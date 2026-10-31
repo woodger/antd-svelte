@@ -4,6 +4,7 @@
   import BorderBeamFixtures from './BorderBeamFixtures.svelte';
   import MasonryFixtures from './MasonryFixtures.svelte';
   import SplitterFixtures from './SplitterFixtures.svelte';
+  import QRCodeFixtures from './QRCodeFixtures.svelte';
   import RateFixtures from './RateFixtures.svelte';
   import ImageGroupFixtures from './ImageGroupFixtures.svelte';
   import ImageFixtures from './ImageFixtures.svelte';
@@ -113,6 +114,7 @@
     <BorderBeamFixtures />
     <MasonryFixtures />
     <SplitterFixtures />
+    <QRCodeFixtures />
     <TextAreaFeaturesFixtures />
     <TextAreaFixtures />
     <InputFeaturesFixtures />

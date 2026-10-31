@@ -6,6 +6,7 @@
   import type { BorderBeamConfig } from './border-beam.types';
   import type { MasonryConfig } from './masonry.types';
   import type { SplitterConfig } from './splitter.types';
+  import type { QRCodeConfig } from './qrcode.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
   import type { InputSearchConfig } from './input-search.types';
@@ -27,6 +28,7 @@
     borderBeam?: BorderBeamConfig;
     masonry?: MasonryConfig;
     splitter?: SplitterConfig;
+    qrcode?: QRCodeConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
     inputPassword?: InputPasswordConfig;
@@ -54,6 +56,7 @@
     borderBeam,
     masonry,
     splitter,
+    qrcode,
     textArea,
     input,
     inputPassword,
@@ -88,6 +91,9 @@
     },
     get splitter() {
       return splitter ?? parent.splitter;
+    },
+    get qrcode() {
+      return qrcode ?? parent.qrcode;
     },
     get input() {
       return input ?? parent.input;
@@ -136,7 +142,8 @@
         steps: { ...parent.locale.steps, ...locale?.steps },
         badge: { ...parent.locale.badge, ...locale?.badge },
         avatarGroup: { ...parent.locale.avatarGroup, ...locale?.avatarGroup },
-        layout: { ...parent.locale.layout, ...locale?.layout }
+        layout: { ...parent.locale.layout, ...locale?.layout },
+        qrcode: { ...parent.locale.qrcode, ...locale?.qrcode }
       };
     }
   };

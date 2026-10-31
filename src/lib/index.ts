@@ -578,3 +578,18 @@ export type {
   SplitterClassSlots,
   SplitterStyleSlots
 } from './splitter.types';
+export { default as QRCode } from './QRCode.svelte';
+export type {
+  QRCodeProps,
+  QRCodeConfig,
+  QRCodeSemantic,
+  QRCodeSlots,
+  QRCodeLocale,
+  QRCodeErrorLevel,
+  QRStatus,
+  StatusRenderInfo,
+  ImageSettings,
+  QRProps,
+  QRPropsCanvas,
+  QRPropsSvg
+} from './qrcode.types';

@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **87**.
-Есть публичная реализация у **59** семейств; отсутствует у **14**.
-Проверенный объём v1 покрыт у **31**; требуется аудит у **28**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **88**.
+Есть публичная реализация у **60** семейств; отсутствует у **13**.
+Проверенный объём v1 покрыт у **32**; требуется аудит у **28**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -63,7 +63,7 @@ Candidate означает запись каталога, для которой 
 | [List](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/list) | data-display | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
 | [Listy](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/listy) | data-display | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
 | [Popover](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/popover) | data-display | target | Popover | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Corner placements и порталы (missing) |
-| [QRCode](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/qr-code) | data-display | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
+| [QRCode](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/qr-code) | data-display | target | QRCode | Согласованный v1 покрыт | PrefixCls, общий theme/token engine и React development warnings (missing) |
 | [Segmented](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/segmented) | data-display | target | Segmented | Согласованный v1 покрыт | PrefixCls и глобальный component config/tokens (missing) |
 | [Statistic](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/statistic) | data-display | target | Statistic, StatisticTimer, StatisticCountdown | Согласованный v1 покрыт | Произвольные component tokens, prefixCls и component config (missing) |
 | [Table](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/table) | data-display | target | Table | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Виртуализация и древовидные данные (missing) |

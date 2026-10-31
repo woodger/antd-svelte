@@ -4031,6 +4031,87 @@ Fixture — `?fixture=image-preview-group`, галерея — `/ant-design#imag
 SSR рендерит children без DOM registration и открытого viewer. Ограничения semantic/
 config/container/icons и исходных motion общие с Image и перечислены выше.
 
+## QRCode
+
+QRCode переносит canvas/SVG и статусы Ant Design 6.6.8 с encoder из
+@rc-component/qrcode 2.0.0 (~2.0.0). TypeScript-алгоритм Project Nayuki сохранён
+с исходными таблицами, сегментацией, выбором версии/маски и Reed–Solomon.
+Runtime React dependencies не добавлены. В пакет включены лицензии
+[rc-qrcode](./src/lib/vendor/LICENSE.rc-qrcode),
+[Nayuki](./src/lib/vendor/LICENSE.qrcodegen) и
+[qrcode.react](./src/lib/vendor/LICENSE.qrcode-react).
+Точные Props, status snippet и semantic/config — в
+[исходных объявлениях](./src/lib/qrcode.types.ts).
+
+```svelte
+<script lang="ts">
+  import { QRCode } from 'antd-svelte';
+</script>
+
+<QRCode
+  value="https://ant.design"
+  type="svg"
+  size={180}
+  marginSize={4}
+  aria-label="Ссылка на Ant Design"
+/>
+```
+
+Массив value задаёт отдельные сегменты, а не склеенную строку. Numeric,
+alphanumeric и UTF-8 выбираются с исходными правилами; доступны версии 1–40 и
+уровни L/M/Q/H. BoostLevel по умолчанию повышает коррекцию, если размер символа
+не увеличивается. Пустая строка не создаёт DOM, пустой массив создаёт символ
+без payload. Слишком длинное значение сохраняет RangeError `Data too long`,
+незавершённая Unicode surrogate pair — URIError, без подмены данных.
+
+Type по умолчанию canvas. SSR создаёт canvas shell размером size; отрисовка после
+mount учитывает devicePixelRatio. SVG целиком готов при SSR. MarginSize задаётся
+в модулях, округляется вниз и ограничивается снизу нулём; default 0 сохраняет
+поведение Ant Design. Size управляет bitmap и fallback root width/height.
+Только width/height обычного style передаются также рисунку; semantic root
+dimensions не передаются ему. CSS-растяжение не увеличивает разрешение bitmap.
+
+Icon принимает URL, iconSize — квадрат либо width/height, по умолчанию 40×40.
+Размер 0 сохраняет fallback rc-qrcode к 10% от size. Изображение центрируется,
+загружается с crossOrigin=anonymous и растягивается в указанный прямоугольник.
+Canvas вырезает перекрытые модули только после успешной загрузки; SVG делает это
+сразу. При отсутствии Path2D используется исходный fallback с отдельными rect:
+он сохраняет модули под иконкой, как в закреплённом rc-qrcode. При отсутствии
+2D context остаётся canvas shell. При ошибке загрузки canvas сохраняет все QR-модули.
+PNG можно получить через nativeElement.querySelector('canvas').toDataURL();
+чужой сервер изображения должен разрешать CORS, как в эталоне.
+
+Status active оставляет рисунок без cover; expired показывает текст и refresh,
+loading использует Spin, scanned — текст подтверждения. OnRefresh не меняет
+status автоматически. Кнопка использует текущие Button/config/disabled правила
+и сохраняет native type=button; её click всплывает до root. StatusRender —
+snippet с status/locale/onRefresh, который целиком заменяет содержимое cover,
+включая пустой результат. Locale.qrcode объединяется по полям; RU/EN подписи
+взяты из закреплённых словарей Ant Design.
+
+Role=img и aria-* относятся к canvas/SVG. Native id/title/data-* и обработчики
+относятся к root; title не создаёт SVG title, children не выводится. Передавайте
+aria-label или aria-labelledby для имени рисунка. Bind:nativeElement заменяет
+React ref и очищается при пустом value или unmount; поздний load отсоединённого
+изображения не перерисовывает старый canvas.
+
+ConfigProvider.qrcode задаёт class/style/classNames/styles для root/cover;
+nested config заменяет объект целиком. Semantic callbacks получают разрешённые
+type/size/status/bordered/errorLevel/bgColor. Root style идёт после semantic
+styles, затем записываются size или plain width/height. Color по умолчанию берётся
+из цвета текста текущей темы; style.color не меняет модули. Bordered=false
+оставляет прозрачную границу, убирает padding и radius. RTL наследуется.
+
+CSS-рецепт qrcode воспроизводит все 11 правил с проверкой SHA-256. Fixture —
+`?fixture=qrcode`; unit/SSR/package/browser проверяют матрицы, pixel centers,
+quiet zone, иконку/CORS, statuses, refs, темы, стили и fallback. Матрицы сверяются
+с [фиксированными результатами npm-пакета](./tests/package/qrcode-vectors.json),
+включая все 40 версий, четыре уровня коррекции и восемь масок.
+
+Произвольные prefixCls, React theme/token engine и component tokens пока не
+перенесены. React development warnings для пустого value и icon с уровнем L
+пока не воспроизводятся; production-поведение этих случаев сохранено.
+
 ## BorderBeam
 
 BorderBeam переносит декоративные слои Ant Design 6.6.8: BorderBeam/BorderBeamEffect,

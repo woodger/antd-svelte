@@ -9,6 +9,10 @@
 
 ### Added
 
+- QRCode переносит исходный encoder rc-qrcode/Nayuki, canvas/SVG, segmentation,
+  ECC/boost, quiet zone, icon/CORS, статусы, locale и semantic/config API.
+  Сохранены SSR, DPR, native attributes/ref, fallback и cleanup; добавлены
+  лицензии, CSS-рецепт, 226 эталонных матриц и unit/SSR/package/browser-проверки.
 - Splitter переносит размеры и ограничения панелей, mouse/touch drag, lazy preview,
   controlled callbacks, collapse с восстановлением, destroyOnHidden, motion,
   semantic config, темы, RTL и SSR. React Panel declarations заменены typed

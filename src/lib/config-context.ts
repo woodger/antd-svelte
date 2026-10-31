@@ -5,6 +5,7 @@ import type { WatermarkConfig } from './watermark.types';
 import type { BorderBeamConfig } from './border-beam.types';
 import type { MasonryConfig } from './masonry.types';
 import type { SplitterConfig } from './splitter.types';
+import type { QRCodeConfig } from './qrcode.types';
 import type { InputConfig } from './input.types';
 import type { InputPasswordConfig } from './input-password.types';
 import type { InputSearchConfig } from './input-search.types';
@@ -20,6 +21,7 @@ export interface ConfigContext {
   readonly borderBeam?: BorderBeamConfig;
   readonly masonry?: MasonryConfig;
   readonly splitter?: SplitterConfig;
+  readonly qrcode?: QRCodeConfig;
   readonly textArea?: TextAreaConfig;
   readonly input?: InputConfig;
   readonly inputPassword?: InputPasswordConfig;

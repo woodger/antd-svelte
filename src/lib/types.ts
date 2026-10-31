@@ -1,6 +1,8 @@
 import type { UploadLocale } from './upload.types';
 import type { DatePickerLocale } from './date-picker.types';
 import { datePickerEnUS, datePickerRuRU } from './date-picker.locale';
+import type { QRCodeLocale } from './qrcode.types';
+import { qrCodeEnUS, qrCodeRuRU } from './qrcode.locale';
 export type ComponentSize = 'small' | 'middle' | 'large';
 
 /**
@@ -39,6 +41,7 @@ export interface Locale {
   badge?: Partial<BadgeLocale>;
   avatarGroup?: Partial<AvatarGroupLocale>;
   layout?: Partial<LayoutLocale>;
+  qrcode?: Partial<QRCodeLocale>;
 }
 
 export interface LayoutLocale {
@@ -163,6 +166,7 @@ export const ruRU = {
   empty: { description: 'Нет данных' },
   skeleton: { loadingText: 'Загрузка…' },
   spin: { loadingText: 'Загрузка…' },
+  qrcode: qrCodeRuRU,
   progress: { label: 'Ход выполнения', successText: 'Завершено', exceptionText: 'Ошибка' },
   inputNumber: {
     increase: 'Увеличить значение',
@@ -240,6 +244,7 @@ export const enUS = {
   empty: { description: 'No data' },
   skeleton: { loadingText: 'Loading…' },
   spin: { loadingText: 'Loading…' },
+  qrcode: qrCodeEnUS,
   progress: { label: 'Progress', successText: 'Completed', exceptionText: 'Failed' },
   inputNumber: {
     increase: 'Increase value',
