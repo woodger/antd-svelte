@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **95**.
 Есть публичная реализация у **64** семейств; отсутствует у **9**.
-Проверенный объём v1 покрыт у **36**; требуется аудит у **28**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **37**; требуется аудит у **27**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -30,7 +30,7 @@ Candidate означает запись каталога, для которой 
 | [Breadcrumb](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/breadcrumb) | navigation | target | Breadcrumb | Согласованный v1 покрыт | PrefixCls, глобальный component config/tokens и полный Menu API (missing) |
 | [Dropdown](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/dropdown) | navigation | target | Dropdown | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Вложенные меню (missing) |
 | [Menu](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/menu) | navigation | target | Menu | Согласованный v1 покрыт | Адаптивное horizontal overflow и исходные popup/inline motion (missing); Полный semantic/config/tokens, render hooks, tooltip и legacy children API (missing) |
-| [Pagination](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/pagination) | navigation | target | Pagination | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Simple и quick jumper (missing) |
+| [Pagination](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/pagination) | navigation | target | Pagination | Согласованный v1 покрыт | Полный token/wireframe/Select props и React-specific API (missing) |
 | [Steps](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/steps) | navigation | target | Steps | Согласованный v1 покрыт | PrefixCls, глобальный steps config/tokens и Wave (missing) |
 | [Tabs](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tabs) | navigation | target | Tabs | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Editable-card и меню overflow (missing) |
 | [AutoComplete](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/auto-complete) | data-entry | target | AutoComplete | Согласованный v1 покрыт | Virtual, fieldNames, render hooks, semantic/config API и legacy aliases (missing) |

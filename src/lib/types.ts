@@ -128,6 +128,19 @@ export interface PaginationLocale {
   jumpNext: string;
   pageSize: string;
   itemsPerPage: string;
+  jumpTo?: string;
+  jumpToConfirm?: string;
+  pageSuffix?: string;
+  items_per_page?: string;
+  jump_to?: string;
+  jump_to_confirm?: string;
+  prev_page?: string;
+  next_page?: string;
+  prev_5?: string;
+  next_5?: string;
+  prev_3?: string;
+  next_3?: string;
+  page_size?: string;
 }
 
 export interface SelectOption<Value extends string | number = string> {
@@ -199,7 +212,10 @@ export const ruRU = {
     jumpPrevious: 'Предыдущие страницы',
     jumpNext: 'Следующие страницы',
     pageSize: 'Записей на странице',
-    itemsPerPage: '/ стр.'
+    itemsPerPage: '/ стр.',
+    jumpTo: 'Перейти',
+    jumpToConfirm: 'подтвердить',
+    pageSuffix: 'Страница'
   },
   transfer: transferRuRU,
   table: {
@@ -279,7 +295,10 @@ export const enUS = {
     jumpPrevious: 'Previous pages',
     jumpNext: 'Next pages',
     pageSize: 'Items per page',
-    itemsPerPage: '/ page'
+    itemsPerPage: '/ page',
+    jumpTo: 'Go to',
+    jumpToConfirm: 'confirm',
+    pageSuffix: 'Page'
   },
   transfer: transferEnUS,
   table: {

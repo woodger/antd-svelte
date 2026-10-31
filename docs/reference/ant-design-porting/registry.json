@@ -1362,9 +1362,9 @@
       "name": "Pagination",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Аудит и расширение по полной цели переноса; поддержка общего Pagination перед переносом List. Согласованные native/bind/normalization contracts сохранены.",
       "upstreamPath": "components/pagination",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Pagination",
@@ -1374,31 +1374,126 @@
         }
       ],
       "dependencies": [
-        "config-provider"
+        "config-provider",
+        "select",
+        "grid",
+        "form"
       ],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/pagination",
+          "range": "~1.4.0",
+          "referenceVersion": "1.4.0"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": "6.3.4"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
       "evidence": [
-        "readme.md",
-        "tests/browser/checkbox-pagination.spec.ts"
+        "src/lib/Pagination.svelte",
+        "src/lib/PaginationControl.svelte",
+        "src/lib/PaginationJumpIcon.svelte",
+        "src/lib/pagination.types.ts",
+        "src/lib/pagination.engine.ts",
+        "src/lib/vendor/pagination.css",
+        "src/lib/vendor/LICENSE.rc-pagination",
+        "src/lib/pagination.engine.test.ts",
+        "src/lib/pagination.ssr.test.ts",
+        "tests/package/pagination.ssr.test.ts",
+        "tests/browser/pagination-features.spec.ts",
+        "tests/browser/checkbox-pagination.spec.ts",
+        "tests/browser/fixtures/PaginationFeaturesFixtures.svelte",
+        "readme.md"
       ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "state-navigation",
+          "title": "Bind/default state, normalization и исходные page windows",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "src/lib/pagination.engine.test.ts",
+            "src/lib/pagination.ssr.test.ts",
+            "tests/package/pagination.ssr.test.ts",
+            "tests/browser/pagination-features.spec.ts",
+            "tests/browser/checkbox-pagination.spec.ts"
+          ],
+          "note": "Сохранены current/pageSize bindings, read-once defaults, finite/safe-integer нормализация и отсутствие callbacks при prop changes. Page windows, seven-page threshold, showLessItems и showPrevNextJumpers перенесены из rc-pagination 1.4.0; общий engine с Transfer. Empty normal показывает disabled page1 без active, range0/0."
         },
         {
-          "id": "gap-1",
-          "title": "Simple и quick jumper",
+          "id": "simple-quick",
+          "title": "Simple/readOnly и quick jumper с go button",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/pagination.engine.test.ts",
+            "src/lib/pagination.ssr.test.ts",
+            "tests/package/pagination.ssr.test.ts",
+            "tests/browser/pagination-features.spec.ts",
+            "tests/browser/checkbox-pagination.spec.ts"
+          ],
+          "note": "Исходные Enter/blur/Up/Down, invalid text restore, digit-only quick input, blur guard при переходе к paging controls, clear и custom go label. Draft сохраняется при внешних total/pageSize updates без изменения current. Quick jumper сохраняется в simple/readOnly mode; кнопка подтверждает simple value перед quick value, скрыта для одной страницы. Вложенный React li заменён на валидный span с тем же классом, подтверждение — native button. Empty simple counter1/0. Native input value attributes синхронизированы для form reset."
+        },
+        {
+          "id": "size-changer",
+          "title": "Boolean/Select props, threshold и custom/legacy size rendering",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/pagination.engine.test.ts",
+            "src/lib/pagination.ssr.test.ts",
+            "tests/package/pagination.ssr.test.ts",
+            "tests/browser/pagination-features.spec.ts",
+            "tests/browser/checkbox-pagination.spec.ts"
+          ],
+          "note": "Auto threshold50, context/local override, numeric/string options и current size; прежние sorting/dedup/invalid filtering сохранены. onShowSizeChange перед onChange, затем Select callback; размер Pagination перекрывает Select size. Components.sizeChanger и selectComponentClass заменены snippets с value/disabled/class/options/onChange; legacy получает Select props и явный resolved size."
+        },
+        {
+          "id": "render-semantic",
+          "title": "ItemRender/icons, semantic/config/locale и native handlers",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/pagination.engine.test.ts",
+            "src/lib/pagination.ssr.test.ts",
+            "tests/package/pagination.ssr.test.ts",
+            "tests/browser/pagination-features.spec.ts",
+            "tests/browser/checkbox-pagination.spec.ts"
+          ],
+          "note": "OriginalElement snippet содержит готовый native button; info заменяет cloneElement и LI click. Root semantic соответствует nav, прежний class остаётся на ul; item охватывает страницы, prev/next и simple counter, исключая jumps. Context/local style priority, raw semantic props с явным resolved size, source locale aliases и сохранённый camelCase словарь. 115 CSS rules с двумя media scopes, source jump/ellipsis SVG и существующая MIT-лицензия."
+        },
+        {
+          "id": "layout-lifecycle",
+          "title": "Align, responsive, темы/RTL, focus и SSR",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/pagination.engine.test.ts",
+            "src/lib/pagination.ssr.test.ts",
+            "tests/package/pagination.ssr.test.ts",
+            "tests/browser/pagination-features.spec.ts",
+            "tests/browser/checkbox-pagination.spec.ts"
+          ],
+          "note": "Align start/center/end, sizes, dark/compact/RTL, native keyboard и focus repair после disabled next. XS responsive добавляет legacy mini без изменения высоты, как в actual6.6.8 CSS; explicit size имеет приоритет. Native size changer доступен на XS как в прежнем API; quick jumper скрыт по source media. Media subscriptions очищаются, SSR без DOM/timers/callbacks."
+        },
+        {
+          "id": "advanced-api",
+          "title": "Полный token/wireframe/Select props и React-specific API",
           "state": "missing",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Полный token/wireframe engine, global Form variant, расширенные ещё не перенесённые Select props, генерация CSS arbitrary prefixCls/selectPrefixCls и React-specific components/dev warnings не перенесены. SelectPrefixCls передаётся custom renderer info, штатный Select сохраняет ant-select. Native nav, snippets/handlers, bind API, число/option normalization и мобильный size changer являются сохранёнными Svelte adaptations; v1-ready не означает полный React API."
         }
       ]
     },

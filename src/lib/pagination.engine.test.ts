@@ -1,5 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { getPaginationItems, getPaginationState, getPageSizeOptions } from './pagination.engine';
+import {
+  getPaginationItems, getPaginationState, getPageSizeOptions
+} from './pagination.engine';
 
 describe('getPaginationState', () => {
   it('represents an empty collection as page one with an empty range', () => {
@@ -56,7 +58,7 @@ describe('getPaginationItems', () => {
 
   it('shows the current page, its neighbours and both jumps in the middle', () => {
     expect(getPaginationItems(getPaginationState(200, 10, 10))).toEqual(
-      [1, 'jump-prev', 8, 9, 10, 11, 12, 'jump-next', 20]
+      [1, 'jump-prev', 9, 10, 11, 'jump-next', 20]
     );
   });
 
@@ -66,13 +68,25 @@ describe('getPaginationItems', () => {
     );
   });
 
-  it('shows a single missing page instead of a jump near either edge', () => {
-    expect(getPaginationItems(getPaginationState(100, 5, 10))).toEqual(
-      [1, 2, 3, 4, 5, 6, 7, 'jump-next', 10]
+  it('retains five edge pages before entering the two-jumper middle window', () => {
+    expect(getPaginationItems(getPaginationState(100, 4, 10))).toEqual(
+      [1, 2, 3, 4, 5, 'jump-next', 10]
     );
-    expect(getPaginationItems(getPaginationState(100, 6, 10))).toEqual(
-      [1, 'jump-prev', 4, 5, 6, 7, 8, 9, 10]
+    expect(getPaginationItems(getPaginationState(100, 7, 10))).toEqual(
+      [1, 'jump-prev', 6, 7, 8, 9, 10]
     );
+  });
+
+  it('uses a seven-page threshold and narrower windows for showLessItems', () => {
+    expect(getPaginationItems(getPaginationState(80, 1, 10)))
+      .toEqual([1, 2, 3, 4, 5, 'jump-next', 8]);
+    expect(getPaginationItems(getPaginationState(150, 4, 10), true))
+      .toEqual([1, 'jump-prev', 3, 4, 5, 'jump-next', 15]);
+  });
+
+  it('removes jumps without removing the end pages or full neighbor buffer', () => {
+    expect(getPaginationItems(getPaginationState(200, 10, 10), false, false))
+      .toEqual([1, 8, 9, 10, 11, 12, 20]);
   });
 
   it('keeps rendering bounded for a very large page count', () => {

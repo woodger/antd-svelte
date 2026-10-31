@@ -9,6 +9,11 @@
 
 ### Added
 
+- Pagination: simple/readOnly, quick jumper и подтверждение, align/responsive,
+  source jump windows, itemRender/icons, locale aliases, semantic/config slots,
+  custom size changer и deprecated adapter. Сохранены bind API, нормализация,
+  сортировка размеров и доступный мобильный size changer. Общий engine используется
+  с Transfer; добавлены CSS-рецепт и unit/SSR/package/browser проверки.
 - Transfer: controlled targetKeys/selection, исходный порядок переноса, поиск,
   Shift/header selection, oneWay removal, independent simple/normal pagination,
   custom lists/footer/actions, semantic config/locale, темы/RTL и native checkbox.

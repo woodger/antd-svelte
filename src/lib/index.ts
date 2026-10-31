@@ -499,6 +499,18 @@ export type { RadioProps, RadioGroupProps, RadioOption, RadioValue } from './rad
 export type { SwitchProps } from './Switch.svelte';
 export type { PaginationProps } from './Pagination.svelte';
 export type {
+  PaginationConfig,
+  PaginationComponentConfig,
+  PaginationPosition,
+  PaginationContent,
+  PaginationSemantic,
+  PaginationSlots,
+  PaginationItemType,
+  PaginationItemInfo,
+  PaginationSizeChangerInfo,
+  PaginationSizeChangerProps
+} from './pagination.types';
+export type {
   TableProps,
   TableColumn,
   TableKey,

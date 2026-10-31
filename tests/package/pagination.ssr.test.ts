@@ -1,0 +1,40 @@
+import { render } from 'svelte/server';
+import { describe, expect, it, vi } from 'vitest';
+import { Pagination, type PaginationConfig, type PaginationProps } from 'antd-svelte';
+import PaginationFeatures from '../browser/fixtures/PaginationFeaturesFixtures.svelte';
+
+describe('Pagination source public package', () => {
+  it('exports extended Props and List pagination config without changing binding props', () => {
+    const config: PaginationConfig = { position: 'both', simple: { readOnly: true } };
+    const props: PaginationProps = {
+      ...config,
+      total: 120,
+      current: 2,
+      pageSize: 10,
+      align: 'end',
+      showLessItems: true,
+      responsive: true
+    };
+    const body = render(Pagination, { props }).body;
+
+    expect(body).toContain('ant-pagination-simple');
+    expect(body).toContain('ant-pagination-end');
+    expect(body).toContain('title="2/12"');
+    expect(body).not.toContain('position=');
+  });
+
+  it('renders the complete fixture without browser globals or scheduled work', () => {
+    vi.useFakeTimers();
+
+    try {
+      const body = render(PaginationFeatures).body;
+
+      expect(body).toContain('id="pagination-features-fixture"');
+      expect(body).toContain('aria-label="Extended pagination"');
+      expect(body).toContain('ant-pagination-item-6');
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});

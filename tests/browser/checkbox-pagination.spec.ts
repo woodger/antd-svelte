@@ -248,10 +248,8 @@ test('Pagination represents an empty collection and can hide a single page', asy
   await page.getByRole('button', { name: 'Empty data' }).click();
 
   await expect(pagination.locator('[aria-label="Pagination range"]')).toHaveText('0–0 / 0');
-  await expect(pagination.getByRole('button', { name: 'Страница 1', exact: true })).toHaveAttribute(
-    'aria-current',
-    'page'
-  );
+  await expect(pagination.getByRole('button', { name: 'Страница 1', exact: true })).toBeDisabled();
+  await expect(pagination.locator('[aria-current]')).toHaveCount(0);
   await expect(pagination.getByRole('button', { name: 'Предыдущая страница', exact: true }))
     .toBeDisabled();
   await expect(pagination.getByRole('button', { name: 'Следующая страница', exact: true }))
@@ -270,7 +268,7 @@ test(
 
     await page.getByRole('button', { name: 'Large data' }).click();
 
-    await expect(pagination.locator('.ant-pagination-item')).toHaveCount(7);
+    await expect(pagination.locator('.ant-pagination-item')).toHaveCount(5);
     await expect(pagination.locator('[aria-current="page"]')).toHaveText('1000');
     await expect(
       pagination.getByRole(
@@ -287,7 +285,7 @@ test(
     await page.keyboard.press('Escape');
     await page.getByRole('button', { name: 'Invalid pagination inputs' }).click();
 
-    await expect(pagination.locator('[aria-current="page"]')).toHaveText('1');
+    await expect(pagination.getByRole('button', { name: 'Страница 1', exact: true })).toBeDisabled();
     await expect(pagination.locator('[aria-label="Pagination range"]')).toHaveText('0–0 / 0');
     await expect(page.getByRole('status', { name: 'Pagination owner', exact: true }))
       .toHaveText('-5:0');

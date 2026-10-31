@@ -11,6 +11,7 @@
   import type { TimePickerConfig } from './time-picker.types';
   import type { CascaderConfig } from './cascader.types';
   import type { TransferConfig } from './transfer.types';
+  import type { PaginationComponentConfig } from './pagination.types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
@@ -38,6 +39,7 @@
     timePicker?: TimePickerConfig;
     cascader?: CascaderConfig;
     transfer?: TransferConfig;
+    pagination?: PaginationComponentConfig;
     rangePicker?: RangePickerConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
@@ -71,6 +73,7 @@
     timePicker,
     cascader,
     transfer,
+    pagination,
     rangePicker,
     textArea,
     input,
@@ -121,6 +124,9 @@
     },
     get transfer() {
       return transfer ?? parent.transfer;
+    },
+    get pagination() {
+      return pagination ?? parent.pagination;
     },
     get rangePicker() {
       return rangePicker ?? parent.rangePicker;

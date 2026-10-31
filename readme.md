@@ -5406,10 +5406,14 @@ Callback получает номера с учётом отображаемог�
 Изменение props, включая уменьшение `total`, само не записывает исправленное
 значение владельцу и не вызывает callbacks. Для пустой коллекции отображается
 страница 1 и диапазон `[0, 0]`; `hideOnSinglePage` скрывает навигацию.
+У пустой коллекции числовая кнопка отключена и не помечена active, как в upstream.
 Дробные значения округляются вниз, total ограничен снизу нулём, current и
 pageSize — единицей, все значения — сверху `Number.MAX_SAFE_INTEGER`.
 Для NaN и бесконечных значений используются defaults 0, 1 и 10.
 Список номеров и переходов содержит не более девяти элементов независимо от total.
+Расчёт окон и jump boundaries перенесён из @rc-component/pagination 1.4.0:
+при двух jump-кнопках между ними остаются три числовые кнопки, включая текущую.
+`showLessItems` уменьшает buffer и шаг jump с 5 до 3; `showPrevNextJumpers` скрывает jumps.
 
 Выбор размера автоматически показывается при `total > 50`; это меняется через
 `showSizeChanger`. `pageSizeOptions` по умолчанию равен `[10, 20, 50, 100]`.
@@ -5418,6 +5422,73 @@ pageSize — единицей, все значения — сверху `Number.
 нормализованный total и диапазон записей с нумерацией от 1.
 На узком экране элементы переносятся на следующую строку, а выбор размера
 остаётся доступным.
+
+`simple=true` показывает редактируемый current/total. Enter и blur подтверждают ввод,
+ArrowUp уменьшает страницу, ArrowDown увеличивает. Объект `{ readOnly: true }`
+сохраняет counter без input. Для пустой коллекции simple counter равен 1/0,
+как в закреплённой версии. Незавершённый ввод сохраняется при внешнем изменении
+total/pageSize, пока отображаемая current не изменилась. Выбор размера сбрасывает
+draft к отображаемой странице. `showQuickJumper=true` добавляет ввод цифр: Enter и blur
+за пределами paging controls переходят на указанную страницу. Объект
+`{ goButton: true }` добавляет подтверждение и отключает переход по blur.
+Вместо true у goButton допустим текст/snippet. Quick jumper доступен и в simple mode.
+Его кнопка сначала подтверждает simple input, затем значение quick jumper; blur
+simple input сохраняет исходное поведение подтверждения. Для одной страницы
+quick jumper и его кнопка скрыты. Вложенный в quick jumper React li заменён на span
+с тем же классом, чтобы сохранить валидную HTML-структуру; подтверждение — native button.
+
+`align` принимает start/center/end. `showTitle=false` убирает tooltip titles,
+сохраняя доступные имена. `responsive` на XS добавляет legacy class mini при
+отсутствии явного size. В CSS Ant Design 6.6.8 этот класс сам не меняет высоту:
+её меняет size=small. Это поведение проверено на исходной React-сборке и сохранено.
+`size` и ConfigProvider.componentSize по-прежнему задают реальные размеры.
+
+`itemRender` — snippet с `(page, type, originalElement, info)`. OriginalElement
+рисует готовый native button; info содержит disabled/active/label/title/onClick
+для собственного native control. Это замена ReactNode и cloneElement/LI click.
+`prevIcon/nextIcon/jumpPrevIcon/jumpNextIcon` принимают текст или декоративный snippet.
+Стандартные jump/ellipsis icons перенесены из @ant-design/icons-svg 4.6.0
+под существующей [MIT-лицензией](./src/lib/vendor/LICENSE.ant-design-icons).
+
+`showSizeChanger` допускает boolean или поддержанные Select props. Собственный
+onChange вызывается после onShowSizeChange и основного onChange Pagination.
+Размер Pagination имеет приоритет над size из Select props.
+`components.sizeChanger` получает snippet с value/disabled/class/options/onChange;
+устаревший selectComponentClass адаптирован тем же способом и дополнительно
+получает Select props. PaginationConfig добавляет position для использования в List.
+Не все расширенные React Select props уже существуют у Svelte Select.
+
+ConfigProvider.pagination задаёт class/style, semantic classNames/styles,
+showSizeChanger и totalBoundaryShowSizeChanger. Локальные настройки имеют приоритет.
+Semantic callbacks получают исходные props и явный resolved size; внутренние
+default values не подставляются вместо отсутствующих исходных props.
+Semantic root соответствует native nav; прежний class остаётся на ul.
+Root style перекрывает styles.root; classNames.item/styles.item относятся к страницам,
+prev/next и simple counter, исключая jump controls, как в upstream.
+`locale` принимает исходные snake_case aliases; locale.page задаёт suffix quick jumper.
+Существующий config.locale.pagination.page остаётся доступным именем страницы.
+
+Сохранены отличия прежнего Svelte API: bind:current/pageSize, нормализация чисел,
+сортировка/удаление повторов размеров и доступный size changer на XS. Новые строковые
+pageSizeOptions сначала преобразуются в числа. В React options могут сохранять
+исходный порядок, а вся options area скрывается на XS. Quick jumper следует
+исходному CSS и скрывается на XS. Для controlled compositing с отказом владельца
+используйте functional bindings с getter и обработчики onChange.
+
+Полный token/wireframe engine, глобальный Form variant, генерация CSS для
+произвольных prefixCls/selectPrefixCls и React-specific components/dev warnings
+остаются в следующих этапах. `selectPrefixCls` доступен custom size changer info;
+штатный Select сохраняет свои классы. Обычный disabled, навигация native кнопками,
+возврат focus после отключения next и SSR без DOM/media/timers сохранены.
+
+Проверки: [engine](./src/lib/pagination.engine.test.ts),
+[SSR](./src/lib/pagination.ssr.test.ts),
+[package](./tests/package/pagination.ssr.test.ts),
+[browser](./tests/browser/pagination-features.spec.ts), прежние
+[binding/normalization tests](./tests/browser/checkbox-pagination.spec.ts)
+и `?fixture=pagination-features`. [CSS](./src/lib/vendor/pagination.css)
+воспроизводится рецептом pagination: 115 правил, включая два media rules;
+алгоритм страниц использует [MIT rc-pagination](./src/lib/vendor/LICENSE.rc-pagination).
 
 ## Table
 
@@ -6138,8 +6209,7 @@ Chromium проверяет Enter/Space/Escape, hover/focus/click, лениво�
 Галерея проверяет управление командой, границы перемещения, reset, мобильный
 Popover и SSR; модель — нормализацию имён, Unicode-инициалы и свежие ключи.
 
-Эта версия покрывает перечисленное ядро. Simple/quick jumper
-и произвольный itemRender Pagination, древовидные/поисковые фильтры Table,
+Эта версия покрывает перечисленное ядро. Древовидные/поисковые фильтры Table,
 расширенные режимы DatePicker,
 расширения Tree/TreeSelect/Upload/Menu, Select tags, Form.List, вложенные name paths,
 порталы, виртуализация и статические методы Modal пока отсутствуют. Совместимость

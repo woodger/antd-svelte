@@ -1,6 +1,7 @@
 import type {
   TransferContent, TransferDirection, TransferKey, TransferRenderedItem, TransferRenderResult
 } from './transfer.types';
+import { getPaginationItems } from './pagination.engine';
 
 export function transferKey(record: object): TransferKey {
   if ('key' in record && ['string', 'number', 'bigint'].includes(typeof record.key)) {
@@ -133,27 +134,5 @@ export function transferPaginationItems(
   count: number,
   less: boolean
 ): (number | 'jump-prev' | 'jump-next')[] {
-  const buffer = less ? 1 : 2;
-  if (count <= 3 + buffer * 2) return Array.from({ length: count }, (_, index) => index + 1);
-
-  let left = Math.max(1, current - buffer);
-  let right = Math.min(current + buffer, count);
-
-  if (current - 1 <= buffer) right = 1 + buffer * 2;
-  if (count - current <= buffer) left = count - buffer * 2;
-
-  const previous = current - 1 >= buffer * 2 && current !== 3;
-  const next = count - current >= buffer * 2 && current !== count - 2;
-
-  if (!less && previous && right !== count) left += 1;
-  if (!less && next && left !== 1) right -= 1;
-
-  const result: (number | 'jump-prev' | 'jump-next')[] = [];
-  if (left !== 1) result.push(1);
-  if (previous) result.push('jump-prev');
-  for (let page = left; page <= right; page++) result.push(page);
-  if (next) result.push('jump-next');
-  if (right !== count) result.push(count);
-
-  return result;
+  return getPaginationItems({ current, pageCount: count }, less);
 }
