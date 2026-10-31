@@ -2,7 +2,7 @@ import type { Dayjs } from 'dayjs';
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import type { GenerateConfig } from './date-generate.types';
-import type { datePickerEnUS } from './date-picker.locale';
+import type { PickerLocale } from './picker-locale.types';
 
 export type CalendarMode = 'year' | 'month';
 export type CalendarSelectInfo = { source: 'year' | 'month' | 'date' | 'customize'; };
@@ -13,23 +13,8 @@ export interface CalendarRef {
   nativeElement: HTMLDivElement;
 }
 
-/** Язык rc-picker; загружать Day.js locale, кроме встроенных en/ru, должен потребитель. */
-export type CalendarLang = Partial<typeof datePickerEnUS.lang> & {
-  locale: string;
-  shortWeekDays?: string[];
-  shortMonths?: string[];
-  monthFormat?: string;
-  fieldDateTimeFormat?: string;
-  fieldDateFormat?: string;
-  fieldTimeFormat?: string;
-  fieldMonthFormat?: string;
-  fieldYearFormat?: string;
-  fieldWeekFormat?: string;
-  fieldQuarterFormat?: string;
-  cellYearFormat?: string;
-  cellQuarterFormat?: string;
-  cellDateFormat?: string;
-};
+/** Язык общей панели rc-picker. */
+export type CalendarLang = PickerLocale;
 
 /** Объединяется по полям lang с ConfigProvider.locale.calendar и базовой локалью. */
 export interface CalendarLocale {

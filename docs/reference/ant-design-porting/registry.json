@@ -2739,24 +2739,115 @@
       "id": "time-picker",
       "name": "TimePicker",
       "category": "data-entry",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос SinglePicker/TimePicker по закреплённому rc-picker; TimePicker.RangePicker остаётся обязательным следующим этапом.",
       "upstreamPath": "components/time-picker",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "TimePicker",
+          "local": [
+            "TimePicker"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "date-picker"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/picker",
+          "range": "~1.12.2",
+          "referenceVersion": "1.12.2"
+        },
+        {
+          "name": "dayjs",
+          "range": "^1.11.11",
+          "referenceVersion": "1.11.23"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
+      "evidence": [
+        "src/lib/TimePicker.svelte",
+        "src/lib/SinglePicker.svelte",
+        "src/lib/PickerTimePanel.svelte",
+        "src/lib/PickerTimeColumn.svelte",
+        "src/lib/time-picker.types.ts",
+        "src/lib/time-picker.engine.ts",
+        "src/lib/time-picker-column.dom.ts",
+        "src/lib/time-picker.engine.test.ts",
+        "src/lib/time-picker.ssr.test.ts",
+        "tests/package/time-picker.ssr.test.ts",
+        "tests/browser/time-picker.spec.ts",
+        "tests/browser/fixtures/TimePickerFixtures.svelte",
+        "readme.md"
+      ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "single-picker",
+          "title": "SinglePicker: controlled/default value/open, input, confirm, clear и presets",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/time-picker.ssr.test.ts",
+            "tests/browser/time-picker.spec.ts"
+          ],
+          "note": "Общий SinglePicker без изменения текущих DatePicker contracts. Draft, owner и pickerValue независимы; пустой input не получает now/defaultOpenValue автоматически. Переходы rc-picker: panel intermediate, Tab/Enter/OK, Escape/close; onOk перед change, Calendar info={}, clear onChange(null,null). Now/presets применяются сразу."
+        },
+        {
+          "id": "columns-format",
+          "title": "Форматы, nullable columns, 12-hour, шаги, ограничения и Dayjs precision",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/time-picker.engine.test.ts",
+            "tests/browser/time-picker.spec.ts"
+          ],
+          "note": "HH:mm:ss/hh:mm:ss A, locale field formats, display callback readonly, строгие input formats, show flags, legacy/dynamic disabled units, hideDisabledOptions. Panel selection выравнивает все units, включая скрытые milliseconds (default step=100); step=1 сохраняет точность. Сохранены дата и UTC режим входного Dayjs; parser/getNow используют общий adapter."
+        },
+        {
+          "id": "hover-scroll-lifecycle",
+          "title": "Hover preview, changeOnScroll, native keyboard/refs и cleanup",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/browser/time-picker.spec.ts",
+            "tests/package/time-picker.ssr.test.ts"
+          ],
+          "note": "Preview не меняет calendar/value, включая disabled и unaligned units. Manual scroll выбирает ближайший enabled unit через 300 ms; scroll alignment, timers и RAF очищаются при замене выбора/unmount. Native buttons/arrows/Home/End, ArrowDown input, popover и focus restoration — согласованная Svelte accessibility adaptation. SSR панели hidden без browser APIs; native FormData содержит display string, Form model сохраняет Dayjs."
+        },
+        {
+          "id": "presentation",
+          "title": "Locale/config, semantic slots, snippets, темы, размеры и RTL",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/time-picker.engine.test.ts",
+            "src/lib/time-picker.ssr.test.ts",
+            "tests/package/time-picker.ssr.test.ts",
+            "tests/browser/time-picker.spec.ts"
+          ],
+          "note": "Общие DatePickerLocale/lang/timePickerLocale и en/ru, отдельный ConfigProvider.timePicker с replacement. Сохранены два semantic слоя upstream, raw local props и style priority. Prefix/icons/clear, cellRender originNode, panelRender, presets, renderExtraFooter и legacy addon — Svelte snippets. Используется существующий извлечённый CSS DatePicker; React runtime не добавляется."
+        },
+        {
+          "id": "range-picker",
+          "title": "TimePicker.RangePicker",
+          "state": "missing",
           "requiredForV1": true,
           "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "note": "Диапазон времени следует отдельным логическим этапом на общей машине RangePicker; семейство пока partial."
+        },
+        {
+          "id": "advanced-api",
+          "title": "Multiple, mask, generatePicker, полный trigger/token/locale API и diagnostics",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "На этом этапе только один Dayjs; multiple=true не заявлен в типах. Произвольные prefix/tokens, полный каталог locales, React diagnostics и полный rc-trigger/motion/container API остаются следующими этапами. Styles — CSS strings, nodes/renderers — Svelte snippets. Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream."
         }
       ]
     },

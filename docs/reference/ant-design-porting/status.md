@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **90**.
-Есть публичная реализация у **61** семейств; отсутствует у **12**.
-Проверенный объём v1 покрыт у **33**; требуется аудит у **28**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **91**.
+Есть публичная реализация у **62** семейств; отсутствует у **11**.
+Проверенный объём v1 покрыт у **33**; требуется аудит у **28**; частично покрыт у **1**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -47,7 +47,7 @@ Candidate означает запись каталога, для которой 
 | [Select](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/select) | data-entry | target | Select | Согласованный v1 покрыт | Свободный ввод tags (missing); Виртуализация options (missing) |
 | [Slider](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/slider) | data-entry | target | Slider | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Range и marks/dots (missing) |
 | [Switch](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/switch) | data-entry | target | Switch | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
-| [TimePicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/time-picker) | data-entry | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
+| [TimePicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/time-picker) | data-entry | target | TimePicker | Частично покрыт v1 | TimePicker.RangePicker (missing); Multiple, mask, generatePicker, полный trigger/token/locale API и diagnostics (missing) |
 | [Transfer](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/transfer) | data-entry | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
 | [TreeSelect](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tree-select) | data-entry | target | TreeSelect | Согласованный v1 покрыт | FieldNames/simple mode, maxCount/tags/render hooks, semantic/config/ref и legacy extras (missing); Виртуализация, scrollTo и исходные popup/list motion (missing) |
 | [Upload](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/upload) | data-entry | target | Upload, UploadDragger | Согласованный v1 покрыт | Directory/paste, render hooks, semantic slots и полный config/token API (missing); Исходные анимации списка и collapse lifecycle (missing) |

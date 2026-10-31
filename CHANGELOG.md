@@ -9,6 +9,11 @@
 
 ### Added
 
+- TimePicker: общий SinglePicker, time columns, строгие форматы, draft/confirm/
+  controlled state, hover и scroll selection, ограничения, locale/config,
+  semantic slots и snippets. Сохранены UTC/точность Dayjs и текущие DatePicker/
+  RangePicker contracts; добавлены unit/SSR/package/browser-проверки.
+  TimePicker.RangePicker и multiple остаются в следующих этапах.
 - Calendar: full/mini date/month panels, controlled value/mode и display state,
   исходные события/ограничения дат, header/cell snippets, week numbers,
   semantic config/locale, generic date adapter, native refs и доступный grid.

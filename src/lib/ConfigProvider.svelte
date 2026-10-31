@@ -8,6 +8,7 @@
   import type { SplitterConfig } from './splitter.types';
   import type { QRCodeConfig } from './qrcode.types';
   import type { CalendarConfig } from './calendar.types';
+  import type { TimePickerConfig } from './time-picker.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
   import type { InputSearchConfig } from './input-search.types';
@@ -31,6 +32,7 @@
     splitter?: SplitterConfig;
     qrcode?: QRCodeConfig;
     calendar?: CalendarConfig;
+    timePicker?: TimePickerConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
     inputPassword?: InputPasswordConfig;
@@ -60,6 +62,7 @@
     splitter,
     qrcode,
     calendar,
+    timePicker,
     textArea,
     input,
     inputPassword,
@@ -100,6 +103,9 @@
     },
     get calendar() {
       return calendar ?? parent.calendar;
+    },
+    get timePicker() {
+      return timePicker ?? parent.timePicker;
     },
     get input() {
       return input ?? parent.input;

@@ -582,6 +582,21 @@ export { default as QRCode } from './QRCode.svelte';
 export { default as RadioButton } from './RadioButton.svelte';
 export type { RadioButtonProps } from './radio.types';
 export { default as Calendar } from './Calendar.svelte';
+export { default as TimePicker } from './TimePicker.svelte';
+export type {
+  TimePickerProps,
+  TimePickerLocale,
+  TimePickerConfig,
+  TimePickerSemantic,
+  TimePickerSlots,
+  TimePickerPopupSlots,
+  TimePickerCellRenderInfo,
+  TimePickerColumnType,
+  TimePickerUnit,
+  TimePickerContent,
+  TimePickerFocusOptions,
+  TimePickerPreset
+} from './time-picker.types';
 export { generateCalendar } from './calendar';
 export type {
   CalendarProps,

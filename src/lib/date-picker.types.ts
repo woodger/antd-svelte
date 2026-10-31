@@ -2,14 +2,10 @@ import type { Dayjs } from 'dayjs';
 import type { HTMLInputAttributes } from 'svelte/elements';
 import type { Snippet } from 'svelte';
 import type { ComponentSize } from './types';
-import type { datePickerEnUS } from './date-picker.locale';
+import type { PickerLocale } from './picker-locale.types';
 export type DatePickerLocale = {
-  lang: Partial<typeof datePickerEnUS.lang> & {
-    fieldDateFormat?: string;
-    fieldDateTimeFormat?: string;
-    fieldTimeFormat?: string;
-  };
-  timePickerLocale?: { placeholder?: string; };
+  lang: Partial<PickerLocale>;
+  timePickerLocale?: { placeholder?: string; rangePlaceholder?: [string, string]; };
 };
 export type DatePickerMode = 'date' | 'month' | 'year' | 'decade';
 export type DatePickerFormat = string | ((value: Dayjs) => string);

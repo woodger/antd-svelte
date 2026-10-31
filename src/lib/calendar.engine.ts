@@ -2,6 +2,7 @@
 import type { GenerateConfig } from './date-generate.types';
 import type { CalendarLang, CalendarLocale, CalendarMode } from './calendar.types';
 import { datePickerEnUS } from './date-picker.locale';
+export { fillPickerLocale as calendarFilledLocale } from './picker-locale.engine';
 
 export function calendarSameYear<T>(a: T | undefined, b: T | undefined, date: GenerateConfig<T>) {
   return !!a && !!b && date.getYear(a) === date.getYear(b);
@@ -26,23 +27,6 @@ export function calendarLocale(context?: CalendarLocale, local?: CalendarLocale)
       ...context?.timePickerLocale,
       ...local?.timePickerLocale
     }
-  };
-}
-
-export function calendarFilledLocale(locale: CalendarLang): CalendarLang {
-  return {
-    ...locale,
-    fieldDateTimeFormat: locale.fieldDateTimeFormat || 'YYYY-MM-DD HH:mm:ss',
-    fieldDateFormat: locale.fieldDateFormat || 'YYYY-MM-DD',
-    fieldTimeFormat: locale.fieldTimeFormat || 'HH:mm:ss',
-    fieldMonthFormat: locale.fieldMonthFormat || 'YYYY-MM',
-    fieldYearFormat: locale.fieldYearFormat || 'YYYY',
-    fieldWeekFormat: locale.fieldWeekFormat || 'gggg-wo',
-    fieldQuarterFormat: locale.fieldQuarterFormat || 'YYYY-[Q]Q',
-    yearFormat: locale.yearFormat || 'YYYY',
-    cellYearFormat: locale.cellYearFormat || 'YYYY',
-    cellQuarterFormat: locale.cellQuarterFormat || '[Q]Q',
-    cellDateFormat: locale.cellDateFormat || locale.dayFormat || 'D'
   };
 }
 

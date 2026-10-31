@@ -32,7 +32,8 @@ export const datePickerEnUS = {
     "nextCentury": "Next century"
   },
   "timePickerLocale": {
-    "placeholder": "Select time"
+    "placeholder": "Select time",
+    "rangePlaceholder": ["Start time", "End time"] as [string, string]
   }
 };
 export const datePickerRuRU = {
@@ -90,6 +91,7 @@ export const datePickerRuRU = {
     ]
   },
   "timePickerLocale": {
-    "placeholder": "Выберите время"
+    "placeholder": "Выберите время",
+    "rangePlaceholder": ["Время начала", "Время окончания"] as [string, string]
   }
 };

@@ -7,6 +7,7 @@
   import QRCodeFixtures from './QRCodeFixtures.svelte';
   import RadioButtonFixtures from './RadioButtonFixtures.svelte';
   import CalendarFixtures from './CalendarFixtures.svelte';
+  import TimePickerFixtures from './TimePickerFixtures.svelte';
   import RateFixtures from './RateFixtures.svelte';
   import ImageGroupFixtures from './ImageGroupFixtures.svelte';
   import ImageFixtures from './ImageFixtures.svelte';
@@ -119,6 +120,7 @@
     <QRCodeFixtures />
     <RadioButtonFixtures />
     <CalendarFixtures />
+    <TimePickerFixtures />
     <TextAreaFeaturesFixtures />
     <TextAreaFixtures />
     <InputFeaturesFixtures />
