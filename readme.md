@@ -136,6 +136,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | InputGroup | Deprecated Input.Group: legacy-классы, keyed items и композиция через SpaceCompact |
 | DatePicker | Single Dayjs date/datetime, input/calendar/time, confirmation, clear, ограничения, locale и native формы |
 | RangePicker | Пара Dayjs, связанные календари, время и подтверждение границ, allowEmpty/disabled, presets и hover |
+| Calendar | Full/mini date/month panels, controlled value/mode, header, week numbers, snippets и custom date adapter |
 | Upload / UploadDragger | Выбор/drop, controlled list, beforeUpload, XHR/customRequest, статусы и удаление |
 | Tree | TreeData, раскрытие/выбор/отметки, strict/conduction, loadData, клавиатура и showLine |
 | TreeSelect | Single/multiple, labelInValue, check strategies, поиск, loadData и native popup |
@@ -2798,6 +2799,96 @@ bind:this даёт focus({index:0|1,preventScroll,cursor}) и blur(). Native onf
 Form/нативная отправка и UTC в разных browser zones. Остальные picker modes,
 mask, render hooks, полный semantic/config/motion/container API остаются пробелами
 семейства; наличие RangePicker не означает полного покрытия React DatePicker.
+
+## Calendar
+
+Calendar переносит самостоятельную панель из Ant Design 6.6.8 и
+@rc-component/picker 1.12.2. По умолчанию отображает полный месяц с шестью
+строками дат; fullscreen={false} включает мини-календарь. Режим year показывает
+12 месяцев и сохраняется после выбора месяца.
+
+```svelte
+<script lang="ts">
+  import dayjs from 'dayjs';
+  import { Calendar } from 'antd-svelte';
+
+  let value = $state(dayjs('2024-09-15'));
+</script>
+
+<Calendar {value} onChange={next => { value = next; }}>
+  {#snippet cellRender(date, info)}
+    {#if info.type === 'date' && date.date() === 15}<span>Событие</span>{/if}
+  {/snippet}
+</Calendar>
+```
+
+Без value используются defaultValue или getNow(); defaultValue читается один
+раз. Заданные value и mode управляются владельцем через callbacks, без
+bind:value/mode. Отказ обновить prop сохраняет выбор и режим. Как PickerPanel,
+сама панель сдвигает отображаемый месяц при клике соседней даты даже при
+отклонённом value; заголовок продолжает показывать выбранное значение.
+При удалении controlled prop локальное значение очищается, без возврата к
+defaultValue/month: это поведение useControlledState изученной версии.
+
+Порядок выбора — onPanelChange при смене месяца/года панели, затем onChange
+при смене календарного дня, затем onSelect. Повторный выбор дня вызывает только
+onSelect. CalendarSelectInfo.source различает date, month, year и customize. Переключатель
+режима вызывает только onPanelChange. Компонент использует общий Dayjs adapter
+без прикладной сериализации или нормализации; проверены UTC, timezone offset,
+время и milliseconds.
+
+`validRange` сравнивает полные timestamps включительно, до вызова disabledDate.
+Month disabled вычисляется по первому и последнему дню месяца с сохранённым
+временем; содержимое месяца не сканируется. Поэтому диапазон внутри одного
+месяца может отключить весь этот месяц, как в rc-picker. Годы/месяцы заголовка
+ограничиваются validRange, но его действия не проходят disabledDate и не
+ограничивают день месяца границами диапазона.
+
+`headerRender` получает value/type/onChange/onTypeChange и полностью заменяет
+заголовок. `fullCellRender` заменяет содержимое ячейки; cellRender добавляет
+содержимое в стандартный date-content. Современные snippets имеют приоритет
+над deprecated date/monthCellRender и date/monthFullCellRender. OriginNode в
+CalendarCellRenderInfo — Svelte snippet исходного rc-picker inner. Date info.locale
+содержит filled formats, month info.locale — исходный lang. `showWeek` добавляет
+отдельные ячейки без render snippets; они выбирают начало строки с source=date.
+Ячейки сохраняются по позиции строки/столбца, как в upstream.
+
+Locale берётся из ConfigProvider.locale.calendar, независимо от DatePicker.
+Глобальные enUS/ruRU включают Calendar; default locale библиотеки остаётся ruRU.
+Словарь Calendar в ConfigProvider заменяется целиком, как DatePicker. Локальный
+Calendar.locale объединяет поля lang с базовым словарём и контекстом. Загрузка
+остальных Day.js locales остаётся у потребителя.
+
+`classNames`/`styles` принимают объекты или callbacks для root/header/body/content/
+item/itemContent. Callback props сохраняют переданные mode/showWeek, fullscreen
+получает default true. Приоритет root styles: context styles.root → context
+style → local styles.root → local style. Вложенный ConfigProvider.calendar
+заменяет component config целиком. `bind:nativeElement` возвращает root div и
+очищается при unmount. Календарь не добавляет скрытое поле с сериализованной
+датой; внутренние controls заголовка не получают name/id/required FormItem.
+
+`generateCalendar(adapter)` — отдельный экспорт вместо React-статики
+Calendar.generateCalendar. Фабрика возвращает Svelte component с теми же Props,
+реактивными value/mode и bind:nativeElement; CalendarGenerateConfig описывает
+исходные операции над датой. Типы и defaults находятся в
+[calendar.types.ts](./src/lib/calendar.types.ts).
+
+Адаптация доступности: table имеет роль grid, ячейки — gridcell с selected,
+disabled, today и одним tab stop. Стрелки/Home/End перемещают только фокус,
+Enter/Space выбирают. В standalone rc-picker эти keyboard handlers отсутствуют.
+Вложенные inputs/buttons сохраняют свою клавиатуру; stopPropagation у custom
+control предотвращает выбор родительской ячейки. В заголовке используются
+существующие native Select/RadioGroup с доступными именами.
+
+Из архива извлечены 123 CSS-правила Calendar, включая full/mini, week и mobile
+header. Темы, primary, compact и RTL используют текущие tokens библиотеки.
+Проверки: [engine](./src/lib/calendar.engine.test.ts),
+[SSR](./src/lib/calendar.ssr.test.ts),
+[public package](./tests/package/calendar.ssr.test.ts),
+[browser](./tests/browser/calendar.spec.ts) и `?fixture=calendar`, включая
+фабрику с собственным UTC Date adapter. PrefixCls, произвольный token engine,
+полный каталог locales, React warnings и неперенесённые возможности используемых
+Select/Radio остаются за пределами подтверждённого объёма этого этапа.
 
 ## TreeSelect
 

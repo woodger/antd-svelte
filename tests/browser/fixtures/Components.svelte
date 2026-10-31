@@ -6,6 +6,7 @@
   import SplitterFixtures from './SplitterFixtures.svelte';
   import QRCodeFixtures from './QRCodeFixtures.svelte';
   import RadioButtonFixtures from './RadioButtonFixtures.svelte';
+  import CalendarFixtures from './CalendarFixtures.svelte';
   import RateFixtures from './RateFixtures.svelte';
   import ImageGroupFixtures from './ImageGroupFixtures.svelte';
   import ImageFixtures from './ImageFixtures.svelte';
@@ -117,6 +118,7 @@
     <SplitterFixtures />
     <QRCodeFixtures />
     <RadioButtonFixtures />
+    <CalendarFixtures />
     <TextAreaFeaturesFixtures />
     <TextAreaFixtures />
     <InputFeaturesFixtures />

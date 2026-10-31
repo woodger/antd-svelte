@@ -9,6 +9,10 @@
 
 ### Added
 
+- Calendar: full/mini date/month panels, controlled value/mode и display state,
+  исходные события/ограничения дат, header/cell snippets, week numbers,
+  semantic config/locale, generic date adapter, native refs и доступный grid.
+  Добавлены CSS-рецепт и unit/SSR/package/browser-проверки.
 - RadioButton и кнопочный RadioGroup: children/options, optionType, size,
   outline/solid, block/vertical, Badge, темы и native refs. Существующие bind,
   reset/FormData и fieldset semantics сохранены. Добавлены CSS-рецепт и

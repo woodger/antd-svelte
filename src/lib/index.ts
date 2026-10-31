@@ -581,6 +581,22 @@ export type {
 export { default as QRCode } from './QRCode.svelte';
 export { default as RadioButton } from './RadioButton.svelte';
 export type { RadioButtonProps } from './radio.types';
+export { default as Calendar } from './Calendar.svelte';
+export { generateCalendar } from './calendar';
+export type {
+  CalendarProps,
+  CalendarRef,
+  CalendarMode,
+  CalendarSelectInfo,
+  CalendarGenerateConfig,
+  CalendarHeaderRenderInfo,
+  CalendarCellRenderInfo,
+  CalendarLang,
+  CalendarLocale,
+  CalendarSlots,
+  CalendarSemantic,
+  CalendarConfig
+} from './calendar.types';
 export type {
   QRCodeProps,
   QRCodeConfig,

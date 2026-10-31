@@ -1,0 +1,108 @@
+<script lang="ts" generics="DateType">
+  import { tick } from 'svelte';
+  import Select from './Select.svelte';
+  import RadioButton from './RadioButton.svelte';
+  import RadioGroup from './RadioGroup.svelte';
+  import { provideFormField, useFormField } from './form-context';
+  import { calendarMonthOptions, calendarSetYear, calendarYearOptions } from './calendar.engine';
+  import type { CalendarLang, CalendarMode, CalendarSelectInfo } from './calendar.types';
+  import type { GenerateConfig } from './date-generate.types';
+
+  let {
+    value,
+    mode,
+    fullscreen,
+    validRange,
+    locale,
+    generateConfig,
+    class: className,
+    style,
+    onChange,
+    onModeChange
+  }: {
+    value: DateType;
+    mode: CalendarMode | undefined;
+    fullscreen: boolean;
+    validRange?: [DateType, DateType];
+    locale: CalendarLang;
+    generateConfig: GenerateConfig<DateType>;
+    class?: string;
+    style?: string;
+    onChange: (date: DateType, source: CalendarSelectInfo['source']) => void;
+    onModeChange: (mode: CalendarMode) => void;
+  } = $props();
+
+  const field = useFormField();
+  // Внутренние controls заголовка не являются отдельными полями внешнего FormItem.
+  provideFormField(field ? {
+    get disabled() {
+      return field.disabled;
+    },
+    get status() {
+      return field.status;
+    },
+    required: false,
+    describedBy: undefined,
+    onBlur() {
+      field.onBlur();
+    }
+  } : undefined);
+
+  let monthInput = $state<HTMLInputElement>();
+  let yearInput = $state<HTMLInputElement>();
+  let years = $derived(calendarYearOptions(value, validRange, locale, generateConfig));
+  let months = $derived(calendarMonthOptions(value, validRange, locale, generateConfig));
+
+  function handleModeChange(next: CalendarMode) {
+    onModeChange(next);
+
+    // Native radio переключается до callback; controlled Calendar может отклонить новый mode.
+    void tick().then(() => {
+      if (monthInput) monthInput.checked = mode === 'month';
+      if (yearInput) yearInput.checked = mode === 'year';
+    });
+  }
+</script>
+
+<style>
+  @media (width > 480px) {
+    .ant-picker-calendar-header :global(.ant-picker-calendar-year-select),
+    .ant-picker-calendar-header :global(.ant-picker-calendar-month-select) { width: auto; flex-shrink: 0; }
+  }
+</style>
+
+<div class={['ant-picker-calendar-header', className]} {style}>
+  <Select
+    class="ant-picker-calendar-year-select"
+    aria-label={locale.yearSelect ?? locale.year}
+    size={fullscreen ? undefined : 'small'}
+    options={years}
+    bind:value={() => generateConfig.getYear(value), () => {}}
+    onValueChange={year => {
+      if (year !== undefined)
+        onChange(calendarSetYear(value, year, validRange, generateConfig), 'year');
+    }}
+  />
+  {#if mode === 'month'}
+    <Select
+      class="ant-picker-calendar-month-select"
+      aria-label={locale.monthSelect ?? locale.month}
+      size={fullscreen ? undefined : 'small'}
+      options={months}
+      bind:value={() => generateConfig.getMonth(value), () => {}}
+      onValueChange={month => {
+        if (month !== undefined) onChange(generateConfig.setMonth(value, month), 'month');
+      }}
+    />
+  {/if}
+  <RadioGroup
+    class="ant-picker-calendar-mode-switch"
+    aria-label={`${locale.month} / ${locale.year}`}
+    size={fullscreen ? undefined : 'small'}
+    bind:value={() => mode, () => {}}
+    onValueChange={handleModeChange}
+  >
+    <RadioButton value="month" bind:inputElement={monthInput}>{locale.month}</RadioButton>
+    <RadioButton value="year" bind:inputElement={yearInput}>{locale.year}</RadioButton>
+  </RadioGroup>
+</div>

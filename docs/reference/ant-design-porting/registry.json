@@ -3144,24 +3144,129 @@
       "id": "calendar",
       "name": "Calendar",
       "category": "data-display",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос Calendar 6.6.8 по общей цели: date/month panels, state/events, header/cell snippets, ranges, locale/semantic config и custom date adapter; существующие Svelte contracts Select/Radio сохранены.",
       "upstreamPath": "components/calendar",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "Calendar",
+          "local": [
+            "Calendar"
+          ]
+        },
+        {
+          "upstream": "Calendar.generateCalendar",
+          "local": [
+            "generateCalendar"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "select",
+        "radio"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/picker",
+          "range": "~1.12.2",
+          "referenceVersion": "1.12.2"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "dayjs",
+          "range": "^1.11.11",
+          "referenceVersion": "1.11.23"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
+      "evidence": [
+        "src/lib/Calendar.svelte",
+        "src/lib/CalendarCore.svelte",
+        "src/lib/CalendarHeader.svelte",
+        "src/lib/calendar.types.ts",
+        "src/lib/calendar.engine.ts",
+        "src/lib/calendar.engine.test.ts",
+        "src/lib/calendar.ssr.test.ts",
+        "tests/package/calendar.ssr.test.ts",
+        "tests/browser/calendar.spec.ts",
+        "tests/browser/fixtures/CalendarFixtures.svelte",
+        "tests/browser/fixtures/calendar-date-adapter.ts",
+        "tools/ant-design-css-recipes.json",
+        "readme.md"
+      ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Full/mini date и month panels, controlled/default state и события",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "evidence": [
+            "src/lib/calendar.ssr.test.ts",
+            "tests/browser/calendar.spec.ts"
+          ],
+          "note": "Value/mode props + callbacks, начальные defaultValue/getNow/month, очистка при controlled release; отдельный pickerValue при отклонённом value. Порядок panel/change/select и date/month/year/customize sources сохранены; time/milliseconds/UTC не нормализуются. Это объём текущего этапа, не полный API React и его зависимостей."
+        },
+        {
+          "id": "ranges-header",
+          "title": "ValidRange, disabledDate, year/month Select и RadioButton header",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/calendar.engine.test.ts",
+            "tests/browser/calendar.spec.ts"
+          ],
+          "note": "Полные inclusive timestamps и predicate short-circuit; month disabled по двум endpoints, без сканирования. Header предлагает 20 лет или range, ограничивает месяцы, сохраняет день и время; не применяет disabledDate. Сохранены существующие Svelte Select/RadioGroup и их disabled/bind/native contracts."
+        },
+        {
+          "id": "renderers-week",
+          "title": "Header/cell/full snippets, deprecated renderers, originNode и week column",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/calendar.ssr.test.ts",
+            "tests/browser/calendar.spec.ts"
+          ],
+          "note": "Svelte snippets вместо React renderers; современные выше legacy. Full заменяет inner, cell добавляет content. Date info получает filled locale, month raw locale. Week cells не вызывают renderer и выбирают начало строки. Ячейки и черновики сохраняются по позиции строк/столбцов."
+        },
+        {
+          "id": "factory-ssr-lifecycle",
+          "title": "GenerateCalendar, SSR, native refs и lifecycle",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/calendar.ssr.test.ts",
+            "tests/browser/calendar.spec.ts"
+          ],
+          "note": "Отдельная factory вместо React static; GenerateConfig совместим по операциям с rc-picker. Проверен собственный immutable UTC Date adapter, реактивные value/mode и ref setters. SSR содержит panel; nativeElement очищается. Календарь не сериализует дату в hidden input; header отделён от native association внешнего FormItem."
+        },
+        {
+          "id": "presentation",
+          "title": "Semantic/config API, en/ru locale, темы, compact, RTL и mobile",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/calendar.ssr.test.ts",
+            "tests/browser/calendar.spec.ts",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "123 исходных CSS rules, full/mini и mobile header. Все шесть semantic slots, functions и root style priority, component config replacement. Calendar locale отдельна от DatePicker; props.locale deep merge. Default ruRU сохраняет библиотечный контракт. Grid/roving focus и Enter/Space/Home/End/arrows — явная Svelte accessibility adaptation к pointer-only standalone PickerPanel."
+        },
+        {
+          "id": "theme-prefix-diagnostics",
+          "title": "PrefixCls, произвольный token engine, все locales и React diagnostics",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Произвольный prefix/token engine, полный каталог locale exports, React deprecated/invalid-value warnings и неаудированные возможности используемых Select/Radio не объявляются перенесёнными. Адаптация: class/styles strings, snippets, отдельный factory и nativeElement binding вместо React refs/statics."
         }
       ]
     },

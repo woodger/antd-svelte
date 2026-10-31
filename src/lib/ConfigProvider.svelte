@@ -7,6 +7,7 @@
   import type { MasonryConfig } from './masonry.types';
   import type { SplitterConfig } from './splitter.types';
   import type { QRCodeConfig } from './qrcode.types';
+  import type { CalendarConfig } from './calendar.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
   import type { InputSearchConfig } from './input-search.types';
@@ -29,6 +30,7 @@
     masonry?: MasonryConfig;
     splitter?: SplitterConfig;
     qrcode?: QRCodeConfig;
+    calendar?: CalendarConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
     inputPassword?: InputPasswordConfig;
@@ -57,6 +59,7 @@
     masonry,
     splitter,
     qrcode,
+    calendar,
     textArea,
     input,
     inputPassword,
@@ -94,6 +97,9 @@
     },
     get qrcode() {
       return qrcode ?? parent.qrcode;
+    },
+    get calendar() {
+      return calendar ?? parent.calendar;
     },
     get input() {
       return input ?? parent.input;

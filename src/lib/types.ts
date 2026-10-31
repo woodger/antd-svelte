@@ -2,6 +2,7 @@ import type { UploadLocale } from './upload.types';
 import type { DatePickerLocale } from './date-picker.types';
 import { datePickerEnUS, datePickerRuRU } from './date-picker.locale';
 import type { QRCodeLocale } from './qrcode.types';
+import type { CalendarLocale } from './calendar.types';
 import { qrCodeEnUS, qrCodeRuRU } from './qrcode.locale';
 export type ComponentSize = 'small' | 'middle' | 'large';
 
@@ -20,6 +21,7 @@ export interface Locale {
   tree?: { expand?: string; collapse?: string; };
   upload?: UploadLocale;
   datePicker?: DatePickerLocale;
+  calendar?: CalendarLocale;
   okText: string;
   cancelText: string;
   closeText: string;
@@ -141,6 +143,7 @@ export const ruRU = {
     downloadFile: 'Загрузить файл'
   },
   datePicker: datePickerRuRU,
+  calendar: datePickerRuRU,
   layout: { expand: 'Развернуть боковую панель', collapse: 'Свернуть боковую панель' },
   avatarGroup: {
     label: 'Участники',
@@ -223,6 +226,7 @@ export const enUS = {
     downloadFile: 'Download file'
   },
   datePicker: datePickerEnUS,
+  calendar: datePickerEnUS,
   layout: { expand: 'Expand sidebar', collapse: 'Collapse sidebar' },
   avatarGroup: { label: 'Members', hiddenLabel: 'Hidden members', overflow: 'More members' },
   badge: {
