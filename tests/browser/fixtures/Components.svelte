@@ -8,6 +8,7 @@
   import RadioButtonFixtures from './RadioButtonFixtures.svelte';
   import CalendarFixtures from './CalendarFixtures.svelte';
   import TimePickerFixtures from './TimePickerFixtures.svelte';
+  import TimeRangePickerFixtures from './TimeRangePickerFixtures.svelte';
   import RateFixtures from './RateFixtures.svelte';
   import ImageGroupFixtures from './ImageGroupFixtures.svelte';
   import ImageFixtures from './ImageFixtures.svelte';
@@ -121,6 +122,7 @@
     <RadioButtonFixtures />
     <CalendarFixtures />
     <TimePickerFixtures />
+    <TimeRangePickerFixtures />
     <TextAreaFeaturesFixtures />
     <TextAreaFixtures />
     <InputFeaturesFixtures />

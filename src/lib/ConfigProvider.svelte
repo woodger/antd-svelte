@@ -9,6 +9,7 @@
   import type { QRCodeConfig } from './qrcode.types';
   import type { CalendarConfig } from './calendar.types';
   import type { TimePickerConfig } from './time-picker.types';
+  import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
   import type { InputSearchConfig } from './input-search.types';
@@ -33,6 +34,7 @@
     qrcode?: QRCodeConfig;
     calendar?: CalendarConfig;
     timePicker?: TimePickerConfig;
+    rangePicker?: RangePickerConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
     inputPassword?: InputPasswordConfig;
@@ -63,6 +65,7 @@
     qrcode,
     calendar,
     timePicker,
+    rangePicker,
     textArea,
     input,
     inputPassword,
@@ -106,6 +109,9 @@
     },
     get timePicker() {
       return timePicker ?? parent.timePicker;
+    },
+    get rangePicker() {
+      return rangePicker ?? parent.rangePicker;
     },
     get input() {
       return input ?? parent.input;

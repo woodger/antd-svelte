@@ -9,11 +9,17 @@
 
 ### Added
 
+- TimeRangePicker переносит TimePicker.RangePicker: два поля, отдельные
+  подтверждения и calendar draft, sorting/allowEmpty/disabled, dependent time
+  restrictions, hover/scroll, pickerValue, mixed range/time config и snippets.
+  Общий RangePickerCore сохраняет существующий календарный API; перенесены
+  позиционирование узкой панели/стрелки и deferred focus с cleanup. Добавлены
+  unit/SSR/package/browser-проверки, включая UTC, RTL и native form/refs.
 - TimePicker: общий SinglePicker, time columns, строгие форматы, draft/confirm/
   controlled state, hover и scroll selection, ограничения, locale/config,
   semantic slots и snippets. Сохранены UTC/точность Dayjs и текущие DatePicker/
   RangePicker contracts; добавлены unit/SSR/package/browser-проверки.
-  TimePicker.RangePicker и multiple остаются в следующих этапах.
+  Multiple и mask format остаются в следующих этапах.
 - Calendar: full/mini date/month panels, controlled value/mode и display state,
   исходные события/ограничения дат, header/cell snippets, week numbers,
   semantic config/locale, generic date adapter, native refs и доступный grid.
@@ -87,6 +93,8 @@
 
 ### Fixed
 
+- TimePicker в RTL сохраняет исходный порядок колонок времени и RTL-направление
+  внутри колонок через marker PickerPanel.
 - TreeSelect не выбирает удалённый активный узел по Enter и очищает устаревшую
   ARIA-связь после обновления данных. Controlled search восстанавливает ввод из
   searchValue при отказе владельца; удаление тегов отсутствующих узлов сохраняется.

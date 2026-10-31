@@ -6,7 +6,7 @@ import type {
   TimePickerPopupSlots
 } from './time-picker.types';
 
-function mergeSlots(values: (TimePickerSlots | undefined)[], separator: string) {
+export function mergePickerSlots(values: (TimePickerSlots | undefined)[], separator: string) {
   const popup = (value: TimePickerSlots | undefined): TimePickerPopupSlots =>
     typeof value?.popup === 'string' ? { root: value.popup } : value?.popup ?? {};
   const join = (parts: (string | undefined)[]) =>
@@ -36,11 +36,11 @@ export function timePickerSemantic(
   const resolve = (value: TimePickerSemantic | undefined, props: TimePickerProps) =>
     typeof value === 'function' ? value({ props }) : value;
   const outerProps = { ...props, variant: resolved.variant };
-  const outerClasses = mergeSlots([
+  const outerClasses = mergePickerSlots([
     resolve(config?.classNames, outerProps), resolve(props.classNames, outerProps),
     { popup: { root: props.popupClassName } }
   ], ' ');
-  const outerStyles = mergeSlots([
+  const outerStyles = mergePickerSlots([
     resolve(config?.styles, outerProps), { root: config?.style },
     resolve(props.styles, outerProps), { popup: { root: props.popupStyle } }
   ], ';');
@@ -53,8 +53,8 @@ export function timePickerSemantic(
   };
 
   return {
-    classes: mergeSlots([resolve(config?.classNames, innerProps), outerClasses], ' '),
-    styles: mergeSlots([
+    classes: mergePickerSlots([resolve(config?.classNames, innerProps), outerClasses], ' '),
+    styles: mergePickerSlots([
       resolve(config?.styles, innerProps), { root: config?.style }, outerStyles
     ], ';')
   };

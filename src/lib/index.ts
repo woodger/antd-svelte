@@ -97,7 +97,8 @@ export type {
   RangePickerPart,
   RangePickerInfo,
   RangePickerTimeConfig,
-  RangePickerPreset
+  RangePickerPreset,
+  RangePickerConfig
 } from './range-picker.types';
 export { default as DatePicker } from './DatePicker.svelte';
 export type {
@@ -583,6 +584,12 @@ export { default as RadioButton } from './RadioButton.svelte';
 export type { RadioButtonProps } from './radio.types';
 export { default as Calendar } from './Calendar.svelte';
 export { default as TimePicker } from './TimePicker.svelte';
+export { default as TimeRangePicker } from './TimeRangePicker.svelte';
+export type {
+  TimeRangePickerProps,
+  TimeRangePickerFocusOptions,
+  TimeRangePickerSemantic
+} from './time-range-picker.types';
 export type {
   TimePickerProps,
   TimePickerLocale,

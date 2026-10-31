@@ -20,6 +20,13 @@ export interface RangePickerPreset {
   label: string | Snippet;
   value: RangePickerInputValue | (() => RangePickerInputValue);
 }
+/** Настройки общей range-обёртки; вложенный ConfigProvider заменяет объект целиком. */
+export interface RangePickerConfig {
+  class?: string;
+  style?: string;
+  variant?: DatePickerProps['variant'];
+  separator?: string | Snippet;
+}
 /** Пара Dayjs с общей панелью диапазона, временем и подтверждением границ. */
 export interface RangePickerProps extends Omit<
   DatePickerProps,

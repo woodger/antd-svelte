@@ -2740,7 +2740,7 @@
       "name": "TimePicker",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Автономный перенос SinglePicker/TimePicker по закреплённому rc-picker; TimePicker.RangePicker остаётся обязательным следующим этапом.",
+      "scopeReason": "Автономный перенос Single/Range TimePicker по закреплённому rc-picker: общие SinglePicker/RangePickerCore, time columns, source transitions/config и сохранение действующих календарных Svelte contracts.",
       "upstreamPath": "components/time-picker",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2748,6 +2748,12 @@
           "upstream": "TimePicker",
           "local": [
             "TimePicker"
+          ]
+        },
+        {
+          "upstream": "TimePicker.RangePicker",
+          "local": [
+            "TimeRangePicker"
           ]
         }
       ],
@@ -2782,7 +2788,17 @@
         "tests/package/time-picker.ssr.test.ts",
         "tests/browser/time-picker.spec.ts",
         "tests/browser/fixtures/TimePickerFixtures.svelte",
-        "readme.md"
+        "readme.md",
+        "src/lib/TimeRangePicker.svelte",
+        "src/lib/RangePickerCore.svelte",
+        "src/lib/time-range-picker.types.ts",
+        "src/lib/time-range-picker.engine.ts",
+        "src/lib/time-range-picker-popup.dom.ts",
+        "src/lib/time-range-picker.engine.test.ts",
+        "src/lib/time-range-picker.ssr.test.ts",
+        "tests/package/time-range-picker.ssr.test.ts",
+        "tests/browser/time-range-picker.spec.ts",
+        "tests/browser/fixtures/TimeRangePickerFixtures.svelte"
       ],
       "features": [
         {
@@ -2827,17 +2843,23 @@
             "src/lib/time-picker.engine.test.ts",
             "src/lib/time-picker.ssr.test.ts",
             "tests/package/time-picker.ssr.test.ts",
-            "tests/browser/time-picker.spec.ts"
+            "tests/browser/time-picker.spec.ts",
+            "tests/browser/time-range-picker.spec.ts"
           ],
-          "note": "Общие DatePickerLocale/lang/timePickerLocale и en/ru, отдельный ConfigProvider.timePicker с replacement. Сохранены два semantic слоя upstream, raw local props и style priority. Prefix/icons/clear, cellRender originNode, panelRender, presets, renderExtraFooter и legacy addon — Svelte snippets. Используется существующий извлечённый CSS DatePicker; React runtime не добавляется."
+          "note": "Общие DatePickerLocale/lang/timePickerLocale и en/ru, отдельный ConfigProvider.timePicker с replacement. SinglePicker сохраняет два semantic слоя и raw local props; RangePicker один слой с resolved size/disabled и raw variant. Prefix/icons/clear, cellRender originNode/range, panelRender, presets и footer — Svelte snippets; single legacy addon сохранён. Используется существующий извлечённый CSS DatePicker, source RTL marker; React runtime не добавляется."
         },
         {
           "id": "range-picker",
-          "title": "TimePicker.RangePicker",
-          "state": "missing",
+          "title": "Range time: отдельные подтверждения, sorting, allowEmpty/disabled и mixed config",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Диапазон времени следует отдельным логическим этапом на общей машине RangePicker; семейство пока partial."
+          "evidence": [
+            "src/lib/time-range-picker.engine.test.ts",
+            "src/lib/time-range-picker.ssr.test.ts",
+            "tests/package/time-range-picker.ssr.test.ts",
+            "tests/browser/time-range-picker.spec.ts"
+          ],
+          "note": "Общая машина RangePicker: calendar/submit/owner, последовательные OK/Enter/Tab, focus lock и strong/weak close, onOk до перехода/change, сортировка только final pair и locked boundary clear. Nullable panels/defaultOpenValue/pickerValue, from-dependent validation, native FormData/Dayjs/Form/refs и cleanup. Icons/semantic берутся из timePicker; variant/separator/class/plain style из rangePicker, один semantic слой. Узкая панель/стрелка сдвигаются под активное поле; source RTL column order. Svelte native buttons/popover и deferred focus адаптированы без изменения календарного RangePicker API."
         },
         {
           "id": "advanced-api",

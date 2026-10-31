@@ -54,12 +54,16 @@ export function timePickerFormats(
   return [locale.fieldTimeFormat || timeFormat(props)];
 }
 
-export function timePickerLang(props: TimePickerProps, locale: PickerLocale) {
+export function timePickerLang(
+  props: Pick<TimePickerProps,
+    'showHour' | 'showMinute' | 'showSecond' | 'showMillisecond' | 'use12Hours' | 'format'>,
+  locale: PickerLocale
+) {
   return fillPickerLocale(locale, timeFormat(props));
 }
 
 export function timePickerClock(
-  props: TimePickerProps,
+  props: Pick<TimePickerProps, keyof DatePickerTimeConfig | 'changeOnScroll'>,
   locale: NonNullable<TimePickerProps['locale']>['lang'] = {}
 ): DatePickerTimeConfig {
   const format = timePickerFormats(props, locale)[0];

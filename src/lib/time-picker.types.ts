@@ -53,7 +53,10 @@ export interface TimePickerSlots {
 export type TimePickerSemantic = TimePickerSlots
   | ((info: { props: TimePickerProps; }) => TimePickerSlots | undefined);
 
-/** Объект component config заменяется целиком во вложенном ConfigProvider. */
+/**
+ * Объект component config заменяется целиком во вложенном ConfigProvider.
+ * Общий semantic callback получает range props в TimeRangePicker runtime, как upstream.
+ */
 export interface TimePickerConfig {
   class?: string;
   style?: string;

@@ -562,7 +562,10 @@
       </ul></div>
     {/if}
     <div>
-      <div class="ant-picker-panel" tabindex="-1">
+      <div
+        class={['ant-picker-panel', config.direction === 'rtl' && 'ant-picker-panel-rtl']}
+        tabindex="-1"
+      >
         {#if timeLocale}<PickerTimePanel
           value={draft || clock.defaultOpenValue || null}
           pickerValue={panel}

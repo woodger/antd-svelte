@@ -328,6 +328,9 @@ test('TimePicker combines source semantic layers, themes, RTL and nested config 
   await expect(popup(page)).toHaveCSS('outline-offset', '6px');
   await expect(popup(page).locator('.local-time-content')).toHaveCSS('outline-offset', '6px');
   await expect(popup(page).locator('.custom-time-cell').first()).toHaveAttribute('data-type', 'time');
+  const hour = await popup(page).locator('[data-type="hour"]').boundingBox();
+  const minute = await popup(page).locator('[data-type="minute"]').boundingBox();
+  expect(hour!.x).toBeLessThan(minute!.x);
   await unit(page, 'hour 13').click();
   await unit(page, 'ОК').click();
   await control(page, 'Replace time picker config').check();
