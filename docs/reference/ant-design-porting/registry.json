@@ -3022,24 +3022,158 @@
       "id": "transfer",
       "name": "Transfer",
       "category": "data-entry",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос по общей цели: controlled перенос между списками, selection/search, oneWay, pagination и custom rendering; общий token/renderEmpty API отдельно.",
       "upstreamPath": "components/transfer",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "Transfer",
+          "local": [
+            "Transfer"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "button",
+        "checkbox",
+        "input",
+        "dropdown",
+        "pagination",
+        "empty",
+        "form"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/pagination",
+          "range": "~1.4.0",
+          "referenceVersion": "1.4.0"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@rc-component/checkbox",
+          "range": "~2.0.0",
+          "referenceVersion": "2.0.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
+      "evidence": [
+        "src/lib/Transfer.svelte",
+        "src/lib/TransferSection.svelte",
+        "src/lib/TransferCheckbox.svelte",
+        "src/lib/TransferAction.svelte",
+        "src/lib/TransferPagination.svelte",
+        "src/lib/transfer.types.ts",
+        "src/lib/transfer.engine.ts",
+        "src/lib/transfer.locale.ts",
+        "src/lib/vendor/transfer.css",
+        "src/lib/vendor/LICENSE.rc-pagination",
+        "src/lib/transfer.engine.test.ts",
+        "src/lib/transfer.ssr.test.ts",
+        "tests/package/transfer.ssr.test.ts",
+        "tests/browser/transfer.spec.ts",
+        "tests/browser/fixtures/TransferFixtures.svelte",
+        "readme.md"
+      ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "controlled-data",
+          "title": "Controlled targetKeys, source/target order и primitive/rowKey identity",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "evidence": [
+            "src/lib/transfer.engine.test.ts",
+            "src/lib/transfer.ssr.test.ts",
+            "tests/package/transfer.ssr.test.ts",
+            "tests/browser/transfer.spec.ts"
+          ],
+          "note": "targetKeys всегда задаёт владелец. Source следует dataSource, target — targetKeys; missing targets сохраняются в change. Right move prepend, disabled keys исключаются. String/number/bigint различаются; rowKey клонирует frozen record без изменения input. Native div ref; только aria/data forwarding; нет FormData serializer."
+        },
+        {
+          "id": "selection",
+          "title": "Controlled/local selection, Shift, filtered/header/page selection",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/transfer.engine.test.ts",
+            "src/lib/transfer.ssr.test.ts",
+            "tests/package/transfer.ssr.test.ts",
+            "tests/browser/transfer.spec.ts"
+          ],
+          "note": "Локальное или controlled выделение с onSelectChange до onChange. Enabled-only ranges, reset anchor при поиске, скрытые выбранные строки сохраняются. Select all/current/invert и deselect работают с исходными порядком и disabled boundaries. Смена data чистит selection без callbacks; undefined освобождает controlled selection в пустое локальное состояние."
+        },
+        {
+          "id": "search-render",
+          "title": "Case-sensitive search, metadata render и Svelte content",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/transfer.engine.test.ts",
+            "src/lib/transfer.ssr.test.ts",
+            "tests/package/transfer.ssr.test.ts",
+            "tests/browser/transfer.spec.ts"
+          ],
+          "note": "Default render возвращает null; текст поиска — первый string/number среди render result/title/key. Metadata label/value разделены. Render callback возвращает текст, metadata или snippet вместо JSX. ShowSearch defaultValue читается один раз для каждого списка; clear публикует один callback. FilterOption получает физическую direction, onSearch/onScroll логическую."
+        },
+        {
+          "id": "one-way-pagination",
+          "title": "OneWay removal и независимая simple/normal pagination",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/transfer.engine.test.ts",
+            "src/lib/transfer.ssr.test.ts",
+            "tests/package/transfer.ssr.test.ts",
+            "tests/browser/transfer.spec.ts"
+          ],
+          "note": "OneWay скрывает reverse action и даёт remove/remove current/all. Disabled строки и missing targets сохраняются. Независимые страницы, default pageSize=10/simple=true, controlled pageSize/showSizeChanger, showLessItems и исходный rc-pagination threshold/jumps. Пустая выдача сбрасывает page и локальный pageSize; временное отключение pagination сохраняет page. При custom children pagination выключается."
+        },
+        {
+          "id": "custom-composition",
+          "title": "Custom list/footer/actions и callback contracts",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/transfer.engine.test.ts",
+            "src/lib/transfer.ssr.test.ts",
+            "tests/package/transfer.ssr.test.ts",
+            "tests/browser/transfer.spec.ts"
+          ],
+          "note": "Children получает данные/selection/semantic slots и callbacks; footer — полные list props и физическую сторону. Actions snippet получает handlers/disabled/icon вместо cloneElement; descriptor сохраняет собственный disabled/onClick. PreventDefault не отменяет перенос. Extra actions учитывают oneWay. Наличие footer/children snippet задаёт layout даже при пустом содержимом — явная Svelte adaptation."
+        },
+        {
+          "id": "presentation",
+          "title": "Semantic/config/locale, themes, RTL, native keyboard и SSR",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/transfer.engine.test.ts",
+            "src/lib/transfer.ssr.test.ts",
+            "tests/package/transfer.ssr.test.ts",
+            "tests/browser/transfer.spec.ts"
+          ],
+          "note": "54 исходных CSS rules без keyframes/at-rules, theme token aliases и MIT rc-pagination. Common/nested context/local semantic slots, исходный root/legacy style priority, ConfigProvider.transfer, locale и status. Native checkbox/labels, Tab/Space, dropdown keyboard/focus. RTL меняет физические callbacks/footer/empty sides и arrows; source/target semantics остаются логическими. SSR без DOM/timers/change callbacks. Native reset сохраняет model/query; checked DOM следует исходному React/native reset поведению. Input value attribute синхронизирован локально без изменения публичного Input."
+        },
+        {
+          "id": "advanced-api",
+          "title": "Полный token/renderEmpty и React-specific API",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Общий token engine/renderEmpty, CSS generation для произвольного prefixCls, React-specific refs/dev warnings не перенесены. PrefixCls меняет DOM-классы, vendor CSS рассчитан на ant-transfer. ReactNode callbacks/cloneElement заменены явно описанными snippets/handlers; v1-ready не означает завершение полного React API."
         }
       ]
     },

@@ -606,6 +606,30 @@ export type {
   CascaderSemanticValue,
   CascaderConfig
 } from './cascader.types';
+export { default as Transfer } from './Transfer.svelte';
+export type {
+  TransferProps,
+  TransferItem,
+  TransferKey,
+  TransferDirection,
+  TransferStatus,
+  TransferContent,
+  TransferConfig,
+  TransferLocale,
+  TransferSearchOption,
+  TransferPagination,
+  TransferAction,
+  TransferActionInfo,
+  TransferSelectAllLabel,
+  TransferRenderResult,
+  TransferRenderedItem,
+  TransferListProps,
+  TransferListBodyProps,
+  TransferSlots,
+  TransferSectionSlots,
+  TransferSemantic,
+  TransferSemanticValue
+} from './transfer.types';
 export { default as TimePicker } from './TimePicker.svelte';
 export { default as TimeRangePicker } from './TimeRangePicker.svelte';
 export type {

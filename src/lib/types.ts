@@ -3,6 +3,8 @@ import type { DatePickerLocale } from './date-picker.types';
 import { datePickerEnUS, datePickerRuRU } from './date-picker.locale';
 import type { QRCodeLocale } from './qrcode.types';
 import type { CalendarLocale } from './calendar.types';
+import type { TransferLocale } from './transfer.types';
+import { transferEnUS, transferRuRU } from './transfer.locale';
 import { qrCodeEnUS, qrCodeRuRU } from './qrcode.locale';
 export type ComponentSize = 'small' | 'middle' | 'large';
 
@@ -22,6 +24,7 @@ export interface Locale {
   upload?: UploadLocale;
   datePicker?: DatePickerLocale;
   calendar?: CalendarLocale;
+  transfer?: TransferLocale;
   okText: string;
   cancelText: string;
   closeText: string;
@@ -198,6 +201,7 @@ export const ruRU = {
     pageSize: 'Записей на странице',
     itemsPerPage: '/ стр.'
   },
+  transfer: transferRuRU,
   table: {
     label: 'Таблица',
     emptyText: 'Нет данных',
@@ -277,6 +281,7 @@ export const enUS = {
     pageSize: 'Items per page',
     itemsPerPage: '/ page'
   },
+  transfer: transferEnUS,
   table: {
     label: 'Table',
     emptyText: 'No data',

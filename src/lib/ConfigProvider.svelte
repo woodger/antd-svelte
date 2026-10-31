@@ -10,6 +10,7 @@
   import type { CalendarConfig } from './calendar.types';
   import type { TimePickerConfig } from './time-picker.types';
   import type { CascaderConfig } from './cascader.types';
+  import type { TransferConfig } from './transfer.types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
@@ -36,6 +37,7 @@
     calendar?: CalendarConfig;
     timePicker?: TimePickerConfig;
     cascader?: CascaderConfig;
+    transfer?: TransferConfig;
     rangePicker?: RangePickerConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
@@ -68,6 +70,7 @@
     calendar,
     timePicker,
     cascader,
+    transfer,
     rangePicker,
     textArea,
     input,
@@ -115,6 +118,9 @@
     },
     get cascader() {
       return cascader ?? parent.cascader;
+    },
+    get transfer() {
+      return transfer ?? parent.transfer;
     },
     get rangePicker() {
       return rangePicker ?? parent.rangePicker;
@@ -167,7 +173,8 @@
         badge: { ...parent.locale.badge, ...locale?.badge },
         avatarGroup: { ...parent.locale.avatarGroup, ...locale?.avatarGroup },
         layout: { ...parent.locale.layout, ...locale?.layout },
-        qrcode: { ...parent.locale.qrcode, ...locale?.qrcode }
+        qrcode: { ...parent.locale.qrcode, ...locale?.qrcode },
+        transfer: { ...parent.locale.transfer, ...locale?.transfer }
       };
     }
   };

@@ -10,6 +10,7 @@
   import TimePickerFixtures from './TimePickerFixtures.svelte';
   import TimeRangePickerFixtures from './TimeRangePickerFixtures.svelte';
   import CascaderFixtures from './CascaderFixtures.svelte';
+  import TransferFixtures from './TransferFixtures.svelte';
   import RateFixtures from './RateFixtures.svelte';
   import ImageGroupFixtures from './ImageGroupFixtures.svelte';
   import ImageFixtures from './ImageFixtures.svelte';
@@ -125,6 +126,7 @@
     <TimePickerFixtures />
     <TimeRangePickerFixtures />
     <CascaderFixtures />
+    <TransferFixtures />
     <TextAreaFeaturesFixtures />
     <TextAreaFixtures />
     <InputFeaturesFixtures />

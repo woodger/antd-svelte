@@ -762,5 +762,26 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Cascader: selector, columns, checkbox, panel и RTL; select base — vendor/antd.css.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "transfer",
+    "output": "src/lib/vendor/transfer.css",
+    "expectedRules": 54,
+    "include": [
+      "\\.ant-transfer(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-transfer",
+        "replacement": ".ant-transfer-css-var"
+      },
+      {
+        "pattern": "\\.ant-transfer(?:-customize-list|-status-(?:error|warning)|-rtl)?(?![-\\w])",
+        "replacement": "$&:where(.ant-transfer-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Transfer: списки, поиск, actions, custom lists, pagination, status и RTL.\n * Корни ограничены :where(.ant-transfer-css-var); keyframes и at-rules отсутствуют.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]

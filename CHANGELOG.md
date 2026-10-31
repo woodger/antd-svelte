@@ -9,6 +9,11 @@
 
 ### Added
 
+- Transfer: controlled targetKeys/selection, исходный порядок переноса, поиск,
+  Shift/header selection, oneWay removal, independent simple/normal pagination,
+  custom lists/footer/actions, semantic config/locale, темы/RTL и native checkbox.
+  Добавлены CSS-рецепт, лицензия rc-pagination, unit/SSR/package/browser проверки
+  и отдельная фикстура. React callbacks/snippets и границы API описаны в README.
 - Cascader/CascaderPanel: single/multiple пути, checkbox conduction и стратегии,
   поиск/подсветка, custom fields, loadData с исходным lifecycle options, колонки,
   controlled/default состояния, native keyboard/refs, snippets, responsive tags,
