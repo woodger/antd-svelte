@@ -8,6 +8,7 @@ import type { SplitterConfig } from './splitter.types';
 import type { QRCodeConfig } from './qrcode.types';
 import type { CalendarConfig } from './calendar.types';
 import type { TimePickerConfig } from './time-picker.types';
+import type { CascaderConfig } from './cascader.types';
 import type { RangePickerConfig } from './range-picker.types';
 import type { InputConfig } from './input.types';
 import type { InputPasswordConfig } from './input-password.types';
@@ -27,6 +28,7 @@ export interface ConfigContext {
   readonly qrcode?: QRCodeConfig;
   readonly calendar?: CalendarConfig;
   readonly timePicker?: TimePickerConfig;
+  readonly cascader?: CascaderConfig;
   readonly rangePicker?: RangePickerConfig;
   readonly textArea?: TextAreaConfig;
   readonly input?: InputConfig;

@@ -9,6 +9,7 @@
   import CalendarFixtures from './CalendarFixtures.svelte';
   import TimePickerFixtures from './TimePickerFixtures.svelte';
   import TimeRangePickerFixtures from './TimeRangePickerFixtures.svelte';
+  import CascaderFixtures from './CascaderFixtures.svelte';
   import RateFixtures from './RateFixtures.svelte';
   import ImageGroupFixtures from './ImageGroupFixtures.svelte';
   import ImageFixtures from './ImageFixtures.svelte';
@@ -123,6 +124,7 @@
     <CalendarFixtures />
     <TimePickerFixtures />
     <TimeRangePickerFixtures />
+    <CascaderFixtures />
     <TextAreaFeaturesFixtures />
     <TextAreaFixtures />
     <InputFeaturesFixtures />

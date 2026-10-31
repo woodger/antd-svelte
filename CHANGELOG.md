@@ -9,6 +9,11 @@
 
 ### Added
 
+- Cascader/CascaderPanel: single/multiple пути, checkbox conduction и стратегии,
+  поиск/подсветка, custom fields, loadData с исходным lifecycle options, колонки,
+  controlled/default состояния, native keyboard/refs, snippets, responsive tags,
+  semantic config, темы/RTL и deprecated popup aliases. Добавлены CSS-рецепт,
+  лицензия rc-cascader, unit/SSR/package/browser проверки и отдельная фикстура.
 - TimeRangePicker переносит TimePicker.RangePicker: два поля, отдельные
   подтверждения и calendar draft, sorting/allowEmpty/disabled, dependent time
   restrictions, hover/scroll, pickerValue, mixed range/time config и snippets.

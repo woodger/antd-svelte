@@ -890,7 +890,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Cascader и TimePicker отсутствуют в публичной библиотеке; их Compact-контекст подключается при переносе соответствующих API. AutoComplete, InputSearch, DatePicker, RangePicker и TreeSelect уже наследуют Compact context."
+          "note": "AutoComplete, InputSearch, DatePicker, RangePicker, TimePicker, TimeRangePicker, TreeSelect и Cascader наследуют Compact context. Полный аудит оставшихся child API выполняется вместе с их переносом."
         }
       ]
     },
@@ -1648,24 +1648,169 @@
       "id": "cascader",
       "name": "Cascader",
       "category": "data-entry",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос по общей цели: Cascader/Panel, пути, conduction, поиск, loadData, source state/keyboard/presentation и Svelte native semantics; расширенные popup/token API отдельно.",
       "upstreamPath": "components/cascader",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "Cascader",
+          "local": [
+            "Cascader"
+          ]
+        },
+        {
+          "upstream": "Cascader.Panel",
+          "local": [
+            "CascaderPanel"
+          ]
+        },
+        {
+          "upstream": "Cascader.SHOW_PARENT",
+          "local": [
+            "CASCADER_SHOW_PARENT"
+          ]
+        },
+        {
+          "upstream": "Cascader.SHOW_CHILD",
+          "local": [
+            "CASCADER_SHOW_CHILD"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "select",
+        "tree",
+        "empty",
+        "form",
+        "space"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/cascader",
+          "range": "~1.22.0",
+          "referenceVersion": "1.22.0"
+        },
+        {
+          "name": "@rc-component/select",
+          "range": "~1.10.1",
+          "referenceVersion": "1.10.1"
+        },
+        {
+          "name": "@rc-component/tree",
+          "range": "~1.4.0",
+          "referenceVersion": "1.4.0"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "L",
+      "evidence": [
+        "src/lib/Cascader.svelte",
+        "src/lib/CascaderPanel.svelte",
+        "src/lib/CascaderCore.svelte",
+        "src/lib/CascaderColumns.svelte",
+        "src/lib/cascader.types.ts",
+        "src/lib/cascader.engine.ts",
+        "src/lib/cascader.dom.ts",
+        "src/lib/vendor/LICENSE.rc-cascader",
+        "src/lib/vendor/cascader.css",
+        "src/lib/cascader.engine.test.ts",
+        "src/lib/cascader.ssr.test.ts",
+        "tests/package/cascader.ssr.test.ts",
+        "tests/browser/cascader.spec.ts",
+        "tests/browser/fixtures/CascaderFixtures.svelte",
+        "readme.md"
+      ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "paths-state",
+          "title": "Single paths, controlled/default state, missing values и clear",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "evidence": [
+            "src/lib/cascader.engine.test.ts",
+            "src/lib/cascader.ssr.test.ts",
+            "tests/package/cascader.ssr.test.ts",
+            "tests/browser/cascader.spec.ts"
+          ],
+          "note": "Полный путь string/number, strict value matching, aliases fieldNames, original option identity и undefined для missing cells. Clear single=(undefined,undefined), multi=([],[]); onClear до change. Повторный single выбор вызывает change. Прикладной FormData serializer не добавляется."
+        },
+        {
+          "id": "multiple-checks",
+          "title": "Multiple conduction, disabled boundaries и SHOW_PARENT/SHOW_CHILD",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/cascader.engine.test.ts",
+            "tests/browser/cascader.spec.ts"
+          ],
+          "note": "Общий rc-tree 1.4.0 engine. Checkbox выбирает ветку, content родителя только раскрывает; disabled/disableCheckbox разрывают conduction. Missing paths сохраняются первыми, ordering проверен по source levels; display и callback применяют стратегию."
+        },
+        {
+          "id": "search-paths",
+          "title": "Controlled search, filter/sort/limit, подсветка и original callbacks",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/cascader.engine.test.ts",
+            "src/lib/cascader.ssr.test.ts",
+            "tests/package/cascader.ssr.test.ts",
+            "tests/browser/cascader.spec.ts"
+          ],
+          "note": "Default any-label filter и limit=50; limit до обхода без sort и после сортировки с comparator. ChangeOnSelect/multiple включают parents, disabled наследуется. Object search config перекрывает top-level aliases. Исходный search lifecycle/autoClear, null notFoundContent suppresses popup без очистки query. OptionRender получает raw option и originNode snippet вместо React search clone с rendered label."
+        },
+        {
+          "id": "lazy-paths",
+          "title": "LoadData и завершение загрузки через options",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/cascader.ssr.test.ts",
+            "tests/browser/cascader.spec.ts"
+          ],
+          "note": "Promise callback не ожидается. Children (включая []), isLeaf=true или удаление options снимают loading. Загрузка не вызывается при SSR и поиске; сетевой транспорт, обработка ошибок и обновление options остаются у потребителя. Явный isLeaf=false сохраняется в поисковой выдаче; single без changeOnSelect не выбирает такой узел."
+        },
+        {
+          "id": "columns-panel",
+          "title": "Click/hover columns, native keyboard, Panel, refs, SSR и cleanup",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/cascader.engine.test.ts",
+            "src/lib/cascader.ssr.test.ts",
+            "tests/package/cascader.ssr.test.ts",
+            "tests/browser/cascader.spec.ts"
+          ],
+          "note": "Source Up/Down/Left/Right/Backspace/Enter/Escape, RTL, focus удерживается в combobox. Standalone Panel получает native buttons/keyboard как явную Svelte accessibility adaptation. Hidden SSR popup, refs очищаются при unmount, popup/resize/RAF ресурсы принадлежат экземпляру. React children заменены trigger snippet с handlers/ARIA. Единый active path сохраняет исходные различия mouse/keyboard при очистке поиска; single missing path не раскрывает известную часть пути."
+        },
+        {
+          "id": "presentation",
+          "title": "Config/semantic styles, snippets, tags/overflow, темы и RTL",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/cascader.engine.test.ts",
+            "src/lib/cascader.ssr.test.ts",
+            "tests/package/cascader.ssr.test.ts",
+            "tests/browser/cascader.spec.ts"
+          ],
+          "note": "108 исходных CSS rules с at-rules; Select base CSS используется без изменения Select API. Raw semantic props с resolved disabled/size/variant/status, root/dropdown/listItem style priority, icons, sizes/variants, common locale, themes/compact, popup widths и legacy aliases. Responsive/maxTagCount/truncate, display/option/tag/popup snippets. Panel наследует только disabled/direction и expand/loading icons, без root/popup semantic config."
+        },
+        {
+          "id": "advanced-api",
+          "title": "Полный token/portal/React-specific API и generic ValueField inference",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Не перенесены arbitrary popup containers/align/motion, prefixCls, полный token engine/renderEmpty, React components/refs/dev warnings и автоматический вывод значения по generic ValueField и полные generic типы всех semantic props. Svelte callbacks/native semantics задокументированы отдельно; v1-ready не означает полный React API."
         }
       ]
     },

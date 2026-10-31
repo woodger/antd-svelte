@@ -10,6 +10,7 @@
     | 'check'
     | 'loading'
     | 'filter'
+    | 'search'
     | 'warning'
     | keyof typeof statusIcons;
   } = $props();
@@ -51,6 +52,8 @@
     <path d="m5 12 4 4L19 6" />
   {:else if name === 'filter'}
     <path d="M4 5h16l-6 7v6l-4 2v-8z" />
+  {:else if name === 'search'}
+    <circle cx="10.5" cy="10.5" r="6.5" /><path d="m16 16 5 5" />
   {:else if name === 'warning'}
     <circle cx="12" cy="12" r="9" /><path d="M12 7v6M12 17h.01" />
   {:else}

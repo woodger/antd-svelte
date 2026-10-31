@@ -583,6 +583,29 @@ export { default as QRCode } from './QRCode.svelte';
 export { default as RadioButton } from './RadioButton.svelte';
 export type { RadioButtonProps } from './radio.types';
 export { default as Calendar } from './Calendar.svelte';
+export { default as Cascader } from './Cascader.svelte';
+export { default as CascaderPanel } from './CascaderPanel.svelte';
+export { CASCADER_SHOW_PARENT, CASCADER_SHOW_CHILD } from './cascader.engine';
+export type {
+  CascaderProps,
+  CascaderPanelProps,
+  CascaderOption,
+  CascaderRawValue,
+  CascaderPath,
+  CascaderValue,
+  CascaderContent,
+  CascaderFieldNames,
+  CascaderSearchConfig,
+  CascaderStrategy,
+  CascaderRenderInfo,
+  CascaderTagInfo,
+  CascaderOmittedTag,
+  CascaderTriggerInfo,
+  CascaderSlots,
+  CascaderSemantic,
+  CascaderSemanticValue,
+  CascaderConfig
+} from './cascader.types';
 export { default as TimePicker } from './TimePicker.svelte';
 export { default as TimeRangePicker } from './TimeRangePicker.svelte';
 export type {

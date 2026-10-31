@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **92**.
-Есть публичная реализация у **62** семейств; отсутствует у **11**.
-Проверенный объём v1 покрыт у **34**; требуется аудит у **28**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **94**.
+Есть публичная реализация у **63** семейств; отсутствует у **10**.
+Проверенный объём v1 покрыт у **35**; требуется аудит у **28**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -34,7 +34,7 @@ Candidate означает запись каталога, для которой 
 | [Steps](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/steps) | navigation | target | Steps | Согласованный v1 покрыт | PrefixCls, глобальный steps config/tokens и Wave (missing) |
 | [Tabs](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tabs) | navigation | target | Tabs | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Editable-card и меню overflow (missing) |
 | [AutoComplete](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/auto-complete) | data-entry | target | AutoComplete | Согласованный v1 покрыт | Virtual, fieldNames, render hooks, semantic/config API и legacy aliases (missing) |
-| [Cascader](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/cascader) | data-entry | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
+| [Cascader](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/cascader) | data-entry | target | Cascader, CascaderPanel, CASCADER_SHOW_PARENT, CASCADER_SHOW_CHILD | Согласованный v1 покрыт | Полный token/portal/React-specific API и generic ValueField inference (missing) |
 | [Checkbox](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/checkbox) | data-entry | target | Checkbox, CheckboxGroup | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [ColorPicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/color-picker) | data-entry | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
 | [DatePicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/date-picker) | data-entry | target | DatePicker, RangePicker | Согласованный v1 покрыт | Другие picker modes, multiple, single presets/render hooks, mask и semantic API (missing); Глобальный DatePicker component config, prefix/tokens, popup motion/container (missing) |

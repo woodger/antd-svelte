@@ -140,6 +140,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Upload / UploadDragger | Выбор/drop, controlled list, beforeUpload, XHR/customRequest, статусы и удаление |
 | Tree | TreeData, раскрытие/выбор/отметки, strict/conduction, loadData, клавиатура и showLine |
 | TreeSelect | Single/multiple, labelInValue, check strategies, поиск, loadData и native popup |
+| Cascader / CascaderPanel | Полные пути, multiple/check strategies, поиск, lazy children, колонки и standalone Panel |
 | TextArea | Многострочное значение, native constraints/events/selection, формы, размеры, статусы и RTL |
 | InputNumber | Число/null, черновик ввода, min/max, дробный шаг, precision, кнопки и клавиатура, FormData, reset и FormItem |
 | Slider | Одно число, min/max/step, мышь и касание, клавиатура, завершение изменения, подсказка значения, ориентация, reverse/RTL, FormData, reset и FormItem |
@@ -3063,6 +3064,115 @@ header. Темы, primary, compact и RTL используют текущие to
 фабрику с собственным UTC Date adapter. PrefixCls, произвольный token engine,
 полный каталог locales, React warnings и неперенесённые возможности используемых
 Select/Radio остаются за пределами подтверждённого объёма этого этапа.
+
+## Cascader / CascaderPanel
+
+Cascader переносит Ant Design 6.6.8 и @rc-component/cascader 1.22.0.
+Selector сверён с @rc-component/select 1.10.1, каскадные checkbox — с
+@rc-component/tree 1.4.0. Чистая логика путей и поиска находится в
+[cascader.engine.ts](./src/lib/cascader.engine.ts), публичные типы и defaults — в
+[cascader.types.ts](./src/lib/cascader.types.ts).
+React-зависимости не устанавливаются. [Лицензия rc-cascader](./src/lib/vendor/LICENSE.rc-cascader)
+включена в пакет; CSS-рецепт извлекает 108 правил selector/columns/checkbox/Panel/RTL.
+
+```svelte
+<script lang="ts">
+  import { Cascader, CascaderPanel, type CascaderPath } from 'antd-svelte';
+
+  let path = $state<CascaderPath>([]);
+  const options = [
+    { value: 'asia', label: 'Asia', children: [
+      { value: 'japan', label: 'Japan' }
+    ] }
+  ];
+</script>
+
+<Cascader {options} value={path} onChange={next => { path = next ?? []; }} />
+<CascaderPanel {options} value={path} onChange={next => { path = next ?? []; }} />
+```
+
+Value/defaultValue — полный путь string/number; multiple использует массив
+путей. Value управляется владельцем через onChange, defaultValue читается при
+создании. Очистка single вызывает onChange(undefined, undefined), multiple —
+onChange([], []). Второй аргумент содержит исходные options в порядке пути;
+отсутствующие узлы сохраняют undefined. Missing paths остаются видимыми, с
+fallback к raw values. Повторный выбор single тоже вызывает onChange.
+Компонент не задаёт прикладную сериализацию путей в FormData.
+
+В multiple каскадный выбор проходит только через разрешённые checkbox; disabled
+и disableCheckbox разрывают conduction. Отображение и onChange используют
+SHOW_PARENT по умолчанию или SHOW_CHILD. Константы экспортируются как
+CASCADER_SHOW_PARENT/CASCADER_SHOW_CHILD. Клик по содержимому родителя раскрывает
+колонку, checkbox выбирает ветку. Default display — весь путь через ` / ` для
+single и последний label для multiple. MaxTagCount, responsive, maxTagTextLength,
+tagRender и maxTagPlaceholder меняют отображение, сохраняя выбранные пути.
+
+ShowSearch по умолчанию false. True включает поиск по любому label в пути;
+объект настраивает controlled searchValue/onSearch, filter/sort/render, limit,
+matchInputWidth, searchIcon и autoClearSearchValue. Поля объекта имеют приоритет
+над deprecated top-level props. Default limit=50; false и неположительное число
+снимают лимит. Без sort лимит останавливает обход, с sort применяется после
+сортировки. ChangeOnSelect/multiple включают промежуточные пути в выдачу;
+disabled родителя распространяется на результаты его детей.
+Label snippet остаётся непрозрачным для default filter, как ReactNode;
+для поиска по содержимому snippets задайте filter.
+
+Выбор очищает локальный поиск без отдельного onSearch; multiple с autoClearSearchValue=false
+сохраняет запрос до blur. Полная очистка и закрытие single могут вызвать
+onSearch(''); при controlled search решение об изменении остаётся у владельца.
+
+LoadData получает исходные options активного пути, когда последний узел не leaf.
+Его Promise не ожидается: индикатор снимается после обновления children,
+isLeaf=true либо удаления узла из options. Пустой children=[] тоже снимает
+индикатор. Во время поиска загрузка не запускается.
+Явный isLeaf=false сохраняется в выдаче: single без changeOnSelect не выбирает
+такой узел. Сетевые запросы, ошибки и обновление options принадлежат потребителю,
+как в upstream; компонент не
+выполняет скрытую загрузку и не добавляет собственные состояния ответа.
+
+Popup поддерживает controlled/defaultOpen, changeOnSelect, click/hover,
+размещение, ширину и popupRender; deprecated dropdown aliases сохранены.
+Поле удерживает focus при выборе; Up/Down обходят разрешённые строки,
+Left/Right переходят между колонками и меняются местами в RTL, Backspace
+возвращает родителя, Enter выбирает, Escape закрывает.
+При непустом запросе Left/Right сохраняют нативную работу каретки и выделения.
+В multiple Backspace также удаляет последний разрешённый tag. Clear — нативная кнопка с клавиатурной
+активацией. FormItem передаёт label/id, description, required и status;
+bind:nativeElement/inputElement и focus/blur доступны после mount.
+
+ConfigProvider.cascader задаёт variant, class/style, semantic slots и icons.
+Локальные поля уточняют конфигурацию; root style идёт после styles.root,
+dropdownStyle — после styles.popup.root, styles.popup.listItem — после
+popupMenuColumnStyle. AllowClear=true наследует clearIcon и обычную иконку Ant
+по умолчанию. Объект allowClear передаётся без наследования; его отсутствующий
+или falsy clearIcon использует fallback `×`.
+Semantic callbacks получают исходные props, включая raw
+multiple, и resolved disabled/size/variant/status. Panel наследует disabled/direction и expand/loading icons,
+а root class/style и popup semantic config Cascader к ней не применяются.
+Темы и compact используют текущие tokens библиотеки; locale — общий ConfigProvider.
+
+ReactNode/render callbacks заменены Svelte snippets. OptionRender получает
+исходный option и info с path/searchValue/originNode: для поисковой подсветки
+используйте originNode. В React search option.label содержит уже отрисованный
+узел; Svelte сохраняет исходный label и передаёт содержимое отдельно.
+TagRender получает label snippet, closable/onClose и rc path key; сводный tag
+maxTagCount имеет isMaxTag=true без value/index/onClose.
+MaxTagPlaceholder получает default label и исходные labels/options каждого
+скрытого пути; собственный displayRender можно повторно вызвать с ними.
+Custom children получает handlers/ARIA для нативного trigger, который заменяет
+React cloneElement. При нём inputElement отсутствует.
+
+Standalone Panel использует нативные строки-кнопки и клавиатурный focus между
+ними. Это явная Svelte accessibility adaptation к исходной pointer-only Panel.
+SSR не обращается к DOM и не вызывает loadData; initially open popup отрисован
+hidden до mount. Полный token engine/renderEmpty, prefixCls, произвольные
+popup containers/align/motion, React-specific components/refs/warnings и
+вывод типа value по произвольному generic ValueField остаются вне этого этапа.
+
+Проверки: [engine](./src/lib/cascader.engine.test.ts),
+[SSR](./src/lib/cascader.ssr.test.ts),
+[public package](./tests/package/cascader.ssr.test.ts),
+[browser](./tests/browser/cascader.spec.ts) и `?fixture=cascader`.
 
 ## TreeSelect
 
