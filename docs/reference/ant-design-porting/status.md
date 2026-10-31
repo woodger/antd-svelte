@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **86**.
-Есть публичная реализация у **58** семейств; отсутствует у **15**.
-Проверенный объём v1 покрыт у **30**; требуется аудит у **28**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **87**.
+Есть публичная реализация у **59** семейств; отсутствует у **14**.
+Проверенный объём v1 покрыт у **31**; требуется аудит у **28**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -25,7 +25,7 @@ Candidate означает запись каталога, для которой 
 | [Layout](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/layout) | layout | target | Layout, LayoutHeader, LayoutContent, LayoutFooter, LayoutSider | Согласованный v1 покрыт | PrefixCls и глобальный component config/tokens (missing) |
 | [Masonry](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/masonry) | layout | target | Masonry | Согласованный v1 покрыт | PrefixCls, общий theme/token engine и глобальный motion config (missing) |
 | [Space](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/space) | layout | target | Space, SpaceCompact, SpaceAddon | Согласованный v1 покрыт | PrefixCls и глобальный space component config/tokens (missing); Compact-адаптеры ещё не перенесённых controls (missing) |
-| [Splitter](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/splitter) | layout | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
+| [Splitter](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/splitter) | layout | target | Splitter | Согласованный v1 покрыт | Адаптация React Panel declarations к Svelte items/snippets (partial); PrefixCls и общий theme/token engine (missing) |
 | [Anchor](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/anchor) | navigation | target | Anchor, AnchorLink | Согласованный v1 покрыт | PrefixCls и глобальный anchor/getTargetContainer config (missing) |
 | [Breadcrumb](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/breadcrumb) | navigation | target | Breadcrumb | Согласованный v1 покрыт | PrefixCls, глобальный component config/tokens и полный Menu API (missing) |
 | [Dropdown](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/dropdown) | navigation | target | Dropdown | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Вложенные меню (missing) |

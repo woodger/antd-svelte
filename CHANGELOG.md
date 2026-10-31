@@ -9,6 +9,10 @@
 
 ### Added
 
+- Splitter переносит размеры и ограничения панелей, mouse/touch drag, lazy preview,
+  controlled callbacks, collapse с восстановлением, destroyOnHidden, motion,
+  semantic config, темы, RTL и SSR. React Panel declarations заменены typed
+  items/snippets. Добавлены CSS-рецепт и unit/SSR/package/browser-проверки.
 - Masonry переносит измеряемую раскладку с responsive columns/gutters, fresh,
   keyed items, snippets, onLayoutChange и semantic/config API. Сохранены пустой
   SSR root, исходные CSS appear/leave и очистка observers/RAF; перестановка

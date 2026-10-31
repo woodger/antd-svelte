@@ -5,6 +5,7 @@
   import type { WatermarkConfig } from './watermark.types';
   import type { BorderBeamConfig } from './border-beam.types';
   import type { MasonryConfig } from './masonry.types';
+  import type { SplitterConfig } from './splitter.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
   import type { InputSearchConfig } from './input-search.types';
@@ -25,6 +26,7 @@
     watermark?: WatermarkConfig;
     borderBeam?: BorderBeamConfig;
     masonry?: MasonryConfig;
+    splitter?: SplitterConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
     inputPassword?: InputPasswordConfig;
@@ -51,6 +53,7 @@
     watermark,
     borderBeam,
     masonry,
+    splitter,
     textArea,
     input,
     inputPassword,
@@ -82,6 +85,9 @@
     },
     get masonry() {
       return masonry ?? parent.masonry;
+    },
+    get splitter() {
+      return splitter ?? parent.splitter;
     },
     get input() {
       return input ?? parent.input;

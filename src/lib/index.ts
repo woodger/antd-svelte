@@ -565,3 +565,16 @@ export type {
   MasonrySemantic,
   MasonrySemanticSlots
 } from './masonry.types';
+export { default as Splitter } from './Splitter.svelte';
+export type {
+  SplitterProps,
+  SplitterPanelProps,
+  SplitterOrientation,
+  SplitterSize,
+  SplitterContent,
+  SplitterIconVisibility,
+  SplitterConfig,
+  SplitterSemantic,
+  SplitterClassSlots,
+  SplitterStyleSlots
+} from './splitter.types';

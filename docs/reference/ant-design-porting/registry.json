@@ -898,24 +898,133 @@
       "id": "splitter",
       "name": "Splitter",
       "category": "layout",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос: размеры панелей, ограничения, mouse/touch drag, lazy, collapse и SSR; React Panel declarations заменяются typed items/snippets.",
       "upstreamPath": "components/splitter",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "Splitter",
+          "local": [
+            "Splitter"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/resize-observer",
+          "range": "^1.1.2",
+          "referenceVersion": "1.1.2"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@ant-design/icons-svg",
+          "range": "^4.6.0",
+          "referenceVersion": "4.6.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
+      "evidence": [
+        "src/lib/Splitter.svelte",
+        "src/lib/splitter.engine.test.ts",
+        "src/lib/splitter.dom.test.ts",
+        "src/lib/splitter.ssr.test.ts",
+        "tests/package/splitter.ssr.test.ts",
+        "tests/browser/splitter.spec.ts",
+        "tools/ant-design-css-recipes.json"
+      ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Размеры, min/max, normalization и controlled/default state",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "src/lib/splitter.engine.test.ts",
+            "tests/browser/splitter.spec.ts"
+          ],
+          "note": "Числа и проценты, greedy заполнение остатка, fit ограничений при полной группе и resize контейнера. Любой заданный size контролирует всю группу; defaults читаются один раз. В ненулевой группе collapsed zero сохраняется даже при min; полностью нулевая группа делится поровну. Невозможные ограничения сохраняют поведение source без нового error API."
+        },
+        {
+          "id": "drag-lazy",
+          "title": "Mouse/touch, lazy preview, направления, ARIA и callbacks",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/splitter.dom.test.ts",
+            "tests/browser/splitter.spec.ts"
+          ],
+          "note": "Смещение от начала gesture, исходные последовательные clamps и поиск через coincident zero panels. Normal end сообщает текущие размеры, lazy end — proposal без onResize. Сохранены double-click guard, horizontal RTL и физическое ограничение lazy до смены знака. Separator не focusable и не имеет keyboard resize в эталоне."
+        },
+        {
+          "id": "collapse",
+          "title": "Сворачивание, cache, destroyOnHidden, icons и motion",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/splitter.engine.test.ts",
+            "src/lib/splitter.ssr.test.ts",
+            "tests/browser/splitter.spec.ts"
+          ],
+          "note": "Collapse/expand rechecks limits, resize→end→collapse, physical RTL и true/auto/false visibility. Panel destroy override; retained DOM по умолчанию. Native type=button заменяет div role=button с исходными Enter/Space и English labels. Новый icon object перекрывает legacy целиком; пустые icons сохраняются. CSS reduced motion и отключение transition во время drag."
+        },
+        {
+          "id": "ssr-lifecycle",
+          "title": "Исходные SSR размеры, observer dedup, ref и cleanup",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/splitter.dom.test.ts",
+            "src/lib/splitter.ssr.test.ts",
+            "tests/package/splitter.ssr.test.ts",
+            "tests/browser/splitter.spec.ts"
+          ],
+          "note": "SSR выводит raw px/%/auto и panel content без DOM callbacks. ResizeObserver сохраняет дробные размеры с исходным floor/offset dedup и microtask delivery; zero игнорируется. Как в source, orientation без root resize не перемеряется. Unmount очищает observers/node/window handlers без synthetic end и stale callbacks."
+        },
+        {
+          "id": "presentation",
+          "title": "Semantic styles, ConfigProvider, темы, RTL и vendor CSS",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/splitter.ssr.test.ts",
+            "tests/browser/splitter.spec.ts",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "ConfigProvider.splitter class/style/classNames/styles, nested replacement и resolved orientation/vertical. Root plain style после semantic; panel geometry после item style. Dragger default/active classes; styles.dragger.active принимается, но source не применяет его. Все 59 CSS rules и SVG icons закреплённой версии; hover alias изолирован в bar."
+        },
+        {
+          "id": "react-panel-api",
+          "title": "Адаптация React Panel declarations к Svelte items/snippets",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/splitter.types.ts",
+            "src/lib/splitter.ssr.test.ts",
+            "tests/browser/splitter.spec.ts"
+          ],
+          "note": "Svelte не разбирает children snippets синхронно до SSR. Панели задаются items: SplitterPanelProps[] с scalar/snippet children; отдельного публичного SplitterPanel нет. Состояние/DOM сохраняются по позиции, как в useItems/InternalPanel; bind:nativeElement заменяет React ref."
+        },
+        {
+          "id": "theme-prefix",
+          "title": "PrefixCls и общий theme/token engine",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "note": "Текущие CSS variables, light/dark и inherited direction поддерживаются. Произвольные prefixCls, React theme algorithms и component tokens пока не перенесены."
         }
       ]
     },
