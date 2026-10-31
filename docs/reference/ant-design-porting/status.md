@@ -6,7 +6,7 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **88**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **89**.
 Есть публичная реализация у **60** семейств; отсутствует у **13**.
 Проверенный объём v1 покрыт у **32**; требуется аудит у **28**; частично покрыт у **0**.
 
@@ -42,7 +42,7 @@ Candidate означает запись каталога, для которой 
 | [Input](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input) | data-entry | target | Input, TextArea, InputPassword, InputSearch, InputOTP, InputGroup | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Input prefixCls, общий variant/token engine и React value/ref conventions (missing); TextArea prefixCls, общий variant/token engine и React value/ref conventions (missing) |
 | [InputNumber](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input-number) | data-entry | target | InputNumber | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); stringMode, formatter/parser и варианты оформления (missing) |
 | [Mentions](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/mentions) | data-entry | target | Mentions, getMentions | Согласованный v1 покрыт | Полный semantic/config API, popupRender/container, legacy Option и motion (missing) |
-| [Radio](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/radio) | data-entry | target | Radio, RadioGroup | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
+| [Radio](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/radio) | data-entry | target | Radio, RadioGroup, RadioButton | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Rate](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/rate) | data-entry | target | Rate | Согласованный v1 покрыт | PrefixCls, произвольный token engine и полный upstream Tooltip API (missing) |
 | [Select](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/select) | data-entry | target | Select | Согласованный v1 покрыт | Свободный ввод tags (missing); Виртуализация options (missing) |
 | [Slider](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/slider) | data-entry | target | Slider | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Range и marks/dots (missing) |

@@ -579,6 +579,8 @@ export type {
   SplitterStyleSlots
 } from './splitter.types';
 export { default as QRCode } from './QRCode.svelte';
+export { default as RadioButton } from './RadioButton.svelte';
+export type { RadioButtonProps } from './radio.types';
 export type {
   QRCodeProps,
   QRCodeConfig,

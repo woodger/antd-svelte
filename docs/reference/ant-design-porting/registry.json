@@ -2366,9 +2366,9 @@
       "name": "Radio",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Существующие Radio/RadioGroup сохранены; добавлены button appearance, children и refs для исходного заголовка Calendar. Полный аудит семейства ещё не завершён.",
       "upstreamPath": "components/radio",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Radio",
@@ -2381,17 +2381,39 @@
           "local": [
             "RadioGroup"
           ]
+        },
+        {
+          "upstream": "Radio.Button",
+          "local": [
+            "RadioButton"
+          ]
         }
       ],
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/checkbox",
+          "range": "~2.0.0",
+          "referenceVersion": "2.0.0"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/radio.spec.ts"
+        "tests/browser/radio.spec.ts",
+        "src/lib/RadioButton.svelte",
+        "src/lib/radio-button.ssr.test.ts",
+        "tests/package/radio-button.ssr.test.ts",
+        "tests/browser/radio-button.spec.ts",
+        "tools/ant-design-css-recipes.json"
       ],
       "features": [
         {
@@ -2401,6 +2423,20 @@
           "requiredForV1": true,
           "evidence": [],
           "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+        },
+        {
+          "id": "button-options",
+          "title": "RadioButton, children, group optionType/size/buttonStyle/block и refs",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/radio-button.ssr.test.ts",
+            "tests/package/radio-button.ssr.test.ts",
+            "tests/browser/radio-button.spec.ts",
+            "tests/browser/radio.spec.ts",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "RadioButton добавляет исходный option-type context без DOM-обёртки. Group optionType перекрывает локальный button; nonempty options перекрывают children. 67 CSS rules для outline/solid, размеров, block/vertical, Badge и focus; normal vendor сохранён. Light/dark/compact/RTL через существующие tokens. Inner span/input refs очищаются. Существующие native fieldset, bind/value callbacks, disabled precedence и reset semantics сохранены; это не завершает аудит React API всего семейства."
         }
       ]
     },

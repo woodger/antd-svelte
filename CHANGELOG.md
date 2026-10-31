@@ -9,6 +9,10 @@
 
 ### Added
 
+- RadioButton и кнопочный RadioGroup: children/options, optionType, size,
+  outline/solid, block/vertical, Badge, темы и native refs. Существующие bind,
+  reset/FormData и fieldset semantics сохранены. Добавлены CSS-рецепт и
+  SSR/package/browser-проверки как основа для заголовка Calendar.
 - QRCode переносит исходный encoder rc-qrcode/Nayuki, canvas/SVG, segmentation,
   ECC/boost, quiet zone, icon/CORS, статусы, locale и semantic/config API.
   Сохранены SSR, DPR, native attributes/ref, fallback и cleanup; добавлены

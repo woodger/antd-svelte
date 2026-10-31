@@ -2,7 +2,7 @@
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useForm, useFormField } from './form-context';
-  import { useRadioGroup } from './radio-context';
+  import { useRadioGroup, useRadioOptionType } from './radio-context';
   import { connectRadio, syncRadioPeers } from './radio.dom';
   import type { RadioProps } from './radio.types';
 
@@ -20,6 +20,9 @@
     'aria-invalid': ariaInvalid,
     style,
     class: className = '',
+    rootClassName,
+    nativeElement = $bindable(),
+    inputElement = $bindable(),
     ...attributes
   }: RadioProps = $props();
 
@@ -27,9 +30,12 @@
   const form = useForm();
   const field = useFormField();
   const group = useRadioGroup();
+  const optionType = useRadioOptionType();
   const initialDefault = untrack(() => defaultChecked);
   const resets = new Set<ReturnType<typeof setTimeout>>();
-  let control = $state<HTMLInputElement>();
+  let control = $derived(inputElement);
+  let button = $derived((group?.optionType || optionType) === 'button');
+  let prefix = $derived(button ? 'ant-radio-button' : 'ant-radio');
   let resolvedChecked = $derived(group ? group.value === value : checked ?? initialDefault);
   let resolvedDefault = $derived(group ? group.defaultValue === value : initialDefault);
   let resolvedDisabled = $derived(
@@ -105,22 +111,25 @@
 <svelte:document onreset={handleReset} />
 
 <label class={[
-    'ant-radio-wrapper ant-radio-css-var',
-    resolvedChecked && 'ant-radio-wrapper-checked',
-    resolvedDisabled && 'ant-radio-wrapper-disabled',
-    config.direction === 'rtl' && 'ant-radio-wrapper-rtl',
-    className
+    `${prefix}-wrapper ant-radio-css-var`,
+    button && 'ant-radio-button-css-var',
+    resolvedChecked && `${prefix}-wrapper-checked`,
+    resolvedDisabled && `${prefix}-wrapper-disabled`,
+    config.direction === 'rtl' && `${prefix}-wrapper-rtl`,
+    group?.block && `${prefix}-wrapper-block`,
+    className,
+    rootClassName
   ]} {style}>
-  <span class={[
-      'ant-radio',
-      resolvedChecked && 'ant-radio-checked',
-      resolvedDisabled && 'ant-radio-disabled'
+  <span bind:this={nativeElement} class={[
+      prefix,
+      resolvedChecked && `${prefix}-checked`,
+      resolvedDisabled && `${prefix}-disabled`
     ]}>
     <input
       {...attributes}
-      bind:this={control}
+      bind:this={inputElement}
       type="radio"
-      class="ant-radio-input"
+      class={`${prefix}-input`}
       id={id ?? field?.id}
       name={nativeGroup.name}
       form={nativeGroup.form}
@@ -146,5 +155,5 @@
       onblur={handleBlur}
     />
   </span>
-  {#if children}<span class="ant-radio-label">{@render children()}</span>{/if}
+  {#if children}<span class={`${prefix}-label`}>{@render children()}</span>{/if}
 </label>

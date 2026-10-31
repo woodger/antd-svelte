@@ -149,6 +149,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Checkbox | Checked/defaultChecked, смешанное состояние, нативные события и FormData, интеграция с FormItem |
 | CheckboxGroup | Типизированный массив выбранных значений, options, disabled, нативные checkbox, FormData, reset и интеграция с FormItem |
 | Radio | Checked/defaultChecked, disabled, нативные события, синхронизация соседних radio и FormData |
+| RadioButton | Кнопочное оформление Radio, native input, group context и refs |
 | RadioGroup | Типизированный одиночный выбор, options, уникальное имя группы, горизонтальное/вертикальное расположение, required, reset и FormItem |
 | Switch | Checked/defaultChecked, loading, disabled, обычный/малый размеры, snippets состояний, клавиатура, FormData и FormItem |
 | Pagination | Страницы, переходы по пять страниц, выбор pageSize, диапазон записей, размеры, RTL и локаль |
@@ -4770,8 +4771,46 @@ Fieldset с ролью radiogroup сообщает required/invalid; отдел�
 
 Галерея `/ant-design#radio` показывает отдельные Radio для расположения
 вариантов и форму с числовым тарифом, boolean-публикацией, отправкой и сбросом.
-RadioGroup пока строится через options; вложенные Radio и Radio.Button
-не поддерживаются.
+RadioGroup также принимает children со вложенными Radio и RadioButton.
+Непустые options имеют приоритет, пустой массив оставляет children:
+
+```svelte
+<script lang="ts">
+  import { RadioButton, RadioGroup } from 'antd-svelte';
+
+  let mode = $state('month');
+</script>
+
+<RadioGroup bind:value={mode} name="mode" aria-label="Режим календаря" size="small">
+  <RadioButton value="month">Месяц</RadioButton>
+  <RadioButton value="year">Год</RadioButton>
+</RadioGroup>
+```
+
+RadioButton соответствует React Radio.Button и добавляет только кнопочный
+option context, без новой DOM-обёртки. Input остаётся radio: работают native
+keyboard, name/FormData, required и существующий reset/bind контракт Radio.
+`optionType="button"` у группы меняет все дочерние Radio; явный `optionType="default"`
+перекрывает кнопочный контекст RadioButton. Без optionType каждый дочерний control
+сохраняет собственный вид. Привязка value и checked использует прежний Svelte API.
+
+`buttonStyle` выбирает outline (default) или solid. `size` наследует componentSize;
+локальный small/middle/large имеет приоритет. Block растягивает группу и делит
+ширину между вариантами; vertical сохраняет стыки и радиусы кнопок. Темы, primary,
+compact и RTL используют текущие настройки библиотеки. Нативный fieldset и
+существующий приоритет disabled группы сохранены.
+
+`bind:nativeElement` у Radio/RadioButton возвращает внутренний span RcCheckbox,
+bind:inputElement — input для focus()/blur(). Обе ссылки очищаются при unmount.
+`rootClassName`, как class/style, относится к label. Точные объявления — в
+[radio.types.ts](./src/lib/radio.types.ts). Изучены Radio/Group/RadioButton и
+@rc-component/checkbox 2.0.0; runtime React dependency не добавлена.
+
+Рецепт radio-button воспроизводит 67 правил эталона для кнопок, размеров,
+vertical/block и Badge; прежний vendor/radio.css сохранён. Проверки —
+`?fixture=radio-button`, SSR/public package и browser, включая существующие Radio.
+Полный аудит семейства ещё не завершён: rich options/semantic/config, prefix/token
+engine, Wave и остальные React-specific contracts остаются отдельной работой.
 
 ## Switch
 

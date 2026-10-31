@@ -5,6 +5,7 @@
   import MasonryFixtures from './MasonryFixtures.svelte';
   import SplitterFixtures from './SplitterFixtures.svelte';
   import QRCodeFixtures from './QRCodeFixtures.svelte';
+  import RadioButtonFixtures from './RadioButtonFixtures.svelte';
   import RateFixtures from './RateFixtures.svelte';
   import ImageGroupFixtures from './ImageGroupFixtures.svelte';
   import ImageFixtures from './ImageFixtures.svelte';
@@ -115,6 +116,7 @@
     <MasonryFixtures />
     <SplitterFixtures />
     <QRCodeFixtures />
+    <RadioButtonFixtures />
     <TextAreaFeaturesFixtures />
     <TextAreaFixtures />
     <InputFeaturesFixtures />
