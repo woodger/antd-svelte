@@ -947,6 +947,12 @@ bind:nativeElement относятся к wrapper. `showInkInFixed` сохран�
 indicator использует offsetLeft/clientWidth и раскрывает активную ссылку
 в scrollable ancestors как upstream.
 
+Базовые отступы пункта Anchor — 4px по вертикали и 16px перед текстом.
+У первого горизонтального пункта отступ по inline-оси нулевой; у вложенного
+вертикального пункта padding-block равен paddingXXS / 2, обычно 2px.
+Переменные отступов объявлены в том же CSS scope, который использует корень
+компонента; пользовательский gap для разделения ссылок не требуется.
+
 Для раскрытия ссылки сохранён framework-independent compute-scroll-into-view
 3.0.2 (git 0c45c0afce9650b8cc96dd23ea8efdc90cbd32fe), удовлетворяющий ^3.0.2
 делегата scroll-into-view-if-needed 3.1.0 (git

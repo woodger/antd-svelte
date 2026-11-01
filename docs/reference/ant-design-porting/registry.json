@@ -1360,7 +1360,11 @@
         "src/lib/anchor.dom.test.ts",
         "src/lib/anchor.ssr.test.ts",
         "tests/browser/anchor.spec.ts",
-        "integration:anchor"
+        "integration:anchor",
+        "src/lib/vendor/anchor.css",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/anchor-spacing.spec.ts",
+        "tests/browser/fixtures/AnchorSpacingFixtures.svelte"
       ],
       "features": [
         {
@@ -1382,9 +1386,11 @@
           "requiredForV1": true,
           "evidence": [
             "src/lib/anchor.ssr.test.ts",
-            "tests/browser/anchor.spec.ts"
+            "tests/browser/anchor.spec.ts",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/anchor-spacing.spec.ts"
           ],
-          "note": "Affix включён по умолчанию; стили root уступают style. Indicator использует offset/client geometry и делегированный compute-scroll-into-view 3.0.2 под MIT."
+          "note": "Affix включён по умолчанию; стили root уступают style. Indicator использует offset/client geometry и делегированный compute-scroll-into-view 3.0.2 под MIT. Базовые link padding 4px/16px объявлены на действующем CSS root; проверяются горизонтальные/вертикальные и вложенные отступы, нулевой первый horizontal padding, native темы, RTL, экран 320px, focus/scroll/callbacks и indicator geometry."
         },
         {
           "id": "global-config",
