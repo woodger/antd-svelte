@@ -9,6 +9,10 @@
 
 ### Added
 
+- List/ListItem/ListItemMeta: исходная пагинация и server pages, responsive grid,
+  Meta/actions/extra, semantic config, loading/empty, native refs и темы/RTL.
+  Добавлен ConfigProvider.renderEmpty для List, CSS-рецепт и unit/SSR/package/browser
+  проверки. Svelte children arrays и граница SSR для opaque snippets описаны отдельно.
 - Pagination: simple/readOnly, quick jumper и подтверждение, align/responsive,
   source jump windows, itemRender/icons, locale aliases, semantic/config slots,
   custom size changer и deprecated adapter. Сохранены bind API, нормализация,

@@ -1,3 +1,4 @@
+import type { Snippet } from 'svelte';
 import type { UploadLocale } from './upload.types';
 import type { DatePickerLocale } from './date-picker.types';
 import { datePickerEnUS, datePickerRuRU } from './date-picker.locale';
@@ -7,6 +8,13 @@ import type { TransferLocale } from './transfer.types';
 import { transferEnUS, transferRuRU } from './transfer.locale';
 import { qrCodeEnUS, qrCodeRuRU } from './qrcode.locale';
 export type ComponentSize = 'small' | 'middle' | 'large';
+
+export type RenderEmptyComponent = 'Table' | 'Table.filter' | 'List' | 'Select'
+  | 'TreeSelect' | 'Cascader' | 'Transfer' | 'Mentions';
+export type RenderEmptyContent = string | number | boolean | null | undefined | Snippet
+  | readonly RenderEmptyContent[];
+/** Producer callback заменяет ReactNode; undefined/null/false/0 используют fallback List. */
+export type RenderEmptyHandler = (componentName?: RenderEmptyComponent) => RenderEmptyContent;
 
 /**
  * Поддерживаемая палитра, светлая/тёмная тема и compact density; не общий token engine Ant Design.

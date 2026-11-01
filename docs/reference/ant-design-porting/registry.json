@@ -4141,24 +4141,148 @@
       "id": "list",
       "name": "List",
       "category": "data-display",
-      "scope": "candidate",
-      "scopeReason": "Deprecated в каталоге 6.6.8; целесообразность переноса требует решения.",
+      "scope": "target",
+      "scopeReason": "Существующий deprecated List включён в полную цель переноса 6.6.8. Listy остаётся отдельным семейством и не заменяет его API.",
       "upstreamPath": "components/list",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "List",
+          "local": [
+            "List"
+          ]
+        },
+        {
+          "upstream": "List.Item",
+          "local": [
+            "ListItem"
+          ]
+        },
+        {
+          "upstream": "List.Item.Meta",
+          "local": [
+            "ListItemMeta"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "grid",
+        "pagination",
+        "spin",
+        "empty"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
+      "evidence": [
+        "src/lib/List.svelte",
+        "src/lib/ListItem.svelte",
+        "src/lib/ListItemMeta.svelte",
+        "src/lib/ListContent.svelte",
+        "src/lib/list.types.ts",
+        "src/lib/list.engine.ts",
+        "src/lib/list.dom.ts",
+        "src/lib/list.engine.test.ts",
+        "src/lib/list.ssr.test.ts",
+        "src/lib/vendor/list.css",
+        "tests/package/list.ssr.test.ts",
+        "tests/package/ListFixture.svelte",
+        "tests/browser/list.spec.ts",
+        "tests/browser/fixtures/ListFixtures.svelte",
+        "readme.md"
+      ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "data-rendering",
+          "title": "Readonly records, row keys и Svelte content",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "evidence": [
+            "src/lib/list.engine.test.ts",
+            "src/lib/list.ssr.test.ts",
+            "tests/package/list.ssr.test.ts",
+            "tests/browser/list.spec.ts"
+          ],
+          "note": "RenderItem — прямой generic snippet с page-local index; children добавляются после записей. Сохранены ключи 0/empty, React string coercion и fallback local index. Повторы не удаляют записи; occurrence key предотвращает фатальный Svelte duplicate-key exception. Непустые данные без renderer оставляют контейнер, как в upstream."
+        },
+        {
+          "id": "pagination",
+          "title": "Исходные defaults, controlled callbacks, server pages и позиции",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/list.engine.test.ts",
+            "src/lib/list.ssr.test.ts",
+            "tests/package/list.ssr.test.ts",
+            "tests/browser/list.spec.ts"
+          ],
+          "note": "False/true/object/null, read-once defaults, undefined-skipping merge, controlled owner rejection и callback order onShowSizeChange→onChange. State сохраняется при скрытии pagination; top/bottom/both, default align=end; loadMore заменяет только bottom. Source slice сохраняет целую серверную порцию вне offset, current ограничен сверху без callbacks; общий Pagination сохраняет свой прежний bind/normalization contract."
+        },
+        {
+          "id": "grid-layout",
+          "title": "Responsive grid и horizontal/vertical item layout",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/list.engine.test.ts",
+            "src/lib/list.ssr.test.ts",
+            "tests/package/list.ssr.test.ts",
+            "tests/browser/list.spec.ts"
+          ],
+          "note": "Row/Col/gutter, largest-active-breakpoint lookup без lower-configured fallback, SSR grid.column; native LI либо grid DIV/Col. Исходные children text rules для массивов, DOM measurement для snippets, vertical main/extra включая 0. Source CSS61 rules, media768/576, без keyframes. Размеры, margin, padding и геометрия сверяются с pin6.6.8."
+        },
+        {
+          "id": "meta-semantic",
+          "title": "Meta/actions/extra, config slots и native refs",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/list.engine.test.ts",
+            "src/lib/list.ssr.test.ts",
+            "tests/package/list.ssr.test.ts",
+            "tests/browser/list.spec.ts"
+          ],
+          "note": "Avatar/title/description включая0/true; h4 title и исходные margins; Meta children и root extra не создают блоки. Actions/separators, horizontal raw extra, context/local class/style priority. bind:nativeElement для List/Item/Meta, Meta bind:ref object; Item grid ref указывает на внешний Col. Очистка refs на unmount."
+        },
+        {
+          "id": "loading-empty-lifecycle",
+          "title": "Spin/Empty, renderEmpty, SSR, темы и доступность",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/list.engine.test.ts",
+            "src/lib/list.ssr.test.ts",
+            "tests/package/list.ssr.test.ts",
+            "tests/browser/list.spec.ts"
+          ],
+          "note": "Boolean/поддержанные Spin props, empty loading stub53, source loading={} distinction, delay и inert busy children существующего Spin; pager остаётся снаружи. Locale.emptyText || ConfigProvider.renderEmpty(List) || simple Empty; lazy producer, source falsy fallback. RenderEmpty пока использует только List. SSR без DOM/media/observer/timers, cleanup на unmount, нативные links/buttons с видимым focus, RTL/dark/compact/reduced motion."
+        },
+        {
+          "id": "opaque-snippet-ssr",
+          "title": "Автоматическое mixed-text SSR для непрозрачного snippet",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Массив children сохраняет виртуальные типы string/number и точный SSR no-flex. Для обычного snippet SSR начинает с flex, после mount DOM observer проверяет только диапазон children без видимой обёртки; DOM не различает string и number. Для точного SSR/числовых mixed children передайте массив. Это явная Svelte boundary; полная React.Children introspection не заявлена."
+        },
+        {
+          "id": "advanced-api",
+          "title": "Полный token/prefix/Spin API и React-specific development behavior",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Полный token engine и расширенные ещё не перенесённые Spin props остаются дальнейшими этапами; встроенный CSS рассчитан на ant-list, arbitrary prefix CSS не генерируется. React refs/nodes адаптированы к snippets/native bindings, deprecation/dev warnings не испускаются. V1-ready не означает полный React API."
         }
       ]
     },

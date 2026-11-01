@@ -11,6 +11,8 @@ import type { TimePickerConfig } from './time-picker.types';
 import type { CascaderConfig } from './cascader.types';
 import type { TransferConfig } from './transfer.types';
 import type { PaginationComponentConfig } from './pagination.types';
+import type { ListConfig } from './list.types';
+import type { RenderEmptyHandler } from './types';
 import type { RangePickerConfig } from './range-picker.types';
 import type { InputConfig } from './input.types';
 import type { InputPasswordConfig } from './input-password.types';
@@ -33,6 +35,8 @@ export interface ConfigContext {
   readonly cascader?: CascaderConfig;
   readonly transfer?: TransferConfig;
   readonly pagination?: PaginationComponentConfig;
+  readonly list?: ListConfig;
+  readonly renderEmpty?: RenderEmptyHandler;
   readonly rangePicker?: RangePickerConfig;
   readonly textArea?: TextAreaConfig;
   readonly input?: InputConfig;

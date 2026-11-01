@@ -142,6 +142,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | TreeSelect | Single/multiple, labelInValue, check strategies, поиск, loadData и native popup |
 | Cascader / CascaderPanel | Полные пути, multiple/check strategies, поиск, lazy children, колонки и standalone Panel |
 | Transfer | Два списка, controlled targetKeys, выделение/Shift, поиск, oneWay, пагинация и custom lists |
+| List / ListItem / ListItemMeta | Исходная пагинация, grid, Meta/actions/extra, loading, renderEmpty и refs |
 | TextArea | Многострочное значение, native constraints/events/selection, формы, размеры, статусы и RTL |
 | InputNumber | Число/null, черновик ввода, min/max, дробный шаг, precision, кнопки и клавиатура, FormData, reset и FormItem |
 | Slider | Одно число, min/max/step, мышь и касание, клавиатура, завершение изменения, подсказка значения, ориентация, reverse/RTL, FormData, reset и FormItem |
@@ -3297,6 +3298,96 @@ React-specific refs/dev warnings остаются вне этого этапа. 
 алгоритм страниц включён с [MIT-лицензией](./src/lib/vendor/LICENSE.rc-pagination).
 Delete icon перенесён из @ant-design/icons-svg 4.6.0 под существующей
 [MIT-лицензией](./src/lib/vendor/LICENSE.ant-design-icons).
+
+## List / ListItem / ListItemMeta
+
+List переносит существующий API Ant Design 6.6.8. В upstream он deprecated с 6.6;
+Listy — отдельное семейство и не заменяет этот компонент в Svelte-пакете.
+
+```svelte
+<script lang="ts">
+  import { List, ListItem, ListItemMeta } from 'antd-svelte';
+
+  const rows = [{ key: 0, title: 'Alpha' }, { key: '', title: 'Beta' }];
+</script>
+
+<List dataSource={rows} pagination={{ defaultPageSize: 2 }} bordered>
+  {#snippet renderItem(row, index)}
+    <ListItem>
+      <ListItemMeta title={row.title} description={`Index ${index}`} />
+    </ListItem>
+  {/snippet}
+</List>
+```
+
+`renderItem` — прямой Svelte snippet с `(item, index)`; index начинается с нуля
+на каждой странице. `dataSource` принимает readonly-массив и не изменяется.
+`rowKey` — поле или функция; без него используется item.key, затем локальный индекс.
+Ключи `0` и `''` сохраняются. Как в React, ключ преобразуется в строку: число `0`
+и строка `'0'` имеют одинаковый ключ. Повторные ключи не удаляют записи и не приводят
+к фатальной ошибке keyed each; стабильность состояния требует уникальных ключей.
+Без renderItem непустые данные оставляют пустой контейнер. `children` добавляются
+после записей, а при пустых данных могут заменить Empty.
+
+`pagination` по умолчанию false; true или объект включают общий Pagination.
+`defaultCurrent/defaultPageSize` читаются один раз. `current/pageSize/total` объекта
+имеют приоритет; undefined не перекрывает defaults. Запросы обновляют локальное
+состояние, затем вызывают callbacks объекта, сохраняя отказ controlled-владельца.
+Смена размера вызывает onShowSizeChange до onChange. `position` принимает
+top/bottom/both, align по умолчанию end. Truthy loadMore заменяет только нижний pager.
+Серверная порция не обрезается повторно, если заданный offset выходит за её пределы.
+Изменение данных ограничивает отображаемую страницу без изменения владельца
+или callbacks. Нормализация общего Pagination описана в его разделе.
+
+`grid` использует Row/Col, gutter и column либо xs…xxxl. Выбирается самый большой
+активный breakpoint; если у него нет truthy column, используется grid.column,
+без поиска меньшего настроенного breakpoint. При SSR применяется grid.column.
+ListItem в grid — div внутри Col, в обычном списке — li. `size` и наследуемый
+componentSize задают small/default/large; явный default перекрывает размер context.
+
+Meta отображает avatar/title/description, включая числовой ноль; title — h4.
+Null/undefined/false/пустая строка убирают соответствующий блок, true сохраняет
+пустую обёртку. `actions` — массив содержимого с исходными разделителями.
+Vertical extra создаёт item-main/item-extra; горизонтальный extra выводится
+как самостоятельный узел. ConfigProvider.list задаёт class/style и item semantic
+slots actions/extra; локальные значения имеют приоритет. `header/footer` также
+сохраняют ноль и true. Root extra присутствует в типах upstream, но блока не создаёт.
+
+ListContent принимает текст, числа, boolean, snippets и вложенные массивы.
+Для точного mixed-text layout при SSR передайте children массивом:
+
+```svelte
+{#snippet word()}<span>Ant Design</span>{/snippet}
+<ListItem children={['Before ', word, ' after']} />
+```
+
+Строка среди нескольких children включает no-flex; число им не считается.
+Обычный Svelte snippet непрозрачен для SSR: первоначально используется flex,
+после mount проверяются только DOM-узлы children, без actions/extra и видимой
+обёртки. DOM не различает строку и число в текстовом узле; массив сохраняет это
+различие и исходный SSR-класс. Observer снимается при unmount и смене режима.
+
+`loading` принимает boolean или поддержанные Spin props. Пустой loading-список
+получает исходный stub 53px вместо Empty; pager остаётся снаружи busy content.
+`loading={}` сохраняет особенность upstream: root не loading, но Spin включён.
+Пустое состояние использует locale.emptyText, затем ConfigProvider.renderEmpty('List'),
+затем Empty с simple image. Ноль/false/пустая строка используют fallback.
+`renderEmpty` — producer callback, возвращающий ListContent; он вызывается только
+для нужного пустого состояния. Пока этот общий callback подключён только к List.
+
+`bind:nativeElement` доступен у всех трёх компонентов; у grid Item это внешний Col.
+Meta также поддерживает bind:ref с объектом nativeElement. Значения появляются
+после mount и очищаются при unmount. SSR не создаёт DOM/media/observer/timer ресурсы.
+Нативные ссылки и кнопки сохраняют focus; поддержаны темы, compact, RTL и reduced motion.
+
+Полный token engine, CSS для произвольного prefixCls, расширенные ещё не перенесённые
+Spin props и React development warnings остаются в дальнейших этапах. Ограничение
+SSR для непрозрачных snippets отмечено отдельно от поддержки массивов children.
+
+Проверки: [engine](./src/lib/list.engine.test.ts), [SSR](./src/lib/list.ssr.test.ts),
+[пакет](./tests/package/list.ssr.test.ts), [браузер](./tests/browser/list.spec.ts)
+и `?fixture=list`. [CSS](./src/lib/vendor/list.css) воспроизводится рецептом list:
+61 правило, две media-области 768/576px, без keyframes; [MIT](./src/lib/vendor/LICENSE.ant-design).
 
 ## TreeSelect
 

@@ -804,5 +804,26 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Pagination: sizes, simple/quick jumper, options, variants и responsive media.\n * Корни ограничены :where(.ant-pagination-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "list",
+    "output": "src/lib/vendor/list.css",
+    "expectedRules": 61,
+    "include": [
+      "\\.ant-list(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-list(?:-container)?(?![-\\w])",
+        "replacement": ".ant-list-css-var"
+      },
+      {
+        "pattern": "\\.ant-list(?![-\\w])",
+        "replacement": ".ant-list:where(.ant-list-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * List: items, Meta, actions, grid, bordered и responsive media.\n * Базовый корень ограничен :where(.ant-list-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]

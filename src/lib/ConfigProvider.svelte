@@ -12,6 +12,8 @@
   import type { CascaderConfig } from './cascader.types';
   import type { TransferConfig } from './transfer.types';
   import type { PaginationComponentConfig } from './pagination.types';
+  import type { ListConfig } from './list.types';
+  import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
@@ -40,6 +42,9 @@
     cascader?: CascaderConfig;
     transfer?: TransferConfig;
     pagination?: PaginationComponentConfig;
+    list?: ListConfig;
+    /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
+    renderEmpty?: RenderEmptyHandler;
     rangePicker?: RangePickerConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
@@ -74,6 +79,8 @@
     cascader,
     transfer,
     pagination,
+    list,
+    renderEmpty,
     rangePicker,
     textArea,
     input,
@@ -127,6 +134,12 @@
     },
     get pagination() {
       return pagination ?? parent.pagination;
+    },
+    get list() {
+      return list ?? parent.list;
+    },
+    get renderEmpty() {
+      return renderEmpty ?? parent.renderEmpty;
     },
     get rangePicker() {
       return rangePicker ?? parent.rangePicker;

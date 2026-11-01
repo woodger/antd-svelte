@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **95**.
-Есть публичная реализация у **64** семейств; отсутствует у **9**.
-Проверенный объём v1 покрыт у **37**; требуется аудит у **27**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **98**.
+Есть публичная реализация у **65** семейств; отсутствует у **8**.
+Проверенный объём v1 покрыт у **38**; требуется аудит у **27**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -60,7 +60,7 @@ Candidate означает запись каталога, для которой 
 | [Descriptions](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/descriptions) | data-display | target | Descriptions | Согласованный v1 покрыт | PrefixCls, пользовательские breakpoint/token и глобальный component config (missing) |
 | [Empty](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/empty) | data-display | target | Empty | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Image](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/image) | data-display | target | Image, ImagePreviewGroup | Согласованный v1 покрыт | Progress placeholder, полный semantic/config/icons API, container и motion (missing) |
-| [List](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/list) | data-display | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
+| [List](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/list) | data-display | target | List, ListItem, ListItemMeta | Согласованный v1 покрыт | Автоматическое mixed-text SSR для непрозрачного snippet (partial); Полный token/prefix/Spin API и React-specific development behavior (missing) |
 | [Listy](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/listy) | data-display | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
 | [Popover](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/popover) | data-display | target | Popover | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Corner placements и порталы (missing) |
 | [QRCode](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/qr-code) | data-display | target | QRCode | Согласованный v1 покрыт | PrefixCls, общий theme/token engine и React development warnings (missing) |

@@ -12,6 +12,7 @@
   import CascaderFixtures from './CascaderFixtures.svelte';
   import TransferFixtures from './TransferFixtures.svelte';
   import PaginationFeaturesFixtures from './PaginationFeaturesFixtures.svelte';
+  import ListFixtures from './ListFixtures.svelte';
   import RateFixtures from './RateFixtures.svelte';
   import ImageGroupFixtures from './ImageGroupFixtures.svelte';
   import ImageFixtures from './ImageFixtures.svelte';
@@ -129,6 +130,7 @@
     <CascaderFixtures />
     <TransferFixtures />
     <PaginationFeaturesFixtures />
+    <ListFixtures />
     <TextAreaFeaturesFixtures />
     <TextAreaFixtures />
     <InputFeaturesFixtures />
