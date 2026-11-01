@@ -953,6 +953,16 @@ indicator использует offsetLeft/clientWidth и раскрывает а
 Переменные отступов объявлены в том же CSS scope, который использует корень
 компонента; пользовательский gap для разделения ссылок не требуется.
 
+При source-настройках темы Anchor применяет `components.Anchor`: defaults берутся
+из paddingXXS/padding, затем действуют component overrides и отдельный algorithm.
+Source compact уменьшает inline-отступ до 8px; native-only compact сохраняет 16px.
+Вложенный padding-block по-прежнему равен paddingXXS / 2, независимо от
+linkPaddingBlock. Aliases меняют шрифт, цвета и границы; нули/undefined и custom
+CSS prefix поддерживаются. Переменные доступны при SSR, semantic/plain styles
+сохраняют приоритет. Source-ссылки используют linkDecoration/linkHoverDecoration/
+linkFocusDecoration; по умолчанию подчёркивания нет.
+Смена темы сохраняет ссылки, фокус, scroll и callbacks.
+
 Для раскрытия ссылки сохранён framework-independent compute-scroll-into-view
 3.0.2 (git 0c45c0afce9650b8cc96dd23ea8efdc90cbd32fe), удовлетворяющий ^3.0.2
 делегата scroll-into-view-if-needed 3.1.0 (git
@@ -963,11 +973,13 @@ catch binding; MIT-лицензии обоих пакетов сохранены
 Сохранено ограничение делегата 3.0.2: отрицательный scrollLeft RTL-контейнера
 не поддерживается при автоматическом раскрытии; нативная ручная прокрутка,
 выбор и геометрия indicator доступны.
-Глобальные component config/tokens, getTargetContainer и prefixCls ещё не перенесены.
+Глобальные component config, getTargetContainer и prefixCls ещё не перенесены.
 
 Фикстура — `?fixture=anchor`, пример — `/ant-design#anchor`. Unit/SSR/Chromium
 проверяют приоритеты offsets, callbacks/history, анимацию/cleanup, nested/legacy,
-RTL/indicator и production hydration. CSS-рецепт anchor содержит 22 правила.
+RTL/indicator и production hydration. Source tokens и метрики проверяются
+[по официальному UMD](./src/lib/theme-anchor-tokens-reference.test.ts) и
+[в браузере](./tests/browser/anchor-theme.spec.ts). CSS-рецепт anchor содержит 22 правила.
 
 ## Affix
 

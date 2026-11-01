@@ -9,6 +9,12 @@
 
 ### Added
 
+- Theme Anchor: исходные component defaults и aliases для обычных/вложенных
+  ссылок, source compact padding, отдельные algorithms, hash и CSS prefix.
+  Оформление ссылок учитывает tokens обычного, hover/active и focus состояний.
+  Добавлены UMD conformance, SSR и browser-проверки метрик, приоритета styles,
+  RTL и обновлений темы с сохранением ссылок, focus, scroll/history и callbacks.
+  Native-only темы и lifecycle indicator сохранены.
 - Theme Cascader: исходные defaults и совместный Select/Cascader scope для поля
   и dropdown; standalone Panel получает только Cascader tokens. Добавлены UMD
   conformance, SSR и browser-проверки размеров/строк/checkbox, responsive tags

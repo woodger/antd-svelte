@@ -20,7 +20,7 @@ import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
-  | 'Select' | 'TreeSelect' | 'Cascader';
+  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -37,7 +37,11 @@ const factories = {
   Popconfirm: preparePopconfirmTokens,
   Select: prepareSelectTokens,
   TreeSelect: prepareTreeSelectTokens,
-  Cascader: prepareCascaderTokens
+  Cascader: prepareCascaderTokens,
+  Anchor: (token: GlobalToken) => ({
+    linkPaddingBlock: token.paddingXXS,
+    linkPaddingInlineStart: token.padding
+  })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
@@ -54,7 +58,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Popconfirm: [],
   Select: ['optionLineHeight', 'optionSelectedFontWeight'],
   TreeSelect: [],
-  Cascader: ['optionSelectedFontWeight']
+  Cascader: ['optionSelectedFontWeight'],
+  Anchor: []
 };
 const inputMetrics = [
   'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',

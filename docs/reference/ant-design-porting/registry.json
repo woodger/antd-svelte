@@ -1364,7 +1364,15 @@
         "src/lib/vendor/anchor.css",
         "tools/ant-design-css-recipes.json",
         "tests/browser/anchor-spacing.spec.ts",
-        "tests/browser/fixtures/AnchorSpacingFixtures.svelte"
+        "tests/browser/fixtures/AnchorSpacingFixtures.svelte",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-anchor-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-anchor-tokens-reference.json",
+        "tests/package/anchor-theme.ssr.test.ts",
+        "tests/browser/anchor-theme.spec.ts",
+        "tests/browser/fixtures/AnchorThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-anchor-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -1398,7 +1406,25 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Component config/tokens/prefix отсутствуют; getContainer задаётся prop."
+          "note": "Component config/prefix отсутствуют; getContainer задаётся prop."
+        },
+        {
+          "id": "anchor-theme-tokens",
+          "title": "Source Anchor defaults/aliases и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Anchor.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-anchor-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-anchor-tokens-reference.json",
+            "tests/package/anchor-theme.ssr.test.ts",
+            "tests/browser/anchor-theme.spec.ts",
+            "tests/browser/fixtures/AnchorThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-anchor-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные linkPaddingBlock=paddingXXS и linkPaddingInlineStart=padding, финальные overrides, component algorithms/aliases, zero/undefined/negative и custom prefix. Первый horizontal item сохраняет нулевой inline padding, nested block padding зависит от paddingXXS/2 независимо от linkPaddingBlock, title margin от fontSize/14*3. Source compact inline padding=8px; native-only compact сохраняет прежние 16px. Source linkDecoration/linkHoverDecoration/linkFocusDecoration применяются к обычному, hover/active и focus состояниям; native-only стили сохранены. Scoped declarations и computed metrics horizontal/vertical/nested links, активных titles, границ, ink и link decorations сверяются с официальным UMD для 17 настроек. SSR scope внутри обычного и Affix root, style priority, DOM/focus, scroll/history/callbacks и cleanup сохраняются. Lifecycle измерения indicator не меняется; остальные config/prefixCls API остаются в работе."
         }
       ]
     },
@@ -7993,7 +8019,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect и Cascader/CascaderPanel получили собственную подготовку tokens и CSS consumption; остальные families остаются в работе."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; остальные families остаются в работе."
         },
         {
           "id": "static-design-tokens",
@@ -8226,6 +8252,24 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные восемь defaults, финальные overrides, округление optionPadding, unitless optionSelectedFontWeight, component algorithms/aliases, zero/undefined и custom prefix. Поле и dropdown объединяют Select и Cascader scopes в исходном порядке; Panel получает только Cascader и наследует шрифт/цвет provider с прозрачным фоном. Checkbox aliases не применяются к внутренним checkbox. UMD declarations и computed metrics для 18 настроек: single/multiple трёх размеров, tags, suffix/clear, disabled, columns/rows/expand icons, search/empty и checkbox checked/mixed/disabled/unchecked. Responsive tags сохраняют source geometry, включая нулевую controlWidth. SSR и смена темы сохраняют DOM, поиск/выделение/фокус и callbacks; popup variables обновляются без потери controller left/top, semantic CSS overrides сохраняют приоритет при смене ширины поиска. Native-only темы и существующий Svelte API сохранены; остальные advanced API остаются в работе."
+        },
+        {
+          "id": "anchor-theme-tokens",
+          "title": "Source Anchor defaults/aliases и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Anchor.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-anchor-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-anchor-tokens-reference.json",
+            "tests/package/anchor-theme.ssr.test.ts",
+            "tests/browser/anchor-theme.spec.ts",
+            "tests/browser/fixtures/AnchorThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-anchor-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные linkPaddingBlock=paddingXXS и linkPaddingInlineStart=padding, финальные overrides, component algorithms/aliases, zero/undefined/negative и custom prefix. Первый horizontal item сохраняет нулевой inline padding, nested block padding зависит от paddingXXS/2 независимо от linkPaddingBlock, title margin от fontSize/14*3. Source compact inline padding=8px; native-only compact сохраняет прежние 16px. Source linkDecoration/linkHoverDecoration/linkFocusDecoration применяются к обычному, hover/active и focus состояниям; native-only стили сохранены. Scoped declarations и computed metrics horizontal/vertical/nested links, активных titles, границ, ink и link decorations сверяются с официальным UMD для 17 настроек. SSR scope внутри обычного и Affix root, style priority, DOM/focus, scroll/history/callbacks и cleanup сохраняются. Lifecycle измерения indicator не меняется; остальные config/prefixCls API остаются в работе."
         }
       ]
     },

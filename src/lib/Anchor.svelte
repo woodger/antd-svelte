@@ -7,6 +7,7 @@
   import { createAnchorRuntime } from './anchor.dom';
   import { revealAnchorLink } from './anchor-scroll.dom';
   import { connectFeedbackFocus } from './feedback.dom';
+  import { useComponentTheme } from './theme-component.svelte';
   import type { AnchorProps } from './anchor.types';
   let {
     items,
@@ -31,6 +32,7 @@
     ...rest
   }: AnchorProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Anchor');
   let activeLink = $state<string | null>(null);
   let ink = $state<HTMLSpanElement>();
   let runtime = $state.raw<ReturnType<typeof createAnchorRuntime>>();
@@ -139,10 +141,18 @@
   });
 </script>
 
+<style>
+  .ant-anchor-source-theme :global(.ant-anchor-link-title) { text-decoration:var(--ant-link-decoration); }
+  .ant-anchor-source-theme :global(.ant-anchor-link-title:is(:hover,:active)) { text-decoration:var(--ant-link-hover-decoration); }
+  .ant-anchor-source-theme :global(.ant-anchor-link-title:focus) { text-decoration:var(--ant-link-focus-decoration); }
+</style>
+
 {#snippet content()}
   <div {...rest} bind:this={nativeElement} dir={config.direction}
     class={[
         'ant-anchor-wrapper ant-anchor-css-var',
+        componentTheme.className,
+        componentTheme.className && 'ant-anchor-source-theme',
         direction === 'horizontal' && 'ant-anchor-wrapper-horizontal',
         config.direction === 'rtl' && 'ant-anchor-rtl',
         className,
@@ -150,6 +160,7 @@
         classes.root
       ]}
     style={[
+        componentTheme.style,
         `max-height:${offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh'}`,
         slots.root,
         style

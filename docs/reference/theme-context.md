@@ -104,6 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
+Anchor также получает собственные defaults и aliases.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -221,6 +222,25 @@ tag отдельно, native-only тема использует display:contents
 присутствуют при SSR и обновляются отдельно от controller left/top; semantic
 styles.popup.root сохраняет приоритет, в том числе при смене ширины поиска.
 Смена темы сохраняет input/rows, поисковый текст, выделение, фокус и callbacks.
+
+## Токены Anchor
+
+Anchor подготавливает linkPaddingBlock из paddingXXS, linkPaddingInlineStart —
+из padding. Явные component overrides применяются после defaults. Первый
+горизонтальный пункт сохраняет нулевой inline-отступ. Вложенные ссылки используют
+paddingXXS / 2, а отступ заголовка с детьми — fontSize / 14 * 3, независимо от
+linkPaddingBlock. Source compact использует inline-отступ 8px; native-only compact
+сохраняет прежние 16px.
+
+Aliases и отдельный component algorithm задают шрифт, цвета и границы. Hash/key
+scope и CSS variables присутствуют при SSR, включая Anchor внутри Affix.
+Нули сохраняются, undefined не возвращает vendor defaults; custom CSS prefix
+связан с опубликованным ant CSS. Semantic root style и plain style сохраняют
+приоритет. Source-ссылки используют linkDecoration, linkHoverDecoration и
+linkFocusDecoration для обычного, hover/active и focus состояний; по умолчанию
+подчёркивания нет. Native-only оформление сохраняется. Обновления сохраняют DOM ссылок,
+фокус, scroll/history и callbacks. Измерение indicator и отслеживание scroll
+сохраняют исходный lifecycle.
 
 ## Токены всплывающих панелей
 
