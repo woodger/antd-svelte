@@ -2,6 +2,7 @@
   import { onDestroy, untrack } from 'svelte';
   import Radio from './Radio.svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm, useFormField } from './form-context';
   import { provideRadioGroup } from './radio-context';
   import { getRadioOptions } from './radio.engine';
@@ -41,6 +42,7 @@
   }: RadioGroupProps<Value> = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Radio');
   const form = useForm();
   const field = useFormField();
   const generatedId = $props.id();
@@ -166,10 +168,11 @@
   bind:this={nativeElement}
   id={controlId}
   {name}
-  {style}
+  style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}
   {role}
   class={[
       `${prefixCls}-group ant-radio-css-var`,
+      componentTheme.className,
       `${prefixCls}-group-${buttonStyle}`,
       resolvedSize === 'small' && `${prefixCls}-group-small`,
       resolvedSize === 'large' && `${prefixCls}-group-large`,

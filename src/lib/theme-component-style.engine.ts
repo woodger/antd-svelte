@@ -1,30 +1,42 @@
-import { prepareButtonTokens, prepareInputTokens, prepareInputNumberTokens }
-  from './theme-control-tokens.engine';
+import {
+  prepareButtonTokens,
+  prepareInputTokens,
+  prepareInputNumberTokens,
+  prepareRadioTokens,
+  prepareSwitchTokens
+} from './theme-control-tokens.engine';
 import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
   from './theme-css-variables.engine';
 import type { GlobalToken } from './theme-component-token.types';
 
-export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon';
+export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
+  | 'Radio' | 'Checkbox' | 'Switch';
 
 const factories = {
   Button: prepareButtonTokens,
   Input: prepareInputTokens,
   InputNumber: prepareInputNumberTokens,
-  Addon: () => ({})
+  Addon: () => ({}),
+  Radio: prepareRadioTokens,
+  Checkbox: () => ({}),
+  Switch: prepareSwitchTokens
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
   Input: [],
   InputNumber: ['handleOpacity'],
-  Addon: []
+  Addon: [],
+  Radio: ['radioSize', 'dotSize'],
+  Checkbox: [],
+  Switch: []
 };
 
 /** Source getDefaultComponentToken/getComponentToken и CSS-variable registration. */
-export function componentThemeVariables(
+function resolveComponentVariables(
   component: StyledComponent,
   token: GlobalToken,
   prefix = 'ant'
-): Record<string, string> {
+) {
   const custom = { ...token[component] } as Record<string, unknown>;
   const defaults = factories[component]({ ...token, ...custom });
   const merged: Record<string, unknown> = { ...defaults, ...custom };
@@ -49,9 +61,24 @@ export function componentThemeVariables(
       ? `${value}px` : String(value);
   }
 
-  return variables;
+  return { variables, defaultVariables: Object.keys(defaults)
+    .map(key => tokenToCSSVariable(qualify(key), prefix)) };
+}
+
+export function componentThemeVariables(
+  component: StyledComponent,
+  token: GlobalToken,
+  prefix = 'ant'
+): Record<string, string> {
+  return resolveComponentVariables(component, token, prefix).variables;
 }
 
 export function componentThemeStyle(component: StyledComponent, token: GlobalToken, prefix = 'ant') {
-  return serializeThemeVariables(componentThemeVariables(component, token, prefix), prefix);
+  const { variables, defaultVariables } = resolveComponentVariables(component, token, prefix);
+  for (const name of defaultVariables) {
+    // В upstream отсутствие декларации наследуется; vendor defaults не должны возвращать её.
+    if (!(name in variables)) variables[name] = 'inherit';
+  }
+
+  return serializeThemeVariables(variables, prefix);
 }

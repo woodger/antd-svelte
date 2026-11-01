@@ -2,6 +2,7 @@
   import { onDestroy, untrack } from 'svelte';
   import Checkbox from './Checkbox.svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm, useFormField } from './form-context';
   import { provideCheckboxGroup } from './checkbox-context';
   import {
@@ -36,6 +37,7 @@
   }: CheckboxGroupProps<Value> = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Checkbox');
   const form = useForm();
   const field = useFormField();
   const generatedId = $props.id();
@@ -167,10 +169,11 @@
   bind:this={nativeElement}
   id={controlId}
   {name}
-  {style}
+  style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}
   {role}
   class={[
       `${prefixCls}-group ant-checkbox-css-var`,
+      componentTheme.className,
       config.direction === 'rtl' && `${prefixCls}-group-rtl`,
       className,
       rootClassName

@@ -2200,7 +2200,17 @@
         "tests/browser/checkbox-features.spec.ts",
         "tests/browser/fixtures/CheckboxFeaturesFixtures.svelte",
         "src/lib/Table.svelte",
-        "readme.md"
+        "readme.md",
+        "src/lib/theme-control-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/theme-toggle-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-toggle-tokens-reference.json",
+        "tests/package/toggle-theme.ssr.test.ts",
+        "tests/browser/toggle-theme.spec.ts",
+        "tests/browser/fixtures/ToggleThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-toggle-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -2275,12 +2285,33 @@
           "note": "Сохранены native fieldset/form/reset, блокировка всех детей disabled-группой, bind:value/function binding, типы string/number/boolean и первая запись повторного option. Это отличается от React any/null/controlled state и child disabled override. Старый options API нормализует state по options, новый children API сохраняет source raw state. User change сбрасывает mixed state; nativeEvent — DOM change, default value вне группы — on. Snippets, CSS strings и native refs заменяют React contracts."
         },
         {
-          "id": "advanced-theme",
-          "title": "Общий token engine, Wave и React diagnostics/statics",
-          "state": "missing",
+          "id": "source-theme-tokens",
+          "title": "Исходные component/alias tokens и CSS scopes",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Общий source theme/prefix/component-token engine и Wave не перенесены. В compact остаются прежние 16px icon и line height вместо source 14px/20px, в dark — прежний primary вместо source dark algorithm. React development warnings/statics и вложенные Form NamePath остаются пробелами. V1-ready не означает полный React API."
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/theme-toggle-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-toggle-tokens-reference.json",
+            "tests/package/toggle-theme.ssr.test.ts",
+            "tests/browser/toggle-theme.spec.ts",
+            "tests/browser/fixtures/ToggleThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-toggle-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source aliases, отдельные algorithms и hash/cssVar classes на Checkbox/CheckboxGroup. Размер/цвет/lineWidth и compact/dark из source настроек, custom CSS-variable prefix, SSR body/head и reactive updates. Checkbox не имеет отдельных ComponentToken defaults; native-only темы сохраняют прежний CSS."
+        },
+        {
+          "id": "advanced-theme",
+          "title": "Wave, произвольный prefix CSS и React diagnostics/statics",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source theme tokens и algorithms применяются к CSS. Wave, произвольный prefixCls CSS и React diagnostics/statics остаются пробелами; native-only mode/primary/compact сохраняют прежнее оформление. V1-ready не означает полный React API. Вложенные Form NamePath остаются отдельным пробелом."
         }
       ]
     },
@@ -3313,7 +3344,17 @@
         "src/lib/vendor/radio.css",
         "src/lib/vendor/radio-button.css",
         "tools/ant-design-css-recipes.json",
-        "readme.md"
+        "readme.md",
+        "src/lib/theme-control-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/theme-toggle-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-toggle-tokens-reference.json",
+        "tests/package/toggle-theme.ssr.test.ts",
+        "tests/browser/toggle-theme.spec.ts",
+        "tests/browser/fixtures/ToggleThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-toggle-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -3400,12 +3441,33 @@
           "note": "Сохраняются native fieldset/form/reset/required, блокировка всех options disabled-группой, типы string/number/boolean, первая запись повторного option и function binding. Это отличается от React any/null/controlled state и child disabled override. NativeEvent — DOM change, semantic props.checked отражает фактический Svelte state, включая локальный, refs/snippets/CSS strings заменяют React contracts."
         },
         {
-          "id": "advanced-theme",
-          "title": "Общий token engine, Wave и React-specific diagnostics/statics",
-          "state": "missing",
+          "id": "source-theme-tokens",
+          "title": "Исходные component/alias tokens и CSS scopes",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Общий theme/prefix/token engine, Wave и точная source compact/dark палитра не перенесены. React diagnostics/statics и вложенные Form NamePath остаются отдельными пробелами. V1-ready не означает полный React API."
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/theme-toggle-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-toggle-tokens-reference.json",
+            "tests/package/toggle-theme.ssr.test.ts",
+            "tests/browser/toggle-theme.spec.ts",
+            "tests/browser/fixtures/ToggleThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-toggle-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source prepareComponentToken, final overrides, unitless radioSize/dotSize, обычные/кнопочные цвета и отступы, hash/cssVar classes на Radio/RadioButton/RadioGroup. Отдельные algorithms, custom CSS-variable prefix, SSR body/head, reactive updates и undefined/zero semantics. Native-only темы сохраняют прежний CSS."
+        },
+        {
+          "id": "advanced-theme",
+          "title": "Wave, произвольный prefix CSS и React diagnostics/statics",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source theme tokens и algorithms применяются к CSS. Wave, произвольный prefixCls CSS и React diagnostics/statics остаются пробелами; native-only mode/primary/compact сохраняют прежнее оформление. V1-ready не означает полный React API. Вложенные Form NamePath остаются отдельным пробелом."
         }
       ]
     },
@@ -3812,7 +3874,17 @@
         "tools/ant-design-css-recipes.json",
         "readme.md",
         "tests/browser/switch.spec.ts",
-        "integration:switch"
+        "integration:switch",
+        "src/lib/theme-control-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/theme-toggle-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-toggle-tokens-reference.json",
+        "tests/package/toggle-theme.ssr.test.ts",
+        "tests/browser/toggle-theme.spec.ts",
+        "tests/browser/fixtures/ToggleThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-toggle-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -3894,12 +3966,33 @@
           "note": "Сохраняются native формы/hidden field/reset, отменяемый native onclick перед source callbacks, Svelte bindable state/function binding вместо React controlled props, CSS strings/snippets и native events/refs. Подписи остаются aria-hidden, handle — span вместо source div. Semantic props.checked/value отражают Svelte prop state; defaultChecked/value не подменяют исходные aliases внутри info."
         },
         {
-          "id": "advanced-theme",
-          "title": "Wave, общий token engine и React diagnostics/statics",
-          "state": "missing",
+          "id": "source-theme-tokens",
+          "title": "Исходные component/alias tokens и CSS scopes",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Wave, общий source theme/component-token/prefix engine и React warnings/__ANT_SWITCH не перенесены. Compact сохраняет прежние 22px track/18px handle/12px content вместо source 20/16/10; dark сохраняет прежний primary вместо source dark algorithm. Сохраняются текущие native focus и темы; v1-ready не означает полный React API."
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/theme-toggle-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-toggle-tokens-reference.json",
+            "tests/package/toggle-theme.ssr.test.ts",
+            "tests/browser/toggle-theme.spec.ts",
+            "tests/browser/fixtures/ToggleThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-toggle-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source prepareComponentToken, final overrides, track/handle/margin metrics обоих размеров и hash/cssVar classes. Отдельные algorithms, custom CSS-variable prefix, SSR body/head, reactive updates и undefined/zero semantics. Native-only темы сохраняют прежний CSS."
+        },
+        {
+          "id": "advanced-theme",
+          "title": "Wave, произвольный prefix CSS и React diagnostics/statics",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source theme tokens и algorithms применяются к CSS. Wave, произвольный prefixCls CSS и React diagnostics/statics остаются пробелами; native-only mode/primary/compact сохраняют прежнее оформление. V1-ready не означает полный React API."
         }
       ]
     },
@@ -7204,7 +7297,13 @@
         "src/lib/theme-control-tokens-reference.test.ts",
         "tools/fixtures/ant-design-control-tokens-reference.json",
         "tests/package/control-theme.ssr.test.ts",
-        "tests/browser/control-theme.spec.ts"
+        "tests/browser/control-theme.spec.ts",
+        "src/lib/theme-toggle-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-toggle-tokens-reference.json",
+        "tests/package/toggle-theme.ssr.test.ts",
+        "tests/browser/toggle-theme.spec.ts",
+        "tests/browser/fixtures/ToggleThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-toggle-metrics.json"
       ],
       "features": [
         {
@@ -7225,7 +7324,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction и Wave остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние CSS и геометрию. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber и SpaceAddon; остальные consumers требуют переноса."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction и Wave остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние CSS и геометрию. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса."
         },
         {
           "id": "static-design-tokens",
@@ -7307,6 +7406,25 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+        },
+        {
+          "id": "checkable-theme-tokens",
+          "title": "Source Radio/Checkbox/Switch token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/theme-toggle-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-toggle-tokens-reference.json",
+            "tests/package/toggle-theme.ssr.test.ts",
+            "tests/browser/toggle-theme.spec.ts",
+            "tests/browser/fixtures/ToggleThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-toggle-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source defaults/final overrides, component algorithms, unitless Radio metrics, Checkbox aliases и оба размера Switch. Hash/cssVar classes на controls/groups, CSS prefix bridge, SSR scopes и cleanup, нули/undefined без vendor fallback. Эталон scoped CSS declarations и computed metrics из официального UMD для 13 настроек. Native-only темы сохранены; остальные CSS consumers и Wave остаются в работе."
         }
       ]
     },

@@ -5,6 +5,7 @@
 <script lang="ts">
   import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm, useFormField } from './form-context';
   import Icon from './Icon.svelte';
   import type { SwitchEvent, SwitchProps } from './switch.types';
@@ -18,6 +19,7 @@
   }: SwitchProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Switch');
   const form = useForm();
   const field = useFormField();
   const initialDefault = untrack(() => props.defaultChecked ?? props.defaultValue ?? false);
@@ -45,6 +47,7 @@
   let localStyles = $derived(typeof props.styles === 'function'
     ? props.styles(info) : props.styles);
   let rootStyle = $derived([
+    componentTheme.style,
     contextStyles?.root,
     config.switch?.style,
     localStyles?.root,
@@ -194,6 +197,7 @@
   tabindex={props.tabIndex ?? props.tabindex}
   class={[
       prefix,
+      componentTheme.className,
       resolvedChecked && `${prefix}-checked`,
       resolvedDisabled && `${prefix}-disabled`,
       props.loading && `${prefix}-loading`,

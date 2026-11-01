@@ -5,6 +5,7 @@
 <script lang="ts">
   import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm, useFormField } from './form-context';
   import { useCheckboxGroup } from './checkbox-context';
   import { createCheckableClickLock } from './checkable.dom';
@@ -21,6 +22,7 @@
   }: CheckboxProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Checkbox');
   const form = useForm();
   const field = useFormField();
   const group = useCheckboxGroup();
@@ -58,6 +60,7 @@
   let localStyles = $derived(typeof props.styles === 'function'
     ? props.styles(info) : props.styles);
   let rootStyle = $derived([
+    componentTheme.style,
     contextStyles?.root,
     config.checkbox?.style,
     localStyles?.root,
@@ -160,6 +163,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions (Label блокирует повторный click; клавиатурой и фокусом управляет native input.) -->
 <label class={[
   `${prefix}-wrapper ant-checkbox-css-var`,
+  componentTheme.className,
   resolvedChecked && `${prefix}-wrapper-checked`,
   resolvedDisabled && `${prefix}-wrapper-disabled`,
   config.direction === 'rtl' && `${prefix}-rtl`,

@@ -100,7 +100,8 @@ const config: ThemeConfig = {
 ```
 
 Эти records доступны в GlobalToken. Исходные prepareComponentToken и применение
-CSS-переменных подключены для Button, Input, TextArea, InputNumber и SpaceAddon.
+CSS-переменных подключены для Button, Input, TextArea, InputNumber, SpaceAddon,
+Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -118,6 +119,17 @@ filled backgrounds. При handleVisible=true исходный handleVisibleWidt
 из controlHeightSM; отдельный handleWidth задаёт ширину при hover/focus. Это разные
 токены. Например, handleWidth=36 при стандартном размере оставляет 22px в покое и
 использует 36px при наведении.
+
+Radio подготавливает размеры круга и точки, цвета обычного/кнопочного режима и
+отступы. radioSize/dotSize — unitless CSS variables; размеры точки вычисляются
+до окончательных component overrides. Checkbox использует alias tokens без
+отдельных ComponentToken defaults. Switch рассчитывает track/handle/margin tokens
+для обычного и small-размера. Отдельные component algorithms меняют эти controls
+независимо от глобальной темы.
+
+Явный undefined в ComponentToken не восстанавливает default: соответствующая
+переменная наследуется, как при отсутствии декларации upstream. На CSS-корнях
+это явно перекрывает статические vendor defaults; нулевые значения сохраняются.
 
 Группы, affix wrappers и native input/textarea получают необходимые переменные;
 собственный CSS-корень вложенного control сбрасывает чужие alias overrides.
@@ -170,6 +182,13 @@ zeroRuntime наследуется; опубликованные стили ко
 - [SSR controls](../../tests/package/control-theme.ssr.test.ts) и
   [браузерное применение](../../tests/browser/control-theme.spec.ts),
   маршрут `?fixture=control-theme`.
+- [Эталон Radio/Checkbox/Switch](../../src/lib/theme-toggle-tokens-reference.test.ts)
+  из официального UMD: 13 настроек, включая wireframe, отдельные algorithms,
+  нули, undefined и custom prefix.
+- [SSR checkables](../../tests/package/toggle-theme.ssr.test.ts) и
+  [браузерная геометрия/состояния](../../tests/browser/toggle-theme.spec.ts),
+  маршрут `?fixture=toggle-theme`. Ожидаемые размеры и цвета получены из computed
+  styles официального UMD и принадлежат браузерному test contour.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

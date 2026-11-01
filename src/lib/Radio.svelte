@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm, useFormField } from './form-context';
   import { useRadioGroup, useRadioOptionType } from './radio-context';
   import { connectRadio, syncRadioPeers } from './radio.dom';
@@ -16,6 +17,7 @@
   }: RadioProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Radio');
   const form = useForm();
   const field = useFormField();
   const group = useRadioGroup();
@@ -52,6 +54,7 @@
   let localStyles = $derived(typeof props.styles === 'function'
     ? props.styles(info) : props.styles);
   let rootStyle = $derived([
+    componentTheme.style,
     contextStyles?.root,
     config.radio?.style,
     localStyles?.root,
@@ -185,6 +188,7 @@
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_noninteractive_element_interactions (Label блокирует повторный click; клавиатурой и фокусом управляет native input.) -->
 <label class={[
     `${prefix}-wrapper ant-radio-css-var`,
+    componentTheme.className,
     button && 'ant-radio-button-css-var',
     resolvedChecked && `${prefix}-wrapper-checked`,
     resolvedDisabled && `${prefix}-wrapper-disabled`,

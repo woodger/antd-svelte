@@ -134,3 +134,53 @@ export function prepareInputNumberTokens(token: AliasToken & Partial<InputNumber
     handleVisibleWidth: handleVisible === true ? handleWidth : 0
   };
 }
+
+/** Размер dot вычисляется из fontSizeLG и wireframe до final radioSize/dotSize overrides. */
+export function prepareRadioTokens(token: AliasToken) {
+  const radioSize = token.fontSizeLG;
+  const dotSize = token.wireframe ? radioSize - 8 : radioSize - (4 + token.lineWidth) * 2;
+
+  return {
+    radioSize,
+    dotSize,
+    dotColorDisabled: token.colorTextDisabled,
+    buttonSolidCheckedColor: token.colorTextLightSolid,
+    buttonSolidCheckedBg: token.colorPrimary,
+    buttonSolidCheckedHoverBg: token.colorPrimaryHover,
+    buttonSolidCheckedActiveBg: token.colorPrimaryActive,
+    buttonBg: token.colorBgContainer,
+    buttonCheckedBg: token.colorBgContainer,
+    buttonColor: token.colorText,
+    buttonCheckedBgDisabled: token.controlItemBgActiveDisabled,
+    buttonCheckedColorDisabled: token.colorTextDisabled,
+    buttonPaddingInline: token.padding - token.lineWidth,
+    wrapperMarginInlineEnd: token.marginXS,
+    radioColor: token.wireframe ? token.colorPrimary : token.colorWhite,
+    radioBgColor: token.wireframe ? token.colorBgContainer : token.colorPrimary
+  };
+}
+
+/** Source Switch metrics используют фиксированный padding=2, включая small-вариант. */
+export function prepareSwitchTokens(token: AliasToken) {
+  const height = token.fontSize * token.lineHeight;
+  const heightSM = token.controlHeight / 2;
+  const padding = 2;
+  const handleSize = height - padding * 2;
+  const handleSizeSM = heightSM - padding * 2;
+
+  return {
+    trackHeight: height,
+    trackHeightSM: heightSM,
+    trackMinWidth: handleSize * 2 + padding * 4,
+    trackMinWidthSM: handleSizeSM * 2 + padding * 2,
+    trackPadding: padding,
+    handleBg: token.colorWhite,
+    handleSize,
+    handleSizeSM,
+    handleShadow: `0 2px 4px 0 ${new FastColor('#00230b').setA(.2).toRgbString()}`,
+    innerMinMargin: handleSize / 2,
+    innerMaxMargin: handleSize + padding + padding * 2,
+    innerMinMarginSM: handleSizeSM / 2,
+    innerMaxMarginSM: handleSizeSM + padding + padding * 2
+  };
+}

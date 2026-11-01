@@ -5860,8 +5860,9 @@ prefixCls и явный role относятся к корню. PrefixCls пер�
 Сохранены native fieldset/form/reset/required, принудительный disabled группы,
 primitive values и deduplication options, bind:indeterminate и defaults. Они
 отличаются от React state/ref conventions, child disabled override и controlled
-indeterminate. Общий token/prefix engine, точная dark/compact тема, Wave и React
-diagnostics/statics остаются неперенесёнными. Типы —
+indeterminate. Source Checkbox aliases и отдельные theme algorithms применяются
+к Checkbox/CheckboxGroup; native-only темы сохраняют прежнее оформление.
+Произвольный prefix CSS, Wave и React diagnostics/statics остаются неперенесёнными. Типы —
 [checkbox.types.ts](./src/lib/checkbox.types.ts) и
 [checkbox-group.types.ts](./src/lib/checkbox-group.types.ts); проверки —
 [browser](./tests/browser/checkbox-features.spec.ts),
@@ -6014,8 +6015,10 @@ onValueChange. Нативный onchange остаётся на input. Label/inpu
 Сохраняются прежние native fieldset, defaults/reset, required и disabled группы,
 уникальные имена, примитивные типы и удаление повторных options. Эти границы
 отличаются от React any-value/controlled-state и приоритета disabled дочернего Radio.
-Общий token/prefix engine, Wave, React diagnostics/statics и вложенные Form NamePath
-остаются неперенесёнными. Дополнительные сценарии — `?fixture=radio-features`,
+Source Radio tokens и отдельные theme algorithms применяются к Radio, RadioButton
+и RadioGroup; native-only темы сохраняют прежнее оформление. Произвольный prefix CSS,
+Wave, React diagnostics/statics и вложенные Form NamePath остаются неперенесёнными.
+Дополнительные сценарии — `?fixture=radio-features`,
 [browser](./tests/browser/radio-features.spec.ts) и
 [package SSR](./tests/package/radio-features.ssr.test.ts).
 
@@ -6114,8 +6117,9 @@ focus(options?)/blur() доступны и через bind:this. AutoFocus вы�
 mount, tabIndex — alias tabindex. Lowercase autofocus сохраняет HTML-поведение.
 Native form/reset/hidden field, отменяемый onclick, скрытые от accessibility tree
 подписи и span handle сохраняют прежний Svelte контракт. React использует div handle
-и controlled state/event/ref conventions. Wave, общий token/prefix engine, точная
-dark/compact палитра и React diagnostics/statics пока не перенесены.
+и controlled state/event/ref conventions. Source Switch tokens и отдельные theme
+algorithms применяются к обоим размерам; native-only темы сохраняют прежнее
+оформление. Wave, произвольный prefix CSS и React diagnostics/statics пока не перенесены.
 
 Изучены Ant Design 6.6.8, @rc-component/switch 1.0.3 и @rc-component/util 1.14.0.
 Рецепт switch побайтно воспроизводит прежние 47 правил vendor CSS, включая reduced
@@ -6608,7 +6612,8 @@ hash/CSS variables. `theme.useToken()` возвращает реактивный
 GlobalToken, Theme, hashId и transformed CSS-variable token. Глобальные переменные
 передаются компонентам уже при SSR; существующие native темы без source-настроек
 сохраняют прежнее поведение. Компонентные overrides применяются к Button,
-Input/TextArea (включая Password/Search/OTP), InputNumber и SpaceAddon;
+Input/TextArea (включая Password/Search/OTP), InputNumber, SpaceAddon,
+Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch;
 остальные CSS-потребители ещё переносятся. Примеры и точная граница —
 [в справочнике контекста темы](./docs/reference/theme-context.md).
 

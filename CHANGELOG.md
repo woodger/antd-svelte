@@ -9,6 +9,10 @@
 
 ### Added
 
+- Theme checkables: исходная подготовка Radio/Switch tokens и Checkbox aliases,
+  группы и RadioButton, отдельные algorithms, unitless dimensions и SSR scopes.
+  Явный undefined наследует CSS-переменную без возврата vendor defaults;
+  native-only темы сохраняются.
 - Theme controls: исходная подготовка Button/Input/TextArea/InputNumber tokens,
   SpaceAddon aliases, CSS roots в composed controls и изоляция вложенных aliases.
   Переменные и scope-правила доступны при SSR; native-only темы сохраняются.
