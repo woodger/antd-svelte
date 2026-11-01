@@ -2210,7 +2210,7 @@
             "tests/package/cascader.ssr.test.ts",
             "tests/browser/cascader.spec.ts"
           ],
-          "note": "Default any-label filter и limit=50; limit до обхода без sort и после сортировки с comparator. ChangeOnSelect/multiple включают parents, disabled наследуется. Object search config перекрывает top-level aliases. Исходный search lifecycle/autoClear, null notFoundContent suppresses popup без очистки query. OptionRender получает raw option и originNode snippet вместо React search clone с rendered label."
+          "note": "Default any-label filter и limit=50; limit до обхода без sort и после сортировки с comparator. ChangeOnSelect/multiple включают parents, disabled наследуется. Object search config перекрывает top-level aliases. Исходный search lifecycle/autoClear, null notFoundContent suppresses popup без очистки query. Поиск при выбранном пути сохраняет высоту строки и видимый цвет текста; повторный ввод не меняет value. OptionRender получает raw option и originNode snippet вместо React search clone с rendered label."
         },
         {
           "id": "lazy-paths",

@@ -232,6 +232,21 @@ test('Cascader reverses column arrows in RTL and Backspace returns to the parent
   await expect(owner(page)).toHaveText('[]');
 });
 
+test('Cascader keeps repeated search visible with an existing selected path', async ({ page }) => {
+  await control(page, 'Search paths').check();
+  await button(page, 'Set owner path').click();
+  await input(page).fill('HANG');
+
+  await expect(input(page)).toBeVisible();
+  await expect(input(page)).toHaveCSS('color', 'rgba(0, 0, 0, 0.88)');
+  expect((await input(page).boundingBox())!.height).toBeGreaterThan(0);
+  await input(page).fill('Japan');
+
+  await expect(input(page)).toHaveValue('Japan');
+  await expect(input(page)).toBeVisible();
+  await expect(owner(page)).toHaveText('["asia","china","hangzhou"]');
+});
+
 test('Cascader searches full paths and highlights original case without publishing on input', async ({ page }) => {
   await control(page, 'Search paths').check();
   await input(page).fill('HANG');

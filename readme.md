@@ -3381,6 +3381,8 @@ Popup поддерживает controlled/defaultOpen, changeOnSelect, click/hov
 Left/Right переходят между колонками и меняются местами в RTL, Backspace
 возвращает родителя, Enter выбирает, Escape закрывает.
 При непустом запросе Left/Right сохраняют нативную работу каретки и выделения.
+Поле поиска сохраняет высоту строки и цвет текста после скрытия выбранного label;
+повторный ввод оставляет выбранный путь без изменений.
 В multiple Backspace также удаляет последний разрешённый tag. Clear — нативная кнопка с клавиатурной
 активацией. FormItem передаёт label/id, description, required и status;
 bind:nativeElement/inputElement и focus/blur доступны после mount.

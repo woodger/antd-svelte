@@ -468,11 +468,11 @@
   .ant-cascader { display:inline-flex;align-items:center;position:relative;max-width:100%; }
   .ant-cascader:focus-within { outline:2px solid var(--ant-color-primary);outline-offset:2px; }
   .ant-select-content { min-width:0;position:relative; }
-  .ant-select-single .ant-select-content { overflow:hidden;white-space:nowrap; }
+  .ant-select-single .ant-select-content { overflow:hidden;white-space:nowrap;min-height:1lh; }
   .ant-select-single { min-height:var(--ant-select-height); }
   .ant-select-single .selected-label { overflow:hidden;text-overflow:ellipsis; }
   .ant-select-single .ant-select-input { position:absolute;inset:0;width:100%;height:100%; }
-  .ant-cascader .ant-select-input { min-width:0;padding:0;border:0;outline:0;background:transparent;color:inherit;font:inherit;line-height:inherit;cursor:inherit; }
+  .ant-cascader .ant-select-input { min-width:0;padding:0;border:0;outline:0;background:transparent;color:var(--ant-select-color);font:inherit;line-height:inherit;cursor:inherit; }
   .ant-select-input::placeholder { color:var(--ant-color-text-placeholder); }
   .ant-select-multiple { height:auto;min-height:var(--ant-select-height); }
   .ant-select-multiple .ant-select-content { gap:0; }
