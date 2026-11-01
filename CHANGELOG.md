@@ -9,6 +9,11 @@
 
 ### Added
 
+- Slider range: исходные multiple handles, marks/dots, push/cross, fixed disabled
+  anchors, editable/minCount/maxCount, draggableTrack, callbacks, semantic config
+  и refs. Сохранены прежние native single contracts; диапазон использует native
+  input/form bridge и отдельный CSS-рецепт. Добавлены MIT rc-slider и проверки
+  engine/public SSR/browser; неперенесённые scalar/Tooltip API описаны в README.
 - Carousel: исходные геометрия/клоны, finite/infinite, rows, fade, native swipe,
   autoplay, lazy loading, responsive, callbacks, typed refs и custom renderers.
   Добавлены config/locale, темы/RTL, CSS-рецепт, MIT react-slick и unit/package

@@ -3058,9 +3058,9 @@
       "name": "Slider",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Расширение существующего native single Slider исходными range/marks/dots, push/cross, disabled anchors, editable/draggableTrack и semantic API rc-slider 1.1.1; прежние Svelte forms/bind/events сохраняются.",
       "upstreamPath": "components/slider",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Slider",
@@ -3070,31 +3070,132 @@
         }
       ],
       "dependencies": [
-        "config-provider"
+        "config-provider",
+        "tooltip"
       ],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/slider",
+          "range": "~1.1.1",
+          "referenceVersion": "1.1.1"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
+      "priority": "p1",
+      "effort": "L",
       "evidence": [
-        "readme.md",
-        "tests/browser/slider.spec.ts"
+        "src/lib/Slider.svelte",
+        "src/lib/SliderSingle.svelte",
+        "src/lib/SliderRange.svelte",
+        "src/lib/slider.types.ts",
+        "src/lib/slider-range.types.ts",
+        "src/lib/slider-range.engine.ts",
+        "src/lib/slider-range.dom.ts",
+        "src/lib/slider-range.engine.test.ts",
+        "src/lib/slider.ssr.test.ts",
+        "src/lib/slider.engine.test.ts",
+        "tests/package/slider-range.ssr.test.ts",
+        "tests/browser/slider.spec.ts",
+        "tests/browser/slider-range.spec.ts",
+        "tests/browser/fixtures/SliderRangeFixtures.svelte",
+        "src/lib/vendor/slider-range.css",
+        "readme.md"
       ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Сохранённый native single API",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "src/lib/SliderSingle.svelte",
+            "src/lib/slider.engine.test.ts",
+            "src/lib/slider.ssr.test.ts",
+            "tests/browser/slider.spec.ts"
+          ],
+          "note": "Bind/value/defaultValue, точные дробные ступени, native events/reset/FormData, FormItem, focus/keyboard/cancellation и прежний CSS сохраняются. Default SliderProps callbacks остаются number; range выводит number[]."
         },
         {
-          "id": "gap-1",
-          "title": "Range и marks/dots",
+          "id": "range-core",
+          "title": "Исходные range transitions, marks/dots, push/cross и disabled anchors",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/slider-range.engine.test.ts",
+            "tests/package/slider-range.ssr.test.ts",
+            "tests/browser/slider-range.spec.ts"
+          ],
+          "note": "Sorted copies, null/empty/default/count, step/marks/min/max alignment, source tie breaking, allowCross/pushable и неподвижные disabled-точки. Dots — исходные визуальные деления. Свойства массива вне отображаемого набора не отключают редактирование."
+        },
+        {
+          "id": "range-gestures",
+          "title": "Pointer/touch, keyboard crossing, editable и draggableTrack",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/browser/slider-range.spec.ts",
+            "src/lib/slider-range.dom.ts"
+          ],
+          "note": "Исходные closest handle, cache identities, drag group clamp, editable add/delete с minCount/maxCount и удаление поперёк дорожки после 130px. Любая disabled-точка отключает edit/track drag; editable имеет приоритет, step=null отключает track drag. Before/change/after/complete, включая keyup на границе и Delete без complete."
+        },
+        {
+          "id": "range-rendering",
+          "title": "Semantic config, themes/RTL и native accessibility",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/slider-range.ssr.test.ts",
+            "tests/browser/slider-range.spec.ts",
+            "src/lib/vendor/slider-range.css"
+          ],
+          "note": "ConfigProvider.slider относится к range-ветке; object/function semantic slots, class concatenation, local style priority и deprecated aliases. Исходные размеры/цвета для light/dark/compact и существующих primary presets; отдельный извлекаемый CSS. Handles — native inputs, marks — native buttons вместо React interactive div/span."
+        },
+        {
+          "id": "range-lifecycle",
+          "title": "Native формы, refs и SSR/lifecycle",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/slider-range.ssr.test.ts",
+            "tests/browser/slider-range.spec.ts"
+          ],
+          "note": "Name/form, повторные значения FormData, first-input id, initial-default reset с удалением добавленных точек и отменой reset. Ref.focus/blur/nativeElement в обоих режимах. SSR не вызывает DOM/focus/callbacks/timers; cleanup снимает capture, listeners, timers и refs, поздние blur/change не читают уничтоженную модель."
+        },
+        {
+          "id": "native-adapter",
+          "title": "Граница native controls и React event/instance API",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/slider.types.ts",
+            "src/lib/slider-range.types.ts",
+            "tests/browser/slider-range.spec.ts"
+          ],
+          "note": "Сохраняется Svelte bind-модель; onChange получает массив до bind update, onValueChange после. Range pointer/keyboard публикует дополнительные input/change после DOM update с isTrusted=false. Native inputs/form/label и keyboardable mark buttons заменяют React div/span; typed refs не являются React instance."
+        },
+        {
+          "id": "range-tooltip",
+          "title": "Текущий SliderTooltipConfig и полный исходный Tooltip API",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SliderRange.svelte",
+            "src/lib/tooltip.types.ts",
+            "tests/browser/slider-range.spec.ts"
+          ],
+          "note": "Поддержаны четыре placement, text formatter, pinned per-handle tooltip и active hover/focus tooltip с native description/popover. Полные SliderTooltipProps/portals/containers, corner placements, исходный mouseup focus-open lifecycle и все delegated tooltip props ещё не перенесены."
+        },
+        {
+          "id": "single-source-api",
+          "title": "Полный исходный scalar API и общий token/prefix engine",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "note": "Новые marks/dots, semantic config и React callback aliases пока принадлежат range-ветке; одиночный Slider сохраняет согласованный native contract. Полная унификация source scalar API, произвольные theme tokens/prefix CSS, React diagnostics и private Slider contexts для ColorPicker остаются следующими этапами. V1-ready не означает полный React API."
         }
       ]
     },

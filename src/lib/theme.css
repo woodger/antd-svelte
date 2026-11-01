@@ -348,6 +348,40 @@
   --ant-carousel-arrow-offset: var(--ant-margin-xs);
 }
 
+.ant-slider-css-var {
+  --ant-line-height: calc(1 + 8px / var(--ant-font-size));
+  --ant-control-height-lg: calc(var(--ant-control-height) * 1.25);
+  --ant-control-height-sm: calc(var(--ant-control-height) * 0.75);
+  --ant-slider-control-size: calc(var(--ant-control-height-lg) / 4);
+  --ant-slider-handle-size: var(--ant-slider-control-size);
+  --ant-slider-handle-size-hover: calc(var(--ant-control-height-sm) / 2);
+  --ant-slider-rail-bg: var(--ant-color-fill-tertiary);
+  --ant-slider-rail-hover-bg: var(--ant-color-fill-secondary);
+  --ant-slider-track-bg-disabled: var(--ant-color-bg-container-disabled);
+  --ant-slider-handle-color-disabled: #bfbfbf;
+  --ant-slider-dot-border-color: var(--ant-color-border-secondary);
+  --ant-slider-dot-active-border-color: var(--ant-color-primary-border);
+}
+
+.ant-slider-css-var[data-ant-slider-theme='dark'] {
+  --ant-color-primary: #1668dc;
+  --ant-color-primary-border: #15325b;
+  --ant-color-primary-border-hover: #15417e;
+  --ant-slider-handle-color-disabled: #4f4f4f;
+}
+
+.ant-slider-css-var[data-ant-slider-theme='dark'][data-ant-slider-primary='purple'] {
+  --ant-color-primary: #642ab5;
+  --ant-color-primary-border: #301c4d;
+  --ant-color-primary-border-hover: #3e2069;
+}
+
+.ant-slider-css-var[data-ant-slider-theme='dark'][data-ant-slider-primary='green'] {
+  --ant-color-primary: #49aa19;
+  --ant-color-primary-border: #274916;
+  --ant-color-primary-border-hover: #306317;
+}
+
 .ant-svelte-theme[data-ant-theme='dark'] > .ant-tour-css-var {
   --ant-tour-primary-next-btn-hover-bg: #fff;
 }

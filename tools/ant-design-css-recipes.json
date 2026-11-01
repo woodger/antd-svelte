@@ -901,5 +901,26 @@
     ],
     "keyframes": ["ant-carousel-dot-animation", "ant-carousel-dot-vertical-animation"],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Carousel: slick track, slides, arrows, dots и duration animations.\n * Корни ограничены :where(.ant-carousel-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "slider-range",
+    "output": "src/lib/vendor/slider-range.css",
+    "expectedRules": 54,
+    "include": [
+      "\\.ant-slider(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-slider(?:-css-var)?(?![-\\w])",
+        "replacement": ".ant-slider-css-var"
+      },
+      {
+        "pattern": "\\.ant-slider((?:-horizontal|-vertical|-rtl|-disabled|-lock|-with-marks)?)(?![-\\w])",
+        "replacement": ".ant-slider$1:where(.ant-slider-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Slider: range handles, tracks, marks/dots и RTL.\n * Новые правила ограничены :where(.ant-slider-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]

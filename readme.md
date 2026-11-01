@@ -148,7 +148,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Carousel | Слайды, infinite/finite, rows, fade, swipe, autoplay, lazy loading, responsive и refs |
 | TextArea | Многострочное значение, native constraints/events/selection, формы, размеры, статусы и RTL |
 | InputNumber | Число/null, черновик ввода, min/max, дробный шаг, precision, кнопки и клавиатура, FormData, reset и FormItem |
-| Slider | Одно число, min/max/step, мышь и касание, клавиатура, завершение изменения, подсказка значения, ориентация, reverse/RTL, FormData, reset и FormItem |
+| Slider | Число или диапазон, marks/dots, editable/draggableTrack, push/cross, клавиатура, подсказки, темы/RTL, native формы и refs |
 | Image / ImagePreviewGroup | Native img/fallback/placeholder, preview transforms/focus и групповая навигация по images/items |
 | Mentions | Prefix/split, поиск и вставка у каретки, loading, autoSize и native popup |
 | AutoComplete | Свободный текст, options/groups, поиск, keyboard backfill, custom input и controlled popup |
@@ -1160,11 +1160,11 @@ Form восстанавливает её initialValues и сбрасывает �
 
 ## Slider
 
-Slider выбирает одно число через `bind:value` и `onValueChange(value)`.
+По умолчанию Slider выбирает одно число через `bind:value` и `onValueChange(value)`.
 `defaultValue` фиксируется при создании отдельного control и по умолчанию
 равен 0. При привязке задавайте начальное число у владельца без defaultValue.
-Значение Slider всегда числовое; пустое состояние и выбор диапазона в эту
-версию не входят.
+В одиночном режиме значение всегда числовое. Следующие положения описывают этот
+сохранённый native API; режим `range` описан отдельно ниже.
 
 ```svelte
 <script lang="ts">
@@ -1254,8 +1254,89 @@ Escape скрывает подсказку, сохраняя фокус и чи�
 её снова. Disabled скрывает подсказку. Текст дополняет aria-describedby поля,
 сохраняя help/ошибку FormItem. Числовые callbacks от показа подсказки не вызываются.
 
-Реализован один бегунок. Range, marks/dots, перетаскивание диапазона
-и динамическое добавление бегунков пока отсутствуют.
+### Диапазон Slider
+
+`Range` включает исходный multiple-handle API Ant Design 6.6.8 и
+@rc-component/slider 1.1.1. Старые одиночные bind, normalization, callbacks,
+native events и reset сохраняются. Точные интерфейсы:
+[slider.types.ts](./src/lib/slider.types.ts) и
+[slider-range.types.ts](./src/lib/slider-range.types.ts).
+
+```svelte
+<script lang="ts">
+  import { Slider, type SliderRef } from 'antd-svelte';
+
+  let interval = $state([20, 80]);
+  let slider = $state<SliderRef>();
+</script>
+
+<Slider range bind:value={interval} bind:ref={slider} name="interval"
+  ariaLabelForHandle={['Начало', 'Конец']} />
+```
+
+Значения сортируются в новую копию; внешний массив не меняется. Без value и
+defaultValue создаются две точки у min. Null и [] оставляют диапазон пустым;
+нажатие на дорожку восстанавливает две совпадающие точки. Deprecated count
+сохраняет исходные правила заполнения. `SliderProps` по умолчанию описывает
+одиночные callbacks; `SliderProps<true>` и `SliderRangeProps` описывают массив.
+При прямом SSR-вызове TypeScript можно уточнить компонент как `Slider<true>`.
+
+Range использует исходное выравнивание по step/marks/min/max rc-slider. Step=null
+оставляет только marks и endpoints, включая max. Dots добавляет деления;
+сам алгоритм выбора точки определяется step/marks. Marks принимает текст,
+числа, snippets либо label/style. Интерактивные подписи — native buttons;
+они доступны с клавиатуры и не отправляют форму. Included/track управляют
+дорожками, а start/end подсветки определяются крайними значениями.
+
+AllowCross по умолчанию true. Pushable задаёт минимальный разрыв и выталкивает
+соседей; true использует step. Disabled принимает boolean или массив: выключенные
+точки остаются неподвижными anchors. Любая выключенная отображаемая точка
+отключает editable и draggableTrack; лишние элементы массива disabled не учитываются.
+Range.draggableTrack двигает группу с сохранением расстояний и ограничением границ.
+
+Range.editable добавляет точки по нажатию на дорожку и учитывает minCount/maxCount.
+Delete/Backspace удаляет выбранную точку; перенос дальше 130px поперёк дорожки
+помечает её для удаления. Editable имеет приоритет над draggableTrack; при
+step=null перенос всей дорожки отключён. Во время пересечения сохраняется drag
+identity; после завершения и keyboard crossing фокус следует новому индексу.
+
+OnChange получает отсортированный массив перед обновлением bind:value;
+onValueChange — после него. OnBeforeChange и deprecated onAfterChange сохраняют
+порядок rc-slider. Range вызывает onChangeComplete по navigation keyup и release
+даже без изменения; Delete вызывает before/change без дополнительного complete.
+Click mark завершает изменение сразу. Keyboard=false блокирует перемещение,
+но сохраняет исходный callback keyup. Нативные input/change доступны отдельно;
+для pointer/keyboard действий диапазона они отправляются после DOM update и
+имеют isTrusted=false. Для числового массива используйте компонентные callbacks.
+
+Каждый включённый native input отправляет своё значение под общим name;
+FormData.getAll(name) возвращает диапазон. Id и связь label относятся к первому
+input, form поддерживает внешнего владельца. Native reset восстанавливает
+initial defaultValue с текущими границами и удаляет добавленные точки; без
+defaultValue возвращаются две точки у min. Отменённый reset сохраняет значения.
+Form/FormItem передают name/id, disabled, описание, ошибку и blur/touched.
+
+Ref.focus()/blur() работают в обоих режимах; bind:nativeElement и
+ref.nativeElement дают внешний div. При unmount очищаются pointer/touch listeners,
+capture, reset timers и ref. SSR не измеряет DOM, не фокусирует controls и не
+запускает callbacks/timers. Темы light/dark/compact и три существующих primary
+переключаются через ConfigProvider. Direction/reverse и orientation/vertical
+сохраняют исходные физические направления; orientation имеет приоритет.
+
+ConfigProvider.slider в этом этапе задаёт class/style и semantic slots диапазона.
+ClassNames объединяются, styles применяются по порядку с приоритетом локального
+слоя. Есть slots root/tracks/track/rail/handle и deprecated style aliases.
+Сохраняется текущий SliderTooltipConfig: четыре placement, text formatter,
+native popover и описание input. Полный SliderTooltipProps, portal/container API
+и исходное управление focus-open остаются частично перенесёнными. Полный scalar
+API marks/dots/semantic config, произвольные prefix CSS и theme tokens ещё не закрыты.
+
+Проверки: [engine](./src/lib/slider-range.engine.test.ts),
+[public SSR](./tests/package/slider-range.ssr.test.ts),
+[browser](./tests/browser/slider-range.spec.ts) и `?fixture=slider-range`.
+Новый [CSS](./src/lib/vendor/slider-range.css) воспроизводится рецептом из 54 правил;
+прежний [slider.css](./src/lib/vendor/slider.css) сохранён. Перенесённая логика
+снабжена [MIT rc-slider](./src/lib/vendor/LICENSE.rc-slider).
 
 ## Tooltip
 

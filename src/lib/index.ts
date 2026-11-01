@@ -363,6 +363,19 @@ export type {
 } from './input.types';
 export type { InputNumberProps } from './InputNumber.svelte';
 export type { SliderProps } from './Slider.svelte';
+export type { SliderSingleProps } from './slider.types';
+export type {
+  SliderRangeProps,
+  SliderRangeConfig,
+  SliderRef,
+  SliderMarks,
+  SliderMarkContent,
+  SliderConfig,
+  SliderClassNames,
+  SliderStyles,
+  SliderSemanticName,
+  SliderSemanticValue
+} from './slider-range.types';
 export type {
   TooltipProps,
   TooltipPlacement,

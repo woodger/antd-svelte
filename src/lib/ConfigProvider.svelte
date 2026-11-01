@@ -17,6 +17,7 @@
   import type { TypographyConfig } from './typography.types';
   import type { TourConfig } from './tour.types';
   import type { CarouselConfig } from './carousel.types';
+  import type { SliderConfig } from './slider-range.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -51,6 +52,7 @@
     typography?: TypographyConfig;
     tour?: TourConfig;
     carousel?: CarouselConfig;
+    slider?: SliderConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
@@ -94,6 +96,7 @@
     typography,
     tour,
     carousel,
+    slider,
     virtual,
     renderEmpty,
     rangePicker,
@@ -164,6 +167,9 @@
     },
     get carousel() {
       return carousel ?? parent.carousel;
+    },
+    get slider() {
+      return slider ?? parent.slider;
     },
     get virtual() {
       return virtual ?? parent.virtual;
