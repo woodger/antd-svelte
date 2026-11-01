@@ -5,7 +5,8 @@
   import { useForm, useFormField } from './form-context';
   import { provideRadioGroup } from './radio-context';
   import { getRadioOptions } from './radio.engine';
-  import type { RadioGroupProps, RadioValue } from './radio.types';
+  import { spaceOrientation } from './space.engine';
+  import type { RadioChangeEvent, RadioGroupProps, RadioValue } from './radio.types';
 
   let {
     options,
@@ -14,7 +15,8 @@
     defaultValue,
     disabled,
     required,
-    orientation = 'horizontal',
+    orientation,
+    vertical,
     optionType,
     size,
     buttonStyle = 'outline',
@@ -22,6 +24,14 @@
     id,
     name,
     onValueChange,
+    onChange,
+    onFocus,
+    onBlur,
+    onMouseEnter,
+    onMouseLeave,
+    prefixCls = 'ant-radio',
+    role = 'radiogroup',
+    nativeElement = $bindable(),
     onfocus,
     'aria-invalid': ariaInvalid,
     style,
@@ -36,8 +46,11 @@
   const generatedId = $props.id();
   const initialDefault = untrack(() => defaultValue);
   const resets = new Set<ReturnType<typeof setTimeout>>();
+  const members = new Map<HTMLInputElement, Value>();
   let useDefault = $state(true);
-  let container = $state<HTMLFieldSetElement>();
+  let container = $derived(nativeElement);
+  let alive = true;
+  let resolvedOrientation = $derived(spaceOrientation(orientation, vertical));
   let controlId = $derived(id ?? field?.id ?? `ant-radio-group-${generatedId}`);
   let nativeName = $derived(name ?? field?.name ?? `ant-radio-name-${generatedId}`);
   let selected = $derived(value ?? (useDefault ? initialDefault : undefined));
@@ -73,18 +86,33 @@
     get block() {
       return block;
     },
-    select(next) {
+    register(input, optionValue) {
+      members.set(input, optionValue);
+
+      return () => { members.delete(input); };
+    },
+    select(next, event) {
       const option = items.find((item) => item.value === next);
 
       if ((items.length && !option) || resolvedDisabled || option?.disabled || selected === next) return;
 
       useDefault = false;
       value = next;
-      onValueChange?.(next);
+      onChange?.(event as RadioChangeEvent<Value>);
+      if (alive) onValueChange?.(next);
+      if (!alive) return;
+
+      // Владелец function binding может отклонить выбор после native radio activation.
+      // Значения участников хранят тип: 0 и '0' имеют одинаковый DOM value.
+      if (selected !== next) {
+        for (const [input, optionValue] of members) input.checked = optionValue === selected;
+      }
     }
   });
 
   onDestroy(() => {
+    alive = false;
+    members.clear();
     for (const reset of resets)
       clearTimeout(reset);
   });
@@ -124,7 +152,7 @@
 
 <style>
   .ant-radio-group { display: inline-flex; flex-wrap: wrap; min-width: 0; max-width: 100%; padding: 0; border: 0; row-gap: var(--ant-margin-xs); }
-  .ant-radio-group-vertical { flex-direction: column; align-items: flex-start; }
+  .ant-radio-group-vertical { display: flex; flex-direction: column; align-items: stretch; }
   .ant-radio-group-vertical:has(> :global(.ant-radio-button-wrapper), > :global(.ant-badge) > :global(.ant-radio-button-wrapper)) { align-items: stretch; }
   .ant-radio-group.ant-radio-group-block { display: flex; width: 100%; }
   .ant-radio-group:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
@@ -135,19 +163,19 @@
 
 <fieldset
   {...attributes}
-  bind:this={container}
+  bind:this={nativeElement}
   id={controlId}
   {name}
   {style}
-  role="radiogroup"
+  {role}
   class={[
-      'ant-radio-group ant-radio-css-var',
-      `ant-radio-group-${buttonStyle}`,
-      resolvedSize === 'small' && 'ant-radio-group-small',
-      resolvedSize === 'large' && 'ant-radio-group-large',
-      block && 'ant-radio-group-block',
-      orientation === 'vertical' && 'ant-radio-group-vertical',
-      config.direction === 'rtl' && 'ant-radio-group-rtl',
+      `${prefixCls}-group ant-radio-css-var`,
+      `${prefixCls}-group-${buttonStyle}`,
+      resolvedSize === 'small' && `${prefixCls}-group-small`,
+      resolvedSize === 'large' && `${prefixCls}-group-large`,
+      block && `${prefixCls}-group-block`,
+      resolvedOrientation === 'vertical' && `${prefixCls}-group-vertical`,
+      config.direction === 'rtl' && `${prefixCls}-group-rtl`,
       className,
       rootClassName
     ]}
@@ -158,7 +186,7 @@
         : field?.label)}
   aria-required={resolvedRequired || undefined}
   aria-invalid={field?.status === 'error' || ariaInvalid || undefined}
-  aria-orientation={orientation}
+  aria-orientation={resolvedOrientation}
   aria-describedby={describedBy}
   data-ant-form-invalid={field?.status === 'error'
       || ariaInvalid === true
@@ -166,10 +194,35 @@
       || undefined}
   tabindex="-1"
   onfocus={handleFocus}
+  onfocusin={event => {
+    onFocus?.(event);
+    if (alive) attributes.onfocusin?.(event);
+  }}
+  onfocusout={event => {
+    onBlur?.(event);
+    if (alive) attributes.onfocusout?.(event);
+  }}
+  onmouseenter={event => {
+    onMouseEnter?.(event);
+    if (alive) attributes.onmouseenter?.(event);
+  }}
+  onmouseleave={event => {
+    onMouseLeave?.(event);
+    if (alive) attributes.onmouseleave?.(event);
+  }}
 >
   {#if items.length}
     {#each items as option, index (option.value)}
-    <Radio id={`${controlId}-${index}`} value={option.value} disabled={option.disabled} form={attributes.form} aria-label={option.label} aria-invalid={ariaInvalid} aria-describedby={attributes['aria-describedby']}>{option.label}</Radio>
+      <Radio id={option.id ?? `${controlId}-${index}`} value={option.value}
+        disabled={option.disabled} form={attributes.form} {prefixCls}
+        title={option.title} style={option.style} class={option.className}
+        required={option.required} onChange={option.onChange}
+        aria-label={typeof option.label === 'string' || typeof option.label === 'number'
+          ? String(option.label) : undefined}
+        aria-invalid={ariaInvalid} aria-describedby={attributes['aria-describedby']}>
+        {#if typeof option.label === 'function'}{@render option.label()}
+        {:else}{option.label}{/if}
+      </Radio>
     {/each}
   {:else if children}
     {@render children()}

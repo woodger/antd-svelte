@@ -156,7 +156,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Select | Одиночный и множественный выбор строковых/числовых значений; поиск, очистка, disabled options, клавиатура и FormData |
 | Checkbox | Checked/defaultChecked, смешанное состояние, нативные события и FormData, интеграция с FormItem |
 | CheckboxGroup | Типизированный массив выбранных значений, options, disabled, нативные checkbox, FormData, reset и интеграция с FormItem |
-| Radio | Checked/defaultChecked, disabled, нативные события, синхронизация соседних radio и FormData |
+| Radio | Checked/defaultChecked, semantic config, callbacks/refs, нативные группы и FormData |
 | RadioButton | Кнопочное оформление Radio, native input, group context и refs |
 | RadioGroup | Типизированный одиночный выбор, options, уникальное имя группы, горизонтальное/вертикальное расположение, required, reset и FormItem |
 | Switch | Checked/defaultChecked, loading, disabled, обычный/малый размеры, snippets состояний, клавиатура, FormData и FormItem |
@@ -5822,7 +5822,9 @@ callbacks. Нативный onchange также доступен. Без name о
 
 Для общего типизированного значения используйте RadioGroup.
 `RadioGroupProps<Value>` и `RadioOption<Value>` принимают string, number и
-boolean. Options содержит примитивы или `{ value, label, disabled? }`.
+boolean. Options содержит примитивы или `{ value, label, disabled?, id?, title?,
+className?, style?, required?, onChange? }`. Label принимает строку, число или
+snippet; style остаётся CSS-строкой, как в остальных Svelte-компонентах.
 Повторяющиеся значения отображаются один раз, с первой подписью и disabled.
 
 ```svelte
@@ -5855,7 +5857,8 @@ boolean. Options содержит примитивы или `{ value, label, dis
 
 Стрелки переключают нативный выбор и фокус, пропуская disabled options;
 Space выбирает сфокусированный вариант, Tab выходит из группы. Orientation
-по умолчанию horizontal; vertical располагает варианты столбцом. Группа
+по умолчанию horizontal; vertical располагает варианты столбцом. Boolean alias
+vertical применяется, когда orientation не задан. Явный orientation имеет приоритет. Группа
 наследует disabled из Form/FormItem и ConfigProvider. Явный disabled=false
 переопределяет наследование, disabled группы блокирует все options.
 
@@ -5918,6 +5921,10 @@ compact и RTL используют текущие настройки библи
 
 `bind:nativeElement` у Radio/RadioButton возвращает внутренний span RcCheckbox,
 bind:inputElement — input для focus()/blur(). Обе ссылки очищаются при unmount.
+Bind:ref возвращает `{ input, nativeElement, focus(options?), blur() }`; focus/blur
+доступны также через bind:this. У RadioGroup bind:nativeElement возвращает fieldset.
+AutoFocus переводит фокус на input при mount; lowercase autofocus сохраняет нативное
+поведение. TabIndex — alias нативного tabindex.
 `rootClassName`, как class/style, относится к label. Точные объявления — в
 [radio.types.ts](./src/lib/radio.types.ts). Изучены Radio/Group/RadioButton и
 @rc-component/checkbox 2.0.0; runtime React dependency не добавлена.
@@ -5925,8 +5932,33 @@ bind:inputElement — input для focus()/blur(). Обе ссылки очищ�
 Рецепт radio-button воспроизводит 67 правил эталона для кнопок, размеров,
 vertical/block и Badge; прежний vendor/radio.css сохранён. Проверки —
 `?fixture=radio-button`, SSR/public package и browser, включая существующие Radio.
-Полный аудит семейства ещё не завершён: rich options/semantic/config, prefix/token
-engine, Wave и остальные React-specific contracts остаются отдельной работой.
+
+ClassNames/styles у Radio и RadioButton задают root/icon/label объектом или
+функцией от `{ props }`. Props содержат фактические checked, disabled, value и name;
+checked учитывает локальное состояние Svelte. ConfigProvider.radio задаёт общие
+class/style и semantic slots, в том числе для Radio из options и вложенного provider.
+Приоритет root style: config.styles.root, config.style, styles.root, style.
+Настройки применяются к каждому Radio, как в исходной реализации; Group сохраняет
+собственные class/style. PrefixCls меняет имена классов; CSS для нового префикса
+предоставляет потребитель. У Group он передаётся в options; children задают свой.
+
+OnChange получает `{ target, nativeEvent, stopPropagation, preventDefault }`;
+target.value сохраняет исходный тип. NativeEvent — DOM change, а не React MouseEvent.
+Callback option/Radio вызывается до Group.onChange; Group.onChange — перед
+onValueChange. Нативный onchange остаётся на input. Label/input clicks защищены от
+повторного внешнего всплытия. OnClick/onFocus/onBlur/onKeyDown/onKeyPress работают
+на input; onMouseEnter/onMouseLeave — на label. У Group onFocus/onBlur получают
+всплывающие focusin/focusout дочерних controls. Для отклонения выбора владельцем
+группы используйте function binding с getter/setter; native checked восстанавливается
+по типизированным значениям, включая различие 0 и '0'.
+
+Сохраняются прежние native fieldset, defaults/reset, required и disabled группы,
+уникальные имена, примитивные типы и удаление повторных options. Эти границы
+отличаются от React any-value/controlled-state и приоритета disabled дочернего Radio.
+Общий token/prefix engine, Wave, React diagnostics/statics и вложенные Form NamePath
+остаются неперенесёнными. Дополнительные сценарии — `?fixture=radio-features`,
+[browser](./tests/browser/radio-features.spec.ts) и
+[package SSR](./tests/package/radio-features.ssr.test.ts).
 
 ## Switch
 

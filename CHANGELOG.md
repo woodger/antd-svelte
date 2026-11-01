@@ -9,6 +9,9 @@
 
 ### Added
 
+- Radio: rich options, semantic config, исходные callbacks и click bubble lock,
+  vertical alias, focus/blur refs и autoFocus. Сохранены native формы/reset/disabled;
+  RadioGroup восстанавливает typed selection при отклонении function binding.
 - InputNumber: stringMode с исходной mini-decimal арифметикой, spinner, variants,
   prefix/suffix и legacy addons, semantic config, refs, wheel/hold/Shift и callbacks.
   Сохранены native number/FormData/reset; различия числового режима и общих тем

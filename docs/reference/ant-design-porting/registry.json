@@ -2998,7 +2998,7 @@
       "name": "Radio",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Существующие Radio/RadioGroup сохранены; добавлены button appearance, children и refs для исходного заголовка Calendar. Полный аудит семейства ещё не завершён.",
+      "scopeReason": "Аудит Radio/RadioGroup/RadioButton 6.6.8: rich options, semantic config, callbacks/ref/autoFocus и click lock, с сохранением существующих native value/form/reset/disabled контрактов.",
       "upstreamPath": "components/radio",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -3022,7 +3022,8 @@
         }
       ],
       "dependencies": [
-        "config-provider"
+        "config-provider",
+        "form"
       ],
       "upstreamPackages": [
         {
@@ -3036,39 +3037,121 @@
           "referenceVersion": "1.14.0"
         }
       ],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "priority": "p1",
+      "effort": "M",
       "evidence": [
-        "readme.md",
-        "tests/browser/radio.spec.ts",
+        "src/lib/Radio.svelte",
+        "src/lib/RadioGroup.svelte",
         "src/lib/RadioButton.svelte",
+        "src/lib/radio.types.ts",
+        "src/lib/radio-context.ts",
+        "src/lib/radio.engine.ts",
+        "src/lib/radio.dom.ts",
+        "src/lib/radio.ssr.test.ts",
+        "src/lib/radio.engine.test.ts",
         "src/lib/radio-button.ssr.test.ts",
         "tests/package/radio-button.ssr.test.ts",
+        "tests/package/radio-features.ssr.test.ts",
+        "tests/browser/radio.spec.ts",
         "tests/browser/radio-button.spec.ts",
-        "tools/ant-design-css-recipes.json"
+        "tests/browser/radio-features.spec.ts",
+        "tests/browser/fixtures/RadioFeaturesFixtures.svelte",
+        "src/lib/vendor/radio.css",
+        "src/lib/vendor/radio-button.css",
+        "tools/ant-design-css-recipes.json",
+        "readme.md"
       ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "native-core",
+          "title": "Native radio, типизированный выбор, формы и reset",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "src/lib/radio.engine.test.ts",
+            "src/lib/radio.ssr.test.ts",
+            "tests/browser/radio.spec.ts"
+          ],
+          "note": "Checked/defaultChecked, bind:checked/value, string/number/boolean, native peers/name/FormData, required/FormItem, callbacks только при пользовательском изменении, disabled precedence, captured defaults/reset/canceled reset и внешние формы сохранены."
         },
         {
           "id": "button-options",
-          "title": "RadioButton, children, group optionType/size/buttonStyle/block и refs",
+          "title": "RadioButton, children, optionType/size/buttonStyle/block и темы",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
             "src/lib/radio-button.ssr.test.ts",
             "tests/package/radio-button.ssr.test.ts",
             "tests/browser/radio-button.spec.ts",
-            "tests/browser/radio.spec.ts",
+            "tests/browser/calendar.spec.ts",
             "tools/ant-design-css-recipes.json"
           ],
-          "note": "RadioButton добавляет исходный option-type context без DOM-обёртки. Group optionType перекрывает локальный button; nonempty options перекрывают children. 67 CSS rules для outline/solid, размеров, block/vertical, Badge и focus; normal vendor сохранён. Light/dark/compact/RTL через существующие tokens. Inner span/input refs очищаются. Существующие native fieldset, bind/value callbacks, disabled precedence и reset semantics сохранены; это не завершает аудит React API всего семейства."
+          "note": "Исходный option-type context без DOM-обёртки; group optionType перекрывает RadioButton, nonempty options перекрывают children. Outline/solid, размеры, block/vertical, Badge, focus и текущие light/dark/compact/RTL tokens. Ранее извлечённые 67 radio-button rules и normal vendor сохранены."
+        },
+        {
+          "id": "rich-options",
+          "title": "Rich labels, id/title/className/style/required и callbacks options",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/radio-features.ssr.test.ts",
+            "tests/browser/radio-features.spec.ts"
+          ],
+          "note": "Label принимает string/number/snippet, значения не приводятся к строкам до native input. Id относится к input, title/className/style — к label. Option callback получает типизированное source event до Group; option required действует вместе с прежним group required."
+        },
+        {
+          "id": "semantic-config",
+          "title": "Radio semantic slots, config и prefixCls",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/radio-features.ssr.test.ts",
+            "tests/browser/radio-features.spec.ts"
+          ],
+          "note": "Root/icon/label, объекты и функции от фактических Svelte checked/disabled/value/name. ConfigProvider.radio наследуется и применяется к отдельным Radio, включая Group options; root style priority config.styles.root -> config.style -> styles.root -> style. Group имеет собственные class/style; prefixCls передаётся в generated options, произвольный CSS предоставляет потребитель."
+        },
+        {
+          "id": "callbacks-lifecycle",
+          "title": "Source callbacks, click lock, refs, focus/keyboard и unmount",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/radio-features.ssr.test.ts",
+            "tests/browser/radio-features.spec.ts",
+            "tests/browser/radio.spec.ts"
+          ],
+          "note": "RadioChangeEvent target/value сохраняет тип, option/Radio onChange предшествует Group.onChange и onValueChange. Native events сохранены; stopPropagation/preventDefault вызывают DOM методы. Label bubble lock как useBubbleLock с RAF cleanup; autoFocus при mount, tabIndex, refs input/span и bind:this focus/blur. Group ref — fieldset, onFocus/onBlur всплывают от inputs. Function binding восстанавливает отклонённый native выбор по типизированным участникам, без смешения 0 и строкового 0; callback может синхронно удалить controls."
+        },
+        {
+          "id": "orientation",
+          "title": "Orientation и vertical alias",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/radio-features.ssr.test.ts",
+            "tests/browser/radio-features.spec.ts",
+            "tests/browser/radio-button.spec.ts"
+          ],
+          "note": "Явный horizontal/vertical имеет приоритет над boolean vertical; по умолчанию horizontal. Действующие native keyboard/focus и radio-button стыки сохранены."
+        },
+        {
+          "id": "native-boundary",
+          "title": "Svelte/native contracts вместо React state/event/ref conventions",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/radio.types.ts",
+            "readme.md"
+          ],
+          "note": "Сохраняются native fieldset/form/reset/required, блокировка всех options disabled-группой, типы string/number/boolean, первая запись повторного option и function binding. Это отличается от React any/null/controlled state и child disabled override. NativeEvent — DOM change, semantic props.checked отражает фактический Svelte state, включая локальный, refs/snippets/CSS strings заменяют React contracts."
+        },
+        {
+          "id": "advanced-theme",
+          "title": "Общий token engine, Wave и React-specific diagnostics/statics",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [],
+          "note": "Общий theme/prefix/token engine, Wave и точная source compact/dark палитра не перенесены. React diagnostics/statics и вложенные Form NamePath остаются отдельными пробелами. V1-ready не означает полный React API."
         }
       ]
     },

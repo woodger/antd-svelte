@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **107**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **45**; требуется аудит у **25**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **46**; требуется аудит у **24**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -42,7 +42,7 @@ Candidate означает запись каталога, для которой 
 | [Input](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input) | data-entry | target | Input, TextArea, InputPassword, InputSearch, InputOTP, InputGroup | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Input prefixCls, общий variant/token engine и React value/ref conventions (missing); TextArea prefixCls, общий variant/token engine и React value/ref conventions (missing) |
 | [InputNumber](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input-number) | data-entry | target | InputNumber | Согласованный v1 покрыт | Native Svelte contracts и отличия обычного числового режима (partial); Общий token/prefix engine, точная compact/focus тема и React diagnostics (missing) |
 | [Mentions](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/mentions) | data-entry | target | Mentions, getMentions | Согласованный v1 покрыт | Полный semantic/config API, popupRender/container, legacy Option и motion (missing) |
-| [Radio](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/radio) | data-entry | target | Radio, RadioGroup, RadioButton | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
+| [Radio](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/radio) | data-entry | target | Radio, RadioGroup, RadioButton | Согласованный v1 покрыт | Svelte/native contracts вместо React state/event/ref conventions (partial); Общий token engine, Wave и React-specific diagnostics/statics (missing) |
 | [Rate](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/rate) | data-entry | target | Rate | Согласованный v1 покрыт | PrefixCls, произвольный token engine и полный upstream Tooltip API (missing) |
 | [Select](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/select) | data-entry | target | Select | Согласованный v1 покрыт | Свободный ввод tags (missing); Виртуализация options (missing) |
 | [Slider](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/slider) | data-entry | target | Slider | Согласованный v1 покрыт | Граница native controls и React event/instance API (partial); Текущий SliderTooltipConfig и полный исходный Tooltip API (partial); Полный исходный scalar API и общий token/prefix engine (missing) |

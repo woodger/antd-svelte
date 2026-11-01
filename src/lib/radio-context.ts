@@ -1,5 +1,5 @@
 import { getContext, setContext } from 'svelte';
-import type { RadioValue } from './radio.types';
+import type { RadioChangeEvent, RadioValue } from './radio.types';
 
 interface RadioGroupContext<Value extends RadioValue = RadioValue> {
   readonly value: Value | undefined;
@@ -9,7 +9,8 @@ interface RadioGroupContext<Value extends RadioValue = RadioValue> {
   readonly required: boolean;
   readonly optionType?: 'default' | 'button';
   readonly block?: boolean;
-  select(value: Value): void;
+  register(input: HTMLInputElement, value: Value): () => void;
+  select(value: Value, event: RadioChangeEvent): void;
 }
 
 const groupKey = Symbol('ant-design-radio-group');

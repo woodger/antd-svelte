@@ -527,7 +527,18 @@ export type {
   CheckboxGroupOption,
   CheckboxGroupValue
 } from './checkbox-group.types';
-export type { RadioProps, RadioGroupProps, RadioOption, RadioValue } from './radio.types';
+export type {
+  RadioProps,
+  RadioGroupProps,
+  RadioOption,
+  RadioValue,
+  RadioContent,
+  RadioChangeEvent,
+  RadioRef,
+  RadioSemanticSlots,
+  RadioSemantic,
+  RadioConfig
+} from './radio.types';
 export type { SwitchProps } from './Switch.svelte';
 export type { PaginationProps } from './Pagination.svelte';
 export type {

@@ -20,6 +20,7 @@
   import type { SliderConfig } from './slider-range.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
+  import type { RadioConfig } from './radio.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -57,6 +58,7 @@
     slider?: SliderConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
+    radio?: RadioConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
@@ -103,6 +105,7 @@
     slider,
     colorPicker,
     inputNumber,
+    radio,
     virtual,
     renderEmpty,
     rangePicker,
@@ -182,6 +185,9 @@
     },
     get inputNumber() {
       return inputNumber ?? parent.inputNumber;
+    },
+    get radio() {
+      return radio ?? parent.radio;
     },
     get virtual() {
       return virtual ?? parent.virtual;
