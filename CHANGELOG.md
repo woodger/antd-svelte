@@ -9,6 +9,10 @@
 
 ### Added
 
+- Carousel: исходные геометрия/клоны, finite/infinite, rows, fade, native swipe,
+  autoplay, lazy loading, responsive, callbacks, typed refs и custom renderers.
+  Добавлены config/locale, темы/RTL, CSS-рецепт, MIT react-slick и unit/package
+  SSR/browser проверки. Границы Svelte snippets и React instance описаны в README.
 - Tour: controlled/default шаги, target/mask/gap, все 12 размещений и center,
   исходные flip/shift/arrow, keyboard/IME, custom panel/actions/indicators,
   semantic config/locale и живые theme portals. Добавлены CSS-рецепт, MIT-лицензии

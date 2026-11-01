@@ -2,6 +2,7 @@ import type { Snippet } from 'svelte';
 import type { TypographyLocale } from './typography.types';
 import { typographyEnUS, typographyRuRU } from './typography.locale';
 import type { TourLocale } from './tour.types';
+import type { CarouselLocale } from './carousel.types';
 import { tourEnUS, tourRuRU } from './tour.locale';
 import type { UploadLocale } from './upload.types';
 import type { DatePickerLocale } from './date-picker.types';
@@ -37,6 +38,9 @@ export interface Locale {
   tour?: Partial<TourLocale>;
   /** Исходный alias Ant Design; локальный Tour имеет приоритет над tour. */
   Tour?: Partial<TourLocale>;
+  carousel?: Partial<CarouselLocale>;
+  /** Исходный alias Ant Design; локальный Carousel перекрывает carousel. */
+  Carousel?: Partial<CarouselLocale>;
   image?: { preview?: string; };
   tree?: { expand?: string; collapse?: string; };
   upload?: UploadLocale;
@@ -170,6 +174,7 @@ export interface SelectOption<Value extends string | number = string> {
 export const ruRU = {
   typography: typographyRuRU,
   tour: tourRuRU,
+  carousel: { prevSlide: 'Предыдущий слайд', nextSlide: 'Следующий слайд' },
   tree: { expand: 'Развернуть', collapse: 'Свернуть' },
   upload: {
     uploading: 'Загрузка...',
@@ -259,6 +264,7 @@ export const ruRU = {
 export const enUS = {
   typography: typographyEnUS,
   tour: tourEnUS,
+  carousel: { prevSlide: 'Previous slide', nextSlide: 'Next slide' },
   tree: { expand: 'Expand', collapse: 'Collapse' },
   upload: {
     uploading: 'Uploading...',

@@ -1,0 +1,66 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * Carousel: slick track, slides, arrows, dots и duration animations.
+ * Корни ограничены :where(.ant-carousel-css-var).
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+.ant-carousel:where(.ant-carousel-css-var){font-family:var(--ant-font-family);font-size:var(--ant-font-size);box-sizing:border-box;}
+.ant-carousel:where(.ant-carousel-css-var)::before,.ant-carousel:where(.ant-carousel-css-var)::after{box-sizing:border-box;}
+.ant-carousel:where(.ant-carousel-css-var) [class^="ant-carousel"],.ant-carousel:where(.ant-carousel-css-var) [class*=" ant-carousel"]{box-sizing:border-box;}
+.ant-carousel:where(.ant-carousel-css-var) [class^="ant-carousel"]::before,.ant-carousel:where(.ant-carousel-css-var) [class*=" ant-carousel"]::before,.ant-carousel:where(.ant-carousel-css-var) [class^="ant-carousel"]::after,.ant-carousel:where(.ant-carousel-css-var) [class*=" ant-carousel"]::after{box-sizing:border-box;}
+.ant-carousel:where(.ant-carousel-css-var){box-sizing:border-box;margin:0;padding:0;color:var(--ant-color-text);font-size:var(--ant-font-size);line-height:var(--ant-line-height);list-style:none;font-family:var(--ant-font-family);}
+.ant-carousel:where(.ant-carousel-css-var) .slick-slider{position:relative;display:block;box-sizing:border-box;touch-action:pan-y;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-slider .slick-track,.ant-carousel:where(.ant-carousel-css-var) .slick-slider .slick-list{transform:translate3d(0, 0, 0);touch-action:pan-y;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-list{position:relative;display:block;margin:0;padding:0;overflow:hidden;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-list:focus{outline:none;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-list.dragging{cursor:pointer;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-list .slick-slide{pointer-events:none;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-list .slick-slide input.ant-radio-input,.ant-carousel:where(.ant-carousel-css-var) .slick-list .slick-slide input.ant-checkbox-input{visibility:hidden;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-list .slick-slide.slick-active{pointer-events:auto;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-list .slick-slide.slick-active input.ant-radio-input,.ant-carousel:where(.ant-carousel-css-var) .slick-list .slick-slide.slick-active input.ant-checkbox-input{visibility:visible;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-list .slick-slide >div>div{vertical-align:bottom;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-track{position:relative;top:0;inset-inline-start:0;display:block;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-track::before,.ant-carousel:where(.ant-carousel-css-var) .slick-track::after{display:table;content:"";}
+.ant-carousel:where(.ant-carousel-css-var) .slick-track::after{clear:both;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-slide{display:none;float:left;height:100%;min-height:1px;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-slide img{display:block;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-slide.dragging img{pointer-events:none;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-initialized .slick-slide{display:block;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-vertical .slick-slide{display:block;height:auto;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-prev,.ant-carousel:where(.ant-carousel-css-var) .slick-next{position:absolute;top:50%;width:var(--ant-carousel-arrow-size);height:var(--ant-carousel-arrow-size);transform:translateY(-50%);color:#fff;opacity:0.4;background:transparent;padding:0;line-height:0;border:0;outline:none;cursor:pointer;z-index:1;transition:opacity var(--ant-motion-duration-slow);}
+.ant-carousel:where(.ant-carousel-css-var) .slick-prev:hover,.ant-carousel:where(.ant-carousel-css-var) .slick-next:hover,.ant-carousel:where(.ant-carousel-css-var) .slick-prev:focus,.ant-carousel:where(.ant-carousel-css-var) .slick-next:focus{opacity:1;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-prev.slick-disabled,.ant-carousel:where(.ant-carousel-css-var) .slick-next.slick-disabled{pointer-events:none;opacity:0;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-prev::after,.ant-carousel:where(.ant-carousel-css-var) .slick-next::after{box-sizing:border-box;position:absolute;top:calc((var(--ant-carousel-arrow-size) - calc(var(--ant-carousel-arrow-size) / 1.4142135623730951)) / 2);inset-inline-start:calc((var(--ant-carousel-arrow-size) - calc(var(--ant-carousel-arrow-size) / 1.4142135623730951)) / 2);display:inline-block;width:calc(var(--ant-carousel-arrow-size) / 1.4142135623730951);height:calc(var(--ant-carousel-arrow-size) / 1.4142135623730951);border:0 solid currentcolor;border-inline-start-width:2px;border-block-start-width:2px;border-radius:1px;content:"";}
+.ant-carousel:where(.ant-carousel-css-var) .slick-prev{inset-inline-start:var(--ant-carousel-arrow-offset);}
+.ant-carousel:where(.ant-carousel-css-var) .slick-prev::after{transform:rotate(-45deg);}
+.ant-carousel:where(.ant-carousel-css-var) .slick-next{inset-inline-end:var(--ant-carousel-arrow-offset);}
+.ant-carousel:where(.ant-carousel-css-var) .slick-next::after{transform:rotate(135deg);}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots{position:absolute;inset-inline-end:0;bottom:0;inset-inline-start:0;z-index:15;display:flex!important;justify-content:center;padding-inline-start:0;margin:0;list-style:none;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots-bottom{bottom:var(--ant-carousel-dot-offset);}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots-top{top:var(--ant-carousel-dot-offset);bottom:auto;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots li{position:relative;display:inline-block;flex:0 1 auto;box-sizing:content-box;width:var(--ant-carousel-dot-width);height:var(--ant-carousel-dot-height);margin-inline:var(--ant-carousel-dot-gap);padding:0;text-align:center;text-indent:-999px;vertical-align:top;transition:all var(--ant-motion-duration-slow);border-radius:var(--ant-carousel-dot-height);overflow:hidden;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots li::after{display:block;position:absolute;top:0;inset-inline-start:0;width:0;height:var(--ant-carousel-dot-height);content:"";background:transparent;border-radius:var(--ant-carousel-dot-height);opacity:1;outline:none;cursor:pointer;overflow:hidden;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots li button{position:relative;display:block;width:100%;height:var(--ant-carousel-dot-height);padding:0;color:transparent;font-size:0;background:var(--ant-color-bg-container);border:0;border-radius:var(--ant-carousel-dot-height);outline:none;cursor:pointer;opacity:0.2;transition:all var(--ant-motion-duration-slow);overflow:hidden;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots li button:hover{opacity:0.75;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots li button::after{position:absolute;inset:calc(var(--ant-carousel-dot-gap) * -1);content:"";}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots li.slick-active{width:var(--ant-carousel-dot-active-width);position:relative;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots li.slick-active:hover{opacity:1;}
+.ant-carousel:where(.ant-carousel-css-var) .slick-dots li.slick-active::after{background:var(--ant-color-bg-container);animation-name:ant-carousel-dot-animation;animation-duration:var(--dot-duration);animation-timing-function:ease-out;animation-fill-mode:forwards;}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-prev,.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-next{inset-inline-start:50%;margin-block-start:unset;transform:translateX(-50%);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-prev{inset-block-start:var(--ant-carousel-arrow-offset);inset-inline-start:50%;}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-prev::after{transform:rotate(45deg);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-next{inset-block-start:auto;inset-block-end:var(--ant-carousel-arrow-offset);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-next::after{transform:rotate(-135deg);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots{top:50%;bottom:auto;flex-direction:column;width:var(--ant-carousel-dot-height);height:auto;margin:0;transform:translateY(-50%);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots-start{inset-inline-end:auto;inset-inline-start:var(--ant-carousel-dot-offset);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots-end{inset-inline-end:var(--ant-carousel-dot-offset);inset-inline-start:auto;}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots li{width:var(--ant-carousel-dot-height);height:var(--ant-carousel-dot-width);margin:var(--ant-margin-xxs) 0;vertical-align:baseline;}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots li button{width:var(--ant-carousel-dot-height);height:var(--ant-carousel-dot-width);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots li::after{width:var(--ant-carousel-dot-height);height:0;}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots li.slick-active{width:var(--ant-carousel-dot-height);height:var(--ant-carousel-dot-active-width);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots li.slick-active button{width:var(--ant-carousel-dot-height);height:var(--ant-carousel-dot-active-width);}
+.ant-carousel-vertical:where(.ant-carousel-css-var) .slick-dots li.slick-active::after{width:var(--ant-carousel-dot-height);height:var(--ant-carousel-dot-width);animation-name:ant-carousel-dot-vertical-animation;animation-duration:var(--dot-duration);animation-timing-function:ease-out;animation-fill-mode:forwards;}
+.ant-carousel-rtl:where(.ant-carousel-css-var){direction:rtl;}
+@keyframes ant-carousel-dot-animation{from{width:0;}to{width:var(--ant-carousel-dot-active-width);}}
+@keyframes ant-carousel-dot-vertical-animation{from{height:0;}to{height:var(--ant-carousel-dot-active-width);}}
+.ant-carousel-css-var{--ant-carousel-arrow-size:16px;--ant-carousel-arrow-offset:8px;--ant-carousel-dot-width:16px;--ant-carousel-dot-height:3px;--ant-carousel-dot-gap:4px;--ant-carousel-dot-offset:12px;--ant-carousel-dot-width-active:24px;--ant-carousel-dot-active-width:24px;}

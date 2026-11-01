@@ -4022,24 +4022,147 @@
       "id": "carousel",
       "name": "Carousel",
       "category": "data-display",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Самостоятельный перенос Carousel 6.6.8 и react-slick 2.0.0: геометрия/клоны, rows, fade, swipe, lazy loading, autoplay, responsive, callbacks и typed refs.",
       "upstreamPath": "components/carousel",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "Carousel",
+          "local": [
+            "Carousel"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@ant-design/react-slick",
+          "range": "~2.0.0",
+          "referenceVersion": "2.0.0"
+        },
+        {
+          "name": "json2mq",
+          "range": "^0.2.0",
+          "referenceVersion": "0.2.0"
+        },
+        {
+          "name": "throttle-debounce",
+          "range": "^5.0.0",
+          "referenceVersion": "5.0.0"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "L",
+      "evidence": [
+        "src/lib/Carousel.svelte",
+        "src/lib/CarouselSlider.svelte",
+        "src/lib/CarouselContent.svelte",
+        "src/lib/carousel.types.ts",
+        "src/lib/carousel-settings.engine.ts",
+        "src/lib/carousel.engine.ts",
+        "src/lib/carousel-swipe.engine.ts",
+        "src/lib/carousel.model.svelte.ts",
+        "src/lib/carousel.dom.ts",
+        "src/lib/carousel.engine.test.ts",
+        "src/lib/vendor/carousel.css",
+        "tests/package/carousel.ssr.test.ts",
+        "tests/browser/carousel.spec.ts",
+        "tests/browser/fixtures/CarouselFixtures.svelte"
+      ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Исходные track/slide classes, размеры, infinite/finite и RTL",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "src/lib/carousel.engine.test.ts",
+            "tests/package/carousel.ssr.test.ts",
+            "tests/browser/carousel.spec.ts"
+          ],
+          "note": "Симметричные pre/post clones react-slick 2.0.0, finite uneven pages, отдельный targetSlide, center/variable widths и rows/slidesPerRow. Fade принудительно использует один слайд; vertical следует dotPlacement или явному prop, RTL применяется только к horizontal wrapper. Сохранены пустой/одиночный unslick и текущая страница при изменении children."
+        },
+        {
+          "id": "animation-refs",
+          "title": "Переходы, before/afterChange, imperative API и asNavFor",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/carousel.engine.test.ts",
+            "tests/browser/carousel.spec.ts"
+          ],
+          "note": "WaitForAnimate=false по умолчанию; interrupt публикует исходный afterChange, CSS/transform можно отключить. Typed ref предоставляет goTo/next/prev/autoPlay и innerSlider state/methods. AsNavFor предотвращает рекурсивный обход. Next/prev и currentSlide сохраняют внутреннее направление Slick в RTL; focusOnSelect фокусирует прежний DOM current до commit, как React."
+        },
+        {
+          "id": "autoplay-lazy",
+          "title": "Autoplay, pause modes, progress dots и lazy loading",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/carousel.engine.test.ts",
+            "tests/browser/carousel.spec.ts"
+          ],
+          "note": "Интервал autoplaySpeed+50ms, исходные playing/paused/hovered/focused и imperative play/pause. Progress dots используют autoplaySpeed без добавки и не останавливают CSS animation при паузе. Ondemand/anticipated следуют одному исходному пути; progressive загружает обе стороны и останавливается после покрытия clone window. Image load/error и adaptive height сохраняют пользовательские обработчики."
+        },
+        {
+          "id": "input-responsive",
+          "title": "Keyboard, mouse/touch swipe и responsive unslick",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/carousel.engine.test.ts",
+            "tests/browser/carousel.spec.ts"
+          ],
+          "note": "Physical Left/Right, editable input exclusions и accessibility flag. Draggable=false по умолчанию; touch/swipe gates, edge friction, swipeToSlide и исходные navigable indexes. Responsive listeners задаются при mount, применяются по media change и сохраняют диапазоны json2mq; unslick показывает исходные child div без группировки, при возвращении slider создаётся заново."
+        },
+        {
+          "id": "rendering-config",
+          "title": "Arrows/dots snippets, locale, config, темы и source CSS",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/carousel.ssr.test.ts",
+            "tests/browser/carousel.spec.ts"
+          ],
+          "note": "Custom arrows/paging/appendDots получают исходные render props. DotPlacement и deprecated dotPosition; ConfigProvider.carousel class/style относятся к inner slider, rootClassName/id — к wrapper. Locale.carousel и исходный Carousel alias. Light/dark/compact, CSS variables, source arrow spacing и duration keyframes; клавиатурный фокус имеет видимый outline."
+        },
+        {
+          "id": "ssr-lifecycle",
+          "title": "SSR geometry, hydration boundary и cleanup ресурсов",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/carousel.ssr.test.ts",
+            "tests/browser/carousel.spec.ts"
+          ],
+          "note": "SSR использует исходные процентные/variable-width смещения и lazy placeholders без DOM, timers, callbacks или media listeners. При unmount очищаются animation/autoplay/progressive/resize timers, observers, image/touch listeners и refs; сохранённые методы не публикуют поздние события. Изображения проверяются после обновления children даже при прежнем количестве слайдов."
+        },
+        {
+          "id": "svelte-content-refs",
+          "title": "Граница React children/instance и Svelte snippets/typed refs",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/package/carousel.ssr.test.ts",
+            "tests/browser/carousel.spec.ts"
+          ],
+          "note": "Items описывают исходный child div и его content/width/attributes; children принимает один snippet либо массив логических слайдов. Непрозрачный snippet не разбирается и не клонируется как React virtual tree; каждый clone получает собственный экземпляр snippet. Custom renderers применяют переданные props явно. InnerSlider — typed adapter вместо React class; в responsive unslick отсутствует."
+        },
+        {
+          "id": "advanced-source-api",
+          "title": "Произвольный prefix CSS и полный общий token engine",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "note": "DOM prefixCls поддержан, генерация CSS для него и произвольные theme/component tokens остаются общими пробелами. React development diagnostics и устаревшие IE event/CSS fallbacks не воспроизводятся. Исходный RTL reset использует число children до rows grouping; известные особенности upstream не заменяются прикладным поведением. V1-ready не означает полный React API."
         }
       ]
     },

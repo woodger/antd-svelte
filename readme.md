@@ -145,6 +145,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Transfer | Два списка, controlled targetKeys, выделение/Shift, поиск, oneWay, пагинация и custom lists |
 | List / ListItem / ListItemMeta | Исходная пагинация, grid, Meta/actions/extra, loading, renderEmpty и refs |
 | Listy | Группы, sticky headers, измеряемая виртуализация, scrollTo и native scroll |
+| Carousel | Слайды, infinite/finite, rows, fade, swipe, autoplay, lazy loading, responsive и refs |
 | TextArea | Многострочное значение, native constraints/events/selection, формы, размеры, статусы и RTL |
 | InputNumber | Число/null, черновик ввода, min/max, дробный шаг, precision, кнопки и клавиатура, FormData, reset и FormItem |
 | Slider | Одно число, min/max/step, мышь и касание, клавиатура, завершение изменения, подсказка значения, ориентация, reverse/RTL, FormData, reset и FormItem |
@@ -3301,6 +3302,89 @@ React-specific refs/dev warnings остаются вне этого этапа. 
 алгоритм страниц включён с [MIT-лицензией](./src/lib/vendor/LICENSE.rc-pagination).
 Delete icon перенесён из @ant-design/icons-svg 4.6.0 под существующей
 [MIT-лицензией](./src/lib/vendor/LICENSE.ant-design-icons).
+
+## Carousel
+
+Carousel переносит Ant Design 6.6.8 и @ant-design/react-slick 2.0.0 без React
+runtime. Геометрия, клоны и переходы следуют исходному Slick. Публичные Props,
+render snippets и refs описаны в [carousel.types.ts](./src/lib/carousel.types.ts).
+
+```svelte
+<script lang="ts">
+  import { Carousel, type CarouselRef } from 'antd-svelte';
+
+  let carousel = $state<CarouselRef>();
+</script>
+
+<Carousel arrows autoplay={{ dotDuration: true }} bind:ref={carousel}
+  children={['Первый слайд', 'Второй слайд', 'Третий слайд']} />
+<button type="button" onclick={() => carousel?.goTo(0)}>В начало</button>
+```
+
+Каждый элемент массива children — отдельный логический слайд. Один непрозрачный
+snippet тоже образует один слайд: его внутренние DOM-узлы не разбираются.
+Для нескольких snippets и метаданных используйте items: каждый элемент задаёт
+children, class, attributes и width исходного child div. Items имеет приоритет
+над children. Числовой width нужен для variableWidth, включая SSR; строки rows
+и slidesPerRow группируются до создания клонов. Как в Slick, группировка заменяет
+child style своими width/display; произвольный стиль содержимого задавайте внутри
+snippet. Клоны создают независимые экземпляры snippets, поэтому их DOM ids должны
+учитывать возможное повторение.
+
+По умолчанию dots включены, arrows/draggable/autoplay/waitForAnimate выключены,
+infinite включён, speed равен 500ms. Effect="fade" включает fade и один слайд на
+страницу; centerMode устанавливает slidesToScroll=1. DotPlacement принимает
+top/bottom/start/end; deprecated dotPosition также преобразует left/right.
+Start/end включают vertical по умолчанию; явный vertical имеет приоритет.
+Вертикальный режим отключает наследуемое зеркалирование RTL. В горизонтальном
+RTL currentSlide зеркальный, но next/prev сохраняют исходное направление Slick.
+
+InitialSlide задаёт начальную позицию и повторно применяется при изменении этого
+prop или root RTL. Смена количества слайдов сама по себе его не применяет.
+Как в Ant Design, RTL reset считает исходные children до rows grouping.
+BeforeChange/afterChange сохраняют порядок и прерывание перехода; waitForAnimate
+блокирует повторный переход. GoTo/next/prev откладываются на native timer, как
+исходные методы. Ref появляется после mount, nativeElement указывает на внешний
+div. InnerSlider предоставляет типизированные state/list/track и методы Slick;
+это Svelte adapter, а не произвольный React class instance. В responsive unslick
+innerSlider отсутствует, а методы Carousel ничего не переключают.
+
+Autoplay использует интервал autoplaySpeed+50ms; duration dots — autoplaySpeed.
+PauseOnHover/pauseOnDotsHover/pauseOnFocus сохраняют исходные состояния
+playing/paused/hovered/focused. Focus pause относится к самому slick-slide,
+а не к вложенному input. CSS-прогресс dots не останавливается вместе с JS autoplay.
+LazyLoad поддерживает ondemand, anticipated и progressive с исходными индексами
+onLazyLoad, включая клоны. AdaptiveHeight обновляется после измерений и image load.
+Responsive регистрирует media listeners при mount и применяет breakpoint по
+событию matchMedia; исходного принудительного применения при mount нет.
+
+Клавиатура использует physical Left/Right и RTL, пропуская input/textarea/select.
+Мышиный drag требует draggable; touch учитывает swipe/touchMove/touchThreshold,
+edgeFriction и swipeToSlide. Controls — native button с type="button"; они не
+отправляют форму. У arrows, dots и слайдов есть видимый keyboard focus. Отключённая
+стрелка сохраняет исходные class/pointer semantics без добавления native disabled.
+FocusOnSelect фокусирует прежний current DOM slide до commit, как react-slick.
+
+PrevArrow/nextArrow получают class/style/onClick/currentSlide/slideCount;
+customPaging — индекс и onClick, appendDots — default dots snippet и root props.
+Пользовательский renderer явно применяет эти props к своим элементам.
+ConfigProvider.carousel задаёт class/style внутреннего slick-slider; локальные
+значения имеют приоритет. RootClassName/id относятся к внешнему wrapper.
+Locale.carousel и исходный alias Carousel задают имена стрелок; локальный
+Carousel имеет приоритет. Темы light/dark/compact и RTL используют общие CSS variables.
+
+SSR выводит исходную процентную либо variable-width геометрию и lazy placeholders
+без DOM, callbacks, timers или media queries. При уничтожении очищаются timers,
+ResizeObserver, image/focus/touch/media listeners и refs; поздние callbacks не
+вызываются. Полный token engine, генерация CSS для произвольного prefixCls,
+React development diagnostics и устаревшие IE fallbacks остаются вне этапа.
+
+Проверки: [engine](./src/lib/carousel.engine.test.ts),
+[public package SSR](./tests/package/carousel.ssr.test.ts),
+[browser](./tests/browser/carousel.spec.ts) и `?fixture=carousel`.
+[CSS](./src/lib/vendor/carousel.css) воспроизводится рецептом: 58 правил и два
+keyframes. Перенесённая логика снабжена [MIT react-slick](./src/lib/vendor/LICENSE.react-slick),
+стили — существующей [MIT Ant Design](./src/lib/vendor/LICENSE.ant-design).
 
 ## Tour
 

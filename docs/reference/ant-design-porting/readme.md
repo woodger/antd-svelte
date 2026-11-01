@@ -113,7 +113,7 @@ Report детерминированно перезаписывает тольк�
 vendor/avatar.css, avatar-group.css, badge.css, divider.css, flex.css, statistic.css,
 segmented.css, grid.css, layout.css, descriptions.css, card.css, breadcrumb.css,
 space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.css, anchor.css, steps.css, timeline.css, float-button.css, date-picker.css, menu.css, mentions.css, image.css, rate.css, otp.css, border-beam.css, masonry.css, splitter.css, qrcode.css, radio-button.css, calendar.css, transfer.css, pagination.css и list.css.
-Рецепты listy, typography и tour воспроизводят одноимённые vendor CSS.
+Рецепты listy, typography, tour и carousel воспроизводят одноимённые vendor CSS.
 Остальные текущие vendor-файлы
 этим выпуском инструмента не перегенерируются. Новый компонент получает отдельный
 проверенный рецепт: include/exclude для селекторов, replacements, keyframes,

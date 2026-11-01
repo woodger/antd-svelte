@@ -683,6 +683,28 @@ export type {
   ListySemanticProps,
   ListySemanticName
 } from './listy.types';
+export { default as Carousel } from './Carousel.svelte';
+export type {
+  CarouselProps,
+  CarouselRef,
+  CarouselInnerSlider,
+  CarouselState,
+  CarouselItem,
+  CarouselContent,
+  CarouselArrowProps,
+  CarouselDotsProps,
+  CarouselSlickSettings,
+  CarouselResponsiveObject,
+  CarouselEffect,
+  DotPlacement,
+  CarouselLazyLoad,
+  CarouselSwipeDirection,
+  CarouselTouchObject,
+  CarouselAutoplayState,
+  CarouselPlayType,
+  CarouselConfig,
+  CarouselLocale
+} from './carousel.types';
 export { default as Tour } from './Tour.svelte';
 export type {
   TourProps,

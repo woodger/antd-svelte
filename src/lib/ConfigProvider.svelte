@@ -16,6 +16,7 @@
   import type { ListyConfig } from './listy.types';
   import type { TypographyConfig } from './typography.types';
   import type { TourConfig } from './tour.types';
+  import type { CarouselConfig } from './carousel.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -49,6 +50,7 @@
     listy?: ListyConfig;
     typography?: TypographyConfig;
     tour?: TourConfig;
+    carousel?: CarouselConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
@@ -91,6 +93,7 @@
     listy,
     typography,
     tour,
+    carousel,
     virtual,
     renderEmpty,
     rangePicker,
@@ -159,6 +162,9 @@
     get tour() {
       return tour ?? parent.tour;
     },
+    get carousel() {
+      return carousel ?? parent.carousel;
+    },
     get virtual() {
       return virtual ?? parent.virtual;
     },
@@ -223,6 +229,18 @@
         global: { ...parent.locale.global, ...locale?.global },
         tour: { ...parent.locale.tour, ...parent.locale.Tour, ...locale?.tour, ...locale?.Tour },
         Tour: { ...parent.locale.tour, ...parent.locale.Tour, ...locale?.tour, ...locale?.Tour },
+        carousel: {
+          ...parent.locale.carousel,
+          ...parent.locale.Carousel,
+          ...locale?.carousel,
+          ...locale?.Carousel
+        },
+        Carousel: {
+          ...parent.locale.carousel,
+          ...parent.locale.Carousel,
+          ...locale?.carousel,
+          ...locale?.Carousel
+        },
         pagination: { ...parent.locale.pagination, ...locale?.pagination },
         table: { ...parent.locale.table, ...locale?.table },
         inputNumber: { ...parent.locale.inputNumber, ...locale?.inputNumber },
