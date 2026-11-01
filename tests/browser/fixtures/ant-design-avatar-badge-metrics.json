@@ -1,0 +1,1155 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "operation": "render Avatar, Avatar.Group and Badge; read scoped CSS declarations and computed metrics"
+  },
+  "cases": [
+    {
+      "name": "default",
+      "metrics": {
+        "avatar": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "14px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "24px",
+          "height": "24px",
+          "fontSize": "14px"
+        },
+        "large": {
+          "width": "40px",
+          "height": "40px",
+          "fontSize": "14px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "18px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "14px",
+          "borderTopColor": "rgb(255, 255, 255)"
+        },
+        "badge": {
+          "width": "20px",
+          "height": "20px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "20px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "14px",
+          "height": "14px",
+          "fontSize": "12px",
+          "lineHeight": "14px",
+          "borderTopLeftRadius": "7px"
+        },
+        "dot": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 80,
+          "offsets": [
+            0,
+            24,
+            48
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "dark",
+      "metrics": {
+        "avatar": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "14px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(255, 255, 255, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "24px",
+          "height": "24px",
+          "fontSize": "14px"
+        },
+        "large": {
+          "width": "40px",
+          "height": "40px",
+          "fontSize": "14px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "18px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "14px",
+          "borderTopColor": "rgb(20, 20, 20)"
+        },
+        "badge": {
+          "width": "20px",
+          "height": "20px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(220, 68, 70)",
+          "lineHeight": "20px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(20, 20, 20) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "14px",
+          "height": "14px",
+          "fontSize": "12px",
+          "lineHeight": "14px",
+          "borderTopLeftRadius": "7px"
+        },
+        "dot": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(220, 68, 70)",
+          "boxShadow": "rgb(20, 20, 20) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(73, 170, 25)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 80,
+          "offsets": [
+            0,
+            24,
+            48
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(31, 31, 31)"
+        }
+      }
+    },
+    {
+      "name": "compact",
+      "metrics": {
+        "avatar": {
+          "width": "28px",
+          "height": "28px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "21px",
+          "height": "21px",
+          "fontSize": "12px"
+        },
+        "large": {
+          "width": "35px",
+          "height": "35px",
+          "fontSize": "12px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "15px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "28px",
+          "height": "28px",
+          "fontSize": "12px",
+          "borderTopColor": "rgb(255, 255, 255)"
+        },
+        "badge": {
+          "width": "18px",
+          "height": "18px",
+          "fontSize": "10px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "18px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "12px",
+          "height": "12px",
+          "fontSize": "10px",
+          "lineHeight": "12px",
+          "borderTopLeftRadius": "6px"
+        },
+        "dot": {
+          "width": "5px",
+          "height": "5px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "5px",
+          "height": "5px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "4px",
+          "paddingInlineEnd": "4px"
+        },
+        "groupLayout": {
+          "width": 76,
+          "offsets": [
+            0,
+            24,
+            48
+          ]
+        },
+        "popover": {
+          "fontSize": "12px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "dark-compact",
+      "metrics": {
+        "avatar": {
+          "width": "28px",
+          "height": "28px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(255, 255, 255, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "21px",
+          "height": "21px",
+          "fontSize": "12px"
+        },
+        "large": {
+          "width": "35px",
+          "height": "35px",
+          "fontSize": "12px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "15px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "28px",
+          "height": "28px",
+          "fontSize": "12px",
+          "borderTopColor": "rgb(20, 20, 20)"
+        },
+        "badge": {
+          "width": "18px",
+          "height": "18px",
+          "fontSize": "10px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(220, 68, 70)",
+          "lineHeight": "18px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(20, 20, 20) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "12px",
+          "height": "12px",
+          "fontSize": "10px",
+          "lineHeight": "12px",
+          "borderTopLeftRadius": "6px"
+        },
+        "dot": {
+          "width": "5px",
+          "height": "5px",
+          "backgroundColor": "rgb(220, 68, 70)",
+          "boxShadow": "rgb(20, 20, 20) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "5px",
+          "height": "5px",
+          "backgroundColor": "rgb(73, 170, 25)"
+        },
+        "multi": {
+          "paddingInlineStart": "4px",
+          "paddingInlineEnd": "4px"
+        },
+        "groupLayout": {
+          "width": 76,
+          "offsets": [
+            0,
+            24,
+            48
+          ]
+        },
+        "popover": {
+          "fontSize": "12px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(31, 31, 31)"
+        }
+      }
+    },
+    {
+      "name": "custom-global",
+      "metrics": {
+        "avatar": {
+          "width": "44px",
+          "height": "44px",
+          "fontSize": "18px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(69, 103, 137)",
+          "borderTopWidth": "2px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "33px",
+          "height": "33px",
+          "fontSize": "18px"
+        },
+        "large": {
+          "width": "55px",
+          "height": "55px",
+          "fontSize": "18px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "23px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "44px",
+          "height": "44px",
+          "fontSize": "18px",
+          "borderTopColor": "rgb(171, 205, 239)"
+        },
+        "badge": {
+          "width": "22px",
+          "height": "22px",
+          "fontSize": "14px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "22px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(171, 205, 239) 0px 0px 0px 2px"
+        },
+        "smallBadge": {
+          "width": "18px",
+          "height": "18px",
+          "fontSize": "14px",
+          "lineHeight": "18px",
+          "borderTopLeftRadius": "9px"
+        },
+        "dot": {
+          "width": "7px",
+          "height": "7px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(171, 205, 239) 0px 0px 0px 2px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "7px",
+          "height": "7px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 116,
+          "offsets": [
+            0,
+            36,
+            72
+          ]
+        },
+        "popover": {
+          "fontSize": "18px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "own-avatar",
+      "metrics": {
+        "avatar": {
+          "width": "48px",
+          "height": "48px",
+          "fontSize": "21px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "30px",
+          "height": "30px",
+          "fontSize": "16px"
+        },
+        "large": {
+          "width": "60px",
+          "height": "60px",
+          "fontSize": "25px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "27px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "48px",
+          "height": "48px",
+          "fontSize": "21px",
+          "borderTopColor": "rgb(18, 52, 86)"
+        },
+        "badge": {
+          "width": "20px",
+          "height": "20px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "20px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "14px",
+          "height": "14px",
+          "fontSize": "12px",
+          "lineHeight": "14px",
+          "borderTopLeftRadius": "7px"
+        },
+        "dot": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 120,
+          "offsets": [
+            0,
+            36,
+            72
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "own-badge",
+      "metrics": {
+        "avatar": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "14px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "24px",
+          "height": "24px",
+          "fontSize": "14px"
+        },
+        "large": {
+          "width": "40px",
+          "height": "40px",
+          "fontSize": "14px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "18px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "14px",
+          "borderTopColor": "rgb(255, 255, 255)"
+        },
+        "badge": {
+          "width": "28px",
+          "height": "28px",
+          "fontSize": "15px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(160, 17, 204)",
+          "lineHeight": "28px",
+          "fontWeight": "600",
+          "zIndex": "9",
+          "boxShadow": "rgb(254, 220, 186) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "19px",
+          "height": "19px",
+          "fontSize": "13px",
+          "lineHeight": "19px",
+          "borderTopLeftRadius": "9.5px"
+        },
+        "dot": {
+          "width": "9px",
+          "height": "9px",
+          "backgroundColor": "rgb(160, 17, 204)",
+          "boxShadow": "rgb(254, 220, 186) 0px 0px 0px 1px",
+          "zIndex": "9"
+        },
+        "status": {
+          "width": "10px",
+          "height": "10px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "11px",
+          "paddingInlineEnd": "11px"
+        },
+        "groupLayout": {
+          "width": 80,
+          "offsets": [
+            0,
+            24,
+            48
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "numeric-badge-values",
+      "metrics": {
+        "avatar": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "14px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "24px",
+          "height": "24px",
+          "fontSize": "14px"
+        },
+        "large": {
+          "width": "40px",
+          "height": "40px",
+          "fontSize": "14px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "18px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "14px",
+          "borderTopColor": "rgb(255, 255, 255)"
+        },
+        "badge": {
+          "width": "20px",
+          "height": "20px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "20px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "14px",
+          "height": "14px",
+          "fontSize": "12px",
+          "lineHeight": "14px",
+          "borderTopLeftRadius": "7px"
+        },
+        "dot": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 80,
+          "offsets": [
+            0,
+            24,
+            48
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "component-algorithms",
+      "metrics": {
+        "avatar": {
+          "width": "46px",
+          "height": "46px",
+          "fontSize": "19px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "34.5px",
+          "height": "34.5px",
+          "fontSize": "19px"
+        },
+        "large": {
+          "width": "57.5px",
+          "height": "57.5px",
+          "fontSize": "19px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "25px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "46px",
+          "height": "46px",
+          "fontSize": "19px",
+          "borderTopColor": "rgb(255, 255, 255)"
+        },
+        "badge": {
+          "width": "23px",
+          "height": "23px",
+          "fontSize": "14px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(139, 17, 176)",
+          "lineHeight": "23px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "17px",
+          "height": "17px",
+          "fontSize": "14px",
+          "lineHeight": "17px",
+          "borderTopLeftRadius": "8.5px"
+        },
+        "dot": {
+          "width": "7px",
+          "height": "7px",
+          "backgroundColor": "rgb(139, 17, 176)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "7px",
+          "height": "7px",
+          "backgroundColor": "rgb(73, 170, 25)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 122,
+          "offsets": [
+            0,
+            38,
+            76
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "zero-component-values",
+      "metrics": {
+        "avatar": {
+          "width": "2px",
+          "height": "2px",
+          "fontSize": "0px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "2px",
+          "height": "2px",
+          "fontSize": "14px"
+        },
+        "large": {
+          "width": "2px",
+          "height": "2px",
+          "fontSize": "14px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "0px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "2px",
+          "height": "2px",
+          "fontSize": "0px",
+          "borderTopColor": "rgb(255, 255, 255)"
+        },
+        "badge": {
+          "width": "0px",
+          "height": "0px",
+          "fontSize": "0px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "0px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "0px",
+          "height": "0px",
+          "fontSize": "0px",
+          "lineHeight": "0px",
+          "borderTopLeftRadius": "0px"
+        },
+        "dot": {
+          "width": "0px",
+          "height": "0px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "0px",
+          "height": "0px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "0px",
+          "paddingInlineEnd": "0px"
+        },
+        "groupLayout": {
+          "width": 6,
+          "offsets": [
+            0,
+            2,
+            4
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "undefined-component-values",
+      "metrics": {
+        "avatar": {
+          "width": "12.2344px",
+          "height": "27.1406px",
+          "fontSize": "16px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "24px",
+          "height": "24px",
+          "fontSize": "14px"
+        },
+        "large": {
+          "width": "40px",
+          "height": "40px",
+          "fontSize": "14px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "18px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "10.9531px",
+          "height": "24px",
+          "fontSize": "14px",
+          "borderTopColor": "rgb(255, 255, 255)"
+        },
+        "badge": {
+          "width": "6.875px",
+          "height": "12px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "12px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "14px",
+          "height": "14px",
+          "fontSize": "12px",
+          "lineHeight": "14px",
+          "borderTopLeftRadius": "7px"
+        },
+        "dot": {
+          "width": "0px",
+          "height": "0px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 16.859375,
+          "offsets": [
+            0,
+            2.953125,
+            5.90625
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "avatar-aliases",
+      "metrics": {
+        "avatar": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "24px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "2px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "24px",
+          "height": "24px",
+          "fontSize": "24px"
+        },
+        "large": {
+          "width": "40px",
+          "height": "40px",
+          "fontSize": "24px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "18px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "32px",
+          "height": "32px",
+          "fontSize": "24px",
+          "borderTopColor": "rgb(255, 255, 255)"
+        },
+        "badge": {
+          "width": "20px",
+          "height": "20px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "20px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "14px",
+          "height": "14px",
+          "fontSize": "12px",
+          "lineHeight": "14px",
+          "borderTopLeftRadius": "7px"
+        },
+        "dot": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 80,
+          "offsets": [
+            0,
+            24,
+            48
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    },
+    {
+      "name": "custom-prefix",
+      "metrics": {
+        "avatar": {
+          "width": "47px",
+          "height": "47px",
+          "fontSize": "14px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.25)",
+          "borderTopWidth": "1px",
+          "borderTopLeftRadius": "50%"
+        },
+        "small": {
+          "width": "24px",
+          "height": "24px",
+          "fontSize": "14px"
+        },
+        "large": {
+          "width": "40px",
+          "height": "40px",
+          "fontSize": "14px"
+        },
+        "square": {
+          "borderTopLeftRadius": "6px"
+        },
+        "icon": {
+          "fontSize": "18px"
+        },
+        "numeric": {
+          "width": "51px",
+          "height": "51px",
+          "fontSize": "18px"
+        },
+        "group": {
+          "width": "47px",
+          "height": "47px",
+          "fontSize": "14px",
+          "borderTopColor": "rgb(250, 206, 0)"
+        },
+        "badge": {
+          "width": "27px",
+          "height": "27px",
+          "fontSize": "12px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "lineHeight": "27px",
+          "fontWeight": "400",
+          "zIndex": "auto",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px"
+        },
+        "smallBadge": {
+          "width": "14px",
+          "height": "14px",
+          "fontSize": "12px",
+          "lineHeight": "14px",
+          "borderTopLeftRadius": "7px"
+        },
+        "dot": {
+          "width": "8px",
+          "height": "8px",
+          "backgroundColor": "rgb(255, 77, 79)",
+          "boxShadow": "rgb(255, 255, 255) 0px 0px 0px 1px",
+          "zIndex": "auto"
+        },
+        "status": {
+          "width": "6px",
+          "height": "6px",
+          "backgroundColor": "rgb(82, 196, 26)"
+        },
+        "multi": {
+          "paddingInlineStart": "8px",
+          "paddingInlineEnd": "8px"
+        },
+        "groupLayout": {
+          "width": 125,
+          "offsets": [
+            0,
+            39,
+            78
+          ]
+        },
+        "popover": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)"
+        }
+      }
+    }
+  ]
+}

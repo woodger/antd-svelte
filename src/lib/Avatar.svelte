@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { resolveAvatarSize, normalizeAvatarGap } from './avatar.engine';
   import { connectAvatarText } from './avatar.dom';
   import type { AvatarProps } from './avatar.types';
@@ -27,6 +28,7 @@
     style
   }: AvatarProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Avatar');
   let host = $state<HTMLSpanElement>();
   let sourceSrc = $derived(src);
   let sourceSet = $derived(srcSet);
@@ -36,6 +38,7 @@
   let resolvedSize = $derived(resolveAvatarSize(size, config.componentSize));
   let rootStyle = $derived(
     [
+      componentTheme.style && `${componentTheme.style};`,
       typeof resolvedSize === 'number'
         ? `width: ${resolvedSize}px; height: ${resolvedSize}px; font-size: ${icon
           ? resolvedSize / 2
@@ -88,6 +91,7 @@
 
 <span bind:this={host} {id} {title} role={!hidden ? 'img' : undefined} aria-label={ariaLabel ?? (ariaLabelledby ? undefined : alt || undefined)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} aria-hidden={hidden || undefined} dir={config.direction} class={[
     'ant-avatar ant-avatar-css-var',
+    componentTheme.className,
     `ant-avatar-${shape}`,
     resolvedSize === 'small' && 'ant-avatar-sm',
     resolvedSize === 'large' && 'ant-avatar-lg',

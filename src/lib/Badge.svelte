@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { getBadgeState, normalizeBadgeOffset } from './badge.engine';
   import { ruRU } from './types';
   import type { BadgeContext, BadgeProps } from './badge.types';
@@ -24,6 +25,8 @@
     style
   }: BadgeProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Badge');
+  let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
   const generatedId = $props.id();
   let rootId = $derived(id ?? `ant-badge-${generatedId}`);
   let state = $derived(
@@ -53,6 +56,7 @@
 <style>
   .ant-badge { max-width: 100%; min-width: 0; vertical-align: middle; }
   .ant-badge .ant-badge-indicator { pointer-events: none; margin-top: var(--ant-badge-offset-top, 0px); inset-inline-end: var(--ant-badge-offset-inline, 0px); box-shadow: 0 0 0 var(--ant-line-width) var(--ant-color-bg-container); }
+  .ant-badge-source-tokens .ant-badge-indicator { box-shadow: 0 0 0 var(--ant-line-width) var(--ant-color-border-bg); }
   .ant-badge-not-a-wrapper .ant-badge-indicator { position: relative; top: auto; transform: none; display: inline-flex; }
   .ant-badge-status-standalone { margin-top: var(--ant-badge-offset-top, 0px); inset-inline-end: var(--ant-badge-offset-inline, auto); }
   .ant-badge-status-text { margin-inline-start: var(--ant-margin-xs); color: var(--ant-color-text); font-size: var(--ant-font-size); overflow-wrap: anywhere; }
@@ -62,12 +66,14 @@
 
 <span id={rootId} role={ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} title={nativeTitle} class={[
     'ant-badge ant-badge-css-var',
+    componentTheme.className,
+    componentTheme.className && 'ant-badge-source-tokens',
     !children && 'ant-badge-not-a-wrapper',
     state.hasStatus && 'ant-badge-status',
     state.statusStandalone && 'ant-badge-status-standalone',
     config.direction === 'rtl' && 'ant-badge-rtl',
     className
-  ]} {style} style:--ant-badge-offset-top={position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={position ? `${-position[0]}px` : undefined}>
+  ]} style={rootStyle} style:--ant-badge-offset-top={position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={position ? `${-position[0]}px` : undefined}>
   {#if children}{@render children(context)}{/if}
   {#if state.visible}
     {#if state.statusStandalone}<span class={[

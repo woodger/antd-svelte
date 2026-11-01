@@ -127,6 +127,19 @@ Radio подготавливает размеры круга и точки, цв
 для обычного и small-размера. Отдельные component algorithms меняют эти controls
 независимо от глобальной темы.
 
+Avatar рассчитывает container/text/icon sizes и токены группы из текущей темы.
+AvatarGroup, кнопка +N и скрытые аватары используют те же component overrides.
+groupOverlapping/groupBorderColor задают перекрытие и обводку, groupSpace —
+расстояние между строками существующего именованного overflow-списка.
+Числовой size Avatar сохраняет исходные width/height и font-size текста 18px
+или иконки size/2; plain style имеет приоритет.
+
+Badge рассчитывает размеры count/dot/status, font metrics и padding. Тень
+индикатора использует colorBorderBg. Numeric indicatorZIndex/textFontWeight
+получают px, как в исходном hook 6.6.8; строковые значения сохраняются без единиц.
+Это правило проверяется по CSS declarations и computed styles официального UMD.
+Native-only Avatar/Badge сохраняют прежние размеры и оформление.
+
 Явный undefined в ComponentToken не восстанавливает default: соответствующая
 переменная наследуется, как при отсутствии декларации upstream. На CSS-корнях
 это явно перекрывает статические vendor defaults; нулевые значения сохраняются.
@@ -136,6 +149,8 @@ Radio подготавливает размеры круга и точки, цв
 Приоритет semantic/plain style и inline variables ConfigProvider сохраняется.
 Scope-правила появляются в Svelte head уже при SSR и удаляются вместе с provider.
 При ручном svelte/server render нужно включить result.head в HTML страницы.
+Корень панели Popover также получает scope-класс: Avatar aliases не меняют
+оформление самой панели. Полная подготовка Popover ComponentToken ещё в работе.
 
 Footer-кнопки DatePicker/RangePicker и TimePicker/TimeRangePicker используют общий
 Button. Они получают его component tokens и semantic config при фиксированном
@@ -206,6 +221,13 @@ zeroRuntime наследуется; опубликованные стили ко
   styles официального UMD и принадлежат браузерному test contour.
 - [Композиция PickerButton](../../tests/browser/picker-button.spec.ts): четыре
   footer-ветки, Button tokens/config/Wave, scalar locale text и native focus/формы.
+- [Эталон Avatar/Badge](../../src/lib/theme-display-tokens-reference.test.ts):
+  все scoped declarations для 13 настроек официального UMD, включая нули,
+  undefined, component algorithms, numeric units и custom CSS prefix.
+  [Браузерные метрики и композиция](../../tests/browser/avatar-badge-theme.spec.ts),
+  [SSR](../../tests/package/avatar-badge-theme.ssr.test.ts),
+  маршрут `?fixture=avatar-badge-theme`. Проверяются также AvatarGroup/Popover,
+  alias isolation, подгонка текста и сохранение native DOM/focus.
 - [Compact metrics](../../tests/browser/compact-theme.spec.ts),
   [SSR](../../tests/package/compact-theme.ssr.test.ts), маршрут `?fixture=compact-theme`.
   Эталон размеров, шрифтов и padding для 15 сочетаний темы/размера получен из

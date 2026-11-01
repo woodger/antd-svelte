@@ -3,6 +3,7 @@
   import AvatarGroupOverflow from './AvatarGroupOverflow.svelte';
   import { getAvatarGroupItems } from './avatar-group.engine';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { connectFeedbackFocus } from './feedback.dom';
   import { ruRU } from './types';
   import type { AvatarGroupProps } from './avatar-group.types';
@@ -20,6 +21,8 @@
     style
   }: AvatarGroupProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Avatar');
+  let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
   let host = $state<HTMLDivElement>();
   let layout = $derived(getAvatarGroupItems(items, max?.count));
   let strings = $derived({ ...ruRU.avatarGroup, ...config.locale.avatarGroup });
@@ -38,9 +41,10 @@
 
 <div bind:this={host} {id} role="group" aria-label={ariaLabel ?? (ariaLabelledby ? undefined : strings.label)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} class={[
     'ant-avatar-group ant-avatar-css-var',
+    componentTheme.className,
     config.direction === 'rtl' && 'ant-avatar-group-rtl',
     className
-  ]} {style}>
+  ]} style={rootStyle}>
   {#each layout.visible as item (item.key)}<Avatar {...item} alt={item.alt ?? item.label} size={item.size ?? size} shape={item.shape ?? shape}>{#if item.children}{@render item.children()}{:else}{item.text}{/if}</Avatar>{/each}
   {#if layout.hidden.length}<span class="ant-avatar-group-overflow"><AvatarGroupOverflow items={layout.hidden} {size} {shape} {max} /></span>{/if}
 </div>

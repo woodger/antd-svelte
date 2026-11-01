@@ -2,6 +2,7 @@
   import NoCompactStyle from './NoCompactStyle.svelte';
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { connectPopup } from './popup.dom';
   import { connectPopoverTrigger, focusPopover } from './popover.dom';
   import { getTooltipDelay } from './tooltip.engine';
@@ -30,6 +31,7 @@
   }: PopoverProps = $props();
 
   const config = useConfig();
+  const designTokens = useDesignTokenContext();
   const generatedId = $props.id();
   const id = `ant-popover-${generatedId}`;
   const titleId = `${id}-title`;
@@ -345,6 +347,8 @@
     ? ariaLabelledby ?? (hasTitle ? titleId : undefined)
     : undefined} aria-describedby={ariaDescribedby} aria-busy={ariaBusy} class={[
         'ant-popover',
+        designTokens.enabled && designTokens.state.key,
+        designTokens.enabled && designTokens.state.hashId,
         popupClass,
         `ant-popover-placement-${shown ? actualPlacement : placement}`,
         config.direction === 'rtl' && 'ant-popover-rtl'

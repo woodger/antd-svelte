@@ -4873,7 +4873,14 @@ lime, gold. Text принимает строку или Snippet; preset color и
 цветом status. Offset — readonly-пара чисел [x, y]: y задаёт margin-top,
 положительный x сдвигает от логического конца наружу, в RTL направление зеркально.
 Неконечная координата заменяется на 0 независимо от второй координаты.
-Компонент наследует тему и RTL; compact сохраняет собственные размеры Badge.
+Компонент наследует тему и RTL; native compact сохраняет собственные размеры Badge.
+
+Source `theme.components.Badge` применяет исходные размеры count/dot/status,
+шрифты и padding. Defaults пересчитываются из global/компонентных aliases и
+algorithm; тень использует colorBorderBg. Числовые indicatorZIndex/textFontWeight
+сериализуются с px, как в Ant Design 6.6.8; безразмерные значения задаются строками.
+Настройки доступны при SSR, custom cssVar.prefix и реактивных обновлениях.
+Подробности — [контекст темы](./docs/reference/theme-context.md).
 
 Визуальный индикатор скрыт от screen reader. Рядом расположен обычный скрытый
 текст с полным значением, в том числе при `99+` и dot. Children получает
@@ -4935,7 +4942,13 @@ small/medium/large равны 24/32/40 px. Явный size переопреде�
 Неположительное/неконечное число заменяется размером из контекста. Для числового
 размера шрифт текста равен 18 px, иконки — size/2, как в исходнике.
 Class/style относятся к корню; style имеет приоритет над числовыми размерами.
-Темы и RTL наследуются, compact сохраняет собственные размеры Avatar.
+Темы и RTL наследуются, native compact сохраняет собственные размеры Avatar.
+
+Source `theme.components.Avatar` подготавливает container/text/icon sizes по
+исходным правилам, включая отдельный algorithm и aliases. При стандартном
+compactAlgorithm именованные small/medium/large имеют 21/28/35px; числовой size
+сохраняет собственные размеры и font-size. Локальный style остаётся последним.
+Общие токены применяются также к AvatarGroup и аватарам в overflow.
 
 Gap задаёт свободное место по краям текста, по умолчанию 4 px. Конечное
 неотрицательное значение сохраняется, иначе используется 4. Длинный текст
@@ -5021,8 +5034,12 @@ Popover после mount. Escape возвращает фокус кнопке. �
 Подписи группы, списка и кнопки берутся из locale.avatarGroup с частичным
 наследованием. Aria-label/aria-labelledby переопределяют имя группы,
 aria-describedby описывает корень; id/class/style также относятся к корню.
-Группа наследует темы, compact и RTL, сохраняет логическое перекрытие 8 px,
-подбирает обводку под фон темы и переносит аватары на узком экране.
+Группа наследует темы, compact и RTL и переносит аватары на узком экране.
+В native-темах сохраняются логическое перекрытие 8px и обводка под фон темы.
+В source-темах Avatar groupOverlapping/groupBorderColor управляют перекрытием и
+обводкой; groupSpace задаёт расстояние между строками существующего overflow-списка.
+Панель Popover сбрасывает чужие alias overrides на значения provider, а скрытые
+аватары получают собственные Avatar tokens.
 Нативный Popover требует Popover API; собственных анимаций группа не добавляет.
 
 Галерея `/ant-design#avatar-group` показывает добавление, удаление, перестановку,
@@ -6643,7 +6660,7 @@ GlobalToken, Theme, hashId и transformed CSS-variable token. Глобальны
 передаются компонентам уже при SSR; native темы сохраняют прежние цвета,
 а compact metrics описаны выше. Компонентные overrides применяются к Button,
 Input/TextArea (включая Password/Search/OTP), InputNumber, SpaceAddon,
-Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch;
+Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup, Switch, Avatar/AvatarGroup и Badge;
 остальные CSS-потребители ещё переносятся. Примеры и точная граница —
 [в справочнике контекста темы](./docs/reference/theme-context.md).
 

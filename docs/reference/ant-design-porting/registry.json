@@ -4776,7 +4776,21 @@
       "evidence": [
         "readme.md",
         "tests/browser/avatar.spec.ts",
-        "tests/browser/avatar-group.spec.ts"
+        "tests/browser/avatar-group.spec.ts",
+        "src/lib/theme-display-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/Avatar.svelte",
+        "src/lib/AvatarGroup.svelte",
+        "src/lib/Badge.svelte",
+        "src/lib/Popover.svelte",
+        "src/lib/theme-display-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-avatar-badge-tokens-reference.json",
+        "tests/package/avatar-badge-theme.ssr.test.ts",
+        "tests/browser/avatar-badge-theme.spec.ts",
+        "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-avatar-badge-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -4838,6 +4852,29 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Src принимает строку; icon/children Snippet поддерживаются."
+        },
+        {
+          "id": "display-theme-tokens",
+          "title": "Source Avatar/AvatarGroup/Badge token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-display-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/Avatar.svelte",
+            "src/lib/AvatarGroup.svelte",
+            "src/lib/Badge.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/theme-display-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-avatar-badge-tokens-reference.json",
+            "tests/package/avatar-badge-theme.ssr.test.ts",
+            "tests/browser/avatar-badge-theme.spec.ts",
+            "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-avatar-badge-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные defaults/final overrides, alias overrides и component algorithms, нули/undefined, custom CSS prefix/hash и SSR scopes. Размеры Avatar, numeric size priority, group overlap/border/spacing и hidden avatars; Badge count/dot/status/fonts/padding/shadow colorBorderBg. Numeric Badge z-index/font-weight сериализуются с px как upstream; строки сохраняют безразмерные значения. Все CSS declarations и computed metrics закреплены по официальному UMD для 13 настроек. Popover scope сбрасывает чужие Avatar aliases, скрытые аватары повторно получают свои tokens. Native-only темы и существующие Svelte API/a11y/focus сохраняются; полный API остальных families остаётся в работе."
         }
       ]
     },
@@ -4848,7 +4885,7 @@
       "scope": "target",
       "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
       "upstreamPath": "components/badge",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Badge",
@@ -4865,7 +4902,21 @@
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/badge.spec.ts"
+        "tests/browser/badge.spec.ts",
+        "src/lib/theme-display-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/Avatar.svelte",
+        "src/lib/AvatarGroup.svelte",
+        "src/lib/Badge.svelte",
+        "src/lib/Popover.svelte",
+        "src/lib/theme-display-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-avatar-badge-tokens-reference.json",
+        "tests/package/avatar-badge-theme.ssr.test.ts",
+        "tests/browser/avatar-badge-theme.spec.ts",
+        "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-avatar-badge-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -4883,6 +4934,29 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Ограничение зафиксировано в README модуля."
+        },
+        {
+          "id": "display-theme-tokens",
+          "title": "Source Avatar/AvatarGroup/Badge token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-display-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/Avatar.svelte",
+            "src/lib/AvatarGroup.svelte",
+            "src/lib/Badge.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/theme-display-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-avatar-badge-tokens-reference.json",
+            "tests/package/avatar-badge-theme.ssr.test.ts",
+            "tests/browser/avatar-badge-theme.spec.ts",
+            "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-avatar-badge-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные defaults/final overrides, alias overrides и component algorithms, нули/undefined, custom CSS prefix/hash и SSR scopes. Размеры Avatar, numeric size priority, group overlap/border/spacing и hidden avatars; Badge count/dot/status/fonts/padding/shadow colorBorderBg. Numeric Badge z-index/font-weight сериализуются с px как upstream; строки сохраняют безразмерные значения. Все CSS declarations и computed metrics закреплены по официальному UMD для 13 настроек. Popover scope сбрасывает чужие Avatar aliases, скрытые аватары повторно получают свои tokens. Native-only темы и существующие Svelte API/a11y/focus сохраняются; полный API остальных families остаётся в работе."
         }
       ]
     },
@@ -5877,6 +5951,18 @@
             "tests/browser/space-compact.spec.ts"
           ],
           "note": "Без Compact сохраняется существующее поведение; общий подробный аудит семейства ещё не завершён."
+        },
+        {
+          "id": "theme-scope-isolation",
+          "title": "Сброс parent component aliases на корне панели",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popover.svelte",
+            "tests/browser/avatar-badge-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source key/hash на popup root сбрасывают inherited component aliases к provider globals при SSR и runtime. Проверена композиция AvatarGroup; полная подготовка собственных Popover ComponentToken и остальные пробелы семейства не объявляются завершёнными."
         }
       ]
     },
@@ -7607,7 +7693,18 @@
         "tests/package/wave.ssr.test.ts",
         "tests/browser/wave.spec.ts",
         "tests/browser/fixtures/WaveFixtures.svelte",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/theme-display-tokens.engine.ts",
+        "src/lib/Avatar.svelte",
+        "src/lib/AvatarGroup.svelte",
+        "src/lib/Badge.svelte",
+        "src/lib/Popover.svelte",
+        "src/lib/theme-display-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-avatar-badge-tokens-reference.json",
+        "tests/package/avatar-badge-theme.ssr.test.ts",
+        "tests/browser/avatar-badge-theme.spec.ts",
+        "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-avatar-badge-metrics.json"
       ],
       "features": [
         {
@@ -7628,7 +7725,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние CSS и геометрию. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Popover получил scope для сброса родительских aliases."
         },
         {
           "id": "static-design-tokens",
@@ -7756,6 +7853,29 @@
             "docs/reference/wave.md"
           ],
           "note": "Capture listener, пять source triggers и RAF debounce последнего события, disabled/showEffect и полный текущий GlobalToken/native event/hash. Стандартные target/color/geometry/resize, ordinary/quick appear, opacity end и 5000ms deadline; cleanup RAF/timers/observers/DOM при unmount. SSR не создаёт effect DOM, native callbacks/form/focus сохраняются. Config wave records наследуются при отсутствии и заменяются при явном объекте. Восемь CSS rules из закреплённого архива; без React runtime."
+        },
+        {
+          "id": "display-theme-tokens",
+          "title": "Source Avatar/AvatarGroup/Badge token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-display-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/Avatar.svelte",
+            "src/lib/AvatarGroup.svelte",
+            "src/lib/Badge.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/theme-display-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-avatar-badge-tokens-reference.json",
+            "tests/package/avatar-badge-theme.ssr.test.ts",
+            "tests/browser/avatar-badge-theme.spec.ts",
+            "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-avatar-badge-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные defaults/final overrides, alias overrides и component algorithms, нули/undefined, custom CSS prefix/hash и SSR scopes. Размеры Avatar, numeric size priority, group overlap/border/spacing и hidden avatars; Badge count/dot/status/fonts/padding/shadow colorBorderBg. Numeric Badge z-index/font-weight сериализуются с px как upstream; строки сохраняют безразмерные значения. Все CSS declarations и computed metrics закреплены по официальному UMD для 13 настроек. Popover scope сбрасывает чужие Avatar aliases, скрытые аватары повторно получают свои tokens. Native-only темы и существующие Svelte API/a11y/focus сохраняются; полный API остальных families остаётся в работе."
         }
       ]
     },

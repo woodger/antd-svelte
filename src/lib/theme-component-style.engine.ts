@@ -5,12 +5,13 @@ import {
   prepareRadioTokens,
   prepareSwitchTokens
 } from './theme-control-tokens.engine';
+import { prepareAvatarTokens, prepareBadgeTokens } from './theme-display-tokens.engine';
 import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
   from './theme-css-variables.engine';
 import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
-  | 'Radio' | 'Checkbox' | 'Switch';
+  | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -19,7 +20,9 @@ const factories = {
   Addon: () => ({}),
   Radio: prepareRadioTokens,
   Checkbox: () => ({}),
-  Switch: prepareSwitchTokens
+  Switch: prepareSwitchTokens,
+  Avatar: prepareAvatarTokens,
+  Badge: prepareBadgeTokens
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
@@ -28,7 +31,9 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Addon: [],
   Radio: ['radioSize', 'dotSize'],
   Checkbox: [],
-  Switch: []
+  Switch: [],
+  Avatar: [],
+  Badge: []
 };
 const inputMetrics = [
   'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',

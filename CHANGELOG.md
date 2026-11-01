@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme display: исходная подготовка Avatar/AvatarGroup и Badge tokens, размеры,
+  цвета, обводки, group spacing и Badge shadow. Сохранены native-only темы,
+  numeric Avatar size и приоритет style; добавлены SSR, UMD conformance и
+  browser-проверки. Popover scope сбрасывает Avatar aliases на значения provider,
+  скрытые аватары сохраняют собственные tokens.
 - Picker footer: общий Button в DatePicker/RangePicker и TimePicker/TimeRangePicker,
   как исходный PickerButton. Подтверждения получают button config, component tokens,
   Wave и scalar locale text с autoInsertSpace; native формы/disabled/focus и
