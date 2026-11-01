@@ -32,6 +32,7 @@
   import type { TextAreaConfig } from './textarea.types';
   import type { Snippet } from 'svelte';
   import { provideConfig, useConfig, type ConfigContext } from './config-context';
+  import { provideDesignTokens } from './theme-context.svelte';
   import type { ComponentSize, Locale, ThemeConfig } from './types';
   import './styles.css';
 
@@ -131,6 +132,8 @@
   }: ConfigProviderProps = $props();
 
   const parent = useConfig();
+  const themeId = $props.id();
+  const designTokens = provideDesignTokens(() => theme, themeId);
   const config: ConfigContext = {
     get button() {
       return button ?? parent.button;
@@ -244,7 +247,10 @@
       return direction ?? parent.direction;
     },
     get theme() {
-      return { ...parent.theme, ...theme };
+      return designTokens.config;
+    },
+    get themeStyle() {
+      return designTokens.style;
     },
     get locale() {
       return {
@@ -302,12 +308,17 @@
 </script>
 
 <div
-  class={`ant-svelte-theme ${className}`}
+  class={[
+    'ant-svelte-theme',
+    designTokens.enabled && designTokens.state.key,
+    designTokens.enabled && designTokens.state.hashId,
+    className
+  ]}
   data-ant-theme={config.theme.mode}
   data-ant-primary={config.theme.primary}
   data-ant-compact={config.theme.compact || undefined}
   dir={config.direction}
-  {style}
+  style={[designTokens.style, style].filter(Boolean).join(';') || undefined}
 >
   {@render children()}
 </div>

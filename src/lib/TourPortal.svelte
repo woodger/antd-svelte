@@ -27,7 +27,7 @@
   });
 </script>
 
-<div class="ant-svelte-theme" style="display:contents"
+<div class="ant-svelte-theme" style={`display:contents;${config.themeStyle ?? ''}`}
   data-ant-theme={config.theme.mode} data-ant-primary={config.theme.primary}
   data-ant-compact={config.theme.compact || undefined}
   {@attach element => {

@@ -69,11 +69,12 @@ TypeError; это наблюдаемое поведение закреплённ
 
 ## Граница текущего этапа
 
-Статический расчёт не меняет оформление компонентов. ConfigProvider пока
-использует существующие mode/primary/compact, а token/algorithm/components,
-source token context/useToken, CSS-variable wiring и Wave ещё не подключены.
-DesignTokenConfig описывает вход статического расчёта; это отдельный тип от
-действующего [ThemeConfig](../../src/lib/types.ts).
+Статический расчёт не меняет оформление компонентов и не вычисляет component
+overrides. Runtime token/algorithm/components, наследование, useToken и глобальные
+CSS variables описаны в [справочнике контекста темы](theme-context.md).
+Применение всех component tokens к CSS и Wave ещё переносится.
+DesignTokenConfig описывает статические token/algorithm; getDesignToken также
+принимает полный [ThemeConfig](../../src/lib/types.ts), игнорируя runtime поля.
 
 Исходные модули seed/map/alias не зависят от Svelte runtime. Поля textDecoration
 в AliasToken представлены CSS-строками вместо React.CSSProperties.

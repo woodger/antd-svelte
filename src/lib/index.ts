@@ -549,7 +549,14 @@ export type {
   RadioConfig
 } from './radio.types';
 export type { SwitchProps } from './Switch.svelte';
-export { theme } from './theme.engine';
+export { theme } from './theme';
+export type { CSSVariableToken, ThemeTokenResult } from './theme-context.types';
+export type {
+  ComponentTokenMap,
+  ComponentsConfig,
+  GlobalToken,
+  OverrideToken
+} from './theme-component-token.types';
 export type {
   AliasToken,
   DesignTokenConfig,

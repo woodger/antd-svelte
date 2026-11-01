@@ -306,7 +306,8 @@
   {/if}
 </span>
 <div class="ant-svelte-theme" data-ant-theme={config.theme.mode} data-ant-primary={config.theme.primary}
-  data-ant-compact={config.theme.compact || undefined} style="display:contents"
+  data-ant-compact={config.theme.compact || undefined}
+  style={`display:contents;${config.themeStyle ?? ''}`}
   {@attach element => {
     const source = anchor;
     const getter = props.getPopupContainer;

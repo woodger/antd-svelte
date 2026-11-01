@@ -9,6 +9,9 @@
 
 ### Added
 
+- ConfigProvider: source token/algorithm inheritance, реактивный theme.useToken,
+  полные component token types и overrides в GlobalToken, исходные hash/CSS-variable
+  calculations и SSR scope. Применение всех ComponentToken к CSS продолжается.
 - Theme: исходные seed/map/alias algorithms и статический getDesignToken,
   цепочки default/dark/compact, custom mappers и overrides. Полный эталон UMD
   сохранён для 25 настроек; подключение токенов к ConfigProvider продолжается.

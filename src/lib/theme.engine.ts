@@ -1,14 +1,15 @@
 import defaultSeed from './theme-seed';
 import { defaultAlgorithm, darkAlgorithm, compactAlgorithm } from './theme-algorithms.engine';
 import { formatAliasToken } from './theme-alias.engine';
-import type { AliasToken, DesignTokenConfig, MapToken } from './theme-token.types';
+import type { AliasToken, MapToken } from './theme-token.types';
+import type { ThemeConfig } from './types';
 
 /**
  * Статический AliasToken Ant Design 6.6.8. Каждый вызов возвращает новый объект.
  * Копирует seed, выполняет алгоритмы по порядку и затем применяет alias overrides.
  * Пустой массив алгоритмов бросает TypeError, как закреплённый upstream.
  */
-export function getDesignToken(config?: DesignTokenConfig): AliasToken {
+export function getDesignToken(config?: ThemeConfig): AliasToken {
   const algorithm = config?.algorithm;
   const algorithms = algorithm
     ? typeof algorithm === 'function' ? [algorithm] : algorithm
@@ -29,7 +30,7 @@ export function getDesignToken(config?: DesignTokenConfig): AliasToken {
   return formatAliasToken({ ...mapToken!, override });
 }
 
-/** Статическая часть theme API; context/useToken и стили ConfigProvider переносятся отдельно. */
+/** Статическая часть theme API; context/useToken находятся в theme-context.svelte.ts. */
 export const theme = {
   defaultSeed,
   defaultAlgorithm,

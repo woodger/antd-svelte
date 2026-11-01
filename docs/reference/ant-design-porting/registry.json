@@ -6959,7 +6959,7 @@
       "name": "ConfigProvider",
       "category": "other",
       "scope": "target",
-      "scopeReason": "Аудит ConfigProvider продолжается; перенесён статический theme API с исходными seed/map/alias algorithms, native темы и component config сохраняются.",
+      "scopeReason": "Аудит ConfigProvider продолжается; source theme context/useToken и глобальные CSS variables подключены, применение всех component tokens к стилям переносится отдельно. Native темы и component config сохраняются.",
       "upstreamPath": "components/config-provider",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -6992,6 +6992,16 @@
           "name": "@ant-design/fast-color",
           "range": "^3.0.1",
           "referenceVersion": "3.0.1"
+        },
+        {
+          "name": "@ant-design/cssinjs-utils",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
+        },
+        {
+          "name": "@emotion/hash",
+          "range": "^0.8.0",
+          "referenceVersion": "0.8.0"
         }
       ],
       "priority": "unassigned",
@@ -7013,7 +7023,22 @@
         "tools/fixtures/ant-design-theme-reference.json",
         "tests/package/theme-tokens.ssr.test.ts",
         "tests/browser/theme-tokens.spec.ts",
-        "docs/reference/design-tokens.md"
+        "docs/reference/design-tokens.md",
+        "src/lib/theme.ts",
+        "src/lib/theme-config.engine.ts",
+        "src/lib/theme-context.svelte.ts",
+        "src/lib/theme-context.types.ts",
+        "src/lib/theme-component-token.types.ts",
+        "src/lib/theme-derivative.ts",
+        "src/lib/theme-cache.ts",
+        "src/lib/theme-hash.engine.ts",
+        "src/lib/theme-css-variables.engine.ts",
+        "src/lib/theme-config.engine.test.ts",
+        "src/lib/theme-context-reference.test.ts",
+        "tools/fixtures/ant-design-theme-context-reference.json",
+        "tests/package/theme-context.ssr.test.ts",
+        "tests/browser/theme-context.spec.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -7026,11 +7051,15 @@
         },
         {
           "id": "gap-1",
-          "title": "Применение source tokens/algorithms к ConfigProvider и component tokens",
-          "state": "missing",
+          "title": "Применение всех source component tokens и style hooks к DOM/CSS",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Статический расчёт доступен отдельно через theme.getDesignToken. Runtime token/algorithm/components, context/useToken, source CSS-variable wiring, prefix/hash engine и Wave ещё не подключены; native mode/primary/compact сохраняются."
+          "evidence": [
+            "src/lib/theme-config.engine.ts",
+            "src/lib/theme-context.svelte.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction и Wave остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние CSS и геометрию."
         },
         {
           "id": "static-design-tokens",
@@ -7047,7 +7076,31 @@
             "tests/browser/theme-tokens.spec.ts",
             "docs/reference/design-tokens.md"
           ],
-          "note": "DefaultSeed, default/dark/compact algorithms, ordered custom chains, source palettes/metrics/radii/shadows и AliasToken. Override priority и capture, reduce semantics, motion/focus, отсутствие мутации input, новые выходные объекты и source TypeError для пустого массива. Полные map/alias поля и порядок ключей сверяются с официальным UMD в 25 конфигурациях, включая zero/negative/NaN/undefined и CSS color formats. Статический API не меняет оформление ConfigProvider; runtime wiring и useToken остаются отдельным пробелом."
+          "note": "DefaultSeed, default/dark/compact algorithms, ordered custom chains, source palettes/metrics/radii/shadows и AliasToken. Override priority и capture, reduce semantics, motion/focus, отсутствие мутации input, новые выходные объекты и source TypeError для пустого массива. Полные map/alias поля и порядок ключей сверяются с официальным UMD в 25 конфигурациях, включая zero/negative/NaN/undefined и CSS color formats. Статический API не меняет оформление ConfigProvider и не применяет components; полный ThemeConfig принимается, runtime поля игнорируются. Context/useToken описан отдельной feature."
+        },
+        {
+          "id": "runtime-design-tokens",
+          "title": "Source theme context/useToken, inheritance и глобальные CSS variables",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme.ts",
+            "src/lib/theme-config.engine.ts",
+            "src/lib/theme-context.svelte.ts",
+            "src/lib/theme-context.types.ts",
+            "src/lib/theme-component-token.types.ts",
+            "src/lib/theme-derivative.ts",
+            "src/lib/theme-cache.ts",
+            "src/lib/theme-hash.engine.ts",
+            "src/lib/theme-css-variables.engine.ts",
+            "src/lib/theme-config.engine.test.ts",
+            "src/lib/theme-context-reference.test.ts",
+            "tools/fixtures/ant-design-theme-context-reference.json",
+            "tests/package/theme-context.ssr.test.ts",
+            "tests/browser/theme-context.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "token/algorithm/components merge, inherit=false с сохранением hashed/cssVar/zeroRuntime, runtime [] fallback, component algorithm true/false/custom chains, source Theme cache, 70 записей и 679 полей ComponentTokenMap без React, raw/CSS-variable tokens и исходные hashes. Глобальные CSS variables при SSR и реактивных обновлениях, custom CSS prefix bridge, local generated key, явный inline style priority и theme boundaries/portals ColorPicker/Tour. Полные outputs/order/meta сверяются с официальным UMD в 23 сценариях. Компонентные overrides рассчитываются в GlobalToken; полное визуальное применение всех ComponentToken остаётся частичным."
         },
         {
           "id": "compact-spacing",

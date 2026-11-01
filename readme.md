@@ -6602,14 +6602,17 @@ MS=12, XL=32, XXL=48px с padding/margin/content aliases. Каждый provider
 разрешает aliases в собственном scope; явный compact=false восстанавливает
 обычные интервалы, inline CSS variables сохраняют приоритет. Проверки геометрии
 Card/Flex/Divider и вложенных provider — `tests/browser/theme.spec.ts`, `?fixture=theme`.
-Произвольные seed tokens, component tokens и алгоритмы тем оригинального
-ConfigProvider пока не перенесены.
 
-Отдельно доступен статический `theme`: defaultSeed, default/dark/compact algorithms
-и getDesignToken с произвольными seed/alias overrides. Он воспроизводит расчёт
-Ant Design 6.6.8 и работает в SSR; оформление ConfigProvider остаётся прежним.
-Подключение source token context/useToken и component tokens продолжается.
-Примеры, границы и эталонные проверки —
+ConfigProvider также принимает source token/algorithm, наследование и настройки
+hash/CSS variables. `theme.useToken()` возвращает реактивный объект с текущими
+GlobalToken, Theme, hashId и transformed CSS-variable token. Глобальные переменные
+передаются компонентам уже при SSR; существующие native темы без source-настроек
+сохраняют прежнее поведение. Компонентные overrides рассчитываются в GlobalToken;
+их применение ко всем CSS-потребителям ещё переносится. Примеры и точная граница —
+[в справочнике контекста темы](./docs/reference/theme-context.md).
+
+Статические defaultSeed, default/dark/compact algorithms и getDesignToken
+работают без context и DOM. Их source-округления, overrides и ограничения описаны
 [в справочнике design tokens](./docs/reference/design-tokens.md).
 
 По умолчанию используется `ruRU`; `enUS` также экспортируется. `locale` принимает

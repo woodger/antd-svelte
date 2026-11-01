@@ -1,4 +1,6 @@
 import type { Snippet } from 'svelte';
+import type { DesignTokenConfig } from './theme-token.types';
+import type { ComponentsConfig } from './theme-component-token.types';
 import type { TypographyLocale } from './typography.types';
 import type { ColorPickerLocale } from './color-picker.types';
 import { colorPickerEnUS, colorPickerRuRU } from './color-picker.locale';
@@ -23,14 +25,28 @@ export type RenderEmptyContent = string | number | boolean | null | undefined | 
 /** Producer callback заменяет ReactNode; undefined/null/false/0 используют fallback List. */
 export type RenderEmptyHandler = (componentName?: RenderEmptyComponent) => RenderEmptyContent;
 
-/**
- * Поддерживаемая палитра, светлая/тёмная тема и compact density; не общий token engine Ant Design.
- */
-export interface ThemeConfig {
+/** Source tokens/algorithms с наследованием; mode/primary/compact сохраняют native theme API. */
+export interface ThemeConfig extends DesignTokenConfig {
   mode?: 'light' | 'dark';
   primary?: 'blue' | 'purple' | 'green';
   compact?: boolean;
+  /**
+   * Компонентные overrides в GlobalToken; algorithm=true пересчитывает зависимые aliases.
+   * Применение ComponentToken к стилям компонентов пока переносится отдельно.
+   */
+  components?: ComponentsConfig;
+  /** false сбрасывает родительские tokens/algorithm/components; hashed/cssVar/zeroRuntime наследуются. */
+  inherit?: boolean;
+  /** По умолчанию true; false возвращает пустой hashId. */
+  hashed?: boolean;
+  /** Prefix по умолчанию ant; key генерируется для каждого provider с локальной theme. */
+  cssVar?: { prefix?: string; key?: string; };
+  /** Компоненты используют опубликованный CSS; настройка наследуется вместе с source theme. */
+  zeroRuntime?: boolean;
 }
+
+export type ResolvedThemeConfig = ThemeConfig
+  & Required<Pick<ThemeConfig, 'mode' | 'primary' | 'compact'>>;
 
 export interface Locale {
   colorPicker?: Partial<ColorPickerLocale>;

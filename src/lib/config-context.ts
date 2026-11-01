@@ -30,7 +30,7 @@ import type { InputSearchConfig } from './input-search.types';
 import type { InputOTPConfig } from './input-otp.types';
 import type { TextAreaConfig } from './textarea.types';
 import { getContext, setContext } from 'svelte';
-import { ruRU, type ComponentSize, type Locale, type ThemeConfig } from './types';
+import { ruRU, type ComponentSize, type Locale, type ResolvedThemeConfig } from './types';
 
 export interface ConfigContext {
   readonly button?: ButtonConfig;
@@ -71,7 +71,9 @@ export interface ConfigContext {
   readonly explicitComponentSize?: ComponentSize;
   readonly componentDisabled: boolean;
   readonly direction: 'ltr' | 'rtl';
-  readonly theme: Required<ThemeConfig>;
+  readonly theme: ResolvedThemeConfig;
+  /** Source token CSS для дополнительных theme boundaries и порталов. */
+  readonly themeStyle?: string;
   readonly locale: Locale;
 }
 

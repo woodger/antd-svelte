@@ -6,5 +6,6 @@
 - [Реестр переноса и CSS-инструменты](reference/ant-design-porting/readme.md).
 - [Сводка покрытия](reference/ant-design-porting/status.md).
 - [Статический расчёт design tokens](reference/design-tokens.md).
+- [ConfigProvider и реактивный контекст темы](reference/theme-context.md).
 - [Политики разработки](policy/index.md).
 - [История изменений](../CHANGELOG.md).
