@@ -2,6 +2,7 @@
   import Dropdown from './Dropdown.svelte';
   import Icon from './Icon.svelte';
   import { breadcrumbAttributes } from './breadcrumb.engine';
+  import { focusPopover } from './popover.dom';
   import type { breadcrumbEntries } from './breadcrumb.engine';
   import type { BreadcrumbContent, BreadcrumbProps, BreadcrumbSlots } from './breadcrumb.types';
   import type { DropdownMenuProps } from './dropdown.types';
@@ -37,6 +38,8 @@
 <style>
   button { appearance: none; margin-block: 0; border: 0; color: inherit; background: transparent; font: inherit; cursor: pointer; }
   button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
+  /* Обёртка Svelte Dropdown сохраняет базовую линию соседних пунктов. */
+  .ant-breadcrumb-item > :global(.ant-dropdown-trigger) { vertical-align: baseline; }
   .breadcrumb-arrow { display: inline-flex; margin-inline-start: var(--ant-margin-xxs); font-size: var(--ant-font-size-icon); }
 </style>
 
@@ -49,7 +52,11 @@
 {/snippet}
 {#snippet link(overlay: boolean)}
   {#if itemRender}
-    {#if overlay}<span class="ant-breadcrumb-overlay-link">{@render itemRender(entry.item, params, routes, entry.paths)}{@render arrow()}</span>
+    {#if overlay}<span class="ant-breadcrumb-overlay-link" tabindex="-1"
+      onfocus={event => {
+        // Dropdown возвращает фокус overlay span; Tab должен вести прямо в native itemRender.
+        focusPopover(event.currentTarget);
+      }}>{@render itemRender(entry.item, params, routes, entry.paths)}{@render arrow()}</span>
     {:else}{@render itemRender(entry.item, params, routes, entry.paths)}{/if}
   {:else if entry.href !== undefined}
     <a {...attributes} href={entry.href} class={[

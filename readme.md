@@ -886,6 +886,14 @@ Svelte Dropdown с placement=bottom по умолчанию; dropdownIcon=null/u
 адаптация прежнего плоского Dropdown; произвольные React Menu options ещё не
 поддержаны. Тема/compact/RTL наследуются через ConfigProvider.
 
+Обёртка Dropdown внутри пункта Breadcrumb сохраняет базовую линию текста
+соседних links/span/button, в том числе при переносе цепочки и custom itemRender.
+Это локальное правило Breadcrumb; шрифты и выравнивание отдельного Dropdown
+не меняются.
+В menu с custom itemRender внешняя обёртка не добавляет остановку Tab;
+возврат фокуса после Escape направляет его в первый доступный нативный control
+этого пункта.
+
 Галерея — `/ant-design#breadcrumb`, фикстура — `?fixture=breadcrumb`.
 Unit/SSR/Chromium покрывают маршруты, параметры, разделители, шаблон, стили,
 меню, отмену перехода и production hydration. Рецепт breadcrumb извлекает 21

@@ -1,7 +1,5 @@
 <script lang="ts">
-  import { Breadcrumb } from 'antd-svelte';
-  import { ConfigProvider } from 'antd-svelte';
-  import type { BreadcrumbItem } from 'antd-svelte';
+  import { Breadcrumb, ConfigProvider, Dropdown, theme, type BreadcrumbItem } from 'antd-svelte';
 
   let id = $state('42');
   let custom = $state(false);
@@ -10,6 +8,10 @@
   let dark = $state(false);
   let compact = $state(false);
   let mounted = $state(true);
+  let large = $state(false);
+  let source = $state(false);
+  let actionMenu = $state(false);
+  let narrow = $state(false);
   let actions = $state(0);
   let submissions = $state(0);
   let events = $state<string[]>([]);
@@ -45,6 +47,20 @@
     ...separators ? [] : [{ key: 'separator', type: 'separator' as const, separator: ':' }],
     { key: 'current', title: 'Current', onClick: () => { actions++; } }
   ]);
+  let alignmentItems = $derived<BreadcrumbItem[]>([
+    { key: 'workspace', path: 'workspace', title: 'Рабочее пространство' },
+    {
+      key: 'svelte',
+      path: actionMenu ? undefined : 'svelte',
+      title: 'svelte',
+      menu: { items: [
+        { key: 'components', title: 'Компоненты' },
+        { key: 'themes', title: 'Темы' }
+      ] },
+      dropdownProps: { trigger: 'click', 'aria-label': 'Aligned Breadcrumb sections' }
+    },
+    { key: 'library', title: 'Библиотека' }
+  ]);
 </script>
 
 {#snippet renderItem(item: BreadcrumbItem, params: Record<string, unknown>, routes: readonly BreadcrumbItem[], paths: readonly string[])}
@@ -62,7 +78,14 @@
   <label><input type="checkbox" bind:checked={dark} /> Dark Breadcrumb</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact Breadcrumb</label>
   <label><input type="checkbox" bind:checked={mounted} /> Mount Breadcrumb</label>
-  <ConfigProvider theme={{ mode: dark ? 'dark' : 'light', compact }}>
+  <label><input type="checkbox" bind:checked={large} /> Large Breadcrumb context</label>
+  <label><input type="checkbox" bind:checked={source} /> Source Breadcrumb theme</label>
+  <label><input type="checkbox" bind:checked={actionMenu} /> Breadcrumb menu without href</label>
+  <label><input type="checkbox" bind:checked={narrow} /> Narrow Breadcrumb</label>
+  <ConfigProvider componentSize={large ? 'large' : undefined} theme={source ? {
+    algorithm: [dark ? theme.darkAlgorithm : theme.defaultAlgorithm,
+      ...compact ? [theme.compactAlgorithm] : []]
+  } : { mode: dark ? 'dark' : 'light', compact }}>
     <form
       onsubmit={event => {
         event.preventDefault();
@@ -80,8 +103,14 @@
         styles={{ root: 'padding:1px', item: 'padding:2px', separator: 'padding:3px' }}
         style="padding:4px"
       />{/if}
+      <div style:width={narrow ? custom ? '280px' : '200px' : '800px'}>
+        <Breadcrumb id="alignment-breadcrumb" aria-label="Aligned breadcrumb"
+          items={alignmentItems} itemRender={custom ? renderItem : undefined} />
+      </div>
       <button type="button">After Breadcrumb</button>
     </form>
+    <Dropdown menu={{ items: [{ key: 'external', label: 'External entry' }] }}
+      class="standalone-dropdown"><button type="button">Standalone Dropdown</button></Dropdown>
   </ConfigProvider>
   <output aria-label="Breadcrumb events">{JSON.stringify(events)}</output>
   <output aria-label="Breadcrumb actions">{actions}</output>

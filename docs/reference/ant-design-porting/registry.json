@@ -1435,7 +1435,9 @@
         "src/lib/breadcrumb.test.ts",
         "src/lib/breadcrumb.ssr.test.ts",
         "tests/browser/breadcrumb.spec.ts",
-        "integration:breadcrumb"
+        "integration:breadcrumb",
+        "src/lib/BreadcrumbEntry.svelte",
+        "tests/browser/breadcrumb-alignment.spec.ts"
       ],
       "features": [
         {
@@ -1457,9 +1459,10 @@
           "requiredForV1": true,
           "evidence": [
             "src/lib/breadcrumb.ssr.test.ts",
-            "tests/browser/breadcrumb.spec.ts"
+            "tests/browser/breadcrumb.spec.ts",
+            "tests/browser/breadcrumb-alignment.spec.ts"
           ],
-          "note": "React children sugar заменён items. ItemRender — Svelte Snippet с route/params/routes/paths; непрозрачный пустой Snippet сохраняет li. Item.style не применяется в исходнике 6.6.8; styles.item используется на li."
+          "note": "React children sugar заменён items. ItemRender — Svelte Snippet с route/params/routes/paths; непрозрачный пустой Snippet сохраняет li. Item.style не применяется в исходнике 6.6.8; styles.item используется на li. Обёртка Dropdown выровнена по baseline только внутри пункта Breadcrumb; Range-метрики проверяют текст в native/source темах, RTL, переносе, ссылках, кнопках и custom itemRender без смены шрифтов."
         },
         {
           "id": "menu",
@@ -1470,9 +1473,10 @@
             "src/lib/breadcrumb.ssr.test.ts",
             "src/lib/dropdown.ssr.test.ts",
             "tests/browser/breadcrumb.spec.ts",
-            "tests/browser/dropdown.spec.ts"
+            "tests/browser/dropdown.spec.ts",
+            "tests/browser/breadcrumb-alignment.spec.ts"
           ],
-          "note": "Dropdown получает нативный href/target/rel вместо вложенного interactive label. Нативные кнопки вместо clickable span без href. Поддержан текущий Svelte Dropdown; произвольный React Menu API остаётся в полном объёме."
+          "note": "Dropdown получает нативный href/target/rel вместо вложенного interactive label. Нативные кнопки вместо clickable span без href. Поддержан текущий Svelte Dropdown; произвольный React Menu API остаётся в полном объёме. Custom itemRender перенаправляет программный возврат фокуса из overlay span в первый доступный нативный control без дополнительной остановки Tab; общий Dropdown не меняется."
         },
         {
           "id": "global-config",
