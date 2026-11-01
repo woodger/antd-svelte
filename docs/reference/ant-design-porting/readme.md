@@ -61,6 +61,7 @@ V1-ready остаётся оценкой первого объёма, а не п
 вместе с сопоставлением экспортов Avatar и AvatarGroup. Аналогично сгруппированы
 Checkbox.Group, Radio.Group, Tag.CheckableTag и Form.Item. Фабрики createForm,
 createMessage/createNotification учитываются в API, но не прибавляют компоненты.
+Статический theme API учтён в семействе ConfigProvider и не добавляет Svelte-компонент.
 
 Состав каталога 6.6.8 закреплён в данных: 73 позиции, включая Icon, Util и
 deprecated List; внешние Pro Components не включены. Экспорты Row/Col относятся

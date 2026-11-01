@@ -9,6 +9,9 @@
 
 ### Added
 
+- Theme: исходные seed/map/alias algorithms и статический getDesignToken,
+  цепочки default/dark/compact, custom mappers и overrides. Полный эталон UMD
+  сохранён для 25 настроек; подключение токенов к ConfigProvider продолжается.
 - Switch: value/defaultValue, source click/change/arrow events, semantic config,
   refs и focus aliases. Native формы/reset/onclick сохранены; CSS-рецепт switch
   побайтно воспроизводит прежние 47 правил из Ant Design 6.6.8.

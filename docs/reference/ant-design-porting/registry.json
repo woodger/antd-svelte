@@ -6959,7 +6959,7 @@
       "name": "ConfigProvider",
       "category": "other",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Аудит ConfigProvider продолжается; перенесён статический theme API с исходными seed/map/alias algorithms, native темы и component config сохраняются.",
       "upstreamPath": "components/config-provider",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -6968,15 +6968,52 @@
           "local": [
             "ConfigProvider"
           ]
+        },
+        {
+          "upstream": "theme",
+          "local": [
+            "theme"
+          ]
         }
       ],
       "dependencies": [],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@ant-design/colors",
+          "range": "^8.0.1",
+          "referenceVersion": "8.0.1"
+        },
+        {
+          "name": "@ant-design/cssinjs",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
+        },
+        {
+          "name": "@ant-design/fast-color",
+          "range": "^3.0.1",
+          "referenceVersion": "3.0.1"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/config-provider.spec.ts"
+        "tests/browser/config-provider.spec.ts",
+        "src/lib/theme.engine.ts",
+        "src/lib/theme-token.types.ts",
+        "src/lib/theme-seed.ts",
+        "src/lib/theme-algorithms.engine.ts",
+        "src/lib/theme-alias.engine.ts",
+        "src/lib/theme-color.engine.ts",
+        "src/lib/theme-metrics.engine.ts",
+        "src/lib/theme-palette.engine.ts",
+        "src/lib/theme-palettes.ts",
+        "src/lib/theme.engine.test.ts",
+        "src/lib/theme-reference.test.ts",
+        "tools/fixtures/ant-design-theme-reference.json",
+        "tests/package/theme-tokens.ssr.test.ts",
+        "tests/browser/theme-tokens.spec.ts",
+        "docs/reference/design-tokens.md"
       ],
       "features": [
         {
@@ -6989,11 +7026,28 @@
         },
         {
           "id": "gap-1",
-          "title": "Произвольные токены и алгоритмы тем",
+          "title": "Применение source tokens/algorithms к ConfigProvider и component tokens",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "note": "Статический расчёт доступен отдельно через theme.getDesignToken. Runtime token/algorithm/components, context/useToken, source CSS-variable wiring, prefix/hash engine и Wave ещё не подключены; native mode/primary/compact сохраняются."
+        },
+        {
+          "id": "static-design-tokens",
+          "title": "Статические seed/map/alias algorithms и theme.getDesignToken",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme.engine.ts",
+            "src/lib/theme-token.types.ts",
+            "src/lib/theme.engine.test.ts",
+            "src/lib/theme-reference.test.ts",
+            "tools/fixtures/ant-design-theme-reference.json",
+            "tests/package/theme-tokens.ssr.test.ts",
+            "tests/browser/theme-tokens.spec.ts",
+            "docs/reference/design-tokens.md"
+          ],
+          "note": "DefaultSeed, default/dark/compact algorithms, ordered custom chains, source palettes/metrics/radii/shadows и AliasToken. Override priority и capture, reduce semantics, motion/focus, отсутствие мутации input, новые выходные объекты и source TypeError для пустого массива. Полные map/alias поля и порядок ключей сверяются с официальным UMD в 25 конфигурациях, включая zero/negative/NaN/undefined и CSS color formats. Статический API не меняет оформление ConfigProvider; runtime wiring и useToken остаются отдельным пробелом."
         },
         {
           "id": "compact-spacing",

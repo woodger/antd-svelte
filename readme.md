@@ -6601,9 +6601,16 @@ Spacing использует size map 6.6.8: compact size/SM=8, XS/XXS=4, LG/MD=
 MS=12, XL=32, XXL=48px с padding/margin/content aliases. Каждый provider
 разрешает aliases в собственном scope; явный compact=false восстанавливает
 обычные интервалы, inline CSS variables сохраняют приоритет. Проверки геометрии
-Card/Flex/Divider и вложенных provider — `e2e/theme.spec.ts`, `?fixture=theme`.
+Card/Flex/Divider и вложенных provider — `tests/browser/theme.spec.ts`, `?fixture=theme`.
 Произвольные seed tokens, component tokens и алгоритмы тем оригинального
 ConfigProvider пока не перенесены.
+
+Отдельно доступен статический `theme`: defaultSeed, default/dark/compact algorithms
+и getDesignToken с произвольными seed/alias overrides. Он воспроизводит расчёт
+Ant Design 6.6.8 и работает в SSR; оформление ConfigProvider остаётся прежним.
+Подключение source token context/useToken и component tokens продолжается.
+Примеры, границы и эталонные проверки —
+[в справочнике design tokens](./docs/reference/design-tokens.md).
 
 По умолчанию используется `ruRU`; `enUS` также экспортируется. `locale` принимает
 частичное переопределение подписей кнопок и служебных сообщений. Вложенная группа
@@ -7005,6 +7012,13 @@ rg --files --hidden --no-ignore .upstream/ant-design/components/avatar
 описанного ниже; checkout дополняет его исходниками и тестами.
 
 ## Источник и лицензия
+
+Статический theme API использует algorithms/alias Ant Design 6.6.8,
+палитры @ant-design/colors 8.0.1, семантику getComputedToken из cssinjs 2.1.2
+и FastColor 3.0.1. Сохранены лицензии
+[colors](./src/lib/vendor/LICENSE.ant-design-colors),
+[cssinjs](./src/lib/vendor/LICENSE.cssinjs) и
+[FastColor](./src/lib/vendor/LICENSE.fast-color).
 
 Стили взяты из `dist/antd.css` официального
 [пакета antd 6.6.8](https://registry.npmjs.org/antd/-/antd-6.6.8.tgz).

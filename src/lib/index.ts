@@ -549,6 +549,16 @@ export type {
   RadioConfig
 } from './radio.types';
 export type { SwitchProps } from './Switch.svelte';
+export { theme } from './theme.engine';
+export type {
+  AliasToken,
+  DesignTokenConfig,
+  MapToken,
+  MappingAlgorithm,
+  PresetColorKey,
+  PresetColorType,
+  SeedToken
+} from './theme-token.types';
 export type {
   SwitchSize,
   SwitchContent,

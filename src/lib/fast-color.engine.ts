@@ -124,6 +124,25 @@ export class FastColor {
     return this.value ??= this.getMax() / 255;
   }
 
+  // Source darken/lighten передаёт HSV saturation в HSL-конструктор; сохраняем эту арифметику.
+  darken(amount = 10): this {
+    const h = this.getHue();
+    const s = this.getHSVSaturation();
+    let l = this.getLightness() - amount / 100;
+    if (l < 0) l = 0;
+
+    return new (this.constructor as typeof FastColor)({ h, s, l, a: this.a }) as this;
+  }
+
+  lighten(amount = 10): this {
+    const h = this.getHue();
+    const s = this.getHSVSaturation();
+    let l = this.getLightness() + amount / 100;
+    if (l > 1) l = 1;
+
+    return new (this.constructor as typeof FastColor)({ h, s, l, a: this.a }) as this;
+  }
+
   mix(input: FastColorInput, amount = 50): this {
     const color = new (this.constructor as typeof FastColor)(input);
     const ratio = amount / 100;
