@@ -7,5 +7,6 @@
 - [Сводка покрытия](reference/ant-design-porting/status.md).
 - [Статический расчёт design tokens](reference/design-tokens.md).
 - [ConfigProvider и реактивный контекст темы](reference/theme-context.md).
+- [Wave: настройки, targets и lifecycle](reference/wave.md).
 - [Политики разработки](policy/index.md).
 - [История изменений](../CHANGELOG.md).

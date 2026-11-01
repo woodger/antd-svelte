@@ -2,6 +2,7 @@
   import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useWave } from './wave.svelte';
   import { useForm, useFormField } from './form-context';
   import { useRadioGroup, useRadioOptionType } from './radio-context';
   import { connectRadio, syncRadioPeers } from './radio.dom';
@@ -18,6 +19,7 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Radio');
+  const wave = useWave('Radio', () => resolvedDisabled);
   const form = useForm();
   const field = useFormField();
   const group = useRadioGroup();
@@ -200,12 +202,13 @@
     props.rootClassName,
     contextClasses?.root,
     localClasses?.root
-  ]} style={rootStyle} title={props.title}
+  ]} style={rootStyle} title={props.title} {@attach wave}
   onclick={clickLock.label}
   onmouseenter={event => props.onMouseEnter?.(event)}
   onmouseleave={event => props.onMouseLeave?.(event)}>
   <span bind:this={nativeElement} class={[
       prefix,
+      !button && 'ant-wave-target',
       resolvedChecked && `${prefix}-checked`,
       resolvedDisabled && `${prefix}-disabled`,
       contextClasses?.icon,

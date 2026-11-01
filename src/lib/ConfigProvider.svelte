@@ -23,6 +23,7 @@
   import type { RadioConfig } from './radio.types';
   import type { CheckboxConfig } from './checkbox.types';
   import type { SwitchConfig } from './switch.types';
+  import type { WaveConfig } from './wave.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -65,6 +66,7 @@
     radio?: RadioConfig;
     checkbox?: CheckboxConfig;
     switch?: SwitchConfig;
+    wave?: WaveConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
@@ -114,6 +116,7 @@
     radio,
     checkbox,
     switch: switchConfig,
+    wave,
     virtual,
     renderEmpty,
     rangePicker,
@@ -204,6 +207,9 @@
     },
     get switch() {
       return switchConfig ?? parent.switch;
+    },
+    get wave() {
+      return wave ?? parent.wave;
     },
     get virtual() {
       return virtual ?? parent.virtual;

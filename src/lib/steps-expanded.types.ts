@@ -50,4 +50,6 @@ export interface StepItemViewProps {
   ellipsis?: boolean;
   sourceKey?: string | number;
   onChoose?: (event: MouseEvent) => void;
+  waveDisabled?: boolean;
+  waveColorSource?: 'color' | null;
 }

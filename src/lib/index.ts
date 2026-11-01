@@ -610,6 +610,14 @@ export type { SelectProps, SelectSearchConfig } from './select.types';
 export type { FormProps } from './form.types';
 export type { ModalProps } from './Modal.svelte';
 export type { ConfigProviderProps } from './ConfigProvider.svelte';
+export type {
+  WaveConfig,
+  WaveTriggerType,
+  WaveColorSource,
+  WaveComponent,
+  WaveEffectInfo,
+  ShowWaveEffect
+} from './wave.types';
 export type { FormItemProps } from './FormItem.svelte';
 export type {
   ValidationRule,

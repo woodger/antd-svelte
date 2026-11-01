@@ -3,6 +3,7 @@
   import Icon from './Icon.svelte';
   import StepIcon from './StepIcon.svelte';
   import { setStepsIcon } from './steps-icon-context';
+  import { useWave } from './wave.svelte';
   import { stepsDataHasContent } from './steps-data.engine';
   import type { StepsDataContent } from './steps-data.engine';
   import type { StepItemViewProps } from './steps-expanded.types';
@@ -26,8 +27,11 @@
     progressDotRender,
     ellipsis,
     sourceKey,
-    onChoose
+    onChoose,
+    waveDisabled,
+    waveColorSource
   }: StepItemViewProps = $props();
+  const wave = useWave('Steps', () => blocked || !!waveDisabled, () => waveColorSource);
   const style = (root:
     string
     | undefined, local:
@@ -44,7 +48,7 @@
   let progress = $derived(!dot && !item.icon && status === 'process' && percent !== undefined);
   setStepsIcon({
     get className() {
-      return [classes.itemIcon, localClasses.icon].filter(Boolean).join(' ');
+      return ['ant-wave-target', classes.itemIcon, localClasses.icon].filter(Boolean).join(' ');
     },
     get style() {
       return style(slots.itemIcon, localStyles.icon);
@@ -147,7 +151,7 @@
   </div>
 {/snippet}
 
-<li class={[
+<li {@attach wave} class={[
     'ant-steps-item',
     `ant-steps-item-${status}`,
     active && 'ant-steps-item-active',

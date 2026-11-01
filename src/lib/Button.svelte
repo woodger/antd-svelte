@@ -6,6 +6,7 @@
   import { onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useWave } from './wave.svelte';
   import { useCompact } from './space-compact-context';
   import { useButtonGroup } from './button-group-context';
   import { compactClasses } from './space-compact.engine';
@@ -54,6 +55,7 @@
   > = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Button');
+  const wave = useWave('Button', () => innerLoading);
   const compact = useCompact();
   const group = useButtonGroup();
   const form = useForm();
@@ -216,6 +218,8 @@
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{typeof node === 'string' ? buttonText(node, spacing) : node ?? ''}{/if}
 {/snippet}
 <svelte:element this={href !== undefined ? 'a' : 'button'} {...attributes} bind:this={nativeElement}
+  {@attach href === undefined && appearance.variant !== 'text' && appearance.variant !== 'link'
+    ? wave : undefined}
   type={href === undefined ? htmlType : undefined} href={href !== undefined && !blocked ? href : undefined} {target} {rel} {download} {hreflang} {referrerpolicy}
   disabled={href === undefined ? innerLoading || blocked : undefined} aria-disabled={href !== undefined ? blocked : undefined} aria-busy={innerLoading || undefined}
   tabindex={href !== undefined ? blocked ? -1 : 0 : attributes.tabindex} class={rootClasses} style={rootStyle} onclick={click}>

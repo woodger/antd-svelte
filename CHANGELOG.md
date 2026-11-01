@@ -9,6 +9,11 @@
 
 ### Added
 
+- Wave: source capture/RAF triggers, стандартный эффект для Button, Checkbox,
+  Radio/RadioButton, Switch, интерактивного Tag и Steps; ConfigProvider.wave с
+  disabled/showEffect/triggerType и полным GlobalToken. Сохранены source targets,
+  colors/durations/deadline, native формы/фокус, SSR и cleanup. Добавлены Tag
+  onClick/onclick и воспроизводимый CSS-рецепт wave из восьми исходных правил.
 - Theme checkables: исходная подготовка Radio/Switch tokens и Checkbox aliases,
   группы и RadioButton, отдельные algorithms, unitless dimensions и SSR scopes.
   Явный undefined наследует CSS-переменную без возврата vendor defaults;

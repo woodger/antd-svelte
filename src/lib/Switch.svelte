@@ -6,6 +6,7 @@
   import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useWave } from './wave.svelte';
   import { useForm, useFormField } from './form-context';
   import Icon from './Icon.svelte';
   import type { SwitchEvent, SwitchProps } from './switch.types';
@@ -20,6 +21,7 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Switch');
+  const wave = useWave('Switch', () => resolvedDisabled);
   const form = useForm();
   const field = useFormField();
   const initialDefault = untrack(() => props.defaultChecked ?? props.defaultValue ?? false);
@@ -172,6 +174,7 @@
 <button
   {...attributes}
   bind:this={nativeElement}
+  {@attach wave}
   type="button"
   role="switch"
   id={props.id ?? field?.id}

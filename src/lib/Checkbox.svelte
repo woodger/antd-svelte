@@ -6,6 +6,7 @@
   import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useWave } from './wave.svelte';
   import { useForm, useFormField } from './form-context';
   import { useCheckboxGroup } from './checkbox-context';
   import { createCheckableClickLock } from './checkable.dom';
@@ -23,6 +24,7 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Checkbox');
+  const wave = useWave('Checkbox', () => resolvedDisabled);
   const form = useForm();
   const field = useFormField();
   const group = useCheckboxGroup();
@@ -173,11 +175,12 @@
   contextClasses?.root,
   localClasses?.root,
   props.rootClassName
-]} style={rootStyle} onclick={clickLock.label}
+]} style={rootStyle} onclick={clickLock.label} {@attach wave}
   onmouseenter={event => props.onMouseEnter?.(event)}
   onmouseleave={event => props.onMouseLeave?.(event)}>
   <span bind:this={nativeElement} class={[
     prefix,
+    'ant-wave-target',
     resolvedChecked && `${prefix}-checked`,
     indeterminate && `${prefix}-indeterminate`,
     resolvedDisabled && `${prefix}-disabled`,

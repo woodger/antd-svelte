@@ -270,8 +270,9 @@ Svelte Snippet непрозрачен для SSR; после hydration пров�
 ASCII-пробела, в отличие от scalar children. Изменения текста наблюдаются с cleanup.
 Эта адаптация явно учитывается как partial coverage в реестре.
 
-Wave и enter/leave анимация loading icon, prefixCls и произвольные component
-Design Tokens пока отсутствуют; прежний spinner сохранён. Общий механизм тем,
+Enter/leave анимация loading icon и prefixCls пока отсутствуют; прежний spinner
+сохранён. Source component tokens и [Wave](./docs/reference/wave.md) подключены.
+Общий механизм тем,
 RTL, Form disabled и Compact остаётся прежним. Фикстура — ?fixture=button;
 расширенный пример — /ant-design#buttons. Unit/SSR/Chromium проверяют приоритеты,
 формы/ссылки, delay/cancel, CJK, nested config, Group/Compact и совместимость
@@ -2856,7 +2857,8 @@ Bind:nativeElement возвращает ol; rootClassName добавляется
 Сохранены согласованные отличия v1 от React: нативные кнопки внутри именованного
 списка, keyed focus recovery, clamp current, responsive-порог 532px (исходный
 useBreakpoint версии 6.6.8 использует xs), componentDisabled и locale.steps.
-Произвольные prefixCls/component config/tokens и Wave ещё не перенесены.
+Произвольные prefixCls/component config/tokens ещё не перенесены.
+Wave работает для доступных items при общем onChange.
 Новые сценарии находятся в ?fixture=steps-variants и втором примере #steps;
 unit/SSR/Chromium проверяют layouts, collapse/index mapping, render Snippets,
 rich tooltip и доступность процента.
@@ -4658,9 +4660,10 @@ ConfigProvider.floatButton.backTopIcon задаёт BackTop icon. Как в ис
 FloatButton не потребляет объявленные в глобальном floatButton config class/style/
 semantic slots; локальные props работают. Config вложенного provider наследуется
 при undefined и заменяется целиком при заданном объекте. Сохраняются прежние
-ограничения Button/Badge/Tooltip; произвольные prefix/component tokens, Wave и
+ограничения Button/Badge/Tooltip; произвольные prefix/component tokens и
 общий React z-index context ещё не перенесены. CSS-рецепт воспроизводит 42 правила;
 глобальный fade адаптирован через WAAPI с исходными длительностями и reduced motion.
+Wave наследуется через общий Button, включая BackTop и trigger группы.
 
 ```svelte
 <FloatButton tooltip="Помощь" aria-label="Помощь" onclick={showHelp} />
@@ -4748,10 +4751,14 @@ prefixCls и глобальный timeline component config/tokens ещё не �
 
 Tag показывает метку с обязательным children Snippet. Icon и пользовательский
 closeIcon также принимают Snippet. Содержимое — короткая phrasing-разметка
-без вложенных controls. Иконки декоративные, aria-hidden/inert.
+без вложенных controls, кроме ссылки. Иконки декоративные, aria-hidden/inert.
 Сам Tag не создаёт остановок Tab или live-region. Именование через aria-label/
 aria-labelledby добавляет корневому span роль group; id/class/style и
 aria-describedby относятся к этому корню.
+
+OnClick/onclick получают нативный click корневого span; onclick имеет приоритет.
+Callback или единственная прямая ссылка включают [Wave](./docs/reference/wave.md).
+Закрытие сохраняет stopPropagation и не вызывает onClick метки.
 
 Variant: filled (по умолчанию), outlined, solid. Color по умолчанию default;
 статусы — success/processing/error/default/warning. Предустановленные цвета:
@@ -5862,7 +5869,8 @@ primitive values и deduplication options, bind:indeterminate и defaults. Он�
 отличаются от React state/ref conventions, child disabled override и controlled
 indeterminate. Source Checkbox aliases и отдельные theme algorithms применяются
 к Checkbox/CheckboxGroup; native-only темы сохраняют прежнее оформление.
-Произвольный prefix CSS, Wave и React diagnostics/statics остаются неперенесёнными. Типы —
+Wave подключён; произвольный prefix CSS и React diagnostics/statics остаются
+неперенесёнными. Типы —
 [checkbox.types.ts](./src/lib/checkbox.types.ts) и
 [checkbox-group.types.ts](./src/lib/checkbox-group.types.ts); проверки —
 [browser](./tests/browser/checkbox-features.spec.ts),
@@ -6017,7 +6025,7 @@ onValueChange. Нативный onchange остаётся на input. Label/inpu
 отличаются от React any-value/controlled-state и приоритета disabled дочернего Radio.
 Source Radio tokens и отдельные theme algorithms применяются к Radio, RadioButton
 и RadioGroup; native-only темы сохраняют прежнее оформление. Произвольный prefix CSS,
-Wave, React diagnostics/statics и вложенные Form NamePath остаются неперенесёнными.
+Wave подключён; React diagnostics/statics и вложенные Form NamePath остаются неперенесёнными.
 Дополнительные сценарии — `?fixture=radio-features`,
 [browser](./tests/browser/radio-features.spec.ts) и
 [package SSR](./tests/package/radio-features.ssr.test.ts).
@@ -6119,7 +6127,7 @@ Native form/reset/hidden field, отменяемый onclick, скрытые о�
 подписи и span handle сохраняют прежний Svelte контракт. React использует div handle
 и controlled state/event/ref conventions. Source Switch tokens и отдельные theme
 algorithms применяются к обоим размерам; native-only темы сохраняют прежнее
-оформление. Wave, произвольный prefix CSS и React diagnostics/statics пока не перенесены.
+оформление. Wave подключён; произвольный prefix CSS и React diagnostics/statics пока не перенесены.
 
 Изучены Ant Design 6.6.8, @rc-component/switch 1.0.3 и @rc-component/util 1.14.0.
 Рецепт switch побайтно воспроизводит прежние 47 правил vendor CSS, включая reduced
@@ -6617,6 +6625,12 @@ Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch;
 остальные CSS-потребители ещё переносятся. Примеры и точная граница —
 [в справочнике контекста темы](./docs/reference/theme-context.md).
 
+ConfigProvider.wave управляет эффектом Button, Checkbox, Radio/RadioButton,
+Switch, интерактивного Tag и Steps. Доступны disabled, showEffect с полным
+GlobalToken и пять типов trigger. Настройки наследуются; явный record заменяет
+родительский целиком. Targets, timing и Svelte boundaries описаны
+[в справочнике Wave](./docs/reference/wave.md).
+
 Статические defaultSeed, default/dark/compact algorithms и getDesignToken
 работают без context и DOM. Их source-округления, overrides и ограничения описаны
 [в справочнике design tokens](./docs/reference/design-tokens.md).
@@ -7036,6 +7050,8 @@ Checkbox, Pagination, Table, Modal, Form и связанные animations; гл�
 сохранены. В [vendor/radio.css](./src/lib/vendor/radio.css) добавлены обычные Radio и
 RadioGroup из того же архива; [vendor/switch.css](./src/lib/vendor/switch.css) содержит
 Switch вместе с правилами reduced motion.
+Общий эффект Wave извлечён отдельно в [vendor/wave.css](./src/lib/vendor/wave.css);
+рецепт wave сохраняет все восемь исходных правил без keyframes.
 InputNumber outlined находится в [vendor/input-number.css](./src/lib/vendor/input-number.css),
 адаптация тем и reduced motion — в theme.css и InputNumber.svelte.
 [vendor/slider.css](./src/lib/vendor/slider.css) содержит Slider с одним бегунком из

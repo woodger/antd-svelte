@@ -184,6 +184,7 @@
     )}>
   {#each displayed as step, index (step.key)}
     <StepItem item={step.item} index={step.originIndex >= 0 ? initial + step.originIndex : index} status={statuses[index]} active={index === display.current}
+      waveDisabled={!onChange} waveColorSource={variant === 'filled' ? 'color' : null}
       blocked={(disabled
           ?? config.componentDisabled)
           || Boolean(step.item.disabled)} nextStatus={index < displayed.length - 1

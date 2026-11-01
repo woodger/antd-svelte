@@ -153,8 +153,9 @@ aliases для опубликованного CSS с префиксом ant. П�
 hashId и внутренний token key используют исходную арифметику cssinjs 2.1.2 и
 @emotion/hash 0.8.0; hashed=false возвращает пустой hashId. Классы hash/cssVar
 добавлены к scope provider и перечисленным выше controls при source-настройках.
-Остальные компонентные roots, prefixCls, полная подготовка component styles и Wave
-остаются в работе.
+Остальные компонентные roots, prefixCls и полная подготовка component styles остаются
+в работе. [Wave](wave.md) использует настоящий GlobalToken в showEffect и исходные
+CSS variables/durations для стандартного эффекта.
 zeroRuntime наследуется; опубликованные стили компонентов уже статические,
 отдельный CSS-in-JS renderer библиотеки не добавлен.
 

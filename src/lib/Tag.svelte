@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
   import { useConfig } from './config-context';
+  import { useWave } from './wave.svelte';
+  import { connectWaveLink } from './wave.dom';
   import { connectFeedbackFocus } from './feedback.dom';
   import Icon from './Icon.svelte';
   import type { TagProps } from './tag.types';
@@ -14,6 +16,8 @@
     closeLabel,
     disabled,
     onClose,
+    onClick,
+    onclick,
     id,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
@@ -22,8 +26,10 @@
     style
   }: TagProps = $props();
   const config = useConfig();
+  const wave = useWave('Tag', () => blocked);
   const generatedId = $props.id();
   let host = $state<HTMLSpanElement>();
+  let waveLink = $state(false);
   let closed = $state(false);
   let active = true;
   let closing = false;
@@ -36,6 +42,10 @@
   $effect(() => {
     const node = host;
     if (node && closeIcon) return connectFeedbackFocus(node);
+  });
+  $effect(() => {
+    const node = host;
+    if (node) return connectWaveLink(node, value => { waveLink = value; });
   });
 
   function handleClose(event: MouseEvent) {
@@ -93,6 +103,7 @@
 </style>
 
 {#if !closed}
+  <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions, a11y_no_noninteractive_element_interactions (Source Tag.onClick сохраняет span; клавиатурой управляют native link/close.) -->
   <span bind:this={host} {id} role={ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} class={[
       'ant-tag ant-tag-css-var',
       `ant-tag-${color}`,
@@ -101,7 +112,9 @@
       config.theme.mode === 'dark' && 'ant-tag-dark',
       config.direction === 'rtl' && 'ant-tag-rtl',
       className
-    ]} {style}>
+    ]} {style} {@attach onClick || onclick || waveLink ? wave : undefined} onclick={event => {
+      if (!blocked) (onclick ?? onClick)?.(event);
+    }}>
     {#if icon}<span class="ant-tag-icon anticon" aria-hidden="true" inert>{@render icon()}</span>{/if}<span class="ant-tag-content" id={contentId}>{@render children()}</span>
     {#if closeIcon}<button type="button" class="ant-tag-close-icon" disabled={blocked} aria-label={closeLabel ?? config.locale.closeText} aria-describedby={contentId} {@attach connectClose}><span aria-hidden="true" inert>{#if typeof closeIcon === 'function'}{@render closeIcon()}{:else}<Icon name="close" />{/if}</span></button>{/if}
   </span>

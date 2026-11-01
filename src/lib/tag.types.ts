@@ -1,4 +1,5 @@
 import type { Snippet } from 'svelte';
+import type { HTMLAttributes } from 'svelte/elements';
 
 export type TagPresetColor =
   'blue'
@@ -31,6 +32,10 @@ export interface TagProps {
   closeLabel?: string;
   disabled?: boolean;
   onClose?: (event: MouseEvent) => void;
+  /** Click по метке; закрытие не всплывает сюда. Включает source Wave. */
+  onClick?: HTMLAttributes<HTMLSpanElement>['onclick'];
+  /** Нативный alias; при совместной передаче имеет приоритет над onClick. */
+  onclick?: HTMLAttributes<HTMLSpanElement>['onclick'];
   id?: string;
   'aria-label'?: string;
   'aria-labelledby'?: string;
