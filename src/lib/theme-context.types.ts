@@ -25,6 +25,7 @@ export interface DesignTokenState extends ThemeTokenResult {
   readonly prefix: string;
   readonly key: string;
   readonly style: string;
+  readonly scopeCSS: string;
 }
 
 export interface DesignTokenContext {

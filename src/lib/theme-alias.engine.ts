@@ -6,7 +6,7 @@ function isStableColor(color: number): boolean {
   return color >= 0 && color <= 255;
 }
 
-function getAlphaColor(frontColor: string, backgroundColor: string): string {
+export function getAlphaColor(frontColor: string, backgroundColor: string): string {
   const { r: fR, g: fG, b: fB, a: originAlpha } = new FastColor(frontColor).toRgb();
   if (originAlpha < 1) {
     return frontColor;

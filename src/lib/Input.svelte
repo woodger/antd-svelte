@@ -5,6 +5,7 @@
 <script lang="ts">
   import { onDestroy, onMount, tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
@@ -67,6 +68,7 @@
   }: InputProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Input');
   const compact = useCompact();
   const form = useForm();
   const field = useFormField();
@@ -160,9 +162,13 @@
   );
   let localStyles = $derived(typeof styles === 'function' ? styles(info) : styles);
   let rootStyle = $derived(
-    [contextStyles?.root, config.input?.style, localStyles?.root, style].filter(Boolean).join(
-      ';'
-    )
+    [
+      componentTheme.style,
+      contextStyles?.root,
+      config.input?.style,
+      localStyles?.root,
+      style
+    ].filter(Boolean).join(';')
   );
   let variantClasses = $derived([
     `ant-input-${appearance}`,
@@ -170,6 +176,7 @@
   ]);
   let rootClasses = $derived([
     'ant-input-css-var',
+    componentTheme.className,
     className,
     rootClassName,
     compactClasses('ant-input', config.direction, compact),
@@ -391,6 +398,7 @@
         !wrapped && !grouped && rootClasses
       ]}
     style={[
+        (wrapped || grouped) && componentTheme.style,
         contextStyles?.input,
         localStyles?.input,
         !wrapped && !grouped && rootStyle

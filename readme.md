@@ -6607,8 +6607,9 @@ ConfigProvider также принимает source token/algorithm, насле�
 hash/CSS variables. `theme.useToken()` возвращает реактивный объект с текущими
 GlobalToken, Theme, hashId и transformed CSS-variable token. Глобальные переменные
 передаются компонентам уже при SSR; существующие native темы без source-настроек
-сохраняют прежнее поведение. Компонентные overrides рассчитываются в GlobalToken;
-их применение ко всем CSS-потребителям ещё переносится. Примеры и точная граница —
+сохраняют прежнее поведение. Компонентные overrides применяются к Button,
+Input/TextArea (включая Password/Search/OTP), InputNumber и SpaceAddon;
+остальные CSS-потребители ещё переносятся. Примеры и точная граница —
 [в справочнике контекста темы](./docs/reference/theme-context.md).
 
 Статические defaultSeed, default/dark/compact algorithms и getDesignToken

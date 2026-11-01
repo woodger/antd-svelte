@@ -33,6 +33,7 @@
   import type { Snippet } from 'svelte';
   import { provideConfig, useConfig, type ConfigContext } from './config-context';
   import { provideDesignTokens } from './theme-context.svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { ComponentSize, Locale, ThemeConfig } from './types';
   import './styles.css';
 
@@ -306,6 +307,10 @@
 
   provideConfig(config);
 </script>
+
+{#if designTokens.enabled && theme}
+  <ThemeScopeStyle css={designTokens.state.scopeCSS} scope={designTokens.state.key} />
+{/if}
 
 <div
   class={[

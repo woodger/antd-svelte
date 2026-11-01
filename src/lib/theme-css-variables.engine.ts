@@ -68,3 +68,19 @@ export function serializeThemeVariables(variables: Record<string, string>, prefi
 
   return entries.map(([key, value]) => `${key}:${value}`).join(';');
 }
+
+/** Снимок provider CSS сохраняет его inline overrides при сбросе aliases на дочерних roots. */
+export function themeVariableScopes(variables: Record<string, string>, prefix: string, key: string) {
+  const snapshots: string[] = [];
+  const resets: Record<string, string> = {};
+  for (const name of Object.keys(variables)) {
+    const snapshot = `--ant-svelte-theme-base-${name.slice(2)}`;
+    snapshots.push(`${snapshot}:var(${name})`);
+    resets[name] = `var(${snapshot})`;
+  }
+
+  return {
+    snapshots: snapshots.join(';'),
+    css: `.${key}{${serializeThemeVariables(resets, prefix)}}`
+  };
+}

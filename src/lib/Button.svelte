@@ -5,6 +5,7 @@
 <script lang="ts" generics="Href extends string | undefined = undefined">
   import { onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useCompact } from './space-compact-context';
   import { useButtonGroup } from './button-group-context';
   import { compactClasses } from './space-compact.engine';
@@ -52,6 +53,7 @@
     Href
   > = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Button');
   const compact = useCompact();
   const group = useButtonGroup();
   const form = useForm();
@@ -135,6 +137,7 @@
   let rootClasses = $derived(
     [
       'ant-btn',
+      componentTheme.className,
       `ant-btn-${type || 'default'}`,
       `ant-btn-color-${appearance.color === 'danger' ? 'dangerous' : appearance.color}`,
       `ant-btn-variant-${appearance.variant}`,
@@ -162,7 +165,8 @@
     ]
   );
   let rootStyle = $derived(
-    [contextStyles.root, config.button?.style, slots.root, style].filter(Boolean).join(';')
+    [componentTheme.style, contextStyles.root, config.button?.style, slots.root, style]
+      .filter(Boolean).join(';')
   );
 
   $effect(() => {

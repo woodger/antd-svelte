@@ -9,6 +9,9 @@
 
 ### Added
 
+- Theme controls: исходная подготовка Button/Input/TextArea/InputNumber tokens,
+  SpaceAddon aliases, CSS roots в composed controls и изоляция вложенных aliases.
+  Переменные и scope-правила доступны при SSR; native-only темы сохраняются.
 - ConfigProvider: source token/algorithm inheritance, реактивный theme.useToken,
   полные component token types и overrides в GlobalToken, исходные hash/CSS-variable
   calculations и SSR scope. Применение всех ComponentToken к CSS продолжается.

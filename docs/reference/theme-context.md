@@ -99,9 +99,31 @@ const config: ThemeConfig = {
 };
 ```
 
-Эти records уже доступны в GlobalToken. Их применение ко всем компонентным
-CSS-потребителям и исходные prepareComponentToken пока переносятся отдельно.
-Наличие поля в ComponentTokenMap не подтверждает его визуальное покрытие.
+Эти records доступны в GlobalToken. Исходные prepareComponentToken и применение
+CSS-переменных подключены для Button, Input, TextArea, InputNumber и SpaceAddon.
+InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
+Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
+ComponentTokenMap не подтверждает его визуальное покрытие.
+
+## Токены controls
+
+Подготовка получает глобальные токены, объединённые с record компонента;
+после расчёта явные component overrides сохраняют приоритет. Button использует
+собственные font/line-height metrics, preset shadows и padding; Input/TextArea —
+общий расчёт размеров и теней фокуса. Нулевые значения сохраняют source-поведение:
+Button font overrides используют ??, Input inputFontSize — ||.
+
+InputNumber рассчитывает controlWidth, размеры и видимость handles, padding и
+filled backgrounds. При handleVisible=true исходный handleVisibleWidth вычисляется
+из controlHeightSM; отдельный handleWidth задаёт ширину при hover/focus. Это разные
+токены. Например, handleWidth=36 при стандартном размере оставляет 22px в покое и
+использует 36px при наведении.
+
+Группы, affix wrappers и native input/textarea получают необходимые переменные;
+собственный CSS-корень вложенного control сбрасывает чужие alias overrides.
+Приоритет semantic/plain style и inline variables ConfigProvider сохраняется.
+Scope-правила появляются в Svelte head уже при SSR и удаляются вместе с provider.
+При ручном svelte/server render нужно включить result.head в HTML страницы.
 
 ## CSS и совместимость
 
@@ -118,8 +140,9 @@ aliases для опубликованного CSS с префиксом ant. П�
 
 hashId и внутренний token key используют исходную арифметику cssinjs 2.1.2 и
 @emotion/hash 0.8.0; hashed=false возвращает пустой hashId. Классы hash/cssVar
-добавлены к scope provider. Их применение к каждому компонентному root,
-prefixCls, полная подготовка component styles и Wave остаются в работе.
+добавлены к scope provider и перечисленным выше controls при source-настройках.
+Остальные компонентные roots, prefixCls, полная подготовка component styles и Wave
+остаются в работе.
 zeroRuntime наследуется; опубликованные стили компонентов уже статические,
 отдельный CSS-in-JS renderer библиотеки не добавлен.
 
@@ -141,6 +164,12 @@ zeroRuntime наследуется; опубликованные стили ко
 - [SSR публичного пакета](../../tests/package/theme-context.ssr.test.ts).
 - [Браузерные consumers](../../tests/browser/theme-context.spec.ts),
   маршрут `?fixture=theme-context`.
+- [Эталон компонентных CSS-переменных](../../src/lib/theme-control-tokens-reference.test.ts)
+  из официального UMD: 12 настроек Button/Input/InputNumber/Addon, включая нули,
+  отдельные алгоритмы, custom prefix и fractional handle width.
+- [SSR controls](../../tests/package/control-theme.ssr.test.ts) и
+  [браузерное применение](../../tests/browser/control-theme.spec.ts),
+  маршрут `?fixture=control-theme`.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

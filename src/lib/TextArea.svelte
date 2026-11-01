@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
@@ -62,6 +63,7 @@
     ...attributes
   }: TextAreaProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Input');
   const compact = useCompact();
   const form = useForm();
   const field = useFormField();
@@ -158,12 +160,17 @@
   );
   let localStyles = $derived(typeof styles === 'function' ? styles(semanticInfo) : styles);
   let rootStyle = $derived(
-    [contextStyles?.root, config.textArea?.style, localStyles?.root, style].filter(Boolean).join(
-      ';'
-    )
+    [
+      componentTheme.style,
+      contextStyles?.root,
+      config.textArea?.style,
+      localStyles?.root,
+      style
+    ].filter(Boolean).join(';')
   );
   let leafStyle = $derived(
     [
+      wrapped && componentTheme.style,
       wrapped && textAreaResizeStyle(rootStyle),
       contextStyles?.textarea,
       localStyles?.textarea,
@@ -180,6 +187,7 @@
   let rootClasses = $derived(
     [
       'ant-input-css-var',
+      componentTheme.className,
       className,
       rootClassName,
       compactClasses('ant-input', config.direction, compact),

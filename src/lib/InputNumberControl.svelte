@@ -1,6 +1,7 @@
 <script lang="ts" generics="Value extends InputNumberValue = number">
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
@@ -40,6 +41,7 @@
     ...props
   }: InputNumberProps<Value> = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('InputNumber');
   const compact = useCompact();
   const form = useForm();
   const field = useFormField();
@@ -105,8 +107,9 @@
     ? config.inputNumber.styles(info) : config.inputNumber?.styles);
   let localStyles = $derived(typeof props.styles === 'function'
     ? props.styles(info) : props.styles);
-  let classes = $derived(mergeSlots(contextClasses, localClasses));
-  let styles = $derived(mergeSlots(contextStyles, { root: config.inputNumber?.style },
+  let classes = $derived(mergeSlots({ root: componentTheme.className }, contextClasses, localClasses));
+  let styles = $derived(mergeSlots({ root: componentTheme.style }, contextStyles,
+    { root: config.inputNumber?.style },
     localStyles, { root: props.style }, ';'));
   const owned = new Set([
     'value', 'defaultValue', 'stringMode', 'min', 'max', 'step', 'precision', 'decimalSeparator',
@@ -129,11 +132,12 @@
     b?: InputNumberSlots,
     c?: InputNumberSlots,
     d?: InputNumberSlots,
+    e?: InputNumberSlots,
     separator = ' '
   ) {
     const result: InputNumberSlots = {};
 
-    for (const slots of [a, b, c, d]) {
+    for (const slots of [a, b, c, d, e]) {
       for (const [name, text] of Object.entries(slots ?? {})) {
         const key = name as keyof InputNumberSlots;
         result[key] = [result[key], text].filter(Boolean).join(separator);

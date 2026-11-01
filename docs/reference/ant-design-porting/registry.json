@@ -64,7 +64,16 @@
         "src/lib/button.engine.test.ts",
         "tests/package/button.ssr.test.ts",
         "tests/browser/button.spec.ts",
-        "integration:button"
+        "integration:button",
+        "src/lib/theme-control-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/ThemeScopeStyle.svelte",
+        "src/lib/theme-control-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-control-tokens-reference.json",
+        "tests/package/control-theme.ssr.test.ts",
+        "tests/browser/control-theme.spec.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -117,10 +126,38 @@
         {
           "id": "motion-global",
           "title": "Wave, loading icon enter/leave, prefixCls и произвольные component tokens",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Сохранён прежний мгновенный spinner; задержка loading/cancel уже перенесена. Подробный перенос Wave/motion и общего token/prefix механизма ещё предстоит."
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Компонентные tokens Button подключены через source preparation и CSS variables. Wave, loading icon enter/leave и общий prefixCls остаются в работе; native-only spinner/темы сохраняются."
+        },
+        {
+          "id": "control-theme-tokens",
+          "title": "Source component token preparation и CSS consumption для controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         }
       ]
     },
@@ -989,7 +1026,16 @@
         "src/lib/SpaceCompact.svelte",
         "src/lib/SpaceAddon.svelte",
         "tests/browser/space.spec.ts",
-        "integration:space"
+        "integration:space",
+        "src/lib/theme-control-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/ThemeScopeStyle.svelte",
+        "src/lib/theme-control-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-control-tokens-reference.json",
+        "tests/package/control-theme.ssr.test.ts",
+        "tests/browser/control-theme.spec.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -1040,10 +1086,20 @@
         {
           "id": "global-config",
           "title": "PrefixCls и глобальный space component config/tokens",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Произвольный component config/tokens ещё не перенесён; публичный Space core не означает завершение семейства."
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "SpaceAddon поддерживает source component aliases и CSS scope; Space component config/prefixCls и полный family token audit ещё не завершены."
         },
         {
           "id": "remaining-controls",
@@ -1052,6 +1108,24 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "AutoComplete, InputSearch, DatePicker, RangePicker, TimePicker, TimeRangePicker, TreeSelect и Cascader наследуют Compact context. Полный аудит оставшихся child API выполняется вместе с их переносом."
+        },
+        {
+          "id": "control-theme-tokens",
+          "title": "Source component token preparation и CSS consumption для controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         }
       ]
     },
@@ -2663,7 +2737,16 @@
         "src/lib/input-group.types.ts",
         "src/lib/input-group.ssr.test.ts",
         "tests/package/input-group.ssr.test.ts",
-        "tests/browser/input-group.spec.ts"
+        "tests/browser/input-group.spec.ts",
+        "src/lib/theme-control-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/ThemeScopeStyle.svelte",
+        "src/lib/theme-control-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-control-tokens-reference.json",
+        "tests/package/control-theme.ssr.test.ts",
+        "tests/browser/control-theme.spec.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -2814,18 +2897,56 @@
         {
           "id": "input-remaining",
           "title": "Input prefixCls, общий variant/token engine и React value/ref conventions",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "ConfigProvider.variant/Form.variant, arbitrary tokens, prefixCls и deprecated internal classes/structure hooks не перенесены. Согласованный string bind:value сохраняется вместо React controlled rejection/broad value types; native refs представлены Svelte bindings. Native hidden остаётся на root; source CSS authored display перекрывает UA hidden, без дополнительного override. React dev diagnostics, включая deprecated Group warning, не перенесены."
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. ConfigProvider.variant/Form.variant, prefixCls и deprecated internal hooks ещё не перенесены. Согласованные string bind:value, native refs/hidden и React dev diagnostics остаются прежними."
         },
         {
           "id": "textarea-remaining",
           "title": "TextArea prefixCls, общий variant/token engine и React value/ref conventions",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Не перенесены prefixCls, общий ConfigProvider.variant/Form.variant и произвольный token engine. Существующий строковый Svelte bind:value имеет приоритет над React controlled rejection; React broad value types и shape resizableTextArea не добавлены, textarea/root доступны через именованные native refs."
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "TextArea использует source Input token preparation и CSS variables, включая wrappers и native leaf. PrefixCls и общий ConfigProvider.variant/Form.variant ещё не перенесены; string bind:value/native refs и React value conventions сохраняют прежнюю границу."
+        },
+        {
+          "id": "control-theme-tokens",
+          "title": "Source component token preparation и CSS consumption для controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         }
       ]
     },
@@ -2885,7 +3006,16 @@
         "tests/browser/input-number-features.spec.ts",
         "tests/browser/fixtures/InputNumberFeaturesFixtures.svelte",
         "src/lib/vendor/input-number-features.css",
-        "readme.md"
+        "readme.md",
+        "src/lib/theme-control-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/ThemeScopeStyle.svelte",
+        "src/lib/theme-control-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-control-tokens-reference.json",
+        "tests/package/control-theme.ssr.test.ts",
+        "tests/browser/control-theme.spec.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -2985,10 +3115,38 @@
         {
           "id": "advanced-theme",
           "title": "Общий token/prefix engine, точная compact/focus тема и React diagnostics",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Произвольные component tokens/prefix CSS и общий source theme algorithm не перенесены. Действующие compact radius/line height/padding/handles и focus shadow/actions отличаются от React; сохраняются согласованные native focus и темы. React development warnings/PurePanel и Form feedback/variant context остаются вне перенесённого объёма. V1-ready не означает полный React API."
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source component tokens, подготовка padding/fonts/shadows/handles и runtime algorithms подключены к CSS при source-настройках. Native-only compact/focus CSS сохраняется. PrefixCls CSS, общий Form feedback/variant context, React diagnostics/PurePanel и полный renderer остаются в работе."
+        },
+        {
+          "id": "control-theme-tokens",
+          "title": "Source component token preparation и CSS consumption для controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         }
       ]
     },
@@ -7038,7 +7196,15 @@
         "tools/fixtures/ant-design-theme-context-reference.json",
         "tests/package/theme-context.ssr.test.ts",
         "tests/browser/theme-context.spec.ts",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/theme-control-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/ThemeScopeStyle.svelte",
+        "src/lib/theme-control-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-control-tokens-reference.json",
+        "tests/package/control-theme.ssr.test.ts",
+        "tests/browser/control-theme.spec.ts"
       ],
       "features": [
         {
@@ -7059,7 +7225,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction и Wave остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние CSS и геометрию."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction и Wave остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние CSS и геометрию. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber и SpaceAddon; остальные consumers требуют переноса."
         },
         {
           "id": "static-design-tokens",
@@ -7123,6 +7289,24 @@
             "tests/browser/button.spec.ts"
           ],
           "note": "Color/variant/shape, loadingIcon, autoInsertSpace и class/style/semantic slots. Omitted наследует, явный объект заменяет целиком как upstream; общий аудит ConfigProvider продолжается."
+        },
+        {
+          "id": "control-theme-tokens",
+          "title": "Source component token preparation и CSS consumption для controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-control-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/theme-control-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-control-tokens-reference.json",
+            "tests/package/control-theme.ssr.test.ts",
+            "tests/browser/control-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         }
       ]
     },

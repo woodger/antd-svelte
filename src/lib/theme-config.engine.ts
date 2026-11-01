@@ -4,7 +4,8 @@ import { createDerivativeTheme } from './theme-cache';
 import { DerivativeTheme } from './theme-derivative';
 import { formatAliasToken } from './theme-alias.engine';
 import { hashTokenString, tokenToKey } from './theme-hash.engine';
-import { serializeThemeVariables, transformThemeToken } from './theme-css-variables.engine';
+import { serializeThemeVariables, themeVariableScopes, transformThemeToken }
+  from './theme-css-variables.engine';
 import type { AliasToken, MappingAlgorithm, SeedToken } from './theme-token.types';
 import type { ComponentsConfig, GlobalToken } from './theme-component-token.types';
 import type { CSSVariableToken, DesignTokenState } from './theme-context.types';
@@ -122,6 +123,7 @@ export function createDesignTokenState(config: ResolvedThemeConfig): DesignToken
   const token = Object.assign(actualToken, { _tokenKey: tokenToKey(actualToken, mergedSalt) });
   const transformed = transformThemeToken(merged, prefix);
   const cssVar = { ...transformed.token, _hashId: hash } as CSSVariableToken;
+  const scope = themeVariableScopes(transformed.variables, prefix, key);
 
   return {
     theme,
@@ -132,6 +134,7 @@ export function createDesignTokenState(config: ResolvedThemeConfig): DesignToken
     cssVar,
     prefix,
     key,
-    style: serializeThemeVariables(transformed.variables, prefix)
+    style: `${serializeThemeVariables(transformed.variables, prefix)};${scope.snapshots}`,
+    scopeCSS: scope.css
   };
 }
