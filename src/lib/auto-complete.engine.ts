@@ -7,6 +7,7 @@ import type {
 export interface AutoCompleteEntry {
   key: string;
   group: boolean;
+  grouped?: boolean;
   option: AutoCompleteItem;
 }
 
@@ -38,11 +39,11 @@ export function filterAutoCompleteOptions(
 export function flattenAutoCompleteOptions(
   options: readonly AutoCompleteItem[]
 ): AutoCompleteEntry[] {
-  return options.flatMap((option, index) => 'options' in option
+  return options.flatMap<AutoCompleteEntry>((option, index) => 'options' in option
     ? [
       { key: String(option.key ?? `group-${index}`), group: true, option },
       ...option.options.map(
-        item => ({ key: String(item.key ?? item.value), group: false, option: item })
+        item => ({ key: String(item.key ?? item.value), group: false, grouped: true, option: item })
       )
     ]
     : [{ key: String(option.key ?? option.value), group: false, option }]);

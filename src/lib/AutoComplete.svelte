@@ -16,6 +16,8 @@
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
   import { connectPopup } from './popup.dom';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
   import Icon from './Icon.svelte';
 
   let {
@@ -61,6 +63,7 @@
   const field = useFormField();
   const form = useForm();
   const compact = useCompact();
+  const componentTheme = useComponentTheme('Select');
   const generated = $props.id();
   let innerValue = $state<string | undefined>(untrack(() => value ?? defaultValue));
   let innerOpen = $state(untrack(() => open ?? defaultOpen));
@@ -71,6 +74,7 @@
   );
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
   let resolvedStatus = $derived(status ?? field?.status);
+  let showClear = $derived(Boolean(allowClear && text && !blocked && !readonly));
   let controlId = $derived(id ?? field?.id ?? `ant-auto-complete-${generated}`);
   let searchConfig = $derived(
     { filterOption, onSearch, ...(typeof showSearch === 'object' ? showSearch : {}) }
@@ -330,16 +334,32 @@
   .auto-complete .ant-select-input { position: relative; inset: auto; width: 100%; min-width: 0; padding: 0; border: 0; outline: 0; background: transparent; color: inherit; font: inherit; line-height: inherit; opacity: 1; }
   .ant-select-input::placeholder { color: var(--ant-color-text-placeholder); }
   .auto-complete:focus-within { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
+  .auto-complete.ant-select-source-theme:focus-within { outline: 0; outline-offset: 0; }
+  .auto-complete.ant-select-source-theme.ant-select-customize { min-height: 0; }
   .clear { display: flex; flex: none; padding: 0; border: 0; background: none; color: var(--ant-color-text-tertiary); cursor: pointer; }
   .clear:focus-visible { outline: 2px solid var(--ant-color-primary); }
+  .ant-select-source-theme .clear { display: inline-block; color: var(--ant-color-text-quaternary); }
+  .ant-select-source-theme .clear:hover { color: var(--ant-color-icon); }
+  .ant-select-source-theme .clear:focus-visible { opacity: 1; }
   .popup { position: fixed; margin: 0; border: 0; overflow-y: auto; }
   .ant-select-item { display: block; width: 100%; border: 0; background: transparent; color: inherit; font: inherit; text-align: start; }
+  /* Options повторяют flex column rc-select, пустая выдача остаётся обычным блоком. */
+  .popup.ant-select-source-popup:not([hidden]) { display: flex; flex-direction: column; }
+  .ant-select-source-popup .ant-select-item { flex: none; font-size: var(--ant-select-option-font-size); line-height: var(--ant-select-option-line-height); font-weight: 400; color: var(--ant-color-text); }
+  .ant-select-source-popup .ant-select-item-option { display: flex; }
+  .ant-select-source-popup .ant-select-item-group { font-size: var(--ant-font-size-sm); color: var(--ant-color-text-description); }
+  .ant-select-source-popup .ant-select-item-option-disabled { color: var(--ant-color-text-disabled); }
 </style>
 
 <svelte:document onreset={handleReset} />
-<div bind:this={nativeElement} dir={config.direction} {style}
+<div bind:this={nativeElement} dir={config.direction}
+  style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}
   class={[
       'auto-complete ant-select ant-select-css-var ant-select-single ant-select-auto-complete ant-select-show-search',
+      componentTheme.className,
+      componentTheme.className && 'ant-select-source-theme',
+      componentTheme.className && showClear && 'ant-select-allow-clear',
+      componentTheme.className && config.direction === 'rtl' && 'ant-select-rtl',
       `ant-select-${variant}`,
       resolvedSize === 'large' && 'ant-select-lg',
       resolvedSize === 'small' && 'ant-select-sm',
@@ -355,15 +375,19 @@
   <div class="ant-select-content">
     {#if children}{@render children(input)}{:else}<input {...attributes} {...input.attributes} use:register class="ant-select-input" type="text" />{/if}
   </div>
-  {#if allowClear && text && !blocked && !readonly}<button type="button" class="clear" aria-label={config.locale.clearText} onpointerdown={event => event.preventDefault()} onclick={clear}>
+  {#if showClear}<button type="button" class={['clear', componentTheme.className && 'ant-select-clear']} aria-label={config.locale.clearText} onpointerdown={event => event.preventDefault()} onclick={clear}>
     {#if typeof allowClear === 'object' && allowClear.clearIcon}{@render allowClear.clearIcon()}{:else}<Icon name="close" />{/if}
   </button>{/if}
   {#if mounted}
     <div bind:this={popup} popover="manual" hidden={!visible || !shown} id={`${controlId}-list`} role="listbox"
-      class={['popup ant-select-dropdown ant-select-css-var', popupClassName]} dir={config.direction}
-      style={`max-height:${listHeight}px;${typeof popupMatchSelectWidth === 'number'
-          ? `width:${popupMatchSelectWidth}px;`
-          : ''}`} onscroll={onPopupScroll}
+      class={['popup ant-select-dropdown ant-select-css-var', componentTheme.className,
+          componentTheme.className && entries.length > 0 && 'ant-select-source-popup',
+          componentTheme.className && config.direction === 'rtl' && 'ant-select-dropdown-rtl',
+          popupClassName]} dir={config.direction}
+      {@attach node => connectComponentTheme(node, componentTheme.style)}
+      style:max-height={`${listHeight}px`}
+      style:width={typeof popupMatchSelectWidth === 'number' ? `${popupMatchSelectWidth}px` : undefined}
+      onscroll={onPopupScroll}
       aria-label={attributes['aria-label']
           ?? attributes.placeholder
           ?? config.locale.searchText}>
@@ -374,6 +398,7 @@
             aria-selected={entry.option.value.toLowerCase() === text.toLowerCase()} aria-disabled={entry.option.disabled || undefined}
             class={[
                 'ant-select-item ant-select-item-option',
+                componentTheme.className && entry.grouped && 'ant-select-item-option-grouped',
                 index === active && 'ant-select-item-option-active',
                 entry.option.disabled && 'ant-select-item-option-disabled',
                 entry.option.class
@@ -392,7 +417,9 @@
                 if (option)
                   choose(option);
               }}>
-            {#if typeof entry.option.label === 'function'}{@render entry.option.label()}{:else}{entry.option.label ?? entry.option.value}{/if}
+            <span class={componentTheme.className ? 'ant-select-item-option-content' : undefined}>
+              {#if typeof entry.option.label === 'function'}{@render entry.option.label()}{:else}{entry.option.label ?? entry.option.value}{/if}
+            </span>
           </button>
         {/if}
       {:else}<div class="ant-select-item-empty">{#if typeof notFoundContent === 'function'}{@render notFoundContent()}{:else}{notFoundContent ?? ''}{/if}</div>{/each}

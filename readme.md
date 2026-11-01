@@ -5665,8 +5665,15 @@ Native name/required/disabled/readonly, FormItem/status/reset, размеры, v
 Compact, темы и RTL поддержаны. Галерея `/ant-design#auto-complete`, фикстура
 `?fixture=auto-complete`. При custom input его native constraints задаются на нём.
 
+Source theme использует `components.Select` и общий Select token scope, как
+upstream AutoComplete: размеры options/groups, отступы, цвета, clear и focus.
+Custom Input сохраняет собственные `components.Input` и размеры; оболочка не
+навязывает ему controlHeight Select. Токены доступны при SSR; смена темы
+сохраняет native editor, option content, выделение, фокус, FormData и положение
+открытого popup. Native-only темы сохраняют прежнее оформление.
+
 Virtual/scrollTo, fieldNames, optionRender/popupRender, prefix/searchIcon,
-полный semantic/config/token API и legacy dataSource/Option/deprecated dropdown
+полный semantic/config API и legacy dataSource/Option/deprecated dropdown
 aliases пока отсутствуют. Generic numeric/object values не входят в первый этап.
 
 ## Select

@@ -102,7 +102,8 @@ const config: ThemeConfig = {
 Эти records доступны в GlobalToken. Исходные prepareComponentToken и применение
 CSS-переменных подключены для Button, Input, TextArea, InputNumber, SpaceAddon,
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
-Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm и Select.
+Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
+Select и AutoComplete.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -186,7 +187,15 @@ multipleItemColorDisabled сериализуются, но не меняют э�
 Наличие ComponentToken не означает, что источник использует его в каждой ветке CSS.
 Полные variants/semantic config/prefixCls, virtualization и остальные rc-select
 props ещё не перенесены. Общие Select-style consumers AutoComplete, TreeSelect и
-Cascader пока требуют отдельного подключения tokens; native-only темы сохранены.
+Cascader используют те же upstream стили; tokens AutoComplete уже подключены,
+TreeSelect и Cascader ещё ожидают подключения. Native-only темы сохранены.
+
+AutoComplete использует Select scope для обычного поля, clear и popup, включая
+group indentation и font metrics. Custom Input получает собственные Input tokens;
+оболочка customize наследует шрифт provider и не задаёт минимальную высоту Select.
+Нативная textarea сохраняет rows и собственные style/constraints. При обновлении
+темы меняются CSS variables панели, а left/top/ширина остаются у DOM-controller
+и соответствующих props. Фокус, selection, текст, options и FormData сохраняются.
 
 ## Токены всплывающих панелей
 
@@ -308,6 +317,14 @@ zeroRuntime наследуется; опубликованные стили ко
   [SSR](../../tests/package/select-theme.ssr.test.ts), маршрут `?fixture=select-theme`.
   Проверяются single/multiple всех размеров, disabled, options, стрелка/clear,
   изоляция aliases и смена темы без потери редактора, выделения, фокуса и FormData.
+- [Метрики AutoComplete](../../tests/browser/fixtures/ant-design-auto-complete-metrics.json)
+  получены из закреплённого официального UMD: 17 настроек, три размера и variants,
+  disabled, custom Input/textarea, groups/options и пустая выдача.
+  [Браузерные проверки](../../tests/browser/auto-complete-theme.spec.ts),
+  [SSR](../../tests/package/auto-complete-theme.ssr.test.ts),
+  маршрут `?fixture=auto-complete-theme`. Проверяются изоляция Select/Input tokens,
+  нули/undefined, custom prefix/hash, RTL, смена темы и размеров открытой панели
+  без потери inline-позиции, DOM, ввода, выделения, фокуса или значений формы.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

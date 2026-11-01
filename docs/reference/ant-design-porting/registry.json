@@ -2024,7 +2024,12 @@
         "src/lib/auto-complete.engine.test.ts",
         "tests/package/auto-complete.ssr.test.ts",
         "tests/browser/auto-complete.spec.ts",
-        "integration:auto-complete"
+        "integration:auto-complete",
+        "tests/package/auto-complete-theme.ssr.test.ts",
+        "tests/browser/auto-complete-theme.spec.ts",
+        "tests/browser/fixtures/AutoCompleteThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-auto-complete-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -2066,7 +2071,23 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет virtualization/scrollTo, fieldNames, optionRender/popupRender, prefix/searchIcon customization, полного semantic classNames/styles и ConfigProvider.select/token engine. Legacy dataSource/Option children/deprecated dropdown aliases и React option.props wrappers не перенесены. Поддерживается string value; React generic numeric/object значения за пределами первого этапа."
+          "note": "Нет virtualization/scrollTo, fieldNames, optionRender/popupRender, prefix/searchIcon customization, полного semantic classNames/styles и ConfigProvider.select. Общие Select tokens подключены отдельно. Legacy dataSource/Option children/deprecated dropdown aliases и React option.props wrappers не перенесены. Поддерживается string value; React generic numeric/object значения за пределами первого этапа."
+        },
+        {
+          "id": "source-select-theme",
+          "title": "Общий Select token scope, options/groups и custom Input composition",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/AutoComplete.svelte",
+            "src/lib/theme-select-tokens.engine.ts",
+            "tests/package/auto-complete-theme.ssr.test.ts",
+            "tests/browser/auto-complete-theme.spec.ts",
+            "tests/browser/fixtures/AutoCompleteThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-auto-complete-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Как upstream, AutoComplete использует Select tokens без собственного style hook: selector/clear/popup, option/group fonts и logical group indentation. Custom Input сохраняет свои tokens и ref; customize wrapper не задаёт Select min-height. Computed metrics официального UMD для 17 настроек: размеры, variants, disabled, custom Input/textarea, группы и пустая выдача; component algorithms/aliases, нули/undefined, prefix/hash. SSR и обновления сохраняют native editor/option content, input selection/focus, FormData и callbacks. CSS variables панели обновляются отдельно от controller left/top; width/listHeight используют отдельные style directives. Native-only темы и существующий API сохранены; остальные rc-select props/config/virtualization остаются в работе."
         }
       ]
     },
@@ -3899,7 +3920,7 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumers AutoComplete/TreeSelect/Cascader остаются в работе."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumers TreeSelect/Cascader остаются в работе. AutoComplete получает общий Select token scope."
         }
       ]
     },
@@ -8094,7 +8115,7 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumers AutoComplete/TreeSelect/Cascader остаются в работе."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumers TreeSelect/Cascader остаются в работе. AutoComplete получает общий Select token scope."
         }
       ]
     },

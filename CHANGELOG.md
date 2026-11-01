@@ -9,6 +9,10 @@
 
 ### Added
 
+- Theme AutoComplete: общий Select token scope для поля, clear и popup,
+  исходные метрики options/groups и отдельные tokens custom Input. Добавлены
+  UMD, SSR и browser-проверки; смена темы сохраняет позицию popup, DOM,
+  ввод, выделение, фокус и значения формы. Native-only темы сохранены.
 - Theme Select: исходная подготовка tokens и aliases для selector/dropdown,
   размеров tags/options, arrow/clear и focus styles. Добавлены UMD conformance,
   SSR и browser-проверки нулей/undefined/algorithms/prefix и смены темы с

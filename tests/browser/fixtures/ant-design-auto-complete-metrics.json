@@ -1,0 +1,5197 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "operation": "render AutoComplete sizes, variants, disabled, custom Input/textarea, grouped options and empty popup; read computed metrics"
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "minHeight": "32px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "minHeight": "32px",
+          "height": "32px"
+        }
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(66, 66, 66)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(66, 66, 66)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(66, 66, 66)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(255, 255, 255, 0.08)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "backgroundColor": "rgba(255, 255, 255, 0.08)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(66, 66, 66)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(31, 31, 31)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(255, 255, 255, 0.016) 0px 6px 16px 0px, rgba(255, 255, 255, 0.024) 0px 3px 6px -4px, rgba(255, 255, 255, 0.01) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.45)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "minHeight": "32px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(255, 255, 255, 0.08)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "minHeight": "32px",
+          "height": "32px"
+        }
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "middle-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "20px"
+        },
+        "small": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "3px",
+          "paddingBottom": "0px",
+          "paddingLeft": "3px",
+          "height": "22px"
+        },
+        "small-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "20px"
+        },
+        "large": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "5.5px",
+          "paddingRight": "7px",
+          "paddingBottom": "5.5px",
+          "paddingLeft": "7px",
+          "height": "35px"
+        },
+        "large-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "filled": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "filled-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "20px"
+        },
+        "borderless": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "borderless-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "20px"
+        },
+        "underlined": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "underlined-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "20px"
+        },
+        "disabled": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "disabled-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "20px"
+        },
+        "custom": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "28px"
+        },
+        "custom-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "28px"
+        },
+        "textarea": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "66px"
+        },
+        "textarea-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgb(0, 0, 0)",
+          "height": "66px"
+        },
+        "popup": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "10px",
+          "lineHeight": "10px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "10px",
+          "height": "10px",
+          "insetInlineEnd": "7px"
+        },
+        "group": {
+          "fontSize": "10px",
+          "lineHeight": "16.6667px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "height": "28px",
+          "minHeight": "28px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Beta": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Disabled": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Gamma": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "empty": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "minHeight": "28px",
+          "height": "28px"
+        }
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(66, 66, 66)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "middle-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "20px"
+        },
+        "small": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(66, 66, 66)",
+          "paddingTop": "0px",
+          "paddingRight": "3px",
+          "paddingBottom": "0px",
+          "paddingLeft": "3px",
+          "height": "22px"
+        },
+        "small-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "20px"
+        },
+        "large": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(66, 66, 66)",
+          "paddingTop": "5.5px",
+          "paddingRight": "7px",
+          "paddingBottom": "5.5px",
+          "paddingLeft": "7px",
+          "height": "35px"
+        },
+        "large-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "22px"
+        },
+        "filled": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(255, 255, 255, 0.08)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "filled-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "20px"
+        },
+        "borderless": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "borderless-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "20px"
+        },
+        "underlined": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "underlined-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "20px"
+        },
+        "disabled": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "backgroundColor": "rgba(255, 255, 255, 0.08)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(66, 66, 66)",
+          "paddingTop": "3px",
+          "paddingRight": "7px",
+          "paddingBottom": "3px",
+          "paddingLeft": "7px",
+          "height": "28px"
+        },
+        "disabled-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "height": "20px"
+        },
+        "custom": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "28px"
+        },
+        "custom-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "height": "28px"
+        },
+        "textarea": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(20, 20, 20)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "66px"
+        },
+        "textarea-input": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgb(0, 0, 0)",
+          "height": "66px"
+        },
+        "popup": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgb(31, 31, 31)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(255, 255, 255, 0.016) 0px 6px 16px 0px, rgba(255, 255, 255, 0.024) 0px 3px 6px -4px, rgba(255, 255, 255, 0.01) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "10px",
+          "lineHeight": "10px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "width": "10px",
+          "height": "10px",
+          "insetInlineEnd": "7px"
+        },
+        "group": {
+          "fontSize": "10px",
+          "lineHeight": "16.6667px",
+          "color": "rgba(255, 255, 255, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.45)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "height": "28px",
+          "minHeight": "28px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Beta": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(255, 255, 255, 0.08)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Disabled": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.25)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Gamma": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "empty": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.25)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "minHeight": "28px",
+          "height": "28px"
+        }
+      }
+    },
+    {
+      "name": "wireframe",
+      "config": {
+        "token": {
+          "wireframe": true
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "minHeight": "32px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "minHeight": "32px",
+          "height": "32px"
+        }
+      }
+    },
+    {
+      "name": "custom-global",
+      "config": {
+        "token": {
+          "fontSize": 18,
+          "controlHeight": 46,
+          "lineWidth": 2,
+          "paddingXXS": 7,
+          "borderRadius": 9,
+          "zIndexPopupBase": 2000
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "9px",
+          "borderTopWidth": "2px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "8px",
+          "paddingRight": "10px",
+          "paddingBottom": "8px",
+          "paddingLeft": "10px",
+          "height": "46px"
+        },
+        "middle-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "small": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "2px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "2.25px",
+          "paddingRight": "6px",
+          "paddingBottom": "2.25px",
+          "paddingLeft": "6px",
+          "height": "34.5px"
+        },
+        "small-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "large": {
+          "fontSize": "20px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "11px",
+          "borderTopWidth": "2px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "12.75px",
+          "paddingRight": "10px",
+          "paddingBottom": "12.75px",
+          "paddingLeft": "10px",
+          "height": "57.5px"
+        },
+        "large-input": {
+          "fontSize": "20px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "28px"
+        },
+        "filled": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "9px",
+          "borderTopWidth": "2px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "10px",
+          "paddingBottom": "8px",
+          "paddingLeft": "10px",
+          "height": "46px"
+        },
+        "filled-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "borderless": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "9px",
+          "borderTopWidth": "2px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "10px",
+          "paddingBottom": "8px",
+          "paddingLeft": "10px",
+          "height": "46px"
+        },
+        "borderless-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "underlined": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "2px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "10px",
+          "paddingBottom": "8px",
+          "paddingLeft": "10px",
+          "height": "46px"
+        },
+        "underlined-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "disabled": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "9px",
+          "borderTopWidth": "2px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "8px",
+          "paddingRight": "10px",
+          "paddingBottom": "8px",
+          "paddingLeft": "10px",
+          "height": "46px"
+        },
+        "disabled-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "26px"
+        },
+        "custom": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "9px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "46px"
+        },
+        "custom-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "46px"
+        },
+        "textarea": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "9px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "84px"
+        },
+        "textarea-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgb(0, 0, 0)",
+          "height": "84px"
+        },
+        "popup": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "7px",
+          "paddingBottom": "7px",
+          "borderRadius": "11px",
+          "zIndex": "2050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "14px",
+          "lineHeight": "14px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "14px",
+          "height": "14px",
+          "insetInlineEnd": "10px"
+        },
+        "group": {
+          "fontSize": "14px",
+          "lineHeight": "20.2222px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "10px",
+          "paddingRight": "12px",
+          "paddingBottom": "10px",
+          "paddingLeft": "12px",
+          "height": "46px",
+          "minHeight": "46px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "10px",
+          "paddingRight": "12px",
+          "paddingBottom": "10px",
+          "paddingLeft": "24px",
+          "height": "46px",
+          "fontWeight": "400",
+          "minHeight": "46px"
+        },
+        "Beta": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "10px",
+          "paddingRight": "12px",
+          "paddingBottom": "10px",
+          "paddingLeft": "24px",
+          "height": "46px",
+          "fontWeight": "400",
+          "minHeight": "46px"
+        },
+        "Disabled": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "10px",
+          "paddingRight": "12px",
+          "paddingBottom": "10px",
+          "paddingLeft": "24px",
+          "height": "46px",
+          "fontWeight": "400",
+          "minHeight": "46px"
+        },
+        "Gamma": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "10px",
+          "paddingRight": "12px",
+          "paddingBottom": "10px",
+          "paddingLeft": "12px",
+          "height": "46px",
+          "fontWeight": "400",
+          "minHeight": "46px"
+        },
+        "empty": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "10px",
+          "paddingRight": "12px",
+          "paddingBottom": "10px",
+          "paddingLeft": "12px",
+          "minHeight": "46px",
+          "height": "46px"
+        }
+      }
+    },
+    {
+      "name": "zero-padding",
+      "config": {
+        "components": {
+          "Select": {
+            "paddingXXS": 0,
+            "controlHeight": 28
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "2px",
+          "paddingRight": "11px",
+          "paddingBottom": "2px",
+          "paddingLeft": "11px",
+          "height": "28px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "2px",
+          "paddingRight": "11px",
+          "paddingBottom": "2px",
+          "paddingLeft": "11px",
+          "height": "28px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "2px",
+          "paddingRight": "11px",
+          "paddingBottom": "2px",
+          "paddingLeft": "11px",
+          "height": "28px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "2px",
+          "paddingRight": "11px",
+          "paddingBottom": "2px",
+          "paddingLeft": "11px",
+          "height": "28px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "2px",
+          "paddingRight": "11px",
+          "paddingBottom": "2px",
+          "paddingLeft": "11px",
+          "height": "28px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "3px",
+          "paddingRight": "12px",
+          "paddingBottom": "3px",
+          "paddingLeft": "12px",
+          "height": "28px",
+          "minHeight": "28px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "3px",
+          "paddingRight": "12px",
+          "paddingBottom": "3px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "3px",
+          "paddingRight": "12px",
+          "paddingBottom": "3px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "3px",
+          "paddingRight": "12px",
+          "paddingBottom": "3px",
+          "paddingLeft": "24px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "3px",
+          "paddingRight": "12px",
+          "paddingBottom": "3px",
+          "paddingLeft": "12px",
+          "height": "28px",
+          "fontWeight": "400",
+          "minHeight": "28px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "3px",
+          "paddingRight": "12px",
+          "paddingBottom": "3px",
+          "paddingLeft": "12px",
+          "minHeight": "28px",
+          "height": "28px"
+        }
+      }
+    },
+    {
+      "name": "zero-focus",
+      "config": {
+        "token": {
+          "lineWidthFocus": 0
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "minHeight": "32px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "minHeight": "32px",
+          "height": "32px"
+        }
+      }
+    },
+    {
+      "name": "own-aliases",
+      "config": {
+        "components": {
+          "Select": {
+            "fontSize": 20,
+            "controlHeight": 48,
+            "fontWeightStrong": 500,
+            "colorText": "#123456",
+            "colorBgContainer": "#f0e0d0",
+            "paddingXXS": 5
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(240, 224, 208)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "middle-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "small": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(240, 224, 208)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "33.4219px"
+        },
+        "small-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(240, 224, 208)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgb(18, 52, 86)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "filled-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "borderless": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "borderless-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "underlined": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(240, 224, 208)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "underlined-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "disabled": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "disabled-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "31.4219px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(240, 224, 208)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(240, 224, 208)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "5px",
+          "paddingBottom": "5px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "12px",
+          "height": "48px",
+          "minHeight": "48px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "24px",
+          "height": "48px",
+          "fontWeight": "400",
+          "minHeight": "48px"
+        },
+        "Beta": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "24px",
+          "height": "48px",
+          "fontWeight": "400",
+          "minHeight": "48px"
+        },
+        "Disabled": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "24px",
+          "height": "48px",
+          "fontWeight": "400",
+          "minHeight": "48px"
+        },
+        "Gamma": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "12px",
+          "height": "48px",
+          "fontWeight": "400",
+          "minHeight": "48px"
+        },
+        "empty": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "12px",
+          "minHeight": "48px",
+          "height": "48px"
+        }
+      }
+    },
+    {
+      "name": "own-tokens",
+      "config": {
+        "components": {
+          "Select": {
+            "optionFontSize": 17,
+            "optionLineHeight": 1.8,
+            "optionPadding": "3px 9px",
+            "optionHeight": 50,
+            "optionSelectedFontWeight": 700,
+            "optionSelectedColor": "#220033",
+            "optionSelectedBg": "#aabbcc",
+            "optionActiveBg": "#ccbbaa",
+            "selectorBg": "#ffedcc",
+            "multipleItemBg": "#ccddaa",
+            "multipleItemHeight": 30,
+            "multipleItemHeightSM": 20,
+            "multipleItemHeightLG": 44,
+            "multipleItemColorDisabled": "#0033aa",
+            "multipleItemBorderColor": "red",
+            "multipleItemBorderColorDisabled": "blue",
+            "hoverBorderColor": "#884411",
+            "activeBorderColor": "#114488",
+            "activeOutlineColor": "#ddffff",
+            "zIndexPopup": 1510
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1510",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "21.6px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "3px",
+          "paddingRight": "9px",
+          "paddingBottom": "3px",
+          "paddingLeft": "9px",
+          "height": "50px",
+          "minHeight": "50px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "17px",
+          "lineHeight": "30.6px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "3px",
+          "paddingRight": "9px",
+          "paddingBottom": "3px",
+          "paddingLeft": "24px",
+          "height": "50px",
+          "fontWeight": "400",
+          "minHeight": "50px"
+        },
+        "Beta": {
+          "fontSize": "17px",
+          "lineHeight": "30.6px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(204, 187, 170)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "3px",
+          "paddingRight": "9px",
+          "paddingBottom": "3px",
+          "paddingLeft": "24px",
+          "height": "50px",
+          "fontWeight": "400",
+          "minHeight": "50px"
+        },
+        "Disabled": {
+          "fontSize": "17px",
+          "lineHeight": "30.6px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "3px",
+          "paddingRight": "9px",
+          "paddingBottom": "3px",
+          "paddingLeft": "24px",
+          "height": "50px",
+          "fontWeight": "400",
+          "minHeight": "50px"
+        },
+        "Gamma": {
+          "fontSize": "17px",
+          "lineHeight": "30.6px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "3px",
+          "paddingRight": "9px",
+          "paddingBottom": "3px",
+          "paddingLeft": "9px",
+          "height": "50px",
+          "fontWeight": "400",
+          "minHeight": "50px"
+        },
+        "empty": {
+          "fontSize": "17px",
+          "lineHeight": "30.6px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "3px",
+          "paddingRight": "9px",
+          "paddingBottom": "3px",
+          "paddingLeft": "9px",
+          "minHeight": "50px",
+          "height": "50px"
+        }
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Select": {
+            "fontSize": 18,
+            "controlHeight": 44,
+            "algorithm": true
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "8px",
+          "paddingRight": "11px",
+          "paddingBottom": "8px",
+          "paddingLeft": "11px",
+          "height": "44px"
+        },
+        "middle-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "small": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "2.5px",
+          "paddingRight": "7px",
+          "paddingBottom": "2.5px",
+          "paddingLeft": "7px",
+          "height": "33px"
+        },
+        "small-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "large": {
+          "fontSize": "20px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "12.5px",
+          "paddingRight": "11px",
+          "paddingBottom": "12.5px",
+          "paddingLeft": "11px",
+          "height": "55px"
+        },
+        "large-input": {
+          "fontSize": "20px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "28px"
+        },
+        "filled": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "11px",
+          "paddingBottom": "8px",
+          "paddingLeft": "11px",
+          "height": "44px"
+        },
+        "filled-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "borderless": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "11px",
+          "paddingBottom": "8px",
+          "paddingLeft": "11px",
+          "height": "44px"
+        },
+        "borderless-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "underlined": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "11px",
+          "paddingBottom": "8px",
+          "paddingLeft": "11px",
+          "height": "44px"
+        },
+        "underlined-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "26px"
+        },
+        "disabled": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "8px",
+          "paddingRight": "11px",
+          "paddingBottom": "8px",
+          "paddingLeft": "11px",
+          "height": "44px"
+        },
+        "disabled-input": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "26px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "14px",
+          "lineHeight": "14px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "14px",
+          "height": "14px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "14px",
+          "lineHeight": "20.2222px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "9px",
+          "paddingRight": "12px",
+          "paddingBottom": "9px",
+          "paddingLeft": "12px",
+          "height": "44px",
+          "minHeight": "44px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "9px",
+          "paddingRight": "12px",
+          "paddingBottom": "9px",
+          "paddingLeft": "24px",
+          "height": "44px",
+          "fontWeight": "400",
+          "minHeight": "44px"
+        },
+        "Beta": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "9px",
+          "paddingRight": "12px",
+          "paddingBottom": "9px",
+          "paddingLeft": "24px",
+          "height": "44px",
+          "fontWeight": "400",
+          "minHeight": "44px"
+        },
+        "Disabled": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "9px",
+          "paddingRight": "12px",
+          "paddingBottom": "9px",
+          "paddingLeft": "24px",
+          "height": "44px",
+          "fontWeight": "400",
+          "minHeight": "44px"
+        },
+        "Gamma": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "9px",
+          "paddingRight": "12px",
+          "paddingBottom": "9px",
+          "paddingLeft": "12px",
+          "height": "44px",
+          "fontWeight": "400",
+          "minHeight": "44px"
+        },
+        "empty": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "9px",
+          "paddingRight": "12px",
+          "paddingBottom": "9px",
+          "paddingLeft": "12px",
+          "minHeight": "44px",
+          "height": "44px"
+        }
+      }
+    },
+    {
+      "name": "component-dark",
+      "config": {
+        "components": {
+          "Select": {
+            "colorPrimary": "#a011cc",
+            "algorithm": [
+              "darkAlgorithm"
+            ]
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0.08)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.08)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(255, 255, 255, 0.016) 0px 6px 16px 0px, rgba(255, 255, 255, 0.024) 0px 3px 6px -4px, rgba(255, 255, 255, 0.01) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "minHeight": "32px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.85)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0.08)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.85)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.85)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "32px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "minHeight": "32px",
+          "height": "32px"
+        }
+      }
+    },
+    {
+      "name": "unitless-string-values",
+      "config": {
+        "components": {
+          "Select": {
+            "optionSelectedFontWeight": "bold",
+            "optionLineHeight": "2",
+            "zIndexPopup": 0
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "0",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "34px",
+          "minHeight": "32px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "38px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "38px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "38px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "38px",
+          "fontWeight": "400",
+          "minHeight": "32px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "28px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "minHeight": "32px",
+          "height": "38px"
+        }
+      }
+    },
+    {
+      "name": "zero-component-values",
+      "config": {
+        "components": {
+          "Select": {
+            "multipleItemHeight": 0,
+            "multipleItemHeightSM": 0,
+            "multipleItemHeightLG": 0,
+            "optionHeight": 0,
+            "optionPadding": 0,
+            "optionSelectedFontWeight": 0,
+            "showArrowPaddingInlineEnd": 0
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "18.8438px",
+          "minHeight": "0px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "24px",
+          "height": "22px",
+          "fontWeight": "400",
+          "minHeight": "0px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "24px",
+          "height": "22px",
+          "fontWeight": "400",
+          "minHeight": "0px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "24px",
+          "height": "22px",
+          "fontWeight": "400",
+          "minHeight": "0px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "22px",
+          "fontWeight": "400",
+          "minHeight": "0px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "minHeight": "0px",
+          "height": "22px"
+        }
+      }
+    },
+    {
+      "name": "undefined-component-values",
+      "config": {
+        "components": {
+          "Select": {
+            "optionHeight": {
+              "$type": "undefined"
+            },
+            "optionPadding": {
+              "$type": "undefined"
+            },
+            "optionFontSize": {
+              "$type": "undefined"
+            },
+            "selectorBg": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "18.8438px",
+          "minHeight": "auto",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "24px",
+          "height": "22px",
+          "fontWeight": "400",
+          "minHeight": "auto"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "24px",
+          "height": "22px",
+          "fontWeight": "400",
+          "minHeight": "auto"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "24px",
+          "height": "22px",
+          "fontWeight": "400",
+          "minHeight": "auto"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "22px",
+          "fontWeight": "400",
+          "minHeight": "auto"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "minHeight": "0px",
+          "height": "22px"
+        }
+      }
+    },
+    {
+      "name": "custom-prefix",
+      "config": {
+        "cssVar": {
+          "prefix": "Select2"
+        },
+        "components": {
+          "Select": {
+            "optionHeight": 45,
+            "optionSelectedFontWeight": 550,
+            "multipleItemHeight": 26
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "middle-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "small": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "24px"
+        },
+        "small-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "filled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "borderless": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "borderless-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "underlined": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "underlined-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "22px"
+        },
+        "disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "4px",
+          "paddingRight": "11px",
+          "paddingBottom": "4px",
+          "paddingLeft": "11px",
+          "height": "32px"
+        },
+        "disabled-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "22px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "32px"
+        },
+        "custom-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "32px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "45px",
+          "minHeight": "45px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "45px",
+          "fontWeight": "400",
+          "minHeight": "45px"
+        },
+        "Beta": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "45px",
+          "fontWeight": "400",
+          "minHeight": "45px"
+        },
+        "Disabled": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "24px",
+          "height": "45px",
+          "fontWeight": "400",
+          "minHeight": "45px"
+        },
+        "Gamma": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "height": "45px",
+          "fontWeight": "400",
+          "minHeight": "45px"
+        },
+        "empty": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "5px",
+          "paddingRight": "12px",
+          "paddingBottom": "5px",
+          "paddingLeft": "12px",
+          "minHeight": "45px",
+          "height": "45px"
+        }
+      }
+    },
+    {
+      "name": "custom-input-tokens",
+      "config": {
+        "components": {
+          "Select": {
+            "fontSize": 20,
+            "controlHeight": 48,
+            "colorText": "#123456",
+            "selectorBg": "#ffedcc"
+          },
+          "Input": {
+            "fontSize": 17,
+            "controlHeight": 36,
+            "inputFontSize": 18,
+            "colorPrimary": "#009955",
+            "algorithm": true
+          }
+        }
+      },
+      "metrics": {
+        "middle": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "middle-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "small": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "4px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "0px",
+          "paddingRight": "7px",
+          "paddingBottom": "0px",
+          "paddingLeft": "7px",
+          "height": "33.4219px"
+        },
+        "small-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "large": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "8px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "7px",
+          "paddingRight": "11px",
+          "paddingBottom": "7px",
+          "paddingLeft": "11px",
+          "height": "40px"
+        },
+        "large-input": {
+          "fontSize": "16px",
+          "lineHeight": "24px",
+          "color": "rgb(18, 52, 86)",
+          "height": "24px"
+        },
+        "filled": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "filled-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "borderless": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "borderless-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "underlined": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "0px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "underlined-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "height": "31.4219px"
+        },
+        "disabled": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "6px",
+          "borderTopWidth": "1px",
+          "borderTopColor": "rgb(217, 217, 217)",
+          "paddingTop": "12px",
+          "paddingRight": "11px",
+          "paddingBottom": "12px",
+          "paddingLeft": "11px",
+          "height": "57.4219px"
+        },
+        "disabled-input": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "height": "31.4219px"
+        },
+        "custom": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "36.0625px"
+        },
+        "custom-input": {
+          "fontSize": "18px",
+          "lineHeight": "26.4706px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "height": "36.0625px"
+        },
+        "textarea": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(255, 237, 204)",
+          "borderRadius": "6px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "height": "72px"
+        },
+        "textarea-input": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgb(0, 0, 0)",
+          "height": "72px"
+        },
+        "popup": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingBottom": "4px",
+          "borderRadius": "8px",
+          "zIndex": "1050",
+          "boxShadow": "rgba(0, 0, 0, 0.08) 0px 6px 16px 0px, rgba(0, 0, 0, 0.12) 0px 3px 6px -4px, rgba(0, 0, 0, 0.05) 0px 9px 28px 8px"
+        },
+        "clear": {
+          "fontSize": "12px",
+          "lineHeight": "12px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "width": "12px",
+          "height": "12px",
+          "insetInlineEnd": "11px"
+        },
+        "group": {
+          "fontSize": "12px",
+          "lineHeight": "18.8571px",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.45)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "12px",
+          "height": "48px",
+          "minHeight": "48px",
+          "fontWeight": "400"
+        },
+        "Alpha": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "24px",
+          "height": "48px",
+          "fontWeight": "400",
+          "minHeight": "48px"
+        },
+        "Beta": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0.04)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "24px",
+          "height": "48px",
+          "fontWeight": "400",
+          "minHeight": "48px"
+        },
+        "Disabled": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "24px",
+          "height": "48px",
+          "fontWeight": "400",
+          "minHeight": "48px"
+        },
+        "Gamma": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgb(18, 52, 86)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "borderRadius": "4px",
+          "borderTopWidth": "0px",
+          "borderTopColor": "rgb(18, 52, 86)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "12px",
+          "height": "48px",
+          "fontWeight": "400",
+          "minHeight": "48px"
+        },
+        "empty": {
+          "fontSize": "20px",
+          "lineHeight": "31.4286px",
+          "color": "rgba(0, 0, 0, 0.25)",
+          "paddingTop": "8.28571px",
+          "paddingRight": "12px",
+          "paddingBottom": "8.28571px",
+          "paddingLeft": "12px",
+          "minHeight": "48px",
+          "height": "48px"
+        }
+      }
+    }
+  ]
+}
