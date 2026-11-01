@@ -2058,7 +2058,7 @@
             "tests/package/auto-complete.ssr.test.ts",
             "tests/browser/auto-complete.spec.ts"
           ],
-          "note": "Без options и notFoundContent popup скрыт даже при open=true; SSR всегда закрыт как rc-select useOpen. Native popover сохраняет фокус input, popupMatchSelectWidth/listHeight/onPopupScroll, outside/Escape и cleanup. Native FormData, FormItem/required/status/reset и disabled, размеры/variants, themes/RTL/Compact. CSS Select переиспользуется из vendor/antd.css, как upstream AutoComplete."
+          "note": "Без options и notFoundContent popup скрыт даже при open=true; SSR всегда закрыт как rc-select useOpen. OnOpenChange сообщает запрос до обновления локального open, включая controlled open=false. Native popover сохраняет фокус input, popupMatchSelectWidth/listHeight/onPopupScroll, outside/Escape и cleanup. Native FormData, FormItem/required/status/reset и disabled, размеры/variants, themes/RTL/Compact. CSS Select переиспользуется из vendor/antd.css, как upstream AutoComplete."
         },
         {
           "id": "extended-api",

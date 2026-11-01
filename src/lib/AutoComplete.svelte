@@ -174,9 +174,9 @@
   }
   function requestOpen(next: boolean) {
     if (next && (blocked || readonly)) return;
-    innerOpen = next;
     if (next !== visible)
       onOpenChange?.(next);
+    innerOpen = next;
   }
   function change(next: string | undefined, before = actualValue) {
     innerValue = next;

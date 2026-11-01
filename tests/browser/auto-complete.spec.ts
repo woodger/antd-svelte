@@ -7,6 +7,23 @@ test.beforeEach(
   async ({ page }) => { await page.goto('/?fixture=auto-complete'); }
 );
 
+test('AutoComplete reports local and controlled open requests', async ({ page }) => {
+  await input(page).click();
+
+  await expect(popup(page)).toBeVisible();
+  await expect(page.getByLabel('Completion openings', { exact: true })).toHaveText('[true]');
+  await input(page).press('Escape');
+
+  await expect(popup(page)).toHaveCount(0);
+  await expect(page.getByLabel('Completion openings', { exact: true })).toHaveText('[true,false]');
+  await page.getByLabel('Lock completion closed', { exact: true }).check();
+  await input(page).fill('alpha');
+
+  await expect(input(page)).toHaveAttribute('aria-expanded', 'false');
+  await expect(page.getByLabel('Completion openings', { exact: true }))
+    .toHaveText('[true,false,true]');
+});
+
 test(
   'AutoComplete accepts free input without local filtering and selects the option value rather than its label',
   async ({ page }) => {

@@ -5634,7 +5634,9 @@ ShowSearch object объединяет filterOption/onSearch с прежними
 
 Open/defaultOpen задают controlled/uncontrolled popup. Без options и непустого
 notFoundContent popup скрыт даже при open=true. SSR оставляет его закрытым до
-mount, как rc-select useOpen. PopupMatchSelectWidth — boolean/число, listHeight
+mount, как rc-select useOpen. OnOpenChange получает запрос на смену открытого
+состояния, включая отклонённый controlled open=false запрос.
+PopupMatchSelectWidth — boolean/число, listHeight
 по умолчанию 256; onPopupScroll передаёт native scroll event. Поверхность — native
 popover с сохранением фокуса input, outside/Escape и cleanup.
 
