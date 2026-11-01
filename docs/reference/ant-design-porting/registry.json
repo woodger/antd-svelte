@@ -4942,6 +4942,7 @@
         "src/lib/calendar.ssr.test.ts",
         "tests/package/calendar.ssr.test.ts",
         "tests/browser/calendar.spec.ts",
+        "tests/browser/calendar-header.spec.ts",
         "tests/browser/fixtures/CalendarFixtures.svelte",
         "tests/browser/fixtures/calendar-date-adapter.ts",
         "tools/ant-design-css-recipes.json",
@@ -4966,7 +4967,8 @@
           "requiredForV1": true,
           "evidence": [
             "src/lib/calendar.engine.test.ts",
-            "tests/browser/calendar.spec.ts"
+            "tests/browser/calendar.spec.ts",
+            "tests/browser/calendar-header.spec.ts"
           ],
           "note": "Полные inclusive timestamps и predicate short-circuit; month disabled по двум endpoints, без сканирования. Header предлагает 20 лет или range, ограничивает месяцы, сохраняет день и время; не применяет disabledDate. Сохранены существующие Svelte Select/RadioGroup и их disabled/bind/native contracts."
         },
@@ -5000,9 +5002,10 @@
           "evidence": [
             "src/lib/calendar.ssr.test.ts",
             "tests/browser/calendar.spec.ts",
-            "tools/ant-design-css-recipes.json"
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/calendar-header.spec.ts"
           ],
-          "note": "123 исходных CSS rules, full/mini и mobile header. Все шесть semantic slots, functions и root style priority, component config replacement. Calendar locale отдельна от DatePicker; props.locale deep merge. Default ruRU сохраняет библиотечный контракт. Grid/roving focus и Enter/Space/Home/End/arrows — явная Svelte accessibility adaptation к pointer-only standalone PickerPanel."
+          "note": "123 исходных CSS rules, full/mini и mobile header. Все шесть semantic slots, functions и root style priority, component config replacement. Calendar locale отдельна от DatePicker; props.locale deep merge. Default ruRU сохраняет библиотечный контракт. Grid/roving focus и Enter/Space/Home/End/arrows — явная Svelte accessibility adaptation к pointer-only standalone PickerPanel. Локальная геометрия CalendarHeader учитывает внешние div Select: desktop widths 80/70px, nowrap mode switch; mobile поля рядом и режим ниже. Проверяются реальные границы controls при 300/360px и viewport 1280/390/320, обе панели, en/ru, compact/RTL и клавиатура без CSS сайта."
         },
         {
           "id": "theme-prefix-diagnostics",

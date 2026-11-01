@@ -3263,6 +3263,13 @@ control предотвращает выбор родительской ячей�
 
 Из архива извлечены 123 CSS-правила Calendar, включая full/mini, week и mobile
 header. Темы, primary, compact и RTL используют текущие tokens библиотеки.
+В desktop-шапке внешние обёртки Select получают ширины yearControlWidth=80px и
+monthControlWidth=70px; переключатель режима не переносит отдельные кнопки.
+При viewport до 480px год и месяц располагаются рядом, переключатель — ниже,
+как в исходном Calendar. Эти правила принадлежат CalendarHeader и не меняют
+геометрию остальных Select/RadioGroup. Границы полей и кнопок в мини-календарях
+300/360px, mobile/RTL и работа dropdown/клавиатуры проверяются в
+[calendar-header](./tests/browser/calendar-header.spec.ts).
 Проверки: [engine](./src/lib/calendar.engine.test.ts),
 [SSR](./src/lib/calendar.ssr.test.ts),
 [public package](./tests/package/calendar.ssr.test.ts),

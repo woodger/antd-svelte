@@ -65,9 +65,13 @@
 </script>
 
 <style>
+  /* Auto width внешнего div Select зависит от intrinsic ширины native input. */
+  .ant-picker-calendar-header :global(.ant-picker-calendar-year-select),
+  .ant-picker-calendar-header :global(.ant-picker-calendar-month-select) { display: inline-block; flex: none; vertical-align: top; }
+  .ant-picker-calendar-header :global(.ant-picker-calendar-mode-switch) { flex-shrink: 0; flex-wrap: nowrap; }
   @media (width > 480px) {
-    .ant-picker-calendar-header :global(.ant-picker-calendar-year-select),
-    .ant-picker-calendar-header :global(.ant-picker-calendar-month-select) { width: auto; flex-shrink: 0; }
+    .ant-picker-calendar-header :global(.ant-picker-calendar-year-select) { width: var(--ant-calendar-year-control-width); }
+    .ant-picker-calendar-header :global(.ant-picker-calendar-month-select) { width: var(--ant-calendar-month-control-width); }
   }
 </style>
 
@@ -82,8 +86,7 @@
       if (year !== undefined)
         onChange(calendarSetYear(value, year, validRange, generateConfig), 'year');
     }}
-  />
-  {#if mode === 'month'}
+  />{#if mode === 'month'}
     <Select
       class="ant-picker-calendar-month-select"
       aria-label={locale.monthSelect ?? locale.month}
@@ -94,8 +97,7 @@
         if (month !== undefined) onChange(generateConfig.setMonth(value, month), 'month');
       }}
     />
-  {/if}
-  <RadioGroup
+  {/if}<RadioGroup
     class="ant-picker-calendar-mode-switch"
     aria-label={`${locale.month} / ${locale.year}`}
     size={fullscreen ? undefined : 'small'}

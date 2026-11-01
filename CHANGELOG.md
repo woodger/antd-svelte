@@ -173,6 +173,10 @@
 
 ### Fixed
 
+- CalendarHeader: мини-календарь 300/360px вмещает оба Select и переключатель
+  режима на desktop; на mobile год и месяц находятся рядом, переключатель ниже.
+  Исправлены только локальные обёртки шапки, сохранены Select/RadioGroup,
+  клавиатура, dropdown, full/mini, month/year, темы и RTL.
 - Native compact: согласованы fontSize/lineHeight/fontHeight и controlHeight с
   compactAlgorithm, применены font/padding metrics Button/Input/TextArea/InputNumber
   без включения source colors. Middle controls имеют 28px, large — 35px; small
