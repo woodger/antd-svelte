@@ -14,6 +14,7 @@
   import type { PaginationComponentConfig } from './pagination.types';
   import type { ListConfig } from './list.types';
   import type { ListyConfig } from './listy.types';
+  import type { TypographyConfig } from './typography.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -45,6 +46,7 @@
     pagination?: PaginationComponentConfig;
     list?: ListConfig;
     listy?: ListyConfig;
+    typography?: TypographyConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
@@ -85,6 +87,7 @@
     pagination,
     list,
     listy,
+    typography,
     virtual,
     renderEmpty,
     rangePicker,
@@ -147,6 +150,9 @@
     get listy() {
       return listy ?? parent.listy;
     },
+    get typography() {
+      return typography ?? parent.typography;
+    },
     get virtual() {
       return virtual ?? parent.virtual;
     },
@@ -196,6 +202,18 @@
       return {
         ...parent.locale,
         ...locale,
+        typography: {
+          ...parent.locale.typography,
+          ...parent.locale.Text,
+          ...locale?.typography,
+          ...locale?.Text
+        },
+        Text: {
+          ...parent.locale.typography,
+          ...parent.locale.Text,
+          ...locale?.typography,
+          ...locale?.Text
+        },
         global: { ...parent.locale.global, ...locale?.global },
         pagination: { ...parent.locale.pagination, ...locale?.pagination },
         table: { ...parent.locale.table, ...locale?.table },

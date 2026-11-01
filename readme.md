@@ -125,6 +125,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | --- | --- |
 | ConfigProvider | Светлая и тёмная темы, три основных цвета, компактная плотность, размеры, disabled, направление и локаль |
 | Button / ButtonGroup | Native button/href, color/variant/ghost, loading delay/icon, semantic slots, config, Group и Compact |
+| Typography / TypographyText / TypographyTitle / TypographyParagraph / TypographyLink | Нативный текст, decorations, copy/edit, CSS/JS ellipsis, expand/collapse и semantic config |
 | FloatButton / FloatButtonGroup / FloatButtonBackTop | Плавающие native actions, Badge/Tooltip, меню групп и возврат с прогрессом прокрутки |
 | Watermark | Text/image Canvas tiles, per-line fonts, offsets, mutation repair, наследование Modal/Drawer |
 | BorderBeam | CSS-лучи по рамке нативного контейнера, градиенты, фазы, размеры и reduced motion |
@@ -3298,6 +3299,92 @@ React-specific refs/dev warnings остаются вне этого этапа. 
 Числовая/simple пагинация сверена с @rc-component/pagination 1.4.0;
 алгоритм страниц включён с [MIT-лицензией](./src/lib/vendor/LICENSE.rc-pagination).
 Delete icon перенесён из @ant-design/icons-svg 4.6.0 под существующей
+[MIT-лицензией](./src/lib/vendor/LICENSE.ant-design-icons).
+
+## Typography
+
+`Typography` — нативный `article` с типографическими стилями; `component` меняет
+его тег. `TypographyText`, `TypographyTitle`, `TypographyParagraph` и
+`TypographyLink` соответствуют Text/Title/Paragraph/Link Ant Design 6.6.8 и
+добавляют операции над текстом. Точные контракты находятся в
+[typography.types.ts](./src/lib/typography.types.ts).
+
+```svelte
+<script lang="ts">
+  import { TypographyTitle, TypographyParagraph, TypographyLink } from 'antd-svelte';
+
+  let text = $state('Длинный текст статьи');
+  let expanded = $state(false);
+</script>
+
+<TypographyTitle level={2}>Название статьи</TypographyTitle>
+<TypographyParagraph children={text} copyable
+  editable={{ onChange: value => { text = value; } }}
+  ellipsis={{ rows: 2, expandable: 'collapsible', expanded,
+    onExpand: (_event, info) => { expanded = info.expanded; } }} />
+<TypographyLink href="/articles" target="_blank">Все статьи</TypographyLink>
+```
+
+Text рендерит `span`, Title — `h1`–`h5` (по умолчанию `h1`), Paragraph — `div`,
+Link — `a`. У Link с `target="_blank"` и не заданным `rel` добавляется
+`noopener noreferrer`. `disabled` меняет оформление; кнопки copy/edit/expand
+сохраняют интерактивность, как в upstream. Decorations оборачивают текст вместе
+с действиями; `actions.placement` переносит панель в начало или конец.
+
+`copyable` принимает настройки text, format, icon, tooltips, tabIndex и onCopy.
+Async producer вызывается по клику; пустой text использует исходный children
+fallback. HTML копируется как `text/html` и `text/plain`; при отказе Clipboard API
+применяется document copy fallback. Успешное состояние сбрасывается через три
+секунды. Уже начатая операция и callback завершаются после unmount без нового
+таймера. Для богатого содержимого указывайте `copyable.text`: исходный array
+fallback объединяет верхний уровень, а узлы элементов превращает в
+`[object Object]`.
+
+`editable` управляет режимом через editing; callbacks сами не заменяют children.
+Редактор получает editable.text или строковые children. Ввод удаляет CR/LF,
+сохранение применяет trim. Enter вызывает onChange и onEnd, Escape — onCancel,
+blur — только onChange; IME и модификаторы Enter учитываются. Поддержаны
+triggerType, maxLength, autoSize, tooltip, icon и tabIndex. `enterIcon={null}`
+скрывает подтверждение; custom enterIcon snippet получает CSS class первым
+аргументом вместо React cloneElement. При закрытии фокус возвращается к edit icon.
+Редактор не становится control внешнего FormItem. При blur без relatedTarget
+проверка connected выполняется после Svelte tick: удаление focused DOM не должно
+сохранять draft. `bind:nativeElement` отсутствует во время editing и очищается
+при unmount.
+
+Без действий и других настроек ellipsis использует native CSS. JS-ветка измеряет
+строки и операции, ищет границу по UTF-16, сохраняет suffix и полный aria-label.
+Поддержаны rows, expandable/collapsible, symbol, defaultExpanded, expanded,
+onExpand, onEllipsis и tooltip. DefaultExpanded читается один раз. Text исключает
+rows/expandable/onExpand; для responsive ширины Text задайте style. Link принимает
+boolean ellipsis. Tooltip измеряет native overflow при наведении и скрывается
+над панелью действий.
+
+Scalar children и массивы передают точные границы текста до SSR. В массиве snippet
+остаётся атомом. Обычный текстовый children snippet распознаётся после mount через
+DOM; при JS truncation и editing исходный snippet остаётся в скрытом `span`, чтобы
+получать обновления. Его полный текст поэтому остаётся в textContent, а видимый обрезанный
+текст доступен через innerText. Для точного initial SSR editing используйте
+scalar children или editable.text. Богатый snippet не разбирается как React tree.
+
+ConfigProvider.typography задаёт class/style и semantic root/actions/action/textarea;
+локальные слои имеют приоритет. Callback видит разрешённые prefixCls/direction и
+фактический component. Locale.typography и исходный locale.Text задают подписи
+действий; Text имеет приоритет при совместном использовании. Сохранены dark,
+compact, RTL, native focus и исходные heading margins.
+
+Tooltip использует общий native popover внутри корня вместо React body portal.
+Corner placements, click/contextMenu, popup styles/container и полный token engine
+ещё не перенесены. Vendor CSS рассчитан на `ant-typography`, произвольный prefix
+не генерирует новый CSS.
+
+Проверки: [engine](./src/lib/typography.engine.test.ts),
+[copy lifecycle](./src/lib/typography-copy.model.test.ts),
+[public package SSR](./tests/package/typography.ssr.test.ts),
+[browser](./tests/browser/typography.spec.ts), `?fixture=typography`.
+[73 исходных CSS rules](./src/lib/vendor/typography.css) воспроизводятся
+[рецептом](./tools/ant-design-css-recipes.json). Иконки взяты из
+@ant-design/icons-svg 4.6.0 под существующей
 [MIT-лицензией](./src/lib/vendor/LICENSE.ant-design-icons).
 
 ## List / ListItem / ListItemMeta

@@ -9,6 +9,10 @@
 
 ### Added
 
+- Typography/Text/Title/Paragraph/Link: исходные decorations, copyable с Clipboard API
+  и document fallback, controlled editing, CSS/JS ellipsis, expand/collapse, semantic
+  config, locale, native refs, темы/RTL и CSS-рецепт. Добавлены unit/package/browser
+  проверки; адаптация opaque snippets и границы SSR описаны в README.
 - Listy: группировка с исходными индексами, sticky headers, измеряемая виртуализация,
   scrollTo, native wheel/touch/selection drag и scrollbar. Добавлены ConfigProvider.listy/
   virtual, refs, CSS-рецепт, лицензии и unit/SSR/package/browser проверки; сохранены

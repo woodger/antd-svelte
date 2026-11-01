@@ -1,4 +1,6 @@
 import type { Snippet } from 'svelte';
+import type { TypographyLocale } from './typography.types';
+import { typographyEnUS, typographyRuRU } from './typography.locale';
 import type { UploadLocale } from './upload.types';
 import type { DatePickerLocale } from './date-picker.types';
 import { datePickerEnUS, datePickerRuRU } from './date-picker.locale';
@@ -26,6 +28,9 @@ export interface ThemeConfig {
 }
 
 export interface Locale {
+  typography?: Partial<TypographyLocale>;
+  /** Исходный alias Ant Design; локальные поля Text перекрывают typography. */
+  Text?: Partial<TypographyLocale>;
   global?: { show?: string; hide?: string; };
   image?: { preview?: string; };
   tree?: { expand?: string; collapse?: string; };
@@ -158,6 +163,7 @@ export interface SelectOption<Value extends string | number = string> {
 }
 
 export const ruRU = {
+  typography: typographyRuRU,
   tree: { expand: 'Развернуть', collapse: 'Свернуть' },
   upload: {
     uploading: 'Загрузка...',
@@ -245,6 +251,7 @@ export const ruRU = {
 } satisfies Locale;
 
 export const enUS = {
+  typography: typographyEnUS,
   tree: { expand: 'Expand', collapse: 'Collapse' },
   upload: {
     uploading: 'Uploading...',

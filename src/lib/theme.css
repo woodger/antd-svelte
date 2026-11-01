@@ -328,6 +328,30 @@
   --ant-form-label-height: var(--ant-control-height);
 }
 
+.ant-typography-css-var {
+  --ant-line-height: calc(1 + 8px / var(--ant-font-size));
+  --ant-typography-title-margin-top: 1.2em;
+  --ant-typography-title-margin-bottom: 0.5em;
+}
+
+.ant-typography-css-var.ant-typography-compact {
+  --ant-font-size-heading-1: 32px;
+  --ant-font-size-heading-2: 26px;
+  --ant-font-size-heading-3: 20px;
+  --ant-font-size-heading-4: 16px;
+  --ant-font-size-heading-5: 14px;
+  --ant-line-height-heading-1: 1.25;
+  --ant-line-height-heading-2: 1.3076923076923077;
+  --ant-line-height-heading-3: 1.4;
+  --ant-line-height-heading-4: 1.5;
+  --ant-line-height-heading-5: 1.5714285714285714;
+}
+
+.ant-typography-compact > textarea.ant-input {
+  padding-block: 3px;
+  padding-inline: 7px;
+}
+
 .ant-listy-css-var {
   /* Исходный font map задаёт fontSize + 8px, в том числе для compact. */
   line-height: calc(var(--ant-font-size) + 8px);

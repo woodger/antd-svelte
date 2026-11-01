@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **99**.
-Есть публичная реализация у **66** семейств; отсутствует у **7**.
-Проверенный объём v1 покрыт у **39**; требуется аудит у **27**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **104**.
+Есть публичная реализация у **67** семейств; отсутствует у **6**.
+Проверенный объём v1 покрыт у **40**; требуется аудит у **27**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -18,7 +18,7 @@ Candidate означает запись каталога, для которой 
 | [Button](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/button) | general | target | Button, ButtonGroup | Согласованный v1 покрыт | Автопробел для двух китайских символов (partial); Wave, loading icon enter/leave, prefixCls и произвольные component tokens (missing) |
 | [FloatButton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/float-button) | general | target | FloatButton, FloatButtonGroup, FloatButtonBackTop | Согласованный v1 покрыт | PrefixCls, общий z-index context, Wave и произвольные component tokens (missing) |
 | [Icon](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/icon) | general | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
-| [Typography](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/typography) | general | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
+| [Typography](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/typography) | general | target | Typography, TypographyText, TypographyTitle, TypographyParagraph, TypographyLink | Согласованный v1 покрыт | Границы ReactNode и непрозрачных Svelte snippets (partial); Полные theme tokens, произвольный prefix CSS и расширенные Tooltip props (missing) |
 | [Divider](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/divider) | layout | target | Divider | Согласованный v1 покрыт | Произвольные component tokens, prefixCls и component config (missing) |
 | [Flex](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/flex) | layout | target | Flex | Согласованный v1 покрыт | Пользовательский Svelte-компонент в component (missing); PrefixCls и глобальные настройки Flex в ConfigProvider (missing) |
 | [Grid](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/grid) | layout | target | Row, Col, createBreakpoint | Согласованный v1 покрыт | Пользовательские breakpoint/theme tokens и prefixCls (missing) |

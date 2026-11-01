@@ -683,6 +683,30 @@ export type {
   ListySemanticProps,
   ListySemanticName
 } from './listy.types';
+export { default as Typography } from './Typography.svelte';
+export { default as TypographyText } from './TypographyText.svelte';
+export { default as TypographyTitle } from './TypographyTitle.svelte';
+export { default as TypographyParagraph } from './TypographyParagraph.svelte';
+export { default as TypographyLink } from './TypographyLink.svelte';
+export type {
+  TypographyProps,
+  TypographyBlockProps,
+  TypographyTextProps,
+  TypographyTitleProps,
+  TypographyParagraphProps,
+  TypographyLinkProps,
+  TypographyConfig,
+  TypographyContent,
+  TypographyType,
+  TypographySemantic,
+  TypographySemanticProps,
+  TypographySlots,
+  TypographySemanticName,
+  TypographyCopyConfig,
+  TypographyEditConfig,
+  TypographyEllipsisConfig,
+  TypographyLocale
+} from './typography.types';
 export { default as TimePicker } from './TimePicker.svelte';
 export { default as TimeRangePicker } from './TimeRangePicker.svelte';
 export type {

@@ -273,24 +273,185 @@
       "id": "typography",
       "name": "Typography",
       "category": "general",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос Typography 6.6.8: нативные варианты, decorations, копирование, редактирование и CSS/JS ellipsis с сохранением исходных состояний и ограничений.",
       "upstreamPath": "components/typography",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "Typography",
+          "local": [
+            "Typography"
+          ]
+        },
+        {
+          "upstream": "Typography.Text",
+          "local": [
+            "TypographyText"
+          ]
+        },
+        {
+          "upstream": "Typography.Title",
+          "local": [
+            "TypographyTitle"
+          ]
+        },
+        {
+          "upstream": "Typography.Paragraph",
+          "local": [
+            "TypographyParagraph"
+          ]
+        },
+        {
+          "upstream": "Typography.Link",
+          "local": [
+            "TypographyLink"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "input",
+        "tooltip"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@ant-design/icons-svg",
+          "range": "^4.6.0",
+          "referenceVersion": "4.6.0"
+        },
+        {
+          "name": "@rc-component/input",
+          "range": "~1.3.1",
+          "referenceVersion": "1.3.1"
+        },
+        {
+          "name": "@rc-component/resize-observer",
+          "range": "^1.1.2",
+          "referenceVersion": "1.1.2"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "L",
+      "evidence": [
+        "src/lib/Typography.svelte",
+        "src/lib/TypographyText.svelte",
+        "src/lib/TypographyTitle.svelte",
+        "src/lib/TypographyParagraph.svelte",
+        "src/lib/TypographyLink.svelte",
+        "src/lib/TypographyBlock.svelte",
+        "src/lib/TypographyEllipsis.svelte",
+        "src/lib/TypographyEditable.svelte",
+        "src/lib/TypographySnippet.svelte",
+        "src/lib/TypographyTooltip.svelte",
+        "src/lib/typography.types.ts",
+        "src/lib/typography.engine.test.ts",
+        "src/lib/typography-copy.model.test.ts",
+        "src/lib/vendor/typography.css",
+        "tests/package/typography.ssr.test.ts",
+        "tests/browser/typography.spec.ts",
+        "tests/browser/fixtures/TypographyFixtures.svelte"
+      ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Нативные варианты, типы текста, decorations и actions",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "src/lib/typography.engine.test.ts",
+            "tests/package/typography.ssr.test.ts",
+            "tests/browser/typography.spec.ts"
+          ],
+          "note": "Article/span/h1–h5/div/a; порядок strong/u/del/code/mark/kbd/i, secure blank link, Text без rows/expandable, boolean ellipsis Link. Disabled — оформление, действия остаются интерактивными. Actions start/end и nativeElement bindings."
+        },
+        {
+          "id": "copyable",
+          "title": "Async text, Clipboard API, HTML и document copy fallback",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/typography.engine.test.ts",
+            "src/lib/typography-copy.model.test.ts",
+            "tests/browser/typography.spec.ts"
+          ],
+          "note": "Исходный falsy-text fallback и top-level array join; icon/tooltips normal/success, loading, tabIndex, 3s reset. text/html пишет оба формата; execCommand fallback снимает listener. Уже начатое копирование и callback завершаются после unmount, новый reset timer не создаётся."
+        },
+        {
+          "id": "editable",
+          "title": "Controlled/default editing, textarea, IME и callbacks",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/typography.engine.test.ts",
+            "tests/package/typography.ssr.test.ts",
+            "tests/browser/typography.spec.ts"
+          ],
+          "note": "Explicit text, icon/text triggers, maxLength/autoSize, enterIcon, trim и удаление CR/LF; Enter save+end, Escape cancel, blur save без end; фокус/каретка и возврат к edit icon. Внешний FormItem не получает editor value/name/blur. Svelte null-relatedTarget blur проверяет connected после tick, чтобы удаление focused DOM не вызывало save."
+        },
+        {
+          "id": "ellipsis",
+          "title": "CSS/JS ellipsis, suffix, expand/collapse и tooltip",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/typography.engine.test.ts",
+            "tests/package/typography.ssr.test.ts",
+            "tests/browser/typography.spec.ts"
+          ],
+          "note": "CSS single/multi-line без лишних измерений; JS DOM binary search с исходными rows-1/action heights, 1px allowance и UTF-16 slicing. Width/text/rows/placement remeasure, suffix, defaultExpanded once, controlled expansion/withdrawal, custom symbol и onEllipsis. Native tooltip measure только при hover; операции скрывают текстовую подсказку."
+        },
+        {
+          "id": "semantic-config",
+          "title": "ConfigProvider.typography и semantic root/actions/action/textarea",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/typography.ssr.test.ts",
+            "tests/browser/typography.spec.ts"
+          ],
+          "note": "Class/style и slot callbacks; локальный style имеет приоритет. Callback получает resolved prefixCls/direction и фактический component. Locale.typography и исходный Text alias; локальный direction, heading tokens compact, dark/RTL и доступный focus."
+        },
+        {
+          "id": "ssr-lifecycle",
+          "title": "SSR без DOM, очистка ресурсов и доступные native controls",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/typography.ssr.test.ts",
+            "src/lib/typography-copy.model.test.ts",
+            "tests/browser/typography.spec.ts"
+          ],
+          "note": "SSR начинает CSS clamp до измерений JS; initial editor со scalar/explicit text. Native button/anchor, aria-label полного текста, aria-hidden обрезанного контента, tooltip description и keyboard/focus. Таймеры, observers/listeners и native refs очищаются; unmount editor не сохраняет draft."
+        },
+        {
+          "id": "opaque-snippets",
+          "title": "Границы ReactNode и непрозрачных Svelte snippets",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/package/typography.ssr.test.ts",
+            "tests/browser/typography.spec.ts"
+          ],
+          "note": "Scalar/arrays сохраняют исходные границы; snippet внутри массива — атом. Обычный plain-text children snippet распознаётся в DOM, остаётся mounted в скрытом span при JS truncation/editing и обновляет copy/edit. Для точного SSR initial editing используйте scalar children/explicit editable.text. Богатый snippet не разбирается как React virtual tree; tooltip использует native popover внутри root вместо body portal."
+        },
+        {
+          "id": "advanced-source-api",
+          "title": "Полные theme tokens, произвольный prefix CSS и расширенные Tooltip props",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "note": "Сохраняются общие ограничения token engine/Tooltip: corner placements, click/contextMenu, portal container, popup semantic styles и arbitrary-prefix CSS ещё не перенесены. React dev warnings не воспроизводятся. V1-ready не означает полный React API."
         }
       ]
     },
