@@ -399,7 +399,7 @@
                   ]} style:inset-inline-start={selectionOptions?.fixed
                       ? fixedCells[expansionOffset].offset
                       : undefined} style:z-index={selectionOptions?.fixed ? 3 : undefined}>
-                  <Checkbox checked={selection.all} indeterminate={selection.some} disabled={resolvedDisabled || selection.disabled} aria-label={strings.selectAll} onCheckedChange={(checked) => changeSelection(
+                  <Checkbox skipGroup checked={selection.all} indeterminate={selection.some} disabled={resolvedDisabled || selection.disabled} aria-label={strings.selectAll} onCheckedChange={(checked) => changeSelection(
                       changeableKeys,
                       checked,
                       'all'
@@ -475,7 +475,7 @@
                     ]} style:inset-inline-start={selectionOptions?.fixed
                         ? fixedCells[expansionOffset].offset
                         : undefined} style:z-index={selectionOptions?.fixed ? 1 : undefined}>
-                    <Checkbox checked={selectedKeys.has(row.key)} disabled={resolvedDisabled || row.checkbox.disabled} aria-label={row.checkbox['aria-label']
+                    <Checkbox skipGroup checked={selectedKeys.has(row.key)} disabled={resolvedDisabled || row.checkbox.disabled} aria-label={row.checkbox['aria-label']
                         ?? `${strings.selectRow} ${row.key}`} onCheckedChange={(checked) => changeSelection(
                             [row.key],
                             checked,

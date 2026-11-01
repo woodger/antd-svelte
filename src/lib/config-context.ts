@@ -20,6 +20,7 @@ import type { SliderConfig } from './slider-range.types';
 import type { ColorPickerConfig } from './color-picker.types';
 import type { InputNumberConfig } from './input-number.types';
 import type { RadioConfig } from './radio.types';
+import type { CheckboxConfig } from './checkbox.types';
 import type { RenderEmptyHandler } from './types';
 import type { RangePickerConfig } from './range-picker.types';
 import type { InputConfig } from './input.types';
@@ -52,6 +53,7 @@ export interface ConfigContext {
   readonly colorPicker?: ColorPickerConfig;
   readonly inputNumber?: InputNumberConfig;
   readonly radio?: RadioConfig;
+  readonly checkbox?: CheckboxConfig;
   readonly virtual?: boolean;
   readonly renderEmpty?: RenderEmptyHandler;
   readonly rangePicker?: RangePickerConfig;

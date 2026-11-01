@@ -154,8 +154,8 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Mentions | Prefix/split, поиск и вставка у каретки, loading, autoSize и native popup |
 | AutoComplete | Свободный текст, options/groups, поиск, keyboard backfill, custom input и controlled popup |
 | Select | Одиночный и множественный выбор строковых/числовых значений; поиск, очистка, disabled options, клавиатура и FormData |
-| Checkbox | Checked/defaultChecked, смешанное состояние, нативные события и FormData, интеграция с FormItem |
-| CheckboxGroup | Типизированный массив выбранных значений, options, disabled, нативные checkbox, FormData, reset и интеграция с FormItem |
+| Checkbox | Checked/defaultChecked, mixed state, semantic config, callbacks/refs, native формы и участие в группе |
+| CheckboxGroup | Типизированный массив, options/children, skipGroup, semantic options, FormData, disabled и reset |
 | Radio | Checked/defaultChecked, semantic config, callbacks/refs, нативные группы и FormData |
 | RadioButton | Кнопочное оформление Radio, native input, group context и refs |
 | RadioGroup | Типизированный одиночный выбор, options, уникальное имя группы, горизонтальное/вертикальное расположение, required, reset и FormItem |
@@ -5742,16 +5742,39 @@ OnPopupScroll получает native scroll event с currentTarget=listbox; р�
 Встроенное правило `required` проверяет наличие значения, и `false` считается
 заданным значением. `form.resetFields()` возвращает значение из `initialValues`.
 
+OnChange получает `{ target, nativeEvent, stopPropagation, preventDefault }` с
+типизированными target.checked/value. Нативный onchange остаётся отдельным DOM
+событием. Callback Checkbox вызывается до Group.onChange; прежний onCheckedChange
+и сброс indeterminate при пользовательском переключении сохранены. NativeEvent —
+DOM change, а не React MouseEvent. Label/input используют исходный click bubble
+lock; наружу приходит один click на активацию подписи.
+
+ConfigProvider.checkbox задаёт class/style и semantic root/icon/label, в том числе
+для вариантов Group и вложенного provider. Локальные classNames/styles принимают
+объекты или функции от фактических checked/indeterminate/disabled props. Приоритет
+root style: config.styles.root, config.style, styles.root, style. Title относится
+к внутреннему span, как в исходном Checkbox; class/rootClassName/style — к label.
+PrefixCls меняет классы; CSS для произвольного префикса предоставляет потребитель.
+
+Bind:inputElement и bind:nativeElement возвращают input и внутренний span;
+bind:ref — `{ input, nativeElement, focus(options?), blur() }`. Ссылки очищаются при
+unmount. Focus/blur есть и у bind:this. AutoFocus вызывает native focus один раз
+при mount; lowercase autofocus сохраняет HTML-поведение. TabIndex — alias tabindex.
+OnFocus/onBlur/onKeyDown/onKeyPress работают на input, onMouseEnter/onMouseLeave —
+на label. Нативные lowercase handlers сохраняются.
+
 ## CheckboxGroup
 
 CheckboxGroup переносит выбор нескольких флажков в одно поле с массивом.
 `CheckboxGroupProps<Value>` и `CheckboxGroupOption<Value>` поддерживают
 string, number и boolean. Options принимает примитивы или объекты
-`{ value, label, disabled? }`; подпись примитива получается через String.
+`{ value, label, disabled?, id?, title?, className?, style?, required?, onChange? }`;
+подпись примитива получается через String. Label принимает строку, число или
+snippet; style — CSS-строка. Nullish entries/values пропускаются.
 
 ```svelte
 <script lang="ts">
-  import { CheckboxGroup } from 'antd-svelte';
+  import { Checkbox, CheckboxGroup } from 'antd-svelte';
 
   const options = [
     { value: 'read', label: 'Просмотр' },
@@ -5764,7 +5787,7 @@ string, number и boolean. Options принимает примитивы или 
 <CheckboxGroup {options} bind:value={permissions} name="permissions" aria-label="Права доступа" />
 ```
 
-Каждое пользовательское переключение обновляет bind:value и вызывает
+При options каждое пользовательское переключение обновляет bind:value и вызывает
 `onValueChange(values)` с новым массивом в порядке options. Массив callback
 не разделяется с привязкой. Повторяющиеся options показываются один раз;
 первая подпись и disabled-состояние сохраняются. Числовой 0 и строковый "0",
@@ -5807,8 +5830,44 @@ options; disabled, отсутствующие и невыбранные вари
 Галерея `/ant-design#checkbox` показывает форму выбора прав с общим флажком
 «Все права», промежуточным состоянием, проверкой количества, отправкой и сбросом.
 Общий выбор управляется владельцем через массив, как и в примере Ant Design.
-Группа пока строится через options; вложенные Checkbox и snippets для вариантов
-не поддерживаются.
+Непустые нормализованные options имеют приоритет над children; пустые оставляют
+snippet с вложенными Checkbox, включая Row/Col и другие контейнеры:
+
+```svelte
+<CheckboxGroup bind:value={permissions} name="permissions" aria-label="Права доступа">
+  <Checkbox value="read">Просмотр</Checkbox>
+  <Checkbox value="edit">Редактирование</Checkbox>
+</CheckboxGroup>
+```
+
+Children регистрируют текущие значения и отменяют регистрацию при удалении или
+смене value. Как upstream, их внутренний массив сохраняет порядок выбора и
+временно отсутствующие значения. Bind:value отражает этот raw state; callbacks
+получают только зарегистрированные значения. Поэтому вернувшийся child снова
+показывает сохранённый выбор. OnChange(values) вызывается перед onValueChange,
+массивы callbacks не разделяются с state. У options сохраняются описанные выше
+сортировка и нормализация прежнего API. Getter/setter function binding позволяет
+владельцу отклонять изменения; native checked восстанавливается по типизированным
+значениям, не смешивая 0 и '0'.
+
+SkipGroup оставляет Checkbox самостоятельным: его checked/name и callbacks не
+входят в группу. Disabled внешнего native fieldset продолжает действовать.
+Вложенные CheckboxGroup изолируют context; флажки выбора строк Table используют
+skipGroup, как в upstream. Group.nativeElement — bindable fieldset; rootClassName,
+prefixCls и явный role относятся к корню. PrefixCls передаётся в generated options,
+а children задают собственный prefixCls.
+
+Сохранены native fieldset/form/reset/required, принудительный disabled группы,
+primitive values и deduplication options, bind:indeterminate и defaults. Они
+отличаются от React state/ref conventions, child disabled override и controlled
+indeterminate. Общий token/prefix engine, точная dark/compact тема, Wave и React
+diagnostics/statics остаются неперенесёнными. Типы —
+[checkbox.types.ts](./src/lib/checkbox.types.ts) и
+[checkbox-group.types.ts](./src/lib/checkbox-group.types.ts); проверки —
+[browser](./tests/browser/checkbox-features.spec.ts),
+[package SSR](./tests/package/checkbox-features.ssr.test.ts) и
+[engine](./src/lib/checkbox-group.engine.test.ts). Изучены @rc-component/checkbox
+2.0.0 и @rc-component/util 1.14.0; runtime React dependencies не добавлены.
 
 ## Radio и RadioGroup
 

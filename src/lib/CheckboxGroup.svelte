@@ -3,21 +3,31 @@
   import Checkbox from './Checkbox.svelte';
   import { useConfig } from './config-context';
   import { useForm, useFormField } from './form-context';
-  import { getCheckboxGroupOptions, getCheckboxGroupValue } from './checkbox-group.engine';
+  import { provideCheckboxGroup } from './checkbox-context';
+  import {
+    getCheckboxGroupOptions,
+    getCheckboxGroupValue,
+    toggleCheckboxGroupChildren
+  } from './checkbox-group.engine';
   import type {
-    CheckboxGroupOption,
     CheckboxGroupProps,
     CheckboxGroupValue
   } from './checkbox-group.types';
 
   let {
-    options,
+    options = [],
+    children,
     value = $bindable<Value[]>(),
     defaultValue,
     disabled,
     id,
     name,
     onValueChange,
+    onChange,
+    prefixCls = 'ant-checkbox',
+    rootClassName,
+    role = 'group',
+    nativeElement = $bindable(),
     onfocus,
     'aria-invalid': ariaInvalid,
     style,
@@ -30,9 +40,11 @@
   const field = useFormField();
   const generatedId = $props.id();
   const initialDefault = untrack(() => [...(defaultValue ?? [])]);
-  const initialKeys = new Set(initialDefault);
   const resets = new Set<ReturnType<typeof setTimeout>>();
-  let container = $state<HTMLFieldSetElement>();
+  const members = new Map<HTMLInputElement, Value>();
+  let registeredValues: Value[] = [];
+  let container = $derived(nativeElement);
+  let alive = true;
   let controlId = $derived(id ?? field?.id ?? `ant-checkbox-group-${generatedId}`);
   let items = $derived(getCheckboxGroupOptions(options));
   let selected = $derived(new Set(value ?? initialDefault));
@@ -43,23 +55,76 @@
     [attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined
   );
 
+  provideCheckboxGroup<Value>({
+    get value() {
+      return value ?? initialDefault;
+    },
+    get defaultValue() {
+      return initialDefault;
+    },
+    get name() {
+      return name ?? field?.name;
+    },
+    get form() {
+      return attributes.form;
+    },
+    get disabled() {
+      return resolvedDisabled;
+    },
+    register(input, optionValue) {
+      members.set(input, optionValue);
+      registeredValues = [...registeredValues, optionValue];
+
+      return () => {
+        members.delete(input);
+        registeredValues = registeredValues.filter(item => item !== optionValue);
+      };
+    },
+    toggle: change
+  });
+
   onDestroy(() => {
+    alive = false;
+    members.clear();
+    registeredValues = [];
     for (const reset of resets)
       clearTimeout(reset);
   });
 
-  function change(option: CheckboxGroupOption<Value>, checked: boolean) {
-    if (resolvedDisabled || option.disabled || selected.has(option.value) === checked) return;
+  function syncMembers() {
+    for (const [input, optionValue] of members) input.checked = selected.has(optionValue);
+  }
 
-    const next = new Set(selected);
+  function change(optionValue: Value, checked: boolean) {
+    if (resolvedDisabled) return;
 
-    if (checked)
-      next.add(option.value);
-    else next.delete(option.value);
+    let values: Value[];
+    let nextValue: Value[];
 
-    const values = getCheckboxGroupValue(items, [...next]);
-    value = [...values];
-    onValueChange?.(values);
+    if (items.length) {
+      const option = items.find(item => item.value === optionValue);
+      if (!option || option.disabled || selected.has(optionValue) === checked) return;
+
+      const next = new Set(selected);
+      if (checked) next.add(optionValue);
+      else next.delete(optionValue);
+
+      values = getCheckboxGroupValue(items, [...next]);
+      nextValue = values;
+    } else {
+      const next = toggleCheckboxGroupChildren(
+        value ?? initialDefault,
+        optionValue,
+        registeredValues
+      );
+      nextValue = next.value;
+      values = next.callbackValue;
+    }
+
+    value = [...nextValue];
+    onChange?.([...values]);
+    if (alive) onValueChange?.(values);
+    if (alive) syncMembers();
   }
 
   function handleFocus(event: FocusEvent & { currentTarget: EventTarget & HTMLFieldSetElement; }) {
@@ -82,6 +147,7 @@
       if (event.defaultPrevented || !element.isConnected || element !== container) return;
 
       value = [...initialDefault];
+      syncMembers();
     }, 0);
     resets.add(reset);
   }
@@ -98,14 +164,16 @@
 
 <fieldset
   {...attributes}
-  bind:this={container}
+  bind:this={nativeElement}
   id={controlId}
   {name}
   {style}
+  {role}
   class={[
-      'ant-checkbox-group ant-checkbox-css-var',
-      config.direction === 'rtl' && 'ant-checkbox-group-rtl',
-      className
+      `${prefixCls}-group ant-checkbox-css-var`,
+      config.direction === 'rtl' && `${prefixCls}-group-rtl`,
+      className,
+      rootClassName
     ]}
   disabled={resolvedDisabled}
   aria-label={attributes['aria-label']
@@ -120,21 +188,20 @@
   tabindex="-1"
   onfocus={handleFocus}
 >
-  {#each items as option, index (option.value)}
-    <!-- Массивом и отменой reset управляет группа; дочерние привязки не меняют локальный checked. -->
-    <Checkbox
-      id={`${controlId}-${index}`}
-      name={name ?? field?.name}
-      value={String(option.value)}
-      form={attributes.form}
-      bind:checked={() => selected.has(option.value), () => { }}
-      defaultChecked={initialKeys.has(option.value)}
-      disabled={resolvedDisabled || option.disabled || false}
-      required={false}
-      aria-label={option.label}
-      aria-invalid={ariaInvalid}
-      aria-describedby={attributes['aria-describedby']}
-      onchange={(event) => change(option, event.currentTarget.checked)}
-    >{option.label}</Checkbox>
-  {/each}
+  {#if items.length}
+    {#each items as option, index (option.value)}
+      <Checkbox id={option.id ?? `${controlId}-${index}`} value={option.value} {prefixCls}
+        disabled={resolvedDisabled || option.disabled || false} required={option.required ?? false}
+        title={option.title} class={[`${prefixCls}-group-item`, option.className].filter(Boolean).join(' ')}
+        style={option.style} onChange={option.onChange}
+        aria-label={typeof option.label === 'string' || typeof option.label === 'number'
+          ? String(option.label) : undefined}
+        aria-invalid={ariaInvalid} aria-describedby={attributes['aria-describedby']}>
+        {#if typeof option.label === 'function'}{@render option.label()}
+        {:else}{option.label}{/if}
+      </Checkbox>
+    {/each}
+  {:else if children}
+    {@render children()}
+  {/if}
 </fieldset>

@@ -9,6 +9,9 @@
 
 ### Added
 
+- Checkbox: children/context/skipGroup, rich options, semantic config, callbacks,
+  refs и autoFocus. Children сохраняют исходные raw state и фильтрацию callbacks;
+  прежние options/FormData/reset/indeterminate сохранены, Table selection изолирован.
 - Radio: rich options, semantic config, исходные callbacks и click bubble lock,
   vertical alias, focus/blur refs и autoFocus. Сохранены native формы/reset/disabled;
   RadioGroup восстанавливает typed selection при отклонении function binding.

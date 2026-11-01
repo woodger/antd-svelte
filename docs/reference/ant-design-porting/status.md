@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **107**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **46**; требуется аудит у **24**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **47**; требуется аудит у **23**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -35,7 +35,7 @@ Candidate означает запись каталога, для которой 
 | [Tabs](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tabs) | navigation | target | Tabs | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Editable-card и меню overflow (missing) |
 | [AutoComplete](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/auto-complete) | data-entry | target | AutoComplete | Согласованный v1 покрыт | Virtual, fieldNames, render hooks, semantic/config API и legacy aliases (missing) |
 | [Cascader](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/cascader) | data-entry | target | Cascader, CascaderPanel, CASCADER_SHOW_PARENT, CASCADER_SHOW_CHILD | Согласованный v1 покрыт | Полный token/portal/React-specific API и generic ValueField inference (missing) |
-| [Checkbox](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/checkbox) | data-entry | target | Checkbox, CheckboxGroup | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
+| [Checkbox](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/checkbox) | data-entry | target | Checkbox, CheckboxGroup | Согласованный v1 покрыт | Сохраняемые Svelte/native contracts вместо React conventions (partial); Общий token engine, Wave и React diagnostics/statics (missing) |
 | [ColorPicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/color-picker) | data-entry | target | ColorPicker | Согласованный v1 покрыт | Native trigger/popup и граница React nodes/events (partial); Полный rc-trigger/motion и общий token/prefix engine (missing) |
 | [DatePicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/date-picker) | data-entry | target | DatePicker, RangePicker | Согласованный v1 покрыт | Другие picker modes, multiple, single presets/render hooks, mask и semantic API (missing); Глобальный DatePicker component config, prefix/tokens, popup motion/container (missing) |
 | [Form](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/form) | data-entry | target | Form, createForm, FormValidationError, FormItem | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Form.List и вложенные name paths (missing) |

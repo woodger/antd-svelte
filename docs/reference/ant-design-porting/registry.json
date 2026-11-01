@@ -2075,9 +2075,9 @@
       "name": "Checkbox",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Аудит Checkbox/CheckboxGroup 6.6.8: children context, rich options, semantic config, callbacks/ref и click lock с сохранением прежних native value/form/reset/disabled контрактов.",
       "upstreamPath": "components/checkbox",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Checkbox",
@@ -2093,24 +2093,120 @@
         }
       ],
       "dependencies": [
-        "config-provider"
+        "config-provider",
+        "form"
       ],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/checkbox",
+          "range": "~2.0.0",
+          "referenceVersion": "2.0.0"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
+      "priority": "p1",
+      "effort": "M",
       "evidence": [
-        "readme.md",
+        "src/lib/Checkbox.svelte",
+        "src/lib/CheckboxGroup.svelte",
+        "src/lib/checkbox.types.ts",
+        "src/lib/checkbox-group.types.ts",
+        "src/lib/checkbox-context.ts",
+        "src/lib/checkbox-group.engine.ts",
+        "src/lib/checkable.dom.ts",
+        "src/lib/checkbox-group.engine.test.ts",
+        "src/lib/checkbox-group.ssr.test.ts",
+        "tests/package/checkbox-features.ssr.test.ts",
         "tests/browser/checkbox-pagination.spec.ts",
-        "tests/browser/checkbox-group.spec.ts"
+        "tests/browser/checkbox-group.spec.ts",
+        "tests/browser/checkbox-features.spec.ts",
+        "tests/browser/fixtures/CheckboxFeaturesFixtures.svelte",
+        "src/lib/Table.svelte",
+        "readme.md"
       ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "native-core",
+          "title": "Native checkbox, mixed state, формы и reset",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "src/lib/checkbox-group.ssr.test.ts",
+            "tests/browser/checkbox-pagination.spec.ts",
+            "tests/browser/checkbox-group.spec.ts"
+          ],
+          "note": "Checked/defaultChecked, bind:checked/indeterminate/value, typed primitives, native names/FormData/required/FormItem, disabled precedence, captured defaults/reset/canceled reset и внешние формы сохранены. Внешние изменения не вызывают callbacks."
+        },
+        {
+          "id": "group-children",
+          "title": "Children context, регистрация, skipGroup и вложенные группы",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/checkbox-group.engine.test.ts",
+            "tests/package/checkbox-features.ssr.test.ts",
+            "tests/browser/checkbox-features.spec.ts"
+          ],
+          "note": "Checkbox участвует в ближайшей группе через Grid/произвольные Svelte wrappers. Children сохраняют source raw state и порядок выбора; callbacks фильтруются по зарегистрированным значениям. Удалённое значение возвращается checked даже после другого выбора. Динамический value перерегистрируется; skipGroup исключает value/name, Table selection использует skipGroup как upstream. Непустые нормализованные options перекрывают children."
+        },
+        {
+          "id": "rich-options",
+          "title": "Rich labels, metadata и option callbacks",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/checkbox-group.engine.test.ts",
+            "tests/package/checkbox-features.ssr.test.ts",
+            "tests/browser/checkbox-features.spec.ts"
+          ],
+          "note": "Label принимает string/number/snippet; id относится к input, title — к внутреннему span, className/style — к label. Option onChange вызывается до Group.onChange/onValueChange. Сохранены required, typed primitive options, первая запись повторного значения и прежняя нормализация options в порядке массива. Callback arrays не разделяются с bind:value."
+        },
+        {
+          "id": "semantic-config",
+          "title": "Root/icon/label semantics, config и prefixCls",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/checkbox-features.ssr.test.ts",
+            "tests/browser/checkbox-features.spec.ts"
+          ],
+          "note": "ConfigProvider.checkbox наследуется и применяется к отдельным Checkbox и Group options. ClassNames/styles принимают объекты и функции от resolved checked/disabled/value/name. Root style priority config.styles.root -> config.style -> styles.root -> style. Group имеет собственные class/style/role; prefixCls передаётся generated options, произвольный CSS предоставляет потребитель. Действующие темы/RTL и responsive Grid сохранены."
+        },
+        {
+          "id": "callbacks-lifecycle",
+          "title": "Source events, click lock, refs, focus/keyboard и unmount",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/checkbox-features.ssr.test.ts",
+            "tests/browser/checkbox-features.spec.ts",
+            "tests/browser/radio-features.spec.ts"
+          ],
+          "note": "CheckboxChangeEvent сохраняет тип target.value/checked, stopPropagation/preventDefault вызывают DOM методы; lowercase native events сохранены. Общий с Radio label click lock очищает RAF при unmount. AutoFocus при mount, tabIndex, bindable input/span/ref и bind:this focus/blur. Function binding восстанавливает отклонённый выбор по typed registration, не смешивая 0 и строковый 0. Callback может синхронно удалить controls; blur keyed removal не читает уничтоженный parent render."
+        },
+        {
+          "id": "native-boundary",
+          "title": "Сохраняемые Svelte/native contracts вместо React conventions",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/checkbox.types.ts",
+            "src/lib/checkbox-group.types.ts",
+            "readme.md"
+          ],
+          "note": "Сохранены native fieldset/form/reset, блокировка всех детей disabled-группой, bind:value/function binding, типы string/number/boolean и первая запись повторного option. Это отличается от React any/null/controlled state и child disabled override. Старый options API нормализует state по options, новый children API сохраняет source raw state. User change сбрасывает mixed state; nativeEvent — DOM change, default value вне группы — on. Snippets, CSS strings и native refs заменяют React contracts."
+        },
+        {
+          "id": "advanced-theme",
+          "title": "Общий token engine, Wave и React diagnostics/statics",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "note": "Общий source theme/prefix/component-token engine и Wave не перенесены. В compact остаются прежние 16px icon и line height вместо source 14px/20px, в dark — прежний primary вместо source dark algorithm. React development warnings/statics и вложенные Form NamePath остаются пробелами. V1-ready не означает полный React API."
         }
       ]
     },

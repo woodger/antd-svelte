@@ -3,7 +3,8 @@
   import { useConfig } from './config-context';
   import { useForm, useFormField } from './form-context';
   import { useRadioGroup, useRadioOptionType } from './radio-context';
-  import { connectRadio, createRadioClickLock, syncRadioPeers } from './radio.dom';
+  import { connectRadio, syncRadioPeers } from './radio.dom';
+  import { createCheckableClickLock } from './checkable.dom';
   import type { RadioChangeEvent, RadioProps } from './radio.types';
 
   let {
@@ -21,7 +22,7 @@
   const optionType = useRadioOptionType();
   const initialDefault = untrack(() => props.defaultChecked ?? false);
   const resets = new Set<ReturnType<typeof setTimeout>>();
-  const clickLock = createRadioClickLock();
+  const clickLock = createCheckableClickLock();
   let alive = true;
   let control = $derived(inputElement);
   let value = $derived(props.value ?? 'on');

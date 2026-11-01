@@ -523,6 +523,15 @@ export type { AvatarGroupLocale } from './types';
 export type { EmptyLocale } from './types';
 export type { CheckboxProps } from './Checkbox.svelte';
 export type {
+  CheckboxValue,
+  CheckboxContent,
+  CheckboxChangeEvent,
+  CheckboxRef,
+  CheckboxSemanticSlots,
+  CheckboxSemantic,
+  CheckboxConfig
+} from './checkbox.types';
+export type {
   CheckboxGroupProps,
   CheckboxGroupOption,
   CheckboxGroupValue
