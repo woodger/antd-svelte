@@ -371,6 +371,16 @@ export type {
   InputCountContent
 } from './input.types';
 export type { InputNumberProps } from './InputNumber.svelte';
+export type {
+  InputNumberValue,
+  InputNumberContent,
+  InputNumberFocusOptions,
+  InputNumberRef,
+  InputNumberStepInfo,
+  InputNumberSlots,
+  InputNumberSemantic,
+  InputNumberConfig
+} from './input-number.types';
 export type { SliderProps } from './Slider.svelte';
 export type { SliderSingleProps } from './slider.types';
 export type {

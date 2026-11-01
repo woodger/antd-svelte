@@ -12,6 +12,8 @@
     | 'filter'
     | 'search'
     | 'warning'
+    | 'plus'
+    | 'minus'
     | keyof typeof statusIcons;
   } = $props();
   let statusPath = $derived(
@@ -50,6 +52,10 @@
     <path d="m6 6 12 12M6 18 18 6" />
   {:else if name === 'check'}
     <path d="m5 12 4 4L19 6" />
+  {:else if name === 'plus'}
+    <path d="M5 12h14M12 5v14" />
+  {:else if name === 'minus'}
+    <path d="M5 12h14" />
   {:else if name === 'filter'}
     <path d="M4 5h16l-6 7v6l-4 2v-8z" />
   {:else if name === 'search'}

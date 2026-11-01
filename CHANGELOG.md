@@ -9,6 +9,10 @@
 
 ### Added
 
+- InputNumber: stringMode с исходной mini-decimal арифметикой, spinner, variants,
+  prefix/suffix и legacy addons, semantic config, refs, wheel/hold/Shift и callbacks.
+  Сохранены native number/FormData/reset; различия числового режима и общих тем
+  описаны в README и реестре. Добавлены CSS-рецепт и MIT mini-decimal.
 - ColorPicker: исходная Color-модель, точность RGB/HSB/alpha, single/gradient,
   palette, editable gradient points, presets, semantic config/locale и native popup.
   Добавлены private slider hooks, InputNumber formatter/parser, CSS-рецепт и MIT

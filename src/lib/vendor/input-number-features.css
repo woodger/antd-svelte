@@ -1,0 +1,71 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * InputNumber: variants, spinner, prefix/suffix и legacy addon.
+ * Существующие outlined/compact rules остаются в исходных vendor-файлах.
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled) .ant-input-number-prefix,.ant-input-number-outlined.ant-input-number-status-error:not(.ant-input-number-disabled) .ant-input-number-suffix{color:var(--ant-color-error-affix);}
+.ant-input-number-outlined.ant-input-number-status-warning:not(.ant-input-number-disabled) .ant-input-number-prefix,.ant-input-number-outlined.ant-input-number-status-warning:not(.ant-input-number-disabled) .ant-input-number-suffix{color:var(--ant-color-warning-affix);}
+.ant-input-number-filled{background:var(--ant-color-fill-tertiary);border-width:var(--ant-line-width);border-style:var(--ant-line-type);border-color:transparent;}
+input.ant-input-number-filled,.ant-input-number-filled input,textarea.ant-input-number-filled,.ant-input-number-filled textarea{color:var(--ant-color-text);}
+.ant-input-number-filled:hover{background:var(--ant-color-fill-secondary);}
+.ant-input-number-filled:focus,.ant-input-number-filled:focus-within{outline:0;border-color:var(--ant-input-number-active-border-color);background-color:var(--ant-input-number-active-bg);}
+.ant-input-number-filled.ant-input-number-disabled,.ant-input-number-filled[disabled]{color:var(--ant-color-text-disabled);background-color:var(--ant-color-bg-container-disabled);border-color:var(--ant-color-border-disabled);box-shadow:none;cursor:not-allowed;opacity:1;}
+.ant-input-number-filled.ant-input-number-disabled input[disabled],.ant-input-number-filled[disabled] input[disabled],.ant-input-number-filled.ant-input-number-disabled textarea[disabled],.ant-input-number-filled[disabled] textarea[disabled]{cursor:not-allowed;}
+.ant-input-number-filled.ant-input-number-disabled:hover:not([disabled]),.ant-input-number-filled[disabled]:hover:not([disabled]){border-color:var(--ant-color-border-disabled);background-color:var(--ant-color-bg-container-disabled);}
+.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled){background:var(--ant-color-error-bg);border-width:var(--ant-line-width);border-style:var(--ant-line-type);border-color:transparent;}
+input.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled),.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled) input,textarea.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled),.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled) textarea{color:var(--ant-color-error-text);}
+.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled):hover{background:var(--ant-color-error-bg-hover);}
+.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled):focus,.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled):focus-within{outline:0;border-color:var(--ant-color-error);background-color:var(--ant-input-number-active-bg);}
+.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled) .ant-input-number-prefix,.ant-input-number-filled.ant-input-number-status-error:not(.ant-input-number-disabled) .ant-input-number-suffix{color:var(--ant-color-error-affix);}
+.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled){background:var(--ant-color-warning-bg);border-width:var(--ant-line-width);border-style:var(--ant-line-type);border-color:transparent;}
+input.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled),.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled) input,textarea.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled),.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled) textarea{color:var(--ant-color-warning-text);}
+.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled):hover{background:var(--ant-color-warning-bg-hover);}
+.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled):focus,.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled):focus-within{outline:0;border-color:var(--ant-color-warning);background-color:var(--ant-input-number-active-bg);}
+.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled) .ant-input-number-prefix,.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-number-disabled) .ant-input-number-suffix{color:var(--ant-color-warning-affix);}
+.ant-input-number-filled .ant-input-number-actions{background:var(--ant-input-number-filled-handle-bg);}
+.ant-input-number-filled .ant-input-number-actions .ant-input-number-action-down{border-block-start:var(--ant-line-width) var(--ant-line-type) var(--ant-input-number-handle-border-color);}
+.ant-input-number-filled:focus-within .ant-input-number-actions{background:var(--ant-input-number-handle-bg);}
+.ant-input-number-underlined{background:var(--ant-color-bg-container);border-width:var(--ant-line-width) 0;border-style:var(--ant-line-type) none;border-color:transparent transparent var(--ant-color-border) transparent;border-radius:0;}
+.ant-input-number-underlined:hover{border-color:transparent transparent var(--ant-input-number-hover-border-color) transparent;background-color:var(--ant-input-number-hover-bg);}
+.ant-input-number-underlined:focus,.ant-input-number-underlined:focus-within{border-color:transparent transparent var(--ant-input-number-active-border-color) transparent;outline:0;background-color:var(--ant-input-number-active-bg);}
+.ant-input-number-underlined.ant-input-number-disabled,.ant-input-number-underlined[disabled]{color:var(--ant-color-text-disabled);box-shadow:none;cursor:not-allowed;}
+.ant-input-number-underlined.ant-input-number-disabled:hover,.ant-input-number-underlined[disabled]:hover{border-color:transparent transparent var(--ant-color-border) transparent;}
+.ant-input-number-underlined input[disabled],.ant-input-number-underlined textarea[disabled]{cursor:not-allowed;}
+.ant-input-number-underlined.ant-input-number-status-error:not(.ant-input-number-disabled){background:var(--ant-color-bg-container);border-width:var(--ant-line-width) 0;border-style:var(--ant-line-type) none;border-color:transparent transparent var(--ant-color-error) transparent;border-radius:0;}
+.ant-input-number-underlined.ant-input-number-status-error:not(.ant-input-number-disabled):hover{border-color:transparent transparent var(--ant-color-error-border-hover) transparent;background-color:var(--ant-input-number-hover-bg);}
+.ant-input-number-underlined.ant-input-number-status-error:not(.ant-input-number-disabled):focus,.ant-input-number-underlined.ant-input-number-status-error:not(.ant-input-number-disabled):focus-within{border-color:transparent transparent var(--ant-color-error) transparent;outline:0;background-color:var(--ant-input-number-active-bg);}
+.ant-input-number-underlined.ant-input-number-status-error:not(.ant-input-number-disabled) .ant-input-number-prefix,.ant-input-number-underlined.ant-input-number-status-error:not(.ant-input-number-disabled) .ant-input-number-suffix{color:var(--ant-color-error-affix);}
+.ant-input-number-underlined.ant-input-number-status-error.ant-input-number-disabled{border-color:transparent transparent var(--ant-color-error) transparent;}
+.ant-input-number-underlined.ant-input-number-status-warning:not(.ant-input-number-disabled){background:var(--ant-color-bg-container);border-width:var(--ant-line-width) 0;border-style:var(--ant-line-type) none;border-color:transparent transparent var(--ant-color-warning) transparent;border-radius:0;}
+.ant-input-number-underlined.ant-input-number-status-warning:not(.ant-input-number-disabled):hover{border-color:transparent transparent var(--ant-color-warning-border-hover) transparent;background-color:var(--ant-input-number-hover-bg);}
+.ant-input-number-underlined.ant-input-number-status-warning:not(.ant-input-number-disabled):focus,.ant-input-number-underlined.ant-input-number-status-warning:not(.ant-input-number-disabled):focus-within{border-color:transparent transparent var(--ant-color-warning) transparent;outline:0;background-color:var(--ant-input-number-active-bg);}
+.ant-input-number-underlined.ant-input-number-status-warning:not(.ant-input-number-disabled) .ant-input-number-prefix,.ant-input-number-underlined.ant-input-number-status-warning:not(.ant-input-number-disabled) .ant-input-number-suffix{color:var(--ant-color-warning-affix);}
+.ant-input-number-underlined.ant-input-number-status-warning.ant-input-number-disabled{border-color:transparent transparent var(--ant-color-warning) transparent;}
+.ant-input-number-underlined .ant-input-number-actions{background:var(--ant-input-number-handle-bg);}
+.ant-input-number-underlined .ant-input-number-actions .ant-input-number-action-down{border-block-start:var(--ant-line-width) var(--ant-line-type) var(--ant-input-number-handle-border-color);}
+.ant-input-number-borderless{background:transparent;border:none;padding-block:calc(var(--ant-input-number-padding-block) + var(--ant-line-width));}
+.ant-input-number-borderless.ant-input-number-sm,.ant-input-number-borderless.ant-input-number-affix-wrapper-sm{padding-block:calc(var(--ant-input-number-padding-block-sm) + var(--ant-line-width));}
+.ant-input-number-borderless.ant-input-number-lg,.ant-input-number-borderless.ant-input-number-affix-wrapper-lg{padding-block:calc(var(--ant-input-number-padding-block-lg) + var(--ant-line-width));}
+.ant-input-number-borderless:focus,.ant-input-number-borderless:focus-within{outline:none;}
+.ant-input-number-borderless:focus-visible,.ant-input-number-borderless:has(input:focus-visible),.ant-input-number-borderless:has(textarea:focus-visible){outline:var(--ant-input-number-line-width-focus) var(--ant-line-type) var(--ant-input-number-active-border-color);outline-offset:calc(var(--ant-line-width) * -1);transition:outline-offset 0s,outline 0s;}
+.ant-input-number-borderless.ant-input-number-disabled,.ant-input-number-borderless[disabled]{color:var(--ant-color-text-disabled);cursor:not-allowed;}
+.ant-input-number-borderless.ant-input-number-status-error,.ant-input-number-borderless.ant-input-number-status-error input,.ant-input-number-borderless.ant-input-number-status-error textarea{color:var(--ant-color-error);}
+.ant-input-number-borderless.ant-input-number-status-error:focus-visible,.ant-input-number-borderless.ant-input-number-status-error:has(input:focus-visible),.ant-input-number-borderless.ant-input-number-status-error:has(textarea:focus-visible){outline:var(--ant-input-number-line-width-focus) var(--ant-line-type) var(--ant-color-error);outline-offset:calc(var(--ant-line-width) * -1);transition:outline-offset 0s,outline 0s;}
+.ant-input-number-borderless.ant-input-number-status-error .ant-input-number-prefix,.ant-input-number-borderless.ant-input-number-status-error .ant-input-number-suffix{color:var(--ant-color-error-affix);}
+.ant-input-number-borderless.ant-input-number-status-warning,.ant-input-number-borderless.ant-input-number-status-warning input,.ant-input-number-borderless.ant-input-number-status-warning textarea{color:var(--ant-color-warning);}
+.ant-input-number-borderless.ant-input-number-status-warning:focus-visible,.ant-input-number-borderless.ant-input-number-status-warning:has(input:focus-visible),.ant-input-number-borderless.ant-input-number-status-warning:has(textarea:focus-visible){outline:var(--ant-input-number-line-width-focus) var(--ant-line-type) var(--ant-color-warning);outline-offset:calc(var(--ant-line-width) * -1);transition:outline-offset 0s,outline 0s;}
+.ant-input-number-borderless.ant-input-number-status-warning .ant-input-number-prefix,.ant-input-number-borderless.ant-input-number-status-warning .ant-input-number-suffix{color:var(--ant-color-warning-affix);}
+.ant-input-number.ant-input-number-borderless{padding-block:0;--ant-input-number-input-padding-block:calc(var(--ant-input-number-padding-block) + var(--ant-line-width));}
+.ant-input-number.ant-input-number-borderless.ant-input-number-sm{padding-block:0;--ant-input-number-input-padding-block:calc(var(--ant-input-number-padding-block-sm) + var(--ant-line-width));}
+.ant-input-number.ant-input-number-borderless.ant-input-number-lg{padding-block:0;--ant-input-number-input-padding-block:calc(var(--ant-input-number-padding-block-lg) + var(--ant-line-width));}
+.ant-input-number.ant-input-number-mode-spinner{padding:0;width:auto;}
+.ant-input-number.ant-input-number-mode-spinner .ant-input-number-action{flex:none;padding-inline:var(--ant-input-number-input-padding-inline);}
+.ant-input-number.ant-input-number-mode-spinner .ant-input-number-action-up{border-inline-start:var(--ant-line-width) var(--ant-line-type) var(--ant-input-number-handle-border-color);}
+.ant-input-number.ant-input-number-mode-spinner .ant-input-number-action-down{border-inline-end:var(--ant-line-width) var(--ant-line-type) var(--ant-input-number-handle-border-color);}
+.ant-input-number.ant-input-number-mode-spinner .ant-input-number-input{text-align:center;padding-inline:var(--ant-input-number-input-padding-inline);}
+.ant-input-number .ant-input-number-prefix,.ant-input-number .ant-input-number-suffix{display:flex;flex:none;align-items:center;align-self:center;pointer-events:none;}
+.ant-input-number .ant-input-number-prefix{margin-inline-end:var(--ant-padding-xxs);}
+.ant-input-number .ant-input-number-suffix{height:100%;margin-inline-start:var(--ant-padding-xxs);transition:margin var(--ant-motion-duration-mid);}
+.ant-input-number:hover:not(.ant-input-number-without-controls) .ant-input-number-suffix{margin-inline-end:var(--ant-input-number-handle-width);}
+.ant-input-number-addon:has(.ant-select){border:0;padding:0;}

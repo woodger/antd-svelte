@@ -60,7 +60,7 @@ describe('InputNumber server rendering', () => {
       expect(body).toContain('aria-valuemin="0"');
       expect(body).toContain('aria-valuemax="12"');
       expect(body).toContain('ant-input-number-out-of-range');
-      expect(body).toMatch(/ant-input-number-action-up[^>]*\sdisabled(?:[\s=>])/);
+      expect(body).toMatch(/<button(?=[^>]*class="[^"]*ant-input-number-action-up)(?=[^>]*\sdisabled(?:[\s=>]))/);
     }
   );
 

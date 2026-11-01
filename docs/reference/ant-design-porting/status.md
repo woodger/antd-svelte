@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **107**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **44**; требуется аудит у **26**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **45**; требуется аудит у **25**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -40,7 +40,7 @@ Candidate означает запись каталога, для которой 
 | [DatePicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/date-picker) | data-entry | target | DatePicker, RangePicker | Согласованный v1 покрыт | Другие picker modes, multiple, single presets/render hooks, mask и semantic API (missing); Глобальный DatePicker component config, prefix/tokens, popup motion/container (missing) |
 | [Form](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/form) | data-entry | target | Form, createForm, FormValidationError, FormItem | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Form.List и вложенные name paths (missing) |
 | [Input](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input) | data-entry | target | Input, TextArea, InputPassword, InputSearch, InputOTP, InputGroup | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Input prefixCls, общий variant/token engine и React value/ref conventions (missing); TextArea prefixCls, общий variant/token engine и React value/ref conventions (missing) |
-| [InputNumber](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input-number) | data-entry | target | InputNumber | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); stringMode и варианты оформления (missing) |
+| [InputNumber](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input-number) | data-entry | target | InputNumber | Согласованный v1 покрыт | Native Svelte contracts и отличия обычного числового режима (partial); Общий token/prefix engine, точная compact/focus тема и React diagnostics (missing) |
 | [Mentions](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/mentions) | data-entry | target | Mentions, getMentions | Согласованный v1 покрыт | Полный semantic/config API, popupRender/container, legacy Option и motion (missing) |
 | [Radio](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/radio) | data-entry | target | Radio, RadioGroup, RadioButton | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Rate](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/rate) | data-entry | target | Rate | Согласованный v1 покрыт | PrefixCls, произвольный token engine и полный upstream Tooltip API (missing) |

@@ -147,7 +147,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Listy | Группы, sticky headers, измеряемая виртуализация, scrollTo и native scroll |
 | Carousel | Слайды, infinite/finite, rows, fade, swipe, autoplay, lazy loading, responsive и refs |
 | TextArea | Многострочное значение, native constraints/events/selection, формы, размеры, статусы и RTL |
-| InputNumber | Число/null, черновик ввода, min/max, дробный шаг, precision, кнопки и клавиатура, FormData, reset и FormItem |
+| InputNumber | Число/null и stringMode, точные десятичные шаги, formatter/parser, spinner, variants, prefix/suffix, refs, FormData и reset |
 | Slider | Число или диапазон, marks/dots, editable/draggableTrack, push/cross, клавиатура, подсказки, темы/RTL, native формы и refs |
 | ColorPicker | Color-модель, RGB/HSB/hex/alpha, palette, single/gradient, presets, semantic config и native popup |
 | Image / ImagePreviewGroup | Native img/fallback/placeholder, preview transforms/focus и групповая навигация по images/items |
@@ -1100,8 +1100,8 @@ InputNumber редактирует `number | null` через `bind:value` и
 `1.` и завершающие нули остаются в поле при наборе. Корректное число в пределах
 min/max сразу обновляет модель; пустая строка обновляет её на null. Нечисловой
 или выходящий за границы черновик не заменяет последнее принятое число.
-Поддерживаются знак, десятичная точка и экспонента; запятая не является
-десятичным разделителем этой версии. Составной ввод IME публикует число
+Поддерживаются знак, десятичная точка и экспонента. DecimalSeparator задаёт другой
+разделитель; без него прежний строгий parser не принимает запятую. Составной ввод IME публикует число
 после compositionend.
 
 Blur и Enter завершают редактирование: числовой черновик ограничивается
@@ -1125,13 +1125,17 @@ ArrowUp/ArrowDown и кнопки меняют число на step, сохра�
 На границе недоступно движение наружу. `keyboard={false}` отключает стрелки,
 `controls={false}` скрывает кнопки; эти настройки независимы. Enter завершает
 ввод и сохраняет нативную отправку формы. `onkeydown` вызывается до обработки
-клавиш; preventDefault отменяет её. Колесо мыши число не меняет.
+клавиш; preventDefault отменяет её. Shift увеличивает шаг в десять раз.
+Удержание кнопки повторяет изменение после 600ms с интервалом 200ms.
+Колесо по умолчанию число не меняет; `changeOnWheel` включает его только для
+сфокусированного поля. `changeOnBlur={false}` сохраняет черновик при blur;
+Enter по-прежнему подтверждает ввод, в том числе при keyboard=false.
 `oninput` и остальные нативные события получают DOM-текст; числовое значение
 получайте через onValueChange.
 
 Размеры small/middle/large, disabled и направление наследуются из
 ConfigProvider. Явные props переопределяют наследование. Readonly задаётся
-нативным `readonly`; disabled/readonly блокируют изменение числа и скрывают
+нативным `readonly` либо alias readOnly; disabled/readonly блокируют изменение числа и скрывают
 кнопки. Status принимает error/warning и наследует ошибку FormItem.
 Поддерживаются светлая/тёмная темы, основные цвета, компактный режим, RTL и
 prefers-reduced-motion. Кнопки и сообщение нативной проверки локализуются
@@ -1155,12 +1159,56 @@ null и обновляет привязку в следующей задаче �
 Form восстанавливает её initialValues и сбрасывает черновик, даже если число
 осталось прежним.
 
+StringMode переносит арифметику @rc-component/input-number 1.6.2 и mini-decimal 1.0.1:
+значение и callbacks используют string/null, не теряя дробные разряды за пределами
+safe integer. Step и границы могут быть строками; без заданных границ stringMode
+не вводит safe-integer ограничение. Precision и дополнение до точности step
+следуют исходному алгоритму. Для произвольной точности нужен BigInt; fallback
+mini-decimal использует обычный Number с его ограничениями.
+
+```svelte
+<script lang="ts">
+  import { InputNumber } from 'antd-svelte';
+  let amount = $state<string | null>('1');
+</script>
+
+<InputNumber stringMode bind:value={amount} min="0" max="10" step="0.00000000000001" />
+```
+
+Опциональные formatter/parser разделяют текст и модель; parser может вернуть
+строку для stringMode. Formatter получает строковое число и `{ userTyping, input }`.
+Каретка восстанавливается после форматирования, без снятия выделения при фокусе.
+OnChange получает тот же тип значения, что onValueChange, и вызывается перед ним;
+onInput получает исходный текст после обновления модели. OnStep сообщает emitter
+handler/keyboard/wheel, направление и offset; onPressEnter вызывается после commit.
+Для отклонения обновлений владельцем используйте function binding с getter/setter.
+
+Есть outlined/filled/borderless/underlined, mode="spinner", prefix/suffix и custom
+иконки в controls. Контент принимает строки, числа и snippets. Legacy addonBefore/
+addonAfter собираются через SpaceCompact/SpaceAddon; rootClassName относится к
+Compact, а nativeElement — к самому control. ConfigProvider.inputNumber задаёт
+variant, class/style и semantic slots. Локальные styles имеют приоритет.
+
+Bind:inputElement возвращает input, bind:nativeElement — корень control, bind:ref —
+proxy native input с nativeElement и focus({ cursor, preventScroll })/blur(). Методы
+focus/blur доступны также через bind:this. Mouse callbacks с именами Ant Design
+относятся к корню; нативные lowercase handlers сохраняют события input.
+Публичные типы и JSDoc находятся в [input-number.types.ts](./src/lib/input-number.types.ts).
+
+Обычный числовой режим сохраняет прежние native контракты выше: строгий parser,
+finite number/null, safe-integer defaults, проверку формы и commit черновика.
+Точность step не добавляет нули к отображению автоматически. Это явно отличается
+от rc-input-number; stringMode использует исходный десятичный алгоритм.
+Общий token engine, точное соответствие compact/focus цветов и React diagnostics/
+PurePanel остаются пробелами переноса. Нативные кнопки и Svelte snippets заменяют
+React spans/nodes. CSS-рецепт input-number-features извлекает 65 новых правил,
+не перезаписывая прежние outlined/compact стили; арифметика сопровождается
+[MIT mini-decimal](./src/lib/vendor/LICENSE.rc-mini-decimal).
+
 Пример количества, цены и расчёта стоимости доступен на `/ant-design#input-number`.
-Реализован вариант outlined с boolean controls. Опциональные formatter и parser
-разделяют отображаемую строку и числовые value/FormData. Formatter получает
-строковое число и `{ userTyping, input }`, parser — строку поля; без них сохраняется прежний
-строгий parser. Полный rc-input-number contract ещё требует аудита.
-`stringMode`, другие варианты оформления, prefix/suffix и изменение колесом пока отсутствуют.
+Новые сценарии: `?fixture=input-number-features`,
+[browser](./tests/browser/input-number-features.spec.ts) и
+[package SSR](./tests/package/input-number-features.ssr.test.ts).
 
 ## ColorPicker
 

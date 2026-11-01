@@ -117,6 +117,8 @@ space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.c
 Рецепт slider-range воспроизводит отдельный CSS диапазона; прежний slider.css
 одиночного control не перезаписывается.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
+Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
+прежние outlined/compact файлы не перезаписываются.
 Остальные текущие vendor-файлы
 этим выпуском инструмента не перегенерируются. Новый компонент получает отдельный
 проверенный рецепт: include/exclude для селекторов, replacements, keyframes,
