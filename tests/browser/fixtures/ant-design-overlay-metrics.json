@@ -1,0 +1,2098 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "operation": "render Tooltip/Popover/Popconfirm; read component and internal Tooltip declarations, composed computed styles"
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(66, 66, 66)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(31, 31, 31)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(255, 255, 255, 0.85)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(31, 31, 31)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(255, 255, 255, 0.85)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(216, 150, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "minWidth": "28px",
+          "minHeight": "28px",
+          "paddingTop": "4px",
+          "paddingRight": "4px",
+          "paddingBottom": "4px",
+          "paddingLeft": "4px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "4px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "12px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "12px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "12px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "minWidth": "28px",
+          "minHeight": "28px",
+          "paddingTop": "4px",
+          "paddingRight": "4px",
+          "paddingBottom": "4px",
+          "paddingLeft": "4px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgb(66, 66, 66)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(31, 31, 31)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "4px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(255, 255, 255, 0.85)"
+        },
+        "popoverContent": {
+          "fontSize": "12px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "12px",
+          "lineHeight": "20px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(31, 31, 31)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "12px",
+          "fontWeight": "600",
+          "color": "rgba(255, 255, 255, 0.85)"
+        },
+        "confirmDescription": {
+          "fontSize": "12px",
+          "color": "rgba(255, 255, 255, 0.85)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "12px",
+          "color": "rgb(216, 150, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "wireframe",
+      "config": {
+        "token": {
+          "wireframe": true
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "177px",
+          "paddingTop": "5px",
+          "paddingRight": "16px",
+          "paddingBottom": "4px",
+          "paddingLeft": "16px",
+          "marginBottom": "0px",
+          "borderBottomWidth": "1px",
+          "borderBottomColor": "rgba(5, 5, 5, 0.06)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "12px",
+          "paddingRight": "16px",
+          "paddingBottom": "12px",
+          "paddingLeft": "16px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "custom-global",
+      "config": {
+        "token": {
+          "fontSize": 18,
+          "controlHeight": 44,
+          "borderRadius": 20,
+          "sizePopupArrow": 24,
+          "lineWidth": 2,
+          "zIndexPopupBase": 2000
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "2070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "minWidth": "64px",
+          "minHeight": "44px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "20px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 12 A 4 4 0 0 0 2.82843 10.8284 L 10.5858 3.07107 A 2 2 0 0 1 13.4142 3.07107 L 21.1716 10.8284 A 4 4 0 0 0 24 12 Z\")"
+        },
+        "popover": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "2030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px"
+        },
+        "popoverTitle": {
+          "fontSize": "18px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "18px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 12 A 6 6 0 0 0 4.24264 10.2426 L 10.5858 3.89949 A 2 2 0 0 1 13.4142 3.89949 L 19.7574 10.2426 A 6 6 0 0 0 24 12 Z\")"
+        },
+        "confirm": {
+          "fontSize": "18px",
+          "lineHeight": "26px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "2060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "18px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "18px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "18px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 16,
+          "popover": 16,
+          "confirm": 16
+        }
+      }
+    },
+    {
+      "name": "own-tooltip",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "maxWidth": 320,
+            "zIndexPopup": 1800,
+            "arrowOffsetHorizontal": 20,
+            "arrowOffsetVertical": 11,
+            "arrowShadowWidth": 10,
+            "colorBgSpotlight": "#123456",
+            "colorTextLightSolid": "#ffeeaa"
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1800",
+          "maxWidth": "320px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 238, 170)",
+          "backgroundColor": "rgb(18, 52, 86)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "own-popover",
+      "config": {
+        "components": {
+          "Popover": {
+            "titleMinWidth": 210,
+            "zIndexPopup": 1500,
+            "innerPadding": 18,
+            "titlePadding": "3px 5px",
+            "titleMarginBottom": 7,
+            "titleBorderBottom": "2px solid red",
+            "innerContentPadding": "4px 6px",
+            "colorBgElevated": "#abcdef",
+            "fontSize": 17
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "17px",
+          "lineHeight": "26.7143px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1500"
+        },
+        "popoverPanel": {
+          "paddingTop": "18px",
+          "paddingRight": "18px",
+          "paddingBottom": "18px",
+          "paddingLeft": "18px",
+          "backgroundColor": "rgb(171, 205, 239)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "17px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "210px",
+          "paddingTop": "3px",
+          "paddingRight": "5px",
+          "paddingBottom": "3px",
+          "paddingLeft": "5px",
+          "marginBottom": "7px",
+          "borderBottomWidth": "2px",
+          "borderBottomColor": "rgb(255, 0, 0)"
+        },
+        "popoverContent": {
+          "fontSize": "17px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "4px",
+          "paddingRight": "6px",
+          "paddingBottom": "4px",
+          "paddingLeft": "6px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "17px",
+          "lineHeight": "26.7143px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(171, 205, 239)",
+          "borderRadius": "8px",
+          "paddingTop": "18px",
+          "paddingRight": "18px",
+          "paddingBottom": "18px",
+          "paddingLeft": "18px"
+        },
+        "confirmTitle": {
+          "fontSize": "17px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "17px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "17px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "own-popconfirm",
+      "config": {
+        "components": {
+          "Popconfirm": {
+            "zIndexPopup": 1600,
+            "fontSize": 19,
+            "colorWarning": "#00aa00",
+            "colorTextHeading": "#123456",
+            "colorText": "#550077"
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "19px",
+          "lineHeight": "29.8571px",
+          "color": "rgb(85, 0, 119)",
+          "zIndex": "1600"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "19px",
+          "fontWeight": "600",
+          "color": "rgb(18, 52, 86)"
+        },
+        "confirmDescription": {
+          "fontSize": "19px",
+          "color": "rgb(85, 0, 119)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "19px",
+          "color": "rgb(0, 170, 0)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "composed-aliases",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "fontSize": 30,
+            "colorText": "#110000"
+          },
+          "Popover": {
+            "fontSize": 22,
+            "colorText": "#002200"
+          },
+          "Popconfirm": {
+            "fontSize": 18,
+            "colorText": "#000033"
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "30px",
+          "lineHeight": "47.1429px",
+          "color": "rgb(17, 0, 0)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "30px",
+          "lineHeight": "47.1429px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "22px",
+          "lineHeight": "34.5714px",
+          "color": "rgb(0, 34, 0)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "22px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "22px",
+          "color": "rgb(0, 34, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "18px",
+          "lineHeight": "28.2857px",
+          "color": "rgb(0, 0, 51)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "18px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "18px",
+          "color": "rgb(0, 0, 51)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "18px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "component-algorithms",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "fontSize": 19,
+            "borderRadius": 20,
+            "algorithm": true
+          },
+          "Popover": {
+            "fontSize": 17,
+            "controlHeight": 48,
+            "algorithm": [
+              "darkAlgorithm"
+            ]
+          },
+          "Popconfirm": {
+            "colorWarning": "#a011cc",
+            "algorithm": true
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "19px",
+          "lineHeight": "27px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "19px",
+          "lineHeight": "27px",
+          "minWidth": "56px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "20px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "17px",
+          "lineHeight": "25px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px"
+        },
+        "popoverTitle": {
+          "fontSize": "17px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.85)"
+        },
+        "popoverContent": {
+          "fontSize": "17px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "17px",
+          "lineHeight": "25px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "16px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "17px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.85)"
+        },
+        "confirmDescription": {
+          "fontSize": "17px",
+          "color": "rgba(0, 0, 0, 0.85)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "17px",
+          "color": "rgb(160, 17, 204)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "deprecated-width",
+      "config": {
+        "components": {
+          "Popover": {
+            "width": 212
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "212px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "deprecated-min-width",
+      "config": {
+        "components": {
+          "Popover": {
+            "minWidth": 221
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "221px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "deprecated-both",
+      "config": {
+        "components": {
+          "Popover": {
+            "width": 202,
+            "minWidth": 222
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "202px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "deprecated-with-title-zero",
+      "config": {
+        "components": {
+          "Popover": {
+            "width": 202,
+            "minWidth": 222,
+            "titleMinWidth": 0
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "0px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "deprecated-zero",
+      "config": {
+        "components": {
+          "Popover": {
+            "width": 0,
+            "minWidth": 0
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "250px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "177px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1060"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "zero-component-values",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "maxWidth": 0,
+            "zIndexPopup": 0,
+            "arrowOffsetHorizontal": 0,
+            "arrowShadowWidth": 0
+          },
+          "Popover": {
+            "titleMinWidth": 0,
+            "zIndexPopup": 0,
+            "innerPadding": 0,
+            "titleMarginBottom": 0
+          },
+          "Popconfirm": {
+            "zIndexPopup": 0
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "0",
+          "maxWidth": "0px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "0"
+        },
+        "popoverPanel": {
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "0px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "0px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "0"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "undefined-component-values",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "maxWidth": {
+              "$type": "undefined"
+            },
+            "arrowPath": {
+              "$type": "undefined"
+            }
+          },
+          "Popover": {
+            "titleMinWidth": {
+              "$type": "undefined"
+            },
+            "innerPadding": {
+              "$type": "undefined"
+            }
+          },
+          "Popconfirm": {
+            "zIndexPopup": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "none"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "none"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "0px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "auto"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    },
+    {
+      "name": "custom-prefix",
+      "config": {
+        "cssVar": {
+          "prefix": "Overlay2"
+        },
+        "components": {
+          "Tooltip": {
+            "maxWidth": 290
+          },
+          "Popover": {
+            "titleMinWidth": 230
+          },
+          "Popconfirm": {
+            "zIndexPopup": 1750
+          }
+        }
+      },
+      "metrics": {
+        "tooltip": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1070",
+          "maxWidth": "290px"
+        },
+        "tooltipPanel": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "minWidth": "28px",
+          "minHeight": "32px",
+          "paddingTop": "6px",
+          "paddingRight": "8px",
+          "paddingBottom": "6px",
+          "paddingLeft": "8px",
+          "color": "rgb(255, 255, 255)",
+          "backgroundColor": "rgba(0, 0, 0, 0.85)",
+          "borderRadius": "6px"
+        },
+        "tooltipArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "popover": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1030"
+        },
+        "popoverPanel": {
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px"
+        },
+        "popoverTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "minWidth": "230px",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginBottom": "8px",
+          "borderBottomWidth": "0px",
+          "borderBottomColor": "rgba(0, 0, 0, 0.88)"
+        },
+        "popoverContent": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px"
+        },
+        "popoverArrow": {
+          "beforeClipPath": "path(\"M 0 8 A 4 4 0 0 0 2.82843 6.82843 L 6.58579 3.07107 A 2 2 0 0 1 9.41421 3.07107 L 13.1716 6.82843 A 4 4 0 0 0 16 8 Z\")"
+        },
+        "confirm": {
+          "fontSize": "14px",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "zIndex": "1750"
+        },
+        "confirmPanel": {
+          "backgroundColor": "rgb(255, 255, 255)",
+          "borderRadius": "8px",
+          "paddingTop": "12px",
+          "paddingRight": "12px",
+          "paddingBottom": "12px",
+          "paddingLeft": "12px"
+        },
+        "confirmTitle": {
+          "fontSize": "14px",
+          "fontWeight": "600",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        "confirmDescription": {
+          "fontSize": "14px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "marginTop": "4px"
+        },
+        "confirmIcon": {
+          "fontSize": "14px",
+          "color": "rgb(250, 173, 20)"
+        },
+        "gaps": {
+          "tooltip": 12,
+          "popover": 12,
+          "confirm": 12
+        }
+      }
+    }
+  ]
+}

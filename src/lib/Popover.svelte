@@ -3,6 +3,9 @@
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useDesignTokenContext } from './theme-context.svelte';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
+  import { consumePopconfirmTheme } from './popover-theme-context';
   import { connectPopup } from './popup.dom';
   import { connectPopoverTrigger, focusPopover } from './popover.dom';
   import { getTooltipDelay } from './tooltip.engine';
@@ -32,6 +35,14 @@
 
   const config = useConfig();
   const designTokens = useDesignTokenContext();
+  const tooltipTheme = useComponentTheme('Tooltip');
+  const componentTheme = useComponentTheme('Popover');
+  const confirmTheme = consumePopconfirmTheme() ? useComponentTheme('Popconfirm') : undefined;
+  let popupThemeStyle = $derived(
+    [tooltipTheme.style, componentTheme.style, confirmTheme?.style].filter(Boolean).join(';')
+      || undefined
+  );
+  const initialThemeStyle = untrack(() => popupThemeStyle);
   const generatedId = $props.id();
   const id = `ant-popover-${generatedId}`;
   const titleId = `${id}-title`;
@@ -122,6 +133,9 @@
         return autoAdjustOverflow;
       },
       maxWidth: '100vw',
+      gap: () => untrack(() => designTokens.enabled
+        ? (arrow ? designTokens.state.token.sizePopupArrow / 2 : 0)
+          + designTokens.state.token.marginXXS : undefined),
       preserveFocus: false,
       onPlacement: (next) => {
         actualPlacement = next;
@@ -347,12 +361,14 @@
     ? ariaLabelledby ?? (hasTitle ? titleId : undefined)
     : undefined} aria-describedby={ariaDescribedby} aria-busy={ariaBusy} class={[
         'ant-popover',
+        designTokens.enabled && 'ant-popover-css-var',
         designTokens.enabled && designTokens.state.key,
         designTokens.enabled && designTokens.state.hashId,
         popupClass,
         `ant-popover-placement-${shown ? actualPlacement : placement}`,
         config.direction === 'rtl' && 'ant-popover-rtl'
-      ]} onpointerenter={(event) => {
+      ]} style={initialThemeStyle}
+    {@attach node => connectComponentTheme(node, popupThemeStyle)} onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         handlePopupHover(true);
     }} onpointerleave={() => handlePopupHover(false)} onfocusin={() => {

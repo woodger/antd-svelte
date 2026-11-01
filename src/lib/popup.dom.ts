@@ -13,7 +13,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   maxWidth?: string;
   align?: 'left' | 'right' | 'top' | 'bottom';
   matchAnchorWidth?: boolean;
-  gap?: number;
+  gap?: number | (() => number | undefined);
   getPosition?: (anchor: DOMRect, popup: DOMRect, viewport: TooltipRect) => TooltipPosition;
   onVisibilityChange?: (visible: boolean) => void;
 }): () => void {
@@ -90,7 +90,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       options.placement,
       options.autoAdjustOverflow,
       options.align,
-      options.gap
+      typeof options.gap === 'function' ? options.gap() : options.gap
     );
     const signature = `${position
       .left}:${position

@@ -1,0 +1,1343 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "operation": "render Tooltip/Popover/Popconfirm; read component and internal Tooltip declarations, composed computed styles"
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "4px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "4px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "wireframe",
+      "config": {
+        "token": {
+          "wireframe": true
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "0px",
+          "--ant-popover-title-margin-bottom": "0px",
+          "--ant-popover-title-padding": "5px 16px 4px",
+          "--ant-popover-title-border-bottom": "1px solid rgba(5,5,5,0.06)",
+          "--ant-popover-inner-content-padding": "12px 16px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "custom-global",
+      "config": {
+        "token": {
+          "fontSize": 18,
+          "controlHeight": 44,
+          "borderRadius": 20,
+          "sizePopupArrow": 24,
+          "lineWidth": 2,
+          "zIndexPopupBase": 2000
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "2070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "22px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "14.627416997969522px",
+          "--ant-tooltip-arrow-path": "path('M 0 12 A 4 4 0 0 0 2.82842712474619 10.82842712474619 L 10.585786437626904 3.0710678118654755 A 2 2 0 0 1 13.414213562373096 3.0710678118654755 L 21.17157287525381 10.82842712474619 A 4 4 0 0 0 24 12 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 22.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "2030",
+          "--ant-popover-arrow-shadow-width": "13.455844122715714px",
+          "--ant-popover-arrow-path": "path('M 0 12 A 6 6 0 0 0 4.242640687119285 10.242640687119284 L 10.585786437626904 3.899494936611666 A 2 2 0 0 1 13.414213562373096 3.899494936611666 L 19.757359312880716 10.242640687119284 A 6 6 0 0 0 24 12 Z')",
+          "--ant-popover-arrow-polygon": "polygon(2.485281374238571px 100%, 50% 2.485281374238571px, 21.51471862576143px 100%, 2.485281374238571px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "18px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "2060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "2070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "22px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "14.627416997969522px",
+          "--ant-tooltip-arrow-path": "path('M 0 12 A 4 4 0 0 0 2.82842712474619 10.82842712474619 L 10.585786437626904 3.0710678118654755 A 2 2 0 0 1 13.414213562373096 3.0710678118654755 L 21.17157287525381 10.82842712474619 A 4 4 0 0 0 24 12 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 22.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "own-tooltip",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "maxWidth": 320,
+            "zIndexPopup": 1800,
+            "arrowOffsetHorizontal": 20,
+            "arrowOffsetVertical": 11,
+            "arrowShadowWidth": 10,
+            "colorBgSpotlight": "#123456",
+            "colorTextLightSolid": "#ffeeaa"
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-color-bg-spotlight": "#123456",
+          "--ant-color-text-light-solid": "#ffeeaa",
+          "--ant-tooltip-z-index-popup": "1800",
+          "--ant-tooltip-max-width": "320px",
+          "--ant-tooltip-arrow-offset-horizontal": "20px",
+          "--ant-tooltip-arrow-offset-vertical": "11px",
+          "--ant-tooltip-arrow-shadow-width": "10px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-color-bg-spotlight": "#123456",
+          "--ant-color-text-light-solid": "#ffeeaa",
+          "--ant-tooltip-z-index-popup": "1800",
+          "--ant-tooltip-max-width": "320px",
+          "--ant-tooltip-arrow-offset-horizontal": "20px",
+          "--ant-tooltip-arrow-offset-vertical": "11px",
+          "--ant-tooltip-arrow-shadow-width": "10px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "own-popover",
+      "config": {
+        "components": {
+          "Popover": {
+            "titleMinWidth": 210,
+            "zIndexPopup": 1500,
+            "innerPadding": 18,
+            "titlePadding": "3px 5px",
+            "titleMarginBottom": 7,
+            "titleBorderBottom": "2px solid red",
+            "innerContentPadding": "4px 6px",
+            "colorBgElevated": "#abcdef",
+            "fontSize": 17
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-color-bg-elevated": "#abcdef",
+          "--ant-font-size": "17px",
+          "--ant-popover-title-min-width": "210px",
+          "--ant-popover-z-index-popup": "1500",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "18px",
+          "--ant-popover-title-margin-bottom": "7px",
+          "--ant-popover-title-padding": "3px 5px",
+          "--ant-popover-title-border-bottom": "2px solid red",
+          "--ant-popover-inner-content-padding": "4px 6px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "own-popconfirm",
+      "config": {
+        "components": {
+          "Popconfirm": {
+            "zIndexPopup": 1600,
+            "fontSize": 19,
+            "colorWarning": "#00aa00",
+            "colorTextHeading": "#123456",
+            "colorText": "#550077"
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-font-size": "19px",
+          "--ant-color-warning": "#00aa00",
+          "--ant-color-text-heading": "#123456",
+          "--ant-color-text": "#550077",
+          "--ant-popconfirm-z-index-popup": "1600"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "composed-aliases",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "fontSize": 30,
+            "colorText": "#110000"
+          },
+          "Popover": {
+            "fontSize": 22,
+            "colorText": "#002200"
+          },
+          "Popconfirm": {
+            "fontSize": 18,
+            "colorText": "#000033"
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-font-size": "30px",
+          "--ant-color-text": "#110000",
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-font-size": "22px",
+          "--ant-color-text": "#002200",
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-font-size": "18px",
+          "--ant-color-text": "#000033",
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-font-size": "30px",
+          "--ant-color-text": "#110000",
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "component-algorithms",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "fontSize": 19,
+            "borderRadius": 20,
+            "algorithm": true
+          },
+          "Popover": {
+            "fontSize": 17,
+            "controlHeight": 48,
+            "algorithm": [
+              "darkAlgorithm"
+            ]
+          },
+          "Popconfirm": {
+            "colorWarning": "#a011cc",
+            "algorithm": true
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-font-size": "19px",
+          "--ant-border-radius": "20px",
+          "--ant-font-size-sm": "16px",
+          "--ant-font-size-lg": "22px",
+          "--ant-font-size-xl": "28px",
+          "--ant-font-size-heading-1": "50px",
+          "--ant-font-size-heading-2": "42px",
+          "--ant-font-size-heading-3": "34px",
+          "--ant-font-size-heading-4": "28px",
+          "--ant-font-size-heading-5": "22px",
+          "--ant-line-height": "1.4210526315789473",
+          "--ant-line-height-lg": "1.3636363636363635",
+          "--ant-line-height-sm": "1.5",
+          "--ant-font-height": "27px",
+          "--ant-font-height-lg": "30px",
+          "--ant-font-height-sm": "24px",
+          "--ant-line-height-heading-1": "1.16",
+          "--ant-line-height-heading-2": "1.1904761904761905",
+          "--ant-line-height-heading-3": "1.2352941176470589",
+          "--ant-line-height-heading-4": "1.2857142857142858",
+          "--ant-line-height-heading-5": "1.3636363636363635",
+          "--ant-border-radius-sm": "8px",
+          "--ant-border-radius-lg": "16px",
+          "--ant-border-radius-outer": "6px",
+          "--ant-font-size-icon": "16px",
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "22px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-color-primary": "#1668dc",
+          "--ant-color-success": "#49aa19",
+          "--ant-color-warning": "#d89614",
+          "--ant-color-error": "#dc4446",
+          "--ant-color-info": "#1668dc",
+          "--ant-color-link": "#1668dc",
+          "--ant-font-size": "17px",
+          "--ant-control-height": "48px",
+          "--ant-blue-1": "#111a2c",
+          "--ant-blue-2": "#112545",
+          "--ant-blue-3": "#15325b",
+          "--ant-blue-4": "#15417e",
+          "--ant-blue-5": "#1554ad",
+          "--ant-blue-6": "#1668dc",
+          "--ant-blue-7": "#3c89e8",
+          "--ant-blue-8": "#65a9f3",
+          "--ant-blue-9": "#8dc5f8",
+          "--ant-blue-10": "#b7dcfa",
+          "--ant-purple-1": "#1a1325",
+          "--ant-purple-2": "#24163a",
+          "--ant-purple-3": "#301c4d",
+          "--ant-purple-4": "#3e2069",
+          "--ant-purple-5": "#51258f",
+          "--ant-purple-6": "#642ab5",
+          "--ant-purple-7": "#854eca",
+          "--ant-purple-8": "#ab7ae0",
+          "--ant-purple-9": "#cda8f0",
+          "--ant-purple-10": "#ebd7fa",
+          "--ant-cyan-1": "#112123",
+          "--ant-cyan-2": "#113536",
+          "--ant-cyan-3": "#144848",
+          "--ant-cyan-4": "#146262",
+          "--ant-cyan-5": "#138585",
+          "--ant-cyan-6": "#13a8a8",
+          "--ant-cyan-7": "#33bcb7",
+          "--ant-cyan-8": "#58d1c9",
+          "--ant-cyan-9": "#84e2d8",
+          "--ant-cyan-10": "#b2f1e8",
+          "--ant-green-1": "#162312",
+          "--ant-green-2": "#1d3712",
+          "--ant-green-3": "#274916",
+          "--ant-green-4": "#306317",
+          "--ant-green-5": "#3c8618",
+          "--ant-green-6": "#49aa19",
+          "--ant-green-7": "#6abe39",
+          "--ant-green-8": "#8fd460",
+          "--ant-green-9": "#b2e58b",
+          "--ant-green-10": "#d5f2bb",
+          "--ant-magenta-1": "#291321",
+          "--ant-magenta-2": "#40162f",
+          "--ant-magenta-3": "#551c3b",
+          "--ant-magenta-4": "#75204f",
+          "--ant-magenta-5": "#a02669",
+          "--ant-magenta-6": "#cb2b83",
+          "--ant-magenta-7": "#e0529c",
+          "--ant-magenta-8": "#f37fb7",
+          "--ant-magenta-9": "#f8a8cc",
+          "--ant-magenta-10": "#fad2e3",
+          "--ant-pink-1": "#291321",
+          "--ant-pink-2": "#40162f",
+          "--ant-pink-3": "#551c3b",
+          "--ant-pink-4": "#75204f",
+          "--ant-pink-5": "#a02669",
+          "--ant-pink-6": "#cb2b83",
+          "--ant-pink-7": "#e0529c",
+          "--ant-pink-8": "#f37fb7",
+          "--ant-pink-9": "#f8a8cc",
+          "--ant-pink-10": "#fad2e3",
+          "--ant-red-1": "#2a1215",
+          "--ant-red-2": "#431418",
+          "--ant-red-3": "#58181c",
+          "--ant-red-4": "#791a1f",
+          "--ant-red-5": "#a61d24",
+          "--ant-red-6": "#d32029",
+          "--ant-red-7": "#e84749",
+          "--ant-red-8": "#f37370",
+          "--ant-red-9": "#f89f9a",
+          "--ant-red-10": "#fac8c3",
+          "--ant-orange-1": "#2b1d11",
+          "--ant-orange-2": "#442a11",
+          "--ant-orange-3": "#593815",
+          "--ant-orange-4": "#7c4a15",
+          "--ant-orange-5": "#aa6215",
+          "--ant-orange-6": "#d87a16",
+          "--ant-orange-7": "#e89a3c",
+          "--ant-orange-8": "#f3b765",
+          "--ant-orange-9": "#f8cf8d",
+          "--ant-orange-10": "#fae3b7",
+          "--ant-yellow-1": "#2b2611",
+          "--ant-yellow-2": "#443b11",
+          "--ant-yellow-3": "#595014",
+          "--ant-yellow-4": "#7c6e14",
+          "--ant-yellow-5": "#aa9514",
+          "--ant-yellow-6": "#d8bd14",
+          "--ant-yellow-7": "#e8d639",
+          "--ant-yellow-8": "#f3ea62",
+          "--ant-yellow-9": "#f8f48b",
+          "--ant-yellow-10": "#fafab5",
+          "--ant-volcano-1": "#2b1611",
+          "--ant-volcano-2": "#441d12",
+          "--ant-volcano-3": "#592716",
+          "--ant-volcano-4": "#7c3118",
+          "--ant-volcano-5": "#aa3e19",
+          "--ant-volcano-6": "#d84a1b",
+          "--ant-volcano-7": "#e87040",
+          "--ant-volcano-8": "#f3956a",
+          "--ant-volcano-9": "#f8b692",
+          "--ant-volcano-10": "#fad4bc",
+          "--ant-geekblue-1": "#131629",
+          "--ant-geekblue-2": "#161d40",
+          "--ant-geekblue-3": "#1c2755",
+          "--ant-geekblue-4": "#203175",
+          "--ant-geekblue-5": "#263ea0",
+          "--ant-geekblue-6": "#2b4acb",
+          "--ant-geekblue-7": "#5273e0",
+          "--ant-geekblue-8": "#7f9ef3",
+          "--ant-geekblue-9": "#a8c1f8",
+          "--ant-geekblue-10": "#d2e0fa",
+          "--ant-gold-1": "#2b2111",
+          "--ant-gold-2": "#443111",
+          "--ant-gold-3": "#594214",
+          "--ant-gold-4": "#7c5914",
+          "--ant-gold-5": "#aa7714",
+          "--ant-gold-6": "#d89614",
+          "--ant-gold-7": "#e8b339",
+          "--ant-gold-8": "#f3cc62",
+          "--ant-gold-9": "#f8df8b",
+          "--ant-gold-10": "#faedb5",
+          "--ant-lime-1": "#1f2611",
+          "--ant-lime-2": "#2e3c10",
+          "--ant-lime-3": "#3e4f13",
+          "--ant-lime-4": "#536d13",
+          "--ant-lime-5": "#6f9412",
+          "--ant-lime-6": "#8bbb11",
+          "--ant-lime-7": "#a9d134",
+          "--ant-lime-8": "#c9e75d",
+          "--ant-lime-9": "#e4f88b",
+          "--ant-lime-10": "#f0fab5",
+          "--ant-color-shadow": "rgba(255, 255, 255, 0.2)",
+          "--ant-color-text": "rgba(0,0,0,0.85)",
+          "--ant-color-fill": "rgba(0,0,0,0.18)",
+          "--ant-color-fill-secondary": "rgba(0,0,0,0.12)",
+          "--ant-color-fill-tertiary": "rgba(0,0,0,0.08)",
+          "--ant-color-fill-quaternary": "rgba(0,0,0,0.04)",
+          "--ant-color-bg-solid": "rgba(0,0,0,0.95)",
+          "--ant-color-bg-solid-hover": "rgb(0,0,0)",
+          "--ant-color-bg-solid-active": "rgba(0,0,0,0.9)",
+          "--ant-color-bg-layout": "#ffffff",
+          "--ant-color-bg-spotlight": "#ffffff",
+          "--ant-color-bg-blur": "rgba(0,0,0,0.04)",
+          "--ant-color-border": "#ffffff",
+          "--ant-color-border-disabled": "#ffffff",
+          "--ant-color-border-secondary": "#ffffff",
+          "--ant-color-primary-bg": "#15325b",
+          "--ant-color-primary-bg-hover": "#15417e",
+          "--ant-color-primary-border": "#15325b",
+          "--ant-color-primary-border-hover": "#15417e",
+          "--ant-color-primary-hover": "#3c89e8",
+          "--ant-color-primary-active": "#1554ad",
+          "--ant-color-primary-text-hover": "#3c89e8",
+          "--ant-color-primary-text": "#1668dc",
+          "--ant-color-primary-text-active": "#1554ad",
+          "--ant-color-success-bg": "#162312",
+          "--ant-color-success-bg-hover": "#1d3712",
+          "--ant-color-success-border": "#274916",
+          "--ant-color-success-border-hover": "#306317",
+          "--ant-color-success-hover": "#306317",
+          "--ant-color-success-active": "#3c8618",
+          "--ant-color-success-text-hover": "#6abe39",
+          "--ant-color-success-text": "#49aa19",
+          "--ant-color-success-text-active": "#3c8618",
+          "--ant-color-error-bg": "#2c1618",
+          "--ant-color-error-bg-hover": "#451d1f",
+          "--ant-color-error-bg-filled-hover": "#441e1f",
+          "--ant-color-error-bg-active": "#5b2526",
+          "--ant-color-error-border": "#5b2526",
+          "--ant-color-error-border-hover": "#7e2e2f",
+          "--ant-color-error-hover": "#e86e6b",
+          "--ant-color-error-active": "#ad393a",
+          "--ant-color-error-text-hover": "#e86e6b",
+          "--ant-color-error-text": "#dc4446",
+          "--ant-color-error-text-active": "#ad393a",
+          "--ant-color-warning-bg": "#2b2111",
+          "--ant-color-warning-bg-hover": "#443111",
+          "--ant-color-warning-border": "#594214",
+          "--ant-color-warning-border-hover": "#7c5914",
+          "--ant-color-warning-hover": "#7c5914",
+          "--ant-color-warning-active": "#aa7714",
+          "--ant-color-warning-text-hover": "#e8b339",
+          "--ant-color-warning-text": "#d89614",
+          "--ant-color-warning-text-active": "#aa7714",
+          "--ant-color-info-bg": "#111a2c",
+          "--ant-color-info-bg-hover": "#112545",
+          "--ant-color-info-border": "#15325b",
+          "--ant-color-info-border-hover": "#15417e",
+          "--ant-color-info-hover": "#15417e",
+          "--ant-color-info-active": "#1554ad",
+          "--ant-color-info-text-hover": "#3c89e8",
+          "--ant-color-info-text": "#1668dc",
+          "--ant-color-info-text-active": "#1554ad",
+          "--ant-color-link-hover": "#15417e",
+          "--ant-color-link-active": "#1554ad",
+          "--ant-blue-hover": "#1554ad",
+          "--ant-blue-active": "#3c89e8",
+          "--ant-purple-hover": "#51258f",
+          "--ant-purple-active": "#854eca",
+          "--ant-cyan-hover": "#138585",
+          "--ant-cyan-active": "#33bcb7",
+          "--ant-green-hover": "#3c8618",
+          "--ant-green-active": "#6abe39",
+          "--ant-magenta-hover": "#a02669",
+          "--ant-magenta-active": "#e0529c",
+          "--ant-pink-hover": "#a02669",
+          "--ant-pink-active": "#e0529c",
+          "--ant-red-hover": "#a61d24",
+          "--ant-red-active": "#e84749",
+          "--ant-orange-hover": "#aa6215",
+          "--ant-orange-active": "#e89a3c",
+          "--ant-yellow-hover": "#aa9514",
+          "--ant-yellow-active": "#e8d639",
+          "--ant-volcano-hover": "#aa3e19",
+          "--ant-volcano-active": "#e87040",
+          "--ant-geekblue-hover": "#263ea0",
+          "--ant-geekblue-active": "#5273e0",
+          "--ant-lime-hover": "#6f9412",
+          "--ant-lime-active": "#a9d134",
+          "--ant-gold-hover": "#aa7714",
+          "--ant-gold-active": "#e8b339",
+          "--ant-font-size-sm": "14px",
+          "--ant-font-size-lg": "20px",
+          "--ant-font-size-xl": "24px",
+          "--ant-font-size-heading-1": "46px",
+          "--ant-font-size-heading-2": "36px",
+          "--ant-font-size-heading-3": "30px",
+          "--ant-font-size-heading-4": "24px",
+          "--ant-font-size-heading-5": "20px",
+          "--ant-line-height": "1.4705882352941178",
+          "--ant-line-height-lg": "1.4",
+          "--ant-line-height-sm": "1.5714285714285714",
+          "--ant-font-height": "25px",
+          "--ant-font-height-lg": "28px",
+          "--ant-font-height-sm": "22px",
+          "--ant-line-height-heading-1": "1.173913043478261",
+          "--ant-line-height-heading-2": "1.2222222222222223",
+          "--ant-line-height-heading-3": "1.2666666666666666",
+          "--ant-line-height-heading-4": "1.3333333333333333",
+          "--ant-line-height-heading-5": "1.4",
+          "--ant-control-height-sm": "36px",
+          "--ant-control-height-xs": "24px",
+          "--ant-control-height-lg": "60px",
+          "--ant-color-fill-content": "rgba(0,0,0,0.12)",
+          "--ant-color-fill-content-hover": "rgba(0,0,0,0.18)",
+          "--ant-color-fill-alter": "rgba(0,0,0,0.04)",
+          "--ant-color-bg-container-disabled": "rgba(0,0,0,0.08)",
+          "--ant-color-split": "rgba(255,255,255,0.01)",
+          "--ant-color-text-heading": "rgba(0,0,0,0.85)",
+          "--ant-color-highlight": "#dc4446",
+          "--ant-color-bg-text-hover": "rgba(0,0,0,0.12)",
+          "--ant-color-bg-text-active": "rgba(0,0,0,0.18)",
+          "--ant-color-icon-hover": "rgba(0,0,0,0.85)",
+          "--ant-color-error-outline": "rgba(26,2,4,0.92)",
+          "--ant-color-warning-outline": "rgba(29,19,2,0.94)",
+          "--ant-color-error-affix": "#dc4446",
+          "--ant-color-warning-affix": "#d89614",
+          "--ant-font-size-icon": "14px",
+          "--ant-control-interactive-size": "24px",
+          "--ant-control-item-bg-hover": "rgba(0,0,0,0.08)",
+          "--ant-control-item-bg-active": "#15325b",
+          "--ant-control-item-bg-active-hover": "#15417e",
+          "--ant-control-item-bg-active-disabled": "rgba(0,0,0,0.18)",
+          "--ant-control-tmp-outline": "rgba(0,0,0,0.04)",
+          "--ant-control-outline": "rgba(1,32,77,0.92)",
+          "--ant-box-shadow": "0 6px 16px 0 rgba(255,255,255,0.016),\n      0 3px 6px -4px rgba(255,255,255,0.024),\n      0 9px 28px 8px rgba(255,255,255,0.010000000000000002)",
+          "--ant-box-shadow-secondary": "0 6px 16px 0 rgba(255,255,255,0.016),\n      0 3px 6px -4px rgba(255,255,255,0.024),\n      0 9px 28px 8px rgba(255,255,255,0.010000000000000002)",
+          "--ant-box-shadow-tertiary": "0 1px 2px 0 rgba(255,255,255,0.010000000000000002),\n      0 1px 6px -1px rgba(255,255,255,0.006),\n      0 2px 4px 0 rgba(255,255,255,0.006)",
+          "--ant-box-shadow-popover-arrow": "2px 2px 5px rgba(255,255,255,0.010000000000000002)",
+          "--ant-drop-shadow-popover": "drop-shadow(0 6px 16px rgba(255,255,255,0.016)) drop-shadow(0 3px 6px rgba(255,255,255,0.024)) drop-shadow(0 9px 28px rgba(255,255,255,0.010000000000000002))",
+          "--ant-box-shadow-card": "0 1px 2px -2px rgba(255,255,255,0.032),\n      0 3px 6px 0 rgba(255,255,255,0.024),\n      0 5px 12px 4px rgba(255,255,255,0.018)",
+          "--ant-box-shadow-drawer-right": "-6px 0 16px 0 rgba(255,255,255,0.016),\n      -3px 0 6px -4px rgba(255,255,255,0.024),\n      -9px 0 28px 8px rgba(255,255,255,0.010000000000000002)",
+          "--ant-box-shadow-drawer-left": "6px 0 16px 0 rgba(255,255,255,0.016),\n      3px 0 6px -4px rgba(255,255,255,0.024),\n      9px 0 28px 8px rgba(255,255,255,0.010000000000000002)",
+          "--ant-box-shadow-drawer-up": "0 6px 16px 0 rgba(255,255,255,0.016),\n      0 3px 6px -4px rgba(255,255,255,0.024),\n      0 9px 28px 8px rgba(255,255,255,0.010000000000000002)",
+          "--ant-box-shadow-drawer-down": "0 -6px 16px 0 rgba(255,255,255,0.016),\n      0 -3px 6px -4px rgba(255,255,255,0.024),\n      0 -9px 28px 8px rgba(255,255,255,0.010000000000000002)",
+          "--ant-box-shadow-tabs-overflow-left": "inset 10px 0 8px -8px rgba(255,255,255,0.016)",
+          "--ant-box-shadow-tabs-overflow-right": "inset -10px 0 8px -8px rgba(255,255,255,0.016)",
+          "--ant-box-shadow-tabs-overflow-top": "inset 0 10px 8px -8px rgba(255,255,255,0.016)",
+          "--ant-box-shadow-tabs-overflow-bottom": "inset 0 -10px 8px -8px rgba(255,255,255,0.016)",
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-color-warning": "#a011cc",
+          "--ant-color-warning-bg": "#fde6ff",
+          "--ant-color-warning-bg-hover": "#f8b8ff",
+          "--ant-color-warning-border": "#e488f2",
+          "--ant-color-warning-border-hover": "#cf5ce6",
+          "--ant-color-warning-hover": "#cf5ce6",
+          "--ant-color-warning-active": "#7b05a6",
+          "--ant-color-warning-text-hover": "#b834d9",
+          "--ant-color-warning-text": "#a011cc",
+          "--ant-color-warning-text-active": "#7b05a6",
+          "--ant-color-warning-outline": "rgba(235,5,255,0.1)",
+          "--ant-color-warning-affix": "#a011cc",
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-font-size": "19px",
+          "--ant-border-radius": "20px",
+          "--ant-font-size-sm": "16px",
+          "--ant-font-size-lg": "22px",
+          "--ant-font-size-xl": "28px",
+          "--ant-font-size-heading-1": "50px",
+          "--ant-font-size-heading-2": "42px",
+          "--ant-font-size-heading-3": "34px",
+          "--ant-font-size-heading-4": "28px",
+          "--ant-font-size-heading-5": "22px",
+          "--ant-line-height": "1.4210526315789473",
+          "--ant-line-height-lg": "1.3636363636363635",
+          "--ant-line-height-sm": "1.5",
+          "--ant-font-height": "27px",
+          "--ant-font-height-lg": "30px",
+          "--ant-font-height-sm": "24px",
+          "--ant-line-height-heading-1": "1.16",
+          "--ant-line-height-heading-2": "1.1904761904761905",
+          "--ant-line-height-heading-3": "1.2352941176470589",
+          "--ant-line-height-heading-4": "1.2857142857142858",
+          "--ant-line-height-heading-5": "1.3636363636363635",
+          "--ant-border-radius-sm": "8px",
+          "--ant-border-radius-lg": "16px",
+          "--ant-border-radius-outer": "6px",
+          "--ant-font-size-icon": "16px",
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "22px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "deprecated-width",
+      "config": {
+        "components": {
+          "Popover": {
+            "width": 212
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-width": "212px",
+          "--ant-popover-title-min-width": "212px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "deprecated-min-width",
+      "config": {
+        "components": {
+          "Popover": {
+            "minWidth": 221
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-min-width": "221px",
+          "--ant-popover-title-min-width": "221px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "deprecated-both",
+      "config": {
+        "components": {
+          "Popover": {
+            "width": 202,
+            "minWidth": 222
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-width": "202px",
+          "--ant-min-width": "222px",
+          "--ant-popover-title-min-width": "202px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "deprecated-with-title-zero",
+      "config": {
+        "components": {
+          "Popover": {
+            "width": 202,
+            "minWidth": 222,
+            "titleMinWidth": 0
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-width": "202px",
+          "--ant-min-width": "222px",
+          "--ant-popover-title-min-width": "0px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "deprecated-zero",
+      "config": {
+        "components": {
+          "Popover": {
+            "width": 0,
+            "minWidth": 0
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-width": "0px",
+          "--ant-min-width": "0px",
+          "--ant-popover-title-min-width": "177px",
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "12px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "1060"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-max-width": "250px",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "zero-component-values",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "maxWidth": 0,
+            "zIndexPopup": 0,
+            "arrowOffsetHorizontal": 0,
+            "arrowShadowWidth": 0
+          },
+          "Popover": {
+            "titleMinWidth": 0,
+            "zIndexPopup": 0,
+            "innerPadding": 0,
+            "titleMarginBottom": 0
+          },
+          "Popconfirm": {
+            "zIndexPopup": 0
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "0",
+          "--ant-tooltip-max-width": "0px",
+          "--ant-tooltip-arrow-offset-horizontal": "0px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "0px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-title-min-width": "0px",
+          "--ant-popover-z-index-popup": "0",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-inner-padding": "0px",
+          "--ant-popover-title-margin-bottom": "0px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--ant-popconfirm-z-index-popup": "0"
+        },
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "0",
+          "--ant-tooltip-max-width": "0px",
+          "--ant-tooltip-arrow-offset-horizontal": "0px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "0px",
+          "--ant-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "undefined-component-values",
+      "config": {
+        "components": {
+          "Tooltip": {
+            "maxWidth": {
+              "$type": "undefined"
+            },
+            "arrowPath": {
+              "$type": "undefined"
+            }
+          },
+          "Popover": {
+            "titleMinWidth": {
+              "$type": "undefined"
+            },
+            "innerPadding": {
+              "$type": "undefined"
+            }
+          },
+          "Popconfirm": {
+            "zIndexPopup": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--ant-popover-z-index-popup": "1030",
+          "--ant-popover-arrow-shadow-width": "8.970562748477143px",
+          "--ant-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--ant-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--ant-popover-arrow-offset-horizontal": "12px",
+          "--ant-popover-arrow-offset-vertical": "8px",
+          "--ant-popover-title-margin-bottom": "8px",
+          "--ant-popover-title-padding": "0px",
+          "--ant-popover-title-border-bottom": "none",
+          "--ant-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {},
+        "TooltipOnPopover": {
+          "--ant-tooltip-z-index-popup": "1070",
+          "--ant-tooltip-arrow-offset-horizontal": "12px",
+          "--ant-tooltip-arrow-offset-vertical": "8px",
+          "--ant-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--ant-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    },
+    {
+      "name": "custom-prefix",
+      "config": {
+        "cssVar": {
+          "prefix": "Overlay2"
+        },
+        "components": {
+          "Tooltip": {
+            "maxWidth": 290
+          },
+          "Popover": {
+            "titleMinWidth": 230
+          },
+          "Popconfirm": {
+            "zIndexPopup": 1750
+          }
+        }
+      },
+      "variables": {
+        "Tooltip": {
+          "--overlay-2-tooltip-z-index-popup": "1070",
+          "--overlay-2-tooltip-max-width": "290px",
+          "--overlay-2-tooltip-arrow-offset-horizontal": "12px",
+          "--overlay-2-tooltip-arrow-offset-vertical": "8px",
+          "--overlay-2-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--overlay-2-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--overlay-2-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        },
+        "Popover": {
+          "--overlay-2-popover-title-min-width": "230px",
+          "--overlay-2-popover-z-index-popup": "1030",
+          "--overlay-2-popover-arrow-shadow-width": "8.970562748477143px",
+          "--overlay-2-popover-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--overlay-2-popover-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)",
+          "--overlay-2-popover-arrow-offset-horizontal": "12px",
+          "--overlay-2-popover-arrow-offset-vertical": "8px",
+          "--overlay-2-popover-inner-padding": "12px",
+          "--overlay-2-popover-title-margin-bottom": "8px",
+          "--overlay-2-popover-title-padding": "0px",
+          "--overlay-2-popover-title-border-bottom": "none",
+          "--overlay-2-popover-inner-content-padding": "0px"
+        },
+        "Popconfirm": {
+          "--overlay-2-popconfirm-z-index-popup": "1750"
+        },
+        "TooltipOnPopover": {
+          "--overlay-2-tooltip-z-index-popup": "1070",
+          "--overlay-2-tooltip-max-width": "290px",
+          "--overlay-2-tooltip-arrow-offset-horizontal": "12px",
+          "--overlay-2-tooltip-arrow-offset-vertical": "8px",
+          "--overlay-2-tooltip-arrow-shadow-width": "8.970562748477143px",
+          "--overlay-2-tooltip-arrow-path": "path('M 0 8 A 4 4 0 0 0 2.82842712474619 6.82842712474619 L 6.585786437626905 3.0710678118654755 A 2 2 0 0 1 9.414213562373096 3.0710678118654755 L 13.17157287525381 6.82842712474619 A 4 4 0 0 0 16 8 Z')",
+          "--overlay-2-tooltip-arrow-polygon": "polygon(1.6568542494923806px 100%, 50% 1.6568542494923806px, 14.34314575050762px 100%, 1.6568542494923806px 100%)"
+        }
+      }
+    }
+  ]
+}

@@ -1494,6 +1494,13 @@ Placement принимает top/bottom/left/right; arrow=false скрывает
 сдвиг. Положение обновляется при прокрутке, resize и перемещении anchor, пока
 подсказка открыта. Class и style относятся к wrapper.
 
+При source-настройках ConfigProvider панель использует Tooltip tokens: maxWidth,
+zIndexPopup, offsets и форму стрелки, включая component aliases/algorithm.
+Отступ от anchor рассчитывается по глобальным sizePopupArrow и marginXXS, как
+в исходном Tooltip: обычно 12px со стрелкой и 4px без неё. Без source-настроек
+сохраняется прежний отступ 8px. Подробности — в
+[описании темы](./docs/reference/theme-context.md#токены-всплывающих-панелей).
+
 Поверхность использует нативный `popover="manual"` в верхнем слое браузера,
 без переноса DOM в body: overflow контейнера не обрезает её, контекст темы и
 модальность dialog сохраняются. Нужен браузер с Popover API, как для фильтров Table.
@@ -1567,6 +1574,12 @@ PopupClass относится к самой поверхности. Aria-labelle
 и aria-busy позволяют связать её с содержимым составного компонента;
 aria-label имеет приоритет при выборе имени.
 
+Source-тема подготавливает Tooltip и Popover tokens в исходном порядке:
+maxWidth и стрелку внутреннего Tooltip, затем собственные titleMinWidth,
+zIndexPopup, padding и wireframe-разделение заголовка/содержимого. Deprecated
+width/minWidth сохраняют исходный приоритет перед titleMinWidth по умолчанию.
+Обновление темы сохраняет позицию панели, введённый текст и фокус.
+
 Popover использует нативный `popover="manual"` и требует Popover API.
 Поверхность остаётся в исходном DOM-поддереве и показывается в верхнем слое:
 overflow контейнера не обрезает её, темы и работа внутри Modal сохраняются.
@@ -1627,6 +1640,11 @@ Popover обеспечивает открытие кликом, Enter/Space на
 описания — кнопка отмены. Tab следует естественному порядку, Escape закрывает
 карточку и возвращает фокус. Поддерживаются Modal, вложенный Tooltip, темы,
 compact, RTL и prefers-reduced-motion. Требуется нативный Popover API.
+
+При source-настройках ConfigProvider aliases применяются в порядке
+Tooltip → Popover → Popconfirm; Popconfirm подготавливает собственный zIndexPopup.
+Вложенный самостоятельный Popover использует свои tokens без aliases Popconfirm.
+Смена темы не прерывает ожидающее подтверждение.
 
 `bind:open`, defaultOpen и `onOpenChange(open)` следуют модели Svelte.
 DefaultOpen учитывается один раз; внешние изменения open не вызывают

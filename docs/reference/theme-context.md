@@ -102,6 +102,7 @@ const config: ThemeConfig = {
 Эти records доступны в GlobalToken. Исходные prepareComponentToken и применение
 CSS-переменных подключены для Button, Input, TextArea, InputNumber, SpaceAddon,
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
+Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover и Popconfirm.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -150,11 +151,39 @@ Native-only Avatar/Badge сохраняют прежние размеры и о�
 Scope-правила появляются в Svelte head уже при SSR и удаляются вместе с provider.
 При ручном svelte/server render нужно включить result.head в HTML страницы.
 Корень панели Popover также получает scope-класс: Avatar aliases не меняют
-оформление самой панели. Полная подготовка Popover ComponentToken ещё в работе.
+оформление самой панели.
 
 Footer-кнопки DatePicker/RangePicker и TimePicker/TimeRangePicker используют общий
 Button. Они получают его component tokens и semantic config при фиксированном
 source размере small, независимо от Compact и размера picker.
+
+## Токены всплывающих панелей
+
+Tooltip рассчитывает maxWidth, zIndexPopup, смещения и форму стрелки. Popover
+добавляет titleMinWidth, собственный zIndexPopup и arrow tokens, padding и
+wireframe-разделение заголовка/содержимого. Deprecated width имеет приоритет
+перед minWidth; оба используются только для отсутствующего titleMinWidth.
+Нулевой titleMinWidth сохраняется, нулевые deprecated aliases игнорируются,
+как в source cssinjs-utils. Popconfirm подготавливает собственный zIndexPopup.
+
+Popover использует также scope внутреннего Tooltip. На корне Popconfirm aliases
+применяются в исходном порядке Tooltip → Popover → Popconfirm. Вложенный Popover
+получает собственные aliases, не наследуя overrides внешнего Popconfirm.
+Component algorithms, undefined, нули и custom CSS prefix поддерживаются;
+zIndexPopup сериализуется без px, path/polygon стрелок — как строки CSS.
+
+Позиционирование читает глобальные sizePopupArrow и marginXXS: отступ равен
+sizePopupArrow / 2 + marginXXS со стрелкой и marginXXS без неё. Component aliases
+влияют на CSS, но не подменяют глобальные tokens в этом расчёте — так устроен
+исходный Tooltip. При обычной source-теме отступы равны 12px и 4px; native-only
+панели сохраняют прежний отступ 8px.
+
+Переменные появляются уже в SSR-разметке. Реактивные обновления меняют только
+theme variables и сохраняют inline-позицию, DOM содержимого, редактор, фокус и
+ожидающий Promise Popconfirm. Отключение source-темы удаляет эти переменные.
+Существующие четыре placement, viewport limits, native top layer и ARIA-контракты
+сохраняются. Полные source corner placements, zIndex context и motion ещё не
+перенесены; наличие zIndexPopup не меняет порядок native top layer.
 
 ## CSS и совместимость
 
@@ -228,6 +257,13 @@ zeroRuntime наследуется; опубликованные стили ко
   [SSR](../../tests/package/avatar-badge-theme.ssr.test.ts),
   маршрут `?fixture=avatar-badge-theme`. Проверяются также AvatarGroup/Popover,
   alias isolation, подгонка текста и сохранение native DOM/focus.
+- [Эталон Tooltip/Popover/Popconfirm](../../src/lib/theme-overlay-tokens-reference.test.ts):
+  все scoped declarations официального UMD для 19 настроек, включая wireframe,
+  deprecated aliases, нули/undefined, component algorithms и custom CSS prefix.
+  [Браузерная геометрия и lifecycle](../../tests/browser/overlay-theme.spec.ts),
+  [SSR](../../tests/package/overlay-theme.ssr.test.ts),
+  маршрут `?fixture=overlay-theme`. Проверяются исходные отступы/стрелки,
+  порядок aliases, сохранение позиции/редактора/фокуса и ожидающего подтверждения.
 - [Compact metrics](../../tests/browser/compact-theme.spec.ts),
   [SSR](../../tests/package/compact-theme.ssr.test.ts), маршрут `?fixture=compact-theme`.
   Эталон размеров, шрифтов и padding для 15 сочетаний темы/размера получен из

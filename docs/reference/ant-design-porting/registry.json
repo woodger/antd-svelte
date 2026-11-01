@@ -5922,7 +5922,22 @@
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/popover.spec.ts"
+        "tests/browser/popover.spec.ts",
+        "src/lib/theme-overlay-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.dom.ts",
+        "src/lib/TooltipPopup.svelte",
+        "src/lib/Popover.svelte",
+        "src/lib/Popconfirm.svelte",
+        "src/lib/popover-theme-context.ts",
+        "src/lib/popup.dom.ts",
+        "src/lib/theme-overlay-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-overlay-tokens-reference.json",
+        "tests/package/overlay-theme.ssr.test.ts",
+        "tests/browser/overlay-theme.spec.ts",
+        "tests/browser/fixtures/OverlayThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -5962,7 +5977,31 @@
             "tests/browser/avatar-badge-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Source key/hash на popup root сбрасывают inherited component aliases к provider globals при SSR и runtime. Проверена композиция AvatarGroup; полная подготовка собственных Popover ComponentToken и остальные пробелы семейства не объявляются завершёнными."
+          "note": "Source key/hash на popup root сбрасывают inherited component aliases к provider globals при SSR и runtime. Проверена композиция AvatarGroup; собственные Popover ComponentToken описаны отдельной feature. Остальные пробелы семейства остаются открытыми."
+        },
+        {
+          "id": "overlay-theme-tokens",
+          "title": "Source Tooltip/Popover/Popconfirm token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover-theme-context.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/theme-overlay-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-overlay-tokens-reference.json",
+            "tests/package/overlay-theme.ssr.test.ts",
+            "tests/browser/overlay-theme.spec.ts",
+            "tests/browser/fixtures/OverlayThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Native-only API/отступы, четыре placement, viewport limits и top layer сохранены. Полные corner placements, source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
         }
       ]
     },
@@ -6551,7 +6590,22 @@
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/tooltip.spec.ts"
+        "tests/browser/tooltip.spec.ts",
+        "src/lib/theme-overlay-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.dom.ts",
+        "src/lib/TooltipPopup.svelte",
+        "src/lib/Popover.svelte",
+        "src/lib/Popconfirm.svelte",
+        "src/lib/popover-theme-context.ts",
+        "src/lib/popup.dom.ts",
+        "src/lib/theme-overlay-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-overlay-tokens-reference.json",
+        "tests/package/overlay-theme.ssr.test.ts",
+        "tests/browser/overlay-theme.spec.ts",
+        "tests/browser/fixtures/OverlayThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -6591,6 +6645,30 @@
             "tests/browser/steps-variants.spec.ts"
           ],
           "note": "Пассивный rich content; существующие строки/числа/пустые title и Compact isolation сохранены. Основной подробный аудит Tooltip остаётся отдельным."
+        },
+        {
+          "id": "overlay-theme-tokens",
+          "title": "Source Tooltip/Popover/Popconfirm token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover-theme-context.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/theme-overlay-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-overlay-tokens-reference.json",
+            "tests/package/overlay-theme.ssr.test.ts",
+            "tests/browser/overlay-theme.spec.ts",
+            "tests/browser/fixtures/OverlayThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Native-only API/отступы, четыре placement, viewport limits и top layer сохранены. Полные corner placements, source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
         }
       ]
     },
@@ -7069,7 +7147,7 @@
       "scope": "target",
       "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
       "upstreamPath": "components/popconfirm",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Popconfirm",
@@ -7087,7 +7165,22 @@
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/popconfirm.spec.ts"
+        "tests/browser/popconfirm.spec.ts",
+        "src/lib/theme-overlay-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component.dom.ts",
+        "src/lib/TooltipPopup.svelte",
+        "src/lib/Popover.svelte",
+        "src/lib/Popconfirm.svelte",
+        "src/lib/popover-theme-context.ts",
+        "src/lib/popup.dom.ts",
+        "src/lib/theme-overlay-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-overlay-tokens-reference.json",
+        "tests/package/overlay-theme.ssr.test.ts",
+        "tests/browser/overlay-theme.spec.ts",
+        "tests/browser/fixtures/OverlayThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -7105,6 +7198,30 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Ограничение зафиксировано в README модуля."
+        },
+        {
+          "id": "overlay-theme-tokens",
+          "title": "Source Tooltip/Popover/Popconfirm token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover-theme-context.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/theme-overlay-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-overlay-tokens-reference.json",
+            "tests/package/overlay-theme.ssr.test.ts",
+            "tests/browser/overlay-theme.spec.ts",
+            "tests/browser/fixtures/OverlayThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Native-only API/отступы, четыре placement, viewport limits и top layer сохранены. Полные corner placements, source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
         }
       ]
     },
@@ -7704,7 +7821,19 @@
         "tests/package/avatar-badge-theme.ssr.test.ts",
         "tests/browser/avatar-badge-theme.spec.ts",
         "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
-        "tests/browser/fixtures/ant-design-avatar-badge-metrics.json"
+        "tests/browser/fixtures/ant-design-avatar-badge-metrics.json",
+        "src/lib/theme-overlay-tokens.engine.ts",
+        "src/lib/theme-component.dom.ts",
+        "src/lib/TooltipPopup.svelte",
+        "src/lib/Popconfirm.svelte",
+        "src/lib/popover-theme-context.ts",
+        "src/lib/popup.dom.ts",
+        "src/lib/theme-overlay-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-overlay-tokens-reference.json",
+        "tests/package/overlay-theme.ssr.test.ts",
+        "tests/browser/overlay-theme.spec.ts",
+        "tests/browser/fixtures/OverlayThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-metrics.json"
       ],
       "features": [
         {
@@ -7725,7 +7854,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Popover получил scope для сброса родительских aliases."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm получили собственную подготовку tokens и CSS consumption; остальные families остаются в работе."
         },
         {
           "id": "static-design-tokens",
@@ -7876,6 +8005,30 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные defaults/final overrides, alias overrides и component algorithms, нули/undefined, custom CSS prefix/hash и SSR scopes. Размеры Avatar, numeric size priority, group overlap/border/spacing и hidden avatars; Badge count/dot/status/fonts/padding/shadow colorBorderBg. Numeric Badge z-index/font-weight сериализуются с px как upstream; строки сохраняют безразмерные значения. Все CSS declarations и computed metrics закреплены по официальному UMD для 13 настроек. Popover scope сбрасывает чужие Avatar aliases, скрытые аватары повторно получают свои tokens. Native-only темы и существующие Svelte API/a11y/focus сохраняются; полный API остальных families остаётся в работе."
+        },
+        {
+          "id": "overlay-theme-tokens",
+          "title": "Source Tooltip/Popover/Popconfirm token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover-theme-context.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/theme-overlay-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-overlay-tokens-reference.json",
+            "tests/package/overlay-theme.ssr.test.ts",
+            "tests/browser/overlay-theme.spec.ts",
+            "tests/browser/fixtures/OverlayThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Native-only API/отступы, четыре placement, viewport limits и top layer сохранены. Полные corner placements, source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
         }
       ]
     },

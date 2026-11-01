@@ -2,6 +2,9 @@
   import type { Snippet } from 'svelte';
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { connectTooltipDescription } from './tooltip.dom';
   import { connectPopup } from './popup.dom';
   import type { TooltipPlacement } from './tooltip.types';
@@ -31,6 +34,9 @@
   } = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Tooltip');
+  const designTokens = useDesignTokenContext();
+  const initialThemeStyle = untrack(() => componentTheme.style);
   const generatedId = $props.id();
   const id = `ant-tooltip-${generatedId}`;
   let popup = $state<HTMLSpanElement>();
@@ -48,6 +54,9 @@
       trigger,
       placement,
       autoAdjustOverflow,
+      gap: () => untrack(() => designTokens.enabled
+        ? (arrow ? designTokens.state.token.sizePopupArrow / 2 : 0)
+          + designTokens.state.token.marginXXS : undefined),
       onDismiss,
       onPlacement: (next) => {
         actualPlacement = next;
@@ -68,9 +77,11 @@
 <span bind:this={popup} {id} role="tooltip" popover="manual" hidden dir={config.direction} class={[
     'ant-tooltip',
     'ant-tooltip-css-var',
+    componentTheme.className,
     `ant-tooltip-placement-${open ? actualPlacement : placement}`,
     config.direction === 'rtl' && 'ant-tooltip-rtl'
-  ]} onpointerenter={(event) => {
+  ]} style={initialThemeStyle}
+  {@attach node => connectComponentTheme(node, componentTheme.style)} onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         onHoverChange?.(true);
     }} onpointerleave={() => onHoverChange?.(false)}>

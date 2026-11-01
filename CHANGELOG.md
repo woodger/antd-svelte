@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme overlays: исходная подготовка Tooltip/Popover/Popconfirm tokens, arrow
+  paths/offsets, wireframe padding, deprecated aliases и порядок вложенных style
+  hooks. Source gap рассчитывается по глобальным tokens; native-only панели
+  сохраняются. Добавлены UMD conformance, SSR и browser-проверки обновления темы
+  с сохранением позиции, редактора, фокуса и ожидающего подтверждения.
 - Theme display: исходная подготовка Avatar/AvatarGroup и Badge tokens, размеры,
   цвета, обводки, group spacing и Badge shadow. Сохранены native-only темы,
   numeric Avatar size и приоритет style; добавлены SSR, UMD conformance и

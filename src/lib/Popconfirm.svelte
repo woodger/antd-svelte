@@ -2,6 +2,7 @@
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useForm } from './form-context';
+  import { providePopconfirmTheme } from './popover-theme-context';
   import { ruRU } from './types';
   import { createPopconfirmAction } from './popconfirm.model.svelte.js';
   import type { PopconfirmProps } from './popconfirm.types';
@@ -35,6 +36,7 @@
   }: PopconfirmProps = $props();
 
   const config = useConfig();
+  providePopconfirmTheme();
   const form = useForm();
   const generatedId = $props.id();
   const titleId = `ant-popconfirm-${generatedId}-title`;

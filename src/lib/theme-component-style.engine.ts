@@ -6,12 +6,17 @@ import {
   prepareSwitchTokens
 } from './theme-control-tokens.engine';
 import { prepareAvatarTokens, prepareBadgeTokens } from './theme-display-tokens.engine';
+import {
+  prepareTooltipTokens,
+  preparePopoverTokens,
+  preparePopconfirmTokens
+} from './theme-overlay-tokens.engine';
 import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
   from './theme-css-variables.engine';
 import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
-  | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge';
+  | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -22,7 +27,10 @@ const factories = {
   Checkbox: () => ({}),
   Switch: prepareSwitchTokens,
   Avatar: prepareAvatarTokens,
-  Badge: prepareBadgeTokens
+  Badge: prepareBadgeTokens,
+  Tooltip: prepareTooltipTokens,
+  Popover: preparePopoverTokens,
+  Popconfirm: preparePopconfirmTokens
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
@@ -33,7 +41,10 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Checkbox: [],
   Switch: [],
   Avatar: [],
-  Badge: []
+  Badge: [],
+  Tooltip: [],
+  Popover: [],
+  Popconfirm: []
 };
 const inputMetrics = [
   'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',
@@ -59,6 +70,14 @@ function resolveComponentVariables(
 ) {
   const custom = { ...token[component] } as Record<string, unknown>;
   const defaults = factories[component]({ ...token, ...custom });
+
+  if (component === 'Popover') {
+    for (const old of ['width', 'minWidth']) {
+      // В исходном deprecated mapping учитываются truthy aliases, затем сохраняется явный 0.
+      if (custom[old] || custom.titleMinWidth) custom.titleMinWidth ??= custom[old];
+    }
+  }
+
   const merged: Record<string, unknown> = { ...defaults, ...custom };
   const global = token as unknown as Record<string, unknown>;
   for (const key of Object.keys(merged)) {
