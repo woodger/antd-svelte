@@ -9,6 +9,10 @@
 
 ### Added
 
+- ColorPicker: исходная Color-модель, точность RGB/HSB/alpha, single/gradient,
+  palette, editable gradient points, presets, semantic config/locale и native popup.
+  Добавлены private slider hooks, InputNumber formatter/parser, CSS-рецепт и MIT
+  upstream. Полные token/trigger/motion возможности остаются в реестре пробелов.
 - Slider range: исходные multiple handles, marks/dots, push/cross, fixed disabled
   anchors, editable/minCount/maxCount, draggableTrack, callbacks, semantic config
   и refs. Сохранены прежние native single contracts; диапазон использует native

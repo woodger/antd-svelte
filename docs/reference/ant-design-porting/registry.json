@@ -2118,24 +2118,149 @@
       "id": "color-picker",
       "name": "ColorPicker",
       "category": "data-entry",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос ColorPicker по общему поручению: исходная Color-модель, single/gradient, palette/sliders/inputs, controlled transitions, presets и semantic config. Общий token/motion/trigger engine остаётся отдельной областью.",
       "upstreamPath": "components/color-picker",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "ColorPicker",
+          "local": [
+            "ColorPicker"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "slider",
+        "input",
+        "input-number",
+        "select",
+        "segmented",
+        "collapse",
+        "divider",
+        "popover",
+        "form",
+        "space"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/color-picker",
+          "range": "~3.1.1",
+          "referenceVersion": "3.1.1"
+        },
+        {
+          "name": "@ant-design/fast-color",
+          "range": "^3.0.1",
+          "referenceVersion": "3.0.1"
+        },
+        {
+          "name": "@rc-component/slider",
+          "range": "~1.1.1",
+          "referenceVersion": "1.1.1"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.10.1",
+          "referenceVersion": "3.10.1"
+        }
+      ],
+      "priority": "p1",
+      "effort": "L",
+      "evidence": [
+        "src/lib/ColorPicker.svelte",
+        "src/lib/ColorPickerPanel.svelte",
+        "src/lib/ColorPickerInputs.svelte",
+        "src/lib/ColorPickerSlider.svelte",
+        "src/lib/color-picker.types.ts",
+        "src/lib/color.ts",
+        "src/lib/color-core.engine.ts",
+        "src/lib/fast-color.engine.ts",
+        "src/lib/color-names.ts",
+        "src/lib/color-picker.engine.ts",
+        "src/lib/color-picker.engine.test.ts",
+        "tests/package/color-picker.ssr.test.ts",
+        "tests/browser/color-picker.spec.ts",
+        "tests/browser/fixtures/ColorPickerFixtures.svelte",
+        "src/lib/vendor/color-picker.css",
+        "readme.md",
+        "src/lib/ColorPickerPicker.svelte",
+        "src/lib/ColorPickerPresets.svelte",
+        "src/lib/slider-internal-context.ts",
+        "src/lib/popup-portal.dom.ts",
+        "src/lib/popup-position.engine.ts"
+      ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "color-model",
+          "title": "Исходные Color, форматы, точность, cleared и интерполяция",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "src/lib/color-picker.engine.test.ts"
+          ],
+          "note": "RcColor/FastColor арифметика и caches HSV/HSL, именованные цвета, RGB/HSB/hex/alpha, clone/equals, исходный порядок gradient points и RGB interpolation. Color публикуется как тип, как upstream; объекты приходят из callbacks."
+        },
+        {
+          "id": "picker-inputs",
+          "title": "Palette, Hue/Alpha, HEX/RGB/HSB и форматы",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/browser/color-picker.spec.ts"
+          ],
+          "note": "Native pointer/touch и keyboard palette; Source sliders через private LTR/drag context, disabledAlpha/disabledFormat, HEX sanitization и InputNumber formatter/parser. DisabledAlpha сохраняет исходное условие по прежнему alpha."
+        },
+        {
+          "id": "gradient",
+          "title": "Single/gradient transitions, cached gradient, editable points и active color",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/browser/color-picker.spec.ts"
+          ],
+          "note": "Mode options сортируются single/gradient; переключение кеширует gradient до изменения single color. Drag сохраняет raw identity и цвета, добавляет interpolated stop, удаляет после 130px. Keyboard Delete сохраняет исходную возможность удалить последние точки и порядок callbacks."
+        },
+        {
+          "id": "controlled-lifecycle",
+          "title": "Controlled/default value, open/format, callbacks, SSR и cleanup",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/color-picker.ssr.test.ts",
+            "tests/browser/color-picker.spec.ts"
+          ],
+          "note": "Заданные value/open/format остаются controlled; onChange и onChangeComplete независимы. Picker drag хранит preview до complete. Native button не отправляет форму; panel изолирован от FormItem/Compact, portal и pointer resources уничтожаются. DestroyOnHidden сохраняет исходную retained-state границу."
+        },
+        {
+          "id": "presets-rendering",
+          "title": "Presets, snippets, semantic config, locale, themes/RTL",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/color-picker.ssr.test.ts",
+            "tests/browser/color-picker.spec.ts"
+          ],
+          "note": "Одиночные/gradient presets, initial collapse state, native buttons и typed panelRender Picker/Presets snippets. ConfigProvider.colorPicker, semantic layers/styles, inherited size и compact; существующие theme presets, en/ru и ColorPicker locale alias."
+        },
+        {
+          "id": "native-boundary",
+          "title": "Native trigger/popup и граница React nodes/events",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/color-picker.types.ts",
+            "tests/browser/color-picker.spec.ts"
+          ],
+          "note": "Trigger/presets/clear/handler используют native buttons; popup — native popover. ReactNode renderers заменены snippets; внутренний Select сохраняет существующий native combobox. ColorPicker не добавляет скрытое поле FormData, как и исходный control."
+        },
+        {
+          "id": "advanced-trigger-theme",
+          "title": "Полный rc-trigger/motion и общий token/prefix engine",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "note": "Произвольные component tokens/prefix CSS, полный rc-trigger DOM boundary для nested clipping/scaled containers, motion и React diagnostics/PurePanel не перенесены. Числовой viewport flip/shift, все 12 placements, arrow/pointAtCenter и custom container используют общий source engine с Tour. V1-ready не означает полный React API."
         }
       ]
     },
@@ -2628,7 +2753,13 @@
         "config-provider",
         "space"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/input-number",
+          "range": "~1.6.2",
+          "referenceVersion": "1.6.2"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
@@ -2646,11 +2777,11 @@
         },
         {
           "id": "gap-1",
-          "title": "stringMode, formatter/parser и варианты оформления",
+          "title": "stringMode и варианты оформления",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "note": "Formatter/parser добавлены для ColorPicker; остальные ограничения описаны в README."
         },
         {
           "id": "compact-context",
@@ -2662,6 +2793,17 @@
             "tests/browser/space-compact.spec.ts"
           ],
           "note": "Без Compact сохраняется существующее поведение; общий подробный аудит семейства ещё не завершён."
+        },
+        {
+          "id": "formatter-parser",
+          "title": "Форматированное отображение и числовой parser",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/package/color-picker.ssr.test.ts",
+            "tests/browser/color-picker.spec.ts"
+          ],
+          "note": "Опциональные formatter(value,{userTyping,input})/parser, numeric value/FormData, commit/step/reset. Без них сохраняется прежний строгий native parser; полный rc-input-number contract ещё требует аудита."
         }
       ]
     },
@@ -3195,7 +3337,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Новые marks/dots, semantic config и React callback aliases пока принадлежат range-ветке; одиночный Slider сохраняет согласованный native contract. Полная унификация source scalar API, произвольные theme tokens/prefix CSS, React diagnostics и private Slider contexts для ColorPicker остаются следующими этапами. V1-ready не означает полный React API."
+          "note": "Новые marks/dots, semantic config и React callback aliases пока принадлежат range-ветке; одиночный Slider сохраняет согласованный native contract. Полная унификация source scalar API, произвольные theme tokens/prefix CSS, React diagnostics остаются следующими этапами. V1-ready не означает полный React API."
         }
       ]
     },
@@ -5539,7 +5681,9 @@
         "src/lib/vendor/tour.css",
         "tests/package/tour.ssr.test.ts",
         "tests/browser/tour.spec.ts",
-        "tests/browser/fixtures/TourFixtures.svelte"
+        "tests/browser/fixtures/TourFixtures.svelte",
+        "src/lib/popup-portal.dom.ts",
+        "src/lib/popup-position.engine.ts"
       ],
       "features": [
         {

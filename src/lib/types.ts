@@ -1,5 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { TypographyLocale } from './typography.types';
+import type { ColorPickerLocale } from './color-picker.types';
+import { colorPickerEnUS, colorPickerRuRU } from './color-picker.locale';
 import { typographyEnUS, typographyRuRU } from './typography.locale';
 import type { TourLocale } from './tour.types';
 import type { CarouselLocale } from './carousel.types';
@@ -31,6 +33,8 @@ export interface ThemeConfig {
 }
 
 export interface Locale {
+  colorPicker?: Partial<ColorPickerLocale>;
+  ColorPicker?: Partial<ColorPickerLocale>;
   typography?: Partial<TypographyLocale>;
   /** Исходный alias Ant Design; локальные поля Text перекрывают typography. */
   Text?: Partial<TypographyLocale>;
@@ -172,6 +176,7 @@ export interface SelectOption<Value extends string | number = string> {
 }
 
 export const ruRU = {
+  colorPicker: colorPickerRuRU,
   typography: typographyRuRU,
   tour: tourRuRU,
   carousel: { prevSlide: 'Предыдущий слайд', nextSlide: 'Следующий слайд' },
@@ -262,6 +267,7 @@ export const ruRU = {
 } satisfies Locale;
 
 export const enUS = {
+  colorPicker: colorPickerEnUS,
   typography: typographyEnUS,
   tour: tourEnUS,
   carousel: { prevSlide: 'Previous slide', nextSlide: 'Next slide' },

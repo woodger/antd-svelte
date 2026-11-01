@@ -363,6 +363,27 @@
   --ant-slider-dot-active-border-color: var(--ant-color-primary-border);
 }
 
+.ant-color-picker-css-var {
+  --ant-control-height-lg: calc(var(--ant-control-height) * 1.25);
+  --ant-control-height-sm: calc(var(--ant-control-height) * 0.75);
+  --ant-font-size-sm: calc(var(--ant-font-size) - 2px);
+  --ant-line-height-sm: calc(1 + 8px / var(--ant-font-size-sm));
+  --ant-line-height: calc(1 + 8px / var(--ant-font-size));
+}
+
+.ant-color-picker-css-var[data-ant-color-theme='dark'] {
+  --ant-color-primary: #1668dc;
+  --ant-drop-shadow-popover: drop-shadow(0 6px 16px rgba(255, 255, 255, 0.016)) drop-shadow(0 3px 6px rgba(255, 255, 255, 0.024)) drop-shadow(0 9px 28px rgba(255, 255, 255, 0.01));
+}
+
+.ant-color-picker-css-var[data-ant-color-theme='dark'][data-ant-color-primary='purple'] {
+  --ant-color-primary: #642ab5;
+}
+
+.ant-color-picker-css-var[data-ant-color-theme='dark'][data-ant-color-primary='green'] {
+  --ant-color-primary: #49aa19;
+}
+
 .ant-slider-css-var[data-ant-slider-theme='dark'] {
   --ant-color-primary: #1668dc;
   --ant-color-primary-border: #15325b;

@@ -1,4 +1,4 @@
-import { getTooltipPosition } from './tooltip.engine';
+import { getTooltipPosition, type TooltipPosition, type TooltipRect } from './tooltip.engine';
 import type { TooltipPlacement } from './tooltip.types';
 
 const openPopups = new WeakMap<Document, HTMLElement[]>();
@@ -14,6 +14,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   align?: 'left' | 'right' | 'top' | 'bottom';
   matchAnchorWidth?: boolean;
   gap?: number;
+  getPosition?: (anchor: DOMRect, popup: DOMRect, viewport: TooltipRect) => TooltipPosition;
   onVisibilityChange?: (visible: boolean) => void;
 }): () => void {
   const document = anchor.ownerDocument;
@@ -82,7 +83,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
     }
 
     const bounds = popup.getBoundingClientRect();
-    const position = getTooltipPosition(
+    const position = options.getPosition?.(rect, bounds, viewport) ?? getTooltipPosition(
       rect,
       bounds,
       viewport,

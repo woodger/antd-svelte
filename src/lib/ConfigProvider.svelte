@@ -18,6 +18,7 @@
   import type { TourConfig } from './tour.types';
   import type { CarouselConfig } from './carousel.types';
   import type { SliderConfig } from './slider-range.types';
+  import type { ColorPickerConfig } from './color-picker.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -53,6 +54,7 @@
     tour?: TourConfig;
     carousel?: CarouselConfig;
     slider?: SliderConfig;
+    colorPicker?: ColorPickerConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
@@ -97,6 +99,7 @@
     tour,
     carousel,
     slider,
+    colorPicker,
     virtual,
     renderEmpty,
     rangePicker,
@@ -171,6 +174,9 @@
     get slider() {
       return slider ?? parent.slider;
     },
+    get colorPicker() {
+      return colorPicker ?? parent.colorPicker;
+    },
     get virtual() {
       return virtual ?? parent.virtual;
     },
@@ -233,6 +239,14 @@
           ...locale?.Text
         },
         global: { ...parent.locale.global, ...locale?.global },
+        colorPicker: {
+          ...parent.locale.colorPicker, ...parent.locale.ColorPicker,
+          ...locale?.colorPicker, ...locale?.ColorPicker
+        },
+        ColorPicker: {
+          ...parent.locale.colorPicker, ...parent.locale.ColorPicker,
+          ...locale?.colorPicker, ...locale?.ColorPicker
+        },
         tour: { ...parent.locale.tour, ...parent.locale.Tour, ...locale?.tour, ...locale?.Tour },
         Tour: { ...parent.locale.tour, ...parent.locale.Tour, ...locale?.tour, ...locale?.Tour },
         carousel: {

@@ -17,12 +17,14 @@
     type SliderRangeOptions
   } from './slider-range.engine';
   import { connectSliderRangeDrag, connectSliderRangeInput } from './slider-range.dom';
+  import { useSliderInternal } from './slider-internal-context';
   import type { SliderRangeProps, SliderClassNames, SliderStyles } from './slider-range.types';
   import TooltipPopup from './TooltipPopup.svelte';
 
   let { value = $bindable(), ref = $bindable(), nativeElement = $bindable(), ...props }:
     SliderRangeProps = $props();
   const config = useConfig();
+  const internal = useSliderInternal();
   const form = useForm();
   const field = useFormField();
   const initialDefault = untrack(() => props.defaultValue);
@@ -47,7 +49,7 @@
   let prefixCls = $derived(props.prefixCls ?? 'ant-slider');
   let orientation = $derived(props.orientation ?? (props.vertical ? 'vertical' : 'horizontal'));
   let direction = $derived(getSliderDirection(orientation, props.reverse ?? false,
-    config.direction === 'rtl'));
+    (internal?.direction ?? config.direction) === 'rtl'));
   let disabled = $derived(props.disabled ?? field?.disabled ?? form?.disabled
     ?? config.componentDisabled);
   let minimum = $derived(Number.isFinite(props.min) ? props.min! : 0);
@@ -194,7 +196,7 @@
     const changed = result.length !== raw.length
       || result.some((entry, item) => entry !== raw[item]);
     if (changed) props.onChange?.(result);
-    value = result;
+    if (!internal?.controlled) value = result;
     if (changed) {
       props.onValueChange?.(result);
       if (index >= 0) dispatchNative('input', index);
@@ -246,6 +248,9 @@
     locked = handle;
     if (index >= 0) inputs[index]?.focus();
     tooltipDismissed = false;
+    internal?.onDragStart?.({
+      rawValues: origin, draggingIndex: index, draggingValue: origin[index]
+    });
     gesture = connectSliderRangeDrag(event.currentTarget as HTMLElement, event, move => {
       if (!nativeElement) return;
       const rect = nativeElement.getBoundingClientRect();
@@ -270,6 +275,12 @@
         cache = next.values;
         draggingValue = next.value;
         publish(draggingDelete ? cache.filter((_, item) => item !== index) : cache, index);
+        internal?.onDragChange?.({
+          rawValues: cache,
+          draggingIndex: index,
+          draggingValue: next.value,
+          deleteIndex: draggingDelete ? index : -1
+        });
       }
     }, () => {
       const target = draggingValue;
@@ -330,6 +341,11 @@
   ) {
     props.onkeydown?.(event);
     if (event.defaultPrevented || sliderHandleDisabled(disabled, index)) return;
+    if ((event.key === 'Delete' || event.key === 'Backspace') && internal?.onKeyDelete) {
+      event.preventDefault();
+      internal.onKeyDelete(index);
+      return;
+    }
     const change = sliderRangeKey(event.key, direction);
     if (props.keyboard === false) {
       if (change !== undefined) event.preventDefault();
@@ -395,6 +411,7 @@
     focused = index;
     activeTooltip = index;
     tooltipDismissed = false;
+    internal?.onFocus?.(index);
     props.onFocus?.(event);
     props.onfocus?.(event);
   }
@@ -483,7 +500,7 @@
 <svelte:document onreset={handleReset} />
 <!-- svelte-ignore a11y_no_static_element_interactions (Корень маршрутизирует исходный click/drag по дорожке.) -->
 <div bind:this={nativeElement} class={[prefixCls, 'ant-slider-css-var', 'range-root',
-  `${prefixCls}-${orientation}`, config.direction === 'rtl' && `${prefixCls}-rtl`,
+  `${prefixCls}-${orientation}`, (internal?.direction ?? config.direction) === 'rtl' && `${prefixCls}-rtl`,
   disabledState[0] && `${prefixCls}-disabled`, marks.length && `${prefixCls}-with-marks`,
   locked && `${prefixCls}-lock`, props.class, config.slider?.class, props.rootClassName, classNames.root]}
   style={styles.root} data-ant-slider-theme={config.theme.mode}
@@ -514,10 +531,12 @@
   </div>
   {#each displayed as point, index (index)}
     <div bind:this={handles[index]} class={[`${prefixCls}-handle`, `${prefixCls}-handle-${index + 1}`,
-      'range-handle', classNames.handle, active && draggingIndex === index && `${prefixCls}-handle-dragging`,
+      'range-handle', classNames.handle, internal?.handleClass?.(index, point),
+      active && draggingIndex === index && `${prefixCls}-handle-dragging`,
       active && draggingIndex === index && draggingDelete && `${prefixCls}-handle-dragging-delete`,
       sliderHandleDisabled(disabled, index) && `${prefixCls}-handle-disabled`]}
-      style={[sliderRangePosition(direction, point, minimum, maximum), indexed(props.handleStyle, index), styles.handle].filter(Boolean).join(';')}>
+      style={[sliderRangePosition(direction, point, minimum, maximum), indexed(props.handleStyle, index), styles.handle,
+        internal?.handleStyle?.(index, point)].filter(Boolean).join(';')}>
       <!-- svelte-ignore a11y_role_supports_aria_props_implicit (AriaRequired сохраняет явный публичный prop rc-slider; native required передаётся отдельно.) -->
       <input {...inputAttributes} bind:this={inputs[index]} {@attach connectInput}
         type="range" class="slider-range-input"

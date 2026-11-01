@@ -249,6 +249,15 @@ export type {
 } from './input-password.types';
 export { default as InputNumber } from './InputNumber.svelte';
 export { default as Slider } from './Slider.svelte';
+export { default as ColorPicker } from './ColorPicker.svelte';
+export type { AggregationColor as Color } from './color';
+export type { ColorGenInput } from './color-core.engine';
+export type { ColorMode, ColorFormat, ColorValue } from './color-picker.engine';
+export type {
+  ColorPickerProps, ColorPickerPreset, ColorPickerConfig, ColorPickerLocale,
+  ColorPickerContent, ColorPickerPlacement, ColorPickerSlots, ColorPickerStyles,
+  ColorPickerSemantic
+} from './color-picker.types';
 export { default as Tooltip } from './Tooltip.svelte';
 export { default as Popover } from './Popover.svelte';
 export { default as Popconfirm } from './Popconfirm.svelte';

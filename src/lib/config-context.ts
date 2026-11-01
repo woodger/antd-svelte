@@ -17,6 +17,7 @@ import type { TypographyConfig } from './typography.types';
 import type { TourConfig } from './tour.types';
 import type { CarouselConfig } from './carousel.types';
 import type { SliderConfig } from './slider-range.types';
+import type { ColorPickerConfig } from './color-picker.types';
 import type { RenderEmptyHandler } from './types';
 import type { RangePickerConfig } from './range-picker.types';
 import type { InputConfig } from './input.types';
@@ -46,6 +47,7 @@ export interface ConfigContext {
   readonly tour?: TourConfig;
   readonly carousel?: CarouselConfig;
   readonly slider?: SliderConfig;
+  readonly colorPicker?: ColorPickerConfig;
   readonly virtual?: boolean;
   readonly renderEmpty?: RenderEmptyHandler;
   readonly rangePicker?: RangePickerConfig;

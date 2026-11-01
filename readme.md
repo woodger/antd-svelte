@@ -149,6 +149,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | TextArea | Многострочное значение, native constraints/events/selection, формы, размеры, статусы и RTL |
 | InputNumber | Число/null, черновик ввода, min/max, дробный шаг, precision, кнопки и клавиатура, FormData, reset и FormItem |
 | Slider | Число или диапазон, marks/dots, editable/draggableTrack, push/cross, клавиатура, подсказки, темы/RTL, native формы и refs |
+| ColorPicker | Color-модель, RGB/HSB/hex/alpha, palette, single/gradient, presets, semantic config и native popup |
 | Image / ImagePreviewGroup | Native img/fallback/placeholder, preview transforms/focus и групповая навигация по images/items |
 | Mentions | Prefix/split, поиск и вставка у каретки, loading, autoSize и native popup |
 | AutoComplete | Свободный текст, options/groups, поиск, keyboard backfill, custom input и controlled popup |
@@ -1155,8 +1156,69 @@ Form восстанавливает её initialValues и сбрасывает �
 осталось прежним.
 
 Пример количества, цены и расчёта стоимости доступен на `/ant-design#input-number`.
-Реализован вариант outlined с boolean controls. `stringMode`, formatter/parser,
-другие варианты оформления, prefix/suffix и изменение колесом пока отсутствуют.
+Реализован вариант outlined с boolean controls. Опциональные formatter и parser
+разделяют отображаемую строку и числовые value/FormData. Formatter получает
+строковое число и `{ userTyping, input }`, parser — строку поля; без них сохраняется прежний
+строгий parser. Полный rc-input-number contract ещё требует аудита.
+`stringMode`, другие варианты оформления, prefix/suffix и изменение колесом пока отсутствуют.
+
+## ColorPicker
+
+ColorPicker переносит Ant Design 6.6.8, @rc-component/color-picker 3.1.1,
+FastColor 3.0.1 и gradient slider 1.1.1. Точные props и snippets описаны в
+[color-picker.types.ts](./src/lib/color-picker.types.ts); методы Color — в
+[color.ts](./src/lib/color.ts). React runtime в пакет не добавляется.
+
+```svelte
+<script lang="ts">
+  import { ColorPicker, type ColorPickerProps } from 'antd-svelte';
+  let color = $state<ColorPickerProps['value']>('#1677ff');
+</script>
+
+<ColorPicker value={color} onChange={next => { color = next; }}
+  mode={['single', 'gradient']} showText allowClear />
+```
+
+Value принимает строку, объект Color из callback, null или массив `{ color, percent }`.
+Color сохраняет точность HSV и alpha; повторный разбор строки может её потерять.
+Пустое начальное значение очищено. Cleared отличается от прозрачного цвета;
+clear сохраняет оттенок и насыщенность, а повторный clear не вызывает callbacks.
+`onChange(color, css)` возвращает RGB/linear-gradient CSS независимо от format.
+Заданные value/open/format управляются владельцем. Для обновления только после
+drag передайте обработчик onChangeComplete; локальный preview до завершения
+не меняет текст trigger. DefaultValue/defaultFormat читаются при создании.
+
+Есть HEX sanitization, RGB/HSB inputs, Hue/Alpha и двумерный palette. Native handler
+добавляет стрелки клавиатуры для saturation/brightness. Gradient mode поддерживает
+добавление interpolated points, crossing, active color, drag deletion и исходный
+keyboard Delete, включая удаление последних точек. Переход gradient → single →
+gradient восстанавливает кеш, пока single color не изменён. DisabledAlpha сохраняет
+исходное условие: текущий alpha учитывается при следующем изменении.
+
+Presets принимают цвета/градиенты, ключи, label/snippet и initial defaultOpen.
+ShowText может быть snippet с Color; children заменяет trigger. PanelRender получает
+исходный panel snippet и `extra.components.Picker/Presets`, которые можно разместить
+в своей композиции. ConfigProvider.colorPicker задаёт class/style, semantic slots
+и arrow; локальный style имеет приоритет. Поддерживаются en/ru, alias locale.ColorPicker,
+унаследованный размер, Compact, темы и RTL; внутренние цветовые дорожки всегда LTR.
+
+Trigger, clear и presets — native buttons; popup использует native popover,
+12 placement, click/hover, arrow/pointAtCenter и getPopupContainer. По умолчанию portal
+находится в body; внутри native modal остаётся в dialog. CSS-переменные темы
+переносятся общим механизмом с Tour. Escape возвращает
+фокус; outside закрывает popup. DestroyOnHidden управляет сохранением черновиков;
+portal, listeners и timers очищаются. Panel изолирует FormItem и Compact. Как upstream,
+ColorPicker не добавляет скрытое поле в FormData; значение передаётся callbacks.
+
+Остаются общий token/prefix engine, полный rc-trigger overflow/motion API и React
+development/PurePanel API. Native DOM и Svelte snippets заменяют React nodes/refs.
+Извлечённый [CSS](./src/lib/vendor/color-picker.css) воспроизводится рецептом из 94 правил.
+Логика сопровождается MIT [FastColor](./src/lib/vendor/LICENSE.fast-color) и
+[rc-color-picker](./src/lib/vendor/LICENSE.rc-color-picker). Formatter/parser опираются
+на [rc-input-number 1.6.2](./src/lib/vendor/LICENSE.rc-input-number).
+Проверки: [engine](./src/lib/color-picker.engine.test.ts),
+[package SSR](./tests/package/color-picker.ssr.test.ts),
+[browser](./tests/browser/color-picker.spec.ts); fixture: `?fixture=color-picker`.
 
 ## Slider
 

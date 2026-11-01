@@ -236,13 +236,4 @@ export function getTourOffsetStyle(position: TourAlignment | undefined) {
     + (bottom ? `bottom:${position.bottom}px;top:auto` : `top:${position.y}px;bottom:auto`);
 }
 
-export function getTourArrowStyle(position: TourAlignment | undefined) {
-  const align = position?.align;
-  if (!align?.points || align.autoArrow === false) return '';
-  const [source, target] = align.points;
-  const y = source[0] === target[0] || !['t', 'b'].includes(source[0])
-    ? `top:${position!.arrowY}px` : source[0] === 't' ? 'top:0' : 'bottom:0';
-  const x = source[1] === target[1] || !['l', 'r'].includes(source[1])
-    ? `left:${position!.arrowX}px` : source[1] === 'l' ? 'left:0' : 'right:0';
-  return `${x};${y}`;
-}
+export { getPopupArrowStyle as getTourArrowStyle } from './popup-position.engine';

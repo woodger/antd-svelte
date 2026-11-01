@@ -30,6 +30,10 @@
     max?: number;
     step?: number;
     precision?: number;
+    /** Отображение числа; parser возвращает число из форматированной строки. */
+    formatter?: (value: number | string | undefined,
+      info: { userTyping: boolean; input: string; }) => string;
+    parser?: (value: string | undefined) => number;
     /** @defaultValue true */
     controls?: boolean;
     /** @defaultValue true */
@@ -47,6 +51,8 @@
     max,
     step,
     precision,
+    formatter,
+    parser,
     controls = true,
     keyboard = true,
     size,
@@ -99,12 +105,12 @@
     const current = normalizeInputNumber(value === undefined ? initialDefault : value);
 
     return {
-      text: formatInputNumber(current, resolvedPrecision),
+      text: formatValue(current),
       dirty: false,
       resetKey: form?.resetKey
     };
   });
-  let parsed = $derived(parseInputNumber(editor.text));
+  let parsed = $derived(parseValue(editor.text));
   let outOfRange = $derived(
     resolvedValue !== null && !isInputNumberInRange(resolvedValue, options)
     || parsed !== null && parsed !== undefined && !isInputNumberInRange(parsed, options)
@@ -135,25 +141,45 @@
     onValueChange?.(next);
   }
 
+  function formatValue(current: number | null, userTyping = false, input?: string) {
+    const text = input ?? formatInputNumber(current, resolvedPrecision);
+    if (!formatter) return text;
+    const number = userTyping && input !== undefined && !parser
+      ? input.replace(/[^\w.-]+/g, '') : current === null ? '' : String(current);
+    return formatter(number, {
+      userTyping,
+      input: input ?? untrack(() => control?.value ?? '')
+    });
+  }
+
+  function parseValue(text: string) {
+    if (!parser) return parseInputNumber(formatter ? text.replace(/[^\w.-]+/g, '') : text);
+    const result = parser(text);
+    return Number.isFinite(result) ? result : undefined;
+  }
+
   function collect(text: string) {
-    const next = parseInputNumber(text);
+    const next = parseValue(text);
 
     if (next === null || next !== undefined && isInputNumberInRange(next, options))
       publish(next);
 
-    editor = { text, dirty: true };
+    editor = {
+      text: next === undefined || next !== resolvedValue ? text : formatValue(next, true, text),
+      dirty: true
+    };
   }
 
   function flush() {
     if (!editor.dirty || composing || resolvedDisabled || readonly) return;
 
-    const next = commitInputNumber(parseInputNumber(editor.text) ?? resolvedValue, options);
+    const next = commitInputNumber(parseValue(editor.text) ?? resolvedValue, options);
 
     // Пустое поле остаётся null; нечисловой черновик возвращается к последнему числу.
     if (next !== undefined)
       publish(editor.text.trim() ? next : null);
 
-    editor = { text: formatInputNumber(resolvedValue, resolvedPrecision), dirty: false };
+    editor = { text: formatValue(resolvedValue), dirty: false };
   }
 
   function changeStep(direction: 1 | -1) {
@@ -164,7 +190,7 @@
     if (next === null) return;
 
     publish(next);
-    editor = { text: formatInputNumber(resolvedValue, resolvedPrecision), dirty: false };
+    editor = { text: formatValue(resolvedValue), dirty: false };
     control?.focus();
   }
 
@@ -236,7 +262,7 @@
 
       composing = false;
       value = initialDefault;
-      editor = { text: formatInputNumber(initialDefault, resolvedPrecision), dirty: false };
+      editor = { text: formatValue(initialDefault), dirty: false };
     }, 0);
     resets.add(reset);
   }
