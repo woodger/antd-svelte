@@ -6,6 +6,7 @@ import {
   prepareSwitchTokens
 } from './theme-control-tokens.engine';
 import { prepareAvatarTokens, prepareBadgeTokens } from './theme-display-tokens.engine';
+import { prepareSelectTokens } from './theme-select-tokens.engine';
 import {
   prepareTooltipTokens,
   preparePopoverTokens,
@@ -16,7 +17,8 @@ import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
 import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
-  | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm';
+  | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
+  | 'Select';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -30,7 +32,8 @@ const factories = {
   Badge: prepareBadgeTokens,
   Tooltip: prepareTooltipTokens,
   Popover: preparePopoverTokens,
-  Popconfirm: preparePopconfirmTokens
+  Popconfirm: preparePopconfirmTokens,
+  Select: prepareSelectTokens
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
@@ -44,7 +47,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Badge: [],
   Tooltip: [],
   Popover: [],
-  Popconfirm: []
+  Popconfirm: [],
+  Select: ['optionLineHeight', 'optionSelectedFontWeight']
 };
 const inputMetrics = [
   'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',

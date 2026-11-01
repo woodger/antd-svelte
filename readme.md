@@ -5692,6 +5692,13 @@ aliases пока отсутствуют. Generic numeric/object values не вх
 <Select id="teams" mode="multiple" {options} bind:value={teams} name="teams" allowClear />
 ```
 
+При source-настройках ConfigProvider Select применяет собственные tokens и aliases
+к selector и dropdown: размеры tags/options, padding, цвета, focus border/outline,
+стрелку и очистку. Поддерживаются component algorithm, custom CSS prefix, нули и
+явный undefined. Смена темы сохраняет DOM поля/списка, ввод, выделение, фокус и
+FormData. Native-only темы сохраняют прежнее оформление; style относится к внешней
+обёртке. Подробности — в [описании темы](./docs/reference/theme-context.md#токены-select).
+
 Поиск по умолчанию выключен в одиночном режиме и включён в multiple;
 `showSearch` переопределяет это. Нажатие варианта во множественном режиме
 добавляет или удаляет его, очищает поисковый текст и сохраняет открытый список

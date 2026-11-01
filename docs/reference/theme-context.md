@@ -102,7 +102,7 @@ const config: ThemeConfig = {
 Эти records доступны в GlobalToken. Исходные prepareComponentToken и применение
 CSS-переменных подключены для Button, Input, TextArea, InputNumber, SpaceAddon,
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
-Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover и Popconfirm.
+Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm и Select.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -157,6 +157,37 @@ Footer-кнопки DatePicker/RangePicker и TimePicker/TimeRangePicker исп�
 Button. Они получают его component tokens и semantic config при фиксированном
 source размере small, независимо от Compact и размера picker.
 
+## Токены Select
+
+Select рассчитывает высоты tags через min(controlHeight - 2 * paddingXXS,
+controlHeight - 2 * lineWidth), внутренний margin через floor(paddingXXS / 2),
+padding и font metrics options, цвета selector/selection/focus и zIndexPopup.
+После подготовки явные component overrides сохраняют исходный приоритет.
+optionLineHeight, optionSelectedFontWeight и zIndexPopup сериализуются без px.
+Нулевые paddingXXS и lineWidthFocus сохраняют source-расчёт.
+
+Обёртка и dropdown получают key/hash scope, selector — собственные CSS variables.
+Родительские aliases сбрасываются к provider; отдельный Select algorithm и custom
+CSS prefix работают независимо от остальных controls. Значения уже присутствуют
+в SSR-разметке. Обновления сохраняют native input/option nodes, поисковый текст,
+выделение, фокус и данные формы; удаление source-настроек возвращает native стили.
+
+Поле multiple использует line-height высоты tag плюс два внутренних margin.
+Options размещены в flex column без сжатия, как внутренний virtual-list;
+пустая выдача, как в OptionList, остаётся вне этого flex-контекста. Это сохраняет
+геометрию в том числе при undefined optionHeight. При source compact
+small одиночный Select имеет высоту 22px, multiple — 21px, как официальный UMD.
+Стрелка/clear используют fontSizeIcon, focus включает исходные active tokens;
+кнопка очистки сохраняет нативный Tab и возврат фокуса в поле.
+
+В outlined multiple исходные стили 6.6.8 задают прозрачную границу tag и наследуют
+disabled color. multipleItemBorderColor/multipleItemBorderColorDisabled и
+multipleItemColorDisabled сериализуются, но не меняют это поведение upstream.
+Наличие ComponentToken не означает, что источник использует его в каждой ветке CSS.
+Полные variants/semantic config/prefixCls, virtualization и остальные rc-select
+props ещё не перенесены. Общие Select-style consumers AutoComplete, TreeSelect и
+Cascader пока требуют отдельного подключения tokens; native-only темы сохранены.
+
 ## Токены всплывающих панелей
 
 Tooltip рассчитывает maxWidth, zIndexPopup, смещения и форму стрелки. Popover
@@ -202,7 +233,7 @@ InputNumber получают рассчитанные font/padding metrics уж�
 source colors, hash-классов и scope-правил.
 
 В compact режиме middle у Input, Select, InputNumber и Button имеет высоту 28px,
-large — 35px. Для small Input, Select и InputNumber имеют минимум 22px: строка 20px
+large — 35px. Для small Input, одиночный Select и InputNumber имеют минимум 22px: строка 20px
 и две рамки по 1px. Button имеет фиксированную высоту 21px. Эти значения получены
 в официальном React-компоненте 6.6.8; одинаковая высота всех small controls не
 является исходным поведением. Явный `compact: false`, наследование provider,
@@ -270,6 +301,13 @@ zeroRuntime наследуется; опубликованные стили ко
   [официального UMD](../../tests/browser/fixtures/ant-design-compact-metrics.json)
   после проверки SHA-256. Проверяются native/source пути, dark, пустой token,
   родительский source-контекст, обновления, вложенные provider и изоляция.
+- [Эталон Select](../../src/lib/theme-select-tokens-reference.test.ts): полные CSS
+  declarations официального UMD для 16 настроек, включая algorithms, нули/undefined,
+  custom prefix, внутренние margins и unitless fields.
+  [Браузерные размеры и поведение](../../tests/browser/select-theme.spec.ts),
+  [SSR](../../tests/package/select-theme.ssr.test.ts), маршрут `?fixture=select-theme`.
+  Проверяются single/multiple всех размеров, disabled, options, стрелка/clear,
+  изоляция aliases и смена темы без потери редактора, выделения, фокуса и FormData.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

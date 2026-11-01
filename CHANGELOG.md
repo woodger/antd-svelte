@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme Select: исходная подготовка tokens и aliases для selector/dropdown,
+  размеров tags/options, arrow/clear и focus styles. Добавлены UMD conformance,
+  SSR и browser-проверки нулей/undefined/algorithms/prefix и смены темы с
+  сохранением DOM, поиска, выделения, фокуса, callbacks и формы. Native-only
+  оформление и существующий Svelte API сохранены.
 - Theme overlays: исходная подготовка Tooltip/Popover/Popconfirm tokens, arrow
   paths/offsets, wireframe padding, deprecated aliases и порядок вложенных style
   hooks. Source gap рассчитывается по глобальным tokens; native-only панели

@@ -3796,7 +3796,17 @@
         "tests/browser/multiple-select.spec.ts",
         "tests/package/select-remote.ssr.test.ts",
         "tests/browser/remote-select.spec.ts",
-        "integration:select"
+        "integration:select",
+        "src/lib/theme-select-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/Select.svelte",
+        "src/lib/theme-select-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-select-tokens-reference.json",
+        "tests/package/select-theme.ssr.test.ts",
+        "tests/browser/select-theme.spec.ts",
+        "tests/browser/fixtures/SelectThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -3871,6 +3881,25 @@
             "tests/browser/space-compact.spec.ts"
           ],
           "note": "Без Compact сохраняется существующее поведение; общий подробный аудит семейства ещё не завершён."
+        },
+        {
+          "id": "select-theme-tokens",
+          "title": "Source Select token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-select-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/Select.svelte",
+            "src/lib/theme-select-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-select-tokens-reference.json",
+            "tests/package/select-theme.ssr.test.ts",
+            "tests/browser/select-theme.spec.ts",
+            "tests/browser/fixtures/SelectThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumers AutoComplete/TreeSelect/Cascader остаются в работе."
         }
       ]
     },
@@ -7843,7 +7872,15 @@
         "tests/package/overlay-theme.ssr.test.ts",
         "tests/browser/overlay-theme.spec.ts",
         "tests/browser/fixtures/OverlayThemeFixtures.svelte",
-        "tests/browser/fixtures/ant-design-overlay-metrics.json"
+        "tests/browser/fixtures/ant-design-overlay-metrics.json",
+        "src/lib/theme-select-tokens.engine.ts",
+        "src/lib/Select.svelte",
+        "src/lib/theme-select-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-select-tokens-reference.json",
+        "tests/package/select-theme.ssr.test.ts",
+        "tests/browser/select-theme.spec.ts",
+        "tests/browser/fixtures/SelectThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-metrics.json"
       ],
       "features": [
         {
@@ -7864,7 +7901,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm получили собственную подготовку tokens и CSS consumption; остальные families остаются в работе."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm и Select получили собственную подготовку tokens и CSS consumption; остальные families остаются в работе."
         },
         {
           "id": "static-design-tokens",
@@ -8039,6 +8076,25 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Native-only API/отступы, четыре placement, viewport limits и top layer сохранены. Полные corner placements, source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
+        },
+        {
+          "id": "select-theme-tokens",
+          "title": "Source Select token preparation и CSS consumption",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-select-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/Select.svelte",
+            "src/lib/theme-select-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-select-tokens-reference.json",
+            "tests/package/select-theme.ssr.test.ts",
+            "tests/browser/select-theme.spec.ts",
+            "tests/browser/fixtures/SelectThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumers AutoComplete/TreeSelect/Cascader остаются в работе."
         }
       ]
     },

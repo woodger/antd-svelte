@@ -1,6 +1,7 @@
 <script lang="ts" generics="Value extends string | number = string, Mode extends 'multiple' | undefined = undefined">
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useFormField } from './form-context';
@@ -37,6 +38,7 @@
     onOpenChange,
     onkeydown,
     onbeforeinput,
+    onfocus,
     onblur,
     onclick,
     style,
@@ -45,6 +47,7 @@
   }: SelectProps<Value, Mode> = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Select');
   const compact = useCompact();
   const field = useFormField();
   const generatedId = $props.id();
@@ -53,6 +56,7 @@
   );
   let useDefault = $state(true);
   let isOpen = $state(false);
+  let focused = $state(false);
   let internalSearch = $state('');
   let searchConfig = $derived(
     { searchValue, onSearch, filterOption, ...(typeof showSearch === 'object' ? showSearch : {}) }
@@ -340,9 +344,16 @@
   }
 
   function handleBlur(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
+    focused = false;
     setOpen(false);
     field?.onBlur();
     onblur?.(event);
+  }
+
+  function handleFocus(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
+    focused = true;
+    // Прямой Svelte handler получает native input в this; обёртка сохраняет receiver.
+    onfocus?.call(event.currentTarget, event);
   }
 
   function handlePointerDown(
@@ -375,6 +386,8 @@
   .container { position: relative; min-width: 0; width: 100%; }
   .ant-select { display: flex; align-items: center; width: 100%; }
   .ant-select:focus-within { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
+  .ant-select.ant-select-source-theme { align-items: flex-start; }
+  .ant-select.ant-select-source-theme:focus-within { outline: 0; outline-offset: 0; }
   .ant-select.ant-select-single .ant-select-input, .ant-select.ant-select-multiple .ant-select-input {
     position: relative;
     inset: auto;
@@ -394,41 +407,60 @@
   .clear { display: flex; padding: 0; margin-inline-end: 4px; border: 0; background: none; color: var(--ant-color-text-tertiary); cursor: pointer; }
   .clear:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
   .popup.ant-select-dropdown { top: calc(100% + 4px); inset-inline: 0; max-height: 256px; overflow-y: auto; }
+  /* Исходный virtual-list размещает options в flex column без сжатия строк. */
+  .popup.ant-select-source-popup { display: flex; flex-direction: column; }
+  .ant-select-source-popup > .ant-select-item { flex: none; }
+  .ant-select-source-theme .clear { display: inline-block; margin-inline-end: 0; color: var(--ant-color-text-quaternary); }
+  .ant-select-source-theme .clear:hover { color: var(--ant-color-icon); }
+  .ant-select-source-theme .clear:focus-visible { opacity: 1; }
+  .ant-select-source-theme:has(.clear):hover .suffix, .ant-select-source-theme:has(.clear:focus-visible) .suffix { opacity: 0; }
   .ant-select-item { width: 100%; border: 0; background: none; font-family: inherit; text-align: start; }
   .ant-select.ant-select-multiple { height: auto; min-height: var(--ant-select-height); }
   .ant-select.ant-select-multiple .ant-select-content { gap: 0; }
   .ant-select.ant-select-multiple .ant-select-input { flex: 1 1 60px; width: 60px; min-width: 40px; max-width: 100%; }
+  .ant-select.ant-select-source-theme.ant-select-multiple .ant-select-input { line-height: calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-select-multi-item-height)); }
   .ant-select.ant-select-multiple .ant-select-selection-item { flex: none; box-sizing: border-box; max-width: calc(100% - var(--ant-select-internal_fixed_item_margin) * 2); min-width: 0; }
   .ant-select-selection-item-remove { flex: none; padding: 0; border: 0; background: transparent; }
   .ant-select-selection-item-remove:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 1px; }
   .ant-select-selection-item-disabled { color: var(--ant-select-multiple-item-color-disabled); }
+  .ant-select-source-theme .ant-select-selection-item-disabled { color: inherit; }
   .container.ant-select-compact-item > .ant-select { border-radius: inherit; }
+  @media (hover: none) {
+    .ant-select-source-theme:has(.clear) .suffix { opacity: 0; }
+  }
 </style>
 
 <svelte:document onpointerdown={handleOutside} onreset={handleReset} />
 
 <div class={[
     'container ant-select-css-var',
+    componentTheme.className,
     compactItemClasses,
     compact && resolvedSize === 'large' && 'ant-select-lg',
     compact && resolvedSize === 'small' && 'ant-select-sm',
     compact && expanded && 'ant-select-focused',
     compact && resolvedDisabled && 'ant-select-disabled',
     className
-  ]} bind:this={container} {style}>
+  ]} bind:this={container} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
   <div
     role="presentation"
     onpointerdown={handlePointerDown}
     class={[
         'ant-select ant-select-css-var ant-select-outlined ant-select-show-arrow',
+        componentTheme.className && 'ant-select-source-theme',
+        componentTheme.className && canSearch && 'ant-select-show-search',
+        componentTheme.className && allowClear && 'ant-select-allow-clear',
+        componentTheme.className && config.direction === 'rtl' && 'ant-select-rtl',
         loading && 'ant-select-loading',
         multiple ? 'ant-select-multiple' : 'ant-select-single',
-        expanded && 'ant-select-open ant-select-focused',
+        expanded && 'ant-select-open',
+        (expanded || componentTheme.className && focused) && 'ant-select-focused',
         resolvedDisabled && 'ant-select-disabled',
         resolvedSize === 'large' && 'ant-select-lg',
         resolvedSize === 'small' && 'ant-select-sm',
         resolvedStatus && `ant-select-status-${resolvedStatus}`
       ]}
+    style={componentTheme.style}
   >
     <div class="ant-select-content">
       {#if multiple}
@@ -486,12 +518,13 @@
         oninput={handleInput}
         onclick={handleClick}
         onblur={handleBlur}
+        onfocus={handleFocus}
       />
     </div>
     {#if allowClear && (multiple ? selectedValues.length : selected) && !resolvedDisabled}
-      <button type="button" class="clear" aria-label={config.locale.clearText} onpointerdown={(event) => event.preventDefault()} onclick={() => choose(undefined)}><Icon name="close" /></button>
+      <button type="button" class={['clear', componentTheme.className && 'ant-select-clear']} aria-label={config.locale.clearText} onpointerdown={(event) => event.preventDefault()} onclick={() => choose(undefined)}><Icon name="close" /></button>
     {/if}
-    <span class="suffix"><Icon name={loading ? 'loading' : 'down'} /></span>
+    <span class={['suffix', componentTheme.className && 'ant-select-suffix']}><Icon name={loading ? 'loading' : 'down'} /></span>
   </div>
   {#if name ?? field?.name}
     {#if multiple}
@@ -506,7 +539,11 @@
   {#if expanded}
     <div
       bind:this={list}
-      class="popup ant-select-dropdown"
+      class={['popup ant-select-dropdown', componentTheme.className && 'ant-select-css-var',
+        componentTheme.className && filtered.length > 0 && 'ant-select-source-popup',
+        componentTheme.className && config.direction === 'rtl' && 'ant-select-dropdown-rtl',
+        componentTheme.className]}
+      style={componentTheme.style}
       id={`${controlId}-list`}
       role="listbox"
       aria-busy={loading || undefined}
