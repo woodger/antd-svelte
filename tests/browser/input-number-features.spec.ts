@@ -305,7 +305,8 @@ test(
     await up.hover();
     const box = (await up.boundingBox())!;
     const time = new Date('2026-11-01T00:00:00Z');
-    await page.clock.install({ time });
+    // Clock идёт между install и pauseAt, поэтому стартуем раньше точки остановки.
+    await page.clock.install({ time: new Date(time.getTime() - 60_000) });
     await page.clock.pauseAt(time);
 
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
@@ -338,7 +339,7 @@ test(
     await up.hover();
     const box = (await up.boundingBox())!;
     const time = new Date('2026-11-01T00:00:00Z');
-    await page.clock.install({ time });
+    await page.clock.install({ time: new Date(time.getTime() - 60_000) });
     await page.clock.pauseAt(time);
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
     await page.mouse.down();
@@ -366,7 +367,7 @@ test(
     await up.hover();
     const box = (await up.boundingBox())!;
     const time = new Date('2026-11-01T00:00:00Z');
-    await page.clock.install({ time });
+    await page.clock.install({ time: new Date(time.getTime() - 60_000) });
     await page.clock.pauseAt(time);
 
     await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
