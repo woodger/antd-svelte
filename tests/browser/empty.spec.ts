@@ -258,14 +258,14 @@ test(
 
     await expect(host(page)).toHaveCSS('direction', 'rtl');
     await expect(host(page)).toHaveCSS('font-size', '12px');
-    await expect(image(page)).toHaveCSS('height', '90px');
+    await expect(image(page)).toHaveCSS('height', '87.5px');
     await expect(image(page).locator('pattern rect').first()).toHaveCSS('fill', 'rgb(20, 20, 20)');
     expect(await image(page).locator('pattern').evaluateAll(nodes => nodes.map(node => node.id)))
       .toEqual(ids);
 
     await setting(page, 'image', 'simple');
 
-    await expect(image(page)).toHaveCSS('height', '36px');
+    await expect(image(page)).toHaveCSS('height', '35px');
 
     await page.locator('#empty-fixture .surface')
       .screenshot({ path: testInfo.outputPath('empty-dark-rtl.png') });

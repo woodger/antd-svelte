@@ -29,6 +29,7 @@ export type RenderEmptyHandler = (componentName?: RenderEmptyComponent) => Rende
 export interface ThemeConfig extends DesignTokenConfig {
   mode?: 'light' | 'dark';
   primary?: 'blue' | 'purple' | 'green';
+  /** Компактные метрики текста, размеров и отступов; native цвета сохраняются. */
   compact?: boolean;
   /**
    * Компонентные overrides в GlobalToken; algorithm=true пересчитывает зависимые aliases.

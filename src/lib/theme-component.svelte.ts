@@ -1,11 +1,16 @@
 import { useDesignTokenContext } from './theme-context.svelte';
-import { componentThemeStyle, type StyledComponent } from './theme-component-style.engine';
+import {
+  compactComponentThemeStyle,
+  componentThemeStyle,
+  type StyledComponent
+} from './theme-component-style.engine';
 
-/** SSR и реактивный root style перед semantic/user styles; native темы сохраняют старый CSS. */
+/** SSR и реактивный root style перед semantic/user styles; native compact получает только метрики. */
 export function useComponentTheme(component: StyledComponent) {
   const context = useDesignTokenContext();
   const style = $derived(context.enabled
-    ? componentThemeStyle(component, context.state.token, context.state.prefix) : undefined);
+    ? componentThemeStyle(component, context.state.token, context.state.prefix)
+    : context.config.compact ? compactComponentThemeStyle(component, context.state.token) : undefined);
 
   return {
     get style() { return style; },

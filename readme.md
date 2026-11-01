@@ -6622,11 +6622,19 @@ MS=12, XL=32, XXL=48px с padding/margin/content aliases. Каждый provider
 обычные интервалы, inline CSS variables сохраняют приоритет. Проверки геометрии
 Card/Flex/Divider и вложенных provider — `tests/browser/theme.spec.ts`, `?fixture=theme`.
 
+`compact: true` согласует fontSize/lineHeight/fontHeight и высоты controls с
+compactAlgorithm, а Button/Input/TextArea/InputNumber получают рассчитанные
+font/padding metrics при SSR. Для Input, Select, InputNumber и Button middle=28px,
+large=35px. В small первые три имеют минимум 22px из-за строки и рамок,
+Button — 21px, как в React 6.6.8. Native цвета сохраняются; пустой `token: {}`
+для корректной геометрии не требуется. Браузерная сверка —
+[compact-theme](./tests/browser/compact-theme.spec.ts), `?fixture=compact-theme`.
+
 ConfigProvider также принимает source token/algorithm, наследование и настройки
 hash/CSS variables. `theme.useToken()` возвращает реактивный объект с текущими
 GlobalToken, Theme, hashId и transformed CSS-variable token. Глобальные переменные
-передаются компонентам уже при SSR; существующие native темы без source-настроек
-сохраняют прежнее поведение. Компонентные overrides применяются к Button,
+передаются компонентам уже при SSR; native темы сохраняют прежние цвета,
+а compact metrics описаны выше. Компонентные overrides применяются к Button,
 Input/TextArea (включая Password/Search/OTP), InputNumber, SpaceAddon,
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch;
 остальные CSS-потребители ещё переносятся. Примеры и точная граница —

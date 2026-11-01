@@ -402,7 +402,7 @@ test('Calendar mini/full, dark and compact appearances follow source tokens', as
     .toHaveCSS('background-color', 'rgb(114, 46, 209)');
   await control(page, 'Compact Calendar').check();
 
-  await expect(mode(page, 0)).toHaveCSS('height', '20px');
+  await expect(mode(page, 0)).toHaveCSS('height', '21px');
 });
 
 test('Calendar clears native refs on removal while preserving external owner values and focus', async ({ page }) => {

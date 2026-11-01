@@ -152,7 +152,17 @@ aliases для опубликованного CSS с префиксом ant. П�
 
 Дополнительные theme boundaries ColorPicker и Tour получают те же переменные,
 включая перенос popup в другой DOM container. Нативные темы без source-настроек
-сохраняют прежние CSS-переопределения и геометрию.
+сохраняют прежние цвета и CSS-переопределения. При `compact: true` fontSize/lineHeight/
+fontHeight и controlHeight согласованы с compactAlgorithm. Button/Input/TextArea/
+InputNumber получают рассчитанные font/padding metrics уже при SSR, без включения
+source colors, hash-классов и scope-правил.
+
+В compact режиме middle у Input, Select, InputNumber и Button имеет высоту 28px,
+large — 35px. Для small Input, Select и InputNumber имеют минимум 22px: строка 20px
+и две рамки по 1px. Button имеет фиксированную высоту 21px. Эти значения получены
+в официальном React-компоненте 6.6.8; одинаковая высота всех small controls не
+является исходным поведением. Явный `compact: false`, наследование provider,
+пользовательские component styles и обычная тема сохраняются.
 
 hashId и внутренний token key используют исходную арифметику cssinjs 2.1.2 и
 @emotion/hash 0.8.0; hashed=false возвращает пустой hashId. Классы hash/cssVar
@@ -196,6 +206,12 @@ zeroRuntime наследуется; опубликованные стили ко
   styles официального UMD и принадлежат браузерному test contour.
 - [Композиция PickerButton](../../tests/browser/picker-button.spec.ts): четыре
   footer-ветки, Button tokens/config/Wave, scalar locale text и native focus/формы.
+- [Compact metrics](../../tests/browser/compact-theme.spec.ts),
+  [SSR](../../tests/package/compact-theme.ssr.test.ts), маршрут `?fixture=compact-theme`.
+  Эталон размеров, шрифтов и padding для 15 сочетаний темы/размера получен из
+  [официального UMD](../../tests/browser/fixtures/ant-design-compact-metrics.json)
+  после проверки SHA-256. Проверяются native/source пути, dark, пустой token,
+  родительский source-контекст, обновления, вложенные provider и изоляция.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

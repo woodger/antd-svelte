@@ -26,11 +26,16 @@ describe('Source control theme SSR', () => {
     expect(body).toMatch(/class="ant-btn control-ssr css-dev-only-do-not-override-/);
   });
 
-  it('preserves native-only CSS without generating component variables or head rules', () => {
+  it('renders compact metrics while preserving native colors and omitting source head rules', () => {
     const { body, head } = render(ControlThemeFixture, { props: { native: true } });
 
     expect(body).toContain('data-ant-compact="true"');
+    expect(body).toContain('--ant-button-content-line-height:1.6666666666666667');
+    expect(body).toContain('--ant-button-padding-inline:11px');
+    expect(body).toContain('--ant-input-padding-block:3px');
+    expect(body).toContain('--ant-input-number-padding-block:3px');
     expect(body).not.toContain('--ant-button-font-weight:');
+    expect(body).not.toContain('--ant-button-primary-color:');
     expect(head).not.toContain('data-ant-svelte-theme=');
   });
 });

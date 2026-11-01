@@ -173,6 +173,11 @@
 
 ### Fixed
 
+- Native compact: согласованы fontSize/lineHeight/fontHeight и controlHeight с
+  compactAlgorithm, применены font/padding metrics Button/Input/TextArea/InputNumber
+  без включения source colors. Middle controls имеют 28px, large — 35px; small
+  Input/Select/InputNumber сохраняют исходный минимум 22px, Button — 21px.
+  Native цвета, вложенные provider, overrides, SSR и focus сохраняются.
 - TimePicker в RTL сохраняет исходный порядок колонок времени и RTL-направление
   внутри колонок через marker PickerPanel.
 - TreeSelect не выбирает удалённый активный узел по Enter и очищает устаревшую

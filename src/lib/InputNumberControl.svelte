@@ -431,9 +431,9 @@
 </script>
 
 <style>
-  .input-number-root { max-width: 100%; height: var(--ant-control-height); }
-  .input-number-root.ant-input-number-lg { height: var(--ant-control-height-lg); }
-  .input-number-root.ant-input-number-sm { height: var(--ant-control-height-sm); }
+  .input-number-root { max-width: 100%; height: var(--ant-control-height); min-height: calc(var(--ant-input-number-input-font-size) * var(--ant-line-height) + var(--ant-input-number-padding-block) * 2 + var(--ant-line-width) * 2); }
+  .input-number-root.ant-input-number-lg { height: var(--ant-control-height-lg); min-height: calc(var(--ant-input-number-input-font-size-lg) * var(--ant-line-height-lg) + var(--ant-input-number-padding-block-lg) * 2 + var(--ant-line-width) * 2); }
+  .input-number-root.ant-input-number-sm { height: var(--ant-control-height-sm); min-height: calc(var(--ant-input-number-input-font-size-sm) * var(--ant-line-height) + var(--ant-input-number-padding-block-sm) * 2 + var(--ant-line-width) * 2); }
   .input-number-input { min-width: 0; height: 100%; }
   .input-number-root .input-number-suffix { height: auto; }
   @media (prefers-reduced-motion: reduce) {

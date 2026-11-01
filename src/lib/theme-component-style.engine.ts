@@ -30,6 +30,21 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Checkbox: [],
   Switch: []
 };
+const inputMetrics = [
+  'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',
+  'paddingInline', 'paddingInlineSM', 'paddingInlineLG',
+  'inputFontSize', 'inputFontSizeSM', 'inputFontSizeLG'
+];
+const compactMetrics: Partial<Record<StyledComponent, readonly string[]>> = {
+  Button: [
+    'contentFontSize', 'contentFontSizeSM', 'contentFontSizeLG',
+    'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG',
+    'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',
+    'paddingInline', 'paddingInlineSM', 'paddingInlineLG'
+  ],
+  Input: inputMetrics,
+  InputNumber: inputMetrics
+};
 
 /** Source getDefaultComponentToken/getComponentToken и CSS-variable registration. */
 function resolveComponentVariables(
@@ -81,4 +96,19 @@ export function componentThemeStyle(component: StyledComponent, token: GlobalTok
   }
 
   return serializeThemeVariables(variables, prefix);
+}
+
+/** Native compact использует исходные метрики controls, сохраняя прежние цвета и остальные стили. */
+export function compactComponentThemeStyle(component: StyledComponent, token: GlobalToken) {
+  const metrics = compactMetrics[component];
+  if (!metrics) return undefined;
+
+  const variables = componentThemeVariables(component, token);
+  const selected = Object.fromEntries(metrics.map(key => {
+    const qualified = `${component}${key[0].toUpperCase()}${key.slice(1)}`;
+    const name = tokenToCSSVariable(qualified, 'ant');
+    return [name, variables[name]];
+  }));
+
+  return serializeThemeVariables(selected);
 }

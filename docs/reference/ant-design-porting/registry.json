@@ -168,7 +168,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежние цвета; compact font/padding metrics применяются отдельно. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         },
         {
           "id": "source-wave",
@@ -1175,7 +1175,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежние цвета; compact font/padding metrics применяются отдельно. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         }
       ]
     },
@@ -3123,7 +3123,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежние цвета; compact font/padding metrics применяются отдельно. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         }
       ]
     },
@@ -3323,7 +3323,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежние цвета; compact font/padding metrics применяются отдельно. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         }
       ]
     },
@@ -7670,14 +7670,21 @@
         },
         {
           "id": "compact-spacing",
-          "title": "Compact size map и padding/margin/content aliases",
+          "title": "Compact size map, font/control metrics и padding/margin/content aliases",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/theme.css",
-            "tests/browser/theme.spec.ts"
+            "tests/browser/theme.spec.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/InputNumberControl.svelte",
+            "tests/browser/compact-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-compact-metrics.json",
+            "tests/package/compact-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
           ],
-          "note": "Закреплённые default/compact size maps, локальное разрешение aliases во вложенных provider, explicit compact=false и inline token override. Полный token engine и остальные compact-map tokens ещё требуют аудита."
+          "note": "Закреплённые default/compact size maps, локальное разрешение aliases во вложенных provider, explicit compact=false и inline token override. Native compact fontSize/lineHeight/fontHeight/controlHeight согласованы с compactAlgorithm; Button/Input/TextArea/InputNumber получают только font/padding metrics без source colors/hash/scope. Исходный small Input/Select/InputNumber минимум 22px, Button 21px; middle 28px и large 35px. Полный аудит остальных compact consumers продолжается."
         },
         {
           "id": "button-config",
@@ -7706,7 +7713,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежний CSS. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+          "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежние цвета; compact font/padding metrics применяются отдельно. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
         },
         {
           "id": "checkable-theme-tokens",

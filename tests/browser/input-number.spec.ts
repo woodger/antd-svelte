@@ -550,7 +550,7 @@ test(
     await page.getByLabel('English locale', { exact: true }).check();
     await input.focus();
 
-    await expect(wrapper).toHaveCSS('height', '20px');
+    await expect(wrapper).toHaveCSS('height', '22px');
     await expect(wrapper).toHaveCSS('font-size', '12px');
     await expect(wrapper).toHaveCSS('direction', 'rtl');
     await expect(wrapper).toHaveCSS('border-color', 'rgb(114, 46, 209)');

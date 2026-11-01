@@ -37,14 +37,16 @@ describe('ConfigProvider source design-token SSR', () => {
     expect(body).not.toContain('data-component-primary=');
   });
 
-  it('preserves native themes and exposes source tokens without adding source CSS declarations', () => {
-    const body = render(ThemeContextFixture, { props: { kind: 'native' } }).body;
+  it('preserves native colors while exposing compact control metrics without source scope rules', () => {
+    const { body, head } = render(ThemeContextFixture, { props: { kind: 'native' } });
 
     expect(body).toContain('data-ant-theme="dark"');
     expect(body).toContain('data-ant-primary="purple"');
     expect(body).toContain('data-ant-compact="true"');
     expect(body).toContain('data-primary="#642ab5"');
-    expect(body).not.toContain('style="--ant-');
+    expect(body).toContain('--ant-button-padding-block:3px');
+    expect(body).not.toContain('--ant-color-primary:');
+    expect(head).not.toContain('data-ant-svelte-theme=');
   });
 
   it('uses the source default context without a ConfigProvider', () => {
