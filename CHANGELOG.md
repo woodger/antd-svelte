@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme Cascader: исходные defaults и совместный Select/Cascader scope для поля
+  и dropdown; standalone Panel получает только Cascader tokens. Добавлены UMD
+  conformance, SSR и browser-проверки размеров/строк/checkbox, responsive tags
+  и смены темы без потери DOM, поиска, выделения, focus и позиции popup.
+  Сохранены native-only темы и приоритет semantic popup styles.
 - Theme TreeSelect: исходные TreeSelect defaults и совместный Select/TreeSelect
   scope для поля и dropdown, размеры узлов, цвета/checkbox и порядок aliases.
   Добавлены UMD conformance, SSR и browser-проверки смены темы без потери дерева,

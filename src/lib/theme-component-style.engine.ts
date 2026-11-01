@@ -8,6 +8,7 @@ import {
 import { prepareAvatarTokens, prepareBadgeTokens } from './theme-display-tokens.engine';
 import { prepareSelectTokens } from './theme-select-tokens.engine';
 import { prepareTreeSelectTokens } from './theme-tree-tokens.engine';
+import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
 import {
   prepareTooltipTokens,
   preparePopoverTokens,
@@ -19,7 +20,7 @@ import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
-  | 'Select' | 'TreeSelect';
+  | 'Select' | 'TreeSelect' | 'Cascader';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -35,7 +36,8 @@ const factories = {
   Popover: preparePopoverTokens,
   Popconfirm: preparePopconfirmTokens,
   Select: prepareSelectTokens,
-  TreeSelect: prepareTreeSelectTokens
+  TreeSelect: prepareTreeSelectTokens,
+  Cascader: prepareCascaderTokens
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
@@ -51,7 +53,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Popover: [],
   Popconfirm: [],
   Select: ['optionLineHeight', 'optionSelectedFontWeight'],
-  TreeSelect: []
+  TreeSelect: [],
+  Cascader: ['optionSelectedFontWeight']
 };
 const inputMetrics = [
   'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',

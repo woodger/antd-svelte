@@ -3398,6 +3398,16 @@ multiple, и resolved disabled/size/variant/status. Panel наследует dis
 а root class/style и popup semantic config Cascader к ней не применяются.
 Темы и compact используют текущие tokens библиотеки; locale — общий ConfigProvider.
 
+При source-настройках темы поле и dropdown объединяют `components.Select` и
+`components.Cascader` в исходном порядке. Cascader задаёт ширину поля/колонок,
+высоту dropdown, отступы и оформление выбранной строки. Component algorithms,
+нули/undefined и custom CSS prefix поддерживаются; настройки `components.Checkbox`
+не меняют внутренние checkbox. Standalone Panel получает только Cascader tokens,
+наследует шрифт/цвет provider и сохраняет прозрачный фон. Смена темы сохраняет
+DOM, поиск, выделение, фокус и позицию popup; semantic popup styles сохраняют
+приоритет. Native-only темы остаются прежними. Подробности —
+[в справочнике темы](./docs/reference/theme-context.md).
+
 ReactNode/render callbacks заменены Svelte snippets. OptionRender получает
 исходный option и info с path/searchValue/originNode: для поисковой подсветки
 используйте originNode. В React search option.label содержит уже отрисованный
@@ -3412,14 +3422,15 @@ React cloneElement. При нём inputElement отсутствует.
 Standalone Panel использует нативные строки-кнопки и клавиатурный focus между
 ними. Это явная Svelte accessibility adaptation к исходной pointer-only Panel.
 SSR не обращается к DOM и не вызывает loadData; initially open popup отрисован
-hidden до mount. Полный token engine/renderEmpty, prefixCls, произвольные
+hidden до mount. RenderEmpty, prefixCls, произвольные
 popup containers/align/motion, React-specific components/refs/warnings и
 вывод типа value по произвольному generic ValueField остаются вне этого этапа.
 
 Проверки: [engine](./src/lib/cascader.engine.test.ts),
 [SSR](./src/lib/cascader.ssr.test.ts),
 [public package](./tests/package/cascader.ssr.test.ts),
-[browser](./tests/browser/cascader.spec.ts) и `?fixture=cascader`.
+[browser](./tests/browser/cascader.spec.ts),
+[source theme](./tests/browser/cascader-theme.spec.ts) и `?fixture=cascader`.
 
 ## Transfer
 

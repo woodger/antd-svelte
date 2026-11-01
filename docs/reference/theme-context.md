@@ -103,7 +103,7 @@ const config: ThemeConfig = {
 CSS-переменных подключены для Button, Input, TextArea, InputNumber, SpaceAddon,
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
-Select, AutoComplete и TreeSelect.
+Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -187,8 +187,8 @@ multipleItemColorDisabled сериализуются, но не меняют э�
 Наличие ComponentToken не означает, что источник использует его в каждой ветке CSS.
 Полные variants/semantic config/prefixCls, virtualization и остальные rc-select
 props ещё не перенесены. Общие Select-style consumers AutoComplete, TreeSelect и
-Cascader используют те же upstream стили; tokens AutoComplete и TreeSelect уже
-подключены, Cascader ещё ожидает подключения. Native-only темы сохранены.
+Cascader используют те же upstream стили и получают соответствующие component
+tokens. Native-only темы сохранены.
 
 AutoComplete использует Select scope для обычного поля, clear и popup, включая
 group indentation и font metrics. Custom Input получает собственные Input tokens;
@@ -207,6 +207,20 @@ control/text tokens. Поэтому source compact использует высо
 а в native-only теме — прежнее оформление. SSR получает переменные на корнях;
 снимок popup создаётся вместе с ним, последующие изменения затрагивают только
 theme variables и сохраняют controller left/top и размеры из props.
+
+Cascader объединяет Select и Cascader scopes в исходном порядке. Восемь Cascader
+defaults задают ширину поля/колонок, высоту dropdown, отступы и выбранную строку;
+optionPadding рассчитывается с Math.round, optionSelectedFontWeight остаётся
+безразмерным. Настройки `components.Checkbox` не меняют checkbox внутри Cascader.
+Standalone CascaderPanel получает только Cascader scope и наследует шрифт/цвет
+provider без Select aliases; фон панели остаётся прозрачным, как upstream.
+
+Обёртки tags/input сохраняются при смене темы: source overflow измеряет каждый
+tag отдельно, native-only тема использует display:contents. Это сохраняет также
+геометрию при нулевой controlWidth и responsive maxTagCount. Переменные popup
+присутствуют при SSR и обновляются отдельно от controller left/top; semantic
+styles.popup.root сохраняет приоритет, в том числе при смене ширины поиска.
+Смена темы сохраняет input/rows, поисковый текст, выделение, фокус и callbacks.
 
 ## Токены всплывающих панелей
 

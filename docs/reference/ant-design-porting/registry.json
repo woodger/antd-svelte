@@ -2172,7 +2172,16 @@
         "tests/package/cascader.ssr.test.ts",
         "tests/browser/cascader.spec.ts",
         "tests/browser/fixtures/CascaderFixtures.svelte",
-        "readme.md"
+        "readme.md",
+        "src/lib/theme-cascader-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-cascader-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-cascader-tokens-reference.json",
+        "tests/package/cascader-theme.ssr.test.ts",
+        "tests/browser/cascader-theme.spec.ts",
+        "tests/browser/fixtures/CascaderThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-cascader-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -2251,13 +2260,32 @@
         },
         {
           "id": "advanced-api",
-          "title": "Полный token/portal/React-specific API и generic ValueField inference",
+          "title": "Полный portal/React-specific API и generic ValueField inference",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Не перенесены arbitrary popup containers/align/motion, prefixCls, полный token engine/renderEmpty, React components/refs/dev warnings и автоматический вывод значения по generic ValueField и полные generic типы всех semantic props. Svelte callbacks/native semantics задокументированы отдельно; v1-ready не означает полный React API."
+          "note": "Не перенесены arbitrary popup containers/align/motion, prefixCls, renderEmpty, React components/refs/dev warnings и автоматический вывод значения по generic ValueField и полные generic типы всех semantic props. Svelte callbacks/native semantics задокументированы отдельно; v1-ready не означает полный React API."
+        },
+        {
+          "id": "cascader-theme-tokens",
+          "title": "Совместные Select/Cascader tokens и самостоятельный Panel scope",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-cascader-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/CascaderCore.svelte",
+            "src/lib/theme-cascader-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-cascader-tokens-reference.json",
+            "tests/package/cascader-theme.ssr.test.ts",
+            "tests/browser/cascader-theme.spec.ts",
+            "tests/browser/fixtures/CascaderThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-cascader-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные восемь defaults, финальные overrides, округление optionPadding, unitless optionSelectedFontWeight, component algorithms/aliases, zero/undefined и custom prefix. Поле и dropdown объединяют Select и Cascader scopes в исходном порядке; Panel получает только Cascader и наследует шрифт/цвет provider с прозрачным фоном. Checkbox aliases не применяются к внутренним checkbox. UMD declarations и computed metrics для 18 настроек: single/multiple трёх размеров, tags, suffix/clear, disabled, columns/rows/expand icons, search/empty и checkbox checked/mixed/disabled/unchecked. Responsive tags сохраняют source geometry, включая нулевую controlWidth. SSR и смена темы сохраняют DOM, поиск/выделение/фокус и callbacks; popup variables обновляются без потери controller left/top, semantic CSS overrides сохраняют приоритет при смене ширины поиска. Native-only темы и существующий Svelte API сохранены; остальные advanced API остаются в работе."
         }
       ]
     },
@@ -3920,7 +3948,7 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumer Cascader остаются в работе. AutoComplete и TreeSelect получают общий Select token scope."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization и portals/motion остаются в работе. AutoComplete, TreeSelect и Cascader получают общий Select token scope."
         }
       ]
     },
@@ -7965,7 +7993,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm и Select получили собственную подготовку tokens и CSS consumption; остальные families остаются в работе."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect и Cascader/CascaderPanel получили собственную подготовку tokens и CSS consumption; остальные families остаются в работе."
         },
         {
           "id": "static-design-tokens",
@@ -8158,7 +8186,7 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumer Cascader остаются в работе. AutoComplete и TreeSelect получают общий Select token scope."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization и portals/motion остаются в работе. AutoComplete, TreeSelect и Cascader получают общий Select token scope."
         },
         {
           "id": "tree-select-theme-tokens",
@@ -8179,6 +8207,25 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходный tree.initComponentToken: семь defaults, финальные overrides, component algorithms/aliases, zero/undefined и custom prefix. Select и TreeSelect scopes объединяются в исходном порядке на поле и dropdown; Tree aliases не применяются к внутреннему дереву. UMD declarations и computed metrics для 17 настроек: single/multiple трёх размеров, tags, suffix/clear, disabled, tree rows/titles/switchers/indent и checkbox checked/mixed/disabled/unchecked. SSR, смена темы, native FormData/selection/focus, поиск и callbacks сохраняются; theme variables панели обновляются отдельно от controller left/top. Native checkbox buttons в source панели используют vendor border/background; native-only темы сохраняют прежние стили. Source compact titleHeight=21px. Остальные config/semantic/virtualization/ref API остаются в работе."
+        },
+        {
+          "id": "cascader-theme-tokens",
+          "title": "Совместные Select/Cascader tokens и самостоятельный Panel scope",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-cascader-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/CascaderCore.svelte",
+            "src/lib/theme-cascader-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-cascader-tokens-reference.json",
+            "tests/package/cascader-theme.ssr.test.ts",
+            "tests/browser/cascader-theme.spec.ts",
+            "tests/browser/fixtures/CascaderThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-cascader-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные восемь defaults, финальные overrides, округление optionPadding, unitless optionSelectedFontWeight, component algorithms/aliases, zero/undefined и custom prefix. Поле и dropdown объединяют Select и Cascader scopes в исходном порядке; Panel получает только Cascader и наследует шрифт/цвет provider с прозрачным фоном. Checkbox aliases не применяются к внутренним checkbox. UMD declarations и computed metrics для 18 настроек: single/multiple трёх размеров, tags, suffix/clear, disabled, columns/rows/expand icons, search/empty и checkbox checked/mixed/disabled/unchecked. Responsive tags сохраняют source geometry, включая нулевую controlWidth. SSR и смена темы сохраняют DOM, поиск/выделение/фокус и callbacks; popup variables обновляются без потери controller left/top, semantic CSS overrides сохраняют приоритет при смене ширины поиска. Native-only темы и существующий Svelte API сохранены; остальные advanced API остаются в работе."
         }
       ]
     },

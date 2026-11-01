@@ -36,6 +36,8 @@
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { connectPopup } from './popup.dom';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
   import CascaderColumns from './CascaderColumns.svelte';
   import Empty from './Empty.svelte';
   import Icon from './Icon.svelte';
@@ -127,6 +129,11 @@
   const field = useFormField();
   const form = useForm();
   const compact = useCompact();
+  const selectTheme = useComponentTheme('Select');
+  const cascaderTheme = useComponentTheme('Cascader');
+  const componentStyle = $derived(
+    [!panel && selectTheme.style, cascaderTheme.style].filter(Boolean).join(';') || undefined
+  );
   const generated = $props.id();
   let fields = $derived(cascaderFields(fieldNames));
   let index = $derived(cascaderIndex(options, fields));
@@ -467,29 +474,47 @@
 <style>
   .ant-cascader { display:inline-flex;align-items:center;position:relative;max-width:100%; }
   .ant-cascader:focus-within { outline:2px solid var(--ant-color-primary);outline-offset:2px; }
+  .ant-cascader.ant-cascader-source-theme { align-items:flex-start;max-width:none; }
+  .ant-cascader.ant-cascader-source-theme:focus-within { outline:0;outline-offset:0; }
   .ant-select-content { min-width:0;position:relative; }
   .ant-select-single .ant-select-content { overflow:hidden;white-space:nowrap;min-height:1lh; }
   .ant-select-single { min-height:var(--ant-select-height); }
   .ant-select-single .selected-label { overflow:hidden;text-overflow:ellipsis; }
   .ant-select-single .ant-select-input { position:absolute;inset:0;width:100%;height:100%; }
   .ant-cascader .ant-select-input { min-width:0;padding:0;border:0;outline:0;background:transparent;color:var(--ant-select-color);font:inherit;line-height:inherit;cursor:inherit; }
+  .ant-cascader.ant-select-single.ant-select-open .ant-select-content-has-search-value > .overflow-item { opacity:1; }
   .ant-select-input::placeholder { color:var(--ant-color-text-placeholder); }
   .ant-select-multiple { height:auto;min-height:var(--ant-select-height); }
   .ant-select-multiple .ant-select-content { gap:0; }
   .ant-select-multiple .ant-select-input { position:relative;inset:auto;flex:0 1 auto;width:var(--select-input-width,4px);min-width:4px;max-width:100%;height:auto; }
+  .ant-cascader-source-theme.ant-select-multiple .ant-select-input { line-height:calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-select-multi-item-height)); }
   .ant-select-selection-item { flex:none;box-sizing:border-box;max-width:100%;min-width:0; }
+  .ant-cascader-source-theme .ant-select-selection-item { flex:1;max-width:none; }
+  /* Обёртки сохраняют DOM при смене темы; source overflow измеряет каждый tag отдельно. */
+  .overflow-item { display:contents; }
+  .ant-cascader-source-theme.ant-select-multiple .overflow-item { display:block; }
   .ant-select-selection-item-remove,.clear { padding:0;border:0;background:transparent;cursor:pointer;flex:none; }
   .clear { margin-inline-end:4px;color:var(--ant-color-text-tertiary);display:flex; }
   .suffix { display:flex;flex:none;color:var(--ant-color-text-quaternary);pointer-events:none; }
+  .ant-cascader-source-theme .clear { margin-inline-end:0;display:inline-block;color:var(--ant-color-text-quaternary); }
+  .ant-cascader-source-theme .clear:hover { color:var(--ant-color-icon); }
+  .ant-cascader-source-theme:has(.clear):hover .suffix,.ant-cascader-source-theme:has(.clear:focus-visible) .suffix { opacity:0; }
   .prefix { display:flex;flex:none;margin-inline-end:var(--ant-padding-xs); }
   .ant-select-selection-item-disabled { color:var(--ant-select-multiple-item-color-disabled); }
+  .ant-cascader-source-theme .ant-select-selection-item-disabled { color:inherit; }
   .ant-select-selection-item-remove:focus-visible,.clear:focus-visible { outline:2px solid var(--ant-color-primary); }
   .clear:focus-visible { opacity:1; }
   .measure-tag { position:absolute;inset-block-start:0;inset-inline-start:0;visibility:hidden;pointer-events:none; }
   .placeholder { position:absolute;inset-inline-start:0;pointer-events:none;color:var(--ant-color-text-placeholder); }
   .popup { position:fixed;margin:0;border:0;overflow:auto; }
   .ant-cascader-panel { color:var(--ant-color-text);background:var(--ant-color-bg-container); }
+  .ant-cascader-panel.ant-cascader-source-theme { color:inherit;background:transparent; }
+  /* Upstream оставляет line box вокруг expand/loading icon, включая его высоту. */
+  .ant-cascader-source-theme :global(.ant-cascader-menu-item-expand-icon),.ant-cascader-source-theme :global(.ant-cascader-menu-item-loading-icon) { display:block; }
   .custom-trigger { width:auto; }
+  @media (hover:none) {
+    .ant-cascader-source-theme:has(.clear) .suffix { opacity:0; }
+  }
 </style>
 
 {#snippet content(value: CascaderContent | undefined)}
@@ -522,13 +547,17 @@
 {#if panel}
   <div {...attributes} bind:this={nativeElement} id={controlId} dir={resolvedDirection}
     class={['ant-cascader-panel ant-cascader-css-var', !options.length && 'ant-cascader-panel-empty',
-      className, rootClassName]} {style}>
+      cascaderTheme.className, cascaderTheme.className && 'ant-cascader-source-theme',
+      className, rootClassName]}
+    style={[componentStyle, style].filter(Boolean).join(';') || undefined}>
     {@render menus()}
   </div>
 {:else}
   <div {...rootAttributes} bind:this={nativeElement} role="presentation" dir={resolvedDirection}
     class={[
       'ant-cascader ant-cascader-css-var',
+      cascaderTheme.className,
+      cascaderTheme.className && 'ant-cascader-source-theme',
       !children && 'ant-select ant-select-css-var',
       !children && showArrow !== false && suffix !== null && suffix !== false && 'ant-select-show-arrow',
       !children && canSearch && 'ant-select-show-search',
@@ -546,7 +575,7 @@
       rtl && 'ant-select-rtl',
       compactClasses('ant-select', resolvedDirection, compact),
       context?.class, className, rootClassName, classes.root
-    ]} style={[css.root, style].filter(Boolean).join(';')}
+    ]} style={[componentStyle, css.root, style].filter(Boolean).join(';')}
     onmousedown={event => {
       onmousedown?.(event);
       if (event.defaultPrevented || blocked || children) return;
@@ -586,70 +615,74 @@
           {#each display as item, index (item.key)}
             {@const hidden = index >= tagCount}
             {#snippet label()}{@render displayLabel(item, true)}{/snippet}
-            <span data-cascader-tag class={[
-              'tag', !tagRender && 'ant-select-selection-item', hidden && 'measure-tag',
-              (blocked || item.disabled) && 'ant-select-selection-item-disabled', classes.item
-            ]} style={css.item} title={item.text} aria-hidden={hidden || undefined} inert={hidden}
-              role="presentation" onmousedown={event => {
-                if (!tagRender || blocked) return;
-                event.preventDefault();
-                event.stopPropagation();
-                requestOpen(!visible);
-              }} onclick={event => { if (tagRender) event.stopPropagation(); }}>
-              {#if tagRender}
-                {@render tagRender({
-                  label, value: item.key, disabled: item.disabled, closable: !blocked && !item.disabled,
-                  index, isMaxTag: false, onClose: event => {
-                    event?.stopPropagation();
-                    if (!blocked && !item.disabled) removeTag(item.path);
-                  }
-                })}
-              {:else}
-                <span class={['ant-select-selection-item-content', classes.itemContent]}
-                  style={css.itemContent}>{@render label()}</span>
-                {#if !blocked && !item.disabled}
-                  <button type="button" class={['ant-select-selection-item-remove', classes.itemRemove]}
-                    style={css.itemRemove} tabindex="-1"
-                    aria-label={`${config.locale.removeText ?? 'Remove'} ${item.text ?? item.key}`}
-                    onmousedown={event => event.preventDefault()}
-                    onclick={event => { event.stopPropagation(); removeTag(item.path); }}>
-                    {#if remove === undefined}<Icon name="close" />
-                    {:else}{@render content(remove)}{/if}
-                  </button>
+            <div class={['overflow-item', cascaderTheme.className && 'ant-select-content-item']}>
+              <span data-cascader-tag class={[
+                'tag', !tagRender && 'ant-select-selection-item', hidden && 'measure-tag',
+                (blocked || item.disabled) && 'ant-select-selection-item-disabled', classes.item
+              ]} style={css.item} title={item.text} aria-hidden={hidden || undefined} inert={hidden}
+                role="presentation" onmousedown={event => {
+                  if (!tagRender || blocked) return;
+                  event.preventDefault();
+                  event.stopPropagation();
+                  requestOpen(!visible);
+                }} onclick={event => { if (tagRender) event.stopPropagation(); }}>
+                {#if tagRender}
+                  {@render tagRender({
+                    label, value: item.key, disabled: item.disabled, closable: !blocked && !item.disabled,
+                    index, isMaxTag: false, onClose: event => {
+                      event?.stopPropagation();
+                      if (!blocked && !item.disabled) removeTag(item.path);
+                    }
+                  })}
+                {:else}
+                  <span class={['ant-select-selection-item-content', classes.itemContent]}
+                    style={css.itemContent}>{@render label()}</span>
+                  {#if !blocked && !item.disabled}
+                    <button type="button" class={['ant-select-selection-item-remove', classes.itemRemove]}
+                      style={css.itemRemove} tabindex="-1"
+                      aria-label={`${config.locale.removeText ?? 'Remove'} ${item.text ?? item.key}`}
+                      onmousedown={event => event.preventDefault()}
+                      onclick={event => { event.stopPropagation(); removeTag(item.path); }}>
+                      {#if remove === undefined}<Icon name="close" />
+                      {:else}{@render content(remove)}{/if}
+                    </button>
+                  {/if}
                 {/if}
-              {/if}
-            </span>
+              </span>
+            </div>
           {/each}
           {#if display.length && (omitted.length || maxTagCount === 'responsive')}
-            <span data-cascader-rest class={[
-              'ant-select-selection-overflow-item-rest',
-              !tagRender && 'ant-select-selection-item',
-              !omitted.length && 'measure-tag', classes.item
-            ]} style={css.item} aria-hidden={!omitted.length || undefined} inert={!omitted.length}
-              role="presentation" onmousedown={event => {
-                if (!tagRender || blocked) return;
-                event.preventDefault();
-                event.stopPropagation();
-                requestOpen(!visible);
-              }} onclick={event => { if (tagRender) event.stopPropagation(); }}>
-              {#snippet restLabel()}
-                {#if typeof maxTagPlaceholder === 'function'}
-                  {@render (maxTagPlaceholder as Snippet<[CascaderOmittedTag<OptionType>[]]>)(
-                    omitted.map(item => ({
-                      label: item.text ?? item.shown[0], labels: item.labels, options: item.options,
-                      value: item.key, disabled: item.disabled
-                    }))
-                  )}
-                {:else if maxTagPlaceholder !== undefined}{@render content(maxTagPlaceholder)}
-                {:else}+ {omitted.length} ...{/if}
-              {/snippet}
-              {#if tagRender}
-                {@render tagRender({ label: restLabel, disabled: false, closable: false, isMaxTag: true })}
-              {:else}
-                <span class={['ant-select-selection-item-content', classes.itemContent]}
-                  style={css.itemContent}>{@render restLabel()}</span>
-              {/if}
-            </span>
+            <div class={['overflow-item', cascaderTheme.className && 'ant-select-content-item']}>
+              <span data-cascader-rest class={[
+                'ant-select-selection-overflow-item-rest',
+                !tagRender && 'ant-select-selection-item',
+                !omitted.length && 'measure-tag', classes.item
+              ]} style={css.item} aria-hidden={!omitted.length || undefined} inert={!omitted.length}
+                role="presentation" onmousedown={event => {
+                  if (!tagRender || blocked) return;
+                  event.preventDefault();
+                  event.stopPropagation();
+                  requestOpen(!visible);
+                }} onclick={event => { if (tagRender) event.stopPropagation(); }}>
+                {#snippet restLabel()}
+                  {#if typeof maxTagPlaceholder === 'function'}
+                    {@render (maxTagPlaceholder as Snippet<[CascaderOmittedTag<OptionType>[]]>)(
+                      omitted.map(item => ({
+                        label: item.text ?? item.shown[0], labels: item.labels, options: item.options,
+                        value: item.key, disabled: item.disabled
+                      }))
+                    )}
+                  {:else if maxTagPlaceholder !== undefined}{@render content(maxTagPlaceholder)}
+                  {:else}+ {omitted.length} ...{/if}
+                {/snippet}
+                {#if tagRender}
+                  {@render tagRender({ label: restLabel, disabled: false, closable: false, isMaxTag: true })}
+                {:else}
+                  <span class={['ant-select-selection-item-content', classes.itemContent]}
+                    style={css.itemContent}>{@render restLabel()}</span>
+                {/if}
+              </span>
+            </div>
           {/if}
         {:else if display[0] && !search}
           <span class={['selected-label', classes.item]} style={css.item} title={display[0].text}>
@@ -660,31 +693,34 @@
           <span class={['placeholder ant-select-placeholder', classes.placeholder]}
             style={css.placeholder}>{@render content(placeholder)}</span>
         {/if}
-        <input bind:this={inputElement} id={controlId} type="text" role={attributes.role ?? 'combobox'}
-          class={['ant-select-input', classes.input]} style={css.input}
-          aria-haspopup="menu" aria-controls={visible ? listId : undefined}
-          aria-expanded={visible} aria-activedescendant={visible ? activeId : undefined}
-          aria-autocomplete={canSearch ? 'list' : 'none'}
-          aria-label={attributes['aria-label']} aria-labelledby={attributes['aria-labelledby']}
-          aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined}
-          aria-required={attributes['aria-required'] ?? field?.required}
-          aria-invalid={resolvedStatus === 'error' || attributes['aria-invalid'] || undefined}
-          aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch}
-          {...{ autofocus: autoFocus || attributes.autofocus }}
-          tabindex={tabIndex ?? attributes.tabindex} inputmode={attributes.inputmode} value={inputValue}
-          oninput={event => handleSearch(event.currentTarget.value)}
-          oncompositionend={event => handleSearch(event.currentTarget.value)}
-          onkeydown={event => { onInputKeyDown?.(event); handleKeyDown(event); }} onkeyup={handleKeyUp}
-          onfocus={event => {
-            if (blocked) return;
-            if (showAction.includes('focus')) requestOpen(true);
-            onfocus?.(event);
-          }}
-          onblur={event => {
-            enterHeld = false;
-            if (isMultiple) changeSearch('', false);
-            if (!blocked) onblur?.(event);
-          }} />
+        <div class={['overflow-item', cascaderTheme.className && isMultiple
+          && 'ant-select-content-item ant-select-content-item-suffix']}>
+          <input bind:this={inputElement} id={controlId} type="text" role={attributes.role ?? 'combobox'}
+            class={['ant-select-input', classes.input]} style={css.input}
+            aria-haspopup="menu" aria-controls={visible ? listId : undefined}
+            aria-expanded={visible} aria-activedescendant={visible ? activeId : undefined}
+            aria-autocomplete={canSearch ? 'list' : 'none'}
+            aria-label={attributes['aria-label']} aria-labelledby={attributes['aria-labelledby']}
+            aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined}
+            aria-required={attributes['aria-required'] ?? field?.required}
+            aria-invalid={resolvedStatus === 'error' || attributes['aria-invalid'] || undefined}
+            aria-busy={loading || undefined} autocomplete="off" disabled={blocked} readonly={!canSearch}
+            {...{ autofocus: autoFocus || attributes.autofocus }}
+            tabindex={tabIndex ?? attributes.tabindex} inputmode={attributes.inputmode} value={inputValue}
+            oninput={event => handleSearch(event.currentTarget.value)}
+            oncompositionend={event => handleSearch(event.currentTarget.value)}
+            onkeydown={event => { onInputKeyDown?.(event); handleKeyDown(event); }} onkeyup={handleKeyUp}
+            onfocus={event => {
+              if (blocked) return;
+              if (showAction.includes('focus')) requestOpen(true);
+              onfocus?.(event);
+            }}
+            onblur={event => {
+              enterHeld = false;
+              if (isMultiple) changeSearch('', false);
+              if (!blocked) onblur?.(event);
+            }} />
+        </div>
       </div>
       {#if hasClear}<button type="button" class="clear ant-select-clear"
         aria-label={config.locale.clearText} onmousedown={event => event.preventDefault()}
@@ -702,13 +738,19 @@
   </div>
   <NoCompactStyle>
     {#if mounted}
+      <!-- SSR получает переменные сразу; attachment обновляет их, сохраняя left/top контроллера. -->
       <div bind:this={popup} popover="manual" hidden={!visible || !shown}
         class={[
           'popup ant-select-dropdown ant-select-css-var ant-cascader-dropdown ant-cascader-css-var',
+          cascaderTheme.className,
+          cascaderTheme.className && 'ant-cascader-source-theme',
           rtl && 'ant-cascader-dropdown-rtl', popupClassName || dropdownClassName,
           rootClassName, classes.popup.root
         ]} dir={resolvedDirection}
-        style={popupStyle} onfocusout={blurWithin}>
+        style={[untrack(() => componentStyle), popupStyle].filter(Boolean).join(';')}
+        {@attach node => connectComponentTheme(node,
+          [componentStyle, popupStyle].filter(Boolean).join(';'))}
+        onfocusout={blurWithin}>
         {#if popupRender || dropdownRender}{@render (popupRender || dropdownRender)!(menus)}
         {:else}{@render menus()}{/if}
       </div>
