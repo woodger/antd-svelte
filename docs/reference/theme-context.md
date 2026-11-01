@@ -103,7 +103,7 @@ const config: ThemeConfig = {
 CSS-переменных подключены для Button, Input, TextArea, InputNumber, SpaceAddon,
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
-Select и AutoComplete.
+Select, AutoComplete и TreeSelect.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -187,8 +187,8 @@ multipleItemColorDisabled сериализуются, но не меняют э�
 Наличие ComponentToken не означает, что источник использует его в каждой ветке CSS.
 Полные variants/semantic config/prefixCls, virtualization и остальные rc-select
 props ещё не перенесены. Общие Select-style consumers AutoComplete, TreeSelect и
-Cascader используют те же upstream стили; tokens AutoComplete уже подключены,
-TreeSelect и Cascader ещё ожидают подключения. Native-only темы сохранены.
+Cascader используют те же upstream стили; tokens AutoComplete и TreeSelect уже
+подключены, Cascader ещё ожидает подключения. Native-only темы сохранены.
 
 AutoComplete использует Select scope для обычного поля, clear и popup, включая
 group indentation и font metrics. Custom Input получает собственные Input tokens;
@@ -196,6 +196,17 @@ group indentation и font metrics. Custom Input получает собстве�
 Нативная textarea сохраняет rows и собственные style/constraints. При обновлении
 темы меняются CSS variables панели, а left/top/ширина остаются у DOM-controller
 и соответствующих props. Фокус, selection, текст, options и FormData сохраняются.
+
+TreeSelect объединяет style hooks Select и TreeSelect в исходном порядке;
+aliases TreeSelect применяются к полю и dropdown после aliases Select.
+Семь TreeSelect defaults берутся из tree.initComponentToken: titleHeight,
+switcherSize и indentSize зависят от controlHeightSM, цвета — от глобальных
+control/text tokens. Поэтому source compact использует высоту узла 21px.
+Внутренний Tree наследует этот scope без применения `components.Tree`.
+Нативные checkbox-кнопки в source панели сохраняют border/background vendor CSS,
+а в native-only теме — прежнее оформление. SSR получает переменные на корнях;
+снимок popup создаётся вместе с ним, последующие изменения затрагивают только
+theme variables и сохраняют controller left/top и размеры из props.
 
 ## Токены всплывающих панелей
 
@@ -325,6 +336,15 @@ zeroRuntime наследуется; опубликованные стили ко
   маршрут `?fixture=auto-complete-theme`. Проверяются изоляция Select/Input tokens,
   нули/undefined, custom prefix/hash, RTL, смена темы и размеров открытой панели
   без потери inline-позиции, DOM, ввода, выделения, фокуса или значений формы.
+- [Эталон TreeSelect](../../src/lib/theme-tree-select-tokens-reference.test.ts):
+  все scoped declarations для 17 настроек официального UMD; порядок aliases двух
+  hooks, отдельные algorithms, нули/undefined и custom prefix.
+  [Браузерные метрики](../../tests/browser/fixtures/ant-design-tree-select-metrics.json),
+  [поведение](../../tests/browser/tree-select-theme.spec.ts),
+  [SSR](../../tests/package/tree-select-theme.ssr.test.ts),
+  маршрут `?fixture=tree-select-theme`. Проверяются single/multiple трёх размеров,
+  disabled, tree rows/titles/switchers/indent, четыре состояния checkbox,
+  сохранение DOM, поиска/выделения/фокуса, FormData и положения открытой панели.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

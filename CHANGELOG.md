@@ -9,6 +9,10 @@
 
 ### Added
 
+- Theme TreeSelect: исходные TreeSelect defaults и совместный Select/TreeSelect
+  scope для поля и dropdown, размеры узлов, цвета/checkbox и порядок aliases.
+  Добавлены UMD conformance, SSR и browser-проверки смены темы без потери дерева,
+  поиска, выделения, focus, FormData и позиции панели. Native-only темы сохранены.
 - Theme AutoComplete: общий Select token scope для поля, clear и popup,
   исходные метрики options/groups и отдельные tokens custom Input. Добавлены
   UMD, SSR и browser-проверки; смена темы сохраняет позицию popup, DOM,

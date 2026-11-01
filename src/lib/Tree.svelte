@@ -363,7 +363,9 @@
   button.ant-tree-switcher, button.ant-tree-node-content-wrapper { padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit; }
   button.ant-tree-node-content-wrapper { padding:0 var(--ant-padding-xs); }
   .ant-tree-list-holder-inner { display:flex;flex-direction:column; }
-  .ant-tree-checkbox { flex-shrink:0;padding:0;border:0;background:transparent;cursor:pointer; }
+  .ant-tree-checkbox { flex-shrink:0;padding:0;cursor:pointer; }
+  /* Source TreeSelect использует рамку и фон checkbox из своего vendor scope. */
+  .ant-tree-checkbox:not(:where(.ant-tree-select-source-tree *)) { border:0;background:transparent; }
   .ant-tree-checkbox:focus-visible { outline:2px solid var(--ant-color-primary); }
   .ant-tree-switcher:focus-visible { outline:2px solid var(--ant-color-primary); }
 </style>

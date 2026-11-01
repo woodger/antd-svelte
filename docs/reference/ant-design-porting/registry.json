@@ -3920,7 +3920,7 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumers TreeSelect/Cascader остаются в работе. AutoComplete получает общий Select token scope."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumer Cascader остаются в работе. AutoComplete и TreeSelect получают общий Select token scope."
         }
       ]
     },
@@ -4624,6 +4624,11 @@
           "name": "@rc-component/tree",
           "range": "~1.4.0",
           "referenceVersion": "1.4.0"
+        },
+        {
+          "name": "@rc-component/select",
+          "range": "~1.10.0",
+          "referenceVersion": "1.10.1"
         }
       ],
       "priority": "p1",
@@ -4633,7 +4638,17 @@
         "src/lib/tree-select.engine.test.ts",
         "tests/package/tree-select.ssr.test.ts",
         "tests/browser/tree-select.spec.ts",
-        "integration:tree-select"
+        "integration:tree-select",
+        "src/lib/theme-tree-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/Tree.svelte",
+        "src/lib/theme-tree-select-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-tree-select-tokens-reference.json",
+        "tests/package/tree-select-theme.ssr.test.ts",
+        "tests/browser/tree-select-theme.spec.ts",
+        "tests/browser/fixtures/TreeSelectThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tree-select-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -4677,7 +4692,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет fieldNames, treeDataSimpleMode, TreeNode children, maxCount/maxTagCount/tagRender, popupRender/prefix/suffix customization, treeExpandAction, component config/token engine и полного semantic/ref API. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers не перенесены."
+          "note": "Нет fieldNames, treeDataSimpleMode, TreeNode children, maxCount/maxTagCount/tagRender, popupRender/prefix/suffix customization, treeExpandAction, component config и полного semantic/ref API. Deprecated extra.triggerNode/allCheckedNodes и node.props React wrappers не перенесены."
         },
         {
           "id": "virtual-motion",
@@ -4686,6 +4701,26 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Все отфильтрованные видимые узлы рендерятся существующим Tree; listHeight ограничивает native scroll viewport. Rc-trigger/virtual-list/motion/getPopupContainer API остаются отдельными этапами."
+        },
+        {
+          "id": "source-tree-select-theme",
+          "title": "Совместные Select/TreeSelect tokens и исходные метрики дерева",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/theme-tree-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/Tree.svelte",
+            "src/lib/theme-tree-select-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-tree-select-tokens-reference.json",
+            "tests/package/tree-select-theme.ssr.test.ts",
+            "tests/browser/tree-select-theme.spec.ts",
+            "tests/browser/fixtures/TreeSelectThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходный tree.initComponentToken: семь defaults, финальные overrides, component algorithms/aliases, zero/undefined и custom prefix. Select и TreeSelect scopes объединяются в исходном порядке на поле и dropdown; Tree aliases не применяются к внутреннему дереву. UMD declarations и computed metrics для 17 настроек: single/multiple трёх размеров, tags, suffix/clear, disabled, tree rows/titles/switchers/indent и checkbox checked/mixed/disabled/unchecked. SSR, смена темы, native FormData/selection/focus, поиск и callbacks сохраняются; theme variables панели обновляются отдельно от controller left/top. Native checkbox buttons в source панели используют vendor border/background; native-only темы сохраняют прежние стили. Source compact titleHeight=21px. Остальные config/semantic/virtualization/ref API остаются в работе."
         }
       ]
     },
@@ -7901,7 +7936,15 @@
         "tests/package/select-theme.ssr.test.ts",
         "tests/browser/select-theme.spec.ts",
         "tests/browser/fixtures/SelectThemeFixtures.svelte",
-        "tests/browser/fixtures/ant-design-select-metrics.json"
+        "tests/browser/fixtures/ant-design-select-metrics.json",
+        "src/lib/theme-tree-tokens.engine.ts",
+        "src/lib/Tree.svelte",
+        "src/lib/theme-tree-select-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-tree-select-tokens-reference.json",
+        "tests/package/tree-select-theme.ssr.test.ts",
+        "tests/browser/tree-select-theme.spec.ts",
+        "tests/browser/fixtures/TreeSelectThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tree-select-metrics.json"
       ],
       "features": [
         {
@@ -8115,7 +8158,27 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumers TreeSelect/Cascader остаются в работе. AutoComplete получает общий Select token scope."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization, portals/motion и Select-style consumer Cascader остаются в работе. AutoComplete и TreeSelect получают общий Select token scope."
+        },
+        {
+          "id": "tree-select-theme-tokens",
+          "title": "Совместные Select/TreeSelect tokens и исходные метрики дерева",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/theme-tree-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/Tree.svelte",
+            "src/lib/theme-tree-select-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-tree-select-tokens-reference.json",
+            "tests/package/tree-select-theme.ssr.test.ts",
+            "tests/browser/tree-select-theme.spec.ts",
+            "tests/browser/fixtures/TreeSelectThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tree-select-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходный tree.initComponentToken: семь defaults, финальные overrides, component algorithms/aliases, zero/undefined и custom prefix. Select и TreeSelect scopes объединяются в исходном порядке на поле и dropdown; Tree aliases не применяются к внутреннему дереву. UMD declarations и computed metrics для 17 настроек: single/multiple трёх размеров, tags, suffix/clear, disabled, tree rows/titles/switchers/indent и checkbox checked/mixed/disabled/unchecked. SSR, смена темы, native FormData/selection/focus, поиск и callbacks сохраняются; theme variables панели обновляются отдельно от controller left/top. Native checkbox buttons в source панели используют vendor border/background; native-only темы сохраняют прежние стили. Source compact titleHeight=21px. Остальные config/semantic/virtualization/ref API остаются в работе."
         }
       ]
     },

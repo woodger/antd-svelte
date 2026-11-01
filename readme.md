@@ -4056,8 +4056,15 @@ Name/FormItem создают hidden inputs с raw values для native FormData.
 объектный контракт labelInValue ради ограничений Form v1. Его общий object store
 остаётся отдельным этапом. SSR не запускает loadData, popover или browser APIs.
 
+Source theme объединяет `components.Select` и `components.TreeSelect` в исходном
+порядке: aliases TreeSelect могут менять также поле. Select оформляет теги,
+стрелку/clear и focus, TreeSelect — размеры/отступы узлов, цвета и checkbox панели.
+Настройки `components.Tree` не меняют дерево внутри TreeSelect. Токены доступны
+при SSR; смена темы сохраняет DOM, поиск, выделение, focus, raw FormData и позицию
+открытой панели. В source compact высота узла — 21px. Native-only темы сохранены.
+
 Virtual/scrollTo, fieldNames/simple mode, TreeNode children, maxCount/maxTagCount,
-tag/popup render hooks, treeExpandAction, полный semantic/config/token/ref API,
+tag/popup render hooks, treeExpandAction, полный semantic/config/ref API,
 legacy React extras и исходные motion/container API ещё не перенесены.
 
 ## Tree

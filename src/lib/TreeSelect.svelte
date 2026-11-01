@@ -23,6 +23,8 @@
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { connectPopup } from './popup.dom';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
   import Tree from './Tree.svelte';
   import Icon from './Icon.svelte';
   import NoCompactStyle from './NoCompactStyle.svelte';
@@ -91,6 +93,11 @@
   const form = useForm();
   const field = useFormField();
   const compact = useCompact();
+  const selectTheme = useComponentTheme('Select');
+  const treeSelectTheme = useComponentTheme('TreeSelect');
+  const componentStyle = $derived(
+    [selectTheme.style, treeSelectTheme.style].filter(Boolean).join(';') || undefined
+  );
   const generated = $props.id();
   let internalValue = $state.raw<TreeSelectValue>(untrack(() => defaultValue));
   let actualValue = $derived(value === undefined ? internalValue : value);
@@ -451,20 +458,32 @@
   .ant-select { display:flex;align-items:center;width:100%;position:relative; }
   .ant-select-content { min-width:0;position:relative; }
   .ant-select:focus-within { outline:2px solid var(--ant-color-primary);outline-offset:2px; }
+  .ant-select.ant-select-source-theme { align-items:flex-start; }
+  .ant-select.ant-select-source-theme:focus-within { outline:0;outline-offset:0; }
   .ant-select .ant-select-input { position:relative;inset:auto;width:100%;min-width:0;padding:0;border:0;outline:0;background:transparent;color:inherit;font:inherit;line-height:inherit;cursor:inherit; }
   .ant-select-input::placeholder { color:var(--ant-color-text-placeholder); }
   .ant-select-multiple { height:auto;min-height:var(--ant-select-height); }
   .ant-select-multiple .ant-select-content { gap:0; }
   .ant-select-multiple .ant-select-input { flex:1 1 60px;width:60px;min-width:40px;max-width:100%; }
+  .ant-select-source-theme.ant-select-multiple .ant-select-input { line-height:calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-select-multi-item-height)); }
   .ant-select-multiple .ant-select-selection-item { flex:none;box-sizing:border-box;max-width:100%;min-width:0; }
+  .ant-select-source-theme.ant-select-multiple .ant-select-selection-item { max-width:calc(100% - var(--ant-select-internal_fixed_item_margin) * 2); }
   .ant-select-selection-item-remove,.clear { padding:0;border:0;background:transparent;cursor:pointer;flex:none; }
   .clear { margin-inline-end:4px;color:var(--ant-color-text-tertiary);display:flex; }
   .suffix { display:flex;flex:none;color:var(--ant-color-text-quaternary);pointer-events:none; }
+  .ant-select-source-theme .clear { display:inline-block;margin-inline-end:0;color:var(--ant-color-text-quaternary); }
+  .ant-select-source-theme .clear:hover { color:var(--ant-color-icon); }
+  .ant-select-source-theme .clear:focus-visible { opacity:1; }
+  .ant-select-source-theme:has(.clear):hover .suffix,.ant-select-source-theme:has(.clear:focus-visible) .suffix { opacity:0; }
   .single-snippet { position:absolute;pointer-events:none;inset-inline-start:0; }
   .popup { position:fixed;margin:0;border:0;overflow:visible; }
   .popup-body { overflow:auto; }
   .ant-select-selection-item-disabled { color:var(--ant-select-multiple-item-color-disabled); }
+  .ant-select-source-theme .ant-select-selection-item-disabled { color:inherit; }
   .ant-select-selection-item-remove:focus-visible,.clear:focus-visible { outline:2px solid var(--ant-color-primary); }
+  @media (hover:none) {
+    .ant-select-source-theme:has(.clear) .suffix { opacity:0; }
+  }
 </style>
 {#snippet labelNode(item:TreeSelectLabeledValue)}{#if treeTitleRender && index.values.has(item.value)}{@render treeTitleRender(index.values.get(item.value)!)}{:else if typeof item.label==='function'}{@render item.label()}{:else}{item.label ?? item.value}{/if}{/snippet}
 {#snippet panelTitle(node:TreeDataNode)}{@render labelNode(
@@ -482,8 +501,13 @@
       inputElement?.focus();
       requestOpen(true);
     }
-  }} dir={config.direction} style={style} class={[
+  }} dir={config.direction}
+  style={[componentStyle, style].filter(Boolean).join(';') || undefined} class={[
       'ant-select ant-select-css-var ant-tree-select-css-var ant-select-show-arrow',
+      selectTheme.className,
+      selectTheme.className && 'ant-select-source-theme',
+      selectTheme.className && canSearch && 'ant-select-show-search',
+      selectTheme.className && allowClear && 'ant-select-allow-clear',
       `ant-select-${variant}`,
       isMultiple ? 'ant-select-multiple' : 'ant-select-single',
       visible && 'ant-select-open',
@@ -519,19 +543,25 @@
           blurWithin(event);
         }} />
   </div>
-  {#if allowClear&&!blocked&&(display.length||search)}<button type="button" class="clear" aria-label={config.locale.clearText} onpointerdown={event => event.preventDefault()} onclick={clear}><Icon name="close-circle-filled" /></button>{/if}
-  <span class="suffix" aria-hidden="true"><Icon name={loading ? 'loading' : 'down'} /></span>
+  {#if allowClear&&!blocked&&(display.length||search)}<button type="button" class={['clear', selectTheme.className && 'ant-select-clear']} aria-label={config.locale.clearText} onpointerdown={event => event.preventDefault()} onclick={clear}><Icon name="close-circle-filled" /></button>{/if}
+  <span class={['suffix', selectTheme.className && 'ant-select-suffix']} aria-hidden="true"><Icon name={loading ? 'loading' : 'down'} /></span>
   {#if name??field?.name}{#each display as item(item.value)}<input type="hidden" name={name ?? field?.name} value={String(item.value)} disabled={blocked} />{/each}{/if}
 </div>
-<NoCompactStyle>{#if mounted}<div bind:this={popup} popover="manual" hidden={!visible || !shown} class={[
+<NoCompactStyle>{#if mounted}
+{@const initialPopupStyle = untrack(() => componentStyle)}
+<div bind:this={popup} popover="manual" hidden={!visible || !shown} class={[
     'popup ant-select-dropdown ant-select-css-var ant-tree-select-dropdown ant-tree-select-css-var',
+    selectTheme.className,
+    selectTheme.className && 'ant-tree-select-source-popup',
     config.direction === 'rtl' && 'ant-tree-select-dropdown-rtl',
     popupClassName
-  ]} style:width={typeof popupMatchSelectWidth === 'number'
+  ]} style={initialPopupStyle}
+  {@attach node => connectComponentTheme(node, componentStyle)}
+  style:width={typeof popupMatchSelectWidth === 'number'
       ? `${popupMatchSelectWidth}px`
       : undefined} onfocusout={blurWithin}>
   <div class="popup-body" style:max-height={`${listHeight}px`} onscroll={onPopupScroll}>
-    {#if filtered.length}<Tree bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} aria-label={attributes['aria-label'] ?? placeholder ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} activeKey={active} onActiveChange={key => {
+    {#if filtered.length}<Tree bind:nativeElement={treeElement} treeData={filteredIndex.data} id={`${controlId}-list`} class={treeSelectTheme.className && 'ant-tree-select-source-tree'} aria-label={attributes['aria-label'] ?? placeholder ?? config.locale.searchText} focusable={false} multiple={isMultiple} checkable={checkable} checkStrictly checkedKeys={{ checked: checks.checked, halfChecked: checks.halfChecked }} selectedKeys={checkable ? [] : checks.checked} expandedKeys={panelExpanded} activeKey={active} onActiveChange={key => {
         active = key;
       }} onSelect={(_keys, info) => panelSelect(info.node)} onCheck={(_keys, info) => panelSelect(info.node)} onExpand={expandPanel} loadedKeys={treeLoadedKeys ?? loaded} onLoad={(keys) => {
           onTreeLoad?.(keys);
