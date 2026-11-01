@@ -683,6 +683,27 @@ export type {
   ListySemanticProps,
   ListySemanticName
 } from './listy.types';
+export { default as Tour } from './Tour.svelte';
+export type {
+  TourProps,
+  TourStepProps,
+  TourPanelInfo,
+  TourPlacement,
+  TourType,
+  TourTarget,
+  TourArrow,
+  TourMask,
+  TourGap,
+  TourClosable,
+  TourButtonProps,
+  TourContent,
+  TourSemantic,
+  TourSemanticName,
+  TourSlots,
+  TourConfig,
+  TourLocale,
+  TourAlign
+} from './tour.types';
 export { default as Typography } from './Typography.svelte';
 export { default as TypographyText } from './TypographyText.svelte';
 export { default as TypographyTitle } from './TypographyTitle.svelte';

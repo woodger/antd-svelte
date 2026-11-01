@@ -15,6 +15,7 @@
   import type { ListConfig } from './list.types';
   import type { ListyConfig } from './listy.types';
   import type { TypographyConfig } from './typography.types';
+  import type { TourConfig } from './tour.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -47,6 +48,7 @@
     list?: ListConfig;
     listy?: ListyConfig;
     typography?: TypographyConfig;
+    tour?: TourConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
@@ -88,6 +90,7 @@
     list,
     listy,
     typography,
+    tour,
     virtual,
     renderEmpty,
     rangePicker,
@@ -153,6 +156,9 @@
     get typography() {
       return typography ?? parent.typography;
     },
+    get tour() {
+      return tour ?? parent.tour;
+    },
     get virtual() {
       return virtual ?? parent.virtual;
     },
@@ -215,6 +221,8 @@
           ...locale?.Text
         },
         global: { ...parent.locale.global, ...locale?.global },
+        tour: { ...parent.locale.tour, ...parent.locale.Tour, ...locale?.tour, ...locale?.Tour },
+        Tour: { ...parent.locale.tour, ...parent.locale.Tour, ...locale?.tour, ...locale?.Tour },
         pagination: { ...parent.locale.pagination, ...locale?.pagination },
         table: { ...parent.locale.table, ...locale?.table },
         inputNumber: { ...parent.locale.inputNumber, ...locale?.inputNumber },

@@ -5246,24 +5246,150 @@
       "id": "tour",
       "name": "Tour",
       "category": "data-display",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос Tour 6.6.8 и rc-tour 2.4.0: исходные состояния, target/mask/gap, все placements, panel snippets, semantic config и portal lifecycle.",
       "upstreamPath": "components/tour",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "Tour",
+          "local": [
+            "Tour"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "button"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/tour",
+          "range": "~2.4.0",
+          "referenceVersion": "2.4.0"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.10.1",
+          "referenceVersion": "3.10.1"
+        },
+        {
+          "name": "@rc-component/portal",
+          "range": "^2.2.1",
+          "referenceVersion": "2.2.1"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@rc-component/resize-observer",
+          "range": "^1.1.2",
+          "referenceVersion": "1.1.2"
+        },
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@ant-design/icons-svg",
+          "range": "^4.6.0",
+          "referenceVersion": "4.6.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "L",
+      "evidence": [
+        "src/lib/Tour.svelte",
+        "src/lib/TourPanel.svelte",
+        "src/lib/TourDefaultPanel.svelte",
+        "src/lib/TourPortal.svelte",
+        "src/lib/tour.types.ts",
+        "src/lib/tour.engine.ts",
+        "src/lib/tour-position.engine.ts",
+        "src/lib/tour.dom.ts",
+        "src/lib/tour-portal.dom.ts",
+        "src/lib/tour.engine.test.ts",
+        "src/lib/vendor/tour.css",
+        "tests/package/tour.ssr.test.ts",
+        "tests/browser/tour.spec.ts",
+        "tests/browser/fixtures/TourFixtures.svelte"
+      ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Controlled/default open/current, шаги и порядок callbacks",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "tests/browser/tour.spec.ts",
+            "tests/package/tour.ssr.test.ts"
+          ],
+          "note": "Без open/defaultOpen непустой Tour открыт; defaultCurrent читается один раз, повторное открытие сбрасывает uncontrolled current. Out-of-range закрывает, controlled owner может отклонять изменения. onChange получает новый индекс; finish вызывает close, finish, затем nextButtonProps.onClick. Поля шага заменяют panel callbacks/metadata, включая собственный undefined."
+        },
+        {
+          "id": "target-mask",
+          "title": "DOM target/getter, mask/gap и исходное взаимодействие",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/tour.engine.test.ts",
+            "tests/browser/tour.spec.ts"
+          ],
+          "note": "Null/undefined target даёт центр по умолчанию без стрелки. SVG hole, independent gap X/Y/radius, custom mask color/style и disabledInteraction только для pointer. Mask не закрывается по внешнему click; без маски целевая страница интерактивна, body lock сохраняется. Raw open управляет автопрокруткой; step scroll default предшествует root fallback, false передаётся native scrollIntoView."
+        },
+        {
+          "id": "placements",
+          "title": "Все 12 Ant Design placements, center, arrow и flip/shift",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/tour.engine.test.ts",
+            "tests/browser/tour.spec.ts"
+          ],
+          "note": "Перенесены числовой useAlign rc-trigger 3.10.1, visible area, scale, dynamic inset, округление и flip cache. Ant Design corner points отличаются от defaults rc-tour. Поддержаны pointAtCenter, inline/custom containers и onPopupAlign; animated и builtinPlacements переопределяются Ant Design, как в эталоне."
+        },
+        {
+          "id": "panel-rendering",
+          "title": "Default/primary, cover, actions/indicators и локальный panel snippet",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/browser/tour.spec.ts"
+          ],
+          "note": "Text/arrays/snippets, исходная проверка наличия content с нулём, Previous/Next/Finish, custom labels/classes/styles и native MouseEvent. Description snippet сохраняет native draft между шагами. Actions получают default snippet и current/total. Собственный step.renderPanel=undefined выбирает fallback rc-tour panel."
+        },
+        {
+          "id": "semantic-config",
+          "title": "ConfigProvider.tour, semantic slots, locale и темы",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/tour.engine.test.ts",
+            "tests/browser/tour.spec.ts"
+          ],
+          "note": "Context/local class/style callbacks получают raw props с merged step primary class. Root styles относятся к mask; step semantic objects заменяют panel slots. Locale.tour и исходный Tour alias, global.close, light/dark/compact; body portal сохраняет физическое направление контейнера при RTL config, как upstream."
+        },
+        {
+          "id": "ssr-lifecycle",
+          "title": "SSR, keyboard/IME, portals, body lock и cleanup",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/tour.ssr.test.ts",
+            "tests/browser/tour.spec.ts"
+          ],
+          "note": "SSR не рендерит слои и не вызывает DOM getters/snippets. Physical Left/Right игнорируют editable targets; Escape учитывает closable/keyboard и 200ms IME tail. Исходно нет focus trap/autofocus. Portals переносят живые CSS variables; внутри native Modal/Drawer стандартный container остаётся в dialog top layer. Listeners, observers, queued work, locks и portal DOM очищаются."
+        },
+        {
+          "id": "advanced-source-api",
+          "title": "Полные theme tokens, произвольный prefix CSS и общий zIndex context",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "note": "Генерация CSS для произвольного prefixCls, полный token engine и единый исходный zIndex context для всех popup families ещё отсутствуют. Явный zIndex и базовый default 1001 поддержаны; React dev diagnostics/private PurePanel не воспроизводятся. V1-ready не означает полный React API."
         }
       ]
     },

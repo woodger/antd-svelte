@@ -14,6 +14,7 @@ import type { PaginationComponentConfig } from './pagination.types';
 import type { ListConfig } from './list.types';
 import type { ListyConfig } from './listy.types';
 import type { TypographyConfig } from './typography.types';
+import type { TourConfig } from './tour.types';
 import type { RenderEmptyHandler } from './types';
 import type { RangePickerConfig } from './range-picker.types';
 import type { InputConfig } from './input.types';
@@ -40,6 +41,7 @@ export interface ConfigContext {
   readonly list?: ListConfig;
   readonly listy?: ListyConfig;
   readonly typography?: TypographyConfig;
+  readonly tour?: TourConfig;
   readonly virtual?: boolean;
   readonly renderEmpty?: RenderEmptyHandler;
   readonly rangePicker?: RangePickerConfig;

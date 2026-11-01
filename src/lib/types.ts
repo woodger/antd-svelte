@@ -1,6 +1,8 @@
 import type { Snippet } from 'svelte';
 import type { TypographyLocale } from './typography.types';
 import { typographyEnUS, typographyRuRU } from './typography.locale';
+import type { TourLocale } from './tour.types';
+import { tourEnUS, tourRuRU } from './tour.locale';
 import type { UploadLocale } from './upload.types';
 import type { DatePickerLocale } from './date-picker.types';
 import { datePickerEnUS, datePickerRuRU } from './date-picker.locale';
@@ -31,7 +33,10 @@ export interface Locale {
   typography?: Partial<TypographyLocale>;
   /** Исходный alias Ant Design; локальные поля Text перекрывают typography. */
   Text?: Partial<TypographyLocale>;
-  global?: { show?: string; hide?: string; };
+  global?: { show?: string; hide?: string; close?: string; };
+  tour?: Partial<TourLocale>;
+  /** Исходный alias Ant Design; локальный Tour имеет приоритет над tour. */
+  Tour?: Partial<TourLocale>;
   image?: { preview?: string; };
   tree?: { expand?: string; collapse?: string; };
   upload?: UploadLocale;
@@ -164,6 +169,7 @@ export interface SelectOption<Value extends string | number = string> {
 
 export const ruRU = {
   typography: typographyRuRU,
+  tour: tourRuRU,
   tree: { expand: 'Развернуть', collapse: 'Свернуть' },
   upload: {
     uploading: 'Загрузка...',
@@ -211,7 +217,7 @@ export const ruRU = {
   okText: 'Подтвердить',
   cancelText: 'Отмена',
   closeText: 'Закрыть',
-  global: { show: 'Показать', hide: 'Скрыть' },
+  global: { show: 'Показать', hide: 'Скрыть', close: 'Закрыть' },
   image: { preview: 'Просмотр изображения' },
   clearText: 'Очистить',
   emptyText: 'Ничего не найдено',
@@ -252,6 +258,7 @@ export const ruRU = {
 
 export const enUS = {
   typography: typographyEnUS,
+  tour: tourEnUS,
   tree: { expand: 'Expand', collapse: 'Collapse' },
   upload: {
     uploading: 'Uploading...',
@@ -295,7 +302,7 @@ export const enUS = {
   okText: 'OK',
   cancelText: 'Cancel',
   closeText: 'Close',
-  global: { show: 'Show', hide: 'Hide' },
+  global: { show: 'Show', hide: 'Hide', close: 'Close' },
   image: { preview: 'Image preview' },
   clearText: 'Clear',
   emptyText: 'No options',

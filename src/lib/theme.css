@@ -334,6 +334,19 @@
   --ant-typography-title-margin-bottom: 0.5em;
 }
 
+.ant-tour-css-var {
+  --ant-line-height: calc(1 + 8px / var(--ant-font-size));
+  --ant-control-height-sm: calc(var(--ant-control-height) * 0.75);
+  --ant-tour-close-btn-size: calc(var(--ant-font-size) + 8px);
+  --ant-tour-z-index-popup: 1070;
+  --ant-tour-primary-prev-btn-bg: rgb(255 255 255 / 15%);
+  --ant-tour-primary-next-btn-hover-bg: rgb(240, 240, 240);
+}
+
+.ant-svelte-theme[data-ant-theme='dark'] > .ant-tour-css-var {
+  --ant-tour-primary-next-btn-hover-bg: #fff;
+}
+
 .ant-typography-css-var.ant-typography-compact {
   --ant-font-size-heading-1: 32px;
   --ant-font-size-heading-2: 26px;

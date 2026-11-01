@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **104**.
-Есть публичная реализация у **67** семейств; отсутствует у **6**.
-Проверенный объём v1 покрыт у **40**; требуется аудит у **27**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **105**.
+Есть публичная реализация у **68** семейств; отсутствует у **5**.
+Проверенный объём v1 покрыт у **41**; требуется аудит у **27**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -70,7 +70,7 @@ Candidate означает запись каталога, для которой 
 | [Tag](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tag) | data-display | target | Tag, CheckableTag | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Timeline](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/timeline) | data-display | target | Timeline | Согласованный v1 покрыт | PrefixCls и глобальный timeline config/tokens (missing) |
 | [Tooltip](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tooltip) | data-display | target | Tooltip | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Corner placements (missing) |
-| [Tour](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tour) | data-display | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
+| [Tour](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tour) | data-display | target | Tour | Согласованный v1 покрыт | Полные theme tokens, произвольный prefix CSS и общий zIndex context (missing) |
 | [Tree](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tree) | data-display | target | Tree | Согласованный v1 покрыт | Virtual scroll, drag/drop и DirectoryTree (missing); FieldNames, полный generic/ref/semantic/config API и motion (missing) |
 | [Alert](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/alert) | feedback | target | Alert | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Drawer](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/drawer) | feedback | target | Drawer | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Немодальные панели, push и resize (missing) |

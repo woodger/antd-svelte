@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tour: controlled/default шаги, target/mask/gap, все 12 размещений и center,
+  исходные flip/shift/arrow, keyboard/IME, custom panel/actions/indicators,
+  semantic config/locale и живые theme portals. Добавлены CSS-рецепт, MIT-лицензии
+  rc-tour/trigger/portal и unit/package SSR/browser проверки; границы zIndex/token
+  engine и адаптация к native Modal/Drawer описаны в README.
 - Typography/Text/Title/Paragraph/Link: исходные decorations, copyable с Clipboard API
   и document fallback, controlled editing, CSS/JS ellipsis, expand/collapse, semantic
   config, locale, native refs, темы/RTL и CSS-рецепт. Добавлены unit/package/browser
