@@ -104,7 +104,7 @@ describe('Switch server rendering', () => {
     expect(body).toContain('ant-switch-small');
     expect(body).toContain('<span>Enabled</span>');
     expect(body).toContain('<span>Disabled</span>');
-    expect(body).toMatch(/class="ant-switch-inner"[^>]*aria-hidden="true"/);
+    expect(body).toMatch(/class="ant-switch-inner(?: [^"]*)?"[^>]*aria-hidden="true"/);
     expect(body).toContain('aria-label="Notifications"');
   });
 

@@ -3614,9 +3614,9 @@
       "name": "Switch",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Аудит Switch 6.6.8: value/defaultValue, source events и стрелки, semantic config, refs/focus aliases с сохранением прежних native form/reset/onclick контрактов.",
       "upstreamPath": "components/switch",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Switch",
@@ -3626,24 +3626,122 @@
         }
       ],
       "dependencies": [
-        "config-provider"
+        "config-provider",
+        "form"
       ],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/switch",
+          "range": "~1.0.3",
+          "referenceVersion": "1.0.3"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
+      "priority": "p1",
+      "effort": "M",
       "evidence": [
+        "src/lib/Switch.svelte",
+        "src/lib/switch.types.ts",
+        "src/lib/switch.ssr.test.ts",
+        "tests/package/switch-features.ssr.test.ts",
+        "tests/browser/switch-features.spec.ts",
+        "tests/browser/fixtures/SwitchFeaturesFixtures.svelte",
+        "src/lib/vendor/switch.css",
+        "tools/ant-design-css-recipes.json",
         "readme.md",
         "tests/browser/switch.spec.ts",
         "integration:switch"
       ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "native-core",
+          "title": "Native switch, формы, disabled/loading и reset",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "src/lib/switch.ssr.test.ts",
+            "tests/browser/switch.spec.ts",
+            "tests/browser/switch-features.spec.ts"
+          ],
+          "note": "Bind:checked/onCheckedChange, captured defaults, name=on в native FormData, внешняя форма, canceled reset и cleanup таймера, FormItem/required/labels/focus, native Enter/Space/label activation без submit сохранены. Disabled=false перекрывает context, loading блокирует control и hidden field."
+        },
+        {
+          "id": "value-aliases",
+          "title": "Checked/value, defaultChecked/defaultValue и приоритет",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/switch-features.ssr.test.ts",
+            "tests/browser/switch-features.spec.ts"
+          ],
+          "note": "Определённый checked имеет приоритет над value, defaultChecked — над defaultValue, включая false. Defaults фиксируются при создании; value поддерживает binding с начальным boolean у владельца. На протяжении жизни используется один способ привязки. Function binding может отклонить изменение, callbacks всё равно сообщают requested value."
+        },
+        {
+          "id": "source-events",
+          "title": "Source click/change, стрелки и keyboard callbacks",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/switch-features.ssr.test.ts",
+            "tests/browser/switch-features.spec.ts"
+          ],
+          "note": "OnCheckedChange/onChange перед onClick, native MouseEvent/KeyboardEvent с button currentTarget. ArrowLeft задаёт false, ArrowRight true, RTL не меняет значения; повторная стрелка вызывает onChange даже без изменения, как rc-switch. Native keyCode 37/39 соответствует нормализованному React which, включая синтетические events. Затем onKeyDown/native onkeydown; стрелки не вызывают onClick. Внешние изменения/reset не вызывают callbacks, синхронный unmount прекращает последующие handlers."
+        },
+        {
+          "id": "semantic-config",
+          "title": "Root/content/indicator, config, rich content и размеры",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/switch-features.ssr.test.ts",
+            "tests/browser/switch-features.spec.ts"
+          ],
+          "note": "ConfigProvider.switch наследуется, classNames/styles принимают objects/functions от props с resolved size/disabled. Root style priority config.styles.root -> config.style -> styles.root -> style; content на обеих подписях, indicator на handle. String/number/snippets сохраняют zero. Medium/middle/default — ordinary, small — малый размер; inherited large остаётся ordinary. PrefixCls/rootClassName, текущие темы/RTL/mobile/reduced motion сохранены."
+        },
+        {
+          "id": "refs-lifecycle",
+          "title": "Native ref, focus/blur, autoFocus и keyed removal",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "tests/package/switch-features.ssr.test.ts",
+            "tests/browser/switch-features.spec.ts"
+          ],
+          "note": "Ref/nativeElement — bindable native button, focus(options?)/blur через ref и bind:this. AutoFocus при mount, tabIndex alias и native autofocus, onFocus/onBlur плюс lowercase handlers. Ссылки очищаются, pending reset не меняет владельца после удаления; keyed blur использует последний действующий callback."
+        },
+        {
+          "id": "source-css",
+          "title": "Воспроизводимые исходные CSS-правила Switch",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/vendor/switch.css",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "47 правил из закреплённого dist/antd.css, включая reduced motion, без keyframes. Рецепт побайтно сохраняет прежний vendor-файл; меняется только css-variable root selector. Отдельный общий theme/token engine не входит в этот CSS-рецепт."
+        },
+        {
+          "id": "native-boundary",
+          "title": "Сохраняемые Svelte state/event/form и accessibility contracts",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/switch.types.ts",
+            "readme.md"
+          ],
+          "note": "Сохраняются native формы/hidden field/reset, отменяемый native onclick перед source callbacks, Svelte bindable state/function binding вместо React controlled props, CSS strings/snippets и native events/refs. Подписи остаются aria-hidden, handle — span вместо source div. Semantic props.checked/value отражают Svelte prop state; defaultChecked/value не подменяют исходные aliases внутри info."
+        },
+        {
+          "id": "advanced-theme",
+          "title": "Wave, общий token engine и React diagnostics/statics",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "note": "Wave, общий source theme/component-token/prefix engine и React warnings/__ANT_SWITCH не перенесены. Compact сохраняет прежние 22px track/18px handle/12px content вместо source 20/16/10; dark сохраняет прежний primary вместо source dark algorithm. Сохраняются текущие native focus и темы; v1-ready не означает полный React API."
         }
       ]
     },

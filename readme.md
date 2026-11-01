@@ -159,7 +159,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Radio | Checked/defaultChecked, semantic config, callbacks/refs, нативные группы и FormData |
 | RadioButton | Кнопочное оформление Radio, native input, group context и refs |
 | RadioGroup | Типизированный одиночный выбор, options, уникальное имя группы, горизонтальное/вертикальное расположение, required, reset и FormItem |
-| Switch | Checked/defaultChecked, loading, disabled, обычный/малый размеры, snippets состояний, клавиатура, FormData и FormItem |
+| Switch | Checked/value aliases, source events, semantic config, refs, loading, клавиатура и native формы |
 | Pagination | Страницы, переходы по пять страниц, выбор pageSize, диапазон записей, размеры, RTL и локаль |
 | Table | Типизированные колонки и snippets, фильтры, стабильная сортировка одной колонки, локальная и серверная пагинация, выбор и раскрытие строк, закрепление заголовка и колонок, loading и пустые данные |
 | Modal | Нативный dialog, заголовок, footer snippet, закрытие, confirmLoading и callbacks |
@@ -6049,7 +6049,7 @@ unCheckedChildren предназначены для коротких подпи�
 Они скрыты от accessibility tree, поэтому имя control не меняется вместе
 с текстом состояния.
 
-Размеры — middle и small. По умолчанию наследуется componentSize;
+Размеры — medium, small и aliases middle/default. По умолчанию наследуется componentSize;
 small включает малый размер, middle/large провайдера используют обычный.
 Явный size переопределяет наследование. Disabled наследуется из Form/FormItem
 и ConfigProvider, disabled=false переопределяет его. Loading показывает
@@ -6082,8 +6082,46 @@ resetFields модели. Правило required считает false зада�
 возвращает последнее сохранённое состояние, следующая попытка очищает ошибку.
 При удалении примера запрос отменяется, поздний результат игнорируется.
 Флажок ошибки в примере влияет только на следующее сохранение. Ниже показан
-малый Switch с проверкой и сбросом Form. API использует checked/defaultChecked;
-React-алиасы value/defaultValue пока не поддерживаются.
+малый Switch с проверкой и сбросом Form.
+
+Value/defaultValue — aliases checked/defaultChecked. Определённый checked имеет
+приоритет над value; defaultChecked, включая false, — над defaultValue. Defaults
+фиксируются при создании. Value поддерживает bind:value; задавайте начальный boolean
+у владельца и используйте один способ привязки на протяжении жизни control.
+Checked/value сохраняют существующие Svelte state conventions: для отклонения
+пользовательского изменения используйте getter/setter function binding.
+
+OnChange(checked, event) и onClick(checked, event) получают native MouseEvent либо
+KeyboardEvent с button в currentTarget. При click сначала работает прежний native
+onclick, способный отменить переключение, затем onCheckedChange, onChange и onClick.
+ArrowLeft задаёт false, ArrowRight — true, в том числе в RTL. Повторная стрелка
+вызывает onChange даже при том же состоянии, как rc-switch; onClick не вызывается.
+OnKeyDown и native onkeydown работают после обработки стрелок. Внешние обновления
+и reset не вызывают source callbacks. OnFocus/onBlur дополняют lowercase handlers.
+Синтетические keydown используют keyCode 37/39: это native эквивалент which,
+который React нормализует для rc-switch; одного key без кода недостаточно.
+
+CheckedChildren/unCheckedChildren принимают string, number или snippet; ноль
+сохраняется. ConfigProvider.switch задаёт class/style и semantic root/content/indicator,
+которые наследуются вложенным provider. ClassNames/styles принимают объекты или
+функции от props с resolved size/disabled. Content относится к обеим внутренним
+подписям, indicator — к handle. Приоритет root style: config.styles.root, config.style,
+styles.root, style. PrefixCls меняет классы, rootClassName относится к button;
+CSS произвольного префикса предоставляет потребитель.
+
+Bind:ref и bind:nativeElement возвращают native button и очищаются при unmount;
+focus(options?)/blur() доступны и через bind:this. AutoFocus вызывает focus при
+mount, tabIndex — alias tabindex. Lowercase autofocus сохраняет HTML-поведение.
+Native form/reset/hidden field, отменяемый onclick, скрытые от accessibility tree
+подписи и span handle сохраняют прежний Svelte контракт. React использует div handle
+и controlled state/event/ref conventions. Wave, общий token/prefix engine, точная
+dark/compact палитра и React diagnostics/statics пока не перенесены.
+
+Изучены Ant Design 6.6.8, @rc-component/switch 1.0.3 и @rc-component/util 1.14.0.
+Рецепт switch побайтно воспроизводит прежние 47 правил vendor CSS, включая reduced
+motion; keyframes не добавляются. Типы — [switch.types.ts](./src/lib/switch.types.ts),
+проверки — [browser](./tests/browser/switch-features.spec.ts) и
+[package SSR](./tests/package/switch-features.ssr.test.ts).
 
 ## Pagination
 
@@ -6657,7 +6695,8 @@ RadioGroup использует нативную группу input[type=radio],
 стрелки и Space. Tab сохраняет нативный порядок; FormItem направляет фокус к
 выбранному доступному варианту или первому доступному.
 Switch использует нативную кнопку с role=switch: Space и Enter переключают
-состояние, disabled/loading исключают кнопку из Tab. Имя остаётся постоянным,
+состояние, ArrowLeft/ArrowRight задают false/true; disabled/loading исключают кнопку из Tab.
+Имя остаётся постоянным,
 а checked-состояние передаёт aria-checked.
 InputNumber использует input с role=spinbutton: стрелки меняют число, Enter
 завершает черновик. Кнопки увеличения и уменьшения сохраняют фокус в input.

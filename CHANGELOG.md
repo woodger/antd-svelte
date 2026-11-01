@@ -9,6 +9,9 @@
 
 ### Added
 
+- Switch: value/defaultValue, source click/change/arrow events, semantic config,
+  refs и focus aliases. Native формы/reset/onclick сохранены; CSS-рецепт switch
+  побайтно воспроизводит прежние 47 правил из Ant Design 6.6.8.
 - Checkbox: children/context/skipGroup, rich options, semantic config, callbacks,
   refs и autoFocus. Children сохраняют исходные raw state и фильтрацию callbacks;
   прежние options/FormData/reset/indeterminate сохранены, Table selection изолирован.

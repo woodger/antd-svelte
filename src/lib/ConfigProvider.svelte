@@ -22,6 +22,7 @@
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
   import type { CheckboxConfig } from './checkbox.types';
+  import type { SwitchConfig } from './switch.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -61,6 +62,7 @@
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
     checkbox?: CheckboxConfig;
+    switch?: SwitchConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
@@ -109,6 +111,7 @@
     inputNumber,
     radio,
     checkbox,
+    switch: switchConfig,
     virtual,
     renderEmpty,
     rangePicker,
@@ -194,6 +197,9 @@
     },
     get checkbox() {
       return checkbox ?? parent.checkbox;
+    },
+    get switch() {
+      return switchConfig ?? parent.switch;
     },
     get virtual() {
       return virtual ?? parent.virtual;

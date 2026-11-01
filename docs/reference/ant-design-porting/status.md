@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **107**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **47**; требуется аудит у **23**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **48**; требуется аудит у **22**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -46,7 +46,7 @@ Candidate означает запись каталога, для которой 
 | [Rate](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/rate) | data-entry | target | Rate | Согласованный v1 покрыт | PrefixCls, произвольный token engine и полный upstream Tooltip API (missing) |
 | [Select](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/select) | data-entry | target | Select | Согласованный v1 покрыт | Свободный ввод tags (missing); Виртуализация options (missing) |
 | [Slider](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/slider) | data-entry | target | Slider | Согласованный v1 покрыт | Граница native controls и React event/instance API (partial); Текущий SliderTooltipConfig и полный исходный Tooltip API (partial); Полный исходный scalar API и общий token/prefix engine (missing) |
-| [Switch](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/switch) | data-entry | target | Switch | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
+| [Switch](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/switch) | data-entry | target | Switch | Согласованный v1 покрыт | Сохраняемые Svelte state/event/form и accessibility contracts (partial); Wave, общий token engine и React diagnostics/statics (missing) |
 | [TimePicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/time-picker) | data-entry | target | TimePicker, TimeRangePicker | Согласованный v1 покрыт | Multiple, mask, generatePicker, полный trigger/token/locale API и diagnostics (missing) |
 | [Transfer](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/transfer) | data-entry | target | Transfer | Согласованный v1 покрыт | Полный token/renderEmpty и React-specific API (missing) |
 | [TreeSelect](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tree-select) | data-entry | target | TreeSelect | Согласованный v1 покрыт | FieldNames/simple mode, maxCount/tags/render hooks, semantic/config/ref и legacy extras (missing); Виртуализация, scrollTo и исходные popup/list motion (missing) |

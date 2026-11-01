@@ -549,6 +549,16 @@ export type {
   RadioConfig
 } from './radio.types';
 export type { SwitchProps } from './Switch.svelte';
+export type {
+  SwitchSize,
+  SwitchContent,
+  SwitchEvent,
+  SwitchChangeEventHandler,
+  SwitchClickEventHandler,
+  SwitchSemanticSlots,
+  SwitchSemantic,
+  SwitchConfig
+} from './switch.types';
 export type { PaginationProps } from './Pagination.svelte';
 export type {
   PaginationConfig,

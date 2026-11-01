@@ -21,6 +21,7 @@ import type { ColorPickerConfig } from './color-picker.types';
 import type { InputNumberConfig } from './input-number.types';
 import type { RadioConfig } from './radio.types';
 import type { CheckboxConfig } from './checkbox.types';
+import type { SwitchConfig } from './switch.types';
 import type { RenderEmptyHandler } from './types';
 import type { RangePickerConfig } from './range-picker.types';
 import type { InputConfig } from './input.types';
@@ -54,6 +55,7 @@ export interface ConfigContext {
   readonly inputNumber?: InputNumberConfig;
   readonly radio?: RadioConfig;
   readonly checkbox?: CheckboxConfig;
+  readonly switch?: SwitchConfig;
   readonly virtual?: boolean;
   readonly renderEmpty?: RenderEmptyHandler;
   readonly rangePicker?: RangePickerConfig;

@@ -119,6 +119,8 @@ space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.c
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.
+Рецепт switch побайтно воспроизводит прежние 47 правил, включая reduced motion;
+заменяется только исходный CSS-variable root selector.
 Остальные текущие vendor-файлы
 этим выпуском инструмента не перегенерируются. Новый компонент получает отдельный
 проверенный рецепт: include/exclude для селекторов, replacements, keyframes,
