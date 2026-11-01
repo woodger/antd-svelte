@@ -2611,7 +2611,8 @@
       ],
       "dependencies": [
         "config-provider",
-        "space"
+        "space",
+        "button"
       ],
       "upstreamPackages": [
         {
@@ -2643,7 +2644,14 @@
         "tests/browser/date-picker.spec.ts",
         "tests/package/range-picker.ssr.test.ts",
         "tests/browser/range-picker.spec.ts",
-        "integration:date-picker"
+        "integration:date-picker",
+        "src/lib/SinglePicker.svelte",
+        "src/lib/RangePickerCore.svelte",
+        "src/lib/Button.svelte",
+        "tests/browser/picker-button.spec.ts",
+        "tests/browser/fixtures/PickerButtonFixtures.svelte",
+        "docs/reference/theme-context.md",
+        "docs/reference/wave.md"
       ],
       "features": [
         {
@@ -2710,6 +2718,22 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "262 CSS-правила и локальные theme aliases. Native popover использует существующий lifecycle без полного rc-trigger/motion/getPopupContainer API. Полный пользовательский component config и token engine не перенесены."
+        },
+        {
+          "id": "confirmation-button",
+          "title": "Исходная композиция PickerButton и наследование Button config/tokens/Wave",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/Button.svelte",
+            "tests/browser/picker-button.spec.ts",
+            "tests/browser/fixtures/PickerButtonFixtures.svelte",
+            "docs/reference/theme-context.md",
+            "docs/reference/wave.md"
+          ],
+          "note": "Все четыре date/time single/range footer-ветки используют общий Button с source small/primary defaults. ConfigProvider.button, semantic props/styles, components.Button и wave наследуются; NoCompactStyle изолирует footer от Compact. Locale.ok передаётся строкой для source children и autoInsertSpace. Нативный type=button, прежние disabled predicates, callbacks, Dayjs precision/UTC и focus сохраняются; остальные picker API/token gaps не закрываются этой feature."
         }
       ]
     },
@@ -4212,7 +4236,8 @@
       ],
       "dependencies": [
         "config-provider",
-        "date-picker"
+        "date-picker",
+        "button"
       ],
       "upstreamPackages": [
         {
@@ -4251,7 +4276,12 @@
         "src/lib/time-range-picker.ssr.test.ts",
         "tests/package/time-range-picker.ssr.test.ts",
         "tests/browser/time-range-picker.spec.ts",
-        "tests/browser/fixtures/TimeRangePickerFixtures.svelte"
+        "tests/browser/fixtures/TimeRangePickerFixtures.svelte",
+        "src/lib/Button.svelte",
+        "tests/browser/picker-button.spec.ts",
+        "tests/browser/fixtures/PickerButtonFixtures.svelte",
+        "docs/reference/theme-context.md",
+        "docs/reference/wave.md"
       ],
       "features": [
         {
@@ -4323,6 +4353,22 @@
             "readme.md"
           ],
           "note": "На этом этапе только один Dayjs; multiple=true не заявлен в типах. Произвольные prefix/tokens, полный каталог locales, React diagnostics и полный rc-trigger/motion/container API остаются следующими этапами. Styles — CSS strings, nodes/renderers — Svelte snippets. Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream."
+        },
+        {
+          "id": "confirmation-button",
+          "title": "Исходная композиция PickerButton и наследование Button config/tokens/Wave",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/Button.svelte",
+            "tests/browser/picker-button.spec.ts",
+            "tests/browser/fixtures/PickerButtonFixtures.svelte",
+            "docs/reference/theme-context.md",
+            "docs/reference/wave.md"
+          ],
+          "note": "Все четыре date/time single/range footer-ветки используют общий Button с source small/primary defaults. ConfigProvider.button, semantic props/styles, components.Button и wave наследуются; NoCompactStyle изолирует footer от Compact. Locale.ok передаётся строкой для source children и autoInsertSpace. Нативный type=button, прежние disabled predicates, callbacks, Dayjs precision/UTC и focus сохраняются; остальные picker API/token gaps не закрываются этой feature."
         }
       ]
     },

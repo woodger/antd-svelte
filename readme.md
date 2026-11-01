@@ -2907,6 +2907,13 @@ callbacks. NeedConfirm по умолчанию true для datetime и false д�
 onOk. Escape/внешний клик отменяют неподтверждённый draft. Now использует исходный
 путь preset submit и сразу применяет допустимое текущее время.
 
+Кнопки подтверждения DatePicker, RangePicker, TimePicker и TimeRangePicker используют
+общий Button с size=small и type=primary, как исходный PickerButton. Они наследуют
+ConfigProvider.button, components.Button и Wave; переданная строка локали сохраняет
+Button autoInsertSpace и semantic props. Нативные disabled/type=button, порядок
+подтверждения, точность Dayjs и возврат фокуса сохраняются. Проверки —
+[picker-button](./tests/browser/picker-button.spec.ts), `?fixture=picker-button`.
+
 Точность повторяет rc-picker: panel selection выравнивает все time units, даже
 скрытые; default millisecondStep=100, ближайшее разрешённое значение слева либо
 первое разрешённое. ShowTime.format задаёт формат time panel; формат input

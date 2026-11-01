@@ -31,6 +31,7 @@
   import { compactClasses } from './space-compact.engine';
   import { connectPopup } from './popup.dom';
   import NoCompactStyle from './NoCompactStyle.svelte';
+  import Button from './Button.svelte';
   import DatePickerCalendar from './DatePickerCalendar.svelte';
   import DatePickerTimePanel from './DatePickerTimePanel.svelte';
   import Icon from './Icon.svelte';
@@ -928,14 +929,15 @@
                 adapter.getNow(), clock, timeRestriction
               ))}
             >{lang.now}</button></li>{/if}
-            {#if confirm}<li class="ant-picker-ok"><button
-              type="button"
-              class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm"
+            {#if confirm}<li class="ant-picker-ok"><Button
+              type="primary"
+              size="small"
               disabled={!calendar[active] && !clock.defaultOpenValue
                 || !!(calendar[active] || clock.defaultOpenValue)
                   && invalid((calendar[active] || clock.defaultOpenValue)!, active)}
               onclick={confirmTime}
-            ><span>{lang.ok}</span></button></li>{/if}
+              children={lang.ok}
+            /></li>{/if}
           </ul>{/if}
         </div>
       {/if}
@@ -1152,14 +1154,15 @@
               active,
               'confirm',
               validPickerTime(adapter.getNow(), clock)
-            )}>{showTime ? lang.now : lang.today}</button></li>{/if}{#if confirm}<li class="ant-picker-ok"><button type="button" class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm" disabled={!calendar[active]
+            )}>{showTime ? lang.now : lang.today}</button></li>{/if}{#if confirm}<li class="ant-picker-ok"><Button
+              type="primary" size="small" disabled={!calendar[active]
               && !empty[active]
               || Boolean(
                 calendar[active] && invalid(calendar[active]!, active, from())
               )} onclick={() => {
                 send(active, 'confirm');
                 onOk?.([...calendar]);
-              }}><span>{lang.ok}</span></button></li>{/if}</ul></div>{/if}
+              }} children={lang.ok} /></li>{/if}</ul></div>{/if}
         </div>
       </div></div>
       {/if}

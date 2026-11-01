@@ -18,6 +18,7 @@
   import { compactClasses } from './space-compact.engine';
   import { connectPopup } from './popup.dom';
   import NoCompactStyle from './NoCompactStyle.svelte';
+  import Button from './Button.svelte';
   import DatePickerCalendar from './DatePickerCalendar.svelte';
   import DatePickerTimePanel from './DatePickerTimePanel.svelte';
   import Icon from './Icon.svelte';
@@ -604,12 +605,13 @@
                 if (commit(next)) requestOpen(false);
               }}
             >{actualLocale.now}</button></li>{/if}
-            {#if confirm}<li class="ant-picker-ok"><button
-              type="button"
-              class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm"
+            {#if confirm}<li class="ant-picker-ok"><Button
+              type="primary"
+              size="small"
               disabled={!valid(draft || clock.defaultOpenValue || null)}
               onclick={() => finish(true)}
-            ><span>{actualLocale.ok}</span></button></li>{/if}
+              children={actualLocale.ok}
+            /></li>{/if}
           </ul>{/if}
         </div>
       {/if}
@@ -773,10 +775,11 @@
                   input?.focus();
                 }
               }}>{actualLocale.now}</button></li>{/if}
-            {#if confirm}<li class="ant-picker-ok"><button type="button" class="ant-btn ant-btn-primary ant-btn-color-primary ant-btn-variant-solid ant-btn-sm" disabled={!valid(draft)} onclick={() => {
+            {#if confirm}<li class="ant-picker-ok"><Button type="primary" size="small"
+              disabled={!valid(draft)} onclick={() => {
                 finish(true);
                 input?.focus();
-              }}><span>{actualLocale.ok}</span></button></li>{/if}
+              }} children={actualLocale.ok} /></li>{/if}
           </ul>{:else if showToday}<button type="button" class="ant-picker-today-btn" disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
               const next = validPickerTime(adapter.getNow());
               if (commit(next))

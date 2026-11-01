@@ -54,6 +54,8 @@ info содержит полный текущий GlobalToken, component, classN
 React children.type в Svelte отсутствует.
 FloatButton, BackTop и trigger FloatButtonGroup наследуют Wave через общий Button;
 их info.component равен Button, как в source composition.
+Кнопки подтверждения DatePicker/RangePicker и TimePicker/TimeRangePicker также
+используют общий Button и получают его Wave, сохраняя native picker lifecycle.
 Изменение variant Button или удаление handler/ссылки Tag отключает Wave и очищает
 ожидающий либо активный эффект, сохраняя нативный корень Svelte control.
 

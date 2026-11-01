@@ -137,6 +137,10 @@ Radio подготавливает размеры круга и точки, цв
 Scope-правила появляются в Svelte head уже при SSR и удаляются вместе с provider.
 При ручном svelte/server render нужно включить result.head в HTML страницы.
 
+Footer-кнопки DatePicker/RangePicker и TimePicker/TimeRangePicker используют общий
+Button. Они получают его component tokens и semantic config при фиксированном
+source размере small, независимо от Compact и размера picker.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables
@@ -190,6 +194,8 @@ zeroRuntime наследуется; опубликованные стили ко
   [браузерная геометрия/состояния](../../tests/browser/toggle-theme.spec.ts),
   маршрут `?fixture=toggle-theme`. Ожидаемые размеры и цвета получены из computed
   styles официального UMD и принадлежат браузерному test contour.
+- [Композиция PickerButton](../../tests/browser/picker-button.spec.ts): четыре
+  footer-ветки, Button tokens/config/Wave, scalar locale text и native focus/формы.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

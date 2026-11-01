@@ -9,6 +9,10 @@
 
 ### Added
 
+- Picker footer: общий Button в DatePicker/RangePicker и TimePicker/TimeRangePicker,
+  как исходный PickerButton. Подтверждения получают button config, component tokens,
+  Wave и scalar locale text с autoInsertSpace; native формы/disabled/focus и
+  существующие Dayjs callbacks/precision сохраняются.
 - Wave: source capture/RAF triggers, стандартный эффект для Button, Checkbox,
   Radio/RadioButton, Switch, интерактивного Tag и Steps; ConfigProvider.wave с
   disabled/showEffect/triggerType и полным GlobalToken. Сохранены source targets,

@@ -27,13 +27,14 @@ describe('TimeRangePicker SSR', () => {
       defaultValue: [dayjs('2024-09-15T10:23:44'), dayjs('2024-09-15T17:45:56')],
       allowEmpty: [true, true]
     } }).body;
+    const html = body.replace(/<!--[\s\S]*?-->/g, '');
 
     expect(body.match(/value=""/g)).toHaveLength(2);
     expect(body).toContain('ant-picker-time-range-wrapper');
     expect(body).toMatch(/role="dialog"[^>]*hidden/);
     expect(body).not.toContain('ant-picker-time-panel-cell-selected');
     expect(body).not.toContain('role="grid"');
-    expect(body).toMatch(/disabled[^>]*><span>ОК/);
+    expect(html).toMatch(/<button\b[^>]*\bdisabled[^>]*>\s*<span>ОК<\/span>/);
   });
 
   it('renders per-field defaultOpenValue only in the panel and supports footer mode snippets', () => {

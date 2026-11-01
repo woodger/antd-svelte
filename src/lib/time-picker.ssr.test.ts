@@ -48,10 +48,11 @@ describe('TimePicker SSR', () => {
 
   it('renders nullable columns without inventing a selected time', () => {
     const body = render(TimePicker, { props: { value: null, defaultOpen: true } }).body;
+    const html = body.replace(/<!--[\s\S]*?-->/g, '');
 
     expect(body.match(/class="ant-picker-time-panel-column"/g)).toHaveLength(3);
     expect(body).not.toContain('ant-picker-time-panel-cell-selected');
-    expect(body).toMatch(/disabled[^>]*><span>ОК/);
+    expect(html).toMatch(/<button\b[^>]*\bdisabled[^>]*>\s*<span>ОК<\/span>/);
   });
 
   it('uses the time locale and explicit display format independently from panel units', () => {
