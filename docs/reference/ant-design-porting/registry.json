@@ -4290,24 +4290,151 @@
       "id": "listy",
       "name": "Listy",
       "category": "data-display",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный полный перенос 6.6.8: самостоятельный Listy с исходной группировкой, raw/virtual ветками, scrollTo и sticky headers; deprecated List остаётся отдельным API.",
       "upstreamPath": "components/listy",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "Listy",
+          "local": [
+            "Listy"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider"
+      ],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/listy",
+          "range": "~1.2.3",
+          "referenceVersion": "1.2.3"
+        },
+        {
+          "name": "@rc-component/virtual-list",
+          "range": "^1.4.0",
+          "referenceVersion": "1.5.1"
+        },
+        {
+          "name": "@rc-component/resize-observer",
+          "range": "^1.1.2",
+          "referenceVersion": "1.1.2"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@rc-component/portal",
+          "range": "^2.0.0",
+          "referenceVersion": "2.0.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "L",
+      "evidence": [
+        "src/lib/Listy.svelte",
+        "src/lib/ListyRaw.svelte",
+        "src/lib/ListyVirtual.svelte",
+        "src/lib/ListyGroupHeader.svelte",
+        "src/lib/ListyScrollbar.svelte",
+        "src/lib/listy.types.ts",
+        "src/lib/listy.engine.ts",
+        "src/lib/listy.model.svelte.ts",
+        "src/lib/listy.dom.ts",
+        "src/lib/listy-gestures.dom.ts",
+        "src/lib/listy.engine.test.ts",
+        "src/lib/vendor/listy.css",
+        "tests/package/listy.ssr.test.ts",
+        "tests/package/ListyFixture.svelte",
+        "tests/browser/listy.spec.ts",
+        "tests/browser/fixtures/ListyFixtures.svelte",
+        "readme.md"
+      ],
       "features": [
         {
-          "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "id": "data-grouping",
+          "title": "Readonly items, стабильные ключи и глобальная группировка",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "evidence": [
+            "src/lib/listy.engine.test.ts",
+            "tests/package/listy.ssr.test.ts",
+            "tests/browser/listy.spec.ts"
+          ],
+          "note": "Обязательный rowKey без fallback; tagged keys с 0/empty/bigint и CSS escape. Группы Map по всему items сохраняют first-seen order и original index; itemRender/group.title — direct generic snippets. Duplicate records не удаляются, occurrence key предотвращает Svelte duplicate-key exception."
+        },
+        {
+          "id": "raw-scroll",
+          "title": "Raw viewport, native scrollIntoView и ref",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/listy.engine.test.ts",
+            "tests/package/listy.ssr.test.ts",
+            "tests/browser/listy.spec.ts"
+          ],
+          "note": "MaxHeight/native overflow, item/group/position/number и align/offset. Sticky scroll margins измеряют header и восстанавливаются; missing/null/undefined no-op. Group target — вся section; при key+groupKey item имеет приоритет. Ref содержит только scrollTo, отдельный nativeElement binding, native UIEvent."
+        },
+        {
+          "id": "virtual-window",
+          "title": "Измеряемая виртуализация и scrollTo lifecycle",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/listy.engine.test.ts",
+            "tests/package/listy.ssr.test.ts",
+            "tests/browser/listy.spec.ts"
+          ],
+          "note": "Оценка fontHeight+padding, offsetHeight+margins, retained cache, source range boundaries/overscan и anchor correction. Без height/при height=0 выводятся все строки; fitting dataset без scrollbar. ScrollTo до 10 выравниваний после измерений, latest request, missing key retries по virtual-list1.5.1 без смены позиции; late data/shrink/reorder/resize. 1.5.1 удовлетворяет ^1.4.0 Listy, выбрана по devDependency Antd и коду npm browser bundle."
+        },
+        {
+          "id": "sticky-headers",
+          "title": "Sticky sections и виртуальные закреплённые заголовки",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/listy.engine.test.ts",
+            "tests/package/listy.ssr.test.ts",
+            "tests/browser/listy.spec.ts"
+          ],
+          "note": "Raw CSS sticky внутри section; virtual clone в root после mount, binary header lookup с tolerance1px, push-out следующим header, включая0/empty keys. Измеренная либо оценочная высота для item top/auto; bottom без header padding. Virtual group target — header row, groupKey имеет приоритет; computed top перекрывает user style."
+        },
+        {
+          "id": "scroll-interaction",
+          "title": "Колесо, касания, selection drag и scrollbar",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/listy.engine.test.ts",
+            "tests/package/listy.ssr.test.ts",
+            "tests/browser/listy.spec.ts"
+          ],
+          "note": "Native passive:false wheel, frame batching, nested handled marker, Shift wheel и source boundary lock50ms; Firefox legacy patch. One-finger touch/инерция14/15, mouse selection autoscroll; scrollbar8px, min thumb20px, track click/drag, RTL и flash/hide3000ms. Listy не предоставляет горизонтальную виртуализацию."
+        },
+        {
+          "id": "semantic-lifecycle",
+          "title": "Config, semantic slots, SSR, focus и темы",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/listy.engine.test.ts",
+            "tests/package/listy.ssr.test.ts",
+            "tests/browser/listy.spec.ts"
+          ],
+          "note": "ConfigProvider.listy class/style и semantic root/item/groupHeader; raw callback props, local style priority. Local virtual ?? config.virtual ?? false; config.virtual пока используется только Listy. Forced virtual relative root, native bindings cleanup, SSR без DOM/timers/observers/clone; native links/controls/focus, dark/compact/RTL/reduced motion. Пустая коллекция не добавляет Empty. Portal clone адаптирован к Svelte root child."
+        },
+        {
+          "id": "advanced-theme",
+          "title": "Полный token/prefix engine и React-specific API",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Произвольные theme/component tokens и генерация CSS для custom prefixCls остаются общими этапами. React nodes/refs/SyntheticEvent адаптированы к snippets/bindings/native UIEvent; development key/scroll warnings не испускаются. V1-ready не означает полного покрытия всего React Ant Design."
         }
       ]
     },

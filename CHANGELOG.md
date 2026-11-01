@@ -9,6 +9,10 @@
 
 ### Added
 
+- Listy: группировка с исходными индексами, sticky headers, измеряемая виртуализация,
+  scrollTo, native wheel/touch/selection drag и scrollbar. Добавлены ConfigProvider.listy/
+  virtual, refs, CSS-рецепт, лицензии и unit/SSR/package/browser проверки; сохранены
+  различия raw/virtual и native focus при перестановке строк.
 - List/ListItem/ListItemMeta: исходная пагинация и server pages, responsive grid,
   Meta/actions/extra, semantic config, loading/empty, native refs и темы/RTL.
   Добавлен ConfigProvider.renderEmpty для List, CSS-рецепт и unit/SSR/package/browser

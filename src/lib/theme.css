@@ -328,6 +328,13 @@
   --ant-form-label-height: var(--ant-control-height);
 }
 
+.ant-listy-css-var {
+  /* Исходный font map задаёт fontSize + 8px, в том числе для compact. */
+  line-height: calc(var(--ant-font-size) + 8px);
+  --ant-listy-item-padding-block: var(--ant-padding-sm);
+  --ant-listy-item-padding-inline: var(--ant-padding);
+}
+
 .ant-list-css-var {
   --ant-list-content-width: 220px;
   --ant-list-item-padding: var(--ant-padding-content-vertical) 0;

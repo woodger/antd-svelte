@@ -143,6 +143,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Cascader / CascaderPanel | Полные пути, multiple/check strategies, поиск, lazy children, колонки и standalone Panel |
 | Transfer | Два списка, controlled targetKeys, выделение/Shift, поиск, oneWay, пагинация и custom lists |
 | List / ListItem / ListItemMeta | Исходная пагинация, grid, Meta/actions/extra, loading, renderEmpty и refs |
+| Listy | Группы, sticky headers, измеряемая виртуализация, scrollTo и native scroll |
 | TextArea | Многострочное значение, native constraints/events/selection, формы, размеры, статусы и RTL |
 | InputNumber | Число/null, черновик ввода, min/max, дробный шаг, precision, кнопки и клавиатура, FormData, reset и FormItem |
 | Slider | Одно число, min/max/step, мышь и касание, клавиатура, завершение изменения, подсказка значения, ориентация, reverse/RTL, FormData, reset и FormItem |
@@ -3388,6 +3389,84 @@ SSR для непрозрачных snippets отмечено отдельно �
 [пакет](./tests/package/list.ssr.test.ts), [браузер](./tests/browser/list.spec.ts)
 и `?fixture=list`. [CSS](./src/lib/vendor/list.css) воспроизводится рецептом list:
 61 правило, две media-области 768/576px, без keyframes; [MIT](./src/lib/vendor/LICENSE.ant-design).
+
+## Listy
+
+Listy переносит Ant Design 6.6.8, @rc-component/listy 1.2.3 и
+@rc-component/virtual-list 1.5.1. Последняя версия удовлетворяет runtime range
+`^1.4.0` Listy и соответствует dev-зависимости закреплённого Ant Design и коду
+его официального browser bundle. React runtime не добавляется в пакет.
+
+```svelte
+<script lang="ts">
+  import { Listy, type ListyRef } from 'antd-svelte';
+  const items = [
+    { id: 'one', team: 'A', name: 'Alpha' },
+    { id: 'two', team: 'B', name: 'Beta' },
+    { id: 'three', team: 'A', name: 'Gamma' }
+  ];
+  let list = $state<ListyRef>();
+</script>
+
+{#snippet title(team: string, members: typeof items)}
+  <strong>{team} ({members.length})</strong>
+{/snippet}
+<Listy {items} rowKey="id" height={240} virtual sticky
+  group={{ key: item => item.team, title }} bind:ref={list}>
+  {#snippet itemRender(item, index)}<a href={`#${item.id}`}>{index}: {item.name}</a>{/snippet}
+</Listy>
+<button onclick={() => list?.scrollTo({ key: 'three', align: 'top' })}>Show Gamma</button>
+```
+
+Точные props, semantic slots и refs описаны в [исходных типах](./src/lib/listy.types.ts).
+Items принимает readonly массив; rowKey обязателен и не подменяется индексом.
+Группы собираются по всему массиву в порядке первого появления ключа, даже когда
+записи группы идут вперемежку. Title получает исходные объекты группы;
+itemRender — исходный индекс записи. Ноль и пустая строка сохраняются в ключах.
+При некорректных duplicate keys записи не удаляются; внутренние occurrence keys
+предотвращают фатальную ошибку Svelte. Для корректной идентичности нужны уникальные keys.
+
+Virtual выбирается как `local ?? ConfigProvider.virtual ?? false`. Без ненулевой
+height виртуальная ветка выводит все строки; height=0 в raw mode схлопывает viewport.
+Виртуальное окно использует исходную оценку высоты, измерения строк с margins,
+overscan и сохранение cache по ключам. Поддержаны переменные высоты, resize,
+замена/сокращение данных, колесо, nested lists, touch momentum, selection drag и
+scrollbar с track click/drag и задержкой скрытия. При смене raw/virtual создаётся
+новая ветка со своей прокруткой и cache, как в React.
+
+Ref содержит только scrollTo. Число и `{ top, left }` задают позицию;
+`{ key }` и `{ groupKey }` поддерживают top/bottom/auto и offset. В raw mode
+используется native scrollIntoView с временными scroll margins; группа означает
+целую section. В virtual mode группа означает строку заголовка, выравнивание
+повторяется после измерений. Sticky offset применяется для top, включая auto,
+который разрешился в top; до измерения заголовка используется оценочная высота.
+Отсутствующий ключ сохраняет позицию; виртуальная ветка повторно ищет его во время
+обновления данных. Без аргумента либо с null raw mode ничего не меняет, virtual
+показывает scrollbar. При одновременно переданных key/groupKey raw mode выбирает
+item, virtual mode — group. Горизонтальная виртуализация не входит в API Listy.
+
+ConfigProvider.listy задаёт class/style и semantic root/item/groupHeader.
+Локальные значения дополняют классы и перекрывают стили; style перекрывает
+styles.root. Callback получает сырые props до defaults/context; generic callbacks
+в metadata имеют тип unknown. Virtual root принудительно сохраняет position:relative,
+а top закреплённого clone перекрывает пользовательский top.
+
+OnScroll (либо native onscroll) получает native UIEvent: currentTarget — raw root
+либо virtual holder. Bind:ref и bind:nativeElement появляются после mount и
+очищаются при unmount. SSR не создаёт timers/observers; sticky clone появляется
+после mount. Нативные ссылки, controls, выделение и focus сохраняются; доступны
+RTL, dark, compact и reduced motion. Компонент не добавляет выбор строк,
+прикладную навигацию или собственное пустое состояние.
+
+Полный token engine, генерация CSS для произвольного prefixCls и React development
+warnings остаются за пределами этого этапа. CSS рассчитан на ant-listy.
+Проверки: [engine](./src/lib/listy.engine.test.ts),
+[публичный пакет/SSR](./tests/package/listy.ssr.test.ts),
+[браузер](./tests/browser/listy.spec.ts), `?fixture=listy`.
+[CSS-рецепт](./tools/ant-design-css-recipes.json) воспроизводит
+[16 правил](./src/lib/vendor/listy.css) без keyframes;
+[MIT Listy](./src/lib/vendor/LICENSE.rc-listy) и
+[MIT virtual-list](./src/lib/vendor/LICENSE.rc-virtual-list) включены в пакет.
 
 ## TreeSelect
 

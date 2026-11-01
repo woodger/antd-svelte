@@ -13,6 +13,7 @@
   import type { TransferConfig } from './transfer.types';
   import type { PaginationComponentConfig } from './pagination.types';
   import type { ListConfig } from './list.types';
+  import type { ListyConfig } from './listy.types';
   import type { RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
@@ -43,6 +44,9 @@
     transfer?: TransferConfig;
     pagination?: PaginationComponentConfig;
     list?: ListConfig;
+    listy?: ListyConfig;
+    /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
+    virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
     renderEmpty?: RenderEmptyHandler;
     rangePicker?: RangePickerConfig;
@@ -80,6 +84,8 @@
     transfer,
     pagination,
     list,
+    listy,
+    virtual,
     renderEmpty,
     rangePicker,
     textArea,
@@ -137,6 +143,12 @@
     },
     get list() {
       return list ?? parent.list;
+    },
+    get listy() {
+      return listy ?? parent.listy;
+    },
+    get virtual() {
+      return virtual ?? parent.virtual;
     },
     get renderEmpty() {
       return renderEmpty ?? parent.renderEmpty;
