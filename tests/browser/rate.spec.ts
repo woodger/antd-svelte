@@ -240,7 +240,7 @@ test(
 
     await page.getByLabel('Compact Rate theme', { exact: true }).check();
 
-    await expect(root).toHaveCSS('font-size', '12.5px');
+    await expect(root).toHaveCSS('font-size', '13.125px');
 
     await page.getByLabel('Dark Rate theme', { exact: true }).check();
 

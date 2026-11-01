@@ -353,7 +353,7 @@ test(
     const avatar = preview(page).locator('.ant-skeleton-avatar');
     const section = preview(page).locator('.ant-skeleton-section');
 
-    await expect(avatar).toHaveCSS('width', '36px');
+    await expect(avatar).toHaveCSS('width', '35px');
     await expect(avatar).toHaveCSS('background-color', 'rgba(255, 255, 255, 0.12)');
     await expect(preview(page)).toHaveCSS('font-size', '12px');
     await expect(preview(page)).toHaveCSS('direction', 'rtl');
