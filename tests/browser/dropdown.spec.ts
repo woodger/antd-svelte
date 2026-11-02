@@ -25,6 +25,24 @@ test.beforeEach(async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Component browser fixtures' })).toBeVisible();
 });
 
+for (const value of ['click', 'manual']) {
+  test(`Dropdown keeps an externally opened ${value} menu visible after pointer leave`, async ({ page }) => {
+    await mode(page, value);
+    await trigger(page).scrollIntoViewIfNeeded();
+    await freeze(page);
+    await page.keyboard.press('F4');
+    await expect(menu(page)).toBeVisible();
+    await command(page, 'Rename').hover();
+    await trigger(page).hover();
+    await page.mouse.move(0, 0);
+    await page.clock.runFor(200);
+
+    await expect(menu(page)).toBeVisible();
+    await expect(status(page, 'open')).toHaveText('true');
+    await expect(status(page, 'changes')).toHaveText('[]');
+  });
+}
+
 test(
   'Dropdown exposes a native menu button, named commands and a separator',
   async ({ page }, testInfo) => {

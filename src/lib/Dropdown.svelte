@@ -301,7 +301,7 @@
 
   function handleLeave() {
     hovered = false;
-    if (!wanted())
+    if (supports('hover') && !wanted())
       request(false, getTooltipDelay(mouseLeaveDelay));
   }
 
@@ -354,7 +354,7 @@
     popupHovered = next;
     if (next)
       cancelPending();
-    else if (!wanted())
+    else if (supports('hover') && !wanted())
       request(false, getTooltipDelay(mouseLeaveDelay));
   }
 

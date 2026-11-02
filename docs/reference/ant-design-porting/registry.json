@@ -1540,7 +1540,18 @@
         "config-provider",
         "space"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/dropdown",
+          "range": "~1.0.3",
+          "referenceVersion": "1.0.3"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.10.1",
+          "referenceVersion": "3.10.1"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
@@ -1586,6 +1597,17 @@
             "tests/browser/space-compact.spec.ts"
           ],
           "note": "Без Compact сохраняется существующее поведение; общий подробный аудит семейства ещё не завершён."
+        },
+        {
+          "id": "trigger-dismissal",
+          "title": "Уход указателя учитывает выбранные trigger actions",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Dropdown.svelte",
+            "tests/browser/dropdown.spec.ts"
+          ],
+          "note": "Как rc-trigger 3.10.1, pointer leave запрашивает закрытие только при наличии hover. Внешне открытое меню с click или пустым массивом trigger сохраняет видимость и не вызывает onOpenChange при уходе указателя; hover задержки и обычные click/keyboard сценарии сохранены."
         }
       ]
     },
