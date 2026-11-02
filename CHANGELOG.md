@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tabs: centered, tabBarGutter и tabBarStyle с исходными logical/vertical отступами,
+  нулевыми и дробными значениями, отдельными header styles и CSS-рецептом.
+  Добавлены 31 эталон официального UMD, SSR/browser-проверки live layout,
+  прокрутки, индикатора, фокуса и сохранения панелей.
 - Tabs: editable-card с onEdit, hideAdd, closable/closeIcon, add/remove icons
   и доступными именами действий. Delete/Backspace/middle mouse сохраняют исходные
   запросы и соседний фокус; items/selection меняет владелец. Добавлены native

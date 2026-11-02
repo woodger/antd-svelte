@@ -2173,7 +2173,7 @@
       "name": "Tabs",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Аудит согласованного native v1 и перенос source editable-card с сохранением существующего выбора, lifecycle панелей и фокуса.",
+      "scopeReason": "Аудит согласованного native v1 и перенос source editable-card, centered/gutter/header style с сохранением существующего выбора, lifecycle панелей и фокуса.",
       "upstreamPath": "components/tabs",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2222,7 +2222,12 @@
         "tests/package/tabs-editable.ssr.test.ts",
         "tests/browser/tabs-editable.spec.ts",
         "tests/browser/fixtures/TabsEditableFixtures.svelte",
-        "tests/browser/fixtures/ant-design-tabs-editable-metrics.json"
+        "tests/browser/fixtures/ant-design-tabs-editable-metrics.json",
+        "src/lib/vendor/tabs-layout.css",
+        "tests/package/tabs-layout.ssr.test.ts",
+        "tests/browser/tabs-layout.spec.ts",
+        "tests/browser/fixtures/TabsLayoutFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tabs-layout-metrics.json"
       ],
       "features": [
         {
@@ -2276,6 +2281,23 @@
           "note": "OnEdit получает native event для add и строковый key для remove; items/selection меняет owner, edit не вызывает onTabClick/onChange. Source getRemovable: disabled/closable=false запрещают, closeIcon=null/false скрывают только при undefined closable; truthy item closeIcon перекрывает removeIcon, falsy removeIcon даёт ×, nullish — CloseOutlined, falsy addIcon — PlusOutlined. Delete/Backspace/middle mouse запрашивают удаление и смещают focus по enabled tabs даже при отказе owner; обычный close не активирует tab. Native sibling buttons без nested controls, action locale labels, passive SVG paths icons-svg 4.6.0, 13 CSS rules из pinned archive. Официальный UMD содержит эталон 25 сочетаний controls и 24 layouts/sizes LTR/RTL. Сохранены keyed panes, drafts/FormData, native form behavior и owner focus; focused add остаётся видимым при добавлении в scroll viewport."
         },
         {
+          "id": "header-layout",
+          "title": "Centered, tabBarGutter и tabBarStyle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tabs.svelte",
+            "src/lib/tabs.types.ts",
+            "src/lib/vendor/tabs-layout.css",
+            "tests/package/tabs-layout.ssr.test.ts",
+            "tests/browser/tabs-layout.spec.ts",
+            "tests/browser/fixtures/TabsLayoutFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tabs-layout-metrics.json",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "Исходное margin:auto центрирует горизонтальный список при свободном месте; vertical centered сохраняет source flex:1 0 auto, растянутый список и заголовки сверху. TabBarGutter задаёт margin-inline-start по горизонтали и margin-top по вертикали для всех headers, кроме первого, и add при непустом items; zero/fractional/negative сохраняются, RTL и mobile placement определяют ось. TabBarStyle — согласованная CSS-строка всей панели заголовков, root style остаётся отдельным. Официальный UMD задаёт 31 эталон метрик для 3 типов, 4 положений, LTR/RTL, defaults, пустого editable списка и custom header style. Native scroll, focus, indicator и keyed panes сохраняются; source overflow menu остаётся отдельным gap."
+        },
+        {
           "id": "extended-api",
           "title": "Полные header/indicator, semantic/config/ref, aliases и motion API",
           "state": "missing",
@@ -2283,7 +2305,7 @@
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет centered/tabBarGutter/tabBarStyle/onTabScroll, indicator/indicatorSize и renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, source medium/tabPosition/destroyInactiveTabPane aliases и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Locale.dropdownAriaLabel не используется до переноса overflow menu."
+          "note": "Нет onTabScroll, indicator/indicatorSize и renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, source medium/tabPosition/destroyInactiveTabPane aliases и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Locale.dropdownAriaLabel не используется до переноса overflow menu."
         }
       ]
     },

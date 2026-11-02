@@ -169,7 +169,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Popconfirm | Подтверждение и отмена, Promise/loading, повтор после ошибки, защита от поздних результатов, snippets, локализация и клавиатура |
 | Dropdown | Плоское меню команд, click/hover, bind:open, disabled/danger, snippets, шесть положений, стрелки/typeahead и возврат фокуса |
 | Menu | Items/группы/подменю, selected/open keys, horizontal/vertical/inline, native links, клавиатура и collapse |
-| Tabs | Типизированные панели, bind:activeKey, line/card, четыре положения, ручная клавиатурная активация, сохранение содержимого и destroyOnHidden |
+| Tabs | Типизированные панели, bind:activeKey, line/card/editable-card, четыре положения, centered/gutter, ручная клавиатурная активация, сохранение содержимого и destroyOnHidden |
 | Collapse | Независимые панели и accordion, bind:activeKey, snippets, extra, header/icon/disabled, сохранение содержимого и destroyOnHidden |
 | Drawer | Модальная выдвижная панель, bind:open, четыре стороны, размеры, snippets, анимация, сохранение содержимого и destroyOnHidden |
 | Alert | Четыре статуса, title/description/icon/action snippets, outlined/filled, banner, закрытие с callbacks, анимацией и доступным фокусом |
@@ -2013,6 +2013,17 @@ Start/end разрешаются относительно RTL. На экране
 ComponentSize: small/middle/large, по умолчанию ConfigProvider.componentSize.
 Тема, compact, RTL и reduced motion применяются через существующие токены.
 
+Centered=true центрирует горизонтальный список заголовков, пока хватает места.
+Как в исходной реализации, вертикальный список растягивается по высоте, а
+заголовки остаются сверху. TabBarGutter
+задаёт отступ в px перед всеми заголовками, кроме первого, и перед кнопкой
+добавления, если список не пуст. Нулевое значение убирает исходный отступ;
+дробные и отрицательные значения сохраняются. По горизонтали используется
+margin-inline-start с учётом RTL, по вертикали — margin-top; при мобильном
+переходе наверх меняется и ось отступа. TabBarStyle принимает CSS-строку для
+всей панели заголовков, включая extra content. Корневой style действует отдельно.
+Например: `<Tabs {items} centered tabBarGutter={12} tabBarStyle="margin-bottom:8px" />`.
+
 TabBarExtraContent задаёт правый слот либо { left, right }: string/number/boolean/
 Snippet. Слоты находятся вне tablist и допускают нативные интерактивные controls;
 они не участвуют в навигации стрелками. Как @rc-component/tabs 1.13.0, falsy extra
@@ -2058,10 +2069,13 @@ DropdownAriaLabel пока не используется: меню перепо�
 
 Фикстура `?fixture=tabs-editable` сверяет truthiness, иконки и размеры с Ant Design
 6.6.8 и @rc-component/tabs 1.13.0. Проверяются callbacks, принятие/отказ владельца,
-фокус, FormData, layout/RTL и сохранение панелей. Галерея `/ant-design#tabs`
+фокус, FormData, layout/RTL и сохранение панелей. Фикстура `?fixture=tabs-layout`
+сравнивает centered/gutter/header style с 31 эталоном официального UMD, включая
+все типы и положения в LTR/RTL, нулевой отступ и пустой editable список.
+Галерея `/ant-design#tabs`
 показывает профиль, настройки, историю Table, destroyOnHidden и Tabs внутри Modal.
 Drag-and-drop, меню more, renderTabBar и настройка indicator ещё не перенесены.
-Остаются также centered/tabBarGutter/tabBarStyle/onTabScroll, source size/placement
+Остаются также onTabScroll, source size/placement
 aliases, полный semantic/config/ref API, component tokens и исходный motion.
 
 ## Collapse
@@ -7320,6 +7334,8 @@ Tabs.svelte и tabs.engine.ts управляют выбором и фокусо�
 воспроизводит их из закреплённого архива; прежний tabs.css сохранён.
 TabsEditIcon использует точные PlusOutlined/CloseOutlined из icons-svg 4.6.0
 под существующей MIT-лицензией; их пути совпадают с официальным UMD Ant Design.
+[vendor/tabs-layout.css](./src/lib/vendor/tabs-layout.css) содержит исходное
+правило centered; рецепт tabs-layout сохраняет селекторы и declaration margin:auto.
 [vendor/collapse.css](./src/lib/vendor/collapse.css) содержит 49 правил Collapse и его
 токены из того же архива. Корневые селекторы ограничены
 :where(.ant-collapse-css-var); React motion и правила ColorPicker исключены.

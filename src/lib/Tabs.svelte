@@ -26,6 +26,9 @@
     removeIcon,
     locale,
     tabPlacement = 'top',
+    centered = false,
+    tabBarGutter,
+    tabBarStyle,
     size,
     destroyOnHidden = false,
     tabBarExtraContent,
@@ -58,6 +61,8 @@
   let vertical = $derived(placement === 'left' || placement === 'right');
   let editable = $derived(type === 'editable-card');
   let showAdd = $derived(editable && hideAdd !== true);
+  let gutterStyle = $derived(tabBarGutter === undefined ? undefined
+    : `${vertical ? 'margin-top' : 'margin-inline-start'}:${tabBarGutter}px`);
   let extraLeft = $derived(
     tabBarExtraContent && typeof tabBarExtraContent === 'object'
       ? tabBarExtraContent.left
@@ -287,6 +292,8 @@
   .ant-tabs > .ant-tabs-nav { min-width: 0; }
   .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap { min-width: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scroll-behavior: auto; }
   .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list { flex: 0 0 auto; min-height: var(--ant-control-height); }
+  /* В исходном centered вертикальный список растягивается, заголовки остаются сверху. */
+  .ant-tabs-centered:is(.ant-tabs-left, .ant-tabs-right) > .ant-tabs-nav .ant-tabs-nav-list { flex-grow: 1; }
   .ant-tabs-left > .ant-tabs-nav, .ant-tabs-right > .ant-tabs-nav { max-width: 45%; }
   .ant-tabs-left > .ant-tabs-nav .ant-tabs-nav-wrap, .ant-tabs-right > .ant-tabs-nav .ant-tabs-nav-wrap { max-height: min(400px, 60dvh); }
   .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-right > .ant-tabs-nav .ant-tabs-tab { white-space: normal; overflow-wrap: anywhere; }
@@ -305,10 +312,11 @@
 {/snippet}
 
 {#snippet defaultRemove()}<TabsEditIcon name="close" />{/snippet}
-{#snippet tabButton(item: TabsItem, editing: boolean)}
+{#snippet tabButton(item: TabsItem, editing: boolean, first: boolean)}
   <button type="button" role="tab" id={itemId(item.key, 'tab')} data-tabs-key={item.key}
     aria-controls={itemId(item.key, 'panel')} aria-selected={selectedKey === item.key}
     disabled={item.disabled} tabindex={tabStop === item.key ? 0 : -1}
+    style={editing || first ? undefined : gutterStyle}
     class={editing ? 'ant-tabs-tab-btn' : [
       'ant-tabs-tab',
       selectedKey === item.key && 'ant-tabs-tab-active',
@@ -329,17 +337,18 @@
     `ant-tabs-${placement}`,
     (type === 'card' || editable) && 'ant-tabs-card',
     editable && 'ant-tabs-editable ant-tabs-editable-card',
+    centered && 'ant-tabs-centered',
     resolvedSize !== 'middle' && `ant-tabs-${resolvedSize}`,
     config.direction === 'rtl' && 'ant-tabs-rtl',
     className
   ]} {style}>
-  <div class="ant-tabs-nav" role="presentation">
+  <div class="ant-tabs-nav" role="presentation" style={tabBarStyle}>
     {#if extraLeft}<div class="ant-tabs-extra-content">{@render value(extraLeft)}</div>{/if}
     <div bind:this={viewport} class="ant-tabs-nav-wrap">
       <div bind:this={list} role="tablist" aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-orientation={vertical ? 'vertical' : 'horizontal'} tabindex={tabStop === undefined ? 0 : undefined} class="ant-tabs-nav-list" data-tabs-editable={editable ? '' : undefined} onkeydown={handleKeydown} onfocusout={handleFocusout}>
-        {#each items as item (item.key)}
+        {#each items as item, index (item.key)}
           {#if editable}
-            <div role="presentation" data-tabs-cell={item.key} class={[
+            <div role="presentation" data-tabs-cell={item.key} style={index ? gutterStyle : undefined} class={[
               'ant-tabs-tab',
               selectedKey === item.key && 'ant-tabs-tab-active',
               item.disabled && 'ant-tabs-tab-disabled',
@@ -347,7 +356,7 @@
               isTabsItemRemovable(item, editable) && 'ant-tabs-tab-with-remove'
             ]} onclick={event => handleCellClick(item, event)}
               onmousedown={event => handleCellMouseDown(item, event)}>
-              {@render tabButton(item, true)}
+              {@render tabButton(item, true, index === 0)}
               {#if isTabsItemRemovable(item, editable)}
                 <button type="button" class="ant-tabs-tab-remove" data-tabs-key={item.key}
                   aria-label={locale?.removeAriaLabel || 'remove'}
@@ -357,10 +366,11 @@
                 </button>
               {/if}
             </div>
-          {:else}{@render tabButton(item, false)}{/if}
+          {:else}{@render tabButton(item, false, index === 0)}{/if}
         {/each}
         {#if showAdd}
           <button type="button" class="ant-tabs-nav-add" aria-label={locale?.addAriaLabel || 'Add tab'}
+            style={items.length ? gutterStyle : undefined}
             onclick={event => onEdit?.(event, 'add')}>
             {#if addIcon}{@render value(addIcon)}{:else}<TabsEditIcon name="plus" />{/if}
           </button>

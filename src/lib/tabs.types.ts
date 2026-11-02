@@ -50,6 +50,15 @@ export interface TabsProps {
   locale?: TabsLocale;
   /** @defaultValue 'top' */
   tabPlacement?: TabsPlacement;
+  /**
+   * Центрирует горизонтальные заголовки; вертикальный список растягивается как в source.
+   * @defaultValue false
+   */
+  centered?: boolean;
+  /** Отступ в px перед каждым заголовком, кроме первого, и кнопкой добавления. */
+  tabBarGutter?: number;
+  /** CSS-строка для панели заголовков; style по-прежнему относится к корню Tabs. */
+  tabBarStyle?: string;
   size?: ComponentSize;
   /** @defaultValue false */
   destroyOnHidden?: boolean;
