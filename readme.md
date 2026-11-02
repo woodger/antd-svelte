@@ -2026,6 +2026,14 @@ ComponentSize: small/middle/large и исходный medium, эквивален
 приоритет над размером провайдера.
 Тема, compact, RTL и reduced motion применяются через существующие токены.
 
+Source-тема применяет `theme.components.Tabs`: 26 исходных defaults, aliases и
+component algorithms. Высоты карточек участвуют в вычислении padding до наложения
+явных overrides; zero и undefined сохраняют исходное поведение. More popup наследует
+тот же scope, включая CSS-variable prefix и hash. Стандартные native-темы сохраняют
+прежнее оформление; source-тема допускает шапку ниже native минимума 32px.
+Фикстура `?fixture=tabs-theme` сверяет 15 тем, 10 вариантов в LTR/RTL и popup
+с официальным UMD; смена темы сохраняет DOM, черновики, выделение и фокус.
+
 `indicator={{ size: 12.5, align: 'center' }}` задаёт длину и выравнивание линии.
 Size также принимает чистую функцию `(origin) => origin - 20`: origin — полная
 ширина горизонтального или высота вертикального заголовка с дробной точностью.
@@ -2167,7 +2175,7 @@ keyboard, control/owner callbacks, popupRender, portal, вложенные по�
 Здесь же проверяются сохранение DOM, focus, More, прокрутки и cleanup кадров/listeners.
 Drag-and-drop и renderTabBar ещё не перенесены.
 Остаются также полный semantic/config/ref API,
-component tokens и исходный motion; приоритет уничтожения панелей сохраняет native v1.
+исходный motion; приоритет уничтожения панелей сохраняет native v1.
 Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,
 placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и motion/prefix.
 

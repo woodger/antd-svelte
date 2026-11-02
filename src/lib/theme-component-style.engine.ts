@@ -10,6 +10,7 @@ import { prepareSelectTokens } from './theme-select-tokens.engine';
 import { prepareTreeSelectTokens } from './theme-tree-tokens.engine';
 import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
 import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.engine';
+import { prepareTabsTokens } from './theme-tabs-tokens.engine';
 import {
   prepareTooltipTokens,
   preparePopoverTokens,
@@ -23,9 +24,10 @@ import type { GlobalToken } from './theme-component-token.types';
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
-  | 'Steps' | 'Timeline' | 'Pagination';
+  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs';
 
 const factories = {
+  Tabs: prepareTabsTokens,
   Button: prepareButtonTokens,
   Input: prepareInputTokens,
   InputNumber: prepareInputNumberTokens,
@@ -122,7 +124,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Breadcrumb: [],
   Steps: [],
   Timeline: [],
-  Pagination: []
+  Pagination: [],
+  Tabs: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

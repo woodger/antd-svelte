@@ -9,6 +9,10 @@
 
 ### Added
 
+- Theme Tabs: исходные defaults/aliases, card height → padding, component algorithms,
+  CSS-variable prefix/hash и наследование More popup. Добавлены UMD conformance,
+  SSR/browser-проверки 15 тем, 10 вариантов, LTR/RTL, zero/undefined и обновлений
+  без потери DOM, drafts, focus и selection. Native-only темы сохраняются.
 - Tabs: deprecated destroyInactiveTabPane у корня и items с приоритетом modern
   имени на том же уровне. Сохранены native item-before-root, forceRender,
   lazy lifecycle, local state, FormData и focus repair; добавлены 12 UMD-сценариев

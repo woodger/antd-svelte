@@ -2271,7 +2271,18 @@
         "tests/browser/tabs-destroy.spec.ts",
         "tests/browser/fixtures/TabsDestroyFixtures.svelte",
         "tests/browser/fixtures/ant-design-tabs-destroy-reference.json",
-        "tests/package/tabs-destroy.ssr.test.ts"
+        "tests/package/tabs-destroy.ssr.test.ts",
+        "src/lib/theme-tabs-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-tabs-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-tabs-tokens-reference.json",
+        "tests/browser/tabs-theme.spec.ts",
+        "tests/browser/fixtures/TabsThemeFixtures.svelte",
+        "tests/browser/fixtures/tabs-theme-presets.ts",
+        "tests/browser/fixtures/ant-design-tabs-theme-metrics.json",
+        "tests/package/TabsThemeFixture.svelte",
+        "tests/package/tabs-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -2421,6 +2432,26 @@
           "note": "Добавлен deprecated destroyInactiveTabPane у корня и items; современное destroyOnHidden ?? legacy задаёт приоритет на каждом уровне, включая false. Сохраняется native v1 item-before-root: item.destroyOnHidden ?? item.destroyInactiveTabPane ?? root.destroyOnHidden ?? root.destroyInactiveTabPane ?? false. У rc-tabs 1.13.0 явно заданное общее значение перекрывает item, поэтому полный source приоритет не заявлен. Двенадцать UMD-сценариев фиксируют десять совпадений и два сохранённых отличия. ForceRender сохраняет содержимое, отключение флага после уничтожения не монтирует панель до визита; state, native FormData и owned focus repair сохраняются."
         },
         {
+          "id": "component-theme",
+          "title": "Source component tokens, CSS-variable prefix/hash и More scope",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-tabs-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-tabs-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-tabs-tokens-reference.json",
+            "tests/browser/tabs-theme.spec.ts",
+            "tests/browser/fixtures/TabsThemeFixtures.svelte",
+            "tests/browser/fixtures/tabs-theme-presets.ts",
+            "tests/browser/fixtures/ant-design-tabs-theme-metrics.json",
+            "tests/package/TabsThemeFixture.svelte",
+            "tests/package/tabs-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Перенесён prepareComponentToken Tabs 6.6.8: 26 defaults, custom heights перед padding, aliases и component algorithms. Zero/undefined сохраняются до CSS, deprecated horizontalItemMargin/RTL регистрируются без влияния на source layout. Root получает собственный scope/prefix/hash и user style после defaults; More копирует variables из origin, сбрасывает vendor defaults и сохраняет user overlay CSS. Source scope снимает native минимум высоты 32px для zero/undefined. Данные официального UMD охватывают 15 тем, 10 вариантов, LTR/RTL и popup; runtime updates сохраняют DOM, focus, selection и drafts. Native-only темы сохраняют прежние метрики и цвета. Semantic/config/prefixCls и исходный motion остаются отдельными gaps."
+        },
+        {
           "id": "extended-api",
           "title": "RenderTabBar, полный semantic/config/ref и motion API",
           "state": "missing",
@@ -2428,7 +2459,7 @@
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся."
+          "note": "Нет renderTabBar, полного semantic/config, prefixCls/native root attributes/ref, animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся."
         }
       ]
     },
@@ -8470,7 +8501,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; остальные families остаются в работе."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs получил исходные component tokens и CSS consumption; остальные families остаются в работе."
         },
         {
           "id": "static-design-tokens",

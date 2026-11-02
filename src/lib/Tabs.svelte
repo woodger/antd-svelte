@@ -4,6 +4,7 @@
   import TabsEditIcon from './TabsEditIcon.svelte';
   import TabsOverflow from './TabsOverflow.svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { connectTabsNav, connectTabsScroll, revealTab } from './tabs.dom';
   import { getTabsIndicatorStyle, isTabsIndicatorStyleEqual } from './tabs-indicator.engine';
   import type { TabsIndicatorOffset, TabsIndicatorStyle } from './tabs-indicator.engine';
@@ -53,6 +54,7 @@
   }: TabsProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Tabs');
   const generatedId = $props.id();
   const initialDefault = untrack(() => defaultActiveKey);
   let root = $state<HTMLDivElement>();
@@ -368,6 +370,8 @@
   /* Operations не наследует inline gutter скрытого inner Add; исходный card gutter остаётся. */
   .ant-tabs > .ant-tabs-nav :global(.ant-tabs-add-in-operations) { margin-block: 0 !important; margin-right: 0 !important; margin-left: var(--ant-tabs-card-gutter) !important; }
   .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list { flex: 0 0 auto; min-height: var(--ant-control-height); }
+  /* Source tokens могут задавать шапку ниже native минимума, включая zero/undefined. */
+  .ant-tabs.ant-tabs-source-theme > .ant-tabs-nav .ant-tabs-nav-list { min-height: 0; }
   /* В исходном centered вертикальный список растягивается, заголовки остаются сверху. */
   .ant-tabs-centered:is(.ant-tabs-left, .ant-tabs-right) > .ant-tabs-nav .ant-tabs-nav-list { flex-grow: 1; }
   .ant-tabs-left > .ant-tabs-nav, .ant-tabs-right > .ant-tabs-nav { max-width: 45%; }
@@ -410,6 +414,8 @@
 
 <div bind:this={root} id={rootId} dir={config.direction} class={[
     'ant-tabs ant-tabs-css-var',
+    componentTheme.className,
+    componentTheme.className && 'ant-tabs-source-theme',
     `ant-tabs-${placement}`,
     (type === 'card' || editable) && 'ant-tabs-card',
     editable && 'ant-tabs-editable ant-tabs-editable-card',
@@ -417,7 +423,7 @@
     (resolvedSize === 'small' || resolvedSize === 'large') && `ant-tabs-${resolvedSize}`,
     config.direction === 'rtl' && 'ant-tabs-rtl',
     className
-  ]} {style}>
+  ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
   <div class="ant-tabs-nav" role="presentation" style={tabBarStyle}>
     {#if extraLeft}<div class="ant-tabs-extra-content">{@render value(extraLeft)}</div>{/if}
     <div bind:this={viewport} class="ant-tabs-nav-wrap">
@@ -456,6 +462,7 @@
       </div>
     </div>
     <TabsOverflow bind:nativeElement={operations} {rootId} {editable} {locale} more={resolvedMore} {moreIcon}
+      themeClassName={componentTheme.className} themeStyle={componentTheme.inheritedStyle}
       {removeIcon} {popupClassName} {getPopupContainer} {tabBarGutter}
       items={items.filter(item => hiddenKeys.includes(item.key))}
       panelId={key => itemId(key, 'panel')} onSelect={activate}

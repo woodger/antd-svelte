@@ -28,6 +28,8 @@
     popupClassName,
     getPopupContainer,
     tabBarGutter,
+    themeClassName,
+    themeStyle,
     panelId,
     onSelect,
     onRemove,
@@ -44,6 +46,8 @@
     popupClassName?: string;
     getPopupContainer?: (trigger: HTMLElement) => HTMLElement;
     tabBarGutter?: number;
+    themeClassName?: string;
+    themeStyle?: string;
     panelId: (key: string) => string;
     onSelect: (key: string, event: MouseEvent) => void;
     onRemove: (item: TabsItem, event: MouseEvent) => void;
@@ -127,12 +131,18 @@
     const origin = nativeElement;
     const container = containerGetter;
     const cssText = overlayStyle;
+    const inherited = themeStyle;
     if (!surface || !source || !origin || !rendered) return;
 
     return untrack(() => {
       const css = surface.ownerDocument.createElement('span').style;
       css.cssText = cssText ?? '';
       const names = Array.from(css);
+      const inheritedCSS = surface.ownerDocument.createElement('span').style;
+      inheritedCSS.cssText = inherited ?? '';
+      const inheritedNames = Array.from(inheritedCSS);
+      for (const name of inheritedNames)
+        surface.style.setProperty(name, inheritedCSS.getPropertyValue(name));
       const marker = surface.ownerDocument.createComment('tabs-popup');
       surface.before(marker);
       const disconnect = connectPopupPortal(surface, {
@@ -149,6 +159,7 @@
 
       return () => {
         for (const name of names) surface.style.removeProperty(name);
+        for (const name of inheritedNames) surface.style.removeProperty(name);
         disconnect();
         marker.remove();
       };
@@ -409,10 +420,11 @@
     data-tabs-popup-owner={rootId}
     dir={config.direction} class={[
       'ant-tabs-dropdown ant-tabs-css-var',
+      themeClassName,
       `ant-tabs-dropdown-placement-${shown ? actualSide : side}${align === 'left' ? 'Left' : align === 'right' ? 'Right' : ''}`,
       config.direction === 'rtl' && 'ant-tabs-dropdown-rtl',
       more && Object.hasOwn(more, 'overlayClassName') ? more.overlayClassName : popupClassName
-    ]} style={untrack(() => more?.overlayStyle)}
+    ]} style={untrack(() => [themeStyle, more?.overlayStyle].filter(Boolean).join(';') || undefined)}
     onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
     onclick={event => more?.onOverlayClick?.(event)}>
     {#if rendered && more?.popupRender}

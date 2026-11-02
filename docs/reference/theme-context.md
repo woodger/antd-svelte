@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline и Pagination получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination и Tabs получают собственные
 defaults и aliases.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
@@ -315,6 +315,27 @@ scope, wireframe и LTR/RTL. Hover страниц/active/prev/disabled и focus 
 changer на XS сохраняются; полный Form variant и произвольный prefixCls остаются
 в работе.
 
+## Токены Tabs
+
+Tabs подготавливает 26 defaults из глобальных aliases и `components.Tabs`.
+Переопределённые cardHeight/SM/LG участвуют в расчёте padding до наложения
+явных component values. Нулевые heights используют исходный fallback при расчёте
+padding, но сами нули сохраняются в CSS. Undefined наследуется и не возвращает
+vendor defaults. HorizontalItemMargin/RTL регистрируются, но закреплённый CSS
+их не использует; horizontalItemGutter продолжает определять отступы.
+
+Root получает собственные component declarations, CSS-variable prefix и hash.
+More popup сбрасывает vendor defaults и копирует вычисленные variables своего
+origin; user overlay styles сохраняют приоритет. Source-тема снимает прежний
+native минимум 32px у списка заголовков: zero/undefined могут давать более низкую
+шапку, как в Ant Design. Native-only темы сохраняют прежние цвета и размеры.
+
+Официальный UMD задаёт declarations для 15 тем, 300 наборов метрик для десяти
+вариантов в LTR/RTL и 30 наборов popup metrics. Проверяются aliases, algorithms,
+padding/height, zero/undefined, scope reset и style priority; live updates сохраняют
+DOM, drafts, selection, focus и открытое содержимое More. Полный semantic/config,
+произвольный prefixCls и исходный motion остаются отдельными задачами.
+
 ## Токены Menu
 
 Menu подготавливает 79 defaults, включая устаревшие имена, из глобальных tokens
@@ -508,6 +529,11 @@ zeroRuntime наследуется; опубликованные стили ко
   [браузерные проверки](../../tests/browser/pagination-theme.spec.ts),
   маршрут `?fixture=pagination-theme`. Проверяются также style priority,
   нативные кнопки, сохранение drafts/focus и callback order size changer.
+
+- [Эталон Tabs](../../src/lib/theme-tabs-tokens-reference.test.ts),
+  [computed metrics](../../tests/browser/fixtures/ant-design-tabs-theme-metrics.json),
+  [SSR](../../tests/package/tabs-theme.ssr.test.ts) и
+  [браузерные проверки](../../tests/browser/tabs-theme.spec.ts), маршрут `?fixture=tabs-theme`.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),
