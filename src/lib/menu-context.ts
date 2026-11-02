@@ -3,6 +3,11 @@ import type { MenuEntry } from './menu.engine';
 import type { MenuMode, MenuTheme } from './menu.types';
 
 export interface MenuContext {
+  readonly componentTheme: {
+    readonly className: string | undefined;
+    readonly style: string | undefined;
+    readonly inheritedStyle: string | undefined;
+  };
   readonly mode: MenuMode;
   readonly theme: MenuTheme;
   readonly collapsed: boolean;

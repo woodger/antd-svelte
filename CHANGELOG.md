@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme Menu: исходные defaults, aliases и deprecated mapping, отдельные
+  algorithms, CSS prefix и hash; размеры и light/dark оформление пунктов,
+  inline-списков и popup. Добавлены UMD conformance, SSR и browser-проверки
+  метрик, style priority, RTL, обновлений темы с сохранением DOM, фокуса,
+  selected/open keys и позиции панели. Native-only темы сохранены.
 - Theme Anchor: исходные component defaults и aliases для обычных/вложенных
   ссылок, source compact padding, отдельные algorithms, hash и CSS prefix.
   Оформление ссылок учитывает tokens обычного, hover/active и focus состояний.

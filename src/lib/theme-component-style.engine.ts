@@ -9,6 +9,7 @@ import { prepareAvatarTokens, prepareBadgeTokens } from './theme-display-tokens.
 import { prepareSelectTokens } from './theme-select-tokens.engine';
 import { prepareTreeSelectTokens } from './theme-tree-tokens.engine';
 import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
+import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.engine';
 import {
   prepareTooltipTokens,
   preparePopoverTokens,
@@ -20,7 +21,7 @@ import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
-  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor';
+  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -41,7 +42,8 @@ const factories = {
   Anchor: (token: GlobalToken) => ({
     linkPaddingBlock: token.paddingXXS,
     linkPaddingInlineStart: token.padding
-  })
+  }),
+  Menu: prepareMenuTokens
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
@@ -59,7 +61,14 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Select: ['optionLineHeight', 'optionSelectedFontWeight'],
   TreeSelect: [],
   Cascader: ['optionSelectedFontWeight'],
-  Anchor: []
+  Anchor: [],
+  Menu: ['groupTitleLineHeight']
+};
+const deprecatedTokens: Partial<Record<
+  StyledComponent, readonly (readonly [string, string])[]
+>> = {
+  Popover: [['width', 'titleMinWidth'], ['minWidth', 'titleMinWidth']],
+  Menu: menuDeprecatedTokens
 };
 const inputMetrics = [
   'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',
@@ -86,11 +95,9 @@ function resolveComponentVariables(
   const custom = { ...token[component] } as Record<string, unknown>;
   const defaults = factories[component]({ ...token, ...custom });
 
-  if (component === 'Popover') {
-    for (const old of ['width', 'minWidth']) {
-      // В исходном deprecated mapping учитываются truthy aliases, затем сохраняется явный 0.
-      if (custom[old] || custom.titleMinWidth) custom.titleMinWidth ??= custom[old];
-    }
+  for (const [old, current] of deprecatedTokens[component] ?? []) {
+    // Defaults рассчитаны до mapping; truthy alias не заменяет явно переданный 0.
+    if (custom[old] || custom[current]) custom[current] ??= custom[old];
   }
 
   const merged: Record<string, unknown> = { ...defaults, ...custom };
@@ -135,6 +142,12 @@ export function componentThemeStyle(component: StyledComponent, token: GlobalTok
   }
 
   return serializeThemeVariables(variables, prefix);
+}
+
+/** Вложенный CSS-корень сбрасывает vendor defaults и наследует переменные своего control. */
+export function inheritedComponentThemeStyle(component: StyledComponent, token: GlobalToken) {
+  const { defaultVariables } = resolveComponentVariables(component, token);
+  return serializeThemeVariables(Object.fromEntries(defaultVariables.map(name => [name, 'inherit'])));
 }
 
 /** Native compact использует исходные метрики controls, сохраняя прежние цвета и остальные стили. */

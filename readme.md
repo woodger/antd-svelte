@@ -1782,7 +1782,8 @@ InlineIndent по умолчанию 24 px. InlineCollapsed переводит i
 подсказка title сохраняют текст. Полный Tooltip API для collapsed items пока отсутствует.
 
 Закрытые подменю монтируются при первом открытии; forceSubMenuRender монтирует
-их заранее. Inline скрывает сохранённый DOM через hidden, popup использует native
+их заранее, сохраняя закрытые popup скрытыми в том числе в horizontal mode.
+Inline скрывает сохранённый DOM через hidden, popup использует native
 popover и общий механизм позиционирования. Боковое подменю выравнивается по верху
 заголовка, horizontal popup — по нижнему левому краю, в RTL по правому; поверхность
 переворачивается/сдвигается в пределах viewport. Outside click закрывает её;
@@ -1803,13 +1804,22 @@ upstream. Ref.focus(options) предпочитает ссылку в пункт
 
 Theme='light' по умолчанию независимо от алгоритма страницы; theme='dark' задаёт
 тёмную палитру Menu с фоном #001529. Глобальные primary/compact/RTL наследуются.
+При source-настройках темы `components.Menu` получает исходные defaults и aliases:
+размеры пунктов/иконок/групп, отступы, active bar и light/dark цвета. Отдельные
+component algorithms, CSS prefix и hash поддержаны. Устаревшие имена токенов
+сопоставляются после расчёта defaults, как upstream; явно переданные нули сохраняются.
+Вложенные inline-списки наследуют переменные корневого Menu, popup получает
+собственный scope. Его переменные обновляются без потери позиции и фокуса.
+Plain style имеет приоритет на корневом меню; popup использует component tokens,
+как отдельная поверхность upstream. Native-only темы сохраняют прежнее оформление.
+Source compact использует itemHeight=35px и collapsedWidth=70px.
 Как Ant wrapper, Menu учитывает только свой disabled и disabled пунктов:
 Form.disabled и ConfigProvider.componentDisabled не отключают навигацию.
 Галерея — `/ant-design#menu`, изолированная фикстура — `?fixture=menu`.
 
 Первый этап не включает responsive horizontal overflow/overflowedIndicator,
 исходные popup/collapse motion, controlled activeKey/defaultActiveFirst,
-component config/tokens, semantic classNames/styles, prefixCls, render hooks,
+component config вне темы, semantic classNames/styles, prefixCls, render hooks,
 getPopupContainer/placements/offset и overrides expandIcon/itemIcon. Legacy
 Menu.Item/SubMenu/ItemGroup/Divider children wrappers отсутствуют; данные задаются
 items. Standalone Menu пока не расширяет существующий контракт Dropdown.

@@ -33,6 +33,25 @@ test.beforeEach(async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Component browser fixtures' })).toBeVisible();
 });
 
+test('Tooltip hides a zero-size trigger and reappears when its size returns', async ({ page }) => {
+  const button = trigger(page);
+  await button.focus();
+  await expect(tooltip(page)).toBeVisible();
+  const style = await button.getAttribute('style');
+
+  await button.evaluate(element => {
+    element.style.cssText += ';width:0;height:0;min-width:0;min-height:0;padding:0;border:0;overflow:hidden';
+  });
+
+  await expect(tooltip(page)).toBeHidden();
+  await button.evaluate((element, previous) => {
+    element.style.cssText = previous ?? '';
+  }, style);
+
+  await expect(tooltip(page)).toBeVisible();
+  await expect(button).toBeFocused();
+});
+
 test(
   'Tooltip respects enter and leave delays, remains hoverable and keeps focus on its trigger',
   async ({ page }) => {

@@ -15,6 +15,7 @@
   import { provideMenu } from './menu-context';
   import { useConfig } from './config-context';
   import { useSider } from './layout-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import MenuList from './MenuList.svelte';
 
   let {
@@ -48,6 +49,7 @@
   }: MenuProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Menu');
   const sider = useSider();
   const generated = $props.id();
   let model = $derived(buildMenuEntries(items));
@@ -225,6 +227,7 @@
   }
 
   provideMenu({
+    componentTheme,
     get mode() {
       return actualMode;
     },
@@ -303,8 +306,11 @@
 
 <ul {...attributes} bind:this={nativeElement} role="menu" tabindex={tabindex} data-menu-list="true" dir={config.direction}
   aria-disabled={disabled || undefined} aria-orientation={actualMode === 'horizontal' ? 'horizontal' : 'vertical'}
-  {style} class={[
+  style={[componentTheme.style, style].filter(Boolean).join(';') || undefined} class={[
       'ant-menu ant-menu-css-var ant-menu-root',
+      componentTheme.className,
+      componentTheme.className && 'ant-menu-source-theme',
+      componentTheme.className && actualMode === 'horizontal' && 'ant-menu-overflow',
       `ant-menu-${actualMode}`,
       `ant-menu-${theme}`,
       collapsed && 'ant-menu-inline-collapsed',

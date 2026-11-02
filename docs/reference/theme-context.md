@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor также получает собственные defaults и aliases.
+Anchor и Menu также получают собственные defaults и aliases.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -241,6 +241,29 @@ linkFocusDecoration для обычного, hover/active и focus состоя�
 подчёркивания нет. Native-only оформление сохраняется. Обновления сохраняют DOM ссылок,
 фокус, scroll/history и callbacks. Измерение indicator и отслеживание scroll
 сохраняют исходный lifecycle.
+
+## Токены Menu
+
+Menu подготавливает 79 defaults, включая устаревшие имена, из глобальных tokens
+и `components.Menu`. Aliases и отдельный algorithm задают размеры, отступы,
+шрифты, active bar, группы и light/dark палитру. `groupTitleLineHeight` и
+`zIndexPopup` безразмерны. CSS-строки передаются без нормализации, нули сохраняются,
+а undefined не возвращает vendor defaults. Source compact использует
+itemHeight=35px и collapsedWidth=70px.
+
+Deprecated mapping выполняется после подготовки defaults и перед финальными
+overrides, как cssinjs-utils 2.1.2. Например, старый colorActiveBarWidth меняет
+activeBarWidth, но не пересчитывает уже подготовленный itemWidth. Текущее явно
+заданное значение 0 имеет приоритет над устаревшим именем.
+
+Корневой Menu и popup получают собственный key/hash scope; внутренние списки
+наследуют переменные своего меню вместо статических vendor defaults. Plain root
+style сохраняет приоритет во вложенных inline-списках; popup получает собственные
+component tokens, как отдельная поверхность upstream. Native button заголовка
+сохраняет ширину исходного block div, включая fallback некорректного CSS-размера.
+Source popup использует paddingXS как промежуток до заголовка и отдельный
+borderRadiusLG. Обновление цвета не заменяет DOM и не перезаписывает left/top
+controller, фокус, selected/open keys или callbacks. Native-only темы сохраняются.
 
 ## Токены всплывающих панелей
 

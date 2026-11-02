@@ -97,8 +97,8 @@
           if (context.active === entry.key)
             context.activate(null);
         }}>
-      {#if item.icon}<span class="ant-menu-item-icon">{@render item.icon()}</span>{/if}
-      <span class={[
+      <!-- Source icon/label идут подряд; native-тема сохраняет межэлементный пробел. -->
+      {#if item.icon}<span class="ant-menu-item-icon">{@render item.icon()}</span>{#if !context.componentTheme.className}{' '}{/if}{/if}<span class={[
           'ant-menu-title-content',
           item.extra !== undefined && 'ant-menu-title-content-with-extra'
         ]}>

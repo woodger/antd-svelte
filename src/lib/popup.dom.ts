@@ -14,6 +14,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   align?: 'left' | 'right' | 'top' | 'bottom';
   matchAnchorWidth?: boolean;
   gap?: number | (() => number | undefined);
+  allowZeroSize?: boolean | (() => boolean);
   getPosition?: (anchor: DOMRect, popup: DOMRect, viewport: TooltipRect) => TooltipPosition;
   onVisibilityChange?: (visible: boolean) => void;
 }): () => void {
@@ -50,14 +51,19 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       height: visual?.height ?? view.innerHeight
     };
     const modal = document.querySelector('dialog:modal');
+    const zeroAllowed = typeof options.allowZeroSize === 'function'
+      ? options.allowZeroSize() : options.allowZeroSize;
+    const horizontalVisible = zeroAllowed && rect.width === 0
+      ? rect.left >= viewport.x && rect.left <= viewport.x + viewport.width
+      : rect.right > viewport.x && rect.left < viewport.x + viewport.width;
+    const verticalVisible = zeroAllowed && rect.height === 0
+      ? rect.top >= viewport.y && rect.top <= viewport.y + viewport.height
+      : rect.bottom > viewport.y && rect.top < viewport.y + viewport.height;
     const visible = anchor.isConnected
       && anchor.getClientRects().length
-      && rect.width
-      && rect.height
-      && rect.right > viewport.x
-      && rect.left < viewport.x + viewport.width
-      && rect.bottom > viewport.y
-      && rect.top < viewport.y + viewport.height
+      && (zeroAllowed || rect.width && rect.height)
+      && horizontalVisible
+      && verticalVisible
       && (!modal || modal.contains(anchor));
 
     if (!visible) {

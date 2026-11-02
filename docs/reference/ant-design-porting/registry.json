@@ -1614,6 +1614,16 @@
           "name": "@rc-component/menu",
           "range": "~1.5.0",
           "referenceVersion": "1.5.0"
+        },
+        {
+          "name": "@ant-design/fast-color",
+          "range": "^3.0.1",
+          "referenceVersion": "3.0.1"
+        },
+        {
+          "name": "@ant-design/cssinjs-utils",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
         }
       ],
       "priority": "p1",
@@ -1626,7 +1636,16 @@
         "integration:menu",
         "src/lib/vendor/menu-theme-scope.css",
         "tools/ant-design-css-recipes.json",
-        "tools/ant-design-css.test.mjs"
+        "tools/ant-design-css.test.mjs",
+        "src/lib/theme-menu-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-menu-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-menu-tokens-reference.json",
+        "tests/package/menu-theme.ssr.test.ts",
+        "tests/browser/menu-theme.spec.ts",
+        "tests/browser/fixtures/MenuThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-menu-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -1667,6 +1686,24 @@
           "note": "Стрелки по режиму/уровню, Home/End, Enter, возврат Escape к родителю popup; disabled пропускается. Заголовки — native button с role=menuitem, Space не раскрывает их, как upstream. Focus предпочитает a[href]; nativeElement/focus/findItem. Light/dark menu theme независимо от алгоритма страницы, primary/compact/RTL, 201 CSS-правило. Menu не наследует Form.disabled/ConfigProvider.componentDisabled, как Ant wrapper."
         },
         {
+          "id": "source-theme-tokens",
+          "title": "Source Menu defaults/aliases, deprecated mapping и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-menu-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-menu-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-menu-tokens-reference.json",
+            "tests/package/menu-theme.ssr.test.ts",
+            "tests/browser/menu-theme.spec.ts",
+            "tests/browser/fixtures/MenuThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-menu-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные 79 defaults и 23 deprecated mapping; defaults рассчитываются до mapping, финальные overrides и явно заданные нули сохраняют приоритет. Размеры/отступы/active bar, шрифты и light/dark палитра, component algorithms, custom CSS prefix, hash, zero/undefined и CSS lengths. Scoped declarations и computed metrics для 20 настроек: inline/vertical/horizontal/collapsed, пункты/иконки/заголовки/стрелки, вложенные списки, группы/разделители и light/dark popup. Внутренние CSS roots наследуют Menu variables вместо vendor defaults; popup получает собственный scope и paddingXS как промежуток до заголовка. SSR и смена темы сохраняют DOM/focus, selected/open keys, callbacks и controller left/top; plain root overrides достигают inline children, popup использует component tokens. Закрытые forceSubMenuRender popup остаются скрытыми в horizontal mode. Native-only темы сохранены; остальные advanced API остаются в работе."
+        },
+        {
           "id": "overflow-motion",
           "title": "Адаптивное horizontal overflow и исходные popup/inline motion",
           "state": "missing",
@@ -1676,11 +1713,11 @@
         },
         {
           "id": "extended-api",
-          "title": "Полный semantic/config/tokens, render hooks, tooltip и legacy children API",
+          "title": "Полный semantic/config, render hooks, tooltip и legacy children API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет prefixCls/component config/token engine, semantic classNames/styles, popupRender/getPopupContainer/placements/offset, expandIcon/itemIcon overrides, controlled activeKey/defaultActiveFirst, Menu.Item/SubMenu/ItemGroup/Divider children wrappers и полного Tooltip API collapsed items. Standalone Menu не меняет существующий Dropdown menu contract; интеграция остаётся отдельным этапом."
+          "note": "Нет prefixCls/component config вне темы, semantic classNames/styles, popupRender/getPopupContainer/placements/offset, expandIcon/itemIcon overrides, controlled activeKey/defaultActiveFirst, Menu.Item/SubMenu/ItemGroup/Divider children wrappers и полного Tooltip API collapsed items. Standalone Menu не меняет существующий Dropdown menu contract; интеграция остаётся отдельным этапом."
         }
       ]
     },
@@ -8276,6 +8313,24 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные linkPaddingBlock=paddingXXS и linkPaddingInlineStart=padding, финальные overrides, component algorithms/aliases, zero/undefined/negative и custom prefix. Первый horizontal item сохраняет нулевой inline padding, nested block padding зависит от paddingXXS/2 независимо от linkPaddingBlock, title margin от fontSize/14*3. Source compact inline padding=8px; native-only compact сохраняет прежние 16px. Source linkDecoration/linkHoverDecoration/linkFocusDecoration применяются к обычному, hover/active и focus состояниям; native-only стили сохранены. Scoped declarations и computed metrics horizontal/vertical/nested links, активных titles, границ, ink и link decorations сверяются с официальным UMD для 17 настроек. SSR scope внутри обычного и Affix root, style priority, DOM/focus, scroll/history/callbacks и cleanup сохраняются. Lifecycle измерения indicator не меняется; остальные config/prefixCls API остаются в работе."
+        },
+        {
+          "id": "menu-theme-tokens",
+          "title": "Source Menu defaults/aliases, deprecated mapping и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-menu-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-menu-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-menu-tokens-reference.json",
+            "tests/package/menu-theme.ssr.test.ts",
+            "tests/browser/menu-theme.spec.ts",
+            "tests/browser/fixtures/MenuThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-menu-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные 79 defaults и 23 deprecated mapping; defaults рассчитываются до mapping, финальные overrides и явно заданные нули сохраняют приоритет. Размеры/отступы/active bar, шрифты и light/dark палитра, component algorithms, custom CSS prefix, hash, zero/undefined и CSS lengths. Scoped declarations и computed metrics для 20 настроек: inline/vertical/horizontal/collapsed, пункты/иконки/заголовки/стрелки, вложенные списки, группы/разделители и light/dark popup. Внутренние CSS roots наследуют Menu variables вместо vendor defaults; popup получает собственный scope и paddingXS как промежуток до заголовка. SSR и смена темы сохраняют DOM/focus, selected/open keys, callbacks и controller left/top; plain root overrides достигают inline children, popup использует component tokens. Закрытые forceSubMenuRender popup остаются скрытыми в horizontal mode. Native-only темы сохранены; остальные advanced API остаются в работе."
         }
       ]
     },
