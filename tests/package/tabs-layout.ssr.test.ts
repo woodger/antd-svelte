@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { render } from 'svelte/server';
 import { Tabs } from 'antd-svelte';
 import reference from '../browser/fixtures/ant-design-tabs-layout-metrics.json';
-import registry from '../../docs/reference/ant-design-porting/registry.json';
+import registry from 'antd-svelte/porting/registry.json';
 
 const items = [
   { key: '', label: 'Alpha' },
