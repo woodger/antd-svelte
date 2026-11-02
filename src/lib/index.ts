@@ -438,6 +438,12 @@ export type {
   TabsSemanticProps
 } from './tabs.types';
 export type {
+  TabsAnimatedConfig,
+  TabsPaneMotion,
+  TabsMotionEvent,
+  TabsMotionName
+} from './tabs-motion.types';
+export type {
   CollapseProps,
   CollapseItem,
   CollapseTrigger,

@@ -1,6 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize } from './types';
+import type { TabsAnimatedConfig } from './tabs-motion.types';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end';
@@ -134,6 +135,8 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   /** @deprecated Используйте indicator.size; его nullish значение сохраняет этот fallback. */
   indicatorSize?: TabsIndicatorSize;
   type?: TabsType;
+  /** Исходный default: inkBar=true, tabPane=false; true включает обе анимации. */
+  animated?: boolean | TabsAnimatedConfig;
   /** Запрашивает изменение items у владельца; add получает событие, remove — key. */
   onEdit?: (target: MouseEvent | KeyboardEvent | string, action: 'add' | 'remove') => void;
   /** Скрывает добавление только в editable-card. @defaultValue false */

@@ -6,6 +6,8 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { tabsSemantics } from './tabs-semantic.engine';
+  import { getTabsAnimation } from './tabs-motion.engine';
+  import { useToken } from './theme-context.svelte';
   import { connectTabsNav, connectTabsScroll, revealTab } from './tabs.dom';
   import { getTabsIndicatorStyle, isTabsIndicatorStyleEqual } from './tabs-indicator.engine';
   import type { TabsIndicatorOffset, TabsIndicatorStyle } from './tabs-indicator.engine';
@@ -29,6 +31,7 @@
     indicator,
     indicatorSize,
     type,
+    animated,
     onEdit,
     hideAdd,
     addIcon,
@@ -61,6 +64,7 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Tabs');
+  const designTokens = useToken();
   const generatedId = $props.id();
   const initialDefault = untrack(() => defaultActiveKey);
   let root = $derived(nativeElement);
@@ -97,6 +101,7 @@
   ));
   let vertical = $derived(placement === 'left' || placement === 'right');
   let editable = $derived(type === 'editable-card');
+  let animation = $derived(getTabsAnimation(animated));
   let showAdd = $derived(editable && hideAdd !== true);
   let gutterStyle = $derived(tabBarGutter === undefined ? undefined
     : `${vertical ? 'margin-top' : 'margin-inline-start'}:${tabBarGutter}px`);
@@ -124,6 +129,7 @@
     indicator,
     indicatorSize,
     type,
+    animated,
     onEdit,
     hideAdd,
     addIcon,
@@ -520,7 +526,7 @@
             {#if resolvedAddIcon}{@render value(resolvedAddIcon)}{:else}<TabsEditIcon name="plus" />{/if}
           </button>
         {/if}
-        <div class={['ant-tabs-ink-bar ant-tabs-ink-bar-animated', classes.indicator]} aria-hidden="true"
+        <div class={['ant-tabs-ink-bar', animation.inkBar && 'ant-tabs-ink-bar-animated', classes.indicator]} aria-hidden="true"
           style={[inkBarStyle, slots.indicator].filter(Boolean).join(';') || undefined}
           hidden={!activeOffset || (type ?? 'line') !== 'line'}></div>
       </div>
@@ -537,11 +543,17 @@
       onUnavailable={() => focusTab(tabStop)} />
     {#if extraRight}<div class="ant-tabs-extra-content">{@render value(extraRight)}</div>{/if}
   </div>
-  <div class="ant-tabs-body-holder"><div bind:this={body} class={['ant-tabs-body', classes.body]} style={slots.body}>
+  <div class="ant-tabs-body-holder"><div bind:this={body} class={[
+    'ant-tabs-body',
+    `ant-tabs-body-${placement}`,
+    animation.tabPane && 'ant-tabs-body-animated',
+    classes.body
+  ]} style={slots.body}>
     {#each items as item (item.key)}
       <TabsPanel id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'tab')} itemKey={item.key} active={selectedKey === item.key} children={item.children} forceRender={item.forceRender}
         destroyOnHidden={item.destroyOnHidden ?? item.destroyInactiveTabPane ?? rootDestroy}
-        class={classes.content} style={slots.content} />
+        class={classes.content} style={slots.content}
+        motion={animation.tabPaneMotion} motionEnabled={designTokens.token.motion} />
     {:else}<div class="ant-tabs-empty">{config.locale.emptyText}</div>{/each}
   </div></div>
 </div>

@@ -2173,7 +2173,7 @@
       "name": "Tabs",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Аудит native v1 и перенос source editable-card, layout, More, indicator, component theme и semantic/config с сохранением выбора, lifecycle панелей, DOM и фокуса; onTabScroll поверх native scroll.",
+      "scopeReason": "Аудит native v1 и перенос source editable-card, layout, More, indicator, component theme, semantic/config и animated с сохранением выбора, lifecycle панелей, DOM и фокуса; onTabScroll поверх native scroll.",
       "upstreamPath": "components/tabs",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2222,6 +2222,11 @@
           "name": "is-mobile",
           "range": "^5.0.0",
           "referenceVersion": "5.0.0"
+        },
+        {
+          "name": "@rc-component/motion",
+          "range": "^1.3.3",
+          "referenceVersion": "1.3.3"
         }
       ],
       "priority": "unassigned",
@@ -2292,7 +2297,21 @@
         "tests/browser/fixtures/TabsSemanticFixtures.svelte",
         "tests/browser/tabs-semantic.spec.ts",
         "tests/package/TabsSemanticFixture.svelte",
-        "tests/package/tabs-semantic.ssr.test.ts"
+        "tests/package/tabs-semantic.ssr.test.ts",
+        "src/lib/tabs-motion.types.ts",
+        "src/lib/tabs-motion.engine.ts",
+        "src/lib/tabs-motion.dom.ts",
+        "src/lib/tabs-motion.engine.test.ts",
+        "src/lib/tabs-motion.dom.test.ts",
+        "src/lib/vendor/LICENSE.rc-motion",
+        "tests/browser/fixtures/ant-design-tabs-motion-reference.json",
+        "tests/browser/fixtures/tabs-motion-presets.ts",
+        "tests/browser/fixtures/tabs-motion-fixture.css",
+        "tests/browser/fixtures/TabsMotionFixtures.svelte",
+        "tests/browser/fixtures/TabsMotionContent.svelte",
+        "tests/browser/tabs-motion.spec.ts",
+        "tests/package/TabsMotionFixture.svelte",
+        "tests/package/tabs-motion.ssr.test.ts"
       ],
       "features": [
         {
@@ -2459,7 +2478,7 @@
             "tests/package/tabs-theme.ssr.test.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Перенесён prepareComponentToken Tabs 6.6.8: 26 defaults, custom heights перед padding, aliases и component algorithms. Zero/undefined сохраняются до CSS, deprecated horizontalItemMargin/RTL регистрируются без влияния на source layout. Root получает собственный scope/prefix/hash и user style после defaults; More копирует variables из origin, сбрасывает vendor defaults и сохраняет user overlay CSS. Source scope снимает native минимум высоты 32px для zero/undefined. Данные официального UMD охватывают 15 тем, 10 вариантов, LTR/RTL и popup; runtime updates сохраняют DOM, focus, selection и drafts. Native-only темы сохраняют прежние метрики и цвета. Semantic/config описаны отдельной feature; prefixCls и исходный motion остаются gaps."
+          "note": "Перенесён prepareComponentToken Tabs 6.6.8: 26 defaults, custom heights перед padding, aliases и component algorithms. Zero/undefined сохраняются до CSS, deprecated horizontalItemMargin/RTL регистрируются без влияния на source layout. Root получает собственный scope/prefix/hash и user style после defaults; More копирует variables из origin, сбрасывает vendor defaults и сохраняет user overlay CSS. Source scope снимает native минимум высоты 32px для zero/undefined. Данные официального UMD охватывают 15 тем, 10 вариантов, LTR/RTL и popup; runtime updates сохраняют DOM, focus, selection и drafts. Native-only темы сохраняют прежние метрики и цвета. Semantic/config описаны отдельной feature; prefixCls остаётся gap; animated описан отдельной feature."
         },
         {
           "id": "semantic-config",
@@ -2481,14 +2500,38 @@
           "note": "Перенесены root/item/remove/indicator/body/content/header/popup.root classNames/styles, string popup shorthand и callbacks от source size (undefined без явного размера), physical placement и normalized items. CSS-строки сохраняют source order provider styles.root → provider style → local styles.root → local style; tabBarStyle и indicator styles идут последними. ConfigProvider.tabs наследуется или заменяется целиком во вложенном provider; icons/indicator/indicatorSize сохраняют исходный приоритет. Глобальный more использует только icon, как 6.6.8; локальные more.icon и own overlay class/style, включая undefined, перекрывают fallback. Двадцать три эталона официального UMD задают classes, computed CSS, callback props и SVG/text icons. RootClassName, native attrs/events и bind:nativeElement предоставляют Svelte root API: aria-label/labelledby сохраняют прежнее именование tablist, SSR ref не заполняется. Живой bind:activeKey и keyed native панельный lifecycle сохраняются; обновления config/styles не пересоздают DOM и не сбрасывают drafts/selection/focus. Общий getPopupContainer и произвольный prefixCls не входят в этот объём."
         },
         {
+          "id": "animated",
+          "title": "Animated ink bar, source switch и native CSSMotion панелей",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tabs-motion.types.ts",
+            "src/lib/tabs-motion.engine.ts",
+            "src/lib/tabs-motion.dom.ts",
+            "src/lib/tabs-motion.engine.test.ts",
+            "src/lib/tabs-motion.dom.test.ts",
+            "src/lib/TabsPanel.svelte",
+            "src/lib/vendor/LICENSE.rc-motion",
+            "tests/browser/fixtures/ant-design-tabs-motion-reference.json",
+            "tests/browser/fixtures/tabs-motion-presets.ts",
+            "tests/browser/fixtures/tabs-motion-fixture.css",
+            "tests/browser/fixtures/TabsMotionFixtures.svelte",
+            "tests/browser/fixtures/TabsMotionContent.svelte",
+            "tests/browser/tabs-motion.spec.ts",
+            "tests/package/TabsMotionFixture.svelte",
+            "tests/package/tabs-motion.ssr.test.ts"
+          ],
+          "note": "Перенесены Ant Design useAnimateConfig и rc-tabs 1.13.0: default inkBar=true/tabPane=false, boolean flags, замена custom motion при tabPane=true и неявное включение tabPaneMotion. Motion 1.3.3 задаёт prepare/start/active/end, commit prepare перед measurement hooks, два RAF, string/object names, async prepare даже при motion=false, phase CSS-строки, end=false, deadline и passive visibility notifications. Own visible/forceRender/removeOnLeave, включая undefined, повторяют source spread/defaults. EventProps.className/style действуют в стабильных ветках, phase style/class и hidden forceRender/leavedClassName сохраняют исходный приоритет. Тридцать три эталона официального UMD задают flags, CSS durations/colors/position, callback ordering, retention и source override rules; порядок между независимыми deadline timers не фиксируется. Native adaptations сохраняются: постоянные pane shells и item-before-root destroy, CSS-строки вместо React CSSProperties, outgoing aria-hidden/inert и owned focus, reduced-motion/live disable завершают CSS-переход. Reversal сохраняет DOM/state/drafts, FormData включает уходящее содержимое до leave end; frames/timers/prepare callbacks очищаются при unmount. React children/internalRef CSSMotion не используются исходным TabPanelList и не вводятся в Svelte API."
+        },
+        {
           "id": "extended-api",
-          "title": "RenderTabBar, prefixCls, общий popup container и motion API",
+          "title": "RenderTabBar, оформление отдельных панелей, prefixCls и общий popup container",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет renderTabBar, произвольного prefixCls, общего ConfigProvider.getPopupContainer и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Native root attributes/events и bind:nativeElement поддерживаются как Svelte API, без React ref wrapper."
+          "note": "Нет renderTabBar, panel className/style отдельных items, произвольного prefixCls, общего ConfigProvider.getPopupContainer. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Native root attributes/events и bind:nativeElement поддерживаются как Svelte API, без React ref wrapper."
         }
       ]
     },

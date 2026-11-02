@@ -1992,7 +1992,8 @@ Up/Down. Enter и Space активируют сфокусированную вк
 
 Содержимое ленивое: впервые монтируется при активации и по умолчанию сохраняется
 в скрытой панели, включая локальный state дочерних компонентов и DOM-черновики.
-DestroyOnHidden=true удаляет содержимое при скрытии; следующий визит создаёт
+DestroyOnHidden=true удаляет содержимое при скрытии, а при анимации панели — после
+завершения leave; следующий визит создаёт
 новый экземпляр. После уничтожения отключение destroyOnHidden само по себе
 не монтирует панель заново. Значение на отдельном item переопределяет общее,
 включая явное false. Это сохранённый контракт native v1: rc-tabs 1.13.0 отдаёт
@@ -2033,6 +2034,35 @@ component algorithms. Высоты карточек участвуют в выч
 прежнее оформление; source-тема допускает шапку ниже native минимума 32px.
 Фикстура `?fixture=tabs-theme` сверяет 15 тем, 10 вариантов в LTR/RTL и popup
 с официальным UMD; смена темы сохраняет DOM, черновики, выделение и фокус.
+
+`animated` по умолчанию равен `{ inkBar: true, tabPane: false }`. False отключает обе
+анимации, true включает обе без initial appear панели. Объект задаёт переключатели
+независимо. `tabPane=true` заменяет весь переданный tabPaneMotion стандартным
+`ant-tabs-switch`, включая его callbacks, как в 6.6.8.
+
+Для собственного перехода передайте `animated={{ tabPaneMotion: motion }}` без
+tabPane: rc-tabs включает его автоматически. Явное tabPane=false сохраняет motion,
+но отключает body animated class. MotionName принимает строку с suffix фаз либо
+объект имён. Поддержаны appear/enter/leave flags, leaveImmediately, deadline в ms,
+visible/forceRender/removeOnLeave overrides, leavedClassName и lifecycle callbacks.
+EventProps.className/style применяются в стабильном состоянии; CSS-фазы перекрывают
+их. У скрытой forceRender-панели motion задаёт display:none, у сохранённой панели
+leavedClassName перекрывает eventProps.className, как в исходном CSSMotion.
+Собственный motionName требует CSS для перехода; положительный motionDeadline
+завершает его без CSS end event. Prepare может вернуть Promise и работает даже
+при `theme.token.motion=false`. Start/active получают native div и event=null,
+возвращают CSS-строку после content styles; end получает native event либо
+`{ deadline: true }`. Возврат false из end оставляет переход незавершённым.
+Prepare/start читают DOM с prepare classes, active — со start classes.
+
+Во время leave сохраняются DOM, local state и FormData уходящей панели. Aria-hidden
+и inert сразу исключают её из навигации; owned focus переходит к новому заголовку.
+Быстрое возвращение отменяет уничтожение. OnVisibleChanged вызывается после DOM
+commit; первый невидимый mount не вызывает callback. Независимые deadline timers
+не задают порядок между панелями, в том числе в upstream.
+Native prefers-reduced-motion и живое отключение motion завершают CSS-переходы;
+unmount отменяет frames, timers и продолжения prepare. Пустые native panel shells
+и согласованный приоритет item destroy сохраняются.
 
 `classNames` и `styles` принимают объект либо чистую функцию `({ props }) => slots`.
 Доступны root/item/remove/indicator/body/content/header и popup.root; строка popup
@@ -2217,9 +2247,13 @@ keyboard, control/owner callbacks, popupRender, portal, вложенные по�
 Фикстура `?fixture=tabs-semantic` сравнивает 23 эталона semantic slots, CSS-слоёв,
 callback props, provider inheritance и icon precedence с официальным UMD.
 Проверяются native attrs/events/ref и живое обновление открытого popup.
+Фикстура `?fixture=tabs-motion` сверяет 33 UMD-эталона фаз, CSS, callbacks,
+приоритетов, RTL и lifecycle; дополнительно проверяются незавершённые переходы,
+FormData, focus, reversal, end=false, async prepare, reduced motion и cleanup.
 Drag-and-drop и renderTabBar ещё не перенесены.
-Остаются произвольный prefixCls, общий ConfigProvider.getPopupContainer и
-исходный motion; приоритет уничтожения панелей сохраняет native v1.
+Остаются panel className/style отдельных items, произвольный prefixCls
+и общий ConfigProvider.getPopupContainer;
+приоритет уничтожения панелей сохраняет native v1.
 Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,
 placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и motion/prefix.
 

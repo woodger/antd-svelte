@@ -1,0 +1,4629 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "deadlineOrdering": "per-pane; source timers run independently",
+    "browser": "156.0.8078.4",
+    "rcMotion": {
+      "version": "1.3.3",
+      "revision": "595a9ccd66d6739ceeca335edb9dd2c1dbb5a76f"
+    }
+  },
+  "cases": [
+    {
+      "name": "object-motion-name",
+      "animated": {
+        "tabPaneMotion": {
+          "motionAppear": false,
+          "motionName": {
+            "enter": "tabs-motion-custom-enter",
+            "enterStart": "tabs-motion-custom-enter-start",
+            "enterActive": "tabs-motion-custom-enter-active",
+            "leave": "tabs-motion-custom-leave",
+            "leaveStart": "tabs-motion-custom-leave-start",
+            "leaveActive": "tabs-motion-custom-leave-active"
+          }
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "all-motion-flags-disabled",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "motionEnter": false,
+          "motionLeave": false
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [],
+      "trace": [
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "leave-immediately",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "motionLeaveImmediately": true
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "destroy-off",
+      "animated": true,
+      "destroy": false,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "alpha",
+            "Retained draft"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ],
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [],
+      "retained": true
+    },
+    {
+      "name": "undefined-ink",
+      "animated": {
+        "tabPane": true
+      },
+      "unsetInk": true,
+      "initial": {
+        "inkAnimated": false,
+        "inkDuration": "0s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": false,
+        "inkDuration": "0s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "custom-leaved-class",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "removeOnLeave": false,
+          "leavedClassName": "kept-motion-pane"
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "alpha",
+            "Retained draft"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ],
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "event-props-visible",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "eventClass": "event-pane",
+      "eventColor": "rgb(20,40,60)",
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgb(20, 40, 60)",
+            [
+              "event-pane"
+            ]
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgb(20, 40, 60)",
+            [
+              "event-pane"
+            ]
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "event-props-hidden",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "removeOnLeave": false
+        }
+      },
+      "traceHooks": true,
+      "eventClass": "event-pane",
+      "eventColor": "rgb(20,40,60)",
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgb(20, 40, 60)",
+            [
+              "event-pane"
+            ]
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "alpha",
+            "Retained draft"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgb(20, 40, 60)",
+            []
+          ],
+          [
+            "beta",
+            "rgb(20, 40, 60)",
+            [
+              "event-pane"
+            ]
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "event-props-force",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "forceRender": true
+        }
+      },
+      "traceHooks": true,
+      "eventClass": "event-pane",
+      "eventColor": "rgb(20,40,60)",
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgb(20, 40, 60)",
+            [
+              "event-pane"
+            ]
+          ],
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            [
+              "event-pane"
+            ]
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "alpha",
+            "Retained draft"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            [
+              "event-pane"
+            ]
+          ],
+          [
+            "beta",
+            "rgb(20, 40, 60)",
+            [
+              "event-pane"
+            ]
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "default",
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": false,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": false,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "disabled",
+      "animated": false,
+      "initial": {
+        "inkAnimated": false,
+        "inkDuration": "0s",
+        "bodyAnimated": false,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": false,
+        "inkDuration": "0s",
+        "bodyAnimated": false,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "enabled",
+      "animated": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "empty-config",
+      "animated": {},
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": false,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": false,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "ink-disabled",
+      "animated": {
+        "inkBar": false
+      },
+      "initial": {
+        "inkAnimated": false,
+        "inkDuration": "0s",
+        "bodyAnimated": false,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": false,
+        "inkDuration": "0s",
+        "bodyAnimated": false,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "panes-only",
+      "animated": {
+        "inkBar": false,
+        "tabPane": true
+      },
+      "initial": {
+        "inkAnimated": false,
+        "inkDuration": "0s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": false,
+        "inkDuration": "0s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "pane-disabled",
+      "animated": {
+        "tabPane": false
+      },
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": false,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": false,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "custom-replaced",
+      "animated": {
+        "tabPane": true,
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "prepare": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.3s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "custom-motion",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "custom-without-body-class",
+      "animated": {
+        "tabPane": false,
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": false,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": false,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "custom-appear",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom"
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "no-enter",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "motionEnter": false
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "visible",
+          "visible": true
+        },
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "no-leave",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "motionLeave": false
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "prepare",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "prepare": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "prepare",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "prepare",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "prepare",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "prepare",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "prepare-without-motion",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "prepare": true,
+      "motionOff": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0s, 0s, 0s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0s, 0s, 0s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "prepare",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "prepare",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "prepare",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "prepare",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "callback-styles",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "prepare": true,
+      "paint": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "prepare",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "prepare",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.24s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.24s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "prepare",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "prepare",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "deadline",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "deadline-pane",
+          "motionAppear": false,
+          "motionDeadline": 200
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "all",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "all",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0s",
+          "property": "all",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0s",
+          "property": "all",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "deadline-pane-leave",
+              "deadline-pane-leave-prepare",
+              "deadline-pane"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "deadline-pane-enter",
+              "deadline-pane-enter-prepare",
+              "deadline-pane"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "deadline-pane-leave",
+              "deadline-pane-leave-start",
+              "deadline-pane"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "deadline-pane-enter",
+              "deadline-pane-enter-start",
+              "deadline-pane"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "deadline-pane-leave",
+              "deadline-pane-leave-active",
+              "deadline-pane"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "deadline"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "deadline-pane-enter",
+              "deadline-pane-enter-active",
+              "deadline-pane"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "deadline"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "force-render",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "forceRender": true
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ],
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "alpha",
+            "Retained draft"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ],
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "keep-content",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false,
+          "removeOnLeave": false
+        }
+      },
+      "traceHooks": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "alpha",
+            "Retained draft"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ],
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "undefined-force",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "force": true,
+      "unsetMotion": [
+        "forceRender"
+      ],
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "undefined-remove",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "destroy": false,
+      "unsetMotion": [
+        "removeOnLeave"
+      ],
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.16s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [
+        {
+          "phase": "leave",
+          "step": "start",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "start",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-prepare",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "active",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": null
+        },
+        {
+          "phase": "enter",
+          "step": "active",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-start",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": null
+        },
+        {
+          "phase": "leave",
+          "step": "end",
+          "key": "alpha",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-leave",
+              "tabs-motion-custom-leave-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "absolute"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "enter",
+          "step": "end",
+          "key": "beta",
+          "observed": {
+            "classes": [
+              "tabs-motion-custom-enter",
+              "tabs-motion-custom-enter-active",
+              "tabs-motion-custom"
+            ],
+            "color": "rgba(0, 0, 0, 0.88)",
+            "position": "static"
+          },
+          "event": "transitionend"
+        },
+        {
+          "phase": "visible",
+          "visible": false
+        },
+        {
+          "phase": "visible",
+          "visible": true
+        }
+      ],
+      "retained": false
+    },
+    {
+      "name": "undefined-visible",
+      "animated": {
+        "tabPaneMotion": {
+          "motionName": "tabs-motion-custom",
+          "motionAppear": false
+        }
+      },
+      "traceHooks": true,
+      "unsetMotion": [
+        "visible"
+      ],
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha",
+          "beta"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ],
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.3s, 0.3s, 0.3s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha",
+          "beta"
+        ],
+        "values": [
+          [
+            "alpha",
+            "Retained draft"
+          ],
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ],
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [],
+      "trace": [],
+      "retained": true
+    },
+    {
+      "name": "motion-disabled-theme",
+      "animated": true,
+      "motionOff": true,
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0s, 0s, 0s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0s, 0s, 0s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [],
+      "trace": [],
+      "retained": false
+    },
+    {
+      "name": "custom-duration-rtl",
+      "animated": true,
+      "rtl": true,
+      "placement": "end",
+      "duration": "0.5s",
+      "initial": {
+        "inkAnimated": true,
+        "inkDuration": "0.5s, 0.5s",
+        "bodyAnimated": true,
+        "visible": [
+          "alpha"
+        ],
+        "values": [
+          [
+            "alpha",
+            "alpha initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "alpha",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "snapshot": {
+        "inkAnimated": true,
+        "inkDuration": "0.5s, 0.5s",
+        "bodyAnimated": true,
+        "visible": [
+          "beta"
+        ],
+        "values": [
+          [
+            "beta",
+            "beta initial"
+          ]
+        ],
+        "contentStyles": [
+          [
+            "beta",
+            "rgba(0, 0, 0, 0.88)",
+            []
+          ]
+        ]
+      },
+      "steps": [
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "start",
+          "duration": "0s",
+          "property": "none",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "alpha",
+          "status": "leave",
+          "step": "active",
+          "duration": "0.5s",
+          "property": "opacity",
+          "position": "absolute",
+          "color": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "key": "beta",
+          "status": "enter",
+          "step": "active",
+          "duration": "0.5s",
+          "property": "opacity",
+          "position": "static",
+          "color": "rgba(0, 0, 0, 0.88)"
+        }
+      ],
+      "trace": [],
+      "retained": false
+    }
+  ]
+}

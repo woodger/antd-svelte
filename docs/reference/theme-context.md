@@ -342,8 +342,15 @@ CSS-строки; root применяет provider styles.root → provider styl
 вычисленной линии. Popup.root перекрывается собственным more.overlayStyle, включая
 явное undefined. Callback props содержат source size (undefined без явного
 размера), physical tabPlacement и нормализованные items. Эти слои сверяются
-с 23 эталонами официального UMD;
-произвольный prefixCls, общий getPopupContainer и исходный motion остаются задачами.
+с 23 эталонами официального UMD.
+
+Tabs.animated управляет ink bar и переходами панелей. MotionDurationSlow задаёт
+стандартный switch; глобальный token.motion=false отключает CSS-фазы, но сохраняет
+prepare hooks. Custom motion styles применяются после semantic content styles.
+Native reduced motion и живое отключение завершают текущий переход; DOM сохраняется
+до leave end, затем действует destroyOnHidden. EventProps.className/style применяются
+в стабильном состоянии; phase styles имеют приоритет. Произвольный prefixCls и общий
+getPopupContainer остаются задачами.
 
 ## Токены Menu
 
@@ -546,6 +553,9 @@ zeroRuntime наследуется; опубликованные стили ко
   [Semantic/config эталон](../../tests/browser/fixtures/ant-design-tabs-semantic-reference.json),
   [SSR](../../tests/package/tabs-semantic.ssr.test.ts) и
   [browser](../../tests/browser/tabs-semantic.spec.ts), маршрут `?fixture=tabs-semantic`.
+  [Motion эталон](../../tests/browser/fixtures/ant-design-tabs-motion-reference.json),
+  [SSR](../../tests/package/tabs-motion.ssr.test.ts) и
+  [browser](../../tests/browser/tabs-motion.spec.ts), маршрут `?fixture=tabs-motion`.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

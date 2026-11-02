@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tabs: animated inkBar/tabPane, source switch и custom CSS motion с prepare,
+  phase styles, end/deadline и visibility callbacks. Уходящие панели сохраняют
+  DOM/state/FormData до leave end; reversal отменяет уничтожение, native focus,
+  reduced motion и cleanup сохранены. Добавлены 33 UMD-эталона и unit/SSR/browser checks.
 - Tabs: semantic classNames/styles, ConfigProvider.tabs, rootClassName и native
   attrs/events/bind:nativeElement. Сохранены исходные CSS-слои, callback props,
   icon/indicator precedence и замена config во вложенном provider. Добавлены
