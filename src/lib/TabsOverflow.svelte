@@ -19,11 +19,15 @@
   let {
     nativeElement = $bindable<HTMLDivElement | undefined>(),
     rootId,
+    ownerId,
+    mobile: mobileOverride,
+    rtl,
     items,
     editable,
     locale,
     more,
     moreIcon,
+    defaultMoreIcon,
     removeIcon,
     removeClassName,
     removeStyle,
@@ -40,11 +44,15 @@
   }: {
     nativeElement?: HTMLDivElement;
     rootId: string;
+    ownerId?: string;
+    mobile?: boolean;
+    rtl?: boolean;
     items: readonly TabsItem[];
     editable: boolean;
     locale?: TabsLocale;
     more?: TabsMoreProps;
     moreIcon?: TabsContent;
+    defaultMoreIcon?: TabsContent;
     removeIcon?: TabsContent;
     removeClassName?: string;
     removeStyle?: string;
@@ -67,7 +75,8 @@
   let open = $state(false);
   let shown = $state(false);
   let rendered = $state(false);
-  let mobile = $state(false);
+  let mobileDevice = $state(false);
+  let mobile = $derived(mobileOverride ?? mobileDevice);
   let selectedKey = $state<string | null>(null);
   let menuKey = $state<string | undefined>();
   let repairFocus = $state(false);
@@ -99,7 +108,7 @@
     ? optionId(selectedKey) : undefined);
 
   $effect(() => {
-    mobile = isTabsMobileDevice(window.navigator.userAgent);
+    mobileDevice = isTabsMobileDevice(window.navigator.userAgent);
   });
 
   $effect(() => {
@@ -417,7 +426,8 @@
     class:ant-tabs-dropdown-open={visible} hidden={mobile}
     style={`${tabBarGutter === undefined ? '' : `margin-inline-start:${tabBarGutter}px;`}${items.length ? '' : 'visibility:hidden;order:1'}`}
     aria-haspopup="listbox" aria-controls={popupId} aria-expanded={open}
-    aria-label={icon === defaultIcon || icon === null || typeof icon === 'boolean' || icon === ''
+    aria-label={icon === defaultIcon || icon === defaultMoreIcon || icon === null
+      || typeof icon === 'boolean' || icon === ''
       ? 'ellipsis' : undefined}
     onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
     onfocus={() => { if (supports('focus')) requestVisible(true); }}
@@ -434,12 +444,12 @@
     {@render value(icon)}
   </button>
   <div bind:this={popup} popover="manual" hidden={!shown || !visible} role="presentation"
-    data-tabs-popup-owner={rootId}
+    data-tabs-popup-owner={ownerId ?? rootId}
     dir={config.direction} class={[
       'ant-tabs-dropdown ant-tabs-css-var',
       themeClassName,
       `ant-tabs-dropdown-placement-${shown ? actualSide : side}${align === 'left' ? 'Left' : align === 'right' ? 'Right' : ''}`,
-      config.direction === 'rtl' && 'ant-tabs-dropdown-rtl',
+      (rtl ?? config.direction === 'rtl') && 'ant-tabs-dropdown-rtl',
       more && Object.hasOwn(more, 'overlayClassName') ? more.overlayClassName : popupClassName
     ]} style={initialStyle}
     onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}

@@ -1,6 +1,42 @@
 import type { TabsIndicatorOffset } from './tabs-indicator.engine';
 import type { TabsScrollInfo } from './tabs.types';
 
+/** Публичный native onTabClick сохраняет MouseEvent и при вызове из custom tab bar. */
+export function getTabsClickEvent(
+  event: MouseEvent | KeyboardEvent,
+  root: HTMLElement | undefined
+): MouseEvent | undefined {
+  if (!('key' in event)) return event;
+
+  const view = root?.ownerDocument.defaultView;
+  if (!view) return undefined;
+
+  const click = new view.MouseEvent('click', {
+    bubbles: event.bubbles,
+    cancelable: event.cancelable,
+    composed: event.composed,
+    altKey: event.altKey,
+    ctrlKey: event.ctrlKey,
+    metaKey: event.metaKey,
+    shiftKey: event.shiftKey,
+    view
+  });
+  Object.defineProperties(click, {
+    target: { get: () => event.target },
+    currentTarget: { get: () => event.currentTarget }
+  });
+  for (const method of ['preventDefault', 'stopPropagation', 'stopImmediatePropagation'] as const) {
+    const original = click[method].bind(click);
+    click[method] = () => {
+      original();
+      event[method]();
+    };
+  }
+  if (event.defaultPrevented) click.preventDefault();
+
+  return click;
+}
+
 export function revealTab(viewport: HTMLElement, tab: HTMLElement, vertical: boolean) {
   const view = viewport.getBoundingClientRect();
   const bounds = tab.getBoundingClientRect();
