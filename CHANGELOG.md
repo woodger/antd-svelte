@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme Pagination: исходные defaults/aliases, quick-jumper Input tokens,
+  отдельный Select scope, algorithms, CSS prefix/hash и wireframe из исходного
+  bordered.ts. Добавлены UMD conformance, SSR и browser-проверки размеров,
+  состояний, LTR/RTL и обновлений с сохранением native nav/buttons, drafts,
+  фокуса, bind API и порядка callbacks.
 - Theme Steps/Timeline: исходные defaults/aliases, component algorithms и
   совместный scope Steps → Timeline, CSS prefix/hash и приоритет пользовательских
   styles. Добавлены UMD conformance, SSR и browser-проверки метрик вариантов,

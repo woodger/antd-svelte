@@ -1868,6 +1868,11 @@
           "name": "@ant-design/icons",
           "range": "^6.3.4",
           "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@ant-design/cssinjs-utils",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
         }
       ],
       "priority": "p2",
@@ -1886,7 +1891,15 @@
         "tests/browser/pagination-features.spec.ts",
         "tests/browser/checkbox-pagination.spec.ts",
         "tests/browser/fixtures/PaginationFeaturesFixtures.svelte",
-        "readme.md"
+        "readme.md",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-pagination-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-pagination-tokens-reference.json",
+        "tests/package/pagination-theme.ssr.test.ts",
+        "tests/browser/pagination-theme.spec.ts",
+        "tests/browser/fixtures/PaginationThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-pagination-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -1961,13 +1974,31 @@
         },
         {
           "id": "advanced-api",
-          "title": "Полный token/wireframe/Select props и React-specific API",
+          "title": "Полные Select props, Form variant и React-specific API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Полный token/wireframe engine, global Form variant, расширенные ещё не перенесённые Select props, генерация CSS arbitrary prefixCls/selectPrefixCls и React-specific components/dev warnings не перенесены. SelectPrefixCls передаётся custom renderer info, штатный Select сохраняет ant-select. Native nav, snippets/handlers, bind API, число/option normalization и мобильный size changer являются сохранёнными Svelte adaptations; v1-ready не означает полный React API."
+          "note": "Global Form variant, расширенные ещё не перенесённые Select props, генерация CSS arbitrary prefixCls/selectPrefixCls и React-specific components/dev warnings не перенесены. SelectPrefixCls передаётся custom renderer info, штатный Select сохраняет ant-select. Native nav, snippets/handlers, bind API, число/option normalization и мобильный size changer являются сохранёнными Svelte adaptations; v1-ready не означает полный React API."
+        },
+        {
+          "id": "source-theme-tokens",
+          "title": "Исходные Pagination/Input defaults, aliases и wireframe",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Pagination.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-pagination-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-pagination-tokens-reference.json",
+            "tests/package/pagination-theme.ssr.test.ts",
+            "tests/browser/pagination-theme.spec.ts",
+            "tests/browser/fixtures/PaginationThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-pagination-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные 12 Pagination и 18 общих Input defaults, component algorithms/aliases, нули/undefined, runtime CSS lengths и CSS prefix/hash. Native nav получает scope перед semantic/plain styles; ul наследует defaults без provider reset, Select получает собственные aliases, Input overrides не меняют quick jumper. Глобальный wireframe включает bordered независимо от component alias; отсутствующие в dist/antd.css правила перенесены из source bordered.ts в scoped CSS. Colors/padding исходных ссылок применяются к native buttons, prev/next сохраняют normal line-height при undefined itemSize. MiniOptionsSizeChangerTop создаёт переменную, но source CSS её не читает. Scoped UMD declarations и 240 наборов computed metrics для 18 тем: три размера, disabled/simple, variants, Select, wireframe и LTR/RTL; отдельный эталон hover/focus. Обновления сохраняют DOM, drafts/selection/focus, bind API и порядок callbacks; native-only темы и согласованный mobile size changer сохранены."
         }
       ]
     },
@@ -8564,6 +8595,24 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные 18 Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. Legacy titleLineHeight/customIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
+        },
+        {
+          "id": "pagination-theme-tokens",
+          "title": "Исходные Pagination tokens, Input defaults и wireframe",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Pagination.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-pagination-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-pagination-tokens-reference.json",
+            "tests/package/pagination-theme.ssr.test.ts",
+            "tests/browser/pagination-theme.spec.ts",
+            "tests/browser/fixtures/PaginationThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-pagination-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные 12 Pagination и 18 общих Input defaults, component algorithms/aliases, нули/undefined, runtime CSS lengths и CSS prefix/hash. Native nav получает scope перед semantic/plain styles; ul наследует defaults без provider reset, Select получает собственные aliases, Input overrides не меняют quick jumper. Глобальный wireframe включает bordered независимо от component alias; отсутствующие в dist/antd.css правила перенесены из source bordered.ts в scoped CSS. Colors/padding исходных ссылок применяются к native buttons, prev/next сохраняют normal line-height при undefined itemSize. MiniOptionsSizeChangerTop создаёт переменную, но source CSS её не читает. Scoped UMD declarations и 240 наборов computed metrics для 18 тем: три размера, disabled/simple, variants, Select, wireframe и LTR/RTL; отдельный эталон hover/focus. Обновления сохраняют DOM, drafts/selection/focus, bind API и порядок callbacks; native-only темы и согласованный mobile size changer сохранены."
         }
       ]
     },

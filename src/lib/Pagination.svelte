@@ -5,6 +5,8 @@
 <script lang="ts">
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { provideFormField, useFormField } from './form-context';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { getPaginationItems, getPaginationState, getPageSizeOptions } from './pagination.engine';
@@ -64,6 +66,8 @@
   } = $derived(rawProps);
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Pagination');
+  const designToken = useDesignTokenContext();
   const field = useFormField();
   provideFormField(field ? {
     get status() { return field.status; },
@@ -145,8 +149,13 @@
   let localClasses = $derived(resolve(classNames));
   let contextStyles = $derived(resolve(config.pagination?.styles));
   let localStyles = $derived(resolve(styles));
-  let rootStyle = $derived(join([contextStyles.root, config.pagination?.style,
-    localStyles.root, style], ';'));
+  let rootStyle = $derived(join([
+    componentTheme.style,
+    contextStyles.root,
+    config.pagination?.style,
+    localStyles.root,
+    style
+  ], ';'));
   let itemClass = $derived(join([contextClasses.item, localClasses.item], ' '));
   let itemStyle = $derived(join([contextStyles.item, localStyles.item], ';'));
   let simpleText = $state<string | number>(untrack(() => pagination.current));
@@ -269,6 +278,27 @@
   .ant-pagination .ant-pagination-options :global(.container) { min-width: 90px; }
   .quick-button { cursor: pointer; font: inherit; }
   input:focus-visible, .quick-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
+  .ant-pagination-source-theme :global(.ant-pagination-item .page-button) { padding-inline: calc(var(--ant-margin-xxs) * 1.5); color: var(--ant-color-text); }
+  .ant-pagination-source-theme :global(.ant-pagination-item-active .page-button) { color: var(--ant-pagination-item-active-color); }
+  .ant-pagination-source-theme :global(.ant-pagination-item-active:hover .page-button) { color: var(--ant-pagination-item-active-color-hover); }
+  /* Source button сохраняет normal и при неопределённой высоте item. */
+  .ant-pagination-source-theme :global(.ant-pagination-prev button), .ant-pagination-source-theme :global(.ant-pagination-next button) { line-height: normal; }
+  .ant-pagination-source-theme.ant-pagination-disabled :global(.ant-pagination-item .page-button) { color: var(--ant-color-text-disabled); background-color: transparent; border: none; cursor: not-allowed; }
+  .ant-pagination-source-theme.ant-pagination-disabled :global(.ant-pagination-item-active .page-button) { color: var(--ant-pagination-item-active-color-disabled); }
+  /* Ant Design 6.6.8 pagination/style/bordered.ts; этих правил нет в dist/antd.css. */
+  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev:hover button), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next:hover button) { border-color: var(--ant-color-primary-hover); background-color: var(--ant-pagination-item-bg); }
+  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev .ant-pagination-item-link), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next .ant-pagination-item-link) { background-color: var(--ant-pagination-item-link-bg); border-color: var(--ant-color-border); }
+  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev:hover .ant-pagination-item-link), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next:hover .ant-pagination-item-link) { border-color: var(--ant-color-primary); background-color: var(--ant-pagination-item-bg); color: var(--ant-color-primary); }
+  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev.ant-pagination-disabled .ant-pagination-item-link), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next.ant-pagination-disabled .ant-pagination-item-link) { border-color: var(--ant-color-border); color: var(--ant-color-text-disabled); }
+  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item) { background-color: var(--ant-pagination-item-bg); border: var(--ant-line-width) var(--ant-line-type) var(--ant-color-border); }
+  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item:hover:not(.ant-pagination-item-active)) { border-color: var(--ant-color-primary); background-color: var(--ant-pagination-item-bg); }
+  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item:hover:not(.ant-pagination-item-active) > a), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item:hover:not(.ant-pagination-item-active) .page-button) { color: var(--ant-color-primary); }
+  .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-item-active) { border-color: var(--ant-color-primary); }
+  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item), .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item-link) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); }
+  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item:hover:not(.ant-pagination-item-active)), .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item-link:hover:not(.ant-pagination-item-active)) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); }
+  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item:hover:not(.ant-pagination-item-active) > a), .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item:hover:not(.ant-pagination-item-active) .page-button) { color: var(--ant-color-text-disabled); }
+  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-item-active) { background-color: var(--ant-pagination-item-active-bg-disabled); }
+  .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-prev:hover button), .ant-pagination-source-theme.ant-pagination-bordered.ant-pagination-disabled :global(.ant-pagination-next:hover button) { background-color: var(--ant-color-bg-container-disabled); border-color: var(--ant-color-border); color: var(--ant-color-text-disabled); }
   @media (max-width: 576px) { .ant-pagination .ant-pagination-options-quick-jumper, .ant-pagination .quick-options-only { display: none; } }
   @media (prefers-reduced-motion: reduce) { input, .ant-pagination :global(.ant-pagination-item), .ant-pagination :global(.ant-pagination-item-link) { transition: none; } }
 </style>
@@ -293,13 +323,17 @@
 {#if !hideOnSinglePage || pagination.total > pagination.pageSize}
   <nav {...forwarded} bind:this={navigation} {id} {role} aria-label={ariaLabel ?? strings.label}
     aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction}
-    class={[config.pagination?.class, rootClassName, contextClasses.root, localClasses.root]}
+    class={[componentTheme.className, config.pagination?.class, rootClassName,
+      contextClasses.root, localClasses.root]}
     style={rootStyle}>
     <ul class={[prefixCls, 'ant-pagination-css-var', `${prefixCls}-${resolvedSize}`,
+        componentTheme.className && 'ant-pagination-source-theme',
+        designToken.enabled && designToken.state.token.wireframe && `${prefixCls}-bordered`,
         mini && `${prefixCls}-mini`, align && `${prefixCls}-${align}`,
         simple && `${prefixCls}-simple`, blocked && `${prefixCls}-disabled`,
         rtl && `${prefixCls}-rtl`, config.input?.variant && config.input.variant !== 'outlined'
-          && `${prefixCls}-${config.input.variant}`, className]}>
+          && `${prefixCls}-${config.input.variant}`, className]}
+      style={componentTheme.inheritedStyle}>
       {#if showTotal}<li class={`${prefixCls}-total-text`}>
         {@render showTotal(pagination.total, pagination.range)}
       </li>{/if}

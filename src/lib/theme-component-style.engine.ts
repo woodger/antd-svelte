@@ -23,7 +23,7 @@ import type { GlobalToken } from './theme-component-token.types';
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
-  | 'Steps' | 'Timeline';
+  | 'Steps' | 'Timeline' | 'Pagination';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -83,6 +83,21 @@ const factories = {
     dotBg: undefined,
     dotSize: undefined,
     itemPaddingBottom: token.padding * 1.25
+  }),
+  Pagination: (token: GlobalToken) => ({
+    itemBg: token.colorBgContainer,
+    itemSize: token.controlHeight,
+    itemSizeSM: token.controlHeightSM,
+    itemSizeLG: token.controlHeightLG,
+    itemActiveBg: token.colorBgContainer,
+    itemActiveColor: token.colorPrimary,
+    itemActiveColorHover: token.colorPrimaryHover,
+    itemLinkBg: token.colorBgContainer,
+    itemActiveColorDisabled: token.colorTextDisabled,
+    itemActiveBgDisabled: token.controlItemBgActiveDisabled,
+    itemInputBg: token.colorBgContainer,
+    miniOptionsSizeChangerTop: 0,
+    ...prepareInputTokens(token)
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
@@ -106,7 +121,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Dropdown: [],
   Breadcrumb: [],
   Steps: [],
-  Timeline: []
+  Timeline: [],
+  Pagination: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

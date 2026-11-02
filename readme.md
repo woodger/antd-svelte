@@ -6399,11 +6399,28 @@ pageSizeOptions сначала преобразуются в числа. В Reac
 исходному CSS и скрывается на XS. Для controlled compositing с отказом владельца
 используйте functional bindings с getter и обработчики onChange.
 
-Полный token/wireframe engine, глобальный Form variant, генерация CSS для
+Глобальный Form variant, генерация CSS для
 произвольных prefixCls/selectPrefixCls и React-specific components/dev warnings
 остаются в следующих этапах. `selectPrefixCls` доступен custom size changer info;
 штатный Select сохраняет свои классы. Обычный disabled, навигация native кнопками,
 возврат focus после отключения next и SSR без DOM/media/timers сохранены.
+
+Source `theme.components.Pagination` использует 12 собственных defaults и общий
+расчёт 18 Input defaults для quick jumper. Поддержаны component algorithms,
+aliases, нули/undefined, runtime CSS lengths и CSS prefix/hash. Токены находятся
+на native nav, styled ul наследует их, поэтому styles.root/style сохраняют
+приоритет. Внутренний Select получает собственный scope; Input overrides
+не подменяют quick jumper. MiniOptionsSizeChangerTop сериализуется, но исходный
+CSS 6.6.8 его не использует.
+
+Глобальный token.wireframe включает bordered, независимо от одноимённого
+component override. Дополнительные правила перенесены из исходного
+pagination/style/bordered.ts: в закреплённом dist/antd.css их нет. Цвета и padding
+номеров применяются к сохранённым native buttons. Кнопки prev/next сохраняют
+source line-height: normal, в том числе при неопределённой высоте item.
+Метрики трёх размеров, disabled/simple и variants, hover/focus и обновления темы
+проверяются с официальным UMD в `?fixture=pagination-theme`. Native-only темы,
+bind API и согласованное поведение на XS сохраняются.
 
 Проверки: [engine](./src/lib/pagination.engine.test.ts),
 [SSR](./src/lib/pagination.ssr.test.ts),

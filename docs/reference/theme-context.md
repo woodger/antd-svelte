@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps и Timeline также получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline и Pagination получают собственные
 defaults и aliases.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
@@ -289,6 +289,31 @@ navigation, outlined, vertical, title-vertical, panel, inline, progress и об�
 ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки и поля,
 фокус, выделение и callbacks. Native-only темы и согласованные отличия Steps
 не меняются. Произвольные prefixCls и component config вне темы остаются в работе.
+
+## Токены Pagination
+
+Pagination подготавливает 12 собственных defaults и 18 общих Input defaults для
+quick jumper. Исходный miniOptionsSizeChangerTop сериализуется, но не читается CSS
+6.6.8. Поддержаны component algorithms, aliases, нули/undefined, runtime CSS
+lengths и CSS prefix/hash. Навигационный nav получает token scope перед
+semantic/plain styles; styled ul наследует defaults без повторного provider
+reset. Это сохраняет приоритет существующего styles.root/style на nav.
+Внутренний Select получает собственные aliases, а components.Input не меняет
+quick jumper: его defaults принадлежат Pagination.
+
+Глобальный wireframe добавляет bordered независимо от component alias wireframe.
+Дополнительные правила из pagination/style/bordered.ts находятся в scoped styles
+Pagination.svelte: закреплённый dist/antd.css их не содержит. Цвета и padding
+исходных ссылок применяются также к native page buttons. Prev/next используют
+source line-height: normal, чтобы неопределённая itemSize не меняла высоту кнопки.
+
+Scoped declarations и 240 наборов computed metrics для 18 тем сверяются с
+официальным UMD: три размера, disabled/simple, input variants, собственный Select
+scope, wireframe и LTR/RTL. Hover страниц/active/prev/disabled и focus quick jumper
+имеют отдельный эталон. SSR и обновления сохраняют кнопки, поля, ввод/выделение,
+фокус, callbacks и bind API. Native-only темы, nav semantic root и доступный size
+changer на XS сохраняются; полный Form variant и произвольный prefixCls остаются
+в работе.
 
 ## Токены Menu
 
@@ -476,6 +501,13 @@ zeroRuntime наследуется; опубликованные стили ко
   [SSR](../../tests/package/steps-theme.ssr.test.ts), маршрут `?fixture=steps-theme`.
   Проверяются варианты Steps, обе ориентации Timeline, приоритет styles, сохранение
   DOM/focus, нативных кнопок выбора и callbacks при обновлении темы.
+
+- [Эталон Pagination](../../src/lib/theme-pagination-tokens-reference.test.ts),
+  [computed metrics и состояния](../../tests/browser/fixtures/ant-design-pagination-metrics.json),
+  [SSR](../../tests/package/pagination-theme.ssr.test.ts) и
+  [браузерные проверки](../../tests/browser/pagination-theme.spec.ts),
+  маршрут `?fixture=pagination-theme`. Проверяются также style priority,
+  нативные кнопки, сохранение drafts/focus и callback order size changer.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),
