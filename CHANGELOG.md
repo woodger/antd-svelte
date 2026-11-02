@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tabs: deprecated destroyInactiveTabPane у корня и items с приоритетом modern
+  имени на том же уровне. Сохранены native item-before-root, forceRender,
+  lazy lifecycle, local state, FormData и focus repair; добавлены 12 UMD-сценариев
+  и SSR/browser-проверки, включая два документированных отличия приоритета.
 - Tabs: indicator.size/align, deprecated indicatorSize и onTabScroll с исходными
   физическими направлениями. Добавлены 64 UMD-эталона индикатора и 8 сценариев
   прокрутки, unit/SSR/browser-проверки дробных размеров, RTL, приоритетов,

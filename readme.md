@@ -2000,6 +2000,14 @@ DestroyOnHidden=true удаляет содержимое при скрытии; 
 его даже вместе с destroyOnHidden. Удаление key всегда уничтожает панель.
 Состояние, которое владелец хранит снаружи Tabs, уничтожение панели не сбрасывает.
 
+Устаревший destroyInactiveTabPane поддерживается у Tabs и каждого item.
+На одном уровне destroyOnHidden имеет приоритет, включая явное false.
+Между уровнями сохраняется описанный выше контракт: настройка item, современная
+или legacy, перекрывает корневую. ForceRender, ленивое повторное монтирование,
+локальный state, FormData и восстановление фокуса работают так же, как с destroyOnHidden.
+Фикстура `?fixture=tabs-destroy` сопоставляет 12 сценариев официального UMD:
+десять совпадают с upstream, два фиксируют сохранённое отличие приоритета item.
+
 Сохранённая скрытая панель остаётся в DOM; её таймеры и подписки продолжают
 работать. Поля посещённых/forceRender-панелей участвуют в нативной FormData,
 даже когда скрыты; ещё не смонтированных или уничтоженных полей в FormData нет.
@@ -2158,7 +2166,7 @@ keyboard, control/owner callbacks, popupRender, portal, вложенные по�
 официального UMD и направления onTabScroll в восьми сочетаниях RTL/placement.
 Здесь же проверяются сохранение DOM, focus, More, прокрутки и cleanup кадров/listeners.
 Drag-and-drop и renderTabBar ещё не перенесены.
-Остаются также destroyInactiveTabPane, полный semantic/config/ref API,
+Остаются также полный semantic/config/ref API,
 component tokens и исходный motion; приоритет уничтожения панелей сохраняет native v1.
 Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,
 placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и motion/prefix.

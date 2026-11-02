@@ -2267,7 +2267,11 @@
         "tests/package/tabs-indicator.ssr.test.ts",
         "tests/browser/tabs-indicator.spec.ts",
         "tests/browser/fixtures/TabsIndicatorFixtures.svelte",
-        "tests/browser/fixtures/ant-design-tabs-indicator-metrics.json"
+        "tests/browser/fixtures/ant-design-tabs-indicator-metrics.json",
+        "tests/browser/tabs-destroy.spec.ts",
+        "tests/browser/fixtures/TabsDestroyFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tabs-destroy-reference.json",
+        "tests/package/tabs-destroy.ssr.test.ts"
       ],
       "features": [
         {
@@ -2401,14 +2405,30 @@
           "note": "Callback получает left/right/top/bottom только при изменении позиции на текущей оси; RTL сохраняет физические направления. Восемь исходных UMD-сценариев задают направления при фокусировке заголовков. Callback обновляется без сброса позиции; одинаковая позиция не создаёт событие, listener удаляется при unmount. Согласованный native scroll сохраняется: браузер может объединять изменения, поэтому cadence и синхронный порядок source useSyncState/transform callbacks, source mixed-axis wheel и kinetic touch mechanism не воспроизводятся."
         },
         {
+          "id": "legacy-destroy",
+          "title": "DestroyInactiveTabPane и сохранённый native lifecycle",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tabs.svelte",
+            "src/lib/TabsPanel.svelte",
+            "src/lib/tabs.types.ts",
+            "tests/browser/tabs-destroy.spec.ts",
+            "tests/browser/fixtures/TabsDestroyFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tabs-destroy-reference.json",
+            "tests/package/tabs-destroy.ssr.test.ts"
+          ],
+          "note": "Добавлен deprecated destroyInactiveTabPane у корня и items; современное destroyOnHidden ?? legacy задаёт приоритет на каждом уровне, включая false. Сохраняется native v1 item-before-root: item.destroyOnHidden ?? item.destroyInactiveTabPane ?? root.destroyOnHidden ?? root.destroyInactiveTabPane ?? false. У rc-tabs 1.13.0 явно заданное общее значение перекрывает item, поэтому полный source приоритет не заявлен. Двенадцать UMD-сценариев фиксируют десять совпадений и два сохранённых отличия. ForceRender сохраняет содержимое, отключение флага после уничтожения не монтирует панель до визита; state, native FormData и owned focus repair сохраняются."
+        },
+        {
           "id": "extended-api",
-          "title": "RenderTabBar, полный semantic/config/ref, aliases и motion API",
+          "title": "RenderTabBar, полный semantic/config/ref и motion API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, destroyInactiveTabPane alias и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся."
+          "note": "Нет renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся."
         }
       ]
     },

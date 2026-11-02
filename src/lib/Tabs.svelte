@@ -42,7 +42,8 @@
     tabBarGutter,
     tabBarStyle,
     size,
-    destroyOnHidden = false,
+    destroyOnHidden,
+    destroyInactiveTabPane,
     tabBarExtraContent,
     id,
     'aria-label': ariaLabel,
@@ -74,6 +75,7 @@
   let selectedKey = $derived(getTabsActiveKey(items, activeKey ?? initialDefault));
   let tabStop = $derived(getTabsActiveKey(items, focusKey ?? selectedKey));
   let resolvedSize = $derived(size ?? config.componentSize);
+  let rootDestroy = $derived(destroyOnHidden ?? destroyInactiveTabPane ?? false);
   let inkBarStyle = $derived(inkStyle && Object.entries(inkStyle)
     .map(([key, value]) => `${key}:${typeof value === 'number' ? `${value}px` : value}`)
     .join(';'));
@@ -463,7 +465,8 @@
   </div>
   <div class="ant-tabs-body-holder"><div bind:this={body} class="ant-tabs-body">
     {#each items as item (item.key)}
-      <TabsPanel id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'tab')} itemKey={item.key} active={selectedKey === item.key} children={item.children} forceRender={item.forceRender} destroyOnHidden={item.destroyOnHidden ?? destroyOnHidden} />
+      <TabsPanel id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'tab')} itemKey={item.key} active={selectedKey === item.key} children={item.children} forceRender={item.forceRender}
+        destroyOnHidden={item.destroyOnHidden ?? item.destroyInactiveTabPane ?? rootDestroy} />
     {:else}<div class="ant-tabs-empty">{config.locale.emptyText}</div>{/each}
   </div></div>
 </div>

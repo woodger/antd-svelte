@@ -64,7 +64,10 @@ export interface TabsItem {
   /** Null/false скрывают кнопку при не заданном closable; closable=true сохраняет её. */
   closeIcon?: TabsContent;
   forceRender?: boolean;
+  /** Настройка панели перекрывает корневую; современное имя перекрывает alias. */
   destroyOnHidden?: boolean;
+  /** @deprecated Используйте destroyOnHidden. */
+  destroyInactiveTabPane?: boolean;
 }
 
 /** Исходные доступные имена управляющих кнопок Tabs. */
@@ -126,6 +129,8 @@ export interface TabsProps {
   size?: ComponentSize | 'medium';
   /** @defaultValue false */
   destroyOnHidden?: boolean;
+  /** @deprecated Используйте destroyOnHidden; явное современное false перекрывает alias. */
+  destroyInactiveTabPane?: boolean;
   tabBarExtraContent?: TabsExtraContent;
   id?: string;
   'aria-label'?: string;
