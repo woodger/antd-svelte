@@ -44,9 +44,14 @@ export function connectTabsNav(
   }
 
   function reveal() {
-    const focused = tabs.find((tab) => tab === list.ownerDocument.activeElement && !tab.disabled);
-    if (focused ?? selected)
-      revealTab(viewport, (focused ?? selected)!, options.vertical);
+    const focused = list.ownerDocument.activeElement;
+    let control: HTMLElement | undefined = selected;
+    if (focused instanceof list.ownerDocument.defaultView!.HTMLElement
+      && list.contains(focused)
+      && focused.matches('[role="tab"]:not(:disabled), .ant-tabs-tab-remove, .ant-tabs-nav-add')) {
+      control = focused.closest<HTMLElement>('[data-tabs-cell]') ?? focused;
+    }
+    if (control) revealTab(viewport, control, options.vertical);
   }
 
   update();

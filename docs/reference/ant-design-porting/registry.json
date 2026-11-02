@@ -2173,7 +2173,7 @@
       "name": "Tabs",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Аудит согласованного native v1 и перенос source editable-card с сохранением существующего выбора, lifecycle панелей и фокуса.",
       "upstreamPath": "components/tabs",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2192,30 +2192,58 @@
           "name": "@rc-component/tabs",
           "range": "~1.13.0",
           "referenceVersion": "1.13.0"
+        },
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@ant-design/icons-svg",
+          "range": "^4.6.0",
+          "referenceVersion": "4.6.0"
         }
       ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/tabs.spec.ts"
+        "tests/browser/tabs.spec.ts",
+        "src/lib/Tabs.svelte",
+        "src/lib/TabsPanel.svelte",
+        "src/lib/tabs.types.ts",
+        "src/lib/tabs.engine.ts",
+        "src/lib/tabs.dom.ts",
+        "src/lib/tabs.engine.test.ts",
+        "src/lib/tabs.ssr.test.ts",
+        "src/lib/TabsEditIcon.svelte",
+        "src/lib/vendor/tabs-editable.css",
+        "tools/ant-design-css-recipes.json",
+        "tests/package/tabs-editable.ssr.test.ts",
+        "tests/browser/tabs-editable.spec.ts",
+        "tests/browser/fixtures/TabsEditableFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tabs-editable-metrics.json"
       ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Согласованные native tabs, выбор, keyboard/focus и lifecycle панелей",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "src/lib/tabs.engine.test.ts",
+            "src/lib/tabs.ssr.test.ts",
+            "tests/browser/tabs.spec.ts"
+          ],
+          "note": "Сохранены native button tabs и именованные панели, bind/default activeKey, first-wins duplicates и пустые ключи, fallback к первой enabled без изменения owner value, lazy/forceRender/destroyOnHidden, FormData, controlled callbacks и cancellation. Manual arrows/Home/End, owned focus recovery и keyed state, RTL/sizes/native themes и mobile placement до 575px — согласованный v1; v1-ready не означает полный React API."
         },
         {
-          "id": "gap-1",
-          "title": "Editable-card и меню overflow",
+          "id": "overflow",
+          "title": "Меню скрытых вкладок more",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "note": "Сохраняется native scroll и показ focused header/action; source visible-range/operations, more trigger/popupRender и удаление скрытых tabs ещё не перенесены."
         },
         {
           "id": "bar-extra",
@@ -2227,7 +2255,35 @@
             "tests/browser/card.spec.ts",
             "tests/browser/tabs.spec.ts"
           ],
-          "note": "Слоты остаются вне tablist; truthiness extras соответствует @rc-component/tabs 1.13.0. Основной подробный аудит Tabs ещё не завершён."
+          "note": "Слоты остаются вне tablist; truthiness extras соответствует @rc-component/tabs 1.13.0. Числовой label=0 сохраняется как согласованный Svelte contract."
+        },
+        {
+          "id": "editable-card",
+          "title": "Editable-card, source edit requests и add/remove controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tabs.svelte",
+            "src/lib/tabs.types.ts",
+            "src/lib/tabs.engine.test.ts",
+            "src/lib/TabsEditIcon.svelte",
+            "src/lib/vendor/tabs-editable.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/package/tabs-editable.ssr.test.ts",
+            "tests/browser/tabs-editable.spec.ts",
+            "tests/browser/fixtures/ant-design-tabs-editable-metrics.json"
+          ],
+          "note": "OnEdit получает native event для add и строковый key для remove; items/selection меняет owner, edit не вызывает onTabClick/onChange. Source getRemovable: disabled/closable=false запрещают, closeIcon=null/false скрывают только при undefined closable; truthy item closeIcon перекрывает removeIcon, falsy removeIcon даёт ×, nullish — CloseOutlined, falsy addIcon — PlusOutlined. Delete/Backspace/middle mouse запрашивают удаление и смещают focus по enabled tabs даже при отказе owner; обычный close не активирует tab. Native sibling buttons без nested controls, action locale labels, passive SVG paths icons-svg 4.6.0, 13 CSS rules из pinned archive. Официальный UMD содержит эталон 25 сочетаний controls и 24 layouts/sizes LTR/RTL. Сохранены keyed panes, drafts/FormData, native form behavior и owner focus; focused add остаётся видимым при добавлении в scroll viewport."
+        },
+        {
+          "id": "extended-api",
+          "title": "Полные header/indicator, semantic/config/ref, aliases и motion API",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Нет centered/tabBarGutter/tabBarStyle/onTabScroll, indicator/indicatorSize и renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, source medium/tabPosition/destroyInactiveTabPane aliases и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Locale.dropdownAriaLabel не используется до переноса overflow menu."
         }
       ]
     },

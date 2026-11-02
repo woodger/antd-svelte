@@ -1957,7 +1957,7 @@ Dropdown.Button, href, popupRender и getPopupContainer пока отсутст�
 
 `items` принимает readonly-массив TabsItem: строковый key, label (строку, число,
 boolean/null или пассивный Snippet), необязательные children (Snippet), icon, disabled,
-forceRender и destroyOnHidden. Ключи идентифицируют панели при перестановке;
+forceRender, destroyOnHidden, closable и closeIcon. Ключи идентифицируют панели при перестановке;
 содержимое и его фокус сохраняются.
 Пустой строковый ключ допустим; при повторении используется первое вхождение.
 Icon декоративный. Label должен давать вкладке доступное имя; интерактивные
@@ -1983,9 +1983,9 @@ fallback при удалении/disabled и перемещение фокуса
 Клавиатура использует ручную активацию. Стрелки перемещают фокус по кругу,
 пропуская disabled; Home/End выбирают первый/последний доступный заголовок.
 В горизонтальном списке действуют Left/Right с учётом RTL, в вертикальном —
-Up/Down. Enter и Space активируют сфокусированную вкладку. Список добавляет
+Up/Down. Enter и Space активируют сфокусированную вкладку. Заголовки добавляют
 одну остановку Tab; после выхода повторный вход возвращает фокус к выбранной
-вкладке. Tab из списка переходит к именованной активной панели, затем к её
+вкладке. В line/card Tab из списка переходит к именованной активной панели, затем к её
 полям и кнопкам. При скрытии сфокусированной панели или удалении/disabled
 сфокусированного заголовка фокус переходит на доступный заголовок либо tablist.
 Изменения при фокусе снаружи Tabs не перемещают его внутрь.
@@ -2006,7 +2006,7 @@ Tabs не является полем формы и не наследует disa
 доступность навигации задаётся disabled отдельных items. Заголовки используют
 button type=button и не отправляют окружающую форму.
 
-Type поддерживает line и card, tabPlacement — top, bottom, start, end.
+Type поддерживает line/card/editable-card, tabPlacement — top, bottom, start, end.
 Start/end разрешаются относительно RTL. На экране шириной до 575px вертикальный
 список переходит наверх. Переполнение прокручивается; навигация показывает
 сфокусированный заголовок без прокрутки всей страницы. Size использует общий
@@ -2018,10 +2018,51 @@ Snippet. Слоты находятся вне tablist и допускают на
 они не участвуют в навигации стрелками. Как @rc-component/tabs 1.13.0, falsy extra
 (включая 0) не создаёт wrapper; числовой label=0 при этом отображается.
 
-Галерея `/ant-design#tabs` показывает профиль, настройки, историю Table,
-сохранение черновиков, destroyOnHidden и Tabs внутри Modal. Первая версия
-не поддерживает editable-card, добавление/закрытие пользователем, drag-and-drop,
-меню переполнения more, renderTabBar и настройку indicator.
+В editable-card `onEdit(target, action)` запрашивает изменение у владельца:
+add получает native click event, remove — строковый key, включая пустой.
+Items и activeKey меняет владелец; edit сам по себе не вызывает onChange/onTabClick.
+HideAdd=true скрывает добавление. Disabled и closable=false запрещают удаление;
+closeIcon=null/false скрывают кнопку только при не заданном closable.
+Closable=true сохраняет кнопку и использует fallback иконки. Приоритет —
+truthy closeIcon, removeIcon, затем «×»; nullish removeIcon использует CloseOutlined.
+Falsy addIcon использует PlusOutlined. Boolean true создаёт пустую иконку,
+сохраняя доступное имя кнопки. Иконки — пассивные TabsContent/Snippet.
+
+Delete/Backspace и средняя кнопка мыши запрашивают удаление и перемещают фокус
+вперёд, а для последней доступной вкладки — назад; disabled пропускаются.
+Это происходит и при отказе владельца менять items. Обычный click на close
+не активирует вкладку. Фокус, явно заданный владельцем снаружи Tabs, сохраняется.
+Close выбранной вкладки и Add доступны через Tab; остальные close имеют tabindex=-1.
+Locale.addAriaLabel/removeAriaLabel задают имена с defaults «Add tab»/«remove».
+DropdownAriaLabel пока не используется: меню переполнения ещё не перенесено.
+
+```svelte
+<script lang="ts">
+  import { Tabs, type TabsItem } from 'antd-svelte';
+
+  let items = $state<TabsItem[]>([{ key: 'first', label: 'Первая вкладка' }]);
+  let next = 1;
+</script>
+
+<Tabs type="editable-card" aria-label="Разделы" {items}
+  locale={{ addAriaLabel: 'Добавить вкладку', removeAriaLabel: 'Закрыть вкладку' }}
+  onEdit={(target, action) => {
+    if (action === 'add') {
+      const key = `new-${next++}`;
+      items = [...items, { key, label: 'Новая вкладка' }];
+    } else if (typeof target === 'string') {
+      items = items.filter(item => item.key !== target);
+    }
+  }} />
+```
+
+Фикстура `?fixture=tabs-editable` сверяет truthiness, иконки и размеры с Ant Design
+6.6.8 и @rc-component/tabs 1.13.0. Проверяются callbacks, принятие/отказ владельца,
+фокус, FormData, layout/RTL и сохранение панелей. Галерея `/ant-design#tabs`
+показывает профиль, настройки, историю Table, destroyOnHidden и Tabs внутри Modal.
+Drag-and-drop, меню more, renderTabBar и настройка indicator ещё не перенесены.
+Остаются также centered/tabBarGutter/tabBarStyle/onTabScroll, source size/placement
+aliases, полный semantic/config/ref API, component tokens и исходный motion.
 
 ## Collapse
 
@@ -7274,6 +7315,11 @@ dropdown.engine.ts — навигацию и typeahead, popup.dom.ts — пов�
 :where(.ant-tabs-css-var), группы с общими declarations сохранены.
 Tabs.svelte и tabs.engine.ts управляют выбором и фокусом, TabsPanel.svelte —
 временем жизни содержимого; tabs.dom.ts измеряет индикатор и прокручивает заголовки.
+[vendor/tabs-editable.css](./src/lib/vendor/tabs-editable.css) дополняет их 13
+исходными правилами add/remove, размеров, focus и RTL. Рецепт tabs-editable
+воспроизводит их из закреплённого архива; прежний tabs.css сохранён.
+TabsEditIcon использует точные PlusOutlined/CloseOutlined из icons-svg 4.6.0
+под существующей MIT-лицензией; их пути совпадают с официальным UMD Ant Design.
 [vendor/collapse.css](./src/lib/vendor/collapse.css) содержит 49 правил Collapse и его
 токены из того же архива. Корневые селекторы ограничены
 :where(.ant-collapse-css-var); React motion и правила ColorPicker исключены.

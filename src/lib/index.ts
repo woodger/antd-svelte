@@ -418,7 +418,7 @@ export type {
   DropdownPlacement,
   DropdownTrigger
 } from './dropdown.types';
-export type { TabsProps, TabsItem, TabsType, TabsPlacement } from './tabs.types';
+export type { TabsProps, TabsItem, TabsType, TabsPlacement, TabsLocale } from './tabs.types';
 export type {
   CollapseProps,
   CollapseItem,

@@ -1,15 +1,17 @@
 <script lang="ts">
-  import { onDestroy, untrack } from 'svelte';
+  import { onDestroy, tick, untrack } from 'svelte';
   import TabsPanel from './TabsPanel.svelte';
+  import TabsEditIcon from './TabsEditIcon.svelte';
   import { useConfig } from './config-context';
   import { connectTabsNav, revealTab } from './tabs.dom';
   import {
     getTabsActiveKey,
     getTabsNavigationKey,
     getTabsPlacement,
+    isTabsItemRemovable,
     normalizeTabsItems
   } from './tabs.engine';
-  import type { TabsContent, TabsProps } from './tabs.types';
+  import type { TabsContent, TabsItem, TabsProps } from './tabs.types';
 
   let {
     items: sourceItems,
@@ -18,6 +20,11 @@
     onChange,
     onTabClick,
     type = 'line',
+    onEdit,
+    hideAdd = false,
+    addIcon,
+    removeIcon,
+    locale,
     tabPlacement = 'top',
     size,
     destroyOnHidden = false,
@@ -39,7 +46,7 @@
   let indicator = $state<HTMLDivElement>();
   let focusKey = $state<string | undefined>();
   let mobile = $state(false);
-  let repairFocus = false;
+  let repairFocus = $state(false);
   let retainedFocus: HTMLElement | undefined;
   let active = true;
   let rootId = $derived(id ?? `ant-tabs-${generatedId}`);
@@ -49,6 +56,8 @@
   let resolvedSize = $derived(size ?? config.componentSize);
   let placement = $derived(getTabsPlacement(tabPlacement, config.direction, mobile));
   let vertical = $derived(placement === 'left' || placement === 'right');
+  let editable = $derived(type === 'editable-card');
+  let showAdd = $derived(editable && hideAdd !== true);
   let extraLeft = $derived(
     tabBarExtraContent && typeof tabBarExtraContent === 'object'
       ? tabBarExtraContent.left
@@ -76,6 +85,8 @@
     const panels = body;
     const key = selectedKey;
     const available = items.filter((item) => !item.disabled);
+    const canAdd = showAdd;
+    const layoutChanged = nav?.hasAttribute('data-tabs-editable') !== editable;
     retainedFocus = undefined;
     if (!nav || !panels) return;
 
@@ -91,13 +102,18 @@
     if (nav.contains(focused)) {
       if (focused === nav)
         repairFocus = key !== undefined;
-      else if (focused instanceof HTMLElement
-        && !available.some(
-          (item) => item.key === focused.dataset.tabsKey
-        ))
-        repairFocus = true;
-      else if (moving && focused instanceof HTMLElement)
-        retainedFocus = focused;
+      else if (focused instanceof HTMLElement) {
+        const item = available.find(item => item.key === focused.dataset.tabsKey);
+        const adding = focused.matches('.ant-tabs-nav-add');
+        const removing = focused.matches('.ant-tabs-tab-remove');
+        if (adding ? !canAdd : !item || layoutChanged
+          || removing && !isTabsItemRemovable(item, editable)) {
+          focusKey = adding ? undefined : item?.key;
+          repairFocus = true;
+        } else if (moving) {
+          retainedFocus = focused;
+        }
+      }
     } else if (panels.contains(focused)) {
       const panel = Array.from(panels.children).find((element) => element.contains(focused));
       if (panel instanceof HTMLElement && panel.dataset.tabsKey !== key)
@@ -175,9 +191,17 @@
   }
 
   function handleKeydown(event: KeyboardEvent) {
-    if (event.defaultPrevented
-      || event.isComposing
-      || event.ctrlKey
+    if (event.defaultPrevented || event.isComposing) return;
+    if (event.target instanceof Element
+      && event.target.closest('.ant-tabs-tab-remove, .ant-tabs-nav-add')) return;
+
+    if (editable && (event.key === 'Delete' || event.key === 'Backspace')) {
+      const item = items.find(item => item.key === focusKey);
+      if (item) void removeTab(item, event, true);
+      return;
+    }
+
+    if (event.ctrlKey
       || event.metaKey
       || event.altKey) return;
 
@@ -214,12 +238,47 @@
   function handleFocusout(event: FocusEvent) {
     if (event.relatedTarget instanceof Node && !list?.contains(event.relatedTarget))
       focusKey = undefined;
+    else if (event.relatedTarget instanceof Element
+      && event.relatedTarget.closest('.ant-tabs-nav-add, .ant-tabs-tab-remove'))
+      focusKey = undefined;
   }
 
   function handleTabFocus(key: string, element: HTMLButtonElement) {
     focusKey = key;
     if (viewport)
-      revealTab(viewport, element, vertical);
+      revealTab(viewport, element.closest<HTMLElement>('[data-tabs-cell]') ?? element, vertical);
+  }
+
+  async function removeTab(
+    item: TabsItem,
+    event: MouseEvent | KeyboardEvent,
+    moveFocus = false
+  ) {
+    if (!isTabsItemRemovable(item, editable)) return;
+
+    event.preventDefault();
+    event.stopPropagation();
+    const enabled = items.filter(item => !item.disabled);
+    const last = enabled.at(-1)?.key === item.key;
+    const next = getTabsNavigationKey(items, tabStop, last ? 'previous' : 'next');
+    onEdit?.(item.key, 'remove');
+    if (!moveFocus) return;
+
+    await tick();
+    if (!active || !root) return;
+    const focused = root.ownerDocument.activeElement;
+    if (focused !== root.ownerDocument.body && !root.contains(focused)) return;
+
+    focusTab(getTabsActiveKey(items, next));
+  }
+
+  function handleCellClick(item: TabsItem, event: MouseEvent) {
+    if (event.target instanceof Element && event.target.closest('button')) return;
+    activate(item.key, event);
+  }
+
+  function handleCellMouseDown(item: TabsItem, event: MouseEvent) {
+    if (event.button === 1) void removeTab(item, event, true);
   }
 </script>
 
@@ -232,6 +291,9 @@
   .ant-tabs-left > .ant-tabs-nav .ant-tabs-nav-wrap, .ant-tabs-right > .ant-tabs-nav .ant-tabs-nav-wrap { max-height: min(400px, 60dvh); }
   .ant-tabs-left > .ant-tabs-nav .ant-tabs-tab, .ant-tabs-right > .ant-tabs-nav .ant-tabs-tab { white-space: normal; overflow-wrap: anywhere; }
   :where(button.ant-tabs-tab) { appearance: none; margin: 0; font: inherit; text-align: inherit; flex: none; }
+  button.ant-tabs-tab-btn { appearance: none; padding: 0; border: 0; background: transparent; font: inherit; color: inherit; text-align: inherit; cursor: inherit; }
+  button.ant-tabs-tab-btn:disabled { cursor: not-allowed; }
+  button.ant-tabs-tab-btn:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
   .ant-tabs .ant-tabs-tab:focus-visible, .ant-tabs-nav-list:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -3px; }
   .ant-tabs-empty { padding: var(--ant-padding-sm); color: var(--ant-color-text-description); }
   .ant-tabs-ink-bar[hidden] { display: none; }
@@ -242,10 +304,31 @@
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
 
+{#snippet defaultRemove()}<TabsEditIcon name="close" />{/snippet}
+{#snippet tabButton(item: TabsItem, editing: boolean)}
+  <button type="button" role="tab" id={itemId(item.key, 'tab')} data-tabs-key={item.key}
+    aria-controls={itemId(item.key, 'panel')} aria-selected={selectedKey === item.key}
+    disabled={item.disabled} tabindex={tabStop === item.key ? 0 : -1}
+    class={editing ? 'ant-tabs-tab-btn' : [
+      'ant-tabs-tab',
+      selectedKey === item.key && 'ant-tabs-tab-active',
+      item.disabled && 'ant-tabs-tab-disabled'
+    ]}
+    onfocus={event => handleTabFocus(item.key, event.currentTarget)}
+    onclick={event => activate(item.key, event)}>
+    {#if editing}
+      {#if item.icon}<span class="ant-tabs-tab-icon" aria-hidden="true">{@render item.icon()}</span>{/if}<span class="ant-tabs-tab-label">{@render value(item.label)}</span>
+    {:else}
+      <span class="ant-tabs-tab-btn">{#if item.icon}<span class="ant-tabs-tab-icon" aria-hidden="true">{@render item.icon()}</span>{/if}<span class="ant-tabs-tab-label">{@render value(item.label)}</span></span>
+    {/if}
+  </button>
+{/snippet}
+
 <div bind:this={root} id={rootId} dir={config.direction} class={[
     'ant-tabs ant-tabs-css-var',
     `ant-tabs-${placement}`,
-    type === 'card' && 'ant-tabs-card',
+    (type === 'card' || editable) && 'ant-tabs-card',
+    editable && 'ant-tabs-editable ant-tabs-editable-card',
     resolvedSize !== 'middle' && `ant-tabs-${resolvedSize}`,
     config.direction === 'rtl' && 'ant-tabs-rtl',
     className
@@ -253,16 +336,35 @@
   <div class="ant-tabs-nav" role="presentation">
     {#if extraLeft}<div class="ant-tabs-extra-content">{@render value(extraLeft)}</div>{/if}
     <div bind:this={viewport} class="ant-tabs-nav-wrap">
-      <div bind:this={list} role="tablist" aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-orientation={vertical ? 'vertical' : 'horizontal'} tabindex={tabStop === undefined ? 0 : undefined} class="ant-tabs-nav-list" onkeydown={handleKeydown} onfocusout={handleFocusout}>
+      <div bind:this={list} role="tablist" aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-orientation={vertical ? 'vertical' : 'horizontal'} tabindex={tabStop === undefined ? 0 : undefined} class="ant-tabs-nav-list" data-tabs-editable={editable ? '' : undefined} onkeydown={handleKeydown} onfocusout={handleFocusout}>
         {#each items as item (item.key)}
-          <button type="button" role="tab" id={itemId(item.key, 'tab')} data-tabs-key={item.key} aria-controls={itemId(item.key, 'panel')} aria-selected={selectedKey === item.key} disabled={item.disabled} tabindex={tabStop === item.key ? 0 : -1} class={[
+          {#if editable}
+            <div role="presentation" data-tabs-cell={item.key} class={[
               'ant-tabs-tab',
               selectedKey === item.key && 'ant-tabs-tab-active',
-              item.disabled && 'ant-tabs-tab-disabled'
-            ]} onfocus={(event) => handleTabFocus(item.key, event.currentTarget)} onclick={(event) => activate(item.key, event)}>
-            <span class="ant-tabs-tab-btn">{#if item.icon}<span class="ant-tabs-tab-icon" aria-hidden="true">{@render item.icon()}</span>{/if}<span class="ant-tabs-tab-label">{@render value(item.label)}</span></span>
-          </button>
+              item.disabled && 'ant-tabs-tab-disabled',
+              focusKey === item.key && 'ant-tabs-tab-focus',
+              isTabsItemRemovable(item, editable) && 'ant-tabs-tab-with-remove'
+            ]} onclick={event => handleCellClick(item, event)}
+              onmousedown={event => handleCellMouseDown(item, event)}>
+              {@render tabButton(item, true)}
+              {#if isTabsItemRemovable(item, editable)}
+                <button type="button" class="ant-tabs-tab-remove" data-tabs-key={item.key}
+                  aria-label={locale?.removeAriaLabel || 'remove'}
+                  tabindex={selectedKey === item.key ? 0 : -1}
+                  onclick={event => { void removeTab(item, event); }}>
+                  {@render value(item.closeIcon || (removeIcon ?? defaultRemove) || '×')}
+                </button>
+              {/if}
+            </div>
+          {:else}{@render tabButton(item, false)}{/if}
         {/each}
+        {#if showAdd}
+          <button type="button" class="ant-tabs-nav-add" aria-label={locale?.addAriaLabel || 'Add tab'}
+            onclick={event => onEdit?.(event, 'add')}>
+            {#if addIcon}{@render value(addIcon)}{:else}<TabsEditIcon name="plus" />{/if}
+          </button>
+        {/if}
         <div bind:this={indicator} class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" aria-hidden="true" hidden></div>
       </div>
     </div>

@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **107**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **48**; требуется аудит у **22**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **49**; требуется аудит у **21**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -32,7 +32,7 @@ Candidate означает запись каталога, для которой 
 | [Menu](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/menu) | navigation | target | Menu | Согласованный v1 покрыт | Адаптивное horizontal overflow и исходные popup/inline motion (missing); Полный semantic/config, render hooks, tooltip и legacy children API (missing) |
 | [Pagination](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/pagination) | navigation | target | Pagination | Согласованный v1 покрыт | Полные Select props, Form variant и React-specific API (missing) |
 | [Steps](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/steps) | navigation | target | Steps | Согласованный v1 покрыт | PrefixCls и глобальный steps config вне темы (missing) |
-| [Tabs](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tabs) | navigation | target | Tabs | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Editable-card и меню overflow (missing) |
+| [Tabs](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tabs) | navigation | target | Tabs | Согласованный v1 покрыт | Меню скрытых вкладок more (missing); Полные header/indicator, semantic/config/ref, aliases и motion API (missing) |
 | [AutoComplete](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/auto-complete) | data-entry | target | AutoComplete | Согласованный v1 покрыт | Virtual, fieldNames, render hooks, semantic/config API и legacy aliases (missing) |
 | [Cascader](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/cascader) | data-entry | target | Cascader, CascaderPanel, CASCADER_SHOW_PARENT, CASCADER_SHOW_CHILD | Согласованный v1 покрыт | Полный portal/React-specific API и generic ValueField inference (missing) |
 | [Checkbox](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/checkbox) | data-entry | target | Checkbox, CheckboxGroup | Согласованный v1 покрыт | Сохраняемые Svelte/native contracts вместо React conventions (partial); Source themes/Wave, произвольный prefix CSS и React diagnostics/statics (partial) |

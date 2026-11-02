@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tabs: editable-card с onEdit, hideAdd, closable/closeIcon, add/remove icons
+  и доступными именами действий. Delete/Backspace/middle mouse сохраняют исходные
+  запросы и соседний фокус; items/selection меняет владелец. Добавлены native
+  add/remove buttons, точные SVG, CSS-рецепт и UMD conformance, SSR/browser-проверки
+  размеров, RTL, focus, callbacks, FormData и сохранения панелей.
 - Theme Pagination: исходные defaults/aliases, quick-jumper Input tokens,
   отдельный Select scope, algorithms, CSS prefix/hash и wireframe из исходного
   bordered.ts. Добавлены UMD conformance, SSR и browser-проверки размеров,

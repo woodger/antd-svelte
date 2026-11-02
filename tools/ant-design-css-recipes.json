@@ -1007,5 +1007,22 @@
     "replacements": [],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Wave: reset, ordinary/quick appear transitions; без keyframes.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "tabs-editable",
+    "output": "src/lib/vendor/tabs-editable.css",
+    "expectedRules": 13,
+    "include": [
+      "^(?=.*\\.ant-tabs(?![\\w]))(?=.*(?:tab-remove|nav-add|tab-with-remove|editable))"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.ant-tabs(?![-\\w])",
+        "replacement": ".ant-tabs:where(.ant-tabs-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Tabs editable-card: кнопки добавления и удаления, размеры, RTL и focus.\n * Дополнение существующего tabs.css; declarations сохранены.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]

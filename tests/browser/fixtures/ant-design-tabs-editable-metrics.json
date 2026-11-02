@@ -1,0 +1,2341 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4",
+    "operation": "render official editable Tabs; capture remove/add truthiness, native labels, icon paths and LTR/RTL sizes/placements",
+    "rcTabs": {
+      "version": "1.13.0",
+      "revision": "dea2f5f48991865ddbf743b0f783f45eb72ff671"
+    }
+  },
+  "cases": [
+    {
+      "name": "default",
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "card",
+      "props": {
+        "type": "card"
+      },
+      "remove": null,
+      "add": null
+    },
+    {
+      "name": "not-closable",
+      "item": {
+        "closable": false
+      },
+      "remove": null,
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "disabled",
+      "item": {
+        "disabled": true
+      },
+      "remove": null,
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "close-null",
+      "item": {
+        "closeIcon": null
+      },
+      "remove": null,
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "close-false",
+      "item": {
+        "closeIcon": false
+      },
+      "remove": null,
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "close-zero",
+      "item": {
+        "closeIcon": 0
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "close-empty",
+      "item": {
+        "closeIcon": ""
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "close-true",
+      "item": {
+        "closeIcon": true
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "12px",
+          "height": "2px"
+        },
+        "paths": []
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "force-null",
+      "item": {
+        "closable": true,
+        "closeIcon": null
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "force-false",
+      "item": {
+        "closable": true,
+        "closeIcon": false
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "custom-close",
+      "item": {
+        "closeIcon": "R"
+      },
+      "remove": {
+        "label": "remove",
+        "text": "R",
+        "tabIndex": 0,
+        "box": {
+          "width": "19px",
+          "height": "14px"
+        },
+        "paths": []
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "custom-remove",
+      "props": {
+        "removeIcon": "X"
+      },
+      "remove": {
+        "label": "remove",
+        "text": "X",
+        "tabIndex": 0,
+        "box": {
+          "width": "19px",
+          "height": "14px"
+        },
+        "paths": []
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "remove-false",
+      "props": {
+        "removeIcon": false
+      },
+      "remove": {
+        "label": "remove",
+        "text": "×",
+        "tabIndex": 0,
+        "box": {
+          "width": "19px",
+          "height": "14px"
+        },
+        "paths": []
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "remove-zero",
+      "props": {
+        "removeIcon": 0
+      },
+      "remove": {
+        "label": "remove",
+        "text": "×",
+        "tabIndex": 0,
+        "box": {
+          "width": "19px",
+          "height": "14px"
+        },
+        "paths": []
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "remove-true",
+      "props": {
+        "removeIcon": true
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "12px",
+          "height": "2px"
+        },
+        "paths": []
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "remove-null",
+      "props": {
+        "removeIcon": null
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "add-false",
+      "props": {
+        "addIcon": false
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "add-zero",
+      "props": {
+        "addIcon": 0
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "add-true",
+      "props": {
+        "addIcon": true
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": []
+      }
+    },
+    {
+      "name": "add-empty",
+      "props": {
+        "addIcon": ""
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "custom-add",
+      "props": {
+        "addIcon": "A"
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add tab",
+        "text": "A",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": []
+      }
+    },
+    {
+      "name": "hide-add",
+      "props": {
+        "hideAdd": true
+      },
+      "remove": {
+        "label": "remove",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": null
+    },
+    {
+      "name": "locale",
+      "props": {
+        "locale": {
+          "addAriaLabel": "Add section",
+          "removeAriaLabel": "Close section"
+        }
+      },
+      "remove": {
+        "label": "Close section",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "24px",
+          "height": "14.7812px"
+        },
+        "paths": [
+          "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+        ]
+      },
+      "add": {
+        "label": "Add section",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    },
+    {
+      "name": "empty",
+      "empty": true,
+      "remove": null,
+      "add": {
+        "label": "Add tab",
+        "text": "",
+        "tabIndex": 0,
+        "box": {
+          "width": "40px",
+          "height": "40px"
+        },
+        "paths": [
+          "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+          "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+        ]
+      }
+    }
+  ],
+  "metrics": [
+    {
+      "direction": "ltr",
+      "tabPlacement": "top",
+      "size": "middle",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "116.25px",
+        "height": "40px",
+        "paddingTop": "8px",
+        "paddingRight": "16px",
+        "paddingBottom": "8px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "40px",
+        "height": "40px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "top",
+      "size": "small",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "100.25px",
+        "height": "32px",
+        "paddingTop": "4px",
+        "paddingRight": "8px",
+        "paddingBottom": "4px",
+        "paddingLeft": "8px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "6px 6px 0px 0px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "32px",
+        "height": "32px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "top",
+      "size": "large",
+      "cell": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "124.016px",
+        "height": "48px",
+        "paddingTop": "11px",
+        "paddingRight": "16px",
+        "paddingBottom": "11px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      },
+      "tab": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "62.0156px",
+        "height": "24px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "48px",
+        "height": "48px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "bottom",
+      "size": "middle",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "116.25px",
+        "height": "40px",
+        "paddingTop": "8px",
+        "paddingRight": "16px",
+        "paddingBottom": "8px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(255, 255, 255)",
+        "borderRadius": "0px 0px 8px 8px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "40px",
+        "height": "40px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "bottom",
+      "size": "small",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "100.25px",
+        "height": "32px",
+        "paddingTop": "4px",
+        "paddingRight": "8px",
+        "paddingBottom": "4px",
+        "paddingLeft": "8px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(255, 255, 255)",
+        "borderRadius": "0px 0px 6px 6px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "32px",
+        "height": "32px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "bottom",
+      "size": "large",
+      "cell": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "124.016px",
+        "height": "48px",
+        "paddingTop": "11px",
+        "paddingRight": "16px",
+        "paddingBottom": "11px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(255, 255, 255)",
+        "borderRadius": "0px 0px 8px 8px"
+      },
+      "tab": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "62.0156px",
+        "height": "24px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "48px",
+        "height": "48px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "start",
+      "size": "middle",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "116.25px",
+        "height": "40px",
+        "paddingTop": "8px",
+        "paddingRight": "16px",
+        "paddingBottom": "8px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 0px 0px 8px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "114.25px",
+        "height": "40px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "start",
+      "size": "small",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "100.25px",
+        "height": "32px",
+        "paddingTop": "4px",
+        "paddingRight": "8px",
+        "paddingBottom": "4px",
+        "paddingLeft": "8px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "6px 0px 0px 6px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "98.25px",
+        "height": "32px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "start",
+      "size": "large",
+      "cell": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "124.016px",
+        "height": "48px",
+        "paddingTop": "11px",
+        "paddingRight": "16px",
+        "paddingBottom": "11px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 0px 0px 8px"
+      },
+      "tab": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "62.0156px",
+        "height": "24px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "122.016px",
+        "height": "48px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "end",
+      "size": "middle",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "116.25px",
+        "height": "40px",
+        "paddingTop": "8px",
+        "paddingRight": "16px",
+        "paddingBottom": "8px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "0px 8px 8px 0px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "114.25px",
+        "height": "40px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "end",
+      "size": "small",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "100.25px",
+        "height": "32px",
+        "paddingTop": "4px",
+        "paddingRight": "8px",
+        "paddingBottom": "4px",
+        "paddingLeft": "8px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "0px 6px 6px 0px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "98.25px",
+        "height": "32px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "ltr",
+      "tabPlacement": "end",
+      "size": "large",
+      "cell": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "124.016px",
+        "height": "48px",
+        "paddingTop": "11px",
+        "paddingRight": "16px",
+        "paddingBottom": "11px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "0px 8px 8px 0px"
+      },
+      "tab": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "62.0156px",
+        "height": "24px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "8px",
+        "marginRight": "-4px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "122.016px",
+        "height": "48px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "top",
+      "size": "middle",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "116.25px",
+        "height": "40px",
+        "paddingTop": "8px",
+        "paddingRight": "16px",
+        "paddingBottom": "8px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "40px",
+        "height": "40px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "top",
+      "size": "small",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "100.25px",
+        "height": "32px",
+        "paddingTop": "4px",
+        "paddingRight": "8px",
+        "paddingBottom": "4px",
+        "paddingLeft": "8px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "6px 6px 0px 0px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "32px",
+        "height": "32px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "top",
+      "size": "large",
+      "cell": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "124.016px",
+        "height": "48px",
+        "paddingTop": "11px",
+        "paddingRight": "16px",
+        "paddingBottom": "11px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      },
+      "tab": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "62.0156px",
+        "height": "24px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "48px",
+        "height": "48px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "bottom",
+      "size": "middle",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "116.25px",
+        "height": "40px",
+        "paddingTop": "8px",
+        "paddingRight": "16px",
+        "paddingBottom": "8px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(255, 255, 255)",
+        "borderRadius": "0px 0px 8px 8px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "40px",
+        "height": "40px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "bottom",
+      "size": "small",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "100.25px",
+        "height": "32px",
+        "paddingTop": "4px",
+        "paddingRight": "8px",
+        "paddingBottom": "4px",
+        "paddingLeft": "8px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(255, 255, 255)",
+        "borderRadius": "0px 0px 6px 6px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "32px",
+        "height": "32px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "bottom",
+      "size": "large",
+      "cell": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "124.016px",
+        "height": "48px",
+        "paddingTop": "11px",
+        "paddingRight": "16px",
+        "paddingBottom": "11px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(255, 255, 255)",
+        "borderRadius": "0px 0px 8px 8px"
+      },
+      "tab": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "62.0156px",
+        "height": "24px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "48px",
+        "height": "48px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "start",
+      "size": "middle",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "116.25px",
+        "height": "40px",
+        "paddingTop": "8px",
+        "paddingRight": "16px",
+        "paddingBottom": "8px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "0px 8px 8px 0px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "114.25px",
+        "height": "40px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "start",
+      "size": "small",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "100.25px",
+        "height": "32px",
+        "paddingTop": "4px",
+        "paddingRight": "8px",
+        "paddingBottom": "4px",
+        "paddingLeft": "8px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "0px 6px 6px 0px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "98.25px",
+        "height": "32px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "start",
+      "size": "large",
+      "cell": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "124.016px",
+        "height": "48px",
+        "paddingTop": "11px",
+        "paddingRight": "16px",
+        "paddingBottom": "11px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "0px 8px 8px 0px"
+      },
+      "tab": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "62.0156px",
+        "height": "24px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "122.016px",
+        "height": "48px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "end",
+      "size": "middle",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "116.25px",
+        "height": "40px",
+        "paddingTop": "8px",
+        "paddingRight": "16px",
+        "paddingBottom": "8px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 0px 0px 8px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "114.25px",
+        "height": "40px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "end",
+      "size": "small",
+      "cell": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "100.25px",
+        "height": "32px",
+        "paddingTop": "4px",
+        "paddingRight": "8px",
+        "paddingBottom": "4px",
+        "paddingLeft": "8px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "6px 0px 0px 6px"
+      },
+      "tab": {
+        "fontSize": "14px",
+        "lineHeight": "22px",
+        "color": "rgb(22, 119, 255)",
+        "width": "54.25px",
+        "height": "22px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "98.25px",
+        "height": "32px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    },
+    {
+      "direction": "rtl",
+      "tabPlacement": "end",
+      "size": "large",
+      "cell": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "124.016px",
+        "height": "48px",
+        "paddingTop": "11px",
+        "paddingRight": "16px",
+        "paddingBottom": "11px",
+        "paddingLeft": "16px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 0px 0px 8px"
+      },
+      "tab": {
+        "fontSize": "16px",
+        "lineHeight": "24px",
+        "color": "rgb(22, 119, 255)",
+        "width": "62.0156px",
+        "height": "24px",
+        "paddingTop": "0px",
+        "paddingRight": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "marginLeft": "0px",
+        "marginRight": "0px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgb(22, 119, 255)",
+        "borderRadius": "0px"
+      },
+      "remove": {
+        "fontSize": "12px",
+        "lineHeight": "12px",
+        "color": "rgba(0, 0, 0, 0.45)",
+        "width": "24px",
+        "height": "14.7812px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "-4px",
+        "marginRight": "8px",
+        "borderTopWidth": "0px",
+        "borderTopColor": "rgba(0, 0, 0, 0.45)",
+        "borderRadius": "0px"
+      },
+      "add": {
+        "fontSize": "13.3333px",
+        "lineHeight": "normal",
+        "color": "rgba(0, 0, 0, 0.88)",
+        "width": "122.016px",
+        "height": "48px",
+        "paddingTop": "1px",
+        "paddingRight": "6px",
+        "paddingBottom": "1px",
+        "paddingLeft": "6px",
+        "marginLeft": "2px",
+        "marginRight": "0px",
+        "borderTopWidth": "1px",
+        "borderTopColor": "rgb(240, 240, 240)",
+        "borderRadius": "8px 8px 0px 0px"
+      }
+    }
+  ]
+}

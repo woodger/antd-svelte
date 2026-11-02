@@ -1,0 +1,19 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * Tabs editable-card: кнопки добавления и удаления, размеры, RTL и focus.
+ * Дополнение существующего tabs.css; declarations сохранены.
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+.ant-tabs-card.ant-tabs-small >.ant-tabs-nav .ant-tabs-nav-add{min-width:var(--ant-tabs-card-height-sm);min-height:var(--ant-tabs-card-height-sm);}
+.ant-tabs-card.ant-tabs-large >.ant-tabs-nav .ant-tabs-nav-add{min-width:var(--ant-tabs-card-height-lg);min-height:var(--ant-tabs-card-height-lg);}
+.ant-tabs-rtl .ant-tabs-nav .ant-tabs-tab .ant-tabs-tab-remove{margin-right:var(--ant-margin-xs);margin-left:calc(var(--ant-margin-xxs) * -1);}
+.ant-tabs-rtl .ant-tabs-nav .ant-tabs-tab .ant-tabs-tab-remove .anticon{margin:0;}
+.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-add,.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-add{min-width:var(--ant-tabs-card-height);min-height:var(--ant-tabs-card-height);margin-left:var(--ant-tabs-card-gutter);background:transparent;border:var(--ant-line-width) var(--ant-line-type) var(--ant-color-border-secondary);border-radius:var(--ant-border-radius-lg) var(--ant-border-radius-lg) 0 0;outline:none;cursor:pointer;color:var(--ant-color-text);transition:all var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);}
+.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-add:hover,.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-add:hover{color:var(--ant-tabs-item-hover-color);}
+.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-add:active,.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-add:active,.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-add:focus:not(:focus-visible),.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-add:focus:not(:focus-visible){color:var(--ant-tabs-item-active-color);}
+.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-add:focus-visible,.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-add:focus-visible{outline:var(--ant-line-width-focus) solid var(--ant-color-primary-border);outline-offset:-3px;transition:outline-offset 0s,outline 0s;}
+.ant-tabs:where(.ant-tabs-css-var) .ant-tabs-tab-remove:focus:not(:focus-visible),.ant-tabs:where(.ant-tabs-css-var) .ant-tabs-tab-remove:active{color:var(--ant-tabs-item-active-color);}
+.ant-tabs:where(.ant-tabs-css-var) .ant-tabs-tab-remove{flex:none;line-height:1;margin-right:calc(var(--ant-margin-xxs) * -1);margin-left:var(--ant-margin-xs);color:var(--ant-color-icon);font-size:var(--ant-font-size-sm);background:transparent;border:none;outline:none;cursor:pointer;transition:all var(--ant-motion-duration-slow);}
+.ant-tabs:where(.ant-tabs-css-var) .ant-tabs-tab-remove:hover{color:var(--ant-color-text-heading);}
+.ant-tabs:where(.ant-tabs-css-var) .ant-tabs-tab-remove:focus-visible{outline:var(--ant-line-width-focus) solid var(--ant-color-primary-border);outline-offset:1px;transition:outline-offset 0s,outline 0s;}
+.ant-tabs:where(.ant-tabs-css-var) .ant-tabs-tab .ant-tabs-tab-remove .anticon{margin:0;vertical-align:middle;}

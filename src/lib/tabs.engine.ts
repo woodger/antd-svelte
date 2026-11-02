@@ -1,5 +1,13 @@
 import type { TabsItem, TabsPlacement } from './tabs.types';
 
+export function isTabsItemRemovable(
+  item: Pick<TabsItem, 'closable' | 'closeIcon' | 'disabled'>,
+  editable: boolean
+): boolean {
+  return editable && !item.disabled && item.closable !== false
+    && !(item.closable === undefined && (item.closeIcon === null || item.closeIcon === false));
+}
+
 export function normalizeTabsItems(items: readonly TabsItem[]): TabsItem[] {
   const seen = new Set<string>();
 

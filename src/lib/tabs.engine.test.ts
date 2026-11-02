@@ -3,6 +3,7 @@ import {
   getTabsActiveKey,
   getTabsNavigationKey,
   getTabsPlacement,
+  isTabsItemRemovable,
   normalizeTabsItems
 } from './tabs.engine';
 import type { TabsItem } from './tabs.types';
@@ -13,6 +14,25 @@ const items: TabsItem[] = [
   { key: 'beta', label: 'Beta' },
   { key: 'gamma', label: 'Gamma' }
 ];
+
+describe('Tabs editable removal eligibility', () => {
+  it.each([
+    { item: {}, editable: false, expected: false },
+    { item: {}, editable: true, expected: true },
+    { item: { disabled: true }, editable: true, expected: false },
+    { item: { closable: false }, editable: true, expected: false },
+    { item: { closeIcon: null }, editable: true, expected: false },
+    { item: { closeIcon: false }, editable: true, expected: false },
+    { item: { closeIcon: 0 }, editable: true, expected: true },
+    { item: { closeIcon: '' }, editable: true, expected: true },
+    { item: { closable: true, closeIcon: null }, editable: true, expected: true },
+    { item: { closable: true, closeIcon: false }, editable: true, expected: true },
+    { item: { closable: false, closeIcon: 'custom' }, editable: true, expected: false },
+    { item: { closable: true, disabled: true }, editable: true, expected: false }
+  ])('preserves source removal rules for $item with editable=$editable', sample => {
+    expect(isTabsItemRemovable(sample.item, sample.editable)).toBe(sample.expected);
+  });
+});
 
 describe('Tabs item normalization', () => {
   it(
