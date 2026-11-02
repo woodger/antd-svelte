@@ -424,7 +424,11 @@ export type {
   TabsType,
   TabsPlacement,
   TabsPosition,
-  TabsLocale
+  TabsLocale,
+  TabsMoreProps,
+  TabsMoreTrigger,
+  TabsMorePlacement,
+  TabsMoreRenderInfo
 } from './tabs.types';
 export type {
   CollapseProps,

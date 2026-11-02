@@ -2173,7 +2173,7 @@
       "name": "Tabs",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Аудит согласованного native v1 и перенос source editable-card, header layout, medium и tabPosition с сохранением существующего выбора, lifecycle панелей и фокуса.",
+      "scopeReason": "Аудит native v1 и перенос source editable-card, header layout, medium/tabPosition и More с сохранением выбора, lifecycle панелей, DOM и фокуса.",
       "upstreamPath": "components/tabs",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2202,6 +2202,26 @@
           "name": "@ant-design/icons-svg",
           "range": "^4.6.0",
           "referenceVersion": "4.6.0"
+        },
+        {
+          "name": "@rc-component/dropdown",
+          "range": "~1.0.0",
+          "referenceVersion": "1.0.3"
+        },
+        {
+          "name": "@rc-component/menu",
+          "range": "~1.5.0",
+          "referenceVersion": "1.5.0"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.11.1",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "is-mobile",
+          "range": "^5.0.0",
+          "referenceVersion": "5.0.0"
         }
       ],
       "priority": "unassigned",
@@ -2228,7 +2248,20 @@
         "tests/browser/tabs-layout.spec.ts",
         "tests/browser/fixtures/TabsLayoutFixtures.svelte",
         "tests/browser/fixtures/ant-design-tabs-layout-metrics.json",
-        "tests/browser/tabs-compat.spec.ts"
+        "tests/browser/tabs-compat.spec.ts",
+        "src/lib/TabsOverflow.svelte",
+        "src/lib/TabsMoreIcon.svelte",
+        "src/lib/tabs-overflow.engine.ts",
+        "src/lib/tabs-overflow.dom.ts",
+        "src/lib/tabs-overflow.engine.test.ts",
+        "src/lib/vendor/tabs-overflow.css",
+        "src/lib/vendor/LICENSE.is-mobile",
+        "src/lib/popup-portal.dom.ts",
+        "src/lib/popup.dom.ts",
+        "tests/package/tabs-overflow.ssr.test.ts",
+        "tests/browser/tabs-overflow.spec.ts",
+        "tests/browser/fixtures/TabsOverflowFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tabs-overflow-metrics.json"
       ],
       "features": [
         {
@@ -2246,10 +2279,24 @@
         {
           "id": "overflow",
           "title": "Меню скрытых вкладок more",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Сохраняется native scroll и показ focused header/action; source visible-range/operations, more trigger/popupRender и удаление скрытых tabs ещё не перенесены."
+          "evidence": [
+            "src/lib/TabsOverflow.svelte",
+            "src/lib/TabsMoreIcon.svelte",
+            "src/lib/tabs-overflow.engine.ts",
+            "src/lib/tabs-overflow.dom.ts",
+            "src/lib/tabs-overflow.engine.test.ts",
+            "src/lib/vendor/tabs-overflow.css",
+            "src/lib/vendor/LICENSE.is-mobile",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/package/tabs-overflow.ssr.test.ts",
+            "tests/browser/tabs-overflow.spec.ts",
+            "tests/browser/fixtures/TabsOverflowFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tabs-overflow-metrics.json"
+          ],
+          "note": "Перенесены source visible range с floor на trailing edge, hidden tabs/operations, More icon precedence, locale listbox, hover/click/focus/contextMenu, delays, placement, visible/onVisibleChange, popupRender(menu,{restTabs,onClose}), overlay style/class/callback, container, autofocus и min-overlay width. Native scroll сохраняется; тот же Add переносится в operations с placeholder и исходным card gutter. More keyboard повторяет source Up/Down, включая первый Up к предпоследнему; popup menu имеет native option/close sibling buttons и Home/End. Mouse option закрывает menu, More hover keyboard сохраняет его, close только запрашивает edit. Официальный UMD задаёт 35 эталонов icon/layout/RTL/locale и 3 сценария выбора/scroll. Native adaptations: MouseEvent/PointerEvent для keyboard activation, encoded panel IDs, доступное имя пустой More, отсутствие stale aria-activedescendant и owned focus из portal. Контролируемая visible перекрывает internal requests/onClose; onVisibleChange заменяет pointer/dismiss callback, keyboard и aria-expanded используют internal open как в rc-tabs. Не перенесены остальные raw Dropdown props: arrow, align/alignPoint, placements, showAction/hideAction, onPopupAlign, autoDestroy, overlay и motion/prefix; full source tokens/semantic/config остаются отдельным gap."
         },
         {
           "id": "bar-extra",
@@ -2322,7 +2369,7 @@
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет onTabScroll, indicator/indicatorSize и renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, destroyInactiveTabPane alias и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Locale.dropdownAriaLabel не используется до переноса overflow menu."
+          "note": "Нет onTabScroll, indicator/indicatorSize и renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, destroyInactiveTabPane alias и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся."
         }
       ]
     },

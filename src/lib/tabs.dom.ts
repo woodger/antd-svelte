@@ -65,11 +65,19 @@ export function connectTabsNav(
   for (const tab of tabs)
     resize.observe(tab);
 
-  const attributes = new MutationObserver(() => {
+  const attributes = new MutationObserver(records => {
+    // Svelte может повторно записать тот же class при переносе фокуса в More.
+    if (!records.some(record => record.oldValue !== root.getAttribute(record.attributeName!)))
+      return;
+
     update();
     reveal();
   });
-  attributes.observe(root, { attributes: true, attributeFilter: ['class', 'dir'] });
+  attributes.observe(root, {
+    attributes: true,
+    attributeOldValue: true,
+    attributeFilter: ['class', 'dir']
+  });
 
   return () => {
     resize.disconnect();

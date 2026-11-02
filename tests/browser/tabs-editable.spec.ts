@@ -98,7 +98,7 @@ test('accepted add keeps the same native add button and respects owner selection
   await expect(page.getByLabel('Tabs editable changes', { exact: true })).toHaveText('[]');
 });
 
-test('keyboard addition keeps the focused action inside the scroll viewport', async ({ page }) => {
+test('keyboard addition keeps the focused action visible in the header', async ({ page }) => {
   await check(page, 'Accept Tabs edits');
   await check(page, 'Select owner edit result');
   const add = owned(page).getByRole('button', { name: 'Add tab', exact: true });
@@ -110,9 +110,10 @@ test('keyboard addition keeps the focused action inside the scroll viewport', as
     await expect(tab(page, `new-${index}`)).toHaveAttribute('aria-selected', 'true');
     await expect(add).toBeFocused();
     await expect.poll(() => add.evaluate(element => {
-      const viewport = element.closest('.ant-tabs-nav-wrap')!.getBoundingClientRect();
+      const viewport = element.closest('.ant-tabs-nav')!.getBoundingClientRect();
       const bounds = element.getBoundingClientRect();
-      return bounds.left >= viewport.left - 1 && bounds.right <= viewport.right + 1;
+      return bounds.left >= viewport.left - 1 && bounds.right <= viewport.right + 1
+        && bounds.top >= viewport.top - 1 && bounds.bottom <= viewport.bottom + 1;
     })).toBe(true);
   }
 });

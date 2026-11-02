@@ -2,8 +2,10 @@
   import { onDestroy, tick, untrack } from 'svelte';
   import TabsPanel from './TabsPanel.svelte';
   import TabsEditIcon from './TabsEditIcon.svelte';
+  import TabsOverflow from './TabsOverflow.svelte';
   import { useConfig } from './config-context';
   import { connectTabsNav, revealTab } from './tabs.dom';
+  import { connectTabsOverflow } from './tabs-overflow.dom';
   import {
     getTabsActiveKey,
     getTabsNavigationKey,
@@ -25,6 +27,10 @@
     addIcon,
     removeIcon,
     locale,
+    more,
+    moreIcon,
+    popupClassName,
+    getPopupContainer,
     tabPlacement,
     tabPosition,
     centered = false,
@@ -48,6 +54,10 @@
   let list = $state<HTMLDivElement>();
   let body = $state<HTMLDivElement>();
   let indicator = $state<HTMLDivElement>();
+  let operations = $state<HTMLDivElement>();
+  let addButton = $state<HTMLButtonElement>();
+  let hiddenKeys = $state<string[]>([]);
+  let resolvedMore = $derived(more ? { ...more } : undefined);
   let focusKey = $state<string | undefined>();
   let mobile = $state(false);
   let repairFocus = $state(false);
@@ -109,6 +119,14 @@
         (item, index) => item.key !== currentKeys[index]
       );
     const focused = nav.ownerDocument.activeElement;
+    const popupOwner = focused instanceof Element
+      ? focused.closest<HTMLElement>('[data-tabs-popup-owner]')?.dataset.tabsPopupOwner : undefined;
+    const ownedRoot = popupOwner ? nav.ownerDocument.getElementById(popupOwner) : null;
+    if (!canAdd && focused instanceof HTMLElement && root?.contains(focused)
+      && focused.matches('.ant-tabs-nav-add')) {
+      focusKey = undefined;
+      repairFocus = true;
+    }
     if (nav.contains(focused)) {
       if (focused === nav)
         repairFocus = key !== undefined;
@@ -124,8 +142,9 @@
           retainedFocus = focused;
         }
       }
-    } else if (panels.contains(focused)) {
-      const panel = Array.from(panels.children).find((element) => element.contains(focused));
+    } else if (panels.contains(focused) || panels.contains(ownedRoot)) {
+      const panel = Array.from(panels.children).find(element =>
+        element.contains(focused) || element.contains(ownedRoot));
       if (panel instanceof HTMLElement && panel.dataset.tabsKey !== key)
         repairFocus = true;
       else if (moving && focused instanceof HTMLElement)
@@ -179,6 +198,21 @@
 
   onDestroy(() => {
     active = false;
+  });
+
+  $effect(() => {
+    const scroller = viewport;
+    const nav = list;
+    const controls = operations;
+    const add = addButton;
+    const keys = items.map(item => item.key);
+    const isVertical = vertical;
+    if (!scroller || !nav || !controls) return;
+
+    return untrack(() => connectTabsOverflow(scroller, nav, controls, add, {
+      vertical: isVertical,
+      onChange: next => hiddenKeys = next.filter(key => keys.includes(key))
+    }));
   });
 
   function itemId(key: string, kind: 'tab' | 'panel') {
@@ -295,7 +329,9 @@
 <style>
   .ant-tabs { min-width: 0; max-width: 100%; }
   .ant-tabs > .ant-tabs-nav { min-width: 0; }
-  .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap { min-width: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: thin; scroll-behavior: auto; }
+  .ant-tabs > .ant-tabs-nav .ant-tabs-nav-wrap { min-width: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: none; scroll-behavior: auto; }
+  /* Operations не наследует inline gutter скрытого inner Add; исходный card gutter остаётся. */
+  .ant-tabs > .ant-tabs-nav :global(.ant-tabs-add-in-operations) { margin-block: 0 !important; margin-right: 0 !important; margin-left: var(--ant-tabs-card-gutter) !important; }
   .ant-tabs > .ant-tabs-nav .ant-tabs-nav-list { flex: 0 0 auto; min-height: var(--ant-control-height); }
   /* В исходном centered вертикальный список растягивается, заголовки остаются сверху. */
   .ant-tabs-centered:is(.ant-tabs-left, .ant-tabs-right) > .ant-tabs-nav .ant-tabs-nav-list { flex-grow: 1; }
@@ -374,7 +410,7 @@
           {:else}{@render tabButton(item, false, index === 0)}{/if}
         {/each}
         {#if showAdd}
-          <button type="button" class="ant-tabs-nav-add" aria-label={locale?.addAriaLabel || 'Add tab'}
+          <button bind:this={addButton} type="button" class="ant-tabs-nav-add" aria-label={locale?.addAriaLabel || 'Add tab'}
             style={items.length ? gutterStyle : undefined}
             onclick={event => onEdit?.(event, 'add')}>
             {#if addIcon}{@render value(addIcon)}{:else}<TabsEditIcon name="plus" />{/if}
@@ -383,6 +419,12 @@
         <div bind:this={indicator} class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" aria-hidden="true" hidden></div>
       </div>
     </div>
+    <TabsOverflow bind:nativeElement={operations} {rootId} {editable} {locale} more={resolvedMore} {moreIcon}
+      {removeIcon} {popupClassName} {getPopupContainer} {tabBarGutter}
+      items={items.filter(item => hiddenKeys.includes(item.key))}
+      panelId={key => itemId(key, 'panel')} onSelect={activate}
+      onRemove={(item, event) => { void removeTab(item, event); }}
+      onUnavailable={() => focusTab(tabStop)} />
     {#if extraRight}<div class="ant-tabs-extra-content">{@render value(extraRight)}</div>{/if}
   </div>
   <div class="ant-tabs-body-holder"><div bind:this={body} class="ant-tabs-body">

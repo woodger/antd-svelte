@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tabs: More с исходным visible range, listbox скрытых вкладок, trigger/icon/locale,
+  popupRender, controlled visibility, portal и удалением через onEdit. Add сохраняет
+  DOM-узел при переходе в operations; добавлены CSS-рецепт, 35 UMD-эталонов,
+  unit/SSR/browser-проверки keyboard, RTL, focus, nested popup и lifecycle.
 - Tabs: исходный size=medium и deprecated tabPosition с физическими сторонами,
   приоритетом tabPlacement и сохранением native mobile fallback. Добавлены
   unit/SSR/browser-проверки RTL, наследования размера и сохранения DOM/фокуса.

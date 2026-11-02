@@ -9,6 +9,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   autoAdjustOverflow: boolean;
   onPlacement: (placement: TooltipPlacement) => void;
   onDismiss: (reason: 'escape' | 'outside') => void;
+  onKeydown?: (event: KeyboardEvent) => void;
   preserveFocus?: boolean;
   maxWidth?: string;
   align?: 'left' | 'right' | 'top' | 'bottom';
@@ -126,6 +127,9 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   }
 
   function handleKeydown(event: KeyboardEvent) {
+    const current = shown && openPopups.get(document)?.at(-1) === popup;
+    if (current && !event.defaultPrevented && event.key !== 'Escape')
+      options.onKeydown?.(event);
     if (shown
       && openPopups.get(document)?.at(-1) === popup
       && event.key === 'Escape'

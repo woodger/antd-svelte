@@ -1,0 +1,22 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * Tabs: операции More, dropdown listbox, remove и RTL.
+ * Motion selectors исключены; native popover управляет поверхностью.
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+.ant-tabs-dropdown-rtl{direction:rtl;}
+.ant-tabs-menu-item .ant-tabs-dropdown-rtl{text-align:right;}
+.ant-tabs-left >.ant-tabs-nav .ant-tabs-nav-operations,.ant-tabs-right >.ant-tabs-nav .ant-tabs-nav-operations,.ant-tabs-left >div>.ant-tabs-nav .ant-tabs-nav-operations,.ant-tabs-right >div>.ant-tabs-nav .ant-tabs-nav-operations{flex:1 0 auto;flex-direction:column;}
+.ant-tabs-dropdown{box-sizing:border-box;margin:0;padding:0;color:var(--ant-color-text);font-size:var(--ant-font-size);line-height:var(--ant-line-height);list-style:none;font-family:var(--ant-font-family);position:absolute;top:-9999px;left:-9999px;z-index:var(--ant-tabs-z-index-popup);display:block;}
+.ant-tabs-dropdown-hidden{display:none;}
+.ant-tabs-dropdown .ant-tabs-dropdown-menu{max-height:200px;margin:0;padding:var(--ant-padding-xxs) 0;overflow-x:hidden;overflow-y:auto;text-align:left;list-style-type:none;background-color:var(--ant-color-bg-container);background-clip:padding-box;border-radius:var(--ant-border-radius-lg);outline:none;box-shadow:var(--ant-box-shadow-secondary);}
+.ant-tabs-dropdown .ant-tabs-dropdown-menu-item{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;display:flex;align-items:center;min-width:120px;margin:0;padding:var(--ant-padding-xxs) var(--ant-padding-sm);color:var(--ant-color-text);font-weight:400;font-size:var(--ant-font-size);line-height:var(--ant-line-height);cursor:pointer;transition:all var(--ant-motion-duration-slow);}
+.ant-tabs-dropdown .ant-tabs-dropdown-menu-item >span{flex:1;white-space:nowrap;}
+.ant-tabs-dropdown .ant-tabs-dropdown-menu-item-remove{flex:none;margin-left:var(--ant-margin-sm);color:var(--ant-color-icon);font-size:var(--ant-font-size-sm);background:transparent;border:0;cursor:pointer;}
+.ant-tabs-dropdown .ant-tabs-dropdown-menu-item-remove:hover{color:var(--ant-tabs-item-hover-color);}
+.ant-tabs-dropdown .ant-tabs-dropdown-menu-item:hover{background:var(--ant-control-item-bg-hover);}
+.ant-tabs-dropdown .ant-tabs-dropdown-menu-item-disabled,.ant-tabs-dropdown .ant-tabs-dropdown-menu-item-disabled:hover{color:var(--ant-color-text-disabled);background:transparent;cursor:not-allowed;}
+.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-operations,.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-operations{display:flex;align-self:stretch;}
+.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-operations-hidden,.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-operations-hidden{position:absolute;visibility:hidden;pointer-events:none;}
+.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-more,.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-more{position:relative;padding:var(--ant-tabs-card-padding);background:transparent;border:0;color:var(--ant-color-text);}
+.ant-tabs:where(.ant-tabs-css-var) >.ant-tabs-nav .ant-tabs-nav-more::after,.ant-tabs:where(.ant-tabs-css-var) >div>.ant-tabs-nav .ant-tabs-nav-more::after{position:absolute;right:0;bottom:0;left:0;height:calc(var(--ant-control-height-lg) / 8);transform:translateY(100%);content:'';}

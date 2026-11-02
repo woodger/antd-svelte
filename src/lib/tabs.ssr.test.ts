@@ -54,7 +54,8 @@ describe('Tabs server rendering', () => {
         /<button[^>]*data-tabs-key=""[^>]*aria-selected="true"[^>]*tabindex="0"/
       );
       expect(body).toMatch(/<button[^>]*data-tabs-key="locked"[^>]*\sdisabled(?:[\s=>])/);
-      expect(body.match(/type="button"/g)).toHaveLength(3);
+      expect(body.match(/type="button"/g)).toHaveLength(4);
+      expect(body).toContain('aria-haspopup="listbox"');
       expect(body).not.toContain('type="submit"');
       const tabIds = [...body.matchAll(/role="tab" id="([^"]+)"[^>]*aria-controls="([^"]+)"/g)];
 

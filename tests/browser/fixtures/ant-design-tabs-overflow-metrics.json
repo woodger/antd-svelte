@@ -1,0 +1,4499 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "browser": "156.0.8078.4",
+    "source": "package/dist/antd.min.js",
+    "operation": "render official Tabs in 360x288 host; capture More icon precedence, operations/listbox geometry, hidden tabs and keyboard versus pointer activation",
+    "rcTabs": {
+      "version": "1.13.0",
+      "revision": "dea2f5f48991865ddbf743b0f783f45eb72ff671"
+    },
+    "rcDropdown": {
+      "version": "1.0.3",
+      "revision": "1c37540097219029d7463e2cdcf7ef37e6b2d47f"
+    }
+  },
+  "cases": [
+    {
+      "name": "ltr-top-line",
+      "direction": "ltr",
+      "tabPlacement": "top",
+      "type": "line",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "ltr-top-card",
+      "direction": "ltr",
+      "tabPlacement": "top",
+      "type": "card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "ltr-top-editable-card",
+      "direction": "ltr",
+      "tabPlacement": "top",
+      "type": "editable-card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "87.3281px",
+          "height": "40px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "200px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": {
+          "width": "24px",
+          "height": "19px",
+          "fontSize": "12px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "1px",
+          "paddingRight": "6px",
+          "paddingBottom": "1px",
+          "paddingLeft": "6px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "12px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        }
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 4",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "name": "ltr-bottom-line",
+      "direction": "ltr",
+      "tabPlacement": "bottom",
+      "type": "line",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "ltr-bottom-card",
+      "direction": "ltr",
+      "tabPlacement": "bottom",
+      "type": "card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "ltr-bottom-editable-card",
+      "direction": "ltr",
+      "tabPlacement": "bottom",
+      "type": "editable-card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "87.3281px",
+          "height": "40px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "200px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": {
+          "width": "24px",
+          "height": "19px",
+          "fontSize": "12px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "1px",
+          "paddingRight": "6px",
+          "paddingBottom": "1px",
+          "paddingLeft": "6px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "12px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        }
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 4",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "name": "ltr-start-line",
+      "direction": "ltr",
+      "tabPlacement": "start",
+      "type": "line",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "90.7969px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "90.7969px",
+          "height": "34px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "ltr-start-card",
+      "direction": "ltr",
+      "tabPlacement": "start",
+      "type": "card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "76.7969px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "76.7969px",
+          "height": "34px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "128px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "ltr-start-editable-card",
+      "direction": "ltr",
+      "tabPlacement": "start",
+      "type": "editable-card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "104.797px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "104.797px",
+          "height": "74px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": {
+          "width": "24px",
+          "height": "19px",
+          "fontSize": "12px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "1px",
+          "paddingRight": "6px",
+          "paddingBottom": "1px",
+          "paddingLeft": "6px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "12px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        }
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "name": "ltr-end-line",
+      "direction": "ltr",
+      "tabPlacement": "end",
+      "type": "line",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "90.7969px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "90.7969px",
+          "height": "34px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "ltr-end-card",
+      "direction": "ltr",
+      "tabPlacement": "end",
+      "type": "card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "76.7969px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "76.7969px",
+          "height": "34px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "128px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "ltr-end-editable-card",
+      "direction": "ltr",
+      "tabPlacement": "end",
+      "type": "editable-card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "104.797px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "104.797px",
+          "height": "74px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": {
+          "width": "24px",
+          "height": "19px",
+          "fontSize": "12px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "1px",
+          "paddingRight": "6px",
+          "paddingBottom": "1px",
+          "paddingLeft": "6px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "12px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        }
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "name": "rtl-top-line",
+      "direction": "rtl",
+      "tabPlacement": "top",
+      "type": "line",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "rtl-top-card",
+      "direction": "rtl",
+      "tabPlacement": "top",
+      "type": "card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "rtl-top-editable-card",
+      "direction": "rtl",
+      "tabPlacement": "top",
+      "type": "editable-card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "87.3281px",
+          "height": "40px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "200px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": {
+          "width": "24px",
+          "height": "19px",
+          "fontSize": "12px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "1px",
+          "paddingRight": "6px",
+          "paddingBottom": "1px",
+          "paddingLeft": "6px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "12px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        }
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 4",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "name": "rtl-bottom-line",
+      "direction": "rtl",
+      "tabPlacement": "bottom",
+      "type": "line",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "rtl-bottom-card",
+      "direction": "rtl",
+      "tabPlacement": "bottom",
+      "type": "card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "rtl-bottom-editable-card",
+      "direction": "rtl",
+      "tabPlacement": "bottom",
+      "type": "editable-card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "40px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "87.3281px",
+          "height": "40px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "200px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": {
+          "width": "24px",
+          "height": "19px",
+          "fontSize": "12px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "1px",
+          "paddingRight": "6px",
+          "paddingBottom": "1px",
+          "paddingLeft": "6px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "12px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        }
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 4",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "name": "rtl-start-line",
+      "direction": "rtl",
+      "tabPlacement": "start",
+      "type": "line",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "114.781px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "114.781px",
+          "height": "34px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "rtl-start-card",
+      "direction": "rtl",
+      "tabPlacement": "start",
+      "type": "card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "76.7969px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "76.7969px",
+          "height": "34px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "128px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "rtl-start-editable-card",
+      "direction": "rtl",
+      "tabPlacement": "start",
+      "type": "editable-card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "104.797px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "104.797px",
+          "height": "74px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": {
+          "width": "24px",
+          "height": "19px",
+          "fontSize": "12px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "1px",
+          "paddingRight": "6px",
+          "paddingBottom": "1px",
+          "paddingLeft": "6px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "12px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        }
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "name": "rtl-end-line",
+      "direction": "rtl",
+      "tabPlacement": "end",
+      "type": "line",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "114.781px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "114.781px",
+          "height": "34px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "rtl-end-card",
+      "direction": "rtl",
+      "tabPlacement": "end",
+      "type": "card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "76.7969px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "76.7969px",
+          "height": "34px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "128px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "rtl-end-editable-card",
+      "direction": "rtl",
+      "tabPlacement": "end",
+      "type": "editable-card",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "104.797px",
+          "height": "34px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "104.797px",
+          "height": "74px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": {
+          "width": "24px",
+          "height": "19px",
+          "fontSize": "12px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "1px",
+          "paddingRight": "6px",
+          "paddingBottom": "1px",
+          "paddingLeft": "6px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "12px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        }
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "name": "icon-undefined",
+      "iconKind": "undefined",
+      "icon": {
+        "text": "More",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "66px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "66px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "icon-null",
+      "iconKind": "null",
+      "icon": {
+        "text": "",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "32px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "32px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "icon-false",
+      "iconKind": "false",
+      "icon": {
+        "text": "",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "32px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "32px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "icon-true",
+      "iconKind": "true",
+      "icon": {
+        "text": "",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "32px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "32px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "icon-zero",
+      "iconKind": "zero",
+      "icon": {
+        "text": "0",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "40px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "40px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "icon-empty",
+      "iconKind": "empty",
+      "icon": {
+        "text": "",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "32px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "32px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "icon-text",
+      "iconKind": "text",
+      "icon": {
+        "text": "More tabs",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "66px",
+          "height": "52px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "66px",
+          "height": "52px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "root-icon",
+      "rootIcon": true,
+      "icon": {
+        "text": "ROOT",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "67px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "67px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "root-icon-overridden",
+      "rootIcon": true,
+      "iconKind": "text",
+      "icon": {
+        "text": "More tabs",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "66px",
+          "height": "52px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "66px",
+          "height": "52px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "root-icon-undefined",
+      "rootIcon": true,
+      "iconKind": "undefined",
+      "icon": {
+        "text": "More",
+        "paths": []
+      },
+      "metrics": {
+        "more": {
+          "width": "66px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "66px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "188px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "name": "locale",
+      "localized": true,
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "Hidden sections",
+      "hidden": [
+        {
+          "label": "Tab 6",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 7",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 8",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 9",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 10",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    }
+  ],
+  "behavior": [
+    {
+      "scenario": "mouse",
+      "open": false,
+      "events": [
+        {
+          "click": "9",
+          "type": "click"
+        },
+        {
+          "change": "9"
+        }
+      ]
+    },
+    {
+      "scenario": "keyboard",
+      "selectedLabel": "Tab 6",
+      "open": false,
+      "events": [
+        {
+          "click": "5",
+          "type": "keydown"
+        },
+        {
+          "change": "5"
+        }
+      ]
+    },
+    {
+      "scenario": "scrolled",
+      "icon": {
+        "text": "",
+        "paths": [
+          "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+        ]
+      },
+      "metrics": {
+        "more": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "13.3333px",
+          "fontFamily": "Arial",
+          "lineHeight": "normal",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "8px",
+          "paddingRight": "16px",
+          "paddingBottom": "8px",
+          "paddingLeft": "16px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "operations": {
+          "width": "45.3281px",
+          "height": "46px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "0px",
+          "paddingRight": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "menu": {
+          "width": "120px",
+          "height": "158px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgb(255, 255, 255)",
+          "paddingTop": "4px",
+          "paddingRight": "0px",
+          "paddingBottom": "4px",
+          "paddingLeft": "0px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "8px"
+        },
+        "item": {
+          "width": "120px",
+          "height": "30px",
+          "fontSize": "14px",
+          "fontFamily": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+          "lineHeight": "22px",
+          "color": "rgba(0, 0, 0, 0.88)",
+          "backgroundColor": "rgba(0, 0, 0, 0)",
+          "paddingTop": "4px",
+          "paddingRight": "12px",
+          "paddingBottom": "4px",
+          "paddingLeft": "12px",
+          "marginTop": "0px",
+          "marginRight": "0px",
+          "marginBottom": "0px",
+          "marginLeft": "0px",
+          "borderTopWidth": "0px",
+          "borderRadius": "0px"
+        },
+        "remove": null
+      },
+      "label": "expanded dropdown",
+      "hidden": [
+        {
+          "label": "Tab 1",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 2",
+          "disabled": true,
+          "removable": false
+        },
+        {
+          "label": "Tab 3",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 4",
+          "disabled": false,
+          "removable": false
+        },
+        {
+          "label": "Tab 5",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    }
+  ]
+}

@@ -10,6 +10,12 @@ const items = [
   { key: 'beta', label: 'Beta' }
 ];
 
+function headerControls(markup: string): string {
+  return markup.match(
+    /<(?:button|div)\b[^>]*(?:role="tab"|data-tabs-cell=|class="ant-tabs-nav-add)[^>]*>/g
+  )?.join('') ?? '';
+}
+
 describe('Tabs layout SSR', () => {
   it('pins the official UMD layout reference to the audited source and archive', () => {
     expect(reference.reference).toMatchObject({
@@ -48,7 +54,7 @@ describe('Tabs layout SSR', () => {
         ? 'margin-inline-start' : 'margin-top';
 
       expect(body).toContain('ant-tabs-centered');
-      expect(body.match(new RegExp(`${margin}:0px`, 'g'))).toHaveLength(3);
+      expect(headerControls(body).match(new RegExp(`${margin}:0px`, 'g'))).toHaveLength(3);
       expect(body).toMatch(/data-tabs-cell="" class=/);
       expect(body).not.toMatch(/data-tabs-cell="" style=/);
       expect(body).toMatch(/aria-selected="true"[^>]*tabindex="0"/);
@@ -65,9 +71,9 @@ describe('Tabs layout SSR', () => {
       centered: true
     } }).body;
 
-    expect(fractional.match(/margin-inline-start:12\.5px/g)).toHaveLength(2);
-    expect(negative.match(/margin-inline-start:-3px/g)).toHaveLength(2);
+    expect(headerControls(fractional).match(/margin-inline-start:12\.5px/g)).toHaveLength(2);
+    expect(headerControls(negative).match(/margin-inline-start:-3px/g)).toHaveLength(2);
     expect(empty).toContain('ant-tabs-nav-add');
-    expect(empty).not.toContain('margin-inline-start:');
+    expect(headerControls(empty)).not.toContain('margin-inline-start:');
   });
 });

@@ -6,6 +6,37 @@ export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end';
 export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
 export type TabsContent = string | number | boolean | null | Snippet;
 export type TabsExtraContent = TabsContent | { left?: TabsContent; right?: TabsContent; };
+export type TabsMoreTrigger = 'hover' | 'click' | 'contextMenu' | 'focus';
+export type TabsMorePlacement = 'topLeft' | 'top' | 'topRight'
+  | 'bottomLeft' | 'bottom' | 'bottomRight';
+
+export interface TabsMoreRenderInfo {
+  restTabs: readonly TabsItem[];
+  onClose: () => void;
+}
+
+/** Параметры меню скрытых вкладок; popupRender получает исходный listbox как snippet. */
+export interface TabsMoreProps {
+  icon?: TabsContent;
+  popupRender?: Snippet<[Snippet, TabsMoreRenderInfo]>;
+  /** @defaultValue 'hover' */
+  trigger?: TabsMoreTrigger | readonly TabsMoreTrigger[];
+  /** @defaultValue 'bottomLeft' */
+  placement?: TabsMorePlacement;
+  /** Задержки в секундах, как в исходном Dropdown. @defaultValue 0.1 */
+  mouseEnterDelay?: number;
+  mouseLeaveDelay?: number;
+  /** Controlled visibility перекрывает внутреннее состояние, включая закрытие через onClose. */
+  visible?: boolean;
+  /** Как more в rc-tabs, заменяет внутренний pointer/dismiss callback; для control передавайте visible. */
+  onVisibleChange?: (visible: boolean) => void;
+  overlayClassName?: string;
+  overlayStyle?: string;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  autoFocus?: boolean;
+  minOverlayWidthMatchTrigger?: boolean;
+  onOverlayClick?: (event: MouseEvent) => void;
+}
 
 export interface TabsItem {
   key: string;
@@ -25,7 +56,7 @@ export interface TabsItem {
 export interface TabsLocale {
   addAriaLabel?: string;
   removeAriaLabel?: string;
-  /** Имя ещё не перенесённого overflow menu; native scroll его не использует. */
+  /** Имя listbox скрытых вкладок; пустая строка сохраняется. */
   dropdownAriaLabel?: string;
 }
 
@@ -49,6 +80,12 @@ export interface TabsProps {
   removeIcon?: TabsContent;
   /** По умолчанию исходные Add tab/remove; не заменяет доступное имя tablist. */
   locale?: TabsLocale;
+  more?: TabsMoreProps;
+  /** Историческая иконка; явно заданное more.icon имеет приоритет, включая null/false. */
+  moreIcon?: TabsContent;
+  /** @deprecated Используйте semantic popup classes после переноса полного semantic API. */
+  popupClassName?: string;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   /** @defaultValue 'top' */
   tabPlacement?: TabsPlacement;
   /** Физическая сторона без RTL-переотражения. @deprecated Используйте tabPlacement. */

@@ -5,6 +5,8 @@ export function connectPopupPortal(element: HTMLElement, options: {
   autoLock: boolean;
   origin: HTMLElement;
   marker: Comment;
+  preserveVariables?: readonly string[];
+  restoreOnDestroy?: boolean;
 }) {
   const origin = options.origin;
   const document = element.ownerDocument;
@@ -19,6 +21,18 @@ export function connectPopupPortal(element: HTMLElement, options: {
   let active = true;
   let queued = false;
 
+  function move(parent: HTMLElement, before: ChildNode | null) {
+    if (element.parentNode === parent && element.nextSibling === before) return;
+    const focused = document.activeElement;
+    if (typeof parent.moveBefore === 'function' && parent.isConnected && element.isConnected) {
+      parent.moveBefore(element, before);
+    } else {
+      parent.insertBefore(element, before);
+      if (focused instanceof view.HTMLElement && element.contains(focused)
+        && document.activeElement === document.body) focused.focus({ preventScroll: true });
+    }
+  }
+
   function syncTheme() {
     if (!active || inline) return;
     const source = view.getComputedStyle(origin);
@@ -30,6 +44,7 @@ export function connectPopupPortal(element: HTMLElement, options: {
     managed.clear();
     const actual = view.getComputedStyle(element);
     for (const [name, value] of values) {
+      if (options.preserveVariables?.includes(name)) continue;
       if (actual.getPropertyValue(name) !== value) {
         element.style.setProperty(name, value);
         managed.add(name);
@@ -49,7 +64,10 @@ export function connectPopupPortal(element: HTMLElement, options: {
   // Native dialog делает body inert; стандартный portal остаётся в его top layer.
   element.style.pointerEvents = !getter && modal ? 'auto' : '';
   if (inline) origin.insertBefore(element, options.marker.nextSibling);
-  else if (container !== element && !element.contains(container)) container.append(element);
+  else if (container !== element && !element.contains(container)) {
+    if (options.restoreOnDestroy) move(container, null);
+    else container.append(element);
+  }
   syncTheme();
   const observer = new view.MutationObserver(scheduleTheme);
   if (!inline) {
@@ -81,6 +99,10 @@ export function connectPopupPortal(element: HTMLElement, options: {
     view.removeEventListener('resize', scheduleTheme);
     lock?.remove();
     for (const name of managed) element.style.removeProperty(name);
-    if (!inline) element.remove();
+    if (!inline) {
+      if (options.restoreOnDestroy && options.marker.isConnected && options.marker.parentElement)
+        move(options.marker.parentElement, options.marker.nextSibling);
+      else element.remove();
+    }
   };
 }

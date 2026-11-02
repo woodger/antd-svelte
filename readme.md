@@ -169,7 +169,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Popconfirm | Подтверждение и отмена, Promise/loading, повтор после ошибки, защита от поздних результатов, snippets, локализация и клавиатура |
 | Dropdown | Плоское меню команд, click/hover, bind:open, disabled/danger, snippets, шесть положений, стрелки/typeahead и возврат фокуса |
 | Menu | Items/группы/подменю, selected/open keys, horizontal/vertical/inline, native links, клавиатура и collapse |
-| Tabs | Типизированные панели, bind:activeKey, line/card/editable-card, четыре положения, centered/gutter, ручная клавиатурная активация, сохранение содержимого и destroyOnHidden |
+| Tabs | Типизированные панели, bind:activeKey, line/card/editable-card, четыре положения, centered/gutter, меню more, ручная клавиатурная активация, сохранение содержимого и destroyOnHidden |
 | Collapse | Независимые панели и accordion, bind:activeKey, snippets, extra, header/icon/disabled, сохранение содержимого и destroyOnHidden |
 | Drawer | Модальная выдвижная панель, bind:open, четыре стороны, размеры, snippets, анимация, сохранение содержимого и destroyOnHidden |
 | Alert | Четыре статуса, title/description/icon/action snippets, outlined/filled, banner, закрытие с callbacks, анимацией и доступным фокусом |
@@ -2050,7 +2050,8 @@ Delete/Backspace и средняя кнопка мыши запрашивают 
 не активирует вкладку. Фокус, явно заданный владельцем снаружи Tabs, сохраняется.
 Close выбранной вкладки и Add доступны через Tab; остальные close имеют tabindex=-1.
 Locale.addAriaLabel/removeAriaLabel задают имена с defaults «Add tab»/«remove».
-DropdownAriaLabel пока не используется: меню переполнения ещё не перенесено.
+Locale.dropdownAriaLabel именует listbox скрытых вкладок, по умолчанию «expanded dropdown»;
+явная пустая строка сохраняется.
 
 ```svelte
 <script lang="ts">
@@ -2072,6 +2073,56 @@ DropdownAriaLabel пока не используется: меню перепо�
   }} />
 ```
 
+При переполнении More показывает вкладки вне видимого диапазона, включая частично
+обрезанные и disabled. Native scroll сохраняется; Add переходит в блок операций
+с сохранением DOM-узла, фокуса и исходного card gutter. Определение мобильного
+устройства повторяет default is-mobile 5.0.0, отдельно от breakpoint расположения:
+на мобильном user agent More скрыт, прокрутка и Add остаются доступны.
+
+More открывается через hover с задержками 0.1/0.1 секунды. `more.trigger` также
+поддерживает click, focus, contextMenu и массив событий. ArrowDown/Enter/Space на
+кнопке открывают список без выбора; Up/Down затем меняют активный пункт, пропуская
+disabled. Первый Up сохраняет исходный выбор предпоследнего enabled-пункта.
+Tab переносит фокус в список; его стрелки/Home/End двигают фокус по native options.
+Выбор с кнопки More при hover оставляет список открытым, клик по option закрывает.
+Клавиатурный выбор использует native click: публичный onTabClick по-прежнему получает
+MouseEvent, включая его подтип PointerEvent. Close вызывает только onEdit, не закрывая
+список; items меняет владелец. Escape сначала закрывает вложенную поверхность,
+затем More, затем содержащий Modal.
+
+`more.icon` перекрывает исторический moreIcon, включая null/false/0 и пустую строку.
+Без них используется исходный EllipsisOutlined; явно заданный more.icon=undefined
+даёт строку «More», как rc-tabs. У пустой декоративной кнопки остаётся native имя
+«ellipsis». More принимает placement, mouseEnterDelay/mouseLeaveDelay, autoFocus,
+minOverlayWidthMatchTrigger, overlayClassName/overlayStyle, onOverlayClick и
+getPopupContainer; CSS styles задаются строкой. Корневые popupClassName и
+getPopupContainer также поддерживаются; одноимённые more overrides имеют приоритет,
+включая явно заданный undefined. Portal сохраняет тему и собственные CSS variables popup.
+
+More.visible перекрывает внутренние запросы и onClose. Как в rc-tabs,
+more.onVisibleChange заменяет внутренний pointer/dismiss callback; для controlled
+режима передавайте оба поля. Клавиатурное открытие и aria-expanded используют
+внутренний флаг. PopupRender получает menu Snippet и { restTabs, onClose };
+содержимое ленивое и сохраняется после первого открытия.
+
+```svelte
+<script lang="ts">
+  import type { Snippet } from 'svelte';
+  import { Tabs, type TabsMoreRenderInfo } from 'antd-svelte';
+
+  const items = Array.from({ length: 12 }, (_, index) => ({
+    key: String(index),
+    label: `Вкладка ${index + 1}`
+  }));
+</script>
+
+{#snippet popup(menu: Snippet, info: TabsMoreRenderInfo)}
+  {@render menu()}
+  <button type="button" onclick={info.onClose}>Закрыть список</button>
+{/snippet}
+<Tabs {items} aria-label="Разделы" more={{ trigger: 'click', popupRender: popup }} />
+```
+
 Фикстура `?fixture=tabs-editable` сверяет truthiness, иконки и размеры с Ant Design
 6.6.8 и @rc-component/tabs 1.13.0. Проверяются callbacks, принятие/отказ владельца,
 фокус, FormData, layout/RTL и сохранение панелей. Фикстура `?fixture=tabs-layout`
@@ -2081,9 +2132,14 @@ DropdownAriaLabel пока не используется: меню перепо�
 размера и сохранение панелей при смене способа расположения.
 Галерея `/ant-design#tabs`
 показывает профиль, настройки, историю Table, destroyOnHidden и Tabs внутри Modal.
-Drag-and-drop, меню more, renderTabBar и настройка indicator ещё не перенесены.
+Фикстура `?fixture=tabs-overflow` сверяет 35 эталонов More из официального UMD:
+скрытые вкладки, CSS метрики, SVG, icon precedence, RTL и locale. Проверяются также
+keyboard, control/owner callbacks, popupRender, portal, вложенные поверхности и focus.
+Drag-and-drop, renderTabBar и настройка indicator ещё не перенесены.
 Остаются также onTabScroll, destroyInactiveTabPane, полный semantic/config/ref API,
 component tokens и исходный motion; приоритет уничтожения панелей сохраняет native v1.
+Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,
+placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и motion/prefix.
 
 ## Collapse
 
@@ -7001,7 +7057,9 @@ Menu использует ul/li с role=menu/menuitem, native button для за
 Enter раскрывает подменю, Escape возвращает фокус к родителю popup.
 Tabs использует tablist, нативные button с role=tab и связанные tabpanel.
 Aria-selected сообщает выбор; стрелки двигают фокус без активации. Скрытые
-панели недоступны для Tab. Escape остаётся доступен содержащему Modal.
+панели недоступны для Tab. More использует listbox с native options/close buttons;
+его Escape закрывает popup раньше содержащего Modal. Фокус из portal учитывается
+при скрытии внешней панели.
 Collapse использует нативные кнопки внутри headings, aria-expanded/aria-controls
 и обычную последовательность Tab. Extra отделён от кнопки заголовка, скрытое
 содержимое недоступно для Tab. Именованные regions ограничены небольшими группами
@@ -7343,6 +7401,12 @@ TabsEditIcon использует точные PlusOutlined/CloseOutlined из i
 под существующей MIT-лицензией; их пути совпадают с официальным UMD Ant Design.
 [vendor/tabs-layout.css](./src/lib/vendor/tabs-layout.css) содержит исходное
 правило centered; рецепт tabs-layout сохраняет селекторы и declaration margin:auto.
+[vendor/tabs-overflow.css](./src/lib/vendor/tabs-overflow.css) содержит 16 исходных
+правил More/operations/listbox/remove/RTL без motion selectors. TabsOverflow.svelte
+управляет popup, tabs-overflow.engine.ts повторяет visible range и навигацию rc-tabs,
+tabs-overflow.dom.ts сохраняет native scroll и переносит тот же Add с заглушкой.
+EllipsisOutlined взят из icons-svg 4.6.0; regexp is-mobile 5.0.0 сопровождается
+[исходной MIT-лицензией](./src/lib/vendor/LICENSE.is-mobile).
 [vendor/collapse.css](./src/lib/vendor/collapse.css) содержит 49 правил Collapse и его
 токены из того же архива. Корневые селекторы ограничены
 :where(.ant-collapse-css-var); React motion и правила ColorPicker исключены.
