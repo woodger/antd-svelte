@@ -1538,7 +1538,8 @@
       ],
       "dependencies": [
         "config-provider",
-        "space"
+        "space",
+        "menu"
       ],
       "upstreamPackages": [
         {
@@ -1550,13 +1551,28 @@
           "name": "@rc-component/trigger",
           "range": "^3.10.1",
           "referenceVersion": "3.10.1"
+        },
+        {
+          "name": "@ant-design/cssinjs-utils",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
         }
       ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/dropdown.spec.ts"
+        "tests/browser/dropdown.spec.ts",
+        "src/lib/Dropdown.svelte",
+        "src/lib/theme-overlay-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-dropdown-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-dropdown-tokens-reference.json",
+        "tests/package/dropdown-theme.ssr.test.ts",
+        "tests/browser/dropdown-theme.spec.ts",
+        "tests/browser/fixtures/DropdownThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-dropdown-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -1608,6 +1624,45 @@
             "tests/browser/dropdown.spec.ts"
           ],
           "note": "Как rc-trigger 3.10.1, pointer leave запрашивает закрытие только при наличии hover. Внешне открытое меню с click или пустым массивом trigger сохраняет видимость и не вызывает onOpenChange при уходе указателя; hover задержки и обычные click/keyboard сценарии сохранены."
+        },
+        {
+          "id": "source-theme-tokens",
+          "title": "Source Dropdown defaults/aliases и отдельный Menu scope",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Dropdown.svelte",
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-dropdown-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-dropdown-tokens-reference.json",
+            "tests/package/dropdown-theme.ssr.test.ts",
+            "tests/browser/dropdown-theme.spec.ts",
+            "tests/browser/fixtures/DropdownThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-dropdown-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Семь Dropdown defaults и 79 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены."
+        },
+        {
+          "id": "open-event-info",
+          "title": "Полный onOpenChange info и callback при выборе команды",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/dropdown.types.ts",
+            "tests/browser/dropdown.spec.ts",
+            "readme.md"
+          ],
+          "note": "Сохранён принятый Svelte onOpenChange(boolean) и bind:open; выбор команды закрывает binding без onOpenChange(false). Исходный Ant Design 6.6.8 передаёт второй аргумент с source и вызывает callback при выборе команды. Это различие остаётся для отдельного совместимого расширения API."
+        },
+        {
+          "id": "extended-api",
+          "title": "Semantic/config/prefixCls, render/container и дополнительные trigger API",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [],
+          "note": "Ещё не перенесены global dropdown config вне theme tokens, semantic classNames/styles, prefixCls, popupRender/getPopupContainer, contextMenu, Dropdown.Button и исходный destroy/motion/arrow.pointAtCenter API. Standalone Menu/selectable/checkable integration и полный аудит семейства остаются в работе."
         }
       ]
     },
@@ -8353,6 +8408,25 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные 79 defaults и 23 deprecated mapping; defaults рассчитываются до mapping, финальные overrides и явно заданные нули сохраняют приоритет. Размеры/отступы/active bar, шрифты и light/dark палитра, component algorithms, custom CSS prefix, hash, zero/undefined и CSS lengths. Scoped declarations и computed metrics для 20 настроек: inline/vertical/horizontal/collapsed, пункты/иконки/заголовки/стрелки, вложенные списки, группы/разделители и light/dark popup. Внутренние CSS roots наследуют Menu variables вместо vendor defaults; popup получает собственный scope и paddingXS как промежуток до заголовка. SSR и смена темы сохраняют DOM/focus, selected/open keys, callbacks и controller left/top; plain root overrides достигают inline children, popup использует component tokens. Закрытые forceSubMenuRender popup остаются скрытыми в horizontal mode. Native-only темы сохранены; остальные advanced API остаются в работе."
+        },
+        {
+          "id": "dropdown-theme-tokens",
+          "title": "Source Dropdown defaults/aliases и отдельный Menu scope",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Dropdown.svelte",
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-dropdown-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-dropdown-tokens-reference.json",
+            "tests/package/dropdown-theme.ssr.test.ts",
+            "tests/browser/dropdown-theme.spec.ts",
+            "tests/browser/fixtures/DropdownThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-dropdown-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Семь Dropdown defaults и 79 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены."
         }
       ]
     },

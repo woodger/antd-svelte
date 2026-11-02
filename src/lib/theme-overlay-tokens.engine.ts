@@ -61,3 +61,12 @@ export function preparePopoverTokens(token: AliasToken) {
 export function preparePopconfirmTokens(token: AliasToken) {
   return { zIndexPopup: token.zIndexPopupBase + 60 };
 }
+
+export function prepareDropdownTokens(token: AliasToken) {
+  return {
+    zIndexPopup: token.zIndexPopupBase + 50,
+    paddingBlock: (token.controlHeight - token.fontSize * token.lineHeight) / 2,
+    ...prepareArrowOffsets(token.borderRadiusLG),
+    ...prepareArrowTokens(token)
+  };
+}

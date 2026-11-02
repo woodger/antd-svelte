@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme Dropdown: исходные defaults/aliases, отдельный Menu scope для списка,
+  source padding/box sizing, arrow offsets и gap, algorithms и CSS prefix/hash.
+  Добавлены UMD conformance, SSR и browser-проверки метрик, hover, положений
+  стрелки и смены темы без потери DOM, focus, native links или позиции popup.
+  Native-only темы и существующий Svelte callback API сохранены.
 - Theme Menu: исходные defaults, aliases и deprecated mapping, отдельные
   algorithms, CSS prefix и hash; размеры и light/dark оформление пунктов,
   inline-списков и popup. Добавлены UMD conformance, SSR и browser-проверки

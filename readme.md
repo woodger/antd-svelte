@@ -1869,8 +1869,10 @@ Space активируют его; preventDefault в callbacks отменяет 
 Open поддерживает bind:open; defaultOpen читается при создании компонента.
 `onOpenChange(boolean)` сообщает запросы видимости от trigger, hover, Escape,
 Tab и клика снаружи. Изменение open владельцем и закрытие из-за disabled
-не вызывают callback. Как в Ant Design, выбор команды закрывает меню и обновляет
+не вызывают callback. В существующем Svelte API выбор команды закрывает меню и обновляет
 binding **без onOpenChange(false)**; для команды используйте menu.onClick.
+Исходный Ant Design 6.6.8 вызывает callback и при выборе команды, передавая
+второй аргумент с source; это расширение текущего Svelte API ещё не перенесено.
 Сначала вызывается onClick пункта, затем menu.onClick; оба получают
 `{ key, domEvent: MouseEvent }`. PreventDefault в пункте отменяет следующий
 обработчик и закрытие, в menu.onClick — закрытие. Асинхронные операции и их ошибки
@@ -1902,6 +1904,17 @@ bottomLeft, в RTL — bottomRight. AutoAdjustOverflow по умолчанию t
 положение. Минимальная ширина соответствует trigger, длинный список прокручивается.
 Arrow по умолчанию false. Поверхность использует native popover, сохраняет
 контекст темы и работает внутри Modal; закрытое меню остаётся смонтированным.
+
+При source-настройках темы `components.Dropdown` рассчитывает paddingBlock,
+zIndexPopup и tokens стрелки; aliases задают шрифт, цвета, отступы и радиусы.
+Внутренний список получает отдельный scope Menu: его aliases дополняют Dropdown,
+как в исходной реализации. Например, `components.Menu.fontSize` меняет строки,
+а `components.Menu.itemHeight` не заменяет `Dropdown.paddingBlock`.
+Поддержаны component algorithms, CSS prefix/hash, нули, undefined и CSS-строки.
+Source gap равен глобальному marginXXS плюс половина sizePopupArrow при arrow;
+corner placements используют исходные arrowOffsetHorizontal. Обновления темы
+сохраняют DOM, фокус и inline-позицию popup. Native-only оформление и существующие
+bind:open/callback contracts сохранены.
 
 Галерея `/ant-design#dropdown` показывает действия строки Table: открытие Modal,
 копирование и архивирование участника. Первая версия ограничена плоскими командами:

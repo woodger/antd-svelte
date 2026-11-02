@@ -13,7 +13,8 @@ import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.eng
 import {
   prepareTooltipTokens,
   preparePopoverTokens,
-  preparePopconfirmTokens
+  preparePopconfirmTokens,
+  prepareDropdownTokens
 } from './theme-overlay-tokens.engine';
 import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
   from './theme-css-variables.engine';
@@ -21,7 +22,7 @@ import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
-  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu';
+  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -43,7 +44,8 @@ const factories = {
     linkPaddingBlock: token.paddingXXS,
     linkPaddingInlineStart: token.padding
   }),
-  Menu: prepareMenuTokens
+  Menu: prepareMenuTokens,
+  Dropdown: prepareDropdownTokens
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
@@ -62,7 +64,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   TreeSelect: [],
   Cascader: ['optionSelectedFontWeight'],
   Anchor: [],
-  Menu: ['groupTitleLineHeight']
+  Menu: ['groupTitleLineHeight'],
+  Dropdown: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

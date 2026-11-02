@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor и Menu также получают собственные defaults и aliases.
+Anchor, Menu и Dropdown также получают собственные defaults и aliases.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -266,6 +266,24 @@ borderRadiusLG. Обновление цвета не заменяет DOM и н�
 controller, фокус, selected/open keys или callbacks. Native-only темы сохраняются.
 
 ## Токены всплывающих панелей
+
+Dropdown подготавливает семь defaults: zIndexPopup, paddingBlock, два arrow
+offsets, shadow width и два arrow paths. PaddingBlock рассчитывается из
+controlHeight, fontSize и lineHeight; component overrides применяются после
+расчёта. Поддержаны aliases, отдельные algorithms, нули/undefined, CSS-строки,
+hash и CSS prefix. Source compact paddingBlock=4px.
+
+Popup получает Dropdown scope, внутренний список — переменные Menu. Menu aliases
+дополняют Dropdown aliases; общий provider reset на списке не применяется.
+Menu component defaults также присутствуют, как в upstream при отключённых
+правилах Menu, но оформление строк использует Dropdown CSS. Например,
+Menu.fontSize меняет строки, а Menu.itemHeight не задаёт их высоту. Source
+padding/box sizing и шесть положений стрелки сверяются с официальным UMD.
+Промежуток до trigger использует глобальный marginXXS и половину sizePopupArrow
+при включённой стрелке; component aliases не меняют этот глобальный расчёт.
+Смена темы обновляет variables отдельно от controller left/top и сохраняет
+DOM, фокус, native link navigation и существующие Svelte callbacks.
+Native-only оформление сохраняется.
 
 Tooltip рассчитывает maxWidth, zIndexPopup, смещения и форму стрелки. Popover
 добавляет titleMinWidth, собственный zIndexPopup и arrow tokens, padding и
