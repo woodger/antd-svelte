@@ -5,6 +5,7 @@
   import TabsOverflow from './TabsOverflow.svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { tabsSemantics } from './tabs-semantic.engine';
   import { connectTabsNav, connectTabsScroll, revealTab } from './tabs.dom';
   import { getTabsIndicatorStyle, isTabsIndicatorStyleEqual } from './tabs-indicator.engine';
   import type { TabsIndicatorOffset, TabsIndicatorStyle } from './tabs-indicator.engine';
@@ -27,9 +28,9 @@
     onTabScroll,
     indicator,
     indicatorSize,
-    type = 'line',
+    type,
     onEdit,
-    hideAdd = false,
+    hideAdd,
     addIcon,
     removeIcon,
     locale,
@@ -39,7 +40,7 @@
     getPopupContainer,
     tabPlacement,
     tabPosition,
-    centered = false,
+    centered,
     tabBarGutter,
     tabBarStyle,
     size,
@@ -49,15 +50,20 @@
     id,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
-    class: className = '',
-    style
+    class: className,
+    rootClassName,
+    classNames,
+    styles,
+    style,
+    nativeElement = $bindable<HTMLDivElement>(),
+    ...rest
   }: TabsProps = $props();
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Tabs');
   const generatedId = $props.id();
   const initialDefault = untrack(() => defaultActiveKey);
-  let root = $state<HTMLDivElement>();
+  let root = $derived(nativeElement);
   let viewport = $state<HTMLDivElement>();
   let list = $state<HTMLDivElement>();
   let body = $state<HTMLDivElement>();
@@ -67,6 +73,9 @@
   let addButton = $state<HTMLButtonElement>();
   let hiddenKeys = $state<string[]>([]);
   let resolvedMore = $derived(more ? { ...more } : undefined);
+  let resolvedMoreIcon = $derived(config.tabs?.more?.icon ?? config.tabs?.moreIcon ?? moreIcon);
+  let resolvedAddIcon = $derived(addIcon ?? config.tabs?.addIcon);
+  let resolvedRemoveIcon = $derived(removeIcon ?? config.tabs?.removeIcon);
   let focusKey = $state<string | undefined>();
   let mobile = $state(false);
   let repairFocus = $state(false);
@@ -101,6 +110,51 @@
       ? tabBarExtraContent.right
       : tabBarExtraContent
   );
+  let semanticProps = $derived({
+    ...rest,
+    items: items.map(item => ({
+      ...item,
+      destroyOnHidden: item.destroyOnHidden ?? item.destroyInactiveTabPane
+    })),
+    activeKey,
+    defaultActiveKey,
+    onChange,
+    onTabClick,
+    onTabScroll,
+    indicator,
+    indicatorSize,
+    type,
+    onEdit,
+    hideAdd,
+    addIcon,
+    removeIcon,
+    locale,
+    more,
+    moreIcon,
+    popupClassName,
+    getPopupContainer,
+    tabPlacement: (tabPlacement ?? tabPosition) === undefined ? undefined
+      : getTabsPlacement((tabPlacement ?? tabPosition)!, config.direction),
+    tabPosition,
+    centered,
+    tabBarGutter,
+    tabBarStyle,
+    size: size ?? config.explicitComponentSize,
+    destroyOnHidden,
+    destroyInactiveTabPane,
+    tabBarExtraContent,
+    id,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledby,
+    class: className,
+    rootClassName,
+    classNames,
+    styles,
+    style
+  });
+  let semantics = $derived(tabsSemantics(config.tabs, classNames, styles, semanticProps));
+  let classes = $derived(semantics.classes);
+  let slots = $derived(semantics.styles);
 
   $effect(() => {
     const media = window.matchMedia('(max-width: 575px)');
@@ -197,8 +251,9 @@
   $effect(() => {
     const view = root?.ownerDocument.defaultView;
     const next = getTabsIndicatorStyle(activeOffset, vertical, config.direction === 'rtl', {
-      size: indicator?.size ?? indicatorSize,
-      align: indicator?.align
+      size: indicator?.size ?? indicatorSize
+        ?? config.tabs?.indicator?.size ?? config.tabs?.indicatorSize,
+      align: indicator?.align ?? config.tabs?.indicator?.align
     });
     if (!view) return;
 
@@ -396,9 +451,10 @@
   <button type="button" role="tab" id={itemId(item.key, 'tab')} data-tabs-key={item.key}
     aria-controls={itemId(item.key, 'panel')} aria-selected={selectedKey === item.key}
     disabled={item.disabled} tabindex={tabStop === item.key ? 0 : -1}
-    style={editing || first ? undefined : gutterStyle}
+    style={editing ? undefined : [first ? undefined : gutterStyle, slots.item].filter(Boolean).join(';') || undefined}
     class={editing ? 'ant-tabs-tab-btn' : [
       'ant-tabs-tab',
+      classes.item,
       selectedKey === item.key && 'ant-tabs-tab-active',
       item.disabled && 'ant-tabs-tab-disabled'
     ]}
@@ -412,7 +468,7 @@
   </button>
 {/snippet}
 
-<div bind:this={root} id={rootId} dir={config.direction} class={[
+<div {...rest} bind:this={nativeElement} id={rootId} dir={config.direction} class={[
     'ant-tabs ant-tabs-css-var',
     componentTheme.className,
     componentTheme.className && 'ant-tabs-source-theme',
@@ -422,16 +478,22 @@
     centered && 'ant-tabs-centered',
     (resolvedSize === 'small' || resolvedSize === 'large') && `ant-tabs-${resolvedSize}`,
     config.direction === 'rtl' && 'ant-tabs-rtl',
-    className
-  ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
-  <div class="ant-tabs-nav" role="presentation" style={tabBarStyle}>
+    config.tabs?.class,
+    className,
+    rootClassName,
+    classes.root
+  ]} style={[componentTheme.style, slots.root].filter(Boolean).join(';') || undefined}>
+  <div class={['ant-tabs-nav', classes.header]} role="presentation"
+    style={[slots.header, tabBarStyle].filter(Boolean).join(';') || undefined}>
     {#if extraLeft}<div class="ant-tabs-extra-content">{@render value(extraLeft)}</div>{/if}
     <div bind:this={viewport} class="ant-tabs-nav-wrap">
       <div bind:this={list} role="tablist" aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-orientation={vertical ? 'vertical' : 'horizontal'} tabindex={tabStop === undefined ? 0 : undefined} class="ant-tabs-nav-list" data-tabs-editable={editable ? '' : undefined} onkeydown={handleKeydown} onfocusout={handleFocusout}>
         {#each items as item, index (item.key)}
           {#if editable}
-            <div role="presentation" data-tabs-cell={item.key} style={index ? gutterStyle : undefined} class={[
+            <div role="presentation" data-tabs-cell={item.key}
+              style={[index ? gutterStyle : undefined, slots.item].filter(Boolean).join(';') || undefined} class={[
               'ant-tabs-tab',
+              classes.item,
               selectedKey === item.key && 'ant-tabs-tab-active',
               item.disabled && 'ant-tabs-tab-disabled',
               focusKey === item.key && 'ant-tabs-tab-focus',
@@ -440,11 +502,12 @@
               onmousedown={event => handleCellMouseDown(item, event)}>
               {@render tabButton(item, true, index === 0)}
               {#if isTabsItemRemovable(item, editable)}
-                <button type="button" class="ant-tabs-tab-remove" data-tabs-key={item.key}
+                <button type="button" class={['ant-tabs-tab-remove', classes.remove]}
+                  style={slots.remove} data-tabs-key={item.key}
                   aria-label={locale?.removeAriaLabel || 'remove'}
                   tabindex={selectedKey === item.key ? 0 : -1}
                   onclick={event => { void removeTab(item, event); }}>
-                  {@render value(item.closeIcon || (removeIcon ?? defaultRemove) || '×')}
+                  {@render value(item.closeIcon || (resolvedRemoveIcon ?? defaultRemove) || '×')}
                 </button>
               {/if}
             </div>
@@ -454,26 +517,31 @@
           <button bind:this={addButton} type="button" class="ant-tabs-nav-add" aria-label={locale?.addAriaLabel || 'Add tab'}
             style={items.length ? gutterStyle : undefined}
             onclick={event => onEdit?.(event, 'add')}>
-            {#if addIcon}{@render value(addIcon)}{:else}<TabsEditIcon name="plus" />{/if}
+            {#if resolvedAddIcon}{@render value(resolvedAddIcon)}{:else}<TabsEditIcon name="plus" />{/if}
           </button>
         {/if}
-        <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" aria-hidden="true"
-          style={inkBarStyle} hidden={!activeOffset || type !== 'line'}></div>
+        <div class={['ant-tabs-ink-bar ant-tabs-ink-bar-animated', classes.indicator]} aria-hidden="true"
+          style={[inkBarStyle, slots.indicator].filter(Boolean).join(';') || undefined}
+          hidden={!activeOffset || (type ?? 'line') !== 'line'}></div>
       </div>
     </div>
-    <TabsOverflow bind:nativeElement={operations} {rootId} {editable} {locale} more={resolvedMore} {moreIcon}
+    <TabsOverflow bind:nativeElement={operations} {rootId} {editable} {locale} more={resolvedMore}
+      moreIcon={resolvedMoreIcon} removeIcon={resolvedRemoveIcon}
+      removeClassName={classes.remove} removeStyle={slots.remove} popupStyle={slots.popup.root}
       themeClassName={componentTheme.className} themeStyle={componentTheme.inheritedStyle}
-      {removeIcon} {popupClassName} {getPopupContainer} {tabBarGutter}
+      popupClassName={[popupClassName, classes.popup.root].filter(Boolean).join(' ') || undefined}
+      {getPopupContainer} {tabBarGutter}
       items={items.filter(item => hiddenKeys.includes(item.key))}
       panelId={key => itemId(key, 'panel')} onSelect={activate}
       onRemove={(item, event) => { void removeTab(item, event); }}
       onUnavailable={() => focusTab(tabStop)} />
     {#if extraRight}<div class="ant-tabs-extra-content">{@render value(extraRight)}</div>{/if}
   </div>
-  <div class="ant-tabs-body-holder"><div bind:this={body} class="ant-tabs-body">
+  <div class="ant-tabs-body-holder"><div bind:this={body} class={['ant-tabs-body', classes.body]} style={slots.body}>
     {#each items as item (item.key)}
       <TabsPanel id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'tab')} itemKey={item.key} active={selectedKey === item.key} children={item.children} forceRender={item.forceRender}
-        destroyOnHidden={item.destroyOnHidden ?? item.destroyInactiveTabPane ?? rootDestroy} />
+        destroyOnHidden={item.destroyOnHidden ?? item.destroyInactiveTabPane ?? rootDestroy}
+        class={classes.content} style={slots.content} />
     {:else}<div class="ant-tabs-empty">{config.locale.emptyText}</div>{/each}
   </div></div>
 </div>

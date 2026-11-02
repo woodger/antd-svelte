@@ -57,8 +57,8 @@ describe('Editable Tabs native SSR', () => {
     expect(body.match(/class="ant-tabs-tab-remove\b/g)).toHaveLength(2);
     expect(body).toContain('ant-tabs-editable ant-tabs-editable-card');
     expect(body).toMatch(/role="tab"[^>]*data-tabs-key=""[^>]*tabindex="0"/);
-    expect(body).toMatch(/class="ant-tabs-tab-remove"[^>]*data-tabs-key=""[^>]*tabindex="0"/);
-    expect(body).toMatch(/class="ant-tabs-tab-remove"[^>]*data-tabs-key="beta"[^>]*tabindex="-1"/);
+    expect(body).toMatch(/class="ant-tabs-tab-remove(?: [^"]*)?"[^>]*data-tabs-key=""[^>]*tabindex="0"/);
+    expect(body).toMatch(/class="ant-tabs-tab-remove(?: [^"]*)?"[^>]*data-tabs-key="beta"[^>]*tabindex="-1"/);
     expect(body).not.toContain('type="submit"');
   });
 

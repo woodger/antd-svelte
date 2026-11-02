@@ -333,8 +333,17 @@ native минимум 32px у списка заголовков: zero/undefined 
 Официальный UMD задаёт declarations для 15 тем, 300 наборов метрик для десяти
 вариантов в LTR/RTL и 30 наборов popup metrics. Проверяются aliases, algorithms,
 padding/height, zero/undefined, scope reset и style priority; live updates сохраняют
-DOM, drafts, selection, focus и открытое содержимое More. Полный semantic/config,
-произвольный prefixCls и исходный motion остаются отдельными задачами.
+DOM, drafts, selection, focus и открытое содержимое More.
+
+`ConfigProvider.tabs` задаёт class/style, semantic classNames/styles, icons и
+indicator. Вложенный record заменяет родительский целиком. Semantic styles используют
+CSS-строки; root применяет provider styles.root → provider style → local styles.root
+→ local style. TabBarStyle идёт после semantic header, indicator styles — после
+вычисленной линии. Popup.root перекрывается собственным more.overlayStyle, включая
+явное undefined. Callback props содержат source size (undefined без явного
+размера), physical tabPlacement и нормализованные items. Эти слои сверяются
+с 23 эталонами официального UMD;
+произвольный prefixCls, общий getPopupContainer и исходный motion остаются задачами.
 
 ## Токены Menu
 
@@ -534,6 +543,9 @@ zeroRuntime наследуется; опубликованные стили ко
   [computed metrics](../../tests/browser/fixtures/ant-design-tabs-theme-metrics.json),
   [SSR](../../tests/package/tabs-theme.ssr.test.ts) и
   [браузерные проверки](../../tests/browser/tabs-theme.spec.ts), маршрут `?fixture=tabs-theme`.
+  [Semantic/config эталон](../../tests/browser/fixtures/ant-design-tabs-semantic-reference.json),
+  [SSR](../../tests/package/tabs-semantic.ssr.test.ts) и
+  [browser](../../tests/browser/tabs-semantic.spec.ts), маршрут `?fixture=tabs-semantic`.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

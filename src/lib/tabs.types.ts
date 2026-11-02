@@ -1,4 +1,5 @@
 import type { Snippet } from 'svelte';
+import type { HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize } from './types';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
@@ -78,8 +79,45 @@ export interface TabsLocale {
   dropdownAriaLabel?: string;
 }
 
+/** Имена классов или CSS-строки; popup string сокращает запись popup.root. */
+export interface TabsSlots {
+  root?: string;
+  item?: string;
+  remove?: string;
+  indicator?: string;
+  body?: string;
+  content?: string;
+  header?: string;
+  popup?: string | { root?: string; };
+}
+
+/** Props с source size (undefined без явного размера), physical placement и нормализованными items. */
+export type TabsSemanticProps = Omit<TabsProps, 'items' | 'size' | 'tabPlacement' | 'nativeElement'> & {
+  items: readonly TabsItem[];
+  size: ComponentSize | 'medium' | undefined;
+  tabPlacement?: TabsPosition;
+};
+
+export type TabsSemantic = TabsSlots | ((info: { props: TabsSemanticProps; }) => TabsSlots);
+
+/** Настройки ConfigProvider.tabs; вложенный provider заменяет весь record. */
+export interface TabsConfig {
+  class?: string;
+  style?: string;
+  classNames?: TabsSemantic;
+  styles?: TabsSemantic;
+  indicator?: TabsIndicator;
+  /** @deprecated Используйте indicator.size. */
+  indicatorSize?: TabsIndicatorSize;
+  addIcon?: TabsContent;
+  removeIcon?: TabsContent;
+  moreIcon?: TabsContent;
+  /** Как в 6.6.8, глобальный more использует только icon; остальные поля не меняют trigger. */
+  more?: Omit<TabsMoreProps, 'popupRender'>;
+}
+
 /** Набор keyed панелей с bind:activeKey, ручной клавиатурной активацией и overflow. */
-export interface TabsProps {
+export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'class' | 'style'> {
   items: readonly TabsItem[];
   /** Поддерживает bind:activeKey. */
   activeKey?: string | undefined;
@@ -107,9 +145,12 @@ export interface TabsProps {
   /** По умолчанию исходные Add tab/remove; не заменяет доступное имя tablist. */
   locale?: TabsLocale;
   more?: TabsMoreProps;
-  /** Историческая иконка; явно заданное more.icon имеет приоритет, включая null/false. */
+  /**
+   * Legacy иконка: глобальные tabs.more.icon ?? tabs.moreIcon имеют приоритет.
+   * Явное локальное more.icon перекрывает их, включая null/false/undefined.
+   */
   moreIcon?: TabsContent;
-  /** @deprecated Используйте semantic popup classes после переноса полного semantic API. */
+  /** @deprecated Используйте classNames.popup.root. */
   popupClassName?: string;
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   /** @defaultValue 'top' */
@@ -136,5 +177,12 @@ export interface TabsProps {
   'aria-label'?: string;
   'aria-labelledby'?: string;
   class?: string;
+  rootClassName?: string;
   style?: string;
+  /** Provider и локальные классы накапливаются; callback получает разрешённые props. */
+  classNames?: TabsSemantic;
+  /** CSS-строки; root style перекрывает styles.root, tabBarStyle перекрывает styles.header. */
+  styles?: TabsSemantic;
+  /** bind:nativeElement предоставляет корневой HTMLDivElement после mount; SSR refs не заполняются. */
+  nativeElement?: HTMLDivElement;
 }

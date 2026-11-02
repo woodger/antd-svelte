@@ -431,7 +431,11 @@ export type {
   TabsMoreRenderInfo,
   TabsIndicator,
   TabsIndicatorSize,
-  TabsScrollInfo
+  TabsScrollInfo,
+  TabsConfig,
+  TabsSlots,
+  TabsSemantic,
+  TabsSemanticProps
 } from './tabs.types';
 export type {
   CollapseProps,

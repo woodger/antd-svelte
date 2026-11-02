@@ -1,7 +1,17 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
 
-  let { id, labelledBy, itemKey, active, children, forceRender = false, destroyOnHidden = false }: {
+  let {
+    id,
+    labelledBy,
+    itemKey,
+    active,
+    children,
+    forceRender = false,
+    destroyOnHidden = false,
+    class: className,
+    style
+  }: {
     id: string;
     labelledBy: string;
     itemKey: string;
@@ -9,6 +19,8 @@
     children?: Snippet;
     forceRender?: boolean;
     destroyOnHidden?: boolean;
+    class?: string;
+    style?: string;
   } = $props();
   let mounted = $state(false);
   let renderContent = $derived(active || forceRender || mounted && !destroyOnHidden);
@@ -28,6 +40,6 @@
   .ant-tabs-content[hidden] { display: none; }
 </style>
 
-<div {id} role="tabpanel" aria-labelledby={labelledBy} tabindex={active ? 0 : -1} hidden={!active} data-tabs-key={itemKey} class={['ant-tabs-content', !active && 'ant-tabs-content-hidden']}>
+<div {id} role="tabpanel" aria-labelledby={labelledBy} tabindex={active ? 0 : -1} hidden={!active} data-tabs-key={itemKey} class={['ant-tabs-content', !active && 'ant-tabs-content-hidden', className]} {style}>
   {#if renderContent}<div class="ant-tabs-content-inner" {@attach rememberContent}>{@render children?.()}</div>{/if}
 </div>

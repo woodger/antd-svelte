@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tabs: semantic classNames/styles, ConfigProvider.tabs, rootClassName и native
+  attrs/events/bind:nativeElement. Сохранены исходные CSS-слои, callback props,
+  icon/indicator precedence и замена config во вложенном provider. Добавлены
+  23 UMD-эталона, unit/SSR/browser-проверки и живые обновления без потери DOM/фокуса.
 - Theme Tabs: исходные defaults/aliases, card height → padding, component algorithms,
   CSS-variable prefix/hash и наследование More popup. Добавлены UMD conformance,
   SSR/browser-проверки 15 тем, 10 вариантов, LTR/RTL, zero/undefined и обновлений

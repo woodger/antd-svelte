@@ -1,0 +1,2282 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4"
+  },
+  "cases": [
+    {
+      "name": "layers",
+      "mode": "layers",
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-local-root"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "callbacks-ltr",
+      "mode": "callbacks",
+      "placement": "start",
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-context-small-left",
+          "s-local-root",
+          "s-local-small-left"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "21px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": [
+        {
+          "scope": "context",
+          "kind": "classNames",
+          "size": "small",
+          "placement": "left",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "classNames",
+          "size": "small",
+          "placement": "left",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "context",
+          "kind": "styles",
+          "size": "small",
+          "placement": "left",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "styles",
+          "size": "small",
+          "placement": "left",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        }
+      ]
+    },
+    {
+      "name": "callbacks-rtl",
+      "mode": "callbacks",
+      "placement": "start",
+      "rtl": true,
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-context-small-right",
+          "s-local-root",
+          "s-local-small-right"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "21px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": [
+        {
+          "scope": "context",
+          "kind": "classNames",
+          "size": "small",
+          "placement": "right",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "classNames",
+          "size": "small",
+          "placement": "right",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "context",
+          "kind": "styles",
+          "size": "small",
+          "placement": "right",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "styles",
+          "size": "small",
+          "placement": "right",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        }
+      ]
+    },
+    {
+      "name": "callbacks-medium",
+      "mode": "callbacks",
+      "size": "medium",
+      "placement": "bottom",
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-context-medium-bottom",
+          "s-local-root",
+          "s-local-medium-bottom"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "21px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": [
+        {
+          "scope": "context",
+          "kind": "classNames",
+          "size": "medium",
+          "placement": "bottom",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "classNames",
+          "size": "medium",
+          "placement": "bottom",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "context",
+          "kind": "styles",
+          "size": "medium",
+          "placement": "bottom",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "styles",
+          "size": "medium",
+          "placement": "bottom",
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        }
+      ]
+    },
+    {
+      "name": "callbacks-default-position",
+      "mode": "callbacks",
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-context-small-none",
+          "s-local-root",
+          "s-local-small-none"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "21px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": [
+        {
+          "scope": "context",
+          "kind": "classNames",
+          "size": "small",
+          "placement": null,
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "classNames",
+          "size": "small",
+          "placement": null,
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "context",
+          "kind": "styles",
+          "size": "small",
+          "placement": null,
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "styles",
+          "size": "small",
+          "placement": null,
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        }
+      ]
+    },
+    {
+      "name": "callbacks-default-size",
+      "mode": "callbacks",
+      "defaultSize": true,
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-context-undefined-none",
+          "s-local-root",
+          "s-local-undefined-none"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "21px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": [
+        {
+          "scope": "context",
+          "kind": "classNames",
+          "size": null,
+          "placement": null,
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "classNames",
+          "size": null,
+          "placement": null,
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "context",
+          "kind": "styles",
+          "size": null,
+          "placement": null,
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "styles",
+          "size": null,
+          "placement": null,
+          "type": "editable-card",
+          "items": 10,
+          "normalized": false
+        }
+      ]
+    },
+    {
+      "name": "callbacks-default-type",
+      "mode": "callbacks",
+      "defaultType": true,
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-context-small-none",
+          "s-local-root",
+          "s-local-small-none"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": null,
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": null
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "21px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": null,
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": null
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": null,
+        "remove": null
+      },
+      "info": [
+        {
+          "scope": "context",
+          "kind": "classNames",
+          "size": "small",
+          "placement": null,
+          "type": null,
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "classNames",
+          "size": "small",
+          "placement": null,
+          "type": null,
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "context",
+          "kind": "styles",
+          "size": "small",
+          "placement": null,
+          "type": null,
+          "items": 10,
+          "normalized": false
+        },
+        {
+          "scope": "local",
+          "kind": "styles",
+          "size": "small",
+          "placement": null,
+          "type": null,
+          "items": 10,
+          "normalized": false
+        }
+      ]
+    },
+    {
+      "name": "nested-replace",
+      "mode": "layers",
+      "nested": true,
+      "classes": {
+        "root": [
+          "s-local-plain",
+          "s-extra-root",
+          "s-local-root"
+        ],
+        "header": [
+          "s-local-header"
+        ],
+        "item": [
+          "s-local-item"
+        ],
+        "remove": [
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-local-body"
+        ],
+        "content": [
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "INNER",
+          "paths": []
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "context-current-more",
+      "context": {
+        "more": {
+          "icon": "CTX-CURRENT"
+        },
+        "moreIcon": "CTX-LEGACY"
+      },
+      "local": {
+        "moreIcon": "LOCAL-LEGACY"
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "80.7812px",
+          "transform": "translateX(-50%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "CTX-CURRENT",
+          "paths": []
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "context-legacy-more",
+      "context": {
+        "more": {
+          "icon": null
+        },
+        "moreIcon": "CTX-LEGACY"
+      },
+      "local": {
+        "moreIcon": "LOCAL-LEGACY"
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "80.7812px",
+          "transform": "translateX(-50%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "CTX-LEGACY",
+          "paths": []
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "context-false-more",
+      "context": {
+        "more": {
+          "icon": false
+        },
+        "moreIcon": "CTX-LEGACY"
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "80.7812px",
+          "transform": "translateX(-50%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": []
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "local-current-more",
+      "context": {
+        "more": {
+          "icon": "CTX-CURRENT"
+        }
+      },
+      "local": {
+        "more": {
+          "icon": "LOCAL-CURRENT"
+        }
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "80.7812px",
+          "transform": "translateX(-50%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "LOCAL-CURRENT",
+          "paths": []
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "local-undefined-more",
+      "context": {
+        "more": {
+          "icon": "CTX-CURRENT"
+        }
+      },
+      "local": {
+        "more": {
+          "icon": {
+            "$type": "undefined"
+          }
+        }
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "80.7812px",
+          "transform": "translateX(-50%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "More",
+          "paths": []
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "context-add-remove",
+      "context": {
+        "addIcon": "CTX-ADD",
+        "removeIcon": "CTX-REMOVE"
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "142.781px",
+          "transform": "translateX(-50%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "CTX-ADD",
+          "paths": []
+        },
+        "remove": {
+          "text": "CTX-REMOVE",
+          "paths": []
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "local-null-icons",
+      "context": {
+        "addIcon": "CTX-ADD",
+        "removeIcon": "CTX-REMOVE"
+      },
+      "local": {
+        "addIcon": null,
+        "removeIcon": null
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "142.781px",
+          "transform": "translateX(-50%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "CTX-ADD",
+          "paths": []
+        },
+        "remove": {
+          "text": "CTX-REMOVE",
+          "paths": []
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "local-false-icons",
+      "context": {
+        "addIcon": "CTX-ADD",
+        "removeIcon": "CTX-REMOVE"
+      },
+      "local": {
+        "addIcon": false,
+        "removeIcon": false
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "75.7812px",
+          "transform": "translateX(-50%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "×",
+          "paths": []
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "indicator-context",
+      "context": {
+        "indicator": {
+          "size": 12,
+          "align": "start"
+        },
+        "indicatorSize": 7
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "12px",
+          "transform": "",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "indicator-local-legacy",
+      "context": {
+        "indicator": {
+          "size": 12,
+          "align": "start"
+        }
+      },
+      "local": {
+        "indicatorSize": 9
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "9px",
+          "transform": "",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "indicator-local-zero",
+      "context": {
+        "indicator": {
+          "size": 12,
+          "align": "start"
+        }
+      },
+      "local": {
+        "indicator": {
+          "size": 0,
+          "align": "end"
+        }
+      },
+      "classes": {
+        "root": [],
+        "header": [],
+        "item": [],
+        "remove": [],
+        "indicator": [],
+        "body": [],
+        "content": [],
+        "popup": [],
+        "popupRemove": []
+      },
+      "metrics": {
+        "root": {
+          "color": "rgba(0, 0, 0, 0.88)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "16px"
+        },
+        "item": {
+          "paddingTop": "4px",
+          "paddingLeft": "8px"
+        },
+        "remove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        },
+        "indicator": {
+          "width": "0px",
+          "transform": "translateX(-100%)",
+          "backgroundColor": "rgb(22, 119, 255)"
+        },
+        "body": {
+          "paddingTop": "0px"
+        },
+        "content": {
+          "paddingLeft": "0px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgba(0, 0, 0, 0.45)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "popup-more-style",
+      "mode": "layers",
+      "local": {
+        "more": {
+          "overlayStyle": {
+            "backgroundColor": "rgb(60,70,80)"
+          }
+        }
+      },
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-local-root"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(60, 70, 80)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "popup-more-undefined-style",
+      "mode": "layers",
+      "local": {
+        "more": {
+          "overlayStyle": {
+            "$type": "undefined"
+          }
+        }
+      },
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-local-root"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-legacy-popup",
+          "s-context-popup",
+          "s-local-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgba(0, 0, 0, 0)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "popup-more-class",
+      "mode": "layers",
+      "local": {
+        "more": {
+          "overlayClassName": "s-more-popup"
+        }
+      },
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-local-root"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [
+          "s-more-popup"
+        ],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    },
+    {
+      "name": "popup-more-undefined-class",
+      "mode": "layers",
+      "local": {
+        "more": {
+          "overlayClassName": {
+            "$type": "undefined"
+          }
+        }
+      },
+      "classes": {
+        "root": [
+          "s-context-plain",
+          "s-local-plain",
+          "s-extra-root",
+          "s-context-root",
+          "s-local-root"
+        ],
+        "header": [
+          "s-context-header",
+          "s-local-header"
+        ],
+        "item": [
+          "s-context-item",
+          "s-local-item"
+        ],
+        "remove": [
+          "s-context-remove",
+          "s-local-remove"
+        ],
+        "indicator": [
+          "s-context-indicator",
+          "s-local-indicator"
+        ],
+        "body": [
+          "s-context-body",
+          "s-local-body"
+        ],
+        "content": [
+          "s-context-content",
+          "s-local-content"
+        ],
+        "popup": [],
+        "popupRemove": [
+          "s-context-remove",
+          "s-local-remove"
+        ]
+      },
+      "metrics": {
+        "root": {
+          "color": "rgb(40, 50, 60)",
+          "fontSize": "14px"
+        },
+        "header": {
+          "marginBottom": "3px"
+        },
+        "item": {
+          "paddingTop": "6px",
+          "paddingLeft": "11px"
+        },
+        "remove": {
+          "color": "rgb(60, 70, 80)"
+        },
+        "indicator": {
+          "width": "7px",
+          "transform": "none",
+          "backgroundColor": "rgb(40, 50, 60)"
+        },
+        "body": {
+          "paddingTop": "5px"
+        },
+        "content": {
+          "paddingLeft": "11px"
+        },
+        "popup": {
+          "backgroundColor": "rgb(70, 80, 90)"
+        },
+        "popupRemove": {
+          "color": "rgb(60, 70, 80)"
+        }
+      },
+      "icons": {
+        "more": {
+          "text": "",
+          "paths": [
+            "M176 511a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0zm280 0a56 56 0 10112 0 56 56 0 10-112 0z"
+          ]
+        },
+        "add": {
+          "text": "",
+          "paths": [
+            "M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z",
+            "M192 474h672q8 0 8 8v60q0 8-8 8H160q-8 0-8-8v-60q0-8 8-8z"
+          ]
+        },
+        "remove": {
+          "text": "",
+          "paths": [
+            "M799.86 166.31c.02 0 .04.02.08.06l57.69 57.7c.04.03.05.05.06.08a.12.12 0 010 .06c0 .03-.02.05-.06.09L569.93 512l287.7 287.7c.04.04.05.06.06.09a.12.12 0 010 .07c0 .02-.02.04-.06.08l-57.7 57.69c-.03.04-.05.05-.07.06a.12.12 0 01-.07 0c-.03 0-.05-.02-.09-.06L512 569.93l-287.7 287.7c-.04.04-.06.05-.09.06a.12.12 0 01-.07 0c-.02 0-.04-.02-.08-.06l-57.69-57.7c-.04-.03-.05-.05-.06-.07a.12.12 0 010-.07c0-.03.02-.05.06-.09L454.07 512l-287.7-287.7c-.04-.04-.05-.06-.06-.09a.12.12 0 010-.07c0-.02.02-.04.06-.08l57.7-57.69c.03-.04.05-.05.07-.06a.12.12 0 01.07 0c.03 0 .05.02.09.06L512 454.07l287.7-287.7c.04-.04.06-.05.09-.06a.12.12 0 01.07 0z"
+          ]
+        }
+      },
+      "info": []
+    }
+  ]
+}

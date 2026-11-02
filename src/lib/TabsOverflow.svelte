@@ -25,7 +25,10 @@
     more,
     moreIcon,
     removeIcon,
+    removeClassName,
+    removeStyle,
     popupClassName,
+    popupStyle,
     getPopupContainer,
     tabBarGutter,
     themeClassName,
@@ -43,7 +46,10 @@
     more?: TabsMoreProps;
     moreIcon?: TabsContent;
     removeIcon?: TabsContent;
+    removeClassName?: string;
+    removeStyle?: string;
     popupClassName?: string;
+    popupStyle?: string;
     getPopupContainer?: (trigger: HTMLElement) => HTMLElement;
     tabBarGutter?: number;
     themeClassName?: string;
@@ -84,7 +90,10 @@
     : placement.endsWith('Right') ? 'right' as const : undefined);
   let containerGetter = $derived(more && Object.hasOwn(more, 'getPopupContainer')
     ? more.getPopupContainer : getPopupContainer);
-  let overlayStyle = $derived(more?.overlayStyle);
+  let overlayStyle = $derived(more && Object.hasOwn(more, 'overlayStyle')
+    ? more.overlayStyle : popupStyle);
+  const initialStyle = untrack(() => [themeStyle, overlayStyle].filter(Boolean).join(';') || undefined);
+  let initialStyleCleared = false;
   let matchWidth = $derived(more?.minOverlayWidthMatchTrigger !== false);
   let selectedId = $derived(selectedKey !== null && items.some(item => item.key === selectedKey)
     ? optionId(selectedKey) : undefined);
@@ -135,6 +144,13 @@
     if (!surface || !source || !origin || !rendered) return;
 
     return untrack(() => {
+      // До первого открытия markup уже содержит начальные styles; props могли успеть измениться.
+      if (!initialStyleCleared) {
+        const initial = surface.ownerDocument.createElement('span').style;
+        initial.cssText = initialStyle ?? '';
+        for (const name of initial) surface.style.removeProperty(name);
+        initialStyleCleared = true;
+      }
       const css = surface.ownerDocument.createElement('span').style;
       css.cssText = cssText ?? '';
       const names = Array.from(css);
@@ -381,7 +397,8 @@
           {@render value(item.label)}
         </button>
         {#if isTabsItemRemovable(item, editable)}
-          <button type="button" class="ant-tabs-dropdown-menu-item-remove" data-tabs-overflow-key={item.key}
+          <button type="button" class={['ant-tabs-dropdown-menu-item-remove', removeClassName]}
+            style={removeStyle} data-tabs-overflow-key={item.key}
             aria-label={locale?.removeAriaLabel || 'remove'} tabindex="0"
             onclick={event => onRemove(item, event)}>
             {@render value(item.closeIcon || (removeIcon ?? defaultRemove) || '×')}
@@ -424,7 +441,7 @@
       `ant-tabs-dropdown-placement-${shown ? actualSide : side}${align === 'left' ? 'Left' : align === 'right' ? 'Right' : ''}`,
       config.direction === 'rtl' && 'ant-tabs-dropdown-rtl',
       more && Object.hasOwn(more, 'overlayClassName') ? more.overlayClassName : popupClassName
-    ]} style={untrack(() => [themeStyle, more?.overlayStyle].filter(Boolean).join(';') || undefined)}
+    ]} style={initialStyle}
     onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
     onclick={event => more?.onOverlayClick?.(event)}>
     {#if rendered && more?.popupRender}

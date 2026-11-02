@@ -1,5 +1,6 @@
 import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
 import type { ButtonConfig } from './button.types';
+import type { TabsConfig } from './tabs.types';
 import type { RateConfig } from './rate.types';
 import type { WatermarkConfig } from './watermark.types';
 import type { BorderBeamConfig } from './border-beam.types';
@@ -34,6 +35,7 @@ import { getContext, setContext } from 'svelte';
 import { ruRU, type ComponentSize, type Locale, type ResolvedThemeConfig } from './types';
 
 export interface ConfigContext {
+  readonly tabs?: TabsConfig;
   readonly button?: ButtonConfig;
   readonly rate?: RateConfig;
   readonly watermark?: WatermarkConfig;

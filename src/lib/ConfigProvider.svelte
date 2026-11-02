@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
   import type { ButtonConfig } from './button.types';
+  import type { TabsConfig } from './tabs.types';
   import type { RateConfig } from './rate.types';
   import type { WatermarkConfig } from './watermark.types';
   import type { BorderBeamConfig } from './border-beam.types';
@@ -44,6 +45,7 @@
     /** Частично переопределяет родительскую тему; остальные поля наследуются. */
     theme?: ThemeConfig;
     button?: ButtonConfig;
+    tabs?: TabsConfig;
     rate?: RateConfig;
     watermark?: WatermarkConfig;
     borderBeam?: BorderBeamConfig;
@@ -94,6 +96,7 @@
     children,
     theme,
     button,
+    tabs,
     rate,
     watermark,
     borderBeam,
@@ -139,6 +142,9 @@
   const themeId = $props.id();
   const designTokens = provideDesignTokens(() => theme, themeId);
   const config: ConfigContext = {
+    get tabs() {
+      return tabs ?? parent.tabs;
+    },
     get button() {
       return button ?? parent.button;
     },

@@ -2034,12 +2034,53 @@ component algorithms. Высоты карточек участвуют в выч
 Фикстура `?fixture=tabs-theme` сверяет 15 тем, 10 вариантов в LTR/RTL и popup
 с официальным UMD; смена темы сохраняет DOM, черновики, выделение и фокус.
 
+`classNames` и `styles` принимают объект либо чистую функцию `({ props }) => slots`.
+Доступны root/item/remove/indicator/body/content/header и popup.root; строка popup
+сокращает запись popup.root. Styles используют CSS-строки. Remove применяется
+к кнопкам удаления и в заголовках, и в More. Callback получает source size:
+undefined без явного размера у компонента/провайдера, физический tabPlacement до
+mobile fallback и items с нормализованным destroyOnHidden.
+Остальные поля сохраняют переданные Svelte props; bind:activeKey остаётся живым.
+
+`ConfigProvider.tabs` задаёт class/style, semantic slots, add/remove/more icons и
+indicator/indicatorSize. Отсутствующий record наследуется; явно переданный объект
+во вложенном провайдере заменяет его целиком, как в Ant Design. Классы провайдера
+и компонента накапливаются. Порядок root CSS: provider styles.root → provider style
+→ local styles.root → local style; tabBarStyle идёт после styles.header.
+Semantic indicator styles идут после вычисленной геометрии линии.
+
+```svelte
+<ConfigProvider tabs={{
+  classNames: { header: 'section-tabs' },
+  styles: { item: 'padding-inline:12px' },
+  indicator: { size: 24, align: 'start' }
+}}>
+  <Tabs {items} classNames={{ content: 'section-panel' }} />
+</ConfigProvider>
+```
+
+У More сохраняется исходный порядок: локальное more.icon, затем глобальные
+tabs.more.icon ?? tabs.moreIcon, затем локальное legacy moreIcon. Явное локальное
+more.icon, включая null/false/undefined, перекрывает fallback. Глобальный tabs.more
+использует только icon, как в 6.6.8; trigger и остальные параметры задаются локально.
+Собственные поля more.overlayClassName/overlayStyle перекрывают deprecated popup
+class и semantic popup.root, даже при явном undefined.
+
+`rootClassName` добавляет класс корню; нативные title/data-атрибуты и обработчики
+передаются HTMLDivElement. `bind:nativeElement` предоставляет сам корневой div
+после mount и очищается при unmount; SSR его не заполняет. Это Svelte binding,
+без React ref wrapper. Aria-label/aria-labelledby сохраняют прежнее назначение:
+именуют tablist. Обновления config/semantic styles сохраняют DOM, draft и фокус.
+
 `indicator={{ size: 12.5, align: 'center' }}` задаёт длину и выравнивание линии.
 Size также принимает чистую функцию `(origin) => origin - 20`: origin — полная
 ширина горизонтального или высота вертикального заголовка с дробной точностью.
 По умолчанию используется полный размер и align=center; start/end учитывают RTL.
 Нули и отрицательные значения передаются в CSS без ограничения. Устаревший
-indicatorSize используется, когда indicator.size nullish. Формулы, включая
+indicatorSize используется, когда indicator.size nullish, затем берутся
+ConfigProvider.tabs.indicator.size ?? ConfigProvider.tabs.indicatorSize.
+Align наследуется отдельно.
+Формулы, включая
 end transform в RTL, повторяют rc-tabs 1.13.0. Измерение выполняется после mount;
 SSR не вызывает size callbacks. Обновление откладывается на кадр, а сравнение
 округлённых значений подавляет дрожание индикатора. Смена indicator не сбрасывает
@@ -2173,8 +2214,11 @@ keyboard, control/owner callbacks, popupRender, portal, вложенные по�
 Фикстура `?fixture=tabs-indicator` сверяет 64 эталона indicator/indicatorSize из
 официального UMD и направления onTabScroll в восьми сочетаниях RTL/placement.
 Здесь же проверяются сохранение DOM, focus, More, прокрутки и cleanup кадров/listeners.
+Фикстура `?fixture=tabs-semantic` сравнивает 23 эталона semantic slots, CSS-слоёв,
+callback props, provider inheritance и icon precedence с официальным UMD.
+Проверяются native attrs/events/ref и живое обновление открытого popup.
 Drag-and-drop и renderTabBar ещё не перенесены.
-Остаются также полный semantic/config/ref API,
+Остаются произвольный prefixCls, общий ConfigProvider.getPopupContainer и
 исходный motion; приоритет уничтожения панелей сохраняет native v1.
 Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,
 placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и motion/prefix.
