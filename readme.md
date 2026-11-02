@@ -894,10 +894,19 @@ Svelte Dropdown с placement=bottom по умолчанию; dropdownIcon=null/u
 возврат фокуса после Escape направляет его в первый доступный нативный control
 этого пункта.
 
-Галерея — `/ant-design#breadcrumb`, фикстура — `?fixture=breadcrumb`.
+При source-настройках темы `components.Breadcrumb` получает семь исходных defaults:
+цвета пунктов, ссылок, последнего пункта и разделителей, размер иконок и отступ
+разделителя. Поддержаны aliases, component algorithms, CSS prefix/hash,
+нули и undefined. Цвет стрелки меню наследуется от пункта, цвет текста ссылки
+задаётся отдельно; custom dropdownIcon и semantic styles сохраняют этот порядок.
+Semantic root styles и plain style имеют приоритет после component tokens.
+Popup использует собственные Dropdown/Menu scopes. Обновление темы сохраняет
+нативные ссылки, фокус, навигацию и callbacks; native-only оформление сохранено.
+
+Галерея — `/ant-design#breadcrumb`, фикстуры — `?fixture=breadcrumb` и `?fixture=breadcrumb-theme`.
 Unit/SSR/Chromium покрывают маршруты, параметры, разделители, шаблон, стили,
 меню, отмену перехода и production hydration. Рецепт breadcrumb извлекает 21
-правило без keyframes. PrefixCls и глобальный component config/tokens остаются
+правило без keyframes. PrefixCls и глобальный component config вне темы остаются
 в полном объёме миграции.
 
 ## Anchor / AnchorLink

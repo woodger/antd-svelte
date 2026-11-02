@@ -468,7 +468,7 @@
   .ant-dropdown-menu { box-sizing: border-box; width: 100%; max-width: 100%; max-height: calc(100dvh - 16px); overflow: auto; overflow-wrap: anywhere; }
   .ant-dropdown-source-theme .ant-dropdown-menu { box-sizing: content-box; width: auto; max-height: calc(100vh - var(--ant-control-height-lg) * 2.5); }
   /* Button заполняет строку как исходный li; content-box сохраняет размеры и padding upstream. */
-  .ant-dropdown-source-theme .ant-dropdown-menu-item { box-sizing: content-box; width: stretch; }
+  .ant-dropdown-source-theme .ant-dropdown-menu-item { box-sizing: content-box; width: stretch; height: auto; }
   :where(button, a) { appearance: none; width: 100%; margin: 0; border: 0; background: transparent; color: inherit; text-align: start; font: inherit; }
   a.ant-dropdown-menu-item { box-sizing: border-box; text-decoration: none; }
   .ant-dropdown-menu-title-content { min-width: 0; white-space: normal; }

@@ -1458,6 +1458,11 @@
           "name": "@rc-component/menu",
           "range": "~1.5.0",
           "referenceVersion": "1.5.0"
+        },
+        {
+          "name": "@ant-design/cssinjs-utils",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
         }
       ],
       "priority": "p1",
@@ -1469,7 +1474,15 @@
         "tests/browser/breadcrumb.spec.ts",
         "integration:breadcrumb",
         "src/lib/BreadcrumbEntry.svelte",
-        "tests/browser/breadcrumb-alignment.spec.ts"
+        "tests/browser/breadcrumb-alignment.spec.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-breadcrumb-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-breadcrumb-tokens-reference.json",
+        "tests/package/breadcrumb-theme.ssr.test.ts",
+        "tests/browser/breadcrumb-theme.spec.ts",
+        "tests/browser/fixtures/BreadcrumbThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-breadcrumb-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -1512,11 +1525,30 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls, глобальный component config/tokens и полный Menu API",
+          "title": "PrefixCls, глобальный component config и полный Menu API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Пока фиксированный prefix и существующий standalone Dropdown; глобальная конфигурация и отсутствующие Menu-возможности требуют следующих этапов."
+          "note": "Component tokens подключены через theme.components.Breadcrumb. PrefixCls, глобальный breadcrumb config вне темы и отсутствующие возможности standalone Dropdown/Menu требуют следующих этапов."
+        },
+        {
+          "id": "source-theme-tokens",
+          "title": "Source Breadcrumb defaults/aliases и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Breadcrumb.svelte",
+            "src/lib/BreadcrumbEntry.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-breadcrumb-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-breadcrumb-tokens-reference.json",
+            "tests/package/breadcrumb-theme.ssr.test.ts",
+            "tests/browser/breadcrumb-theme.spec.ts",
+            "tests/browser/fixtures/BreadcrumbThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-breadcrumb-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Семь defaults, aliases и отдельные algorithms, zero/undefined/negative, runtime CSS lengths и custom CSS prefix/hash. Scoped declarations и 34 computed metric sets для 17 тем: LTR/RTL root, ссылки/иконки/разделители/последний пункт, overlay/стрелка, hover/focus и Dropdown links. Девять дополнительных сочетаний rich title, default/SVG/anticon/text dropdownIcon, последнего пункта и semantic color. Нативный trigger-link сохраняется: отдельный span текста воспроизводит независимые от стрелки color/padding/margins исходной вложенной ссылки. Semantic/plain styles сохраняют приоритет; Dropdown/Menu scopes отделяют aliases popup, автоматическая высота его ссылок перекрывает ancestor Breadcrumb height. Обновления сохраняют DOM/focus, navigation и callbacks; native-only темы и существующие Svelte contracts сохранены."
         }
       ]
     },
@@ -1640,9 +1672,10 @@
             "tests/browser/dropdown-theme.spec.ts",
             "tests/browser/fixtures/DropdownThemeFixtures.svelte",
             "tests/browser/fixtures/ant-design-dropdown-metrics.json",
-            "docs/reference/theme-context.md"
+            "docs/reference/theme-context.md",
+            "tests/browser/breadcrumb-theme.spec.ts"
           ],
-          "note": "Семь Dropdown defaults и 79 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены."
+          "note": "Семь Dropdown defaults и 79 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены. Явная автоматическая высота source rows сохраняет геометрию native links внутри Breadcrumb при отдельных Menu font/height aliases."
         },
         {
           "id": "open-event-info",
@@ -8427,6 +8460,25 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Семь Dropdown defaults и 79 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены."
+        },
+        {
+          "id": "breadcrumb-theme-tokens",
+          "title": "Source Breadcrumb defaults/aliases и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Breadcrumb.svelte",
+            "src/lib/BreadcrumbEntry.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-breadcrumb-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-breadcrumb-tokens-reference.json",
+            "tests/package/breadcrumb-theme.ssr.test.ts",
+            "tests/browser/breadcrumb-theme.spec.ts",
+            "tests/browser/fixtures/BreadcrumbThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-breadcrumb-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Семь defaults, aliases и отдельные algorithms, zero/undefined/negative, runtime CSS lengths и custom CSS prefix/hash. Scoped declarations и 34 computed metric sets для 17 тем: LTR/RTL root, ссылки/иконки/разделители/последний пункт, overlay/стрелка, hover/focus и Dropdown links. Девять дополнительных сочетаний rich title, default/SVG/anticon/text dropdownIcon, последнего пункта и semantic color. Нативный trigger-link сохраняется: отдельный span текста воспроизводит независимые от стрелки color/padding/margins исходной вложенной ссылки. Semantic/plain styles сохраняют приоритет; Dropdown/Menu scopes отделяют aliases popup, автоматическая высота его ссылок перекрывает ancestor Breadcrumb height. Обновления сохраняют DOM/focus, navigation и callbacks; native-only темы и существующие Svelte contracts сохранены."
         }
       ]
     },

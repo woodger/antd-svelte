@@ -41,6 +41,14 @@
   /* Обёртка Svelte Dropdown сохраняет базовую линию соседних пунктов. */
   .ant-breadcrumb-item > :global(.ant-dropdown-trigger) { vertical-align: baseline; }
   .breadcrumb-arrow { display: inline-flex; margin-inline-start: var(--ant-margin-xxs); font-size: var(--ant-font-size-icon); }
+  /* В upstream текст ссылки и стрелка наследуют цвет от разных элементов. */
+  :global(.ant-breadcrumb-source-theme) a.ant-breadcrumb-overlay-link { color: inherit; }
+  :global(.ant-breadcrumb-source-theme) a.ant-breadcrumb-overlay-link > .breadcrumb-overlay-title { color: var(--ant-breadcrumb-link-color); display: inline-block; box-sizing: border-box; height: var(--ant-font-height); padding: 0 var(--ant-padding-xxs); margin-inline: calc(var(--ant-margin-xxs) * -1); }
+  :global(.ant-breadcrumb-source-theme) a.ant-breadcrumb-overlay-link:hover, :global(.ant-breadcrumb-source-theme) a.ant-breadcrumb-overlay-link:hover > .breadcrumb-overlay-title { color: var(--ant-breadcrumb-link-hover-color); }
+  :global(.ant-breadcrumb-source-theme) .breadcrumb-arrow { vertical-align: -0.125em; }
+  .breadcrumb-overlay-title > :global(svg) { display: inline-block; vertical-align: middle; margin-block-end: 0.2em; }
+  .breadcrumb-overlay-title > :global(.anticon + span), .breadcrumb-overlay-title > :global(.anticon + a), .breadcrumb-overlay-title > :global(svg + span), .breadcrumb-overlay-title > :global(svg + a) { margin-inline-start: var(--ant-margin-xxs); }
+  :global(.ant-breadcrumb-source-theme) :is(a, button).ant-breadcrumb-overlay-link > :global(svg) { display: inline; vertical-align: baseline; margin-block-end: 0; }
 </style>
 
 {#snippet value(node: BreadcrumbContent | undefined)}
@@ -63,13 +71,13 @@
         'ant-breadcrumb-link',
         overlay && 'ant-breadcrumb-overlay-link',
         entry.item.class
-      ]} onclick={entry.item.onClick}>{@render value(entry.title)}{#if overlay}{@render arrow()}{/if}</a>
+      ]} onclick={entry.item.onClick}>{#if overlay}<span class="breadcrumb-overlay-title">{@render value(entry.title)}</span>{@render arrow()}{:else}{@render value(entry.title)}{/if}</a>
   {:else if overlay || entry.item.onClick}
     <button {...attributes} type="button" class={[
         'ant-breadcrumb-link',
         overlay && 'ant-breadcrumb-overlay-link',
         entry.item.class
-      ]} onclick={entry.item.onClick}>{@render value(entry.title)}{#if overlay}{@render arrow()}{/if}</button>
+      ]} onclick={entry.item.onClick}>{#if overlay}<span class="breadcrumb-overlay-title">{@render value(entry.title)}</span>{@render arrow()}{:else}{@render value(entry.title)}{/if}</button>
   {:else}<span {...attributes} class={['ant-breadcrumb-link', entry.item.class]}>{@render value(entry.title)}</span>{/if}
 {/snippet}
 <li class={['ant-breadcrumb-item', classes.item]} style={styles.item}>

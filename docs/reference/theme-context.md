@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Menu и Dropdown также получают собственные defaults и aliases.
+Anchor, Breadcrumb, Menu и Dropdown также получают собственные defaults и aliases.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -241,6 +241,29 @@ linkFocusDecoration для обычного, hover/active и focus состоя�
 подчёркивания нет. Native-only оформление сохраняется. Обновления сохраняют DOM ссылок,
 фокус, scroll/history и callbacks. Измерение indicator и отслеживание scroll
 сохраняют исходный lifecycle.
+
+## Токены Breadcrumb
+
+Семь defaults задают itemColor, lastItemColor, iconFontSize, linkColor,
+linkHoverColor, separatorColor и separatorMargin. Они рассчитываются из общих
+tokens и aliases Breadcrumb; явные component overrides применяются последними.
+Поддержаны component algorithms, CSS prefix/hash, нули/undefined и переданные
+во время выполнения CSS-строки размеров. Semantic root styles и plain style
+сохраняют приоритет после tokens.
+
+В upstream внешний overlay наследует цвет пункта, а вложенная ссылка получает
+linkColor. Svelte сохраняет нативный trigger-link: отдельный span текста передаёт
+этот цвет, padding и margins; стрелка наследует цвет пункта, включая последний
+пункт и semantic styles.item. Default SVG, custom SVG/anticon и текстовые стрелки
+сохраняют исходные размеры и выравнивание. Dropdown/Menu scopes отделяют aliases
+popup; автоматическая высота его ссылок перекрывает правило ссылок Breadcrumb,
+которое иначе попадает в native popover через DOM предка.
+
+Declarations и computed metrics LTR/RTL сверяются с официальным UMD для 17 тем;
+отдельно проверяются девять сочетаний rich title, dropdownIcon, последнего пункта
+и semantic color. SSR и обновления сохраняют DOM ссылок, фокус, навигацию,
+callbacks и native-only оформление. PrefixCls и глобальный breadcrumb config
+вне темы ещё не перенесены.
 
 ## Токены Menu
 

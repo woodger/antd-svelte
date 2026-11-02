@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme Breadcrumb: исходные defaults/aliases и component algorithms, CSS
+  prefix/hash, отдельные цвета текста и стрелки меню, padding/margins overlay.
+  Добавлены UMD conformance, SSR и browser-проверки LTR/RTL, custom icons,
+  semantic styles, фокуса и навигации. Ссылки Dropdown используют автоматическую
+  высоту и не наследуют высоту ссылок Breadcrumb через DOM предка.
 - Theme Dropdown: исходные defaults/aliases, отдельный Menu scope для списка,
   source padding/box sizing, arrow offsets и gap, algorithms и CSS prefix/hash.
   Добавлены UMD conformance, SSR и browser-проверки метрик, hover, положений

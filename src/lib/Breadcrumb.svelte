@@ -1,5 +1,6 @@
 <script lang="ts" generics="Params extends Record<string, unknown> = Record<string, unknown>">
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { breadcrumbEntries, breadcrumbHasContent, breadcrumbItems } from './breadcrumb.engine';
   import BreadcrumbEntry from './BreadcrumbEntry.svelte';
   import type { BreadcrumbContent, BreadcrumbProps } from './breadcrumb.types';
@@ -22,6 +23,7 @@
     Params
   > = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Breadcrumb');
   let mergedSeparator = $derived(separator ?? '/');
   let mergedItems = $derived(breadcrumbItems(items, routes));
   let entries = $derived(breadcrumbEntries(mergedItems, params));
@@ -52,11 +54,13 @@
 {/snippet}
 <nav {...rest} bind:this={nativeElement} dir={config.direction} class={[
     'ant-breadcrumb ant-breadcrumb-css-var',
+    componentTheme.className,
+    componentTheme.className && 'ant-breadcrumb-source-theme',
     config.direction === 'rtl' && 'ant-breadcrumb-rtl',
     className,
     rootClassName,
     classes.root
-  ]} style={[slots.root, style].filter(Boolean).join(';')}>
+  ]} style={[componentTheme.style, slots.root, style].filter(Boolean).join(';')}>
   <ol>{#each entries as entry, index (entry.item.key ?? index)}
     {#if entry.item.type === 'separator'}
       <li class={['ant-breadcrumb-separator', classes.separator]} style={slots.separator} aria-hidden="true">{@render value(entry.item.separator ?? '/')}</li>

@@ -22,7 +22,7 @@ import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
-  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown';
+  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -45,7 +45,16 @@ const factories = {
     linkPaddingInlineStart: token.padding
   }),
   Menu: prepareMenuTokens,
-  Dropdown: prepareDropdownTokens
+  Dropdown: prepareDropdownTokens,
+  Breadcrumb: (token: GlobalToken) => ({
+    itemColor: token.colorTextDescription,
+    lastItemColor: token.colorText,
+    iconFontSize: token.fontSize,
+    linkColor: token.colorTextDescription,
+    linkHoverColor: token.colorText,
+    separatorColor: token.colorTextDescription,
+    separatorMargin: token.marginXS
+  })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
@@ -65,7 +74,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Cascader: ['optionSelectedFontWeight'],
   Anchor: [],
   Menu: ['groupTitleLineHeight'],
-  Dropdown: []
+  Dropdown: [],
+  Breadcrumb: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]
