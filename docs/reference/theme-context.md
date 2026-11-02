@@ -104,7 +104,8 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu и Dropdown также получают собственные defaults и aliases.
+Anchor, Breadcrumb, Menu, Dropdown, Steps и Timeline также получают собственные
+defaults и aliases.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -264,6 +265,30 @@ Declarations и computed metrics LTR/RTL сверяются с официаль�
 и semantic color. SSR и обновления сохраняют DOM ссылок, фокус, навигацию,
 callbacks и native-only оформление. PrefixCls и глобальный breadcrumb config
 вне темы ещё не перенесены.
+
+## Токены Steps и Timeline
+
+Steps подготавливает 18 defaults, включая descriptionMaxWidth=undefined.
+Размеры обычной/small иконки, dot/active dot, custom icon font и navigation
+используют исходные CSS-переменные. TitleLineHeight, customIconSize/customIconTop,
+iconTop и legacy waitIcon*/finishIcon* defaults по-прежнему сериализуются,
+но CSS 6.6.8 их не читает; дополнительные правила для них не вводятся.
+Wireframe меняет исходные defaults без добавления отсутствующего source-оформления.
+
+Timeline подготавливает шесть defaults: tailColor/tailWidth, dotBorderWidth,
+dotBg/dotSize и itemPaddingBottom. Неопределённые dotBg/dotSize сохраняют fallback
+на Steps. Оба scope находятся на одном ol: сначала Steps tokens/aliases,
+затем Timeline. Например, Timeline.fontSize меняет заголовок, а размер шрифта
+иконки остаётся отдельным Steps.iconFontSize. Semantic root styles и plain style
+применяются после tokens; вычисленный Timeline.titleSpan сохраняет приоритет.
+
+Поддержаны component algorithms, custom CSS prefix/hash, нули/undefined и runtime
+CSS lengths. Scoped declarations и 328 наборов computed metrics для 18 тем
+получены из официального UMD: LTR/RTL, размеры/статусы, custom icons, dot,
+navigation, outlined, vertical, title-vertical, panel, inline, progress и обе
+ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки и поля,
+фокус, выделение и callbacks. Native-only темы и согласованные отличия Steps
+не меняются. Произвольные prefixCls и component config вне темы остаются в работе.
 
 ## Токены Menu
 
@@ -443,6 +468,14 @@ zeroRuntime наследуется; опубликованные стили ко
   маршрут `?fixture=tree-select-theme`. Проверяются single/multiple трёх размеров,
   disabled, tree rows/titles/switchers/indent, четыре состояния checkbox,
   сохранение DOM, поиска/выделения/фокуса, FormData и положения открытой панели.
+
+- [Эталон Steps/Timeline](../../src/lib/theme-steps-tokens-reference.test.ts):
+  scoped declarations и [computed metrics](../../tests/browser/fixtures/ant-design-steps-metrics.json)
+  из официального UMD для 18 тем, включая совместные aliases и component algorithms.
+  [Браузерные проверки](../../tests/browser/steps-theme.spec.ts),
+  [SSR](../../tests/package/steps-theme.ssr.test.ts), маршрут `?fixture=steps-theme`.
+  Проверяются варианты Steps, обе ориентации Timeline, приоритет styles, сохранение
+  DOM/focus, нативных кнопок выбора и callbacks при обновлении темы.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

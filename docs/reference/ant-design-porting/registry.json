@@ -2011,6 +2011,11 @@
           "name": "@rc-component/motion",
           "range": "^1.3.3",
           "referenceVersion": "1.3.3"
+        },
+        {
+          "name": "@ant-design/cssinjs-utils",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
         }
       ],
       "priority": "p1",
@@ -2035,7 +2040,16 @@
         "tests/package/wave.ssr.test.ts",
         "tests/browser/wave.spec.ts",
         "tests/browser/fixtures/WaveFixtures.svelte",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/Timeline.svelte",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-steps-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-steps-tokens-reference.json",
+        "tests/package/steps-theme.ssr.test.ts",
+        "tests/browser/steps-theme.spec.ts",
+        "tests/browser/fixtures/StepsThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-steps-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -2076,11 +2090,11 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls, глобальный steps config/tokens",
+          "title": "PrefixCls и глобальный steps config вне темы",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Существующие theme/RTL/size/locale сохранены; произвольный component config ещё не перенесён."
+          "note": "Исходные component tokens/aliases подключены отдельно; произвольный component config и prefixCls ещё не перенесены."
         },
         {
           "id": "source-wave",
@@ -2101,6 +2115,25 @@
             "docs/reference/wave.md"
           ],
           "note": "Capture listener, пять source triggers и RAF debounce последнего события, disabled/showEffect и полный текущий GlobalToken/native event/hash. Стандартные target/color/geometry/resize, ordinary/quick appear, opacity end и 5000ms deadline; cleanup RAF/timers/observers/DOM при unmount. SSR не создаёт effect DOM, native callbacks/form/focus сохраняются. Config wave records наследуются при отсутствии и заменяются при явном объекте. Восемь CSS rules из закреплённого архива; без React runtime. Нужен общий onChange; disabled item и item-only callback без него волну не включают. Filled использует colorSource=color; native title button и icon target сохраняются."
+        },
+        {
+          "id": "source-theme-tokens",
+          "title": "Исходные Steps defaults/aliases и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Steps.svelte",
+            "src/lib/Timeline.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-steps-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-steps-tokens-reference.json",
+            "tests/package/steps-theme.ssr.test.ts",
+            "tests/browser/steps-theme.spec.ts",
+            "tests/browser/fixtures/StepsThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-steps-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные 18 Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. Legacy titleLineHeight/customIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
         }
       ]
     },
@@ -6811,6 +6844,11 @@
           "name": "@ant-design/icons",
           "range": "^6.3.4",
           "referenceVersion": null
+        },
+        {
+          "name": "@ant-design/cssinjs-utils",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
         }
       ],
       "priority": "p1",
@@ -6820,7 +6858,16 @@
         "src/lib/timeline.engine.test.ts",
         "src/lib/timeline.ssr.test.ts",
         "tests/browser/timeline.spec.ts",
-        "integration:timeline"
+        "integration:timeline",
+        "src/lib/Steps.svelte",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-steps-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-steps-tokens-reference.json",
+        "tests/package/steps-theme.ssr.test.ts",
+        "tests/browser/steps-theme.spec.ts",
+        "tests/browser/fixtures/StepsThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-steps-metrics.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -6859,11 +6906,30 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls и глобальный timeline config/tokens",
+          "title": "PrefixCls и глобальный timeline config вне темы",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Фиксированные CSS vars наследуют общую тему; произвольный component config и prefix ещё не перенесены."
+          "note": "Исходные component tokens/aliases подключены отдельно; произвольный component config и prefixCls ещё не перенесены."
+        },
+        {
+          "id": "source-theme-tokens",
+          "title": "Исходные Timeline defaults/aliases и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Steps.svelte",
+            "src/lib/Timeline.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-steps-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-steps-tokens-reference.json",
+            "tests/package/steps-theme.ssr.test.ts",
+            "tests/browser/steps-theme.spec.ts",
+            "tests/browser/fixtures/StepsThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-steps-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные 18 Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. Legacy titleLineHeight/customIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
         }
       ]
     },
@@ -8479,6 +8545,25 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Семь defaults, aliases и отдельные algorithms, zero/undefined/negative, runtime CSS lengths и custom CSS prefix/hash. Scoped declarations и 34 computed metric sets для 17 тем: LTR/RTL root, ссылки/иконки/разделители/последний пункт, overlay/стрелка, hover/focus и Dropdown links. Девять дополнительных сочетаний rich title, default/SVG/anticon/text dropdownIcon, последнего пункта и semantic color. Нативный trigger-link сохраняется: отдельный span текста воспроизводит независимые от стрелки color/padding/margins исходной вложенной ссылки. Semantic/plain styles сохраняют приоритет; Dropdown/Menu scopes отделяют aliases popup, автоматическая высота его ссылок перекрывает ancestor Breadcrumb height. Обновления сохраняют DOM/focus, navigation и callbacks; native-only темы и существующие Svelte contracts сохранены."
+        },
+        {
+          "id": "steps-timeline-theme-tokens",
+          "title": "Исходные Steps/Timeline tokens, aliases и общий scope",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Steps.svelte",
+            "src/lib/Timeline.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-steps-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-steps-tokens-reference.json",
+            "tests/package/steps-theme.ssr.test.ts",
+            "tests/browser/steps-theme.spec.ts",
+            "tests/browser/fixtures/StepsThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-steps-metrics.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Исходные 18 Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. Legacy titleLineHeight/customIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
         }
       ]
     },

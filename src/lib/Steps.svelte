@@ -1,6 +1,7 @@
 <script lang="ts">
   import { useStepsComposition } from './steps-composition-context';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import StepItem from './StepItem.svelte';
   import { connectStepsFocus } from './steps.dom';
   import { getStepsStatus, normalizeStepsCurrent } from './steps.engine';
@@ -44,6 +45,7 @@
     ...rest
   }: StepsProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Steps');
   const composition = useStepsComposition();
   const generatedId = $props.id();
   let mobile = $state(false);
@@ -163,6 +165,8 @@
       : strings.label)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction}
   class={[
       'ant-steps ant-steps-css-var',
+      componentTheme.className,
+      componentTheme.className && 'ant-steps-source-theme',
       `ant-steps-${variant}`,
       `ant-steps-title-${layout.titlePlacement}`,
       layout.vertical ? 'ant-steps-vertical' : 'ant-steps-horizontal',
@@ -177,7 +181,7 @@
       rootClassName,
       classes.root
     ]}
-  style={[`--ant-cmp-steps-items-offset:${offset}`, slots.root, style].filter(
+  style={[componentTheme.style, `--ant-cmp-steps-items-offset:${offset}`, slots.root, style].filter(
       Boolean
     ).join(
       ';'

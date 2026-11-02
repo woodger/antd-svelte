@@ -2939,11 +2939,20 @@ Bind:nativeElement возвращает ol; rootClassName добавляется
 Сохранены согласованные отличия v1 от React: нативные кнопки внутри именованного
 списка, keyed focus recovery, clamp current, responsive-порог 532px (исходный
 useBreakpoint версии 6.6.8 использует xs), componentDisabled и locale.steps.
-Произвольные prefixCls/component config/tokens ещё не перенесены.
+Произвольные prefixCls и component config вне темы ещё не перенесены.
 Wave работает для доступных items при общем onChange.
 Новые сценарии находятся в ?fixture=steps-variants и втором примере #steps;
 unit/SSR/Chromium проверяют layouts, collapse/index mapping, render Snippets,
 rich tooltip и доступность процента.
+
+Source `theme.components.Steps` применяет исходные defaults, aliases и отдельные
+algorithms к размерам иконок/точек, шрифтам, цветам и navigation. Поддержаны
+CSS prefix/hash, нули/undefined и переданные во время выполнения CSS lengths.
+Semantic root styles и plain style сохраняют приоритет. Старые titleLineHeight,
+customIconSize/customIconTop и iconTop создают переменные, но не меняют оформление,
+как в 6.6.8; то же относится к legacy waitIcon*/finishIcon* defaults.
+Метрики вариантов и композиции Timeline сверяются с официальным UMD в
+`?fixture=steps-theme`; native-only темы сохраняют прежнее оформление.
 
 ## DatePicker
 
@@ -4842,7 +4851,15 @@ Horizontal сохраняет поведение исходных Steps: ниж�
 ant-steps-vertical, но явный ant-timeline-horizontal остаётся. Это отличается от
 согласованного v1-порога самостоятельного Steps (532px); базовые Steps не меняются.
 SSR не измеряет DOM/viewport и оставляет объявленную ориентацию. Произвольные
-prefixCls и глобальный timeline component config/tokens ещё не перенесены.
+prefixCls и глобальный timeline component config вне темы ещё не перенесены.
+
+Source `theme.components.Timeline` подготавливает шесть defaults для tail/dot/spacing
+и поддерживает aliases, отдельные algorithms, CSS prefix/hash и нули/undefined.
+На общем корне aliases Timeline применяются после Steps, как в upstream;
+размеры иконок Steps и размеры точек Timeline сохраняют отдельные переменные.
+Styles.root/style перекрывают tokens, а titleSpan по-прежнему применяется последним.
+Эталонные метрики обеих ориентаций и обновления темы проверяются также в
+`?fixture=steps-theme`.
 
 Фикстура — ?fixture=timeline, пример — /ant-design#timeline. Engine/SSR/Chromium
 проверяют aliases, порядок/статусы, геометрию titleSpan, темы/RTL, сохранение поля

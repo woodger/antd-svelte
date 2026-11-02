@@ -22,7 +22,8 @@ import type { GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
-  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb';
+  | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
+  | 'Steps' | 'Timeline';
 
 const factories = {
   Button: prepareButtonTokens,
@@ -54,6 +55,34 @@ const factories = {
     linkHoverColor: token.colorText,
     separatorColor: token.colorTextDescription,
     separatorMargin: token.marginXS
+  }),
+  Steps: (token: GlobalToken) => ({
+    titleLineHeight: token.controlHeight,
+    customIconSize: token.controlHeight,
+    customIconTop: 0,
+    customIconFontSize: token.controlHeightSM,
+    iconSize: token.controlHeight,
+    iconTop: -0.5,
+    iconFontSize: token.fontSize,
+    iconSizeSM: token.fontSizeHeading3,
+    dotSize: token.controlHeight / 4,
+    dotCurrentSize: token.controlHeightLG / 4,
+    navArrowColor: token.colorTextDisabled,
+    navContentMaxWidth: 'unset',
+    descriptionMaxWidth: undefined,
+    waitIconColor: token.wireframe ? token.colorTextDisabled : token.colorTextLabel,
+    waitIconBgColor: token.wireframe ? token.colorBgContainer : token.colorFillContent,
+    waitIconBorderColor: token.wireframe ? token.colorTextDisabled : 'transparent',
+    finishIconBgColor: token.wireframe ? token.colorBgContainer : token.controlItemBgActive,
+    finishIconBorderColor: token.wireframe ? token.colorPrimary : token.controlItemBgActive
+  }),
+  Timeline: (token: GlobalToken) => ({
+    tailColor: token.colorSplit,
+    tailWidth: token.lineWidthBold,
+    dotBorderWidth: token.lineWidthBold,
+    dotBg: undefined,
+    dotSize: undefined,
+    itemPaddingBottom: token.padding * 1.25
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
@@ -75,7 +104,9 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Anchor: [],
   Menu: ['groupTitleLineHeight'],
   Dropdown: [],
-  Breadcrumb: []
+  Breadcrumb: [],
+  Steps: [],
+  Timeline: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

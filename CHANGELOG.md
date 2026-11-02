@@ -9,6 +9,11 @@
 
 ### Added
 
+- Theme Steps/Timeline: исходные defaults/aliases, component algorithms и
+  совместный scope Steps → Timeline, CSS prefix/hash и приоритет пользовательских
+  styles. Добавлены UMD conformance, SSR и browser-проверки метрик вариантов,
+  RTL и смены темы с сохранением DOM, фокуса и нативного выбора шагов.
+  Legacy токены, не используемые исходным CSS, сохраняют это поведение.
 - Theme Breadcrumb: исходные defaults/aliases и component algorithms, CSS
   prefix/hash, отдельные цвета текста и стрелки меню, padding/margins overlay.
   Добавлены UMD conformance, SSR и browser-проверки LTR/RTL, custom icons,

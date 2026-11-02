@@ -2,6 +2,7 @@
   import Steps from './Steps.svelte';
   import { setStepsComposition } from './steps-composition-context';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { timelineItems, timelineLayoutAlternate, timelineMode } from './timeline.engine';
   import type { StepsProps } from './steps.types';
   import type { TimelineProps, TimelineSlots } from './timeline.types';
@@ -32,6 +33,7 @@
     }
   );
   const config = useConfig();
+  const componentTheme = useComponentTheme('Timeline');
   setStepsComposition({
     get railFollowPrevStatus() {
       return reverse;
@@ -141,6 +143,8 @@
 <Steps {...forwarded} items={converted} type="dot" {variant} {orientation} current={converted.length - 1}
   class={[
       'ant-timeline ant-timeline-css-var',
+      componentTheme.className,
+      componentTheme.className && 'ant-timeline-source-theme',
       orientation === 'horizontal' && 'ant-timeline-horizontal',
       alternate && 'ant-timeline-layout-alternate',
       config.direction === 'rtl' && 'ant-timeline-rtl',
@@ -150,4 +154,4 @@
     ).join(
       ' '
     )}
-  {rootClassName} classNames={combined} styles={{ ...slots, root: [slots.root, style].filter(Boolean).join(';') }} style={spanStyle} bind:nativeElement />
+  {rootClassName} classNames={combined} styles={{ ...slots, root: [componentTheme.style, slots.root, style].filter(Boolean).join(';') }} style={spanStyle} bind:nativeElement />
