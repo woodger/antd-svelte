@@ -2173,7 +2173,7 @@
       "name": "Tabs",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Аудит согласованного native v1 и перенос source editable-card, centered/gutter/header style с сохранением существующего выбора, lifecycle панелей и фокуса.",
+      "scopeReason": "Аудит согласованного native v1 и перенос source editable-card, header layout, medium и tabPosition с сохранением существующего выбора, lifecycle панелей и фокуса.",
       "upstreamPath": "components/tabs",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2227,7 +2227,8 @@
         "tests/package/tabs-layout.ssr.test.ts",
         "tests/browser/tabs-layout.spec.ts",
         "tests/browser/fixtures/TabsLayoutFixtures.svelte",
-        "tests/browser/fixtures/ant-design-tabs-layout-metrics.json"
+        "tests/browser/fixtures/ant-design-tabs-layout-metrics.json",
+        "tests/browser/tabs-compat.spec.ts"
       ],
       "features": [
         {
@@ -2240,7 +2241,7 @@
             "src/lib/tabs.ssr.test.ts",
             "tests/browser/tabs.spec.ts"
           ],
-          "note": "Сохранены native button tabs и именованные панели, bind/default activeKey, first-wins duplicates и пустые ключи, fallback к первой enabled без изменения owner value, lazy/forceRender/destroyOnHidden, FormData, controlled callbacks и cancellation. Manual arrows/Home/End, owned focus recovery и keyed state, RTL/sizes/native themes и mobile placement до 575px — согласованный v1; v1-ready не означает полный React API."
+          "note": "Сохранены native button tabs и именованные панели, bind/default activeKey, first-wins duplicates и пустые ключи, fallback к первой enabled без изменения owner value, lazy/forceRender/destroyOnHidden, FormData, controlled callbacks и cancellation. Manual arrows/Home/End, owned focus recovery и keyed state, RTL/sizes/native themes и mobile placement до 575px — согласованный v1; v1-ready не означает полный React API. Item destroyOnHidden имеет приоритет над общим флагом в согласованном Svelte v1; в rc-tabs 1.13.0 явно заданный общий флаг имеет приоритет над item."
         },
         {
           "id": "overflow",
@@ -2298,6 +2299,22 @@
           "note": "Исходное margin:auto центрирует горизонтальный список при свободном месте; vertical centered сохраняет source flex:1 0 auto, растянутый список и заголовки сверху. TabBarGutter задаёт margin-inline-start по горизонтали и margin-top по вертикали для всех headers, кроме первого, и add при непустом items; zero/fractional/negative сохраняются, RTL и mobile placement определяют ось. TabBarStyle — согласованная CSS-строка всей панели заголовков, root style остаётся отдельным. Официальный UMD задаёт 31 эталон метрик для 3 типов, 4 положений, LTR/RTL, defaults, пустого editable списка и custom header style. Native scroll, focus, indicator и keyed panes сохраняются; source overflow menu остаётся отдельным gap."
         },
         {
+          "id": "compatibility-props",
+          "title": "Source medium и deprecated tabPosition",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tabs.types.ts",
+            "src/lib/Tabs.svelte",
+            "src/lib/tabs.engine.ts",
+            "src/lib/tabs.engine.test.ts",
+            "src/lib/tabs.ssr.test.ts",
+            "tests/browser/tabs-compat.spec.ts",
+            "tests/browser/fixtures/TabsLayoutFixtures.svelte"
+          ],
+          "note": "Medium даёт исходный средний размер без small/large класса и локально перекрывает ConfigProvider.componentSize; существующий middle сохраняется. Deprecated tabPosition принимает top/right/bottom/left, физические left/right не переотражаются в RTL; tabPlacement ?? tabPosition ?? top задаёт приоритет. Согласованный native mobile fallback до 575px распространяется и на физические вертикальные позиции. При смене props сохраняются keyed panes, drafts, selection и focus; callbacks и native manual keyboard не меняются."
+        },
+        {
           "id": "extended-api",
           "title": "Полные header/indicator, semantic/config/ref, aliases и motion API",
           "state": "missing",
@@ -2305,7 +2322,7 @@
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет onTabScroll, indicator/indicatorSize и renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, source medium/tabPosition/destroyInactiveTabPane aliases и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Locale.dropdownAriaLabel не используется до переноса overflow menu."
+          "note": "Нет onTabScroll, indicator/indicatorSize и renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, destroyInactiveTabPane alias и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Locale.dropdownAriaLabel не используется до переноса overflow menu."
         }
       ]
     },

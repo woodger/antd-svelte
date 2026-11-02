@@ -106,6 +106,15 @@ describe('Tabs keyboard navigation', () => {
 });
 
 describe('Tabs placement', () => {
+  it.each(['left', 'right'] as const)(
+    'keeps physical %s independent of RTL and uses the native mobile fallback', placement => {
+      expect(getTabsPlacement(placement, 'ltr')).toBe(placement);
+      expect(getTabsPlacement(placement, 'rtl')).toBe(placement);
+      expect(getTabsPlacement(placement, 'ltr', true)).toBe('top');
+      expect(getTabsPlacement(placement, 'rtl', true)).toBe('top');
+    }
+  );
+
   it.each(
     [
       ['start', 'ltr', 'left'],

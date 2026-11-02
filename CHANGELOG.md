@@ -9,6 +9,9 @@
 
 ### Added
 
+- Tabs: исходный size=medium и deprecated tabPosition с физическими сторонами,
+  приоритетом tabPlacement и сохранением native mobile fallback. Добавлены
+  unit/SSR/browser-проверки RTL, наследования размера и сохранения DOM/фокуса.
 - Tabs: centered, tabBarGutter и tabBarStyle с исходными logical/vertical отступами,
   нулевыми и дробными значениями, отдельными header styles и CSS-рецептом.
   Добавлены 31 эталон официального UMD, SSR/browser-проверки live layout,

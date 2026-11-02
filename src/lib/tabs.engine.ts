@@ -1,4 +1,4 @@
-import type { TabsItem, TabsPlacement } from './tabs.types';
+import type { TabsItem, TabsPlacement, TabsPosition } from './tabs.types';
 
 export function isTabsItemRemovable(
   item: Pick<TabsItem, 'closable' | 'closeIcon' | 'disabled'>,
@@ -49,7 +49,7 @@ export function getTabsNavigationKey(
     : -1) + available.length) % available.length].key;
 }
 
-export function getTabsPlacement(placement: TabsPlacement, direction:
+export function getTabsPlacement(placement: TabsPlacement | TabsPosition, direction:
   'ltr'
   | 'rtl', mobile = false):
   'top'
@@ -58,6 +58,7 @@ export function getTabsPlacement(placement: TabsPlacement, direction:
   | 'right' {
   if (placement === 'top' || placement === 'bottom') return placement;
   if (mobile) return 'top';
+  if (placement === 'left' || placement === 'right') return placement;
 
   return (placement === 'start') === (direction === 'ltr') ? 'left' : 'right';
 }

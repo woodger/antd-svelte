@@ -25,7 +25,8 @@
     addIcon,
     removeIcon,
     locale,
-    tabPlacement = 'top',
+    tabPlacement,
+    tabPosition,
     centered = false,
     tabBarGutter,
     tabBarStyle,
@@ -57,7 +58,11 @@
   let selectedKey = $derived(getTabsActiveKey(items, activeKey ?? initialDefault));
   let tabStop = $derived(getTabsActiveKey(items, focusKey ?? selectedKey));
   let resolvedSize = $derived(size ?? config.componentSize);
-  let placement = $derived(getTabsPlacement(tabPlacement, config.direction, mobile));
+  let placement = $derived(getTabsPlacement(
+    tabPlacement ?? tabPosition ?? 'top',
+    config.direction,
+    mobile
+  ));
   let vertical = $derived(placement === 'left' || placement === 'right');
   let editable = $derived(type === 'editable-card');
   let showAdd = $derived(editable && hideAdd !== true);
@@ -338,7 +343,7 @@
     (type === 'card' || editable) && 'ant-tabs-card',
     editable && 'ant-tabs-editable ant-tabs-editable-card',
     centered && 'ant-tabs-centered',
-    resolvedSize !== 'middle' && `ant-tabs-${resolvedSize}`,
+    (resolvedSize === 'small' || resolvedSize === 'large') && `ant-tabs-${resolvedSize}`,
     config.direction === 'rtl' && 'ant-tabs-rtl',
     className
   ]} {style}>

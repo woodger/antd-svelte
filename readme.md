@@ -1995,7 +1995,8 @@ Up/Down. Enter и Space активируют сфокусированную вк
 DestroyOnHidden=true удаляет содержимое при скрытии; следующий визит создаёт
 новый экземпляр. После уничтожения отключение destroyOnHidden само по себе
 не монтирует панель заново. Значение на отдельном item переопределяет общее,
-включая явное false. ForceRender=true монтирует содержимое сразу и сохраняет
+включая явное false. Это сохранённый контракт native v1: rc-tabs 1.13.0 отдаёт
+приоритет явно заданному общему destroyOnHidden. ForceRender=true монтирует содержимое сразу и сохраняет
 его даже вместе с destroyOnHidden. Удаление key всегда уничтожает панель.
 Состояние, которое владелец хранит снаружи Tabs, уничтожение панели не сбрасывает.
 
@@ -2007,10 +2008,14 @@ Tabs не является полем формы и не наследует disa
 button type=button и не отправляют окружающую форму.
 
 Type поддерживает line/card/editable-card, tabPlacement — top, bottom, start, end.
-Start/end разрешаются относительно RTL. На экране шириной до 575px вертикальный
+Start/end разрешаются относительно RTL. Устаревший tabPosition принимает
+физические top/right/bottom/left; left/right не отражаются в RTL. Явный
+tabPlacement имеет приоритет. На экране шириной до 575px вертикальный
 список переходит наверх. Переполнение прокручивается; навигация показывает
 сфокусированный заголовок без прокрутки всей страницы. Size использует общий
-ComponentSize: small/middle/large, по умолчанию ConfigProvider.componentSize.
+ComponentSize: small/middle/large и исходный medium, эквивалентный middle;
+по умолчанию используется ConfigProvider.componentSize. Явный medium имеет
+приоритет над размером провайдера.
 Тема, compact, RTL и reduced motion применяются через существующие токены.
 
 Centered=true центрирует горизонтальный список заголовков, пока хватает места.
@@ -2072,11 +2077,13 @@ DropdownAriaLabel пока не используется: меню перепо�
 фокус, FormData, layout/RTL и сохранение панелей. Фикстура `?fixture=tabs-layout`
 сравнивает centered/gutter/header style с 31 эталоном официального UMD, включая
 все типы и положения в LTR/RTL, нулевой отступ и пустой editable список.
+Здесь же проверяются физический tabPosition, его приоритет, medium, наследование
+размера и сохранение панелей при смене способа расположения.
 Галерея `/ant-design#tabs`
 показывает профиль, настройки, историю Table, destroyOnHidden и Tabs внутри Modal.
 Drag-and-drop, меню more, renderTabBar и настройка indicator ещё не перенесены.
-Остаются также onTabScroll, source size/placement
-aliases, полный semantic/config/ref API, component tokens и исходный motion.
+Остаются также onTabScroll, destroyInactiveTabPane, полный semantic/config/ref API,
+component tokens и исходный motion; приоритет уничтожения панелей сохраняет native v1.
 
 ## Collapse
 

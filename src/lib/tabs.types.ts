@@ -3,6 +3,7 @@ import type { ComponentSize } from './types';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end';
+export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
 export type TabsContent = string | number | boolean | null | Snippet;
 export type TabsExtraContent = TabsContent | { left?: TabsContent; right?: TabsContent; };
 
@@ -50,6 +51,8 @@ export interface TabsProps {
   locale?: TabsLocale;
   /** @defaultValue 'top' */
   tabPlacement?: TabsPlacement;
+  /** Физическая сторона без RTL-переотражения. @deprecated Используйте tabPlacement. */
+  tabPosition?: TabsPosition;
   /**
    * Центрирует горизонтальные заголовки; вертикальный список растягивается как в source.
    * @defaultValue false
@@ -59,7 +62,8 @@ export interface TabsProps {
   tabBarGutter?: number;
   /** CSS-строка для панели заголовков; style по-прежнему относится к корню Tabs. */
   tabBarStyle?: string;
-  size?: ComponentSize;
+  /** Medium соответствует middle; при отсутствии используется ConfigProvider.componentSize. */
+  size?: ComponentSize | 'medium';
   /** @defaultValue false */
   destroyOnHidden?: boolean;
   tabBarExtraContent?: TabsExtraContent;

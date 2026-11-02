@@ -12,6 +12,35 @@ const items: TabsItem[] = [
 ];
 
 describe('Tabs server rendering', () => {
+  it.each(['top', 'right', 'bottom', 'left'] as const)(
+    'renders physical tabPosition=%s before hydration', tabPosition => {
+      const { body } = render(Tabs, { props: { items, tabPosition } });
+
+      expect(body).toContain(`ant-tabs-${tabPosition}`);
+      expect(body).toContain(`aria-orientation="${tabPosition === 'top' || tabPosition === 'bottom'
+        ? 'horizontal' : 'vertical'}"`);
+    }
+  );
+
+  it('gives tabPlacement priority over the deprecated physical position', () => {
+    const { body } = render(Tabs, { props: { items, tabPlacement: 'end', tabPosition: 'top' } });
+
+    expect(body).toContain('ant-tabs-right');
+    expect(body).not.toContain('ant-tabs-top');
+    expect(body).toContain('aria-orientation="vertical"');
+  });
+
+  it('renders source medium size with the same default classes as native middle', () => {
+    const medium = render(Tabs, { props: { items, size: 'medium' } }).body;
+    const middle = render(Tabs, { props: { items, size: 'middle' } }).body;
+
+    for (const body of [medium, middle]) {
+      expect(body).not.toMatch(/\bant-tabs-(?:small|large|medium|middle)\b/);
+      expect(body.match(/role="tab"/g)).toHaveLength(3);
+      expect(body).toContain('Alpha content');
+    }
+  });
+
   it(
     'renders a named tablist, native tabs and associated panels with one selected tab stop',
     () => {

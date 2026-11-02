@@ -1,5 +1,12 @@
 <script lang="ts">
-  import { ConfigProvider, Tabs, type TabsPlacement, type TabsType } from 'antd-svelte';
+  import {
+    ConfigProvider,
+    Tabs,
+    type ComponentSize,
+    type TabsPlacement,
+    type TabsPosition,
+    type TabsType
+  } from 'antd-svelte';
   import reference from './ant-design-tabs-layout-metrics.json';
 
   let sample = $state(reference.cases[0].name);
@@ -7,7 +14,11 @@
   let centered = $state(false);
   let gutter = $state<number | undefined>();
   let placement = $state<TabsPlacement>('top');
+  let legacyPlacement = $state(false);
+  let physicalPlacement = $state<TabsPosition>('left');
   let type = $state<TabsType>('line');
+  let size = $state<ComponentSize | 'medium' | ''>('');
+  let providerSize = $state<ComponentSize>('middle');
   let rtl = $state(false);
   let dark = $state(false);
   let compact = $state(false);
@@ -47,8 +58,19 @@
   <label>Tabs layout placement <select aria-label="Tabs layout placement" bind:value={placement}>
     {#each ['top', 'bottom', 'start', 'end'] as value}<option>{value}</option>{/each}
   </select></label>
+  <label><input type="checkbox" bind:checked={legacyPlacement} /> Use legacy Tabs placement</label>
+  <label>Tabs physical position <select aria-label="Tabs physical position" bind:value={physicalPlacement}>
+    {#each ['top', 'right', 'bottom', 'left'] as value}<option>{value}</option>{/each}
+  </select></label>
   <label>Tabs layout type <select aria-label="Tabs layout type" bind:value={type}>
     {#each ['line', 'card', 'editable-card'] as value}<option>{value}</option>{/each}
+  </select></label>
+  <label>Tabs layout size <select aria-label="Tabs layout size" bind:value={size}>
+    <option value="">inherit</option>
+    {#each ['small', 'middle', 'medium', 'large'] as value}<option>{value}</option>{/each}
+  </select></label>
+  <label>Tabs provider size <select aria-label="Tabs provider size" bind:value={providerSize}>
+    {#each ['small', 'middle', 'large'] as value}<option>{value}</option>{/each}
   </select></label>
   <label><input type="checkbox" bind:checked={rtl} /> RTL Tabs layout</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark Tabs layout</label>
@@ -58,11 +80,15 @@
   <label>Tabs header style <input bind:value={headerStyle} /></label>
   <input aria-label="Tabs layout outside" />
   <ConfigProvider direction={options.direction === 'rtl' ? 'rtl' : 'ltr'}
+    componentSize={interactive ? providerSize : undefined}
     theme={{ mode: dark ? 'dark' : 'light', compact }}>
     <div class="stage" class:narrow>
       {#if mounted}
         <Tabs id="tabs-layout-main" aria-label="Layout sections" bind:activeKey={current}
-          type={options.type as TabsType} tabPlacement={options.tabPlacement as TabsPlacement}
+          type={options.type as TabsType}
+          tabPlacement={interactive && legacyPlacement ? undefined : options.tabPlacement as TabsPlacement}
+          tabPosition={interactive ? physicalPlacement : undefined}
+          size={interactive ? size || undefined : undefined}
           centered={options.centered} tabBarGutter={options.gutter}
           tabBarStyle={options.headerStyle} style="height:320px;color:rgb(170,20,30)"
           items={!interactive && selected.empty ? [] : [
