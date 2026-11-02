@@ -12,6 +12,7 @@
   let animated = $state(true);
   let holdPrepare = $state(false);
   let allowEnd = $state(true);
+  let paneStyles = $state(true);
   let events = $state<string[]>([]);
   let changes = $state<string[]>([]);
   const pending = new Set<() => void>();
@@ -48,6 +49,7 @@
   <label><input type="checkbox" bind:checked={animated} /> Enable Tabs animation</label>
   <label><input type="checkbox" bind:checked={holdPrepare} /> Hold motion prepare</label>
   <label><input type="checkbox" bind:checked={allowEnd} /> Allow motion end</label>
+  <label><input type="checkbox" bind:checked={paneStyles} /> Apply pane item styles</label>
   <button type="button" onclick={resolvePrepare}>Resolve motion prepare</button>
   <button type="button" onclick={() => {
     events = [];
@@ -62,9 +64,22 @@
         <Tabs id="tabs-motion-main" aria-label="Animated sections" bind:activeKey={current}
           animated={animated ? settings.animated : false} destroyOnHidden={sample.destroy ?? true}
           tabPlacement={sample.placement as TabsPlacement | undefined}
+          classNames={{ content: sample.contentClass }} styles={{ content: sample.contentStyle }}
           items={[
-            { key: 'alpha', label: 'Alpha', children: alpha, forceRender: sample.force },
-            { key: 'beta', label: 'Beta', children: beta, forceRender: sample.force }
+            {
+              key: 'alpha',
+              label: 'Alpha',
+              children: alpha,
+              forceRender: sample.force,
+              ...(paneStyles ? sample.paneAlpha : {})
+            },
+            {
+              key: 'beta',
+              label: 'Beta',
+              children: beta,
+              forceRender: sample.force,
+              ...(paneStyles ? sample.paneBeta : {})
+            }
           ]} onChange={key => changes.push(key)} />
       {/if}
     </form>

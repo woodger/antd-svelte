@@ -1964,6 +1964,12 @@ Icon декоративный. Label должен давать вкладке д
 элементы внутри label не поддерживаются. `aria-label` или `aria-labelledby`
 именует список вкладок. Id/class/style относятся к корневому контейнеру.
 
+`items[].className` и `items[].style` относятся к соответствующему tabpanel,
+а не к заголовку. Классы добавляются после classNames.content. CSS-строки применяются
+в порядке styles.content → item.style → motion style; у каждой панели свои overrides.
+Например: `{ key: 'profile', label: 'Профиль', children: profile, className: 'profile-panel', style: 'padding-inline:12px' }`.
+Живое обновление оформления сохраняет DOM, local state, draft, selection и focus.
+
 `bind:activeKey` хранит выбранный ключ. DefaultActiveKey читается при создании;
 без ключа выбирается первая доступная вкладка. Для binding задавайте начальное
 значение у владельца без defaultActiveKey. При неизвестном, удалённом или
@@ -2247,12 +2253,13 @@ keyboard, control/owner callbacks, popupRender, portal, вложенные по�
 Фикстура `?fixture=tabs-semantic` сравнивает 23 эталона semantic slots, CSS-слоёв,
 callback props, provider inheritance и icon precedence с официальным UMD.
 Проверяются native attrs/events/ref и живое обновление открытого popup.
-Фикстура `?fixture=tabs-motion` сверяет 33 UMD-эталона фаз, CSS, callbacks,
+Фикстура `?fixture=tabs-motion` сверяет 41 UMD-эталон фаз, CSS, callbacks,
 приоритетов, RTL и lifecycle; дополнительно проверяются незавершённые переходы,
 FormData, focus, reversal, end=false, async prepare, reduced motion и cleanup.
+Восемь сценариев задают per-item class/style, semantic/motion precedence, hidden
+forceRender и RTL; живое обновление проверяется также во время перехода.
 Drag-and-drop и renderTabBar ещё не перенесены.
-Остаются panel className/style отдельных items, произвольный prefixCls
-и общий ConfigProvider.getPopupContainer;
+Остаются произвольный prefixCls и общий ConfigProvider.getPopupContainer;
 приоритет уничтожения панелей сохраняет native v1.
 Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,
 placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и motion/prefix.

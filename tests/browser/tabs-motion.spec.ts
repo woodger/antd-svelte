@@ -43,8 +43,11 @@ async function snapshot(page: Page) {
     values: Array.from(root.querySelectorAll('input'), input => [input.name, input.value]),
     contentStyles: Array.from(root.querySelectorAll('input'), input => {
       const panel = input.closest('[role=tabpanel]')!;
-      return [input.name, getComputedStyle(panel).color,
-        Array.from(panel.classList).filter(name => name === 'event-pane')];
+      const css = getComputedStyle(panel);
+      return [input.name, css.color,
+        Array.from(panel.classList).filter(name => name === 'event-pane' || name.startsWith('p-')),
+        Object.fromEntries(['paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft', 'borderLeftWidth']
+          .map(name => [name, css[name as keyof CSSStyleDeclaration]]))];
     })
   }));
 }
@@ -288,4 +291,70 @@ test('reduced motion and live disabling settle transitions without losing active
   await expect(root.locator('input[name=beta]')).toHaveCount(0);
   await expect(root.locator('.ant-tabs-body')).not.toHaveClass(/ant-tabs-body-animated/);
   await expect(root.locator('.ant-tabs-ink-bar')).not.toHaveClass(/ant-tabs-ink-bar-animated/);
+});
+
+test('changing item panel styles preserves the focused draft and leaves headers untouched', async ({ page }) => {
+  await configure(page, 'pane-after-semantic');
+  const root = page.locator('#tabs-motion-main');
+  const panel = root.locator('[role=tabpanel][data-tabs-key=alpha]');
+  const draft = page.getByRole('textbox', { name: 'alpha motion draft', exact: true });
+  await draft.fill('Styled panel draft');
+  await page.getByRole('button', { name: 'Increment alpha motion', exact: true }).click();
+  await draft.focus();
+  await draft.evaluate(element => (element as HTMLInputElement).setSelectionRange(2, 8));
+  const previous = await draft.elementHandle();
+
+  await expect(panel).toHaveCSS('color', 'rgb(40, 50, 60)');
+  await expect(panel).toHaveCSS('padding-left', '17px');
+  await check(page, 'Apply pane item styles', false);
+
+  await expect(panel).toHaveCSS('color', 'rgb(10, 20, 30)');
+  await expect(panel).toHaveCSS('padding-left', '3px');
+  await expect(panel).not.toHaveClass(/p-alpha/);
+  await expect(draft).toBeFocused();
+  await expect(draft).toHaveValue('Styled panel draft');
+  expect(await draft.evaluate((node, original) => node === original, previous)).toBe(true);
+  expect(await draft.evaluate(element => [
+    (element as HTMLInputElement).selectionStart,
+    (element as HTMLInputElement).selectionEnd
+  ])).toEqual([2, 8]);
+  await expect(panel.locator('output')).toHaveText('1');
+  await expect(root.getByRole('tab', { name: 'Alpha', exact: true })).not.toHaveClass(/p-alpha/);
+  await expect(page.getByLabel('Tabs motion changes', { exact: true })).toHaveText('[]');
+  await expect(page.getByLabel('Tabs motion lifecycle', { exact: true })).toHaveText('[]');
+  await check(page, 'Apply pane item styles', true);
+
+  await expect(panel).toHaveClass(/p-alpha/);
+  await expect(panel).toHaveCSS('color', 'rgb(40, 50, 60)');
+  await expect(draft).toBeFocused();
+});
+
+test('motion styles stay above live item styles and restore the current semantic layer afterward', async ({ page }) => {
+  await configure(page, 'pane-hook-styles');
+  const root = page.locator('#tabs-motion-main');
+  const alpha = root.locator('[role=tabpanel][data-tabs-key=alpha]');
+  const beta = root.locator('[role=tabpanel][data-tabs-key=beta]');
+  await root.getByRole('tab', { name: 'Beta', exact: true }).click();
+  await expect(alpha).toHaveClass(/tabs-motion-custom-leave-active/);
+  await alpha.evaluate(element => {
+    for (const animation of element.getAnimations()) animation.pause();
+  });
+
+  await expect(alpha).toHaveCSS('color', 'rgb(200, 30, 40)');
+  await expect(alpha).toHaveCSS('padding-left', '17px');
+  await check(page, 'Apply pane item styles', false);
+
+  await expect(alpha).toHaveCSS('color', 'rgb(200, 30, 40)');
+  await expect(alpha).toHaveCSS('padding-left', '3px');
+  await expect(alpha).not.toHaveClass(/p-alpha/);
+  await expect(alpha).toHaveClass(/tabs-motion-custom-leave-active/);
+  await alpha.evaluate(element => {
+    for (const animation of element.getAnimations()) animation.play();
+  });
+  await stable(page);
+
+  await expect(beta).toHaveCSS('color', 'rgb(10, 20, 30)');
+  await expect(beta).not.toHaveClass(/p-beta/);
+  await expect(root.getByRole('tab', { name: 'Beta', exact: true })).toBeFocused();
+  await expect(page.getByLabel('Tabs motion changes', { exact: true })).toHaveText('["beta"]');
 });

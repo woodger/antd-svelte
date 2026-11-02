@@ -15,8 +15,21 @@
   <Tabs id="motion-ssr" aria-label="Animated sections" animated={settings.animated}
     destroyOnHidden={sample.destroy ?? true}
     tabPlacement={sample.placement as TabsPlacement | undefined}
+    classNames={{ content: sample.contentClass }} styles={{ content: sample.contentStyle }}
     items={[
-      { key: 'alpha', label: 'Alpha', children: alpha, forceRender: sample.force },
-      { key: 'beta', label: 'Beta', children: beta, forceRender: sample.force }
+      {
+        key: 'alpha',
+        label: 'Alpha',
+        children: alpha,
+        forceRender: sample.force,
+        ...sample.paneAlpha
+      },
+      {
+        key: 'beta',
+        label: 'Beta',
+        children: beta,
+        forceRender: sample.force,
+        ...sample.paneBeta
+      }
     ]} onChange={browserOnly} onTabScroll={browserOnly} />
 </ConfigProvider>

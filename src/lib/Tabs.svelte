@@ -552,7 +552,8 @@
     {#each items as item (item.key)}
       <TabsPanel id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'tab')} itemKey={item.key} active={selectedKey === item.key} children={item.children} forceRender={item.forceRender}
         destroyOnHidden={item.destroyOnHidden ?? item.destroyInactiveTabPane ?? rootDestroy}
-        class={classes.content} style={slots.content}
+        class={[classes.content, item.className].filter(Boolean).join(' ') || undefined}
+        style={[slots.content, item.style].filter(Boolean).join(';') || undefined}
         motion={animation.tabPaneMotion} motionEnabled={designTokens.token.motion} />
     {:else}<div class="ant-tabs-empty">{config.locale.emptyText}</div>{/each}
   </div></div>

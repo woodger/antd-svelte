@@ -12,6 +12,11 @@ export interface TabsMotionCase {
   unsetInk?: boolean;
   eventClass?: string;
   eventColor?: string;
+  paintColor?: string;
+  contentClass?: string;
+  contentStyle?: string;
+  paneAlpha?: { className?: string; style?: string; };
+  paneBeta?: { className?: string; style?: string; };
   traceHooks?: boolean;
   prepare?: boolean;
   paint?: boolean;
@@ -54,6 +59,7 @@ export function tabsMotionSettings(
       motion[key] = undefined;
     }
     if (sample.traceHooks) {
+      const color = sample.paintColor ? `;color:${sample.paintColor}` : '';
       for (const phase of ['Appear', 'Enter', 'Leave'] as const) {
         const report = (step: string, node: HTMLDivElement, event: TabsMotionEvent | null) => {
           record?.({
@@ -63,7 +69,7 @@ export function tabsMotionSettings(
             event: event === null ? null : 'deadline' in event ? 'deadline' : event.type,
             observed: {
               classes: Array.from(node.classList).filter(name =>
-                /^(?:ant-tabs-switch|tabs-motion-custom|deadline-pane|event-pane)/.test(name)),
+                /^(?:ant-tabs-switch|tabs-motion-custom|deadline-pane|event-pane|p-)/.test(name)),
               color: node.ownerDocument.defaultView!.getComputedStyle(node).color,
               position: node.ownerDocument.defaultView!.getComputedStyle(node).position
             }
@@ -75,12 +81,15 @@ export function tabsMotionSettings(
         };
         motion[`on${phase}Start`] = (node, event) => {
           report('start', node, event);
-          return sample.paint ? `opacity:${phase === 'Leave' ? 1 : 0}` : undefined;
+          return sample.paint
+            ? `opacity:${phase === 'Leave' ? 1 : 0}${color}`
+            : undefined;
         };
         motion[`on${phase}Active`] = (node, event) => {
           report('active', node, event);
           return sample.paint
-            ? `opacity:${phase === 'Leave' ? 0 : 1};transition:opacity .24s linear` : undefined;
+            ? `opacity:${phase === 'Leave' ? 0 : 1};transition:opacity .24s linear${color}`
+            : undefined;
         };
         motion[`on${phase}End`] = (node, event) => {
           report('end', node, event);

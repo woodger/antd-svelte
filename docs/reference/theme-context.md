@@ -347,6 +347,8 @@ CSS-строки; root применяет provider styles.root → provider styl
 Tabs.animated управляет ink bar и переходами панелей. MotionDurationSlow задаёт
 стандартный switch; глобальный token.motion=false отключает CSS-фазы, но сохраняет
 prepare hooks. Custom motion styles применяются после semantic content styles.
+У каждой панели item.style идёт между semantic content и motion; item.className
+добавляется после classNames.content и не затрагивает заголовок.
 Native reduced motion и живое отключение завершают текущий переход; DOM сохраняется
 до leave end, затем действует destroyOnHidden. EventProps.className/style применяются
 в стабильном состоянии; phase styles имеют приоритет. Произвольный prefixCls и общий

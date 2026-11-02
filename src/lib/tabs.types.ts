@@ -60,6 +60,10 @@ export interface TabsItem {
   label: TabsContent;
   children?: Snippet;
   icon?: Snippet;
+  /** Класс отдельной панели после classNames.content; не меняет заголовок вкладки. */
+  className?: string;
+  /** CSS-строка панели после styles.content и перед motion styles. */
+  style?: string;
   disabled?: boolean;
   /** В editable-card запрещает удаление; disabled также скрывает кнопку. */
   closable?: boolean;

@@ -9,6 +9,9 @@
 
 ### Added
 
+- Tabs: className/style отдельных панелей с исходным порядком semantic → item → motion.
+  Добавлены восемь UMD-сценариев и SSR/browser-проверки изоляции заголовков,
+  RTL, forceRender и обновлений без потери DOM/state/draft/selection/focus.
 - Tabs: animated inkBar/tabPane, source switch и custom CSS motion с prepare,
   phase styles, end/deadline и visibility callbacks. Уходящие панели сохраняют
   DOM/state/FormData до leave end; reversal отменяет уничтожение, native focus,
