@@ -7,6 +7,32 @@ const selected = (page: Page) => page.getByLabel('Menu selected', { exact: true 
 const opened = (page: Page) => page.getByLabel('Menu opened', { exact: true });
 test.beforeEach(async ({ page }) => { await page.goto('/?fixture=menu'); });
 
+for (const rootTheme of ['light', 'dark']) {
+  test(`Menu ${rootTheme} nested defaults ignore a parent popup theme override`, async ({ page }) => {
+    const parentTheme = rootTheme === 'light' ? 'dark' : 'light';
+    await page.getByLabel('Menu mode', { exact: true }).selectOption('vertical');
+    await page.getByLabel('Menu theme', { exact: true }).selectOption(rootTheme);
+    await page.getByLabel('Parent menu popup theme', { exact: true }).selectOption(parentTheme);
+    await item(page, 'Projects').click();
+    await item(page, 'Nested').click();
+    const popups = page.locator('.menu-popup:popover-open');
+    const leaf = popups.nth(1).getByRole('menuitem', { name: 'Leaf', exact: true });
+
+    await expect(popups).toHaveCount(2);
+    await expect(popups.nth(0)).toHaveClass(new RegExp(`ant-menu-${parentTheme}`));
+    await expect(popups.nth(1)).toHaveClass(new RegExp(`ant-menu-${rootTheme}`));
+    await expect(leaf).toHaveCSS('color', rootTheme === 'light'
+      ? 'rgba(0, 0, 0, 0.88)' : 'rgba(255, 255, 255, 0.65)');
+    await expect(popups.nth(1).locator(':scope > ul')).toHaveCSS('background-color',
+      rootTheme === 'light' ? 'rgb(255, 255, 255)' : 'rgb(0, 21, 41)');
+    await leaf.focus();
+    await leaf.press('Escape');
+
+    await expect(popups).toHaveCount(1);
+    await expect(item(page, 'Nested')).toBeFocused();
+  });
+}
+
 test(
   'Menu inline groups dividers and selection callbacks preserve leaf-to-root key paths',
   async ({ page }) => {

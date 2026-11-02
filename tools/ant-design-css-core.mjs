@@ -167,6 +167,10 @@ export function splitSelectors(value) {
 }
 
 export function extractCss(css, recipe) {
+  if (recipe.scope !== undefined
+    && (typeof recipe.scope !== 'string' || !recipe.scope.trim() || /[{};]/.test(recipe.scope))) {
+    throw new Error('CSS recipe scope must be a non-empty @scope prelude');
+  }
   if (!Array.isArray(recipe.include)
     || !recipe.include.length
     || !Number.isInteger(
@@ -230,8 +234,10 @@ export function extractCss(css, recipe) {
   if (count !== recipe.expectedRules) throw new Error(
     `Unexpected CSS rule count: expected ${recipe.expectedRules}, received ${count}`
   );
+  const content = recipe.scope
+    ? `@scope ${recipe.scope}{\n${rules.join('\n')}\n}` : rules.join('\n');
   return {
-    content: `${recipe.header}\n${rules.join('\n')}\n`,
+    content: `${recipe.header}\n${content}\n`,
     rules: count,
     keyframes: [...foundKeyframes]
   };

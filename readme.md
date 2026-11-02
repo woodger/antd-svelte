@@ -1750,6 +1750,10 @@ Items принимает MenuItemType: обычный пункт, подменю
 Label и extra пункта — string/number/Snippet, icon — Snippet. Поддержаны
 item.disabled/danger/title, class/style; у подменю также theme/popupClassName
 и onTitleClick. Группы не добавляют уровень отступа и не входят в keyPath.
+Theme подменю меняет только его popup; следующее подменю без собственного theme
+использует тему корневого Menu. Для native popover правила light/dark дополнительно
+ограничены CSS @scope: тема родителя не переходит во вложенный popup. Базовые
+нескопированные правила сохранены для браузеров без поддержки @scope.
 
 SelectedKeys/openKeys задают controlled state; defaultSelectedKeys/defaultOpenKeys
 читаются при создании для uncontrolled state. По умолчанию выбран один пункт,

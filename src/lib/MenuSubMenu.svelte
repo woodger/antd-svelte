@@ -142,7 +142,7 @@
             !opened && 'ant-menu-hidden',
             context.direction === 'rtl' && 'ant-menu-rtl'
           ]}
-        hidden={!opened}><MenuList entries={entry.children} theme={actualTheme} /></ul>
+        hidden={!opened}><MenuList entries={entry.children} {theme} /></ul>
     {:else}
       <div bind:this={popup} popover="manual" hidden={!opened || !shown}
         class={[
@@ -156,7 +156,7 @@
               'ant-menu ant-menu-css-var ant-menu-sub ant-menu-vertical',
               context.direction === 'rtl' && 'ant-menu-rtl'
             ]}>
-          <MenuList entries={entry.children} theme={actualTheme} />
+          <MenuList entries={entry.children} {theme} />
         </ul>
       </div>
     {/if}

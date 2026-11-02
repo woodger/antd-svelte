@@ -1623,7 +1623,10 @@
         "src/lib/menu.engine.test.ts",
         "tests/package/menu.ssr.test.ts",
         "tests/browser/menu.spec.ts",
-        "integration:menu"
+        "integration:menu",
+        "src/lib/vendor/menu-theme-scope.css",
+        "tools/ant-design-css-recipes.json",
+        "tools/ant-design-css.test.mjs"
       ],
       "features": [
         {
@@ -1645,9 +1648,12 @@
           "requiredForV1": true,
           "evidence": [
             "src/lib/Menu.svelte",
-            "tests/browser/menu.spec.ts"
+            "tests/browser/menu.spec.ts",
+            "src/lib/vendor/menu-theme-scope.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/package/menu.ssr.test.ts"
           ],
-          "note": "Controlled/default openKeys, задержки по runtime rc-menu (open/close 0.1 s), ленивый popup и forceSubMenuRender. Native popover с outside/Escape, RTL и верхним выравниванием боковых подменю. Inline сохраняет descendant keys при закрытии, popup удаляет их. InlineCollapsed/Sider переводит меню в vertical и кэширует uncontrolled inline keys; controlled ключи остаются у владельца. Collapsed labels имеют native title вместо исходного Tooltip."
+          "note": "Controlled/default openKeys, задержки по runtime rc-menu (open/close 0.1 s), ленивый popup и forceSubMenuRender. Native popover с outside/Escape, RTL и верхним выравниванием боковых подменю. Inline сохраняет descendant keys при закрытии, popup удаляет их. InlineCollapsed/Sider переводит меню в vertical и кэширует uncontrolled inline keys; controlled ключи остаются у владельца. Collapsed labels имеют native title вместо исходного Tooltip. SubMenu.theme меняет только собственный popup; nested default использует тему корневого Menu. Дополнительные scoped light/dark rules ограничивают CSS предков в native popover без смены DOM/keyboard/focus; обычные CSS rules остаются fallback без @scope."
         },
         {
           "id": "keyboard-contexts",

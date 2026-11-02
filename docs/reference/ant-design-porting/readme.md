@@ -151,6 +151,11 @@ JSON/CSS выводятся в stdout; диагностические сообщ
 области media/supports/container/layer. Явно перечисленные keyframes сохраняются;
 appendRootKeyframes может переместить в конец только корневые keyframes, как
 в существующем Badge. Селекторные преобразования перечисляются в рецепте.
+Необязательный scope задаёт prelude внешнего @scope для выбранных правил;
+expectedRules по-прежнему считает исходные style rules. Тела деклараций и вложенные
+media/supports/container/layer сохраняются. Рецепт menu-theme-scope добавляет
+ограниченные light/dark правила для вложенных native popover; обычный menu CSS
+остаётся базовым оформлением. :where(:scope) в replacements сохраняет specificity.
 Несовпадение хеша, потеря keyframes или неожиданное число правил завершаются
 ошибкой. Инструмент читает только package/dist/antd.css из архива и не распаковывает
 его содержимое на диск. Для произвольных иных at-rules потребуется расширить

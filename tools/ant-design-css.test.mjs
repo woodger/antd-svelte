@@ -53,6 +53,21 @@ describe('Pinned CSS archive', () => {
 });
 
 describe('CSS extraction', () => {
+  it('wraps extracted rules in an explicit scope without changing rule counts or media', () => {
+    const result = extractCss('@media(width>20px){.ant-test{color:red}}.other{color:blue}', recipe({
+      scope: '(.fixture) to (:scope .nested)'
+    }));
+
+    expect(result.content).toBe('/* Test source */\n@scope (.fixture) to (:scope .nested){\n@media(width>20px){.ant-test:where(.test-vars){color:red}}\n}\n');
+    expect(result.rules).toBe(1);
+  });
+
+  it('rejects empty and malformed scope preludes', () => {
+    for (const scope of ['', ' ', true, '(.fixture){}', '(.fixture);']) {
+      expect(() => extractCss('.ant-test{color:red}', recipe({ scope }))).toThrow('scope');
+    }
+  });
+
   it(
     'splits selector lists without splitting functional selectors or quoted attribute values',
     () => {

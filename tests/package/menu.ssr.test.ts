@@ -4,6 +4,24 @@ import { Menu } from 'antd-svelte';
 import MenuFixtures from '../browser/fixtures/MenuFixtures.svelte';
 
 describe('Menu SSR', () => {
+  it('keeps each popup theme local and uses the root theme for nested defaults', () => {
+    const { body } = render(Menu, {
+      props: {
+        theme: 'light',
+        forceSubMenuRender: true,
+        defaultOpenKeys: ['parent', 'nested'],
+        items: [{ key: 'parent', label: 'Parent', theme: 'dark', children: [
+          { key: 'nested', label: 'Nested', children: [{ key: 'leaf', label: 'Leaf' }] }
+        ] }]
+      }
+    });
+    const themes = Array.from(body.matchAll(
+      /class="[^"]*menu-popup[^"]*ant-menu-(light|dark)[^"]*"/g
+    ), match => match[1]);
+
+    expect(themes).toEqual(['dark', 'light']);
+  });
+
   it(
     'renders groups dividers selection and expanded inline hierarchy',
     () => {

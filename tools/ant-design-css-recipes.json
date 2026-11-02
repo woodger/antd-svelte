@@ -557,6 +557,32 @@
     "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Menu: items/submenus/inline/horizontal/themes; rc-motion исключён.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "menu-theme-scope",
+    "output": "src/lib/vendor/menu-theme-scope.css",
+    "expectedRules": 77,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-menu-(?:light|dark)(?![-\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-menu-css-var",
+        "replacement": ".ant-menu-css-var"
+      },
+      {
+        "pattern": "\\.ant-menu(?![-\\w])",
+        "replacement": ".ant-menu:where(.ant-menu-css-var)"
+      },
+      {
+        "pattern": "^\\.ant-menu-(light|dark)",
+        "replacement": ":where(:scope).ant-menu-$1"
+      }
+    ],
+    "scope": "(.ant-menu-css-var) to (:scope .ant-menu-submenu-popup)",
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; vendor/LICENSE.ant-design.\n * Menu theme scope: native popovers сохраняют DOM и отделяют вложенную тему.\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
     "id": "mentions",
     "output": "src/lib/vendor/mentions.css",
     "expectedRules": 102,
