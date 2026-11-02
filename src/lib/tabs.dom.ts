@@ -1,3 +1,6 @@
+import type { TabsIndicatorOffset } from './tabs-indicator.engine';
+import type { TabsScrollInfo } from './tabs.types';
+
 export function revealTab(viewport: HTMLElement, tab: HTMLElement, vertical: boolean) {
   const view = viewport.getBoundingClientRect();
   const bounds = tab.getBoundingClientRect();
@@ -26,21 +29,49 @@ export function connectTabsNav(
   root: HTMLElement,
   viewport: HTMLElement,
   list: HTMLElement,
-  indicator: HTMLElement,
-  options: { key: string | undefined; vertical: boolean; showIndicator: boolean; }
+  options: {
+    key: string | undefined;
+    vertical: boolean;
+    editable: boolean;
+    onIndicatorChange: (offset: TabsIndicatorOffset | undefined) => void;
+  }
 ): () => void {
   const tabs = Array.from(list.querySelectorAll<HTMLButtonElement>('[role="tab"]'));
   const selected = tabs.find((tab) => tab.dataset.tabsKey === options.key);
+  let previous: string | undefined;
 
   function update() {
-    indicator.hidden = !selected || !options.showIndicator;
-    if (!selected) return;
+    let offset: TabsIndicatorOffset | undefined;
+    if (selected) {
+      const listBox = list.getBoundingClientRect();
+      function measure(tab: HTMLElement) {
+        const cell = options.editable ? tab.closest<HTMLElement>('[data-tabs-cell]') ?? tab : tab;
+        const box = cell.getBoundingClientRect();
+        return Math.abs(box.width - cell.offsetWidth) < 1 ? {
+          width: box.width,
+          height: box.height,
+          left: box.left - listBox.left,
+          top: box.top - listBox.top
+        } : {
+          width: cell.offsetWidth,
+          height: cell.offsetHeight,
+          left: cell.offsetLeft,
+          top: cell.offsetTop
+        };
+      }
+      const first = measure(tabs[0]);
+      const current = measure(selected);
+      offset = {
+        ...current,
+        right: first.left + first.width - current.left - current.width
+      };
+    }
 
-    indicator.style.left = options.vertical ? '' : `${selected.offsetLeft}px`;
-    indicator.style.right = options.vertical ? '' : 'auto';
-    indicator.style.top = options.vertical ? `${selected.offsetTop}px` : '';
-    indicator.style.width = options.vertical ? '' : `${selected.offsetWidth}px`;
-    indicator.style.height = options.vertical ? `${selected.offsetHeight}px` : '';
+    const next = JSON.stringify(offset ?? null);
+    if (next !== previous) {
+      previous = next;
+      options.onIndicatorChange(offset);
+    }
   }
 
   function reveal() {
@@ -83,4 +114,26 @@ export function connectTabsNav(
     resize.disconnect();
     attributes.disconnect();
   };
+}
+
+/** Сохраняет native scroll; React transform имеет противоположный знак на той же физической оси. */
+export function connectTabsScroll(
+  viewport: HTMLElement,
+  vertical: boolean,
+  onScroll: (info: TabsScrollInfo) => void
+): () => void {
+  let previous = vertical ? viewport.scrollTop : viewport.scrollLeft;
+
+  function handleScroll() {
+    const next = vertical ? viewport.scrollTop : viewport.scrollLeft;
+    if (next === previous) return;
+
+    const direction = vertical ? next > previous ? 'bottom' : 'top'
+      : next > previous ? 'right' : 'left';
+    previous = next;
+    onScroll({ direction });
+  }
+
+  viewport.addEventListener('scroll', handleScroll, { passive: true });
+  return () => viewport.removeEventListener('scroll', handleScroll);
 }

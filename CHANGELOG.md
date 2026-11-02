@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tabs: indicator.size/align, deprecated indicatorSize и onTabScroll с исходными
+  физическими направлениями. Добавлены 64 UMD-эталона индикатора и 8 сценариев
+  прокрутки, unit/SSR/browser-проверки дробных размеров, RTL, приоритетов,
+  сохранения DOM/фокуса/More и cleanup; native scroll сохраняется.
 - Tabs: More с исходным visible range, listbox скрытых вкладок, trigger/icon/locale,
   popupRender, controlled visibility, portal и удалением через onEdit. Add сохраняет
   DOM-узел при переходе в operations; добавлены CSS-рецепт, 35 UMD-эталонов,

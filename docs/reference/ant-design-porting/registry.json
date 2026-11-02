@@ -2173,7 +2173,7 @@
       "name": "Tabs",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Аудит native v1 и перенос source editable-card, header layout, medium/tabPosition и More с сохранением выбора, lifecycle панелей, DOM и фокуса.",
+      "scopeReason": "Аудит native v1 и перенос source editable-card, header layout, medium/tabPosition, More и indicator с сохранением выбора, lifecycle панелей, DOM и фокуса; onTabScroll поверх native scroll.",
       "upstreamPath": "components/tabs",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2261,7 +2261,13 @@
         "tests/package/tabs-overflow.ssr.test.ts",
         "tests/browser/tabs-overflow.spec.ts",
         "tests/browser/fixtures/TabsOverflowFixtures.svelte",
-        "tests/browser/fixtures/ant-design-tabs-overflow-metrics.json"
+        "tests/browser/fixtures/ant-design-tabs-overflow-metrics.json",
+        "src/lib/tabs-indicator.engine.ts",
+        "src/lib/tabs-indicator.engine.test.ts",
+        "tests/package/tabs-indicator.ssr.test.ts",
+        "tests/browser/tabs-indicator.spec.ts",
+        "tests/browser/fixtures/TabsIndicatorFixtures.svelte",
+        "tests/browser/fixtures/ant-design-tabs-indicator-metrics.json"
       ],
       "features": [
         {
@@ -2362,14 +2368,47 @@
           "note": "Medium даёт исходный средний размер без small/large класса и локально перекрывает ConfigProvider.componentSize; существующий middle сохраняется. Deprecated tabPosition принимает top/right/bottom/left, физические left/right не переотражаются в RTL; tabPlacement ?? tabPosition ?? top задаёт приоритет. Согласованный native mobile fallback до 575px распространяется и на физические вертикальные позиции. При смене props сохраняются keyed panes, drafts, selection и focus; callbacks и native manual keyboard не меняются."
         },
         {
+          "id": "indicator",
+          "title": "Локальные indicator.size/align и deprecated indicatorSize",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tabs.svelte",
+            "src/lib/tabs.types.ts",
+            "src/lib/tabs.dom.ts",
+            "src/lib/tabs-indicator.engine.ts",
+            "src/lib/tabs-indicator.engine.test.ts",
+            "tests/package/tabs-indicator.ssr.test.ts",
+            "tests/browser/tabs-indicator.spec.ts",
+            "tests/browser/fixtures/TabsIndicatorFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tabs-indicator-metrics.json"
+          ],
+          "note": "Перенесены формулы useIndicator из rc-tabs 1.13.0: полный width/height origin, number/function size, start/center/end, physical right в RTL и исходный translateX(-100%) для end. Indicator.size ?? indicatorSize задаёт приоритет, 0/negative сохраняются до CSS. Размеры измеряются с дробной точностью getTabSize, обновление через RAF и rounded equality подавляет jitter. SSR не вызывает size callback; обновление параметров не пересоздаёт nav controller и не сбрасывает focus/scroll/More или pane DOM. Официальный UMD задаёт 64 эталона стилей/геометрии. Глобальный tabs config и semantic indicator styles остаются в extended API gap."
+        },
+        {
+          "id": "tab-scroll",
+          "title": "OnTabScroll с физическими направлениями и native scroll",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tabs.svelte",
+            "src/lib/tabs.types.ts",
+            "src/lib/tabs.dom.ts",
+            "tests/package/tabs-indicator.ssr.test.ts",
+            "tests/browser/tabs-indicator.spec.ts",
+            "tests/browser/fixtures/ant-design-tabs-indicator-metrics.json"
+          ],
+          "note": "Callback получает left/right/top/bottom только при изменении позиции на текущей оси; RTL сохраняет физические направления. Восемь исходных UMD-сценариев задают направления при фокусировке заголовков. Callback обновляется без сброса позиции; одинаковая позиция не создаёт событие, listener удаляется при unmount. Согласованный native scroll сохраняется: браузер может объединять изменения, поэтому cadence и синхронный порядок source useSyncState/transform callbacks, source mixed-axis wheel и kinetic touch mechanism не воспроизводятся."
+        },
+        {
           "id": "extended-api",
-          "title": "Полные header/indicator, semantic/config/ref, aliases и motion API",
+          "title": "RenderTabBar, полный semantic/config/ref, aliases и motion API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет onTabScroll, indicator/indicatorSize и renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, destroyInactiveTabPane alias и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся."
+          "note": "Нет renderTabBar, полного semantic/config и component token engine, prefixCls/native root attributes/ref, destroyInactiveTabPane alias и animated/motion. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся."
         }
       ]
     },

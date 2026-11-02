@@ -2018,6 +2018,25 @@ ComponentSize: small/middle/large и исходный medium, эквивален
 приоритет над размером провайдера.
 Тема, compact, RTL и reduced motion применяются через существующие токены.
 
+`indicator={{ size: 12.5, align: 'center' }}` задаёт длину и выравнивание линии.
+Size также принимает чистую функцию `(origin) => origin - 20`: origin — полная
+ширина горизонтального или высота вертикального заголовка с дробной точностью.
+По умолчанию используется полный размер и align=center; start/end учитывают RTL.
+Нули и отрицательные значения передаются в CSS без ограничения. Устаревший
+indicatorSize используется, когда indicator.size nullish. Формулы, включая
+end transform в RTL, повторяют rc-tabs 1.13.0. Измерение выполняется после mount;
+SSR не вызывает size callbacks. Обновление откладывается на кадр, а сравнение
+округлённых значений подавляет дрожание индикатора. Смена indicator не сбрасывает
+прокрутку и не меняет фокус, выбранную вкладку или состояние панели.
+
+OnTabScroll получает `{ direction: 'left' | 'right' | 'top' | 'bottom' }` при
+изменении native scroll заголовков на текущей оси. Направления физические,
+в том числе в RTL; фокусировка заголовка тоже может вызвать прокрутку.
+Повторные scroll events при прежней позиции не вызывают callback. Браузер
+может объединять соседние изменения в одно native событие; согласованная
+прокрутка остаётся нативной, вместо transform/wheel/touch механизма React.
+Смена callback не сбрасывает позицию, listener удаляется при unmount.
+
 Centered=true центрирует горизонтальный список заголовков, пока хватает места.
 Как в исходной реализации, вертикальный список растягивается по высоте, а
 заголовки остаются сверху. TabBarGutter
@@ -2135,8 +2154,11 @@ more.onVisibleChange заменяет внутренний pointer/dismiss callb
 Фикстура `?fixture=tabs-overflow` сверяет 35 эталонов More из официального UMD:
 скрытые вкладки, CSS метрики, SVG, icon precedence, RTL и locale. Проверяются также
 keyboard, control/owner callbacks, popupRender, portal, вложенные поверхности и focus.
-Drag-and-drop, renderTabBar и настройка indicator ещё не перенесены.
-Остаются также onTabScroll, destroyInactiveTabPane, полный semantic/config/ref API,
+Фикстура `?fixture=tabs-indicator` сверяет 64 эталона indicator/indicatorSize из
+официального UMD и направления onTabScroll в восьми сочетаниях RTL/placement.
+Здесь же проверяются сохранение DOM, focus, More, прокрутки и cleanup кадров/listeners.
+Drag-and-drop и renderTabBar ещё не перенесены.
+Остаются также destroyInactiveTabPane, полный semantic/config/ref API,
 component tokens и исходный motion; приоритет уничтожения панелей сохраняет native v1.
 Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,
 placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и motion/prefix.

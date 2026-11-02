@@ -6,6 +6,21 @@ export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end';
 export type TabsPosition = 'top' | 'right' | 'bottom' | 'left';
 export type TabsContent = string | number | boolean | null | Snippet;
 export type TabsExtraContent = TabsContent | { left?: TabsContent; right?: TabsContent; };
+export type TabsIndicatorSize = number | ((origin: number) => number);
+
+/** Размер и logical выравнивание индикатора активного заголовка. */
+export interface TabsIndicator {
+  /** Размер в px или чистое вычисление от полной ширины/высоты заголовка. */
+  size?: TabsIndicatorSize;
+  /** @defaultValue 'center' */
+  align?: 'start' | 'center' | 'end';
+}
+
+/** Физическое направление изменения native scroll заголовков. */
+export interface TabsScrollInfo {
+  direction: 'left' | 'right' | 'top' | 'bottom';
+}
+
 export type TabsMoreTrigger = 'hover' | 'click' | 'contextMenu' | 'focus';
 export type TabsMorePlacement = 'topLeft' | 'top' | 'topRight'
   | 'bottomLeft' | 'bottom' | 'bottomRight';
@@ -69,6 +84,14 @@ export interface TabsProps {
   defaultActiveKey?: string;
   onChange?: (activeKey: string) => void;
   onTabClick?: (key: string, event: MouseEvent) => void;
+  /**
+   * Только при изменении scroll на текущей оси;
+   * соседние native events могут объединяться браузером.
+   */
+  onTabScroll?: (info: TabsScrollInfo) => void;
+  indicator?: TabsIndicator;
+  /** @deprecated Используйте indicator.size; его nullish значение сохраняет этот fallback. */
+  indicatorSize?: TabsIndicatorSize;
   type?: TabsType;
   /** Запрашивает изменение items у владельца; add получает событие, remove — key. */
   onEdit?: (target: MouseEvent | KeyboardEvent | string, action: 'add' | 'remove') => void;

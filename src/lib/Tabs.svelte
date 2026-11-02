@@ -4,7 +4,9 @@
   import TabsEditIcon from './TabsEditIcon.svelte';
   import TabsOverflow from './TabsOverflow.svelte';
   import { useConfig } from './config-context';
-  import { connectTabsNav, revealTab } from './tabs.dom';
+  import { connectTabsNav, connectTabsScroll, revealTab } from './tabs.dom';
+  import { getTabsIndicatorStyle, isTabsIndicatorStyleEqual } from './tabs-indicator.engine';
+  import type { TabsIndicatorOffset, TabsIndicatorStyle } from './tabs-indicator.engine';
   import { connectTabsOverflow } from './tabs-overflow.dom';
   import {
     getTabsActiveKey,
@@ -21,6 +23,9 @@
     defaultActiveKey,
     onChange,
     onTabClick,
+    onTabScroll,
+    indicator,
+    indicatorSize,
     type = 'line',
     onEdit,
     hideAdd = false,
@@ -53,7 +58,8 @@
   let viewport = $state<HTMLDivElement>();
   let list = $state<HTMLDivElement>();
   let body = $state<HTMLDivElement>();
-  let indicator = $state<HTMLDivElement>();
+  let activeOffset = $state<TabsIndicatorOffset>();
+  let inkStyle = $state<TabsIndicatorStyle>();
   let operations = $state<HTMLDivElement>();
   let addButton = $state<HTMLButtonElement>();
   let hiddenKeys = $state<string[]>([]);
@@ -68,6 +74,9 @@
   let selectedKey = $derived(getTabsActiveKey(items, activeKey ?? initialDefault));
   let tabStop = $derived(getTabsActiveKey(items, focusKey ?? selectedKey));
   let resolvedSize = $derived(size ?? config.componentSize);
+  let inkBarStyle = $derived(inkStyle && Object.entries(inkStyle)
+    .map(([key, value]) => `${key}:${typeof value === 'number' ? `${value}px` : value}`)
+    .join(';'));
   let placement = $derived(getTabsPlacement(
     tabPlacement ?? tabPosition ?? 'top',
     config.direction,
@@ -174,24 +183,48 @@
   });
 
   $effect(() => {
+    const scroller = viewport;
+    const isVertical = vertical;
+    if (!scroller) return;
+
+    return untrack(() => connectTabsScroll(scroller, isVertical, info => onTabScroll?.(info)));
+  });
+
+  $effect(() => {
+    const view = root?.ownerDocument.defaultView;
+    const next = getTabsIndicatorStyle(activeOffset, vertical, config.direction === 'rtl', {
+      size: indicator?.size ?? indicatorSize,
+      align: indicator?.align
+    });
+    if (!view) return;
+
+    const frame = view.requestAnimationFrame(() => {
+      if (!isTabsIndicatorStyleEqual(inkStyle, next)) inkStyle = next;
+    });
+    return () => view.cancelAnimationFrame(frame);
+  });
+
+  $effect(() => {
     const container = root;
     const scroller = viewport;
     const nav = list;
-    const line = indicator;
     const selected = items.find((item) => item.key === selectedKey);
     const isVertical = vertical;
-    const showIndicator = type === 'line';
+    const isEditable = editable;
 
     if (container
       && scroller
-      && nav
-      && line) return untrack(
+      && nav) return untrack(
         () => connectTabsNav(
           container,
           scroller,
           nav,
-          line,
-          { key: selected?.key, vertical: isVertical, showIndicator }
+          {
+            key: selected?.key,
+            vertical: isVertical,
+            editable: isEditable,
+            onIndicatorChange: next => activeOffset = next
+          }
         )
       );
   });
@@ -416,7 +449,8 @@
             {#if addIcon}{@render value(addIcon)}{:else}<TabsEditIcon name="plus" />{/if}
           </button>
         {/if}
-        <div bind:this={indicator} class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" aria-hidden="true" hidden></div>
+        <div class="ant-tabs-ink-bar ant-tabs-ink-bar-animated" aria-hidden="true"
+          style={inkBarStyle} hidden={!activeOffset || type !== 'line'}></div>
       </div>
     </div>
     <TabsOverflow bind:nativeElement={operations} {rootId} {editable} {locale} more={resolvedMore} {moreIcon}
