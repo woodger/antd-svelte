@@ -5545,17 +5545,29 @@ CSSMotion, завершение использует deadline. Кеш сохра
 dot с count=0 скрыт, а с showZero отображается число 0; без count dot виден.
 Самостоятельный status виден и без count, и при скрытом нуле. При наличии
 children для статусной точки нужен dot или отображаемый count/text. Видимый
-числовой count имеет приоритет над оформлением status. Строка text='0' участвует
-в правиле нуля; Snippet считается содержимым независимо от его результата.
+числовой count имеет приоритет над оформлением status. Строка text='0' и число
+text=0 участвуют в общем правиле нуля, в том числе при ненулевом count.
+Snippet считается содержимым независимо от его результата.
 
 Поддерживаются success, processing, default, error, warning и 13 preset цветов:
 blue, purple, cyan, green, magenta, pink, red, orange, yellow, volcano, geekblue,
 lime, gold. Также поддерживаются CSS-цвета, CSS variables и background gradients.
 У обычного индикатора custom color задаёт background; у самостоятельной статусной
 точки — background и color. Preset color имеет приоритет над status.
-Text принимает строку или Snippet. Offset — readonly-пара чисел [x, y]: y задаёт margin-top,
+Text принимает string/number/boolean/null или Snippet. Число не становится count
+или BadgeContext.count. True учитывается как присутствующее значение, но подпись
+не выводит; false/null считаются пустыми. Text=0 выводится только с showZero.
+Deprecated size="default" сохраняет геометрию medium, но semantic callbacks
+получают исходное default. Предупреждение консоли не выводится.
+
+Offset — readonly-пара [x, y] из number|string: y задаёт margin-top,
 положительный x сдвигает от логического конца наружу, в RTL направление зеркально.
-Неконечная координата заменяется на 0 независимо от второй координаты.
+Неконечная числовая координата заменяется на 0 независимо от второй координаты.
+Строковый x использует parseFloat: '10.5px' даёт 10.5, '1e2' — 100; строковый y
+сохраняет CSS units, включая em, %, calc и var. Строка '20' не превращается в 20px.
+У обычного индикатора и самостоятельного статуса raw offset задаётся отдельными
+DOM-свойствами: невалидное новое значение оставляет прежнюю координату, как React.
+У custom count offset остаётся частью CSS-строки BadgeCountContext.
 Компонент наследует тему и RTL; native compact сохраняет собственные размеры Badge.
 
 Source `theme.components.Badge` применяет исходные размеры count/dot/status,
@@ -5601,7 +5613,8 @@ Badge.style по-прежнему применяется к корню и не �
 на обычный индикатор; для него используйте styles.indicator. Для custom count
 Badge.style остаётся частью BadgeCountContext. Прежний числовой layout без нового
 API сохраняется; ConfigProvider.badge, semantic props, rootClassName и custom
-CSS color включают исходный layout. Bind:nativeElement предоставляет корневой
+CSS color, новые scalar text, строковый offset и size="default" включают исходный
+layout. Bind:nativeElement предоставляет корневой
 HTMLSpanElement и очищается при unmount. Нативные span attrs/events передаются
 корню; onclick имеет приоритет над React-compatible onClick. Изменение props/config
 сохраняет DOM, состояние, selection и фокус. 49 вариантов и реактивные обновления
@@ -5622,10 +5635,15 @@ HTMLSpanElement и очищается при unmount. Нативные span attr
 У прежнего числового режима без нового API сохранены native normalization, BadgeContext,
 root style и оформление standalone/non-status text; эти границы отличаются от React.
 
-Пока не перенесены prefixCls/scrollNumberPrefixCls, scalar text кроме строк,
-строковые offset и deprecated size="default". Processing использует исходную
+58 вариантов text/offset/size и обратимые обновления закреплены в
+[UMD-эталонах](./tests/browser/fixtures/ant-design-badge-values-reference.json),
+проверки — [browser](./tests/browser/badge-values.spec.ts),
+[engine](./src/lib/badge.engine.test.ts) и
+[SSR](./tests/package/badge-values.ssr.test.ts), фикстура — `?fixture=badge-values`.
+
+Пока не перенесены prefixCls/scrollNumberPrefixCls. Processing использует исходную
 CSS-пульсацию, которая отключается при reduced motion. Экспортируются BadgeProps,
-BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeCount, BadgeCountContext,
+BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeOffset, BadgeCount, BadgeCountContext,
 BadgeContext, BadgeConfig, BadgeSlots, BadgeSemantic и BadgeLocale.
 
 ## BadgeRibbon

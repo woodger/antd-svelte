@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getBadgeStyleValue } from './badge-style.engine';
+import { getBadgeStyleValue, serializeBadgeStyleLayers } from './badge-style.engine';
 
 describe('Badge semantic CSS values', () => {
   it('uses the last declaration across semantic layers', () => {
@@ -38,5 +38,14 @@ describe('Badge semantic CSS values', () => {
     expect(getBadgeStyleValue(['color:red', 'color:;invalid;color'], 'color')).toBe('red');
     expect(getBadgeStyleValue(['color:red', 'color:!important'], 'color')).toBe('red');
     expect(getBadgeStyleValue([], 'color')).toBeUndefined();
+  });
+
+  it('keeps raw offset values separate from CSS declarations and explicit empty values', () => {
+    expect(getBadgeStyleValue([[['margin-top', '1px;color:red']]], 'color')).toBeUndefined();
+    expect(getBadgeStyleValue(['margin-top:5px', [['margin-top', '']]], 'margin-top')).toBe('');
+    expect(serializeBadgeStyleLayers([
+      [['margin-top', '2em'], ['inset-inline-end', '-10px']], undefined, 'color:red'
+    ])).toBe('margin-top:2em;inset-inline-end:-10px;color:red');
+    expect(serializeBadgeStyleLayers([[['margin-top', '']]])).toBeUndefined();
   });
 });

@@ -1,6 +1,12 @@
+export type BadgeStyleLayer = string | undefined | readonly (readonly [string, string])[];
+
 /** Сохраняет declaration keys, строки, комментарии и function values без развёртки shorthand. */
-export function* getBadgeStyleDeclarations(layers: readonly (string | undefined)[]) {
+export function* getBadgeStyleDeclarations(layers: readonly BadgeStyleLayer[]) {
   for (const layer of layers) {
+    if (typeof layer !== 'string') {
+      for (const [property, value] of layer ?? []) yield { property, value, priority: '' };
+      continue;
+    }
     let declaration = '';
     let depth = 0;
     let quote = '';
@@ -68,7 +74,7 @@ export function* getBadgeStyleDeclarations(layers: readonly (string | undefined)
   }
 }
 
-export function getBadgeStyleValue(layers: readonly (string | undefined)[], property: string) {
+export function getBadgeStyleValue(layers: readonly BadgeStyleLayer[], property: string) {
   let result: string | undefined;
   let important = false;
 
@@ -80,4 +86,11 @@ export function getBadgeStyleValue(layers: readonly (string | undefined)[], prop
   }
 
   return result;
+}
+
+export function serializeBadgeStyleLayers(layers: readonly BadgeStyleLayer[]) {
+  return layers.map(layer => typeof layer === 'string' ? layer
+    : layer?.filter(([, value]) => value !== '')
+      .map(([property, value]) => `${property}:${value}`).join(';'))
+    .filter(Boolean).join(';') || undefined;
 }

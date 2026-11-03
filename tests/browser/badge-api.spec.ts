@@ -1,5 +1,6 @@
 import type { Page } from '@playwright/test';
 import { test, expect } from './test';
+import { snapshotBadgeApi as snapshot } from './badge-api-metrics';
 import reference from './fixtures/ant-design-badge-api-reference.json' with { type: 'json' };
 
 test.use({ viewport: { width: 1200, height: 1000 } });
@@ -13,48 +14,6 @@ async function select(page: Page, name: string) {
     await document.fonts.ready;
     for (let index = 0; index < 5; index++) await new Promise(requestAnimationFrame);
   });
-}
-
-async function snapshot(page: Page) {
-  const ref = await page.getByLabel('Badge API ref', { exact: true }).textContent();
-  return page.locator('#badge-api-surface').evaluate((host, ref) => {
-    const root = host.querySelector<HTMLElement>('[data-api-root]')!;
-    const indicator = root.querySelector<HTMLElement>(
-      'sup, .ant-badge-status-dot, [data-api-custom]'
-    );
-    const text = root.querySelector<HTMLElement>('.ant-badge-status-text');
-    const base = root.getBoundingClientRect();
-    const metric = (node: HTMLElement | null) => {
-      if (!node) return null;
-      const rect = node.getBoundingClientRect();
-      const style = getComputedStyle(node);
-      const round = (value: number) => Math.round(value * 1000) / 1000;
-
-      return {
-        x: round(rect.x - base.x), y: round(rect.y - base.y),
-        width: round(rect.width), height: round(rect.height),
-        fontSize: style.fontSize, lineHeight: style.lineHeight, weight: style.fontWeight,
-        color: style.color, background: style.backgroundColor,
-        backgroundImage: style.backgroundImage, padding: style.padding,
-        opacity: style.opacity, radius: style.borderRadius, shadow: style.boxShadow,
-        outline: style.outline, marginTop: style.marginTop,
-        insetInlineEnd: style.insetInlineEnd, borderColor: style.borderColor
-      };
-    };
-    const classes = (node: HTMLElement | null) => node
-      ? [...node.classList].filter(name => name.startsWith('case-')).sort() : [];
-
-    return {
-      root: metric(root), indicator: metric(indicator), text: metric(text),
-      classes: { root: classes(root), indicator: classes(indicator) },
-      kind: indicator?.tagName === 'SUP' ? 'number'
-        : indicator?.hasAttribute('data-api-custom') ? 'custom' : indicator ? 'status' : null,
-      preset: indicator ? [...indicator.classList]
-        .find(name => name.startsWith('ant-badge-color-'))?.slice(16) ?? null : null,
-      content: indicator?.textContent ?? null,
-      ref: ref === 'SPAN'
-    };
-  }, ref);
 }
 
 for (const sample of reference.cases) {

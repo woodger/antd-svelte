@@ -546,6 +546,7 @@ export type {
   BadgeColor,
   BadgeSize,
   BadgeText,
+  BadgeOffset,
   BadgeCount,
   BadgeCountContext,
   BadgeContext,

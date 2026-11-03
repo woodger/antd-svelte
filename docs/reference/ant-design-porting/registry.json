@@ -6217,7 +6217,13 @@
         "tests/browser/fixtures/BadgeApiFixtures.svelte",
         "tests/browser/fixtures/ant-design-badge-api-reference.json",
         "tests/browser/badge-api.spec.ts",
-        "tests/package/badge-api.ssr.test.ts"
+        "tests/package/badge-api.ssr.test.ts",
+        "src/lib/badge.engine.test.ts",
+        "tests/browser/fixtures/BadgeValuesFixtures.svelte",
+        "tests/browser/fixtures/ant-design-badge-values-reference.json",
+        "tests/browser/badge-api-metrics.ts",
+        "tests/browser/badge-values.spec.ts",
+        "tests/package/badge-values.ssr.test.ts"
       ],
       "features": [
         {
@@ -6312,18 +6318,18 @@
             "tests/browser/badge.spec.ts",
             "tests/browser/badge-count.spec.ts"
           ],
-          "note": "Сохранены конечный numeric count, нормализация overflow/offset, числовой BadgeContext.count, root class/style, доступные описания и прежний standalone/non-status text layout числового режима без нового API. Эти соглашения отличаются от React. Строки/Snippet не расширяют тип существующего BadgeContext.count. Непрозрачный Snippet не клонируется автоматически: caller получает root attrs и должен применить их сам. ReactNode arrays/portals не анализируются. ConfigProvider.badge, semantic props, rootClassName и custom CSS colors включают source layout. Local style остаётся на корне и в custom count context; обычный indicator настраивается через styles.indicator."
+          "note": "Сохранены конечный numeric count, нормализация overflow/offset, числовой BadgeContext.count, root class/style, доступные описания и прежний standalone/non-status text layout числового режима без нового API. Эти соглашения отличаются от React. Строки/Snippet не расширяют тип существующего BadgeContext.count. Непрозрачный Snippet не клонируется автоматически: caller получает root attrs и должен применить их сам. ReactNode arrays/portals не анализируются. ConfigProvider.badge, semantic props, rootClassName и custom CSS colors, новые scalar text/строковый offset/size=\"default\" включают source layout. Local style остаётся на корне и в custom count context; обычный indicator настраивается через styles.indicator."
         },
         {
           "id": "advanced-api",
-          "title": "Префиксы Badge, scalar text и deprecated size/строковый offset",
+          "title": "Префиксы Badge/ScrollNumber",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md",
             "src/lib/badge.types.ts"
           ],
-          "note": "PrefixCls/scrollNumberPrefixCls, scalar text кроме строк, deprecated size=\"default\" и строковые offset остаются в работе. Существующие native числовые normalization, BadgeContext, root style и ReactNode/Snippet boundaries сохраняются отдельно."
+          "note": "PrefixCls/scrollNumberPrefixCls остаются в работе. Существующие native числовые normalization, BadgeContext, root style и ReactNode/Snippet boundaries сохраняются отдельно."
         },
         {
           "id": "digit-motion",
@@ -6393,6 +6399,31 @@
             "tests/package/badge-api.ssr.test.ts"
           ],
           "note": "ConfigProvider.badge наследуется и заменяется вложенным config. Class/rootClassName и context/local semantic root classes объединяются; root/indicator object/function styles и classNames получают props с разрешёнными defaults. Обычный indicator объединяет offset, context indicator, context legacy style и local indicator; custom color задаёт background, border-color создаёт исходный inset shadow. В standalone status context style относится к root, root color передаётся status text; custom color задаёт background/color точки. У custom count semantic indicator игнорируется, legacy context style/offset передаются через BadgeCountContext. CSS property diff сохраняет shorthand/longhand и реактивное удаление цветов/стилей. Bind:nativeElement заменяет React ref, очищается при unmount; span attrs/events передаются корню, onclick приоритетнее onClick. Native local style/root/count/a11y contracts сохранены и описаны отдельно. 49 UMD-эталонов включают computed styles/geometry/SSR, ConfigProvider inheritance, callbacks, custom count, preset/CSS colors, RTL и обратимые обновления."
+        },
+        {
+          "id": "scalar-text-offset-size",
+          "title": "Scalar text, string CSS offsets и deprecated default size",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/badge.types.ts",
+            "src/lib/badge.engine.ts",
+            "src/lib/badge.engine.test.ts",
+            "src/lib/Badge.svelte",
+            "src/lib/badge-style.engine.ts",
+            "src/lib/badge-style.dom.ts",
+            "src/lib/badge-style.engine.test.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/BadgeApiCase.svelte",
+            "tests/browser/fixtures/badge-api-presets.ts",
+            "tests/browser/fixtures/BadgeValuesFixtures.svelte",
+            "tests/browser/fixtures/ant-design-badge-values-reference.json",
+            "tests/browser/badge-api-metrics.ts",
+            "tests/browser/badge-values.spec.ts",
+            "tests/package/badge-values.ssr.test.ts"
+          ],
+          "note": "Text принимает string/number/boolean/null/Snippet. Число 0 участвует в общем zero и showZero; true считается присутствующим, но не выводит подпись, false/null отсутствуют. Numeric text не становится count или BadgeContext.count; сохранены source truthiness для NaN/Infinity. String X разбирается parseFloat, Y сохраняет CSS units без автоматического px; numeric nonfinite по прежнему native контракту заменяется на 0. Raw offset у обычного indicator/status root использует отдельные DOM properties, сохраняет прежнюю координату при невалидном обновлении и не интерпретирует value как дополнительные declarations. Custom count получает прежнюю CSS-строку контекста. Deprecated size=\"default\" имеет геометрию medium и остаётся default в semantic callback; Svelte не выводит deprecation warning. Source layout включается для нового API, прежний numeric layout сохраняется. 58 UMD-эталонов и обратимые обновления фиксируют состояния/count/text/геометрию/styles/callbacks/SSR, CSS units, malformed strings, RTL и custom count."
         }
       ]
     },

@@ -4,8 +4,10 @@ import type { TagPresetColor } from './tag.types';
 
 export type BadgeStatus = 'success' | 'processing' | 'default' | 'error' | 'warning';
 export type BadgeColor = TagPresetColor | (string & {});
-export type BadgeSize = 'medium' | 'small';
-export type BadgeText = string | Snippet;
+/** Deprecated default имеет геометрию medium; semantic callbacks получают исходное значение. */
+export type BadgeSize = 'medium' | 'small' | 'default';
+export type BadgeText = string | number | boolean | null | Snippet;
+export type BadgeOffset = readonly [number | string, number | string];
 /** Атрибуты исходного custom count; Snippet применяет их к собственному корню. */
 export interface BadgeCountContext {
   class: string;
@@ -53,7 +55,8 @@ export interface BadgeProps extends Omit<
   text?: BadgeText;
   /** @defaultValue 'medium' */
   size?: BadgeSize;
-  offset?: readonly [number, number];
+  /** X разбирается через parseFloat; строковый Y сохраняет CSS units. */
+  offset?: BadgeOffset;
   title?: string | false | null;
   children?: Snippet<[BadgeContext]>;
   id?: string;

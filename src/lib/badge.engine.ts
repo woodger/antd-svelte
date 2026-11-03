@@ -1,4 +1,4 @@
-import type { BadgeProps } from './badge.types';
+import type { BadgeOffset, BadgeProps } from './badge.types';
 
 type BadgeOptions = Pick<
   BadgeProps,
@@ -29,14 +29,15 @@ export function getBadgeState(
   const renderable = customCount || scalarCount !== undefined
     && scalarCount !== false && scalarCount !== '';
   const limit = Number.isFinite(overflowCount) && overflowCount >= 0 ? overflowCount : 99;
-  const zero = scalarCount === 0 || scalarCount === '0' || text === '0';
-  const hasText = typeof text === 'function' || Boolean(text);
+  const zero = scalarCount === 0 || scalarCount === '0' || text === '0' || text === 0;
+  const hasText = text !== undefined && text !== null && text !== false && text !== '';
   const hasStatus = (status !== undefined
     || color !== undefined)
     && (!hasCount
       || zero
       && !showZero);
-  const statusStandalone = !hasChildren && hasStatus && (hasText || status !== undefined || !zero);
+  const statusStandalone = !hasChildren && hasStatus
+    && (Boolean(text) || status !== undefined || !zero);
   const showAsDot = dot && !zero;
   const hidden = (!renderable && !hasText || zero && !showZero) && !showAsDot;
   const numberedCount = Number(scalarCount) > limit ? `${limit}+` : scalarCount;
@@ -55,16 +56,18 @@ export function getBadgeState(
     showAsDot,
     hidden,
     visible: statusStandalone || !hidden,
-    showText: !hidden && hasText && (text !== '0' || showZero)
+    showText: !hidden && (text === 0 ? showZero : Boolean(text) && text !== true)
   };
 }
 
-export function normalizeBadgeOffset(offset:
-  readonly [number, number]
-  | undefined):
-  readonly [number, number]
-  | undefined {
-  return offset
-    ? [Number.isFinite(offset[0]) ? offset[0] : 0, Number.isFinite(offset[1]) ? offset[1] : 0]
-    : undefined;
+export function normalizeBadgeOffset(
+  offset: BadgeOffset | undefined
+): readonly [number, number | string] | undefined {
+  if (!offset) return undefined;
+
+  return [
+    typeof offset[0] === 'string' ? Number.parseFloat(offset[0])
+      : Number.isFinite(offset[0]) ? offset[0] : 0,
+    typeof offset[1] === 'string' ? offset[1] : Number.isFinite(offset[1]) ? offset[1] : 0
+  ];
 }

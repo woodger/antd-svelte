@@ -9,6 +9,11 @@
 
 ### Added
 
+- Badge values: number/boolean/null text с исходными zero/presence правилами,
+  строковые offset с parseFloat/CSS units и deprecated size="default".
+  Сохранены numeric normalization, BadgeContext и прежний layout без нового API;
+  raw offset использует DOM style setters, включая невалидные реактивные обновления.
+  Добавлены 58 UMD-эталонов и unit/SSR/browser-проверки.
 - Badge component config: ConfigProvider.badge, root/indicator semantic callbacks,
   CSS colors/gradients, исходные style priorities и inset border ScrollNumber.
   Добавлены rootClassName, native span attrs/events и bind:nativeElement;

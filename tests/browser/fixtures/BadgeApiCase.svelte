@@ -18,6 +18,9 @@
   let element = $state<HTMLSpanElement>();
   let events = $state<string[]>([]);
   let count = $derived(values.custom ? custom : values.count);
+  let text = $derived(values.textSpecial === 'nan' ? NaN
+    : values.textSpecial === 'infinity' ? Infinity
+      : values.textSpecial === 'negative-infinity' ? -Infinity : values.text);
   let classNames = $derived(values.functions ? ({ props }: { props: BadgeProps; }) => ({
     root: `case-fn-${props.size}-${props.dot}-${props.showZero}-${props.overflowCount}`,
     indicator: `case-fn-count-${props.count}`
@@ -42,7 +45,7 @@
     <div id="badge-api-surface"
       style="font-family:Arial;font-size:14px;color:rgb(12,34,56);line-height:22px;--api-color:#4682b4">
       {#if mounted}<Badge bind:nativeElement={element} {count} color={values.color}
-        status={values.status} text={values.text} size={values.size} offset={values.offset}
+        status={values.status} {text} size={values.size} offset={values.offset}
         overflowCount={values.overflowCount} showZero={values.showZero} dot={values.dot}
         title={values.title} class={values.class} style={legacyStyle
           ? changed ? 'padding-left:8px;color:rgb(12,34,56)'

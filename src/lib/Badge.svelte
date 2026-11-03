@@ -6,7 +6,9 @@
   import { presetColors } from './theme-token.types';
   import { createBadgeZoom, type BadgeZoomState } from './badge-zoom.dom';
   import { connectBadgeStyle } from './badge-style.dom';
-  import { getBadgeStyleValue } from './badge-style.engine';
+  import {
+    getBadgeStyleValue, serializeBadgeStyleLayers, type BadgeStyleLayer
+  } from './badge-style.engine';
   import { getBadgeState, normalizeBadgeOffset } from './badge.engine';
   import { ruRU } from './types';
   import type { BadgeContext, BadgeCountContext, BadgeProps, BadgeSemantic } from './badge.types';
@@ -53,8 +55,13 @@
     )
   );
   let position = $derived(normalizeBadgeOffset(offset));
-  let offsetStyle = $derived(position
-    ? `margin-top:${position[1]}px;inset-inline-end:${-position[0]}px` : undefined);
+  let sourceOffset = $derived(offset?.some(value => typeof value === 'string') ?? false);
+  let offsetLayer = $derived<BadgeStyleLayer>(position
+    ? [
+      ['margin-top', typeof position[1] === 'number' ? `${position[1]}px` : position[1]],
+      ['inset-inline-end', `${-position[0]}px`]
+    ]
+    : undefined);
   let info = $derived({ props: { ...props, overflowCount, size, dot, showZero } });
   const resolve = (value: BadgeSemantic | undefined) =>
     (typeof value === 'function' ? value(info) : value) ?? {};
@@ -64,15 +71,15 @@
   let localStyles = $derived(resolve(styles));
   let rootLayers = $derived([
     componentTheme.style,
-    badgeState.statusStandalone ? offsetStyle : undefined,
+    badgeState.statusStandalone ? offsetLayer : undefined,
     contextStyles.root,
     badgeState.statusStandalone ? config.badge?.style : undefined,
     localStyles.root,
     style
   ]);
-  let rootStyle = $derived(rootLayers.filter(Boolean).join(';') || undefined);
+  let rootStyle = $derived(serializeBadgeStyleLayers(rootLayers));
   let indicatorLayers = $derived([
-    badgeState.statusStandalone ? undefined : offsetStyle,
+    badgeState.statusStandalone ? undefined : offsetLayer,
     contextStyles.indicator,
     badgeState.statusStandalone ? undefined : config.badge?.style,
     localStyles.indicator
@@ -83,11 +90,11 @@
       : [['background', color]] : []);
   let border = $derived(!badgeState.statusStandalone
     ? getBadgeStyleValue(indicatorLayers, 'border-color') : undefined);
-  let indicatorStyle = $derived([
+  let indicatorStyle = $derived(serializeBadgeStyleLayers([
     ...indicatorLayers,
     ...colorOverrides.map(([property, value]) => `${property}:${value}`),
     border && `box-shadow:0 0 0 1px ${border} inset`
-  ].filter(Boolean).join(';') || undefined);
+  ]));
   let statusTextColor = $derived(badgeState.statusStandalone ? getBadgeStyleValue([
     contextStyles.root, config.badge?.style, localStyles.root
   ], 'color') : undefined);
@@ -112,7 +119,8 @@
   // Новый API следует source layout; прежние числовые DOM/spacing сохраняются.
   let sourceCount = $derived(typeof count === 'string' || typeof count === 'boolean'
     || Boolean(customCount || config.badge || classNames || styles || rootClassName)
-    || color !== undefined && !isPreset);
+    || color !== undefined && !isPreset || sourceOffset || size === 'default'
+    || typeof text === 'number' || typeof text === 'boolean' || text === null);
   let descriptionId = $derived(
     badgeState.visible && (!badgeState.customCount || badgeState.statusStandalone)
       ? `${rootId}-description` : undefined
@@ -120,11 +128,11 @@
   let context = $derived<BadgeContext>({ count: badgeState.count, descriptionId });
   let countContext = $derived<BadgeCountContext>({
     class: ['ant-scroll-number-custom-component', zoom.className].filter(Boolean).join(' '),
-    style: [
-      offsetStyle,
+    style: serializeBadgeStyleLayers([
+      offsetLayer,
       config.badge?.style,
       style
-    ].filter(Boolean).join(';') || undefined
+    ])
   });
   let description = $derived(
     !badgeState.statusStandalone && badgeState.descriptionCount !== undefined
@@ -193,7 +201,7 @@
     config.badge?.class,
     contextClasses.root,
     localClasses.root
-  ]} style={untrack(() => rootStyle)} style:--ant-badge-offset-top={position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={position ? `${-position[0]}px` : undefined} {@attach connectRootStyle} {@attach connectZoom}>
+  ]} style={untrack(() => rootStyle)} style:--ant-badge-offset-top={!sourceOffset && position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={!sourceOffset && position ? `${-position[0]}px` : undefined} {@attach connectRootStyle} {@attach connectZoom}>
   {#if children}{@render children(context)}{/if}{#if !sourceCount}{' '}{/if}{#if badgeState.statusStandalone || renderCounter}
     {#if badgeState.statusStandalone}<span class={[
         'ant-badge-status-dot',

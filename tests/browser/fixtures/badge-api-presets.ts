@@ -9,6 +9,7 @@ export interface BadgeApiValues extends Omit<
   classNames?: { root?: string; indicator?: string; };
   styles?: { root?: string; indicator?: string; };
   functions?: boolean;
+  textSpecial?: 'nan' | 'infinity' | 'negative-infinity';
 }
 
 export interface BadgeApiCase extends BadgeApiValues {
