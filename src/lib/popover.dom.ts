@@ -1,3 +1,5 @@
+import { getPopupActiveElement } from './popup.dom';
+
 export function connectPopoverTrigger(
   element: Element,
   id: string,
@@ -67,7 +69,7 @@ export function focusPopover(popup: HTMLElement): void {
       continue;
 
     element.focus({ preventScroll: true });
-    if (popup.ownerDocument.activeElement === element) return;
+    if (getPopupActiveElement(popup) === element) return;
   }
   popup.focus({ preventScroll: true });
 }

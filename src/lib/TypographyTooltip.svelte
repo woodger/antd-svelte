@@ -115,6 +115,7 @@
   <NoCompactStyle>
     <TooltipPopup title={content} open={visible} anchor={target} describe={target} trigger={target}
       placement={options.placement} arrow={options.arrow} autoAdjustOverflow={options.autoAdjustOverflow}
+      getPopupContainer={options.getPopupContainer} getTooltipContainer={options.getTooltipContainer}
       onDismiss={() => dismiss()} onHoverChange={value => hoverPopup(value)} />
   </NoCompactStyle>
 {/if}

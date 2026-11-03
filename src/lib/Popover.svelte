@@ -6,7 +6,8 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import { consumePopconfirmTheme } from './popover-theme-context';
-  import { connectPopup } from './popup.dom';
+  import { connectPopup, getPopupActiveElement } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
   import { connectPopoverTrigger, focusPopover } from './popover.dom';
   import { getTooltipDelay } from './tooltip.engine';
   import type { PopoverContent, PopoverProps, PopoverTrigger } from './popover.types';
@@ -24,6 +25,8 @@
     autoAdjustOverflow = true,
     mouseEnterDelay = 0.1,
     mouseLeaveDelay = 0.1,
+    getPopupContainer,
+    getTooltipContainer,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
@@ -67,6 +70,12 @@
   let hasBody = $derived(hasContent(content));
   let available = $derived(hasTitle || hasBody);
   let visible = $derived(available && (open ?? initialDefault));
+  const portal = createPopupContainer(() => ({
+    open: visible,
+    reference: anchor,
+    getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
+    themeStyle: popupThemeStyle
+  }));
 
   function hasContent(value: PopoverContent | null | undefined) {
     return typeof value === 'function'
@@ -106,7 +115,7 @@
     clicked = false;
     focusOnShow = false;
     // Возвращаем фокус до удаления условного snippet и скрытия поверхности.
-    if (surface?.contains(surface.ownerDocument.activeElement)
+    if (surface?.contains(getPopupActiveElement(surface))
       && source instanceof HTMLElement
       && source.isConnected) {
       untrack(() => {
@@ -159,8 +168,8 @@
     }));
 
     return () => {
-      resumeFocus = surface.contains(surface.ownerDocument.activeElement)
-        ? surface.ownerDocument.activeElement as HTMLElement
+      resumeFocus = surface.contains(getPopupActiveElement(surface))
+        ? getPopupActiveElement(surface) as HTMLElement
         : undefined;
 
       closing = true;
@@ -335,7 +344,7 @@
       return;
     }
     if (reason === 'escape'
-      && popup?.contains(popup.ownerDocument.activeElement)
+      && popup?.contains(getPopupActiveElement(popup))
       && anchor instanceof HTMLElement) {
       closing = true;
       anchor.focus({ preventScroll: true });
@@ -368,7 +377,8 @@
         `ant-popover-placement-${shown ? actualPlacement : placement}`,
         config.direction === 'rtl' && 'ant-popover-rtl'
       ]} style={initialThemeStyle}
-    {@attach node => connectComponentTheme(node, popupThemeStyle)} onpointerenter={(event) => {
+    {@attach node => connectComponentTheme(node, popupThemeStyle)} {@attach portal}
+    onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         handlePopupHover(true);
     }} onpointerleave={() => handlePopupHover(false)} onfocusin={() => {

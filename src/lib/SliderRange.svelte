@@ -568,7 +568,10 @@
         anchor={handles[index]} describe={inputs[index]} trigger={inputs[index]}
         placement={props.tooltip.placement ?? (orientation === 'vertical'
           ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}
-        arrow={props.tooltip.arrow ?? true} onDismiss={() => { tooltipDismissed = true; }} />
+        arrow={props.tooltip.arrow ?? true}
+        getPopupContainer={props.tooltip.getPopupContainer || config.getPopupContainer}
+        getTooltipContainer={props.tooltip.getTooltipContainer}
+        onDismiss={() => { tooltipDismissed = true; }} />
     {/if}
   {/each}
   {#if marks.length}
@@ -593,6 +596,9 @@
       placement={props.tooltip === false ? 'top' : props.tooltip?.placement
         ?? (orientation === 'vertical' ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}
       arrow={props.tooltip === false ? false : props.tooltip?.arrow ?? true}
+      getPopupContainer={(props.tooltip === false ? undefined : props.tooltip?.getPopupContainer)
+        || config.getPopupContainer}
+      getTooltipContainer={props.tooltip === false ? undefined : props.tooltip?.getTooltipContainer}
       onDismiss={() => { tooltipDismissed = true; }} />
   {/if}
 </div>

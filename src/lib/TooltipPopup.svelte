@@ -7,6 +7,7 @@
   import { useDesignTokenContext } from './theme-context.svelte';
   import { connectTooltipDescription } from './tooltip.dom';
   import { connectPopup } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
   import type { TooltipPlacement } from './tooltip.types';
 
   let {
@@ -18,6 +19,8 @@
     placement = 'top',
     arrow = true,
     autoAdjustOverflow = true,
+    getPopupContainer,
+    getTooltipContainer,
     onDismiss,
     onHoverChange
   }: {
@@ -29,6 +32,8 @@
     placement?: TooltipPlacement;
     arrow?: boolean;
     autoAdjustOverflow?: boolean;
+    getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
+    getTooltipContainer?: (trigger: HTMLElement) => HTMLElement;
     onDismiss: () => void;
     onHoverChange?: (hovered: boolean) => void;
   } = $props();
@@ -42,6 +47,12 @@
   let popup = $state<HTMLSpanElement>();
   let actualPlacement = $state(untrack(() => placement));
   let available = $derived(typeof title === 'function' || Boolean(title.trim()));
+  const portal = createPopupContainer(() => ({
+    open: open && available,
+    reference: anchor,
+    getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
+    themeStyle: componentTheme.style
+  }));
 
   $effect(() => {
     if (describe && available) return connectTooltipDescription(describe, id);
@@ -81,7 +92,8 @@
     `ant-tooltip-placement-${open ? actualPlacement : placement}`,
     config.direction === 'rtl' && 'ant-tooltip-rtl'
   ]} style={initialThemeStyle}
-  {@attach node => connectComponentTheme(node, componentTheme.style)} onpointerenter={(event) => {
+  {@attach node => connectComponentTheme(node, componentTheme.style)} {@attach portal}
+  onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         onHoverChange?.(true);
     }} onpointerleave={() => onHoverChange?.(false)}>

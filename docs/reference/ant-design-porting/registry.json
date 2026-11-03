@@ -448,7 +448,18 @@
         "src/lib/vendor/typography.css",
         "tests/package/typography.ssr.test.ts",
         "tests/browser/typography.spec.ts",
-        "tests/browser/fixtures/TypographyFixtures.svelte"
+        "tests/browser/fixtures/TypographyFixtures.svelte",
+        "src/lib/TooltipPopup.svelte",
+        "src/lib/popup-container.model.svelte.ts",
+        "src/lib/popup-portal.dom.ts",
+        "src/lib/popup.dom.ts",
+        "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+        "tests/browser/fixtures/overlay-container-presets.ts",
+        "tests/browser/fixtures/OverlayContainerCase.svelte",
+        "tests/browser/fixtures/OverlayContainerContent.svelte",
+        "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+        "tests/browser/overlay-container.spec.ts",
+        "tests/package/overlay-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -539,7 +550,29 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Сохраняются общие ограничения token engine/Tooltip: corner placements, click/contextMenu, portal container, popup semantic styles и arbitrary-prefix CSS ещё не перенесены. React dev warnings не воспроизводятся. V1-ready не означает полный React API."
+          "note": "Сохраняются общие ограничения token engine/Tooltip: corner placements, click/contextMenu, popup semantic styles и arbitrary-prefix CSS ещё не перенесены. React dev warnings не воспроизводятся. V1-ready не означает полный React API."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/typography.types.ts",
+            "src/lib/popup-container.model.svelte.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+            "tests/browser/fixtures/overlay-container-presets.ts",
+            "tests/browser/fixtures/OverlayContainerCase.svelte",
+            "tests/browser/fixtures/OverlayContainerContent.svelte",
+            "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+            "tests/browser/overlay-container.spec.ts",
+            "tests/package/overlay-container.ssr.test.ts"
+          ],
+          "note": "Ellipsis tooltip options передают getPopupContainer/getTooltipContainer общему Tooltip; edit/copy tooltips наследуют ConfigProvider автоматически. Сохраняется локальный → legacy → provider || priority. Getter получает native typography element, не исполняется при SSR и до показа подсказки. Открытый ShadowRoot, замена container callback и cleanup следуют общему portal; прежние нативные ellipsis измерения/hover, callback contracts и SSR сохраняются. Сценарии ellipsis local/legacy/global, child provider и shadow входят в 52 эталона UMD. Полный расширенный Tooltip API и arbitrary-prefix CSS остаются gaps."
         }
       ]
     },
@@ -1605,7 +1638,18 @@
         "tests/browser/dropdown-theme.spec.ts",
         "tests/browser/fixtures/DropdownThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-dropdown-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/dropdown.types.ts",
+        "src/lib/popup-container.model.svelte.ts",
+        "src/lib/popup-portal.dom.ts",
+        "src/lib/popup.dom.ts",
+        "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+        "tests/browser/fixtures/overlay-container-presets.ts",
+        "tests/browser/fixtures/OverlayContainerCase.svelte",
+        "tests/browser/fixtures/OverlayContainerContent.svelte",
+        "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+        "tests/browser/overlay-container.spec.ts",
+        "tests/package/overlay-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -1696,7 +1740,28 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ещё не перенесены global dropdown config вне theme tokens, semantic classNames/styles, prefixCls, popupRender/getPopupContainer, contextMenu, Dropdown.Button и исходный destroy/motion/arrow.pointAtCenter API. Standalone Menu/selectable/checkable integration и полный аудит семейства остаются в работе."
+          "note": "Ещё не перенесены global dropdown config вне theme tokens, semantic classNames/styles, prefixCls, popupRender, contextMenu, Dropdown.Button и исходный destroy/motion/arrow.pointAtCenter API. Standalone Menu/selectable/checkable integration и полный аудит семейства остаются в работе."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Dropdown.svelte",
+            "src/lib/dropdown.types.ts",
+            "src/lib/popup-container.model.svelte.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+            "tests/browser/fixtures/overlay-container-presets.ts",
+            "tests/browser/fixtures/OverlayContainerCase.svelte",
+            "tests/browser/fixtures/OverlayContainerContent.svelte",
+            "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+            "tests/browser/overlay-container.spec.ts",
+            "tests/package/overlay-container.ssr.test.ts"
+          ],
+          "note": "Локальный getPopupContainer || ConfigProvider; собственный undefined сохраняет provider. Getter получает исходный child trigger, не вызывается до первого открытия/при SSR. Reactive portal сохраняет menu DOM/focus при неизменном container, копирует inherited theme variables и сохраняет собственные Dropdown/Menu aliases. Открытый ShadowRoot: pointer внутри не считается outside, клавиатура и Escape/focus работают через фактический root/composedPath. Source precedence и payload включены в 52 UMD-эталона общего набора; default native placement inline/manual popover, native link/keyboard и сохранённое меню остаются. Остальные extended Dropdown props и motion описаны отдельно. Унаследованные arrow coordinates и CSS-derived arrow variables родительского popup не перезаписывают собственный controller текущей поверхности."
         }
       ]
     },
@@ -4745,7 +4810,19 @@
         "tests/browser/slider-range.spec.ts",
         "tests/browser/fixtures/SliderRangeFixtures.svelte",
         "src/lib/vendor/slider-range.css",
-        "readme.md"
+        "readme.md",
+        "src/lib/TooltipPopup.svelte",
+        "src/lib/tooltip.types.ts",
+        "src/lib/popup-container.model.svelte.ts",
+        "src/lib/popup-portal.dom.ts",
+        "src/lib/popup.dom.ts",
+        "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+        "tests/browser/fixtures/overlay-container-presets.ts",
+        "tests/browser/fixtures/OverlayContainerCase.svelte",
+        "tests/browser/fixtures/OverlayContainerContent.svelte",
+        "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+        "tests/browser/overlay-container.spec.ts",
+        "tests/package/overlay-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -4829,7 +4906,7 @@
             "src/lib/tooltip.types.ts",
             "tests/browser/slider-range.spec.ts"
           ],
-          "note": "Поддержаны четыре placement, text formatter, pinned per-handle tooltip и active hover/focus tooltip с native description/popover. Полные SliderTooltipProps/portals/containers, corner placements, исходный mouseup focus-open lifecycle и все delegated tooltip props ещё не перенесены."
+          "note": "Поддержаны четыре placement, text formatter, pinned per-handle tooltip и active hover/focus tooltip с native description/popover. Container/getter priorities описаны отдельной feature. Полные SliderTooltipProps, corner placements, исходный mouseup focus-open lifecycle и все delegated tooltip props ещё не перенесены."
         },
         {
           "id": "single-source-api",
@@ -4838,6 +4915,29 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Новые marks/dots, semantic config и React callback aliases пока принадлежат range-ветке; одиночный Slider сохраняет согласованный native contract. Полная унификация source scalar API, произвольные theme tokens/prefix CSS, React diagnostics остаются следующими этапами. V1-ready не означает полный React API."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/popup-container.model.svelte.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+            "tests/browser/fixtures/overlay-container-presets.ts",
+            "tests/browser/fixtures/OverlayContainerCase.svelte",
+            "tests/browser/fixtures/OverlayContainerContent.svelte",
+            "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+            "tests/browser/overlay-container.spec.ts",
+            "tests/package/overlay-container.ssr.test.ts"
+          ],
+          "note": "Обе ветки передают tooltip.getPopupContainer || ConfigProvider.getPopupContainer как основной getter Tooltip, поэтому inherited global имеет приоритет над legacy tooltip.getTooltipContainer; legacy используется лишь без основного/global getter. Корневого getPopupContainer у Slider нет в pinned source и новый root API не добавлен. Active single/range tooltip и pinned popup каждой range handle получают соответствующий visible handle DOM div; undefined сохраняет fallback. До открытия/при SSR getter не вызывается. Container updates, HTMLElement/открытый ShadowRoot и cleanup используют общий reactive portal. Все priority branches, включая legacy без provider, входят в 52 эталона официального UMD. Прежние native inputs/descriptions, formatter, четыре placement и focus-open adaptations сохранены; полный SliderTooltipProps ещё не перенесён."
         }
       ]
     },
@@ -6803,7 +6903,18 @@
         "tests/browser/overlay-theme.spec.ts",
         "tests/browser/fixtures/OverlayThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-overlay-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/popover.types.ts",
+        "src/lib/popover.dom.ts",
+        "src/lib/popup-container.model.svelte.ts",
+        "src/lib/popup-portal.dom.ts",
+        "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+        "tests/browser/fixtures/overlay-container-presets.ts",
+        "tests/browser/fixtures/OverlayContainerCase.svelte",
+        "tests/browser/fixtures/OverlayContainerContent.svelte",
+        "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+        "tests/browser/overlay-container.spec.ts",
+        "tests/package/overlay-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -6868,6 +6979,28 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Native-only API/отступы, четыре placement, viewport limits и top layer сохранены. Полные corner placements, source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popover.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popover.dom.ts",
+            "src/lib/popup-container.model.svelte.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+            "tests/browser/fixtures/overlay-container-presets.ts",
+            "tests/browser/fixtures/OverlayContainerCase.svelte",
+            "tests/browser/fixtures/OverlayContainerContent.svelte",
+            "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+            "tests/browser/overlay-container.spec.ts",
+            "tests/package/overlay-container.ssr.test.ts"
+          ],
+          "note": "Наследует source Tooltip container chain: getPopupContainer → legacy getTooltipContainer → ConfigProvider. Own undefined не отключает provider. Getter ленивый и browser-only. Reactive portal сохраняет контент, focus/selection и popup при неизменном target, переносит наследуемые CSS variables без потери своих Popover/Tooltip aliases; changes/removal overrides проверяются в DOM. Открытый ShadowRoot использует собственные стили потребителя; focus lookup и возврат на trigger учитывают фактический root. 52 общих UMD-эталона задают priority, getter payload и state retention; native default inline/top-layer surface и прежний retained content сохраняются. Destroy/motion и прочие rc-trigger props остаются отдельными gaps. Унаследованные arrow coordinates и CSS-derived arrow variables родительского popup не перезаписывают собственный controller текущей поверхности."
         }
       ]
     },
@@ -7484,7 +7617,18 @@
         "config-provider",
         "space"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/tooltip",
+          "range": "~1.5.2",
+          "referenceVersion": "1.5.2"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.10.1",
+          "referenceVersion": "3.10.1"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
@@ -7504,7 +7648,18 @@
         "tests/browser/overlay-theme.spec.ts",
         "tests/browser/fixtures/OverlayThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-overlay-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/Tooltip.svelte",
+        "src/lib/tooltip.types.ts",
+        "src/lib/popup-container.model.svelte.ts",
+        "src/lib/popup-portal.dom.ts",
+        "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+        "tests/browser/fixtures/overlay-container-presets.ts",
+        "tests/browser/fixtures/OverlayContainerCase.svelte",
+        "tests/browser/fixtures/OverlayContainerContent.svelte",
+        "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+        "tests/browser/overlay-container.spec.ts",
+        "tests/package/overlay-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -7568,6 +7723,28 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Native-only API/отступы, четыре placement, viewport limits и top layer сохранены. Полные corner placements, source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/popup-container.model.svelte.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+            "tests/browser/fixtures/overlay-container-presets.ts",
+            "tests/browser/fixtures/OverlayContainerCase.svelte",
+            "tests/browser/fixtures/OverlayContainerContent.svelte",
+            "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+            "tests/browser/overlay-container.spec.ts",
+            "tests/package/overlay-container.ssr.test.ts"
+          ],
+          "note": "Изучены Ant Design 6.6.8 и rc-tooltip 1.5.2 (a43ecc7977059b91c96951556c31be29981d6b72), делегирующий container Trigger 3.10.1. Локальный getPopupContainer → legacy getTooltipContainer → ConfigProvider с исходным || fallback: own undefined сохраняет следующий слой. Getter получает реальный DOM trigger, включая SVG с исходным HTMLElement в типе; до первого открытия и при SSR не вызывается. Общий reactive portal разрешает DOM-target отдельно от callback identity и сохраняет DOM/state/draft/focus/selection при замене функции с тем же контейнером. Наследуемые CSS variables копируются отдельно от component-theme variables; смена владельца переменной не стирает новый override. HTMLElement/открытый ShadowRoot, обновление container/theme и cleanup проверяются публичными browser/SSR fixtures и 52 UMD-эталонами общего набора. Согласованный native default сохраняется: без getter скрытый SSR shell и DOM остаются inline, используется manual popover; callback count, точный React DOM и вся rc-trigger lifecycle здесь не заявлены. Унаследованные arrow coordinates и CSS-derived arrow variables родительского popup не перезаписывают собственный controller текущей поверхности."
         }
       ]
     },
@@ -8079,7 +8256,17 @@
         "tests/browser/overlay-theme.spec.ts",
         "tests/browser/fixtures/OverlayThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-overlay-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/popconfirm.types.ts",
+        "src/lib/popup-container.model.svelte.ts",
+        "src/lib/popup-portal.dom.ts",
+        "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+        "tests/browser/fixtures/overlay-container-presets.ts",
+        "tests/browser/fixtures/OverlayContainerCase.svelte",
+        "tests/browser/fixtures/OverlayContainerContent.svelte",
+        "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+        "tests/browser/overlay-container.spec.ts",
+        "tests/package/overlay-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -8121,6 +8308,28 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Native-only API/отступы, четыре placement, viewport limits и top layer сохранены. Полные corner placements, source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/Popover.svelte",
+            "src/lib/popup-container.model.svelte.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+            "tests/browser/fixtures/overlay-container-presets.ts",
+            "tests/browser/fixtures/OverlayContainerCase.svelte",
+            "tests/browser/fixtures/OverlayContainerContent.svelte",
+            "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+            "tests/browser/overlay-container.spec.ts",
+            "tests/package/overlay-container.ssr.test.ts"
+          ],
+          "note": "getPopupContainer и legacy getTooltipContainer передаются Popover/Tooltip с локальным → legacy → ConfigProvider || priority. Undefined наследует fallback; getter не выполняется в SSR и до первого открытия. Общий portal сохраняет snippet state/DOM, ввод/focus/selection, темы и Promise action при том же DOM-target. Native focus перед отключением buttons во время Promise берётся из фактического root. Приоритеты, trigger DOM payload и замена callback с тем же контейнером включены в 52 UMD-эталона; native SSR shell, сохранённое содержимое и собственные callback/Promise contracts не меняются. Полный rc-trigger/motion API не заявлен."
         }
       ]
     },
@@ -8759,7 +8968,16 @@
         "tests/browser/fixtures/PopupContainerContent.svelte",
         "tests/browser/fixtures/PopupContainerFixtures.svelte",
         "tests/browser/popup-container.spec.ts",
-        "tests/package/popup-container.ssr.test.ts"
+        "tests/package/popup-container.ssr.test.ts",
+        "src/lib/popup-container.model.svelte.ts",
+        "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+        "tests/browser/fixtures/overlay-container-presets.ts",
+        "tests/browser/fixtures/OverlayContainerCase.svelte",
+        "tests/browser/fixtures/OverlayContainerContent.svelte",
+        "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+        "tests/browser/overlay-container.spec.ts",
+        "tests/package/overlay-container.ssr.test.ts",
+        "src/lib/Dropdown.svelte"
       ],
       "features": [
         {
@@ -9153,9 +9371,17 @@
             "tests/browser/fixtures/PopupContainerContent.svelte",
             "tests/browser/fixtures/PopupContainerFixtures.svelte",
             "tests/browser/popup-container.spec.ts",
-            "tests/package/popup-container.ssr.test.ts"
+            "tests/package/popup-container.ssr.test.ts",
+            "src/lib/popup-container.model.svelte.ts",
+            "tests/browser/fixtures/ant-design-overlay-container-reference.json",
+            "tests/browser/fixtures/overlay-container-presets.ts",
+            "tests/browser/fixtures/OverlayContainerCase.svelte",
+            "tests/browser/fixtures/OverlayContainerContent.svelte",
+            "tests/browser/fixtures/OverlayContainerFixtures.svelte",
+            "tests/browser/overlay-container.spec.ts",
+            "tests/package/overlay-container.ssr.test.ts"
           ],
-          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами; Tour намеренно не читает глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. Select/AutoComplete, Tooltip/Popover/Popconfirm, Dropdown/Menu, Date/Time/RangePicker, TreeSelect/Cascader/Mentions, Slider, Modal/Drawer и прочие исходные consumers ещё не подключены; полный provider API не заявлен."
+          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour намеренно не читает глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Select/AutoComplete, полный Menu popup API, Date/Time/RangePicker, TreeSelect/Cascader/Mentions, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
         }
       ]
     },

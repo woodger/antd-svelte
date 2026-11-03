@@ -9,6 +9,11 @@
 
 ### Added
 
+- Контейнеры Tooltip/Popover/Popconfirm, Dropdown, Slider и Typography Tooltip:
+  локальные и legacy getters, ConfigProvider fallback и исходный порядок Slider.
+  Общий portal сохраняет DOM/state/focus при смене функции с тем же контейнером,
+  собственные theme variables и native SSR/cleanup; добавлены 52 UMD-эталона
+  и проверки SSR/browser. Default native размещение без getter сохранено.
 - ConfigProvider.getPopupContainer: наследование для Tabs и ColorPicker с исходными
   приоритетами локальных props и undefined. Поддержан ShadowRoot в общем portal,
   сохранение состояния при смене функции с тем же контейнером, pointer/keyboard

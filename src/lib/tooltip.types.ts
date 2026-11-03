@@ -23,6 +23,10 @@ export interface TooltipProps {
   mouseEnterDelay?: number;
   /** Задержка закрытия в секундах. */
   mouseLeaveDelay?: number;
+  /** Локальная функция → legacy getTooltipContainer → ConfigProvider; undefined наследует fallback. */
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  /** @deprecated Используйте getPopupContainer. Имеет приоритет над ConfigProvider. */
+  getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
   class?: string;
   style?: string;
 }
@@ -33,4 +37,8 @@ export interface SliderTooltipConfig {
   placement?: TooltipPlacement;
   arrow?: boolean;
   formatter?: ((value: number) => string | null) | null;
+  /** Имеет приоритет над ConfigProvider; у Slider нет корневого getPopupContainer. */
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  /** @deprecated Используйте getPopupContainer. Глобальный provider getter приоритетнее. */
+  getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
 }

@@ -26,6 +26,10 @@ export interface PopoverProps {
   mouseEnterDelay?: number;
   /** Задержка закрытия в секундах. */
   mouseLeaveDelay?: number;
+  /** Локальная функция → legacy getTooltipContainer → ConfigProvider. */
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  /** @deprecated Используйте getPopupContainer. Undefined сохраняет provider fallback. */
+  getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
   'aria-label'?: string;
   'aria-labelledby'?: string;
   'aria-describedby'?: string;

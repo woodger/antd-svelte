@@ -3,7 +3,8 @@
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useForm } from './form-context';
-  import { connectPopup } from './popup.dom';
+  import { connectPopup, getPopupActiveElement } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
   import { connectPopoverTrigger } from './popover.dom';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
@@ -36,6 +37,7 @@
     autoAdjustOverflow = true,
     mouseEnterDelay = 0.1,
     mouseLeaveDelay = 0.1,
+    getPopupContainer,
     'aria-label': ariaLabel,
     class: className = '',
     style
@@ -74,6 +76,12 @@
   let resolvedKey = $derived(getDropdownActiveKey(items, activeKey));
   let resolvedDisabled = $derived(disabled ?? form?.disabled ?? config.componentDisabled);
   let visible = $derived(!resolvedDisabled && (open ?? initialDefault));
+  const portal = createPopupContainer(() => ({
+    open: visible,
+    reference: anchor,
+    getPopupContainer: getPopupContainer || config.getPopupContainer,
+    themeStyle: componentTheme.style
+  }));
   let requestedPlacement = $derived(
     placement ?? (config.direction === 'rtl' ? 'bottomRight' : 'bottomLeft')
   );
@@ -116,7 +124,7 @@
       clicked = false;
       focusPending = null;
       search = { text: '', time: 0 };
-      if (element?.contains(element.ownerDocument.activeElement)
+      if (element?.contains(getPopupActiveElement(element))
         && source instanceof HTMLElement
         && source.isConnected) {
         untrack(() => {
@@ -125,8 +133,8 @@
           closing = false;
         });
       }
-    } else if (element?.contains(element.ownerDocument.activeElement)) {
-      const focused = element.ownerDocument.activeElement;
+    } else if (element?.contains(getPopupActiveElement(element))) {
+      const focused = getPopupActiveElement(element);
       if (focused instanceof HTMLElement && (focused.dataset.dropdownKey ?? null) !== key)
         repairFocus = true;
     }
@@ -188,7 +196,7 @@
     }));
 
     return () => {
-      resumeFocus = Boolean(list?.contains(surface.ownerDocument.activeElement));
+      resumeFocus = Boolean(list?.contains(getPopupActiveElement(surface)));
       closing = true;
       disconnect();
       closing = false;
@@ -285,7 +293,7 @@
     if ((reason === 'escape'
       || reason === 'menu')
       && popup?.contains(
-        popup.ownerDocument.activeElement
+        getPopupActiveElement(popup)
       )
       && anchor instanceof HTMLElement
       && anchor.isConnected) {
@@ -406,8 +414,9 @@
       return;
     }
     if (event.key === ' ') {
-      const link = event.target instanceof Element
-        ? event.target.closest<HTMLAnchorElement>('a[role="menuitem"]')
+      const target = event.composedPath()[0] ?? event.target;
+      const link = target instanceof Element
+        ? target.closest<HTMLAnchorElement>('a[role="menuitem"]')
         : null;
       if (link) {
         event.preventDefault();
@@ -488,7 +497,8 @@
     `ant-dropdown-placement-${shown ? actualPlacement : requestedPlacement}`,
     config.direction === 'rtl' && 'ant-dropdown-rtl'
   ]} style={untrack(() => componentTheme.style)}
-  {@attach node => connectComponentTheme(node, componentTheme.style)} onpointerenter={(event) => {
+  {@attach node => connectComponentTheme(node, componentTheme.style)} {@attach portal}
+  onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         handlePopupHover(true);
     }} onpointerleave={() => handlePopupHover(false)} onfocusin={() => {

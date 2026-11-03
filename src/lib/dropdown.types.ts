@@ -61,6 +61,8 @@ export interface DropdownProps {
   mouseEnterDelay?: number;
   /** @defaultValue 0.1 */
   mouseLeaveDelay?: number;
+  /** Локальная функция перекрывает ConfigProvider; undefined сохраняет provider fallback. */
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   'aria-label'?: string;
   class?: string;
   style?: string;

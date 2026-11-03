@@ -1475,8 +1475,11 @@ ConfigProvider.slider в этом этапе задаёт class/style и semanti
 ClassNames объединяются, styles применяются по порядку с приоритетом локального
 слоя. Есть slots root/tracks/track/rail/handle и deprecated style aliases.
 Сохраняется текущий SliderTooltipConfig: четыре placement, text formatter,
-native popover и описание input. Полный SliderTooltipProps, portal/container API
-и исходное управление focus-open остаются частично перенесёнными. Полный scalar
+native popover и описание input. Контейнер выбирается в исходном порядке:
+tooltip.getPopupContainer → ConfigProvider.getPopupContainer → legacy
+tooltip.getTooltipContainer. Корневого getPopupContainer у Slider нет.
+Полный SliderTooltipProps и исходное управление focus-open остаются частично
+перенесёнными. Полный scalar
 API marks/dots/semantic config, произвольные prefix CSS и theme tokens ещё не закрыты.
 
 Проверки: [engine](./src/lib/slider-range.engine.test.ts),
@@ -1538,8 +1541,8 @@ zIndexPopup, offsets и форму стрелки, включая component alia
 сохраняется прежний отступ 8px. Подробности — в
 [описании темы](./docs/reference/theme-context.md#токены-всплывающих-панелей).
 
-Поверхность использует нативный `popover="manual"` в верхнем слое браузера,
-без переноса DOM в body: overflow контейнера не обрезает её, контекст темы и
+Поверхность использует нативный `popover="manual"` в верхнем слое браузера.
+Без container getter DOM остаётся на месте: overflow не обрезает её, контекст темы и
 модальность dialog сохраняются. Нужен браузер с Popover API, как для фильтров Table.
 Скрытый или находящийся за пределами viewport anchor скрывает поверхность;
 при возвращении anchor внешний open сохраняется. В SSR поверхность скрыта,
@@ -1547,9 +1550,16 @@ zIndexPopup, offsets и форму стрелки, включая component alia
 описания сохраняет существующие ID и отслеживает их изменения; cleanup удаляет
 только ID Tooltip.
 
+Контейнер выбирается через getPopupContainer → legacy getTooltipContainer →
+ConfigProvider.getPopupContainer. Undefined сохраняет fallback; функция получает
+исходный DOM trigger, включая SVG, и вызывается только в браузере после открытия.
+Смена функции с тем же контейнером сохраняет DOM, state, focus и selection.
+Portal переносит наследуемые variables и сохраняет приоритет собственных component tokens.
+Вложенные popup сохраняют собственные координаты и цвет стрелки.
+
 Галерея находится на `/ant-design#tooltip`. Первая версия поддерживает обычный
 текст и четыре положения; rich snippets, click/contextMenu, именованные цвета,
-corner placements и getPopupContainer пока отсутствуют.
+corner placements пока отсутствуют.
 
 ## Popover
 
@@ -1618,7 +1628,7 @@ width/minWidth сохраняют исходный приоритет перед
 Обновление темы сохраняет позицию панели, введённый текст и фокус.
 
 Popover использует нативный `popover="manual"` и требует Popover API.
-Поверхность остаётся в исходном DOM-поддереве и показывается в верхнем слое:
+Без container getter поверхность остаётся в исходном DOM-поддереве и верхнем слое:
 overflow контейнера не обрезает её, темы и работа внутри Modal сохраняются.
 Вложенный Tooltip обрабатывает Escape первым; затем закрывается Popover,
 следующим Escape — Modal. Существующий aria-describedby trigger сохраняется.
@@ -1626,6 +1636,11 @@ Aria-controls объединяется с имеющимися ID; при отк
 удаляется, а aria-haspopup/aria-expanded восстанавливаются с учётом изменений
 владельца. Позиционирование и связь с trigger подключаются после гидратации;
 в SSR поверхность скрыта.
+
+GetPopupContainer и legacy getTooltipContainer выбирают контейнер по тем же
+правилам, что Tooltip; локальный undefined сохраняет provider fallback.
+Getter не вызывается до первого открытия и при SSR. Обновление контейнера
+и темы сохраняет native popup lifecycle; неизменный контейнер не перемещает DOM.
 
 Пустые title и content отключают показ и ARIA-связь. Если один из них является
 snippet, компонент считает содержимое доступным; условное отсутствие текста
@@ -1635,10 +1650,13 @@ snippet, компонент считает содержимое доступны
 
 Галерея `/ant-design#popover` содержит редактор профиля и информационную
 карточку с кнопкой. Первая версия ограничена четырьмя положениями;
-contextMenu, corner placements, destroyOnHidden, getPopupContainer и
+contextMenu, corner placements, destroyOnHidden и
 произвольные цветовые варианты пока отсутствуют.
 
 ## Popconfirm
+
+GetPopupContainer/getTooltipContainer передаются Popover с теми же приоритетами.
+Контекст темы и Promise действия сохраняются при переносе popup в контейнер.
 
 ```svelte
 <script lang="ts">
@@ -1725,7 +1743,7 @@ aria-controls/aria-expanded. Во время ожидания выставляе
 отменой, ошибкой и повтором. После удаления trigger фокус переходит к кнопке
 восстановления записей. Пример освобождает ожидающие таймеры при удалении.
 Первая версия поддерживает открытие по клику и четыре положения;
-hover/contextMenu, corner placements и getPopupContainer пока отсутствуют.
+hover/contextMenu и corner placements пока отсутствуют.
 
 ## Menu
 
@@ -1915,6 +1933,8 @@ bottomLeft, в RTL — bottomRight. AutoAdjustOverflow по умолчанию t
 положение. Минимальная ширина соответствует trigger, длинный список прокручивается.
 Arrow по умолчанию false. Поверхность использует native popover, сохраняет
 контекст темы и работает внутри Modal; закрытое меню остаётся смонтированным.
+GetPopupContainer выбирает локальную функцию или ConfigProvider fallback;
+undefined наследует provider. До первого открытия функция не вызывается.
 
 При source-настройках темы `components.Dropdown` рассчитывает paddingBlock,
 zIndexPopup и tokens стрелки; aliases задают шрифт, цвета, отступы и радиусы.
@@ -1930,7 +1950,7 @@ bind:open/callback contracts сохранены.
 Галерея `/ant-design#dropdown` показывает действия строки Table: открытие Modal,
 копирование и архивирование участника. Первая версия ограничена плоскими командами:
 интеграция standalone Menu, подменю, selectable/checkable items, contextMenu,
-Dropdown.Button, href, popupRender и getPopupContainer пока отсутствуют.
+Dropdown.Button, href и popupRender пока отсутствуют.
 
 ## Tabs
 
@@ -7191,8 +7211,9 @@ GlobalToken и пять типов trigger. Настройки наследую�
 
 ConfigProvider.getPopupContainer задаёт `(trigger?: HTMLElement) => HTMLElement | ShadowRoot`.
 Вложенный provider наследует функцию, когда его prop отсутствует или равен undefined;
-theme.inherit=false не сбрасывает эту настройку. Сейчас она подключена к Tabs и
-ColorPicker; остальные потребители исходного API ещё требуют переноса. Tour использует
+theme.inherit=false не сбрасывает эту настройку. Она подключена к Tabs, ColorPicker,
+Tooltip, Popover, Popconfirm, Dropdown, Slider и Tooltip внутри Typography;
+остальные потребители исходного API ещё требуют переноса. Tour использует
 только собственный getPopupContainer, как Ant Design 6.6.8.
 Функция вызывается только в браузере. Без выбранной функции сохраняется native fallback
 в body или текущий modal dialog. Для ShadowRoot стили размещает потребитель;
@@ -7200,6 +7221,11 @@ ColorPicker; остальные потребители исходного API е
 DOM-контейнером сохраняет popup, его state, фокус и выделение текста. Проверки —
 [popup-container](./tests/browser/popup-container.spec.ts) и `?fixture=popup-container`;
 30 сценариев наследования и приоритетов сверены с официальным UMD.
+Для общих overlay-компонентов добавлены ещё 52 эталона:
+[overlay-container](./tests/browser/overlay-container.spec.ts), `?fixture=overlay-container`.
+В этой сверке default обозначает исходное native размещение без пользовательского
+контейнера; DOM не переносится в body автоматически. ShadowRoot проверяется с
+собственными стилями потребителя. При закрытии сохраняется прежний native lifecycle.
 
 Статические defaultSeed, default/dark/compact algorithms и getDesignToken
 работают без context и DOM. Их source-округления, overrides и ограничения описаны

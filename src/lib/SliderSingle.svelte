@@ -429,7 +429,10 @@
     onfocus={handleFocus}
     onblur={handleBlur}
   />
-  <TooltipPopup title={resolvedDisabled ? '' : tooltipTitle} open={tooltipOpen} anchor={handle} describe={control} trigger={control} placement={tooltipPlacement} arrow={tooltip === false ? false : tooltip?.arrow ?? true} onDismiss={() => {
+  <TooltipPopup title={resolvedDisabled ? '' : tooltipTitle} open={tooltipOpen} anchor={handle} describe={control} trigger={control} placement={tooltipPlacement} arrow={tooltip === false ? false : tooltip?.arrow ?? true}
+    getPopupContainer={(tooltip === false ? undefined : tooltip?.getPopupContainer)
+      || config.getPopupContainer}
+    getTooltipContainer={tooltip === false ? undefined : tooltip?.getTooltipContainer} onDismiss={() => {
       tooltipState = { ...tooltipState, dismissed: true };
     }} onHoverChange={(next) => {
         popupHovered = next;

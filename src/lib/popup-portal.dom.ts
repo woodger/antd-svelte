@@ -35,6 +35,16 @@ export function connectPopupPortal(element: HTMLElement, options: {
     }
   }
 
+  function clearManaged() {
+    const preserved = new Set(options.preserveVariables);
+    // После прошлого sync переменная могла перейти component-theme attachment.
+    for (const name of managed) {
+      if (!preserved.has(name)) element.style.removeProperty(name);
+    }
+    managed.clear();
+    return preserved;
+  }
+
   function syncTheme() {
     if (!active || inline) return;
     const source = view.getComputedStyle(origin);
@@ -42,11 +52,10 @@ export function connectPopupPortal(element: HTMLElement, options: {
     for (const name of source) {
       if (name.startsWith('--')) values.set(name, source.getPropertyValue(name));
     }
-    for (const name of managed) element.style.removeProperty(name);
-    managed.clear();
+    const preserved = clearManaged();
     const actual = view.getComputedStyle(element);
     for (const [name, value] of values) {
-      if (options.preserveVariables?.includes(name)) continue;
+      if (preserved.has(name)) continue;
       if (actual.getPropertyValue(name) !== value) {
         element.style.setProperty(name, value);
         managed.add(name);
@@ -95,16 +104,18 @@ export function connectPopupPortal(element: HTMLElement, options: {
     document.head.append(lock);
   }
 
-  return () => {
+  const disconnect = () => {
     active = false;
     observer.disconnect();
     view.removeEventListener('resize', scheduleTheme);
     lock?.remove();
-    for (const name of managed) element.style.removeProperty(name);
+    clearManaged();
     if (!inline) {
-      if (options.restoreOnDestroy && options.marker.isConnected && options.marker.parentElement)
-        move(options.marker.parentElement, options.marker.nextSibling);
+      const parent = options.marker.parentNode;
+      if (options.restoreOnDestroy && options.marker.isConnected && parent)
+        move(parent as HTMLElement | ShadowRoot, options.marker.nextSibling);
       else element.remove();
     }
   };
+  return Object.assign(disconnect, { syncTheme });
 }

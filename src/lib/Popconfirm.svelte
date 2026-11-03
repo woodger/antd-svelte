@@ -5,6 +5,7 @@
   import { providePopconfirmTheme } from './popover-theme-context';
   import { ruRU } from './types';
   import { createPopconfirmAction } from './popconfirm.model.svelte.js';
+  import { getPopupActiveElement } from './popup.dom';
   import type { PopconfirmProps } from './popconfirm.types';
   import Popover from './Popover.svelte';
   import Button from './Button.svelte';
@@ -27,6 +28,8 @@
     placement = 'top',
     arrow = true,
     autoAdjustOverflow = true,
+    getPopupContainer,
+    getTooltipContainer,
     onOpenChange,
     onConfirm,
     onCancel,
@@ -68,7 +71,7 @@
     const element = overlay;
 
     // Сохраняем фокус в карточке до отключения кнопок на время Promise.
-    if (action.loading && element?.contains(element.ownerDocument.activeElement))
+    if (action.loading && element?.contains(getPopupActiveElement(element)))
       element.focus({ preventScroll: true });
   });
 
@@ -136,6 +139,6 @@
   </div>
 {/snippet}
 
-<Popover content={hasTitle ? content : undefined} bind:open={() => visible, request} trigger={resolvedDisabled ? [] : 'click'} {placement} {arrow} {autoAdjustOverflow} popupClass="ant-popconfirm" aria-labelledby={titleId} aria-describedby={hasDescription ? descriptionId : undefined} aria-busy={action.loading || undefined} class={className} {style}>
+<Popover content={hasTitle ? content : undefined} bind:open={() => visible, request} trigger={resolvedDisabled ? [] : 'click'} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer} popupClass="ant-popconfirm" aria-labelledby={titleId} aria-describedby={hasDescription ? descriptionId : undefined} aria-busy={action.loading || undefined} class={className} {style}>
   {@render children()}
 </Popover>

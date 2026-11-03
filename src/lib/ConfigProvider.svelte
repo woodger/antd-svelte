@@ -75,7 +75,8 @@
     renderEmpty?: RenderEmptyHandler;
     /**
      * Наследуемый контейнер popup. Undefined сохраняет родительскую функцию.
-     * Пока используется Tabs и ColorPicker; Tour читает только локальную настройку, как upstream.
+     * Используется Tabs, ColorPicker и общими Tooltip/Popover/Dropdown с их потребителями.
+     * Tour читает только локальную настройку, как upstream; остальные families ещё переносятся.
      * Функция вызывается только в браузере; ShadowRoot не получает стили из document автоматически.
      */
     getPopupContainer?: GetPopupContainer;

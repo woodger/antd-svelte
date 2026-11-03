@@ -27,6 +27,10 @@ export interface PopconfirmProps {
   arrow?: boolean;
   /** @defaultValue true */
   autoAdjustOverflow?: boolean;
+  /** Передаётся Popover: локальная функция → legacy getter → ConfigProvider. */
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
+  /** @deprecated Используйте getPopupContainer. */
+  getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
   onOpenChange?: (open: boolean) => void;
   /** Promise удерживает loading; rejection сохраняет возможность повтора. */
   onConfirm?: (event: MouseEvent) => void | PromiseLike<unknown>;
