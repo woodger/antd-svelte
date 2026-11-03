@@ -1,0 +1,84 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * Tabs More: slide-up/down phases и placement overrides.
+ * Общие motion selectors ограничены .ant-tabs-dropdown; source groups сохранены.
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter.ant-slide-up-enter-active,:where(.ant-tabs-dropdown).ant-slide-up-appear.ant-slide-up-appear-active{animation-name:antSlideUpIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave.ant-slide-up-leave-active{animation-name:antSlideUpOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-up-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-up-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter.ant-slide-down-enter-active,:where(.ant-tabs-dropdown).ant-slide-down-appear.ant-slide-down-appear-active{animation-name:antSlideDownIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave.ant-slide-down-leave-active{animation-name:antSlideDownOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-down-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+.ant-tabs-dropdown.ant-slide-down-enter.ant-slide-down-enter-active.ant-tabs-dropdown-placement-bottomLeft,.ant-tabs-dropdown.ant-slide-down-appear.ant-slide-down-appear-active.ant-tabs-dropdown-placement-bottomLeft,.ant-tabs-dropdown.ant-slide-down-enter.ant-slide-down-enter-active.ant-tabs-dropdown-placement-bottom,.ant-tabs-dropdown.ant-slide-down-appear.ant-slide-down-appear-active.ant-tabs-dropdown-placement-bottom,.ant-tabs-dropdown.ant-slide-down-enter.ant-slide-down-enter-active.ant-tabs-dropdown-placement-bottomRight,.ant-tabs-dropdown.ant-slide-down-appear.ant-slide-down-appear-active.ant-tabs-dropdown-placement-bottomRight{animation-name:antSlideUpIn;}
+.ant-tabs-dropdown.ant-slide-up-enter.ant-slide-up-enter-active.ant-tabs-dropdown-placement-topLeft,.ant-tabs-dropdown.ant-slide-up-appear.ant-slide-up-appear-active.ant-tabs-dropdown-placement-topLeft,.ant-tabs-dropdown.ant-slide-up-enter.ant-slide-up-enter-active.ant-tabs-dropdown-placement-top,.ant-tabs-dropdown.ant-slide-up-appear.ant-slide-up-appear-active.ant-tabs-dropdown-placement-top,.ant-tabs-dropdown.ant-slide-up-enter.ant-slide-up-enter-active.ant-tabs-dropdown-placement-topRight,.ant-tabs-dropdown.ant-slide-up-appear.ant-slide-up-appear-active.ant-tabs-dropdown-placement-topRight{animation-name:antSlideDownIn;}
+.ant-tabs-dropdown.ant-slide-down-leave.ant-slide-down-leave-active.ant-tabs-dropdown-placement-bottomLeft,.ant-tabs-dropdown.ant-slide-down-leave.ant-slide-down-leave-active.ant-tabs-dropdown-placement-bottom,.ant-tabs-dropdown.ant-slide-down-leave.ant-slide-down-leave-active.ant-tabs-dropdown-placement-bottomRight{animation-name:antSlideUpOut;}
+.ant-tabs-dropdown.ant-slide-up-leave.ant-slide-up-leave-active.ant-tabs-dropdown-placement-topLeft,.ant-tabs-dropdown.ant-slide-up-leave.ant-slide-up-leave-active.ant-tabs-dropdown-placement-top,.ant-tabs-dropdown.ant-slide-up-leave.ant-slide-up-leave-active.ant-tabs-dropdown-placement-topRight{animation-name:antSlideDownOut;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter.ant-slide-up-enter-active,:where(.ant-tabs-dropdown).ant-slide-up-appear.ant-slide-up-appear-active{animation-name:antSlideUpIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave.ant-slide-up-leave-active{animation-name:antSlideUpOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-up-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-up-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter.ant-slide-down-enter-active,:where(.ant-tabs-dropdown).ant-slide-down-appear.ant-slide-down-appear-active{animation-name:antSlideDownIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave.ant-slide-down-leave-active{animation-name:antSlideDownOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-down-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter.ant-slide-up-enter-active,:where(.ant-tabs-dropdown).ant-slide-up-appear.ant-slide-up-appear-active{animation-name:antSlideUpIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave.ant-slide-up-leave-active{animation-name:antSlideUpOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-up-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-up-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter.ant-slide-down-enter-active,:where(.ant-tabs-dropdown).ant-slide-down-appear.ant-slide-down-appear-active{animation-name:antSlideDownIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave.ant-slide-down-leave-active{animation-name:antSlideDownOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-down-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter.ant-slide-up-enter-active,:where(.ant-tabs-dropdown).ant-slide-up-appear.ant-slide-up-appear-active{animation-name:antSlideUpIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave.ant-slide-up-leave-active{animation-name:antSlideUpOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-up-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-up-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter.ant-slide-down-enter-active,:where(.ant-tabs-dropdown).ant-slide-down-appear.ant-slide-down-appear-active{animation-name:antSlideDownIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave.ant-slide-down-leave-active{animation-name:antSlideDownOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-down-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter.ant-slide-up-enter-active,:where(.ant-tabs-dropdown).ant-slide-up-appear.ant-slide-up-appear-active{animation-name:antSlideUpIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-up-leave.ant-slide-up-leave-active{animation-name:antSlideUpOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-up-enter,:where(.ant-tabs-dropdown).ant-slide-up-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-up-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-up-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-up-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-duration:var(--ant-motion-duration-mid);animation-fill-mode:both;animation-play-state:paused;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter.ant-slide-down-enter-active,:where(.ant-tabs-dropdown).ant-slide-down-appear.ant-slide-down-appear-active{animation-name:antSlideDownIn;animation-play-state:running;}
+:where(.ant-tabs-dropdown).ant-slide-down-leave.ant-slide-down-leave-active{animation-name:antSlideDownOut;animation-play-state:running;pointer-events:none;}
+:where(.ant-tabs-dropdown).ant-slide-down-enter,:where(.ant-tabs-dropdown).ant-slide-down-appear{transform:scale(0);transform-origin:0% 0%;opacity:0;animation-timing-function:var(--ant-motion-ease-out-quint);}
+:where(.ant-tabs-dropdown).ant-slide-down-enter-prepare,:where(.ant-tabs-dropdown).ant-slide-down-appear-prepare{transform:scale(1);}
+:where(.ant-tabs-dropdown).ant-slide-down-leave{animation-timing-function:var(--ant-motion-ease-in-quint);}
+@keyframes antSlideUpIn{0%{transform:scaleY(0.8);transform-origin:0% 0%;opacity:0;}100%{transform:scaleY(1);transform-origin:0% 0%;opacity:1;}}
+@keyframes antSlideDownIn{0%{transform:scaleY(0.8);transform-origin:100% 100%;opacity:0;}100%{transform:scaleY(1);transform-origin:100% 100%;opacity:1;}}
+@keyframes antSlideUpOut{0%{transform:scaleY(1);transform-origin:0% 0%;opacity:1;}100%{transform:scaleY(0.8);transform-origin:0% 0%;opacity:0;}}
+@keyframes antSlideDownOut{0%{transform:scaleY(1);transform-origin:100% 100%;opacity:1;}100%{transform:scaleY(0.8);transform-origin:100% 100%;opacity:0;}}

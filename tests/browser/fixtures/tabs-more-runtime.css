@@ -1,0 +1,19 @@
+.runtime-overlay { box-sizing: border-box; width: 240px; padding: 12px; background: white; }
+.runtime-overlay input { width: 140px; }
+.runtime-overlay button { display: block; }
+.ant-tabs-dropdown.custom-more-appear, .ant-tabs-dropdown.custom-more-enter,
+.ant-tabs-dropdown.custom-more-leave, .ant-tabs-dropdown.ant-tabs-dropdown-runtime-appear,
+.ant-tabs-dropdown.ant-tabs-dropdown-runtime-enter, .ant-tabs-dropdown.ant-tabs-dropdown-runtime-leave {
+  animation-duration: .24s; animation-fill-mode: both; animation-play-state: paused;
+}
+.custom-more-appear.custom-more-appear-active, .custom-more-enter.custom-more-enter-active,
+.ant-tabs-dropdown-runtime-appear.ant-tabs-dropdown-runtime-appear-active,
+.ant-tabs-dropdown-runtime-enter.ant-tabs-dropdown-runtime-enter-active {
+  animation-name: runtimeMoreIn; animation-play-state: running;
+}
+.custom-more-leave.custom-more-leave-active,
+.ant-tabs-dropdown-runtime-leave.ant-tabs-dropdown-runtime-leave-active {
+  animation-name: runtimeMoreOut; animation-play-state: running;
+}
+@keyframes runtimeMoreIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes runtimeMoreOut { from { opacity: 1; } to { opacity: 0; } }

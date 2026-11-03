@@ -2192,7 +2192,13 @@ Locale.dropdownAriaLabel именует listbox скрытых вкладок, �
 на мобильном user agent More скрыт, прокрутка и Add остаются доступны.
 
 More открывается через hover с задержками 0.1/0.1 секунды. `more.trigger` также
-поддерживает click, focus, contextMenu и массив событий. ArrowDown/Enter/Space на
+поддерживает click, focus, contextMenu и массив событий. `showAction` и `hideAction`
+раздельно заменяют действия открытия и закрытия; пустой массив отключает сторону.
+У contextMenu исходное закрытие — click. Hover без click получает touch toggle;
+после touch hover игнорируется до следующего обработанного click.
+Закрывающий focus срабатывает на blur кнопки, включая переход внутрь popup,
+как в исходном Trigger.
+ArrowDown/Enter/Space на
 кнопке открывают список без выбора; Up/Down затем меняют активный пункт, пропуская
 disabled. Первый Up сохраняет исходный выбор предпоследнего enabled-пункта.
 Tab переносит фокус в список; его стрелки/Home/End двигают фокус по native options.
@@ -2211,11 +2217,29 @@ getPopupContainer; CSS styles задаются строкой. Корневые 
 getPopupContainer также поддерживаются; одноимённые more overrides имеют приоритет,
 включая явно заданный undefined. Portal сохраняет тему и собственные CSS variables popup.
 
-More.visible перекрывает внутренние запросы и onClose. Как в rc-tabs,
+`more.visible` со значением true/false перекрывает внутренние запросы и onClose.
+Как в rc-tabs,
 more.onVisibleChange заменяет внутренний pointer/dismiss callback; для controlled
 режима передавайте оба поля. Клавиатурное открытие и aria-expanded используют
-внутренний флаг. PopupRender получает menu Snippet и { restTabs, onClose };
-содержимое ленивое и сохраняется после первого открытия.
+внутренний флаг OperationNode. Явный more.visible=undefined включает отдельный
+uncontrolled Trigger: pointer actions управляют popup, а keyboard/onClose меняют
+только флаг OperationNode. В этой ветке Dropdown не добавляет open class и не
+переносит фокус по autoFocus/Tab. Изменение visible сбрасывает внутреннее значение
+Trigger, как useControlledState исходника.
+
+PopupRender получает menu Snippet и { restTabs, onClose }; `more.overlay` — Snippet,
+который заменяет и menu, и popupRender. Клавиатурный выбор с More работает даже
+без исходного menu DOM. Содержимое ленивое и сохраняется после
+первого открытия. `autoDestroy=true` удаляет его вместе с popup после leave end;
+повторное открытие во время leave сохраняет DOM/state. Уходящая поверхность остаётся
+aria-hidden/inert и не перехватывает Escape у следующего popup/Modal.
+
+По умолчанию More использует ant-slide-up с placement overrides. `transitionName`
+задаёт другой CSS motion prefix; пустая строка отключает motion. Непустой animation
+имеет приоритет и добавляет префикс ant-tabs-dropdown-. CSS для собственного имени
+задаёт потребитель. Theme motion=false и reduced motion завершают переход;
+`openClassName` заменяет класс открытой кнопки, пустая строка убирает его.
+Прежний native SSR shell сохраняется без содержимого; при autoDestroy=true его нет.
 
 ```svelte
 <script lang="ts">
@@ -2292,6 +2316,9 @@ Attributes позволяют сохранить class/style/handlers и доб�
 Фикстура `?fixture=tabs-overflow` сверяет 35 эталонов More из официального UMD:
 скрытые вкладки, CSS метрики, SVG, icon precedence, RTL и locale. Проверяются также
 keyboard, control/owner callbacks, popupRender, portal, вложенные поверхности и focus.
+Фикстура `?fixture=tabs-more-runtime` сверяет lifecycle, overlay precedence,
+раздельные actions/touch, visible=undefined и motion phases с 33 эталонами UMD.
+Здесь же проверяются autoDestroy после leave, reversal, смена motion и cleanup portal.
 Фикстура `?fixture=tabs-indicator` сверяет 64 эталона indicator/indicatorSize из
 официального UMD и направления onTabScroll в восьми сочетаниях RTL/placement.
 Здесь же проверяются сохранение DOM, focus, More, прокрутки и cleanup кадров/listeners.
@@ -7576,6 +7603,12 @@ TabsEditIcon использует точные PlusOutlined/CloseOutlined из i
 правил More/operations/listbox/remove/RTL без motion selectors. TabsOverflow.svelte
 управляет popup, tabs-overflow.engine.ts повторяет visible range и навигацию rc-tabs,
 tabs-overflow.dom.ts сохраняет native scroll и переносит тот же Add с заглушкой.
+[vendor/tabs-overflow-motion.css](./src/lib/vendor/tabs-overflow-motion.css) добавляет
+74 исходных slide-up/down rules и четыре keyframes. Общие phase selectors
+ограничены :where(.ant-tabs-dropdown) без роста specificity; placement overrides и
+повторные source groups сохранены.
+Раздельные actions и touch повторяют @rc-component/trigger 3.10.1; его
+[MIT-лицензия](./src/lib/vendor/LICENSE.rc-trigger) включена в пакет.
 EllipsisOutlined взят из icons-svg 4.6.0; regexp is-mobile 5.0.0 сопровождается
 [исходной MIT-лицензией](./src/lib/vendor/LICENSE.is-mobile).
 [vendor/collapse.css](./src/lib/vendor/collapse.css) содержит 49 правил Collapse и его

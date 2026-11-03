@@ -1055,5 +1055,29 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Tabs: операции More, dropdown listbox, remove и RTL.\n * Motion selectors исключены; native popover управляет поверхностью.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "tabs-overflow-motion",
+    "output": "src/lib/vendor/tabs-overflow-motion.css",
+    "expectedRules": 74,
+    "include": [
+      "^\\.ant-slide-(?:up|down)(?![\\w])",
+      "^\\.ant-tabs-dropdown\\.ant-slide-"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "^\\.ant-slide-",
+        "replacement": ":where(.ant-tabs-dropdown).ant-slide-"
+      }
+    ],
+    "keyframes": [
+      "antSlideUpIn",
+      "antSlideUpOut",
+      "antSlideDownIn",
+      "antSlideDownOut"
+    ],
+    "appendRootKeyframes": true,
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Tabs More: slide-up/down phases и placement overrides.\n * Общие motion selectors ограничены .ant-tabs-dropdown; source groups сохранены.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   }
 ]

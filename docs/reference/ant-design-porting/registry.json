@@ -2174,7 +2174,7 @@
       "name": "Tabs",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Аудит native v1 и перенос source editable-card, layout, More, indicator, component theme, semantic/config, animated и renderTabBar с сохранением выбора, lifecycle панелей, DOM и фокуса; onTabScroll поверх native scroll.",
+      "scopeReason": "Аудит native v1 и перенос source editable-card, layout, More runtime/motion, indicator, component theme, semantic/config, animated и renderTabBar с сохранением выбора, lifecycle панелей, DOM и фокуса; onTabScroll поверх native scroll.",
       "upstreamPath": "components/tabs",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2228,6 +2228,11 @@
           "name": "@rc-component/motion",
           "range": "^1.3.3",
           "referenceVersion": "1.3.3"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.10.1",
+          "referenceVersion": "3.10.1"
         }
       ],
       "priority": "unassigned",
@@ -2321,7 +2326,20 @@
         "tests/browser/fixtures/TabsRenderContent.svelte",
         "tests/browser/fixtures/TabsRenderFixtures.svelte",
         "tests/browser/tabs-render.spec.ts",
-        "tests/package/tabs-render.ssr.test.ts"
+        "tests/package/tabs-render.ssr.test.ts",
+        "src/lib/tabs-more.engine.ts",
+        "src/lib/tabs-more.engine.test.ts",
+        "src/lib/tabs-more.dom.ts",
+        "src/lib/vendor/tabs-overflow-motion.css",
+        "tests/browser/fixtures/ant-design-tabs-more-runtime-reference.json",
+        "tests/browser/fixtures/tabs-more-runtime-presets.ts",
+        "tests/browser/fixtures/tabs-more-runtime.css",
+        "tests/browser/fixtures/TabsMoreRuntimeCase.svelte",
+        "tests/browser/fixtures/TabsMoreRuntimeContent.svelte",
+        "tests/browser/fixtures/TabsMoreRuntimeFixtures.svelte",
+        "tests/browser/tabs-more-runtime.spec.ts",
+        "tests/package/tabs-more-runtime.ssr.test.ts",
+        "src/lib/vendor/LICENSE.rc-trigger"
       ],
       "features": [
         {
@@ -2356,7 +2374,34 @@
             "tests/browser/fixtures/TabsOverflowFixtures.svelte",
             "tests/browser/fixtures/ant-design-tabs-overflow-metrics.json"
           ],
-          "note": "Перенесены source visible range с floor на trailing edge, hidden tabs/operations, More icon precedence, locale listbox, hover/click/focus/contextMenu, delays, placement, visible/onVisibleChange, popupRender(menu,{restTabs,onClose}), overlay style/class/callback, container, autofocus и min-overlay width. Native scroll сохраняется; тот же Add переносится в operations с placeholder и исходным card gutter. More keyboard повторяет source Up/Down, включая первый Up к предпоследнему; popup menu имеет native option/close sibling buttons и Home/End. Mouse option закрывает menu, More hover keyboard сохраняет его, close только запрашивает edit. Официальный UMD задаёт 35 эталонов icon/layout/RTL/locale и 3 сценария выбора/scroll. Native adaptations: MouseEvent/PointerEvent для keyboard activation, encoded panel IDs, доступное имя пустой More, отсутствие stale aria-activedescendant и owned focus из portal. Контролируемая visible перекрывает internal requests/onClose; onVisibleChange заменяет pointer/dismiss callback, keyboard и aria-expanded используют internal open как в rc-tabs. Не перенесены остальные raw Dropdown props: arrow, align/alignPoint, placements, showAction/hideAction, onPopupAlign, autoDestroy, overlay и motion/prefix. Source tokens/semantic/config описаны отдельными features; общий ConfigProvider.getPopupContainer остаётся gap."
+          "note": "Перенесены source visible range с floor на trailing edge, hidden tabs/operations, More icon precedence, locale listbox, hover/click/focus/contextMenu, delays, placement, visible/onVisibleChange, popupRender(menu,{restTabs,onClose}), overlay style/class/callback, container, autofocus и min-overlay width. Native scroll сохраняется; тот же Add переносится в operations с placeholder и исходным card gutter. More keyboard повторяет source Up/Down, включая первый Up к предпоследнему; popup menu имеет native option/close sibling buttons и Home/End. Mouse option закрывает menu, More hover keyboard сохраняет его, close только запрашивает edit. Официальный UMD задаёт 35 эталонов icon/layout/RTL/locale и 3 сценария выбора/scroll. Native adaptations: MouseEvent/PointerEvent для keyboard activation, encoded panel IDs, доступное имя пустой More, отсутствие stale aria-activedescendant и owned focus из portal. Контролируемая visible перекрывает internal requests/onClose; onVisibleChange заменяет pointer/dismiss callback, keyboard и aria-expanded используют internal open как в rc-tabs. Raw overlay, autoDestroy, openClassName, раздельные actions/touch и motion описаны отдельной feature. Не перенесены остальные raw Dropdown props: arrow, align/alignPoint, placements, onPopupAlign и prefix. Source tokens/semantic/config описаны отдельными features; общий ConfigProvider.getPopupContainer остаётся gap."
+        },
+        {
+          "id": "more-runtime",
+          "title": "Raw overlay, More lifecycle/motion и раздельные trigger actions",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TabsOverflow.svelte",
+            "src/lib/tabs.types.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/tabs-motion.dom.ts",
+            "tools/ant-design-css-recipes.json",
+            "src/lib/tabs-more.engine.ts",
+            "src/lib/tabs-more.engine.test.ts",
+            "src/lib/tabs-more.dom.ts",
+            "src/lib/vendor/tabs-overflow-motion.css",
+            "tests/browser/fixtures/ant-design-tabs-more-runtime-reference.json",
+            "tests/browser/fixtures/tabs-more-runtime-presets.ts",
+            "tests/browser/fixtures/tabs-more-runtime.css",
+            "tests/browser/fixtures/TabsMoreRuntimeCase.svelte",
+            "tests/browser/fixtures/TabsMoreRuntimeContent.svelte",
+            "tests/browser/fixtures/TabsMoreRuntimeFixtures.svelte",
+            "tests/browser/tabs-more-runtime.spec.ts",
+            "tests/package/tabs-more-runtime.ssr.test.ts",
+            "src/lib/vendor/LICENSE.rc-trigger"
+          ],
+          "note": "Перенесён OperationNode → rc-dropdown 1.0.3 → trigger 3.10.1: overlay Snippet заменяет menu/popupRender, клавиатура More выбирает tabs даже без menu DOM; контент ленивый; default сохраняет DOM/state, autoDestroy удаляет после leave end. OpenClassName заменяет исходный класс, animation перекрывает transitionName с prefix ant-tabs-dropdown-. CSS-рецепт извлекает 74 rules и 4 slide-up/down keyframes с ограничением :where(.ant-tabs-dropdown) без роста specificity; placement меняет исходную анимацию. ShowAction/hideAction разрешаются отдельно, [] отключает сторону, contextMenu по умолчанию скрывается click, focus скрывает по blur кнопки даже при переходе внутрь popup, hover без click добавляет touch только на соответствующей стороне. OperationNode.open, Dropdown.visible и uncontrolled Trigger сохраняют разные роли: own visible=undefined включает Trigger, keyboard/onClose меняют только open, open class и autoFocus/Tab отключены этой веткой; смена visible синхронизирует внутренний Trigger как useControlledState. 33 UMD-эталона задают pointer/keyboard/context/touch, callbacks, content retention и appear/enter/leave classes/durations/keyframes. Native SSR shell, outgoing aria-hidden/inert, reduced/live motion disable и cleanup portal сохраняются; reversal отменяет уничтожение, скрытый родитель закрывает nested popup и освобождает Escape. Произвольные arrow/alignment/placements/prefix и общий ConfigProvider.getPopupContainer остаются gaps общей overflow/extended-api."
         },
         {
           "id": "bar-extra",

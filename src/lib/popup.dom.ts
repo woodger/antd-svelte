@@ -61,6 +61,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       ? rect.top >= viewport.y && rect.top <= viewport.y + viewport.height
       : rect.bottom > viewport.y && rect.top < viewport.y + viewport.height;
     const visible = anchor.isConnected
+      && !anchor.closest('[inert]')
       && anchor.getClientRects().length
       && (zeroAllowed || rect.width && rect.height)
       && horizontalVisible
@@ -127,11 +128,13 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   }
 
   function handleKeydown(event: KeyboardEvent) {
-    const current = shown && openPopups.get(document)?.at(-1) === popup;
+    const current = shown && !anchor.closest('[inert]')
+      && openPopups.get(document)?.findLast(element => !element.inert) === popup;
     if (current && !event.defaultPrevented && event.key !== 'Escape')
       options.onKeydown?.(event);
     if (shown
-      && openPopups.get(document)?.at(-1) === popup
+      && !anchor.closest('[inert]')
+      && openPopups.get(document)?.findLast(element => !element.inert) === popup
       && event.key === 'Escape'
       && !event.defaultPrevented) {
       event.preventDefault();
@@ -144,6 +147,8 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
     const target = event.target;
 
     if (shown
+      && !popup.inert
+      && !anchor.closest('[inert]')
       && target instanceof Node
       && !popup.contains(target)
       && !(options.trigger ?? anchor).contains(

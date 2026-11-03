@@ -1,9 +1,14 @@
 <script lang="ts">
-  import { onDestroy, untrack } from 'svelte';
+  import { flushSync, onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { connectPopup } from './popup.dom';
   import { connectPopupPortal } from './popup-portal.dom';
-  import { getTooltipDelay } from './tooltip.engine';
+  import { getTooltipDelay, getTooltipPosition } from './tooltip.engine';
+  import { getTabsMoreActions } from './tabs-more.engine';
+  import { getTabsMoreSize } from './tabs-more.dom';
+  import { getTabsClickEvent } from './tabs.dom';
+  import { createTabsPaneMotion, type TabsPaneMotionState } from './tabs-motion.dom';
+  import { useToken } from './theme-context.svelte';
   import { getTabsMoreNavigationKey, isTabsMobileDevice } from './tabs-overflow.engine';
   import { getTabsNavigationKey, isTabsItemRemovable } from './tabs.engine';
   import TabsEditIcon from './TabsEditIcon.svelte';
@@ -66,12 +71,17 @@
   } = $props();
 
   const config = useConfig();
+  const tokens = useToken();
   let button = $state<HTMLButtonElement>();
   let popup = $state<HTMLDivElement>();
   let list = $state<HTMLUListElement>();
   let open = $state(false);
+  let triggerOpen = $state(false);
   let shown = $state(false);
   let rendered = $state(false);
+  let runtime = $state<ReturnType<typeof createTabsPaneMotion>>();
+  let motionState = $state<TabsPaneMotionState>({ running: false });
+  let motionStarted = $state(false);
   let mobileDevice = $state(false);
   let mobile = $derived(mobileOverride ?? mobileDevice);
   let selectedKey = $state<string | null>(null);
@@ -84,10 +94,27 @@
   let focusFrame = 0;
   let focusView: Window | undefined;
   let active = true;
+  let touched = false;
+  let detachPortal: (() => void) | undefined;
+  let motionProperties: string[] = [];
   let popupId = $derived(`${rootId}-more-popup`);
   let available = $derived(items.length > 0 && !mobile);
-  let visible = $derived(!mobile && Boolean(more && 'visible' in more
-    ? more.visible : items.length && open));
+  let dropdownVisible = $derived(more && Object.hasOwn(more, 'visible')
+    ? more.visible : Boolean(items.length && open));
+  let visible = $derived(!mobile && (dropdownVisible ?? triggerOpen));
+  let actions = $derived(getTabsMoreActions(more ?? {}));
+  let autoDestroy = $derived(more?.autoDestroy === true);
+  let motionName = $derived(more?.animation ? `ant-tabs-dropdown-${more.animation}`
+    : more?.transitionName);
+  let present = $derived(visible || motionState.running);
+  let motionConfig = $derived({
+    motionName,
+    onAppearPrepare: () => {},
+    onEnterPrepare: () => {},
+    onVisibleChanged: (next: boolean) => {
+      if (!next && !visible && autoDestroy) destroyPopup();
+    }
+  });
   let icon = $derived(more?.icon === undefined ? 'More' : more.icon);
   let placement = $derived(more?.placement ?? 'bottomLeft');
   let side = $derived(placement.startsWith('top') ? 'top' as const : 'bottom' as const);
@@ -101,7 +128,7 @@
   let popupDirection = $derived(ownOverlayClass || rtl === undefined
     ? config.direction : rtl ? 'rtl' : 'ltr');
   const initialStyle = untrack(() => [themeStyle, overlayStyle].filter(Boolean).join(';') || undefined);
-  let initialStyleCleared = false;
+  let initialStyleElement: HTMLDivElement | undefined;
   let matchWidth = $derived(more?.minOverlayWidthMatchTrigger !== false);
   let selectedId = $derived(selectedKey !== null && items.some(item => item.key === selectedKey)
     ? optionId(selectedKey) : undefined);
@@ -112,6 +139,45 @@
 
   $effect(() => {
     if (visible) rendered = true;
+  });
+
+  $effect.pre(() => {
+    // Trigger useControlledState сбрасывает внутреннее значение при смене controlled prop.
+    triggerOpen = dropdownVisible ?? false;
+  });
+
+  $effect(() => {
+    const surface = popup;
+    if (!surface) return;
+
+    const controller = createTabsPaneMotion(surface, (next, commit) => {
+      if (commit) flushSync(() => { motionState = next; });
+      else motionState = next;
+    });
+    runtime = controller;
+    return () => {
+      controller.destroy();
+      runtime = undefined;
+      motionState = { running: false };
+      motionStarted = false;
+    };
+  });
+
+  $effect.pre(() => {
+    const controller = runtime;
+    const next = visible;
+    const options = motionConfig;
+    const ready = shown;
+    const enabled = tokens.token.motion && ready;
+    if (controller && (motionStarted || ready)) {
+      motionStarted = true;
+      untrack(() => controller.sync(next, options, enabled));
+    } else if (!next && autoDestroy) rendered = false;
+  });
+
+  $effect(() => {
+    if (autoDestroy && rendered && !visible && motionStarted && !motionState.running)
+      untrack(destroyPopup);
   });
 
   $effect.pre(() => {
@@ -153,11 +219,11 @@
 
     return untrack(() => {
       // До первого открытия markup уже содержит начальные styles; props могли успеть измениться.
-      if (!initialStyleCleared) {
+      if (initialStyleElement !== surface) {
         const initial = surface.ownerDocument.createElement('span').style;
         initial.cssText = initialStyle ?? '';
         for (const name of initial) surface.style.removeProperty(name);
-        initialStyleCleared = true;
+        initialStyleElement = surface;
       }
       const css = surface.ownerDocument.createElement('span').style;
       css.cssText = cssText ?? '';
@@ -181,19 +247,44 @@
       for (const name of names)
         surface.style.setProperty(name, css.getPropertyValue(name), css.getPropertyPriority(name));
 
-      return () => {
+      let connected = true;
+      const cleanup = () => {
+        if (!connected) return;
+        connected = false;
         for (const name of names) surface.style.removeProperty(name);
         for (const name of inheritedNames) surface.style.removeProperty(name);
         disconnect();
         marker.remove();
+      };
+      detachPortal = cleanup;
+      return () => {
+        cleanup();
+        if (detachPortal === cleanup) detachPortal = undefined;
       };
     });
   });
 
   $effect(() => {
     const surface = popup;
+    const cssText = motionState.style;
+    const authorStyle = overlayStyle;
+    if (!surface) return;
+
+    const css = surface.ownerDocument.createElement('span').style;
+    const author = surface.ownerDocument.createElement('span').style;
+    css.cssText = cssText ?? '';
+    author.cssText = authorStyle ?? '';
+    for (const name of new Set([...motionProperties, ...css])) {
+      const source = css.getPropertyValue(name) ? css : author;
+      surface.style.setProperty(name, source.getPropertyValue(name), source.getPropertyPriority(name));
+    }
+    motionProperties = Array.from(css);
+  });
+
+  $effect(() => {
+    const surface = popup;
     const source = button;
-    const show = visible;
+    const show = present;
     const requestedSide = side;
     const requestedAlign = align;
     const match = matchWidth;
@@ -213,15 +304,28 @@
         maxWidth: '100vw',
         matchAnchorWidth: match,
         preserveFocus: false,
+        getPosition: (anchor, _bounds, viewport) => getTooltipPosition(
+          anchor,
+          getTabsMoreSize(surface),
+          viewport,
+          requestedSide,
+          true,
+          requestedAlign,
+          4
+        ),
         onPlacement: value => actualSide = value === 'top' ? 'top' : 'bottom',
         onDismiss: reason => {
+          if (!visible) return;
           if (reason === 'escape') source.focus({ preventScroll: true });
-          requestVisible(false);
+          if (reason === 'escape' || actions.hide.has('click')
+            || actions.hide.has('contextMenu') || actions.hide.has('touch')) requestVisible(false);
         },
         onKeydown: event => {
-          if (event.key !== 'Tab') return;
-          if (!focusAttempted && list) {
-            list.focus({ preventScroll: true });
+          if (!visible || event.key !== 'Tab' || dropdownVisible === undefined) return;
+          const overlay = more && Object.hasOwn(more, 'overlay')
+            ? popup?.firstElementChild : list;
+          if (!focusAttempted && overlay instanceof HTMLElement) {
+            overlay.focus({ preventScroll: true });
             focusAttempted = true;
             event.preventDefault();
           } else {
@@ -232,7 +336,7 @@
         onVisibilityChange: next => {
           shown = next;
           if (!next) cancelFocus();
-          else if (more?.autoFocus) scheduleFocus();
+          else if (more?.autoFocus && dropdownVisible !== undefined) scheduleFocus();
         }
       });
     });
@@ -251,7 +355,14 @@
     active = false;
     cancelPending();
     cancelFocus();
+    detachPortal?.();
   });
+
+  function destroyPopup() {
+    // Svelte удаляет conditional range после возврата portal в исходное место.
+    detachPortal?.();
+    rendered = false;
+  }
 
   function cancelPending() {
     if (pending !== undefined) clearTimeout(pending);
@@ -275,34 +386,40 @@
         return;
       }
       if (--frames) focusFrame = view.requestAnimationFrame(focus);
-      else if (active && visible && list) {
+      else if (active && visible) {
         focusFrame = 0;
-        list.focus({ preventScroll: true });
-        focusAttempted = true;
+        const overlay = more && Object.hasOwn(more, 'overlay')
+          ? popup?.firstElementChild : list;
+        if (overlay instanceof HTMLElement) {
+          overlay.focus({ preventScroll: true });
+          focusAttempted = true;
+        }
       }
     }
     focusFrame = view.requestAnimationFrame(focus);
   }
 
-  function supports(kind: TabsMoreTrigger) {
-    const trigger = more?.trigger ?? 'hover';
-    return typeof trigger === 'string' ? trigger === kind : trigger.includes(kind);
+  function supports(kind: TabsMoreTrigger | 'touch', show: boolean) {
+    return (show ? actions.show : actions.hide).has(kind);
   }
 
   function requestVisible(next: boolean) {
     cancelPending();
     if (!active || next === visible) return;
+    triggerOpen = next;
     if (more && 'onVisibleChange' in more) more.onVisibleChange?.(next);
     else open = next;
   }
 
   function hover(next: boolean, event: PointerEvent) {
-    if (event.pointerType === 'touch' || !supports('hover') || !available) return;
+    if (event.pointerType === 'touch' || touched || !supports('hover', next)
+      || !available && !visible) return;
     cancelPending();
     pending = setTimeout(() => {
       pending = undefined;
       if (active) requestVisible(next);
-    }, getTooltipDelay(next ? more?.mouseEnterDelay : more?.mouseLeaveDelay));
+    }, getTooltipDelay(next ? more?.mouseEnterDelay : more?.mouseLeaveDelay,
+      next && more && Object.hasOwn(more, 'mouseEnterDelay') ? 0 : 0.1));
   }
 
   function optionId(key: string) {
@@ -333,7 +450,9 @@
     if (!fromMore && event.target instanceof Element && event.target.closest('[role="option"]')
       && (event.key === 'Enter' || event.key === ' ')) return;
 
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+    if (fromMore && event.key === 'Escape') {
+      open = false;
+    } else if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       const offset = event.key === 'ArrowDown' ? 1 : -1;
       if (fromMore) selectedKey = getTabsMoreNavigationKey(items, selectedKey, offset);
       else focusOption(getTabsNavigationKey(items, menuKey, offset === 1 ? 'next' : 'previous'));
@@ -349,13 +468,18 @@
       if (!fromMore) {
         focusOption(menuKey ?? getTabsNavigationKey(items, undefined, 'first'));
         event.preventDefault();
-      } else if (selectedKey !== null && list) {
-        const option = Array.from(list.querySelectorAll<HTMLButtonElement>('[role="option"]'))
+      } else if (selectedKey !== null) {
+        const option = Array.from(list?.querySelectorAll<HTMLButtonElement>('[role="option"]') ?? [])
           .find(element => element.dataset.tabsOverflowKey === selectedKey);
         // Публичный onTabClick остаётся MouseEvent, как у обычного native tab button.
-        keyboardClick = fromMore;
-        option?.click();
-        keyboardClick = false;
+        if (option) {
+          keyboardClick = true;
+          option.click();
+          keyboardClick = false;
+        } else {
+          const click = getTabsClickEvent(event, button);
+          if (click) onSelect(selectedKey, click);
+        }
       }
     }
   }
@@ -420,41 +544,56 @@
   'ant-tabs-nav-operations',
   !items.length && 'ant-tabs-nav-operations-hidden'
 ]}>
-  <button bind:this={button} type="button" id={`${rootId}-more`} class="ant-tabs-nav-more"
-    class:ant-tabs-dropdown-open={visible} hidden={mobile}
+  <button bind:this={button} type="button" id={`${rootId}-more`} class={[
+      'ant-tabs-nav-more',
+      dropdownVisible && (more?.openClassName ?? 'ant-tabs-dropdown-open')
+    ]} hidden={mobile}
     style={`${tabBarGutter === undefined ? '' : `margin-inline-start:${tabBarGutter}px;`}${items.length ? '' : 'visibility:hidden;order:1'}`}
     aria-haspopup="listbox" aria-controls={popupId} aria-expanded={open}
     aria-label={icon === defaultMoreIcon || icon === null
       || typeof icon === 'boolean' || icon === ''
       ? 'ellipsis' : undefined}
     onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
-    onfocus={() => { if (supports('focus')) requestVisible(true); }}
-    onblur={event => {
-      if (supports('focus') && (!(event.relatedTarget instanceof Node)
-        || !popup?.contains(event.relatedTarget))) requestVisible(false);
-    }} onclick={() => { if (supports('click')) requestVisible(!visible); }}
+    onfocus={() => { if (supports('focus', true)) requestVisible(true); }}
+    onblur={() => { if (supports('focus', false)) requestVisible(false); }} onclick={() => {
+      if (visible ? supports('click', false) || supports('contextMenu', false)
+        : supports('click', true)) requestVisible(!visible);
+      if (supports('click', true) || supports('click', false) || supports('contextMenu', false))
+        touched = false;
+    }} ontouchstart={() => {
+      if (!supports('touch', true) && !supports('touch', false)) return;
+      touched = true;
+      if (supports('touch', !visible)) requestVisible(!visible);
+    }}
     oncontextmenu={event => {
-      if (supports('contextMenu')) {
+      if (supports('contextMenu', true)) {
         event.preventDefault();
-        requestVisible(true);
+        requestVisible(visible && supports('contextMenu', false) ? false : true);
       }
     }} onkeydown={handleKeydown}>
     {@render value(icon)}
   </button>
-  <div bind:this={popup} popover="manual" hidden={!shown || !visible} role="presentation"
-    data-tabs-popup-owner={ownerId ?? rootId}
-    dir={popupDirection} class={[
-      'ant-tabs-dropdown ant-tabs-css-var',
-      themeClassName,
-      `ant-tabs-dropdown-placement-${shown ? actualSide : side}${align === 'left' ? 'Left' : align === 'right' ? 'Right' : ''}`,
-      !ownOverlayClass && (rtl ?? config.direction === 'rtl')
-        && 'ant-tabs-dropdown-rtl',
-      more && Object.hasOwn(more, 'overlayClassName') ? more.overlayClassName : popupClassName
-    ]} style={initialStyle}
-    onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
-    onclick={event => more?.onOverlayClick?.(event)}>
-    {#if rendered && more?.popupRender}
-      {@render more.popupRender(menu, { restTabs: items, onClose: () => open = false })}
-    {:else if rendered}{@render menu()}{/if}
-  </div>
+  {#if !autoDestroy || rendered}
+    <div bind:this={popup} popover="manual" hidden={!shown || !present} role="presentation"
+      inert={!visible} aria-hidden={!visible}
+      data-tabs-popup-owner={ownerId ?? rootId}
+      dir={popupDirection} class={[
+        'ant-tabs-dropdown ant-tabs-css-var',
+        motionState.className,
+        rendered && !present && 'ant-tabs-dropdown-hidden',
+        themeClassName,
+        `ant-tabs-dropdown-placement-${shown ? actualSide : side}${align === 'left' ? 'Left' : align === 'right' ? 'Right' : ''}`,
+        !ownOverlayClass && (rtl ?? config.direction === 'rtl')
+          && 'ant-tabs-dropdown-rtl',
+        more && Object.hasOwn(more, 'overlayClassName') ? more.overlayClassName : popupClassName
+      ]} style={initialStyle}
+      onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
+      onclick={event => more?.onOverlayClick?.(event)}>
+      {#if rendered && more && Object.hasOwn(more, 'overlay')}
+        {@render more.overlay?.()}
+      {:else if rendered && more?.popupRender}
+        {@render more.popupRender(menu, { restTabs: items, onClose: () => open = false })}
+      {:else if rendered}{@render menu()}{/if}
+    </div>
+  {/if}
 </div>

@@ -39,12 +39,29 @@ export interface TabsMoreProps {
   popupRender?: Snippet<[Snippet, TabsMoreRenderInfo]>;
   /** @defaultValue 'hover' */
   trigger?: TabsMoreTrigger | readonly TabsMoreTrigger[];
+  /** Перекрывает действия trigger только для открытия; пустой массив отключает их. */
+  showAction?: readonly TabsMoreTrigger[];
+  /** Перекрывает действия закрытия; contextMenu default — ['click'], focus закрывает при blur кнопки. */
+  hideAction?: readonly TabsMoreTrigger[];
+  /** Собственный класс открытого More; undefined сохраняет ant-tabs-dropdown-open. */
+  openClassName?: string;
+  /** Заменяет стандартное меню и popupRender; содержимое ленивое. */
+  overlay?: Snippet;
+  /** Удаляет popup и его state после окончания leave. @defaultValue false */
+  autoDestroy?: boolean;
+  /** Motion class prefix, у Tabs default — ant-slide-up; пустая строка отключает CSS motion. */
+  transitionName?: string;
+  /** Перекрывает transitionName с префиксом ant-tabs-dropdown-; пустая строка не перекрывает. */
+  animation?: string;
   /** @defaultValue 'bottomLeft' */
   placement?: TabsMorePlacement;
   /** Задержки в секундах, как в исходном Dropdown. @defaultValue 0.1 */
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
-  /** Controlled visibility перекрывает внутреннее состояние, включая закрытие через onClose. */
+  /**
+   * Boolean перекрывает внутреннее состояние, включая onClose.
+   * Явное undefined включает отдельное состояние Trigger: keyboard/onClose меняют только open Tabs.
+   */
   visible?: boolean;
   /** Как more в rc-tabs, заменяет внутренний pointer/dismiss callback; для control передавайте visible. */
   onVisibleChange?: (visible: boolean) => void;

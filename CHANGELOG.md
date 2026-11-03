@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tabs More: raw overlay, autoDestroy после leave end, openClassName, исходная
+  slide-анимация и transitionName/animation, раздельные showAction/hideAction и touch.
+  Сохранены отдельные состояния OperationNode/Trigger при visible=undefined,
+  lifecycle при reversal, native inert/SSR и cleanup portal. Добавлены 33 UMD-эталона
+  и unit/SSR/browser-проверки.
 - Tabs: renderTabBar со стандартной навигацией как Snippet, исходными props и
   overrides, per-tab children/attributes и Svelte attachments. Пользовательская
   шапка меняет только навигацию; панели, draft/state/focus и root ref сохраняются.

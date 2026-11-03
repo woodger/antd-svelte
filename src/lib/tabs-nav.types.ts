@@ -42,7 +42,7 @@ export interface TabsTabBarProps {
   editable?: TabsEditableConfig;
   locale?: TabsLocale;
   /** Замена целиком: отсутствие icon возвращает текст More исходного OperationNode. */
-  more?: TabsMoreProps & { transitionName?: string; };
+  more?: TabsMoreProps;
   tabBarGutter?: number;
   /** Native выбор; KeyboardEvent сохраняет публичный MouseEvent contract и cancellation. */
   onTabClick: (key: string, event: MouseEvent | KeyboardEvent) => void;
