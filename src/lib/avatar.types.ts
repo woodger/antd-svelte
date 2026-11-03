@@ -30,6 +30,8 @@ export interface AvatarProps extends Omit<
   gap?: number;
   icon?: Snippet;
   children?: Snippet;
+  /** Локальный component prefix; отсутствие и пустая строка используют ant-avatar. */
+  prefixCls?: string;
   onError?: () => boolean | void;
   /**
    * Click корневого span; keyboard behavior принадлежит владельцу.

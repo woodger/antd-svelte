@@ -20,6 +20,8 @@ export interface AvatarGroupProps {
   items: readonly AvatarGroupItem[];
   size?: AvatarSize;
   shape?: AvatarShape;
+  /** Меняет group/popover classes; префиксы Avatar участников остаются независимыми. */
+  prefixCls?: string;
   max?: AvatarGroupMax;
   id?: string;
   'aria-label'?: string;

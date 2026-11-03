@@ -5945,11 +5945,19 @@ Drawer. Выбор фото/инициалов/ошибочного источн
 использует локальные data URL без внешней сети и persistence.
 
 AvatarProps, AvatarShape, AvatarSize и AvatarConfig экспортируются через index.ts.
-PrefixCls пока не перенесён. Semantic classNames/styles исходный Avatar 6.6.8
-не объявляет. Config/DOM/ref проверяются по
+Локальный prefixCls меняет root/modifier/string classes; отсутствие и пустая строка
+используют ant-avatar. Имена CSS variables, Image и anticon остаются общими.
+Шаблон из 24 исходных правил ограничен текущим prefix и сохраняет шрифты/aliases
+соседних стандартных Avatar. Смена prefix сохраняет root, img, text fit, src Snippet,
+focus и ref; stylesheet живёт вместе с экземпляром и выводится также в SSR head.
+Semantic classNames/styles исходный Avatar 6.6.8 не объявляет. Config/DOM/ref проверяются по
 [UMD-эталонам](./tests/browser/fixtures/ant-design-avatar-api-reference.json),
 [browser](./tests/browser/avatar-api.spec.ts) и
 [SSR](./tests/package/avatar-api.ssr.test.ts); фикстура — `?fixture=avatar-api`.
+Префиксы закреплены в
+[UMD-эталонах](./tests/browser/fixtures/ant-design-avatar-prefix-reference.json),
+[browser](./tests/browser/avatar-prefix.spec.ts) и
+[SSR](./tests/package/avatar-prefix.ssr.test.ts); фикстура — `?fixture=avatar-prefix`.
 
 ## AvatarGroup
 
@@ -5981,6 +5989,11 @@ DOM props и callbacks элемента относятся к его Avatar. Bin
 Class/rootClassName/style относятся к div группы. Bind:nativeElement даёт этот div
 после mount и очищается при unmount. ConfigProvider.avatar class/style относятся
 к аватарам, включая счётчик и открытый overflow; к корню группы они не применяются.
+PrefixCls группы меняет group/RTL/popover classes, но не передаётся участникам и
+счётчику. PrefixCls участника задаётся отдельно, как у исходных дочерних Avatar.
+Обводка группы применяется к аватарам с совпадающим prefix. Native wrap, overlap,
+список с подписями, кнопка +N и focus recovery сохраняются. Смена prefix обновляет
+класс уже открытого popup и сохраняет его содержимое; стили снимаются при unmount.
 
 Item поддерживает props Avatar и необязательный text для строковых инициалов.
 Children Snippet имеет приоритет над text; затем действуют правила Avatar:
@@ -6031,8 +6044,8 @@ aria-describedby описывает корень; id/class/style также от
 не добавляется. Новые и сброшенные участники получают свежие ключи. Фокус
 сохраняется при перестановке и переходит к соседу после удаления. Внешней сети
 и persistence нет. Экспортируются AvatarGroupProps, AvatarGroupItem,
-AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Responsive-размеры по
-breakpoint, произвольные компоненты вместо Avatar и устаревшие maxCount/
+AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
+Avatar и устаревшие maxCount/
 maxStyle/maxPopoverPlacement/maxPopoverTrigger в эту версию не входят.
 
 ## Image
@@ -8374,6 +8387,13 @@ AvatarGroupOverflow.svelte использует существующий Popover
 с полными именами. Восстановление фокуса использует feedback.dom.ts.
 Avatar сохраняет версию src/srcSet при обновлении spread props с теми же
 значениями, Popover игнорирует blur после destroy. Новые зависимости не добавлены.
+[vendor/avatar-prefix.css.js](./src/lib/vendor/avatar-prefix.css.js) содержит 24
+исходных правила Avatar/Group, включая anticon и Popover. CSS-рецепт проверяет
+архив и число правил; runtime меняет component selectors и ограничивает shared
+reset/alias declarations текущим prefix через :is/:where с исходной specificity.
+Marker, имена CSS variables и глобальные Image/anticon selectors сохраняются;
+стили соседних стандартных Avatar не сбрасываются. Native text/icon wrappers,
+group wrap/overflow и resource cleanup остаются в Svelte-компонентах.
 Пять filled-иконок в [status-icons.ts](./src/lib/status-icons.ts) скопированы из
 [Ant Design Icons](https://github.com/ant-design/ant-design-icons/tree/7f2516ac91226d2b41f93b35cb5197c8d94f7189/packages/icons-svg/svg/filled)
 и подключены к существующему Icon.svelte с сохранением outline-иконок.

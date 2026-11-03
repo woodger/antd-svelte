@@ -9,6 +9,9 @@
 
 ### Added
 
+- Avatar/AvatarGroup: локальный prefixCls, исходные root/string/group/popover classes
+  и CSS template из 24 правил. Shared reset ограничен своим prefix; сохраняются
+  соседние tokens, text fit, DOM/ref и открытый overflow. Добавлены 37 UMD-эталонов.
 - Avatar: ConfigProvider.avatar class/style, rootClassName, native DOM attrs/events,
   onClick/onclick и bind:nativeElement; AvatarGroup получил rootClassName/div ref.
   Служебные поля items не попадают в DOM. Добавлены 31 UMD-эталон и SSR/browser-проверки.

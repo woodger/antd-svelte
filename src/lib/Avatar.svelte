@@ -7,6 +7,8 @@
   import { getGridMediaQueries, gridBreakpoints, gridResponsiveValue } from './grid.engine';
   import { resolveAvatarSize, normalizeAvatarGap } from './avatar.engine';
   import { connectAvatarText } from './avatar.dom';
+  import { getAvatarPrefixCss } from './avatar-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { AvatarProps } from './avatar.types';
   import type { GridBreakpoint } from './grid.types';
 
@@ -36,6 +38,7 @@
     'aria-hidden': ariaHidden = false,
     class: className = '',
     rootClassName,
+    prefixCls,
     style,
     ...attributes
   }: AvatarProps = $props();
@@ -44,6 +47,8 @@
   const theme = useToken();
   const breakpoint = createBreakpoint();
   let host = $derived(nativeElement);
+  let prefix = $derived(prefixCls || 'ant-avatar');
+  let prefixCss = $derived(getAvatarPrefixCss(prefix));
   let imageSnippet = $derived(typeof src === 'function' ? src : undefined);
   let sourceSrc = $derived(typeof src === 'string' ? src : undefined);
   let sourceSet = $derived(srcSet);
@@ -113,12 +118,14 @@
 </script>
 
 <style>
-  .ant-avatar { flex-shrink: 0; }
-  .ant-avatar-string { display: inline-block; flex: none; transform-origin: center; white-space: nowrap; }
-  .ant-avatar-icon-content { display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; }
+  .ant-avatar-css-var { flex-shrink: 0; }
+  [data-ant-avatar-string] { display: inline-block; flex: none; transform-origin: center; white-space: nowrap; }
+  .ant-avatar-icon-content { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; }
   .ant-avatar-icon-content :global(svg) { width: 1em; height: 1em; }
-  @media (prefers-reduced-motion: reduce) { .ant-avatar, .ant-avatar-string { animation: none; transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .ant-avatar-css-var, [data-ant-avatar-string] { animation: none; transition: none; } }
 </style>
+
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`avatar-prefix:${prefix}`} />{/if}
 
 <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions, a11y_no_noninteractive_element_interactions (Avatar.onClick сохраняет span; keyboard behavior принадлежит владельцу.) -->
 <span {...attributes} bind:this={nativeElement} {id} {title}
@@ -127,16 +134,17 @@
   aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby}
   aria-hidden={hidden || undefined} inert={inert || imageSnippet && ariaHidden || undefined}
   dir={dir ?? config.direction} onclick={onclick ?? onClick} class={[
-    'ant-avatar ant-avatar-css-var',
+    prefix,
+    'ant-avatar-css-var',
     componentTheme.className,
-    `ant-avatar-${shape}`,
-    resolvedSize === 'small' && 'ant-avatar-sm',
-    resolvedSize === 'large' && 'ant-avatar-lg',
-    hasImage && 'ant-avatar-image',
-    icon && 'ant-avatar-icon',
+    `${prefix}-${shape}`,
+    resolvedSize === 'small' && `${prefix}-sm`,
+    resolvedSize === 'large' && `${prefix}-lg`,
+    hasImage && `${prefix}-image`,
+    icon && `${prefix}-icon`,
     config.avatar?.class,
     className,
     rootClassName
   ]} style={rootStyle}>
-  {#if imageSnippet}{@render imageSnippet()}{:else if hasImage}{#key source}{@const request = source}<img src={request.src} srcset={request.srcSet} alt="" aria-hidden="true" {draggable} crossorigin={crossOrigin} {@attach node => watchImage(node, request)} />{/key}{:else if icon}<span class="ant-avatar-icon-content" aria-hidden="true" inert>{@render icon()}</span>{:else}<span class="ant-avatar-string" aria-hidden="true" inert {@attach fitText}>{@render children?.()}</span>{/if}
+  {#if imageSnippet}{@render imageSnippet()}{:else if hasImage}{#key source}{@const request = source}<img src={request.src} srcset={request.srcSet} alt="" aria-hidden="true" {draggable} crossorigin={crossOrigin} {@attach node => watchImage(node, request)} />{/key}{:else if icon}<span class="ant-avatar-icon-content" aria-hidden="true" inert>{@render icon()}</span>{:else}<span class={`${prefix}-string`} data-ant-avatar-string="" aria-hidden="true" inert {@attach fitText}>{@render children?.()}</span>{/if}
 </span>

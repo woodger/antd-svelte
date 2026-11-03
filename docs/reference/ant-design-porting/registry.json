@@ -5999,7 +5999,16 @@
         "tests/browser/fixtures/ant-design-avatar-api-reference.json",
         "tests/browser/avatar-api.spec.ts",
         "tests/browser/avatar-api-metrics.ts",
-        "tests/package/avatar-api.ssr.test.ts"
+        "tests/package/avatar-api.ssr.test.ts",
+        "src/lib/avatar-prefix.engine.ts",
+        "src/lib/avatar-prefix.engine.test.ts",
+        "src/lib/vendor/avatar-prefix.css.js",
+        "src/lib/ThemeScopeStyle.svelte",
+        "tests/browser/fixtures/AvatarPrefixFixtures.svelte",
+        "tests/browser/fixtures/ant-design-avatar-prefix-reference.json",
+        "tests/browser/avatar-prefix.spec.ts",
+        "tests/browser/avatar-prefix-metrics.ts",
+        "tests/package/avatar-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -6089,7 +6098,7 @@
         },
         {
           "id": "advanced-api",
-          "title": "PrefixCls и оставшийся AvatarGroup API",
+          "title": "Оставшийся AvatarGroup API",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -6097,7 +6106,7 @@
             "src/lib/avatar.types.ts",
             "src/lib/ConfigProvider.svelte"
           ],
-          "note": "RootClassName, ConfigProvider.avatar и native DOM/events/ref перенесены отдельным feature. Пока не перенесён локальный prefixCls; AvatarGroup сохраняет согласованный items/Popover API, deprecated max* aliases и полный max.popover/children API ещё требуют переноса. Пассивные Svelte/native contracts и нормализация размеров/лимита сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
+          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref и локальный prefixCls перенесены отдельными features. AvatarGroup сохраняет согласованный items/Popover API; deprecated max* aliases и полный max.popover/children API ещё требуют переноса. Пассивные Svelte/native contracts и нормализация размеров/лимита сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
         },
         {
           "id": "display-theme-tokens",
@@ -6146,6 +6155,33 @@
             "readme.md"
           ],
           "note": "ConfigProvider.avatar class/style наследуются при отсутствии и заменяются явным record; context style перекрывает computed size, local style остаётся последним. Group игнорирует этот config на собственном div, дочерние/counter/hidden Avatar читают его. Перенесены rootClassName, native HTML attrs/events, onClick/onclick priority и span/div bind:nativeElement с cleanup. Local dir/role имеют приоритет; Source click payload, в том числе при componentDisabled, сверяется с 31 UMD-случаем. Обновления сохраняют DOM/ref/focus, состояние src Snippet и ошибки строки src. Key/label/text остаются metadata items; binding ref отдельного элемента не создаётся через items. Прежние пассивные a11y/text-fit/image contracts сохранены; Enter/Space не синтезируют click."
+        },
+        {
+          "id": "source-prefix",
+          "title": "Локальные Avatar/Group prefixes, CSS и popup lifetime",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/avatar-prefix.engine.ts",
+            "src/lib/avatar-prefix.engine.test.ts",
+            "src/lib/vendor/avatar-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/Avatar.svelte",
+            "src/lib/AvatarGroup.svelte",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar.types.ts",
+            "src/lib/avatar-group.types.ts",
+            "tests/browser/fixtures/avatar-api-presets.ts",
+            "tests/browser/fixtures/AvatarApiCase.svelte",
+            "tests/browser/fixtures/AvatarPrefixFixtures.svelte",
+            "tests/browser/fixtures/ant-design-avatar-prefix-reference.json",
+            "tests/browser/avatar-prefix.spec.ts",
+            "tests/browser/avatar-prefix-metrics.ts",
+            "tests/package/avatar-prefix.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Root/modifier/string/group/RTL/popover classes и fallback ant-avatar. Prefix группы не передаётся участникам/счётчику; индивидуальные prefixes и их border rules сохраняют исходное поведение. CSS data module извлекает 24 правила закреплённого архива, включая Image, anticon и Popover; runtime ограничивает shared reset/variables текущим prefix без изменения specificity и global variable names. SSR head, обратимые обновления, cleanup stylesheet, соседние custom tokens, native text fit/focus, image/caller state и открытый overflow описаны 37 UMD-эталонами и browser cases. Native group/items/layout/a11y contracts сохранены; полный оставшийся Group API указан отдельно."
         }
       ]
     },

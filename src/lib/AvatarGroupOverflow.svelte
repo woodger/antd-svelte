@@ -6,11 +6,12 @@
   import type { AvatarGroupItem, AvatarGroupMax } from './avatar-group.types';
   import type { AvatarShape, AvatarSize } from './avatar.types';
 
-  let { items, size, shape, max }: {
+  let { items, size, shape, max, prefix }: {
     items: readonly AvatarGroupItem[];
     size?: AvatarSize;
     shape?: AvatarShape;
     max?: AvatarGroupMax;
+    prefix: string;
   } = $props();
   const config = useConfig();
   let open = $state<boolean | undefined>(false);
@@ -31,6 +32,6 @@
 <li><Avatar {...item} size={item.size ?? size} shape={item.shape ?? shape}
   aria-hidden={typeof item.src === 'function' ? item['aria-hidden'] : true}
   children={item.children ?? (text ? textContent : undefined)} /><span class="ant-avatar-group-name">{label}</span></li>{/each}</ul>{/if}{/snippet}
-<Popover bind:open title={strings.hiddenLabel} content={hiddenItems} trigger={max?.popover?.trigger ?? ['hover', 'click']} placement={max?.popover?.placement ?? 'top'} arrow={max?.popover?.arrow} autoAdjustOverflow={max?.popover?.autoAdjustOverflow} mouseEnterDelay={max?.popover?.mouseEnterDelay} mouseLeaveDelay={max?.popover?.mouseLeaveDelay} aria-label={strings.hiddenLabel} popupClass="ant-avatar-group-popover">
+<Popover bind:open title={strings.hiddenLabel} content={hiddenItems} trigger={max?.popover?.trigger ?? ['hover', 'click']} placement={max?.popover?.placement ?? 'top'} arrow={max?.popover?.arrow} autoAdjustOverflow={max?.popover?.autoAdjustOverflow} mouseEnterDelay={max?.popover?.mouseEnterDelay} mouseLeaveDelay={max?.popover?.mouseLeaveDelay} aria-label={strings.hiddenLabel} popupClass={`${prefix}-group-popover`}>
   <button type="button" class="ant-avatar-group-more" aria-label={`${strings.overflow}: ${items.length}`}><Avatar {size} {shape} style={max?.style} aria-hidden>+{items.length}</Avatar></button>
 </Popover>

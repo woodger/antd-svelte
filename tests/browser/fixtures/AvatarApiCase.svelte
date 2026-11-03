@@ -16,9 +16,11 @@
   let provider = $derived(values.provider);
   let items = $derived<AvatarGroupItem[]>([
     { key: 'alpha', label: 'Alpha', text: 'A', class: 'case-alpha',
-      'data-member': 'alpha', onClick: event => handleClick(event, 'member') },
-    { key: 'beta', label: 'Beta', text: 'B', class: 'case-beta', style: 'color:rgb(1,2,3)' },
-    { key: 'gamma', label: 'Gamma', text: 'G' }
+      prefixCls: values.itemPrefix, 'data-member': 'alpha',
+      onClick: event => handleClick(event, 'member') },
+    { key: 'beta', label: 'Beta', text: 'B', class: 'case-beta',
+      prefixCls: values.itemPrefix, style: 'color:rgb(1,2,3)' },
+    { key: 'gamma', label: 'Gamma', text: 'G', prefixCls: values.itemPrefix }
   ]);
 
   function handleClick(event: MouseEvent, label = 'click') {
@@ -43,7 +45,8 @@
   theme={{
     mode: sample.dark ? 'dark' : 'light',
     compact: sample.compact,
-    token: { motion: false, ...sample.token }
+    token: { motion: false, ...sample.token },
+    components: sample.avatarTokens ? { Avatar: sample.avatarTokens } : undefined
   }}
 >
   <ConfigProvider avatar={values.innerProvider}>
@@ -51,6 +54,7 @@
       {#if mounted}{#if sample.group}
         <AvatarGroup
           {items}
+          prefixCls={values.prefixCls}
           size={values.size}
           shape={values.shape}
           class={values.class}
@@ -61,6 +65,7 @@
         />
       {:else}
         <Avatar
+          prefixCls={values.prefixCls}
           size={values.size}
           shape={values.shape}
           gap={values.gap}

@@ -1,8 +1,10 @@
 import type { AvatarConfig, AvatarProps, ThemeConfig } from 'antd-svelte';
 
 export interface AvatarApiValues extends Pick<
-  AvatarProps, 'size' | 'shape' | 'gap' | 'class' | 'rootClassName' | 'style' | 'title' | 'dir'
+  AvatarProps,
+  'size' | 'shape' | 'gap' | 'class' | 'rootClassName' | 'style' | 'title' | 'dir' | 'prefixCls'
 > {
+  itemPrefix?: string;
   tabindex?: number;
   role?: AvatarProps['role'];
   kind?: 'text' | 'icon' | 'image' | 'snippet';
@@ -17,6 +19,7 @@ export interface AvatarApiCase extends AvatarApiValues {
   componentSize?: 'small' | 'middle' | 'large';
   componentDisabled?: boolean;
   token?: ThemeConfig['token'];
+  avatarTokens?: NonNullable<ThemeConfig['components']>['Avatar'];
   dark?: boolean;
   compact?: boolean;
   cancelError?: boolean;
