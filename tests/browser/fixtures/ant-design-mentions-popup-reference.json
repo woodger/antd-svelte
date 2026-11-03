@@ -1,0 +1,715 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4"
+  },
+  "cases": [
+    {
+      "name": "native-default",
+      "parent": "none",
+      "custom": false,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "native-global",
+      "custom": false,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "native-child",
+      "child": true,
+      "custom": false,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "native-undefined",
+      "local": "undefined",
+      "custom": false,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "native-local",
+      "local": "local",
+      "custom": false,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "native-shadow",
+      "local": "shadow",
+      "custom": false,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "native-global-shadow",
+      "parent": "shadow",
+      "custom": false,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "native-local-no-global",
+      "parent": "none",
+      "local": "local",
+      "custom": false,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "custom-default",
+      "parent": "none",
+      "custom": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      }
+    },
+    {
+      "name": "custom-global",
+      "custom": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      }
+    },
+    {
+      "name": "custom-child",
+      "child": true,
+      "custom": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      }
+    },
+    {
+      "name": "custom-undefined",
+      "local": "undefined",
+      "custom": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      }
+    },
+    {
+      "name": "custom-local",
+      "local": "local",
+      "custom": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "custom-shadow",
+      "local": "shadow",
+      "custom": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      }
+    },
+    {
+      "name": "custom-global-shadow",
+      "parent": "shadow",
+      "custom": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      }
+    },
+    {
+      "name": "custom-local-no-global",
+      "parent": "none",
+      "local": "local",
+      "custom": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "custom-replace",
+      "custom": true,
+      "replace": true,
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": false
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "native-top",
+      "placement": "top",
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "custom-rtl",
+      "custom": true,
+      "rtl": true,
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "native-double-prefix",
+      "prefix": "@@",
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "@@a",
+        "selection": [
+          0,
+          3
+        ],
+        "focused": true
+      }
+    },
+    {
+      "name": "custom-context",
+      "custom": true,
+      "context": true,
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true,
+        "context": {
+          "rootError": true,
+          "fieldError": false,
+          "fieldSmall": false,
+          "fieldCompact": false
+        }
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "reopened": {
+        "count": "0"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "native-context",
+      "context": true,
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "text": "",
+            "parent": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "span",
+            "text": "@",
+            "parent": "measure"
+          }
+        ],
+        "menu": true,
+        "context": {
+          "rootError": true,
+          "fieldError": false,
+          "fieldSmall": false,
+          "fieldCompact": false
+        }
+      },
+      "refresh": {
+        "same": true,
+        "value": "@",
+        "selection": [
+          0,
+          1
+        ],
+        "focused": true
+      }
+    }
+  ]
+}

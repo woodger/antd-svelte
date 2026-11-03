@@ -29,6 +29,8 @@
     ]
   );
   let instance = $state<Mentions>();
+  let nativeRoot = $state<HTMLDivElement>();
+  let editor = $state<HTMLTextAreaElement>();
   let submitted = $state('');
   const form = createForm(
     {
@@ -41,6 +43,8 @@
 <section id="mentions-fixture">
   {#if visible}<Mentions
     bind:this={instance}
+    bind:nativeElement={nativeRoot}
+    bind:textarea={editor}
     aria-label="Mention text"
     name="mentions"
     {value}
@@ -111,6 +115,12 @@
     type="button"
     onclick={() => { visible = !visible; }}
   >Toggle mentions mount</button>
+  <button type="button" onclick={() => editor?.focus()}>Focus bound mentions</button>
+  <output aria-label="Mentions native refs">{JSON.stringify({
+    root: Boolean(nativeRoot),
+    textarea: Boolean(editor),
+    contains: Boolean(nativeRoot && editor && nativeRoot.contains(editor))
+  })}</output>
   <output aria-label="Mentions value">{value}</output><output aria-label="Mentions events">{JSON.stringify(events)}</output><output
     aria-label="Mentions searches"
   >{JSON.stringify(searches)}</output><output

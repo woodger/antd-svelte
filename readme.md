@@ -151,7 +151,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Slider | Число или диапазон, marks/dots, editable/draggableTrack, push/cross, клавиатура, подсказки, темы/RTL, native формы и refs |
 | ColorPicker | Color-модель, RGB/HSB/hex/alpha, palette, single/gradient, presets, semantic config и native popup |
 | Image / ImagePreviewGroup | Native img/fallback/placeholder, preview transforms/focus и групповая навигация по images/items |
-| Mentions | Prefix/split, поиск и вставка у каретки, loading, autoSize и native popup |
+| Mentions | Prefix/split, поиск у каретки, loading, autoSize, popupRender и контейнер |
 | AutoComplete | Свободный текст, options/groups, поиск, keyboard backfill, custom input и controlled popup |
 | Select | Одиночный и множественный выбор строковых/числовых значений; поиск, очистка, disabled options, клавиатура и FormData |
 | Checkbox | Checked/defaultChecked, mixed state, semantic config, callbacks/refs, native формы и участие в группе |
@@ -6073,6 +6073,33 @@ aria-activedescendant заменяют React DropdownMenu на rc-menu. Mirror �
 accessibility tree. Общий popup-механизм сохраняет прежний default gap для остальных
 компонентов; AutoComplete использует исходные 4 px, как SelectTrigger.
 
+Локальный getPopupContainer выбирает HTMLElement или ShadowRoot. Как Ant Design,
+Mentions не наследует ConfigProvider.getPopupContainer. Тип getter не требует
+аргументов; при открытии runtime сначала передаёт undefined, затем span префикса
+внутри ant-mentions-measure. Без getter сохраняется native размещение; на сервере
+getter не вызывается. Стили ShadowRoot размещает потребитель.
+
+PopupRender — Snippet со стандартным menu Snippet. Можно добавить обёртку или
+заменить меню; клавиатура textarea продолжает выбирать из options. Пользовательское
+содержимое сохраняет тему и локализацию, но не наследует status/feedback FormItem
+и SpaceCompact, как исходный ContextIsolator. Фокус в стандартном меню удерживает
+подсказки открытыми; переход в поле вне menu закрывает их по исходному blur.
+Закрытие и смена DOM-контейнера создают popupRender заново; смена getter с тем же
+контейнером сохраняет DOM/state, текст, фокус и выделение textarea.
+
+```svelte
+<script lang="ts">
+  import type { Snippet } from 'svelte';
+  import { Mentions } from 'antd-svelte';
+</script>
+{#snippet popup(menu: Snippet)}
+  <strong>Участники</strong>
+  {@render menu()}
+{/snippet}
+<Mentions options={[{ value: 'alice', label: 'Alice' }]} popupRender={popup}
+  getPopupContainer={() => document.body} aria-label="Комментарий" />
+```
+
 AutoSize принимает boolean/{minRows,maxRows}, измеряет содержимое с теми же
 font/padding/box-sizing, что и textarea. Shadow node, ResizeObserver, frames и
 listeners удаляются при unmount. OnResize получает {width,height}. Это API Mentions;
@@ -6084,8 +6111,10 @@ reset, Form/ConfigProvider disabled, locale/themes/compact density/RTL подд�
 Focus/blur, bind:nativeElement и bind:textarea предоставляют native refs.
 CSS-рецепт mentions извлекает 102 правила. Галерея `/ant-design#mentions`,
 фикстура `?fixture=mentions`; SSR не измеряет DOM и не ставит таймеры.
+22 эталона официального UMD для контейнеров и popupRender —
+[mentions-popup](./tests/browser/mentions-popup.spec.ts), `?fixture=mentions-popup`.
 
-PopupRender/getPopupContainer, semantic classNames/styles, feedback suffix,
+Semantic classNames/styles, feedback suffix,
 полный ConfigProvider.mentions/token API, prefixCls, legacy Option children и
 исходные rc-trigger motion пока отсутствуют.
 
@@ -7248,7 +7277,7 @@ ConfigProvider.getPopupContainer задаёт `(trigger?: HTMLElement) => HTMLEl
 theme.inherit=false не сбрасывает эту настройку. Она подключена к Tabs, ColorPicker,
 Tooltip, Popover, Popconfirm, Dropdown, Slider, Tooltip внутри Typography,
 Select, AutoComplete, TreeSelect и Cascader;
-остальные потребители исходного API ещё требуют переноса. Tour использует
+остальные потребители исходного API ещё требуют переноса. Tour и Mentions используют
 только собственный getPopupContainer, как Ant Design 6.6.8.
 Функция вызывается только в браузере. Без выбранной функции сохраняется прежнее
 native размещение компонента. Для ShadowRoot стили размещает потребитель;

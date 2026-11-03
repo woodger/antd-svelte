@@ -9,6 +9,11 @@
 
 ### Added
 
+- Mentions: локальный getPopupContainer и popupRender со стандартным menu Snippet.
+  Сохранены исходное отсутствие ConfigProvider fallback, prefix trigger и сброс
+  custom state при закрытии/смене контейнера. Поддержаны ShadowRoot, изоляция
+  FormItem/SpaceCompact, native refs, SSR и cleanup; добавлены 22 UMD-эталона
+  и SSR/browser-проверки фокуса, выбора и живых обновлений.
 - Контейнеры TreeSelect и Cascader: локальный getter, ConfigProvider fallback и
   ShadowRoot с исходным trigger, включая custom children Cascader. Native refs,
   поиск, lazy load, темы, клавиатура и SSR сохраняются; зазор до popup исправлен

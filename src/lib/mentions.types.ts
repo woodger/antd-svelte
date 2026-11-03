@@ -64,6 +64,10 @@ export interface MentionsProps extends Omit<
   onPressEnter?: (event: KeyboardEvent) => void;
   onResize?: (size: { width: number; height: number; }) => void;
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
+  /** Локальный контейнер; ConfigProvider.getPopupContainer не используется, как upstream. */
+  getPopupContainer?: () => HTMLElement | ShadowRoot;
+  /** Получает стандартный menu Snippet; содержимое создаётся заново при каждом открытии. */
+  popupRender?: Snippet<[Snippet]>;
   class?: string;
   rootClassName?: string;
   /** @defaultValue '' */

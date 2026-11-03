@@ -51,7 +51,7 @@ export function createPopupContainer(getOptions: () => PopupContainerOptions) {
         origin,
         marker,
         autoLock: false,
-        get restoreOnDestroy() { return rendered; },
+        get restoreOnDestroy() { return rendered && node.isConnected; },
         get preserveVariables() {
           const style = node.ownerDocument.createElement('span').style;
           style.cssText = getOptions().themeStyle ?? '';

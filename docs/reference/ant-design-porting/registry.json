@@ -4289,7 +4289,16 @@
         "src/lib/mentions.engine.test.ts",
         "tests/package/mentions.ssr.test.ts",
         "tests/browser/mentions.spec.ts",
-        "integration:mentions"
+        "integration:mentions",
+        "src/lib/MentionsPopupContent.svelte",
+        "src/lib/popup-container.model.svelte.ts",
+        "tests/browser/fixtures/ant-design-mentions-popup-reference.json",
+        "tests/browser/fixtures/mentions-popup-presets.ts",
+        "tests/browser/fixtures/MentionsPopupBody.svelte",
+        "tests/browser/fixtures/MentionsPopupCase.svelte",
+        "tests/browser/fixtures/MentionsPopupFixtures.svelte",
+        "tests/browser/mentions-popup.spec.ts",
+        "tests/package/mentions-popup.ssr.test.ts"
       ],
       "features": [
         {
@@ -4326,12 +4335,30 @@
           "note": "Loading заменяет выдачу disabled spinner и блокирует Enter; options меняет владелец, запроса внутри нет. AllowClear/disabled/custom icon, readonly/disabled, FormItem/status/native FormData/reset, размеры/variants, locale/themes/compact density/RTL. NativeElement/textarea/focus/blur; 102 CSS-правила с воспроизводимым рецептом. SSR не измеряет DOM и не ставит таймеры."
         },
         {
+          "id": "popup-render-container",
+          "title": "Локальный getPopupContainer и popupRender, context isolation и lifecycle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/MentionsPopupContent.svelte",
+            "src/lib/popup-container.model.svelte.ts",
+            "tests/browser/fixtures/ant-design-mentions-popup-reference.json",
+            "tests/browser/fixtures/mentions-popup-presets.ts",
+            "tests/browser/fixtures/MentionsPopupBody.svelte",
+            "tests/browser/fixtures/MentionsPopupCase.svelte",
+            "tests/browser/fixtures/MentionsPopupFixtures.svelte",
+            "tests/browser/mentions-popup.spec.ts",
+            "tests/package/mentions-popup.ssr.test.ts"
+          ],
+          "note": "22 эталона официального UMD закрепляют local-only getter без ConfigProvider fallback, первый undefined и последующий span префикса, HTMLElement/ShadowRoot. PopupRender получает стандартный menu Snippet, изолирует FormItem/SpaceCompact и сохраняет theme/locale. Закрытие и смена DOM-контейнера пересоздают custom content; новый callback с прежним контейнером сохраняет popup/editor DOM, state, focus/selection. Menu focus отменяет blur, footer вне menu закрывает подсказки; обработчики работают внутри ShadowRoot. SSR не вызывает getter. Native default inline shell и listbox/option сохраняются; выбор/клавиатура, FormData, loading/empty, native refs и cleanup покрыты отдельными browser/SSR-сценариями."
+        },
+        {
           "id": "extended-api",
-          "title": "Полный semantic/config API, popupRender/container, legacy Option и motion",
+          "title": "Полный semantic/config API, legacy Option и motion",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет popupRender/getPopupContainer, semantic classNames/styles/feedback suffix, ConfigProvider.mentions/token engine/prefixCls и legacy Mentions.Option children. Native listbox не предоставляет расширенный React Menu/ref API; callbacks получают исходные option data без React-generated key suffix. Rc-trigger motion не переносится этим этапом."
+          "note": "Нет semantic classNames/styles/feedback suffix, ConfigProvider.mentions/token engine/prefixCls и legacy Mentions.Option children. Native listbox не предоставляет расширенный React Menu/ref API; callbacks получают исходные option data без React-generated key suffix. Rc-trigger motion не переносится этим этапом."
         }
       ]
     },
@@ -9495,7 +9522,7 @@
             "tests/browser/choice-container.spec.ts",
             "tests/package/choice-container.ssr.test.ts"
           ],
-          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour намеренно не читает глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Полный Menu popup API, Date/Time/RangePicker, Mentions, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
+          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour и Mentions намеренно не читают глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Полный Menu popup API, Date/Time/RangePicker, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
         }
       ]
     },

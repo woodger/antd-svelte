@@ -12,6 +12,8 @@
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { connectPopup } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
+  import MentionsPopupContent from './MentionsPopupContent.svelte';
   import Icon from './Icon.svelte';
 
   let {
@@ -41,6 +43,8 @@
     onPressEnter,
     onResize,
     onPopupScroll,
+    getPopupContainer,
+    popupRender,
     class: className = '',
     rootClassName = '',
     popupClassName = '',
@@ -84,9 +88,33 @@
   let focused = $state(false);
   let shown = $state(false);
   let mounted = $state(false);
+  let root = $state<HTMLDivElement>();
+  let editor = $state<HTMLTextAreaElement>();
   let mirror = $state<HTMLDivElement>();
+  let prefixElement = $state<HTMLSpanElement>();
   let anchor = $state<HTMLSpanElement>();
   let popup = $state<HTMLDivElement>();
+  let popupContainer = $state<HTMLElement | ShadowRoot>();
+  let containerOpen = false;
+  function resolvePopupContainer(trigger?: HTMLElement) {
+    const getter: (trigger?: HTMLElement) => HTMLElement | ShadowRoot = getPopupContainer!;
+    const target = getter(trigger);
+    popupContainer = target;
+
+    return target;
+  }
+  $effect.pre(() => {
+    const open = visible;
+    // KeywordTrigger создаётся открытым: первый вызов предшествует появлению prefix ref.
+    if (!getPopupContainer) popupContainer = undefined;
+    else if (open && !containerOpen) resolvePopupContainer(undefined);
+    containerOpen = open;
+  });
+  const portal = createPopupContainer(() => ({
+    open: visible,
+    reference: prefixElement,
+    getPopupContainer: visible && getPopupContainer ? resolvePopupContainer : undefined
+  }));
   let measure: ReturnType<typeof connectMentionsMeasure> | undefined;
   let blurTimer: ReturnType<typeof setTimeout> | undefined;
   let previousValue = untrack(() => value);
@@ -95,6 +123,15 @@
     alive = false;
     if (blurTimer !== undefined)
       clearTimeout(blurTimer);
+  });
+
+  $effect(() => {
+    nativeElement = root;
+    return () => { nativeElement = undefined; };
+  });
+  $effect(() => {
+    textarea = editor;
+    return () => { textarea = undefined; };
   });
 
   $effect(() => {
@@ -108,8 +145,8 @@
       measuring = false;
   });
   $effect(() => {
-    if (!textarea || !mirror) return;
-    const element = textarea;
+    if (!editor || !mirror) return;
+    const element = editor;
     const target = mirror;
     const resize = onResize;
     const sizing = autoSize;
@@ -137,14 +174,15 @@
       active = enabled(0);
   });
   $effect(() => {
-    if (!visible || !popup || !anchor || !nativeElement) return;
+    if (!visible || !popup || !anchor || !root) return;
     return connectPopup(popup, anchor, {
-      trigger: nativeElement,
+      trigger: root,
       placement,
       align: config.direction === 'rtl' ? 'right' : 'left',
       gap: 4,
       autoAdjustOverflow: true,
       maxWidth: '100vw',
+      preserveFocus: !popupRender,
       onPlacement: () => { },
       onVisibilityChange: next => {
         shown = next;
@@ -184,14 +222,14 @@
     });
   }
   async function choose(option: MentionsOption) {
-    if (blocked || readonly || loading || option.disabled || !textarea) return;
+    if (blocked || readonly || loading || option.disabled || !editor) return;
     const result = replaceMention(
       text,
       {
         location,
         prefix: token,
         target: option.value,
-        selectionStart: textarea.selectionStart,
+        selectionStart: editor.selectionStart,
         split
       }
     );
@@ -202,9 +240,9 @@
     location = 0;
     onSelect?.({ ...option }, selectedPrefix);
     await tick();
-    if (alive && textarea?.isConnected) {
-      textarea.focus({ preventScroll: true });
-      textarea.setSelectionRange(result.selection, result.selection);
+    if (alive && editor?.isConnected) {
+      editor.focus({ preventScroll: true });
+      editor.setSelectionRange(result.selection, result.selection);
     }
   }
   function handleKeydown(
@@ -293,18 +331,32 @@
       onBlur?.(event);
     }, 0);
   }
+  function handleMenuFocus() {
+    if (blurTimer !== undefined) clearTimeout(blurTimer);
+    focused = true;
+  }
+  function connectMenuFocus(node: HTMLDivElement) {
+    // Переходы внутри одного ShadowRoot не доходят до delegated listeners документа.
+    node.addEventListener('focusin', handleMenuFocus);
+    node.addEventListener('focusout', handleBlur);
+
+    return () => {
+      node.removeEventListener('focusin', handleMenuFocus);
+      node.removeEventListener('focusout', handleBlur);
+    };
+  }
   function clear() {
     if (blocked || readonly || typeof allowClear === 'object' && allowClear.disabled) return;
     change('');
     measuring = false;
-    textarea?.focus();
+    editor?.focus();
     onClear?.();
   }
   export function focus(options?: FocusOptions) {
-    textarea?.focus(options);
+    editor?.focus(options);
   }
   export function blur() {
-    textarea?.blur();
+    editor?.blur();
   }
 </script>
 
@@ -319,7 +371,35 @@
   .ant-mentions-clear:focus-visible { outline: 2px solid var(--ant-color-primary); }
 </style>
 
-<div bind:this={nativeElement} {style} dir={config.direction}
+{#snippet menu()}
+  <div id={`${controlId}-list`} role="listbox" class="ant-mentions-dropdown-menu"
+    aria-label={attributes['aria-label'] ?? config.locale.searchText} onscroll={onPopupScroll}
+    aria-busy={loading || undefined} {@attach connectMenuFocus}>
+    {#each filtered as option, index (option.key ?? option.value)}
+      <button type="button" role="option" tabindex="-1" id={`${controlId}-option-${index}`}
+        disabled={option.disabled} aria-selected={active === index}
+        aria-disabled={option.disabled || undefined} class={[
+          'ant-mentions-dropdown-menu-item',
+          active === index && 'ant-mentions-dropdown-menu-item-active',
+          option.disabled && 'ant-mentions-dropdown-menu-item-disabled',
+          'class' in option && option.class
+        ]} style={'style' in option ? option.style : undefined} onpointermove={() => {
+          if (!option.disabled) active = index;
+        }} onclick={() => void choose(option)}>
+        {#if loading}<Icon name="loading" />
+        {:else if 'label' in option && typeof option.label === 'function'}{@render option.label()}
+        {:else}{'label' in option ? option.label ?? option.value : option.value}{/if}
+      </button>
+    {:else}
+      <div class="ant-mentions-dropdown-menu-item ant-mentions-dropdown-menu-item-disabled">
+        {#if typeof notFoundContent === 'function'}{@render notFoundContent()}
+        {:else}{notFoundContent === undefined ? config.locale.emptyText : notFoundContent ?? ''}{/if}
+      </div>
+    {/each}
+  </div>
+{/snippet}
+
+<div bind:this={root} {style} dir={config.direction}
   class={[
       'ant-mentions ant-mentions-css-var',
       `ant-mentions-${variant}`,
@@ -332,7 +412,7 @@
       className,
       rootClassName
     ]}>
-  <textarea {...attributes} bind:this={textarea} id={controlId} name={name ?? field?.name} rows={attributes.rows ?? 1}
+  <textarea {...attributes} bind:this={editor} id={controlId} name={name ?? field?.name} rows={attributes.rows ?? 1}
     class={[
         'ant-mentions-textarea',
         config.direction === 'rtl' && 'ant-mentions-textarea-rtl'
@@ -351,32 +431,20 @@
         )
         || undefined}
     oninput={handleInput} onkeydown={handleKeydown} onkeyup={handleKeyup} onfocus={handleFocus} onblur={handleBlur}></textarea>
-  <div bind:this={mirror} class="ant-mentions-measure" aria-hidden="true">{text.slice(0, location) + token}<span bind:this={anchor} class="caret-anchor"></span>{text.slice(location + token.length)}</div>
+  <div bind:this={mirror} class="ant-mentions-measure" aria-hidden="true">{text.slice(0, location)}{#if visible}<span bind:this={prefixElement}>{token}</span>{:else}{token}{/if}<span bind:this={anchor} class="caret-anchor"></span>{text.slice(location + token.length)}</div>
   {#if allowClear && text && !blocked && !readonly}<button type="button" class="ant-mentions-clear" aria-label={config.locale.clearText}
     disabled={typeof allowClear === 'object' && allowClear.disabled} onpointerdown={event => event.preventDefault()} onclick={clear}>
     {#if typeof allowClear === 'object' && allowClear.clearIcon}{@render allowClear.clearIcon()}{:else}<Icon name="close" />{/if}
   </button>{/if}
-  {#if mounted}<div bind:this={popup} popover="manual" hidden={!visible || !shown} class={['popup ant-mentions-dropdown ant-mentions-css-var', popupClassName]} dir={config.direction}>
-    <div id={`${controlId}-list`} role="listbox" class="ant-mentions-dropdown-menu" aria-label={attributes['aria-label'] ?? config.locale.searchText} onscroll={onPopupScroll} aria-busy={loading || undefined}>
-      {#each filtered as option, index (option.key ?? option.value)}
-        <button type="button" role="option" tabindex="-1" id={`${controlId}-option-${index}`} disabled={option.disabled} aria-selected={active === index}
-          aria-disabled={option.disabled || undefined} class={[
-              'ant-mentions-dropdown-menu-item',
-              active === index && 'ant-mentions-dropdown-menu-item-active',
-              option.disabled && 'ant-mentions-dropdown-menu-item-disabled',
-              'class' in option && option.class
-            ]}
-          style={'style' in option ? option.style : undefined} onpointermove={() => {
-              if (!option.disabled)
-                active = index;
-            }} onclick={() => void choose(option)}>
-          {#if loading}<Icon name="loading" />{:else if 'label' in option && typeof option.label === 'function'}{@render option.label()}{:else}{'label' in option
-              ? option.label ?? option.value
-              : option.value}{/if}
-        </button>
-      {:else}<div class="ant-mentions-dropdown-menu-item ant-mentions-dropdown-menu-item-disabled">{#if typeof notFoundContent === 'function'}{@render notFoundContent()}{:else}{notFoundContent === undefined
-          ? config.locale.emptyText
-          : notFoundContent ?? ''}{/if}</div>{/each}
-    </div>
-  </div>{/if}
+  {#key popupContainer}
+    {#if mounted}
+      <div bind:this={popup} popover="manual" hidden={!visible || !shown}
+        class={['popup ant-mentions-dropdown ant-mentions-css-var', popupClassName]}
+        dir={config.direction} {@attach portal}>
+        {#if popupRender}
+          {#if visible}<MentionsPopupContent {popupRender} {menu} />{/if}
+        {:else}{@render menu()}{/if}
+      </div>
+    {/if}
+  {/key}
 </div>

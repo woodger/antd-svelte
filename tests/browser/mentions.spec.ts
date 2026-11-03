@@ -260,17 +260,35 @@ test(
 );
 
 test(
-  'Mentions public focus and unmount release popup state and deferred blur callbacks',
+  'Mentions public refs survive updates and unmount releases popup state and deferred blur',
   async ({ page }) => {
+    const refs = page.getByLabel('Mentions native refs', { exact: true });
+    await expect(refs).toHaveText('{"root":true,"textarea":true,"contains":true}');
     await page.getByRole('button', { name: 'Focus mentions', exact: true }).click();
 
     await expect(input(page)).toBeFocused();
 
     await input(page).pressSequentially('@a');
+    const editor = await input(page).elementHandle();
+    await page.getByLabel('Loading mentions', { exact: true }).evaluate(node => {
+      const checkbox = node as HTMLInputElement;
+      checkbox.checked = true;
+      checkbox.dispatchEvent(new Event('change', { bubbles: true }));
+    });
+
+    await expect(refs).toHaveText('{"root":true,"textarea":true,"contains":true}');
+    expect(await input(page).evaluate((node, old) => node === old, editor)).toBe(true);
     await page.getByRole('button', { name: 'Toggle mentions mount', exact: true }).click();
 
     await expect(input(page)).toHaveCount(0);
     await expect(page.locator('[popover]:popover-open')).toHaveCount(0);
+    await expect(refs).toHaveText('{"root":false,"textarea":false,"contains":false}');
+
+    await page.getByRole('button', { name: 'Toggle mentions mount', exact: true }).click();
+    await page.getByRole('button', { name: 'Focus bound mentions', exact: true }).click();
+
+    await expect(refs).toHaveText('{"root":true,"textarea":true,"contains":true}');
+    await expect(input(page)).toBeFocused();
   }
 );
 
