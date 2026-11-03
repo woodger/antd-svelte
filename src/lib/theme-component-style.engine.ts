@@ -5,7 +5,8 @@ import {
   prepareRadioTokens,
   prepareSwitchTokens
 } from './theme-control-tokens.engine';
-import { prepareAvatarTokens, prepareBadgeTokens } from './theme-display-tokens.engine';
+import { prepareAvatarTokens, prepareBadgeTokens, prepareTagTokens }
+  from './theme-display-tokens.engine';
 import { prepareSelectTokens } from './theme-select-tokens.engine';
 import { prepareTreeSelectTokens } from './theme-tree-tokens.engine';
 import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
@@ -24,7 +25,7 @@ import type { GlobalToken } from './theme-component-token.types';
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
-  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs';
+  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag';
 
 const factories = {
   Tabs: prepareTabsTokens,
@@ -37,6 +38,7 @@ const factories = {
   Switch: prepareSwitchTokens,
   Avatar: prepareAvatarTokens,
   Badge: prepareBadgeTokens,
+  Tag: prepareTagTokens,
   Tooltip: prepareTooltipTokens,
   Popover: preparePopoverTokens,
   Popconfirm: preparePopconfirmTokens,
@@ -112,6 +114,7 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Switch: [],
   Avatar: [],
   Badge: [],
+  Tag: [],
   Tooltip: [],
   Popover: [],
   Popconfirm: [],

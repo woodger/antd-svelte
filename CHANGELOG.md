@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tag styling: CSS colors с исходной HSL/alpha арифметикой, inverse/bordered
+  aliases, semantic classes/styles и ConfigProvider.tag. Добавлены Tag tokens
+  и исходный reactive style diff; CheckableTag наследует context class/style.
+  Прежние snippets, native close/focus и controlled callbacks сохранены.
 - CheckableTag: исходные click/keyboard callbacks, отмена и repeat Space,
   native aliases, DOM attrs и bind:nativeElement. Сохранены нативная кнопка,
   controlled checked, Enter и восстановление фокуса; добавлены 12 UMD-сценариев

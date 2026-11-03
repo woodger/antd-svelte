@@ -1,4 +1,16 @@
 import type { AliasToken } from './theme-token.types';
+import { AggregationColor } from './color';
+import { FastColor } from './fast-color.engine';
+import { isBrightColor } from './color-picker.engine';
+
+export function prepareTagTokens(token: AliasToken) {
+  return {
+    defaultBg: new FastColor(token.colorFillTertiary)
+      .onBackground(token.colorBgContainer).toHexString(),
+    defaultColor: token.colorText,
+    solidTextColor: isBrightColor(new AggregationColor(token.colorBgSolid), '#fff') ? '#000' : '#fff'
+  };
+}
 
 export function prepareAvatarTokens(token: AliasToken) {
   return {

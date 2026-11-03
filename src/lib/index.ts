@@ -538,6 +538,9 @@ export type {
   TagPresetColor,
   TagStatusColor,
   TagVariant,
+  TagSlots,
+  TagSemantic,
+  TagConfig,
   CheckableTagProps
 } from './tag.types';
 export type {

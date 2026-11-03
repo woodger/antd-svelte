@@ -1,5 +1,8 @@
 <script lang="ts">
+  import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectTagStyle } from './tag-style.dom';
   import { connectFeedbackFocus } from './feedback.dom';
   import type { CheckableTagProps } from './tag.types';
 
@@ -24,7 +27,19 @@
     ...attributes
   }: CheckableTagProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Tag');
   let blocked = $derived(disabled ?? config.componentDisabled);
+  let rootStyle = $derived([
+    componentTheme.style,
+    config.tag?.style,
+    style
+  ].filter(Boolean).join(';') || undefined);
+
+  function rootStyles(node: HTMLButtonElement) {
+    const update = connectTagStyle(node);
+    $effect(() => update([componentTheme.style, config.tag?.style, style]));
+  }
+
   $effect(() => {
     const node = nativeElement;
     if (node) return connectFeedbackFocus(node);
@@ -77,12 +92,15 @@
   dir={dir ?? config.direction}
   class={[
     'ant-tag ant-tag-css-var ant-tag-checkable',
+    componentTheme.className,
+    config.tag?.class,
     checked && 'ant-tag-checkable-checked',
     blocked && 'ant-tag-checkable-disabled',
     config.direction === 'rtl' && 'ant-tag-rtl',
     className
   ]}
-  {style}
+  style={untrack(() => rootStyle)}
+  {@attach rootStyles}
   onclick={handleClick}
   onkeydown={handleKeyDown}
 >

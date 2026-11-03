@@ -3,6 +3,7 @@ import type { ButtonConfig } from './button.types';
 import type { TabsConfig } from './tabs.types';
 import type { BadgeRibbonConfig } from './badge-ribbon.types';
 import type { BadgeConfig } from './badge.types';
+import type { TagConfig } from './tag.types';
 import type { RateConfig } from './rate.types';
 import type { WatermarkConfig } from './watermark.types';
 import type { BorderBeamConfig } from './border-beam.types';
@@ -40,6 +41,7 @@ export interface ConfigContext {
   readonly tabs?: TabsConfig;
   readonly ribbon?: BadgeRibbonConfig;
   readonly badge?: BadgeConfig;
+  readonly tag?: TagConfig;
   readonly button?: ButtonConfig;
   readonly rate?: RateConfig;
   readonly watermark?: WatermarkConfig;

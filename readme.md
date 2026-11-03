@@ -181,7 +181,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Empty | Пустое состояние, default/simple SVG, image/description snippets, действия, локаль, темы и восстановление фокуса |
 | Result | Семь статусов, официальные иконки/SVG, заголовок, описание, действия, подробности и восстановление фокуса |
 | Steps | Управляемые этапы, статусы, snippets, нативные кнопки, horizontal/vertical, medium/small, локаль, темы и восстановление фокуса |
-| Tag | Статусные/preset цвета, filled/outlined/solid, snippets, отменяемое закрытие, disabled и восстановление фокуса |
+| Tag | Preset/status/CSS colors, варианты и legacy aliases, semantic styles, ConfigProvider.tag, snippets и отменяемое закрытие |
 | CheckableTag | Управляемый checked/onChange, click/keyboard callbacks, DOM attrs/ref, нативная toggle-кнопка, aria-pressed и disabled |
 | Badge | Числовой счётчик, overflow/showZero/dot, статусы/preset цвета, string/Snippet text, размеры, offset и доступное полное значение |
 | Avatar | Изображение, icon/children fallback, circle/square, именованные/числовые/адаптивные размеры, подгонка текста и доступное имя |
@@ -5366,7 +5366,7 @@ Styles.root/style перекрывают tokens, а titleSpan по-прежне�
 
 ```svelte
 <script lang="ts">
-  import { CheckableTag, Tag } from 'antd-svelte';
+  import { CheckableTag, ConfigProvider, Tag } from 'antd-svelte';
   let checked = $state(false);
 </script>
 
@@ -5376,6 +5376,10 @@ Styles.root/style перекрывают tokens, а titleSpan по-прежне�
 <CheckableTag {checked} onChange={value => { checked = value; }}>
   Показывать готовые задачи
 </CheckableTag>
+
+<ConfigProvider tag={{ variant: 'outlined', style: 'letter-spacing:1px' }}>
+  <Tag color="#2db7f5" styles={{ root: 'font-weight:600' }}>CSS color</Tag>
+</ConfigProvider>
 ```
 
 Tag показывает метку с обязательным children Snippet. Icon и пользовательский
@@ -5389,12 +5393,38 @@ OnClick/onclick получают нативный click корневого span;
 Callback или единственная прямая ссылка включают [Wave](./docs/reference/wave.md).
 Закрытие сохраняет stopPropagation и не вызывает onClick метки.
 
-Variant: filled (по умолчанию), outlined, solid. Color по умолчанию default;
-статусы — success/processing/error/default/warning. Предустановленные цвета:
+Variant: filled (по умолчанию), outlined, solid. Прежний default class сохраняется;
+semantic callbacks получают исходный undefined color, кроме default для solid.
+Статусы — success/processing/error/default/warning. Предустановленные цвета:
 blue/purple/cyan/green/magenta/pink/red/orange/yellow/volcano/geekblue/lime/gold.
 Pink и magenta используют соответствующие токены Ant Design. Статусный цвет не добавляет
 role=status и не запускает анимацию/объявление. TagColor, TagPresetColor,
 TagStatusColor и TagVariant экспортируются через index.ts.
+
+Color также принимает CSS-строки. Solid задаёт background-color; filled и outlined
+вычисляют светлый фон через исходный FastColor/HSL с lightness 0.95, сохраняя alpha.
+Outlined добавляет border-color. CSS variables используются как исходная строка
+foreground/border; FastColor не вычисляет их значение. Disabled убирает рассчитанные
+цвета, но сохраняет явно переданные styles/style.
+
+Приоритет variant: локальный prop, суффикс color="…-inverse", bordered=false,
+ConfigProvider.tag.variant, затем filled. Inverse удаляет первое вхождение -inverse и выбирает
+solid; явный variant сохраняет приоритет. Deprecated bordered=true не навязывает
+outlined и не отменяет context variant.
+
+ConfigProvider.tag наследуется при отсутствии; явный объект, включая {}, заменяет
+родительский record. Сейчас поддерживаются class, style, variant, classNames и styles.
+TagSlots/TagSemantic задают root, icon, content и close строками CSS или classes;
+callback получает props с разрешёнными color, variant и disabled. Root styles:
+рассчитанный CSS-цвет, context styles.root, context style, local styles.root, local style.
+RootClassName дополняет class. Изменения shorthand/longhand повторяют style diff
+upstream; CSS-строки сохраняют нативный приоритет !important.
+
+Icon styles/classes применяются к существующей декоративной wrapper-границе Snippet,
+close — к нативной кнопке. Content semantic slot действует при наличии icon, как
+upstream; прежняя private content-обёртка и описание кнопки закрытия сохраняются.
+CheckableTag читает только context class/style и локальный style имеет приоритет;
+semantic настройки и variant Tag к нему не применяются.
 
 CloseIcon=false/undefined скрывает закрытие; true показывает существующий Icon
 close, Snippet заменяет его изображение внутри той же нативной кнопки.
@@ -5443,6 +5473,8 @@ Type=button и aria-pressed остаются собственными атриб
 обычный цвет текста с токенами и адаптирует фон/границу preset/status меток
 через color-mix и локальные токены палитры. Solid сохраняет исходный цвет;
 обычный solid в тёмной теме использует светлый фон и тёмный текст.
+Эта прежняя адаптация действует в native theme; source token/algorithm theme
+использует исходные Tag aliases, component overrides и палитры алгоритма.
 Текст переносится на узком экране; close control не сжимается. Reduced motion
 отключает встроенные transitions; ресурсы пользовательского Snippet принадлежат
 его владельцу. Новая локаль не нужна: closeText уже входит в ruRU/enUS.
@@ -5454,9 +5486,8 @@ Type=button и aria-pressed остаются собственными атриб
 объединению выбранных статусов; пустой выбор показывает все строки. Ядро Table
 не изменяется. Введённые значения выводятся обычными Svelte bindings.
 
-В первой версии нет пользовательских CSS-цветов, ссылок/target,
-CheckableTagGroup, drag-and-drop, внешней анимации, semantic classNames/styles,
-prefixCls/rootClassName и устаревших bordered/closable/color-inverse aliases.
+Пока нет ссылок/target, CheckableTagGroup, drag-and-drop, внешней анимации,
+prefixCls, closable и context closeIcon/closable.
 
 ## Badge
 

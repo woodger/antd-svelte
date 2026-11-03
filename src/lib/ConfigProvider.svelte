@@ -4,6 +4,7 @@
   import type { TabsConfig } from './tabs.types';
   import type { BadgeRibbonConfig } from './badge-ribbon.types';
   import type { BadgeConfig } from './badge.types';
+  import type { TagConfig } from './tag.types';
   import type { RateConfig } from './rate.types';
   import type { WatermarkConfig } from './watermark.types';
   import type { BorderBeamConfig } from './border-beam.types';
@@ -50,6 +51,7 @@
     tabs?: TabsConfig;
     ribbon?: BadgeRibbonConfig;
     badge?: BadgeConfig;
+    tag?: TagConfig;
     rate?: RateConfig;
     watermark?: WatermarkConfig;
     borderBeam?: BorderBeamConfig;
@@ -110,6 +112,7 @@
     tabs,
     ribbon,
     badge,
+    tag,
     rate,
     watermark,
     borderBeam,
@@ -164,6 +167,9 @@
     },
     get badge() {
       return badge ?? parent.badge;
+    },
+    get tag() {
+      return tag ?? parent.tag;
     },
     get button() {
       return button ?? parent.button;

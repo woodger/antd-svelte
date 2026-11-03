@@ -7988,6 +7988,11 @@
           "name": "@rc-component/motion",
           "range": "^1.3.3",
           "referenceVersion": "1.3.3"
+        },
+        {
+          "name": "@ant-design/fast-color",
+          "range": "^3.0.1",
+          "referenceVersion": "3.0.1"
         }
       ],
       "priority": "unassigned",
@@ -8013,7 +8018,22 @@
         "tests/browser/fixtures/CheckableTagApiFixtures.svelte",
         "tests/browser/fixtures/checkable-tag-api-presets.ts",
         "tests/browser/fixtures/ant-design-checkable-tag-api-reference.json",
-        "tests/package/checkable-tag-api.ssr.test.ts"
+        "tests/package/checkable-tag-api.ssr.test.ts",
+        "src/lib/Tag.svelte",
+        "src/lib/tag-color.engine.ts",
+        "src/lib/tag-color.engine.test.ts",
+        "src/lib/tag-style.dom.ts",
+        "src/lib/inline-style.engine.ts",
+        "src/lib/theme-display-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/ConfigProvider.svelte",
+        "tests/browser/tag-style.spec.ts",
+        "tests/browser/tag-style-metrics.ts",
+        "tests/browser/fixtures/TagStyleCase.svelte",
+        "tests/browser/fixtures/TagStyleFixtures.svelte",
+        "tests/browser/fixtures/tag-style-presets.ts",
+        "tests/browser/fixtures/ant-design-tag-style-reference.json",
+        "tests/package/tag-style.ssr.test.ts"
       ],
       "features": [
         {
@@ -8060,6 +8080,43 @@
             "tests/package/checkable-tag-api.ssr.test.ts"
           ],
           "note": "OnChange перед onClick, onKeyDown до Space, отмена/repeat и callback после синхронного unmount сверены с 12 сценариями официальной сборки. Lowercase aliases имеют приоритет; HTMLAttributes и bind:nativeElement относятся к прежней native toggle-кнопке. Controlled checked, Enter, aria-pressed, disabled, focus recovery и guard уже отменённого click сохранены. PrefixCls и ConfigProvider.tag этим этапом не перенесены; общий аудит Tag остаётся unreviewed."
+        },
+        {
+          "id": "source-styling",
+          "title": "CSS colors, variants, semantic styles и Tag component config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tag.svelte",
+            "src/lib/CheckableTag.svelte",
+            "src/lib/tag.types.ts",
+            "src/lib/tag-color.engine.ts",
+            "src/lib/tag-color.engine.test.ts",
+            "src/lib/tag-style.dom.ts",
+            "src/lib/inline-style.engine.ts",
+            "src/lib/theme-display-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/tag-style.spec.ts",
+            "tests/browser/tag-style-metrics.ts",
+            "tests/browser/fixtures/TagStyleCase.svelte",
+            "tests/browser/fixtures/TagStyleFixtures.svelte",
+            "tests/browser/fixtures/tag-style-presets.ts",
+            "tests/browser/fixtures/ant-design-tag-style-reference.json",
+            "tests/package/tag-style.ssr.test.ts"
+          ],
+          "note": "Перенесены useColor (HSL/alpha, CSS variables, inverse и bordered aliases), приоритет variant и root/icon/content/close semantic objects/functions. ConfigProvider.tag поддерживает class/style/variant/classNames/styles, наследование и замену record; CheckableTag читает только class/style. Source theme использует исходные Tag tokens, алгоритм и component overrides; native dark adaptation сохраняется отдельно. Reactive CSS diff сохраняет shorthand/longhand и нативный !important. 62 UMD-эталона и семь обратимых обновлений описывают проверяемый scope, без утверждения о полном API Tag."
+        },
+        {
+          "id": "remaining-api",
+          "title": "Оставшийся API Tag: links, closable, prefixes и CheckableTagGroup",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/tag.types.ts"
+          ],
+          "note": "Пока не перенесены href/target, closable и context closeIcon/closable, локальный prefixCls и Tag.CheckableTagGroup. Прежние native button/aria-pressed, close hit target/focus recovery, content wrapping и декоративные Snippet wrappers сохраняются; эти границы не означают идентичный React DOM."
         }
       ]
     },

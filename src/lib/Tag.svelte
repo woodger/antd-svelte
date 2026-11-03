@@ -1,16 +1,18 @@
 <script lang="ts">
-  import { onDestroy } from 'svelte';
+  import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { getTagColor } from './tag-color.engine';
+  import { connectTagStyle } from './tag-style.dom';
   import { useWave } from './wave.svelte';
   import { connectWaveLink } from './wave.dom';
   import { connectFeedbackFocus } from './feedback.dom';
   import Icon from './Icon.svelte';
-  import type { TagProps } from './tag.types';
+  import type { TagProps, TagSemantic } from './tag.types';
 
+  let props: TagProps = $props();
   let {
     children,
-    color = 'default',
-    variant = 'filled',
     icon,
     closeIcon = false,
     closeLabel,
@@ -23,9 +25,13 @@
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     class: className = '',
-    style
-  }: TagProps = $props();
+    style,
+    rootClassName,
+    classNames,
+    styles
+  } = $derived(props);
   const config = useConfig();
+  const componentTheme = useComponentTheme('Tag');
   const wave = useWave('Tag', () => blocked);
   const generatedId = $props.id();
   let host = $state<HTMLSpanElement>();
@@ -34,7 +40,62 @@
   let active = true;
   let closing = false;
   let blocked = $derived(disabled ?? config.componentDisabled);
+  let color = $derived(getTagColor(props, config.tag?.variant));
+  let info = $derived({ props: {
+    ...props,
+    color: color.color,
+    variant: color.variant,
+    disabled: blocked
+  } });
+  const resolve = (value: TagSemantic | undefined) =>
+    (typeof value === 'function' ? value(info) : value) ?? {};
+  let contextClasses = $derived(resolve(config.tag?.classNames));
+  let localClasses = $derived(resolve(classNames));
+  let contextStyles = $derived(resolve(config.tag?.styles));
+  let localStyles = $derived(resolve(styles));
+  let rootStyle = $derived([
+    componentTheme.style,
+    !blocked && color.style.map(([name, value]) => `${name}:${value}`).join(';'),
+    contextStyles.root,
+    config.tag?.style,
+    localStyles.root,
+    style
+  ].filter(Boolean).join(';') || undefined);
+  let iconStyle = $derived([contextStyles.icon, localStyles.icon].filter(Boolean).join(';') || undefined);
+  let contentStyle = $derived(
+    [contextStyles.content, localStyles.content].filter(Boolean).join(';') || undefined
+  );
+  let closeStyle = $derived(
+    [contextStyles.close, localStyles.close].filter(Boolean).join(';') || undefined
+  );
   let contentId = $derived(`ant-tag-content-${generatedId}`);
+
+  function rootStyles(node: HTMLSpanElement) {
+    const update = connectTagStyle(node);
+    $effect(() => update([
+      componentTheme.style,
+      blocked ? undefined : color.style,
+      contextStyles.root,
+      config.tag?.style,
+      localStyles.root,
+      style
+    ]));
+  }
+
+  function iconStyles(node: HTMLSpanElement) {
+    const update = connectTagStyle(node);
+    $effect(() => update([contextStyles.icon, localStyles.icon]));
+  }
+
+  function contentStyles(node: HTMLSpanElement) {
+    const update = connectTagStyle(node);
+    $effect(() => update(icon ? [contextStyles.content, localStyles.content] : []));
+  }
+
+  function closeStyles(node: HTMLButtonElement) {
+    const update = connectTagStyle(node);
+    $effect(() => update([contextStyles.close, localStyles.close]));
+  }
 
   onDestroy(() => {
     active = false;
@@ -95,7 +156,8 @@
   .ant-tag-content { min-width: 0; overflow-wrap: anywhere; }
   .ant-tag-icon { display: inline-flex; flex: none; align-items: center; }
   .ant-tag-icon :global(svg) { max-width: 1em; max-height: 1em; }
-  .ant-tag-close-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; min-width: 20px; min-height: 20px; border: 0; padding: 0; background: transparent; font: inherit; }
+  /* Нативная кнопка требует явного letter-spacing, который source span наследует. */
+  .ant-tag-close-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; min-width: 20px; min-height: 20px; border: 0; padding: 0; background: transparent; font: inherit; letter-spacing: inherit; }
   .ant-tag-close-icon:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -2px; border-radius: var(--ant-border-radius-sm); }
   .ant-tag-close-icon:disabled { cursor: not-allowed; }
   .ant-tag-dark .ant-tag-close-icon { color: inherit; }
@@ -104,18 +166,57 @@
 
 {#if !closed}
   <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions, a11y_no_noninteractive_element_interactions (Source Tag.onClick сохраняет span; клавиатурой управляют native link/close.) -->
-  <span bind:this={host} {id} role={ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} class={[
+  <span
+    bind:this={host}
+    {id}
+    role={ariaLabel || ariaLabelledby ? 'group' : undefined}
+    aria-label={ariaLabel}
+    aria-labelledby={ariaLabelledby}
+    aria-describedby={ariaDescribedby}
+    dir={config.direction}
+    class={[
       'ant-tag ant-tag-css-var',
-      `ant-tag-${color}`,
-      `ant-tag-${variant}`,
+      componentTheme.className,
+      config.tag?.class,
+      contextClasses.root,
+      localClasses.root,
+      color.internal && `ant-tag-${color.color}`,
+      props.color === undefined && !color.internal && 'ant-tag-default',
+      `ant-tag-${color.variant}`,
       blocked && 'ant-tag-disabled',
-      config.theme.mode === 'dark' && 'ant-tag-dark',
+      config.theme.mode === 'dark' && !componentTheme.className && 'ant-tag-dark',
       config.direction === 'rtl' && 'ant-tag-rtl',
-      className
-    ]} {style} {@attach onClick || onclick || waveLink ? wave : undefined} onclick={event => {
+      className,
+      rootClassName
+    ]}
+    style={untrack(() => rootStyle)}
+    {@attach rootStyles}
+    {@attach onClick || onclick || waveLink ? wave : undefined}
+    onclick={event => {
       if (!blocked) (onclick ?? onClick)?.(event);
-    }}>
-    {#if icon}<span class="ant-tag-icon anticon" aria-hidden="true" inert>{@render icon()}</span>{/if}<span class="ant-tag-content" id={contentId}>{@render children()}</span>
-    {#if closeIcon}<button type="button" class="ant-tag-close-icon" disabled={blocked} aria-label={closeLabel ?? config.locale.closeText} aria-describedby={contentId} {@attach connectClose}><span aria-hidden="true" inert>{#if typeof closeIcon === 'function'}{@render closeIcon()}{:else}<Icon name="close" />{/if}</span></button>{/if}
+    }}
+  >
+    {#if icon}<span
+      class={['ant-tag-icon anticon', contextClasses.icon, localClasses.icon]}
+      style={untrack(() => iconStyle)}
+      {@attach iconStyles}
+      aria-hidden="true"
+      inert
+    >{@render icon()}</span>{/if}<span
+      class={['ant-tag-content', icon && contextClasses.content, icon && localClasses.content]}
+      style={untrack(() => icon ? contentStyle : undefined)}
+      {@attach contentStyles}
+      id={contentId}
+    >{@render children()}</span>
+    {#if closeIcon}<button
+      type="button"
+      class={['ant-tag-close-icon', contextClasses.close, localClasses.close]}
+      style={untrack(() => closeStyle)}
+      {@attach closeStyles}
+      disabled={blocked}
+      aria-label={closeLabel ?? config.locale.closeText}
+      aria-describedby={contentId}
+      {@attach connectClose}
+    ><span aria-hidden="true" inert>{#if typeof closeIcon === 'function'}{@render closeIcon()}{:else}<Icon name="close" />{/if}</span></button>{/if}
   </span>
 {/if}

@@ -16,16 +16,47 @@ export type TagPresetColor =
   | 'lime'
   | 'gold';
 export type TagStatusColor = 'success' | 'processing' | 'error' | 'default' | 'warning';
-export type TagColor = TagPresetColor | TagStatusColor;
+export type TagColor = TagPresetColor | TagStatusColor | `${TagPresetColor}-inverse` | (string & {});
 export type TagVariant = 'filled' | 'outlined' | 'solid';
+
+export interface TagSlots {
+  root?: string;
+  /** Декоративная wrapper-граница icon Snippet. */
+  icon?: string;
+  /** Применяется при наличии icon, как исходный content slot. */
+  content?: string;
+  /** Нативная кнопка закрытия с прежней геометрией и focus behavior. */
+  close?: string;
+}
+
+/** Callback получает props с разрешёнными color, variant и disabled; CSS задаётся строками. */
+export type TagSemantic = TagSlots | ((info: { props: TagProps; }) => TagSlots | undefined);
+
+/**
+ * Наследуемый record; явный объект, включая {}, заменяет родительский.
+ * CheckableTag использует только class/style. Root style: context styles.root,
+ * context style, local styles.root, local style; рассчитанный цвет идёт перед ними.
+ */
+export interface TagConfig {
+  class?: string;
+  style?: string;
+  variant?: TagVariant;
+  classNames?: TagSemantic;
+  styles?: TagSemantic;
+}
 
 /** Метка с цветом, icon и отменяемым закрытием. */
 export interface TagProps {
   children: Snippet;
-  /** @defaultValue 'default' */
+  /** Preset, status или CSS-цвет; отсутствие сохраняет прежний default class. */
   color?: TagColor;
-  /** @defaultValue 'filled' */
+  /** Локальный variant, color-inverse, bordered=false, context variant, затем filled. */
   variant?: TagVariant;
+  /** @deprecated Используйте variant="filled"; false имеет приоритет над context variant. */
+  bordered?: boolean;
+  rootClassName?: string;
+  classNames?: TagSemantic;
+  styles?: TagSemantic;
   icon?: Snippet;
   /** @defaultValue false */
   closeIcon?: boolean | Snippet;
