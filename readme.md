@@ -5869,7 +5869,11 @@ small/medium/large равны 24/32/40 px. Явный size переопреде�
 числовой size принимает положительное конечное число, включая дробное.
 Неположительное/неконечное число заменяется размером из контекста. Для числового
 размера шрифт текста равен 18 px, иконки — size/2, как в исходнике.
-Class/style относятся к корню; style имеет приоритет над числовыми размерами.
+Class/rootClassName/style относятся к корню. ConfigProvider.avatar задаёт class/style
+для каждого Avatar; отсутствующий record наследуется, явный объект, включая {},
+заменяет родительский целиком. Context style перекрывает числовые/адаптивные размеры,
+локальный style — context style. AvatarGroup не применяет этот config к своему корню,
+но его видимые, счётчик и скрытые аватары читают общий config.
 Темы и RTL наследуются, native compact сохраняет собственные размеры Avatar.
 
 Size также принимает карту `{ xs, sm, md, lg, xl, xxl, xxxl }` с числовыми значениями:
@@ -5914,8 +5918,16 @@ fallback или unmount observer отключается. На SSR инициал
 icon/children также inert. Без имени или
 с aria-hidden=true весь Avatar декоративный. Для действия оберните Avatar
 нативной кнопкой/ссылкой, задайте ей имя и при необходимости скройте повторяющий
-его Avatar. Остановок Tab, live-region, автоматического фокуса и root onclick
-компонент не добавляет. Title задаёт нативную подсказку.
+его Avatar. Без явно переданных props компонент не добавляет остановок Tab,
+live-region, автоматического фокуса и root click handler. Title задаёт нативную подсказку.
+
+HTMLAttributes, data-/aria-атрибуты и нативные события передаются корневому span.
+OnClick/onclick получают нативный MouseEvent; onclick имеет приоритет. Уже
+отменённый click также передаётся владельцу. Enter/Space не синтезируют click:
+keyboard behavior принадлежит владельцу. Локальные dir/role имеют приоритет над
+контекстом и автоматической ролью; согласованные правила именования сохраняются.
+Bind:nativeElement даёт текущий span, сохраняется при обновлениях config/props/
+содержимого и очищается при unmount. SSR не создаёт ref или browser resources.
 
 Для src Snippet именованный корень имеет role=group и сохраняет доступность
 вложенных изображений и controls. Без имени содержимое использует собственные
@@ -5932,9 +5944,12 @@ Drawer. Выбор фото/инициалов/ошибочного источн
 профиля; сброс восстанавливает участников и не меняет предпросмотр. Пример
 использует локальные data URL без внешней сети и persistence.
 
-AvatarProps, AvatarShape и AvatarSize экспортируются через index.ts.
-PrefixCls/rootClassName, ConfigProvider.avatar и полный DOM/ref API пока не
-перенесены. Semantic classNames/styles исходный Avatar 6.6.8 не объявляет.
+AvatarProps, AvatarShape, AvatarSize и AvatarConfig экспортируются через index.ts.
+PrefixCls пока не перенесён. Semantic classNames/styles исходный Avatar 6.6.8
+не объявляет. Config/DOM/ref проверяются по
+[UMD-эталонам](./tests/browser/fixtures/ant-design-avatar-api-reference.json),
+[browser](./tests/browser/avatar-api.spec.ts) и
+[SSR](./tests/package/avatar-api.ssr.test.ts); фикстура — `?fixture=avatar-api`.
 
 ## AvatarGroup
 
@@ -5959,6 +5974,13 @@ AvatarGroup — отдельный Svelte export для Avatar.Group. Items пр
 Число 0 и строка '0' различаются. Порядок владельца сохраняется, входной массив
 и элементы не изменяются. Внутри видимой части и открытого списка элементы
 сохраняют DOM и состояние Avatar при перестановке по key.
+Key/label/text используются группой и не передаются в DOM аватаров. Остальные
+DOM props и callbacks элемента относятся к его Avatar. Bind:nativeElement
+задаётся на отдельном Avatar; items не создаёт binding для ref каждого элемента.
+
+Class/rootClassName/style относятся к div группы. Bind:nativeElement даёт этот div
+после mount и очищается при unmount. ConfigProvider.avatar class/style относятся
+к аватарам, включая счётчик и открытый overflow; к корню группы они не применяются.
 
 Item поддерживает props Avatar и необязательный text для строковых инициалов.
 Children Snippet имеет приоритет над text; затем действуют правила Avatar:

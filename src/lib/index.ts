@@ -575,7 +575,7 @@ export type {
   BadgeRibbonPlacement,
   BadgeRibbonContent
 } from './badge-ribbon.types';
-export type { AvatarProps, AvatarShape, AvatarSize } from './avatar.types';
+export type { AvatarProps, AvatarShape, AvatarSize, AvatarConfig } from './avatar.types';
 export type {
   AvatarGroupProps,
   AvatarGroupItem,

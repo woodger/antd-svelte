@@ -26,11 +26,11 @@
   @media (prefers-reduced-motion: reduce) { .ant-avatar-group-more { transition: none; animation: none; } }
 </style>
 
-{#snippet hiddenItems()}{#if open}<ul class="ant-avatar-group-list" aria-label={strings.hiddenLabel}>{#each items as item (item.key)}
-{#snippet textContent()}{item.text}{/snippet}
+{#snippet hiddenItems()}{#if open}<ul class="ant-avatar-group-list" aria-label={strings.hiddenLabel}>{#each items as { key, label, text, ...item } (key)}
+{#snippet textContent()}{text}{/snippet}
 <li><Avatar {...item} size={item.size ?? size} shape={item.shape ?? shape}
   aria-hidden={typeof item.src === 'function' ? item['aria-hidden'] : true}
-  children={item.children ?? (item.text ? textContent : undefined)} /><span class="ant-avatar-group-name">{item.label}</span></li>{/each}</ul>{/if}{/snippet}
+  children={item.children ?? (text ? textContent : undefined)} /><span class="ant-avatar-group-name">{label}</span></li>{/each}</ul>{/if}{/snippet}
 <Popover bind:open title={strings.hiddenLabel} content={hiddenItems} trigger={max?.popover?.trigger ?? ['hover', 'click']} placement={max?.popover?.placement ?? 'top'} arrow={max?.popover?.arrow} autoAdjustOverflow={max?.popover?.autoAdjustOverflow} mouseEnterDelay={max?.popover?.mouseEnterDelay} mouseLeaveDelay={max?.popover?.mouseLeaveDelay} aria-label={strings.hiddenLabel} popupClass="ant-avatar-group-popover">
   <button type="button" class="ant-avatar-group-more" aria-label={`${strings.overflow}: ${items.length}`}><Avatar {size} {shape} style={max?.style} aria-hidden>+{items.length}</Avatar></button>
 </Popover>

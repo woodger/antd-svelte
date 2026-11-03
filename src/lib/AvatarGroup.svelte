@@ -18,12 +18,14 @@
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     class: className = '',
-    style
+    rootClassName,
+    style,
+    nativeElement = $bindable()
   }: AvatarGroupProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Avatar');
   let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
-  let host = $state<HTMLDivElement>();
+  let host = $derived(nativeElement);
   let layout = $derived(getAvatarGroupItems(items, max?.count));
   let strings = $derived({ ...ruRU.avatarGroup, ...config.locale.avatarGroup });
   $effect(() => {
@@ -39,16 +41,17 @@
   .ant-avatar-group-overflow { display: inline-flex; flex-shrink: 0; }
 </style>
 
-<div bind:this={host} {id} role="group" aria-label={ariaLabel ?? (ariaLabelledby ? undefined : strings.label)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} class={[
+<div bind:this={nativeElement} {id} role="group" aria-label={ariaLabel ?? (ariaLabelledby ? undefined : strings.label)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} class={[
     'ant-avatar-group ant-avatar-css-var',
     componentTheme.className,
     config.direction === 'rtl' && 'ant-avatar-group-rtl',
-    className
+    className,
+    rootClassName
   ]} style={rootStyle}>
-  {#each layout.visible as item (item.key)}
-    {#snippet textContent()}{item.text}{/snippet}
-    <Avatar {...item} alt={item.alt ?? item.label} size={item.size ?? size}
-      shape={item.shape ?? shape} children={item.children ?? (item.text ? textContent : undefined)} />
+  {#each layout.visible as { key, label, text, ...item } (key)}
+    {#snippet textContent()}{text}{/snippet}
+    <Avatar {...item} alt={item.alt ?? label} size={item.size ?? size}
+      shape={item.shape ?? shape} children={item.children ?? (text ? textContent : undefined)} />
   {/each}
   {#if layout.hidden.length}<span class="ant-avatar-group-overflow"><AvatarGroupOverflow items={layout.hidden} {size} {shape} {max} /></span>{/if}
 </div>

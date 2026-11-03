@@ -2,7 +2,7 @@ import type { AvatarProps, AvatarShape, AvatarSize } from './avatar.types';
 import type { PopoverProps } from './popover.types';
 
 export type AvatarGroupKey = string | number;
-export interface AvatarGroupItem extends AvatarProps {
+export interface AvatarGroupItem extends Omit<AvatarProps, 'nativeElement'> {
   key: AvatarGroupKey;
   label: string;
   text?: string;
@@ -26,5 +26,8 @@ export interface AvatarGroupProps {
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
   class?: string;
+  rootClassName?: string;
   style?: string;
+  /** Bindable div; собственные class/style Avatar config к корню группы не применяются. */
+  nativeElement?: HTMLDivElement;
 }

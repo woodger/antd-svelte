@@ -9,6 +9,9 @@
 
 ### Added
 
+- Avatar: ConfigProvider.avatar class/style, rootClassName, native DOM attrs/events,
+  onClick/onclick и bind:nativeElement; AvatarGroup получил rootClassName/div ref.
+  Служебные поля items не попадают в DOM. Добавлены 31 UMD-эталон и SSR/browser-проверки.
 - Tag/CheckableTag/CheckableTagGroup: локальный prefixCls с исходными classes,
   шаблоном из 90 CSS rules и SSR head. Смена prefix сохраняет DOM/focus и native
   themes; cleanup stylesheet не затрагивает соседей. Добавлены 60 UMD-эталонов.

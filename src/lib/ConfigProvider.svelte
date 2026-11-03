@@ -5,6 +5,7 @@
   import type { BadgeRibbonConfig } from './badge-ribbon.types';
   import type { BadgeConfig } from './badge.types';
   import type { TagConfig } from './tag.types';
+  import type { AvatarConfig } from './avatar.types';
   import type { RateConfig } from './rate.types';
   import type { WatermarkConfig } from './watermark.types';
   import type { BorderBeamConfig } from './border-beam.types';
@@ -52,6 +53,7 @@
     ribbon?: BadgeRibbonConfig;
     badge?: BadgeConfig;
     tag?: TagConfig;
+    avatar?: AvatarConfig;
     rate?: RateConfig;
     watermark?: WatermarkConfig;
     borderBeam?: BorderBeamConfig;
@@ -113,6 +115,7 @@
     ribbon,
     badge,
     tag,
+    avatar,
     rate,
     watermark,
     borderBeam,
@@ -170,6 +173,9 @@
     },
     get tag() {
       return tag ?? parent.tag;
+    },
+    get avatar() {
+      return avatar ?? parent.avatar;
     },
     get button() {
       return button ?? parent.button;
