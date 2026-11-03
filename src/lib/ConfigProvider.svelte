@@ -2,6 +2,7 @@
   import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
   import type { ButtonConfig } from './button.types';
   import type { TabsConfig } from './tabs.types';
+  import type { BadgeRibbonConfig } from './badge-ribbon.types';
   import type { RateConfig } from './rate.types';
   import type { WatermarkConfig } from './watermark.types';
   import type { BorderBeamConfig } from './border-beam.types';
@@ -46,6 +47,7 @@
     theme?: ThemeConfig;
     button?: ButtonConfig;
     tabs?: TabsConfig;
+    ribbon?: BadgeRibbonConfig;
     rate?: RateConfig;
     watermark?: WatermarkConfig;
     borderBeam?: BorderBeamConfig;
@@ -104,6 +106,7 @@
     theme,
     button,
     tabs,
+    ribbon,
     rate,
     watermark,
     borderBeam,
@@ -152,6 +155,9 @@
   const config: ConfigContext = {
     get tabs() {
       return tabs ?? parent.tabs;
+    },
+    get ribbon() {
+      return ribbon ?? parent.ribbon;
     },
     get button() {
       return button ?? parent.button;

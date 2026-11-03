@@ -6122,6 +6122,12 @@
           "local": [
             "Badge"
           ]
+        },
+        {
+          "upstream": "Badge.Ribbon",
+          "local": [
+            "BadgeRibbon"
+          ]
         }
       ],
       "dependencies": [
@@ -6146,7 +6152,21 @@
         "tests/browser/avatar-badge-theme.spec.ts",
         "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-avatar-badge-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/BadgeRibbon.svelte",
+        "src/lib/badge-ribbon.types.ts",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/vendor/badge-ribbon.css",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/BadgeRibbonCase.svelte",
+        "tests/browser/fixtures/BadgeRibbonFixtures.svelte",
+        "tests/browser/fixtures/BadgeRibbonState.svelte",
+        "tests/browser/fixtures/badge-ribbon-presets.ts",
+        "tests/browser/fixtures/ant-design-badge-ribbon-reference.json",
+        "tests/browser/badge-ribbon.spec.ts",
+        "tests/package/badge-ribbon.ssr.test.ts",
+        "src/lib/badge-ribbon.dom.ts"
       ],
       "features": [
         {
@@ -6159,11 +6179,35 @@
         },
         {
           "id": "gap-1",
-          "title": "Ribbon и произвольный count",
+          "title": "Произвольный count",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "note": "Badge.count пока принимает число; строковый/Snippet count остаётся в работе. Ribbon перенесён отдельным Svelte export."
+        },
+        {
+          "id": "ribbon",
+          "title": "Badge.Ribbon: content, colors, placement, semantics, config и ref",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/BadgeRibbon.svelte",
+            "src/lib/badge-ribbon.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/vendor/badge-ribbon.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/BadgeRibbonCase.svelte",
+            "tests/browser/fixtures/BadgeRibbonFixtures.svelte",
+            "tests/browser/fixtures/BadgeRibbonState.svelte",
+            "tests/browser/fixtures/badge-ribbon-presets.ts",
+            "tests/browser/fixtures/ant-design-badge-ribbon-reference.json",
+            "tests/browser/badge-ribbon.spec.ts",
+            "tests/package/badge-ribbon.ssr.test.ts",
+            "src/lib/badge-ribbon.dom.ts"
+          ],
+          "note": "Отдельный BadgeRibbon сохраняет source wrapper/indicator/content/corner, default end и логические start/end в RTL. Все 13 preset colors, CSS colors и независимый цвет corner; class/style относятся к indicator, rootClassName и semantic root — к wrapper. Object/function classNames/styles и ConfigProvider.ribbon объединяются с исходным приоритетом; text/children принимают scalar или Snippet, nativeElement заменяет RibbonRef. CSS properties обновляются по source diff, включая взаимодействие shorthand/longhand при смене color и удалении стилей. Используются Badge component aliases/algorithm и исходные CSS declarations. Изменение props/theme сохраняет DOM, caller state, focus/selection; ref очищается при unmount. Эталоны официального UMD покрывают SSR, геометрию, темы, классы, стиль и lifecycle. Глобальная генерация CSS для произвольного ConfigProvider.prefixCls остаётся вне текущего движка; локальный prefixCls сохраняет исходные DOM-классы."
         },
         {
           "id": "display-theme-tokens",

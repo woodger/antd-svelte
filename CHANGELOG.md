@@ -9,6 +9,10 @@
 
 ### Added
 
+- BadgeRibbon для Badge.Ribbon 6.6.8: scalar/Snippet content, preset/CSS colors,
+  логические placement/RTL, semantic callbacks, ConfigProvider.ribbon и native ref.
+  Используются исходные Badge aliases/algorithm и 27 извлечённых CSS-правил;
+  добавлены UMD-эталоны и SSR/browser-проверки состояния, фокуса и cleanup.
 - Avatar.src принимает Svelte Snippet с исходным приоритетом и собственными
   атрибутами, событиями и состоянием. Поддержана интеграция с Image и preview,
   включая AvatarGroup overflow; перенесено исходное CSS-правило Image.

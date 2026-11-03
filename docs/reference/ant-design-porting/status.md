@@ -6,7 +6,7 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **107**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **108**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
 Проверенный объём v1 покрыт у **49**; требуется аудит у **21**; частично покрыт у **0**.
 
@@ -52,7 +52,7 @@ Candidate означает запись каталога, для которой 
 | [TreeSelect](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tree-select) | data-entry | target | TreeSelect | Согласованный v1 покрыт | FieldNames/simple mode, maxCount/tags/render hooks, semantic/config/ref и legacy extras (missing); Виртуализация, scrollTo и исходные popup/list motion (missing) |
 | [Upload](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/upload) | data-entry | target | Upload, UploadDragger | Согласованный v1 покрыт | Directory/paste, render hooks, semantic slots и полный config/token API (missing); Исходные анимации списка и collapse lifecycle (missing) |
 | [Avatar](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/avatar) | data-display | target | Avatar, AvatarGroup | Согласованный v1 покрыт | PrefixCls, rootClassName и полный config/DOM/ref API (missing) |
-| [Badge](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/badge) | data-display | target | Badge | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Ribbon и произвольный count (missing) |
+| [Badge](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/badge) | data-display | target | Badge, BadgeRibbon | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Произвольный count (missing) |
 | [Calendar](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/calendar) | data-display | target | Calendar, generateCalendar | Согласованный v1 покрыт | PrefixCls, произвольный token engine, все locales и React diagnostics (missing) |
 | [Card](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/card) | data-display | target | Card, CardGrid, CardMeta | Согласованный v1 покрыт | PrefixCls, глобальный variant/component config/tokens и полный API Tabs (missing) |
 | [Carousel](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/carousel) | data-display | target | Carousel | Согласованный v1 покрыт | Граница React children/instance и Svelte snippets/typed refs (partial); Произвольный prefix CSS и полный общий token engine (missing) |

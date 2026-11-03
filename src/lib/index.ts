@@ -279,6 +279,7 @@ export { default as Steps } from './Steps.svelte';
 export { default as Tag } from './Tag.svelte';
 export { default as CheckableTag } from './CheckableTag.svelte';
 export { default as Badge } from './Badge.svelte';
+export { default as BadgeRibbon } from './BadgeRibbon.svelte';
 export { default as Avatar } from './Avatar.svelte';
 export { default as AvatarGroup } from './AvatarGroup.svelte';
 export { default as Divider } from './Divider.svelte';
@@ -548,6 +549,14 @@ export type {
   BadgeContext
 } from './badge.types';
 export type { BadgeLocale } from './types';
+export type {
+  BadgeRibbonProps,
+  BadgeRibbonConfig,
+  BadgeRibbonSlots,
+  BadgeRibbonSemantic,
+  BadgeRibbonPlacement,
+  BadgeRibbonContent
+} from './badge-ribbon.types';
 export type { AvatarProps, AvatarShape, AvatarSize } from './avatar.types';
 export type {
   AvatarGroupProps,
