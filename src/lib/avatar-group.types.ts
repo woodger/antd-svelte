@@ -22,6 +22,23 @@ export interface AvatarGroupProps {
   shape?: AvatarShape;
   /** Меняет group/popover classes; префиксы Avatar участников остаются независимыми. */
   prefixCls?: string;
+  /**
+   * Truthy max.count имеет приоритет; лимит нормализуется так же, как max.count.
+   * @deprecated Используйте max.count.
+   */
+  maxCount?: number;
+  /** Непустой max.style имеет приоритет. @deprecated Используйте max.style. */
+  maxStyle?: string;
+  /**
+   * Max.popover.placement имеет приоритет.
+   * @deprecated Используйте max.popover.placement.
+   */
+  maxPopoverPlacement?: 'top' | 'bottom';
+  /**
+   * Max.popover.trigger имеет приоритет.
+   * @deprecated Используйте max.popover.trigger.
+   */
+  maxPopoverTrigger?: 'hover' | 'focus' | 'click';
   max?: AvatarGroupMax;
   id?: string;
   'aria-label'?: string;

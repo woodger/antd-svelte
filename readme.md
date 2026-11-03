@@ -6008,6 +6008,15 @@ Max.count ограничивает число видимых участнико�
 до целого, но не ниже 1. При лимите не меньше числа уникальных участников
 кнопка отсутствует. Max.style задаёт style Avatar внутри кнопки +N.
 
+Для совместимости с Ant Design доступны deprecated aliases maxCount, maxStyle,
+maxPopoverPlacement (top/bottom) и maxPopoverTrigger (hover/focus/click).
+Соответствующее truthy поле max имеет приоритет: max.count=0 допускает fallback
+к maxCount, пустой max.style — к maxStyle, а пустой массив max.popover.trigger=[]
+подавляет legacy trigger. После выбора count действуют те же правила нормализации
+лимита. Без собственных triggers сохраняется нативный default hover/click.
+Новый код использует max; alias-пропы не попадают в DOM. При обновлении aliases
+кнопка и открытый список сохраняются, пока остаются скрытые участники.
+
 Max.popover принимает trigger, placement, arrow, autoAdjustOverflow и задержки
 mouseEnterDelay/mouseLeaveDelay существующего Popover. По умолчанию используются
 hover/click и top: нативная кнопка открывается кликом, Enter/Space или наведением.
@@ -6045,8 +6054,11 @@ aria-describedby описывает корень; id/class/style также от
 сохраняется при перестановке и переходит к соседу после удаления. Внешней сети
 и persistence нет. Экспортируются AvatarGroupProps, AvatarGroupItem,
 AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
-Avatar и устаревшие maxCount/
-maxStyle/maxPopoverPlacement/maxPopoverTrigger в эту версию не входят.
+Avatar и полный исходный max.popover API пока не перенесены.
+Приоритеты aliases, count/style и trigger/placement проверяются по
+[20 UMD-эталонам](./tests/browser/fixtures/ant-design-avatar-group-max-reference.json),
+[SSR](./tests/package/avatar-group-max.ssr.test.ts) и
+[браузерным сценариям](./tests/browser/avatar-group-max.spec.ts).
 
 ## Image
 

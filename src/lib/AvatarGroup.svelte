@@ -15,6 +15,10 @@
     size,
     shape,
     max,
+    maxCount,
+    maxStyle,
+    maxPopoverPlacement,
+    maxPopoverTrigger,
     id,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
@@ -31,7 +35,18 @@
   let host = $derived(nativeElement);
   let prefix = $derived(prefixCls || 'ant-avatar');
   let prefixCss = $derived(getAvatarPrefixCss(prefix));
-  let layout = $derived(getAvatarGroupItems(items, max?.count));
+  // Upstream использует truthy fallback, в том числе для count=0 и пустого style.
+  let resolvedMax = $derived({
+    ...max,
+    count: max?.count || maxCount,
+    style: max?.style || maxStyle,
+    popover: {
+      ...max?.popover,
+      placement: max?.popover?.placement || maxPopoverPlacement,
+      trigger: max?.popover?.trigger || maxPopoverTrigger
+    }
+  });
+  let layout = $derived(getAvatarGroupItems(items, resolvedMax.count));
   let strings = $derived({ ...ruRU.avatarGroup, ...config.locale.avatarGroup });
   $effect(() => {
     const node = host;
@@ -61,5 +76,5 @@
     <Avatar {...item} alt={item.alt ?? label} size={item.size ?? size}
       shape={item.shape ?? shape} children={item.children ?? (text ? textContent : undefined)} />
   {/each}
-  {#if layout.hidden.length}<span class="ant-avatar-group-overflow"><AvatarGroupOverflow items={layout.hidden} {size} {shape} {max} {prefix} /></span>{/if}
+  {#if layout.hidden.length}<span class="ant-avatar-group-overflow"><AvatarGroupOverflow items={layout.hidden} {size} {shape} max={resolvedMax} {prefix} /></span>{/if}
 </div>

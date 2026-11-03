@@ -1,0 +1,880 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1"
+  },
+  "cases": [
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "legacy-click",
+      "maxStyle": "color:rgb(5,15,25);background:rgb(200,210,220)",
+      "maxPopoverPlacement": "bottom",
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(5, 15, 25)",
+          "background": "rgb(200, 210, 220)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "bottom",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 1,
+      "maxPopoverTrigger": "hover",
+      "probe": "hover",
+      "name": "legacy-hover",
+      "snapshot": {
+        "texts": [
+          "A"
+        ],
+        "counter": {
+          "text": "+3",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 3,
+      "maxPopoverTrigger": "focus",
+      "probe": "focus",
+      "name": "legacy-focus",
+      "maxPopoverPlacement": "bottom",
+      "snapshot": {
+        "texts": [
+          "A",
+          "B",
+          "C"
+        ],
+        "counter": {
+          "text": "+1",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "bottom",
+        "texts": [
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "empty-max",
+      "max": {},
+      "maxStyle": "color:rgb(5,15,25);background:rgb(200,210,220)",
+      "maxPopoverPlacement": "bottom",
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(5, 15, 25)",
+          "background": "rgb(200, 210, 220)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "bottom",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 1,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "modern-count",
+      "max": {
+        "count": 3
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B",
+          "C"
+        ],
+        "counter": {
+          "text": "+1",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "zero-count-fallback",
+      "max": {
+        "count": 0
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "zero-no-alias",
+      "max": {
+        "count": 0
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "counter": null,
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": false,
+        "placement": null,
+        "texts": []
+      }
+    },
+    {
+      "maxCount": 0,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "legacy-zero",
+      "snapshot": {
+        "texts": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "counter": null,
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": false,
+        "placement": null,
+        "texts": []
+      }
+    },
+    {
+      "maxCount": 9,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "legacy-unlimited",
+      "snapshot": {
+        "texts": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "counter": null,
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": false,
+        "placement": null,
+        "texts": []
+      }
+    },
+    {
+      "maxCount": 0,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "modern-count-zero-alias",
+      "max": {
+        "count": 1
+      },
+      "snapshot": {
+        "texts": [
+          "A"
+        ],
+        "counter": {
+          "text": "+3",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "B",
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "modern-style-priority",
+      "maxStyle": "color:rgb(5,15,25);background:rgb(200,210,220)",
+      "max": {
+        "style": "color:rgb(25,35,45);background:rgb(220,230,240)"
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(25, 35, 45)",
+          "background": "rgb(220, 230, 240)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "empty-style-fallback",
+      "maxStyle": "color:rgb(5,15,25);background:rgb(200,210,220)",
+      "max": {
+        "style": ""
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(5, 15, 25)",
+          "background": "rgb(200, 210, 220)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "whitespace-style",
+      "maxStyle": "color:rgb(5,15,25);background:rgb(200,210,220)",
+      "max": {
+        "style": " "
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "modern-placement",
+      "maxPopoverPlacement": "bottom",
+      "max": {
+        "popover": {
+          "placement": "left"
+        }
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "left",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "hover",
+      "probe": "focus",
+      "name": "modern-trigger",
+      "max": {
+        "popover": {
+          "trigger": "focus"
+        }
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "focus",
+      "probe": "click",
+      "name": "modern-trigger-array",
+      "max": {
+        "popover": {
+          "trigger": [
+            "hover",
+            "click"
+          ]
+        }
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "empty-trigger-array",
+      "max": {
+        "popover": {
+          "trigger": []
+        }
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": false,
+        "placement": null,
+        "texts": []
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "reactive-aliases",
+      "maxStyle": "color:rgb(5,15,25);background:rgb(200,210,220)",
+      "maxPopoverPlacement": "top",
+      "patch": {
+        "maxStyle": "color:rgb(25,35,45);background:rgb(220,230,240)",
+        "maxPopoverPlacement": "bottom",
+        "maxPopoverTrigger": "focus"
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(5, 15, 25)",
+          "background": "rgb(200, 210, 220)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "changed": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(25, 35, 45)",
+          "background": "rgb(220, 230, 240)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "restored": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(5, 15, 25)",
+          "background": "rgb(200, 210, 220)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 1,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "reactive-modern-priority",
+      "maxStyle": "color:rgb(5,15,25);background:rgb(200,210,220)",
+      "maxPopoverPlacement": "bottom",
+      "max": {
+        "count": 2,
+        "style": "color:rgb(25,35,45);background:rgb(220,230,240)",
+        "popover": {
+          "trigger": "click",
+          "placement": "top"
+        }
+      },
+      "patch": {
+        "max": {
+          "count": 0,
+          "style": "",
+          "popover": {}
+        }
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(25, 35, 45)",
+          "background": "rgb(220, 230, 240)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "changed": {
+        "texts": [
+          "A"
+        ],
+        "counter": {
+          "text": "+3",
+          "color": "rgb(5, 15, 25)",
+          "background": "rgb(200, 210, 220)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "restored": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(25, 35, 45)",
+          "background": "rgb(220, 230, 240)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    },
+    {
+      "maxCount": 2,
+      "maxPopoverTrigger": "click",
+      "probe": "click",
+      "name": "reactive-limit",
+      "patch": {
+        "maxCount": 4
+      },
+      "snapshot": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "changed": {
+        "texts": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ],
+        "counter": null,
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "restored": {
+        "texts": [
+          "A",
+          "B"
+        ],
+        "counter": {
+          "text": "+2",
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.25)",
+          "width": "32px",
+          "height": "32px",
+          "radius": "50%",
+          "fontSize": "14px"
+        },
+        "attributes": [
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "popup": {
+        "open": true,
+        "placement": "top",
+        "texts": [
+          "C",
+          "D"
+        ]
+      }
+    }
+  ]
+}

@@ -6008,7 +6008,16 @@
         "tests/browser/fixtures/ant-design-avatar-prefix-reference.json",
         "tests/browser/avatar-prefix.spec.ts",
         "tests/browser/avatar-prefix-metrics.ts",
-        "tests/package/avatar-prefix.ssr.test.ts"
+        "tests/package/avatar-prefix.ssr.test.ts",
+        "src/lib/avatar-group.engine.ts",
+        "src/lib/avatar-group.engine.test.ts",
+        "tests/browser/fixtures/avatar-group-max-presets.ts",
+        "tests/browser/fixtures/AvatarGroupMaxCase.svelte",
+        "tests/browser/fixtures/AvatarGroupMaxFixtures.svelte",
+        "tests/browser/fixtures/ant-design-avatar-group-max-reference.json",
+        "tests/browser/avatar-group-max-metrics.ts",
+        "tests/browser/avatar-group-max.spec.ts",
+        "tests/package/avatar-group-max.ssr.test.ts"
       ],
       "features": [
         {
@@ -6106,7 +6115,7 @@
             "src/lib/avatar.types.ts",
             "src/lib/ConfigProvider.svelte"
           ],
-          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref и локальный prefixCls перенесены отдельными features. AvatarGroup сохраняет согласованный items/Popover API; deprecated max* aliases и полный max.popover/children API ещё требуют переноса. Пассивные Svelte/native contracts и нормализация размеров/лимита сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
+          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref и локальный prefixCls перенесены отдельными features. AvatarGroup сохраняет согласованный items/Popover API; deprecated max* aliases перенесены отдельной feature; полный max.popover/children API ещё требует переноса. Пассивные Svelte/native contracts и нормализация размеров/лимита сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
         },
         {
           "id": "display-theme-tokens",
@@ -6182,6 +6191,28 @@
             "readme.md"
           ],
           "note": "Root/modifier/string/group/RTL/popover classes и fallback ant-avatar. Prefix группы не передаётся участникам/счётчику; индивидуальные prefixes и их border rules сохраняют исходное поведение. CSS data module извлекает 24 правила закреплённого архива, включая Image, anticon и Popover; runtime ограничивает shared reset/variables текущим prefix без изменения specificity и global variable names. SSR head, обратимые обновления, cleanup stylesheet, соседние custom tokens, native text fit/focus, image/caller state и открытый overflow описаны 37 UMD-эталонами и browser cases. Native group/items/layout/a11y contracts сохранены; полный оставшийся Group API указан отдельно."
+        },
+        {
+          "id": "group-max-aliases",
+          "title": "Deprecated AvatarGroup max aliases и исходные приоритеты",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/avatar-group.types.ts",
+            "src/lib/AvatarGroup.svelte",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.engine.ts",
+            "src/lib/avatar-group.engine.test.ts",
+            "tests/browser/fixtures/avatar-group-max-presets.ts",
+            "tests/browser/fixtures/AvatarGroupMaxCase.svelte",
+            "tests/browser/fixtures/AvatarGroupMaxFixtures.svelte",
+            "tests/browser/fixtures/ant-design-avatar-group-max-reference.json",
+            "tests/browser/avatar-group-max-metrics.ts",
+            "tests/browser/avatar-group-max.spec.ts",
+            "tests/package/avatar-group-max.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "MaxCount/maxStyle/maxPopoverPlacement/maxPopoverTrigger; truthy max fields имеют приоритет, включая fallback count=0/пустого style и приоритет пустого trigger array. Двадцать UMD-эталонов описывают limits, counter style, placement/trigger, обратимые обновления и SSR без overflow content/таймеров. Native items/deduplication, нормализация count, hover/click defaults, доступная кнопка и список сохранены. Живое обновление aliases сохраняет popup/hidden Avatar DOM и фокус; удаление overflow восстанавливает соседний control. Полный max.popover и children API остаются в работе."
         }
       ]
     },

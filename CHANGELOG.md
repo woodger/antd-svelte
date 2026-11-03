@@ -9,6 +9,9 @@
 
 ### Added
 
+- AvatarGroup: deprecated maxCount/maxStyle/maxPopoverPlacement/maxPopoverTrigger
+  с исходным truthy приоритетом max. Сохранены нормализация лимита, DOM, фокус и
+  открытый список; добавлены 20 UMD-эталонов и SSR/browser-проверки.
 - Avatar/AvatarGroup: локальный prefixCls, исходные root/string/group/popover classes
   и CSS template из 24 правил. Shared reset ограничен своим prefix; сохраняются
   соседние tokens, text fit, DOM/ref и открытый overflow. Добавлены 37 UMD-эталонов.
