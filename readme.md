@@ -6097,8 +6097,9 @@ accessibility tree. Общий popup-механизм сохраняет пре�
 
 Локальный getPopupContainer выбирает HTMLElement или ShadowRoot. Как Ant Design,
 Mentions не наследует ConfigProvider.getPopupContainer. Тип getter не требует
-аргументов; при открытии runtime сначала передаёт undefined, затем span префикса
-внутри ant-mentions-measure. Без getter сохраняется native размещение; на сервере
+аргументов. Функция без параметров при открытии сначала получает undefined,
+затем span префикса внутри ant-mentions-measure. Функция с параметром ждёт этот
+DOM ref, как rc-trigger. Без getter сохраняется native размещение; на сервере
 getter не вызывается. Стили ShadowRoot размещает потребитель.
 
 PopupRender — Snippet со стандартным menu Snippet. Можно добавить обёртку или
@@ -6133,7 +6134,7 @@ reset, Form/ConfigProvider disabled, locale/themes/compact density/RTL подд�
 Focus/blur, bind:nativeElement и bind:textarea предоставляют native refs.
 CSS-рецепт mentions извлекает 102 правила. Галерея `/ant-design#mentions`,
 фикстура `?fixture=mentions`; SSR не измеряет DOM и не ставит таймеры.
-22 эталона официального UMD для контейнеров и popupRender —
+24 эталона официального UMD для контейнеров и popupRender —
 [mentions-popup](./tests/browser/mentions-popup.spec.ts), `?fixture=mentions-popup`.
 
 Semantic classNames/styles, feedback suffix,

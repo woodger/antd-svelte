@@ -105,9 +105,9 @@
   }
   $effect.pre(() => {
     const open = visible;
-    // KeywordTrigger создаётся открытым: первый вызов предшествует появлению prefix ref.
+    // Как rc-trigger: getter с параметром ждёт prefix ref; нулевая арность разрешает undefined.
     if (!getPopupContainer) popupContainer = undefined;
-    else if (open && !containerOpen) resolvePopupContainer(undefined);
+    else if (open && !containerOpen && !getPopupContainer.length) resolvePopupContainer(undefined);
     containerOpen = open;
   });
   const portal = createPopupContainer(() => ({

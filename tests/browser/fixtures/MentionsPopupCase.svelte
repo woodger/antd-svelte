@@ -70,7 +70,9 @@
     if (sample.local === 'undefined') props.getPopupContainer = undefined;
     else if (sample.local) {
       const target = alternate ? 'child' : sample.local;
-      props.getPopupContainer = (...args: [HTMLElement?]) => get('local', target, args);
+      props.getPopupContainer = sample.parameter
+        ? (trigger?: HTMLElement) => get('local', target, [trigger])
+        : (...args: [HTMLElement?]) => get('local', target, args);
     }
     return props;
   });

@@ -4312,6 +4312,11 @@
           "name": "@rc-component/menu",
           "range": "~1.5.0",
           "referenceVersion": "1.5.0"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.0.0",
+          "referenceVersion": "3.10.1"
         }
       ],
       "priority": "p1",
@@ -4382,7 +4387,7 @@
             "tests/browser/mentions-popup.spec.ts",
             "tests/package/mentions-popup.ssr.test.ts"
           ],
-          "note": "22 эталона официального UMD закрепляют local-only getter без ConfigProvider fallback, первый undefined и последующий span префикса, HTMLElement/ShadowRoot. PopupRender получает стандартный menu Snippet, изолирует FormItem/SpaceCompact и сохраняет theme/locale. Закрытие и смена DOM-контейнера пересоздают custom content; новый callback с прежним контейнером сохраняет popup/editor DOM, state, focus/selection. Menu focus отменяет blur, footer вне menu закрывает подсказки; обработчики работают внутри ShadowRoot. SSR не вызывает getter. Native default inline shell и listbox/option сохраняются; выбор/клавиатура, FormData, loading/empty, native refs и cleanup покрыты отдельными browser/SSR-сценариями."
+          "note": "24 эталона официального UMD закрепляют local-only getter без ConfigProvider fallback, HTMLElement/ShadowRoot и span префикса. Getter нулевой арности сначала получает undefined; getter с параметром ждёт DOM ref. PopupRender получает стандартный menu Snippet, изолирует FormItem/SpaceCompact и сохраняет theme/locale. Закрытие и смена DOM-контейнера пересоздают custom content; новый callback с прежним контейнером сохраняет popup/editor DOM, state, focus/selection. Menu focus отменяет blur, footer вне menu закрывает подсказки; обработчики работают внутри ShadowRoot. SSR не вызывает getter. Native default inline shell и listbox/option сохраняются; выбор/клавиатура, FormData, loading/empty, native refs и cleanup покрыты отдельными browser/SSR-сценариями."
         },
         {
           "id": "extended-api",

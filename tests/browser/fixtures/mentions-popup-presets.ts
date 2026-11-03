@@ -9,4 +9,5 @@ export interface MentionsPopupCase {
   rtl?: boolean;
   prefix?: '@@';
   context?: boolean;
+  parameter?: boolean;
 }
