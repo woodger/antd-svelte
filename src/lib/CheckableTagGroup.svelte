@@ -4,6 +4,8 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectTagStyle } from './tag-style.dom';
+  import { getTagPrefixCss } from './tag-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type {
     CheckableTagGroupProps,
     CheckableTagGroupSemantic,
@@ -14,6 +16,9 @@
   let { nativeElement = $bindable(), ...props }: CheckableTagGroupProps<Value> = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Tag');
+  let prefix = $derived(props.prefixCls || 'ant-tag');
+  let prefixCss = $derived(getTagPrefixCss(prefix));
+  let groupPrefix = $derived(`${prefix}-checkable-group`);
   let innerValue = $state.raw<Value | Value[] | null | undefined>(
     untrack(() => props.defaultValue)
   );
@@ -70,16 +75,19 @@
   }
 </script>
 
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}
+
 <div
   {...attributes}
   bind:this={nativeElement}
   id={props.id}
   class={[
-    'ant-tag-checkable-group ant-tag-css-var',
+    groupPrefix,
+    'ant-tag-css-var',
     config.tag?.class,
     props.rootClassName,
-    props.disabled && 'ant-tag-checkable-group-disabled',
-    config.direction === 'rtl' && 'ant-tag-checkable-group-rtl',
+    props.disabled && `${groupPrefix}-disabled`,
+    config.direction === 'rtl' && `${groupPrefix}-rtl`,
     componentTheme.className,
     props.class,
     contextClasses.root,
@@ -91,7 +99,7 @@
   {#each options as option (option.value)}
     <CheckableTag
       class={[
-        'ant-tag-checkable-group-item', contextClasses.item, localClasses.item, option.className
+        `${groupPrefix}-item`, contextClasses.item, localClasses.item, option.className
       ].filter(Boolean).join(' ')}
       style={[contextStyles.item, localStyles.item, option.style].filter(Boolean).join(';')}
       checked={props.multiple

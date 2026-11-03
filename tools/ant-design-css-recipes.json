@@ -36,6 +36,30 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Avatar.Group: группа, обводка и перекрытие; список Popover адаптирован в Svelte.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "tag-prefix",
+    "output": "src/lib/vendor/tag-prefix.css.js",
+    "expectedRules": 90,
+    "include": [
+      "\\.ant-tag(?![\\w])"
+    ],
+    "exclude": [
+      "ant-picker-tag"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-tag-css-var",
+        "replacement": ".ant-tag-css-var"
+      },
+      {
+        "pattern": "\\.ant-tag(?![-\\w])",
+        "replacement": ".ant-tag:where(.ant-tag-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Tag prefix template: базовые правила, CheckableTag/Group, цвета и ссылки.\n * CSS data module для локального prefixCls; marker и имена CSS variables сохраняются.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
+  },
+  {
     "id": "tag-group",
     "output": "src/lib/vendor/tag-group.css",
     "expectedRules": 1,

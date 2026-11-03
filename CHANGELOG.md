@@ -9,6 +9,9 @@
 
 ### Added
 
+- Tag/CheckableTag/CheckableTagGroup: локальный prefixCls с исходными classes,
+  шаблоном из 90 CSS rules и SSR head. Смена prefix сохраняет DOM/focus и native
+  themes; cleanup stylesheet не затрагивает соседей. Добавлены 60 UMD-эталонов.
 - CheckableTagGroup: single/multiple, controlled/defaultValue, typed options,
   root/item semantics, ConfigProvider.tag и native div ref. Исходный gap извлечён
   из CSS; 34 UMD-эталона проверяют выбор, callbacks и обновления props.

@@ -4,6 +4,8 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { connectTagStyle } from './tag-style.dom';
   import { connectFeedbackFocus } from './feedback.dom';
+  import { getTagPrefixCss } from './tag-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { CheckableTagProps } from './tag.types';
 
   let {
@@ -24,10 +26,13 @@
     'aria-describedby': ariaDescribedby,
     class: className = '',
     style,
+    prefixCls,
     ...attributes
   }: CheckableTagProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Tag');
+  let prefix = $derived(prefixCls || 'ant-tag');
+  let prefixCss = $derived(getTagPrefixCss(prefix));
   let blocked = $derived(disabled ?? config.componentDisabled);
   let rootStyle = $derived([
     componentTheme.style,
@@ -71,13 +76,15 @@
 </script>
 
 <style>
-  .ant-tag { display: inline-flex; align-items: center; appearance: none; min-width: 0; max-width: 100%; white-space: normal; vertical-align: middle; --ant-tag-default-color: var(--ant-color-text); }
-  .ant-tag-content { min-width: 0; overflow-wrap: anywhere; }
-  .ant-tag-icon { display: inline-flex; flex: none; align-items: center; }
+  .ant-tag-css-var { display: inline-flex; align-items: center; appearance: none; min-width: 0; max-width: 100%; white-space: normal; vertical-align: middle; --ant-tag-default-color: var(--ant-color-text); }
+  .ant-tag-content { box-sizing: border-box; min-width: 0; overflow-wrap: anywhere; }
+  .ant-tag-icon { box-sizing: border-box; display: inline-flex; flex: none; align-items: center; }
   .ant-tag-icon :global(svg) { max-width: 1em; max-height: 1em; }
-  .ant-tag:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
-  @media (prefers-reduced-motion: reduce) { .ant-tag { transition: none; } }
+  .ant-tag-css-var:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
+  @media (prefers-reduced-motion: reduce) { .ant-tag-css-var { transition: none; } }
 </style>
+
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}
 
 <button
   {...attributes}
@@ -91,12 +98,14 @@
   aria-describedby={ariaDescribedby}
   dir={dir ?? config.direction}
   class={[
-    'ant-tag ant-tag-css-var ant-tag-checkable',
+    prefix,
+    'ant-tag-css-var',
+    `${prefix}-checkable`,
     componentTheme.className,
     config.tag?.class,
-    checked && 'ant-tag-checkable-checked',
-    blocked && 'ant-tag-checkable-disabled',
-    config.direction === 'rtl' && 'ant-tag-rtl',
+    checked && `${prefix}-checkable-checked`,
+    blocked && `${prefix}-checkable-disabled`,
+    config.direction === 'rtl' && `${prefix}-rtl`,
     className
   ]}
   style={untrack(() => rootStyle)}

@@ -8068,7 +8068,18 @@
         "tests/browser/fixtures/TagGroupFixtures.svelte",
         "tests/browser/fixtures/tag-group-presets.ts",
         "tests/browser/fixtures/ant-design-tag-group-reference.json",
-        "tests/package/tag-group.ssr.test.ts"
+        "tests/package/tag-group.ssr.test.ts",
+        "src/lib/tag-prefix.engine.ts",
+        "src/lib/tag-prefix.engine.test.ts",
+        "src/lib/vendor/tag-prefix.css.js",
+        "src/lib/ThemeScopeStyle.svelte",
+        "tests/browser/tag-prefix.spec.ts",
+        "tests/browser/tag-prefix-metrics.ts",
+        "tests/browser/fixtures/TagPrefixCase.svelte",
+        "tests/browser/fixtures/TagPrefixFixtures.svelte",
+        "tests/browser/fixtures/tag-prefix-presets.ts",
+        "tests/browser/fixtures/ant-design-tag-prefix-reference.json",
+        "tests/package/tag-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -8114,7 +8125,7 @@
             "tests/browser/fixtures/ant-design-checkable-tag-api-reference.json",
             "tests/package/checkable-tag-api.ssr.test.ts"
           ],
-          "note": "OnChange перед onClick, onKeyDown до Space, отмена/repeat и callback после синхронного unmount сверены с 12 сценариями официальной сборки. Lowercase aliases имеют приоритет; HTMLAttributes и bind:nativeElement относятся к прежней native toggle-кнопке. Controlled checked, Enter, aria-pressed, disabled, focus recovery и guard уже отменённого click сохранены. PrefixCls пока не перенесён; context class/style описаны в source-styling. Общий аудит Tag остаётся unreviewed."
+          "note": "OnChange перед onClick, onKeyDown до Space, отмена/repeat и callback после синхронного unmount сверены с 12 сценариями официальной сборки. Lowercase aliases имеют приоритет; HTMLAttributes и bind:nativeElement относятся к прежней native toggle-кнопке. Controlled checked, Enter, aria-pressed, disabled, focus recovery и guard уже отменённого click сохранены. Локальный prefixCls описан отдельно; context class/style описаны в source-styling. Общий аудит Tag остаётся unreviewed."
         },
         {
           "id": "source-styling",
@@ -8144,14 +8155,28 @@
         },
         {
           "id": "remaining-api",
-          "title": "Оставшийся API Tag: prefixes",
-          "state": "missing",
+          "title": "Локальный prefixCls Tag, CheckableTag и CheckableTagGroup",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
-            "readme.md",
-            "src/lib/tag.types.ts"
+            "src/lib/tag-prefix.engine.ts",
+            "src/lib/tag-prefix.engine.test.ts",
+            "src/lib/vendor/tag-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "src/lib/ThemeScopeStyle.svelte",
+            "src/lib/Tag.svelte",
+            "src/lib/CheckableTag.svelte",
+            "src/lib/CheckableTagGroup.svelte",
+            "src/lib/tag.types.ts",
+            "tests/browser/tag-prefix.spec.ts",
+            "tests/browser/tag-prefix-metrics.ts",
+            "tests/browser/fixtures/TagPrefixCase.svelte",
+            "tests/browser/fixtures/TagPrefixFixtures.svelte",
+            "tests/browser/fixtures/tag-prefix-presets.ts",
+            "tests/browser/fixtures/ant-design-tag-prefix-reference.json",
+            "tests/package/tag-prefix.ssr.test.ts"
           ],
-          "note": "Пока не перенесён локальный prefixCls Tag/CheckableTag/CheckableTagGroup. Прежние native button/aria-pressed, close hit target/focus recovery, content wrapping и декоративные Snippet wrappers сохраняются; эти границы не означают идентичный React DOM."
+          "note": "Локальный prefixCls и fallback ant-tag меняют исходные root/modifier/close/group/item classes. Дочерние CheckableTag группы сохраняют стандартный prefix, как upstream. CSS template из 90 правил закреплённого архива сохраняет global variables/icons и marker; SSR head, обратимая смена prefix и cleanup экземпляра не заменяют DOM и не затрагивают соседей. 60 UMD-эталонов, native theme/focus/hit target/Wave cases описывают scope. Прежние native button/aria-pressed, close removal/focus recovery, wrapping и декоративные Snippet wrappers сохраняются; это не идентичный React DOM. Общий аудит v1 остаётся отдельно."
         },
         {
           "id": "source-links-closable",
@@ -8199,7 +8224,7 @@
             "tests/browser/fixtures/ant-design-tag-group-reference.json",
             "tests/package/tag-group.ssr.test.ts"
           ],
-          "note": "Single/multiple, controlled/defaultValue и переход к undefined по useControlledState 1.14.0, строгие типы значений, off-list values, порядок добавления/удаления и callbacks. Primitive/object options, Snippet labels, option className/style, root/item semantic objects/functions и приоритет context/local/option styles. Общий Tag context и исходный raw disabled, native div ref, ARIA/data filter, RTL и token gap. 34 сценария официальной UMD-сборки описывают начальные состояния и обновления. Существующие native CheckableTag button/aria-pressed, Enter, disabled, focus recovery и отсутствие FormData сохраняются; это не идентичный React DOM. PrefixCls остаётся отдельно неперенесённым."
+          "note": "Single/multiple, controlled/defaultValue и переход к undefined по useControlledState 1.14.0, строгие типы значений, off-list values, порядок добавления/удаления и callbacks. Primitive/object options, Snippet labels, option className/style, root/item semantic objects/functions и приоритет context/local/option styles. Общий Tag context и исходный raw disabled, native div ref, ARIA/data filter, RTL и token gap. 34 сценария официальной UMD-сборки описывают начальные состояния и обновления. Существующие native CheckableTag button/aria-pressed, Enter, disabled, focus recovery и отсутствие FormData сохраняются; это не идентичный React DOM. Локальный prefixCls описан отдельно; дочерние CheckableTag сохраняют стандартный prefix, как upstream."
         }
       ]
     },

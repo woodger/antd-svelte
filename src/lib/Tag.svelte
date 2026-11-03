@@ -4,11 +4,13 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { getTagColor } from './tag-color.engine';
   import { getTagClose } from './tag-close.engine';
+  import { getTagPrefixCss } from './tag-prefix.engine';
   import { connectTagStyle } from './tag-style.dom';
   import { useWave } from './wave.svelte';
   import { connectWaveLink } from './wave.dom';
   import { connectFeedbackFocus } from './feedback.dom';
   import Icon from './Icon.svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { TagProps, TagSemantic } from './tag.types';
 
   let { nativeElement = $bindable(), ...props }: TagProps = $props();
@@ -32,6 +34,7 @@
     class: className = '',
     style,
     rootClassName,
+    prefixCls,
     classNames,
     styles
   } = $derived(props);
@@ -40,6 +43,8 @@
   const wave = useWave('Tag', () => blocked);
   const generatedId = $props.id();
   let host = $derived(nativeElement);
+  let prefix = $derived(prefixCls || 'ant-tag');
+  let prefixCss = $derived(getTagPrefixCss(prefix));
   let waveLink = $state(false);
   let closed = $state(false);
   let active = true;
@@ -51,7 +56,7 @@
     'children', 'icon', 'closeIcon', 'closable', 'closeLabel', 'disabled', 'onClose',
     'onClick', 'onclick', 'id', 'dir', 'role', 'href', 'target', 'aria-label',
     'aria-labelledby', 'aria-describedby', 'aria-disabled', 'class', 'style', 'rootClassName',
-    'classNames', 'styles', 'color', 'variant', 'bordered'
+    'classNames', 'styles', 'color', 'variant', 'bordered', 'prefixCls'
   ]);
   let attributes = $derived(Object.fromEntries(Object.entries(props)
     .filter(([key]) => !owned.has(key))));
@@ -94,20 +99,25 @@
     'aria-disabled': href && blocked ? true : ariaDisabled,
     dir: dir ?? config.direction,
     href: blocked ? undefined : href,
-    target
+    target,
+    'data-ant-tag-color': color.internal ? color.color
+      : props.color === undefined ? 'default' : undefined,
+    'data-ant-tag-variant': color.variant,
+    'data-ant-tag-disabled': blocked ? '' : undefined
   });
   let rootClasses = $derived([
-    'ant-tag ant-tag-css-var',
+    prefix,
+    'ant-tag-css-var',
     componentTheme.className,
     config.tag?.class,
     contextClasses.root,
     localClasses.root,
-    color.internal && `ant-tag-${color.color}`,
-    props.color === undefined && !color.internal && 'ant-tag-default',
-    `ant-tag-${color.variant}`,
-    blocked && 'ant-tag-disabled',
+    color.internal && `${prefix}-${color.color}`,
+    props.color === undefined && !color.internal && `${prefix}-default`,
+    `${prefix}-${color.variant}`,
+    blocked && `${prefix}-disabled`,
     config.theme.mode === 'dark' && !componentTheme.className && 'ant-tag-dark',
-    config.direction === 'rtl' && 'ant-tag-rtl',
+    config.direction === 'rtl' && `${prefix}-rtl`,
     className,
     rootClassName
   ]);
@@ -193,37 +203,37 @@
 </script>
 
 <style>
-  .ant-tag { display: inline-flex; align-items: center; min-width: 0; max-width: 100%; white-space: normal; vertical-align: middle; --ant-tag-default-color: var(--ant-color-text); }
+  .ant-tag-css-var { display: inline-flex; align-items: center; min-width: 0; max-width: 100%; white-space: normal; vertical-align: middle; --ant-tag-default-color: var(--ant-color-text); }
   .ant-tag-dark { --ant-tag-default-bg: var(--ant-color-fill-tertiary); }
-  .ant-tag-dark.ant-tag-default.ant-tag-solid:not(.ant-tag-disabled) { background-color: var(--ant-color-text); color: var(--ant-color-bg-container); }
-  .ant-tag-dark.ant-tag-blue { --ant-tag-accent: var(--ant-blue-6); --ant-tag-dark-color: var(--ant-blue-4); }
-  .ant-tag-dark.ant-tag-purple { --ant-tag-accent: var(--ant-purple-6); --ant-tag-dark-color: var(--ant-purple-4); }
-  .ant-tag-dark.ant-tag-cyan { --ant-tag-accent: var(--ant-cyan-6); --ant-tag-dark-color: var(--ant-cyan-4); }
-  .ant-tag-dark.ant-tag-green { --ant-tag-accent: var(--ant-green-6); --ant-tag-dark-color: var(--ant-green-4); }
-  .ant-tag-dark.ant-tag-magenta { --ant-tag-accent: var(--ant-magenta-6); --ant-tag-dark-color: var(--ant-magenta-4); }
-  .ant-tag-dark.ant-tag-pink { --ant-tag-accent: var(--ant-pink-6); --ant-tag-dark-color: var(--ant-pink-4); }
-  .ant-tag-dark.ant-tag-red { --ant-tag-accent: var(--ant-red-6); --ant-tag-dark-color: var(--ant-red-4); }
-  .ant-tag-dark.ant-tag-orange { --ant-tag-accent: var(--ant-orange-6); --ant-tag-dark-color: var(--ant-orange-4); }
-  .ant-tag-dark.ant-tag-yellow { --ant-tag-accent: var(--ant-yellow-6); --ant-tag-dark-color: var(--ant-yellow-4); }
-  .ant-tag-dark.ant-tag-volcano { --ant-tag-accent: var(--ant-volcano-6); --ant-tag-dark-color: var(--ant-volcano-4); }
-  .ant-tag-dark.ant-tag-geekblue { --ant-tag-accent: var(--ant-geekblue-6); --ant-tag-dark-color: var(--ant-geekblue-4); }
-  .ant-tag-dark.ant-tag-lime { --ant-tag-accent: var(--ant-lime-6); --ant-tag-dark-color: var(--ant-lime-4); }
-  .ant-tag-dark.ant-tag-gold { --ant-tag-accent: var(--ant-gold-6); --ant-tag-dark-color: var(--ant-gold-4); }
-  .ant-tag-dark.ant-tag-success { --ant-tag-accent: var(--ant-color-success); --ant-tag-dark-color: var(--ant-color-success); }
-  .ant-tag-dark.ant-tag-processing { --ant-tag-accent: var(--ant-color-info); --ant-tag-dark-color: var(--ant-color-info); }
-  .ant-tag-dark.ant-tag-error { --ant-tag-accent: var(--ant-color-error); --ant-tag-dark-color: var(--ant-color-error); }
-  .ant-tag-dark.ant-tag-warning { --ant-tag-accent: var(--ant-color-warning); --ant-tag-dark-color: var(--ant-color-warning); }
-  .ant-tag-dark:not(.ant-tag-default):not(.ant-tag-solid):not(.ant-tag-disabled) { color: var(--ant-tag-dark-color); background-color: color-mix(in srgb, var(--ant-tag-accent) 15%, var(--ant-color-bg-container)); }
-  .ant-tag-dark.ant-tag-outlined:not(.ant-tag-default):not(.ant-tag-disabled) { border-color: color-mix(in srgb, var(--ant-tag-accent) 40%, var(--ant-color-bg-container)); }
-  .ant-tag-content { min-width: 0; overflow-wrap: anywhere; }
-  .ant-tag-icon { display: inline-flex; flex: none; align-items: center; }
+  .ant-tag-dark[data-ant-tag-color="default"][data-ant-tag-variant="solid"]:not([data-ant-tag-disabled]) { background-color: var(--ant-color-text); color: var(--ant-color-bg-container); }
+  .ant-tag-dark[data-ant-tag-color="blue"] { --ant-tag-accent: var(--ant-blue-6); --ant-tag-dark-color: var(--ant-blue-4); }
+  .ant-tag-dark[data-ant-tag-color="purple"] { --ant-tag-accent: var(--ant-purple-6); --ant-tag-dark-color: var(--ant-purple-4); }
+  .ant-tag-dark[data-ant-tag-color="cyan"] { --ant-tag-accent: var(--ant-cyan-6); --ant-tag-dark-color: var(--ant-cyan-4); }
+  .ant-tag-dark[data-ant-tag-color="green"] { --ant-tag-accent: var(--ant-green-6); --ant-tag-dark-color: var(--ant-green-4); }
+  .ant-tag-dark[data-ant-tag-color="magenta"] { --ant-tag-accent: var(--ant-magenta-6); --ant-tag-dark-color: var(--ant-magenta-4); }
+  .ant-tag-dark[data-ant-tag-color="pink"] { --ant-tag-accent: var(--ant-pink-6); --ant-tag-dark-color: var(--ant-pink-4); }
+  .ant-tag-dark[data-ant-tag-color="red"] { --ant-tag-accent: var(--ant-red-6); --ant-tag-dark-color: var(--ant-red-4); }
+  .ant-tag-dark[data-ant-tag-color="orange"] { --ant-tag-accent: var(--ant-orange-6); --ant-tag-dark-color: var(--ant-orange-4); }
+  .ant-tag-dark[data-ant-tag-color="yellow"] { --ant-tag-accent: var(--ant-yellow-6); --ant-tag-dark-color: var(--ant-yellow-4); }
+  .ant-tag-dark[data-ant-tag-color="volcano"] { --ant-tag-accent: var(--ant-volcano-6); --ant-tag-dark-color: var(--ant-volcano-4); }
+  .ant-tag-dark[data-ant-tag-color="geekblue"] { --ant-tag-accent: var(--ant-geekblue-6); --ant-tag-dark-color: var(--ant-geekblue-4); }
+  .ant-tag-dark[data-ant-tag-color="lime"] { --ant-tag-accent: var(--ant-lime-6); --ant-tag-dark-color: var(--ant-lime-4); }
+  .ant-tag-dark[data-ant-tag-color="gold"] { --ant-tag-accent: var(--ant-gold-6); --ant-tag-dark-color: var(--ant-gold-4); }
+  .ant-tag-dark[data-ant-tag-color="success"] { --ant-tag-accent: var(--ant-color-success); --ant-tag-dark-color: var(--ant-color-success); }
+  .ant-tag-dark[data-ant-tag-color="processing"] { --ant-tag-accent: var(--ant-color-info); --ant-tag-dark-color: var(--ant-color-info); }
+  .ant-tag-dark[data-ant-tag-color="error"] { --ant-tag-accent: var(--ant-color-error); --ant-tag-dark-color: var(--ant-color-error); }
+  .ant-tag-dark[data-ant-tag-color="warning"] { --ant-tag-accent: var(--ant-color-warning); --ant-tag-dark-color: var(--ant-color-warning); }
+  .ant-tag-dark:not([data-ant-tag-color="default"]):not([data-ant-tag-variant="solid"]):not([data-ant-tag-disabled]) { color: var(--ant-tag-dark-color); background-color: color-mix(in srgb, var(--ant-tag-accent) 15%, var(--ant-color-bg-container)); }
+  .ant-tag-dark[data-ant-tag-variant="outlined"]:not([data-ant-tag-color="default"]):not([data-ant-tag-disabled]) { border-color: color-mix(in srgb, var(--ant-tag-accent) 40%, var(--ant-color-bg-container)); }
+  .ant-tag-content { box-sizing: border-box; min-width: 0; overflow-wrap: anywhere; }
+  .ant-tag-icon { box-sizing: border-box; display: inline-flex; flex: none; align-items: center; }
   .ant-tag-icon :global(svg) { max-width: 1em; max-height: 1em; }
   /* Нативная кнопка требует явного letter-spacing, который source span наследует. */
-  .ant-tag-close-icon { display: inline-flex; align-items: center; justify-content: center; flex: none; min-width: 20px; min-height: 20px; border: 0; padding: 0; background: transparent; font: inherit; letter-spacing: inherit; }
-  .ant-tag-close-icon:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -2px; border-radius: var(--ant-border-radius-sm); }
-  .ant-tag-close-icon:disabled { cursor: not-allowed; }
-  .ant-tag-dark .ant-tag-close-icon { color: inherit; }
-  @media (prefers-reduced-motion: reduce) { .ant-tag, .ant-tag-close-icon { transition: none; } }
+  [data-ant-tag-close] { display: inline-flex; align-items: center; justify-content: center; flex: none; min-width: 20px; min-height: 20px; border: 0; padding: 0; background: transparent; font: inherit; letter-spacing: inherit; }
+  [data-ant-tag-close]:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -2px; border-radius: var(--ant-border-radius-sm); }
+  [data-ant-tag-close]:disabled { cursor: not-allowed; }
+  .ant-tag-dark [data-ant-tag-close] { color: inherit; }
+  @media (prefers-reduced-motion: reduce) { .ant-tag-css-var, [data-ant-tag-close] { transition: none; } }
 </style>
 
 {#snippet tagContent()}
@@ -242,7 +252,8 @@
   {#if showClose}<button
     {...close.attributes}
     type="button"
-    class={['ant-tag-close-icon', contextClasses.close, localClasses.close]}
+    class={[`${prefix}-close-icon`, contextClasses.close, localClasses.close]}
+    data-ant-tag-close=""
     style={untrack(() => closeStyle)}
     {@attach closeStyles}
     disabled={blocked}
@@ -258,6 +269,7 @@
 
 <!-- Явные a/span не перемещают SSR-корень при hydration и сохраняют фокус. -->
 {#if !closed}
+  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tag-prefix:${prefix}`} />{/if}
   {#if href}
     <a
       {...rootAttributes}

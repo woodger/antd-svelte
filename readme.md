@@ -5533,6 +5533,19 @@ undefined наследует componentDisabled, false явно снимает б
 Метками остаются native toggle-кнопки CheckableTag: Enter/Space, aria-pressed,
 focus recovery и отсутствие FormData сохраняются. Это осознанная граница с React span.
 
+Tag, CheckableTag и CheckableTagGroup принимают локальный prefixCls. Отсутствие
+или пустая строка используют ant-tag; root/modifier/close classes следуют префиксу.
+У группы меняются group/item classes, но вложенные CheckableTag сохраняют ant-tag,
+как в закреплённом upstream. PrefixCls не передаётся HTML-атрибутом и не меняет
+имена CSS variables. Приватные content/icon wrappers и native dark class сохраняются.
+
+Для нестандартного prefix используется шаблон из 90 исходных CSS rules. Он
+попадает в SSR head и обновляется вместе с props; смена prefix не заменяет root,
+close control или элементы группы. Удаление/закрытие экземпляра освобождает его
+stylesheet, сохраняя стили соседей. Стандартный prefix использует прежний vendor CSS
+без дополнительного head style. Native wrapping, hit target, focus и dark/compact
+theme сохраняются; источник semantic styles и component tokens не меняется.
+
 Компоненты наследуют тему, primary, compact и RTL. Для тёмной темы Tag связывает
 обычный цвет текста с токенами и адаптирует фон/границу preset/status меток
 через color-mix и локальные токены палитры. Solid сохраняет исходный цвет;
@@ -5550,7 +5563,7 @@ focus recovery и отсутствие FormData сохраняются. Это �
 объединению выбранных статусов; пустой выбор показывает все строки. Ядро Table
 не изменяется. Введённые значения выводятся обычными Svelte bindings.
 
-Пока нет drag-and-drop, внешней анимации и prefixCls.
+Drag-and-drop и внешняя анимация остаются ответственностью владельца.
 
 ## Badge
 
@@ -8292,6 +8305,14 @@ Svelte attachment с cleanup. Используется существующий 
 исходного CSS; остальные ссылки документа этот reset не затрагивает.
 [vendor/tag-group.css](./src/lib/vendor/tag-group.css) содержит одно исходное
 правило CheckableTagGroup: flex, wrap и token gap; правило извлекается CSS-рецептом.
+[vendor/tag-prefix.css.js](./src/lib/vendor/tag-prefix.css.js) — CSS data module
+из того же архива: 90 правил Tag, CheckableTag/Group, preset/status и ссылок,
+без DatePicker и keyframes. Runtime меняет component class selectors и shared
+reset selectors, сохраняя marker ant-tag-css-var, anticon и имена CSS variables.
+Scoped native styles используют стабильные markers для root/close и состояния цвета,
+поэтому согласованные native behavior и themes работают с локальным prefixCls.
+Runtime добавляет native font rule с прежней specificity; disabled close сохраняет
+not-allowed, хотя исходный anticon[tabindex] показывает pointer.
 [vendor/badge.css](./src/lib/vendor/badge.css) содержит 52 правила Badge и keyframes
 antStatusProcessing из того же архива. Селекторы Radio/Space, ссылок и анимации
 цифр/появления исключены; корни ограничены :where(.ant-badge-css-var), declarations
