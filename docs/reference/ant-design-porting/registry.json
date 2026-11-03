@@ -6189,7 +6189,17 @@
         "tests/browser/fixtures/BadgeCountFixtures.svelte",
         "tests/browser/fixtures/ant-design-badge-count-reference.json",
         "tests/browser/badge-count.spec.ts",
-        "tests/package/badge-count.ssr.test.ts"
+        "tests/package/badge-count.ssr.test.ts",
+        "src/lib/BadgeDigit.svelte",
+        "src/lib/BadgeNumber.svelte",
+        "src/lib/badge-digit.engine.ts",
+        "src/lib/badge-digit.engine.test.ts",
+        "tests/browser/fixtures/badge-digit-motion-presets.ts",
+        "tests/browser/fixtures/BadgeDigitCase.svelte",
+        "tests/browser/fixtures/BadgeDigitMotionFixtures.svelte",
+        "tests/browser/fixtures/ant-design-badge-digit-motion-reference.json",
+        "tests/browser/badge-digit-motion.spec.ts",
+        "tests/package/badge-digit-motion.ssr.test.ts"
       ],
       "features": [
         {
@@ -6222,7 +6232,7 @@
             "tests/browser/badge-count.spec.ts",
             "tests/package/badge-count.ssr.test.ts"
           ],
-          "note": "Строки сохраняют написание и source numeric comparison/точный zero, полный title/description. Boolean/null следуют ScrollNumber presence; integer strings используют статические SingleNumber slots для точной геометрии. Готовый count получает class/style через BadgeCountContext вместо React.cloneElement; вызывающий Snippet явно применяет их к своему root с приоритетом своих attrs. Дополнительной обёртки нет; custom count сохраняет собственные controls/доступность и не заменяется точкой при dot. Offset/RTL, темы, own style/title priority, caller state/focus, cleanup и SSR закреплены 46 UMD-эталонами. Прокрутка и zoom не входят в этот этап."
+          "note": "Строки сохраняют написание и source numeric comparison/точный zero, полный title/description. Boolean/null следуют ScrollNumber presence; integer strings используют SingleNumber slots для точной геометрии. Готовый count получает class/style через BadgeCountContext вместо React.cloneElement; вызывающий Snippet явно применяет их к своему root с приоритетом своих attrs. Дополнительной обёртки нет; custom count сохраняет собственные controls/доступность и не заменяется точкой при dot. Offset/RTL, темы, own style/title priority, caller state/focus, cleanup и SSR закреплены 46 UMD-эталонами. Прокрутка перенесена отдельной возможностью; zoom остаётся в работе."
         },
         {
           "id": "ribbon",
@@ -6288,14 +6298,38 @@
         },
         {
           "id": "advanced-api",
-          "title": "Badge config/semantic/custom colors, prefix/ref и исходный motion",
+          "title": "Badge config/semantic/custom colors, prefix/ref и исходный zoom/cache",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md",
             "src/lib/badge.types.ts"
           ],
-          "note": "ConfigProvider.badge, Badge semantic classNames/styles, произвольные CSS-цвета, prefixCls/scrollNumberPrefixCls/rootClassName, полный DOM/ref API, source SingleNumber rolling и CSSMotion zoom/cache lifecycle остаются в работе. Ribbon имеет собственные перенесённые semantic/config/ref API."
+          "note": "ConfigProvider.badge, Badge semantic classNames/styles, произвольные CSS-цвета, prefixCls/scrollNumberPrefixCls/rootClassName, полный DOM/ref API, CSSMotion zoom/cache lifecycle остаются в работе. Ribbon имеет собственные перенесённые semantic/config/ref API."
+        },
+        {
+          "id": "digit-motion",
+          "title": "Исходная прокрутка SingleNumber и lifecycle разрядов",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/Badge.svelte",
+            "src/lib/badge.engine.ts",
+            "src/lib/vendor/badge-count-digits.css",
+            "tools/ant-design-css-recipes.json",
+            "src/lib/BadgeDigit.svelte",
+            "src/lib/BadgeNumber.svelte",
+            "src/lib/badge-digit.engine.ts",
+            "src/lib/badge-digit.engine.test.ts",
+            "tests/browser/fixtures/badge-digit-motion-presets.ts",
+            "tests/browser/fixtures/BadgeDigitCase.svelte",
+            "tests/browser/fixtures/BadgeDigitMotionFixtures.svelte",
+            "tests/browser/fixtures/ant-design-badge-digit-motion-reference.json",
+            "tests/browser/badge-digit-motion.spec.ts",
+            "tests/package/badge-digit-motion.ssr.test.ts"
+          ],
+          "note": "Числа, integer strings и boolean true используют source SingleNumber units с reverse-position keys. Сохранены направление по abs(count), переходы 9/0, рост/сокращение, знаки/NaN, текущий индекс и stale previousCount при неизменной цифре. Transitionend обновляет previous value/count; fallback 1000 ms зависит только от numeric value и хранит count своего render. Новый value и unmount очищают прежний timer; завершение event не отменяет source fallback. React keys строкифицируются, включая NaN. SSR выводит settled units без таймеров, hydration сохраняет DOM/фокус. Native reduced motion и мгновенный numeric offset сохранены; внешний CSSMotion zoom/cache не перенесён. 18 UMD-последовательностей/68 кадров фиксируют промежуточные пути, идентичность разрядов и lifecycle; pure engine проверяет все 200 пар направлений/цифр."
         }
       ]
     },

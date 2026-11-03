@@ -1,0 +1,3335 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4",
+    "clock": "paused; 32ms after each step; source motion:false"
+  },
+  "cases": [
+    {
+      "name": "up",
+      "initial": 3,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "3",
+        "digits": 1,
+        "units": 1
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "3",
+            "title": "3",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 5
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "345",
+            "title": "5",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(-200%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "5",
+            "title": "5",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "down",
+      "initial": 5,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 3
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "5",
+        "digits": 1,
+        "units": 1
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "5",
+            "title": "5",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 3
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "345",
+            "title": "3",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(200%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "-200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "-100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "3",
+            "title": "3",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "wrap-up",
+      "initial": 9,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "9",
+        "digits": 1,
+        "units": 1
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "9",
+            "title": "9",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 10
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "190",
+            "title": "10",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "0",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "10",
+            "title": "10",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "wrap-down",
+      "initial": 10,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 9
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "10",
+        "digits": 2,
+        "units": 2
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "10",
+            "title": "10",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 9
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "90",
+            "title": "9",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "translateY(100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "-100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "9",
+            "title": "9",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "grow",
+      "initial": 5,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 105
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "5",
+        "digits": 1,
+        "units": 1
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "5",
+            "title": "5",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 105
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "105",
+            "title": "105",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "105",
+            "title": "105",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "shrink",
+      "initial": 105,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "105",
+        "digits": 3,
+        "units": 3
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "105",
+            "title": "105",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 5
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "5",
+            "title": "5",
+            "focused": true,
+            "digits": [
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "5",
+            "title": "5",
+            "focused": true,
+            "digits": [
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "negative",
+      "initial": -13,
+      "steps": [
+        {
+          "kind": "value",
+          "value": -15
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "-13",
+        "digits": 3,
+        "units": 3
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "-13",
+            "title": "-13",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "-",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": -15
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "-1345",
+            "title": "-15",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "-",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "translateY(-200%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "-15",
+            "title": "-15",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "-",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "5",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "rapid",
+      "initial": 3,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 5
+        },
+        {
+          "kind": "value",
+          "value": 2
+        },
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "3",
+        "digits": 1,
+        "units": 1
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "3",
+            "title": "3",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 5
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "345",
+            "title": "5",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(-200%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 2
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "23",
+            "title": "2",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "2",
+                    "top": "-100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 7
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "34567",
+            "title": "7",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(-400%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "6",
+                    "top": "300%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "7",
+                    "top": "400%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "7",
+            "title": "7",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "7",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "same-digit-count-latch",
+      "initial": 17,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 7
+        },
+        {
+          "kind": "value",
+          "value": 8
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "timer",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "text": "17",
+        "digits": 2,
+        "units": 2
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "17",
+            "title": "17",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "7",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 7
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "7",
+            "title": "7",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "7",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 8
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "8901234567",
+            "title": "8",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "translateY(900%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "8",
+                    "top": "-900%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "9",
+                    "top": "-800%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "0",
+                    "top": "-700%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "1",
+                    "top": "-600%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "2",
+                    "top": "-500%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "3",
+                    "top": "-400%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "-300%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "-200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "6",
+                    "top": "-100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "7",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "8",
+            "title": "8",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "8",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "timer",
+            "ms": 1100
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "8",
+            "title": "8",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "8",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "fallback",
+      "initial": 3,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 8
+        },
+        {
+          "kind": "timer",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "text": "3",
+        "digits": 1,
+        "units": 1
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "3",
+            "title": "3",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 8
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "345678",
+            "title": "8",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(-500%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "6",
+                    "top": "300%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "7",
+                    "top": "400%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "8",
+                    "top": "500%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "timer",
+            "ms": 1100
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "8",
+            "title": "8",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "8",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "overflow",
+      "initial": 98,
+      "overflowCount": 99,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 101
+        },
+        {
+          "kind": "value",
+          "value": 98
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "98",
+        "digits": 2,
+        "units": 2
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "98",
+            "title": "98",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "8",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 101
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "99+",
+            "title": "101",
+            "focused": true,
+            "digits": []
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 98
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "98",
+            "title": "98",
+            "focused": true,
+            "digits": [
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 4,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "8",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "98",
+            "title": "98",
+            "focused": true,
+            "digits": [
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 4,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "8",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "string-spellings",
+      "initial": "009",
+      "steps": [
+        {
+          "kind": "value",
+          "value": "010"
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "value",
+          "value": "010.0"
+        },
+        {
+          "kind": "value",
+          "value": "0x10"
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "009",
+        "digits": 3,
+        "units": 3
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "009",
+            "title": "009",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": "010"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "00190",
+            "title": "010",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "1",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "0",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "010",
+            "title": "010",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": "010.0"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "010.0",
+            "title": "010.0",
+            "focused": true,
+            "digits": [
+              {
+                "id": 4,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 5,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": ".",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": "0x10"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1234567890x10",
+            "title": "0x10",
+            "focused": true,
+            "digits": [
+              {
+                "id": 5,
+                "transform": "translateY(-900%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "2",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": true
+                  },
+                  {
+                    "value": "3",
+                    "top": "200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "300%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "400%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "6",
+                    "top": "500%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "7",
+                    "top": "600%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "8",
+                    "top": "700%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "9",
+                    "top": "800%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "0",
+                    "top": "900%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "x",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "0x10",
+            "title": "0x10",
+            "focused": true,
+            "digits": [
+              {
+                "id": 5,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "x",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "nan-recovery",
+      "initial": true,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "value",
+          "value": 2
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "true",
+        "digits": 4,
+        "units": 4
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "true",
+            "title": null,
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "t",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "r",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 3,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "u",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 4,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "e",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 1
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1",
+            "title": "1",
+            "focused": true,
+            "digits": [
+              {
+                "id": 4,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1",
+            "title": "1",
+            "focused": true,
+            "digits": [
+              {
+                "id": 4,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 2
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "12",
+            "title": "2",
+            "focused": true,
+            "digits": [
+              {
+                "id": 4,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "2",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "2",
+            "title": "2",
+            "focused": true,
+            "digits": [
+              {
+                "id": 4,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "2",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "zero",
+      "initial": 0,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "value",
+          "value": 0
+        },
+        {
+          "kind": "value",
+          "value": 1
+        },
+        {
+          "kind": "timer",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "text": "0",
+        "digits": 0,
+        "units": 0
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "0",
+            "title": "0",
+            "focused": true,
+            "digits": []
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 1
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1",
+            "title": "1",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1",
+            "title": "1",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 0
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "0",
+            "title": "0",
+            "focused": true,
+            "digits": []
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 1
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1",
+            "title": "1",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "timer",
+            "ms": 1100
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1",
+            "title": "1",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "small",
+      "initial": 2,
+      "size": "small",
+      "steps": [
+        {
+          "kind": "value",
+          "value": 9
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "2",
+        "digits": 1,
+        "units": 1
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "2",
+            "title": "2",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "2",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 9
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "23456789",
+            "title": "9",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(-700%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "2",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "3",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "200%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "5",
+                    "top": "300%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": true
+                  },
+                  {
+                    "value": "6",
+                    "top": "400%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "7",
+                    "top": "500%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "8",
+                    "top": "600%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  },
+                  {
+                    "value": "9",
+                    "top": "700%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "9",
+            "title": "9",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "rtl",
+      "initial": 9,
+      "direction": "rtl",
+      "steps": [
+        {
+          "kind": "value",
+          "value": 10
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "9",
+        "digits": 1,
+        "units": 1
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "9",
+            "title": "9",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 10
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "190",
+            "title": "10",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "9",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "0",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "10",
+            "title": "10",
+            "focused": true,
+            "digits": [
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "0",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "aliases",
+      "initial": 12,
+      "badge": {
+        "indicatorHeight": 28,
+        "textFontSize": 16
+      },
+      "steps": [
+        {
+          "kind": "value",
+          "value": 23
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "text": "12",
+        "digits": 2,
+        "units": 2
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "12",
+            "title": "12",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "28px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "28px",
+                "units": [
+                  {
+                    "value": "2",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 23
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1223",
+            "title": "23",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "28px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "2",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "28px",
+                "units": [
+                  {
+                    "value": "2",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "3",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "23",
+            "title": "23",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "28px",
+                "units": [
+                  {
+                    "value": "2",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "28px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "unmount",
+      "initial": 13,
+      "steps": [
+        {
+          "kind": "value",
+          "value": 24
+        },
+        {
+          "kind": "unmount"
+        },
+        {
+          "kind": "timer",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "text": "13",
+        "digits": 2,
+        "units": 2
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "13",
+            "title": "13",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "",
+                "transition": "none",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "value",
+            "value": 24
+          },
+          "snapshot": {
+            "sup": true,
+            "text": "1234",
+            "title": "24",
+            "focused": true,
+            "digits": [
+              {
+                "id": 1,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "1",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "2",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              },
+              {
+                "id": 2,
+                "transform": "translateY(-100%)",
+                "transition": "",
+                "height": "20px",
+                "units": [
+                  {
+                    "value": "3",
+                    "top": "",
+                    "left": "",
+                    "position": "",
+                    "current": false
+                  },
+                  {
+                    "value": "4",
+                    "top": "100%",
+                    "left": "0px",
+                    "position": "absolute",
+                    "current": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "step": {
+            "kind": "unmount"
+          },
+          "snapshot": {
+            "sup": false,
+            "text": null,
+            "title": null,
+            "focused": false,
+            "digits": []
+          }
+        },
+        {
+          "step": {
+            "kind": "timer",
+            "ms": 1100
+          },
+          "snapshot": {
+            "sup": false,
+            "text": null,
+            "title": null,
+            "focused": false,
+            "digits": []
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -5480,10 +5480,26 @@ NaN/Infinity считаются отсутствующим count. Отрицат
 и пробелы. Overflow использует числовое сравнение, как upstream: `'100'` даёт
 `99+`, `'001'` остаётся `001`. Только точная строка `'0'` включает правило нуля;
 `'00'` и `'0.0'` видимы. Числовые строки с целым значением выводятся исходными
-символьными slots ScrollNumber, пока без прокрутки. Пустая строка и false не
+символьными slots ScrollNumber. Пустая строка и false не
 создают счётчик без text/dot; null означает отсутствие count. Boolean true
 отображается как `true`, как в исходном ScrollNumber. Полные строки сохраняются
 в title и доступном описании, независимо от overflow.
+
+Целые числа и числовые строки прокручиваются по исходному алгоритму SingleNumber.
+Направление следует изменению абсолютного count; переходы 9/0 и смена длины
+сохраняют разряды по позиции справа. Знаки и нечисловые символы остаются статичными.
+Быстрые изменения используют сохранённые previous value/count, как upstream;
+неизменная цифра сама по себе не обновляет предыдущий count.
+Transitionend завершает путь; если событие не пришло, работает fallback 1000 ms.
+Таймер очищается при смене числового значения разряда и при его удалении. SSR выводит
+начальные settled units без таймеров; browser mount не пересоздаёт их DOM.
+Reduced motion отключает переходы. Прежний numeric offset меняется мгновенно;
+это сохранённая native-граница внешнего ScrollNumber, независимо от движения цифр.
+18 последовательностей и 68 кадров закреплены в
+[UMD-эталонах](./tests/browser/fixtures/ant-design-badge-digit-motion-reference.json),
+проверки — [engine](./src/lib/badge-digit.engine.test.ts),
+[browser](./tests/browser/badge-digit-motion.spec.ts) и
+[SSR](./tests/package/badge-digit-motion.ssr.test.ts), фикстура — `?fixture=badge-digit-motion`.
 
 ```svelte
 <script lang="ts">
@@ -5557,7 +5573,7 @@ Title по умолчанию содержит полный count; false/null у
 root style и оформление standalone/non-status text; эти границы отличаются от React.
 
 В первой версии Badge нет произвольных CSS-цветов,
-анимации прокрутки цифр, появления/исчезновения, semantic classNames/styles,
+анимации появления/исчезновения, semantic classNames/styles,
 prefixCls/rootClassName и устаревших aliases. Processing использует исходную
 CSS-пульсацию, которая отключается при reduced motion. Экспортируются BadgeProps,
 BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeCount, BadgeCountContext,
@@ -8091,8 +8107,9 @@ antStatusProcessing из того же архива. Селекторы Radio/Sp
 [vendor/badge-custom-count.css](./src/lib/vendor/badge-custom-count.css) содержит
 пять исходных правил готового count и antBadgeLoadingCircle;
 [vendor/badge-count-digits.css](./src/lib/vendor/badge-count-digits.css) — три правила
-ScrollNumber/статических SingleNumber slots. Селекторы и декларации извлечены
-из того же архива; прокрутка цифр и zoom lifecycle остаются в работе.
+ScrollNumber/SingleNumber slots. Селекторы и декларации извлечены
+из того же архива; JS-план разрядов реализован в BadgeDigit/BadgeNumber,
+zoom lifecycle остаётся в работе.
 [vendor/badge-ribbon.css](./src/lib/vendor/badge-ribbon.css) содержит 27 правил
 Badge.Ribbon из того же архива: wrapper, indicator, content/corner, логические
 placement, RTL и preset colors. Декларации сохранены; корни ограничены классами

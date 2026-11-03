@@ -47,8 +47,7 @@ export function getBadgeState(
     descriptionCount: typeof sourceCount === 'string' ? sourceCount
       : sourceCount === true ? 'true' : count,
     customCount,
-    digitString: (typeof scalarCount === 'string' || scalarCount === true)
-      && Boolean(numberedCount) && Number(numberedCount) % 1 === 0,
+    displayValue: showAsDot || customCount ? '' : numberedCount,
     display: showAsDot || !renderable || customCount ? ''
       : String(numberedCount),
     hasStatus,

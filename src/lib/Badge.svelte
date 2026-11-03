@@ -4,6 +4,7 @@
   import { getBadgeState, normalizeBadgeOffset } from './badge.engine';
   import { ruRU } from './types';
   import type { BadgeContext, BadgeCountContext, BadgeProps } from './badge.types';
+  import BadgeNumber from './BadgeNumber.svelte';
 
   let {
     count,
@@ -74,6 +75,8 @@
   .ant-badge-status-text { margin-inline-start: var(--ant-margin-xs); color: var(--ant-color-text); font-size: var(--ant-font-size); overflow-wrap: anywhere; }
   .ant-badge-source-count.ant-badge-not-a-wrapper .ant-badge-indicator { display: block; }
   .ant-badge-source-count:not(.ant-badge-status) .ant-badge-status-text { margin-inline-start: 0; color: inherit; font-size: inherit; }
+  /* Прежний numeric offset меняется сразу; анимируются только разряды. */
+  .ant-badge:not(.ant-badge-source-count) .ant-scroll-number { transition: none; }
   .ant-badge-description { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   @media (prefers-reduced-motion: reduce) { .ant-badge .ant-badge-indicator, .ant-badge .ant-badge-status-dot, .ant-badge .ant-badge-status-dot::after { transition: none; animation: none; } }
 </style>
@@ -96,12 +99,12 @@
         color && `ant-badge-color-${color}`
       ]} aria-hidden="true"></span>{:else if customCount}{@render customCount(countContext)}{:else}<sup class={[
           'ant-badge-indicator',
-          sourceCount && 'ant-scroll-number',
+          'ant-scroll-number',
           state.showAsDot ? 'ant-badge-dot' : 'ant-badge-count',
           size === 'small' && 'ant-badge-count-sm',
           !state.showAsDot && state.display.length > 1 && 'ant-badge-multiple-words',
           status && `ant-badge-status-${status}`,
           color && `ant-badge-color-${color}`
-        ]} aria-hidden="true" title={nativeTitle}>{#if !state.showAsDot}<bdi>{#if state.digitString}{#each [...state.display] as character, index (state.display.length - index)}<span class="ant-scroll-number-only" style="transition:none"><span class="ant-scroll-number-only-unit current">{character}</span></span>{/each}{:else}{state.display}{/if}</bdi>{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description">{description}</span>{/if}
+        ]} aria-hidden="true" title={nativeTitle}>{#if !state.showAsDot}<BadgeNumber count={state.displayValue} />{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description">{description}</span>{/if}
   {/if}{#if !sourceCount}{' '}{/if}{#if state.showText}<span class="ant-badge-status-text">{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
 </span>
