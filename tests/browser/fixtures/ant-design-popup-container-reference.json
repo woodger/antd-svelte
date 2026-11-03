@@ -1,0 +1,690 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4"
+  },
+  "cases": [
+    {
+      "name": "tabs-default",
+      "component": "tabs",
+      "parent": "none",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-parent",
+      "component": "tabs",
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-inherited",
+      "component": "tabs",
+      "child": "absent",
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-child-undefined",
+      "component": "tabs",
+      "child": "undefined",
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-child",
+      "component": "tabs",
+      "child": "child",
+      "snapshot": {
+        "target": "child",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "child",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-theme-reset",
+      "component": "tabs",
+      "resetTheme": true,
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-local",
+      "component": "tabs",
+      "local": "local",
+      "snapshot": {
+        "target": "local",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "local",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-local-undefined",
+      "component": "tabs",
+      "local": "undefined",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-more",
+      "component": "tabs",
+      "local": "local",
+      "more": "more",
+      "snapshot": {
+        "target": "more",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "more",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-more-undefined",
+      "component": "tabs",
+      "more": "undefined",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-local-more-undefined",
+      "component": "tabs",
+      "local": "local",
+      "more": "undefined",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-child-local",
+      "component": "tabs",
+      "child": "child",
+      "local": "local",
+      "snapshot": {
+        "target": "local",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "local",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-shadow",
+      "component": "tabs",
+      "parent": "shadow",
+      "snapshot": {
+        "target": "shadow",
+        "shadow": true,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-child-shadow",
+      "component": "tabs",
+      "child": "shadow",
+      "snapshot": {
+        "target": "shadow",
+        "shadow": true,
+        "calls": [
+          {
+            "getter": "child",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-shadow-local-undefined",
+      "component": "tabs",
+      "parent": "shadow",
+      "local": "undefined",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-shadow-menu",
+      "component": "tabs",
+      "parent": "shadow",
+      "menu": true,
+      "snapshot": {
+        "target": "shadow",
+        "shadow": true,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "tabs-more"
+          }
+        ]
+      }
+    },
+    {
+      "name": "color-parent",
+      "component": "color-picker",
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "color-picker"
+          }
+        ]
+      },
+      "beforeOpen": [],
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "color-child-undefined",
+      "component": "color-picker",
+      "child": "undefined",
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "color-picker"
+          }
+        ]
+      },
+      "beforeOpen": [],
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "color-child",
+      "component": "color-picker",
+      "child": "child",
+      "snapshot": {
+        "target": "child",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "child",
+            "trigger": "color-picker"
+          }
+        ]
+      },
+      "beforeOpen": [],
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "color-local",
+      "component": "color-picker",
+      "local": "local",
+      "snapshot": {
+        "target": "local",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "local",
+            "trigger": "color-picker"
+          }
+        ]
+      },
+      "beforeOpen": [],
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "color-local-undefined",
+      "component": "color-picker",
+      "local": "undefined",
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "color-picker"
+          }
+        ]
+      },
+      "beforeOpen": [],
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "color-theme-reset",
+      "component": "color-picker",
+      "resetTheme": true,
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "color-picker"
+          }
+        ]
+      },
+      "beforeOpen": [],
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "color-shadow",
+      "component": "color-picker",
+      "parent": "shadow",
+      "snapshot": {
+        "target": "shadow",
+        "shadow": true,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "color-picker"
+          }
+        ]
+      },
+      "beforeOpen": [],
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "color-default",
+      "component": "color-picker",
+      "parent": "none",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      },
+      "beforeOpen": [],
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tour-ignores-provider",
+      "component": "tour",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      }
+    },
+    {
+      "name": "tour-local",
+      "component": "tour",
+      "local": "local",
+      "snapshot": {
+        "target": "local",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "local",
+            "trigger": "none"
+          },
+          {
+            "getter": "local",
+            "trigger": "tour-placeholder"
+          }
+        ]
+      }
+    },
+    {
+      "name": "tour-ignores-child",
+      "component": "tour",
+      "child": "child",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      }
+    },
+    {
+      "name": "tabs-render-bar-inherit",
+      "component": "tabs",
+      "bar": "inherit",
+      "snapshot": {
+        "target": "parent",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-render-bar-undefined",
+      "component": "tabs",
+      "bar": "undefined",
+      "snapshot": {
+        "target": "body",
+        "shadow": false,
+        "calls": []
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "tabs-render-bar-local",
+      "component": "tabs",
+      "bar": "local",
+      "snapshot": {
+        "target": "local",
+        "shadow": false,
+        "calls": [
+          {
+            "getter": "bar",
+            "trigger": "tabs-more"
+          }
+        ]
+      },
+      "refresh": {
+        "same": true,
+        "value": "Retained container draft",
+        "selection": [
+          2,
+          8
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    }
+  ]
+}

@@ -2350,7 +2350,15 @@
         "tests/browser/fixtures/TabsMorePositionFixtures.svelte",
         "tests/browser/tabs-more-position.spec.ts",
         "tests/package/tabs-more-position.ssr.test.ts",
-        "src/lib/vendor/LICENSE.rc-dropdown"
+        "src/lib/vendor/LICENSE.rc-dropdown",
+        "src/lib/types.ts",
+        "tests/browser/fixtures/ant-design-popup-container-reference.json",
+        "tests/browser/fixtures/popup-container-presets.ts",
+        "tests/browser/fixtures/PopupContainerCase.svelte",
+        "tests/browser/fixtures/PopupContainerContent.svelte",
+        "tests/browser/fixtures/PopupContainerFixtures.svelte",
+        "tests/browser/popup-container.spec.ts",
+        "tests/package/popup-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -2385,7 +2393,7 @@
             "tests/browser/fixtures/TabsOverflowFixtures.svelte",
             "tests/browser/fixtures/ant-design-tabs-overflow-metrics.json"
           ],
-          "note": "Перенесены source visible range с floor на trailing edge, hidden tabs/operations, More icon precedence, locale listbox, hover/click/focus/contextMenu, delays, placement, visible/onVisibleChange, popupRender(menu,{restTabs,onClose}), overlay style/class/callback, container, autofocus и min-overlay width. Native scroll сохраняется; тот же Add переносится в operations с placeholder и исходным card gutter. More keyboard повторяет source Up/Down, включая первый Up к предпоследнему; popup menu имеет native option/close sibling buttons и Home/End. Mouse option закрывает menu, More hover keyboard сохраняет его, close только запрашивает edit. Официальный UMD задаёт 35 эталонов icon/layout/RTL/locale и 3 сценария выбора/scroll. Native adaptations: MouseEvent/PointerEvent для keyboard activation, encoded panel IDs, доступное имя пустой More, отсутствие stale aria-activedescendant и owned focus из portal. Контролируемая visible перекрывает internal requests/onClose; onVisibleChange заменяет pointer/dismiss callback, keyboard и aria-expanded используют internal open как в rc-tabs. Raw overlay, autoDestroy, openClassName, раздельные actions/touch и motion описаны отдельной feature. Arrow, align/alignPoint, placements/builtinPlacements и onPopupAlign описаны отдельной feature. Raw prefixCls пока не перенесён. Source tokens/semantic/config описаны отдельными features; общий ConfigProvider.getPopupContainer остаётся gap."
+          "note": "Перенесены source visible range с floor на trailing edge, hidden tabs/operations, More icon precedence, locale listbox, hover/click/focus/contextMenu, delays, placement, visible/onVisibleChange, popupRender(menu,{restTabs,onClose}), overlay style/class/callback, container, autofocus и min-overlay width. Native scroll сохраняется; тот же Add переносится в operations с placeholder и исходным card gutter. More keyboard повторяет source Up/Down, включая первый Up к предпоследнему; popup menu имеет native option/close sibling buttons и Home/End. Mouse option закрывает menu, More hover keyboard сохраняет его, close только запрашивает edit. Официальный UMD задаёт 35 эталонов icon/layout/RTL/locale и 3 сценария выбора/scroll. Native adaptations: MouseEvent/PointerEvent для keyboard activation, encoded panel IDs, доступное имя пустой More, отсутствие stale aria-activedescendant и owned focus из portal. Контролируемая visible перекрывает internal requests/onClose; onVisibleChange заменяет pointer/dismiss callback, keyboard и aria-expanded используют internal open как в rc-tabs. Raw overlay, autoDestroy, openClassName, раздельные actions/touch и motion описаны отдельной feature. Arrow, align/alignPoint, placements/builtinPlacements и onPopupAlign описаны отдельной feature. Raw prefixCls пока не перенесён. Source tokens/semantic/config и наследование ConfigProvider.getPopupContainer описаны отдельными features."
         },
         {
           "id": "more-runtime",
@@ -2412,7 +2420,7 @@
             "tests/package/tabs-more-runtime.ssr.test.ts",
             "src/lib/vendor/LICENSE.rc-trigger"
           ],
-          "note": "Перенесён OperationNode → rc-dropdown 1.0.3 → trigger 3.10.1: overlay Snippet заменяет menu/popupRender, клавиатура More выбирает tabs даже без menu DOM; контент ленивый; default сохраняет DOM/state, autoDestroy удаляет после leave end. OpenClassName заменяет исходный класс, animation перекрывает transitionName с prefix ant-tabs-dropdown-. CSS-рецепт извлекает 74 rules и 4 slide-up/down keyframes с ограничением :where(.ant-tabs-dropdown) без роста specificity; placement меняет исходную анимацию. ShowAction/hideAction разрешаются отдельно, [] отключает сторону, contextMenu по умолчанию скрывается click, focus скрывает по blur кнопки даже при переходе внутрь popup, hover без click добавляет touch только на соответствующей стороне. OperationNode.open, Dropdown.visible и uncontrolled Trigger сохраняют разные роли: own visible=undefined включает Trigger, keyboard/onClose меняют только open, open class и autoFocus/Tab отключены этой веткой; смена visible синхронизирует внутренний Trigger как useControlledState. 33 UMD-эталона задают pointer/keyboard/context/touch, callbacks, content retention и appear/enter/leave classes/durations/keyframes. Native SSR shell, outgoing aria-hidden/inert, reduced/live motion disable и cleanup portal сохраняются; reversal отменяет уничтожение, скрытый родитель закрывает nested popup и освобождает Escape. Arrow и alignment/placements описаны отдельной feature; prefixCls и общий ConfigProvider.getPopupContainer остаются gaps общей overflow/extended-api."
+          "note": "Перенесён OperationNode → rc-dropdown 1.0.3 → trigger 3.10.1: overlay Snippet заменяет menu/popupRender, клавиатура More выбирает tabs даже без menu DOM; контент ленивый; default сохраняет DOM/state, autoDestroy удаляет после leave end. OpenClassName заменяет исходный класс, animation перекрывает transitionName с prefix ant-tabs-dropdown-. CSS-рецепт извлекает 74 rules и 4 slide-up/down keyframes с ограничением :where(.ant-tabs-dropdown) без роста specificity; placement меняет исходную анимацию. ShowAction/hideAction разрешаются отдельно, [] отключает сторону, contextMenu по умолчанию скрывается click, focus скрывает по blur кнопки даже при переходе внутрь popup, hover без click добавляет touch только на соответствующей стороне. OperationNode.open, Dropdown.visible и uncontrolled Trigger сохраняют разные роли: own visible=undefined включает Trigger, keyboard/onClose меняют только open, open class и autoFocus/Tab отключены этой веткой; смена visible синхронизирует внутренний Trigger как useControlledState. 33 UMD-эталона задают pointer/keyboard/context/touch, callbacks, content retention и appear/enter/leave classes/durations/keyframes. Native SSR shell, outgoing aria-hidden/inert, reduced/live motion disable и cleanup portal сохраняются; reversal отменяет уничтожение, скрытый родитель закрывает nested popup и освобождает Escape. Arrow и alignment/placements описаны отдельной feature; prefixCls остаётся gap общей overflow/extended-api. Наследование ConfigProvider.getPopupContainer описано отдельной feature."
         },
         {
           "id": "more-positioning",
@@ -2438,7 +2446,7 @@
             "tests/package/tabs-more-position.ssr.test.ts",
             "src/lib/vendor/LICENSE.rc-dropdown"
           ],
-          "note": "Перенесён Dropdown 1.0.3 → Trigger 3.10.1: шесть физических placements, shallow align overrides, replacement placements и приоритет own builtinPlacements, включая undefined. Общий числовой useAlign сохраняет прежний вход Tour и поддерживает numeric/percent offset и targetOffset, adjust 0/false/negative, shift, flip cache, visible/scroll/visibleFirst, rounding и source placement lookup. DynamicInset и legacy _experimental.dynamicInset выбирают right/bottom; useCssRight/useCssBottom/useCssTransform/ignoreShake остаются неиспользуемыми полями исходного AlignType и сохраняются в callback. Arrow добавляет исходный div и show-arrow class; собственных стилей у Tabs arrow в upstream нет, raw overlay focus пропускает div-arrow. AlignPoint использует client coordinates click/hover/contextMenu и сохраняет fallback к кнопке для keyboard/touch без точки; minWidth по умолчанию выключен для point mode, own undefined также выключает stretch. Point + click-hide закрывается при scroll/resize, hover сохраняет точку и popup даже после ухода кнопки за viewport. OnPopupAlign получает DOM и фактический align перед записью offsets; количество callbacks не фиксируется, при нулевом scale alignment/callback пропускается. 51 эталон официального UMD задаёт coordinates, classes, CSS modes, offsets, callback payload, arrow/focus и containers. Native adaptations сохраняются: fixed top-layer surface, неограниченная portal-геометрия при clipping родителя, непрерывное слежение за layout, измерение реального border box при content-box и отдельные visibility/inert правила; CSS-строка overlayStyle идёт после offsets/arrow variables. Flip обновляет CSS insets и при неизменных координатах; autoFocus выполняется один раз за открытый сеанс. Runtime обновления не сбрасывают DOM/state/draft/selection/focus; idle/reentrant callback loop и cleanup scrollers/frames после unmount защищены тестами. More prefixCls и общий provider container остаются gap."
+          "note": "Перенесён Dropdown 1.0.3 → Trigger 3.10.1: шесть физических placements, shallow align overrides, replacement placements и приоритет own builtinPlacements, включая undefined. Общий числовой useAlign сохраняет прежний вход Tour и поддерживает numeric/percent offset и targetOffset, adjust 0/false/negative, shift, flip cache, visible/scroll/visibleFirst, rounding и source placement lookup. DynamicInset и legacy _experimental.dynamicInset выбирают right/bottom; useCssRight/useCssBottom/useCssTransform/ignoreShake остаются неиспользуемыми полями исходного AlignType и сохраняются в callback. Arrow добавляет исходный div и show-arrow class; собственных стилей у Tabs arrow в upstream нет, raw overlay focus пропускает div-arrow. AlignPoint использует client coordinates click/hover/contextMenu и сохраняет fallback к кнопке для keyboard/touch без точки; minWidth по умолчанию выключен для point mode, own undefined также выключает stretch. Point + click-hide закрывается при scroll/resize, hover сохраняет точку и popup даже после ухода кнопки за viewport. OnPopupAlign получает DOM и фактический align перед записью offsets; количество callbacks не фиксируется, при нулевом scale alignment/callback пропускается. 51 эталон официального UMD задаёт coordinates, classes, CSS modes, offsets, callback payload, arrow/focus и containers. Native adaptations сохраняются: fixed top-layer surface, неограниченная portal-геометрия при clipping родителя, непрерывное слежение за layout, измерение реального border box при content-box и отдельные visibility/inert правила; CSS-строка overlayStyle идёт после offsets/arrow variables. Flip обновляет CSS insets и при неизменных координатах; autoFocus выполняется один раз за открытый сеанс. Runtime обновления не сбрасывают DOM/state/draft/selection/focus; idle/reentrant callback loop и cleanup scrollers/frames после unmount защищены тестами. More prefixCls остаётся gap. Наследование provider container описано отдельной feature."
         },
         {
           "id": "bar-extra",
@@ -2657,13 +2665,36 @@
         },
         {
           "id": "extended-api",
-          "title": "PrefixCls, общий popup container и React JSX sugar",
+          "title": "PrefixCls и React JSX sugar",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет произвольного prefixCls и общего ConfigProvider.getPopupContainer. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Native root attributes/events и bind:nativeElement поддерживаются как Svelte API, без React ref wrapper."
+          "note": "Нет произвольного prefixCls. Общий ConfigProvider.getPopupContainer описан отдельной feature. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Native root attributes/events и bind:nativeElement поддерживаются как Svelte API, без React ref wrapper."
+        },
+        {
+          "id": "popup-container",
+          "title": "Наследование getPopupContainer и ShadowRoot portal",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/types.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-popup-container-reference.json",
+            "tests/browser/fixtures/popup-container-presets.ts",
+            "tests/browser/fixtures/PopupContainerCase.svelte",
+            "tests/browser/fixtures/PopupContainerContent.svelte",
+            "tests/browser/fixtures/PopupContainerFixtures.svelte",
+            "tests/browser/popup-container.spec.ts",
+            "tests/package/popup-container.ssr.test.ts",
+            "src/lib/Tabs.svelte",
+            "src/lib/TabsOverflow.svelte"
+          ],
+          "note": "Перенесён порядок ConfigProvider → Tabs → OperationNode/Dropdown: отсутствие корневого getPopupContainer наследует provider, собственный undefined выключает его; more.getPopupContainer имеет следующий приоритет, включая undefined. Вложенный provider с undefined сохраняет родителя; theme.inherit=false не меняет container context. Стандартный bar/renderTabBar получает разрешённую функцию, semantic callbacks сохраняют raw props. Portal принимает HTMLElement или ShadowRoot; стили shadow subtree предоставляет потребитель. Native top layer и modal fallback без getter сохранены. Смена функции с тем же контейнером не перемещает popup и сохраняет DOM/state/draft/focus/selection; composedPath защищает внутри-popup pointer/keyboard, lookup и focus используют фактический root. 30 общих эталонов UMD включают локальные/глобальные приоритеты, ShadowRoot и отсутствие наследования Tour. Общий перенос provider container на остальные families продолжается; React-specific event wrappers не добавляются."
         }
       ]
     },
@@ -3249,7 +3280,18 @@
         "src/lib/ColorPickerPresets.svelte",
         "src/lib/slider-internal-context.ts",
         "src/lib/popup-portal.dom.ts",
-        "src/lib/popup-position.engine.ts"
+        "src/lib/popup-position.engine.ts",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/types.ts",
+        "src/lib/popup.dom.ts",
+        "tests/browser/fixtures/ant-design-popup-container-reference.json",
+        "tests/browser/fixtures/popup-container-presets.ts",
+        "tests/browser/fixtures/PopupContainerCase.svelte",
+        "tests/browser/fixtures/PopupContainerContent.svelte",
+        "tests/browser/fixtures/PopupContainerFixtures.svelte",
+        "tests/browser/popup-container.spec.ts",
+        "tests/package/popup-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -3322,6 +3364,28 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Произвольные component tokens/prefix CSS, полный rc-trigger DOM boundary для nested clipping/scaled containers, motion и React diagnostics/PurePanel не перенесены. Числовой viewport flip/shift, все 12 placements, arrow/pointAtCenter и custom container используют общий source engine с Tour. V1-ready не означает полный React API."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/types.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-popup-container-reference.json",
+            "tests/browser/fixtures/popup-container-presets.ts",
+            "tests/browser/fixtures/PopupContainerCase.svelte",
+            "tests/browser/fixtures/PopupContainerContent.svelte",
+            "tests/browser/fixtures/PopupContainerFixtures.svelte",
+            "tests/browser/popup-container.spec.ts",
+            "tests/package/popup-container.ssr.test.ts",
+            "src/lib/ColorPicker.svelte"
+          ],
+          "note": "ColorPicker → Popover/Tooltip выбирает локальную функцию getPopupContainer или ConfigProvider fallback через ||; собственный undefined сохраняет provider, в отличие от Tabs. Вложенный provider наследует функцию и при undefined, независимо от theme.inherit. Общий portal принимает HTMLElement или ShadowRoot, переносит theme variables и сохраняет native modal fallback без getter. Смена функции с тем же DOM-контейнером сохраняет popup, inputs, state/focus/selection. ComposedPath отличает pointer внутри shadow popup от внешнего; закрытие возвращает focus в native trigger. Стили document не внедряются в ShadowRoot автоматически. Приоритеты, payload trigger и обновления сверены с официальным UMD; SSR не вызывает getter. Как source lazy popup, ColorPicker не вызывает локальный/provider getter до первого открытия; destroyOnHidden снимает скрытый custom portal. Остальные source consumers общего container context переносятся отдельно."
         }
       ]
     },
@@ -8684,7 +8748,18 @@
         "tests/package/tree-select-theme.ssr.test.ts",
         "tests/browser/tree-select-theme.spec.ts",
         "tests/browser/fixtures/TreeSelectThemeFixtures.svelte",
-        "tests/browser/fixtures/ant-design-tree-select-metrics.json"
+        "tests/browser/fixtures/ant-design-tree-select-metrics.json",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/types.ts",
+        "src/lib/popup-portal.dom.ts",
+        "tests/browser/fixtures/ant-design-popup-container-reference.json",
+        "tests/browser/fixtures/popup-container-presets.ts",
+        "tests/browser/fixtures/PopupContainerCase.svelte",
+        "tests/browser/fixtures/PopupContainerContent.svelte",
+        "tests/browser/fixtures/PopupContainerFixtures.svelte",
+        "tests/browser/popup-container.spec.ts",
+        "tests/package/popup-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -9060,6 +9135,27 @@
             "tests/browser/tabs-semantic.spec.ts"
           ],
           "note": "Tabs class/style/classNames/styles, indicator/indicatorSize и add/remove/more icons. Отсутствующий config наследуется; явный record заменяется целиком. Глобальный more использует только icon по Ant Design 6.6.8. Общий аудит ConfigProvider продолжается."
+        },
+        {
+          "id": "popup-container",
+          "title": "Наследование getPopupContainer и подключение потребителей",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/types.ts",
+            "src/lib/popup-portal.dom.ts",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-popup-container-reference.json",
+            "tests/browser/fixtures/popup-container-presets.ts",
+            "tests/browser/fixtures/PopupContainerCase.svelte",
+            "tests/browser/fixtures/PopupContainerContent.svelte",
+            "tests/browser/fixtures/PopupContainerFixtures.svelte",
+            "tests/browser/popup-container.spec.ts",
+            "tests/package/popup-container.ssr.test.ts"
+          ],
+          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами; Tour намеренно не читает глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. Select/AutoComplete, Tooltip/Popover/Popconfirm, Dropdown/Menu, Date/Time/RangePicker, TreeSelect/Cascader/Mentions, Slider, Modal/Drawer и прочие исходные consumers ещё не подключены; полный provider API не заявлен."
         }
       ]
     },

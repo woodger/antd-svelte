@@ -1,6 +1,8 @@
+import { getPopupActiveElement } from './popup.dom';
+
 /** Portal сохраняет вычисленные CSS variables исходной Svelte theme boundary. */
 export function connectPopupPortal(element: HTMLElement, options: {
-  getPopupContainer: false | ((reference?: HTMLElement) => HTMLElement) | undefined;
+  getPopupContainer: false | ((reference?: HTMLElement) => HTMLElement | ShadowRoot) | undefined;
   reference?: HTMLElement;
   autoLock: boolean;
   origin: HTMLElement;
@@ -21,9 +23,9 @@ export function connectPopupPortal(element: HTMLElement, options: {
   let active = true;
   let queued = false;
 
-  function move(parent: HTMLElement, before: ChildNode | null) {
+  function move(parent: HTMLElement | ShadowRoot, before: ChildNode | null) {
     if (element.parentNode === parent && element.nextSibling === before) return;
-    const focused = document.activeElement;
+    const focused = getPopupActiveElement(element);
     if (typeof parent.moveBefore === 'function' && parent.isConnected && element.isConnected) {
       parent.moveBefore(element, before);
     } else {

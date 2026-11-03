@@ -671,6 +671,7 @@ export {
   type RenderEmptyComponent,
   type RenderEmptyContent,
   type RenderEmptyHandler,
+  type GetPopupContainer,
   type TableLocale,
   type ComponentSize,
   type ThemeConfig,

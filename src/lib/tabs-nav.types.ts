@@ -52,7 +52,8 @@ export interface TabsTabBarProps {
   /** Callback-ref стандартной панели; null при замене ref/unmount, не вызывается при SSR. */
   ref?: (element: HTMLDivElement | null) => void;
   style?: string;
-  getPopupContainer?: (trigger: HTMLElement) => HTMLElement;
+  /** Разрешённый container context; override undefined стандартной панели выключает его. */
+  getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   popupClassName?: string;
   indicator?: TabsIndicator;
   /** Разрешённые semantic slots; popup — плоская строка. */

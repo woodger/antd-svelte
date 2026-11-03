@@ -55,6 +55,10 @@ export interface ColorPickerProps extends Omit<HTMLButtonAttributes,
   destroyOnHidden?: boolean;
   /** @deprecated Используйте destroyOnHidden. */
   destroyTooltipOnHide?: boolean;
+  /**
+   * Локальная функция перекрывает ConfigProvider; undefined сохраняет provider fallback.
+   * До первого открытия не вызывается; после destroyOnHidden снова ждёт открытия.
+   */
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement;
   /** Custom trigger сохраняет собственную native семантику. */
   children?: Snippet;

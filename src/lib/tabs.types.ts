@@ -84,6 +84,7 @@ export interface TabsMoreProps {
   onVisibleChange?: (visible: boolean) => void;
   overlayClassName?: string;
   overlayStyle?: string;
+  /** Перекрывает корневую/provider функцию, включая собственный undefined. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   autoFocus?: boolean;
   minOverlayWidthMatchTrigger?: boolean;
@@ -194,6 +195,7 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   moreIcon?: TabsContent;
   /** @deprecated Используйте classNames.popup.root. */
   popupClassName?: string;
+  /** Отсутствие наследует ConfigProvider; собственный undefined выключает наследование. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   /** @defaultValue 'top' */
   tabPlacement?: TabsPlacement;

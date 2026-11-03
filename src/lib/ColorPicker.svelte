@@ -4,7 +4,7 @@
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
-  import { connectPopup } from './popup.dom';
+  import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { connectPopupPortal } from './popup-portal.dom';
   import { getPopupAlignment, getPopupArrowStyle, type PopupFlipCache } from './popup-position.engine';
   import { genAlphaColor, generateColor, getColorAlpha, getColorModes, getColorText,
@@ -47,6 +47,10 @@
   let portalOrigin: HTMLElement | undefined;
   let portalMarker: Comment | undefined;
   let visited = $state(false);
+  let rendered = $derived(open || visited && !(props.destroyOnHidden ?? props.destroyTooltipOnHide));
+  let portalTarget = $state<HTMLElement | ShadowRoot>();
+  let containerGetter = $derived(props.getPopupContainer || config.getPopupContainer);
+  let customContainer = $derived(rendered && containerGetter !== undefined);
   let actualPlacement = $state('bottom');
   let arrowStyle = $state('');
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -113,9 +117,16 @@
     previousOpen = props.open;
   });
   $effect.pre(() => {
-    if (!open && popup?.contains(popup.ownerDocument.activeElement)) {
+    const surface = popup;
+    if (!open && surface?.contains(getPopupActiveElement(surface))) {
       untrack(() => anchor?.focus({ preventScroll: true }));
     }
+  });
+  $effect.pre(() => {
+    const getter = containerGetter;
+    const source = anchor;
+    // Одинаковый DOM-контейнер не требует переподключать portal при смене функции.
+    portalTarget = rendered && source ? getter?.(source) : undefined;
   });
   $effect(() => { innerMode = color.isGradient() ? 'gradient' : 'single'; });
   $effect(() => {
@@ -310,7 +321,8 @@
   style={`display:contents;${config.themeStyle ?? ''}`}
   {@attach element => {
     const source = anchor;
-    const getter = props.getPopupContainer;
+    const container = portalTarget;
+    const custom = customContainer;
     if (!source) return;
     return untrack(() => {
       portalOrigin ??= element.parentElement ?? undefined;
@@ -320,7 +332,7 @@
         portalOrigin.insertBefore(portalMarker, element);
       }
       return connectPopupPortal(element, {
-        getPopupContainer: getter ? () => getter(source) : undefined,
+        getPopupContainer: custom ? () => container ?? element.ownerDocument.body : undefined,
         reference: source,
         autoLock: false,
         origin: portalOrigin,
@@ -337,7 +349,7 @@
     onpointerenter={() => { if (timer) clearTimeout(timer); }} onpointerleave={() => hover(false)}>
     {#if arrow}<div class="ant-popover-arrow" style={arrowStyle} aria-hidden="true"></div>{/if}
     <div class="ant-popover-container color-picker-surface" style={localStyles?.popupOverlayInner}>
-      {#if open || visited && !(props.destroyOnHidden ?? props.destroyTooltipOnHide)}
+      {#if rendered}
         <ColorPickerPanel {prefixCls} value={color} {mode} {modes} {format} props={mergedProps}
           bind:activeIndex bind:dragging onChange={change} onComplete={complete}
           onMode={changeMode} onFormat={changeFormat} />

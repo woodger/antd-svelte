@@ -1,7 +1,7 @@
 <script lang="ts">
   import { flushSync, onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
-  import { connectPopup } from './popup.dom';
+  import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { connectPopupPortal } from './popup-portal.dom';
   import { getTooltipDelay } from './tooltip.engine';
   import { getPopupPlacement, type PopupFlipCache } from './popup-position.engine';
@@ -66,7 +66,7 @@
     removeStyle?: string;
     popupClassName?: string;
     popupStyle?: string;
-    getPopupContainer?: (trigger: HTMLElement) => HTMLElement;
+    getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
     tabBarGutter?: number;
     themeClassName?: string;
     themeStyle?: string;
@@ -144,7 +144,7 @@
   let containerGetter = $derived(more && Object.hasOwn(more, 'getPopupContainer')
     ? more.getPopupContainer : getPopupContainer);
   let customContainer = $derived(containerGetter !== undefined);
-  let portalTarget = $state<HTMLElement>();
+  let portalTarget = $state<HTMLElement | ShadowRoot>();
   let overlayStyle = $derived(more && Object.hasOwn(more, 'overlayStyle')
     ? more.overlayStyle : popupStyle);
   let ownOverlayClass = $derived(Boolean(more && Object.hasOwn(more, 'overlayClassName')));
@@ -227,7 +227,7 @@
   });
 
   $effect.pre(() => {
-    const focused = button?.ownerDocument.activeElement;
+    const focused = popup ? getPopupActiveElement(popup) : button?.ownerDocument.activeElement;
     const canShow = available;
     const current = items;
     if (!canShow) {
@@ -474,7 +474,8 @@
     const key = selectedKey;
     const id = selectedId;
     if (key !== null && id && list) {
-      const item = list.ownerDocument.getElementById(id);
+      const item = Array.from(list.querySelectorAll<HTMLElement>('[id]'))
+        .find(element => element.id === id);
       if (item) untrack(() => item.scrollIntoView(false));
     }
   });
@@ -567,6 +568,8 @@
   function handleKeydown(event: KeyboardEvent) {
     if (event.defaultPrevented || event.isComposing) return;
     const fromMore = event.currentTarget === button;
+    // Document-delegation Svelte видит ShadowRoot host в event.target.
+    const target = event.composedPath()[0] ?? event.target;
     if (fromMore && !open) {
       if (['ArrowDown', ' ', 'Enter'].includes(event.key)) {
         cancelPending();
@@ -575,9 +578,9 @@
       }
       return;
     }
-    if (event.target instanceof Element && event.target.closest('.ant-tabs-dropdown-menu-item-remove'))
+    if (target instanceof Element && target.closest('.ant-tabs-dropdown-menu-item-remove'))
       return;
-    if (!fromMore && event.target instanceof Element && event.target.closest('[role="option"]')
+    if (!fromMore && target instanceof Element && target.closest('[role="option"]')
       && (event.key === 'Enter' || event.key === ' ')) return;
 
     if (fromMore && event.key === 'Escape') {

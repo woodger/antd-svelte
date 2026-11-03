@@ -351,8 +351,11 @@ prepare hooks. Custom motion styles применяются после semantic c
 добавляется после classNames.content и не затрагивает заголовок.
 Native reduced motion и живое отключение завершают текущий переход; DOM сохраняется
 до leave end, затем действует destroyOnHidden. EventProps.className/style применяются
-в стабильном состоянии; phase styles имеют приоритет. Произвольный prefixCls и общий
-getPopupContainer остаются задачами.
+в стабильном состоянии; phase styles имеют приоритет. Произвольный prefixCls остаётся
+задачей. Общий getPopupContainer наследуется из ConfigProvider при отсутствии корневого
+prop Tabs; явный undefined и more overrides перекрывают его. ColorPicker использует
+локальную функцию или provider fallback. Точные приоритеты и текущие потребители
+описаны в [readme](../../readme.md#темы-и-локализация).
 
 ## Токены Menu
 

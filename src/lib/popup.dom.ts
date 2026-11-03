@@ -3,6 +3,11 @@ import type { TooltipPlacement } from './tooltip.types';
 
 const openPopups = new WeakMap<Document, HTMLElement[]>();
 
+export function getPopupActiveElement(element: Element) {
+  const root = element.getRootNode() as Document | ShadowRoot;
+  return root.activeElement ?? element.ownerDocument.activeElement;
+}
+
 export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   trigger?: Element;
   placement: TooltipPlacement;
@@ -151,16 +156,19 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   }
 
   function handlePointerdown(event: PointerEvent) {
-    const target = event.target;
+    const target = event.composedPath()[0] ?? event.target;
+    const popupRoot = popup.getRootNode();
+    const trigger = options.trigger ?? anchor;
+    const triggerRoot = trigger.getRootNode();
 
     if (shown
       && !popup.inert
       && !anchor.closest('[inert]')
       && target instanceof Node
       && !popup.contains(target)
-      && !(options.trigger ?? anchor).contains(
-        target
-      ))
+      && !('host' in popupRoot && popupRoot.host === target)
+      && !trigger.contains(target)
+      && !('host' in triggerRoot && triggerRoot.host === target))
       options.onDismiss('outside');
   }
 

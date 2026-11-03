@@ -39,7 +39,6 @@
     more,
     moreIcon,
     popupClassName,
-    getPopupContainer,
     tabPlacement,
     tabPosition,
     centered,
@@ -63,6 +62,13 @@
   }: TabsProps = $props();
 
   const config = useConfig();
+  let getPopupContainer = $derived(rest.getPopupContainer);
+  let popupContainer = $derived(Object.hasOwn(rest, 'getPopupContainer')
+    ? getPopupContainer : config.getPopupContainer);
+  let attributes = $derived.by(() => {
+    const { getPopupContainer: _container, ...attributes } = rest;
+    return attributes;
+  });
   const componentTheme = useComponentTheme('Tabs');
   const designTokens = useToken();
   const generatedId = $props.id();
@@ -192,7 +198,7 @@
     onTabScroll,
     extra: tabBarExtraContent,
     style: tabBarStyle,
-    getPopupContainer,
+    getPopupContainer: popupContainer,
     popupClassName: [popupClassName, classes.popup.root].filter(Boolean).join(' ') || undefined,
     indicator: {
       size: indicator?.size ?? indicatorSize
@@ -289,7 +295,7 @@
   <TabsNav bar={props} context={navContext} />
 {/snippet}
 
-<div {...rest} bind:this={nativeElement} id={rootId} dir={config.direction} class={[
+<div {...attributes} bind:this={nativeElement} id={rootId} dir={config.direction} class={[
     'ant-tabs ant-tabs-css-var',
     componentTheme.className,
     componentTheme.className && 'ant-tabs-source-theme',

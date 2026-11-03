@@ -9,6 +9,11 @@
 
 ### Added
 
+- ConfigProvider.getPopupContainer: наследование для Tabs и ColorPicker с исходными
+  приоритетами локальных props и undefined. Поддержан ShadowRoot в общем portal,
+  сохранение состояния при смене функции с тем же контейнером, pointer/keyboard
+  события и focus в shadow popup. Tour сохраняет собственный container API.
+  Добавлены 30 UMD-эталонов и SSR/browser-проверки; остальные consumers ещё переносятся.
 - Tabs More: arrow, align/alignPoint, placements/builtinPlacements и onPopupAlign
   с исходными offsets/regions/flip/shift, dynamic inset и приоритетом CSS. Общий
   числовой useAlign расширен с сохранением поведения Tour; native top layer,

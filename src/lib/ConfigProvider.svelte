@@ -25,7 +25,7 @@
   import type { CheckboxConfig } from './checkbox.types';
   import type { SwitchConfig } from './switch.types';
   import type { WaveConfig } from './wave.types';
-  import type { RenderEmptyHandler } from './types';
+  import type { GetPopupContainer, RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
@@ -73,6 +73,12 @@
     virtual?: boolean;
     /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
     renderEmpty?: RenderEmptyHandler;
+    /**
+     * Наследуемый контейнер popup. Undefined сохраняет родительскую функцию.
+     * Пока используется Tabs и ColorPicker; Tour читает только локальную настройку, как upstream.
+     * Функция вызывается только в браузере; ShadowRoot не получает стили из document автоматически.
+     */
+    getPopupContainer?: GetPopupContainer;
     rangePicker?: RangePickerConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
@@ -122,6 +128,7 @@
     wave,
     virtual,
     renderEmpty,
+    getPopupContainer,
     rangePicker,
     textArea,
     input,
@@ -222,6 +229,9 @@
     },
     get renderEmpty() {
       return renderEmpty ?? parent.renderEmpty;
+    },
+    get getPopupContainer() {
+      return getPopupContainer || parent.getPopupContainer;
     },
     get rangePicker() {
       return rangePicker ?? parent.rangePicker;

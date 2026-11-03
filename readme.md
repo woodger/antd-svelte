@@ -1289,8 +1289,10 @@ ShowText может быть snippet с Color; children заменяет trigger
 Trigger, clear и presets — native buttons; popup использует native popover,
 12 placement, click/hover, arrow/pointAtCenter и getPopupContainer. По умолчанию portal
 находится в body; внутри native modal остаётся в dialog. CSS-переменные темы
-переносятся общим механизмом с Tour. Escape возвращает
-фокус; outside закрывает popup. DestroyOnHidden управляет сохранением черновиков;
+переносятся общим механизмом с Tour. Локальная функция getPopupContainer имеет
+приоритет над ConfigProvider.getPopupContainer; undefined использует provider.
+Getter не вызывается до первого открытия. Escape возвращает фокус; outside закрывает
+popup. DestroyOnHidden управляет сохранением черновиков;
 portal, listeners и timers очищаются. Panel изолирует FormItem и Compact. Как upstream,
 ColorPicker не добавляет скрытое поле в FormData; значение передаётся callbacks.
 
@@ -2216,6 +2218,10 @@ minOverlayWidthMatchTrigger, overlayClassName/overlayStyle, onOverlayClick и
 getPopupContainer; CSS styles задаются строкой. Корневые popupClassName и
 getPopupContainer также поддерживаются; одноимённые more overrides имеют приоритет,
 включая явно заданный undefined. Portal сохраняет тему и собственные CSS variables popup.
+ConfigProvider.getPopupContainer наследуется, если корневой prop Tabs отсутствует.
+Явный root getPopupContainer=undefined выключает provider, как исходный spread props.
+More имеет следующий приоритет, включая собственный undefined. Эти правила сохраняются
+в props стандартной панели при renderTabBar; semantic callbacks получают raw props.
 
 Выравнивание More повторяет rc-dropdown/rc-trigger 3.10.1. `placements` заменяет
 таблицу целиком, `builtinPlacements` имеет приоритет; его явный undefined даёт пустую
@@ -7182,6 +7188,18 @@ Switch, интерактивного Tag и Steps. Доступны disabled, sh
 GlobalToken и пять типов trigger. Настройки наследуются; явный record заменяет
 родительский целиком. Targets, timing и Svelte boundaries описаны
 [в справочнике Wave](./docs/reference/wave.md).
+
+ConfigProvider.getPopupContainer задаёт `(trigger?: HTMLElement) => HTMLElement | ShadowRoot`.
+Вложенный provider наследует функцию, когда его prop отсутствует или равен undefined;
+theme.inherit=false не сбрасывает эту настройку. Сейчас она подключена к Tabs и
+ColorPicker; остальные потребители исходного API ещё требуют переноса. Tour использует
+только собственный getPopupContainer, как Ant Design 6.6.8.
+Функция вызывается только в браузере. Без выбранной функции сохраняется native fallback
+в body или текущий modal dialog. Для ShadowRoot стили размещает потребитель;
+стили document автоматически в него не переходят. Обновление функции с тем же
+DOM-контейнером сохраняет popup, его state, фокус и выделение текста. Проверки —
+[popup-container](./tests/browser/popup-container.spec.ts) и `?fixture=popup-container`;
+30 сценариев наследования и приоритетов сверены с официальным UMD.
 
 Статические defaultSeed, default/dark/compact algorithms и getDesignToken
 работают без context и DOM. Их source-округления, overrides и ограничения описаны
