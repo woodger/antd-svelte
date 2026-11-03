@@ -6,7 +6,6 @@
   import { getTooltipDelay } from './tooltip.engine';
   import { getTabsMoreNavigationKey, isTabsMobileDevice } from './tabs-overflow.engine';
   import { getTabsNavigationKey, isTabsItemRemovable } from './tabs.engine';
-  import TabsMoreIcon from './TabsMoreIcon.svelte';
   import TabsEditIcon from './TabsEditIcon.svelte';
   import type {
     TabsContent,
@@ -26,7 +25,6 @@
     editable,
     locale,
     more,
-    moreIcon,
     defaultMoreIcon,
     removeIcon,
     removeClassName,
@@ -51,7 +49,6 @@
     editable: boolean;
     locale?: TabsLocale;
     more?: TabsMoreProps;
-    moreIcon?: TabsContent;
     defaultMoreIcon?: TabsContent;
     removeIcon?: TabsContent;
     removeClassName?: string;
@@ -91,8 +88,7 @@
   let available = $derived(items.length > 0 && !mobile);
   let visible = $derived(!mobile && Boolean(more && 'visible' in more
     ? more.visible : items.length && open));
-  let icon = $derived(more && 'icon' in more
-    ? more.icon === undefined ? 'More' : more.icon : moreIcon ?? defaultIcon);
+  let icon = $derived(more?.icon === undefined ? 'More' : more.icon);
   let placement = $derived(more?.placement ?? 'bottomLeft');
   let side = $derived(placement.startsWith('top') ? 'top' as const : 'bottom' as const);
   let align = $derived(placement.endsWith('Left') ? 'left' as const
@@ -101,6 +97,9 @@
     ? more.getPopupContainer : getPopupContainer);
   let overlayStyle = $derived(more && Object.hasOwn(more, 'overlayStyle')
     ? more.overlayStyle : popupStyle);
+  let ownOverlayClass = $derived(Boolean(more && Object.hasOwn(more, 'overlayClassName')));
+  let popupDirection = $derived(ownOverlayClass || rtl === undefined
+    ? config.direction : rtl ? 'rtl' : 'ltr');
   const initialStyle = untrack(() => [themeStyle, overlayStyle].filter(Boolean).join(';') || undefined);
   let initialStyleCleared = false;
   let matchWidth = $derived(more?.minOverlayWidthMatchTrigger !== false);
@@ -382,7 +381,6 @@
 {#snippet value(node: TabsContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
-{#snippet defaultIcon()}<TabsMoreIcon />{/snippet}
 {#snippet defaultRemove()}<TabsEditIcon name="close" />{/snippet}
 {#snippet menu()}
   <ul bind:this={list} id={popupId} role="listbox" tabindex="-1"
@@ -426,7 +424,7 @@
     class:ant-tabs-dropdown-open={visible} hidden={mobile}
     style={`${tabBarGutter === undefined ? '' : `margin-inline-start:${tabBarGutter}px;`}${items.length ? '' : 'visibility:hidden;order:1'}`}
     aria-haspopup="listbox" aria-controls={popupId} aria-expanded={open}
-    aria-label={icon === defaultIcon || icon === defaultMoreIcon || icon === null
+    aria-label={icon === defaultMoreIcon || icon === null
       || typeof icon === 'boolean' || icon === ''
       ? 'ellipsis' : undefined}
     onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
@@ -445,11 +443,12 @@
   </button>
   <div bind:this={popup} popover="manual" hidden={!shown || !visible} role="presentation"
     data-tabs-popup-owner={ownerId ?? rootId}
-    dir={config.direction} class={[
+    dir={popupDirection} class={[
       'ant-tabs-dropdown ant-tabs-css-var',
       themeClassName,
       `ant-tabs-dropdown-placement-${shown ? actualSide : side}${align === 'left' ? 'Left' : align === 'right' ? 'Right' : ''}`,
-      (rtl ?? config.direction === 'rtl') && 'ant-tabs-dropdown-rtl',
+      !ownOverlayClass && (rtl ?? config.direction === 'rtl')
+        && 'ant-tabs-dropdown-rtl',
       more && Object.hasOwn(more, 'overlayClassName') ? more.overlayClassName : popupClassName
     ]} style={initialStyle}
     onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}

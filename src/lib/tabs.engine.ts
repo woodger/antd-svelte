@@ -1,5 +1,6 @@
 import type { TabsItem, TabsPlacement, TabsPosition } from './tabs.types';
 
+/** ID native заголовка или панели для полностью пользовательской навигации Tabs. */
 export function getTabsItemId(rootId: string, key: string, kind: 'tab' | 'panel'): string {
   const encoded = Array.from(key, character => character.codePointAt(0)!.toString(16)).join('-');
   return `${rootId}-${kind}-${encoded || 'empty'}`;

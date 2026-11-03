@@ -2,6 +2,7 @@ import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize } from './types';
 import type { TabsAnimatedConfig } from './tabs-motion.types';
+import type { TabsRenderTabBar } from './tabs-nav.types';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end';
@@ -180,6 +181,8 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   /** @deprecated Используйте destroyOnHidden; явное современное false перекрывает alias. */
   destroyInactiveTabPane?: boolean;
   tabBarExtraContent?: TabsExtraContent;
+  /** Snippet получает разрешённые props и стандартную навигацию с заменяемыми props. */
+  renderTabBar?: TabsRenderTabBar;
   id?: string;
   'aria-label'?: string;
   'aria-labelledby'?: string;

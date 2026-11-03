@@ -26,8 +26,10 @@ export interface TabsEditableConfig {
 
 type TabsBarSlots = Omit<TabsSlots, 'popup'> & { popup?: string; };
 
-/** Заголовок вкладки; attributes дополняют или заменяют атрибуты его корневого элемента. */
-export type TabsTabNode = Snippet<[attributes?: HTMLAttributes<HTMLElement>]>;
+/** Атрибуты внешнего узла заголовка; нативная кнопка tab остаётся внутри. */
+export type TabsTabAttributes = HTMLAttributes<HTMLElement>;
+
+export type TabsTabNode = Snippet<[attributes?: TabsTabAttributes]>;
 
 /** Разрешённые настройки TabNavList; popup уже плоский, как в исходном rc-tabs. */
 export interface TabsTabBarProps {
@@ -39,21 +41,36 @@ export interface TabsTabBarProps {
   mobile: boolean;
   editable?: TabsEditableConfig;
   locale?: TabsLocale;
+  /** Замена целиком: отсутствие icon возвращает текст More исходного OperationNode. */
   more?: TabsMoreProps & { transitionName?: string; };
   tabBarGutter?: number;
+  /** Native выбор; KeyboardEvent сохраняет публичный MouseEvent contract и cancellation. */
   onTabClick: (key: string, event: MouseEvent | KeyboardEvent) => void;
   onTabScroll?: (info: TabsScrollInfo) => void;
   extra?: TabsExtraContent;
   className?: string;
+  /** Callback-ref стандартной панели; null при замене ref/unmount, не вызывается при SSR. */
+  ref?: (element: HTMLDivElement | null) => void;
   style?: string;
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement;
   popupClassName?: string;
   indicator?: TabsIndicator;
+  /** Разрешённые semantic slots; popup — плоская строка. */
   classNames?: TabsBarSlots;
+  /** CSS-строки; изменения body/content здесь не меняют панели Tabs. */
   styles?: TabsBarSlots;
-  /** Аналог renderWrapper: node принимает DOM attributes и Svelte attachments. */
-  children?: Snippet<[node: TabsTabNode, item: TabsItem]>;
+  /** Аналог renderWrapper/cloneElement: исходные attributes доступны для merge и attachments. */
+  children?: Snippet<[node: TabsTabNode, item: TabsItem, attributes: TabsTabAttributes]>;
 }
+
+/** Стандартная навигация с полным набором props; для замены используйте spread исходных props. */
+export type TabsDefaultTabBar = Snippet<[props: TabsTabBarProps]>;
+
+/** Custom bar заменяет только навигацию; панели и их lifecycle остаются в Tabs. */
+export type TabsRenderTabBar = Snippet<[
+  props: TabsTabBarProps,
+  DefaultTabBar: TabsDefaultTabBar
+]>;
 
 export interface TabsNavApi {
   readonly element: HTMLDivElement | undefined;

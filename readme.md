@@ -2235,6 +2235,51 @@ more.onVisibleChange заменяет внутренний pointer/dismiss callb
 <Tabs {items} aria-label="Разделы" more={{ trigger: 'click', popupRender: popup }} />
 ```
 
+`renderTabBar` получает разрешённые props навигации и Snippet стандартной панели.
+Он может обернуть её, заменить props или построить собственную шапку:
+
+```svelte
+<script lang="ts">
+  import { Tabs, type TabsDefaultTabBar, type TabsTabBarProps } from 'antd-svelte';
+
+  const items = [{ key: 'profile', label: 'Профиль' }, { key: 'history', label: 'История' }];
+</script>
+
+{#snippet bar(props: TabsTabBarProps, DefaultTabBar: TabsDefaultTabBar)}
+  <div class="custom-bar">
+    {@render DefaultTabBar({ ...props, className: 'custom-header', style: 'padding-top:8px' })}
+  </div>
+{/snippet}
+<Tabs {items} renderTabBar={bar} />
+```
+
+Стандартной панели передают полный набор props через spread. Её overrides меняют
+только навигацию: например, activeKey управляет выделением заголовка, а активная
+панель остаётся под управлением Tabs. Переданный onTabClick выполняет native выбор;
+его можно заменить или вызвать из своего обработчика. KeyboardEvent из полностью
+пользовательской шапки преобразуется в MouseEvent для публичного onTabClick,
+сохраняя modifiers, target/currentTarget и отмену события.
+Callback-ref `ref` предоставляет DOM-узел стандартной панели и получает null
+при замене ref или unmount; во время SSR он не вызывается.
+
+Сохраняется native наследование темы popup. В исходном UMD замена
+more.overlayClassName может удалить служебный CSS-variable scope и сбросить цвет
+текста до browser default; native portal продолжает наследовать тему Tabs.
+
+`children` стандартной панели — Snippet `(node, item, attributes)`. Он оборачивает
+каждый заголовок; `node(overrides)` дополняет или заменяет его исходные DOM attributes.
+Attributes позволяют сохранить class/style/handlers и добавить Svelte attachments.
+Как в исходном TabNode, внешний узел отделён от нативной кнопки tab: её клик
+останавливает всплытие до внешнего onclick. Для перехвата выбора всей шапки
+используйте props.onTabClick. Перестановка items и интеграция с drag-and-drop
+остаются у владельца, как в официальном примере.
+
+Собственная шапка отвечает за клавиатуру и ARIA. Публичный
+`getTabsItemId(props.id, key, 'tab' | 'panel')` связывает её controls с native
+панелями, включая пустые и Unicode keys. Панели, их состояние и корневой ref
+не пересоздаются при обновлении или замене renderer'а. Точные типы находятся в
+[tabs-nav.types.ts](src/lib/tabs-nav.types.ts).
+
 Фикстура `?fixture=tabs-editable` сверяет truthiness, иконки и размеры с Ant Design
 6.6.8 и @rc-component/tabs 1.13.0. Проверяются callbacks, принятие/отказ владельца,
 фокус, FormData, layout/RTL и сохранение панелей. Фикстура `?fixture=tabs-layout`
@@ -2258,7 +2303,10 @@ callback props, provider inheritance и icon precedence с официальны�
 FormData, focus, reversal, end=false, async prepare, reduced motion и cleanup.
 Восемь сценариев задают per-item class/style, semantic/motion precedence, hidden
 forceRender и RTL; живое обновление проверяется также во время перехода.
-Drag-and-drop и renderTabBar ещё не перенесены.
+Фикстура `?fixture=tabs-render` сверяет 35 UMD-эталонов props, overrides,
+per-tab wrappers/attributes, callbacks, More, RTL и пустого editable набора.
+Проверяются также SSR, native keyboard/cancellation, attachments и обновления
+шапки без потери DOM/state/draft/selection/focus и открытого More.
 Остаются произвольный prefixCls и общий ConfigProvider.getPopupContainer;
 приоритет уничтожения панелей сохраняет native v1.
 Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,

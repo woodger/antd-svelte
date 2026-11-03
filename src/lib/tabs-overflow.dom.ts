@@ -25,7 +25,7 @@ export function connectTabsOverflow(
   list: HTMLElement,
   operations: HTMLElement,
   add: HTMLButtonElement | undefined,
-  options: { vertical: boolean; onChange: (keys: string[]) => void; }
+  options: { vertical: boolean; rtl?: boolean; onChange: (keys: string[]) => void; }
 ): () => void {
   const document = list.ownerDocument;
   const view = document.defaultView!;
@@ -79,7 +79,7 @@ export function connectTabsOverflow(
     const contentLength = fullLength - addLength;
     const needScroll = Math.floor(available) < Math.floor(fullLength);
     const visibleLength = available - (needScroll ? operationLength : addLength);
-    const rtl = !vertical && view.getComputedStyle(viewport).direction === 'rtl';
+    const rtl = !vertical && (options.rtl ?? view.getComputedStyle(viewport).direction === 'rtl');
     const current = vertical ? viewport.scrollTop : Math.abs(viewport.scrollLeft);
     const scroll = Math.max(0, Math.min(current, contentLength - visibleLength));
     if (scroll !== current) {

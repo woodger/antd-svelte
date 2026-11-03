@@ -15,7 +15,8 @@
     "UPLOAD_LIST_IGNORE",
     "TREE_SELECT_SHOW_ALL",
     "TREE_SELECT_SHOW_PARENT",
-    "TREE_SELECT_SHOW_CHILD"
+    "TREE_SELECT_SHOW_CHILD",
+    "getTabsItemId"
   ],
   "components": [
     {
@@ -2173,7 +2174,7 @@
       "name": "Tabs",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Аудит native v1 и перенос source editable-card, layout, More, indicator, component theme, semantic/config и animated с сохранением выбора, lifecycle панелей, DOM и фокуса; onTabScroll поверх native scroll.",
+      "scopeReason": "Аудит native v1 и перенос source editable-card, layout, More, indicator, component theme, semantic/config, animated и renderTabBar с сохранением выбора, lifecycle панелей, DOM и фокуса; onTabScroll поверх native scroll.",
       "upstreamPath": "components/tabs",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2313,7 +2314,14 @@
         "tests/browser/fixtures/TabsMotionContent.svelte",
         "tests/browser/tabs-motion.spec.ts",
         "tests/package/TabsMotionFixture.svelte",
-        "tests/package/tabs-motion.ssr.test.ts"
+        "tests/package/tabs-motion.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-tabs-render-reference.json",
+        "tests/browser/fixtures/tabs-render-presets.ts",
+        "tests/browser/fixtures/TabsRenderCase.svelte",
+        "tests/browser/fixtures/TabsRenderContent.svelte",
+        "tests/browser/fixtures/TabsRenderFixtures.svelte",
+        "tests/browser/tabs-render.spec.ts",
+        "tests/package/tabs-render.ssr.test.ts"
       ],
       "features": [
         {
@@ -2544,14 +2552,36 @@
           "note": "Унаследованные из rc-tabs TabPaneProps поля item.className/style применяются только к своей панели. Классы следуют за classNames.content; CSS-строки идут после styles.content и перед motion styles/eventProps. Пустое или отсутствующее поле сохраняет semantic layer. Восемь дополнительных UMD-сценариев задают CSS colors/paddings, классы и measurement hooks: static/animated, source priority, custom callbacks, eventProps, forceRender и logical RTL. Живое изменение не пересоздаёт панели и не сбрасывает local state, draft, selection/focus, activeKey или текущую motion phase. Формат CSS-строки сохраняет согласованный Svelte contract."
         },
         {
+          "id": "render-tab-bar",
+          "title": "RenderTabBar, стандартная навигация и per-tab wrappers",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tabs.svelte",
+            "src/lib/TabsNav.svelte",
+            "src/lib/tabs-nav.types.ts",
+            "src/lib/tabs.engine.ts",
+            "src/lib/tabs.dom.ts",
+            "src/lib/tabs-overflow.dom.ts",
+            "tests/browser/fixtures/ant-design-tabs-render-reference.json",
+            "tests/browser/fixtures/tabs-render-presets.ts",
+            "tests/browser/fixtures/TabsRenderCase.svelte",
+            "tests/browser/fixtures/TabsRenderContent.svelte",
+            "tests/browser/fixtures/TabsRenderFixtures.svelte",
+            "tests/browser/tabs-render.spec.ts",
+            "tests/package/tabs-render.ssr.test.ts"
+          ],
+          "note": "Исходная граница Tabs/TabNavList сохранена: renderTabBar — Svelte Snippet с разрешёнными props и стандартной панелью как Snippet. Spread/overrides меняют header, activeKey, animated ink, editable/locale, extra/gutter, indicator, More, popup/container, styles/classes, physical position, rtl/mobile и callbacks; Root layout/selection и body lifecycle остаются у Tabs. Children получает node Snippet, item и исходные DOM attributes; внешний узел отделён от native tab button, как исходный TabNode/renderWrapper, доступны merge handlers/styles/classes и Svelte attachments. Сортировку items и сторонний drag-and-drop задаёт владелец. Полная замена/отсутствие шапки не пересоздаёт панели. GetTabsItemId предоставляет согласованные native IDs, включая пустые/Unicode keys; ARIA/keyboard собственной шапки задаёт пользователь. Source native adaptations сохраняются: ручные arrows, responsive placement и native scroll, постоянные pane shells, item-first destroy и публичный MouseEvent/cancellation. Custom KeyboardEvent адаптируется к MouseEvent с modifiers/target/currentTarget и forwarding prevent/stop. 35 эталонов официального UMD задают props, CSS, classes, callbacks, editable, More, RTL/mobile, per-node wrappers/clone attributes и пустой набор. Тесты защищают живые изменения, keyed DOM/state/draft/selection/focus, root ref, ownership и cleanup attachments. Callback-ref стандартной панели сохраняет DOM при обновлениях и получает null при замене владельца/unmount; SSR его не вызывает. Отдельные эталоны фиксируют приоритет RTL класса Dropdown: bar.rtl и own overlayClassName. Согласованное native наследование темы portal сохраняется: own overlayClassName не теряет тему при удалении source scope классов; в соответствующем UMD-сценарии сохранены source popup и явный nativePopup. Замена/удаление more возвращает текст More исходного OperationNode без неявного fallback к иконкам Tabs. Sortable wrapper сохраняет собственный фокус при keyed moves и не отдаёт свои клавиши native tab handler."
+        },
+        {
           "id": "extended-api",
-          "title": "RenderTabBar, prefixCls и общий popup container",
+          "title": "PrefixCls, общий popup container и React JSX sugar",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет renderTabBar, произвольного prefixCls, общего ConfigProvider.getPopupContainer. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Native root attributes/events и bind:nativeElement поддерживаются как Svelte API, без React ref wrapper."
+          "note": "Нет произвольного prefixCls и общего ConfigProvider.getPopupContainer. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Native root attributes/events и bind:nativeElement поддерживаются как Svelte API, без React ref wrapper."
         }
       ]
     },

@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tabs: renderTabBar со стандартной навигацией как Snippet, исходными props и
+  overrides, per-tab children/attributes и Svelte attachments. Пользовательская
+  шапка меняет только навигацию; панели, draft/state/focus и root ref сохраняются.
+  Добавлены callback-ref стандартной панели, getTabsItemId для native ARIA-связей,
+  35 UMD-эталонов и SSR/browser checks.
 - Tabs: className/style отдельных панелей с исходным порядком semantic → item → motion.
   Добавлены восемь UMD-сценариев и SSR/browser-проверки изоляции заголовков,
   RTL, forceRender и обновлений без потери DOM/state/draft/selection/focus.

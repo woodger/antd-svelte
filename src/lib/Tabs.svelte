@@ -49,6 +49,7 @@
     destroyOnHidden,
     destroyInactiveTabPane,
     tabBarExtraContent,
+    renderTabBar,
     id,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
@@ -120,6 +121,7 @@
     destroyOnHidden,
     destroyInactiveTabPane,
     tabBarExtraContent,
+    renderTabBar,
     id,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
@@ -197,7 +199,10 @@
         ?? config.tabs?.indicator?.size ?? config.tabs?.indicatorSize,
       align: indicator?.align ?? config.tabs?.indicator?.align
     },
-    classNames: { ...classes, popup: classes.popup.root },
+    classNames: {
+      ...classes,
+      popup: [popupClassName, classes.popup.root].filter(Boolean).join(' ') || undefined
+    },
     styles: { ...slots, popup: slots.popup.root }
   });
 
@@ -280,6 +285,9 @@
 {#snippet defaultMore()}<TabsMoreIcon />{/snippet}
 {#snippet defaultAdd()}<TabsEditIcon name="plus" />{/snippet}
 {#snippet defaultRemove()}<TabsEditIcon name="close" />{/snippet}
+{#snippet defaultTabBar(props: TabsTabBarProps)}
+  <TabsNav bar={props} context={navContext} />
+{/snippet}
 
 <div {...rest} bind:this={nativeElement} id={rootId} dir={config.direction} class={[
     'ant-tabs ant-tabs-css-var',
@@ -296,7 +304,8 @@
     rootClassName,
     classes.root
   ]} style={[componentTheme.style, slots.root].filter(Boolean).join(';') || undefined}>
-  <TabsNav {bar} context={navContext} />
+  {#if renderTabBar}{@render renderTabBar(bar, defaultTabBar)}
+  {:else}{@render defaultTabBar(bar)}{/if}
   <div class="ant-tabs-body-holder"><div bind:this={body} class={[
     'ant-tabs-body',
     `ant-tabs-body-${placement}`,

@@ -437,6 +437,15 @@ export type {
   TabsSemantic,
   TabsSemanticProps
 } from './tabs.types';
+export { getTabsItemId } from './tabs.engine';
+export type {
+  TabsEditableConfig,
+  TabsTabAttributes,
+  TabsTabNode,
+  TabsTabBarProps,
+  TabsDefaultTabBar,
+  TabsRenderTabBar
+} from './tabs-nav.types';
 export type {
   TabsAnimatedConfig,
   TabsPaneMotion,

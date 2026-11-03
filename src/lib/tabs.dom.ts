@@ -25,6 +25,8 @@ export function getTabsClickEvent(
     target: { get: () => event.target },
     currentTarget: { get: () => event.currentTarget }
   });
+  click.getModifierState = event.getModifierState.bind(event);
+  // DOM-методам нужен собственный Event receiver; отмена затрагивает и исходную клавиатуру.
   for (const method of ['preventDefault', 'stopPropagation', 'stopImmediatePropagation'] as const) {
     const original = click[method].bind(click);
     click[method] = () => {
@@ -68,7 +70,7 @@ export function connectTabsNav(
   options: {
     key: string | undefined;
     vertical: boolean;
-    editable: boolean;
+    measureCells: boolean;
     onIndicatorChange: (offset: TabsIndicatorOffset | undefined) => void;
   }
 ): () => void {
@@ -81,7 +83,8 @@ export function connectTabsNav(
     if (selected) {
       const listBox = list.getBoundingClientRect();
       function measure(tab: HTMLElement) {
-        const cell = options.editable ? tab.closest<HTMLElement>('[data-tabs-cell]') ?? tab : tab;
+        const cell = options.measureCells
+          ? tab.closest<HTMLElement>('[data-tabs-cell]') ?? tab : tab;
         const box = cell.getBoundingClientRect();
         return Math.abs(box.width - cell.offsetWidth) < 1 ? {
           width: box.width,
