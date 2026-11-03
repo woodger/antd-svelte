@@ -1,7 +1,9 @@
 import type { Snippet } from 'svelte';
+import type { GridResponsive } from './grid.types';
 
 export type AvatarShape = 'circle' | 'square';
-export type AvatarSize = 'small' | 'medium' | 'large' | number;
+/** Карта использует наибольший совпавший breakpoint; отсутствие совпадений оставляет CSS defaults. */
+export type AvatarSize = 'small' | 'medium' | 'large' | number | GridResponsive<number>;
 
 /** Аватар с приоритетом изображения, icon и текста и fallback при ошибке загрузки. */
 export interface AvatarProps {
@@ -12,6 +14,7 @@ export interface AvatarProps {
   draggable?: boolean | 'true' | 'false';
   /** @defaultValue 'circle' */
   shape?: AvatarShape;
+  /** Локальный размер имеет приоритет над контекстом; responsive map применяется после mount. */
   size?: AvatarSize;
   /** @defaultValue 4 */
   gap?: number;

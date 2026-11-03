@@ -5962,7 +5962,16 @@
         "tests/browser/avatar-badge-theme.spec.ts",
         "tests/browser/fixtures/AvatarBadgeThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-avatar-badge-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/grid.engine.ts",
+        "src/lib/grid-media-queries.test.ts",
+        "src/lib/grid-breakpoint.model.svelte.ts",
+        "src/lib/grid-breakpoint.test.ts",
+        "tests/browser/fixtures/AvatarResponsiveCase.svelte",
+        "tests/browser/fixtures/AvatarResponsiveFixtures.svelte",
+        "tests/browser/fixtures/ant-design-avatar-responsive-reference.json",
+        "tests/browser/avatar-responsive.spec.ts",
+        "tests/package/avatar-responsive.ssr.test.ts"
       ],
       "features": [
         {
@@ -6012,10 +6021,20 @@
         {
           "id": "responsive",
           "title": "Размеры по breakpoint",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Отложено после AvatarGroup; в текущем AvatarSize нет карты breakpoint."
+          "evidence": [
+            "src/lib/grid.engine.ts",
+            "src/lib/grid-media-queries.test.ts",
+            "src/lib/grid-breakpoint.model.svelte.ts",
+            "src/lib/grid-breakpoint.test.ts",
+            "tests/browser/fixtures/AvatarResponsiveCase.svelte",
+            "tests/browser/fixtures/AvatarResponsiveFixtures.svelte",
+            "tests/browser/fixtures/ant-design-avatar-responsive-reference.json",
+            "tests/browser/avatar-responsive.spec.ts",
+            "tests/package/avatar-responsive.ssr.test.ts"
+          ],
+          "note": "Семь source breakpoints xs…xxxl, самый крупный совпавший размер с fallback по меньшим совпавшим; undefined пропускается, zero останавливает поиск и оставляет CSS defaults. Карта без совпадений не наследует componentSize вместо собственного значения. Responsive font-size size/2 для icon/children, иначе 18px; numeric/native normalization сохранена. Source screen* tokens и проверка порядка границ, snapshot queries до переключения responsive mode как useBreakpoint 6.6.8. Приоритет item → group → ConfigProvider и последний style; visible/counter/hidden avatars сохраняют свои размеры, пустые дети не подменяются renderable Snippet. SSR использует пустые screens, browser mount/resize не пересоздаёт DOM/изображения, сохраняет focus/error state и пересчитывает text fit; media listeners очищаются. 20 UMD-эталонов покрывают 274 набора измерений и отдельный lifecycle смены порогов."
         },
         {
           "id": "src-snippet",

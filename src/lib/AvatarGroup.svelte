@@ -45,6 +45,10 @@
     config.direction === 'rtl' && 'ant-avatar-group-rtl',
     className
   ]} style={rootStyle}>
-  {#each layout.visible as item (item.key)}<Avatar {...item} alt={item.alt ?? item.label} size={item.size ?? size} shape={item.shape ?? shape}>{#if item.children}{@render item.children()}{:else}{item.text}{/if}</Avatar>{/each}
+  {#each layout.visible as item (item.key)}
+    {#snippet textContent()}{item.text}{/snippet}
+    <Avatar {...item} alt={item.alt ?? item.label} size={item.size ?? size}
+      shape={item.shape ?? shape} children={item.children ?? (item.text ? textContent : undefined)} />
+  {/each}
   {#if layout.hidden.length}<span class="ant-avatar-group-overflow"><AvatarGroupOverflow items={layout.hidden} {size} {shape} {max} /></span>{/if}
 </div>

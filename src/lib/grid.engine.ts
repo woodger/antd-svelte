@@ -1,4 +1,6 @@
 import type { ColProps, GridGap, GridGutter, GridResponsive, GridScreenMap } from './grid.types';
+import type { AliasToken } from './theme-token.types';
+import type { GridBreakpoint } from './grid.types';
 
 export const gridBreakpoints = ['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs'] as const;
 export const gridMediaQueries = {
@@ -10,6 +12,41 @@ export const gridMediaQueries = {
   xxl: '(min-width: 1600px)',
   xxxl: '(min-width: 1920px)'
 } as const;
+
+type BreakpointTokens = Pick<AliasToken, Extract<keyof AliasToken, `screen${string}`>>;
+
+/** Source responsiveObserver проверяет порядок границ до создания matchMedia queries. */
+export function getGridMediaQueries(token: BreakpointTokens): Record<GridBreakpoint, string> {
+  const names = ['XS', 'SM', 'MD', 'LG', 'XL', 'XXL', 'XXXL'] as const;
+  for (const [index, name] of names.entries()) {
+    const minimum = token[`screen${name}Min`];
+    const current = token[`screen${name}`];
+    if (!(minimum <= current)) {
+      throw new Error(`screen${name}Min<=screen${name} fails : !(${minimum}<=${current})`);
+    }
+    if (name !== 'XXXL') {
+      const maximum = token[`screen${name}Max`];
+      if (!(current <= maximum)) {
+        throw new Error(`screen${name}<=screen${name}Max fails : !(${current}<=${maximum})`);
+      }
+      const next = names[index + 1];
+      const nextMinimum = token[`screen${next}Min`];
+      if (!(maximum <= nextMinimum)) {
+        throw new Error(`screen${name}Max<=screen${next}Min fails : !(${maximum}<=${nextMinimum})`);
+      }
+    }
+  }
+
+  return {
+    xs: `(max-width: ${token.screenXSMax}px)`,
+    sm: `(min-width: ${token.screenSM}px)`,
+    md: `(min-width: ${token.screenMD}px)`,
+    lg: `(min-width: ${token.screenLG}px)`,
+    xl: `(min-width: ${token.screenXL}px)`,
+    xxl: `(min-width: ${token.screenXXL}px)`,
+    xxxl: `(min-width: ${token.screenXXXL}px)`
+  };
+}
 
 export function gridResponsiveValue<Value>(
   value: Value | GridResponsive<Value>,

@@ -184,7 +184,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Tag | Статусные/preset цвета, filled/outlined/solid, snippets, отменяемое закрытие, disabled и восстановление фокуса |
 | CheckableTag | Управляемый checked/onChange, нативная toggle-кнопка, aria-pressed, disabled и snippets |
 | Badge | Числовой счётчик, overflow/showZero/dot, статусы/preset цвета, string/Snippet text, размеры, offset и доступное полное значение |
-| Avatar | Изображение, icon/children fallback, circle/square, именованные и числовые размеры, подгонка текста и доступное имя |
+| Avatar | Изображение, icon/children fallback, circle/square, именованные/числовые/адаптивные размеры, подгонка текста и доступное имя |
 | AvatarGroup | Типизированные items, стабильные ключи, общие размеры/форма, перекрытие, max.count и скрытые участники в Popover |
 | Divider | Направления, подпись, titlePlacement, варианты линий, размеры, semantic slots и nativeElement |
 | Flex | Прямые дети, направления, align/justify, wrap, gap/flex, нативный component и nativeElement |
@@ -516,6 +516,8 @@ CreateBreakpoint заменяет React Grid.useBreakpoint явной Svelte-м�
 при SSR равно {}, подключение публикует карту семи MediaQueryList, cleanup
 удаляет listeners и игнорирует запоздалые события. Breakpoint.connected сообщает
 наличие подключения; повторный connect завершает предыдущее.
+Необязательный второй аргумент connect(view, mediaQueries) задаёт полную карту
+семи запросов; без него используются прежние стандартные пороги Grid.
 
 Оба компонента поддерживают class/style, нативные атрибуты/события,
 bind:nativeElement и RTL без изменения DOM-порядка. Галерея — `/ant-design#grid`,
@@ -5557,6 +5559,26 @@ small/medium/large равны 24/32/40 px. Явный size переопреде�
 Class/style относятся к корню; style имеет приоритет над числовыми размерами.
 Темы и RTL наследуются, native compact сохраняет собственные размеры Avatar.
 
+Size также принимает карту `{ xs, sm, md, lg, xl, xxl, xxxl }` с числовыми значениями:
+например, `<Avatar size={{ xs: 24, md: 40, xxl: 100 }}>АВ</Avatar>`.
+Выбирается самый крупный совпавший breakpoint с заданным значением; пропуски и
+undefined позволяют использовать меньший совпавший. Размер xxl сохраняется на
+xxxl, если xxxl не задан. Если совпадений нет, inline-размеры снимаются и действуют
+обычные Avatar tokens; componentSize не заменяет явно заданную карту. Значение 0
+останавливает поиск, но не задаёт inline-геометрию, как upstream. Шрифт адаптивных
+icon/children равен size/2; без них — 18px. Локальный style сохраняет приоритет.
+
+Пороги берутся из source screen* tokens с исходной проверкой порядка границ.
+Карта media queries фиксируется при подписке: как useBreakpoint 6.6.8, изменение
+порогов темы начинает действовать после выхода из responsive mode и возврата в него.
+SSR не обращается к window и оставляет карту без совпадений; после mount размеры
+обновляются без пересоздания Avatar, изображения и фокусируемого владельца.
+Подгонка текста пересчитывается, listeners очищаются при unmount.
+Эталонные 20 вариантов и 274 набора измерений закреплены в
+[UMD-снимках](./tests/browser/fixtures/ant-design-avatar-responsive-reference.json),
+проверки — [browser](./tests/browser/avatar-responsive.spec.ts) и
+[SSR](./tests/package/avatar-responsive.ssr.test.ts), фикстура — `?fixture=avatar-responsive`.
+
 Source `theme.components.Avatar` подготавливает container/text/icon sizes по
 исходным правилам, включая отдельный algorithm и aliases. При стандартном
 compactAlgorithm именованные small/medium/large имеют 21/28/35px; числовой size
@@ -5588,7 +5610,7 @@ Drawer. Выбор фото/инициалов/ошибочного источн
 использует локальные data URL без внешней сети и persistence.
 
 AvatarProps, AvatarShape и AvatarSize экспортируются через index.ts.
-Размеры по breakpoint, src Snippet, Image-интеграция, semantic classNames/styles
+Src Snippet, Image-интеграция, semantic classNames/styles
 и prefixCls/rootClassName в первую версию не входят.
 
 ## AvatarGroup
@@ -5620,7 +5642,7 @@ Children Snippet имеет приоритет над text; затем дейс�
 изображение → icon → содержимое. Label даёт Avatar полное имя по умолчанию
 через alt; явные alt/ARIA props сохраняются. Size/shape элемента переопределяют
 значения группы, затем используются defaults Avatar/ConfigProvider. Строковые
-и числовые размеры, fallback и подгонка текста работают как у Avatar.
+и числовые размеры, breakpoint-карты, fallback и подгонка текста работают как у Avatar.
 
 Max.count ограничивает число видимых участников, а кнопка +N добавляется
 отдельно: count=2 при пяти участниках даёт два Avatar и +3. Без лимита, при 0,

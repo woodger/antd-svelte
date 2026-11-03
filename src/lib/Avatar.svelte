@@ -2,9 +2,13 @@
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useToken } from './theme-context.svelte';
+  import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
+  import { getGridMediaQueries, gridBreakpoints, gridResponsiveValue } from './grid.engine';
   import { resolveAvatarSize, normalizeAvatarGap } from './avatar.engine';
   import { connectAvatarText } from './avatar.dom';
   import type { AvatarProps } from './avatar.types';
+  import type { GridBreakpoint } from './grid.types';
 
   let {
     src,
@@ -29,6 +33,8 @@
   }: AvatarProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Avatar');
+  const theme = useToken();
+  const breakpoint = createBreakpoint();
   let host = $state<HTMLSpanElement>();
   let sourceSrc = $derived(src);
   let sourceSet = $derived(srcSet);
@@ -36,6 +42,17 @@
   let failed = $state.raw<typeof source>();
   let hasImage = $derived(Boolean(source.src) && failed !== source);
   let resolvedSize = $derived(resolveAvatarSize(size, config.componentSize));
+  let responsive = $derived(typeof resolvedSize === 'object'
+    && Object.keys(resolvedSize).some(key => gridBreakpoints.includes(key as GridBreakpoint)));
+  let responsiveSize = $derived(typeof resolvedSize === 'object'
+    ? gridResponsiveValue(resolvedSize, breakpoint.screens) : undefined);
+  $effect(() => {
+    const view = host?.ownerDocument.defaultView;
+    // useBreakpoint 6.6.8 обновляет подписку по refreshOnChange, а не при смене token object.
+    if (responsive && view) {
+      return breakpoint.connect(view, untrack(() => getGridMediaQueries(theme.token)));
+    }
+  });
   let rootStyle = $derived(
     [
       componentTheme.style && `${componentTheme.style};`,
@@ -43,6 +60,10 @@
         ? `width: ${resolvedSize}px; height: ${resolvedSize}px; font-size: ${icon
           ? resolvedSize / 2
           : 18}px;`
+        : '',
+      responsiveSize
+        ? `width: ${responsiveSize}px; height: ${responsiveSize}px; font-size: ${icon || children
+          ? responsiveSize / 2 : 18}px;`
         : '',
       style
     ].filter(

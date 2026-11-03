@@ -9,6 +9,10 @@
 
 ### Added
 
+- Адаптивный Avatar.size: семь source breakpoints, sparse/zero/undefined maps,
+  исходный font-size, screen* tokens и приоритеты style/AvatarGroup/ConfigProvider.
+  Сохранены SSR, DOM/focus, image fallback, text fit и overflow; добавлены
+  20 UMD-эталонов с 274 наборами измерений, source subscription lifecycle и unit/SSR/browser checks.
 - Контейнеры Modal/Drawer: getContainer с false, selector, DOM-узлом,
   DocumentFragment/ShadowRoot и ConfigProvider fallback с исходными аргументами.
   Сохранены native dialog, SSR, состояние при замене функции с тем же target,
