@@ -5493,7 +5493,7 @@ NaN/Infinity считаются отсутствующим count. Отрицат
 Transitionend завершает путь; если событие не пришло, работает fallback 1000 ms.
 Таймер очищается при смене числового значения разряда и при его удалении. SSR выводит
 начальные settled units без таймеров; browser mount не пересоздаёт их DOM.
-Reduced motion отключает переходы. Прежний numeric offset меняется мгновенно;
+Reduced motion отключает переходы. Прежний numeric offset без нового API меняется мгновенно;
 это сохранённая native-граница внешнего ScrollNumber, независимо от движения цифр.
 18 последовательностей и 68 кадров закреплены в
 [UMD-эталонах](./tests/browser/fixtures/ant-design-badge-digit-motion-reference.json),
@@ -5530,8 +5530,9 @@ Count Snippet получает BadgeCountContext с class/style. Примени�
 а CSS-строку контекста поставьте перед собственной. Это явная
 замена React.cloneElement: Svelte не анализирует и не клонирует непрозрачный
 Snippet. Дополнительной обёртки нет; если атрибуты не применены, автоматического
-позиционирования не будет. Style содержит offset и Badge.style; собственный
-style корня имеет приоритет. Dot не заменяет готовый count точкой, как upstream.
+позиционирования не будет. Style содержит offset, ConfigProvider.badge.style и
+Badge.style; собственный style корня имеет приоритет. Dot не заменяет готовый
+count точкой, как upstream.
 Пустой Snippet остаётся заданным count и не выбирает status вместо себя.
 Доступность и интерактивность принадлежат Snippet; Badge не скрывает его controls
 и не добавляет общее описание «Есть обновления». Смена offset/темы сохраняет его
@@ -5549,8 +5550,10 @@ children для статусной точки нужен dot или отобра
 
 Поддерживаются success, processing, default, error, warning и 13 preset цветов:
 blue, purple, cyan, green, magenta, pink, red, orange, yellow, volcano, geekblue,
-lime, gold. Text принимает строку или Snippet; preset color имеет приоритет над
-цветом status. Offset — readonly-пара чисел [x, y]: y задаёт margin-top,
+lime, gold. Также поддерживаются CSS-цвета, CSS variables и background gradients.
+У обычного индикатора custom color задаёт background; у самостоятельной статусной
+точки — background и color. Preset color имеет приоритет над status.
+Text принимает строку или Snippet. Offset — readonly-пара чисел [x, y]: y задаёт margin-top,
 положительный x сдвигает от логического конца наружу, в RTL направление зеркально.
 Неконечная координата заменяется на 0 независимо от второй координаты.
 Компонент наследует тему и RTL; native compact сохраняет собственные размеры Badge.
@@ -5577,6 +5580,35 @@ Title по умолчанию содержит полный count; false/null у
 строка заменяет её. Class/style относятся к корню, offset — к индикатору;
 для самостоятельного статуса offset применяется к корню, как в исходнике.
 
+ConfigProvider.badge задаёт class/style и semantic classNames/styles. Class и
+rootClassName относятся к корню. ClassNames и styles принимают object либо
+callback({props}) с разрешёнными size, overflowCount, dot и showZero; slots —
+root и indicator. Контекстные и локальные классы объединяются. Для обычного
+индикатора порядок стилей: offset → context indicator → context style → local
+indicator → custom color. Border-color создаёт inset shadow ScrollNumber,
+перекрывая заданный box-shadow. У самостоятельного статуса context style относится
+к root, цвет status text берётся из semantic root/context style, а custom color
+перекрывает оба цвета точки. Custom count получает только legacy context style
+и offset через BadgeCountContext; semantic indicator к нему не применяется,
+как в исходном ScrollNumber. Пустой ConfigProvider.badge заменяет родительский config.
+
+```svelte
+<Badge count="12" color="#2db7f5"
+  styles={{ root: 'margin-inline:8px', indicator: 'border-color:#fff' }} />
+```
+
+Badge.style по-прежнему применяется к корню и не переносится
+на обычный индикатор; для него используйте styles.indicator. Для custom count
+Badge.style остаётся частью BadgeCountContext. Прежний числовой layout без нового
+API сохраняется; ConfigProvider.badge, semantic props, rootClassName и custom
+CSS color включают исходный layout. Bind:nativeElement предоставляет корневой
+HTMLSpanElement и очищается при unmount. Нативные span attrs/events передаются
+корню; onclick имеет приоритет над React-compatible onClick. Изменение props/config
+сохраняет DOM, состояние, selection и фокус. 49 вариантов и реактивные обновления
+закреплены в [UMD-эталонах](./tests/browser/fixtures/ant-design-badge-api-reference.json),
+проверки — [browser](./tests/browser/badge-api.spec.ts) и
+[SSR](./tests/package/badge-api.ssr.test.ts), фикстура — `?fixture=badge-api`.
+
 Галерея `/ant-design#badge` показывает варианты и локальный список уведомлений
 в Drawer. Непрочитанное количество вычисляется из сообщений. Чтение сохраняет
 записи; фокус переходит на прочитанное сообщение или список после «Прочитать все».
@@ -5587,15 +5619,14 @@ Title по умолчанию содержит полный count; false/null у
 [официальных UMD-снимках](./tests/browser/fixtures/ant-design-badge-count-reference.json),
 проверки — [browser](./tests/browser/badge-count.spec.ts) и
 [SSR](./tests/package/badge-count.ssr.test.ts), фикстура — `?fixture=badge-count`.
-У прежнего числового режима сохранены native normalization, BadgeContext,
+У прежнего числового режима без нового API сохранены native normalization, BadgeContext,
 root style и оформление standalone/non-status text; эти границы отличаются от React.
 
-В первой версии Badge нет произвольных CSS-цветов,
-semantic classNames/styles,
-prefixCls/rootClassName и устаревших aliases. Processing использует исходную
+Пока не перенесены prefixCls/scrollNumberPrefixCls, scalar text кроме строк,
+строковые offset и deprecated size="default". Processing использует исходную
 CSS-пульсацию, которая отключается при reduced motion. Экспортируются BadgeProps,
 BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeCount, BadgeCountContext,
-BadgeContext и BadgeLocale.
+BadgeContext, BadgeConfig, BadgeSlots, BadgeSemantic и BadgeLocale.
 
 ## BadgeRibbon
 

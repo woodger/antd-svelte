@@ -9,6 +9,11 @@
 
 ### Added
 
+- Badge component config: ConfigProvider.badge, root/indicator semantic callbacks,
+  CSS colors/gradients, исходные style priorities и inset border ScrollNumber.
+  Добавлены rootClassName, native span attrs/events и bind:nativeElement;
+  сохранены прежние native style/count/a11y contracts и состояние custom count.
+  Добавлены 49 UMD-эталонов и unit/SSR/browser-проверки.
 - Badge CSSMotion: исходные enter/leave, кеш count/dot/title, прерывание выхода,
   собственные end events и deadline, custom count и standalone/status branches.
   Перенесены четыре CSS-правила и четыре keyframes; сохранены SSR, фокус,

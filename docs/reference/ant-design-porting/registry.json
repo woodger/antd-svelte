@@ -6207,7 +6207,17 @@
         "tests/browser/fixtures/BadgeZoomFixtures.svelte",
         "tests/browser/fixtures/ant-design-badge-zoom-reference.json",
         "tests/browser/badge-zoom.spec.ts",
-        "tests/package/badge-zoom.ssr.test.ts"
+        "tests/package/badge-zoom.ssr.test.ts",
+        "src/lib/index.ts",
+        "src/lib/badge-style.engine.ts",
+        "src/lib/badge-style.dom.ts",
+        "src/lib/badge-style.engine.test.ts",
+        "tests/browser/fixtures/badge-api-presets.ts",
+        "tests/browser/fixtures/BadgeApiCase.svelte",
+        "tests/browser/fixtures/BadgeApiFixtures.svelte",
+        "tests/browser/fixtures/ant-design-badge-api-reference.json",
+        "tests/browser/badge-api.spec.ts",
+        "tests/package/badge-api.ssr.test.ts"
       ],
       "features": [
         {
@@ -6302,18 +6312,18 @@
             "tests/browser/badge.spec.ts",
             "tests/browser/badge-count.spec.ts"
           ],
-          "note": "Сохранены конечный numeric count, нормализация overflow/offset, числовой BadgeContext.count, root class/style, доступные описания и прежний standalone/non-status text layout числового режима. Эти соглашения отличаются от React. Строки/Snippet не расширяют тип существующего BadgeContext.count. Непрозрачный Snippet не клонируется автоматически: caller получает root attrs и должен применить их сам. ReactNode arrays/portals не анализируются."
+          "note": "Сохранены конечный numeric count, нормализация overflow/offset, числовой BadgeContext.count, root class/style, доступные описания и прежний standalone/non-status text layout числового режима без нового API. Эти соглашения отличаются от React. Строки/Snippet не расширяют тип существующего BadgeContext.count. Непрозрачный Snippet не клонируется автоматически: caller получает root attrs и должен применить их сам. ReactNode arrays/portals не анализируются. ConfigProvider.badge, semantic props, rootClassName и custom CSS colors включают source layout. Local style остаётся на корне и в custom count context; обычный indicator настраивается через styles.indicator."
         },
         {
           "id": "advanced-api",
-          "title": "Badge config/semantic/custom colors, prefix/ref",
+          "title": "Префиксы Badge, scalar text и deprecated size/строковый offset",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md",
             "src/lib/badge.types.ts"
           ],
-          "note": "ConfigProvider.badge, Badge semantic classNames/styles, произвольные CSS-цвета, prefixCls/scrollNumberPrefixCls/rootClassName, полный DOM/ref API остаются в работе. Ribbon имеет собственные перенесённые semantic/config/ref API."
+          "note": "PrefixCls/scrollNumberPrefixCls, scalar text кроме строк, deprecated size=\"default\" и строковые offset остаются в работе. Существующие native числовые normalization, BadgeContext, root style и ReactNode/Snippet boundaries сохраняются отдельно."
         },
         {
           "id": "digit-motion",
@@ -6359,6 +6369,30 @@
             "tests/package/badge-zoom.ssr.test.ts"
           ],
           "note": "Перенесены motionAppear=false, enter/leave start/active/activated, два RAF между фазами, собственные end events и deadline 1000 ms после active. Кешируются последние видимые count/dot/title; явный title обновляется во время выхода. События внутренних цифр игнорируются, ранний own end удерживает render до activated; новый показ прерывает выход. Custom count получает motion classes и, как source ScrollNumber без DOM-ref, завершается по deadline. Смена custom/number внутри active не переподключает end listeners до следующего motion. Самостоятельный status обходит CSSMotion. Начальные SSR/DOM не имеют appear; unmount очищает RAF/listeners/deadline. Существующие native description/focus contracts и reduced motion сохранены; непрозрачный Snippet кешируется по ссылке, его собственная реактивность не замораживается. 17 UMD-последовательностей/87 кадров и SSR фиксируют source lifecycle; четыре CSS-правила и четыре keyframes извлечены из закреплённого архива."
+        },
+        {
+          "id": "component-config-semantics-colors-ref",
+          "title": "Badge config, semantic slots, CSS colors и native root ref/events",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/badge.types.ts",
+            "src/lib/Badge.svelte",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "src/lib/badge-style.engine.ts",
+            "src/lib/badge-style.dom.ts",
+            "src/lib/badge-style.engine.test.ts",
+            "tests/browser/fixtures/badge-api-presets.ts",
+            "tests/browser/fixtures/BadgeApiCase.svelte",
+            "tests/browser/fixtures/BadgeApiFixtures.svelte",
+            "tests/browser/fixtures/ant-design-badge-api-reference.json",
+            "tests/browser/badge-api.spec.ts",
+            "tests/package/badge-api.ssr.test.ts"
+          ],
+          "note": "ConfigProvider.badge наследуется и заменяется вложенным config. Class/rootClassName и context/local semantic root classes объединяются; root/indicator object/function styles и classNames получают props с разрешёнными defaults. Обычный indicator объединяет offset, context indicator, context legacy style и local indicator; custom color задаёт background, border-color создаёт исходный inset shadow. В standalone status context style относится к root, root color передаётся status text; custom color задаёт background/color точки. У custom count semantic indicator игнорируется, legacy context style/offset передаются через BadgeCountContext. CSS property diff сохраняет shorthand/longhand и реактивное удаление цветов/стилей. Bind:nativeElement заменяет React ref, очищается при unmount; span attrs/events передаются корню, onclick приоритетнее onClick. Native local style/root/count/a11y contracts сохранены и описаны отдельно. 49 UMD-эталонов включают computed styles/geometry/SSR, ConfigProvider inheritance, callbacks, custom count, preset/CSS colors, RTL и обратимые обновления."
         }
       ]
     },
@@ -9928,6 +9962,23 @@
             "tests/package/dialog-container.ssr.test.ts"
           ],
           "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour и Mentions намеренно не читают глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Ещё 54 UMD-эталона покрывают четыре Date/Time single/range exports: source root trigger/defaultOpen arity, local → global fallback, ShadowRoot, gap/min-width/RTL placement и сохранение state/focus. Native conditional panel lifetime сохранён. Ещё 32 UMD-эталона Menu подтверждают own-undefined отключение global getter, native title trigger, force render/inline copies, ShadowRoot, remount при смене target и сохранение state/focus при замене функции. Ещё 36 UMD-эталонов Modal/Drawer подтверждают local getContainer → global fallback, вызов без аргументов у Modal и body trigger у Drawer, false/selectors/DOM/ShadowRoot, timing, retention и remount. Native modal/SSR contracts сохранены; source inline-геометрия Drawer, остальной Menu popup API и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
+        },
+        {
+          "id": "badge-config",
+          "title": "ConfigProvider.badge class/style и semantic config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/badge.types.ts",
+            "src/lib/Badge.svelte",
+            "tests/browser/badge-api.spec.ts",
+            "tests/package/badge-api.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-badge-api-reference.json",
+            "readme.md"
+          ],
+          "note": "Badge наследует отсутствующий config; явный record, включая пустой, заменяет родительский целиком. Class относится к root, context style — к indicator обычного Badge и root самостоятельного статуса. Root/indicator semantic object/function records объединяются с локальными props по исходному порядку. Callback props содержат разрешённые defaults; обновления сохраняют DOM/ref/state/focus. Native local style boundary сохраняется отдельно."
         }
       ]
     },

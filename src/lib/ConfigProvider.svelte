@@ -3,6 +3,7 @@
   import type { ButtonConfig } from './button.types';
   import type { TabsConfig } from './tabs.types';
   import type { BadgeRibbonConfig } from './badge-ribbon.types';
+  import type { BadgeConfig } from './badge.types';
   import type { RateConfig } from './rate.types';
   import type { WatermarkConfig } from './watermark.types';
   import type { BorderBeamConfig } from './border-beam.types';
@@ -48,6 +49,7 @@
     button?: ButtonConfig;
     tabs?: TabsConfig;
     ribbon?: BadgeRibbonConfig;
+    badge?: BadgeConfig;
     rate?: RateConfig;
     watermark?: WatermarkConfig;
     borderBeam?: BorderBeamConfig;
@@ -107,6 +109,7 @@
     button,
     tabs,
     ribbon,
+    badge,
     rate,
     watermark,
     borderBeam,
@@ -158,6 +161,9 @@
     },
     get ribbon() {
       return ribbon ?? parent.ribbon;
+    },
+    get badge() {
+      return badge ?? parent.badge;
     },
     get button() {
       return button ?? parent.button;

@@ -1,8 +1,9 @@
 import type { Snippet } from 'svelte';
+import type { HTMLAttributes } from 'svelte/elements';
 import type { TagPresetColor } from './tag.types';
 
 export type BadgeStatus = 'success' | 'processing' | 'default' | 'error' | 'warning';
-export type BadgeColor = TagPresetColor;
+export type BadgeColor = TagPresetColor | (string & {});
 export type BadgeSize = 'medium' | 'small';
 export type BadgeText = string | Snippet;
 /** Атрибуты исходного custom count; Snippet применяет их к собственному корню. */
@@ -19,8 +20,26 @@ export interface BadgeContext {
   descriptionId: string | undefined;
 }
 
+export interface BadgeSlots {
+  root?: string;
+  indicator?: string;
+}
+
+/** CSS задаётся строками; callback получает props с разрешёнными defaults. */
+export type BadgeSemantic = BadgeSlots
+  | ((info: { props: BadgeProps; }) => BadgeSlots | undefined);
+
+export interface BadgeConfig {
+  class?: string;
+  style?: string;
+  classNames?: BadgeSemantic;
+  styles?: BadgeSemantic;
+}
+
 /** Счётчик или статус у дочернего содержимого; число и отображаемый текст различаются. */
-export interface BadgeProps {
+export interface BadgeProps extends Omit<
+  HTMLAttributes<HTMLSpanElement>, 'children' | 'class' | 'style' | 'title' | 'color'
+>, BadgeConfig {
   /** Snippet получает class/style вместо React.cloneElement; собственные attrs имеют приоритет. */
   count?: BadgeCount;
   /** @defaultValue 99 */
@@ -43,4 +62,9 @@ export interface BadgeProps {
   'aria-describedby'?: string;
   class?: string;
   style?: string;
+  rootClassName?: string;
+  /** Нативный onclick имеет приоритет над React-compatible alias. */
+  onClick?: HTMLAttributes<HTMLSpanElement>['onclick'];
+  /** bind:nativeElement заменяет React ref и очищается при unmount. */
+  nativeElement?: HTMLSpanElement;
 }

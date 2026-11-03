@@ -3,12 +3,16 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useToken } from './theme-context.svelte';
+  import { presetColors } from './theme-token.types';
   import { createBadgeZoom, type BadgeZoomState } from './badge-zoom.dom';
+  import { connectBadgeStyle } from './badge-style.dom';
+  import { getBadgeStyleValue } from './badge-style.engine';
   import { getBadgeState, normalizeBadgeOffset } from './badge.engine';
   import { ruRU } from './types';
-  import type { BadgeContext, BadgeCountContext, BadgeProps } from './badge.types';
+  import type { BadgeContext, BadgeCountContext, BadgeProps, BadgeSemantic } from './badge.types';
   import BadgeNumber from './BadgeNumber.svelte';
 
+  let { nativeElement = $bindable(), ...props }: BadgeProps = $props();
   let {
     count,
     overflowCount = 99,
@@ -25,15 +29,22 @@
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
+    dir: elementDirection,
+    role,
+    onClick,
+    onclick,
     class: className = '',
-    style
-  }: BadgeProps = $props();
+    style,
+    rootClassName,
+    classNames,
+    styles,
+    ...rest
+  } = $derived(props);
   const config = useConfig();
   const componentTheme = useComponentTheme('Badge');
   const token = useToken();
   let indicator = $state<HTMLElement>();
   let zoom = $state.raw<BadgeZoomState>({ rendered: false });
-  let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
   const generatedId = $props.id();
   let rootId = $derived(id ?? `ant-badge-${generatedId}`);
   let badgeState = $derived(
@@ -42,6 +53,44 @@
     )
   );
   let position = $derived(normalizeBadgeOffset(offset));
+  let offsetStyle = $derived(position
+    ? `margin-top:${position[1]}px;inset-inline-end:${-position[0]}px` : undefined);
+  let info = $derived({ props: { ...props, overflowCount, size, dot, showZero } });
+  const resolve = (value: BadgeSemantic | undefined) =>
+    (typeof value === 'function' ? value(info) : value) ?? {};
+  let contextClasses = $derived(resolve(config.badge?.classNames));
+  let localClasses = $derived(resolve(classNames));
+  let contextStyles = $derived(resolve(config.badge?.styles));
+  let localStyles = $derived(resolve(styles));
+  let rootLayers = $derived([
+    componentTheme.style,
+    badgeState.statusStandalone ? offsetStyle : undefined,
+    contextStyles.root,
+    badgeState.statusStandalone ? config.badge?.style : undefined,
+    localStyles.root,
+    style
+  ]);
+  let rootStyle = $derived(rootLayers.filter(Boolean).join(';') || undefined);
+  let indicatorLayers = $derived([
+    badgeState.statusStandalone ? undefined : offsetStyle,
+    contextStyles.indicator,
+    badgeState.statusStandalone ? undefined : config.badge?.style,
+    localStyles.indicator
+  ]);
+  let isPreset = $derived(presetColors.some(preset => preset === color));
+  let colorOverrides = $derived<readonly (readonly [string, string])[]>(color && !isPreset
+    ? badgeState.statusStandalone ? [['color', color], ['background', color]]
+      : [['background', color]] : []);
+  let border = $derived(!badgeState.statusStandalone
+    ? getBadgeStyleValue(indicatorLayers, 'border-color') : undefined);
+  let indicatorStyle = $derived([
+    ...indicatorLayers,
+    ...colorOverrides.map(([property, value]) => `${property}:${value}`),
+    border && `box-shadow:0 0 0 1px ${border} inset`
+  ].filter(Boolean).join(';') || undefined);
+  let statusTextColor = $derived(badgeState.statusStandalone ? getBadgeStyleValue([
+    contextStyles.root, config.badge?.style, localStyles.root
+  ], 'color') : undefined);
   let strings = $derived({ ...ruRU.badge, ...config.locale.badge });
   let customCount = $derived(typeof count === 'function' ? count : undefined);
   let current = $derived({
@@ -60,9 +109,10 @@
     if (!badgeState.hidden) cached = current;
   });
 
-  // Новые значения следуют source layout; прежние числовые DOM/spacing сохраняются.
+  // Новый API следует source layout; прежние числовые DOM/spacing сохраняются.
   let sourceCount = $derived(typeof count === 'string' || typeof count === 'boolean'
-    || Boolean(customCount));
+    || Boolean(customCount || config.badge || classNames || styles || rootClassName)
+    || color !== undefined && !isPreset);
   let descriptionId = $derived(
     badgeState.visible && (!badgeState.customCount || badgeState.statusStandalone)
       ? `${rootId}-description` : undefined
@@ -71,7 +121,8 @@
   let countContext = $derived<BadgeCountContext>({
     class: ['ant-scroll-number-custom-component', zoom.className].filter(Boolean).join(' '),
     style: [
-      position && `margin-top:${position[1]}px;inset-inline-end:${-position[0]}px`,
+      offsetStyle,
+      config.badge?.style,
       style
     ].filter(Boolean).join(';') || undefined
   });
@@ -90,6 +141,16 @@
   );
   let indicatorTitle = $derived(title === false || title === null ? undefined
     : title ?? (displayed.title !== undefined ? String(displayed.title) : undefined));
+
+  function connectRootStyle(node: HTMLSpanElement) {
+    const update = connectBadgeStyle(node);
+    $effect(() => update(rootLayers));
+  }
+
+  function connectIndicatorStyle(node: HTMLElement) {
+    const update = connectBadgeStyle(node);
+    $effect(() => update(indicatorLayers, colorOverrides, !badgeState.statusStandalone));
+  }
 
   function connectZoom(node: HTMLSpanElement) {
     const motion = createBadgeZoom(
@@ -118,7 +179,7 @@
   @media (prefers-reduced-motion: reduce) { .ant-badge .ant-badge-indicator, .ant-badge .ant-badge-status-dot, .ant-badge .ant-badge-status-dot::after { transition: none; animation: none; } }
 </style>
 
-<span id={rootId} role={ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} title={nativeTitle} class={[
+<span {...rest} bind:this={nativeElement} id={rootId} role={role !== undefined ? role : ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={elementDirection !== undefined ? elementDirection : config.direction} title={nativeTitle} onclick={onclick ?? onClick} class={[
     'ant-badge ant-badge-css-var',
     componentTheme.className,
     componentTheme.className && 'ant-badge-source-tokens',
@@ -127,22 +188,30 @@
     badgeState.hasStatus && 'ant-badge-status',
     badgeState.statusStandalone && 'ant-badge-status-standalone',
     config.direction === 'rtl' && 'ant-badge-rtl',
-    className
-  ]} style={rootStyle} style:--ant-badge-offset-top={position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={position ? `${-position[0]}px` : undefined} {@attach connectZoom}>
+    className,
+    rootClassName,
+    config.badge?.class,
+    contextClasses.root,
+    localClasses.root
+  ]} style={untrack(() => rootStyle)} style:--ant-badge-offset-top={position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={position ? `${-position[0]}px` : undefined} {@attach connectRootStyle} {@attach connectZoom}>
   {#if children}{@render children(context)}{/if}{#if !sourceCount}{' '}{/if}{#if badgeState.statusStandalone || renderCounter}
     {#if badgeState.statusStandalone}<span class={[
         'ant-badge-status-dot',
+        contextClasses.indicator,
+        localClasses.indicator,
         status && `ant-badge-status-${status}`,
-        color && `ant-badge-color-${color}`
-      ]} aria-hidden="true"></span>{:else if displayed.custom}{@render displayed.custom(countContext)}{:else}<sup bind:this={indicator} data-show={wanted} class={[
+        isPreset && `ant-badge-color-${color}`
+      ]} aria-hidden="true" style={untrack(() => indicatorStyle)} {@attach connectIndicatorStyle}></span>{:else if displayed.custom}{@render displayed.custom(countContext)}{:else}<sup bind:this={indicator} data-show={wanted} class={[
           'ant-badge-indicator',
           'ant-scroll-number',
+          contextClasses.indicator,
+          localClasses.indicator,
           displayed.dot ? 'ant-badge-dot' : 'ant-badge-count',
           size === 'small' && 'ant-badge-count-sm',
           !displayed.dot && displayed.display.length > 1 && 'ant-badge-multiple-words',
           status && `ant-badge-status-${status}`,
-          color && `ant-badge-color-${color}`,
+          isPreset && `ant-badge-color-${color}`,
           zoom.className
-        ]} aria-hidden="true" title={indicatorTitle}>{#if !displayed.dot}<BadgeNumber count={displayed.value} />{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description">{description}</span>{/if}
-  {/if}{#if !sourceCount}{' '}{/if}{#if badgeState.showText}<span class="ant-badge-status-text">{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
+        ]} aria-hidden="true" title={indicatorTitle} style={untrack(() => indicatorStyle)} {@attach connectIndicatorStyle}>{#if !displayed.dot}<BadgeNumber count={displayed.value} />{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description">{description}</span>{/if}
+  {/if}{#if !sourceCount}{' '}{/if}{#if badgeState.showText}<span class="ant-badge-status-text" style={statusTextColor ? `color:${statusTextColor}` : undefined}>{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
 </span>
