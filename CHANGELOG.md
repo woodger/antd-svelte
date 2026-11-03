@@ -9,6 +9,11 @@
 
 ### Added
 
+- Badge CSSMotion: исходные enter/leave, кеш count/dot/title, прерывание выхода,
+  собственные end events и deadline, custom count и standalone/status branches.
+  Перенесены четыре CSS-правила и четыре keyframes; сохранены SSR, фокус,
+  немедленное обновление доступного описания и reduced motion. Добавлены
+  17 UMD-последовательностей/87 кадров и SSR/browser-проверки cleanup.
 - Badge SingleNumber: исходные пути прокрутки, reverse-position keys, abs-count
   направление, быстрые изменения, NaN/знаки и fallback 1000 ms с cleanup.
   Сохранены SSR, hydration, focus, reduced motion и мгновенный numeric offset;
@@ -17,7 +22,7 @@
   Перенесены строковые overflow/zero правила, статические символьные slots,
   custom positioning/RTL, SSR и собственная интерактивность Snippet.
   Числовой BadgeContext и прежние native contracts сохранены; добавлены
-  46 UMD-эталонов и unit/SSR/browser-проверки. Zoom остаётся в работе.
+  46 UMD-эталонов и unit/SSR/browser-проверки.
 - BadgeRibbon для Badge.Ribbon 6.6.8: scalar/Snippet content, preset/CSS colors,
   логические placement/RTL, semantic callbacks, ConfigProvider.ribbon и native ref.
   Используются исходные Badge aliases/algorithm и 27 извлечённых CSS-правил;

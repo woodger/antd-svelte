@@ -1,0 +1,2275 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4",
+    "clock": "paused; motionDurationSlow:10s; explicit RAF/end/deadline steps",
+    "normalization": "animationName omits CSS-in-JS hash prefix; events flushed synchronously"
+  },
+  "cases": [
+    {
+      "name": "early-end",
+      "count": 5,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "wait",
+          "ms": 32
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 16
+        },
+        {
+          "kind": "wait",
+          "ms": 16
+        },
+        {
+          "kind": "wait",
+          "ms": 16
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 32
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 16
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 16
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 16
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "early-start-end",
+      "count": 5,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "initial-visible",
+      "count": 5,
+      "steps": [
+        {
+          "kind": "wait",
+          "ms": 64
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "enter",
+      "count": 0,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 5
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 16
+        }
+      ],
+      "ssr": {
+        "kind": null,
+        "text": null,
+        "title": null,
+        "show": null,
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 5
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-start"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 16
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "leave-cache",
+      "count": 5,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "inner-end"
+        },
+        {
+          "kind": "set",
+          "title": "Leaving"
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 16
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "inner-end"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "title": "Leaving"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "Leaving",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 16
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "deadline",
+      "count": 5,
+      "steps": [
+        {
+          "kind": "set",
+          "count": null
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "wait",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": null
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 1100
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "reenter",
+      "count": 5,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "wait",
+          "ms": 16
+        },
+        {
+          "kind": "set",
+          "count": 6
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "inner-end"
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 16
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 6
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "56",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-start"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "56",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "inner-end"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 1100
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "enter-then-leave",
+      "count": 0,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 5
+        },
+        {
+          "kind": "wait",
+          "ms": 16
+        },
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "kind": null,
+        "text": null,
+        "title": null,
+        "show": null,
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 5
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-start"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 16
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-start"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "dot-cache",
+      "count": 1,
+      "dot": true,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "set",
+          "dot": false
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "",
+        "title": "1",
+        "show": "true",
+        "dot": true,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "",
+            "title": "1",
+            "show": "true",
+            "dot": true,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "",
+            "title": "1",
+            "show": "false",
+            "dot": true,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "",
+            "title": "1",
+            "show": "false",
+            "dot": true,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "dot": false
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "",
+            "title": "1",
+            "show": "false",
+            "dot": true,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "standalone",
+      "count": 5,
+      "wrap": false,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "end"
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": false
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antNoWrapperZoomBadgeOut",
+            "focused": false
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antNoWrapperZoomBadgeOut",
+            "focused": false
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "custom-deadline",
+      "custom": true,
+      "show": true,
+      "steps": [
+        {
+          "kind": "set",
+          "show": false
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "kind": "custom",
+        "text": "★",
+        "title": null,
+        "show": null,
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "show": false
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 1100
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "custom-enter",
+      "custom": true,
+      "show": false,
+      "steps": [
+        {
+          "kind": "set",
+          "show": true
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "kind": null,
+        "text": null,
+        "title": null,
+        "show": null,
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "show": true
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-start"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 1100
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "swap-custom-active",
+      "count": 0,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 5
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "set",
+          "custom": true,
+          "show": true
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "kind": null,
+        "text": null,
+        "title": null,
+        "show": null,
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 5
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-start"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "custom": true,
+            "show": true
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 2,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 2,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 1100
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 2,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "swap-number-active",
+      "custom": true,
+      "show": false,
+      "steps": [
+        {
+          "kind": "set",
+          "show": true
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "set",
+          "custom": false,
+          "count": 6
+        },
+        {
+          "kind": "end"
+        },
+        {
+          "kind": "wait",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "kind": null,
+        "text": null,
+        "title": null,
+        "show": null,
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "show": true
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-start"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "custom",
+            "id": 1,
+            "text": "★",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "custom": false,
+            "count": 6
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 2,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "end"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 2,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-enter",
+              "ant-badge-zoom-enter-active"
+            ],
+            "animation": "antZoomBadgeIn",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 1100
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 2,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "motion-disabled",
+      "count": 5,
+      "motion": false,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "set",
+          "count": 6
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 6
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 2,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        }
+      ]
+    },
+    {
+      "name": "status-bypass",
+      "count": 5,
+      "wrap": false,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0,
+          "status": "success"
+        },
+        {
+          "kind": "set",
+          "count": 6
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": false
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0,
+            "status": "success"
+          },
+          "snapshot": {
+            "kind": "status",
+            "id": 2,
+            "text": "",
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": false
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 6
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 3,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": false
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 3,
+            "text": "6",
+            "title": "6",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": false
+          }
+        }
+      ]
+    },
+    {
+      "name": "unmount",
+      "count": 5,
+      "steps": [
+        {
+          "kind": "set",
+          "count": 0
+        },
+        {
+          "kind": "wait",
+          "ms": 64
+        },
+        {
+          "kind": "unmount"
+        },
+        {
+          "kind": "wait",
+          "ms": 1100
+        }
+      ],
+      "ssr": {
+        "kind": "number",
+        "text": "5",
+        "title": "5",
+        "show": "true",
+        "dot": false,
+        "multiple": false
+      },
+      "frames": [
+        {
+          "step": {
+            "kind": "initial"
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "true",
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": "none",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "set",
+            "count": 0
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-start"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 64
+          },
+          "snapshot": {
+            "kind": "number",
+            "id": 1,
+            "text": "5",
+            "title": "5",
+            "show": "false",
+            "dot": false,
+            "multiple": false,
+            "motion": [
+              "ant-badge-zoom",
+              "ant-badge-zoom-leave",
+              "ant-badge-zoom-leave-active"
+            ],
+            "animation": "antZoomBadgeOut",
+            "focused": true
+          }
+        },
+        {
+          "step": {
+            "kind": "unmount"
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": false
+          }
+        },
+        {
+          "step": {
+            "kind": "wait",
+            "ms": 1100
+          },
+          "snapshot": {
+            "kind": null,
+            "id": null,
+            "text": null,
+            "title": null,
+            "show": null,
+            "dot": false,
+            "multiple": false,
+            "motion": [],
+            "animation": null,
+            "focused": false
+          }
+        }
+      ]
+    }
+  ]
+}

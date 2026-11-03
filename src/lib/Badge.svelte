@@ -1,6 +1,9 @@
 <script lang="ts">
+  import { untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useToken } from './theme-context.svelte';
+  import { createBadgeZoom, type BadgeZoomState } from './badge-zoom.dom';
   import { getBadgeState, normalizeBadgeOffset } from './badge.engine';
   import { ruRU } from './types';
   import type { BadgeContext, BadgeCountContext, BadgeProps } from './badge.types';
@@ -27,10 +30,13 @@
   }: BadgeProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Badge');
+  const token = useToken();
+  let indicator = $state<HTMLElement>();
+  let zoom = $state.raw<BadgeZoomState>({ rendered: false });
   let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
   const generatedId = $props.id();
   let rootId = $derived(id ?? `ant-badge-${generatedId}`);
-  let state = $derived(
+  let badgeState = $derived(
     getBadgeState(
       { count, overflowCount, showZero, dot, status, color, text, hasChildren: Boolean(children) }
     )
@@ -38,32 +44,63 @@
   let position = $derived(normalizeBadgeOffset(offset));
   let strings = $derived({ ...ruRU.badge, ...config.locale.badge });
   let customCount = $derived(typeof count === 'function' ? count : undefined);
+  let current = $derived({
+    custom: customCount,
+    value: badgeState.displayValue,
+    display: badgeState.display,
+    dot: badgeState.showAsDot,
+    title: badgeState.titleCount
+  });
+  let cached = $state.raw(untrack(() => current));
+  let displayed = $derived(badgeState.hidden ? cached : current);
+  let wanted = $derived(!badgeState.hidden && !badgeState.statusStandalone);
+  let renderCounter = $derived(wanted || zoom.rendered);
+
+  $effect.pre(() => {
+    if (!badgeState.hidden) cached = current;
+  });
+
   // Новые значения следуют source layout; прежние числовые DOM/spacing сохраняются.
   let sourceCount = $derived(typeof count === 'string' || typeof count === 'boolean'
     || Boolean(customCount));
-  let descriptionId = $derived(state.visible && (!state.customCount || state.statusStandalone)
-    ? `${rootId}-description` : undefined);
-  let context = $derived<BadgeContext>({ count: state.count, descriptionId });
+  let descriptionId = $derived(
+    badgeState.visible && (!badgeState.customCount || badgeState.statusStandalone)
+      ? `${rootId}-description` : undefined
+  );
+  let context = $derived<BadgeContext>({ count: badgeState.count, descriptionId });
   let countContext = $derived<BadgeCountContext>({
-    class: 'ant-scroll-number-custom-component',
+    class: ['ant-scroll-number-custom-component', zoom.className].filter(Boolean).join(' '),
     style: [
       position && `margin-top:${position[1]}px;inset-inline-end:${-position[0]}px`,
       style
     ].filter(Boolean).join(';') || undefined
   });
   let description = $derived(
-    !state.statusStandalone && state.descriptionCount !== undefined
-      ? `${strings.count}: ${state.descriptionCount}`
+    !badgeState.statusStandalone && badgeState.descriptionCount !== undefined
+      ? `${strings.count}: ${badgeState.descriptionCount}`
       : status ? strings[status] : strings.dot
   );
   let nativeTitle = $derived(
     title === false || title === null
       ? undefined
       : title
-      ?? (state.visible && !state.statusStandalone && state.titleCount !== undefined
-        ? String(state.titleCount)
+      ?? (badgeState.visible && !badgeState.statusStandalone && badgeState.titleCount !== undefined
+        ? String(badgeState.titleCount)
         : undefined)
   );
+  let indicatorTitle = $derived(title === false || title === null ? undefined
+    : title ?? (displayed.title !== undefined ? String(displayed.title) : undefined));
+
+  function connectZoom(node: HTMLSpanElement) {
+    const motion = createBadgeZoom(
+      node.ownerDocument.defaultView!,
+      () => indicator,
+      value => { zoom = value; }
+    );
+
+    $effect(() => motion.sync(wanted, token.token.motion !== false, !badgeState.statusStandalone));
+    return () => motion.destroy();
+  }
 </script>
 
 <style>
@@ -87,24 +124,25 @@
     componentTheme.className && 'ant-badge-source-tokens',
     sourceCount && 'ant-badge-source-count',
     !children && 'ant-badge-not-a-wrapper',
-    state.hasStatus && 'ant-badge-status',
-    state.statusStandalone && 'ant-badge-status-standalone',
+    badgeState.hasStatus && 'ant-badge-status',
+    badgeState.statusStandalone && 'ant-badge-status-standalone',
     config.direction === 'rtl' && 'ant-badge-rtl',
     className
-  ]} style={rootStyle} style:--ant-badge-offset-top={position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={position ? `${-position[0]}px` : undefined}>
-  {#if children}{@render children(context)}{/if}{#if !sourceCount}{' '}{/if}{#if state.visible}
-    {#if state.statusStandalone}<span class={[
+  ]} style={rootStyle} style:--ant-badge-offset-top={position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={position ? `${-position[0]}px` : undefined} {@attach connectZoom}>
+  {#if children}{@render children(context)}{/if}{#if !sourceCount}{' '}{/if}{#if badgeState.statusStandalone || renderCounter}
+    {#if badgeState.statusStandalone}<span class={[
         'ant-badge-status-dot',
         status && `ant-badge-status-${status}`,
         color && `ant-badge-color-${color}`
-      ]} aria-hidden="true"></span>{:else if customCount}{@render customCount(countContext)}{:else}<sup class={[
+      ]} aria-hidden="true"></span>{:else if displayed.custom}{@render displayed.custom(countContext)}{:else}<sup bind:this={indicator} data-show={wanted} class={[
           'ant-badge-indicator',
           'ant-scroll-number',
-          state.showAsDot ? 'ant-badge-dot' : 'ant-badge-count',
+          displayed.dot ? 'ant-badge-dot' : 'ant-badge-count',
           size === 'small' && 'ant-badge-count-sm',
-          !state.showAsDot && state.display.length > 1 && 'ant-badge-multiple-words',
+          !displayed.dot && displayed.display.length > 1 && 'ant-badge-multiple-words',
           status && `ant-badge-status-${status}`,
-          color && `ant-badge-color-${color}`
-        ]} aria-hidden="true" title={nativeTitle}>{#if !state.showAsDot}<BadgeNumber count={state.displayValue} />{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description">{description}</span>{/if}
-  {/if}{#if !sourceCount}{' '}{/if}{#if state.showText}<span class="ant-badge-status-text">{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
+          color && `ant-badge-color-${color}`,
+          zoom.className
+        ]} aria-hidden="true" title={indicatorTitle}>{#if !displayed.dot}<BadgeNumber count={displayed.value} />{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description">{description}</span>{/if}
+  {/if}{#if !sourceCount}{' '}{/if}{#if badgeState.showText}<span class="ant-badge-status-text">{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
 </span>

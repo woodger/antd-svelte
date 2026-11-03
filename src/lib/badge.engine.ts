@@ -53,6 +53,7 @@ export function getBadgeState(
     hasStatus,
     statusStandalone,
     showAsDot,
+    hidden,
     visible: statusStandalone || !hidden,
     showText: !hidden && hasText && (text !== '0' || showZero)
   };

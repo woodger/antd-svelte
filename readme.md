@@ -5501,6 +5501,21 @@ Reduced motion отключает переходы. Прежний numeric offse
 [browser](./tests/browser/badge-digit-motion.spec.ts) и
 [SSR](./tests/package/badge-digit-motion.ssr.test.ts), фикстура — `?fixture=badge-digit-motion`.
 
+Появление и исчезновение следуют CSSMotion: начальный видимый count не анимируется,
+последующие изменения проходят start/active, а повторный показ прерывает выход.
+У индикатора на время выхода сохраняются последние видимые count, dot и title; явно заданный
+title продолжает обновляться. Собственный animationend/transitionend завершает
+анимацию, события внутренних цифр игнорируются. Fallback срабатывает через
+1000 ms после active. Ранний end сохраняет предыдущую разметку до activated,
+как в исходнике. Самостоятельный status обходит этот lifecycle.
+`theme.token.motion=false` и reduced motion отключают новые анимации;
+включение reduced motion завершает текущую. Удаление компонента отменяет RAF,
+таймеры и слушатели. Description и descriptionId скрываются сразу, независимо
+от сохраняемого декоративного индикатора. 17 последовательностей/87 кадров и SSR
+закреплены в [UMD-эталонах](./tests/browser/fixtures/ant-design-badge-zoom-reference.json),
+проверки — [browser](./tests/browser/badge-zoom.spec.ts) и
+[SSR](./tests/package/badge-zoom.ssr.test.ts), фикстура — `?fixture=badge-zoom`.
+
 ```svelte
 <script lang="ts">
   import { Badge, type BadgeCountContext } from 'antd-svelte';
@@ -5520,7 +5535,10 @@ style корня имеет приоритет. Dot не заменяет гот
 Пустой Snippet остаётся заданным count и не выбирает status вместо себя.
 Доступность и интерактивность принадлежат Snippet; Badge не скрывает его controls
 и не добавляет общее описание «Есть обновления». Смена offset/темы сохраняет его
-DOM, состояние и фокус; удаление count уничтожает прежнее содержимое.
+DOM, состояние и фокус. При скрытии count содержимое сохраняется на время выхода.
+Классы zoom передаются через контекст; как у исходного custom count без DOM-ref
+CSSMotion, завершение использует deadline. Кеш сохраняет ссылку на Snippet,
+а его собственные реактивные зависимости продолжают обновляться.
 
 Нулевой count скрыт, пока не включён showZero. Как в Ant Design 6.6.8,
 dot с count=0 скрыт, а с showZero отображается число 0; без count dot виден.
@@ -5573,7 +5591,7 @@ Title по умолчанию содержит полный count; false/null у
 root style и оформление standalone/non-status text; эти границы отличаются от React.
 
 В первой версии Badge нет произвольных CSS-цветов,
-анимации появления/исчезновения, semantic classNames/styles,
+semantic classNames/styles,
 prefixCls/rootClassName и устаревших aliases. Processing использует исходную
 CSS-пульсацию, которая отключается при reduced motion. Экспортируются BadgeProps,
 BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeCount, BadgeCountContext,
@@ -8108,8 +8126,10 @@ antStatusProcessing из того же архива. Селекторы Radio/Sp
 пять исходных правил готового count и antBadgeLoadingCircle;
 [vendor/badge-count-digits.css](./src/lib/vendor/badge-count-digits.css) — три правила
 ScrollNumber/SingleNumber slots. Селекторы и декларации извлечены
-из того же архива; JS-план разрядов реализован в BadgeDigit/BadgeNumber,
-zoom lifecycle остаётся в работе.
+из того же архива; JS-план разрядов реализован в BadgeDigit/BadgeNumber.
+[vendor/badge-zoom.css](./src/lib/vendor/badge-zoom.css) содержит четыре исходных
+правила CSSMotion и четыре keyframes для обычного и самостоятельного Badge;
+lifecycle реализован в Badge и badge-zoom.dom по @rc-component/motion 1.3.3.
 [vendor/badge-ribbon.css](./src/lib/vendor/badge-ribbon.css) содержит 27 правил
 Badge.Ribbon из того же архива: wrapper, indicator, content/corner, логические
 placement, RTL и preset colors. Декларации сохранены; корни ограничены классами

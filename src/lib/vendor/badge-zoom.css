@@ -1,0 +1,13 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * Badge CSSMotion zoom: enter/leave и отдельные standalone keyframes.
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+.ant-badge:where(.ant-badge-css-var) .ant-badge-zoom-appear,.ant-badge:where(.ant-badge-css-var) .ant-badge-zoom-enter{animation-name:antZoomBadgeIn;animation-duration:var(--ant-motion-duration-slow);animation-timing-function:var(--ant-motion-ease-out-back);animation-fill-mode:both;}
+.ant-badge:where(.ant-badge-css-var) .ant-badge-zoom-leave{animation-name:antZoomBadgeOut;animation-duration:var(--ant-motion-duration-slow);animation-timing-function:var(--ant-motion-ease-out-back);animation-fill-mode:both;}
+.ant-badge:where(.ant-badge-css-var).ant-badge-not-a-wrapper .ant-badge-zoom-appear,.ant-badge:where(.ant-badge-css-var).ant-badge-not-a-wrapper .ant-badge-zoom-enter{animation-name:antNoWrapperZoomBadgeIn;animation-duration:var(--ant-motion-duration-slow);animation-timing-function:var(--ant-motion-ease-out-back);}
+.ant-badge:where(.ant-badge-css-var).ant-badge-not-a-wrapper .ant-badge-zoom-leave{animation-name:antNoWrapperZoomBadgeOut;animation-duration:var(--ant-motion-duration-slow);animation-timing-function:var(--ant-motion-ease-out-back);}
+@keyframes antZoomBadgeIn{0%{transform:scale(0) translate(50%, -50%);opacity:0;}100%{transform:scale(1) translate(50%, -50%);}}
+@keyframes antZoomBadgeOut{0%{transform:scale(1) translate(50%, -50%);}100%{transform:scale(0) translate(50%, -50%);opacity:0;}}
+@keyframes antNoWrapperZoomBadgeIn{0%{transform:scale(0);opacity:0;}100%{transform:scale(1);}}
+@keyframes antNoWrapperZoomBadgeOut{0%{transform:scale(1);}100%{transform:scale(0);opacity:0;}}

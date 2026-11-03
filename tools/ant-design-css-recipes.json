@@ -103,6 +103,28 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Badge count: ScrollNumber и SingleNumber slots.\n * JS-план прокрутки перенесён в badge-digit.engine.ts и BadgeDigit.svelte.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "badge-zoom",
+    "output": "src/lib/vendor/badge-zoom.css",
+    "expectedRules": 4,
+    "include": [
+      "ant-badge-zoom"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.ant-badge(?![-\\w])",
+        "replacement": ".ant-badge:where(.ant-badge-css-var)"
+      }
+    ],
+    "keyframes": [
+      "antZoomBadgeIn",
+      "antZoomBadgeOut",
+      "antNoWrapperZoomBadgeIn",
+      "antNoWrapperZoomBadgeOut"
+    ],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Badge CSSMotion zoom: enter/leave и отдельные standalone keyframes.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
     "id": "badge-ribbon",
     "output": "src/lib/vendor/badge-ribbon.css",
     "expectedRules": 27,
