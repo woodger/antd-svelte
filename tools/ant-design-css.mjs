@@ -44,8 +44,9 @@ export async function runCss(
   verifyArchive(bytes, upstream.archiveSha256);
   const css = archiveEntry(bytes, 'package/dist/antd.css').toString('utf8');
   const outputs = selected.map(recipe => {
+    const extension = recipe.format === 'module' ? '.css.js' : '.css';
     if (!recipe.output.startsWith('src/lib/vendor/')
-      || !recipe.output.endsWith('.css')) throw new Error(
+      || !recipe.output.endsWith(extension)) throw new Error(
         'CSS output must stay in the component vendor directory'
       );
     if (!recipe.header.includes(`Ant Design ${upstream.version}`)
@@ -64,7 +65,7 @@ export async function runCss(
       if (actual !== result.content) throw new Error(
         `CSS differs: ${recipe.output}. Review the recipe before --write`
       );
-    } else stdout.write(result.content);
+    } else stdout.write(id === 'all' ? result.stylesheet : result.content);
     stderr.write(
       `${recipe
         .id}: ${result

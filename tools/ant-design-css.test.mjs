@@ -53,6 +53,24 @@ describe('Pinned CSS archive', () => {
 });
 
 describe('CSS extraction', () => {
+  it('exports the same verified stylesheet as a portable ES module', async () => {
+    const css = '.ant-test{content:"quotes\\\\and braces{}";color:red}';
+    const plain = extractCss(css, recipe());
+    const module = extractCss(css, recipe({ format: 'module' }));
+    const imported = await import(`data:text/javascript,${encodeURIComponent(module.content)}`);
+
+    expect(imported.default).toBe(plain.content);
+    expect(module.stylesheet).toBe(plain.content);
+    expect(module.rules).toBe(plain.rules);
+    expect(module.keyframes).toEqual(plain.keyframes);
+    expect(module.content).toContain('/* Test source */');
+  });
+
+  it('rejects an unknown output format before writing artifacts', () => {
+    expect(() => extractCss('.ant-test{color:red}', recipe({ format: 'javascript' })))
+      .toThrow('format');
+  });
+
   it('wraps extracted rules in an explicit scope without changing rule counts or media', () => {
     const result = extractCss('@media(width>20px){.ant-test{color:red}}.other{color:blue}', recipe({
       scope: '(.fixture) to (:scope .nested)'

@@ -66,6 +66,40 @@
     "appendRootKeyframes": true
   },
   {
+    "id": "badge-prefix",
+    "output": "src/lib/vendor/badge-prefix.css.js",
+    "expectedRules": 59,
+    "include": [
+      "\\.ant-badge(?![\\w])"
+    ],
+    "exclude": [
+      "ant-radio",
+      "ant-space",
+      "(^|\\s)a(?=[\\s.:#>+~\\[]|$)"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-badge",
+        "replacement": ".ant-badge-css-var"
+      },
+      {
+        "pattern": "\\.ant-badge(?![-\\w])",
+        "replacement": ".ant-badge:where(.ant-badge-css-var)"
+      }
+    ],
+    "keyframes": [
+      "antStatusProcessing",
+      "antBadgeLoadingCircle",
+      "antZoomBadgeIn",
+      "antZoomBadgeOut",
+      "antNoWrapperZoomBadgeIn",
+      "antNoWrapperZoomBadgeOut"
+    ],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Badge prefix template: count/dot/status, ScrollNumber/custom count и zoom; без Radio/Space.\n * CSS data module для локального prefixCls; корни ограничены :where(.ant-badge-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "appendRootKeyframes": true,
+    "format": "module"
+  },
+  {
     "id": "badge-custom-count",
     "output": "src/lib/vendor/badge-custom-count.css",
     "expectedRules": 5,

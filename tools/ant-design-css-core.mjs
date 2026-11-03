@@ -167,6 +167,9 @@ export function splitSelectors(value) {
 }
 
 export function extractCss(css, recipe) {
+  if (recipe.format !== undefined && !['css', 'module'].includes(recipe.format)) {
+    throw new Error('CSS recipe format must be css or module');
+  }
   if (recipe.scope !== undefined
     && (typeof recipe.scope !== 'string' || !recipe.scope.trim() || /[{};]/.test(recipe.scope))) {
     throw new Error('CSS recipe scope must be a non-empty @scope prelude');
@@ -236,8 +239,12 @@ export function extractCss(css, recipe) {
   );
   const content = recipe.scope
     ? `@scope ${recipe.scope}{\n${rules.join('\n')}\n}` : rules.join('\n');
+  const stylesheet = `${recipe.header}\n${content}\n`;
   return {
-    content: `${recipe.header}\n${content}\n`,
+    stylesheet,
+    content: recipe.format === 'module'
+      ? `${recipe.header}\n/** @type {string} */\nconst css = ${JSON.stringify(stylesheet)};\nexport default css;\n`
+      : stylesheet,
     rules: count,
     keyframes: [...foundKeyframes]
   };

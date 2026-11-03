@@ -9,6 +9,9 @@
 
 ### Added
 
+- CSS extraction поддерживает portable ES-модули с default CSS string export.
+  Preview all сохраняет CSS-вывод; hash/rule/keyframe checks и явный write сохранены.
+  Добавлен проверенный Badge prefix template: 59 правил и шесть keyframes.
 - Badge values: number/boolean/null text с исходными zero/presence правилами,
   строковые offset с parseFloat/CSS units и deprecated size="default".
   Сохранены numeric normalization, BadgeContext и прежний layout без нового API;
