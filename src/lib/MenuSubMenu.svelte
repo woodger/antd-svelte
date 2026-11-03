@@ -1,13 +1,16 @@
 <script lang="ts">
-  import { onDestroy, untrack } from 'svelte';
+  import { onDestroy, onMount, untrack } from 'svelte';
+  import { on } from 'svelte/events';
   import type { MenuEntry } from './menu.engine';
   import { menuSubMenu } from './menu.engine';
   import type { MenuTheme } from './menu.types';
   import { useMenu } from './menu-context';
   import { connectPopup } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
   import { connectComponentTheme } from './theme-component.dom';
   import type { TooltipPlacement } from './tooltip.types';
   import MenuList from './MenuList.svelte';
+  import MenuPopupContent from './MenuPopupContent.svelte';
 
   let { entry, theme }: { entry: MenuEntry; theme: MenuTheme; } = $props();
   const context = useMenu();
@@ -15,6 +18,10 @@
   let actualTheme = $derived(item.theme ?? theme);
   let opened = $derived(context.open.includes(entry.key));
   let blocked = $derived(context.disabled || Boolean(item.disabled));
+  let childrenActive = $state(false);
+  let active = $derived(!blocked && (context.active === entry.key
+    || context.mode !== 'inline' && (childrenActive
+      || entry.children.some(child => contains(child, context.active)))));
   const nestedStyle = $derived(context.componentTheme.className
     ? `${context.componentTheme.inheritedStyle};color:inherit;font:inherit` : undefined);
   let selected = $derived(
@@ -22,6 +29,8 @@
   );
   let title = $state<HTMLButtonElement>();
   let popup = $state<HTMLDivElement>();
+  let popupContainer = $state<HTMLElement | ShadowRoot>();
+  let client = $state(false);
   let shown = $state(false);
   let popupPlacement = $state<TooltipPlacement>();
   const placementClass = $derived.by(() => {
@@ -37,19 +46,69 @@
     return `ant-menu-submenu-placement-${name}`;
   });
   let mounted = $state(untrack(() => opened || context.forceRender));
+  let popupMounted = $state(untrack(() => context.mode !== 'inline'
+    && (opened || context.forceRender)
+    || context.forceRender && Boolean(context.getPopupContainer)));
+  let containerUsed = $state(untrack(() => Boolean(context.getPopupContainer)));
   let timer: ReturnType<typeof setTimeout> | undefined;
+  onMount(() => { client = true; });
 
-  function contains(node: MenuEntry, key: string): boolean {
-    return node.key === key || node.children.some(child => contains(child, key));
+  function resolveContainer(trigger?: HTMLElement) {
+    const target = context.getPopupContainer!(trigger!);
+    popupContainer = target;
+    return target;
+  }
+  $effect.pre(() => {
+    const getter = context.getPopupContainer;
+    if (!getter) popupContainer = undefined;
+    // Обычное Menu открывает Trigger после RAF; forceRender допускает первый undefined.
+    else if (context.forceRender && !title && !getter.length) resolveContainer(undefined);
+  });
+  const portal = createPopupContainer(() => ({
+    open: context.mode !== 'inline' && opened || context.forceRender,
+    rendered: popupMounted && (context.mode !== 'inline' || client && containerUsed),
+    reference: title,
+    getPopupContainer: context.getPopupContainer ? resolveContainer : undefined,
+    themeStyle: context.componentTheme.style
+  }));
+
+  function contains(node: MenuEntry, key: string | null): boolean {
+    return key !== null && (node.key === key || node.children.some(child => contains(child, key)));
   }
   function register(element: HTMLButtonElement) {
     return { destroy: context.register(entry.key, element) };
+  }
+  function connectEvents(element: HTMLUListElement) {
+    const keyboard = on(element, 'keydown', event => {
+      const root = context.nativeElement;
+      if (!root || root.contains(element)) return;
+
+      // Portal сохраняет currentTarget корневого callback и исходный target события.
+      const descriptor = Object.getOwnPropertyDescriptor(event, 'currentTarget');
+      Object.defineProperty(event, 'currentTarget', { configurable: true, value: root });
+      try {
+        context.keydown(event as KeyboardEvent & { currentTarget: HTMLUListElement; });
+      } finally {
+        if (descriptor) Object.defineProperty(event, 'currentTarget', descriptor);
+        else Reflect.deleteProperty(event, 'currentTarget');
+      }
+    });
+    // Svelte сначала вызывает delegated child handlers внутри ShadowRoot, сохраняя domEvent.target.
+    const click = on(element, 'click', () => {});
+    return () => {
+      keyboard();
+      click();
+    };
   }
 
   $effect(() => {
     if (opened || context.forceRender)
       mounted = true;
+    if (context.getPopupContainer) containerUsed = true;
+    if (context.mode !== 'inline' && (opened || context.forceRender)
+      || context.forceRender && context.getPopupContainer) popupMounted = true;
   });
+  $effect(() => context.registerHover(entry.key, hover));
   $effect(() => {
     if (!opened || context.mode === 'inline' || !popup || !title) return;
 
@@ -86,6 +145,7 @@
     timer = undefined;
   }
   function hover(next: boolean) {
+    childrenActive = next;
     cancel();
     if (blocked || context.mode === 'inline' || context.trigger !== 'hover') return;
 
@@ -112,18 +172,18 @@
     opened && 'ant-menu-submenu-open',
     selected && 'ant-menu-submenu-selected',
     blocked && 'ant-menu-submenu-disabled',
-    context.active === entry.key && 'ant-menu-submenu-active',
+    active && 'ant-menu-submenu-active',
     item.class
   ]}
   style={item.style} onmouseenter={() => {
       if (!blocked)
         context.activate(entry.key);
-      hover(true);
+      context.hover(entry, true);
     }}
   onmouseleave={() => {
       if (context.active === entry.key)
         context.activate(null);
-      hover(false);
+      context.hover(entry, false);
     }}>
   <button type="button" disabled={blocked} bind:this={title} use:register id={context.id(entry.key)} data-menu-id={context.id(entry.key)}
     class="ant-menu-submenu-title" role="menuitem" tabindex={blocked ? undefined : -1} aria-disabled={blocked || undefined}
@@ -168,8 +228,12 @@
           ]}
         style={nestedStyle}
         hidden={!opened}><MenuList entries={entry.children} {theme} /></ul>
-    {:else}
-      <div bind:this={popup} popover="manual" hidden={!opened || !shown}
+    {/if}
+  {/if}
+  {#if popupMounted && (context.mode !== 'inline' || client && containerUsed)}
+    {#key popupContainer}
+      <div bind:this={popup} role="presentation" popover="manual"
+        hidden={context.mode === 'inline' || !opened || !shown}
         class={[
             'menu-popup ant-menu ant-menu-css-var ant-menu-submenu ant-menu-submenu-popup',
             context.componentTheme.className,
@@ -180,15 +244,20 @@
             item.popupClassName
           ]}
         style={untrack(() => context.componentTheme.style)}
+        onmouseenter={() => context.hover(entry, true)}
+        onmouseleave={() => context.hover(entry, false)}
+        {@attach portal}
         {@attach node => connectComponentTheme(node, context.componentTheme.style)}>
         <ul id={`${context.id(entry.key)}-popup`} role="menu" data-menu-list="true"
           class={[
-              'ant-menu ant-menu-css-var ant-menu-sub ant-menu-vertical',
+              'ant-menu ant-menu-css-var ant-menu-sub',
+              context.mode === 'inline' ? 'ant-menu-inline' : 'ant-menu-vertical',
               context.direction === 'rtl' && 'ant-menu-rtl'
-            ]} style={nestedStyle}>
-          <MenuList entries={entry.children} {theme} />
+            ]} style={nestedStyle} {@attach connectEvents}>
+          <MenuPopupContent entries={entry.children} {theme}
+            isInlineCopy={context.mode === 'inline'} />
         </ul>
       </div>
-    {/if}
+    {/key}
   {/if}
 </li>

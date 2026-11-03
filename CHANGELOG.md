@@ -9,6 +9,11 @@
 
 ### Added
 
+- Контейнеры Menu: локальный getter и ConfigProvider с исходным приоритетом
+  own undefined, ShadowRoot, force render и скрытыми inline-копиями.
+  Сохранены native refs, фокус/выделение, theme variables, hover и клавиатура
+  вынесенных подменю; смена контейнера пересоздаёт popup contents, как upstream.
+  Добавлены 32 UMD-эталона и SSR/browser-проверки; overflow More остаётся в работе.
 - Контейнеры DatePicker/RangePicker и TimePicker/TimeRangePicker: local → global
   fallback, ShadowRoot, исходный root trigger и defaultOpen с учётом арности getter.
   Восстановлены source offset=4 px, округление координат вниз, min-width selector

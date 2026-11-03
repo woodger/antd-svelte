@@ -45,10 +45,16 @@
     nativeElement = $bindable(),
     onkeydown,
     tabindex = 0,
-    ...attributes
+    ...rest
   }: MenuProps = $props();
 
   const config = useConfig();
+  let popupContainer = $derived(Object.hasOwn(rest, 'getPopupContainer')
+    ? rest.getPopupContainer : config.getPopupContainer);
+  let attributes = $derived.by(() => {
+    const { getPopupContainer: _container, ...attributes } = rest;
+    return attributes;
+  });
   const componentTheme = useComponentTheme('Menu');
   const sider = useSider();
   const generated = $props.id();
@@ -62,7 +68,10 @@
   );
   let actualMode = $derived(collapsed ? 'vertical' : mode);
   let active = $state<string | null>(null);
+  let rootElement = $state<HTMLUListElement>();
   const elements = new Map<string, HTMLElement>();
+  const hoverHandlers = new Map<string, (open: boolean) => void>();
+  const handledKeys = new WeakSet<KeyboardEvent>();
   const frames = new Set<number>();
   let previous = untrack(() => ({ selectedKeys, openKeys, mode: actualMode, collapsed }));
   let inlineCache = untrack(() => [...actualOpen]);
@@ -70,6 +79,12 @@
   onDestroy(() => {
     frames.forEach(frame => cancelAnimationFrame(frame));
     frames.clear();
+    hoverHandlers.clear();
+  });
+
+  $effect(() => {
+    nativeElement = rootElement;
+    return () => { nativeElement = undefined; };
   });
 
   $effect(() => {
@@ -108,6 +123,19 @@
       if (elements.get(key) === element)
         elements.delete(key);
     };
+  }
+
+  function registerHover(key: string, handler: (open: boolean) => void) {
+    hoverHandlers.set(key, handler);
+    return () => {
+      if (hoverHandlers.get(key) === handler) hoverHandlers.delete(key);
+    };
+  }
+
+  function hover(entry: MenuEntry, open: boolean) {
+    for (let current: MenuEntry | undefined = entry; current; current = current.parent) {
+      hoverHandlers.get(current.key)?.(open);
+    }
   }
 
   function setOpen(entry: MenuEntry, next: boolean) {
@@ -267,8 +295,17 @@
     get closeDelay() {
       return subMenuCloseDelay;
     },
+    get nativeElement() {
+      return rootElement;
+    },
+    get getPopupContainer() {
+      return popupContainer;
+    },
     id,
     register,
+    registerHover,
+    hover,
+    keydown,
     activate: key => {
       active = key;
     },
@@ -280,8 +317,13 @@
   });
 
   function keydown(event: KeyboardEvent & { currentTarget: EventTarget & HTMLUListElement; }) {
-    const target = event.target instanceof Element ? event.target.closest('[data-menu-id]') : null;
-    const key = [...elements].find(([, element]) => element === target)?.[0];
+    // Вложенные portal могут находиться в одном контейнере; событие обрабатывается один раз.
+    if (handledKeys.has(event)) return;
+    handledKeys.add(event);
+    const target = event.composedPath().find((node): node is Element =>
+      node instanceof Element && node.hasAttribute('data-menu-id'));
+    const key = [...elements].find(([, element]) => element === target
+      || target && element.id === target.id)?.[0];
     void keyboard(key ? model.entries.get(key) ?? null : null, event);
     onkeydown?.(event);
   }
@@ -304,7 +346,7 @@
   }
 </script>
 
-<ul {...attributes} bind:this={nativeElement} role="menu" tabindex={tabindex} data-menu-list="true" dir={config.direction}
+<ul {...attributes} bind:this={rootElement} role="menu" tabindex={tabindex} data-menu-list="true" dir={config.direction}
   aria-disabled={disabled || undefined} aria-orientation={actualMode === 'horizontal' ? 'horizontal' : 'vertical'}
   style={[componentTheme.style, style].filter(Boolean).join(';') || undefined} class={[
       'ant-menu ant-menu-css-var ant-menu-root',

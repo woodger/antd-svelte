@@ -1819,6 +1819,21 @@ popover и общий механизм позиционирования. Бок�
 Escape внутри popup закрывает текущий уровень и возвращает фокус к родителю.
 Таймеры, listeners и animation frames очищаются при unmount.
 
+GetPopupContainer задаёт HTMLElement или ShadowRoot для popup каждого подменю.
+Без локального prop используется ConfigProvider.getPopupContainer; собственный
+`getPopupContainer={undefined}` отключает это наследование, как Ant wrapper.
+Getter получает native button заголовка (в React это div). Без getter сохраняется
+прежнее native-размещение. Обычный inline не вызывает getter; при
+forceSubMenuRender с getter создаются также скрытые popup-копии inline-подменю,
+которые не заменяют refs основного списка. Getter с объявленным параметром ждёт
+DOM-заголовок; zero-arity getter при force render может сначала получить undefined.
+SSR getter не вызывает. Смена функции с тем же контейнером сохраняет DOM, draft,
+выделение и фокус; смена самого контейнера пересоздаёт popup contents, как React portal.
+Вынесенные подменю сохраняют клавиатуру, hover-задержки, callbacks и theme variables.
+Стили внутри ShadowRoot подключает потребитель. Сверка существующих подменю покрыта
+32 снимками официального UMD и фикстурой `?fixture=menu-container`; горизонтальный
+overflow More в эти гарантии пока не входит и остаётся отдельным этапом.
+
 Структура — ul/li с role=menu/menuitem/group/separator. Заголовки подменю используют
 native button, a[href] в label остаётся настоящей ссылкой. Menu не перехватывает
 переход, модификаторы, target/rel; native Enter на ссылке запускает callback
@@ -1849,7 +1864,7 @@ Form.disabled и ConfigProvider.componentDisabled не отключают нав
 Первый этап не включает responsive horizontal overflow/overflowedIndicator,
 исходные popup/collapse motion, controlled activeKey/defaultActiveFirst,
 component config вне темы, semantic classNames/styles, prefixCls, render hooks,
-getPopupContainer/placements/offset и overrides expandIcon/itemIcon. Legacy
+placements/offset и overrides expandIcon/itemIcon. Legacy
 Menu.Item/SubMenu/ItemGroup/Divider children wrappers отсутствуют; данные задаются
 items. Standalone Menu пока не расширяет существующий контракт Dropdown.
 
@@ -7299,7 +7314,7 @@ ConfigProvider.getPopupContainer задаёт `(trigger?: HTMLElement) => HTMLEl
 Вложенный provider наследует функцию, когда его prop отсутствует или равен undefined;
 theme.inherit=false не сбрасывает эту настройку. Она подключена к Tabs, ColorPicker,
 Tooltip, Popover, Popconfirm, Dropdown, Slider, Tooltip внутри Typography,
-Select, AutoComplete, TreeSelect, Cascader, DatePicker, RangePicker, TimePicker
+Select, AutoComplete, TreeSelect, Cascader, Menu, DatePicker, RangePicker, TimePicker
 и TimeRangePicker;
 остальные потребители исходного API ещё требуют переноса. Tour и Mentions используют
 только собственный getPopupContainer, как Ant Design 6.6.8.

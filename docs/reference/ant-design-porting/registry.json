@@ -1800,6 +1800,11 @@
           "name": "@ant-design/cssinjs-utils",
           "range": "^2.1.2",
           "referenceVersion": "2.1.2"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.0.0",
+          "referenceVersion": "3.10.1"
         }
       ],
       "priority": "p1",
@@ -1821,7 +1826,11 @@
         "tests/browser/menu-theme.spec.ts",
         "tests/browser/fixtures/MenuThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-menu-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/fixtures/ant-design-menu-container-reference.json",
+        "tests/browser/fixtures/MenuContainerFixtures.svelte",
+        "tests/package/menu-container.ssr.test.ts",
+        "tests/browser/menu-container.spec.ts"
       ],
       "features": [
         {
@@ -1880,6 +1889,19 @@
           "note": "Исходные 79 defaults и 23 deprecated mapping; defaults рассчитываются до mapping, финальные overrides и явно заданные нули сохраняют приоритет. Размеры/отступы/active bar, шрифты и light/dark палитра, component algorithms, custom CSS prefix, hash, zero/undefined и CSS lengths. Scoped declarations и computed metrics для 20 настроек: inline/vertical/horizontal/collapsed, пункты/иконки/заголовки/стрелки, вложенные списки, группы/разделители и light/dark popup. Внутренние CSS roots наследуют Menu variables вместо vendor defaults; popup получает собственный scope и paddingXS как промежуток до заголовка. SSR и смена темы сохраняют DOM/focus, selected/open keys, callbacks и controller left/top; plain root overrides достигают inline children, popup использует component tokens. Закрытые forceSubMenuRender popup остаются скрытыми в horizontal mode. Native-only темы сохранены; остальные advanced API остаются в работе."
         },
         {
+          "id": "popup-container",
+          "title": "Локальный и ConfigProvider getPopupContainer для подменю",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-menu-container-reference.json",
+            "tests/browser/fixtures/MenuContainerFixtures.svelte",
+            "tests/package/menu-container.ssr.test.ts",
+            "tests/browser/menu-container.spec.ts"
+          ],
+          "note": "Отсутствующий local prop наследует ConfigProvider; собственный undefined отключает global getter. Trigger — согласованный native button заголовка вместо React div; без getter сохраняется native-размещение. Обычный inline не вызывает getter; force render с getter создаёт скрытые popup-копии, не заменяя native refs основного списка. Parameterized getter ждёт trigger; zero-arity при force render может получить undefined. SSR getter не вызывает. Смена функции с тем же target сохраняет DOM/state/draft/selection/focus, смена target пересоздаёт popup contents. Вынесенные уровни сохраняют keyboard, native links, hover path, themes и cleanup; consumer подключает стили ShadowRoot. 32 UMD-снимка сохраняют сырой overflow More; assertions сравнивают реализованные подменю, More относится к missing overflow-motion."
+        },
+        {
           "id": "overflow-motion",
           "title": "Адаптивное horizontal overflow и исходные popup/inline motion",
           "state": "missing",
@@ -1893,7 +1915,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет prefixCls/component config вне темы, semantic classNames/styles, popupRender/getPopupContainer/placements/offset, expandIcon/itemIcon overrides, controlled activeKey/defaultActiveFirst, Menu.Item/SubMenu/ItemGroup/Divider children wrappers и полного Tooltip API collapsed items. Standalone Menu не меняет существующий Dropdown menu contract; интеграция остаётся отдельным этапом."
+          "note": "Нет prefixCls/component config вне темы, semantic classNames/styles, popupRender/placements/offset, expandIcon/itemIcon overrides, controlled activeKey/defaultActiveFirst, Menu.Item/SubMenu/ItemGroup/Divider children wrappers и полного Tooltip API collapsed items. Standalone Menu не меняет существующий Dropdown menu contract; интеграция остаётся отдельным этапом."
         }
       ]
     },
@@ -9599,9 +9621,13 @@
             "tests/browser/fixtures/PickerContainerFixtures.svelte",
             "tests/browser/fixtures/ant-design-picker-container-reference.json",
             "tests/browser/picker-container.spec.ts",
-            "tests/package/picker-container.ssr.test.ts"
+            "tests/package/picker-container.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-menu-container-reference.json",
+            "tests/browser/fixtures/MenuContainerFixtures.svelte",
+            "tests/package/menu-container.ssr.test.ts",
+            "tests/browser/menu-container.spec.ts"
           ],
-          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour и Mentions намеренно не читают глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Ещё 54 UMD-эталона покрывают четыре Date/Time single/range exports: source root trigger/defaultOpen arity, local → global fallback, ShadowRoot, gap/min-width/RTL placement и сохранение state/focus. Native conditional panel lifetime сохранён. Полный Menu popup API, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
+          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour и Mentions намеренно не читают глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Ещё 54 UMD-эталона покрывают четыре Date/Time single/range exports: source root trigger/defaultOpen arity, local → global fallback, ShadowRoot, gap/min-width/RTL placement и сохранение state/focus. Native conditional panel lifetime сохранён. Ещё 32 UMD-эталона Menu подтверждают own-undefined отключение global getter, native title trigger, force render/inline copies, ShadowRoot, remount при смене target и сохранение state/focus при замене функции. Остальной Menu popup API, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
         }
       ]
     },

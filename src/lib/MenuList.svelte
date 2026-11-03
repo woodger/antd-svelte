@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { on } from 'svelte/events';
   import type { MenuEntry } from './menu.engine';
   import { menuItem } from './menu.engine';
   import type { MenuContent, MenuTheme } from './menu.types';
@@ -10,6 +11,14 @@
   const context = useMenu();
   function register(element: HTMLLIElement, key: string) {
     return { destroy: context.register(key, element) };
+  }
+
+  function connectFocus(element: HTMLLIElement, entry: MenuEntry) {
+    function focus() {
+      if (!context.disabled && !menuItem(entry).disabled) context.activate(entry.key);
+    }
+    // Переходы между пунктами одного ShadowRoot не доходят до document delegation.
+    return on(element, 'focusin', focus);
   }
 
   function activate(event: MouseEvent, entry: MenuEntry) {
@@ -29,7 +38,7 @@
     }
     if (event.key === 'Enter') {
       // Enter на настоящей ссылке создаёт native click, который запускает callback.
-      if (event.target instanceof HTMLAnchorElement) return;
+      if (event.composedPath()[0] instanceof HTMLAnchorElement) return;
       event.preventDefault();
       context.click(entry, event);
     }
@@ -86,10 +95,7 @@
           ';'
         )}
       onclick={event => activate(event, entry)} onkeydown={event => keyboard(event, entry)}
-      onfocusin={() => {
-          if (!blocked)
-            context.activate(entry.key);
-        }} onmouseenter={() => {
+      {@attach node => connectFocus(node, entry)} onmouseenter={() => {
             if (!blocked)
               context.activate(entry.key);
           }}

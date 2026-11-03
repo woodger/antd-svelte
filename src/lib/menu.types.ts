@@ -88,6 +88,12 @@ export interface MenuProps extends Omit<
   subMenuOpenDelay?: number;
   /** @defaultValue 0.1 */
   subMenuCloseDelay?: number;
+  /**
+   * Контейнер popup подменю; trigger — native button заголовка.
+   * Отсутствующий prop наследует ConfigProvider; собственный undefined отключает его.
+   * При force render zero-arity getter может сначала получить undefined; SSR не вызывает getter.
+   */
+  getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   rootClassName?: string;
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLUListElement;

@@ -1,0 +1,3623 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4"
+  },
+  "cases": [
+    {
+      "name": "vertical-default",
+      "parent": "none",
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [],
+        "popups": [
+          {
+            "key": "p",
+            "target": "default",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [],
+        "popups": [
+          {
+            "key": "n",
+            "target": "default",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "default",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "vertical-parent",
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "parent",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-child",
+      "child": "child",
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "child",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "child",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "child",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "vertical-child-undefined",
+      "child": "undefined",
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "parent",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-local",
+      "local": "local",
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-local-undefined",
+      "local": "undefined",
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [],
+        "popups": [
+          {
+            "key": "p",
+            "target": "default",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [],
+        "popups": [
+          {
+            "key": "n",
+            "target": "default",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "default",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "vertical-shadow",
+      "parent": "shadow",
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "shadow",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "shadow",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "shadow",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-local-shadow",
+      "local": "shadow",
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "shadow",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "shadow",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "shadow",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-reset-theme",
+      "resetTheme": true,
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "parent",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-rtl",
+      "rtl": true,
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "parent",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-force",
+      "local": "local",
+      "force": true,
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-force-zero",
+      "local": "local",
+      "force": true,
+      "zero": true,
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "none",
+              "key": null,
+              "title": ""
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "vertical-initial-zero",
+      "local": "local",
+      "initial": true,
+      "zero": true,
+      "mode": "vertical",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-default",
+      "parent": "none",
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [],
+        "popups": [
+          {
+            "key": "p",
+            "target": "default",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [],
+        "popups": [
+          {
+            "key": "n",
+            "target": "default",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "default",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "horizontal-parent",
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "parent",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-child",
+      "child": "child",
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "child",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "child",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "child",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "horizontal-child-undefined",
+      "child": "undefined",
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "parent",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-local",
+      "local": "local",
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-local-undefined",
+      "local": "undefined",
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [],
+        "popups": [
+          {
+            "key": "p",
+            "target": "default",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [],
+        "popups": [
+          {
+            "key": "n",
+            "target": "default",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "default",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      }
+    },
+    {
+      "name": "horizontal-shadow",
+      "parent": "shadow",
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "shadow",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "shadow",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "shadow",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-local-shadow",
+      "local": "shadow",
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "shadow",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "shadow",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "shadow",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-reset-theme",
+      "resetTheme": true,
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "parent",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-rtl",
+      "rtl": true,
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "parent",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "parent",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-force",
+      "local": "local",
+      "force": true,
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "rc-menu-more",
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          },
+          {
+            "key": "rc-menu-more",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "rc-menu-more",
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          },
+          {
+            "key": "rc-menu-more",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "rc-menu-more",
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          },
+          {
+            "key": "rc-menu-more",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "rc-menu-more",
+              "title": ""
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            },
+            {
+              "key": "rc-menu-more",
+              "target": "child",
+              "visible": false,
+              "draft": null,
+              "count": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-force-zero",
+      "local": "local",
+      "force": true,
+      "zero": true,
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "rc-menu-more",
+            "title": ""
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          },
+          {
+            "key": "rc-menu-more",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "rc-menu-more",
+            "title": ""
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          },
+          {
+            "key": "rc-menu-more",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "rc-menu-more",
+            "title": ""
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          },
+          {
+            "key": "rc-menu-more",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "rc-menu-more",
+              "title": ""
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "none",
+              "key": null,
+              "title": ""
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            },
+            {
+              "key": "rc-menu-more",
+              "target": "child",
+              "visible": false,
+              "draft": null,
+              "count": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "horizontal-initial-zero",
+      "local": "local",
+      "initial": true,
+      "zero": true,
+      "mode": "horizontal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inline-local",
+      "mode": "inline",
+      "local": "local",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [],
+        "popups": []
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": false
+      },
+      "nested": {
+        "calls": [],
+        "popups": []
+      }
+    },
+    {
+      "name": "inline-force",
+      "mode": "inline",
+      "local": "local",
+      "force": true,
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": false
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": false,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "n",
+              "target": "child",
+              "visible": false,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": false,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inline-force-zero",
+      "mode": "inline",
+      "local": "local",
+      "force": true,
+      "zero": true,
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": false
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": "Projects"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "key": null,
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "n",
+            "target": "local",
+            "visible": false,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": false,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": "Projects"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "none",
+              "key": null,
+              "title": ""
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": false,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "n",
+              "target": "child",
+              "visible": false,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": false,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "inline-parent",
+      "mode": "inline",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [],
+        "popups": []
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": false
+      },
+      "nested": {
+        "calls": [],
+        "popups": []
+      }
+    },
+    {
+      "name": "inline-undefined",
+      "mode": "inline",
+      "local": "undefined",
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [],
+        "popups": []
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": false
+      },
+      "nested": {
+        "calls": [],
+        "popups": []
+      }
+    },
+    {
+      "name": "collapsed-local",
+      "mode": "inline",
+      "local": "local",
+      "collapsed": true,
+      "beforeOpen": {
+        "calls": [],
+        "popups": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Seed",
+            "count": "0"
+          }
+        ]
+      },
+      "refresh": {
+        "sameMenu": true,
+        "sameInput": true,
+        "samePopup": true,
+        "draft": "Owned draft",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true,
+        "count": "1",
+        "parentActive": true
+      },
+      "nested": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "n",
+            "title": "Nested"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "key": "p",
+            "title": ""
+          }
+        ],
+        "popups": [
+          {
+            "key": "n",
+            "target": "local",
+            "visible": true,
+            "draft": null,
+            "count": null
+          },
+          {
+            "key": "p",
+            "target": "local",
+            "visible": true,
+            "draft": "Owned draft",
+            "count": "1"
+          }
+        ]
+      },
+      "moved": {
+        "samePopup": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "n",
+              "title": "Nested"
+            },
+            {
+              "getter": "local",
+              "args": 1,
+              "tag": "div",
+              "key": "p",
+              "title": ""
+            }
+          ],
+          "popups": [
+            {
+              "key": "n",
+              "target": "child",
+              "visible": true,
+              "draft": null,
+              "count": null
+            },
+            {
+              "key": "p",
+              "target": "child",
+              "visible": true,
+              "draft": "Seed",
+              "count": "0"
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
