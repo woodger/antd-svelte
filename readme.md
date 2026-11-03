@@ -182,7 +182,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Result | Семь статусов, официальные иконки/SVG, заголовок, описание, действия, подробности и восстановление фокуса |
 | Steps | Управляемые этапы, статусы, snippets, нативные кнопки, horizontal/vertical, medium/small, локаль, темы и восстановление фокуса |
 | Tag | Статусные/preset цвета, filled/outlined/solid, snippets, отменяемое закрытие, disabled и восстановление фокуса |
-| CheckableTag | Управляемый checked/onChange, нативная toggle-кнопка, aria-pressed, disabled и snippets |
+| CheckableTag | Управляемый checked/onChange, click/keyboard callbacks, DOM attrs/ref, нативная toggle-кнопка, aria-pressed и disabled |
 | Badge | Числовой счётчик, overflow/showZero/dot, статусы/preset цвета, string/Snippet text, размеры, offset и доступное полное значение |
 | Avatar | Изображение, icon/children fallback, circle/square, именованные/числовые/адаптивные размеры, подгонка текста и доступное имя |
 | AvatarGroup | Типизированные items, стабильные ключи, общие размеры/форма, перекрытие, max.count и скрытые участники в Popover |
@@ -5425,8 +5425,17 @@ CheckableTag — отдельный export с обязательным children 
 и содержимое, но кнопка исключается из Tab и не меняет состояние.
 
 CheckableTag поддерживает Enter/Space и естественный Tab; при удалении кнопки
-фокус восстанавливается рядом, сохраняя выбор владельца. Id/class/style и
-aria-label/aria-labelledby/aria-describedby относятся к кнопке. Выбранные
+фокус восстанавливается рядом, сохраняя выбор владельца. OnClick вызывается
+после onChange; отмена click внутри него не отменяет уже отправленное значение.
+OnKeyDown вызывается первым: preventDefault отменяет переключение. Space
+переключает при keydown, игнорирует repeat и не вызывает onClick; нативный Enter
+создаёт click. Lowercase onclick/onkeydown имеют приоритет над соответствующими
+callbacks. Уже отменённый click не вызывает переключение или onClick.
+
+Id/class/style, title, data-/aria-атрибуты и остальные HTMLAttributes относятся
+к кнопке. Dir наследуется при отсутствии локального значения. Bind:nativeElement
+даёт ту же кнопку при обновлениях и очищается при unmount; SSR не создаёт ref.
+Type=button и aria-pressed остаются собственными атрибутами компонента. Выбранные
 фильтры, их объединение и связь с Form/Table принадлежат владельцу; скрытых
 полей FormData и автоматической интеграции с FormItem нет.
 

@@ -9,6 +9,10 @@
 
 ### Added
 
+- CheckableTag: исходные click/keyboard callbacks, отмена и repeat Space,
+  native aliases, DOM attrs и bind:nativeElement. Сохранены нативная кнопка,
+  controlled checked, Enter и восстановление фокуса; добавлены 12 UMD-сценариев
+  и SSR/browser-проверки.
 - Badge prefixes: локальный prefixCls со своими styles и исходные
   scrollNumberPrefixCls classes для sup/custom count и разрядов.
   Сохранены глобальная CSS-связь ScrollNumber, active zoom/cache, DOM/ref/focus

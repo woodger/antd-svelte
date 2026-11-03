@@ -9,24 +9,49 @@
     disabled,
     icon,
     onChange,
+    onClick,
+    onclick,
+    onKeyDown,
+    onkeydown,
+    nativeElement = $bindable(),
     id,
+    dir,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     class: className = '',
-    style
+    style,
+    ...attributes
   }: CheckableTagProps = $props();
   const config = useConfig();
-  let host = $state<HTMLButtonElement>();
   let blocked = $derived(disabled ?? config.componentDisabled);
   $effect(() => {
-    const node = host;
+    const node = nativeElement;
     if (node) return connectFeedbackFocus(node);
   });
 
-  function handleClick(event: MouseEvent) {
-    if (!blocked && !event.defaultPrevented)
-      onChange?.(!checked);
+  function handleClick(event: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) {
+    if (blocked || event.defaultPrevented) return;
+
+    // Callback может синхронно удалить владельца вместе с его props.
+    const click = onclick ?? onClick;
+    onChange?.(!checked);
+    click?.(event);
+  }
+
+  function handleKeyDown(
+    event: KeyboardEvent & { currentTarget: EventTarget & HTMLButtonElement; }
+  ) {
+    const disabled = blocked;
+    const nextChecked = !checked;
+    const change = onChange;
+    (onkeydown ?? onKeyDown)?.(event);
+    if (disabled || event.defaultPrevented) return;
+
+    if (event.key === ' ') {
+      event.preventDefault();
+      if (!event.repeat) change?.(nextChecked);
+    }
   }
 </script>
 
@@ -39,12 +64,27 @@
   @media (prefers-reduced-motion: reduce) { .ant-tag { transition: none; } }
 </style>
 
-<button bind:this={host} {id} type="button" aria-pressed={checked} disabled={blocked} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction} class={[
+<button
+  {...attributes}
+  bind:this={nativeElement}
+  {id}
+  type="button"
+  aria-pressed={checked}
+  disabled={blocked}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledby}
+  aria-describedby={ariaDescribedby}
+  dir={dir ?? config.direction}
+  class={[
     'ant-tag ant-tag-css-var ant-tag-checkable',
     checked && 'ant-tag-checkable-checked',
     blocked && 'ant-tag-checkable-disabled',
     config.direction === 'rtl' && 'ant-tag-rtl',
     className
-  ]} {style} onclick={handleClick}>
+  ]}
+  {style}
+  onclick={handleClick}
+  onkeydown={handleKeyDown}
+>
   {#if icon}<span class="ant-tag-icon anticon" aria-hidden="true" inert>{@render icon()}</span>{/if}<span class="ant-tag-content">{@render children()}</span>
 </button>

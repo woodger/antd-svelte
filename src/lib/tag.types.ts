@@ -45,13 +45,22 @@ export interface TagProps {
 }
 
 /** Управляемая метка-фильтр: новое checked передаётся через onChange. */
-export interface CheckableTagProps {
+export interface CheckableTagProps extends Omit<
+  HTMLAttributes<HTMLButtonElement>,
+  'children' | 'class' | 'style'
+> {
   children: Snippet;
   /** @defaultValue false */
   checked?: boolean;
   disabled?: boolean;
   icon?: Snippet;
   onChange?: (checked: boolean) => void;
+  /** После onChange для click; onclick имеет приоритет. Space не вызывает onClick. */
+  onClick?: HTMLAttributes<HTMLButtonElement>['onclick'];
+  /** До обработки Space; preventDefault отменяет переключение. onkeydown имеет приоритет. */
+  onKeyDown?: HTMLAttributes<HTMLButtonElement>['onkeydown'];
+  /** Bindable ссылка на нативную кнопку; очищается при unmount. */
+  nativeElement?: HTMLButtonElement;
   id?: string;
   'aria-label'?: string;
   'aria-labelledby'?: string;

@@ -8005,7 +8005,15 @@
         "tests/package/wave.ssr.test.ts",
         "tests/browser/wave.spec.ts",
         "tests/browser/fixtures/WaveFixtures.svelte",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/CheckableTag.svelte",
+        "src/lib/tag.types.ts",
+        "tests/browser/checkable-tag-api.spec.ts",
+        "tests/browser/fixtures/CheckableTagApiCase.svelte",
+        "tests/browser/fixtures/CheckableTagApiFixtures.svelte",
+        "tests/browser/fixtures/checkable-tag-api-presets.ts",
+        "tests/browser/fixtures/ant-design-checkable-tag-api-reference.json",
+        "tests/package/checkable-tag-api.ssr.test.ts"
       ],
       "features": [
         {
@@ -8035,6 +8043,23 @@
             "docs/reference/wave.md"
           ],
           "note": "Capture listener, пять source triggers и RAF debounce последнего события, disabled/showEffect и полный текущий GlobalToken/native event/hash. Стандартные target/color/geometry/resize, ordinary/quick appear, opacity end и 5000ms deadline; cleanup RAF/timers/observers/DOM при unmount. SSR не создаёт effect DOM, native callbacks/form/focus сохраняются. Config wave records наследуются при отсутствии и заменяются при явном объекте. Восемь CSS rules из закреплённого архива; без React runtime. OnClick/onclick и single direct anchor в opaque snippet включают Wave; закрытие останавливает callback. CheckableTag не получает Wave, как upstream. Общий аудит Tag остаётся unreviewed."
+        },
+        {
+          "id": "checkable-callbacks-dom",
+          "title": "CheckableTag callbacks, Space и DOM API",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/CheckableTag.svelte",
+            "src/lib/tag.types.ts",
+            "tests/browser/checkable-tag-api.spec.ts",
+            "tests/browser/fixtures/CheckableTagApiCase.svelte",
+            "tests/browser/fixtures/CheckableTagApiFixtures.svelte",
+            "tests/browser/fixtures/checkable-tag-api-presets.ts",
+            "tests/browser/fixtures/ant-design-checkable-tag-api-reference.json",
+            "tests/package/checkable-tag-api.ssr.test.ts"
+          ],
+          "note": "OnChange перед onClick, onKeyDown до Space, отмена/repeat и callback после синхронного unmount сверены с 12 сценариями официальной сборки. Lowercase aliases имеют приоритет; HTMLAttributes и bind:nativeElement относятся к прежней native toggle-кнопке. Controlled checked, Enter, aria-pressed, disabled, focus recovery и guard уже отменённого click сохранены. PrefixCls и ConfigProvider.tag этим этапом не перенесены; общий аудит Tag остаётся unreviewed."
         }
       ]
     },

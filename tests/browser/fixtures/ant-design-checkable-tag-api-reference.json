@@ -1,0 +1,279 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js"
+  },
+  "cases": [
+    {
+      "name": "controlled-clicks",
+      "steps": [
+        {
+          "kind": "click"
+        },
+        {
+          "kind": "click"
+        }
+      ],
+      "events": [
+        "change:true",
+        "click:api",
+        "change:true",
+        "click:api"
+      ],
+      "prevented": [
+        false,
+        false
+      ],
+      "final": {
+        "checked": false,
+        "mounted": true
+      }
+    },
+    {
+      "name": "checked-click",
+      "checked": true,
+      "steps": [
+        {
+          "kind": "click"
+        }
+      ],
+      "events": [
+        "change:false",
+        "click:api"
+      ],
+      "prevented": [
+        false
+      ],
+      "final": {
+        "checked": true,
+        "mounted": true
+      }
+    },
+    {
+      "name": "accepted-clicks",
+      "accept": true,
+      "steps": [
+        {
+          "kind": "click"
+        },
+        {
+          "kind": "click"
+        }
+      ],
+      "events": [
+        "change:true",
+        "click:api",
+        "change:false",
+        "click:api"
+      ],
+      "prevented": [
+        false,
+        false
+      ],
+      "final": {
+        "checked": false,
+        "mounted": true
+      }
+    },
+    {
+      "name": "prevent-click-after-change",
+      "preventClick": true,
+      "steps": [
+        {
+          "kind": "click"
+        }
+      ],
+      "events": [
+        "change:true",
+        "click:api"
+      ],
+      "prevented": [
+        true
+      ],
+      "final": {
+        "checked": false,
+        "mounted": true
+      }
+    },
+    {
+      "name": "space-then-repeat",
+      "accept": true,
+      "steps": [
+        {
+          "kind": "key",
+          "key": " "
+        },
+        {
+          "kind": "key",
+          "key": " ",
+          "repeat": true
+        },
+        {
+          "kind": "key",
+          "key": "ArrowRight"
+        }
+      ],
+      "events": [
+        "key: :false",
+        "change:true",
+        "key: :true",
+        "key:ArrowRight:false"
+      ],
+      "prevented": [
+        true,
+        true,
+        false
+      ],
+      "final": {
+        "checked": true,
+        "mounted": true
+      }
+    },
+    {
+      "name": "prevent-space",
+      "preventKey": true,
+      "steps": [
+        {
+          "kind": "key",
+          "key": " "
+        }
+      ],
+      "events": [
+        "key: :false"
+      ],
+      "prevented": [
+        true
+      ],
+      "final": {
+        "checked": false,
+        "mounted": true
+      }
+    },
+    {
+      "name": "repeated-space",
+      "steps": [
+        {
+          "kind": "key",
+          "key": " ",
+          "repeat": true
+        }
+      ],
+      "events": [
+        "key: :true"
+      ],
+      "prevented": [
+        true
+      ],
+      "final": {
+        "checked": false,
+        "mounted": true
+      }
+    },
+    {
+      "name": "enter-keydown",
+      "steps": [
+        {
+          "kind": "key",
+          "key": "Enter"
+        }
+      ],
+      "events": [
+        "key:Enter:false"
+      ],
+      "prevented": [
+        false
+      ],
+      "final": {
+        "checked": false,
+        "mounted": true
+      }
+    },
+    {
+      "name": "disabled-events",
+      "disabled": true,
+      "steps": [
+        {
+          "kind": "click"
+        },
+        {
+          "kind": "key",
+          "key": " "
+        }
+      ],
+      "events": [
+        "key: :false"
+      ],
+      "prevented": [
+        false,
+        false
+      ],
+      "final": {
+        "checked": false,
+        "mounted": true
+      }
+    },
+    {
+      "name": "change-unmount",
+      "removeOnChange": true,
+      "steps": [
+        {
+          "kind": "click"
+        }
+      ],
+      "events": [
+        "change:true",
+        "click:api"
+      ],
+      "prevented": [
+        false
+      ],
+      "final": {
+        "checked": false,
+        "mounted": false
+      }
+    },
+    {
+      "name": "keydown-unmount",
+      "removeOnKeyDown": true,
+      "steps": [
+        {
+          "kind": "key",
+          "key": " "
+        }
+      ],
+      "events": [
+        "key: :false",
+        "change:true"
+      ],
+      "prevented": [
+        true
+      ],
+      "final": {
+        "checked": false,
+        "mounted": false
+      }
+    },
+    {
+      "name": "cancelled-key",
+      "steps": [
+        {
+          "kind": "key",
+          "key": " ",
+          "cancelled": true
+        }
+      ],
+      "events": [
+        "key: :false"
+      ],
+      "prevented": [
+        true
+      ],
+      "final": {
+        "checked": false,
+        "mounted": true
+      }
+    }
+  ]
+}
