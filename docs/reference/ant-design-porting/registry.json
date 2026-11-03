@@ -8079,16 +8079,34 @@
         "tests/browser/fixtures/TagPrefixFixtures.svelte",
         "tests/browser/fixtures/tag-prefix-presets.ts",
         "tests/browser/fixtures/ant-design-tag-prefix-reference.json",
-        "tests/package/tag-prefix.ssr.test.ts"
+        "tests/package/tag-prefix.ssr.test.ts",
+        "src/lib/tag.ssr.test.ts"
       ],
       "features": [
         {
           "id": "core-v1",
           "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "readme.md",
+            "src/lib/Tag.svelte",
+            "src/lib/CheckableTag.svelte",
+            "src/lib/tag.types.ts",
+            "src/lib/tag.ssr.test.ts",
+            "tests/browser/tag.spec.ts",
+            "tests/browser/checkable-tag-api.spec.ts",
+            "tests/browser/tag-style.spec.ts",
+            "tests/browser/tag-close.spec.ts",
+            "tests/browser/tag-hydration.spec.ts",
+            "tests/browser/tag-group.spec.ts",
+            "tests/browser/tag-prefix.spec.ts",
+            "tests/package/tag-style.ssr.test.ts",
+            "tests/package/tag-close.ssr.test.ts",
+            "tests/package/tag-group.ssr.test.ts",
+            "tests/package/tag-prefix.ssr.test.ts"
+          ],
+          "note": "Аудирован согласованный v1 Tag/CheckableTag: содержимое и декоративные Snippets, preset/status/custom colors и variants, отменяемое закрытие, controlled checked, disabled, keyboard/callback order, native refs/attrs, theme/RTL/locale, SSR/hydration и cleanup. Source config/semantics, href/closable, CheckableTagGroup, prefixes и Wave подробно описаны отдельными features. Native controls, DOM removal, перенос текста и focus recovery сохранены; source DOM/ReactNode отличия перечислены отдельно. V1-ready не означает идентичный React DOM или завершение всего Ant Design."
         },
         {
           "id": "source-wave",
@@ -8108,7 +8126,7 @@
             "tests/browser/fixtures/WaveFixtures.svelte",
             "docs/reference/wave.md"
           ],
-          "note": "Capture listener, пять source triggers и RAF debounce последнего события, disabled/showEffect и полный текущий GlobalToken/native event/hash. Стандартные target/color/geometry/resize, ordinary/quick appear, opacity end и 5000ms deadline; cleanup RAF/timers/observers/DOM при unmount. SSR не создаёт effect DOM, native callbacks/form/focus сохраняются. Config wave records наследуются при отсутствии и заменяются при явном объекте. Восемь CSS rules из закреплённого архива; без React runtime. OnClick/onclick и single direct anchor в opaque snippet включают Wave; закрытие останавливает callback. CheckableTag не получает Wave, как upstream. Общий аудит Tag остаётся unreviewed."
+          "note": "Capture listener, пять source triggers и RAF debounce последнего события, disabled/showEffect и полный текущий GlobalToken/native event/hash. Стандартные target/color/geometry/resize, ordinary/quick appear, opacity end и 5000ms deadline; cleanup RAF/timers/observers/DOM при unmount. SSR не создаёт effect DOM, native callbacks/form/focus сохраняются. Config wave records наследуются при отсутствии и заменяются при явном объекте. Восемь CSS rules из закреплённого архива; без React runtime. OnClick/onclick и single direct anchor в opaque snippet включают Wave; закрытие останавливает callback. CheckableTag не получает Wave, как upstream. Аудит согласованного v1 описан в core-v1; отличия DOM указаны отдельно."
         },
         {
           "id": "checkable-callbacks-dom",
@@ -8125,7 +8143,7 @@
             "tests/browser/fixtures/ant-design-checkable-tag-api-reference.json",
             "tests/package/checkable-tag-api.ssr.test.ts"
           ],
-          "note": "OnChange перед onClick, onKeyDown до Space, отмена/repeat и callback после синхронного unmount сверены с 12 сценариями официальной сборки. Lowercase aliases имеют приоритет; HTMLAttributes и bind:nativeElement относятся к прежней native toggle-кнопке. Controlled checked, Enter, aria-pressed, disabled, focus recovery и guard уже отменённого click сохранены. Локальный prefixCls описан отдельно; context class/style описаны в source-styling. Общий аудит Tag остаётся unreviewed."
+          "note": "OnChange перед onClick, onKeyDown до Space, отмена/repeat и callback после синхронного unmount сверены с 12 сценариями официальной сборки. Lowercase aliases имеют приоритет; HTMLAttributes и bind:nativeElement относятся к прежней native toggle-кнопке. Controlled checked, Enter, aria-pressed, disabled, focus recovery и guard уже отменённого click сохранены. Локальный prefixCls описан отдельно; context class/style описаны в source-styling. Аудит согласованного v1 описан в core-v1; отличия DOM указаны отдельно."
         },
         {
           "id": "source-styling",
@@ -8176,7 +8194,7 @@
             "tests/browser/fixtures/ant-design-tag-prefix-reference.json",
             "tests/package/tag-prefix.ssr.test.ts"
           ],
-          "note": "Локальный prefixCls и fallback ant-tag меняют исходные root/modifier/close/group/item classes. Дочерние CheckableTag группы сохраняют стандартный prefix, как upstream. CSS template из 90 правил закреплённого архива сохраняет global variables/icons и marker; SSR head, обратимая смена prefix и cleanup экземпляра не заменяют DOM и не затрагивают соседей. 60 UMD-эталонов, native theme/focus/hit target/Wave cases описывают scope. Прежние native button/aria-pressed, close removal/focus recovery, wrapping и декоративные Snippet wrappers сохраняются; это не идентичный React DOM. Общий аудит v1 остаётся отдельно."
+          "note": "Локальный prefixCls и fallback ant-tag меняют исходные root/modifier/close/group/item classes. Дочерние CheckableTag группы сохраняют стандартный prefix, как upstream. CSS template из 90 правил закреплённого архива сохраняет global variables/icons и marker; SSR head, обратимая смена prefix и cleanup экземпляра не заменяют DOM и не затрагивают соседей. 60 UMD-эталонов, native theme/focus/hit target/Wave cases описывают scope. Прежние native button/aria-pressed, close removal/focus recovery, wrapping и декоративные Snippet wrappers сохраняются; это не идентичный React DOM."
         },
         {
           "id": "source-links-closable",
@@ -8204,7 +8222,7 @@
             "tests/browser/fixtures/tag-close-hydration.client.ts",
             "tests/browser/fixtures/tag-close-hydration.html"
           ],
-          "note": "Перенесены native href/target, HTMLAttributes и bind:nativeElement, source props/context/fallback приоритеты closeIcon/closable, scalar/Snippet/blank glyphs и ARIA-only поля. Closable.disabled/afterClose у Tag игнорируются, как upstream; Tag.disabled управляет native control. Keyboard keydown/repeat/cancellation и предотвращение навигации при закрытии сверены с 55 UMD-случаями и семью обратимыми обновлениями. Hover/active/keyboard focus проверяются для root и descendant ссылок, включая disabled. Четыре link rules и scoped общий reset из 14 rules извлекаются из закреплённого архива. Явные a/span branches сохраняют SSR DOM/focus; постоянные browser hydration cases используют свежий SSR output. Сохранены прежние native removal/ref cleanup, описанная closeLabel/description граница, focus recovery, inert Snippet и guard уже отменённого close click; полный аудит Tag ещё не завершён."
+          "note": "Перенесены native href/target, HTMLAttributes и bind:nativeElement, source props/context/fallback приоритеты closeIcon/closable, scalar/Snippet/blank glyphs и ARIA-only поля. Closable.disabled/afterClose у Tag игнорируются, как upstream; Tag.disabled управляет native control. Keyboard keydown/repeat/cancellation и предотвращение навигации при закрытии сверены с 55 UMD-случаями и семью обратимыми обновлениями. Hover/active/keyboard focus проверяются для root и descendant ссылок, включая disabled. Четыре link rules и scoped общий reset из 14 rules извлекаются из закреплённого архива. Явные a/span branches сохраняют SSR DOM/focus; постоянные browser hydration cases используют свежий SSR output. Сохранены прежние native removal/ref cleanup, описанная closeLabel/description граница, focus recovery, inert Snippet и guard уже отменённого close click; отличия React DOM описаны в native-boundaries."
         },
         {
           "id": "source-checkable-group",
@@ -8225,6 +8243,26 @@
             "tests/package/tag-group.ssr.test.ts"
           ],
           "note": "Single/multiple, controlled/defaultValue и переход к undefined по useControlledState 1.14.0, строгие типы значений, off-list values, порядок добавления/удаления и callbacks. Primitive/object options, Snippet labels, option className/style, root/item semantic objects/functions и приоритет context/local/option styles. Общий Tag context и исходный raw disabled, native div ref, ARIA/data filter, RTL и token gap. 34 сценария официальной UMD-сборки описывают начальные состояния и обновления. Существующие native CheckableTag button/aria-pressed, Enter, disabled, focus recovery и отсутствие FormData сохраняются; это не идентичный React DOM. Локальный prefixCls описан отдельно; дочерние CheckableTag сохраняют стандартный prefix, как upstream."
+        },
+        {
+          "id": "native-boundaries",
+          "title": "Сохранённые native controls, DOM и Snippet boundaries",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/Tag.svelte",
+            "src/lib/CheckableTag.svelte",
+            "src/lib/CheckableTagGroup.svelte",
+            "src/lib/tag.types.ts",
+            "src/lib/tag.ssr.test.ts",
+            "tests/browser/tag.spec.ts",
+            "tests/browser/tag-close.spec.ts",
+            "tests/browser/tag-group.spec.ts",
+            "tests/browser/tag-prefix.spec.ts",
+            "tests/browser/tag-hydration.spec.ts"
+          ],
+          "note": "Сохраняются согласованные адаптации: закрытие и выбор через native buttons, aria-pressed и Enter у CheckableTag, native disabled и курсор not-allowed; closeLabel/description имеют описанный приоритет. Закрытие удаляет DOM; wrapping, hit target, focus recovery и декоративные inert Snippet wrappers остаются прежними. Сохраняются private classes и default class при отсутствии color. Произвольный ReactNode и cloneElement не воспроизводятся буквально: icon/children/closeIcon используют описанные scalar/Snippet формы. Публичный Svelte API сохраняется; полное совпадение React DOM не заявляется."
         }
       ]
     },

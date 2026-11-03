@@ -363,6 +363,8 @@
 
 ### Changed
 
+- Завершён аудит согласованного v1 Tag/CheckableTag. В реестре отдельно описаны
+  сохранённые native controls, DOM и Snippet boundaries; это не полный React DOM.
 - Tabs: навигация выделена в приватный TabsNav по границе исходного TabNavList.
   Выбор и панели остаются в Tabs; native keyboard, overflow, размеры и focus
   recovery сохраняются.
