@@ -50,7 +50,15 @@
   let strings = $derived({ ...ruRU.avatarGroup, ...config.locale.avatarGroup });
   $effect(() => {
     const node = host;
-    if (node) return connectFeedbackFocus(node);
+    if (!node) return;
+
+    return connectFeedbackFocus(node, focused => {
+      // Popup может находиться вне группы после getPopupContainer.
+      const surface = focused.closest<HTMLElement>('.ant-popover');
+      const controls = node.querySelector('.ant-avatar-group-more')
+        ?.getAttribute('aria-controls')?.split(/\s+/) ?? [];
+      return Boolean(surface && controls.includes(surface.id));
+    });
   });
 </script>
 

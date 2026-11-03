@@ -5,8 +5,8 @@ import type { PopoverContent, PopoverPlacement } from './popover.types';
 /** Подтверждение действия с Promise, состоянием ожидания и защитой от позднего результата. */
 export interface PopconfirmProps {
   children: Snippet;
-  title: PopoverContent;
-  description?: PopoverContent | null;
+  title: Exclude<PopoverContent, boolean>;
+  description?: Exclude<PopoverContent, boolean> | null;
   icon?: Snippet | null;
   /** Поддерживает bind:open. */
   open?: boolean | undefined;

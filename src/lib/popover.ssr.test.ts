@@ -117,4 +117,45 @@ describe('Popover server rendering', () => {
       second.match(/id="(ant-popover-[^"]+)"/)?.[1]
     );
   });
+
+  it('preserves source boolean presence without rendering boolean text', () => {
+    const visible = render(Popover, { props: { children, title: true, content: true } }).body;
+    const empty = render(Popover, { props: { children, title: false, content: false } }).body;
+
+    expect(visible).toContain('class="ant-popover-title');
+    expect(visible).toContain('class="ant-popover-content');
+    expect(visible).not.toMatch(/>(?:true|false)</);
+    expect(empty).not.toContain('class="ant-popover-title');
+    expect(empty).not.toContain('class="ant-popover-content');
+  });
+
+  it.each([
+    { destroyOnHidden: true },
+    { destroyTooltipOnHide: true },
+    { destroyTooltipOnHide: { keepParent: false } },
+    { destroyOnHidden: true, destroyTooltipOnHide: false }
+  ])('defers disposable snippets until hydration for %j', options => {
+    const content = createRawSnippet(() => ({
+      render: () => { throw new Error('Unexpected SSR content'); }
+    }));
+    const { body } = render(Popover, {
+      props: { children, title: content, content, defaultOpen: true, ...options }
+    });
+
+    expect(body).toContain('popover="manual"');
+    expect(body).not.toContain('class="ant-popover-title');
+    expect(body).not.toContain('class="ant-popover-content');
+  });
+
+  it.each([
+    { destroyOnHidden: false, destroyTooltipOnHide: true },
+    { destroyTooltipOnHide: false }
+  ])('retains the existing eager SSR content for %j', options => {
+    const { body } = render(Popover, {
+      props: { children, title: 'Retained title', content: 'Retained body', ...options }
+    });
+
+    expect(body).toContain('Retained title');
+    expect(body).toContain('Retained body');
+  });
 });

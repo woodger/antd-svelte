@@ -6017,7 +6017,18 @@
         "tests/browser/fixtures/ant-design-avatar-group-max-reference.json",
         "tests/browser/avatar-group-max-metrics.ts",
         "tests/browser/avatar-group-max.spec.ts",
-        "tests/package/avatar-group-max.ssr.test.ts"
+        "tests/package/avatar-group-max.ssr.test.ts",
+        "src/lib/avatar-group.ssr.test.ts",
+        "src/lib/feedback.dom.ts",
+        "src/lib/popover.types.ts",
+        "src/lib/popover.ssr.test.ts",
+        "tests/browser/fixtures/avatar-group-popover-presets.ts",
+        "tests/browser/fixtures/AvatarGroupPopoverCase.svelte",
+        "tests/browser/fixtures/AvatarGroupPopoverFixtures.svelte",
+        "tests/browser/fixtures/ant-design-avatar-group-popover-reference.json",
+        "tests/browser/avatar-group-popover-metrics.ts",
+        "tests/browser/avatar-group-popover.spec.ts",
+        "tests/package/avatar-group-popover.ssr.test.ts"
       ],
       "features": [
         {
@@ -6115,7 +6126,7 @@
             "src/lib/avatar.types.ts",
             "src/lib/ConfigProvider.svelte"
           ],
-          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref и локальный prefixCls перенесены отдельными features. AvatarGroup сохраняет согласованный items/Popover API; deprecated max* aliases перенесены отдельной feature; полный max.popover/children API ещё требует переноса. Пассивные Svelte/native contracts и нормализация размеров/лимита сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
+          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref, prefixCls и deprecated max* aliases перенесены отдельными features. Max.popover принимает весь текущий Svelte Popover API, включая content/title, controlled/default open, destroy и getters. Произвольные children вместо items и остальные исходные Popover props (corner/contextMenu, semantic/config/prefixCls, color/align/motion, fresh cache) остаются в работе. Согласованные passive/native contracts, нормализация размеров/лимита, кнопка и список сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
         },
         {
           "id": "display-theme-tokens",
@@ -6213,6 +6224,31 @@
             "readme.md"
           ],
           "note": "MaxCount/maxStyle/maxPopoverPlacement/maxPopoverTrigger; truthy max fields имеют приоритет, включая fallback count=0/пустого style и приоритет пустого trigger array. Двадцать UMD-эталонов описывают limits, counter style, placement/trigger, обратимые обновления и SSR без overflow content/таймеров. Native items/deduplication, нормализация count, hover/click defaults, доступная кнопка и список сохранены. Живое обновление aliases сохраняет popup/hidden Avatar DOM и фокус; удаление overflow восстанавливает соседний control. Полный max.popover и children API остаются в работе."
+        },
+        {
+          "id": "group-popover-config",
+          "title": "Полный текущий Svelte Popover API в max.popover",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/AvatarGroup.svelte",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.types.ts",
+            "src/lib/avatar-group.ssr.test.ts",
+            "src/lib/feedback.dom.ts",
+            "src/lib/Popover.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popover.ssr.test.ts",
+            "tests/browser/fixtures/avatar-group-popover-presets.ts",
+            "tests/browser/fixtures/AvatarGroupPopoverCase.svelte",
+            "tests/browser/fixtures/AvatarGroupPopoverFixtures.svelte",
+            "tests/browser/fixtures/ant-design-avatar-group-popover-reference.json",
+            "tests/browser/avatar-group-popover-metrics.ts",
+            "tests/browser/avatar-group-popover.spec.ts",
+            "tests/package/avatar-group-popover.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Тип производен от PopoverProps без children. Custom title/content, явные null/false/undefined, true/0, controlled open с onOpenChange и defaultOpen, снятие controlled без возврата default, native ARIA/wrapper class/style и дополнительные popup classes. Group destroyOnHidden по умолчанию true; false сохраняет DOM/state после первого открытия, явный undefined оставляет выбор legacy alias. Все существующие Svelte getters/trigger/placement/arrow/delays передаются. 33 последовательности официального UMD фиксируют видимое содержимое, callbacks и удерживаемые inputs/avatars; native shell/ARIA не включены в source snapshot. Нативная кнопка, focus recovery, source/theme scopes, ленивые SSR/snippets и восстановление при portal unmount сохраняются. Весь React Popover API не объявляется перенесённым: оставшиеся props отмечены в advanced-api."
         }
       ]
     },
@@ -7556,7 +7592,23 @@
         "config-provider",
         "space"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/tooltip",
+          "range": "~1.5.2",
+          "referenceVersion": "1.5.2"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.10.1",
+          "referenceVersion": "3.10.1"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
@@ -7587,7 +7639,20 @@
         "tests/browser/fixtures/OverlayContainerContent.svelte",
         "tests/browser/fixtures/OverlayContainerFixtures.svelte",
         "tests/browser/overlay-container.spec.ts",
-        "tests/package/overlay-container.ssr.test.ts"
+        "tests/package/overlay-container.ssr.test.ts",
+        "src/lib/AvatarGroup.svelte",
+        "src/lib/AvatarGroupOverflow.svelte",
+        "src/lib/avatar-group.types.ts",
+        "src/lib/avatar-group.ssr.test.ts",
+        "src/lib/feedback.dom.ts",
+        "src/lib/popover.ssr.test.ts",
+        "tests/browser/fixtures/avatar-group-popover-presets.ts",
+        "tests/browser/fixtures/AvatarGroupPopoverCase.svelte",
+        "tests/browser/fixtures/AvatarGroupPopoverFixtures.svelte",
+        "tests/browser/fixtures/ant-design-avatar-group-popover-reference.json",
+        "tests/browser/avatar-group-popover-metrics.ts",
+        "tests/browser/avatar-group-popover.spec.ts",
+        "tests/package/avatar-group-popover.ssr.test.ts"
       ],
       "features": [
         {
@@ -7600,11 +7665,11 @@
         },
         {
           "id": "gap-1",
-          "title": "Corner placements и порталы",
-          "state": "missing",
+          "title": "Corner placements и остальные исходные Popover настройки",
+          "state": "partial",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "note": "Контейнеры и destroyOnHidden перенесены отдельными features. Native API сохраняет четыре placement; corner/contextMenu, semantic/config/prefixCls, color/align/motion и fresh cache ещё требуют переноса. Общий подробный аудит v1 не завершён."
         },
         {
           "id": "compact-isolation",
@@ -7673,7 +7738,32 @@
             "tests/browser/overlay-container.spec.ts",
             "tests/package/overlay-container.ssr.test.ts"
           ],
-          "note": "Наследует source Tooltip container chain: getPopupContainer → legacy getTooltipContainer → ConfigProvider. Own undefined не отключает provider. Getter ленивый и browser-only. Reactive portal сохраняет контент, focus/selection и popup при неизменном target, переносит наследуемые CSS variables без потери своих Popover/Tooltip aliases; changes/removal overrides проверяются в DOM. Открытый ShadowRoot использует собственные стили потребителя; focus lookup и возврат на trigger учитывают фактический root. 52 общих UMD-эталона задают priority, getter payload и state retention; native default inline/top-layer surface и прежний retained content сохраняются. Destroy/motion и прочие rc-trigger props остаются отдельными gaps. Унаследованные arrow coordinates и CSS-derived arrow variables родительского popup не перезаписывают собственный controller текущей поверхности."
+          "note": "Наследует source Tooltip container chain: getPopupContainer → legacy getTooltipContainer → ConfigProvider. Own undefined не отключает provider. Getter ленивый и browser-only. Reactive portal сохраняет контент, focus/selection и popup при неизменном target, переносит наследуемые CSS variables без потери своих Popover/Tooltip aliases; changes/removal overrides проверяются в DOM. Открытый ShadowRoot использует собственные стили потребителя; focus lookup и возврат на trigger учитывают фактический root. 52 общих UMD-эталона задают priority, getter payload и state retention; native default inline/top-layer surface и прежний retained content сохраняются. Destroy описан отдельной feature; motion и прочие rc-trigger props остаются gaps. Унаследованные arrow coordinates и CSS-derived arrow variables родительского popup не перезаписывают собственный controller текущей поверхности."
+        },
+        {
+          "id": "content-lifecycle",
+          "title": "Boolean content и destroyOnHidden/legacy lifecycle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/AvatarGroup.svelte",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.types.ts",
+            "src/lib/avatar-group.ssr.test.ts",
+            "src/lib/feedback.dom.ts",
+            "src/lib/Popover.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popover.ssr.test.ts",
+            "tests/browser/fixtures/avatar-group-popover-presets.ts",
+            "tests/browser/fixtures/AvatarGroupPopoverCase.svelte",
+            "tests/browser/fixtures/AvatarGroupPopoverFixtures.svelte",
+            "tests/browser/fixtures/ant-design-avatar-group-popover-reference.json",
+            "tests/browser/avatar-group-popover-metrics.ts",
+            "tests/browser/avatar-group-popover.spec.ts",
+            "tests/package/avatar-group-popover.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Исходный isReactRenderable: false опускает секцию, true создаёт пустую, 0 отображается. DestroyOnHidden ?? Boolean(destroyTooltipOnHide); keepParent игнорируется, явный false modern prop имеет приоритет. Native default сохраняет прежнее eager/retained содержимое; удаляемые snippets не вызываются при SSR даже при начальном open/defaultOpen. При закрытии сначала возвращается фокус, затем удаляются title/content. Синхронный отказ function binding от открытия не блокирует повторные callbacks. Проверено по 33 UMD-последовательностям AvatarGroup, собственным SSR и standalone browser cases. Source CSSMotion/deadline/fresh cache не входят в эту feature; закрытие остаётся немедленным по прежнему native контракту."
         }
       ]
     },

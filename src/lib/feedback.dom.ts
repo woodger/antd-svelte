@@ -16,18 +16,21 @@ function available(node: HTMLElement): boolean {
     ).visibility === 'visible';
 }
 
-export function connectFeedbackFocus(host: HTMLElement) {
+export function connectFeedbackFocus(
+  host: HTMLElement,
+  isRelated?: (node: HTMLElement) => boolean
+) {
   const document = host.ownerDocument;
   let target: HTMLElement | undefined;
   let neighbors: HTMLElement[] = [];
 
   function remember() {
     const focused = document.activeElement;
-    if (focused instanceof HTMLElement && host.contains(focused)) {
+    if (focused instanceof HTMLElement && (host.contains(focused) || isRelated?.(focused))) {
       target = focused;
       const dialog = host.closest<HTMLDialogElement>('dialog[open]');
       const candidates = [...(dialog ?? document).querySelectorAll<HTMLElement>(focusable)].filter(
-        node => node.tabIndex >= 0 && !host.contains(node)
+        node => node.tabIndex >= 0 && !host.contains(node) && !isRelated?.(node)
       );
       neighbors = [
         ...candidates.filter(
@@ -64,7 +67,7 @@ export function connectFeedbackFocus(host: HTMLElement) {
   document.addEventListener('focusin', remember);
   remember();
   const observer = new host.ownerDocument.defaultView!.MutationObserver(() => {
-    if (!target || host.contains(target) || !host.isConnected) return;
+    if (!target || host.contains(target) || isRelated?.(target) || !host.isConnected) return;
 
     const candidates = neighbors;
     target = undefined;

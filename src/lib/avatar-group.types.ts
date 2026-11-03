@@ -10,10 +10,12 @@ export interface AvatarGroupItem extends Omit<AvatarProps, 'nativeElement'> {
 export interface AvatarGroupMax {
   count?: number;
   style?: string;
-  popover?: Pick<
-    PopoverProps,
-    'trigger' | 'placement' | 'arrow' | 'autoAdjustOverflow' | 'mouseEnterDelay' | 'mouseLeaveDelay'
-  >;
+  /**
+   * Настройки Svelte Popover; children остаётся кнопкой +N.
+   * Content заменяет список, title — его заголовок. По умолчанию destroyOnHidden=true.
+   * Open — controlled prop с onOpenChange; без open состояние внутреннее.
+   */
+  popover?: Omit<PopoverProps, 'children'>;
 }
 /** Группа аватаров с лимитом видимых элементов и Popover для оставшихся. */
 export interface AvatarGroupProps {

@@ -3,7 +3,8 @@ import type { TooltipPlacement } from './tooltip.types';
 
 export type PopoverPlacement = TooltipPlacement;
 export type PopoverTrigger = 'hover' | 'focus' | 'click';
-export type PopoverContent = string | number | Snippet;
+/** False опускает секцию; true оставляет пустую секцию без текста; 0 отображается. */
+export type PopoverContent = string | number | boolean | Snippet;
 
 /** Интерактивная поверхность у trigger snippet с bind:open и управлением фокусом. */
 export interface PopoverProps {
@@ -15,6 +16,13 @@ export interface PopoverProps {
   /** @defaultValue false */
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  /** Удаляет title/content при закрытии; по умолчанию содержимое сохраняется. */
+  destroyOnHidden?: boolean;
+  /**
+   * Современный destroyOnHidden имеет приоритет, включая false.
+   * @deprecated Используйте destroyOnHidden; keepParent не меняет результат.
+   */
+  destroyTooltipOnHide?: boolean | { keepParent?: boolean };
   trigger?: PopoverTrigger | readonly PopoverTrigger[];
   /** @defaultValue 'top' */
   placement?: PopoverPlacement;

@@ -1,6 +1,6 @@
 <script lang="ts">
   import NoCompactStyle from './NoCompactStyle.svelte';
-  import { onDestroy, untrack } from 'svelte';
+  import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { useComponentTheme } from './theme-component.svelte';
@@ -19,6 +19,8 @@
     open = $bindable<boolean | undefined>(),
     defaultOpen = false,
     onOpenChange,
+    destroyOnHidden,
+    destroyTooltipOnHide,
     trigger = ['hover', 'focus'],
     placement = 'top',
     arrow = true,
@@ -66,10 +68,13 @@
   let focusOnShow = false;
   let resumeFocus: HTMLElement | undefined;
   let active = true;
+  let mounted = $state(false);
   let hasTitle = $derived(hasContent(title));
   let hasBody = $derived(hasContent(content));
   let available = $derived(hasTitle || hasBody);
   let visible = $derived(available && (open ?? initialDefault));
+  let destroy = $derived(destroyOnHidden ?? Boolean(destroyTooltipOnHide));
+  let renderContent = $derived(!destroy || mounted && visible);
   const portal = createPopupContainer(() => ({
     open: visible,
     reference: anchor,
@@ -81,10 +86,13 @@
     return typeof value === 'function'
       || value !== null
       && value !== undefined
+      && value !== false
       && Boolean(
         String(value).trim()
       );
   }
+
+  onMount(() => { mounted = true; });
 
   $effect(() => {
     const element = host;
@@ -228,6 +236,11 @@
       if (next !== (open ?? initialDefault)) {
         open = next;
         onOpenChange?.(next);
+      }
+      // Отклонённое открытие не должно превращать следующий click в закрытие.
+      if (next && !visible) {
+        clicked = false;
+        focusOnShow = false;
       }
       if (next && visible && shown && focusOnShow && popup) {
         focusOnShow = false;
@@ -387,8 +400,10 @@
     }} onfocusout={handlePopupBlur}>
   {#if arrow}<div class="ant-popover-arrow" aria-hidden="true"></div>{/if}
   <div class="ant-popover-container">
-    {#if hasTitle}<div id={titleId} class="ant-popover-title">{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</div>{/if}
-    {#if hasBody}<div class="ant-popover-content">{#if typeof content === 'function'}{@render content()}{:else}{content}{/if}</div>{/if}
+    {#if renderContent}
+      {#if hasTitle}<div id={titleId} class="ant-popover-title">{#if typeof title === 'function'}{@render title()}{:else if typeof title !== 'boolean'}{title}{/if}</div>{/if}
+      {#if hasBody}<div class="ant-popover-content">{#if typeof content === 'function'}{@render content()}{:else if typeof content !== 'boolean'}{content}{/if}</div>{/if}
+    {/if}
   </div>
 </div>
 </NoCompactStyle>

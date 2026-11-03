@@ -1584,7 +1584,8 @@ corner placements пока отсутствуют.
 ```
 
 Title и content принимают строку, число или Svelte snippet; число 0 отображается,
-строки экранируются. Children — snippet с одним основным DOM-элементом, например
+строки экранируются. False не создаёт секцию; true создаёт пустую секцию без текста,
+как исходный isReactRenderable. Children — snippet с одним основным DOM-элементом, например
 Button или нативной кнопкой. Он служит anchor и получает aria-haspopup=dialog,
 aria-controls и aria-expanded. Для клавиатурного доступа используйте фокусируемый
 элемент. Карточка получает role=dialog и имя от title; при отсутствии заголовка
@@ -1648,12 +1649,17 @@ Getter не вызывается до первого открытия и при 
 Пустые title и content отключают показ и ARIA-связь. Если один из них является
 snippet, компонент считает содержимое доступным; условное отсутствие текста
 внутри snippet контролирует его владелец. Закрытое содержимое остаётся
-смонтированным и сохраняет состояние. Отложенные открытия отменяются при
+смонтированным и сохраняет состояние. DestroyOnHidden=true удаляет title/content
+при закрытии и создаёт их заново при открытии; при SSR такие snippets не вызываются,
+включая начальный open/defaultOpen. Legacy destroyTooltipOnHide принимает boolean
+или объект с keepParent; объект включает удаление, keepParent не меняет результат.
+Явный destroyOnHidden, включая false, имеет приоритет перед alias.
+Фокус возвращается к trigger перед удалением содержимого. Отложенные открытия отменяются при
 удалении компонента, очистке содержимого и замене trigger.
 
 Галерея `/ant-design#popover` содержит редактор профиля и информационную
 карточку с кнопкой. Первая версия ограничена четырьмя положениями;
-contextMenu, corner placements, destroyOnHidden и
+contextMenu, corner placements и
 произвольные цветовые варианты пока отсутствуют.
 
 ## Popconfirm
@@ -6017,15 +6023,62 @@ maxPopoverPlacement (top/bottom) и maxPopoverTrigger (hover/focus/click).
 Новый код использует max; alias-пропы не попадают в DOM. При обновлении aliases
 кнопка и открытый список сохраняются, пока остаются скрытые участники.
 
-Max.popover принимает trigger, placement, arrow, autoAdjustOverflow и задержки
-mouseEnterDelay/mouseLeaveDelay существующего Popover. По умолчанию используются
+Max.popover принимает настройки текущего Svelte Popover, кроме children:
+содержимое, видимость, callbacks, container getters, ARIA, classes/styles,
+trigger, placement, arrow, autoAdjustOverflow и задержки
+mouseEnterDelay/mouseLeaveDelay. Class/style относятся к wrapper Popover;
+popupClass добавляется к group-popover class. По умолчанию используются
 hover/click и top: нативная кнопка открывается кликом, Enter/Space или наведением.
 Для клавиатуры при собственном trigger используйте click или focus. Popover
 показывает именованный список скрытых участников с полными label; аватары
 в этом списке декоративные, кроме src Snippet, сохраняющих собственную
 доступность и controls; явный aria-hidden=true делает их декоративными.
-Они создаются только при открытии и удаляются при
-закрытии. Переход элемента между видимой частью и Popover создаёт новый Avatar.
+Title заменяет заголовок списка, content — сам список. Наличие ключа с null,
+false или undefined явно отключает соответствующий default; true оставляет
+пустую секцию, 0 отображается. Snippets создаются после первого открытия,
+без вызовов при SSR. Если собственного заголовка нет, сохраняется имя из locale;
+иначе имя берётся из title или явных aria-label/aria-labelledby. Aria-describedby
+и aria-busy передаются поверхности.
+
+Вложенный max.popover.open — controlled prop с onOpenChange, как у исходной
+группы: владелец принимает или отклоняет запрос. Без open состояние внутреннее;
+defaultOpen читается один раз при создании overflow. Удаление controlled open
+очищает внутреннее значение и не возвращает defaultOpen. Внешнее изменение open
+не вызывает callback. Отклонённое закрытие сохраняет открытый popup и фокус;
+отклонённое открытие позволяет повторить запрос следующим кликом.
+
+```svelte
+<script lang="ts">
+  import { AvatarGroup } from 'antd-svelte';
+
+  let open = $state(false);
+  const members = [
+    { key: 'anna', label: 'Анна', text: 'АН' },
+    { key: 'vera', label: 'Вера', text: 'ВС' }
+  ];
+</script>
+
+{#snippet details()}<input aria-label="Комментарий команды" value="Черновик" />{/snippet}
+
+<AvatarGroup items={members} max={{
+  count: 1,
+  popover: {
+    title: 'Команда',
+    content: details,
+    open,
+    onOpenChange: next => { open = next; },
+    destroyOnHidden: false
+  }
+}} />
+```
+
+DestroyOnHidden по умолчанию true: список и пользовательские snippets удаляются
+при закрытии. False сохраняет их DOM и состояние после первого открытия;
+сохраняющееся содержимое остаётся реактивным по правилам Svelte Popover.
+Явный ключ destroyOnHidden=undefined снимает default группы и оставляет выбор
+legacy destroyTooltipOnHide. GetPopupContainer/getTooltipContainer имеют те же
+приоритеты и lifecycle, что у Popover; getter получает нативную кнопку +N.
+Переход элемента между видимой частью и Popover создаёт новый Avatar.
 Image preview внутри списка сохраняет открытый Popover: первый Escape закрывает
 preview и возвращает фокус изображению, следующий — Popover с возвратом к +N.
 
@@ -6054,11 +6107,18 @@ aria-describedby описывает корень; id/class/style также от
 сохраняется при перестановке и переходит к соседу после удаления. Внешней сети
 и persistence нет. Экспортируются AvatarGroupProps, AvatarGroupItem,
 AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
-Avatar и полный исходный max.popover API пока не перенесены.
+Avatar и настройки исходного Popover, ещё отсутствующие в Svelte Popover,
+пока не перенесены: в том числе corner/contextMenu, semantic styles, prefixCls,
+color/align/motion и fresh cache. Точный текущий тип max.popover производен от
+[PopoverProps](./src/lib/popover.types.ts), а не дублирует отдельный список props.
 Приоритеты aliases, count/style и trigger/placement проверяются по
 [20 UMD-эталонам](./tests/browser/fixtures/ant-design-avatar-group-max-reference.json),
 [SSR](./tests/package/avatar-group-max.ssr.test.ts) и
 [браузерным сценариям](./tests/browser/avatar-group-max.spec.ts).
+Содержимое, controlled/default state, destroy/retain и container getters проверяются по
+[33 UMD-последовательностям](./tests/browser/fixtures/ant-design-avatar-group-popover-reference.json),
+[SSR](./tests/package/avatar-group-popover.ssr.test.ts) и
+[browser lifecycle](./tests/browser/avatar-group-popover.spec.ts).
 
 ## Image
 

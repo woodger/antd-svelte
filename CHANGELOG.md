@@ -9,6 +9,11 @@
 
 ### Added
 
+- AvatarGroup: настройки текущего Svelte Popover в max.popover, custom title/content,
+  controlled/default open, callback, container getters и native ARIA/classes/styles.
+  Добавлены destroyOnHidden/legacy alias у Popover; Group удаляет содержимое по
+  умолчанию и умеет сохранять его по запросу. SSR остаётся ленивым; 33 UMD-сценария
+  фиксируют жизненный цикл. Повторное отклонённое открытие снова вызывает callback.
 - AvatarGroup: deprecated maxCount/maxStyle/maxPopoverPlacement/maxPopoverTrigger
   с исходным truthy приоритетом max. Сохранены нормализация лимита, DOM, фокус и
   открытый список; добавлены 20 UMD-эталонов и SSR/browser-проверки.

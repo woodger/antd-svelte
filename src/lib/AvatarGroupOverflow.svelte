@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { untrack } from 'svelte';
   import Avatar from './Avatar.svelte';
   import Popover from './Popover.svelte';
   import { useConfig } from './config-context';
@@ -14,8 +15,24 @@
     prefix: string;
   } = $props();
   const config = useConfig();
-  let open = $state<boolean | undefined>(false);
+  let popover = $derived(max?.popover ?? {});
+  let innerOpen = $state<boolean | undefined>(untrack(() => popover.defaultOpen ?? false));
+  let previousOpen = untrack(() => popover.open);
+  let open = $derived(Boolean(popover.open !== undefined ? popover.open : innerOpen));
+  let visited = $state(false);
   let strings = $derived({ ...ruRU.avatarGroup, ...config.locale.avatarGroup });
+  let title = $derived('title' in popover ? popover.title : strings.hiddenLabel);
+  let content = $derived('content' in popover ? popover.content : hiddenItems);
+
+  $effect.pre(() => {
+    const next = popover.open;
+
+    // Как useControlledState: удаление controlled open не возвращает defaultOpen.
+    if (!Object.is(next, previousOpen)) innerOpen = next;
+    previousOpen = next;
+
+    if (open) visited = true;
+  });
 </script>
 
 <style>
@@ -27,11 +44,24 @@
   @media (prefers-reduced-motion: reduce) { .ant-avatar-group-more { transition: none; animation: none; } }
 </style>
 
-{#snippet hiddenItems()}{#if open}<ul class="ant-avatar-group-list" aria-label={strings.hiddenLabel}>{#each items as { key, label, text, ...item } (key)}
+{#snippet hiddenItems()}<ul class="ant-avatar-group-list" aria-label={strings.hiddenLabel}>{#each items as { key, label, text, ...item } (key)}
 {#snippet textContent()}{text}{/snippet}
 <li><Avatar {...item} size={item.size ?? size} shape={item.shape ?? shape}
   aria-hidden={typeof item.src === 'function' ? item['aria-hidden'] : true}
-  children={item.children ?? (text ? textContent : undefined)} /><span class="ant-avatar-group-name">{label}</span></li>{/each}</ul>{/if}{/snippet}
-<Popover bind:open title={strings.hiddenLabel} content={hiddenItems} trigger={max?.popover?.trigger ?? ['hover', 'click']} placement={max?.popover?.placement ?? 'top'} arrow={max?.popover?.arrow} autoAdjustOverflow={max?.popover?.autoAdjustOverflow} mouseEnterDelay={max?.popover?.mouseEnterDelay} mouseLeaveDelay={max?.popover?.mouseLeaveDelay} aria-label={strings.hiddenLabel} popupClass={`${prefix}-group-popover`}>
+  children={item.children ?? (text ? textContent : undefined)} /><span class="ant-avatar-group-name">{label}</span></li>{/each}</ul>{/snippet}
+{#snippet popupTitle()}{#if visited && typeof title === 'function'}{@render title()}{/if}{/snippet}
+{#snippet popupContent()}{#if visited && typeof content === 'function'}{@render content()}{/if}{/snippet}
+<Popover
+  {...popover}
+  bind:open={() => open, next => innerOpen = next}
+  title={typeof title === 'function' ? popupTitle : title}
+  content={typeof content === 'function' ? popupContent : content}
+  destroyOnHidden={'destroyOnHidden' in popover ? popover.destroyOnHidden : true}
+  trigger={popover.trigger ?? ['hover', 'click']}
+  placement={popover.placement ?? 'top'}
+  aria-label={'aria-label' in popover ? popover['aria-label']
+    : 'title' in popover || popover['aria-labelledby'] ? undefined : strings.hiddenLabel}
+  popupClass={[`${prefix}-group-popover`, popover.popupClass].filter(Boolean).join(' ')}
+>
   <button type="button" class="ant-avatar-group-more" aria-label={`${strings.overflow}: ${items.length}`}><Avatar {size} {shape} style={max?.style} aria-hidden>+{items.length}</Avatar></button>
 </Popover>

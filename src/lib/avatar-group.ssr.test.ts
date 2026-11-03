@@ -100,4 +100,38 @@ describe('AvatarGroup server rendering', () => {
       vi.useRealTimers();
     }
   });
+
+  it.each([
+    { open: true },
+    { defaultOpen: true },
+    { open: false, defaultOpen: true },
+    { open: true, destroyOnHidden: false },
+    { defaultOpen: true, destroyOnHidden: undefined, destroyTooltipOnHide: false }
+  ])('keeps configured popup snippets lazy before hydration for %j', options => {
+    const content = createRawSnippet(() => ({
+      render: () => { throw new Error('Unexpected SSR popup'); }
+    }));
+    vi.useFakeTimers();
+    try {
+      const { body } = render(AvatarGroup, {
+        props: {
+          items,
+          max: { count: 1, popover: {
+            ...options,
+            title: content,
+            content,
+            getPopupContainer: () => { throw new Error('Unexpected SSR container'); },
+            onOpenChange: () => { throw new Error('Unexpected SSR callback'); }
+          } }
+        }
+      });
+
+      expect(body).toContain('+2');
+      expect(body).not.toContain('/hidden-portrait.svg');
+      expect(body).not.toContain('ant-avatar-group-list');
+      expect(vi.getTimerCount()).toBe(0);
+    } finally {
+      vi.useRealTimers();
+    }
+  });
 });
