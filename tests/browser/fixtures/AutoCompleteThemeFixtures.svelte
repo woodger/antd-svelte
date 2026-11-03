@@ -20,6 +20,7 @@
   let openings = $state<boolean[]>([]);
   let focusEvents = $state(0);
   let editor = $state<HTMLInputElement | HTMLTextAreaElement>();
+  let nativeRoot = $state<HTMLDivElement>();
   let customEditor = $state<HTMLInputElement | HTMLTextAreaElement>();
   const options: AutoCompleteItem[] = [{ label: 'Letters', options: [
     { value: 'a', label: 'Alpha' }, { value: 'b', label: 'Beta' },
@@ -81,7 +82,8 @@
             {/snippet}
           </AutoComplete>
           <AutoComplete {options} defaultValue="b" class="completion-token-popup" name="query"
-            bind:inputElement={editor} aria-label="Themed completion popup" style="width:240px"
+            bind:inputElement={editor} bind:nativeElement={nativeRoot}
+            aria-label="Themed completion popup" style="width:240px"
             allowClear {listHeight} popupMatchSelectWidth={width}
             onFocus={() => focusEvents++}
             onChange={value => { changes = [...changes, String(value)]; }}
@@ -101,4 +103,8 @@
   <output aria-label="Completion theme selections">{JSON.stringify(selections)}</output>
   <output aria-label="Completion theme openings">{JSON.stringify(openings)}</output>
   <output aria-label="Completion theme focus events">{focusEvents}</output>
+  <output aria-label="Completion native refs">{JSON.stringify({
+    root: Boolean(nativeRoot), input: Boolean(editor),
+    contains: Boolean(nativeRoot && editor && nativeRoot.contains(editor))
+  })}</output>
 </section>

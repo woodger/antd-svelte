@@ -16,6 +16,7 @@
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
   import { connectPopup } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import Icon from './Icon.svelte';
@@ -37,6 +38,7 @@
     onFocus,
     onBlur,
     onPopupScroll,
+    getPopupContainer,
     backfill = false,
     defaultActiveFirstOption = false,
     allowClear = false,
@@ -100,13 +102,31 @@
   let active = $state(-1);
   let preview = $state<string>();
   let focused = $state(false);
+  let root = $state<HTMLDivElement>();
+  let editor = $state<HTMLInputElement | HTMLTextAreaElement>();
   let popup = $state<HTMLDivElement>();
   let shown = $state(false);
   let mounted = $state(false);
+  const portal = createPopupContainer(() => ({
+    open: visible,
+    reference: root,
+    getPopupContainer: getPopupContainer || config.getPopupContainer,
+    themeStyle: componentTheme.style
+  }));
   let enterLock = false;
   let previous = untrack(() => ({ value, open }));
   onMount(() => {
     hydrated = true;
+  });
+
+  // Без bind: обновление spread props может сбросить локальное значение ref prop.
+  $effect(() => {
+    nativeElement = root;
+    return () => { nativeElement = undefined; };
+  });
+  $effect(() => {
+    inputElement = editor;
+    return () => { inputElement = undefined; };
   });
 
   $effect(() => {
@@ -144,8 +164,8 @@
     });
   });
   $effect(() => {
-    if (!visible || !popup || !nativeElement) return;
-    return connectPopup(popup, nativeElement, {
+    if (!visible || !popup || !root) return;
+    return connectPopup(popup, root, {
       placement: 'bottom',
       gap: 4,
       align: config.direction === 'rtl' ? 'right' : 'left',
@@ -168,11 +188,11 @@
   });
 
   function register(element: HTMLInputElement | HTMLTextAreaElement) {
-    inputElement = element;
+    editor = element;
     return {
       destroy() {
-        if (inputElement === element)
-          inputElement = undefined;
+        if (editor === element)
+          editor = undefined;
       }
     };
   }
@@ -213,14 +233,14 @@
     onSelect?.(option.value, { ...option });
     preview = undefined;
     requestOpen(false);
-    inputElement?.focus({ preventScroll: true });
+    editor?.focus({ preventScroll: true });
   }
   function clear() {
     if (blocked || readonly) return;
     const before = actualValue;
     const beforeText = text;
     onClear?.();
-    inputElement?.focus({ preventScroll: true });
+    editor?.focus({ preventScroll: true });
     change(undefined, before);
     // Rc-select вызывает отдельный search-путь после очистки display values.
     if (beforeText) {
@@ -234,7 +254,7 @@
     if (event.defaultPrevented || event.isComposing || blocked || readonly) return;
     if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
       if (!visible) {
-        if (!(inputElement instanceof HTMLTextAreaElement))
+        if (!(editor instanceof HTMLTextAreaElement))
           requestOpen(true);
         return;
       }
@@ -272,13 +292,13 @@
     onBlur?.(event);
   }
   function handleReset(event: Event) {
-    if (event.target !== inputElement?.form) return;
+    if (event.target !== editor?.form) return;
     queueMicrotask(() => {
-      if (!event.defaultPrevented && inputElement?.isConnected) {
+      if (!event.defaultPrevented && editor?.isConnected) {
         innerValue = defaultValue;
         preview = undefined;
         innerOpen = false;
-        inputElement.value = text;
+        editor.value = text;
       }
     });
   }
@@ -320,10 +340,10 @@
     register
   });
   export function focus(options?: FocusOptions) {
-    inputElement?.focus(options);
+    editor?.focus(options);
   }
   export function blur() {
-    inputElement?.blur();
+    editor?.blur();
   }
 </script>
 
@@ -352,7 +372,7 @@
 </style>
 
 <svelte:document onreset={handleReset} />
-<div bind:this={nativeElement} dir={config.direction}
+<div bind:this={root} dir={config.direction}
   style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}
   class={[
       'auto-complete ant-select ant-select-css-var ant-select-single ant-select-auto-complete ant-select-show-search',
@@ -385,6 +405,7 @@
           componentTheme.className && config.direction === 'rtl' && 'ant-select-dropdown-rtl',
           popupClassName]} dir={config.direction}
       {@attach node => connectComponentTheme(node, componentTheme.style)}
+      {@attach portal}
       style:max-height={`${listHeight}px`}
       style:width={typeof popupMatchSelectWidth === 'number' ? `${popupMatchSelectWidth}px` : undefined}
       onscroll={onPopupScroll}

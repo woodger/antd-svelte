@@ -38,6 +38,10 @@ export interface SelectProps<
   loading?: boolean;
   notFoundContent?: string | number | Snippet | null;
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
+  /**
+   * Getter получает корень Select; undefined наследует ConfigProvider, без getter список inline.
+   */
+  getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   /** @defaultValue false */
   allowClear?: boolean;
   status?: 'error' | 'warning';

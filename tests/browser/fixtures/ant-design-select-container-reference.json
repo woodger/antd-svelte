@@ -1,0 +1,847 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4"
+  },
+  "cases": [
+    {
+      "name": "select-default",
+      "component": "select",
+      "parent": "none",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-parent",
+      "component": "select",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-undefined",
+      "component": "select",
+      "local": "undefined",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-local",
+      "component": "select",
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-child",
+      "component": "select",
+      "child": "child",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "child",
+        "calls": [
+          {
+            "getter": "child",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-nested-undefined",
+      "component": "select",
+      "child": "undefined",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-shadow",
+      "component": "select",
+      "parent": "shadow",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-reset-theme",
+      "component": "select",
+      "resetTheme": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-multiple-default",
+      "component": "select-multiple",
+      "parent": "none",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-multiple-parent",
+      "component": "select-multiple",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-multiple-undefined",
+      "component": "select-multiple",
+      "local": "undefined",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-multiple-local",
+      "component": "select-multiple",
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-multiple-child",
+      "component": "select-multiple",
+      "child": "child",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "child",
+        "calls": [
+          {
+            "getter": "child",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-multiple-nested-undefined",
+      "component": "select-multiple",
+      "child": "undefined",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-multiple-shadow",
+      "component": "select-multiple",
+      "parent": "shadow",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "select-multiple-reset-theme",
+      "component": "select-multiple",
+      "resetTheme": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-default",
+      "component": "auto-complete",
+      "parent": "none",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-parent",
+      "component": "auto-complete",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-undefined",
+      "component": "auto-complete",
+      "local": "undefined",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-local",
+      "component": "auto-complete",
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-child",
+      "component": "auto-complete",
+      "child": "child",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "child",
+        "calls": [
+          {
+            "getter": "child",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-nested-undefined",
+      "component": "auto-complete",
+      "child": "undefined",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-shadow",
+      "component": "auto-complete",
+      "parent": "shadow",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-reset-theme",
+      "component": "auto-complete",
+      "resetTheme": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-textarea-default",
+      "component": "auto-complete-textarea",
+      "parent": "none",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-textarea-parent",
+      "component": "auto-complete-textarea",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-textarea-undefined",
+      "component": "auto-complete-textarea",
+      "local": "undefined",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-textarea-local",
+      "component": "auto-complete-textarea",
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-textarea-child",
+      "component": "auto-complete-textarea",
+      "child": "child",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "child",
+        "calls": [
+          {
+            "getter": "child",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-textarea-nested-undefined",
+      "component": "auto-complete-textarea",
+      "child": "undefined",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-textarea-shadow",
+      "component": "auto-complete-textarea",
+      "parent": "shadow",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    },
+    {
+      "name": "auto-complete-textarea-reset-theme",
+      "component": "auto-complete-textarea",
+      "resetTheme": true,
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "trigger": "select-root",
+            "tag": "div"
+          }
+        ],
+        "matchedWidth": true
+      },
+      "refresh": {
+        "same": true,
+        "value": "alp",
+        "selection": [
+          1,
+          2
+        ],
+        "focused": true,
+        "activeRetained": true
+      }
+    }
+  ]
+}

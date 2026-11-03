@@ -2804,7 +2804,13 @@
         "tests/browser/auto-complete-theme.spec.ts",
         "tests/browser/fixtures/AutoCompleteThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-auto-complete-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/fixtures/ant-design-select-container-reference.json",
+        "tests/browser/fixtures/select-container-presets.ts",
+        "tests/browser/fixtures/SelectContainerCase.svelte",
+        "tests/browser/fixtures/SelectContainerFixtures.svelte",
+        "tests/browser/select-container.spec.ts",
+        "tests/package/select-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -2863,6 +2869,21 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Как upstream, AutoComplete использует Select tokens без собственного style hook: selector/clear/popup, option/group fonts и logical group indentation. Custom Input сохраняет свои tokens и ref; customize wrapper не задаёт Select min-height. Computed metrics официального UMD для 17 настроек: размеры, variants, disabled, custom Input/textarea, группы и пустая выдача; component algorithms/aliases, нули/undefined, prefix/hash. SSR и обновления сохраняют native editor/option content, input selection/focus, FormData и callbacks. CSS variables панели обновляются отдельно от controller left/top; width/listHeight используют отдельные style directives. Native-only темы и существующий API сохранены; остальные rc-select props/config/virtualization остаются в работе."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый контейнер списка с native lifecycle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-select-container-reference.json",
+            "tests/browser/fixtures/select-container-presets.ts",
+            "tests/browser/fixtures/SelectContainerCase.svelte",
+            "tests/browser/fixtures/SelectContainerFixtures.svelte",
+            "tests/browser/select-container.spec.ts",
+            "tests/package/select-container.ssr.test.ts"
+          ],
+          "note": "GetPopupContainer → ConfigProvider.getPopupContainer; undefined сохраняет fallback. Getter получает корневой div.ant-select и не выполняется при SSR/до первого открытия. HTMLElement/ShadowRoot, исходный trigger payload, nested provider/theme.inherit=false и сохранение поиска/фокуса/выделения при замене функции с тем же DOM-контейнером сверены с официальным UMD. Общие 32 сценария охватывают single/multiple и AutoComplete input/textarea. Native default DOM и lifecycle сохранены; явный контейнер использует native top layer, theme variables, width/RTL, keyboard/pointer selection, FormData и cleanup. ShadowRoot styles принадлежат потребителю."
         }
       ]
     },
@@ -4663,7 +4684,13 @@
         "tests/browser/select-theme.spec.ts",
         "tests/browser/fixtures/SelectThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-select-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/fixtures/ant-design-select-container-reference.json",
+        "tests/browser/fixtures/select-container-presets.ts",
+        "tests/browser/fixtures/SelectContainerCase.svelte",
+        "tests/browser/fixtures/SelectContainerFixtures.svelte",
+        "tests/browser/select-container.spec.ts",
+        "tests/package/select-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -4756,7 +4783,22 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization и portals/motion остаются в работе. AutoComplete, TreeSelect и Cascader получают общий Select token scope."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization и motion остаются в работе. AutoComplete, TreeSelect и Cascader получают общий Select token scope."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый контейнер списка с native lifecycle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-select-container-reference.json",
+            "tests/browser/fixtures/select-container-presets.ts",
+            "tests/browser/fixtures/SelectContainerCase.svelte",
+            "tests/browser/fixtures/SelectContainerFixtures.svelte",
+            "tests/browser/select-container.spec.ts",
+            "tests/package/select-container.ssr.test.ts"
+          ],
+          "note": "GetPopupContainer → ConfigProvider.getPopupContainer; undefined сохраняет fallback. Getter получает корневой div.ant-select и не выполняется при SSR/до первого открытия. HTMLElement/ShadowRoot, исходный trigger payload, nested provider/theme.inherit=false и сохранение поиска/фокуса/выделения при замене функции с тем же DOM-контейнером сверены с официальным UMD. Общие 32 сценария охватывают single/multiple и AutoComplete input/textarea. Native default DOM и lifecycle сохранены; явный контейнер использует native top layer, theme variables, width/RTL, keyboard/pointer selection, FormData и cleanup. ShadowRoot styles принадлежат потребителю."
         }
       ]
     },
@@ -8977,7 +9019,13 @@
         "tests/browser/fixtures/OverlayContainerFixtures.svelte",
         "tests/browser/overlay-container.spec.ts",
         "tests/package/overlay-container.ssr.test.ts",
-        "src/lib/Dropdown.svelte"
+        "src/lib/Dropdown.svelte",
+        "tests/browser/fixtures/ant-design-select-container-reference.json",
+        "tests/browser/fixtures/select-container-presets.ts",
+        "tests/browser/fixtures/SelectContainerCase.svelte",
+        "tests/browser/fixtures/SelectContainerFixtures.svelte",
+        "tests/browser/select-container.spec.ts",
+        "tests/package/select-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -9379,9 +9427,15 @@
             "tests/browser/fixtures/OverlayContainerContent.svelte",
             "tests/browser/fixtures/OverlayContainerFixtures.svelte",
             "tests/browser/overlay-container.spec.ts",
-            "tests/package/overlay-container.ssr.test.ts"
+            "tests/package/overlay-container.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-select-container-reference.json",
+            "tests/browser/fixtures/select-container-presets.ts",
+            "tests/browser/fixtures/SelectContainerCase.svelte",
+            "tests/browser/fixtures/SelectContainerFixtures.svelte",
+            "tests/browser/select-container.spec.ts",
+            "tests/package/select-container.ssr.test.ts"
           ],
-          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour намеренно не читает глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Select/AutoComplete, полный Menu popup API, Date/Time/RangePicker, TreeSelect/Cascader/Mentions, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
+          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour намеренно не читает глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. Полный Menu popup API, Date/Time/RangePicker, TreeSelect/Cascader/Mentions, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
         }
       ]
     },

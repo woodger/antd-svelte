@@ -89,6 +89,11 @@ export interface AutoCompleteProps extends Omit<
   onFocus?: (event: FocusEvent) => void;
   onBlur?: (event: FocusEvent) => void;
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
+  /**
+   * Локальный getter получает корень Select и перекрывает ConfigProvider.
+   * Undefined наследует provider; без общей функции сохраняется native размещение.
+   */
+  getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   /** @defaultValue false */
   backfill?: boolean;
   /** @defaultValue false */

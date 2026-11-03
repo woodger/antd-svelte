@@ -3,6 +3,7 @@ import { connectPopupPortal } from './popup-portal.dom';
 
 interface PopupContainerOptions {
   open: boolean;
+  rendered?: boolean;
   reference?: Element;
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   themeStyle?: string;
@@ -11,12 +12,15 @@ interface PopupContainerOptions {
 /** Callback identity не меняет portal, пока функция возвращает тот же DOM-контейнер. */
 export function createPopupContainer(getOptions: () => PopupContainerOptions) {
   let visited = false;
+  let rendered = true;
   let container = $state<HTMLElement | ShadowRoot>();
   let connection = $state.raw<ReturnType<typeof connectPopupPortal>>();
 
   $effect.pre(() => {
     const options = getOptions();
     visited ||= options.open;
+    // Cleanup Svelte читает прежние runes; DOM-флаг меняется до удаления условной ветки.
+    rendered = options.rendered !== false;
     // rc-trigger передаёт фактический DOM trigger, включая SVG, при HTMLElement в исходном типе.
     container = visited && options.reference && options.getPopupContainer
       ? options.getPopupContainer(options.reference as HTMLElement)
@@ -46,7 +50,7 @@ export function createPopupContainer(getOptions: () => PopupContainerOptions) {
         origin,
         marker,
         autoLock: false,
-        restoreOnDestroy: true,
+        get restoreOnDestroy() { return rendered; },
         get preserveVariables() {
           const style = node.ownerDocument.createElement('span').style;
           style.cssText = getOptions().themeStyle ?? '';

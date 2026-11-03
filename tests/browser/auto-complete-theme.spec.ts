@@ -162,6 +162,30 @@ test('custom Input keeps its own tokens and native ref', async ({ page }) => {
     .toBeVisible();
 });
 
+test('published root and input refs survive updates and clear on unmount', async ({ page }) => {
+  const input = page.getByRole('combobox', { name: 'Themed completion popup', exact: true });
+  await input.fill('draft');
+  await expect(page.getByLabel('Completion native refs', { exact: true }))
+    .toHaveText('{"root":true,"input":true,"contains":true}');
+
+  await page.getByLabel('Completion token preset', { exact: true }).evaluate(node => {
+    const select = node as HTMLSelectElement;
+    select.value = 'compact';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+  await input.press('Escape');
+  await page.getByRole('button', { name: 'Focus themed completion', exact: true }).click();
+
+  await expect(input).toBeFocused();
+  await expect(input).toHaveValue('draft');
+  await expect(page.getByLabel('Completion native refs', { exact: true }))
+    .toHaveText('{"root":true,"input":true,"contains":true}');
+  await page.getByLabel('Mount themed completion', { exact: true }).uncheck();
+  await expect(input).toHaveCount(0);
+  await expect(page.getByLabel('Completion native refs', { exact: true }))
+    .toHaveText('{"root":false,"input":false,"contains":false}');
+});
+
 test('native styles return without replacing the open editor', async ({ page }) => {
   await page.getByLabel('Completion token preset', { exact: true }).selectOption('own-aliases');
   const input = page.getByRole('combobox', { name: 'Themed completion popup', exact: true });

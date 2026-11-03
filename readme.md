@@ -6114,6 +6114,12 @@ PopupMatchSelectWidth — boolean/число, listHeight
 по умолчанию 256; onPopupScroll передаёт native scroll event. Поверхность — native
 popover с сохранением фокуса input, outside/Escape и cleanup.
 
+GetPopupContainer получает корневой элемент Select, включая custom input/textarea.
+Локальная функция перекрывает ConfigProvider.getPopupContainer; undefined наследует
+provider. Getter выполняется в браузере после открытия. При переносе сохраняются
+Select tokens, поиск, фокус и FormData. ShadowRoot требует собственных стилей.
+Замена функции с тем же DOM-контейнером сохраняет поле и список.
+
 Стрелки обходят доступные options, Enter/Tab выбирают активный пункт; IME Enter
 не выбирает. Backfill меняет только видимый текст до подтверждения. По runtime
 rc-select defaultActiveFirstOption=false, хотя таблица Ant Design указывает true;
@@ -6181,6 +6187,17 @@ aliases пока отсутствуют. Generic numeric/object values не вх
 явный undefined. Смена темы сохраняет DOM поля/списка, ввод, выделение, фокус и
 FormData. Native-only темы сохраняют прежнее оформление; style относится к внешней
 обёртке. Подробности — в [описании темы](./docs/reference/theme-context.md#токены-select).
+
+GetPopupContainer получает внутренний корень `.ant-select`. Локальная функция
+перекрывает ConfigProvider.getPopupContainer; undefined наследует provider. Без
+getter список сохраняет прежнее inline-размещение. При выбранном контейнере
+используется native popover с шириной поля, обновлением положения, outside/Escape
+и сохранением фокуса. Getter не вызывается при SSR и до первого открытия.
+ShadowRoot требует собственных стилей; смена функции с тем же контейнером
+сохраняет DOM списка, поиск и выделение. Закрытие Select удаляет его список;
+AutoComplete сохраняет смонтированный popup до unmount. Проверки обоих компонентов —
+[select-container](./tests/browser/select-container.spec.ts), `?fixture=select-container`;
+32 сценария сверены с официальным UMD Ant Design 6.6.8.
 
 Поиск по умолчанию выключен в одиночном режиме и включён в multiple;
 `showSearch` переопределяет это. Нажатие варианта во множественном режиме
@@ -7212,11 +7229,12 @@ GlobalToken и пять типов trigger. Настройки наследую�
 ConfigProvider.getPopupContainer задаёт `(trigger?: HTMLElement) => HTMLElement | ShadowRoot`.
 Вложенный provider наследует функцию, когда его prop отсутствует или равен undefined;
 theme.inherit=false не сбрасывает эту настройку. Она подключена к Tabs, ColorPicker,
-Tooltip, Popover, Popconfirm, Dropdown, Slider и Tooltip внутри Typography;
+Tooltip, Popover, Popconfirm, Dropdown, Slider, Tooltip внутри Typography,
+Select и AutoComplete;
 остальные потребители исходного API ещё требуют переноса. Tour использует
 только собственный getPopupContainer, как Ant Design 6.6.8.
-Функция вызывается только в браузере. Без выбранной функции сохраняется native fallback
-в body или текущий modal dialog. Для ShadowRoot стили размещает потребитель;
+Функция вызывается только в браузере. Без выбранной функции сохраняется прежнее
+native размещение компонента. Для ShadowRoot стили размещает потребитель;
 стили document автоматически в него не переходят. Обновление функции с тем же
 DOM-контейнером сохраняет popup, его state, фокус и выделение текста. Проверки —
 [popup-container](./tests/browser/popup-container.spec.ts) и `?fixture=popup-container`;
@@ -7226,6 +7244,8 @@ DOM-контейнером сохраняет popup, его state, фокус и
 В этой сверке default обозначает исходное native размещение без пользовательского
 контейнера; DOM не переносится в body автоматически. ShadowRoot проверяется с
 собственными стилями потребителя. При закрытии сохраняется прежний native lifecycle.
+Select/AutoComplete добавляют 32 эталона в
+[select-container](./tests/browser/select-container.spec.ts), `?fixture=select-container`.
 
 Статические defaultSeed, default/dark/compact algorithms и getDesignToken
 работают без context и DOM. Их source-округления, overrides и ограничения описаны

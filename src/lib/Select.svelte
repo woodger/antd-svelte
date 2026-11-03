@@ -2,6 +2,9 @@
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
+  import { connectPopup } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useFormField } from './form-context';
@@ -28,6 +31,7 @@
     loading = false,
     notFoundContent,
     onPopupScroll,
+    getPopupContainer,
     allowClear = false,
     status,
     disabled,
@@ -68,8 +72,10 @@
   let cachedOptions = $state.raw<ReadonlyMap<Value, SelectOption<Value>>>(new Map());
   let activeValue = $state<Value>();
   let container: HTMLDivElement;
+  let reference = $state<HTMLDivElement>();
   let control = $state<HTMLInputElement>();
   let list = $state<HTMLDivElement>();
+  let shown = $state(false);
   let typeahead = '';
   let lastTyped = 0;
   let controlId = $derived(id ?? field?.id ?? `ant-select-${generatedId}`);
@@ -114,6 +120,43 @@
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
   let compactItemClasses = $derived(compactClasses('ant-select', config.direction, compact));
   let expanded = $derived(isOpen && !resolvedDisabled);
+  let popupContainerGetter = $derived(getPopupContainer || config.getPopupContainer);
+  const portal = createPopupContainer(() => ({
+    open: expanded,
+    rendered: expanded,
+    reference,
+    getPopupContainer: popupContainerGetter,
+    themeStyle: componentTheme.style
+  }));
+
+  $effect(() => {
+    if (!expanded || !list || !reference || !popupContainerGetter) return;
+
+    const popup = list;
+    const anchor = reference;
+    const disconnect = connectPopup(popup, anchor, {
+      placement: 'bottom',
+      gap: 4,
+      align: config.direction === 'rtl' ? 'right' : 'left',
+      autoAdjustOverflow: true,
+      maxWidth: '100vw',
+      applyPosition: position => {
+        popup.style.width = `${anchor.getBoundingClientRect().width}px`;
+        popup.style.left = `${position.left}px`;
+        popup.style.top = `${position.top}px`;
+      },
+      onPlacement: () => {},
+      onVisibilityChange: next => { shown = next; },
+      onDismiss: () => setOpen(false)
+    });
+
+    return () => {
+      disconnect();
+      popup.removeAttribute('hidden');
+      for (const property of ['width', 'left', 'top', 'max-width'])
+        popup.style.removeProperty(property);
+    };
+  });
 
   $effect(() => {
     if (!control || !multiple) return;
@@ -376,7 +419,11 @@
   }
 
   function handleOutside(event: PointerEvent) {
-    if (event.target instanceof Node && !container.contains(event.target)) {
+    if (popupContainerGetter) return;
+
+    const target = event.composedPath()[0] ?? event.target;
+
+    if (target instanceof Node && !container.contains(target)) {
       setOpen(false);
     }
   }
@@ -409,6 +456,8 @@
   .popup.ant-select-dropdown { top: calc(100% + 4px); inset-inline: 0; max-height: 256px; overflow-y: auto; }
   /* Исходный virtual-list размещает options в flex column без сжатия строк. */
   .popup.ant-select-source-popup { display: flex; flex-direction: column; }
+  .popup.ant-select-dropdown[popover] { position: fixed; inset: auto; margin: 0; }
+  .popup.ant-select-dropdown[hidden] { display: none; }
   .ant-select-source-popup > .ant-select-item { flex: none; }
   .ant-select-source-theme .clear { display: inline-block; margin-inline-end: 0; color: var(--ant-color-text-quaternary); }
   .ant-select-source-theme .clear:hover { color: var(--ant-color-icon); }
@@ -443,6 +492,7 @@
     className
   ]} bind:this={container} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
   <div
+    bind:this={reference}
     role="presentation"
     onpointerdown={handlePointerDown}
     class={[
@@ -539,11 +589,15 @@
   {#if expanded}
     <div
       bind:this={list}
+      popover={popupContainerGetter ? 'manual' : undefined}
+      hidden={Boolean(popupContainerGetter) && !shown}
+      dir={config.direction}
       class={['popup ant-select-dropdown', componentTheme.className && 'ant-select-css-var',
         componentTheme.className && filtered.length > 0 && 'ant-select-source-popup',
         componentTheme.className && config.direction === 'rtl' && 'ant-select-dropdown-rtl',
         componentTheme.className]}
-      style={componentTheme.style}
+      {@attach node => connectComponentTheme(node, componentTheme.style)}
+      {@attach portal}
       id={`${controlId}-list`}
       role="listbox"
       aria-busy={loading || undefined}

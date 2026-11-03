@@ -9,6 +9,13 @@
 
 ### Added
 
+- Контейнеры Select и AutoComplete: локальный getPopupContainer, наследование
+  ConfigProvider и ShadowRoot, исходный DOM trigger и вызов только после открытия.
+  Перенос сохраняет поиск, клавиатуру, фокус/выделение, FormData и Select tokens;
+  default native размещение сохранено. Добавлены 32 UMD-эталона и SSR/browser-проверки.
+  Внутренние DOM-ссылки AutoComplete сохраняются при обновлении spread props,
+  публичные bind:nativeElement / bind:inputElement поддержаны.
+  Повторное открытие Select не оставляет старых списков в исходной DOM-ветке.
 - Контейнеры Tooltip/Popover/Popconfirm, Dropdown, Slider и Typography Tooltip:
   локальные и legacy getters, ConfigProvider fallback и исходный порядок Slider.
   Общий portal сохраняет DOM/state/focus при смене функции с тем же контейнером,
