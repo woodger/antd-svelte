@@ -29,7 +29,8 @@
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
-  import { connectPopup } from './popup.dom';
+  import { connectPopup, getPopupActiveElement } from './popup.dom';
+  import { createPickerPopup, getPickerPopupPosition } from './picker-popup.model.svelte.js';
   import NoCompactStyle from './NoCompactStyle.svelte';
   import Button from './Button.svelte';
   import DatePickerCalendar from './DatePickerCalendar.svelte';
@@ -99,6 +100,7 @@
     class: className = '',
     rootClassName = '',
     popupClassName = '',
+    getPopupContainer,
     style,
     nativeElement = $bindable(),
     startInput = $bindable(),
@@ -191,6 +193,9 @@
   );
   let focused = $state(false);
   let shown = $state(false);
+  let rootElement = $state<HTMLDivElement>();
+  let startElement = $state<HTMLInputElement>();
+  let endElement = $state<HTMLInputElement>();
   let popup = $state<HTMLDivElement>();
   let timeWrapper = $state<HTMLDivElement>();
   let timeContainer = $state<HTMLDivElement>();
@@ -262,6 +267,24 @@
   let timeEndText = $derived(time ? formatPicker(calendar[1], lang.locale, formats) : undefined);
   let timePanelWasOpen = false;
   let previousTimeActive = -1;
+  const container = createPickerPopup(() => ({
+    open: visible,
+    reference: rootElement,
+    getPopupContainer: getPopupContainer || config.getPopupContainer,
+    themeStyle: semantic?.styles.popup.root
+  }));
+  $effect(() => {
+    nativeElement = rootElement;
+    return () => { nativeElement = undefined; };
+  });
+  $effect(() => {
+    startInput = startElement;
+    return () => { startInput = undefined; };
+  });
+  $effect(() => {
+    endInput = endElement;
+    return () => { endInput = undefined; };
+  });
   $effect(() => {
     if (time && value !== previousValue) internalValue = rangePair(value);
     previousValue = value;
@@ -307,7 +330,7 @@
   $effect(() => {
     void revision;
     const index = interaction.currentIndex;
-    const view = nativeElement?.ownerDocument.defaultView;
+    const view = rootElement?.ownerDocument.defaultView;
     if (!time || index === null || !interaction.forceFocus || !view) return;
 
     // React useFocusLock выполняет сильный переход после native focus внешнего клика.
@@ -333,13 +356,20 @@
       untrack(() => send(blocked.findIndex(item => !item), 'field-switch'));
   });
   $effect(() => {
-    if (!visible || !popup || !nativeElement) return;
-    return connectPopup(popup, nativeElement, {
+    if (!visible || !popup || !rootElement) return;
+    return connectPopup(popup, rootElement, {
       placement: actualPlacement.startsWith('top') ? 'top' : 'bottom',
       align: actualPlacement.endsWith('Right') ? 'right' : 'left',
       autoAdjustOverflow: true,
       maxWidth: '100vw',
-      matchAnchorWidth: Boolean(time),
+      gap: 4,
+      getPosition: (reference, bounds, viewport) => getPickerPopupPosition(
+        reference,
+        bounds,
+        viewport,
+        actualPlacement
+      ),
+      matchAnchorWidth: true,
       preserveFocus: true,
       onPlacement: next => {
         verticalPlacement = next === 'top' ? 'top' : 'bottom';
@@ -357,14 +387,14 @@
     });
   });
   $effect(() => {
-    if (!time || !visible || !nativeElement || !timeWrapper || !timeContainer) return;
-    return connectTimeRangePopup(nativeElement, timeWrapper, timeContainer,
+    if (!time || !visible || !rootElement || !timeWrapper || !timeContainer) return;
+    return connectTimeRangePopup(rootElement, timeWrapper, timeContainer,
       () => inputs()[active], () => config.direction === 'rtl', (arrow, offset) => {
         timePosition = { arrow, offset };
       });
   });
   $effect(() => {
-    const root = nativeElement;
+    const root = rootElement;
     const input = inputs()[active];
     if (!root || !input) return;
     function measure() {
@@ -379,7 +409,7 @@
     return () => observer.disconnect();
   });
   function inputs() {
-    return [startInput, endInput];
+    return [startElement, endElement];
   }
   function dateTexts(pair: RangePickerValue): [string, string] {
     return [
@@ -615,15 +645,16 @@
   }
   function blurWithin(event: FocusEvent) {
     if (event.relatedTarget instanceof Node
-      && (nativeElement?.contains(event.relatedTarget)
+      && (rootElement?.contains(event.relatedTarget)
         || popup?.contains(
           event.relatedTarget
         ))) return;
     queueMicrotask(() => {
-      const current = startInput?.ownerDocument.activeElement;
-      if (!startInput?.isConnected
+      const current = popup ? getPopupActiveElement(popup)
+        : startElement?.ownerDocument.activeElement;
+      if (!startElement?.isConnected
         || current
-        && (nativeElement?.contains(current)
+        && (rootElement?.contains(current)
           || popup?.contains(
             current
           ))) return;
@@ -816,7 +847,7 @@
   }
   function handleTimeRootClick(event: MouseEvent & { currentTarget: HTMLDivElement; }) {
     if (!time || blocked.every(Boolean)) return;
-    if (!nativeElement?.contains(event.currentTarget.ownerDocument.activeElement))
+    if (!rootElement?.contains(event.currentTarget.ownerDocument.activeElement))
       inputs()[blocked.findIndex(value => !value)]?.focus();
     requestOpen(true);
     (time.onclick ?? time.onClick)?.(event);
@@ -946,7 +977,7 @@
 {/snippet}
 
 <div
-  bind:this={nativeElement}
+  bind:this={rootElement}
   role={time ? 'presentation' : 'group'}
   style={time ? [semantic?.styles.root, style].filter(Boolean).join(';')
     : config.rangePicker?.style ? [config.rangePicker.style, style].filter(Boolean).join(';') : style}
@@ -983,7 +1014,7 @@
       time && previewValue && (presetHover || hover && active === 0)
         && 'ant-picker-input-placeholder'
     ]}>
-    <input {...attributes} bind:this={startInput} id={typeof id === 'string' ? id : id?.start ?? field?.id} name={name ?? field?.name} placeholder={time ? timePlaceholder?.[0] : placeholder?.[0] ?? lang.rangePlaceholder[0]} type="text" role="combobox" aria-haspopup="dialog" aria-expanded={visible && active === 0} aria-controls={`ant-range-picker-${generatedId}`} aria-invalid={inputInvalid(0)
+    <input {...attributes} bind:this={startElement} id={typeof id === 'string' ? id : id?.start ?? field?.id} name={name ?? field?.name} placeholder={time ? timePlaceholder?.[0] : placeholder?.[0] ?? lang.rangePlaceholder[0]} type="text" role="combobox" aria-haspopup="dialog" aria-expanded={visible && active === 0} aria-controls={`ant-range-picker-${generatedId}`} aria-invalid={inputInvalid(0)
         || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
@@ -1011,7 +1042,7 @@
       time && previewValue && (presetHover || hover && active === 1)
         && 'ant-picker-input-placeholder'
     ]}>
-    <input {...attributes} bind:this={endInput} id={typeof id === 'object' ? id.end : undefined} name={name ?? field?.name} placeholder={time ? timePlaceholder?.[1] : placeholder?.[1] ?? lang.rangePlaceholder[1]} type="text" role="combobox" aria-haspopup="dialog" aria-expanded={visible && active === 1} aria-controls={`ant-range-picker-${generatedId}`} aria-invalid={inputInvalid(1)
+    <input {...attributes} bind:this={endElement} id={typeof id === 'object' ? id.end : undefined} name={name ?? field?.name} placeholder={time ? timePlaceholder?.[1] : placeholder?.[1] ?? lang.rangePlaceholder[1]} type="text" role="combobox" aria-haspopup="dialog" aria-expanded={visible && active === 1} aria-controls={`ant-range-picker-${generatedId}`} aria-invalid={inputInvalid(1)
         || resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
@@ -1060,6 +1091,7 @@
   {/if}
 </div>
 <NoCompactStyle>
+  {#key container.target}
   {#if visible}
     <div bind:this={popup} id={`ant-range-picker-${generatedId}`} popover="manual" role="dialog" tabindex="-1" aria-label={attributes['aria-label'] ?? (time ? lang.timeSelect : lang.placeholder)} hidden={!shown} onfocusout={blurWithin}
       class={[
@@ -1073,6 +1105,7 @@
           time && rootClassName
         ]}
       style={semantic?.styles.popup.root}
+      {@attach container.portal}
       onkeydown={event => {
           if (event.key === 'Escape') {
             event.preventDefault();
@@ -1168,4 +1201,5 @@
       {/if}
     </div>
   {/if}
+  {/key}
 </NoCompactStyle>

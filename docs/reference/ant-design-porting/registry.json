@@ -3540,6 +3540,11 @@
           "name": "@ant-design/icons",
           "range": "^6.3.4",
           "referenceVersion": "6.3.4"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.6.15",
+          "referenceVersion": "3.10.1"
         }
       ],
       "priority": "p1",
@@ -3562,7 +3567,15 @@
         "tests/browser/picker-button.spec.ts",
         "tests/browser/fixtures/PickerButtonFixtures.svelte",
         "docs/reference/theme-context.md",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/picker-popup.model.svelte.ts",
+        "tests/browser/fixtures/picker-container-presets.ts",
+        "tests/browser/fixtures/PickerContainerFooter.svelte",
+        "tests/browser/fixtures/PickerContainerCase.svelte",
+        "tests/browser/fixtures/PickerContainerFixtures.svelte",
+        "tests/browser/fixtures/ant-design-picker-container-reference.json",
+        "tests/browser/picker-container.spec.ts",
+        "tests/package/picker-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -3624,11 +3637,11 @@
         },
         {
           "id": "global-parity",
-          "title": "Глобальный DatePicker component config, prefix/tokens, popup motion/container",
+          "title": "Глобальный DatePicker component config, prefix/tokens и полный popup motion/lifecycle",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "262 CSS-правила и локальные theme aliases. Native popover использует существующий lifecycle без полного rc-trigger/motion/getPopupContainer API. Полный пользовательский component config и token engine не перенесены."
+          "note": "262 CSS-правила и локальные theme aliases. Полный пользовательский component config и token engine не перенесены. Native conditional panel удаляется при закрытии; исходные retained popup lifecycle, полный rc-trigger и motion остаются пробелами."
         },
         {
           "id": "confirmation-button",
@@ -3645,6 +3658,25 @@
             "docs/reference/wave.md"
           ],
           "note": "Все четыре date/time single/range footer-ветки используют общий Button с source small/primary defaults. ConfigProvider.button, semantic props/styles, components.Button и wave наследуются; NoCompactStyle изолирует footer от Compact. Locale.ok передаётся строкой для source children и autoInsertSpace. Нативный type=button, прежние disabled predicates, callbacks, Dayjs precision/UTC и focus сохраняются; остальные picker API/token gaps не закрываются этой feature."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container, ShadowRoot и source geometry",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/picker-popup.model.svelte.ts",
+            "tests/browser/fixtures/picker-container-presets.ts",
+            "tests/browser/fixtures/PickerContainerFooter.svelte",
+            "tests/browser/fixtures/PickerContainerCase.svelte",
+            "tests/browser/fixtures/PickerContainerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-picker-container-reference.json",
+            "tests/browser/picker-container.spec.ts",
+            "tests/package/picker-container.ssr.test.ts"
+          ],
+          "note": "54 эталона официального UMD задают local → ConfigProvider fallback, undefined/nesting/theme reset, div.ant-picker trigger и defaultOpen с учётом нулевой/положительной арности getter. Исходные offset=4 с округлением координат вниз при scale=1, min-width selector и default bottomRight в RTL перенесены в общие single/range cores. Новый callback с прежним контейнером сохраняет panel/editor DOM, draft, state, focus/selection; смена самого DOM target пересоздаёт panel, как React portal. Поддержаны ShadowRoot со стилями потребителя, native refs/cleanup и SSR без вызова getter. Dayjs, точность/UTC, FormData и машины подтверждения сохранены; native conditional panel по-прежнему удаляется при закрытии, в отличие от retained popup rc-trigger."
         }
       ]
     },
@@ -5272,6 +5304,11 @@
           "name": "dayjs",
           "range": "^1.11.11",
           "referenceVersion": "1.11.23"
+        },
+        {
+          "name": "@rc-component/trigger",
+          "range": "^3.6.15",
+          "referenceVersion": "3.10.1"
         }
       ],
       "priority": "p2",
@@ -5304,7 +5341,15 @@
         "tests/browser/picker-button.spec.ts",
         "tests/browser/fixtures/PickerButtonFixtures.svelte",
         "docs/reference/theme-context.md",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/picker-popup.model.svelte.ts",
+        "tests/browser/fixtures/picker-container-presets.ts",
+        "tests/browser/fixtures/PickerContainerFooter.svelte",
+        "tests/browser/fixtures/PickerContainerCase.svelte",
+        "tests/browser/fixtures/PickerContainerFixtures.svelte",
+        "tests/browser/fixtures/ant-design-picker-container-reference.json",
+        "tests/browser/picker-container.spec.ts",
+        "tests/package/picker-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -5375,7 +5420,7 @@
           "evidence": [
             "readme.md"
           ],
-          "note": "На этом этапе только один Dayjs; multiple=true не заявлен в типах. Произвольные prefix/tokens, полный каталог locales, React diagnostics и полный rc-trigger/motion/container API остаются следующими этапами. Styles — CSS strings, nodes/renderers — Svelte snippets. Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream."
+          "note": "На этом этапе только один Dayjs; multiple=true не заявлен в типах. Произвольные prefix/tokens, полный каталог locales, React diagnostics и полный rc-trigger/motion API и retained popup lifecycle остаются следующими этапами. Styles — CSS strings, nodes/renderers — Svelte snippets. Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream."
         },
         {
           "id": "confirmation-button",
@@ -5392,6 +5437,25 @@
             "docs/reference/wave.md"
           ],
           "note": "Все четыре date/time single/range footer-ветки используют общий Button с source small/primary defaults. ConfigProvider.button, semantic props/styles, components.Button и wave наследуются; NoCompactStyle изолирует footer от Compact. Locale.ok передаётся строкой для source children и autoInsertSpace. Нативный type=button, прежние disabled predicates, callbacks, Dayjs precision/UTC и focus сохраняются; остальные picker API/token gaps не закрываются этой feature."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый popup container, ShadowRoot и source geometry",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/picker-popup.model.svelte.ts",
+            "tests/browser/fixtures/picker-container-presets.ts",
+            "tests/browser/fixtures/PickerContainerFooter.svelte",
+            "tests/browser/fixtures/PickerContainerCase.svelte",
+            "tests/browser/fixtures/PickerContainerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-picker-container-reference.json",
+            "tests/browser/picker-container.spec.ts",
+            "tests/package/picker-container.ssr.test.ts"
+          ],
+          "note": "54 эталона официального UMD задают local → ConfigProvider fallback, undefined/nesting/theme reset, div.ant-picker trigger и defaultOpen с учётом нулевой/положительной арности getter. Исходные offset=4 с округлением координат вниз при scale=1, min-width selector и default bottomRight в RTL перенесены в общие single/range cores. Новый callback с прежним контейнером сохраняет panel/editor DOM, draft, state, focus/selection; смена самого DOM target пересоздаёт panel, как React portal. Поддержаны ShadowRoot со стилями потребителя, native refs/cleanup и SSR без вызова getter. Dayjs, точность/UTC, FormData и машины подтверждения сохранены; native conditional panel по-прежнему удаляется при закрытии, в отличие от retained popup rc-trigger."
         }
       ]
     },
@@ -9520,9 +9584,19 @@
             "tests/browser/fixtures/ChoiceContainerContent.svelte",
             "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
             "tests/browser/choice-container.spec.ts",
-            "tests/package/choice-container.ssr.test.ts"
+            "tests/package/choice-container.ssr.test.ts",
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/picker-popup.model.svelte.ts",
+            "tests/browser/fixtures/picker-container-presets.ts",
+            "tests/browser/fixtures/PickerContainerFooter.svelte",
+            "tests/browser/fixtures/PickerContainerCase.svelte",
+            "tests/browser/fixtures/PickerContainerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-picker-container-reference.json",
+            "tests/browser/picker-container.spec.ts",
+            "tests/package/picker-container.ssr.test.ts"
           ],
-          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour и Mentions намеренно не читают глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Полный Menu popup API, Date/Time/RangePicker, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
+          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour и Mentions намеренно не читают глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Ещё 54 UMD-эталона покрывают четыре Date/Time single/range exports: source root trigger/defaultOpen arity, local → global fallback, ShadowRoot, gap/min-width/RTL placement и сохранение state/focus. Native conditional panel lifetime сохранён. Полный Menu popup API, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
         }
       ]
     },

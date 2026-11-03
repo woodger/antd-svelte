@@ -9,6 +9,12 @@
 
 ### Added
 
+- Контейнеры DatePicker/RangePicker и TimePicker/TimeRangePicker: local → global
+  fallback, ShadowRoot, исходный root trigger и defaultOpen с учётом арности getter.
+  Восстановлены source offset=4 px, округление координат вниз, min-width selector
+  и default RTL placement;
+  сохранены native refs, Dayjs/подтверждения и условный lifecycle панели.
+  Добавлены 54 UMD-эталона и SSR/browser-проверки геометрии, state, focus и cleanup.
 - Mentions: локальный getPopupContainer и popupRender со стандартным menu Snippet.
   Сохранены исходное отсутствие ConfigProvider fallback, prefix trigger и сброс
   custom state при закрытии/смене контейнера. Поддержаны ShadowRoot, изоляция

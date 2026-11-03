@@ -1,0 +1,2001 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4"
+  },
+  "cases": [
+    {
+      "name": "date-default",
+      "parent": "none",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "date-parent",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-child",
+      "child": "child",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "child",
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "date-child-undefined",
+      "child": "undefined",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-local",
+      "local": "local",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-local-undefined",
+      "local": "undefined",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-shadow",
+      "parent": "shadow",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-local-shadow",
+      "local": "shadow",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-reset-theme",
+      "resetTheme": true,
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-rtl",
+      "rtl": true,
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomRight",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-top",
+      "placement": "topRight",
+      "local": "local",
+      "component": "date",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "topRight",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-initial-zero",
+      "initial": "zero",
+      "local": "local",
+      "component": "date",
+      "beforeOpen": [
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "none",
+          "trigger": "other"
+        },
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "div",
+          "trigger": "picker-root"
+        }
+      ],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "trigger": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-initial-one",
+      "initial": "one",
+      "local": "local",
+      "component": "date",
+      "beforeOpen": [
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "div",
+          "trigger": "picker-root"
+        }
+      ],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-default",
+      "parent": "none",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "date-range-parent",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-child",
+      "child": "child",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "child",
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "date-range-child-undefined",
+      "child": "undefined",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-local",
+      "local": "local",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-local-undefined",
+      "local": "undefined",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-shadow",
+      "parent": "shadow",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-local-shadow",
+      "local": "shadow",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-reset-theme",
+      "resetTheme": true,
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-rtl",
+      "rtl": true,
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomRight",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-top",
+      "placement": "topRight",
+      "local": "local",
+      "component": "date-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "topRight",
+        "gap": 5,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-initial-zero",
+      "initial": "zero",
+      "local": "local",
+      "component": "date-range",
+      "beforeOpen": [
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "none",
+          "trigger": "other"
+        },
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "div",
+          "trigger": "picker-root"
+        }
+      ],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "trigger": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-range-initial-one",
+      "initial": "one",
+      "local": "local",
+      "component": "date-range",
+      "beforeOpen": [
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "div",
+          "trigger": "picker-root"
+        }
+      ],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-default",
+      "parent": "none",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "time-parent",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-child",
+      "child": "child",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "child",
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "time-child-undefined",
+      "child": "undefined",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-local",
+      "local": "local",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-local-undefined",
+      "local": "undefined",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-shadow",
+      "parent": "shadow",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-local-shadow",
+      "local": "shadow",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-reset-theme",
+      "resetTheme": true,
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-rtl",
+      "rtl": true,
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomRight",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-top",
+      "placement": "topRight",
+      "local": "local",
+      "component": "time",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "topRight",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-initial-zero",
+      "initial": "zero",
+      "local": "local",
+      "component": "time",
+      "beforeOpen": [
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "none",
+          "trigger": "other"
+        },
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "div",
+          "trigger": "picker-root"
+        }
+      ],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "trigger": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-initial-one",
+      "initial": "one",
+      "local": "local",
+      "component": "time",
+      "beforeOpen": [
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "div",
+          "trigger": "picker-root"
+        }
+      ],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-default",
+      "parent": "none",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "default",
+        "calls": [],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "time-range-parent",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-child",
+      "child": "child",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "child",
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      }
+    },
+    {
+      "name": "time-range-child-undefined",
+      "child": "undefined",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-local",
+      "local": "local",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-local-undefined",
+      "local": "undefined",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-shadow",
+      "parent": "shadow",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-local-shadow",
+      "local": "shadow",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-reset-theme",
+      "resetTheme": true,
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-rtl",
+      "rtl": true,
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "parent",
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomRight",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-top",
+      "placement": "topRight",
+      "local": "local",
+      "component": "time-range",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "topRight",
+        "gap": 5,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-initial-zero",
+      "initial": "zero",
+      "local": "local",
+      "component": "time-range",
+      "beforeOpen": [
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "none",
+          "trigger": "other"
+        },
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "div",
+          "trigger": "picker-root"
+        }
+      ],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "none",
+            "trigger": "other"
+          },
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "time-range-initial-one",
+      "initial": "one",
+      "local": "local",
+      "component": "time-range",
+      "beforeOpen": [
+        {
+          "getter": "local",
+          "args": 1,
+          "tag": "div",
+          "trigger": "picker-root"
+        }
+      ],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-time-local",
+      "component": "date",
+      "showTime": true,
+      "local": "local",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "local",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14 10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    },
+    {
+      "name": "date-time-range-shadow",
+      "component": "date-range",
+      "showTime": true,
+      "local": "shadow",
+      "beforeOpen": [],
+      "snapshot": {
+        "target": "shadow",
+        "calls": [
+          {
+            "getter": "local",
+            "args": 1,
+            "tag": "div",
+            "trigger": "picker-root"
+          }
+        ],
+        "placement": "bottomLeft",
+        "gap": 4,
+        "minWidth": 600
+      },
+      "refresh": {
+        "same": true,
+        "samePopup": true,
+        "value": "2026-05-14 10:20:30.123",
+        "selection": [
+          1,
+          7
+        ],
+        "focused": true,
+        "count": "1"
+      },
+      "moved": {
+        "same": false,
+        "count": "0",
+        "target": "child"
+      }
+    }
+  ]
+}

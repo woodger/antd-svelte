@@ -16,7 +16,8 @@
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
-  import { connectPopup } from './popup.dom';
+  import { connectPopup, getPopupActiveElement } from './popup.dom';
+  import { createPickerPopup, getPickerPopupPosition } from './picker-popup.model.svelte.js';
   import NoCompactStyle from './NoCompactStyle.svelte';
   import Button from './Button.svelte';
   import DatePickerCalendar from './DatePickerCalendar.svelte';
@@ -68,7 +69,7 @@
     onOpenChange,
     onPanelChange,
     renderExtraFooter,
-    placement = 'bottomLeft',
+    placement,
     disabled,
     id,
     name,
@@ -78,6 +79,7 @@
     class: className = '',
     rootClassName = '',
     popupClassName = '',
+    getPopupContainer,
     style,
     nativeElement = $bindable(),
     ...attributes
@@ -131,8 +133,12 @@
   let draftSource = $state<'input' | 'panel'>('input');
   let focused = $state(false);
   let input = $state<HTMLInputElement>();
+  let rootElement = $state<HTMLDivElement>();
   let popup = $state<HTMLDivElement>();
   let shown = $state(false);
+  let actualPlacement = $derived(
+    placement ?? (config.direction === 'rtl' ? 'bottomRight' : 'bottomLeft')
+  );
   let popupPlacement = $state<'top' | 'bottom'>('bottom');
   let invalid = $derived(
     time
@@ -203,6 +209,16 @@
     resetValue: resetTimeValue
   });
 
+  const container = createPickerPopup(() => ({
+    open: visible,
+    reference: rootElement,
+    getPopupContainer: getPopupContainer || config.getPopupContainer,
+    themeStyle: semantic?.styles.popup.root
+  }));
+  $effect(() => {
+    nativeElement = rootElement;
+    return () => { nativeElement = undefined; };
+  });
   $effect(() => {
     if (time && value !== previousValue) internalValue = value ?? null;
     previousValue = value;
@@ -238,12 +254,20 @@
     panelWasOpen = opened;
   });
   $effect(() => {
-    if (!visible || !popup || !nativeElement) return;
-    return connectPopup(popup, nativeElement, {
-      placement: placement.startsWith('top') ? 'top' : 'bottom',
-      align: placement.endsWith('Right') ? 'right' : 'left',
+    if (!visible || !popup || !rootElement) return;
+    return connectPopup(popup, rootElement, {
+      placement: actualPlacement.startsWith('top') ? 'top' : 'bottom',
+      align: actualPlacement.endsWith('Right') ? 'right' : 'left',
       autoAdjustOverflow: true,
       maxWidth: '100vw',
+      gap: 4,
+      getPosition: (reference, bounds, viewport) => getPickerPopupPosition(
+        reference,
+        bounds,
+        viewport,
+        actualPlacement
+      ),
+      matchAnchorWidth: true,
       preserveFocus: true,
       onVisibilityChange: next => {
         shown = next;
@@ -470,15 +494,15 @@
   }
   function blurWithin(event?: FocusEvent) {
     if (event?.relatedTarget instanceof Node
-      && (nativeElement?.contains(event.relatedTarget)
+      && (rootElement?.contains(event.relatedTarget)
         || popup?.contains(
           event.relatedTarget
         ))) return;
     queueMicrotask(() => {
-      const active = input?.ownerDocument.activeElement;
+      const active = popup ? getPopupActiveElement(popup) : input?.ownerDocument.activeElement;
       if (!input?.isConnected
         || active
-        && (nativeElement?.contains(active)
+        && (rootElement?.contains(active)
           || popup?.contains(
             active
           ))) return;
@@ -512,7 +536,7 @@
   }
   function handleRootClick(event: MouseEvent & { currentTarget: EventTarget & HTMLDivElement; }) {
     if (!time || blocked) return;
-    if (!nativeElement?.contains(event.currentTarget.ownerDocument.activeElement)) input?.focus();
+    if (!rootElement?.contains(event.currentTarget.ownerDocument.activeElement)) input?.focus();
     requestOpen(true);
     (time.onclick ?? time.onClick)?.(event);
   }
@@ -646,7 +670,7 @@
   {/if}
 {/snippet}
 
-<div bind:this={nativeElement} role={time ? 'presentation' : 'group'} style={time
+<div bind:this={rootElement} role={time ? 'presentation' : 'group'} style={time
     ? [semantic?.styles.root, style].filter(Boolean).join(';') : style}
   dir={config.direction} onfocusout={blurWithin} onclick={time ? handleRootClick : undefined}
   class={[
@@ -741,14 +765,15 @@
   {#if !time}{@render clearButton()}{/if}
 </div>
 <NoCompactStyle>
+  {#key container.target}
   {#if visible}
     <div bind:this={popup} id={`ant-picker-${generatedId}`} popover="manual" role="dialog" aria-label={attributes['aria-label'] ?? (time ? placeholderText || actualLocale.timeSelect : actualLocale.placeholder)} hidden={!shown} onfocusout={blurWithin} class={[
         'ant-picker-dropdown ant-picker-css-var',
         config.direction === 'rtl' && 'ant-picker-dropdown-rtl',
-        `ant-picker-dropdown-placement-${popupPlacement === 'top' ? 'top' : 'bottom'}${time && placement.endsWith('Right') ? 'Right' : 'Left'}`,
+        `ant-picker-dropdown-placement-${popupPlacement === 'top' ? 'top' : 'bottom'}${actualPlacement.endsWith('Right') ? 'Right' : 'Left'}`,
         time ? semantic?.classes.popup.root : popupClassName,
         time && rootClassName
-      ]} style={semantic?.styles.popup.root}>
+      ]} style={semantic?.styles.popup.root} {@attach container.portal}>
       {#if time}
         <div
           class={['ant-picker-panel-container', semantic?.classes.popup.container]}
@@ -790,4 +815,5 @@
       {/if}
     </div>
   {/if}
+  {/key}
 </NoCompactStyle>

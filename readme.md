@@ -3419,9 +3419,29 @@ popup с возвратом фокуса. Время доступно через
 Поверхность использует существующий native popover lifecycle библиотеки, включая
 изоляцию Compact, закрытие снаружи и поддержку dialog top layer.
 
+DatePicker, RangePicker, TimePicker и TimeRangePicker поддерживают локальный
+getPopupContainer с fallback на ConfigProvider.getPopupContainer; undefined
+наследует provider. Getter получает root div.ant-picker и возвращает HTMLElement
+или ShadowRoot. При defaultOpen функция без параметров сначала вызывается с
+undefined, затем с root; функция с параметром ждёт DOM ref, как rc-trigger.
+SSR не вызывает getter. Без выбранной функции сохраняется native размещение.
+
+Исходный offset до поля — 4 px; координаты при единичном масштабе округляются
+вниз, как rc-trigger. Минимальная ширина popup равна ширине selector.
+Default placement — bottomLeft в LTR и bottomRight в RTL, явное значение имеет
+приоритет. Смена getter с тем же контейнером сохраняет DOM панели, пользовательский
+state, фокус/выделение и draft поля; смена самого контейнера пересоздаёт панель,
+как исходный portal. Стили ShadowRoot задаёт потребитель. Getter не меняет
+Dayjs/UTC/precision, FormData и порядок подтверждения границ.
+
+Native панель по-прежнему удаляется при закрытии; custom footer/panel state
+при следующем открытии создаётся заново. Это сохранённое отличие от retained
+popup rc-trigger. Проверки и 54 эталона официального UMD —
+[picker-container](./tests/browser/picker-container.spec.ts), `?fixture=picker-container`.
+
 Остальные picker/multiple modes, generatePicker factory, single presets,
 cellRender/panelRender, mask format, hover preview, полный semantic/component config
-и rc-trigger/motion/container API ещё не перенесены. Реестр перечисляет эти пробелы
+и полный rc-trigger/motion API ещё не перенесены. Реестр перечисляет эти пробелы
 отдельно; данный этап не заявляет полноту семейства DatePicker.
 
 ## TimePicker
@@ -3505,7 +3525,8 @@ native popover lifecycle библиотеки. Темы, compact, RTL, status и
 [browser](./tests/browser/time-picker.spec.ts) и `?fixture=time-picker`.
 Multiple, mask format, generatePicker, произвольный prefix/
 token engine, полный каталог locales, React diagnostics и полный rc-trigger/
-motion/container API пока не перенесены. Диапазон экспортируется как TimeRangePicker.
+motion API пока не перенесены. Контейнеры popup описаны в разделе DatePicker.
+Диапазон экспортируется как TimeRangePicker.
 Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream.
 
 ## TimeRangePicker (TimePicker.RangePicker)
@@ -3582,7 +3603,8 @@ unmount. Focus принимает объект с index/cursor/preventScroll л�
 popover используют согласованную Svelte adaptation; deferred focus, RAF геометрии,
 scroll timers и observers очищаются при удалении.
 
-Popup сохраняет ширину selector и сдвигает узкую time panel со стрелкой под активное
+Popup наследует общий container API DatePicker, сохраняет минимальную ширину selector
+и сдвигает узкую time panel со стрелкой под активное
 поле. В RTL колонки времени сохраняют исходный порядок hours → minutes → seconds,
 а направление внутри колонок меняется. Темы, compact, размеры, locale и status
 используют текущие контексты библиотеки.
@@ -3656,7 +3678,7 @@ bind:this даёт focus({index:0|1,preventScroll,cursor}) и blur(). Native onf
 Подтверждены SSR без browser APIs, ввод/ошибки/очистка, переходы фокуса,
 подтверждение времени, ограничения/from, nullable границы, controlled rejection,
 Form/нативная отправка и UTC в разных browser zones. Остальные picker modes,
-mask, render hooks, полный semantic/config/motion/container API остаются пробелами
+mask, render hooks, полный semantic/config/motion API остаются пробелами
 семейства; наличие RangePicker не означает полного покрытия React DatePicker.
 
 ## Calendar
@@ -7276,7 +7298,8 @@ ConfigProvider.getPopupContainer задаёт `(trigger?: HTMLElement) => HTMLEl
 Вложенный provider наследует функцию, когда его prop отсутствует или равен undefined;
 theme.inherit=false не сбрасывает эту настройку. Она подключена к Tabs, ColorPicker,
 Tooltip, Popover, Popconfirm, Dropdown, Slider, Tooltip внутри Typography,
-Select, AutoComplete, TreeSelect и Cascader;
+Select, AutoComplete, TreeSelect, Cascader, DatePicker, RangePicker, TimePicker
+и TimeRangePicker;
 остальные потребители исходного API ещё требуют переноса. Tour и Mentions используют
 только собственный getPopupContainer, как Ant Design 6.6.8.
 Функция вызывается только в браузере. Без выбранной функции сохраняется прежнее

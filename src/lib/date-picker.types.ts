@@ -85,8 +85,10 @@ export interface DatePickerProps extends Omit<
   onOpenChange?: (open: boolean) => void;
   onPanelChange?: (value: Dayjs, mode: DatePickerMode) => void;
   renderExtraFooter?: Snippet;
-  /** @defaultValue 'bottomLeft' */
+  /** По умолчанию bottomLeft в LTR и bottomRight в RTL, как rc-picker. */
   placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
+  /** Локальный контейнер; undefined наследует ConfigProvider.getPopupContainer. */
+  getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   class?: string;
   rootClassName?: string;
   /** @defaultValue '' */
