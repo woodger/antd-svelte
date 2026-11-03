@@ -1,0 +1,2044 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "browser": "156.0.8078.4"
+  },
+  "cases": [
+    {
+      "name": "modal-default",
+      "parent": "none",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "modal-parent",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-child",
+      "child": "child",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "modal-child-undefined",
+      "child": "undefined",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "modal-local",
+      "local": "local",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-local-undefined",
+      "local": "undefined",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-inline",
+      "local": "inline",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "modal-element",
+      "local": "element",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-selector",
+      "local": "selector",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-missing-selector",
+      "local": "missing-selector",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "modal-shadow",
+      "parent": "shadow",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "shadow",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-local-shadow",
+      "local": "shadow",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "shadow",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-reset-theme",
+      "resetTheme": true,
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-initial",
+      "local": "local",
+      "initial": true,
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-rtl",
+      "rtl": true,
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "modal-empty-result",
+      "local": "empty-result",
+      "component": "modal",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "drawer-default",
+      "parent": "none",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "drawer-parent",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "body",
+              "body": true
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-child",
+      "child": "child",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "child",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "drawer-child-undefined",
+      "child": "undefined",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "drawer-local",
+      "local": "local",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-local-undefined",
+      "local": "undefined",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "body",
+              "body": true
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-inline",
+      "local": "inline",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "drawer-element",
+      "local": "element",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-selector",
+      "local": "selector",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-missing-selector",
+      "local": "missing-selector",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "drawer-shadow",
+      "parent": "shadow",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "shadow",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "body",
+              "body": true
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-local-shadow",
+      "local": "shadow",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "shadow",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-reset-theme",
+      "resetTheme": true,
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "body",
+              "body": true
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-initial",
+      "local": "local",
+      "initial": true,
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-rtl",
+      "rtl": true,
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "parent",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "parent",
+              "args": 1,
+              "tag": "body",
+              "body": true
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "parent",
+            "args": 1,
+            "tag": "body",
+            "body": true
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-empty-result",
+      "local": "empty-result",
+      "component": "drawer",
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "drawer-force",
+      "component": "drawer",
+      "local": "local",
+      "force": true,
+      "beforeOpen": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ]
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "child",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      }
+    },
+    {
+      "name": "drawer-destroy",
+      "component": "drawer",
+      "local": "local",
+      "destroy": true,
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "local",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "moved": {
+        "sameRoot": false,
+        "snapshot": {
+          "calls": [
+            {
+              "getter": "local",
+              "args": 0,
+              "tag": "none",
+              "body": false
+            }
+          ],
+          "target": "child",
+          "hasInput": true,
+          "draft": "Seed",
+          "count": "0"
+        }
+      },
+      "afterClose": {
+        "calls": [
+          {
+            "getter": "local",
+            "args": 0,
+            "tag": "none",
+            "body": false
+          }
+        ],
+        "target": "default",
+        "hasInput": false,
+        "draft": null,
+        "count": null
+      }
+    },
+    {
+      "name": "modal-empty-selector",
+      "component": "modal",
+      "local": "empty-selector",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    },
+    {
+      "name": "drawer-empty-selector",
+      "component": "drawer",
+      "local": "empty-selector",
+      "beforeOpen": {
+        "calls": []
+      },
+      "snapshot": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Seed",
+        "count": "0"
+      },
+      "refresh": {
+        "sameInput": true,
+        "sameRoot": true,
+        "draft": "Owned draft",
+        "count": "1",
+        "selection": [
+          1,
+          5
+        ],
+        "focused": true
+      },
+      "afterClose": {
+        "calls": [],
+        "target": "default",
+        "hasInput": true,
+        "draft": "Owned draft",
+        "count": "1"
+      }
+    }
+  ]
+}

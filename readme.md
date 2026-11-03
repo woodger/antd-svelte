@@ -2514,6 +2514,48 @@ start/end относительно кнопки заголовка и напра
 Первая версия не поддерживает legacy Collapse.Panel, пользовательский expandIcon,
 classNames/styles и React-анимацию высоты.
 
+## Modal
+
+Modal сохраняет нативный dialog, `bind:open`, footer/children snippets и существующие
+правила onOk/onCancel, confirmLoading, Escape и закрытия по фону.
+
+GetContainer принимает DOM-узел, DocumentFragment (включая ShadowRoot), CSS-селектор,
+функцию без аргументов либо false. Локальное undefined использует
+ConfigProvider.getPopupContainer; Modal вызывает глобальный getter без trigger,
+как Ant Design 6.6.8. False оставляет DOM на месте и отключает global fallback.
+Без обеих настроек сохраняется прежнее native-размещение.
+
+```svelte
+<script lang="ts">
+  import { Modal } from 'antd-svelte';
+  let open = $state(false);
+</script>
+
+<button type="button" onclick={() => open = true}>Открыть редактор</button>
+<div id="modal-container"></div>
+<Modal bind:open title="Редактор" getContainer="#modal-container">
+  <input name="description" aria-label="Описание" />
+</Modal>
+```
+
+Getter вызывается только после browser mount, в том числе у закрытого Modal.
+Первый перенос готового контейнера сохраняет SSR DOM. Смена функции с тем же
+контейнером сохраняет содержимое, draft, выделение и фокус; смена самого
+контейнера пересоздаёт dialog и содержимое, как React portal. Отсутствующий
+selector или пустой результат getter используют body. Для отключённого DOM-узла
+и DocumentFragment открытие ждёт вставки в document. Стили ShadowRoot подключает
+потребитель. Нативная модальность, fullscreen-размещение, inert, scroll lock и
+возврат фокуса сохраняются в любом контейнере. Прежний SSR shell и eagerly mounted
+children сохранены; полное API Modal, semantic styles и render hooks ещё требуют переноса.
+
+Эталонные зависимости — @rc-component/dialog 1.10.0 и portal 2.1.3;
+лицензии сохранены в [LICENSE.rc-dialog](./src/lib/vendor/LICENSE.rc-dialog) и
+[LICENSE.rc-portal](./src/lib/vendor/LICENSE.rc-portal).
+Сверка Modal/Drawer использует 36 снимков официального UMD,
+[browser-проверки](./tests/browser/dialog-container.spec.ts) и
+[проверки взаимодействия](./tests/browser/dialog-container-interaction.spec.ts),
+фикстура — `?fixture=dialog-container`.
+
 ## Drawer
 
 ```svelte
@@ -2594,7 +2636,18 @@ Tabs и Collapse. Черновик сохраняется при закрыти�
 к другому участнику создаёт отдельный редактор. DestroyOnHidden пересоздаёт
 редактор из сохранённой строки. Сохранение обновляет Table и закрывает панель.
 Первая версия не поддерживает немодальный режим, mask=false, resizable, push,
-getContainer/порталы, loading/Skeleton, focusable и afterOpenChange.
+loading/Skeleton, focusable и afterOpenChange.
+
+GetContainer поддерживает те же DOM-узлы, DocumentFragment, selectors, функции и
+false, что [Modal](#modal). Undefined наследует ConfigProvider.getPopupContainer;
+Drawer передаёт ему document.body, как Ant wrapper. Getter вызывается и в закрытом
+состоянии, кроме destroyOnHidden без forceRender, пока содержимое не требуется.
+Смена контейнера пересоздаёт панель и отменяет прежнюю анимацию; замена функции
+с тем же контейнером сохраняет DOM/state/focus. Нативные SSR, lifecycle children,
+модальность и fullscreen-геометрия сохранены. Source absolute-размещение inline
+Drawer при getContainer=false ещё не перенесено: false пока выбирает исходную
+DOM-ветку. Эталон — @rc-component/drawer 1.4.2 и portal 2.1.3;
+[LICENSE.rc-drawer](./src/lib/vendor/LICENSE.rc-drawer) сохранена в пакете.
 
 ## Alert
 
@@ -7314,7 +7367,7 @@ ConfigProvider.getPopupContainer задаёт `(trigger?: HTMLElement) => HTMLEl
 Вложенный provider наследует функцию, когда его prop отсутствует или равен undefined;
 theme.inherit=false не сбрасывает эту настройку. Она подключена к Tabs, ColorPicker,
 Tooltip, Popover, Popconfirm, Dropdown, Slider, Tooltip внутри Typography,
-Select, AutoComplete, TreeSelect, Cascader, Menu, DatePicker, RangePicker, TimePicker
+Select, AutoComplete, TreeSelect, Cascader, Menu, Modal, Drawer, DatePicker, RangePicker, TimePicker
 и TimeRangePicker;
 остальные потребители исходного API ещё требуют переноса. Tour и Mentions используют
 только собственный getPopupContainer, как Ant Design 6.6.8.

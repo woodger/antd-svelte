@@ -1,4 +1,5 @@
 import type { Snippet } from 'svelte';
+import type { GetContainer } from './types';
 
 export type DrawerPlacement = 'top' | 'right' | 'bottom' | 'left';
 export type DrawerSize = 'default' | 'large' | number | (string & {});
@@ -24,6 +25,11 @@ export interface DrawerProps {
   forceRender?: boolean;
   /** @defaultValue false */
   destroyOnHidden?: boolean;
+  /**
+   * Undefined наследует ConfigProvider; false оставляет DOM на месте.
+   * Global getter получает document.body.
+   */
+  getContainer?: GetContainer;
   onClose?: (event: Event) => void;
   id?: string;
   'aria-label'?: string;

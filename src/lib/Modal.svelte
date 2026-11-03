@@ -1,9 +1,10 @@
 <script lang="ts">
   import NoCompactStyle from './NoCompactStyle.svelte';
-  import { onDestroy } from 'svelte';
   import type { Snippet } from 'svelte';
   import { useConfig } from './config-context';
   import { useWatermarkPanel } from './watermark-context';
+  import { createDialogContainer } from './dialog-container.model.svelte.js';
+  import type { GetContainer } from './types';
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
 
@@ -28,6 +29,11 @@
     cancelText?: string;
     onOk?: () => void;
     onCancel?: () => void;
+    /**
+     * Undefined наследует ConfigProvider; false оставляет DOM на месте.
+     * Global getter вызывается без trigger.
+     */
+    getContainer?: GetContainer;
     class?: string;
   }
 
@@ -45,6 +51,7 @@
     cancelText,
     onOk,
     onCancel,
+    getContainer,
     class: className = ''
   }: ModalProps = $props();
 
@@ -54,24 +61,32 @@
   const titleId = `ant-modal-${generatedId}`;
   let dialog = $state<HTMLDialogElement>();
   let backdropPointer = false;
+  const container = createDialogContainer(() => ({
+    component: 'modal',
+    getContainer,
+    getPopupContainer: config.getPopupContainer,
+    onPointerDown: event => { backdropPointer = isBackdrop(event); },
+    onPointerUp: handlePointerUp
+  }));
 
   $effect(() => {
-    if (!dialog) {
+    if (!dialog || !container.connected || !dialog.isConnected) {
       return;
     }
 
-    if (open && !dialog.open) {
+    if (open && !dialog.matches(':modal')) {
+      if (dialog.open) dialog.close();
       dialog.showModal();
     } else if (!open && dialog.open) {
       dialog.close();
     }
   });
 
-  onDestroy(() => {
-    if (dialog?.open) {
-      dialog.close();
-    }
-  });
+  function connectDialog(node: HTMLDialogElement) {
+    return () => {
+      if (node.open) node.close();
+    };
+  }
 
   function cancel() {
     if (!confirmLoading) {
@@ -129,6 +144,7 @@
 </style>
 
 <NoCompactStyle>
+{#key container.key}
 <dialog
   bind:this={dialog}
   class={`ant-svelte-dialog ant-modal-css-var ${className}`}
@@ -137,14 +153,12 @@
   aria-labelledby={titleId}
   aria-modal="true"
   oncancel={handleCancel}
-  onclose={() => {
-      if (!dialog?.open)
+  onclose={event => {
+      if (event.currentTarget === dialog && !dialog.open)
         open = false;
     }}
-  onpointerdown={(event) => {
-      backdropPointer = isBackdrop(event);
-    }}
-  onpointerup={handlePointerUp}
+  {@attach container.attach}
+  {@attach connectDialog}
 >
   <div class="ant-modal">
     <div class="ant-modal-container" {@attach watermarkPanel}>
@@ -168,4 +182,5 @@
     </div>
   </div>
 </dialog>
+{/key}
 </NoCompactStyle>

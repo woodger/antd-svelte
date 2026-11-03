@@ -21,6 +21,10 @@ export type ComponentSize = 'small' | 'middle' | 'large';
 /** Контейнер popup из ConfigProvider; trigger отсутствует у некоторых потребителей upstream. */
 export type GetPopupContainer = (triggerNode?: HTMLElement) => HTMLElement | ShadowRoot;
 
+/** Контейнер Modal/Drawer: false оставляет DOM на месте; функция вызывается только в браузере. */
+export type GetContainer = string | Element | DocumentFragment
+  | (() => Element | DocumentFragment) | false;
+
 export type RenderEmptyComponent = 'Table' | 'Table.filter' | 'List' | 'Select'
   | 'TreeSelect' | 'Cascader' | 'Transfer' | 'Mentions';
 export type RenderEmptyContent = string | number | boolean | null | undefined | Snippet

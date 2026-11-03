@@ -6,6 +6,7 @@
   import { useWatermarkPanel } from './watermark-context';
   import { createDrawerDialog } from './drawer.dom';
   import { getDrawerSize } from './drawer.engine';
+  import { createDialogContainer } from './dialog-container.model.svelte.js';
   import type { DrawerProps } from './drawer.types';
 
   let {
@@ -21,6 +22,7 @@
     mask,
     forceRender = false,
     destroyOnHidden = false,
+    getContainer,
     onClose,
     id,
     'aria-label': ariaLabel,
@@ -37,12 +39,34 @@
   let mounted = $state(false);
   // Это фаза фактической DOM-анимации, а не копия запрошенного open.
   let closing = $state(false);
-  let runtime: ReturnType<typeof createDrawerDialog> | undefined;
+  let runtime = $state.raw<ReturnType<typeof createDrawerDialog>>();
   let backdropPointer: number | undefined;
   let active = true;
   let rootId = $derived(id ?? `ant-drawer-${generatedId}`);
   let titleId = $derived(`${rootId}-title`);
   let renderContent = $derived(open || closing || forceRender || mounted && !destroyOnHidden);
+  const container = createDialogContainer(() => ({
+    component: 'drawer',
+    getContainer,
+    getPopupContainer: config.getPopupContainer,
+    enabled: !destroyOnHidden || open || closing || forceRender,
+    style,
+    onPointerDown: event => {
+      backdropPointer = event.button === 0 && isBackdrop(event) ? event.pointerId : undefined;
+    },
+    onPointerUp: handlePointerUp,
+    onPointerCancel: () => { backdropPointer = undefined; }
+  }));
+
+  function connectRuntime(node: HTMLDialogElement) {
+    closing = false;
+    const current = createDrawerDialog(node, value => { closing = value; });
+    runtime = current;
+    return () => {
+      current.destroy();
+      if (runtime === current) runtime = undefined;
+    };
+  }
 
   // Содержимое остаётся смонтированным до завершения ухода панели.
   $effect.pre(() => {
@@ -57,19 +81,16 @@
     const node = dialog;
     const requested = open;
     const side = placement;
-    if (!node) return;
+    const current = runtime;
+    if (!node || !current || !container.connected || !node.isConnected) return;
 
     untrack(() => {
-      runtime ??= createDrawerDialog(node, (value) => {
-        closing = value;
-      });
-      runtime.sync(requested, side);
+      current.sync(requested, side);
     });
   });
 
   onDestroy(() => {
     active = false;
-    runtime?.destroy();
   });
 
   function rememberContent() {
@@ -109,8 +130,8 @@
       requestClose(event);
   }
 
-  function handleClose() {
-    if (!active || dialog?.open) return;
+  function handleClose(event: Event) {
+    if (!active || event.currentTarget !== dialog || dialog?.open) return;
 
     runtime?.nativeClosed();
     open = false;
@@ -134,6 +155,7 @@
 </style>
 
 <NoCompactStyle>
+{#key container.key}
 <dialog bind:this={dialog} id={rootId} class={[
     'ant-drawer ant-drawer-css-var ant-svelte-drawer',
     `ant-drawer-${placement}`,
@@ -142,11 +164,8 @@
   ]} {style} style:--ant-svelte-drawer-size={getDrawerSize(size)} dir={config.direction} aria-modal="true" aria-label={ariaLabel} aria-labelledby={ariaLabelledby
       ?? (ariaLabel === undefined && title !== undefined
         ? titleId
-        : undefined)} aria-describedby={ariaDescribedby} oncancel={handleCancel} onclose={handleClose} onpointerdown={(event) => {
-          backdropPointer = event.button === 0 && isBackdrop(event) ? event.pointerId : undefined;
-        }} onpointerup={handlePointerUp} onpointercancel={() => {
-      backdropPointer = undefined;
-    }}>
+        : undefined)} aria-describedby={ariaDescribedby} oncancel={handleCancel} onclose={handleClose}
+    {@attach container.attach} {@attach connectRuntime}>
   <div class={['ant-drawer-mask', mask?.blur && 'ant-drawer-mask-blur']} aria-hidden="true"></div>
   <div class="ant-drawer-content-wrapper">
     {#if renderContent}
@@ -166,4 +185,5 @@
     {/if}
   </div>
 </dialog>
+{/key}
 </NoCompactStyle>

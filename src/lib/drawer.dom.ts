@@ -63,6 +63,7 @@ export function createDrawerDialog(dialog: HTMLDialogElement, onClosing: (
     if (disposed) return;
 
     if (open) {
+      if (dialog.open && !dialog.matches(':modal')) dialog.close();
       if (dialog.open && phase !== 'closing') {
         if (side !== placement) {
           cancelMotion();

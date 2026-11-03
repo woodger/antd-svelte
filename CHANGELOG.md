@@ -9,6 +9,12 @@
 
 ### Added
 
+- Контейнеры Modal/Drawer: getContainer с false, selector, DOM-узлом,
+  DocumentFragment/ShadowRoot и ConfigProvider fallback с исходными аргументами.
+  Сохранены native dialog, SSR, состояние при замене функции с тем же target,
+  фокус, inert, scroll lock и lifecycle; смена target пересоздаёт содержимое.
+  Добавлены 36 UMD-эталонов и SSR/browser-проверки. Source inline-геометрия Drawer
+  остаётся в работе.
 - Контейнеры Menu: локальный getter и ConfigProvider с исходным приоритетом
   own undefined, ShadowRoot, force render и скрытыми inline-копиями.
   Сохранены native refs, фокус/выделение, theme variables, hover и клавиатура

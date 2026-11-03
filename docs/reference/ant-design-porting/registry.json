@@ -8260,12 +8260,29 @@
         "config-provider",
         "space"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/drawer",
+          "range": "~1.4.2",
+          "referenceVersion": "1.4.2"
+        },
+        {
+          "name": "@rc-component/portal",
+          "range": "^2.1.3",
+          "referenceVersion": "2.1.3"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/drawer.spec.ts"
+        "tests/browser/drawer.spec.ts",
+        "src/lib/dialog-container.model.svelte.ts",
+        "tests/browser/fixtures/DialogContainerFixtures.svelte",
+        "tests/browser/fixtures/ant-design-dialog-container-reference.json",
+        "tests/browser/dialog-container.spec.ts",
+        "tests/browser/dialog-container-interaction.spec.ts",
+        "tests/package/dialog-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -8294,6 +8311,21 @@
             "tests/browser/space-compact.spec.ts"
           ],
           "note": "Без Compact сохраняется существующее поведение; общий подробный аудит семейства ещё не завершён."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный getContainer и ConfigProvider fallback",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/dialog-container.model.svelte.ts",
+            "tests/browser/fixtures/DialogContainerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-dialog-container-reference.json",
+            "tests/browser/dialog-container.spec.ts",
+            "tests/browser/dialog-container-interaction.spec.ts",
+            "tests/package/dialog-container.ssr.test.ts"
+          ],
+          "note": "GetContainer: false, Element, DocumentFragment/ShadowRoot, selector и функция без аргументов. Undefined наследует global getter; Drawer передаёт document.body; destroyOnHidden без forceRender не вызывает getter, пока panel не нужен. Первый перенос готового контейнера сохраняет SSR DOM; новая функция с тем же target сохраняет state/draft/selection/focus, смена target пересоздаёт содержимое. Detached nodes/DocumentFragment ожидают подключения; стили ShadowRoot принадлежат потребителю. Native modal/inert/fullscreen/scroll lock, возврат фокуса, прежний SSR shell и lifecycle сохранены. 36 UMD-эталонов покрывают priorities, payload, undefined/false, selectors, retention и remount. Source absolute inline-геометрия при getContainer=false ещё отсутствует; false выбирает DOM-ветку с сохранением native fullscreen. Остальной API и подробный аудит остаются в работе."
         }
       ]
     },
@@ -8355,12 +8387,29 @@
         "config-provider",
         "space"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/dialog",
+          "range": "~1.10.0",
+          "referenceVersion": "1.10.0"
+        },
+        {
+          "name": "@rc-component/portal",
+          "range": "^2.1.0",
+          "referenceVersion": "2.1.3"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/modal.spec.ts"
+        "tests/browser/modal.spec.ts",
+        "src/lib/dialog-container.model.svelte.ts",
+        "tests/browser/fixtures/DialogContainerFixtures.svelte",
+        "tests/browser/fixtures/ant-design-dialog-container-reference.json",
+        "tests/browser/dialog-container.spec.ts",
+        "tests/browser/dialog-container-interaction.spec.ts",
+        "tests/package/dialog-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -8381,6 +8430,21 @@
             "tests/browser/space-compact.spec.ts"
           ],
           "note": "Без Compact сохраняется существующее поведение; общий подробный аудит семейства ещё не завершён."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный getContainer и ConfigProvider fallback",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/dialog-container.model.svelte.ts",
+            "tests/browser/fixtures/DialogContainerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-dialog-container-reference.json",
+            "tests/browser/dialog-container.spec.ts",
+            "tests/browser/dialog-container-interaction.spec.ts",
+            "tests/package/dialog-container.ssr.test.ts"
+          ],
+          "note": "GetContainer: false, Element, DocumentFragment/ShadowRoot, selector и функция без аргументов. Undefined наследует global getter; Modal вызывает его без trigger. Первый перенос готового контейнера сохраняет SSR DOM; новая функция с тем же target сохраняет state/draft/selection/focus, смена target пересоздаёт содержимое. Detached nodes/DocumentFragment ожидают подключения; стили ShadowRoot принадлежат потребителю. Native modal/inert/fullscreen/scroll lock, возврат фокуса, прежний SSR shell и lifecycle сохранены. 36 UMD-эталонов покрывают priorities, payload, undefined/false, selectors, retention и remount. Полный аудит семейства и остальной Modal API ещё не завершены."
         }
       ]
     },
@@ -9625,9 +9689,15 @@
             "tests/browser/fixtures/ant-design-menu-container-reference.json",
             "tests/browser/fixtures/MenuContainerFixtures.svelte",
             "tests/package/menu-container.ssr.test.ts",
-            "tests/browser/menu-container.spec.ts"
+            "tests/browser/menu-container.spec.ts",
+            "src/lib/dialog-container.model.svelte.ts",
+            "tests/browser/fixtures/DialogContainerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-dialog-container-reference.json",
+            "tests/browser/dialog-container.spec.ts",
+            "tests/browser/dialog-container-interaction.spec.ts",
+            "tests/package/dialog-container.ssr.test.ts"
           ],
-          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour и Mentions намеренно не читают глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Ещё 54 UMD-эталона покрывают четыре Date/Time single/range exports: source root trigger/defaultOpen arity, local → global fallback, ShadowRoot, gap/min-width/RTL placement и сохранение state/focus. Native conditional panel lifetime сохранён. Ещё 32 UMD-эталона Menu подтверждают own-undefined отключение global getter, native title trigger, force render/inline copies, ShadowRoot, remount при смене target и сохранение state/focus при замене функции. Остальной Menu popup API, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
+          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour и Mentions намеренно не читают глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Ещё 54 UMD-эталона покрывают четыре Date/Time single/range exports: source root trigger/defaultOpen arity, local → global fallback, ShadowRoot, gap/min-width/RTL placement и сохранение state/focus. Native conditional panel lifetime сохранён. Ещё 32 UMD-эталона Menu подтверждают own-undefined отключение global getter, native title trigger, force render/inline copies, ShadowRoot, remount при смене target и сохранение state/focus при замене функции. Ещё 36 UMD-эталонов Modal/Drawer подтверждают local getContainer → global fallback, вызов без аргументов у Modal и body trigger у Drawer, false/selectors/DOM/ShadowRoot, timing, retention и remount. Native modal/SSR contracts сохранены; source inline-геометрия Drawer, остальной Menu popup API и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
         }
       ]
     },
