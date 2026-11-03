@@ -6113,7 +6113,7 @@
       "name": "Badge",
       "category": "data-display",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Badge/BadgeRibbon v1 прошли подробный аудит закреплённого исходника; существующие native contracts и framework boundaries сохраняются отдельно.",
       "upstreamPath": "components/badge",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -6223,16 +6223,63 @@
         "tests/browser/fixtures/ant-design-badge-values-reference.json",
         "tests/browser/badge-api-metrics.ts",
         "tests/browser/badge-values.spec.ts",
-        "tests/package/badge-values.ssr.test.ts"
+        "tests/package/badge-values.ssr.test.ts",
+        "src/lib/badge-prefix.engine.ts",
+        "src/lib/badge-prefix.engine.test.ts",
+        "src/lib/vendor/badge-prefix.css.js",
+        "src/lib/ThemeScopeStyle.svelte",
+        "tests/browser/fixtures/BadgePrefixFixtures.svelte",
+        "tests/browser/fixtures/BadgePrefixMotionFixtures.svelte",
+        "tests/browser/fixtures/ant-design-badge-prefix-reference.json",
+        "tests/browser/fixtures/ant-design-badge-prefix-motion-reference.json",
+        "tests/browser/badge-prefix.spec.ts",
+        "tests/browser/badge-prefix-motion.spec.ts",
+        "tests/package/badge-prefix.ssr.test.ts",
+        "tests/package/badge-prefix-motion.ssr.test.ts"
       ],
       "features": [
         {
           "id": "core-v1",
           "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "readme.md",
+            "src/lib/Badge.svelte",
+            "src/lib/badge.types.ts",
+            "src/lib/badge.engine.ts",
+            "src/lib/badge.engine.test.ts",
+            "src/lib/badge-count.engine.test.ts",
+            "src/lib/badge.ssr.test.ts",
+            "src/lib/BadgeRibbon.svelte",
+            "src/lib/badge-ribbon.types.ts",
+            "src/lib/BadgeDigit.svelte",
+            "src/lib/BadgeNumber.svelte",
+            "src/lib/badge-digit.engine.test.ts",
+            "src/lib/badge-zoom.dom.ts",
+            "src/lib/badge-prefix.engine.ts",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/badge.spec.ts",
+            "tests/browser/badge-count.spec.ts",
+            "tests/browser/badge-ribbon.spec.ts",
+            "tests/browser/badge-api.spec.ts",
+            "tests/browser/badge-values.spec.ts",
+            "tests/browser/badge-digit-motion.spec.ts",
+            "tests/browser/badge-zoom.spec.ts",
+            "tests/browser/badge-prefix.spec.ts",
+            "tests/browser/badge-prefix-motion.spec.ts",
+            "tests/browser/avatar-badge-theme.spec.ts",
+            "tests/package/badge-ribbon.ssr.test.ts",
+            "tests/package/badge-count.ssr.test.ts",
+            "tests/package/badge-api.ssr.test.ts",
+            "tests/package/badge-values.ssr.test.ts",
+            "tests/package/badge-digit-motion.ssr.test.ts",
+            "tests/package/badge-zoom.ssr.test.ts",
+            "tests/package/badge-prefix.ssr.test.ts",
+            "tests/package/badge-prefix-motion.ssr.test.ts",
+            "tests/package/avatar-badge-theme.ssr.test.ts"
+          ],
+          "note": "Аудит v1 Badge/BadgeRibbon выполнен по закреплённым Badge.tsx, ScrollNumber/SingleNumber, Ribbon, style, demos, tests и index.en-US.md. Покрыты числовые/string/boolean/Snippet count, overflow/zero/dot/status, title/text/size/offset, config/semantics/colors/ref/events, source token preparation, digit и zoom lifecycle, локальные prefixes, Ribbon, темы/RTL, SSR/hydration и cleanup. Существующие native numeric normalization, BadgeContext, style/root/доступность и CSS scope сохранены; ReactNode/Snippet и глобальный ConfigProvider.prefixCls boundaries описаны отдельно. V1-ready не означает совпадение всех React-specific surfaces или общий завершённый перенос библиотеки."
         },
         {
           "id": "gap-1",
@@ -6256,7 +6303,7 @@
             "tests/browser/badge-count.spec.ts",
             "tests/package/badge-count.ssr.test.ts"
           ],
-          "note": "Строки сохраняют написание и source numeric comparison/точный zero, полный title/description. Boolean/null следуют ScrollNumber presence; integer strings используют SingleNumber slots для точной геометрии. Готовый count получает class/style через BadgeCountContext вместо React.cloneElement; вызывающий Snippet явно применяет их к своему root с приоритетом своих attrs. Дополнительной обёртки нет; custom count сохраняет собственные controls/доступность и не заменяется точкой при dot. Offset/RTL, темы, own style/title priority, caller state/focus, cleanup и SSR закреплены 46 UMD-эталонами. Прокрутка перенесена отдельной возможностью; zoom остаётся в работе."
+          "note": "Строки сохраняют написание и source numeric comparison/точный zero, полный title/description. Boolean/null следуют ScrollNumber presence; integer strings используют SingleNumber slots для точной геометрии. Готовый count получает class/style через BadgeCountContext вместо React.cloneElement; вызывающий Snippet явно применяет их к своему root с приоритетом своих attrs. Дополнительной обёртки нет; custom count сохраняет собственные controls/доступность и не заменяется точкой при dot. Offset/RTL, темы, own style/title priority, caller state/focus, cleanup и SSR закреплены 46 UMD-эталонами. Прокрутка и zoom перенесены отдельными возможностями."
         },
         {
           "id": "ribbon",
@@ -6322,14 +6369,31 @@
         },
         {
           "id": "advanced-api",
-          "title": "Префиксы Badge/ScrollNumber",
-          "state": "missing",
+          "title": "Локальные Badge/ScrollNumber prefixes и исходные style bindings",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "readme.md",
-            "src/lib/badge.types.ts"
+            "src/lib/badge-prefix.engine.ts",
+            "src/lib/badge-prefix.engine.test.ts",
+            "src/lib/vendor/badge-prefix.css.js",
+            "src/lib/Badge.svelte",
+            "src/lib/BadgeDigit.svelte",
+            "src/lib/BadgeNumber.svelte",
+            "src/lib/badge.types.ts",
+            "src/lib/ThemeScopeStyle.svelte",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/BadgePrefixFixtures.svelte",
+            "tests/browser/fixtures/BadgePrefixMotionFixtures.svelte",
+            "tests/browser/fixtures/ant-design-badge-prefix-reference.json",
+            "tests/browser/fixtures/ant-design-badge-prefix-motion-reference.json",
+            "tests/browser/badge-api-metrics.ts",
+            "tests/browser/badge-prefix.spec.ts",
+            "tests/browser/badge-prefix-motion.spec.ts",
+            "tests/package/badge-prefix.ssr.test.ts",
+            "tests/package/badge-prefix-motion.ssr.test.ts"
           ],
-          "note": "PrefixCls/scrollNumberPrefixCls остаются в работе. Существующие native числовые normalization, BadgeContext, root style и ReactNode/Snippet boundaries сохраняются отдельно."
+          "note": "PrefixCls меняет root/status/text/indicator/zoom classes и Badge selectors/common reset; отдельный head stylesheet строится из 59 закреплённых правил и шести keyframes без Vite ?raw. CSS-variable marker, глобальные ScrollNumber/icon selectors и имена keyframes сохраняются. ScrollNumberPrefixCls меняет sup/custom root/digit/unit classes, но не переносит CSS с глобального ant-scroll-number, как upstream; empty strings используют source fallbacks. Prefix updates сохраняют root/digit/caller state и focus, не перезапускают CSSMotion visible lifecycle; custom count сохраняет исходный deadline без DOM-ref. Head stylesheet и active resources очищаются при unmount. Нативные style guards не применяются при совпадении публичного префикса с внутренними class names. 31 UMD-вариант и шесть motion-последовательностей/30 кадров фиксируют classes, computed geometry/styles, token overrides, RTL, CSS coupling, SSR и обратимые изменения. Глобальный ConfigProvider.prefixCls остаётся общим незавершённым API."
         },
         {
           "id": "digit-motion",

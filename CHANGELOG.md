@@ -9,6 +9,11 @@
 
 ### Added
 
+- Badge prefixes: локальный prefixCls со своими styles и исходные
+  scrollNumberPrefixCls classes для sup/custom count и разрядов.
+  Сохранены глобальная CSS-связь ScrollNumber, active zoom/cache, DOM/ref/focus
+  и caller state; стили живут вместе с Badge. Добавлены 31 UMD-вариант,
+  шесть motion-последовательностей/30 кадров и SSR/browser-проверки cleanup.
 - CSS extraction поддерживает portable ES-модули с default CSS string export.
   Preview all сохраняет CSS-вывод; hash/rule/keyframe checks и явный write сохранены.
   Добавлен проверенный Badge prefix template: 59 правил и шесть keyframes.

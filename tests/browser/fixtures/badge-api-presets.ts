@@ -1,4 +1,4 @@
-import type { BadgeConfig, BadgeProps } from 'antd-svelte';
+import type { BadgeConfig, BadgeProps, ThemeConfig } from 'antd-svelte';
 
 export interface BadgeApiValues extends Omit<
   BadgeProps, 'children' | 'count' | 'nativeElement' | 'classNames' | 'styles'
@@ -18,5 +18,7 @@ export interface BadgeApiCase extends BadgeApiValues {
   direction?: 'ltr' | 'rtl';
   provider?: BadgeConfig;
   innerProvider?: BadgeConfig;
+  token?: ThemeConfig['token'];
+  badgeTokens?: NonNullable<ThemeConfig['components']>['Badge'];
   patch?: BadgeApiValues;
 }

@@ -2,7 +2,11 @@
   import { untrack } from 'svelte';
   import { getBadgeDigitState } from './badge-digit.engine';
 
-  let { value, count }: { value: string; count: number; } = $props();
+  let { value, count, prefixCls = 'ant-scroll-number' }: {
+    value: string;
+    count: number;
+    prefixCls?: string;
+  } = $props();
   let numericValue = $derived(Number(value));
   let previousValue = $state(untrack(() => Number(value)));
   let previousCount = $state(untrack(() => Math.abs(count)));
@@ -29,9 +33,9 @@
   @media (prefers-reduced-motion: reduce) { .ant-scroll-number-only { transition: none; } }
 </style>
 
-<span class="ant-scroll-number-only"
+<span class={`${prefixCls}-only`}
   style={plan.transform ? `transform:${plan.transform}` : 'transition:none'}
   ontransitionend={finish}>{#each plan.units as unit (String(unit.key))}<span
-    class={['ant-scroll-number-only-unit', unit.current && 'current']}
+    class={[`${prefixCls}-only-unit`, unit.current && 'current']}
     style={unit.offset ? `position:absolute;top:${unit.offset}00%;left:0` : undefined}
   >{unit.value}</span>{/each}</span>

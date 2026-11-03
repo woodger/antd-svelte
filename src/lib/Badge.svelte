@@ -10,9 +10,11 @@
     getBadgeStyleValue, serializeBadgeStyleLayers, type BadgeStyleLayer
   } from './badge-style.engine';
   import { getBadgeState, normalizeBadgeOffset } from './badge.engine';
+  import { getBadgePrefixCss } from './badge-prefix.engine';
   import { ruRU } from './types';
   import type { BadgeContext, BadgeCountContext, BadgeProps, BadgeSemantic } from './badge.types';
   import BadgeNumber from './BadgeNumber.svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
 
   let { nativeElement = $bindable(), ...props }: BadgeProps = $props();
   let {
@@ -38,6 +40,8 @@
     class: className = '',
     style,
     rootClassName,
+    prefixCls,
+    scrollNumberPrefixCls,
     classNames,
     styles,
     ...rest
@@ -47,6 +51,11 @@
   const token = useToken();
   let indicator = $state<HTMLElement>();
   let zoom = $state.raw<BadgeZoomState>({ rendered: false });
+  let prefix = $derived(prefixCls || 'ant-badge');
+  let numberPrefix = $derived(scrollNumberPrefixCls || 'ant-scroll-number');
+  let prefixCss = $derived(getBadgePrefixCss(prefix));
+  let nativeIndicator = $derived(prefix === 'ant-badge' && numberPrefix === 'ant-scroll-number');
+  let motionClass = $derived(zoom.className?.split('ant-badge-zoom').join(`${prefix}-zoom`));
   const generatedId = $props.id();
   let rootId = $derived(id ?? `ant-badge-${generatedId}`);
   let badgeState = $derived(
@@ -120,14 +129,15 @@
   let sourceCount = $derived(typeof count === 'string' || typeof count === 'boolean'
     || Boolean(customCount || config.badge || classNames || styles || rootClassName)
     || color !== undefined && !isPreset || sourceOffset || size === 'default'
-    || typeof text === 'number' || typeof text === 'boolean' || text === null);
+    || typeof text === 'number' || typeof text === 'boolean' || text === null
+    || prefixCls !== undefined || scrollNumberPrefixCls !== undefined);
   let descriptionId = $derived(
     badgeState.visible && (!badgeState.customCount || badgeState.statusStandalone)
       ? `${rootId}-description` : undefined
   );
   let context = $derived<BadgeContext>({ count: badgeState.count, descriptionId });
   let countContext = $derived<BadgeCountContext>({
-    class: ['ant-scroll-number-custom-component', zoom.className].filter(Boolean).join(' '),
+    class: [`${numberPrefix}-custom-component`, motionClass].filter(Boolean).join(' '),
     style: serializeBadgeStyleLayers([
       offsetLayer,
       config.badge?.style,
@@ -174,28 +184,31 @@
 
 <style>
   .ant-badge { max-width: 100%; min-width: 0; vertical-align: middle; }
-  .ant-badge .ant-badge-indicator { pointer-events: none; margin-top: var(--ant-badge-offset-top, 0px); inset-inline-end: var(--ant-badge-offset-inline, 0px); box-shadow: 0 0 0 var(--ant-line-width) var(--ant-color-bg-container); }
-  .ant-badge-source-tokens .ant-badge-indicator { box-shadow: 0 0 0 var(--ant-line-width) var(--ant-color-border-bg); }
-  .ant-badge-not-a-wrapper .ant-badge-indicator { position: relative; top: auto; transform: none; display: inline-flex; }
-  .ant-badge-status-standalone { margin-top: var(--ant-badge-offset-top, 0px); inset-inline-end: var(--ant-badge-offset-inline, auto); }
-  .ant-badge-status-text { margin-inline-start: var(--ant-margin-xs); color: var(--ant-color-text); font-size: var(--ant-font-size); overflow-wrap: anywhere; }
-  .ant-badge-source-count.ant-badge-not-a-wrapper .ant-badge-indicator { display: block; }
-  .ant-badge-source-count:not(.ant-badge-status) .ant-badge-status-text { margin-inline-start: 0; color: inherit; font-size: inherit; }
+  .ant-badge .ant-badge-indicator:where([data-ant-badge-native-indicator]) { pointer-events: none; margin-top: var(--ant-badge-offset-top, 0px); inset-inline-end: var(--ant-badge-offset-inline, 0px); box-shadow: 0 0 0 var(--ant-line-width) var(--ant-color-bg-container); }
+  .ant-badge-source-tokens .ant-badge-indicator:where([data-ant-badge-native-indicator]) { box-shadow: 0 0 0 var(--ant-line-width) var(--ant-color-border-bg); }
+  .ant-badge-not-a-wrapper .ant-badge-indicator:where([data-ant-badge-native-indicator]) { position: relative; top: auto; transform: none; display: inline-flex; }
+  .ant-badge-status-standalone:where([data-ant-badge-native-status]) { margin-top: var(--ant-badge-offset-top, 0px); inset-inline-end: var(--ant-badge-offset-inline, auto); }
+  .ant-badge-status-text:where([data-ant-badge-status-text]) { margin-inline-start: var(--ant-margin-xs); color: var(--ant-color-text); font-size: var(--ant-font-size); overflow-wrap: anywhere; }
+  .ant-badge-source-count.ant-badge-not-a-wrapper .ant-badge-indicator:where([data-ant-badge-native-indicator]) { display: block; }
+  .ant-badge-source-count:not(.ant-badge-status) .ant-badge-status-text:where([data-ant-badge-status-text]) { margin-inline-start: 0; color: inherit; font-size: inherit; }
   /* Прежний numeric offset меняется сразу; анимируются только разряды. */
   .ant-badge:not(.ant-badge-source-count) .ant-scroll-number { transition: none; }
-  .ant-badge-description { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-  @media (prefers-reduced-motion: reduce) { .ant-badge .ant-badge-indicator, .ant-badge .ant-badge-status-dot, .ant-badge .ant-badge-status-dot::after { transition: none; animation: none; } }
+  .ant-badge-description:where([data-ant-badge-description]) { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  @media (prefers-reduced-motion: reduce) { .ant-badge-css-var [data-ant-badge-visual], .ant-badge-css-var [data-ant-badge-visual]::after { transition: none; animation: none; } }
 </style>
 
-<span {...rest} bind:this={nativeElement} id={rootId} role={role !== undefined ? role : ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={elementDirection !== undefined ? elementDirection : config.direction} title={nativeTitle} onclick={onclick ?? onClick} class={[
-    'ant-badge ant-badge-css-var',
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`badge-prefix:${prefix}`} />{/if}
+
+<span {...rest} data-ant-badge-native-status={prefix === 'ant-badge' && badgeState.statusStandalone ? '' : undefined} bind:this={nativeElement} id={rootId} role={role !== undefined ? role : ariaLabel || ariaLabelledby ? 'group' : undefined} aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={elementDirection !== undefined ? elementDirection : config.direction} title={nativeTitle} onclick={onclick ?? onClick} class={[
+    prefix,
+    'ant-badge-css-var',
     componentTheme.className,
     componentTheme.className && 'ant-badge-source-tokens',
     sourceCount && 'ant-badge-source-count',
-    !children && 'ant-badge-not-a-wrapper',
-    badgeState.hasStatus && 'ant-badge-status',
-    badgeState.statusStandalone && 'ant-badge-status-standalone',
-    config.direction === 'rtl' && 'ant-badge-rtl',
+    !children && `${prefix}-not-a-wrapper`,
+    badgeState.hasStatus && `${prefix}-status`,
+    prefix === 'ant-badge' && badgeState.statusStandalone && 'ant-badge-status-standalone',
+    config.direction === 'rtl' && `${prefix}-rtl`,
     className,
     rootClassName,
     config.badge?.class,
@@ -204,22 +217,22 @@
   ]} style={untrack(() => rootStyle)} style:--ant-badge-offset-top={!sourceOffset && position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={!sourceOffset && position ? `${-position[0]}px` : undefined} {@attach connectRootStyle} {@attach connectZoom}>
   {#if children}{@render children(context)}{/if}{#if !sourceCount}{' '}{/if}{#if badgeState.statusStandalone || renderCounter}
     {#if badgeState.statusStandalone}<span class={[
-        'ant-badge-status-dot',
+        `${prefix}-status-dot`,
         contextClasses.indicator,
         localClasses.indicator,
-        status && `ant-badge-status-${status}`,
-        isPreset && `ant-badge-color-${color}`
-      ]} aria-hidden="true" style={untrack(() => indicatorStyle)} {@attach connectIndicatorStyle}></span>{:else if displayed.custom}{@render displayed.custom(countContext)}{:else}<sup bind:this={indicator} data-show={wanted} class={[
-          'ant-badge-indicator',
-          'ant-scroll-number',
+        status && `${prefix}-status-${status}`,
+        isPreset && `${prefix}-color-${color}`
+      ]} aria-hidden="true" data-ant-badge-visual style={untrack(() => indicatorStyle)} {@attach connectIndicatorStyle}></span>{:else if displayed.custom}{@render displayed.custom(countContext)}{:else}<sup data-ant-badge-native-indicator={nativeIndicator ? '' : undefined} data-ant-badge-visual bind:this={indicator} data-show={wanted} class={[
+          nativeIndicator && 'ant-badge-indicator',
+          numberPrefix,
           contextClasses.indicator,
           localClasses.indicator,
-          displayed.dot ? 'ant-badge-dot' : 'ant-badge-count',
-          size === 'small' && 'ant-badge-count-sm',
-          !displayed.dot && displayed.display.length > 1 && 'ant-badge-multiple-words',
-          status && `ant-badge-status-${status}`,
-          isPreset && `ant-badge-color-${color}`,
-          zoom.className
-        ]} aria-hidden="true" title={indicatorTitle} style={untrack(() => indicatorStyle)} {@attach connectIndicatorStyle}>{#if !displayed.dot}<BadgeNumber count={displayed.value} />{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description">{description}</span>{/if}
-  {/if}{#if !sourceCount}{' '}{/if}{#if badgeState.showText}<span class="ant-badge-status-text" style={statusTextColor ? `color:${statusTextColor}` : undefined}>{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
+          displayed.dot ? `${prefix}-dot` : `${prefix}-count`,
+          size === 'small' && `${prefix}-count-sm`,
+          !displayed.dot && displayed.display.length > 1 && `${prefix}-multiple-words`,
+          status && `${prefix}-status-${status}`,
+          isPreset && `${prefix}-color-${color}`,
+          motionClass
+        ]} aria-hidden="true" title={indicatorTitle} style={untrack(() => indicatorStyle)} {@attach connectIndicatorStyle}>{#if !displayed.dot}<BadgeNumber count={displayed.value} prefixCls={numberPrefix} />{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description" data-ant-badge-description>{description}</span>{/if}
+  {/if}{#if !sourceCount}{' '}{/if}{#if badgeState.showText}<span class={`${prefix}-status-text`} data-ant-badge-status-text style={statusTextColor ? `color:${statusTextColor}` : undefined}>{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
 </span>

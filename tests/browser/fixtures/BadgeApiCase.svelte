@@ -40,7 +40,8 @@
   style="width:48px;height:48px;padding:0;border:0;font:inherit;background:#eee">T</button>{/snippet}
 
 <ConfigProvider direction={sample.direction} badge={sample.provider}
-  theme={{ token: { motion: false } }}>
+  theme={{ token: { motion: false, ...sample.token },
+    components: sample.badgeTokens ? { Badge: sample.badgeTokens } : undefined }}>
   <ConfigProvider badge={sample.innerProvider}>
     <div id="badge-api-surface"
       style="font-family:Arial;font-size:14px;color:rgb(12,34,56);line-height:22px;--api-color:#4682b4">
@@ -51,11 +52,14 @@
           ? changed ? 'padding-left:8px;color:rgb(12,34,56)'
             : 'padding:4px;padding-left:8px;color:rgb(12,34,56)' : values.style}
         rootClassName={values.rootClassName} {classNames} {styles}
+        prefixCls={values.prefixCls} scrollNumberPrefixCls={values.scrollNumberPrefixCls}
         onClick={() => events.push('alias')} onclick={() => events.push('native')}
         onkeydown={event => events.push(`key:${event.key}`)}
         dir={nativeAttrs ? 'rtl' : undefined} lang={nativeAttrs ? 'ru' : undefined}
         tabindex={nativeAttrs ? 0 : undefined}
-        data-api-root="badge" children={sample.wrap === false ? undefined : owner} />{/if}
+        data-api-root="badge" data-api-prefix={values.prefixCls || 'ant-badge'}
+        data-api-number-prefix={values.scrollNumberPrefixCls || 'ant-scroll-number'}
+        children={sample.wrap === false ? undefined : owner} />{/if}
     </div>
   </ConfigProvider>
 </ConfigProvider>

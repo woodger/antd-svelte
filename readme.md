@@ -5641,7 +5641,24 @@ root style и оформление standalone/non-status text; эти грани
 [engine](./src/lib/badge.engine.test.ts) и
 [SSR](./tests/package/badge-values.ssr.test.ts), фикстура — `?fixture=badge-values`.
 
-Пока не перенесены prefixCls/scrollNumberPrefixCls. Processing использует исходную
+PrefixCls меняет классы Badge, status/text и zoom; пустая строка использует ant-badge.
+Для локального префикса Badge выводит в head stylesheet из закреплённого CSS template.
+Стили обновляются вместе с префиксом и удаляются при unmount; root, digits и caller
+controls сохраняются. ScrollNumberPrefixCls меняет классы sup/custom count и разрядов,
+с fallback ant-scroll-number. Как в исходнике, Badge CSS использует глобальный
+ant-scroll-number: произвольный scrollNumberPrefixCls сам по себе не создаёт CSS
+для новых классов. Эта связь влияет на standalone positioning, overflow и стили
+разрядов. ConfigProvider.prefixCls пока не поддерживается общим движком.
+31 вариант классов/styles/геометрии и шесть zoom-последовательностей/30 кадров
+закреплены в [UMD-эталонах](./tests/browser/fixtures/ant-design-badge-prefix-reference.json)
+и [motion-эталонах](./tests/browser/fixtures/ant-design-badge-prefix-motion-reference.json).
+Проверки — [browser](./tests/browser/badge-prefix.spec.ts),
+[motion](./tests/browser/badge-prefix-motion.spec.ts),
+[SSR](./tests/package/badge-prefix.ssr.test.ts) и
+[motion SSR](./tests/package/badge-prefix-motion.ssr.test.ts).
+Фикстуры — `?fixture=badge-prefix` и `?fixture=badge-prefix-motion`.
+
+Processing использует исходную
 CSS-пульсацию, которая отключается при reduced motion. Экспортируются BadgeProps,
 BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeOffset, BadgeCount, BadgeCountContext,
 BadgeContext, BadgeConfig, BadgeSlots, BadgeSemantic и BadgeLocale.
@@ -8179,6 +8196,12 @@ ScrollNumber/SingleNumber slots. Селекторы и декларации из
 [vendor/badge-zoom.css](./src/lib/vendor/badge-zoom.css) содержит четыре исходных
 правила CSSMotion и четыре keyframes для обычного и самостоятельного Badge;
 lifecycle реализован в Badge и badge-zoom.dom по @rc-component/motion 1.3.3.
+[vendor/badge-prefix.css.js](./src/lib/vendor/badge-prefix.css.js) содержит portable
+CSS template из того же архива: 59 правил и шесть keyframes для локального Badge prefix.
+Селекторы Badge/common reset меняются в badge-prefix.engine; CSS-variable marker,
+глобальные ScrollNumber/icon selectors и keyframe names сохраняются. Тела деклараций
+не меняются; обычные vendor-файлы остаются прежними. ES-модуль генерируется рецептом
+badge-prefix через тот же CSS CLI, без runtime import с Vite-specific ?raw.
 [vendor/badge-ribbon.css](./src/lib/vendor/badge-ribbon.css) содержит 27 правил
 Badge.Ribbon из того же архива: wrapper, indicator, content/corner, логические
 placement, RTL и preset colors. Декларации сохранены; корни ограничены классами

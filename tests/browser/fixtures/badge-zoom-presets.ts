@@ -7,6 +7,8 @@ export interface BadgeZoomValues {
   dot?: boolean;
   title?: string | false | null;
   status?: BadgeStatus;
+  prefixCls?: string;
+  scrollNumberPrefixCls?: string;
 }
 
 export type BadgeZoomStep = ({ kind: 'set'; } & BadgeZoomValues)

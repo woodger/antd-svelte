@@ -19,7 +19,7 @@
 
   function current() {
     return surface?.querySelector(
-      'sup, .ant-scroll-number-custom-component, .ant-badge-status-dot'
+      'sup, [data-custom-zoom], [data-ant-badge-visual]'
     );
   }
 
@@ -52,8 +52,10 @@
 <ConfigProvider theme={{ token: {
   motion: sample.motion ?? true, motionDurationSlow: fast ? '0.3s' : '10s'
 } }}>
-  <div id="badge-zoom-surface" bind:this={surface}>
+  <div id="badge-zoom-surface" bind:this={surface}
+    data-badge-zoom-prefix={values.prefixCls || 'ant-badge'}>
     {#if mounted}<Badge {count} dot={values.dot} status={values.status} title={values.title}
+      prefixCls={values.prefixCls} scrollNumberPrefixCls={values.scrollNumberPrefixCls}
       children={sample.wrap === false ? undefined : target} />{/if}
   </div>
 </ConfigProvider>
