@@ -5,14 +5,24 @@ export type BadgeStatus = 'success' | 'processing' | 'default' | 'error' | 'warn
 export type BadgeColor = TagPresetColor;
 export type BadgeSize = 'medium' | 'small';
 export type BadgeText = string | Snippet;
+/** Атрибуты исходного custom count; Snippet применяет их к собственному корню. */
+export interface BadgeCountContext {
+  class: string;
+  style: string | undefined;
+}
+
+export type BadgeCount = number | string | boolean | null | Snippet<[BadgeCountContext]>;
+
 export interface BadgeContext {
+  /** Существующий числовой контракт: строка/Snippet не преобразуются в число. */
   count: number | undefined;
   descriptionId: string | undefined;
 }
 
 /** Счётчик или статус у дочернего содержимого; число и отображаемый текст различаются. */
 export interface BadgeProps {
-  count?: number;
+  /** Snippet получает class/style вместо React.cloneElement; собственные attrs имеют приоритет. */
+  count?: BadgeCount;
   /** @defaultValue 99 */
   overflowCount?: number;
   /** @defaultValue false */

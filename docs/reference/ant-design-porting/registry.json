@@ -6133,7 +6133,18 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@rc-component/motion",
+          "range": "^1.3.3",
+          "referenceVersion": null
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
@@ -6166,7 +6177,19 @@
         "tests/browser/fixtures/ant-design-badge-ribbon-reference.json",
         "tests/browser/badge-ribbon.spec.ts",
         "tests/package/badge-ribbon.ssr.test.ts",
-        "src/lib/badge-ribbon.dom.ts"
+        "src/lib/badge-ribbon.dom.ts",
+        "src/lib/badge.types.ts",
+        "src/lib/badge.engine.ts",
+        "src/lib/badge-count.engine.test.ts",
+        "src/lib/vendor/badge-custom-count.css",
+        "src/lib/vendor/badge-count-digits.css",
+        "tests/browser/fixtures/badge-count-presets.ts",
+        "tests/browser/fixtures/BadgeCountState.svelte",
+        "tests/browser/fixtures/BadgeCountCase.svelte",
+        "tests/browser/fixtures/BadgeCountFixtures.svelte",
+        "tests/browser/fixtures/ant-design-badge-count-reference.json",
+        "tests/browser/badge-count.spec.ts",
+        "tests/package/badge-count.ssr.test.ts"
       ],
       "features": [
         {
@@ -6179,11 +6202,27 @@
         },
         {
           "id": "gap-1",
-          "title": "Произвольный count",
-          "state": "missing",
+          "title": "Строковый и Snippet count",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Badge.count пока принимает число; строковый/Snippet count остаётся в работе. Ribbon перенесён отдельным Svelte export."
+          "evidence": [
+            "readme.md",
+            "src/lib/badge.types.ts",
+            "src/lib/badge.engine.ts",
+            "src/lib/badge-count.engine.test.ts",
+            "src/lib/Badge.svelte",
+            "src/lib/vendor/badge-custom-count.css",
+            "src/lib/vendor/badge-count-digits.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/badge-count-presets.ts",
+            "tests/browser/fixtures/BadgeCountState.svelte",
+            "tests/browser/fixtures/BadgeCountCase.svelte",
+            "tests/browser/fixtures/BadgeCountFixtures.svelte",
+            "tests/browser/fixtures/ant-design-badge-count-reference.json",
+            "tests/browser/badge-count.spec.ts",
+            "tests/package/badge-count.ssr.test.ts"
+          ],
+          "note": "Строки сохраняют написание и source numeric comparison/точный zero, полный title/description. Boolean/null следуют ScrollNumber presence; integer strings используют статические SingleNumber slots для точной геометрии. Готовый count получает class/style через BadgeCountContext вместо React.cloneElement; вызывающий Snippet явно применяет их к своему root с приоритетом своих attrs. Дополнительной обёртки нет; custom count сохраняет собственные controls/доступность и не заменяется точкой при dot. Offset/RTL, темы, own style/title priority, caller state/focus, cleanup и SSR закреплены 46 UMD-эталонами. Прокрутка и zoom не входят в этот этап."
         },
         {
           "id": "ribbon",
@@ -6231,6 +6270,32 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные defaults/final overrides, alias overrides и component algorithms, нули/undefined, custom CSS prefix/hash и SSR scopes. Размеры Avatar, numeric size priority, group overlap/border/spacing и hidden avatars; Badge count/dot/status/fonts/padding/shadow colorBorderBg. Numeric Badge z-index/font-weight сериализуются с px как upstream; строки сохраняют безразмерные значения. Все CSS declarations и computed metrics закреплены по официальному UMD для 13 настроек. Popover scope сбрасывает чужие Avatar aliases, скрытые аватары повторно получают свои tokens. Native-only темы и существующие Svelte API/a11y/focus сохраняются; полный API остальных families остаётся в работе."
+        },
+        {
+          "id": "native-boundaries",
+          "title": "Существующие native numeric/style/a11y contracts и ReactNode boundary",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/badge.types.ts",
+            "src/lib/badge.engine.test.ts",
+            "src/lib/badge.ssr.test.ts",
+            "tests/browser/badge.spec.ts",
+            "tests/browser/badge-count.spec.ts"
+          ],
+          "note": "Сохранены конечный numeric count, нормализация overflow/offset, числовой BadgeContext.count, root class/style, доступные описания и прежний standalone/non-status text layout числового режима. Эти соглашения отличаются от React. Строки/Snippet не расширяют тип существующего BadgeContext.count. Непрозрачный Snippet не клонируется автоматически: caller получает root attrs и должен применить их сам. ReactNode arrays/portals не анализируются."
+        },
+        {
+          "id": "advanced-api",
+          "title": "Badge config/semantic/custom colors, prefix/ref и исходный motion",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/badge.types.ts"
+          ],
+          "note": "ConfigProvider.badge, Badge semantic classNames/styles, произвольные CSS-цвета, prefixCls/scrollNumberPrefixCls/rootClassName, полный DOM/ref API, source SingleNumber rolling и CSSMotion zoom/cache lifecycle остаются в работе. Ribbon имеет собственные перенесённые semantic/config/ref API."
         }
       ]
     },

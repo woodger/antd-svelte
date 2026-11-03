@@ -22,21 +22,35 @@ export function getBadgeState(
   const count = typeof sourceCount === 'number' && Number.isFinite(sourceCount)
     ? sourceCount
     : undefined;
+  const customCount = typeof sourceCount === 'function';
+  const scalarCount = typeof sourceCount === 'string' || typeof sourceCount === 'boolean'
+    ? sourceCount : count;
+  const hasCount = scalarCount !== undefined || customCount;
+  const renderable = customCount || scalarCount !== undefined
+    && scalarCount !== false && scalarCount !== '';
   const limit = Number.isFinite(overflowCount) && overflowCount >= 0 ? overflowCount : 99;
-  const zero = count === 0 || text === '0';
+  const zero = scalarCount === 0 || scalarCount === '0' || text === '0';
   const hasText = typeof text === 'function' || Boolean(text);
   const hasStatus = (status !== undefined
     || color !== undefined)
-    && (count === undefined
+    && (!hasCount
       || zero
       && !showZero);
   const statusStandalone = !hasChildren && hasStatus && (hasText || status !== undefined || !zero);
   const showAsDot = dot && !zero;
-  const hidden = (count === undefined && !hasText || zero && !showZero) && !showAsDot;
+  const hidden = (!renderable && !hasText || zero && !showZero) && !showAsDot;
+  const numberedCount = Number(scalarCount) > limit ? `${limit}+` : scalarCount;
 
   return {
     count,
-    display: showAsDot || count === undefined ? '' : count > limit ? `${limit}+` : String(count),
+    titleCount: typeof sourceCount === 'string' ? sourceCount : count,
+    descriptionCount: typeof sourceCount === 'string' ? sourceCount
+      : sourceCount === true ? 'true' : count,
+    customCount,
+    digitString: (typeof scalarCount === 'string' || scalarCount === true)
+      && Boolean(numberedCount) && Number(numberedCount) % 1 === 0,
+    display: showAsDot || !renderable || customCount ? ''
+      : String(numberedCount),
     hasStatus,
     statusStandalone,
     showAsDot,

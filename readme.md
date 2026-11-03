@@ -5467,13 +5467,44 @@ prefixCls/rootClassName и устаревших bordered/closable/color-inverse 
 <Badge status="processing" text="Сервис работает" />
 ```
 
-Badge принимает числовой count и необязательный children Snippet. Без children
+Badge принимает count и необязательный children Snippet. Count может быть числом,
+строкой, boolean/null или Snippet. Без children
 индикатор остаётся в потоке. По умолчанию overflowCount=99, showZero=false,
 dot=false и size=medium; размер не наследуется от componentSize. Значение выше
 предела отображается как `99+`. Конечные отрицательные и дробные числа сохраняются;
 NaN/Infinity считаются отсутствующим count. Отрицательный или нечисловой предел
 заменяется на 99; конечный неотрицательный overflowCount, включая 0, допустим.
 Входные значения владельца компонент не изменяет.
+
+Строки сохраняют исходное написание, включая ведущие нули, отрицательные числа
+и пробелы. Overflow использует числовое сравнение, как upstream: `'100'` даёт
+`99+`, `'001'` остаётся `001`. Только точная строка `'0'` включает правило нуля;
+`'00'` и `'0.0'` видимы. Числовые строки с целым значением выводятся исходными
+символьными slots ScrollNumber, пока без прокрутки. Пустая строка и false не
+создают счётчик без text/dot; null означает отсутствие count. Boolean true
+отображается как `true`, как в исходном ScrollNumber. Полные строки сохраняются
+в title и доступном описании, независимо от overflow.
+
+```svelte
+<script lang="ts">
+  import { Badge, type BadgeCountContext } from 'antd-svelte';
+</script>
+
+{#snippet clock(attributes: BadgeCountContext)}<span {...attributes} aria-label="Ожидает ответа">◷</span>{/snippet}
+<Badge count={clock}><a href="/messages">Сообщения</a></Badge>
+```
+
+Count Snippet получает BadgeCountContext с class/style. Примените их к своему
+корневому элементу; при собственном оформлении объедините классы массивом,
+а CSS-строку контекста поставьте перед собственной. Это явная
+замена React.cloneElement: Svelte не анализирует и не клонирует непрозрачный
+Snippet. Дополнительной обёртки нет; если атрибуты не применены, автоматического
+позиционирования не будет. Style содержит offset и Badge.style; собственный
+style корня имеет приоритет. Dot не заменяет готовый count точкой, как upstream.
+Пустой Snippet остаётся заданным count и не выбирает status вместо себя.
+Доступность и интерактивность принадлежат Snippet; Badge не скрывает его controls
+и не добавляет общее описание «Есть обновления». Смена offset/темы сохраняет его
+DOM, состояние и фокус; удаление count уничтожает прежнее содержимое.
 
 Нулевой count скрыт, пока не включён showZero. Как в Ant Design 6.6.8,
 dot с count=0 скрыт, а с showZero отображается число 0; без count dot виден.
@@ -5497,10 +5528,12 @@ algorithm; тень использует colorBorderBg. Числовые indicat
 Настройки доступны при SSR, custom cssVar.prefix и реактивных обновлениях.
 Подробности — [контекст темы](./docs/reference/theme-context.md).
 
-Визуальный индикатор скрыт от screen reader. Рядом расположен обычный скрытый
+Обычный числовой/строковый индикатор скрыт от screen reader. Рядом расположен скрытый
 текст с полным значением, в том числе при `99+` и dot. Children получает
-BadgeContext с нормализованным count и descriptionId, которым владелец может
-описать кнопку, ссылку или другой control. При скрытии индикатора descriptionId
+BadgeContext с нормализованным числовым count и descriptionId, которым владелец может
+описать кнопку, ссылку или другой control. Для строки/Snippet count остаётся
+undefined; Snippet также не получает автоматического descriptionId.
+При скрытии индикатора descriptionId
 становится undefined. Children остаётся в DOM при изменении count: его фокус,
 состояние и нативные события сохраняются. Сам Badge не создаёт остановок Tab,
 live-region или автоматических объявлений. Aria-label/aria-labelledby именуют
@@ -5516,11 +5549,19 @@ Title по умолчанию содержит полный count; false/null у
 После закрытия Drawer фокус возвращается к прежней кнопке даже при count=0.
 Сброс создаёт исходные сообщения с новыми ключами. Сеть и persistence отсутствуют.
 
-В первой версии Badge нет строкового/Snippet count, произвольных CSS-цветов,
+46 вариантов count закреплены в
+[официальных UMD-снимках](./tests/browser/fixtures/ant-design-badge-count-reference.json),
+проверки — [browser](./tests/browser/badge-count.spec.ts) и
+[SSR](./tests/package/badge-count.ssr.test.ts), фикстура — `?fixture=badge-count`.
+У прежнего числового режима сохранены native normalization, BadgeContext,
+root style и оформление standalone/non-status text; эти границы отличаются от React.
+
+В первой версии Badge нет произвольных CSS-цветов,
 анимации прокрутки цифр, появления/исчезновения, semantic classNames/styles,
 prefixCls/rootClassName и устаревших aliases. Processing использует исходную
 CSS-пульсацию, которая отключается при reduced motion. Экспортируются BadgeProps,
-BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeContext и BadgeLocale.
+BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeCount, BadgeCountContext,
+BadgeContext и BadgeLocale.
 
 ## BadgeRibbon
 
@@ -8047,6 +8088,11 @@ antStatusProcessing из того же архива. Селекторы Radio/Sp
 сохранены. Badge.svelte добавляет standalone-позиционирование без ScrollNumber,
 описания, логические offsets, обводку под фон темы и reduced motion.
 Новые зависимости, иконки и лицензии не добавлены.
+[vendor/badge-custom-count.css](./src/lib/vendor/badge-custom-count.css) содержит
+пять исходных правил готового count и antBadgeLoadingCircle;
+[vendor/badge-count-digits.css](./src/lib/vendor/badge-count-digits.css) — три правила
+ScrollNumber/статических SingleNumber slots. Селекторы и декларации извлечены
+из того же архива; прокрутка цифр и zoom lifecycle остаются в работе.
 [vendor/badge-ribbon.css](./src/lib/vendor/badge-ribbon.css) содержит 27 правил
 Badge.Ribbon из того же архива: wrapper, indicator, content/corner, логические
 placement, RTL и preset colors. Декларации сохранены; корни ограничены классами

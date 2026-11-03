@@ -546,6 +546,8 @@ export type {
   BadgeColor,
   BadgeSize,
   BadgeText,
+  BadgeCount,
+  BadgeCountContext,
   BadgeContext
 } from './badge.types';
 export type { BadgeLocale } from './types';

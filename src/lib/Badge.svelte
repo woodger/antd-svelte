@@ -3,7 +3,7 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { getBadgeState, normalizeBadgeOffset } from './badge.engine';
   import { ruRU } from './types';
-  import type { BadgeContext, BadgeProps } from './badge.types';
+  import type { BadgeContext, BadgeCountContext, BadgeProps } from './badge.types';
 
   let {
     count,
@@ -36,19 +36,31 @@
   );
   let position = $derived(normalizeBadgeOffset(offset));
   let strings = $derived({ ...ruRU.badge, ...config.locale.badge });
-  let descriptionId = $derived(state.visible ? `${rootId}-description` : undefined);
+  let customCount = $derived(typeof count === 'function' ? count : undefined);
+  // Новые значения следуют source layout; прежние числовые DOM/spacing сохраняются.
+  let sourceCount = $derived(typeof count === 'string' || typeof count === 'boolean'
+    || Boolean(customCount));
+  let descriptionId = $derived(state.visible && (!state.customCount || state.statusStandalone)
+    ? `${rootId}-description` : undefined);
   let context = $derived<BadgeContext>({ count: state.count, descriptionId });
+  let countContext = $derived<BadgeCountContext>({
+    class: 'ant-scroll-number-custom-component',
+    style: [
+      position && `margin-top:${position[1]}px;inset-inline-end:${-position[0]}px`,
+      style
+    ].filter(Boolean).join(';') || undefined
+  });
   let description = $derived(
-    !state.statusStandalone && state.count !== undefined
-      ? `${strings.count}: ${state.count}`
+    !state.statusStandalone && state.descriptionCount !== undefined
+      ? `${strings.count}: ${state.descriptionCount}`
       : status ? strings[status] : strings.dot
   );
   let nativeTitle = $derived(
     title === false || title === null
       ? undefined
       : title
-      ?? (state.visible && !state.statusStandalone && state.count !== undefined
-        ? String(state.count)
+      ?? (state.visible && !state.statusStandalone && state.titleCount !== undefined
+        ? String(state.titleCount)
         : undefined)
   );
 </script>
@@ -60,6 +72,8 @@
   .ant-badge-not-a-wrapper .ant-badge-indicator { position: relative; top: auto; transform: none; display: inline-flex; }
   .ant-badge-status-standalone { margin-top: var(--ant-badge-offset-top, 0px); inset-inline-end: var(--ant-badge-offset-inline, auto); }
   .ant-badge-status-text { margin-inline-start: var(--ant-margin-xs); color: var(--ant-color-text); font-size: var(--ant-font-size); overflow-wrap: anywhere; }
+  .ant-badge-source-count.ant-badge-not-a-wrapper .ant-badge-indicator { display: block; }
+  .ant-badge-source-count:not(.ant-badge-status) .ant-badge-status-text { margin-inline-start: 0; color: inherit; font-size: inherit; }
   .ant-badge-description { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   @media (prefers-reduced-motion: reduce) { .ant-badge .ant-badge-indicator, .ant-badge .ant-badge-status-dot, .ant-badge .ant-badge-status-dot::after { transition: none; animation: none; } }
 </style>
@@ -68,27 +82,26 @@
     'ant-badge ant-badge-css-var',
     componentTheme.className,
     componentTheme.className && 'ant-badge-source-tokens',
+    sourceCount && 'ant-badge-source-count',
     !children && 'ant-badge-not-a-wrapper',
     state.hasStatus && 'ant-badge-status',
     state.statusStandalone && 'ant-badge-status-standalone',
     config.direction === 'rtl' && 'ant-badge-rtl',
     className
   ]} style={rootStyle} style:--ant-badge-offset-top={position ? `${position[1]}px` : undefined} style:--ant-badge-offset-inline={position ? `${-position[0]}px` : undefined}>
-  {#if children}{@render children(context)}{/if}
-  {#if state.visible}
+  {#if children}{@render children(context)}{/if}{#if !sourceCount}{' '}{/if}{#if state.visible}
     {#if state.statusStandalone}<span class={[
         'ant-badge-status-dot',
         status && `ant-badge-status-${status}`,
         color && `ant-badge-color-${color}`
-      ]} aria-hidden="true"></span>{:else}<sup class={[
+      ]} aria-hidden="true"></span>{:else if customCount}{@render customCount(countContext)}{:else}<sup class={[
           'ant-badge-indicator',
+          sourceCount && 'ant-scroll-number',
           state.showAsDot ? 'ant-badge-dot' : 'ant-badge-count',
           size === 'small' && 'ant-badge-count-sm',
           !state.showAsDot && state.display.length > 1 && 'ant-badge-multiple-words',
           status && `ant-badge-status-${status}`,
           color && `ant-badge-color-${color}`
-        ]} aria-hidden="true" title={nativeTitle}>{#if !state.showAsDot}<bdi>{state.display}</bdi>{/if}</sup>{/if}
-    <span id={descriptionId} class="ant-badge-description">{description}</span>
-  {/if}
-  {#if state.showText}<span class="ant-badge-status-text">{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
+        ]} aria-hidden="true" title={nativeTitle}>{#if !state.showAsDot}<bdi>{#if state.digitString}{#each [...state.display] as character, index (state.display.length - index)}<span class="ant-scroll-number-only" style="transition:none"><span class="ant-scroll-number-only-unit current">{character}</span></span>{/each}{:else}{state.display}{/if}</bdi>{/if}</sup>{/if}{#if !sourceCount}{' '}{/if}{#if descriptionId}<span id={descriptionId} class="ant-badge-description">{description}</span>{/if}
+  {/if}{#if !sourceCount}{' '}{/if}{#if state.showText}<span class="ant-badge-status-text">{#if typeof text === 'function'}{@render text()}{:else}{text}{/if}</span>{/if}
 </span>

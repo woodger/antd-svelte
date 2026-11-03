@@ -66,6 +66,43 @@
     "appendRootKeyframes": true
   },
   {
+    "id": "badge-custom-count",
+    "output": "src/lib/vendor/badge-custom-count.css",
+    "expectedRules": 5,
+    "include": [
+      "ant-scroll-number-custom-component"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.ant-badge(?![-\\w])",
+        "replacement": ".ant-badge:where(.ant-badge-css-var)"
+      }
+    ],
+    "keyframes": [
+      "antBadgeLoadingCircle"
+    ],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Badge custom count: source positioning, standalone, RTL и spinning icon.\n * Корни ограничены :where(.ant-badge-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "badge-count-digits",
+    "output": "src/lib/vendor/badge-count-digits.css",
+    "expectedRules": 3,
+    "include": [
+      "\\.ant-scroll-number(?![-\\w])",
+      "\\.ant-scroll-number-only(?![-\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.ant-badge(?![-\\w])",
+        "replacement": ".ant-badge:where(.ant-badge-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Badge строковый count: ScrollNumber и статические SingleNumber slots.\n * Root/digit transitions сохранены; прокрутка цифр пока не перенесена.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
     "id": "badge-ribbon",
     "output": "src/lib/vendor/badge-ribbon.css",
     "expectedRules": 27,

@@ -9,6 +9,11 @@
 
 ### Added
 
+- Badge.count: строки, boolean/null и Snippet с атрибутами исходного custom root.
+  Перенесены строковые overflow/zero правила, статические символьные slots,
+  custom positioning/RTL, SSR и собственная интерактивность Snippet.
+  Числовой BadgeContext и прежние native contracts сохранены; добавлены
+  46 UMD-эталонов и unit/SSR/browser-проверки. Прокрутка и zoom остаются в работе.
 - BadgeRibbon для Badge.Ribbon 6.6.8: scalar/Snippet content, preset/CSS colors,
   логические placement/RTL, semantic callbacks, ConfigProvider.ribbon и native ref.
   Используются исходные Badge aliases/algorithm и 27 извлечённых CSS-правил;
