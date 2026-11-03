@@ -1,6 +1,28 @@
 import { test, expect } from './test';
 import reference from './fixtures/ant-design-tree-select-metrics.json' with { type: 'json' };
 
+test('bound root and input refs survive theme updates and clear on unmount', async ({ page }) => {
+  const input = page.getByRole('combobox', { name: 'Themed tree popup', exact: true });
+  await input.fill('draft');
+  await expect(page.getByLabel('TreeSelect native refs', { exact: true }))
+    .toHaveText('{"root":true,"input":true,"contains":true}');
+
+  await page.getByLabel('TreeSelect token preset', { exact: true }).evaluate(node => {
+    const select = node as HTMLSelectElement;
+    select.value = 'compact';
+    select.dispatchEvent(new Event('change', { bubbles: true }));
+  });
+  await input.press('Escape');
+  await page.getByRole('button', { name: 'Focus bound TreeSelect', exact: true }).click();
+
+  await expect(input).toBeFocused();
+  await expect(page.getByLabel('TreeSelect native refs', { exact: true }))
+    .toHaveText('{"root":true,"input":true,"contains":true}');
+  await page.getByLabel('Mount themed TreeSelect', { exact: true }).uncheck();
+  await expect(page.getByLabel('TreeSelect native refs', { exact: true }))
+    .toHaveText('{"root":false,"input":false,"contains":false}');
+});
+
 test.beforeEach(async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 1200 });
   await page.goto('/?fixture=tree-select-theme');

@@ -22,7 +22,8 @@
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
-  import { connectPopup } from './popup.dom';
+  import { connectPopup, getPopupActiveElement } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import Tree from './Tree.svelte';
@@ -69,6 +70,7 @@
     popupMatchSelectWidth = true,
     placement,
     onPopupScroll,
+    getPopupContainer,
     popupClassName = '',
     rootClassName = '',
     size,
@@ -154,7 +156,15 @@
   let mounted = $state(untrack(() => defaultOpen || open === true));
   let shown = $state(false);
   let focused = $state(false);
+  let root = $state<HTMLDivElement>();
+  let editor = $state<HTMLInputElement>();
   let popup = $state<HTMLDivElement>();
+  const portal = createPopupContainer(() => ({
+    open: visible,
+    reference: root,
+    getPopupContainer: getPopupContainer || config.getPopupContainer,
+    themeStyle: componentStyle
+  }));
   let treeElement = $state<HTMLDivElement>();
   let active = $state<TreeKey | null>(null);
   let activeDescendant = $state<string>();
@@ -180,6 +190,15 @@
   let previousOpen = false;
   let previousSearch = '';
   let previousProps = untrack(() => ({ value, open, search: searchConfig.searchValue }));
+  // Внутренние DOM-ссылки сохраняются при обновлении spread props без bind:ref.
+  $effect(() => {
+    nativeElement = root;
+    return () => { nativeElement = undefined; };
+  });
+  $effect(() => {
+    inputElement = editor;
+    return () => { inputElement = undefined; };
+  });
   $effect(() => {
     const next = { value, open, search: searchConfig.searchValue };
     if (next.value !== previousProps.value)
@@ -225,10 +244,11 @@
     });
   });
   $effect(() => {
-    if (!visible || !popup || !nativeElement) return;
+    if (!visible || !popup || !root) return;
     const position = placement ?? (config.direction === 'rtl' ? 'bottomRight' : 'bottomLeft');
-    return connectPopup(popup, nativeElement, {
+    return connectPopup(popup, root, {
       placement: position.startsWith('top') ? 'top' : 'bottom',
+      gap: 4,
       align: position.endsWith('Right') ? 'right' : 'left',
       autoAdjustOverflow: true,
       maxWidth: '100vw',
@@ -241,13 +261,13 @@
       onDismiss: reason => {
         requestOpen(false);
         if (reason === 'escape')
-          inputElement?.focus();
+          editor?.focus();
       }
     });
   });
   $effect(() => {
-    if (!inputElement) return;
-    const input = inputElement;
+    if (!editor) return;
+    const input = editor;
     input.setCustomValidity(
       (attributes.required ?? field?.required) && !display.length
         ? config.locale.selectRequiredText ?? 'Please select a value.'
@@ -281,14 +301,14 @@
     onOpenChange?.(next);
   }
   function searchInput(next: string) {
-    const input = inputElement;
+    const input = editor;
     internalSearch = next;
     searchConfig.onSearch?.(next);
     requestOpen(true);
 
     if (searchConfig.searchValue !== undefined && input) {
       void tick().then(() => {
-        if (input === inputElement && input.isConnected)
+        if (input === editor && input.isConnected)
           input.value = inputValue;
       });
     }
@@ -354,13 +374,13 @@
         );
     if (!isMultiple)
       requestOpen(false);
-    inputElement?.focus();
+    editor?.focus();
   }
   function clear() {
     if (blocked) return;
     onClear?.();
     publish([], {});
-    inputElement?.focus();
+    editor?.focus();
   }
   function panelSelect(node: TreeEventNode) {
     choose(node.key as TreeSelectRawValue);
@@ -385,14 +405,19 @@
       ?? Promise.resolve();
   }
   function blurWithin(event: FocusEvent) {
+    const element = root;
+    if (!element) return;
     if (event.relatedTarget instanceof Node
-      && (nativeElement?.contains(event.relatedTarget)
+      && (element.contains(event.relatedTarget)
         || popup?.contains(
           event.relatedTarget
         ))) return;
     queueMicrotask(() => {
-      const target = inputElement?.ownerDocument.activeElement;
-      if (target && (nativeElement?.contains(target) || popup?.contains(target))) return;
+      if (root !== element || !element.isConnected) return;
+      const target = getPopupActiveElement(element);
+      const popupTarget = popup && getPopupActiveElement(popup);
+      if (target && element.contains(target)
+        || popupTarget && popup?.contains(popupTarget)) return;
       focused = false;
       field?.onBlur();
       requestOpen(false);
@@ -443,15 +468,18 @@
       }
       await tick();
       treeElement?.querySelector('[role="tree"]')?.dispatchEvent(
-        new KeyboardEvent('keydown', { key: event.key, bubbles: true, cancelable: true })
+        new KeyboardEvent(
+          'keydown',
+          { key: event.key, bubbles: true, cancelable: true, composed: true }
+        )
       );
     }
   }
   export function focus(options?: FocusOptions) {
-    inputElement?.focus(options);
+    editor?.focus(options);
   }
   export function blur() {
-    inputElement?.blur();
+    editor?.blur();
   }
 </script>
 <style>
@@ -495,10 +523,10 @@
         )?.label
     }
   )}{/snippet}
-<div bind:this={nativeElement} role="presentation" onpointerdown={event => {
+<div bind:this={root} role="presentation" onpointerdown={event => {
     if (!blocked && event.target instanceof Element && !event.target.closest('button,input')) {
       event.preventDefault();
-      inputElement?.focus();
+      editor?.focus();
       requestOpen(true);
     }
   }} dir={config.direction}
@@ -527,7 +555,7 @@
         (blocked || item.disabled) && 'ant-select-selection-item-disabled'
       ]} title={text(item.label)}><span class="ant-select-selection-item-content">{@render labelNode(item)}</span>{#if !blocked&&!item.disabled}<button type="button" class="ant-select-selection-item-remove" aria-label={`${config.locale.removeText ?? 'Remove'} ${text(item.label)}`} onpointerdown={event => event.preventDefault()} onclick={() => choose(item.value, 'selection')}><Icon name="close" /></button>{/if}</span>{/each}
     {:else if (!visible || !canSearch) && (treeTitleRender || typeof display[0]?.label==='function') && display[0]}<span class="single-snippet">{@render labelNode(display[0])}</span>{/if}
-    <input {...attributes} bind:this={inputElement} id={controlId} class="ant-select-input" type="text" role="combobox" aria-haspopup="tree" aria-controls={`${controlId}-list`} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible ? activeDescendant : undefined} aria-invalid={resolvedStatus === 'error'
+    <input {...attributes} bind:this={editor} id={controlId} class="ant-select-input" type="text" role="combobox" aria-haspopup="tree" aria-controls={`${controlId}-list`} aria-expanded={visible} aria-autocomplete={canSearch ? 'list' : 'none'} aria-activedescendant={visible ? activeDescendant : undefined} aria-invalid={resolvedStatus === 'error'
         || attributes['aria-invalid']
         || undefined} aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(
             Boolean
@@ -549,7 +577,7 @@
 </div>
 <NoCompactStyle>{#if mounted}
 {@const initialPopupStyle = untrack(() => componentStyle)}
-<div bind:this={popup} popover="manual" hidden={!visible || !shown} class={[
+<div bind:this={popup} popover="manual" hidden={!visible || !shown} dir={config.direction} class={[
     'popup ant-select-dropdown ant-select-css-var ant-tree-select-dropdown ant-tree-select-css-var',
     selectTheme.className,
     selectTheme.className && 'ant-tree-select-source-popup',
@@ -557,6 +585,7 @@
     popupClassName
   ]} style={initialPopupStyle}
   {@attach node => connectComponentTheme(node, componentStyle)}
+  {@attach portal}
   style:width={typeof popupMatchSelectWidth === 'number'
       ? `${popupMatchSelectWidth}px`
       : undefined} onfocusout={blurWithin}>

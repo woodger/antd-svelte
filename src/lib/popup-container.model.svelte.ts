@@ -7,6 +7,7 @@ interface PopupContainerOptions {
   reference?: Element;
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   themeStyle?: string;
+  preserveVariables?: readonly string[];
 }
 
 /** Callback identity не меняет portal, пока функция возвращает тот же DOM-контейнер. */
@@ -61,6 +62,7 @@ export function createPopupContainer(getOptions: () => PopupContainerOptions) {
             '--ant-tooltip-valid-offset-x',
             '--ant-tooltip-arrow-offset-x',
             '--ant-tooltip-arrow-background-color',
+            ...(getOptions().preserveVariables ?? []),
             ...Array.from(style).filter(name => name.startsWith('--'))
           ];
         }

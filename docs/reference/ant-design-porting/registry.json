@@ -2977,7 +2977,14 @@
         "tests/browser/cascader-theme.spec.ts",
         "tests/browser/fixtures/CascaderThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-cascader-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/fixtures/ant-design-choice-container-reference.json",
+        "tests/browser/fixtures/choice-container-presets.ts",
+        "tests/browser/fixtures/ChoiceContainerCase.svelte",
+        "tests/browser/fixtures/ChoiceContainerContent.svelte",
+        "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
+        "tests/browser/choice-container.spec.ts",
+        "tests/package/choice-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -3062,7 +3069,7 @@
           "evidence": [
             "readme.md"
           ],
-          "note": "Не перенесены arbitrary popup containers/align/motion, prefixCls, renderEmpty, React components/refs/dev warnings и автоматический вывод значения по generic ValueField и полные generic типы всех semantic props. Svelte callbacks/native semantics задокументированы отдельно; v1-ready не означает полный React API."
+          "note": "Не перенесены arbitrary popup align/motion, prefixCls, renderEmpty, React components/refs/dev warnings и автоматический вывод значения по generic ValueField и полные generic типы всех semantic props. Svelte callbacks/native semantics задокументированы отдельно; v1-ready не означает полный React API."
         },
         {
           "id": "cascader-theme-tokens",
@@ -3082,6 +3089,22 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные восемь defaults, финальные overrides, округление optionPadding, unitless optionSelectedFontWeight, component algorithms/aliases, zero/undefined и custom prefix. Поле и dropdown объединяют Select и Cascader scopes в исходном порядке; Panel получает только Cascader и наследует шрифт/цвет provider с прозрачным фоном. Checkbox aliases не применяются к внутренним checkbox. UMD declarations и computed metrics для 18 настроек: single/multiple трёх размеров, tags, suffix/clear, disabled, columns/rows/expand icons, search/empty и checkbox checked/mixed/disabled/unchecked. Responsive tags сохраняют source geometry, включая нулевую controlWidth. SSR и смена темы сохраняют DOM, поиск/выделение/фокус и callbacks; popup variables обновляются без потери controller left/top, semantic CSS overrides сохраняют приоритет при смене ширины поиска. Native-only темы и существующий Svelte API сохранены; остальные advanced API остаются в работе."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый контейнер, исходный trigger и native lifecycle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-choice-container-reference.json",
+            "tests/browser/fixtures/choice-container-presets.ts",
+            "tests/browser/fixtures/ChoiceContainerCase.svelte",
+            "tests/browser/fixtures/ChoiceContainerContent.svelte",
+            "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
+            "tests/browser/choice-container.spec.ts",
+            "tests/package/choice-container.ssr.test.ts"
+          ],
+          "note": "GetPopupContainer → ConfigProvider.getPopupContainer; undefined наследует provider. Getter получает div.ant-select, Cascader custom children передаёт свой DOM trigger; nativeElement сохраняет существующую обёртку. Getter выполняется только в браузере после первого открытия; native SSR shell, top layer и default DOM сохранены. Общие 40 UMD-эталонов задают nested/local/undefined/theme reset, gap=4px, ShadowRoot и editor/selection/focus/state при замене функции с тем же контейнером. Сохранены component aliases, lazy load, pointer/keyboard selection, native TreeSelect FormData и существующий Form v1 single-path contract; multiple Cascader paths остаются у владельца. CascaderPanel остаётся inline и не вызывает container getter; styles ShadowRoot принадлежат потребителю. Controller width защищён от переменных предка."
         }
       ]
     },
@@ -5561,7 +5584,14 @@
         "tests/browser/tree-select-theme.spec.ts",
         "tests/browser/fixtures/TreeSelectThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-tree-select-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/fixtures/ant-design-choice-container-reference.json",
+        "tests/browser/fixtures/choice-container-presets.ts",
+        "tests/browser/fixtures/ChoiceContainerCase.svelte",
+        "tests/browser/fixtures/ChoiceContainerContent.svelte",
+        "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
+        "tests/browser/choice-container.spec.ts",
+        "tests/package/choice-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -5613,7 +5643,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Все отфильтрованные видимые узлы рендерятся существующим Tree; listHeight ограничивает native scroll viewport. Rc-trigger/virtual-list/motion/getPopupContainer API остаются отдельными этапами."
+          "note": "Все отфильтрованные видимые узлы рендерятся существующим Tree; listHeight ограничивает native scroll viewport. Rc-trigger alignment/virtual-list/motion API остаются отдельными этапами."
         },
         {
           "id": "source-tree-select-theme",
@@ -5634,6 +5664,22 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходный tree.initComponentToken: семь defaults, финальные overrides, component algorithms/aliases, zero/undefined и custom prefix. Select и TreeSelect scopes объединяются в исходном порядке на поле и dropdown; Tree aliases не применяются к внутреннему дереву. UMD declarations и computed metrics для 17 настроек: single/multiple трёх размеров, tags, suffix/clear, disabled, tree rows/titles/switchers/indent и checkbox checked/mixed/disabled/unchecked. SSR, смена темы, native FormData/selection/focus, поиск и callbacks сохраняются; theme variables панели обновляются отдельно от controller left/top. Native checkbox buttons в source панели используют vendor border/background; native-only темы сохраняют прежние стили. Source compact titleHeight=21px. Остальные config/semantic/virtualization/ref API остаются в работе."
+        },
+        {
+          "id": "popup-container",
+          "title": "Локальный и наследуемый контейнер, исходный trigger и native lifecycle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-choice-container-reference.json",
+            "tests/browser/fixtures/choice-container-presets.ts",
+            "tests/browser/fixtures/ChoiceContainerCase.svelte",
+            "tests/browser/fixtures/ChoiceContainerContent.svelte",
+            "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
+            "tests/browser/choice-container.spec.ts",
+            "tests/package/choice-container.ssr.test.ts"
+          ],
+          "note": "GetPopupContainer → ConfigProvider.getPopupContainer; undefined наследует provider. Getter получает div.ant-select, Cascader custom children передаёт свой DOM trigger; nativeElement сохраняет существующую обёртку. Getter выполняется только в браузере после первого открытия; native SSR shell, top layer и default DOM сохранены. Общие 40 UMD-эталонов задают nested/local/undefined/theme reset, gap=4px, ShadowRoot и editor/selection/focus/state при замене функции с тем же контейнером. Сохранены component aliases, lazy load, pointer/keyboard selection, native TreeSelect FormData и существующий Form v1 single-path contract; multiple Cascader paths остаются у владельца. CascaderPanel остаётся inline и не вызывает container getter; styles ShadowRoot принадлежат потребителю. Controller width защищён от переменных предка."
         }
       ]
     },
@@ -9025,7 +9071,14 @@
         "tests/browser/fixtures/SelectContainerCase.svelte",
         "tests/browser/fixtures/SelectContainerFixtures.svelte",
         "tests/browser/select-container.spec.ts",
-        "tests/package/select-container.ssr.test.ts"
+        "tests/package/select-container.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-choice-container-reference.json",
+        "tests/browser/fixtures/choice-container-presets.ts",
+        "tests/browser/fixtures/ChoiceContainerCase.svelte",
+        "tests/browser/fixtures/ChoiceContainerContent.svelte",
+        "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
+        "tests/browser/choice-container.spec.ts",
+        "tests/package/choice-container.ssr.test.ts"
       ],
       "features": [
         {
@@ -9433,9 +9486,16 @@
             "tests/browser/fixtures/SelectContainerCase.svelte",
             "tests/browser/fixtures/SelectContainerFixtures.svelte",
             "tests/browser/select-container.spec.ts",
-            "tests/package/select-container.ssr.test.ts"
+            "tests/package/select-container.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-choice-container-reference.json",
+            "tests/browser/fixtures/choice-container-presets.ts",
+            "tests/browser/fixtures/ChoiceContainerCase.svelte",
+            "tests/browser/fixtures/ChoiceContainerContent.svelte",
+            "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
+            "tests/browser/choice-container.spec.ts",
+            "tests/package/choice-container.ssr.test.ts"
           ],
-          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour намеренно не читает глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. Полный Menu popup API, Date/Time/RangePicker, TreeSelect/Cascader/Mentions, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
+          "note": "Добавлен исходный getPopupContainer с необязательным trigger и результатом HTMLElement | ShadowRoot. Отсутствующий/undefined prop наследует родителя через исходный truthy merge; theme.inherit=false не сбрасывает container context. Подключены Tabs и ColorPicker с разными source priorities и own-undefined правилами, общие Tooltip/Popover/Popconfirm, Dropdown, Slider и Tooltip Typography; Tour намеренно не читает глобальный getter, как Ant Design. 30 UMD-эталонов задают nesting, local/More overrides, trigger payload, shadow containers и сохранение содержимого при замене функции с тем же контейнером. Native SSR shell и modal fallback сохраняются, browser getter не выполняется на сервере; ShadowRoot styles принадлежат потребителю. 52 дополнительных UMD-эталона подтверждают overlay priorities и visible handle payload Slider, включая особый global-before-legacy порядок; default native inline DOM и retained SSR shells сохранены. Ещё 32 UMD-эталона Select/AutoComplete подтверждают local → global fallback, native root payload, closed timing, search/selection/focus и замену функции с тем же контейнером; custom textarea и multiple сохраняют FormData, theme updates и cleanup. 40 новых UMD-эталонов покрывают TreeSelect и Cascader: исходный local → global fallback, div.ant-select либо custom children trigger, gap=4px, nested/undefined/theme reset, ShadowRoot и сохранение editor/state при замене callback. CascaderPanel игнорирует container context; native refs/lazy/keyboard/theme lifecycle сохраняются. Полный Menu popup API, Date/Time/RangePicker, Mentions, Modal/Drawer и прочие исходные consumers ещё требуют переноса; полный provider API не заявлен."
         }
       ]
     },

@@ -109,6 +109,8 @@ export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectV
   popupMatchSelectWidth?: boolean | number;
   placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
+  /** Локальный getter получает корень Select; undefined наследует ConfigProvider. */
+  getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   /** @defaultValue '' */
   popupClassName?: string;
   rootClassName?: string;

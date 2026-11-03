@@ -10,7 +10,7 @@ export function measureCascaderInput(input: HTMLInputElement): number {
 }
 
 /** Ширина trigger живёт в CSS variable, чтобы popup styles могли перекрывать stretch. */
-export function connectCascaderWidth(popup: HTMLElement, anchor: HTMLElement) {
+export function connectCascaderWidth(popup: HTMLElement, anchor: Element) {
   const view = anchor.ownerDocument.defaultView!;
   function update() {
     popup.style.setProperty('--cascader-anchor-width', `${anchor.getBoundingClientRect().width}px`);

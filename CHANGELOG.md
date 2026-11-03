@@ -9,6 +9,11 @@
 
 ### Added
 
+- Контейнеры TreeSelect и Cascader: локальный getter, ConfigProvider fallback и
+  ShadowRoot с исходным trigger, включая custom children Cascader. Native refs,
+  поиск, lazy load, темы, клавиатура и SSR сохраняются; зазор до popup исправлен
+  на исходные 4 px. CascaderPanel остаётся inline. Добавлены 40 UMD-эталонов
+  и SSR/browser-проверки, controller width не перезаписывается variables предка.
 - Контейнеры Select и AutoComplete: локальный getPopupContainer, наследование
   ConfigProvider и ShadowRoot, исходный DOM trigger и вызов только после открытия.
   Перенос сохраняет поиск, клавиатуру, фокус/выделение, FormData и Select tokens;

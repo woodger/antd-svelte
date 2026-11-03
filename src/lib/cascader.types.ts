@@ -219,6 +219,11 @@ export interface CascaderProps<
   styles?: CascaderSemanticValue<string>;
   /** @defaultValue false */
   popupMatchSelectWidth?: boolean | number;
+  /**
+   * Локальный getter перекрывает ConfigProvider; custom children передаёт свой DOM trigger.
+   * CascaderPanel не использует контейнер popup.
+   */
+  getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
   popupClassName?: string;
   /** @deprecated Используйте popupClassName. */

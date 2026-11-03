@@ -3865,11 +3865,19 @@ MaxTagPlaceholder получает default label и исходные labels/opti
 Custom children получает handlers/ARIA для нативного trigger, который заменяет
 React cloneElement. При нём inputElement отсутствует.
 
+GetPopupContainer получает корень `.ant-select`, а при custom children — DOM trigger
+из snippet. NativeElement при этом сохраняет прежний div обёртки. Локальная функция
+перекрывает ConfigProvider.getPopupContainer; undefined наследует provider.
+Getter выполняется в браузере после первого открытия. ShadowRoot требует собственных
+стилей. Панель сохраняет state, поиск, фокус и выделение при замене функции с тем же
+контейнером; зазор до trigger — исходные 4 px. CascaderPanel остаётся inline и не
+использует глобальный getter.
+
 Standalone Panel использует нативные строки-кнопки и клавиатурный focus между
 ними. Это явная Svelte accessibility adaptation к исходной pointer-only Panel.
 SSR не обращается к DOM и не вызывает loadData; initially open popup отрисован
 hidden до mount. RenderEmpty, prefixCls, произвольные
-popup containers/align/motion, React-specific components/refs/warnings и
+popup align/motion, React-specific components/refs/warnings и
 вывод типа value по произвольному generic ValueField остаются вне этого этапа.
 
 Проверки: [engine](./src/lib/cascader.engine.test.ts),
@@ -4522,9 +4530,18 @@ Source theme объединяет `components.Select` и `components.TreeSelect`
 при SSR; смена темы сохраняет DOM, поиск, выделение, focus, raw FormData и позицию
 открытой панели. В source compact высота узла — 21px. Native-only темы сохранены.
 
+GetPopupContainer получает корневой `.ant-select`; локальная функция перекрывает
+ConfigProvider.getPopupContainer, undefined наследует provider. Getter не вызывается
+на сервере и до первого открытия. Перенос в HTMLElement/ShadowRoot сохраняет
+Select/TreeSelect tokens, поиск, keyboard engine, lazy load и native FormData.
+Зазор до поля — исходные 4 px. При замене функции с тем же контейнером сохраняются
+DOM панели, фокус и выделение; ShadowRoot требует собственных стилей. Сверка
+TreeSelect/Cascader с 40 сценариями официального UMD —
+[choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
+
 Virtual/scrollTo, fieldNames/simple mode, TreeNode children, maxCount/maxTagCount,
 tag/popup render hooks, treeExpandAction, полный semantic/config/ref API,
-legacy React extras и исходные motion/container API ещё не перенесены.
+legacy React extras и исходные motion API ещё не перенесены.
 
 ## Tree
 
@@ -7230,7 +7247,7 @@ ConfigProvider.getPopupContainer задаёт `(trigger?: HTMLElement) => HTMLEl
 Вложенный provider наследует функцию, когда его prop отсутствует или равен undefined;
 theme.inherit=false не сбрасывает эту настройку. Она подключена к Tabs, ColorPicker,
 Tooltip, Popover, Popconfirm, Dropdown, Slider, Tooltip внутри Typography,
-Select и AutoComplete;
+Select, AutoComplete, TreeSelect и Cascader;
 остальные потребители исходного API ещё требуют переноса. Tour использует
 только собственный getPopupContainer, как Ant Design 6.6.8.
 Функция вызывается только в браузере. Без выбранной функции сохраняется прежнее
@@ -7246,6 +7263,8 @@ DOM-контейнером сохраняет popup, его state, фокус и
 собственными стилями потребителя. При закрытии сохраняется прежний native lifecycle.
 Select/AutoComplete добавляют 32 эталона в
 [select-container](./tests/browser/select-container.spec.ts), `?fixture=select-container`.
+TreeSelect/Cascader добавляют 40 эталонов в
+[choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
 Статические defaultSeed, default/dark/compact algorithms и getDesignToken
 работают без context и DOM. Их source-округления, overrides и ограничения описаны

@@ -18,6 +18,8 @@
   let selections = $state(0);
   let focusEvents = $state(0);
   let openings = $state<boolean[]>([]);
+  let nativeRoot = $state<HTMLDivElement>();
+  let editor = $state<HTMLInputElement>();
   const sizes = ['middle', 'small', 'large'] as const;
   const treeData = [{ value: 'p', title: 'Parent', children: [
     { value: 'a', title: 'Alpha' }, { value: 'b', title: 'Beta' },
@@ -67,6 +69,7 @@
           <TreeSelect {treeData} defaultValue={['a']} multiple disabled class="tree-token-disabled"
             aria-label="Themed disabled tree" style="width:240px" />
           <TreeSelect {treeData} {value} class="tree-token-popup" name="project"
+            bind:nativeElement={nativeRoot} bind:inputElement={editor}
             aria-label="Themed tree popup" style="width:240px" allowClear treeDefaultExpandAll
             {listHeight} popupMatchSelectWidth={width}
             showSearch={{ searchValue: search, filterTreeNode: false, onSearch: next => {
@@ -85,6 +88,11 @@
       </form>
     </ConfigProvider>
   {/if}
+  <button type="button" onclick={() => editor?.focus()}>Focus bound TreeSelect</button>
+  <output aria-label="TreeSelect native refs">{JSON.stringify({
+    root: Boolean(nativeRoot), input: Boolean(editor),
+    contains: Boolean(nativeRoot && editor && nativeRoot.contains(editor))
+  })}</output>
   <output aria-label="TreeSelect theme changes">{changes}</output>
   <output aria-label="TreeSelect theme searches">{searches}</output>
   <output aria-label="TreeSelect theme selections">{selections}</output>

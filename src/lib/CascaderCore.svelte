@@ -35,7 +35,8 @@
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
-  import { connectPopup } from './popup.dom';
+  import { connectPopup, getPopupActiveElement } from './popup.dom';
+  import { createPopupContainer } from './popup-container.model.svelte.js';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import CascaderColumns from './CascaderColumns.svelte';
@@ -116,6 +117,7 @@
     onfocus,
     onblur,
     onPopupScroll,
+    getPopupContainer,
     onclick,
     onmousedown,
     onfocusin,
@@ -203,6 +205,9 @@
   let active = $state.raw<CascaderRawValue[]>([]);
   let searchKey = $derived(typeof active[0] === 'string' ? active[0] : null);
   let loadingKeys = $state.raw<string[]>([]);
+  let root = $state<HTMLDivElement>();
+  let editor = $state<HTMLInputElement>();
+  let anchor = $state<Element>();
   let popup = $state<HTMLDivElement>();
   let contentElement = $state<HTMLDivElement>();
   let responsiveCount = $state(Number.POSITIVE_INFINITY);
@@ -218,6 +223,13 @@
     css.popup.root, dropdownStyle,
     typeof popupMatchSelectWidth === 'number' ? `width:${popupMatchSelectWidth}px` : undefined
   ].filter(Boolean).join(';'));
+  const portal = createPopupContainer(() => ({
+    open: !panel && visible,
+    reference: anchor,
+    getPopupContainer: panel ? undefined : getPopupContainer || config.getPopupContainer,
+    themeStyle: [componentStyle, popupStyle].filter(Boolean).join(';'),
+    preserveVariables: ['--cascader-anchor-width']
+  }));
   let controlId = $derived(id ?? (!panel ? field?.id : undefined) ?? `ant-cascader-${generated}`);
   let listId = $derived(`${controlId}-list`);
   let activeKey = $derived(search ? searchKey : active.length ? cascaderPathKey(active) : null);
@@ -241,6 +253,31 @@
   let previousVisible: boolean | undefined;
   let previousRawOpen: boolean | undefined;
   let previousFirst: CascaderPath | undefined;
+
+  $effect(() => {
+    nativeElement = root;
+    return () => { nativeElement = undefined; };
+  });
+  $effect(() => {
+    inputElement = editor;
+    return () => { inputElement = undefined; };
+  });
+  $effect(() => {
+    const element = root;
+    if (!element) return;
+    if (panel || !children) {
+      anchor = element;
+      return;
+    }
+
+    function update() {
+      anchor = element!.firstElementChild ?? element;
+    }
+    update();
+    const observer = new element.ownerDocument.defaultView!.MutationObserver(update);
+    observer.observe(element, { childList: true });
+    return () => observer.disconnect();
+  });
 
   $effect(() => {
     const next = { value, open, search: searchConfig.searchValue };
@@ -275,11 +312,11 @@
     if (pending.length !== loadingKeys.length) loadingKeys = pending;
   });
   $effect(() => {
-    if (!inputElement || !isMultiple) return;
+    if (!editor || !isMultiple) return;
     void inputValue;
     void resolvedSize;
     void config.theme;
-    const input = inputElement;
+    const input = editor;
     const previous = input.style.getPropertyValue('--select-input-width');
     input.style.setProperty('--select-input-width', `${measureCascaderInput(input)}px`);
     return () => {
@@ -288,12 +325,13 @@
     };
   });
   $effect(() => {
-    if (panel || !visible || !popup || !nativeElement) return;
+    if (panel || !visible || !popup || !anchor) return;
     void popupStyle;
     const position = placement ?? (rtl ? 'bottomRight' : 'bottomLeft');
-    const disconnectWidth = connectCascaderWidth(popup, nativeElement);
-    const disconnectPopup = connectPopup(popup, nativeElement, {
+    const disconnectWidth = connectCascaderWidth(popup, anchor);
+    const disconnectPopup = connectPopup(popup, anchor, {
       placement: position.startsWith('top') ? 'top' : 'bottom',
+      gap: 4,
       align: position.endsWith('Right') ? 'right' : 'left',
       autoAdjustOverflow: true,
       maxWidth: '100vw',
@@ -380,7 +418,7 @@
     changeSearch(next);
     if (next) requestOpen(true);
     void tick().then(() => {
-      if (inputElement) inputElement.value = inputValue;
+      if (editor) editor.value = inputValue;
     });
   }
   function clear() {
@@ -395,14 +433,16 @@
     choose(path);
   }
   function blurWithin(event: FocusEvent) {
-    const root = nativeElement;
-    if (!root) return;
+    const element = root;
+    if (!element) return;
     const target = event.relatedTarget;
-    if (target instanceof Node && (root.contains(target) || popup?.contains(target))) return;
+    if (target instanceof Node && (element.contains(target) || popup?.contains(target))) return;
     queueMicrotask(() => {
-      if (nativeElement !== root) return;
-      const current = root.ownerDocument.activeElement;
-      if (current && (root.contains(current) || popup?.contains(current))) return;
+      if (root !== element || !element.isConnected) return;
+      const current = getPopupActiveElement(element);
+      const popupTarget = popup && getPopupActiveElement(popup);
+      if (current && element.contains(current)
+        || popupTarget && popup?.contains(popupTarget)) return;
       focused = false;
       enterHeld = false;
       field?.onBlur();
@@ -416,7 +456,7 @@
   function handleKeyDown(event: KeyboardEvent) {
     if (blocked || event.isComposing || event.defaultPrevented) return;
     const key = event.key;
-    const now = nativeElement?.ownerDocument.defaultView?.performance.now() ?? 0;
+    const now = root?.ownerDocument.defaultView?.performance.now() ?? 0;
     const clearLocked = now < clearLockUntil ? clearLock : null;
     if (search || clearLocked === null) clearLock = Boolean(search);
     clearLockUntil = now + 250;
@@ -460,14 +500,14 @@
       ? `${item.text.slice(0, maxTagTextLength)}...` : item.text;
   }
   export function focus(options?: FocusOptions) {
-    const target = inputElement ?? nativeElement?.querySelector<HTMLElement>(
+    const target = editor ?? root?.querySelector<HTMLElement>(
       'button,a[href],input,[tabindex="0"]'
     );
     target?.focus(options);
   }
   export function blur() {
-    const target = nativeElement?.ownerDocument.activeElement;
-    if (target instanceof HTMLElement && nativeElement?.contains(target)) target.blur();
+    const target = root && getPopupActiveElement(root);
+    if (target instanceof HTMLElement && root?.contains(target)) target.blur();
   }
 </script>
 
@@ -545,7 +585,7 @@
 {/snippet}
 
 {#if panel}
-  <div {...attributes} bind:this={nativeElement} id={controlId} dir={resolvedDirection}
+  <div {...attributes} bind:this={root} id={controlId} dir={resolvedDirection}
     class={['ant-cascader-panel ant-cascader-css-var', !options.length && 'ant-cascader-panel-empty',
       cascaderTheme.className, cascaderTheme.className && 'ant-cascader-source-theme',
       className, rootClassName]}
@@ -553,7 +593,7 @@
     {@render menus()}
   </div>
 {:else}
-  <div {...rootAttributes} bind:this={nativeElement} role="presentation" dir={resolvedDirection}
+  <div {...rootAttributes} bind:this={root} role="presentation" dir={resolvedDirection}
     class={[
       'ant-cascader ant-cascader-css-var',
       cascaderTheme.className,
@@ -588,7 +628,7 @@
       if (event.defaultPrevented || blocked || children) return;
       if (event.target instanceof Element && !event.target.closest('button')) {
         const keepOpen = visible && (!isMultiple && canSearch
-          || isMultiple && event.target === inputElement);
+          || isMultiple && event.target === editor);
         if (!keepOpen) requestOpen(!visible);
       }
     }} onfocusin={event => {
@@ -695,7 +735,7 @@
         {/if}
         <div class={['overflow-item', cascaderTheme.className && isMultiple
           && 'ant-select-content-item ant-select-content-item-suffix']}>
-          <input bind:this={inputElement} id={controlId} type="text" role={attributes.role ?? 'combobox'}
+          <input bind:this={editor} id={controlId} type="text" role={attributes.role ?? 'combobox'}
             class={['ant-select-input', classes.input]} style={css.input}
             aria-haspopup="menu" aria-controls={visible ? listId : undefined}
             aria-expanded={visible} aria-activedescendant={visible ? activeId : undefined}
@@ -750,6 +790,7 @@
         style={[untrack(() => componentStyle), popupStyle].filter(Boolean).join(';')}
         {@attach node => connectComponentTheme(node,
           [componentStyle, popupStyle].filter(Boolean).join(';'))}
+        {@attach portal}
         onfocusout={blurWithin}>
         {#if popupRender || dropdownRender}{@render (popupRender || dropdownRender)!(menus)}
         {:else}{@render menus()}{/if}
