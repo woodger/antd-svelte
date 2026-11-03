@@ -5971,7 +5971,19 @@
         "tests/browser/fixtures/AvatarResponsiveFixtures.svelte",
         "tests/browser/fixtures/ant-design-avatar-responsive-reference.json",
         "tests/browser/avatar-responsive.spec.ts",
-        "tests/package/avatar-responsive.ssr.test.ts"
+        "tests/package/avatar-responsive.ssr.test.ts",
+        "src/lib/avatar.types.ts",
+        "src/lib/AvatarGroupOverflow.svelte",
+        "src/lib/popup.dom.ts",
+        "src/lib/vendor/avatar.css",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/AvatarSourceCase.svelte",
+        "tests/browser/fixtures/AvatarSourceFixtures.svelte",
+        "tests/browser/fixtures/AvatarSourceState.svelte",
+        "tests/browser/fixtures/avatar-source-presets.ts",
+        "tests/browser/fixtures/ant-design-avatar-source-reference.json",
+        "tests/browser/avatar-source.spec.ts",
+        "tests/package/avatar-source.ssr.test.ts"
       ],
       "features": [
         {
@@ -6039,10 +6051,37 @@
         {
           "id": "src-snippet",
           "title": "src как Snippet",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/Avatar.svelte",
+            "src/lib/avatar.types.ts",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/popup.dom.ts",
+            "src/lib/vendor/avatar.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/AvatarSourceCase.svelte",
+            "tests/browser/fixtures/AvatarSourceFixtures.svelte",
+            "tests/browser/fixtures/AvatarSourceState.svelte",
+            "tests/browser/fixtures/avatar-source-presets.ts",
+            "tests/browser/fixtures/ant-design-avatar-source-reference.json",
+            "tests/browser/avatar-source.spec.ts",
+            "tests/package/avatar-source.ssr.test.ts"
+          ],
+          "note": "Готовый Snippet передаётся без wrapper и имеет приоритет над icon/children даже при пустом содержимом. Атрибуты, ошибки и интерактивность принадлежат Snippet; Avatar.srcSet/draggable/crossOrigin/onError внутрь не передаются. Состояние сохраняется при размере/теме/атрибутах и пересоздаётся при смене вида src. Перенесено исходное Image display:block; preview работает отдельно и внутри AvatarGroup overflow, родительский Popover остаётся видимым, Escape закрывает viewer раньше родителя с возвратом фокуса. Именованный Snippet имеет role=group, неназванный сохраняет собственную доступность, явный aria-hidden делает корень inert. Прежние строковые изображения, пассивные icon/children и ошибки не изменены. 14 UMD-эталонов покрывают DOM/CSS/SSR, ошибки, caller state и preview lifecycle; дополнительные browser checks защищают keyboard, nonmodal preview и unmount."
+        },
+        {
+          "id": "advanced-api",
+          "title": "PrefixCls, rootClassName и полный config/DOM/ref API",
           "state": "missing",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Src принимает строку; icon/children Snippet поддерживаются."
+          "evidence": [
+            "readme.md",
+            "src/lib/avatar.types.ts",
+            "src/lib/ConfigProvider.svelte"
+          ],
+          "note": "Src Snippet и responsive size не закрывают полный React API. PrefixCls/rootClassName, ConfigProvider.avatar className/style, произвольные DOM props и исходный ref не перенесены; пассивные Svelte/native contracts сохранены. Semantic classNames/styles не объявлены исходным Avatar 6.6.8."
         },
         {
           "id": "display-theme-tokens",

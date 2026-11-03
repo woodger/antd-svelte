@@ -5526,22 +5526,32 @@ BadgeStatus, BadgeColor, BadgeSize, BadgeText, BadgeContext и BadgeLocale.
 
 ```svelte
 <script lang="ts">
-  import { Avatar, Badge } from 'antd-svelte';
+  import { Avatar, Badge, Image } from 'antd-svelte';
 </script>
 
 <Avatar src="/anna.jpg" alt="Анна Новикова">АН</Avatar>
 <Avatar shape="square" size={48} alt="Дмитрий Орлов">ДО</Avatar>
 <Badge count={3}><Avatar alt="Вера Смирнова" size="large">ВС</Avatar></Badge>
+{#snippet photo()}<Image src="/anna.jpg" alt="Фото Анны" />{/snippet}
+<Avatar src={photo} size={64} alt="Анна Новикова" />
 ```
 
-Avatar — пассивное представление участника. Src принимает строку; пустой или
-отсутствующий src выбирает fallback. Изображение имеет приоритет над icon
-Snippet, затем children Snippet. При ошибке загрузки onError вызывается один раз
+Avatar отображает изображение, icon или инициалы участника. Src принимает строку
+или Snippet; пустая строка и отсутствующий src выбирают fallback.
+Изображение имеет приоритет над icon Snippet, затем children Snippet.
+При ошибке загрузки строки src onError вызывается один раз
 для текущего изображения; false сохраняет его и отменяет fallback. Остальные
 результаты выбирают icon или children. Смена src/srcSet разрешает новую загрузку,
 в том числе возврат к ранее ошибочному адресу. Изменение только обработчика
 ошибки не повторяет загрузку. SrcSet сам по себе не включает режим изображения.
 Поддерживаются нативные draggable и crossOrigin.
+
+Src Snippet отображается напрямую, даже если он пуст, и имеет приоритет над
+icon/children. Его DOM, атрибуты, события и интерактивность принадлежат вызывающему
+коду: Avatar не передаёт внутрь srcSet, draggable, crossOrigin и onError.
+В частности, Image сохраняет собственные fallback и preview. Изменение размера,
+темы и атрибутов Avatar сохраняет состояние Snippet; смена вида src удаляет
+прежнее содержимое. При SSR Snippet выводится без обращения к browser API.
 
 Ошибка привязана к версии пары src/srcSet. Позднее событие старого изображения
 игнорируется; обработчик может синхронно заменить src, и новый источник
@@ -5594,14 +5604,24 @@ Gap задаёт свободное место по краям текста, п�
 fallback или unmount observer отключается. На SSR инициалы видимы без измерения;
 подгонка выполняется после mount. Собственной анимации нет.
 
-Alt, aria-label или aria-labelledby задают полное имя корню с role=img;
+Для строки src, icon и children Alt, aria-label или aria-labelledby задают
+полное имя корню с role=img;
 оно сохраняется при смене изображения на fallback. Aria-describedby описывает
-этот корень. Внутренние изображения и snippets скрыты от screen reader, а
-snippets также inert: Avatar не содержит интерактивных действий. Без имени или
+этот корень. Внутренний img строки src и icon/children скрыты от screen reader,
+icon/children также inert. Без имени или
 с aria-hidden=true весь Avatar декоративный. Для действия оберните Avatar
 нативной кнопкой/ссылкой, задайте ей имя и при необходимости скройте повторяющий
 его Avatar. Остановок Tab, live-region, автоматического фокуса и root onclick
 компонент не добавляет. Title задаёт нативную подсказку.
+
+Для src Snippet именованный корень имеет role=group и сохраняет доступность
+вложенных изображений и controls. Без имени содержимое использует собственные
+подписи. Явный aria-hidden=true скрывает такой Avatar и делает его inert.
+Не оборачивайте интерактивный Snippet ещё одной кнопкой или ссылкой.
+Эталонные 14 вариантов закреплены в
+[UMD-снимках](./tests/browser/fixtures/ant-design-avatar-source-reference.json),
+проверки — [browser](./tests/browser/avatar-source.spec.ts) и
+[SSR](./tests/package/avatar-source.ssr.test.ts), фикстура — `?fixture=avatar-source`.
 
 Галерея `/ant-design#avatar` переключает содержимое, форму, размер, gap и отмену
 fallback. Отдельный список участников сочетает Avatar с Badge и профилем в
@@ -5610,8 +5630,8 @@ Drawer. Выбор фото/инициалов/ошибочного источн
 использует локальные data URL без внешней сети и persistence.
 
 AvatarProps, AvatarShape и AvatarSize экспортируются через index.ts.
-Src Snippet, Image-интеграция, semantic classNames/styles
-и prefixCls/rootClassName в первую версию не входят.
+PrefixCls/rootClassName, ConfigProvider.avatar и полный DOM/ref API пока не
+перенесены. Semantic classNames/styles исходный Avatar 6.6.8 не объявляет.
 
 ## AvatarGroup
 
@@ -5655,8 +5675,12 @@ mouseEnterDelay/mouseLeaveDelay существующего Popover. По умо�
 hover/click и top: нативная кнопка открывается кликом, Enter/Space или наведением.
 Для клавиатуры при собственном trigger используйте click или focus. Popover
 показывает именованный список скрытых участников с полными label; аватары
-в этом списке декоративные. Они создаются только при открытии и удаляются при
+в этом списке декоративные, кроме src Snippet, сохраняющих собственную
+доступность и controls; явный aria-hidden=true делает их декоративными.
+Они создаются только при открытии и удаляются при
 закрытии. Переход элемента между видимой частью и Popover создаёт новый Avatar.
+Image preview внутри списка сохраняет открытый Popover: первый Escape закрывает
+preview и возвращает фокус изображению, следующий — Popover с возвратом к +N.
 
 Корень — именованная группа, собственных остановок Tab и live-region у неё нет.
 Кнопка +N имеет type=button, доступное имя с полным количеством и ARIA-связь с
@@ -7570,8 +7594,9 @@ toggle-кнопка с aria-pressed и нативной клавиатурой. 
 Badge сохраняет интерактивные children при изменениях и скрытии индикатора.
 Полное значение доступно обычным текстом; descriptionId связывает его с control
 владельца. Автоматических объявлений и дополнительных остановок Tab нет.
-Avatar сохраняет полное имя при fallback и подгонке текста. Без имени он
-декоративный; icon/children inert и не добавляют controls в порядок Tab.
+Avatar сохраняет полное имя при fallback и подгонке текста. Строка src и
+icon/children без имени декоративны; icon/children inert. Src Snippet сохраняет
+собственные controls; именованный корень — group, явный aria-hidden делает его inert.
 AvatarGroup раскрывает скрытых участников нативной кнопкой в именованный
 Popover. Удаление overflow/группы сохраняет доступный фокус и выбор владельца.
 
@@ -7756,6 +7781,8 @@ Avatar проверяется на размеры/gap, масштаб текст
 Chromium проверяет загрузку/fallback/onError, смену src/srcSet, поздние события,
 подгонку после скрытия/изменения шрифта и размеров, очистку настоящего
 ResizeObserver, нативную кнопку владельца, темы/compact/RTL и Modal/Drawer.
+Отдельные source-эталоны проверяют src Snippet, владение атрибутами/ошибками,
+сохранение состояния, Image preview, доступность и вложенный Popover.
 Галерея проверяет начальное ошибочное изображение из SSR, профили участников,
 сохранение/сброс, узкий экран и рендеринг до гидратации; модель — изоляцию и
 обновление только выбранного участника.
@@ -7974,8 +8001,9 @@ antStatusProcessing из того же архива. Селекторы Radio/Sp
 сохранены. Badge.svelte добавляет standalone-позиционирование без ScrollNumber,
 описания, логические offsets, обводку под фон темы и reduced motion.
 Новые зависимости, иконки и лицензии не добавлены.
-[vendor/avatar.css](./src/lib/vendor/avatar.css) содержит 16 правил Avatar из того же
-архива: Group и интеграции с Image/anticon исключены, declarations сохранены.
+[vendor/avatar.css](./src/lib/vendor/avatar.css) содержит 17 правил Avatar из того же
+архива, включая display:block для Image. Group и anticon исключены,
+declarations сохранены.
 Корни ограничены :where(.ant-avatar-css-var), исходный класс токенов заменён
 на .ant-avatar-css-var. Avatar.svelte добавляет Svelte snippets, доступное имя,
 версию источника изображения и нативные listeners с cleanup; avatar.dom.ts

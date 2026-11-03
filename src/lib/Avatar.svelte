@@ -36,11 +36,12 @@
   const theme = useToken();
   const breakpoint = createBreakpoint();
   let host = $state<HTMLSpanElement>();
-  let sourceSrc = $derived(src);
+  let imageSnippet = $derived(typeof src === 'function' ? src : undefined);
+  let sourceSrc = $derived(typeof src === 'string' ? src : undefined);
   let sourceSet = $derived(srcSet);
   let source = $derived({ src: sourceSrc, srcSet: sourceSet });
   let failed = $state.raw<typeof source>();
-  let hasImage = $derived(Boolean(source.src) && failed !== source);
+  let hasImage = $derived(Boolean(imageSnippet) || Boolean(source.src) && failed !== source);
   let resolvedSize = $derived(resolveAvatarSize(size, config.componentSize));
   let responsive = $derived(typeof resolvedSize === 'object'
     && Object.keys(resolvedSize).some(key => gridBreakpoints.includes(key as GridBreakpoint)));
@@ -75,7 +76,7 @@
   );
   let resolvedGap = $derived(normalizeAvatarGap(gap));
   let named = $derived(Boolean(ariaLabel || ariaLabelledby || alt));
-  let hidden = $derived(ariaHidden || !named);
+  let hidden = $derived(ariaHidden || !imageSnippet && !named);
 
   function watchImage(node: HTMLImageElement, request: typeof source) {
     let reported = false;
@@ -110,7 +111,12 @@
   @media (prefers-reduced-motion: reduce) { .ant-avatar, .ant-avatar-string { animation: none; transition: none; } }
 </style>
 
-<span bind:this={host} {id} {title} role={!hidden ? 'img' : undefined} aria-label={ariaLabel ?? (ariaLabelledby ? undefined : alt || undefined)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} aria-hidden={hidden || undefined} dir={config.direction} class={[
+<span bind:this={host} {id} {title}
+  role={!hidden && named ? imageSnippet ? 'group' : 'img' : undefined}
+  aria-label={ariaLabel ?? (ariaLabelledby ? undefined : alt || undefined)}
+  aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby}
+  aria-hidden={hidden || undefined} inert={imageSnippet && ariaHidden || undefined}
+  dir={config.direction} class={[
     'ant-avatar ant-avatar-css-var',
     componentTheme.className,
     `ant-avatar-${shape}`,
@@ -120,5 +126,5 @@
     icon && 'ant-avatar-icon',
     className
   ]} style={rootStyle}>
-  {#if hasImage}{#key source}{@const request = source}<img src={request.src} srcset={request.srcSet} alt="" aria-hidden="true" {draggable} crossorigin={crossOrigin} {@attach node => watchImage(node, request)} />{/key}{:else if icon}<span class="ant-avatar-icon-content" aria-hidden="true" inert>{@render icon()}</span>{:else}<span class="ant-avatar-string" aria-hidden="true" inert {@attach fitText}>{@render children?.()}</span>{/if}
+  {#if imageSnippet}{@render imageSnippet()}{:else if hasImage}{#key source}{@const request = source}<img src={request.src} srcset={request.srcSet} alt="" aria-hidden="true" {draggable} crossorigin={crossOrigin} {@attach node => watchImage(node, request)} />{/key}{:else if icon}<span class="ant-avatar-icon-content" aria-hidden="true" inert>{@render icon()}</span>{:else}<span class="ant-avatar-string" aria-hidden="true" inert {@attach fitText}>{@render children?.()}</span>{/if}
 </span>

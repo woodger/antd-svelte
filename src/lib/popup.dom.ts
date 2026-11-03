@@ -58,7 +58,8 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       width: visual?.width ?? view.innerWidth,
       height: visual?.height ?? view.innerHeight
     };
-    const modal = document.querySelector('dialog:modal');
+    const modal = getPopupActiveElement(popup)?.closest('dialog:modal')
+      ?? document.querySelector('dialog:modal');
     const zeroAllowed = typeof options.allowZeroSize === 'function'
       ? options.allowZeroSize() : options.allowZeroSize;
     const horizontalVisible = zeroAllowed && rect.width === 0
@@ -72,7 +73,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       && anchor.getClientRects().length
       && (zeroAllowed || rect.width && rect.height)
       && (options.allowOffscreenAnchor || horizontalVisible && verticalVisible)
-      && (!modal || modal.contains(anchor));
+      && (!modal || modal.contains(anchor) || popup.contains(modal));
 
     if (!visible) {
       hide();
@@ -140,6 +141,10 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   }
 
   function handleKeydown(event: KeyboardEvent) {
+    const dialog = getPopupActiveElement(popup)?.closest('dialog[open]');
+    // Вложенный native dialog получает свои keys раньше содержащего его popup.
+    if (dialog && popup.contains(dialog) && !dialog.contains(anchor)) return;
+
     const current = shown && !anchor.closest('[inert]')
       && openPopups.get(document)?.findLast(element => !element.inert) === popup;
     if (current && !event.defaultPrevented && event.key !== 'Escape')

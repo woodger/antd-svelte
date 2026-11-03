@@ -7,7 +7,8 @@ export type AvatarSize = 'small' | 'medium' | 'large' | number | GridResponsive<
 
 /** Аватар с приоритетом изображения, icon и текста и fallback при ошибке загрузки. */
 export interface AvatarProps {
-  src?: string;
+  /** Строкой управляет Avatar; готовый Snippet сохраняет собственные attrs/events и интерактивность. */
+  src?: string | Snippet;
   srcSet?: string;
   alt?: string;
   crossOrigin?: '' | 'anonymous' | 'use-credentials';

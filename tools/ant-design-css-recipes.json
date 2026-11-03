@@ -2,13 +2,12 @@
   {
     "id": "avatar",
     "output": "src/lib/vendor/avatar.css",
-    "expectedRules": 16,
+    "expectedRules": 17,
     "include": [
       "\\.ant-avatar(?![\\w])"
     ],
     "exclude": [
       "ant-avatar-group",
-      "ant-image-img",
       "\\.anticon"
     ],
     "replacements": [
@@ -22,7 +21,7 @@
       }
     ],
     "keyframes": [],
-    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Avatar image/icon/text; исключены Group и интеграции с Image/anticon.\n * Корни ограничены :where(.ant-avatar-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Avatar image/icon/text и Image display; исключены Group и anticon.\n * Корни ограничены :where(.ant-avatar-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
     "id": "avatar-group",

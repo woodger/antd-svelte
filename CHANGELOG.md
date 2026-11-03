@@ -9,6 +9,12 @@
 
 ### Added
 
+- Avatar.src принимает Svelte Snippet с исходным приоритетом и собственными
+  атрибутами, событиями и состоянием. Поддержана интеграция с Image и preview,
+  включая AvatarGroup overflow; перенесено исходное CSS-правило Image.
+  Вложенный dialog сохраняет родительский popup и первым обрабатывает клавиатуру.
+  Добавлены 14 UMD-эталонов и SSR/browser-проверки; прежние строковые изображения,
+  icon/children, доступность и fallback сохранены.
 - Адаптивный Avatar.size: семь source breakpoints, sparse/zero/undefined maps,
   исходный font-size, screen* tokens и приоритеты style/AvatarGroup/ConfigProvider.
   Сохранены SSR, DOM/focus, image fallback, text fit и overflow; добавлены
