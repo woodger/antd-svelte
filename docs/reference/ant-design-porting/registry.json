@@ -7973,6 +7973,12 @@
           "local": [
             "CheckableTag"
           ]
+        },
+        {
+          "upstream": "Tag.CheckableTagGroup",
+          "local": [
+            "CheckableTagGroup"
+          ]
         }
       ],
       "dependencies": [
@@ -8053,7 +8059,16 @@
         "tests/browser/tag-hydration.spec.ts",
         "tests/browser/fixtures/tag-close-hydration.server.ts",
         "tests/browser/fixtures/tag-close-hydration.client.ts",
-        "tests/browser/fixtures/tag-close-hydration.html"
+        "tests/browser/fixtures/tag-close-hydration.html",
+        "src/lib/CheckableTagGroup.svelte",
+        "src/lib/vendor/tag-group.css",
+        "tests/browser/tag-group.spec.ts",
+        "tests/browser/tag-group-metrics.ts",
+        "tests/browser/fixtures/TagGroupCase.svelte",
+        "tests/browser/fixtures/TagGroupFixtures.svelte",
+        "tests/browser/fixtures/tag-group-presets.ts",
+        "tests/browser/fixtures/ant-design-tag-group-reference.json",
+        "tests/package/tag-group.ssr.test.ts"
       ],
       "features": [
         {
@@ -8129,14 +8144,14 @@
         },
         {
           "id": "remaining-api",
-          "title": "Оставшийся API Tag: prefixes и CheckableTagGroup",
+          "title": "Оставшийся API Tag: prefixes",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md",
             "src/lib/tag.types.ts"
           ],
-          "note": "Пока не перенесены локальный prefixCls и Tag.CheckableTagGroup. Прежние native button/aria-pressed, close hit target/focus recovery, content wrapping и декоративные Snippet wrappers сохраняются; эти границы не означают идентичный React DOM."
+          "note": "Пока не перенесён локальный prefixCls Tag/CheckableTag/CheckableTagGroup. Прежние native button/aria-pressed, close hit target/focus recovery, content wrapping и декоративные Snippet wrappers сохраняются; эти границы не означают идентичный React DOM."
         },
         {
           "id": "source-links-closable",
@@ -8165,6 +8180,26 @@
             "tests/browser/fixtures/tag-close-hydration.html"
           ],
           "note": "Перенесены native href/target, HTMLAttributes и bind:nativeElement, source props/context/fallback приоритеты closeIcon/closable, scalar/Snippet/blank glyphs и ARIA-only поля. Closable.disabled/afterClose у Tag игнорируются, как upstream; Tag.disabled управляет native control. Keyboard keydown/repeat/cancellation и предотвращение навигации при закрытии сверены с 55 UMD-случаями и семью обратимыми обновлениями. Hover/active/keyboard focus проверяются для root и descendant ссылок, включая disabled. Четыре link rules и scoped общий reset из 14 rules извлекаются из закреплённого архива. Явные a/span branches сохраняют SSR DOM/focus; постоянные browser hydration cases используют свежий SSR output. Сохранены прежние native removal/ref cleanup, описанная closeLabel/description граница, focus recovery, inert Snippet и guard уже отменённого close click; полный аудит Tag ещё не завершён."
+        },
+        {
+          "id": "source-checkable-group",
+          "title": "CheckableTagGroup: выбор, options и semantic styles",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/CheckableTagGroup.svelte",
+            "src/lib/tag.types.ts",
+            "src/lib/vendor/tag-group.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/tag-group.spec.ts",
+            "tests/browser/tag-group-metrics.ts",
+            "tests/browser/fixtures/TagGroupCase.svelte",
+            "tests/browser/fixtures/TagGroupFixtures.svelte",
+            "tests/browser/fixtures/tag-group-presets.ts",
+            "tests/browser/fixtures/ant-design-tag-group-reference.json",
+            "tests/package/tag-group.ssr.test.ts"
+          ],
+          "note": "Single/multiple, controlled/defaultValue и переход к undefined по useControlledState 1.14.0, строгие типы значений, off-list values, порядок добавления/удаления и callbacks. Primitive/object options, Snippet labels, option className/style, root/item semantic objects/functions и приоритет context/local/option styles. Общий Tag context и исходный raw disabled, native div ref, ARIA/data filter, RTL и token gap. 34 сценария официальной UMD-сборки описывают начальные состояния и обновления. Существующие native CheckableTag button/aria-pressed, Enter, disabled, focus recovery и отсутствие FormData сохраняются; это не идентичный React DOM. PrefixCls остаётся отдельно неперенесённым."
         }
       ]
     },

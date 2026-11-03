@@ -183,6 +183,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Steps | Управляемые этапы, статусы, snippets, нативные кнопки, horizontal/vertical, medium/small, локаль, темы и восстановление фокуса |
 | Tag | Preset/status/CSS colors, варианты и legacy aliases, semantic styles, ConfigProvider.tag, snippets и отменяемое закрытие |
 | CheckableTag | Управляемый checked/onChange, click/keyboard callbacks, DOM attrs/ref, нативная toggle-кнопка, aria-pressed и disabled |
+| CheckableTagGroup | Одиночный/множественный выбор, controlled/defaultValue, options, семантические стили и native ref |
 | Badge | Числовой счётчик, overflow/showZero/dot, статусы/preset цвета, string/Snippet text, размеры, offset и доступное полное значение |
 | Avatar | Изображение, icon/children fallback, circle/square, именованные/числовые/адаптивные размеры, подгонка текста и доступное имя |
 | AvatarGroup | Типизированные items, стабильные ключи, общие размеры/форма, перекрытие, max.count и скрытые участники в Popover |
@@ -5362,7 +5363,7 @@ Styles.root/style перекрывают tokens, а titleSpan по-прежне�
 и фокуса, а также production hydration. Рецепт timeline воспроизводит 43 правила
 из того же закреплённого CSS-архива; общие Steps не дублируются.
 
-## Tag и CheckableTag
+## Tag, CheckableTag и CheckableTagGroup
 
 ```svelte
 <script lang="ts">
@@ -5492,6 +5493,46 @@ Type=button и aria-pressed остаются собственными атриб
 фильтры, их объединение и связь с Form/Table принадлежат владельцу; скрытых
 полей FormData и автоматической интеграции с FormItem нет.
 
+CheckableTagGroup — отдельный export, соответствующий Tag.CheckableTagGroup.
+Options принимает строки, числа или records с value, label, className и style;
+label также принимает Snippet. Значения сохраняют тип и должны быть уникальными
+стабильными ключами. Группа без options пуста; children не подменяют options.
+
+```svelte
+<script lang="ts">
+  import { CheckableTagGroup } from 'antd-svelte';
+
+  let selected = $state<string[]>(['Books']);
+</script>
+
+<CheckableTagGroup multiple options={['Movies', 'Books', 'Music']}
+  value={selected} onChange={next => { selected = next; }} />
+```
+
+Без multiple повторное нажатие выбранной метки возвращает null. В multiple
+callback получает массив: добавление сохраняет порядок текущих значений,
+удаление сохраняет остальные, включая значения вне options. Value полностью
+управляется владельцем; отказ принять callback сохраняет checked. Без value
+состояние хранится внутри, defaultValue читается только при создании. Смена
+value на undefined сбрасывает внутреннее значение, как useControlledState upstream;
+callback при внешнем обновлении не вызывается. Bind:value не поддерживается.
+
+ClassNames/styles задают root/item объектом или callback с raw props группы.
+Приоритет root styles: context styles.root, context style, local styles.root,
+local style. Item получает context style CheckableTag, context styles.item,
+local styles.item и option.style. Context class относится к группе и меткам;
+local class/rootClassName — к группе, option.className — к метке. Общие callbacks
+ConfigProvider.tag получают props текущего компонента; тип context остаётся Tag,
+как upstream. Для типизированных group callbacks используйте локальные props.
+
+Корень — div без автоматической group/radiogroup роли. Передаются id, role,
+data-/aria-атрибуты; остальные HTML props отбрасываются, как upstream. Bind:nativeElement
+даёт div после mount и очищается при unmount. Disabled группы передаётся меткам;
+undefined наследует componentDisabled, false явно снимает блокировку. Class disabled
+группы отражает локальный prop. Flex-wrap и gap используют исходный paddingXS.
+Метками остаются native toggle-кнопки CheckableTag: Enter/Space, aria-pressed,
+focus recovery и отсутствие FormData сохраняются. Это осознанная граница с React span.
+
 Компоненты наследуют тему, primary, compact и RTL. Для тёмной темы Tag связывает
 обычный цвет текста с токенами и адаптирует фон/границу preset/status меток
 через color-mix и локальные токены палитры. Solid сохраняет исходный цвет;
@@ -5509,7 +5550,7 @@ Type=button и aria-pressed остаются собственными атриб
 объединению выбранных статусов; пустой выбор показывает все строки. Ядро Table
 не изменяется. Введённые значения выводятся обычными Svelte bindings.
 
-Пока нет CheckableTagGroup, drag-and-drop, внешней анимации и prefixCls.
+Пока нет drag-and-drop, внешней анимации и prefixCls.
 
 ## Badge
 
@@ -8249,6 +8290,8 @@ Svelte attachment с cleanup. Используется существующий 
 два исходных набора общего link reset (14 правил), ограниченных marker Tag.
 Преобразование сохраняет specificity a/псевдоклассов, focus-visible и порядок
 исходного CSS; остальные ссылки документа этот reset не затрагивает.
+[vendor/tag-group.css](./src/lib/vendor/tag-group.css) содержит одно исходное
+правило CheckableTagGroup: flex, wrap и token gap; правило извлекается CSS-рецептом.
 [vendor/badge.css](./src/lib/vendor/badge.css) содержит 52 правила Badge и keyframes
 antStatusProcessing из того же архива. Селекторы Radio/Space, ссылок и анимации
 цифр/появления исключены; корни ограничены :where(.ant-badge-css-var), declarations

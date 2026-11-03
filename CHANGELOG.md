@@ -9,6 +9,9 @@
 
 ### Added
 
+- CheckableTagGroup: single/multiple, controlled/defaultValue, typed options,
+  root/item semantics, ConfigProvider.tag и native div ref. Исходный gap извлечён
+  из CSS; 34 UMD-эталона проверяют выбор, callbacks и обновления props.
 - Tag: native href/target, DOM attrs/ref, closable и context closeIcon/closable.
   Перенесены исходные приоритеты, scalar/Snippet glyphs, ARIA, keyboard repeat
   и отмена навигации при закрытии. Link reset ограничен Tag; сохранены native

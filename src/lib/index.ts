@@ -278,6 +278,7 @@ export { default as Result } from './Result.svelte';
 export { default as Steps } from './Steps.svelte';
 export { default as Tag } from './Tag.svelte';
 export { default as CheckableTag } from './CheckableTag.svelte';
+export { default as CheckableTagGroup } from './CheckableTagGroup.svelte';
 export { default as Badge } from './Badge.svelte';
 export { default as BadgeRibbon } from './BadgeRibbon.svelte';
 export { default as Avatar } from './Avatar.svelte';
@@ -544,6 +545,11 @@ export type {
   TagClosable,
   TagCloseConfig,
   TagCloseIcon,
+  CheckableTagValue,
+  CheckableTagOption,
+  CheckableTagGroupSlots,
+  CheckableTagGroupSemantic,
+  CheckableTagGroupProps,
   CheckableTagProps
 } from './tag.types';
 export type {

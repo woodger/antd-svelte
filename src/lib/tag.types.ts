@@ -29,6 +29,56 @@ export interface TagCloseConfig extends AriaAttributes {
 
 export type TagClosable = boolean | TagCloseConfig | null;
 
+export type CheckableTagValue = string | number;
+
+/** Значение сохраняет тип; label может содержать декоративный Snippet. */
+export interface CheckableTagOption<Value extends CheckableTagValue = CheckableTagValue> {
+  value: Value;
+  label: string | number | boolean | Snippet | null | undefined;
+  className?: string;
+  style?: string;
+}
+
+export interface CheckableTagGroupSlots {
+  root?: string;
+  item?: string;
+}
+
+export type CheckableTagGroupSemantic<Value extends CheckableTagValue = CheckableTagValue> =
+  CheckableTagGroupSlots
+  | ((info: { props: CheckableTagGroupProps<Value>; }) => CheckableTagGroupSlots);
+
+interface CheckableTagGroupBaseProps<Value extends CheckableTagValue> extends AriaAttributes {
+  /** Стабильные уникальные values; строка и число с одинаковым текстом различаются. */
+  options?: readonly (Value | CheckableTagOption<Value>)[];
+  /** Отсутствие наследует componentDisabled у меток; group class отражает только этот prop. */
+  disabled?: boolean;
+  id?: string;
+  role?: HTMLAttributes<HTMLDivElement>['role'];
+  class?: string;
+  rootClassName?: string;
+  style?: string;
+  classNames?: CheckableTagGroupSemantic<Value>;
+  styles?: CheckableTagGroupSemantic<Value>;
+  /** Bindable div; доступен после mount и очищается при unmount. */
+  nativeElement?: HTMLDivElement;
+  [key: `data-${string}`]: unknown;
+}
+
+/** Выбор через CheckableTag: value управляется владельцем, defaultValue — только начальное. */
+export type CheckableTagGroupProps<Value extends CheckableTagValue = CheckableTagValue> =
+  CheckableTagGroupBaseProps<Value> & ({
+    multiple?: false;
+    value?: Value | null;
+    defaultValue?: Value | null;
+    onChange?: (value: Value | null) => void;
+  } | {
+    multiple: true;
+    value?: Value[];
+    defaultValue?: Value[];
+    onChange?: (value: Value[]) => void;
+  });
+
 export interface TagSlots {
   root?: string;
   /** Декоративная wrapper-граница icon Snippet. */
