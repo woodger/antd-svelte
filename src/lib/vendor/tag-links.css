@@ -1,0 +1,10 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * Tag links: source foreground и disabled root/descendant links.
+ * Корни ограничены :where(.ant-tag-css-var).
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+.ant-tag:where(.ant-tag-css-var) a,.ant-tag:where(.ant-tag-css-var) a:hover{color:var(--ant-tag-default-color);}
+.ant-tag-disabled:where(.ant-tag-css-var) a{cursor:not-allowed;pointer-events:none;color:var(--ant-color-text-disabled);}
+.ant-tag-disabled:where(.ant-tag-css-var) a:hover{color:var(--ant-color-text-disabled);}
+a.ant-tag-disabled:where(.ant-tag-css-var):hover,a.ant-tag-disabled:where(.ant-tag-css-var):active{color:var(--ant-color-text-disabled);}

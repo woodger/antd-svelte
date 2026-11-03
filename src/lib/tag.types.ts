@@ -1,5 +1,5 @@
 import type { Snippet } from 'svelte';
-import type { HTMLAttributes } from 'svelte/elements';
+import type { AriaAttributes, HTMLAttributes } from 'svelte/elements';
 
 export type TagPresetColor =
   'blue'
@@ -18,6 +18,16 @@ export type TagPresetColor =
 export type TagStatusColor = 'success' | 'processing' | 'error' | 'default' | 'warning';
 export type TagColor = TagPresetColor | TagStatusColor | `${TagPresetColor}-inverse` | (string & {});
 export type TagVariant = 'filled' | 'outlined' | 'solid';
+export type TagCloseIcon = boolean | string | number | null | Snippet;
+
+/** ARIA-настройки close control; disabled/afterClose у Tag не используются, как upstream. */
+export interface TagCloseConfig extends AriaAttributes {
+  closeIcon?: TagCloseIcon;
+  disabled?: boolean;
+  afterClose?: () => unknown;
+}
+
+export type TagClosable = boolean | TagCloseConfig | null;
 
 export interface TagSlots {
   root?: string;
@@ -43,10 +53,14 @@ export interface TagConfig {
   variant?: TagVariant;
   classNames?: TagSemantic;
   styles?: TagSemantic;
+  closable?: TagClosable;
+  closeIcon?: TagCloseIcon;
 }
 
 /** Метка с цветом, icon и отменяемым закрытием. */
-export interface TagProps {
+export interface TagProps extends Omit<
+  HTMLAttributes<HTMLSpanElement | HTMLAnchorElement>, 'children' | 'class' | 'style' | 'color'
+> {
   children: Snippet;
   /** Preset, status или CSS-цвет; отсутствие сохраняет прежний default class. */
   color?: TagColor;
@@ -58,15 +72,23 @@ export interface TagProps {
   classNames?: TagSemantic;
   styles?: TagSemantic;
   icon?: Snippet;
-  /** @defaultValue false */
-  closeIcon?: boolean | Snippet;
+  /** Отсутствие наследует context; false/null скрывают control, если closable не задан. */
+  closeIcon?: TagCloseIcon;
+  /** Boolean или исходный close config; локальное false перекрывает context. */
+  closable?: TagClosable;
+  /** Имеет приоритет над closable['aria-label'] и locale.closeText. */
   closeLabel?: string;
+  /** Непустой href выбирает корневой anchor; disabled убирает href и добавляет aria-disabled. */
+  href?: string;
+  target?: string;
+  /** Bindable native span/anchor; меняется вместе с типом корня и очищается при unmount. */
+  nativeElement?: HTMLSpanElement | HTMLAnchorElement;
   disabled?: boolean;
   onClose?: (event: MouseEvent) => void;
   /** Click по метке; закрытие не всплывает сюда. Включает source Wave. */
-  onClick?: HTMLAttributes<HTMLSpanElement>['onclick'];
+  onClick?: HTMLAttributes<HTMLSpanElement | HTMLAnchorElement>['onclick'];
   /** Нативный alias; при совместной передаче имеет приоритет над onClick. */
-  onclick?: HTMLAttributes<HTMLSpanElement>['onclick'];
+  onclick?: HTMLAttributes<HTMLSpanElement | HTMLAnchorElement>['onclick'];
   id?: string;
   'aria-label'?: string;
   'aria-labelledby'?: string;

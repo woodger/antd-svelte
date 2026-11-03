@@ -541,6 +541,9 @@ export type {
   TagSlots,
   TagSemantic,
   TagConfig,
+  TagClosable,
+  TagCloseConfig,
+  TagCloseIcon,
   CheckableTagProps
 } from './tag.types';
 export type {

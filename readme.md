@@ -5373,6 +5373,7 @@ Styles.root/style перекрывают tokens, а titleSpan по-прежне�
 <Tag color="success" variant="outlined">Готово</Tag>
 <Tag closeIcon closeLabel="Удалить обязательную метку"
   onClose={event => event.preventDefault()}>Обязательная метка</Tag>
+<Tag href="#tag-help" closable>Ссылка с закрытием</Tag>
 <CheckableTag {checked} onChange={value => { checked = value; }}>
   Показывать готовые задачи
 </CheckableTag>
@@ -5383,11 +5384,22 @@ Styles.root/style перекрывают tokens, а titleSpan по-прежне�
 ```
 
 Tag показывает метку с обязательным children Snippet. Icon и пользовательский
-closeIcon также принимают Snippet. Содержимое — короткая phrasing-разметка
+closeIcon принимают Snippet; closeIcon также принимает текст и числа.
+Содержимое — короткая phrasing-разметка
 без вложенных controls, кроме ссылки. Иконки декоративные, aria-hidden/inert.
-Сам Tag не создаёт остановок Tab или live-region. Именование через aria-label/
-aria-labelledby добавляет корневому span роль group; id/class/style и
-aria-describedby относятся к этому корню.
+Без непустого href корень — span и Tag не создаёт остановок Tab или live-region.
+Именование через aria-label/aria-labelledby добавляет span роль group; переданный
+role имеет приоритет. Непустой href выбирает native anchor с target и естественным
+Tab/Enter. Disabled оставляет anchor, убирает href и добавляет aria-disabled.
+Закрытие ссылки предотвращает навигацию; отмена закрытия сохраняет её содержимое.
+У ссылки в children сохраняется собственный href; disabled Tag меняет её стиль
+и pointer-events, как upstream.
+
+HTMLAttributes, data-/aria-атрибуты и нативные события относятся к корню; локальный
+dir имеет приоритет над context. Bind:nativeElement даёт текущий span/anchor,
+обновляется при смене типа корня и очищается при закрытии/unmount. В SSR ref пуст.
+Hydration сохраняет существующий DOM и фокус. Явные a/span branches избегают
+повторной вставки корня, которая сбрасывает фокус дочерней кнопки.
 
 OnClick/onclick получают нативный click корневого span; onclick имеет приоритет.
 Callback или единственная прямая ссылка включают [Wave](./docs/reference/wave.md).
@@ -5413,7 +5425,8 @@ solid; явный variant сохраняет приоритет. Deprecated bord
 outlined и не отменяет context variant.
 
 ConfigProvider.tag наследуется при отсутствии; явный объект, включая {}, заменяет
-родительский record. Сейчас поддерживаются class, style, variant, classNames и styles.
+родительский record. Поддерживаются class, style, variant, classNames, styles,
+closable и closeIcon.
 TagSlots/TagSemantic задают root, icon, content и close строками CSS или classes;
 callback получает props с разрешёнными color, variant и disabled. Root styles:
 рассчитанный CSS-цвет, context styles.root, context style, local styles.root, local style.
@@ -5426,18 +5439,28 @@ upstream; прежняя private content-обёртка и описание кн
 CheckableTag читает только context class/style и локальный style имеет приоритет;
 semantic настройки и variant Tag к нему не применяются.
 
-CloseIcon=false/undefined скрывает закрытие; true показывает существующий Icon
-close, Snippet заменяет его изображение внутри той же нативной кнопки.
-CloseLabel задаёт имя кнопки, по умолчанию locale.closeText. Описание кнопки
-ссылается на содержимое метки, поэтому одинаковое «Закрыть» сохраняет контекст.
+Без local/context close config кнопка скрыта. CloseIcon=true включает default Icon
+close; текст/число и Snippet заменяют изображение внутри той же нативной кнопки.
+Пустая строка и 0 сохраняют control. Отсутствие props наследует context;
+closable=false скрывает кнопку независимо от icon. CloseIcon=false/null скрывает её,
+если closable не включён. Явный closable=true сохраняет inherited icon или default.
+
+Closable принимает также object config с closeIcon и ARIA-атрибутами. В этом объекте
+closeIcon=null убирает control, а boolean оставляет пустое изображение. Undefined
+не стирает context field. Передаются только ARIA-атрибуты, как в useClosable;
+disabled/afterClose этого объекта Tag не использует. Блокировкой управляет Tag.disabled.
+CloseLabel имеет приоритет над closable['aria-label'], затем используется locale.closeText.
+По умолчанию описание кнопки ссылается на содержимое метки; closable['aria-describedby']
+может его заменить, поэтому одинаковое «Закрыть» сохраняет контекст.
 Disabled наследует ConfigProvider.componentDisabled; false явно снимает его.
 Disabled запрещает закрытие и callbacks, не удаляя содержимое.
 
 OnClose получает нативный MouseEvent; event.preventDefault() синхронно отменяет
 закрытие. Возвращаемое значение и Promise не ожидаются. Повторный вход из callback
 не вызывает onClose ещё раз. Прямой DOM listener останавливает всплытие клика;
-Enter и Space работают через нативную кнопку type=button
-и не отправляют форму. Callback может удалить весь компонент или выбрать фокус.
+Enter и Space обрабатываются при keydown через кнопку type=button; repeat и уже
+отменённое событие игнорируются. Форма не отправляется. Callback может удалить
+весь компонент или выбрать фокус.
 
 После принятого закрытия содержимое удаляется из DOM. Изменение props не
 открывает тот же экземпляр заново: для восстановления нужен новый экземпляр/key.
@@ -5486,8 +5509,7 @@ Type=button и aria-pressed остаются собственными атриб
 объединению выбранных статусов; пустой выбор показывает все строки. Ядро Table
 не изменяется. Введённые значения выводятся обычными Svelte bindings.
 
-Пока нет ссылок/target, CheckableTagGroup, drag-and-drop, внешней анимации,
-prefixCls, closable и context closeIcon/closable.
+Пока нет CheckableTagGroup, drag-and-drop, внешней анимации и prefixCls.
 
 ## Badge
 
@@ -8222,6 +8244,11 @@ steps.dom.ts восстанавливает фокус шагов и испол�
 и восстановление фокуса через feedback.dom.ts. Listener закрытия использует
 Svelte attachment с cleanup. Используется существующий Icon close; новые
 зависимости, иконки и лицензии не добавлены.
+[vendor/tag-links.css](./src/lib/vendor/tag-links.css) добавляет четыре исходных
+правила ссылок Tag, а [vendor/tag-link-reset.css](./src/lib/vendor/tag-link-reset.css) —
+два исходных набора общего link reset (14 правил), ограниченных marker Tag.
+Преобразование сохраняет specificity a/псевдоклассов, focus-visible и порядок
+исходного CSS; остальные ссылки документа этот reset не затрагивает.
 [vendor/badge.css](./src/lib/vendor/badge.css) содержит 52 правила Badge и keyframes
 antStatusProcessing из того же архива. Селекторы Radio/Space, ссылок и анимации
 цифр/появления исключены; корни ограничены :where(.ant-badge-css-var), declarations

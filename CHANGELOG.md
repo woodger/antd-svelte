@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tag: native href/target, DOM attrs/ref, closable и context closeIcon/closable.
+  Перенесены исходные приоритеты, scalar/Snippet glyphs, ARIA, keyboard repeat
+  и отмена навигации при закрытии. Link reset ограничен Tag; сохранены native
+  close/focus и удаление содержимого. Добавлены 55 UMD-эталонов и SSR/browser-проверки.
 - Tag styling: CSS colors с исходной HSL/alpha арифметикой, inverse/bordered
   aliases, semantic classes/styles и ConfigProvider.tag. Добавлены Tag tokens
   и исходный reactive style diff; CheckableTag наследует context class/style.

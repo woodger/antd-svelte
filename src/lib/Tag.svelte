@@ -3,6 +3,7 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { getTagColor } from './tag-color.engine';
+  import { getTagClose } from './tag-close.engine';
   import { connectTagStyle } from './tag-style.dom';
   import { useWave } from './wave.svelte';
   import { connectWaveLink } from './wave.dom';
@@ -10,20 +11,24 @@
   import Icon from './Icon.svelte';
   import type { TagProps, TagSemantic } from './tag.types';
 
-  let props: TagProps = $props();
+  let { nativeElement = $bindable(), ...props }: TagProps = $props();
   let {
     children,
     icon,
-    closeIcon = false,
     closeLabel,
     disabled,
     onClose,
     onClick,
     onclick,
     id,
+    dir,
+    role,
+    href,
+    target,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
+    'aria-disabled': ariaDisabled,
     class: className = '',
     style,
     rootClassName,
@@ -34,12 +39,22 @@
   const componentTheme = useComponentTheme('Tag');
   const wave = useWave('Tag', () => blocked);
   const generatedId = $props.id();
-  let host = $state<HTMLSpanElement>();
+  let host = $derived(nativeElement);
   let waveLink = $state(false);
   let closed = $state(false);
   let active = true;
   let closing = false;
   let blocked = $derived(disabled ?? config.componentDisabled);
+  let close = $derived(getTagClose(props, config.tag));
+  let showClose = $derived(close.visible);
+  const owned = new Set([
+    'children', 'icon', 'closeIcon', 'closable', 'closeLabel', 'disabled', 'onClose',
+    'onClick', 'onclick', 'id', 'dir', 'role', 'href', 'target', 'aria-label',
+    'aria-labelledby', 'aria-describedby', 'aria-disabled', 'class', 'style', 'rootClassName',
+    'classNames', 'styles', 'color', 'variant', 'bordered'
+  ]);
+  let attributes = $derived(Object.fromEntries(Object.entries(props)
+    .filter(([key]) => !owned.has(key))));
   let color = $derived(getTagColor(props, config.tag?.variant));
   let info = $derived({ props: {
     ...props,
@@ -69,8 +84,35 @@
     [contextStyles.close, localStyles.close].filter(Boolean).join(';') || undefined
   );
   let contentId = $derived(`ant-tag-content-${generatedId}`);
+  let rootAttributes = $derived({
+    ...attributes,
+    id,
+    role: role ?? (!href && (ariaLabel || ariaLabelledby) ? 'group' as const : undefined),
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledby,
+    'aria-describedby': ariaDescribedby,
+    'aria-disabled': href && blocked ? true : ariaDisabled,
+    dir: dir ?? config.direction,
+    href: blocked ? undefined : href,
+    target
+  });
+  let rootClasses = $derived([
+    'ant-tag ant-tag-css-var',
+    componentTheme.className,
+    config.tag?.class,
+    contextClasses.root,
+    localClasses.root,
+    color.internal && `ant-tag-${color.color}`,
+    props.color === undefined && !color.internal && 'ant-tag-default',
+    `ant-tag-${color.variant}`,
+    blocked && 'ant-tag-disabled',
+    config.theme.mode === 'dark' && !componentTheme.className && 'ant-tag-dark',
+    config.direction === 'rtl' && 'ant-tag-rtl',
+    className,
+    rootClassName
+  ]);
 
-  function rootStyles(node: HTMLSpanElement) {
+  function rootStyles(node: HTMLElement) {
     const update = connectTagStyle(node);
     $effect(() => update([
       componentTheme.style,
@@ -102,31 +144,51 @@
   });
   $effect(() => {
     const node = host;
-    if (node && closeIcon) return connectFeedbackFocus(node);
+    if (node && showClose) return connectFeedbackFocus(node);
   });
   $effect(() => {
     const node = host;
     if (node) return connectWaveLink(node, value => { waveLink = value; });
   });
 
+  function handleClick(
+    event: MouseEvent & { currentTarget: EventTarget & (HTMLSpanElement | HTMLAnchorElement); }
+  ) {
+    if (!blocked) (onclick ?? onClick)?.(event);
+  }
+
   function handleClose(event: MouseEvent) {
     event.stopPropagation();
-    if (!active || closed || closing || blocked || !closeIcon || event.defaultPrevented) return;
+    if (!active || closed || closing || blocked || !showClose || event.defaultPrevented) return;
 
+    const linked = Boolean(href);
     closing = true;
     try {
       onClose?.(event);
     } finally {
       closing = false;
     }
-    if (active && !event.defaultPrevented)
-      closed = true;
+    if (!event.defaultPrevented) {
+      if (linked) event.preventDefault();
+      if (active) closed = true;
+    }
   }
 
   function connectClose(node: HTMLButtonElement) {
+    function handleCloseKeyDown(event: KeyboardEvent) {
+      if (event.defaultPrevented || event.key !== 'Enter' && event.key !== ' ') return;
+
+      event.preventDefault();
+      if (!event.repeat) node.click();
+    }
+
     // Прямой listener останавливает всплытие до нативных обработчиков родителя.
     node.addEventListener('click', handleClose);
-    return () => node.removeEventListener('click', handleClose);
+    node.addEventListener('keydown', handleCloseKeyDown);
+    return () => {
+      node.removeEventListener('click', handleClose);
+      node.removeEventListener('keydown', handleCloseKeyDown);
+    };
   }
 </script>
 
@@ -164,59 +226,58 @@
   @media (prefers-reduced-motion: reduce) { .ant-tag, .ant-tag-close-icon { transition: none; } }
 </style>
 
+{#snippet tagContent()}
+  {#if icon}<span
+    class={['ant-tag-icon anticon', contextClasses.icon, localClasses.icon]}
+    style={untrack(() => iconStyle)}
+    {@attach iconStyles}
+    aria-hidden="true"
+    inert
+  >{@render icon()}</span>{/if}<span
+    class={['ant-tag-content', icon && contextClasses.content, icon && localClasses.content]}
+    style={untrack(() => icon ? contentStyle : undefined)}
+    {@attach contentStyles}
+    id={contentId}
+  >{@render children()}</span>
+  {#if showClose}<button
+    {...close.attributes}
+    type="button"
+    class={['ant-tag-close-icon', contextClasses.close, localClasses.close]}
+    style={untrack(() => closeStyle)}
+    {@attach closeStyles}
+    disabled={blocked}
+    aria-label={closeLabel ?? ('aria-label' in close.attributes
+      ? close.attributes['aria-label'] : config.locale.closeText)}
+    aria-describedby={'aria-describedby' in close.attributes
+      ? close.attributes['aria-describedby'] : contentId}
+    aria-disabled={'aria-disabled' in close.attributes
+      ? close.attributes['aria-disabled'] : blocked || undefined}
+    {@attach connectClose}
+  ><span aria-hidden="true" inert>{#if typeof close.icon === 'function'}{@render close.icon()}{:else if close.icon === undefined}<Icon name="close" />{:else if typeof close.icon !== 'boolean'}{close.icon ?? ''}{/if}</span></button>{/if}
+{/snippet}
+
+<!-- Явные a/span не перемещают SSR-корень при hydration и сохраняют фокус. -->
 {#if !closed}
-  <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions, a11y_no_noninteractive_element_interactions (Source Tag.onClick сохраняет span; клавиатурой управляют native link/close.) -->
-  <span
-    bind:this={host}
-    {id}
-    role={ariaLabel || ariaLabelledby ? 'group' : undefined}
-    aria-label={ariaLabel}
-    aria-labelledby={ariaLabelledby}
-    aria-describedby={ariaDescribedby}
-    dir={config.direction}
-    class={[
-      'ant-tag ant-tag-css-var',
-      componentTheme.className,
-      config.tag?.class,
-      contextClasses.root,
-      localClasses.root,
-      color.internal && `ant-tag-${color.color}`,
-      props.color === undefined && !color.internal && 'ant-tag-default',
-      `ant-tag-${color.variant}`,
-      blocked && 'ant-tag-disabled',
-      config.theme.mode === 'dark' && !componentTheme.className && 'ant-tag-dark',
-      config.direction === 'rtl' && 'ant-tag-rtl',
-      className,
-      rootClassName
-    ]}
-    style={untrack(() => rootStyle)}
-    {@attach rootStyles}
-    {@attach onClick || onclick || waveLink ? wave : undefined}
-    onclick={event => {
-      if (!blocked) (onclick ?? onClick)?.(event);
-    }}
-  >
-    {#if icon}<span
-      class={['ant-tag-icon anticon', contextClasses.icon, localClasses.icon]}
-      style={untrack(() => iconStyle)}
-      {@attach iconStyles}
-      aria-hidden="true"
-      inert
-    >{@render icon()}</span>{/if}<span
-      class={['ant-tag-content', icon && contextClasses.content, icon && localClasses.content]}
-      style={untrack(() => icon ? contentStyle : undefined)}
-      {@attach contentStyles}
-      id={contentId}
-    >{@render children()}</span>
-    {#if closeIcon}<button
-      type="button"
-      class={['ant-tag-close-icon', contextClasses.close, localClasses.close]}
-      style={untrack(() => closeStyle)}
-      {@attach closeStyles}
-      disabled={blocked}
-      aria-label={closeLabel ?? config.locale.closeText}
-      aria-describedby={contentId}
-      {@attach connectClose}
-    ><span aria-hidden="true" inert>{#if typeof closeIcon === 'function'}{@render closeIcon()}{:else}<Icon name="close" />{/if}</span></button>{/if}
-  </span>
+  {#if href}
+    <a
+      {...rootAttributes}
+      bind:this={nativeElement}
+      class={rootClasses}
+      style={untrack(() => rootStyle)}
+      {@attach rootStyles}
+      {@attach onClick || onclick || waveLink ? wave : undefined}
+      onclick={handleClick}
+    >{@render tagContent()}</a>
+  {:else}
+    <!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions, a11y_no_noninteractive_element_interactions (Source Tag.onClick сохраняет span; клавиатурой управляют native link/close.) -->
+    <span
+      {...rootAttributes}
+      bind:this={nativeElement}
+      class={rootClasses}
+      style={untrack(() => rootStyle)}
+      {@attach rootStyles}
+      {@attach onClick || onclick || waveLink ? wave : undefined}
+      onclick={handleClick}
+    >{@render tagContent()}</span>
+  {/if}
 {/if}

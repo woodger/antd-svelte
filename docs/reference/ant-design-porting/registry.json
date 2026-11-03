@@ -7993,6 +7993,11 @@
           "name": "@ant-design/fast-color",
           "range": "^3.0.1",
           "referenceVersion": "3.0.1"
+        },
+        {
+          "name": "@rc-component/dialog",
+          "range": "~1.10.0",
+          "referenceVersion": "1.10.0"
         }
       ],
       "priority": "unassigned",
@@ -8033,7 +8038,22 @@
         "tests/browser/fixtures/TagStyleFixtures.svelte",
         "tests/browser/fixtures/tag-style-presets.ts",
         "tests/browser/fixtures/ant-design-tag-style-reference.json",
-        "tests/package/tag-style.ssr.test.ts"
+        "tests/package/tag-style.ssr.test.ts",
+        "src/lib/tag-close.engine.ts",
+        "src/lib/tag-close.engine.test.ts",
+        "src/lib/vendor/tag-links.css",
+        "src/lib/vendor/tag-link-reset.css",
+        "tests/browser/tag-close.spec.ts",
+        "tests/browser/tag-close-metrics.ts",
+        "tests/browser/fixtures/TagCloseCase.svelte",
+        "tests/browser/fixtures/TagCloseFixtures.svelte",
+        "tests/browser/fixtures/tag-close-presets.ts",
+        "tests/browser/fixtures/ant-design-tag-close-reference.json",
+        "tests/package/tag-close.ssr.test.ts",
+        "tests/browser/tag-hydration.spec.ts",
+        "tests/browser/fixtures/tag-close-hydration.server.ts",
+        "tests/browser/fixtures/tag-close-hydration.client.ts",
+        "tests/browser/fixtures/tag-close-hydration.html"
       ],
       "features": [
         {
@@ -8079,7 +8099,7 @@
             "tests/browser/fixtures/ant-design-checkable-tag-api-reference.json",
             "tests/package/checkable-tag-api.ssr.test.ts"
           ],
-          "note": "OnChange перед onClick, onKeyDown до Space, отмена/repeat и callback после синхронного unmount сверены с 12 сценариями официальной сборки. Lowercase aliases имеют приоритет; HTMLAttributes и bind:nativeElement относятся к прежней native toggle-кнопке. Controlled checked, Enter, aria-pressed, disabled, focus recovery и guard уже отменённого click сохранены. PrefixCls и ConfigProvider.tag этим этапом не перенесены; общий аудит Tag остаётся unreviewed."
+          "note": "OnChange перед onClick, onKeyDown до Space, отмена/repeat и callback после синхронного unmount сверены с 12 сценариями официальной сборки. Lowercase aliases имеют приоритет; HTMLAttributes и bind:nativeElement относятся к прежней native toggle-кнопке. Controlled checked, Enter, aria-pressed, disabled, focus recovery и guard уже отменённого click сохранены. PrefixCls пока не перенесён; context class/style описаны в source-styling. Общий аудит Tag остаётся unreviewed."
         },
         {
           "id": "source-styling",
@@ -8109,14 +8129,42 @@
         },
         {
           "id": "remaining-api",
-          "title": "Оставшийся API Tag: links, closable, prefixes и CheckableTagGroup",
+          "title": "Оставшийся API Tag: prefixes и CheckableTagGroup",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md",
             "src/lib/tag.types.ts"
           ],
-          "note": "Пока не перенесены href/target, closable и context closeIcon/closable, локальный prefixCls и Tag.CheckableTagGroup. Прежние native button/aria-pressed, close hit target/focus recovery, content wrapping и декоративные Snippet wrappers сохраняются; эти границы не означают идентичный React DOM."
+          "note": "Пока не перенесены локальный prefixCls и Tag.CheckableTagGroup. Прежние native button/aria-pressed, close hit target/focus recovery, content wrapping и декоративные Snippet wrappers сохраняются; эти границы не означают идентичный React DOM."
+        },
+        {
+          "id": "source-links-closable",
+          "title": "Href/target, DOM API и исходный closable config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tag.svelte",
+            "src/lib/tag.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/tag-close.engine.ts",
+            "src/lib/tag-close.engine.test.ts",
+            "src/lib/vendor/tag-links.css",
+            "src/lib/vendor/tag-link-reset.css",
+            "tests/browser/tag-close.spec.ts",
+            "tests/browser/tag-close-metrics.ts",
+            "tests/browser/fixtures/TagCloseCase.svelte",
+            "tests/browser/fixtures/TagCloseFixtures.svelte",
+            "tests/browser/fixtures/tag-close-presets.ts",
+            "tests/browser/fixtures/ant-design-tag-close-reference.json",
+            "tests/package/tag-close.ssr.test.ts",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/tag-hydration.spec.ts",
+            "tests/browser/fixtures/tag-close-hydration.server.ts",
+            "tests/browser/fixtures/tag-close-hydration.client.ts",
+            "tests/browser/fixtures/tag-close-hydration.html"
+          ],
+          "note": "Перенесены native href/target, HTMLAttributes и bind:nativeElement, source props/context/fallback приоритеты closeIcon/closable, scalar/Snippet/blank glyphs и ARIA-only поля. Closable.disabled/afterClose у Tag игнорируются, как upstream; Tag.disabled управляет native control. Keyboard keydown/repeat/cancellation и предотвращение навигации при закрытии сверены с 55 UMD-случаями и семью обратимыми обновлениями. Hover/active/keyboard focus проверяются для root и descendant ссылок, включая disabled. Четыре link rules и scoped общий reset из 14 rules извлекаются из закреплённого архива. Явные a/span branches сохраняют SSR DOM/focus; постоянные browser hydration cases используют свежий SSR output. Сохранены прежние native removal/ref cleanup, описанная closeLabel/description граница, focus recovery, inert Snippet и guard уже отменённого close click; полный аудит Tag ещё не завершён."
         }
       ]
     },
