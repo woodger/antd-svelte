@@ -3,6 +3,7 @@ import type { HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize } from './types';
 import type { TabsAnimatedConfig } from './tabs-motion.types';
 import type { TabsRenderTabBar } from './tabs-nav.types';
+import type { PopupOffset, PopupSourceAlign } from './popup-position.engine';
 
 export type TabsType = 'line' | 'card' | 'editable-card';
 export type TabsPlacement = 'top' | 'bottom' | 'start' | 'end';
@@ -27,6 +28,10 @@ export interface TabsScrollInfo {
 export type TabsMoreTrigger = 'hover' | 'click' | 'contextMenu' | 'focus';
 export type TabsMorePlacement = 'topLeft' | 'top' | 'topRight'
   | 'bottomLeft' | 'bottom' | 'bottomRight';
+export type TabsMoreOffset = PopupOffset;
+/** Исходный AlignType rc-trigger: физические points, числовые/процентные offsets и overflow. */
+export type TabsMoreAlign = PopupSourceAlign;
+export type TabsMorePlacements = Readonly<Record<string, TabsMoreAlign>>;
 
 export interface TabsMoreRenderInfo {
   restTabs: readonly TabsItem[];
@@ -55,6 +60,18 @@ export interface TabsMoreProps {
   animation?: string;
   /** @defaultValue 'bottomLeft' */
   placement?: TabsMorePlacement;
+  /** Заменяет исходную таблицу целиком; undefined сохраняет шесть defaults rc-dropdown. */
+  placements?: TabsMorePlacements;
+  /** Перекрывает placements, включая явное undefined, которое даёт пустую таблицу Trigger. */
+  builtinPlacements?: TabsMorePlacements;
+  /** Неглубоко перекрывает выбранный placement, включая целый объект overflow. */
+  align?: TabsMoreAlign;
+  /** Использует client coordinates последнего click/hover/contextMenu; без точки — кнопку. */
+  alignPoint?: boolean;
+  /** Получает popup и фактические points после flip, перед записью offsets в DOM. */
+  onPopupAlign?: (popup: HTMLDivElement, align: TabsMoreAlign) => void;
+  /** Исходный rc-dropdown добавляет div-arrow и show-arrow class без собственных Tabs-стилей. */
+  arrow?: boolean;
   /** Задержки в секундах, как в исходном Dropdown. @defaultValue 0.1 */
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;

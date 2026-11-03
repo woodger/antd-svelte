@@ -3,9 +3,15 @@
   import { useConfig } from './config-context';
   import { connectPopup } from './popup.dom';
   import { connectPopupPortal } from './popup-portal.dom';
-  import { getTooltipDelay, getTooltipPosition } from './tooltip.engine';
-  import { getTabsMoreActions } from './tabs-more.engine';
-  import { getTabsMoreSize } from './tabs-more.dom';
+  import { getTooltipDelay } from './tooltip.engine';
+  import { getPopupPlacement, type PopupFlipCache } from './popup-position.engine';
+  import { getTabsMoreActions, getTabsMorePlacements } from './tabs-more.engine';
+  import {
+    getTabsMoreArea,
+    getTabsMorePosition,
+    getTabsMoreSize,
+    watchTabsMoreScroll
+  } from './tabs-more.dom';
   import { getTabsClickEvent } from './tabs.dom';
   import { createTabsPaneMotion, type TabsPaneMotionState } from './tabs-motion.dom';
   import { useToken } from './theme-context.svelte';
@@ -87,8 +93,11 @@
   let selectedKey = $state<string | null>(null);
   let menuKey = $state<string | undefined>();
   let repairFocus = $state(false);
-  let actualSide = $state<'top' | 'bottom'>('bottom');
+  let actualPlacement = $state<string>();
+  let aligned = $state(false);
+  let mousePoint = $state<{ left: number; top: number; }>();
   let focusAttempted = false;
+  let focusSession = false;
   let keyboardClick = false;
   let pending: ReturnType<typeof setTimeout> | undefined;
   let focusFrame = 0;
@@ -97,11 +106,13 @@
   let touched = false;
   let detachPortal: (() => void) | undefined;
   let motionProperties: string[] = [];
+  let alignmentFlips: PopupFlipCache = {};
   let popupId = $derived(`${rootId}-more-popup`);
   let available = $derived(items.length > 0 && !mobile);
   let dropdownVisible = $derived(more && Object.hasOwn(more, 'visible')
     ? more.visible : Boolean(items.length && open));
   let visible = $derived(!mobile && (dropdownVisible ?? triggerOpen));
+  let focusReady = $derived(visible && shown && dropdownVisible !== undefined);
   let actions = $derived(getTabsMoreActions(more ?? {}));
   let autoDestroy = $derived(more?.autoDestroy === true);
   let motionName = $derived(more?.animation ? `ant-tabs-dropdown-${more.animation}`
@@ -117,11 +128,23 @@
   });
   let icon = $derived(more?.icon === undefined ? 'More' : more.icon);
   let placement = $derived(more?.placement ?? 'bottomLeft');
-  let side = $derived(placement.startsWith('top') ? 'top' as const : 'bottom' as const);
-  let align = $derived(placement.endsWith('Left') ? 'left' as const
-    : placement.endsWith('Right') ? 'right' as const : undefined);
+  let placements = $derived(getTabsMorePlacements(more));
+  let popupAlign = $derived(more?.align);
+  let alignPoint = $derived(Boolean(more?.alignPoint));
+  let point = $derived(alignPoint ? mousePoint : undefined);
+  let alignmentKey = $derived(JSON.stringify(
+    { placement, placements, align: popupAlign, alignPoint },
+    (_key, value) => value === undefined ? '#undefined' : value
+  ));
+  let initialPlacement = $derived(getPopupPlacement(
+    placements,
+    placements[placement] ?? {},
+    alignPoint
+  ));
   let containerGetter = $derived(more && Object.hasOwn(more, 'getPopupContainer')
     ? more.getPopupContainer : getPopupContainer);
+  let customContainer = $derived(containerGetter !== undefined);
+  let portalTarget = $state<HTMLElement>();
   let overlayStyle = $derived(more && Object.hasOwn(more, 'overlayStyle')
     ? more.overlayStyle : popupStyle);
   let ownOverlayClass = $derived(Boolean(more && Object.hasOwn(more, 'overlayClassName')));
@@ -129,7 +152,8 @@
     ? config.direction : rtl ? 'rtl' : 'ltr');
   const initialStyle = untrack(() => [themeStyle, overlayStyle].filter(Boolean).join(';') || undefined);
   let initialStyleElement: HTMLDivElement | undefined;
-  let matchWidth = $derived(more?.minOverlayWidthMatchTrigger !== false);
+  let matchWidth = $derived(more && Object.hasOwn(more, 'minOverlayWidthMatchTrigger')
+    ? Boolean(more.minOverlayWidthMatchTrigger) : !alignPoint);
   let selectedId = $derived(selectedKey !== null && items.some(item => item.key === selectedKey)
     ? optionId(selectedKey) : undefined);
 
@@ -142,8 +166,30 @@
   });
 
   $effect.pre(() => {
+    const getter = containerGetter;
+    const source = button;
+    // Callback identity может меняться вместе с align; тот же DOM-container не перемещает portal.
+    portalTarget = rendered && source ? getter?.(source) : undefined;
+  });
+
+  $effect.pre(() => {
     // Trigger useControlledState сбрасывает внутреннее значение при смене controlled prop.
     triggerOpen = dropdownVisible ?? false;
+  });
+
+  $effect.pre(() => {
+    if (!visible) alignmentFlips = {};
+  });
+
+  $effect(() => {
+    if (!focusReady) {
+      focusSession = false;
+      cancelFocus();
+    } else if (!focusSession) {
+      focusSession = true;
+      // Как useAccessibility: изменение autoFocus/align внутри открытого сеанса не фокусирует снова.
+      if (untrack(() => more?.autoFocus)) untrack(scheduleFocus);
+    }
   });
 
   $effect(() => {
@@ -212,7 +258,8 @@
     const surface = popup;
     const source = button;
     const origin = nativeElement;
-    const container = containerGetter;
+    const container = portalTarget;
+    const custom = customContainer;
     const cssText = overlayStyle;
     const inherited = themeStyle;
     if (!surface || !source || !origin || !rendered) return;
@@ -236,7 +283,7 @@
       const marker = surface.ownerDocument.createComment('tabs-popup');
       surface.before(marker);
       const disconnect = connectPopupPortal(surface, {
-        getPopupContainer: container ? () => container(source) : undefined,
+        getPopupContainer: custom ? () => container ?? surface.ownerDocument.body : undefined,
         reference: source,
         origin,
         marker,
@@ -285,35 +332,114 @@
     const surface = popup;
     const source = button;
     const show = present;
-    const requestedSide = side;
-    const requestedAlign = align;
+    void alignmentKey;
+    const { requestedPlacement, table, custom, usePoint } = untrack(() => ({
+      requestedPlacement: placement,
+      table: placements,
+      custom: popupAlign,
+      usePoint: alignPoint
+    }));
+    const requestedPoint = point;
+    const authorStyle = overlayStyle;
     const match = matchWidth;
-    if (!surface || !source || !show) return;
+    if (!surface || !source || !show || !rendered) return;
 
     return untrack(() => {
-      if (!match) {
-        const style = surface.ownerDocument.createElement('span').style;
-        style.cssText = overlayStyle ?? '';
-        surface.style.minWidth = style.minWidth;
-      }
-      return connectPopup(surface, source, {
-        placement: requestedSide,
-        align: requestedAlign,
-        autoAdjustOverflow: true,
-        gap: 4,
-        maxWidth: '100vw',
-        matchAnchorWidth: match,
+      const author = surface.ownerDocument.createElement('span').style;
+      author.cssText = authorStyle ?? '';
+      let layout: ReturnType<typeof getTabsMorePosition> | undefined;
+      let signature = '';
+      let applied = '';
+      let revision = 0;
+      const stopWatch = watchTabsMoreScroll(surface, source, () => {
+        revision++;
+        if (visible && usePoint && (actions.hide.has('click') || actions.hide.has('contextMenu')))
+          requestVisible(false);
+      });
+      const disconnect = connectPopup(surface, source, {
+        placement: 'bottom',
+        autoAdjustOverflow: false,
+        maxWidth: false,
         preserveFocus: false,
-        getPosition: (anchor, _bounds, viewport) => getTooltipPosition(
-          anchor,
-          getTabsMoreSize(surface),
-          viewport,
-          requestedSide,
-          true,
-          requestedAlign,
-          4
-        ),
-        onPlacement: value => actualSide = value === 'top' ? 'top' : 'bottom',
+        allowOffscreenAnchor: Boolean(requestedPoint),
+        getPosition: anchor => {
+          const moving = /-(?:appear|enter|leave)-(?:start|active)(?:\s|$)/
+            .test(surface.className);
+          if (!layout || visible && !moving) {
+            const stretch = match ? `${anchor.width}px` : '';
+            surface.style.minWidth = author.minWidth || stretch;
+            const areas = getTabsMoreArea(surface);
+            const target = requestedPoint
+              ? { ...requestedPoint, width: 0, height: 0 } : anchor;
+            const key = JSON.stringify({
+              target: [target.left, target.top, target.width, target.height],
+              size: getTabsMoreSize(surface),
+              areas,
+              revision,
+              preparing: /-(?:appear|enter)-prepare(?:\s|$)/.test(surface.className)
+            });
+            if (key !== signature) {
+              signature = key;
+              const result = getTabsMorePosition(
+                surface,
+                target,
+                {
+                  placement: requestedPlacement,
+                  placements: table,
+                  align: custom,
+                  alignPoint: usePoint
+                },
+                alignmentFlips,
+                areas
+              );
+              if (result) {
+                layout = result;
+                alignmentFlips = result.flips;
+                more?.onPopupAlign?.(surface, result.align);
+                if (active) {
+                  actualPlacement = result.placement;
+                  aligned = true;
+                }
+              }
+            }
+          }
+          return {
+            left: layout?.x ?? -surface.ownerDocument.documentElement.clientWidth * 10,
+            top: layout?.y ?? -surface.ownerDocument.documentElement.clientHeight * 10,
+            arrowX: layout?.arrowX ?? 0,
+            arrowY: layout?.arrowY ?? 0,
+            placement: 'bottom'
+          };
+        },
+        applyPosition: position => {
+          const result = layout;
+          const sourcePoint = result?.align.points?.[0];
+          const inset = result?.align.dynamicInset || result?.align._experimental?.dynamicInset;
+          const right = inset && sourcePoint?.[1] === 'r';
+          const bottom = inset && sourcePoint?.[0] === 'b';
+          const key = [
+            position.left, position.top, position.arrowX, position.arrowY,
+            right, bottom, result?.right, result?.bottom
+          ].join(':');
+          if (applied === key) return;
+          applied = key;
+          const css = surface.ownerDocument.createElement('span').style;
+          css.left = right ? 'auto' : `${position.left}px`;
+          css.right = right ? `${result!.right}px` : 'auto';
+          css.top = bottom ? 'auto' : `${position.top}px`;
+          css.bottom = bottom ? `${result!.bottom}px` : 'auto';
+          css.setProperty('--arrow-x', `${position.arrowX || 0}px`);
+          css.setProperty('--arrow-y', `${position.arrowY || 0}px`);
+          for (const name of css) {
+            const source = author.getPropertyValue(name) ? author : css;
+            surface.style.setProperty(
+              name,
+              source.getPropertyValue(name),
+              source.getPropertyPriority(name)
+            );
+          }
+        },
+        onPlacement: () => {},
         onDismiss: reason => {
           if (!visible) return;
           if (reason === 'escape') source.focus({ preventScroll: true });
@@ -323,7 +449,7 @@
         onKeydown: event => {
           if (!visible || event.key !== 'Tab' || dropdownVisible === undefined) return;
           const overlay = more && Object.hasOwn(more, 'overlay')
-            ? popup?.firstElementChild : list;
+            ? popup?.querySelector(':scope > :not(.ant-tabs-dropdown-arrow)') : list;
           if (!focusAttempted && overlay instanceof HTMLElement) {
             overlay.focus({ preventScroll: true });
             focusAttempted = true;
@@ -335,10 +461,12 @@
         },
         onVisibilityChange: next => {
           shown = next;
-          if (!next) cancelFocus();
-          else if (more?.autoFocus && dropdownVisible !== undefined) scheduleFocus();
         }
       });
+      return () => {
+        stopWatch();
+        disconnect();
+      };
     });
   });
 
@@ -389,7 +517,7 @@
       else if (active && visible) {
         focusFrame = 0;
         const overlay = more && Object.hasOwn(more, 'overlay')
-          ? popup?.firstElementChild : list;
+          ? popup?.querySelector(':scope > :not(.ant-tabs-dropdown-arrow)') : list;
         if (overlay instanceof HTMLElement) {
           overlay.focus({ preventScroll: true });
           focusAttempted = true;
@@ -415,6 +543,8 @@
     if (event.pointerType === 'touch' || touched || !supports('hover', next)
       || !available && !visible) return;
     cancelPending();
+    if (next && event.currentTarget === button)
+      mousePoint = { left: event.clientX, top: event.clientY };
     pending = setTimeout(() => {
       pending = undefined;
       if (active) requestVisible(next);
@@ -555,7 +685,9 @@
       ? 'ellipsis' : undefined}
     onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
     onfocus={() => { if (supports('focus', true)) requestVisible(true); }}
-    onblur={() => { if (supports('focus', false)) requestVisible(false); }} onclick={() => {
+    onblur={() => { if (supports('focus', false)) requestVisible(false); }} onclick={event => {
+      if (!visible && supports('click', true))
+        mousePoint = { left: event.clientX, top: event.clientY };
       if (visible ? supports('click', false) || supports('contextMenu', false)
         : supports('click', true)) requestVisible(!visible);
       if (supports('click', true) || supports('click', false) || supports('contextMenu', false))
@@ -568,6 +700,8 @@
     oncontextmenu={event => {
       if (supports('contextMenu', true)) {
         event.preventDefault();
+        if (!visible || !supports('contextMenu', false))
+          mousePoint = { left: event.clientX, top: event.clientY };
         requestVisible(visible && supports('contextMenu', false) ? false : true);
       }
     }} onkeydown={handleKeydown}>
@@ -582,13 +716,16 @@
         motionState.className,
         rendered && !present && 'ant-tabs-dropdown-hidden',
         themeClassName,
-        `ant-tabs-dropdown-placement-${shown ? actualSide : side}${align === 'left' ? 'Left' : align === 'right' ? 'Right' : ''}`,
+        more?.arrow && 'ant-tabs-dropdown-show-arrow',
+        (aligned ? actualPlacement : initialPlacement)
+          && `ant-tabs-dropdown-placement-${aligned ? actualPlacement : initialPlacement}`,
         !ownOverlayClass && (rtl ?? config.direction === 'rtl')
           && 'ant-tabs-dropdown-rtl',
         more && Object.hasOwn(more, 'overlayClassName') ? more.overlayClassName : popupClassName
       ]} style={initialStyle}
       onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
       onclick={event => more?.onOverlayClick?.(event)}>
+      {#if rendered && more?.arrow}<div class="ant-tabs-dropdown-arrow"></div>{/if}
       {#if rendered && more && Object.hasOwn(more, 'overlay')}
         {@render more.overlay?.()}
       {:else if rendered && more?.popupRender}

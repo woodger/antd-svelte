@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tabs More: arrow, align/alignPoint, placements/builtinPlacements и onPopupAlign
+  с исходными offsets/regions/flip/shift, dynamic inset и приоритетом CSS. Общий
+  числовой useAlign расширен с сохранением поведения Tour; native top layer,
+  border-box measurement, state/focus и cleanup сохранены. Добавлены
+  unit/SSR/browser-проверки и 51 UMD-эталон.
 - Tabs More: raw overlay, autoDestroy после leave end, openClassName, исходная
   slide-анимация и transitionName/animation, раздельные showAction/hideAction и touch.
   Сохранены отдельные состояния OperationNode/Trigger при visible=undefined,

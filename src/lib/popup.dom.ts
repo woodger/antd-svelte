@@ -11,12 +11,14 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   onDismiss: (reason: 'escape' | 'outside') => void;
   onKeydown?: (event: KeyboardEvent) => void;
   preserveFocus?: boolean;
-  maxWidth?: string;
+  maxWidth?: string | false;
   align?: 'left' | 'right' | 'top' | 'bottom';
   matchAnchorWidth?: boolean;
   gap?: number | (() => number | undefined);
   allowZeroSize?: boolean | (() => boolean);
+  allowOffscreenAnchor?: boolean;
   getPosition?: (anchor: DOMRect, popup: DOMRect, viewport: TooltipRect) => TooltipPosition;
+  applyPosition?: (position: TooltipPosition) => void;
   onVisibilityChange?: (visible: boolean) => void;
 }): () => void {
   const document = anchor.ownerDocument;
@@ -64,8 +66,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       && !anchor.closest('[inert]')
       && anchor.getClientRects().length
       && (zeroAllowed || rect.width && rect.height)
-      && horizontalVisible
-      && verticalVisible
+      && (options.allowOffscreenAnchor || horizontalVisible && verticalVisible)
       && (!modal || modal.contains(anchor));
 
     if (!visible) {
@@ -73,11 +74,13 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       return;
     }
 
-    popup.style.maxWidth = `min(${options.maxWidth
-      ?? 'var(--ant-tooltip-max-width)'}, ${Math.max(
-        0,
-        viewport.width - 16
-      )}px)`;
+    if (options.maxWidth !== false) {
+      popup.style.maxWidth = `min(${options.maxWidth
+        ?? 'var(--ant-tooltip-max-width)'}, ${Math.max(
+          0,
+          viewport.width - 16
+        )}px)`;
+    }
     if (options.matchAnchorWidth)
       popup.style.minWidth = `${Math.min(rect.width, Math.max(0, viewport.width - 16))}px`;
     popup.hidden = false;
@@ -100,6 +103,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       options.align,
       typeof options.gap === 'function' ? options.gap() : options.gap
     );
+    if (disposed) return;
     const signature = `${position
       .left}:${position
         .top}:${position
@@ -107,11 +111,14 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
             .arrowY}:${position
               .placement}`;
 
+    options.applyPosition?.(position);
     if (signature !== lastPosition) {
-      popup.style.left = `${position.left}px`;
-      popup.style.top = `${position.top}px`;
-      popup.style.setProperty('--arrow-x', `${position.arrowX}px`);
-      popup.style.setProperty('--arrow-y', `${position.arrowY}px`);
+      if (!options.applyPosition) {
+        popup.style.left = `${position.left}px`;
+        popup.style.top = `${position.top}px`;
+        popup.style.setProperty('--arrow-x', `${position.arrowX}px`);
+        popup.style.setProperty('--arrow-y', `${position.arrowY}px`);
+      }
       options.onPlacement(position.placement);
       lastPosition = signature;
     }

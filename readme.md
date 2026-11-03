@@ -2217,6 +2217,46 @@ getPopupContainer; CSS styles задаются строкой. Корневые 
 getPopupContainer также поддерживаются; одноимённые more overrides имеют приоритет,
 включая явно заданный undefined. Portal сохраняет тему и собственные CSS variables popup.
 
+Выравнивание More повторяет rc-dropdown/rc-trigger 3.10.1. `placements` заменяет
+таблицу целиком, `builtinPlacements` имеет приоритет; его явный undefined даёт пустую
+таблицу Trigger. `align` неглубоко перекрывает выбранный placement, в том числе весь
+overflow. Points физические и не отражаются в RTL. Offset и targetOffset принимают
+числа или проценты от popup и target соответственно. Поддержаны flip/shift, исходное
+значение adjust=0, области htmlRegion visible/scroll/visibleFirst и dynamicInset
+для right/bottom, включая legacy _experimental.dynamicInset. Старые useCssRight,
+useCssBottom, useCssTransform и ignoreShake исходный 3.10.1 не использует.
+
+`alignPoint` использует последнюю client-точку click/hover/contextMenu. Без точки
+keyboard/touch используют кнопку. В point mode default stretch выключен;
+minOverlayWidthMatchTrigger=true включает его, собственный undefined выключает.
+Point menu с click-hide закрывается при scroll/resize; hover сохраняет точку,
+включая уход кнопки за viewport. `onPopupAlign` получает popup и фактический align
+после flip, перед записью offsets. Количество вызовов не фиксируется; idle frames
+не создают callback loop. При нулевом scale выравнивание/callback пропускается.
+CSS overlayStyle имеет приоритет над offsets и arrow variables.
+
+```svelte
+<Tabs {items} more={{
+  trigger: 'contextMenu',
+  alignPoint: true,
+  align: { offset: ['10%', 4], overflow: { adjustX: true, adjustY: true } }
+}} />
+```
+
+`arrow=true` добавляет div-arrow и show-arrow class низкоуровневого Dropdown.
+Tabs upstream не задаёт стили этому div; потребитель может оформить его через
+popupClassName. AutoFocus/Tab работают с overlay, пропуская div-arrow.
+AutoFocus запускается при открытии; обновление align/размеров внутри сеанса
+сохраняет фокус в пользовательском поле. Смена getPopupContainer callback с тем же
+DOM-контейнером сохраняет portal и выделение текста. Flip переключает CSS insets даже тогда,
+когда числовые координаты остаются теми же.
+Native popover остаётся в fixed top layer и отслеживает изменения layout;
+клиппинг предков участвует в расчёте доступной области. Сохраняется измерение
+реального border box при пользовательском box-sizing:content-box.
+Исходная логика сопровождается MIT-лицензиями
+[rc-dropdown](./src/lib/vendor/LICENSE.rc-dropdown) и
+[rc-trigger](./src/lib/vendor/LICENSE.rc-trigger).
+
 `more.visible` со значением true/false перекрывает внутренние запросы и onClose.
 Как в rc-tabs,
 more.onVisibleChange заменяет внутренний pointer/dismiss callback; для controlled
@@ -2319,6 +2359,11 @@ keyboard, control/owner callbacks, popupRender, portal, вложенные по�
 Фикстура `?fixture=tabs-more-runtime` сверяет lifecycle, overlay precedence,
 раздельные actions/touch, visible=undefined и motion phases с 33 эталонами UMD.
 Здесь же проверяются autoDestroy после leave, reversal, смена motion и cleanup portal.
+Фикстура `?fixture=tabs-more-position` сверяет 51 эталон геометрии официального UMD:
+placements, offsets, overflow/regions, point targeting, arrow, callback payload и
+container. Живые проверки защищают DOM/state/draft/selection/focus, callback loop,
+scroll/resize, уход anchor за viewport и cleanup. Общий числовой engine проверяется
+также прежними сценариями Tour.
 Фикстура `?fixture=tabs-indicator` сверяет 64 эталона indicator/indicatorSize из
 официального UMD и направления onTabScroll в восьми сочетаниях RTL/placement.
 Здесь же проверяются сохранение DOM, focus, More, прокрутки и cleanup кадров/listeners.
