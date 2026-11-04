@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tooltip/Popconfirm: destroyOnHidden и legacy destroyTooltipOnHide с исходным
+  приоритетом современного false, сбросом вложенного состояния и lazy SSR.
+  Настройки работают в Typography ellipsis Tooltip и трёх режимах Slider;
+  native shell/ARIA и default lifetime сохранены. Добавлены 44 UMD-сценария
+  и SSR/browser-проверки, включая Popover, portals и ожидающий Promise Popconfirm.
 - Typography Tooltip (ellipsis/copy/edit): trigger/delays из ConfigProvider.tooltip, локальный
   приоритет с 0/[], click/contextMenu и комбинации событий. Semantic callbacks видят
   разрешённые defaults; сохранены native измерения, lazy SSR, DOM и фокус.

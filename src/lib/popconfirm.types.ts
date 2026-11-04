@@ -55,6 +55,13 @@ export interface PopconfirmProps {
   open?: boolean | undefined;
   /** @defaultValue false */
   defaultOpen?: boolean;
+  /** Удаляет содержимое подтверждения при закрытии. @defaultValue false */
+  destroyOnHidden?: boolean;
+  /**
+   * Явный destroyOnHidden приоритетнее, включая false; keepParent не меняет удаление.
+   * @deprecated Используйте destroyOnHidden.
+   */
+  destroyTooltipOnHide?: boolean | { keepParent?: boolean };
   disabled?: boolean;
   /** @defaultValue true */
   showCancel?: boolean;

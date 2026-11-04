@@ -29,6 +29,8 @@
     openClassName,
     icon,
     defaultOpen = false,
+    destroyOnHidden,
+    destroyTooltipOnHide,
     disabled,
     showCancel = true,
     okText,
@@ -186,6 +188,7 @@
 
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`popconfirm-prefix:${prefix}`} />{/if}<Popover content={hasTitle ? content : undefined} bind:open={() => visible, request}
   trigger={resolvedDisabled ? [] : resolvedTrigger} mouseEnterDelay={enterDelay} mouseLeaveDelay={leaveDelay}
+  {destroyOnHidden} {destroyTooltipOnHide}
   {placement} {arrow} {color} {openClassName} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
   {rootClassName} {overlayInnerStyle} classNames={{
     root: [config.popconfirm?.class, overlayClassName, semantics.classNames.root].filter(Boolean).join(' '),

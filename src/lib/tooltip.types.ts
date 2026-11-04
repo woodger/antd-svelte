@@ -71,6 +71,14 @@ export interface TooltipProps {
   /** @defaultValue false */
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
+  /** Удаляет содержимое при закрытии; скрытый native shell сохраняется. @defaultValue false */
+  destroyOnHidden?: boolean;
+  /**
+   * Явный destroyOnHidden приоритетнее, включая false.
+   * Объект включает удаление независимо от keepParent.
+   * @deprecated Используйте destroyOnHidden.
+   */
+  destroyTooltipOnHide?: boolean | { keepParent?: boolean };
   /** @defaultValue 'top' */
   placement?: TooltipPlacement;
   /** @defaultValue true */
@@ -103,6 +111,10 @@ export interface TooltipProps {
 /** Параметры Tooltip ручки Slider; formatter=null отключает содержимое подсказки. */
 export interface SliderTooltipConfig {
   open?: boolean;
+  /** Удаляет содержимое каждой скрытой подсказки; по умолчанию сохраняет. */
+  destroyOnHidden?: boolean;
+  /** @deprecated Используйте destroyOnHidden, который имеет приоритет, включая false. */
+  destroyTooltipOnHide?: TooltipProps['destroyTooltipOnHide'];
   color?: TooltipColor;
   /** Локальный prefix Tooltip; относится ко всем подсказкам single/range. */
   prefixCls?: string;

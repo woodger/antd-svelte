@@ -1,6 +1,6 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
-  import { untrack } from 'svelte';
+  import { onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { getOverlaySemantics } from './overlay-semantic.engine';
@@ -31,6 +31,8 @@
     color,
     prefixCls,
     openClassName,
+    destroyOnHidden,
+    destroyTooltipOnHide,
     open,
     anchor,
     describe,
@@ -48,6 +50,8 @@
     color?: TooltipColor;
     prefixCls?: string;
     openClassName?: string;
+    destroyOnHidden?: boolean;
+    destroyTooltipOnHide?: TooltipProps['destroyTooltipOnHide'];
     open: boolean;
     anchor?: Element;
     describe?: Element;
@@ -75,6 +79,8 @@
   let arrowConfig = $derived(getTooltipArrow(arrow, config.tooltip?.arrow));
   let sourcePlacement = $derived(Boolean(config.tooltip) || typeof arrow === 'object'
     || typeof autoAdjustOverflow === 'object');
+  let destroy = $derived(destroyOnHidden ?? semanticProps?.destroyOnHidden
+    ?? Boolean(destroyTooltipOnHide ?? semanticProps?.destroyTooltipOnHide));
   let callbackProps = $derived.by<TooltipSemanticProps>(() => {
     const source = getTooltipPlacementConfig(arrowConfig, designTokens.state.token);
     const placements = getPopupPlacements(
@@ -86,13 +92,14 @@
     );
     for (const align of Object.values(placements)) align.htmlRegion = 'visibleFirst';
     return {
-      ...(semanticProps ?? { title, open, placement, arrow, color, prefixCls, openClassName }),
+      ...(semanticProps ?? { title, open, placement, arrow, color, prefixCls, openClassName,
+        destroyOnHidden, destroyTooltipOnHide }),
       trigger: semanticProps?.trigger || config.tooltip?.trigger
         || (config.tooltip ? 'hover' : ['hover', 'focus']),
       mouseEnterDelay: semanticProps?.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1,
       mouseLeaveDelay: semanticProps?.mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1,
       getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
-      destroyOnHidden: false,
+      destroyOnHidden: destroy,
       builtinPlacements: placements
     };
   });
@@ -115,12 +122,16 @@
   const initialStyle = untrack(() => rootStyle);
   const popupStyle = createOverlayStyle(() => rootLayers);
   let available = $derived(typeof title === 'function' || Boolean(title.trim()));
+  let mounted = $state(false);
+  let renderContent = $derived(!destroy || mounted && open && available);
   const portal = createPopupContainer(() => ({
     open: open && available,
     reference: anchor,
     getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
     themeStyle: rootStyle
   }));
+
+  onMount(() => { mounted = true; });
 
   function containerStyle(node: HTMLElement) {
     const update = connectInlineStyle(node);
@@ -195,5 +206,5 @@
   <span data-ant-tooltip-container="" class={[`${prefix}-container`, semantics.classNames.container]}
     data-ant-overlay-color={colorInfo.overlayStyle.length > 0 || undefined}
     style={initialContainerStyle} {@attach containerStyle}
-    tabindex="-1">{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</span>
+    tabindex="-1">{#if renderContent}{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}{/if}</span>
 </span>

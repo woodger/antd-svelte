@@ -433,6 +433,8 @@
     color={tooltip === false ? undefined : tooltip?.color}
     prefixCls={tooltip === false ? undefined : tooltip?.prefixCls}
     openClassName={tooltip === false ? undefined : tooltip?.openClassName}
+    destroyOnHidden={tooltip === false ? undefined : tooltip?.destroyOnHidden}
+    destroyTooltipOnHide={tooltip === false ? undefined : tooltip?.destroyTooltipOnHide}
     autoAdjustOverflow={tooltip === false ? undefined : tooltip?.autoAdjustOverflow}
     getPopupContainer={(tooltip === false ? undefined : tooltip?.getPopupContainer)
       || config.getPopupContainer}

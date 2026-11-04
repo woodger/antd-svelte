@@ -572,6 +572,8 @@
         color={props.tooltip.color}
         prefixCls={props.tooltip.prefixCls}
         openClassName={props.tooltip.openClassName}
+        destroyOnHidden={props.tooltip.destroyOnHidden}
+        destroyTooltipOnHide={props.tooltip.destroyTooltipOnHide}
         autoAdjustOverflow={props.tooltip.autoAdjustOverflow}
         getPopupContainer={props.tooltip.getPopupContainer || config.getPopupContainer}
         getTooltipContainer={props.tooltip.getTooltipContainer}
@@ -603,6 +605,8 @@
       color={props.tooltip === false ? undefined : props.tooltip?.color}
       prefixCls={props.tooltip === false ? undefined : props.tooltip?.prefixCls}
       openClassName={props.tooltip === false ? undefined : props.tooltip?.openClassName}
+      destroyOnHidden={props.tooltip === false ? undefined : props.tooltip?.destroyOnHidden}
+      destroyTooltipOnHide={props.tooltip === false ? undefined : props.tooltip?.destroyTooltipOnHide}
       autoAdjustOverflow={props.tooltip === false ? undefined : props.tooltip?.autoAdjustOverflow}
       getPopupContainer={(props.tooltip === false ? undefined : props.tooltip?.getPopupContainer)
         || config.getPopupContainer}

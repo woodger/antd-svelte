@@ -1406,6 +1406,9 @@ Tooltip по умолчанию показывает число при наве�
 Escape скрывает подсказку, сохраняя фокус и число; следующее действие открывает
 её снова. Disabled скрывает подсказку. Текст дополняет aria-describedby поля,
 сохраняя help/ошибку FormItem. Числовые callbacks от показа подсказки не вызываются.
+Поля tooltip.destroyOnHidden и legacy tooltip.destroyTooltipOnHide работают во всех
+трёх режимах подсказок Slider. Правила приоритета и lazy SSR
+такие же, как у самостоятельного Tooltip; по умолчанию содержимое сохраняется.
 
 ### Диапазон Slider
 
@@ -1532,6 +1535,26 @@ Trigger без component config по умолчанию `['hover', 'focus']`; м
 остаётся видимой; клик по ней сохраняет фокус. Escape и нажатие снаружи закрывают
 её. После Escape она остаётся скрытой до нового наведения/фокуса. В Modal первый
 Escape закрывает Tooltip, следующий — Modal.
+
+По умолчанию содержимое скрытой подсказки сохраняется. DestroyOnHidden=true удаляет
+его при закрытии и создаёт заново при открытии: DOM-состояние и состояние вложенного
+компонента сбрасываются. Legacy destroyTooltipOnHide принимает boolean или объект
+с keepParent; объект включает удаление независимо от keepParent. Явный современный
+prop, включая false, приоритетнее alias. Смена флага у открытой подсказки сохраняет
+её DOM, ввод и фокус; включение удаления у закрытой сразу очищает содержимое.
+При включённом удалении SSR не вызывает title snippet, включая начальный open/defaultOpen.
+Прежний скрытый native shell и его ID/ARIA сохраняются; default SSR остаётся eager.
+Это также работает в ellipsis Tooltip Typography и подсказках Slider.
+Удаление следует native закрытию без ожидания исходной CSS motion.
+
+Жизненный цикл сверяется с
+[44 UMD-сценариями / 224 кадрами](./tests/browser/fixtures/ant-design-overlay-lifecycle-reference.json),
+[SSR](./tests/package/overlay-lifecycle.ssr.test.ts) и
+[browser](./tests/browser/overlay-lifecycle.spec.ts), `?fixture=overlay-lifecycle`.
+Эталоны получены с отключённой motion из runtime CSS официального UMD.
+Исходное lazy mount до первого открытия записано отдельно: существующий native
+SSR и eagerly mounted default content остаются согласованной границей.
+Кэширование скрытого содержимого fresh и исходная motion ещё требуют переноса.
 
 Placement принимает top/bottom/left/right, topLeft/topRight/bottomLeft/bottomRight
 и leftTop/leftBottom/rightTop/rightBottom. Направления физические и не меняются
@@ -1847,6 +1870,12 @@ GetPopupContainer/getTooltipContainer передаются Popover с теми �
 Контекст темы и Promise действия сохраняются при переносе popup в контейнер.
 Trigger и hover delays наследуются из ConfigProvider.popconfirm; локальные props
 имеют приоритет. Без настройки trigger остаётся click.
+DestroyOnHidden и legacy destroyTooltipOnHide передаются Popover с исходным
+приоритетом современного prop, включая false. При удалении содержимого заново
+создаются description snippet и кнопки; сам контроллер подтверждения сохраняет
+защиту от результата прежнего Promise после закрытия или повторного открытия.
+При включённом удалении SSR-содержимое остаётся ленивым даже при начальном open/defaultOpen;
+native shell, focus и ARIA следуют прежним правилам Popover.
 
 ```svelte
 <script lang="ts">
@@ -4521,6 +4550,8 @@ boolean ellipsis. Tooltip измеряет native overflow при наведен
 Повторный contextMenu переключает видимость, обычный click её закрывает.
 Подсказки copy/edit наследуют те же настройки; копирование, success title и вход
 в редактор сохраняют свои обычные действия.
+Ellipsis Tooltip также принимает destroyOnHidden и legacy destroyTooltipOnHide:
+при закрытии удаляется его содержимое, измерение текста и native shell сохраняются.
 Как в upstream, onOpenChange сообщает raw open даже для текста без усечения,
 но сама подсказка остаётся скрытой. Для native CSS ellipsis сначала требуется
 измерение при наведении; JS ellipsis измеряется независимо от Tooltip trigger.
