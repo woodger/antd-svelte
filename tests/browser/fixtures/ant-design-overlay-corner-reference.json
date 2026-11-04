@@ -1,0 +1,4593 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "scope": "placement geometry and arrow CSS; explicit boxes isolate other component layout"
+  },
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "width": 600,
+    "height": 400
+  },
+  "cases": [
+    {
+      "name": "topLeft-center",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topLeft-primary-flip",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 4,
+        "width": 80,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 4,
+            "width": 80,
+            "height": 20
+          },
+          "popup": {
+            "x": 200,
+            "y": 36,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topLeft-cross-flip",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 576,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 576,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 476,
+            "y": 36,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 110,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topLeft-no-adjust",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 4,
+            "y": -56,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 10,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topLeft-oversize",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 700,
+        "height": 480
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": -420,
+            "y": 208,
+            "width": 700,
+            "height": 480
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "672px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 660,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topLeft-fractional",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200.5,
+        "y": 160.25,
+        "width": 80.5,
+        "height": 36.5
+      },
+      "popup": {
+        "width": 120.25,
+        "height": 48.5
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200.5,
+            "y": 160.25,
+            "width": 80.5,
+            "height": 36.5
+          },
+          "popup": {
+            "x": 200,
+            "y": 100.5,
+            "width": 120.25,
+            "height": 48.5
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32.5px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40.25,
+          "arrowY": 54.5,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topLeft-no-arrow",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": false,
+      "geometry": true,
+      "gap": 4,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 108,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": null,
+          "arrowX": 40,
+          "arrowY": 50,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-topLeft",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 96,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "36px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 58,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-topLeft",
+      "component": "popover",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 54,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "78px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 100,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popconfirm-topLeft",
+      "component": "popconfirm",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 28,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "104px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 126,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group-topLeft",
+      "component": "avatar-group",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 28,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "104px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 126,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topRight-center",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 80,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topRight-primary-flip",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 4,
+        "width": 80,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 4,
+            "width": 80,
+            "height": 20
+          },
+          "popup": {
+            "x": 160,
+            "y": 36,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 80,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topRight-cross-flip",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 4,
+            "y": 36,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 10,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topRight-no-adjust",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": -96,
+            "y": -56,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 110,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topRight-oversize",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 700,
+        "height": 480
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 700,
+            "height": 480
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topRight-fractional",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200.5,
+        "y": 160.25,
+        "width": 80.5,
+        "height": 36.5
+      },
+      "popup": {
+        "width": 120.25,
+        "height": 48.5
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200.5,
+            "y": 160.25,
+            "width": 80.5,
+            "height": 36.5
+          },
+          "popup": {
+            "x": 160.75,
+            "y": 100.5,
+            "width": 120.25,
+            "height": 48.5
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92.25px",
+            "y": "32.5px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 80,
+          "arrowY": 54.5,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "topRight-no-arrow",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": false,
+      "geometry": true,
+      "gap": 4,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 108,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": null,
+          "arrowX": 80,
+          "arrowY": 50,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-topRight",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 128,
+            "y": 96,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "124px",
+            "y": "36px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 112,
+          "arrowY": 58,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-topRight",
+      "component": "popover",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 79,
+            "y": 54,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "173px",
+            "y": "78px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 161,
+          "arrowY": 100,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popconfirm-topRight",
+      "component": "popconfirm",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 40,
+            "y": 28,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "212px",
+            "y": "104px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 200,
+          "arrowY": 126,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group-topRight",
+      "component": "avatar-group",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 40,
+            "y": 28,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "212px",
+            "y": "104px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 200,
+          "arrowY": 126,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomLeft-center",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomLeft-primary-flip",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 376,
+        "width": 80,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 376,
+            "width": 80,
+            "height": 20
+          },
+          "popup": {
+            "x": 200,
+            "y": 316,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomLeft-cross-flip",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 576,
+        "y": 376,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 576,
+            "y": 376,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 476,
+            "y": 316,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 110,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomLeft-no-adjust",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 4,
+            "y": 36,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 10,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomLeft-oversize",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 700,
+        "height": 480
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 700,
+            "height": 480
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomLeft-fractional",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200.5,
+        "y": 160.25,
+        "width": 80.5,
+        "height": 36.5
+      },
+      "popup": {
+        "width": 120.25,
+        "height": 48.5
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200.5,
+            "y": 160.25,
+            "width": 80.5,
+            "height": 36.5
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 120.25,
+            "height": 48.5
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40.25,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomLeft-no-arrow",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": false,
+      "geometry": true,
+      "gap": 4,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 200,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": null,
+          "arrowX": 40,
+          "arrowY": -2,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-bottomLeft",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-bottomLeft",
+      "component": "popover",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popconfirm-bottomLeft",
+      "component": "popconfirm",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group-bottomLeft",
+      "component": "avatar-group",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomRight-center",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 80,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomRight-primary-flip",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 376,
+        "width": 80,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 376,
+            "width": 80,
+            "height": 20
+          },
+          "popup": {
+            "x": 160,
+            "y": 316,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 80,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomRight-cross-flip",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 4,
+        "y": 376,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 376,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 4,
+            "y": 316,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 10,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomRight-no-adjust",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": -96,
+            "y": 36,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 110,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomRight-oversize",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 700,
+        "height": 480
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 700,
+            "height": 480
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomRight-fractional",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200.5,
+        "y": 160.25,
+        "width": 80.5,
+        "height": 36.5
+      },
+      "popup": {
+        "width": 120.25,
+        "height": 48.5
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200.5,
+            "y": 160.25,
+            "width": 80.5,
+            "height": 36.5
+          },
+          "popup": {
+            "x": 160.75,
+            "y": 208,
+            "width": 120.25,
+            "height": 48.5
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92.25px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 80,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "bottomRight-no-arrow",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": false,
+      "geometry": true,
+      "gap": 4,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 200,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": null,
+          "arrowX": 80,
+          "arrowY": -2,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-bottomRight",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 128,
+            "y": 208,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "124px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 112,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-bottomRight",
+      "component": "popover",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 79,
+            "y": 208,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "173px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 161,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popconfirm-bottomRight",
+      "component": "popconfirm",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 40,
+            "y": 208,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "212px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 200,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group-bottomRight",
+      "component": "avatar-group",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 40,
+            "y": 208,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "212px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 200,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftTop-center",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftTop-primary-flip",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 4,
+        "y": 160,
+        "width": 20,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 160,
+            "width": 20,
+            "height": 36
+          },
+          "popup": {
+            "x": 36,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftTop-cross-flip",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 4,
+        "y": 376,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 376,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 36,
+            "y": 348,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 38,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftTop-no-adjust",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": -128,
+            "y": 4,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 10,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftTop-oversize",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 700,
+        "height": 480
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 700,
+            "height": 480
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftTop-fractional",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200.5,
+        "y": 160.25,
+        "width": 80.5,
+        "height": 36.5
+      },
+      "popup": {
+        "width": 120.25,
+        "height": 48.5
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200.5,
+            "y": 160.25,
+            "width": 80.5,
+            "height": 36.5
+          },
+          "popup": {
+            "x": 68.75,
+            "y": 160,
+            "width": 120.25,
+            "height": 48.5
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104.25px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126.25,
+          "arrowY": 18.25,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftTop-no-arrow",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": false,
+      "geometry": true,
+      "gap": 4,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 76,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": null,
+          "arrowX": 122,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-leftTop",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 36,
+            "y": 160,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "136px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 158,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-leftTop",
+      "component": "popover",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popconfirm-leftTop",
+      "component": "popconfirm",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group-leftTop",
+      "component": "avatar-group",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftBottom-center",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftBottom-primary-flip",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 4,
+        "y": 160,
+        "width": 20,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 160,
+            "width": 20,
+            "height": 36
+          },
+          "popup": {
+            "x": 36,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftBottom-cross-flip",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 36,
+            "y": 4,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 10,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftBottom-no-adjust",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": -128,
+            "y": -24,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 38,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftBottom-oversize",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 700,
+        "height": 480
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 700,
+            "height": 480
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftBottom-fractional",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200.5,
+        "y": 160.25,
+        "width": 80.5,
+        "height": 36.5
+      },
+      "popup": {
+        "width": 120.25,
+        "height": 48.5
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200.5,
+            "y": 160.25,
+            "width": 80.5,
+            "height": 36.5
+          },
+          "popup": {
+            "x": 68.75,
+            "y": 148.5,
+            "width": 120.25,
+            "height": 48.5
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104.25px",
+            "y": "24.5px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126.25,
+          "arrowY": 30.25,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "leftBottom-no-arrow",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": false,
+      "geometry": true,
+      "gap": 4,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 76,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": null,
+          "arrowX": 122,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-leftBottom",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 36,
+            "y": 144,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "136px",
+            "y": "28px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 158,
+          "arrowY": 34,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-leftBottom",
+      "component": "popover",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 102,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "70px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 76,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popconfirm-leftBottom",
+      "component": "popconfirm",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 76,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "96px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 102,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group-leftBottom",
+      "component": "avatar-group",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 76,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "96px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 102,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightTop-center",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightTop-primary-flip",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 576,
+        "y": 160,
+        "width": 20,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 576,
+            "y": 160,
+            "width": 20,
+            "height": 36
+          },
+          "popup": {
+            "x": 444,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightTop-cross-flip",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 576,
+        "y": 376,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 576,
+            "y": 376,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 444,
+            "y": 348,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 38,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightTop-no-adjust",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 36,
+            "y": 4,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 10,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightTop-oversize",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 700,
+        "height": 480
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 700,
+            "height": 480
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightTop-fractional",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200.5,
+        "y": 160.25,
+        "width": 80.5,
+        "height": 36.5
+      },
+      "popup": {
+        "width": 120.25,
+        "height": 48.5
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200.5,
+            "y": 160.25,
+            "width": 80.5,
+            "height": 36.5
+          },
+          "popup": {
+            "x": 293,
+            "y": 160,
+            "width": 120.25,
+            "height": 48.5
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18.25,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightTop-no-arrow",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": false,
+      "geometry": true,
+      "gap": 4,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 284,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": null,
+          "arrowX": -2,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-rightTop",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-rightTop",
+      "component": "popover",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popconfirm-rightTop",
+      "component": "popconfirm",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group-rightTop",
+      "component": "avatar-group",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightBottom-center",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightBottom-primary-flip",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 576,
+        "y": 160,
+        "width": 20,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 576,
+            "y": 160,
+            "width": 20,
+            "height": 36
+          },
+          "popup": {
+            "x": 444,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightBottom-cross-flip",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 576,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 576,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 444,
+            "y": 4,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 10,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightBottom-no-adjust",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 4,
+        "y": 4,
+        "width": 20,
+        "height": 20
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 4,
+            "y": 4,
+            "width": 20,
+            "height": 20
+          },
+          "popup": {
+            "x": 36,
+            "y": -24,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 38,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightBottom-oversize",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 700,
+        "height": 480
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 700,
+            "height": 480
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightBottom-fractional",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200.5,
+        "y": 160.25,
+        "width": 80.5,
+        "height": 36.5
+      },
+      "popup": {
+        "width": 120.25,
+        "height": 48.5
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200.5,
+            "y": 160.25,
+            "width": 80.5,
+            "height": 36.5
+          },
+          "popup": {
+            "x": 293,
+            "y": 148.5,
+            "width": 120.25,
+            "height": 48.5
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24.5px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 30.25,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "rightBottom-no-arrow",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": false,
+      "geometry": true,
+      "gap": 4,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 284,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": null,
+          "arrowX": -2,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-rightBottom",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 144,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "28px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 34,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-rightBottom",
+      "component": "popover",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 102,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "70px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 76,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popconfirm-rightBottom",
+      "component": "popconfirm",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 76,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "96px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 102,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "avatar-group-rightBottom",
+      "component": "avatar-group",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 76,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "96px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 102,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-rtl",
+      "component": "popover",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "direction": "rtl",
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 54,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "78px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 100,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-custom-gap",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "token": {
+        "sizePopupArrow": 24,
+        "marginXXS": 6
+      },
+      "geometry": true,
+      "gap": 18,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 298,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "16px",
+            "width": "24px",
+            "height": "24px",
+            "transform": "matrix(0, -1, 1, 0, -24, 0)"
+          },
+          "arrowX": -9,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-fractional-gap",
+      "component": "popover",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "token": {
+        "sizePopupArrow": 13,
+        "marginXXS": 3.25
+      },
+      "geometry": true,
+      "gap": 9.75,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 205,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "95px",
+            "y": "0px",
+            "width": "13px",
+            "height": "13px",
+            "transform": "matrix(1, 0, 0, 1, 0, -13)"
+          },
+          "arrowX": 80,
+          "arrowY": -4.875,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-y-flip-history",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 4,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "geometry": true,
+      "gap": 12,
+      "frames": [
+        {
+          "rect": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          }
+        },
+        {
+          "open": false
+        },
+        {
+          "open": true
+        }
+      ],
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 4,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 52,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        },
+        null,
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-x-flip-history",
+      "component": "popover",
+      "placement": "rightTop",
+      "rect": {
+        "x": 576,
+        "y": 160,
+        "width": 20,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "geometry": true,
+      "gap": 12,
+      "frames": [
+        {
+          "rect": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          }
+        },
+        {
+          "open": false
+        },
+        {
+          "open": true
+        }
+      ],
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 576,
+            "y": 160,
+            "width": 20,
+            "height": 36
+          },
+          "popup": {
+            "x": 444,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        },
+        null,
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "popover-placement-updates",
+      "component": "popover",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "gap": 12,
+      "frames": [
+        {
+          "placement": "bottomRight"
+        },
+        {
+          "placement": "leftBottom"
+        },
+        {
+          "placement": "rightTop"
+        },
+        {
+          "placement": "topRight"
+        }
+      ],
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 54,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "78px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 100,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 79,
+            "y": 208,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "173px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 161,
+          "arrowY": -6,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 102,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "70px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 76,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 54,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "78px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 100,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "tooltip-size-updates",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "geometry": true,
+      "gap": 12,
+      "frames": [
+        {
+          "popup": {
+            "width": 360,
+            "height": 210
+          }
+        },
+        {
+          "popup": {
+            "width": 120,
+            "height": 48
+          }
+        }
+      ],
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 80,
+          "arrowY": 54,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 360,
+            "height": 210
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "slider-topLeft",
+      "component": "slider",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": null
+        }
+      ]
+    },
+    {
+      "name": "slider-bottomRight",
+      "component": "slider",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 80,
+          "arrowY": -6,
+          "input": null
+        }
+      ]
+    },
+    {
+      "name": "slider-leftBottom",
+      "component": "slider",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 30,
+          "input": null
+        }
+      ]
+    },
+    {
+      "name": "slider-rightTop",
+      "component": "slider",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": null
+        }
+      ]
+    }
+  ]
+}

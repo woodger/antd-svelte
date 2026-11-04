@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tooltip/Popover/Popconfirm, AvatarGroup overflow и Slider Tooltip: все 12
+  физических placement. Угловые варианты используют общий source useAlign,
+  visibleFirst, dynamic inset rounding и flip cache до закрытия; прежние четыре
+  native placement сохранены. Добавлены 99 UMD-эталонов, unit/SSR/browser-проверки
+  и проверка сохранения ввода/выделения при смене placement.
 - AvatarGroup: настройки текущего Svelte Popover в max.popover, custom title/content,
   controlled/default open, callback, container getters и native ARIA/classes/styles.
   Добавлены destroyOnHidden/legacy alias у Popover; Group удаляет содержимое по

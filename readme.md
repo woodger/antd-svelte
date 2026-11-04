@@ -164,8 +164,8 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Table | Типизированные колонки и snippets, фильтры, стабильная сортировка одной колонки, локальная и серверная пагинация, выбор и раскрытие строк, закрепление заголовка и колонок, loading и пустые данные |
 | Modal | Нативный dialog, заголовок, footer snippet, закрытие, confirmLoading и callbacks |
 | Tour | Шаги, target/mask/gap, 12 размещений, controlled/default state, keyboard, snippets и semantic config |
-| Tooltip | Текст, hover/focus, bind:open, задержки, Escape, четыре положения, стрелка, автоматический переворот и aria-describedby |
-| Popover | Интерактивные snippets, click/hover/focus, bind:open, четыре положения, стрелка, автоматический переворот, клавиатура и возврат фокуса |
+| Tooltip | Текст, hover/focus, bind:open, задержки, Escape, 12 положений, стрелка, автоматический переворот и aria-describedby |
+| Popover | Интерактивные snippets, click/hover/focus, bind:open, 12 положений, стрелка, автоматический переворот, клавиатура и возврат фокуса |
 | Popconfirm | Подтверждение и отмена, Promise/loading, повтор после ошибки, защита от поздних результатов, snippets, локализация и клавиатура |
 | Dropdown | Плоское меню команд, click/hover, bind:open, disabled/danger, snippets, шесть положений, стрелки/typeahead и возврат фокуса |
 | Menu | Items/группы/подменю, selected/open keys, horizontal/vertical/inline, native links, клавиатура и collapse |
@@ -1477,7 +1477,7 @@ capture, reset timers и ref. SSR не измеряет DOM, не фокусир
 ConfigProvider.slider в этом этапе задаёт class/style и semantic slots диапазона.
 ClassNames объединяются, styles применяются по порядку с приоритетом локального
 слоя. Есть slots root/tracks/track/rail/handle и deprecated style aliases.
-Сохраняется текущий SliderTooltipConfig: четыре placement, text formatter,
+Сохраняется текущий SliderTooltipConfig: 12 placement, text formatter,
 native popover и описание input. Контейнер выбирается в исходном порядке:
 tooltip.getPopupContainer → ConfigProvider.getPopupContainer → legacy
 tooltip.getTooltipContainer. Корневого getPopupContainer у Slider нет.
@@ -1531,17 +1531,22 @@ Trigger по умолчанию `['hover', 'focus']`; можно выбрать 
 её. После Escape она остаётся скрытой до нового наведения/фокуса. В Modal первый
 Escape закрывает Tooltip, следующий — Modal.
 
-Placement принимает top/bottom/left/right; arrow=false скрывает стрелку.
-По умолчанию autoAdjustOverflow переворачивает подсказку, если с другой стороны
-больше места, и удерживает её в видимой области. False отключает переворот и
-сдвиг. Положение обновляется при прокрутке, resize и перемещении anchor, пока
-подсказка открыта. Class и style относятся к wrapper.
+Placement принимает top/bottom/left/right, topLeft/topRight/bottomLeft/bottomRight
+и leftTop/leftBottom/rightTop/rightBottom. Направления физические и не меняются
+при RTL. Arrow=false скрывает стрелку. У четырёх прежних вариантов сохраняются
+переворот в сторону с большим местом и сдвиг внутри viewport.
+Угловые варианты используют исходные points, visibleFirst и flip по обеим осям
+без сдвига вдоль края. Выбранный flip сохраняется до закрытия; после открытия
+расчёт начинается заново. AutoAdjustOverflow=false отключает переворот и сдвиг.
+Положение обновляется при прокрутке, resize и перемещении anchor, пока подсказка
+открыта. Class и style относятся к wrapper.
 
 При source-настройках ConfigProvider панель использует Tooltip tokens: maxWidth,
 zIndexPopup, offsets и форму стрелки, включая component aliases/algorithm.
 Отступ от anchor рассчитывается по глобальным sizePopupArrow и marginXXS, как
-в исходном Tooltip: обычно 12px со стрелкой и 4px без неё. Без source-настроек
-сохраняется прежний отступ 8px. Подробности — в
+в исходном Tooltip: обычно 12px со стрелкой и 4px без неё. Угловые варианты
+используют эти source defaults и без source-настроек; у четырёх прежних вариантов
+в native-темах сохраняется отступ 8px. Подробности — в
 [описании темы](./docs/reference/theme-context.md#токены-всплывающих-панелей).
 
 Поверхность использует нативный `popover="manual"` в верхнем слое браузера.
@@ -1560,9 +1565,16 @@ ConfigProvider.getPopupContainer. Undefined сохраняет fallback; фун�
 Portal переносит наследуемые variables и сохраняет приоритет собственных component tokens.
 Вложенные popup сохраняют собственные координаты и цвет стрелки.
 
-Галерея находится на `/ant-design#tooltip`. Первая версия поддерживает обычный
-текст и четыре положения; rich snippets, click/contextMenu, именованные цвета,
-corner placements пока отсутствуют.
+Галерея находится на `/ant-design#tooltip`. Поддерживаются строки, числа и rich snippets;
+click/contextMenu, pointAtCenter, именованные цвета и полный align/motion API пока отсутствуют.
+Расчёт угловых позиций использует общий
+[движок rc-trigger](./src/lib/popup-position.engine.ts). Координаты, CSS стрелки,
+fractional sizes, flip history и смена placement проверяются по
+[99 UMD-эталонам](./tests/browser/fixtures/ant-design-overlay-corner-reference.json),
+[unit](./src/lib/tooltip-corner-reference.test.ts),
+[SSR](./tests/package/overlay-corner.ssr.test.ts) и
+[browser](./tests/browser/overlay-corner.spec.ts). Явные размеры в части эталонов
+отделяют позиционирование от layout остальных компонентов.
 
 ## Popover
 
@@ -1614,7 +1626,7 @@ bind:open возвращает фокус, если он находился вн
 Function binding может отклонить изменение open; отклонённое закрытие сохраняет
 фокус и текущие способы удержания карточки открытой.
 
-Placement принимает top/bottom/left/right, arrow=false скрывает стрелку.
+Placement принимает те же 12 направлений, что Tooltip; arrow=false скрывает стрелку.
 AutoAdjustOverflow по умолчанию переворачивает и сдвигает поверхность у края
 viewport; false сохраняет запрошенное положение. Позиция обновляется при
 прокрутке, resize, перемещении anchor и изменении размеров содержимого.
@@ -1658,8 +1670,7 @@ snippet, компонент считает содержимое доступны
 удалении компонента, очистке содержимого и замене trigger.
 
 Галерея `/ant-design#popover` содержит редактор профиля и информационную
-карточку с кнопкой. Первая версия ограничена четырьмя положениями;
-contextMenu, corner placements и
+карточку с кнопкой. ContextMenu, pointAtCenter и
 произвольные цветовые варианты пока отсутствуют.
 
 ## Popconfirm
@@ -1751,8 +1762,8 @@ aria-controls/aria-expanded. Во время ожидания выставляе
 Галерея `/ant-design#popconfirm` показывает удаление строки Table с задержкой,
 отменой, ошибкой и повтором. После удаления trigger фокус переходит к кнопке
 восстановления записей. Пример освобождает ожидающие таймеры при удалении.
-Первая версия поддерживает открытие по клику и четыре положения;
-hover/contextMenu и corner placements пока отсутствуют.
+Поддерживаются открытие по клику и все 12 направлений Tooltip;
+hover/contextMenu пока отсутствуют.
 
 ## Menu
 
@@ -4348,8 +4359,9 @@ ConfigProvider.typography задаёт class/style и semantic root/actions/acti
 compact, RTL, native focus и исходные heading margins.
 
 Tooltip использует общий native popover внутри корня вместо React body portal.
-Corner placements, click/contextMenu, popup styles/container и полный token engine
-ещё не перенесены. Vendor CSS рассчитан на `ant-typography`, произвольный prefix
+Доступны общие 12 placement и container getters Tooltip. Click/contextMenu,
+popup semantic styles и полный token engine ещё не перенесены.
+Vendor CSS рассчитан на `ant-typography`, произвольный prefix
 не генерирует новый CSS.
 
 Проверки: [engine](./src/lib/typography.engine.test.ts),
@@ -6108,7 +6120,7 @@ aria-describedby описывает корень; id/class/style также от
 и persistence нет. Экспортируются AvatarGroupProps, AvatarGroupItem,
 AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
 Avatar и настройки исходного Popover, ещё отсутствующие в Svelte Popover,
-пока не перенесены: в том числе corner/contextMenu, semantic styles, prefixCls,
+пока не перенесены: в том числе contextMenu, pointAtCenter, semantic styles, prefixCls,
 color/align/motion и fresh cache. Точный текущий тип max.popover производен от
 [PopoverProps](./src/lib/popover.types.ts), а не дублирует отдельный список props.
 Приоритеты aliases, count/style и trigger/placement проверяются по
@@ -8081,7 +8093,7 @@ Console warnings/errors и необработанные ошибки брауз�
 просмотра; автоматического сравнения с эталонными изображениями пока нет.
 
 Tooltip проверяется на задержки и отмену ожидающего показа, hover/focus, Escape
-внутри Modal, сохранение описаний, четыре положения, переворот, обрезающие
+внутри Modal, сохранение описаний, 12 положений, переворот, обрезающие
 контейнеры, прокрутку, resize, темы, RTL и узкий экран. Проверяются форматирование
 подсказки Slider, слежение за бегунком и отсутствие числовых callbacks от закрытия.
 Popover проверяется на ввод и действия в snippets, способы открытия и их
@@ -8092,7 +8104,7 @@ Modal, темы/RTL, touch и узкий экран. Галерея провер
 Popconfirm проверяется на подтверждение/отмену и их callbacks, Promise/loading,
 ошибки и повтор, внешнее закрытие, повторное открытие, disabled, удаление и
 поздние результаты, события дочерних кнопок, Form, Modal, Tooltip, темы,
-локаль, RTL, четыре положения и touch. Модель подтверждения проверяется
+локаль, RTL, 12 положений и touch. Модель подтверждения проверяется
 отдельно с управляемыми Promise; галерея удаляет и восстанавливает строку Table.
 Dropdown проверяется на команды и порядок callbacks, клавиатуру/typeahead,
 Tab/Escape, hover-задержки, defaults и внешнее управление, disabled, обновление

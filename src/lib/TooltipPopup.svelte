@@ -6,6 +6,7 @@
   import { connectComponentTheme } from './theme-component.dom';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { connectTooltipDescription } from './tooltip.dom';
+  import { isTooltipCorner } from './tooltip.engine';
   import { connectPopup } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
   import type { TooltipPlacement } from './tooltip.types';
@@ -59,20 +60,24 @@
   });
 
   $effect(() => {
-    if (!popup || !anchor || !open || !available) return;
+    const surface = popup;
+    const reference = anchor;
+    const source = trigger;
 
-    return connectPopup(popup, anchor, {
-      trigger,
-      placement,
-      autoAdjustOverflow,
-      gap: () => untrack(() => designTokens.enabled
+    if (!surface || !reference || !open || !available) return;
+
+    return untrack(() => connectPopup(surface, reference, {
+      trigger: source,
+      get placement() { return placement; },
+      get autoAdjustOverflow() { return autoAdjustOverflow; },
+      gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement)
         ? (arrow ? designTokens.state.token.sizePopupArrow / 2 : 0)
           + designTokens.state.token.marginXXS : undefined),
-      onDismiss,
+      onDismiss: () => onDismiss(),
       onPlacement: (next) => {
         actualPlacement = next;
       }
-    });
+    }));
   });
 </script>
 

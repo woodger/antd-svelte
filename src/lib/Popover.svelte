@@ -9,7 +9,7 @@
   import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
   import { connectPopoverTrigger, focusPopover } from './popover.dom';
-  import { getTooltipDelay } from './tooltip.engine';
+  import { getTooltipDelay, isTooltipCorner } from './tooltip.engine';
   import type { PopoverContent, PopoverProps, PopoverTrigger } from './popover.types';
 
   let {
@@ -150,7 +150,7 @@
         return autoAdjustOverflow;
       },
       maxWidth: '100vw',
-      gap: () => untrack(() => designTokens.enabled
+      gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement)
         ? (arrow ? designTokens.state.token.sizePopupArrow / 2 : 0)
           + designTokens.state.token.marginXXS : undefined),
       preserveFocus: false,

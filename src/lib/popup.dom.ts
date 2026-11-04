@@ -1,4 +1,9 @@
-import { getTooltipPosition, type TooltipPosition, type TooltipRect } from './tooltip.engine';
+import {
+  getTooltipPosition,
+  type TooltipPosition,
+  type TooltipRect
+} from './tooltip.engine';
+import type { PopupFlipCache } from './popup-position.engine';
 import type { TooltipPlacement } from './tooltip.types';
 
 const openPopups = new WeakMap<Document, HTMLElement[]>();
@@ -32,6 +37,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   let shown = false;
   let disposed = false;
   let lastPosition = '';
+  let flips: PopupFlipCache | undefined;
 
   function hide() {
     const stack = openPopups.get(document);
@@ -107,8 +113,18 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       options.placement,
       options.autoAdjustOverflow,
       options.align,
-      typeof options.gap === 'function' ? options.gap() : options.gap
+      typeof options.gap === 'function' ? options.gap() : options.gap,
+      {
+        flips,
+        scrollRegion: {
+          x: -document.documentElement.scrollLeft,
+          y: -document.documentElement.scrollTop,
+          width: Math.max(document.documentElement.scrollWidth, bounds.width),
+          height: Math.max(document.documentElement.scrollHeight, bounds.height)
+        }
+      }
     );
+    flips = position.flips;
     if (disposed) return;
     const signature = `${position
       .left}:${position

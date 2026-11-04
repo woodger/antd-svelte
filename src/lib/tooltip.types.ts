@@ -1,6 +1,10 @@
 import type { Snippet } from 'svelte';
 
-export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right';
+/** Физические направления; Left/Right в имени не меняются при RTL. */
+export type TooltipPlacement =
+  | 'top' | 'bottom' | 'left' | 'right'
+  | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight'
+  | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 export type TooltipTrigger = 'hover' | 'focus';
 
 /** Текстовая подсказка по hover/focus с bind:open и доступным описанием trigger. */

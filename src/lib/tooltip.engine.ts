@@ -1,3 +1,4 @@
+import { getPopupPlacements, getPopupPosition, type PopupFlipCache } from './popup-position.engine';
 import type { TooltipPlacement } from './tooltip.types';
 
 export interface TooltipRect {
@@ -13,6 +14,67 @@ export interface TooltipPosition {
   arrowX: number;
   arrowY: number;
   placement: TooltipPlacement;
+  /** История rc-trigger flips для следующего расчёта в том же открытии. */
+  flips?: PopupFlipCache;
+}
+
+interface TooltipPositionContext {
+  flips?: Readonly<PopupFlipCache>;
+  scrollRegion?: TooltipRect;
+}
+
+type TooltipCornerPlacement = Exclude<TooltipPlacement, 'top' | 'bottom' | 'left' | 'right'>;
+
+export function isTooltipCorner(placement: TooltipPlacement): placement is TooltipCornerPlacement {
+  return placement.length > 6;
+}
+
+function getCornerPosition(
+  anchor: TooltipRect,
+  popup: { width: number; height: number },
+  viewport: TooltipRect,
+  placement: TooltipCornerPlacement,
+  autoAdjustOverflow: boolean,
+  gap: number,
+  context: TooltipPositionContext = {}
+): TooltipPosition {
+  // Для corners без pointAtCenter важна сумма half-arrow + offset.
+  const placements = getPopupPlacements(false, 0, gap, 6, autoAdjustOverflow);
+  const right = viewport.x + viewport.width;
+  const bottom = viewport.y + viewport.height;
+  // Измерение useAlign в (0, 0) расширяет scroll region до размеров popup.
+  const region = context.scrollRegion ?? {
+    ...viewport,
+    width: Math.max(viewport.width, popup.width),
+    height: Math.max(viewport.height, popup.height)
+  };
+  const result = getPopupPosition({
+    target: { left: anchor.x, top: anchor.y, width: anchor.width, height: anchor.height },
+    popup: { left: 0, top: 0, width: popup.width, height: popup.height },
+    mirror: { right, bottom },
+    visible: { left: viewport.x, top: viewport.y, right, bottom },
+    scroll: {
+      left: region.x,
+      top: region.y,
+      right: region.x + region.width,
+      bottom: region.y + region.height
+    },
+    placements,
+    align: { ...placements[placement], htmlRegion: 'visibleFirst' },
+    scaleX: 1,
+    scaleY: 1,
+    flips: context.flips
+  });
+  const point = result.align.points[0];
+
+  return {
+    left: point[1] === 'r' ? right - result.right - popup.width : result.x,
+    top: point[0] === 'b' ? bottom - result.bottom - popup.height : result.y,
+    placement: result.placement as TooltipPlacement,
+    arrowX: result.arrowX,
+    arrowY: result.arrowY,
+    flips: result.flips
+  };
 }
 
 export function getTooltipDelay(seconds: number | undefined, fallback = 0.1): number {
@@ -29,15 +91,20 @@ export function getTooltipPosition(
   placement: TooltipPlacement,
   autoAdjustOverflow = true,
   align?: 'left' | 'right' | 'top' | 'bottom',
-  gap = 8
+  gap = 8,
+  context?: TooltipPositionContext
 ): TooltipPosition {
+  if (isTooltipCorner(placement)) {
+    return getCornerPosition(anchor, popup, viewport, placement, autoAdjustOverflow, gap, context);
+  }
+
   const padding = 8;
-  const opposite: Record<TooltipPlacement, TooltipPlacement> = {
+  const opposite = {
     top: 'bottom',
     bottom: 'top',
     left: 'right',
     right: 'left'
-  };
+  } as const;
   const space = {
     top: anchor.y - viewport.y - gap - padding,
     bottom: viewport.y + viewport.height - anchor.y - anchor.height - gap - padding,
