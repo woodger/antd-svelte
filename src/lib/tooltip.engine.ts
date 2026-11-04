@@ -32,10 +32,13 @@ export interface TooltipSourcePlacement {
   radius: number;
 }
 
-export function getTooltipArrow(arrow: TooltipArrow | undefined) {
-  const config: { show?: boolean; pointAtCenter?: boolean } =
-    typeof arrow === 'boolean' ? { show: arrow } : arrow || {};
-  return { show: config.show ?? true, pointAtCenter: config.pointAtCenter };
+export function getTooltipArrow(arrow?: TooltipArrow, contextArrow?: TooltipArrow) {
+  const toConfig = (value: TooltipArrow | undefined): { show?: boolean; pointAtCenter?: boolean } =>
+    typeof value === 'boolean' ? { show: value } : value || {};
+  const config = toConfig(arrow);
+  const context = toConfig(contextArrow);
+
+  return { ...context, ...config, show: config.show ?? context.show ?? true };
 }
 
 /** Placements используют глобальные tokens; component aliases относятся к CSS стрелки. */

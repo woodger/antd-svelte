@@ -1,10 +1,47 @@
 import type { Snippet } from 'svelte';
-import type { AdjustOverflow, TooltipArrow, TooltipPlacement } from './tooltip.types';
+import type {
+  AdjustOverflow,
+  TooltipArrow,
+  TooltipPlacement,
+  TooltipSlots,
+  TooltipTrigger
+} from './tooltip.types';
 
 export type PopoverPlacement = TooltipPlacement;
-export type PopoverTrigger = 'hover' | 'focus' | 'click';
+export type PopoverTrigger = TooltipTrigger;
 /** False опускает секцию; true оставляет пустую секцию без текста; 0 отображается. */
 export type PopoverContent = string | number | boolean | Snippet;
+
+export interface PopoverSlots extends TooltipSlots {
+  title?: string;
+  content?: string;
+}
+
+/** Callback получает props с разрешёнными placement, trigger и delays; CSS — строки. */
+export type PopoverSemantic = PopoverSlots | ((info: {
+  props: PopoverSemanticProps;
+}) => PopoverSlots);
+
+export interface PopoverSemanticProps extends PopoverProps {
+  /** Входной prop владельца; внутреннее uncontrolled open не подменяет его. */
+  open?: boolean;
+  placement: PopoverPlacement;
+  trigger: PopoverTrigger | readonly PopoverTrigger[];
+  mouseEnterDelay: number;
+  mouseLeaveDelay: number;
+}
+
+/** Собственные настройки Popover; defaults Tooltip к нему не применяются. */
+export interface PopoverConfig {
+  class?: string;
+  style?: string;
+  classNames?: PopoverSemantic;
+  styles?: PopoverSemantic;
+  arrow?: TooltipArrow;
+  trigger?: PopoverTrigger | readonly PopoverTrigger[];
+  mouseEnterDelay?: number;
+  mouseLeaveDelay?: number;
+}
 
 /** Интерактивная поверхность у trigger snippet с bind:open и управлением фокусом. */
 export interface PopoverProps {
@@ -45,4 +82,13 @@ export interface PopoverProps {
   popupClass?: string;
   class?: string;
   style?: string;
+  rootClassName?: string;
+  classNames?: PopoverSemantic;
+  styles?: PopoverSemantic;
+  /** @deprecated Используйте classNames.root. */
+  overlayClassName?: string;
+  /** @deprecated Используйте styles.root. */
+  overlayStyle?: string;
+  /** @deprecated Используйте styles.container. */
+  overlayInnerStyle?: string;
 }

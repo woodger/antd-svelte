@@ -3,13 +3,21 @@
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
-  import { connectComponentTheme } from './theme-component.dom';
+  import { getOverlaySemantics } from './overlay-semantic.engine';
+  import { createOverlayStyle } from './overlay-style.model.svelte';
+  import { getPopupPlacements } from './popup-position.engine';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { connectTooltipDescription } from './tooltip.dom';
   import { getTooltipArrow, getTooltipPlacementConfig, isTooltipCorner } from './tooltip.engine';
   import { connectPopup } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
-  import type { AdjustOverflow, TooltipArrow, TooltipPlacement } from './tooltip.types';
+  import type {
+    AdjustOverflow,
+    TooltipArrow,
+    TooltipPlacement,
+    TooltipProps,
+    TooltipSemanticProps
+  } from './tooltip.types';
 
   let {
     title,
@@ -18,10 +26,11 @@
     describe,
     trigger,
     placement = 'top',
-    arrow = true,
+    arrow,
     autoAdjustOverflow = true,
     getPopupContainer,
     getTooltipContainer,
+    semanticProps,
     onDismiss,
     onHoverChange
   }: {
@@ -35,6 +44,7 @@
     autoAdjustOverflow?: boolean | AdjustOverflow;
     getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
     getTooltipContainer?: (trigger: HTMLElement) => HTMLElement;
+    semanticProps?: Omit<TooltipProps, 'children'>;
     onDismiss: () => void;
     onHoverChange?: (hovered: boolean) => void;
   } = $props();
@@ -42,19 +52,51 @@
   const config = useConfig();
   const componentTheme = useComponentTheme('Tooltip');
   const designTokens = useDesignTokenContext();
-  const initialThemeStyle = untrack(() => componentTheme.style);
   const generatedId = $props.id();
   const id = `ant-tooltip-${generatedId}`;
   let popup = $state<HTMLSpanElement>();
   let actualPlacement = $state(untrack(() => placement));
-  let arrowConfig = $derived(getTooltipArrow(arrow));
-  let sourcePlacement = $derived(typeof arrow === 'object' || typeof autoAdjustOverflow === 'object');
+  let arrowConfig = $derived(getTooltipArrow(arrow, config.tooltip?.arrow));
+  let sourcePlacement = $derived(Boolean(config.tooltip) || typeof arrow === 'object'
+    || typeof autoAdjustOverflow === 'object');
+  let callbackProps = $derived.by<TooltipSemanticProps>(() => {
+    const source = getTooltipPlacementConfig(arrowConfig, designTokens.state.token);
+    const placements = getPopupPlacements(
+      source.pointAtCenter ?? false,
+      source.arrowWidth,
+      source.offset,
+      source.radius,
+      autoAdjustOverflow
+    );
+    for (const align of Object.values(placements)) align.htmlRegion = 'visibleFirst';
+    return {
+      ...(semanticProps ?? { title, open, placement, arrow }),
+      trigger: semanticProps?.trigger || config.tooltip?.trigger
+        || (config.tooltip ? 'hover' : ['hover', 'focus']),
+      mouseEnterDelay: semanticProps?.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1,
+      mouseLeaveDelay: semanticProps?.mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1,
+      getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
+      destroyOnHidden: false,
+      builtinPlacements: placements
+    };
+  });
+  let semantics = $derived(getOverlaySemantics(
+    config.tooltip,
+    semanticProps?.classNames,
+    semanticProps?.styles,
+    callbackProps,
+    semanticProps?.overlayStyle
+  ));
+  let rootStyle = $derived([componentTheme.style, semantics.styles.root].filter(Boolean).join(';')
+    || undefined);
+  const initialStyle = untrack(() => rootStyle);
+  const popupStyle = createOverlayStyle(() => rootStyle);
   let available = $derived(typeof title === 'function' || Boolean(title.trim()));
   const portal = createPopupContainer(() => ({
     open: open && available,
     reference: anchor,
     getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
-    themeStyle: componentTheme.style
+    themeStyle: rootStyle
   }));
 
   $effect(() => {
@@ -74,12 +116,13 @@
       get autoAdjustOverflow() { return autoAdjustOverflow; },
       get sourcePlacement() {
         return sourcePlacement
-          ? getTooltipPlacementConfig(arrow, designTokens.state.token) : undefined;
+          ? getTooltipPlacementConfig(arrowConfig, designTokens.state.token) : undefined;
       },
       gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement) || sourcePlacement
         ? (arrowConfig.show ? designTokens.state.token.sizePopupArrow / 2 : 0)
           + designTokens.state.token.marginXXS : undefined),
       onDismiss: () => onDismiss(),
+      applyPosition: popupStyle.position,
       onPlacement: (next) => {
         actualPlacement = next;
       }
@@ -101,13 +144,18 @@
     'ant-tooltip-css-var',
     componentTheme.className,
     `ant-tooltip-placement-${open ? actualPlacement : placement}`,
-    config.direction === 'rtl' && 'ant-tooltip-rtl'
-  ]} style={initialThemeStyle}
-  {@attach node => connectComponentTheme(node, componentTheme.style)} {@attach portal}
+    config.direction === 'rtl' && 'ant-tooltip-rtl',
+    semanticProps?.overlayClassName, semanticProps?.rootClassName,
+    config.tooltip?.class, semantics.classNames.root
+  ]} style={initialStyle}
+  {@attach popupStyle.attach} {@attach portal}
   onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         onHoverChange?.(true);
     }} onpointerleave={() => onHoverChange?.(false)}>
-  {#if arrowConfig.show}<span class="ant-tooltip-arrow" aria-hidden="true"></span>{/if}
-  <span class="ant-tooltip-container" tabindex="-1">{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</span>
+  {#if arrowConfig.show}<span class={['ant-tooltip-arrow', semantics.classNames.arrow]}
+    style={semantics.styles.arrow} aria-hidden="true"></span>{/if}
+  <span class={['ant-tooltip-container', semantics.classNames.container]}
+    style={[semantics.styles.container, semanticProps?.overlayInnerStyle].filter(Boolean).join(';') || undefined}
+    tabindex="-1">{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</span>
 </span>

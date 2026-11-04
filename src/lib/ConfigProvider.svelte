@@ -6,6 +6,9 @@
   import type { BadgeConfig } from './badge.types';
   import type { TagConfig } from './tag.types';
   import type { AvatarConfig } from './avatar.types';
+  import type { TooltipConfig } from './tooltip.types';
+  import type { PopoverConfig } from './popover.types';
+  import type { PopconfirmConfig } from './popconfirm.types';
   import type { RateConfig } from './rate.types';
   import type { WatermarkConfig } from './watermark.types';
   import type { BorderBeamConfig } from './border-beam.types';
@@ -54,6 +57,9 @@
     badge?: BadgeConfig;
     tag?: TagConfig;
     avatar?: AvatarConfig;
+    tooltip?: TooltipConfig;
+    popover?: PopoverConfig;
+    popconfirm?: PopconfirmConfig;
     rate?: RateConfig;
     watermark?: WatermarkConfig;
     borderBeam?: BorderBeamConfig;
@@ -116,6 +122,9 @@
     badge,
     tag,
     avatar,
+    tooltip,
+    popover,
+    popconfirm,
     rate,
     watermark,
     borderBeam,
@@ -176,6 +185,15 @@
     },
     get avatar() {
       return avatar ?? parent.avatar;
+    },
+    get tooltip() {
+      return tooltip ?? parent.tooltip;
+    },
+    get popover() {
+      return popover ?? parent.popover;
+    },
+    get popconfirm() {
+      return popconfirm ?? parent.popconfirm;
     },
     get button() {
       return button ?? parent.button;

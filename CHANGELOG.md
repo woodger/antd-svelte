@@ -9,6 +9,12 @@
 
 ### Added
 
+- ConfigProvider.tooltip/popover/popconfirm: defaults стрелки, trigger и задержек,
+  class/style и semantic slots с callbacks, замена вложенным provider и исходная
+  изоляция Tooltip от Popover/Popconfirm. Добавлены click/contextMenu у Tooltip,
+  contextMenu у Popover, trigger/delays у Popconfirm и legacy semantic aliases.
+  Сохранены native defaults без новой config, popup DOM, ввод и фокус; 60 UMD-сценариев
+  и 18 event traces проверяют новые настройки, в том числе Slider и AvatarGroup.
 - Tooltip/Popover/Popconfirm, AvatarGroup и Slider Tooltip: локальные
   arrow.pointAtCenter и object autoAdjustOverflow с исходными points, tokens,
   flip/shift и числовой семантикой adjustX/adjustY. Поддержаны активные и

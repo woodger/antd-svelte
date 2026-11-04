@@ -1,11 +1,12 @@
 import type { Snippet } from 'svelte';
+import type { PopupSourceAlign } from './popup-position.engine';
 
 /** Физические направления; Left/Right в имени не меняются при RTL. */
 export type TooltipPlacement =
   | 'top' | 'bottom' | 'left' | 'right'
   | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight'
   | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
-export type TooltipTrigger = 'hover' | 'focus';
+export type TooltipTrigger = 'hover' | 'focus' | 'click' | 'contextMenu';
 
 /** Объект показывает стрелку; pointAtCenter по умолчанию false. */
 export type TooltipArrow = boolean | { pointAtCenter?: boolean };
@@ -16,7 +17,43 @@ export interface AdjustOverflow {
   adjustY?: 0 | 1;
 }
 
-/** Текстовая подсказка по hover/focus с bind:open и доступным описанием trigger. */
+export interface TooltipSlots {
+  root?: string;
+  container?: string;
+  arrow?: string;
+}
+
+/** CSS задаётся строками; callback получает props с разрешёнными trigger, delays и placements. */
+export type TooltipSemantic = TooltipSlots | ((info: {
+  props: TooltipSemanticProps;
+}) => TooltipSlots);
+
+export interface TooltipSemanticProps extends Omit<TooltipProps, 'children' | 'getPopupContainer'> {
+  /** Входной prop владельца; внутреннее uncontrolled open не подменяет его. */
+  open?: boolean;
+  /** У внутренних Tooltip native consumers нет Svelte children snippet. */
+  children?: Snippet;
+  getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement | ShadowRoot;
+  trigger: TooltipTrigger | readonly TooltipTrigger[];
+  mouseEnterDelay: number;
+  mouseLeaveDelay: number;
+  destroyOnHidden: boolean;
+  builtinPlacements: Readonly<Record<string, PopupSourceAlign>>;
+}
+
+/** Настройки popup; вложенный provider заменяет объект целиком, undefined наследует родителя. */
+export interface TooltipConfig {
+  class?: string;
+  style?: string;
+  classNames?: TooltipSemantic;
+  styles?: TooltipSemantic;
+  arrow?: TooltipArrow;
+  trigger?: TooltipTrigger | readonly TooltipTrigger[];
+  mouseEnterDelay?: number;
+  mouseLeaveDelay?: number;
+}
+
+/** Подсказка с настраиваемыми событиями, bind:open и доступным описанием trigger. */
 export interface TooltipProps {
   title?: string | number | null | Snippet;
   children: Snippet;
@@ -42,6 +79,16 @@ export interface TooltipProps {
   getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
   class?: string;
   style?: string;
+  /** Применяется к popup; class/style сохраняют native wrapper contract. */
+  rootClassName?: string;
+  classNames?: TooltipSemantic;
+  styles?: TooltipSemantic;
+  /** @deprecated Используйте classNames.root. */
+  overlayClassName?: string;
+  /** @deprecated Используйте styles.root. */
+  overlayStyle?: string;
+  /** @deprecated Используйте styles.container. */
+  overlayInnerStyle?: string;
 }
 
 /** Параметры Tooltip ручки Slider; formatter=null отключает содержимое подсказки. */

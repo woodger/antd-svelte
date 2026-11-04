@@ -568,7 +568,7 @@
         anchor={handles[index]} describe={inputs[index]} trigger={inputs[index]}
         placement={props.tooltip.placement ?? (orientation === 'vertical'
           ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}
-        arrow={props.tooltip.arrow ?? true}
+        arrow={props.tooltip.arrow}
         autoAdjustOverflow={props.tooltip.autoAdjustOverflow}
         getPopupContainer={props.tooltip.getPopupContainer || config.getPopupContainer}
         getTooltipContainer={props.tooltip.getTooltipContainer}
@@ -596,7 +596,7 @@
       describe={inputs[tooltipIndex]} trigger={inputs[tooltipIndex]}
       placement={props.tooltip === false ? 'top' : props.tooltip?.placement
         ?? (orientation === 'vertical' ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}
-      arrow={props.tooltip === false ? false : props.tooltip?.arrow ?? true}
+      arrow={props.tooltip === false ? false : props.tooltip?.arrow}
       autoAdjustOverflow={props.tooltip === false ? undefined : props.tooltip?.autoAdjustOverflow}
       getPopupContainer={(props.tooltip === false ? undefined : props.tooltip?.getPopupContainer)
         || config.getPopupContainer}

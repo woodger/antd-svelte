@@ -1525,8 +1525,8 @@ DefaultOpen задаёт начальное состояние. `onOpenChange(op
 не вызывают callback. Как и другие bindable props модуля, open следует модели
 Svelte; для синхронизации владельца используйте bind:open.
 
-Trigger по умолчанию `['hover', 'focus']`; можно выбрать одно событие или
-передать пустой массив для программного показа. MouseEnterDelay и mouseLeaveDelay
+Trigger без component config по умолчанию `['hover', 'focus']`; можно выбрать одно
+событие или передать пустой массив для программного показа. MouseEnterDelay и mouseLeaveDelay
 задаются в секундах, по умолчанию 0.1. Фокус открывает подсказку сразу. Pointer
 с типом touch не имитирует hover. На подсказку можно перевести указатель, она
 остаётся видимой; клик по ней сохраняет фокус. Escape и нажатие снаружи закрывают
@@ -1573,12 +1573,11 @@ ConfigProvider.getPopupContainer. Undefined сохраняет fallback; фун�
 Portal переносит наследуемые variables и сохраняет приоритет собственных component tokens.
 Вложенные popup сохраняют собственные координаты и цвет стрелки.
 
-Галерея находится на `/ant-design#tooltip`. Поддерживаются строки, числа и rich snippets;
-click/contextMenu, именованные цвета и полный align/motion API пока отсутствуют.
+Галерея находится на `/ant-design#tooltip`. Поддерживаются строки, числа и rich snippets.
+Именованные цвета и полный align/motion API пока отсутствуют.
 AutoAdjustOverflow принимает также `{ adjustX?: 0 | 1, adjustY?: 0 | 1 }`.
 Числовой 0 тоже разрешает flip, как в rc-trigger; отключение обеих коррекций
-задаётся boolean false. Глобальные ConfigProvider.tooltip/popover defaults
-для arrow и остальных props пока не перенесены.
+задаётся boolean false.
 
 ```svelte
 <Tooltip title="Подсказка" placement="topLeft"
@@ -1601,6 +1600,63 @@ fractional sizes, flip history и смена placement проверяются п
 [SSR](./tests/package/overlay-corner.ssr.test.ts) и
 [browser](./tests/browser/overlay-corner.spec.ts). Явные размеры в части эталонов
 отделяют позиционирование от layout остальных компонентов.
+
+### ConfigProvider и semantic slots
+
+ConfigProvider.tooltip/popover/popconfirm задают class/style, classNames/styles,
+arrow, trigger и hover delays. Отсутствующий объект наследуется; явный объект,
+включая {}, заменяет родительский целиком. Локальные trigger и delays приоритетнее;
+0 сохраняется, undefined наследует следующий слой. Пустой trigger=[] отключает
+события открытия, сохраняя программное управление.
+
+```svelte
+<ConfigProvider tooltip={{ trigger: 'click', arrow: { pointAtCenter: true },
+  class: 'help-popup', styles: { container: 'padding:12px' } }}>
+  <Tooltip title="Подсказка"><button type="button">Подробнее</button></Tooltip>
+</ConfigProvider>
+```
+
+Новая component config включает исходные defaults: hover для Tooltip/Popover,
+click для Popconfirm и source geometry всех 12 направлений. В обычной теме это
+12px со стрелкой, 4px без неё. Без component config сохраняются прежние
+hover/focus и native gap/flip/shift четырёх центральных направлений с boolean
+arrow/overflow. Локальный arrow boolean меняет видимость, сохраняя унаследованный
+pointAtCenter; объект
+перекрывает только свои поля. Настройки tooltip не попадают в Popover/Popconfirm.
+Popover defaults участвуют в наружной поверхности Popconfirm; его собственные
+trigger/delays и видимость стрелки приоритетнее.
+
+Поддерживаются hover, focus, click и contextMenu, а также их массивы. Повторный
+contextMenu переключает видимость; обычный click закрывает такую поверхность.
+Browser context menu подавляется только при включённом contextMenu. Положение
+привязывается к trigger, как в исходном Tooltip без alignPoint.
+В source config события действуют независимо: hover leave закрывает панель,
+открытую click/focus, если hover тоже включён. События, отсутствующие в trigger,
+не закрывают программно открытую поверхность.
+
+Class/style provider относятся к popup. Прежние локальные class/style относятся
+к wrapper trigger; rootClassName задаёт дополнительный класс popup. ClassNames
+и styles принимают slot records либо callback({ props }); стили задаются CSS-строками.
+Tooltip имеет root/container/arrow, Popover добавляет title/content, Popconfirm —
+icon. У Popconfirm title/content оформляют заголовок и описание подтверждения.
+Callbacks видят разрешённые trigger и delays, у Popover/Popconfirm — placement,
+у Tooltip — исходные builtinPlacements и container getter.
+Open в callback — исходный prop владельца; неконтролируемое открытие не подставляет
+в него внутреннее состояние.
+Callbacks выполняются и при SSR, когда DOM ещё недоступен.
+
+Классы слоёв накапливаются. Порядок CSS: context styles → context style(root) →
+local styles → legacy overlayStyle(root). OverlayInnerStyle применяется последним
+к container; overlayClassName остаётся alias для класса root. Эти aliases deprecated.
+Root styles имеют приоритет над вычисленными координатами, как в rc-trigger;
+их обновление не сбрасывает variables темы, DOM, ввод, selection и focus.
+Настройки наследуются также подсказками Slider и overflow AvatarGroup.
+
+Проверки конфигурации:
+[60 UMD-сценариев и 18 последовательностей событий](./tests/browser/fixtures/ant-design-overlay-config-reference.json),
+[SSR](./tests/package/overlay-config.ssr.test.ts) и
+[browser](./tests/browser/overlay-config.spec.ts).
+Tooltip.unique, prefixCls, motion, fresh cache и полный align API ещё не перенесены.
 
 ## Popover
 
@@ -1634,23 +1690,26 @@ Tooltip. DefaultOpen учитывается один раз; внешнее из
 состояние не вызывают callback. Обработчики дочернего элемента сохраняются;
 preventDefault в его onclick отменяет открытие по клику.
 
-Trigger по умолчанию `['hover', 'focus']`. Поддерживаются click, hover, focus,
-их массив и пустой массив для программного показа. MouseEnterDelay и
+Trigger без component config по умолчанию `['hover', 'focus']`. Поддерживаются
+click, hover, focus, contextMenu, их массив и пустой массив для программного показа. MouseEnterDelay и
 mouseLeaveDelay задаются в секундах, по умолчанию 0.1; фокус открывает карточку
-сразу. Touch не имитирует hover. Наведение на карточку и фокус внутри неё
+сразу. Touch не имитирует hover. В прежнем native режиме (hover/focus/click без
+component config) наведение на карточку и фокус внутри неё
 сохраняют видимость. При сочетании hover/focus с click первый клик закрепляет
 открытую карточку, второй закрывает её.
 
-Открытие кликом, Enter или Space переводит фокус на первый доступный control
-в содержимом; для текстовой карточки фокусируется сама поверхность. Открытие
+В этом режиме открытие кликом, Enter или Space переводит фокус на первый доступный
+control в содержимом; для текстовой карточки фокусируется сама поверхность. Открытие
 наведением, фокусом или внешним open сохраняет текущий фокус. Tab/Shift+Tab
-следуют DOM-порядку между trigger, содержимым и соседними controls. Выход фокуса
-за пределы карточки и trigger закрывает её, если нет активного наведения.
+следуют DOM-порядку между trigger, содержимым и соседними controls. В native режиме
+выход фокуса за пределы карточки и trigger закрывает её, если нет активного наведения.
 Escape закрывает карточку и возвращает фокус из содержимого к trigger;
 нажатие снаружи сохраняет фокус на выбранном внешнем элементе. Закрытие через
 bind:open возвращает фокус, если он находился внутри карточки.
 Function binding может отклонить изменение open; отклонённое закрытие сохраняет
 фокус и текущие способы удержания карточки открытой.
+При новой component config или contextMenu открытие кликом сохраняет текущий
+фокус, как upstream; сочетания trigger следуют правилам source config выше.
 
 Placement принимает те же 12 направлений, что Tooltip; arrow=false скрывает стрелку.
 AutoAdjustOverflow по умолчанию переворачивает и сдвигает поверхность у края
@@ -1698,12 +1757,14 @@ snippet, компонент считает содержимое доступны
 Галерея `/ant-design#popover` содержит редактор профиля и информационную
 карточку с кнопкой. Arrow и autoAdjustOverflow принимают те же object настройки,
 что Tooltip; они передаются также через Popconfirm и AvatarGroup.max.popover.
-ContextMenu и произвольные цветовые варианты пока отсутствуют.
+ContextMenu поддержан; произвольные цветовые варианты пока отсутствуют.
 
 ## Popconfirm
 
 GetPopupContainer/getTooltipContainer передаются Popover с теми же приоритетами.
 Контекст темы и Promise действия сохраняются при переносе popup в контейнер.
+Trigger и hover delays наследуются из ConfigProvider.popconfirm; локальные props
+имеют приоритет. Без настройки trigger остаётся click.
 
 ```svelte
 <script lang="ts">
@@ -6147,7 +6208,7 @@ aria-describedby описывает корень; id/class/style также от
 и persistence нет. Экспортируются AvatarGroupProps, AvatarGroupItem,
 AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
 Avatar и настройки исходного Popover, ещё отсутствующие в Svelte Popover,
-пока не перенесены: в том числе contextMenu, semantic styles, prefixCls,
+пока не перенесены: в том числе prefixCls,
 color/align/motion и fresh cache. Точный текущий тип max.popover производен от
 [PopoverProps](./src/lib/popover.types.ts), а не дублирует отдельный список props.
 Приоритеты aliases, count/style и trigger/placement проверяются по

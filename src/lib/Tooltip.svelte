@@ -1,28 +1,41 @@
 <script lang="ts">
   import NoCompactStyle from './NoCompactStyle.svelte';
   import { onDestroy, untrack } from 'svelte';
+  import { useConfig } from './config-context';
   import { getTooltipDelay } from './tooltip.engine';
   import type { TooltipProps, TooltipTrigger } from './tooltip.types';
   import TooltipPopup from './TooltipPopup.svelte';
 
   let {
+    open = $bindable<boolean | undefined>(),
+    open: providedOpen,
+    ...props
+  }: TooltipProps = $props();
+  let {
     title,
     children,
-    open = $bindable<boolean | undefined>(),
     defaultOpen = false,
     onOpenChange,
     placement = 'top',
-    arrow = true,
+    arrow,
     autoAdjustOverflow = true,
-    trigger = ['hover', 'focus'],
-    mouseEnterDelay = 0.1,
-    mouseLeaveDelay = 0.1,
+    trigger,
+    mouseEnterDelay,
+    mouseLeaveDelay,
     getPopupContainer,
     getTooltipContainer,
     class: className = '',
     style
-  }: TooltipProps = $props();
+  } = $derived(props);
 
+  const config = useConfig();
+  // Source config использует hover; без него сохраняется прежний native hover/focus.
+  let resolvedTrigger = $derived<TooltipTrigger | readonly TooltipTrigger[]>(
+    trigger || config.tooltip?.trigger || (config.tooltip ? 'hover' : ['hover', 'focus'])
+  );
+  let enterDelay = $derived(mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1);
+  let leaveDelay = $derived(mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1);
+  let sourceTrigger = $derived(Boolean(config.tooltip) || supports('click') || supports('contextMenu'));
   const initialDefault = untrack(() => defaultOpen);
   let host = $state<HTMLSpanElement>();
   let anchor = $state<Element>();
@@ -30,6 +43,7 @@
   let hovered = false;
   let focused = false;
   let popupHovered = false;
+  let clicked = false;
   let dismissed = false;
   let active = true;
   let text = $derived(
@@ -68,12 +82,14 @@
   }
 
   function supports(kind: TooltipTrigger) {
-    return typeof trigger === 'string' ? trigger === kind : trigger.includes(kind);
+    return typeof resolvedTrigger === 'string'
+      ? resolvedTrigger === kind : resolvedTrigger.includes(kind);
   }
 
   function wanted() {
     return !dismissed
-      && (hovered
+      && (clicked
+        || hovered
         && supports('hover')
         || focused
         && supports('focus')
@@ -116,13 +132,13 @@
     hovered = true;
     dismissed = false;
     if (supports('hover'))
-      request(true, getTooltipDelay(mouseEnterDelay));
+      request(true, getTooltipDelay(enterDelay));
   }
 
   function handleLeave() {
     hovered = false;
-    if (!wanted())
-      request(false, getTooltipDelay(mouseLeaveDelay));
+    if (sourceTrigger ? supports('hover') : !wanted())
+      request(false, getTooltipDelay(leaveDelay));
   }
 
   function handleFocus() {
@@ -136,20 +152,47 @@
     if (event.relatedTarget instanceof Node && host?.contains(event.relatedTarget)) return;
 
     focused = false;
-    if (!wanted())
+    if (sourceTrigger ? supports('focus') : !wanted())
       request(false);
   }
 
   function handlePopupHover(next: boolean) {
+    if (sourceTrigger && !supports('hover')) return;
+
     popupHovered = next;
     if (next)
       cancelPending();
-    else if (!wanted())
-      request(false, getTooltipDelay(mouseLeaveDelay));
+    else if (sourceTrigger ? supports('hover') : !wanted())
+      request(false, getTooltipDelay(leaveDelay));
+  }
+
+  function showByClick() {
+    if (anchor?.matches(':disabled, [aria-disabled="true"]')) return;
+
+    dismissed = false;
+    clicked = true;
+    request(true);
+    if (!visible) clicked = false;
+  }
+
+  function handleClick(event: MouseEvent) {
+    if (event.defaultPrevented || !supports('click') && !supports('contextMenu')) return;
+
+    if (visible) dismiss();
+    else if (supports('click')) showByClick();
+  }
+
+  function handleContextMenu(event: MouseEvent) {
+    if (!supports('contextMenu')) return;
+
+    event.preventDefault();
+    if (visible) dismiss();
+    else showByClick();
   }
 
   function dismiss() {
     dismissed = true;
+    clicked = false;
     request(false);
   }
 </script>
@@ -158,4 +201,7 @@
   .ant-tooltip-trigger { display: inline-block; max-width: 100%; vertical-align: middle; }
 </style>
 
-<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur}>{@render children()}</span><NoCompactStyle><TooltipPopup title={text} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer} onDismiss={dismiss} onHoverChange={handlePopupHover} /></NoCompactStyle>
+<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span><NoCompactStyle><TooltipPopup title={text} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
+  semanticProps={{ ...props, open: providedOpen, trigger: resolvedTrigger,
+    mouseEnterDelay: enterDelay, mouseLeaveDelay: leaveDelay }}
+  onDismiss={dismiss} onHoverChange={handlePopupHover} /></NoCompactStyle>

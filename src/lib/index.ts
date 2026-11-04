@@ -403,15 +403,29 @@ export type {
   TooltipTrigger,
   TooltipArrow,
   AdjustOverflow,
+  TooltipSlots,
+  TooltipSemantic,
+  TooltipSemanticProps,
+  TooltipConfig,
   SliderTooltipConfig
 } from './tooltip.types';
 export type {
   PopoverProps,
   PopoverContent,
   PopoverPlacement,
-  PopoverTrigger
+  PopoverTrigger,
+  PopoverSlots,
+  PopoverSemantic,
+  PopoverSemanticProps,
+  PopoverConfig
 } from './popover.types';
-export type { PopconfirmProps } from './popconfirm.types';
+export type {
+  PopconfirmProps,
+  PopconfirmSlots,
+  PopconfirmSemantic,
+  PopconfirmSemanticProps,
+  PopconfirmConfig
+} from './popconfirm.types';
 export type {
   DropdownProps,
   DropdownMenuProps,

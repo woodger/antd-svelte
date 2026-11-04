@@ -6,17 +6,22 @@
   import { ruRU } from './types';
   import { createPopconfirmAction } from './popconfirm.model.svelte.js';
   import { getPopupActiveElement } from './popup.dom';
-  import type { PopconfirmProps } from './popconfirm.types';
+  import { getOverlaySemantics } from './overlay-semantic.engine';
+  import type { PopconfirmProps, PopconfirmSemanticProps } from './popconfirm.types';
   import Popover from './Popover.svelte';
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
 
   let {
+    open = $bindable<boolean | undefined>(),
+    open: providedOpen,
+    ...props
+  }: PopconfirmProps = $props();
+  let {
     children,
     title,
     description,
     icon,
-    open = $bindable<boolean | undefined>(),
     defaultOpen = false,
     disabled,
     showCancel = true,
@@ -26,7 +31,10 @@
     okButtonProps,
     cancelButtonProps,
     placement = 'top',
-    arrow = true,
+    arrow,
+    trigger,
+    mouseEnterDelay,
+    mouseLeaveDelay,
     autoAdjustOverflow = true,
     getPopupContainer,
     getTooltipContainer,
@@ -34,11 +42,37 @@
     onConfirm,
     onCancel,
     onError,
+    rootClassName,
+    classNames,
+    styles,
+    overlayClassName,
+    overlayStyle,
+    overlayInnerStyle,
     class: className = '',
     style
-  }: PopconfirmProps = $props();
+  } = $derived(props);
 
   const config = useConfig();
+  let resolvedTrigger = $derived(trigger || config.popconfirm?.trigger || 'click');
+  let enterDelay = $derived(mouseEnterDelay ?? config.popconfirm?.mouseEnterDelay ?? 0.1);
+  let leaveDelay = $derived(mouseLeaveDelay ?? config.popconfirm?.mouseLeaveDelay ?? 0.1);
+  let callbackProps = $derived<PopconfirmSemanticProps>({
+    ...props,
+    open: providedOpen,
+    placement,
+    trigger: resolvedTrigger,
+    mouseEnterDelay: enterDelay,
+    mouseLeaveDelay: leaveDelay,
+    okType,
+    overlayStyle
+  });
+  let semantics = $derived(getOverlaySemantics(
+    config.popconfirm,
+    classNames,
+    styles,
+    callbackProps,
+    overlayStyle
+  ));
   providePopconfirmTheme();
   const form = useForm();
   const generatedId = $props.id();
@@ -121,10 +155,13 @@
 {#snippet content()}
   <div bind:this={overlay} class="ant-popconfirm-inner-content" tabindex="-1">
     <div class="ant-popconfirm-message">
-      {#if icon !== null}<span class="ant-popconfirm-message-icon" aria-hidden="true"><span class="anticon">{#if icon}{@render icon()}{:else}<Icon name="warning" />{/if}</span></span>{/if}
+      {#if icon !== null}<span class={['ant-popconfirm-message-icon', semantics.classNames.icon]}
+        style={semantics.styles.icon} aria-hidden="true"><span class="anticon">{#if icon}{@render icon()}{:else}<Icon name="warning" />{/if}</span></span>{/if}
       <div class="ant-popconfirm-message-text">
-        <div id={titleId} class="ant-popconfirm-title">{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</div>
-        {#if hasDescription}<div id={descriptionId} class="ant-popconfirm-description">{#if typeof description === 'function'}{@render description()}{:else}{description}{/if}</div>{/if}
+        <div id={titleId} class={['ant-popconfirm-title', semantics.classNames.title]}
+          style={semantics.styles.title}>{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</div>
+        {#if hasDescription}<div id={descriptionId} class={['ant-popconfirm-description', semantics.classNames.content]}
+          style={semantics.styles.content}>{#if typeof description === 'function'}{@render description()}{:else}{description}{/if}</div>{/if}
       </div>
     </div>
     <div class="ant-popconfirm-buttons">
@@ -139,6 +176,15 @@
   </div>
 {/snippet}
 
-<Popover content={hasTitle ? content : undefined} bind:open={() => visible, request} trigger={resolvedDisabled ? [] : 'click'} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer} popupClass="ant-popconfirm" aria-labelledby={titleId} aria-describedby={hasDescription ? descriptionId : undefined} aria-busy={action.loading || undefined} class={className} {style}>
+<Popover content={hasTitle ? content : undefined} bind:open={() => visible, request}
+  trigger={resolvedDisabled ? [] : resolvedTrigger} mouseEnterDelay={enterDelay} mouseLeaveDelay={leaveDelay}
+  {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
+  {rootClassName} {overlayInnerStyle} classNames={{
+    root: [config.popconfirm?.class, overlayClassName, semantics.classNames.root].filter(Boolean).join(' '),
+    container: semantics.classNames.container,
+    arrow: semantics.classNames.arrow
+  }} styles={{ root: semantics.styles.root, container: semantics.styles.container,
+    arrow: semantics.styles.arrow }}
+  popupClass="ant-popconfirm" aria-labelledby={titleId} aria-describedby={hasDescription ? descriptionId : undefined} aria-busy={action.loading || undefined} class={className} {style}>
   {@render children()}
 </Popover>

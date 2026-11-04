@@ -4,7 +4,8 @@
   import { useConfig } from './config-context';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { useComponentTheme } from './theme-component.svelte';
-  import { connectComponentTheme } from './theme-component.dom';
+  import { getOverlaySemantics } from './overlay-semantic.engine';
+  import { createOverlayStyle } from './overlay-style.model.svelte';
   import { consumePopconfirmTheme } from './popover-theme-context';
   import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
@@ -15,23 +16,32 @@
     getTooltipPlacementConfig,
     isTooltipCorner
   } from './tooltip.engine';
-  import type { PopoverContent, PopoverProps, PopoverTrigger } from './popover.types';
+  import type {
+    PopoverContent,
+    PopoverProps,
+    PopoverSemanticProps,
+    PopoverTrigger
+  } from './popover.types';
 
+  let {
+    open = $bindable<boolean | undefined>(),
+    open: providedOpen,
+    ...props
+  }: PopoverProps = $props();
   let {
     children,
     title,
     content,
-    open = $bindable<boolean | undefined>(),
     defaultOpen = false,
     onOpenChange,
     destroyOnHidden,
     destroyTooltipOnHide,
-    trigger = ['hover', 'focus'],
+    trigger,
     placement = 'top',
-    arrow = true,
+    arrow,
     autoAdjustOverflow = true,
-    mouseEnterDelay = 0.1,
-    mouseLeaveDelay = 0.1,
+    mouseEnterDelay,
+    mouseLeaveDelay,
     getPopupContainer,
     getTooltipContainer,
     'aria-label': ariaLabel,
@@ -39,20 +49,59 @@
     'aria-describedby': ariaDescribedby,
     'aria-busy': ariaBusy,
     popupClass,
+    rootClassName,
+    classNames,
+    styles,
+    overlayClassName,
+    overlayStyle,
+    overlayInnerStyle,
     class: className = '',
     style
-  }: PopoverProps = $props();
+  } = $derived(props);
 
   const config = useConfig();
   const designTokens = useDesignTokenContext();
   const tooltipTheme = useComponentTheme('Tooltip');
   const componentTheme = useComponentTheme('Popover');
-  const confirmTheme = consumePopconfirmTheme() ? useComponentTheme('Popconfirm') : undefined;
+  const isPopconfirm = consumePopconfirmTheme();
+  const confirmTheme = isPopconfirm ? useComponentTheme('Popconfirm') : undefined;
+  let resolvedTrigger = $derived<PopoverTrigger | readonly PopoverTrigger[]>(
+    trigger || config.popover?.trigger || (config.popover ? 'hover' : ['hover', 'focus'])
+  );
+  let enterDelay = $derived(mouseEnterDelay ?? config.popover?.mouseEnterDelay ?? 0.1);
+  let leaveDelay = $derived(mouseLeaveDelay ?? config.popover?.mouseLeaveDelay ?? 0.1);
+  let sourceTrigger = $derived(Boolean(config.popover)
+    || isPopconfirm && (Boolean(config.popconfirm) || Array.isArray(trigger))
+    || supports('contextMenu'));
+  let providedArrow = $derived(
+    isPopconfirm ? getTooltipArrow(arrow, config.popconfirm?.arrow) : arrow
+  );
+  let arrowConfig = $derived(getTooltipArrow(providedArrow, config.popover?.arrow));
+  let callbackProps = $derived<PopoverSemanticProps>({
+    ...props,
+    open: providedOpen,
+    placement,
+    arrow: providedArrow,
+    trigger: resolvedTrigger,
+    mouseEnterDelay: enterDelay,
+    mouseLeaveDelay: leaveDelay,
+    overlayStyle
+  });
+  let semantics = $derived(getOverlaySemantics(
+    config.popover,
+    classNames,
+    styles,
+    callbackProps,
+    overlayStyle
+  ));
   let popupThemeStyle = $derived(
     [tooltipTheme.style, componentTheme.style, confirmTheme?.style].filter(Boolean).join(';')
       || undefined
   );
-  const initialThemeStyle = untrack(() => popupThemeStyle);
+  let rootStyle = $derived([popupThemeStyle, semantics.styles.root].filter(Boolean).join(';')
+    || undefined);
+  const initialStyle = untrack(() => rootStyle);
+  const popupStyle = createOverlayStyle(() => rootStyle);
   const generatedId = $props.id();
   const id = `ant-popover-${generatedId}`;
   const titleId = `${id}-title`;
@@ -74,8 +123,9 @@
   let resumeFocus: HTMLElement | undefined;
   let active = true;
   let mounted = $state(false);
-  let arrowConfig = $derived(getTooltipArrow(arrow));
-  let sourcePlacement = $derived(typeof arrow === 'object' || typeof autoAdjustOverflow === 'object');
+  let sourcePlacement = $derived(typeof arrow === 'object'
+    || Boolean(config.popover) || isPopconfirm && Boolean(config.popconfirm)
+    || typeof autoAdjustOverflow === 'object');
   let hasTitle = $derived(hasContent(title));
   let hasBody = $derived(hasContent(content));
   let available = $derived(hasTitle || hasBody);
@@ -86,7 +136,7 @@
     open: visible,
     reference: anchor,
     getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
-    themeStyle: popupThemeStyle
+    themeStyle: rootStyle
   }));
 
   function hasContent(value: PopoverContent | null | undefined) {
@@ -158,13 +208,14 @@
       },
       get sourcePlacement() {
         return sourcePlacement
-          ? getTooltipPlacementConfig(arrow, designTokens.state.token) : undefined;
+          ? getTooltipPlacementConfig(arrowConfig, designTokens.state.token) : undefined;
       },
       maxWidth: '100vw',
       gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement) || sourcePlacement
         ? (arrowConfig.show ? designTokens.state.token.sizePopupArrow / 2 : 0)
           + designTokens.state.token.marginXXS : undefined),
       preserveFocus: false,
+      applyPosition: popupStyle.position,
       onPlacement: (next) => {
         actualPlacement = next;
       },
@@ -209,7 +260,8 @@
   }
 
   function supports(kind: PopoverTrigger) {
-    return typeof trigger === 'string' ? trigger === kind : trigger.includes(kind);
+    return typeof resolvedTrigger === 'string'
+      ? resolvedTrigger === kind : resolvedTrigger.includes(kind);
   }
 
   function wanted() {
@@ -270,13 +322,13 @@
     hovered = true;
     dismissed = false;
     if (supports('hover'))
-      request(true, getTooltipDelay(mouseEnterDelay));
+      request(true, getTooltipDelay(enterDelay));
   }
 
   function handleLeave() {
     hovered = false;
-    if (!wanted())
-      request(false, getTooltipDelay(mouseLeaveDelay));
+    if (sourceTrigger ? supports('hover') : !wanted())
+      request(false, getTooltipDelay(leaveDelay));
   }
 
   function handleFocus(event: FocusEvent) {
@@ -303,33 +355,47 @@
       && popup?.contains(event.relatedTarget)) return;
 
     clicked = false;
-    if (!wanted())
+    if (sourceTrigger ? supports('focus') : !wanted())
       request(false);
   }
 
   function handleClick(event: MouseEvent) {
     if (event.defaultPrevented
-      || !supports('click')
+      || !supports('click') && !supports('contextMenu')
       || anchor?.matches(
         ':disabled, [aria-disabled="true"]'
       )) return;
 
-    if (clicked || visible && !wanted())
+    if (clicked || visible && (sourceTrigger || !wanted()))
       dismiss('trigger');
+    else if (supports('click')) {
+      clicked = true;
+      dismissed = false;
+      focusOnShow = !sourceTrigger;
+      request(true);
+    }
+  }
+
+  function handleContextMenu(event: MouseEvent) {
+    if (!supports('contextMenu') || anchor?.matches(':disabled, [aria-disabled="true"]')) return;
+
+    event.preventDefault();
+    if (visible) dismiss('trigger');
     else {
       clicked = true;
       dismissed = false;
-      focusOnShow = true;
       request(true);
     }
   }
 
   function handlePopupHover(next: boolean) {
+    if (sourceTrigger && !supports('hover')) return;
+
     popupHovered = next;
     if (next)
       cancelPending();
-    else if (!wanted())
-      request(false, getTooltipDelay(mouseLeaveDelay));
+    else if (sourceTrigger ? supports('hover') : !wanted())
+      request(false, getTooltipDelay(leaveDelay));
   }
 
   function handlePopupBlur(event: FocusEvent) {
@@ -346,6 +412,8 @@
         && host?.contains(
           event.relatedTarget
         )) return;
+
+      if (sourceTrigger && !supports('focus')) return;
 
       clicked = false;
       if (!wanted())
@@ -388,7 +456,7 @@
   @media (prefers-reduced-motion: reduce) { .ant-popover, .ant-popover-container { animation: none; transition: none; } }
 </style>
 
-<span bind:this={host} role="presentation" class={['ant-popover-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick}>{@render children()}</span>
+<span bind:this={host} role="presentation" class={['ant-popover-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span>
 <NoCompactStyle>
 <div bind:this={popup} {id} role="dialog" popover="manual" hidden tabindex="-1" dir={config.direction} aria-label={ariaLabel} aria-labelledby={!ariaLabel
     ? ariaLabelledby ?? (hasTitle ? titleId : undefined)
@@ -399,9 +467,10 @@
         designTokens.enabled && designTokens.state.hashId,
         popupClass,
         `ant-popover-placement-${shown ? actualPlacement : placement}`,
-        config.direction === 'rtl' && 'ant-popover-rtl'
-      ]} style={initialThemeStyle}
-    {@attach node => connectComponentTheme(node, popupThemeStyle)} {@attach portal}
+        config.direction === 'rtl' && 'ant-popover-rtl',
+        rootClassName, overlayClassName, config.popover?.class, semantics.classNames.root
+      ]} style={initialStyle}
+    {@attach popupStyle.attach} {@attach portal}
     onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         handlePopupHover(true);
@@ -409,11 +478,15 @@
       popupFocused = true;
       cancelPending();
     }} onfocusout={handlePopupBlur}>
-  {#if arrowConfig.show}<div class="ant-popover-arrow" aria-hidden="true"></div>{/if}
-  <div class="ant-popover-container">
+  {#if arrowConfig.show}<div class={['ant-popover-arrow', semantics.classNames.arrow]}
+    style={semantics.styles.arrow} aria-hidden="true"></div>{/if}
+  <div class={['ant-popover-container', semantics.classNames.container]}
+    style={[semantics.styles.container, overlayInnerStyle].filter(Boolean).join(';') || undefined}>
     {#if renderContent}
-      {#if hasTitle}<div id={titleId} class="ant-popover-title">{#if typeof title === 'function'}{@render title()}{:else if typeof title !== 'boolean'}{title}{/if}</div>{/if}
-      {#if hasBody}<div class="ant-popover-content">{#if typeof content === 'function'}{@render content()}{:else if typeof content !== 'boolean'}{content}{/if}</div>{/if}
+      {#if hasTitle}<div id={titleId} class={['ant-popover-title', semantics.classNames.title]}
+        style={semantics.styles.title}>{#if typeof title === 'function'}{@render title()}{:else if typeof title !== 'boolean'}{title}{/if}</div>{/if}
+      {#if hasBody}<div class={['ant-popover-content', semantics.classNames.content]}
+        style={semantics.styles.content}>{#if typeof content === 'function'}{@render content()}{:else if typeof content !== 'boolean'}{content}{/if}</div>{/if}
     {/if}
   </div>
 </div>
