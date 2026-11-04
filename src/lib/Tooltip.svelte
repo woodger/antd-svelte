@@ -201,7 +201,7 @@
   .ant-tooltip-trigger { display: inline-block; max-width: 100%; vertical-align: middle; }
 </style>
 
-<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span><NoCompactStyle><TooltipPopup title={text} color={props.color} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
+<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span><NoCompactStyle><TooltipPopup title={text} color={props.color} prefixCls={props.prefixCls} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
   semanticProps={{ ...props, open: providedOpen, trigger: resolvedTrigger,
     mouseEnterDelay: enterDelay, mouseLeaveDelay: leaveDelay }}
   onDismiss={dismiss} onHoverChange={handlePopupHover} /></NoCompactStyle>

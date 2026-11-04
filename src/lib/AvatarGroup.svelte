@@ -54,7 +54,7 @@
 
     return connectFeedbackFocus(node, focused => {
       // Popup может находиться вне группы после getPopupContainer.
-      const surface = focused.closest<HTMLElement>('.ant-popover');
+      const surface = focused.closest<HTMLElement>('.ant-popover,[data-ant-popover]');
       const controls = node.querySelector('.ant-avatar-group-more')
         ?.getAttribute('aria-controls')?.split(/\s+/) ?? [];
       return Boolean(surface && controls.includes(surface.id));

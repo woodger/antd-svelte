@@ -114,6 +114,10 @@
 {#if mounted}
   <NoCompactStyle>
     <TooltipPopup title={content} open={visible} anchor={target} describe={target} trigger={target}
+      color={options.color} prefixCls={options.prefixCls} openClassName={options.openClassName}
+      semanticProps={{ ...options, title: content, trigger: options.trigger ?? 'hover',
+        mouseEnterDelay: options.mouseEnterDelay ?? 0.1,
+        mouseLeaveDelay: options.mouseLeaveDelay ?? 0.1 }}
       placement={options.placement} arrow={options.arrow} autoAdjustOverflow={options.autoAdjustOverflow}
       getPopupContainer={options.getPopupContainer} getTooltipContainer={options.getTooltipContainer}
       onDismiss={() => dismiss()} onHoverChange={value => hoverPopup(value)} />

@@ -126,6 +126,10 @@ space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.c
 без преобразований; Popconfirm использует Popover classes. Inverse classes
 в исходном CSS этих компонентов не имеют цветовой заливки. Собственный цвет
 и native изоляция вложенного contrast принадлежат компонентам, не CSS-рецепту.
+Рецепты tooltip-prefix, popover-prefix и popconfirm-prefix выводят CSS data modules:
+58, 72 и 11 правил соответственно. Локальная подстановка меняет component classes,
+сохраняя имена variables, markers и внешний Popover у Popconfirm. Motion/unique
+исключены; viewport/focus adapters остаются в Svelte-компонентах.
 Остальные текущие vendor-файлы
 этим выпуском инструмента не перегенерируются. Новый компонент получает отдельный
 проверенный рецепт: include/exclude для селекторов, replacements, keyframes,

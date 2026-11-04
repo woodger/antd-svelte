@@ -431,6 +431,8 @@
   />
   <TooltipPopup title={resolvedDisabled ? '' : tooltipTitle} open={tooltipOpen} anchor={handle} describe={control} trigger={control} placement={tooltipPlacement} arrow={tooltip === false ? false : tooltip?.arrow}
     color={tooltip === false ? undefined : tooltip?.color}
+    prefixCls={tooltip === false ? undefined : tooltip?.prefixCls}
+    openClassName={tooltip === false ? undefined : tooltip?.openClassName}
     autoAdjustOverflow={tooltip === false ? undefined : tooltip?.autoAdjustOverflow}
     getPopupContainer={(tooltip === false ? undefined : tooltip?.getPopupContainer)
       || config.getPopupContainer}

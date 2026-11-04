@@ -7,12 +7,16 @@
   import { getOverlaySemantics } from './overlay-semantic.engine';
   import { createOverlayStyle } from './overlay-style.model.svelte';
   import { getTooltipColor } from './tooltip-color.engine';
+  import { getOverlayPrefixCss } from './overlay-prefix.engine';
+  import prefixTemplate from './vendor/popover-prefix.css.js';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { connectInlineStyle } from './inline-style.dom';
   import { serializeInlineStyleLayers } from './inline-style.engine';
   import { consumePopconfirmTheme } from './popover-theme-context';
   import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
   import { connectPopoverTrigger, focusPopover } from './popover.dom';
+  import { connectTooltipOpenClass } from './tooltip.dom';
   import {
     getTooltipArrow,
     getTooltipDelay,
@@ -36,6 +40,8 @@
     title,
     content,
     color,
+    prefixCls,
+    openClassName,
     defaultOpen = false,
     onOpenChange,
     destroyOnHidden,
@@ -64,6 +70,9 @@
   } = $derived(props);
 
   const config = useConfig();
+  let prefix = $derived(prefixCls || 'ant-popover');
+  let prefixCss = $derived(getOverlayPrefixCss('popover', prefix, prefixTemplate));
+  let resolvedOpenClassName = $derived(openClassName || `${prefix}-open`);
   const designTokens = useDesignTokenContext();
   const tooltipTheme = useComponentTheme('Tooltip');
   const componentTheme = useComponentTheme('Popover');
@@ -102,7 +111,7 @@
     [tooltipTheme.style, componentTheme.style, confirmTheme?.style].filter(Boolean).join(';')
       || undefined
   );
-  let colorInfo = $derived(getTooltipColor(color, 'ant-popover'));
+  let colorInfo = $derived(getTooltipColor(color, prefix));
   let rootLayers = $derived([
     popupThemeStyle, colorInfo.arrowStyle, semantics.styles.root
   ]);
@@ -185,6 +194,10 @@
 
   $effect(() => {
     if (anchor && available) return connectPopoverTrigger(anchor, id, shown);
+  });
+
+  $effect(() => {
+    if (anchor && visible) return connectTooltipOpenClass(anchor, resolvedOpenClassName);
   });
 
   $effect.pre(() => {
@@ -463,28 +476,32 @@
 
 <style>
   .ant-popover-trigger { display: inline-block; max-width: 100%; vertical-align: middle; }
-  .ant-popover { position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent; overflow: visible; }
-  .ant-popover[hidden], .ant-popover:not(:popover-open) { display: none; }
-  .ant-popover-container { box-sizing: border-box; max-height: calc(100dvh - 16px); overflow: auto; overflow-wrap: anywhere; }
-  .ant-popover-title { min-width: min(var(--ant-popover-title-min-width), calc(100vw - 48px)); }
-  .ant-popover-placement-top > .ant-popover-arrow, .ant-popover-placement-bottom > .ant-popover-arrow { left: var(--arrow-x, 50%); }
-  .ant-popover-placement-left > .ant-popover-arrow, .ant-popover-placement-right > .ant-popover-arrow { top: var(--arrow-y, 50%); }
-  @media (prefers-reduced-motion: reduce) { .ant-popover, .ant-popover-container { animation: none; transition: none; } }
+  [data-ant-popover] { position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent; overflow: visible; }
+  [data-ant-popover][hidden], [data-ant-popover]:not(:popover-open) { display: none; }
+  [data-ant-popover-container] { box-sizing: border-box; max-height: calc(100dvh - 16px); overflow: auto; overflow-wrap: anywhere; }
+  [data-ant-popover-title],
+  [data-ant-popover][data-ant-custom-prefix] [data-ant-popover-title] { min-width: min(var(--ant-popover-title-min-width), calc(100vw - 48px)); }
+  [data-ant-placement="top"] > [data-ant-popover-arrow], [data-ant-placement="bottom"] > [data-ant-popover-arrow] { left: var(--arrow-x, 50%); }
+  [data-ant-placement="left"] > [data-ant-popover-arrow], [data-ant-placement="right"] > [data-ant-popover-arrow] { top: var(--arrow-y, 50%); }
+  @media (prefers-reduced-motion: reduce) { [data-ant-popover], [data-ant-popover-container] { animation: none; transition: none; } }
 </style>
 
-<span bind:this={host} role="presentation" class={['ant-popover-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span>
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`popover-prefix:${prefix}`} />{/if}<span bind:this={host} role="presentation" class={['ant-popover-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span>
 <NoCompactStyle>
-<div bind:this={popup} {id} role="dialog" popover="manual" hidden tabindex="-1" dir={config.direction} aria-label={ariaLabel} aria-labelledby={!ariaLabel
+<div bind:this={popup} {id} role="dialog" popover="manual" hidden tabindex="-1" dir={config.direction}
+  data-ant-popover="" data-ant-custom-prefix={prefix !== 'ant-popover' || undefined}
+  data-ant-placement={shown ? actualPlacement : placement}
+  aria-label={ariaLabel} aria-labelledby={!ariaLabel
     ? ariaLabelledby ?? (hasTitle ? titleId : undefined)
     : undefined} aria-describedby={ariaDescribedby} aria-busy={ariaBusy} class={[
-        'ant-popover',
+        prefix,
         designTokens.enabled && 'ant-popover-css-var',
         designTokens.enabled && designTokens.state.key,
         designTokens.enabled && designTokens.state.hashId,
         popupClass,
         colorInfo.className,
-        `ant-popover-placement-${shown ? actualPlacement : placement}`,
-        config.direction === 'rtl' && 'ant-popover-rtl',
+        `${prefix}-placement-${shown ? actualPlacement : placement}`,
+        config.direction === 'rtl' && `${prefix}-rtl`,
         rootClassName, overlayClassName, config.popover?.class, semantics.classNames.root
       ]} style={initialStyle}
     {@attach popupStyle.attach} {@attach portal}
@@ -495,15 +512,15 @@
       popupFocused = true;
       cancelPending();
     }} onfocusout={handlePopupBlur}>
-  {#if arrowConfig.show}<div class={['ant-popover-arrow', semantics.classNames.arrow]}
+  {#if arrowConfig.show}<div data-ant-popover-arrow="" class={[`${prefix}-arrow`, semantics.classNames.arrow]}
     style={semantics.styles.arrow} aria-hidden="true"></div>{/if}
-  <div class={['ant-popover-container', semantics.classNames.container]}
+  <div data-ant-popover-container="" class={[`${prefix}-container`, semantics.classNames.container]}
     data-ant-overlay-color={colorInfo.overlayStyle.length > 0 || undefined}
     style={initialContainerStyle} {@attach containerStyle}>
     {#if renderContent}
-      {#if hasTitle}<div id={titleId} class={['ant-popover-title', semantics.classNames.title]}
+      {#if hasTitle}<div data-ant-popover-title="" id={titleId} class={[`${prefix}-title`, semantics.classNames.title]}
         style={semantics.styles.title}>{#if typeof title === 'function'}{@render title()}{:else if typeof title !== 'boolean'}{title}{/if}</div>{/if}
-      {#if hasBody}<div class={['ant-popover-content', semantics.classNames.content]}
+      {#if hasBody}<div class={[`${prefix}-content`, semantics.classNames.content]}
         style={semantics.styles.content}>{#if typeof content === 'function'}{@render content()}{:else if typeof content !== 'boolean'}{content}{/if}</div>{/if}
     {/if}
   </div>

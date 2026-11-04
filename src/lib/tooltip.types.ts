@@ -61,6 +61,10 @@ export interface TooltipProps {
   title?: string | number | null | Snippet;
   /** Preset или CSS background; пользовательский цвет выбирает текст по source luminance. */
   color?: TooltipColor;
+  /** Меняет классы popup и default openClassName; CSS variables и native wrapper сохраняются. */
+  prefixCls?: string;
+  /** DOM-класс открытого trigger после hydration; пустая строка использует `${prefixCls}-open`. */
+  openClassName?: string;
   children: Snippet;
   /** Поддерживает bind:open. */
   open?: boolean | undefined;
@@ -100,6 +104,10 @@ export interface TooltipProps {
 export interface SliderTooltipConfig {
   open?: boolean;
   color?: TooltipColor;
+  /** Локальный prefix Tooltip; относится ко всем подсказкам single/range. */
+  prefixCls?: string;
+  /** DOM-класс открытой ручки после hydration; default — `${prefixCls}-open`. */
+  openClassName?: string;
   placement?: TooltipPlacement;
   arrow?: TooltipArrow;
   /** Как у Tooltip; boolean defaults сохраняют native viewport behavior. */

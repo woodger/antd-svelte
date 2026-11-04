@@ -44,6 +44,10 @@ export interface PopconfirmProps {
   children: Snippet;
   /** Передаётся наружному Popover; semantic цвета текста подтверждения приоритетнее. */
   color?: TooltipColor;
+  /** Меняет классы подтверждения; наружный Popover сохраняет собственный prefix. */
+  prefixCls?: string;
+  /** Передаётся наружному Popover; default — ant-popover-open. */
+  openClassName?: string;
   title: Exclude<PopoverContent, boolean>;
   description?: Exclude<PopoverContent, boolean> | null;
   icon?: Snippet | null;

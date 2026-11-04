@@ -1,0 +1,9 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * Popconfirm prefix template: message, title/description, icon и buttons.
+ * Внешний ant-popover, anticon и имена CSS variables сохранены.
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+/** @type {string} */
+const css = "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Popconfirm prefix template: message, title/description, icon и buttons.\n * Внешний ant-popover, anticon и имена CSS variables сохранены.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */\n.ant-popconfirm{z-index:var(--ant-popconfirm-z-index-popup);}\n.ant-popconfirm.ant-popover{font-size:var(--ant-font-size);}\n.ant-popconfirm .ant-popconfirm-message{margin-bottom:var(--ant-margin-xs);display:flex;flex-wrap:nowrap;align-items:start;}\n.ant-popconfirm .ant-popconfirm-message >.ant-popconfirm-message-icon{color:var(--ant-color-warning);}\n.ant-popconfirm .ant-popconfirm-message >.ant-popconfirm-message-icon .anticon{font-size:var(--ant-font-size);line-height:1;margin-inline-end:var(--ant-margin-xs);}\n.ant-popconfirm .ant-popconfirm-message .ant-popconfirm-title{font-weight:var(--ant-font-weight-strong);color:var(--ant-color-text-heading);}\n.ant-popconfirm .ant-popconfirm-message .ant-popconfirm-title:only-child{font-weight:400;}\n.ant-popconfirm .ant-popconfirm-message .ant-popconfirm-description{margin-top:var(--ant-margin-xxs);color:var(--ant-color-text);}\n.ant-popconfirm .ant-popconfirm-buttons{text-align:end;white-space:nowrap;}\n.ant-popconfirm .ant-popconfirm-buttons button{margin-inline-start:var(--ant-margin-xs);}\n.ant-popconfirm{--ant-popconfirm-z-index-popup:1060;}\n";
+export default css;

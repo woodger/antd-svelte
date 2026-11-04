@@ -435,6 +435,10 @@ breakpoints и параметры motionBase/motionUnit не сериализу�
 aliases для опубликованного CSS с префиксом ant. Пользовательский style provider
 записывается последним и сохраняет приоритет, не меняя значения useToken.
 
+Локальный `prefixCls` у Tooltip, Popover и Popconfirm меняет component classes
+через собственный CSS template. Имена variables, native markers и глобальная
+иконка не меняются; эта настройка не подменяет `theme.cssVar.prefix`.
+
 Дополнительные theme boundaries ColorPicker и Tour получают те же переменные,
 включая перенос popup в другой DOM container. Нативные темы без source-настроек
 сохраняют прежние цвета и CSS-переопределения. При `compact: true` fontSize/lineHeight/

@@ -15,6 +15,9 @@ interface Slots extends TooltipSlots {
 }
 
 export interface OverlayConfigSpec {
+  prefixCls?: string;
+  openClassName?: string;
+  container?: 'body';
   color?: TooltipColor;
   class?: string;
   style?: string;
@@ -36,6 +39,7 @@ export interface OverlayConfigSpec {
 export type OverlayConfigProvider = Partial<Record<'tooltip' | 'popover' | 'popconfirm', OverlayConfigSpec>>;
 
 export interface OverlayConfigValues {
+  anchorClass?: string;
   provider?: OverlayConfigProvider;
   child?: OverlayConfigProvider;
   local?: OverlayConfigSpec;
@@ -44,8 +48,9 @@ export interface OverlayConfigValues {
 
 export interface OverlayConfigCase extends OverlayConfigValues {
   name: string;
-  component: 'tooltip' | 'popover' | 'popconfirm' | 'avatar-group' | 'slider';
+  component: 'tooltip' | 'popover' | 'popconfirm' | 'avatar-group' | 'slider' | 'typography';
   defaultPlacement?: boolean;
+  direction?: 'ltr' | 'rtl';
   theme?: ThemeConfig;
   range?: boolean;
   frames?: OverlayConfigValues[];
@@ -74,11 +79,12 @@ interface CallbackProps {
 
 export function buildOverlayConfig(spec: OverlayConfigSpec | undefined) {
   if (!spec) return undefined;
-  const { callback, classNames, styles, ...rest } = spec;
-  if (!callback) return { ...rest, classNames, styles };
+  const { callback, classNames, styles, container, ...rest } = spec;
+  const props = container ? { ...rest, getPopupContainer: () => document.body } : rest;
+  if (!callback) return { ...props, classNames, styles };
 
   return {
-    ...rest,
+    ...props,
     classNames: ({ props }: { props: CallbackProps }) => ({
       ...classNames,
       root: [classNames?.root,

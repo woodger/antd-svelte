@@ -570,6 +570,8 @@
           ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}
         arrow={props.tooltip.arrow}
         color={props.tooltip.color}
+        prefixCls={props.tooltip.prefixCls}
+        openClassName={props.tooltip.openClassName}
         autoAdjustOverflow={props.tooltip.autoAdjustOverflow}
         getPopupContainer={props.tooltip.getPopupContainer || config.getPopupContainer}
         getTooltipContainer={props.tooltip.getTooltipContainer}
@@ -599,6 +601,8 @@
         ?? (orientation === 'vertical' ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}
       arrow={props.tooltip === false ? false : props.tooltip?.arrow}
       color={props.tooltip === false ? undefined : props.tooltip?.color}
+      prefixCls={props.tooltip === false ? undefined : props.tooltip?.prefixCls}
+      openClassName={props.tooltip === false ? undefined : props.tooltip?.openClassName}
       autoAdjustOverflow={props.tooltip === false ? undefined : props.tooltip?.autoAdjustOverflow}
       getPopupContainer={(props.tooltip === false ? undefined : props.tooltip?.getPopupContainer)
         || config.getPopupContainer}

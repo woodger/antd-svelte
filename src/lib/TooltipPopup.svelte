@@ -7,10 +7,13 @@
   import { createOverlayStyle } from './overlay-style.model.svelte';
   import { getPopupPlacements } from './popup-position.engine';
   import { getTooltipColor } from './tooltip-color.engine';
+  import { getOverlayPrefixCss } from './overlay-prefix.engine';
+  import prefixTemplate from './vendor/tooltip-prefix.css.js';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { connectInlineStyle } from './inline-style.dom';
   import { serializeInlineStyleLayers } from './inline-style.engine';
   import { useDesignTokenContext } from './theme-context.svelte';
-  import { connectTooltipDescription } from './tooltip.dom';
+  import { connectTooltipDescription, connectTooltipOpenClass } from './tooltip.dom';
   import { getTooltipArrow, getTooltipPlacementConfig, isTooltipCorner } from './tooltip.engine';
   import { connectPopup } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
@@ -26,6 +29,8 @@
   let {
     title,
     color,
+    prefixCls,
+    openClassName,
     open,
     anchor,
     describe,
@@ -41,6 +46,8 @@
   }: {
     title: string | Snippet;
     color?: TooltipColor;
+    prefixCls?: string;
+    openClassName?: string;
     open: boolean;
     anchor?: Element;
     describe?: Element;
@@ -56,6 +63,9 @@
   } = $props();
 
   const config = useConfig();
+  let prefix = $derived(prefixCls || 'ant-tooltip');
+  let prefixCss = $derived(getOverlayPrefixCss('tooltip', prefix, prefixTemplate));
+  let resolvedOpenClassName = $derived(openClassName || semanticProps?.openClassName || `${prefix}-open`);
   const componentTheme = useComponentTheme('Tooltip');
   const designTokens = useDesignTokenContext();
   const generatedId = $props.id();
@@ -76,7 +86,7 @@
     );
     for (const align of Object.values(placements)) align.htmlRegion = 'visibleFirst';
     return {
-      ...(semanticProps ?? { title, open, placement, arrow, color }),
+      ...(semanticProps ?? { title, open, placement, arrow, color, prefixCls, openClassName }),
       trigger: semanticProps?.trigger || config.tooltip?.trigger
         || (config.tooltip ? 'hover' : ['hover', 'focus']),
       mouseEnterDelay: semanticProps?.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1,
@@ -93,7 +103,7 @@
     callbackProps,
     semanticProps?.overlayStyle
   ));
-  let colorInfo = $derived(getTooltipColor(color, 'ant-tooltip'));
+  let colorInfo = $derived(getTooltipColor(color, prefix));
   let rootLayers = $derived([
     componentTheme.style, colorInfo.arrowStyle, semantics.styles.root
   ]);
@@ -119,6 +129,10 @@
 
   $effect(() => {
     if (describe && available) return connectTooltipDescription(describe, id);
+  });
+
+  $effect(() => {
+    if (anchor && open && available) return connectTooltipOpenClass(anchor, resolvedOpenClassName);
   });
 
   $effect(() => {
@@ -149,24 +163,25 @@
 </script>
 
 <style>
-  .ant-tooltip { position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent; overflow: visible; }
-  .ant-tooltip[hidden], .ant-tooltip:not(:popover-open) { display: none; }
-  .ant-tooltip-container { display: block; max-height: calc(100dvh - 16px); overflow: auto; overflow-wrap: anywhere; }
-  .ant-tooltip-placement-top > .ant-tooltip-arrow, .ant-tooltip-placement-bottom > .ant-tooltip-arrow { left: var(--arrow-x, 50%); }
-  .ant-tooltip-placement-left > .ant-tooltip-arrow, .ant-tooltip-placement-right > .ant-tooltip-arrow { top: var(--arrow-y, 50%); }
+  [data-ant-tooltip] { position: fixed; inset: auto; margin: 0; padding: 0; border: 0; background: transparent; overflow: visible; }
+  [data-ant-tooltip][hidden], [data-ant-tooltip]:not(:popover-open) { display: none; }
+  [data-ant-tooltip-container] { display: block; max-height: calc(100dvh - 16px); overflow: auto; overflow-wrap: anywhere; }
+  [data-ant-placement="top"] > [data-ant-tooltip-arrow], [data-ant-placement="bottom"] > [data-ant-tooltip-arrow] { left: var(--arrow-x, 50%); }
+  [data-ant-placement="left"] > [data-ant-tooltip-arrow], [data-ant-placement="right"] > [data-ant-tooltip-arrow] { top: var(--arrow-y, 50%); }
   /* Без getter source portal изолирует private contrast родительского popup. */
-  :global([data-ant-overlay-color]) .ant-tooltip[data-ant-tooltip-inline] { --ant-tooltip-overlay-color: initial; }
-  @media (prefers-reduced-motion: reduce) { .ant-tooltip, .ant-tooltip-container { animation: none; transition: none; } }
+  :global([data-ant-overlay-color]) [data-ant-tooltip][data-ant-tooltip-inline] { --ant-tooltip-overlay-color: initial; }
+  @media (prefers-reduced-motion: reduce) { [data-ant-tooltip], [data-ant-tooltip-container] { animation: none; transition: none; } }
 </style>
 
-<span bind:this={popup} {id} role="tooltip" popover="manual" hidden dir={config.direction}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tooltip-prefix:${prefix}`} />{/if}<span bind:this={popup} {id} role="tooltip" popover="manual" hidden dir={config.direction}
+  data-ant-tooltip="" data-ant-placement={open ? actualPlacement : placement}
   data-ant-tooltip-inline={!callbackProps.getPopupContainer || undefined} class={[
-    'ant-tooltip',
+    prefix,
     'ant-tooltip-css-var',
     componentTheme.className,
     colorInfo.className,
-    `ant-tooltip-placement-${open ? actualPlacement : placement}`,
-    config.direction === 'rtl' && 'ant-tooltip-rtl',
+    `${prefix}-placement-${open ? actualPlacement : placement}`,
+    config.direction === 'rtl' && `${prefix}-rtl`,
     semanticProps?.overlayClassName, semanticProps?.rootClassName,
     config.tooltip?.class, semantics.classNames.root
   ]} style={initialStyle}
@@ -175,9 +190,9 @@
       if (event.pointerType !== 'touch')
         onHoverChange?.(true);
     }} onpointerleave={() => onHoverChange?.(false)}>
-  {#if arrowConfig.show}<span class={['ant-tooltip-arrow', semantics.classNames.arrow]}
+  {#if arrowConfig.show}<span data-ant-tooltip-arrow="" class={[`${prefix}-arrow`, semantics.classNames.arrow]}
     style={semantics.styles.arrow} aria-hidden="true"></span>{/if}
-  <span class={['ant-tooltip-container', semantics.classNames.container]}
+  <span data-ant-tooltip-container="" class={[`${prefix}-container`, semantics.classNames.container]}
     data-ant-overlay-color={colorInfo.overlayStyle.length > 0 || undefined}
     style={initialContainerStyle} {@attach containerStyle}
     tabindex="-1">{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</span>

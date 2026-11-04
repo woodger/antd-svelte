@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tooltip/Popover/Popconfirm: локальный prefixCls, исходные popup/slot/color classes
+  и openClassName trigger. Добавлены CSS templates из 58/72/11 правил и 123 UMD-сценария;
+  поддержаны AvatarGroup, Slider и Typography Tooltip. Сохранены DOM/focus, native
+  viewport limits и caller classes; Typography передаёт color и semantic styles
+  общему popup. SSR не клонирует snippets, open class подключается после hydration.
 - Tooltip/Popover/Popconfirm: preset и CSS color, исходные RGB contrast, inverse
   classes и приоритеты semantic/legacy styles. Цвет передаётся в AvatarGroup overflow
   и single/pinned/active range Slider. Извлечены 65 CSS rules; добавлены 129 UMD-сценариев,

@@ -1657,7 +1657,7 @@ Root styles имеют приоритет над вычисленными коо
 [60 UMD-сценариев и 18 последовательностей событий](./tests/browser/fixtures/ant-design-overlay-config-reference.json),
 [SSR](./tests/package/overlay-config.ssr.test.ts) и
 [browser](./tests/browser/overlay-config.spec.ts).
-Tooltip.unique, prefixCls, motion, fresh cache и полный align API ещё не перенесены.
+Tooltip.unique, motion, fresh cache и полный align API ещё не перенесены.
 
 ### Цвет Tooltip, Popover и Popconfirm
 
@@ -1697,6 +1697,46 @@ Tooltip без getter. Явный контейнер внутри родител
 [engine](./src/lib/tooltip-color.engine.test.ts), [SSR](./tests/package/overlay-color.ssr.test.ts)
 и [browser](./tests/browser/overlay-color.spec.ts). Эталоны цвета задают явные размеры
 popup/anchor; геометрия проверяется отдельными наборами выше.
+
+### Локальные префиксы и классы открытого trigger
+
+`prefixCls` меняет классы Tooltip/Popover, их slots, placements и preset colors.
+Defaults — `ant-tooltip` и `ant-popover`; пустая строка также выбирает default.
+У Popconfirm default `ant-popconfirm`: его локальный prefix меняет только классы
+подтверждения, наружный Popover остаётся `ant-popover`, как upstream.
+CSS variables и глобальные `.anticon` сохраняют имена. Это отдельная настройка
+от `theme.cssVar.prefix`; совместимые aliases и существующие native markers/hash
+остаются частью Svelte-адаптации.
+
+```svelte
+<Popover prefixCls="project-card" title="Настройки" content="Сохранены">
+  <button type="button">Показать</button>
+</Popover>
+```
+
+`openClassName` задаёт класс открытого trigger, включая несколько tokens. Без него
+или при пустой строке используется `${prefixCls}-open`; у Popconfirm это по умолчанию
+`ant-popover-open`. Класс добавляется к фактическому DOM trigger после hydration.
+Собственные классы ребёнка сохраняются, при закрытии и unmount удаляются только
+добавленные компонентом tokens. Обновление caller class во время показа не снимает
+open class. SSR не клонирует непрозрачный children snippet; скрытый shell, стабильные
+ID, native wrapper и ARIA-поведение сохраняются.
+
+Настройки работают также в AvatarGroup.max.popover, Slider.tooltip и ellipsis Tooltip
+Typography. Последний передаёт color и semantic/legacy styles общему popup.
+Смена prefix сохраняет DOM, ввод, выделение и фокус; stylesheet удаляется вместе
+с владельцем. Portal и native ограничения viewport остаются прежними, включая
+заголовок Popover на узком экране и восстановление фокуса AvatarGroup.
+
+Источник CSS — отдельные templates Tooltip (58 rules), Popover (72) и Popconfirm
+(11); motion/unique этим этапом не переносились. Проверки:
+[123 UMD-сценария / 172 кадра](./tests/browser/fixtures/ant-design-overlay-prefix-reference.json),
+[CSS engine](./src/lib/overlay-prefix.engine.test.ts),
+[SSR](./tests/package/overlay-prefix.ssr.test.ts) и
+[browser](./tests/browser/overlay-prefix.spec.ts). UMD сам генерирует runtime CSS;
+статический antd.css в этой сверке не подключается. Явные размеры popup/anchor
+изолируют классы и оформление от измерения содержимого; trigger classes проверяются
+также при закрытии. Точный React DOM и Svelte markers не сравниваются.
 
 ## Popover
 
@@ -6248,8 +6288,8 @@ aria-describedby описывает корень; id/class/style также от
 и persistence нет. Экспортируются AvatarGroupProps, AvatarGroupItem,
 AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
 Avatar и настройки исходного Popover, ещё отсутствующие в Svelte Popover,
-пока не перенесены: в том числе prefixCls,
-align/motion и fresh cache. Точный текущий тип max.popover производен от
+пока не перенесены: в том числе align/motion и fresh cache.
+Точный текущий тип max.popover производен от
 [PopoverProps](./src/lib/popover.types.ts), а не дублирует отдельный список props.
 Приоритеты aliases, count/style и trigger/placement проверяются по
 [20 UMD-эталонам](./tests/browser/fixtures/ant-design-avatar-group-max-reference.json),
