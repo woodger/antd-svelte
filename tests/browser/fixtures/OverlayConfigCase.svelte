@@ -62,8 +62,10 @@
         ]} max={{ count: 1, popover: { ...options, title: 'Config title', content } }} />
       {:else if sample.component === 'typography'}
         <TypographyText data-config-anchor="" style="display:block;width:80px"
-          ellipsis={{ tooltip: { ...options, title: content } }}>
-          A long text that exceeds the available width
+          tabindex={sample.focusable ? 0 : undefined}
+          ellipsis={{ suffix: sample.jsEllipsis ? '' : undefined,
+            tooltip: { ...options, title: content } }}>
+          {values.text ?? 'A long text that exceeds the available width'}
         </TypographyText>
       {:else}
         <Slider {...(sample.range

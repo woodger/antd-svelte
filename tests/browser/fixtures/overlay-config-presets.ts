@@ -39,6 +39,7 @@ export interface OverlayConfigSpec {
 export type OverlayConfigProvider = Partial<Record<'tooltip' | 'popover' | 'popconfirm', OverlayConfigSpec>>;
 
 export interface OverlayConfigValues {
+  text?: string;
   anchorClass?: string;
   provider?: OverlayConfigProvider;
   child?: OverlayConfigProvider;
@@ -50,6 +51,8 @@ export interface OverlayConfigCase extends OverlayConfigValues {
   name: string;
   component: 'tooltip' | 'popover' | 'popconfirm' | 'avatar-group' | 'slider' | 'typography';
   defaultPlacement?: boolean;
+  focusable?: boolean;
+  jsEllipsis?: boolean;
   direction?: 'ltr' | 'rtl';
   theme?: ThemeConfig;
   range?: boolean;

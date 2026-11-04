@@ -1,0 +1,1897 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "styles": "runtime CSS-in-JS from the UMD; static antd.css is not loaded",
+    "themeAdapter": "mode:dark and compact:true map to the source algorithms; component algorithm flags are unchanged",
+    "scope": "Typography ellipsis Tooltip: inherited trigger/delay defaults, semantic callbacks and source event traces; measured under empty trigger before interactions"
+  },
+  "viewport": {
+    "width": 600,
+    "height": 400
+  },
+  "cases": [
+    {
+      "name": "provider-hover",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "hover",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-hover",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "local-hover",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "trigger": "hover",
+        "mouseEnterDelay": 0,
+        "mouseLeaveDelay": 0.05,
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0",
+            "cb-leave-0.05",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-hover",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "provider-focus",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-focus",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "local-focus",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "trigger": "focus",
+        "mouseEnterDelay": 0,
+        "mouseLeaveDelay": 0.05,
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0",
+            "cb-leave-0.05",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-focus",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "provider-click",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "click",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-click",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "local-click",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "trigger": "click",
+        "mouseEnterDelay": 0,
+        "mouseLeaveDelay": 0.05,
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0",
+            "cb-leave-0.05",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-click",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "provider-contextMenu",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "contextMenu",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-contextMenu",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "local-contextMenu",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "trigger": "contextMenu",
+        "mouseEnterDelay": 0,
+        "mouseLeaveDelay": 0.05,
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0",
+            "cb-leave-0.05",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-contextMenu",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "provider-empty",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": [],
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-empty",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "local-empty",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "trigger": [],
+        "mouseEnterDelay": 0,
+        "mouseLeaveDelay": 0.05,
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0",
+            "cb-leave-0.05",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-empty",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "provider-mixed",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": [
+            "hover",
+            "focus",
+            "click",
+            "contextMenu"
+          ],
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-hover-focus-click-contextMenu",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "local-mixed",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "trigger": [
+          "hover",
+          "focus",
+          "click",
+          "contextMenu"
+        ],
+        "mouseEnterDelay": 0,
+        "mouseLeaveDelay": 0.05,
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0",
+            "cb-leave-0.05",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-hover-focus-click-contextMenu",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "default",
+      "component": "typography",
+      "provider": {},
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.1",
+            "cb-leave-0.1",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tl",
+            "cb-trigger-hover"
+          ],
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "6px 8px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "child-inherits",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "hover",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "child": {},
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-hover",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "child-empty",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "child": {
+        "tooltip": {}
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.1",
+            "cb-leave-0.1",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tl",
+            "cb-trigger-hover"
+          ],
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "6px 8px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "child-replaces",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "hover",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "child": {
+        "tooltip": {
+          "trigger": "click",
+          "callback": true,
+          "mouseEnterDelay": 0.05
+        }
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.05",
+            "cb-leave-0.1",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tl",
+            "cb-trigger-click"
+          ],
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "6px 8px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "reactive-provider",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "hover",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "frames": [
+        {
+          "provider": {
+            "tooltip": {
+              "callback": true,
+              "class": "ctx-tooltip",
+              "arrow": false,
+              "trigger": "click",
+              "mouseEnterDelay": 0.4,
+              "mouseLeaveDelay": 0.3,
+              "styles": {
+                "container": "color:rgb(44,55,66);padding:9px"
+              }
+            }
+          }
+        },
+        {
+          "provider": {
+            "tooltip": {}
+          }
+        },
+        {
+          "provider": {
+            "tooltip": {
+              "callback": true,
+              "class": "ctx-tooltip",
+              "arrow": {
+                "pointAtCenter": true
+              },
+              "trigger": "hover",
+              "mouseEnterDelay": 0.2,
+              "mouseLeaveDelay": 0.3,
+              "styles": {
+                "container": "color:rgb(44,55,66);padding:9px"
+              }
+            }
+          }
+        }
+      ],
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-hover",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        },
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.4",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tl",
+            "cb-trigger-click",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": false,
+          "input": "Draft"
+        },
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.1",
+            "cb-leave-0.1",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tl",
+            "cb-trigger-hover"
+          ],
+          "color": "rgb(255, 255, 255)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "6px 8px",
+          "arrow": true,
+          "input": "Draft"
+        },
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-hover",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "reactive-local",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true,
+        "trigger": "click"
+      },
+      "focusable": true,
+      "frames": [
+        {
+          "local": {
+            "callback": true,
+            "trigger": "hover",
+            "mouseEnterDelay": 0.05
+          }
+        },
+        {
+          "local": {
+            "callback": true
+          }
+        },
+        {
+          "local": {
+            "callback": true,
+            "trigger": [],
+            "mouseLeaveDelay": 0
+          }
+        }
+      ],
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-click",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        },
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.05",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-hover",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        },
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-focus",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        },
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-empty",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "short",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "click",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "text": "Short",
+      "focusable": true,
+      "snapshots": [
+        null
+      ]
+    },
+    {
+      "name": "js-focus",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "focus",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "jsEllipsis": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-focus",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "body-click",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "click",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true,
+        "container": "body"
+      },
+      "focusable": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-click",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    },
+    {
+      "name": "controlled-false",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "click",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "open": false,
+      "snapshots": [
+        null
+      ]
+    },
+    {
+      "name": "controlled-true",
+      "component": "typography",
+      "provider": {
+        "tooltip": {
+          "callback": true,
+          "class": "ctx-tooltip",
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "trigger": "click",
+          "mouseEnterDelay": 0.2,
+          "mouseLeaveDelay": 0.3,
+          "styles": {
+            "container": "color:rgb(44,55,66);padding:9px"
+          }
+        }
+      },
+      "local": {
+        "callback": true
+      },
+      "focusable": true,
+      "open": true,
+      "snapshots": [
+        {
+          "classes": [
+            "cb-arrow-undefined",
+            "cb-destroy-false",
+            "cb-enter-0.2",
+            "cb-leave-0.3",
+            "cb-open-true",
+            "cb-placement-topLeft",
+            "cb-points-bl-tc",
+            "cb-trigger-click",
+            "ctx-tooltip"
+          ],
+          "color": "rgb(44, 55, 66)",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "padding": "9px",
+          "arrow": true,
+          "input": "Draft"
+        }
+      ]
+    }
+  ],
+  "interactions": [
+    {
+      "name": "default",
+      "steps": [
+        {
+          "action": "hover",
+          "changes": []
+        },
+        {
+          "action": 99,
+          "changes": []
+        },
+        {
+          "action": 1,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 99,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 1,
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "provider-hover",
+      "steps": [
+        {
+          "action": "hover",
+          "changes": []
+        },
+        {
+          "action": 199,
+          "changes": []
+        },
+        {
+          "action": 1,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 299,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 1,
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "provider-focus",
+      "steps": [
+        {
+          "action": "focus",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "blur",
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "provider-click",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "provider-contextMenu",
+      "steps": [
+        {
+          "action": "contextMenu",
+          "canceled": true,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "contextMenu",
+          "canceled": true,
+          "changes": [
+            true,
+            false
+          ]
+        },
+        {
+          "action": "contextMenu",
+          "canceled": true,
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "provider-empty",
+      "steps": [
+        {
+          "action": "hover",
+          "changes": []
+        },
+        {
+          "action": 300,
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "changes": []
+        },
+        {
+          "action": "click",
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "provider-mixed",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "hover",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 200,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 300,
+          "changes": [
+            true,
+            false
+          ]
+        },
+        {
+          "action": "focus",
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": "hover",
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": 200,
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": 300,
+          "changes": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "action": "blur",
+          "changes": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "action": "contextMenu",
+          "canceled": true,
+          "changes": [
+            true,
+            false,
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "local-hover",
+      "steps": [
+        {
+          "action": "hover",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 0,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 49,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 1,
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "local-focus",
+      "steps": [
+        {
+          "action": "focus",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "blur",
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "local-click",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "local-contextMenu",
+      "steps": [
+        {
+          "action": "contextMenu",
+          "canceled": true,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "contextMenu",
+          "canceled": true,
+          "changes": [
+            true,
+            false
+          ]
+        },
+        {
+          "action": "contextMenu",
+          "canceled": true,
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "local-empty",
+      "steps": [
+        {
+          "action": "hover",
+          "changes": []
+        },
+        {
+          "action": 300,
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "changes": []
+        },
+        {
+          "action": "click",
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "local-mixed",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "hover",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 200,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 300,
+          "changes": [
+            true,
+            false
+          ]
+        },
+        {
+          "action": "focus",
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": "hover",
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": 200,
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": 300,
+          "changes": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "action": "blur",
+          "changes": [
+            true,
+            false,
+            true,
+            false
+          ]
+        },
+        {
+          "action": "contextMenu",
+          "canceled": true,
+          "changes": [
+            true,
+            false,
+            true,
+            false,
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            false,
+            true,
+            false,
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "child-inherits",
+      "steps": [
+        {
+          "action": "hover",
+          "changes": []
+        },
+        {
+          "action": 199,
+          "changes": []
+        },
+        {
+          "action": 1,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 299,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 1,
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "child-empty",
+      "steps": [
+        {
+          "action": "hover",
+          "changes": []
+        },
+        {
+          "action": 99,
+          "changes": []
+        },
+        {
+          "action": 1,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "leave",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 99,
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": 1,
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "child-replaces",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "js-focus",
+      "steps": [
+        {
+          "action": "focus",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "blur",
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "body-click",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            false
+          ]
+        }
+      ]
+    },
+    {
+      "name": "short",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "name": "controlled-false",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            true
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            true,
+            true
+          ]
+        }
+      ]
+    },
+    {
+      "name": "controlled-true",
+      "steps": [
+        {
+          "action": "click",
+          "changes": [
+            false
+          ]
+        },
+        {
+          "action": "click",
+          "changes": [
+            false,
+            false
+          ]
+        }
+      ]
+    }
+  ]
+}

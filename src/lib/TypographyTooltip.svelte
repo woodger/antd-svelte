@@ -1,5 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
+  import { useConfig } from './config-context';
+  import { getTooltipDelay } from './tooltip.engine';
   import NoCompactStyle from './NoCompactStyle.svelte';
   import TooltipPopup from './TooltipPopup.svelte';
   import TypographyContent from './TypographyContent.svelte';
@@ -13,6 +15,13 @@
     options?: Omit<TooltipProps, 'children' | 'title'>;
   } = $props();
 
+  const config = useConfig();
+  let resolvedTrigger = $derived<TooltipTrigger | readonly TooltipTrigger[]>(
+    options.trigger || config.tooltip?.trigger || 'hover'
+  );
+  let enterDelay = $derived(options.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1);
+  let leaveDelay = $derived(options.mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1);
+  let sourceTrigger = $derived(Boolean(config.tooltip) || supports('click') || supports('contextMenu'));
   let open = $state(untrack(() => options.defaultOpen ?? false));
   let available = $derived(Boolean(title) || title === 0);
   let visible = $derived(enabled && available && (options.open ?? open));
@@ -30,33 +39,53 @@
 
   let dismiss = () => {};
 
+  function supports(trigger: TooltipTrigger) {
+    return typeof resolvedTrigger === 'string'
+      ? resolvedTrigger === trigger : resolvedTrigger.includes(trigger);
+  }
+
   function connect(element: HTMLElement) {
     let hovered = false;
     let focused = false;
     let popupHovered = false;
+    let clicked = false;
     let dismissed = false;
     let active = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
-    function supports(trigger: TooltipTrigger) {
-      const configured = options.trigger ?? 'hover';
-      return typeof configured === 'string' ? configured === trigger : configured.includes(trigger);
+    function inPopup(node: EventTarget | null) {
+      const view = element.ownerDocument.defaultView!;
+      if (!(node instanceof view.Node)) return false;
+
+      const source = node instanceof view.Element ? node : node.parentElement;
+      const popup = source?.closest('[data-ant-tooltip]');
+      return Boolean(popup && element.contains(popup));
+    }
+
+    function cancelPending() {
+      clearTimeout(timer);
+      timer = undefined;
     }
 
     function wanted() {
-      return !dismissed && (hovered && supports('hover') || focused && supports('focus') || popupHovered);
+      return !dismissed && (clicked || hovered && supports('hover')
+        || focused && supports('focus') || popupHovered);
     }
 
     function request(next: boolean, delay = 0) {
-      clearTimeout(timer);
+      cancelPending();
       const owner = options.open;
       const apply = () => {
-        if (!active || !enabled || !available || !element.isConnected || target !== element
-          || !Object.is(owner, options.open) || next && !wanted() || next === (options.open ?? open)) return;
+        timer = undefined;
+        if (!active || !element.isConnected || target !== element) return;
+        // Как в rc-trigger, отсутствие усечения скрывает popup, сохраняя raw onOpenChange.
+        if (!available || !Object.is(owner, options.open)
+          || next && !wanted() || next === (options.open ?? open)) return;
+
         open = next;
         options.onOpenChange?.(next);
       };
-      if (delay) timer = setTimeout(apply, Math.max(0, delay) * 1000);
+      if (delay) timer = setTimeout(apply, delay);
       else apply();
     }
 
@@ -64,47 +93,92 @@
       if (event.pointerType === 'touch') return;
       hovered = true;
       dismissed = false;
-      if (supports('hover')) request(true, options.mouseEnterDelay ?? 0.1);
+      if (supports('hover')) request(true, getTooltipDelay(enterDelay));
     }
 
     function handleLeave() {
       hovered = false;
-      if (!wanted()) request(false, options.mouseLeaveDelay ?? 0.1);
+      if (sourceTrigger ? supports('hover') : !wanted())
+        request(false, getTooltipDelay(leaveDelay));
     }
 
-    function handleFocus() {
+    function handleFocus(event: FocusEvent) {
+      if (!active || !element.isConnected) return;
+      if (sourceTrigger && inPopup(event.target)) return;
+
       focused = true;
       dismissed = false;
       if (supports('focus')) request(true);
     }
 
     function handleBlur(event: FocusEvent) {
-      const Node = element.ownerDocument.defaultView?.Node;
-      if (Node && event.relatedTarget instanceof Node && element.contains(event.relatedTarget)) return;
-      focused = false;
-      if (!wanted()) request(false);
+      function closeIfOutside() {
+        if (!active || !element.isConnected) return;
+        if (sourceTrigger && inPopup(event.target)) return;
+        const Node = element.ownerDocument.defaultView!.Node;
+        if (event.relatedTarget instanceof Node && element.contains(event.relatedTarget)
+          && (!sourceTrigger || !inPopup(event.relatedTarget))) return;
+
+        focused = false;
+        if (sourceTrigger ? supports('focus') : !wanted()) request(false);
+      }
+      // Удаление focused DOM может отправить blur до cleanup родительских props.
+      if (event.relatedTarget === null) queueMicrotask(closeIfOutside);
+      else closeIfOutside();
     }
 
     dismiss = () => {
       dismissed = true;
+      clicked = false;
       request(false);
     };
+
+    function showByClick() {
+      dismissed = false;
+      clicked = true;
+      request(true);
+      if (!visible) clicked = false;
+    }
+
+    function handleClick(event: MouseEvent) {
+      if (inPopup(event.target) || event.defaultPrevented
+        || !supports('click') && !supports('contextMenu')) return;
+
+      if (visible) dismiss();
+      else if (supports('click')) showByClick();
+    }
+
+    function handleContextMenu(event: MouseEvent) {
+      if (inPopup(event.target) || !supports('contextMenu') || !available) return;
+
+      event.preventDefault();
+      if (visible) dismiss();
+      else showByClick();
+    }
+
     hoverPopup = value => {
+      if (!active || !element.isConnected || sourceTrigger && !supports('hover')) return;
+
       popupHovered = value;
-      if (value) clearTimeout(timer);
-      else if (!wanted()) request(false, options.mouseLeaveDelay ?? 0.1);
+      if (value) cancelPending();
+      else if (sourceTrigger ? supports('hover') : !wanted())
+        request(false, getTooltipDelay(leaveDelay));
     };
     element.addEventListener('pointerenter', handleEnter);
     element.addEventListener('pointerleave', handleLeave);
     element.addEventListener('focusin', handleFocus);
     element.addEventListener('focusout', handleBlur);
+    element.addEventListener('click', handleClick);
+    element.addEventListener('contextmenu', handleContextMenu);
     return () => {
       active = false;
-      clearTimeout(timer);
+      cancelPending();
       element.removeEventListener('pointerenter', handleEnter);
       element.removeEventListener('pointerleave', handleLeave);
       element.removeEventListener('focusin', handleFocus);
       element.removeEventListener('focusout', handleBlur);
+      element.removeEventListener('click', handleClick);
+      element.removeEventListener('contextmenu', handleContextMenu);
     };
   }
   let hoverPopup: (value: boolean) => void = () => {};
@@ -115,9 +189,8 @@
   <NoCompactStyle>
     <TooltipPopup title={content} open={visible} anchor={target} describe={target} trigger={target}
       color={options.color} prefixCls={options.prefixCls} openClassName={options.openClassName}
-      semanticProps={{ ...options, title: content, trigger: options.trigger ?? 'hover',
-        mouseEnterDelay: options.mouseEnterDelay ?? 0.1,
-        mouseLeaveDelay: options.mouseLeaveDelay ?? 0.1 }}
+      semanticProps={{ ...options, title: content, trigger: resolvedTrigger,
+        mouseEnterDelay: enterDelay, mouseLeaveDelay: leaveDelay }}
       placement={options.placement} arrow={options.arrow} autoAdjustOverflow={options.autoAdjustOverflow}
       getPopupContainer={options.getPopupContainer} getTooltipContainer={options.getTooltipContainer}
       onDismiss={() => dismiss()} onHoverChange={value => hoverPopup(value)} />

@@ -44,7 +44,10 @@ export interface TypographyCopyConfig {
   onCopy?: (event?: MouseEvent) => void;
   /** Scalar задаёт обычную иконку; массив — обычную и успешную. Falsy icon включает default. */
   icon?: TypographyContent;
-  /** False отключает обе подсказки; массив задаёт обычную и успешную отдельно. */
+  /**
+   * False отключает обе подсказки; массив задаёт обычную и успешную отдельно.
+   * Trigger/delays наследуют ConfigProvider.tooltip.
+   */
   tooltips?: TypographyContent;
   format?: 'text/plain' | 'text/html';
   tabIndex?: number;
@@ -55,6 +58,7 @@ export interface TypographyEditConfig {
   text?: string;
   editing?: boolean;
   icon?: TypographyContent;
+  /** Заголовок edit Tooltip; false скрывает. Trigger/delays наследуют ConfigProvider.tooltip. */
   tooltip?: TypographyContent;
   onStart?: () => void;
   onChange?: (value: string) => void;
@@ -82,6 +86,7 @@ export interface TypographyEllipsisConfig {
   expanded?: boolean;
   onExpand?: (event: MouseEvent, info: { expanded: boolean; }) => void;
   onEllipsis?: (ellipsis: boolean) => void;
+  /** Tooltip усечённого текста; trigger/delays наследуют ConfigProvider.tooltip. */
   tooltip?: TypographyContent | Omit<TooltipProps, 'children'>;
 }
 

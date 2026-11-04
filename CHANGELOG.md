@@ -9,6 +9,11 @@
 
 ### Added
 
+- Typography Tooltip (ellipsis/copy/edit): trigger/delays из ConfigProvider.tooltip, локальный
+  приоритет с 0/[], click/contextMenu и комбинации событий. Semantic callbacks видят
+  разрешённые defaults; сохранены native измерения, lazy SSR, DOM и фокус.
+  Добавлены 23 UMD-сценария и 21 event trace, включая raw open для неусечённого
+  текста, controlled open, nested provider и ввод внутри popup.
 - Tooltip/Popover/Popconfirm: локальный prefixCls, исходные popup/slot/color classes
   и openClassName trigger. Добавлены CSS templates из 58/72/11 правил и 123 UMD-сценария;
   поддержаны AvatarGroup, Slider и Typography Tooltip. Сохранены DOM/focus, native

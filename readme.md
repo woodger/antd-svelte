@@ -1651,7 +1651,9 @@ styles container, затем применяется цветовой слой co
 alias для класса root. Эти aliases deprecated.
 Root styles имеют приоритет над вычисленными координатами, как в rc-trigger;
 их обновление не сбрасывает variables темы, DOM, ввод, selection и focus.
-Настройки наследуются также подсказками Slider и overflow AvatarGroup.
+Настройки наследуются также подсказками Slider, overflow AvatarGroup и ellipsis
+Tooltip Typography. У Typography без config сохраняется исходный hover trigger;
+его Tooltip создаётся лениво после DOM-измерения и не вызывает semantic callbacks при SSR.
 
 Проверки конфигурации:
 [60 UMD-сценариев и 18 последовательностей событий](./tests/browser/fixtures/ant-design-overlay-config-reference.json),
@@ -4511,7 +4513,17 @@ triggerType, maxLength, autoSize, tooltip, icon и tabIndex. `enterIcon={null}`
 onExpand, onEllipsis и tooltip. DefaultExpanded читается один раз. Text исключает
 rows/expandable/onExpand; для responsive ширины Text задайте style. Link принимает
 boolean ellipsis. Tooltip измеряет native overflow при наведении и скрывается
-над панелью действий.
+над панелью действий. Его trigger и hover delays наследуют ConfigProvider.tooltip;
+локальные options приоритетнее, включая 0 и trigger=[]. Вложенный tooltip record
+заменяет родительский целиком. Без настроек trigger=hover и обе задержки равны 0.1s.
+Поддержаны focus/click/contextMenu и массивы событий; source config разделяет
+их действия, поэтому hover leave может закрыть подсказку, открытую click/focus.
+Повторный contextMenu переключает видимость, обычный click её закрывает.
+Подсказки copy/edit наследуют те же настройки; копирование, success title и вход
+в редактор сохраняют свои обычные действия.
+Как в upstream, onOpenChange сообщает raw open даже для текста без усечения,
+но сама подсказка остаётся скрытой. Для native CSS ellipsis сначала требуется
+измерение при наведении; JS ellipsis измеряется независимо от Tooltip trigger.
 
 Scalar children и массивы передают точные границы текста до SSR. В массиве snippet
 остаётся атомом. Обычный текстовый children snippet распознаётся после mount через
@@ -4527,8 +4539,11 @@ ConfigProvider.typography задаёт class/style и semantic root/actions/acti
 compact, RTL, native focus и исходные heading margins.
 
 Tooltip использует общий native popover внутри корня вместо React body portal.
-Доступны общие 12 placement и container getters Tooltip. Click/contextMenu,
-popup semantic styles и полный token engine ещё не перенесены.
+Доступны общие 12 placement, container getters, color, локальные popup prefixCls и
+openClassName, semantic/legacy styles. Callbacks получают разрешённые trigger/delays
+и входной open владельца. Изменение config сохраняет popup DOM, ввод, выделение
+и фокус. Полный Typography token engine и остальные delegated Tooltip props,
+включая unique/fresh/motion и полный align, ещё требуют переноса.
 Vendor CSS рассчитан на `ant-typography`, произвольный prefix
 не генерирует новый CSS.
 
@@ -4536,6 +4551,12 @@ Vendor CSS рассчитан на `ant-typography`, произвольный pr
 [copy lifecycle](./src/lib/typography-copy.model.test.ts),
 [public package SSR](./tests/package/typography.ssr.test.ts),
 [browser](./tests/browser/typography.spec.ts), `?fixture=typography`.
+Ellipsis Tooltip defaults, semantic callbacks и события сверяются с
+[23 UMD-сценариями / 29 кадрами и 21 event trace](./tests/browser/fixtures/ant-design-typography-tooltip-reference.json):
+[SSR](./tests/package/typography-tooltip.ssr.test.ts),
+[browser](./tests/browser/typography-tooltip.spec.ts), `?fixture=typography-tooltip`.
+Эталон использует runtime CSS официального UMD без статического antd.css;
+native overflow измеряется под trigger=[] до записи последовательностей событий.
 [73 исходных CSS rules](./src/lib/vendor/typography.css) воспроизводятся
 [рецептом](./tools/ant-design-css-recipes.json). Иконки взяты из
 @ant-design/icons-svg 4.6.0 под существующей
