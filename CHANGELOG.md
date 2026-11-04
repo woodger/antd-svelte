@@ -450,6 +450,11 @@
 
 ### Fixed
 
+- Slider: theme.components.Slider теперь применяет все 18 исходных токенов в single
+  и range, горизонтально и вертикально. RailSize меняет толщину шкалы; focus native
+  input оформляет видимый handle. Сохранены native-only темы, hit targets и приоритет
+  пользовательских стилей. Добавлены UMD-эталоны 14 тем и проверки SSR, обновлений,
+  изоляции provider, снятия темы, клавиатуры и cleanup.
 - Tooltip/Popover/Typography: trigger=[] без component config больше не закрывает
   программно открытую панель на hover leave/blur. Прежние native defaults,
   геометрия, Escape/outside и callbacks сохранены. Добавлены 10 UMD-последовательностей

@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination и Tabs получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs и Slider получают собственные
 defaults и aliases.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
@@ -357,6 +357,26 @@ prop Tabs; явный undefined и more overrides перекрывают его.
 локальную функцию или provider fallback. Точные приоритеты и текущие потребители
 описаны в [readme](../../readme.md#темы-и-локализация).
 
+## Токены Slider
+
+Slider подготавливает 18 defaults из глобальных aliases и `components.Slider`.
+Оба режима и ориентации получают component declarations, key/hash и CSS-variable
+prefix на корне. RailSize задаёт толщину rail/track; остальные токены управляют
+control/handle/dot sizes, обводками, цветами и disabled-состоянием. Отдельные aliases
+и algorithms компонента не меняют соседние controls. Нули сохраняются, явный
+undefined снимает declaration и не возвращает vendor default.
+
+Source-тема связывает фокус native input с видимым handle, включая handleSizeHover,
+handleLineWidthHover и outline. Hit targets и нативные value/form/keyboard contracts
+сохранены; полный scalar source API и pointer hover самого handle в single ещё требуют
+переноса. Без source-темы прежние размеры и цвета не меняются. Root style идёт
+после theme variables; range сохраняет provider/semantic/local style priorities.
+
+Официальный UMD задаёт declarations для 14 тем и computed styles четырёх вариантов
+в покое, при наведении на rail, фокусе и disabled. Обновления сохраняют DOM,
+значения, фокус и callbacks; вложенные providers, inherit=false, удаление темы и
+unmount проверяются отдельно.
+
 ## Токены Menu
 
 Menu подготавливает 79 defaults, включая устаревшие имена, из глобальных tokens
@@ -565,6 +585,11 @@ zeroRuntime наследуется; опубликованные стили ко
   [Motion эталон](../../tests/browser/fixtures/ant-design-tabs-motion-reference.json),
   [SSR](../../tests/package/tabs-motion.ssr.test.ts) и
   [browser](../../tests/browser/tabs-motion.spec.ts), маршрут `?fixture=tabs-motion`.
+
+- [Эталон Slider](../../src/lib/theme-slider-tokens-reference.test.ts),
+  [computed styles](../../tests/browser/fixtures/ant-design-slider-theme-reference.json),
+  [SSR](../../tests/package/slider-theme.ssr.test.ts) и
+  [browser](../../tests/browser/slider-theme.spec.ts), маршрут `?fixture=slider-theme`.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs),

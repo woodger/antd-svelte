@@ -2,6 +2,7 @@
   import { onDestroy, onMount, untrack } from 'svelte';
   import type { SliderSingleProps } from './slider.types';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm, useFormField } from './form-context';
   import {
     getSliderDirection,
@@ -68,6 +69,7 @@
   });
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Slider');
   const form = useForm();
   const field = useFormField();
   const initialDefault = untrack(() => defaultValue);
@@ -365,6 +367,21 @@
   .slider-input::-webkit-slider-thumb { appearance: none; width: var(--ant-slider-handle-size); height: var(--ant-slider-handle-size); }
   .slider-input::-moz-range-thumb { width: var(--ant-slider-handle-size); height: var(--ant-slider-handle-size); border: 0; }
   .ant-slider:has(.slider-input:focus-visible) .ant-slider-handle::after { outline: 6px solid var(--ant-slider-handle-active-outline-color); box-shadow: 0 0 0 var(--ant-slider-handle-line-width-hover) var(--ant-slider-handle-active-color); }
+  /* В source фокусируется div handle, в native adapter — input. */
+  .ant-slider.ant-slider-css-var:has(.slider-input:focus) .ant-slider-handle::before {
+    inset-inline-start: calc(((var(--ant-slider-handle-size-hover) - var(--ant-slider-handle-size)) / 2 + var(--ant-slider-handle-line-width-hover)) * -1);
+    inset-block-start: calc(((var(--ant-slider-handle-size-hover) - var(--ant-slider-handle-size)) / 2 + var(--ant-slider-handle-line-width-hover)) * -1);
+    width: calc(var(--ant-slider-handle-size-hover) + var(--ant-slider-handle-line-width-hover) * 2);
+    height: calc(var(--ant-slider-handle-size-hover) + var(--ant-slider-handle-line-width-hover) * 2);
+  }
+  .ant-slider.ant-slider-css-var:has(.slider-input:focus) .ant-slider-handle::after {
+    width: var(--ant-slider-handle-size-hover);
+    height: var(--ant-slider-handle-size-hover);
+    inset-inline-start: calc((var(--ant-slider-handle-size) - var(--ant-slider-handle-size-hover)) / 2);
+    inset-block-start: calc((var(--ant-slider-handle-size) - var(--ant-slider-handle-size-hover)) / 2);
+    box-shadow: 0 0 0 var(--ant-slider-handle-line-width-hover) var(--ant-slider-handle-active-color);
+    outline: 6px solid var(--ant-slider-handle-active-outline-color);
+  }
   @media (prefers-reduced-motion: reduce) {
     .ant-slider-rail, .ant-slider-track, .ant-slider-handle::before, .ant-slider-handle::after { transition: none; }
   }
@@ -375,12 +392,14 @@
 
 <div bind:this={nativeElement} class={[
     'ant-slider',
+    componentTheme.className && 'ant-slider-css-var',
+    componentTheme.className,
     `ant-slider-${orientation}`,
     resolvedDisabled && 'ant-slider-disabled',
     dragging && 'ant-slider-lock',
     config.direction === 'rtl' && 'ant-slider-rtl',
     className
-  ]} {style}>
+  ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
   <div class="ant-slider-rail" aria-hidden="true"></div>
   <div class="ant-slider-track" aria-hidden="true" style={orientation === 'horizontal'
       ? `left:${trackStart}%;width:${percentage}%`

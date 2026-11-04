@@ -1410,6 +1410,17 @@ Escape скрывает подсказку, сохраняя фокус и чи�
 трёх режимах подсказок Slider. Правила приоритета и lazy SSR
 такие же, как у самостоятельного Tooltip; по умолчанию содержимое сохраняется.
 
+`ConfigProvider.theme.components.Slider` применяет все 18 исходных токенов к обоим
+режимам и ориентациям. Например, `railSize: 6` задаёт горизонтальную высоту или
+вертикальную ширину шкалы 6px. Поддержаны aliases, component algorithms, нули,
+явный undefined и CSS-variable prefix. Обновление темы сохраняет значения, DOM,
+фокус и callbacks; локальные root/semantic styles сохраняют приоритет.
+Фокус native input оформляет видимый handle по source-токенам. Native-only темы
+и интерактивные области input сохраняют прежнее поведение.
+Подробнее: [токены Slider](./docs/reference/theme-context.md#токены-slider),
+[SSR](./tests/package/slider-theme.ssr.test.ts),
+[browser](./tests/browser/slider-theme.spec.ts), маршрут `?fixture=slider-theme`.
+
 ### Диапазон Slider
 
 `Range` включает исходный multiple-handle API Ant Design 6.6.8 и
@@ -1488,7 +1499,7 @@ tooltip.getPopupContainer → ConfigProvider.getPopupContainer → legacy
 tooltip.getTooltipContainer. Корневого getPopupContainer у Slider нет.
 Полный SliderTooltipProps и исходное управление focus-open остаются частично
 перенесёнными. Полный scalar
-API marks/dots/semantic config, произвольные prefix CSS и theme tokens ещё не закрыты.
+API marks/dots/semantic config и произвольный prefixCls CSS ещё не закрыты.
 
 Проверки: [engine](./src/lib/slider-range.engine.test.ts),
 [public SSR](./tests/package/slider-range.ssr.test.ts),

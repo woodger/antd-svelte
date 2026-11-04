@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, onDestroy, tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm, useFormField } from './form-context';
   import { getSliderDirection } from './slider.engine';
   import {
@@ -24,6 +25,7 @@
   let { value = $bindable(), ref = $bindable(), nativeElement = $bindable(), ...props }:
     SliderRangeProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Slider');
   const internal = useSliderInternal();
   const form = useForm();
   const field = useFormField();
@@ -486,6 +488,12 @@
   .slider-range-input::-webkit-slider-thumb { appearance: none; width: 100%; height: 100%; }
   .slider-range-input::-moz-range-thumb { width: 100%; height: 100%; border: 0; }
   .range-root { touch-action: none; }
+  .range-root[data-ant-slider-source] .range-handle:focus-within::before {
+    inset-inline-start: calc(((var(--ant-slider-handle-size-hover) - var(--ant-slider-handle-size)) / 2 + var(--ant-slider-handle-line-width-hover)) * -1);
+    inset-block-start: calc(((var(--ant-slider-handle-size-hover) - var(--ant-slider-handle-size)) / 2 + var(--ant-slider-handle-line-width-hover)) * -1);
+    width: calc(var(--ant-slider-handle-size-hover) + var(--ant-slider-handle-line-width-hover) * 2);
+    height: calc(var(--ant-slider-handle-size-hover) + var(--ant-slider-handle-line-width-hover) * 2);
+  }
   .range-handle:has(input:focus-visible)::after { outline: 6px solid var(--ant-slider-handle-active-outline-color); box-shadow: 0 0 0 var(--ant-slider-handle-line-width-hover) var(--ant-slider-handle-active-color); }
   .range-handle:focus-within::after { width: var(--ant-slider-handle-size-hover); height: var(--ant-slider-handle-size-hover); inset-inline-start: calc((var(--ant-slider-handle-size) - var(--ant-slider-handle-size-hover)) / 2); inset-block-start: calc((var(--ant-slider-handle-size) - var(--ant-slider-handle-size-hover)) / 2); box-shadow: 0 0 0 var(--ant-slider-handle-line-width-hover) var(--ant-slider-handle-active-color); outline: 6px solid var(--ant-slider-handle-active-outline-color); }
   .range-mark { border: 0; padding: 0; background: transparent; font: inherit; line-height: inherit; }
@@ -499,11 +507,13 @@
 
 <svelte:document onreset={handleReset} />
 <!-- svelte-ignore a11y_no_static_element_interactions (Корень маршрутизирует исходный click/drag по дорожке.) -->
-<div bind:this={nativeElement} class={[prefixCls, 'ant-slider-css-var', 'range-root',
+<div bind:this={nativeElement} class={[prefixCls, 'ant-slider-css-var', componentTheme.className, 'range-root',
   `${prefixCls}-${orientation}`, (internal?.direction ?? config.direction) === 'rtl' && `${prefixCls}-rtl`,
   disabledState[0] && `${prefixCls}-disabled`, marks.length && `${prefixCls}-with-marks`,
   locked && `${prefixCls}-lock`, props.class, config.slider?.class, props.rootClassName, classNames.root]}
-  style={styles.root} data-ant-slider-theme={config.theme.mode}
+  style={[componentTheme.style, styles.root].filter(Boolean).join(';') || undefined}
+  data-ant-slider-source={Boolean(componentTheme.className) || undefined}
+  data-ant-slider-theme={config.theme.mode}
   data-ant-slider-primary={config.theme.primary} onpointerdown={handleRootPointer}>
   <div class={[`${prefixCls}-rail`, classNames.rail]} style={[props.railStyle, styles.rail].filter(Boolean).join(';')}></div>
   {#if included && props.track !== false}

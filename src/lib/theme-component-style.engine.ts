@@ -12,6 +12,7 @@ import { prepareTreeSelectTokens } from './theme-tree-tokens.engine';
 import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
 import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.engine';
 import { prepareTabsTokens } from './theme-tabs-tokens.engine';
+import { prepareSliderTokens } from './theme-slider-tokens.engine';
 import {
   prepareTooltipTokens,
   preparePopoverTokens,
@@ -25,10 +26,11 @@ import type { GlobalToken } from './theme-component-token.types';
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
-  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag';
+  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider';
 
 const factories = {
   Tabs: prepareTabsTokens,
+  Slider: prepareSliderTokens,
   Button: prepareButtonTokens,
   Input: prepareInputTokens,
   InputNumber: prepareInputNumberTokens,
@@ -128,7 +130,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Steps: [],
   Timeline: [],
   Pagination: [],
-  Tabs: []
+  Tabs: [],
+  Slider: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

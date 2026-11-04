@@ -5148,7 +5148,19 @@
         "tests/browser/fixtures/ant-design-overlay-lifecycle-reference.json",
         "tests/browser/overlay-lifecycle-metrics.ts",
         "tests/browser/overlay-lifecycle.spec.ts",
-        "tests/package/overlay-lifecycle.ssr.test.ts"
+        "tests/package/overlay-lifecycle.ssr.test.ts",
+        "src/lib/theme-slider-tokens.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-slider-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-slider-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-slider-theme-reference.json",
+        "tests/browser/fixtures/SliderThemeCase.svelte",
+        "tests/browser/fixtures/SliderThemeFixtures.svelte",
+        "tests/browser/fixtures/slider-theme-presets.ts",
+        "tests/browser/slider-theme-metrics.ts",
+        "tests/browser/slider-theme.spec.ts",
+        "tests/package/slider-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -5235,12 +5247,35 @@
           "note": "Поддержаны 12 placement, preset/CSS color, local prefix/openClassName, локальные arrow.pointAtCenter/object autoAdjustOverflow, text formatter, pinned per-handle tooltip и active hover/focus tooltip с native description/popover. Container/getter priorities и глобальный Tooltip config с semantic slots описаны отдельными features; отсутствие local arrow сохраняет provider fallback. Полные SliderTooltipProps, исходный mouseup focus-open lifecycle и все delegated tooltip props ещё не перенесены."
         },
         {
+          "id": "component-theme-tokens",
+          "title": "Исходные Slider component tokens в обоих режимах и ориентациях",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "src/lib/theme-slider-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-slider-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-slider-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-slider-theme-reference.json",
+            "tests/browser/fixtures/SliderThemeCase.svelte",
+            "tests/browser/fixtures/SliderThemeFixtures.svelte",
+            "tests/browser/fixtures/slider-theme-presets.ts",
+            "tests/browser/slider-theme-metrics.ts",
+            "tests/browser/slider-theme.spec.ts",
+            "tests/package/slider-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Все 18 исходных defaults, component aliases/algorithms, нули/undefined, CSS-variable prefix и key/hash scope в single/range и обеих ориентациях. RailSize меняет толщину rail/track. Фокус native input оформляет handle по source handleSizeHover/lineWidth/outline; прежние native-only цвета, hit targets и value/form/keyboard contracts сохранены. Theme variables идут перед semantic/local styles. Scoped declarations и computed styles четырёх вариантов в покое, при rail hover, focus и disabled сверяются с официальным UMD для 14 тем. Обновления, inheritance/reset, соседние scopes, снятие темы и unmount сохраняют DOM/focus/значения и не вызывают числовых callbacks. Source pointer hover самого handle в scalar native adapter и полный scalar API остаются отдельным этапом."
+        },
+        {
           "id": "single-source-api",
-          "title": "Полный исходный scalar API и общий token/prefix engine",
+          "title": "Полный исходный scalar API и произвольный prefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Новые marks/dots, semantic config и React callback aliases пока принадлежат range-ветке; одиночный Slider сохраняет согласованный native contract. Полная унификация source scalar API, произвольные theme tokens/prefix CSS, React diagnostics остаются следующими этапами. V1-ready не означает полный React API."
+          "note": "Новые marks/dots, semantic config и React callback aliases пока принадлежат range-ветке; одиночный Slider сохраняет согласованный native contract. Полная унификация source scalar API, произвольный prefixCls CSS, React diagnostics остаются следующими этапами. V1-ready не означает полный React API."
         },
         {
           "id": "popup-container",
@@ -11433,7 +11468,17 @@
         "tests/browser/fixtures/ant-design-overlay-config-reference.json",
         "tests/browser/overlay-config-metrics.ts",
         "tests/browser/overlay-config.spec.ts",
-        "tests/package/overlay-config.ssr.test.ts"
+        "tests/package/overlay-config.ssr.test.ts",
+        "src/lib/theme-slider-tokens.engine.ts",
+        "src/lib/theme-slider-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-slider-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-slider-theme-reference.json",
+        "tests/browser/fixtures/SliderThemeCase.svelte",
+        "tests/browser/fixtures/SliderThemeFixtures.svelte",
+        "tests/browser/fixtures/slider-theme-presets.ts",
+        "tests/browser/slider-theme-metrics.ts",
+        "tests/browser/slider-theme.spec.ts",
+        "tests/package/slider-theme.ssr.test.ts"
       ],
       "features": [
         {
@@ -11454,7 +11499,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs получил исходные component tokens и CSS consumption; остальные families остаются в работе."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs и Slider получили исходные component tokens и CSS consumption; остальные families остаются в работе."
         },
         {
           "id": "static-design-tokens",
@@ -11798,6 +11843,29 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные 12 Pagination и 18 общих Input defaults, component algorithms/aliases, нули/undefined, runtime CSS lengths и CSS prefix/hash. Native nav получает scope перед semantic/plain styles; ul наследует defaults без provider reset, Select получает собственные aliases, Input overrides не меняют quick jumper. Глобальный wireframe включает bordered независимо от component alias; отсутствующие в dist/antd.css правила перенесены из source bordered.ts в scoped CSS. Colors/padding исходных ссылок применяются к native buttons, prev/next сохраняют normal line-height при undefined itemSize. MiniOptionsSizeChangerTop создаёт переменную, но source CSS её не читает. Scoped UMD declarations и 240 наборов computed metrics для 18 тем: три размера, disabled/simple, variants, Select, wireframe и LTR/RTL; отдельный эталон hover/focus. Обновления сохраняют DOM, drafts/selection/focus, bind API и порядок callbacks; native-only темы и согласованный mobile size changer сохранены."
+        },
+        {
+          "id": "slider-theme-tokens",
+          "title": "Исходные Slider component tokens в обоих режимах и ориентациях",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "src/lib/theme-slider-tokens.engine.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-slider-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-slider-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-slider-theme-reference.json",
+            "tests/browser/fixtures/SliderThemeCase.svelte",
+            "tests/browser/fixtures/SliderThemeFixtures.svelte",
+            "tests/browser/fixtures/slider-theme-presets.ts",
+            "tests/browser/slider-theme-metrics.ts",
+            "tests/browser/slider-theme.spec.ts",
+            "tests/package/slider-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Все 18 исходных defaults, component aliases/algorithms, нули/undefined, CSS-variable prefix и key/hash scope в single/range и обеих ориентациях. RailSize меняет толщину rail/track. Фокус native input оформляет handle по source handleSizeHover/lineWidth/outline; прежние native-only цвета, hit targets и value/form/keyboard contracts сохранены. Theme variables идут перед semantic/local styles. Scoped declarations и computed styles четырёх вариантов в покое, при rail hover, focus и disabled сверяются с официальным UMD для 14 тем. Обновления, inheritance/reset, соседние scopes, снятие темы и unmount сохраняют DOM/focus/значения и не вызывают числовых callbacks. Source pointer hover самого handle в scalar native adapter и полный scalar API остаются отдельным этапом."
         },
         {
           "id": "tabs-config",
