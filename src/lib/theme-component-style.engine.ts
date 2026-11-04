@@ -26,11 +26,12 @@ import type { GlobalToken } from './theme-component-token.types';
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
-  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider';
+  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex';
 
 const factories = {
   Tabs: prepareTabsTokens,
   Slider: prepareSliderTokens,
+  Flex: () => ({}),
   Divider: (token: GlobalToken) => ({
     textPaddingInline: '1em',
     orientationMargin: 0.05,
@@ -137,7 +138,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Pagination: [],
   Tabs: [],
   Slider: [],
-  Divider: ['orientationMargin']
+  Divider: ['orientationMargin'],
+  Flex: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

@@ -335,7 +335,8 @@ export type {
   StatisticSemanticSlots,
   StatisticSemanticInfo
 } from './statistic.types';
-export type { FlexProps, FlexAlign, FlexJustify, FlexGap } from './flex.types';
+export type { FlexProps, FlexComponentProps, FlexRootProps, FlexConfig, FlexAlign, FlexJustify, FlexGap }
+  from './flex.types';
 export type {
   DividerProps,
   DividerConfig,

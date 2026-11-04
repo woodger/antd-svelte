@@ -27,6 +27,7 @@
   import type { CarouselConfig } from './carousel.types';
   import type { SliderConfig } from './slider-range.types';
   import type { DividerConfig } from './divider.types';
+  import type { FlexConfig } from './flex.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
@@ -79,6 +80,7 @@
     carousel?: CarouselConfig;
     slider?: SliderConfig;
     divider?: DividerConfig;
+    flex?: FlexConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
@@ -145,6 +147,7 @@
     carousel,
     slider,
     divider,
+    flex,
     colorPicker,
     inputNumber,
     radio,
@@ -254,6 +257,9 @@
     },
     get divider() {
       return divider ?? parent.divider;
+    },
+    get flex() {
+      return flex ?? parent.flex;
     },
     get colorPicker() {
       return colorPicker ?? parent.colorPicker;

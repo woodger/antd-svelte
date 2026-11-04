@@ -104,8 +104,9 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs и Slider получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider и Divider получают собственные
 defaults и aliases.
+Flex использует alias overrides без собственных component defaults и без typography reset.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -356,6 +357,21 @@ Native reduced motion и живое отключение завершают те
 prop Tabs; явный undefined и more overrides перекрывают его. ColorPicker использует
 локальную функцию или provider fallback. Точные приоритеты и текущие потребители
 описаны в [readme](../../readme.md#темы-и-локализация).
+
+## Настройки Flex
+
+ConfigProvider.flex поддерживает vertical/class/style. Undefined наследует record,
+явный объект заменяет его целиком. Orientation приоритетнее local vertical, затем
+provider vertical; provider style идёт перед local style, flex/custom gap — после них.
+Preset gap остаётся классом и уступает inline style.
+
+Flex регистрирует исходный пустой prepareComponentToken и применяет component alias
+overrides/algorithms к корню. PaddingXS/padding/paddingLG задают preset gaps; font/color
+остаются унаследованными, как resetStyle=false в upstream. Локальный BEM prefix
+и theme.cssVar.prefix независимы. Нативный tag и custom Svelte component получают
+рассчитанные class/style; DOM-ref custom root передаёт через собственный $bindable nativeElement.
+Source classes/computed layout, nested replacement, forwarding, SSR и updates:
+[Flex tests](../../tests/browser/flex-source.spec.ts). Общий ConfigProvider prefix ещё не перенесён.
 
 ## Токены Divider
 

@@ -863,7 +863,7 @@
       "name": "Flex",
       "category": "layout",
       "scope": "target",
-      "scopeReason": "Перенос нативной Flex-компоновки без обёрток вокруг детей.",
+      "scopeReason": "Flex-компоновка без дополнительных обёрток; нативный или Svelte-корень с сохранением поведения 6.6.8.",
       "upstreamPath": "components/flex",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -890,7 +890,24 @@
         "src/lib/Flex.svelte",
         "src/lib/flex.types.ts",
         "readme.md",
-        "integration:flex"
+        "integration:flex",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/flex-prefix.engine.ts",
+        "src/lib/flex-prefix.engine.test.ts",
+        "src/lib/vendor/flex-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/ant-design-flex-source-reference.json",
+        "tests/browser/fixtures/flex-source-cases.ts",
+        "tests/browser/fixtures/FlexSourceCase.svelte",
+        "tests/browser/fixtures/FlexSourceFixtures.svelte",
+        "tests/browser/fixtures/FlexCustomRoot.svelte",
+        "tests/browser/fixtures/FlexNoRefRoot.svelte",
+        "tests/browser/flex-source-metrics.ts",
+        "tests/browser/flex-source.spec.ts",
+        "tests/package/FlexSourceTypes.svelte",
+        "tests/package/flex-source.ssr.test.ts"
       ],
       "features": [
         {
@@ -930,18 +947,97 @@
         {
           "id": "custom-component",
           "title": "Пользовательский Svelte-компонент в component",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Пока поддержаны только нативные HTML-теги; forwarding props/ref в пользовательский компонент требует отдельного этапа."
+          "evidence": [
+            "src/lib/Flex.svelte",
+            "src/lib/flex.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/flex-prefix.engine.ts",
+            "src/lib/flex-prefix.engine.test.ts",
+            "src/lib/vendor/flex-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-flex-source-reference.json",
+            "tests/browser/fixtures/flex-source-cases.ts",
+            "tests/browser/fixtures/FlexSourceCase.svelte",
+            "tests/browser/fixtures/FlexSourceFixtures.svelte",
+            "tests/browser/fixtures/FlexCustomRoot.svelte",
+            "tests/browser/fixtures/FlexNoRefRoot.svelte",
+            "tests/browser/flex-source-metrics.ts",
+            "tests/browser/flex-source.spec.ts",
+            "tests/package/FlexSourceTypes.svelte",
+            "tests/package/flex-source.ssr.test.ts"
+          ],
+          "note": "Component принимает Svelte 5 Component с generic дополнительными props; Flex не добавляет wrapper и передаёт class/style/dir, атрибуты, native events и children. FlexProps остаётся расширяемым интерфейсом; FlexComponentProps описывает параметры custom root. Layout props потребляются Flex. NativeElement передаётся через необязательный не-enumerable accessor: custom root может объявить $bindable() без fallback и bind:this, root без forwarding работает с undefined ref и не получает nativeElement в DOM spread. Live prefix/config updates сохраняют custom state, DOM/ref/focus/draft/selection; смена native/custom component заменяет корень и обновляет/очищает ref. SSR не создаёт refs/timers; keyboard/event targets, direct children и cleanup проверяются отдельно. Svelte ClassValue/Snippet/DOM events заменяют React className/children/SyntheticEvent/ref conventions."
         },
         {
           "id": "global-config",
-          "title": "PrefixCls и глобальные настройки Flex в ConfigProvider",
+          "title": "Локальный prefixCls и ConfigProvider.flex",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Flex.svelte",
+            "src/lib/flex.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/flex-prefix.engine.ts",
+            "src/lib/flex-prefix.engine.test.ts",
+            "src/lib/vendor/flex-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-flex-source-reference.json",
+            "tests/browser/fixtures/flex-source-cases.ts",
+            "tests/browser/fixtures/FlexSourceCase.svelte",
+            "tests/browser/fixtures/FlexSourceFixtures.svelte",
+            "tests/browser/fixtures/FlexCustomRoot.svelte",
+            "tests/browser/fixtures/FlexNoRefRoot.svelte",
+            "tests/browser/flex-source-metrics.ts",
+            "tests/browser/flex-source.spec.ts",
+            "tests/package/FlexSourceTypes.svelte",
+            "tests/package/flex-source.ssr.test.ts"
+          ],
+          "note": "Локальный BEM prefix меняет все 32 исходных root rules, включая empty/RTL/wrap/align/justify/preset gaps; variables и shared marker сохраняются, selectors ограничены собственным data root. Undefined и пустой prefix дают ant-flex. ConfigProvider.flex поддерживает vertical/class/style; undefined наследует record, явный объект, включая {}, заменяет его целиком. Приоритет направления: orientation → local vertical → provider vertical. Provider style идёт перед local style, затем flex/custom gap; preset gap уступает inline style. SSR CSS, scope isolation и живое снятие prefix проверены. 36 официальных UMD-сценариев сверяют классы, атрибуты, computed styles и direct-child geometry, custom roots, nested replacement, нулевые/CSS gaps, aliases/algorithms, RTL и narrow wrap. Общий ConfigProvider prefix остаётся отдельным пробелом."
+        },
+        {
+          "id": "component-aliases",
+          "title": "Source alias overrides и component algorithm без typography reset",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Flex.svelte",
+            "src/lib/flex.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/flex-prefix.engine.ts",
+            "src/lib/flex-prefix.engine.test.ts",
+            "src/lib/vendor/flex-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-flex-source-reference.json",
+            "tests/browser/fixtures/flex-source-cases.ts",
+            "tests/browser/fixtures/FlexSourceCase.svelte",
+            "tests/browser/fixtures/FlexSourceFixtures.svelte",
+            "tests/browser/fixtures/FlexCustomRoot.svelte",
+            "tests/browser/fixtures/FlexNoRefRoot.svelte",
+            "tests/browser/flex-source-metrics.ts",
+            "tests/browser/flex-source.spec.ts",
+            "tests/package/FlexSourceTypes.svelte",
+            "tests/package/flex-source.ssr.test.ts"
+          ],
+          "note": "PrepareComponentToken возвращает пустой record, как 6.6.8. Components.Flex применяет alias overrides и algorithm к корню: paddingXS/padding/paddingLG задают preset gaps, отдельный CSS-variable prefix работает через общий bridge. FontSize/colorText variables не добавляют font/color reset, typography остаётся унаследованной. Явный undefined, Source compact/dark, algorithms и custom CSS prefix сверяются с официальным UMD; nested/sibling scopes изолированы. Native density, размер direct children и прежние gap/style priorities сохранены."
+        },
+        {
+          "id": "shared-prefix",
+          "title": "Общий ConfigProvider prefix",
           "state": "missing",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Используются существующие direction и theme; flex.vertical/class/style в ConfigProvider пока отсутствуют."
+          "evidence": [
+            "src/lib/Flex.svelte",
+            "src/lib/ConfigProvider.svelte"
+          ],
+          "note": "Локальный prefixCls поддержан; общий getPrefixCls/rootPrefixCls ещё не перенесён. Svelte component/ref/children/event conventions являются сохранённой границей адаптера."
         }
       ]
     },
@@ -11667,7 +11763,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs, Slider и Divider получили исходные component tokens и CSS consumption; остальные families остаются в работе."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs, Slider и Divider получили исходные component tokens и CSS consumption; Flex получил source alias overrides без собственных defaults и typography reset; остальные families остаются в работе."
         },
         {
           "id": "static-design-tokens",
@@ -12256,6 +12352,62 @@
             "tests/package/DividerConfigTypes.svelte"
           ],
           "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка выбирает ant-divider. CSS data module из 33 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 28 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider и React development warnings остаются отдельным пробелом."
+        },
+        {
+          "id": "flex-component-config",
+          "title": "Локальный prefixCls и ConfigProvider.flex",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Flex.svelte",
+            "src/lib/flex.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/flex-prefix.engine.ts",
+            "src/lib/flex-prefix.engine.test.ts",
+            "src/lib/vendor/flex-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-flex-source-reference.json",
+            "tests/browser/fixtures/flex-source-cases.ts",
+            "tests/browser/fixtures/FlexSourceCase.svelte",
+            "tests/browser/fixtures/FlexSourceFixtures.svelte",
+            "tests/browser/fixtures/FlexCustomRoot.svelte",
+            "tests/browser/fixtures/FlexNoRefRoot.svelte",
+            "tests/browser/flex-source-metrics.ts",
+            "tests/browser/flex-source.spec.ts",
+            "tests/package/FlexSourceTypes.svelte",
+            "tests/package/flex-source.ssr.test.ts"
+          ],
+          "note": "Локальный BEM prefix меняет все 32 исходных root rules, включая empty/RTL/wrap/align/justify/preset gaps; variables и shared marker сохраняются, selectors ограничены собственным data root. Undefined и пустой prefix дают ant-flex. ConfigProvider.flex поддерживает vertical/class/style; undefined наследует record, явный объект, включая {}, заменяет его целиком. Приоритет направления: orientation → local vertical → provider vertical. Provider style идёт перед local style, затем flex/custom gap; preset gap уступает inline style. SSR CSS, scope isolation и живое снятие prefix проверены. 36 официальных UMD-сценариев сверяют классы, атрибуты, computed styles и direct-child geometry, custom roots, nested replacement, нулевые/CSS gaps, aliases/algorithms, RTL и narrow wrap. Общий ConfigProvider prefix остаётся отдельным пробелом."
+        },
+        {
+          "id": "flex-component-aliases",
+          "title": "Source alias overrides и component algorithm без typography reset",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Flex.svelte",
+            "src/lib/flex.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/flex-prefix.engine.ts",
+            "src/lib/flex-prefix.engine.test.ts",
+            "src/lib/vendor/flex-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-flex-source-reference.json",
+            "tests/browser/fixtures/flex-source-cases.ts",
+            "tests/browser/fixtures/FlexSourceCase.svelte",
+            "tests/browser/fixtures/FlexSourceFixtures.svelte",
+            "tests/browser/fixtures/FlexCustomRoot.svelte",
+            "tests/browser/fixtures/FlexNoRefRoot.svelte",
+            "tests/browser/flex-source-metrics.ts",
+            "tests/browser/flex-source.spec.ts",
+            "tests/package/FlexSourceTypes.svelte",
+            "tests/package/flex-source.ssr.test.ts"
+          ],
+          "note": "PrepareComponentToken возвращает пустой record, как 6.6.8. Components.Flex применяет alias overrides и algorithm к корню: paddingXS/padding/paddingLG задают preset gaps, отдельный CSS-variable prefix работает через общий bridge. FontSize/colorText variables не добавляют font/color reset, typography остаётся унаследованной. Явный undefined, Source compact/dark, algorithms и custom CSS prefix сверяются с официальным UMD; nested/sibling scopes изолированы. Native density, размер direct children и прежние gap/style priorities сохранены."
         }
       ]
     },

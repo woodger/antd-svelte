@@ -1,4 +1,4 @@
-import type { Snippet } from 'svelte';
+import type { Component, Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 
 export type FlexAlign =
@@ -27,8 +27,18 @@ export type FlexJustify =
   | 'right';
 export type FlexGap = 'small' | 'medium' | 'middle' | 'large' | string | number;
 
-/** Нативный flex-контейнер с направлением, переносом и именованными gap. */
-export interface FlexProps extends Omit<
+/**
+ * Props пользовательского корня. Class/style/dir и children передаются без обёртки.
+ * Для DOM-ref объявите nativeElement через $bindable() и передайте в bind:this корня.
+ * Без такого forwarding nativeElement Flex остаётся undefined.
+ */
+export interface FlexRootProps extends Omit<HTMLAttributes<HTMLElement>, 'children'> {
+  children?: Snippet;
+  nativeElement?: HTMLElement;
+}
+
+/** Flex-контейнер с нативным или Svelte-корнем и наследуемыми layout-настройками. */
+export interface FlexProps<Props extends object = {}> extends Omit<
   HTMLAttributes<HTMLElement>,
   'children'
   | 'class'
@@ -43,11 +53,27 @@ export interface FlexProps extends Omit<
   align?: FlexAlign;
   flex?: string | number;
   gap?: FlexGap;
-  /** @defaultValue 'div' */
-  component?: keyof HTMLElementTagNameMap;
-  class?: string;
+  /** Локальный BEM prefix; пустая строка использует ant-flex. */
+  prefixCls?: string;
+  /** Нативный tag или Svelte component, получающий props корня. @defaultValue 'div' */
+  component?: keyof HTMLElementTagNameMap | Component<Props>;
+  class?: HTMLAttributes<HTMLElement>['class'];
   rootClassName?: string;
   style?: string;
-  /** Нативный ref доступен после mount и очищается при unmount. */
+  /**
+   * Нативный ref доступен после mount и очищается при unmount.
+   * Пользовательский component передаёт его через $bindable nativeElement, иначе ref undefined.
+   */
   nativeElement?: HTMLElement;
 }
+
+/** Полный набор props при передаче пользовательского component с дополнительными параметрами. */
+export type FlexComponentProps<Props extends object = {}> = FlexProps<Props>
+  & Omit<Props, 'class' | 'style' | 'dir' | 'nativeElement'>;
+
+/**
+ * Undefined наследует record, явный объект заменяет родительский.
+ * Локальные orientation/vertical и style приоритетнее provider vertical/style.
+ * Flex и custom gap применяются после style; preset gap остаётся классом.
+ */
+export type FlexConfig = Pick<FlexProps, 'class' | 'style' | 'vertical'>;

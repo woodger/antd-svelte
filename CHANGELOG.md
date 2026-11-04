@@ -9,6 +9,11 @@
 
 ### Added
 
+- Flex: custom Svelte component с generic props и необязательным nativeElement forwarding,
+  локальный prefixCls и ConfigProvider.flex vertical/class/style. Подключены component
+  aliases/algorithm без typography reset; сохранены children, native events, gap/style
+  priorities, ref/focus/selection и custom state при updates. Добавлены 36 UMD-сценариев
+  и CSS prefix template из 32 правил закреплённого архива.
 - Divider: локальный prefixCls и ConfigProvider.divider с class/style и
   object/function semantic slots. Сохранены приоритет стилей, nativeElement,
   нормализованные callbacks и inline spacing; вложенный record заменяется целиком.

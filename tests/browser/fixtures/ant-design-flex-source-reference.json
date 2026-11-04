@@ -1,0 +1,2562 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js; runtime CSS-in-JS only",
+    "operation": "capture native/custom roots, prefix/context, orientation priorities, gaps, alias/algorithm scopes and direct child geometry",
+    "nativeBoundary": "Svelte class values/children/DOM events/nativeElement forwarding remain; private hash/marker classes are excluded; inherited DOM dir and frame typography match the Svelte fixture"
+  },
+  "viewport": {
+    "width": 1000,
+    "height": 900
+  },
+  "cases": [
+    {
+      "name": "default",
+      "props": {},
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "ant-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "prefix-native",
+      "native": true,
+      "props": {
+        "prefixCls": "tenant-flex"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "tenant-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "prefix-empty",
+      "native": true,
+      "props": {
+        "prefixCls": ""
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "ant-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "class-values",
+      "provider": {
+        "class": [
+          "provider-class",
+          {
+            "active": true
+          }
+        ]
+      },
+      "props": {
+        "prefixCls": "classes-flex",
+        "class": [
+          "local-class",
+          {
+            "selected": true
+          }
+        ]
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "active",
+          "classes-flex",
+          "local-class",
+          "provider-class",
+          "selected"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "prefix-marker",
+      "props": {
+        "prefixCls": "ant-flex-css-var",
+        "vertical": true,
+        "gap": "small"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "ant-flex-css-var-align-stretch",
+          "ant-flex-css-var-gap-small",
+          "ant-flex-css-var-vertical"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "106px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "8px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 38,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 76,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "prefix-overlap",
+      "props": {
+        "prefixCls": "ant-flex-business",
+        "wrap": true,
+        "justify": "space-between"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "ant-flex-business",
+          "ant-flex-business-justify-space-between",
+          "ant-flex-business-wrap-wrap"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "wrap",
+          "align-items": "normal",
+          "justify-content": "space-between",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 150,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 300,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "prefix-short",
+      "props": {
+        "prefixCls": "flex",
+        "align": "baseline",
+        "gap": "large"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "flex",
+          "flex-align-baseline",
+          "flex-gap-large"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "31.5px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "baseline",
+          "justify-content": "normal",
+          "gap": "24px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 84,
+            "y": 1.5,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 168,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "provider-vertical",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "context-flex"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "context-flex",
+          "context-flex-align-stretch",
+          "context-flex-vertical",
+          "provider-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "128px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "19px",
+          "flex": "1 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 49,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 98,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "local-false",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "context-flex",
+        "vertical": false
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "context-flex",
+          "provider-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "19px",
+          "flex": "1 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 79,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 158,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "orientation-horizontal",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "context-flex",
+        "orientation": "horizontal",
+        "vertical": true
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "context-flex",
+          "provider-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "19px",
+          "flex": "1 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 79,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 158,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "orientation-vertical",
+      "provider": {
+        "vertical": false
+      },
+      "props": {
+        "prefixCls": "context-flex",
+        "orientation": "vertical",
+        "vertical": false
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "context-flex",
+          "context-flex-align-stretch",
+          "context-flex-vertical"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "90px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 30,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 60,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "style-priority",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "style-flex",
+        "style": "gap:40px;flex:2;opacity:0.9",
+        "gap": 12,
+        "flex": 0
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "provider-flex",
+          "style-flex",
+          "style-flex-align-stretch",
+          "style-flex-vertical"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "114px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "12px",
+          "flex": "0 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.9"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 42,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 84,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "preset-provider-style",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "style-flex",
+        "gap": "small"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "provider-flex",
+          "style-flex",
+          "style-flex-align-stretch",
+          "style-flex-gap-small",
+          "style-flex-vertical"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "128px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "19px",
+          "flex": "1 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 49,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 98,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "preset-local-style",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "style-flex",
+        "gap": "middle",
+        "style": "gap:42px"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "provider-flex",
+          "style-flex",
+          "style-flex-align-stretch",
+          "style-flex-gap-middle",
+          "style-flex-vertical"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "174px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "42px",
+          "flex": "1 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 72,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 144,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "gap-css",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "style-flex",
+        "gap": "2px 12px",
+        "style": "gap:40px"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "provider-flex",
+          "style-flex",
+          "style-flex-align-stretch",
+          "style-flex-vertical"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "94px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "2px 12px",
+          "flex": "1 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 32,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 64,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "gap-zero",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "zero-flex",
+        "gap": 0,
+        "flex": 0
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "provider-flex",
+          "zero-flex",
+          "zero-flex-align-stretch",
+          "zero-flex-vertical"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "90px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "0px",
+          "flex": "0 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 30,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 60,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "nested-inherit",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "child": null,
+      "props": {
+        "prefixCls": "child-flex"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "child-flex",
+          "child-flex-align-stretch",
+          "child-flex-vertical",
+          "provider-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "128px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "column",
+          "flex-wrap": "nowrap",
+          "align-items": "stretch",
+          "justify-content": "normal",
+          "gap": "19px",
+          "flex": "1 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 0,
+            "y": 49,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 98,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "nested-empty",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "child": {},
+      "props": {
+        "prefixCls": "child-flex"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "child-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "nested-class",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "child": {
+        "class": "child-class"
+      },
+      "props": {
+        "prefixCls": "child-flex"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "child-class",
+          "child-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "nested-false",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "child": {
+        "vertical": false
+      },
+      "props": {
+        "prefixCls": "child-flex"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "child-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "rtl",
+      "rtl": true,
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "rtl-flex",
+        "orientation": "horizontal",
+        "wrap": true,
+        "align": "center",
+        "justify": "space-between"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "provider-flex",
+          "rtl-flex",
+          "rtl-flex-align-center",
+          "rtl-flex-justify-space-between",
+          "rtl-flex-rtl",
+          "rtl-flex-wrap-wrap"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "wrap",
+          "align-items": "center",
+          "justify-content": "space-between",
+          "gap": "19px",
+          "flex": "1 1 0%",
+          "direction": "rtl",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 300,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 150,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "aliases-small",
+      "theme": "aliases-small",
+      "props": {
+        "prefixCls": "alias-flex",
+        "gap": "small"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "alias-flex",
+          "alias-flex-gap-small"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "13px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 73,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 146,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "aliases-middle",
+      "theme": "aliases-middle",
+      "props": {
+        "prefixCls": "alias-flex",
+        "gap": "middle"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "alias-flex",
+          "alias-flex-gap-middle"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "22px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 82,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 164,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "aliases-large",
+      "theme": "aliases-large",
+      "props": {
+        "prefixCls": "alias-flex",
+        "gap": "large"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "alias-flex",
+          "alias-flex-gap-large"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "31px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 91,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 182,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "compact",
+      "theme": "compact",
+      "props": {
+        "prefixCls": "compact-flex",
+        "gap": "large"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "compact-flex",
+          "compact-flex-gap-large"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "16px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 76,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 152,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "algorithm",
+      "theme": "algorithm",
+      "props": {
+        "prefixCls": "algorithm-flex",
+        "gap": "small"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "algorithm-flex",
+          "algorithm-flex-gap-small"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "12px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 72,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 144,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "variables",
+      "theme": "variables",
+      "props": {
+        "prefixCls": "variable-flex",
+        "gap": "medium"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "variable-flex",
+          "variable-flex-gap-medium"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "27px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 87,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 174,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "undefined",
+      "theme": "undefined",
+      "props": {
+        "prefixCls": "missing-flex",
+        "gap": "middle"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "missing-flex",
+          "missing-flex-gap-middle"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "16px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 76,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 152,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "custom-root",
+      "props": {
+        "prefixCls": "custom-flex",
+        "component": "custom",
+        "role": "group",
+        "aria-label": "Custom layout",
+        "data-probe": "forwarded",
+        "title": "Custom title"
+      },
+      "snapshot": {
+        "tag": "SECTION",
+        "classes": [
+          "custom-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": "group",
+          "aria-label": "Custom layout",
+          "title": "Custom title",
+          "data-probe": "forwarded",
+          "data-custom-label": "Root",
+          "data-custom-state": "0",
+          "label": null
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "plain-root",
+      "props": {
+        "prefixCls": "plain-flex",
+        "component": "plain",
+        "wrap": "wrap-reverse",
+        "align": "self-start",
+        "justify": "right"
+      },
+      "snapshot": {
+        "tag": "ARTICLE",
+        "classes": [
+          "plain-flex",
+          "plain-flex-align-self-start",
+          "plain-flex-justify-right",
+          "plain-flex-wrap-wrap-reverse"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "wrap-reverse",
+          "align-items": "self-start",
+          "justify-content": "right",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 180,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 240,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 300,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "custom-theme",
+      "theme": "aliases-large",
+      "provider": {
+        "vertical": true,
+        "class": "provider-flex",
+        "style": "gap:19px;flex:1;opacity:0.6"
+      },
+      "props": {
+        "prefixCls": "custom-flex",
+        "component": "custom",
+        "gap": "large",
+        "vertical": false
+      },
+      "snapshot": {
+        "tag": "SECTION",
+        "classes": [
+          "custom-flex",
+          "custom-flex-gap-large",
+          "provider-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": "Root",
+          "data-custom-state": "0",
+          "label": null
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "19px",
+          "flex": "1 1 0%",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "0.6"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 79,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 158,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "native-section",
+      "props": {
+        "prefixCls": "section-flex",
+        "component": "section"
+      },
+      "snapshot": {
+        "tag": "SECTION",
+        "classes": [
+          "section-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 60,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 120,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty",
+      "empty": true,
+      "props": {
+        "prefixCls": "empty-flex"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "empty-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "none",
+          "width": "auto",
+          "height": "auto",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": []
+      }
+    },
+    {
+      "name": "empty-custom",
+      "empty": true,
+      "props": {
+        "prefixCls": "empty-flex",
+        "component": "custom"
+      },
+      "snapshot": {
+        "tag": "SECTION",
+        "classes": [
+          "empty-flex"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": "Root",
+          "data-custom-state": "0",
+          "label": null
+        },
+        "style": {
+          "display": "none",
+          "width": "auto",
+          "height": "auto",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "normal",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": []
+      }
+    },
+    {
+      "name": "narrow",
+      "width": 180,
+      "props": {
+        "prefixCls": "narrow-flex",
+        "gap": 12,
+        "wrap": true
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "narrow-flex",
+          "narrow-flex-wrap-wrap"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "180px",
+          "height": "72px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "wrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "12px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 72,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 42,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    },
+    {
+      "name": "dark",
+      "theme": "dark",
+      "props": {
+        "prefixCls": "dark-flex",
+        "gap": "small"
+      },
+      "snapshot": {
+        "tag": "DIV",
+        "classes": [
+          "dark-flex",
+          "dark-flex-gap-small"
+        ],
+        "attributes": {
+          "id": null,
+          "role": null,
+          "aria-label": null,
+          "title": null,
+          "data-probe": null,
+          "data-custom-label": null,
+          "data-custom-state": null,
+          "label": "Root"
+        },
+        "style": {
+          "display": "flex",
+          "width": "360px",
+          "height": "30px",
+          "margin-top": "0px",
+          "margin-left": "0px",
+          "padding-top": "0px",
+          "padding-left": "0px",
+          "flex-direction": "row",
+          "flex-wrap": "nowrap",
+          "align-items": "normal",
+          "justify-content": "normal",
+          "gap": "8px",
+          "flex": "0 1 auto",
+          "direction": "ltr",
+          "font-size": "21px",
+          "line-height": "31px",
+          "font-family": "Arial",
+          "color": "rgb(20, 30, 40)",
+          "opacity": "1"
+        },
+        "children": [
+          {
+            "tag": "BUTTON",
+            "x": 0,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "INPUT",
+            "x": 68,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          },
+          {
+            "tag": "BUTTON",
+            "x": 136,
+            "y": 0,
+            "width": 60,
+            "height": 30
+          }
+        ]
+      }
+    }
+  ]
+}

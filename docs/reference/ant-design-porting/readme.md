@@ -121,6 +121,8 @@ space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.c
 defaults ограничены корнем, shared marker и CSS variable names сохраняются.
 Рецепт divider-prefix выводит аналогичный data module из 33 правил Divider;
 defaults ограничены корнем, интеграция ColorPicker исключена.
+Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;
+runtime ограничивает каждый selector собственным root.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.
