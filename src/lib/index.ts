@@ -271,7 +271,7 @@ export { createMessage } from './message.model.svelte.js';
 export { default as NotificationHolder } from './NotificationHolder.svelte';
 export { createNotification } from './notification.model.svelte.js';
 export { default as Progress } from './Progress.svelte';
-export { default as Spin } from './Spin.svelte';
+export { default as Spin } from './spin.component';
 export { default as Skeleton } from './Skeleton.svelte';
 export { default as Empty } from './Empty.svelte';
 export { default as Result } from './Result.svelte';
@@ -520,7 +520,10 @@ export type {
   ProgressCircleSize
 } from './progress.types';
 export type { ProgressLocale } from './types';
-export type { SpinProps, SpinSize } from './spin.types';
+export type {
+  SpinProps, SpinSize, SpinContent, SpinConfig, SpinIndicator, SpinIndicatorInfo,
+  SpinSemanticSlots, SpinSemanticInfo, SpinRef
+} from './spin.types';
 export type { SpinLocale } from './types';
 export type {
   SkeletonProps,

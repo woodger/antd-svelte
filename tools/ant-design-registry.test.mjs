@@ -65,6 +65,11 @@ describe('Ant Design registry', () => {
     expect([...publicExports(source).keys()]).toEqual(['Avatar', 'createForm']);
     expect(componentExportNames(source)).toEqual(['Avatar']);
   });
+  it('counts default component facades while excluding their helpers and types', () => {
+    const source = "export { default as Spin } from './spin.component'; export { default as Other } from './other.component.js'; export { helper, type SpinProps } from './spin.component';";
+
+    expect(componentExportNames(source)).toEqual(['Spin', 'Other']);
+  });
   it(
     'keeps v1 readiness separate from future capabilities and forces review on revision changes',
     () => {

@@ -1,22 +1,58 @@
 import type { Snippet } from 'svelte';
+import type { HTMLAttributes } from 'svelte/elements';
 
-export type SpinSize = 'small' | 'medium' | 'large';
+export type SpinSize = 'small' | 'medium' | 'middle' | 'large' | 'default';
+export type SpinContent = string | number | Snippet | null | boolean;
+export type SpinSemanticSlots = Partial<Record<
+  'root' | 'section' | 'indicator' | 'description' | 'container' | 'tip' | 'mask', string
+>>;
+export interface SpinSemanticInfo {
+  props: SpinProps & { spinning: boolean; fullscreen: boolean; percent?: number; };
+}
+export interface SpinIndicatorInfo {
+  percent?: number;
+  prefixCls: string;
+  class: string;
+  style?: string;
+}
+/** Пассивный snippet; прежние snippets без аргументов также поддерживаются. */
+export type SpinIndicator = Snippet<[SpinIndicatorInfo]>;
+export interface SpinRef {
+  nativeElement: HTMLDivElement;
+}
 
-/** Standalone или вложенный индикатор ожидания с задержкой и блокировкой busy children. */
-export interface SpinProps {
+/** Отдельный, вложенный или полноэкранный индикатор с сохранением busy children. */
+export interface SpinProps extends Omit<
+  HTMLAttributes<HTMLDivElement>, 'children' | 'class' | 'style' | 'aria-hidden'
+> {
+  prefixCls?: string;
   /** @defaultValue true */
   spinning?: boolean;
   /** @defaultValue 0 */
   delay?: number;
+  /** middle/default сохраняют обычный размер; default — deprecated alias. */
   size?: SpinSize;
-  description?: string | Snippet;
-  indicator?: Snippet;
-  children?: Snippet;
-  id?: string;
-  'aria-label'?: string;
-  'aria-labelledby'?: string;
-  'aria-describedby'?: string;
+  description?: SpinContent;
+  /** @deprecated Используйте description. */
+  tip?: SpinContent;
+  indicator?: SpinIndicator | null;
+  children?: SpinContent;
+  /** Фиксированный слой в текущей DOM-ветке, без portal или focus trap. */
+  fullscreen?: boolean;
+  percent?: number | 'auto';
   'aria-hidden'?: boolean;
   class?: string;
+  rootClassName?: string;
+  /** @deprecated Используйте classNames.root. */
+  wrapperClassName?: string;
   style?: string;
+  classNames?: SpinSemanticSlots
+    | ((info: SpinSemanticInfo) => SpinSemanticSlots | undefined);
+  styles?: SpinSemanticSlots
+    | ((info: SpinSemanticInfo) => SpinSemanticSlots | undefined);
+  nativeElement?: HTMLDivElement;
+  ref?: SpinRef;
 }
+
+/** Явный record заменяет родительский; undefined наследует его целиком. */
+export type SpinConfig = Pick<SpinProps, 'class' | 'style' | 'indicator' | 'classNames' | 'styles'>;

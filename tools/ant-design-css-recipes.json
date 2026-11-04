@@ -1118,7 +1118,9 @@
     "id": "listy",
     "output": "src/lib/vendor/listy.css",
     "expectedRules": 16,
-    "include": ["\\.ant-listy(?![\\w])"],
+    "include": [
+      "\\.ant-listy(?![\\w])"
+    ],
     "exclude": [],
     "replacements": [
       {
@@ -1137,8 +1139,12 @@
     "id": "typography",
     "output": "src/lib/vendor/typography.css",
     "expectedRules": 73,
-    "include": ["\\.ant-typography(?![\\w])"],
-    "exclude": ["\\.ant-(?:menu|select)(?![\\w])"],
+    "include": [
+      "\\.ant-typography(?![\\w])"
+    ],
+    "exclude": [
+      "\\.ant-(?:menu|select)(?![\\w])"
+    ],
     "replacements": [
       {
         "pattern": "\\.css-var-_R_0_\\.ant-typography(?:-css-var)?(?![-\\w])",
@@ -1156,7 +1162,9 @@
     "id": "tour",
     "output": "src/lib/vendor/tour.css",
     "expectedRules": 61,
-    "include": ["\\.ant-tour(?![\\w])"],
+    "include": [
+      "\\.ant-tour(?![\\w])"
+    ],
     "exclude": [],
     "replacements": [
       {
@@ -1175,7 +1183,9 @@
     "id": "carousel",
     "output": "src/lib/vendor/carousel.css",
     "expectedRules": 58,
-    "include": ["\\.ant-carousel(?![\\w])"],
+    "include": [
+      "\\.ant-carousel(?![\\w])"
+    ],
     "exclude": [],
     "replacements": [
       {
@@ -1187,7 +1197,10 @@
         "replacement": ".ant-carousel$1:where(.ant-carousel-css-var)"
       }
     ],
-    "keyframes": ["ant-carousel-dot-animation", "ant-carousel-dot-vertical-animation"],
+    "keyframes": [
+      "ant-carousel-dot-animation",
+      "ant-carousel-dot-vertical-animation"
+    ],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Carousel: slick track, slides, arrows, dots и duration animations.\n * Корни ограничены :where(.ant-carousel-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
@@ -1457,5 +1470,57 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Popconfirm prefix template: message, title/description, icon и buttons.\n * Внешний ant-popover, anticon и имена CSS variables сохранены.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "spin",
+    "output": "src/lib/vendor/spin.css",
+    "expectedRules": 35,
+    "include": [
+      "\\.ant-spin(?![\\w])"
+    ],
+    "exclude": [
+      "ant-list"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-spin(?![-\\w])",
+        "replacement": ".ant-spin-css-var"
+      },
+      {
+        "pattern": "\\.ant-spin(?![-\\w])",
+        "replacement": ".ant-spin:where(.ant-spin-css-var)"
+      }
+    ],
+    "keyframes": [
+      "antRotate",
+      "antSpinMove"
+    ],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Spin: standalone/children, fullscreen, percent и размеры; List исключён.\n * Корни ограничены :where(.ant-spin-css-var); имена CSS variables сохранены.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "appendRootKeyframes": true
+  },
+  {
+    "id": "spin-prefix",
+    "output": "src/lib/vendor/spin-prefix.css.js",
+    "expectedRules": 35,
+    "include": [
+      "\\.ant-spin(?![\\w])"
+    ],
+    "exclude": [
+      "ant-list"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-spin(?![-\\w])",
+        "replacement": ".ant-spin-css-var"
+      },
+      {
+        "pattern": "\\.ant-spin(?![-\\w])",
+        "replacement": ".ant-spin:where(.ant-spin-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Spin prefix template: standalone/children, fullscreen, percent и размеры.\n * Корни ограничены :where(.ant-spin-css-var); имена CSS variables сохранены.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "appendRootKeyframes": true,
+    "format": "module"
   }
 ]

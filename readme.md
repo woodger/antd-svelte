@@ -176,7 +176,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | MessageHolder / createMessage | Изолированная очередь пяти типов сообщений, ключи и обновления, таймеры, hover-пауза, maxCount, callable/thenable handle и контекст ConfigProvider |
 | NotificationHolder / createNotification | Подробные уведомления с title/description/actions snippets, четыре статуса, шесть положений, ключи, таймеры, hover/focus-пауза и закрытие |
 | Progress | Line/circle, управляемый percent, статусы, размеры, цвета, форматирование, ARIA, темы/RTL/reduced motion и SSR |
-| Spin | Standalone и сохранённые children, spinning/delay, три размера, description/indicator snippets, блокировка busy-контента и восстановление фокуса |
+| Spin | Standalone/children/fullscreen, percent/auto, component tokens, prefixCls, semantic/provider config, indicator snippets и static fallback; сохранены inert и восстановление фокуса |
 | Skeleton | Каркас первой загрузки, avatar/title/paragraph, размеры и ширины, active/round, замена children, доступный статус и фокус |
 | Empty | Пустое состояние, default/simple SVG, image/description snippets, действия, локаль, темы и восстановление фокуса |
 | Result | Семь статусов, официальные иконки/SVG, заголовок, описание, действия, подробности и восстановление фокуса |
@@ -3390,15 +3390,19 @@ Delay задаётся в миллисекундах и откладывает �
 Изменение содержимого, подписи или размера не перезапускает задержку.
 Unmount отменяет таймер; SSR не создаёт таймеров и скрывает отложенный индикатор.
 
-Size принимает small, medium и large с точками 14, 20 и 32px. Без size используется
-ConfigProvider.componentSize; middle соответствует medium. Поддерживаются темы,
+Size принимает small, medium и large с точками 14, 20 и 32px по умолчанию. Без size
+используется ConfigProvider.componentSize; middle и deprecated default сохраняют обычный размер.
+`theme.components.Spin` меняет размеры независимо от других компонентов. Поддерживаются темы,
 compact, primary, RTL и динамический prefers-reduced-motion. Стандартная анимация
 и CSS-анимации/переходы внутри indicator отключаются при reduced motion;
 таймерами, SVG/JavaScript-анимацией собственного snippet управляет его владелец.
 Высота wrapper определяется содержимым.
 
-Description принимает строку или пассивный Snippet; indicator — пассивный Snippet,
-заменяющий четыре точки. Строки экранируются. Indicator декоративный, без controls
+Description принимает строку, число или пассивный Snippet; deprecated tip используется
+только при description=null/undefined. Indicator — пассивный Snippet, заменяющий четыре точки.
+Он получает аргумент { percent, prefixCls, class, style }; прежние snippets без аргументов
+работают как раньше. В отличие от React cloneElement, Svelte не клонирует содержимое snippet:
+класс dot и semantic style применяются к декоративному span вокруг него. Строки экранируются. Indicator декоративный, без controls
 и остановок Tab. Id/class/style относятся к корню. Отдельный индикатор можно
 сделать декоративным через aria-hidden, когда текстовый статус уже есть рядом.
 
@@ -3427,8 +3431,39 @@ Table использует отдельный декоративный Spin в �
 Её [модель](https://woodger.org/ant-design#spin) отменяет
 ожидающий результат при cancel/reset/unmount и защищает новую попытку от старой.
 
-В первой версии нет fullscreen, percent/auto, глобального setDefaultIndicator,
-semantic classNames/styles и устаревших tip/default-size.
+Fullscreen добавляет фиксированный backdrop в текущей DOM-ветке. Он не использует portal,
+не блокирует внешний документ через inert и не перехватывает фокус. При spinning=false
+корень остаётся в DOM с opacity=0 и pointer-events=none; отдельный обычный Spin по-прежнему
+использует hidden. Для children сохраняется описанная выше блокировка и восстановление фокуса.
+
+Percent принимает число или auto. Число ограничивается 0–100 для SVG-кольца; дробная часть
+сохраняется. При нуле показываются четыре точки; после первого ненулевого percent кольцо
+остаётся смонтированным и скрывается при возврате к нулю. Как в upstream, SVG появляется
+после mount и отсутствует в SSR. Auto обновляется каждые 200 мс после появления индикатора:
+5%, 3% и 1% от остатка до 100 при текущем значении до 30, 70 и 96 включительно.
+Значение останавливается на 96.01238963686535; новый цикл видимой загрузки начинает с нуля.
+Переход к числу, остановка и unmount освобождают interval. Размер, описание, тема и prefix
+не перезапускают auto.
+
+ConfigProvider.spin задаёт indicator, class/style и object/function classNames/styles.
+Undefined наследует record целиком; явный объект, включая {}, заменяет родительский.
+Локальный indicator имеет приоритет над provider, затем Spin.setDefaultIndicator(snippet).
+Статический setter хранит модульный fallback, принимает null/undefined для сброса и сам
+не обновляет смонтированные Spin: новое значение читается при следующем обновлении props.
+Semantic callbacks получают нормализованные size, spinning, description/tip, fullscreen и
+числовой percent. Поддержаны root, section, indicator, description, container и aliases tip/mask.
+Provider styles.root → provider style → local styles.root; затем для standalone идут section,
+для fullscreen — mask, а локальный style применяется последним. Deprecated wrapperClassName
+относится только к children/fullscreen. RootClassName, native attrs/events, bind:nativeElement
+и bind:ref с nativeElement сохраняются при обновлениях; refs очищаются при unmount.
+
+PrefixCls меняет BEM classes; undefined/пустая строка возвращают ant-spin. CSS template из
+35 правил закреплённого архива сохраняет namespace переменных и изолирует root defaults.
+Component tokens, aliases, algorithm и CSS-variable prefix/key/hash работают через общий
+[контекст темы](./docs/reference/theme-context.md#токены-spin).
+Сверка 52 браузерных сценариев и auto timeline принадлежит библиотеке; примеры потребителя
+не заменяют эти проверки. Сохранённые native delay/inert/focus/ARIA и reduced motion — явные
+отличия от React. Общий ConfigProvider prefix и React development warnings ещё не перенесены.
 
 ## Skeleton
 

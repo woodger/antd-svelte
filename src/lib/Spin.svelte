@@ -1,45 +1,126 @@
 <script lang="ts">
-  import { onDestroy, untrack } from 'svelte';
+  import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { createSpinModel, normalizeSpinDelay } from './spin.model.svelte.js';
   import { createSpinFocus } from './spin.dom';
+  import { advanceSpinPercent } from './spin-percent.engine';
+  import { resolveSpinIndicator } from './spin-indicator';
+  import { getSpinPrefixCss } from './spin-prefix.engine';
+  import SpinProgress from './SpinProgress.svelte';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { ruRU } from './types';
-  import type { SpinProps } from './spin.types';
+  import type { SpinProps, SpinSemanticInfo, SpinSemanticSlots } from './spin.types';
 
   let {
     spinning = true,
     delay = 0,
     size,
     description,
+    tip,
     indicator,
     children,
+    fullscreen = false,
+    percent,
+    prefixCls,
     id,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
     'aria-hidden': ariaHidden,
     class: className = '',
-    style
+    rootClassName,
+    wrapperClassName,
+    style,
+    classNames,
+    styles,
+    nativeElement = $bindable(),
+    ref = $bindable(),
+    ...rest
   }: SpinProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Spin');
+  // Выходной ref может сброситься при смене spread props; lifecycle использует свой DOM host.
   let host = $state<HTMLDivElement>();
   let content = $state<HTMLDivElement>();
-  let request = $derived({ spinning, delay: normalizeSpinDelay(delay) });
+  let mockPercent = $state(0);
+  // Spread props могут инвалидировать getters без смены значения; таймеры сравнивают примитивы.
+  let requestedSpinning = $derived(spinning);
+  let requestedDelay = $derived(normalizeSpinDelay(delay));
+  let isAuto = $derived(percent === 'auto');
+  let request = $derived({ spinning: requestedSpinning, delay: requestedDelay });
   const model = createSpinModel(() => request);
   const focus = createSpinFocus();
   let visible = $derived(model.visible);
-  let resolvedSize = $derived(
-    size ?? (config.componentSize === 'middle' ? 'medium' : config.componentSize)
-  );
+  let prefix = $derived(prefixCls || 'ant-spin');
+  let prefixCss = $derived(getSpinPrefixCss(prefix));
+  let resolvedSize = $derived(size ?? config.explicitComponentSize);
+  let resolvedDescription = $derived(description ?? tip);
+  let resolvedPercent = $derived(percent === 'auto' ? mockPercent : percent);
+  let hasChildren = $derived(children !== undefined);
+  let nested = $derived(hasChildren || fullscreen);
   let strings = $derived({ ...ruRU.spin, ...config.locale.spin });
-  let hasDescription = $derived(typeof description === 'function' || Boolean(description));
+  let hasDescription = $derived(
+    typeof resolvedDescription === 'function' || Boolean(resolvedDescription)
+  );
   let label = $derived(
-    ariaLabel
-    ?? (ariaLabelledby
-      ? undefined
-      : typeof description === 'string' && description ? description : strings.loadingText)
+    ariaLabel ?? (ariaLabelledby ? undefined
+      : typeof resolvedDescription === 'string' && resolvedDescription
+        ? resolvedDescription : strings.loadingText)
   );
   let announce = $derived(visible && !ariaHidden);
+  let semanticInfo = $derived<SpinSemanticInfo>({
+    props: {
+      ...rest,
+      id,
+      spinning: visible,
+      delay,
+      size: resolvedSize,
+      description: resolvedDescription,
+      tip: resolvedDescription,
+      indicator,
+      children,
+      fullscreen,
+      percent: resolvedPercent,
+      prefixCls,
+      class: className,
+      rootClassName,
+      wrapperClassName,
+      style,
+      classNames,
+      styles,
+      'aria-label': ariaLabel,
+      'aria-labelledby': ariaLabelledby,
+      'aria-describedby': ariaDescribedby,
+      'aria-hidden': ariaHidden
+    }
+  });
+  let resolvedIndicator = $derived(resolveSpinIndicator(semanticInfo.props, config.spin));
+  let semantics = $derived.by(() => {
+    const inheritedClasses = config.spin?.classNames;
+    const inheritedStyles = config.spin?.styles;
+    const contextClasses = typeof inheritedClasses === 'function'
+      ? inheritedClasses(semanticInfo) : inheritedClasses;
+    const contextStyles = typeof inheritedStyles === 'function'
+      ? inheritedStyles(semanticInfo) : inheritedStyles;
+    const localClasses = typeof classNames === 'function' ? classNames(semanticInfo) : classNames;
+    const localStyles = typeof styles === 'function' ? styles(semanticInfo) : styles;
+    const classes: SpinSemanticSlots = {};
+    const slots: SpinSemanticSlots = {};
+
+    for (const slot of [
+      'root', 'section', 'indicator', 'description', 'container', 'tip', 'mask'
+    ] as const) {
+      classes[slot] = [contextClasses?.[slot], localClasses?.[slot]].filter(Boolean).join(' ');
+      slots[slot] = [
+        contextStyles?.[slot],
+        slot === 'root' && config.spin?.style,
+        localStyles?.[slot]
+      ].filter(Boolean).join(';');
+    }
+
+    return { classes, styles: slots };
+  });
 
   $effect(() => {
     const node = host;
@@ -55,51 +136,112 @@
     }));
   });
 
+  $effect(() => {
+    const node = host;
+    const active = isAuto && visible;
+    if (!node || !active) return;
+
+    mockPercent = 0;
+    const view = node.ownerDocument.defaultView!;
+    const timer = view.setInterval(() => {
+      mockPercent = advanceSpinPercent(mockPercent);
+    }, 200);
+    return () => view.clearInterval(timer);
+  });
+
   $effect.pre(() => {
     const node = host;
     const container = content;
     const busy = spinning;
-    if (node)
-      untrack(() => focus.update(node, container, busy));
+    if (node) untrack(() => focus.update(node, container, busy));
   });
 
+  onMount(() => {
+    nativeElement = host;
+    ref = { nativeElement: host! };
+    return () => {
+      nativeElement = undefined;
+      ref = undefined;
+    };
+  });
   onDestroy(() => focus.destroy());
 </script>
 
 <style>
-  .ant-spin { min-width: 0; max-width: 100%; }
-  .ant-spin[hidden] { display: none; }
-  .ant-spin:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
-  .ant-spin > .ant-spin-section { width: max-content; max-width: calc(100% - 24px); pointer-events: none; text-align: center; }
-  .ant-spin-description { min-width: 0; max-width: 100%; overflow-wrap: anywhere; text-align: center; }
-  .ant-spin-dot { flex: none; }
+  [data-ant-spin-root] { min-width: 0; max-width: 100%; }
+  [data-ant-spin-root][hidden] { display: none; }
+  [data-ant-spin-root]:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
+  [data-ant-spin-root] > [data-ant-spin-part="section"] { width: max-content; max-width: calc(100% - 24px); pointer-events: none; text-align: center; }
+  [data-ant-spin-part="description"] { min-width: 0; max-width: 100%; overflow-wrap: anywhere; text-align: center; }
+  [data-ant-spin-part="dot"], [data-ant-spin-part="holder"] { flex: none; }
   @media (prefers-reduced-motion: reduce) {
-    .ant-spin .ant-spin-dot-spin, .ant-spin .ant-spin-dot-item { animation: none; }
-    .ant-spin .ant-spin-dot-item { opacity: 1; }
-    .ant-spin .ant-spin-container, .ant-spin .ant-spin-container::after, .ant-spin .ant-spin-dot-holder { transition: none; }
-    .ant-spin .ant-spin-dot :global(*) { animation: none !important; transition: none !important; }
+    [data-ant-spin-root] { transition: none; }
+    [data-ant-spin-root] [data-ant-spin-part="dot"], [data-ant-spin-root] [data-ant-spin-part="item"] { animation: none; }
+    [data-ant-spin-root] [data-ant-spin-part="item"] { opacity: 1; }
+    [data-ant-spin-root] [data-ant-spin-part="container"], [data-ant-spin-root] [data-ant-spin-part="container"]::after,
+    [data-ant-spin-root] [data-ant-spin-part="holder"] { transition: none; }
+    [data-ant-spin-part="custom"] :global(*) { animation: none !important; transition: none !important; }
   }
 </style>
 
 {#snippet visual()}
-  <span class="ant-spin-dot" aria-hidden="true">{#if indicator}{@render indicator()}{:else}<span class="ant-spin-dot-holder"><span class="ant-spin-dot-holder ant-spin-dot-spin"><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i><i class="ant-spin-dot-item"></i></span></span>{/if}</span>
-  {#if hasDescription}<div class="ant-spin-description">{#if typeof description === 'function'}{@render description()}{:else}{description}{/if}</div>{/if}
+  {#if resolvedIndicator}
+    <span class={[`${prefix}-dot`, semantics.classes.indicator]}
+      style={semantics.styles.indicator} aria-hidden="true" data-ant-spin-part="custom">
+      {@render resolvedIndicator({ percent: resolvedPercent, prefixCls: prefix,
+        class: [`${prefix}-dot`, semantics.classes.indicator].filter(Boolean).join(' '),
+        style: semantics.styles.indicator })}
+    </span>
+  {:else}
+    <span class={[`${prefix}-dot-holder`, semantics.classes.indicator,
+      (resolvedPercent ?? 0) > 0 && `${prefix}-dot-holder-hidden`]}
+      style={semantics.styles.indicator} data-ant-spin-part="holder" aria-hidden="true">
+      <span class={`${prefix}-dot ${prefix}-dot-spin`} data-ant-spin-part="dot" aria-hidden="true">
+        {#each [1, 2, 3, 4] as dot (dot)}<i class={`${prefix}-dot-item`} data-ant-spin-part="item"></i>{/each}
+      </span>
+    </span>
+    <SpinProgress prefixCls={prefix} percent={resolvedPercent ?? 0} {label} />
+  {/if}
+  {#if hasDescription}
+    <div class={[`${prefix}-description`, semantics.classes.tip, semantics.classes.description]}
+      style={[semantics.styles.tip, semantics.styles.description].filter(Boolean).join(';')}
+      data-ant-spin-part="description">{#if typeof resolvedDescription === 'function'}{@render resolvedDescription()}{:else if typeof resolvedDescription !== 'boolean'}{resolvedDescription}{/if}</div>
+  {:else if resolvedDescription === 0}0{/if}
 {/snippet}
 
-<!-- svelte-ignore a11y_no_noninteractive_tabindex (Отрицательный tabindex нужен для временного фокуса при блокировке children.) -->
-<div bind:this={host} {id} role={ariaHidden
-    ? undefined
-    : children ? 'group' : announce ? 'status' : undefined} aria-live={!children && announce ? 'polite' : undefined} aria-atomic={!children && announce || undefined} aria-label={children || visible ? label : undefined} aria-labelledby={children || visible ? ariaLabelledby : undefined} aria-describedby={ariaDescribedby} aria-hidden={ariaHidden || !children && !visible || undefined} tabindex={children ? -1 : undefined} hidden={!children && !visible} dir={config.direction} class={[
-        'ant-spin ant-spin-css-var',
-        !children && 'ant-spin-section',
-        visible && 'ant-spin-spinning',
-        resolvedSize === 'small' && 'ant-spin-sm',
-        resolvedSize === 'large' && 'ant-spin-lg',
-        config.direction === 'rtl' && 'ant-spin-rtl',
-        className
-      ]} {style}>
-  {#if visible}{#if children}<div class="ant-spin-section" role={announce ? 'status' : undefined} aria-live={announce ? 'polite' : undefined} aria-atomic={announce || undefined} aria-label={typeof description === 'string' && description
-      ? description
-      : strings.loadingText}>{@render visual()}</div>{:else}{@render visual()}{/if}{/if}
-  {#if children}<div bind:this={content} class="ant-spin-container" inert={spinning} aria-busy={spinning}>{@render children()}</div>{/if}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`spin-prefix:${prefix}`} />{/if}<!-- svelte-ignore a11y_no_noninteractive_tabindex (Отрицательный tabindex временно паркует фокус вне inert children.) --><div
+  bind:this={host} {id} data-ant-spin-root
+  data-ant-spin-prefix={prefixCss ? prefix : undefined}
+  role={ariaHidden ? undefined : hasChildren ? 'group' : announce ? 'status' : undefined}
+  aria-live={!hasChildren && announce ? 'polite' : undefined}
+  aria-atomic={!hasChildren && announce || undefined}
+  aria-label={hasChildren || visible ? label : undefined}
+  aria-labelledby={hasChildren || visible ? ariaLabelledby : undefined}
+  aria-describedby={ariaDescribedby}
+  aria-hidden={ariaHidden || !hasChildren && !visible || undefined}
+  tabindex={hasChildren ? -1 : undefined} hidden={!nested && !visible}
+  dir={config.direction} class={[
+    prefix, 'ant-spin-css-var', componentTheme.className,
+    visible && `${prefix}-spinning`, fullscreen && `${prefix}-fullscreen`,
+    resolvedSize === 'small' && `${prefix}-sm`, resolvedSize === 'large' && `${prefix}-lg`,
+    config.direction === 'rtl' && `${prefix}-rtl`, rootClassName, semantics.classes.root,
+    fullscreen && semantics.classes.mask,
+    nested ? wrapperClassName : [`${prefix}-section`, semantics.classes.section],
+    config.spin?.class, className
+  ]} style={[componentTheme.style, semantics.styles.root, !nested && semantics.styles.section,
+    fullscreen && semantics.styles.mask, style].filter(Boolean).join(';') || undefined} {...rest}>
+  {#if visible}
+    {#if nested}
+      <div class={[`${prefix}-section`, semantics.classes.section]}
+        style={semantics.styles.section} data-ant-spin-part="section"
+        role={hasChildren && announce ? 'status' : undefined}
+        aria-live={hasChildren && announce ? 'polite' : undefined}
+        aria-atomic={hasChildren && announce || undefined}
+        aria-label={hasChildren ? typeof resolvedDescription === 'string' && resolvedDescription
+          ? resolvedDescription : strings.loadingText : undefined}>{@render visual()}</div>
+    {:else}{@render visual()}{/if}
+  {/if}
+  {#if hasChildren}<div bind:this={content} class={[`${prefix}-container`, semantics.classes.container]}
+    style={semantics.styles.container} data-ant-spin-part="container" inert={spinning}
+    aria-busy={spinning}>{#if typeof children === 'function'}{@render children()}{:else if typeof children !== 'boolean'}{children}{/if}</div>{/if}
 </div>

@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider и Divider получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider и Spin получают собственные
 defaults и aliases.
 Flex использует alias overrides без собственных component defaults и без typography reset.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
@@ -372,6 +372,33 @@ overrides/algorithms к корню. PaddingXS/padding/paddingLG задают pre
 рассчитанные class/style; DOM-ref custom root передаёт через собственный $bindable nativeElement.
 Source classes/computed layout, nested replacement, forwarding, SSR и updates:
 [Flex tests](../../tests/browser/flex-source.spec.ts). Общий ConfigProvider prefix ещё не перенесён.
+
+## Токены Spin
+
+Spin подготавливает contentHeight=400, dotSize=controlHeightLG/2,
+dotSizeSM=controlHeightLG*0.35 и dotSizeLG=controlHeight. В Ant Design 6.6.8
+contentHeight регистрируется, но Spin CSS его не использует; токен не задаёт max-height.
+Component aliases/algorithm меняют Spin независимо от остальных controls. Явные нули,
+undefined и CSS-variable prefix/key/hash сохраняют общий source-порядок.
+Переменные применяются на корне до semantic и пользовательских стилей; nested и sibling
+providers изолированы. Size выбирает обычный, малый или большой dot token.
+
+ConfigProvider.spin содержит indicator, class/style и semantic classNames/styles.
+Record наследуется целиком при undefined и заменяется явным объектом. Semantic slots
+root/section/indicator/description/container и deprecated tip/mask повторяют исходные
+ветви standalone/children/fullscreen. Внутри root сохраняется порядок provider styles.root,
+provider style и local styles.root; затем идут standalone section/fullscreen mask и local style.
+Snippet indicator получает вычисленный percent и оформляется через декоративный dot span.
+Spin.setDefaultIndicator задаёт общий fallback после local/provider indicator; setter сам
+не запускает обновление существующих экземпляров.
+
+Local prefix использует [CSS template](../../src/lib/vendor/spin-prefix.css.js) из 35 правил.
+Static и auto progress, fullscreen, context/style priorities и компонентные темы сверяются с
+[52 UMD-сценариями](../../tests/browser/fixtures/ant-design-spin-source-reference.json).
+[Browser tests](../../tests/browser/spin-source.spec.ts) также проверяют live updates,
+refs/state/focus, token isolation и cleanup. Native inert/focus, нормализованная delay с
+перезапуском и ARIA/reduced motion сохраняются отдельно от React; global provider prefix
+и React development warnings ещё не перенесены.
 
 ## Токены Divider
 

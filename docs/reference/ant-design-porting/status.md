@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **109**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **51**; требуется аудит у **19**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **52**; требуется аудит у **18**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -81,7 +81,7 @@ Candidate означает запись каталога, для которой 
 | [Progress](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/progress) | feedback | target | Progress | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Dashboard, steps и градиенты (missing) |
 | [Result](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/result) | feedback | target | Result | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Skeleton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/skeleton) | feedback | target | Skeleton | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Отдельные Skeleton primitives (missing) |
-| [Spin](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/spin) | feedback | target | Spin | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Fullscreen и percent (missing) |
+| [Spin](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/spin) | feedback | target | Spin | Согласованный v1 покрыт | Общий prefixCls ConfigProvider (missing); React development warnings (missing) |
 | [Watermark](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/watermark) | feedback | target | Watermark | Согласованный v1 покрыт | Полный общий theme/token engine (missing) |
 | [Affix](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/affix) | other | target | Affix | Согласованный v1 покрыт | PrefixCls и глобальный affix/getTargetContainer config (missing) |
 | [App](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/app) | other | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |

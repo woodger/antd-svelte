@@ -9,6 +9,12 @@
 
 ### Added
 
+- Spin: fullscreen, percent/auto, ConfigProvider.spin, semantic slots, deprecated aliases,
+  local prefixCls и static setDefaultIndicator. Подключены четыре component tokens,
+  aliases/algorithm и SSR variables; сохранены native delay/inert/focus/ARIA и reduced motion.
+  Извлечены 35 CSS rules, добавлены 52 официальных UMD-сценария и auto timeline,
+  unit/SSR/browser-проверки состояния, scope isolation, refs и cleanup.
+
 - Flex: custom Svelte component с generic props и необязательным nativeElement forwarding,
   локальный prefixCls и ConfigProvider.flex vertical/class/style. Подключены component
   aliases/algorithm без typography reset; сохранены children, native events, gap/style

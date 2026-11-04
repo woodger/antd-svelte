@@ -32,9 +32,7 @@ export function componentExportNames(source) {
   return ast.statements.flatMap(
     node => ts.isExportDeclaration(node)
       && !node.isTypeOnly
-      && node.moduleSpecifier?.text?.endsWith(
-        '.svelte'
-      )
+      && /\.(svelte|component)(\.js)?$/.test(node.moduleSpecifier?.text ?? '')
       && node.exportClause
       && ts.isNamedExports(
         node.exportClause

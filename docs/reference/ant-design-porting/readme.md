@@ -61,6 +61,8 @@ V1-ready остаётся оценкой первого объёма, а не п
 вместе с сопоставлением экспортов Avatar и AvatarGroup. Аналогично сгруппированы
 Checkbox.Group, Radio.Group, Tag.CheckableTag и Form.Item. Фабрики createForm,
 createMessage/createNotification учитываются в API, но не прибавляют компоненты.
+Default exports из *.component обозначают Svelte component facades со статическим API
+и считаются наравне с прямыми *.svelte exports.
 Theme API и useToken учтены в семействе ConfigProvider и не добавляют Svelte-компонент.
 
 Состав каталога 6.6.8 закреплён в данных: 73 позиции, включая Icon, Util и
@@ -114,6 +116,8 @@ Report детерминированно перезаписывает тольк�
 vendor/avatar.css, avatar-group.css, badge.css, divider.css, flex.css, statistic.css,
 segmented.css, grid.css, layout.css, descriptions.css, card.css, breadcrumb.css,
 space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.css, anchor.css, steps.css, timeline.css, float-button.css, date-picker.css, menu.css, mentions.css, image.css, rate.css, otp.css, border-beam.css, masonry.css, splitter.css, qrcode.css, radio-button.css, calendar.css, transfer.css, pagination.css и list.css.
+Рецепты spin и spin-prefix извлекают 35 правил Spin, включая fullscreen/percent;
+первый сохраняет два keyframes, второй выводит локальный CSS prefix template.
 Рецепты listy, typography, tour и carousel воспроизводят одноимённые vendor CSS.
 Рецепт slider-range воспроизводит отдельный CSS диапазона; прежний slider.css
 одиночного control не перезаписывается.

@@ -26,9 +26,15 @@ import type { GlobalToken } from './theme-component-token.types';
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
-  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex';
+  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin';
 
 const factories = {
+  Spin: (token: GlobalToken) => ({
+    contentHeight: 400,
+    dotSize: token.controlHeightLG / 2,
+    dotSizeSM: token.controlHeightLG * 0.35,
+    dotSizeLG: token.controlHeight
+  }),
   Tabs: prepareTabsTokens,
   Slider: prepareSliderTokens,
   Flex: () => ({}),
@@ -139,7 +145,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Tabs: [],
   Slider: [],
   Divider: ['orientationMargin'],
-  Flex: []
+  Flex: [],
+  Spin: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]
