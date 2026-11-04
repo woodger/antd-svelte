@@ -175,7 +175,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Alert | Четыре статуса, title/description/icon/action snippets, outlined/filled, banner, закрытие с callbacks, анимацией и доступным фокусом |
 | MessageHolder / createMessage | Изолированная очередь пяти типов сообщений, ключи и обновления, таймеры, hover-пауза, maxCount, callable/thenable handle и контекст ConfigProvider |
 | NotificationHolder / createNotification | Подробные уведомления с title/description/actions snippets, четыре статуса, шесть положений, ключи, таймеры, hover/focus-пауза и закрытие |
-| Progress | Line/steps, gradients, success и percentPosition; native circle, component tokens, semantic/provider config, local prefix и formatter snippets; ARIA/RTL/SSR |
+| Progress | Line/circle/dashboard, steps, gradients, success и percentPosition; component tokens, semantic/provider config, local prefix и formatter snippets; ARIA/RTL/SSR |
 | Spin | Standalone/children/fullscreen, percent/auto, component tokens, prefixCls, semantic/provider config, indicator snippets и static fallback; сохранены inert и восстановление фокуса |
 | Skeleton | Каркас первой загрузки, avatar/title/paragraph, размеры и ширины, active/round, замена children, доступный статус и фокус |
 | Empty | Пустое состояние, default/simple SVG, image/description snippets, действия, локаль, темы и восстановление фокуса |
@@ -3293,17 +3293,17 @@ DOM-видимость и фокус — в notice.dom.ts; ими также п�
 <Progress type="circle" {percent} size={120} aria-label="Проверка файлов" />
 ```
 
-Type по умолчанию line, также поддерживается circle. Percent по умолчанию 0;
+Type по умолчанию line, также поддерживаются circle и dashboard. Percent по умолчанию 0;
 конечные значения ограничиваются 0–100 без округления. Undefined, NaN и ±Infinity
 заменяются на 0. Отображение, ширина/дуга и aria-valuenow используют одно
 нормализованное значение. Percent не bindable; владелец операции передаёт
 обновления через props. У Progress нет собственных таймеров и callbacks работы.
 
-Status поддерживает normal/success/exception и active для line. Без явного
+Status поддерживает normal/success/exception/active. Без явного
 status значение 100 включает success, остальные значения — normal. Явный
 normal/exception/success сохраняется при любом проценте. Active добавляет
-декоративную анимацию полосы и не изменяет percent. Circle в TypeScript не
-принимает active. Success/exception показывают декоративную иконку вместо
+декоративную анимацию line и не изменяет percent; circle/dashboard с active остаются
+статичными. Success/exception показывают декоративную иконку вместо
 подписи, если не задан format. Цвета статусов используют токены темы.
 
 ShowInfo=true по умолчанию. Format получает нормализованный percent и может вернуть
@@ -3324,13 +3324,21 @@ Size по умолчанию medium. Для line medium/small задают вы�
 заменяются defaults. Например, size={{ height: 4 }} сохраняет ширину 100%.
 Доступная ширина контейнера ограничивает индикатор на узких экранах.
 
-Для circle size принимает medium=120px, small=60px или положительный конечный
-диаметр в px. Невалидный диаметр заменяется на 120px. SVG сохраняет пропорции
-и помещается в контейнер. При диаметре ≤20px видимая подпись скрывается,
-ARIA-значение сохраняется. У circle strokeWidth задаётся
+Для circle/dashboard size принимает medium=120px, small=60px или положительный конечный
+диаметр в px. Middle/default дают обычный размер. Совместимая пара использует первый
+размер; deprecated width действует при отсутствующем size. Невалидный диаметр заменяется
+на 120px. SVG сохраняет пропорции и помещается в контейнер. При диаметре ≤20px подпись
+показывается в Tooltip; доступные значения сохраняются, остановка Tab не добавляется.
+Подпись Tooltip создаётся при первом открытии и сохраняется при закрытии. У circle strokeWidth задаётся
 в процентах viewBox; default — не меньше 6% и 3px при заданном диаметре.
 Невалидное значение использует default, чрезмерное ограничивается 99.9%, чтобы
 радиус оставался положительным. Нулевой процент не рисует цветной дуги.
+При сжатии контейнер круга сохраняет квадрат и центрирование подписи. Явный
+styles.body.width сохраняет исходную высоту; styles.body.height задаёт её напрямую.
+CSS-геометрия следует @rc-component/progress 1.0.3: круглые концы корректируют длину
+сегмента, а быстрые обновления с интервалом менее 100ms отключают переход. Числовые
+dash attributes сохраняют прежнюю геометрию для измеряющих её consumers; видимую дугу
+определяют CSS declarations. Минимальная толщина вычисляется в исходном порядке операций.
 
 StrokeColor/railColor принимают CSS-цвета и переопределяют цвет заполнения/фона,
 включая при success/exception. RailColor имеет приоритет над deprecated trailColor.
@@ -3339,6 +3347,9 @@ stops: ключи сортируются по исходному parseFloat, dir
 в LTR/RTL. В обычном line массив strokeColor использует первый цвет; в steps цвета
 применяются по индексу. Gradient object в line steps игнорируется, как upstream. StrokeLinecap поддерживает round/butt/square;
 у line butt/square убирают скругления, у circle задают SVG stroke-linecap.
+Круговой градиент использует record процентных stops, SVG mask и conic/linear background;
+порядок ключей сохраняется, концы становятся butt. From/to не преобразуются в процентные
+stops, как и в исходном круговом renderer.
 Темы и compact используют существующие токены. RTL меняет начало заполнения
 line на правое и направление active-анимации; circle сохраняет обход по часовой
 стрелке. Reduced motion отключает active-анимацию и переходы значений/цвета.
@@ -3387,14 +3398,28 @@ Bind:nativeElement возвращает текущий root после mount и 
 Тема Progress подключает шесть исходных component tokens, aliases/algorithm и CSS-variable
 prefix/key/hash; переменные идут перед semantic/user styles.
 
+Dashboard использует gapDegree=75, circle — 0. GapPlacement принимает top/bottom/start/end;
+start/end учитывают RTL. Deprecated gapPosition задаёт физические top/bottom/left/right;
+gapPlacement имеет приоритет. Для circle с положительным gapDegree задавайте placement:
+без него исходный renderer не применяет rotation. Success у круга рисуется отдельным
+сегментом перед остатком percent-success, с исходным порядком наложения.
+
+Круговые steps используют Math.round независимо от rounding. Object steps задаёт count/gap,
+по умолчанию промежуток 2 единицы viewBox; отдельная непрерывная rail не рисуется.
+Success вычитается из процента перед расчётом активных steps. Сохранены особенности
+6.6.8: без railColor неактивные steps наследуют основной stroke, а градиентные steps
+ссылаются на отсутствующее gradient definition. Эти случаи входят в source-проверки.
+
 [Эталоны line/steps](./tests/browser/fixtures/ant-design-progress-line-reference.json)
 сняты из официального UMD в стандартном режиме браузера для 70 сценариев.
 Для узкого size=24 отдельно сохранён
 [эталон native clipping](./tests/browser/fixtures/progress-native-clipping-reference.json)
-из свежей сборки прежнего коммита библиотеки. Circle пока сохраняет исходный Svelte API
-и геометрию из раздела выше. Dashboard, circular steps/gradients/success, gap placement,
-auto Tooltip маленького circle, общий ConfigProvider prefix и React development warnings
-остаются следующими этапами; наличие общей component theme не означает перенос SVG-движка.
+из свежей сборки прежнего коммита библиотеки. Для circle/dashboard есть
+[81 UMD-сценарий и transition trace](./tests/browser/fixtures/ant-design-progress-circle-reference.json).
+Сохранены native finite bounds, clipping длинной подписи и числовые SVG attributes;
+Tooltip использует существующую Svelte-обёртку. Общий ConfigProvider prefix и React
+development warnings остаются следующими этапами. Исходная лицензия
+[@rc-component/progress](./src/lib/vendor/LICENSE.rc-progress) включена в пакет.
 
 ## Spin
 

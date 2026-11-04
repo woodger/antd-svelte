@@ -77,7 +77,7 @@ for (const type of ['line', 'circle']) {
           )
             .toBe(`${value}%`);
         else
-          await expect(progress(page).locator('.ant-progress-circle-path')).toHaveCSS(
+          await expect(progress(page).locator('.ant-progress-circle-path').first()).toHaveCSS(
             'opacity',
             value === '0' ? '0' : '1'
           );
@@ -255,7 +255,7 @@ test(
       .fill('25');
     await page.getByRole('spinbutton', { name: 'Progress stroke width', exact: true }).fill('12');
 
-    const path = progress(page).locator('.ant-progress-circle-path');
+    const path = progress(page).locator('.ant-progress-circle-path').first();
 
     await expect(path).toHaveAttribute('r', '44');
     await expect(path).toHaveAttribute('stroke-width', '12');
@@ -305,7 +305,7 @@ test(
 
     await setting(page, 'type', 'circle');
 
-    await expect(progress(page).locator('.ant-progress-circle-path')).toHaveCSS(
+    await expect(progress(page).locator('.ant-progress-circle-path').first()).toHaveCSS(
       'stroke',
       'rgb(114, 46, 209)'
     );
@@ -372,7 +372,7 @@ test(
 
     await setting(page, 'type', 'circle');
 
-    await expect(progress(page).locator('.ant-progress-circle-path')).toHaveCSS(
+    await expect(progress(page).locator('.ant-progress-circle-path').first()).toHaveCSS(
       'transition-duration',
       '0s'
     );
@@ -437,6 +437,13 @@ test.describe('mobile Progress', () => {
 
         expect(box.x).toBeGreaterThanOrEqual(0);
         expect(box.x + box.width).toBeLessThanOrEqual(375);
+
+        if (type === 'circle') {
+          const svg = (await progress(page).locator('svg').first().boundingBox())!;
+          const indicator = (await progress(page).locator('.ant-progress-indicator').boundingBox())!;
+          expect(box.height).toBeCloseTo(svg.height, 1);
+          expect(indicator.y + indicator.height / 2).toBeCloseTo(svg.y + svg.height / 2, 1);
+        }
 
         await expect.poll(
           () => page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)

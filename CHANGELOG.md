@@ -9,6 +9,12 @@
 
 ### Added
 
+- Progress circle/dashboard: gap placement/degree, success segments, circular steps,
+  conic gradients и Tooltip маленького круга по @rc-component/progress 1.0.3.
+  Сохранены native bounds/ARIA/clipping и числовые SVG attributes; CSS-геометрия,
+  status icons и rapid-update transitions сверяются с 81 UMD-сценарием и trace.
+  Компонентные tokens и semantic styles применяются к новой SVG-разметке.
+
 - Progress line: steps/rounding, gradients, success segment и percentPosition,
   formatter snippets и исходные aliases. Подключены ConfigProvider.progress, semantic slots,
   local prefixCls, nativeElement и шесть component tokens с aliases/algorithm.

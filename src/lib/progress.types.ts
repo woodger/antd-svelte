@@ -1,11 +1,11 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 
-export type ProgressType = 'line' | 'circle';
+export type ProgressType = 'line' | 'circle' | 'dashboard';
 export type ProgressStatus = 'normal' | 'active' | 'exception' | 'success';
-export type ProgressCircleSize = 'small' | 'medium' | 'middle' | 'default' | number;
+export type ProgressCircleSize = 'small' | 'medium' | 'middle' | 'default' | number
+  | [number | string, number];
 export type ProgressLineSize = ProgressCircleSize
-  | [number | string, number]
   | { width?: number | string; height?: number; };
 export type ProgressSize = ProgressLineSize;
 export type ProgressContent = string | number | Snippet | null | boolean;
@@ -19,6 +19,8 @@ export interface PercentPositionType {
   align?: 'start' | 'center' | 'end';
   type?: 'inner' | 'outer';
 }
+export type ProgressGapPlacement = 'top' | 'bottom' | 'start' | 'end';
+export type ProgressGapPosition = 'top' | 'bottom' | 'left' | 'right';
 export type ProgressSemanticSlots = Partial<Record<
   'root' | 'body' | 'rail' | 'track' | 'indicator', string
 >>;
@@ -43,6 +45,12 @@ interface ProgressBaseProps extends Omit<
   railColor?: string;
   /** @deprecated Используйте railColor. */
   trailColor?: string;
+  /** @deprecated Используйте size. В line значение не используется. */
+  width?: number;
+  gapDegree?: number;
+  gapPlacement?: ProgressGapPlacement;
+  /** @deprecated Используйте gapPlacement. */
+  gapPosition?: ProgressGapPosition;
   strokeLinecap?: 'round' | 'butt' | 'square';
   class?: string;
   rootClassName?: string;
@@ -57,7 +65,7 @@ interface ProgressBaseProps extends Omit<
   children?: ProgressContent;
 }
 
-/** Line/steps и сохранённый native circle; dashboard/circular steps переносятся отдельно. */
+/** Line/steps и исходные circle/dashboard с сохранённой finite normalization. */
 export type ProgressProps = ProgressBaseProps & (
   | {
     type?: 'line';
@@ -71,15 +79,15 @@ export type ProgressProps = ProgressBaseProps & (
     percentPosition?: PercentPositionType;
   }
   | {
-    type: 'circle';
-    status?: Exclude<ProgressStatus, 'active'>;
+    type: 'circle' | 'dashboard';
+    status?: ProgressStatus;
     size?: ProgressCircleSize;
     strokeWidth?: number;
-    strokeColor?: string;
-    success?: never;
-    steps?: never;
-    rounding?: never;
-    percentPosition?: never;
+    strokeColor?: string | string[] | ProgressGradient;
+    success?: ProgressSuccess;
+    steps?: number | { count: number; gap: number; };
+    rounding?: (step: number) => number;
+    percentPosition?: PercentPositionType;
   }
 );
 

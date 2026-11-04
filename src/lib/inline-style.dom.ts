@@ -1,7 +1,7 @@
 import { getInlineStyleDeclarations, type InlineStyleLayer } from './inline-style.engine';
 
 /** React style diff по declaration keys; reconcile восстанавливает слой после DOM-controller. */
-export function connectInlineStyle(node: HTMLElement, reconcile = false) {
+export function connectInlineStyle(node: HTMLElement | SVGElement, reconcile = false) {
   const parser = node.ownerDocument.createElement('span').style;
   let previous = new Map<string, { value: string; priority: string; }>();
   let initialized = false;

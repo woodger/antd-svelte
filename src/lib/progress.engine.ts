@@ -33,6 +33,10 @@ export function resolveProgressLineSize(size?: ProgressLineSize) {
 }
 
 export function resolveProgressCircleSize(size?: ProgressCircleSize): number {
+  if (Array.isArray(size)) {
+    const value = size[0] ?? size[1];
+    return typeof value === 'number' ? positive(value, 120) : 120;
+  }
   return typeof size === 'number' ? positive(size, 120) : size === 'small' ? 60 : 120;
 }
 
@@ -41,7 +45,10 @@ export function getProgressCircleGeometry(
   diameter: number,
   strokeWidth?: number
 ) {
-  const width = Math.min(99.9, positive(strokeWidth, Math.max(6, 300 / positive(diameter, 120))));
+  const width = Math.min(
+    99.9,
+    positive(strokeWidth, Math.max(6, 3 / positive(diameter, 120) * 100))
+  );
   const radius = (100 - width) / 2;
   const circumference = 2 * Math.PI * radius;
   return {

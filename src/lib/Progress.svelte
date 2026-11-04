@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import Icon from './Icon.svelte';
+  import ProgressCircle from './ProgressCircle.svelte';
+  import { progressCircleIcons } from './progress-circle-icons';
   import { statusIcons } from './status-icons';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useConfig } from './config-context';
@@ -28,13 +29,17 @@
     type = 'line',
     percent = 0,
     status,
-    size = 'medium',
+    size: providedSize,
     strokeWidth,
     showInfo = true,
     format,
     strokeColor,
     railColor,
     trailColor,
+    width,
+    gapDegree,
+    gapPlacement,
+    gapPosition,
     strokeLinecap = 'round',
     success,
     steps,
@@ -64,11 +69,12 @@
   let host = $state<HTMLDivElement>();
   let prefix = $derived(prefixCls || 'ant-progress');
   let prefixCss = $derived(getProgressPrefixCss(prefix));
+  let size = $derived(providedSize ?? 'medium');
   let value = $derived(normalizeProgressPercent(percent));
   let successValue = $derived(progressSuccessPercent(success));
   let resolvedStatus = $derived(resolveProgressStatus(
     success?.percent === undefined ? value : Number.parseInt(String(success.percent), 10),
-    type === 'circle' && status === 'active' ? 'normal' : status
+    status
   ));
   let lineSize = $derived.by(() => {
     const resolved = resolveProgressLineSize(size);
@@ -77,7 +83,9 @@
     }
     return resolved;
   });
-  let diameter = $derived(resolveProgressCircleSize(size as ProgressCircleSize));
+  let diameter = $derived(resolveProgressCircleSize(
+    (providedSize ?? width ?? 'medium') as ProgressCircleSize
+  ));
   let circle = $derived(getProgressCircleGeometry(value, diameter, strokeWidth));
   let stepCount = $derived(typeof steps === 'object' ? steps.count : steps ?? 0);
   let stepLayout = $derived(steps
@@ -105,7 +113,7 @@
   let statusIcon = $derived(
     !format && infoPosition !== 'inner'
       && (resolvedStatus === 'success' || resolvedStatus === 'exception')
-      ? icons[type][resolvedStatus] : undefined
+      ? icons[type === 'line' ? 'line' : 'circle'][resolvedStatus] : undefined
   );
   let semanticInfo = $derived<ProgressSemanticInfo>({ props: {
     ...rest,
@@ -120,6 +128,10 @@
     strokeColor,
     railColor,
     trailColor,
+    width,
+    gapDegree,
+    gapPlacement,
+    gapPosition,
     strokeLinecap,
     success,
     steps,
@@ -163,15 +175,11 @@
   [data-ant-progress-root]:not([data-ant-progress-steps]) { min-width: 0; max-width: 100%; }
   [data-ant-progress-type="line"]:not([data-ant-progress-steps]) [data-ant-progress-part="body"], [data-ant-progress-type="line"]:not([data-ant-progress-steps]) [data-ant-progress-part="rail"] { min-width: 0; }
   [data-ant-progress-type="line"] [data-ant-progress-part="indicator"][data-ant-progress-position="outer"]:not([data-ant-progress-icon]) { flex: none; max-width: 50%; overflow: hidden; text-overflow: ellipsis; }
-  [data-ant-progress-type="circle"] [data-ant-progress-part="body"] { max-width: 100%; }
-  [data-ant-progress-type="circle"] [data-ant-progress-part="indicator"] { padding-inline: 10%; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
-  [data-ant-progress-type="circle"] svg { display: block; width: 100%; height: auto; }
-  [data-ant-progress-part="circle-path"] { transition: stroke-dashoffset var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out-circ), stroke var(--ant-motion-duration-slow); }
   .anticon { display: inline-flex; line-height: 0; vertical-align: -0.125em; }
   [data-ant-progress-direction="rtl"][data-ant-progress-active] [data-ant-progress-part="track"]::after { animation-name: ant-svelte-progress-rtl-active; }
   @keyframes ant-svelte-progress-rtl-active { 0% { transform: translateX(100%) scaleX(0); opacity: 0.1; } 20% { transform: translateX(100%) scaleX(0); opacity: 0.5; } to { transform: translateX(0) scaleX(1); opacity: 0; } }
   @media (prefers-reduced-motion: reduce) {
-    [data-ant-progress-root] [data-ant-progress-part="track"], [data-ant-progress-root] [data-ant-progress-part="step"], [data-ant-progress-root] [data-ant-progress-part="circle-path"] { transition: none; }
+    [data-ant-progress-root] [data-ant-progress-part="track"], [data-ant-progress-root] [data-ant-progress-part="step"] { transition: none; }
     [data-ant-progress-root][data-ant-progress-active] [data-ant-progress-part="track"]::after { animation: none; }
     [data-ant-progress-root] [data-ant-progress-part="indicator"] :global(*) { animation: none !important; transition: none !important; }
   }
@@ -187,7 +195,7 @@
     data-ant-progress-icon={Boolean(statusIcon) || undefined}
     style={semantics.styles.indicator} aria-hidden="true"
     title={typeof text === 'function' ? undefined : valueText}
-    dir={statusIcon || infoPosition === 'inner' || steps ? undefined : 'auto'}>{#if statusIcon}<span class="anticon">{#if type === 'line'}<svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor" fill-rule={resolvedStatus === 'exception' ? 'evenodd' : undefined} aria-hidden="true" focusable="false"><path d={statusIcons[resolvedStatus === 'success' ? 'check-circle-filled' : 'close-circle-filled']} /></svg>{:else}<Icon name={statusIcon} />{/if}</span>{:else if typeof text === 'function'}{@render text()}{:else if typeof text !== 'boolean'}{text}{/if}</span>
+    dir={statusIcon || infoPosition === 'inner' || steps ? undefined : 'auto'}>{#if statusIcon}<span class="anticon"><svg viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor" fill-rule={type === 'line' && resolvedStatus === 'exception' ? 'evenodd' : undefined} aria-hidden="true" focusable="false"><path d={type === 'line' ? statusIcons[resolvedStatus === 'success' ? 'check-circle-filled' : 'close-circle-filled'] : progressCircleIcons[resolvedStatus === 'success' ? 'success' : 'exception']} /></svg></span>{:else if typeof text === 'function'}{@render text()}{:else if typeof text !== 'boolean'}{text}{/if}</span>
 {/snippet}
 
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`progress-prefix:${prefix}`} />{/if}<div
@@ -202,7 +210,9 @@
   data-ant-progress-active={resolvedStatus === 'active' || undefined}
   class={[
     prefix, 'ant-progress-css-var', componentTheme.className,
-    `${prefix}-status-${resolvedStatus}`, type !== 'line' && `${prefix}-${type}`,
+    `${prefix}-status-${resolvedStatus}`, type !== 'line' && `${prefix}-circle`,
+    type === 'circle' && resolveProgressCircleSize(size as ProgressCircleSize) <= 20
+      && `${prefix}-inline-circle`,
     pureLine && [`${prefix}-line`, `${prefix}-line-align-${infoAlign}`,
       `${prefix}-line-position-${infoPosition}`],
     steps && `${prefix}-steps`, showInfo && `${prefix}-show-info`,
@@ -210,22 +220,11 @@
     config.progress?.class, className, rootClassName, semantics.classes.root
   ]} style={[componentTheme.style, semantics.styles.root].filter(Boolean).join(';') || undefined}
   {...rest}>
-  {#if type === 'circle'}
-    <div class={[`${prefix}-body`, semantics.classes.body]} data-ant-progress-part="body"
-      style={`width: ${diameter}px;font-size: ${diameter * 0.15 + 6}px;${semantics.styles.body ?? ''}`}>
-      <svg viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-        <circle class={[`${prefix}-circle-rail`, semantics.classes.rail]} cx="50" cy="50"
-          r={circle.radius} fill="none" stroke-width={circle.strokeWidth}
-          style={`stroke: ${mergedRail ?? ''};${semantics.styles.rail ?? ''}`} />
-        <circle class={[`${prefix}-circle-path`, semantics.classes.track]} cx="50" cy="50"
-          r={circle.radius} fill="none" stroke-width={circle.strokeWidth}
-          stroke-linecap={strokeLinecap} stroke-dasharray={`${circle.circumference} ${circle.circumference}`}
-          stroke-dashoffset={circle.offset} transform="rotate(-90 50 50)"
-          data-ant-progress-part="circle-path"
-          style={`stroke: ${typeof strokeColor === 'string' ? strokeColor : ''};opacity: ${value === 0 ? 0 : 1};${semantics.styles.track ?? ''}`} />
-      </svg>
-      {#if showInfo && diameter > 20}{@render indicator()}{/if}
-    </div>
+  {#if type !== 'line'}
+    <ProgressCircle {prefix} {type} percent={value} {diameter} strokeWidth={circle.strokeWidth}
+      strokeColor={lineColor} railColor={mergedRail} {strokeLinecap} {success} {steps}
+      {gapDegree} {gapPlacement} {gapPosition} classes={semantics.classes}
+      styles={semantics.styles} indicator={showInfo ? indicator : undefined} />
   {:else if steps && stepLayout}
     <div class={[`${prefix}-steps-body`, semantics.classes.body]} style={semantics.styles.body}
       data-ant-progress-part="body">

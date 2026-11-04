@@ -11081,7 +11081,12 @@
         "tests/browser/progress-line.spec.ts",
         "tests/package/progress-line.ssr.test.ts",
         "tests/browser/fixtures/ant-design-progress-line-reference.json",
-        "tests/browser/fixtures/progress-native-clipping-reference.json"
+        "tests/browser/fixtures/progress-native-clipping-reference.json",
+        "src/lib/progress-circle.engine.ts",
+        "src/lib/progress-circle-reference.test.ts",
+        "tests/browser/progress-circle.spec.ts",
+        "tests/package/progress-circle.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-progress-circle-reference.json"
       ],
       "features": [
         {
@@ -11094,18 +11099,20 @@
             "src/lib/progress.ssr.test.ts",
             "tests/browser/progress.spec.ts"
           ],
-          "note": "Сохранены finite percent/dimensions, нормализация общего percent и старые line/circle defaults, контролируемые props без таймеров, локализованные ARIA/name/valueText, отсутствие Tab/live regions и SSR геометрия native circle. Class/style, native events, owner state/focus и reduced motion сохраняются. Circle пока использует прежний SVG adapter, не полный @rc-component/progress."
+          "note": "Сохранены finite percent/dimensions, нормализация общего percent, локализованные ARIA/name/valueText, отсутствие Tab/live regions, owner state/focus и reduced motion. Circle/dashboard принимают все source statuses; active анимирует только line. Числовые SVG attributes сохраняются рядом с исходной CSS-геометрией, formatter API расширен без изменения прежних вызовов."
         },
         {
           "id": "gap-1",
           "title": "Dashboard, steps и градиенты",
-          "state": "partial",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/progress-line.engine.ts",
-            "tests/browser/progress-line.spec.ts"
+            "src/lib/progress-circle.engine.ts",
+            "tests/browser/progress-line.spec.ts",
+            "tests/browser/progress-circle.spec.ts"
           ],
-          "note": "Line steps/rounding и gradients перенесены по Ant Design 6.6.8. Circular steps, dashboard, conic gradient/mask и delegated transition/geometry остаются следующим этапом; типы пока не обещают эти возможности у circle."
+          "note": "Line и circular steps/gradients, dashboard/gap placement и success перенесены по Ant Design 6.6.8 / @rc-component/progress 1.0.3. Source conic masks, cap adjustment, transition durations и исходные особенности renderer проверяются отдельно; native bounds и clipping сохранены."
         },
         {
           "id": "line-features",
@@ -11155,15 +11162,21 @@
             "src/lib/vendor/progress-prefix.css.js",
             "tests/browser/fixtures/ant-design-progress-line-reference.json"
           ],
-          "note": "Шесть source component defaults и alias/algorithm overrides, CSS-variable prefix/key/hash; variables до semantic/user styles. Local BEM prefix с fallback ant-progress, marker collision и RTL проверены. 40 исходных CSS rules и один keyframe; native RTL active decoration сохранён. SourceSVG viewBox filled status icons используется только в Progress line, остальные Icon consumers не меняются."
+          "note": "Шесть source component defaults и alias/algorithm overrides, CSS-variable prefix/key/hash; variables до semantic/user styles. Local BEM prefix с fallback ant-progress, marker collision и RTL проверены. 40 исходных CSS rules и один keyframe; native RTL active decoration сохранён. Filled/outlined status icons используют исходные viewBox/path; остальные Icon consumers не меняются. Circle tokens, aliases и semantic SVG declarations проверены по UMD."
         },
         {
           "id": "circle-source",
           "title": "Полный circle/dashboard и маленький Tooltip",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Не перенесены dashboard/gap placement/width alias, circle success/steps/gradient, source cap adjustment/transition duration и auto Tooltip для small circle. Существующая finite native geometry сохраняется; её r/offset/rotation не выдаются за полное совпадение с rc-component/progress."
+          "evidence": [
+            "src/lib/ProgressCircle.svelte",
+            "src/lib/progress-circle-reference.test.ts",
+            "tests/browser/progress-circle.spec.ts",
+            "tests/package/progress-circle.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-progress-circle-reference.json"
+          ],
+          "note": "81 UMD-сценарий в standards mode и rapid-update trace: circle/dashboard, success paint order, logical/physical gaps с RTL, width/size aliases, round cap correction и source step spacing. Circular rounding игнорируется; gradient использует insertion order процентных stops, masks/foreignObject/conic background и butt cap. SVG styles пишутся через общий declaration writer с приоритетом semantic slots. Сохранены source особенности: default inactive steps наследуют основной stroke без railColor, gradient steps ссылаются на отсутствующее definition, gap у circle без placement не применяет rotation. Tiny Tooltip ленивый, сохраняет содержимое после закрытия и не добавляет Tab stop; используется native Svelte wrapper. Source outlined status icons, уникальные SSR masks и cleanup refs/popup проверены."
         },
         {
           "id": "global-prefix-warnings",
@@ -11172,6 +11185,19 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Общий ConfigProvider getPrefixCls и React development warnings остаются общими следующими этапами."
+        },
+        {
+          "id": "native-boundaries",
+          "title": "Сохраняемые Svelte/native contracts",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/progress.engine.test.ts",
+            "src/lib/progress.ssr.test.ts",
+            "tests/browser/progress.spec.ts"
+          ],
+          "note": "Native finite normalization/bounds для percent/size/strokeWidth, clipping подписи и numerically compatible SVG attributes сохраняются. Видимую дугу определяет исходная CSS-геометрия. Props/refs и passive formatter snippets адаптированы к Svelte; Tooltip использует существующую обёртку. Runtime fallback для невалидного размера остаётся native, object circle size не добавлен в публичные типы. Эти границы не выдаются за побайтовую React/DOM эквивалентность."
         }
       ]
     },

@@ -384,13 +384,17 @@ ConfigProvider.progress содержит class/style и semantic classNames/styl
 root/body/rail/track/indicator. Undefined наследует весь record, локальный объект заменяет его.
 Provider styles.root → provider style → local styles.root → local style задают root;
 styles частей применяются после вычисленных dimensions/colors. Source line/steps используют
-40 правил закреплённого CSS и локальный prefix template. Круговая геометрия пока native.
+40 правил закреплённого CSS и локальный prefix template. Circle/dashboard используют
+геометрию @rc-component/progress 1.0.3, сохраняя native finite bounds и SVG attributes.
 
 Line success, gradients, steps/rounding, percentPosition и приоритеты контекста сверяются с
 [70 UMD-сценариями](../../tests/browser/fixtures/ant-design-progress-line-reference.json).
 Существующие finite normalization, ARIA/locale и обрезка внешней текстовой подписи сохраняются;
 для size=24 есть отдельный baseline прежней Svelte-библиотеки. Deprecated aliases работают
 без React development warnings. Общий ConfigProvider prefix ещё не перенесён.
+Circle/dashboard, success/steps/gradient, gap placement и шесть tokens проверяются по
+[81 UMD-сценарию и transition trace](../../tests/browser/fixtures/ant-design-progress-circle-reference.json).
+Стили SVG-частей используют общий CSS declaration writer с исходным приоритетом semantic styles.
 
 ## Токены Spin
 

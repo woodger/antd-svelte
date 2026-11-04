@@ -522,6 +522,8 @@ export type {
   ProgressGradient,
   ProgressSuccess,
   PercentPositionType,
+  ProgressGapPlacement,
+  ProgressGapPosition,
   ProgressSemanticSlots,
   ProgressSemanticInfo,
   ProgressConfig
