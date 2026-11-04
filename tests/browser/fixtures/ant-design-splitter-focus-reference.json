@@ -1,0 +1,152 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js; runtime CSS-in-JS; React 18.3.1; standards mode",
+    "operation": "Render native input and button as public Panel children; collapse first panel; await zero painted size; Shift+Tab from remaining expand control; expand and read uncontrolled input",
+    "nativeBoundary": "Svelte uses button instead of div role=button; before control is the existing fixture Clear Splitter events button. Input/button children use ordinary public snippets; no DOM injection."
+  },
+  "cases": [
+    {
+      "name": "horizontal-static-retain",
+      "orientation": "horizontal",
+      "motion": false,
+      "destroyOnHidden": false,
+      "snapshot": {
+        "size": "0px",
+        "overflow": "hidden",
+        "inert": false,
+        "ariaHidden": null,
+        "field": {
+          "value": "Retained draft",
+          "visibility": "visible"
+        },
+        "accessibleTextboxes": 1,
+        "previousFocus": "Splitter content action",
+        "restoredValue": "Retained draft"
+      }
+    },
+    {
+      "name": "horizontal-static-destroy",
+      "orientation": "horizontal",
+      "motion": false,
+      "destroyOnHidden": true,
+      "snapshot": {
+        "size": "0px",
+        "overflow": "hidden",
+        "inert": false,
+        "ariaHidden": null,
+        "field": null,
+        "accessibleTextboxes": 0,
+        "previousFocus": "Before Splitter",
+        "restoredValue": ""
+      }
+    },
+    {
+      "name": "horizontal-motion-retain",
+      "orientation": "horizontal",
+      "motion": true,
+      "destroyOnHidden": false,
+      "snapshot": {
+        "size": "0px",
+        "overflow": "hidden",
+        "inert": false,
+        "ariaHidden": null,
+        "field": {
+          "value": "Retained draft",
+          "visibility": "visible"
+        },
+        "accessibleTextboxes": 1,
+        "previousFocus": "Splitter content action",
+        "restoredValue": "Retained draft"
+      }
+    },
+    {
+      "name": "horizontal-motion-destroy",
+      "orientation": "horizontal",
+      "motion": true,
+      "destroyOnHidden": true,
+      "snapshot": {
+        "size": "0px",
+        "overflow": "hidden",
+        "inert": false,
+        "ariaHidden": null,
+        "field": null,
+        "accessibleTextboxes": 0,
+        "previousFocus": "Before Splitter",
+        "restoredValue": ""
+      }
+    },
+    {
+      "name": "vertical-static-retain",
+      "orientation": "vertical",
+      "motion": false,
+      "destroyOnHidden": false,
+      "snapshot": {
+        "size": "0px",
+        "overflow": "hidden",
+        "inert": false,
+        "ariaHidden": null,
+        "field": {
+          "value": "Retained draft",
+          "visibility": "visible"
+        },
+        "accessibleTextboxes": 1,
+        "previousFocus": "Splitter content action",
+        "restoredValue": "Retained draft"
+      }
+    },
+    {
+      "name": "vertical-static-destroy",
+      "orientation": "vertical",
+      "motion": false,
+      "destroyOnHidden": true,
+      "snapshot": {
+        "size": "0px",
+        "overflow": "hidden",
+        "inert": false,
+        "ariaHidden": null,
+        "field": null,
+        "accessibleTextboxes": 0,
+        "previousFocus": "Before Splitter",
+        "restoredValue": ""
+      }
+    },
+    {
+      "name": "vertical-motion-retain",
+      "orientation": "vertical",
+      "motion": true,
+      "destroyOnHidden": false,
+      "snapshot": {
+        "size": "0px",
+        "overflow": "hidden",
+        "inert": false,
+        "ariaHidden": null,
+        "field": {
+          "value": "Retained draft",
+          "visibility": "visible"
+        },
+        "accessibleTextboxes": 1,
+        "previousFocus": "Splitter content action",
+        "restoredValue": "Retained draft"
+      }
+    },
+    {
+      "name": "vertical-motion-destroy",
+      "orientation": "vertical",
+      "motion": true,
+      "destroyOnHidden": true,
+      "snapshot": {
+        "size": "0px",
+        "overflow": "hidden",
+        "inert": false,
+        "ariaHidden": null,
+        "field": null,
+        "accessibleTextboxes": 0,
+        "previousFocus": "Before Splitter",
+        "restoredValue": ""
+      }
+    }
+  ]
+}

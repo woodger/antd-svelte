@@ -1,5 +1,6 @@
 import type { Locator, Page } from '@playwright/test';
 import { test, expect } from './test';
+import focusReference from './fixtures/ant-design-splitter-focus-reference.json' with { type: 'json' };
 
 type ResizeEvent = { event: string; sizes?: number[]; collapsed?: boolean[]; index?: number; };
 const root = (page: Page) => page.locator('.fixture-splitter');
@@ -281,6 +282,68 @@ test(
     await expect(first).toHaveValue('');
   }
 );
+
+for (const sample of focusReference.cases) {
+  test(`Splitter matches pinned collapsed-panel focus: ${sample.name}`, async ({ page }) => {
+    await select(page, 'Splitter orientation').selectOption(sample.orientation);
+    await control(page, 'Animated Splitter collapse').setChecked(sample.motion);
+    await control(page, 'Destroy Splitter hidden content').setChecked(sample.destroyOnHidden);
+    const draft = root(page).getByRole('textbox', { name: 'Splitter first draft', exact: true });
+    await draft.fill('Retained draft');
+    await root(page).getByRole('button', { name: 'Toggle start panel', exact: true }).click();
+    const panel = panels(page).nth(0);
+    const dimension = sample.orientation === 'vertical' ? 'height' : 'width';
+
+    await expect(panel).toHaveCSS(dimension, '0px');
+    const snapshot = await panel.evaluate(node => {
+      const field = node.querySelector('input');
+
+      return {
+        size: getComputedStyle(node).flexBasis,
+        overflow: getComputedStyle(node).overflow,
+        inert: (node as HTMLElement).inert,
+        ariaHidden: node.getAttribute('aria-hidden'),
+        field: field ? {
+          value: field.value,
+          visibility: getComputedStyle(field).visibility
+        } : null
+      };
+    });
+    const accessibleTextboxes = await draft.count();
+    const expand = root(page).getByRole('button', { name: 'Toggle end panel', exact: true });
+    await expand.focus();
+    await page.keyboard.press('Shift+Tab');
+
+    if (sample.destroyOnHidden) {
+      await expect(page.getByRole('button', { name: 'Clear Splitter events', exact: true }))
+        .toBeFocused();
+    } else {
+      // Сохраняем ограничение pinned upstream: clipping не исключает controls из Tab-порядка.
+      await expect(root(page).getByRole('button', { name: 'Splitter content action', exact: true }))
+        .toBeFocused();
+      await page.keyboard.press('Shift+Tab');
+
+      await expect(draft).toBeFocused();
+    }
+
+    await expand.click();
+    await expect(panel).toHaveCSS(dimension, '300px');
+
+    expect({
+      ...snapshot,
+      accessibleTextboxes,
+      restoredValue: await draft.inputValue()
+    }).toEqual({
+      size: sample.snapshot.size,
+      overflow: sample.snapshot.overflow,
+      inert: sample.snapshot.inert,
+      ariaHidden: sample.snapshot.ariaHidden,
+      field: sample.snapshot.field,
+      accessibleTextboxes: sample.snapshot.accessibleTextboxes,
+      restoredValue: sample.snapshot.restoredValue
+    });
+  });
+}
 
 test(
   'Splitter uses physical collapse directions in RTL and does not translate source button labels',

@@ -1596,9 +1596,10 @@
           "evidence": [
             "src/lib/splitter.engine.test.ts",
             "src/lib/splitter.ssr.test.ts",
-            "tests/browser/splitter.spec.ts"
+            "tests/browser/splitter.spec.ts",
+            "tests/browser/fixtures/ant-design-splitter-focus-reference.json"
           ],
-          "note": "Collapse/expand rechecks limits, resize→end→collapse, physical RTL и true/auto/false visibility. Panel destroy override; retained DOM по умолчанию. Native type=button заменяет div role=button с исходными Enter/Space и English labels. Новый icon object перекрывает legacy целиком; пустые icons сохраняются. CSS reduced motion и отключение transition во время drag."
+          "note": "Collapse/expand rechecks limits, resize→end→collapse, physical RTL и true/auto/false visibility. Panel destroy override; retained DOM по умолчанию. Как в pinned upstream, retained controls остаются в Tab-порядке и доступном дереве: нет inert/aria-hidden или переноса фокуса; destroyOnHidden удаляет потомков и сбрасывает uncontrolled state при раскрытии. Native type=button заменяет div role=button с исходными Enter/Space и English labels. Новый icon object перекрывает legacy целиком; пустые icons сохраняются. CSS reduced motion и отключение transition во время drag."
         },
         {
           "id": "ssr-lifecycle",
