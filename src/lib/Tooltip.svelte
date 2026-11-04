@@ -35,7 +35,8 @@
   );
   let enterDelay = $derived(mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1);
   let leaveDelay = $derived(mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1);
-  let sourceTrigger = $derived(Boolean(config.tooltip) || supports('click') || supports('contextMenu'));
+  let sourceTrigger = $derived(Boolean(config.tooltip) || resolvedTrigger.length === 0
+    || supports('click') || supports('contextMenu'));
   const initialDefault = untrack(() => defaultOpen);
   let host = $state<HTMLSpanElement>();
   let anchor = $state<Element>();

@@ -67,6 +67,7 @@ export interface PopoverProps {
    * @deprecated Используйте destroyOnHidden; keepParent не меняет результат.
    */
   destroyTooltipOnHide?: boolean | { keepParent?: boolean };
+  /** [] оставляет программное управление без открытия/закрытия по событиям trigger. */
   trigger?: PopoverTrigger | readonly PopoverTrigger[];
   /** @defaultValue 'top' */
   placement?: PopoverPlacement;

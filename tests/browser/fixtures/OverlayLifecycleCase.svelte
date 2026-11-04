@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
-  import { ConfigProvider, Tooltip, Popover, Popconfirm, TypographyText, Slider } from 'antd-svelte';
+  import { ConfigProvider, Tooltip, Popover, Popconfirm, TypographyText, Slider,
+    AvatarGroup } from 'antd-svelte';
   import OverlayLifecycleContent from './OverlayLifecycleContent.svelte';
   import type { OverlayLifecycleCase as Sample } from './overlay-lifecycle-presets';
 
@@ -42,8 +43,13 @@
 <button type="button" onclick={() => open = false}>Close lifecycle popup</button>
 <label><input type="checkbox" bind:checked={asyncConfirm} /> Async lifecycle confirm</label>
 <button type="button" onclick={() => resolveConfirm?.()}>Resolve lifecycle confirm</button>
-<ConfigProvider theme={{ token: { motion: false } }} tooltip={{}} popover={{}} popconfirm={{}}>
-  <div style="margin:80px 180px" id="lifecycle-case">
+<ConfigProvider theme={{ token: { motion: false } }}
+  tooltip={sample.sourceConfig === false ? undefined : {}}
+  popover={sample.sourceConfig === false ? undefined : {}}
+  popconfirm={sample.sourceConfig === false ? undefined : {}}>
+  <div style="margin:80px 180px" id="lifecycle-case"
+    {@attach host => host.querySelector('.ant-avatar-group-more')
+      ?.setAttribute('data-lifecycle-anchor', '')}>
     {#if mounted}
       {#if sliderMode !== 'off'}
         <Slider {...sliderMode === 'single'
@@ -63,9 +69,15 @@
             : undefined}>
           {@render anchor()}
         </Popconfirm>
+      {:else if sample.component === 'avatar-group'}
+        <AvatarGroup items={[
+          { key: 'a', label: 'Alpha', text: 'A' },
+          { key: 'b', label: 'Beta', text: 'B' }
+        ]} max={{ count: 1, popover: { ...options, title: 'Lifecycle title', content } }} />
       {:else}
         <TypographyText data-lifecycle-anchor="" children="A long text that exceeds its width"
-          style="display:block;width:80px" ellipsis={{ tooltip: { ...options, title: content } }} />
+          tabindex={0} style="display:block;width:80px"
+          ellipsis={{ tooltip: { ...options, title: content } }} />
       {/if}
     {/if}
   </div>

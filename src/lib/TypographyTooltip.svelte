@@ -21,7 +21,8 @@
   );
   let enterDelay = $derived(options.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1);
   let leaveDelay = $derived(options.mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1);
-  let sourceTrigger = $derived(Boolean(config.tooltip) || supports('click') || supports('contextMenu'));
+  let sourceTrigger = $derived(Boolean(config.tooltip) || resolvedTrigger.length === 0
+    || supports('click') || supports('contextMenu'));
   let open = $state(untrack(() => options.defaultOpen ?? false));
   let available = $derived(Boolean(title) || title === 0);
   let visible = $derived(enabled && available && (options.open ?? open));

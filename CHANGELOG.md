@@ -450,6 +450,10 @@
 
 ### Fixed
 
+- Tooltip/Popover/Typography: trigger=[] без component config больше не закрывает
+  программно открытую панель на hover leave/blur. Прежние native defaults,
+  геометрия, Escape/outside и callbacks сохранены. Добавлены 10 UMD-последовательностей
+  и браузерные регрессии, в том числе для Popconfirm и AvatarGroup.
 - Mentions: getPopupContainer с параметром ждёт DOM-префикс, как rc-trigger;
   предварительный undefined остаётся только для функций нулевой арности.
   Добавлены UMD-регрессии обычного и пользовательского popup.

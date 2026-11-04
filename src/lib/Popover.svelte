@@ -83,7 +83,7 @@
   );
   let enterDelay = $derived(mouseEnterDelay ?? config.popover?.mouseEnterDelay ?? 0.1);
   let leaveDelay = $derived(mouseLeaveDelay ?? config.popover?.mouseLeaveDelay ?? 0.1);
-  let sourceTrigger = $derived(Boolean(config.popover)
+  let sourceTrigger = $derived(Boolean(config.popover) || resolvedTrigger.length === 0
     || isPopconfirm && (Boolean(config.popconfirm) || Array.isArray(trigger))
     || supports('contextMenu'));
   let providedArrow = $derived(

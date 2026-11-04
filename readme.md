@@ -1629,8 +1629,13 @@ fractional sizes, flip history и смена placement проверяются п
 ConfigProvider.tooltip/popover/popconfirm задают class/style, classNames/styles,
 arrow, trigger и hover delays. Отсутствующий объект наследуется; явный объект,
 включая {}, заменяет родительский целиком. Локальные trigger и delays приоритетнее;
-0 сохраняется, undefined наследует следующий слой. Пустой trigger=[] отключает
-события открытия, сохраняя программное управление.
+0 сохраняется, undefined наследует следующий слой. При trigger=[] события hover,
+focus, click и contextMenu на trigger и popup не открывают и не закрывают панель.
+Это работает и без component config: уход указателя и blur не закрывают панель
+и не вызывают onOpenChange. События содержимого работают, contextmenu не подавляется.
+Escape и нажатие снаружи закрывают панель по прежним native правилам.
+Правило для trigger=[] работает также в Popconfirm, Typography ellipsis Tooltip
+и AvatarGroup.max.popover.
 
 ```svelte
 <ConfigProvider tooltip={{ trigger: 'click', arrow: { pointAtCenter: true },
@@ -1682,6 +1687,10 @@ Tooltip Typography. У Typography без config сохраняется исхо�
 [60 UMD-сценариев и 18 последовательностей событий](./tests/browser/fixtures/ant-design-overlay-config-reference.json),
 [SSR](./tests/package/overlay-config.ssr.test.ts) и
 [browser](./tests/browser/overlay-config.spec.ts).
+Без component config поведение пустого trigger дополнительно сверяется с
+[10 UMD-последовательностями / 130 кадрами](./tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json)
+для controlled/default open и удаления focused содержимого:
+[browser](./tests/browser/overlay-empty-trigger.spec.ts).
 Tooltip.unique, motion, fresh cache и полный align API ещё не перенесены.
 
 ### Цвет Tooltip, Popover и Popconfirm

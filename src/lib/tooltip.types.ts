@@ -85,6 +85,7 @@ export interface TooltipProps {
   arrow?: TooltipArrow;
   /** @defaultValue true */
   autoAdjustOverflow?: boolean | AdjustOverflow;
+  /** [] оставляет программное управление без открытия/закрытия по событиям trigger. */
   trigger?: TooltipTrigger | readonly TooltipTrigger[];
   /** Задержка открытия в секундах. */
   mouseEnterDelay?: number;

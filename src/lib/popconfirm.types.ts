@@ -75,7 +75,7 @@ export interface PopconfirmProps {
   placement?: PopoverPlacement;
   /** @defaultValue true */
   arrow?: TooltipArrow;
-  /** Локальный trigger → ConfigProvider.popconfirm → click. */
+  /** Локальный trigger → ConfigProvider.popconfirm → click; [] оставляет программное управление. */
   trigger?: PopoverTrigger | readonly PopoverTrigger[];
   /** Задержки hover в секундах, по умолчанию 0.1. */
   mouseEnterDelay?: number;

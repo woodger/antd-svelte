@@ -481,7 +481,11 @@
         "tests/browser/fixtures/ant-design-overlay-lifecycle-reference.json",
         "tests/browser/overlay-lifecycle-metrics.ts",
         "tests/browser/overlay-lifecycle.spec.ts",
-        "tests/package/overlay-lifecycle.ssr.test.ts"
+        "tests/package/overlay-lifecycle.ssr.test.ts",
+        "src/lib/popover.types.ts",
+        "src/lib/AvatarGroup.svelte",
+        "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+        "tests/browser/overlay-empty-trigger.spec.ts"
       ],
       "features": [
         {
@@ -677,6 +681,30 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "DestroyOnHidden ?? !!destroyTooltipOnHide; современный false перекрывает truthy alias, legacy object включает удаление независимо от keepParent. При закрытии очищается содержимое, включая DOM draft и локальное состояние child component; при открытии оно создаётся заново. Изменение флага в открытой панели сохраняет DOM/draft/selection/focus, в закрытой включает удаление сразу. Semantic props Tooltip получают разрешённый boolean, Popover/Popconfirm сохраняют входной prop. Настройки передаются ellipsis Tooltip Typography и single/active range/pinned range Slider. Контроллер Popconfirm сохраняет защиту от старого Promise при уничтоженном содержимом. 44 официальных UMD-сценария / 224 кадра фиксируют приоритет, initial/default open, body portals, скрытые обновления и reset/retention. Motion в эталоне отключена. Согласованная native граница: скрытый shell и ID/ARIA сохраняются, default SSR/content остаются eager, Typography и destroy=true ленивы при SSR; удаление следует native закрытию без ожидания source CSS motion. Исходные fresh cache, motion/unique и остальные delegated props остаются в работе."
+        },
+        {
+          "id": "empty-trigger",
+          "title": "Пустой trigger без component config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/AvatarGroup.svelte",
+            "tests/browser/fixtures/overlay-lifecycle-presets.ts",
+            "tests/browser/fixtures/OverlayLifecycleCase.svelte",
+            "tests/browser/fixtures/OverlayLifecycleContent.svelte",
+            "tests/browser/fixtures/OverlayLifecycleFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+            "tests/browser/overlay-lifecycle-metrics.ts",
+            "tests/browser/overlay-empty-trigger.spec.ts",
+            "tests/package/overlay-lifecycle.ssr.test.ts"
+          ],
+          "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
         }
       ]
     },
@@ -6392,7 +6420,16 @@
         "tests/browser/fixtures/ant-design-overlay-config-reference.json",
         "tests/browser/overlay-config-metrics.ts",
         "tests/browser/overlay-config.spec.ts",
-        "tests/package/overlay-config.ssr.test.ts"
+        "tests/package/overlay-config.ssr.test.ts",
+        "src/lib/TypographyTooltip.svelte",
+        "tests/browser/fixtures/overlay-lifecycle-presets.ts",
+        "tests/browser/fixtures/OverlayLifecycleCase.svelte",
+        "tests/browser/fixtures/OverlayLifecycleContent.svelte",
+        "tests/browser/fixtures/OverlayLifecycleFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+        "tests/browser/overlay-lifecycle-metrics.ts",
+        "tests/browser/overlay-empty-trigger.spec.ts",
+        "tests/package/overlay-lifecycle.ssr.test.ts"
       ],
       "features": [
         {
@@ -6770,6 +6807,30 @@
             "docs/reference/theme-context.md"
           ],
           "note": "PrefixCls Tooltip/Popover меняет popup, slots, placements и preset classes; empty/undefined используют defaults. Popconfirm меняет только собственные classes, сохраняя наружный ant-popover и его default open class. Перенесён openClassName, включая empty fallback и несколько tokens: реальный DOM trigger получает class после hydration, cleanup снимает только добавленные tokens; caller class сохраняется и может обновляться при открытой панели. Нет cloneElement непрозрачного Svelte snippet при SSR; hidden shell, native wrapper/ARIA и стабильные ID сохранены. Три CSS data templates: Tooltip 58, Popover 72, Popconfirm 11 rules; variables/markers/anticon и theme.cssVar.prefix остаются независимы от local component prefix. Stylesheet принадлежит экземпляру, обновления сохраняют popup DOM/draft/selection/focus. Source presets, все Tooltip/Popover placements, aliases/algorithms/CSS-variable prefix, native dark/compact и body portal проверяются по 123 официальным UMD-сценариям/172 кадрам; UMD генерирует CSS без подключения статического antd.css. Hash/css-var markers и native wrapper исключены из точного сравнения React DOM. Поддержаны Group max.popover, single/pinned/active range Slider и Typography ellipsis Tooltip; последний теперь передаёт color и semantic/legacy styles. Native viewport limits и Group focus recovery сохранены. Source motion/unique/fresh и остальные delegated Tooltip props не входят в эту feature."
+        },
+        {
+          "id": "empty-trigger",
+          "title": "Пустой trigger без component config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/AvatarGroup.svelte",
+            "tests/browser/fixtures/overlay-lifecycle-presets.ts",
+            "tests/browser/fixtures/OverlayLifecycleCase.svelte",
+            "tests/browser/fixtures/OverlayLifecycleContent.svelte",
+            "tests/browser/fixtures/OverlayLifecycleFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+            "tests/browser/overlay-lifecycle-metrics.ts",
+            "tests/browser/overlay-empty-trigger.spec.ts",
+            "tests/package/overlay-lifecycle.ssr.test.ts"
+          ],
+          "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
         }
       ]
     },
@@ -8216,7 +8277,9 @@
         "tests/browser/fixtures/ant-design-overlay-lifecycle-reference.json",
         "tests/browser/overlay-lifecycle-metrics.ts",
         "tests/browser/overlay-lifecycle.spec.ts",
-        "tests/package/overlay-lifecycle.ssr.test.ts"
+        "tests/package/overlay-lifecycle.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+        "tests/browser/overlay-empty-trigger.spec.ts"
       ],
       "features": [
         {
@@ -8511,6 +8574,30 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "DestroyOnHidden ?? !!destroyTooltipOnHide; современный false перекрывает truthy alias, legacy object включает удаление независимо от keepParent. При закрытии очищается содержимое, включая DOM draft и локальное состояние child component; при открытии оно создаётся заново. Изменение флага в открытой панели сохраняет DOM/draft/selection/focus, в закрытой включает удаление сразу. Semantic props Tooltip получают разрешённый boolean, Popover/Popconfirm сохраняют входной prop. Настройки передаются ellipsis Tooltip Typography и single/active range/pinned range Slider. Контроллер Popconfirm сохраняет защиту от старого Promise при уничтоженном содержимом. 44 официальных UMD-сценария / 224 кадра фиксируют приоритет, initial/default open, body portals, скрытые обновления и reset/retention. Motion в эталоне отключена. Согласованная native граница: скрытый shell и ID/ARIA сохраняются, default SSR/content остаются eager, Typography и destroy=true ленивы при SSR; удаление следует native закрытию без ожидания source CSS motion. Исходные fresh cache, motion/unique и остальные delegated props остаются в работе."
+        },
+        {
+          "id": "empty-trigger",
+          "title": "Пустой trigger без component config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/AvatarGroup.svelte",
+            "tests/browser/fixtures/overlay-lifecycle-presets.ts",
+            "tests/browser/fixtures/OverlayLifecycleCase.svelte",
+            "tests/browser/fixtures/OverlayLifecycleContent.svelte",
+            "tests/browser/fixtures/OverlayLifecycleFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+            "tests/browser/overlay-lifecycle-metrics.ts",
+            "tests/browser/overlay-empty-trigger.spec.ts",
+            "tests/package/overlay-lifecycle.ssr.test.ts"
+          ],
+          "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
         }
       ]
     },
@@ -9439,7 +9526,10 @@
         "tests/browser/fixtures/ant-design-overlay-lifecycle-reference.json",
         "tests/browser/overlay-lifecycle-metrics.ts",
         "tests/browser/overlay-lifecycle.spec.ts",
-        "tests/package/overlay-lifecycle.ssr.test.ts"
+        "tests/package/overlay-lifecycle.ssr.test.ts",
+        "src/lib/AvatarGroup.svelte",
+        "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+        "tests/browser/overlay-empty-trigger.spec.ts"
       ],
       "features": [
         {
@@ -9707,6 +9797,30 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "DestroyOnHidden ?? !!destroyTooltipOnHide; современный false перекрывает truthy alias, legacy object включает удаление независимо от keepParent. При закрытии очищается содержимое, включая DOM draft и локальное состояние child component; при открытии оно создаётся заново. Изменение флага в открытой панели сохраняет DOM/draft/selection/focus, в закрытой включает удаление сразу. Semantic props Tooltip получают разрешённый boolean, Popover/Popconfirm сохраняют входной prop. Настройки передаются ellipsis Tooltip Typography и single/active range/pinned range Slider. Контроллер Popconfirm сохраняет защиту от старого Promise при уничтоженном содержимом. 44 официальных UMD-сценария / 224 кадра фиксируют приоритет, initial/default open, body portals, скрытые обновления и reset/retention. Motion в эталоне отключена. Согласованная native граница: скрытый shell и ID/ARIA сохраняются, default SSR/content остаются eager, Typography и destroy=true ленивы при SSR; удаление следует native закрытию без ожидания source CSS motion. Исходные fresh cache, motion/unique и остальные delegated props остаются в работе."
+        },
+        {
+          "id": "empty-trigger",
+          "title": "Пустой trigger без component config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/AvatarGroup.svelte",
+            "tests/browser/fixtures/overlay-lifecycle-presets.ts",
+            "tests/browser/fixtures/OverlayLifecycleCase.svelte",
+            "tests/browser/fixtures/OverlayLifecycleContent.svelte",
+            "tests/browser/fixtures/OverlayLifecycleFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+            "tests/browser/overlay-lifecycle-metrics.ts",
+            "tests/browser/overlay-empty-trigger.spec.ts",
+            "tests/package/overlay-lifecycle.ssr.test.ts"
+          ],
+          "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
         }
       ]
     },
@@ -10335,7 +10449,10 @@
         "tests/browser/fixtures/ant-design-overlay-lifecycle-reference.json",
         "tests/browser/overlay-lifecycle-metrics.ts",
         "tests/browser/overlay-lifecycle.spec.ts",
-        "tests/package/overlay-lifecycle.ssr.test.ts"
+        "tests/package/overlay-lifecycle.ssr.test.ts",
+        "src/lib/AvatarGroup.svelte",
+        "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+        "tests/browser/overlay-empty-trigger.spec.ts"
       ],
       "features": [
         {
@@ -10605,6 +10722,30 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "DestroyOnHidden ?? !!destroyTooltipOnHide; современный false перекрывает truthy alias, legacy object включает удаление независимо от keepParent. При закрытии очищается содержимое, включая DOM draft и локальное состояние child component; при открытии оно создаётся заново. Изменение флага в открытой панели сохраняет DOM/draft/selection/focus, в закрытой включает удаление сразу. Semantic props Tooltip получают разрешённый boolean, Popover/Popconfirm сохраняют входной prop. Настройки передаются ellipsis Tooltip Typography и single/active range/pinned range Slider. Контроллер Popconfirm сохраняет защиту от старого Promise при уничтоженном содержимом. 44 официальных UMD-сценария / 224 кадра фиксируют приоритет, initial/default open, body portals, скрытые обновления и reset/retention. Motion в эталоне отключена. Согласованная native граница: скрытый shell и ID/ARIA сохраняются, default SSR/content остаются eager, Typography и destroy=true ленивы при SSR; удаление следует native закрытию без ожидания source CSS motion. Исходные fresh cache, motion/unique и остальные delegated props остаются в работе."
+        },
+        {
+          "id": "empty-trigger",
+          "title": "Пустой trigger без component config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/AvatarGroup.svelte",
+            "tests/browser/fixtures/overlay-lifecycle-presets.ts",
+            "tests/browser/fixtures/OverlayLifecycleCase.svelte",
+            "tests/browser/fixtures/OverlayLifecycleContent.svelte",
+            "tests/browser/fixtures/OverlayLifecycleFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
+            "tests/browser/overlay-lifecycle-metrics.ts",
+            "tests/browser/overlay-empty-trigger.spec.ts",
+            "tests/package/overlay-lifecycle.ssr.test.ts"
+          ],
+          "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
         }
       ]
     },

@@ -5,11 +5,21 @@ import { Tooltip } from 'antd-svelte';
 import registry from 'antd-svelte/porting/registry.json';
 import OverlayLifecycleCase from '../browser/fixtures/OverlayLifecycleCase.svelte';
 import reference from '../browser/fixtures/ant-design-overlay-lifecycle-reference.json';
+import emptyTrigger from '../browser/fixtures/ant-design-overlay-empty-trigger-reference.json';
 import type { OverlayLifecycleCase as Sample } from '../browser/fixtures/overlay-lifecycle-presets';
 
 describe('Overlay content lifetime public package SSR', () => {
   it('pins content lifetime evidence to the studied official archive', () => {
     expect(reference.reference).toMatchObject({
+      version: registry.upstream.version,
+      revision: registry.upstream.revision,
+      archiveSha256: registry.upstream.archiveSha256,
+      source: 'package/dist/antd.min.js'
+    });
+  });
+
+  it('pins empty trigger traces to the studied official archive', () => {
+    expect(emptyTrigger.reference).toMatchObject({
       version: registry.upstream.version,
       revision: registry.upstream.revision,
       archiveSha256: registry.upstream.archiveSha256,

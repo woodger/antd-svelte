@@ -1,0 +1,2148 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "styles": "runtime CSS-in-JS only; static antd.css is not loaded",
+    "scope": "empty local trigger without component config; controlled/default open and ignored anchor/popup hover, focus, click and contextMenu, then focused unmount; AvatarGroup overflow is made focusable in the harness",
+    "nativeBoundary": "Svelte keeps its existing native Escape and outside dismissal; no pointerdown is used in these trigger traces"
+  },
+  "viewport": {
+    "width": 700,
+    "height": 500
+  },
+  "cases": [
+    {
+      "name": "empty-tooltip-controlled",
+      "component": "tooltip",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "open": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-tooltip-default",
+      "component": "tooltip",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "defaultOpen": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-popover-controlled",
+      "component": "popover",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "open": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-popover-default",
+      "component": "popover",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "defaultOpen": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-popconfirm-controlled",
+      "component": "popconfirm",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "open": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-popconfirm-default",
+      "component": "popconfirm",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "defaultOpen": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-typography-controlled",
+      "component": "typography",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "open": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-typography-default",
+      "component": "typography",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "defaultOpen": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-avatar-group-controlled",
+      "component": "avatar-group",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "open": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    },
+    {
+      "name": "empty-avatar-group-default",
+      "component": "avatar-group",
+      "sourceConfig": false,
+      "options": {
+        "destroyOnHidden": false
+      },
+      "defaultOpen": true,
+      "steps": [
+        {
+          "action": "initial",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "focus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "blur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupHover",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "leave",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupBlur",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "click",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "contextMenu",
+          "canceled": false,
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "0"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupClick",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "popupFocus",
+          "snapshot": {
+            "visible": 1,
+            "contents": [
+              {
+                "value": "Draft",
+                "count": "1"
+              }
+            ],
+            "callbacks": [
+              "lifecycle-destroy-false"
+            ]
+          },
+          "changes": []
+        },
+        {
+          "action": "unmount",
+          "snapshot": {
+            "visible": 0,
+            "contents": [],
+            "callbacks": []
+          },
+          "changes": []
+        }
+      ]
+    }
+  ]
+}
