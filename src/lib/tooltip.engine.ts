@@ -1,5 +1,6 @@
 import { getPopupPlacements, getPopupPosition, type PopupFlipCache } from './popup-position.engine';
-import type { TooltipPlacement } from './tooltip.types';
+import type { AdjustOverflow, TooltipArrow, TooltipPlacement } from './tooltip.types';
+import type { AliasToken } from './theme-token.types';
 
 export interface TooltipRect {
   x: number;
@@ -21,6 +22,34 @@ export interface TooltipPosition {
 interface TooltipPositionContext {
   flips?: Readonly<PopupFlipCache>;
   scrollRegion?: TooltipRect;
+  source?: TooltipSourcePlacement;
+}
+
+export interface TooltipSourcePlacement {
+  pointAtCenter?: boolean;
+  arrowWidth: number;
+  offset: number;
+  radius: number;
+}
+
+export function getTooltipArrow(arrow: TooltipArrow | undefined) {
+  const config: { show?: boolean; pointAtCenter?: boolean } =
+    typeof arrow === 'boolean' ? { show: arrow } : arrow || {};
+  return { show: config.show ?? true, pointAtCenter: config.pointAtCenter };
+}
+
+/** Placements используют глобальные tokens; component aliases относятся к CSS стрелки. */
+export function getTooltipPlacementConfig(
+  arrow: TooltipArrow,
+  token: Pick<AliasToken, 'sizePopupArrow' | 'marginXXS' | 'borderRadius'>
+): TooltipSourcePlacement {
+  const config = getTooltipArrow(arrow);
+  return {
+    pointAtCenter: config.pointAtCenter,
+    arrowWidth: config.show ? token.sizePopupArrow : 0,
+    offset: token.marginXXS,
+    radius: token.borderRadius
+  };
 }
 
 type TooltipCornerPlacement = Exclude<TooltipPlacement, 'top' | 'bottom' | 'left' | 'right'>;
@@ -29,17 +58,24 @@ export function isTooltipCorner(placement: TooltipPlacement): placement is Toolt
   return placement.length > 6;
 }
 
-function getCornerPosition(
+function getSourcePosition(
   anchor: TooltipRect,
   popup: { width: number; height: number },
   viewport: TooltipRect,
-  placement: TooltipCornerPlacement,
-  autoAdjustOverflow: boolean,
+  placement: TooltipPlacement,
+  autoAdjustOverflow: boolean | AdjustOverflow,
   gap: number,
   context: TooltipPositionContext = {}
 ): TooltipPosition {
-  // Для corners без pointAtCenter важна сумма half-arrow + offset.
-  const placements = getPopupPlacements(false, 0, gap, 6, autoAdjustOverflow);
+  // Без новых object props corners используют прежнюю сумму half-arrow + offset.
+  const source = context.source;
+  const placements = getPopupPlacements(
+    source?.pointAtCenter ?? false,
+    source?.arrowWidth ?? 0,
+    source?.offset ?? gap,
+    source?.radius ?? 6,
+    autoAdjustOverflow
+  );
   const right = viewport.x + viewport.width;
   const bottom = viewport.y + viewport.height;
   // Измерение useAlign в (0, 0) расширяет scroll region до размеров popup.
@@ -89,13 +125,13 @@ export function getTooltipPosition(
   popup: { width: number; height: number; },
   viewport: TooltipRect,
   placement: TooltipPlacement,
-  autoAdjustOverflow = true,
+  autoAdjustOverflow: boolean | AdjustOverflow = true,
   align?: 'left' | 'right' | 'top' | 'bottom',
   gap = 8,
   context?: TooltipPositionContext
 ): TooltipPosition {
-  if (isTooltipCorner(placement)) {
-    return getCornerPosition(anchor, popup, viewport, placement, autoAdjustOverflow, gap, context);
+  if (isTooltipCorner(placement) || context?.source || typeof autoAdjustOverflow === 'object') {
+    return getSourcePosition(anchor, popup, viewport, placement, autoAdjustOverflow, gap, context);
   }
 
   const padding = 8;

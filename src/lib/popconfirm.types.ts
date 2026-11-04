@@ -1,6 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { ButtonProps } from './Button.svelte';
 import type { PopoverContent, PopoverPlacement } from './popover.types';
+import type { AdjustOverflow, TooltipArrow } from './tooltip.types';
 
 /** Подтверждение действия с Promise, состоянием ожидания и защитой от позднего результата. */
 export interface PopconfirmProps {
@@ -24,9 +25,9 @@ export interface PopconfirmProps {
   /** @defaultValue 'top' */
   placement?: PopoverPlacement;
   /** @defaultValue true */
-  arrow?: boolean;
+  arrow?: TooltipArrow;
   /** @defaultValue true */
-  autoAdjustOverflow?: boolean;
+  autoAdjustOverflow?: boolean | AdjustOverflow;
   /** Передаётся Popover: локальная функция → legacy getter → ConfigProvider. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   /** @deprecated Используйте getPopupContainer. */

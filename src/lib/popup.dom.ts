@@ -1,10 +1,11 @@
 import {
   getTooltipPosition,
   type TooltipPosition,
-  type TooltipRect
+  type TooltipRect,
+  type TooltipSourcePlacement
 } from './tooltip.engine';
 import type { PopupFlipCache } from './popup-position.engine';
-import type { TooltipPlacement } from './tooltip.types';
+import type { AdjustOverflow, TooltipPlacement } from './tooltip.types';
 
 const openPopups = new WeakMap<Document, HTMLElement[]>();
 
@@ -16,7 +17,8 @@ export function getPopupActiveElement(element: Element) {
 export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   trigger?: Element;
   placement: TooltipPlacement;
-  autoAdjustOverflow: boolean;
+  autoAdjustOverflow: boolean | AdjustOverflow;
+  sourcePlacement?: TooltipSourcePlacement;
   onPlacement: (placement: TooltipPlacement) => void;
   onDismiss: (reason: 'escape' | 'outside') => void;
   onKeydown?: (event: KeyboardEvent) => void;
@@ -116,6 +118,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       typeof options.gap === 'function' ? options.gap() : options.gap,
       {
         flips,
+        source: options.sourcePlacement,
         scrollRegion: {
           x: -document.documentElement.scrollLeft,
           y: -document.documentElement.scrollTop,

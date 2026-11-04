@@ -1400,7 +1400,9 @@ Tooltip по умолчанию показывает число при наве�
 задаёт формат. `tooltip={false}`, `tooltip={{ open: false }}`, formatter=null
 или результат formatter=null отключают подсказку и её описание. `open: true`
 показывает её постоянно у доступного Slider. Также поддерживаются placement
-и arrow. По умолчанию положение top, для вертикального Slider — right, в RTL — left.
+и arrow, включая `{ pointAtCenter: true }`, а также boolean/object autoAdjustOverflow.
+Это относится к single, активной подсказке range и закреплённым подсказкам всех
+бегунков. По умолчанию положение top, для вертикального Slider — right, в RTL — left.
 Escape скрывает подсказку, сохраняя фокус и число; следующее действие открывает
 её снова. Disabled скрывает подсказку. Текст дополняет aria-describedby поля,
 сохраняя help/ошибку FormItem. Числовые callbacks от показа подсказки не вызываются.
@@ -1533,7 +1535,11 @@ Escape закрывает Tooltip, следующий — Modal.
 
 Placement принимает top/bottom/left/right, topLeft/topRight/bottomLeft/bottomRight
 и leftTop/leftBottom/rightTop/rightBottom. Направления физические и не меняются
-при RTL. Arrow=false скрывает стрелку. У четырёх прежних вариантов сохраняются
+при RTL. Arrow=false скрывает стрелку. Arrow={{ pointAtCenter: true }} привязывает
+tip стрелки к центру trigger. Угловые варианты с pointAtCenter=false или arrow={{}}
+сохраняют исходную привязку к краю. Локальные object arrow и object autoAdjustOverflow включают исходный
+расчёт всех 12 направлений, включая shift центральных вариантов. Без object props
+у четырёх прежних вариантов сохраняются
 переворот в сторону с большим местом и сдвиг внутри viewport.
 Угловые варианты используют исходные points, visibleFirst и flip по обеим осям
 без сдвига вдоль края. Выбранный flip сохраняется до закрытия; после открытия
@@ -1546,7 +1552,9 @@ zIndexPopup, offsets и форму стрелки, включая component alia
 Отступ от anchor рассчитывается по глобальным sizePopupArrow и marginXXS, как
 в исходном Tooltip: обычно 12px со стрелкой и 4px без неё. Угловые варианты
 используют эти source defaults и без source-настроек; у четырёх прежних вариантов
-в native-темах сохраняется отступ 8px. Подробности — в
+в native-темах сохраняется отступ 8px. Object arrow/autoAdjustOverflow используют
+source gap и глобальный borderRadius даже без source-настроек. Component aliases
+меняют оформление стрелки, но не её исходную привязку. Подробности — в
 [описании темы](./docs/reference/theme-context.md#токены-всплывающих-панелей).
 
 Поверхность использует нативный `popover="manual"` в верхнем слое браузера.
@@ -1566,7 +1574,25 @@ Portal переносит наследуемые variables и сохраняет
 Вложенные popup сохраняют собственные координаты и цвет стрелки.
 
 Галерея находится на `/ant-design#tooltip`. Поддерживаются строки, числа и rich snippets;
-click/contextMenu, pointAtCenter, именованные цвета и полный align/motion API пока отсутствуют.
+click/contextMenu, именованные цвета и полный align/motion API пока отсутствуют.
+AutoAdjustOverflow принимает также `{ adjustX?: 0 | 1, adjustY?: 0 | 1 }`.
+Числовой 0 тоже разрешает flip, как в rc-trigger; отключение обеих коррекций
+задаётся boolean false. Глобальные ConfigProvider.tooltip/popover defaults
+для arrow и остальных props пока не перенесены.
+
+```svelte
+<Tooltip title="Подсказка" placement="topLeft"
+  arrow={{ pointAtCenter: true }} autoAdjustOverflow={{ adjustX: 1, adjustY: 1 }}>
+  <button type="button">Подробнее</button>
+</Tooltip>
+```
+
+Локальные arrow/overflow настройки сверяются с
+[84 UMD-эталонами](./tests/browser/fixtures/ant-design-overlay-options-reference.json),
+[unit](./src/lib/tooltip-options-reference.test.ts),
+[SSR](./tests/package/overlay-options.ssr.test.ts) и
+[browser](./tests/browser/overlay-options.spec.ts). Они включают настройки tokens,
+обновления открытой карточки, оба режима range Tooltip и сохранение draft/focus.
 Расчёт угловых позиций использует общий
 [движок rc-trigger](./src/lib/popup-position.engine.ts). Координаты, CSS стрелки,
 fractional sizes, flip history и смена placement проверяются по
@@ -1670,8 +1696,9 @@ snippet, компонент считает содержимое доступны
 удалении компонента, очистке содержимого и замене trigger.
 
 Галерея `/ant-design#popover` содержит редактор профиля и информационную
-карточку с кнопкой. ContextMenu, pointAtCenter и
-произвольные цветовые варианты пока отсутствуют.
+карточку с кнопкой. Arrow и autoAdjustOverflow принимают те же object настройки,
+что Tooltip; они передаются также через Popconfirm и AvatarGroup.max.popover.
+ContextMenu и произвольные цветовые варианты пока отсутствуют.
 
 ## Popconfirm
 
@@ -6120,7 +6147,7 @@ aria-describedby описывает корень; id/class/style также от
 и persistence нет. Экспортируются AvatarGroupProps, AvatarGroupItem,
 AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
 Avatar и настройки исходного Popover, ещё отсутствующие в Svelte Popover,
-пока не перенесены: в том числе contextMenu, pointAtCenter, semantic styles, prefixCls,
+пока не перенесены: в том числе contextMenu, semantic styles, prefixCls,
 color/align/motion и fresh cache. Точный текущий тип max.popover производен от
 [PopoverProps](./src/lib/popover.types.ts), а не дублирует отдельный список props.
 Приоритеты aliases, count/style и trigger/placement проверяются по

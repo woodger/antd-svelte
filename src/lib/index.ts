@@ -401,6 +401,8 @@ export type {
   TooltipProps,
   TooltipPlacement,
   TooltipTrigger,
+  TooltipArrow,
+  AdjustOverflow,
   SliderTooltipConfig
 } from './tooltip.types';
 export type {

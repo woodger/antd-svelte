@@ -9,7 +9,12 @@
   import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
   import { connectPopoverTrigger, focusPopover } from './popover.dom';
-  import { getTooltipDelay, isTooltipCorner } from './tooltip.engine';
+  import {
+    getTooltipArrow,
+    getTooltipDelay,
+    getTooltipPlacementConfig,
+    isTooltipCorner
+  } from './tooltip.engine';
   import type { PopoverContent, PopoverProps, PopoverTrigger } from './popover.types';
 
   let {
@@ -69,6 +74,8 @@
   let resumeFocus: HTMLElement | undefined;
   let active = true;
   let mounted = $state(false);
+  let arrowConfig = $derived(getTooltipArrow(arrow));
+  let sourcePlacement = $derived(typeof arrow === 'object' || typeof autoAdjustOverflow === 'object');
   let hasTitle = $derived(hasContent(title));
   let hasBody = $derived(hasContent(content));
   let available = $derived(hasTitle || hasBody);
@@ -149,9 +156,13 @@
       get autoAdjustOverflow() {
         return autoAdjustOverflow;
       },
+      get sourcePlacement() {
+        return sourcePlacement
+          ? getTooltipPlacementConfig(arrow, designTokens.state.token) : undefined;
+      },
       maxWidth: '100vw',
-      gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement)
-        ? (arrow ? designTokens.state.token.sizePopupArrow / 2 : 0)
+      gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement) || sourcePlacement
+        ? (arrowConfig.show ? designTokens.state.token.sizePopupArrow / 2 : 0)
           + designTokens.state.token.marginXXS : undefined),
       preserveFocus: false,
       onPlacement: (next) => {
@@ -398,7 +409,7 @@
       popupFocused = true;
       cancelPending();
     }} onfocusout={handlePopupBlur}>
-  {#if arrow}<div class="ant-popover-arrow" aria-hidden="true"></div>{/if}
+  {#if arrowConfig.show}<div class="ant-popover-arrow" aria-hidden="true"></div>{/if}
   <div class="ant-popover-container">
     {#if renderContent}
       {#if hasTitle}<div id={titleId} class="ant-popover-title">{#if typeof title === 'function'}{@render title()}{:else if typeof title !== 'boolean'}{title}{/if}</div>{/if}

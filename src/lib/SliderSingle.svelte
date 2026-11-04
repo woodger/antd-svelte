@@ -430,6 +430,7 @@
     onblur={handleBlur}
   />
   <TooltipPopup title={resolvedDisabled ? '' : tooltipTitle} open={tooltipOpen} anchor={handle} describe={control} trigger={control} placement={tooltipPlacement} arrow={tooltip === false ? false : tooltip?.arrow ?? true}
+    autoAdjustOverflow={tooltip === false ? undefined : tooltip?.autoAdjustOverflow}
     getPopupContainer={(tooltip === false ? undefined : tooltip?.getPopupContainer)
       || config.getPopupContainer}
     getTooltipContainer={tooltip === false ? undefined : tooltip?.getTooltipContainer} onDismiss={() => {

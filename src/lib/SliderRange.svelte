@@ -569,6 +569,7 @@
         placement={props.tooltip.placement ?? (orientation === 'vertical'
           ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}
         arrow={props.tooltip.arrow ?? true}
+        autoAdjustOverflow={props.tooltip.autoAdjustOverflow}
         getPopupContainer={props.tooltip.getPopupContainer || config.getPopupContainer}
         getTooltipContainer={props.tooltip.getTooltipContainer}
         onDismiss={() => { tooltipDismissed = true; }} />
@@ -596,6 +597,7 @@
       placement={props.tooltip === false ? 'top' : props.tooltip?.placement
         ?? (orientation === 'vertical' ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}
       arrow={props.tooltip === false ? false : props.tooltip?.arrow ?? true}
+      autoAdjustOverflow={props.tooltip === false ? undefined : props.tooltip?.autoAdjustOverflow}
       getPopupContainer={(props.tooltip === false ? undefined : props.tooltip?.getPopupContainer)
         || config.getPopupContainer}
       getTooltipContainer={props.tooltip === false ? undefined : props.tooltip?.getTooltipContainer}

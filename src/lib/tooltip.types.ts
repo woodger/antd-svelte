@@ -7,6 +7,15 @@ export type TooltipPlacement =
   | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 export type TooltipTrigger = 'hover' | 'focus';
 
+/** Объект показывает стрелку; pointAtCenter по умолчанию false. */
+export type TooltipArrow = boolean | { pointAtCenter?: boolean };
+
+/** Семантика rc-trigger: числовые 0 и 1 разрешают flip; boolean false отключает коррекцию. */
+export interface AdjustOverflow {
+  adjustX?: 0 | 1;
+  adjustY?: 0 | 1;
+}
+
 /** Текстовая подсказка по hover/focus с bind:open и доступным описанием trigger. */
 export interface TooltipProps {
   title?: string | number | null | Snippet;
@@ -19,9 +28,9 @@ export interface TooltipProps {
   /** @defaultValue 'top' */
   placement?: TooltipPlacement;
   /** @defaultValue true */
-  arrow?: boolean;
+  arrow?: TooltipArrow;
   /** @defaultValue true */
-  autoAdjustOverflow?: boolean;
+  autoAdjustOverflow?: boolean | AdjustOverflow;
   trigger?: TooltipTrigger | readonly TooltipTrigger[];
   /** Задержка открытия в секундах. */
   mouseEnterDelay?: number;
@@ -39,7 +48,9 @@ export interface TooltipProps {
 export interface SliderTooltipConfig {
   open?: boolean;
   placement?: TooltipPlacement;
-  arrow?: boolean;
+  arrow?: TooltipArrow;
+  /** Как у Tooltip; boolean defaults сохраняют native viewport behavior. */
+  autoAdjustOverflow?: boolean | AdjustOverflow;
   formatter?: ((value: number) => string | null) | null;
   /** Имеет приоритет над ConfigProvider; у Slider нет корневого getPopupContainer. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;

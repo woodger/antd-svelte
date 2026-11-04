@@ -22,8 +22,8 @@
   let options = $derived({
     open: values.open ?? true,
     placement: values.placement,
-    arrow: sample.arrow ?? true,
-    autoAdjustOverflow: sample.adjust ?? true
+    arrow: values.arrow ?? true,
+    autoAdjustOverflow: values.adjust ?? true
   });
 </script>
 
@@ -35,7 +35,10 @@
 {#snippet anchor()}<button data-corner-anchor="" type="button">Anchor</button>{/snippet}
 
 <ConfigProvider direction={sample.direction}
-  theme={native ? undefined : { token: { motion: false, ...sample.token } }}>
+  theme={native ? undefined : {
+    token: { motion: false, ...sample.token },
+    components: sample.components
+  }}>
   <div id="corner-case" {@attach host => {
     const element = host.querySelector(sample.component === 'avatar-group'
       ? '.ant-avatar-group-more' : sample.component === 'slider' ? '.ant-slider-handle' : 'button');
@@ -54,8 +57,14 @@
         { key: 'c', label: 'Gamma', text: 'C' }
       ]} max={{ count: 1, popover: { ...options, title: 'Corner card', content } }} />
     {:else}
-      <Slider defaultValue={50} tooltip={{
-        open: values.open ?? true, placement: values.placement, formatter: () => 'Corner slider'
+      <Slider {...(sample.range
+        ? { range: true, defaultValue: [25, 75] as [number, number] }
+        : { range: false, defaultValue: 50 })} tooltip={{
+        open: values.open ?? true,
+        placement: values.placement,
+        arrow: values.arrow,
+        autoAdjustOverflow: values.adjust,
+        formatter: () => 'Corner slider'
       }} />
     {/if}
   </div>

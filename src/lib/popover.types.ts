@@ -1,5 +1,5 @@
 import type { Snippet } from 'svelte';
-import type { TooltipPlacement } from './tooltip.types';
+import type { AdjustOverflow, TooltipArrow, TooltipPlacement } from './tooltip.types';
 
 export type PopoverPlacement = TooltipPlacement;
 export type PopoverTrigger = 'hover' | 'focus' | 'click';
@@ -27,9 +27,9 @@ export interface PopoverProps {
   /** @defaultValue 'top' */
   placement?: PopoverPlacement;
   /** @defaultValue true */
-  arrow?: boolean;
+  arrow?: TooltipArrow;
   /** @defaultValue true */
-  autoAdjustOverflow?: boolean;
+  autoAdjustOverflow?: boolean | AdjustOverflow;
   /** Задержка открытия в секундах. */
   mouseEnterDelay?: number;
   /** Задержка закрытия в секундах. */

@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tooltip/Popover/Popconfirm, AvatarGroup и Slider Tooltip: локальные
+  arrow.pointAtCenter и object autoAdjustOverflow с исходными points, tokens,
+  flip/shift и числовой семантикой adjustX/adjustY. Поддержаны активные и
+  закреплённые range-подсказки; boolean defaults сохранены. Добавлены 84 UMD-эталона
+  и unit/SSR/browser-проверки, включая сохранение DOM, draft, selection и focus.
 - Tooltip/Popover/Popconfirm, AvatarGroup overflow и Slider Tooltip: все 12
   физических placement. Угловые варианты используют общий source useAlign,
   visibleFirst, dynamic inset rounding и flip cache до закрытия; прежние четыре

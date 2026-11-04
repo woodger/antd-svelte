@@ -1,0 +1,4805 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "scope": "local arrow.pointAtCenter and autoAdjustOverflow; explicit boxes isolate component layout"
+  },
+  "viewport": {
+    "x": 0,
+    "y": 0,
+    "width": 600,
+    "height": 400
+  },
+  "cases": [
+    {
+      "name": "top-point-true",
+      "component": "tooltip",
+      "placement": "top",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 180,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "60px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 60,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "top-point-false",
+      "component": "tooltip",
+      "placement": "top",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 180,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "60px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 60,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "top-point-edge",
+      "component": "tooltip",
+      "placement": "top",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 0,
+            "y": 49,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottom",
+          "arrow": {
+            "x": "41px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, -8, -16)"
+          },
+          "arrowX": 41,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "top-overflow-empty",
+      "component": "tooltip",
+      "placement": "top",
+      "rect": {
+        "x": 0,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {},
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 0,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 0,
+            "y": 49,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottom",
+          "arrow": {
+            "x": "40px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, -8, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "top-overflow-0",
+      "component": "tooltip",
+      "placement": "top",
+      "rect": {
+        "x": 0,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {
+        "adjustX": 0,
+        "adjustY": 0
+      },
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 0,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 0,
+            "y": 49,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottom",
+          "arrow": {
+            "x": "40px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, -8, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "top-overflow-1",
+      "component": "tooltip",
+      "placement": "top",
+      "rect": {
+        "x": 0,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {
+        "adjustX": 1,
+        "adjustY": 1
+      },
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 0,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 0,
+            "y": 49,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottom",
+          "arrow": {
+            "x": "40px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, -8, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottom-point-true",
+      "component": "tooltip",
+      "placement": "bottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 180,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottom",
+          "arrow": {
+            "x": "60px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, -8, -16)"
+          },
+          "arrowX": 60,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottom-point-false",
+      "component": "tooltip",
+      "placement": "bottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 180,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottom",
+          "arrow": {
+            "x": "60px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, -8, -16)"
+          },
+          "arrowX": 60,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottom-point-edge",
+      "component": "tooltip",
+      "placement": "bottom",
+      "rect": {
+        "x": 560,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 560,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 480,
+            "y": 315,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "100px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 100,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottom-overflow-empty",
+      "component": "tooltip",
+      "placement": "bottom",
+      "rect": {
+        "x": 0,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {},
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 0,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 0,
+            "y": 315,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "40px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottom-overflow-0",
+      "component": "tooltip",
+      "placement": "bottom",
+      "rect": {
+        "x": 0,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {
+        "adjustX": 0,
+        "adjustY": 0
+      },
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 0,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 0,
+            "y": 315,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "40px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottom-overflow-1",
+      "component": "tooltip",
+      "placement": "bottom",
+      "rect": {
+        "x": 0,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {
+        "adjustX": 1,
+        "adjustY": 1
+      },
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 0,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 0,
+            "y": 315,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "40px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "left-point-true",
+      "component": "tooltip",
+      "placement": "left",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 154,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "left",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, -8)"
+          },
+          "arrowX": 126,
+          "arrowY": 24,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "left-point-false",
+      "component": "tooltip",
+      "placement": "left",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 154,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "left",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, -8)"
+          },
+          "arrowX": 126,
+          "arrowY": 24,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "left-point-edge",
+      "component": "tooltip",
+      "placement": "left",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 93,
+            "y": 0,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "right",
+          "arrow": {
+            "x": "0px",
+            "y": "19px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, -8)"
+          },
+          "arrowX": -6,
+          "arrowY": 19,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "left-overflow-empty",
+      "component": "tooltip",
+      "placement": "left",
+      "rect": {
+        "x": 1,
+        "y": 0,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {},
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 0,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 93,
+            "y": 0,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "right",
+          "arrow": {
+            "x": "0px",
+            "y": "18px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, -8)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "left-overflow-0",
+      "component": "tooltip",
+      "placement": "left",
+      "rect": {
+        "x": 1,
+        "y": 0,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {
+        "adjustX": 0,
+        "adjustY": 0
+      },
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 0,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 93,
+            "y": 0,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "right",
+          "arrow": {
+            "x": "0px",
+            "y": "18px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, -8)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "left-overflow-1",
+      "component": "tooltip",
+      "placement": "left",
+      "rect": {
+        "x": 1,
+        "y": 0,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {
+        "adjustX": 1,
+        "adjustY": 1
+      },
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 0,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 93,
+            "y": 0,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "right",
+          "arrow": {
+            "x": "0px",
+            "y": "18px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, -8)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "right-point-true",
+      "component": "tooltip",
+      "placement": "right",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 154,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "right",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, -8)"
+          },
+          "arrowX": -6,
+          "arrowY": 24,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "right-point-false",
+      "component": "tooltip",
+      "placement": "right",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 154,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "right",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, -8)"
+          },
+          "arrowX": -6,
+          "arrowY": 24,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "right-point-edge",
+      "component": "tooltip",
+      "placement": "right",
+      "rect": {
+        "x": 590,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 590,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 458,
+            "y": 359,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "left",
+          "arrow": {
+            "x": "104px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, -8)"
+          },
+          "arrowX": 126,
+          "arrowY": 32,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "right-overflow-empty",
+      "component": "tooltip",
+      "placement": "right",
+      "rect": {
+        "x": 590,
+        "y": 0,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {},
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 590,
+            "y": 0,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 458,
+            "y": 0,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "left",
+          "arrow": {
+            "x": "104px",
+            "y": "18px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, -8)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "right-overflow-0",
+      "component": "tooltip",
+      "placement": "right",
+      "rect": {
+        "x": 590,
+        "y": 0,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {
+        "adjustX": 0,
+        "adjustY": 0
+      },
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 590,
+            "y": 0,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 458,
+            "y": 0,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "left",
+          "arrow": {
+            "x": "104px",
+            "y": "18px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, -8)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "right-overflow-1",
+      "component": "tooltip",
+      "placement": "right",
+      "rect": {
+        "x": 590,
+        "y": 0,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": true,
+      "adjust": {
+        "adjustX": 1,
+        "adjustY": 1
+      },
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 590,
+            "y": 0,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 458,
+            "y": 0,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "left",
+          "arrow": {
+            "x": "104px",
+            "y": "18px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, -8)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topLeft-point-true",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topLeft-point-false",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topLeft-point-edge",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 21,
+            "y": 49,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 30,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topLeft-empty-arrow",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {},
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topRight-point-true",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 140,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 90,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topRight-point-false",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 80,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topRight-point-edge",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 61,
+            "y": 49,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 10,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topRight-empty-arrow",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {},
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 80,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomLeft-point-true",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 30,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomLeft-point-false",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomLeft-point-edge",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 560,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 560,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 460,
+            "y": 315,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 110,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomLeft-empty-arrow",
+      "component": "tooltip",
+      "placement": "bottomLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {},
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomRight-point-true",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 140,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 90,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomRight-point-false",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 80,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomRight-point-edge",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 560,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 560,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 500,
+            "y": 315,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 90,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomRight-empty-arrow",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {},
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 80,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftTop-point-true",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 162,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 17,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftTop-point-false",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftTop-point-edge",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 93,
+            "y": 3,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 17,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftTop-empty-arrow",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {},
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftBottom-point-true",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 146,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 31,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftBottom-point-false",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftBottom-point-edge",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 93,
+            "y": 21,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 8,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftBottom-empty-arrow",
+      "component": "tooltip",
+      "placement": "leftBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {},
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightTop-point-true",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 162,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 17,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightTop-point-false",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightTop-point-edge",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 590,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 590,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 458,
+            "y": 343,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 40,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightTop-empty-arrow",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {},
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 160,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 18,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightBottom-point-true",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 146,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 31,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightBottom-point-false",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": false
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightBottom-point-edge",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 590,
+        "y": 375,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 590,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 458,
+            "y": 361,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftBottom",
+          "arrow": {
+            "x": "104px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 31,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightBottom-empty-arrow",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {},
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 148,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 30,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topLeft-point-no-adjust",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 21,
+            "y": -59,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "topLeft-point-large-radius",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "token": {
+        "borderRadius": 24,
+        "sizePopupArrow": 20,
+        "marginXXS": 7
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 204,
+            "y": 95,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "26px",
+            "y": "28px",
+            "width": "20px",
+            "height": "20px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 20)"
+          },
+          "arrowX": 38,
+          "arrowY": 56.5,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 20,
+        "marginXXS": 7,
+        "borderRadius": 24
+      }
+    },
+    {
+      "name": "bottomRight-point-no-adjust",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": -59,
+            "y": 49,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 90,
+          "arrowY": -6,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "bottomRight-point-large-radius",
+      "component": "tooltip",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "token": {
+        "borderRadius": 24,
+        "sizePopupArrow": 20,
+        "marginXXS": 7
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 156,
+            "y": 213,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "74px",
+            "y": "0px",
+            "width": "20px",
+            "height": "20px",
+            "transform": "matrix(1, 0, 0, 1, 0, -20)"
+          },
+          "arrowX": 82,
+          "arrowY": -8.5,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 20,
+        "marginXXS": 7,
+        "borderRadius": 24
+      }
+    },
+    {
+      "name": "leftTop-point-no-adjust",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": -131,
+            "y": 3,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 17,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "leftTop-point-large-radius",
+      "component": "tooltip",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "token": {
+        "borderRadius": 24,
+        "sizePopupArrow": 20,
+        "marginXXS": 7
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 63,
+            "y": 136,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "100px",
+            "y": "8px",
+            "width": "20px",
+            "height": "20px",
+            "transform": "matrix(0, 1, -1, 0, 20, 0)"
+          },
+          "arrowX": 128.5,
+          "arrowY": 36,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 20,
+        "marginXXS": 7,
+        "borderRadius": 24
+      }
+    },
+    {
+      "name": "rightBottom-point-no-adjust",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 1,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": false,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 1,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 93,
+            "y": -13,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 31,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "rightBottom-point-large-radius",
+      "component": "tooltip",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "token": {
+        "borderRadius": 24,
+        "sizePopupArrow": 20,
+        "marginXXS": 7
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 297,
+            "y": 172,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "20px",
+            "width": "20px",
+            "height": "20px",
+            "transform": "matrix(0, -1, 1, 0, -20, 0)"
+          },
+          "arrowX": -8.5,
+          "arrowY": 12,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 20,
+        "marginXXS": 7,
+        "borderRadius": 24
+      }
+    },
+    {
+      "name": "top-point-small-tokens",
+      "component": "tooltip",
+      "placement": "top",
+      "rect": {
+        "x": 201.5,
+        "y": 159.25,
+        "width": 21,
+        "height": 15
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "token": {
+        "borderRadius": 0,
+        "sizePopupArrow": 10,
+        "marginXXS": 3
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 201.5,
+            "y": 159.25,
+            "width": 21,
+            "height": 15
+          },
+          "popup": {
+            "x": 152,
+            "y": 104,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "60px",
+            "y": "38px",
+            "width": "10px",
+            "height": "10px",
+            "transform": "matrix(-1, 0, 0, -1, -5, 10)"
+          },
+          "arrowX": 60,
+          "arrowY": 52,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 10,
+        "marginXXS": 3,
+        "borderRadius": 0
+      }
+    },
+    {
+      "name": "left-point-small-tokens",
+      "component": "tooltip",
+      "placement": "left",
+      "rect": {
+        "x": 201.5,
+        "y": 159.25,
+        "width": 21,
+        "height": 15
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "token": {
+        "borderRadius": 0,
+        "sizePopupArrow": 10,
+        "marginXXS": 3
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 201.5,
+            "y": 159.25,
+            "width": 21,
+            "height": 15
+          },
+          "popup": {
+            "x": 74,
+            "y": 142,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "left",
+          "arrow": {
+            "x": "110px",
+            "y": "24px",
+            "width": "10px",
+            "height": "10px",
+            "transform": "matrix(0, 1, -1, 0, 10, -5)"
+          },
+          "arrowX": 124,
+          "arrowY": 24,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 10,
+        "marginXXS": 3,
+        "borderRadius": 0
+      }
+    },
+    {
+      "name": "topRight-point-small-tokens",
+      "component": "tooltip",
+      "placement": "topRight",
+      "rect": {
+        "x": 201.5,
+        "y": 159.25,
+        "width": 21,
+        "height": 15
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "token": {
+        "borderRadius": 0,
+        "sizePopupArrow": 10,
+        "marginXXS": 3
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 201.5,
+            "y": 159.25,
+            "width": 21,
+            "height": 15
+          },
+          "popup": {
+            "x": 109,
+            "y": 104,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "98px",
+            "y": "38px",
+            "width": "10px",
+            "height": "10px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 10)"
+          },
+          "arrowX": 103,
+          "arrowY": 52,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 10,
+        "marginXXS": 3,
+        "borderRadius": 0
+      }
+    },
+    {
+      "name": "rightTop-point-small-tokens",
+      "component": "tooltip",
+      "placement": "rightTop",
+      "rect": {
+        "x": 201.5,
+        "y": 159.25,
+        "width": 21,
+        "height": 15
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "token": {
+        "borderRadius": 0,
+        "sizePopupArrow": 10,
+        "marginXXS": 3
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 201.5,
+            "y": 159.25,
+            "width": 21,
+            "height": 15
+          },
+          "popup": {
+            "x": 230,
+            "y": 147,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightTop",
+          "arrow": {
+            "x": "0px",
+            "y": "8px",
+            "width": "10px",
+            "height": "10px",
+            "transform": "matrix(0, -1, 1, 0, -10, 0)"
+          },
+          "arrowX": -4,
+          "arrowY": 19,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 10,
+        "marginXXS": 3,
+        "borderRadius": 0
+      }
+    },
+    {
+      "name": "tooltip-component-aliases",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "components": {
+        "Tooltip": {
+          "sizePopupArrow": 24,
+          "marginXXS": 9,
+          "borderRadius": 30
+        }
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "32px",
+            "y": "24px",
+            "width": "24px",
+            "height": "24px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 24)"
+          },
+          "arrowX": 30,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "popover-component-aliases",
+      "component": "popover",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "components": {
+        "Popover": {
+          "sizePopupArrow": 24,
+          "marginXXS": 9,
+          "borderRadius": 30
+        }
+      },
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "24px",
+            "width": "24px",
+            "height": "24px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 24)"
+          },
+          "arrowX": 30,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "popover-topLeft-point",
+      "component": "popover",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "direction": "rtl",
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 28,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "104px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 126,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "popover-rightBottom-point",
+      "component": "popover",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "direction": "rtl",
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 74,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "96px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 103,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "popconfirm-topLeft-point",
+      "component": "popconfirm",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "direction": "rtl",
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 28,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "104px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 126,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "popconfirm-rightBottom-point",
+      "component": "popconfirm",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "direction": "rtl",
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 74,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "96px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 103,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "avatar-group-topLeft-point",
+      "component": "avatar-group",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "direction": "rtl",
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 28,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "104px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 126,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "avatar-group-rightBottom-point",
+      "component": "avatar-group",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "direction": "rtl",
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 74,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "96px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 103,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "slider-topLeft-point",
+      "component": "slider",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": false,
+      "gap": 12,
+      "direction": "rtl",
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 28,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "104px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 126,
+          "input": null
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "slider-rightBottom-point",
+      "component": "slider",
+      "placement": "rightBottom",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 240,
+        "height": 120
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": false,
+      "gap": 12,
+      "direction": "rtl",
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 74,
+            "width": 240,
+            "height": 120
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "96px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 103,
+          "input": null
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "tooltip-point-native-size",
+      "component": "tooltip",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 96,
+            "width": 152,
+            "height": 52
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "36px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 58,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "popover-point-native-size",
+      "component": "popover",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 54,
+            "width": 201,
+            "height": 94
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "78px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 100,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "slider-range-bottomRight-point",
+      "component": "slider",
+      "placement": "bottomRight",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": {
+        "adjustX": 0,
+        "adjustY": 0
+      },
+      "geometry": false,
+      "gap": 12,
+      "range": true,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 140,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 90,
+          "arrowY": -6,
+          "input": null
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "slider-range-leftTop-point",
+      "component": "slider",
+      "placement": "leftTop",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": {
+        "adjustX": 0,
+        "adjustY": 0
+      },
+      "geometry": false,
+      "gap": 12,
+      "range": true,
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 68,
+            "y": 162,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "leftTop",
+          "arrow": {
+            "x": "104px",
+            "y": "8px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, 1, -1, 0, 16, 0)"
+          },
+          "arrowX": 126,
+          "arrowY": 17,
+          "input": null
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "popover-point-updates",
+      "component": "popover",
+      "placement": "topLeft",
+      "rect": {
+        "x": 200,
+        "y": 160,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": true,
+      "geometry": true,
+      "gap": 12,
+      "frames": [
+        {
+          "arrow": {
+            "pointAtCenter": false
+          }
+        },
+        {
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "placement": "rightBottom",
+          "adjust": {
+            "adjustX": 0,
+            "adjustY": 0
+          }
+        },
+        {
+          "arrow": false,
+          "placement": "topLeft",
+          "adjust": {}
+        },
+        {
+          "arrow": {},
+          "placement": "bottomRight",
+          "adjust": false
+        },
+        {
+          "arrow": {
+            "pointAtCenter": true
+          },
+          "placement": "topRight",
+          "adjust": true
+        }
+      ],
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 220,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 30,
+          "arrowY": 54,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": {
+            "x": "12px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 40,
+          "arrowY": 54,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 292,
+            "y": 146,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "rightBottom",
+          "arrow": {
+            "x": "0px",
+            "y": "24px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(0, -1, 1, 0, -16, 0)"
+          },
+          "arrowX": -6,
+          "arrowY": 31,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 200,
+            "y": 108,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topLeft",
+          "arrow": null,
+          "arrowX": 40,
+          "arrowY": 50,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 160,
+            "y": 208,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottomRight",
+          "arrow": {
+            "x": "92px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, 0, -16)"
+          },
+          "arrowX": 80,
+          "arrowY": -6,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 140,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "topRight",
+          "arrow": {
+            "x": "92px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+          },
+          "arrowX": 90,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    },
+    {
+      "name": "tooltip-overflow-updates",
+      "component": "tooltip",
+      "placement": "top",
+      "rect": {
+        "x": 0,
+        "y": 1,
+        "width": 80,
+        "height": 36
+      },
+      "popup": {
+        "width": 120,
+        "height": 48
+      },
+      "arrow": {
+        "pointAtCenter": true
+      },
+      "adjust": {
+        "adjustX": 0,
+        "adjustY": 0
+      },
+      "geometry": true,
+      "gap": 12,
+      "frames": [
+        {
+          "rect": {
+            "x": 590,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "adjust": false
+        },
+        {
+          "adjust": {
+            "adjustX": 1,
+            "adjustY": 1
+          }
+        },
+        {
+          "rect": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          }
+        },
+        {
+          "open": false
+        },
+        {
+          "open": true,
+          "adjust": {}
+        }
+      ],
+      "snapshots": [
+        {
+          "anchor": {
+            "x": 0,
+            "y": 1,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 0,
+            "y": 49,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "bottom",
+          "arrow": {
+            "x": "40px",
+            "y": "0px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(1, 0, 0, 1, -8, -16)"
+          },
+          "arrowX": 40,
+          "arrowY": -6,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 590,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 570,
+            "y": 315,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "60px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 60,
+          "arrowY": 54,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 590,
+            "y": 375,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 510,
+            "y": 315,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "100px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 100,
+          "arrowY": 54,
+          "input": "Draft"
+        },
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 180,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "60px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 60,
+          "arrowY": 54,
+          "input": "Draft"
+        },
+        null,
+        {
+          "anchor": {
+            "x": 200,
+            "y": 160,
+            "width": 80,
+            "height": 36
+          },
+          "popup": {
+            "x": 180,
+            "y": 100,
+            "width": 120,
+            "height": 48
+          },
+          "placement": "top",
+          "arrow": {
+            "x": "60px",
+            "y": "32px",
+            "width": "16px",
+            "height": "16px",
+            "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+          },
+          "arrowX": 60,
+          "arrowY": 54,
+          "input": "Draft"
+        }
+      ],
+      "tokens": {
+        "sizePopupArrow": 16,
+        "marginXXS": 4,
+        "borderRadius": 6
+      }
+    }
+  ]
+}

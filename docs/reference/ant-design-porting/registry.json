@@ -4987,7 +4987,12 @@
         "tests/browser/fixtures/ant-design-overlay-corner-reference.json",
         "tests/browser/overlay-corner-metrics.ts",
         "tests/browser/overlay-corner.spec.ts",
-        "tests/package/overlay-corner.ssr.test.ts"
+        "tests/package/overlay-corner.ssr.test.ts",
+        "src/lib/tooltip-options-reference.test.ts",
+        "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+        "tests/browser/overlay-options.spec.ts",
+        "tests/package/overlay-options.ssr.test.ts"
       ],
       "features": [
         {
@@ -5071,7 +5076,7 @@
             "src/lib/tooltip.types.ts",
             "tests/browser/slider-range.spec.ts"
           ],
-          "note": "Поддержаны 12 placement, text formatter, pinned per-handle tooltip и active hover/focus tooltip с native description/popover. Container/getter priorities описаны отдельной feature. Полные SliderTooltipProps, исходный mouseup focus-open lifecycle и все delegated tooltip props ещё не перенесены."
+          "note": "Поддержаны 12 placement, локальные arrow.pointAtCenter/object autoAdjustOverflow, text formatter, pinned per-handle tooltip и active hover/focus tooltip с native description/popover. Container/getter priorities описаны отдельной feature. Полные SliderTooltipProps, исходный mouseup focus-open lifecycle и все delegated tooltip props ещё не перенесены."
         },
         {
           "id": "single-source-api",
@@ -5129,7 +5134,33 @@
             "tests/package/overlay-corner.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: points без pointAtCenter, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Source CSS-transform/scroll-container clipping, pointAtCenter, align/overflow object и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: corner points, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Локальные pointAtCenter/object overflow описаны отдельной feature; source CSS-transform/scroll-container clipping, align и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+        },
+        {
+          "id": "arrow-overflow-options",
+          "title": "Локальные pointAtCenter и object autoAdjustOverflow",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/tooltip-options-reference.test.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "tests/browser/fixtures/overlay-corner-presets.ts",
+            "tests/browser/fixtures/OverlayCornerCase.svelte",
+            "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+            "tests/browser/overlay-corner-metrics.ts",
+            "tests/browser/overlay-options.spec.ts",
+            "tests/package/overlay-options.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Локальные arrow boolean/{ pointAtCenter?: boolean } и autoAdjustOverflow boolean/{ adjustX?: 0 | 1, adjustY?: 0 | 1 }. Object props включают исходные points/offsets, visibleFirst, центральный shift и flip cache для всех 12 физических placement. Числовые 0 и 1 разрешают flip по семантике supports rc-trigger; false отключает corrections. Геометрия использует global sizePopupArrow/marginXXS/borderRadius, component aliases меняют CSS стрелки. Прежние четыре native placement с boolean props сохраняют gap/flip/shift. 84 официальных UMD-эталона закрепляют координаты, стрелку, tokens/aliases, RTL, edge cases и реактивные обновления. Проверены Popover/Popconfirm/AvatarGroup и single, pinned range, active range Slider; смена object props сохраняет DOM, draft, selection и focus. Provider-specific tooltip/popover defaults, полный align/trigger/motion и CSS-transform/scroll-container clipping остаются вне этой feature."
         }
       ]
     },
@@ -6084,7 +6115,14 @@
         "tests/browser/fixtures/ant-design-overlay-corner-reference.json",
         "tests/browser/overlay-corner-metrics.ts",
         "tests/browser/overlay-corner.spec.ts",
-        "tests/package/overlay-corner.ssr.test.ts"
+        "tests/package/overlay-corner.ssr.test.ts",
+        "src/lib/tooltip-options-reference.test.ts",
+        "src/lib/SliderSingle.svelte",
+        "src/lib/SliderRange.svelte",
+        "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+        "tests/browser/overlay-options.spec.ts",
+        "tests/package/overlay-options.ssr.test.ts"
       ],
       "features": [
         {
@@ -6182,7 +6220,7 @@
             "src/lib/avatar.types.ts",
             "src/lib/ConfigProvider.svelte"
           ],
-          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref, prefixCls и deprecated max* aliases перенесены отдельными features. Max.popover принимает весь текущий Svelte Popover API, включая content/title, controlled/default open, destroy и getters. Произвольные children вместо items и остальные исходные Popover props (contextMenu/pointAtCenter, semantic/config/prefixCls, color/align/motion, fresh cache) остаются в работе. Согласованные passive/native contracts, нормализация размеров/лимита, кнопка и список сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
+          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref, prefixCls и deprecated max* aliases перенесены отдельными features. Max.popover принимает весь текущий Svelte Popover API, включая content/title, controlled/default open, destroy и getters. Произвольные children вместо items и остальные исходные Popover props (contextMenu, semantic/config/prefixCls, color/align/motion, fresh cache) остаются в работе. Согласованные passive/native contracts, нормализация размеров/лимита, кнопка и список сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
         },
         {
           "id": "display-theme-tokens",
@@ -6331,7 +6369,33 @@
             "tests/package/overlay-corner.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: points без pointAtCenter, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Source CSS-transform/scroll-container clipping, pointAtCenter, align/overflow object и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: corner points, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Локальные pointAtCenter/object overflow описаны отдельной feature; source CSS-transform/scroll-container clipping, align и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+        },
+        {
+          "id": "arrow-overflow-options",
+          "title": "Локальные pointAtCenter и object autoAdjustOverflow",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/tooltip-options-reference.test.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "tests/browser/fixtures/overlay-corner-presets.ts",
+            "tests/browser/fixtures/OverlayCornerCase.svelte",
+            "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+            "tests/browser/overlay-corner-metrics.ts",
+            "tests/browser/overlay-options.spec.ts",
+            "tests/package/overlay-options.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Локальные arrow boolean/{ pointAtCenter?: boolean } и autoAdjustOverflow boolean/{ adjustX?: 0 | 1, adjustY?: 0 | 1 }. Object props включают исходные points/offsets, visibleFirst, центральный shift и flip cache для всех 12 физических placement. Числовые 0 и 1 разрешают flip по семантике supports rc-trigger; false отключает corrections. Геометрия использует global sizePopupArrow/marginXXS/borderRadius, component aliases меняют CSS стрелки. Прежние четыре native placement с boolean props сохраняют gap/flip/shift. 84 официальных UMD-эталона закрепляют координаты, стрелку, tokens/aliases, RTL, edge cases и реактивные обновления. Проверены Popover/Popconfirm/AvatarGroup и single, pinned range, active range Slider; смена object props сохраняет DOM, draft, selection и focus. Provider-specific tooltip/popover defaults, полный align/trigger/motion и CSS-transform/scroll-container clipping остаются вне этой feature."
         }
       ]
     },
@@ -7749,7 +7813,14 @@
         "tests/browser/fixtures/ant-design-overlay-corner-reference.json",
         "tests/browser/overlay-corner-metrics.ts",
         "tests/browser/overlay-corner.spec.ts",
-        "tests/package/overlay-corner.ssr.test.ts"
+        "tests/package/overlay-corner.ssr.test.ts",
+        "src/lib/tooltip-options-reference.test.ts",
+        "src/lib/SliderSingle.svelte",
+        "src/lib/SliderRange.svelte",
+        "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+        "tests/browser/overlay-options.spec.ts",
+        "tests/package/overlay-options.ssr.test.ts"
       ],
       "features": [
         {
@@ -7766,7 +7837,7 @@
           "state": "partial",
           "requiredForV1": false,
           "evidence": [],
-          "note": "12 placements, контейнеры и destroyOnHidden перенесены отдельными features. ContextMenu, pointAtCenter, semantic/config/prefixCls, color/align/motion и fresh cache ещё требуют переноса. Общий подробный аудит v1 не завершён."
+          "note": "12 placements, локальные pointAtCenter/object overflow, контейнеры и destroyOnHidden перенесены отдельными features. ContextMenu, semantic/config/prefixCls, color/align/motion и fresh cache ещё требуют переноса. Общий подробный аудит v1 не завершён."
         },
         {
           "id": "compact-isolation",
@@ -7887,7 +7958,33 @@
             "tests/package/overlay-corner.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: points без pointAtCenter, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Source CSS-transform/scroll-container clipping, pointAtCenter, align/overflow object и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: corner points, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Локальные pointAtCenter/object overflow описаны отдельной feature; source CSS-transform/scroll-container clipping, align и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+        },
+        {
+          "id": "arrow-overflow-options",
+          "title": "Локальные pointAtCenter и object autoAdjustOverflow",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/tooltip-options-reference.test.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "tests/browser/fixtures/overlay-corner-presets.ts",
+            "tests/browser/fixtures/OverlayCornerCase.svelte",
+            "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+            "tests/browser/overlay-corner-metrics.ts",
+            "tests/browser/overlay-options.spec.ts",
+            "tests/package/overlay-options.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Локальные arrow boolean/{ pointAtCenter?: boolean } и autoAdjustOverflow boolean/{ adjustX?: 0 | 1, adjustY?: 0 | 1 }. Object props включают исходные points/offsets, visibleFirst, центральный shift и flip cache для всех 12 физических placement. Числовые 0 и 1 разрешают flip по семантике supports rc-trigger; false отключает corrections. Геометрия использует global sizePopupArrow/marginXXS/borderRadius, component aliases меняют CSS стрелки. Прежние четыре native placement с boolean props сохраняют gap/flip/shift. 84 официальных UMD-эталона закрепляют координаты, стрелку, tokens/aliases, RTL, edge cases и реактивные обновления. Проверены Popover/Popconfirm/AvatarGroup и single, pinned range, active range Slider; смена object props сохраняет DOM, draft, selection и focus. Provider-specific tooltip/popover defaults, полный align/trigger/motion и CSS-transform/scroll-container clipping остаются вне этой feature."
         }
       ]
     },
@@ -8787,7 +8884,14 @@
         "tests/browser/fixtures/ant-design-overlay-corner-reference.json",
         "tests/browser/overlay-corner-metrics.ts",
         "tests/browser/overlay-corner.spec.ts",
-        "tests/package/overlay-corner.ssr.test.ts"
+        "tests/package/overlay-corner.ssr.test.ts",
+        "src/lib/tooltip-options-reference.test.ts",
+        "src/lib/SliderSingle.svelte",
+        "src/lib/SliderRange.svelte",
+        "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+        "tests/browser/overlay-options.spec.ts",
+        "tests/package/overlay-options.ssr.test.ts"
       ],
       "features": [
         {
@@ -8823,7 +8927,7 @@
             "tests/package/overlay-corner.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: points без pointAtCenter, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Source CSS-transform/scroll-container clipping, pointAtCenter, align/overflow object и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: corner points, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Локальные pointAtCenter/object overflow описаны отдельной feature; source CSS-transform/scroll-container clipping, align и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
         },
         {
           "id": "compact-isolation",
@@ -8892,6 +8996,32 @@
             "tests/package/overlay-container.ssr.test.ts"
           ],
           "note": "Изучены Ant Design 6.6.8 и rc-tooltip 1.5.2 (a43ecc7977059b91c96951556c31be29981d6b72), делегирующий container Trigger 3.10.1. Локальный getPopupContainer → legacy getTooltipContainer → ConfigProvider с исходным || fallback: own undefined сохраняет следующий слой. Getter получает реальный DOM trigger, включая SVG с исходным HTMLElement в типе; до первого открытия и при SSR не вызывается. Общий reactive portal разрешает DOM-target отдельно от callback identity и сохраняет DOM/state/draft/focus/selection при замене функции с тем же контейнером. Наследуемые CSS variables копируются отдельно от component-theme variables; смена владельца переменной не стирает новый override. HTMLElement/открытый ShadowRoot, обновление container/theme и cleanup проверяются публичными browser/SSR fixtures и 52 UMD-эталонами общего набора. Согласованный native default сохраняется: без getter скрытый SSR shell и DOM остаются inline, используется manual popover; callback count, точный React DOM и вся rc-trigger lifecycle здесь не заявлены. Унаследованные arrow coordinates и CSS-derived arrow variables родительского popup не перезаписывают собственный controller текущей поверхности."
+        },
+        {
+          "id": "arrow-overflow-options",
+          "title": "Локальные pointAtCenter и object autoAdjustOverflow",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/tooltip-options-reference.test.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "tests/browser/fixtures/overlay-corner-presets.ts",
+            "tests/browser/fixtures/OverlayCornerCase.svelte",
+            "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+            "tests/browser/overlay-corner-metrics.ts",
+            "tests/browser/overlay-options.spec.ts",
+            "tests/package/overlay-options.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Локальные arrow boolean/{ pointAtCenter?: boolean } и autoAdjustOverflow boolean/{ adjustX?: 0 | 1, adjustY?: 0 | 1 }. Object props включают исходные points/offsets, visibleFirst, центральный shift и flip cache для всех 12 физических placement. Числовые 0 и 1 разрешают flip по семантике supports rc-trigger; false отключает corrections. Геометрия использует global sizePopupArrow/marginXXS/borderRadius, component aliases меняют CSS стрелки. Прежние четыре native placement с boolean props сохраняют gap/flip/shift. 84 официальных UMD-эталона закрепляют координаты, стрелку, tokens/aliases, RTL, edge cases и реактивные обновления. Проверены Popover/Popconfirm/AvatarGroup и single, pinned range, active range Slider; смена object props сохраняет DOM, draft, selection и focus. Provider-specific tooltip/popover defaults, полный align/trigger/motion и CSS-transform/scroll-container clipping остаются вне этой feature."
         }
       ]
     },
@@ -9491,7 +9621,14 @@
         "tests/browser/fixtures/ant-design-overlay-corner-reference.json",
         "tests/browser/overlay-corner-metrics.ts",
         "tests/browser/overlay-corner.spec.ts",
-        "tests/package/overlay-corner.ssr.test.ts"
+        "tests/package/overlay-corner.ssr.test.ts",
+        "src/lib/tooltip-options-reference.test.ts",
+        "src/lib/SliderSingle.svelte",
+        "src/lib/SliderRange.svelte",
+        "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+        "tests/browser/overlay-options.spec.ts",
+        "tests/package/overlay-options.ssr.test.ts"
       ],
       "features": [
         {
@@ -9581,7 +9718,33 @@
             "tests/package/overlay-corner.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: points без pointAtCenter, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Source CSS-transform/scroll-container clipping, pointAtCenter, align/overflow object и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+          "note": "Все 12 физических направлений, включая восемь corner placements, для Tooltip, Popover, Popconfirm, AvatarGroup.max.popover и Slider Tooltip. Corners используют существующие getPopupPlacements/getPopupPosition rc-trigger 3.10.1: corner points, visibleFirst/scroll region, flip по двум осям без shift, dynamic inset rounding и cache до закрытия. CSS всех направлений уже извлечён из pinned dist. Source gap учитывает sizePopupArrow/marginXXS и arrow=false; native gap/flip/shift четырёх прежних placement сохранены. 99 UMD-эталонов задают координаты, CSS стрелки, oversize/fractional values, RTL, изменения placement/размеров и cache; часть cases фиксирует размеры box для изоляции geometry от layout остальных компонентов. Публичные SSR/browser fixtures сохраняют ввод, selection, фокус и native Escape/cleanup. Локальные pointAtCenter/object overflow описаны отдельной feature; source CSS-transform/scroll-container clipping, align и motion не объявляются перенесёнными; прежние native viewport/top-layer constraints сохранены."
+        },
+        {
+          "id": "arrow-overflow-options",
+          "title": "Локальные pointAtCenter и object autoAdjustOverflow",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/tooltip-options-reference.test.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/Popover.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "tests/browser/fixtures/overlay-corner-presets.ts",
+            "tests/browser/fixtures/OverlayCornerCase.svelte",
+            "tests/browser/fixtures/OverlayOptionsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-overlay-options-reference.json",
+            "tests/browser/overlay-corner-metrics.ts",
+            "tests/browser/overlay-options.spec.ts",
+            "tests/package/overlay-options.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Локальные arrow boolean/{ pointAtCenter?: boolean } и autoAdjustOverflow boolean/{ adjustX?: 0 | 1, adjustY?: 0 | 1 }. Object props включают исходные points/offsets, visibleFirst, центральный shift и flip cache для всех 12 физических placement. Числовые 0 и 1 разрешают flip по семантике supports rc-trigger; false отключает corrections. Геометрия использует global sizePopupArrow/marginXXS/borderRadius, component aliases меняют CSS стрелки. Прежние четыре native placement с boolean props сохраняют gap/flip/shift. 84 официальных UMD-эталона закрепляют координаты, стрелку, tokens/aliases, RTL, edge cases и реактивные обновления. Проверены Popover/Popconfirm/AvatarGroup и single, pinned range, active range Slider; смена object props сохраняет DOM, draft, selection и focus. Provider-specific tooltip/popover defaults, полный align/trigger/motion и CSS-transform/scroll-container clipping остаются вне этой feature."
         }
       ]
     },

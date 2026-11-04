@@ -6,10 +6,10 @@
   import { connectComponentTheme } from './theme-component.dom';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { connectTooltipDescription } from './tooltip.dom';
-  import { isTooltipCorner } from './tooltip.engine';
+  import { getTooltipArrow, getTooltipPlacementConfig, isTooltipCorner } from './tooltip.engine';
   import { connectPopup } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
-  import type { TooltipPlacement } from './tooltip.types';
+  import type { AdjustOverflow, TooltipArrow, TooltipPlacement } from './tooltip.types';
 
   let {
     title,
@@ -31,8 +31,8 @@
     describe?: Element;
     trigger?: Element;
     placement?: TooltipPlacement;
-    arrow?: boolean;
-    autoAdjustOverflow?: boolean;
+    arrow?: TooltipArrow;
+    autoAdjustOverflow?: boolean | AdjustOverflow;
     getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
     getTooltipContainer?: (trigger: HTMLElement) => HTMLElement;
     onDismiss: () => void;
@@ -47,6 +47,8 @@
   const id = `ant-tooltip-${generatedId}`;
   let popup = $state<HTMLSpanElement>();
   let actualPlacement = $state(untrack(() => placement));
+  let arrowConfig = $derived(getTooltipArrow(arrow));
+  let sourcePlacement = $derived(typeof arrow === 'object' || typeof autoAdjustOverflow === 'object');
   let available = $derived(typeof title === 'function' || Boolean(title.trim()));
   const portal = createPopupContainer(() => ({
     open: open && available,
@@ -70,8 +72,12 @@
       trigger: source,
       get placement() { return placement; },
       get autoAdjustOverflow() { return autoAdjustOverflow; },
-      gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement)
-        ? (arrow ? designTokens.state.token.sizePopupArrow / 2 : 0)
+      get sourcePlacement() {
+        return sourcePlacement
+          ? getTooltipPlacementConfig(arrow, designTokens.state.token) : undefined;
+      },
+      gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement) || sourcePlacement
+        ? (arrowConfig.show ? designTokens.state.token.sizePopupArrow / 2 : 0)
           + designTokens.state.token.marginXXS : undefined),
       onDismiss: () => onDismiss(),
       onPlacement: (next) => {
@@ -102,6 +108,6 @@
       if (event.pointerType !== 'touch')
         onHoverChange?.(true);
     }} onpointerleave={() => onHoverChange?.(false)}>
-  {#if arrow}<span class="ant-tooltip-arrow" aria-hidden="true"></span>{/if}
+  {#if arrowConfig.show}<span class="ant-tooltip-arrow" aria-hidden="true"></span>{/if}
   <span class="ant-tooltip-container" tabindex="-1">{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</span>
 </span>
