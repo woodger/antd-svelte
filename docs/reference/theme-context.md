@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin и Progress получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress и Skeleton получают собственные
 defaults и aliases.
 Flex использует alias overrides без собственных component defaults и без typography reset.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
@@ -395,6 +395,22 @@ Line success, gradients, steps/rounding, percentPosition и приоритеты
 Circle/dashboard, success/steps/gradient, gap placement и шесть tokens проверяются по
 [81 UMD-сценарию и transition trace](../../tests/browser/fixtures/ant-design-progress-circle-reference.json).
 Стили SVG-частей используют общий CSS declaration writer с исходным приоритетом semantic styles.
+
+## Токены Skeleton
+
+Основной Skeleton и его пять primitives используют общий компонентный scope. Defaults:
+color/gradientFromColor=colorFillContent, colorGradientEnd/gradientToColor=colorFill,
+titleHeight/paragraphLiHeight=controlHeight/2, blockRadius=borderRadiusSM,
+paragraphMarginTop=marginLG+marginXXS. Deprecated color/colorGradientEnd обновляют современные
+поля при отсутствии их override; явные современные значения имеют приоритет.
+
+Поддержаны aliases/algorithm, dark/compact, нули и variable prefix/key/hash. Переменные
+на root предшествуют user styles. Primitives наследуют componentSize только для
+Avatar/Button/Input, поддерживают local prefixCls и object root/content semantic slots;
+style относится к content после styles.content. Main Skeleton сохраняет native host,
+status/focus и normalization; его component record/semantic/prefix/ref API пока отсутствуют.
+[116 source-сценариев](../../tests/browser/fixtures/ant-design-skeleton-element-reference.json)
+сняты из закреплённого UMD с одинаковым inherited global-token окружением.
 
 ## Токены Spin
 

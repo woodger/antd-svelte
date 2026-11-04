@@ -120,6 +120,8 @@ space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.c
 первый сохраняет два keyframes, второй выводит локальный CSS prefix template.
 Рецепты progress и progress-prefix извлекают 40 правил line/circle CSS, steps, success и
 percentPosition; первый сохраняет один keyframe, второй выводит CSS data module.
+Рецепты skeleton и skeleton-prefix извлекают 48 правил основного Skeleton и пяти primitives;
+первый сохраняет один keyframe, второй выводит CSS data module для локального prefix.
 Рецепты listy, typography, tour и carousel воспроизводят одноимённые vendor CSS.
 Рецепт slider-range воспроизводит отдельный CSS диапазона; прежний slider.css
 одиночного control не перезаписывается.

@@ -272,7 +272,12 @@ export { default as NotificationHolder } from './NotificationHolder.svelte';
 export { createNotification } from './notification.model.svelte.js';
 export { default as Progress } from './Progress.svelte';
 export { default as Spin } from './spin.component';
-export { default as Skeleton } from './Skeleton.svelte';
+export { default as Skeleton } from './skeleton.component';
+export { default as SkeletonAvatar } from './SkeletonAvatar.svelte';
+export { default as SkeletonButton } from './SkeletonButton.svelte';
+export { default as SkeletonInput } from './SkeletonInput.svelte';
+export { default as SkeletonImage } from './SkeletonImage.svelte';
+export { default as SkeletonNode } from './SkeletonNode.svelte';
 export { default as Empty } from './Empty.svelte';
 export { default as Result } from './Result.svelte';
 export { default as Steps } from './Steps.svelte';
@@ -538,6 +543,13 @@ export type {
   SkeletonProps,
   SkeletonAvatarProps,
   SkeletonAvatarSize,
+  SkeletonElementProps,
+  SkeletonElementSize,
+  SkeletonElementSlots,
+  SkeletonButtonProps,
+  SkeletonInputProps,
+  SkeletonImageProps,
+  SkeletonNodeProps,
   SkeletonTitleProps,
   SkeletonParagraphProps,
   SkeletonWidth

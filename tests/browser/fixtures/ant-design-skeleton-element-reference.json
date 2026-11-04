@@ -1,0 +1,5924 @@
+{
+  "reference": {
+    "documentMode": "CSS1Compat",
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js; runtime CSS-in-JS only; frame inherits the same global design-token typography/color as the native provider",
+    "operation": "capture all five Skeleton primitives, size context, shapes/block, CSS tokens/aliases, semantic style precedence and local prefixes",
+    "nativeBoundary": "Skeleton primitives preserve the source structure and settings. Named Svelte exports alias the static properties. Reduced motion additionally disables the placeholder animation. Main Skeleton retains its native host, busy/status, focus, layout guards and normalization; main semantic/config/prefix/ref APIs are a separate stage. Private hash/marker classes are excluded."
+  },
+  "viewport": {
+    "width": 1000,
+    "height": 900
+  },
+  "cases": [
+    {
+      "name": "avatar-default",
+      "kind": "avatar",
+      "props": {},
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-active",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-semantic",
+      "kind": "avatar",
+      "props": {
+        "class": "owner-class",
+        "rootClassName": "owner-root",
+        "classNames": {
+          "root": "semantic-root",
+          "content": "semantic-content"
+        },
+        "styles": {
+          "root": "padding-top:7px",
+          "content": "padding-left:3px;width:110px;height:25px"
+        },
+        "style": "width:130px;height:31px"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element",
+            "owner-class",
+            "owner-root",
+            "semantic-root"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "130px",
+            "height": "38px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "7px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle",
+            "semantic-content"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "130px",
+            "height": "31px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "3px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-local-prefix",
+      "kind": "avatar",
+      "props": {
+        "prefixCls": "custom-skeleton",
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "custom-skeleton",
+            "custom-skeleton-active",
+            "custom-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "custom-skeleton-avatar",
+            "custom-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-marker-prefix",
+      "kind": "avatar",
+      "props": {
+        "prefixCls": "ant-skeleton-css-var"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton-css-var-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-css-var-avatar",
+            "ant-skeleton-css-var-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-rtl",
+      "kind": "avatar",
+      "props": {},
+      "rtl": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "rtl",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-own",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "own",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 34, 51) 25%, rgb(68, 85, 102) 37%, rgb(17, 34, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-aliases",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "aliases",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "36px",
+            "height": "36px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "36px",
+            "height": "36px",
+            "min-width": "0px",
+            "line-height": "36px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 102, 51) 25%, rgb(51, 170, 136) 37%, rgb(17, 102, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-deprecated",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-deprecated-priority",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated-priority",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-dark",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "dark",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0.18) 37%, rgba(255, 255, 255, 0.12) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(255, 255, 255, 0.85)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-compact",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "compact",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "28px",
+            "height": "28px",
+            "font-size": "12px",
+            "line-height": "20px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "28px",
+            "height": "28px",
+            "min-width": "0px",
+            "line-height": "28px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-algorithm",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "algorithm",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-variables",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "variables",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(102, 51, 170) 25%, rgba(0, 0, 0, 0.15) 37%, rgb(102, 51, 170) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-theme-zero",
+      "kind": "avatar",
+      "props": {
+        "active": true
+      },
+      "theme": "zero",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-named",
+      "kind": "avatar",
+      "props": {},
+      "named": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-default",
+      "kind": "button",
+      "props": {},
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-active",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-semantic",
+      "kind": "button",
+      "props": {
+        "class": "owner-class",
+        "rootClassName": "owner-root",
+        "classNames": {
+          "root": "semantic-root",
+          "content": "semantic-content"
+        },
+        "styles": {
+          "root": "padding-top:7px",
+          "content": "padding-left:3px;width:110px;height:25px"
+        },
+        "style": "width:130px;height:31px"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element",
+            "owner-class",
+            "owner-root",
+            "semantic-root"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "130px",
+            "height": "38px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "7px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "semantic-content"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "130px",
+            "height": "31px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "3px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-local-prefix",
+      "kind": "button",
+      "props": {
+        "prefixCls": "custom-skeleton",
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "custom-skeleton",
+            "custom-skeleton-active",
+            "custom-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "custom-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-marker-prefix",
+      "kind": "button",
+      "props": {
+        "prefixCls": "ant-skeleton-css-var"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton-css-var-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-css-var-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-rtl",
+      "kind": "button",
+      "props": {},
+      "rtl": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "rtl",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-own",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "own",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 34, 51) 25%, rgb(68, 85, 102) 37%, rgb(17, 34, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-aliases",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "aliases",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "72px",
+            "height": "36px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "72px",
+            "height": "36px",
+            "min-width": "72px",
+            "line-height": "36px",
+            "border-radius": "7px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 102, 51) 25%, rgb(51, 170, 136) 37%, rgb(17, 102, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-deprecated",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-deprecated-priority",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated-priority",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-dark",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "dark",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0.18) 37%, rgba(255, 255, 255, 0.12) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(255, 255, 255, 0.85)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-compact",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "compact",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "56px",
+            "height": "28px",
+            "font-size": "12px",
+            "line-height": "20px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "56px",
+            "height": "28px",
+            "min-width": "56px",
+            "line-height": "28px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-algorithm",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "algorithm",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-variables",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "variables",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(102, 51, 170) 25%, rgba(0, 0, 0, 0.15) 37%, rgb(102, 51, 170) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-theme-zero",
+      "kind": "button",
+      "props": {
+        "active": true
+      },
+      "theme": "zero",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-named",
+      "kind": "button",
+      "props": {},
+      "named": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-default",
+      "kind": "input",
+      "props": {},
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-active",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-semantic",
+      "kind": "input",
+      "props": {
+        "class": "owner-class",
+        "rootClassName": "owner-root",
+        "classNames": {
+          "root": "semantic-root",
+          "content": "semantic-content"
+        },
+        "styles": {
+          "root": "padding-top:7px",
+          "content": "padding-left:3px;width:110px;height:25px"
+        },
+        "style": "width:130px;height:31px"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element",
+            "owner-class",
+            "owner-root",
+            "semantic-root"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "38px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "7px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input",
+            "semantic-content"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "31px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "3px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-local-prefix",
+      "kind": "input",
+      "props": {
+        "prefixCls": "custom-skeleton",
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "custom-skeleton",
+            "custom-skeleton-active",
+            "custom-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "custom-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-marker-prefix",
+      "kind": "input",
+      "props": {
+        "prefixCls": "ant-skeleton-css-var"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton-css-var-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-css-var-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-rtl",
+      "kind": "input",
+      "props": {},
+      "rtl": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "rtl",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-own",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "own",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 34, 51) 25%, rgb(68, 85, 102) 37%, rgb(17, 34, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-aliases",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "aliases",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "180px",
+            "height": "36px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "180px",
+            "height": "36px",
+            "min-width": "180px",
+            "line-height": "36px",
+            "border-radius": "7px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 102, 51) 25%, rgb(51, 170, 136) 37%, rgb(17, 102, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-deprecated",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-deprecated-priority",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated-priority",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-dark",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "dark",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0.18) 37%, rgba(255, 255, 255, 0.12) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(255, 255, 255, 0.85)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-compact",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "compact",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "140px",
+            "height": "28px",
+            "font-size": "12px",
+            "line-height": "20px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "140px",
+            "height": "28px",
+            "min-width": "140px",
+            "line-height": "28px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-algorithm",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "algorithm",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-variables",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "variables",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(102, 51, 170) 25%, rgba(0, 0, 0, 0.15) 37%, rgb(102, 51, 170) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-theme-zero",
+      "kind": "input",
+      "props": {
+        "active": true
+      },
+      "theme": "zero",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-named",
+      "kind": "input",
+      "props": {},
+      "named": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "image-default",
+      "kind": "image",
+      "props": {},
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-active",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-semantic",
+      "kind": "image",
+      "props": {
+        "class": "owner-class",
+        "rootClassName": "owner-root",
+        "classNames": {
+          "root": "semantic-root",
+          "content": "semantic-content"
+        },
+        "styles": {
+          "root": "padding-top:7px",
+          "content": "padding-left:3px;width:110px;height:25px"
+        },
+        "style": "width:130px;height:31px"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element",
+            "owner-class",
+            "owner-root",
+            "semantic-root"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "130px",
+            "height": "38px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "7px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image",
+            "semantic-content"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "130px",
+            "height": "31px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "3px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-local-prefix",
+      "kind": "image",
+      "props": {
+        "prefixCls": "custom-skeleton",
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "custom-skeleton",
+            "custom-skeleton-active",
+            "custom-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "custom-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-marker-prefix",
+      "kind": "image",
+      "props": {
+        "prefixCls": "ant-skeleton-css-var"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton-css-var-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-css-var-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-rtl",
+      "kind": "image",
+      "props": {},
+      "rtl": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "rtl",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-own",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "own",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 34, 51) 25%, rgb(68, 85, 102) 37%, rgb(17, 34, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-aliases",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "aliases",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "108px",
+            "height": "108px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "108px",
+            "height": "108px",
+            "min-width": "0px",
+            "line-height": "108px",
+            "border-radius": "7px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 102, 51) 25%, rgb(51, 170, 136) 37%, rgb(17, 102, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "54px",
+            "height": "54px",
+            "line-height": "54px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-deprecated",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-deprecated-priority",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated-priority",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-dark",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "dark",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0.18) 37%, rgba(255, 255, 255, 0.12) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(255, 255, 255, 0.85)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-compact",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "compact",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "84px",
+            "height": "84px",
+            "font-size": "12px",
+            "line-height": "20px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "84px",
+            "height": "84px",
+            "min-width": "0px",
+            "line-height": "84px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "42px",
+            "height": "42px",
+            "line-height": "42px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-algorithm",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "algorithm",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-variables",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "variables",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(102, 51, 170) 25%, rgba(0, 0, 0, 0.15) 37%, rgb(102, 51, 170) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-theme-zero",
+      "kind": "image",
+      "props": {
+        "active": true
+      },
+      "theme": "zero",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "image-named",
+      "kind": "image",
+      "props": {},
+      "named": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-image"
+          ],
+          "text": "Image placeholder",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": {
+          "viewBox": "0 0 1098 1024",
+          "path": "M365.7 329.1q0 45.8-32 77.7t-77.7 32-77.7-32-32-77.7 32-77.6 77.7-32 77.7 32 32 77.6M951 548.6v256H146.3V694.9L329 512l91.5 91.4L713 311zm54.8-402.3H91.4q-7.4 0-12.8 5.4T73 164.6v694.8q0 7.5 5.5 12.9t12.8 5.4h914.3q7.5 0 12.9-5.4t5.4-12.9V164.6q0-7.5-5.4-12.9t-12.9-5.4m91.4 18.3v694.8q0 37.8-26.8 64.6t-64.6 26.9H91.4q-37.7 0-64.6-26.9T0 859.4V164.6q0-37.8 26.8-64.6T91.4 73h914.3q37.8 0 64.6 26.9t26.8 64.6",
+          "style": {
+            "width": "48px",
+            "height": "48px",
+            "line-height": "48px",
+            "fill": "rgb(0, 0, 0)"
+          }
+        }
+      }
+    },
+    {
+      "name": "node-default",
+      "kind": "node",
+      "props": {},
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-active",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-semantic",
+      "kind": "node",
+      "props": {
+        "class": "owner-class",
+        "rootClassName": "owner-root",
+        "classNames": {
+          "root": "semantic-root",
+          "content": "semantic-content"
+        },
+        "styles": {
+          "root": "padding-top:7px",
+          "content": "padding-left:3px;width:110px;height:25px"
+        },
+        "style": "width:130px;height:31px"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element",
+            "owner-class",
+            "owner-root",
+            "semantic-root"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "130px",
+            "height": "38px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "7px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node",
+            "semantic-content"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "130px",
+            "height": "31px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "3px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-local-prefix",
+      "kind": "node",
+      "props": {
+        "prefixCls": "custom-skeleton",
+        "active": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "custom-skeleton",
+            "custom-skeleton-active",
+            "custom-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "custom-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-marker-prefix",
+      "kind": "node",
+      "props": {
+        "prefixCls": "ant-skeleton-css-var"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton-css-var-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-css-var-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-rtl",
+      "kind": "node",
+      "props": {},
+      "rtl": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "rtl",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-own",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "own",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 34, 51) 25%, rgb(68, 85, 102) 37%, rgb(17, 34, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-aliases",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "aliases",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "108px",
+            "height": "108px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "108px",
+            "height": "108px",
+            "min-width": "0px",
+            "line-height": "108px",
+            "border-radius": "7px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(17, 102, 51) 25%, rgb(51, 170, 136) 37%, rgb(17, 102, 51) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-deprecated",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-deprecated-priority",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "deprecated-priority",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(204, 34, 68) 25%, rgb(51, 68, 170) 37%, rgb(204, 34, 68) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-dark",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "dark",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(255, 255, 255, 0.12) 25%, rgba(255, 255, 255, 0.18) 37%, rgba(255, 255, 255, 0.12) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(255, 255, 255, 0.85)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-compact",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "compact",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "84px",
+            "height": "84px",
+            "font-size": "12px",
+            "line-height": "20px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "84px",
+            "height": "84px",
+            "min-width": "0px",
+            "line-height": "84px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-algorithm",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "algorithm",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-variables",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "variables",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgb(102, 51, 170) 25%, rgba(0, 0, 0, 0.15) 37%, rgb(102, 51, 170) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-theme-zero",
+      "kind": "node",
+      "props": {
+        "active": true
+      },
+      "theme": "zero",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-active",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%)",
+            "background-size": "400% 100%",
+            "animation-name": "skeleton-loading",
+            "animation-duration": "1.4s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-named",
+      "kind": "node",
+      "props": {},
+      "named": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-size-small",
+      "kind": "avatar",
+      "props": {
+        "size": "small"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "24px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle",
+            "ant-skeleton-avatar-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "24px",
+            "height": "24px",
+            "min-width": "0px",
+            "line-height": "24px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-size-medium",
+      "kind": "avatar",
+      "props": {
+        "size": "medium"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-size-middle",
+      "kind": "avatar",
+      "props": {
+        "size": "middle"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-size-large",
+      "kind": "avatar",
+      "props": {
+        "size": "large"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "40px",
+            "height": "40px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle",
+            "ant-skeleton-avatar-lg"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "40px",
+            "height": "40px",
+            "min-width": "0px",
+            "line-height": "40px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-size-default",
+      "kind": "avatar",
+      "props": {
+        "size": "default"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-context-small",
+      "kind": "avatar",
+      "props": {},
+      "contextSize": "small",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "24px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle",
+            "ant-skeleton-avatar-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "24px",
+            "height": "24px",
+            "min-width": "0px",
+            "line-height": "24px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-context-large",
+      "kind": "avatar",
+      "props": {},
+      "contextSize": "large",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "40px",
+            "height": "40px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle",
+            "ant-skeleton-avatar-lg"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "40px",
+            "height": "40px",
+            "min-width": "0px",
+            "line-height": "40px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-size-priority",
+      "kind": "avatar",
+      "props": {
+        "size": "small"
+      },
+      "contextSize": "large",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "24px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle",
+            "ant-skeleton-avatar-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "24px",
+            "height": "24px",
+            "min-width": "0px",
+            "line-height": "24px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-size-small",
+      "kind": "button",
+      "props": {
+        "size": "small"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "48px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "ant-skeleton-button-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "48px",
+            "height": "24px",
+            "min-width": "48px",
+            "line-height": "24px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-size-medium",
+      "kind": "button",
+      "props": {
+        "size": "medium"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-size-middle",
+      "kind": "button",
+      "props": {
+        "size": "middle"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-size-large",
+      "kind": "button",
+      "props": {
+        "size": "large"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "80px",
+            "height": "40px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "ant-skeleton-button-lg"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "80px",
+            "height": "40px",
+            "min-width": "80px",
+            "line-height": "40px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-size-default",
+      "kind": "button",
+      "props": {
+        "size": "default"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-context-small",
+      "kind": "button",
+      "props": {},
+      "contextSize": "small",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "48px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "ant-skeleton-button-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "48px",
+            "height": "24px",
+            "min-width": "48px",
+            "line-height": "24px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-context-large",
+      "kind": "button",
+      "props": {},
+      "contextSize": "large",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "80px",
+            "height": "40px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "ant-skeleton-button-lg"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "80px",
+            "height": "40px",
+            "min-width": "80px",
+            "line-height": "40px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-size-priority",
+      "kind": "button",
+      "props": {
+        "size": "small"
+      },
+      "contextSize": "large",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "48px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "ant-skeleton-button-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "48px",
+            "height": "24px",
+            "min-width": "48px",
+            "line-height": "24px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-size-small",
+      "kind": "input",
+      "props": {
+        "size": "small"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "120px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input",
+            "ant-skeleton-input-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "120px",
+            "height": "24px",
+            "min-width": "120px",
+            "line-height": "24px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-size-medium",
+      "kind": "input",
+      "props": {
+        "size": "medium"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-size-middle",
+      "kind": "input",
+      "props": {
+        "size": "middle"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-size-large",
+      "kind": "input",
+      "props": {
+        "size": "large"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "200px",
+            "height": "40px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input",
+            "ant-skeleton-input-lg"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "200px",
+            "height": "40px",
+            "min-width": "200px",
+            "line-height": "40px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-size-default",
+      "kind": "input",
+      "props": {
+        "size": "default"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-context-small",
+      "kind": "input",
+      "props": {},
+      "contextSize": "small",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "120px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input",
+            "ant-skeleton-input-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "120px",
+            "height": "24px",
+            "min-width": "120px",
+            "line-height": "24px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-context-large",
+      "kind": "input",
+      "props": {},
+      "contextSize": "large",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "200px",
+            "height": "40px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input",
+            "ant-skeleton-input-lg"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "200px",
+            "height": "40px",
+            "min-width": "200px",
+            "line-height": "40px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-size-priority",
+      "kind": "input",
+      "props": {
+        "size": "small"
+      },
+      "contextSize": "large",
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "120px",
+            "height": "24px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input",
+            "ant-skeleton-input-sm"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "120px",
+            "height": "24px",
+            "min-width": "120px",
+            "line-height": "24px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-numeric-0",
+      "kind": "avatar",
+      "props": {
+        "size": 0
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "0px",
+            "height": "22px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "0px",
+            "height": "0px",
+            "min-width": "0px",
+            "line-height": "0px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-numeric-20",
+      "kind": "avatar",
+      "props": {
+        "size": 20
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "20px",
+            "height": "22px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "20px",
+            "height": "20px",
+            "min-width": "0px",
+            "line-height": "20px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-numeric-64",
+      "kind": "avatar",
+      "props": {
+        "size": 64
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "64px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "64px",
+            "min-width": "0px",
+            "line-height": "64px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "avatar-square",
+      "kind": "avatar",
+      "props": {
+        "shape": "square"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-avatar",
+            "ant-skeleton-avatar-square"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "0px",
+            "line-height": "32px",
+            "border-radius": "0px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-shape-circle",
+      "kind": "button",
+      "props": {
+        "shape": "circle"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "ant-skeleton-button-circle"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "32px",
+            "height": "32px",
+            "min-width": "32px",
+            "line-height": "32px",
+            "border-radius": "50%",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-shape-square",
+      "kind": "button",
+      "props": {
+        "shape": "square"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "ant-skeleton-button-square"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-shape-round",
+      "kind": "button",
+      "props": {
+        "shape": "round"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button",
+            "ant-skeleton-button-round"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "32px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-shape-default",
+      "kind": "button",
+      "props": {
+        "shape": "default"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "64px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "button-block",
+      "kind": "button",
+      "props": {
+        "block": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-block",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "300px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-button"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "300px",
+            "height": "32px",
+            "min-width": "64px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "input-block",
+      "kind": "input",
+      "props": {
+        "block": true
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-block",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "300px",
+            "height": "32px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "SPAN",
+          "classes": [
+            "ant-skeleton-input"
+          ],
+          "text": "",
+          "style": {
+            "display": "inline-block",
+            "width": "300px",
+            "height": "32px",
+            "min-width": "160px",
+            "line-height": "32px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-children",
+      "kind": "node",
+      "props": {},
+      "child": true,
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "96px",
+            "height": "96px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "ant-skeleton-node"
+          ],
+          "text": "Custom node",
+          "style": {
+            "display": "inline-flex",
+            "width": "96px",
+            "height": "96px",
+            "min-width": "0px",
+            "line-height": "96px",
+            "border-radius": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    },
+    {
+      "name": "node-internal-class",
+      "kind": "node",
+      "props": {
+        "internalClassName": "owner-node",
+        "style": "width:160px;height:70px"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-skeleton",
+            "ant-skeleton-element"
+          ],
+          "style": {
+            "display": "inline-block",
+            "width": "160px",
+            "height": "70px",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px",
+            "background-color": "rgba(0, 0, 0, 0)"
+          }
+        },
+        "content": {
+          "tag": "DIV",
+          "classes": [
+            "owner-node"
+          ],
+          "text": "",
+          "style": {
+            "display": "block",
+            "width": "160px",
+            "height": "70px",
+            "min-width": "0px",
+            "line-height": "22px",
+            "border-radius": "0px",
+            "background-color": "rgba(0, 0, 0, 0)",
+            "background-image": "none",
+            "background-size": "auto",
+            "animation-name": "none",
+            "animation-duration": "0s",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "padding-left": "0px"
+          }
+        },
+        "image": null
+      }
+    }
+  ]
+}

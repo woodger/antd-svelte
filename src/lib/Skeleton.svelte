@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { resolveSkeletonLayout } from './skeleton.engine';
   import { createSkeletonFocus } from './skeleton.dom';
   import { ruRU } from './types';
@@ -23,6 +24,7 @@
     style
   }: SkeletonProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Skeleton');
   const focus = createSkeletonFocus();
   let host = $state<HTMLDivElement>();
   let content = $state<HTMLDivElement>();
@@ -63,11 +65,12 @@
     {#if loading}
       <div class={[
           'ant-skeleton ant-skeleton-css-var',
+          componentTheme.className,
           layout.avatar && 'ant-skeleton-with-avatar',
           active && 'ant-skeleton-active',
           round && 'ant-skeleton-round',
           config.direction === 'rtl' && 'ant-skeleton-rtl'
-        ]} aria-hidden="true">
+        ]} style={componentTheme.style} aria-hidden="true">
         {#if layout.avatar}<div class="ant-skeleton-header"><span class={[
             'ant-skeleton-avatar',
             `ant-skeleton-avatar-${layout.avatar.shape}`,

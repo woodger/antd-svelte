@@ -27,9 +27,19 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
-  | 'Progress';
+  | 'Progress' | 'Skeleton';
 
 const factories = {
+  Skeleton: (token: GlobalToken) => ({
+    color: token.colorFillContent,
+    colorGradientEnd: token.colorFill,
+    gradientFromColor: token.colorFillContent,
+    gradientToColor: token.colorFill,
+    titleHeight: token.controlHeight / 2,
+    blockRadius: token.borderRadiusSM,
+    paragraphMarginTop: token.marginLG + token.marginXXS,
+    paragraphLiHeight: token.controlHeight / 2
+  }),
   Progress: (token: GlobalToken) => ({
     circleTextColor: token.colorText,
     defaultColor: token.colorInfo,
@@ -156,12 +166,14 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Divider: ['orientationMargin'],
   Flex: [],
   Spin: [],
-  Progress: []
+  Progress: [],
+  Skeleton: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]
 >> = {
   Popover: [['width', 'titleMinWidth'], ['minWidth', 'titleMinWidth']],
+  Skeleton: [['color', 'gradientFromColor'], ['colorGradientEnd', 'gradientToColor']],
   Menu: menuDeprecatedTokens
 };
 const inputMetrics = [

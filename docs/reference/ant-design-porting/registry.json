@@ -11246,12 +11246,42 @@
       "scope": "target",
       "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
       "upstreamPath": "components/skeleton",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Skeleton",
           "local": [
             "Skeleton"
+          ]
+        },
+        {
+          "upstream": "Skeleton.Avatar",
+          "local": [
+            "SkeletonAvatar"
+          ]
+        },
+        {
+          "upstream": "Skeleton.Button",
+          "local": [
+            "SkeletonButton"
+          ]
+        },
+        {
+          "upstream": "Skeleton.Input",
+          "local": [
+            "SkeletonInput"
+          ]
+        },
+        {
+          "upstream": "Skeleton.Image",
+          "local": [
+            "SkeletonImage"
+          ]
+        },
+        {
+          "upstream": "Skeleton.Node",
+          "local": [
+            "SkeletonNode"
           ]
         }
       ],
@@ -11259,28 +11289,81 @@
         "config-provider"
       ],
       "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "priority": "p2",
+      "effort": "M",
       "evidence": [
         "readme.md",
-        "tests/browser/skeleton.spec.ts"
+        "docs/reference/theme-context.md",
+        "src/lib/Skeleton.svelte",
+        "src/lib/SkeletonElement.svelte",
+        "src/lib/skeleton.types.ts",
+        "src/lib/skeleton.engine.test.ts",
+        "src/lib/skeleton.ssr.test.ts",
+        "src/lib/skeleton-element-reference.test.ts",
+        "tests/browser/skeleton.spec.ts",
+        "tests/browser/skeleton-element.spec.ts",
+        "tests/package/skeleton-element.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-skeleton-element-reference.json"
       ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Native основной Skeleton, значения, status/focus и SSR",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "src/lib/skeleton.engine.test.ts",
+            "src/lib/skeleton.ssr.test.ts",
+            "tests/browser/skeleton.spec.ts"
+          ],
+          "note": "Сохранены loading=true, destructive children replacement, stable named host, busy/status/locale, decorative layout, parked focus и recovery в dialog/document. Native finite widths/rows<=1000, title/div и flex/responsive guards сохраняются. Явный loading=undefined по-прежнему включает каркас. Основной Skeleton получает общие component tokens; его native host не выдаётся за React DOM."
         },
         {
           "id": "gap-1",
           "title": "Отдельные Skeleton primitives",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SkeletonElement.svelte",
+            "src/lib/skeleton.component.ts",
+            "tests/browser/skeleton-element.spec.ts",
+            "tests/package/skeleton-element.ssr.test.ts"
+          ],
+          "note": "Skeleton.Avatar/Button/Input/Image/Node и одинаковые named Svelte exports. Исходные Element/Node div/span/SVG, size context с локальным приоритетом и 0, aliases medium/middle/default, shapes/block, active и object root/content semantic styles. Style относится к content и идёт после styles.content; styles.root отдельный. Node поддерживает исходный internalClassName, принимает Svelte snippet и сохраняет его native/local state при theme/prefix changes. Primitives не создают controls/live status и поддерживают native reduced motion."
+        },
+        {
+          "id": "component-theme-prefix",
+          "title": "Общие Skeleton tokens и local prefix primitives",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/skeleton-prefix.engine.ts",
+            "src/lib/vendor/skeleton.css",
+            "tests/browser/fixtures/ant-design-skeleton-element-reference.json"
+          ],
+          "note": "Все восемь defaults, deprecated color/colorGradientEnd mapping, современные overrides, component aliases/algorithm, dark/compact, нули и variable prefix/key/hash. Inline variables применяются к основному Skeleton и primitives до user styles. 48 исходных CSS rules/один keyframe, CSS prefix template и marker collision. 116 source UMD-сценариев в standards mode; сравниваемая inherited typography/color задаётся исходными global design tokens."
+        },
+        {
+          "id": "main-source-api",
+          "title": "Основной Skeleton: semantic/config/prefix/ref и вложенные props",
           "state": "missing",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Не перенесены ConfigProvider.skeleton, function/object main semantic slots, local prefixCls и nativeElement/ref у основного Skeleton, rootClassName и дополнительные class/style/prefix поля вложенных title/paragraph/avatar. Primitives повторяют исходную изоляцию от component config и имеют свой local prefix."
+        },
+        {
+          "id": "native-boundaries",
+          "title": "Сохраняемые native contracts и общий ConfigProvider prefix",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "tests/browser/skeleton.spec.ts"
+          ],
+          "note": "Основной Skeleton сохраняет native wrappers/status/focus/normalization и responsive layout, включая default loading для явного undefined. Общий ConfigProvider prefix и React development warnings отсутствуют. Primitives используют named aliases и snippets Svelte, учитывают reduced motion сверх исходной реализации; componentSize наследуют только самостоятельные Avatar/Button/Input."
         }
       ]
     },

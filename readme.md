@@ -177,7 +177,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | NotificationHolder / createNotification | Подробные уведомления с title/description/actions snippets, четыре статуса, шесть положений, ключи, таймеры, hover/focus-пауза и закрытие |
 | Progress | Line/circle/dashboard, steps, gradients, success и percentPosition; component tokens, semantic/provider config, local prefix и formatter snippets; ARIA/RTL/SSR |
 | Spin | Standalone/children/fullscreen, percent/auto, component tokens, prefixCls, semantic/provider config, indicator snippets и static fallback; сохранены inert и восстановление фокуса |
-| Skeleton | Каркас первой загрузки, avatar/title/paragraph, размеры и ширины, active/round, замена children, доступный статус и фокус |
+| Skeleton | Каркас первой загрузки и Avatar/Button/Input/Image/Node; размеры, темы, active/round, semantic slots primitives, замена children, доступный статус и фокус |
 | Empty | Пустое состояние, default/simple SVG, image/description snippets, действия, локаль, темы и восстановление фокуса |
 | Result | Семь статусов, официальные иконки/SVG, заголовок, описание, действия, подробности и восстановление фокуса |
 | Steps | Управляемые этапы, статусы, snippets, нативные кнопки, horizontal/vertical, medium/small, локаль, темы и восстановление фокуса |
@@ -3570,7 +3570,7 @@ Title принимает boolean или { width }; paragraph — boolean или 
 
 Round скругляет title и строки paragraph. Active включает CSS-анимацию;
 prefers-reduced-motion отключает её динамически. Каркас наследует цвета,
-плотность и направление из ConfigProvider. Аватар сохраняет пропорцию 1:1;
+плотность и направление из ConfigProvider. Аватар основного каркаса сохраняет пропорцию 1:1;
 большие размеры и ширины ограничены доступным контейнером. Компонент не
 выполняет запросов, не создаёт таймеров и не измеряет DOM для разметки.
 SSR сразу выводит каркас или готовое содержимое согласно loading.
@@ -3598,8 +3598,37 @@ Ru/en-тексты — «Загрузка…»/«Loading…»; отсутств�
 которая отменяет ожидание при cancel/reset/unmount и защищает новую попытку
 от старого результата. При retry фокус переходит на постоянную группу карточки.
 
-В первой версии нет отдельных SkeletonAvatar/Button/Input/Image/Node,
-semantic classNames/styles, prefixCls и устаревшего size=default.
+Самостоятельные `Skeleton.Avatar`, `Skeleton.Button`, `Skeleton.Input`, `Skeleton.Image`
+и `Skeleton.Node` доступны также как SkeletonAvatar/Button/Input/Image/Node. Это одни
+и те же Svelte-компоненты. Avatar/Button/Input наследуют componentSize; локальный size
+имеет приоритет, включая 0 у Avatar. Поддержаны small/medium/middle/large/default;
+Avatar принимает числовой размер. У основного Skeleton default avatar остаётся large.
+
+Button принимает circle/square/round/default и block; Input поддерживает block.
+Это span-плейсхолдеры, которые не добавляют button/input, live status или остановку Tab.
+Image выводит исходный декоративный SVG; Node рисует пустую область либо Svelte children
+snippet и сохраняет её состояние при изменении темы/размера/prefix. Active анимирует
+placeholder; reduced motion отключает его анимацию.
+Node поддерживает исходный internalClassName: он заменяет стандартный content class.
+При reduced motion фон сохраняется, а загрузочная анимация останавливается.
+
+У primitives object classNames/styles задают root/content. Class/rootClassName относятся
+к внешнему div, styles.root применяется к нему после component variables. Style относится
+к content и имеет приоритет над styles.content и числовым размером Avatar. Локальный
+prefixCls меняет BEM-классы с fallback ant-skeleton; переменные темы сохраняют namespace.
+Primitives повторяют исходную изоляцию от ConfigProvider.skeleton: используют размер,
+тему и prefix, а component record основного Skeleton к ним не применяется.
+
+Тема Skeleton подготавливает восемь исходных tokens для основного каркаса и primitives,
+включая deprecated color/colorGradientEnd, современные overrides, aliases/algorithm и
+CSS-variable prefix/key/hash. Основной Skeleton сохраняет native host/status/focus,
+размеры и normalization. Его semantic/config/prefix/ref API, rootClassName и дополнительные
+поля вложенных avatar/title/paragraph ещё не перенесены. Общий ConfigProvider prefix и
+React development warnings также остаются следующими этапами.
+
+[116 UMD-сценариев](./tests/browser/fixtures/ant-design-skeleton-element-reference.json)
+сверяют каждый primitive с Ant Design 6.6.8 в стандартном режиме браузера, с одинаковой
+унаследованной typography/color из global design tokens.
 
 ## Empty
 
@@ -8837,10 +8866,10 @@ Theme.css связывает цвет, фон и текст с токенами 
 fullscreen и percent исключены. Spin.svelte адаптирует доступность, inert,
 перенос текста и reduced motion, spin.model.svelte.ts управляет ожиданием,
 spin.dom.ts — парковкой/возвратом фокуса. Новые иконки и лицензии не добавлены.
-[vendor/skeleton.css](./src/lib/vendor/skeleton.css) содержит 22 правила и один keyframes
-из того же архива: составной Skeleton, avatar/title/paragraph, active и round.
-Корневые селекторы ограничены :where(.ant-skeleton-css-var); отдельные элементы
-и block исключены, active ограничен тремя используемыми частями.
+[vendor/skeleton.css](./src/lib/vendor/skeleton.css) содержит 48 правил и один keyframe
+из того же архива: составной Skeleton, пять primitives, active, round и block.
+Корневые селекторы ограничены :where(.ant-skeleton-css-var). Рецепт skeleton-prefix
+выводит CSS data module для локального prefix primitives с теми же 48 правилами.
 Skeleton.svelte использует декоративный div для title, постоянную группу,
 отдельный status, адаптивный flex-layout, пропорции аватара и reduced motion.
 skeleton.engine.ts рассчитывает конфигурацию; skeleton.dom.ts сохраняет фокус

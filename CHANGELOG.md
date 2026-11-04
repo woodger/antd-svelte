@@ -9,6 +9,12 @@
 
 ### Added
 
+- Skeleton.Avatar/Button/Input/Image/Node и одинаковые named Svelte exports: исходные
+  size context/shapes/block, object root/content semantic styles, local prefix и active.
+  Общие восемь component tokens подключены также к основному Skeleton; его native
+  host/status/focus/normalization сохранены. Добавлены 48 CSS rules, 116 UMD-сценариев,
+  SSR/browser-проверки style priority, динамических обновлений и состояния Node snippet.
+
 - Progress circle/dashboard: gap placement/degree, success segments, circular steps,
   conic gradients и Tooltip маленького круга по @rc-component/progress 1.0.3.
   Сохранены native bounds/ARIA/clipping и числовые SVG attributes; CSS-геометрия,

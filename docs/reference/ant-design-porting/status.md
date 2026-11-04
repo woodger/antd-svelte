@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **109**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **114**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **53**; требуется аудит у **17**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **54**; требуется аудит у **16**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -80,7 +80,7 @@ Candidate означает запись каталога, для которой 
 | [Popconfirm](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/popconfirm) | feedback | target | Popconfirm | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Progress](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/progress) | feedback | target | Progress | Согласованный v1 покрыт | Общий prefix и React diagnostics (missing); Сохраняемые Svelte/native contracts (partial) |
 | [Result](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/result) | feedback | target | Result | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
-| [Skeleton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/skeleton) | feedback | target | Skeleton | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Отдельные Skeleton primitives (missing) |
+| [Skeleton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/skeleton) | feedback | target | Skeleton, SkeletonAvatar, SkeletonButton, SkeletonInput, SkeletonImage, SkeletonNode | Согласованный v1 покрыт | Основной Skeleton: semantic/config/prefix/ref и вложенные props (missing); Сохраняемые native contracts и общий ConfigProvider prefix (partial) |
 | [Spin](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/spin) | feedback | target | Spin | Согласованный v1 покрыт | Общий prefixCls ConfigProvider (missing); React development warnings (missing) |
 | [Watermark](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/watermark) | feedback | target | Watermark | Согласованный v1 покрыт | Полный общий theme/token engine (missing) |
 | [Affix](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/affix) | other | target | Affix | Согласованный v1 покрыт | PrefixCls и глобальный affix/getTargetContainer config (missing) |
