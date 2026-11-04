@@ -43,6 +43,7 @@
     getPopupContainer,
     getTooltipContainer,
     semanticProps,
+    ownerClassName,
     onDismiss,
     onHoverChange
   }: {
@@ -62,6 +63,7 @@
     getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
     getTooltipContainer?: (trigger: HTMLElement) => HTMLElement;
     semanticProps?: Omit<TooltipProps, 'children'>;
+    ownerClassName?: string;
     onDismiss: () => void;
     onHoverChange?: (hovered: boolean) => void;
   } = $props();
@@ -81,6 +83,8 @@
     || typeof autoAdjustOverflow === 'object');
   let destroy = $derived(destroyOnHidden ?? semanticProps?.destroyOnHidden
     ?? Boolean(destroyTooltipOnHide ?? semanticProps?.destroyTooltipOnHide));
+  let localClassNames = $derived(ownerClassName
+    ? { root: ownerClassName } : semanticProps?.classNames);
   let callbackProps = $derived.by<TooltipSemanticProps>(() => {
     const source = getTooltipPlacementConfig(arrowConfig, designTokens.state.token);
     const placements = getPopupPlacements(
@@ -94,6 +98,7 @@
     return {
       ...(semanticProps ?? { title, open, placement, arrow, color, prefixCls, openClassName,
         destroyOnHidden, destroyTooltipOnHide }),
+      ...(ownerClassName ? { classNames: localClassNames } : {}),
       trigger: semanticProps?.trigger || config.tooltip?.trigger
         || (config.tooltip ? 'hover' : ['hover', 'focus']),
       mouseEnterDelay: semanticProps?.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1,
@@ -105,7 +110,7 @@
   });
   let semantics = $derived(getOverlaySemantics(
     config.tooltip,
-    semanticProps?.classNames,
+    localClassNames,
     semanticProps?.styles,
     callbackProps,
     semanticProps?.overlayStyle

@@ -117,6 +117,8 @@ space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.c
 Рецепты listy, typography, tour и carousel воспроизводят одноимённые vendor CSS.
 Рецепт slider-range воспроизводит отдельный CSS диапазона; прежний slider.css
 одиночного control не перезаписывается.
+Рецепт slider-prefix выводит CSS data module из 54 правил для обоих режимов;
+defaults ограничены корнем, shared marker и CSS variable names сохраняются.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.

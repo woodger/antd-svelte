@@ -1166,6 +1166,32 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Slider: range handles, tracks, marks/dots и RTL.\n * Новые правила ограничены :where(.ant-slider-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "slider-prefix",
+    "output": "src/lib/vendor/slider-prefix.css.js",
+    "expectedRules": 54,
+    "include": [
+      "\\.ant-slider(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-slider(?:-css-var)?(?![-\\w])",
+        "replacement": ".ant-slider-css-var"
+      },
+      {
+        "pattern": "\\.ant-slider((?:-horizontal|-vertical|-rtl|-disabled|-lock|-with-marks)?)(?![-\\w])",
+        "replacement": ".ant-slider$1:where(.ant-slider-css-var)"
+      },
+      {
+        "pattern": "^\\.ant-slider-css-var$",
+        "replacement": ".ant-slider:where(.ant-slider-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Slider prefix template: single/range, tracks, marks/dots и RTL.\n * Defaults ограничены корнем; marker, Tooltip и CSS variable names сохраняются.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
+  },
+  {
     "id": "color-picker",
     "output": "src/lib/vendor/color-picker.css",
     "expectedRules": 94,

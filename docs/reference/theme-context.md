@@ -375,6 +375,11 @@ ConfigProvider.slider применяется к single и range; callback пол
 с разрешёнными disabled и vertical. Provider styles.root/style идут перед local
 styles.root/style, legacy rail/track/handle — перед semantic styles. Вложенный record
 заменяется целиком, undefined наследуется; обновление styles сохраняет native DOM.
+Локальный prefixCls поддержан в обоих режимах и не меняет CSS variable namespace.
+Prefix stylesheet ограничивает defaults своим root; source variables/semantic styles
+сохраняют приоритет. Slider Tooltip получает собственный owner class, в том числе
+в portal; его prefix настраивается независимо. Native presets и DOM dir продолжают
+следовать существующему ConfigProvider wrapper.
 
 Официальный UMD задаёт declarations для 14 тем и computed styles четырёх вариантов
 в покое, при наведении на rail, фокусе и disabled. Обновления сохраняют DOM,

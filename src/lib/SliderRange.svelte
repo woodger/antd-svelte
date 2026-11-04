@@ -20,6 +20,8 @@
   import { connectSliderRangeDrag, connectSliderRangeInput } from './slider-range.dom';
   import { useSliderInternal } from './slider-internal-context';
   import { sliderSemantics } from './slider-semantic.engine';
+  import { getSliderPrefixCss } from './slider-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { SliderRangeProps } from './slider-range.types';
   import TooltipPopup from './TooltipPopup.svelte';
 
@@ -49,7 +51,9 @@
   let tooltipDismissed = $state(false);
   let locked = $state(false);
   let blurCallbacks: Pick<SliderRangeProps, 'onBlur' | 'onblur'> = {};
-  let prefixCls = $derived(props.prefixCls ?? 'ant-slider');
+  let prefixCls = $derived(props.prefixCls || 'ant-slider');
+  let customPrefix = $derived(prefixCls !== 'ant-slider');
+  let prefixCss = $derived(getSliderPrefixCss(prefixCls));
   let orientation = $derived(props.orientation ?? (props.vertical ? 'vertical' : 'horizontal'));
   let direction = $derived(getSliderDirection(orientation, props.reverse ?? false,
     (internal?.direction ?? config.direction) === 'rtl'));
@@ -481,13 +485,16 @@
 </style>
 
 <svelte:document onreset={handleReset} />
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`slider-prefix:${prefixCls}`} />{/if}
 <!-- svelte-ignore a11y_no_static_element_interactions (Корень маршрутизирует исходный click/drag по дорожке.) -->
 <div bind:this={nativeElement} class={[prefixCls, 'ant-slider-css-var', componentTheme.className, 'range-root',
   `${prefixCls}-${orientation}`, (internal?.direction ?? config.direction) === 'rtl' && `${prefixCls}-rtl`,
   disabledState[0] && `${prefixCls}-disabled`, marks.length && `${prefixCls}-with-marks`,
   locked && `${prefixCls}-lock`, props.class, config.slider?.class, props.rootClassName, classNames.root]}
   style={[componentTheme.style, styles.root].filter(Boolean).join(';') || undefined}
-  data-ant-slider-source={Boolean(componentTheme.className) || undefined}
+  data-ant-slider-source={Boolean(componentTheme.className) || customPrefix || undefined}
+  data-ant-slider-prefix={customPrefix ? prefixCls : undefined}
+  data-ant-slider-native={customPrefix && !componentTheme.className || undefined}
   data-ant-slider-theme={config.theme.mode}
   data-ant-slider-primary={config.theme.primary} onpointerdown={handleRootPointer}>
   <div class={[`${prefixCls}-rail`, classNames.rail]} style={[props.railStyle, styles.rail].filter(Boolean).join(';')}></div>
@@ -549,6 +556,7 @@
     </div>
     {#if props.tooltip !== false && props.tooltip?.open}
       <TooltipPopup title={formatTooltip(point)}
+        ownerClassName={`${prefixCls}-tooltip`}
         open={!disabledState[0] && props.tooltip.formatter !== null && !draggingDelete}
         anchor={handles[index]} describe={inputs[index]} trigger={inputs[index]}
         placement={props.tooltip.placement ?? (orientation === 'vertical'
@@ -583,6 +591,7 @@
   {/if}
   {#if props.tooltip === false || !props.tooltip?.open}
     <TooltipPopup title={tooltipTitle} open={tooltipOpen} anchor={handles[tooltipIndex]}
+      ownerClassName={`${prefixCls}-tooltip`}
       describe={inputs[tooltipIndex]} trigger={inputs[tooltipIndex]}
       placement={props.tooltip === false ? 'top' : props.tooltip?.placement
         ?? (orientation === 'vertical' ? config.direction === 'rtl' ? 'left' : 'right' : 'top')}

@@ -20,6 +20,8 @@
     sliderRangePosition
   } from './slider-range.engine';
   import { sliderSemantics } from './slider-semantic.engine';
+  import { getSliderPrefixCss } from './slider-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import TooltipPopup from './TooltipPopup.svelte';
 
   interface Interaction {
@@ -62,6 +64,7 @@
     name,
     style,
     rootClassName,
+    prefixCls,
     classNames,
     styles: semanticStyles,
     handleStyle,
@@ -119,6 +122,9 @@
   let interaction: Interaction | null = null;
   let blurCallbacks: Pick<SliderSingleProps, 'onblur' | 'onBlur'> = {};
   let orientation = $derived(orientationProp ?? (vertical ? 'vertical' : 'horizontal'));
+  let prefix = $derived(prefixCls || 'ant-slider');
+  let customPrefix = $derived(prefix !== 'ant-slider');
+  let prefixCss = $derived(getSliderPrefixCss(prefix));
   let options = $derived(resolveSliderOptions({ min, max, step: step ?? undefined }));
   let markEntries = $derived(sliderRangeMarks(marks));
   let hasDecorations = $derived(markEntries.length > 0 || Boolean(dots));
@@ -461,26 +467,26 @@
 </script>
 
 <style>
-  .ant-slider { min-width: 0; }
-  .ant-slider-rail, .ant-slider-track, .ant-slider-handle { pointer-events: none; }
-  .ant-slider-horizontal .ant-slider-handle { transform: translateX(-50%); }
-  .ant-slider-vertical .ant-slider-handle { transform: translateY(-50%); }
+  [data-ant-slider-single] { min-width: 0; }
+  [data-ant-slider-part="rail"], [data-ant-slider-part="track"], [data-ant-slider-part="handle"] { pointer-events: none; }
+  [data-ant-slider-single="horizontal"] [data-ant-slider-part="handle"] { transform: translateX(-50%); }
+  [data-ant-slider-single="vertical"] [data-ant-slider-part="handle"] { transform: translateY(-50%); }
   .slider-input { position: absolute; margin: 0; padding: 0; border: 0; opacity: 0; cursor: inherit; appearance: none; touch-action: none; }
-  .ant-slider-horizontal .slider-input { left: calc(var(--ant-slider-handle-size) / -2); top: calc((var(--ant-slider-rail-size) * 3 - 32px) / 2); width: calc(100% + var(--ant-slider-handle-size)); height: 32px; }
-  .ant-slider-vertical .slider-input { top: calc(var(--ant-slider-handle-size) / -2); left: calc((var(--ant-slider-rail-size) * 3 - 32px) / 2); height: calc(100% + var(--ant-slider-handle-size)); width: 32px; writing-mode: vertical-lr; }
+  [data-ant-slider-single="horizontal"] .slider-input { left: calc(var(--ant-slider-handle-size) / -2); top: calc((var(--ant-slider-rail-size) * 3 - 32px) / 2); width: calc(100% + var(--ant-slider-handle-size)); height: 32px; }
+  [data-ant-slider-single="vertical"] .slider-input { top: calc(var(--ant-slider-handle-size) / -2); left: calc((var(--ant-slider-rail-size) * 3 - 32px) / 2); height: calc(100% + var(--ant-slider-handle-size)); width: 32px; writing-mode: vertical-lr; }
   .slider-input::-webkit-slider-thumb { appearance: none; width: var(--ant-slider-handle-size); height: var(--ant-slider-handle-size); }
   .slider-input::-moz-range-thumb { width: var(--ant-slider-handle-size); height: var(--ant-slider-handle-size); border: 0; }
   .slider-mark { border: 0; padding: 0; background: transparent; font: inherit; line-height: inherit; }
   .slider-mark:not(:disabled) { cursor: pointer; }
-  .ant-slider:has(.slider-input:focus-visible) .ant-slider-handle::after { outline: 6px solid var(--ant-slider-handle-active-outline-color); box-shadow: 0 0 0 var(--ant-slider-handle-line-width-hover) var(--ant-slider-handle-active-color); }
+  [data-ant-slider-single]:has(.slider-input:focus-visible) [data-ant-slider-part="handle"]::after { outline: 6px solid var(--ant-slider-handle-active-outline-color); box-shadow: 0 0 0 var(--ant-slider-handle-line-width-hover) var(--ant-slider-handle-active-color); }
   /* В source фокусируется div handle, в native adapter — input. */
-  .ant-slider.ant-slider-css-var:has(.slider-input:focus) .ant-slider-handle::before {
+  [data-ant-slider-single].ant-slider-css-var:has(.slider-input:focus) [data-ant-slider-part="handle"]::before {
     inset-inline-start: calc(((var(--ant-slider-handle-size-hover) - var(--ant-slider-handle-size)) / 2 + var(--ant-slider-handle-line-width-hover)) * -1);
     inset-block-start: calc(((var(--ant-slider-handle-size-hover) - var(--ant-slider-handle-size)) / 2 + var(--ant-slider-handle-line-width-hover)) * -1);
     width: calc(var(--ant-slider-handle-size-hover) + var(--ant-slider-handle-line-width-hover) * 2);
     height: calc(var(--ant-slider-handle-size-hover) + var(--ant-slider-handle-line-width-hover) * 2);
   }
-  .ant-slider.ant-slider-css-var:has(.slider-input:focus) .ant-slider-handle::after {
+  [data-ant-slider-single].ant-slider-css-var:has(.slider-input:focus) [data-ant-slider-part="handle"]::after {
     width: var(--ant-slider-handle-size-hover);
     height: var(--ant-slider-handle-size-hover);
     inset-inline-start: calc((var(--ant-slider-handle-size) - var(--ant-slider-handle-size-hover)) / 2);
@@ -489,51 +495,58 @@
     outline: 6px solid var(--ant-slider-handle-active-outline-color);
   }
   @media (prefers-reduced-motion: reduce) {
-    .ant-slider-rail, .ant-slider-track, .ant-slider-handle::before, .ant-slider-handle::after { transition: none; }
+    [data-ant-slider-single] [data-ant-slider-part="rail"], [data-ant-slider-single] [data-ant-slider-part="track"], [data-ant-slider-single] [data-ant-slider-part="handle"]::before, [data-ant-slider-single] [data-ant-slider-part="handle"]::after { transition: none; }
   }
 </style>
 
 <svelte:document onreset={handleReset} />
 <svelte:window onpointerup={handlePointerup} onpointercancel={handlePointercancel} />
 
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`slider-prefix:${prefix}`} />{/if}
 <div bind:this={nativeElement} class={[
-    'ant-slider',
-    (componentTheme.className || hasDecorations) && 'ant-slider-css-var',
+    prefix,
+    (componentTheme.className || hasDecorations || customPrefix) && 'ant-slider-css-var',
     componentTheme.className,
-    `ant-slider-${orientation}`,
-    resolvedDisabled && 'ant-slider-disabled',
-    markEntries.length && 'ant-slider-with-marks',
-    dragging && 'ant-slider-lock',
-    config.direction === 'rtl' && 'ant-slider-rtl',
+    `${prefix}-${orientation}`,
+    resolvedDisabled && `${prefix}-disabled`,
+    markEntries.length && `${prefix}-with-marks`,
+    dragging && `${prefix}-lock`,
+    config.direction === 'rtl' && `${prefix}-rtl`,
     className, config.slider?.class, rootClassName, classes.root
   ]} style={[componentTheme.style, styles.root].filter(Boolean).join(';') || undefined}
-  data-ant-slider-theme={hasDecorations && !componentTheme.className ? config.theme.mode : undefined}
-  data-ant-slider-primary={hasDecorations && !componentTheme.className ? config.theme.primary : undefined}>
-  <div class={['ant-slider-rail', classes.rail]} aria-hidden="true"
+  data-ant-slider-single={orientation}
+  data-ant-slider-prefix={customPrefix ? prefix : undefined}
+  data-ant-slider-native={customPrefix && !componentTheme.className || undefined}
+  data-ant-slider-theme={(hasDecorations || customPrefix) && !componentTheme.className
+    ? config.theme.mode : undefined}
+  data-ant-slider-primary={(hasDecorations || customPrefix) && !componentTheme.className
+    ? config.theme.primary : undefined}>
+  <div class={[`${prefix}-rail`, classes.rail]} data-ant-slider-part="rail" aria-hidden="true"
     style={[railStyle, styles.rail].filter(Boolean).join(';') || undefined}></div>
   {#if included && track !== false}
     {#if classes.tracks || styles.tracks}
-      <div class={['ant-slider-tracks', classes.tracks]} aria-hidden="true"
+      <div class={[`${prefix}-tracks`, classes.tracks]} aria-hidden="true"
         style={[orientation === 'horizontal'
           ? `left:${trackStart}%;width:${percentage}%`
           : `top:${trackStart}%;height:${percentage}%`, styles.tracks].filter(Boolean).join(';')}></div>
     {/if}
-    <div class={['ant-slider-track', 'ant-slider-track-1', classes.track]} aria-hidden="true" style={[
+    <div class={[`${prefix}-track`, `${prefix}-track-1`, classes.track]} data-ant-slider-part="track"
+      aria-hidden="true" style={[
       orientation === 'horizontal'
       ? `left:${trackStart}%;width:${percentage}%`
       : `top:${trackStart}%;height:${percentage}%`, indexed(trackStyle), styles.track
     ].filter(Boolean).join(';')}></div>
   {/if}
   {#if stepDots.length}
-    <div class="ant-slider-step" aria-hidden="true">
+    <div class={`${prefix}-step`} aria-hidden="true">
       {#each stepDots as point}
-        <span class={['ant-slider-dot', isIncluded(point) && 'ant-slider-dot-active']}
+        <span class={[`${prefix}-dot`, isIncluded(point) && `${prefix}-dot-active`]}
           style={decorationStyle(point)}></span>
       {/each}
     </div>
   {/if}
-  <div bind:this={handle} class={['ant-slider-handle', 'ant-slider-handle-1', resolvedDisabled
-      && 'ant-slider-handle-disabled', classes.handle]} aria-hidden="true" style={[
+  <div bind:this={handle} class={[`${prefix}-handle`, `${prefix}-handle-1`,
+      resolvedDisabled && `${prefix}-handle-disabled`, classes.handle]} data-ant-slider-part="handle" aria-hidden="true" style={[
         orientation === 'horizontal'
           ? `left:${position}%`
           : `top:${position}%`, indexed(handleStyle), styles.handle
@@ -585,10 +598,10 @@
     onblur={handleBlur}
   />
   {#if markEntries.length}
-    <div class="ant-slider-mark">
+    <div class={`${prefix}-mark`}>
       {#each markEntries as mark}
-        <button type="button" class={['ant-slider-mark-text', 'slider-mark',
-          isIncluded(mark.value) && 'ant-slider-mark-text-active']}
+        <button type="button" class={[`${prefix}-mark-text`, 'slider-mark',
+          isIncluded(mark.value) && `${prefix}-mark-text-active`]}
           aria-label={typeof mark.label === 'boolean' ? String(mark.value) : undefined}
           style={`${sliderRangePosition(direction, mark.value, options.min, options.max)};${mark.style ?? ''}`}
           disabled={resolvedDisabled} onpointerdown={event => event.preventDefault()}
@@ -599,6 +612,7 @@
     </div>
   {/if}
   <TooltipPopup title={resolvedDisabled ? '' : tooltipTitle} open={tooltipOpen} anchor={handle} describe={control} trigger={control} placement={tooltipPlacement} arrow={tooltip === false ? false : tooltip?.arrow}
+    ownerClassName={`${prefix}-tooltip`}
     color={tooltip === false ? undefined : tooltip?.color}
     prefixCls={tooltip === false ? undefined : tooltip?.prefixCls}
     openClassName={tooltip === false ? undefined : tooltip?.openClassName}

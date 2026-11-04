@@ -9,6 +9,11 @@
 
 ### Added
 
+- Slider: локальный prefixCls для single/range и всех BEM-потомков; пустой prefix
+  возвращает ant-slider. Подсказки получают исходный owner class независимо от
+  собственного Tooltip prefix. Извлечены 54 CSS rules и добавлены 37 UMD-сценариев,
+  SSR/browser-проверки prefix updates, portals, scope isolation и reduced motion.
+  Native inputs/refs/FormData, фокус, palette presets и disabled Tooltip policy сохранены.
 - Scalar Slider: marks/dots, step=null, included/track, общий с range semantic config,
   deprecated styles/vertical, handle ARIA/disabled arrays, autoFocus и числовой onChange
   перед bind update. Сохранены native numeric grid без marks, forms/reset, focus и

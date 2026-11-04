@@ -1529,8 +1529,27 @@ native popover и описание input. Контейнер выбираетс�
 tooltip.getPopupContainer → ConfigProvider.getPopupContainer → legacy
 tooltip.getTooltipContainer. Корневого getPopupContainer у Slider нет.
 Полный SliderTooltipProps и исходное управление focus-open остаются частично
-перенесёнными. Полный scalar lifecycle/callback API и произвольный prefixCls CSS
+перенесёнными. Полный scalar lifecycle/callback API
 ещё не закрыты; сохранены описанные выше native numeric/form/event contracts.
+
+Локальный `prefixCls` меняет BEM-классы обоих режимов, tracks, marks/dots и handles.
+Пустой prefix, как и undefined, выбирает `ant-slider`. Для собственного prefix
+stylesheet из 54 исходных правил добавляется уже при SSR; defaults ограничены
+владельцем и не меняют соседние Slider. CSS variables сохраняют пространство
+Slider, а `theme.cssVar.prefix` настраивает их независимо от BEM-классов.
+Смена prefix сохраняет DOM, refs, значения, фокус и callbacks.
+
+Все подсказки получают исходный classNames.root `${prefix}-tooltip` с разрешённым prefix, включая
+active и pinned range. Собственный `tooltip.prefixCls` остаётся независимым;
+при стандартном Tooltip prefix применяется исходный reset min-width контейнера.
+Native disabled по-прежнему скрывает подсказки даже при open=true; upstream в этом
+случае оставляет принудительно открытую подсказку. При сверке RTL учитывается
+унаследованный DOM dir, который задаёт Svelte ConfigProvider.
+
+Prefix: [SSR](./tests/package/slider-prefix.ssr.test.ts),
+[browser](./tests/browser/slider-prefix.spec.ts),
+[эталон UMD](./tests/browser/fixtures/ant-design-slider-prefix-reference.json),
+маршрут `?fixture=slider-prefix`.
 
 Scalar source API: [SSR](./tests/package/slider-scalar.ssr.test.ts),
 [browser](./tests/browser/slider-scalar.spec.ts),
@@ -8561,7 +8580,12 @@ Switch вместе с правилами reduced motion.
 InputNumber outlined находится в [vendor/input-number.css](./src/lib/vendor/input-number.css),
 адаптация тем и reduced motion — в theme.css и InputNumber.svelte.
 [vendor/slider.css](./src/lib/vendor/slider.css) содержит Slider с одним бегунком из
-того же архива; нативный control и reduced motion адаптированы в Slider.svelte.
+того же архива; нативный control и reduced motion адаптированы в
+[SliderSingle.svelte](./src/lib/SliderSingle.svelte).
+[vendor/slider-prefix.css.js](./src/lib/vendor/slider-prefix.css.js) воспроизводится
+рецептом slider-prefix из 54 правил того же архива. Runtime заменяет componentCls
+и descendant resets; marker и CSS variable names сохраняются. Defaults ограничены
+корнем, а native aliases восстанавливаются отдельным bridge после template.
 [vendor/tooltip.css](./src/lib/vendor/tooltip.css) содержит базовые Tooltip и стрелку
 из того же архива. Native popover, позиционирование и reduced motion реализованы
 в TooltipPopup.svelte и popup.dom.ts; тёмная тема адаптирована в theme.css.
