@@ -338,6 +338,7 @@ export type {
 export type { FlexProps, FlexAlign, FlexJustify, FlexGap } from './flex.types';
 export type {
   DividerProps,
+  DividerConfig,
   DividerOrientation,
   DividerTitlePlacement,
   DividerSize,

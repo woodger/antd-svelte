@@ -750,7 +750,21 @@
         "tests/browser/fixtures/DividerThemeFixtures.svelte",
         "tests/browser/divider-theme-metrics.ts",
         "tests/browser/divider-theme.spec.ts",
-        "tests/package/divider-theme.ssr.test.ts"
+        "tests/package/divider-theme.ssr.test.ts",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/divider-prefix.engine.ts",
+        "src/lib/divider-prefix.engine.test.ts",
+        "src/lib/vendor/divider-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/ant-design-divider-config-reference.json",
+        "tests/browser/fixtures/divider-config-cases.ts",
+        "tests/browser/fixtures/DividerConfigCase.svelte",
+        "tests/browser/fixtures/DividerConfigFixtures.svelte",
+        "tests/browser/divider-config-metrics.ts",
+        "tests/browser/divider-config.spec.ts",
+        "tests/package/divider-config.ssr.test.ts",
+        "tests/package/DividerConfigTypes.svelte"
       ],
       "features": [
         {
@@ -788,11 +802,28 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls и глобальный Divider component config",
-          "state": "missing",
+          "title": "Локальный prefixCls и ConfigProvider.divider",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "ConfigProvider.divider class/style/semantic slots и произвольный prefixCls ещё не подключены; component theme tokens поддержаны отдельным feature."
+          "evidence": [
+            "src/lib/Divider.svelte",
+            "src/lib/divider.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/divider-prefix.engine.ts",
+            "src/lib/divider-prefix.engine.test.ts",
+            "src/lib/vendor/divider-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-divider-config-reference.json",
+            "tests/browser/fixtures/divider-config-cases.ts",
+            "tests/browser/fixtures/DividerConfigCase.svelte",
+            "tests/browser/fixtures/DividerConfigFixtures.svelte",
+            "tests/browser/divider-config-metrics.ts",
+            "tests/browser/divider-config.spec.ts",
+            "tests/package/divider-config.ssr.test.ts",
+            "tests/package/DividerConfigTypes.svelte"
+          ],
+          "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка выбирает ant-divider. CSS data module из 33 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 28 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider и React development warnings остаются отдельным пробелом."
         },
         {
           "id": "component-theme-tokens",
@@ -812,7 +843,18 @@
             "tests/browser/divider-theme.spec.ts",
             "tests/package/divider-theme.ssr.test.ts"
           ],
-          "note": "TextPaddingInline, orientationMargin и verticalMarginInline подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. OrientationMargin — безразмерная доля rail, deprecated prop сохраняет собственный отступ подписи. Source component aliases/algorithms, key/hash, custom CSS-variable prefix, нули, CSS units и явный undefined сверяются с 15 официальными UMD-темами и computed styles 11 вариантов. Reactive updates сохраняют DOM и фокус соседнего input; nested/sibling scopes, inherit=false, удаление темы и unmount изолированы. Native separator, default spacing и explicit componentSize сохранены; prefixCls и ConfigProvider.divider остаются в работе."
+          "note": "TextPaddingInline, orientationMargin и verticalMarginInline подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. OrientationMargin — безразмерная доля rail, deprecated prop сохраняет собственный отступ подписи. Source component aliases/algorithms, key/hash, custom CSS-variable prefix, нули, CSS units и явный undefined сверяются с 15 официальными UMD-темами и computed styles 11 вариантов. Reactive updates сохраняют DOM и фокус соседнего input; nested/sibling scopes, inherit=false, удаление темы и unmount изолированы. Native separator, default spacing и explicit componentSize сохранены; локальный prefixCls и ConfigProvider.divider поддержаны отдельным feature."
+        },
+        {
+          "id": "source-extras",
+          "title": "Общий ConfigProvider prefix и React development diagnostics",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Divider.svelte",
+            "src/lib/ConfigProvider.svelte"
+          ],
+          "note": "Локальный prefixCls поддержан; общий getPrefixCls/rootPrefixCls и React-only warnings для legacy props/vertical children ещё не перенесены. Согласованные nativeElement/ARIA/snippet и semantic default normalization contracts сохранены."
         }
       ]
     },
@@ -12188,7 +12230,32 @@
             "tests/browser/divider-theme.spec.ts",
             "tests/package/divider-theme.ssr.test.ts"
           ],
-          "note": "TextPaddingInline, orientationMargin и verticalMarginInline подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. OrientationMargin — безразмерная доля rail, deprecated prop сохраняет собственный отступ подписи. Source component aliases/algorithms, key/hash, custom CSS-variable prefix, нули, CSS units и явный undefined сверяются с 15 официальными UMD-темами и computed styles 11 вариантов. Reactive updates сохраняют DOM и фокус соседнего input; nested/sibling scopes, inherit=false, удаление темы и unmount изолированы. Native separator, default spacing и explicit componentSize сохранены; prefixCls и ConfigProvider.divider остаются в работе."
+          "note": "TextPaddingInline, orientationMargin и verticalMarginInline подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. OrientationMargin — безразмерная доля rail, deprecated prop сохраняет собственный отступ подписи. Source component aliases/algorithms, key/hash, custom CSS-variable prefix, нули, CSS units и явный undefined сверяются с 15 официальными UMD-темами и computed styles 11 вариантов. Reactive updates сохраняют DOM и фокус соседнего input; nested/sibling scopes, inherit=false, удаление темы и unmount изолированы. Native separator, default spacing и explicit componentSize сохранены; локальный prefixCls и ConfigProvider.divider поддержаны отдельным feature."
+        },
+        {
+          "id": "divider-component-config",
+          "title": "Локальный prefixCls и ConfigProvider.divider",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Divider.svelte",
+            "src/lib/divider.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/divider-prefix.engine.ts",
+            "src/lib/divider-prefix.engine.test.ts",
+            "src/lib/vendor/divider-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-divider-config-reference.json",
+            "tests/browser/fixtures/divider-config-cases.ts",
+            "tests/browser/fixtures/DividerConfigCase.svelte",
+            "tests/browser/fixtures/DividerConfigFixtures.svelte",
+            "tests/browser/divider-config-metrics.ts",
+            "tests/browser/divider-config.spec.ts",
+            "tests/package/divider-config.ssr.test.ts",
+            "tests/package/DividerConfigTypes.svelte"
+          ],
+          "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка выбирает ant-divider. CSS data module из 33 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 28 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider и React development warnings остаются отдельным пробелом."
         }
       ]
     },

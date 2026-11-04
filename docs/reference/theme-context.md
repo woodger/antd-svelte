@@ -371,8 +371,17 @@ vendor defaults. Официальный UMD задаёт declarations для 15 
 11 вариантов, включая plain, vertical, размеры, dashed/dotted и legacy margin.
 RTL, reactive updates, inherit=false, соседние scopes, удаление темы и unmount
 проверяются через [browser](../../tests/browser/divider-theme.spec.ts) и
-[SSR](../../tests/package/divider-theme.ssr.test.ts). PrefixCls и ConfigProvider.divider
-остаются отдельными задачами.
+[SSR](../../tests/package/divider-theme.ssr.test.ts).
+
+Локальный prefixCls меняет BEM-классы независимо от CSS-variable prefix; stylesheet
+из 33 правил ограничивает defaults своим корнем и не меняет соседние controls.
+ConfigProvider.divider наследуется как record: undefined сохраняет родителя,
+явный объект заменяет его целиком. Object/function classNames/styles объединяются
+provider → local; provider style идёт после provider styles.root, local style — последним.
+Прежние нормализованные semantic props сохранены; callback может вернуть undefined.
+SSR, 28 официальных UMD-сценариев и живые updates проверяются через
+[prefix/config tests](../../tests/browser/divider-config.spec.ts).
+Общий prefix ConfigProvider и React development warnings остаются в работе.
 
 ## Токены Slider
 

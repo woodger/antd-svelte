@@ -26,6 +26,7 @@
   import type { TourConfig } from './tour.types';
   import type { CarouselConfig } from './carousel.types';
   import type { SliderConfig } from './slider-range.types';
+  import type { DividerConfig } from './divider.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
@@ -77,6 +78,7 @@
     tour?: TourConfig;
     carousel?: CarouselConfig;
     slider?: SliderConfig;
+    divider?: DividerConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
@@ -142,6 +144,7 @@
     tour,
     carousel,
     slider,
+    divider,
     colorPicker,
     inputNumber,
     radio,
@@ -248,6 +251,9 @@
     },
     get slider() {
       return slider ?? parent.slider;
+    },
+    get divider() {
+      return divider ?? parent.divider;
     },
     get colorPicker() {
       return colorPicker ?? parent.colorPicker;

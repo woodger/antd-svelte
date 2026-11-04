@@ -328,9 +328,29 @@ orientationMargin и verticalMarginInline, локальные alias-токены
 Проверки: [SSR](./tests/package/divider-theme.ssr.test.ts),
 [browser](./tests/browser/divider-theme.spec.ts),
 [эталон UMD](./tests/browser/fixtures/ant-design-divider-theme-reference.json),
-фикстура `?fixture=divider-theme`. PrefixCls и ConfigProvider.divider пока не поддержаны.
+фикстура `?fixture=divider-theme`.
+
+Локальный prefixCls меняет BEM-классы корня, вариантов и потомков; пустой prefix
+использует ant-divider. CSS variables и общий marker сохраняют прежние имена.
+Собственный stylesheet из 33 правил добавляется при SSR и очищается при unmount.
+Defaults ограничены владельцем, включая prefix, совпадающий с общим marker.
+
+ConfigProvider.divider задаёт class/style и object/function classNames/styles.
+Undefined наследует родительский record; явный объект, включая {}, заменяет его
+целиком. Приоритет root styles: provider styles.root → provider style → local
+styles.root → local style. Без подписи merged styles.rail идёт перед local style.
+Callbacks получают прежние нормализованные props и могут вернуть undefined.
+Prefix/config updates сохраняют nativeElement, DOM, фокус и состояние соседних полей;
+строчный vertical Divider не добавляет пробелы. Проверки:
+[SSR](./tests/package/divider-config.ssr.test.ts),
+[browser](./tests/browser/divider-config.spec.ts),
+[эталон UMD](./tests/browser/fixtures/ant-design-divider-config-reference.json),
+фикстура `?fixture=divider-config`. Общий prefix ConfigProvider и React development
+warnings ещё не перенесены.
+
 Vendor/divider.css содержит 33 правила из закреплённого архива; рецепт divider
 исключает интеграцию ColorPicker и воспроизводится через `npm run cli -- css`.
+Рецепт divider-prefix выводит CSS data module для локального prefix из тех же правил.
 
 ## Flex
 

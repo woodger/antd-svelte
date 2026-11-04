@@ -18,6 +18,8 @@ export interface DividerProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style'
 > {
+  /** Локальный BEM prefix; пустая строка использует ant-divider. */
+  prefixCls?: string;
   children?: Snippet | string | number | null | false;
   orientation?: DividerOrientation | DividerTitlePlacement;
   vertical?: boolean;
@@ -36,8 +38,17 @@ export interface DividerProps extends Omit<
   class?: string;
   rootClassName?: string;
   style?: string;
-  classNames?: DividerSemanticSlots | ((info: DividerSemanticInfo) => DividerSemanticSlots);
-  styles?: DividerSemanticSlots | ((info: DividerSemanticInfo) => DividerSemanticSlots);
+  classNames?: DividerSemanticSlots
+    | ((info: DividerSemanticInfo) => DividerSemanticSlots | undefined);
+  styles?: DividerSemanticSlots
+    | ((info: DividerSemanticInfo) => DividerSemanticSlots | undefined);
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
 }
+
+/**
+ * Наследуемый record; явный объект, включая {}, заменяет родительский.
+ * Root style: provider styles.root → provider style → local styles.root → local style.
+ * Callbacks получают те же нормализованные props, что локальные semantic callbacks.
+ */
+export type DividerConfig = Pick<DividerProps, 'class' | 'style' | 'classNames' | 'styles'>;

@@ -5,6 +5,14 @@ import Divider from './Divider.svelte';
 import type { DividerProps } from './divider.types';
 
 describe('Divider server rendering', () => {
+  it('keeps existing default normalization in semantic callbacks', () => {
+    const { body } = render(Divider, { props: {
+      classNames: ({ props }) => ({ root: `defaults-${props.variant}-${props.plain}-${props.dashed}` })
+    } });
+
+    expect(body).toContain('defaults-solid-false-false');
+  });
+
   it('keeps the upstream default spacing without an explicit size', () => {
     const body = render(Divider, {
       props: {

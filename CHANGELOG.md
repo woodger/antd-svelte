@@ -9,6 +9,10 @@
 
 ### Added
 
+- Divider: локальный prefixCls и ConfigProvider.divider с class/style и
+  object/function semantic slots. Сохранены приоритет стилей, nativeElement,
+  нормализованные callbacks и inline spacing; вложенный record заменяется целиком.
+  Извлечён CSS prefix template из 33 правил; добавлены 28 официальных UMD-сценариев.
 - Divider: textPaddingInline, orientationMargin и verticalMarginInline из
   ConfigProvider.theme.components.Divider, включая component aliases/algorithm,
   CSS-variable prefix и SSR. Сохранены native separator, размеры, default spacing
