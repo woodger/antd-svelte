@@ -13,6 +13,13 @@
     type SliderDirection,
     type SliderOptions
   } from './slider.engine';
+  import {
+    createSliderRangeOffset,
+    sliderRangeKey,
+    sliderRangeMarks,
+    sliderRangePosition
+  } from './slider-range.engine';
+  import { sliderSemantics } from './slider-semantic.engine';
   import TooltipPopup from './TooltipPopup.svelte';
 
   interface Interaction {
@@ -22,6 +29,7 @@
     expectedValue: number | undefined;
     options: SliderOptions;
     direction: SliderDirection;
+    alignment: string | undefined;
     resetKey?: object;
     changed: boolean;
     canceled: boolean;
@@ -31,11 +39,21 @@
     value = $bindable<number | undefined>(),
     ref = $bindable(),
     nativeElement = $bindable(),
+    ...props
+  }: SliderSingleProps = $props();
+  let {
     defaultValue = 0,
+    range,
     min,
     max,
     step,
-    orientation = 'horizontal',
+    marks,
+    dots,
+    included = true,
+    track,
+    orientation: orientationProp,
+    vertical,
+    autoFocus,
     reverse = false,
     keyboard = true,
     tooltip,
@@ -43,6 +61,20 @@
     id,
     name,
     style,
+    rootClassName,
+    classNames,
+    styles: semanticStyles,
+    handleStyle,
+    trackStyle,
+    railStyle,
+    dotStyle,
+    activeDotStyle,
+    tabIndex,
+    ariaLabelForHandle,
+    ariaLabelledByForHandle,
+    ariaRequired,
+    ariaValueTextFormatterForHandle,
+    onChange,
     onValueChange,
     onChangeComplete,
     oninput,
@@ -55,9 +87,12 @@
     onlostpointercapture,
     onfocus,
     onblur,
+    onFocus,
+    onBlur,
     class: className = '',
     ...attributes
-  }: SliderSingleProps = $props();
+  } = $derived(props);
+  const initialAutoFocus = untrack(() => autoFocus ?? props.autofocus);
 
   onMount(() => {
     ref = {
@@ -65,6 +100,7 @@
       focus: () => control?.focus(),
       blur: () => control?.blur()
     };
+    if (initialAutoFocus) control?.focus();
     return () => { ref = undefined; };
   });
 
@@ -81,20 +117,50 @@
   let tooltipFocused = $state(false);
   let popupHovered = $state(false);
   let interaction: Interaction | null = null;
-  let blurCallback: SliderSingleProps['onblur'];
-  let options = $derived(resolveSliderOptions({ min, max, step }));
+  let blurCallbacks: Pick<SliderSingleProps, 'onblur' | 'onBlur'> = {};
+  let orientation = $derived(orientationProp ?? (vertical ? 'vertical' : 'horizontal'));
+  let options = $derived(resolveSliderOptions({ min, max, step: step ?? undefined }));
+  let markEntries = $derived(sliderRangeMarks(marks));
+  let hasDecorations = $derived(markEntries.length > 0 || Boolean(dots));
+  let sourceAlignment = $derived(marks !== undefined || step === null);
+  let alignment = $derived(sourceAlignment
+    ? `${step === null ? 'null' : options.step}:${markEntries.map(mark => mark.value).join(',')}`
+    : undefined);
+  let offset = $derived(createSliderRangeOffset({
+    ...options,
+    step: step === null ? null : options.step,
+    marks: markEntries,
+    allowCross: true,
+    pushable: false,
+    disabled: false
+  }));
   let resolvedValue = $derived(
-    normalizeSliderValue(value === undefined ? initialDefault : value, options)
+    formatValue(value === undefined ? initialDefault : value)
   );
-  let resolvedDisabled = $derived(
+  let mergedDisabled = $derived(
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
+  let resolvedDisabled = $derived(typeof mergedDisabled === 'boolean'
+    ? mergedDisabled : mergedDisabled[0] ?? false);
+  let semantics = $derived(sliderSemantics<SliderSingleProps>({
+    ...props, value, disabled: mergedDisabled, vertical: orientation === 'vertical'
+  }, config.slider, classNames, semanticStyles));
+  let classes = $derived(semantics.classNames);
+  let styles = $derived(semantics.styles);
+  let stepDots = $derived.by(() => {
+    const result = new Set(markEntries.map(mark => mark.value));
+    if (dots && step !== null) {
+      for (let point = options.min; point <= options.max; point += options.step) result.add(point);
+    }
+    return [...result];
+  });
   let direction = $derived(getSliderDirection(orientation, reverse, config.direction === 'rtl'));
   let percentage = $derived(getSliderRatio(resolvedValue, options) * 100);
   let position = $derived(direction === 'rtl' || direction === 'btt'
     ? 100 - percentage
     : percentage);
   let trackStart = $derived(direction === 'rtl' || direction === 'btt' ? 100 - percentage : 0);
+  let labelledBy = $derived(indexed(ariaLabelledByForHandle) ?? attributes['aria-labelledby']);
   let configuredTooltipOpen = $derived(tooltip === false ? false : tooltip?.open);
   let tooltipState = $derived(
     { ownerOpen: configuredTooltipOpen, disabled: resolvedDisabled, dismissed: false }
@@ -129,6 +195,7 @@
       value,
       options,
       direction,
+      alignment,
       disabled: resolvedDisabled,
       keyboard,
       resetKey: form?.resetKey
@@ -141,6 +208,7 @@
       && active.options.min === current.options.min
       && active.options.max === current.options.max
       && active.options.step === current.options.step
+      && active.alignment === current.alignment
       && active.direction === current.direction && active.resetKey === current.resetKey
       && (active.kind !== 'key' || current.keyboard);
   }
@@ -153,7 +221,7 @@
     if (!input) return;
 
     // Нативный reset хранит defaults отдельно от текущего value; смена владельца отменяет захват.
-    input.defaultValue = String(normalizeSliderValue(initialDefault, current.options));
+    input.defaultValue = String(formatValue(initialDefault));
     input.value = String(next);
 
     if (interaction && !interaction.canceled && !isCurrent(interaction, current))
@@ -175,6 +243,7 @@
       expectedValue: value,
       options,
       direction,
+      alignment,
       resetKey: form?.resetKey,
       changed: false,
       canceled: false
@@ -217,6 +286,7 @@
       interaction.changed = true;
       interaction.expectedValue = next;
     }
+    onChange?.(next);
     value = next;
     onValueChange?.(next);
   }
@@ -229,7 +299,7 @@
 
     if (!interaction)
       begin('native');
-    publish(normalizeSliderValue(event.currentTarget.valueAsNumber, options));
+    publish(formatValue(event.currentTarget.valueAsNumber));
     event.currentTarget.value = String(resolvedValue);
     oninput?.(event);
   }
@@ -299,7 +369,10 @@
 
     if (event.defaultPrevented || event.isComposing || resolvedDisabled) return;
 
-    const next = getSliderKeyValue(event.key, resolvedValue, options, direction);
+    const change = sliderRangeKey(event.key, direction);
+    const next = sourceAlignment && change !== undefined
+      ? offset.offset([resolvedValue], change, 0).value
+      : getSliderKeyValue(event.key, resolvedValue, options, direction);
 
     if (next === undefined) return;
 
@@ -323,6 +396,7 @@
   function handleFocus(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
     tooltipFocused = true;
     tooltipState = { ...tooltipState, dismissed: false };
+    onFocus?.(event);
     onfocus?.(event);
   }
 
@@ -330,12 +404,13 @@
     tooltipFocused = false;
     cancelInteraction(true);
     field?.onBlur();
-    blurCallback?.(event);
+    blurCallbacks.onBlur?.(event);
+    blurCallbacks.onblur?.(event);
   }
 
   $effect.pre(() => {
     // Blur от remove() не должен читать уже уничтоженные spread props родителя.
-    blurCallback = onblur;
+    blurCallbacks = { onblur, onBlur };
   });
 
   function handleReset(event: Event) {
@@ -350,9 +425,38 @@
 
       if (event.defaultPrevented || !input.isConnected || input !== control) return;
 
-      value = normalizeSliderValue(input.valueAsNumber, options);
+      value = formatValue(input.valueAsNumber);
     }, 0);
     resets.add(reset);
+  }
+
+  function indexed<T>(entry: T | readonly T[] | undefined): T | undefined {
+    return Array.isArray(entry) ? entry[0] : entry as T | undefined;
+  }
+
+  function formatValue(next: number | undefined) {
+    if (!sourceAlignment) return normalizeSliderValue(next, options);
+    return offset.format(typeof next === 'number' && Number.isFinite(next) ? next : options.min);
+  }
+
+  function isIncluded(point: number) {
+    return included && options.min <= point && point <= resolvedValue;
+  }
+
+  function decorationStyle(point: number) {
+    return [
+      sliderRangePosition(direction, point, options.min, options.max),
+      typeof dotStyle === 'function' ? dotStyle(point) : dotStyle,
+      isIncluded(point) && (typeof activeDotStyle === 'function'
+        ? activeDotStyle(point) : activeDotStyle)
+    ].filter(Boolean).join(';');
+  }
+
+  function handleMark(point: number) {
+    if (resolvedDisabled) return;
+    begin('native');
+    publish(formatValue(point));
+    finish();
   }
 </script>
 
@@ -366,6 +470,8 @@
   .ant-slider-vertical .slider-input { top: calc(var(--ant-slider-handle-size) / -2); left: calc((var(--ant-slider-rail-size) * 3 - 32px) / 2); height: calc(100% + var(--ant-slider-handle-size)); width: 32px; writing-mode: vertical-lr; }
   .slider-input::-webkit-slider-thumb { appearance: none; width: var(--ant-slider-handle-size); height: var(--ant-slider-handle-size); }
   .slider-input::-moz-range-thumb { width: var(--ant-slider-handle-size); height: var(--ant-slider-handle-size); border: 0; }
+  .slider-mark { border: 0; padding: 0; background: transparent; font: inherit; line-height: inherit; }
+  .slider-mark:not(:disabled) { cursor: pointer; }
   .ant-slider:has(.slider-input:focus-visible) .ant-slider-handle::after { outline: 6px solid var(--ant-slider-handle-active-outline-color); box-shadow: 0 0 0 var(--ant-slider-handle-line-width-hover) var(--ant-slider-handle-active-color); }
   /* В source фокусируется div handle, в native adapter — input. */
   .ant-slider.ant-slider-css-var:has(.slider-input:focus) .ant-slider-handle::before {
@@ -392,22 +498,47 @@
 
 <div bind:this={nativeElement} class={[
     'ant-slider',
-    componentTheme.className && 'ant-slider-css-var',
+    (componentTheme.className || hasDecorations) && 'ant-slider-css-var',
     componentTheme.className,
     `ant-slider-${orientation}`,
     resolvedDisabled && 'ant-slider-disabled',
+    markEntries.length && 'ant-slider-with-marks',
     dragging && 'ant-slider-lock',
     config.direction === 'rtl' && 'ant-slider-rtl',
-    className
-  ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
-  <div class="ant-slider-rail" aria-hidden="true"></div>
-  <div class="ant-slider-track" aria-hidden="true" style={orientation === 'horizontal'
+    className, config.slider?.class, rootClassName, classes.root
+  ]} style={[componentTheme.style, styles.root].filter(Boolean).join(';') || undefined}
+  data-ant-slider-theme={hasDecorations && !componentTheme.className ? config.theme.mode : undefined}
+  data-ant-slider-primary={hasDecorations && !componentTheme.className ? config.theme.primary : undefined}>
+  <div class={['ant-slider-rail', classes.rail]} aria-hidden="true"
+    style={[railStyle, styles.rail].filter(Boolean).join(';') || undefined}></div>
+  {#if included && track !== false}
+    {#if classes.tracks || styles.tracks}
+      <div class={['ant-slider-tracks', classes.tracks]} aria-hidden="true"
+        style={[orientation === 'horizontal'
+          ? `left:${trackStart}%;width:${percentage}%`
+          : `top:${trackStart}%;height:${percentage}%`, styles.tracks].filter(Boolean).join(';')}></div>
+    {/if}
+    <div class={['ant-slider-track', 'ant-slider-track-1', classes.track]} aria-hidden="true" style={[
+      orientation === 'horizontal'
       ? `left:${trackStart}%;width:${percentage}%`
-      : `top:${trackStart}%;height:${percentage}%`}></div>
-  <div bind:this={handle} class={['ant-slider-handle', resolvedDisabled
-      && 'ant-slider-handle-disabled']} aria-hidden="true" style={orientation === 'horizontal'
+      : `top:${trackStart}%;height:${percentage}%`, indexed(trackStyle), styles.track
+    ].filter(Boolean).join(';')}></div>
+  {/if}
+  {#if stepDots.length}
+    <div class="ant-slider-step" aria-hidden="true">
+      {#each stepDots as point}
+        <span class={['ant-slider-dot', isIncluded(point) && 'ant-slider-dot-active']}
+          style={decorationStyle(point)}></span>
+      {/each}
+    </div>
+  {/if}
+  <div bind:this={handle} class={['ant-slider-handle', 'ant-slider-handle-1', resolvedDisabled
+      && 'ant-slider-handle-disabled', classes.handle]} aria-hidden="true" style={[
+        orientation === 'horizontal'
           ? `left:${position}%`
-          : `top:${position}%`}></div>
+          : `top:${position}%`, indexed(handleStyle), styles.handle
+      ].filter(Boolean).join(';')}></div>
+  <!-- svelte-ignore a11y_role_supports_aria_props_implicit (AriaRequired сохраняет исходный Slider prop; native required передаётся отдельно.) -->
   <input
     {...attributes}
     bind:this={control}
@@ -417,14 +548,19 @@
     name={name ?? field?.name}
     min={options.min}
     max={options.max}
-    step={options.step}
+    step={sourceAlignment ? 'any' : options.step}
     value={resolvedValue}
     disabled={resolvedDisabled}
     style:direction={direction === 'rtl' || direction === 'btt' ? 'rtl' : 'ltr'}
-    aria-label={attributes['aria-label']
-        ?? (attributes['aria-labelledby']
+    tabindex={tabIndex === undefined ? attributes.tabindex : indexed(tabIndex) ?? -1}
+    aria-label={indexed(ariaLabelForHandle) ?? attributes['aria-label']
+        ?? (labelledBy
           ? undefined
           : field?.label)}
+    aria-labelledby={labelledBy}
+    aria-required={ariaRequired ?? attributes['aria-required']}
+    aria-valuetext={indexed(ariaValueTextFormatterForHandle)?.(resolvedValue)
+      ?? attributes['aria-valuetext']}
     aria-valuemin={options.min}
     aria-valuemax={options.max}
     aria-valuenow={resolvedValue}
@@ -448,6 +584,20 @@
     onfocus={handleFocus}
     onblur={handleBlur}
   />
+  {#if markEntries.length}
+    <div class="ant-slider-mark">
+      {#each markEntries as mark}
+        <button type="button" class={['ant-slider-mark-text', 'slider-mark',
+          isIncluded(mark.value) && 'ant-slider-mark-text-active']}
+          aria-label={typeof mark.label === 'boolean' ? String(mark.value) : undefined}
+          style={`${sliderRangePosition(direction, mark.value, options.min, options.max)};${mark.style ?? ''}`}
+          disabled={resolvedDisabled} onpointerdown={event => event.preventDefault()}
+          onclick={() => handleMark(mark.value)}>
+          {#if typeof mark.label === 'function'}{@render mark.label()}{:else if typeof mark.label !== 'boolean'}{mark.label}{/if}
+        </button>
+      {/each}
+    </div>
+  {/if}
   <TooltipPopup title={resolvedDisabled ? '' : tooltipTitle} open={tooltipOpen} anchor={handle} describe={control} trigger={control} placement={tooltipPlacement} arrow={tooltip === false ? false : tooltip?.arrow}
     color={tooltip === false ? undefined : tooltip?.color}
     prefixCls={tooltip === false ? undefined : tooltip?.prefixCls}

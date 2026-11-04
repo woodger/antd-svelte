@@ -368,9 +368,13 @@ undefined снимает declaration и не возвращает vendor default
 
 Source-тема связывает фокус native input с видимым handle, включая handleSizeHover,
 handleLineWidthHover и outline. Hit targets и нативные value/form/keyboard contracts
-сохранены; полный scalar source API и pointer hover самого handle в single ещё требуют
+сохранены; полный scalar lifecycle API и pointer hover самого handle в single ещё требуют
 переноса. Без source-темы прежние размеры и цвета не меняются. Root style идёт
-после theme variables; range сохраняет provider/semantic/local style priorities.
+после theme variables; оба режима используют общий provider/semantic/local resolver.
+ConfigProvider.slider применяется к single и range; callback получает входные props
+с разрешёнными disabled и vertical. Provider styles.root/style идут перед local
+styles.root/style, legacy rail/track/handle — перед semantic styles. Вложенный record
+заменяется целиком, undefined наследуется; обновление styles сохраняет native DOM.
 
 Официальный UMD задаёт declarations для 14 тем и computed styles четырёх вариантов
 в покое, при наведении на rail, фокусе и disabled. Обновления сохраняют DOM,

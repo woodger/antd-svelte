@@ -1,6 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes } from 'svelte/elements';
 import type { SliderTooltipConfig } from './tooltip.types';
+import type { SliderSingleProps } from './slider.types';
 
 /** Исходные настройки нескольких точек; editable имеет приоритет над draggableTrack. */
 export interface SliderRangeConfig {
@@ -17,14 +18,15 @@ export type SliderMarks = Readonly<Record<string | number,
 export type SliderSemanticName = 'root' | 'tracks' | 'track' | 'rail' | 'handle';
 export type SliderClassNames = Partial<Record<SliderSemanticName, string>>;
 export type SliderStyles = Partial<Record<SliderSemanticName, string>>;
-export type SliderSemanticValue<Value> = Value | ((info: { props: SliderRangeProps; }) => Value);
+export type SliderSemanticValue<Value, Props = SliderRangeProps> = Value
+  | ((info: { props: Props; }) => Value);
 
-/** Наследуемые стили диапазона; локальные semantic slots имеют приоритет. */
+/** Общие стили Slider; callbacks различают scalar/range по props.range. */
 export interface SliderConfig {
   class?: string;
   style?: string;
-  classNames?: SliderSemanticValue<SliderClassNames>;
-  styles?: SliderSemanticValue<SliderStyles>;
+  classNames?: SliderSemanticValue<SliderClassNames, SliderSingleProps | SliderRangeProps>;
+  styles?: SliderSemanticValue<SliderStyles, SliderSingleProps | SliderRangeProps>;
 }
 
 /** Методы доступны после mount; nativeElement указывает на корень Slider. */

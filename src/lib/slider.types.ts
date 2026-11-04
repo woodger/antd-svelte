@@ -1,6 +1,14 @@
 import type { HTMLInputAttributes } from 'svelte/elements';
 import type { SliderTooltipConfig } from './tooltip.types';
-import type { SliderRangeConfig, SliderRangeProps, SliderRef } from './slider-range.types';
+import type {
+  SliderClassNames,
+  SliderMarks,
+  SliderRangeConfig,
+  SliderRangeProps,
+  SliderRef,
+  SliderSemanticValue,
+  SliderStyles
+} from './slider-range.types';
 
 /** Одиночное числовое значение с pointer/keyboard взаимодействием и bind:value. */
 export interface SliderSingleProps extends Omit<
@@ -15,6 +23,7 @@ export interface SliderSingleProps extends Omit<
   | 'class'
   | 'children'
   | 'readonly'
+  | 'disabled'
 > {
   /** Поддерживает bind:value. */
   value?: number | undefined;
@@ -25,17 +34,48 @@ export interface SliderSingleProps extends Omit<
   defaultValue?: number;
   min?: number;
   max?: number;
-  step?: number;
+  /** Null выбирает только marks/min/max. */
+  step?: number | null;
+  marks?: SliderMarks;
+  dots?: boolean;
+  /** @defaultValue true */
+  included?: boolean;
+  track?: boolean;
+  disabled?: boolean | readonly boolean[] | null;
   /** @defaultValue 'horizontal' */
   orientation?: 'horizontal' | 'vertical';
+  /** @deprecated Используйте orientation. */
+  vertical?: boolean;
+  autoFocus?: boolean;
   /** @defaultValue false */
   reverse?: boolean;
   /** @defaultValue true */
   keyboard?: boolean;
   tooltip?: false | SliderTooltipConfig;
+  /** Исходный callback перед обновлением bind:value; onValueChange вызывается после. */
+  onChange?: (value: number) => void;
   onValueChange?: (value: number) => void;
   /** Один callback после завершённого изменения; отменённое взаимодействие не публикуется. */
   onChangeComplete?: (value: number) => void;
+  onFocus?: (event: FocusEvent) => void;
+  onBlur?: (event: FocusEvent) => void;
+  tabIndex?: number | readonly number[];
+  ariaLabelForHandle?: string | readonly string[];
+  ariaLabelledByForHandle?: string | readonly string[];
+  ariaRequired?: boolean;
+  ariaValueTextFormatterForHandle?: ((value: number) => string)
+    | readonly ((value: number) => string)[];
+  rootClassName?: string;
+  classNames?: SliderSemanticValue<SliderClassNames, SliderSingleProps>;
+  styles?: SliderSemanticValue<SliderStyles, SliderSingleProps>;
+  /** @deprecated Используйте styles.handle. */
+  handleStyle?: string | readonly string[];
+  /** @deprecated Используйте styles.track. */
+  trackStyle?: string | readonly string[];
+  /** @deprecated Используйте styles.rail. */
+  railStyle?: string;
+  dotStyle?: string | ((value: number) => string);
+  activeDotStyle?: string | ((value: number) => string);
   class?: string;
 }
 
@@ -45,7 +85,8 @@ type SliderRangeExtras<Range> = {
 };
 
 type SliderNativeProps = Omit<SliderSingleProps,
-  'range' | 'value' | 'defaultValue' | 'onValueChange' | 'onChangeComplete' | 'disabled' | 'step'
+  'range' | 'value' | 'defaultValue' | 'onValueChange' | 'onChangeComplete' | 'onChange'
+    | 'disabled' | 'step' | 'classNames' | 'styles'
 >;
 export type SliderValue<Range> = Range extends false ? number : number[] | null;
 type SliderChangeValue<Range> = Range extends false ? number : number[];
@@ -54,9 +95,14 @@ interface SliderValueProps<Range extends boolean | SliderRangeConfig> extends Sl
   value?: SliderValue<Range>;
   defaultValue?: SliderValue<Range>;
   onValueChange?: (value: SliderChangeValue<Range>) => void;
+  onChange?: (value: SliderChangeValue<Range>) => void;
   onChangeComplete?: (value: SliderChangeValue<Range>) => void;
   disabled?: SliderSingleProps['disabled'] | (Range extends false ? never : readonly boolean[]);
-  step?: number | (Range extends false ? never : null);
+  step?: number | null;
+  classNames?: SliderSemanticValue<SliderClassNames,
+    Range extends false ? SliderSingleProps : SliderRangeProps>;
+  styles?: SliderSemanticValue<SliderStyles,
+    Range extends false ? SliderSingleProps : SliderRangeProps>;
 }
 
 /** Range=true/config выбирает массив; default generic сохраняет прежние scalar callbacks. */

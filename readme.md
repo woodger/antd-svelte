@@ -1338,6 +1338,11 @@ onChangeComplete при отпускании. Действие на уже до�
 поддерживается. Для числовой модели используйте onValueChange, нативные
 события остаются доступны через HTML props.
 
+`onChange(next)` получает число перед обновлением `bind:value`; `onValueChange`
+вызывается после. Этот alias не меняет сохранённые native правила завершения и
+отмены действий. Source onBeforeChange/onAfterChange и полная унификация lifecycle
+с range пока остаются отдельной задачей.
+
 По умолчанию min=0, max=100, step=1. Число ограничивается границами и
 выравнивается по ближайшему шагу от min; равные расстояния округляются
 к большему значению. Дробные шаги вычисляются без накопления хвостов вроде
@@ -1346,6 +1351,18 @@ onChangeComplete при отпускании. Действие на уже до�
 как у нативного range. Некорректный step заменяется на 1, нечисловые границы —
 на defaults; max < min сворачивается в min. Равные границы дают фиксированное
 значение без изменений и callbacks.
+
+Scalar также поддерживает `marks`, `dots`, `step={null}`, `included` и `track`.
+При наличии marks или step=null значение выравнивается общим с range алгоритмом
+rc-slider: выбирается ближайший mark/step/min/max с исходным порядком разрешения
+равных расстояний. При step=null доступны только marks и границы, даже если marks
+нет. Dots добавляет визуальные деления и само не ограничивает значения.
+Included=false убирает track и active marks/dots; track=false скрывает только track.
+Подпись mark принимает текст, число, snippet или `{ label, style }` с CSS-строкой.
+Marks — нативные кнопки: доступны Tab/Enter/Space и исключаются при disabled.
+Изменение marks нормализует отображение и FormData без записи в owner и callbacks.
+Отображаемые marks/dots используют тот же мост native presets, что и range;
+обычный числовой Slider без делений сохраняет прежнее оформление.
 
 Внешние value и изменения границ не вызывают callbacks и не изменяют состояние
 владельца. Для отображения и FormData используется нормализованное число.
@@ -1360,7 +1377,8 @@ preventDefault отменяет обработку. PreventDefault в onpointerd
 aria-valuetext позволяет описать единицу измерения. Фокус остаётся у input,
 а видимый бегунок показывает кольцо клавиатурного фокуса.
 
-Orientation принимает horizontal/vertical. Вертикальному Slider задайте высоту,
+Orientation принимает horizontal/vertical и имеет приоритет над deprecated vertical.
+Вертикальному Slider задайте высоту,
 например `style="height: 160px"`; min по умолчанию находится снизу. Reverse
 меняет направление. В RTL горизонтальный min находится справа; reverse
 меняет это правило обратно. Вертикальное направление от RTL не меняется.
@@ -1374,6 +1392,13 @@ Disabled наследуется из Form/FormItem и ConfigProvider; disabled=f
 blur и удаление control отменяют активное действие без позднего
 onChangeComplete. Новое действие работает независимо от отменённого.
 Слушатели и ожидающие reset освобождаются при удалении.
+
+Scalar принимает исходные ariaLabelForHandle/ariaLabelledByForHandle,
+ariaValueTextFormatterForHandle, ariaRequired, tabIndex и autoFocus, включая
+первый элемент массивов handle props. Массив disabled использует только первую
+отображаемую точку. AutoFocus фиксируется при mount; ref.focus()/blur() обращаются
+к native input. TabIndex=[] исключает control из Tab, но сохраняет программный
+фокус native input, в отличие от div без tabindex в rc-slider.
 
 Для Form передавайте `value={form.values.volume}` и
 `onValueChange={(value) => form.setFieldValue('volume', value)}`.
@@ -1490,16 +1515,28 @@ capture, reset timers и ref. SSR не измеряет DOM, не фокусир
 переключаются через ConfigProvider. Direction/reverse и orientation/vertical
 сохраняют исходные физические направления; orientation имеет приоритет.
 
-ConfigProvider.slider в этом этапе задаёт class/style и semantic slots диапазона.
+ConfigProvider.slider задаёт class/style и semantic slots обоих режимов.
 ClassNames объединяются, styles применяются по порядку с приоритетом локального
 слоя. Есть slots root/tracks/track/rail/handle и deprecated style aliases.
+Provider styles.root → provider style → local styles.root → local style; legacy
+rail/track/handle styles идут перед semantic стилями соответствующего элемента.
+Callback видит входные props, разрешённые disabled и vertical; проверяйте props.range
+перед обращением к числовому/массивному value. Явный вложенный record заменяет
+родительскую config целиком; undefined наследует её. Root style применяется после
+theme variables и сохраняет приоритет при обновлении темы.
 Сохраняется текущий SliderTooltipConfig: 12 placement, text formatter,
 native popover и описание input. Контейнер выбирается в исходном порядке:
 tooltip.getPopupContainer → ConfigProvider.getPopupContainer → legacy
 tooltip.getTooltipContainer. Корневого getPopupContainer у Slider нет.
 Полный SliderTooltipProps и исходное управление focus-open остаются частично
-перенесёнными. Полный scalar
-API marks/dots/semantic config и произвольный prefixCls CSS ещё не закрыты.
+перенесёнными. Полный scalar lifecycle/callback API и произвольный prefixCls CSS
+ещё не закрыты; сохранены описанные выше native numeric/form/event contracts.
+
+Scalar source API: [SSR](./tests/package/slider-scalar.ssr.test.ts),
+[browser](./tests/browser/slider-scalar.spec.ts),
+[эталон официального UMD](./tests/browser/fixtures/ant-design-slider-scalar-reference.json),
+маршрут `?fixture=slider-scalar`. Проверяются также semantic config, ARIA, native
+focus/form/reset и отсутствие callbacks при обновлении marks.
 
 Проверки: [engine](./src/lib/slider-range.engine.test.ts),
 [public SSR](./tests/package/slider-range.ssr.test.ts),

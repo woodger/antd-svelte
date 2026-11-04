@@ -5048,7 +5048,7 @@
       "name": "Slider",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Расширение существующего native single Slider исходными range/marks/dots, push/cross, disabled anchors, editable/draggableTrack и semantic API rc-slider 1.1.1; прежние Svelte forms/bind/events сохраняются.",
+      "scopeReason": "Расширение существующего native single Slider исходными range/marks/dots, push/cross, disabled anchors, editable/draggableTrack и semantic API rc-slider 1.1.1, затем scalar marks/alignment/semantics/ARIA; прежние Svelte forms/bind/events сохраняются.",
       "upstreamPath": "components/slider",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -5160,7 +5160,16 @@
         "tests/browser/slider-theme-metrics.ts",
         "tests/browser/slider-theme.spec.ts",
         "tests/package/slider-theme.ssr.test.ts",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/slider-semantic.engine.ts",
+        "tests/browser/fixtures/SliderScalarCase.svelte",
+        "tests/browser/fixtures/SliderScalarFixtures.svelte",
+        "tests/browser/fixtures/slider-scalar-cases.ts",
+        "tests/browser/fixtures/ant-design-slider-scalar-reference.json",
+        "tests/browser/slider-scalar-metrics.ts",
+        "tests/browser/slider-scalar.spec.ts",
+        "tests/package/slider-scalar.ssr.test.ts",
+        "tests/package/SliderScalarTypes.svelte"
       ],
       "features": [
         {
@@ -5209,7 +5218,7 @@
             "tests/browser/slider-range.spec.ts",
             "src/lib/vendor/slider-range.css"
           ],
-          "note": "ConfigProvider.slider относится к range-ветке; object/function semantic slots, class concatenation, local style priority и deprecated aliases. Исходные размеры/цвета для light/dark/compact и существующих primary presets; отдельный извлекаемый CSS. Handles — native inputs, marks — native buttons вместо React interactive div/span."
+          "note": "ConfigProvider.slider относится к обоим режимам; object/function semantic slots, class concatenation, local style priority и deprecated aliases. Light/dark/compact используют сохранённые native presets; source component tokens описаны отдельным feature; отдельный извлекаемый CSS. Handles — native inputs, marks — native buttons вместо React interactive div/span."
         },
         {
           "id": "range-lifecycle",
@@ -5232,7 +5241,7 @@
             "src/lib/slider-range.types.ts",
             "tests/browser/slider-range.spec.ts"
           ],
-          "note": "Сохраняется Svelte bind-модель; onChange получает массив до bind update, onValueChange после. Range pointer/keyboard публикует дополнительные input/change после DOM update с isTrusted=false. Native inputs/form/label и keyboardable mark buttons заменяют React div/span; typed refs не являются React instance."
+          "note": "Сохраняется Svelte bind-модель; onChange получает число/массив до bind update, onValueChange после. Range pointer/keyboard публикует дополнительные input/change после DOM update с isTrusted=false. Native inputs/form/label и keyboardable mark buttons заменяют React div/span; typed refs не являются React instance."
         },
         {
           "id": "range-tooltip",
@@ -5270,12 +5279,52 @@
           "note": "Все 18 исходных defaults, component aliases/algorithms, нули/undefined, CSS-variable prefix и key/hash scope в single/range и обеих ориентациях. RailSize меняет толщину rail/track. Фокус native input оформляет handle по source handleSizeHover/lineWidth/outline; прежние native-only цвета, hit targets и value/form/keyboard contracts сохранены. Theme variables идут перед semantic/local styles. Scoped declarations и computed styles четырёх вариантов в покое, при rail hover, focus и disabled сверяются с официальным UMD для 14 тем. Обновления, inheritance/reset, соседние scopes, снятие темы и unmount сохраняют DOM/focus/значения и не вызывают числовых callbacks. Source pointer hover самого handle в scalar native adapter и полный scalar API остаются отдельным этапом."
         },
         {
+          "id": "scalar-marks-semantics",
+          "title": "Scalar marks/alignment и общий Slider semantic config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "src/lib/slider.types.ts",
+            "src/lib/slider-range.types.ts",
+            "src/lib/slider-semantic.engine.ts",
+            "src/lib/slider-range.engine.ts",
+            "tests/browser/fixtures/SliderScalarCase.svelte",
+            "tests/browser/fixtures/SliderScalarFixtures.svelte",
+            "tests/browser/fixtures/slider-scalar-cases.ts",
+            "tests/browser/fixtures/ant-design-slider-scalar-reference.json",
+            "tests/browser/slider-scalar-metrics.ts",
+            "tests/browser/slider-scalar.spec.ts",
+            "tests/package/slider-scalar.ssr.test.ts",
+            "tests/package/SliderScalarTypes.svelte",
+            "readme.md"
+          ],
+          "note": "Scalar marks/dots, step=null, included/track, mark snippets/styles, vertical/orientation, handle ARIA и первый элемент disabled/tabIndex arrays. При marks/null-step используется общий rc-slider offset/key engine; без marks сохранён прежний точный native grid. OnChange(number) идёт перед bind update, onValueChange после; native completion/cancellation/reset/FormData и input event contracts сохраняются. Общий scalar/range semantic resolver применяет provider slots/style → local slots/style; legacy element styles идут перед semantic. Callbacks видят исходные props с разрешёнными disabled/vertical, ConfigProvider.slider применён к обоим режимам с source nested record replacement. 31 официальный UMD-сценарий фиксирует styles/ARIA/marks/dots и keyboard/pointer onChange transitions в RTL/обеих ориентациях; live marks/styles сохраняют DOM/owner/focus и callback silence. Marks — native buttons вместо span; disabled input исключён из Tab независимо от его DOM tabIndex, пустой tabIndex=[] сохраняет native programmatic focus. AutoFocus/ref, rich snippets, native reset и focused removal проверяются отдельно. Полный scalar onBeforeChange/onAfterChange/source completion lifecycle, pointer hover handle, prefix CSS и diagnostics остаются в работе. Отображаемые scalar marks/dots подключают существующий native preset bridge range; plain numeric appearance сохранён. Light/dark/green без source-темы также сверяются с UMD; Source scopes не получают native color overrides."
+        },
+        {
           "id": "single-source-api",
           "title": "Полный исходный scalar API и произвольный prefixCls",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Новые marks/dots, semantic config и React callback aliases пока принадлежат range-ветке; одиночный Slider сохраняет согласованный native contract. Полная унификация source scalar API, произвольный prefixCls CSS, React diagnostics остаются следующими этапами. V1-ready не означает полный React API."
+          "evidence": [
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "src/lib/slider.types.ts",
+            "src/lib/slider-range.types.ts",
+            "src/lib/slider-semantic.engine.ts",
+            "src/lib/slider-range.engine.ts",
+            "tests/browser/fixtures/SliderScalarCase.svelte",
+            "tests/browser/fixtures/SliderScalarFixtures.svelte",
+            "tests/browser/fixtures/slider-scalar-cases.ts",
+            "tests/browser/fixtures/ant-design-slider-scalar-reference.json",
+            "tests/browser/slider-scalar-metrics.ts",
+            "tests/browser/slider-scalar.spec.ts",
+            "tests/package/slider-scalar.ssr.test.ts",
+            "tests/package/SliderScalarTypes.svelte",
+            "readme.md"
+          ],
+          "note": "Marks/dots/null-step alignment, semantic config/styles, ARIA/disabled arrays, vertical и onChange alias перенесены в scalar. Полные onBeforeChange/onAfterChange и source completion lifecycle, pointer hover самого handle, произвольный prefixCls CSS и React diagnostics ещё требуют переноса. Прежние native точный grid без marks, bind/form/input events и cancellation/completion policy сохранены; v1-ready не означает полный React API."
         },
         {
           "id": "popup-container",
@@ -11478,7 +11527,19 @@
         "tests/browser/fixtures/slider-theme-presets.ts",
         "tests/browser/slider-theme-metrics.ts",
         "tests/browser/slider-theme.spec.ts",
-        "tests/package/slider-theme.ssr.test.ts"
+        "tests/package/slider-theme.ssr.test.ts",
+        "src/lib/slider.types.ts",
+        "src/lib/slider-range.types.ts",
+        "src/lib/slider-semantic.engine.ts",
+        "src/lib/slider-range.engine.ts",
+        "tests/browser/fixtures/SliderScalarCase.svelte",
+        "tests/browser/fixtures/SliderScalarFixtures.svelte",
+        "tests/browser/fixtures/slider-scalar-cases.ts",
+        "tests/browser/fixtures/ant-design-slider-scalar-reference.json",
+        "tests/browser/slider-scalar-metrics.ts",
+        "tests/browser/slider-scalar.spec.ts",
+        "tests/package/slider-scalar.ssr.test.ts",
+        "tests/package/SliderScalarTypes.svelte"
       ],
       "features": [
         {
@@ -11843,6 +11904,30 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные 12 Pagination и 18 общих Input defaults, component algorithms/aliases, нули/undefined, runtime CSS lengths и CSS prefix/hash. Native nav получает scope перед semantic/plain styles; ul наследует defaults без provider reset, Select получает собственные aliases, Input overrides не меняют quick jumper. Глобальный wireframe включает bordered независимо от component alias; отсутствующие в dist/antd.css правила перенесены из source bordered.ts в scoped CSS. Colors/padding исходных ссылок применяются к native buttons, prev/next сохраняют normal line-height при undefined itemSize. MiniOptionsSizeChangerTop создаёт переменную, но source CSS её не читает. Scoped UMD declarations и 240 наборов computed metrics для 18 тем: три размера, disabled/simple, variants, Select, wireframe и LTR/RTL; отдельный эталон hover/focus. Обновления сохраняют DOM, drafts/selection/focus, bind API и порядок callbacks; native-only темы и согласованный mobile size changer сохранены."
+        },
+        {
+          "id": "slider-config",
+          "title": "Scalar marks/alignment и общий Slider semantic config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "src/lib/slider.types.ts",
+            "src/lib/slider-range.types.ts",
+            "src/lib/slider-semantic.engine.ts",
+            "src/lib/slider-range.engine.ts",
+            "tests/browser/fixtures/SliderScalarCase.svelte",
+            "tests/browser/fixtures/SliderScalarFixtures.svelte",
+            "tests/browser/fixtures/slider-scalar-cases.ts",
+            "tests/browser/fixtures/ant-design-slider-scalar-reference.json",
+            "tests/browser/slider-scalar-metrics.ts",
+            "tests/browser/slider-scalar.spec.ts",
+            "tests/package/slider-scalar.ssr.test.ts",
+            "tests/package/SliderScalarTypes.svelte",
+            "readme.md"
+          ],
+          "note": "Scalar marks/dots, step=null, included/track, mark snippets/styles, vertical/orientation, handle ARIA и первый элемент disabled/tabIndex arrays. При marks/null-step используется общий rc-slider offset/key engine; без marks сохранён прежний точный native grid. OnChange(number) идёт перед bind update, onValueChange после; native completion/cancellation/reset/FormData и input event contracts сохраняются. Общий scalar/range semantic resolver применяет provider slots/style → local slots/style; legacy element styles идут перед semantic. Callbacks видят исходные props с разрешёнными disabled/vertical, ConfigProvider.slider применён к обоим режимам с source nested record replacement. 31 официальный UMD-сценарий фиксирует styles/ARIA/marks/dots и keyboard/pointer onChange transitions в RTL/обеих ориентациях; live marks/styles сохраняют DOM/owner/focus и callback silence. Marks — native buttons вместо span; disabled input исключён из Tab независимо от его DOM tabIndex, пустой tabIndex=[] сохраняет native programmatic focus. AutoFocus/ref, rich snippets, native reset и focused removal проверяются отдельно. Полный scalar onBeforeChange/onAfterChange/source completion lifecycle, pointer hover handle, prefix CSS и diagnostics остаются в работе. Отображаемые scalar marks/dots подключают существующий native preset bridge range; plain numeric appearance сохранён. Light/dark/green без source-темы также сверяются с UMD; Source scopes не получают native color overrides."
         },
         {
           "id": "slider-theme-tokens",

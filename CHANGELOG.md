@@ -9,6 +9,13 @@
 
 ### Added
 
+- Scalar Slider: marks/dots, step=null, included/track, общий с range semantic config,
+  deprecated styles/vertical, handle ARIA/disabled arrays, autoFocus и числовой onChange
+  перед bind update. Сохранены native numeric grid без marks, forms/reset, focus и
+  completion/cancellation contracts. Добавлены UMD-эталоны для 31 сценария оформления и переходов,
+  SSR/browser-проверки keyboard/pointer, RTL, вложенной config и live marks.
+  Новые деления используют palette bridge range и без source-темы; plain native
+  Slider сохраняет прежние цвета.
 - Tooltip/Popconfirm: destroyOnHidden и legacy destroyTooltipOnHide с исходным
   приоритетом современного false, сбросом вложенного состояния и lazy SSR.
   Настройки работают в Typography ellipsis Tooltip и трёх режимах Slider;

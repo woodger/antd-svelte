@@ -25,7 +25,8 @@
       value = next as SliderValue<Range>;
     }} />
 {:else}
-  <SliderSingle {...props as SliderSingleProps} bind:ref bind:nativeElement
+  <SliderSingle {...props as SliderSingleProps} range={range as false | undefined}
+    bind:ref bind:nativeElement
     bind:value={() => value as number | undefined, next => {
       value = next as SliderValue<Range>;
     }} />

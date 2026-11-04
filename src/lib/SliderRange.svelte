@@ -19,7 +19,8 @@
   } from './slider-range.engine';
   import { connectSliderRangeDrag, connectSliderRangeInput } from './slider-range.dom';
   import { useSliderInternal } from './slider-internal-context';
-  import type { SliderRangeProps, SliderClassNames, SliderStyles } from './slider-range.types';
+  import { sliderSemantics } from './slider-semantic.engine';
+  import type { SliderRangeProps } from './slider-range.types';
   import TooltipPopup from './TooltipPopup.svelte';
 
   let { value = $bindable(), ref = $bindable(), nativeElement = $bindable(), ...props }:
@@ -79,11 +80,10 @@
   let sorted = $derived([...displayed].sort((a, b) => a - b));
   let included = $derived(props.included ?? true);
   let mergedProps = $derived({ ...props, value, disabled, vertical: orientation === 'vertical' });
-  let classNames = $derived<SliderClassNames>(mergeClassNames(
-    resolve(config.slider?.classNames), resolve(props.classNames)
-  ));
-  let styles = $derived<SliderStyles>(mergeStyles(resolve(config.slider?.styles),
-    { root: config.slider?.style }, resolve(props.styles), { root: props.style ?? undefined }));
+  let semantics = $derived(sliderSemantics(mergedProps, config.slider,
+    props.classNames, props.styles));
+  let classNames = $derived(semantics.classNames);
+  let styles = $derived(semantics.styles);
   let dots = $derived.by(() => {
     const values = new Set(marks.map(mark => mark.value));
     if (props.dots && step !== null) {
@@ -120,36 +120,11 @@
     });
   }
 
-  function resolve<T>(entry: T | ((info: { props: SliderRangeProps; }) => T) | undefined) {
-    return typeof entry === 'function'
-      ? (entry as (info: { props: SliderRangeProps; }) => T)({ props: mergedProps }) : entry;
-  }
-
   function formatTooltip(point: number | undefined) {
     if (point === undefined || props.tooltip === false || props.tooltip?.formatter === null) {
       return '';
     }
     return props.tooltip?.formatter ? props.tooltip.formatter(point) ?? '' : String(point);
-  }
-
-  function mergeStyles(...entries: (SliderStyles | undefined)[]) {
-    const result: SliderStyles = {};
-    for (const entry of entries) {
-      for (const name of Object.keys(entry ?? {}) as (keyof SliderStyles)[]) {
-        result[name] = [result[name], entry![name]].filter(Boolean).join(';');
-      }
-    }
-    return result;
-  }
-
-  function mergeClassNames(...entries: (SliderClassNames | undefined)[]) {
-    const result: SliderClassNames = {};
-    for (const entry of entries) {
-      for (const name of Object.keys(entry ?? {}) as (keyof SliderClassNames)[]) {
-        result[name] = [result[name], entry![name]].filter(Boolean).join(' ');
-      }
-    }
-    return result;
   }
 
   function indexed<T>(entry: T | readonly T[] | undefined, index: number): T | undefined {
