@@ -62,6 +62,7 @@ export function createPopupContainer(getOptions: () => PopupContainerOptions) {
             '--ant-tooltip-valid-offset-x',
             '--ant-tooltip-arrow-offset-x',
             '--ant-tooltip-arrow-background-color',
+            '--ant-tooltip-overlay-color',
             ...(getOptions().preserveVariables ?? []),
             ...Array.from(style).filter(name => name.startsWith('--'))
           ];

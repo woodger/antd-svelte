@@ -2,6 +2,7 @@ import type { Snippet } from 'svelte';
 import type {
   AdjustOverflow,
   TooltipArrow,
+  TooltipColor,
   TooltipPlacement,
   TooltipSlots,
   TooltipTrigger
@@ -46,6 +47,8 @@ export interface PopoverConfig {
 /** Интерактивная поверхность у trigger snippet с bind:open и управлением фокусом. */
 export interface PopoverProps {
   children: Snippet;
+  /** Цвет панели и стрелки; title/content сохраняют собственные semantic цвета. */
+  color?: TooltipColor;
   title?: PopoverContent | null;
   content?: PopoverContent | null;
   /** Поддерживает bind:open. */

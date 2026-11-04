@@ -21,6 +21,7 @@
     children,
     title,
     description,
+    color,
     icon,
     defaultOpen = false,
     disabled,
@@ -178,7 +179,7 @@
 
 <Popover content={hasTitle ? content : undefined} bind:open={() => visible, request}
   trigger={resolvedDisabled ? [] : resolvedTrigger} mouseEnterDelay={enterDelay} mouseLeaveDelay={leaveDelay}
-  {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
+  {placement} {arrow} {color} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
   {rootClassName} {overlayInnerStyle} classNames={{
     root: [config.popconfirm?.class, overlayClassName, semantics.classNames.root].filter(Boolean).join(' '),
     container: semantics.classNames.container,

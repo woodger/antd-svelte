@@ -401,6 +401,7 @@ export type {
   TooltipProps,
   TooltipPlacement,
   TooltipTrigger,
+  TooltipColor,
   TooltipArrow,
   AdjustOverflow,
   TooltipSlots,

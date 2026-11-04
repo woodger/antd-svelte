@@ -6,7 +6,7 @@ import type {
   PopoverSlots,
   PopoverTrigger
 } from './popover.types';
-import type { AdjustOverflow, TooltipArrow } from './tooltip.types';
+import type { AdjustOverflow, TooltipArrow, TooltipColor } from './tooltip.types';
 
 export interface PopconfirmSlots extends PopoverSlots {
   icon?: string;
@@ -42,6 +42,8 @@ export interface PopconfirmConfig {
 /** Подтверждение действия с Promise, состоянием ожидания и защитой от позднего результата. */
 export interface PopconfirmProps {
   children: Snippet;
+  /** Передаётся наружному Popover; semantic цвета текста подтверждения приоритетнее. */
+  color?: TooltipColor;
   title: Exclude<PopoverContent, boolean>;
   description?: Exclude<PopoverContent, boolean> | null;
   icon?: Snippet | null;

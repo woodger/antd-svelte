@@ -1,5 +1,6 @@
 import type { Snippet } from 'svelte';
 import type { PopupSourceAlign } from './popup-position.engine';
+import type { PresetColorKey } from './theme-token.types';
 
 /** Физические направления; Left/Right в имени не меняются при RTL. */
 export type TooltipPlacement =
@@ -7,6 +8,8 @@ export type TooltipPlacement =
   | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight'
   | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 export type TooltipTrigger = 'hover' | 'focus' | 'click' | 'contextMenu';
+/** Preset имена чувствительны к регистру; остальные строки передаются CSS как одно value. */
+export type TooltipColor = PresetColorKey | `${PresetColorKey}-inverse` | (string & {});
 
 /** Объект показывает стрелку; pointAtCenter по умолчанию false. */
 export type TooltipArrow = boolean | { pointAtCenter?: boolean };
@@ -56,6 +59,8 @@ export interface TooltipConfig {
 /** Подсказка с настраиваемыми событиями, bind:open и доступным описанием trigger. */
 export interface TooltipProps {
   title?: string | number | null | Snippet;
+  /** Preset или CSS background; пользовательский цвет выбирает текст по source luminance. */
+  color?: TooltipColor;
   children: Snippet;
   /** Поддерживает bind:open. */
   open?: boolean | undefined;
@@ -94,6 +99,7 @@ export interface TooltipProps {
 /** Параметры Tooltip ручки Slider; formatter=null отключает содержимое подсказки. */
 export interface SliderTooltipConfig {
   open?: boolean;
+  color?: TooltipColor;
   placement?: TooltipPlacement;
   arrow?: TooltipArrow;
   /** Как у Tooltip; boolean defaults сохраняют native viewport behavior. */

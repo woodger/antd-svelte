@@ -3,11 +3,12 @@
   import { buildOverlayConfig, buildOverlayProvider } from './overlay-config-presets';
   import type { OverlayConfigCase as Sample, OverlayConfigValues } from './overlay-config-presets';
 
-  let { sample, step = 0, interactive = false, native = false }: {
+  let { sample, step = 0, interactive = false, native = false, activeSlider = false }: {
     sample: Sample;
     step?: number;
     interactive?: boolean;
     native?: boolean;
+    activeSlider?: boolean;
   } = $props();
   let values = $derived<OverlayConfigValues>(Object.assign({}, sample,
     ...(sample.frames?.slice(0, step) ?? [])));
@@ -37,7 +38,9 @@
 {/snippet}
 {#snippet anchor()}<button type="button" data-config-anchor="">Anchor</button>{/snippet}
 
-<ConfigProvider theme={native ? undefined : { token: { motion: false } }} {...buildOverlayProvider(values.provider)}>
+<ConfigProvider theme={native ? sample.theme : {
+  ...sample.theme, token: { motion: false, ...sample.theme?.token }
+}} {...buildOverlayProvider(values.provider)}>
   <ConfigProvider {...buildOverlayProvider(values.child)}>
     <div id="config-case" {@attach host => host.querySelector(sample.component === 'avatar-group'
       ? '.ant-avatar-group-more' : sample.component === 'slider' ? '.ant-slider-handle' : 'button')
@@ -54,7 +57,11 @@
           { key: 'b', label: 'Beta', text: 'B' }
         ]} max={{ count: 1, popover: { ...options, title: 'Config title', content } }} />
       {:else}
-        <Slider defaultValue={50} tooltip={{ open: true, placement: 'topLeft' }} />
+        <Slider {...(sample.range
+          ? { range: true, defaultValue: [25, 75] as [number, number] }
+          : { range: false, defaultValue: 50 })}
+          tooltip={{ open: activeSlider ? undefined : true,
+            placement: 'topLeft', color: values.local?.color }} />
       {/if}
     </div>
   </ConfigProvider>

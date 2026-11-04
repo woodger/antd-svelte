@@ -6,6 +6,9 @@
   import { getOverlaySemantics } from './overlay-semantic.engine';
   import { createOverlayStyle } from './overlay-style.model.svelte';
   import { getPopupPlacements } from './popup-position.engine';
+  import { getTooltipColor } from './tooltip-color.engine';
+  import { connectInlineStyle } from './inline-style.dom';
+  import { serializeInlineStyleLayers } from './inline-style.engine';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { connectTooltipDescription } from './tooltip.dom';
   import { getTooltipArrow, getTooltipPlacementConfig, isTooltipCorner } from './tooltip.engine';
@@ -14,6 +17,7 @@
   import type {
     AdjustOverflow,
     TooltipArrow,
+    TooltipColor,
     TooltipPlacement,
     TooltipProps,
     TooltipSemanticProps
@@ -21,6 +25,7 @@
 
   let {
     title,
+    color,
     open,
     anchor,
     describe,
@@ -35,6 +40,7 @@
     onHoverChange
   }: {
     title: string | Snippet;
+    color?: TooltipColor;
     open: boolean;
     anchor?: Element;
     describe?: Element;
@@ -70,7 +76,7 @@
     );
     for (const align of Object.values(placements)) align.htmlRegion = 'visibleFirst';
     return {
-      ...(semanticProps ?? { title, open, placement, arrow }),
+      ...(semanticProps ?? { title, open, placement, arrow, color }),
       trigger: semanticProps?.trigger || config.tooltip?.trigger
         || (config.tooltip ? 'hover' : ['hover', 'focus']),
       mouseEnterDelay: semanticProps?.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1,
@@ -87,10 +93,17 @@
     callbackProps,
     semanticProps?.overlayStyle
   ));
-  let rootStyle = $derived([componentTheme.style, semantics.styles.root].filter(Boolean).join(';')
-    || undefined);
+  let colorInfo = $derived(getTooltipColor(color, 'ant-tooltip'));
+  let rootLayers = $derived([
+    componentTheme.style, colorInfo.arrowStyle, semantics.styles.root
+  ]);
+  let rootStyle = $derived(serializeInlineStyleLayers(rootLayers));
+  let containerLayers = $derived([
+    semantics.styles.container, semanticProps?.overlayInnerStyle, colorInfo.overlayStyle
+  ]);
+  const initialContainerStyle = untrack(() => serializeInlineStyleLayers(containerLayers));
   const initialStyle = untrack(() => rootStyle);
-  const popupStyle = createOverlayStyle(() => rootStyle);
+  const popupStyle = createOverlayStyle(() => rootLayers);
   let available = $derived(typeof title === 'function' || Boolean(title.trim()));
   const portal = createPopupContainer(() => ({
     open: open && available,
@@ -98,6 +111,11 @@
     getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
     themeStyle: rootStyle
   }));
+
+  function containerStyle(node: HTMLElement) {
+    const update = connectInlineStyle(node);
+    $effect(() => update(containerLayers));
+  }
 
   $effect(() => {
     if (describe && available) return connectTooltipDescription(describe, id);
@@ -136,13 +154,17 @@
   .ant-tooltip-container { display: block; max-height: calc(100dvh - 16px); overflow: auto; overflow-wrap: anywhere; }
   .ant-tooltip-placement-top > .ant-tooltip-arrow, .ant-tooltip-placement-bottom > .ant-tooltip-arrow { left: var(--arrow-x, 50%); }
   .ant-tooltip-placement-left > .ant-tooltip-arrow, .ant-tooltip-placement-right > .ant-tooltip-arrow { top: var(--arrow-y, 50%); }
+  /* Без getter source portal изолирует private contrast родительского popup. */
+  :global([data-ant-overlay-color]) .ant-tooltip[data-ant-tooltip-inline] { --ant-tooltip-overlay-color: initial; }
   @media (prefers-reduced-motion: reduce) { .ant-tooltip, .ant-tooltip-container { animation: none; transition: none; } }
 </style>
 
-<span bind:this={popup} {id} role="tooltip" popover="manual" hidden dir={config.direction} class={[
+<span bind:this={popup} {id} role="tooltip" popover="manual" hidden dir={config.direction}
+  data-ant-tooltip-inline={!callbackProps.getPopupContainer || undefined} class={[
     'ant-tooltip',
     'ant-tooltip-css-var',
     componentTheme.className,
+    colorInfo.className,
     `ant-tooltip-placement-${open ? actualPlacement : placement}`,
     config.direction === 'rtl' && 'ant-tooltip-rtl',
     semanticProps?.overlayClassName, semanticProps?.rootClassName,
@@ -156,6 +178,7 @@
   {#if arrowConfig.show}<span class={['ant-tooltip-arrow', semantics.classNames.arrow]}
     style={semantics.styles.arrow} aria-hidden="true"></span>{/if}
   <span class={['ant-tooltip-container', semantics.classNames.container]}
-    style={[semantics.styles.container, semanticProps?.overlayInnerStyle].filter(Boolean).join(';') || undefined}
+    data-ant-overlay-color={colorInfo.overlayStyle.length > 0 || undefined}
+    style={initialContainerStyle} {@attach containerStyle}
     tabindex="-1">{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</span>
 </span>

@@ -6,6 +6,9 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { getOverlaySemantics } from './overlay-semantic.engine';
   import { createOverlayStyle } from './overlay-style.model.svelte';
+  import { getTooltipColor } from './tooltip-color.engine';
+  import { connectInlineStyle } from './inline-style.dom';
+  import { serializeInlineStyleLayers } from './inline-style.engine';
   import { consumePopconfirmTheme } from './popover-theme-context';
   import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
@@ -32,6 +35,7 @@
     children,
     title,
     content,
+    color,
     defaultOpen = false,
     onOpenChange,
     destroyOnHidden,
@@ -98,10 +102,17 @@
     [tooltipTheme.style, componentTheme.style, confirmTheme?.style].filter(Boolean).join(';')
       || undefined
   );
-  let rootStyle = $derived([popupThemeStyle, semantics.styles.root].filter(Boolean).join(';')
-    || undefined);
+  let colorInfo = $derived(getTooltipColor(color, 'ant-popover'));
+  let rootLayers = $derived([
+    popupThemeStyle, colorInfo.arrowStyle, semantics.styles.root
+  ]);
+  let rootStyle = $derived(serializeInlineStyleLayers(rootLayers));
+  let containerLayers = $derived([
+    semantics.styles.container, overlayInnerStyle, colorInfo.overlayStyle
+  ]);
+  const initialContainerStyle = untrack(() => serializeInlineStyleLayers(containerLayers));
   const initialStyle = untrack(() => rootStyle);
-  const popupStyle = createOverlayStyle(() => rootStyle);
+  const popupStyle = createOverlayStyle(() => rootLayers);
   const generatedId = $props.id();
   const id = `ant-popover-${generatedId}`;
   const titleId = `${id}-title`;
@@ -138,6 +149,11 @@
     getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
     themeStyle: rootStyle
   }));
+
+  function containerStyle(node: HTMLElement) {
+    const update = connectInlineStyle(node);
+    $effect(() => update(containerLayers));
+  }
 
   function hasContent(value: PopoverContent | null | undefined) {
     return typeof value === 'function'
@@ -466,6 +482,7 @@
         designTokens.enabled && designTokens.state.key,
         designTokens.enabled && designTokens.state.hashId,
         popupClass,
+        colorInfo.className,
         `ant-popover-placement-${shown ? actualPlacement : placement}`,
         config.direction === 'rtl' && 'ant-popover-rtl',
         rootClassName, overlayClassName, config.popover?.class, semantics.classNames.root
@@ -481,7 +498,8 @@
   {#if arrowConfig.show}<div class={['ant-popover-arrow', semantics.classNames.arrow]}
     style={semantics.styles.arrow} aria-hidden="true"></div>{/if}
   <div class={['ant-popover-container', semantics.classNames.container]}
-    style={[semantics.styles.container, overlayInnerStyle].filter(Boolean).join(';') || undefined}>
+    data-ant-overlay-color={colorInfo.overlayStyle.length > 0 || undefined}
+    style={initialContainerStyle} {@attach containerStyle}>
     {#if renderContent}
       {#if hasTitle}<div id={titleId} class={['ant-popover-title', semantics.classNames.title]}
         style={semantics.styles.title}>{#if typeof title === 'function'}{@render title()}{:else if typeof title !== 'boolean'}{title}{/if}</div>{/if}

@@ -5,6 +5,7 @@ import {
 
 export { getInlineStyleDeclarations as getBadgeStyleDeclarations } from './inline-style.engine';
 export type { InlineStyleLayer as BadgeStyleLayer } from './inline-style.engine';
+export { serializeInlineStyleLayers as serializeBadgeStyleLayers } from './inline-style.engine';
 
 export function getBadgeStyleValue(layers: readonly BadgeStyleLayer[], property: string) {
   let result: string | undefined;
@@ -18,11 +19,4 @@ export function getBadgeStyleValue(layers: readonly BadgeStyleLayer[], property:
   }
 
   return result;
-}
-
-export function serializeBadgeStyleLayers(layers: readonly BadgeStyleLayer[]) {
-  return layers.map(layer => typeof layer === 'string' ? layer
-    : layer?.filter(([, value]) => value !== '')
-      .map(([property, value]) => `${property}:${value}`).join(';'))
-    .filter(Boolean).join(';') || undefined;
 }

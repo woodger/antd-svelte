@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tooltip/Popover/Popconfirm: preset и CSS color, исходные RGB contrast, inverse
+  classes и приоритеты semantic/legacy styles. Цвет передаётся в AvatarGroup overflow
+  и single/pinned/active range Slider. Извлечены 65 CSS rules; добавлены 129 UMD-сценариев,
+  12 вложенных поверхностей и engine/SSR/browser-проверки. Native palette/DOM,
+  черновики и фокус сохранены; private contrast изолирован между popup.
 - ConfigProvider.tooltip/popover/popconfirm: defaults стрелки, trigger и задержек,
   class/style и semantic slots с callbacks, замена вложенным provider и исходная
   изоляция Tooltip от Popover/Popconfirm. Добавлены click/contextMenu у Tooltip,

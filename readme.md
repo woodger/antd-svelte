@@ -1574,7 +1574,7 @@ Portal переносит наследуемые variables и сохраняет
 Вложенные popup сохраняют собственные координаты и цвет стрелки.
 
 Галерея находится на `/ant-design#tooltip`. Поддерживаются строки, числа и rich snippets.
-Именованные цвета и полный align/motion API пока отсутствуют.
+Полный align/motion API пока отсутствует.
 AutoAdjustOverflow принимает также `{ adjustX?: 0 | 1, adjustY?: 0 | 1 }`.
 Числовой 0 тоже разрешает flip, как в rc-trigger; отключение обеих коррекций
 задаётся boolean false.
@@ -1646,8 +1646,9 @@ Open в callback — исходный prop владельца; неконтро�
 Callbacks выполняются и при SSR, когда DOM ещё недоступен.
 
 Классы слоёв накапливаются. Порядок CSS: context styles → context style(root) →
-local styles → legacy overlayStyle(root). OverlayInnerStyle применяется последним
-к container; overlayClassName остаётся alias для класса root. Эти aliases deprecated.
+local styles → legacy overlayStyle(root). OverlayInnerStyle следует после semantic
+styles container, затем применяется цветовой слой color; overlayClassName остаётся
+alias для класса root. Эти aliases deprecated.
 Root styles имеют приоритет над вычисленными координатами, как в rc-trigger;
 их обновление не сбрасывает variables темы, DOM, ввод, selection и focus.
 Настройки наследуются также подсказками Slider и overflow AvatarGroup.
@@ -1657,6 +1658,45 @@ Root styles имеют приоритет над вычисленными коо
 [SSR](./tests/package/overlay-config.ssr.test.ts) и
 [browser](./tests/browser/overlay-config.spec.ts).
 Tooltip.unique, prefixCls, motion, fresh cache и полный align API ещё не перенесены.
+
+### Цвет Tooltip, Popover и Popconfirm
+
+`color` принимает 13 preset-имён Ant Design либо CSS background. Имена чувствительны
+к регистру: `blue` использует палитру Ant Design, `Blue` — CSS named color. Имена
+`*-inverse` получают исходный класс, но у Tooltip/Popover 6.6.8 для них нет цветовой
+заливки. Preset CSS использует текущие `--ant-<color>-6`, включая component aliases
+и algorithm. Прежние native-темы сохраняют свои палитры; source-тема использует
+исходные tokens Ant Design.
+
+```svelte
+<Tooltip title="Сохранено" color="#fadb14">
+  <button type="button">Статус</button>
+</Tooltip>
+<Slider defaultValue={40} tooltip={{ color: 'purple' }} />
+```
+
+У пользовательского background Tooltip выбирает чёрный или белый текст по исходной
+RGB luminance с порогом 0.5; alpha не участвует. Color parser не разрешает CSS
+variables перед расчётом контраста, хотя browser использует их при отрисовке.
+Popover и Popconfirm сохраняют собственные цвета title/content, как upstream.
+Semantic `color` текста и legacy overlayInnerStyle могут их переопределить.
+
+Цветовой background следует после container styles и overlayInnerStyle. Root styles
+могут переопределить цвет стрелки; у preset Tooltip variable задана на самой стрелке,
+поэтому для неё используется styles.arrow. Raw background передаётся одним CSS value,
+а не списком declarations. Реактивное невалидное значение может сохранить прежний
+background, как React style setter; удаление shorthand сохраняет исходный style diff.
+
+Цвет работает также в `AvatarGroup.max.popover` и обоих режимах Slider Tooltip.
+Обновление открытой панели сохраняет DOM, ввод, выделение и фокус. Private contrast
+родительской панели не копируется в body portal и изолирован у вложенного native
+Tooltip без getter. Явный контейнер внутри родительской панели наследует его,
+как исходный getPopupContainer.
+
+Проверки цвета: [129 UMD-сценариев и 12 вложенных поверхностей](./tests/browser/fixtures/ant-design-overlay-color-reference.json),
+[engine](./src/lib/tooltip-color.engine.test.ts), [SSR](./tests/package/overlay-color.ssr.test.ts)
+и [browser](./tests/browser/overlay-color.spec.ts). Эталоны цвета задают явные размеры
+popup/anchor; геометрия проверяется отдельными наборами выше.
 
 ## Popover
 
@@ -1757,7 +1797,7 @@ snippet, компонент считает содержимое доступны
 Галерея `/ant-design#popover` содержит редактор профиля и информационную
 карточку с кнопкой. Arrow и autoAdjustOverflow принимают те же object настройки,
 что Tooltip; они передаются также через Popconfirm и AvatarGroup.max.popover.
-ContextMenu поддержан; произвольные цветовые варианты пока отсутствуют.
+ContextMenu и color поддержаны по общим правилам Tooltip выше.
 
 ## Popconfirm
 
@@ -6209,7 +6249,7 @@ aria-describedby описывает корень; id/class/style также от
 AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
 Avatar и настройки исходного Popover, ещё отсутствующие в Svelte Popover,
 пока не перенесены: в том числе prefixCls,
-color/align/motion и fresh cache. Точный текущий тип max.popover производен от
+align/motion и fresh cache. Точный текущий тип max.popover производен от
 [PopoverProps](./src/lib/popover.types.ts), а не дублирует отдельный список props.
 Приоритеты aliases, count/style и trigger/placement проверяются по
 [20 UMD-эталонам](./tests/browser/fixtures/ant-design-avatar-group-max-reference.json),

@@ -122,6 +122,10 @@ space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.c
 прежние outlined/compact файлы не перезаписываются.
 Рецепт switch побайтно воспроизводит прежние 47 правил, включая reduced motion;
 заменяется только исходный CSS-variable root selector.
+Рецепт overlay-color сохраняет 65 исходных preset rules Tooltip и Popover
+без преобразований; Popconfirm использует Popover classes. Inverse classes
+в исходном CSS этих компонентов не имеют цветовой заливки. Собственный цвет
+и native изоляция вложенного contrast принадлежат компонентам, не CSS-рецепту.
 Остальные текущие vendor-файлы
 этим выпуском инструмента не перегенерируются. Новый компонент получает отдельный
 проверенный рецепт: include/exclude для селекторов, replacements, keyframes,

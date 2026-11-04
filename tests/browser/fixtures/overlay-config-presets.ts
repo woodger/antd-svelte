@@ -3,7 +3,9 @@ import type {
   TooltipArrow,
   TooltipPlacement,
   TooltipSlots,
-  TooltipTrigger
+  TooltipTrigger,
+  TooltipColor,
+  ThemeConfig
 } from 'antd-svelte';
 
 interface Slots extends TooltipSlots {
@@ -13,6 +15,7 @@ interface Slots extends TooltipSlots {
 }
 
 export interface OverlayConfigSpec {
+  color?: TooltipColor;
   class?: string;
   style?: string;
   classNames?: Slots;
@@ -43,6 +46,8 @@ export interface OverlayConfigCase extends OverlayConfigValues {
   name: string;
   component: 'tooltip' | 'popover' | 'popconfirm' | 'avatar-group' | 'slider';
   defaultPlacement?: boolean;
+  theme?: ThemeConfig;
+  range?: boolean;
   frames?: OverlayConfigValues[];
   snapshots: unknown[];
 }

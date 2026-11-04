@@ -1,5 +1,12 @@
 export type InlineStyleLayer = string | undefined | readonly (readonly [string, string])[];
 
+export function serializeInlineStyleLayers(layers: readonly InlineStyleLayer[]) {
+  return layers.map(layer => typeof layer === 'string' ? layer
+    : layer?.filter(([, value]) => value !== '')
+      .map(([property, value]) => `${property}:${value}`).join(';'))
+    .filter(Boolean).join(';') || undefined;
+}
+
 /** Сохраняет declaration keys, строки, комментарии и function values без развёртки shorthand. */
 export function* getInlineStyleDeclarations(layers: readonly InlineStyleLayer[]) {
   for (const layer of layers) {
