@@ -740,7 +740,17 @@
         "src/lib/Divider.svelte",
         "src/lib/divider.types.ts",
         "readme.md",
-        "integration:divider"
+        "integration:divider",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-divider-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-divider-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-divider-theme-reference.json",
+        "tests/browser/fixtures/divider-theme-presets.ts",
+        "tests/browser/fixtures/DividerThemeCase.svelte",
+        "tests/browser/fixtures/DividerThemeFixtures.svelte",
+        "tests/browser/divider-theme-metrics.ts",
+        "tests/browser/divider-theme.spec.ts",
+        "tests/package/divider-theme.ssr.test.ts"
       ],
       "features": [
         {
@@ -778,11 +788,31 @@
         },
         {
           "id": "global-config",
-          "title": "Произвольные component tokens, prefixCls и component config",
+          "title": "PrefixCls и глобальный Divider component config",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Глобальное расширение ConfigProvider требует отдельного этапа; CSS-переменные можно переопределять через style."
+          "note": "ConfigProvider.divider class/style/semantic slots и произвольный prefixCls ещё не подключены; component theme tokens поддержаны отдельным feature."
+        },
+        {
+          "id": "component-theme-tokens",
+          "title": "Исходные Divider component tokens и локальные alias overrides",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Divider.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-divider-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-divider-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-divider-theme-reference.json",
+            "tests/browser/fixtures/divider-theme-presets.ts",
+            "tests/browser/fixtures/DividerThemeCase.svelte",
+            "tests/browser/fixtures/DividerThemeFixtures.svelte",
+            "tests/browser/divider-theme-metrics.ts",
+            "tests/browser/divider-theme.spec.ts",
+            "tests/package/divider-theme.ssr.test.ts"
+          ],
+          "note": "TextPaddingInline, orientationMargin и verticalMarginInline подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. OrientationMargin — безразмерная доля rail, deprecated prop сохраняет собственный отступ подписи. Source component aliases/algorithms, key/hash, custom CSS-variable prefix, нули, CSS units и явный undefined сверяются с 15 официальными UMD-темами и computed styles 11 вариантов. Reactive updates сохраняют DOM и фокус соседнего input; nested/sibling scopes, inherit=false, удаление темы и unmount изолированы. Native separator, default spacing и explicit componentSize сохранены; prefixCls и ConfigProvider.divider остаются в работе."
         }
       ]
     },
@@ -11595,7 +11625,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs и Slider получили исходные component tokens и CSS consumption; остальные families остаются в работе."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs, Slider и Divider получили исходные component tokens и CSS consumption; остальные families остаются в работе."
         },
         {
           "id": "static-design-tokens",
@@ -12139,6 +12169,26 @@
             "tests/package/typography-tooltip.ssr.test.ts"
           ],
           "note": "ConfigProvider.tooltip/popover/popconfirm: class/style, object/function classNames/styles, arrow, trigger и mouseEnter/LeaveDelay. Undefined наследует объект, явный record, включая {}, заменяет его целиком. Локальные trigger/delays приоритетнее, 0 и [] сохранены; boolean arrow меняет show, сохраняя унаследованный pointAtCenter. Новая component config включает source hover defaults и source geometry для Tooltip/Popover; Popconfirm default click. Без этой config сохранены native hover/focus и четыре boolean placement. Tooltip context не попадает во внутренние поверхности Popover/Popconfirm; Popover context участвует в наружной поверхности Popconfirm по исходным слоям. Перенесены semantic root/container/arrow/title/content/icon и callbacks с разрешёнными defaults и входным open владельца, rootClassName и legacy overlayClassName/overlayStyle/overlayInnerStyle; CSS задаётся строками. Provider class/style относятся к popup, прежние local class/style остаются у wrapper. Root CSS следует после координат и обновляется без сброса theme/portal variables, DOM, draft, selection или focus. Source trigger события hover/focus/click/contextMenu, повторное contextMenu и click hide проверены по 18 event traces, slots/priority/nested replacement/reactive config — по 60 UMD-сценариям. Slider и AvatarGroup наследуют настройки; SSR остаётся скрытым и без DOM/timers. Tooltip.unique, arbitrary prefix CSS, fresh/motion и полный rc-trigger API остаются в работе; общий аудит семейств не завершён. Ellipsis Tooltip Typography также наследует trigger/delays, включая local 0/[] и nested record replacement; 23 UMD-сценария и 21 event trace фиксируют callbacks, source timing и raw open при отсутствии усечения. Lazy SSR и native DOM/измерения Typography сохранены."
+        },
+        {
+          "id": "divider-theme-tokens",
+          "title": "Исходные Divider component tokens и локальные alias overrides",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Divider.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-divider-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-divider-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-divider-theme-reference.json",
+            "tests/browser/fixtures/divider-theme-presets.ts",
+            "tests/browser/fixtures/DividerThemeCase.svelte",
+            "tests/browser/fixtures/DividerThemeFixtures.svelte",
+            "tests/browser/divider-theme-metrics.ts",
+            "tests/browser/divider-theme.spec.ts",
+            "tests/package/divider-theme.ssr.test.ts"
+          ],
+          "note": "TextPaddingInline, orientationMargin и verticalMarginInline подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. OrientationMargin — безразмерная доля rail, deprecated prop сохраняет собственный отступ подписи. Source component aliases/algorithms, key/hash, custom CSS-variable prefix, нули, CSS units и явный undefined сверяются с 15 официальными UMD-темами и computed styles 11 вариантов. Reactive updates сохраняют DOM и фокус соседнего input; nested/sibling scopes, inherit=false, удаление темы и unmount изолированы. Native separator, default spacing и explicit componentSize сохранены; prefixCls и ConfigProvider.divider остаются в работе."
         }
       ]
     },

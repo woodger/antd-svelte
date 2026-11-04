@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import type { DividerProps, DividerOrientation, DividerSemanticInfo } from './divider.types';
 
   let {
@@ -22,6 +23,7 @@
     ...rest
   }: DividerProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Divider');
   let direction = $derived<DividerOrientation>(
     orientation === 'horizontal' || orientation === 'vertical'
       ? orientation : typeof vertical === 'boolean'
@@ -86,6 +88,7 @@
   dir={config.direction}
   class={[
       'ant-divider ant-divider-css-var',
+      componentTheme.className,
       `ant-divider-${direction}`,
       hasChildren && ['ant-divider-with-text', `ant-divider-with-text-${logicalPlacement}`],
       dashed && 'ant-divider-dashed',
@@ -100,7 +103,7 @@
       rootClassName,
       classes.root
     ]}
-  style={[semanticStyles.root, !hasChildren
+  style={[componentTheme.style, semanticStyles.root, !hasChildren
       && semanticStyles.rail, style].filter(
         Boolean
       ).join(

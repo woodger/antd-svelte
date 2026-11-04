@@ -357,6 +357,23 @@ prop Tabs; явный undefined и more overrides перекрывают его.
 локальную функцию или provider fallback. Точные приоритеты и текущие потребители
 описаны в [readme](../../readme.md#темы-и-локализация).
 
+## Токены Divider
+
+Divider подготавливает textPaddingInline=1em, orientationMargin=0.05 и
+verticalMarginInline из marginXS. OrientationMargin безразмерен и задаёт пропорцию
+rail; deprecated prop с тем же именем по-прежнему задаёт отдельный отступ подписи.
+Component aliases и algorithm меняют только Divider. Source key/hash и собственный
+CSS-variable prefix применяются уже при SSR; переменные идут перед semantic/root style.
+Без source-темы сохраняются прежние отступы, native separator и размеры.
+
+Нули и CSS-единицы сохраняются; явный undefined снимает declaration без возврата
+vendor defaults. Официальный UMD задаёт declarations для 15 тем и computed styles
+11 вариантов, включая plain, vertical, размеры, dashed/dotted и legacy margin.
+RTL, reactive updates, inherit=false, соседние scopes, удаление темы и unmount
+проверяются через [browser](../../tests/browser/divider-theme.spec.ts) и
+[SSR](../../tests/package/divider-theme.ssr.test.ts). PrefixCls и ConfigProvider.divider
+остаются отдельными задачами.
+
 ## Токены Slider
 
 Slider подготавливает 18 defaults из глобальных aliases и `components.Slider`.

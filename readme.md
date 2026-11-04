@@ -319,7 +319,16 @@ CSS-строки, как style остальных Svelte-компонентов.
 Пример доступен на `/ant-design#divider`, изолированная фикстура — `?fixture=divider`.
 SSR и Chromium-проверки покрывают aliases, ноль, snippets, варианты, размеры,
 semantic slots, геометрию размещения, темы, RTL и узкий экран.
-Произвольные component tokens, prefixCls и component config пока не поддержаны.
+`ConfigProvider.theme.components.Divider` поддерживает textPaddingInline,
+orientationMargin и verticalMarginInline, локальные alias-токены и algorithm.
+Токен orientationMargin задаёт долю ширины rail; одноимённый deprecated prop
+продолжает задавать отдельный отступ подписи. Тема применяется уже при SSR,
+обновляется без замены DOM и предшествует semantic styles и пользовательскому style.
+Нули, CSS-единицы, явный undefined и собственный cssVar.prefix сохраняются.
+Проверки: [SSR](./tests/package/divider-theme.ssr.test.ts),
+[browser](./tests/browser/divider-theme.spec.ts),
+[эталон UMD](./tests/browser/fixtures/ant-design-divider-theme-reference.json),
+фикстура `?fixture=divider-theme`. PrefixCls и ConfigProvider.divider пока не поддержаны.
 Vendor/divider.css содержит 33 правила из закреплённого архива; рецепт divider
 исключает интеграцию ColorPicker и воспроизводится через `npm run cli -- css`.
 

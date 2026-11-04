@@ -9,6 +9,10 @@
 
 ### Added
 
+- Divider: textPaddingInline, orientationMargin и verticalMarginInline из
+  ConfigProvider.theme.components.Divider, включая component aliases/algorithm,
+  CSS-variable prefix и SSR. Сохранены native separator, размеры, default spacing
+  и приоритет semantic/user styles; добавлена сверка с официальным UMD для 15 тем.
 - Slider: локальный prefixCls для single/range и всех BEM-потомков; пустой prefix
   возвращает ant-slider. Подсказки получают исходный owner class независимо от
   собственного Tooltip prefix. Извлечены 54 CSS rules и добавлены 37 UMD-сценариев,
