@@ -30,6 +30,7 @@
   import type { FlexConfig } from './flex.types';
   import type { SpinConfig } from './spin.types';
   import type { ProgressConfig } from './progress.types';
+  import type { SkeletonConfig } from './skeleton.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
@@ -85,6 +86,7 @@
     flex?: FlexConfig;
     spin?: SpinConfig;
     progress?: ProgressConfig;
+    skeleton?: SkeletonConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
@@ -154,6 +156,7 @@
     flex,
     spin,
     progress,
+    skeleton,
     colorPicker,
     inputNumber,
     radio,
@@ -272,6 +275,9 @@
     },
     get progress() {
       return progress ?? parent.progress;
+    },
+    get skeleton() {
+      return skeleton ?? parent.skeleton;
     },
     get colorPicker() {
       return colorPicker ?? parent.colorPicker;

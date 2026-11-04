@@ -177,7 +177,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | NotificationHolder / createNotification | Подробные уведомления с title/description/actions snippets, четыре статуса, шесть положений, ключи, таймеры, hover/focus-пауза и закрытие |
 | Progress | Line/circle/dashboard, steps, gradients, success и percentPosition; component tokens, semantic/provider config, local prefix и formatter snippets; ARIA/RTL/SSR |
 | Spin | Standalone/children/fullscreen, percent/auto, component tokens, prefixCls, semantic/provider config, indicator snippets и static fallback; сохранены inert и восстановление фокуса |
-| Skeleton | Каркас первой загрузки и Avatar/Button/Input/Image/Node; размеры, темы, active/round, semantic slots primitives, замена children, доступный статус и фокус |
+| Skeleton | Каркас первой загрузки и Avatar/Button/Input/Image/Node; размеры, темы, active/round, semantic slots, ConfigProvider, prefix, refs, замена children, доступный статус и фокус |
 | Empty | Пустое состояние, default/simple SVG, image/description snippets, действия, локаль, темы и восстановление фокуса |
 | Result | Семь статусов, официальные иконки/SVG, заголовок, описание, действия, подробности и восстановление фокуса |
 | Steps | Управляемые этапы, статусы, snippets, нативные кнопки, horizontal/vertical, medium/small, локаль, темы и восстановление фокуса |
@@ -3590,6 +3590,25 @@ Ru/en-тексты — «Загрузка…»/«Loading…»; отсутств�
 используют ruRU. Для статического превью aria-hidden скрывает всю группу и
 подавляет status. ConfigProvider.disabled не скрывает обратную связь.
 
+ConfigProvider.skeleton задаёт class/style и object/function classNames/styles.
+Вложенный record заменяется целиком; undefined наследует родительский.
+Semantic slots root/header/section/avatar/title/paragraph объединяются с локальными;
+callbacks получают defaults avatar=false, title=true, paragraph=true и исходные
+optional props, включая отсутствующие active/loading.
+Root styles применяются в порядке context styles.root → context style → local styles.root.
+Существующие локальные class/style остаются на постоянной group. Новые rootClassName,
+context class/style и semantic root относятся к декоративному каркасу и отсутствуют
+при loading=false. Это сохраняет прежний native контракт без дублирования padding.
+
+Локальный prefixCls меняет BEM-классы каркаса с fallback ant-skeleton;
+переменные темы сохраняют свой namespace. Вложенные avatar/title/paragraph принимают
+class и prefixCls, которые заменяют соответствующие semantic class и default prefix,
+как при spread в исходнике. Их style заменяется объединённым semantic style;
+для оформления этих частей используйте styles.avatar/title/paragraph.
+Bind:nativeElement указывает на div каркаса, при loading=false и unmount очищается
+до undefined. Bind:ref даёт объект с nativeElement, равным null без каркаса;
+при unmount сам ref очищается до undefined. Refs не присваиваются при SSR.
+
 Если loading удаляет сфокусированные children, фокус предварительно переходит
 на постоянную group с tabindex=-1. Он остаётся там после завершения; Tab входит
 в новое содержимое. Skeleton не фокусирует новые controls автоматически и не
@@ -3629,13 +3648,16 @@ Primitives повторяют исходную изоляцию от ConfigProvi
 Тема Skeleton подготавливает восемь исходных tokens для основного каркаса и primitives,
 включая deprecated color/colorGradientEnd, современные overrides, aliases/algorithm и
 CSS-variable prefix/key/hash. Основной Skeleton сохраняет native host/status/focus,
-размеры и normalization. Его semantic/config/prefix/ref API, rootClassName и дополнительные
-поля вложенных avatar/title/paragraph ещё не перенесены. Общий ConfigProvider prefix и
-React development warnings также остаются следующими этапами.
+размеры и normalization. Общий ConfigProvider prefix и React development warnings
+остаются следующими этапами.
 
 [116 UMD-сценариев](./tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 сверяют каждый primitive с Ant Design 6.6.8 в стандартном режиме браузера, с одинаковой
 унаследованной typography/color из global design tokens.
+[34 сценария основного Skeleton](./tests/browser/fixtures/ant-design-skeleton-main-reference.json)
+сверяют классы, объявленные slot styles, наследование и вложенные props.
+Постоянная группа, title/div, flex/responsive layout и нормализация сохраняют
+native поведение и не выдаются за исходную React-разметку.
 
 ## Empty
 

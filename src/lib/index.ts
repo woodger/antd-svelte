@@ -554,6 +554,9 @@ export type {
   SkeletonParagraphProps,
   SkeletonWidth
 } from './skeleton.types';
+export type {
+  SkeletonConfig, SkeletonSemanticSlots, SkeletonSemanticInfo, SkeletonRef, SkeletonPartProps
+} from './skeleton.types';
 export type { SkeletonLocale } from './types';
 export type { EmptyProps, EmptyImage, EmptyDescription } from './empty.types';
 export type { ResultProps, ResultStatus, ResultContent } from './result.types';

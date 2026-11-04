@@ -407,9 +407,14 @@ paragraphMarginTop=marginLG+marginXXS. Deprecated color/colorGradientEnd обн�
 Поддержаны aliases/algorithm, dark/compact, нули и variable prefix/key/hash. Переменные
 на root предшествуют user styles. Primitives наследуют componentSize только для
 Avatar/Button/Input, поддерживают local prefixCls и object root/content semantic slots;
-style относится к content после styles.content. Main Skeleton сохраняет native host,
-status/focus и normalization; его component record/semantic/prefix/ref API пока отсутствуют.
+style относится к content после styles.content. Main Skeleton поддерживает отдельный
+ConfigProvider.skeleton и object/function root/header/section/avatar/title/paragraph.
+Его root styles: context styles.root → context style → local styles.root; legacy local
+class/style остаются на native host. Local prefix меняет классы декоративного каркаса,
+nativeElement/ref указывают на него; при loading=false каркас отсутствует.
+Main сохраняет native host/status/focus, title/div, flex/responsive guards и normalization.
 [116 source-сценариев](../../tests/browser/fixtures/ant-design-skeleton-element-reference.json)
+primitives и [34 main-сценария](../../tests/browser/fixtures/ant-design-skeleton-main-reference.json)
 сняты из закреплённого UMD с одинаковым inherited global-token окружением.
 
 ## Токены Spin

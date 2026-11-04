@@ -17,7 +17,7 @@ export interface SkeletonElementProps {
   classNames?: SkeletonElementSlots;
   styles?: SkeletonElementSlots;
 }
-/** Самостоятельный placeholder аватара; основной Skeleton использует только size/shape. */
+/** Самостоятельный placeholder аватара и настройки аватара основного Skeleton. */
 export interface SkeletonAvatarProps extends SkeletonElementProps {
   size?: SkeletonAvatarSize;
   shape?: 'circle' | 'square';
@@ -37,12 +37,18 @@ export interface SkeletonNodeProps extends SkeletonElementProps {
   internalClassName?: string;
 }
 export type SkeletonImageProps = SkeletonElementProps;
+export interface SkeletonPartProps {
+  prefixCls?: string;
+  class?: string;
+  /** Основной Skeleton заменяет вложенный style соответствующим semantic style. */
+  style?: string;
+}
 /** Геометрия строки title в Skeleton. */
-export interface SkeletonTitleProps {
+export interface SkeletonTitleProps extends SkeletonPartProps {
   width?: SkeletonWidth;
 }
 /** Число строк и ширины текстового placeholder Skeleton. */
-export interface SkeletonParagraphProps {
+export interface SkeletonParagraphProps extends SkeletonPartProps {
   rows?: number;
   width?: SkeletonWidth | SkeletonWidth[];
 }
@@ -56,7 +62,7 @@ export interface SkeletonProps {
   /** @defaultValue false */
   round?: boolean;
   /** @defaultValue false */
-  avatar?: boolean | Pick<SkeletonAvatarProps, 'size' | 'shape'>;
+  avatar?: boolean | Omit<SkeletonAvatarProps, 'active'>;
   /** @defaultValue true */
   title?: boolean | SkeletonTitleProps;
   /** @defaultValue true */
@@ -67,6 +73,32 @@ export interface SkeletonProps {
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
   'aria-hidden'?: boolean;
+  /** Существующий native host; новые semantic root и rootClassName относятся к каркасу. */
   class?: string;
+  /** Существующий native host; styles.root относится к декоративному каркасу. */
   style?: string;
+  prefixCls?: string;
+  rootClassName?: string;
+  classNames?: SkeletonSemanticSlots
+    | ((info: SkeletonSemanticInfo) => SkeletonSemanticSlots | undefined);
+  styles?: SkeletonSemanticSlots
+    | ((info: SkeletonSemanticInfo) => SkeletonSemanticSlots | undefined);
+  /** Placeholder div после mount; undefined, когда loading=false или компонент удалён. */
+  nativeElement?: HTMLDivElement;
+  ref?: SkeletonRef;
 }
+
+export type SkeletonSemanticSlots = Partial<Record<
+  'root' | 'header' | 'section' | 'avatar' | 'title' | 'paragraph', string
+>>;
+export interface SkeletonSemanticInfo {
+  props: SkeletonProps & {
+    avatar: NonNullable<SkeletonProps['avatar']>;
+    title: NonNullable<SkeletonProps['title']>;
+    paragraph: NonNullable<SkeletonProps['paragraph']>;
+  };
+}
+export interface SkeletonRef {
+  readonly nativeElement: HTMLDivElement | null;
+}
+export type SkeletonConfig = Pick<SkeletonProps, 'class' | 'style' | 'classNames' | 'styles'>;

@@ -11334,7 +11334,7 @@
         },
         {
           "id": "component-theme-prefix",
-          "title": "Общие Skeleton tokens и local prefix primitives",
+          "title": "Общие Skeleton tokens и local prefix",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
@@ -11348,12 +11348,16 @@
         {
           "id": "main-source-api",
           "title": "Основной Skeleton: semantic/config/prefix/ref и вложенные props",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
-            "readme.md"
+            "src/lib/Skeleton.svelte",
+            "src/lib/skeleton.types.ts",
+            "tests/package/skeleton-main.ssr.test.ts",
+            "tests/browser/skeleton-main.spec.ts",
+            "tests/browser/fixtures/ant-design-skeleton-main-reference.json"
           ],
-          "note": "Не перенесены ConfigProvider.skeleton, function/object main semantic slots, local prefixCls и nativeElement/ref у основного Skeleton, rootClassName и дополнительные class/style/prefix поля вложенных title/paragraph/avatar. Primitives повторяют исходную изоляцию от component config и имеют свой local prefix."
+          "note": "ConfigProvider.skeleton class/style и object/function semantic root/header/section/avatar/title/paragraph; defaults avatar/title/paragraph при исходных optional active/loading, context→local merge и nested replacement. Local prefix, rootClassName, bind:nativeElement/ref относятся к декоративному каркасу; refs очищаются при loading/unmount. Вложенные class/prefix перекрывают defaults, их style заменяется semantic style как в source. Legacy local class/style остаются на native host, без дублирования padding. 34 UMD-сценария сверяют классы и объявленные slot effects; title/div, flex/responsive guards и normalization остаются native boundaries. Primitives изолированы от основного component record."
         },
         {
           "id": "native-boundaries",

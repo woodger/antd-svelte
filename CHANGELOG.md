@@ -9,6 +9,11 @@
 
 ### Added
 
+- Основной Skeleton: ConfigProvider.skeleton, object/function semantic slots,
+  local prefixCls, rootClassName, nativeElement/ref и вложенные class/prefix props.
+  Сохранены native host, прежние class/style, status/focus, layout и normalization.
+  Добавлена сверка с 34 официальными UMD-сценариями, SSR и lifecycle-проверки.
+
 - Skeleton.Avatar/Button/Input/Image/Node и одинаковые named Svelte exports: исходные
   size context/shapes/block, object root/content semantic styles, local prefix и active.
   Общие восемь component tokens подключены также к основному Skeleton; его native
