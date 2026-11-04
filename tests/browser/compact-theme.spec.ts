@@ -26,9 +26,9 @@ for (const mode of ['native', 'source']) {
           .toBeCloseTo(metrics.height, 2);
         for (const key of ['fontSize', 'lineHeight', 'paddingBlockStart', 'paddingBlockEnd',
           'paddingInlineStart', 'paddingInlineEnd'] as const) {
-          const value = await controls[name].evaluate((element, property) =>
-            getComputedStyle(element)[property], key);
-          expect(value, `${name}.${key}`).toBe(metrics[key]);
+          await expect.poll(() => controls[name].evaluate((element, property) =>
+            getComputedStyle(element)[property], key), { message: `${name}.${key}` })
+            .toBe(metrics[key]);
         }
       }
     });
