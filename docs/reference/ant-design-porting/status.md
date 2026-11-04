@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **109**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **52**; требуется аудит у **18**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **53**; требуется аудит у **17**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -78,7 +78,7 @@ Candidate означает запись каталога, для которой 
 | [Modal](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/modal) | feedback | target | Modal | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Notification](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/notification) | feedback | target | NotificationHolder, createNotification | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Popconfirm](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/popconfirm) | feedback | target | Popconfirm | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
-| [Progress](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/progress) | feedback | target | Progress | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Dashboard, steps и градиенты (missing) |
+| [Progress](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/progress) | feedback | target | Progress | Согласованный v1 покрыт | Dashboard, steps и градиенты (partial); Полный circle/dashboard и маленький Tooltip (missing); Общий prefix и React diagnostics (missing) |
 | [Result](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/result) | feedback | target | Result | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Skeleton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/skeleton) | feedback | target | Skeleton | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Отдельные Skeleton primitives (missing) |
 | [Spin](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/spin) | feedback | target | Spin | Согласованный v1 покрыт | Общий prefixCls ConfigProvider (missing); React development warnings (missing) |

@@ -26,9 +26,18 @@ import type { GlobalToken } from './theme-component-token.types';
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
-  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin';
+  | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
+  | 'Progress';
 
 const factories = {
+  Progress: (token: GlobalToken) => ({
+    circleTextColor: token.colorText,
+    defaultColor: token.colorInfo,
+    remainingColor: token.colorFillSecondary,
+    lineBorderRadius: 100,
+    circleTextFontSize: '1em',
+    circleIconFontSize: `${token.fontSize / token.fontSizeSM}em`
+  }),
   Spin: (token: GlobalToken) => ({
     contentHeight: 400,
     dotSize: token.controlHeightLG / 2,
@@ -146,7 +155,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Slider: [],
   Divider: ['orientationMargin'],
   Flex: [],
-  Spin: []
+  Spin: [],
+  Progress: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

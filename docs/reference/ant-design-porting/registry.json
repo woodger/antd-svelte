@@ -11043,7 +11043,7 @@
       "scope": "target",
       "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
       "upstreamPath": "components/progress",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Progress",
@@ -11055,29 +11055,123 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "upstreamPackages": [
+        {
+          "name": "@ant-design/fast-color",
+          "range": "^3.0.1",
+          "referenceVersion": "3.0.1"
+        },
+        {
+          "name": "@rc-component/progress",
+          "range": "~1.0.3",
+          "referenceVersion": "1.0.3"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
       "evidence": [
         "readme.md",
-        "tests/browser/progress.spec.ts"
+        "docs/reference/theme-context.md",
+        "src/lib/Progress.svelte",
+        "src/lib/progress.types.ts",
+        "src/lib/progress.engine.test.ts",
+        "src/lib/progress.ssr.test.ts",
+        "src/lib/progress-line-reference.test.ts",
+        "tests/browser/progress.spec.ts",
+        "tests/browser/progress-line.spec.ts",
+        "tests/package/progress-line.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-progress-line-reference.json",
+        "tests/browser/fixtures/progress-native-clipping-reference.json"
       ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Native line/circle, значения, статусы и SSR",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "src/lib/progress.engine.test.ts",
+            "src/lib/progress.ssr.test.ts",
+            "tests/browser/progress.spec.ts"
+          ],
+          "note": "Сохранены finite percent/dimensions, нормализация общего percent и старые line/circle defaults, контролируемые props без таймеров, локализованные ARIA/name/valueText, отсутствие Tab/live regions и SSR геометрия native circle. Class/style, native events, owner state/focus и reduced motion сохраняются. Circle пока использует прежний SVG adapter, не полный @rc-component/progress."
         },
         {
           "id": "gap-1",
           "title": "Dashboard, steps и градиенты",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/progress-line.engine.ts",
+            "tests/browser/progress-line.spec.ts"
+          ],
+          "note": "Line steps/rounding и gradients перенесены по Ant Design 6.6.8. Circular steps, dashboard, conic gradient/mask и delegated transition/geometry остаются следующим этапом; типы пока не обещают эти возможности у circle."
+        },
+        {
+          "id": "line-features",
+          "title": "Line success, percentPosition и formatter nodes",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/Progress.svelte",
+            "tests/browser/progress-line.spec.ts",
+            "tests/package/progress-line.ssr.test.ts"
+          ],
+          "note": "Два независимых tracks, source success status precedence, railColor/trailColor и strokeWidth/size aliases. PercentPosition inner/outer + start/center/end; внутренний текст вместо status icon и brightness по FastColor. Format получает optional success percent, возвращает string/number/passive Snippet; старый format.length<=1 без success вызывается с одним аргументом. Snippet использует numeric ARIA fallback или явный aria-valuetext. Label clipping для size=24 сохраняет исходный native contract и отдельно сверяется с fresh-build baseline 850ad08; source эталон остаётся неизменным."
+        },
+        {
+          "id": "line-steps",
+          "title": "Line steps, размеры, цвета и rounding",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/progress-line.engine.ts",
+            "src/lib/progress-line-reference.test.ts",
+            "tests/browser/progress-line.spec.ts"
+          ],
+          "note": "Количество и rounding по source steps*percent/100, per-item dimensions, small width 2/default 14, strokeWidth height, colors per index и rail fallback. Object steps использует count, gap в line не меняет интервалы. Gradient object в steps игнорируется. Preset middle/default и локальный prefix поддержаны; широкие steps следуют source layout."
+        },
+        {
+          "id": "component-config",
+          "title": "ConfigProvider.progress, semantic slots и native refs",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/progress-line.spec.ts",
+            "tests/package/progress-line.ssr.test.ts"
+          ],
+          "note": "Record class/style/classNames/styles наследуется целиком при undefined, явный объект заменяет его. Object/function root/body/rail/track/indicator получают props с source defaults для type/percent/size/showInfo/percentPosition. Source provider slots → provider style → local slots → local style; part styles перекрывают computed dimensions/colors. Native attrs/events и bind:nativeElement; root/ref/focus сохраняются при updates и ref очищается при unmount."
+        },
+        {
+          "id": "theme-prefix",
+          "title": "Компонентные tokens, aliases и local prefix",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/progress-prefix.engine.ts",
+            "src/lib/vendor/progress.css",
+            "src/lib/vendor/progress-prefix.css.js",
+            "tests/browser/fixtures/ant-design-progress-line-reference.json"
+          ],
+          "note": "Шесть source component defaults и alias/algorithm overrides, CSS-variable prefix/key/hash; variables до semantic/user styles. Local BEM prefix с fallback ant-progress, marker collision и RTL проверены. 40 исходных CSS rules и один keyframe; native RTL active decoration сохранён. SourceSVG viewBox filled status icons используется только в Progress line, остальные Icon consumers не меняются."
+        },
+        {
+          "id": "circle-source",
+          "title": "Полный circle/dashboard и маленький Tooltip",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "note": "Не перенесены dashboard/gap placement/width alias, circle success/steps/gradient, source cap adjustment/transition duration и auto Tooltip для small circle. Существующая finite native geometry сохраняется; её r/offset/rotation не выдаются за полное совпадение с rc-component/progress."
+        },
+        {
+          "id": "global-prefix-warnings",
+          "title": "Общий prefix и React diagnostics",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [],
+          "note": "Общий ConfigProvider getPrefixCls и React development warnings остаются общими следующими этапами."
         }
       ]
     },

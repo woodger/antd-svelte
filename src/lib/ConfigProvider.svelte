@@ -29,6 +29,7 @@
   import type { DividerConfig } from './divider.types';
   import type { FlexConfig } from './flex.types';
   import type { SpinConfig } from './spin.types';
+  import type { ProgressConfig } from './progress.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
@@ -83,6 +84,7 @@
     divider?: DividerConfig;
     flex?: FlexConfig;
     spin?: SpinConfig;
+    progress?: ProgressConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
@@ -151,6 +153,7 @@
     divider,
     flex,
     spin,
+    progress,
     colorPicker,
     inputNumber,
     radio,
@@ -266,6 +269,9 @@
     },
     get spin() {
       return spin ?? parent.spin;
+    },
+    get progress() {
+      return progress ?? parent.progress;
     },
     get colorPicker() {
       return colorPicker ?? parent.colorPicker;

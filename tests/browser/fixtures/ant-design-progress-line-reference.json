@@ -1,0 +1,7038 @@
+{
+  "reference": {
+    "documentMode": "CSS1Compat",
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js; runtime CSS-in-JS only",
+    "operation": "capture line/steps, gradients, success, percent position, themes, semantic/context ordering and local prefixes",
+    "nativeBoundary": "Svelte keeps finite legacy percent/dimensions, named progressbar and localized aria-valuetext, passive formatter snippets, old one-argument formatter call and reduced motion/RTL active decoration. Circle/dashboard and delegated SVG geometry remain a separate migration stage; private hash/marker classes and native-only ARIA are excluded."
+  },
+  "viewport": {
+    "width": 1000,
+    "height": 900
+  },
+  "cases": [
+    {
+      "name": "default",
+      "props": {},
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "272.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "0px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "0%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "19.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "fractional",
+      "props": {
+        "percent": 42.5
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "252.578px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "107.344px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "42.5%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "39.4219px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "complete",
+      "props": {
+        "percent": 100
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-success"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14.25px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14.25px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "278px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "278px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "",
+          "style": {
+            "color": "rgb(82, 196, 26)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "14px"
+          }
+        },
+        "icon": {
+          "viewBox": "64 64 896 896",
+          "width": 14,
+          "height": 14
+        }
+      }
+    },
+    {
+      "name": "exception",
+      "props": {
+        "percent": 65,
+        "status": "exception"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-exception"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14.25px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14.25px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "278px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "180.688px",
+              "height": "8px",
+              "background-color": "rgb(255, 77, 79)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "",
+          "style": {
+            "color": "rgb(255, 77, 79)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "14px"
+          }
+        },
+        "icon": {
+          "viewBox": "64 64 896 896",
+          "width": 14,
+          "height": 14
+        }
+      }
+    },
+    {
+      "name": "active",
+      "props": {
+        "percent": 65,
+        "status": "active"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-active"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "explicit-normal",
+      "props": {
+        "percent": 100,
+        "status": "normal"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "256.328px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "256.328px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "100%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "35.6719px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "no-info",
+      "props": {
+        "percent": 65,
+        "showInfo": false
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "8px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "8px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "300px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "195px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": null,
+        "icon": null
+      }
+    },
+    {
+      "name": "small",
+      "props": {
+        "percent": 65,
+        "size": "small"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-small",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "12px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "12px",
+            "line-height": "18.8571px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "12px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "268.297px",
+            "height": "6px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "174.391px",
+              "height": "6px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "12px",
+            "line-height": "12px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "23.7031px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "middle",
+      "props": {
+        "percent": 65,
+        "size": "middle"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "default-alias",
+      "props": {
+        "percent": 65,
+        "size": "default"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "numeric",
+      "props": {
+        "percent": 65,
+        "size": 24
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "24px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "24px",
+            "height": "24px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "0px",
+            "height": "24px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "0px",
+              "height": "24px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "pair",
+      "props": {
+        "percent": 65,
+        "size": [
+          240,
+          16
+        ]
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "16px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "16px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "204.344px",
+            "height": "16px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "132.812px",
+              "height": "16px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "css-width",
+      "props": {
+        "percent": 65,
+        "size": [
+          "75%",
+          12
+        ]
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "225px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "189.344px",
+            "height": "12px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "123.062px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "object",
+      "props": {
+        "percent": 65,
+        "size": {
+          "width": 240,
+          "height": 16
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "16px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "16px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "204.344px",
+            "height": "16px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "132.812px",
+              "height": "16px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "legacy-stroke",
+      "props": {
+        "percent": 65,
+        "strokeWidth": 4
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "4px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "4px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "square",
+      "props": {
+        "percent": 65,
+        "strokeLinecap": "square"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "0px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "butt",
+      "props": {
+        "percent": 65,
+        "strokeLinecap": "butt",
+        "railColor": "#332211"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgb(51, 34, 17)",
+            "border-radius": "0px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "trail-alias",
+      "props": {
+        "percent": 65,
+        "trailColor": "#332211"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgb(51, 34, 17)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "rail-priority",
+      "props": {
+        "percent": 65,
+        "trailColor": "red",
+        "railColor": "#332211"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgb(51, 34, 17)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "success-part",
+      "props": {
+        "percent": 70,
+        "success": {
+          "percent": 30
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "185.031px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "79.2969px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "70%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "success-zero",
+      "props": {
+        "percent": 100,
+        "success": {
+          "percent": 0
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "256.328px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "256.328px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "0px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "100%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "35.6719px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "success-complete",
+      "props": {
+        "percent": 50,
+        "success": {
+          "percent": 100
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-success"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14.25px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14.25px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "278px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "139px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "278px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "",
+          "style": {
+            "color": "rgb(82, 196, 26)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "14px"
+          }
+        },
+        "icon": {
+          "viewBox": "64 64 896 896",
+          "width": 14,
+          "height": 14
+        }
+      }
+    },
+    {
+      "name": "success-negative",
+      "props": {
+        "percent": 50,
+        "success": {
+          "percent": -20
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "132.172px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "0px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "50%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "success-overlap",
+      "props": {
+        "percent": 30,
+        "success": {
+          "percent": 70
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "79.2969px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "185.031px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "30%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "success-colors",
+      "props": {
+        "percent": 70,
+        "success": {
+          "percent": 30,
+          "strokeColor": "#ff22cc"
+        },
+        "strokeColor": "#2244cc"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "185.031px",
+              "height": "8px",
+              "background-color": "rgb(34, 68, 204)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "#2244cc"
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "79.2969px",
+              "height": "8px",
+              "background-color": "rgb(255, 34, 204)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "70%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "format",
+      "format": "numbers",
+      "props": {
+        "percent": 65,
+        "success": {
+          "percent": 30
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "247.469px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "160.844px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "74.2344px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65 / 30",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "44.5312px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "format-complete",
+      "format": "numbers",
+      "props": {
+        "percent": 100
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-success"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "247.469px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "247.469px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "100 / 0",
+          "style": {
+            "color": "rgb(82, 196, 26)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "44.5312px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "format-rich",
+      "format": "rich",
+      "props": {
+        "percent": 65,
+        "success": {
+          "percent": 30
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "246.875px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "160.469px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "74.0625px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65 / 30",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "45.125px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "gradient",
+      "props": {
+        "percent": 65,
+        "strokeColor": {
+          "from": "#108ee9",
+          "to": "#87d068"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "background-image": "linear-gradient(to right, rgb(16, 142, 233), rgb(135, 208, 104))",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "linear-gradient(to right, #108ee9, #87d068)"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "gradient-stops",
+      "props": {
+        "percent": 65,
+        "strokeColor": {
+          "100%": "#ff0000",
+          "0%": "#00ff00",
+          "50%": "#0000ff"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "background-image": "linear-gradient(to right, rgb(0, 255, 0) 0%, rgb(0, 0, 255) 50%, rgb(255, 0, 0) 100%)",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "linear-gradient(to right, #00ff00 0%, #0000ff 50%, #ff0000 100%)"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "gradient-direction",
+      "props": {
+        "percent": 65,
+        "strokeColor": {
+          "direction": "to top",
+          "from": "#108ee9",
+          "to": "#87d068"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "background-image": "linear-gradient(to top, rgb(16, 142, 233), rgb(135, 208, 104))",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "linear-gradient(to top, #108ee9, #87d068)"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "gradient-defaults",
+      "props": {
+        "percent": 65,
+        "strokeColor": {
+          "from": "#87d068"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "background-image": "linear-gradient(to right, rgb(135, 208, 104), rgb(22, 119, 255))",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "linear-gradient(to right, #87d068, #1677FF)"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "gradient-prefixes",
+      "props": {
+        "percent": 65,
+        "strokeColor": {
+          "20px": "#123456",
+          "0%": "#cc22ff",
+          "nope": "black",
+          "100%": "#222222"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "background-image": "linear-gradient(to right, rgb(204, 34, 255) 0%, rgb(18, 52, 86) 20%, rgb(34, 34, 34) 100%)",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "linear-gradient(to right, #cc22ff 0%, #123456 20%, #222222 100%)"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "array-first",
+      "props": {
+        "percent": 65,
+        "strokeColor": [
+          "#2244cc",
+          "#cc2244"
+        ]
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(34, 68, 204)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "#2244cc"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps",
+      "props": {
+        "percent": 50,
+        "steps": 3
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "83.6562px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "83.6562px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "50%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-small",
+      "props": {
+        "percent": 60,
+        "steps": 5,
+        "size": "small"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-small",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "55.6562px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "55.6562px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "2px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "2px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "2px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "2px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "2px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-number-size",
+      "props": {
+        "percent": 60,
+        "steps": 5,
+        "size": 16
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "125.656px",
+            "height": "16px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "125.656px",
+            "height": "16px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "16px",
+              "height": "16px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "16px",
+              "height": "16px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "16px",
+              "height": "16px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "16px",
+              "height": "16px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "16px",
+              "height": "16px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-pair",
+      "props": {
+        "percent": 60,
+        "steps": 5,
+        "size": [
+          20,
+          12
+        ]
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "145.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "145.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-width",
+      "props": {
+        "percent": 60,
+        "steps": 6,
+        "size": [
+          80,
+          12
+        ]
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "527.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "527.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "80px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "80px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "80px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "80px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "80px",
+              "height": "12px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "80px",
+              "height": "12px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-object",
+      "props": {
+        "percent": 60,
+        "steps": 5,
+        "size": {
+          "width": 20,
+          "height": 12
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "145.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "145.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "12px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-config",
+      "props": {
+        "percent": 60,
+        "steps": {
+          "count": 5,
+          "gap": 10
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "115.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "115.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-zero",
+      "props": {
+        "percent": 60,
+        "steps": {
+          "count": 0,
+          "gap": 10
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "35.6562px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "35.6562px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-round-floor",
+      "rounding": "floor",
+      "props": {
+        "percent": 50,
+        "steps": 5
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "115.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "115.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "50%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-round-ceil",
+      "rounding": "ceil",
+      "props": {
+        "percent": 42,
+        "steps": 5
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "115.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "115.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "42%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-colors",
+      "props": {
+        "percent": 80,
+        "steps": 5,
+        "strokeColor": [
+          "#2244cc",
+          "#cc2244"
+        ],
+        "railColor": "#ffeeaa"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "115.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "115.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(34, 68, 204)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(204, 34, 68)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(255, 238, 170)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "80%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-gradient-ignored",
+      "props": {
+        "percent": 80,
+        "steps": 5,
+        "strokeColor": {
+          "from": "red",
+          "to": "blue"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "115.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "115.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "80%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-hidden",
+      "props": {
+        "percent": 80,
+        "steps": 5,
+        "showInfo": false
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "78px",
+            "height": "8px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "78px",
+            "height": "8px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": null,
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-success",
+      "props": {
+        "percent": 60,
+        "steps": 5,
+        "success": {
+          "percent": 30
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "115.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "115.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "steps-semantic",
+      "semantic": true,
+      "provider": true,
+      "props": {
+        "percent": 60,
+        "steps": 5,
+        "size": [
+          20,
+          12
+        ]
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "align-none",
+            "ant-progress",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "ant-progress-steps",
+            "local-root",
+            "percent-60",
+            "provider-progress",
+            "provider-root",
+            "show-true",
+            "size-20,12",
+            "type-line"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "149.656px",
+            "height": "21px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "7px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-steps-body",
+            "local-body",
+            "provider-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "149.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active",
+              "local-track",
+              "provider-track"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "9px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active",
+              "local-track",
+              "provider-track"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "9px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "ant-progress-steps-item-active",
+              "local-track",
+              "provider-track"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "9px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "local-track",
+              "provider-track"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "9px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-steps-item",
+              "local-track",
+              "provider-track"
+            ],
+            "style": {
+              "width": "20px",
+              "height": "9px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "local-indicator",
+            "provider-indicator"
+          ],
+          "text": "60%",
+          "style": {
+            "color": "rgb(102, 34, 170)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "semantic",
+      "semantic": true,
+      "provider": true,
+      "props": {
+        "percent": 65,
+        "success": {
+          "percent": 30
+        },
+        "style": "padding-top:11px"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "align-none",
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "local-root",
+            "percent-65",
+            "provider-progress",
+            "provider-root",
+            "show-true",
+            "size-medium",
+            "type-line"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "25px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "11px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body",
+            "local-body",
+            "provider-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail",
+            "local-rail",
+            "provider-rail"
+          ],
+          "style": {
+            "width": "260.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "3px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track",
+              "local-track",
+              "provider-track"
+            ],
+            "style": {
+              "width": "169.219px",
+              "height": "9px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "3px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success",
+              "local-track",
+              "provider-track"
+            ],
+            "style": {
+              "width": "78.0938px",
+              "height": "9px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "3px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer",
+            "local-indicator",
+            "provider-indicator"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgb(102, 34, 170)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "provider-reset",
+      "provider": true,
+      "childProvider": "empty",
+      "props": {
+        "percent": 65
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "provider-inherit",
+      "provider": true,
+      "props": {
+        "percent": 65
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal",
+            "provider-progress",
+            "provider-root"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "19px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "5px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body",
+            "provider-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail",
+            "provider-rail"
+          ],
+          "style": {
+            "width": "262.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "2px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track",
+              "provider-track"
+            ],
+            "style": {
+              "width": "170.516px",
+              "height": "7px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "2px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer",
+            "provider-indicator"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgb(34, 68, 204)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "own-tokens",
+      "theme": "own",
+      "props": {
+        "percent": 65
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgb(17, 34, 51)",
+            "border-radius": "9px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(136, 68, 204)",
+              "background-image": "none",
+              "border-radius": "9px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "own-inner",
+      "theme": "own",
+      "props": {
+        "percent": 65,
+        "size": [
+          240,
+          20
+        ],
+        "percentPosition": {
+          "type": "inner",
+          "align": "end"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-inner",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "20px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "20px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "240px",
+            "height": "20px",
+            "background-color": "rgb(17, 34, 51)",
+            "border-radius": "9px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "156px",
+              "height": "20px",
+              "background-color": "rgb(136, 68, 204)",
+              "background-image": "none",
+              "border-radius": "9px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-inner"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgb(255, 255, 255)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "flex",
+            "order": "0",
+            "justify-content": "end",
+            "padding-left": "4px",
+            "width": "156px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "aliases",
+      "theme": "aliases",
+      "props": {
+        "percent": 65
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "18px",
+            "color": "rgb(17, 153, 85)",
+            "font-size": "18px",
+            "line-height": "28.2857px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "18px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "12px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "252.438px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "164.078px",
+              "height": "8px",
+              "background-color": "rgb(187, 34, 68)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgb(17, 153, 85)",
+            "font-size": "18px",
+            "line-height": "18px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "35.5625px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "algorithm",
+      "theme": "algorithm",
+      "props": {
+        "percent": 65
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(204, 34, 187)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "dark",
+      "theme": "dark",
+      "props": {
+        "percent": 65,
+        "success": {
+          "percent": 30
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(255, 255, 255, 0.85)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(255, 255, 255, 0.12)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 104, 220)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-track",
+              "ant-progress-track-success"
+            ],
+            "style": {
+              "width": "79.2969px",
+              "height": "8px",
+              "background-color": "rgb(73, 170, 25)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(255, 255, 255, 0.85)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "compact",
+      "theme": "compact",
+      "props": {
+        "percent": 65
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "12px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "12px",
+            "line-height": "20px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "12px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "4px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "272.297px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "176.984px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "12px",
+            "line-height": "12px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "23.7031px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "variables",
+      "theme": "variables",
+      "props": {
+        "percent": 65
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "7px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "7px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "local-prefix",
+      "props": {
+        "prefixCls": "custom-progress",
+        "percent": 65,
+        "success": {
+          "percent": 30
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "custom-progress",
+            "custom-progress-line",
+            "custom-progress-line-align-end",
+            "custom-progress-line-position-outer",
+            "custom-progress-show-info",
+            "custom-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "custom-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "custom-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "custom-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "custom-progress-track",
+              "custom-progress-track-success"
+            ],
+            "style": {
+              "width": "79.2969px",
+              "height": "8px",
+              "background-color": "rgb(82, 196, 26)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "custom-progress-indicator",
+            "custom-progress-indicator-end",
+            "custom-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "marker-prefix",
+      "props": {
+        "prefixCls": "ant-progress-css-var",
+        "percent": 65,
+        "steps": 5
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress-css-var-show-info",
+            "ant-progress-css-var-status-normal",
+            "ant-progress-css-var-steps"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "115.656px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-css-var-steps-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "115.656px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "2px"
+          }
+        },
+        "rail": null,
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-css-var-steps-item",
+              "ant-progress-css-var-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-css-var-steps-item",
+              "ant-progress-css-var-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-css-var-steps-item",
+              "ant-progress-css-var-steps-item-active"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-css-var-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          },
+          {
+            "classes": [
+              "ant-progress-css-var-steps-item"
+            ],
+            "style": {
+              "width": "14px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0.06)",
+              "background-image": "none",
+              "border-radius": "0px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-css-var-indicator"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "empty-prefix",
+      "props": {
+        "prefixCls": "",
+        "percent": 65
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "rtl",
+      "rtl": true,
+      "props": {
+        "percent": 65,
+        "strokeColor": {
+          "from": "#108ee9",
+          "to": "#87d068"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-rtl",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "14px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "rtl",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "300px",
+            "height": "14px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "264.344px",
+            "height": "8px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "171.812px",
+              "height": "8px",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "background-image": "linear-gradient(to left, rgb(16, 142, 233), rgb(135, 208, 104))",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "linear-gradient(to left, #108ee9, #87d068)"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "rtl-prefix",
+      "rtl": true,
+      "props": {
+        "prefixCls": "rtl-progress",
+        "percent": 65,
+        "size": [
+          240,
+          20
+        ],
+        "percentPosition": {
+          "type": "inner",
+          "align": "start"
+        }
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "rtl-progress",
+            "rtl-progress-line",
+            "rtl-progress-line-align-start",
+            "rtl-progress-line-position-inner",
+            "rtl-progress-rtl",
+            "rtl-progress-show-info",
+            "rtl-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "20px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "rtl",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "rtl-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "20px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "rtl-progress-rail"
+          ],
+          "style": {
+            "width": "240px",
+            "height": "20px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "rtl-progress-track"
+            ],
+            "style": {
+              "width": "156px",
+              "height": "20px",
+              "background-color": "rgb(22, 119, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": ""
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "rtl-progress-indicator",
+            "rtl-progress-indicator-inner",
+            "rtl-progress-indicator-start"
+          ],
+          "text": "65%",
+          "style": {
+            "color": "rgb(255, 255, 255)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "flex",
+            "order": "0",
+            "justify-content": "start",
+            "padding-left": "4px",
+            "width": "156px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "position-inner-start",
+      "props": {
+        "percent": 25,
+        "size": [
+          240,
+          20
+        ],
+        "percentPosition": {
+          "type": "inner",
+          "align": "start"
+        },
+        "strokeColor": "#E6F4FF"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-start",
+            "ant-progress-line-position-inner",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "20px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "20px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "240px",
+            "height": "20px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "60px",
+              "height": "20px",
+              "background-color": "rgb(230, 244, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "#E6F4FF"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-bright",
+            "ant-progress-indicator-inner",
+            "ant-progress-indicator-start"
+          ],
+          "text": "25%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "flex",
+            "order": "0",
+            "justify-content": "start",
+            "padding-left": "4px",
+            "width": "60px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "position-inner-center",
+      "props": {
+        "percent": 25,
+        "size": [
+          240,
+          20
+        ],
+        "percentPosition": {
+          "type": "inner",
+          "align": "center"
+        },
+        "strokeColor": "#E6F4FF"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-center",
+            "ant-progress-line-position-inner",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "20px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "20px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "240px",
+            "height": "20px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "60px",
+              "height": "20px",
+              "background-color": "rgb(230, 244, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "#E6F4FF"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-bright",
+            "ant-progress-indicator-center",
+            "ant-progress-indicator-inner"
+          ],
+          "text": "25%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "flex",
+            "order": "0",
+            "justify-content": "center",
+            "padding-left": "4px",
+            "width": "60px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "position-inner-end",
+      "props": {
+        "percent": 25,
+        "size": [
+          240,
+          20
+        ],
+        "percentPosition": {
+          "type": "inner",
+          "align": "end"
+        },
+        "strokeColor": "#E6F4FF"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-inner",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "20px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "20px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "240px",
+            "height": "20px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "60px",
+              "height": "20px",
+              "background-color": "rgb(230, 244, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "#E6F4FF"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-bright",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-inner"
+          ],
+          "text": "25%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "flex",
+            "order": "0",
+            "justify-content": "end",
+            "padding-left": "4px",
+            "width": "60px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "position-outer-start",
+      "props": {
+        "percent": 25,
+        "size": [
+          240,
+          20
+        ],
+        "percentPosition": {
+          "type": "outer",
+          "align": "start"
+        },
+        "strokeColor": "#E6F4FF"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-start",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "20px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "20px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "204.344px",
+            "height": "20px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "51.0781px",
+              "height": "20px",
+              "background-color": "rgb(230, 244, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "#E6F4FF"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-outer",
+            "ant-progress-indicator-start"
+          ],
+          "text": "25%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "-1",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "position-outer-center",
+      "props": {
+        "percent": 25,
+        "size": [
+          240,
+          20
+        ],
+        "percentPosition": {
+          "type": "outer",
+          "align": "center"
+        },
+        "strokeColor": "#E6F4FF"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-center",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "38px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body",
+            "ant-progress-body-layout-bottom"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "38px",
+            "align-items": "center",
+            "flex-direction": "column",
+            "gap": "4px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "240px",
+            "height": "20px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "60px",
+              "height": "20px",
+              "background-color": "rgb(230, 244, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "#E6F4FF"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-center",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "25%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    },
+    {
+      "name": "position-outer-end",
+      "props": {
+        "percent": 25,
+        "size": [
+          240,
+          20
+        ],
+        "percentPosition": {
+          "type": "outer",
+          "align": "end"
+        },
+        "strokeColor": "#E6F4FF"
+      },
+      "snapshot": {
+        "root": {
+          "classes": [
+            "ant-progress",
+            "ant-progress-line",
+            "ant-progress-line-align-end",
+            "ant-progress-line-position-outer",
+            "ant-progress-show-info",
+            "ant-progress-status-normal"
+          ],
+          "style": {
+            "display": "inline-flex",
+            "width": "300px",
+            "height": "20px",
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "22px",
+            "direction": "ltr",
+            "padding-top": "0px"
+          }
+        },
+        "body": {
+          "classes": [
+            "ant-progress-body"
+          ],
+          "style": {
+            "display": "flex",
+            "width": "240px",
+            "height": "20px",
+            "align-items": "center",
+            "flex-direction": "row",
+            "gap": "8px"
+          }
+        },
+        "rail": {
+          "classes": [
+            "ant-progress-rail"
+          ],
+          "style": {
+            "width": "204.344px",
+            "height": "20px",
+            "background-color": "rgba(0, 0, 0, 0.06)",
+            "border-radius": "100px"
+          }
+        },
+        "tracks": [
+          {
+            "classes": [
+              "ant-progress-track"
+            ],
+            "style": {
+              "width": "51.0781px",
+              "height": "20px",
+              "background-color": "rgb(230, 244, 255)",
+              "background-image": "none",
+              "border-radius": "100px",
+              "--progress-line-stroke-color": "#E6F4FF"
+            }
+          }
+        ],
+        "indicator": {
+          "classes": [
+            "ant-progress-indicator",
+            "ant-progress-indicator-end",
+            "ant-progress-indicator-outer"
+          ],
+          "text": "25%",
+          "style": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "font-size": "14px",
+            "line-height": "14px",
+            "display": "block",
+            "order": "0",
+            "justify-content": "normal",
+            "padding-left": "0px",
+            "width": "27.6562px"
+          }
+        },
+        "icon": null
+      }
+    }
+  ]
+}

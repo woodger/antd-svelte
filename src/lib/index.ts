@@ -517,7 +517,14 @@ export type {
   ProgressStatus,
   ProgressSize,
   ProgressLineSize,
-  ProgressCircleSize
+  ProgressCircleSize,
+  ProgressContent,
+  ProgressGradient,
+  ProgressSuccess,
+  PercentPositionType,
+  ProgressSemanticSlots,
+  ProgressSemanticInfo,
+  ProgressConfig
 } from './progress.types';
 export type { ProgressLocale } from './types';
 export type {

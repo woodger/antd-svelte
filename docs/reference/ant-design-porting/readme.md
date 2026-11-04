@@ -118,6 +118,8 @@ segmented.css, grid.css, layout.css, descriptions.css, card.css, breadcrumb.css,
 space.css, space-compact.css, space-addon.css, input-number-compact.css, affix.css, anchor.css, steps.css, timeline.css, float-button.css, date-picker.css, menu.css, mentions.css, image.css, rate.css, otp.css, border-beam.css, masonry.css, splitter.css, qrcode.css, radio-button.css, calendar.css, transfer.css, pagination.css и list.css.
 Рецепты spin и spin-prefix извлекают 35 правил Spin, включая fullscreen/percent;
 первый сохраняет два keyframes, второй выводит локальный CSS prefix template.
+Рецепты progress и progress-prefix извлекают 40 правил line/circle CSS, steps, success и
+percentPosition; первый сохраняет один keyframe, второй выводит CSS data module.
 Рецепты listy, typography, tour и carousel воспроизводят одноимённые vendor CSS.
 Рецепт slider-range воспроизводит отдельный CSS диапазона; прежний slider.css
 одиночного control не перезаписывается.

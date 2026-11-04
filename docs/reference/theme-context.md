@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider и Spin получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin и Progress получают собственные
 defaults и aliases.
 Flex использует alias overrides без собственных component defaults и без typography reset.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
@@ -372,6 +372,25 @@ overrides/algorithms к корню. PaddingXS/padding/paddingLG задают pre
 рассчитанные class/style; DOM-ref custom root передаёт через собственный $bindable nativeElement.
 Source classes/computed layout, nested replacement, forwarding, SSR и updates:
 [Flex tests](../../tests/browser/flex-source.spec.ts). Общий ConfigProvider prefix ещё не перенесён.
+
+## Токены и настройки Progress
+
+Progress подготавливает defaultColor=colorInfo, remainingColor=colorFillSecondary,
+circleTextColor=colorText, lineBorderRadius=100, circleTextFontSize=1em и
+circleIconFontSize=fontSize/fontSizeSM em. Component aliases/algorithm меняют только Progress;
+CSS-variable prefix/key/hash и SSR variables используют общий механизм.
+
+ConfigProvider.progress содержит class/style и semantic classNames/styles для
+root/body/rail/track/indicator. Undefined наследует весь record, локальный объект заменяет его.
+Provider styles.root → provider style → local styles.root → local style задают root;
+styles частей применяются после вычисленных dimensions/colors. Source line/steps используют
+40 правил закреплённого CSS и локальный prefix template. Круговая геометрия пока native.
+
+Line success, gradients, steps/rounding, percentPosition и приоритеты контекста сверяются с
+[70 UMD-сценариями](../../tests/browser/fixtures/ant-design-progress-line-reference.json).
+Существующие finite normalization, ARIA/locale и обрезка внешней текстовой подписи сохраняются;
+для size=24 есть отдельный baseline прежней Svelte-библиотеки. Deprecated aliases работают
+без React development warnings. Общий ConfigProvider prefix ещё не перенесён.
 
 ## Токены Spin
 

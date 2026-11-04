@@ -9,6 +9,13 @@
 
 ### Added
 
+- Progress line: steps/rounding, gradients, success segment и percentPosition,
+  formatter snippets и исходные aliases. Подключены ConfigProvider.progress, semantic slots,
+  local prefixCls, nativeElement и шесть component tokens с aliases/algorithm.
+  Сохранены native percent/dimensions/ARIA и clipping внешней текстовой подписи;
+  статусные иконки используют исходную SVG-область. Добавлены 40 CSS rules,
+  70 UMD-сценариев и baseline прежнего clipping. Circle/dashboard SVG остаётся отдельным этапом.
+
 - Spin: fullscreen, percent/auto, ConfigProvider.spin, semantic slots, deprecated aliases,
   local prefixCls и static setDefaultIndicator. Подключены четыре component tokens,
   aliases/algorithm и SSR variables; сохранены native delay/inert/focus/ARIA и reduced motion.

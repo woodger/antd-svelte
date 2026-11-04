@@ -175,7 +175,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Alert | Четыре статуса, title/description/icon/action snippets, outlined/filled, banner, закрытие с callbacks, анимацией и доступным фокусом |
 | MessageHolder / createMessage | Изолированная очередь пяти типов сообщений, ключи и обновления, таймеры, hover-пауза, maxCount, callable/thenable handle и контекст ConfigProvider |
 | NotificationHolder / createNotification | Подробные уведомления с title/description/actions snippets, четыре статуса, шесть положений, ключи, таймеры, hover/focus-пауза и закрытие |
-| Progress | Line/circle, управляемый percent, статусы, размеры, цвета, форматирование, ARIA, темы/RTL/reduced motion и SSR |
+| Progress | Line/steps, gradients, success и percentPosition; native circle, component tokens, semantic/provider config, local prefix и formatter snippets; ARIA/RTL/SSR |
 | Spin | Standalone/children/fullscreen, percent/auto, component tokens, prefixCls, semantic/provider config, indicator snippets и static fallback; сохранены inert и восстановление фокуса |
 | Skeleton | Каркас первой загрузки, avatar/title/paragraph, размеры и ширины, active/round, замена children, доступный статус и фокус |
 | Empty | Пустое состояние, default/simple SVG, image/description snippets, действия, локаль, темы и восстановление фокуса |
@@ -3306,11 +3306,16 @@ normal/exception/success сохраняется при любом процент
 принимает active. Success/exception показывают декоративную иконку вместо
 подписи, если не задан format. Цвета статусов используют токены темы.
 
-ShowInfo=true по умолчанию. Format(percent) возвращает строку и получает
-нормализованный процент; результат заменяет стандартные число/иконку и
-используется в aria-valuetext. HTML в строке экранируется. При showInfo=false
-подпись скрывается, доступные значения сохраняются. Длинная подпись сокращается
-многоточием; полный текст остаётся в title и aria-valuetext.
+ShowInfo=true по умолчанию. Format получает нормализованный percent и может вернуть
+строку, число или пассивный Snippet. При success либо format.length > 1 вторым аргументом
+передаётся нормализованный success percent (по умолчанию 0). Прежний callback с
+format.length <= 1 без success получает один аргумент, как раньше. Callback вычисляется
+один раз; строка/число используются в aria-valuetext. Для Snippet доступное значение
+сохраняет числовой percent; его можно уточнить через aria-valuetext. HTML в строке экранируется. При showInfo=false
+подпись скрывается, доступные значения сохраняются. Длинная внешняя текстовая подпись
+сокращается многоточием; полный текст остаётся в title и aria-valuetext. Это сохранённый
+native contract: при size=24 подпись ограничена 12px, тогда как React допускает её выход
+за body. В line статусные иконки используют исходную SVG-область и не получают текстовую обрезку.
 
 Size по умолчанию medium. Для line medium/small задают высоту 8/6px; число
 задаёт ширину и высоту в px. Пара [width, height] и объект { width?, height? }
@@ -3322,13 +3327,17 @@ Size по умолчанию medium. Для line medium/small задают вы�
 Для circle size принимает medium=120px, small=60px или положительный конечный
 диаметр в px. Невалидный диаметр заменяется на 120px. SVG сохраняет пропорции
 и помещается в контейнер. При диаметре ≤20px видимая подпись скрывается,
-ARIA-значение сохраняется. StrokeWidth относится только к circle и задаётся
+ARIA-значение сохраняется. У circle strokeWidth задаётся
 в процентах viewBox; default — не меньше 6% и 3px при заданном диаметре.
 Невалидное значение использует default, чрезмерное ограничивается 99.9%, чтобы
 радиус оставался положительным. Нулевой процент не рисует цветной дуги.
 
 StrokeColor/railColor принимают CSS-цвета и переопределяют цвет заполнения/фона,
-включая при success/exception. StrokeLinecap поддерживает round/butt/square;
+включая при success/exception. RailColor имеет приоритет над deprecated trailColor.
+Для line strokeColor также принимает { from, to, direction? } или record процентных
+stops: ключи сортируются по исходному parseFloat, direction по умолчанию to right/to left
+в LTR/RTL. В обычном line массив strokeColor использует первый цвет; в steps цвета
+применяются по индексу. Gradient object в line steps игнорируется, как upstream. StrokeLinecap поддерживает round/butt/square;
 у line butt/square убирают скругления, у circle задают SVG stroke-linecap.
 Темы и compact используют существующие токены. RTL меняет начало заполнения
 line на правое и направление active-анимации; circle сохраняет обход по часовой
@@ -3355,9 +3364,37 @@ ConfigProvider.disabled не скрывает обратную связь. Id/cl
 unmount и защищает повтор от результата предыдущей попытки. Скачиваемый CSV
 и успешное завершение через 700ms сохранены.
 
-В первой версии нет dashboard, steps, градиентов, отдельного success-сегмента,
-percentPosition, semantic classNames/styles и автоматического Tooltip для
-маленького circle. Подпись format принимает строку; snippets не поддерживаются.
+Line поддерживает success={{ percent, strokeColor? }} как отдельный track поверх основного.
+Наличие success.percent определяет автоматический status вместо общего percent, в том числе
+при success.percent=0. Длины обоих tracks ограничиваются отдельно; success может выходить
+за основной track, как в upstream. Deprecated strokeWidth задаёт высоту line, когда size —
+preset; предпочтителен size. Дополнительные aliases middle/default дают обычный размер.
+
+Steps задаёт число отдельных элементов line. Math.round определяет активное количество;
+rounding получает steps*percent/100. Size задаёт размер одного элемента, а не общей полосы.
+По умолчанию ширина 14px (2px при small), высота strokeWidth либо 8px. Object steps использует
+count; gap в этой ветке не меняет интервалы. PercentPosition выбирает start/center/end и
+inner/outer. Внутренняя подпись всегда текстовая, в том числе при success/exception;
+яркость первого заданного цвета выбирает контраст подписи по исходному FastColor.
+
+ConfigProvider.progress задаёт class/style и object/function classNames/styles для
+root/body/rail/track/indicator. Undefined наследует record, явный объект заменяет его.
+Callbacks получают props с defaults для type/percent/size/showInfo/percentPosition.
+Provider styles.root → provider style → local styles.root → local style сохраняют приоритет;
+styles отдельных частей применяются после вычисленных размеров/цветов.
+PrefixCls меняет BEM classes с fallback ant-progress для undefined/пустой строки.
+Bind:nativeElement возвращает текущий root после mount и очищается при unmount.
+Тема Progress подключает шесть исходных component tokens, aliases/algorithm и CSS-variable
+prefix/key/hash; переменные идут перед semantic/user styles.
+
+[Эталоны line/steps](./tests/browser/fixtures/ant-design-progress-line-reference.json)
+сняты из официального UMD в стандартном режиме браузера для 70 сценариев.
+Для узкого size=24 отдельно сохранён
+[эталон native clipping](./tests/browser/fixtures/progress-native-clipping-reference.json)
+из свежей сборки прежнего коммита библиотеки. Circle пока сохраняет исходный Svelte API
+и геометрию из раздела выше. Dashboard, circular steps/gradients/success, gap placement,
+auto Tooltip маленького circle, общий ConfigProvider prefix и React development warnings
+остаются следующими этапами; наличие общей component theme не означает перенос SVG-движка.
 
 ## Spin
 
