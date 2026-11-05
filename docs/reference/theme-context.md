@@ -11,8 +11,9 @@ ConfigProvider принимает source `token`, `algorithm`, `components`, `in
 Расчёт и наследование принадлежат [theme-config.engine.ts](../../src/lib/theme-config.engine.ts),
 Svelte context — [theme-context.svelte.ts](../../src/lib/theme-context.svelte.ts).
 Пакет не зависит от React или CSS-in-JS runtime.
-Публичный theme.cssVar принимает объект { prefix?, key? }; boolean-режимы
-Ant Design пока не перенесены. В частности, cssVar=false не отключает CSS-переменные.
+Публичный theme.cssVar принимает объект { prefix?, key? }, как в Ant Design 6.6.8.
+Эталон использует CSS-переменные постоянно; cssVar=false не входит в его тип
+и при передаче из JavaScript не отключает CSS-переменные.
 
 ## Использование
 
@@ -452,7 +453,8 @@ Inner header использует colorFillAlter, inner body — общий ве
 сценариев normal/small/inner/tabs/grid/loading и вложенных/соседних providers.
 Изменение/удаление темы сохраняет DOM, draft и selection; SSR не требует DOM.
 Булевы cssVar из сообщения о дефекте проверяются как JS runtime inputs;
-они не расширяют публичный ThemeConfig и не подтверждают отключение CSS variables.
+они не входят в публичный ThemeConfig ни здесь, ни в 6.6.8. Оба значения оставляют
+CSS-переменные включёнными также в upstream.
 
 ## Токены Alert
 
