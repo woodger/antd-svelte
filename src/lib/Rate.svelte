@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { useForm, useFormField } from './form-context';
   import { getRateKeyValue, getRatePointerValue, getRateStarClass } from './rate.engine';
   import type { RateCharacterInfo, RateProps } from './rate.types';
@@ -33,6 +35,16 @@
     ...attributes
   }: RateProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Rate');
+  const tokens = useDesignTokenContext();
+  let transformFallback = $derived.by(() => {
+    const transform = tokens.enabled ? tokens.state.token.Rate?.starHoverScale : undefined;
+    if (!transform || typeof transform !== 'object') return undefined;
+
+    // Source CSS-var registration теряет CSSObject/arrays; прежний native hover сохраняется.
+    return tokens.state.prefix === 'ant' ? '--ant-rate-star-hover-scale:scale(1.1)'
+      : `--ant-rate-star-hover-scale:var(--${tokens.state.prefix}-rate-star-hover-scale,scale(1.1))`;
+  });
   const form = useForm();
   const field = useFormField();
   let innerValue = $state<number | undefined>(untrack(() => defaultValue || 0));
@@ -153,6 +165,7 @@
 <ul role="radiogroup" {...attributes} bind:this={nativeElement} tabindex={blocked ? -1 : tabIndex ?? attributes.tabindex ?? 0}
   class={[
       'ant-rate ant-rate-css-var',
+      componentTheme.className,
       blocked && 'ant-rate-disabled',
       config.direction === 'rtl' && 'ant-rate-rtl',
       resolvedSize === 'small' && 'ant-rate-small',
@@ -161,7 +174,7 @@
       rootClassName,
       config.rate?.class
     ]}
-  style={[config.rate?.style, style].filter(Boolean).join(';')}
+  style={[componentTheme.style, transformFallback, config.rate?.style, style].filter(Boolean).join(';')}
   onfocusin={event => {
       if (!blocked) {
         focused = true;

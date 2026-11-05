@@ -621,6 +621,11 @@
 
 ### Fixed
 
+- Rate: подключены шесть компонентных токенов и исходная подготовка focus width.
+  Добавлены сверка с Ant Design 6.6.8, SSR и browser для размеров, цветов,
+  algorithms, scopes, стилей и сохранения оценки/фокуса. Для непримитивного
+  starHoverScale сохранён native scale(1.1); потеря source CSS variable записана отдельно.
+
 - Splitter: подключены три современных компонентных токена и deprecated
   resizeSpinnerSize. В token theme bar наследует настроенные aliases; native
   hover fallback сохранён. Добавлены сверка с Ant Design 6.6.8, SSR и browser

@@ -5180,6 +5180,11 @@
           "name": "@ant-design/colors",
           "range": "^8.0.1",
           "referenceVersion": "8.0.1"
+        },
+        {
+          "name": "@ant-design/cssinjs",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
         }
       ],
       "priority": "p2",
@@ -5192,7 +5197,20 @@
         "src/lib/rate.ssr.test.ts",
         "tests/package/rate.ssr.test.ts",
         "tests/browser/rate.spec.ts",
-        "integration:rate"
+        "integration:rate",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component-token.types.ts",
+        "src/lib/theme-rate-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-rate-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-rate-theme-reference.json",
+        "tests/browser/fixtures/rate-theme-presets.ts",
+        "tests/browser/fixtures/RateThemeControl.svelte",
+        "tests/browser/fixtures/RateThemeCase.svelte",
+        "tests/browser/fixtures/RateThemeFixtures.svelte",
+        "tests/browser/rate-theme-metrics.ts",
+        "tests/browser/rate-theme.spec.ts",
+        "tests/package/rate-theme.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -5235,12 +5253,51 @@
           "note": "Все 21 CSS-правило Rate, >div заменён на >button; outline и reduced motion дополнены. Tooltips string/local TooltipProps используют существующий Tooltip с сохранёнными отступами; characterRender заменяет tooltip composition, как rest override Ant. ConfigProvider.rate class/style и inherited size/disabled; style владельца выше context."
         },
         {
+          "id": "component-theme-tokens",
+          "title": "Шесть компонентных токенов со строковым transform и source focus width",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Rate.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component-token.types.ts",
+            "src/lib/theme-rate-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-rate-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-rate-theme-reference.json",
+            "tests/browser/fixtures/rate-theme-presets.ts",
+            "tests/browser/fixtures/RateThemeControl.svelte",
+            "tests/browser/fixtures/RateThemeCase.svelte",
+            "tests/browser/fixtures/RateThemeFixtures.svelte",
+            "tests/browser/rate-theme-metrics.ts",
+            "tests/browser/rate-theme.spec.ts",
+            "tests/package/rate-theme.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Фабрика и root theme hook следуют 6.6.8: starColor, starBg, starSize/SM/LG, строковый starHoverScale и подготовленный lineWidthFocus. Нули/undefined, global/component aliases и algorithms, cssVar.prefix, normal/small/large/RTL/disabled/character/Tooltip, nested/reset/sibling providers, hover и star focus. Theme variables перед context/local styles; обновления сохраняют value/radio DOM/focus/ref и callbacks. SSR не создаёт DOM/focus/value events/timers. Непримитивные transform вынесены в отдельную native boundary."
+        },
+        {
+          "id": "native-structured-transform",
+          "title": "CSSObject/array transform и сохранённый native hover fallback",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Rate.svelte",
+            "src/lib/theme-component-token.types.ts",
+            "tools/fixtures/ant-design-rate-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-rate-theme-reference.json",
+            "tests/browser/rate-theme.spec.ts",
+            "tests/package/rate-theme.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Наблюдение Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d и @ant-design/cssinjs 2.1.2: ConfigProvider theme.components.Rate.starHoverScale принимает CSSObject/arrays по исходному типу, но CSS-var registration сохраняет только string/number. Для массива [scale(1.2),scale(1.3)] и объектов с _skip_check_/_multi_value_ декларация отсутствует, hover/focus transform=none. Raw source fixtures сохраняют этот результат. Svelte сохраняет прежний native scale(1.1), включая cssVar.prefix; context/local CSS variables и disabled scale(1) приоритетнее fallback. Исчезновение масштабирования не перенесено; полная интерпретация CSSObject, включая исходные markers, отложена для отдельного разбора. Существующие принятые shapes не сужены."
+        },
+        {
           "id": "extended-api",
-          "title": "PrefixCls, произвольный token engine и полный upstream Tooltip API",
+          "title": "PrefixCls и полный upstream Tooltip API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Namespace ant-rate закреплён статическим CSS. Component tokens доступны как CSS variables; произвольный React theme/token engine пока отсутствует. Tooltips ограничены поддерживаемым публичным Svelte Tooltip API."
+          "note": "Локальный/global prefixCls и оставшийся Tooltip API не перенесены. Строковые компонентные токены и algorithms подключены отдельной feature; CSSObject transform имеет явную native boundary. V1-ready не означает полный React API."
         }
       ]
     },

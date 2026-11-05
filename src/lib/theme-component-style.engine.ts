@@ -30,9 +30,18 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
-  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter';
+  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate';
 
 const factories = {
+  Rate: (token: GlobalToken) => ({
+    lineWidthFocus: token.lineWidthFocus === 0 ? 0 : token.lineWidth,
+    starColor: token.yellow6,
+    starSize: token.controlHeight * 0.625,
+    starSizeSM: token.controlHeightSM * 0.625,
+    starSizeLG: token.controlHeightLG * 0.625,
+    starHoverScale: 'scale(1.1)',
+    starBg: token.colorFillContent
+  }),
   Splitter: (token: GlobalToken & Partial<SplitterComponentToken>) => {
     const resizeSpinnerSize = token.resizeSpinnerSize || 20;
 
@@ -267,7 +276,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Descriptions: [],
   Statistic: [],
   Segmented: [],
-  Splitter: []
+  Splitter: [],
+  Rate: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

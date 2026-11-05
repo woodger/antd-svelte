@@ -461,6 +461,7 @@ export interface RateComponentToken {
   starSize: number;
   starSizeSM: number;
   starSizeLG: number;
+  /** Строковая transform; для CSSObject/arrays пока сохраняется native scale(1.1). */
   starHoverScale: ThemeTransform;
   starBg: string;
 }

@@ -7567,6 +7567,22 @@ config заменяет родительский. Light/dark, compact, RTL и re
 CSS variables --ant-rate-star-color/size/size-sm/size-lg/bg/hover-scale и
 --ant-rate-line-width-focus допускают явный inline override.
 
+ConfigProvider.theme.components.Rate применяет все шесть компонентных токенов
+со строковым starHoverScale. LineWidthFocus подготавливается по исходному правилу
+из lineWidth/lineWidthFocus. Поддержаны нули, undefined, global/component aliases
+и algorithms, cssVar.prefix, вложенные/reset/sibling providers, hover/focus и
+disabled. Переменные темы идут перед ConfigProvider.rate.style и локальным style;
+смена темы сохраняет оценку, radio DOM, фокус, refs и callbacks.
+Сверка: [UMD](./tests/browser/fixtures/ant-design-rate-theme-reference.json),
+[SSR](./tests/package/rate-theme.ssr.test.ts),
+[browser](./tests/browser/rate-theme.spec.ts), `?fixture=rate-theme`.
+
+Массивы и CSSObject в starHoverScale пока не исполняются. Ant Design 6.6.8
+не регистрирует для них CSS variable, поэтому его hover transform становится none.
+Это наблюдение записано в реестре; native сохраняет прежний scale(1.1).
+Пользовательские CSS variables/styles перекрывают этот fallback. Полный CSSObject
+API, включая исходные _multi_value_/_skip_check_ markers, остаётся отдельным пробелом.
+
 Bind:this предоставляет focus()/blur(), которые игнорируются при disabled;
 bind:nativeElement возвращает ul. AutoFocus применяется только после mount,
 SSR не обращается к DOM и не вызывает callbacks. Нативные button type=button
@@ -7582,8 +7598,8 @@ StarFilled SVG взят из Ant Design Icons SVG 4.6.0 с существующ�
 Галерея — `/ant-design#rate`, fixture — `?fixture=rate`; unit/SSR и browser
 сценарии проверяют значения, callbacks, геометрию, контексты и cleanup.
 
-PrefixCls и произвольный React theme/token engine пока отсутствуют; namespace
-ant-rate закреплён. Полный upstream Tooltip API ограничен текущим публичным
+PrefixCls пока отсутствует; namespace ant-rate закреплён.
+Полный upstream Tooltip API ограничен текущим публичным
 Svelte Tooltip. Эти части не считаются покрытыми переносом Rate.
 
 
