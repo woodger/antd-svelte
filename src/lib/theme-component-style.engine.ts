@@ -31,9 +31,35 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
-  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image';
+  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
+  | 'Layout';
 
 const factories = {
+  Layout: (token: GlobalToken) => {
+    const paddingInline = token.controlHeightLG * 1.25;
+
+    return {
+      colorBgHeader: '#001529',
+      colorBgBody: token.colorBgLayout,
+      colorBgTrigger: '#002140',
+      bodyBg: token.colorBgLayout,
+      headerBg: '#001529',
+      headerHeight: token.controlHeight * 2,
+      headerPadding: `0 ${paddingInline}px`,
+      headerColor: token.colorText,
+      footerPadding: `${token.controlHeightSM}px ${paddingInline}px`,
+      footerBg: token.colorBgLayout,
+      siderBg: '#001529',
+      triggerHeight: token.controlHeightLG + token.marginXXS * 2,
+      triggerBg: '#002140',
+      triggerColor: token.colorTextLightSolid,
+      zeroTriggerWidth: token.controlHeightLG,
+      zeroTriggerHeight: token.controlHeightLG,
+      lightSiderBg: token.colorBgContainer,
+      lightTriggerBg: token.colorBgContainer,
+      lightTriggerColor: token.colorText
+    };
+  },
   Image: (token: GlobalToken) => ({
     zIndexPopup: token.zIndexPopupBase + 80,
     previewOperationColor: new FastColor(token.colorTextLightSolid).setA(0.65).toRgbString(),
@@ -249,6 +275,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Layout: [],
   Image: [],
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
   Input: [],
@@ -296,6 +323,11 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]
 >> = {
+  Layout: [
+    ['colorBgBody', 'bodyBg'],
+    ['colorBgHeader', 'headerBg'],
+    ['colorBgTrigger', 'triggerBg']
+  ],
   Popover: [['width', 'titleMinWidth'], ['minWidth', 'titleMinWidth']],
   Skeleton: [['color', 'gradientFromColor'], ['colorGradientEnd', 'gradientToColor']],
   Menu: menuDeprecatedTokens,

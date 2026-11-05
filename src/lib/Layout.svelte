@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { provideLayout } from './layout-context';
   import { createLayoutState } from './layout.model.svelte.js';
   import type { LayoutProps } from './layout.types';
@@ -15,6 +16,7 @@
     ...rest
   }: LayoutProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Layout');
   const model = createLayoutState();
   provideLayout(model);
   onDestroy(() => model.destroy());
@@ -23,10 +25,11 @@
 <div {...rest} bind:this={nativeElement} dir={config.direction} data-ant-has-sider={hasSider === false ? 'false' : undefined}
   class={[
       'ant-layout ant-layout-css-var',
+      componentTheme.className,
       (hasSider ?? model.hasSider) && 'ant-layout-has-sider',
       config.direction === 'rtl' && 'ant-layout-rtl',
       className,
       rootClassName
-    ]} {style}>
+    ]} style={[componentTheme.style, style].filter(Boolean).join(';')}>
   {@render children?.()}
 </div>

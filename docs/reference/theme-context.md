@@ -456,6 +456,26 @@ Inner header использует colorFillAlter, inner body — общий ве
 они не входят в публичный ThemeConfig ни здесь, ни в 6.6.8. Оба значения оставляют
 CSS-переменные включёнными также в upstream.
 
+## Токены Layout
+
+Layout и Sider подготавливают общие 19 defaults: 16 актуальных component tokens
+и deprecated colorBgHeader/colorBgBody/colorBgTrigger. Старые имена сопоставляются
+с headerBg/bodyBg/triggerBg после подготовки defaults и до финальных overrides;
+явные современные значения имеют приоритет. Поддержаны aliases, отдельный
+algorithm, dark/compact, CSS lengths, нули, undefined и cssVar prefix/key.
+
+Header/Content/Footer внутри Layout наследуют его переменные, включая CSS overrides
+в style. Sider получает собственный scope; semantic styles.root и style сохраняют
+приоритет над variables, вычисляемая ширина — над обоими. Обновление темы сохраняет
+DOM, refs, collapse, фокус и выделение текста.
+
+В Ant Design 6.6.8 standalone Header/Footer имеют scope class, но остаются без
+Layout variables: headerHeight=72 даёт 22px, footerPadding='14px 30px' — 0px.
+Исходные замеры сохранены отдельно в поле standalone
+[эталона](../../tests/browser/fixtures/ant-design-layout-theme-reference.json).
+Svelte-секции вне Layout получают собственные variables. Это осознанная граница
+совместимости, записанная в реестре для отдельного разбора.
+
 ## Токены Image
 
 Image подготавливает шесть defaults из закреплённого style-модуля: zIndexPopup,

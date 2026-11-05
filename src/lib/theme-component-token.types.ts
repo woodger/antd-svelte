@@ -347,8 +347,11 @@ export interface InputNumberComponentToken {
 }
 
 export interface LayoutComponentToken {
+  /** @deprecated Используйте headerBg. */
   colorBgHeader: string;
+  /** @deprecated Используйте bodyBg. */
   colorBgBody: string;
+  /** @deprecated Используйте triggerBg. */
   colorBgTrigger: string;
   bodyBg: string;
   headerBg: string;

@@ -621,6 +621,12 @@
 
 ### Fixed
 
+- Layout: подключены 16 современных component tokens и три deprecated aliases
+  для Layout/Sider с наследованием variables секциями и сохранёнными style priorities.
+  Добавлены Source/SSR/browser-проверки scopes, геометрии, collapse/focus/refs.
+  Standalone-секции получают собственные variables; отсутствие их в upstream
+  записано отдельно для разбора.
+
 - Image: шесть компонентных токенов подключены к миниатюре и общему viewer
   ImagePreviewGroup. Сохранены приоритет preview.zIndex/wrapperStyle, native dialog
   stack, transforms/current/focus и refs. Добавлены сверка с Ant Design 6.6.8,

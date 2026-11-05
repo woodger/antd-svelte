@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { provideSider, useLayout } from './layout-context';
   import { layoutSiderWidth } from './layout.engine';
   import { connectSiderBreakpoint } from './layout.dom';
@@ -35,6 +36,7 @@
     ...rest
   }: LayoutSiderProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Layout');
   const layout = useLayout();
   const id = $props.id();
   const initial = untrack(() => defaultCollapsed);
@@ -130,6 +132,7 @@
 <aside {...rest} bind:this={nativeElement} dir={config.direction}
   class={[
       'ant-layout-sider ant-layout-css-var',
+      componentTheme.className,
       `ant-layout-sider-${theme}`,
       config.theme.compact && 'ant-layout-sider-compact',
       selected && 'ant-layout-sider-collapsed',
@@ -141,6 +144,7 @@
       classes.root
     ]}
   style={[
+      componentTheme.style,
       slots.root,
       style,
       `flex:0 0 ${actualWidth};max-width:${actualWidth};min-width:${actualWidth};width:${actualWidth}`

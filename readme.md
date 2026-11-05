@@ -882,7 +882,16 @@ expand/collapse, с expandLabel/collapseLabel override. Reduced motion откл�
 переходы. Галерея — `/ant-design#layout`, фикстура — `?fixture=layout`; unit/SSR/
 Chromium покрывают структуру, SSR без JS, callbacks, размеры, breakpoint/cleanup,
 фокус, locale и темы. Рецепт layout извлекает 35 правил, включая Menu-интеграции.
-PrefixCls и глобальный component config/tokens пока не поддержаны.
+ConfigProvider.theme.components.Layout поддерживает 16 актуальных токенов и
+три deprecated aliases colorBgHeader/colorBgBody/colorBgTrigger. Aliases, отдельный
+algorithm и cssVar prefix/key применяются к Layout/Sider; секции внутри Layout
+наследуют его переменные, включая CSS overrides в style. Явные современные имена
+имеют приоритет над deprecated, semantic styles.root — перед style, вычисляемая
+ширина Sider — последней. Смена темы сохраняет collapse, DOM, refs, фокус и черновики.
+Отдельные Header/Content/Footer получают собственные переменные: в закреплённом
+upstream standalone-секции остаются без Layout variables. Наблюдение и выбранное
+поведение записаны в реестре; это отличие не переносится в Svelte.
+PrefixCls и глобальный layout component config вне темы пока не поддержаны.
 
 ## Descriptions
 
