@@ -2314,7 +2314,9 @@
         "tests/browser/pagination-theme.spec.ts",
         "tests/browser/fixtures/PaginationThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-pagination-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/pagination-color.spec.ts",
+        "tests/browser/fixtures/PaginationColorFixtures.svelte"
       ],
       "features": [
         {
@@ -2414,6 +2416,19 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные 12 Pagination и 18 общих Input defaults, component algorithms/aliases, нули/undefined, runtime CSS lengths и CSS prefix/hash. Native nav получает scope перед semantic/plain styles; ul наследует defaults без provider reset, Select получает собственные aliases, Input overrides не меняют quick jumper. Глобальный wireframe включает bordered независимо от component alias; отсутствующие в dist/antd.css правила перенесены из source bordered.ts в scoped CSS. Colors/padding исходных ссылок применяются к native buttons, prev/next сохраняют normal line-height при undefined itemSize. MiniOptionsSizeChangerTop создаёт переменную, но source CSS её не читает. Scoped UMD declarations и 240 наборов computed metrics для 18 тем: три размера, disabled/simple, variants, Select, wireframe и LTR/RTL; отдельный эталон hover/focus. Обновления сохраняют DOM, drafts/selection/focus, bind API и порядок callbacks; native-only темы и согласованный mobile size changer сохранены."
+        },
+        {
+          "id": "native-page-colors",
+          "title": "Цвета нативных кнопок во всех режимах темы",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Pagination.svelte",
+            "tests/browser/pagination-color.spec.ts",
+            "tests/browser/fixtures/PaginationColorFixtures.svelte",
+            "tests/browser/fixtures/ant-design-pagination-metrics.json"
+          ],
+          "note": "Active, hover и disabled используют существующие переменные цветов также без source marker. Обычные/активные/disabled кнопки сравниваются с эталоном 6.6.8 для light/dark, LTR/RTL и native/source; native primary=blue сохраняет прежнюю seed-палитру также в dark mode. Custom CSS variables на semantic item и inline itemRender сохраняют приоритет. Native buttons, aria-current, binding, callbacks и отсутствие form submit сохраняются; padding и source-only bordered styles не меняются."
         }
       ]
     },

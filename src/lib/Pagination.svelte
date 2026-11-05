@@ -279,12 +279,13 @@
   .quick-button { cursor: pointer; font: inherit; }
   input:focus-visible, .quick-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
   .ant-pagination-source-theme :global(.ant-pagination-item .page-button) { padding-inline: calc(var(--ant-margin-xxs) * 1.5); color: var(--ant-color-text); }
-  .ant-pagination-source-theme :global(.ant-pagination-item-active .page-button) { color: var(--ant-pagination-item-active-color); }
-  .ant-pagination-source-theme :global(.ant-pagination-item-active:hover .page-button) { color: var(--ant-pagination-item-active-color-hover); }
+  .ant-pagination :global(.ant-pagination-item-active .page-button) { color: var(--ant-pagination-item-active-color); }
+  .ant-pagination :global(.ant-pagination-item-active:hover .page-button) { color: var(--ant-pagination-item-active-color-hover); }
   /* Source button сохраняет normal и при неопределённой высоте item. */
   .ant-pagination-source-theme :global(.ant-pagination-prev button), .ant-pagination-source-theme :global(.ant-pagination-next button) { line-height: normal; }
-  .ant-pagination-source-theme.ant-pagination-disabled :global(.ant-pagination-item .page-button) { color: var(--ant-color-text-disabled); background-color: transparent; border: none; cursor: not-allowed; }
-  .ant-pagination-source-theme.ant-pagination-disabled :global(.ant-pagination-item-active .page-button) { color: var(--ant-pagination-item-active-color-disabled); }
+  .ant-pagination.ant-pagination-disabled :global(.ant-pagination-item .page-button) { color: var(--ant-color-text-disabled); }
+  .ant-pagination-source-theme.ant-pagination-disabled :global(.ant-pagination-item .page-button) { background-color: transparent; border: none; cursor: not-allowed; }
+  .ant-pagination.ant-pagination-disabled :global(.ant-pagination-item-active .page-button) { color: var(--ant-pagination-item-active-color-disabled); }
   /* Ant Design 6.6.8 pagination/style/bordered.ts; этих правил нет в dist/antd.css. */
   .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev:hover button), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next:hover button) { border-color: var(--ant-color-primary-hover); background-color: var(--ant-pagination-item-bg); }
   .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-prev .ant-pagination-item-link), .ant-pagination-source-theme.ant-pagination-bordered :global(.ant-pagination-next .ant-pagination-item-link) { background-color: var(--ant-pagination-item-link-bg); border-color: var(--ant-color-border); }

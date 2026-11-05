@@ -8106,6 +8106,12 @@ source line-height: normal, в том числе при неопределённ
 проверяются с официальным UMD в `?fixture=pagination-theme`. Native-only темы,
 bind API и согласованное поведение на XS сохраняются.
 
+В теме без `cssVar` активный номер также получает primary-цвет, hover —
+primary-hover, disabled — disabled-цвет. Переменные цветов состояний на
+`styles.item` и inline-цвет custom `itemRender` сохраняют приоритет. Эти состояния
+проверяет [регрессионный тест](./tests/browser/pagination-color.spec.ts)
+в светлой и тёмной теме, LTR и RTL; существующая native-палитра `primary` сохраняется.
+
 Проверки: [engine](./src/lib/pagination.engine.test.ts),
 [SSR](./src/lib/pagination.ssr.test.ts),
 [package](./tests/package/pagination.ssr.test.ts),

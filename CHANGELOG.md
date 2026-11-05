@@ -554,6 +554,10 @@
 
 ### Fixed
 
+- Pagination: цвета active/hover/disabled теперь применяются к нативным кнопкам
+  также без cssVar. Сохранены цвета пользовательских CSS-переменных и inline
+  itemRender, размеры, binding, клавиатура и callbacks.
+
 - Anchor/Breadcrumb: восстановлен scoped reset ссылок в стандартной теме без
   cssVar. Normal/hover/active/focus используют исходные link decoration tokens;
   inline overrides, focus outline, навигация и внешние links сохранены. Добавлена
