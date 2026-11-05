@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { descriptionsColumn, descriptionsItems, descriptionsRows } from './descriptions.engine';
   import DescriptionsCell from './DescriptionsCell.svelte';
@@ -26,6 +27,7 @@
     ...rest
   }: DescriptionsProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Descriptions');
   const breakpoint = createBreakpoint();
   let columns = $derived(descriptionsColumn(column, breakpoint.screens));
   let rows = $derived(descriptionsRows(items, columns, breakpoint.screens));
@@ -63,6 +65,7 @@
 <div {...rest} bind:this={nativeElement} dir={config.direction}
   class={[
       'ant-descriptions ant-descriptions-css-var',
+      componentTheme.className,
       bordered && 'ant-descriptions-bordered',
       mergedSize === 'small' && 'ant-descriptions-small',
       (mergedSize === 'middle' || mergedSize === 'medium') && 'ant-descriptions-medium',
@@ -71,7 +74,7 @@
       rootClassName,
       classes.root
     ]}
-  style={[slots.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, slots.root, style].filter(Boolean).join(';')}>
   {#if title !== undefined && title !== null && title !== false && title !== '' || extra !== undefined && extra !== null && extra !== false && extra !== ''}
     <div class={['ant-descriptions-header', classes.header]} style={slots.header}>
       {#if title !== undefined && title !== null && title !== false && title !== ''}<div class={['ant-descriptions-title', classes.title]} style={slots.title}>{@render value(title)}</div>{/if}

@@ -8451,7 +8451,20 @@
         "src/lib/descriptions.test.ts",
         "src/lib/descriptions.ssr.test.ts",
         "tests/browser/descriptions.spec.ts",
-        "integration:descriptions"
+        "integration:descriptions",
+        "src/lib/Descriptions.svelte",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-descriptions-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-descriptions-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-descriptions-theme-reference.json",
+        "tests/browser/fixtures/descriptions-theme-presets.ts",
+        "tests/browser/fixtures/DescriptionsThemeCase.svelte",
+        "tests/browser/fixtures/DescriptionsThemeDescription.svelte",
+        "tests/browser/fixtures/DescriptionsThemeFixtures.svelte",
+        "tests/browser/descriptions-theme-metrics.ts",
+        "tests/browser/descriptions-theme.spec.ts",
+        "tests/package/descriptions-theme.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -8488,8 +8501,30 @@
           "note": "Без явного componentSize размер large; middle остаётся локальным alias medium. Label/content styles на ячейках bordered, item-level приоритет сохранён; вложенные таблицы изолированы."
         },
         {
+          "id": "component-theme-tokens",
+          "title": "Все десять компонентных токенов",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Descriptions.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-descriptions-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-descriptions-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-descriptions-theme-reference.json",
+            "tests/browser/fixtures/descriptions-theme-presets.ts",
+            "tests/browser/fixtures/DescriptionsThemeCase.svelte",
+            "tests/browser/fixtures/DescriptionsThemeDescription.svelte",
+            "tests/browser/fixtures/DescriptionsThemeFixtures.svelte",
+            "tests/browser/descriptions-theme-metrics.ts",
+            "tests/browser/descriptions-theme.spec.ts",
+            "tests/package/descriptions-theme.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Фабрика и root theme hook следуют 6.6.8: десять component tokens, глобальные/component alias tokens и algorithms, нулевые и undefined значения, cssVar.prefix. Bordered использует labelBg и общий colorTextSecondary; size/bordered padding сохраняет source priority над itemPaddingBottom/itemPaddingEnd. Horizontal/vertical, normal/small/middle, responsive column/span/filled, RTL, nested/reset/sibling providers. Реактивная смена темы сохраняет DOM ячеек, draft/focus/selection; semantic/user/item styles приоритетнее переменных темы. SSR не создаёт DOM/media subscriptions/timers."
+        },
+        {
           "id": "global-configuration",
-          "title": "PrefixCls, пользовательские breakpoint/token и глобальный component config",
+          "title": "PrefixCls, пользовательские breakpoints и глобальный component config",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],

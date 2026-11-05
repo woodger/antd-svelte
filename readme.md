@@ -855,10 +855,23 @@ item.style; без рамки — к внутренним span. Style корня
 Вложенные таблицы сохраняют собственные bordered/size и не получают row-стили
 внешней таблицы. Темы/RTL наследуются через ConfigProvider.
 
+ConfigProvider.theme.components.Descriptions применяет все десять компонентных
+токенов, включая цвета title/extra/label/content, фон label, отступ заголовка,
+ячеек и двоеточия. Значения рассчитываются из общих alias tokens; поддержаны
+глобальные и компонентные algorithms, cssVar.prefix, вложенные providers
+и обновление после mount. Переменные темы идут перед semantic/user styles.
+Сохраняются исходные правила 6.6.8: bordered использует labelBg и общий
+colorTextSecondary вместо labelColor, а размеры и рамка могут перекрывать
+itemPaddingBottom/itemPaddingEnd собственными отступами.
+Сверка: [официальные CSS tokens](./tools/fixtures/ant-design-descriptions-tokens-reference.json),
+[варианты и responsive spans](./tests/browser/fixtures/ant-design-descriptions-theme-reference.json),
+[SSR](./tests/package/descriptions-theme.ssr.test.ts) и
+[browser](./tests/browser/descriptions-theme.spec.ts), `?fixture=descriptions-theme`.
+
 Галерея — `/ant-design#descriptions`, фикстура — `?fixture=descriptions`.
 Unit/SSR/Chromium проверяют раскладку, media, приоритет стилей и вложенность.
 Рецепт descriptions извлекает 40 правил без keyframes, включая две интеграции
-Table expanded-row. PrefixCls, произвольные breakpoint/theme tokens и глобальный
+Table expanded-row. PrefixCls, произвольные breakpoints и глобальный
 component config пока не поддержаны и остаются в полном объёме миграции.
 
 ## Card

@@ -613,6 +613,11 @@
 
 ### Fixed
 
+- Descriptions: все десять компонентных токенов подключены к общей теме.
+  Сохранены bordered/size priorities, responsive column/span, semantic/item styles
+  и фокус при реактивном обновлении. Добавлена сверка с Ant Design 6.6.8 для
+  horizontal/vertical, размеров, RTL, algorithms, вложенных providers и SSR.
+
 - Carousel: компонентные токены теперь применяются к wrapper через общую тему.
   Сохранены семь современных токенов, deprecated dotWidthActive и его приоритеты,
   вертикальная геометрия, RTL, nested/reset providers и style внутреннего slider.

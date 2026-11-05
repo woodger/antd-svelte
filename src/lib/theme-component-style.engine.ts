@@ -27,9 +27,22 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
-  | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel';
+  | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
+  | 'Descriptions';
 
 const factories = {
+  Descriptions: (token: GlobalToken) => ({
+    labelBg: token.colorFillAlter,
+    labelColor: token.colorTextTertiary,
+    titleColor: token.colorText,
+    titleMarginBottom: token.fontSizeSM * token.lineHeightSM,
+    itemPaddingBottom: token.padding,
+    itemPaddingEnd: token.padding,
+    colonMarginRight: token.marginXS,
+    colonMarginLeft: token.marginXXS / 2,
+    contentColor: token.colorText,
+    extraColor: token.colorText
+  }),
   Carousel: (token: GlobalToken) => ({
     arrowSize: 16,
     arrowOffset: token.marginXS,
@@ -224,7 +237,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Alert: [],
   Collapse: [],
   Card: [],
-  Carousel: []
+  Carousel: [],
+  Descriptions: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]
