@@ -1,5 +1,6 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
+import type { RenderEmptyContent } from './types';
 
 export type TransferKey = string | number | bigint;
 export type TransferDirection = 'left' | 'right';
@@ -62,7 +63,7 @@ export interface TransferConfig {
 
 export interface TransferLocale {
   titles?: readonly TransferContent[];
-  notFoundContent?: TransferContent | readonly TransferContent[];
+  notFoundContent?: RenderEmptyContent;
   searchPlaceholder?: string;
   itemUnit?: string;
   itemsUnit?: string;

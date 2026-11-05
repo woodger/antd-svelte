@@ -4,7 +4,7 @@
   import { listHasContent, listMixedText } from './list.engine';
   import { connectListItemText } from './list.dom';
   import type { ListItemProps } from './list.types';
-  import ListContent from './ListContent.svelte';
+  import ListContent from './RenderContent.svelte';
   import Col from './Col.svelte';
 
   let {

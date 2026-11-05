@@ -5,6 +5,8 @@
   import Button from './Button.svelte';
   import Checkbox from './Checkbox.svelte';
   import Icon from './Icon.svelte';
+  import Empty from './Empty.svelte';
+  import RenderEmpty from './RenderEmpty.svelte';
 
   let { title, options, value, multiple, disabled, onApply }: {
     title: string;
@@ -209,6 +211,11 @@
         {:else}
           <label class="radio-option"><input type="radio" name={`ant-filter-${id}`} value={index} checked={draft.includes(option.value)} {disabled} onchange={() => choose(option.value, true)} />{option.text}</label>
         {/if}
+      {:else}
+        {#snippet nativeEmpty()}<Empty image="simple"
+          description={config.locale.table?.filterEmptyText ?? ruRU.table.filterEmptyText}
+          styles={{ image: 'height:24px' }} style="margin:0;padding:16px 0" />{/snippet}
+        <RenderEmpty componentName="Table.filter" nullish fallback={nativeEmpty} />
       {/each}
     </div>
     <div class="ant-table-filter-dropdown-btns">

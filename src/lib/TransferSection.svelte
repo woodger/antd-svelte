@@ -12,6 +12,8 @@
   import Dropdown from './Dropdown.svelte';
   import Input from './Input.svelte';
   import Icon from './Icon.svelte';
+  import RenderContent from './RenderContent.svelte';
+  import type { RenderEmptyContent } from './types';
 
   let { section, children, footer, style, onSearch }: {
     section: TransferListProps<RecordType>;
@@ -59,7 +61,7 @@
   let label = $derived(typeof section.selectAllLabel === 'function'
     ? section.selectAllLabel({ selectedCount, totalCount: filtered.length })
     : section.selectAllLabel);
-  let empty: TransferContent = $derived.by(() => {
+  let empty: RenderEmptyContent = $derived.by(() => {
     const content = section.notFoundContent;
     return Array.isArray(content) ? content[section.direction === 'left' ? 0 : 1] : content;
   });
@@ -177,7 +179,7 @@
       </div>
     {:else if rows.length === 0}
       <div class={`${section.prefixCls}-list-body-not-found`}>
-        {@render text(empty)}
+        <RenderContent value={empty} />
       </div>
     {:else}
       <ul class={[`${section.prefixCls}-list-content`, section.classNames.list,

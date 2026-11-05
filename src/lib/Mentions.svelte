@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onDestroy, tick, untrack } from 'svelte';
+  import RenderEmpty from './RenderEmpty.svelte';
   import type { MentionsProps, MentionsOption } from './mentions.types';
   import {
     getMentionMeasure,
@@ -392,8 +393,8 @@
       </button>
     {:else}
       <div class="ant-mentions-dropdown-menu-item ant-mentions-dropdown-menu-item-disabled">
-        {#if typeof notFoundContent === 'function'}{@render notFoundContent()}
-        {:else}{notFoundContent === undefined ? config.locale.emptyText : notFoundContent ?? ''}{/if}
+        {#snippet nativeEmpty()}{config.locale.emptyText}{/snippet}
+        <RenderEmpty componentName="Mentions" local={notFoundContent} fallback={nativeEmpty} />
       </div>
     {/each}
   </div>

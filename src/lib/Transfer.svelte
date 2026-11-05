@@ -14,6 +14,7 @@
   import TransferSection from './TransferSection.svelte';
   import TransferAction from './TransferAction.svelte';
   import Empty from './Empty.svelte';
+  import DefaultRenderEmpty from './DefaultRenderEmpty.svelte';
   import type {
     TransferDirection, TransferItem, TransferKey, TransferListProps, TransferProps,
     TransferSemanticValue, TransferSlots, TransferSectionSlots
@@ -63,8 +64,9 @@
     localStyles.root, props.style], ';'));
   let actionsStyle = $derived(join([props.operationStyle, contextStyles.actions,
     localStyles.actions], ';'));
+  let contextEmpty = $derived(config.renderEmpty?.('Transfer'));
   let locale = $derived({ ...transferRuRU, ...config.locale.transfer,
-    notFoundContent: defaultEmpty, ...props.locale });
+    notFoundContent: contextEmpty || defaultEmpty, ...props.locale });
   let titles = $derived(props.titles ?? locale.titles ?? []);
   let icon = $derived(props.selectionsIcon ?? config.transfer?.selectionsIcon);
   let actions = $derived(props.actions ?? props.operations ?? []);
@@ -252,4 +254,7 @@
     onSearch={value => search('right', value)} />
 </div>
 
-{#snippet defaultEmpty()}<Empty image="simple" />{/snippet}
+{#snippet defaultEmpty()}
+  {#if config.renderEmpty}<DefaultRenderEmpty componentName="Transfer" />
+  {:else}<Empty image="simple" />{/if}
+{/snippet}

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { listHasContent } from './list.engine';
   import type { ListItemMetaProps, ListItemMetaRef } from './list.types';
-  import ListContent from './ListContent.svelte';
+  import ListContent from './RenderContent.svelte';
 
   let {
     avatar,

@@ -1,9 +1,9 @@
 <script lang="ts">
-  import type { ListContent } from './list.types';
-  let { value }: { value: ListContent; } = $props();
+  import type { RenderEmptyContent } from './types';
+  let { value }: { value: RenderEmptyContent; } = $props();
 </script>
 
-{#snippet content(node: ListContent)}
+{#snippet content(node: RenderEmptyContent)}
   {#if Array.isArray(node)}
     {#each node as child}{@render content(child)}{/each}
   {:else if typeof node === 'function'}{@render node()}

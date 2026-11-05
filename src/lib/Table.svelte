@@ -26,6 +26,7 @@
   import TableFilter from './TableFilter.svelte';
   import Spin from './Spin.svelte';
   import Empty from './Empty.svelte';
+  import RenderEmpty from './RenderEmpty.svelte';
 
   let {
     mode = 'client',
@@ -432,7 +433,7 @@
                             ]}></span></span></span>
                       </button>
                     {:else}<span>{column.title}</span>{/if}
-                    {#if column.filters?.length && (mode === 'server' || column.onFilter)}
+                    {#if column.filters && (mode === 'server' || column.onFilter)}
                       <TableFilter title={column.title} options={column.filters} value={Object.hasOwn(tableData.filters, column.key)
                           ? tableData.filters[column.key]
                           : []} multiple={column.filterMultiple !== false} disabled={resolvedDisabled} onApply={(values) => changeFilter(column.key, values)} />
@@ -499,7 +500,10 @@
                 <tr class="ant-table-expanded-row"><td class="ant-table-cell" colspan={columns.length + dataOffset}><div class="expanded-content" id={expansionId(row.key)}>{@render expandable.expandedRowRender(row.record, index)}</div></td></tr>
               {/if}
             {:else}
-              <tr class="ant-table-placeholder"><td class="ant-table-cell" colspan={columns.length + dataOffset}>{#if !loading}{#if empty}{@render empty()}{:else}<Empty image="simple" description={strings.emptyText} />{/if}{:else}&nbsp;{/if}</td></tr>
+              <tr class="ant-table-placeholder"><td class="ant-table-cell" colspan={columns.length + dataOffset}>{#if !loading}
+                {#snippet nativeEmpty()}<Empty image="simple" description={strings.emptyText} />{/snippet}
+                <RenderEmpty componentName="Table" local={empty} fallback={nativeEmpty} />
+              {:else}&nbsp;{/if}</td></tr>
             {/each}
           </tbody>
         </table>

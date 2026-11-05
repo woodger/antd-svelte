@@ -3753,8 +3753,10 @@ CSS rules включают small; для совместимого размера
 slot styles, изображения и их исходные цвета при явной source theme.
 Native image=false, inert/ARIA, responsive guards, footer wrapping, paint patterns
 прежнего режима и восстановление фокуса сохранены.
-Общий ConfigProvider prefix и React diagnostics остаются в работе. RenderEmpty уже
-используется List; интеграция остальных consumers, включая Select, ещё не завершена.
+Общий ConfigProvider prefix и React diagnostics остаются в работе.
+[RenderEmpty](./docs/reference/render-empty.md) подключён к Select/TreeSelect,
+Cascader/Panel, Mentions, Transfer, Table/фильтру и List; AutoComplete сохраняет
+исходное исключение combobox. Без callback действуют прежние native defaults.
 Собственный image Snippet отвечает за свои ресурсы и анимацию.
 
 ## Result
@@ -4619,7 +4621,8 @@ checkbox возвращает начальный checked DOM до следующ
 SSR не публикует callbacks и не обращается к DOM. Состояния и ресурсы принадлежат
 экземпляру; меню использует существующий Dropdown.
 
-Полный token engine/renderEmpty, генерация CSS для произвольного prefixCls и
+RenderEmpty подключён через ConfigProvider с исходными fallback/locale приоритетами
+и выбором array content по стороне. Полный token engine, генерация CSS для произвольного prefixCls и
 React-specific refs/dev warnings остаются вне этого этапа. PrefixCls меняет DOM
 классы; встроенный vendor CSS рассчитан на ant-transfer.
 
@@ -7400,9 +7403,14 @@ FormData и не меняет выбранные value. OnSearch не имеет
 Loading показывает spinner и aria-busy, сохраняя доступность уже выданных options.
 При пустой выдаче по умолчанию выводится локализованный текст loading/empty;
 notFoundContent заменяет его строкой, числом или Snippet, null убирает содержимое.
+При отсутствии local notFoundContent используется ConfigProvider.renderEmpty('Select');
+его falsy результат выбирает simple small Empty. Без callback сохраняется прежний
+локализованный текст. Остальные правила — в [общем справочнике](./docs/reference/render-empty.md).
 Ошибка не является отдельным upstream prop: используйте status="error" и
-notFoundContent, при необходимости внешний alert и кнопку повтора. Для кнопки
-внутри popup предотвращайте pointerdown default, чтобы сохранять фокус поля;
+notFoundContent, при необходимости внешний alert и кнопку повтора. Фокус в controls
+кастомного пустого содержимого сохраняет popup, выход наружу закрывает его.
+Native input blur-callback остаётся нативным. Для кнопки
+внутри popup предотвращайте pointerdown default, если нужно сохранить фокус поля;
 дублируйте действие вне popup для последовательной клавиатурной навигации.
 OnPopupScroll получает native scroll event с currentTarget=listbox; решение о
 следующей странице и объединение options остаются у потребителя.

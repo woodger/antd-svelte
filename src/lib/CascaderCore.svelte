@@ -40,6 +40,7 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import CascaderColumns from './CascaderColumns.svelte';
+  import RenderEmpty from './RenderEmpty.svelte';
   import Empty from './Empty.svelte';
   import Icon from './Icon.svelte';
   import NoCompactStyle from './NoCompactStyle.svelte';
@@ -567,8 +568,8 @@
   {:else}{#each item.shown as label, index}{#if index > 0}{' / '}{/if}{@render content(label)}{/each}{/if}
 {/snippet}
 {#snippet empty()}
-  {#if notFoundContent === undefined}<Empty image="simple" />
-  {:else}{@render content(notFoundContent)}{/if}
+  {#snippet nativeEmpty()}<Empty image="simple" />{/snippet}
+  <RenderEmpty componentName="Cascader" local={notFoundContent} fallback={nativeEmpty} />
 {/snippet}
 {#snippet menus()}
   <CascaderColumns {columns} {active} {search} searchRender={searchConfig.render}

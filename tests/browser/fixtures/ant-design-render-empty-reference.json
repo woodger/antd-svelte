@@ -1,0 +1,1814 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "documentMode": "CSS1Compat",
+    "source": "package/dist/antd.min.js; runtime CSS-in-JS; React 18.3.1; inherited global-token typography/color; public consumer APIs and ConfigProvider.renderEmpty",
+    "operation": "Open each actual public consumer and compare custom scalars/nodes/arrays, falsy OR/default vs Table.filter nullish fallback, local override, nested provider replacement and AutoComplete exclusion",
+    "nativeBoundary": "Without renderEmpty, existing native localized text/loading/defaults remain. With renderEmpty, source default simple/small Empty is used after falsy output; Table.filter uses its own localized 24px image. Table empty snippet represents locale.emptyText. Callback scheduling is consumption-driven, except Transfer derives locale at root; React render counts and native popup/table DOM/open state are not compared. Empty native ARIA/paint/responsive contracts remain. Visibility/blank slots normalize to an empty array. Local zero Select/TreeSelect stays visible and is compared against fresh pre-migration library revision 8847e8d rather than source popup suppression."
+  },
+  "viewport": {
+    "width": 1000,
+    "height": 900
+  },
+  "cases": [
+    {
+      "name": "Select-text",
+      "component": "Select",
+      "renderer": "text",
+      "snapshot": [
+        {
+          "text": "Global Select",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Select-snippet",
+      "component": "Select",
+      "renderer": "snippet",
+      "snapshot": [
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Select-array",
+      "component": "Select",
+      "renderer": "array",
+      "snapshot": [
+        {
+          "text": "Global Select|0Global customEmpty global action 0|end",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Select-false",
+      "component": "Select",
+      "renderer": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Select-null",
+      "component": "Select",
+      "renderer": "null",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Select-undefined",
+      "component": "Select",
+      "renderer": "undefined",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Select-zero",
+      "component": "Select",
+      "renderer": "zero",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Select-true",
+      "component": "Select",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "Select-empty",
+      "component": "Select",
+      "renderer": "empty",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Select-empty-array",
+      "component": "Select",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "TreeSelect-text",
+      "component": "TreeSelect",
+      "renderer": "text",
+      "snapshot": [
+        {
+          "text": "Global TreeSelect",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-snippet",
+      "component": "TreeSelect",
+      "renderer": "snippet",
+      "snapshot": [
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-array",
+      "component": "TreeSelect",
+      "renderer": "array",
+      "snapshot": [
+        {
+          "text": "Global TreeSelect|0Global customEmpty global action 0|end",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-false",
+      "component": "TreeSelect",
+      "renderer": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-null",
+      "component": "TreeSelect",
+      "renderer": "null",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-undefined",
+      "component": "TreeSelect",
+      "renderer": "undefined",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-zero",
+      "component": "TreeSelect",
+      "renderer": "zero",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-true",
+      "component": "TreeSelect",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "TreeSelect-empty",
+      "component": "TreeSelect",
+      "renderer": "empty",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-empty-array",
+      "component": "TreeSelect",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "Cascader-text",
+      "component": "Cascader",
+      "renderer": "text",
+      "snapshot": [
+        {
+          "text": "Global Cascader",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Cascader-snippet",
+      "component": "Cascader",
+      "renderer": "snippet",
+      "snapshot": [
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Cascader-array",
+      "component": "Cascader",
+      "renderer": "array",
+      "snapshot": [
+        {
+          "text": "Global Cascader|0Global customEmpty global action 0|end",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Cascader-false",
+      "component": "Cascader",
+      "renderer": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cascader-null",
+      "component": "Cascader",
+      "renderer": "null",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cascader-undefined",
+      "component": "Cascader",
+      "renderer": "undefined",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cascader-zero",
+      "component": "Cascader",
+      "renderer": "zero",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cascader-true",
+      "component": "Cascader",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "Cascader-empty",
+      "component": "Cascader",
+      "renderer": "empty",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cascader-empty-array",
+      "component": "Cascader",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "CascaderPanel-text",
+      "component": "CascaderPanel",
+      "renderer": "text",
+      "snapshot": [
+        {
+          "text": "Global Cascader",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-snippet",
+      "component": "CascaderPanel",
+      "renderer": "snippet",
+      "snapshot": [
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-array",
+      "component": "CascaderPanel",
+      "renderer": "array",
+      "snapshot": [
+        {
+          "text": "Global Cascader|0Global customEmpty global action 0|end",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-false",
+      "component": "CascaderPanel",
+      "renderer": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-null",
+      "component": "CascaderPanel",
+      "renderer": "null",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-undefined",
+      "component": "CascaderPanel",
+      "renderer": "undefined",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-zero",
+      "component": "CascaderPanel",
+      "renderer": "zero",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-true",
+      "component": "CascaderPanel",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "CascaderPanel-empty",
+      "component": "CascaderPanel",
+      "renderer": "empty",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-empty-array",
+      "component": "CascaderPanel",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "Transfer-text",
+      "component": "Transfer",
+      "renderer": "text",
+      "snapshot": [
+        {
+          "text": "Global Transfer",
+          "empty": []
+        },
+        {
+          "text": "Global Transfer",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Transfer-snippet",
+      "component": "Transfer",
+      "renderer": "snippet",
+      "snapshot": [
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        },
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Transfer-array",
+      "component": "Transfer",
+      "renderer": "array",
+      "snapshot": [
+        {
+          "text": "Global Transfer left",
+          "empty": []
+        },
+        {
+          "text": "Global Transfer right|0Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Transfer-false",
+      "component": "Transfer",
+      "renderer": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        },
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transfer-null",
+      "component": "Transfer",
+      "renderer": "null",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        },
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transfer-undefined",
+      "component": "Transfer",
+      "renderer": "undefined",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        },
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transfer-zero",
+      "component": "Transfer",
+      "renderer": "zero",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        },
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transfer-true",
+      "component": "Transfer",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "Transfer-empty",
+      "component": "Transfer",
+      "renderer": "empty",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        },
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transfer-empty-array",
+      "component": "Transfer",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-text",
+      "component": "Mentions",
+      "renderer": "text",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-snippet",
+      "component": "Mentions",
+      "renderer": "snippet",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-array",
+      "component": "Mentions",
+      "renderer": "array",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-false",
+      "component": "Mentions",
+      "renderer": "false",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-null",
+      "component": "Mentions",
+      "renderer": "null",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-undefined",
+      "component": "Mentions",
+      "renderer": "undefined",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-zero",
+      "component": "Mentions",
+      "renderer": "zero",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-true",
+      "component": "Mentions",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-empty",
+      "component": "Mentions",
+      "renderer": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-empty-array",
+      "component": "Mentions",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "Table-text",
+      "component": "Table",
+      "renderer": "text",
+      "snapshot": [
+        {
+          "text": "Global Table",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Table-snippet",
+      "component": "Table",
+      "renderer": "snippet",
+      "snapshot": [
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Table-array",
+      "component": "Table",
+      "renderer": "array",
+      "snapshot": [
+        {
+          "text": "Global Table|0Global customEmpty global action 0|end",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Table-false",
+      "component": "Table",
+      "renderer": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table-null",
+      "component": "Table",
+      "renderer": "null",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table-undefined",
+      "component": "Table",
+      "renderer": "undefined",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table-zero",
+      "component": "Table",
+      "renderer": "zero",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table-true",
+      "component": "Table",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "Table-empty",
+      "component": "Table",
+      "renderer": "empty",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table-empty-array",
+      "component": "Table",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "Table.filter-text",
+      "component": "Table.filter",
+      "renderer": "text",
+      "snapshot": [
+        {
+          "text": "Global Table.filter",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Table.filter-snippet",
+      "component": "Table.filter",
+      "renderer": "snippet",
+      "snapshot": [
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Table.filter-array",
+      "component": "Table.filter",
+      "renderer": "array",
+      "snapshot": [
+        {
+          "text": "Global Table.filter|0Global customEmpty global action 0|end",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Table.filter-false",
+      "component": "Table.filter",
+      "renderer": "false",
+      "snapshot": []
+    },
+    {
+      "name": "Table.filter-null",
+      "component": "Table.filter",
+      "renderer": "null",
+      "snapshot": [
+        {
+          "text": "No filters",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No filters",
+              "imageHeight": "24px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table.filter-undefined",
+      "component": "Table.filter",
+      "renderer": "undefined",
+      "snapshot": [
+        {
+          "text": "No filters",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No filters",
+              "imageHeight": "24px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table.filter-zero",
+      "component": "Table.filter",
+      "renderer": "zero",
+      "snapshot": [
+        {
+          "text": "0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Table.filter-true",
+      "component": "Table.filter",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "Table.filter-empty",
+      "component": "Table.filter",
+      "renderer": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "Table.filter-empty-array",
+      "component": "Table.filter",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "List-text",
+      "component": "List",
+      "renderer": "text",
+      "snapshot": [
+        {
+          "text": "Global List",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-snippet",
+      "component": "List",
+      "renderer": "snippet",
+      "snapshot": [
+        {
+          "text": "Global customEmpty global action 0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-array",
+      "component": "List",
+      "renderer": "array",
+      "snapshot": [
+        {
+          "text": "Global List|0Global customEmpty global action 0|end",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-false",
+      "component": "List",
+      "renderer": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List-null",
+      "component": "List",
+      "renderer": "null",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List-undefined",
+      "component": "List",
+      "renderer": "undefined",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List-zero",
+      "component": "List",
+      "renderer": "zero",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List-true",
+      "component": "List",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "List-empty",
+      "component": "List",
+      "renderer": "empty",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List-empty-array",
+      "component": "List",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-text",
+      "component": "AutoComplete",
+      "renderer": "text",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-snippet",
+      "component": "AutoComplete",
+      "renderer": "snippet",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-array",
+      "component": "AutoComplete",
+      "renderer": "array",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-false",
+      "component": "AutoComplete",
+      "renderer": "false",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-null",
+      "component": "AutoComplete",
+      "renderer": "null",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-undefined",
+      "component": "AutoComplete",
+      "renderer": "undefined",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-zero",
+      "component": "AutoComplete",
+      "renderer": "zero",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-true",
+      "component": "AutoComplete",
+      "renderer": "true",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-empty",
+      "component": "AutoComplete",
+      "renderer": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-empty-array",
+      "component": "AutoComplete",
+      "renderer": "empty-array",
+      "snapshot": []
+    },
+    {
+      "name": "Select-local-null",
+      "component": "Select",
+      "renderer": "text",
+      "local": "null",
+      "snapshot": []
+    },
+    {
+      "name": "Select-local-zero",
+      "component": "Select",
+      "renderer": "text",
+      "local": "zero",
+      "snapshot": []
+    },
+    {
+      "name": "Select-local-empty",
+      "component": "Select",
+      "renderer": "text",
+      "local": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "Select-local-text",
+      "component": "Select",
+      "renderer": "text",
+      "local": "text",
+      "snapshot": [
+        {
+          "text": "Local empty",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Select-local-snippet",
+      "component": "Select",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": [
+        {
+          "text": "Local custom",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-local-null",
+      "component": "TreeSelect",
+      "renderer": "text",
+      "local": "null",
+      "snapshot": []
+    },
+    {
+      "name": "TreeSelect-local-zero",
+      "component": "TreeSelect",
+      "renderer": "text",
+      "local": "zero",
+      "snapshot": []
+    },
+    {
+      "name": "TreeSelect-local-empty",
+      "component": "TreeSelect",
+      "renderer": "text",
+      "local": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "TreeSelect-local-text",
+      "component": "TreeSelect",
+      "renderer": "text",
+      "local": "text",
+      "snapshot": [
+        {
+          "text": "Local empty",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-local-snippet",
+      "component": "TreeSelect",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": [
+        {
+          "text": "Local custom",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Cascader-local-null",
+      "component": "Cascader",
+      "renderer": "text",
+      "local": "null",
+      "snapshot": []
+    },
+    {
+      "name": "Cascader-local-zero",
+      "component": "Cascader",
+      "renderer": "text",
+      "local": "zero",
+      "snapshot": []
+    },
+    {
+      "name": "Cascader-local-empty",
+      "component": "Cascader",
+      "renderer": "text",
+      "local": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "Cascader-local-text",
+      "component": "Cascader",
+      "renderer": "text",
+      "local": "text",
+      "snapshot": [
+        {
+          "text": "Local empty",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Cascader-local-snippet",
+      "component": "Cascader",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": [
+        {
+          "text": "Local custom",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-local-null",
+      "component": "CascaderPanel",
+      "renderer": "text",
+      "local": "null",
+      "snapshot": []
+    },
+    {
+      "name": "CascaderPanel-local-zero",
+      "component": "CascaderPanel",
+      "renderer": "text",
+      "local": "zero",
+      "snapshot": [
+        {
+          "text": "0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-local-empty",
+      "component": "CascaderPanel",
+      "renderer": "text",
+      "local": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "CascaderPanel-local-text",
+      "component": "CascaderPanel",
+      "renderer": "text",
+      "local": "text",
+      "snapshot": [
+        {
+          "text": "Local empty",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "CascaderPanel-local-snippet",
+      "component": "CascaderPanel",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": [
+        {
+          "text": "Local custom",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Transfer-local-null",
+      "component": "Transfer",
+      "renderer": "text",
+      "local": "null",
+      "snapshot": []
+    },
+    {
+      "name": "Transfer-local-zero",
+      "component": "Transfer",
+      "renderer": "text",
+      "local": "zero",
+      "snapshot": [
+        {
+          "text": "0",
+          "empty": []
+        },
+        {
+          "text": "0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Transfer-local-empty",
+      "component": "Transfer",
+      "renderer": "text",
+      "local": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "Transfer-local-text",
+      "component": "Transfer",
+      "renderer": "text",
+      "local": "text",
+      "snapshot": [
+        {
+          "text": "Local empty",
+          "empty": []
+        },
+        {
+          "text": "Local empty",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Transfer-local-snippet",
+      "component": "Transfer",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": [
+        {
+          "text": "Local custom",
+          "empty": []
+        },
+        {
+          "text": "Local custom",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Mentions-local-null",
+      "component": "Mentions",
+      "renderer": "text",
+      "local": "null",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-local-zero",
+      "component": "Mentions",
+      "renderer": "text",
+      "local": "zero",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-local-empty",
+      "component": "Mentions",
+      "renderer": "text",
+      "local": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-local-text",
+      "component": "Mentions",
+      "renderer": "text",
+      "local": "text",
+      "snapshot": []
+    },
+    {
+      "name": "Mentions-local-snippet",
+      "component": "Mentions",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": []
+    },
+    {
+      "name": "Table-local-snippet",
+      "component": "Table",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": [
+        {
+          "text": "Local custom",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-local-null",
+      "component": "List",
+      "renderer": "text",
+      "local": "null",
+      "snapshot": [
+        {
+          "text": "Global List",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-local-zero",
+      "component": "List",
+      "renderer": "text",
+      "local": "zero",
+      "snapshot": [
+        {
+          "text": "Global List",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-local-empty",
+      "component": "List",
+      "renderer": "text",
+      "local": "empty",
+      "snapshot": [
+        {
+          "text": "Global List",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-local-text",
+      "component": "List",
+      "renderer": "text",
+      "local": "text",
+      "snapshot": [
+        {
+          "text": "Local empty",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-local-snippet",
+      "component": "List",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": [
+        {
+          "text": "Local custom",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "AutoComplete-local-null",
+      "component": "AutoComplete",
+      "renderer": "text",
+      "local": "null",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-local-zero",
+      "component": "AutoComplete",
+      "renderer": "text",
+      "local": "zero",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-local-empty",
+      "component": "AutoComplete",
+      "renderer": "text",
+      "local": "empty",
+      "snapshot": []
+    },
+    {
+      "name": "AutoComplete-local-text",
+      "component": "AutoComplete",
+      "renderer": "text",
+      "local": "text",
+      "snapshot": [
+        {
+          "text": "Local empty",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "AutoComplete-local-snippet",
+      "component": "AutoComplete",
+      "renderer": "text",
+      "local": "snippet",
+      "snapshot": [
+        {
+          "text": "Local custom",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Select-nested-text",
+      "component": "Select",
+      "renderer": "text",
+      "nested": "text",
+      "snapshot": [
+        {
+          "text": "Nested Select",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Transfer-nested-text",
+      "component": "Transfer",
+      "renderer": "text",
+      "nested": "text",
+      "snapshot": [
+        {
+          "text": "Nested Transfer",
+          "empty": []
+        },
+        {
+          "text": "Nested Transfer",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "Table-nested-text",
+      "component": "Table",
+      "renderer": "text",
+      "nested": "text",
+      "snapshot": [
+        {
+          "text": "Nested Table",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "List-nested-text",
+      "component": "List",
+      "renderer": "text",
+      "nested": "text",
+      "snapshot": [
+        {
+          "text": "Nested List",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "AutoComplete-nested-text",
+      "component": "AutoComplete",
+      "renderer": "text",
+      "nested": "text",
+      "snapshot": []
+    },
+    {
+      "name": "Select-nested-false",
+      "component": "Select",
+      "renderer": "text",
+      "nested": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Transfer-nested-false",
+      "component": "Transfer",
+      "renderer": "text",
+      "nested": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        },
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": true,
+              "description": "No data",
+              "imageHeight": "35px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Table-nested-false",
+      "component": "Table",
+      "renderer": "text",
+      "nested": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "List-nested-false",
+      "component": "List",
+      "renderer": "text",
+      "nested": "false",
+      "snapshot": [
+        {
+          "text": "No data",
+          "empty": [
+            {
+              "normal": true,
+              "small": false,
+              "description": "No data",
+              "imageHeight": "40px"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AutoComplete-nested-false",
+      "component": "AutoComplete",
+      "renderer": "text",
+      "nested": "false",
+      "snapshot": []
+    }
+  ],
+  "interaction": {
+    "value": "Retained global draft",
+    "selection": [
+      3,
+      8
+    ],
+    "sameInput": true,
+    "focused": true
+  }
+}

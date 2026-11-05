@@ -1,0 +1,29 @@
+{
+  "reference": {
+    "libraryRevision": "8847e8d22ba18a8ca593c66052b3575303a76d74",
+    "operation": "fresh git archive/build of pre-migration native Select/TreeSelect zero-content behavior",
+    "scope": "notFoundContent=0; source CSS-variable provider, enUS, viewport1000x900; source closes these empty popups while the existing native controls keep literal zero visible"
+  },
+  "cases": [
+    {
+      "name": "Select-local-zero",
+      "component": "Select",
+      "snapshot": [
+        {
+          "text": "0",
+          "empty": []
+        }
+      ]
+    },
+    {
+      "name": "TreeSelect-local-zero",
+      "component": "TreeSelect",
+      "snapshot": [
+        {
+          "text": "0",
+          "empty": []
+        }
+      ]
+    }
+  ]
+}

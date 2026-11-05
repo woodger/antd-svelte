@@ -29,7 +29,7 @@ export type RenderEmptyComponent = 'Table' | 'Table.filter' | 'List' | 'Select'
   | 'TreeSelect' | 'Cascader' | 'Transfer' | 'Mentions';
 export type RenderEmptyContent = string | number | boolean | null | undefined | Snippet
   | readonly RenderEmptyContent[];
-/** Producer callback заменяет ReactNode; undefined/null/false/0 используют fallback List. */
+/** Producer callback заменяет ReactNode; falsy использует fallback, Table.filter — только nullish. */
 export type RenderEmptyHandler = (componentName?: RenderEmptyComponent) => RenderEmptyContent;
 
 /** Source tokens/algorithms с наследованием; mode/primary/compact сохраняют native theme API. */
@@ -164,6 +164,7 @@ export interface TableLocale {
   filterTitle?: string;
   filterApply?: string;
   filterReset?: string;
+  filterEmptyText?: string;
   expandColumn?: string;
   expandRow?: string;
   collapseRow?: string;
@@ -284,6 +285,7 @@ export const ruRU = {
     filterTitle: 'Фильтр',
     filterApply: 'Применить',
     filterReset: 'Сбросить',
+    filterEmptyText: 'Без фильтров',
     expandColumn: 'Подробности',
     expandRow: 'Раскрыть строку',
     collapseRow: 'Свернуть строку'
@@ -371,6 +373,7 @@ export const enUS = {
     filterTitle: 'Filter',
     filterApply: 'Apply',
     filterReset: 'Reset',
+    filterEmptyText: 'No filters',
     expandColumn: 'Details',
     expandRow: 'Expand row',
     collapseRow: 'Collapse row'

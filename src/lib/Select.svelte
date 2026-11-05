@@ -1,6 +1,7 @@
 <script lang="ts" generics="Value extends string | number = string, Mode extends 'multiple' | undefined = undefined">
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import RenderEmpty from './RenderEmpty.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import { connectPopup } from './popup.dom';
@@ -388,9 +389,20 @@
 
   function handleBlur(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
     focused = false;
-    setOpen(false);
+    const next = event.relatedTarget;
+
+    if (!(next instanceof Node && list?.contains(next))) setOpen(false);
     field?.onBlur();
     onblur?.(event);
+  }
+
+  function handleListFocusOut(event: FocusEvent) {
+    const next = event.relatedTarget;
+
+    if (next instanceof Node && (container.contains(next) || list?.contains(next))) return;
+
+    focused = false;
+    setOpen(false);
   }
 
   function handleFocus(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
@@ -602,6 +614,7 @@
       role="listbox"
       aria-busy={loading || undefined}
       onscroll={onPopupScroll}
+      onfocusout={handleListFocusOut}
       aria-multiselectable={multiple || undefined}
       aria-label={attributes['aria-label']
           ?? placeholder
@@ -638,10 +651,10 @@
           {#if multiple ? selectedKeys.has(option.value) : option.value === selectedValue}<span class="ant-select-item-option-state"><Icon name="check" /></span>{/if}
         </button>
       {:else}
-        <div class="ant-select-item-empty">{#if typeof notFoundContent === 'function'}{@render notFoundContent()}{:else if notFoundContent !== null}{notFoundContent
-            ?? (loading
+        <div class="ant-select-item-empty">{#snippet nativeEmpty()}{loading
               ? (config.locale.spin ?? ruRU.spin!).loadingText
-              : config.locale.emptyText)}{/if}</div>
+              : config.locale.emptyText}{/snippet}<RenderEmpty componentName="Select"
+              local={notFoundContent} fallback={nativeEmpty} /></div>
       {/each}
     </div>
   {/if}

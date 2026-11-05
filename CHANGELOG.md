@@ -9,6 +9,13 @@
 
 ### Added
 
+- ConfigProvider.renderEmpty подключён к Select/TreeSelect, Cascader/Panel, Mentions,
+  Transfer, Table и фильтру; List сохраняет своё подключение, AutoComplete — исключение.
+  Перенесены source falsy/nullish presets и Transfer side arrays с сохранением native
+  defaults без callback и локального нуля Select/TreeSelect. Select сохраняет popup при
+  фокусе в кастомном содержимом. Добавлены 151 UMD-сценарий, interaction trace,
+  свежий native baseline и SSR/browser-проверки.
+
 - Empty: URL/scalar content, PRESENTED_IMAGE_DEFAULT/SIMPLE, ConfigProvider.empty,
   object/function semantic slots, local prefixCls, rootClassName, imageStyle и refs.
   Подключены Empty aliases/algorithm и исходные SVG colors с сохранением native режима,

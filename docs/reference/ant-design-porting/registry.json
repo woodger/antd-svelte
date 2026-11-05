@@ -3207,6 +3207,18 @@
             "tests/package/select-container.ssr.test.ts"
           ],
           "note": "GetPopupContainer → ConfigProvider.getPopupContainer; undefined сохраняет fallback. Getter получает корневой div.ant-select и не выполняется при SSR/до первого открытия. HTMLElement/ShadowRoot, исходный trigger payload, nested provider/theme.inherit=false и сохранение поиска/фокуса/выделения при замене функции с тем же DOM-контейнером сверены с официальным UMD. Общие 32 сценария охватывают single/multiple и AutoComplete input/textarea. Native default DOM и lifecycle сохранены; явный контейнер использует native top layer, theme variables, width/RTL, keyboard/pointer selection, FormData и cleanup. ShadowRoot styles принадлежат потребителю."
+        },
+        {
+          "id": "render-empty-exclusion",
+          "title": "Исключение глобального renderEmpty в combobox",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/render-empty.spec.ts",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json"
+          ],
+          "note": "Как в pinned Select mode=combobox, AutoComplete не вызывает ConfigProvider.renderEmpty и не открывает default Empty popup при отсутствии options/notFoundContent. Собственный notFoundContent сохраняет прежний API."
         }
       ]
     },
@@ -3428,6 +3440,22 @@
             "tests/package/choice-container.ssr.test.ts"
           ],
           "note": "GetPopupContainer → ConfigProvider.getPopupContainer; undefined наследует provider. Getter получает div.ant-select, Cascader custom children передаёт свой DOM trigger; nativeElement сохраняет существующую обёртку. Getter выполняется только в браузере после первого открытия; native SSR shell, top layer и default DOM сохранены. Общие 40 UMD-эталонов задают nested/local/undefined/theme reset, gap=4px, ShadowRoot и editor/selection/focus/state при замене функции с тем же контейнером. Сохранены component aliases, lazy load, pointer/keyboard selection, native TreeSelect FormData и существующий Form v1 single-path contract; multiple Cascader paths остаются у владельца. CascaderPanel остаётся inline и не вызывает container getter; styles ShadowRoot принадлежат потребителю. Controller width защищён от переменных предка."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/CascaderCore.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Cascader и CascaderPanel сообщают одно имя Cascader; local notFoundContent !== undefined имеет приоритет. Falsy callback выбирает simple small Empty, без callback сохраняется прежний simple Empty. Suppressed local values и native controller не меняются."
         }
       ]
     },
@@ -4719,6 +4747,22 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Нет semantic classNames/styles/feedback suffix, ConfigProvider.mentions/token engine/prefixCls и legacy Mentions.Option children. Native listbox не предоставляет расширенный React Menu/ref API; callbacks получают исходные option data без React-generated key suffix. Rc-trigger motion не переносится этим этапом."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Mentions.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Local notFoundContent !== undefined имеет приоритет; falsy callback выбирает simple small Empty. Без callback сохраняется native locale.emptyText; loading option остаётся отдельной веткой."
         }
       ]
     },
@@ -5209,6 +5253,22 @@
             "tests/package/select-container.ssr.test.ts"
           ],
           "note": "GetPopupContainer → ConfigProvider.getPopupContainer; undefined сохраняет fallback. Getter получает корневой div.ant-select и не выполняется при SSR/до первого открытия. HTMLElement/ShadowRoot, исходный trigger payload, nested provider/theme.inherit=false и сохранение поиска/фокуса/выделения при замене функции с тем же DOM-контейнером сверены с официальным UMD. Общие 32 сценария охватывают single/multiple и AutoComplete input/textarea. Native default DOM и lifecycle сохранены; явный контейнер использует native top layer, theme variables, width/RTL, keyboard/pointer selection, FormData и cleanup. ShadowRoot styles принадлежат потребителю."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Select.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Local notFoundContent !== undefined перекрывает общий renderer. Falsy callback выбирает simple small Empty; отсутствие callback сохраняет native loading/empty text. Native local zero остаётся видимым, в отличие от source popup. Custom empty controls сохраняют popup при фокусе внутри, выход закрывает его; native input blur callback сохранён."
         }
       ]
     },
@@ -6137,7 +6197,7 @@
       "name": "Transfer",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Автономный перенос по общей цели: controlled перенос между списками, selection/search, oneWay, pagination и custom rendering; общий token/renderEmpty API отдельно.",
+      "scopeReason": "Автономный перенос по общей цели: controlled перенос между списками, selection/search, oneWay, pagination и custom rendering; общий token API отдельно.",
       "upstreamPath": "components/transfer",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -6281,13 +6341,29 @@
         },
         {
           "id": "advanced-api",
-          "title": "Полный token/renderEmpty и React-specific API",
+          "title": "Полный token и React-specific API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Общий token engine/renderEmpty, CSS generation для произвольного prefixCls, React-specific refs/dev warnings не перенесены. PrefixCls меняет DOM-классы, vendor CSS рассчитан на ant-transfer. ReactNode callbacks/cloneElement заменены явно описанными snippets/handlers; v1-ready не означает завершение полного React API."
+          "note": "Общий token engine, CSS generation для произвольного prefixCls, React-specific refs/dev warnings не перенесены. PrefixCls меняет DOM-классы, vendor CSS рассчитан на ant-transfer. ReactNode callbacks/cloneElement заменены явно описанными snippets/handlers; v1-ready не означает завершение полного React API."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Transfer.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Общий renderer вычисляется до props.locale; local notFoundContent, включая own undefined/null, перекрывает default. Falsy callback выбирает simple small Empty, без callback сохраняется прежний simple Empty. Array выбирается по стороне, вложенный content/0 отображается рекурсивно."
         }
       ]
     },
@@ -6444,6 +6520,22 @@
             "tests/package/choice-container.ssr.test.ts"
           ],
           "note": "GetPopupContainer → ConfigProvider.getPopupContainer; undefined наследует provider. Getter получает div.ant-select, Cascader custom children передаёт свой DOM trigger; nativeElement сохраняет существующую обёртку. Getter выполняется только в браузере после первого открытия; native SSR shell, top layer и default DOM сохранены. Общие 40 UMD-эталонов задают nested/local/undefined/theme reset, gap=4px, ShadowRoot и editor/selection/focus/state при замене функции с тем же контейнером. Сохранены component aliases, lazy load, pointer/keyboard selection, native TreeSelect FormData и существующий Form v1 single-path contract; multiple Cascader paths остаются у владельца. CascaderPanel остаётся inline и не вызывает container getter; styles ShadowRoot принадлежат потребителю. Controller width защищён от переменных предка."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TreeSelect.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Local notFoundContent !== undefined перекрывает общий renderer. Falsy callback выбирает simple small Empty; отсутствие callback сохраняет native locale text. Native local zero остаётся видимым, в отличие от source popup; свежий baseline закреплён отдельно."
         }
       ]
     },
@@ -8100,7 +8192,7 @@
         },
         {
           "id": "shared-config",
-          "title": "Общий prefix, diagnostics и renderEmpty у остальных consumers",
+          "title": "Общий prefix и diagnostics",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
@@ -8108,7 +8200,23 @@
             "src/lib/config-context.ts",
             "src/lib/List.svelte"
           ],
-          "note": "Общий ConfigProvider prefix и React development warnings не перенесены. RenderEmpty существует в ConfigProvider и используется List; интеграция остальных consumers, включая Select/Table, и полный defaultRenderEmpty остаются отдельным общим этапом."
+          "note": "Общий ConfigProvider prefix и React development warnings не перенесены; поддержка renderEmpty выделена отдельно."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/DefaultRenderEmpty.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Общий private preset использует simple для Table/List, simple small для Select/TreeSelect/Cascader/Transfer/Mentions и null для Table.filter; сам filter задаёт localized image24 preset. ConfigProvider.empty влияет на styling, local preset image имеет приоритет. Без callback native defaults потребителей сохранены."
         }
       ]
     },
@@ -8262,7 +8370,7 @@
         "src/lib/List.svelte",
         "src/lib/ListItem.svelte",
         "src/lib/ListItemMeta.svelte",
-        "src/lib/ListContent.svelte",
+        "src/lib/RenderContent.svelte",
         "src/lib/list.types.ts",
         "src/lib/list.engine.ts",
         "src/lib/list.dom.ts",
@@ -8339,7 +8447,7 @@
             "tests/package/list.ssr.test.ts",
             "tests/browser/list.spec.ts"
           ],
-          "note": "Boolean/поддержанные Spin props, empty loading stub53, source loading={} distinction, delay и inert busy children существующего Spin; pager остаётся снаружи. Locale.emptyText || ConfigProvider.renderEmpty(List) || simple Empty; lazy producer, source falsy fallback. RenderEmpty пока использует только List. SSR без DOM/media/observer/timers, cleanup на unmount, нативные links/buttons с видимым focus, RTL/dark/compact/reduced motion."
+          "note": "Boolean/поддержанные Spin props, empty loading stub53, source loading={} distinction, delay и inert busy children существующего Spin; pager остаётся снаружи. Locale.emptyText || ConfigProvider.renderEmpty(List) || simple Empty; lazy producer, source falsy fallback. SSR без DOM/media/observer/timers, cleanup на unmount, нативные links/buttons с видимым focus, RTL/dark/compact/reduced motion."
         },
         {
           "id": "opaque-snippet-ssr",
@@ -8360,6 +8468,22 @@
             "readme.md"
           ],
           "note": "Полный token engine и расширенные ещё не перенесённые Spin props остаются дальнейшими этапами; встроенный CSS рассчитан на ant-list, arbitrary prefix CSS не генерируется. React refs/nodes адаптированы к snippets/native bindings, deprecation/dev warnings не испускаются. V1-ready не означает полный React API."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/List.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Сохранены locale.emptyText || renderEmpty(List) || simple Empty, lazy producer и source falsy fallback. Общий рекурсивный renderer содержимого вынесен из приватного ListContent в RenderContent без новых DOM wrappers."
         }
       ]
     },
@@ -9303,7 +9427,7 @@
       "scope": "target",
       "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
       "upstreamPath": "components/table",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Table",
@@ -9343,6 +9467,22 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Ограничение зафиксировано в README модуля."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Table.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Существующий empty Snippet имеет приоритет над общим renderer; native loading скрывает empty. Falsy callback выбирает simple Empty, без callback сохраняется locale.table.emptyText. Table.filter использует ?? и отдельный localized image24/padding16 preset; 0/false/empty сохраняются. Filters=[] теперь открывает пустой фильтр при поддерживаемом native режиме колонки; native callback shape не меняется."
         }
       ]
     },
@@ -12806,6 +12946,22 @@
             "tests/package/flex-source.ssr.test.ts"
           ],
           "note": "PrepareComponentToken возвращает пустой record, как 6.6.8. Components.Flex применяет alias overrides и algorithm к корню: paddingXS/padding/paddingLG задают preset gaps, отдельный CSS-variable prefix работает через общий bridge. FontSize/colorText variables не добавляют font/color reset, typography остаётся унаследованной. Явный undefined, Source compact/dark, algorithms и custom CSS prefix сверяются с официальным UMD; nested/sibling scopes изолированы. Native density, размер direct children и прежние gap/style priorities сохранены."
+        },
+        {
+          "id": "render-empty",
+          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/RenderEmpty.svelte",
+            "tests/package/render-empty.ssr.test.ts",
+            "tests/browser/render-empty.spec.ts",
+            "tests/browser/fixtures/ant-design-render-empty-reference.json",
+            "tests/browser/fixtures/render-empty-native-reference.json",
+            "docs/reference/render-empty.md"
+          ],
+          "note": "Renderer наследуется при undefined; собственная функция заменяет родительскую, её falsy не возвращает родительский output. Select/TreeSelect/Cascader/Panel/Mentions/Transfer/Table/filter/List получают исходные имена и fallback priorities. AutoComplete исключён как upstream combobox. Producer вычисляется по потреблению, Transfer при locale; точные React render counts не заявлены. Native defaults без callback и local zero Select/TreeSelect сохраняются."
         }
       ]
     },

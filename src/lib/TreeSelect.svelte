@@ -19,6 +19,7 @@
   } from './tree-select.engine';
   import { expandTreeParents, treeCheckDisabled } from './tree.engine';
   import { useConfig } from './config-context';
+  import RenderEmpty from './RenderEmpty.svelte';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -605,6 +606,9 @@
             search.toLowerCase()
           )
         )} />
-    {:else}<div id={`${controlId}-list`} role="listbox" class="ant-select-empty">{#if typeof notFoundContent==='function'}{@render notFoundContent()}{:else if notFoundContent!==null}{notFoundContent ?? config.locale.emptyText}{/if}</div>{/if}
+    {:else}<div id={`${controlId}-list`} role="listbox" class="ant-select-empty">
+      {#snippet nativeEmpty()}{config.locale.emptyText}{/snippet}
+      <RenderEmpty componentName="TreeSelect" local={notFoundContent} fallback={nativeEmpty} />
+    </div>{/if}
   </div>
 </div>{/if}</NoCompactStyle>

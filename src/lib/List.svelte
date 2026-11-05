@@ -13,7 +13,7 @@
     listRows
   } from './list.engine';
   import type { ListProps } from './list.types';
-  import ListContent from './ListContent.svelte';
+  import ListContent from './RenderContent.svelte';
   import Empty from './Empty.svelte';
   import Pagination from './Pagination.svelte';
   import Row from './Row.svelte';
