@@ -1,6 +1,7 @@
 <script lang="ts" generics="Value extends SegmentedValue = SegmentedValue">
   import { onDestroy, tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { normalizeSegmentedOptions, offsetSegmentedValue } from './segmented.engine';
   import { connectFeedbackFocus } from './feedback.dom';
   import { animateSegmentedThumb } from './segmented.dom';
@@ -28,6 +29,7 @@
     ...rest
   }: SegmentedProps<Value> = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Segmented');
   const generatedId = $props.id();
   const resets = new Set<ReturnType<typeof setTimeout>>();
   const initialValue = untrack(
@@ -190,6 +192,7 @@
   aria-orientation={isVertical ? 'vertical' : 'horizontal'} tabindex={rest.tabindex ?? (disabled ? undefined : 0)} dir={config.direction}
   class={[
       'ant-segmented ant-segmented-css-var',
+      componentTheme.className,
       disabled && 'ant-segmented-disabled',
       block && 'ant-segmented-block',
       isVertical && 'ant-segmented-vertical',
@@ -201,7 +204,7 @@
       rootClassName,
       classes.root
     ]}
-  style={[slotStyles.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, slotStyles.root, style].filter(Boolean).join(';')}>
   <div class="ant-segmented-group" bind:this={group}>
     {#each items as item (item.value)}
       {#if item.tooltip}

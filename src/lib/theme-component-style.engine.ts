@@ -28,9 +28,19 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
-  | 'Descriptions' | 'Statistic';
+  | 'Descriptions' | 'Statistic' | 'Segmented';
 
 const factories = {
+  Segmented: (token: GlobalToken) => ({
+    trackPadding: token.lineWidthBold,
+    trackBg: token.colorBgLayout,
+    itemColor: token.colorTextLabel,
+    itemHoverColor: token.colorText,
+    itemHoverBg: token.colorFillSecondary,
+    itemSelectedBg: token.colorBgElevated,
+    itemActiveBg: token.colorFill,
+    itemSelectedColor: token.colorText
+  }),
   Statistic: (token: GlobalToken) => ({
     titleFontSize: token.fontSize,
     contentFontSize: token.fontSizeHeading3
@@ -243,7 +253,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Card: [],
   Carousel: [],
   Descriptions: [],
-  Statistic: []
+  Statistic: [],
+  Segmented: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

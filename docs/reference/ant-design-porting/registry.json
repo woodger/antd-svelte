@@ -9829,7 +9829,18 @@
         "src/lib/segmented.types.ts",
         "src/lib/segmented.engine.ts",
         "readme.md",
-        "integration:segmented"
+        "integration:segmented",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-segmented-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-segmented-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-segmented-theme-reference.json",
+        "tests/browser/fixtures/segmented-theme-presets.ts",
+        "tests/browser/fixtures/SegmentedThemeCase.svelte",
+        "tests/browser/fixtures/SegmentedThemeControl.svelte",
+        "tests/browser/fixtures/SegmentedThemeFixtures.svelte",
+        "tests/browser/segmented-theme-metrics.ts",
+        "tests/browser/segmented-theme.spec.ts",
+        "tests/package/segmented-theme.ssr.test.ts"
       ],
       "features": [
         {
@@ -9891,8 +9902,30 @@
           "note": "Строка либо локальные TooltipProps; существующий Tooltip использует span с display:contents и native popover. Проверяются block, disabled option, клавиатура и измерения thumb."
         },
         {
+          "id": "component-theme-tokens",
+          "title": "Все восемь компонентных токенов",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Segmented.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-segmented-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-segmented-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-segmented-theme-reference.json",
+            "tests/browser/fixtures/segmented-theme-presets.ts",
+            "tests/browser/fixtures/SegmentedThemeCase.svelte",
+            "tests/browser/fixtures/SegmentedThemeControl.svelte",
+            "tests/browser/fixtures/SegmentedThemeFixtures.svelte",
+            "tests/browser/segmented-theme-metrics.ts",
+            "tests/browser/segmented-theme.spec.ts",
+            "tests/package/segmented-theme.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Фабрика и root theme hook следуют 6.6.8: trackPadding/trackBg, itemColor/itemHoverColor/itemHoverBg/itemSelectedBg/itemActiveBg/itemSelectedColor; zero/string/undefined, global/component aliases и algorithms, cssVar.prefix. Normal/small/large/block/round/vertical/disabled, RTL, nested/reset/sibling providers, semantic/user priority и hover/active pseudo states. Native темы и radio/FormData/keyboard сохраняются; обновление CSS не сбрасывает selection/focus/DOM, изменение геометрии отменяет thumb. SSR не создаёт animation/observer/timers."
+        },
+        {
           "id": "global-config",
-          "title": "PrefixCls и глобальный component config/tokens",
+          "title": "PrefixCls и глобальный component config",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],

@@ -512,6 +512,19 @@ aria-label option. Title по умолчанию берётся из scalar labe
 как в Ant Design. ClassNames/styles поддерживают root/item/label/icon, объект
 либо callback ({ props }); styles — CSS-строки. Style перекрывает styles.root.
 
+ConfigProvider.theme.components.Segmented применяет все восемь компонентных
+токенов: padding/фон track, обычный/selected/hover текст и фоны selected/hover/active.
+Поддержаны числовой 0, строковая CSS-длина trackPadding, alias tokens,
+глобальные и компонентные algorithms, cssVar.prefix и вложенные providers.
+Тема обновляет размеры и состояния без сброса selection, focus или radio DOM;
+изменение геометрии завершает существующий thumb через ResizeObserver.
+Переменные темы идут перед semantic/user styles; native light/dark/compact
+сохраняют прежние цвета и размеры.
+Сверка: [официальные CSS tokens](./tools/fixtures/ant-design-segmented-tokens-reference.json),
+[размеры и pseudo states](./tests/browser/fixtures/ant-design-segmented-theme-reference.json),
+[SSR](./tests/package/segmented-theme.ssr.test.ts) и
+[browser](./tests/browser/segmented-theme.spec.ts), `?fixture=segmented-theme`.
+
 Value поддерживает binding, defaultValue читается при создании; без него выбран
 первый option, даже disabled. Внешняя смена value не вызывает onChange(value).
 Удаление выбранного option не исправляет значение; восстановление option

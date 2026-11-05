@@ -613,6 +613,11 @@
 
 ### Fixed
 
+- Segmented: подключены все восемь компонентных токенов, включая trackPadding
+  и цвета selected/hover/active. Сохранены native темы, radio selection/focus,
+  semantic styles и отмена thumb при изменении размеров. Добавлена сверка
+  CSS declarations, геометрии и состояний с Ant Design 6.6.8, SSR и browser.
+
 - Statistic: titleFontSize/contentFontSize применяются через общую компонентную
   тему также в Timer и Countdown. Сохранены native compact, semantic/value styles,
   вложенные providers, snippets и интервалы при смене токенов. Добавлена сверка
