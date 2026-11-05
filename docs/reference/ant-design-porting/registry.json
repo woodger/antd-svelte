@@ -2160,7 +2160,13 @@
         "tests/browser/fixtures/ant-design-menu-container-reference.json",
         "tests/browser/fixtures/MenuContainerFixtures.svelte",
         "tests/package/menu-container.ssr.test.ts",
-        "tests/browser/menu-container.spec.ts"
+        "tests/browser/menu-container.spec.ts",
+        "src/lib/vendor/menu-link-reset.css",
+        "src/lib/styles.css",
+        "tests/browser/fixtures/ant-design-menu-link-decoration-reference.json",
+        "tests/browser/fixtures/MenuLinkDecorationFixtures.svelte",
+        "tests/browser/menu-link-decoration.spec.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -2246,6 +2252,22 @@
           "requiredForV1": false,
           "evidence": [],
           "note": "Нет prefixCls/component config вне темы, semantic classNames/styles, popupRender/placements/offset, expandIcon/itemIcon overrides, controlled activeKey/defaultActiveFirst, Menu.Item/SubMenu/ItemGroup/Divider children wrappers и полного Tooltip API collapsed items. Standalone Menu не меняет существующий Dropdown menu contract; интеграция остаётся отдельным этапом."
+        },
+        {
+          "id": "link-reset",
+          "title": "Общий reset ссылок Menu и подменю",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/vendor/menu-link-reset.css",
+            "src/lib/styles.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-menu-link-decoration-reference.json",
+            "tests/browser/fixtures/MenuLinkDecorationFixtures.svelte",
+            "tests/browser/menu-link-decoration.spec.ts",
+            "readme.md"
+          ],
+          "note": "14 общих link reset rules извлекаются из закреплённого npm CSS и ограничены потомками .ant-menu-css-var с исходной specificity ссылок/псевдоклассов. Normal/hover/active/focus используют исходные decoration tokens; inline style приоритетнее, Menu item colors и disabled rules сохраняют приоритет над общим reset. Правила действуют без source theme, в cssVar, horizontal/vertical/inline, группах и popup-подменю, включая body/ShadowRoot containers с подключёнными владельцем стилями. 39 UMD-сценариев закрепляют default/custom/inline, light/dark/compact/RTL; browser проверяет href, одиночные click/selection callbacks, клавиатуру, сохранение DOM/focus при смене токенов и темы и оформление внешних ссылок. Native DOM, popup lifecycle и прочий Menu API сохранены."
         }
       ]
     },

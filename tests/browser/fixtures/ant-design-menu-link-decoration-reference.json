@@ -1,0 +1,1262 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "browser": "156.0.8078.4",
+    "operation": "Public Menu label anchors in horizontal/vertical/inline modes: normal, hover, active, focus-visible; submenu popup/inline children and group labels. Default/custom link CSS variables and inline priority, light/dark/compact/RTL. Menu reset is scoped in the Svelte port so unrelated links retain their existing appearance."
+  },
+  "cases": [
+    {
+      "name": "horizontal-light-normal-default",
+      "mode": "horizontal",
+      "dark": false,
+      "compact": false,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-light-normal-custom",
+      "mode": "horizontal",
+      "dark": false,
+      "compact": false,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-light-normal-inline",
+      "mode": "horizontal",
+      "dark": false,
+      "compact": false,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-light-compact-default",
+      "mode": "horizontal",
+      "dark": false,
+      "compact": true,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-light-compact-custom",
+      "mode": "horizontal",
+      "dark": false,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-light-compact-inline",
+      "mode": "horizontal",
+      "dark": false,
+      "compact": true,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-dark-normal-default",
+      "mode": "horizontal",
+      "dark": true,
+      "compact": false,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-dark-normal-custom",
+      "mode": "horizontal",
+      "dark": true,
+      "compact": false,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-dark-normal-inline",
+      "mode": "horizontal",
+      "dark": true,
+      "compact": false,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-dark-compact-default",
+      "mode": "horizontal",
+      "dark": true,
+      "compact": true,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-dark-compact-custom",
+      "mode": "horizontal",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-dark-compact-inline",
+      "mode": "horizontal",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "horizontal-rtl-custom",
+      "mode": "horizontal",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": true,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-light-normal-default",
+      "mode": "inline",
+      "dark": false,
+      "compact": false,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-light-normal-custom",
+      "mode": "inline",
+      "dark": false,
+      "compact": false,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-light-normal-inline",
+      "mode": "inline",
+      "dark": false,
+      "compact": false,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-light-compact-default",
+      "mode": "inline",
+      "dark": false,
+      "compact": true,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-light-compact-custom",
+      "mode": "inline",
+      "dark": false,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-light-compact-inline",
+      "mode": "inline",
+      "dark": false,
+      "compact": true,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-dark-normal-default",
+      "mode": "inline",
+      "dark": true,
+      "compact": false,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-dark-normal-custom",
+      "mode": "inline",
+      "dark": true,
+      "compact": false,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-dark-normal-inline",
+      "mode": "inline",
+      "dark": true,
+      "compact": false,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-dark-compact-default",
+      "mode": "inline",
+      "dark": true,
+      "compact": true,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-dark-compact-custom",
+      "mode": "inline",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-dark-compact-inline",
+      "mode": "inline",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "inline-rtl-custom",
+      "mode": "inline",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": true,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-light-normal-default",
+      "mode": "vertical",
+      "dark": false,
+      "compact": false,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-light-normal-custom",
+      "mode": "vertical",
+      "dark": false,
+      "compact": false,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-light-normal-inline",
+      "mode": "vertical",
+      "dark": false,
+      "compact": false,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-light-compact-default",
+      "mode": "vertical",
+      "dark": false,
+      "compact": true,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-light-compact-custom",
+      "mode": "vertical",
+      "dark": false,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-light-compact-inline",
+      "mode": "vertical",
+      "dark": false,
+      "compact": true,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-dark-normal-default",
+      "mode": "vertical",
+      "dark": true,
+      "compact": false,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-dark-normal-custom",
+      "mode": "vertical",
+      "dark": true,
+      "compact": false,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-dark-normal-inline",
+      "mode": "vertical",
+      "dark": true,
+      "compact": false,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-dark-compact-default",
+      "mode": "vertical",
+      "dark": true,
+      "compact": true,
+      "custom": false,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-dark-compact-custom",
+      "mode": "vertical",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-dark-compact-inline",
+      "mode": "vertical",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": true,
+      "rtl": false,
+      "links": {
+        "nested": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline",
+          "outline": "solid"
+        }
+      }
+    },
+    {
+      "name": "vertical-rtl-custom",
+      "mode": "vertical",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "rtl": true,
+      "links": {
+        "nested": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "regular": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        },
+        "group": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through",
+          "outline": "solid"
+        }
+      }
+    }
+  ]
+}

@@ -2308,6 +2308,14 @@ overflow More в эти гарантии пока не входит и оста�
 native button, a[href] в label остаётся настоящей ссылкой. Menu не перехватывает
 переход, модификаторы, target/rel; native Enter на ссылке запускает callback
 один раз через click вместо дублирования legacy React keydown/click.
+Ссылки label и групп используют исходный link reset во всех режимах Menu,
+включая inline/popup-подменю и отдельный popup container, без зависимости от cssVar.
+LinkDecoration/linkHoverDecoration/linkFocusDecoration и inline styles сохраняют
+приоритет; ссылки вне Menu не меняются. Рецепт menu-link-reset извлекает 14 общих
+правил из закреплённого CSS. Сверка:
+[39 UMD-сценариев](./tests/browser/fixtures/ant-design-menu-link-decoration-reference.json) и
+[browser](./tests/browser/menu-link-decoration.spec.ts), `?fixture=menu-link-decoration`.
+
 Inline Up/Down обходят все видимые доступные пункты, Enter переключает подменю.
 Horizontal Left/Right меняют пункты первого уровня с учётом RTL, Down/Enter входят
 в popup. В popup Up/Down обходят текущий уровень, Left/Right входят/возвращаются
