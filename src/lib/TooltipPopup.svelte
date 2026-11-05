@@ -60,6 +60,7 @@
     getTooltipContainer,
     semanticProps,
     ownerClassName,
+    outsideEvents,
     onDismiss,
     onHoverChange
   }: {
@@ -89,7 +90,8 @@
     getTooltipContainer?: (trigger: HTMLElement) => HTMLElement;
     semanticProps?: Omit<TooltipProps, 'children'>;
     ownerClassName?: string;
-    onDismiss: () => void;
+    outsideEvents?: 'pointer' | 'mouse';
+    onDismiss: (reason: 'escape' | 'outside') => void;
     onHoverChange?: (hovered: boolean) => void;
   } = $props();
 
@@ -282,7 +284,8 @@
       gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement) || sourcePlacement
         ? (arrowConfig.show ? designTokens.state.token.sizePopupArrow / 2 : 0)
           + designTokens.state.token.marginXXS : undefined),
-      onDismiss: () => onDismiss(),
+      get outsideEvents() { return outsideEvents; },
+      onDismiss: reason => onDismiss(reason),
       applyPosition: popupStyle.position,
       onPlacement: (next) => {
         actualPlacement = next;

@@ -30,6 +30,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   onAlign?: (position: TooltipPosition) => void;
   onPlacement: (placement: TooltipPlacement) => void;
   onDismiss: (reason: 'escape' | 'outside') => void;
+  outsideEvents?: 'pointer' | 'mouse';
   onKeydown?: (event: KeyboardEvent) => void;
   preserveFocus?: boolean;
   maxWidth?: string | false;
@@ -207,7 +208,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
     }
   }
 
-  function handlePointerdown(event: PointerEvent) {
+  function handleOutside(event: MouseEvent | PointerEvent) {
     const target = event.composedPath()[0] ?? event.target;
     const popupRoot = popup.getRootNode();
     const trigger = options.trigger ?? anchor;
@@ -224,6 +225,14 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       options.onDismiss('outside');
   }
 
+  function handlePointerdown(event: PointerEvent) {
+    if (options.outsideEvents !== 'mouse') handleOutside(event);
+  }
+
+  function handleMousedown(event: MouseEvent) {
+    if (options.outsideEvents === 'mouse') handleOutside(event);
+  }
+
   function preserveFocus(event: PointerEvent) {
     event.preventDefault();
   }
@@ -232,6 +241,8 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   tick();
   document.addEventListener('keydown', handleKeydown);
   document.addEventListener('pointerdown', handlePointerdown, true);
+  view.addEventListener('mousedown', handleMousedown, true);
+  view.addEventListener('contextmenu', handleMousedown, true);
   if (options.preserveFocus !== false)
     popup.addEventListener('pointerdown', preserveFocus);
 
@@ -240,6 +251,8 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
     view.cancelAnimationFrame(frame);
     document.removeEventListener('keydown', handleKeydown);
     document.removeEventListener('pointerdown', handlePointerdown, true);
+    view.removeEventListener('mousedown', handleMousedown, true);
+    view.removeEventListener('contextmenu', handleMousedown, true);
     popup.removeEventListener('pointerdown', preserveFocus);
     hide();
   }, { forceAlign });

@@ -9,6 +9,12 @@
 
 ### Added
 
+- Tooltip: независимые showAction/hideAction, пустые и реактивные наборы событий,
+  focusDelay/blurDelay, исходный touch fallback и закрытие снаружи для новых actions.
+  Настройки работают также в ellipsis Tooltip Typography; сохранены native defaults,
+  controlled/bindable open и SSR cleanup. Добавлены 54 UMD-сценария / 310 кадров
+  с проверкой callback timing, popup hover и отмены задержки после unmount.
+
 - Tooltip: disabled с сохранением raw open и ожидающих событий, id с fallback/fresh
   cache, forceRender для скрытого содержимого и portal, явный zIndex с source style
   priority. Настройки передаются Slider и Typography; сохранены native shell/SSR,

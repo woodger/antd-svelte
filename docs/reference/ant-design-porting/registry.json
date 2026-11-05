@@ -486,7 +486,17 @@
         "src/lib/AvatarGroup.svelte",
         "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
         "tests/browser/overlay-empty-trigger.spec.ts",
-        "tests/browser/fixtures/ant-design-typography-actions-reference.json"
+        "tests/browser/fixtures/ant-design-typography-actions-reference.json",
+        "src/lib/tooltip.engine.ts",
+        "src/lib/tooltip.engine.test.ts",
+        "tests/browser/fixtures/ant-design-tooltip-actions-reference.json",
+        "tests/browser/fixtures/tooltip-actions.types.ts",
+        "tests/browser/fixtures/TooltipActionsFixtures.svelte",
+        "tests/browser/fixtures/TooltipLifecycleCase.svelte",
+        "tests/browser/fixtures/tooltip-lifecycle.types.ts",
+        "tests/browser/tooltip-actions.spec.ts",
+        "tests/package/tooltip-actions.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -708,6 +718,30 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
+        },
+        {
+          "id": "independent-trigger-actions",
+          "title": "Независимые showAction/hideAction и focusDelay/blurDelay",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/tooltip.engine.test.ts",
+            "src/lib/Tooltip.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-tooltip-actions-reference.json",
+            "tests/browser/fixtures/tooltip-actions.types.ts",
+            "tests/browser/fixtures/TooltipActionsFixtures.svelte",
+            "tests/browser/fixtures/TooltipLifecycleCase.svelte",
+            "tests/browser/fixtures/tooltip-lifecycle.types.ts",
+            "tests/browser/tooltip-actions.spec.ts",
+            "tests/package/tooltip-actions.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Независимые списки заменяют trigger; undefined возвращает его, [] отключает выбранное направление. FocusDelay/blurDelay задаются в секундах с default 0 независимо от mouse delays; отрицательные значения сохраняют асинхронный timer 0 rc-trigger. Неявный touch добавляется к hover без click отдельно для show/hide; touched подавляет совместимые mouse события до обработанного click. Новые overrides используют исходное outside mousedown/contextmenu только для hide click/contextMenu/touch; Escape сохраняется. Отключённый hide и замена actions не отменяют ожидающий show. 54 официальных UMD-сценария / 310 кадров фиксируют Tooltip и Typography JS ellipsis, raw callbacks и sync timing, controlled owner через getter/setter binding, prop removal, popup hover, disabled visibility и touch. Четыре source cleanup traces закрепляют отсутствие callback после удаления pending/visible focused trigger. Native blur без relatedTarget ждёт microtask для проверки connected/cleanup; blur с relatedTarget сохраняет source sync timing. SSR не запускает DOM/timers, unmount отменяет задержку. Native defaults без новых actions, Svelte binding и существующий popup lifecycle сохраняются; Typography вычисляет disabled по ellipsis. Source motion/UniqueProvider и полный аудит остальных delegated props этим этапом не объявляются завершёнными."
         }
       ]
     },
@@ -10244,7 +10278,12 @@
         "tests/browser/fixtures/TooltipLifecycleState.svelte",
         "tests/browser/fixtures/TooltipLifecycleFixtures.svelte",
         "tests/browser/tooltip-lifecycle.spec.ts",
-        "tests/package/tooltip-lifecycle.ssr.test.ts"
+        "tests/package/tooltip-lifecycle.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-tooltip-actions-reference.json",
+        "tests/browser/fixtures/tooltip-actions.types.ts",
+        "tests/browser/fixtures/TooltipActionsFixtures.svelte",
+        "tests/browser/tooltip-actions.spec.ts",
+        "tests/package/tooltip-actions.ssr.test.ts"
       ],
       "features": [
         {
@@ -10666,6 +10705,30 @@
             "readme.md"
           ],
           "note": "Disabled скрывает popup/open class и снимает собственную description, сохраняя raw open, события и pending delay. Uncontrolled open переживает обновление spread props; Svelte bind contract сохранён. Id имеет стабильный falsy fallback и кэшируется с содержимым по fresh; caller-owned ARIA tokens сохраняются, включая whitespace/escaped id без повторного добавления токенов observer. ForceRender монтирует скрытое содержимое и portal после hydration, включая disabled/empty title и destroyOnHidden; первый mount берёт текущий payload, выключение force при destroy удаляет его. Явный zIndex, включая 0/negative, идёт перед provider/local root и legacy overlayStyle; отсутствие prop возвращает тематический default. 19 UMD-сценариев / 139 кадров и четыре consumer traces / 20 кадров закрепляют поведение. Настройки переданы single/active range/pinned range Slider и Typography; Typography вычисляет disabled по ellipsis, перекрывая tooltip option, как Source. Native eager SSR, retained shell, доступное описание закрытого Tooltip и существующая active range composition сохранены; destroy=true SSR остаётся lazy. Browser проверяет draft/counter/focus/selection, ID ownership, portal cleanup и отсутствие позднего callback после unmount. Source shared zIndex context, top-layer stacking, motion/UniqueProvider и остальные delegated props этим этапом не объявляются перенесёнными; общий аудит семейства остаётся в работе."
+        },
+        {
+          "id": "independent-trigger-actions",
+          "title": "Независимые showAction/hideAction и focusDelay/blurDelay",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/tooltip.engine.test.ts",
+            "src/lib/Tooltip.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/popup.dom.ts",
+            "tests/browser/fixtures/ant-design-tooltip-actions-reference.json",
+            "tests/browser/fixtures/tooltip-actions.types.ts",
+            "tests/browser/fixtures/TooltipActionsFixtures.svelte",
+            "tests/browser/fixtures/TooltipLifecycleCase.svelte",
+            "tests/browser/fixtures/tooltip-lifecycle.types.ts",
+            "tests/browser/tooltip-actions.spec.ts",
+            "tests/package/tooltip-actions.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Независимые списки заменяют trigger; undefined возвращает его, [] отключает выбранное направление. FocusDelay/blurDelay задаются в секундах с default 0 независимо от mouse delays; отрицательные значения сохраняют асинхронный timer 0 rc-trigger. Неявный touch добавляется к hover без click отдельно для show/hide; touched подавляет совместимые mouse события до обработанного click. Новые overrides используют исходное outside mousedown/contextmenu только для hide click/contextMenu/touch; Escape сохраняется. Отключённый hide и замена actions не отменяют ожидающий show. 54 официальных UMD-сценария / 310 кадров фиксируют Tooltip и Typography JS ellipsis, raw callbacks и sync timing, controlled owner через getter/setter binding, prop removal, popup hover, disabled visibility и touch. Четыре source cleanup traces закрепляют отсутствие callback после удаления pending/visible focused trigger. Native blur без relatedTarget ждёт microtask для проверки connected/cleanup; blur с relatedTarget сохраняет source sync timing. SSR не запускает DOM/timers, unmount отменяет задержку. Native defaults без новых actions, Svelte binding и существующий popup lifecycle сохраняются; Typography вычисляет disabled по ellipsis. Source motion/UniqueProvider и полный аудит остальных delegated props этим этапом не объявляются завершёнными."
         }
       ]
     },

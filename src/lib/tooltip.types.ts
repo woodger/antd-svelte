@@ -126,8 +126,22 @@ export interface TooltipProps {
   arrow?: TooltipArrow;
   /** @defaultValue true */
   autoAdjustOverflow?: boolean | AdjustOverflow;
-  /** [] оставляет программное управление без открытия/закрытия по событиям trigger. */
+  /** Базовые события; [] отключает их, если showAction/hideAction не заданы отдельно. */
   trigger?: TooltipTrigger | readonly TooltipTrigger[];
+  /**
+   * Заменяет только события открытия; undefined использует trigger, [] отключает их.
+   * Hover без click также включает touch.
+   */
+  showAction?: readonly TooltipTrigger[];
+  /**
+   * Заменяет только события закрытия; undefined использует trigger.
+   * [] отключает trigger и outside-закрытие, сохраняя Escape.
+   */
+  hideAction?: readonly TooltipTrigger[];
+  /** Задержка focus в секундах; по умолчанию 0, не наследует mouseEnterDelay. */
+  focusDelay?: number;
+  /** Задержка blur в секундах; по умолчанию 0, не наследует mouseLeaveDelay. */
+  blurDelay?: number;
   /** Задержка открытия в секундах. */
   mouseEnterDelay?: number;
   /** Задержка закрытия в секундах. */

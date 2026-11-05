@@ -6,6 +6,10 @@ export interface TooltipLifecycleOptions {
   open?: boolean;
   defaultOpen?: boolean;
   trigger?: TooltipTrigger | readonly TooltipTrigger[];
+  showAction?: readonly TooltipTrigger[] | null;
+  hideAction?: readonly TooltipTrigger[] | null;
+  focusDelay?: number;
+  blurDelay?: number;
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;
   forceRender?: boolean;

@@ -1,0 +1,8339 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "delegated": {
+      "tooltip": "1.5.2",
+      "trigger": "3.10.1"
+    },
+    "operation": "Public Tooltip and Typography JS ellipsis Tooltip: independent showAction/hideAction, empty/undefined/reactive overrides, outside pointer/mousedown/contextmenu and Escape, focusDelay/blurDelay and synchronous callback timing including negative delays, implicit hover touch and compatibility-mouse suppression, popup hover delays, pending state and disabled visibility. Four cleanup traces compare pending and visible focus after synchronous unmount and 1500ms advance. Motion disabled; clock paused between explicit advances; JS ellipsis callback awaited before initial snapshot; 100ms clock advance after each action, 300ms after mount/ellipsis measurement. Popup hover dispatches both pointer and mouse events; Source binds pointer enter and mouse leave."
+  },
+  "cases": [
+    {
+      "name": "tooltip-empty-actions",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-empty-hide-open",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsidePointer"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideContext"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-focus-show-click-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsidePointer"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-click-show-focus-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-context-show-hover-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "popupLeave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideContext"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-focus-show-context-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-empty-show-default-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-default-show-empty-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "hideAction": []
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-hover-delay-without-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "popupLeave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-focus-delay-without-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-focus-delay-cancel",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0.3
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0.3
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-blur-delay-cancel",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-negative-focus-delays",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": -0.1,
+            "blurDelay": -0.1
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": -0.1,
+            "blurDelay": -0.1
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": -0.1,
+            "blurDelay": -0.1
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-focus-delays-independent",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 1,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 1,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 1,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-reactive-actions",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "showAction": [
+                "focus"
+              ],
+              "hideAction": []
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "hideAction": [
+                "click"
+              ]
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-pending-actions-replaced",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "showAction": [],
+              "hideAction": []
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 1200
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-removed-pending-actions",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 1
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 1
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "showAction": null,
+              "hideAction": null
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null,
+            "focusDelay": 1
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 1200
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null,
+            "focusDelay": 1
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null,
+            "focusDelay": 1
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-hover-touch-toggle",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-hover-click-no-implicit-touch",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-touch-show-without-hide",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-touch-hide-without-show",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-popup-hover-delay",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "popupEnter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "popupLeave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-removed-actions",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "showAction": null,
+              "hideAction": null
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-focus-related-target",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focusOutside"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-controlled-open-actions",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 300
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": true,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": true,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 300
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-controlled-hide-actions",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsidePointer"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false,
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false,
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 300
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false,
+            false,
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false,
+              false,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "tooltip-disabled-actions",
+      "mode": "tooltip",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "disabled": true,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "disabled": true,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "disabled": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "disabled": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-empty-actions",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-empty-hide-open",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsidePointer"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideContext"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "defaultOpen": true,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-focus-show-click-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsidePointer"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-click-show-focus-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "focus"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-context-show-hover-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "popupLeave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideContext"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "contextMenu"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-focus-show-context-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "contextMenu"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-empty-show-default-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "defaultOpen": true
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-default-show-empty-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "hideAction": []
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-hover-delay-without-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "popupLeave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0.3,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-focus-delay-without-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 0.3
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-focus-delay-cancel",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0.3
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0.3
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-blur-delay-cancel",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0.3
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-negative-focus-delays",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": -0.1,
+            "blurDelay": -0.1
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": -0.1,
+            "blurDelay": -0.1
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": -0.1,
+            "blurDelay": -0.1
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-focus-delays-independent",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 1,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 1,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 1,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-reactive-actions",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "click"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "showAction": [
+                "focus"
+              ],
+              "hideAction": []
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "hideAction": [
+                "click"
+              ]
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-pending-actions-replaced",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "showAction": [],
+              "hideAction": []
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 1200
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0,
+            "showAction": [],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-removed-pending-actions",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 1
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [],
+            "focusDelay": 1
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "showAction": null,
+              "hideAction": null
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null,
+            "focusDelay": 1
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 1200
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null,
+            "focusDelay": 1
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null,
+            "focusDelay": 1
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-hover-touch-toggle",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-hover-click-no-implicit-touch",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover",
+              "click"
+            ],
+            "hideAction": [
+              "hover",
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-touch-show-without-hide",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": []
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-touch-hide-without-show",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-popup-hover-delay",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "popupEnter"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "popupLeave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 400
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.3,
+            "showAction": [
+              "hover"
+            ],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-removed-actions",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "showAction": null,
+              "hideAction": null
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "showAction": null,
+            "hideAction": null
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-focus-related-target",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focusOutside"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true,
+            false,
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "focusDelay": 0,
+            "blurDelay": 0
+          },
+          "syncEvents": [
+            true,
+            false,
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-controlled-open-actions",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "syncEvents": [],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 300
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": true,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": true,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 300
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "open": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ],
+            "focusDelay": 0.2
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-controlled-hide-actions",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "touch"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsidePointer"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "outsideMouse"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false,
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false,
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 300
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "escape"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0.2,
+            "open": true,
+            "showAction": [],
+            "hideAction": [
+              "hover"
+            ]
+          },
+          "syncEvents": [
+            false,
+            false,
+            false
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              false,
+              false,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "typography-disabled-actions",
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "disabled": true,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "disabled": true,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true
+          ],
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "disabled": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "snapshot": {
+            "visible": true,
+            "openClass": true,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Action content",
+            "trigger": [],
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0,
+            "disabled": false,
+            "showAction": [
+              "focus"
+            ],
+            "hideAction": [
+              "click"
+            ]
+          },
+          "syncEvents": [
+            true,
+            false
+          ],
+          "snapshot": {
+            "visible": false,
+            "openClass": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "cleanup": [
+    {
+      "mode": "tooltip",
+      "pending": true,
+      "props": {
+        "title": "Action content",
+        "trigger": [],
+        "mouseEnterDelay": 0,
+        "mouseLeaveDelay": 0,
+        "showAction": [
+          "focus"
+        ],
+        "hideAction": [],
+        "focusDelay": 0.3
+      },
+      "focused": [],
+      "immediate": [],
+      "settled": [],
+      "popupCount": 0
+    },
+    {
+      "mode": "tooltip",
+      "pending": false,
+      "props": {
+        "title": "Action content",
+        "trigger": "focus",
+        "mouseEnterDelay": 1,
+        "mouseLeaveDelay": 1,
+        "focusDelay": 0,
+        "blurDelay": 0
+      },
+      "focused": [
+        true
+      ],
+      "immediate": [
+        true
+      ],
+      "settled": [
+        true
+      ],
+      "popupCount": 0
+    },
+    {
+      "mode": "typography",
+      "pending": true,
+      "props": {
+        "title": "Action content",
+        "trigger": [],
+        "mouseEnterDelay": 0,
+        "mouseLeaveDelay": 0,
+        "showAction": [
+          "focus"
+        ],
+        "hideAction": [],
+        "focusDelay": 0.3
+      },
+      "focused": [],
+      "immediate": [],
+      "settled": [],
+      "popupCount": 0
+    },
+    {
+      "mode": "typography",
+      "pending": false,
+      "props": {
+        "title": "Action content",
+        "trigger": "focus",
+        "mouseEnterDelay": 1,
+        "mouseLeaveDelay": 1,
+        "focusDelay": 0,
+        "blurDelay": 0
+      },
+      "focused": [
+        true
+      ],
+      "immediate": [
+        true
+      ],
+      "settled": [
+        true
+      ],
+      "popupCount": 0
+    }
+  ]
+}

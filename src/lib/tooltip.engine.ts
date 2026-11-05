@@ -1,8 +1,29 @@
 import {
   getPopupPlacements, getPopupPosition, type PopupFlipCache, type PopupSourceAlign
 } from './popup-position.engine';
-import type { AdjustOverflow, TooltipArrow, TooltipContent, TooltipPlacement } from './tooltip.types';
+import type {
+  AdjustOverflow,
+  TooltipArrow,
+  TooltipContent,
+  TooltipPlacement,
+  TooltipTrigger
+} from './tooltip.types';
 import type { AliasToken } from './theme-token.types';
+
+/** rc-trigger/useAction: независимые наборы и неявный touch для hover без click. */
+export function getTooltipActions(
+  trigger: TooltipTrigger | readonly TooltipTrigger[],
+  showAction?: readonly TooltipTrigger[],
+  hideAction?: readonly TooltipTrigger[]
+) {
+  const defaults = typeof trigger === 'string' ? [trigger] : trigger;
+  const show = new Set<TooltipTrigger | 'touch'>(showAction ?? defaults);
+  const hide = new Set<TooltipTrigger | 'touch'>(hideAction ?? defaults);
+  if (show.has('hover') && !show.has('click')) show.add('touch');
+  if (hide.has('hover') && !hide.has('click')) hide.add('touch');
+
+  return { show, hide };
+}
 
 /** Ant Design memoOverlay: 0 в title приоритетнее даже truthy legacy overlay. */
 export function getTooltipContent(title?: TooltipContent, overlay?: TooltipContent): TooltipContent {

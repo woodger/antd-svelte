@@ -1,5 +1,39 @@
 import { describe, expect, it } from 'vitest';
-import { getTooltipDelay, getTooltipPosition } from './tooltip.engine';
+import { getTooltipActions, getTooltipDelay, getTooltipPosition } from './tooltip.engine';
+
+describe('Tooltip actions', () => {
+  it('uses independent overrides and does not replace an explicitly empty action list', () => {
+    const { show, hide } = getTooltipActions(['hover', 'focus'], ['click'], []);
+
+    expect([...show]).toEqual(['click']);
+    expect([...hide]).toEqual([]);
+    expect([...getTooltipActions('focus', [], undefined).hide]).toEqual(['focus']);
+  });
+
+  it('keeps context menu dismissal distinct from the Dropdown fallback', () => {
+    const { show, hide } = getTooltipActions('contextMenu', ['focus']);
+
+    expect([...show]).toEqual(['focus']);
+    expect([...hide]).toEqual(['contextMenu']);
+  });
+
+  it('adds implicit touch to hover without click independently for each direction', () => {
+    const { show, hide } = getTooltipActions([], ['hover'], ['hover', 'click']);
+
+    expect([...show]).toEqual(['hover', 'touch']);
+    expect([...hide]).toEqual(['hover', 'click']);
+  });
+
+  it('does not mutate the caller action arrays or share returned sets', () => {
+    const trigger = Object.freeze(['hover', 'focus'] as const);
+    const first = getTooltipActions(trigger);
+    first.show.clear();
+
+    expect(trigger).toEqual(['hover', 'focus']);
+    expect([...getTooltipActions(trigger).show]).toEqual(['hover', 'focus', 'touch']);
+    expect([...first.hide]).toEqual(['hover', 'focus', 'touch']);
+  });
+});
 
 describe('Tooltip positioning', () => {
   const anchor = { x: 200, y: 160, width: 80, height: 40 };

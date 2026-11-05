@@ -1,7 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
-  import { getTooltipDelay } from './tooltip.engine';
+  import { getTooltipActions, getTooltipDelay } from './tooltip.engine';
   import NoCompactStyle from './NoCompactStyle.svelte';
   import TooltipPopup from './TooltipPopup.svelte';
   import type { TypographyContent as Content } from './typography.types';
@@ -21,8 +21,11 @@
   );
   let enterDelay = $derived(options.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1);
   let leaveDelay = $derived(options.mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1);
+  let actionOverrides = $derived(options.showAction !== undefined || options.hideAction !== undefined);
+  let actions = $derived(getTooltipActions(resolvedTrigger, options.showAction, options.hideAction));
+  let sourceTouch = $derived(actionOverrides || Boolean(config.tooltip));
   let sourceTrigger = $derived(Boolean(config.tooltip) || resolvedTrigger.length === 0
-    || supports('click') || supports('contextMenu'));
+    || supports('click') || supports('contextMenu') || actionOverrides);
   let open = $state(untrack(() => options.defaultOpen ?? false));
   let available = $derived(Boolean(resolvedTitle) || resolvedTitle === 0);
   let visible = $derived(enabled && available && (options.open ?? open));
@@ -38,7 +41,7 @@
     return untrack(() => connect(element));
   });
 
-  let dismiss = () => {};
+  let dismiss: (reason?: 'escape' | 'outside') => void = () => {};
 
   // Typography уже поддерживает bigint; в Tooltip сохраняется его текстовое представление.
   function toTooltipContent(value: Content): TooltipContent {
@@ -57,6 +60,7 @@
     let popupHovered = false;
     let clicked = false;
     let dismissed = false;
+    let touched = false;
     let active = true;
     let timer: ReturnType<typeof setTimeout> | undefined;
 
@@ -82,30 +86,35 @@
     function request(next: boolean, delay = 0) {
       cancelPending();
       const owner = options.open;
+      // Удаление overrides не отменяет уже запущенный source action.
+      const independentActions = actionOverrides;
       const apply = () => {
         timer = undefined;
         if (!active || !element.isConnected || target !== element) return;
         // Как в rc-trigger, отсутствие усечения скрывает popup, сохраняя raw onOpenChange.
         if (!available || !Object.is(owner, options.open)
-          || next && !wanted() || next === (options.open ?? open)) return;
+          || !independentActions && !actionOverrides && next && !wanted()
+          || next === (options.open ?? open)) return;
 
         open = next;
         options.onOpenChange?.(next);
       };
-      if (delay) timer = setTimeout(apply, delay);
+      if (delay !== 0) timer = setTimeout(apply, delay);
       else apply();
     }
 
     function handleEnter(event: PointerEvent) {
-      if (event.pointerType === 'touch') return;
+      if (event.pointerType === 'touch' || sourceTouch && touched) return;
       hovered = true;
       dismissed = false;
-      if (supports('hover')) request(true, getTooltipDelay(enterDelay));
+      if (actions.show.has('hover')) request(true, getTooltipDelay(enterDelay));
     }
 
     function handleLeave() {
+      if (sourceTouch && touched) return;
+
       hovered = false;
-      if (sourceTrigger ? supports('hover') : !wanted())
+      if (sourceTrigger ? actions.hide.has('hover') : !wanted())
         request(false, getTooltipDelay(leaveDelay));
     }
 
@@ -115,10 +124,12 @@
 
       focused = true;
       dismissed = false;
-      if (supports('focus')) request(true);
+      if (actions.show.has('focus')) request(true, (options.focusDelay ?? 0) * 1000);
     }
 
     function handleBlur(event: FocusEvent) {
+      if (!active || !element.isConnected) return;
+
       function closeIfOutside() {
         if (!active || !element.isConnected) return;
         if (sourceTrigger && inPopup(event.target)) return;
@@ -127,14 +138,19 @@
           && (!sourceTrigger || !inPopup(event.relatedTarget))) return;
 
         focused = false;
-        if (sourceTrigger ? supports('focus') : !wanted()) request(false);
+        if (sourceTrigger ? actions.hide.has('focus') : !wanted()) {
+          request(false, (options.blurDelay ?? 0) * 1000);
+        }
       }
       // Удаление focused DOM может отправить blur до cleanup родительских props.
       if (event.relatedTarget === null) queueMicrotask(closeIfOutside);
       else closeIfOutside();
     }
 
-    dismiss = () => {
+    dismiss = reason => {
+      if (reason === 'outside' && actionOverrides && !actions.hide.has('click')
+        && !actions.hide.has('contextMenu') && !actions.hide.has('touch')) return;
+
       dismissed = true;
       clicked = false;
       request(false);
@@ -148,23 +164,42 @@
     }
 
     function handleClick(event: MouseEvent) {
-      if (inPopup(event.target) || event.defaultPrevented
-        || !supports('click') && !supports('contextMenu')) return;
+      const show = actions.show.has('click');
+      const hide = actions.hide.has('click') || actions.hide.has('contextMenu');
+      if (inPopup(event.target) || event.defaultPrevented && !actionOverrides || !show && !hide) return;
 
-      if (visible) dismiss();
-      else if (supports('click')) showByClick();
+      if (visible && hide) dismiss();
+      else if (!visible && show) showByClick();
+      if (sourceTouch) touched = false;
     }
 
     function handleContextMenu(event: MouseEvent) {
-      if (inPopup(event.target) || !supports('contextMenu') || !available) return;
+      if (inPopup(event.target) || !actions.show.has('contextMenu') || !available) return;
 
       event.preventDefault();
-      if (visible) dismiss();
+      if (visible && actions.hide.has('contextMenu')) dismiss();
       else showByClick();
     }
 
+    function handleTouchStart(event: TouchEvent) {
+      if (inPopup(event.target) || !sourceTouch
+        || !actions.show.has('touch') && !actions.hide.has('touch')) return;
+
+      touched = true;
+      if (visible && actions.hide.has('touch')) dismiss();
+      else if (!visible && actions.show.has('touch')) showByClick();
+    }
+
     hoverPopup = value => {
-      if (!active || !element.isConnected || sourceTrigger && !supports('hover')) return;
+      if (!active || !element.isConnected) return;
+
+      if (actionOverrides) {
+        if (value) {
+          if (actions.show.has('hover') && visible) request(true, getTooltipDelay(enterDelay));
+        } else if (actions.hide.has('hover')) request(false, getTooltipDelay(leaveDelay));
+        return;
+      }
+      if (sourceTrigger && !supports('hover')) return;
 
       popupHovered = value;
       if (value) cancelPending();
@@ -177,6 +212,7 @@
     element.addEventListener('focusout', handleBlur);
     element.addEventListener('click', handleClick);
     element.addEventListener('contextmenu', handleContextMenu);
+    element.addEventListener('touchstart', handleTouchStart);
     return () => {
       active = false;
       cancelPending();
@@ -186,6 +222,7 @@
       element.removeEventListener('focusout', handleBlur);
       element.removeEventListener('click', handleClick);
       element.removeEventListener('contextmenu', handleContextMenu);
+      element.removeEventListener('touchstart', handleTouchStart);
     };
   }
   let hoverPopup: (value: boolean) => void = () => {};
@@ -205,7 +242,8 @@
         mouseLeaveDelay: leaveDelay
       }}
       placement={options.placement} arrow={options.arrow} autoAdjustOverflow={options.autoAdjustOverflow}
+      outsideEvents={actionOverrides ? 'mouse' : undefined}
       getPopupContainer={options.getPopupContainer} getTooltipContainer={options.getTooltipContainer}
-      onDismiss={() => dismiss()} onHoverChange={value => hoverPopup(value)} />
+      onDismiss={reason => dismiss(reason)} onHoverChange={value => hoverPopup(value)} />
   </NoCompactStyle>
 {/if}

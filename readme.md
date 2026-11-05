@@ -1723,6 +1723,31 @@ Trigger без component config по умолчанию `['hover', 'focus']`; м
 её. После Escape она остаётся скрытой до нового наведения/фокуса. В Modal первый
 Escape закрывает Tooltip, следующий — Modal.
 
+`showAction` и `hideAction` независимо заменяют события открытия и закрытия из
+trigger, в том числе при trigger=[]. Undefined возвращает соответствующий набор
+trigger; пустой массив отключает только выбранное направление. `focusDelay` и
+`blurDelay` задаются в секундах, по умолчанию 0, независимо от mouse delays.
+Если событие закрытия отключено, blur/leave не отменяет ожидающее открытие;
+сама замена списка событий также не сбрасывает уже запущенную задержку.
+
+При явных action overrides hover без click добавляет touch отдельно для каждого
+направления, как в rc-trigger. Touchstart переключает разрешённое направление,
+последующие hover-события подавляются до обработанного click. Source config
+также использует этот touch fallback; прежний native default без новых actions
+сохраняет подавление touch hover. Для явных overrides закрытие снаружи происходит
+по mousedown/contextmenu и только при hide click/contextMenu либо неявном touch;
+hideAction=[] отключает его. Escape продолжает закрывать открытую подсказку.
+Настройки работают также в ellipsis Tooltip Typography; его видимость по-прежнему
+зависит от измеренного усечения, а onOpenChange сообщает raw open.
+Controlled-сверка использует getter/setter binding с отклонением записи владельцем;
+обычный open сохраняет прежнюю Svelte-семантику, описанную выше.
+Native blur без relatedTarget проверяет доступность trigger в следующей microtask,
+чтобы удаление focused DOM не вызывало callback. Это граница синхронного callback
+rc-trigger; переход фокуса с relatedTarget сохраняет его исходное время вызова.
+Сверка: [54 UMD-сценария / 310 кадров](./tests/browser/fixtures/ant-design-tooltip-actions-reference.json),
+[SSR](./tests/package/tooltip-actions.ssr.test.ts) и
+[browser](./tests/browser/tooltip-actions.spec.ts), `?fixture=tooltip-actions`.
+
 По умолчанию содержимое скрытой подсказки сохраняется. `fresh=false` фиксирует
 последнее открытое содержимое и semantic class/style внутреннего container;
 `fresh=true` обновляет их также при закрытом popup. При открытии всегда применяется
@@ -5105,6 +5130,9 @@ boolean ellipsis. Tooltip измеряет native overflow при наведен
 Поддержаны focus/click/contextMenu и массивы событий; source config разделяет
 их действия, поэтому hover leave может закрыть подсказку, открытую click/focus.
 Повторный contextMenu переключает видимость, обычный click её закрывает.
+Локальные showAction/hideAction независимо заменяют эти действия; focusDelay и
+blurDelay не наследуют mouse delays. Их приоритет, touch fallback и поведение
+внешнего закрытия описаны в [Tooltip](#tooltip).
 Подсказки copy/edit наследуют те же настройки; копирование, success title и вход
 в редактор сохраняют свои обычные действия.
 Ellipsis Tooltip также принимает destroyOnHidden и legacy destroyTooltipOnHide:
@@ -5131,7 +5159,8 @@ Tooltip использует общий native popover внутри корня �
 openClassName, semantic/legacy styles. Callbacks получают разрешённые trigger/delays
 и входной open владельца. Изменение config сохраняет popup DOM, ввод, выделение
 и фокус. Полный Typography token engine и остальные delegated Tooltip props,
-включая unique/fresh/motion и полный align, ещё требуют переноса.
+включая UniqueProvider/motion и полную геометрию CSS-transform/scroll-container,
+ещё требуют переноса. Граница fresh для opaque Snippet описана в Tooltip.
 Vendor CSS рассчитан на `ant-typography`, произвольный prefix
 не генерирует новый CSS.
 
