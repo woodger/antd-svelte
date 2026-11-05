@@ -9,6 +9,12 @@
 
 ### Added
 
+- Result: четыре component tokens, aliases/algorithm, ConfigProvider.result,
+  object/function semantic slots, local prefixCls/rootClassName, refs и data/ARIA.
+  Перенесены scalar/array content и три static image components; сохранены native
+  heading, decorative/inert icons, responsive/focus contracts. Все 20 CSS rules
+  воспроизводятся инструментом; добавлены 81 официальный UMD-сценарий и SSR/browser-проверки.
+
 - ConfigProvider.renderEmpty подключён к Select/TreeSelect, Cascader/Panel, Mentions,
   Transfer, Table и фильтру; List сохраняет своё подключение, AutoComplete — исключение.
   Перенесены source falsy/nullish presets и Transfer side arrays с сохранением native

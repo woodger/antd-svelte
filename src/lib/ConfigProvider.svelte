@@ -32,6 +32,7 @@
   import type { ProgressConfig } from './progress.types';
   import type { SkeletonConfig } from './skeleton.types';
   import type { EmptyConfig } from './empty.types';
+  import type { ResultConfig } from './result.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
@@ -89,6 +90,7 @@
     progress?: ProgressConfig;
     skeleton?: SkeletonConfig;
     empty?: EmptyConfig;
+    result?: ResultConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
@@ -160,6 +162,7 @@
     progress,
     skeleton,
     empty,
+    result,
     colorPicker,
     inputNumber,
     radio,
@@ -284,6 +287,9 @@
     },
     get empty() {
       return empty ?? parent.empty;
+    },
+    get result() {
+      return result ?? parent.result;
     },
     get colorPicker() {
       return colorPicker ?? parent.colorPicker;

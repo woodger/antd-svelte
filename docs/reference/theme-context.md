@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress и Skeleton получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress, Skeleton и Result получают собственные
 defaults и aliases.
 Flex использует alias overrides без собственных component defaults и без typography reset.
 Empty использует общие aliases/algorithm без собственных component-only defaults.
@@ -417,6 +417,35 @@ Main сохраняет native host/status/focus, title/div, flex/responsive gua
 [116 source-сценариев](../../tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 primitives и [34 main-сценария](../../tests/browser/fixtures/ant-design-skeleton-main-reference.json)
 сняты из закреплённого UMD с одинаковым inherited global-token окружением.
+
+## Токены Result
+
+Result использует четыре component defaults:
+
+| Token | Default |
+| --- | --- |
+| titleFontSize | fontSizeHeading3 |
+| subtitleFontSize | fontSize |
+| iconFontSize | fontSizeHeading3 × 3; строковое значение получает calc() |
+| extraMargin | paddingLG px 0 0 0 |
+
+Поддержаны числовые/строковые значения, 0, общие aliases, component algorithm,
+dark/compact и cssVar prefix/key. Variables применяются на корне перед
+semantic/user styles, вложенные и соседние scopes изолированы. Иллюстрации
+403/404/500 сохраняют исходные цвета независимо от темы.
+
+ConfigProvider.result и локальные classNames/styles поддерживают object/function
+slots root/title/subTitle/body/extra/icon. Root order:
+provider.styles.root → provider.style → local.styles.root → local.style.
+Callback props содержат разрешённый status; остальные значения остаются входными.
+Локальный prefixCls использует все 20 закреплённых CSS rules; namespace variables
+сохраняется. Native heading, responsive inline padding/image, flex/wrapping extra,
+декоративная семантика и focus recovery остаются отдельными Svelte contracts.
+
+[81 официальный UMD-сценарий](../../tests/browser/fixtures/ant-design-result-reference.json)
+сверяется через [браузерные проверки](../../tests/browser/result-source.spec.ts),
+маршрут `?fixture=result-source`. [Package SSR](../../tests/package/result.ssr.test.ts)
+проверяет public facade, scalar/array content, config priority и variables без DOM.
 
 ## Aliases Empty
 

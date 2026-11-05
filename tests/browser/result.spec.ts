@@ -46,7 +46,7 @@ test(
 
 for (const [status, color, pathStart, glyph] of [
   ['success', 'rgb(82, 196, 26)', 'M512 64C', 'l71.2 98.8 157.2-218'],
-  ['error', 'rgb(255, 77, 79)', 'M512 64c', 'L512 466.745'],
+  ['error', 'rgb(255, 77, 79)', 'M512 64c', 'L512 466.75'],
   ['info', 'rgb(22, 119, 255)', 'M512 64C', 'V296zm32 440'],
   ['warning', 'rgb(250, 173, 20)', 'M955.7', 'v184c0 4.4']
 ]) test(`Result displays the official ${status} icon and theme color`, async ({ page }) => {

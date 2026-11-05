@@ -11420,9 +11420,9 @@
       "name": "Result",
       "category": "feedback",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Перенос исходного Result API с сохранением native heading, декоративной семантики, responsive layout и восстановления фокуса.",
       "upstreamPath": "components/result",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Result",
@@ -11434,22 +11434,104 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": "6.3.4"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
       "evidence": [
-        "readme.md",
+        "src/lib/Result.svelte",
+        "src/lib/result.types.ts",
+        "src/lib/result.component.ts",
+        "src/lib/result.ssr.test.ts",
+        "tests/package/result.ssr.test.ts",
         "tests/browser/result.spec.ts",
-        "integration:result"
+        "tests/browser/result-source.spec.ts",
+        "tests/browser/fixtures/ant-design-result-reference.json",
+        "tools/ant-design-css-recipes.json",
+        "readme.md",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Семь статусов, title/subTitle/actions/details, SSR и native focus",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "src/lib/result.ssr.test.ts",
+            "tests/browser/result.spec.ts"
+          ],
+          "note": "Строковые и числовые 403/404/500, исходные icons/illustrations и приоритет exception над icon, в том числе false/null. Escaped text и snippets, чтение icon→title→subtitle→extra→body; нативные действия и заголовок headingLevel. Named group только по явной ARIA, без live-region/автофокуса; focus recovery и owner focus сохраняются в document/Modal/Drawer."
+        },
+        {
+          "id": "source-content-images",
+          "title": "Scalar/array content и три static image components",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/package/result.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-result-reference.json"
+          ],
+          "note": "Presence повторяет isReactRenderable 1.14.0: null/undefined/false/empty string исключаются; 0, true и массивы создают контейнер, boolean не печатается. Icon null/false скрывает обычный glyph; empty string/undefined выбирает default. PRESENTED_IMAGE_403/404/500 — Svelte components с исходными geometry/paint/title и без native ARIA/viewBox; внутренние иллюстрации Result сохраняют прежний decorative/viewBox contract. Эти static members не добавляют named exports в счётчик. Exception объединяет icon/image classes на одном wrapper, как source."
+        },
+        {
+          "id": "semantic-config",
+          "title": "ConfigProvider.result и object/function semantic slots",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Result.svelte",
+            "src/lib/ConfigProvider.svelte",
+            "tests/package/result.ssr.test.ts",
+            "tests/browser/result-source.spec.ts"
+          ],
+          "note": "Slots root/title/subTitle/body/extra/icon; callback props — входные значения с разрешённым status. Root style priority: context styles→context style→local styles→local style. Undefined наследует record, явный объект заменяет целиком; source own values/0 сохранены. Локальные prefixCls/rootClassName, явный role, data/ARIA и bind:nativeElement/ref с очисткой после unmount. Live config/theme/prefix не заменяет root/actions/draft и сохраняет focus/selection."
+        },
+        {
+          "id": "theme-tokens",
+          "title": "Все четыре component tokens, aliases/algorithm и local prefix CSS",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-component-style.engine.ts",
+            "tests/browser/fixtures/ant-design-result-reference.json",
+            "tests/browser/result-source.spec.ts",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "titleFontSize, subtitleFontSize, iconFontSize, extraMargin и исходные defaults; поддержаны 0/строки, global/component aliases, algorithm, dark/compact, cssVar prefix/key. Variables перед semantic/user styles и изоляция scopes. Все 20 CSS rules воспроизводятся из проверенного npm-архива; prefix template сохраняет namespace variables. 81 официальный UMD-сценарий сравнивает API/classes, computed slot effects и полную SVG geometry/paint; path d разбирается браузерным CSSOM без своего parser. CloseCircleFilled использует оптимизированный path проверенного архива @ant-design/icons-svg 4.6.0 вместо raw SVG; общий glyph сверяется также через потребителей Icon."
+        },
+        {
+          "id": "native-boundaries",
+          "title": "Сохраняемые Svelte/native contracts",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "tests/browser/result.spec.ts",
+            "tests/browser/result-source.spec.ts"
+          ],
+          "note": "Title — heading выбранного уровня вместо div; именованная group и decorative/inert icons, SVG viewBox без title и размеры обычных icons через CSS. Responsive inline padding/image, flex/wrapping extra и focus recovery сохраняются. Эти layout/ARIA guards, SVG title и private hashes/markers исключены из source snapshots; native browser suite проверяет доступность, сохранение draft/focus, Modal/Drawer и узкий viewport."
+        },
+        {
+          "id": "shared-config",
+          "title": "Общий prefix ConfigProvider и React diagnostics",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/config-context.ts",
+            "readme.md"
+          ],
+          "note": "Локальный prefixCls поддержан; общий ConfigProvider prefix/getPrefixCls и React development warnings о строковых icon ещё не перенесены."
         }
       ]
     },
@@ -12962,6 +13044,19 @@
             "docs/reference/render-empty.md"
           ],
           "note": "Renderer наследуется при undefined; собственная функция заменяет родительскую, её falsy не возвращает родительский output. Select/TreeSelect/Cascader/Panel/Mentions/Transfer/Table/filter/List получают исходные имена и fallback priorities. AutoComplete исключён как upstream combobox. Producer вычисляется по потреблению, Transfer при locale; точные React render counts не заявлены. Native defaults без callback и local zero Select/TreeSelect сохраняются."
+        },
+        {
+          "id": "result-config",
+          "title": "ConfigProvider.result: theme tokens и semantic config",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/result.types.ts",
+            "tests/browser/result-source.spec.ts",
+            "tests/browser/fixtures/ant-design-result-reference.json"
+          ],
+          "note": "Наследуемый class/style и object/function root/title/subTitle/body/extra/icon с локальным приоритетом и source callback status. Все четыре Result tokens, aliases и algorithms подключены к корню; source UMD cases фиксируют defaults, 0/строки, nested config replacement и cssVar prefix. Native heading/ARIA/layout/focus сохраняются отдельно."
         }
       ]
     },

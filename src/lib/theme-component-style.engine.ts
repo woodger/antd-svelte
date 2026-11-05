@@ -27,9 +27,16 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
-  | 'Progress' | 'Skeleton' | 'Empty';
+  | 'Progress' | 'Skeleton' | 'Empty' | 'Result';
 
 const factories = {
+  Result: (token: GlobalToken) => ({
+    titleFontSize: token.fontSizeHeading3,
+    subtitleFontSize: token.fontSize,
+    iconFontSize: typeof token.fontSizeHeading3 === 'number'
+      ? token.fontSizeHeading3 * 3 : `calc(${token.fontSizeHeading3} * 3)`,
+    extraMargin: `${token.paddingLG}px 0 0 0`
+  }),
   Empty: () => ({}),
   Skeleton: (token: GlobalToken) => ({
     color: token.colorFillContent,
@@ -169,7 +176,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Spin: [],
   Progress: [],
   Skeleton: [],
-  Empty: []
+  Empty: [],
+  Result: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

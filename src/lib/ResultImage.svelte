@@ -1,14 +1,19 @@
 <script lang="ts">
   // Ant Design 6.6.8 — MIT; см. vendor/LICENSE.ant-design.
   // Геометрия es/result/{unauthorized,noFound,serverError}.js без изменения цветов.
-  // Добавлены viewBox и декоративная семантика; удалены SVG title.
+  // Внутри Result — native viewBox/decorative mode; static images сохраняют source SVG/title.
   // https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
   // SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
-  let { status }: { status: '403' | '404' | '500'; } = $props();
+  let { status, decorative = true }: {
+    status: '403' | '404' | '500';
+    decorative?: boolean;
+  } = $props();
 </script>
 
 {#if status === '403'}
-<svg width="251" height="294" viewBox="0 0 251 294" aria-hidden="true" focusable="false">
+<svg width="251" height="294" viewBox={decorative ? '0 0 251 294' : undefined}
+  aria-hidden={decorative || undefined} focusable={decorative ? 'false' : undefined}>
+  {#if !decorative}<title>Unauthorized</title>{/if}
   <g fill="none" fill-rule="evenodd">
     <path fill="#E4EBF7" d="M0 129v-2C0 58.3 55.6 2.7 124.2 2.7h2c68.6 0 124.2 55.6 124.2 124.1v2.1c0 68.6-55.6 124.2-124.1 124.2h-2.1A124.2 124.2 0 0 1 0 129" />
     <path fill="#FFF" d="M41.4 133a8.2 8.2 0 1 1-16.4-1.7 8.2 8.2 0 0 1 16.4 1.6" />
@@ -65,7 +70,9 @@
   </g>
 </svg>
 {:else if status === '404'}
-<svg width="252" height="294" viewBox="0 0 252 294" aria-hidden="true" focusable="false">
+<svg width="252" height="294" viewBox={decorative ? '0 0 252 294' : undefined}
+  aria-hidden={decorative || undefined} focusable={decorative ? 'false' : undefined}>
+  {#if !decorative}<title>No Found</title>{/if}
   <g fill="none" fill-rule="evenodd">
     <circle cx="126.75" cy="128.1" r="126" fill="#E4EBF7" />
     <circle cx="31.55" cy="130.8" r="8.3" fill="#FFF" />
@@ -122,7 +129,9 @@
   </g>
 </svg>
 {:else if status === '500'}
-<svg width="254" height="294" viewBox="0 0 254 294" aria-hidden="true" focusable="false">
+<svg width="254" height="294" viewBox={decorative ? '0 0 254 294' : undefined}
+  aria-hidden={decorative || undefined} focusable={decorative ? 'false' : undefined}>
+  {#if !decorative}<title>Server Error</title>{/if}
   <g fill="none" fill-rule="evenodd">
     <path fill="#E4EBF7" d="M0 128.1v-2C0 56.5 56.3.2 125.7.2h2.1C197.2.3 253.5 56.6 253.5 126v2.1c0 69.5-56.3 125.7-125.7 125.7h-2.1A125.7 125.7 0 0 1 0 128.1" />
     <path fill="#FFF" d="M40 132.1a8.3 8.3 0 1 1-16.6-1.7 8.3 8.3 0 0 1 16.6 1.7" />

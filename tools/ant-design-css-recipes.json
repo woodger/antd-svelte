@@ -1661,5 +1661,48 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Empty: default/simple/small, image, description и footer.\n * Root reset ограничен marker; namespace CSS variables сохранён.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
     "appendRootKeyframes": true,
     "format": "module"
+  },
+  {
+    "id": "result",
+    "output": "src/lib/vendor/result.css",
+    "expectedRules": 20,
+    "include": [
+      "\\.ant-result(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-result(?![-\\w])",
+        "replacement": ".ant-result-css-var"
+      },
+      {
+        "pattern": "\\.ant-result(?![-\\w])",
+        "replacement": ".ant-result:where(.ant-result-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Все 20 правил Result из официального dist/antd.css.\n * Корень .ant-result ограничен :where(.ant-result-css-var).\n * Источник: https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256 архива: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "result-prefix",
+    "output": "src/lib/vendor/result-prefix.css.js",
+    "expectedRules": 20,
+    "include": [
+      "\\.ant-result(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-result(?![-\\w])",
+        "replacement": ".ant-result-css-var"
+      },
+      {
+        "pattern": "\\.ant-result(?![-\\w])",
+        "replacement": ".ant-result:where(.ant-result-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Все 20 правил Result из официального dist/antd.css.\n * Корень .ant-result ограничен :where(.ant-result-css-var).\n * Источник: https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256 архива: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   }
 ]
