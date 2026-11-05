@@ -172,7 +172,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Tabs | Типизированные панели, bind:activeKey, line/card/editable-card, четыре положения, centered/gutter, меню more, ручная клавиатурная активация, сохранение содержимого и destroyOnHidden |
 | Collapse | Независимые панели и accordion, bind:activeKey, snippets, extra, header/icon/disabled, сохранение содержимого и destroyOnHidden |
 | Drawer | Модальная выдвижная панель, bind:open, четыре стороны, размеры, snippets, анимация, сохранение содержимого и destroyOnHidden |
-| Alert | Четыре статуса, title/description/icon/action snippets, outlined/filled, banner, закрытие с callbacks, анимацией и доступным фокусом |
+| Alert | Четыре статуса, scalar/snippet content, legacy aliases, semantic/provider config, component tokens, prefix/ref и закрытие с доступным фокусом |
 | MessageHolder / createMessage | Изолированная очередь пяти типов сообщений, ключи и обновления, таймеры, hover-пауза, maxCount, callable/thenable handle и контекст ConfigProvider |
 | NotificationHolder / createNotification | Подробные уведомления с title/description/actions snippets, четыре статуса, шесть положений, ключи, таймеры, hover/focus-пауза и закрытие |
 | Progress | Line/circle/dashboard, steps, gradients, success и percentPosition; component tokens, semantic/provider config, local prefix и formatter snippets; ARIA/RTL/SSR |
@@ -3039,8 +3039,11 @@ outlined или filled; filled сохраняет фон статуса и уб�
 Banner убирает рамку и скругления; без явно заданных type/showIcon использует
 warning и видимую иконку. В обычном режиме showIcon=false.
 
-Title и description принимают строку или Snippet, icon/action — Snippet.
-Пустые строки title/description не создают соответствующую область. Snippet
+Title/description/icon/action принимают строку, число, boolean, null, Snippet
+и вложенные массивы такого содержимого. Null/undefined/false/пустая строка не
+создают title/description/actions; 0, true и массивы создают контейнеры,
+но boolean не выводится текстом. Title ?? message поддерживает deprecated message,
+сохраняя явные 0/false/пустую строку. Snippet
 считается присутствующим; условное отсутствие содержимого выражайте через
 undefined у владельца. Description включает увеличенные отступы и иконку.
 Icon декоративный и отображается только при showIcon, включая пользовательский
@@ -3048,11 +3051,17 @@ snippet. Для интерактивных controls используйте descr
 icon и closable.closeIcon не должны содержать интерактивных элементов.
 Действия не закрывают Alert и не вызывают callbacks закрытия.
 
-Closable=false по умолчанию. True добавляет нативную кнопку type=button с
+Без ConfigProvider.alert закрытие отключено по умолчанию. True добавляет кнопку type=button с
 ConfigProvider.locale.closeText. Объект дополнительно поддерживает disabled,
 closeIcon (строка или Snippet), aria-label/aria-labelledby/aria-describedby,
 onClose(MouseEvent) и afterClose(). Пользовательский текст closeIcon остаётся
 декоративным содержимым; доступное имя задаётся через aria-label или локаль.
+Deprecated closeText/closeIcon и onClose/afterClose на корне поддержаны.
+Truthy closeText включает закрытие даже при closable=false; явный boolean иначе
+приоритетнее closeIcon/context, а объект всегда включает кнопку. Локальный truthy
+closable.closeIcon → truthy closeText → заданный closeIcon → context object icon →
+context closeIcon задают содержимое. Прежний local closable.closeIcon='' остаётся
+пустым; Source выбирает fallback. Local callbacks приоритетнее верхнеуровневых.
 Disabled запрещает закрытие, сохраняя действия. Alert не наследует disabled
 от Form/ConfigProvider; вложенные controls используют собственный контекст.
 
@@ -3074,7 +3083,9 @@ Role по умолчанию alert с неотложным объявление�
 результата действия задавайте role=status с мягким объявлением. Aria-atomic=true
 по умолчанию; aria-live и aria-atomic можно переопределить. Aria-label,
 aria-labelledby и aria-describedby именуют и описывают корневой контейнер.
-Id/class/style также относятся к корню. Появление и обновление не перемещают
+Id/class/style, data-* и остальные aria-* также относятся к корню.
+OnClick/onMouseEnter/onMouseLeave уведомляют о событиях контейнера; controls остаются
+нативными, stopPropagation в onClose предотвращает root click. Появление и обновление не перемещают
 фокус. При закрытии фокус из сообщения переходит к следующему доступному control
 в DOM, затем к предыдущему либо содержащему нативному dialog. Поиск внутри
 Modal/Drawer ограничен активным dialog. Фокус снаружи и фокус, выбранный onClose
@@ -3082,16 +3093,33 @@ Modal/Drawer ограничен активным dialog. Фокус снаруж
 использует естественную клавиатуру и не отправляет окружающую форму;
 тип пользовательских action-кнопок задаёт их владелец.
 
-Темы, compact, RTL и цвета статусов используют существующие токены. На ширине
+ConfigProvider.alert поддерживает variant, closable/closeIcon, четыре status icons,
+class/style и object/function classNames/styles для root/icon/section/title/
+description/actions/close. Undefined наследует record, явный объект заменяет его
+целиком. Callbacks получают входные props с разрешёнными prefixCls/variant/type/
+showIcon/boolean closable. Root style priority: provider.styles.root → provider.style
+→ local.styles.root → local.style. Local prefixCls/rootClassName и bind:nativeElement/ref
+поддержаны; refs присваиваются после mount и очищаются при unmount. Ref хранит snapshot
+root, включая отсоединённый узел после закрытия; nativeElement отражает текущий DOM.
+Обновления оформления сохраняют DOM, поля, focus и selection.
+
+Все четыре [токена Alert](docs/reference/theme-context.md#токены-alert), aliases и
+component algorithm применяются перед semantic/user styles. Source theme использует
+fitted viewBox статусных иконок из icons-svg 4.6.0; legacy сохраняет прежний viewport.
+На ширине
 до 575px action переносится на отдельную строку, оставляя место длинному тексту.
 Кнопка закрытия имеет зону не меньше 24px. Галерея `/ant-design#alert` показывает
 настройки сообщения, действие и повторное создание закрытого экземпляра.
 Ошибка загрузки `/ant-design#server-table` использует Alert с прежним retry:
 текущая страница и query сохраняются.
 
-Первая версия не поддерживает React ErrorBoundary, бегущую строку, semantic
-classNames/styles и устаревшие message/onClose/afterClose/closeText/closeIcon
-на верхнем уровне props. Используются title и объект closable из API 6.6.8.
+110 официальных UMD-сценариев фиксируют API, computed styles, геометрию status icons,
+порядок callbacks и исходные corner cases. Отдельный свежий SSR baseline подтверждает
+прежний пустой local closeIcon. Сохранены native atomic/ARIA, локализованное имя,
+декоративный close wrapper/glyph/palette, hit target и responsive/focus guards.
+WAAPI закрытие сохраняет snapshot callbacks, afterClose после удаления и reduced motion;
+в Source afterClose видит ещё подключённый узел. Эти различия исключены из source metrics.
+Alert.ErrorBoundary, общий ConfigProvider prefix и React diagnostics ещё не перенесены.
 
 ## Message
 
@@ -3838,6 +3866,7 @@ success/error → редактирование/retry без потери пол�
 responsive inline padding/image, flex/wrapping действий и восстановление фокуса.
 81 официальный UMD-сценарий сверяет остальной API, slot styles и полную геометрию SVG;
 path d сравнивается через браузерный CSSOM, который разбирает compact arc flags.
+Source theme использует исходный fitted viewBox статусных иконок; legacy viewport сохранён.
 Эти native layout/ARIA boundaries исключены из source snapshots и проверяются
 отдельно. Общий prefix ConfigProvider и React development warnings ещё не перенесены.
 

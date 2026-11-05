@@ -1,5 +1,6 @@
 <script lang="ts">
   import { statusIcons } from './status-icons';
+  import { useDesignTokenContext } from './theme-context.svelte';
 
   let { name }: {
     name:
@@ -19,6 +20,8 @@
   let statusPath = $derived(
     name in statusIcons ? statusIcons[name as keyof typeof statusIcons] : undefined
   );
+  // Пять filled status icons из icons-svg 4.6.0 используют fitted viewBox; legacy размер сохранён.
+  const designTokens = useDesignTokenContext();
 </script>
 
 <style>
@@ -29,7 +32,9 @@
 </style>
 
 <svg
-  viewBox={statusPath ? '0 0 1024 1024' : '0 0 24 24'}
+  viewBox={statusPath
+    ? designTokens.enabled ? '64 64 896 896' : '0 0 1024 1024'
+    : '0 0 24 24'}
   fill={statusPath ? 'currentColor' : 'none'}
   fill-rule={name === 'close-circle-filled' ? 'evenodd' : undefined}
   stroke={statusPath ? 'none' : 'currentColor'}

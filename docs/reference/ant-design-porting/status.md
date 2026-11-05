@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **114**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **56**; требуется аудит у **14**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **57**; требуется аудит у **13**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -72,7 +72,7 @@ Candidate означает запись каталога, для которой 
 | [Tooltip](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tooltip) | data-display | target | Tooltip | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Tour](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tour) | data-display | target | Tour | Согласованный v1 покрыт | Полные theme tokens, произвольный prefix CSS и общий zIndex context (missing) |
 | [Tree](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tree) | data-display | target | Tree | Согласованный v1 покрыт | Virtual scroll, drag/drop и DirectoryTree (missing); FieldNames, полный generic/ref/semantic/config API и motion (missing) |
-| [Alert](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/alert) | feedback | target | Alert | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
+| [Alert](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/alert) | feedback | target | Alert | Согласованный v1 покрыт | Сохраняемые native motion, close presentation, ARIA/focus и layout (partial); Alert.ErrorBoundary (missing); Общий ConfigProvider prefix и React diagnostics (missing) |
 | [Drawer](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/drawer) | feedback | target | Drawer | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Немодальные панели, push и resize (missing); Локальный getContainer и ConfigProvider fallback (partial) |
 | [Message](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/message) | feedback | target | MessageHolder, createMessage | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Modal](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/modal) | feedback | target | Modal | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |

@@ -493,7 +493,13 @@ export type {
   AlertType,
   AlertVariant,
   AlertContent,
-  AlertClosable
+  AlertClosable,
+  AlertCloseAttributes,
+  AlertConfig,
+  AlertRef,
+  AlertSemantic,
+  AlertSemanticSlots,
+  AlertSemanticInfo
 } from './alert.types';
 export type {
   MessageType,

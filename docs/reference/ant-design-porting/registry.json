@@ -10579,9 +10579,9 @@
       "name": "Alert",
       "category": "feedback",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Перенос исходных props, config, slots и theme Alert с сохранением native закрытия, ARIA/focus и layout.",
       "upstreamPath": "components/alert",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Alert",
@@ -10593,21 +10593,124 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
+        },
+        {
+          "name": "@rc-component/motion",
+          "range": "^1.3.3",
+          "referenceVersion": "1.3.3"
+        },
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": "6.3.4"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
       "evidence": [
+        "src/lib/Alert.svelte",
+        "src/lib/alert.types.ts",
+        "src/lib/alert.engine.ts",
+        "src/lib/alert.engine.test.ts",
+        "src/lib/alert.ssr.test.ts",
+        "tests/package/alert.ssr.test.ts",
+        "tests/browser/alert.spec.ts",
+        "tests/browser/alert-source.spec.ts",
+        "tests/browser/fixtures/ant-design-alert-reference.json",
+        "tests/browser/fixtures/alert-native-reference.json",
+        "tools/ant-design-css-recipes.json",
         "readme.md",
-        "tests/browser/alert.spec.ts"
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Статусы, outlined/filled, banner, content и native закрытие",
+          "state": "supported",
           "requiredForV1": true,
-          "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "evidence": [
+            "src/lib/alert.ssr.test.ts",
+            "tests/browser/alert.spec.ts"
+          ],
+          "note": "Четыре filled status icons, title/description/action, banner warning/showIcon defaults и local overrides. Native button, callback snapshot, inert/aria-hidden при уходе, WAAPI/reduced motion, afterClose после удаления, owner focus и ограничение dialog. Закрытый экземпляр не открывается props updates; unmount отменяет motion и afterClose."
+        },
+        {
+          "id": "source-content-close",
+          "title": "Scalar/array content, legacy aliases и source close priorities",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/alert.engine.test.ts",
+            "tests/package/alert.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-alert-reference.json"
+          ],
+          "note": "IsReactRenderable 1.14.0, 0/true/массивы и nullish title→message. CloseText truthy включает кнопку даже при closable=false; иначе local boolean перед legacy icon/context, object включает закрытие. Truthy local object icon→closeText→defined legacy icon→context object icon→context icon. Прежний local object closeIcon empty string сохранён отдельно. Local callbacks перед legacy callbacks; preventDefault не отменяет закрытие, stopPropagation блокирует root click. Context status icons используют nullish local fallback."
+        },
+        {
+          "id": "semantic-config",
+          "title": "ConfigProvider.alert, semantic slots, local prefix и refs",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Alert.svelte",
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/alert-source.spec.ts",
+            "tests/package/alert.ssr.test.ts"
+          ],
+          "note": "Variant/closable/closeIcon, четыре icons, class/style и object/function root/icon/section/title/description/actions/close. Callback props разрешают prefix/type/variant/showIcon/boolean closable; root style order: context slots→context style→local slots→local style. Record replacement, local prefix/rootClassName, раздельные root/close data/ARIA и root mouse callbacks. Ref хранит root snapshot после mount, nativeElement отражает DOM; unmount очищает оба. Live config/theme/prefix сохраняет nodes, draft, focus и selection."
+        },
+        {
+          "id": "theme-tokens",
+          "title": "Четыре component tokens, aliases/algorithm и CSS recipes",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/Icon.svelte",
+            "tests/browser/fixtures/ant-design-alert-reference.json",
+            "tests/browser/fixtures/ant-design-result-reference.json",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "BorderRadius/defaultPadding/withDescriptionPadding/withDescriptionIconSize с исходными defaults, 0, aliases, component algorithm, dark/compact и cssVar prefix/key. Сохранено source omission: borderRadius=6 либо явный undefined в изученной конфигурации даёт 0px. Все 37 CSS rules без React motion и local prefix template воспроизводятся из проверенного архива. 110 UMD-сценариев сверяют CSS, классы, полные status paths и viewBox; source theme использует fitted 64 64 896 896 из icons-svg 4.6.0, legacy сохраняет 0 0 1024 1024. Обновлён также Result golden."
+        },
+        {
+          "id": "native-boundaries",
+          "title": "Сохраняемые native motion, close presentation, ARIA/focus и layout",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "tests/browser/alert.spec.ts",
+            "tests/browser/alert-source.spec.ts",
+            "tests/browser/fixtures/alert-native-reference.json"
+          ],
+          "note": "Atomic alert по умолчанию, локализованное close имя, декоративный close wrapper/glyph/palette, 24px hit target и responsive actions сохраняются. Старый local closeIcon empty string остаётся пустым, Source берёт fallback; свежий baseline 425e047 подтверждает SSR. WAAPI/cleanup/reduced motion, callbacks snapshot и afterClose после удаления сохранены; Source callback видит подключённый node. Эти guards/close geometry/private hashes исключены из CSS snapshot, explicit close semantic color проверяется. Порядок 5 реальных close traces соответствует source; Ref snapshot остаётся detached node после закрытия до unmount."
+        },
+        {
+          "id": "error-boundary",
+          "title": "Alert.ErrorBoundary",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md"
+          ],
+          "note": "Исходный составной компонент ErrorBoundary ещё не перенесён; требуется отдельная Svelte boundary с title/message/description fallback и SSR/browser проверками."
+        },
+        {
+          "id": "shared-config",
+          "title": "Общий ConfigProvider prefix и React diagnostics",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/config-context.ts",
+            "readme.md"
+          ],
+          "note": "Локальный prefixCls поддержан. Общий provider prefix/getPrefixCls и React development/deprecation diagnostics пока отсутствуют."
         }
       ]
     },
@@ -11508,7 +11611,7 @@
             "tests/browser/result-source.spec.ts",
             "tools/ant-design-css-recipes.json"
           ],
-          "note": "titleFontSize, subtitleFontSize, iconFontSize, extraMargin и исходные defaults; поддержаны 0/строки, global/component aliases, algorithm, dark/compact, cssVar prefix/key. Variables перед semantic/user styles и изоляция scopes. Все 20 CSS rules воспроизводятся из проверенного npm-архива; prefix template сохраняет namespace variables. 81 официальный UMD-сценарий сравнивает API/classes, computed slot effects и полную SVG geometry/paint; path d разбирается браузерным CSSOM без своего parser. CloseCircleFilled использует оптимизированный path проверенного архива @ant-design/icons-svg 4.6.0 вместо raw SVG; общий glyph сверяется также через потребителей Icon."
+          "note": "titleFontSize, subtitleFontSize, iconFontSize, extraMargin и исходные defaults; поддержаны 0/строки, global/component aliases, algorithm, dark/compact, cssVar prefix/key. Variables перед semantic/user styles и изоляция scopes. Все 20 CSS rules воспроизводятся из проверенного npm-архива; prefix template сохраняет namespace variables. 81 официальный UMD-сценарий сравнивает API/classes, computed slot effects и полную SVG geometry/paint; path d разбирается браузерным CSSOM без своего parser. CloseCircleFilled использует оптимизированный path проверенного архива @ant-design/icons-svg 4.6.0 вместо raw SVG; общий glyph сверяется также через потребителей Icon. Source theme использует fitted status viewBox 64 64 896 896 из icons-svg 4.6.0; legacy viewport сохранён. Golden сравнивает также glyphViewBox."
         },
         {
           "id": "native-boundaries",
@@ -13057,6 +13160,19 @@
             "tests/browser/fixtures/ant-design-result-reference.json"
           ],
           "note": "Наследуемый class/style и object/function root/title/subTitle/body/extra/icon с локальным приоритетом и source callback status. Все четыре Result tokens, aliases и algorithms подключены к корню; source UMD cases фиксируют defaults, 0/строки, nested config replacement и cssVar prefix. Native heading/ARIA/layout/focus сохраняются отдельно."
+        },
+        {
+          "id": "alert-config",
+          "title": "ConfigProvider.alert: defaults, semantic config и tokens",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/alert.types.ts",
+            "tests/browser/alert-source.spec.ts",
+            "tests/browser/fixtures/ant-design-alert-reference.json"
+          ],
+          "note": "Source variant, closable/closeIcon, четыре status icons, class/style и object/function slots с record replacement и локальными priorities. Alert получает четыре tokens/aliases/algorithm и local prefix CSS; native accessibility, закрытие и layout сохраняются отдельно."
         }
       ]
     },

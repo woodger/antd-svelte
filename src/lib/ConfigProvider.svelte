@@ -33,6 +33,7 @@
   import type { SkeletonConfig } from './skeleton.types';
   import type { EmptyConfig } from './empty.types';
   import type { ResultConfig } from './result.types';
+  import type { AlertConfig } from './alert.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
@@ -91,6 +92,7 @@
     skeleton?: SkeletonConfig;
     empty?: EmptyConfig;
     result?: ResultConfig;
+    alert?: AlertConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
@@ -163,6 +165,7 @@
     skeleton,
     empty,
     result,
+    alert,
     colorPicker,
     inputNumber,
     radio,
@@ -290,6 +293,9 @@
     },
     get result() {
       return result ?? parent.result;
+    },
+    get alert() {
+      return alert ?? parent.alert;
     },
     get colorPicker() {
       return colorPicker ?? parent.colorPicker;

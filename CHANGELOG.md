@@ -9,6 +9,12 @@
 
 ### Added
 
+- Alert: scalar/array content, legacy aliases, ConfigProvider.alert, object/function
+  semantic slots, local prefixCls/rootClassName, refs и root/close data/ARIA.
+  Подключены четыре component tokens/aliases/algorithm и 37 CSS rules. Source theme
+  использует исходный fitted viewport пяти status icons; legacy viewport сохранён.
+  Добавлены 110 UMD-сценариев, native SSR baseline, callback traces и SSR/browser-проверки.
+
 - Result: четыре component tokens, aliases/algorithm, ConfigProvider.result,
   object/function semantic slots, local prefixCls/rootClassName, refs и data/ARIA.
   Перенесены scalar/array content и три static image components; сохранены native

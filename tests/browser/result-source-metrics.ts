@@ -43,6 +43,7 @@ export function snapshotResultSource(prefix = 'ant-result') {
     svg: svg ? {
       width: glyph ? getComputedStyle(svg).width : svg.getAttribute('width'),
       height: glyph ? getComputedStyle(svg).height : svg.getAttribute('height'),
+      glyphViewBox: glyph ? svg.getAttribute('viewBox') : null,
       standalone: root ? null : {
         title: svg.querySelector('title')?.textContent ?? null,
         ariaHidden: svg.getAttribute('aria-hidden'),

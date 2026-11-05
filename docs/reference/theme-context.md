@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress, Skeleton и Result получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress, Skeleton, Result и Alert получают собственные
 defaults и aliases.
 Flex использует alias overrides без собственных component defaults и без typography reset.
 Empty использует общие aliases/algorithm без собственных component-only defaults.
@@ -417,6 +417,36 @@ Main сохраняет native host/status/focus, title/div, flex/responsive gua
 [116 source-сценариев](../../tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 primitives и [34 main-сценария](../../tests/browser/fixtures/ant-design-skeleton-main-reference.json)
 сняты из закреплённого UMD с одинаковым inherited global-token окружением.
+
+## Токены Alert
+
+Alert получает четыре component defaults:
+
+| Token | Default |
+| --- | --- |
+| borderRadius | borderRadiusLG |
+| defaultPadding | paddingContentVerticalSM px 12px |
+| withDescriptionPadding | paddingMD px paddingContentHorizontalLG px |
+| withDescriptionIconSize | fontSizeHeading3 |
+
+Поддержаны числовые/строковые значения, 0, aliases, component algorithm, dark/compact
+и cssVar prefix/key. Source corner case сохранён: borderRadius=6, совпадающий с
+глобальным alias, и явный undefined в изученной конфигурации дают 0px. Значение
+компонентной переменной отсутствует; оно не заменяется vendor default.
+
+ConfigProvider.alert задаёт variant, closable/closeIcon, status icons, class/style
+и object/function semantic slots. Root styles: provider slots → provider style →
+local slots → local style. Нормализованные callback props и приоритеты закрытия
+описаны в [Alert](../../readme.md#alert). Source theme также использует fitted
+viewBox пяти filled status icons из icons-svg 4.6.0; legacy viewport сохранён.
+
+[110 UMD-сценариев](../../tests/browser/fixtures/ant-design-alert-reference.json),
+[native baseline](../../tests/browser/fixtures/alert-native-reference.json),
+[SSR](../../tests/package/alert.ssr.test.ts) и
+[browser](../../tests/browser/alert-source.spec.ts), маршрут `?fixture=alert-source`.
+Все 37 CSS rules без React motion воспроизводятся из закреплённого архива.
+Native WAAPI, callbacks после удаления, accessibility/focus и responsive guards
+проверяются отдельно от source CSS/geometry.
 
 ## Токены Result
 

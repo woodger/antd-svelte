@@ -32,6 +32,7 @@ import type { ProgressConfig } from './progress.types';
 import type { SkeletonConfig } from './skeleton.types';
 import type { EmptyConfig } from './empty.types';
 import type { ResultConfig } from './result.types';
+import type { AlertConfig } from './alert.types';
 import type { ColorPickerConfig } from './color-picker.types';
 import type { InputNumberConfig } from './input-number.types';
 import type { RadioConfig } from './radio.types';
@@ -82,6 +83,7 @@ export interface ConfigContext {
   readonly skeleton?: SkeletonConfig;
   readonly empty?: EmptyConfig;
   readonly result?: ResultConfig;
+  readonly alert?: AlertConfig;
   readonly colorPicker?: ColorPickerConfig;
   readonly inputNumber?: InputNumberConfig;
   readonly radio?: RadioConfig;
