@@ -1644,12 +1644,13 @@ focus/form/reset и отсутствие callbacks при обновлении m
 
 ```svelte
 <script lang="ts">
-  import { Button, Tooltip } from 'antd-svelte';
+  import { Button, Tooltip, type TooltipRef } from 'antd-svelte';
 
   let open = $state(false);
+  let tooltipRef = $state<TooltipRef>();
 </script>
 
-<Tooltip title="Сохранить изменения" bind:open placement="top">
+<Tooltip title="Сохранить изменения" bind:open bind:ref={tooltipRef} placement="top">
   <Button>Сохранить</Button>
 </Tooltip>
 ```
@@ -1674,6 +1675,25 @@ DefaultOpen задаёт начальное состояние. `onOpenChange(op
 пользовательском открытии/закрытии; внешнее изменение open и начальное состояние
 не вызывают callback. Как и другие bindable props модуля, open следует модели
 Svelte; для синхронизации владельца используйте bind:open.
+
+`bind:ref` выдаёт TooltipRef после mount и очищает его при unmount. NativeElement
+указывает на основной DOM trigger, включая SVG; popupElement — на существующий
+native span shell. Getters отражают замену trigger и перенос popup в контейнер.
+Shell доступен также до первого открытия и при destroyOnHidden: исходный lazy div
+и его удаление не подменяют согласованный native lifecycle.
+
+`tooltipRef?.forceAlign()` сразу пересчитывает открытый popup текущим контроллером
+placement/arrow/overflow. После изменения разметки вызовите его после `await tick()`
+либо в `$effect`. Метод не создаёт дополнительный animation loop, не открывает
+закрытый или уничтоженный popup и не вызывает onOpenChange; DOM, ввод, фокус и
+выделение сохраняются. Прежнее автоматическое отслеживание anchor продолжает работать.
+Императивный вызов не подписывает `$effect` на внутреннее состояние Tooltip.
+
+Как в исходном interface, TooltipProps не содержит ref; полный тип Svelte-компонента
+с binding доступен через `ComponentProps<typeof Tooltip>`. Сверка DOM/ref и layout:
+[четыре UMD-сценария](./tests/browser/fixtures/ant-design-tooltip-ref-reference.json),
+[SSR](./tests/package/tooltip-ref.ssr.test.ts) и
+[browser](./tests/browser/tooltip-ref.spec.ts), `?fixture=tooltip-ref`.
 
 Trigger без component config по умолчанию `['hover', 'focus']`; можно выбрать одно
 событие или передать пустой массив для программного показа. MouseEnterDelay и mouseLeaveDelay

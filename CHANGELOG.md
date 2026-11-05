@@ -9,6 +9,12 @@
 
 ### Added
 
+- TooltipRef: bind:ref, текущие nativeElement/popupElement и forceAlign на общем
+  контроллере позиции. Сохранены native shell/SSR, автоматическое отслеживание,
+  cleanup, фокус и выделение; вызов не добавляет dependencies в пользовательский effect.
+  Добавлены четыре UMD-сценария ref/lifecycle и browser-проверки с остановленными
+  animation frames, заменой trigger и переносом popup в body.
+
 - Tooltip: legacy overlay с исходным приоритетом title=0, boolean/array content
   и fresh cache содержимого, semantic class/style внутреннего container.
   Настройки передаются Typography и Slider; native eager SSR/hidden shell,

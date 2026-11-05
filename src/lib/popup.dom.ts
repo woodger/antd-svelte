@@ -9,6 +9,12 @@ import type { AdjustOverflow, TooltipPlacement } from './tooltip.types';
 
 const openPopups = new WeakMap<Document, HTMLElement[]>();
 
+/** Cleanup остаётся вызываемой функцией; forceAlign использует тот же контроллер позиции. */
+export interface PopupConnection {
+  (): void;
+  forceAlign: () => void;
+}
+
 export function getPopupActiveElement(element: Element) {
   const root = element.getRootNode() as Document | ShadowRoot;
   return root.activeElement ?? element.ownerDocument.activeElement;
@@ -32,7 +38,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   getPosition?: (anchor: DOMRect, popup: DOMRect, viewport: TooltipRect) => TooltipPosition;
   applyPosition?: (position: TooltipPosition) => void;
   onVisibilityChange?: (visible: boolean) => void;
-}): () => void {
+}): PopupConnection {
   const document = anchor.ownerDocument;
   const view = document.defaultView!;
   let frame = 0;
@@ -207,12 +213,12 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   if (options.preserveFocus !== false)
     popup.addEventListener('pointerdown', preserveFocus);
 
-  return () => {
+  return Object.assign(() => {
     disposed = true;
     view.cancelAnimationFrame(frame);
     document.removeEventListener('keydown', handleKeydown);
     document.removeEventListener('pointerdown', handlePointerdown, true);
     popup.removeEventListener('pointerdown', preserveFocus);
     hide();
-  };
+  }, { forceAlign: update });
 }

@@ -1,16 +1,17 @@
 <script lang="ts">
   import NoCompactStyle from './NoCompactStyle.svelte';
-  import { onDestroy, untrack } from 'svelte';
+  import { onDestroy, onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { getTooltipContent, getTooltipDelay, hasTooltipContent } from './tooltip.engine';
-  import type { TooltipProps, TooltipTrigger } from './tooltip.types';
+  import type { TooltipProps, TooltipRef, TooltipTrigger } from './tooltip.types';
   import TooltipPopup from './TooltipPopup.svelte';
 
   let {
+    ref = $bindable<TooltipRef | undefined>(),
     open = $bindable<boolean | undefined>(),
     open: providedOpen,
     ...props
-  }: TooltipProps = $props();
+  }: TooltipProps & { ref?: TooltipRef } = $props();
   let {
     title,
     overlay,
@@ -41,6 +42,10 @@
   const initialDefault = untrack(() => defaultOpen);
   let host = $state<HTMLSpanElement>();
   let anchor = $state<Element>();
+  let popupController = $state<{
+    getPopupElement: () => HTMLSpanElement | undefined;
+    forceAlign: () => void;
+  }>();
   let pending: ReturnType<typeof setTimeout> | undefined;
   let hovered = false;
   let focused = false;
@@ -51,6 +56,16 @@
   let content = $derived(getTooltipContent(title, overlay));
   let available = $derived(hasTooltipContent(content));
   let visible = $derived(available && (open ?? initialDefault));
+
+  onMount(() => {
+    ref = {
+      get nativeElement() { return anchor; },
+      get popupElement() { return popupController?.getPopupElement(); },
+      forceAlign: () => untrack(() => popupController?.forceAlign())
+    };
+
+    return () => { ref = undefined; };
+  });
 
   $effect(() => {
     const element = host;
@@ -199,7 +214,7 @@
   .ant-tooltip-trigger { display: inline-block; max-width: 100%; vertical-align: middle; }
 </style>
 
-<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span><NoCompactStyle><TooltipPopup title={content} color={props.color} prefixCls={props.prefixCls} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
+<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span><NoCompactStyle><TooltipPopup bind:this={popupController} title={content} color={props.color} prefixCls={props.prefixCls} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
   semanticProps={{ ...props, open: providedOpen, trigger: resolvedTrigger,
     mouseEnterDelay: enterDelay, mouseLeaveDelay: leaveDelay }}
   onDismiss={dismiss} onHoverChange={handlePopupHover} /></NoCompactStyle>

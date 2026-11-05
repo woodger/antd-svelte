@@ -407,6 +407,7 @@ export type {
 export type {
   TooltipProps,
   TooltipContent,
+  TooltipRef,
   TooltipPlacement,
   TooltipTrigger,
   TooltipColor,

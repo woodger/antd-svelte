@@ -1,0 +1,305 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "operation": "Public Tooltip ref before first open, open/close/reopen and unmount; forceAlign after an 80px layout move; button and SVG targets, destroyOnHidden false/true, motion disabled."
+  },
+  "cases": [
+    {
+      "name": "button-destroy-false",
+      "kind": "button",
+      "destroy": false,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "delta": 80,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "BUTTON",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      }
+    },
+    {
+      "name": "button-destroy-true",
+      "kind": "button",
+      "destroy": true,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": false
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "delta": 80,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "BUTTON",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      }
+    },
+    {
+      "name": "svg-destroy-false",
+      "kind": "svg",
+      "destroy": false,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "delta": 80,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "svg",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      }
+    },
+    {
+      "name": "svg-destroy-true",
+      "kind": "svg",
+      "destroy": true,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": false
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "delta": 80,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "svg",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      }
+    }
+  ]
+}

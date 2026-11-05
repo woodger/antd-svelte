@@ -6,6 +6,16 @@ import type { RenderEmptyContent } from './types';
 /** ReactNode заменён текстом, boolean, вложенными массивами и Svelte Snippet. */
 export type TooltipContent = RenderEmptyContent;
 
+/** bind:ref доступен после mount и очищается при unmount; DOM getters отражают текущие узлы. */
+export interface TooltipRef {
+  /** Основной DOM trigger, включая SVG; до разрешения anchor может быть undefined. */
+  readonly nativeElement: Element | undefined;
+  /** Существующий native span shell сохраняется также при закрытии и destroyOnHidden. */
+  readonly popupElement: HTMLSpanElement | undefined;
+  /** Пересчитывает открытый popup; закрытый или уничтоженный экземпляр не открывает. */
+  forceAlign: () => void;
+}
+
 /** Физические направления; Left/Right в имени не меняются при RTL. */
 export type TooltipPlacement =
   | 'top' | 'bottom' | 'left' | 'right'

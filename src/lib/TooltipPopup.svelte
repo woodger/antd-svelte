@@ -87,6 +87,7 @@
   const generatedId = $props.id();
   const id = `ant-tooltip-${generatedId}`;
   let popup = $state<HTMLSpanElement>();
+  let realign: (() => void) | undefined;
   let actualPlacement = $state(untrack(() => placement));
   let arrowConfig = $derived(getTooltipArrow(arrow, config.tooltip?.arrow));
   let sourcePlacement = $derived(Boolean(config.tooltip) || typeof arrow === 'object'
@@ -171,6 +172,16 @@
     $effect(() => update(rendered.layers));
   }
 
+  export function getPopupElement() {
+    return popup;
+  }
+
+  export function forceAlign() {
+    untrack(() => {
+      if (open && available) realign?.();
+    });
+  }
+
   $effect(() => {
     if (describe && available) return connectTooltipDescription(describe, id);
   });
@@ -186,7 +197,7 @@
 
     if (!surface || !reference || !open || !available) return;
 
-    return untrack(() => connectPopup(surface, reference, {
+    const connection = untrack(() => connectPopup(surface, reference, {
       trigger: source,
       get placement() { return placement; },
       get autoAdjustOverflow() { return autoAdjustOverflow; },
@@ -203,6 +214,12 @@
         actualPlacement = next;
       }
     }));
+    realign = connection.forceAlign;
+
+    return () => {
+      realign = undefined;
+      connection();
+    };
   });
 </script>
 

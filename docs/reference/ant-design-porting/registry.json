@@ -10189,7 +10189,14 @@
         "tests/browser/fixtures/TooltipContentFixtures.svelte",
         "tests/browser/fixtures/TooltipContentConsumers.svelte",
         "tests/browser/tooltip-content.spec.ts",
-        "tests/package/tooltip-content.ssr.test.ts"
+        "tests/package/tooltip-content.ssr.test.ts",
+        "src/lib/index.ts",
+        "tests/browser/fixtures/ant-design-tooltip-ref-reference.json",
+        "tests/browser/fixtures/tooltip-ref-fixture.types.ts",
+        "tests/browser/fixtures/TooltipRefCase.svelte",
+        "tests/browser/fixtures/TooltipRefFixtures.svelte",
+        "tests/browser/tooltip-ref.spec.ts",
+        "tests/package/tooltip-ref.ssr.test.ts"
       ],
       "features": [
         {
@@ -10533,6 +10540,27 @@
             "readme.md"
           ],
           "note": "Fresh=false фиксирует последний открытый payload: scalar/array content, container semantic class/style и legacy/color layers; true обновляет скрытый payload. Root/arrow остаются реактивными. Снимок вложенного массива отделён от Svelte proxy. 80 UMD-кадров закрепляют default/false/true, динамический fresh и destroyOnHidden; native eager initial content и скрытый shell сохраняются. Snippet selection кэшируется, но захваченные reactive значения и эффекты Svelte продолжают обновляться: полный React.memo opaque captures не воспроизводится. Fresh передаётся Typography и single/active range/pinned range Slider; браузер проверяет данные consumers, DOM/state retention и отложенную замену Snippet. Source motion/UniqueProvider и остальной delegated API остаются в работе."
+        },
+        {
+          "id": "imperative-ref",
+          "title": "TooltipRef DOM getters и forceAlign",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/ant-design-tooltip-ref-reference.json",
+            "tests/browser/fixtures/tooltip-ref-fixture.types.ts",
+            "tests/browser/fixtures/TooltipRefCase.svelte",
+            "tests/browser/fixtures/TooltipRefFixtures.svelte",
+            "tests/browser/tooltip-ref.spec.ts",
+            "tests/package/tooltip-ref.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Svelte bind:ref после mount с текущими nativeElement/popupElement и forceAlign через существующий контроллер. Ref отдельно от TooltipProps, как в исходном forwardRef; полные props доступны через ComponentProps<typeof Tooltip>. Четыре официальных UMD-сценария фиксируют button/SVG, open/close/reopen, destroyOnHidden и unmount, layout shift80. Native getters отражают текущие Element/span, скрытый shell остаётся подключённым до первого открытия и после закрытия; Source lazy DIV и detached popup snapshot сознательно не копируются. Manual alignment не добавляет RAF loop или tracked dependencies и не открывает закрытый/уничтоженный popup. Browser останавливает автоматические frames, проверяет фактический shift80, DOM/draft/focus/selection, replacement trigger, body portal и cleanup. SSR не создаёт ref и не запускает DOM/timers. Callback/RefObject React заменены Svelte binding; остальные delegated props и общий аудит остаются в работе."
         }
       ]
     },
