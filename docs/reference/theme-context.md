@@ -456,6 +456,30 @@ Inner header использует colorFillAlter, inner body — общий ве
 они не входят в публичный ThemeConfig ни здесь, ни в 6.6.8. Оба значения оставляют
 CSS-переменные включёнными также в upstream.
 
+## Тема и настройки Space
+
+Space не объявляет собственных component tokens. Alias overrides из
+components.Space и отдельный algorithm применяются на корне до gap/wrap,
+semantic и plain styles. Preset small/middle/medium/large используют
+paddingXS/padding/paddingLG; числовые gaps остаются inline. Typography reset
+не добавляется: собственный шрифт контейнера сохраняется независимо от fontSize alias.
+
+ConfigProvider.space задаёт size, class/style и root/item/separator callbacks либо
+objects. Callback props содержат разрешённые size/orientation/align; undefined
+результат допустим. Вложенный record заменяет настройки целиком, undefined наследует,
+{} очищает. Порядок root styles: gap/wrap → provider semantic → provider style →
+local semantic → local style. Локальный size имеет приоритет над provider.space.size;
+componentSize не задаёт интервалы Space.
+
+Compact не использует ConfigProvider.space, собственных tokens у него тоже нет;
+его layout/typography и изоляция config проверяются отдельно. Source Compact
+не применяет свой cssVar class, поэтому его alias probes не сравниваются с native
+наследованием variables через DOM ConfigProvider. SpaceAddon использует ранее
+перенесённый отдельный Addon scope. Произвольный CSS prefix остаётся пробелом.
+Эталоны и проверки: [16 наборов темы/config](../../tests/browser/fixtures/ant-design-space-theme-reference.json),
+[SSR](../../tests/package/space-theme.ssr.test.ts),
+[browser](../../tests/browser/space-theme.spec.ts), `?fixture=space-theme`.
+
 ## Токены Layout
 
 Layout и Sider подготавливают общие 19 defaults: 16 актуальных component tokens

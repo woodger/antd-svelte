@@ -9,6 +9,12 @@
 
 ### Added
 
+- ConfigProvider.space: size, class/style и object/function root/item/separator slots
+  с исходными приоритетами и заменой вложенных records. Space получил alias tokens
+  и algorithms без typography reset; Compact/Addon сохраняют независимые настройки.
+  Добавлены Source/SSR/browser-проверки gaps, scopes, callbacks и сохранения
+  keyed DOM, draft/selection/focus при обновлениях.
+
 - Segmented: локальный prefixCls с CSS из закреплённого архива, независимыми
   defaults и сохранёнными CSS variables. Динамическая смена сохраняет radio,
   выбор/фокус/ref, отменяет старый thumb и очищает stylesheet при unmount.

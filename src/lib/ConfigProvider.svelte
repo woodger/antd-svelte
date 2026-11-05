@@ -36,6 +36,7 @@
   import type { AlertConfig } from './alert.types';
   import type { CollapseConfig } from './collapse.types';
   import type { SegmentedConfig } from './segmented.types';
+  import type { SpaceConfig } from './space.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
@@ -97,6 +98,7 @@
     alert?: AlertConfig;
     collapse?: CollapseConfig;
     segmented?: SegmentedConfig;
+    space?: SpaceConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
@@ -172,6 +174,7 @@
     alert,
     collapse,
     segmented,
+    space,
     colorPicker,
     inputNumber,
     radio,
@@ -305,6 +308,9 @@
     },
     get segmented() {
       return segmented ?? parent.segmented;
+    },
+    get space() {
+      return space ?? parent.space;
     },
     get alert() {
       return alert ?? parent.alert;

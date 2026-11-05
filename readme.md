@@ -1235,8 +1235,9 @@ separator не помечается aria-hidden автоматически: Snip
 
 Orientation имеет приоритет над явным vertical, затем legacy direction;
 по умолчанию horizontal. Align=start/end/center/baseline, horizontal по умолчанию
-center, vertical без align использует естественное stretch. Size=small
-независимо от ConfigProvider.componentSize. Поддержаны small/medium/middle/large
+center, vertical без align использует естественное stretch. Size выбирается из
+локального prop, ConfigProvider.space.size и затем small; componentSize не участвует.
+Поддержаны small/medium/middle/large
 либо число, tuple [horizontal, vertical]. Числовой 0 не создаёт inline gap,
 NaN игнорируется. Wrap добавляет flex-wrap:wrap. Gap/wrap styles идут перед
 styles.root и style: пользовательский inline style перекрывает также числовой
@@ -1248,8 +1249,30 @@ ClassNames/styles root/item/separator принимают объект либо c
 тему/RTL. Галерея — `/ant-design#space`, фикстура — `?fixture=space`. Unit/SSR/
 Chromium проверяют gaps, пустые значения, keyed DOM/фокус и production hydration.
 Рецепт space извлекает 16 правил без Compact/Addon, reset и keyframes.
-PrefixCls и глобальный space component config/tokens остаются в полном объёме
-миграции.
+ConfigProvider.space задаёт size, class/style и object/function classNames/styles
+для root/item/separator. Явный вложенный record заменяет родительский целиком;
+undefined наследует, {} очищает. Semantic callbacks получают разрешённые
+size/orientation/align и могут вернуть undefined. Порядок styles: gap/wrap →
+provider styles.root → provider style → local styles.root → local style.
+ConfigProvider.space не применяется к Compact/Addon.
+
+```svelte
+<script lang="ts">
+  import { ConfigProvider, Space } from 'antd-svelte';
+</script>
+
+<ConfigProvider space={{ size: ['small', 'large'], styles: { item: 'color:#531dab' } }}
+  theme={{ components: { Space: { paddingXS: 12 } } }}>
+  <Space items={['Первый', 'Второй']} separator="|" />
+</ConfigProvider>
+```
+
+Theme.components.Space принимает alias overrides и отдельный algorithm; собственных
+component tokens в 6.6.8 нет. Preset gaps читают paddingXS/padding/paddingLG,
+numeric gaps сохраняют inline priority, typography reset не добавляется. Поддержаны
+именованные cssVar, нули/undefined и независимые provider scopes; обновление темы
+или config сохраняет keyed DOM, черновики, выделение и фокус.
+Произвольный prefixCls остаётся в полном объёме миграции.
 
 ### SpaceCompact и SpaceAddon
 
@@ -8887,10 +8910,10 @@ ConfigProvider также принимает source token/algorithm, насле�
 hash/CSS variables. `theme.useToken()` возвращает реактивный объект с текущими
 GlobalToken, Theme, hashId и transformed CSS-variable token. Глобальные переменные
 передаются компонентам уже при SSR; native темы сохраняют прежние цвета,
-а compact metrics описаны выше. Компонентные overrides применяются к Button,
-Input/TextArea (включая Password/Search/OTP), InputNumber, SpaceAddon,
+а compact metrics описаны выше. Компонентные overrides подключены, в частности, к Button,
+Input/TextArea (включая Password/Search/OTP), InputNumber, Space/SpaceAddon, Layout,
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup, Switch, Avatar/AvatarGroup и Badge;
-остальные CSS-потребители ещё переносятся. Примеры и точная граница —
+полное покрытие CSS-потребителей ещё переносится. Примеры и точная граница —
 [в справочнике контекста темы](./docs/reference/theme-context.md).
 
 ConfigProvider.wave управляет эффектом Button, Checkbox, Radio/RadioButton,

@@ -1496,7 +1496,7 @@
             "src/lib/space.test.ts",
             "tests/browser/space.spec.ts"
           ],
-          "note": "Default small независимо от componentSize; styles/root style перекрывают числовой gap, horizontal align=center. Без typography reset; compact spacing следует общей size map."
+          "note": "Local size → ConfigProvider.space.size → small независимо от componentSize; styles/root style перекрывают числовой gap, horizontal align=center. Без typography reset; compact spacing следует общей size map."
         },
         {
           "id": "content",
@@ -1533,22 +1533,41 @@
           "note": "Outlined/filled/borderless/underlined, error/warning, explicit disabled appearance и compact size; disabled не отключает children и не наследуется автоматически."
         },
         {
-          "id": "global-config",
-          "title": "PrefixCls и глобальный space component config/tokens",
-          "state": "partial",
+          "id": "source-theme-aliases",
+          "title": "Alias tokens/algorithms Space без typography reset",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
-            "src/lib/theme-control-tokens.engine.ts",
             "src/lib/theme-component-style.engine.ts",
-            "src/lib/theme-component.svelte.ts",
-            "src/lib/ThemeScopeStyle.svelte",
-            "src/lib/theme-control-tokens-reference.test.ts",
-            "tools/fixtures/ant-design-control-tokens-reference.json",
-            "tests/package/control-theme.ssr.test.ts",
-            "tests/browser/control-theme.spec.ts",
-            "docs/reference/theme-context.md"
+            "src/lib/theme-space-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-space-tokens-reference.json",
+            "tests/package/space-theme.ssr.test.ts",
+            "tests/browser/space-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-space-theme-reference.json"
           ],
-          "note": "SpaceAddon поддерживает source component aliases и CSS scope; Space component config/prefixCls и полный family token audit ещё не завершены."
+          "note": "Ant Design 6.6.8: собственный ComponentToken пуст; aliases и component algorithms задают CSS scope обычного Space. Preset small/middle/medium/large читают paddingXS/padding/paddingLG без font reset; numeric gap, semantic/plain styles и ручные CSS variables сохраняют приоритет. Dark/compact, zero/undefined, cssVar key/prefix и independent nested/reset/sibling scopes сверены с официальным UMD. Compact не читает ConfigProvider.space и не применяет свой source cssVar class; его layout/typography/config isolation сверяются без alias probes, native DOM provider inheritance не меняется. Addon сохраняет ранее перенесённый отдельный scope."
+        },
+        {
+          "id": "component-config",
+          "title": "ConfigProvider.space size/class/style и semantic root/item/separator",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/space.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "tests/package/space-theme.ssr.test.ts",
+            "tests/browser/space-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-space-theme-reference.json"
+          ],
+          "note": "Local size → space.size → small; componentSize не участвует. Root/item/separator object/function classNames/styles, additive classes, callback props с разрешёнными size/orientation/align и undefined return. Gap/wrap → context semantic → context plain → local semantic → local plain; явный вложенный record заменяет родителя целиком, undefined наследует, {} очищает. Обновление темы/config и keyed reorder сохраняют nativeElement, input DOM, draft/selection/focus; unmount удаляет owned DOM. CSS strings, class naming и items/Snippet boundary остаются native Svelte contracts."
+        },
+        {
+          "id": "global-config",
+          "title": "Произвольный prefixCls Space/Compact/Addon",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [],
+          "note": "Component config Space, alias tokens/algorithms и прежний Addon scope перенесены отдельными features. CSS generation для произвольного prefixCls семейства ещё отсутствует."
         },
         {
           "id": "remaining-controls",
@@ -13814,7 +13833,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs, Slider и Divider получили исходные component tokens и CSS consumption; Flex получил source alias overrides без собственных defaults и typography reset; остальные families остаются в работе."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены, в частности, для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs, Slider и Divider получили исходные component tokens и CSS consumption; Flex и Space получили source alias overrides без собственных defaults и typography reset, Layout/Sider — общие component tokens и наследуемые переменные секций. Полное покрытие CSS-потребителей ещё переносится."
         },
         {
           "id": "static-design-tokens",

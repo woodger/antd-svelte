@@ -35,6 +35,7 @@ import type { ResultConfig } from './result.types';
 import type { AlertConfig } from './alert.types';
 import type { CollapseConfig } from './collapse.types';
 import type { SegmentedConfig } from './segmented.types';
+import type { SpaceConfig } from './space.types';
 import type { ColorPickerConfig } from './color-picker.types';
 import type { InputNumberConfig } from './input-number.types';
 import type { RadioConfig } from './radio.types';
@@ -88,6 +89,7 @@ export interface ConfigContext {
   readonly alert?: AlertConfig;
   readonly collapse?: CollapseConfig;
   readonly segmented?: SegmentedConfig;
+  readonly space?: SpaceConfig;
   readonly colorPicker?: ColorPickerConfig;
   readonly inputNumber?: InputNumberConfig;
   readonly radio?: RadioConfig;

@@ -10,6 +10,22 @@ export interface SpaceItem {
   children?: SpaceContent;
 }
 export type SpaceSlots = Partial<Record<'root' | 'item' | 'separator', string>>;
+/** Size/orientation/align разрешены; nodes и CSS сохраняют native Svelte contracts. */
+export interface SpaceSemanticInfo {
+  props: SpaceProps;
+}
+export type SpaceSemantic = SpaceSlots
+  | ((info: SpaceSemanticInfo) => SpaceSlots | undefined);
+/** Наследуемые настройки Space; явный record целиком заменяет родительский space. */
+export interface SpaceConfig {
+  /** Используется, когда локальный size отсутствует; componentSize не участвует. */
+  size?: SpaceSize | readonly [SpaceSize, SpaceSize];
+  class?: string;
+  /** Между context styles.root и локальными styles.root/style. */
+  style?: string;
+  classNames?: SpaceSemantic;
+  styles?: SpaceSemantic;
+}
 /** Интервалы, wrappers и separators между keyed items или одним children snippet. */
 export interface SpaceProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
@@ -17,7 +33,7 @@ export interface SpaceProps extends Omit<
 > {
   items?: readonly (SpaceContent | SpaceItem)[];
   children?: Snippet;
-  /** @defaultValue 'small' */
+  /** Локальное значение → ConfigProvider.space.size → small. */
   size?: SpaceSize | readonly [SpaceSize, SpaceSize];
   orientation?: SpaceOrientation;
   vertical?: boolean;
@@ -26,8 +42,8 @@ export interface SpaceProps extends Omit<
   separator?: SpaceContent;
   split?: SpaceContent;
   wrap?: boolean;
-  classNames?: SpaceSlots | ((info: { props: SpaceProps; }) => SpaceSlots);
-  styles?: SpaceSlots | ((info: { props: SpaceProps; }) => SpaceSlots);
+  classNames?: SpaceSemantic;
+  styles?: SpaceSemantic;
   class?: string;
   rootClassName?: string;
   style?: string;

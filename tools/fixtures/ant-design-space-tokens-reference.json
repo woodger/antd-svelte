@@ -1,0 +1,388 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "operation": "Space and Compact have empty public ComponentToken records; Compact ignores ConfigProvider.space and omits its own cssVar class, so component alias probes apply only to regular Space. Native provider DOM variable inheritance is outside that comparison. CSS aliases/algorithms and padding presets preserve inherited typography. ConfigProvider.space size, class/style and root/item/separator object/function slots: normalized callback props, local/preset/numeric/zero gaps, semantic/plain style priority, RTL, nested/replaced/empty/inherited/reset/sibling records. Source font/color and alias probe are measured separately; native snippets/items and keyed state are verified independently."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "variables": {},
+      "compactVariables": {}
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "paddingXS": 14,
+          "padding": 20,
+          "paddingLG": 32,
+          "fontSize": 30,
+          "colorText": "#722ed1"
+        }
+      },
+      "variables": {},
+      "compactVariables": {}
+    },
+    {
+      "name": "component-aliases",
+      "config": {
+        "components": {
+          "Space": {
+            "paddingXS": 14,
+            "padding": 20,
+            "paddingLG": 32,
+            "fontSize": 30,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--ant-padding-xs": "14px",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "32px",
+        "--ant-font-size": "30px",
+        "--ant-color-text": "#722ed1"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "variables": {},
+      "compactVariables": {}
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {},
+      "compactVariables": {}
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {},
+      "compactVariables": {}
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Space": {
+            "algorithm": true,
+            "fontSize": 18,
+            "sizeUnit": 5
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "18px",
+        "--ant-size-unit": "5px",
+        "--ant-font-size-sm": "14px",
+        "--ant-font-size-lg": "20px",
+        "--ant-font-size-xl": "26px",
+        "--ant-font-size-heading-1": "48px",
+        "--ant-font-size-heading-2": "40px",
+        "--ant-font-size-heading-3": "32px",
+        "--ant-font-size-heading-4": "26px",
+        "--ant-font-size-heading-5": "20px",
+        "--ant-line-height": "1.4444444444444444",
+        "--ant-line-height-lg": "1.4",
+        "--ant-line-height-sm": "1.5714285714285714",
+        "--ant-font-height": "26px",
+        "--ant-font-height-lg": "28px",
+        "--ant-font-height-sm": "22px",
+        "--ant-line-height-heading-1": "1.1666666666666667",
+        "--ant-line-height-heading-2": "1.2",
+        "--ant-line-height-heading-3": "1.25",
+        "--ant-line-height-heading-4": "1.3076923076923077",
+        "--ant-line-height-heading-5": "1.4",
+        "--ant-size-xxl": "60px",
+        "--ant-size-xl": "40px",
+        "--ant-size-lg": "30px",
+        "--ant-size-md": "25px",
+        "--ant-size-ms": "20px",
+        "--ant-size": "20px",
+        "--ant-size-sm": "15px",
+        "--ant-size-xs": "10px",
+        "--ant-size-xxs": "5px",
+        "--ant-font-size-icon": "14px",
+        "--ant-padding-xxs": "5px",
+        "--ant-padding-xs": "10px",
+        "--ant-padding-sm": "15px",
+        "--ant-padding": "20px",
+        "--ant-padding-md": "25px",
+        "--ant-padding-lg": "30px",
+        "--ant-padding-xl": "40px",
+        "--ant-padding-content-horizontal-lg": "30px",
+        "--ant-padding-content-vertical-lg": "20px",
+        "--ant-padding-content-horizontal": "20px",
+        "--ant-padding-content-vertical": "15px",
+        "--ant-padding-content-horizontal-sm": "20px",
+        "--ant-padding-content-vertical-sm": "10px",
+        "--ant-margin-xxs": "5px",
+        "--ant-margin-xs": "10px",
+        "--ant-margin-sm": "15px",
+        "--ant-margin": "20px",
+        "--ant-margin-md": "25px",
+        "--ant-margin-lg": "30px",
+        "--ant-margin-xl": "40px",
+        "--ant-margin-xxl": "60px"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "component-compact",
+      "config": {
+        "components": {
+          "Space": {
+            "algorithm": [
+              "compactAlgorithm"
+            ],
+            "controlHeight": 28
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "12px",
+        "--ant-control-height": "24px",
+        "--ant-font-size-sm": "10px",
+        "--ant-font-size-lg": "14px",
+        "--ant-font-size-xl": "16px",
+        "--ant-font-size-heading-1": "32px",
+        "--ant-font-size-heading-2": "26px",
+        "--ant-font-size-heading-3": "20px",
+        "--ant-font-size-heading-4": "16px",
+        "--ant-font-size-heading-5": "14px",
+        "--ant-line-height": "1.6666666666666667",
+        "--ant-line-height-lg": "1.5714285714285714",
+        "--ant-line-height-sm": "1.8",
+        "--ant-font-height": "20px",
+        "--ant-font-height-lg": "22px",
+        "--ant-font-height-sm": "18px",
+        "--ant-line-height-heading-1": "1.25",
+        "--ant-line-height-heading-2": "1.3076923076923077",
+        "--ant-line-height-heading-3": "1.4",
+        "--ant-line-height-heading-4": "1.5",
+        "--ant-line-height-heading-5": "1.5714285714285714",
+        "--ant-size-lg": "16px",
+        "--ant-size-md": "16px",
+        "--ant-size-ms": "12px",
+        "--ant-size": "8px",
+        "--ant-size-sm": "8px",
+        "--ant-size-xs": "4px",
+        "--ant-control-height-sm": "18px",
+        "--ant-control-height-xs": "12px",
+        "--ant-control-height-lg": "30px",
+        "--ant-font-size-icon": "10px",
+        "--ant-control-interactive-size": "12px",
+        "--ant-padding-xs": "4px",
+        "--ant-padding-sm": "8px",
+        "--ant-padding": "8px",
+        "--ant-padding-md": "16px",
+        "--ant-padding-lg": "16px",
+        "--ant-padding-content-horizontal-lg": "16px",
+        "--ant-padding-content-vertical-lg": "12px",
+        "--ant-padding-content-horizontal": "12px",
+        "--ant-padding-content-vertical": "8px",
+        "--ant-padding-content-horizontal-sm": "8px",
+        "--ant-padding-content-vertical-sm": "4px",
+        "--ant-margin-xs": "4px",
+        "--ant-margin-sm": "8px",
+        "--ant-margin": "8px",
+        "--ant-margin-md": "16px",
+        "--ant-margin-lg": "16px"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "zero-aliases",
+      "config": {
+        "components": {
+          "Space": {
+            "paddingXS": 0,
+            "padding": 0,
+            "paddingLG": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-padding-xs": "0px",
+        "--ant-padding": "0px",
+        "--ant-padding-lg": "0px"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "undefined-aliases",
+      "config": {
+        "components": {
+          "Space": {
+            "paddingXS": {
+              "$type": "undefined"
+            },
+            "padding": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "variables": {},
+      "compactVariables": {}
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "key": "space-probe",
+          "prefix": "owned"
+        },
+        "components": {
+          "Space": {
+            "paddingXS": 14,
+            "padding": 20,
+            "paddingLG": 32,
+            "fontSize": 30,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--owned-padding-xs": "14px",
+        "--owned-padding": "20px",
+        "--owned-padding-lg": "32px",
+        "--owned-font-size": "30px",
+        "--owned-color-text": "#722ed1"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "style-priority",
+      "config": {
+        "components": {
+          "Space": {
+            "paddingXS": 14,
+            "padding": 20,
+            "paddingLG": 32,
+            "fontSize": 30,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--ant-padding-xs": "14px",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "32px",
+        "--ant-font-size": "30px",
+        "--ant-color-text": "#722ed1"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "config-objects",
+      "config": {
+        "components": {
+          "Space": {
+            "paddingXS": 14,
+            "padding": 20,
+            "paddingLG": 32,
+            "fontSize": 30,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--ant-padding-xs": "14px",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "32px",
+        "--ant-font-size": "30px",
+        "--ant-color-text": "#722ed1"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "config-functions",
+      "config": {
+        "components": {
+          "Space": {
+            "paddingXS": 14,
+            "padding": 20,
+            "paddingLG": 32,
+            "fontSize": 30,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--ant-padding-xs": "14px",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "32px",
+        "--ant-font-size": "30px",
+        "--ant-color-text": "#722ed1"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "config-empty-functions",
+      "config": {
+        "components": {
+          "Space": {
+            "paddingXS": 14,
+            "padding": 20,
+            "paddingLG": 32,
+            "fontSize": 30,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--ant-padding-xs": "14px",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "32px",
+        "--ant-font-size": "30px",
+        "--ant-color-text": "#722ed1"
+      },
+      "compactVariables": {}
+    },
+    {
+      "name": "config-zero-size",
+      "config": {
+        "components": {
+          "Space": {
+            "paddingXS": 14,
+            "padding": 20,
+            "paddingLG": 32,
+            "fontSize": 30,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--ant-padding-xs": "14px",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "32px",
+        "--ant-font-size": "30px",
+        "--ant-color-text": "#722ed1"
+      },
+      "compactVariables": {}
+    }
+  ]
+}

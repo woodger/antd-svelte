@@ -1,13 +1,14 @@
 <script lang="ts">
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { spaceEntries, spaceGap, spaceHasContent, spaceOrientation } from './space.engine';
   import { connectFeedbackFocus } from './feedback.dom';
-  import type { SpaceContent, SpaceProps } from './space.types';
+  import type { SpaceContent, SpaceProps, SpaceSlots } from './space.types';
 
   let {
     items,
     children,
-    size = 'small',
+    size: customizeSize,
     orientation,
     vertical,
     direction,
@@ -24,6 +25,8 @@
     ...rest
   }: SpaceProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Space');
+  let size = $derived(customizeSize === undefined ? config.space?.size ?? 'small' : customizeSize);
   let entries = $derived(spaceEntries(items, children));
   let latest = $derived(
     entries.reduce((index, item, next) => spaceHasContent(item.children) ? next : index, 0)
@@ -56,8 +59,32 @@
       }
     }
   );
-  let classes = $derived(typeof classNames === 'function' ? classNames(info) : classNames ?? {});
-  let slots = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
+  let semantics = $derived.by(() => {
+    const contextClasses = config.space?.classNames;
+    const contextStyles = config.space?.styles;
+    const inheritedClasses = typeof contextClasses === 'function'
+      ? contextClasses(info) : contextClasses;
+    const inheritedStyles = typeof contextStyles === 'function'
+      ? contextStyles(info) : contextStyles;
+    const localClasses = typeof classNames === 'function' ? classNames(info) : classNames;
+    const localStyles = typeof styles === 'function' ? styles(info) : styles;
+    const classes: SpaceSlots = {};
+    const slots: SpaceSlots = {};
+
+    for (const slot of ['root', 'item', 'separator'] as const) {
+      classes[slot] = [inheritedClasses?.[slot], localClasses?.[slot]].filter(Boolean).join(' ');
+      const layers = [
+        inheritedStyles?.[slot], slot === 'root' && config.space?.style,
+        localStyles?.[slot], slot === 'root' && style
+      ];
+      if (layers.some(value => typeof value === 'string'))
+        slots[slot] = layers.filter(Boolean).join(';');
+    }
+
+    return { classes, styles: slots };
+  });
+  let classes = $derived(semantics.classes);
+  let slots = $derived(semantics.styles);
   let retainedFocus: HTMLElement | undefined;
   $effect.pre(() => {
     const host = nativeElement;
@@ -102,6 +129,8 @@
 {#if entries.length}
   <div {...rest} bind:this={nativeElement} dir={config.direction} class={[
       'ant-space ant-space-css-var',
+      componentTheme.className,
+      config.space?.class,
       `ant-space-${actualOrientation}`,
       config.direction === 'rtl' && 'ant-space-rtl',
       actualAlign && `ant-space-align-${actualAlign}`,
@@ -110,7 +139,7 @@
       rootClassName,
       classes.root
     ]}
-    style={[wrap && 'flex-wrap:wrap', gap.style, slots.root, style].filter(
+    style={[componentTheme.style, wrap && 'flex-wrap:wrap', gap.style, slots.root].filter(
         Boolean
       ).join(
         ';'

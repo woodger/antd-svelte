@@ -173,7 +173,10 @@ export type {
   SpaceContent,
   SpaceOrientation,
   SpaceSize,
-  SpaceSlots
+  SpaceSlots,
+  SpaceSemanticInfo,
+  SpaceSemantic,
+  SpaceConfig
 } from './space.types';
 export { default as Breadcrumb } from './Breadcrumb.svelte';
 export type {
