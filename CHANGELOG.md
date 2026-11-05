@@ -621,6 +621,9 @@
 
 ### Fixed
 
+- Реестр: зарегистрирован integration:result для существующей проверки
+  потребителя; manifest больше не расходится с метаданными пакета по этому ключу.
+
 - QRCode: alias tokens и algorithms подключены к общей теме; canvas/SVG используют
   global colorText с исходным fallback и приоритетом color. Background cover
   получает абсолютную alpha 0.96, включая полупрозрачный colorBgContainer.
