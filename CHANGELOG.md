@@ -9,6 +9,12 @@
 
 ### Added
 
+- Empty: URL/scalar content, PRESENTED_IMAGE_DEFAULT/SIMPLE, ConfigProvider.empty,
+  object/function semantic slots, local prefixCls, rootClassName, imageStyle и refs.
+  Подключены Empty aliases/algorithm и исходные SVG colors с сохранением native режима,
+  inert/ARIA, image=false, responsive/focus contracts. Добавлены все 15 CSS rules,
+  57 официальных UMD-сценариев и SSR/browser-проверки.
+
 - Основной Skeleton: ConfigProvider.skeleton, object/function semantic slots,
   local prefixCls, rootClassName, nativeElement/ref и вложенные class/prefix props.
   Сохранены native host, прежние class/style, status/focus, layout и normalization.

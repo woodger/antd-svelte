@@ -278,7 +278,7 @@ export { default as SkeletonButton } from './SkeletonButton.svelte';
 export { default as SkeletonInput } from './SkeletonInput.svelte';
 export { default as SkeletonImage } from './SkeletonImage.svelte';
 export { default as SkeletonNode } from './SkeletonNode.svelte';
-export { default as Empty } from './Empty.svelte';
+export { default as Empty } from './empty.component';
 export { default as Result } from './Result.svelte';
 export { default as Steps } from './Steps.svelte';
 export { default as Tag } from './Tag.svelte';
@@ -559,6 +559,9 @@ export type {
 } from './skeleton.types';
 export type { SkeletonLocale } from './types';
 export type { EmptyProps, EmptyImage, EmptyDescription } from './empty.types';
+export type {
+  EmptyContent, EmptySemanticSlots, EmptySemanticInfo, EmptySemantic, EmptyConfig, EmptyRef
+} from './empty.types';
 export type { ResultProps, ResultStatus, ResultContent } from './result.types';
 export type {
   StepsProps,

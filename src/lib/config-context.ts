@@ -30,6 +30,7 @@ import type { FlexConfig } from './flex.types';
 import type { SpinConfig } from './spin.types';
 import type { ProgressConfig } from './progress.types';
 import type { SkeletonConfig } from './skeleton.types';
+import type { EmptyConfig } from './empty.types';
 import type { ColorPickerConfig } from './color-picker.types';
 import type { InputNumberConfig } from './input-number.types';
 import type { RadioConfig } from './radio.types';
@@ -78,6 +79,7 @@ export interface ConfigContext {
   readonly spin?: SpinConfig;
   readonly progress?: ProgressConfig;
   readonly skeleton?: SkeletonConfig;
+  readonly empty?: EmptyConfig;
   readonly colorPicker?: ColorPickerConfig;
   readonly inputNumber?: InputNumberConfig;
   readonly radio?: RadioConfig;

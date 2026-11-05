@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **114**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **54**; требуется аудит у **16**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **55**; требуется аудит у **15**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -58,7 +58,7 @@ Candidate означает запись каталога, для которой 
 | [Carousel](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/carousel) | data-display | target | Carousel | Согласованный v1 покрыт | Граница React children/instance и Svelte snippets/typed refs (partial); Произвольный prefix CSS и полный общий token engine (missing) |
 | [Collapse](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/collapse) | data-display | target | Collapse | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
 | [Descriptions](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/descriptions) | data-display | target | Descriptions | Согласованный v1 покрыт | PrefixCls, пользовательские breakpoint/token и глобальный component config (missing) |
-| [Empty](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/empty) | data-display | target | Empty | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
+| [Empty](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/empty) | data-display | target | Empty | Согласованный v1 покрыт | Сохраняемые Svelte/native contracts (partial); Общий prefix, diagnostics и renderEmpty у остальных consumers (missing) |
 | [Image](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/image) | data-display | target | Image, ImagePreviewGroup | Согласованный v1 покрыт | Progress placeholder, полный semantic/config/icons API, container и motion (missing) |
 | [List](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/list) | data-display | target | List, ListItem, ListItemMeta | Согласованный v1 покрыт | Автоматическое mixed-text SSR для непрозрачного snippet (partial); Полный token/prefix/Spin API и React-specific development behavior (missing) |
 | [Listy](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/listy) | data-display | target | Listy | Согласованный v1 покрыт | Полный token/prefix engine и React-specific API (missing) |

@@ -1616,5 +1616,50 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Skeleton: основной каркас и Button/Avatar/Input/Image/Node, block и active.\n * Root reset ограничен marker; имена CSS variables сохранены.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
     "appendRootKeyframes": true,
     "format": "module"
+  },
+  {
+    "id": "empty",
+    "output": "src/lib/vendor/empty.css",
+    "expectedRules": 15,
+    "include": [
+      "\\.ant-empty(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-empty(?![-\\w])",
+        "replacement": ".ant-empty-css-var"
+      },
+      {
+        "pattern": "\\.ant-empty(?![-\\w])",
+        "replacement": ".ant-empty:where(.ant-empty-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Empty: default/simple/small, image, description и footer.\n * Root reset ограничен marker; namespace CSS variables сохранён.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "appendRootKeyframes": true
+  },
+  {
+    "id": "empty-prefix",
+    "output": "src/lib/vendor/empty-prefix.css.js",
+    "expectedRules": 15,
+    "include": [
+      "\\.ant-empty(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-empty(?![-\\w])",
+        "replacement": ".ant-empty-css-var"
+      },
+      {
+        "pattern": "\\.ant-empty(?![-\\w])",
+        "replacement": ".ant-empty:where(.ant-empty-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Empty: default/simple/small, image, description и footer.\n * Root reset ограничен marker; namespace CSS variables сохранён.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "appendRootKeyframes": true,
+    "format": "module"
   }
 ]

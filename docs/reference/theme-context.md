@@ -107,6 +107,7 @@ Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
 Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress и Skeleton получают собственные
 defaults и aliases.
 Flex использует alias overrides без собственных component defaults и без typography reset.
+Empty использует общие aliases/algorithm без собственных component-only defaults.
 InputPassword, InputSearch и ячейки InputOTP используют общий Input token scope.
 Остальные компонентные CSS-потребители ещё переносятся: наличие поля в
 ComponentTokenMap не подтверждает его визуальное покрытие.
@@ -416,6 +417,20 @@ Main сохраняет native host/status/focus, title/div, flex/responsive gua
 [116 source-сценариев](../../tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 primitives и [34 main-сценария](../../tests/browser/fixtures/ant-design-skeleton-main-reference.json)
 сняты из закреплённого UMD с одинаковым inherited global-token окружением.
+
+## Aliases Empty
+
+Empty не определяет component-only tokens; theme.components.Empty принимает общие
+aliases/algorithm, cssVar prefix/key/hash. Image height равен controlHeightLG × 2.5,
+simple — controlHeightLG, small — controlHeightLG × 0.875. Размеры, opacity и цвета
+description используют компонентные aliases; SVG встроенных изображений читает
+глобальные tokens, как в исходнике. GetAsSolidColor сохраняет var(...) и использует
+FastColor 3.0.1 для остальных цветов. Нативный режим сохраняет прежние SVG patterns.
+ConfigProvider.empty задаёт image и object/function semantic root/image/description/footer.
+Root styles: context styles.root → context style → local styles.root → local style;
+imageStyle предшествует semantic image styles.
+[57 UMD-сценариев](../../tests/browser/fixtures/ant-design-empty-reference.json) сверяют
+этот порядок, global SVG paint, aliases, algorithm и CSS variables.
 
 ## Токены Spin
 

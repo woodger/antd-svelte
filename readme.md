@@ -3682,22 +3682,29 @@ Empty показывает отсутствие данных и предлага
 Данными, фильтром и результатом действия управляет владелец; компонент не
 выполняет запросов и не создаёт таймеров.
 
-Image принимает default (по умолчанию), simple, собственный Snippet или false.
+Image принимает default (по умолчанию), simple, URL, собственный Snippet или scalar.
+Empty.PRESENTED_IMAGE_DEFAULT/SIMPLE дают прежние aliases default/simple;
+остальные строки трактуются как URL и выводятся через img с draggable=false.
+Alt берётся из строкового description, иначе используется empty.
 False удаляет изображение вместе с контейнером. Встроенные иллюстрации — SVG
-Ant Design 6.6.8. Их цвета используют текущие CSS-токены; SVG-паттерны совмещают
+Ant Design 6.6.8. В нативном режиме их цвета используют текущие CSS-токены; SVG-паттерны совмещают
 полупрозрачный fill с colorBgContainer, сохраняя непрозрачную заливку при
 перекрытии частей. Идентификаторы уникальны для каждого экземпляра и стабильны
-между SSR и гидратацией. URL картинки передавайте через нативный img внутри
-Snippet. Контейнер изображения декоративный: aria-hidden и inert исключают
+между SSR и гидратацией. При явной source theme используется исходный getAsSolidColor
+и цвета глобальной темы, независимо от component aliases Empty. CSS-переменные
+сохраняются без предварительного смешивания; декоративный SVG получает исходный title.
+Контейнер изображения декоративный: aria-hidden и inert исключают
 его содержимое из accessibility tree, Tab и взаимодействий.
 
-Description принимает строку, Snippet или false. Undefined использует
+Description принимает scalar или Snippet. Undefined использует
 Locale.empty.description: ruRU — «Нет данных», enUS — «No data»; отсутствующие
-поля используют ruRU. False и пустая строка убирают описание без fallback.
+поля используют ruRU. False, null и пустая строка убирают описание без fallback.
+Ноль выводится текстом; true сохраняет пустой description div, как в закреплённом upstream.
 Строки экранируются. Generic locale.emptyText для Select и других компонентов
 сохраняет прежний смысл и значения.
 
-Children выводится в footer с обычными controls и Tab-навигацией. Изменение
+Children принимает scalar или Snippet и выводится в footer с обычными controls и Tab-навигацией.
+Ноль сохраняется; false/null/пустая строка убирают footer, true оставляет пустой div. Изменение
 image/description не пересоздаёт сохранённые действия. Без явного aria-label
 или aria-labelledby корень остаётся обычным div; с ними — именованная group.
 Id/class/style и aria-describedby относятся к корню. Empty не создаёт live-region,
@@ -3729,10 +3736,26 @@ Locale.table.emptyText, включая существующие переопре
 восстанавливает записи при сбросе фильтра и очищает список. Владелец выбирает
 стабильный region таблицы после создания/сброса поиска и поле имени после очистки.
 
-В первой версии нет глобального ConfigProvider.renderEmpty, интеграции с Select,
-semantic classNames/styles, prefixCls/rootClassName и устаревшего imageStyle.
-React-константам PRESENTED_IMAGE_DEFAULT/SIMPLE соответствуют строковые значения
-image. Собственный image Snippet отвечает за свои ресурсы и анимацию.
+ConfigProvider.empty задаёт image, class/style и object/function classNames/styles;
+вложенный record заменяется целиком, undefined наследует родительский.
+Локальный image имеет приоритет, null/undefined используют context image и затем default.
+Semantic slots root/image/description/footer получают исходные props без defaults.
+Root styles: context styles.root → context style → local styles.root → local style.
+Устаревший imageStyle применяется перед semantic image styles. PrefixCls меняет
+BEM-классы с fallback ant-empty; rootClassName относится к корню.
+Bind:nativeElement и поле nativeElement объекта bind:ref указывают на корневой div после mount;
+при unmount bindings очищаются до undefined, при SSR не присваиваются.
+
+Empty не имеет собственных component tokens; theme.components.Empty поддерживает
+общие aliases/algorithm, variable prefix/key/hash, dark и compact. Все 15 исходных
+CSS rules включают small; для совместимого размера можно добавить class="ant-empty-small".
+[57 UMD-сценариев](./tests/browser/fixtures/ant-design-empty-reference.json) сверяют классы,
+slot styles, изображения и их исходные цвета при явной source theme.
+Native image=false, inert/ARIA, responsive guards, footer wrapping, paint patterns
+прежнего режима и восстановление фокуса сохранены.
+Общий ConfigProvider prefix и React diagnostics остаются в работе. RenderEmpty уже
+используется List; интеграция остальных consumers, включая Select, ещё не завершена.
+Собственный image Snippet отвечает за свои ресурсы и анимацию.
 
 ## Result
 
@@ -8904,13 +8927,15 @@ Skeleton.svelte использует декоративный div для title, 
 skeleton.engine.ts рассчитывает конфигурацию; skeleton.dom.ts сохраняет фокус
 при замене children. Theme.css связывает градиент с fill-токенами темы.
 Новые иконки и лицензии не добавлены.
-[vendor/empty.css](./src/lib/vendor/empty.css) содержит 13 правил default/simple из того
-же архива. Корневые селекторы ограничены :where(.ant-empty-css-var); small исключён.
+[vendor/empty.css](./src/lib/vendor/empty.css) содержит все 15 правил default/simple/small
+из того же архива. Корневые селекторы ограничены :where(.ant-empty-css-var).
 Empty.svelte адаптирует snippets, локаль, inert-изображение, перенос текста и footer.
 EmptyImage.svelte переносит геометрию es/empty/empty.js и es/empty/simple.js:
-paths, ellipse, circle, viewBox и transforms сохранены, декоративный SVG не
-дублирует описание через title. Native SVG patterns заменяют getAsSolidColor,
-накладывая fill-токен на colorBgContainer с уникальными $props.id().
+paths, ellipse, circle, viewBox и transforms сохранены. Native SVG patterns заменяют
+getAsSolidColor, накладывая fill-токен на colorBgContainer с уникальными $props.id(),
+без title. При явной source theme empty-image.engine.ts повторяет getAsSolidColor
+из закреплённого исходника с локальным портом FastColor 3.0.1; SVG получает исходный title.
+Рецепты empty/empty-prefix проверяют архив и воспроизводят CSS и local prefix template.
 feedback.dom.ts управляет общим для Empty/Result focusin/MutationObserver
 и восстановлением после tick.
 SVG включены в исходники и покрываются существующей MIT-лицензией Ant Design.

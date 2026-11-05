@@ -27,9 +27,10 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
-  | 'Progress' | 'Skeleton';
+  | 'Progress' | 'Skeleton' | 'Empty';
 
 const factories = {
+  Empty: () => ({}),
   Skeleton: (token: GlobalToken) => ({
     color: token.colorFillContent,
     colorGradientEnd: token.colorFill,
@@ -167,7 +168,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Flex: [],
   Spin: [],
   Progress: [],
-  Skeleton: []
+  Skeleton: [],
+  Empty: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]
