@@ -6,7 +6,9 @@
   import { connectFeedbackFocus } from './feedback.dom';
   import { animateSegmentedThumb } from './segmented.dom';
   import Tooltip from './Tooltip.svelte';
-  import type { SegmentedOption, SegmentedProps, SegmentedValue } from './segmented.types';
+  import type {
+    SegmentedOption, SegmentedProps, SegmentedValue, SegmentedSemanticSlots
+  } from './segmented.types';
 
   let {
     options,
@@ -63,8 +65,32 @@
       }
     }
   );
-  let classes = $derived(typeof classNames === 'function' ? classNames(info) : classNames ?? {});
-  let slotStyles = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
+  let semantics = $derived.by(() => {
+    const contextClasses = config.segmented?.classNames;
+    const contextStyles = config.segmented?.styles;
+    const inheritedClasses = typeof contextClasses === 'function'
+      ? contextClasses(info) : contextClasses;
+    const inheritedStyles = typeof contextStyles === 'function'
+      ? contextStyles(info) : contextStyles;
+    const localClasses = typeof classNames === 'function' ? classNames(info) : classNames;
+    const localStyles = typeof styles === 'function' ? styles(info) : styles;
+    const classes: SegmentedSemanticSlots = {};
+    const slots: SegmentedSemanticSlots = {};
+
+    for (const slot of ['root', 'item', 'label', 'icon'] as const) {
+      classes[slot] = [inheritedClasses?.[slot], localClasses?.[slot]].filter(Boolean).join(' ');
+      const layers = [
+        inheritedStyles?.[slot], slot === 'root' && config.segmented?.style,
+        localStyles?.[slot], slot === 'root' && style
+      ];
+      if (layers.some(value => typeof value === 'string'))
+        slots[slot] = layers.filter(Boolean).join(';');
+    }
+
+    return { classes, styles: slots };
+  });
+  let classes = $derived(semantics.classes);
+  let slotStyles = $derived(semantics.styles);
   let group = $state<HTMLDivElement>();
   let moving = $state(false);
   let previousValue = untrack(() => selected);
@@ -174,12 +200,12 @@
       classes.item
     ]} style={slotStyles.item}>
     <input type="radio" class="ant-segmented-item-input" name={nativeName} checked={item.value === selected} disabled={disabled || item.disabled} aria-label={item['aria-label']
-        ?? (item.icon && item.label === undefined
+        ?? (item.icon && (item.label === undefined || item.label === '')
           ? item.title
           : undefined)} onchange={() => choose(item.value)} onkeydown={handleKey} />
     <div class={['ant-segmented-item-label', classes.label]} title={item.title} style={slotStyles.label}>
-      {#if item.icon}<span class={['ant-segmented-item-icon', classes.icon]} style={slotStyles.icon} aria-hidden="true">{@render item.icon()}</span>{/if}
-      {#if item.icon && item.label !== undefined}<span>{#if typeof item.label === 'function'}{@render item.label()}{:else}{item.label}{/if}</span>
+      <!-- Интервал icon/label задаёт CSS margin; текстовый пробел меняет исходную ширину. -->
+      {#if item.icon}<span class={['ant-segmented-item-icon', classes.icon]} style={slotStyles.icon} aria-hidden="true">{@render item.icon()}</span>{/if}{#if item.icon && item.label !== undefined && item.label !== ''}<span>{#if typeof item.label === 'function'}{@render item.label()}{:else}{item.label}{/if}</span>
       {:else if typeof item.label === 'function'}{@render item.label()}{:else}{item.label}{/if}
     </div>
   </label>
@@ -202,9 +228,10 @@
       shape === 'round' && 'ant-segmented-shape-round',
       className,
       rootClassName,
+      config.segmented?.class,
       classes.root
     ]}
-  style={[componentTheme.style, slotStyles.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, slotStyles.root].filter(Boolean).join(';')}>
   <div class="ant-segmented-group" bind:this={group}>
     {#each items as item (item.value)}
       {#if item.tooltip}

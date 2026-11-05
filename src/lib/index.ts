@@ -324,7 +324,10 @@ export type {
   SegmentedProps,
   SegmentedValue,
   SegmentedOption,
-  SegmentedSemanticSlots
+  SegmentedSemanticSlots,
+  SegmentedSemanticInfo,
+  SegmentedSemantic,
+  SegmentedConfig
 } from './segmented.types';
 export { default as StatisticTimer } from './StatisticTimer.svelte';
 export { default as StatisticCountdown } from './StatisticCountdown.svelte';

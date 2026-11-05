@@ -508,9 +508,23 @@ Bind:nativeElement даёт корневой div Statistic. Фикстура —
 Options — строки/числа или объекты value/label/icon/title/tooltip/disabled/class.
 Значения должны быть уникальными; число 0 и строка "0" различаются. Label —
 строка, число или Snippet; icon — Snippet. Для icon-only задавайте title либо
-aria-label option. Title по умолчанию берётся из scalar label без icon,
+aria-label option. Пустая строка рядом с icon не создаёт текстовый span и считается
+icon-only; числовой 0 отображается. Интервал icon/label задаётся CSS margin.
+Title по умолчанию берётся из scalar label без icon,
 как в Ant Design. ClassNames/styles поддерживают root/item/label/icon, объект
 либо callback ({ props }); styles — CSS-строки. Style перекрывает styles.root.
+
+ConfigProvider.segmented задаёт class/style и classNames/styles всех четырёх slots.
+Undefined наследует родительский record; явный record, включая {}, заменяет его
+целиком. Slot classes объединяются context → local; root styles идут в порядке
+context styles.root → context style → local styles.root → local style.
+Callbacks могут возвращать undefined. Они сохраняют существующие native props:
+generated name и defaults disabled/block/vertical; size остаётся локальным prop,
+даже при наследуемом componentSize. Глобальный callback типизирован для разных
+value/options и не меняет выбор значения.
+Сверка: [UMD](./tests/browser/fixtures/ant-design-segmented-config-reference.json),
+[SSR](./tests/package/segmented-config.ssr.test.ts),
+[browser](./tests/browser/segmented-config.spec.ts), `?fixture=segmented-config`.
 
 ConfigProvider.theme.components.Segmented применяет все восемь компонентных
 токенов: padding/фон track, обычный/selected/hover текст и фоны selected/hover/active.
@@ -565,7 +579,7 @@ children. Поддержаны hover/focus/Escape, в том числе для d
 Локальный Tooltip добавляет служебный span с display:contents и native popover;
 label остаётся flex-item для block и измерений thumb. Пользовательский tooltip.style
 может переопределить display; это меняет компоновку по явному выбору владельца.
-PrefixCls и глобальный component config пока отсутствуют.
+PrefixCls пока отсутствует.
 
 ## Grid: Row, Col и breakpoints
 

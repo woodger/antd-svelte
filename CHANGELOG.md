@@ -9,6 +9,10 @@
 
 ### Added
 
+- ConfigProvider.segmented: class/style и semantic slots с object/function callbacks,
+  исходными приоритетами и заменой вложенных records. Сохранены native callback
+  defaults, binding, radio/focus/ref и независимые scopes; добавлены Source/SSR/browser-проверки.
+
 - Popover/Popconfirm: id/fallback, forceRender, fresh и локальный zIndex с передачей
   через AvatarGroup.max.popover. Скрытые title/content, slots/ID и кнопки следуют
   source cache; opaque Snippet captures сохраняют Svelte-реактивность.
@@ -612,6 +616,10 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Segmented: убран лишний текстовый пробел между icon и label; пустая строка
+  больше не добавляет пустой span с отступом, а числовой 0 сохраняется.
+  Icon-only с пустой подписью использует title как native accessible label.
 
 - Segmented: подключены все восемь компонентных токенов, включая trackPadding
   и цвета selected/hover/active. Сохранены native темы, radio selection/focus,

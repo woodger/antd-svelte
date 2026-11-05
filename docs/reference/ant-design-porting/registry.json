@@ -9840,7 +9840,19 @@
         "tests/browser/fixtures/SegmentedThemeFixtures.svelte",
         "tests/browser/segmented-theme-metrics.ts",
         "tests/browser/segmented-theme.spec.ts",
-        "tests/package/segmented-theme.ssr.test.ts"
+        "tests/package/segmented-theme.ssr.test.ts",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/index.ts",
+        "tests/browser/fixtures/ant-design-segmented-config-reference.json",
+        "tests/browser/fixtures/segmented-config-presets.ts",
+        "tests/browser/fixtures/SegmentedConfigCase.svelte",
+        "tests/browser/fixtures/SegmentedConfigControl.svelte",
+        "tests/browser/fixtures/SegmentedConfigFixtures.svelte",
+        "tests/browser/fixtures/SegmentedConfigMetadataCase.svelte",
+        "tests/browser/segmented-config-metrics.ts",
+        "tests/browser/segmented-config.spec.ts",
+        "tests/package/segmented-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -9924,12 +9936,50 @@
           "note": "Фабрика и root theme hook следуют 6.6.8: trackPadding/trackBg, itemColor/itemHoverColor/itemHoverBg/itemSelectedBg/itemActiveBg/itemSelectedColor; zero/string/undefined, global/component aliases и algorithms, cssVar.prefix. Normal/small/large/block/round/vertical/disabled, RTL, nested/reset/sibling providers, semantic/user priority и hover/active pseudo states. Native темы и radio/FormData/keyboard сохраняются; обновление CSS не сбрасывает selection/focus/DOM, изменение геометрии отменяет thumb. SSR не создаёт animation/observer/timers."
         },
         {
+          "id": "source-component-config",
+          "title": "ConfigProvider.segmented и context/local semantic slots",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "src/lib/segmented.types.ts",
+            "src/lib/Segmented.svelte",
+            "tests/browser/fixtures/ant-design-segmented-config-reference.json",
+            "tests/browser/fixtures/segmented-config-presets.ts",
+            "tests/browser/fixtures/SegmentedConfigCase.svelte",
+            "tests/browser/fixtures/SegmentedConfigControl.svelte",
+            "tests/browser/fixtures/SegmentedConfigFixtures.svelte",
+            "tests/browser/fixtures/SegmentedConfigMetadataCase.svelte",
+            "tests/browser/segmented-config-metrics.ts",
+            "tests/browser/segmented-config.spec.ts",
+            "tests/package/segmented-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Class/style и classNames/styles root/item/label/icon, object/function callbacks и undefined return. Context/local classes объединяются; root styles следуют context slots→context style→local slots→local style. Вложенный undefined наследует record, {} и собственный record заменяют его целиком; siblings изолированы. Callbacks сохраняют local size и исходные defaults shape. Live config сохраняет value, DOM/radio/focus/ref и не вызывает onChange. Лишний whitespace между icon и label удалён по исходной геометрии; SSR не создаёт DOM/refs/animation/timers."
+        },
+        {
+          "id": "native-semantic-props",
+          "title": "Существующие native defaults в semantic callback props",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/segmented.types.ts",
+            "tests/browser/fixtures/ant-design-segmented-config-reference.json",
+            "tests/browser/fixtures/SegmentedConfigMetadataCase.svelte",
+            "tests/package/segmented-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Сохраняется существующий Svelte callback contract: props.name содержит generated radio name, disabled/block/vertical нормализованы к false. UMD 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d в callbackDefaults probe с options=[0,1] и ConfigProvider componentSize=large передаёт эти отсутствующие props как undefined. Size остаётся локальным undefined в обоих вариантах; shape=default. Новые context callbacks используют те же native props, что прежние локальные."
+        },
+        {
           "id": "global-config",
-          "title": "PrefixCls и глобальный component config",
+          "title": "PrefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Сохраняются текущие Svelte-соглашения ConfigProvider; пользовательские настройки доступны через style/semantic slots."
+          "note": "Локальный и общий prefixCls ещё не перенесены; theme/components и ConfigProvider.segmented поддержаны отдельными features."
         }
       ]
     },

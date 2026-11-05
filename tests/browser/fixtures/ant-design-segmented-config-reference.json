@@ -1,0 +1,3759 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "callbackDefaults": {
+      "name": "undefined",
+      "disabled": "undefined",
+      "block": "undefined",
+      "vertical": "undefined",
+      "size": "undefined",
+      "shape": "default"
+    },
+    "operation": "Segmented ConfigProvider class/style and semantic object/function slots: context/local style priority, undefined callbacks, empty slots, local/provider size, shape, icons, RTL/vertical/disabled, inherited/undefined/empty/replaced records and independent siblings."
+  },
+  "viewport": {
+    "width": 1100,
+    "height": 1000
+  },
+  "cases": [
+    {
+      "name": "defaults",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 97.6875
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 101.6875
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "zero-icon-label",
+      "context": "object",
+      "labelKind": "zero",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 52.015625
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 52.015625
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 52.015625
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 48.015625
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 68.015625
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 72.015625
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 48.015625
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "empty-icon-label",
+      "context": "object",
+      "labelKind": "empty",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 38
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 38
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 38
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 34
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 54
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 58
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 34
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "missing-icon-label",
+      "context": "object",
+      "labelKind": "missing",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 38
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 38
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 38
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 34
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 54
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 58
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 34
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "context-record",
+      "context": "object",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 97.6875
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 101.6875
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "context-style",
+      "context": "object-style",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 97.6875
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 101.6875
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "local-record",
+      "context": "object",
+      "local": "object",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-nested-class",
+              "segcfg-nested-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-nested-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-nested-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-sibling-class",
+              "segcfg-sibling-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-sibling-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-sibling-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "28px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "28px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        }
+      }
+    },
+    {
+      "name": "local-style",
+      "context": "object-style",
+      "local": "object-style",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "10px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "10px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "10px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "10px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-nested-class",
+              "segcfg-nested-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-nested-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-nested-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "10px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-sibling-class",
+              "segcfg-sibling-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-sibling-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-sibling-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "10px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "28px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "10px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "28px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        }
+      }
+    },
+    {
+      "name": "context-callback",
+      "context": "function",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 97.6875
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 101.6875
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "local-callback",
+      "context": "function",
+      "local": "function",
+      "size": "small",
+      "shape": "round",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-small",
+              "meta-shape-round",
+              "meta-count-3",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "9px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "18px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-small",
+              "meta-shape-round",
+              "meta-count-3",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "9px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "18px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-small",
+              "meta-shape-round",
+              "meta-count-3",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "9px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "18px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-local-root",
+              "meta-size-small",
+              "meta-shape-round",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "9px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "18px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-nested-class",
+              "segcfg-nested-root",
+              "segcfg-local-root",
+              "meta-size-small",
+              "meta-shape-round",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-nested-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-nested-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "9px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "18px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-sibling-class",
+              "segcfg-sibling-root",
+              "segcfg-local-root",
+              "meta-size-small",
+              "meta-shape-round",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-sibling-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-sibling-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "9px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "20px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-local-root",
+              "meta-size-small",
+              "meta-shape-round",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "9px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "20px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        }
+      }
+    },
+    {
+      "name": "provider-size-callback",
+      "context": "function",
+      "componentSize": "large",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "34px",
+            "width": 87.0625
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "34px",
+            "width": 87.0625
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "34px",
+            "width": 87.0625
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "34px",
+            "width": 83.0625
+          },
+          "icon": {
+            "fontSize": "16px",
+            "display": "inline-block",
+            "marginEnd": "3.2px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "34px",
+            "width": 103.0625
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 101.6875
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "undefined-context-callback",
+      "context": "undefined",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class"
+            ],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class"
+            ],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class"
+            ],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 97.6875
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 101.6875
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "empty-local",
+      "context": "object-style",
+      "local": "empty",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 97.6875
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 101.6875
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "undefined-local-callback",
+      "context": "object-style",
+      "local": "undefined",
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "6px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 81.6875
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class"
+            ],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 97.6875
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 101.6875
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class"
+            ],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.88)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 77.6875
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    },
+    {
+      "name": "rtl",
+      "context": "function-style",
+      "local": "object",
+      "rtl": true,
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "rtl"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "rtl"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-context-class",
+              "segcfg-context-root",
+              "meta-size-auto",
+              "meta-shape-default",
+              "meta-count-3",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-context-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-context-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-context-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "rtl"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "rtl"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-nested-class",
+              "segcfg-nested-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-nested-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-nested-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "rtl"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "26px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-sibling-class",
+              "segcfg-sibling-root",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-sibling-item",
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-sibling-label",
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon",
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "28px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [
+              "segcfg-local-class",
+              "segcfg-local-root-class",
+              "segcfg-local-root"
+            ],
+            "item": [
+              "segcfg-local-item"
+            ],
+            "label": [
+              "segcfg-local-label"
+            ],
+            "icon": [
+              "segcfg-local-icon"
+            ]
+          },
+          "root": {
+            "padding": "8px",
+            "background": "rgb(255, 247, 230)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(114, 46, 209)",
+          "label": {
+            "padding": "0px 17px",
+            "minHeight": "28px",
+            "width": 89.6875
+          },
+          "icon": {
+            "fontSize": "23px",
+            "display": "inline-block",
+            "marginEnd": "4.6px"
+          }
+        }
+      }
+    },
+    {
+      "name": "vertical-disabled",
+      "context": "object",
+      "vertical": true,
+      "disabled": true,
+      "metrics": {
+        "normal": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 83.125
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "inherit": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 83.125
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "undefined": {
+          "classes": {
+            "root": [
+              "segcfg-context-class",
+              "segcfg-context-root"
+            ],
+            "item": [
+              "segcfg-context-item"
+            ],
+            "label": [
+              "segcfg-context-label"
+            ],
+            "icon": [
+              "segcfg-context-icon"
+            ]
+          },
+          "root": {
+            "padding": "4px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 13px",
+            "minHeight": "26px",
+            "width": 83.125
+          },
+          "icon": {
+            "fontSize": "19px",
+            "display": "inline-block",
+            "marginEnd": "3.8px"
+          }
+        },
+        "empty": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "3px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.25)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "26px",
+            "width": 79.125
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        },
+        "replace": {
+          "classes": {
+            "root": [
+              "segcfg-nested-class",
+              "segcfg-nested-root"
+            ],
+            "item": [
+              "segcfg-nested-item"
+            ],
+            "label": [
+              "segcfg-nested-label"
+            ],
+            "icon": [
+              "segcfg-nested-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 21px",
+            "minHeight": "26px",
+            "width": 99.125
+          },
+          "icon": {
+            "fontSize": "27px",
+            "display": "inline-block",
+            "marginEnd": "5.4px"
+          }
+        },
+        "sibling": {
+          "classes": {
+            "root": [
+              "segcfg-sibling-class",
+              "segcfg-sibling-root"
+            ],
+            "item": [
+              "segcfg-sibling-item"
+            ],
+            "label": [
+              "segcfg-sibling-label"
+            ],
+            "icon": [
+              "segcfg-sibling-icon"
+            ]
+          },
+          "root": {
+            "padding": "14px",
+            "background": "rgb(230, 244, 255)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgb(135, 56, 0)",
+          "label": {
+            "padding": "0px 23px",
+            "minHeight": "28px",
+            "width": 103.125
+          },
+          "icon": {
+            "fontSize": "29px",
+            "display": "inline-block",
+            "marginEnd": "5.8px"
+          }
+        },
+        "outside": {
+          "classes": {
+            "root": [],
+            "item": [],
+            "label": [],
+            "icon": []
+          },
+          "root": {
+            "padding": "2px",
+            "background": "rgb(245, 245, 245)",
+            "direction": "ltr"
+          },
+          "itemColor": "rgba(0, 0, 0, 0.25)",
+          "label": {
+            "padding": "0px 11px",
+            "minHeight": "28px",
+            "width": 79.125
+          },
+          "icon": {
+            "fontSize": "14px",
+            "display": "inline-block",
+            "marginEnd": "2.8px"
+          }
+        }
+      }
+    }
+  ]
+}
