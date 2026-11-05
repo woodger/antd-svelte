@@ -21,15 +21,30 @@ import {
 } from './theme-overlay-tokens.engine';
 import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
   from './theme-css-variables.engine';
-import type { GlobalToken } from './theme-component-token.types';
+import type { CardComponentToken, GlobalToken } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
-  | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse';
+  | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card';
 
 const factories = {
+  Card: (token: GlobalToken & Partial<CardComponentToken>) => ({
+    headerBg: 'transparent',
+    headerFontSize: token.fontSizeLG,
+    headerFontSizeSM: token.fontSize,
+    headerHeight: token.fontSizeLG * token.lineHeightLG + token.padding * 2,
+    headerHeightSM: token.fontSize * token.lineHeight + token.paddingXS * 2,
+    actionsBg: token.colorBgContainer,
+    actionsLiMargin: `${token.paddingSM}px 0`,
+    tabsMarginBottom: -token.padding - token.lineWidth,
+    extraColor: token.colorText,
+    bodyPaddingSM: 12,
+    headerPaddingSM: 12,
+    bodyPadding: token.bodyPadding ?? token.paddingLG,
+    headerPadding: token.headerPadding ?? token.paddingLG
+  }),
   Collapse: (token: GlobalToken) => ({
     headerPadding: `${token.paddingSM}px ${token.padding}px`,
     headerPaddingSM: `${token.paddingXS}px ${token.paddingSM}px ${token.paddingXS}px ${token.paddingXS}px`,
@@ -197,7 +212,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Empty: [],
   Result: [],
   Alert: [],
-  Collapse: []
+  Collapse: [],
+  Card: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

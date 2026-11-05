@@ -881,12 +881,20 @@ control. Это доступная Svelte-адаптация поверх исх
 Variant=outlined; variant имеет приоритет над legacy bordered=false. Hoverable
 по умолчанию false, type=inner меняет header/body. Small наследуется из явно
 заданного ConfigProvider.componentSize; medium/middle/default/large используют
-обычную геометрию. Small body/header padding остаётся фиксированным 12px;
+обычную геометрию. По умолчанию small body/header padding равен 12px;
 остальные размеры/цвета используют theme/compact tokens.
 ClassNames/styles Card принимают root/header/body/extra/title/actions/cover,
 Meta — root/section/avatar/title/description, объект либо callback ({ props }).
 Style корня перекрывает styles.root; styles.header/body перекрывают legacy
 headStyle/bodyStyle. Meta root следует тому же приоритету.
+
+ConfigProvider.theme.components.Card применяет все 13 компонентных токенов
+эталона, включая bodyPadding/bodyPaddingSM, headerHeight/headerHeightSM,
+headerBg и actionsBg. Defaults пересчитываются из aliases и component algorithm;
+вложенные providers, inherit=false, dark/compact и реактивные изменения изолированы.
+Переменные темы идут перед semantic/user styles. Grid/Meta наследуют scope Card;
+padding Grid использует paddingLG, а не bodyPadding, как в upstream.
+Настройки theme.cssVar описаны в [справочнике темы](docs/reference/theme-context.md).
 
 CardGrid по умолчанию hoverable=true и width=33.33%; style переопределяет ширину.
 Card определяет только прямые Grid внутри body. При SSR CSS :has сохраняет
@@ -909,7 +917,9 @@ activeTabKey имеет приоритет над tabProps.activeKey. TabBarExtr
 
 Галерея — `/ant-design#card`, фикстура — `?fixture=card`; unit/SSR/Chromium
 проверяют стили, слоты, Grid, загрузку/фокус и вкладки. Рецепт card извлекает
-59 правил без keyframes. PrefixCls, глобальный variant/component config/tokens
+59 правил без keyframes. Компонентные темы отдельно сверяются с UMD 6.6.8 в
+`tests/browser/card-theme.spec.ts`, фикстура — `?fixture=card-theme`.
+PrefixCls, глобальный variant/component config
 и отсутствующие возможности Tabs остаются в полном объёме миграции.
 
 ## Breadcrumb

@@ -593,6 +593,12 @@
 
 ### Fixed
 
+- Card: подключены все 13 компонентных токенов к CSS корня. Body/header padding,
+  header height/background и actions background теперь учитывают
+  ConfigProvider.theme.components.Card; aliases, component algorithms,
+  nested scopes и реактивные обновления сверяются с UMD 6.6.8.
+  Сохранены semantic/user style priorities, Grid/Meta, loading, вкладки и фокус.
+
 - Menu: восстановлен scoped link reset в стандартной теме и cssVar, включая
   inline/popup-подменю. Сохранены пользовательские decoration tokens, inline styles,
   цвета пунктов, href, выбор и клавиатура; добавлены CSS-рецепт и 39 UMD-сценариев.

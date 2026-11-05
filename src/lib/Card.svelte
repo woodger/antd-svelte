@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { cardHasContent, cardTabItems } from './card.engine';
   import { connectCardGrid } from './card.dom';
   import { createSkeletonFocus } from './skeleton.dom';
@@ -39,6 +40,7 @@
     ...rest
   }: CardProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Card');
   const focus = createSkeletonFocus();
   let body = $state<HTMLDivElement>();
   let detectedGrid = $state(false);
@@ -116,6 +118,7 @@
 <div {...rest} bind:this={nativeElement} dir={config.direction} data-ant-contain-grid={containGrid === false ? 'false' : undefined}
   class={[
       'ant-card ant-card-css-var',
+      componentTheme.className,
       loading && 'ant-card-loading',
       mergedVariant !== 'borderless' && 'ant-card-bordered',
       hoverable && 'ant-card-hoverable',
@@ -128,7 +131,7 @@
       rootClassName,
       classes.root
     ]}
-  style={[slots.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, slots.root, style].filter(Boolean).join(';')}>
   {#if cardHasContent(title) || cardHasContent(extra) || tabList}
     <div class={['ant-card-head', classes.header]} style={[headStyle, slots.header].filter(Boolean).join(';')}>
       <div class="ant-card-head-wrapper">

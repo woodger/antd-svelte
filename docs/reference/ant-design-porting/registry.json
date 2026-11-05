@@ -7913,7 +7913,20 @@
         "src/lib/CardMeta.svelte",
         "src/lib/card.test.ts",
         "tests/browser/card.spec.ts",
-        "integration:card"
+        "integration:card",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-card-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-card-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-card-theme-reference.json",
+        "tests/browser/fixtures/card-theme-presets.ts",
+        "tests/browser/fixtures/CardThemeCard.svelte",
+        "tests/browser/fixtures/CardThemeCase.svelte",
+        "tests/browser/fixtures/CardThemeFixtures.svelte",
+        "tests/browser/card-theme-metrics.ts",
+        "tests/browser/card-theme.spec.ts",
+        "tests/package/card-theme.ssr.test.ts",
+        "readme.md",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -7951,8 +7964,31 @@
           "note": "Локальные Tabs сохраняют согласованную ручную клавиатурную модель. Размер large/small, defaultActiveTabKey > tabProps.defaultActiveKey, label > legacy tab; левый/правый native extra."
         },
         {
+          "id": "component-theme-tokens",
+          "title": "Все 13 component tokens, aliases и component algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Card.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-card-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-card-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-card-theme-reference.json",
+            "tests/browser/fixtures/card-theme-presets.ts",
+            "tests/browser/fixtures/CardThemeCard.svelte",
+            "tests/browser/fixtures/CardThemeCase.svelte",
+            "tests/browser/fixtures/CardThemeFixtures.svelte",
+            "tests/browser/card-theme-metrics.ts",
+            "tests/browser/card-theme.spec.ts",
+            "tests/package/card-theme.ssr.test.ts",
+            "readme.md",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Body/header padding, font/height, header/actions background, actions margin, tabs margin и extra color подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. Нули, CSS units, явный undefined, aliases, общий/компонентный dark/compact algorithm сверяются с официальным UMD: 13 наборов CSS-деклараций и 30 сценариев normal/small/inner/tabs/grid/loading, nested/reset/sibling scopes и RTL. Grid/Meta наследуют Card scope; Grid padding использует paddingLG, inner body — общий вертикальный padding. Reactive updates, inherit=false, снятие темы и unmount сохраняют native contracts; draft/focus/selection не сбрасываются при обновлении темы. Публичный cssVar принимает объект; true/false из сообщения о дефекте проверяются только как JS runtime inputs и не подтверждают boolean theme API."
+        },
+        {
           "id": "global-config",
-          "title": "PrefixCls, глобальный variant/component config/tokens и полный API Tabs",
+          "title": "PrefixCls, глобальный variant/component config и полный API Tabs",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
@@ -13694,6 +13730,29 @@
             "tests/browser/fixtures/ant-design-alert-reference.json"
           ],
           "note": "Source variant, closable/closeIcon, четыре status icons, class/style и object/function slots с record replacement и локальными priorities. Alert получает четыре tokens/aliases/algorithm и local prefix CSS; native accessibility, закрытие и layout сохраняются отдельно."
+        },
+        {
+          "id": "card-theme-tokens",
+          "title": "Исходные Card component tokens и применение к Card/Grid/Meta",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Card.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-card-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-card-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-card-theme-reference.json",
+            "tests/browser/fixtures/card-theme-presets.ts",
+            "tests/browser/fixtures/CardThemeCard.svelte",
+            "tests/browser/fixtures/CardThemeCase.svelte",
+            "tests/browser/fixtures/CardThemeFixtures.svelte",
+            "tests/browser/card-theme-metrics.ts",
+            "tests/browser/card-theme.spec.ts",
+            "tests/package/card-theme.ssr.test.ts",
+            "readme.md",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Body/header padding, font/height, header/actions background, actions margin, tabs margin и extra color подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. Нули, CSS units, явный undefined, aliases, общий/компонентный dark/compact algorithm сверяются с официальным UMD: 13 наборов CSS-деклараций и 30 сценариев normal/small/inner/tabs/grid/loading, nested/reset/sibling scopes и RTL. Grid/Meta наследуют Card scope; Grid padding использует paddingLG, inner body — общий вертикальный padding. Reactive updates, inherit=false, снятие темы и unmount сохраняют native contracts; draft/focus/selection не сбрасываются при обновлении темы. Публичный cssVar принимает объект; true/false из сообщения о дефекте проверяются только как JS runtime inputs и не подтверждают boolean theme API."
         }
       ]
     },

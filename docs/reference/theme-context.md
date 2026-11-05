@@ -11,6 +11,8 @@ ConfigProvider принимает source `token`, `algorithm`, `components`, `in
 Расчёт и наследование принадлежат [theme-config.engine.ts](../../src/lib/theme-config.engine.ts),
 Svelte context — [theme-context.svelte.ts](../../src/lib/theme-context.svelte.ts).
 Пакет не зависит от React или CSS-in-JS runtime.
+Публичный theme.cssVar принимает объект { prefix?, key? }; boolean-режимы
+Ant Design пока не перенесены. В частности, cssVar=false не отключает CSS-переменные.
 
 ## Использование
 
@@ -104,7 +106,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress, Skeleton, Result, Alert и Collapse получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress, Skeleton, Result, Alert, Collapse и Card получают собственные
 defaults и aliases.
 Flex использует alias overrides без собственных component defaults и без typography reset.
 Empty использует общие aliases/algorithm без собственных component-only defaults.
@@ -431,6 +433,26 @@ component algorithm, dark/compact и cssVar prefix/key. ConfigProvider.collapse
 управляет defaults стрелки и оформления; root/header/title/body/icon slots и item
 приоритеты описаны в [Collapse](../../readme.md#collapse). Native button получает
 header styles и полную область нажатия; высота панели меняется без React motion.
+
+## Токены Card
+
+Все 13 component tokens подготавливаются по Card/style закреплённого 6.6.8.
+Header font/height, обычные body/header padding, actions background/margin,
+extra color и tabs margin пересчитываются из aliases; small body/header padding
+по умолчанию равен 12px независимо от compact. Явные component overrides,
+включая нули, CSS units и undefined, сохраняют исходный приоритет.
+
+Card применяет переменные к собственному корню перед semantic/user styles.
+Grid/Meta наследуют этот scope; padding Grid использует общий paddingLG.
+Inner header использует colorFillAlter, inner body — общий вертикальный padding
+и bodyPadding по горизонтали. Small rules имеют приоритет над inner padding.
+Отдельный component algorithm не меняет глобальную или соседнюю тему.
+
+Официальный UMD служит эталоном для 13 наборов CSS-деклараций и 30 браузерных
+сценариев normal/small/inner/tabs/grid/loading и вложенных/соседних providers.
+Изменение/удаление темы сохраняет DOM, draft и selection; SSR не требует DOM.
+Булевы cssVar из сообщения о дефекте проверяются как JS runtime inputs;
+они не расширяют публичный ThemeConfig и не подтверждают отключение CSS variables.
 
 ## Токены Alert
 
