@@ -613,6 +613,11 @@
 
 ### Fixed
 
+- Carousel: компонентные токены теперь применяются к wrapper через общую тему.
+  Сохранены семь современных токенов, deprecated dotWidthActive и его приоритеты,
+  вертикальная геометрия, RTL, nested/reset providers и style внутреннего slider.
+  Добавлена сверка CSS declarations и геометрии с Ant Design 6.6.8, SSR и browser.
+
 - Card: подключены все 13 компонентных токенов к CSS корня. Body/header padding,
   header height/background и actions background теперь учитывают
   ConfigProvider.theme.components.Card; aliases, component algorithms,

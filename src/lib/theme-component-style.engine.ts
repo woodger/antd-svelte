@@ -27,9 +27,19 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
-  | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card';
+  | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel';
 
 const factories = {
+  Carousel: (token: GlobalToken) => ({
+    arrowSize: 16,
+    arrowOffset: token.marginXS,
+    dotWidth: 16,
+    dotHeight: 3,
+    dotGap: token.marginXXS,
+    dotOffset: 12,
+    dotWidthActive: 24,
+    dotActiveWidth: 24
+  }),
   Card: (token: GlobalToken & Partial<CardComponentToken>) => ({
     headerBg: 'transparent',
     headerFontSize: token.fontSizeLG,
@@ -213,14 +223,16 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Result: [],
   Alert: [],
   Collapse: [],
-  Card: []
+  Card: [],
+  Carousel: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]
 >> = {
   Popover: [['width', 'titleMinWidth'], ['minWidth', 'titleMinWidth']],
   Skeleton: [['color', 'gradientFromColor'], ['colorGradientEnd', 'gradientToColor']],
-  Menu: menuDeprecatedTokens
+  Menu: menuDeprecatedTokens,
+  Carousel: [['dotWidthActive', 'dotActiveWidth']]
 };
 const inputMetrics = [
   'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',

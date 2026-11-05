@@ -8145,7 +8145,20 @@
         "src/lib/vendor/carousel.css",
         "tests/package/carousel.ssr.test.ts",
         "tests/browser/carousel.spec.ts",
-        "tests/browser/fixtures/CarouselFixtures.svelte"
+        "tests/browser/fixtures/CarouselFixtures.svelte",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component-token.types.ts",
+        "src/lib/theme-carousel-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-carousel-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-carousel-theme-reference.json",
+        "tests/browser/fixtures/carousel-theme-presets.ts",
+        "tests/browser/fixtures/CarouselThemeCase.svelte",
+        "tests/browser/fixtures/CarouselThemeSlider.svelte",
+        "tests/browser/fixtures/CarouselThemeFixtures.svelte",
+        "tests/browser/carousel-theme-metrics.ts",
+        "tests/browser/carousel-theme.spec.ts",
+        "tests/package/carousel-theme.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -8227,12 +8240,35 @@
           "note": "Items описывают исходный child div и его content/width/attributes; children принимает один snippet либо массив логических слайдов. Непрозрачный snippet не разбирается и не клонируется как React virtual tree; каждый clone получает собственный экземпляр snippet. Custom renderers применяют переданные props явно. InnerSlider — typed adapter вместо React class; в responsive unslick отсутствует."
         },
         {
+          "id": "component-theme-tokens",
+          "title": "Семь компонентных токенов и deprecated dotWidthActive",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Carousel.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component-token.types.ts",
+            "src/lib/theme-carousel-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-carousel-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-carousel-theme-reference.json",
+            "tests/browser/fixtures/carousel-theme-presets.ts",
+            "tests/browser/fixtures/CarouselThemeCase.svelte",
+            "tests/browser/fixtures/CarouselThemeSlider.svelte",
+            "tests/browser/fixtures/CarouselThemeFixtures.svelte",
+            "tests/browser/carousel-theme-metrics.ts",
+            "tests/browser/carousel-theme.spec.ts",
+            "tests/package/carousel-theme.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Фабрика и root theme hook следуют 6.6.8: семь современных токенов, dotWidthActive→dotActiveWidth с приоритетом современного имени, включая 0; отдельно deprecated 0 сохраняет source default 24. CSS lengths, alias tokens, global/component algorithms, undefined, cssVar.prefix, четыре размещения точек и RTL. Вложенные/reset/sibling providers изолированы; реактивная смена сохраняет slides/draft/focus и управление. Class/style и ConfigProvider.carousel остаются на inner slider, после наследуемых root variables."
+        },
+        {
           "id": "advanced-source-api",
-          "title": "Произвольный prefix CSS и полный общий token engine",
+          "title": "Генерация CSS для произвольного prefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "DOM prefixCls поддержан, генерация CSS для него и произвольные theme/component tokens остаются общими пробелами. React development diagnostics и устаревшие IE event/CSS fallbacks не воспроизводятся. Исходный RTL reset использует число children до rows grouping; известные особенности upstream не заменяются прикладным поведением. V1-ready не означает полный React API."
+          "note": "DOM prefixCls поддержан; генерация CSS для него остаётся общим пробелом. React development diagnostics и устаревшие IE event/CSS fallbacks не воспроизводятся. Исходный RTL reset использует число children до rows grouping; известные особенности upstream не заменяются прикладным поведением. V1-ready не означает полный React API."
         }
       ]
     },

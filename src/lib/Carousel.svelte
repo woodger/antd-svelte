@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import {
     getCarouselItems,
     getCarouselRows,
@@ -13,6 +14,7 @@
 
   let { ref = $bindable(), nativeElement = $bindable(), ...props }: CarouselProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Carousel');
   let breakpoint = $state<number | null>(null);
   let items = $derived(getCarouselItems(props));
   let resolved = $derived(getCarouselSettings(props, config.direction, breakpoint));
@@ -85,8 +87,9 @@
 </style>
 
 <div bind:this={nativeElement} id={props.id}
-  class={[prefixCls, 'ant-carousel-css-var', resolved.rootRtl && `${prefixCls}-rtl`,
-    resolved.rootVertical && `${prefixCls}-vertical`, props.rootClassName]} style={duration}>
+  class={[prefixCls, 'ant-carousel-css-var', componentTheme.className,
+    resolved.rootRtl && `${prefixCls}-rtl`, resolved.rootVertical && `${prefixCls}-vertical`,
+    props.rootClassName]} style={[componentTheme.style, duration].filter(Boolean).join(';')}>
   {#if settings.regular}
     <div class={['regular', 'slider', className]}>
       {#each items as item}

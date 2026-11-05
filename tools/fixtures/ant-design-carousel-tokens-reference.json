@@ -1,0 +1,552 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "operation": "Carousel seven modern component tokens and deprecated dotWidthActive: defaults, overrides, zero/string/undefined, alias priority, global/component algorithms, CSS variable prefix, four dot placements, RTL, nested/reset/sibling providers and inner slider style priority."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "8px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "24px"
+      }
+    },
+    {
+      "name": "reported",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": 32,
+            "dotActiveWidth": 48,
+            "arrowSize": 28
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "28px",
+        "--ant-carousel-arrow-offset": "8px",
+        "--ant-carousel-dot-width": "32px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "48px"
+      }
+    },
+    {
+      "name": "all-tokens",
+      "config": {
+        "cssVar": {},
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "26px",
+        "--ant-carousel-arrow-offset": "13px",
+        "--ant-carousel-dot-width": "29.5px",
+        "--ant-carousel-dot-height": "6.5px",
+        "--ant-carousel-dot-gap": "7px",
+        "--ant-carousel-dot-offset": "18px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "47.5px"
+      }
+    },
+    {
+      "name": "zero-tokens",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": 0,
+            "dotHeight": 0,
+            "dotGap": 0,
+            "dotOffset": 0,
+            "dotActiveWidth": 0,
+            "arrowSize": 0,
+            "arrowOffset": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "0px",
+        "--ant-carousel-arrow-offset": "0px",
+        "--ant-carousel-dot-width": "0px",
+        "--ant-carousel-dot-height": "0px",
+        "--ant-carousel-dot-gap": "0px",
+        "--ant-carousel-dot-offset": "0px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "0px"
+      }
+    },
+    {
+      "name": "string-lengths",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": "2rem",
+            "dotHeight": "0.25rem",
+            "dotActiveWidth": "3rem"
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "8px",
+        "--ant-carousel-dot-width": "2rem",
+        "--ant-carousel-dot-height": "0.25rem",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "3rem"
+      }
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "marginXS": 15,
+          "marginXXS": 6
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "15px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "6px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "24px"
+      }
+    },
+    {
+      "name": "component-aliases",
+      "config": {
+        "components": {
+          "Carousel": {
+            "marginXS": 17,
+            "marginXXS": 8
+          }
+        }
+      },
+      "variables": {
+        "--ant-margin-xs": "17px",
+        "--ant-margin-xxs": "8px",
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "17px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "8px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "24px"
+      }
+    },
+    {
+      "name": "deprecated-width",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidthActive": 37
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "8px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "37px",
+        "--ant-carousel-dot-active-width": "37px"
+      }
+    },
+    {
+      "name": "current-width-priority",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidthActive": 37,
+            "dotActiveWidth": 43
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "8px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "37px",
+        "--ant-carousel-dot-active-width": "43px"
+      }
+    },
+    {
+      "name": "current-zero-priority",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidthActive": 37,
+            "dotActiveWidth": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "8px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "37px",
+        "--ant-carousel-dot-active-width": "0px"
+      }
+    },
+    {
+      "name": "deprecated-zero",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidthActive": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "8px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "0px",
+        "--ant-carousel-dot-active-width": "24px"
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ],
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "26px",
+        "--ant-carousel-arrow-offset": "13px",
+        "--ant-carousel-dot-width": "29.5px",
+        "--ant-carousel-dot-height": "6.5px",
+        "--ant-carousel-dot-gap": "7px",
+        "--ant-carousel-dot-offset": "18px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "47.5px"
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "4px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "24px"
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ],
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "26px",
+        "--ant-carousel-arrow-offset": "13px",
+        "--ant-carousel-dot-width": "29.5px",
+        "--ant-carousel-dot-height": "6.5px",
+        "--ant-carousel-dot-gap": "7px",
+        "--ant-carousel-dot-offset": "18px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "47.5px"
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Carousel": {
+            "algorithm": true,
+            "sizeUnit": 5
+          }
+        }
+      },
+      "variables": {
+        "--ant-size-unit": "5px",
+        "--ant-size-xxl": "60px",
+        "--ant-size-xl": "40px",
+        "--ant-size-lg": "30px",
+        "--ant-size-md": "25px",
+        "--ant-size-ms": "20px",
+        "--ant-size": "20px",
+        "--ant-size-sm": "15px",
+        "--ant-size-xs": "10px",
+        "--ant-size-xxs": "5px",
+        "--ant-padding-xxs": "5px",
+        "--ant-padding-xs": "10px",
+        "--ant-padding-sm": "15px",
+        "--ant-padding": "20px",
+        "--ant-padding-md": "25px",
+        "--ant-padding-lg": "30px",
+        "--ant-padding-xl": "40px",
+        "--ant-padding-content-horizontal-lg": "30px",
+        "--ant-padding-content-vertical-lg": "20px",
+        "--ant-padding-content-horizontal": "20px",
+        "--ant-padding-content-vertical": "15px",
+        "--ant-padding-content-horizontal-sm": "20px",
+        "--ant-padding-content-vertical-sm": "10px",
+        "--ant-margin-xxs": "5px",
+        "--ant-margin-xs": "10px",
+        "--ant-margin-sm": "15px",
+        "--ant-margin": "20px",
+        "--ant-margin-md": "25px",
+        "--ant-margin-lg": "30px",
+        "--ant-margin-xl": "40px",
+        "--ant-margin-xxl": "60px",
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "10px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "5px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "24px"
+      }
+    },
+    {
+      "name": "component-compact",
+      "config": {
+        "components": {
+          "Carousel": {
+            "algorithm": [
+              "compactAlgorithm"
+            ],
+            "controlHeight": 28
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "12px",
+        "--ant-control-height": "24px",
+        "--ant-font-size-sm": "10px",
+        "--ant-font-size-lg": "14px",
+        "--ant-font-size-xl": "16px",
+        "--ant-font-size-heading-1": "32px",
+        "--ant-font-size-heading-2": "26px",
+        "--ant-font-size-heading-3": "20px",
+        "--ant-font-size-heading-4": "16px",
+        "--ant-font-size-heading-5": "14px",
+        "--ant-line-height": "1.6666666666666667",
+        "--ant-line-height-lg": "1.5714285714285714",
+        "--ant-line-height-sm": "1.8",
+        "--ant-font-height": "20px",
+        "--ant-font-height-lg": "22px",
+        "--ant-font-height-sm": "18px",
+        "--ant-line-height-heading-1": "1.25",
+        "--ant-line-height-heading-2": "1.3076923076923077",
+        "--ant-line-height-heading-3": "1.4",
+        "--ant-line-height-heading-4": "1.5",
+        "--ant-line-height-heading-5": "1.5714285714285714",
+        "--ant-size-lg": "16px",
+        "--ant-size-md": "16px",
+        "--ant-size-ms": "12px",
+        "--ant-size": "8px",
+        "--ant-size-sm": "8px",
+        "--ant-size-xs": "4px",
+        "--ant-control-height-sm": "18px",
+        "--ant-control-height-xs": "12px",
+        "--ant-control-height-lg": "30px",
+        "--ant-font-size-icon": "10px",
+        "--ant-control-interactive-size": "12px",
+        "--ant-padding-xs": "4px",
+        "--ant-padding-sm": "8px",
+        "--ant-padding": "8px",
+        "--ant-padding-md": "16px",
+        "--ant-padding-lg": "16px",
+        "--ant-padding-content-horizontal-lg": "16px",
+        "--ant-padding-content-vertical-lg": "12px",
+        "--ant-padding-content-horizontal": "12px",
+        "--ant-padding-content-vertical": "8px",
+        "--ant-padding-content-horizontal-sm": "8px",
+        "--ant-padding-content-vertical-sm": "4px",
+        "--ant-margin-xs": "4px",
+        "--ant-margin-sm": "8px",
+        "--ant-margin": "8px",
+        "--ant-margin-md": "16px",
+        "--ant-margin-lg": "16px",
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-arrow-offset": "4px",
+        "--ant-carousel-dot-width": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "24px"
+      }
+    },
+    {
+      "name": "undefined-tokens",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": {
+              "$type": "undefined"
+            },
+            "arrowOffset": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "16px",
+        "--ant-carousel-dot-height": "3px",
+        "--ant-carousel-dot-gap": "4px",
+        "--ant-carousel-dot-offset": "12px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "24px"
+      }
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "prefix": "demo"
+        },
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "variables": {
+        "--demo-carousel-arrow-size": "26px",
+        "--demo-carousel-arrow-offset": "13px",
+        "--demo-carousel-dot-width": "29.5px",
+        "--demo-carousel-dot-height": "6.5px",
+        "--demo-carousel-dot-gap": "7px",
+        "--demo-carousel-dot-offset": "18px",
+        "--demo-carousel-dot-width-active": "24px",
+        "--demo-carousel-dot-active-width": "47.5px"
+      }
+    },
+    {
+      "name": "style-priority",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "26px",
+        "--ant-carousel-arrow-offset": "13px",
+        "--ant-carousel-dot-width": "29.5px",
+        "--ant-carousel-dot-height": "6.5px",
+        "--ant-carousel-dot-gap": "7px",
+        "--ant-carousel-dot-offset": "18px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "47.5px"
+      }
+    },
+    {
+      "name": "rtl",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "variables": {
+        "--ant-carousel-arrow-size": "26px",
+        "--ant-carousel-arrow-offset": "13px",
+        "--ant-carousel-dot-width": "29.5px",
+        "--ant-carousel-dot-height": "6.5px",
+        "--ant-carousel-dot-gap": "7px",
+        "--ant-carousel-dot-offset": "18px",
+        "--ant-carousel-dot-width-active": "24px",
+        "--ant-carousel-dot-active-width": "47.5px"
+      }
+    }
+  ]
+}

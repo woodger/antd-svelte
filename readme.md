@@ -5072,10 +5072,24 @@ ConfigProvider.carousel задаёт class/style внутреннего slick-sl
 Locale.carousel и исходный alias Carousel задают имена стрелок; локальный
 Carousel имеет приоритет. Темы light/dark/compact и RTL используют общие CSS variables.
 
+ConfigProvider.theme.components.Carousel применяет семь компонентных токенов:
+размеры и отступ стрелок, ширину/высоту/отступ/интервал точек и ширину активной
+точки. Вертикальный режим меняет местами размеры точек по исходным правилам.
+Поддержаны alias tokens, глобальные и компонентные algorithms, cssVar.prefix,
+вложенные providers и реактивное обновление без пересоздания слайдов.
+Deprecated dotWidthActive переносится в dotActiveWidth; современное имя приоритетнее,
+включая 0. Как в 6.6.8, отдельно переданный deprecated 0 не заменяет default 24.
+Тематические переменные задаются wrapper; пользовательские class/style и
+ConfigProvider.carousel по-прежнему относятся к inner slider и сохраняют приоритет.
+Сверка: [официальные CSS tokens](./tools/fixtures/ant-design-carousel-tokens-reference.json),
+[геометрия четырёх размещений](./tests/browser/fixtures/ant-design-carousel-theme-reference.json),
+[SSR](./tests/package/carousel-theme.ssr.test.ts) и
+[browser](./tests/browser/carousel-theme.spec.ts), `?fixture=carousel-theme`.
+
 SSR выводит исходную процентную либо variable-width геометрию и lazy placeholders
 без DOM, callbacks, timers или media queries. При уничтожении очищаются timers,
 ResizeObserver, image/focus/touch/media listeners и refs; поздние callbacks не
-вызываются. Полный token engine, генерация CSS для произвольного prefixCls,
+вызываются. Генерация CSS для произвольного prefixCls,
 React development diagnostics и устаревшие IE fallbacks остаются вне этапа.
 
 Проверки: [engine](./src/lib/carousel.engine.test.ts),

@@ -1,0 +1,4799 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "operation": "Carousel seven modern component tokens and deprecated dotWidthActive: defaults, overrides, zero/string/undefined, alias priority, global/component algorithms, CSS variable prefix, four dot placements, RTL, nested/reset/sibling providers and inner slider style priority."
+  },
+  "viewport": {
+    "width": 1100,
+    "height": 1000
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "reported",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": 32,
+            "dotActiveWidth": 48,
+            "arrowSize": 28
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "32px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "48px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "32px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "28px",
+            "height": "28px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "19.7969px",
+              "height": "19.7969px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "32px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "48px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "32px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "28px",
+            "height": "28px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "19.7969px",
+              "height": "19.7969px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "32px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "48px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "32px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "28px",
+            "height": "28px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "19.7969px",
+              "height": "19.7969px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "32px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "48px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "32px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "28px",
+            "height": "28px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "19.7969px",
+              "height": "19.7969px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "48px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "all-tokens",
+      "config": {
+        "cssVar": {},
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "zero-tokens",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": 0,
+            "dotHeight": 0,
+            "dotGap": 0,
+            "dotOffset": 0,
+            "dotActiveWidth": 0,
+            "arrowSize": 0,
+            "arrowOffset": 0
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "0px",
+            "height": "0px",
+            "margin": "0px"
+          },
+          "active": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "button": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "dotsOffset": "0px",
+          "arrow": {
+            "width": "0px",
+            "height": "0px",
+            "previousOffset": "0px",
+            "nextOffset": "0px",
+            "after": {
+              "width": "2px",
+              "height": "2px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "0px",
+            "height": "0px",
+            "margin": "0px"
+          },
+          "active": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "button": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "dotsOffset": "0px",
+          "arrow": {
+            "width": "0px",
+            "height": "0px",
+            "previousOffset": "0px",
+            "nextOffset": "0px",
+            "after": {
+              "width": "2px",
+              "height": "2px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "0px",
+            "height": "0px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "button": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "dotsOffset": "0px",
+          "arrow": {
+            "width": "0px",
+            "height": "0px",
+            "previousOffset": "0px",
+            "nextOffset": "0px",
+            "after": {
+              "width": "2px",
+              "height": "2px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "0px",
+            "height": "0px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "button": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "dotsOffset": "0px",
+          "arrow": {
+            "width": "0px",
+            "height": "0px",
+            "previousOffset": "0px",
+            "nextOffset": "0px",
+            "after": {
+              "width": "2px",
+              "height": "2px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "0px",
+            "margin": "0px"
+          },
+          "active": {
+            "width": "0px",
+            "height": "0px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "0px"
+          },
+          "dotsOffset": "0px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "0px",
+            "nextOffset": "0px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "string-lengths",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": "2rem",
+            "dotHeight": "0.25rem",
+            "dotActiveWidth": "3rem"
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "32px",
+            "height": "4px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "48px",
+            "height": "4px"
+          },
+          "button": {
+            "width": "32px",
+            "height": "4px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "32px",
+            "height": "4px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "48px",
+            "height": "4px"
+          },
+          "button": {
+            "width": "32px",
+            "height": "4px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "4px",
+            "height": "32px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "4px",
+            "height": "48px"
+          },
+          "button": {
+            "width": "4px",
+            "height": "32px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "4px",
+            "height": "32px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "4px",
+            "height": "48px"
+          },
+          "button": {
+            "width": "4px",
+            "height": "32px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "4px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "48px",
+            "height": "4px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "4px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "marginXS": 15,
+          "marginXXS": 6
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 6px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "15px",
+            "nextOffset": "15px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 6px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "15px",
+            "nextOffset": "15px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "6px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "15px",
+            "nextOffset": "15px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "6px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "15px",
+            "nextOffset": "15px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 6px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "15px",
+            "nextOffset": "15px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "component-aliases",
+      "config": {
+        "components": {
+          "Carousel": {
+            "marginXS": 17,
+            "marginXXS": 8
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 8px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "17px",
+            "nextOffset": "17px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 8px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "17px",
+            "nextOffset": "17px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "8px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "17px",
+            "nextOffset": "17px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "8px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "17px",
+            "nextOffset": "17px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 8px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "17px",
+            "nextOffset": "17px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "deprecated-width",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidthActive": 37
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "37px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "37px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "37px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "37px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "37px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "current-width-priority",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidthActive": 37,
+            "dotActiveWidth": 43
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "43px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "43px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "43px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "43px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "43px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "current-zero-priority",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidthActive": 37,
+            "dotActiveWidth": 0
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "0px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "0px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "0px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "0px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "0px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "deprecated-zero",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidthActive": 0
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ],
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ],
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Carousel": {
+            "algorithm": true,
+            "sizeUnit": 5
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 5px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "10px",
+            "nextOffset": "10px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 5px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "10px",
+            "nextOffset": "10px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "5px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "10px",
+            "nextOffset": "10px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "5px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "10px",
+            "nextOffset": "10px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 5px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "10px",
+            "nextOffset": "10px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "component-compact",
+      "config": {
+        "components": {
+          "Carousel": {
+            "algorithm": [
+              "compactAlgorithm"
+            ],
+            "controlHeight": 28
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "16px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "16px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "4px",
+            "nextOffset": "4px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "undefined-tokens",
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": {
+              "$type": "undefined"
+            },
+            "arrowOffset": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "0px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "0px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "0px",
+            "nextOffset": "344px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "0px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "0px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "0px",
+            "nextOffset": "344px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "0px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "0px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "0px",
+            "nextOffset": "-16px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "3px",
+            "height": "0px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "3px",
+            "height": "24px"
+          },
+          "button": {
+            "width": "3px",
+            "height": "0px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "0px",
+            "nextOffset": "-16px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "0px",
+            "nextOffset": "348px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "prefix": "demo"
+        },
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "9px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "style-priority",
+      "priority": true,
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "35px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "55px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "35px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "31px",
+            "height": "31px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "21.9062px",
+              "height": "21.9062px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "35px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "55px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "35px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "31px",
+            "height": "31px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "21.9062px",
+              "height": "21.9062px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "35px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "55px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "35px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "31px",
+            "height": "31px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "21.9062px",
+              "height": "21.9062px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "35px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "55px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "35px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "31px",
+            "height": "31px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "21.9062px",
+              "height": "21.9062px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "35px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "55px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "35px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "31px",
+            "height": "31px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "21.9062px",
+              "height": "21.9062px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "35px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "55px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "35px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "31px",
+            "height": "31px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "21.9062px",
+              "height": "21.9062px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "35px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "55px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "35px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "31px",
+            "height": "31px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "21.9062px",
+              "height": "21.9062px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "35px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "55px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "35px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "31px",
+            "height": "31px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "21.9062px",
+              "height": "21.9062px"
+            }
+          }
+        }
+      }
+    },
+    {
+      "name": "rtl",
+      "rtl": true,
+      "config": {
+        "components": {
+          "Carousel": {
+            "dotWidth": 29.5,
+            "dotHeight": 6.5,
+            "dotGap": 7,
+            "dotOffset": 18,
+            "dotActiveWidth": 47.5,
+            "arrowSize": 26,
+            "arrowOffset": 13
+          }
+        }
+      },
+      "metrics": {
+        "bottom": {
+          "vertical": false,
+          "direction": "rtl",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "top": {
+          "vertical": false,
+          "direction": "rtl",
+          "dot": {
+            "width": "29.5px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "29.5px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "start": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "end": {
+          "vertical": true,
+          "direction": "ltr",
+          "dot": {
+            "width": "6.5px",
+            "height": "29.5px",
+            "margin": "4px 0px"
+          },
+          "active": {
+            "width": "6.5px",
+            "height": "47.5px"
+          },
+          "button": {
+            "width": "6.5px",
+            "height": "29.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "26px",
+            "height": "26px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "18.375px",
+              "height": "18.375px"
+            }
+          }
+        },
+        "nested": {
+          "vertical": false,
+          "direction": "rtl",
+          "dot": {
+            "width": "9px",
+            "height": "6.5px",
+            "margin": "0px 7px"
+          },
+          "active": {
+            "width": "47.5px",
+            "height": "6.5px"
+          },
+          "button": {
+            "width": "9px",
+            "height": "6.5px"
+          },
+          "dotsOffset": "18px",
+          "arrow": {
+            "width": "12px",
+            "height": "12px",
+            "previousOffset": "13px",
+            "nextOffset": "13px",
+            "after": {
+              "width": "8.48438px",
+              "height": "8.48438px"
+            }
+          }
+        },
+        "reset": {
+          "vertical": false,
+          "direction": "rtl",
+          "dot": {
+            "width": "11px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "11px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "sibling": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "10px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "10px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        },
+        "outside": {
+          "vertical": false,
+          "direction": "ltr",
+          "dot": {
+            "width": "16px",
+            "height": "3px",
+            "margin": "0px 4px"
+          },
+          "active": {
+            "width": "24px",
+            "height": "3px"
+          },
+          "button": {
+            "width": "16px",
+            "height": "3px"
+          },
+          "dotsOffset": "12px",
+          "arrow": {
+            "width": "16px",
+            "height": "16px",
+            "previousOffset": "8px",
+            "nextOffset": "8px",
+            "after": {
+              "width": "11.3125px",
+              "height": "11.3125px"
+            }
+          }
+        }
+      }
+    }
+  ]
+}

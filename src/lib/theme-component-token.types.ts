@@ -139,6 +139,7 @@ export interface CarouselComponentToken {
   dotHeight: number | string;
   dotGap: number;
   dotOffset: number;
+  /** @deprecated Используйте dotActiveWidth; современное имя имеет приоритет, включая 0. */
   dotWidthActive: number;
   dotActiveWidth: number | string;
   arrowSize: number;
