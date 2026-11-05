@@ -422,6 +422,7 @@ export type {
 } from './tooltip.types';
 export type {
   PopoverProps,
+  PopoverRef,
   PopoverContent,
   PopoverPlacement,
   PopoverTrigger,

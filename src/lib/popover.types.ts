@@ -14,6 +14,16 @@ export type PopoverTrigger = TooltipTrigger;
 /** False опускает секцию; true оставляет пустую секцию без текста; 0 отображается. */
 export type PopoverContent = string | number | boolean | Snippet;
 
+/** bind:ref Popover/Popconfirm: доступен после mount и очищается при unmount. */
+export interface PopoverRef {
+  /** Основной DOM trigger, включая SVG; до разрешения anchor может быть undefined. */
+  readonly nativeElement: Element | undefined;
+  /** Native div shell сохраняется также до первого открытия и при destroyOnHidden. */
+  readonly popupElement: HTMLDivElement | undefined;
+  /** Объединяет вызовы в microtask; закрытый или уничтоженный popup не открывает. */
+  forceAlign: () => void;
+}
+
 export interface PopoverSlots extends TooltipSlots {
   title?: string;
   content?: string;

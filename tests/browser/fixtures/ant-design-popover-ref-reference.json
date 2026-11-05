@@ -1,0 +1,725 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "viewport": {
+      "width": 1000,
+      "height": 800
+    },
+    "delegated": {
+      "tooltip": "1.5.2",
+      "trigger": "3.10.1"
+    },
+    "operation": "Public Popover/Popconfirm ref lifecycle, button/SVG triggers, destroyOnHidden false/true with motion disabled. ForceAlign after an 80px margin move while requestAnimationFrame is paused, callback and coalesced batch deltas, trigger replacement and popup identity. Existing Svelte hidden DIV shell and stable live getter contracts remain explicit."
+  },
+  "cases": [
+    {
+      "name": "popover-button-destroy-false",
+      "mode": "popover",
+      "kind": "button",
+      "destroy": false,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "beforeForce": 0,
+        "delta": 80,
+        "callbacks": 1,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "BUTTON",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      },
+      "batchDelta": 1,
+      "replacement": {
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "A",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        },
+        "samePopup": true
+      }
+    },
+    {
+      "name": "popover-button-destroy-true",
+      "mode": "popover",
+      "kind": "button",
+      "destroy": true,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": false
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "beforeForce": 0,
+        "delta": 80,
+        "callbacks": 1,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "BUTTON",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      },
+      "batchDelta": 1,
+      "replacement": {
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "A",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        },
+        "samePopup": true
+      }
+    },
+    {
+      "name": "popover-svg-destroy-false",
+      "mode": "popover",
+      "kind": "svg",
+      "destroy": false,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "beforeForce": 0,
+        "delta": 80,
+        "callbacks": 1,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "svg",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      },
+      "batchDelta": 1,
+      "replacement": {
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "A",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        },
+        "samePopup": true
+      }
+    },
+    {
+      "name": "popover-svg-destroy-true",
+      "mode": "popover",
+      "kind": "svg",
+      "destroy": true,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": false
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "beforeForce": 0,
+        "delta": 80,
+        "callbacks": 1,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "svg",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      },
+      "batchDelta": 1,
+      "replacement": {
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "A",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        },
+        "samePopup": true
+      }
+    },
+    {
+      "name": "popconfirm-button-destroy-false",
+      "mode": "popconfirm",
+      "kind": "button",
+      "destroy": false,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "beforeForce": 0,
+        "delta": 80,
+        "callbacks": 1,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "BUTTON",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      },
+      "batchDelta": 1,
+      "replacement": {
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "A",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        },
+        "samePopup": true
+      }
+    },
+    {
+      "name": "popconfirm-button-destroy-true",
+      "mode": "popconfirm",
+      "kind": "button",
+      "destroy": true,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": false
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "BUTTON",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "beforeForce": 0,
+        "delta": 80,
+        "callbacks": 1,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "BUTTON",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      },
+      "batchDelta": 1,
+      "replacement": {
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "A",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        },
+        "samePopup": true
+      }
+    },
+    {
+      "name": "popconfirm-svg-destroy-false",
+      "mode": "popconfirm",
+      "kind": "svg",
+      "destroy": false,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "beforeForce": 0,
+        "delta": 80,
+        "callbacks": 1,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "svg",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      },
+      "batchDelta": 1,
+      "replacement": {
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "A",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        },
+        "samePopup": true
+      }
+    },
+    {
+      "name": "popconfirm-svg-destroy-true",
+      "mode": "popconfirm",
+      "kind": "svg",
+      "destroy": true,
+      "frames": [
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": null,
+            "nativeConnected": true,
+            "popupConnected": null
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "open": false,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": false
+          }
+        },
+        {
+          "open": true,
+          "snapshot": {
+            "exists": true,
+            "align": "function",
+            "native": "svg",
+            "popup": "DIV",
+            "nativeConnected": true,
+            "popupConnected": true
+          }
+        },
+        {
+          "unmounted": true,
+          "snapshot": {
+            "exists": false,
+            "align": "undefined",
+            "native": null,
+            "popup": null,
+            "nativeConnected": null,
+            "popupConnected": null
+          }
+        }
+      ],
+      "alignment": {
+        "beforeForce": 0,
+        "delta": 80,
+        "callbacks": 1,
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "svg",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        }
+      },
+      "batchDelta": 1,
+      "replacement": {
+        "snapshot": {
+          "exists": true,
+          "align": "function",
+          "native": "A",
+          "popup": "DIV",
+          "nativeConnected": true,
+          "popupConnected": true
+        },
+        "samePopup": true
+      }
+    }
+  ]
+}

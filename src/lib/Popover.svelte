@@ -29,15 +29,17 @@
   import type {
     PopoverContent,
     PopoverProps,
+    PopoverRef,
     PopoverSemanticProps,
     PopoverTrigger
   } from './popover.types';
 
   let {
+    ref = $bindable<PopoverRef | undefined>(),
     open = $bindable<boolean | undefined>(),
     open: providedOpen,
     ...props
-  }: PopoverProps = $props();
+  }: PopoverProps & { ref?: PopoverRef } = $props();
   let {
     children,
     title,
@@ -212,7 +214,18 @@
       );
   }
 
-  onMount(() => { mounted = true; });
+  onMount(() => {
+    mounted = true;
+    ref = {
+      get nativeElement() { return active ? anchor : undefined; },
+      get popupElement() { return active ? popup : undefined; },
+      forceAlign: () => untrack(() => {
+        if (active && visible) realign?.();
+      })
+    };
+
+    return () => { ref = undefined; };
+  });
 
   $effect(() => {
     const element = host;

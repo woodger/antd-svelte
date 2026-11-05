@@ -2154,6 +2154,26 @@ AvatarGroup.max.popover; прежние defaults без новых props сох�
 выделение и фокус. Fixed/top-layer, viewport и CSS-transform/scroll-container
 границы остаются теми же, что у Tooltip.
 
+`bind:ref` возвращает общий PopoverRef для Popover и Popconfirm после mount;
+при SSR и после unmount binding равен undefined. Стабильный объект содержит
+getters nativeElement (основной trigger, включая SVG) и popupElement (наружный div).
+Они отслеживают замену trigger и перенос popup в другой контейнер.
+ForceAlign пересчитывает открытый popup без ожидания animation frame; несколько
+синхронных вызовов объединяются в microtask. Он не открывает скрытую карточку,
+не меняет open/confirm callbacks и не создаёт зависимостей в пользовательском
+$effect. Сохранённый handle после unmount безопасен: forceAlign ничего не делает,
+DOM getters возвращают undefined.
+
+Native div shell существует также до первого открытия и при destroyOnHidden;
+ref возвращает этот же узел, а удаление относится к содержимому. В React ref
+до первого открытия не содержит popup, после destroy может ссылаться на удалённый
+div; существующий Svelte lifecycle сохраняется. Nullable DOM types отражают
+эти состояния и поддерживают SVG без приведения к HTMLElement.
+Сверка: [восемь UMD-сценариев](./tests/browser/fixtures/ant-design-popover-ref-reference.json),
+[SSR](./tests/package/popover-ref.ssr.test.ts) и
+[browser](./tests/browser/popover-ref.spec.ts), `?fixture=popover-ref`.
+Bind:ref задаётся непосредственно компоненту; max.popover остаётся объектом PopoverProps.
+
 Source-тема подготавливает Tooltip и Popover tokens в исходном порядке:
 maxWidth и стрелку внутреннего Tooltip, затем собственные titleMinWidth,
 zIndexPopup, padding и wireframe-разделение заголовка/содержимого. Deprecated
@@ -2203,6 +2223,8 @@ ShowAction/hideAction и focusDelay/blurDelay передаются Popover с т
 сохраняются; Popover.disabled и Popconfirm.disabled имеют собственные правила.
 Align/builtinPlacements/onPopupAlign также передаются наружному Popover;
 callback получает его DOM, перемещение не заменяет description и кнопки.
+Bind:ref передаётся тому же Popover и использует общий PopoverRef; forceAlign
+не прерывает ожидающее подтверждение и сохраняет припаркованный фокус.
 DestroyOnHidden и legacy destroyTooltipOnHide передаются Popover с исходным
 приоритетом современного prop, включая false. При удалении содержимого заново
 создаются description snippet и кнопки; сам контроллер подтверждения сохраняет

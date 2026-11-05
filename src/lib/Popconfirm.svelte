@@ -11,15 +11,17 @@
   import prefixTemplate from './vendor/popconfirm-prefix.css.js';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { PopconfirmProps, PopconfirmSemanticProps } from './popconfirm.types';
+  import type { PopoverRef } from './popover.types';
   import Popover from './Popover.svelte';
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
 
   let {
+    ref = $bindable<PopoverRef | undefined>(),
     open = $bindable<boolean | undefined>(),
     open: providedOpen,
     ...props
-  }: PopconfirmProps = $props();
+  }: PopconfirmProps & { ref?: PopoverRef } = $props();
   let {
     children,
     title,
@@ -191,7 +193,7 @@
   </div>
 {/snippet}
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`popconfirm-prefix:${prefix}`} />{/if}<Popover content={hasTitle ? content : undefined} bind:open={() => visible, request}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`popconfirm-prefix:${prefix}`} />{/if}<Popover content={hasTitle ? content : undefined} bind:ref bind:open={() => visible, request}
   trigger={resolvedDisabled ? [] : resolvedTrigger} mouseEnterDelay={enterDelay} mouseLeaveDelay={leaveDelay}
   showAction={props.showAction} hideAction={props.hideAction}
   focusDelay={props.focusDelay} blurDelay={props.blurDelay}

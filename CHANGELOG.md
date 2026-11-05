@@ -9,6 +9,13 @@
 
 ### Added
 
+- Popover/Popconfirm: bind:ref с общим PopoverRef, текущими trigger/popup DOM
+  и forceAlign на существующем контроллере позиции. Сохранены native div shell,
+  SSR/unmount cleanup, popup/trigger replacement, portal, draft/focus/selection
+  и ожидающий Promise; вызов не добавляет зависимости в пользовательский effect.
+  Добавлены восемь UMD-сценариев lifecycle/manual alignment, coalesced calls
+  и соответствующие проверки публичного пакета.
+
 - Popover/Popconfirm: align/builtinPlacements/onPopupAlign с передачей через
   AvatarGroup.max.popover. Сохранены исходные offsets/points, overflow, htmlRegion,
   arrow/class selection и semantic priorities; native automatic tracking, DOM,
