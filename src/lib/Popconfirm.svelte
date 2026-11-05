@@ -89,6 +89,9 @@
   const titleId = `ant-popconfirm-${generatedId}-title`;
   const descriptionId = `ant-popconfirm-${generatedId}-description`;
   const initialDefault = untrack(() => defaultOpen);
+  // Raw open переживает обновление spread props без входного open.
+  let uncontrolledOpen = $state(initialDefault);
+  let rawOpen = $derived(providedOpen === undefined ? uncontrolledOpen : open ?? initialDefault);
   let overlay = $state<HTMLDivElement>();
   let errorSession = $state.raw<object>();
   let active = true;
@@ -97,10 +100,11 @@
   let hasDescription = $derived(
     typeof description === 'function' || Boolean(String(description ?? '').trim())
   );
-  let visible = $derived(!resolvedDisabled && hasTitle && (open ?? initialDefault));
-  let session = $derived(visible ? { owner: open } : null);
+  let visible = $derived(!resolvedDisabled && hasTitle && rawOpen);
+  let session = $derived(visible ? { owner: rawOpen } : null);
   const action = createPopconfirmAction(() => session, {
     onSuccess: () => {
+      uncontrolledOpen = false;
       open = false;
       onOpenChange?.(false);
     },
@@ -125,8 +129,9 @@
   });
 
   function request(next: boolean) {
-    if (!active || resolvedDisabled || action.loading || next === (open ?? initialDefault)) return;
+    if (!active || resolvedDisabled || action.loading || next === rawOpen) return;
 
+    uncontrolledOpen = next;
     open = next;
     onOpenChange?.(next);
   }
@@ -188,6 +193,8 @@
 
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`popconfirm-prefix:${prefix}`} />{/if}<Popover content={hasTitle ? content : undefined} bind:open={() => visible, request}
   trigger={resolvedDisabled ? [] : resolvedTrigger} mouseEnterDelay={enterDelay} mouseLeaveDelay={leaveDelay}
+  showAction={props.showAction} hideAction={props.hideAction}
+  focusDelay={props.focusDelay} blurDelay={props.blurDelay}
   {destroyOnHidden} {destroyTooltipOnHide}
   {placement} {arrow} {color} {openClassName} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
   {rootClassName} {overlayInnerStyle} classNames={{

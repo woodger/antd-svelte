@@ -18,6 +18,7 @@
   import { connectPopoverTrigger, focusPopover } from './popover.dom';
   import { connectTooltipOpenClass } from './tooltip.dom';
   import {
+    getTooltipActions,
     getTooltipArrow,
     getTooltipDelay,
     getTooltipPlacementConfig,
@@ -83,9 +84,13 @@
   );
   let enterDelay = $derived(mouseEnterDelay ?? config.popover?.mouseEnterDelay ?? 0.1);
   let leaveDelay = $derived(mouseLeaveDelay ?? config.popover?.mouseLeaveDelay ?? 0.1);
+  let actionOverrides = $derived(props.showAction !== undefined || props.hideAction !== undefined);
+  let actions = $derived(getTooltipActions(resolvedTrigger, props.showAction, props.hideAction));
+  let sourceTouch = $derived(actionOverrides || Boolean(config.popover)
+    || isPopconfirm && Boolean(config.popconfirm));
   let sourceTrigger = $derived(Boolean(config.popover) || resolvedTrigger.length === 0
     || isPopconfirm && (Boolean(config.popconfirm) || Array.isArray(trigger))
-    || supports('contextMenu'));
+    || supports('contextMenu') || actionOverrides);
   let providedArrow = $derived(
     isPopconfirm ? getTooltipArrow(arrow, config.popconfirm?.arrow) : arrow
   );
@@ -126,6 +131,9 @@
   const id = `ant-popover-${generatedId}`;
   const titleId = `${id}-title`;
   const initialDefault = untrack(() => defaultOpen);
+  // Raw open переживает обновление spread props без входного open.
+  let uncontrolledOpen = $state(initialDefault);
+  let rawOpen = $derived(providedOpen === undefined ? uncontrolledOpen : open ?? initialDefault);
   let host = $state<HTMLSpanElement>();
   let anchor = $state<Element>();
   let popup = $state<HTMLDivElement>();
@@ -138,6 +146,7 @@
   let popupFocused = false;
   let clicked = false;
   let dismissed = false;
+  let touched = false;
   let closing = false;
   let focusOnShow = false;
   let resumeFocus: HTMLElement | undefined;
@@ -149,7 +158,7 @@
   let hasTitle = $derived(hasContent(title));
   let hasBody = $derived(hasContent(content));
   let available = $derived(hasTitle || hasBody);
-  let visible = $derived(available && (open ?? initialDefault));
+  let visible = $derived(!props.disabled && available && rawOpen);
   let destroy = $derived(destroyOnHidden ?? Boolean(destroyTooltipOnHide));
   let renderContent = $derived(!destroy || mounted && visible);
   const portal = createPopupContainer(() => ({
@@ -229,6 +238,7 @@
     // Положение меняется без повторного hide/show, чтобы сохранить ввод и фокус.
     const disconnect = untrack(() => connectPopup(surface, source, {
       trigger: host,
+      get outsideEvents() { return actionOverrides ? 'mouse' : undefined; },
       get placement() {
         return placement;
       },
@@ -309,7 +319,9 @@
   function request(next: boolean, delay = 0) {
     cancelPending();
     const target = anchor;
-    const ownerValue = open;
+    const ownerValue = providedOpen;
+    // Удаление overrides не отменяет уже запущенный source action.
+    const independentActions = actionOverrides;
 
     function apply() {
       pending = undefined;
@@ -319,13 +331,14 @@
         || !target?.isConnected
         || target !== anchor
         || !Object.is(
-          open,
+          providedOpen,
           ownerValue
         )
-        || next
+        || !independentActions && !actionOverrides && next
         && !wanted()) return;
 
-      if (next !== (open ?? initialDefault)) {
+      if (next !== rawOpen) {
+        uncontrolledOpen = next;
         open = next;
         onOpenChange?.(next);
       }
@@ -340,23 +353,25 @@
       }
     }
 
-    if (delay)
+    if (delay !== 0)
       pending = setTimeout(apply, delay);
     else apply();
   }
 
   function handleEnter(event: PointerEvent) {
-    if (event.pointerType === 'touch') return;
+    if (event.pointerType === 'touch' || sourceTouch && touched) return;
 
     hovered = true;
     dismissed = false;
-    if (supports('hover'))
+    if (actions.show.has('hover'))
       request(true, getTooltipDelay(enterDelay));
   }
 
   function handleLeave() {
+    if (sourceTouch && touched) return;
+
     hovered = false;
-    if (sourceTrigger ? supports('hover') : !wanted())
+    if (sourceTrigger ? actions.hide.has('hover') : !wanted())
       request(false, getTooltipDelay(leaveDelay));
   }
 
@@ -371,45 +386,62 @@
       )) return;
 
     dismissed = false;
-    if (supports('focus'))
-      request(true);
+    if (actions.show.has('focus'))
+      request(true, (props.focusDelay ?? 0) * 1000);
   }
 
   function handleBlur(event: FocusEvent) {
-    if (event.relatedTarget instanceof Node && host?.contains(event.relatedTarget)) return;
+    const target = anchor;
+    function closeIfOutside() {
+      if (!active || !target?.isConnected || target !== anchor || closing) return;
+      if (event.relatedTarget instanceof Node && host?.contains(event.relatedTarget)) return;
 
-    focused = false;
-    if (closing
-      || event.relatedTarget instanceof Node
-      && popup?.contains(event.relatedTarget)) return;
+      focused = false;
+      if (!actionOverrides && event.relatedTarget instanceof Node
+        && popup?.contains(event.relatedTarget)) return;
 
-    clicked = false;
-    if (sourceTrigger ? supports('focus') : !wanted())
-      request(false);
+      clicked = false;
+      if (sourceTrigger ? actions.hide.has('focus') : !wanted()) {
+        request(false, (props.blurDelay ?? 0) * 1000);
+      }
+    }
+    // Native blur без relatedTarget также приходит во время удаления focused DOM.
+    if (event.relatedTarget === null) queueMicrotask(closeIfOutside);
+    else closeIfOutside();
   }
 
   function handleClick(event: MouseEvent) {
-    if (event.defaultPrevented
-      || !supports('click') && !supports('contextMenu')
-      || anchor?.matches(
-        ':disabled, [aria-disabled="true"]'
-      )) return;
+    const show = actions.show.has('click');
+    const hide = actions.hide.has('click') || actions.hide.has('contextMenu');
+    if (event.defaultPrevented && !actionOverrides || !show && !hide
+      || anchor?.matches(':disabled, [aria-disabled="true"]')) return;
+
+    if (actionOverrides) {
+      if (visible && hide) dismiss('trigger');
+      else if (!visible && show) showByClick();
+      if (sourceTouch) touched = false;
+      return;
+    }
 
     if (clicked || visible && (sourceTrigger || !wanted()))
       dismiss('trigger');
-    else if (supports('click')) {
-      clicked = true;
-      dismissed = false;
-      focusOnShow = !sourceTrigger;
-      request(true);
-    }
+    else if (show) showByClick();
+    if (sourceTouch) touched = false;
+  }
+
+  function showByClick() {
+    clicked = true;
+    dismissed = false;
+    focusOnShow = !sourceTrigger;
+    request(true);
   }
 
   function handleContextMenu(event: MouseEvent) {
-    if (!supports('contextMenu') || anchor?.matches(':disabled, [aria-disabled="true"]')) return;
+    if (!actions.show.has('contextMenu')
+      || anchor?.matches(':disabled, [aria-disabled="true"]')) return;
 
     event.preventDefault();
-    if (visible) dismiss('trigger');
+    if (visible && actions.hide.has('contextMenu')) dismiss('trigger');
     else {
       clicked = true;
       dismissed = false;
@@ -417,7 +449,24 @@
     }
   }
 
+  function handleTouchStart() {
+    if (!sourceTouch || !actions.show.has('touch') && !actions.hide.has('touch')
+      || anchor?.matches(':disabled, [aria-disabled="true"]')) return;
+
+    touched = true;
+    if (visible && actions.hide.has('touch')) dismiss('trigger');
+    else if (!visible && actions.show.has('touch')) showByClick();
+  }
+
   function handlePopupHover(next: boolean) {
+    if (!active || !popup?.isConnected) return;
+
+    if (actionOverrides) {
+      if (next) {
+        if (actions.show.has('hover') && visible) request(true, getTooltipDelay(enterDelay));
+      } else if (actions.hide.has('hover')) request(false, getTooltipDelay(leaveDelay));
+      return;
+    }
     if (sourceTrigger && !supports('hover')) return;
 
     popupHovered = next;
@@ -425,6 +474,13 @@
       cancelPending();
     else if (sourceTrigger ? supports('hover') : !wanted())
       request(false, getTooltipDelay(leaveDelay));
+  }
+
+  function handlePopupFocus() {
+    if (!active || !popup?.isConnected || actionOverrides) return;
+
+    popupFocused = true;
+    cancelPending();
   }
 
   function handlePopupBlur(event: FocusEvent) {
@@ -442,7 +498,7 @@
           event.relatedTarget
         )) return;
 
-      if (sourceTrigger && !supports('focus')) return;
+      if (actionOverrides || sourceTrigger && !supports('focus')) return;
 
       clicked = false;
       if (!wanted())
@@ -455,6 +511,9 @@
   }
 
   function dismiss(reason: 'escape' | 'outside' | 'trigger') {
+    if (reason === 'outside' && actionOverrides && !actions.hide.has('click')
+      && !actions.hide.has('contextMenu') && !actions.hide.has('touch')) return;
+
     const previous = { clicked, dismissed, focusOnShow };
     clicked = false;
     dismissed = true;
@@ -486,7 +545,7 @@
   @media (prefers-reduced-motion: reduce) { [data-ant-popover], [data-ant-popover-container] { animation: none; transition: none; } }
 </style>
 
-{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`popover-prefix:${prefix}`} />{/if}<span bind:this={host} role="presentation" class={['ant-popover-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span>
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`popover-prefix:${prefix}`} />{/if}<span bind:this={host} role="presentation" class={['ant-popover-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu} ontouchstart={handleTouchStart}>{@render children()}</span>
 <NoCompactStyle>
 <div bind:this={popup} {id} role="dialog" popover="manual" hidden tabindex="-1" dir={config.direction}
   data-ant-popover="" data-ant-custom-prefix={prefix !== 'ant-popover' || undefined}
@@ -508,10 +567,8 @@
     onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         handlePopupHover(true);
-    }} onpointerleave={() => handlePopupHover(false)} onfocusin={() => {
-      popupFocused = true;
-      cancelPending();
-    }} onfocusout={handlePopupBlur}>
+    }} onpointerleave={() => handlePopupHover(false)} onfocusin={handlePopupFocus}
+    onfocusout={handlePopupBlur}>
   {#if arrowConfig.show}<div data-ant-popover-arrow="" class={[`${prefix}-arrow`, semantics.classNames.arrow]}
     style={semantics.styles.arrow} aria-hidden="true"></div>{/if}
   <div data-ant-popover-container="" class={[`${prefix}-container`, semantics.classNames.container]}

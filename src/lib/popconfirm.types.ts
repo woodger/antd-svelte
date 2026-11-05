@@ -77,6 +77,14 @@ export interface PopconfirmProps {
   arrow?: TooltipArrow;
   /** Локальный trigger → ConfigProvider.popconfirm → click; [] оставляет программное управление. */
   trigger?: PopoverTrigger | readonly PopoverTrigger[];
+  /** Заменяет только события открытия; undefined использует trigger, [] отключает их. */
+  showAction?: readonly PopoverTrigger[];
+  /** Заменяет trigger/outside-закрытие; [] сохраняет Escape и кнопки подтверждения. */
+  hideAction?: readonly PopoverTrigger[];
+  /** Задержка focus в секундах; default 0 независимо от hover delays. */
+  focusDelay?: number;
+  /** Задержка blur в секундах; default 0 независимо от hover delays. */
+  blurDelay?: number;
   /** Задержки hover в секундах, по умолчанию 0.1. */
   mouseEnterDelay?: number;
   mouseLeaveDelay?: number;

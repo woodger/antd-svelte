@@ -6909,7 +6909,13 @@
         "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
         "tests/browser/overlay-lifecycle-metrics.ts",
         "tests/browser/overlay-empty-trigger.spec.ts",
-        "tests/package/overlay-lifecycle.ssr.test.ts"
+        "tests/package/overlay-lifecycle.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-popover-actions-reference.json",
+        "tests/browser/fixtures/popover-actions.types.ts",
+        "tests/browser/fixtures/PopoverActionsCase.svelte",
+        "tests/browser/fixtures/PopoverActionsFixtures.svelte",
+        "tests/browser/popover-actions.spec.ts",
+        "tests/package/popover-actions.ssr.test.ts"
       ],
       "features": [
         {
@@ -7311,6 +7317,30 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
+        },
+        {
+          "id": "independent-trigger-actions",
+          "title": "Независимые showAction/hideAction и focusDelay/blurDelay",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.types.ts",
+            "tests/browser/fixtures/ant-design-popover-actions-reference.json",
+            "tests/browser/fixtures/popover-actions.types.ts",
+            "tests/browser/fixtures/PopoverActionsCase.svelte",
+            "tests/browser/fixtures/PopoverActionsFixtures.svelte",
+            "tests/browser/popover-actions.spec.ts",
+            "tests/package/popover-actions.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный align/fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
         }
       ]
     },
@@ -8973,7 +9003,13 @@
         "tests/browser/overlay-lifecycle.spec.ts",
         "tests/package/overlay-lifecycle.ssr.test.ts",
         "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
-        "tests/browser/overlay-empty-trigger.spec.ts"
+        "tests/browser/overlay-empty-trigger.spec.ts",
+        "tests/browser/fixtures/ant-design-popover-actions-reference.json",
+        "tests/browser/fixtures/popover-actions.types.ts",
+        "tests/browser/fixtures/PopoverActionsCase.svelte",
+        "tests/browser/fixtures/PopoverActionsFixtures.svelte",
+        "tests/browser/popover-actions.spec.ts",
+        "tests/package/popover-actions.ssr.test.ts"
       ],
       "features": [
         {
@@ -9292,6 +9328,30 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
+        },
+        {
+          "id": "independent-trigger-actions",
+          "title": "Независимые showAction/hideAction и focusDelay/blurDelay",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.types.ts",
+            "tests/browser/fixtures/ant-design-popover-actions-reference.json",
+            "tests/browser/fixtures/popover-actions.types.ts",
+            "tests/browser/fixtures/PopoverActionsCase.svelte",
+            "tests/browser/fixtures/PopoverActionsFixtures.svelte",
+            "tests/browser/popover-actions.spec.ts",
+            "tests/package/popover-actions.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный align/fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
         }
       ]
     },
@@ -11485,7 +11545,15 @@
         "tests/package/overlay-lifecycle.ssr.test.ts",
         "src/lib/AvatarGroup.svelte",
         "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
-        "tests/browser/overlay-empty-trigger.spec.ts"
+        "tests/browser/overlay-empty-trigger.spec.ts",
+        "src/lib/AvatarGroupOverflow.svelte",
+        "src/lib/avatar-group.types.ts",
+        "tests/browser/fixtures/ant-design-popover-actions-reference.json",
+        "tests/browser/fixtures/popover-actions.types.ts",
+        "tests/browser/fixtures/PopoverActionsCase.svelte",
+        "tests/browser/fixtures/PopoverActionsFixtures.svelte",
+        "tests/browser/popover-actions.spec.ts",
+        "tests/package/popover-actions.ssr.test.ts"
       ],
       "features": [
         {
@@ -11779,6 +11847,30 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
+        },
+        {
+          "id": "independent-trigger-actions",
+          "title": "Независимые showAction/hideAction и focusDelay/blurDelay",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.types.ts",
+            "tests/browser/fixtures/ant-design-popover-actions-reference.json",
+            "tests/browser/fixtures/popover-actions.types.ts",
+            "tests/browser/fixtures/PopoverActionsCase.svelte",
+            "tests/browser/fixtures/PopoverActionsFixtures.svelte",
+            "tests/browser/popover-actions.spec.ts",
+            "tests/package/popover-actions.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный align/fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
         }
       ]
     },

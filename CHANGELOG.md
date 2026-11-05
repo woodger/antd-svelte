@@ -9,6 +9,13 @@
 
 ### Added
 
+- Popover/Popconfirm: независимые showAction/hideAction, focusDelay/blurDelay,
+  touch fallback и source outside/popup focus actions; настройки проходят через
+  AvatarGroup.max.popover. Popover.disabled сохраняет raw open и callbacks.
+  Uncontrolled open переживает обновление props; сохранены native binding/focus,
+  Promise guards и SSR cleanup. Добавлены 67 UMD-сценариев / 389 кадров и шесть
+  cleanup traces с проверкой событий и кнопок подтверждения.
+
 - Tooltip: независимые showAction/hideAction, пустые и реактивные наборы событий,
   focusDelay/blurDelay, исходный touch fallback и закрытие снаружи для новых actions.
   Настройки работают также в ellipsis Tooltip Typography; сохранены native defaults,

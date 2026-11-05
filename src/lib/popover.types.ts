@@ -55,6 +55,8 @@ export interface PopoverProps {
   openClassName?: string;
   title?: PopoverContent | null;
   content?: PopoverContent | null;
+  /** Скрывает панель, сохраняя raw open и trigger-события. @defaultValue false */
+  disabled?: boolean;
   /** Поддерживает bind:open. */
   open?: boolean | undefined;
   /** @defaultValue false */
@@ -67,8 +69,16 @@ export interface PopoverProps {
    * @deprecated Используйте destroyOnHidden; keepParent не меняет результат.
    */
   destroyTooltipOnHide?: boolean | { keepParent?: boolean };
-  /** [] оставляет программное управление без открытия/закрытия по событиям trigger. */
+  /** Базовые события; [] отключает их без отдельных showAction/hideAction. */
   trigger?: PopoverTrigger | readonly PopoverTrigger[];
+  /** Заменяет события открытия; undefined использует trigger, [] отключает их. */
+  showAction?: readonly PopoverTrigger[];
+  /** Заменяет события закрытия; [] сохраняет только Escape и действия содержимого. */
+  hideAction?: readonly PopoverTrigger[];
+  /** Задержка focus в секундах; default 0 независимо от mouseEnterDelay. */
+  focusDelay?: number;
+  /** Задержка blur в секундах; default 0 независимо от mouseLeaveDelay. */
+  blurDelay?: number;
   /** @defaultValue 'top' */
   placement?: PopoverPlacement;
   /** @defaultValue true */

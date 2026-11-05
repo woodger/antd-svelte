@@ -2069,7 +2069,7 @@ aria-controls и aria-expanded. Для клавиатурного доступа
 `bind:open`, defaultOpen и `onOpenChange(open)` следуют модели Svelte, как у
 Tooltip. DefaultOpen учитывается один раз; внешнее изменение open и начальное
 состояние не вызывают callback. Обработчики дочернего элемента сохраняются;
-preventDefault в его onclick отменяет открытие по клику.
+без явных showAction/hideAction preventDefault в его onclick отменяет открытие по клику.
 
 Trigger без component config по умолчанию `['hover', 'focus']`. Поддерживаются
 click, hover, focus, contextMenu, их массив и пустой массив для программного показа. MouseEnterDelay и
@@ -2091,6 +2091,29 @@ Function binding может отклонить изменение open; откл
 фокус и текущие способы удержания карточки открытой.
 При новой component config или contextMenu открытие кликом сохраняет текущий
 фокус, как upstream; сочетания trigger следуют правилам source config выше.
+
+`showAction`/`hideAction` независимо заменяют события trigger; focusDelay/blurDelay
+задаются в секундах с default 0 независимо от hover delays, как у
+[Tooltip](#tooltip). Пустой hideAction отключает trigger/outside-закрытие,
+сохраняя Escape и действия содержимого. Явные списки используют source click,
+contextMenu и touch fallback: click не переводит фокус в popup и не блокируется
+preventDefault дочернего handler. Фокус внутри панели не отменяет отложенное
+закрытие, а blur trigger следует hideAction также при переходе в содержимое.
+Прежнее native удержание и перевод фокуса без overrides сохраняются.
+Blur без relatedTarget ждёт microtask для проверки connected/cleanup;
+возврат фокуса перед скрытием/удалением содержимого остаётся native адаптацией.
+Изменение и удаление action props не отменяет уже запущенную задержку;
+uncontrolled open сохраняется при обновлении spread props.
+
+`Popover.disabled` скрывает панель/open class, сохраняя raw open, callbacks
+и ожидающие события. Изменение самого disabled не вызывает onOpenChange;
+повторное включение может показать уже открытую панель.
+Сверка: [67 UMD-сценариев / 389 кадров и шесть cleanup traces](./tests/browser/fixtures/ant-design-popover-actions-reference.json),
+[SSR](./tests/package/popover-actions.ssr.test.ts) и
+[browser](./tests/browser/popover-actions.spec.ts), `?fixture=popover-actions`.
+Эталоны включают Popconfirm и передачу настроек через AvatarGroup.max.popover.
+Controlled-сценарии используют getter/setter binding с отклонением записи;
+обычный open продолжает следовать модели Svelte.
 
 Placement принимает те же 12 направлений, что Tooltip; arrow=false скрывает стрелку.
 AutoAdjustOverflow по умолчанию переворачивает и сдвигает поверхность у края
@@ -2146,6 +2169,10 @@ GetPopupContainer/getTooltipContainer передаются Popover с теми �
 Контекст темы и Promise действия сохраняются при переносе popup в контейнер.
 Trigger и hover delays наследуются из ConfigProvider.popconfirm; локальные props
 имеют приоритет. Без настройки trigger остаётся click.
+ShowAction/hideAction и focusDelay/blurDelay передаются Popover с теми же
+приоритетами и native границами, описанными выше. Пустой hideAction не отключает
+кнопки подтверждения/отмены. Защита ожидающего Promise и прежний disabled contract
+сохраняются; Popover.disabled и Popconfirm.disabled имеют собственные правила.
 DestroyOnHidden и legacy destroyTooltipOnHide передаются Popover с исходным
 приоритетом современного prop, включая false. При удалении содержимого заново
 создаются description snippet и кнопки; сам контроллер подтверждения сохраняет
@@ -2238,7 +2265,7 @@ aria-controls/aria-expanded. Во время ожидания выставляе
 отменой, ошибкой и повтором. После удаления trigger фокус переходит к кнопке
 восстановления записей. Пример освобождает ожидающие таймеры при удалении.
 Поддерживаются открытие по клику и все 12 направлений Tooltip;
-hover/contextMenu пока отсутствуют.
+hover/focus/contextMenu и независимые action props доступны также через Popconfirm.
 
 ## Menu
 
