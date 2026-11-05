@@ -1,5 +1,7 @@
 import { test, expect } from './test';
 import type { Page } from '@playwright/test';
+import registry from 'antd-svelte/porting/registry.json' with { type: 'json' };
+import actionReference from './fixtures/ant-design-typography-actions-reference.json' with { type: 'json' };
 
 const root = (page: Page) => page.locator('#typography-under-test');
 const control = (page: Page, name: string) => page.getByLabel(name, { exact: true });
@@ -387,6 +389,12 @@ test('Typography keeps controlled expansion unchanged when the owner rejects it'
 });
 
 test('Typography preserves source action widths and the exact two-line cut point', async ({ page }) => {
+  expect(actionReference.reference).toMatchObject({
+    version: registry.upstream.version,
+    revision: registry.upstream.revision,
+    archiveSha256: registry.upstream.archiveSha256
+  });
+
   await control(page, 'Typography copyable').check();
   await control(page, 'Typography editable').check();
   await select(page, 'Typography expandable').selectOption('collapsible');
@@ -398,7 +406,33 @@ test('Typography preserves source action widths and the exact two-line cut point
   const width = await root(page).locator('.ant-typography-actions').evaluate(
     element => element.getBoundingClientRect().width
   );
-  expect(width).toBeCloseTo(98.65625, 1);
+
+  // Upstream snapshot использует шрифты текущего браузера, изолируя CSS библиотеки.
+  const sourceWidth = await page.evaluate(
+    snapshot => {
+      const host = document.createElement('div');
+      host.inert = true;
+      host.setAttribute('aria-hidden', 'true');
+      host.style.cssText = 'position:fixed;left:-9999px;top:0;width:300px;visibility:hidden;pointer-events:none';
+      document.body.append(host);
+
+      try {
+        const shadow = host.attachShadow({ mode: 'open' });
+        const style = document.createElement('style');
+        style.textContent = snapshot.css.join('\n');
+        const content = document.createElement('div');
+        content.innerHTML = snapshot.html;
+        shadow.append(style, content);
+
+        return shadow.querySelector('.ant-typography-actions')!.getBoundingClientRect().width;
+      } finally {
+        host.remove();
+      }
+    },
+    actionReference.snapshot
+  );
+  expect(width).toBeCloseTo(sourceWidth, 1);
+
   await select(page, 'Typography actions').selectOption('start');
   await expect(root(page)).toHaveText(
     'РаскрытьBamboo is Little Light Bamboo is Little Light Bamboo is Little Ligh...'

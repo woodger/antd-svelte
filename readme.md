@@ -5131,6 +5131,12 @@ Vendor CSS рассчитан на `ant-typography`, произвольный pr
 [copy lifecycle](./src/lib/typography-copy.model.test.ts),
 [public package SSR](./tests/package/typography.ssr.test.ts),
 [browser](./tests/browser/typography.spec.ts), `?fixture=typography`.
+
+Ширина actions сверяется с
+[DOM/CSS-снимком Ant Design 6.6.8](./tests/browser/fixtures/ant-design-typography-actions-reference.json)
+в изолированном ShadowRoot. Так сравнение использует одинаковые шрифты текущего
+браузера в Chromium и Headless Shell; точность и границы двухстрочного текста сохранены.
+
 Ellipsis Tooltip defaults, semantic callbacks и события сверяются с
 [23 UMD-сценариями / 29 кадрами и 21 event trace](./tests/browser/fixtures/ant-design-typography-tooltip-reference.json):
 [SSR](./tests/package/typography-tooltip.ssr.test.ts),

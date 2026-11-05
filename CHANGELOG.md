@@ -580,6 +580,10 @@
 
 ### Fixed
 
+- Проверка геометрии Typography сравнивает actions с изолированным DOM/CSS-снимком
+  Ant Design 6.6.8. Разница метрик текста Chromium и Headless Shell больше не даёт
+  ложного падения; точность и точные границы двухстрочного текста сохранены.
+
 - Pagination: цвета active/hover/disabled теперь применяются к нативным кнопкам
   также без cssVar. Сохранены цвета пользовательских CSS-переменных и inline
   itemRender, размеры, binding, клавиатура и callbacks.

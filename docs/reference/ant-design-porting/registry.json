@@ -485,7 +485,8 @@
         "src/lib/popover.types.ts",
         "src/lib/AvatarGroup.svelte",
         "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
-        "tests/browser/overlay-empty-trigger.spec.ts"
+        "tests/browser/overlay-empty-trigger.spec.ts",
+        "tests/browser/fixtures/ant-design-typography-actions-reference.json"
       ],
       "features": [
         {
@@ -496,9 +497,10 @@
           "evidence": [
             "src/lib/typography.engine.test.ts",
             "tests/package/typography.ssr.test.ts",
-            "tests/browser/typography.spec.ts"
+            "tests/browser/typography.spec.ts",
+            "tests/browser/fixtures/ant-design-typography-actions-reference.json"
           ],
-          "note": "Article/span/h1–h5/div/a; порядок strong/u/del/code/mark/kbd/i, secure blank link, Text без rows/expandable, boolean ellipsis Link. Disabled — оформление, действия остаются интерактивными. Actions start/end и nativeElement bindings."
+          "note": "Article/span/h1–h5/div/a; порядок strong/u/del/code/mark/kbd/i, secure blank link, Text без rows/expandable, boolean ellipsis Link. Disabled — оформление, действия остаются интерактивными. Actions start/end и nativeElement bindings. Геометрия actions сравнивается с независимым DOM/CSS-снимком официального UMD в ShadowRoot, со шрифтами текущего Chromium/Headless Shell и прежней точностью."
         },
         {
           "id": "copyable",
@@ -532,9 +534,10 @@
           "evidence": [
             "src/lib/typography.engine.test.ts",
             "tests/package/typography.ssr.test.ts",
-            "tests/browser/typography.spec.ts"
+            "tests/browser/typography.spec.ts",
+            "tests/browser/fixtures/ant-design-typography-actions-reference.json"
           ],
-          "note": "CSS single/multi-line без лишних измерений; JS DOM binary search с исходными rows-1/action heights, 1px allowance и UTF-16 slicing. Width/text/rows/placement remeasure, suffix, defaultExpanded once, controlled expansion/withdrawal, custom symbol и onEllipsis. Native tooltip measure только при hover; операции скрывают текстовую подсказку."
+          "note": "CSS single/multi-line без лишних измерений; JS DOM binary search с исходными rows-1/action heights, 1px allowance и UTF-16 slicing. Width/text/rows/placement remeasure, suffix, defaultExpanded once, controlled expansion/withdrawal, custom symbol и onEllipsis. Native tooltip measure только при hover; операции скрывают текстовую подсказку. Точные границы двухстрочного scalar текста с actions start/end закреплены по официальному UMD; изолированный DOM/CSS-эталон отделяет шрифтовые метрики браузера от ошибок компонентных отступов и размеров."
         },
         {
           "id": "semantic-config",
