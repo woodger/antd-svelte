@@ -10103,6 +10103,11 @@
           "name": "@rc-component/trigger",
           "range": "^3.10.1",
           "referenceVersion": "3.10.1"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
         }
       ],
       "priority": "unassigned",
@@ -10205,7 +10210,16 @@
         "tests/browser/fixtures/TooltipAlignFixtures.svelte",
         "tests/browser/tooltip-align-metrics.ts",
         "tests/browser/tooltip-align.spec.ts",
-        "tests/package/tooltip-align.ssr.test.ts"
+        "tests/package/tooltip-align.ssr.test.ts",
+        "src/lib/tooltip.dom.ts",
+        "tests/browser/fixtures/ant-design-tooltip-lifecycle-reference.json",
+        "tests/browser/fixtures/tooltip-lifecycle.types.ts",
+        "tests/browser/fixtures/TooltipLifecycleCase.svelte",
+        "tests/browser/fixtures/TooltipLifecycleConsumers.svelte",
+        "tests/browser/fixtures/TooltipLifecycleState.svelte",
+        "tests/browser/fixtures/TooltipLifecycleFixtures.svelte",
+        "tests/browser/tooltip-lifecycle.spec.ts",
+        "tests/package/tooltip-lifecycle.ssr.test.ts"
       ],
       "features": [
         {
@@ -10470,9 +10484,12 @@
             "tests/browser/fixtures/ant-design-overlay-lifecycle-reference.json",
             "tests/browser/overlay-lifecycle-metrics.ts",
             "tests/browser/overlay-lifecycle.spec.ts",
-            "tests/package/overlay-lifecycle.ssr.test.ts"
+            "tests/package/overlay-lifecycle.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-tooltip-lifecycle-reference.json",
+            "tests/browser/tooltip-lifecycle.spec.ts",
+            "tests/package/tooltip-lifecycle.ssr.test.ts"
           ],
-          "note": "DestroyOnHidden ?? !!destroyTooltipOnHide; современный false перекрывает truthy alias, legacy object включает удаление независимо от keepParent. При закрытии очищается содержимое, включая DOM draft и локальное состояние child component; при открытии оно создаётся заново. Изменение флага в открытой панели сохраняет DOM/draft/selection/focus, в закрытой включает удаление сразу. Semantic props Tooltip получают разрешённый boolean, Popover/Popconfirm сохраняют входной prop. Настройки передаются ellipsis Tooltip Typography и single/active range/pinned range Slider. Контроллер Popconfirm сохраняет защиту от старого Promise при уничтоженном содержимом. 44 официальных UMD-сценария / 224 кадра фиксируют приоритет, initial/default open, body portals, скрытые обновления и reset/retention. Motion в эталоне отключена. Согласованная native граница: скрытый shell и ID/ARIA сохраняются, default SSR/content остаются eager, Typography и destroy=true ленивы при SSR; удаление следует native закрытию без ожидания source CSS motion. Исходные fresh cache, motion/unique и остальные delegated props остаются в работе."
+          "note": "DestroyOnHidden ?? !!destroyTooltipOnHide; современный false перекрывает truthy alias, legacy object включает удаление независимо от keepParent. При закрытии без forceRender очищается содержимое, включая DOM draft и локальное состояние child component; при открытии оно создаётся заново. Изменение флага в открытой панели сохраняет DOM/draft/selection/focus, в закрытой без forceRender включает удаление сразу. Semantic props Tooltip получают разрешённый boolean, Popover/Popconfirm сохраняют входной prop. Настройки передаются ellipsis Tooltip Typography и single/active range/pinned range Slider. Контроллер Popconfirm сохраняет защиту от старого Promise при уничтоженном содержимом. 44 официальных UMD-сценария / 224 кадра фиксируют приоритет, initial/default open, body portals, скрытые обновления и reset/retention. Motion в эталоне отключена. Согласованная native граница: скрытый shell и ID/ARIA сохраняются, default SSR/content остаются eager, Typography и destroy=true ленивы при SSR; удаление следует native закрытию без ожидания source CSS motion. Полный fresh cache для opaque Snippet, motion/unique и остальные delegated props остаются в работе. Tooltip.forceRender=true сохраняет скрытое содержимое также при destroyOnHidden; его выключение у закрытой подсказки разрешает удаление."
         },
         {
           "id": "empty-trigger",
@@ -10546,9 +10563,12 @@
             "tests/browser/fixtures/TooltipContentConsumers.svelte",
             "tests/browser/tooltip-content.spec.ts",
             "tests/package/tooltip-content.ssr.test.ts",
-            "readme.md"
+            "readme.md",
+            "tests/browser/fixtures/ant-design-tooltip-lifecycle-reference.json",
+            "tests/browser/tooltip-lifecycle.spec.ts",
+            "tests/package/tooltip-lifecycle.ssr.test.ts"
           ],
-          "note": "Fresh=false фиксирует последний открытый payload: scalar/array content, container semantic class/style и legacy/color layers; true обновляет скрытый payload. Root/arrow остаются реактивными. Снимок вложенного массива отделён от Svelte proxy. 80 UMD-кадров закрепляют default/false/true, динамический fresh и destroyOnHidden; native eager initial content и скрытый shell сохраняются. Snippet selection кэшируется, но захваченные reactive значения и эффекты Svelte продолжают обновляться: полный React.memo opaque captures не воспроизводится. Fresh передаётся Typography и single/active range/pinned range Slider; браузер проверяет данные consumers, DOM/state retention и отложенную замену Snippet. Source motion/UniqueProvider и остальной delegated API остаются в работе."
+          "note": "Fresh=false фиксирует последний открытый payload: scalar/array content, container semantic class/style и legacy/color layers; true обновляет скрытый payload. Root/arrow styles остаются реактивными. Снимок вложенного массива отделён от Svelte proxy. 80 UMD-кадров закрепляют default/false/true, динамический fresh и destroyOnHidden; native eager initial content и скрытый shell сохраняются. Snippet selection кэшируется, но захваченные reactive значения и эффекты Svelte продолжают обновляться: полный React.memo opaque captures не воспроизводится. Fresh передаётся Typography и single/active range/pinned range Slider; браузер проверяет данные consumers, DOM/state retention и отложенную замену Snippet. Source motion/UniqueProvider и остальной delegated API остаются в работе. Скрытый id Tooltip также следует fresh cache; первый force mount получает текущий payload."
         },
         {
           "id": "imperative-ref",
@@ -10596,6 +10616,31 @@
             "readme.md"
           ],
           "note": "BuiltinPlacements заменяет всю карту, включая пустой объект; align накладывается поверх выбранной записи без deep merge overflow. Points, offset/targetOffset с процентами и parseFloat strings, htmlRegion, dynamicInset/_experimental и autoArrow используют useAlign 3.10.1. Class выбирается по первому совпадению points; custom key/no class допустимы. Legacy CSS flags сохраняются в metadata, но Source их не использует. 38 UMD-сценариев фиксируют bbox/arrow/final align и resize без изменения координат, class, styles priority, initial callbacks и coalesced manual forceAlign, RTL и prop updates. Native fixed/top-layer, viewport limits и автоматическое anchor tracking сохраняются; полный CSS-transform/scroll-container clipping не заявлен. OnPopupAlign получает native DOM и итоговый align до координат; новые параметры передаются Typography и single/active/pinned range Slider. ForceAlign объединяет синхронные запросы в одну microtask, как Source; idle frames/SSR/closed popup не вызывают callback. Ref geometry проверки продолжают работать без animation frames; DOM/draft/focus/selection сохраняются. Общий аудит и motion/UniqueProvider остаются в работе."
+        },
+        {
+          "id": "trigger-lifecycle-options",
+          "title": "Disabled, id, forceRender и явный zIndex",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.dom.ts",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "tests/browser/fixtures/ant-design-tooltip-lifecycle-reference.json",
+            "tests/browser/fixtures/tooltip-lifecycle.types.ts",
+            "tests/browser/fixtures/TooltipLifecycleCase.svelte",
+            "tests/browser/fixtures/TooltipLifecycleConsumers.svelte",
+            "tests/browser/fixtures/TooltipLifecycleState.svelte",
+            "tests/browser/fixtures/TooltipLifecycleFixtures.svelte",
+            "tests/browser/tooltip-lifecycle.spec.ts",
+            "tests/package/tooltip-lifecycle.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Disabled скрывает popup/open class и снимает собственную description, сохраняя raw open, события и pending delay. Uncontrolled open переживает обновление spread props; Svelte bind contract сохранён. Id имеет стабильный falsy fallback и кэшируется с содержимым по fresh; caller-owned ARIA tokens сохраняются, включая whitespace/escaped id без повторного добавления токенов observer. ForceRender монтирует скрытое содержимое и portal после hydration, включая disabled/empty title и destroyOnHidden; первый mount берёт текущий payload, выключение force при destroy удаляет его. Явный zIndex, включая 0/negative, идёт перед provider/local root и legacy overlayStyle; отсутствие prop возвращает тематический default. 19 UMD-сценариев / 139 кадров и четыре consumer traces / 20 кадров закрепляют поведение. Настройки переданы single/active range/pinned range Slider и Typography; Typography вычисляет disabled по ellipsis, перекрывая tooltip option, как Source. Native eager SSR, retained shell, доступное описание закрытого Tooltip и существующая active range composition сохранены; destroy=true SSR остаётся lazy. Browser проверяет draft/counter/focus/selection, ID ownership, portal cleanup и отсутствие позднего callback после unmount. Source shared zIndex context, top-layer stacking, motion/UniqueProvider и остальные delegated props этим этапом не объявляются перенесёнными; общий аудит семейства остаётся в работе."
         }
       ]
     },

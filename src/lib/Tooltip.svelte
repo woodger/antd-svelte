@@ -40,6 +40,9 @@
   let sourceTrigger = $derived(Boolean(config.tooltip) || resolvedTrigger.length === 0
     || supports('click') || supports('contextMenu'));
   const initialDefault = untrack(() => defaultOpen);
+  // Отдельный raw state переживает обновление spread props без входного open.
+  let uncontrolledOpen = $state(initialDefault);
+  let rawOpen = $derived(providedOpen === undefined ? uncontrolledOpen : open ?? initialDefault);
   let host = $state<HTMLSpanElement>();
   let anchor = $state<Element>();
   let popupController = $state<{
@@ -55,7 +58,7 @@
   let active = true;
   let content = $derived(getTooltipContent(title, overlay));
   let available = $derived(hasTooltipContent(content));
-  let visible = $derived(available && (open ?? initialDefault));
+  let visible = $derived(!props.disabled && available && rawOpen);
 
   onMount(() => {
     ref = {
@@ -112,7 +115,7 @@
   function request(next: boolean, delay = 0) {
     cancelPending();
     const target = anchor;
-    const ownerValue = open;
+    const ownerValue = providedOpen;
 
     function apply() {
       pending = undefined;
@@ -122,14 +125,14 @@
         || !target?.isConnected
         || target !== anchor
         || !Object.is(
-          open,
+          providedOpen,
           ownerValue
         )
         || next
         && !wanted()
-        || next === (open
-          ?? initialDefault)) return;
+        || next === rawOpen) return;
 
+      uncontrolledOpen = next;
       open = next;
       onOpenChange?.(next);
     }

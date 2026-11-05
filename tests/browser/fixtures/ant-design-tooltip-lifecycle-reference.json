@@ -1,0 +1,4715 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "delegated": {
+      "tooltip": "1.5.2",
+      "trigger": "3.10.1",
+      "util": "1.14.0"
+    },
+    "operation": "Public Tooltip disabled raw open/event/delay lifecycle, forceRender with destroyOnHidden/portal/fresh, reactive id fallback/ARIA, explicit zero/negative/reactive zIndex and root style priority. Motion disabled and clock advanced by 100ms after each frame. Native eager retained shell, SSR and persistent description boundaries are compared separately; shared source zIndex context is outside these scalar prop cases."
+  },
+  "cases": [
+    {
+      "name": "disabled-hover",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "hover",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "disabled-focus",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "focus"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "blur"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "focus",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false,
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "disabled-click",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "click"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "click",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "disabled-contextMenu",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "contextMenu"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "contextMenu",
+            "mouseEnterDelay": 0,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false,
+              true
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "disabled-default-open",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "defaultOpen": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "defaultOpen": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "defaultOpen": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "defaultOpen": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "defaultOpen": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "defaultOpen": false,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "disabled-controlled-open",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "open": false,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "open": false,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "disabled-pending-hover",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "hover",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "enter"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "hover",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "hover",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "advance",
+            "ms": 1200
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": true,
+            "trigger": "hover",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "hover",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "leave"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "disabled": false,
+            "trigger": "hover",
+            "mouseEnterDelay": 1,
+            "mouseLeaveDelay": 0
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": [
+              true,
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "force-false-destroy-false",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Initial content",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Before opening"
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": true
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": true,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Updated while hidden"
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": false
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "fresh": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": false
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": false,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": true,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": false,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "force-true-destroy-false",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Initial content",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Initial content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Before opening"
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Initial content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": true
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Initial content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": true,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Updated while hidden"
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": false
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "fresh": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": false,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": false
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": false,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": true,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": false,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "force-false-destroy-true",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Initial content",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Before opening"
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": true
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": true,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Updated while hidden"
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": false
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "fresh": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": false
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": true,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": true,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": true,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "force-true-destroy-true",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Initial content",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Initial content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Before opening"
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Initial content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": true
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Initial content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": true,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false
+            }
+          },
+          "props": {
+            "title": "Before opening",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Updated while hidden"
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Before opening",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": false
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "fresh": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "forceRender": false
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": false,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": true,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": false,
+            "text": null,
+            "id": null,
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": null,
+            "inlineZIndex": null,
+            "portal": false,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Updated while hidden",
+            "open": true,
+            "trigger": [],
+            "forceRender": false,
+            "destroyOnHidden": true,
+            "portal": true,
+            "fresh": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Updated while hidden",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "force-disabled-empty",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "",
+            "disabled": true,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "title": "Available content"
+            }
+          },
+          "props": {
+            "title": "Available content",
+            "disabled": true,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Available content",
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Available content",
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "trigger": [],
+            "portal": true,
+            "open": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Available content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Available content",
+            "disabled": true,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "trigger": [],
+            "portal": true,
+            "open": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Available content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "custom-id",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "first-tooltip-id",
+            "open": true,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "first-tooltip-id",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": "changed-tooltip-id"
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "changed-tooltip-id",
+            "open": true,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "changed-tooltip-id",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "changed-tooltip-id",
+            "open": false,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "changed-tooltip-id",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": ""
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "",
+            "open": false,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "changed-tooltip-id",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": null,
+            "open": false,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "changed-tooltip-id",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": null,
+            "open": true,
+            "trigger": [],
+            "portal": true
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": "last-tooltip-id",
+              "disabled": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "last-tooltip-id",
+            "open": true,
+            "trigger": [],
+            "portal": true,
+            "disabled": true
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "last-tooltip-id",
+            "open": true,
+            "trigger": [],
+            "portal": true,
+            "disabled": false
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "last-tooltip-id",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": true,
+            "getterUsed": true,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "id-input-tokens",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "safe-tooltip-id",
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "safe-tooltip-id",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": "spaced tooltip"
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "spaced tooltip",
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "spaced tooltip",
+            "openClass": true,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": "existing-description trailing"
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "existing-description trailing",
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "existing-description trailing",
+            "openClass": true,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": "   "
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "   ",
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "   ",
+            "openClass": true,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": "tooltip-<&\"'>"
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "tooltip-<&\"'>",
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "tooltip-<&\"'>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": ""
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": "",
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "id": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "id": null,
+            "open": true,
+            "trigger": []
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "z-index-0",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "0",
+            "inlineZIndex": "0",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": 1600
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1600
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1600",
+            "inlineZIndex": "1600",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false,
+              "zIndex": 1700
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": false,
+            "trigger": [],
+            "zIndex": 1700
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1700",
+            "inlineZIndex": "1700",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1700
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1700",
+            "inlineZIndex": "1700",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "z-index--1",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": -1
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "-1",
+            "inlineZIndex": "-1",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": 1600
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1600
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1600",
+            "inlineZIndex": "1600",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false,
+              "zIndex": 1700
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": false,
+            "trigger": [],
+            "zIndex": 1700
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1700",
+            "inlineZIndex": "1700",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1700
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1700",
+            "inlineZIndex": "1700",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "z-index-1234",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1234",
+            "inlineZIndex": "1234",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": 1600
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1600
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1600",
+            "inlineZIndex": "1600",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": false,
+              "zIndex": 1700
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": false,
+            "trigger": [],
+            "zIndex": 1700
+          },
+          "snapshot": {
+            "visible": false,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": false,
+            "described": false,
+            "existingDescription": true,
+            "zIndex": "1700",
+            "inlineZIndex": "1700",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "open": true
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1700
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1700",
+            "inlineZIndex": "1700",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "z-index-style-priority",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1234,
+            "providerZIndex": 1300,
+            "rootZIndex": 1400,
+            "overlayZIndex": 1500
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1500",
+            "inlineZIndex": "1500",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "overlayZIndex": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1234,
+            "providerZIndex": 1300,
+            "rootZIndex": 1400,
+            "overlayZIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1400",
+            "inlineZIndex": "1400",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "rootZIndex": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1234,
+            "providerZIndex": 1300,
+            "rootZIndex": null,
+            "overlayZIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1300",
+            "inlineZIndex": "1300",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "providerZIndex": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 1234,
+            "providerZIndex": null,
+            "rootZIndex": null,
+            "overlayZIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1234",
+            "inlineZIndex": "1234",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": 0
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": 0,
+            "providerZIndex": null,
+            "rootZIndex": null,
+            "overlayZIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "0",
+            "inlineZIndex": "0",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "zIndex": null,
+            "providerZIndex": null,
+            "rootZIndex": null,
+            "overlayZIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "1070",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "name": "z-index-token-default",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "tokenZIndex": 2400
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "2400",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": 0
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "tokenZIndex": 2400,
+            "zIndex": 0
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "0",
+            "inlineZIndex": "0",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "zIndex": null
+            }
+          },
+          "props": {
+            "title": "Lifecycle content",
+            "open": true,
+            "trigger": [],
+            "tokenZIndex": 2400,
+            "zIndex": null
+          },
+          "snapshot": {
+            "visible": true,
+            "contentMounted": true,
+            "text": "Lifecycle content",
+            "id": "<generated>",
+            "openClass": true,
+            "described": true,
+            "existingDescription": true,
+            "zIndex": "2400",
+            "inlineZIndex": "",
+            "portal": false,
+            "getterUsed": false,
+            "events": []
+          }
+        }
+      ]
+    }
+  ],
+  "consumers": [
+    {
+      "mode": "single",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "show"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 1,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "disabled": true,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false,
+              "id": "consumer-changed",
+              "zIndex": 1567
+            }
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-changed",
+            "zIndex": 1567
+          },
+          "snapshot": {
+            "visibleCount": 1,
+            "ids": [
+              "consumer-changed"
+            ],
+            "zIndices": [
+              "1567"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "hide"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-changed",
+            "zIndex": 1567
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [
+              "consumer-changed"
+            ],
+            "zIndices": [
+              "1567"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "mode": "range",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [],
+            "zIndices": [],
+            "texts": []
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "show"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 1,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "disabled": true,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false,
+              "id": "consumer-changed",
+              "zIndex": 1567
+            }
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-changed",
+            "zIndex": 1567
+          },
+          "snapshot": {
+            "visibleCount": 1,
+            "ids": [
+              "consumer-changed"
+            ],
+            "zIndices": [
+              "1567"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "hide"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-changed",
+            "zIndex": 1567
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [
+              "consumer-changed"
+            ],
+            "zIndices": [
+              "1567"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "mode": "pinned",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 2,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "show"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 2,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "disabled": true,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false,
+              "id": "consumer-changed",
+              "zIndex": 1567
+            }
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-changed",
+            "zIndex": 1567
+          },
+          "snapshot": {
+            "visibleCount": 2,
+            "ids": [
+              "consumer-changed"
+            ],
+            "zIndices": [
+              "1567"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "hide"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-changed",
+            "zIndex": 1567
+          },
+          "snapshot": {
+            "visibleCount": 2,
+            "ids": [
+              "consumer-changed"
+            ],
+            "zIndices": [
+              "1567"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "mode": "typography",
+      "frames": [
+        {
+          "action": {
+            "kind": "initial"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "show"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 1,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": true
+            }
+          },
+          "props": {
+            "disabled": true,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-first",
+            "zIndex": 1234
+          },
+          "snapshot": {
+            "visibleCount": 1,
+            "ids": [
+              "consumer-first"
+            ],
+            "zIndices": [
+              "1234"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "props",
+            "props": {
+              "disabled": false,
+              "id": "consumer-changed",
+              "zIndex": 1567
+            }
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-changed",
+            "zIndex": 1567
+          },
+          "snapshot": {
+            "visibleCount": 1,
+            "ids": [
+              "consumer-changed"
+            ],
+            "zIndices": [
+              "1567"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        },
+        {
+          "action": {
+            "kind": "event",
+            "event": "hide"
+          },
+          "props": {
+            "disabled": false,
+            "forceRender": true,
+            "destroyOnHidden": true,
+            "id": "consumer-changed",
+            "zIndex": 1567
+          },
+          "snapshot": {
+            "visibleCount": 0,
+            "ids": [
+              "consumer-changed"
+            ],
+            "zIndices": [
+              "1567"
+            ],
+            "texts": [
+              "Consumer value"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

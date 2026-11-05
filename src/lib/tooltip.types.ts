@@ -90,6 +90,10 @@ export interface TooltipProps {
   /** DOM-класс открытого trigger после hydration; пустая строка использует `${prefixCls}-open`. */
   openClassName?: string;
   children: Snippet;
+  /** ID native popup; пустая строка использует стабильный fallback. Скрытый ID следует fresh. */
+  id?: string;
+  /** Скрывает popup, сохраняя raw open и обработку trigger-событий. @defaultValue false */
+  disabled?: boolean;
   /** Поддерживает bind:open. */
   open?: boolean | undefined;
   /** @defaultValue false */
@@ -97,6 +101,13 @@ export interface TooltipProps {
   onOpenChange?: (open: boolean) => void;
   /** Удаляет содержимое при закрытии; скрытый native shell сохраняется. @defaultValue false */
   destroyOnHidden?: boolean;
+  /**
+   * Заранее монтирует скрытое содержимое и portal после hydration, включая destroyOnHidden.
+   * @defaultValue false
+   */
+  forceRender?: boolean;
+  /** Явный z-index popup; semantic root и legacy overlayStyle имеют приоритет. */
+  zIndex?: number;
   /**
    * Явный destroyOnHidden приоритетнее, включая false.
    * Объект включает удаление независимо от keepParent.
@@ -142,6 +153,14 @@ export interface TooltipProps {
 /** Параметры Tooltip ручки Slider; formatter=null отключает содержимое подсказки. */
 export interface SliderTooltipConfig {
   open?: boolean;
+  /** Передаётся каждой подсказке Slider; скрытый ID следует fresh. */
+  id?: TooltipProps['id'];
+  /** Скрывает подсказки, не отключая Slider и не меняя его значение. */
+  disabled?: TooltipProps['disabled'];
+  /** Монтирует скрытое содержимое после hydration, включая destroyOnHidden. */
+  forceRender?: TooltipProps['forceRender'];
+  /** Явный z-index каждой подсказки; не заменяет общий source zIndex context. */
+  zIndex?: TooltipProps['zIndex'];
   /** Обновляет содержимое скрытой подсказки; default cache сохраняет последний открытый кадр. */
   fresh?: boolean;
   /** Удаляет содержимое каждой скрытой подсказки; по умолчанию сохраняет. */

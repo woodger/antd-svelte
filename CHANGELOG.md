@@ -9,6 +9,12 @@
 
 ### Added
 
+- Tooltip: disabled с сохранением raw open и ожидающих событий, id с fallback/fresh
+  cache, forceRender для скрытого содержимого и portal, явный zIndex с source style
+  priority. Настройки передаются Slider и Typography; сохранены native shell/SSR,
+  ARIA ownership, draft/focus/selection. Добавлены 19 UMD-сценариев, четыре consumer
+  traces и SSR/browser-проверки; общий source zIndex context остаётся в работе.
+
 - Tooltip: align/builtinPlacements и onPopupAlign с исходным приоритетом карт,
   offsets/targetOffset, overflow, htmlRegion, dynamicInset и autoArrow. Переданы
   Typography и single/range Slider; semantic styles сохраняют приоритет.

@@ -1676,6 +1676,25 @@ DefaultOpen задаёт начальное состояние. `onOpenChange(op
 не вызывают callback. Как и другие bindable props модуля, open следует модели
 Svelte; для синхронизации владельца используйте bind:open.
 
+`disabled` скрывает подсказку и её open class, сохраняя raw open. Trigger-события
+и ожидающий mouseEnterDelay продолжают менять это состояние и вызывать
+onOpenChange, как в rc-trigger. Изменение самого disabled не вызывает callback;
+повторное включение может показать уже открытую подсказку. ConfigProvider.disabled
+по-прежнему не отключает объясняющий Tooltip.
+
+`id` задаёт ID popup; пустая строка использует стабильный автоматически созданный
+fallback. При fresh=false скрытый ID кэшируется вместе с содержимым и обновляется
+при открытии. Существующая native связь aria-describedby сохраняется также при
+закрытии; disabled снимает только собственную связь Tooltip. Описания владельца
+не удаляются при смене ID или отключении.
+
+`zIndex` задаёт inline z-index popup, включая 0 и отрицательные значения.
+Provider root styles, local styles.root и legacy overlayStyle идут после него;
+без prop сохраняется тематический zIndexPopup. Настройки передаются single/range
+Slider и ellipsis Tooltip Typography. В Typography disabled вычисляет сам ellipsis
+и перекрывает значение из tooltip options, как в upstream. Общий source zIndex
+context и порядок native top layer этим prop не меняются.
+
 `bind:ref` выдаёт TooltipRef после mount и очищает его при unmount. NativeElement
 указывает на основной DOM trigger, включая SVG; popupElement — на существующий
 native span shell. Getters отражают замену trigger и перенос popup в контейнер.
@@ -1714,16 +1733,28 @@ Escape закрывает Tooltip, следующий — Modal.
 не воспроизводится. Политика fresh передаётся в ellipsis Tooltip Typography
 и single/range Slider; Typography сохраняет поддержку bigint и whitespace.
 
-DestroyOnHidden=true удаляет содержимое при закрытии и создаёт заново при открытии:
+DestroyOnHidden=true без forceRender удаляет содержимое при закрытии и создаёт заново при открытии:
 DOM-состояние и состояние вложенного
 компонента сбрасываются. Legacy destroyTooltipOnHide принимает boolean или объект
 с keepParent; объект включает удаление независимо от keepParent. Явный современный
 prop, включая false, приоритетнее alias. Смена флага у открытой подсказки сохраняет
-её DOM, ввод и фокус; включение удаления у закрытой сразу очищает содержимое.
+её DOM, ввод и фокус; включение удаления у закрытой без forceRender сразу очищает содержимое.
 При включённом удалении SSR не вызывает title snippet, включая начальный open/defaultOpen.
 Прежний скрытый native shell и его ID/ARIA сохраняются; default SSR остаётся eager.
 Это также работает в ellipsis Tooltip Typography и подсказках Slider.
 Удаление следует native закрытию без ожидания исходной CSS motion.
+
+`forceRender=true` заранее монтирует скрытое содержимое после hydration и вызывает
+getPopupContainer, даже без открытия и при disabled. При destroyOnHidden=true оно
+сохраняет скрытое содержимое; выключение forceRender у закрытой подсказки удаляет
+его. Новый force mount получает текущий payload, затем действует fresh cache.
+ForceRender не открывает popup и не вызывает onOpenChange. Native shell сохраняется;
+SSR при destroyOnHidden остаётся lazy, portal getter на сервере не вызывается.
+Сверка: [19 UMD-сценариев и четыре consumer traces](./tests/browser/fixtures/ant-design-tooltip-lifecycle-reference.json),
+[SSR](./tests/package/tooltip-lifecycle.ssr.test.ts) и
+[browser](./tests/browser/tooltip-lifecycle.spec.ts), `?fixture=tooltip-lifecycle`.
+У active range Slider сохраняется существующий один native shell до выбора ручки;
+исходная conditional composition не подменяет его lifecycle.
 
 Жизненный цикл сверяется с
 [44 UMD-сценариями / 224 кадрами](./tests/browser/fixtures/ant-design-overlay-lifecycle-reference.json),
@@ -1901,7 +1932,8 @@ Tooltip Typography. У Typography без config сохраняется исхо�
 [10 UMD-последовательностями / 130 кадрами](./tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json)
 для controlled/default open и удаления focused содержимого:
 [browser](./tests/browser/overlay-empty-trigger.spec.ts).
-Tooltip.unique, motion, fresh cache и полный align API ещё не перенесены.
+Tooltip.unique, motion, source zIndex context и остальные delegated rc-trigger props
+ещё требуют переноса. Границы fresh cache для Snippet и CSS-transform/clipping описаны выше.
 
 ### Цвет Tooltip, Popover и Popconfirm
 

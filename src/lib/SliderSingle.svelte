@@ -617,6 +617,10 @@
     prefixCls={tooltip === false ? undefined : tooltip?.prefixCls}
     openClassName={tooltip === false ? undefined : tooltip?.openClassName}
     fresh={tooltip === false ? undefined : tooltip?.fresh}
+    id={tooltip === false ? undefined : tooltip?.id}
+    disabled={tooltip === false ? undefined : tooltip?.disabled}
+    forceRender={tooltip === false ? undefined : tooltip?.forceRender}
+    zIndex={tooltip === false ? undefined : tooltip?.zIndex}
     align={tooltip === false ? undefined : tooltip?.align}
     builtinPlacements={tooltip === false ? undefined : tooltip?.builtinPlacements}
     onPopupAlign={tooltip === false ? undefined : tooltip?.onPopupAlign}

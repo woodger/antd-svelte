@@ -42,7 +42,11 @@
     destroyOnHidden,
     destroyTooltipOnHide,
     fresh,
-    open,
+    open: rawOpen,
+    id: providedId,
+    disabled,
+    forceRender,
+    zIndex,
     anchor,
     describe,
     trigger,
@@ -68,6 +72,10 @@
     destroyTooltipOnHide?: TooltipProps['destroyTooltipOnHide'];
     fresh?: boolean;
     open: boolean;
+    id?: string;
+    disabled?: boolean;
+    forceRender?: boolean;
+    zIndex?: number;
     anchor?: Element;
     describe?: Element;
     trigger?: Element;
@@ -92,7 +100,11 @@
   const componentTheme = useComponentTheme('Tooltip');
   const designTokens = useDesignTokenContext();
   const generatedId = $props.id();
-  const id = `ant-tooltip-${generatedId}`;
+  let resolvedId = $derived((providedId ?? semanticProps?.id) || `ant-tooltip-${generatedId}`);
+  let resolvedDisabled = $derived(disabled ?? semanticProps?.disabled ?? false);
+  let open = $derived(rawOpen && !resolvedDisabled);
+  let force = $derived(forceRender ?? semanticProps?.forceRender ?? false);
+  let resolvedZIndex = $derived(zIndex ?? semanticProps?.zIndex);
   let popup = $state<HTMLSpanElement>();
   let realign: (() => void) | undefined;
   let actualPlacement = $state(untrack(() => placement));
@@ -119,8 +131,24 @@
     );
     for (const align of Object.values(placements)) align.htmlRegion = 'visibleFirst';
     return {
-      ...(semanticProps ?? { title, open, placement, arrow, color, prefixCls, openClassName,
-        destroyOnHidden, destroyTooltipOnHide, align, builtinPlacements, onPopupAlign }),
+      ...(semanticProps ?? {
+        title,
+        open: rawOpen,
+        placement,
+        arrow,
+        color,
+        prefixCls,
+        openClassName,
+        destroyOnHidden,
+        destroyTooltipOnHide,
+        align,
+        builtinPlacements,
+        onPopupAlign,
+        id: providedId,
+        disabled,
+        forceRender,
+        zIndex
+      }),
       ...(ownerClassName ? { classNames: localClassNames } : {}),
       trigger: semanticProps?.trigger || config.tooltip?.trigger
         || (config.tooltip ? 'hover' : ['hover', 'focus']),
@@ -150,7 +178,10 @@
   ));
   let colorInfo = $derived(getTooltipColor(color, prefix));
   let rootLayers = $derived([
-    componentTheme.style, colorInfo.arrowStyle, semantics.styles.root
+    componentTheme.style,
+    resolvedZIndex === undefined ? undefined : `z-index:${resolvedZIndex}`,
+    colorInfo.arrowStyle,
+    semantics.styles.root
   ]);
   let rootStyle = $derived(serializeInlineStyleLayers(rootLayers));
   let containerLayers = $derived([
@@ -158,6 +189,7 @@
   ]);
   let refresh = $derived(fresh ?? semanticProps?.fresh ?? false);
   let payload = $derived({
+    id: resolvedId,
     title,
     layers: containerLayers,
     classes: [`${prefix}-container`, semantics.classNames.container],
@@ -165,14 +197,16 @@
   });
   let cached = $state.raw(untrack(() => ({ ...payload, title: captureContent(title) })));
   let rendered = $derived(open || refresh ? payload : cached);
+  let id = $derived(rendered.id);
   const initialContainerStyle = untrack(() => serializeInlineStyleLayers(rendered.layers));
   const initialStyle = untrack(() => rootStyle);
   const popupStyle = createOverlayStyle(() => rootLayers);
   let available = $derived(contentAvailable ?? hasTooltipContent(title));
   let mounted = $state(false);
-  let renderContent = $derived(!destroy || mounted && open && available);
+  let renderContent = $derived(!destroy || mounted && (force || open && available));
+  let initialized = false;
   const portal = createPopupContainer(() => ({
-    open: open && available,
+    open: force || open && available,
     reference: anchor,
     getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
     themeStyle: rootStyle
@@ -181,7 +215,12 @@
   onMount(() => { mounted = true; });
 
   $effect.pre(() => {
-    if (open || refresh) cached = { ...payload, title: captureContent(title) };
+    // Первый force render получает текущий payload; последующие скрытые updates используют fresh.
+    if (open || refresh || force && !initialized) {
+      cached = { ...payload, title: captureContent(title) };
+    }
+    if (open || force) initialized = true;
+    else if (destroy) initialized = false;
   });
 
   // Снимок массива не удерживает reactive proxy; внутреннее состояние Snippet остаётся Svelte-owned.
@@ -205,7 +244,7 @@
   }
 
   $effect(() => {
-    if (describe && available) return connectTooltipDescription(describe, id);
+    if (describe && available && !resolvedDisabled) return connectTooltipDescription(describe, id);
   });
 
   $effect(() => {

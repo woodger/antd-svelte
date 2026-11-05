@@ -566,6 +566,10 @@
         prefixCls={props.tooltip.prefixCls}
         openClassName={props.tooltip.openClassName}
         fresh={props.tooltip.fresh}
+        id={props.tooltip.id}
+        disabled={props.tooltip.disabled}
+        forceRender={props.tooltip.forceRender}
+        zIndex={props.tooltip.zIndex}
         align={props.tooltip.align}
         builtinPlacements={props.tooltip.builtinPlacements}
         onPopupAlign={props.tooltip.onPopupAlign}
@@ -604,6 +608,10 @@
       prefixCls={props.tooltip === false ? undefined : props.tooltip?.prefixCls}
       openClassName={props.tooltip === false ? undefined : props.tooltip?.openClassName}
       fresh={props.tooltip === false ? undefined : props.tooltip?.fresh}
+      id={props.tooltip === false ? undefined : props.tooltip?.id}
+      disabled={props.tooltip === false ? undefined : props.tooltip?.disabled}
+      forceRender={props.tooltip === false ? undefined : props.tooltip?.forceRender}
+      zIndex={props.tooltip === false ? undefined : props.tooltip?.zIndex}
       align={props.tooltip === false ? undefined : props.tooltip?.align}
       builtinPlacements={props.tooltip === false ? undefined : props.tooltip?.builtinPlacements}
       onPopupAlign={props.tooltip === false ? undefined : props.tooltip?.onPopupAlign}

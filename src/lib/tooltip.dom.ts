@@ -25,11 +25,23 @@ export function connectTooltipOpenClass(element: Element, className: string): ()
 }
 
 export function connectTooltipDescription(element: Element, id: string): () => void {
+  // ARIA хранит IDREF tokens; пробелы в caller id не должны зациклить observer.
+  const requested = id.split(/\s+/).filter(Boolean);
+  const owned = new Set<string>();
+
   function merge() {
     const tokens = (element.getAttribute('aria-describedby') ?? '').split(/\s+/).filter(Boolean);
 
-    if (!tokens.includes(id))
-      element.setAttribute('aria-describedby', [...tokens, id].join(' '));
+    let changed = false;
+
+    for (const token of requested) {
+      if (!tokens.includes(token)) {
+        owned.add(token);
+        tokens.push(token);
+        changed = true;
+      }
+    }
+    if (changed) element.setAttribute('aria-describedby', tokens.join(' '));
   }
 
   merge();
@@ -38,8 +50,10 @@ export function connectTooltipDescription(element: Element, id: string): () => v
 
   return () => {
     observer.disconnect();
+    if (!owned.size) return;
+
     const tokens = (element.getAttribute('aria-describedby') ?? '').split(/\s+/).filter(
-      (token) => token && token !== id
+      (token) => token && !owned.has(token)
     );
 
     if (tokens.length)

@@ -29,7 +29,7 @@
   let mounted = $state(false);
 
   $effect(() => {
-    if (visible) mounted = true;
+    if (visible || options.forceRender && available) mounted = true;
   });
 
   $effect(() => {
@@ -196,8 +196,14 @@
     <TooltipPopup title={resolvedTitle} contentAvailable={available}
       open={visible} anchor={target} describe={target} trigger={target}
       color={options.color} prefixCls={options.prefixCls} openClassName={options.openClassName}
-      semanticProps={{ ...options, title: resolvedTitle, trigger: resolvedTrigger,
-        mouseEnterDelay: enterDelay, mouseLeaveDelay: leaveDelay }}
+      semanticProps={{
+        ...options,
+        disabled: !enabled,
+        title: resolvedTitle,
+        trigger: resolvedTrigger,
+        mouseEnterDelay: enterDelay,
+        mouseLeaveDelay: leaveDelay
+      }}
       placement={options.placement} arrow={options.arrow} autoAdjustOverflow={options.autoAdjustOverflow}
       getPopupContainer={options.getPopupContainer} getTooltipContainer={options.getTooltipContainer}
       onDismiss={() => dismiss()} onHoverChange={value => hoverPopup(value)} />
