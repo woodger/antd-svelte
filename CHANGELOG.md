@@ -9,6 +9,13 @@
 
 ### Added
 
+- Tooltip: align/builtinPlacements и onPopupAlign с исходным приоритетом карт,
+  offsets/targetOffset, overflow, htmlRegion, dynamicInset и autoArrow. Переданы
+  Typography и single/range Slider; semantic styles сохраняют приоритет.
+  ForceAlign объединяет вызовы в microtask по rc-trigger; сохранены native tracking,
+  hidden shell/SSR, DOM, фокус и выделение. Добавлены 38 UMD-сценариев, числовые,
+  SSR/browser-проверки и явные границы CSS-transform/scroll-container clipping.
+
 - TooltipRef: bind:ref, текущие nativeElement/popupElement и forceAlign на общем
   контроллере позиции. Сохранены native shell/SSR, автоматическое отслеживание,
   cleanup, фокус и выделение; вызов не добавляет dependencies в пользовательский effect.

@@ -617,6 +617,9 @@
     prefixCls={tooltip === false ? undefined : tooltip?.prefixCls}
     openClassName={tooltip === false ? undefined : tooltip?.openClassName}
     fresh={tooltip === false ? undefined : tooltip?.fresh}
+    align={tooltip === false ? undefined : tooltip?.align}
+    builtinPlacements={tooltip === false ? undefined : tooltip?.builtinPlacements}
+    onPopupAlign={tooltip === false ? undefined : tooltip?.onPopupAlign}
     destroyOnHidden={tooltip === false ? undefined : tooltip?.destroyOnHidden}
     destroyTooltipOnHide={tooltip === false ? undefined : tooltip?.destroyTooltipOnHide}
     autoAdjustOverflow={tooltip === false ? undefined : tooltip?.autoAdjustOverflow}

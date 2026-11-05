@@ -3,7 +3,7 @@ export type PopupPlacement = 'center' | 'top' | 'bottom' | 'left' | 'right'
   | 'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight'
   | 'leftTop' | 'leftBottom' | 'rightTop' | 'rightBottom';
 export interface PopupRect { left: number; top: number; width: number; height: number; }
-export type PopupOffset = number | `${number}%`;
+export type PopupOffset = number | string;
 export interface PopupSourceAlign {
   points?: readonly string[];
   offset?: readonly PopupOffset[];
@@ -337,7 +337,11 @@ export function getPopupPlacement(
       && (alignPoint || (item.points?.[1] || '') === (align.points?.[1] || '')))?.[0];
 }
 
-export function getPopupArrowStyle(position: ReturnType<typeof getPopupAlignment> | undefined) {
+export function getPopupArrowStyle(position: {
+  align?: PopupSourceAlign;
+  arrowX: number;
+  arrowY: number;
+} | undefined) {
   const align = position?.align;
   if (!align?.points || align.autoArrow === false) return '';
   const [source, target] = align.points;

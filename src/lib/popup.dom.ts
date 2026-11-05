@@ -4,7 +4,7 @@ import {
   type TooltipRect,
   type TooltipSourcePlacement
 } from './tooltip.engine';
-import type { PopupFlipCache } from './popup-position.engine';
+import type { PopupFlipCache, PopupSourceAlign } from './popup-position.engine';
 import type { AdjustOverflow, TooltipPlacement } from './tooltip.types';
 
 const openPopups = new WeakMap<Document, HTMLElement[]>();
@@ -25,6 +25,9 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   placement: TooltipPlacement;
   autoAdjustOverflow: boolean | AdjustOverflow;
   sourcePlacement?: TooltipSourcePlacement;
+  sourceAlign?: PopupSourceAlign;
+  builtinPlacements?: Readonly<Record<string, PopupSourceAlign>>;
+  onAlign?: (position: TooltipPosition) => void;
   onPlacement: (placement: TooltipPlacement) => void;
   onDismiss: (reason: 'escape' | 'outside') => void;
   onKeydown?: (event: KeyboardEvent) => void;
@@ -44,7 +47,9 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
   let frame = 0;
   let shown = false;
   let disposed = false;
+  let alignRequest = 0;
   let lastPosition = '';
+  let lastAlignment = '';
   let flips: PopupFlipCache | undefined;
 
   function hide() {
@@ -61,7 +66,7 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
     shown = false;
   }
 
-  function update() {
+  function update(manual = false) {
     if (disposed) return;
 
     const rect = anchor.getBoundingClientRect();
@@ -125,6 +130,8 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
       {
         flips,
         source: options.sourcePlacement,
+        align: options.sourceAlign,
+        builtinPlacements: options.builtinPlacements,
         scrollRegion: {
           x: -document.documentElement.scrollLeft,
           y: -document.documentElement.scrollTop,
@@ -140,8 +147,16 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
         .top}:${position
           .arrowX}:${position
             .arrowY}:${position
-              .placement}`;
+              .placement}:${JSON.stringify(position.sourceAlign)}:${position.alignedPlacement}`;
 
+    const onAlign = options.onAlign;
+    if (onAlign) {
+      const geometry = `${signature}:${rect.x}:${rect.y}:${rect.width}:${rect.height}:${bounds.width}:${bounds.height}`;
+      if (manual || geometry !== lastAlignment) {
+        onAlign(position);
+        lastAlignment = geometry;
+      }
+    }
     options.applyPosition?.(position);
     if (signature !== lastPosition) {
       if (!options.applyPosition) {
@@ -163,6 +178,13 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
     update();
     if (!disposed)
       frame = view.requestAnimationFrame(tick);
+  }
+
+  function forceAlign() {
+    const request = ++alignRequest;
+    Promise.resolve().then(() => {
+      if (request === alignRequest) update(true);
+    });
   }
 
   function handleKeydown(event: KeyboardEvent) {
@@ -220,5 +242,5 @@ export function connectPopup(popup: HTMLElement, anchor: Element, options: {
     document.removeEventListener('pointerdown', handlePointerdown, true);
     popup.removeEventListener('pointerdown', preserveFocus);
     hide();
-  }, { forceAlign: update });
+  }, { forceAlign });
 }

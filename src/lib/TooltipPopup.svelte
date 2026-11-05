@@ -5,7 +5,8 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { getOverlaySemantics } from './overlay-semantic.engine';
   import { createOverlayStyle } from './overlay-style.model.svelte';
-  import { getPopupPlacements } from './popup-position.engine';
+  import { getPopupArrowStyle, getPopupPlacement, getPopupPlacements } from './popup-position.engine';
+  import type { TooltipPosition } from './tooltip.engine';
   import { getTooltipColor } from './tooltip-color.engine';
   import { getOverlayPrefixCss } from './overlay-prefix.engine';
   import prefixTemplate from './vendor/tooltip-prefix.css.js';
@@ -46,6 +47,9 @@
     describe,
     trigger,
     placement = 'top',
+    align,
+    builtinPlacements,
+    onPopupAlign,
     arrow,
     autoAdjustOverflow = true,
     getPopupContainer,
@@ -68,6 +72,9 @@
     describe?: Element;
     trigger?: Element;
     placement?: TooltipPlacement;
+    align?: TooltipProps['align'];
+    builtinPlacements?: TooltipProps['builtinPlacements'];
+    onPopupAlign?: TooltipProps['onPopupAlign'];
     arrow?: TooltipArrow;
     autoAdjustOverflow?: boolean | AdjustOverflow;
     getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
@@ -89,9 +96,14 @@
   let popup = $state<HTMLSpanElement>();
   let realign: (() => void) | undefined;
   let actualPlacement = $state(untrack(() => placement));
+  let actualPosition = $state.raw<TooltipPosition>();
+  let resolvedAlign = $derived(align ?? semanticProps?.align);
+  let configuredPlacements = $derived(builtinPlacements ?? semanticProps?.builtinPlacements);
+  let alignCallback = $derived(onPopupAlign ?? semanticProps?.onPopupAlign);
+  let customPosition = $derived(Boolean(resolvedAlign || configuredPlacements || alignCallback));
   let arrowConfig = $derived(getTooltipArrow(arrow, config.tooltip?.arrow));
   let sourcePlacement = $derived(Boolean(config.tooltip) || typeof arrow === 'object'
-    || typeof autoAdjustOverflow === 'object');
+    || typeof autoAdjustOverflow === 'object' || customPosition);
   let destroy = $derived(destroyOnHidden ?? semanticProps?.destroyOnHidden
     ?? Boolean(destroyTooltipOnHide ?? semanticProps?.destroyTooltipOnHide));
   let localClassNames = $derived(ownerClassName
@@ -108,7 +120,7 @@
     for (const align of Object.values(placements)) align.htmlRegion = 'visibleFirst';
     return {
       ...(semanticProps ?? { title, open, placement, arrow, color, prefixCls, openClassName,
-        destroyOnHidden, destroyTooltipOnHide }),
+        destroyOnHidden, destroyTooltipOnHide, align, builtinPlacements, onPopupAlign }),
       ...(ownerClassName ? { classNames: localClassNames } : {}),
       trigger: semanticProps?.trigger || config.tooltip?.trigger
         || (config.tooltip ? 'hover' : ['hover', 'focus']),
@@ -116,9 +128,19 @@
       mouseLeaveDelay: semanticProps?.mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1,
       getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
       destroyOnHidden: destroy,
-      builtinPlacements: placements
+      builtinPlacements: configuredPlacements || placements
     };
   });
+  let classPlacement = $derived.by(() => {
+    if (!customPosition) return open ? actualPlacement : placement;
+    return actualPosition?.sourceAlign
+      ? getPopupPlacement(callbackProps.builtinPlacements, actualPosition.sourceAlign) : undefined;
+  });
+  let arrowPositionStyle = $derived(customPosition && actualPosition ? getPopupArrowStyle({
+    align: actualPosition.sourceAlign,
+    arrowX: actualPosition.arrowX,
+    arrowY: actualPosition.arrowY
+  }) : '');
   let semantics = $derived(getOverlaySemantics(
     config.tooltip,
     localClassNames,
@@ -205,6 +227,19 @@
         return sourcePlacement
           ? getTooltipPlacementConfig(arrowConfig, designTokens.state.token) : undefined;
       },
+      get sourceAlign() { return customPosition ? resolvedAlign ?? {} : undefined; },
+      get builtinPlacements() { return configuredPlacements; },
+      get onAlign() {
+        return customPosition ? (position: TooltipPosition) => {
+          actualPosition = position;
+          alignCallback?.(surface, position.sourceAlign ?? {});
+        } : undefined;
+      },
+      onVisibilityChange: shown => {
+        if (shown && customPosition) queueMicrotask(() => {
+          if (open && available) realign?.();
+        });
+      },
       gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement) || sourcePlacement
         ? (arrowConfig.show ? designTokens.state.token.sizePopupArrow / 2 : 0)
           + designTokens.state.token.marginXXS : undefined),
@@ -235,13 +270,13 @@
 </style>
 
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`tooltip-prefix:${prefix}`} />{/if}<span bind:this={popup} {id} role="tooltip" popover="manual" hidden dir={config.direction}
-  data-ant-tooltip="" data-ant-placement={open ? actualPlacement : placement}
+  data-ant-tooltip="" data-ant-placement={classPlacement}
   data-ant-tooltip-inline={!callbackProps.getPopupContainer || undefined} class={[
     prefix,
     'ant-tooltip-css-var',
     componentTheme.className,
     colorInfo.className,
-    `${prefix}-placement-${open ? actualPlacement : placement}`,
+    classPlacement && `${prefix}-placement-${classPlacement}`,
     config.direction === 'rtl' && `${prefix}-rtl`,
     semanticProps?.overlayClassName, semanticProps?.rootClassName,
     config.tooltip?.class, semantics.classNames.root
@@ -252,7 +287,9 @@
         onHoverChange?.(true);
     }} onpointerleave={() => onHoverChange?.(false)}>
   {#if arrowConfig.show}<span data-ant-tooltip-arrow="" class={[`${prefix}-arrow`, semantics.classNames.arrow]}
-    style={semantics.styles.arrow} aria-hidden="true"></span>{/if}
+    style={arrowPositionStyle
+      ? `${arrowPositionStyle};${semantics.styles.arrow ?? ''}` : semantics.styles.arrow}
+    aria-hidden="true"></span>{/if}
   <span data-ant-tooltip-container="" class={rendered.classes}
     data-ant-overlay-color={rendered.customColor || undefined}
     style={initialContainerStyle} {@attach containerStyle}

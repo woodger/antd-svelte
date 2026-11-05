@@ -566,6 +566,9 @@
         prefixCls={props.tooltip.prefixCls}
         openClassName={props.tooltip.openClassName}
         fresh={props.tooltip.fresh}
+        align={props.tooltip.align}
+        builtinPlacements={props.tooltip.builtinPlacements}
+        onPopupAlign={props.tooltip.onPopupAlign}
         destroyOnHidden={props.tooltip.destroyOnHidden}
         destroyTooltipOnHide={props.tooltip.destroyTooltipOnHide}
         autoAdjustOverflow={props.tooltip.autoAdjustOverflow}
@@ -601,6 +604,9 @@
       prefixCls={props.tooltip === false ? undefined : props.tooltip?.prefixCls}
       openClassName={props.tooltip === false ? undefined : props.tooltip?.openClassName}
       fresh={props.tooltip === false ? undefined : props.tooltip?.fresh}
+      align={props.tooltip === false ? undefined : props.tooltip?.align}
+      builtinPlacements={props.tooltip === false ? undefined : props.tooltip?.builtinPlacements}
+      onPopupAlign={props.tooltip === false ? undefined : props.tooltip?.onPopupAlign}
       destroyOnHidden={props.tooltip === false ? undefined : props.tooltip?.destroyOnHidden}
       destroyTooltipOnHide={props.tooltip === false ? undefined : props.tooltip?.destroyTooltipOnHide}
       autoAdjustOverflow={props.tooltip === false ? undefined : props.tooltip?.autoAdjustOverflow}

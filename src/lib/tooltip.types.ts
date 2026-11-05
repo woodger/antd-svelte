@@ -12,9 +12,12 @@ export interface TooltipRef {
   readonly nativeElement: Element | undefined;
   /** Существующий native span shell сохраняется также при закрытии и destroyOnHidden. */
   readonly popupElement: HTMLSpanElement | undefined;
-  /** Пересчитывает открытый popup; закрытый или уничтоженный экземпляр не открывает. */
+  /** Объединяет вызовы в microtask; закрытый или уничтоженный popup не открывает. */
   forceAlign: () => void;
 }
+
+/** AlignType rc-trigger 3.10.1; offsets принимают числа, проценты и parseFloat strings. */
+export type TooltipAlignConfig = PopupSourceAlign;
 
 /** Физические направления; Left/Right в имени не меняются при RTL. */
 export type TooltipPlacement =
@@ -102,6 +105,12 @@ export interface TooltipProps {
   destroyTooltipOnHide?: boolean | { keepParent?: boolean };
   /** @defaultValue 'top' */
   placement?: TooltipPlacement;
+  /** Накладывается поверх выбранной записи placements; вложенный overflow заменяется целиком. */
+  align?: TooltipAlignConfig;
+  /** Заменяет всю автоматически подготовленную карту, включая пустой объект. */
+  builtinPlacements?: Readonly<Record<string, TooltipAlignConfig>>;
+  /** Получает DOM popup и итоговый align после flip, до применения новых координат. */
+  onPopupAlign?: (popup: HTMLElement, align: TooltipAlignConfig) => void;
   /** @defaultValue true */
   arrow?: TooltipArrow;
   /** @defaultValue true */
@@ -145,6 +154,9 @@ export interface SliderTooltipConfig {
   /** DOM-класс открытой ручки после hydration; default — `${prefixCls}-open`. */
   openClassName?: string;
   placement?: TooltipPlacement;
+  align?: TooltipAlignConfig;
+  builtinPlacements?: Readonly<Record<string, TooltipAlignConfig>>;
+  onPopupAlign?: TooltipProps['onPopupAlign'];
   arrow?: TooltipArrow;
   /** Как у Tooltip; boolean defaults сохраняют native viewport behavior. */
   autoAdjustOverflow?: boolean | AdjustOverflow;

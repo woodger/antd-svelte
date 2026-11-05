@@ -408,6 +408,7 @@ export type {
   TooltipProps,
   TooltipContent,
   TooltipRef,
+  TooltipAlignConfig,
   TooltipPlacement,
   TooltipTrigger,
   TooltipColor,

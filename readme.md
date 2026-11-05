@@ -1682,12 +1682,13 @@ native span shell. Getters отражают замену trigger и перено
 Shell доступен также до первого открытия и при destroyOnHidden: исходный lazy div
 и его удаление не подменяют согласованный native lifecycle.
 
-`tooltipRef?.forceAlign()` сразу пересчитывает открытый popup текущим контроллером
+`tooltipRef?.forceAlign()` пересчитывает открытый popup текущим контроллером
 placement/arrow/overflow. После изменения разметки вызовите его после `await tick()`
 либо в `$effect`. Метод не создаёт дополнительный animation loop, не открывает
 закрытый или уничтоженный popup и не вызывает onOpenChange; DOM, ввод, фокус и
 выделение сохраняются. Прежнее автоматическое отслеживание anchor продолжает работать.
-Императивный вызов не подписывает `$effect` на внутреннее состояние Tooltip.
+Вызовы в одном turn объединяются в одну microtask, как в rc-trigger; возвращаемое
+значение — void. Императивный вызов не подписывает `$effect` на внутреннее состояние Tooltip.
 
 Как в исходном interface, TooltipProps не содержит ref; полный тип Svelte-компонента
 с binding доступен через `ComponentProps<typeof Tooltip>`. Сверка DOM/ref и layout:
@@ -1751,6 +1752,34 @@ tip стрелки к центру trigger. Угловые варианты с p
 Положение обновляется при прокрутке, resize и перемещении anchor, пока подсказка
 открыта. Class и style относятся к wrapper.
 
+`align` накладывается поверх выбранной записи placements; вложенный `overflow`
+заменяется целиком. `builtinPlacements` заменяет всю автоматическую карту, включая
+пустой объект. Points задают точки popup/target; offset считается относительно popup,
+targetOffset — относительно target. Поддержаны числа, проценты и строки через
+parseFloat, включая исходную трактовку `5px` как числа 5. TooltipAlignConfig также
+содержит htmlRegion, dynamicInset/_experimental.dynamicInset и autoArrow.
+UseCssRight/useCssBottom/useCssTransform/ignoreShake сохраняются в metadata,
+но rc-trigger 3.10.1 их не использует.
+
+Класс placement выбирается по первому совпадению points в текущей карте: возможен
+пользовательский ключ или отсутствие класса. Стрелка использует итоговые points;
+semantic styles.arrow и styles.root сохраняют приоритет над координатами.
+Новые align/builtinPlacements/onPopupAlign включают исходную геометрию и gap также
+без source-настроек; прежние defaults без этих props сохраняются.
+
+`onPopupAlign(node, info)` получает реальный popup и итоговые points после flip,
+до применения новых координат. Он вызывается при открытии, фактическом изменении
+геометрии и явном forceAlign; запросы forceAlign в одном turn объединяются.
+Прежнее native отслеживание anchor продолжает работать, callback не вызывается
+на каждом неизменившемся animation frame. SSR и закрытый popup не вызывают callback.
+Настройки передаются Typography и single/active range/pinned range Slider.
+Сверка: [38 UMD-сценариев](./tests/browser/fixtures/ant-design-tooltip-align-reference.json),
+[числовой движок](./src/lib/tooltip-align-reference.test.ts),
+[SSR](./tests/package/tooltip-align.ssr.test.ts) и
+[browser](./tests/browser/tooltip-align.spec.ts), `?fixture=tooltip-align`.
+Размеры box заданы явно для проверки геометрии; native fixed/top-layer и viewport
+ограничения сохраняются, полный CSS-transform/scroll-container clipping здесь не заявлен.
+
 При source-настройках ConfigProvider панель использует Tooltip tokens: maxWidth,
 zIndexPopup, offsets и форму стрелки, включая component aliases/algorithm.
 Отступ от anchor рассчитывается по глобальным sizePopupArrow и marginXXS, как
@@ -1778,7 +1807,7 @@ Portal переносит наследуемые variables и сохраняет
 Вложенные popup сохраняют собственные координаты и цвет стрелки.
 
 Галерея находится на `/ant-design#tooltip`. Поддерживаются строки, числа и rich snippets.
-Полный align/motion API пока отсутствует.
+Исходные motion/UniqueProvider и оставшиеся delegated props ещё не перенесены.
 AutoAdjustOverflow принимает также `{ adjustX?: 0 | 1, adjustY?: 0 | 1 }`.
 Числовой 0 тоже разрешает flip, как в rc-trigger; отключение обеих коррекций
 задаётся boolean false.

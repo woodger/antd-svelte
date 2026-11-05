@@ -80,7 +80,7 @@ for (const source of [false, true]) {
         await draft.fill('Preserved by forceAlign');
         await draft.evaluate((node: HTMLInputElement) => node.setSelectionRange(2, 8));
 
-        const movement = await root.evaluate(node => {
+        const movement = await root.evaluate(async node => {
           const api = (node as TooltipRefFixtureElement).tooltipRef!;
           const popup = api.popupElement!;
           const trigger = api.nativeElement as HTMLElement | SVGElement;
@@ -88,6 +88,7 @@ for (const source of [false, true]) {
           trigger.style.marginLeft = '80px';
           const beforeForce = popup.getBoundingClientRect().x - before;
           api.forceAlign();
+          await Promise.resolve();
           return { beforeForce, afterForce: popup.getBoundingClientRect().x - before };
         });
 

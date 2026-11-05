@@ -1,4 +1,6 @@
-import { getPopupPlacements, getPopupPosition, type PopupFlipCache } from './popup-position.engine';
+import {
+  getPopupPlacements, getPopupPosition, type PopupFlipCache, type PopupSourceAlign
+} from './popup-position.engine';
 import type { AdjustOverflow, TooltipArrow, TooltipContent, TooltipPlacement } from './tooltip.types';
 import type { AliasToken } from './theme-token.types';
 
@@ -27,12 +29,16 @@ export interface TooltipPosition {
   placement: TooltipPlacement;
   /** История rc-trigger flips для следующего расчёта в том же открытии. */
   flips?: PopupFlipCache;
+  sourceAlign?: PopupSourceAlign;
+  alignedPlacement?: string;
 }
 
 interface TooltipPositionContext {
   flips?: Readonly<PopupFlipCache>;
   scrollRegion?: TooltipRect;
   source?: TooltipSourcePlacement;
+  align?: PopupSourceAlign;
+  builtinPlacements?: Readonly<Record<string, PopupSourceAlign>>;
 }
 
 export interface TooltipSourcePlacement {
@@ -82,13 +88,16 @@ function getSourcePosition(
 ): TooltipPosition {
   // Без новых object props corners используют прежнюю сумму half-arrow + offset.
   const source = context.source;
-  const placements = getPopupPlacements(
+  const placements = context.builtinPlacements || getPopupPlacements(
     source?.pointAtCenter ?? false,
     source?.arrowWidth ?? 0,
     source?.offset ?? gap,
     source?.radius ?? 6,
     autoAdjustOverflow
   );
+  if (!context.builtinPlacements) {
+    for (const align of Object.values(placements)) align.htmlRegion = 'visibleFirst';
+  }
   const right = viewport.x + viewport.width;
   const bottom = viewport.y + viewport.height;
   // Измерение useAlign в (0, 0) расширяет scroll region до размеров popup.
@@ -109,20 +118,26 @@ function getSourcePosition(
       bottom: region.y + region.height
     },
     placements,
-    align: { ...placements[placement], htmlRegion: 'visibleFirst' },
+    align: { ...placements[placement], ...context.align },
     scaleX: 1,
     scaleY: 1,
     flips: context.flips
   });
   const point = result.align.points[0];
+  const dynamicInset = result.align.dynamicInset || result.align._experimental?.dynamicInset;
 
   return {
-    left: point[1] === 'r' ? right - result.right - popup.width : result.x,
-    top: point[0] === 'b' ? bottom - result.bottom - popup.height : result.y,
-    placement: result.placement as TooltipPlacement,
+    left: dynamicInset && point[1] === 'r' ? right - result.right - popup.width : result.x,
+    top: dynamicInset && point[0] === 'b' ? bottom - result.bottom - popup.height : result.y,
+    placement: (context.align || context.builtinPlacements
+      ? result.placement || placement : result.placement) as TooltipPlacement,
     arrowX: result.arrowX,
     arrowY: result.arrowY,
-    flips: result.flips
+    flips: result.flips,
+    ...(context.align || context.builtinPlacements ? {
+      sourceAlign: result.align,
+      alignedPlacement: result.placement
+    } : {})
   };
 }
 
@@ -143,7 +158,8 @@ export function getTooltipPosition(
   gap = 8,
   context?: TooltipPositionContext
 ): TooltipPosition {
-  if (isTooltipCorner(placement) || context?.source || typeof autoAdjustOverflow === 'object') {
+  if (isTooltipCorner(placement) || context?.source || context?.align || context?.builtinPlacements
+    || typeof autoAdjustOverflow === 'object') {
     return getSourcePosition(anchor, popup, viewport, placement, autoAdjustOverflow, gap, context);
   }
 

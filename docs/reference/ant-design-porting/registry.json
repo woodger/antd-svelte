@@ -10196,7 +10196,16 @@
         "tests/browser/fixtures/TooltipRefCase.svelte",
         "tests/browser/fixtures/TooltipRefFixtures.svelte",
         "tests/browser/tooltip-ref.spec.ts",
-        "tests/package/tooltip-ref.ssr.test.ts"
+        "tests/package/tooltip-ref.ssr.test.ts",
+        "src/lib/tooltip-align-reference.test.ts",
+        "tests/browser/fixtures/ant-design-tooltip-align-reference.json",
+        "tests/browser/fixtures/tooltip-align.types.ts",
+        "tests/browser/fixtures/TooltipAlignCase.svelte",
+        "tests/browser/fixtures/TooltipAlignConsumers.svelte",
+        "tests/browser/fixtures/TooltipAlignFixtures.svelte",
+        "tests/browser/tooltip-align-metrics.ts",
+        "tests/browser/tooltip-align.spec.ts",
+        "tests/package/tooltip-align.ssr.test.ts"
       ],
       "features": [
         {
@@ -10561,6 +10570,32 @@
             "readme.md"
           ],
           "note": "Svelte bind:ref после mount с текущими nativeElement/popupElement и forceAlign через существующий контроллер. Ref отдельно от TooltipProps, как в исходном forwardRef; полные props доступны через ComponentProps<typeof Tooltip>. Четыре официальных UMD-сценария фиксируют button/SVG, open/close/reopen, destroyOnHidden и unmount, layout shift80. Native getters отражают текущие Element/span, скрытый shell остаётся подключённым до первого открытия и после закрытия; Source lazy DIV и detached popup snapshot сознательно не копируются. Manual alignment не добавляет RAF loop или tracked dependencies и не открывает закрытый/уничтоженный popup. Browser останавливает автоматические frames, проверяет фактический shift80, DOM/draft/focus/selection, replacement trigger, body portal и cleanup. SSR не создаёт ref и не запускает DOM/timers. Callback/RefObject React заменены Svelte binding; остальные delegated props и общий аудит остаются в работе."
+        },
+        {
+          "id": "source-align-api",
+          "title": "Align/builtinPlacements и onPopupAlign",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tooltip.types.ts",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "src/lib/tooltip-align-reference.test.ts",
+            "tests/browser/fixtures/ant-design-tooltip-align-reference.json",
+            "tests/browser/fixtures/tooltip-align.types.ts",
+            "tests/browser/fixtures/TooltipAlignCase.svelte",
+            "tests/browser/fixtures/TooltipAlignConsumers.svelte",
+            "tests/browser/fixtures/TooltipAlignFixtures.svelte",
+            "tests/browser/tooltip-align-metrics.ts",
+            "tests/browser/tooltip-align.spec.ts",
+            "tests/package/tooltip-align.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "BuiltinPlacements заменяет всю карту, включая пустой объект; align накладывается поверх выбранной записи без deep merge overflow. Points, offset/targetOffset с процентами и parseFloat strings, htmlRegion, dynamicInset/_experimental и autoArrow используют useAlign 3.10.1. Class выбирается по первому совпадению points; custom key/no class допустимы. Legacy CSS flags сохраняются в metadata, но Source их не использует. 38 UMD-сценариев фиксируют bbox/arrow/final align и resize без изменения координат, class, styles priority, initial callbacks и coalesced manual forceAlign, RTL и prop updates. Native fixed/top-layer, viewport limits и автоматическое anchor tracking сохраняются; полный CSS-transform/scroll-container clipping не заявлен. OnPopupAlign получает native DOM и итоговый align до координат; новые параметры передаются Typography и single/active/pinned range Slider. ForceAlign объединяет синхронные запросы в одну microtask, как Source; idle frames/SSR/closed popup не вызывают callback. Ref geometry проверки продолжают работать без animation frames; DOM/draft/focus/selection сохраняются. Общий аудит и motion/UniqueProvider остаются в работе."
         }
       ]
     },
