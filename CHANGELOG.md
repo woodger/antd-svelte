@@ -613,6 +613,11 @@
 
 ### Fixed
 
+- Statistic: titleFontSize/contentFontSize применяются через общую компонентную
+  тему также в Timer и Countdown. Сохранены native compact, semantic/value styles,
+  вложенные providers, snippets и интервалы при смене токенов. Добавлена сверка
+  CSS declarations и оформления с Ant Design 6.6.8, SSR и browser.
+
 - Descriptions: все десять компонентных токенов подключены к общей теме.
   Сохранены bordered/size priorities, responsive column/span, semantic/item styles
   и фокус при реактивном обновлении. Добавлена сверка с Ant Design 6.6.8 для

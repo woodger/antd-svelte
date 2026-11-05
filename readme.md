@@ -451,6 +451,22 @@ formatter и valueRender скрытого значения не вызывают
 атрибутами. В RTL значение остаётся LTR, интервалы prefix/suffix логические.
 Темы наследуют цвета; compact меняет title/content с 14/24px на 12/20px.
 
+ConfigProvider.theme.components.Statistic задаёт titleFontSize/contentFontSize
+также для Timer и Countdown. Defaults рассчитываются из fontSize/fontSizeHeading3;
+поддержаны числовой 0, строковый contentFontSize, alias tokens, глобальные
+и компонентные algorithms, cssVar.prefix и вложенные providers.
+Реактивная смена темы сохраняет содержимое, snippets, фокус и работу таймеров.
+Переменные темы применяются перед styles.root/style; semantic styles и
+приоритет styles.content над deprecated valueStyle сохраняются.
+Отступ loading host берётся из собственной темы Skeleton, включая его
+component aliases/algorithm; Statistic.padding не перекрывает этот отступ.
+В эталоне 6.6.8 RTL class Statistic не задаёт direction в LTR-документе.
+Svelte сохраняет существующий dir=rtl и LTR value; наблюдение записано в реестре.
+Сверка: [официальные CSS tokens](./tools/fixtures/ant-design-statistic-tokens-reference.json),
+[оформление normal/loading/Timer/Countdown](./tests/browser/fixtures/ant-design-statistic-theme-reference.json),
+[SSR](./tests/package/statistic-theme.ssr.test.ts) и
+[browser](./tests/browser/statistic-theme.spec.ts), `?fixture=statistic-theme`.
+
 Пример — `/ant-design#statistic`, фикстура — `?fixture=statistic`. Unit/SSR/Chromium
 проверяют форматирование, loading, snippets, semantic styles, темы, RTL и фокус.
 Рецепт statistic воспроизводит 14 правил vendor/statistic.css из закреплённого

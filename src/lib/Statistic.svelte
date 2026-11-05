@@ -1,5 +1,8 @@
 <script lang="ts">
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { componentThemeVariables } from './theme-component-style.engine';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { formatStatisticValue } from './statistic.engine';
   import Skeleton from './Skeleton.svelte';
   import type { StatisticContent, StatisticProps, StatisticSemanticInfo } from './statistic.types';
@@ -25,6 +28,14 @@
     ...rest
   }: StatisticProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Statistic');
+  const designTokens = useDesignTokenContext();
+  let skeletonPadding = $derived(componentThemeVariables('Skeleton', designTokens.state.token)
+    ['--ant-padding'] ?? `${designTokens.state.token.padding}px`);
+  // Source Skeleton имеет собственный CSS-variable root; native host сохраняет его отступ.
+  let skeletonStyle = $derived(designTokens.enabled
+    ? `--ant-padding:${skeletonPadding}`
+    : undefined);
   let semanticInfo = $derived<StatisticSemanticInfo>({
     props: {
       ...rest,
@@ -78,15 +89,16 @@
 <div {...rest} bind:this={nativeElement} dir={config.direction}
   class={[
       'ant-statistic ant-statistic-css-var',
+      componentTheme.className,
       config.direction === 'rtl' && 'ant-statistic-rtl',
       config.theme.compact && 'ant-statistic-compact',
       className,
       rootClassName,
       classes.root
     ]}
-  style={[slotStyles.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, slotStyles.root, style].filter(Boolean).join(';')}>
   {#if hasContent(title)}<div class={['ant-statistic-header', classes.header]} style={slotStyles.header}><div class={['ant-statistic-title', classes.title]} style={slotStyles.title}>{@render content(title)}</div></div>{/if}
-  {#if loading}<Skeleton paragraph={false} active class="ant-statistic-skeleton" />
+  {#if loading}<Skeleton paragraph={false} active class="ant-statistic-skeleton" style={skeletonStyle} />
   {:else}
     <div class={['ant-statistic-content', classes.content]} style={[valueStyle, slotStyles.content].filter(Boolean).join(';')}>
       {#if hasContent(prefix)}<span class={['ant-statistic-content-prefix', classes.prefix]} style={slotStyles.prefix}>{@render content(prefix)}</span>{/if}

@@ -9946,7 +9946,20 @@
         "src/lib/statistic.types.ts",
         "src/lib/statistic.engine.ts",
         "readme.md",
-        "integration:statistic"
+        "integration:statistic",
+        "src/lib/StatisticTimer.svelte",
+        "src/lib/StatisticCountdown.svelte",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-statistic-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-statistic-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-statistic-theme-reference.json",
+        "tests/browser/fixtures/statistic-theme-presets.ts",
+        "tests/browser/fixtures/StatisticThemeCase.svelte",
+        "tests/browser/fixtures/StatisticThemeStatistic.svelte",
+        "tests/browser/fixtures/StatisticThemeFixtures.svelte",
+        "tests/browser/statistic-theme-metrics.ts",
+        "tests/browser/statistic-theme.spec.ts",
+        "tests/package/statistic-theme.ssr.test.ts"
       ],
       "features": [
         {
@@ -9997,8 +10010,45 @@
           "note": "Отдельные Svelte-экспорты StatisticTimer/StatisticCountdown. SSR выводит -, время форматируется фиксированными единицами эталона; onChange получает знаковый остаток, onFinish только после deadline. При отсутствующем value отображение использует default=0 из Statistic, callbacks — исходную цель и NaN. React deprecation console warning Countdown не воспроизводится."
         },
         {
+          "id": "component-theme-tokens",
+          "title": "TitleFontSize/contentFontSize для Statistic, Timer и Countdown",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Statistic.svelte",
+            "src/lib/StatisticTimer.svelte",
+            "src/lib/StatisticCountdown.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-statistic-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-statistic-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-statistic-theme-reference.json",
+            "tests/browser/fixtures/statistic-theme-presets.ts",
+            "tests/browser/fixtures/StatisticThemeCase.svelte",
+            "tests/browser/fixtures/StatisticThemeStatistic.svelte",
+            "tests/browser/fixtures/StatisticThemeFixtures.svelte",
+            "tests/browser/statistic-theme-metrics.ts",
+            "tests/browser/statistic-theme.spec.ts",
+            "tests/package/statistic-theme.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Фабрика и root theme hook следуют 6.6.8: titleFontSize/contentFontSize из fontSize/fontSizeHeading3, zero/string/undefined, global/component alias tokens и algorithms, cssVar.prefix. Normal/loading/Timer/Countdown, RTL, nested/reset/sibling providers и semantic/value/user priority. Native compact сохраняет прежние метрики; смена темы сохраняет значения, snippets, draft/focus/selection и работу таймеров. SSR не запускает часы или интервалы. Отступ native loading host использует собственный resolved Skeleton.padding вместо Statistic.padding, как CSS-variable root Skeleton в source."
+        },
+        {
+          "id": "source-theme-boundaries",
+          "title": "Native RTL direction и обёртки Skeleton",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Statistic.svelte",
+            "tests/browser/fixtures/ant-design-statistic-theme-reference.json",
+            "tests/browser/statistic-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "Upstream observation: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, UMD RTL preset в отдельном CSS1Compat документе без HTML dir. ConfigProvider direction=rtl добавляет Statistic class ant-statistic-rtl, но style/index.ts не задаёт direction; computed root остаётся ltr. Svelte сохраняет существующий dir=rtl и LTR value. В UMD сохранён исходный результат; browser-сверка отдельно учитывает только это различие направления. Loading сохраняет native accessible Skeleton host/status и служебные обёртки; его padding-top сверяется с отдельной темой Skeleton, включая component aliases/algorithm."
+        },
+        {
           "id": "global-config",
-          "title": "Произвольные component tokens, prefixCls и component config",
+          "title": "PrefixCls и глобальный component config",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],

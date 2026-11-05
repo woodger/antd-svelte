@@ -28,9 +28,13 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
-  | 'Descriptions';
+  | 'Descriptions' | 'Statistic';
 
 const factories = {
+  Statistic: (token: GlobalToken) => ({
+    titleFontSize: token.fontSize,
+    contentFontSize: token.fontSizeHeading3
+  }),
   Descriptions: (token: GlobalToken) => ({
     labelBg: token.colorFillAlter,
     labelColor: token.colorTextTertiary,
@@ -238,7 +242,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Collapse: [],
   Card: [],
   Carousel: [],
-  Descriptions: []
+  Descriptions: [],
+  Statistic: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]
