@@ -42,6 +42,8 @@ export interface PopconfirmConfig {
 /** Подтверждение действия с Promise, состоянием ожидания и защитой от позднего результата. */
 export interface PopconfirmProps {
   children: Snippet;
+  /** Передаётся наружному Popover; скрытый ID следует fresh. */
+  id?: string;
   /** Передаётся наружному Popover; semantic цвета текста подтверждения приоритетнее. */
   color?: TooltipColor;
   /** Меняет классы подтверждения; наружный Popover сохраняет собственный prefix. */
@@ -57,6 +59,12 @@ export interface PopconfirmProps {
   defaultOpen?: boolean;
   /** Удаляет содержимое подтверждения при закрытии. @defaultValue false */
   destroyOnHidden?: boolean;
+  /** Монтирует скрытое подтверждение и portal после hydration, включая destroyOnHidden. */
+  forceRender?: boolean;
+  /** Обновляет скрытое содержимое и semantic styles; по умолчанию false. */
+  fresh?: boolean;
+  /** Передаётся Popover перед semantic/legacy root styles. */
+  zIndex?: number;
   /**
    * Явный destroyOnHidden приоритетнее, включая false; keepParent не меняет удаление.
    * @deprecated Используйте destroyOnHidden.

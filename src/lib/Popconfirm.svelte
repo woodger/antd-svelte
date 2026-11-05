@@ -99,9 +99,6 @@
   let active = true;
   let resolvedDisabled = $derived(disabled ?? form?.disabled ?? config.componentDisabled);
   let hasTitle = $derived(typeof title === 'function' || Boolean(String(title ?? '').trim()));
-  let hasDescription = $derived(
-    typeof description === 'function' || Boolean(String(description ?? '').trim())
-  );
   let visible = $derived(!resolvedDisabled && hasTitle && rawOpen);
   let session = $derived(visible ? { owner: rawOpen } : null);
   const action = createPopconfirmAction(() => session, {
@@ -116,6 +113,34 @@
     }
   });
   let errorVisible = $derived(session !== null && session === errorSession);
+  let destroy = $derived(destroyOnHidden ?? Boolean(destroyTooltipOnHide));
+  let force = $derived(props.forceRender ?? false);
+  let refresh = $derived(props.fresh ?? false);
+  let payload = $derived({
+    title,
+    description,
+    icon,
+    prefix,
+    semantics,
+    showCancel,
+    okText,
+    cancelText,
+    okType,
+    okButtonProps: okButtonProps ? { ...okButtonProps } : undefined,
+    cancelButtonProps: cancelButtonProps ? { ...cancelButtonProps } : undefined
+  });
+  let cached = $state.raw(untrack(() => payload));
+  let rendered = $derived(visible || refresh ? payload : cached);
+  let renderedDescription = $derived(typeof rendered.description === 'function'
+    || Boolean(String(rendered.description ?? '').trim()));
+  let initialized = false;
+
+  $effect.pre(() => {
+    // Содержимое принадлежит этому Snippet; внешний Popover не может заморозить его props.
+    if (visible || refresh || force && !initialized) cached = payload;
+    if (visible || force) initialized = true;
+    else if (destroy) initialized = false;
+  });
 
   $effect.pre(() => {
     const element = overlay;
@@ -170,26 +195,26 @@
 </style>
 
 {#snippet content()}
-  <div bind:this={overlay} data-ant-popconfirm-content="" class={`${prefix}-inner-content`} tabindex="-1">
-    <div class={`${prefix}-message`}>
-      {#if icon !== null}<span class={[`${prefix}-message-icon`, semantics.classNames.icon]}
-        style={semantics.styles.icon} aria-hidden="true"><span class="anticon">{#if icon}{@render icon()}{:else}<Icon name="warning" />{/if}</span></span>{/if}
-      <div data-ant-popconfirm-message-text="" class={`${prefix}-message-text`}>
-        <div id={titleId} class={[`${prefix}-title`, semantics.classNames.title]}
-          style={semantics.styles.title}>{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}</div>
-        {#if hasDescription}<div id={descriptionId} class={[`${prefix}-description`, semantics.classNames.content]}
-          style={semantics.styles.content}>{#if typeof description === 'function'}{@render description()}{:else}{description}{/if}</div>{/if}
+  <div bind:this={overlay} data-ant-popconfirm-content="" class={`${rendered.prefix}-inner-content`} tabindex="-1">
+    <div class={`${rendered.prefix}-message`}>
+      {#if rendered.icon !== null}<span class={[`${rendered.prefix}-message-icon`, rendered.semantics.classNames.icon]}
+        style={rendered.semantics.styles.icon} aria-hidden="true"><span class="anticon">{#if rendered.icon}{@render rendered.icon()}{:else}<Icon name="warning" />{/if}</span></span>{/if}
+      <div data-ant-popconfirm-message-text="" class={`${rendered.prefix}-message-text`}>
+        <div id={titleId} class={[`${rendered.prefix}-title`, rendered.semantics.classNames.title]}
+          style={rendered.semantics.styles.title}>{#if typeof rendered.title === 'function'}{@render rendered.title()}{:else}{rendered.title}{/if}</div>
+        {#if renderedDescription}<div id={descriptionId} class={[`${rendered.prefix}-description`, rendered.semantics.classNames.content]}
+          style={rendered.semantics.styles.content}>{#if typeof rendered.description === 'function'}{@render rendered.description()}{:else}{rendered.description}{/if}</div>{/if}
       </div>
     </div>
-    <div data-ant-popconfirm-buttons="" class={`${prefix}-buttons`}>
-      {#if showCancel}<Button {...cancelButtonProps} size={cancelButtonProps?.size ?? 'small'} disabled={Boolean(
-          action.loading || resolvedDisabled || cancelButtonProps?.disabled
-        )} htmlType="button" onclick={cancel}>{cancelText ?? config.locale.cancelText}</Button>{/if}
-      <Button {...okButtonProps} type={okButtonProps?.type ?? okType} size={okButtonProps?.size ?? 'small'} disabled={Boolean(
-          action.loading || resolvedDisabled || okButtonProps?.disabled
-        )} loading={action.loading} htmlType="button" onclick={confirm}>{okText ?? config.locale.okText}</Button>
+    <div data-ant-popconfirm-buttons="" class={`${rendered.prefix}-buttons`}>
+      {#if rendered.showCancel}<Button {...rendered.cancelButtonProps} size={rendered.cancelButtonProps?.size ?? 'small'} disabled={Boolean(
+          action.loading || resolvedDisabled || rendered.cancelButtonProps?.disabled
+        )} htmlType="button" onclick={cancel}>{rendered.cancelText ?? config.locale.cancelText}</Button>{/if}
+      <Button {...rendered.okButtonProps} type={rendered.okButtonProps?.type ?? rendered.okType} size={rendered.okButtonProps?.size ?? 'small'} disabled={Boolean(
+          action.loading || resolvedDisabled || rendered.okButtonProps?.disabled
+        )} loading={action.loading} htmlType="button" onclick={confirm}>{rendered.okText ?? config.locale.okText}</Button>
     </div>
-    {#if errorVisible}<p role="alert" data-ant-popconfirm-error="" class={`${prefix}-error`}>{config.locale.confirmErrorText ?? ruRU.confirmErrorText}</p>{/if}
+    {#if errorVisible}<p role="alert" data-ant-popconfirm-error="" class={`${rendered.prefix}-error`}>{config.locale.confirmErrorText ?? ruRU.confirmErrorText}</p>{/if}
   </div>
 {/snippet}
 
@@ -198,6 +223,7 @@
   showAction={props.showAction} hideAction={props.hideAction}
   focusDelay={props.focusDelay} blurDelay={props.blurDelay}
   align={props.align} builtinPlacements={props.builtinPlacements} onPopupAlign={props.onPopupAlign}
+  id={props.id} forceRender={props.forceRender} fresh={props.fresh} zIndex={props.zIndex}
   {destroyOnHidden} {destroyTooltipOnHide}
   {placement} {arrow} {color} {openClassName} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
   {rootClassName} {overlayInnerStyle} classNames={{
@@ -206,6 +232,6 @@
     arrow: semantics.classNames.arrow
   }} styles={{ root: semantics.styles.root, container: semantics.styles.container,
     arrow: semantics.styles.arrow }}
-  popupClass={prefix} aria-labelledby={titleId} aria-describedby={hasDescription ? descriptionId : undefined} aria-busy={action.loading || undefined} class={className} {style}>
+  popupClass={prefix} aria-labelledby={titleId} aria-describedby={renderedDescription ? descriptionId : undefined} aria-busy={action.loading || undefined} class={className} {style}>
   {@render children()}
 </Popover>

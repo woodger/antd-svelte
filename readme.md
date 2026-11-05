@@ -2174,6 +2174,26 @@ div; существующий Svelte lifecycle сохраняется. Nullable 
 [browser](./tests/browser/popover-ref.spec.ts), `?fixture=popover-ref`.
 Bind:ref задаётся непосредственно компоненту; max.popover остаётся объектом PopoverProps.
 
+`id` задаёт ID native dialog; пустая строка использует стабильный generated ID.
+Скрытый ID обновляется вместе с кэшем содержимого. Aria-controls trigger меняется
+без потери caller IDREF tokens, включая совпадение нового ID с существующим token.
+`zIndex`, включая 0 и отрицательные числа, задаёт явный слой перед semantic root
+и legacy overlayStyle; общий source zIndex context и порядок native top layer
+этот prop не заменяет.
+
+`forceRender=true` прогревает скрытое содержимое и portal после mount/hydration,
+также при disabled и destroyOnHidden. Выключение forceRender у закрытой панели
+с destroyOnHidden удаляет содержимое; новый force mount получает текущие props.
+`fresh=false` сохраняет скрытые title/content, container/title/content class/style
+и ID до открытия; root/arrow styles обновляются сразу. Fresh=true обновляет
+скрытый payload. В Popconfirm кэшируются также icon и props кнопок; loading,
+disabled guards и локализация остаются текущими. Внутреннее состояние виджета
+сохраняется до его удаления, а opaque Snippet captures остаются реактивными по
+правилам Svelte: полная заморозка React.memo здесь не обещается.
+Сверка: [52 UMD-сценария / 399 кадров](./tests/browser/fixtures/ant-design-popover-lifecycle-reference.json),
+[SSR](./tests/package/popover-lifecycle.ssr.test.ts) и
+[browser](./tests/browser/popover-lifecycle.spec.ts), `?fixture=popover-lifecycle`.
+
 Source-тема подготавливает Tooltip и Popover tokens в исходном порядке:
 maxWidth и стрелку внутреннего Tooltip, затем собственные titleMinWidth,
 zIndexPopup, padding и wireframe-разделение заголовка/содержимого. Deprecated
@@ -2192,13 +2212,13 @@ Aria-controls объединяется с имеющимися ID; при отк
 
 GetPopupContainer и legacy getTooltipContainer выбирают контейнер по тем же
 правилам, что Tooltip; локальный undefined сохраняет provider fallback.
-Getter не вызывается до первого открытия и при SSR. Обновление контейнера
+Getter не вызывается до первого открытия или forceRender и при SSR. Обновление контейнера
 и темы сохраняет native popup lifecycle; неизменный контейнер не перемещает DOM.
 
 Пустые title и content отключают показ и ARIA-связь. Если один из них является
 snippet, компонент считает содержимое доступным; условное отсутствие текста
 внутри snippet контролирует его владелец. Закрытое содержимое остаётся
-смонтированным и сохраняет состояние. DestroyOnHidden=true удаляет title/content
+смонтированным и сохраняет состояние. Без forceRender destroyOnHidden=true удаляет title/content
 при закрытии и создаёт их заново при открытии; при SSR такие snippets не вызываются,
 включая начальный open/defaultOpen. Legacy destroyTooltipOnHide принимает boolean
 или объект с keepParent; объект включает удаление, keepParent не меняет результат.
@@ -2225,6 +2245,9 @@ Align/builtinPlacements/onPopupAlign также передаются наруж�
 callback получает его DOM, перемещение не заменяет description и кнопки.
 Bind:ref передаётся тому же Popover и использует общий PopoverRef; forceAlign
 не прерывает ожидающее подтверждение и сохраняет припаркованный фокус.
+Id/forceRender/fresh/zIndex передаются также. Смена ID/слоя сохраняет ожидающий
+Promise, текущее содержимое и припаркованный фокус; его результат по-прежнему
+подчиняется controlled owner и защите от устаревших запросов.
 DestroyOnHidden и legacy destroyTooltipOnHide передаются Popover с исходным
 приоритетом современного prop, включая false. При удалении содержимого заново
 создаются description snippet и кнопки; сам контроллер подтверждения сохраняет
@@ -7011,7 +7034,9 @@ aria-describedby описывает корень; id/class/style также от
 и persistence нет. Экспортируются AvatarGroupProps, AvatarGroupItem,
 AvatarGroupKey, AvatarGroupMax и AvatarGroupLocale. Произвольные компоненты вместо
 Avatar и настройки исходного Popover, ещё отсутствующие в Svelte Popover,
-пока не перенесены: в том числе align/motion и fresh cache.
+пока не перенесены: в том числе motion и полная React.memo-заморозка opaque Snippet.
+Id/forceRender/fresh/zIndex передаются; forceRender прогревает также скрытый
+Snippet после mount, сохраняя ленивый SSR и последующий destroy/retain lifecycle.
 Точный текущий тип max.popover производен от
 [PopoverProps](./src/lib/popover.types.ts), а не дублирует отдельный список props.
 Приоритеты aliases, count/style и trigger/placement проверяются по

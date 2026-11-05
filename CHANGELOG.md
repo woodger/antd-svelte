@@ -9,6 +9,13 @@
 
 ### Added
 
+- Popover/Popconfirm: id/fallback, forceRender, fresh и локальный zIndex с передачей
+  через AvatarGroup.max.popover. Скрытые title/content, slots/ID и кнопки следуют
+  source cache; opaque Snippet captures сохраняют Svelte-реактивность.
+  Force render прогревает portal и сохраняет SSR/hidden shell; ARIA IDREF ownership,
+  draft/focus/selection, widget reset и ожидающий Promise проверены отдельно.
+  Добавлены 52 UMD-сценария / 399 кадров и SSR/browser-проверки.
+
 - Popover/Popconfirm: bind:ref с общим PopoverRef, текущими trigger/popup DOM
   и forceAlign на существующем контроллере позиции. Сохранены native div shell,
   SSR/unmount cleanup, popup/trigger replacement, portal, draft/focus/selection

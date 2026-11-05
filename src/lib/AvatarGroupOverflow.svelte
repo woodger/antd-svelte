@@ -31,7 +31,7 @@
     if (!Object.is(next, previousOpen)) innerOpen = next;
     previousOpen = next;
 
-    if (open) visited = true;
+    if (open || popover.forceRender) visited = true;
   });
 </script>
 

@@ -58,6 +58,8 @@ export interface PopoverConfig {
 /** Интерактивная поверхность у trigger snippet с bind:open и управлением фокусом. */
 export interface PopoverProps {
   children: Snippet;
+  /** ID native popup; пустая строка использует стабильный fallback. Скрытый ID следует fresh. */
+  id?: string;
   /** Цвет панели и стрелки; title/content сохраняют собственные semantic цвета. */
   color?: TooltipColor;
   /** Меняет классы панели, slots и default openClassName; CSS variables сохраняются. */
@@ -75,6 +77,12 @@ export interface PopoverProps {
   onOpenChange?: (open: boolean) => void;
   /** Удаляет title/content при закрытии; по умолчанию содержимое сохраняется. */
   destroyOnHidden?: boolean;
+  /** Монтирует скрытое содержимое и portal после hydration, включая destroyOnHidden. */
+  forceRender?: boolean;
+  /** Обновляет скрытые title/content и semantic styles; по умолчанию false. */
+  fresh?: boolean;
+  /** Явный z-index; semantic root и legacy overlayStyle имеют приоритет. */
+  zIndex?: number;
   /**
    * Современный destroyOnHidden имеет приоритет, включая false.
    * @deprecated Используйте destroyOnHidden; keepParent не меняет результат.

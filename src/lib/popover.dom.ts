@@ -8,6 +8,8 @@ export function connectPopoverTrigger(
 ): () => void {
   const values = { 'aria-haspopup': kind, 'aria-expanded': String(expanded) };
   const previous = new Map<string, string | null>();
+  const requested = id.split(/\s+/).filter(Boolean);
+  const owned = new Set<string>();
 
   for (const attribute of Object.keys(values))
     previous.set(attribute, element.getAttribute(attribute));
@@ -23,8 +25,15 @@ export function connectPopoverTrigger(
     }
     const tokens = (element.getAttribute('aria-controls') ?? '').split(/\s+/).filter(Boolean);
 
-    if (!tokens.includes(id))
-      element.setAttribute('aria-controls', [...tokens, id].join(' '));
+    let changed = false;
+    for (const token of requested) {
+      if (!tokens.includes(token)) {
+        owned.add(token);
+        tokens.push(token);
+        changed = true;
+      }
+    }
+    if (changed) element.setAttribute('aria-controls', tokens.join(' '));
   }
 
   update();
@@ -46,8 +55,9 @@ export function connectPopoverTrigger(
         element.removeAttribute(attribute);
       else element.setAttribute(attribute, original);
     }
+    if (!owned.size) return;
     const tokens = (element.getAttribute('aria-controls') ?? '').split(/\s+/).filter(
-      (token) => token && token !== id
+      (token) => token && !owned.has(token)
     );
 
     if (tokens.length)

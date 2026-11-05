@@ -42,6 +42,7 @@
   }: PopoverProps & { ref?: PopoverRef } = $props();
   let {
     children,
+    id: providedId,
     title,
     content,
     color,
@@ -51,6 +52,9 @@
     onOpenChange,
     destroyOnHidden,
     destroyTooltipOnHide,
+    forceRender = false,
+    fresh = false,
+    zIndex,
     trigger,
     placement = 'top',
     arrow,
@@ -122,18 +126,20 @@
   );
   let colorInfo = $derived(getTooltipColor(color, prefix));
   let rootLayers = $derived([
-    popupThemeStyle, colorInfo.arrowStyle, semantics.styles.root
+    popupThemeStyle,
+    zIndex === undefined ? undefined : `z-index:${zIndex}`,
+    colorInfo.arrowStyle,
+    semantics.styles.root
   ]);
   let rootStyle = $derived(serializeInlineStyleLayers(rootLayers));
   let containerLayers = $derived([
     semantics.styles.container, overlayInnerStyle, colorInfo.overlayStyle
   ]);
-  const initialContainerStyle = untrack(() => serializeInlineStyleLayers(containerLayers));
   const initialStyle = untrack(() => rootStyle);
   const popupStyle = createOverlayStyle(() => rootLayers);
   const generatedId = $props.id();
-  const id = `ant-popover-${generatedId}`;
-  const titleId = `${id}-title`;
+  const fallbackId = `ant-popover-${generatedId}`;
+  const titleId = `${fallbackId}-title`;
   const initialDefault = untrack(() => defaultOpen);
   // Raw open переживает обновление spread props без входного open.
   let uncontrolledOpen = $state(initialDefault);
@@ -191,9 +197,28 @@
   let available = $derived(hasTitle || hasBody);
   let visible = $derived(!props.disabled && available && rawOpen);
   let destroy = $derived(destroyOnHidden ?? Boolean(destroyTooltipOnHide));
-  let renderContent = $derived(!destroy || mounted && visible);
+  let payload = $derived({
+    id: providedId || fallbackId,
+    title,
+    content,
+    layers: containerLayers,
+    containerClasses: [`${prefix}-container`, semantics.classNames.container],
+    titleClasses: [`${prefix}-title`, semantics.classNames.title],
+    contentClasses: [`${prefix}-content`, semantics.classNames.content],
+    titleStyle: semantics.styles.title,
+    contentStyle: semantics.styles.content,
+    customColor: colorInfo.overlayStyle.length > 0
+  });
+  let cached = $state.raw(untrack(() => payload));
+  let rendered = $derived(visible || fresh ? payload : cached);
+  let id = $derived(rendered.id);
+  let renderedTitle = $derived(hasContent(rendered.title));
+  let renderedBody = $derived(hasContent(rendered.content));
+  let renderContent = $derived(!destroy || mounted && (forceRender || visible));
+  let initialized = false;
+  const initialContainerStyle = untrack(() => serializeInlineStyleLayers(rendered.layers));
   const portal = createPopupContainer(() => ({
-    open: visible,
+    open: forceRender || visible,
     reference: anchor,
     getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
     themeStyle: rootStyle
@@ -201,8 +226,15 @@
 
   function containerStyle(node: HTMLElement) {
     const update = connectInlineStyle(node);
-    $effect(() => update(containerLayers));
+    $effect(() => update(rendered.layers));
   }
+
+  $effect.pre(() => {
+    // Первый force render получает текущие props; opaque Snippet captures остаются Svelte-owned.
+    if (visible || fresh || forceRender && !initialized) cached = payload;
+    if (visible || forceRender) initialized = true;
+    else if (destroy) initialized = false;
+  });
 
   function hasContent(value: PopoverContent | null | undefined) {
     return typeof value === 'function'
@@ -606,7 +638,7 @@
   data-ant-popover="" data-ant-custom-prefix={prefix !== 'ant-popover' || undefined}
   data-ant-placement={classPlacement}
   aria-label={ariaLabel} aria-labelledby={!ariaLabel
-    ? ariaLabelledby ?? (hasTitle ? titleId : undefined)
+    ? ariaLabelledby ?? (renderedTitle ? titleId : undefined)
     : undefined} aria-describedby={ariaDescribedby} aria-busy={ariaBusy} class={[
         prefix,
         designTokens.enabled && 'ant-popover-css-var',
@@ -627,14 +659,14 @@
   {#if arrowConfig.show}<div data-ant-popover-arrow="" class={[`${prefix}-arrow`, semantics.classNames.arrow]}
     style={[arrowPositionStyle, semantics.styles.arrow].filter(Boolean).join(';') || undefined}
     aria-hidden="true"></div>{/if}
-  <div data-ant-popover-container="" class={[`${prefix}-container`, semantics.classNames.container]}
-    data-ant-overlay-color={colorInfo.overlayStyle.length > 0 || undefined}
+  <div data-ant-popover-container="" class={rendered.containerClasses}
+    data-ant-overlay-color={rendered.customColor || undefined}
     style={initialContainerStyle} {@attach containerStyle}>
     {#if renderContent}
-      {#if hasTitle}<div data-ant-popover-title="" id={titleId} class={[`${prefix}-title`, semantics.classNames.title]}
-        style={semantics.styles.title}>{#if typeof title === 'function'}{@render title()}{:else if typeof title !== 'boolean'}{title}{/if}</div>{/if}
-      {#if hasBody}<div class={[`${prefix}-content`, semantics.classNames.content]}
-        style={semantics.styles.content}>{#if typeof content === 'function'}{@render content()}{:else if typeof content !== 'boolean'}{content}{/if}</div>{/if}
+      {#if renderedTitle}<div data-ant-popover-title="" id={titleId} class={rendered.titleClasses}
+        style={rendered.titleStyle}>{#if typeof rendered.title === 'function'}{@render rendered.title()}{:else if typeof rendered.title !== 'boolean'}{rendered.title}{/if}</div>{/if}
+      {#if renderedBody}<div class={rendered.contentClasses}
+        style={rendered.contentStyle}>{#if typeof rendered.content === 'function'}{@render rendered.content()}{:else if typeof rendered.content !== 'boolean'}{rendered.content}{/if}</div>{/if}
     {/if}
   </div>
 </div>
