@@ -6,6 +6,7 @@ function setup() {
   const frames = new Map<number, FrameRequestCallback>();
   const observed = new Set<Element>();
   const published: MasonryHeight[][] = [];
+  const animations: { playState: AnimationPlayState; }[] = [{ playState: 'running' }];
   let serial = 0;
   let callback: ResizeObserverCallback;
 
@@ -30,6 +31,7 @@ function setup() {
       height,
       offsetWidth: 100,
       offsetHeight: height,
+      getAnimations() { return animations; },
       getBoundingClientRect() { return { width: 100, height: this.height }; }
     });
   }
@@ -54,6 +56,7 @@ function setup() {
     frames,
     observed,
     published,
+    animations,
     flush,
     resize(target: ReturnType<typeof element>) {
       callback([{ target } as unknown as ResizeObserverEntry], {} as ResizeObserver);
@@ -158,6 +161,95 @@ describe('Masonry DOM runtime', () => {
 });
 
 describe('Masonry CSS motion lifecycle', () => {
+  it('finishes appear and leave when the browser creates no own animation', () => {
+    const state = setup();
+    state.animations.length = 0;
+    const classes: string[] = [];
+    const removed: boolean[] = [];
+    const motion = createMasonryMotion(
+      state.node,
+      value => classes.push(value),
+      () => removed.push(true)
+    );
+    motion.sync(true);
+    state.flush();
+    state.flush();
+    state.flush();
+
+    expect(classes.at(-1)).toBe('');
+    expect(state.frames.size).toBe(0);
+
+    motion.sync(false);
+    state.flush();
+    state.flush();
+    state.flush();
+    state.node.dispatchEvent(new Event('transitionend'));
+
+    expect(classes.at(-1)).toBe('');
+    expect(removed).toEqual([true]);
+    expect(state.frames.size).toBe(0);
+    motion.destroy();
+    state.runtime.destroy();
+  });
+
+  it('skips appear and removes immediately without scheduling frames when motion is disabled', () => {
+    const state = setup();
+    const classes: string[] = [];
+    const removed: boolean[] = [];
+    const motion = createMasonryMotion(
+      state.node,
+      value => classes.push(value),
+      () => removed.push(true)
+    );
+    motion.sync(true, false);
+
+    expect(classes).toEqual(['']);
+    expect(state.frames.size).toBe(0);
+
+    motion.sync(false, false);
+    motion.sync(false, false);
+
+    expect(removed).toEqual([true]);
+    expect(state.frames.size).toBe(0);
+    motion.destroy();
+    state.runtime.destroy();
+  });
+
+  it('cancels pending motion on disabling and keeps a visible item stable when reenabled', () => {
+    const state = setup();
+    const classes: string[] = [];
+    const removed: boolean[] = [];
+    const motion = createMasonryMotion(
+      state.node,
+      value => classes.push(value),
+      () => removed.push(true)
+    );
+    motion.sync(true);
+    const stale = [...state.frames.values()][0];
+    motion.sync(true, false);
+    const count = classes.length;
+    stale(0);
+    state.flush();
+    motion.sync(true, true);
+
+    expect(classes.at(-1)).toBe('');
+    expect(classes).toHaveLength(count);
+    expect(state.frames.size).toBe(0);
+    expect(removed).toEqual([]);
+
+    motion.sync(false);
+    state.flush();
+    motion.sync(false, false);
+    state.flush();
+    state.node.dispatchEvent(new Event('transitionend'));
+
+    expect(removed).toEqual([true]);
+    expect(classes.at(-1)).toBe('');
+    expect(state.frames.size).toBe(0);
+    motion.destroy();
+    state.runtime.destroy();
+  });
+
   it('waits two frames before activation and removes a leaving element only on its own end', () => {
     const state = setup();
     const classes: string[] = [];

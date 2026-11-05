@@ -1,6 +1,8 @@
 <script lang="ts" generics="Data = unknown">
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { gridGutters } from './grid.engine';
   import { captureMasonryFocus, createMasonryRuntime } from './masonry.dom';
@@ -32,7 +34,10 @@
   }: MasonryProps<Data> = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Masonry');
+  const tokens = useDesignTokenContext();
   const breakpoint = createBreakpoint();
+  let motionEnabled = $derived(!tokens.enabled || tokens.state.token.motion !== false);
   let mergedItems = $state.raw<MasonryItemType<Data>[]>([]);
   let heights = $state.raw<MasonryHeight[]>([]);
   let entries = $state.raw<MasonryEntry<Data>[]>([]);
@@ -82,6 +87,7 @@
   let contextStyles = $derived(resolve(config.masonry?.styles));
   let localStyles = $derived(resolve(styles));
   let rootStyle = $derived([
+    componentTheme.style,
     `height:${layout.height}px`,
     contextStyles.root,
     config.masonry?.style,
@@ -173,6 +179,7 @@
   bind:this={nativeElement}
   class={[
     'ant-masonry',
+    componentTheme.className,
     config.masonry?.class,
     contextClasses.root,
     localClasses.root,
@@ -187,6 +194,7 @@
     <MasonryItem
       {entry}
       {runtime}
+      {motionEnabled}
       {itemRender}
       class={[contextClasses.item, localClasses.item].filter(Boolean).join(' ')}
       style={getItemStyle(entry)}

@@ -1415,12 +1415,62 @@
           "note": "ConfigProvider.masonry class/style/classNames/styles с заменой nested object; callbacks получают resolved columns. Root style перекрывает height, geometry перекрывает item styles. Извлечены все 12 CSS rules, включая transitions; RTL использует логический inset без смены data order."
         },
         {
+          "id": "source-theme-aliases",
+          "title": "Alias tokens/algorithms, scoped typography и fresh remeasure",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-masonry-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-masonry-tokens-reference.json",
+            "tests/package/masonry-theme.ssr.test.ts",
+            "tests/browser/masonry-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-masonry-theme-reference.json"
+          ],
+          "note": "ComponentToken Masonry в 6.6.8 пуст. CSS aliases/component algorithms применяются до height и semantic/plain styles; source vars/geometry проверяются при явно заданном source rootClassName=ant-masonry-css-var, соответствующем существующему native marker. Raw наблюдения без marker сохранены отдельно. Font/family/color/transition, dark/compact, zero/undefined, cssVar key/prefix и independent nested/reset/sibling scopes сверены с UMD. Fresh наблюдает новые em-высоты; без fresh layout остаётся прежним до поддержанного remeasure. DOM, refs, draft/selection/focus, scoped CSS overrides и отсутствие повторных равных callbacks проверены."
+        },
+        {
+          "id": "source-motion-config",
+          "title": "Глобальный theme.token.motion для appear/leave",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/masonry.dom.test.ts",
+            "tests/browser/masonry-theme.spec.ts"
+          ],
+          "note": "MotionWrapper 6.6.8 читает глобальный token.motion, независимо от component override/CSS duration. False обходит appear/leave, завершает pending phase и удаляет DOM без ожидания CSS end; true не перезапускает appear уже видимых ячеек. Native controller сохраняет два RAF до active, собственные end events, revive и cleanup. При синхронном удалении sync не захватывает зависимости root entries."
+        },
+        {
+          "id": "native-source-scope-marker",
+          "title": "Сохранённый native CSS marker вместо пропуска source",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Masonry.svelte",
+            "tests/browser/fixtures/ant-design-masonry-theme-reference.json",
+            "tests/browser/masonry-theme.spec.ts"
+          ],
+          "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d вычисляет rootCls=ant-masonry-css-var и регистрирует на нём common/component CSS, но не включает его в className Masonry. При components.Masonry.fontSize=30 в host 14px root остаётся 14px, component variables не совпадают с root selector. Native marker существовал до token port и сохраняется. В эталонной фикстуре marker задаётся официальному компоненту публичным rootClassName без правки UMD; raw случаи находятся в unscoped и отдельно от сравнений CSS/geometry."
+        },
+        {
+          "id": "native-zero-duration-completion",
+          "title": "Завершение CSS phase без собственной браузерной анимации",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/masonry.dom.test.ts",
+            "tests/browser/masonry-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-masonry-theme-reference.json"
+          ],
+          "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, global token.motion=true и components.Masonry={algorithm:true,motion:false}, с явным root marker. CSS duration=0s не создаёт transitionend; после удаления исходник остаётся в fade-leave-active с DOM. Точные source phases сохранены в zeroMotion эталона. Svelte не воспроизводит зависание: после active/paint отсутствие собственной pending animation завершает phase; реальные/paused animations продолжают ждать собственного end. Late events и unmount не удаляют повторно и не оставляют RAF/listeners."
+        },
+        {
           "id": "theme-prefix-motion",
-          "title": "PrefixCls, общий theme/token engine и глобальный motion config",
+          "title": "Произвольный prefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Доступны текущие CSS variables, light/dark и inherited direction. Произвольные React prefixCls/theme algorithms, component tokens и ConfigProvider motion=false не перенесены. У Masonry нет отдельного reduced-motion override в закреплённом CSS."
+          "note": "Alias tokens/algorithms и глобальный theme.token.motion подключены отдельными features. CSS generation для произвольного prefixCls ещё отсутствует. У Masonry нет отдельного reduced-motion override в закреплённом CSS."
         }
       ]
     },

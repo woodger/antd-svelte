@@ -216,8 +216,8 @@ export function createMasonryMotion(
     frame = undefined;
   }
 
-  function handleEnd(event: Event) {
-    if (!active || !status || !activated || event.target !== node) return;
+  function handleEnd(event?: Event) {
+    if (!active || !status || !activated || event && event.target !== node) return;
 
     cancel();
     status = undefined;
@@ -231,25 +231,44 @@ export function createMasonryMotion(
   node.addEventListener('animationend', handleEnd);
 
   return {
-    sync(next: boolean) {
-      if (!active || previous === next) return;
+    sync(next: boolean, motionEnabled = true) {
+      if (!active || previous === next && (motionEnabled || status === undefined)) return;
 
       cancel();
       visible = next;
-      status = next ? previous === undefined ? 'appear' : 'enter' : 'leave';
+      const first = previous === undefined;
       previous = next;
       activated = false;
+
+      if (!motionEnabled) {
+        status = undefined;
+        publish('');
+        if (!next) remove();
+        return;
+      }
+
+      status = next ? first ? 'appear' : 'enter' : 'leave';
       publish(`${name}-${status} ${name}-${status}-start ${name}`);
       frame = view.requestAnimationFrame(() => {
-        if (!active) return;
+        if (!active || !status) return;
 
         frame = view.requestAnimationFrame(() => {
           frame = undefined;
 
-          if (!active) return;
+          if (!active || !status) return;
 
           activated = true;
           publish(`${name}-${status} ${name}-${status}-active ${name}`);
+          // После flush/paint CSS без анимации не пришлёт end event.
+          frame = view.requestAnimationFrame(() => {
+            frame = undefined;
+            if (!active || !status) return;
+
+            const pending = node.getAnimations().some(animation =>
+              animation.playState !== 'finished' && animation.playState !== 'idle'
+            );
+            if (!pending) handleEnd();
+          });
         });
       });
     },

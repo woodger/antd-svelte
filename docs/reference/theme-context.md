@@ -456,6 +456,27 @@ Inner header использует colorFillAlter, inner body — общий ве
 они не входят в публичный ThemeConfig ни здесь, ни в 6.6.8. Оба значения оставляют
 CSS-переменные включёнными также в upstream.
 
+## Тема Masonry
+
+Masonry не объявляет собственных component tokens. Alias overrides и algorithms
+задают typography и transition variables на корне до вычисленной высоты и
+semantic/plain styles. Изменение fontSize меняет em-высоты содержимого: fresh
+наблюдает ячейки, без него старый layout сохраняется до поддержанного remeasure.
+Данные, DOM, refs, draft/selection/focus и правила onLayoutChange сохраняются.
+
+Глобальный theme.token.motion=false отключает appear/leave независимо от CSS
+duration и завершает текущую phase. Включение не запускает повторный appear.
+При отсутствии собственной браузерной анимации native phase завершается после
+обновления CSS: zero-duration leave не ждёт невозможный end event.
+
+В Ant Design 6.6.8 отсутствует вычисленный root marker ant-masonry-css-var:
+компонентный fontSize=30 остаётся 14px в измеренном host. Native marker уже был
+частью библиотеки и сохранён. Для CSS/geometry conformance официальный компонент
+получает marker через rootClassName; исходный npm-архив не меняется. Замеры без
+marker находятся в unscoped, отдельный зависший CSS0 leave — в zeroMotion
+[эталона](../../tests/browser/fixtures/ant-design-masonry-theme-reference.json).
+Оба наблюдения записаны в реестре для отдельного разбора.
+
 ## Тема и настройки Space
 
 Space не объявляет собственных component tokens. Alias overrides из

@@ -708,8 +708,9 @@ CSS-рецепт masonry воспроизводит все 12 правил эт�
 проверкой SHA-256. Appear/leave используют исходные CSS classes и два RAF до
 active. Удаляемая ячейка остаётся до собственного transitionend/animationend;
 события вложенного содержимого её не удаляют. Возврат того же key сохраняет DOM
-и отменяет удаление. Как в CSSMotion без deadline, если собственный переход
-перекрыт стилями и end не приходит, leave не завершается автоматически.
+и отменяет удаление. Если браузер не создал собственную анимацию, phase завершается
+после обновления CSS. Это сохраняет удаление при нулевой длительности, когда
+upstream без deadline остаётся в leave-active. Наблюдение записано в реестре.
 
 Bind:nativeElement заменяет React MasonryRef. Перестановка сохраняет native draft,
 focus и selection input/textarea, а также selection остающихся contenteditable
@@ -721,8 +722,20 @@ ConfigProvider.masonry задаёт class/style/classNames/styles; явно за
 nested config заменяет родительский объект целиком. Semantic callbacks получают
 resolved columns. Root style идёт после semantic root и может перекрыть height;
 геометрия ячейки идёт после semantic item. Light/dark и CSS variables наследуются.
-PrefixCls, общий React theme/token engine и глобальный motion=false пока не
-перенесены. В закреплённом CSS Masonry нет отдельного reduced-motion override.
+Components.Masonry поддерживает alias overrides и algorithms; собственных
+component tokens в 6.6.8 нет. Шрифт меняет измеренные высоты: с fresh ячейки
+пересчитываются, без fresh сохраняют старый layout до load/error/resize либо смены
+items/columns. Обновления сохраняют DOM, refs, draft/selection/focus и не создают
+повторный onLayoutChange, если распределение и данные не изменились.
+Theme.token.motion=false завершает текущий appear/leave и удаляет без ожидания end;
+повторное включение не перезапускает appear уже видимых ячеек.
+
+В 6.6.8 Source Masonry вычисляет ant-masonry-css-var, но пропускает этот класс на
+корне: font/alias настройки не доходят до CSS. Native marker сохранён; для сверки
+эталон получает его через публичный rootClassName без изменения исходников.
+Исходные значения без marker и зависший zero-duration leave сохранены в
+[эталоне](./tests/browser/fixtures/ant-design-masonry-theme-reference.json).
+PrefixCls пока не перенесён. В закреплённом CSS нет отдельного reduced-motion override.
 
 Fixture — `?fixture=masonry`. Engine, SSR, DOM lifecycle, package SSR и browser
 проверяют геометрию, breakpoints, fresh/load/error, данные/callbacks, motion,

@@ -1,4 +1,5 @@
 <script lang="ts" generics="Data">
+  import { untrack } from 'svelte';
   import { createMasonryMotion, type createMasonryRuntime } from './masonry.dom';
   import type { MasonryEntry } from './masonry.engine';
   import type { MasonryProps } from './masonry.types';
@@ -6,6 +7,7 @@
   let {
     entry,
     runtime,
+    motionEnabled = true,
     class: className,
     style,
     itemRender,
@@ -13,6 +15,7 @@
   }: {
     entry: MasonryEntry<Data>;
     runtime?: ReturnType<typeof createMasonryRuntime<Data>>;
+    motionEnabled?: boolean;
     class?: string;
     style: string;
     itemRender?: MasonryProps<Data>['itemRender'];
@@ -47,7 +50,13 @@
     };
   });
 
-  $effect(() => motion?.sync(entry.visible));
+  $effect(() => {
+    const controller = motion;
+    const visible = entry.visible;
+    const enabled = motionEnabled;
+
+    untrack(() => controller?.sync(visible, enabled));
+  });
 </script>
 
 <div

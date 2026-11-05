@@ -32,9 +32,10 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
-  | 'Layout' | 'Space';
+  | 'Layout' | 'Space' | 'Masonry';
 
 const factories = {
+  Masonry: () => ({}),
   Space: () => ({}),
   Layout: (token: GlobalToken) => {
     const paddingInline = token.controlHeightLG * 1.25;
@@ -276,6 +277,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Masonry: [],
   Space: [],
   Layout: [],
   Image: [],

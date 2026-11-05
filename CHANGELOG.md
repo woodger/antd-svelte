@@ -627,6 +627,12 @@
 
 ### Fixed
 
+- Masonry: подключены alias tokens/algorithms и глобальный theme.token.motion.
+  Fresh remeasure сохраняет DOM/draft/selection/focus; отключение motion завершает
+  текущий переход, отсутствие реальной анимации больше не задерживает удаление.
+  Отсутствующий source CSS marker и зависший CSS0 leave записаны отдельно;
+  Source CSS/geometry сверяются через публичный rootClassName без правки upstream.
+
 - Layout: подключены 16 современных component tokens и три deprecated aliases
   для Layout/Sider с наследованием variables секциями и сохранёнными style priorities.
   Добавлены Source/SSR/browser-проверки scopes, геометрии, collapse/focus/refs.
