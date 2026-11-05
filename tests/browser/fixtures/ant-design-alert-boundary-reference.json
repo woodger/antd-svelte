@@ -1,0 +1,531 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "documentMode": "CSS1Compat",
+    "source": "public Alert.ErrorBoundary with real throwing React child; React 18.3.1; error console collected separately",
+    "nativeBoundary": "React componentStack is framework-specific; compare default stack presence and source pre styles independently from Svelte stack frames."
+  },
+  "viewport": {
+    "width": 1000,
+    "height": 900
+  },
+  "cases": [
+    {
+      "name": "healthy",
+      "props": {
+        "id": "unused"
+      },
+      "healthy": true,
+      "snapshot": {
+        "healthyInput": "Retained draft",
+        "root": null,
+        "title": null,
+        "description": null,
+        "stackHasChild": null,
+        "pre": null
+      }
+    },
+    {
+      "name": "default-error",
+      "props": {},
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "custom-title",
+      "props": {
+        "title": "Owner title",
+        "id": "owned-failure"
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "owned-failure",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Owner title",
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "legacy-message",
+      "props": {
+        "message": "Legacy message"
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Legacy message",
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "title-priority",
+      "props": {
+        "title": "Owner title",
+        "message": "Legacy message"
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Owner title",
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "title-null",
+      "props": {
+        "title": null,
+        "message": "Legacy message"
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Legacy message",
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "title-false",
+      "props": {
+        "title": false,
+        "message": "Legacy message"
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": null,
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "title-zero",
+      "props": {
+        "title": 0,
+        "message": "Legacy message"
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "0",
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "title-empty",
+      "props": {
+        "title": "",
+        "message": "Legacy message"
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": null,
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "description-0",
+      "props": {
+        "description": null
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "description-1",
+      "props": {
+        "description": false
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "",
+        "stackHasChild": null,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "description-2",
+      "props": {
+        "description": 0
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "0",
+        "stackHasChild": null,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "description-3",
+      "props": {
+        "description": ""
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "",
+        "stackHasChild": null,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "description-4",
+      "props": {
+        "description": true
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "",
+        "stackHasChild": null,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "description-5",
+      "props": {
+        "description": "Owner description"
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "Owner description",
+        "stackHasChild": null,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "description-6",
+      "props": {
+        "description": [
+          "First",
+          0,
+          false,
+          "Last"
+        ]
+      },
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "First0Last",
+        "stackHasChild": null,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "rich",
+      "props": {},
+      "rich": true,
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Rich boundary title",
+        "description": "Rich boundary description",
+        "stackHasChild": null,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "token-alias",
+      "props": {
+        "description": "Owner description"
+      },
+      "theme": true,
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary failure",
+        "description": "Owner description",
+        "stackHasChild": null,
+        "pre": {
+          "fontSize": "15.3px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    },
+    {
+      "name": "effect-failure",
+      "props": {},
+      "effect": true,
+      "snapshot": {
+        "healthyInput": null,
+        "root": {
+          "id": "",
+          "role": "alert",
+          "status": true,
+          "description": true,
+          "icon": false,
+          "close": false
+        },
+        "title": "Error: Boundary effect failure",
+        "description": "framework-stack",
+        "stackHasChild": true,
+        "pre": {
+          "fontSize": "12.6px",
+          "overflowX": "auto",
+          "margin": "0px",
+          "padding": "0px"
+        }
+      }
+    }
+  ],
+  "ssr": {
+    "healthy": "<span>Healthy child</span>",
+    "failures": [
+      "Boundary server failure",
+      "Boundary server failure"
+    ],
+    "effectHealthy": "<input aria-label=\"Healthy boundary draft\" value=\"Retained draft\"/>"
+  },
+  "lifecycle": {
+    "retainsFailure": true,
+    "healthyChildren": 0,
+    "title": "Updated title",
+    "id": "updated-boundary",
+    "sameRoot": true
+  },
+  "nested": {
+    "alerts": 1,
+    "title": "Outer boundary",
+    "description": "Outer fallback"
+  },
+  "diagnostics": {
+    "pageErrors": [],
+    "consoleErrorCount": 21
+  }
+}

@@ -265,7 +265,7 @@ export { default as Dropdown } from './Dropdown.svelte';
 export { default as Tabs } from './Tabs.svelte';
 export { default as Collapse } from './Collapse.svelte';
 export { default as Drawer } from './Drawer.svelte';
-export { default as Alert } from './Alert.svelte';
+export { default as Alert } from './alert.component';
 export { default as MessageHolder } from './MessageHolder.svelte';
 export { createMessage } from './message.model.svelte.js';
 export { default as NotificationHolder } from './NotificationHolder.svelte';
@@ -501,6 +501,7 @@ export type {
   AlertSemanticSlots,
   AlertSemanticInfo
 } from './alert.types';
+export type { AlertErrorBoundaryProps } from './alert-error-boundary.types';
 export type {
   MessageType,
   MessageKey,

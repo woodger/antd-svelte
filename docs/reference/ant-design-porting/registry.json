@@ -10625,7 +10625,11 @@
         "tests/browser/fixtures/alert-native-reference.json",
         "tools/ant-design-css-recipes.json",
         "readme.md",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/AlertErrorBoundary.svelte",
+        "tests/package/alert-boundary.ssr.test.ts",
+        "tests/browser/alert-boundary.spec.ts",
+        "tests/browser/alert-boundary-hydration.spec.ts"
       ],
       "features": [
         {
@@ -10694,12 +10698,18 @@
         {
           "id": "error-boundary",
           "title": "Alert.ErrorBoundary",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
-            "readme.md"
+            "src/lib/AlertErrorBoundary.svelte",
+            "src/lib/alert.component.ts",
+            "src/lib/alert-error-boundary.types.ts",
+            "tests/package/alert-boundary.ssr.test.ts",
+            "tests/browser/alert-boundary.spec.ts",
+            "tests/browser/alert-boundary-hydration.spec.ts",
+            "tests/browser/fixtures/ant-design-alert-boundary-reference.json"
           ],
-          "note": "Исходный составной компонент ErrorBoundary ещё не перенесён; требуется отдельная Svelte boundary с title/message/description fallback и SSR/browser проверками."
+          "note": "Alert.ErrorBoundary — Svelte component с scalar/array/snippet children, title ?? message ?? Error.toString и description ?? stack внутри source pre. Healthy children без wrapper/id; failure остаётся при props/children updates до remount/key. Fallback находится вне собственной boundary, поэтому его ошибку ловит родитель. Onerror-only boundary сохраняет исходный SSR throw; реальная hydration сохраняет DOM/focus/selection и последующий recovery. 19 Source UMD-сценариев и отдельные SSR, retained-root и nesting probes фиксируют public API; обычный Alert API/namespace сохраняется."
         },
         {
           "id": "shared-config",
@@ -10711,6 +10721,18 @@
             "readme.md"
           ],
           "note": "Локальный prefixCls поддержан. Общий provider prefix/getPrefixCls и React development/deprecation diagnostics пока отсутствуют."
+        },
+        {
+          "id": "boundary-framework",
+          "title": "Framework differences ErrorBoundary",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/AlertErrorBoundary.svelte",
+            "tests/browser/fixtures/ant-design-alert-boundary-reference.json",
+            "readme.md"
+          ],
+          "note": "React componentStack недоступен в Svelte; default pre получает Error.stack JavaScript/Svelte с реальным текстом и stack frames, без выдуманных React frames. React recovery console diagnostics принадлежат React runtime и не воспроизводятся. Ошибки event handlers/отдельных Promise/timer callbacks и SSR не перехватываются. Нет React class instance/setState/reset API; повторный показ children задаётся remount/key. Strict browser console collector сохраняется."
         }
       ]
     },

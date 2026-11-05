@@ -9,6 +9,12 @@
 
 ### Added
 
+- Alert.ErrorBoundary: compound Svelte component, title/message/description/id,
+  сохранение ошибки до remount и передача ошибок fallback к родительской границе.
+  Здоровые children остаются без wrapper; SSR ошибки продолжают выбрасываться.
+  Default description использует Error.stack вместо React componentStack.
+  Добавлены 19 UMD-сценариев, source SSR/lifecycle/nesting evidence и проверки hydration.
+
 - Alert: scalar/array content, legacy aliases, ConfigProvider.alert, object/function
   semantic slots, local prefixCls/rootClassName, refs и root/close data/ARIA.
   Подключены четыре component tokens/aliases/algorithm и 37 CSS rules. Source theme

@@ -3119,7 +3119,21 @@ fitted viewBox статусных иконок из icons-svg 4.6.0; legacy со
 декоративный close wrapper/glyph/palette, hit target и responsive/focus guards.
 WAAPI закрытие сохраняет snapshot callbacks, afterClose после удаления и reduced motion;
 в Source afterClose видит ещё подключённый узел. Эти различия исключены из source metrics.
-Alert.ErrorBoundary, общий ConfigProvider prefix и React diagnostics ещё не перенесены.
+Alert.ErrorBoundary возвращает здоровые children без контейнера. Ошибка дочернего
+render или синхронного effect заменяет их на Alert type=error. Title ?? message
+?? Error.toString() задаёт заголовок; description ?? Error.stack выводится внутри
+pre с font-size:0.9em и overflow-x:auto. Явные 0/false/пустая строка сохраняются,
+id относится только к fallback. Изменение props обновляет тот же Alert, но не
+сбрасывает ошибку даже при здоровых новых children; для сброса нужен remount/key.
+Ошибку самого fallback ловит внешняя ErrorBoundary. Event handlers, отдельные
+Promise/timer callbacks и SSR ошибки эта граница не перехватывает, как исходник.
+Безопасный SSR сохраняет DOM/focus/selection при hydration, затем умеет показать fallback.
+
+Вместо React componentStack используется доступный Error.stack Svelte/JavaScript;
+React recovery diagnostics не воспроизводятся. Эти framework differences отделены
+от [19 официальных сценариев](tests/browser/fixtures/ant-design-alert-boundary-reference.json),
+SSR, hydration и lifecycle-проверок. Общий ConfigProvider prefix и React diagnostics
+ещё не перенесены.
 
 ## Message
 
