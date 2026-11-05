@@ -621,6 +621,11 @@
 
 ### Fixed
 
+- QRCode: alias tokens и algorithms подключены к общей теме; canvas/SVG используют
+  global colorText с исходным fallback и приоритетом color. Background cover
+  получает абсолютную alpha 0.96, включая полупрозрачный colorBgContainer.
+  Добавлены Source/SSR/browser-проверки геометрии, цветов, scopes и реактивного redraw.
+
 - Rate: подключены шесть компонентных токенов и исходная подготовка focus width.
   Добавлены сверка с Ant Design 6.6.8, SSR и browser для размеров, цветов,
   algorithms, scopes, стилей и сохранения оценки/фокуса. Для непримитивного

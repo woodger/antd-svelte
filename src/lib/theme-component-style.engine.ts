@@ -21,6 +21,7 @@ import {
 } from './theme-overlay-tokens.engine';
 import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
   from './theme-css-variables.engine';
+import { FastColor } from './fast-color.engine';
 import type {
   CardComponentToken, GlobalToken, SplitterComponentToken
 } from './theme-component-token.types';
@@ -30,9 +31,12 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
-  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate';
+  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode';
 
 const factories = {
+  QRCode: (token: GlobalToken) => ({
+    QRCodeCoverBackgroundColor: new FastColor(token.colorBgContainer).setA(0.96).toRgbString()
+  }),
   Rate: (token: GlobalToken) => ({
     lineWidthFocus: token.lineWidthFocus === 0 ? 0 : token.lineWidth,
     starColor: token.yellow6,
@@ -277,7 +281,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Statistic: [],
   Segmented: [],
   Splitter: [],
-  Rate: []
+  Rate: [],
+  QRCode: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

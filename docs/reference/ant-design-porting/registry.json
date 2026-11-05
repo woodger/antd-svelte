@@ -9821,6 +9821,16 @@
           "name": "@ant-design/icons-svg",
           "range": "^4.6.0",
           "referenceVersion": "4.6.0"
+        },
+        {
+          "name": "@ant-design/fast-color",
+          "range": "^3.0.1",
+          "referenceVersion": "3.0.1"
+        },
+        {
+          "name": "@ant-design/cssinjs",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
         }
       ],
       "priority": "p2",
@@ -9832,7 +9842,21 @@
         "src/lib/qrcode.ssr.test.ts",
         "tests/package/qrcode.ssr.test.ts",
         "tests/browser/qrcode.spec.ts",
-        "tools/ant-design-css-recipes.json"
+        "tools/ant-design-css-recipes.json",
+        "src/lib/qrcode.types.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/fast-color.engine.ts",
+        "src/lib/theme-qrcode-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-qrcode-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-qrcode-theme-reference.json",
+        "tests/browser/fixtures/qrcode-theme-presets.ts",
+        "tests/browser/fixtures/QRCodeThemeControl.svelte",
+        "tests/browser/fixtures/QRCodeThemeCase.svelte",
+        "tests/browser/fixtures/QRCodeThemeFixtures.svelte",
+        "tests/browser/qrcode-theme-metrics.ts",
+        "tests/browser/qrcode-theme.spec.ts",
+        "tests/package/qrcode-theme.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -9894,12 +9918,36 @@
           "note": "ConfigProvider.qrcode class/style/classNames/styles и whole-object nested replacement; callbacks получают resolved defaults source. Root plain dimensions после semantic geometry, на drawing только plain width/height. Source text-token default color, light/dark cover opacity, borderless transparent border и inherited RTL. Все 11 vendor rules воспроизводятся рецептом; CSS styles и snippets заменяют React objects/nodes."
         },
         {
+          "id": "source-theme-tokens",
+          "title": "Alias tokens, algorithms, подготовленный cover и global foreground",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/QRCode.svelte",
+            "src/lib/qrcode.types.ts",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/fast-color.engine.ts",
+            "src/lib/theme-qrcode-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-qrcode-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-qrcode-theme-reference.json",
+            "tests/browser/fixtures/qrcode-theme-presets.ts",
+            "tests/browser/fixtures/QRCodeThemeControl.svelte",
+            "tests/browser/fixtures/QRCodeThemeCase.svelte",
+            "tests/browser/fixtures/QRCodeThemeFixtures.svelte",
+            "tests/browser/qrcode-theme-metrics.ts",
+            "tests/browser/qrcode-theme.spec.ts",
+            "tests/package/qrcode-theme.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "В 6.6.8 публичный ComponentToken QRCode пуст; перенесены общие aliases/algorithms и внутренний QRCodeCoverBackgroundColor. Root theme hook применяет padding/border/radius/color и cover; FastColor задаёт абсолютную alpha 0.96 colorBgContainer вместо умножения его alpha. Canvas/SVG default color следует global colorText, component aliases цвет модулей не меняют; явный color приоритетнее, undefined global text использует source rc-qrcode fallback #000000. Global/component algorithms, нули/undefined, cssVar.prefix, canvas/SVG/borderless/status/RTL, nested/reset/sibling scopes и semantic/user styles. Реактивная смена сохраняет drawing DOM, focus/ref/status callbacks и перерисовывает прежний bitmap; readback выполняется на browser-owned copy. Native light/dark defaults сохранены, SSR не создаёт DOM/canvas context/callbacks/timers."
+        },
+        {
           "id": "theme-prefix-diagnostics",
-          "title": "PrefixCls, общий theme/token engine и React development warnings",
+          "title": "PrefixCls и React development warnings",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Текущие темы/CSS variables поддерживаются. Произвольные prefixCls, React theme algorithms/component tokens и React dev warnings (пустой value, icon с L) пока не перенесены; production behavior этих input сохранён."
+          "note": "Произвольный локальный/global prefixCls и React dev warnings (пустой value, icon с L) пока не перенесены; production behavior этих input сохранён. Theme aliases/algorithms и global default foreground реализованы отдельной feature; собственных публичных component tokens в QRCode upstream нет."
         }
       ]
     },

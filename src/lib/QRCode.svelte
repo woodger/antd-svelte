@@ -1,6 +1,8 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import {
     encodeQRCode,
     excavateQRCode,
@@ -44,6 +46,8 @@
   }: QRCodeProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('QRCode');
+  const tokens = useDesignTokenContext();
   let canvas = $state<HTMLCanvasElement>();
   let image = $state<HTMLImageElement>();
   let code = $derived(value ? encodeQRCode(value, errorLevel, boostLevel) : undefined);
@@ -57,8 +61,13 @@
     excavate: true,
     crossOrigin: 'anonymous'
   } : undefined));
-  let foreground = $derived(color ?? (config.theme.mode === 'dark'
-    ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.88)'));
+  let foreground = $derived(color ?? (tokens.enabled ? tokens.state.token.colorText ?? '#000000'
+    : config.theme.mode === 'dark' ? 'rgba(255, 255, 255, 0.85)' : 'rgba(0, 0, 0, 0.88)'));
+  // Удалённый source alias не должен восстанавливаться из legacy CSS defaults.
+  let inheritedText = $derived(tokens.enabled && tokens.state.token.colorText === undefined
+    ? tokens.state.prefix === 'ant' ? '--ant-color-text:initial'
+      : `--ant-color-text:var(--${tokens.state.prefix}-color-text)`
+    : undefined);
   let foregroundPath = $derived(qrCodePath(
     placement?.excavation ? excavateQRCode(modules, placement.excavation) : modules,
     margin
@@ -106,6 +115,8 @@
   let contextStyles = $derived(resolve(config.qrcode?.styles));
   let localStyles = $derived(resolve(styles));
   let rootStyle = $derived([
+    inheritedText,
+    componentTheme.style,
     `background-color:${bgColor}`,
     contextStyles?.root,
     config.qrcode?.style,
@@ -158,6 +169,7 @@
     onclick={onclick ?? onClick}
     class={[
       'ant-qrcode ant-qrcode-css-var',
+      componentTheme.className,
       className,
       rootClassName,
       config.qrcode?.class,

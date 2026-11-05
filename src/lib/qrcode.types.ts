@@ -75,6 +75,7 @@ export interface QRCodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'style
   /** Размер bitmap и fallback root width/height, по умолчанию 160. */
   size?: number;
   /** По умолчанию цвет текста текущей темы; style.color не меняет модули. */
+  /** При token theme берётся global colorText; component aliases не меняют цвет модулей. */
   color?: string;
   bgColor?: string;
   /** По умолчанию M. */

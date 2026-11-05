@@ -7343,8 +7343,22 @@ ConfigProvider.qrcode задаёт class/style/classNames/styles для root/cov
 nested config заменяет объект целиком. Semantic callbacks получают разрешённые
 type/size/status/bordered/errorLevel/bgColor. Root style идёт после semantic
 styles, затем записываются size или plain width/height. Color по умолчанию берётся
-из цвета текста текущей темы; style.color не меняет модули. Bordered=false
+из глобального colorText token theme; component QRCode.colorText и style.color
+не меняют модули. Явный color приоритетнее; при undefined global colorText действует
+исходный fallback #000000. Native light/dark defaults сохранены. Bordered=false
 оставляет прозрачную границу, убирает padding и radius. RTL наследуется.
+
+В upstream QRCode не объявляет публичных собственных component tokens.
+ConfigProvider.theme.components.QRCode поддерживает alias tokens и algorithms:
+padding, border, radius, текст cover и прочие глобальные значения. Внутренний
+background cover готовится из colorBgContainer с абсолютной alpha 0.96, включая
+полупрозрачный исходный цвет. Theme variables идут перед semantic/user styles.
+Global/component algorithms, cssVar.prefix и nested/reset/sibling scopes
+сверяются с [UMD](./tests/browser/fixtures/ant-design-qrcode-theme-reference.json),
+[SSR](./tests/package/qrcode-theme.ssr.test.ts) и
+[browser](./tests/browser/qrcode-theme.spec.ts), `?fixture=qrcode-theme`.
+Реактивная смена global colorText перерисовывает прежний canvas и обновляет
+прежний SVG; cover/padding не сбрасывают фокус status snippet или refs.
 
 CSS-рецепт qrcode воспроизводит все 11 правил с проверкой SHA-256. Fixture —
 `?fixture=qrcode`; unit/SSR/package/browser проверяют матрицы, pixel centers,
@@ -7352,8 +7366,8 @@ quiet zone, иконку/CORS, statuses, refs, темы, стили и fallback.
 с [фиксированными результатами npm-пакета](./tests/package/qrcode-vectors.json),
 включая все 40 версий, четыре уровня коррекции и восемь масок.
 
-Произвольные prefixCls, React theme/token engine и component tokens пока не
-перенесены. React development warnings для пустого value и icon с уровнем L
+Произвольный prefixCls пока не перенесён.
+React development warnings для пустого value и icon с уровнем L
 пока не воспроизводятся; production-поведение этих случаев сохранено.
 
 ## BorderBeam
