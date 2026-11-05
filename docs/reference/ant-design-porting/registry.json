@@ -1600,7 +1600,21 @@
         "src/lib/splitter.ssr.test.ts",
         "tests/package/splitter.ssr.test.ts",
         "tests/browser/splitter.spec.ts",
-        "tools/ant-design-css-recipes.json"
+        "tools/ant-design-css-recipes.json",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-component-token.types.ts",
+        "src/lib/theme.css",
+        "src/lib/theme-splitter-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-splitter-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-splitter-theme-reference.json",
+        "tests/browser/fixtures/splitter-theme-presets.ts",
+        "tests/browser/fixtures/SplitterThemeControl.svelte",
+        "tests/browser/fixtures/SplitterThemeCase.svelte",
+        "tests/browser/fixtures/SplitterThemeFixtures.svelte",
+        "tests/browser/splitter-theme-metrics.ts",
+        "tests/browser/splitter-theme.spec.ts",
+        "tests/package/splitter-theme.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -1676,12 +1690,49 @@
           "note": "Svelte не разбирает children snippets синхронно до SSR. Панели задаются items: SplitterPanelProps[] с scalar/snippet children; отдельного публичного SplitterPanel нет. Состояние/DOM сохраняются по позиции, как в useItems/InternalPanel; bind:nativeElement заменяет React ref."
         },
         {
+          "id": "component-theme-tokens",
+          "title": "Три современных компонентных токена и deprecated resizeSpinnerSize",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Splitter.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-component-token.types.ts",
+            "src/lib/theme.css",
+            "src/lib/theme-splitter-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-splitter-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-splitter-theme-reference.json",
+            "tests/browser/fixtures/splitter-theme-presets.ts",
+            "tests/browser/fixtures/SplitterThemeControl.svelte",
+            "tests/browser/fixtures/SplitterThemeCase.svelte",
+            "tests/browser/fixtures/SplitterThemeFixtures.svelte",
+            "tests/browser/splitter-theme-metrics.ts",
+            "tests/browser/splitter-theme.spec.ts",
+            "tests/package/splitter-theme.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Фабрика и root theme hook следуют 6.6.8: splitBarSize, splitTriggerSize, splitBarDraggableSize и deprecated resizeSpinnerSize с исходными fallback/приоритетами, включая современный 0 и отдельный deprecated 0→20. Global/component aliases и algorithms, undefined, cssVar.prefix, normal/vertical/RTL/disabled/custom/lazy, nested/reset/sibling scopes и semantic/user style priority. Native bar hover alias ограничен native темой; token theme наследует настроенные aliases. Реактивная смена сохраняет panels/draft/selection/focus/ref и активный lazy preview; SSR не запускает DOM/observer/events/timers."
+        },
+        {
+          "id": "native-direction-inheritance",
+          "title": "Наследование CSS direction через native ConfigProvider",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/fixtures/ant-design-splitter-theme-reference.json",
+            "tests/browser/splitter-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "Наблюдение Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d: в LTR-документе ConfigProvider direction=rtl без внешнего dir даёт Splitter класс ant-splitter-rtl, но computed direction=ltr; style/index.ts не задаёт для него direction. Source probe directionWithoutHost сохранён отдельно, RTL theme-метрики используют явный dir=rtl host. Native ConfigProvider по существующему контракту создаёт DOM scope с dir=rtl; это поведение сохранено. Наблюдение оставлено для отдельного разбора, не объявлено доказанной ошибкой upstream."
+        },
+        {
           "id": "theme-prefix",
-          "title": "PrefixCls и общий theme/token engine",
+          "title": "PrefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Текущие CSS variables, light/dark и inherited direction поддерживаются. Произвольные prefixCls, React theme algorithms и component tokens пока не перенесены."
+          "note": "Произвольный локальный и глобальный prefixCls остаётся пробелом миграции. Компонентные токены и algorithms подключены к общему theme engine отдельной feature; v1-ready не означает полный API React."
         }
       ]
     },

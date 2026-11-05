@@ -21,16 +21,28 @@ import {
 } from './theme-overlay-tokens.engine';
 import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
   from './theme-css-variables.engine';
-import type { CardComponentToken, GlobalToken } from './theme-component-token.types';
+import type {
+  CardComponentToken, GlobalToken, SplitterComponentToken
+} from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
-  | 'Descriptions' | 'Statistic' | 'Segmented';
+  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter';
 
 const factories = {
+  Splitter: (token: GlobalToken & Partial<SplitterComponentToken>) => {
+    const resizeSpinnerSize = token.resizeSpinnerSize || 20;
+
+    return {
+      splitBarSize: token.splitBarSize || 2,
+      splitTriggerSize: token.splitTriggerSize || 6,
+      splitBarDraggableSize: token.splitBarDraggableSize ?? resizeSpinnerSize,
+      resizeSpinnerSize
+    };
+  },
   Segmented: (token: GlobalToken) => ({
     trackPadding: token.lineWidthBold,
     trackBg: token.colorBgLayout,
@@ -254,7 +266,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Carousel: [],
   Descriptions: [],
   Statistic: [],
-  Segmented: []
+  Segmented: [],
+  Splitter: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

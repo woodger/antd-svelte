@@ -815,9 +815,22 @@ nested config заменяет объект целиком. Root style идёт 
 пустой объект. Null/false icons оставляют пустой custom wrapper.
 
 CSS-рецепт splitter воспроизводит все 59 правил эталона, включая reduced motion,
-с проверкой SHA-256. Темы, primary и RTL наследуются; hover alias ограничен bar и
-не меняет токены содержимого панелей. Произвольные prefixCls, общий React
-theme/token engine и component token config пока не перенесены.
+с проверкой SHA-256. Темы, primary и RTL наследуются; локальный hover alias bar
+сохраняется для native темы, а в token theme bar наследует настроенные aliases.
+
+ConfigProvider.theme.components.Splitter применяет splitBarSize, splitTriggerSize
+и splitBarDraggableSize, включая 0. Deprecated resizeSpinnerSize задаёт fallback
+для splitBarDraggableSize; современное имя имеет приоритет, включая 0.
+Отдельный deprecated 0 сохраняет исходный fallback 20. Поддержаны global/component
+aliases и algorithms, cssVar.prefix, undefined, вложенные/reset/sibling scopes.
+Тематические переменные идут перед semantic/user styles. Реактивные изменения
+сохраняют размеры панелей, draft/selection/focus и текущий lazy drag/preview.
+Сверка: [UMD](./tests/browser/fixtures/ant-design-splitter-theme-reference.json),
+[SSR](./tests/package/splitter-theme.ssr.test.ts),
+[browser](./tests/browser/splitter-theme.spec.ts), `?fixture=splitter-theme`.
+RTL-метрики измерены с явным dir=rtl на host; отдельно записано source-наследование
+LTR без этого host. Существующий native direction провайдера сохранён.
+Произвольный prefixCls пока не перенесён.
 
 Fixture — `?fixture=splitter`. Engine, DOM lifecycle, SSR, package и browser
 проверяют размеры, ограничения, callbacks, controlled/lazy, collapse, native

@@ -621,6 +621,11 @@
 
 ### Fixed
 
+- Splitter: подключены три современных компонентных токена и deprecated
+  resizeSpinnerSize. В token theme bar наследует настроенные aliases; native
+  hover fallback сохранён. Добавлены сверка с Ant Design 6.6.8, SSR и browser
+  для геометрии, provider scopes, приоритетов и обновления lazy preview во время drag.
+
 - Segmented: убран лишний текстовый пробел между icon и label; пустая строка
   больше не добавляет пустой span с отступом, а числовой 0 сохраняется.
   Icon-only с пустой подписью использует title как native accessible label.

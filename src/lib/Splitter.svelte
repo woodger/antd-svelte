@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { getSplitterAria, splitterDraggerClasses } from './splitter.engine';
   import { observeSplitterSize } from './splitter.dom';
   import { createSplitterModel } from './splitter.model.svelte.js';
@@ -32,6 +33,7 @@
   }: SplitterProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Splitter');
   let actualOrientation = $derived(spaceOrientation(orientation, vertical, layout));
   let isVertical = $derived(actualOrientation === 'vertical');
   let reverse = $derived(!isVertical && config.direction === 'rtl');
@@ -98,8 +100,10 @@
 
 <div
   bind:this={nativeElement}
+  data-ant-splitter-native={!componentTheme.className || undefined}
   class={[
     'ant-splitter',
+    componentTheme.className,
     className,
     `ant-splitter-${actualOrientation}`,
     config.direction === 'rtl' && 'ant-splitter-rtl',
@@ -109,7 +113,9 @@
     config.splitter?.class,
     'ant-splitter-css-var'
   ]}
-  style={[contextStyles.root, config.splitter?.style, localStyles.root, style].filter(Boolean).join(';')}
+  style={[
+    componentTheme.style, contextStyles.root, config.splitter?.style, localStyles.root, style
+  ].filter(Boolean).join(';')}
 >
   {#each model.items as panel, index}
     <SplitterPanel

@@ -590,6 +590,7 @@ export interface SwitchComponentToken {
 }
 
 export interface SplitterComponentToken {
+  /** @deprecated Используйте splitBarDraggableSize; современное имя принимает явный 0. */
   resizeSpinnerSize: number;
   splitBarDraggableSize: number;
   splitBarSize: number;
