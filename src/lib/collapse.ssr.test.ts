@@ -18,7 +18,7 @@ describe('Collapse server rendering', () => {
       { props: { items, 'aria-label': 'Account sections', headingLevel: 2 } }
     );
 
-    expect(body).toContain('role="group" aria-label="Account sections"');
+    expect(body).toMatch(/<div(?=[^>]*role="group")(?=[^>]*aria-label="Account sections")[^>]*>/);
     expect(body.match(/<h2\b/g)).toHaveLength(3);
     expect(body.match(/aria-expanded="false"/g)).toHaveLength(3);
     expect(body.match(/role="region"[^>]*\shidden(?:[\s=>])/g)).toHaveLength(3);

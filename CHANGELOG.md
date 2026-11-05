@@ -9,6 +9,13 @@
 
 ### Added
 
+- Collapse: числовые/индексные ключи, scalar/array content, legacy aliases,
+  ConfigProvider.collapse, object/function semantic slots и item overrides,
+  custom expandIcon Snippet, local prefixCls/rootClassName, refs и data/ARIA.
+  Подключены десять component tokens/aliases/algorithm и 49 CSS rules; сохранены
+  native heading/button, keyboard/focus, hidden lifecycle и независимость extra.
+  Добавлены сверка с официальным UMD, callback traces и SSR/browser-проверки.
+
 - Alert.ErrorBoundary: compound Svelte component, title/message/description/id,
   сохранение ошибки до remount и передача ошибок fallback к родительской границе.
   Здоровые children остаются без wrapper; SSR ошибки продолжают выбрасываться.

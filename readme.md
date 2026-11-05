@@ -2811,9 +2811,10 @@ placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и mot
 />
 ```
 
-`items` принимает readonly-массив CollapseItem: строковый key, label (строку или
-пассивный Snippet), необязательные children и extra (Snippet), collapsible,
-showArrow, forceRender и destroyOnHidden. Пустой ключ допустим; при повторении
+`items` принимает readonly-массив CollapseItem: необязательный строковый/числовой
+key, label, children и extra (scalar, вложенный readonly-массив или Snippet),
+collapsible, showArrow, forceRender и destroyOnHidden. Без key используется
+строковый индекс; числа преобразуются в строки. Пустой ключ допустим; при повторении
 используется первое вхождение. Ключ сохраняет экземпляр панели и фокус при
 перестановке. Интерактивные элементы размещаются в extra или children; label
 должен давать кнопке доступное имя и не содержать других controls.
@@ -2821,10 +2822,10 @@ Extra находится рядом с заголовком, вне кнопки
 переключают панель. Id/class/style относятся к корневому контейнеру;
 aria-label или aria-labelledby именует группу.
 
-`bind:activeKey` принимает строку или readonly-массив строк. Активация пользователем
+`bind:activeKey` принимает строку, число или readonly-массив таких ключей. Активация пользователем
 сначала записывает в binding новый массив, затем вызывает onChange с отдельным
-массивом; изменение массива callback не меняет значение владельца. Ключи
-дедуплицируются с сохранением порядка активации. DefaultActiveKey читается при
+массивом; изменение массива callback не меняет значение владельца. Затем вызывается
+item.onItemClick со строковым ключом. Ключи дедуплицируются с сохранением порядка активации. DefaultActiveKey читается при
 создании; без начального значения все панели закрыты, в том числе в accordion.
 Для binding задавайте начальное значение у владельца без defaultActiveKey.
 Внешние изменения, defaults и переключение accordion не вызывают onChange.
@@ -2857,7 +2858,8 @@ extra и поля обходятся обычным Tab; стрелки не п�
 Содержимое впервые монтируется при открытии и по умолчанию сохраняет локальный
 state и DOM-черновики в скрытой панели. DestroyOnHidden=true удаляет содержимое
 при закрытии; отключение этой настройки не монтирует уже уничтоженную панель.
-Значение item переопределяет общее, включая false. ForceRender=true монтирует
+Значение item переопределяет общее, включая false. Legacy destroyInactivePanel
+используется, если destroyOnHidden не задан. ForceRender=true монтирует
 содержимое сразу и сохраняет его даже с destroyOnHidden. Удаление key уничтожает
 панель; состояние вне неё сохраняется. Скрытые сохранённые панели остаются в DOM,
 их таймеры и подписки продолжают работать. Поля посещённых/forceRender-панелей
@@ -2868,15 +2870,39 @@ state и DOM-черновики в скрытой панели. DestroyOnHidden=
 Size использует small/middle/large и ConfigProvider.componentSize. Bordered=false
 убирает внешнюю рамку, ghost — фон и разделители. ExpandIconPlacement задаёт
 start/end относительно кнопки заголовка и направления RTL; extra остаётся
-отдельным элементом после заголовка. Темы, compact и reduced motion используют
-существующие токены. Высота содержимого меняется сразу; анимируется только
-стрелка, с учётом reduced motion.
+отдельным элементом после заголовка. Legacy expandIconPosition используется,
+если expandIconPlacement не задан. ExpandIcon — Snippet с данными панели:
+isActive, header, panelKey, prefixCls, исходными showArrow/collapsible/accordion
+и объединёнными item slots. Его onItemClick переключает доступную панель и вызывает
+root/item callbacks. Пользовательская стрелка не поворачивается автоматически.
+
+ConfigProvider.collapse задаёт expandIcon, class/style и classNames/styles;
+локальная стрелка приоритетнее контекстной. Вложенный явный record заменяет
+родительский. Semantic object/function slots: root, header, title, body, icon.
+Callback получает props с разрешёнными size, bordered и expandIconPlacement.
+Root style: context slots → context style → local slots → local style; component
+variables идут перед ними. Item slots добавляют classes и перекрывают styles.
+Header slot применяется к нативной кнопке, body — к внутреннему содержимому;
+extra остаётся вне кнопки. Item id/class/style и data/ARIA относятся к обёртке
+панели, rootClassName — к корню. Bind:nativeElement и bind:ref получают HTMLDivElement
+после mount и очищаются при unmount. Смена config/theme/prefix сохраняет панели и поля.
+
+Theme.components.Collapse подключает все десять токенов: headerPadding/SM/LG,
+headerBg, contentPadding/SM/LG, contentBg, borderlessContentPadding/Bg. Aliases,
+component algorithm, cssVar prefix/key, dark и compact используют общий механизм
+темы. Local prefixCls поддерживается CSS template из того же закреплённого архива;
+все 49 CSS rules воспроизводятся инструментом. Высота содержимого меняется сразу;
+анимируется только стрелка, с учётом reduced motion.
 
 Галерея `/ant-design#collapse` показывает анкету, вложенные панели, сохранение
 черновиков, destroyOnHidden и независимую кнопку сброса в extra. Сброс примера
 пересоздаёт поля с исходными значениями, сохраняя открытые внешние панели.
-Первая версия не поддерживает legacy Collapse.Panel, пользовательский expandIcon,
-classNames/styles и React-анимацию высоты.
+Legacy Collapse.Panel и React-анимация высоты пока не перенесены. Native group,
+heading/button/region, ARIA-связи, Space, full button hit area, независимость extra,
+focus recovery и icon/showArrow fallback сохранены; это явные отличия от DOM React.
+Snippet — непрозрачная граница: пустой custom expandIcon сохраняет свой wrapper.
+Глобальный ConfigProvider.prefixCls, React dev warnings и низкоуровневые
+item DOM events/headerClass/ref пока не поддерживаются.
 
 ## Modal
 

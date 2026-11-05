@@ -27,9 +27,21 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Radio' | 'Checkbox' | 'Switch' | 'Avatar' | 'Badge' | 'Tooltip' | 'Popover' | 'Popconfirm'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
-  | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert';
+  | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse';
 
 const factories = {
+  Collapse: (token: GlobalToken) => ({
+    headerPadding: `${token.paddingSM}px ${token.padding}px`,
+    headerPaddingSM: `${token.paddingXS}px ${token.paddingSM}px ${token.paddingXS}px ${token.paddingXS}px`,
+    headerPaddingLG: `${token.padding}px ${token.paddingLG}px ${token.padding}px ${token.padding}px`,
+    headerBg: token.colorFillAlter,
+    contentPadding: `${token.padding}px 16px`,
+    contentPaddingSM: token.paddingSM,
+    contentPaddingLG: token.paddingLG,
+    contentBg: token.colorBgContainer,
+    borderlessContentPadding: `${token.paddingXXS}px 16px ${token.padding}px`,
+    borderlessContentBg: 'transparent'
+  }),
   Alert: (token: GlobalToken) => ({
     borderRadius: token.borderRadiusLG,
     withDescriptionIconSize: token.fontSizeHeading3,
@@ -184,7 +196,8 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Skeleton: [],
   Empty: [],
   Result: [],
-  Alert: []
+  Alert: [],
+  Collapse: []
 };
 const deprecatedTokens: Partial<Record<
   StyledComponent, readonly (readonly [string, string])[]

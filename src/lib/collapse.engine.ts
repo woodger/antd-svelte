@@ -1,18 +1,20 @@
 import type { CollapseActiveKey, CollapseItem, CollapseTrigger } from './collapse.types';
 
-export function normalizeCollapseItems(items: readonly CollapseItem[]): CollapseItem[] {
+export function normalizeCollapseItems(items: readonly CollapseItem[]) {
   const seen = new Set<string>();
 
-  return items.filter((item) => {
-    if (seen.has(item.key)) return false;
+  return items.flatMap((item, index) => {
+    const key = String(item.key ?? index);
+    if (seen.has(key)) return [];
 
-    seen.add(item.key);
-    return true;
+    seen.add(key);
+    return [{ ...item, key }];
   });
 }
 
 export function getCollapseKeys(value: CollapseActiveKey | undefined, accordion = false): string[] {
-  const keys = [...new Set(typeof value === 'string' ? [value] : value ?? [])];
+  const source = typeof value === 'string' || typeof value === 'number' ? [value] : value ?? [];
+  const keys = [...new Set(source.map(String))];
   return accordion ? keys.slice(0, 1) : keys;
 }
 
@@ -41,7 +43,9 @@ export function getCollapseFocusKey(
   open: readonly string[],
   collapsible: CollapseTrigger = 'header'
 ): string | undefined {
-  const available = items.filter((item) => getCollapseTrigger(item, collapsible) !== 'disabled');
+  const available = normalizeCollapseItems(items).filter(
+    (item) => getCollapseTrigger(item, collapsible) !== 'disabled'
+  );
 
   return available.find((item) => item.key === requested)?.key
     ?? available.find(

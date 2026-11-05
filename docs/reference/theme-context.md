@@ -104,7 +104,7 @@ CSS-переменных подключены для Button, Input, TextArea, In
 Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch.
 Подключены также Avatar/AvatarGroup, Badge, Tooltip, Popover, Popconfirm,
 Select, AutoComplete, TreeSelect и Cascader/CascaderPanel.
-Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress, Skeleton, Result и Alert получают собственные
+Anchor, Breadcrumb, Menu, Dropdown, Steps, Timeline, Pagination, Tabs, Slider, Divider, Spin, Progress, Skeleton, Result, Alert и Collapse получают собственные
 defaults и aliases.
 Flex использует alias overrides без собственных component defaults и без typography reset.
 Empty использует общие aliases/algorithm без собственных component-only defaults.
@@ -417,6 +417,20 @@ Main сохраняет native host/status/focus, title/div, flex/responsive gua
 [116 source-сценариев](../../tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 primitives и [34 main-сценария](../../tests/browser/fixtures/ant-design-skeleton-main-reference.json)
 сняты из закреплённого UMD с одинаковым inherited global-token окружением.
+
+## Токены Collapse
+
+Collapse использует десять component defaults. HeaderPadding строится из paddingSM
+и padding; его SM/LG-варианты — из paddingXS/SM и padding/LG. HeaderBg использует
+colorFillAlter, contentBg — colorBgContainer. ContentPadding равен `${padding}px 16px`,
+SM/LG используют paddingSM/LG; borderlessContentPadding — `${paddingXXS}px 16px ${padding}px`,
+borderlessContentBg — transparent. Числовые размеры сериализуются с px; явный 0 сохраняется.
+
+Переменные вычисляются для компонента до semantic/root styles. Поддержаны aliases,
+component algorithm, dark/compact и cssVar prefix/key. ConfigProvider.collapse
+управляет defaults стрелки и оформления; root/header/title/body/icon slots и item
+приоритеты описаны в [Collapse](../../readme.md#collapse). Native button получает
+header styles и полную область нажатия; высота панели меняется без React motion.
 
 ## Токены Alert
 

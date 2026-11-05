@@ -7983,9 +7983,9 @@
       "name": "Collapse",
       "category": "data-display",
       "scope": "target",
-      "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
+      "scopeReason": "Исходные items/config/theme и semantic slots с сохранением native кнопок, фокуса и SSR lifecycle.",
       "upstreamPath": "components/collapse",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "Collapse",
@@ -7997,21 +7997,113 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/collapse",
+          "range": "~1.2.0",
+          "referenceVersion": "1.2.0"
+        }
+      ],
+      "priority": "p2",
+      "effort": "M",
       "evidence": [
+        "src/lib/Collapse.svelte",
+        "src/lib/CollapsePanel.svelte",
+        "src/lib/collapse.types.ts",
+        "src/lib/collapse.engine.test.ts",
+        "src/lib/collapse.ssr.test.ts",
+        "tests/package/collapse.ssr.test.ts",
+        "tests/browser/collapse.spec.ts",
+        "tests/browser/collapse-source.spec.ts",
+        "tests/browser/fixtures/ant-design-collapse-reference.json",
+        "tools/ant-design-css-recipes.json",
         "readme.md",
-        "tests/browser/collapse.spec.ts"
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "Items, accordion, bind/default keys, keyboard, focus и hidden lifecycle",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "src/lib/collapse.engine.test.ts",
+            "src/lib/collapse.ssr.test.ts",
+            "tests/browser/collapse.spec.ts"
+          ],
+          "note": "Сохранены readonly items, первый duplicate, пустой/неизвестный key, activation order и bind перед onChange с отдельными массивами. Defaults читаются один раз; accordion использует первый key без перезаписи owner. Native heading/button, ARIA links/regions, Enter/Space, independent extra и focus repair. Retain/destroy/forceRender, FormData, reorder/removal/unmount, nested/modal и touch проверяются отдельно."
+        },
+        {
+          "id": "source-content-config",
+          "title": "Scalar/array content, numeric/index keys, aliases и ConfigProvider.collapse",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/package/collapse.ssr.test.ts",
+            "tests/browser/collapse-source.spec.ts"
+          ],
+          "note": "Числа→строки, omitted key→index; label/children/extra scalar/array/Snippet, extra presence сохраняет 0 и пустую строку. DestroyOnHidden перед destroyInactivePanel, expandIconPlacement перед expandIconPosition. Config record replacement, context→local expandIcon Snippet; payload header/isActive/panelKey/prefix/merged slots и raw accordion/collapsible/showArrow. Payload onItemClick переключает доступную панель через native guards. Item onItemClick вызывается после root onChange; trace сравнивается с UMD."
+        },
+        {
+          "id": "semantic-theme",
+          "title": "Semantic callbacks/items, local prefix/refs и десять component tokens",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/package/collapse.ssr.test.ts",
+            "tests/browser/collapse-source.spec.ts",
+            "tests/browser/fixtures/ant-design-collapse-reference.json",
+            "tools/ant-design-css-recipes.json"
+          ],
+          "note": "Root/header/title/body/icon object/function slots с resolved size/bordered/placement; root context slots→context style→local slots→local style, item overrides last. Header относится к native button, body к содержимому. Root/item data/ARIA, item id/class/style и rootClassName; nativeElement/ref — DOM root, cleanup при unmount. Header/content/borderless padding/Bg, aliases/algorithm, zero, cssVar prefix/key, dark/compact и 49 CSS rules. 86 UMD-сценариев, live config/theme/prefix, focus/selection/refs и callback/lifecycle traces."
+        },
+        {
+          "id": "native-boundaries",
+          "title": "Сохраняемые native DOM, управление, extra, icons и SSR",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "readme.md",
+            "src/lib/collapse.ssr.test.ts",
+            "tests/browser/collapse.spec.ts",
+            "tests/browser/collapse-source.spec.ts"
+          ],
+          "note": "Group/heading/button/region вместо Rc div role=button/tab, Space и full button hit area; independent extra не переключает панель. Native ARIA links, focus repair, first duplicate, binding и empty locale сохраняются. Source CSS метрики header сравниваются с native button; private structure, icon height/rotation/SVG исключены явно. Empty custom Snippet сохраняет wrapper, внутренний RenderContent не инспектирует DOM."
+        },
+        {
+          "id": "legacy-panel",
+          "title": "Deprecated Collapse.Panel и children composition",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+          "note": "Items и Svelte Snippets покрыты; отдельный SSR-safe compound Panel пока не реализован. Не заменяет items и не разрешает onMount-only регистрацию для SSR."
+        },
+        {
+          "id": "motion",
+          "title": "Source height collapse motion",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/collapse.spec.ts",
+            "readme.md"
+          ],
+          "note": "Сохранено мгновенное native hidden/unmount; стрелка анимируется с reduced motion. React CSSMotion высоты, start/active/end styles и timeline остаются в полном объёме миграции."
+        },
+        {
+          "id": "shared-config",
+          "title": "Глобальный prefixCls и React diagnostics",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [],
+          "note": "Локальный prefixCls поддержан; общий ConfigProvider.prefixCls и React dev warnings остаются за пределами этого этапа."
+        },
+        {
+          "id": "item-dom-api",
+          "title": "Низкоуровневые item DOM events, headerClass и ref",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [],
+          "note": "Item id/class/style, data/ARIA, semantic slots и onItemClick перенесены; остальные React.DOMAttributes, headerClass и React RefObject item требуют отдельной Svelte boundary."
         }
       ]
     },

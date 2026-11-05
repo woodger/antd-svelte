@@ -485,7 +485,14 @@ export type {
   CollapseProps,
   CollapseItem,
   CollapseTrigger,
-  CollapseActiveKey
+  CollapseActiveKey,
+  CollapseContent,
+  CollapseConfig,
+  CollapseSemantic,
+  CollapseSemanticSlots,
+  CollapseItemSemanticSlots,
+  CollapseSemanticInfo,
+  CollapseExpandIconInfo
 } from './collapse.types';
 export type { DrawerProps, DrawerPlacement, DrawerSize } from './drawer.types';
 export type {

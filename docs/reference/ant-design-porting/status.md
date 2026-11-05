@@ -8,7 +8,7 @@
 
 Каталог: **73 семейств**, публичных Svelte-компонентов: **114**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **57**; требуется аудит у **13**; частично покрыт у **0**.
+Проверенный объём v1 покрыт у **58**; требуется аудит у **12**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -56,7 +56,7 @@ Candidate означает запись каталога, для которой 
 | [Calendar](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/calendar) | data-display | target | Calendar, generateCalendar | Согласованный v1 покрыт | PrefixCls, произвольный token engine, все locales и React diagnostics (missing) |
 | [Card](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/card) | data-display | target | Card, CardGrid, CardMeta | Согласованный v1 покрыт | PrefixCls, глобальный variant/component config/tokens и полный API Tabs (missing) |
 | [Carousel](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/carousel) | data-display | target | Carousel | Согласованный v1 покрыт | Граница React children/instance и Svelte snippets/typed refs (partial); Произвольный prefix CSS и полный общий token engine (missing) |
-| [Collapse](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/collapse) | data-display | target | Collapse | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed) |
+| [Collapse](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/collapse) | data-display | target | Collapse | Согласованный v1 покрыт | Сохраняемые native DOM, управление, extra, icons и SSR (partial); Deprecated Collapse.Panel и children composition (missing); Source height collapse motion (partial); Глобальный prefixCls и React diagnostics (missing); Низкоуровневые item DOM events, headerClass и ref (missing) |
 | [Descriptions](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/descriptions) | data-display | target | Descriptions | Согласованный v1 покрыт | PrefixCls, пользовательские breakpoint/token и глобальный component config (missing) |
 | [Empty](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/empty) | data-display | target | Empty | Согласованный v1 покрыт | Сохраняемые Svelte/native contracts (partial); Общий prefix и diagnostics (missing) |
 | [Image](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/image) | data-display | target | Image, ImagePreviewGroup | Согласованный v1 покрыт | Progress placeholder, полный semantic/config/icons API, container и motion (missing) |

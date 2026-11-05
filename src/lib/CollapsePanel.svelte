@@ -1,5 +1,6 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
+  import RenderContent from './RenderContent.svelte';
+  import type { CollapseContent } from './collapse.types';
 
   let {
     id,
@@ -8,6 +9,9 @@
     open,
     region,
     children,
+    prefix = 'ant-collapse',
+    bodyClass,
+    bodyStyle,
     forceRender = false,
     destroyOnHidden = false
   }: {
@@ -16,7 +20,10 @@
     itemKey: string;
     open: boolean;
     region: boolean;
-    children?: Snippet;
+    children?: CollapseContent;
+    prefix?: string;
+    bodyClass?: string;
+    bodyStyle?: string;
     forceRender?: boolean;
     destroyOnHidden?: boolean;
   } = $props();
@@ -33,10 +40,10 @@
 </script>
 
 <style>
-  .ant-collapse-panel { min-width: 0; overflow-wrap: anywhere; }
-  .ant-collapse-panel[hidden] { display: none; }
+  [data-collapse-panel] { min-width: 0; overflow-wrap: anywhere; }
+  [data-collapse-panel][hidden] { display: none; }
 </style>
 
-<div {id} role={region ? 'region' : undefined} aria-labelledby={region ? labelledBy : undefined} hidden={!open} data-collapse-panel={itemKey} class={['ant-collapse-panel', !open && 'ant-collapse-panel-hidden']}>
-  {#if renderContent}<div class="ant-collapse-body" {@attach rememberContent}>{@render children?.()}</div>{/if}
+<div {id} role={region ? 'region' : undefined} aria-labelledby={region ? labelledBy : undefined} hidden={!open} data-collapse-panel={itemKey} class={[`${prefix}-panel`, !open && `${prefix}-panel-hidden`]}>
+  {#if renderContent}<div class={[`${prefix}-body`, bodyClass]} data-ant-collapse-part="body" style={bodyStyle || undefined} {@attach rememberContent}><RenderContent value={children} /></div>{/if}
 </div>

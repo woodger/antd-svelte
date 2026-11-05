@@ -2,23 +2,71 @@ import type { Snippet } from 'svelte';
 import type { ComponentSize } from './types';
 
 export type CollapseTrigger = 'header' | 'icon' | 'disabled';
-export type CollapseActiveKey = string | readonly string[];
+export type CollapseActiveKey = string | number | readonly (string | number)[];
+export type CollapseContent = string | number | boolean | null | Snippet
+  | readonly (CollapseContent | undefined)[];
+export interface CollapseItemSemanticSlots {
+  header?: string;
+  title?: string;
+  body?: string;
+  icon?: string;
+}
+export interface CollapseSemanticSlots extends CollapseItemSemanticSlots {
+  root?: string;
+}
+export interface CollapseSemanticInfo {
+  props: CollapseProps & {
+    size: ComponentSize;
+    bordered: boolean;
+    expandIconPlacement: 'start' | 'end';
+  };
+}
+export type CollapseSemantic = CollapseSemanticSlots
+  | ((info: CollapseSemanticInfo) => CollapseSemanticSlots | undefined);
 
+/** Readonly item; ключ по умолчанию — строковый индекс, onChange всегда получает строки. */
 export interface CollapseItem {
-  key: string;
-  label: string | Snippet;
-  children?: Snippet;
-  extra?: Snippet;
+  key?: string | number;
+  /** Пассивное содержимое нативной кнопки; controls размещайте в extra или children. */
+  label?: CollapseContent;
+  children?: CollapseContent;
+  extra?: CollapseContent;
   collapsible?: CollapseTrigger;
   showArrow?: boolean;
   forceRender?: boolean;
   destroyOnHidden?: boolean;
+  id?: string;
+  class?: string;
+  style?: string;
+  /** Item slots дополняют общие classes и перекрывают общие styles. */
+  classNames?: CollapseItemSemanticSlots;
+  styles?: CollapseItemSemanticSlots;
+  /** Вызывается после обновления binding и общего onChange; disabled его не вызывает. */
+  onItemClick?: (key: string) => void;
+  [attribute: `aria-${string}`]: unknown;
+  [attribute: `data-${string}`]: unknown;
 }
+/** Данные панели для expandIcon; custom Snippet не получает автоматический rotate. */
+export interface CollapseExpandIconInfo extends Omit<CollapseItem, 'key' | 'label'> {
+  panelKey: string;
+  header?: CollapseContent;
+  isActive: boolean;
+  accordion?: boolean;
+  collapsible?: CollapseTrigger;
+  showArrow?: boolean;
+  prefixCls: string;
+  /** Переключает доступную панель, затем вызывает onChange и item.onItemClick. */
+  onItemClick: (key: string) => void;
+}
+/** Наследуемое оформление и стрелка; явный record заменяет родительский. */
+export interface CollapseConfig extends Pick<
+  CollapseProps, 'class' | 'style' | 'expandIcon' | 'classNames' | 'styles'
+> {}
 
 /** Независимые раскрываемые панели или accordion с управлением activeKey. */
 export interface CollapseProps {
-  items: readonly CollapseItem[];
-  /** Поддерживает bind:activeKey. */
+  items?: readonly CollapseItem[];
+  /** Поддерживает bind:activeKey; числа сравниваются по строковому представлению. */
   activeKey?: CollapseActiveKey | undefined;
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */
   defaultActiveKey?: CollapseActiveKey;
@@ -29,13 +77,19 @@ export interface CollapseProps {
   collapsible?: CollapseTrigger;
   /** @defaultValue 'start' */
   expandIconPlacement?: 'start' | 'end';
+  /** @deprecated Используйте expandIconPlacement. */
+  expandIconPosition?: 'start' | 'end';
+  /** Локальный Snippet приоритетнее ConfigProvider.collapse.expandIcon. */
+  expandIcon?: Snippet<[CollapseExpandIconInfo]>;
   size?: ComponentSize;
   /** @defaultValue true */
   bordered?: boolean;
   /** @defaultValue false */
   ghost?: boolean;
-  /** @defaultValue false */
+  /** Приоритетнее destroyInactivePanel; forceRender item сохраняет содержимое. */
   destroyOnHidden?: boolean;
+  /** @deprecated Используйте destroyOnHidden. */
+  destroyInactivePanel?: boolean;
   /** @defaultValue 3 */
   headingLevel?: 2 | 3 | 4 | 5 | 6;
   id?: string;
@@ -43,4 +97,14 @@ export interface CollapseProps {
   'aria-labelledby'?: string;
   class?: string;
   style?: string;
+  prefixCls?: string;
+  rootClassName?: string;
+  /** Header slot относится к нативной кнопке, body — к внутреннему содержимому. */
+  classNames?: CollapseSemantic;
+  styles?: CollapseSemantic;
+  /** Bind:nativeElement и bind:ref получают HTMLDivElement после mount, undefined при unmount. */
+  nativeElement?: HTMLDivElement;
+  ref?: HTMLDivElement;
+  [attribute: `aria-${string}`]: unknown;
+  [attribute: `data-${string}`]: unknown;
 }

@@ -27,6 +27,21 @@ describe('Collapse items and values', () => {
     expect(source).toHaveLength(4);
   });
 
+  it('normalizes numeric and omitted item keys without merging explicit empty keys', () => {
+    const source = Object.freeze([
+      { key: 7, label: 'Numeric' }, { key: '7', label: 'Duplicate' },
+      { label: 'Index' }, { key: '', label: 'Empty' }
+    ]);
+
+    expect(normalizeCollapseItems(source)).toEqual([
+      { key: '7', label: 'Numeric' }, { key: '2', label: 'Index' },
+      { key: '', label: 'Empty' }
+    ]);
+    expect(getCollapseKeys([7, '7', 0, '', 'missing'])).toEqual(['7', '0', '', 'missing']);
+    expect(getCollapseKeys(0)).toEqual(['0']);
+    expect(source[0].key).toBe(7);
+  });
+
   it('normalizes a scalar or readonly array, preserving empty and unknown keys', () => {
     const source = Object.freeze(['', 'missing', '', 'settings']);
 

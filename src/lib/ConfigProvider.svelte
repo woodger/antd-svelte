@@ -34,6 +34,7 @@
   import type { EmptyConfig } from './empty.types';
   import type { ResultConfig } from './result.types';
   import type { AlertConfig } from './alert.types';
+  import type { CollapseConfig } from './collapse.types';
   import type { ColorPickerConfig } from './color-picker.types';
   import type { InputNumberConfig } from './input-number.types';
   import type { RadioConfig } from './radio.types';
@@ -93,6 +94,7 @@
     empty?: EmptyConfig;
     result?: ResultConfig;
     alert?: AlertConfig;
+    collapse?: CollapseConfig;
     colorPicker?: ColorPickerConfig;
     inputNumber?: InputNumberConfig;
     radio?: RadioConfig;
@@ -166,6 +168,7 @@
     empty,
     result,
     alert,
+    collapse,
     colorPicker,
     inputNumber,
     radio,
@@ -293,6 +296,9 @@
     },
     get result() {
       return result ?? parent.result;
+    },
+    get collapse() {
+      return collapse ?? parent.collapse;
     },
     get alert() {
       return alert ?? parent.alert;

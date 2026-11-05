@@ -108,7 +108,7 @@
 
   function change(keys: string[]) {
     changes.push([...keys]);
-    owners.push(typeof activeKey === 'string' ? activeKey : [...(activeKey ?? [])]);
+    owners.push(typeof activeKey === 'string' || typeof activeKey === 'number' ? activeKey : [...(activeKey ?? [])]);
     if (mutateCallback) keys.push('injected');
   }
 
