@@ -9,6 +9,12 @@
 
 ### Added
 
+- Popover/Popconfirm: align/builtinPlacements/onPopupAlign с передачей через
+  AvatarGroup.max.popover. Сохранены исходные offsets/points, overflow, htmlRegion,
+  arrow/class selection и semantic priorities; native automatic tracking, DOM,
+  draft/focus/selection и SSR cleanup. Добавлены 84 UMD-сценария; наблюдение
+  о задержке выравнивания React после смены props записано для отдельного разбора.
+
 - Popover/Popconfirm: независимые showAction/hideAction, focusDelay/blurDelay,
   touch fallback и source outside/popup focus actions; настройки проходят через
   AvatarGroup.max.popover. Popover.disabled сохраняет raw open и callbacks.

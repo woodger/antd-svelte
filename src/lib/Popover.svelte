@@ -6,6 +6,7 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { getOverlaySemantics } from './overlay-semantic.engine';
   import { createOverlayStyle } from './overlay-style.model.svelte';
+  import { getPopupArrowStyle, getPopupPlacement, getPopupPlacements } from './popup-position.engine';
   import { getTooltipColor } from './tooltip-color.engine';
   import { getOverlayPrefixCss } from './overlay-prefix.engine';
   import prefixTemplate from './vendor/popover-prefix.css.js';
@@ -24,6 +25,7 @@
     getTooltipPlacementConfig,
     isTooltipCorner
   } from './tooltip.engine';
+  import type { TooltipPosition } from './tooltip.engine';
   import type {
     PopoverContent,
     PopoverProps,
@@ -139,6 +141,8 @@
   let popup = $state<HTMLDivElement>();
   let shown = $state(false);
   let actualPlacement = $state(untrack(() => placement));
+  let actualPosition = $state.raw<TooltipPosition>();
+  let realign: (() => void) | undefined;
   let pending: ReturnType<typeof setTimeout> | undefined;
   let hovered = false;
   let focused = false;
@@ -152,9 +156,34 @@
   let resumeFocus: HTMLElement | undefined;
   let active = true;
   let mounted = $state(false);
+  let customPosition = $derived(Boolean(props.align || props.builtinPlacements || props.onPopupAlign));
   let sourcePlacement = $derived(typeof arrow === 'object'
     || Boolean(config.popover) || isPopconfirm && Boolean(config.popconfirm)
-    || typeof autoAdjustOverflow === 'object');
+    || typeof autoAdjustOverflow === 'object' || customPosition);
+  let positionPlacements = $derived.by(() => {
+    if (props.builtinPlacements) return props.builtinPlacements;
+
+    const source = getTooltipPlacementConfig(arrowConfig, designTokens.state.token);
+    const placements = getPopupPlacements(
+      source.pointAtCenter ?? false,
+      source.arrowWidth,
+      source.offset,
+      source.radius,
+      autoAdjustOverflow
+    );
+    for (const align of Object.values(placements)) align.htmlRegion = 'visibleFirst';
+    return placements;
+  });
+  let classPlacement = $derived.by(() => {
+    if (!customPosition) return shown ? actualPlacement : placement;
+    return actualPosition?.sourceAlign
+      ? getPopupPlacement(positionPlacements, actualPosition.sourceAlign) : undefined;
+  });
+  let arrowPositionStyle = $derived(customPosition && actualPosition ? getPopupArrowStyle({
+    align: actualPosition.sourceAlign,
+    arrowX: actualPosition.arrowX,
+    arrowY: actualPosition.arrowY
+  }) : '');
   let hasTitle = $derived(hasContent(title));
   let hasBody = $derived(hasContent(content));
   let available = $derived(hasTitle || hasBody);
@@ -249,6 +278,14 @@
         return sourcePlacement
           ? getTooltipPlacementConfig(arrowConfig, designTokens.state.token) : undefined;
       },
+      get sourceAlign() { return customPosition ? props.align ?? {} : undefined; },
+      get builtinPlacements() { return props.builtinPlacements; },
+      get onAlign() {
+        return customPosition ? (position: TooltipPosition) => {
+          actualPosition = position;
+          props.onPopupAlign?.(surface, position.sourceAlign ?? {});
+        } : undefined;
+      },
       maxWidth: '100vw',
       gap: () => untrack(() => designTokens.enabled || isTooltipCorner(placement) || sourcePlacement
         ? (arrowConfig.show ? designTokens.state.token.sizePopupArrow / 2 : 0)
@@ -261,6 +298,9 @@
       onDismiss: dismiss,
       onVisibilityChange: (next) => {
         shown = next;
+        if (next && customPosition) queueMicrotask(() => {
+          if (visible) realign?.();
+        });
         if (!next) {
           popupFocused = false;
           popupHovered = false;
@@ -275,8 +315,10 @@
         }
       }
     }));
+    realign = disconnect.forceAlign;
 
     return () => {
+      realign = undefined;
       resumeFocus = surface.contains(getPopupActiveElement(surface))
         ? getPopupActiveElement(surface) as HTMLElement
         : undefined;
@@ -549,7 +591,7 @@
 <NoCompactStyle>
 <div bind:this={popup} {id} role="dialog" popover="manual" hidden tabindex="-1" dir={config.direction}
   data-ant-popover="" data-ant-custom-prefix={prefix !== 'ant-popover' || undefined}
-  data-ant-placement={shown ? actualPlacement : placement}
+  data-ant-placement={classPlacement}
   aria-label={ariaLabel} aria-labelledby={!ariaLabel
     ? ariaLabelledby ?? (hasTitle ? titleId : undefined)
     : undefined} aria-describedby={ariaDescribedby} aria-busy={ariaBusy} class={[
@@ -559,7 +601,7 @@
         designTokens.enabled && designTokens.state.hashId,
         popupClass,
         colorInfo.className,
-        `${prefix}-placement-${shown ? actualPlacement : placement}`,
+        classPlacement && `${prefix}-placement-${classPlacement}`,
         config.direction === 'rtl' && `${prefix}-rtl`,
         rootClassName, overlayClassName, config.popover?.class, semantics.classNames.root
       ]} style={initialStyle}
@@ -570,7 +612,8 @@
     }} onpointerleave={() => handlePopupHover(false)} onfocusin={handlePopupFocus}
     onfocusout={handlePopupBlur}>
   {#if arrowConfig.show}<div data-ant-popover-arrow="" class={[`${prefix}-arrow`, semantics.classNames.arrow]}
-    style={semantics.styles.arrow} aria-hidden="true"></div>{/if}
+    style={[arrowPositionStyle, semantics.styles.arrow].filter(Boolean).join(';') || undefined}
+    aria-hidden="true"></div>{/if}
   <div data-ant-popover-container="" class={[`${prefix}-container`, semantics.classNames.container]}
     data-ant-overlay-color={colorInfo.overlayStyle.length > 0 || undefined}
     style={initialContainerStyle} {@attach containerStyle}>

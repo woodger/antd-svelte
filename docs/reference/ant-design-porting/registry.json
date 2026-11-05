@@ -6915,7 +6915,14 @@
         "tests/browser/fixtures/PopoverActionsCase.svelte",
         "tests/browser/fixtures/PopoverActionsFixtures.svelte",
         "tests/browser/popover-actions.spec.ts",
-        "tests/package/popover-actions.ssr.test.ts"
+        "tests/package/popover-actions.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-popover-align-reference.json",
+        "tests/browser/fixtures/popover-align.types.ts",
+        "tests/browser/fixtures/PopoverAlignCase.svelte",
+        "tests/browser/fixtures/PopoverAlignFixtures.svelte",
+        "tests/browser/popover-align-metrics.ts",
+        "tests/browser/popover-align.spec.ts",
+        "tests/package/popover-align.ssr.test.ts"
       ],
       "features": [
         {
@@ -7013,7 +7020,7 @@
             "src/lib/avatar.types.ts",
             "src/lib/ConfigProvider.svelte"
           ],
-          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref, prefixCls и deprecated max* aliases перенесены отдельными features. Max.popover принимает весь текущий Svelte Popover API, включая content/title, controlled/default open, destroy и getters. Произвольные children вместо items и остальные исходные Popover props (align/motion, fresh cache) остаются в работе. Согласованные passive/native contracts, нормализация размеров/лимита, кнопка и список сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
+          "note": "RootClassName, ConfigProvider.avatar, native DOM/events/ref, prefixCls и deprecated max* aliases перенесены отдельными features. Max.popover принимает весь текущий Svelte Popover API, включая content/title, controlled/default open, destroy и getters. Произвольные children вместо items и остальные исходные Popover props (motion, fresh cache) остаются в работе. Согласованные passive/native contracts, нормализация размеров/лимита, кнопка и список сохраняются; Semantic classNames/styles исходный Avatar 6.6.8 не объявляет."
         },
         {
           "id": "display-theme-tokens",
@@ -7340,7 +7347,32 @@
             "tests/package/popover-actions.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный align/fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
+          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
+        },
+        {
+          "id": "source-align-api",
+          "title": "Align/builtinPlacements и onPopupAlign Popover",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.types.ts",
+            "tests/browser/fixtures/ant-design-popover-align-reference.json",
+            "tests/browser/fixtures/popover-align.types.ts",
+            "tests/browser/fixtures/PopoverAlignCase.svelte",
+            "tests/browser/fixtures/PopoverAlignFixtures.svelte",
+            "tests/browser/popover-align-metrics.ts",
+            "tests/browser/popover-align.spec.ts",
+            "tests/package/popover-align.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Popover и Popconfirm принимают общие TooltipAlignConfig/placements/callback; AvatarGroup.max.popover передаёт их без отдельного адаптера. Полная замена карты, включая {}, shallow merge align/overflow, points, percent/parseFloat offset и targetOffset, htmlRegion, dynamicInset/_experimental, autoArrow и legacy metadata используют общий движок useAlign 3.10.1. Placement class выбирается по первому совпадению points; root/arrow semantic styles имеют приоритет. Callback получает реальный popup и итоговый align до применения новых координат; открытие, фактические изменения и resize не создают callback на idle frames. 84 UMD-сценария фиксируют bbox/arrow/class/payload, nested AvatarGroup forwarding, styles priority, RTL, resize и изменяемые props; SSR остаётся скрытым без DOM/timers. Native fixed/top-layer, viewport/transform/clipping boundaries, draft/focus/selection и cleanup сохранены. Наблюдение upstream 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, @rc-component/trigger 3.10.1: при существующей записи placements смена align или карты сама не выравнивает popup. В шести reactive-сценариях beforeForceAlign хранит прежнюю геометрию, changed — результат явного forceAlign. Для отдельного разбора; прежнее автоматическое tracking Svelte сохранено. Полный ref/lifecycle/fresh/motion API остаётся в работе."
         }
       ]
     },
@@ -9045,7 +9077,14 @@
         "tests/browser/fixtures/PopoverActionsCase.svelte",
         "tests/browser/fixtures/PopoverActionsFixtures.svelte",
         "tests/browser/popover-actions.spec.ts",
-        "tests/package/popover-actions.ssr.test.ts"
+        "tests/package/popover-actions.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-popover-align-reference.json",
+        "tests/browser/fixtures/popover-align.types.ts",
+        "tests/browser/fixtures/PopoverAlignCase.svelte",
+        "tests/browser/fixtures/PopoverAlignFixtures.svelte",
+        "tests/browser/popover-align-metrics.ts",
+        "tests/browser/popover-align.spec.ts",
+        "tests/package/popover-align.ssr.test.ts"
       ],
       "features": [
         {
@@ -9062,7 +9101,7 @@
           "state": "partial",
           "requiredForV1": false,
           "evidence": [],
-          "note": "12 placements, локальные pointAtCenter/object overflow, контейнеры, destroyOnHidden, semantic/config и contextMenu перенесены отдельными features. Align/motion и fresh cache ещё требуют переноса. Общий подробный аудит v1 не завершён."
+          "note": "12 placements, локальные pointAtCenter/object overflow, align/builtinPlacements/onPopupAlign, контейнеры, destroyOnHidden, semantic/config и contextMenu перенесены отдельными features. Motion и fresh cache ещё требуют переноса. Общий подробный аудит v1 не завершён."
         },
         {
           "id": "compact-isolation",
@@ -9387,7 +9426,32 @@
             "tests/package/popover-actions.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный align/fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
+          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
+        },
+        {
+          "id": "source-align-api",
+          "title": "Align/builtinPlacements и onPopupAlign Popover",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.types.ts",
+            "tests/browser/fixtures/ant-design-popover-align-reference.json",
+            "tests/browser/fixtures/popover-align.types.ts",
+            "tests/browser/fixtures/PopoverAlignCase.svelte",
+            "tests/browser/fixtures/PopoverAlignFixtures.svelte",
+            "tests/browser/popover-align-metrics.ts",
+            "tests/browser/popover-align.spec.ts",
+            "tests/package/popover-align.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Popover и Popconfirm принимают общие TooltipAlignConfig/placements/callback; AvatarGroup.max.popover передаёт их без отдельного адаптера. Полная замена карты, включая {}, shallow merge align/overflow, points, percent/parseFloat offset и targetOffset, htmlRegion, dynamicInset/_experimental, autoArrow и legacy metadata используют общий движок useAlign 3.10.1. Placement class выбирается по первому совпадению points; root/arrow semantic styles имеют приоритет. Callback получает реальный popup и итоговый align до применения новых координат; открытие, фактические изменения и resize не создают callback на idle frames. 84 UMD-сценария фиксируют bbox/arrow/class/payload, nested AvatarGroup forwarding, styles priority, RTL, resize и изменяемые props; SSR остаётся скрытым без DOM/timers. Native fixed/top-layer, viewport/transform/clipping boundaries, draft/focus/selection и cleanup сохранены. Наблюдение upstream 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, @rc-component/trigger 3.10.1: при существующей записи placements смена align или карты сама не выравнивает popup. В шести reactive-сценариях beforeForceAlign хранит прежнюю геометрию, changed — результат явного forceAlign. Для отдельного разбора; прежнее автоматическое tracking Svelte сохранено. Полный ref/lifecycle/fresh/motion API остаётся в работе."
         }
       ]
     },
@@ -11589,7 +11653,14 @@
         "tests/browser/fixtures/PopoverActionsCase.svelte",
         "tests/browser/fixtures/PopoverActionsFixtures.svelte",
         "tests/browser/popover-actions.spec.ts",
-        "tests/package/popover-actions.ssr.test.ts"
+        "tests/package/popover-actions.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-popover-align-reference.json",
+        "tests/browser/fixtures/popover-align.types.ts",
+        "tests/browser/fixtures/PopoverAlignCase.svelte",
+        "tests/browser/fixtures/PopoverAlignFixtures.svelte",
+        "tests/browser/popover-align-metrics.ts",
+        "tests/browser/popover-align.spec.ts",
+        "tests/package/popover-align.ssr.test.ts"
       ],
       "features": [
         {
@@ -11906,7 +11977,32 @@
             "tests/package/popover-actions.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный align/fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
+          "note": "Popover и Popconfirm наследуют независимые show/hide lists: undefined возвращает trigger, [] отключает выбранное направление, включая outside hide; Escape и кнопки подтверждения сохраняются. FocusDelay/blurDelay имеют default 0 в секундах независимо от mouse delays; отрицательные значения сохраняют timer 0. Hover без click добавляет touch отдельно для show/hide; touched подавляет совместимые mouse events. Явные overrides используют window mousedown/contextmenu, не отменяют pending hide при popup focus и допускают hide focus при переходе внутрь popup. Уже запущенный source action переживает замену и удаление overrides. Uncontrolled raw open переживает spread updates, а Popconfirm сохраняет Promise session и прежнюю защиту loading/disabled. Popover.disabled скрывает панель, сохраняя raw open, callbacks и pending events; Popconfirm.disabled сохраняет прежний native contract. 67 UMD-сценариев / 389 кадров фиксируют public callbacks, команды Confirm/Cancel и передачу через AvatarGroup; шесть cleanup traces проверяют unmount с pending/visible focus после 1500ms. Native role/ARIA, binding, возврат фокуса и прежняя интерактивная модель без overrides сохранены. Native blur без relatedTarget ждёт microtask для проверки удаления DOM; Source callbacks с relatedTarget сохраняют sync timing. Controlled owner проверяется через getter/setter binding, обычный open следует Svelte. SSR не запускает DOM/timers. Полный fresh/ref/lifecycle/motion API Popover этим этапом не объявляется завершённым."
+        },
+        {
+          "id": "source-align-api",
+          "title": "Align/builtinPlacements и onPopupAlign Popover",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Popover.svelte",
+            "src/lib/Popconfirm.svelte",
+            "src/lib/popover.types.ts",
+            "src/lib/popconfirm.types.ts",
+            "src/lib/popup-position.engine.ts",
+            "src/lib/popup.dom.ts",
+            "src/lib/AvatarGroupOverflow.svelte",
+            "src/lib/avatar-group.types.ts",
+            "tests/browser/fixtures/ant-design-popover-align-reference.json",
+            "tests/browser/fixtures/popover-align.types.ts",
+            "tests/browser/fixtures/PopoverAlignCase.svelte",
+            "tests/browser/fixtures/PopoverAlignFixtures.svelte",
+            "tests/browser/popover-align-metrics.ts",
+            "tests/browser/popover-align.spec.ts",
+            "tests/package/popover-align.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Popover и Popconfirm принимают общие TooltipAlignConfig/placements/callback; AvatarGroup.max.popover передаёт их без отдельного адаптера. Полная замена карты, включая {}, shallow merge align/overflow, points, percent/parseFloat offset и targetOffset, htmlRegion, dynamicInset/_experimental, autoArrow и legacy metadata используют общий движок useAlign 3.10.1. Placement class выбирается по первому совпадению points; root/arrow semantic styles имеют приоритет. Callback получает реальный popup и итоговый align до применения новых координат; открытие, фактические изменения и resize не создают callback на idle frames. 84 UMD-сценария фиксируют bbox/arrow/class/payload, nested AvatarGroup forwarding, styles priority, RTL, resize и изменяемые props; SSR остаётся скрытым без DOM/timers. Native fixed/top-layer, viewport/transform/clipping boundaries, draft/focus/selection и cleanup сохранены. Наблюдение upstream 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, @rc-component/trigger 3.10.1: при существующей записи placements смена align или карты сама не выравнивает popup. В шести reactive-сценариях beforeForceAlign хранит прежнюю геометрию, changed — результат явного forceAlign. Для отдельного разбора; прежнее автоматическое tracking Svelte сохранено. Полный ref/lifecycle/fresh/motion API остаётся в работе."
         }
       ]
     },

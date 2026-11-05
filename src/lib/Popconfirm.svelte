@@ -195,6 +195,7 @@
   trigger={resolvedDisabled ? [] : resolvedTrigger} mouseEnterDelay={enterDelay} mouseLeaveDelay={leaveDelay}
   showAction={props.showAction} hideAction={props.hideAction}
   focusDelay={props.focusDelay} blurDelay={props.blurDelay}
+  align={props.align} builtinPlacements={props.builtinPlacements} onPopupAlign={props.onPopupAlign}
   {destroyOnHidden} {destroyTooltipOnHide}
   {placement} {arrow} {color} {openClassName} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
   {rootClassName} {overlayInnerStyle} classNames={{

@@ -677,8 +677,10 @@ sizePopupArrow / 2 + marginXXS со стрелкой и marginXXS без неё.
 theme variables и сохраняют inline-позицию, DOM содержимого, редактор, фокус и
 ожидающий Promise Popconfirm. Отключение source-темы удаляет эти переменные.
 Существующие четыре placement, viewport limits, native top layer и ARIA-контракты
-сохраняются. Полные source corner placements, zIndex context и motion ещё не
-перенесены; наличие zIndexPopup не меняет порядок native top layer.
+сохраняются. Все 12 placements и локальные align/builtinPlacements/onPopupAlign
+подключены также Popover/Popconfirm и AvatarGroup; semantic root/arrow styles
+имеют приоритет. Общий zIndex context и motion ещё не перенесены;
+наличие zIndexPopup не меняет порядок native top layer.
 
 ## CSS и совместимость
 

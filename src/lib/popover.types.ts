@@ -4,6 +4,7 @@ import type {
   TooltipArrow,
   TooltipColor,
   TooltipPlacement,
+  TooltipProps,
   TooltipSlots,
   TooltipTrigger
 } from './tooltip.types';
@@ -81,6 +82,12 @@ export interface PopoverProps {
   blurDelay?: number;
   /** @defaultValue 'top' */
   placement?: PopoverPlacement;
+  /** Накладывается поверх выбранной записи placements; вложенный overflow заменяется целиком. */
+  align?: TooltipProps['align'];
+  /** Заменяет всю автоматически подготовленную карту, включая пустой объект. */
+  builtinPlacements?: TooltipProps['builtinPlacements'];
+  /** Получает DOM popup и итоговый align после flip, до применения новых координат. */
+  onPopupAlign?: TooltipProps['onPopupAlign'];
   /** @defaultValue true */
   arrow?: TooltipArrow;
   /** @defaultValue true */

@@ -1,0 +1,6114 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "viewport": {
+      "width": 1024,
+      "height": 800
+    },
+    "delegated": {
+      "tooltip": "1.5.2",
+      "trigger": "3.10.1"
+    },
+    "operation": "Popover/Popconfirm align, builtinPlacements and onPopupAlign. Fixed popup160x80 and anchor boxes isolate geometry. Changed source geometry is captured after explicit forceAlign; beforeForceAlign records the preceding two-frame state. Resize uses ResizeObserver. Custom/empty maps, points, percentage/parseFloat offsets, overflow, htmlRegion, dynamicInset, alias class order and semantic root/arrow priority. Avatar.Group forwarding uses fixed overflow bounds. Native automatic tracking, fixed/top-layer and viewport/transform boundaries remain explicit."
+  },
+  "cases": [
+    {
+      "name": "popover-top-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "top"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 254,
+          "y": 119,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 66.5,
+        "arrowY": 90.75,
+        "arrow": {
+          "left": "66.5px",
+          "top": "64px",
+          "right": "77.5px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-bottom-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "bottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 254,
+          "y": 231,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottom",
+        "arrowX": 66.5,
+        "arrowY": 10.75,
+        "arrow": {
+          "left": "66.5px",
+          "top": "0px",
+          "right": "77.5px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, -8, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-left-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "left"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 134,
+          "y": 175,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "left",
+        "arrowX": 153.25,
+        "arrowY": 61.5,
+        "arrow": {
+          "left": "144px",
+          "top": "61.5px",
+          "right": "0px",
+          "bottom": "2.5px",
+          "transform": "matrix(0, 1, -1, 0, 16, -8)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "cr",
+              "cl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftY": 32,
+              "shiftX": true,
+              "adjustX": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-right-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "right"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 374,
+          "y": 175,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "right",
+        "arrowX": -6.75,
+        "arrowY": 61.5,
+        "arrow": {
+          "left": "0px",
+          "top": "61.5px",
+          "right": "144px",
+          "bottom": "2.5px",
+          "transform": "matrix(0, -1, 1, 0, -16, -8)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "cl",
+              "cr"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftY": 32,
+              "shiftX": true,
+              "adjustX": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-topLeft-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "topLeft"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 294,
+          "y": 119,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "topLeft",
+        "arrowX": 33.25,
+        "arrowY": 90.75,
+        "arrow": {
+          "left": "12px",
+          "top": "64px",
+          "right": "132px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bl",
+              "tl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-topRight-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "topRight"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 214,
+          "y": 119,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "topRight",
+        "arrowX": 106.5,
+        "arrowY": 90.75,
+        "arrow": {
+          "left": "132px",
+          "top": "64px",
+          "right": "12px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "tr"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-bottomLeft-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "bottomLeft"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 294,
+          "y": 231,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottomLeft",
+        "arrowX": 33.25,
+        "arrowY": 10.75,
+        "arrow": {
+          "left": "12px",
+          "top": "0px",
+          "right": "132px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, 0, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "bl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-bottomRight-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "bottomRight"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 214,
+          "y": 231,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottomRight",
+        "arrowX": 106.5,
+        "arrowY": 10.75,
+        "arrow": {
+          "left": "132px",
+          "top": "0px",
+          "right": "12px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, 0, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tr",
+              "br"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-leftTop-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "leftTop"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 134,
+          "y": 199,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "leftTop",
+        "arrowX": 153.25,
+        "arrowY": 37.5,
+        "arrow": {
+          "left": "144px",
+          "top": "8px",
+          "right": "0px",
+          "bottom": "56px",
+          "transform": "matrix(0, 1, -1, 0, 16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tr",
+              "tl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-leftBottom-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "leftBottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 134,
+          "y": 151,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "leftBottom",
+        "arrowX": 153.25,
+        "arrowY": 74.75,
+        "arrow": {
+          "left": "144px",
+          "top": "56px",
+          "right": "0px",
+          "bottom": "8px",
+          "transform": "matrix(0, 1, -1, 0, 16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "bl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-rightTop-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "rightTop"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 374,
+          "y": 199,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "rightTop",
+        "arrowX": -6.75,
+        "arrowY": 37.5,
+        "arrow": {
+          "left": "0px",
+          "top": "8px",
+          "right": "144px",
+          "bottom": "56px",
+          "transform": "matrix(0, -1, 1, 0, -16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "tr"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-rightBottom-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "rightBottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 374,
+          "y": 151,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "rightBottom",
+        "arrowX": -6.75,
+        "arrowY": 74.75,
+        "arrow": {
+          "left": "0px",
+          "top": "56px",
+          "right": "144px",
+          "bottom": "8px",
+          "transform": "matrix(0, -1, 1, 0, -16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bl",
+              "br"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-percent-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            "10%",
+            "-25%"
+          ],
+          "targetOffset": [
+            "25%",
+            "50%"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 236,
+          "y": 105,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 64,
+        "arrowY": 90,
+        "arrow": {
+          "left": "64px",
+          "top": "64px",
+          "right": "80px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              "10%",
+              "-25%"
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "targetOffset": [
+              "25%",
+              "50%"
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-parse-float-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            "5px",
+            "-2.5"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 245,
+          "y": 138,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 75,
+        "arrowY": 81.25,
+        "arrow": {
+          "left": "75px",
+          "top": "64px",
+          "right": "69px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              "5px",
+              "-2.5"
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-custom-points",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "br"
+          ],
+          "offset": [
+            3,
+            9
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 363,
+          "y": 261,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": -1.5,
+        "arrowY": -4.5,
+        "arrow": {
+          "left": "0px",
+          "top": "0px",
+          "right": "144px",
+          "bottom": "64px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              3,
+              9
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-center-points",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "points": [
+            "cc",
+            "cc"
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 196,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 40,
+        "arrow": {
+          "left": "80px",
+          "top": "40px",
+          "right": "64px",
+          "bottom": "24px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "cc",
+              "cc"
+            ],
+            "offset": [
+              0,
+              0
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-replace-overflow",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "overflow": {
+            "adjustX": false,
+            "adjustY": false
+          },
+          "offset": [
+            0,
+            -12
+          ]
+        }
+      },
+      "anchor": {
+        "x": 4,
+        "y": 2,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 4,
+          "y": 2,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": -36,
+          "y": -90,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "adjustX": false,
+              "adjustY": false
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-flip-overflow",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "overflow": {
+            "adjustX": 0,
+            "adjustY": 1
+          }
+        },
+        "placement": "topRight"
+      },
+      "anchor": {
+        "x": 4,
+        "y": 2,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 4,
+          "y": 2,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 4,
+          "y": 46,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottomLeft",
+        "arrowX": 40,
+        "arrowY": -6,
+        "arrow": {
+          "left": "12px",
+          "top": "0px",
+          "right": "132px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, 0, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "bl"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": 0,
+              "adjustY": 1
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-shift-overflow",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "overflow": {
+            "shiftX": 0,
+            "shiftY": true,
+            "adjustX": false,
+            "adjustY": false
+          }
+        }
+      },
+      "anchor": {
+        "x": 4,
+        "y": 120,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 4,
+          "y": 120,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 0,
+          "y": 28,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 44,
+        "arrowY": 86,
+        "arrow": {
+          "left": "44px",
+          "top": "64px",
+          "right": "100px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 0,
+              "shiftY": true,
+              "adjustX": false,
+              "adjustY": false
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-dynamic-inset-off",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "dynamicInset": false,
+          "offset": [
+            0.25,
+            -12.25
+          ]
+        },
+        "placement": "topRight"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 200,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "topRight",
+        "arrowX": 119.75,
+        "arrowY": 86.125,
+        "arrow": {
+          "left": "132px",
+          "top": "64px",
+          "right": "12px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "tr"
+            ],
+            "offset": [
+              0.25,
+              -12.25
+            ],
+            "dynamicInset": false,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-experimental-inset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "dynamicInset": false,
+          "_experimental": {
+            "dynamicInset": true
+          },
+          "offset": [
+            0.25,
+            -12.25
+          ]
+        },
+        "placement": "topRight"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 201,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "topRight",
+        "arrowX": 119.75,
+        "arrowY": 86.125,
+        "arrow": {
+          "left": "132px",
+          "top": "64px",
+          "right": "12px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "tr"
+            ],
+            "offset": [
+              0.25,
+              -12.25
+            ],
+            "dynamicInset": false,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "_experimental": {
+              "dynamicInset": true
+            }
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-legacy-css-flags",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "useCssRight": true,
+          "useCssBottom": true,
+          "useCssTransform": true,
+          "ignoreShake": true
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "useCssRight": true,
+            "useCssBottom": true,
+            "useCssTransform": true,
+            "ignoreShake": true
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-empty-map",
+      "mode": "popover",
+      "options": {
+        "align": {},
+        "builtinPlacements": {}
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 196,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 40,
+        "arrow": {
+          "left": "80px",
+          "top": "40px",
+          "right": "64px",
+          "bottom": "24px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "",
+              ""
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-missing-map-entry",
+      "mode": "popover",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "bottom": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              0,
+              20
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 196,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 40,
+        "arrow": {
+          "left": "80px",
+          "top": "40px",
+          "right": "64px",
+          "bottom": "24px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "",
+              ""
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-missing-map-points",
+      "mode": "popover",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "top": {
+            "offset": [
+              5,
+              7
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 245,
+          "y": 203,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 75,
+        "arrowY": 33,
+        "arrow": {
+          "left": "75px",
+          "top": "33px",
+          "right": "69px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "offset": [
+              5,
+              7
+            ],
+            "points": [
+              "",
+              ""
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-custom-map",
+      "mode": "popover",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              7,
+              17
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 247,
+          "y": 269,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 73,
+        "arrowY": -8.5,
+        "arrow": {
+          "left": "73px",
+          "top": "0px",
+          "right": "71px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              7,
+              17
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-map-align-priority",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            12,
+            8
+          ],
+          "overflow": {
+            "adjustY": false
+          }
+        },
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              7,
+              17
+            ],
+            "overflow": {
+              "adjustX": true,
+              "shiftY": true
+            }
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 252,
+          "y": 260,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 68,
+        "arrowY": -4,
+        "arrow": {
+          "left": "68px",
+          "top": "0px",
+          "right": "76px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              12,
+              8
+            ],
+            "overflow": {
+              "adjustY": false
+            }
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-map-alias-order",
+      "mode": "popover",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "custom": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              8,
+              -8
+            ]
+          },
+          "top": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "custom",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-auto-arrow-off",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "br"
+          ],
+          "autoArrow": false
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 360,
+          "y": 240,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 0,
+        "arrowY": 6,
+        "arrow": {
+          "left": "0px",
+          "top": "0px",
+          "right": "144px",
+          "bottom": "64px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "autoArrow": false
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-arrow-user-style",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "br"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "arrowStyle": {
+        "left": 3,
+        "top": 5
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 360,
+          "y": 240,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 0,
+        "arrowY": 6,
+        "arrow": {
+          "left": "3px",
+          "top": "5px",
+          "right": "141px",
+          "bottom": "59px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-root-user-style",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            12,
+            -12
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "rootStyle": {
+        "left": 23.5
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 23.5,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 68,
+        "arrowY": 86,
+        "arrow": {
+          "left": "68px",
+          "top": "64px",
+          "right": "76px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              12,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-region-visible",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "htmlRegion": "visible"
+        },
+        "placement": "bottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 735.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 735.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 644,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visible"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-region-scroll",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "htmlRegion": "scroll"
+        },
+        "placement": "bottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 735.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 735.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 732,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottom",
+        "arrowX": 80,
+        "arrowY": 19.5,
+        "arrow": {
+          "left": "80px",
+          "top": "0px",
+          "right": "64px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, -8, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              0,
+              12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "scroll"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-region-visibleFirst",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "htmlRegion": "visibleFirst"
+        },
+        "placement": "bottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 735.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 735.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 644,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-rtl-custom",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            "10%",
+            "-25%"
+          ]
+        },
+        "placement": "leftBottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "rtl": true,
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 137,
+          "y": 153,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "leftBottom",
+        "arrowX": 152,
+        "arrowY": 74,
+        "arrow": {
+          "left": "144px",
+          "top": "56px",
+          "right": "0px",
+          "bottom": "8px",
+          "transform": "matrix(0, 1, -1, 0, 16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "bl"
+            ],
+            "offset": [
+              "10%",
+              "-25%"
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popover-reactive-align",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "offset": [
+            0,
+            -12
+          ]
+        }
+      },
+      "patch": {
+        "align": {
+          "offset": [
+            32.5,
+            24.5
+          ],
+          "points": [
+            "tl",
+            "br"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      },
+      "beforeForceAlign": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      },
+      "changed": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 393,
+          "y": 277,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": -16.25,
+        "arrowY": -12.25,
+        "arrow": {
+          "left": "0px",
+          "top": "0px",
+          "right": "144px",
+          "bottom": "64px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              32.5,
+              24.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 3
+      }
+    },
+    {
+      "name": "popover-reactive-map",
+      "mode": "popover",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        }
+      },
+      "patch": {
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              8,
+              20
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      },
+      "beforeForceAlign": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      },
+      "changed": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 248,
+          "y": 272,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 72,
+        "arrowY": -10,
+        "arrow": {
+          "left": "72px",
+          "top": "0px",
+          "right": "72px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              8,
+              20
+            ]
+          }
+        },
+        "calls": 3
+      }
+    },
+    {
+      "name": "popover-resize-without-offset",
+      "mode": "popover",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "tl"
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 280,
+          "y": 220,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 40,
+        "arrowY": 16,
+        "arrow": {
+          "left": "40px",
+          "top": "16px",
+          "right": "104px",
+          "bottom": "48px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "tl"
+            ],
+            "offset": [
+              0,
+              0
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      },
+      "resize": {
+        "delta": 1,
+        "snapshot": {
+          "anchor": {
+            "x": 280.5,
+            "y": 220.5,
+            "width": 80,
+            "height": 32
+          },
+          "popup": {
+            "x": 280,
+            "y": 220,
+            "width": 180,
+            "height": 80
+          },
+          "placement": null,
+          "arrowX": 40,
+          "arrowY": 16,
+          "arrow": {
+            "left": "40px",
+            "top": "16px",
+            "right": "124px",
+            "bottom": "48px",
+            "transform": "none"
+          },
+          "callback": {
+            "nodeMatches": true,
+            "align": {
+              "points": [
+                "tl",
+                "tl"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "dynamicInset": true,
+              "overflow": {
+                "shiftX": 40,
+                "shiftY": true,
+                "adjustY": true
+              },
+              "htmlRegion": "visibleFirst"
+            }
+          },
+          "calls": 3
+        }
+      }
+    },
+    {
+      "name": "popconfirm-top-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "top"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 254,
+          "y": 119,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 66.5,
+        "arrowY": 90.75,
+        "arrow": {
+          "left": "66.5px",
+          "top": "64px",
+          "right": "77.5px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-bottom-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "bottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 254,
+          "y": 231,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottom",
+        "arrowX": 66.5,
+        "arrowY": 10.75,
+        "arrow": {
+          "left": "66.5px",
+          "top": "0px",
+          "right": "77.5px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, -8, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-left-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "left"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 134,
+          "y": 175,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "left",
+        "arrowX": 153.25,
+        "arrowY": 61.5,
+        "arrow": {
+          "left": "144px",
+          "top": "61.5px",
+          "right": "0px",
+          "bottom": "2.5px",
+          "transform": "matrix(0, 1, -1, 0, 16, -8)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "cr",
+              "cl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftY": 32,
+              "shiftX": true,
+              "adjustX": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-right-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "right"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 374,
+          "y": 175,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "right",
+        "arrowX": -6.75,
+        "arrowY": 61.5,
+        "arrow": {
+          "left": "0px",
+          "top": "61.5px",
+          "right": "144px",
+          "bottom": "2.5px",
+          "transform": "matrix(0, -1, 1, 0, -16, -8)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "cl",
+              "cr"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftY": 32,
+              "shiftX": true,
+              "adjustX": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-topLeft-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "topLeft"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 294,
+          "y": 119,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "topLeft",
+        "arrowX": 33.25,
+        "arrowY": 90.75,
+        "arrow": {
+          "left": "12px",
+          "top": "64px",
+          "right": "132px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bl",
+              "tl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-topRight-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "topRight"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 214,
+          "y": 119,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "topRight",
+        "arrowX": 106.5,
+        "arrowY": 90.75,
+        "arrow": {
+          "left": "132px",
+          "top": "64px",
+          "right": "12px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "tr"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-bottomLeft-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "bottomLeft"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 294,
+          "y": 231,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottomLeft",
+        "arrowX": 33.25,
+        "arrowY": 10.75,
+        "arrow": {
+          "left": "12px",
+          "top": "0px",
+          "right": "132px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, 0, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "bl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-bottomRight-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "bottomRight"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 214,
+          "y": 231,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottomRight",
+        "arrowX": 106.5,
+        "arrowY": 10.75,
+        "arrow": {
+          "left": "132px",
+          "top": "0px",
+          "right": "12px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, 0, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tr",
+              "br"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-leftTop-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "leftTop"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 134,
+          "y": 199,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "leftTop",
+        "arrowX": 153.25,
+        "arrowY": 37.5,
+        "arrow": {
+          "left": "144px",
+          "top": "8px",
+          "right": "0px",
+          "bottom": "56px",
+          "transform": "matrix(0, 1, -1, 0, 16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tr",
+              "tl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-leftBottom-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "leftBottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 134,
+          "y": 151,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "leftBottom",
+        "arrowX": 153.25,
+        "arrowY": 74.75,
+        "arrow": {
+          "left": "144px",
+          "top": "56px",
+          "right": "0px",
+          "bottom": "8px",
+          "transform": "matrix(0, 1, -1, 0, 16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "bl"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-rightTop-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "rightTop"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 374,
+          "y": 199,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "rightTop",
+        "arrowX": -6.75,
+        "arrowY": 37.5,
+        "arrow": {
+          "left": "0px",
+          "top": "8px",
+          "right": "144px",
+          "bottom": "56px",
+          "transform": "matrix(0, -1, 1, 0, -16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "tr"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-rightBottom-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            13.5,
+            -21.5
+          ]
+        },
+        "placement": "rightBottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 374,
+          "y": 151,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "rightBottom",
+        "arrowX": -6.75,
+        "arrowY": 74.75,
+        "arrow": {
+          "left": "0px",
+          "top": "56px",
+          "right": "144px",
+          "bottom": "8px",
+          "transform": "matrix(0, -1, 1, 0, -16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bl",
+              "br"
+            ],
+            "offset": [
+              13.5,
+              -21.5
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-percent-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            "10%",
+            "-25%"
+          ],
+          "targetOffset": [
+            "25%",
+            "50%"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 236,
+          "y": 105,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 64,
+        "arrowY": 90,
+        "arrow": {
+          "left": "64px",
+          "top": "64px",
+          "right": "80px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              "10%",
+              "-25%"
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "targetOffset": [
+              "25%",
+              "50%"
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-parse-float-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            "5px",
+            "-2.5"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 245,
+          "y": 138,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 75,
+        "arrowY": 81.25,
+        "arrow": {
+          "left": "75px",
+          "top": "64px",
+          "right": "69px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              "5px",
+              "-2.5"
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-custom-points",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "br"
+          ],
+          "offset": [
+            3,
+            9
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 363,
+          "y": 261,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": -1.5,
+        "arrowY": -4.5,
+        "arrow": {
+          "left": "0px",
+          "top": "0px",
+          "right": "144px",
+          "bottom": "64px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              3,
+              9
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-center-points",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "points": [
+            "cc",
+            "cc"
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 196,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 40,
+        "arrow": {
+          "left": "80px",
+          "top": "40px",
+          "right": "64px",
+          "bottom": "24px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "cc",
+              "cc"
+            ],
+            "offset": [
+              0,
+              0
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-replace-overflow",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "overflow": {
+            "adjustX": false,
+            "adjustY": false
+          },
+          "offset": [
+            0,
+            -12
+          ]
+        }
+      },
+      "anchor": {
+        "x": 4,
+        "y": 2,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 4,
+          "y": 2,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": -36,
+          "y": -90,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "adjustX": false,
+              "adjustY": false
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-flip-overflow",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "overflow": {
+            "adjustX": 0,
+            "adjustY": 1
+          }
+        },
+        "placement": "topRight"
+      },
+      "anchor": {
+        "x": 4,
+        "y": 2,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 4,
+          "y": 2,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 4,
+          "y": 46,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottomLeft",
+        "arrowX": 40,
+        "arrowY": -6,
+        "arrow": {
+          "left": "12px",
+          "top": "0px",
+          "right": "132px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, 0, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "bl"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": 0,
+              "adjustY": 1
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-shift-overflow",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "overflow": {
+            "shiftX": 0,
+            "shiftY": true,
+            "adjustX": false,
+            "adjustY": false
+          }
+        }
+      },
+      "anchor": {
+        "x": 4,
+        "y": 120,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 4,
+          "y": 120,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 0,
+          "y": 28,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 44,
+        "arrowY": 86,
+        "arrow": {
+          "left": "44px",
+          "top": "64px",
+          "right": "100px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 0,
+              "shiftY": true,
+              "adjustX": false,
+              "adjustY": false
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-dynamic-inset-off",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "dynamicInset": false,
+          "offset": [
+            0.25,
+            -12.25
+          ]
+        },
+        "placement": "topRight"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 200,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "topRight",
+        "arrowX": 119.75,
+        "arrowY": 86.125,
+        "arrow": {
+          "left": "132px",
+          "top": "64px",
+          "right": "12px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "tr"
+            ],
+            "offset": [
+              0.25,
+              -12.25
+            ],
+            "dynamicInset": false,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-experimental-inset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "dynamicInset": false,
+          "_experimental": {
+            "dynamicInset": true
+          },
+          "offset": [
+            0.25,
+            -12.25
+          ]
+        },
+        "placement": "topRight"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 201,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "topRight",
+        "arrowX": 119.75,
+        "arrowY": 86.125,
+        "arrow": {
+          "left": "132px",
+          "top": "64px",
+          "right": "12px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, 0, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "tr"
+            ],
+            "offset": [
+              0.25,
+              -12.25
+            ],
+            "dynamicInset": false,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "_experimental": {
+              "dynamicInset": true
+            }
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-legacy-css-flags",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "useCssRight": true,
+          "useCssBottom": true,
+          "useCssTransform": true,
+          "ignoreShake": true
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "useCssRight": true,
+            "useCssBottom": true,
+            "useCssTransform": true,
+            "ignoreShake": true
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-empty-map",
+      "mode": "popconfirm",
+      "options": {
+        "align": {},
+        "builtinPlacements": {}
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 196,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 40,
+        "arrow": {
+          "left": "80px",
+          "top": "40px",
+          "right": "64px",
+          "bottom": "24px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "",
+              ""
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-missing-map-entry",
+      "mode": "popconfirm",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "bottom": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              0,
+              20
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 196,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 40,
+        "arrow": {
+          "left": "80px",
+          "top": "40px",
+          "right": "64px",
+          "bottom": "24px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "",
+              ""
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-missing-map-points",
+      "mode": "popconfirm",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "top": {
+            "offset": [
+              5,
+              7
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 245,
+          "y": 203,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 75,
+        "arrowY": 33,
+        "arrow": {
+          "left": "75px",
+          "top": "33px",
+          "right": "69px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "offset": [
+              5,
+              7
+            ],
+            "points": [
+              "",
+              ""
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-custom-map",
+      "mode": "popconfirm",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              7,
+              17
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 247,
+          "y": 269,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 73,
+        "arrowY": -8.5,
+        "arrow": {
+          "left": "73px",
+          "top": "0px",
+          "right": "71px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              7,
+              17
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-map-align-priority",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            12,
+            8
+          ],
+          "overflow": {
+            "adjustY": false
+          }
+        },
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              7,
+              17
+            ],
+            "overflow": {
+              "adjustX": true,
+              "shiftY": true
+            }
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 252,
+          "y": 260,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 68,
+        "arrowY": -4,
+        "arrow": {
+          "left": "68px",
+          "top": "0px",
+          "right": "76px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              12,
+              8
+            ],
+            "overflow": {
+              "adjustY": false
+            }
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-map-alias-order",
+      "mode": "popconfirm",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "custom": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              8,
+              -8
+            ]
+          },
+          "top": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "custom",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-auto-arrow-off",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "br"
+          ],
+          "autoArrow": false
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 360,
+          "y": 240,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 0,
+        "arrowY": 6,
+        "arrow": {
+          "left": "0px",
+          "top": "0px",
+          "right": "144px",
+          "bottom": "64px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "autoArrow": false
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-arrow-user-style",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "br"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "arrowStyle": {
+        "left": 3,
+        "top": 5
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 360,
+          "y": 240,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 0,
+        "arrowY": 6,
+        "arrow": {
+          "left": "3px",
+          "top": "5px",
+          "right": "141px",
+          "bottom": "59px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-root-user-style",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            12,
+            -12
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "rootStyle": {
+        "left": 23.5
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 23.5,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 68,
+        "arrowY": 86,
+        "arrow": {
+          "left": "68px",
+          "top": "64px",
+          "right": "76px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              12,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-region-visible",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "htmlRegion": "visible"
+        },
+        "placement": "bottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 735.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 735.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 644,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visible"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-region-scroll",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "htmlRegion": "scroll"
+        },
+        "placement": "bottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 735.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 735.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 732,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "bottom",
+        "arrowX": 80,
+        "arrowY": 19.5,
+        "arrow": {
+          "left": "80px",
+          "top": "0px",
+          "right": "64px",
+          "bottom": "64px",
+          "transform": "matrix(1, 0, 0, 1, -8, -16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              0,
+              12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "scroll"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-region-visibleFirst",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "htmlRegion": "visibleFirst"
+        },
+        "placement": "bottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 735.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 735.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 644,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-rtl-custom",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            "10%",
+            "-25%"
+          ]
+        },
+        "placement": "leftBottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "rtl": true,
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 137,
+          "y": 153,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "leftBottom",
+        "arrowX": 152,
+        "arrowY": 74,
+        "arrow": {
+          "left": "144px",
+          "top": "56px",
+          "right": "0px",
+          "bottom": "8px",
+          "transform": "matrix(0, 1, -1, 0, 16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "bl"
+            ],
+            "offset": [
+              "10%",
+              "-25%"
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "popconfirm-reactive-align",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "offset": [
+            0,
+            -12
+          ]
+        }
+      },
+      "patch": {
+        "align": {
+          "offset": [
+            32.5,
+            24.5
+          ],
+          "points": [
+            "tl",
+            "br"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      },
+      "beforeForceAlign": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      },
+      "changed": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 393,
+          "y": 277,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": -16.25,
+        "arrowY": -12.25,
+        "arrow": {
+          "left": "0px",
+          "top": "0px",
+          "right": "144px",
+          "bottom": "64px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              32.5,
+              24.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 3
+      }
+    },
+    {
+      "name": "popconfirm-reactive-map",
+      "mode": "popconfirm",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        }
+      },
+      "patch": {
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              8,
+              20
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      },
+      "beforeForceAlign": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      },
+      "changed": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 248,
+          "y": 272,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 72,
+        "arrowY": -10,
+        "arrow": {
+          "left": "72px",
+          "top": "0px",
+          "right": "72px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              8,
+              20
+            ]
+          }
+        },
+        "calls": 3
+      }
+    },
+    {
+      "name": "popconfirm-resize-without-offset",
+      "mode": "popconfirm",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "tl"
+          ],
+          "offset": [
+            0,
+            0
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 280,
+          "y": 220,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 40,
+        "arrowY": 16,
+        "arrow": {
+          "left": "40px",
+          "top": "16px",
+          "right": "104px",
+          "bottom": "48px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "tl"
+            ],
+            "offset": [
+              0,
+              0
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      },
+      "resize": {
+        "delta": 1,
+        "snapshot": {
+          "anchor": {
+            "x": 280.5,
+            "y": 220.5,
+            "width": 80,
+            "height": 32
+          },
+          "popup": {
+            "x": 280,
+            "y": 220,
+            "width": 180,
+            "height": 80
+          },
+          "placement": null,
+          "arrowX": 40,
+          "arrowY": 16,
+          "arrow": {
+            "left": "40px",
+            "top": "16px",
+            "right": "124px",
+            "bottom": "48px",
+            "transform": "none"
+          },
+          "callback": {
+            "nodeMatches": true,
+            "align": {
+              "points": [
+                "tl",
+                "tl"
+              ],
+              "offset": [
+                0,
+                0
+              ],
+              "dynamicInset": true,
+              "overflow": {
+                "shiftX": 40,
+                "shiftY": true,
+                "adjustY": true
+              },
+              "htmlRegion": "visibleFirst"
+            }
+          },
+          "calls": 3
+        }
+      }
+    },
+    {
+      "name": "avatar-percent-offset",
+      "mode": "avatar",
+      "options": {
+        "align": {
+          "offset": [
+            "10%",
+            "-25%"
+          ],
+          "targetOffset": [
+            "25%",
+            "50%"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 236,
+          "y": 105,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 64,
+        "arrowY": 90,
+        "arrow": {
+          "left": "64px",
+          "top": "64px",
+          "right": "80px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              "10%",
+              "-25%"
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst",
+            "targetOffset": [
+              "25%",
+              "50%"
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "avatar-empty-map",
+      "mode": "avatar",
+      "options": {
+        "align": {},
+        "builtinPlacements": {}
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 196,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 40,
+        "arrow": {
+          "left": "80px",
+          "top": "40px",
+          "right": "64px",
+          "bottom": "24px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "",
+              ""
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "avatar-custom-map",
+      "mode": "avatar",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              7,
+              17
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 247,
+          "y": 269,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 73,
+        "arrowY": -8.5,
+        "arrow": {
+          "left": "73px",
+          "top": "0px",
+          "right": "71px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              7,
+              17
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "avatar-map-alias-order",
+      "mode": "avatar",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "custom": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              8,
+              -8
+            ]
+          },
+          "top": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "custom",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "avatar-arrow-user-style",
+      "mode": "avatar",
+      "options": {
+        "align": {
+          "points": [
+            "tl",
+            "br"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "arrowStyle": {
+        "left": 3,
+        "top": 5
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 360,
+          "y": 240,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 0,
+        "arrowY": 6,
+        "arrow": {
+          "left": "3px",
+          "top": "5px",
+          "right": "141px",
+          "bottom": "59px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "avatar-rtl-custom",
+      "mode": "avatar",
+      "options": {
+        "align": {
+          "offset": [
+            "10%",
+            "-25%"
+          ]
+        },
+        "placement": "leftBottom"
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "rtl": true,
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 137,
+          "y": 153,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "leftBottom",
+        "arrowX": 152,
+        "arrowY": 74,
+        "arrow": {
+          "left": "144px",
+          "top": "56px",
+          "right": "0px",
+          "bottom": "8px",
+          "transform": "matrix(0, 1, -1, 0, 16, 0)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "br",
+              "bl"
+            ],
+            "offset": [
+              "10%",
+              "-25%"
+            ],
+            "dynamicInset": true,
+            "autoArrow": false,
+            "overflow": {
+              "adjustX": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      }
+    },
+    {
+      "name": "avatar-reactive-align",
+      "mode": "avatar",
+      "options": {
+        "align": {
+          "offset": [
+            0,
+            -12
+          ]
+        }
+      },
+      "patch": {
+        "align": {
+          "offset": [
+            32.5,
+            24.5
+          ],
+          "points": [
+            "tl",
+            "br"
+          ]
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      },
+      "beforeForceAlign": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 129,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 2
+      },
+      "changed": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 393,
+          "y": 277,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": -16.25,
+        "arrowY": -12.25,
+        "arrow": {
+          "left": "0px",
+          "top": "0px",
+          "right": "144px",
+          "bottom": "64px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tl",
+              "br"
+            ],
+            "offset": [
+              32.5,
+              24.5
+            ],
+            "dynamicInset": true,
+            "overflow": {
+              "shiftX": 40,
+              "shiftY": true,
+              "adjustY": true
+            },
+            "htmlRegion": "visibleFirst"
+          }
+        },
+        "calls": 3
+      }
+    },
+    {
+      "name": "avatar-reactive-map",
+      "mode": "avatar",
+      "options": {
+        "align": {},
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        }
+      },
+      "patch": {
+        "builtinPlacements": {
+          "top": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              8,
+              20
+            ]
+          }
+        }
+      },
+      "anchor": {
+        "x": 280.5,
+        "y": 220.5,
+        "width": 80,
+        "height": 32
+      },
+      "initial": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      },
+      "beforeForceAlign": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 240,
+          "y": 128,
+          "width": 160,
+          "height": 80
+        },
+        "placement": null,
+        "arrowX": 80,
+        "arrowY": 86,
+        "arrow": {
+          "left": "80px",
+          "top": "64px",
+          "right": "64px",
+          "bottom": "0px",
+          "transform": "none"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "bc",
+              "tc"
+            ],
+            "offset": [
+              0,
+              -12
+            ]
+          }
+        },
+        "calls": 2
+      },
+      "changed": {
+        "anchor": {
+          "x": 280.5,
+          "y": 220.5,
+          "width": 80,
+          "height": 32
+        },
+        "popup": {
+          "x": 248,
+          "y": 272,
+          "width": 160,
+          "height": 80
+        },
+        "placement": "top",
+        "arrowX": 72,
+        "arrowY": -10,
+        "arrow": {
+          "left": "72px",
+          "top": "0px",
+          "right": "72px",
+          "bottom": "0px",
+          "transform": "matrix(-1, 0, 0, -1, -8, 16)"
+        },
+        "callback": {
+          "nodeMatches": true,
+          "align": {
+            "points": [
+              "tc",
+              "bc"
+            ],
+            "offset": [
+              8,
+              20
+            ]
+          }
+        },
+        "calls": 3
+      }
+    }
+  ]
+}

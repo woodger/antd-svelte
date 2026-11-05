@@ -6,7 +6,7 @@ import type {
   PopoverSlots,
   PopoverTrigger
 } from './popover.types';
-import type { AdjustOverflow, TooltipArrow, TooltipColor } from './tooltip.types';
+import type { AdjustOverflow, TooltipArrow, TooltipColor, TooltipProps } from './tooltip.types';
 
 export interface PopconfirmSlots extends PopoverSlots {
   icon?: string;
@@ -73,6 +73,12 @@ export interface PopconfirmProps {
   cancelButtonProps?: Omit<ButtonProps, 'children' | 'htmlType' | 'loading'>;
   /** @defaultValue 'top' */
   placement?: PopoverPlacement;
+  /** Передаётся Popover поверх выбранной записи placements. */
+  align?: TooltipProps['align'];
+  /** Заменяет всю карту placements Popover, включая пустой объект. */
+  builtinPlacements?: TooltipProps['builtinPlacements'];
+  /** Получает наружный Popover DOM и итоговый align до применения новых координат. */
+  onPopupAlign?: TooltipProps['onPopupAlign'];
   /** @defaultValue true */
   arrow?: TooltipArrow;
   /** Локальный trigger → ConfigProvider.popconfirm → click; [] оставляет программное управление. */

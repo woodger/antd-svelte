@@ -2136,6 +2136,24 @@ PopupClass относится к самой поверхности. Aria-labelle
 и aria-busy позволяют связать её с содержимым составного компонента;
 aria-label имеет приоритет при выборе имени.
 
+`align`, `builtinPlacements` и `onPopupAlign` следуют правилам [Tooltip](#tooltip):
+align перекрывает выбранную запись, карта заменяется целиком, включая {},
+класс placement выбирается по первому совпадению points. Callback получает
+реальную поверхность Popover и итоговый align до применения новых координат.
+Semantic root/arrow styles сохраняют приоритет. Эти настройки включают исходную
+геометрию также без component config и передаются через Popconfirm и
+AvatarGroup.max.popover; прежние defaults без новых props сохраняются.
+
+Сверка: [84 UMD-сценария](./tests/browser/fixtures/ant-design-popover-align-reference.json),
+[SSR](./tests/package/popover-align.ssr.test.ts) и
+[browser](./tests/browser/popover-align.spec.ts), `?fixture=popover-align`.
+В 6.6.8/rc-trigger 3.10.1 изменение align или существующей записи placements
+само по себе оставляет прежнюю геометрию до forceAlign либо другого события
+выравнивания; состояния до/после forceAlign записаны в эталоне для отдельного
+разбора. Svelte сохраняет автоматическое отслеживание новых props, draft,
+выделение и фокус. Fixed/top-layer, viewport и CSS-transform/scroll-container
+границы остаются теми же, что у Tooltip.
+
 Source-тема подготавливает Tooltip и Popover tokens в исходном порядке:
 maxWidth и стрелку внутреннего Tooltip, затем собственные titleMinWidth,
 zIndexPopup, padding и wireframe-разделение заголовка/содержимого. Deprecated
@@ -2183,6 +2201,8 @@ ShowAction/hideAction и focusDelay/blurDelay передаются Popover с т
 приоритетами и native границами, описанными выше. Пустой hideAction не отключает
 кнопки подтверждения/отмены. Защита ожидающего Promise и прежний disabled contract
 сохраняются; Popover.disabled и Popconfirm.disabled имеют собственные правила.
+Align/builtinPlacements/onPopupAlign также передаются наружному Popover;
+callback получает его DOM, перемещение не заменяет description и кнопки.
 DestroyOnHidden и legacy destroyTooltipOnHide передаются Popover с исходным
 приоритетом современного prop, включая false. При удалении содержимого заново
 создаются description snippet и кнопки; сам контроллер подтверждения сохраняет
@@ -2220,8 +2240,8 @@ snippet. Число 0 отображается, строки экранирую�
 icon=null скрывает его. Children содержит один основной DOM-элемент, обычно
 Button. Его атрибуты и обработчики сохраняются.
 
-Popover обеспечивает открытие кликом, Enter/Space нативной кнопки, четыре
-положения top/bottom/left/right, arrow и autoAdjustOverflow. В содержимом
+Popover обеспечивает открытие кликом, Enter/Space нативной кнопки, 12
+положений Tooltip, arrow и autoAdjustOverflow. В содержимом
 сначала находится отмена, затем подтверждение; showCancel=false скрывает
 отмену. При открытии фокусируется первый доступный control, для обычного
 описания — кнопка отмены. Tab следует естественному порядку, Escape закрывает
