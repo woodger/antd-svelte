@@ -136,6 +136,8 @@ percentPosition; первый сохраняет один keyframe, второй
 defaults ограничены корнем, shared marker и CSS variable names сохраняются.
 Рецепт divider-prefix выводит аналогичный data module из 33 правил Divider;
 defaults ограничены корнем, интеграция ColorPicker исключена.
+Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
+prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;
 runtime ограничивает каждый selector собственным root.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.

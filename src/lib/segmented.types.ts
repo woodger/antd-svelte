@@ -57,6 +57,8 @@ export interface SegmentedProps<Value extends SegmentedValue = SegmentedValue> e
   vertical?: boolean;
   /** @defaultValue 'default' */
   shape?: 'default' | 'round';
+  /** Локальный CSS prefix для корня, options и thumb; пустая строка использует ant-segmented. */
+  prefixCls?: string;
   class?: string;
   rootClassName?: string;
   style?: string;

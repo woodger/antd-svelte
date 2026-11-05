@@ -4,7 +4,8 @@ export function animateSegmentedThumb(
   to: HTMLElement,
   vertical: boolean,
   start: () => void,
-  finish: () => void
+  finish: () => void,
+  prefix = 'ant-segmented'
 ): () => void {
   const view = group.ownerDocument.defaultView!;
   const reduced = view.matchMedia('(prefers-reduced-motion: reduce)');
@@ -32,7 +33,8 @@ export function animateSegmentedThumb(
   }
   const baseline = signature();
   const thumb = group.ownerDocument.createElement('div');
-  thumb.className = 'ant-segmented-thumb';
+  thumb.className = `${prefix}-thumb`;
+  thumb.setAttribute('data-ant-segmented-thumb', '');
   thumb.setAttribute('aria-hidden', 'true');
   Object.assign(
     thumb.style,

@@ -9,6 +9,10 @@
 
 ### Added
 
+- Segmented: локальный prefixCls с CSS из закреплённого архива, независимыми
+  defaults и сохранёнными CSS variables. Динамическая смена сохраняет radio,
+  выбор/фокус/ref, отменяет старый thumb и очищает stylesheet при unmount.
+
 - ConfigProvider.segmented: class/style и semantic slots с object/function callbacks,
   исходными приоритетами и заменой вложенных records. Сохранены native callback
   defaults, binding, radio/focus/ref и независимые scopes; добавлены Source/SSR/browser-проверки.

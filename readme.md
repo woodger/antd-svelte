@@ -579,7 +579,16 @@ children. Поддержаны hover/focus/Escape, в том числе для d
 Локальный Tooltip добавляет служебный span с display:contents и native popover;
 label остаётся flex-item для block и измерений thumb. Пользовательский tooltip.style
 может переопределить display; это меняет компоновку по явному выбору владельца.
-PrefixCls пока отсутствует.
+Локальный prefixCls меняет классы корня, options, icon и thumb и подключает
+извлечённый CSS для этого префикса. Пустая строка использует ant-segmented.
+Имена CSS variables и общий marker сохраняются; defaults ограничены собственным
+корнем. Смена префикса сохраняет radio, значение, фокус и ref, отменяя старый thumb;
+при unmount удаляется локальный stylesheet. Поддержаны native и token themes,
+размеры, block/round, vertical/RTL, disabled, semantic styles и option Tooltip.
+Сверка: [UMD](./tests/browser/fixtures/ant-design-segmented-prefix-reference.json),
+[SSR](./tests/package/segmented-prefix.ssr.test.ts),
+[browser](./tests/browser/segmented-prefix.spec.ts), `?fixture=segmented-prefix`.
+Глобальный ConfigProvider.prefixCls пока отсутствует.
 
 ## Grid: Row, Col и breakpoints
 

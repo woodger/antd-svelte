@@ -9852,7 +9852,20 @@
         "tests/browser/fixtures/SegmentedConfigMetadataCase.svelte",
         "tests/browser/segmented-config-metrics.ts",
         "tests/browser/segmented-config.spec.ts",
-        "tests/package/segmented-config.ssr.test.ts"
+        "tests/package/segmented-config.ssr.test.ts",
+        "src/lib/segmented-prefix.engine.ts",
+        "src/lib/segmented-prefix.engine.test.ts",
+        "src/lib/segmented.dom.ts",
+        "src/lib/vendor/segmented-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/fixtures/ant-design-segmented-prefix-reference.json",
+        "tests/browser/fixtures/segmented-prefix-presets.ts",
+        "tests/browser/fixtures/SegmentedPrefixControl.svelte",
+        "tests/browser/fixtures/SegmentedPrefixCase.svelte",
+        "tests/browser/fixtures/SegmentedPrefixFixtures.svelte",
+        "tests/browser/segmented-prefix-metrics.ts",
+        "tests/browser/segmented-prefix.spec.ts",
+        "tests/package/segmented-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -9974,12 +9987,37 @@
           "note": "Сохраняется существующий Svelte callback contract: props.name содержит generated radio name, disabled/block/vertical нормализованы к false. UMD 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d в callbackDefaults probe с options=[0,1] и ConfigProvider componentSize=large передаёт эти отсутствующие props как undefined. Size остаётся локальным undefined в обоих вариантах; shape=default. Новые context callbacks используют те же native props, что прежние локальные."
         },
         {
+          "id": "local-prefix",
+          "title": "Локальный prefixCls и CSS для собственного префикса",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Segmented.svelte",
+            "src/lib/segmented.types.ts",
+            "src/lib/segmented-prefix.engine.ts",
+            "src/lib/segmented-prefix.engine.test.ts",
+            "src/lib/segmented.dom.ts",
+            "src/lib/vendor/segmented-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ant-design-segmented-prefix-reference.json",
+            "tests/browser/fixtures/segmented-prefix-presets.ts",
+            "tests/browser/fixtures/SegmentedPrefixControl.svelte",
+            "tests/browser/fixtures/SegmentedPrefixCase.svelte",
+            "tests/browser/fixtures/SegmentedPrefixFixtures.svelte",
+            "tests/browser/segmented-prefix-metrics.ts",
+            "tests/browser/segmented-prefix.spec.ts",
+            "tests/package/segmented-prefix.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Локальный prefixCls следует 6.6.8: root/options/icon/thumb classes и stylesheet из 38 закреплённых правил; пустая строка возвращает ant-segmented. CSS variables и marker сохраняются, defaults/root states ограничены собственным control, включая пересечение prefix с marker. Размеры, block/round, vertical/RTL, disabled, hover/active, icon-only/0, native/token themes, cssVar.prefix и semantic styles. Динамическая смена сохраняет radio/value/focus/ref и callbacks, отменяет прежний thumb; Tooltip остаётся собственным компонентом. SSR включает head stylesheet без DOM/timers, unmount удаляет локальные styles."
+        },
+        {
           "id": "global-config",
-          "title": "PrefixCls",
+          "title": "Глобальный ConfigProvider.prefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Локальный и общий prefixCls ещё не перенесены; theme/components и ConfigProvider.segmented поддержаны отдельными features."
+          "note": "Единый глобальный ConfigProvider.prefixCls остаётся общим пробелом миграции. Локальный prefixCls Segmented и ConfigProvider.segmented реализованы отдельно; v1-ready не означает полный React API."
         }
       ]
     },

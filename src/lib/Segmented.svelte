@@ -5,6 +5,8 @@
   import { normalizeSegmentedOptions, offsetSegmentedValue } from './segmented.engine';
   import { connectFeedbackFocus } from './feedback.dom';
   import { animateSegmentedThumb } from './segmented.dom';
+  import { getSegmentedPrefixCss } from './segmented-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import Tooltip from './Tooltip.svelte';
   import type {
     SegmentedOption, SegmentedProps, SegmentedValue, SegmentedSemanticSlots
@@ -22,6 +24,7 @@
     orientation,
     vertical = false,
     shape = 'default',
+    prefixCls,
     class: className = '',
     rootClassName = '',
     style,
@@ -42,6 +45,8 @@
   let nativeName = $derived(name ?? `ant-segmented-${generatedId}`);
   let isVertical = $derived(orientation ? orientation === 'vertical' : vertical);
   let mergedSize = $derived(size ?? config.componentSize);
+  let prefix = $derived(prefixCls || 'ant-segmented');
+  let prefixCss = $derived(getSegmentedPrefixCss(prefix));
   let info = $derived(
     {
       props: {
@@ -57,6 +62,7 @@
         orientation,
         vertical,
         shape,
+        prefixCls,
         class: className,
         rootClassName,
         style,
@@ -109,13 +115,14 @@
     const previous = previousValue;
     const element = group;
     const currentItems = items;
-    // Смена оси или RTL отменяет старую физическую геометрию.
+    // Смена prefix, оси или RTL отменяет старую физическую геометрию.
+    const currentPrefix = prefix;
     const axis = isVertical ? 'vertical' : config.direction;
     previousValue = next;
     if (!element || previous === next) return;
 
     return untrack(() => {
-      const nodes = element.querySelectorAll<HTMLElement>('label.ant-segmented-item');
+      const nodes = element.querySelectorAll<HTMLElement>('label[data-ant-segmented-item]');
       const from = nodes[currentItems.findIndex(item => item.value === previous)];
       const to = nodes[currentItems.findIndex(item => item.value === next)];
       if (!from || !to) return;
@@ -124,7 +131,7 @@
         moving = true;
       }, () => {
         moving = false;
-      });
+      }, currentPrefix);
     });
   });
 
@@ -182,63 +189,67 @@
 </script>
 
 <style>
-  .ant-segmented { --ant-segmented-track-bg: var(--ant-color-bg-layout); --ant-segmented-item-color: var(--ant-color-text-label); --ant-segmented-item-hover-color: var(--ant-color-text); --ant-segmented-item-hover-bg: var(--ant-color-fill-secondary); --ant-segmented-item-selected-bg: var(--ant-color-bg-elevated); --ant-segmented-item-active-bg: var(--ant-color-fill); --ant-segmented-item-selected-color: var(--ant-color-text); }
-  .ant-segmented-item:has(input:focus-visible) { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
-  .ant-segmented-group:has(> :global(.ant-segmented-thumb)) .ant-segmented-item:not(.ant-segmented-item-disabled)::after { background-color: transparent; }
-  @media (prefers-reduced-motion: reduce) { .ant-segmented, .ant-segmented-item, .ant-segmented-item::after { transition: none; } }
+  [data-ant-segmented] { --ant-segmented-track-bg: var(--ant-color-bg-layout); --ant-segmented-item-color: var(--ant-color-text-label); --ant-segmented-item-hover-color: var(--ant-color-text); --ant-segmented-item-hover-bg: var(--ant-color-fill-secondary); --ant-segmented-item-selected-bg: var(--ant-color-bg-elevated); --ant-segmented-item-active-bg: var(--ant-color-fill); --ant-segmented-item-selected-color: var(--ant-color-text); }
+  [data-ant-segmented-item]:has(input:focus-visible) { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
+  [data-ant-segmented-group]:has(> :global([data-ant-segmented-thumb])) [data-ant-segmented-item]:not([data-ant-segmented-item-disabled])::after { background-color: transparent; }
+  @media (prefers-reduced-motion: reduce) { [data-ant-segmented], [data-ant-segmented-item], [data-ant-segmented-item]::after { transition: none; } }
 </style>
 
 <svelte:document onreset={handleReset} />
 
 {#snippet optionNode(item: SegmentedOption<Value>)}
-  <label class={[
-      'ant-segmented-item',
-      item.value === selected && !moving && 'ant-segmented-item-selected',
-      item.value === selected && 'ant-segmented-item-selected-text',
-      (disabled || item.disabled) && 'ant-segmented-item-disabled',
+  <label data-ant-segmented-item data-ant-segmented-item-disabled={disabled || item.disabled || undefined}
+    class={[
+      `${prefix}-item`,
+      item.value === selected && !moving && `${prefix}-item-selected`,
+      item.value === selected && `${prefix}-item-selected-text`,
+      (disabled || item.disabled) && `${prefix}-item-disabled`,
       item.class,
       classes.item
     ]} style={slotStyles.item}>
-    <input type="radio" class="ant-segmented-item-input" name={nativeName} checked={item.value === selected} disabled={disabled || item.disabled} aria-label={item['aria-label']
+    <input type="radio" class={`${prefix}-item-input`} name={nativeName} checked={item.value === selected} disabled={disabled || item.disabled} aria-label={item['aria-label']
         ?? (item.icon && (item.label === undefined || item.label === '')
           ? item.title
           : undefined)} onchange={() => choose(item.value)} onkeydown={handleKey} />
-    <div class={['ant-segmented-item-label', classes.label]} title={item.title} style={slotStyles.label}>
+    <div class={[`${prefix}-item-label`, classes.label]} title={item.title} style={slotStyles.label}>
       <!-- Интервал icon/label задаёт CSS margin; текстовый пробел меняет исходную ширину. -->
-      {#if item.icon}<span class={['ant-segmented-item-icon', classes.icon]} style={slotStyles.icon} aria-hidden="true">{@render item.icon()}</span>{/if}{#if item.icon && item.label !== undefined && item.label !== ''}<span>{#if typeof item.label === 'function'}{@render item.label()}{:else}{item.label}{/if}</span>
+      {#if item.icon}<span class={[`${prefix}-item-icon`, classes.icon]} style={slotStyles.icon} aria-hidden="true">{@render item.icon()}</span>{/if}{#if item.icon && item.label !== undefined && item.label !== ''}<span>{#if typeof item.label === 'function'}{@render item.label()}{:else}{item.label}{/if}</span>
       {:else if typeof item.label === 'function'}{@render item.label()}{:else}{item.label}{/if}
     </div>
   </label>
 {/snippet}
 
-<div {...rest} bind:this={nativeElement} role="radiogroup" aria-label={rest['aria-label']
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`segmented-prefix:${prefix}`} />{/if}
+<div {...rest} bind:this={nativeElement} data-ant-segmented
+  data-ant-segmented-prefix={prefixCss ? prefix : undefined} role="radiogroup" aria-label={rest['aria-label']
     ?? (rest['aria-labelledby']
       ? undefined
       : 'segmented control')}
   aria-orientation={isVertical ? 'vertical' : 'horizontal'} tabindex={rest.tabindex ?? (disabled ? undefined : 0)} dir={config.direction}
   class={[
-      'ant-segmented ant-segmented-css-var',
+      prefix,
+      'ant-segmented-css-var',
       componentTheme.className,
-      disabled && 'ant-segmented-disabled',
-      block && 'ant-segmented-block',
-      isVertical && 'ant-segmented-vertical',
-      config.direction === 'rtl' && 'ant-segmented-rtl',
-      mergedSize === 'small' && 'ant-segmented-sm',
-      mergedSize === 'large' && 'ant-segmented-lg',
-      shape === 'round' && 'ant-segmented-shape-round',
+      disabled && `${prefix}-disabled`,
+      block && `${prefix}-block`,
+      isVertical && `${prefix}-vertical`,
+      config.direction === 'rtl' && `${prefix}-rtl`,
+      mergedSize === 'small' && `${prefix}-sm`,
+      mergedSize === 'large' && `${prefix}-lg`,
+      shape === 'round' && `${prefix}-shape-round`,
       className,
       rootClassName,
       config.segmented?.class,
       classes.root
     ]}
   style={[componentTheme.style, slotStyles.root].filter(Boolean).join(';')}>
-  <div class="ant-segmented-group" bind:this={group}>
+  <div class={`${prefix}-group`} data-ant-segmented-group bind:this={group}>
     {#each items as item (item.value)}
       {#if item.tooltip}
         <Tooltip {...(typeof item.tooltip === 'string'
             ? { title: item.tooltip }
             : item.tooltip)}
-          class={`ant-segmented-tooltip-item ${typeof item.tooltip === 'object'
+          class={`${prefix}-tooltip-item ${typeof item.tooltip === 'object'
               ? item.tooltip.class ?? ''
               : ''}`}
           style={`display:contents;${typeof item.tooltip === 'object'
