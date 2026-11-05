@@ -621,6 +621,11 @@
 
 ### Fixed
 
+- Image: шесть компонентных токенов подключены к миниатюре и общему viewer
+  ImagePreviewGroup. Сохранены приоритет preview.zIndex/wrapperStyle, native dialog
+  stack, transforms/current/focus и refs. Добавлены сверка с Ant Design 6.6.8,
+  SSR и browser; duration пока проверяется только как переменная без progress API.
+
 - Реестр: зарегистрирован integration:result для существующей проверки
   потребителя; manifest больше не расходится с метаданными пакета по этому ключу.
 

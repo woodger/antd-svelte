@@ -31,9 +31,17 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Select' | 'TreeSelect' | 'Cascader' | 'Anchor' | 'Menu' | 'Dropdown' | 'Breadcrumb'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
-  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode';
+  | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image';
 
 const factories = {
+  Image: (token: GlobalToken) => ({
+    zIndexPopup: token.zIndexPopupBase + 80,
+    previewOperationColor: new FastColor(token.colorTextLightSolid).setA(0.65).toRgbString(),
+    previewOperationHoverColor: new FastColor(token.colorTextLightSolid).setA(0.85).toRgbString(),
+    previewOperationColorDisabled: new FastColor(token.colorTextLightSolid).setA(0.25).toRgbString(),
+    previewOperationSize: token.fontSizeIcon * 1.5,
+    progressAnimationDuration: '3s'
+  }),
   QRCode: (token: GlobalToken) => ({
     QRCodeCoverBackgroundColor: new FastColor(token.colorBgContainer).setA(0.96).toRgbString()
   }),
@@ -241,6 +249,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Image: [],
   Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
   Input: [],
   InputNumber: ['handleOpacity'],

@@ -456,6 +456,26 @@ Inner header использует colorFillAlter, inner body — общий ве
 они не входят в публичный ThemeConfig ни здесь, ни в 6.6.8. Оба значения оставляют
 CSS-переменные включёнными также в upstream.
 
+## Токены Image
+
+Image подготавливает шесть defaults из закреплённого style-модуля: zIndexPopup,
+previewOperationSize, три цвета operation и progressAnimationDuration.
+Размер равен fontSizeIcon × 1.5; zIndexPopup — zIndexPopupBase + 80 без единицы px.
+Цвета используют colorTextLightSolid с абсолютной alpha 0.65/0.85/0.25,
+включая полупрозрачный исходный цвет. Duration по умолчанию равен 3s.
+
+Миниатюра и общий viewer Image/ImagePreviewGroup получают собственные component
+variables перед пользовательскими styles. WrapperStyle меняет только миниатюру;
+preview.zIndex перекрывает токен viewer. Aliases, component algorithms, dark/compact,
+нули, cssVar prefix/key и вложенные/соседние providers проверены по
+[официальным замерам](../../tests/browser/fixtures/ant-design-image-theme-reference.json).
+Смена темы сохраняет DOM, transforms, current, refs и фокус. Native dialog stack
+и возврат фокуса поверх Modal сохранены без добавления React z-index context.
+
+ProgressAnimationDuration проверяется как CSS variable: placeholder.progress/render
+и исходная анимация ещё отсутствуют. Остальные ограничения Image перечислены в
+[README](../../readme.md#image).
+
 ## Токены Alert
 
 Alert получает четыре component defaults:

@@ -8859,12 +8859,27 @@
           "note": "Stable registration order, canPreview filtering и отдельные ids для равных src. Явные items (включая []) имеют приоритет и сопоставляются по src. Current/open controlled/uncontrolled, prev/next/physical arrows, one-based countRender и source callbacks. Thumbnail не вызывает onChange; onOpenChange при thumbnail opening получает snapshot прежнего current. Owner current не clamp при удалении items; group preview=false снимает config, но сохраняет source child-triggered opening. Навигация сбрасывает transform без перехода; внешняя смена current сохраняет его."
         },
         {
+          "id": "source-theme-tokens",
+          "title": "Шесть компонентных токенов Image для миниатюры и общего viewer",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-image-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-image-tokens-reference.json",
+            "tests/package/image-theme.ssr.test.ts",
+            "tests/browser/image-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-image-theme-reference.json"
+          ],
+          "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d: исходная подготовка zIndexPopup, previewOperationSize, трёх operation colors и progressAnimationDuration через общий token engine. Цвета получают абсолютную alpha 0.65/0.85/0.25; zIndexPopup без px. Component variables применяются отдельно к thumbnail и viewer Image/ImagePreviewGroup, до wrapperStyle/preview.zIndex. Проверяются aliases/algorithms/dark/compact, zero/undefined, именованные cssVar, single/group/RTL/nested/reset/sibling scopes и реактивная смена без потери DOM/transforms/current/focus/refs. Native dialog stack поверх Modal сохранён, React z-index context не добавлен. ProgressAnimationDuration проверен только как CSS variable: placeholder.progress/render и фактическая progress-анимация остаются в extended-api."
+        },
+        {
           "id": "extended-api",
           "title": "Progress placeholder, полный semantic/config/icons API, container и motion",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет placeholder.progress/render, полного classNames/styles и ConfigProvider.image/token engine/prefixCls, getContainer, icons и React info.icons node wrappers, deprecated aliases. ImageRender/actionsRender имеют native Snippet adaptation. Rc-motion fade/appear/leave и mousePosition transform origin ещё не перенесены."
+          "note": "Нет placeholder.progress/render, полного classNames/styles и ConfigProvider.image/prefixCls, getContainer, icons и React info.icons node wrappers, deprecated aliases. ImageRender/actionsRender имеют native Snippet adaptation. Rc-motion fade/appear/leave и mousePosition transform origin ещё не перенесены."
         }
       ]
     },

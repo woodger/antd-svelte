@@ -16,6 +16,7 @@
   } from './image-preview.dom';
   import { checkImageSource } from './image-status.dom';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import NoCompactStyle from './NoCompactStyle.svelte';
   import ImagePreviewIcon from './ImagePreviewIcon.svelte';
 
@@ -45,6 +46,7 @@
     countRender?: import('svelte').Snippet<[number, number]>;
   } = $props();
   const context = useConfig();
+  const componentTheme = useComponentTheme('Image');
   let dialog = $state<HTMLDialogElement>();
   let element = $state<HTMLImageElement>();
   let mounted = $state(false);
@@ -323,14 +325,16 @@
   <NoCompactStyle>
     <dialog bind:this={dialog} tabindex="-1" class={[
         'image-preview-dialog ant-image-preview ant-image-css-var',
+        componentTheme.className,
         preview.rootClassName,
         preview.movable !== false && 'ant-image-preview-movable',
         moving && 'ant-image-preview-moving'
       ]}
       dir={context.direction} aria-label={image.alt || context.locale.image?.preview || 'Image preview'} aria-modal={focusTrap ? 'true' : undefined}
-      style={preview.zIndex === undefined
-          ? undefined
-          : `z-index:${preview.zIndex};`} oncancel={event => {
+      style={[
+          componentTheme.style,
+          preview.zIndex !== undefined && `z-index:${preview.zIndex}`
+        ].filter(Boolean).join(';')} oncancel={event => {
               event.preventDefault();
               onClose();
             }}>

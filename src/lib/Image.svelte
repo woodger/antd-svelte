@@ -2,6 +2,7 @@
   import { onDestroy, untrack } from 'svelte';
   import type { ImageProps, ImagePreviewConfig, ImageElementData } from './image.types';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useImageGroup } from './image-group-context';
   import { checkImageSource } from './image-status.dom';
   import ImagePreview from './ImagePreview.svelte';
@@ -28,6 +29,7 @@
     ...attributes
   }: ImageProps = $props();
   const context = useConfig();
+  const componentTheme = useComponentTheme('Image');
   const group = useImageGroup();
   const id = $props.id();
   let config = $derived<ImagePreviewConfig>(typeof preview === 'object' ? preview : {});
@@ -119,10 +121,12 @@
 <svelte:element this={canPreview ? 'button' : 'div'} bind:this={nativeElement} type={canPreview ? 'button' : undefined} role={canPreview ? 'button' : undefined}
   class={[
       'image-trigger ant-image ant-image-css-var',
+      componentTheme.className,
       rootClassName,
       status === 'error' && 'ant-image-error'
     ]}
   style={[
+      componentTheme.style,
       width !== undefined && `width:${dimension(width)}`,
       height !== undefined && `height:${dimension(height)}`,
       wrapperStyle

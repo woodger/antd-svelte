@@ -7209,8 +7209,18 @@ Events/capture заменяют React window mouse/touch handlers с cleanup н�
 Ant Design Icons SVG 4.6.0 с существующей MIT-лицензией. Галерея `/ant-design#image`,
 фикстура `?fixture=image`.
 
+ConfigProvider.theme.components.Image задаёт zIndexPopup, previewOperationSize,
+previewOperationColor, previewOperationHoverColor, previewOperationColorDisabled
+и progressAnimationDuration. Общая тема применяется к миниатюре и viewer, включая
+ImagePreviewGroup; aliases, algorithms, cssVar prefix/key и вложенные providers
+поддержаны. Preview.zIndex имеет приоритет над токеном, wrapperStyle — над
+переменными миниатюры. Смена темы сохраняет viewer, transforms, current и фокус.
+ProgressAnimationDuration пока доступен только как CSS variable: placeholder.progress
+и его анимация ещё не перенесены. Native dialog stack поверх Modal сохранён;
+числовой React z-index context не добавляется.
+
 Placeholder progress/render, полный semantic classNames/styles, ConfigProvider.image/
-token engine/prefixCls, getContainer, icons/React info.icons wrappers, deprecated
+prefixCls, getContainer, icons/React info.icons wrappers, deprecated
 aliases и исходные fade/appear/leave/mousePosition motion пока отсутствуют.
 
 ## ImagePreviewGroup (Image.PreviewGroup)
