@@ -962,6 +962,9 @@ Svelte Dropdown с placement=bottom по умолчанию; dropdownIcon=null/u
 соседних links/span/button, в том числе при переносе цепочки и custom itemRender.
 Это локальное правило Breadcrumb; шрифты и выравнивание отдельного Dropdown
 не меняются.
+Ссылки Breadcrumb во всех режимах темы используют linkDecoration,
+linkHoverDecoration и linkFocusDecoration, по умолчанию none. Reset ограничен
+компонентом; inline стили ссылок имеют приоритет, оформление внешних links не меняется.
 В menu с custom itemRender внешняя обёртка не добавляет остановку Tab;
 возврат фокуса после Escape направляет его в первый доступный нативный control
 этого пункта.
@@ -1061,6 +1064,10 @@ catch binding; MIT-лицензии обоих пакетов сохранены
 RTL/indicator и production hydration. Source tokens и метрики проверяются
 [по официальному UMD](./src/lib/theme-anchor-tokens-reference.test.ts) и
 [в браузере](./tests/browser/anchor-theme.spec.ts). CSS-рецепт anchor содержит 22 правила.
+
+Ссылки items и legacy AnchorLink используют linkDecoration/linkHoverDecoration/
+linkFocusDecoration также без cssVar; defaults равны none. Пользовательские
+переменные и inline styles.itemTitle сохраняют приоритет.
 
 ## Affix
 

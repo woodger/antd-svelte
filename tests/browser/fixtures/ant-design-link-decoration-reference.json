@@ -1,0 +1,420 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "documentMode": "CSS1Compat",
+    "source": "Official UMD, React 18.3.1, runtime CSS-in-JS",
+    "operation": "Render public Anchor items/Link and Breadcrumb plain/menu/itemRender links; read textDecorationLine during normal/hover/active/focus, defaults and custom CSS variables/inline priority, light/dark/compact. Native/source modes are compared separately to these decoration values; the preserved Svelte AnchorLink composition uses source item styling because upstream Anchor 6.6.8 ignores legacy children. Native typography and palettes are retained."
+  },
+  "cases": [
+    {
+      "name": "light-normal-default-tokens-items",
+      "dark": false,
+      "compact": false,
+      "custom": false,
+      "inline": false,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "breadcrumb": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "menu": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "custom": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        }
+      }
+    },
+    {
+      "name": "light-normal-custom-tokens-items",
+      "dark": false,
+      "compact": false,
+      "custom": true,
+      "inline": false,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "breadcrumb": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "menu": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "custom": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        }
+      }
+    },
+    {
+      "name": "light-normal-custom-inline-items",
+      "dark": false,
+      "compact": false,
+      "custom": true,
+      "inline": true,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline"
+        },
+        "breadcrumb": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "menu": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "custom": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline"
+        }
+      }
+    },
+    {
+      "name": "light-compact-default-tokens-items",
+      "dark": false,
+      "compact": true,
+      "custom": false,
+      "inline": false,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "breadcrumb": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "menu": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "custom": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        }
+      }
+    },
+    {
+      "name": "light-compact-custom-tokens-items",
+      "dark": false,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "breadcrumb": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "menu": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "custom": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        }
+      }
+    },
+    {
+      "name": "light-compact-custom-inline-items",
+      "dark": false,
+      "compact": true,
+      "custom": true,
+      "inline": true,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline"
+        },
+        "breadcrumb": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "menu": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "custom": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline"
+        }
+      }
+    },
+    {
+      "name": "dark-normal-default-tokens-items",
+      "dark": true,
+      "compact": false,
+      "custom": false,
+      "inline": false,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "breadcrumb": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "menu": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "custom": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        }
+      }
+    },
+    {
+      "name": "dark-normal-custom-tokens-items",
+      "dark": true,
+      "compact": false,
+      "custom": true,
+      "inline": false,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "breadcrumb": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "menu": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "custom": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        }
+      }
+    },
+    {
+      "name": "dark-normal-custom-inline-items",
+      "dark": true,
+      "compact": false,
+      "custom": true,
+      "inline": true,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline"
+        },
+        "breadcrumb": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "menu": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "custom": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline"
+        }
+      }
+    },
+    {
+      "name": "dark-compact-default-tokens-items",
+      "dark": true,
+      "compact": true,
+      "custom": false,
+      "inline": false,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "breadcrumb": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "menu": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        },
+        "custom": {
+          "normal": "none",
+          "hover": "none",
+          "active": "none",
+          "focus": "none"
+        }
+      }
+    },
+    {
+      "name": "dark-compact-custom-tokens-items",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": false,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "breadcrumb": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "menu": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "custom": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        }
+      }
+    },
+    {
+      "name": "dark-compact-custom-inline-items",
+      "dark": true,
+      "compact": true,
+      "custom": true,
+      "inline": true,
+      "legacy": false,
+      "links": {
+        "anchor": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline"
+        },
+        "breadcrumb": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "menu": {
+          "normal": "overline",
+          "hover": "underline",
+          "active": "line-through",
+          "focus": "line-through"
+        },
+        "custom": {
+          "normal": "underline",
+          "hover": "underline",
+          "active": "underline",
+          "focus": "underline"
+        }
+      }
+    }
+  ]
+}

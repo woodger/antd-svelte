@@ -142,9 +142,9 @@
 </script>
 
 <style>
-  .ant-anchor-source-theme :global(.ant-anchor-link-title) { text-decoration:var(--ant-link-decoration); }
-  .ant-anchor-source-theme :global(.ant-anchor-link-title:is(:hover,:active)) { text-decoration:var(--ant-link-hover-decoration); }
-  .ant-anchor-source-theme :global(.ant-anchor-link-title:focus) { text-decoration:var(--ant-link-focus-decoration); }
+  .ant-anchor-wrapper :global(.ant-anchor-link-title) { text-decoration:var(--ant-link-decoration, none); }
+  .ant-anchor-wrapper :global(.ant-anchor-link-title:is(:hover,:active)) { text-decoration:var(--ant-link-hover-decoration, none); }
+  .ant-anchor-wrapper :global(.ant-anchor-link-title:focus) { text-decoration:var(--ant-link-focus-decoration, none); }
 </style>
 
 {#snippet content()}

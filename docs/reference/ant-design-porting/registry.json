@@ -1707,7 +1707,9 @@
         "tests/browser/anchor-theme.spec.ts",
         "tests/browser/fixtures/AnchorThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-anchor-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/link-decoration.spec.ts",
+        "tests/browser/fixtures/ant-design-link-decoration-reference.json"
       ],
       "features": [
         {
@@ -1760,6 +1762,17 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Исходные linkPaddingBlock=paddingXXS и linkPaddingInlineStart=padding, финальные overrides, component algorithms/aliases, zero/undefined/negative и custom prefix. Первый horizontal item сохраняет нулевой inline padding, nested block padding зависит от paddingXXS/2 независимо от linkPaddingBlock, title margin от fontSize/14*3. Source compact inline padding=8px; native-only compact сохраняет прежние 16px. Source linkDecoration/linkHoverDecoration/linkFocusDecoration применяются к обычному, hover/active и focus состояниям; native-only стили сохранены. Scoped declarations и computed metrics horizontal/vertical/nested links, активных titles, границ, ink и link decorations сверяются с официальным UMD для 17 настроек. SSR scope внутри обычного и Affix root, style priority, DOM/focus, scroll/history/callbacks и cleanup сохраняются. Lifecycle измерения indicator не меняется; остальные config/prefixCls API остаются в работе."
+        },
+        {
+          "id": "link-decoration-reset",
+          "title": "Reset ссылок в native и source темах",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/link-decoration.spec.ts",
+            "tests/browser/fixtures/ant-design-link-decoration-reference.json"
+          ],
+          "note": "Scoped linkDecoration/linkHoverDecoration/linkFocusDecoration с fallback none вне source-only marker. Сравнение normal/hover/active/focus с 12 UMD-сценариями 6.6.8 для default/custom variables и inline priority, light/dark/compact; Svelte проверяет native/source, Anchor items/legacy и Breadcrumb plain/menu/itemRender. Legacy AnchorLink сохраняется отдельно: upstream Anchor игнорирует children, стили сравниваются с items. Внешние links, focus outline, DOM identity, href/callbacks и Dropdown keyboard не меняются."
         }
       ]
     },
@@ -1817,7 +1830,9 @@
         "tests/browser/breadcrumb-theme.spec.ts",
         "tests/browser/fixtures/BreadcrumbThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-breadcrumb-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/link-decoration.spec.ts",
+        "tests/browser/fixtures/ant-design-link-decoration-reference.json"
       ],
       "features": [
         {
@@ -1884,6 +1899,17 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Семь defaults, aliases и отдельные algorithms, zero/undefined/negative, runtime CSS lengths и custom CSS prefix/hash. Scoped declarations и 34 computed metric sets для 17 тем: LTR/RTL root, ссылки/иконки/разделители/последний пункт, overlay/стрелка, hover/focus и Dropdown links. Девять дополнительных сочетаний rich title, default/SVG/anticon/text dropdownIcon, последнего пункта и semantic color. Нативный trigger-link сохраняется: отдельный span текста воспроизводит независимые от стрелки color/padding/margins исходной вложенной ссылки. Semantic/plain styles сохраняют приоритет; Dropdown/Menu scopes отделяют aliases popup, автоматическая высота его ссылок перекрывает ancestor Breadcrumb height. Обновления сохраняют DOM/focus, navigation и callbacks; native-only темы и существующие Svelte contracts сохранены."
+        },
+        {
+          "id": "link-decoration-reset",
+          "title": "Reset ссылок в native и source темах",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/link-decoration.spec.ts",
+            "tests/browser/fixtures/ant-design-link-decoration-reference.json"
+          ],
+          "note": "Scoped linkDecoration/linkHoverDecoration/linkFocusDecoration с fallback none вне source-only marker. Сравнение normal/hover/active/focus с 12 UMD-сценариями 6.6.8 для default/custom variables и inline priority, light/dark/compact; Svelte проверяет native/source, Anchor items/legacy и Breadcrumb plain/menu/itemRender. Legacy AnchorLink сохраняется отдельно: upstream Anchor игнорирует children, стили сравниваются с items. Внешние links, focus outline, DOM identity, href/callbacks и Dropdown keyboard не меняются."
         }
       ]
     },

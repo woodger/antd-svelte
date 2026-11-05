@@ -554,6 +554,11 @@
 
 ### Fixed
 
+- Anchor/Breadcrumb: восстановлен scoped reset ссылок в стандартной теме без
+  cssVar. Normal/hover/active/focus используют исходные link decoration tokens;
+  inline overrides, focus outline, навигация и внешние links сохранены. Добавлена
+  сверка с Ant Design 6.6.8 для обоих режимов темы, items/legacy и custom links.
+
 - Slider: theme.components.Slider теперь применяет все 18 исходных токенов в single
   и range, горизонтально и вертикально. RailSize меняет толщину шкалы; focus native
   input оформляет видимый handle. Сохранены native-only темы, hit targets и приоритет

@@ -130,7 +130,7 @@ test('native compact styles return on existing focused links after source remova
   });
 
   await expect(link).toHaveCSS('font-size', '12px');
-  await expect(link).toHaveCSS('text-decoration-line', 'underline');
+  await expect(link).toHaveCSS('text-decoration-line', 'none');
   await expect(link.locator('..')).toHaveCSS('padding-inline-start', '16px');
   expect(await link.evaluate((element, previous) => element === previous, original)).toBe(true);
   await expect(link).toBeFocused();

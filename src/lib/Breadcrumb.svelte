@@ -49,6 +49,12 @@
   let slots = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
 </script>
 
+<style>
+  .ant-breadcrumb :global(:where(a)) { text-decoration:var(--ant-link-decoration, none); }
+  .ant-breadcrumb :global(:where(a:hover, a:active)) { text-decoration:var(--ant-link-hover-decoration, none); }
+  .ant-breadcrumb :global(:where(a:focus)) { text-decoration:var(--ant-link-focus-decoration, none); }
+</style>
+
 {#snippet value(node: BreadcrumbContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
