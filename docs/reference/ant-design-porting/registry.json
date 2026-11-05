@@ -10180,7 +10180,16 @@
         "tests/package/overlay-lifecycle.ssr.test.ts",
         "src/lib/AvatarGroup.svelte",
         "tests/browser/fixtures/ant-design-overlay-empty-trigger-reference.json",
-        "tests/browser/overlay-empty-trigger.spec.ts"
+        "tests/browser/overlay-empty-trigger.spec.ts",
+        "src/lib/RenderContent.svelte",
+        "tests/browser/fixtures/ant-design-tooltip-content-reference.json",
+        "tests/browser/fixtures/tooltip-content-presets.ts",
+        "tests/browser/fixtures/TooltipContentCase.svelte",
+        "tests/browser/fixtures/TooltipCacheCase.svelte",
+        "tests/browser/fixtures/TooltipContentFixtures.svelte",
+        "tests/browser/fixtures/TooltipContentConsumers.svelte",
+        "tests/browser/tooltip-content.spec.ts",
+        "tests/package/tooltip-content.ssr.test.ts"
       ],
       "features": [
         {
@@ -10472,6 +10481,58 @@
             "tests/package/overlay-lifecycle.ssr.test.ts"
           ],
           "note": "Локальный trigger=[] исключает show/hide по hover, focus, click и contextMenu также без ConfigProvider.tooltip/popover/popconfirm. Программные open/defaultOpen сохраняются, неподдержанные события не вызывают onOpenChange; уход указателя и blur на anchor или popup не закрывают панель. Кнопки/события содержимого работают, browser contextmenu не подавляется. Исправлен выбор native/source trigger ветки у Tooltip/Popover/Typography, Popconfirm и AvatarGroup получают общий contract. Прежние native defaults, geometry, ID/ARIA, Escape и outside dismissal сохранены. 10 последовательностей официального UMD / 130 кадров включают controlled/default open и focused unmount; AvatarGroup overflow дополнительно получает tabIndex=0 в исходном harness для проверки focus-событий. Существующие Svelte snippets и native focus adapters сохранены; общий аудит семейств продолжается."
+        },
+        {
+          "id": "content-nodes",
+          "title": "Исходный title/overlay и scalar/array/Snippet content",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/RenderContent.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "tests/browser/fixtures/ant-design-tooltip-content-reference.json",
+            "tests/browser/fixtures/tooltip-content-presets.ts",
+            "tests/browser/fixtures/TooltipContentCase.svelte",
+            "tests/browser/fixtures/TooltipCacheCase.svelte",
+            "tests/browser/fixtures/TooltipContentFixtures.svelte",
+            "tests/browser/fixtures/TooltipContentConsumers.svelte",
+            "tests/browser/tooltip-content.spec.ts",
+            "tests/package/tooltip-content.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "MemoOverlay сохраняет особый приоритет title=0; truthy legacy overlay перекрывает title, falsy использует fallback. Boolean/вложенные массивы и пассивный Snippet используют общий renderer; true и пустой массив допускают пустую панель, false/NaN без fallback отключают показ. 24 публичных UMD-сценария закрепляют текст, visible и onOpenChange, включая escaping и массив со Snippet. Native suppression whitespace/controlled empty title, eager SSR/hidden shell и постоянная ARIA связь сохраняются и явно отличаются от Source. Typography передаёт overlay и сохраняет bigint/whitespace через собственный native adapter."
+        },
+        {
+          "id": "fresh-cache",
+          "title": "Fresh cache внутреннего container и Svelte Snippet boundary",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tooltip.svelte",
+            "src/lib/TooltipPopup.svelte",
+            "src/lib/tooltip.types.ts",
+            "src/lib/tooltip.engine.ts",
+            "src/lib/RenderContent.svelte",
+            "src/lib/TypographyTooltip.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "tests/browser/fixtures/ant-design-tooltip-content-reference.json",
+            "tests/browser/fixtures/tooltip-content-presets.ts",
+            "tests/browser/fixtures/TooltipContentCase.svelte",
+            "tests/browser/fixtures/TooltipCacheCase.svelte",
+            "tests/browser/fixtures/TooltipContentFixtures.svelte",
+            "tests/browser/fixtures/TooltipContentConsumers.svelte",
+            "tests/browser/tooltip-content.spec.ts",
+            "tests/package/tooltip-content.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Fresh=false фиксирует последний открытый payload: scalar/array content, container semantic class/style и legacy/color layers; true обновляет скрытый payload. Root/arrow остаются реактивными. Снимок вложенного массива отделён от Svelte proxy. 80 UMD-кадров закрепляют default/false/true, динамический fresh и destroyOnHidden; native eager initial content и скрытый shell сохраняются. Snippet selection кэшируется, но захваченные reactive значения и эффекты Svelte продолжают обновляться: полный React.memo opaque captures не воспроизводится. Fresh передаётся Typography и single/active range/pinned range Slider; браузер проверяет данные consumers, DOM/state retention и отложенную замену Snippet. Source motion/UniqueProvider и остальной delegated API остаются в работе."
         }
       ]
     },

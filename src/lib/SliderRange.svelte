@@ -565,6 +565,7 @@
         color={props.tooltip.color}
         prefixCls={props.tooltip.prefixCls}
         openClassName={props.tooltip.openClassName}
+        fresh={props.tooltip.fresh}
         destroyOnHidden={props.tooltip.destroyOnHidden}
         destroyTooltipOnHide={props.tooltip.destroyTooltipOnHide}
         autoAdjustOverflow={props.tooltip.autoAdjustOverflow}
@@ -599,6 +600,7 @@
       color={props.tooltip === false ? undefined : props.tooltip?.color}
       prefixCls={props.tooltip === false ? undefined : props.tooltip?.prefixCls}
       openClassName={props.tooltip === false ? undefined : props.tooltip?.openClassName}
+      fresh={props.tooltip === false ? undefined : props.tooltip?.fresh}
       destroyOnHidden={props.tooltip === false ? undefined : props.tooltip?.destroyOnHidden}
       destroyTooltipOnHide={props.tooltip === false ? undefined : props.tooltip?.destroyTooltipOnHide}
       autoAdjustOverflow={props.tooltip === false ? undefined : props.tooltip?.autoAdjustOverflow}

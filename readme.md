@@ -1654,10 +1654,14 @@ focus/form/reset и отсутствие callbacks при обновлении m
 </Tooltip>
 ```
 
-Title принимает строку, число, пассивный Snippet или null. Snippet рендерится
-внутри изолированного popup-контекста; пустоту opaque Snippet компонент не
-определяет заранее. Пустая строка, пробелы, undefined и null
-отключают показ и связь описания; число 0 отображается. Текст экранируется.
+Title принимает строку, число, boolean, пассивный Snippet, вложенные массивы или null.
+Legacy `overlay` приоритетнее title, кроме title=0; falsy overlay использует title.
+Boolean не создаёт текст: true и пустой массив позволяют открыть пустую подсказку,
+false и NaN без fallback отключают её. Snippet рендерится внутри изолированного
+popup-контекста; его пустоту компонент не определяет заранее. Пустая строка,
+пробелы, undefined и null сохраняют native подавление показа и связи описания;
+это отличается от whitespace и controlled empty title upstream. Число 0 отображается.
+Текст экранируется.
 Children — snippet с одним основным DOM-элементом, например Button, Input или
 нативной кнопкой. Этот элемент служит anchor и получает aria-describedby.
 Wrapper сохраняет обработчики дочернего элемента и не добавляет остановку Tab;
@@ -1679,8 +1683,18 @@ Trigger без component config по умолчанию `['hover', 'focus']`; м
 её. После Escape она остаётся скрытой до нового наведения/фокуса. В Modal первый
 Escape закрывает Tooltip, следующий — Modal.
 
-По умолчанию содержимое скрытой подсказки сохраняется. DestroyOnHidden=true удаляет
-его при закрытии и создаёт заново при открытии: DOM-состояние и состояние вложенного
+По умолчанию содержимое скрытой подсказки сохраняется. `fresh=false` фиксирует
+последнее открытое содержимое и semantic class/style внутреннего container;
+`fresh=true` обновляет их также при закрытом popup. При открытии всегда применяется
+текущее значение. Массивы сохраняются снимком, включая вложенные значения.
+Внешние root/arrow styles и наследуемые CSS-переменные продолжают обновляться.
+Кэш фиксирует выбранный Snippet, но реактивные значения и эффекты внутри него
+продолжают работать по правилам Svelte: полный React.memo для opaque captures
+не воспроизводится. Политика fresh передаётся в ellipsis Tooltip Typography
+и single/range Slider; Typography сохраняет поддержку bigint и whitespace.
+
+DestroyOnHidden=true удаляет содержимое при закрытии и создаёт заново при открытии:
+DOM-состояние и состояние вложенного
 компонента сбрасываются. Legacy destroyTooltipOnHide принимает boolean или объект
 с keepParent; объект включает удаление независимо от keepParent. Явный современный
 prop, включая false, приоритетнее alias. Смена флага у открытой подсказки сохраняет
@@ -1697,7 +1711,11 @@ prop, включая false, приоритетнее alias. Смена флаг�
 Эталоны получены с отключённой motion из runtime CSS официального UMD.
 Исходное lazy mount до первого открытия записано отдельно: существующий native
 SSR и eagerly mounted default content остаются согласованной границей.
-Кэширование скрытого содержимого fresh и исходная motion ещё требуют переноса.
+Title/overlay и fresh дополнительно сверяются с
+[24 UMD-сценариями содержимого и 80 кадрами кэша](./tests/browser/fixtures/ant-design-tooltip-content-reference.json),
+[SSR](./tests/package/tooltip-content.ssr.test.ts) и
+[browser](./tests/browser/tooltip-content.spec.ts), `?fixture=tooltip-content`.
+Исходные motion/UniqueProvider и оставшиеся delegated props ещё требуют переноса.
 
 Placement принимает top/bottom/left/right, topLeft/topRight/bottomLeft/bottomRight
 и leftTop/leftBottom/rightTop/rightBottom. Направления физические и не меняются

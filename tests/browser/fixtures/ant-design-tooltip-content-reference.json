@@ -1,0 +1,1322 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "delegated": {
+      "tooltip": "1.5.2",
+      "trigger": "3.10.1"
+    },
+    "operation": "Public Tooltip title/overlay precedence and ReactNode content; click visibility/events, nested arrays/boolean/zero/render function/escaping. Source fresh cache covers inner container content, semantic class and style while hidden, dynamic fresh and destroyOnHidden; motion disabled. Svelte retains native eager hidden shell/SSR and blank-string suppression; opaque Snippet captures remain governed by Svelte reactivity."
+  },
+  "cases": [
+    {
+      "name": "plain",
+      "title": "Title",
+      "snapshot": {
+        "visible": true,
+        "text": "Title",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "overlay-only",
+      "overlay": "Overlay",
+      "snapshot": {
+        "visible": true,
+        "text": "Overlay",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "overlay-wins",
+      "title": "Title",
+      "overlay": "Overlay",
+      "snapshot": {
+        "visible": true,
+        "text": "Overlay",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "zero-wins",
+      "title": 0,
+      "overlay": "Overlay",
+      "snapshot": {
+        "visible": true,
+        "text": "0",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "false-overlay",
+      "title": "Title",
+      "overlay": false,
+      "snapshot": {
+        "visible": true,
+        "text": "Title",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "zero-overlay",
+      "title": "Title",
+      "overlay": 0,
+      "snapshot": {
+        "visible": true,
+        "text": "Title",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "zero-overlay-only",
+      "overlay": 0,
+      "snapshot": {
+        "visible": false,
+        "text": null,
+        "color": null,
+        "className": null,
+        "events": []
+      }
+    },
+    {
+      "name": "empty-overlay",
+      "title": "Title",
+      "overlay": "",
+      "snapshot": {
+        "visible": true,
+        "text": "Title",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "empty-title",
+      "title": "",
+      "snapshot": {
+        "visible": false,
+        "text": null,
+        "color": null,
+        "className": null,
+        "events": []
+      }
+    },
+    {
+      "name": "null-title",
+      "title": null,
+      "snapshot": {
+        "visible": false,
+        "text": null,
+        "color": null,
+        "className": null,
+        "events": []
+      }
+    },
+    {
+      "name": "missing-title",
+      "snapshot": {
+        "visible": false,
+        "text": null,
+        "color": null,
+        "className": null,
+        "events": []
+      }
+    },
+    {
+      "name": "false-title",
+      "title": false,
+      "snapshot": {
+        "visible": false,
+        "text": null,
+        "color": null,
+        "className": null,
+        "events": []
+      }
+    },
+    {
+      "name": "true-title",
+      "title": true,
+      "snapshot": {
+        "visible": true,
+        "text": "",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "nan-title",
+      "title": {
+        "kind": "nan"
+      },
+      "snapshot": {
+        "visible": false,
+        "text": null,
+        "color": null,
+        "className": null,
+        "events": []
+      }
+    },
+    {
+      "name": "array-title",
+      "title": [
+        "A",
+        [
+          false,
+          0,
+          null
+        ],
+        true,
+        "B"
+      ],
+      "snapshot": {
+        "visible": true,
+        "text": "A0B",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "array-overlay",
+      "title": "Title",
+      "overlay": [
+        "Overlay ",
+        [
+          0,
+          false
+        ],
+        " value"
+      ],
+      "snapshot": {
+        "visible": true,
+        "text": "Overlay 0 value",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "empty-array",
+      "title": [],
+      "snapshot": {
+        "visible": true,
+        "text": "",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "empty-array-overlay",
+      "title": "Title",
+      "overlay": [],
+      "snapshot": {
+        "visible": true,
+        "text": "",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "snippet-title",
+      "title": {
+        "kind": "rich"
+      },
+      "snapshot": {
+        "visible": true,
+        "text": "Rich content",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "snippet-overlay",
+      "title": "Title",
+      "overlay": {
+        "kind": "rich"
+      },
+      "snapshot": {
+        "visible": true,
+        "text": "Rich content",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "snippet-zero",
+      "title": 0,
+      "overlay": {
+        "kind": "rich"
+      },
+      "snapshot": {
+        "visible": true,
+        "text": "0",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "mixed-array",
+      "title": [
+        "A ",
+        {
+          "kind": "rich"
+        },
+        " ",
+        [
+          0,
+          false
+        ]
+      ],
+      "snapshot": {
+        "visible": true,
+        "text": "A Rich content 0",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "escaped",
+      "title": "<img src=x onerror=alert(1)>",
+      "snapshot": {
+        "visible": true,
+        "text": "<img src=x onerror=alert(1)>",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    },
+    {
+      "name": "spaces",
+      "title": "   ",
+      "nativeWhitespaceBoundary": true,
+      "snapshot": {
+        "visible": true,
+        "text": "   ",
+        "color": "rgb(255, 255, 255)",
+        "className": null,
+        "events": [
+          true
+        ]
+      }
+    }
+  ],
+  "caches": [
+    {
+      "name": "fresh-default-destroy-false",
+      "destroy": false,
+      "frames": [
+        {
+          "step": "initial",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "opened",
+          "open": true,
+          "label": "A",
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "closed",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "hidden-update",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "reopened",
+          "open": true,
+          "label": "B",
+          "snapshot": {
+            "visible": true,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reclosed",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "second-update",
+          "open": false,
+          "label": "C",
+          "snapshot": {
+            "visible": false,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "enable-fresh",
+          "open": false,
+          "label": "C",
+          "fresh": true,
+          "snapshot": {
+            "visible": false,
+            "text": "C",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "disable-fresh-update",
+          "open": false,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": false,
+            "text": "C",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "final-open",
+          "open": true,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fresh-default-destroy-true",
+      "destroy": true,
+      "frames": [
+        {
+          "step": "initial",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "opened",
+          "open": true,
+          "label": "A",
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "closed",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "hidden-update",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "reopened",
+          "open": true,
+          "label": "B",
+          "snapshot": {
+            "visible": true,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reclosed",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "second-update",
+          "open": false,
+          "label": "C",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "enable-fresh",
+          "open": false,
+          "label": "C",
+          "fresh": true,
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "disable-fresh-update",
+          "open": false,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "final-open",
+          "open": true,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fresh-false-destroy-false",
+      "fresh": false,
+      "destroy": false,
+      "frames": [
+        {
+          "step": "initial",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "opened",
+          "open": true,
+          "label": "A",
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "closed",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "hidden-update",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "reopened",
+          "open": true,
+          "label": "B",
+          "snapshot": {
+            "visible": true,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reclosed",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "second-update",
+          "open": false,
+          "label": "C",
+          "snapshot": {
+            "visible": false,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "enable-fresh",
+          "open": false,
+          "label": "C",
+          "fresh": true,
+          "snapshot": {
+            "visible": false,
+            "text": "C",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "disable-fresh-update",
+          "open": false,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": false,
+            "text": "C",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "final-open",
+          "open": true,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fresh-false-destroy-true",
+      "fresh": false,
+      "destroy": true,
+      "frames": [
+        {
+          "step": "initial",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "opened",
+          "open": true,
+          "label": "A",
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "closed",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "hidden-update",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "reopened",
+          "open": true,
+          "label": "B",
+          "snapshot": {
+            "visible": true,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reclosed",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "second-update",
+          "open": false,
+          "label": "C",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "enable-fresh",
+          "open": false,
+          "label": "C",
+          "fresh": true,
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "disable-fresh-update",
+          "open": false,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "final-open",
+          "open": true,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fresh-true-destroy-false",
+      "fresh": true,
+      "destroy": false,
+      "frames": [
+        {
+          "step": "initial",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "opened",
+          "open": true,
+          "label": "A",
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "closed",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "hidden-update",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reopened",
+          "open": true,
+          "label": "B",
+          "snapshot": {
+            "visible": true,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reclosed",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "second-update",
+          "open": false,
+          "label": "C",
+          "snapshot": {
+            "visible": false,
+            "text": "C",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "enable-fresh",
+          "open": false,
+          "label": "C",
+          "fresh": true,
+          "snapshot": {
+            "visible": false,
+            "text": "C",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "disable-fresh-update",
+          "open": false,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": false,
+            "text": "C",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "final-open",
+          "open": true,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fresh-true-destroy-true",
+      "fresh": true,
+      "destroy": true,
+      "frames": [
+        {
+          "step": "initial",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "opened",
+          "open": true,
+          "label": "A",
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "closed",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "hidden-update",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "reopened",
+          "open": true,
+          "label": "B",
+          "snapshot": {
+            "visible": true,
+            "text": "B",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reclosed",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "second-update",
+          "open": false,
+          "label": "C",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "enable-fresh",
+          "open": false,
+          "label": "C",
+          "fresh": true,
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "disable-fresh-update",
+          "open": false,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "final-open",
+          "open": true,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": true,
+            "text": "A",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fresh-false-array",
+      "fresh": false,
+      "destroy": false,
+      "array": true,
+      "frames": [
+        {
+          "step": "initial",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "opened",
+          "open": true,
+          "label": "A",
+          "snapshot": {
+            "visible": true,
+            "text": "A0",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "closed",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": "A0",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "hidden-update",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "A0",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "reopened",
+          "open": true,
+          "label": "B",
+          "snapshot": {
+            "visible": true,
+            "text": "B0",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reclosed",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "B0",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "second-update",
+          "open": false,
+          "label": "C",
+          "snapshot": {
+            "visible": false,
+            "text": "B0",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "enable-fresh",
+          "open": false,
+          "label": "C",
+          "fresh": true,
+          "snapshot": {
+            "visible": false,
+            "text": "C0",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "disable-fresh-update",
+          "open": false,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": false,
+            "text": "C0",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "final-open",
+          "open": true,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": true,
+            "text": "A0",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        }
+      ]
+    },
+    {
+      "name": "fresh-true-array",
+      "fresh": true,
+      "destroy": false,
+      "array": true,
+      "frames": [
+        {
+          "step": "initial",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": null,
+            "color": null,
+            "className": null
+          }
+        },
+        {
+          "step": "opened",
+          "open": true,
+          "label": "A",
+          "snapshot": {
+            "visible": true,
+            "text": "A0",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "closed",
+          "open": false,
+          "label": "A",
+          "snapshot": {
+            "visible": false,
+            "text": "A0",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        },
+        {
+          "step": "hidden-update",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "B0",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reopened",
+          "open": true,
+          "label": "B",
+          "snapshot": {
+            "visible": true,
+            "text": "B0",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "reclosed",
+          "open": false,
+          "label": "B",
+          "snapshot": {
+            "visible": false,
+            "text": "B0",
+            "color": "rgb(51, 68, 85)",
+            "className": "cache-B"
+          }
+        },
+        {
+          "step": "second-update",
+          "open": false,
+          "label": "C",
+          "snapshot": {
+            "visible": false,
+            "text": "C0",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "enable-fresh",
+          "open": false,
+          "label": "C",
+          "fresh": true,
+          "snapshot": {
+            "visible": false,
+            "text": "C0",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "disable-fresh-update",
+          "open": false,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": false,
+            "text": "C0",
+            "color": "rgb(85, 102, 119)",
+            "className": "cache-C"
+          }
+        },
+        {
+          "step": "final-open",
+          "open": true,
+          "label": "A",
+          "fresh": false,
+          "snapshot": {
+            "visible": true,
+            "text": "A0",
+            "color": "rgb(17, 34, 51)",
+            "className": "cache-A"
+          }
+        }
+      ]
+    }
+  ]
+}

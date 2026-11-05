@@ -9,6 +9,13 @@
 
 ### Added
 
+- Tooltip: legacy overlay с исходным приоритетом title=0, boolean/array content
+  и fresh cache содержимого, semantic class/style внутреннего container.
+  Настройки передаются Typography и Slider; native eager SSR/hidden shell,
+  whitespace policy, binding, ARIA и локальное состояние children сохранены.
+  Добавлены 24 UMD-сценария и 80 кадров кэша; opaque Snippet captures остаются
+  реактивными по правилам Svelte и описаны как граница полного React.memo.
+
 - Collapse.Panel: compound children composition с прямым SSR, items precedence,
   context prefix/slots, nativeElement/ref и сбросом DOM при смене key. Общий renderer
   сохраняет native controls, hidden lifecycle, вложенные панели и focus recovery.

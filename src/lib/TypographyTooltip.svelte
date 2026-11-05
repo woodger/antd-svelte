@@ -4,9 +4,8 @@
   import { getTooltipDelay } from './tooltip.engine';
   import NoCompactStyle from './NoCompactStyle.svelte';
   import TooltipPopup from './TooltipPopup.svelte';
-  import TypographyContent from './TypographyContent.svelte';
   import type { TypographyContent as Content } from './typography.types';
-  import type { TooltipProps, TooltipTrigger } from './tooltip.types';
+  import type { TooltipContent, TooltipProps, TooltipTrigger } from './tooltip.types';
 
   let { target, title, enabled = true, options = {} }: {
     target?: HTMLElement;
@@ -16,6 +15,7 @@
   } = $props();
 
   const config = useConfig();
+  let resolvedTitle = $derived(toTooltipContent(title === 0 ? title : options.overlay || title));
   let resolvedTrigger = $derived<TooltipTrigger | readonly TooltipTrigger[]>(
     options.trigger || config.tooltip?.trigger || 'hover'
   );
@@ -24,7 +24,7 @@
   let sourceTrigger = $derived(Boolean(config.tooltip) || resolvedTrigger.length === 0
     || supports('click') || supports('contextMenu'));
   let open = $state(untrack(() => options.defaultOpen ?? false));
-  let available = $derived(Boolean(title) || title === 0);
+  let available = $derived(Boolean(resolvedTitle) || resolvedTitle === 0);
   let visible = $derived(enabled && available && (options.open ?? open));
   let mounted = $state(false);
 
@@ -39,6 +39,12 @@
   });
 
   let dismiss = () => {};
+
+  // Typography уже поддерживает bigint; в Tooltip сохраняется его текстовое представление.
+  function toTooltipContent(value: Content): TooltipContent {
+    if (typeof value === 'object' && value !== null) return value.map(toTooltipContent);
+    return typeof value === 'bigint' ? String(value) : value;
+  }
 
   function supports(trigger: TooltipTrigger) {
     return typeof resolvedTrigger === 'string'
@@ -185,12 +191,12 @@
   let hoverPopup: (value: boolean) => void = () => {};
 </script>
 
-{#snippet content()}<TypographyContent value={title} />{/snippet}
 {#if mounted}
   <NoCompactStyle>
-    <TooltipPopup title={content} open={visible} anchor={target} describe={target} trigger={target}
+    <TooltipPopup title={resolvedTitle} contentAvailable={available}
+      open={visible} anchor={target} describe={target} trigger={target}
       color={options.color} prefixCls={options.prefixCls} openClassName={options.openClassName}
-      semanticProps={{ ...options, title: content, trigger: resolvedTrigger,
+      semanticProps={{ ...options, title: resolvedTitle, trigger: resolvedTrigger,
         mouseEnterDelay: enterDelay, mouseLeaveDelay: leaveDelay }}
       placement={options.placement} arrow={options.arrow} autoAdjustOverflow={options.autoAdjustOverflow}
       getPopupContainer={options.getPopupContainer} getTooltipContainer={options.getTooltipContainer}

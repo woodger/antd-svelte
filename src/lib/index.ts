@@ -406,6 +406,7 @@ export type {
 } from './slider-range.types';
 export type {
   TooltipProps,
+  TooltipContent,
   TooltipPlacement,
   TooltipTrigger,
   TooltipColor,

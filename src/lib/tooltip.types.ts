@@ -1,6 +1,10 @@
 import type { Snippet } from 'svelte';
 import type { PopupSourceAlign } from './popup-position.engine';
 import type { PresetColorKey } from './theme-token.types';
+import type { RenderEmptyContent } from './types';
+
+/** ReactNode заменён текстом, boolean, вложенными массивами и Svelte Snippet. */
+export type TooltipContent = RenderEmptyContent;
 
 /** Физические направления; Left/Right в имени не меняются при RTL. */
 export type TooltipPlacement =
@@ -58,7 +62,14 @@ export interface TooltipConfig {
 
 /** Подсказка с настраиваемыми событиями, bind:open и доступным описанием trigger. */
 export interface TooltipProps {
-  title?: string | number | null | Snippet;
+  title?: TooltipContent;
+  /** Legacy содержимое приоритетнее title, кроме title=0; falsy overlay использует title. */
+  overlay?: TooltipContent;
+  /**
+   * Обновляет содержимое и semantic container при закрытом popup. @defaultValue false
+   * Кэш фиксирует выбранный Snippet, но не останавливает его захваченную Svelte-реактивность.
+   */
+  fresh?: boolean;
   /** Preset или CSS background; пользовательский цвет выбирает текст по source luminance. */
   color?: TooltipColor;
   /** Меняет классы popup и default openClassName; CSS variables и native wrapper сохраняются. */
@@ -112,6 +123,8 @@ export interface TooltipProps {
 /** Параметры Tooltip ручки Slider; formatter=null отключает содержимое подсказки. */
 export interface SliderTooltipConfig {
   open?: boolean;
+  /** Обновляет содержимое скрытой подсказки; default cache сохраняет последний открытый кадр. */
+  fresh?: boolean;
   /** Удаляет содержимое каждой скрытой подсказки; по умолчанию сохраняет. */
   destroyOnHidden?: boolean;
   /** @deprecated Используйте destroyOnHidden, который имеет приоритет, включая false. */

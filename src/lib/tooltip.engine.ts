@@ -1,6 +1,16 @@
 import { getPopupPlacements, getPopupPosition, type PopupFlipCache } from './popup-position.engine';
-import type { AdjustOverflow, TooltipArrow, TooltipPlacement } from './tooltip.types';
+import type { AdjustOverflow, TooltipArrow, TooltipContent, TooltipPlacement } from './tooltip.types';
 import type { AliasToken } from './theme-token.types';
+
+/** Ant Design memoOverlay: 0 в title приоритетнее даже truthy legacy overlay. */
+export function getTooltipContent(title?: TooltipContent, overlay?: TooltipContent): TooltipContent {
+  return title === 0 ? title : overlay || title || '';
+}
+
+/** Native contract подавляет whitespace strings; truthy nodes и число 0 доступны. */
+export function hasTooltipContent(value: TooltipContent): boolean {
+  return typeof value === 'string' ? Boolean(value.trim()) : Boolean(value) || value === 0;
+}
 
 export interface TooltipRect {
   x: number;

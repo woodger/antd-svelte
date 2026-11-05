@@ -2,7 +2,7 @@
   import NoCompactStyle from './NoCompactStyle.svelte';
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
-  import { getTooltipDelay } from './tooltip.engine';
+  import { getTooltipContent, getTooltipDelay, hasTooltipContent } from './tooltip.engine';
   import type { TooltipProps, TooltipTrigger } from './tooltip.types';
   import TooltipPopup from './TooltipPopup.svelte';
 
@@ -13,6 +13,7 @@
   }: TooltipProps = $props();
   let {
     title,
+    overlay,
     children,
     defaultOpen = false,
     onOpenChange,
@@ -47,12 +48,8 @@
   let clicked = false;
   let dismissed = false;
   let active = true;
-  let text = $derived(
-    typeof title === 'function' ? title : title === undefined || title === null ? '' : String(
-      title
-    )
-  );
-  let available = $derived(typeof text === 'function' || Boolean(text.trim()));
+  let content = $derived(getTooltipContent(title, overlay));
+  let available = $derived(hasTooltipContent(content));
   let visible = $derived(available && (open ?? initialDefault));
 
   $effect(() => {
@@ -202,7 +199,7 @@
   .ant-tooltip-trigger { display: inline-block; max-width: 100%; vertical-align: middle; }
 </style>
 
-<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span><NoCompactStyle><TooltipPopup title={text} color={props.color} prefixCls={props.prefixCls} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
+<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu}>{@render children()}</span><NoCompactStyle><TooltipPopup title={content} color={props.color} prefixCls={props.prefixCls} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
   semanticProps={{ ...props, open: providedOpen, trigger: resolvedTrigger,
     mouseEnterDelay: enterDelay, mouseLeaveDelay: leaveDelay }}
   onDismiss={dismiss} onHoverChange={handlePopupHover} /></NoCompactStyle>

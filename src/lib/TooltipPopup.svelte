@@ -1,6 +1,6 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
   import { onMount, untrack } from 'svelte';
+  import RenderContent from './RenderContent.svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { getOverlaySemantics } from './overlay-semantic.engine';
@@ -14,13 +14,19 @@
   import { serializeInlineStyleLayers } from './inline-style.engine';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { connectTooltipDescription, connectTooltipOpenClass } from './tooltip.dom';
-  import { getTooltipArrow, getTooltipPlacementConfig, isTooltipCorner } from './tooltip.engine';
+  import {
+    getTooltipArrow,
+    getTooltipPlacementConfig,
+    hasTooltipContent,
+    isTooltipCorner
+  } from './tooltip.engine';
   import { connectPopup } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
   import type {
     AdjustOverflow,
     TooltipArrow,
     TooltipColor,
+    TooltipContent,
     TooltipPlacement,
     TooltipProps,
     TooltipSemanticProps
@@ -28,11 +34,13 @@
 
   let {
     title,
+    contentAvailable,
     color,
     prefixCls,
     openClassName,
     destroyOnHidden,
     destroyTooltipOnHide,
+    fresh,
     open,
     anchor,
     describe,
@@ -47,12 +55,14 @@
     onDismiss,
     onHoverChange
   }: {
-    title: string | Snippet;
+    title: TooltipContent;
+    contentAvailable?: boolean;
     color?: TooltipColor;
     prefixCls?: string;
     openClassName?: string;
     destroyOnHidden?: boolean;
     destroyTooltipOnHide?: TooltipProps['destroyTooltipOnHide'];
+    fresh?: boolean;
     open: boolean;
     anchor?: Element;
     describe?: Element;
@@ -123,10 +133,19 @@
   let containerLayers = $derived([
     semantics.styles.container, semanticProps?.overlayInnerStyle, colorInfo.overlayStyle
   ]);
-  const initialContainerStyle = untrack(() => serializeInlineStyleLayers(containerLayers));
+  let refresh = $derived(fresh ?? semanticProps?.fresh ?? false);
+  let payload = $derived({
+    title,
+    layers: containerLayers,
+    classes: [`${prefix}-container`, semantics.classNames.container],
+    customColor: colorInfo.overlayStyle.length > 0
+  });
+  let cached = $state.raw(untrack(() => ({ ...payload, title: captureContent(title) })));
+  let rendered = $derived(open || refresh ? payload : cached);
+  const initialContainerStyle = untrack(() => serializeInlineStyleLayers(rendered.layers));
   const initialStyle = untrack(() => rootStyle);
   const popupStyle = createOverlayStyle(() => rootLayers);
-  let available = $derived(typeof title === 'function' || Boolean(title.trim()));
+  let available = $derived(contentAvailable ?? hasTooltipContent(title));
   let mounted = $state(false);
   let renderContent = $derived(!destroy || mounted && open && available);
   const portal = createPopupContainer(() => ({
@@ -138,9 +157,18 @@
 
   onMount(() => { mounted = true; });
 
+  $effect.pre(() => {
+    if (open || refresh) cached = { ...payload, title: captureContent(title) };
+  });
+
+  // Снимок массива не удерживает reactive proxy; внутреннее состояние Snippet остаётся Svelte-owned.
+  function captureContent(value: TooltipContent): TooltipContent {
+    return Array.isArray(value) ? value.map(captureContent) : value;
+  }
+
   function containerStyle(node: HTMLElement) {
     const update = connectInlineStyle(node);
-    $effect(() => update(containerLayers));
+    $effect(() => update(rendered.layers));
   }
 
   $effect(() => {
@@ -208,8 +236,8 @@
     }} onpointerleave={() => onHoverChange?.(false)}>
   {#if arrowConfig.show}<span data-ant-tooltip-arrow="" class={[`${prefix}-arrow`, semantics.classNames.arrow]}
     style={semantics.styles.arrow} aria-hidden="true"></span>{/if}
-  <span data-ant-tooltip-container="" class={[`${prefix}-container`, semantics.classNames.container]}
-    data-ant-overlay-color={colorInfo.overlayStyle.length > 0 || undefined}
+  <span data-ant-tooltip-container="" class={rendered.classes}
+    data-ant-overlay-color={rendered.customColor || undefined}
     style={initialContainerStyle} {@attach containerStyle}
-    tabindex="-1">{#if renderContent}{#if typeof title === 'function'}{@render title()}{:else}{title}{/if}{/if}</span>
+    tabindex="-1">{#if renderContent}<RenderContent value={rendered.title} />{/if}</span>
 </span>
