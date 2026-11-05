@@ -1,4 +1,7 @@
 import type { Snippet } from 'svelte';
+import type { HTMLAttributes } from 'svelte/elements';
+import type { CollapseItemEvents } from './collapse-events.engine';
+export type { CollapseItemEvents } from './collapse-events.engine';
 import type { ComponentSize } from './types';
 
 export type CollapseTrigger = 'header' | 'icon' | 'disabled';
@@ -25,7 +28,9 @@ export type CollapseSemantic = CollapseSemanticSlots
   | ((info: CollapseSemanticInfo) => CollapseSemanticSlots | undefined);
 
 /** Readonly item; ключ по умолчанию — строковый индекс, onChange всегда получает строки. */
-export interface CollapseItem {
+export interface CollapseItem extends Omit<
+  HTMLAttributes<HTMLDivElement>, 'children' | 'class' | 'style'
+>, CollapseItemEvents {
   key?: string | number;
   /** Пассивное содержимое нативной кнопки; controls размещайте в extra или children. */
   label?: CollapseContent;
@@ -36,6 +41,10 @@ export interface CollapseItem {
   forceRender?: boolean;
   destroyOnHidden?: boolean;
   id?: string;
+  /** Дополнительный класс внешней обёртки заголовка, как в Rc Collapse. */
+  headerClass?: string;
+  /** Callback ref получает node после mount, null при замене ref или unmount; SSR не вызывает. */
+  ref?: (node: HTMLDivElement | null) => void;
   class?: string;
   style?: string;
   /** Item slots дополняют общие classes и перекрывают общие styles. */
@@ -47,7 +56,7 @@ export interface CollapseItem {
   [attribute: `data-${string}`]: unknown;
 }
 /** Данные панели для expandIcon; custom Snippet не получает автоматический rotate. */
-export interface CollapseExpandIconInfo extends Omit<CollapseItem, 'key' | 'label'> {
+export interface CollapseExpandIconInfo extends Omit<CollapseItem, 'key' | 'label' | 'ref'> {
   panelKey: string;
   header?: CollapseContent;
   isActive: boolean;
@@ -63,9 +72,25 @@ export interface CollapseConfig extends Pick<
   CollapseProps, 'class' | 'style' | 'expandIcon' | 'classNames' | 'styles'
 > {}
 
+/** Deprecated children composition; items родителя имеют приоритет над Panel. */
+export interface CollapsePanelProps extends Omit<
+  CollapseItem, 'key' | 'label' | 'classNames' | 'styles' | 'ref'
+> {
+  /** Стабильный ключ; без него начальный индекс считает только Panel instances. */
+  key?: string | number;
+  header?: CollapseContent;
+  /** Внутри Collapse используется prefix родителя. */
+  prefixCls?: string;
+  /** Bind:nativeElement/ref получают обёртку панели; очищаются при unmount. */
+  nativeElement?: HTMLDivElement;
+  ref?: HTMLDivElement;
+}
+
 /** Независимые раскрываемые панели или accordion с управлением activeKey. */
 export interface CollapseProps {
   items?: readonly CollapseItem[];
+  /** Legacy Collapse.Panel composition; явный items (включая []) перекрывает children. */
+  children?: Snippet;
   /** Поддерживает bind:activeKey; числа сравниваются по строковому представлению. */
   activeKey?: CollapseActiveKey | undefined;
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */

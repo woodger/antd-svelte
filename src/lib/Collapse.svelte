@@ -1,11 +1,11 @@
 <script lang="ts">
   import { onDestroy, onMount, untrack } from 'svelte';
-  import Icon from './Icon.svelte';
-  import RenderContent from './RenderContent.svelte';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { getCollapsePrefixCss } from './collapse-prefix.engine';
-  import CollapsePanel from './CollapsePanel.svelte';
+  import CollapseItemView from './CollapseItemView.svelte';
+  import { provideCollapse } from './collapse-context';
+  import { retainCollapseFocus } from './collapse.dom';
   import { useConfig } from './config-context';
   import {
     getCollapseFocusKey,
@@ -25,7 +25,8 @@
     ...props
   }: CollapseProps = $props();
   let {
-    items: sourceItems = [],
+    items: sourceItems,
+    children,
     defaultActiveKey,
     onChange,
     accordion = false,
@@ -92,14 +93,65 @@
     return { classes, styles: slots };
   });
   let rootId = $derived(id ?? `ant-collapse-${generatedId}`);
-  let items = $derived(normalizeCollapseItems(sourceItems));
+  let members = $state.raw(new Map<symbol, {
+    item: () => CollapseItem & { key: string };
+    element: () => HTMLDivElement | undefined;
+  }>());
+  let nextIndex = 0;
+  let legacy = $derived(!Array.isArray(sourceItems) && Boolean(children));
+  let items = $derived(normalizeCollapseItems(sourceItems ?? []));
+  let focusedItems = $derived.by(() => {
+    if (!legacy) return items;
+    const positions = Array.from(root?.children ?? []);
+    return [...members.values()].sort((left, right) =>
+      positions.indexOf(left.element()!) - positions.indexOf(right.element()!)
+    ).map(member => member.item());
+  });
   let openKeys = $derived(getCollapseKeys(activeKey ?? initialDefault, accordion));
   let resolvedSize = $derived(size ?? config.componentSize);
-  let region = $derived(accordion || items.length <= 6);
+  let region = $derived(accordion || !legacy && items.length <= 6);
+
+  provideCollapse({
+    get prefix() { return prefix; },
+    get direction() { return config.direction; },
+    get headingLevel() { return headingLevel; },
+    get collapsible() { return props.collapsible; },
+    get destroyOnHidden() { return rootDestroy; },
+    get region() { return region; },
+    get classes() { return semantics.classes; },
+    get styles() { return semantics.styles; },
+    get openKeys() { return openKeys; },
+    get expandIcon() { return resolvedExpandIcon; },
+    itemId,
+    toggle,
+    iconInfo: expandIconInfo,
+    register(item, element) {
+      const id = Symbol();
+      const index = nextIndex++;
+      // SSR выводится напрямую: registry нужен только для client focus и toggle lookup.
+      untrack(() => members.set(id, { item, element }));
+      let mounted = false;
+      return {
+        index,
+        mount() {
+          mounted = true;
+          members = new Map(untrack(() => members));
+        },
+        destroy() {
+          untrack(() => {
+            members.delete(id);
+            if (mounted) members = new Map(members);
+          });
+        }
+      };
+    }
+  });
+
+  $effect(() => legacy && root ? retainCollapseFocus(root) : undefined);
 
   $effect.pre(() => {
     const container = root;
-    const current = items;
+    const current = focusedItems;
     const open = openKeys;
     const modes = current.map((item) => getCollapseTrigger(item, collapsible));
     repairFocus = false;
@@ -151,7 +203,7 @@
 
   $effect(() => {
     const container = root;
-    const target = getCollapseFocusKey(items, repairKey, openKeys, collapsible);
+    const target = getCollapseFocusKey(focusedItems, repairKey, openKeys, collapsible);
     const previous = retainedFocus;
     retainedFocus = undefined;
     if (!container) return;
@@ -205,7 +257,7 @@
     classNames: CollapseSemanticSlots,
     styles: CollapseSemanticSlots
   ): CollapseExpandIconInfo {
-    const { key, label, ...panelProps } = item;
+    const { key, label, ref: _ref, ...panelProps } = item;
 
     return {
       ...panelProps, panelKey: key, header: label, isActive: open,
@@ -214,13 +266,13 @@
       classNames: { ...semantics.classes, ...classNames },
       styles: { ...semantics.styles, ...styles },
       onItemClick: key => {
-        if (getCollapseTrigger(item, collapsible) !== 'disabled') toggle(key);
+        if (getCollapseTrigger(item, collapsible) !== 'disabled') toggle(key, undefined, item);
       }
     };
   }
 
-  function toggle(key: string, event?: MouseEvent) {
-    const item = items.find((entry) => entry.key === key);
+  function toggle(key: string, event?: MouseEvent, sourceItem?: CollapseItem) {
+    const item = focusedItems.find((entry) => entry.key === key);
     if (!active
       || event?.defaultPrevented
       || !item
@@ -229,7 +281,7 @@
     const next = toggleCollapseKey(activeKey ?? initialDefault, key, accordion);
     activeKey = [...next];
     onChange?.(next);
-    item.onItemClick?.(key);
+    (sourceItem ?? item).onItemClick?.(key);
   }
 </script>
 
@@ -237,20 +289,8 @@
   [data-ant-collapse] { min-width: 0; max-width: 100%; --ant-collapse-toggle-padding: var(--ant-collapse-header-padding); --ant-collapse-extra-spacing: var(--ant-padding); }
   [data-ant-collapse][data-size="small"] { --ant-collapse-toggle-padding: var(--ant-collapse-header-padding-sm); --ant-collapse-extra-spacing: var(--ant-padding-sm); }
   [data-ant-collapse][data-size="large"] { --ant-collapse-toggle-padding: var(--ant-collapse-header-padding-lg); --ant-collapse-extra-spacing: var(--ant-padding-lg); }
-  [data-ant-collapse] > [data-ant-collapse-part="item"] > [data-ant-collapse-part="header"] { padding: 0; align-items: center; cursor: default; }
-  .ant-collapse-heading { flex: 1; min-width: 0; margin: 0; font: inherit; color: inherit; }
-  .ant-collapse-trigger { display: flex; align-items: flex-start; width: 100%; min-width: 0; margin: 0; padding: var(--ant-collapse-toggle-padding); border: 0; border-radius: inherit; background: transparent; color: inherit; font: inherit; text-align: start; cursor: pointer; }
-  .ant-collapse-trigger:disabled { cursor: not-allowed; }
-  .ant-collapse-trigger:focus-visible, [data-ant-collapse]:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -3px; }
-  [data-ant-collapse-part="title"] { flex: 1; min-width: 0; overflow-wrap: anywhere; }
-  [data-ant-collapse] > [data-ant-collapse-part="item"] > [data-ant-collapse-part="header"] [data-ant-collapse-part="icon"] { height: 1lh; }
-  [data-ant-collapse][data-size="small"][data-placement="start"] > [data-ant-collapse-part="item"] > [data-ant-collapse-part="header"] [data-ant-collapse-part="icon"] { margin-inline-start: calc(var(--ant-padding-sm) - var(--ant-padding-xs)); }
-  [data-ant-collapse][data-size="large"][data-placement="start"] > [data-ant-collapse-part="item"] > [data-ant-collapse-part="header"] [data-ant-collapse-part="icon"] { margin-inline-start: calc(var(--ant-padding-lg) - var(--ant-padding)); }
-  .ant-collapse-trigger-icon { pointer-events: none; cursor: default; }
-  .ant-collapse-trigger-icon [data-ant-collapse-part="icon"] { pointer-events: auto; cursor: pointer; }
-  [data-ant-collapse-part="extra"] { flex: none; min-width: 0; max-width: 45%; margin-inline-end: var(--ant-collapse-extra-spacing); overflow-wrap: anywhere; }
   .ant-collapse-empty { padding: var(--ant-padding-sm); color: var(--ant-color-text-description); }
-  @media (prefers-reduced-motion: reduce) { [data-ant-collapse] > [data-ant-collapse-part="item"] > [data-ant-collapse-part="header"], [data-ant-collapse] > [data-ant-collapse-part="item"] > [data-ant-collapse-part="header"] [data-ant-collapse-part="arrow"] { animation: none; transition: none; } }
+  [data-ant-collapse]:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -3px; }
 </style>
 
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`collapse-prefix:${prefix}`} />{/if}
@@ -264,58 +304,8 @@
     config.direction === 'rtl' && `${prefix}-rtl`, config.collapse?.class, className,
     rootClassName, semantics.classes.root, componentTheme.className
   ]} style={[componentTheme.style, semantics.styles.root].filter(Boolean).join(';') || undefined}>
-  {#each items as item (item.key)}
-    {@const mode = getCollapseTrigger(item, collapsible)}
-    {@const open = openKeys.includes(item.key)}
-    {@const itemClasses = {
-      header: [semantics.classes.header, item.classNames?.header].filter(Boolean).join(' '),
-      title: [semantics.classes.title, item.classNames?.title].filter(Boolean).join(' '),
-      body: [semantics.classes.body, item.classNames?.body].filter(Boolean).join(' '),
-      icon: [semantics.classes.icon, item.classNames?.icon].filter(Boolean).join(' ')
-    }}
-    {@const itemStyles = {
-      header: [semantics.styles.header, item.styles?.header].filter(Boolean).join(';'),
-      title: [semantics.styles.title, item.styles?.title].filter(Boolean).join(';'),
-      body: [semantics.styles.body, item.styles?.body].filter(Boolean).join(';'),
-      icon: [semantics.styles.icon, item.styles?.icon].filter(Boolean).join(';')
-    }}
-    <div {...Object.fromEntries(Object.entries(item).filter(([name]) =>
-      name.startsWith('aria-') || name.startsWith('data-')
-    ))} id={item.id} data-collapse-key={item.key} data-ant-collapse-part="item" class={[
-      `${prefix}-item`, open && `${prefix}-item-active`,
-      mode === 'disabled' && `${prefix}-item-disabled`, item.class
-    ]} style={item.style}>
-      <div data-ant-collapse-part="header" class={[
-        `${prefix}-header`, mode === 'icon' && `${prefix}-collapsible-icon`
-      ]}>
-        <svelte:element this={`h${headingLevel}`} class="ant-collapse-heading">
-          <button type="button" id={itemId(item.key, 'header')} data-collapse-trigger={item.key}
-            aria-expanded={open} aria-controls={itemId(item.key, 'panel')}
-            disabled={mode === 'disabled'} class={[
-              'ant-collapse-trigger', mode === 'icon' && 'ant-collapse-trigger-icon',
-              itemClasses.header
-            ]} style={itemStyles.header || undefined} onclick={(event) => toggle(item.key, event)}>
-            {#if item.showArrow !== false}<span class={[`${prefix}-expand-icon`, itemClasses.icon]}
-              data-ant-collapse-part="icon" style={itemStyles.icon || undefined} aria-hidden="true">
-              {#if resolvedExpandIcon}<span class={`${prefix}-arrow`} data-ant-collapse-part="arrow">
-                {@render resolvedExpandIcon(expandIconInfo(item, open, itemClasses, itemStyles))}</span>
-              {:else}<span class={`${prefix}-arrow`} data-ant-collapse-part="arrow"
-                style:transform={`rotate(${open ? 90 : config.direction === 'rtl' ? 180 : 0}deg)`}>
-                <Icon name="right" /></span>{/if}
-            </span>{/if}
-            <span id={itemId(item.key, 'label')} class={[`${prefix}-title`, itemClasses.title]}
-              data-ant-collapse-part="title" style={itemStyles.title || undefined}>
-              <RenderContent value={item.label} /></span>
-          </button>
-        </svelte:element>
-        {#if item.extra !== undefined && item.extra !== null && typeof item.extra !== 'boolean'}
-          <div class={`${prefix}-extra`} data-ant-collapse-part="extra">
-            <RenderContent value={item.extra} /></div>{/if}
-      </div>
-      <CollapsePanel id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'header')}
-        itemKey={item.key} {open} {region} children={item.children} forceRender={item.forceRender}
-        destroyOnHidden={item.destroyOnHidden ?? rootDestroy} {prefix}
-        bodyClass={itemClasses.body} bodyStyle={itemStyles.body} />
-    </div>
-  {:else}<div class="ant-collapse-empty">{config.locale.emptyText}</div>{/each}
+  {#if legacy}{@render children?.()}
+  {:else}{#each items as item (item.key)}
+    <CollapseItemView {item} />
+  {:else}<div class="ant-collapse-empty">{config.locale.emptyText}</div>{/each}{/if}
 </div>

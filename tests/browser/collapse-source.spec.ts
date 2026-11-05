@@ -45,6 +45,56 @@ for (const sample of reference.cases.filter(item => 'retainedBodies' in item)) {
   });
 }
 
+for (const sample of reference.cases.filter(item => 'eventTrace' in item)) {
+  test(`Collapse preserves source item events for ${sample.name}`, async ({ page }) => {
+    await page.getByRole('combobox', { name: 'Collapse source case', exact: true })
+      .selectOption(sample.name);
+    const item = page.locator(root).locator('[data-ant-collapse-part="item"]').first();
+
+    if ('events' in sample && sample.events === 'focus') {
+      await page.getByRole('textbox', { name: 'Event draft', exact: true }).focus();
+      await page.getByRole('button', { name: 'After Collapse source', exact: true }).focus();
+    } else if ('events' in sample && sample.events === 'key') {
+      await item.locator('[data-collapse-trigger]').press('x');
+    } else if ('events' in sample && sample.events === 'mouse') {
+      await item.hover();
+      await page.mouse.move(reference.viewport.width - 1, reference.viewport.height - 1);
+    } else await item.locator('[data-collapse-trigger]').click();
+
+    await expect(page.getByLabel('Collapse source events', { exact: true }))
+      .toHaveText('eventTrace' in sample ? sample.eventTrace!.join(',') : '');
+  });
+}
+
+test('Collapse releases the source item callback ref on unmount', async ({ page }) => {
+  await page.getByRole('combobox', { name: 'Collapse source case', exact: true })
+    .selectOption('item-ref');
+  const sample = reference.cases.find(item => item.name === 'item-ref')!;
+  await page.getByRole('button', { name: 'Toggle Collapse source mount', exact: true }).click();
+
+  await expect(page.getByLabel('Collapse source events', { exact: true }))
+    .toHaveText('refTrace' in sample ? sample.refTrace!.join(',') : '');
+});
+
+for (const sample of reference.cases.filter(item => 'refUpdateTrace' in item)) {
+  test(`Collapse preserves source item refs for ${sample.name}`, async ({ page }) => {
+    await page.getByRole('combobox', { name: 'Collapse source case', exact: true })
+      .selectOption(sample.name);
+    const previous = await page.locator(root).locator('[data-ant-collapse-part="item"]')
+      .first().elementHandle();
+    const replace = sample.name === 'item-ref-replace';
+    await page.getByRole('button', { name: replace ? 'Replace Collapse item ref'
+      : 'Update Collapse item labels', exact: true }).click();
+
+    await expect(page.locator(root).locator('[data-ant-collapse-part="title"]').first())
+      .toHaveText(replace ? 'First title' : 'Updated title');
+    expect(await page.locator(root).locator('[data-ant-collapse-part="item"]').first()
+      .evaluate((node, old) => node === old, previous)).toBe(true);
+    await expect(page.getByLabel('Collapse source events', { exact: true }))
+      .toHaveText('refUpdateTrace' in sample ? sample.refUpdateTrace!.join(',') : '');
+  });
+}
+
 test('Collapse lets a custom expandIcon invoke the source panel callback', async ({ page }) => {
   await page.getByRole('combobox', { name: 'Collapse source case', exact: true })
     .selectOption('custom-icon');

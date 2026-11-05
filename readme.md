@@ -2897,12 +2897,43 @@ component algorithm, cssVar prefix/key, dark и compact используют о�
 Галерея `/ant-design#collapse` показывает анкету, вложенные панели, сохранение
 черновиков, destroyOnHidden и независимую кнопку сброса в extra. Сброс примера
 пересоздаёт поля с исходными значениями, сохраняя открытые внешние панели.
-Legacy Collapse.Panel и React-анимация высоты пока не перенесены. Native group,
-heading/button/region, ARIA-связи, Space, full button hit area, независимость extra,
-focus recovery и icon/showArrow fallback сохранены; это явные отличия от DOM React.
-Snippet — непрозрачная граница: пустой custom expandIcon сохраняет свой wrapper.
-Глобальный ConfigProvider.prefixCls, React dev warnings и низкоуровневые
-item DOM events/headerClass/ref пока не поддерживаются.
+Legacy composition поддержана через тот же native renderer:
+
+```svelte
+<Collapse defaultActiveKey={['profile']}>
+  <Collapse.Panel key="profile" header="Профиль">
+    <input aria-label="Имя" defaultValue="Анна" />
+  </Collapse.Panel>
+</Collapse>
+```
+
+Явный items, включая [], имеет приоритет над children. Панели рендерятся при SSR
+сразу; регистрация и effects не определяют их наличие. Родитель задаёт prefix,
+semantic slots, activeKey, accordion, destroyOnHidden и стрелку. ShowArrow=false
+добавляет legacy no-arrow class; исходный undefined в expandIcon payload сохраняется.
+Bind:nativeElement/ref относятся к обёртке Panel. Смена key пересоздаёт её DOM и поля.
+Legacy без accordion не добавляет region; items сохраняет прежний предел landmarks.
+
+Для перестановки/вставки используйте явные стабильные key. Без key или с пустым
+legacy key начальный индекс считает только Panel instances. Snippet непрозрачен:
+смешанные DOM siblings и динамические implicit indexes не повторяют React child
+cloning/reconciliation. Body Snippets, nested Collapse, retain/destroy/force,
+перестановка, удаление, фокус и живая смена config/theme/prefix проверены отдельно.
+
+Item поддерживает headerClass, HTML attributes, native lowercase events и camelCase
+aliases (включая Capture). Click/capture/bubble/stopPropagation/preventDefault,
+focus/blur, key и mouse traces сверяются с оригиналом. События остаются native DOM:
+React SyntheticEvent и его input/change normalization не создаются. Enter/Space
+сохраняют порядок активации нативной кнопки, включая возможность отменить default.
+Item.ref — callback с node после mount и null при замене ref или unmount; стабильный
+callback не вызывается повторно из-за label updates. Он использует post-DOM lifecycle
+Svelte; React RefObject не мутируется. Panel использует bind:ref вместо callback.
+
+React-анимация высоты пока не перенесена. Native group, heading/button/region,
+ARIA-связи, Space, full button hit area, независимость extra, focus recovery
+и icon/showArrow fallback сохранены; это явные отличия от DOM React. Пустой custom
+expandIcon Snippet сохраняет wrapper. Глобальный ConfigProvider.prefixCls и React
+DEV diagnostics пока не поддерживаются.
 
 ## Modal
 

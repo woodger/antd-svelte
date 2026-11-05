@@ -1,11 +1,63 @@
 import { render } from 'svelte/server';
 import { describe, expect, it, vi } from 'vitest';
 import { Collapse } from 'antd-svelte';
+import CollapseLegacyCase from '../browser/fixtures/CollapseLegacyCase.svelte';
 import CollapseSourceCase from '../browser/fixtures/CollapseSourceCase.svelte';
 
 const items = [{ key: 1, label: 'First title', children: 'First body' }];
 
 describe('Collapse public package SSR', () => {
+  it('renders compound panels and open fields during SSR before registration or effects', () => {
+    const { body } = render(CollapseLegacyCase);
+
+    expect(body).toContain('First legacy section');
+    expect(body).toContain('aria-label="First legacy draft"');
+    expect(body).toContain('value="First draft"');
+    expect(body).not.toContain('aria-label="Second legacy draft"');
+    expect(body).toContain('Legacy extra action');
+    expect(body).toContain('legacy-header-class');
+    expect(body).toContain('aria-label="Legacy first native ref">false');
+    expect(body).toContain('aria-label="Legacy changes">[]');
+    expect(typeof Collapse.Panel).toBe('function');
+  });
+
+  it('gives explicit items precedence over legacy children and suppresses ignored SSR children', () => {
+    const { body } = render(CollapseSourceCase, { props: { sample: {
+      name: 'precedence', legacy: true,
+      panels: [{ key: 1, label: 'Ignored panel', children: 'Ignored body' }],
+      props: { items: [{ key: 'item', label: 'Item wins' }] }
+    } } });
+
+    expect(body).toContain('Item wins');
+    expect(body).not.toContain('Ignored panel');
+    expect(body).not.toContain('Ignored body');
+  });
+
+  it('renders implicit panel index keys and legacy no-arrow classes before mount', () => {
+    const { body } = render(CollapseSourceCase, { props: { sample: {
+      name: 'implicit', legacy: true, props: { defaultActiveKey: 0 },
+      panels: [{ label: 'Implicit panel', children: 0, showArrow: false }]
+    } } });
+
+    expect(body).toContain('data-collapse-key="0"');
+    expect(body).toContain('ant-collapse-item-active ant-collapse-no-arrow');
+    expect(body).toContain('aria-expanded="true"');
+    expect(body).not.toContain('ant-collapse-expand-icon');
+  });
+
+  it('forwards item HTML attributes and headerClass without invoking refs or events during SSR', () => {
+    const fail = () => { throw new Error('Unexpected SSR callback'); };
+    const { body } = render(Collapse, { props: { items: [{
+      key: 'item', label: 'Section', headerClass: 'custom-header', title: 'Item title',
+      tabindex: 2, ref: fail, onClick: fail, onClickCapture: fail
+    }] } });
+
+    expect(body).toContain('title="Item title"');
+    expect(body).toContain('tabindex="2"');
+    expect(body).toContain('custom-header ant-collapse-header');
+    expect(body).not.toContain('onclick=');
+  });
+
   it('normalizes numeric and omitted keys and renders scalar and nested array content', () => {
     const { body } = render(Collapse, { props: {
       items: [{ label: [0, false, ['Title']], children: ['First', 0, false, [null, 'Last']],

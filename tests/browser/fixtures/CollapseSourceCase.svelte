@@ -1,8 +1,12 @@
 <script lang="ts" module>
-  import type { CollapseProps } from 'antd-svelte';
+  import type { CollapseItem, CollapseProps } from 'antd-svelte';
 
   export interface CollapseSourceSample {
     name: string;
+    legacy?: boolean;
+    panels?: readonly CollapseItem[];
+    events?: 'click' | 'capture' | 'stop' | 'prevent' | 'focus' | 'key' | 'mouse';
+    refs?: boolean;
     props: CollapseProps;
     semantic?: 'object' | 'function' | 'undefined';
     provider?: 'object' | 'function' | 'icon';
@@ -25,6 +29,8 @@
   let nativeElement = $state<HTMLDivElement>();
   let ref = $state<HTMLDivElement>();
   let count = $state(0);
+  let renamed = $state(false);
+  let alternateRef = $state(false);
   let events = $state<string[]>([]);
   let iconInfo: CollapseExpandIconInfo | undefined;
   const classes: CollapseSemanticSlots = {
@@ -59,11 +65,48 @@
     classNames: info => ({ ...provider.classNames, root: `provider-root ${flag(info)}` }),
     styles: () => provider.styles
   } : provider);
+  function recordItemRef(node: HTMLDivElement | null) {
+    events = [...events, `ref:${node ? 'node' : 'null'}`];
+  }
+  function alternateItemRef(node: HTMLDivElement | null) {
+    recordItemRef(node);
+  }
+  function itemEvents(item: CollapseItem): CollapseItem {
+    return {
+      ...item, label: renamed ? 'Updated title' : item.label, onItemClick: key => events = [...events, `item:${key}`],
+      ...(sample.refs ? { ref: alternateRef && String(item.key) === '1' ? alternateItemRef : recordItemRef } : {}),
+      ...(sample.events ? {
+        onClick: event => {
+          events = [...events, 'item-click'];
+          if (sample.events === 'stop') event.stopPropagation();
+          if (sample.events === 'prevent') event.preventDefault();
+        }
+      } : {}),
+      ...(sample.events === 'capture' ? { onClickCapture: () => events = [...events, 'item-capture'] } : {}),
+      ...(sample.events === 'focus' ? {
+        onFocus: event => events = [...events, `focus:${(event.target as Element).tagName}:${event.currentTarget.tagName}`],
+        onBlur: event => events = [...events, `blur:${(event.target as Element).tagName}:${event.currentTarget.tagName}`],
+        children: eventDraft
+      } : {}),
+      ...(sample.events === 'key' ? {
+        onKeyDown: event => events = [...events, `keydown:${event.key}`],
+        onKeyUp: event => events = [...events, `keyup:${event.key}`]
+      } : {}),
+      ...(sample.events === 'mouse' ? {
+        onMouseEnter: () => events = [...events, 'enter'],
+        onMouseLeave: () => events = [...events, 'leave']
+      } : {})
+    };
+  }
+  let panelItems = $derived((sample.panels ?? []).map(itemEvents));
+  let frameAttributes = $derived(sample.events ? {
+    onclick: () => events = [...events, 'frame-click']
+  } : {});
   let collapseProps = $derived<CollapseProps>({
     ...sample.props,
     items: sample.rich ? [{ key: 1, label: richTitle, children: richBody, extra: actions }]
-      : sample.props.items?.map(item => ({ ...item,
-        onItemClick: key => events = [...events, `item:${key}`] })),
+      : sample.props.items?.map(itemEvents),
+    ...(sample.legacy ? { children: panels } : {}),
     ...(sample.semantic === 'object' ? { classNames: classes, styles } : {}),
     ...(sample.semantic === 'function' ? {
       classNames: info => ({ ...classes, root: `local-root ${flag(info)}` }),
@@ -94,6 +137,12 @@
   });
 </script>
 
+{#snippet panels()}
+  {#each panelItems as item, index (item.key ?? index)}
+    <Collapse.Panel {...item} ref={undefined} header={item.label} />
+  {/each}
+{/snippet}
+{#snippet eventDraft()}<input aria-label="Event draft" defaultValue="Draft" />{/snippet}
 {#snippet richTitle()}<strong>Rich title</strong>{/snippet}
 {#snippet richBody()}<em>Rich body</em><input
   aria-label="Collapse source draft" defaultValue="Fresh draft" />{/snippet}
@@ -105,7 +154,7 @@
 <ConfigProvider theme={sourceTheme} direction={sample.rtl ? 'rtl' : 'ltr'}
   collapse={sample.provider ? providerConfig : undefined}>
   <ConfigProvider collapse={sample.childProvider === 'empty' ? {} : undefined}>
-    <div data-collapse-source-frame style="width:600px;max-width:100%">
+    <div {...frameAttributes} data-collapse-source-frame style="width:600px;max-width:100%">
       {#if mounted}<Collapse {...collapseProps} bind:nativeElement bind:ref />{/if}
     </div>
   </ConfigProvider>
@@ -115,3 +164,7 @@
 <output aria-label="Collapse source events">{events.join(',')}</output>
 <button type="button" onclick={() => iconInfo?.onItemClick?.(iconInfo.panelKey)}>
   Invoke Collapse expand icon callback</button>
+
+<button type="button" onclick={() => renamed = true}>Update Collapse item labels</button>
+
+<button type="button" onclick={() => alternateRef = true}>Replace Collapse item ref</button>

@@ -9,6 +9,13 @@
 
 ### Added
 
+- Collapse.Panel: compound children composition с прямым SSR, items precedence,
+  context prefix/slots, nativeElement/ref и сбросом DOM при смене key. Общий renderer
+  сохраняет native controls, hidden lifecycle, вложенные панели и focus recovery.
+  Добавлены item HTML/events/headerClass, callback refs, 119 UMD-сценариев,
+  traces capture/bubble/focus/refs, lifecycle и реальная hydration открытой панели.
+  Границы implicit keys, native events и refs описаны отдельно.
+
 - Collapse: числовые/индексные ключи, scalar/array content, legacy aliases,
   ConfigProvider.collapse, object/function semantic slots и item overrides,
   custom expandIcon Snippet, local prefixCls/rootClassName, refs и data/ARIA.

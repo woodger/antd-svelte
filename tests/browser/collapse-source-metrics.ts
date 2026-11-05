@@ -27,7 +27,7 @@ export function snapshotCollapseSource(prefix = 'ant-collapse') {
         classes: classes(node, true), id: node.getAttribute('id'),
         data: node.getAttribute('data-item'),
         style: style(node, ['background-color', 'padding-top']),
-        header: { classes: classes(trigger), style: slot(trigger)!.style },
+        header: { classes: [...new Set([...classes(trigger), ...classes(header)])].sort(), style: slot(trigger)!.style },
         title: slot(node.querySelector(`.${prefix}-title`)),
         body: slot(node.querySelector(`.${prefix}-body`)),
         panel: node.querySelector(`.${prefix}-body`) ? style(
