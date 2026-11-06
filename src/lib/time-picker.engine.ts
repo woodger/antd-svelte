@@ -31,7 +31,7 @@ function fillShow(config: Pick<DatePickerTimeConfig,
   };
 }
 
-function timeFormat(config: Pick<DatePickerTimeConfig,
+export function timeFormat(config: Pick<DatePickerTimeConfig,
   'showHour' | 'showMinute' | 'showSecond' | 'showMillisecond' | 'use12Hours'>) {
   const show = fillShow(config);
   const units = [

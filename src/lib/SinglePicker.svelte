@@ -13,6 +13,8 @@
   } from './date-picker.engine';
   import { datePickerEnUS } from './date-picker.locale';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -85,6 +87,7 @@
     ...attributes
   }: DatePickerProps & { time?: TimePickerProps; } = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('DatePicker');
   const field = useFormField();
   const form = useForm();
   const compact = useCompact();
@@ -209,11 +212,14 @@
     resetValue: resetTimeValue
   });
 
+  const popupThemeStyle = $derived(
+    [componentTheme.style, semantic?.styles.popup.root].filter(Boolean).join(';') || undefined
+  );
   const container = createPickerPopup(() => ({
     open: visible,
     reference: rootElement,
     getPopupContainer: getPopupContainer || config.getPopupContainer,
-    themeStyle: semantic?.styles.popup.root
+    themeStyle: popupThemeStyle
   }));
   $effect(() => {
     nativeElement = rootElement;
@@ -670,11 +676,14 @@
   {/if}
 {/snippet}
 
-<div bind:this={rootElement} role={time ? 'presentation' : 'group'} style={time
-    ? [semantic?.styles.root, style].filter(Boolean).join(';') : style}
+<div bind:this={rootElement} role={time ? 'presentation' : 'group'} style={
+    componentTheme.style || time
+      ? [componentTheme.style, time && semantic?.styles.root, style].filter(Boolean).join(';')
+      : style}
   dir={config.direction} onfocusout={blurWithin} onclick={time ? handleRootClick : undefined}
   class={[
       'ant-picker ant-picker-css-var',
+      componentTheme.className,
       `ant-picker-${actualVariant}`,
       blocked && 'ant-picker-disabled',
       visible && 'ant-picker-open',
@@ -767,13 +776,16 @@
 <NoCompactStyle>
   {#key container.target}
   {#if visible}
+    {@const initialPopupStyle = untrack(() => popupThemeStyle)}
     <div bind:this={popup} id={`ant-picker-${generatedId}`} popover="manual" role="dialog" aria-label={attributes['aria-label'] ?? (time ? placeholderText || actualLocale.timeSelect : actualLocale.placeholder)} hidden={!shown} onfocusout={blurWithin} class={[
         'ant-picker-dropdown ant-picker-css-var',
+        componentTheme.className,
         config.direction === 'rtl' && 'ant-picker-dropdown-rtl',
         `ant-picker-dropdown-placement-${popupPlacement === 'top' ? 'top' : 'bottom'}${actualPlacement.endsWith('Right') ? 'Right' : 'Left'}`,
         time ? semantic?.classes.popup.root : popupClassName,
         time && rootClassName
-      ]} style={semantic?.styles.popup.root} {@attach container.portal}>
+      ]} style={initialPopupStyle}
+      {@attach node => connectComponentTheme(node, popupThemeStyle)} {@attach container.portal}>
       {#if time}
         <div
           class={['ant-picker-panel-container', semantic?.classes.popup.container]}
@@ -788,10 +800,10 @@
             ? 'ant-picker-datetime-panel'
             : undefined}>
           <DatePickerCalendar {panel} selected={draft} direction={config.direction} {mode} locale={actualLocale} {restrictions} {now} onSelect={selectDate} onNavigate={navigate} onModeChange={changeMode} />
-          {#if showTime && mode === 'date'}<DatePickerTimePanel value={draft ?? clock.defaultOpenValue ?? panel} config={clock} format={timeFormat} {disabledTime} onSelect={selectTime} />{/if}
+          {#if showTime && mode === 'date'}<DatePickerTimePanel value={draft ?? clock.defaultOpenValue ?? panel} selectedValue={draft} config={clock} format={timeFormat} locale={actualLocale.locale} {disabledTime} onSelect={selectTime} />{/if}
         </div>
         {#if renderExtraFooter}<div class="ant-picker-footer-extra">{@render renderExtraFooter()}</div>{/if}
-        {#if mode === 'date'}<div class="ant-picker-footer">
+        {#if mode === 'date' && (confirm || (showTime ? showNow : showToday))}<div class="ant-picker-footer">
           {#if confirm || showTime}<ul class="ant-picker-ranges">
             {#if showNow}<li class="ant-picker-now"><button type="button" class="ant-picker-now-btn" disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
                 const next = validPickerTime(adapter.getNow(), clock, disabledTime);

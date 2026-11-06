@@ -4235,7 +4235,21 @@
         "tests/browser/fixtures/PickerContainerFixtures.svelte",
         "tests/browser/fixtures/ant-design-picker-container-reference.json",
         "tests/browser/picker-container.spec.ts",
-        "tests/package/picker-container.ssr.test.ts"
+        "tests/package/picker-container.ssr.test.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-picker-panel-tokens.engine.ts",
+        "src/lib/theme-overlay-tokens.engine.ts",
+        "src/lib/theme-picker-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-picker-tokens-reference.json",
+        "tests/browser/fixtures/PickerThemeControl.svelte",
+        "tests/browser/fixtures/PickerThemeCase.svelte",
+        "tests/browser/fixtures/PickerThemeFixtures.svelte",
+        "tests/browser/fixtures/picker-theme-presets.ts",
+        "tests/browser/fixtures/ant-design-picker-theme-reference.json",
+        "tests/browser/picker-theme-metrics.ts",
+        "tests/browser/picker-theme.spec.ts",
+        "tests/package/picker-theme.ssr.test.ts",
+        "src/lib/DatePickerTimePanel.svelte"
       ],
       "features": [
         {
@@ -4297,11 +4311,11 @@
         },
         {
           "id": "global-parity",
-          "title": "Глобальный DatePicker component config, prefix/tokens и полный popup motion/lifecycle",
+          "title": "Глобальный DatePicker component config, prefix и полный popup motion/lifecycle",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "262 CSS-правила и локальные theme aliases. Полный пользовательский component config и token engine не перенесены. Native conditional panel удаляется при закрытии; исходные retained popup lifecycle, полный rc-trigger и motion остаются пробелами."
+          "note": "262 CSS-правила; component tokens/aliases/algorithms перенесены отдельно. Полный пользовательский component config и произвольный prefix не перенесены. Native conditional panel удаляется при закрытии; исходные retained popup lifecycle, полный rc-trigger и motion остаются пробелами."
         },
         {
           "id": "confirmation-button",
@@ -4337,6 +4351,31 @@
             "tests/package/picker-container.ssr.test.ts"
           ],
           "note": "54 эталона официального UMD задают local → ConfigProvider fallback, undefined/nesting/theme reset, div.ant-picker trigger и defaultOpen с учётом нулевой/положительной арности getter. Исходные offset=4 с округлением координат вниз при scale=1, min-width selector и default bottomRight в RTL перенесены в общие single/range cores. Новый callback с прежним контейнером сохраняет panel/editor DOM, draft, state, focus/selection; смена самого DOM target пересоздаёт panel, как React portal. Поддержаны ShadowRoot со стилями потребителя, native refs/cleanup и SSR без вызова getter. Dayjs, точность/UTC, FormData и машины подтверждения сохранены; native conditional panel по-прежнему удаляется при закрытии, в отличие от retained popup rc-trigger."
+        },
+        {
+          "id": "component-theme",
+          "title": "Общая тема DatePicker для date/time single/range input, calendar и popup",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/DatePickerTimePanel.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/SinglePicker.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-picker-panel-tokens.engine.ts",
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-picker-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-picker-tokens-reference.json",
+            "tests/browser/fixtures/PickerThemeControl.svelte",
+            "tests/browser/fixtures/PickerThemeCase.svelte",
+            "tests/browser/fixtures/PickerThemeFixtures.svelte",
+            "tests/browser/fixtures/picker-theme-presets.ts",
+            "tests/browser/fixtures/ant-design-picker-theme-reference.json",
+            "tests/browser/picker-theme-metrics.ts",
+            "tests/browser/picker-theme.spec.ts",
+            "tests/package/picker-theme.ssr.test.ts"
+          ],
+          "note": "Исходные 45 component/internal defaults, aliases и algorithms; общий ключ components.DatePicker для DatePicker, RangePicker, TimePicker и TimeRangePicker. 15 UMD-тем задают CSS размеров/вариантов, focus, calendar/time/presets/footer и восьми theme scopes, включая RTL, local style, custom cssVar prefix, inheritance/reset и соседние provider. Тематические обновления сохраняют DOM, draft/caret/focus и Dayjs; изменение time cell height сохраняет scrollTop в пикселях, как Source. Локальные/semantic styles и независимый Button theme сохраняют приоритет; datetime header, null selection и отсутствие пустого footer сверены с UMD. Дополнительные picker modes, multiple, полный semantic/component config и retained popup lifecycle этой feature не заявляются."
         }
       ]
     },
@@ -6478,7 +6517,21 @@
         "tests/browser/fixtures/ant-design-picker-container-reference.json",
         "tests/browser/picker-container.spec.ts",
         "tests/package/picker-container.ssr.test.ts",
-        "tests/browser/fixtures/ant-design-time-column-double-click-observation.json"
+        "tests/browser/fixtures/ant-design-time-column-double-click-observation.json",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-picker-panel-tokens.engine.ts",
+        "src/lib/theme-overlay-tokens.engine.ts",
+        "src/lib/theme-picker-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-picker-tokens-reference.json",
+        "tests/browser/fixtures/PickerThemeControl.svelte",
+        "tests/browser/fixtures/PickerThemeCase.svelte",
+        "tests/browser/fixtures/PickerThemeFixtures.svelte",
+        "tests/browser/fixtures/picker-theme-presets.ts",
+        "tests/browser/fixtures/ant-design-picker-theme-reference.json",
+        "tests/browser/picker-theme-metrics.ts",
+        "tests/browser/picker-theme.spec.ts",
+        "tests/package/picker-theme.ssr.test.ts",
+        "src/lib/DatePickerTimePanel.svelte"
       ],
       "features": [
         {
@@ -6543,13 +6596,13 @@
         },
         {
           "id": "advanced-api",
-          "title": "Multiple, mask, generatePicker, полный trigger/token/locale API и diagnostics",
+          "title": "Multiple, mask, generatePicker, полный trigger/locale API и diagnostics",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "На этом этапе только один Dayjs; multiple=true не заявлен в типах. Произвольные prefix/tokens, полный каталог locales, React diagnostics и полный rc-trigger/motion API и retained popup lifecycle остаются следующими этапами. Styles — CSS strings, nodes/renderers — Svelte snippets. Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream."
+          "note": "На этом этапе только один Dayjs; multiple=true не заявлен в типах. Произвольный prefix, полный каталог locales, React diagnostics и полный rc-trigger/motion API и retained popup lifecycle остаются следующими этапами. Styles — CSS strings, nodes/renderers — Svelte snippets. Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream."
         },
         {
           "id": "confirmation-button",
@@ -6598,6 +6651,31 @@
             "tests/browser/fixtures/ant-design-time-column-double-click-observation.json"
           ],
           "note": "В закреплённом UMD реальный double click по hour 13 после выравнивания hour 10 выбирает 14 (delay=0) или 16 (delay=80ms): автопрокрутка смещает второй click. Native намеренно подтверждает первый выбранный пункт, не меняя draft вторым click; keyboard/programmatic clicks, onOk, отдельные range confirmations и UTC/precision сохранены. Raw source pointer trace оставлен для отдельного разбора."
+        },
+        {
+          "id": "component-theme",
+          "title": "Общая тема DatePicker для date/time single/range input, calendar и popup",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/DatePickerTimePanel.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/SinglePicker.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-picker-panel-tokens.engine.ts",
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-picker-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-picker-tokens-reference.json",
+            "tests/browser/fixtures/PickerThemeControl.svelte",
+            "tests/browser/fixtures/PickerThemeCase.svelte",
+            "tests/browser/fixtures/PickerThemeFixtures.svelte",
+            "tests/browser/fixtures/picker-theme-presets.ts",
+            "tests/browser/fixtures/ant-design-picker-theme-reference.json",
+            "tests/browser/picker-theme-metrics.ts",
+            "tests/browser/picker-theme.spec.ts",
+            "tests/package/picker-theme.ssr.test.ts"
+          ],
+          "note": "Исходные 45 component/internal defaults, aliases и algorithms; общий ключ components.DatePicker для DatePicker, RangePicker, TimePicker и TimeRangePicker. 15 UMD-тем задают CSS размеров/вариантов, focus, calendar/time/presets/footer и восьми theme scopes, включая RTL, local style, custom cssVar prefix, inheritance/reset и соседние provider. Тематические обновления сохраняют DOM, draft/caret/focus и Dayjs; изменение time cell height сохраняет scrollTop в пикселях, как Source. Локальные/semantic styles и независимый Button theme сохраняют приоритет; datetime header, null selection и отсутствие пустого footer сверены с UMD. Дополнительные picker modes, multiple, полный semantic/component config и retained popup lifecycle этой feature не заявляются."
         }
       ]
     },

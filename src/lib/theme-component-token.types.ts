@@ -176,6 +176,7 @@ export interface CollapseComponentToken {
   borderlessContentBg: string;
 }
 
+/** Общая тема DatePicker/RangePicker и обоих TimePicker: input, панели, presets и popup. */
 export interface DatePickerComponentToken {
   paddingInline: number;
   paddingInlineSM: number;

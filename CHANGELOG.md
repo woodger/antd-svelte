@@ -9,6 +9,12 @@
 
 ### Added
 
+- DatePicker, RangePicker, TimePicker и TimeRangePicker: общие component tokens
+  через `components.DatePicker`, aliases/algorithms и независимые темы popup.
+  Обновления сохраняют draft, фокус, выделение и исходную прокрутку колонок.
+  Восстановлены datetime header, пустое выделение и отсутствие пустого footer.
+  Добавлены 15 UMD-тем, сравнения focus/popup CSS и unit/SSR/browser-проверки.
+
 - Calendar: подключены шесть public component tokens, 21 внутренний picker panel
   default, aliases/algorithms и независимые темы шапки. Source min-width controls
   сохраняет intrinsic текст при малых размерах без смены public defaults Select.

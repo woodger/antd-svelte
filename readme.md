@@ -4563,6 +4563,20 @@ Native панель по-прежнему удаляется при закрыт
 popup rc-trigger. Проверки и 54 эталона официального UMD —
 [picker-container](./tests/browser/picker-container.spec.ts), `?fixture=picker-container`.
 
+Component tokens всех четырёх date/time single/range controls задаются через
+`ConfigProvider.theme.components.DatePicker`, как в Ant Design. Input, calendar,
+time columns, presets и popup используют общую тему; Button подтверждения
+сохраняет независимые `components.Button`. Поддержаны aliases, component algorithms,
+dark/compact, вложенные provider, `inherit:false` и собственный cssVar prefix.
+Локальные style и существующие semantic styles сохраняют приоритет.
+
+Обновление токенов сохраняет DOM поля и открытой панели, draft, фокус/выделение
+и значение Dayjs. При смене высоты time cells существующая прокрутка сохраняется
+в пикселях, как в исходнике; новое открытие выравнивает выбранное время заново.
+Datetime header показывает выбранное время в panel format; пустое значение
+не подсвечивает время запасной даты. Проверки и 15 UMD-тем —
+[picker-theme](./tests/browser/picker-theme.spec.ts), `?fixture=picker-theme`.
+
 Остальные picker/multiple modes, generatePicker factory, single presets,
 cellRender/panelRender, mask format, hover preview, полный semantic/component config
 и полный rc-trigger/motion API ещё не перенесены. Реестр перечисляет эти пробелы
@@ -4650,8 +4664,10 @@ native popover lifecycle библиотеки. Темы, compact, RTL, status и
 [SSR](./src/lib/time-picker.ssr.test.ts),
 [public package](./tests/package/time-picker.ssr.test.ts),
 [browser](./tests/browser/time-picker.spec.ts) и `?fixture=time-picker`.
-Multiple, mask format, generatePicker, произвольный prefix/
-token engine, полный каталог locales, React diagnostics и полный rc-trigger/
+Общие component tokens настраиваются через `components.DatePicker`; подробности
+и правила обновления открытой панели описаны в разделе DatePicker.
+Multiple, mask format, generatePicker, произвольный prefix,
+полный каталог locales, React diagnostics и полный rc-trigger/
 motion API пока не перенесены. Контейнеры popup описаны в разделе DatePicker.
 Диапазон экспортируется как TimeRangePicker.
 Переполненный 32-bit step вызывает RangeError вместо бесконечного цикла upstream.

@@ -26,6 +26,8 @@
   import { dayjsGenerateConfig as adapter } from './date-picker-dayjs.engine';
   import { datePickerEnUS } from './date-picker.locale';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -108,6 +110,7 @@
     ...attributes
   }: RangePickerProps & { time?: TimeRangePickerProps; } = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('DatePicker');
   const field = useFormField();
   const form = useForm();
   const compact = useCompact();
@@ -267,11 +270,14 @@
   let timeEndText = $derived(time ? formatPicker(calendar[1], lang.locale, formats) : undefined);
   let timePanelWasOpen = false;
   let previousTimeActive = -1;
+  const popupThemeStyle = $derived(
+    [componentTheme.style, semantic?.styles.popup.root].filter(Boolean).join(';') || undefined
+  );
   const container = createPickerPopup(() => ({
     open: visible,
     reference: rootElement,
     getPopupContainer: getPopupContainer || config.getPopupContainer,
-    themeStyle: semantic?.styles.popup.root
+    themeStyle: popupThemeStyle
   }));
   $effect(() => {
     nativeElement = rootElement;
@@ -979,13 +985,15 @@
 <div
   bind:this={rootElement}
   role={time ? 'presentation' : 'group'}
-  style={time ? [semantic?.styles.root, style].filter(Boolean).join(';')
-    : config.rangePicker?.style ? [config.rangePicker.style, style].filter(Boolean).join(';') : style}
+  style={componentTheme.style || time || config.rangePicker?.style
+    ? [componentTheme.style, time ? semantic?.styles.root : config.rangePicker?.style,
+      style].filter(Boolean).join(';') : style}
   dir={config.direction}
   onfocusout={blurWithin}
   onclick={time ? handleTimeRootClick : undefined}
   class={[
       'ant-picker ant-picker-range ant-picker-css-var',
+      componentTheme.className,
       `ant-picker-${resolvedVariant}`,
       blocked.every(Boolean) && 'ant-picker-disabled',
       visible && 'ant-picker-open',
@@ -1093,9 +1101,11 @@
 <NoCompactStyle>
   {#key container.target}
   {#if visible}
+    {@const initialPopupStyle = untrack(() => popupThemeStyle)}
     <div bind:this={popup} id={`ant-range-picker-${generatedId}`} popover="manual" role="dialog" tabindex="-1" aria-label={attributes['aria-label'] ?? (time ? lang.timeSelect : lang.placeholder)} hidden={!shown} onfocusout={blurWithin}
       class={[
           'ant-picker-dropdown ant-picker-css-var',
+          componentTheme.className,
           time && 'ant-picker-dropdown-range',
           config.direction === 'rtl' && 'ant-picker-dropdown-rtl',
           `ant-picker-dropdown-placement-${verticalPlacement}${actualPlacement.endsWith('Right')
@@ -1104,7 +1114,8 @@
           time ? semantic?.classes.popup.root : popupClassName,
           time && rootClassName
         ]}
-      style={semantic?.styles.popup.root}
+      style={initialPopupStyle}
+      {@attach node => connectComponentTheme(node, popupThemeStyle)}
       {@attach container.portal}
       onkeydown={event => {
           if (event.key === 'Escape') {
@@ -1164,7 +1175,7 @@
                   mode = next;
                   onPanelChange?.([...calendar], [next, next]);
                 }} />
-            {#if showTime && mode === 'date'}<DatePickerTimePanel value={calendar[active] ?? clock.defaultOpenValue ?? view} config={clock} format={timeFormat} disabledTime={timeRestriction} onSelect={selectTime} />{/if}
+            {#if showTime && mode === 'date'}<DatePickerTimePanel value={calendar[active] ?? clock.defaultOpenValue ?? view} selectedValue={calendar[active]} config={clock} format={timeFormat} locale={lang.locale} disabledTime={timeRestriction} onSelect={selectTime} />{/if}
           </div></div>
           {#if !showTime && mode === 'date'}<div class="ant-picker-panel" tabindex="-1"><DatePickerCalendar panel={view.add(1, 'month')} selected={calendar[active]} range={displayRange} onHover={date => {
               hover = date;

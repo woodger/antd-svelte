@@ -1,6 +1,6 @@
 import type { AliasToken } from './theme-token.types';
 
-function prepareArrowTokens(token: AliasToken) {
+export function prepareArrowTokens(token: AliasToken) {
   const { sizePopupArrow, borderRadiusXS, borderRadiusOuter } = token;
   const unitWidth = sizePopupArrow / 2;
   const ax = 0;

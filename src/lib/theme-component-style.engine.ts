@@ -15,6 +15,7 @@ import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.eng
 import { prepareTabsTokens } from './theme-tabs-tokens.engine';
 import { prepareSliderTokens } from './theme-slider-tokens.engine';
 import {
+  prepareArrowTokens,
   prepareTooltipTokens,
   preparePopoverTokens,
   preparePopconfirmTokens,
@@ -34,9 +35,17 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar';
+  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker';
 
 const factories = {
+  DatePicker: (token: GlobalToken) => ({
+    ...prepareInputTokens(token),
+    ...preparePickerPanelTokens(token),
+    ...prepareArrowTokens(token),
+    presetsWidth: 120,
+    presetsMaxWidth: 200,
+    zIndexPopup: token.zIndexPopupBase + 50
+  }),
   Calendar: (token: GlobalToken) => ({
     fullBg: token.colorBgContainer,
     fullPanelBg: token.colorBgContainer,
@@ -337,6 +346,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  DatePicker: [],
   Calendar: [],
   Transfer: [],
   Tree: [],

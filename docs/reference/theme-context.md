@@ -165,6 +165,16 @@ Footer-кнопки DatePicker/RangePicker и TimePicker/TimeRangePicker исп�
 Button. Они получают его component tokens и semantic config при фиксированном
 source размере small, независимо от Compact и размера picker.
 
+Date/time single/range controls используют общий `components.DatePicker`: 45
+исходных component/internal defaults для input, calendar/time panels, presets,
+стрелки и z-index. Root и popup получают собственные aliases/component algorithms;
+темы соседних provider и внутреннего Button независимы. Локальные style и
+существующие semantic styles применяются после переменных темы.
+Обновление открытой панели не заменяет поле/колонки, не сбрасывает draft,
+caret/focus и не меняет Dayjs. При изменении time cell height scrollTop сохраняется
+в пикселях, как в исходнике. Геометрией popup продолжает управлять общий portal;
+тема обновляет только принадлежащие ей CSS declarations.
+
 ## Токены Select
 
 Select рассчитывает высоты tags через min(controlHeight - 2 * paddingXXS,
