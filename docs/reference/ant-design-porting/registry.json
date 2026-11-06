@@ -12024,7 +12024,21 @@
         "tests/browser/tour.spec.ts",
         "tests/browser/fixtures/TourFixtures.svelte",
         "src/lib/popup-portal.dom.ts",
-        "src/lib/popup-position.engine.ts"
+        "src/lib/popup-position.engine.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "src/lib/theme-overlay-tokens.engine.ts",
+        "src/lib/theme-tour-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-tour-tokens-reference.json",
+        "tests/browser/fixtures/TourThemeControl.svelte",
+        "tests/browser/fixtures/TourThemeCase.svelte",
+        "tests/browser/fixtures/TourThemeFixtures.svelte",
+        "tests/browser/fixtures/tour-theme-presets.ts",
+        "tests/browser/fixtures/ant-design-tour-theme-reference.json",
+        "tests/browser/fixtures/ant-design-tour-z-index-observation.json",
+        "tests/browser/tour-theme-metrics.ts",
+        "tests/browser/tour-theme.spec.ts",
+        "tests/package/tour-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -12094,11 +12108,48 @@
         },
         {
           "id": "advanced-source-api",
-          "title": "Полные theme tokens, произвольный prefix CSS и общий zIndex context",
+          "title": "Произвольный prefix CSS и общий zIndex context",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Генерация CSS для произвольного prefixCls, полный token engine и единый исходный zIndex context для всех popup families ещё отсутствуют. Явный zIndex и базовый default 1001 поддержаны; React dev diagnostics/private PurePanel не воспроизводятся. V1-ready не означает полный React API."
+          "note": "Генерация CSS для произвольного prefixCls и единый исходный zIndex context для всех popup families ещё отсутствуют. Девять component CSS tokens/aliases/algorithms перенесены отдельно; runtime zIndex и default 1001 сохраняют исходный приоритет. React dev diagnostics/private PurePanel не воспроизводятся. V1-ready не означает полный React API."
+        },
+        {
+          "id": "component-theme",
+          "title": "Девять CSS tokens, alias overrides и algorithms Tour с независимым Button",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tour.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-overlay-tokens.engine.ts",
+            "src/lib/theme-tour-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-tour-tokens-reference.json",
+            "tests/browser/fixtures/TourThemeControl.svelte",
+            "tests/browser/fixtures/TourThemeCase.svelte",
+            "tests/browser/fixtures/TourThemeFixtures.svelte",
+            "tests/browser/fixtures/tour-theme-presets.ts",
+            "tests/browser/fixtures/ant-design-tour-theme-reference.json",
+            "tests/browser/fixtures/ant-design-tour-z-index-observation.json",
+            "tests/browser/tour-theme-metrics.ts",
+            "tests/browser/tour-theme.spec.ts",
+            "tests/package/tour-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Default/primary panels, close, indicators и arrows; девять defaults подготовлены по Source, включая первичные colors и пять arrow tokens. 15 UMD-тем покрывают восемь scopes, target bottomLeft/right, real hover, aliases/algorithms, RTL, custom CSS-variable prefix, styles и Button theme. Root style по-прежнему относится к mask, step style — к popup; theme updates сохраняют шаг, DOM/editor, focus/caret, callbacks и cleanup. SSR не создаёт portal layers/ресурсы и не вызывает DOM getters. Runtime zIndex observation выделен отдельно."
+        },
+        {
+          "id": "theme-z-index-runtime",
+          "title": "Исходный приоритет runtime zIndex над CSS token zIndexPopup",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tour.svelte",
+            "tests/browser/fixtures/ant-design-tour-z-index-observation.json",
+            "tests/browser/tour-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "В обычном Tour 6.6.8 CSS token zIndexPopup=1750 и global zIndexPopupBase=2000 не меняют runtime layer 1001: rc-tour использует documented default prop zIndex=1001. Явный zIndex=1900 работает и имеет приоритет. Native сохраняет это operational behavior; Девять CSS declarations и их conformance не означают применения token zIndexPopup к обычному runtime слою. Raw measurements оставлены для отдельного обсуждения; это ограничение эталона, не объявленное автоматически дефектом."
         }
       ]
     },

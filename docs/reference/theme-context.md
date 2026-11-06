@@ -846,6 +846,20 @@ Bright-state пресетов использует глобальный colorBgE
 цвет и состояние пресетов. 15 UMD-тем покрывают размеры, single/gradient,
 HEX/RGB/HSB, RTL, style priorities, prefix, algorithms и восемь theme scopes.
 
+## Тема Tour
+
+Tour подготавливает девять CSS defaults по 6.6.8: close size, primary button/indicator
+colors, zIndexPopup и пять arrow tokens. Поддержаны aliases, component algorithms,
+dark/compact, cssVar prefix и вложенные темы; Footer Button сохраняет свою тему.
+Root/step styles сохраняют исходные слои: общий root style относится к mask,
+step style — к popup. Обновление темы сохраняет шаг, portal DOM и input/focus/caret.
+
+У обычного Tour runtime prop zIndex с default 1001 перекрывает CSS zIndexPopup,
+включая component overrides и глобальный zIndexPopupBase. Это поведение закреплённого
+upstream сохранено; raw measurements находятся в
+[наблюдении z-index](../../tests/browser/fixtures/ant-design-tour-z-index-observation.json).
+CSS default token и фактический runtime layer учитываются отдельно.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { getTourClosable, getTourSemantics, type TourHighlight } from './tour.engine';
   import { connectTourEscape } from './tour-portal.dom';
   import {
@@ -18,6 +19,7 @@
 
   let props: TourProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Tour');
   let steps = $derived((props.steps ?? []).map(step => ({
     ...step,
     class: [
@@ -41,6 +43,7 @@
   let rootClass = $derived([
     config.direction === 'rtl' && `${prefixCls}-rtl`,
     'ant-tour-css-var',
+    componentTheme.className,
     props.rootClassName,
     config.tour?.class,
     semantics.classes.root,
@@ -245,7 +248,7 @@
   <div bind:this={host} style="display:contents">
     <TourPortal getPopupContainer={props.getPopupContainer}>
       <div class={[`${prefixCls}-mask`, ...rootClass, semantics.classes.mask]}
-        style={`position:${props.getPopupContainer === false ? 'absolute' : 'fixed'};left:0;right:0;top:0;bottom:0;z-index:${zIndex};pointer-events:${highlight && !props.disabledInteraction ? 'none' : 'auto'};${maskStyle ?? ''};${semantics.styles.mask ?? ''}`}>
+        style={`${componentTheme.style ?? ''};position:${props.getPopupContainer === false ? 'absolute' : 'fixed'};left:0;right:0;top:0;bottom:0;z-index:${zIndex};pointer-events:${highlight && !props.disabledInteraction ? 'none' : 'auto'};${maskStyle ?? ''};${semantics.styles.mask ?? ''}`}>
         {#if mask}
           <svg style="width:100%;height:100%" aria-hidden="true">
             <defs><mask id={maskId}>
@@ -277,7 +280,7 @@
     <TourPortal getPopupContainer={props.getPopupContainer} reference={placeholder} popup onReady={handlePopupReady}>
       <div bind:this={popup} class={[prefixCls, position?.placement && `${prefixCls}-placement-${position.placement}`,
         ...rootClass, step.class]}
-        style={`${getTourOffsetStyle(position)};z-index:${zIndex};${step.style ?? ''}`}>
+        style={`${componentTheme.style ?? ''};${getTourOffsetStyle(position)};z-index:${zIndex};${step.style ?? ''}`}>
         {#if arrow && position?.align.points}
           <div class={`${prefixCls}-arrow`} style={getTourArrowStyle(position)}></div>
         {/if}

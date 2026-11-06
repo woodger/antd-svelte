@@ -5414,8 +5414,21 @@ Physical Left/Right меняют шаги, кроме событий из editab
 вызывает DOM getters/snippets. При закрытии/unmount удаляются DOM, locks, listeners
 и observers; отложенное выравнивание не публикует callbacks после уничтожения.
 
-Полный token engine, CSS для произвольного prefixCls и общий zIndex context всех
-popup families остаются вне этого этапа. Явный zIndex поддержан; default — 1001.
+`ConfigProvider.theme.components.Tour` подготавливает девять исходных CSS tokens,
+alias overrides и algorithms для default/primary panels, close, indicators и arrows.
+Button сохраняет независимую тему; local step/semantic styles имеют исходный приоритет.
+CSS Tour подключён перед Button, как в исходном runtime: при наведении на Next
+в primary panel Button задаёт цвет текста и рамки, Tour — фон.
+Обновления темы сохраняют шаг, portal DOM, focus/caret и пользовательский input.
+Проверки и 15 UMD-тем — [tour-theme](./tests/browser/tour-theme.spec.ts), `?fixture=tour-theme`.
+
+Runtime `zIndex` имеет приоритет над CSS token `zIndexPopup`: обычное окно без prop
+сохраняет слой 1001, даже при другом token/base. Это ограничение Ant Design 6.6.8,
+подтверждённое [raw observation](./tests/browser/fixtures/ant-design-tour-z-index-observation.json).
+Для изменения фактического слоя используйте prop `zIndex`; его default сохранён.
+
+CSS для произвольного prefixCls и общий zIndex context всех
+popup families остаются вне этого этапа.
 React private PurePanel и development diagnostics не экспортируются.
 
 Проверки: [engine](./src/lib/tour.engine.test.ts),

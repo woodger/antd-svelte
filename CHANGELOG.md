@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tour: девять исходных CSS defaults, alias overrides и algorithms для panel,
+  close и primary controls, независимая тема Button. Обновления сохраняют шаг,
+  portal/editor DOM и фокус; добавлены 15 UMD-тем и unit/SSR/browser-проверки.
+  Исходный приоритет runtime zIndex=1001 над CSS token записан отдельно.
+
 - ColorPicker: alias overrides и algorithms, независимые темы Popover/Collapse
   и внутренних полей. Theme updates сохраняют popup position, HEX draft/focus
   и пресеты; восстановлены source body reset, flex-размеры полей и bright-state

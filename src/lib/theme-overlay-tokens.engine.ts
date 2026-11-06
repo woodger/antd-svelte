@@ -23,7 +23,7 @@ export function prepareArrowTokens(token: AliasToken) {
   };
 }
 
-function prepareArrowOffsets(contentRadius: number) {
+export function prepareArrowOffsets(contentRadius: number) {
   return {
     arrowOffsetHorizontal: contentRadius > 12 ? contentRadius + 2 : 12,
     arrowOffsetVertical: 8

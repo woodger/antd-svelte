@@ -15,6 +15,7 @@ import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.eng
 import { prepareTabsTokens } from './theme-tabs-tokens.engine';
 import { prepareSliderTokens } from './theme-slider-tokens.engine';
 import {
+  prepareArrowOffsets,
   prepareArrowTokens,
   prepareTooltipTokens,
   preparePopoverTokens,
@@ -35,9 +36,18 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker';
+  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker' | 'Tour';
 
 const factories = {
+  Tour: (token: GlobalToken) => ({
+    zIndexPopup: token.zIndexPopupBase + 70,
+    closeBtnSize: token.fontSize * token.lineHeight,
+    primaryPrevBtnBg: new FastColor(token.colorTextLightSolid).setA(0.15).toRgbString(),
+    primaryNextBtnHoverBg: new FastColor(token.colorBgTextHover)
+      .onBackground(token.colorWhite).toRgbString(),
+    ...prepareArrowOffsets(token.borderRadiusLG),
+    ...prepareArrowTokens(token)
+  }),
   ColorPicker: () => ({}),
   DatePicker: (token: GlobalToken) => ({
     ...prepareInputTokens(token),
@@ -347,6 +357,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Tour: [],
   ColorPicker: [],
   DatePicker: [],
   Calendar: [],
