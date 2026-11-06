@@ -5427,12 +5427,19 @@ ConfigProvider.typography задаёт class/style и semantic root/actions/acti
 действий; Text имеет приоритет при совместном использовании. Сохранены dark,
 compact, RTL, native focus и исходные heading margins.
 
+`theme.components.Typography` применяет `titleMarginTop`/`titleMarginBottom`,
+alias overrides и algorithms к обычному тексту и редактору. Global tokens,
+вложенные/reset/sibling scopes и отдельный CSS-variable prefix следуют source;
+semantic и локальный style сохраняют приоритет. Смена темы сохраняет DOM,
+draft/selection/focus редактора и ожидающее async-копирование. Без source theme
+сохраняются прежние CSS defaults.
+
 Tooltip использует общий native popover внутри корня вместо React body portal.
 Доступны общие 12 placement, container getters, color, локальные popup prefixCls и
 openClassName, semantic/legacy styles. Callbacks получают разрешённые trigger/delays
 и входной open владельца. Изменение config сохраняет popup DOM, ввод, выделение
-и фокус. Полный Typography token engine и остальные delegated Tooltip props,
-включая UniqueProvider/motion и полную геометрию CSS-transform/scroll-container,
+и фокус. Остальные delegated Tooltip props, включая UniqueProvider/motion
+и полную геометрию CSS-transform/scroll-container,
 ещё требуют переноса. Граница fresh для opaque Snippet описана в Tooltip.
 Vendor CSS рассчитан на `ant-typography`, произвольный prefix
 не генерирует новый CSS.
@@ -5441,6 +5448,10 @@ Vendor CSS рассчитан на `ant-typography`, произвольный pr
 [copy lifecycle](./src/lib/typography-copy.model.test.ts),
 [public package SSR](./tests/package/typography.ssr.test.ts),
 [browser](./tests/browser/typography.spec.ts), `?fixture=typography`.
+Темы сверяются с [официальным UMD](./tests/browser/fixtures/ant-design-typography-theme-reference.json)
+в [unit](./src/lib/theme-typography-tokens-reference.test.ts),
+[SSR](./tests/package/typography-theme.ssr.test.ts) и
+[браузере](./tests/browser/typography-theme.spec.ts), `?fixture=typography-theme`.
 
 Ширина actions сверяется с
 [DOM/CSS-снимком Ant Design 6.6.8](./tests/browser/fixtures/ant-design-typography-actions-reference.json)

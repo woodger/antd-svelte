@@ -614,11 +614,27 @@
         },
         {
           "id": "advanced-source-api",
-          "title": "Полные theme tokens, произвольный prefix CSS и расширенные Tooltip props",
+          "title": "Произвольный prefix CSS и расширенные Tooltip props",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Typography CSS для собственного prefixCls и полное применение theme tokens остаются gaps. Вложенный Tooltip поддерживает локальные prefixCls/openClassName, color, semantic/legacy styles, ConfigProvider trigger/delays и click/contextMenu; unique/fresh/motion, полный align и остальные delegated props ещё требуют переноса. React dev warnings не воспроизводятся. V1-ready не означает полный React API."
+          "note": "Typography CSS для собственного prefixCls остаётся gap. Вложенный Tooltip поддерживает локальные prefixCls/openClassName, color, semantic/legacy styles, ConfigProvider trigger/delays и click/contextMenu; unique/fresh/motion, полный align и остальные delegated props ещё требуют переноса. React dev warnings не воспроизводятся. V1-ready не означает полный React API."
+        },
+        {
+          "id": "component-theme",
+          "title": "Heading margins, alias overrides и algorithms для текста и редактора",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TypographyElement.svelte",
+            "src/lib/TypographyEditable.svelte",
+            "src/lib/theme-typography-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-typography-tokens-reference.json",
+            "tests/package/typography-theme.ssr.test.ts",
+            "tests/browser/typography-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-typography-theme-reference.json"
+          ],
+          "note": "Два source tokens titleMarginTop/titleMarginBottom применяются к обычному root и отдельному editor root; alias overrides, global/component algorithms и custom cssVar prefix используют общий theme bridge. 15 официальных UMD-тем / 120 наборов CSS-измерений покрывают text/code, h1/h3/h5, paragraph/link/secondary, article с raw heading, CSS ellipsis, copy и textarea двух редакторов. Проверены dark/compact, zero/undefined, CSS lengths, config/semantic/local style priorities, local CSS variables, RTL и independent nested/reset/sibling scopes. Theme update сохраняет DOM, draft/selection/focus редактора и ожидающий copy Promise/callback; inherit reset, legacy defaults и unmount не заменяют соседние controls. SSR не создаёт DOM/timers. Прежние native copy/edit/ellipsis и границы Tooltip/prefix API сохраняются."
         },
         {
           "id": "popup-container",

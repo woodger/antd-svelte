@@ -3,6 +3,7 @@
   import type { Snippet } from 'svelte';
   import { provideFormField, useFormField } from './form-context';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { typographyEditKey, typographyEditValue } from './typography.engine';
   import type { TypographyEditConfig, TypographySlots } from './typography.types';
   import TextArea from './TextArea.svelte';
@@ -45,6 +46,7 @@
 
   const field = useFormField();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Typography');
   provideFormField(field ? {
     get status() { return field.status; },
     get disabled() { return field.disabled; },
@@ -133,10 +135,11 @@
   }
 </script>
 
-<div class={[prefixCls, `${prefixCls}-edit-content`, direction === 'rtl' && `${prefixCls}-rtl`,
+<div class={[prefixCls, componentTheme.className,
+  `${prefixCls}-edit-content`, direction === 'rtl' && `${prefixCls}-rtl`,
   `${prefixCls}-${component}`, className, classNames.root, 'ant-typography-css-var',
   config.theme.compact && 'ant-typography-compact']}
-  style={[styles.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, styles.root, style].filter(Boolean).join(';')}>
   <TextArea value={current} onChange={event => { current = typographyEditValue(event.target.value); }}
     onKeyDown={handleKeyDown} onkeyup={handleKeyUp} onBlur={handleBlur}
     onCompositionStart={() => { composing = true; }} onCompositionEnd={() => { composing = false; }}

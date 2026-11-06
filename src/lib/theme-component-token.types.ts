@@ -631,8 +631,11 @@ export interface TreeSelectComponentToken {
   nodeSelectedColor: string;
 }
 
+/** Отступы заголовков Typography; font/color aliases настраиваются общим theme API. */
 export interface TypographyComponentToken {
+  /** Отступ заголовка после предыдущего элемента; по умолчанию 1.2em. */
   titleMarginTop: number | string;
+  /** Нижний отступ заголовка; по умолчанию 0.5em. */
   titleMarginBottom: number | string;
 }
 

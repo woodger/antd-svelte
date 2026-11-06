@@ -9,6 +9,11 @@
 
 ### Added
 
+- Typography: компонентные heading margins, alias overrides и algorithms
+  для текста и редактора. Сохранены style priorities, draft/selection/focus
+  и ожидающее async-копирование. Добавлены 15 UMD-тем / 120 наборов измерений
+  текста, заголовков, ссылок и textarea, unit/SSR/browser-проверки.
+
 - Form/FormItem: подключены 11 component tokens, alias overrides и algorithms.
   LabelHeight задаёт vertical height по исходному правилу; сохранены native model,
   validation/submit/reset, labels, фокус и CSS scopes внутренних Row/Col.

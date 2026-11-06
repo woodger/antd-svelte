@@ -32,9 +32,10 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
-  | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form';
+  | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography';
 
 const factories = {
+  Typography: () => ({ titleMarginTop: '1.2em', titleMarginBottom: '0.5em' }),
   Form: (token: GlobalToken & Partial<FormComponentToken>) => ({
     labelRequiredMarkColor: token.colorError,
     labelColor: token.colorTextHeading,
@@ -293,6 +294,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Typography: [],
   Form: [],
   FloatButton: [],
   Affix: [],
