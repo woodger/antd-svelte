@@ -9,6 +9,11 @@
 
 ### Added
 
+- Form/FormItem: подключены 11 component tokens, alias overrides и algorithms.
+  LabelHeight задаёт vertical height по исходному правилу; сохранены native model,
+  validation/submit/reset, labels, фокус и CSS scopes внутренних Row/Col.
+  Добавлены 17 UMD-тем / 170 наборов CSS-измерений и unit/SSR/browser-проверки.
+
 - FloatButton/Group/BackTop: компонентная тема с alias overrides и algorithms,
   наследованием и custom cssVar prefix. Сохранены Button tokens, приоритеты
   config/semantic/local styles, native refs, фокус и формы. Добавлены 15 UMD-тем

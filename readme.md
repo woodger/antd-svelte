@@ -9073,6 +9073,17 @@ FormItem предоставляет label, status, required, description и об
 `setFieldsValue`. Имя FormItem должно присутствовать в `initialValues`.
 Состояние `values` и ошибки предназначены для чтения.
 
+`theme.components.Form` настраивает Form и каждый FormItem: цвет и размер подписи,
+required mark, высоту, отступы colon и полей, vertical padding/margin.
+Поддержаны aliases/algorithms, custom cssVar prefix и вложенные темы. LabelHeight
+также задаёт vertical height, пока не передан отдельный verticalLabelHeight.
+Внутренний Row сохраняет общий alias scope исходных Row/Col, а собственные Form
+tokens наследуются. Локальный style относится к нативному form; значения,
+validation, submit/reset, фокус и native attributes сохраняются при смене темы.
+Сверка с Ant Design — [form-theme](./tests/browser/form-theme.spec.ts),
+`?fixture=form-theme`. Реальные layouts остаются vertical/horizontal; декларация
+inlineItemMarginBottom переносится без добавления inline layout.
+
 Поддерживаются плоские поля со значениями string, number, boolean, null,
 undefined, immutable Dayjs и массивами string/number/boolean. Правила включают required, min/max, pattern и синхронный либо
 асинхронный `validator(value, values)`. Для строк min/max считают Unicode

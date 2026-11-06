@@ -4356,7 +4356,17 @@
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/form.spec.ts"
+        "tests/browser/form.spec.ts",
+        "src/lib/theme-form-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-form-tokens-reference.json",
+        "tests/browser/form-theme-metrics.ts",
+        "tests/browser/fixtures/form-theme-presets.ts",
+        "tests/browser/fixtures/FormThemeControl.svelte",
+        "tests/browser/fixtures/FormThemeCase.svelte",
+        "tests/browser/fixtures/FormThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-theme-reference.json",
+        "tests/browser/form-theme.spec.ts",
+        "tests/package/form-theme.ssr.test.ts"
       ],
       "features": [
         {
@@ -4386,6 +4396,25 @@
             "tests/browser/range-picker.spec.ts"
           ],
           "note": "DatePicker и RangePicker хранят объекты напрямую; required/null, submit и reset сохраняют класс/исходные даты, tuple копируется при snapshot. Остальной подробный аудит Form и generic object store ещё не завершён."
+        },
+        {
+          "id": "component-theme",
+          "title": "Form/FormItem component tokens, alias scopes и algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-form-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-form-tokens-reference.json",
+            "tests/browser/form-theme-metrics.ts",
+            "tests/browser/fixtures/form-theme-presets.ts",
+            "tests/browser/fixtures/FormThemeControl.svelte",
+            "tests/browser/fixtures/FormThemeCase.svelte",
+            "tests/browser/fixtures/FormThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-theme-reference.json",
+            "tests/browser/form-theme.spec.ts",
+            "tests/package/form-theme.ssr.test.ts"
+          ],
+          "note": "Все 11 исходных declarations, включая internal verticalLabelHeight, подтверждены UMD; labelHeight override участвует в vertical default. Сверены 17 тем / 170 CSS-наборов: labels/required/colon/control/extra, horizontal/vertical/standalone, zero/undefined/CSS lengths, custom prefix и nested/reset/sibling scopes. Внутренний Row сбрасывает generic aliases как исходные Row/Col, сохраняя Form variables. Source direction-only оставляет физический LTR у Form/Item: raw observation сохранено в артефакте; сравнение использует явный DOM dir, соответствующий прежнему native ConfigProvider. Reactive updates сохраняют native store, values/errors/validation, labels/ARIA, DOM/focus/selection, FormData и submit/reset. Inline layout не добавлен; inlineItemMarginBottom подтверждён как declaration. Общий аудит Form v1 остаётся незавершённым."
         }
       ]
     },

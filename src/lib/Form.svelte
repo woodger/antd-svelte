@@ -1,6 +1,7 @@
 <script lang="ts" generics="Values extends FormValues">
   import { onDestroy, tick } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { provideForm } from './form-context';
   import type { FormProps } from './form.types';
   import type { FieldName, FormValues } from './validation.engine';
@@ -14,10 +15,12 @@
     onFinishFailed,
     onError,
     class: className = '',
+    style,
     ...attributes
   }: FormProps<Values> = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Form');
   let active = true;
 
   onDestroy(() => {
@@ -93,7 +96,10 @@
 <form
   {...attributes}
   novalidate
-  class={`ant-form ant-form-css-var ant-form-${layout} ${className}`}
+  class={[`ant-form ant-form-css-var ant-form-${layout} ${className}`,
+    componentTheme.className].filter(Boolean).join(' ')}
+  style={componentTheme.style
+    ? [componentTheme.style, style].filter(Boolean).join(';') : style}
   aria-busy={form.isSubmitting || undefined}
   onsubmit={handleSubmit}
   onreset={handleReset}

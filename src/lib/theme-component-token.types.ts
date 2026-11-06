@@ -266,11 +266,13 @@ export interface FlexComponentToken {
 
 export type FloatButtonComponentToken = object;
 
+/** Токены оформления Form и FormItem; defaults рассчитываются из alias tokens. */
 export interface FormComponentToken {
   labelRequiredMarkColor: string;
   labelColor: string;
   labelFontSize: number;
   labelHeight: number | string;
+  /** @internal Явный labelHeight override или auto, если override не задан. */
   verticalLabelHeight: number | string;
   labelColonMarginInlineStart: number;
   labelColonMarginInlineEnd: number;

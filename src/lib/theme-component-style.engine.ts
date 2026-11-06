@@ -23,7 +23,7 @@ import { serializeThemeVariables, tokenToCSSVariable, unitlessTokens }
   from './theme-css-variables.engine';
 import { FastColor } from './fast-color.engine';
 import type {
-  CardComponentToken, GlobalToken, SplitterComponentToken
+  CardComponentToken, FormComponentToken, GlobalToken, SplitterComponentToken
 } from './theme-component-token.types';
 
 export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
@@ -32,9 +32,22 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
-  | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton';
+  | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form';
 
 const factories = {
+  Form: (token: GlobalToken & Partial<FormComponentToken>) => ({
+    labelRequiredMarkColor: token.colorError,
+    labelColor: token.colorTextHeading,
+    labelFontSize: token.fontSize,
+    labelHeight: token.controlHeight,
+    verticalLabelHeight: token.labelHeight ?? 'auto',
+    labelColonMarginInlineStart: token.marginXXS / 2,
+    labelColonMarginInlineEnd: token.marginXS,
+    itemMarginBottom: token.marginLG,
+    verticalLabelPadding: `0 0 ${token.paddingXS}px`,
+    verticalLabelMargin: 0,
+    inlineItemMarginBottom: 0
+  }),
   FloatButton: () => ({}),
   Affix: (token: GlobalToken) => ({ zIndexPopup: token.zIndexBase + 10 }),
   BorderBeam: () => ({}),
@@ -280,6 +293,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Form: [],
   FloatButton: [],
   Affix: [],
   BorderBeam: [],

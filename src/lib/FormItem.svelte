@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import { provideFormField, useForm } from './form-context';
+  import { useComponentTheme } from './theme-component.svelte';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
@@ -25,6 +26,7 @@
   }: FormItemProps = $props();
 
   const form = useForm();
+  const componentTheme = useComponentTheme('Form');
   const generatedId = $props.id();
   let id = $derived(htmlFor ?? `ant-field-${generatedId}`);
   let errors = $derived(form?.getFieldError(name) ?? []);
@@ -81,11 +83,13 @@
 
 <div class={[
     'ant-form-item',
+    componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
     `ant-form-item-${form?.layout ?? 'vertical'}`,
     errors.length && 'ant-form-item-has-error',
     className
-  ]}>
-  <div class="ant-form-item-row">
+  ]} style={componentTheme.style}>
+  <!-- Source Row/Col сбрасывают общие aliases, сохраняя наследование Form tokens. -->
+  <div class={['ant-form-item-row', componentTheme.className]}>
     <div class="ant-form-item-label">
       <label for={id} class:ant-form-item-required={isRequired} title={label} use:focusGroupLabel>
         {label}
