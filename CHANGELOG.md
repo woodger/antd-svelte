@@ -739,6 +739,9 @@
 
 ### Fixed
 
+- Progress Circle: browser-проверка rapid/spaced updates останавливает часы;
+  интервалы 20/150 мс сохраняются независимо от времени выполнения DOM-действий.
+
 - DatePicker/RangePicker datetime: восстановлены приоритет panel/input/locale
   formats, fallback колонок при date-only формате и вывод 12-hour режима.
   Добавлены 40 raw UMD-измерений, unit/SSR/browser-проверки и проверки UTC/precision;
