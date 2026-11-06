@@ -1007,6 +1007,50 @@ Native сохраняет явные component values и canonical bridge; ал�
 уведомление настоящим click после width:undefined. Полный semantic/config/static,
 stack и showProgress API остаются отдельными пробелами.
 
+## Тема Table
+
+`components.Table` подготавливает 37 исходных defaults, включая смешивание
+полупрозрачных подложек с colorBgContainer, alpha sort icons и дробные метрики
+expand icon. ExpandIconScale остаётся unitless. Component aliases/algorithms,
+custom cssVar prefix, undefined и вложенные provider проходят общий механизм.
+Служебные col используют исходные CSS widths; явно подготовленный
+selectionColumnWidth становится inline columnWidth, как в InternalTable,
+и имеет приоритет перед bordered CSS. Явный expandable.columnWidth
+сохраняет приоритет. Native default size остаётся middle из ConfigProvider.
+
+Тема применяется к cells, sort/hover/selection, expanded content и filter popup.
+Filter options получают filterDropdownMenuBg, footer границу borderColor;
+Button/Checkbox сохраняют собственные компонентные темы. В source-теме используются исходные caret SVG и их размеры; native sort button,
+Popover API, expanded viewport и непрозрачные fixed-cell подложки сохранены.
+Обновления меняют CSS variables без замены строк, input, popup или controls;
+сохраняются selection/focus, draft, scroll и рассчитанные fixed offsets.
+Legacy-оформление не меняется.
+
+15 тем официального UMD / 300 CSS-состояний проверяются в
+[unit](../../src/lib/theme-table-tokens-reference.test.ts),
+[SSR](../../tests/package/table-theme.ssr.test.ts) и
+[браузере](../../tests/browser/table-theme.spec.ts), fixture `?fixture=table-theme`.
+Source size явно задан middle для сравнения с опубликованным native default;
+Source typography host использует public theme.useToken(), потому что React
+ConfigProvider не создаёт DOM-обёртку. Expanded padding сравнивается на Source td
+и native viewport content. Fixed hover сверяется отдельно с raw Source цветом:
+native рисует его поверх прежней непрозрачной подложки через linear-gradient.
+
+При чтении component declarations учитывается только registration rule
+`.ant-table-css-var`: `nested-border-top` принадлежит локальному CSS bordered table,
+а не default token factory. Runtime CSS-строки в числовых полях проверяют boundary
+эталона и не расширяют публичные типы.
+
+В [наблюдении root style](../../tests/browser/fixtures/ant-design-table-root-style-observation.json)
+Source styles.root задаёт cellPaddingBlockMD=11px, но внутренняя registration
+`.ant-table` возвращает component value 7px. Native сохраняет опубликованный
+приоритет local style: padding остаётся 11px и после обновления темы.
+Это отличие не скрывается нормализацией эталонных измерений.
+
+Footer/title/summary, tree indentation, virtual rows и отдельная sticky scrollbar
+ещё не перенесены; declarations footerBg/footerColor, expandIconMarginTop и
+stickyScrollBarBorderRadius не означают наличие соответствующего API.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

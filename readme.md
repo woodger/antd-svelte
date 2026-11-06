@@ -9007,7 +9007,8 @@ Keys содержит все раскрытые ключи, включая от�
 или пагинацию и не вызывает общий onChange. currentDataSource и total считают
 только записи, строки подробностей в них не входят.
 
-`expandable.columnWidth` принимает число или CSS-ширину, по умолчанию 48px.
+`expandable.columnWidth` принимает число или CSS-ширину; default без source-темы —
+48px, в теме Ant Design ширина выводится из глобальных метрик.
 `columnTitle` задаёт видимый заголовок; по умолчанию он только доступен скринридеру.
 `fixed: true` закрепляет колонку у начала строки, включая RTL. Смещения и colspan
 учитывают раскрытие, выбор и данные. При горизонтальной прокрутке содержимое
@@ -9025,6 +9026,25 @@ Snippet создаётся только для видимой раскрытой
 держите у владельца. SSR сразу отображает переданные раскрытые строки.
 Раскрытие нажатием на всю строку, forceRender и иерархические данные пока не
 поддерживаются. Живой пример карточек участников доступен на `/ant-design`.
+
+### Компонентная тема Table
+
+`ConfigProvider.theme.components.Table` применяет исходные component tokens и
+aliases к ячейкам, границам, сортировке, hover/selection, expand controls и фильтрам.
+Поддержаны algorithms, custom cssVar prefix, вложенные provider и обновления
+после mount. Local `style` сохраняет приоритет. Смена темы не пересоздаёт строки,
+не меняет выбор/сортировку и не сбрасывает draft/focus в раскрытом snippet.
+
+Native default size по-прежнему наследует `componentSize` (`middle` без настройки).
+В теме Ant Design ширина selection column берётся из `selectionColumnWidth`,
+а expand column — из исходной формулы `controlInteractiveSize + padding × 2`;
+явный `expandable.columnWidth` имеет приоритет. Без source-темы обе колонки
+сохраняют default 48px. Для fixed cells сохраняется непрозрачная подложка.
+
+Footer, tree indentation и отдельная sticky scrollbar ещё не реализованы:
+соответствующие declarations готовятся, но сами по себе не добавляют этот API.
+Сравнение с эталоном, границы покрытия и наблюдение root style описаны в
+[справочнике темы](docs/reference/theme-context.md#тема-table).
 
 ### Закрепление заголовка и колонок
 

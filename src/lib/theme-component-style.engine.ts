@@ -14,6 +14,7 @@ import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
 import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.engine';
 import { prepareTabsTokens } from './theme-tabs-tokens.engine';
 import { prepareSliderTokens } from './theme-slider-tokens.engine';
+import { prepareTableTokens } from './theme-table-tokens.engine';
 import {
   prepareArrowOffsets,
   prepareArrowTokens,
@@ -37,9 +38,10 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
   | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
-  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification';
+  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification' | 'Table';
 
 const factories = {
+  Table: prepareTableTokens,
   Notification: (token: GlobalToken) => ({
     zIndexPopup: token.zIndexPopupBase + 1050,
     width: 384,
@@ -415,6 +417,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Table: ['expandIconScale'],
   Notification: [],
   Message: [],
   Modal: ['titleLineHeight'],

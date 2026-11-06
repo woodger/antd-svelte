@@ -1,6 +1,8 @@
 <script lang="ts" generics="Row extends object">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { getPaginationState } from './pagination.engine';
   import { getTableFixedOffsets } from './table-layout.engine';
   import {
@@ -66,6 +68,12 @@
   }: TableProps<Row> = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Table');
+  const designTheme = useDesignTokenContext();
+  let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
+  // InternalTable передаёт только явно подготовленный token в columnWidth до bordered CSS.
+  let selectionWidth = $derived(designTheme.enabled
+    ? designTheme.state.token.Table?.selectionColumnWidth : 48);
   const id = $props.id();
   const initialSorter = untrack(() => defaultSorter ? { ...defaultSorter } : null);
   const initialCurrent = untrack(() => defaultCurrent);
@@ -334,6 +342,12 @@
   .ant-table-wrapper .ant-table-thead > tr > .table-fixed-cell.ant-table-column-has-sorters:hover { background: linear-gradient(var(--ant-table-header-sort-hover-bg), var(--ant-table-header-sort-hover-bg)) var(--ant-color-bg-container); }
   .ant-table-wrapper .ant-table-tbody > tr > .table-fixed-cell.ant-table-column-sort { background: linear-gradient(var(--ant-table-body-sort-bg), var(--ant-table-body-sort-bg)) var(--ant-color-bg-container); }
   .ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > .table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-bg), var(--ant-table-row-selected-bg)) var(--ant-color-bg-container); }
+  .table-source-theme .ant-table-thead th.ant-table-column-has-sorters:hover .ant-table-column-sorter { color: var(--ant-table-header-icon-hover-color); }
+  .ant-table-wrapper.table-source-theme .ant-table-thead th.ant-table-column-has-sorters.table-fixed-cell:hover { background: linear-gradient(var(--ant-table-fixed-header-sort-active-bg), var(--ant-table-fixed-header-sort-active-bg)) var(--ant-color-bg-container); }
+  .table-source-theme .ant-table-tbody > tr.ant-table-row:hover > td { background: var(--ant-table-row-hover-bg); }
+  .table-source-theme .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > td { background: var(--ant-table-row-selected-hover-bg); }
+  .table-source-theme .ant-table-tbody > tr.ant-table-row:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-hover-bg), var(--ant-table-row-hover-bg)) var(--ant-color-bg-container); }
+  .table-source-theme .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-hover-bg), var(--ant-table-row-selected-hover-bg)) var(--ant-color-bg-container); }
   .ant-table-content:focus-visible, .sort-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
   caption { padding: var(--ant-padding-sm); color: var(--ant-color-text-heading); text-align: start; font-weight: 600; }
   .sort-button { width: 100%; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; cursor: pointer; }
@@ -355,9 +369,11 @@
 
 <div class={[
     'ant-table-wrapper ant-table-css-var',
+    componentTheme.className,
+    designTheme.enabled && 'table-source-theme',
     config.direction === 'rtl' && 'ant-table-wrapper-rtl',
     className
-  ]} dir={config.direction} {style}>
+  ]} dir={config.direction} style={rootStyle}>
   {#if loading}<div class="loading-state" role="status"><Spin size="small" aria-hidden />{strings.loadingText}</div>{/if}
   <div class={[
       'ant-table',
@@ -375,10 +391,13 @@
         <table bind:this={table} aria-label={ariaLabel ?? (caption ? undefined : strings.label)} aria-busy={loading || undefined} style:min-width={typeof scroll?.x === 'number' ? `${scroll.x}px` : scroll?.x}>
           {#if caption}<caption>{caption}</caption>{/if}
           <colgroup>
-            {#if expandable}<col style:width={typeof expandable.columnWidth === 'number'
+            {#if expandable}<col class={designTheme.enabled ? 'ant-table-expand-icon-col' : undefined}
+              style:width={typeof expandable.columnWidth === 'number'
                 ? `${expandable.columnWidth}px`
-                : expandable.columnWidth ?? '48px'} />{/if}
-            {#if rowSelection}<col style="width: 48px" />{/if}
+                : expandable.columnWidth ?? (designTheme.enabled ? undefined : '48px')} />{/if}
+            {#if rowSelection}<col class={designTheme.enabled ? 'ant-table-selection-col' : undefined}
+              style:width={typeof selectionWidth === 'number'
+                ? `${selectionWidth}px` : selectionWidth} />{/if}
             {#each columns as column (column.key)}<col style:width={typeof column.width === 'number'
                 ? `${column.width}px`
                 : column.width} />{/each}
@@ -424,13 +443,19 @@
                     {#if sortable}
                       <button type="button" class="sort-button ant-table-column-sorters" disabled={resolvedDisabled} title={sortDescription(column.key, tableData.sorter)} onclick={() => changeSort(column.key)}>
                         <span class="ant-table-column-title">{column.title}</span>
-                        <span class="ant-table-column-sorter" aria-hidden="true"><span class="ant-table-column-sorter-inner"><span class={[
+                        <span class="ant-table-column-sorter" aria-hidden="true"><span class="ant-table-column-sorter-inner">{#if designTheme.enabled}<span class={[
+                            'anticon anticon-caret-up ant-table-column-sorter-up',
+                            order === 'ascend' && 'active'
+                          ]}><svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" focusable="false"><path d="M858.9 689L530.5 308.2c-9.4-10.9-27.5-10.9-37 0L165.1 689c-12.2 14.2-1.2 35 18.5 35h656.8c19.7 0 30.7-20.8 18.5-35z" /></svg></span><span class={[
+                              'anticon anticon-caret-down ant-table-column-sorter-down',
+                              order === 'descend' && 'active'
+                            ]}><svg viewBox="0 0 1024 1024" width="1em" height="1em" fill="currentColor" focusable="false"><path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L858.9 335c12.2-14.2 1.2-35-18.5-35z" /></svg></span>{:else}<span class={[
                             'sort-arrow sort-up',
                             order === 'ascend' && 'active'
                           ]}></span><span class={[
                               'sort-arrow sort-down',
                               order === 'descend' && 'active'
-                            ]}></span></span></span>
+                            ]}></span>{/if}</span></span>
                       </button>
                     {:else}<span>{column.title}</span>{/if}
                     {#if column.filters && (mode === 'server' || column.onFilter)}

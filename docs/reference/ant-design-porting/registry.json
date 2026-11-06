@@ -10944,7 +10944,18 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/table",
+          "range": "~1.11.1",
+          "referenceVersion": null
+        },
+        {
+          "name": "@ant-design/icons",
+          "range": "^6.3.4",
+          "referenceVersion": null
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
@@ -10954,7 +10965,15 @@
         "tests/browser/server-table.spec.ts",
         "tests/browser/fixed-table.spec.ts",
         "tests/browser/expandable-table.spec.ts",
-        "integration:table"
+        "integration:table",
+        "src/lib/theme-table-tokens.engine.ts",
+        "src/lib/theme-table-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-table-tokens-reference.json",
+        "tests/package/table-theme.ssr.test.ts",
+        "tests/browser/table-theme.spec.ts",
+        "tests/browser/fixtures/ant-design-table-theme-reference.json",
+        "tests/browser/fixtures/ant-design-table-root-style-observation.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -10988,6 +11007,25 @@
             "docs/reference/render-empty.md"
           ],
           "note": "Существующий empty Snippet имеет приоритет над общим renderer; native loading скрывает empty. Falsy callback выбирает simple Empty, без callback сохраняется locale.table.emptyText. Table.filter использует ?? и отдельный localized image24/padding16 preset; 0/false/empty сохраняются. Filters=[] теперь открывает пустой фильтр при поддерживаемом native режиме колонки; native callback shape не меняется."
+        },
+        {
+          "id": "component-theme",
+          "title": "Component tokens, aliases/algorithms и реактивная тема Table",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Table.svelte",
+            "src/lib/TableFilter.svelte",
+            "src/lib/theme-table-tokens.engine.ts",
+            "src/lib/theme-table-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-table-tokens-reference.json",
+            "tests/package/table-theme.ssr.test.ts",
+            "tests/browser/table-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-table-theme-reference.json",
+            "tests/browser/fixtures/ant-design-table-root-style-observation.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "37 defaults, aliases/algorithms, custom cssVar prefix, nested/reset contexts; cells, sort/hover, selection, expanded content и filter colors. Updates сохраняют draft/focus/scroll и controls; local style priority и legacy widths сохранены. Source duplicate registration сбрасывает root variable 11px в 7px; raw observation сохранено, native style остаётся 11px. Footer/title/summary, tree indentation, virtual и отдельная sticky scrollbar отсутствуют; declarations не заявляют этот API. Native size по-прежнему наследует middle; Source benchmark явно задаёт middle."
         }
       ]
     },

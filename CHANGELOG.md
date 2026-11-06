@@ -9,6 +9,12 @@
 
 ### Added
 
+- Table: 37 исходных component defaults, aliases/algorithms и реактивная тема
+  ячеек, служебных колонок, sort/hover, раскрытых строк и фильтров. Добавлены
+  15 UMD-профилей, исходные caret icons и unit/SSR/browser-проверки. Обновления
+  сохраняют controls,
+  draft/focus, выбор и fixed offsets; legacy-тема и local style priority сохранены.
+
 - Notification: семь component defaults, aliases/algorithms и reactive holder/notice
   theme, 17 UMD-тем и unit/SSR/browser-проверки. Actions повторяют source structure;
   legacy layout, editor DOM/focus, viewport styles и deadlines сохранены.

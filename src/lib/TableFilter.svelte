@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useConfig } from './config-context';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import type { TableFilterOption, TableFilterValue } from './table.types';
   import { ruRU } from './types';
   import Button from './Button.svelte';
@@ -18,6 +19,7 @@
   } = $props();
 
   const config = useConfig();
+  const designTheme = useDesignTokenContext();
   const id = $props.id();
   let trigger = $state<HTMLButtonElement>();
   let panel = $state<HTMLDivElement>();
@@ -196,13 +198,16 @@
   /* visibility наследуется Checkbox с transition: all и задерживает фокус при открытии. */
   .filter-popover { position: fixed; inset: auto; width: min(260px, calc(100vw - 16px)); max-height: min(360px, calc(100dvh - 16px)); margin: 0; padding: 0; overflow-y: auto; opacity: 0; pointer-events: none; border: 0; border-radius: var(--ant-border-radius-lg); background: var(--ant-color-bg-container); color: var(--ant-color-text); box-shadow: var(--ant-box-shadow-secondary); font: var(--ant-font-size)/var(--ant-line-height) var(--ant-font-family); font-weight: 400; text-align: start; }
   .filter-options { display: grid; gap: var(--ant-margin-xs); padding: var(--ant-padding-sm); overflow-wrap: anywhere; }
+  .table-filter-source, .table-filter-source .ant-table-filter-dropdown { background: var(--ant-table-filter-dropdown-bg); }
+  .table-filter-source .filter-options { background: var(--ant-table-filter-dropdown-menu-bg); }
   .radio-option { display: flex; align-items: center; gap: var(--ant-margin-xs); cursor: pointer; }
   .radio-option input { flex: none; width: 16px; height: 16px; margin: 0; accent-color: var(--ant-color-primary); }
   .ant-table-filter-dropdown-btns { display: flex; justify-content: space-between; gap: var(--ant-margin-xs); padding: var(--ant-padding-xs); border-top: var(--ant-line-width) solid var(--ant-color-border-secondary); }
+  .table-filter-source .ant-table-filter-dropdown-btns { border-top-color: var(--ant-table-border-color); }
 </style>
 
 <button bind:this={trigger} type="button" class={['ant-table-filter-trigger', value.length > 0 && 'active']} {disabled} aria-label={label} aria-haspopup="dialog" aria-expanded={open} aria-controls={`ant-filter-${id}`} popovertarget={`ant-filter-${id}`}><Icon name="filter" /></button>
-<div bind:this={panel} id={`ant-filter-${id}`} class="filter-popover ant-dropdown" popover="auto" role="dialog" tabindex="-1" aria-label={label} dir={config.direction} onbeforetoggle={beforeToggle} onkeydown={handleKeydown} onfocusout={handleFocusOut}>
+<div bind:this={panel} id={`ant-filter-${id}`} class={['filter-popover ant-dropdown', designTheme.enabled && 'table-filter-source']} popover="auto" role="dialog" tabindex="-1" aria-label={label} dir={config.direction} onbeforetoggle={beforeToggle} onkeydown={handleKeydown} onfocusout={handleFocusOut}>
   <div class="ant-table-filter-dropdown">
     <div class="filter-options" role="group" aria-label={label}>
       {#each options as option, index (index)}
