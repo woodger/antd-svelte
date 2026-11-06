@@ -3,11 +3,18 @@ import type { HTMLAttributes } from 'svelte/elements';
 
 export type AffixTarget = Window | HTMLElement;
 export type AffixUpdatePosition = (() => void) & { cancel: () => void; };
+/** Общие стили внешнего узла; вложенный record заменяется целиком. */
+export interface AffixConfig {
+  class?: string;
+  style?: string;
+}
 /** Закрепляет содержимое у края выбранного окна или прокручиваемого контейнера. */
 export interface AffixProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style'
 > {
+  /** Локальный CSS prefix fixed-узла; пустое значение использует ant-affix. */
+  prefixCls?: string;
   children?: Snippet;
   offsetTop?: number;
   offsetBottom?: number;

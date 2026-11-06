@@ -1,7 +1,7 @@
 <script lang="ts">
   import { Affix, type AffixUpdatePosition } from 'antd-svelte';
 
-  let { id }: { id: string; } = $props();
+  let { id, prefixCls, style }: { id: string; prefixCls?: string; style?: string; } = $props();
   let container = $state<HTMLDivElement>();
   let nativeElement = $state<HTMLDivElement>();
   let instance = $state<{ updatePosition: AffixUpdatePosition }>();
@@ -12,9 +12,12 @@
   <div data-affix-scroll bind:this={container}
     style="width:260px;height:100px;overflow:auto;font:14px/20px monospace;color:#17292b">
     <div style="height:40px"></div>
-    <Affix class="theme-affix" rootClassName="theme-affix-fixed" bind:nativeElement
+    <Affix {prefixCls} class="theme-affix" rootClassName="theme-affix-fixed" bind:nativeElement
       bind:this={instance} target={() => container ?? null} offsetTop={5}
-      style={id === 'style' ? '--ant-font-size:28px;--ant-affix-z-index-popup:444' : undefined}
+      style={[
+        id === 'style' ? '--ant-font-size:28px;--ant-affix-z-index-popup:444' : undefined,
+        style
+      ].filter(Boolean).join(';') || undefined}
       onChange={value => changes = [...changes, Boolean(value)]}>
       <div style="height:32px">
         <input aria-label={`Affix themed draft ${id}`} name={`affix-${id}`} value="Draft" />

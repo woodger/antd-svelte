@@ -1222,18 +1222,28 @@ Default zIndexPopup равен глобальному zIndexBase + 10; числ�
 Style внешнего узла и вычисленные top/bottom/width/height сохраняют назначение.
 Source aliases, scopes и geometry проверяются в `?fixture=affix-theme`.
 
+ConfigProvider.affix задаёт class/style внешнего узла: локальные class идут
+первыми, style — после контекстного. Вложенный record заменяет настройки целиком;
+undefined наследует, {} очищает. Локальный prefixCls меняет fixed class и CSS
+selectors, сохраняя имена variables. Пустое значение возвращает ant-affix.
+Prefix/theme/config updates сохраняют wrapper, fixed content, placeholder,
+draft/selection/focus и onChange; динамический stylesheet очищается при reset
+и unmount. Проверки — `?fixture=affix-config`.
+
 Сохранены ограничения upstream: горизонтальная прокрутка не компенсируется;
 при custom target слушается сам контейнер, поэтому перемещение контейнера
 внешней прокруткой требует явного updatePosition. Null target или полностью
 нулевой скрытый root сохраняют последнее состояние до следующего измерения.
-Глобальные affix config, prefixCls и ConfigProvider.getTargetContainer пока
-отсутствуют; target задаётся prop. React ref заменён Svelte bind:this,
+Глобальный ConfigProvider prefix и getTargetContainer пока отсутствуют;
+target задаётся prop. React ref заменён Svelte bind:this,
 children — Snippet без React-клонирования.
 
 Фикстура — `?fixture=affix`, пример — `/ant-design#affix`. Engine/DOM-тесты
 проверяют округление, очереди, смену target и очистку; SSR/Chromium — нативный
 контент, placeholder, размеры, callbacks и hydration. Vendor CSS воспроизводится
-рецептом affix (6 правил) из закреплённого архива.
+рецептом affix (6 правил) из закреплённого архива. Affix-prefix извлекает те же
+правила в CSS data template для локального prefixCls; проверяются SHA-256,
+scoped defaults, overlapping prefixes и независимый default sibling.
 
 ## Space
 

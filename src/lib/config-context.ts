@@ -10,6 +10,7 @@ import type { PopoverConfig } from './popover.types';
 import type { PopconfirmConfig } from './popconfirm.types';
 import type { RateConfig } from './rate.types';
 import type { WatermarkConfig } from './watermark.types';
+import type { AffixConfig } from './affix.types';
 import type { BorderBeamConfig } from './border-beam.types';
 import type { MasonryConfig } from './masonry.types';
 import type { SplitterConfig } from './splitter.types';
@@ -64,6 +65,7 @@ export interface ConfigContext {
   readonly button?: ButtonConfig;
   readonly rate?: RateConfig;
   readonly watermark?: WatermarkConfig;
+  readonly affix?: AffixConfig;
   readonly borderBeam?: BorderBeamConfig;
   readonly masonry?: MasonryConfig;
   readonly splitter?: SplitterConfig;

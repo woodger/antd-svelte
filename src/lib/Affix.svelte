@@ -2,8 +2,12 @@
   import { createAffixRuntime } from './affix.dom';
   import { connectFeedbackFocus } from './feedback.dom';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useConfig } from './config-context';
+  import { getAffixPrefixCss } from './affix-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { AffixPosition, AffixProps, AffixUpdatePosition } from './affix.types';
   let {
+    prefixCls,
     children,
     offsetTop,
     offsetBottom,
@@ -16,6 +20,11 @@
     ...rest
   }: AffixProps = $props();
   const componentTheme = useComponentTheme('Affix');
+  const config = useConfig();
+  let prefix = $derived(prefixCls || 'ant-affix');
+  let prefixCss = $derived(getAffixPrefixCss(prefix));
+  let wrapperStyle = $derived(config.affix?.style
+    ? [config.affix.style, style].filter(Boolean).join(';') : style);
   let content = $state<HTMLDivElement>();
   let position = $state<AffixPosition>();
   let runtime = $state.raw<ReturnType<typeof createAffixRuntime>>();
@@ -46,10 +55,12 @@
   });
 </script>
 
-<div {...rest} bind:this={nativeElement} class={className} {style}>
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`affix-prefix:${prefix}`} />{/if}
+<div {...rest} bind:this={nativeElement} class={[className, config.affix?.class]} style={wrapperStyle}>
   {#if position}<div aria-hidden="true" style={`width:${position.width}px;height:${position.height}px`}></div>{/if}
-  <div bind:this={content} class={position
-    ? ['ant-affix', componentTheme.className, 'ant-affix-css-var', rootClassName] : undefined} style={position
+  <div bind:this={content} data-ant-affix-prefix={position && prefixCss ? prefix : undefined}
+    class={position
+    ? [prefix, componentTheme.className, 'ant-affix-css-var', rootClassName] : undefined} style={position
       ? [componentTheme.style, `position:fixed;${position
         .edge}:${position
           .offset}px;width:${position

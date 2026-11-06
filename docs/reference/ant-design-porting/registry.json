@@ -13518,12 +13518,39 @@
           "note": "Один component token zIndexPopup = zIndexBase + 10; unitless, zero/undefined и aliases рассчитываются по source style hook. Component scope/style применяются только к fixed content, до измеренных top/bottom/width/height; outer class/style и normal-flow typography сохраняют назначение. 12 UMD presets фиксируют raw declarations и unfixed/fixed CSS/geometry без mocks: dark/compact, component algorithms, cssVar key/prefix, outer CSS inheritance, independent nested/reset/sibling scopes, placeholder и один native input. Updates сохраняют DOM/ref/draft/selection/focus, не вызывают лишних onChange; возврат в поток/source off/unmount и прежние scroll/resize/target scenarios проверяются отдельно."
         },
         {
+          "id": "component-config",
+          "title": "ConfigProvider.affix class/style и whole-record inheritance",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/affix.types.ts",
+            "tests/package/affix-config.ssr.test.ts",
+            "tests/browser/affix-config.spec.ts",
+            "tests/browser/fixtures/ant-design-affix-config-reference.json"
+          ],
+          "note": "Common class/style относятся к outer wrapper; local class идёт перед context, local style имеет приоритет. Undefined наследует, {} очищает, nested record заменяется целиком. Public AffixConfig экспортирован. Шесть official UMD presets фиксируют wrapper styles/classes и fixed/unfixed CSS/geometry; native light/dark/compact сохраняются. Config updates сохраняют DOM/ref/draft/selection/focus, placeholder и onChange; prefix/theme scopes независимы."
+        },
+        {
+          "id": "local-prefix",
+          "title": "Локальный prefixCls и scoped CSS",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/affix-prefix.engine.test.ts",
+            "tools/ant-design-css-recipes.json",
+            "tests/package/affix-config.ssr.test.ts",
+            "tests/browser/affix-config.spec.ts",
+            "tests/browser/fixtures/ant-design-affix-config-reference.json"
+          ],
+          "note": "Local prefixCls меняет только fixed inner class/common descendants; empty/undefined возвращают ant-affix. CSS variable names и native marker сохраняются независимо от theme.cssVar.prefix. Все шесть source rules извлекаются в CSS data template с SHA-256; default rules ограничены собственным data marker. Проверены default/empty/custom/overlapping/shared-marker prefixes, named cssVar/aliases и независимый default sibling. Source hash/native CSS markers исключены из prefix identity, CSS и geometry сравниваются напрямую. Prefix updates сохраняют DOM, focus/selection, data/ref и callbacks; reset/unmount очищает stylesheet. На SSR выводятся outer config/head CSS без fixed content class или placeholder."
+        },
+        {
           "id": "global-config",
-          "title": "PrefixCls и глобальный affix/getTargetContainer config",
+          "title": "Глобальный ConfigProvider prefix и getTargetContainer",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Глобальные component config и prefix не перенесены. По умолчанию window; альтернативный target задаётся непосредственно prop."
+          "note": "Local prefixCls и ConfigProvider.affix class/style подключены отдельными features. Общий ConfigProvider prefix и target container пока не перенесены; target задаётся prop."
         }
       ]
     },

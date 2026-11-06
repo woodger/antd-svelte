@@ -9,6 +9,11 @@
 
 ### Added
 
+- Affix: перенесены ConfigProvider.affix class/style и локальный prefixCls.
+  Сохранены whole-record inheritance, local style priority и независимые CSS
+  variables. Prefix/config updates сохраняют fixed DOM, поля и callbacks;
+  scoped CSS очищается при reset/unmount. Добавлена сверка с официальным UMD.
+
 - ConfigProvider.space: size, class/style и object/function root/item/separator slots
   с исходными приоритетами и заменой вложенных records. Space получил alias tokens
   и algorithms без typography reset; Compact/Addon сохраняют независимые настройки.

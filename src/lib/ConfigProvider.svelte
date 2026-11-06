@@ -11,6 +11,7 @@
   import type { PopconfirmConfig } from './popconfirm.types';
   import type { RateConfig } from './rate.types';
   import type { WatermarkConfig } from './watermark.types';
+  import type { AffixConfig } from './affix.types';
   import type { BorderBeamConfig } from './border-beam.types';
   import type { MasonryConfig } from './masonry.types';
   import type { SplitterConfig } from './splitter.types';
@@ -73,6 +74,7 @@
     popconfirm?: PopconfirmConfig;
     rate?: RateConfig;
     watermark?: WatermarkConfig;
+    affix?: AffixConfig;
     borderBeam?: BorderBeamConfig;
     masonry?: MasonryConfig;
     splitter?: SplitterConfig;
@@ -149,6 +151,7 @@
     popconfirm,
     rate,
     watermark,
+    affix,
     borderBeam,
     masonry,
     splitter,
@@ -237,6 +240,9 @@
     },
     get watermark() {
       return watermark ?? parent.watermark;
+    },
+    get affix() {
+      return affix ?? parent.affix;
     },
     get borderBeam() {
       return borderBeam ?? parent.borderBeam;
