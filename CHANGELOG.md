@@ -9,6 +9,11 @@
 
 ### Added
 
+- Listy: component tokens, alias overrides и algorithms для raw/virtual списков,
+  исходная оценка высоты строк и обновление живого cache. Сохранены semantic
+  priorities, ввод, фокус, refs и sticky scrollTo. Добавлены 16 UMD-тем / 128
+  наборов измерений CSS и виртуального окна, unit/SSR/browser-проверки.
+
 - List: подключены 11 component tokens, font/color/spacing aliases и algorithms.
   Восстановлены source scopes root/container/Col; theme updates сохраняют
   keyed rows, ввод, фокус и pagination. Добавлены 17 UMD-тем / 136 наборов

@@ -33,9 +33,13 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List';
+  | 'List' | 'Listy';
 
 const factories = {
+  Listy: (token: GlobalToken) => ({
+    itemPaddingBlock: token.paddingSM,
+    itemPaddingInline: token.padding
+  }),
   List: (token: GlobalToken) => ({
     contentWidth: 220,
     itemPadding: `${token.paddingContentVertical}px 0`,
@@ -308,6 +312,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Listy: [],
   List: [],
   Typography: [],
   Form: [],

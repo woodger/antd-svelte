@@ -9407,13 +9407,42 @@
         },
         {
           "id": "advanced-theme",
-          "title": "Полный token/prefix engine и React-specific API",
+          "title": "Произвольный prefix CSS и React-specific API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Произвольные theme/component tokens и генерация CSS для custom prefixCls остаются общими этапами. React nodes/refs/SyntheticEvent адаптированы к snippets/bindings/native UIEvent; development key/scroll warnings не испускаются. V1-ready не означает полного покрытия всего React Ant Design."
+          "note": "Генерация CSS для custom prefixCls остаётся общим этапом. React nodes/refs/SyntheticEvent адаптированы к snippets/bindings/native UIEvent; development key/scroll warnings не испускаются. V1-ready не означает полного покрытия всего React Ant Design."
+        },
+        {
+          "id": "component-theme",
+          "title": "Два component tokens, aliases/algorithms и source virtual itemHeight",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Listy.svelte",
+            "src/lib/listy.engine.ts",
+            "src/lib/theme-listy-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-listy-tokens-reference.json",
+            "tests/package/listy-theme.ssr.test.ts",
+            "tests/browser/listy-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-listy-theme-reference.json"
+          ],
+          "note": "ItemPaddingBlock/Inline defaults из paddingSM/padding; font/color/spacing aliases, global/component algorithms и custom cssVar prefix подключены к общему bridge. Raw/virtual roots получают source lineHeight до semantic/local styles, native-only CSS сохраняется. Source virtual estimate = fontHeight + (itemPaddingBlock ?? paddingSM) * 2, без lineWidth; alias overrides и algorithms применяются до этой формулы. 16 официальных UMD-тем / 128 наборов покрывают CSS и реальные filler heights/visible keys при холодном mount, raw/virtual/grouped/sticky, config/semantic/local priorities, zero/undefined, fontHeight/lineWidth, dark/compact, RTL и nested/reset/sibling scopes. Точная оценка дополнительно считана из текущих delegated React props без изменения исходного bundle. Живое обновление cache сверяется отдельным source кадром без remount; единственный stale memo case сохранён отдельным наблюдением, native использует свежий source расчёт. Theme update сохраняет DOM/draft/selection/focus/refs четырёх веток и sticky scrollTo. Inherit reset, legacy defaults и cleanup не меняют sibling scopes; SSR не создаёт browser resources или fixed clone."
+        },
+        {
+          "id": "source-stale-virtual-estimate",
+          "title": "Source stale estimate при неизменной измеренной высоте строк",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-listy-theme-reference.json",
+            "tests/browser/listy-theme.spec.ts",
+            "src/lib/listy.model.svelte.ts",
+            "readme.md"
+          ],
+          "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, @rc-component/virtual-list 1.5.1 package/es/List.js: useMemo расчёта window/scrollHeight пропускает itemHeight. При стабильном items array и фиксированных semantic высотах строк смена estimate 66→74 не обновляет filler: 40 записей, пять измеренных строк по 49px, source 2555→2555px, fresh source mount 2835px. Активные delegated props и raw before/after/fresh кадры сохранены в staleEstimateObservation. Native derived расчёт сразу даёт 2835px без remount или потери cache/DOM; этот source дефект намеренно не воспроизводится и оставлен для отдельного разбора. Остальные warm scopes сравниваются с исходными кадрами без замены данных."
         }
       ]
     },

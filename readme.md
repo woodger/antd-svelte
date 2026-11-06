@@ -5639,11 +5639,32 @@ OnScroll (либо native onscroll) получает native UIEvent: currentTarg
 RTL, dark, compact и reduced motion. Компонент не добавляет выбор строк,
 прикладную навигацию или собственное пустое состояние.
 
-Полный token engine, генерация CSS для произвольного prefixCls и React development
-warnings остаются за пределами этого этапа. CSS рассчитан на ant-listy.
+`theme.components.Listy` применяет `itemPaddingBlock`/`itemPaddingInline`,
+font/color/spacing aliases и algorithms в raw/virtual ветках. Оценка высоты строки
+следует source: fontHeight плюс удвоенный вертикальный padding, без lineWidth;
+фактические высоты уточняются измерением DOM. Явный undefined padding использует
+source fallback для оценки. LineHeight темы применяется до semantic/local styles;
+без source theme сохраняются прежние CSS и оценки высоты.
+Смена темы сохраняет DOM, draft/selection/focus, refs и живой cache измерений.
+Поддержаны named CSS variables, nested/reset/sibling scopes, dark/compact и RTL.
+
+В virtual-list 1.5.1 обнаружена пропущенная зависимость `itemHeight` в `useMemo`.
+Если semantic styles сохраняют высоты видимых строк, новая оценка не обновляет
+невидимую часть до другого изменения списка. Native пересчитывает её сразу,
+как свежий mount исходного компонента. Raw измерения 2555→2555px против свежих
+2835px сохранены в `staleEstimateObservation` эталона; это отличие оставлено
+для отдельного разбора.
+
+Генерация CSS для произвольного prefixCls и React development warnings остаются
+за пределами этого этапа. CSS рассчитан на ant-listy.
 Проверки: [engine](./src/lib/listy.engine.test.ts),
 [публичный пакет/SSR](./tests/package/listy.ssr.test.ts),
 [браузер](./tests/browser/listy.spec.ts), `?fixture=listy`.
+Темы, видимое окно и высота виртуального содержимого сверяются с
+[официальным UMD](./tests/browser/fixtures/ant-design-listy-theme-reference.json)
+в [unit](./src/lib/theme-listy-tokens-reference.test.ts),
+[SSR](./tests/package/listy-theme.ssr.test.ts) и
+[браузере](./tests/browser/listy-theme.spec.ts), `?fixture=listy-theme`.
 [CSS-рецепт](./tools/ant-design-css-recipes.json) воспроизводит
 [16 правил](./src/lib/vendor/listy.css) без keyframes;
 [MIT Listy](./src/lib/vendor/LICENSE.rc-listy) и

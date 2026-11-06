@@ -1,7 +1,10 @@
 <script lang="ts" generics="T = unknown, K extends ListyKey = ListyKey">
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useDesignTokenContext } from './theme-context.svelte';
+  import { useComponentTheme } from './theme-component.svelte';
   import { captureListyFocus } from './listy.dom';
+  import { listyItemHeight } from './listy.engine';
   import type { ListyKey, ListyProps, ListySemantic } from './listy.types';
   import ListyRaw from './ListyRaw.svelte';
   import ListyVirtual from './ListyVirtual.svelte';
@@ -31,18 +34,24 @@
   } = $derived(rawProps);
 
   const config = useConfig();
+  const tokens = useDesignTokenContext();
+  const componentTheme = useComponentTheme('Listy');
   let contextClasses = $derived(resolve(config.listy?.classNames));
   let localClasses = $derived(resolve(classNames));
   let contextStyles = $derived(resolve(config.listy?.styles));
   let localStyles = $derived(resolve(styles));
   let mergedClasses = $derived({
     root: join([config.listy?.class, contextClasses.root, localClasses.root,
-      rootClassName, className, 'ant-listy-css-var'], ' '),
+      rootClassName, className, 'ant-listy-css-var', componentTheme.className], ' '),
     item: join([contextClasses.item, localClasses.item], ' '),
     groupHeader: join([contextClasses.groupHeader, localClasses.groupHeader], ' ')
   });
   let mergedStyles = $derived({
-    root: join([contextStyles.root, config.listy?.style, localStyles.root, style], ';'),
+    root: join([
+      componentTheme.style,
+      tokens.enabled ? 'line-height:var(--ant-line-height)' : undefined,
+      contextStyles.root, config.listy?.style, localStyles.root, style
+    ], ';'),
     item: join([contextStyles.item, localStyles.item], ';'),
     groupHeader: join([contextStyles.groupHeader, localStyles.groupHeader], ';')
   });
@@ -57,7 +66,7 @@
     group,
     sticky,
     height,
-    itemHeight: config.theme.compact ? 36 : 46,
+    itemHeight: tokens.enabled ? listyItemHeight(tokens.state.token) : config.theme.compact ? 36 : 46,
     prefixCls,
     direction: config.direction,
     classNames: mergedClasses,

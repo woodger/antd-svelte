@@ -1,0 +1,447 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "delegatedPackages": {
+      "@rc-component/listy": "1.2.3",
+      "@rc-component/virtual-list": "1.5.1"
+    },
+    "operation": "Unchanged official Listy: two component tokens, alias/algorithm inheritance, raw/virtual and grouped sticky modes, CSS font/line-height/padding/border/group-header styles, root and semantic priorities, zero/undefined, named CSS variables and nested/reset/sibling/RTL. Every preset mounts fresh instances; visible keys and filler heights include measured rows and source estimates for unmounted rows. Physical host dir is explicit. Delegated itemHeight is read passively from the current pinned React fiber tree; no React/Ant Design code or function is replaced. Estimates exclude lineWidth and use fontHeight plus twice the nullish padding override, as in the source."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "estimatedItemHeight": 46,
+      "variables": {
+        "--ant-listy-item-padding-block": "12px",
+        "--ant-listy-item-padding-inline": "16px"
+      }
+    },
+    {
+      "name": "component-tokens",
+      "config": {
+        "components": {
+          "Listy": {
+            "itemPaddingBlock": 18,
+            "itemPaddingInline": 24
+          }
+        }
+      },
+      "estimatedItemHeight": 58,
+      "variables": {
+        "--ant-listy-item-padding-block": "18px",
+        "--ant-listy-item-padding-inline": "24px"
+      }
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "fontSize": 20,
+          "fontHeight": 30,
+          "lineHeight": 1.8,
+          "fontFamily": "monospace",
+          "fontWeightStrong": 650,
+          "colorText": "#722ed1",
+          "colorTextDescription": "#7cb305",
+          "colorBgContainer": "#fff1b8",
+          "colorFillAlter": "rgba(19,194,194,0.15)",
+          "colorSplit": "#fa8c16",
+          "controlItemBgHover": "#efdbff",
+          "paddingSM": 15,
+          "padding": 24,
+          "paddingXS": 7
+        }
+      },
+      "estimatedItemHeight": 60,
+      "variables": {
+        "--ant-listy-item-padding-block": "15px",
+        "--ant-listy-item-padding-inline": "24px"
+      }
+    },
+    {
+      "name": "component-aliases",
+      "config": {
+        "components": {
+          "Listy": {
+            "fontSize": 20,
+            "fontHeight": 30,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "fontWeightStrong": 650,
+            "colorText": "#722ed1",
+            "colorTextDescription": "#7cb305",
+            "colorBgContainer": "#fff1b8",
+            "colorFillAlter": "rgba(19,194,194,0.15)",
+            "colorSplit": "#fa8c16",
+            "controlItemBgHover": "#efdbff",
+            "paddingSM": 15,
+            "padding": 24,
+            "paddingXS": 7,
+            "itemPaddingBlock": 18,
+            "itemPaddingInline": 24
+          }
+        }
+      },
+      "estimatedItemHeight": 66,
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-font-height": "30px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-font-weight-strong": "650",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-description": "#7cb305",
+        "--ant-color-bg-container": "#fff1b8",
+        "--ant-color-fill-alter": "rgba(19,194,194,0.15)",
+        "--ant-color-split": "#fa8c16",
+        "--ant-control-item-bg-hover": "#efdbff",
+        "--ant-padding-sm": "15px",
+        "--ant-padding": "24px",
+        "--ant-padding-xs": "7px",
+        "--ant-listy-item-padding-block": "18px",
+        "--ant-listy-item-padding-inline": "24px"
+      }
+    },
+    {
+      "name": "updated-tokens",
+      "config": {
+        "components": {
+          "Listy": {
+            "fontSize": 24,
+            "fontHeight": 30,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "fontWeightStrong": 650,
+            "colorText": "#722ed1",
+            "colorTextDescription": "#7cb305",
+            "colorBgContainer": "#fff1b8",
+            "colorFillAlter": "rgba(19,194,194,0.15)",
+            "colorSplit": "#fa8c16",
+            "controlItemBgHover": "#efdbff",
+            "paddingSM": 15,
+            "padding": 24,
+            "paddingXS": 7,
+            "itemPaddingBlock": 22,
+            "itemPaddingInline": 30
+          }
+        }
+      },
+      "estimatedItemHeight": 74,
+      "variables": {
+        "--ant-font-size": "24px",
+        "--ant-font-height": "30px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-font-weight-strong": "650",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-description": "#7cb305",
+        "--ant-color-bg-container": "#fff1b8",
+        "--ant-color-fill-alter": "rgba(19,194,194,0.15)",
+        "--ant-color-split": "#fa8c16",
+        "--ant-control-item-bg-hover": "#efdbff",
+        "--ant-padding-sm": "15px",
+        "--ant-padding": "24px",
+        "--ant-padding-xs": "7px",
+        "--ant-listy-item-padding-block": "22px",
+        "--ant-listy-item-padding-inline": "30px"
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "estimatedItemHeight": 46,
+      "variables": {
+        "--ant-listy-item-padding-block": "12px",
+        "--ant-listy-item-padding-inline": "16px"
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "estimatedItemHeight": 36,
+      "variables": {
+        "--ant-listy-item-padding-block": "8px",
+        "--ant-listy-item-padding-inline": "8px"
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "estimatedItemHeight": 36,
+      "variables": {
+        "--ant-listy-item-padding-block": "8px",
+        "--ant-listy-item-padding-inline": "8px"
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Listy": {
+            "algorithm": true,
+            "fontSize": 18,
+            "colorPrimary": "#fa541c"
+          }
+        }
+      },
+      "estimatedItemHeight": 50,
+      "variables": {
+        "--ant-color-primary": "#fa541c",
+        "--ant-font-size": "18px",
+        "--ant-color-primary-bg": "#fff2e8",
+        "--ant-color-primary-bg-hover": "#ffd8bf",
+        "--ant-color-primary-border": "#ffbb96",
+        "--ant-color-primary-border-hover": "#ff9c6e",
+        "--ant-color-primary-hover": "#ff7a45",
+        "--ant-color-primary-active": "#d4380d",
+        "--ant-color-primary-text-hover": "#ff7a45",
+        "--ant-color-primary-text": "#fa541c",
+        "--ant-color-primary-text-active": "#d4380d",
+        "--ant-font-size-sm": "14px",
+        "--ant-font-size-lg": "20px",
+        "--ant-font-size-xl": "26px",
+        "--ant-font-size-heading-1": "48px",
+        "--ant-font-size-heading-2": "40px",
+        "--ant-font-size-heading-3": "32px",
+        "--ant-font-size-heading-4": "26px",
+        "--ant-font-size-heading-5": "20px",
+        "--ant-line-height": "1.4444444444444444",
+        "--ant-line-height-lg": "1.4",
+        "--ant-line-height-sm": "1.5714285714285714",
+        "--ant-font-height": "26px",
+        "--ant-font-height-lg": "28px",
+        "--ant-font-height-sm": "22px",
+        "--ant-line-height-heading-1": "1.1666666666666667",
+        "--ant-line-height-heading-2": "1.2",
+        "--ant-line-height-heading-3": "1.25",
+        "--ant-line-height-heading-4": "1.3076923076923077",
+        "--ant-line-height-heading-5": "1.4",
+        "--ant-font-size-icon": "14px",
+        "--ant-control-item-bg-active": "#fff2e8",
+        "--ant-control-item-bg-active-hover": "#ffd8bf",
+        "--ant-control-outline": "rgba(255,125,25,0.1)",
+        "--ant-listy-item-padding-block": "12px",
+        "--ant-listy-item-padding-inline": "16px"
+      }
+    },
+    {
+      "name": "component-compact",
+      "config": {
+        "components": {
+          "Listy": {
+            "algorithm": [
+              "compactAlgorithm"
+            ],
+            "fontSize": 18
+          }
+        }
+      },
+      "estimatedItemHeight": 38,
+      "variables": {
+        "--ant-control-height": "28px",
+        "--ant-size-lg": "16px",
+        "--ant-size-md": "16px",
+        "--ant-size-ms": "12px",
+        "--ant-size": "8px",
+        "--ant-size-sm": "8px",
+        "--ant-size-xs": "4px",
+        "--ant-control-height-sm": "21px",
+        "--ant-control-height-xs": "14px",
+        "--ant-control-height-lg": "35px",
+        "--ant-control-interactive-size": "14px",
+        "--ant-padding-xs": "4px",
+        "--ant-padding-sm": "8px",
+        "--ant-padding": "8px",
+        "--ant-padding-md": "16px",
+        "--ant-padding-lg": "16px",
+        "--ant-padding-content-horizontal-lg": "16px",
+        "--ant-padding-content-vertical-lg": "12px",
+        "--ant-padding-content-horizontal": "12px",
+        "--ant-padding-content-vertical": "8px",
+        "--ant-padding-content-horizontal-sm": "8px",
+        "--ant-padding-content-vertical-sm": "4px",
+        "--ant-margin-xs": "4px",
+        "--ant-margin-sm": "8px",
+        "--ant-margin": "8px",
+        "--ant-margin-md": "16px",
+        "--ant-margin-lg": "16px",
+        "--ant-listy-item-padding-block": "8px",
+        "--ant-listy-item-padding-inline": "8px"
+      }
+    },
+    {
+      "name": "style-priority",
+      "config": {
+        "components": {
+          "Listy": {
+            "fontSize": 20,
+            "fontHeight": 30,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "fontWeightStrong": 650,
+            "colorText": "#722ed1",
+            "colorTextDescription": "#7cb305",
+            "colorBgContainer": "#fff1b8",
+            "colorFillAlter": "rgba(19,194,194,0.15)",
+            "colorSplit": "#fa8c16",
+            "controlItemBgHover": "#efdbff",
+            "paddingSM": 15,
+            "padding": 24,
+            "paddingXS": 7,
+            "itemPaddingBlock": 18,
+            "itemPaddingInline": 24
+          }
+        }
+      },
+      "estimatedItemHeight": 66,
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-font-height": "30px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-font-weight-strong": "650",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-description": "#7cb305",
+        "--ant-color-bg-container": "#fff1b8",
+        "--ant-color-fill-alter": "rgba(19,194,194,0.15)",
+        "--ant-color-split": "#fa8c16",
+        "--ant-control-item-bg-hover": "#efdbff",
+        "--ant-padding-sm": "15px",
+        "--ant-padding": "24px",
+        "--ant-padding-xs": "7px",
+        "--ant-listy-item-padding-block": "18px",
+        "--ant-listy-item-padding-inline": "24px"
+      }
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "key": "listy-probe",
+          "prefix": "owned"
+        },
+        "components": {
+          "Listy": {
+            "fontSize": 20,
+            "fontHeight": 30,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "fontWeightStrong": 650,
+            "colorText": "#722ed1",
+            "colorTextDescription": "#7cb305",
+            "colorBgContainer": "#fff1b8",
+            "colorFillAlter": "rgba(19,194,194,0.15)",
+            "colorSplit": "#fa8c16",
+            "controlItemBgHover": "#efdbff",
+            "paddingSM": 15,
+            "padding": 24,
+            "paddingXS": 7,
+            "itemPaddingBlock": 18,
+            "itemPaddingInline": 24
+          }
+        }
+      },
+      "estimatedItemHeight": 66,
+      "variables": {
+        "--owned-font-size": "20px",
+        "--owned-font-height": "30px",
+        "--owned-line-height": "1.8",
+        "--owned-font-family": "monospace",
+        "--owned-font-weight-strong": "650",
+        "--owned-color-text": "#722ed1",
+        "--owned-color-text-description": "#7cb305",
+        "--owned-color-bg-container": "#fff1b8",
+        "--owned-color-fill-alter": "rgba(19,194,194,0.15)",
+        "--owned-color-split": "#fa8c16",
+        "--owned-control-item-bg-hover": "#efdbff",
+        "--owned-padding-sm": "15px",
+        "--owned-padding": "24px",
+        "--owned-padding-xs": "7px",
+        "--owned-listy-item-padding-block": "18px",
+        "--owned-listy-item-padding-inline": "24px"
+      }
+    },
+    {
+      "name": "zero-padding",
+      "config": {
+        "components": {
+          "Listy": {
+            "itemPaddingBlock": 0,
+            "itemPaddingInline": 0
+          }
+        }
+      },
+      "estimatedItemHeight": 22,
+      "variables": {
+        "--ant-listy-item-padding-block": "0px",
+        "--ant-listy-item-padding-inline": "0px"
+      }
+    },
+    {
+      "name": "undefined-padding",
+      "config": {
+        "components": {
+          "Listy": {
+            "itemPaddingBlock": {
+              "$type": "undefined"
+            },
+            "itemPaddingInline": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "estimatedItemHeight": 46,
+      "variables": {}
+    },
+    {
+      "name": "line-width",
+      "config": {
+        "token": {
+          "lineWidth": 5
+        }
+      },
+      "estimatedItemHeight": 46,
+      "variables": {
+        "--ant-listy-item-padding-block": "12px",
+        "--ant-listy-item-padding-inline": "16px"
+      }
+    },
+    {
+      "name": "font-height",
+      "config": {
+        "components": {
+          "Listy": {
+            "fontHeight": 42,
+            "itemPaddingBlock": 8
+          }
+        }
+      },
+      "estimatedItemHeight": 58,
+      "variables": {
+        "--ant-font-height": "42px",
+        "--ant-listy-item-padding-block": "8px",
+        "--ant-listy-item-padding-inline": "16px"
+      }
+    }
+  ]
+}

@@ -1,4 +1,11 @@
 import type { ListyGroup, ListyKey, ListyProps, ListyScrollAlign } from './listy.types';
+import type { GlobalToken } from './theme-component-token.types';
+
+/** Source estimate не включает границу; фактические высоты уточняются измерением строк. */
+export function listyItemHeight(token: GlobalToken): number {
+  const component = { ...token, ...token.Listy };
+  return component.fontHeight + (component.itemPaddingBlock ?? component.paddingSM) * 2;
+}
 
 export interface ListyItem<T> {
   type: 'item';

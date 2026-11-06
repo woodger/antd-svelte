@@ -388,6 +388,7 @@ export interface ListComponentToken {
   descriptionFontSize: number;
 }
 
+/** Отступы Listy; itemPaddingBlock также участвует в source estimate виртуальных строк. */
 export interface ListyComponentToken {
   itemPaddingBlock: number;
   itemPaddingInline: number;
