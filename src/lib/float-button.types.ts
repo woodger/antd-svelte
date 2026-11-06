@@ -28,6 +28,7 @@ export interface FloatButtonProps extends Omit<
   | 'autoInsertSpace'
   | '_skipSemantic'
   | '_skipContentWrapper'
+  | '_themeStyle'
 > {
   type?: FloatButtonType;
   /** @defaultValue 'circle' */

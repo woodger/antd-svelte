@@ -75,6 +75,8 @@ export interface ButtonProps extends Omit<
   _skipSemantic?: boolean;
   /** FloatButton передаёт оформленный content и Badge без дополнительного span. */
   _skipContentWrapper?: boolean;
+  /** @internal Тема составного компонента после Button tokens, до пользовательских стилей. */
+  _themeStyle?: string;
 }
 /** Параметры оформления Button для semantic callbacks без обработчиков клика. */
 export type ButtonSemanticProps = Omit<ButtonProps, 'onclick' | 'onClick'>;

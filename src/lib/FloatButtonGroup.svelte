@@ -6,6 +6,7 @@
   import Flex from './Flex.svelte';
   import SpaceCompact from './SpaceCompact.svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
   import { floatButtonPlacement } from './float-button.engine';
   import { createFloatButtonMotion } from './float-button-motion.dom';
@@ -35,6 +36,7 @@
     ...floatProps
   }: FloatButtonGroupProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('FloatButton');
   const form = useForm();
   let internalOpen = $state(false);
   let opened = $derived(open ?? internalOpen);
@@ -186,6 +188,7 @@
 <div bind:this={nativeElement} role="group" dir={config.direction}
   class={[
       'ant-float-btn-group ant-float-btn-css-var',
+      componentTheme.className,
       individual && 'ant-float-btn-group-individual',
       menu && `ant-float-btn-group-${actualPlacement}`,
       menu && 'ant-float-btn-group-menu-mode',
@@ -197,6 +200,7 @@
       rootClassName
     ]}
   style={[
+      componentTheme.style,
       contextStyles.root,
       config.floatButtonGroup?.style,
       slots.root,

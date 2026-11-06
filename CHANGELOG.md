@@ -9,6 +9,11 @@
 
 ### Added
 
+- FloatButton/Group/BackTop: компонентная тема с alias overrides и algorithms,
+  наследованием и custom cssVar prefix. Сохранены Button tokens, приоритеты
+  config/semantic/local styles, native refs, фокус и формы. Добавлены 15 UMD-тем
+  с 225 наборами измерений и unit/SSR/browser-проверки.
+
 - ConfigProvider.getTargetContainer: общий Window/HTMLElement target для Affix
   и Anchor с вложенным наследованием и приоритетом локальных параметров.
   Смена target сохраняет DOM, поля и focus; регистрации Anchor не теряются

@@ -259,7 +259,17 @@
         "integration:float-button",
         "src/lib/wave.svelte.ts",
         "tests/browser/wave.spec.ts",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/theme-float-button-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-float-button-tokens-reference.json",
+        "tests/browser/float-button-theme-metrics.ts",
+        "tests/browser/fixtures/float-button-theme-presets.ts",
+        "tests/browser/fixtures/FloatButtonThemeControl.svelte",
+        "tests/browser/fixtures/FloatButtonThemeCase.svelte",
+        "tests/browser/fixtures/FloatButtonThemeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-float-button-theme-reference.json",
+        "tests/browser/float-button-theme.spec.ts",
+        "tests/package/float-button-theme.ssr.test.ts"
       ],
       "features": [
         {
@@ -308,11 +318,11 @@
         },
         {
           "id": "global-parity",
-          "title": "PrefixCls, общий z-index context, произвольные component tokens",
+          "title": "Произвольный prefixCls и общий z-index context",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Наследуются действующие локальные theme/Tooltip/Badge/Button ограничения. Нет полного общего React token/prefix/z-index механизма; CSS popup base используется без нового stacking context API."
+          "note": "Общие React prefix/z-index механизмы ещё не перенесены; CSS popup base используется без нового stacking context API. FloatButton aliases/algorithms покрыты отдельной feature component-theme; ограничения Button/Badge/Tooltip сохраняются."
         },
         {
           "id": "source-wave",
@@ -328,7 +338,26 @@
             "tests/browser/wave.spec.ts",
             "docs/reference/wave.md"
           ],
-          "note": "FloatButton, BackTop и Group trigger используют общий Button, как в upstream. Наследуют ConfigProvider.wave, source trigger/effect и Button guards; info.component=Button. Href остаётся anchor без Wave. Общие prefix/z-index/component token gaps остаются отдельной feature."
+          "note": "FloatButton, BackTop и Group trigger используют общий Button, как в upstream. Наследуют ConfigProvider.wave, source trigger/effect и Button guards; info.component=Button. Href остаётся anchor без Wave. Общие prefix/z-index gaps остаются отдельной feature; FloatButton aliases/algorithms покрыты component-theme."
+        },
+        {
+          "id": "component-theme",
+          "title": "FloatButton alias tokens/algorithms, общий scope Group/BackTop и Button composition",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-float-button-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-float-button-tokens-reference.json",
+            "tests/browser/float-button-theme-metrics.ts",
+            "tests/browser/fixtures/float-button-theme-presets.ts",
+            "tests/browser/fixtures/FloatButtonThemeControl.svelte",
+            "tests/browser/fixtures/FloatButtonThemeCase.svelte",
+            "tests/browser/fixtures/FloatButtonThemeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-float-button-theme-reference.json",
+            "tests/browser/float-button-theme.spec.ts",
+            "tests/package/float-button-theme.ssr.test.ts"
+          ],
+          "note": "В закреплённом source ComponentToken пуст; поддержаны реальные alias overrides, global/component algorithms, custom cssVar prefix и nested/reset/sibling scopes. Размер controlHeightLG, icon fontSizeIcon×1.5, paddingXXS, marginXXL/marginLG, group padding и остальные alias declarations сверяются с 15 UMD-темами / 225 наборами CSS/geometry. Group и BackTop используют scope FloatButton; отдельные вымышленные tokens не добавлены. Button component tokens, config style, semantic/local CSS variables и plain styles сохраняют исходный приоритет; reactive updates/disable/inherit reset сохраняют DOM/ref/focus, draft/selection, FormData и native keyboard submit."
         }
       ]
     },

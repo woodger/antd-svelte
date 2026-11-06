@@ -5,6 +5,7 @@
   import FloatButtonIcon from './FloatButtonIcon.svelte';
   import { buttonHasContent, buttonText } from './button.engine';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useFloatButton } from './float-button-context';
   import { connectFeedbackFocus } from './feedback.dom';
   import type { BadgeProps } from './badge.types';
@@ -27,6 +28,7 @@
     ...rest
   }: FloatButtonProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('FloatButton');
   const group = useFloatButton();
   let actualShape = $derived(group?.shape || shape);
   let individual = $derived(group?.individual ?? true);
@@ -124,8 +126,10 @@
 {/snippet}
 {#snippet node()}
   <Button {...rest} {type} shape={actualShape} size="large" icon={actualIcon} children={contentNode} _skipSemantic _skipContentWrapper
+    _themeStyle={componentTheme.style}
     class={[
         'ant-float-btn ant-float-btn-css-var',
+        componentTheme.className,
         `ant-float-btn-${type}`,
         `ant-float-btn-${actualShape}`,
         config.direction === 'rtl' && 'ant-float-btn-rtl',

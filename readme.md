@@ -6384,8 +6384,17 @@ visibilityHeight=0, target не вызывается. После mount scroll о
 ConfigProvider.floatButton.backTopIcon задаёт BackTop icon. Как в исходной 6.6.8,
 FloatButton не потребляет объявленные в глобальном floatButton config class/style/
 semantic slots; локальные props работают. Config вложенного provider наследуется
-при undefined и заменяется целиком при заданном объекте. Сохраняются прежние
-ограничения Button/Badge/Tooltip; произвольные prefix/component tokens и
+при undefined и заменяется целиком при заданном объекте.
+
+`theme.components.FloatButton` применяет alias overrides и algorithms к кнопкам,
+Group и BackTop. Собственных component tokens у закреплённого FloatButton нет:
+размер задаёт controlHeightLG, иконку — fontSizeIcon, отступы — paddingXXS,
+marginXXL/marginLG и padding группы. Button сохраняет свои component tokens;
+его config style, semantic styles и локальный style имеют приоритет над темой.
+Вложенные и соседние providers изолированы, поддержаны custom cssVar prefix,
+реактивные изменения и возврат к legacy defaults.
+
+Сохраняются прежние ограничения Button/Badge/Tooltip; произвольный prefixCls и
 общий React z-index context ещё не перенесены. CSS-рецепт воспроизводит 42 правила;
 глобальный fade адаптирован через WAAPI с исходными длительностями и reduced motion.
 Wave наследуется через общий Button, включая BackTop и trigger группы.

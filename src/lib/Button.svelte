@@ -49,6 +49,7 @@
     nativeElement = $bindable(),
     _skipSemantic,
     _skipContentWrapper,
+    _themeStyle,
     ...attributes
   }: ButtonElementProps<
     Href
@@ -167,7 +168,7 @@
     ]
   );
   let rootStyle = $derived(
-    [componentTheme.style, contextStyles.root, config.button?.style, slots.root, style]
+    [componentTheme.style, _themeStyle, contextStyles.root, config.button?.style, slots.root, style]
       .filter(Boolean).join(';')
   );
 
