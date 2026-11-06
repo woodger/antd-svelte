@@ -35,9 +35,10 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker';
+  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker';
 
 const factories = {
+  ColorPicker: () => ({}),
   DatePicker: (token: GlobalToken) => ({
     ...prepareInputTokens(token),
     ...preparePickerPanelTokens(token),
@@ -346,6 +347,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  ColorPicker: [],
   DatePicker: [],
   Calendar: [],
   Transfer: [],

@@ -832,6 +832,20 @@ theme variables и сохраняют inline-позицию, DOM содержи�
 имеют приоритет. Общий zIndex context и motion ещё не перенесены;
 наличие zIndexPopup не меняет порядок native top layer.
 
+## Тема ColorPicker
+
+ColorPicker 6.6.8 не объявляет собственных public component tokens. Запись
+`components.ColorPicker` применяет aliases и algorithms к trigger и popup;
+Popup дополнительно получает собственные defaults Popover. Его root styles
+сохраняют приоритет, а содержимое повторяет source colorText reset.
+Collapse пресетов, Input/InputNumber, Select и Slider сохраняют свои темы;
+ColorPicker применяет поверх них исходные CSS-правила размеров и шрифтов.
+Bright-state пресетов использует глобальный colorBgElevated, как useToken Source.
+
+Изменения темы сохраняют DOM, popup position, HEX draft/caret/focus, выбранный
+цвет и состояние пресетов. 15 UMD-тем покрывают размеры, single/gradient,
+HEX/RGB/HSB, RTL, style priorities, prefix, algorithms и восемь theme scopes.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

@@ -1,6 +1,9 @@
 <script lang="ts">
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -16,6 +19,9 @@
 
   let props: ColorPickerProps = $props();
   const config = useConfig();
+  const designTheme = useDesignTokenContext();
+  const componentTheme = useComponentTheme('ColorPicker');
+  const popoverTheme = useComponentTheme('Popover');
   const field = useFormField();
   const form = useForm();
   const compact = useCompact();
@@ -74,6 +80,11 @@
     ? props.styles({ props: mergedProps }) : props.styles);
   let styles = $derived(mergeSlots(contextStyles, { root: config.colorPicker?.style },
     localStyles, { root: props.style }, ';'));
+  let popupThemeStyle = $derived(
+    [popoverTheme.style, componentTheme.style, styles.popup?.root].filter(Boolean).join(';')
+      || undefined
+  );
+  const initialPopupStyle = untrack(() => popupThemeStyle);
   const owned = new Set([
     'value', 'defaultValue', 'mode', 'open', 'disabled', 'format', 'defaultFormat',
     'allowClear', 'disabledAlpha', 'disabledFormat', 'presets', 'size', 'trigger', 'placement',
@@ -161,6 +172,7 @@
         return match?.[0].toLowerCase() as 'left' | 'right' | 'top' | 'bottom' | undefined;
       },
       get autoAdjustOverflow() { return props.autoAdjustOverflow !== false; },
+      allowZeroSize: () => untrack(() => designTheme.enabled),
       maxWidth: '100vw',
       getPosition(target, bounds, viewport) {
         const placement = props.placement ?? 'bottomLeft';
@@ -263,6 +275,11 @@
   .color-picker-popup[hidden], .color-picker-popup:not(:popover-open) { display: none; }
   .color-picker-surface { max-width: calc(100vw - 16px); }
   .color-picker-button { font: inherit; color: inherit; text-align: start; line-height: normal; }
+  .color-picker-button.color-picker-source-theme { font-size: var(--ant-font-size); font-family: var(--ant-font-family); }
+  .color-picker-button.color-picker-source-theme:disabled { color: var(--ant-color-text-disabled); }
+  .color-picker-source-theme :global(.color-fields .ant-input-number-sm) { height: auto; min-height: var(--ant-control-height-sm); }
+  .color-picker-source-theme :global(.color-fields .ant-color-picker-format-select > .ant-select) { height: 100%; }
+  .color-picker-source-theme :global(.ant-color-picker-inner) { color: var(--ant-color-text); }
   .color-picker-button:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
   .color-picker-trigger-clear { display: block; }
   @media (prefers-reduced-motion: reduce) { .color-picker-button { transition: none; } }
@@ -285,13 +302,14 @@
         props.onblur?.(event);
       }}
       class={[`${prefixCls}-trigger`, 'ant-color-picker-css-var', 'color-picker-button',
+        componentTheme.className, designTheme.enabled && 'color-picker-source-theme',
         config.direction === 'rtl' && `${prefixCls}-rtl`,
         size === 'small' && `${prefixCls}-sm`, size === 'large' && `${prefixCls}-lg`,
         disabled && `${prefixCls}-trigger-disabled`, open && `${prefixCls}-trigger-active`,
         field?.status && `${prefixCls}-status-${field.status}`,
         compactClasses(prefixCls, config.direction, compact), config.colorPicker?.class,
         props.rootClassName, props.class, classes.root]}
-      style={styles.root}>
+      style={[componentTheme.style, styles.root].filter(Boolean).join(';') || undefined}>
       {#if color.cleared}
         <span class={[`${prefixCls}-clear`, 'color-picker-trigger-clear', classes.body]}
           style={styles.body} aria-hidden="true"></span>
@@ -308,7 +326,7 @@
           {:else if color.isGradient()}
             {#each color.getColors() as stop, index}
               <span class={[`${prefixCls}-trigger-text-cell`, open && activeIndex !== index
-                && `${prefixCls}-trigger-text-cell-inactive`]}>{stop.color.toRgbString()} {stop.percent}%</span>
+                && `${prefixCls}-trigger-text-cell-inactive`]}><!-- Раздельные text nodes сохраняют дробную ширину React-подписи. -->{#each [stop.color.toRgbString(), ' ', stop.percent, '%'] as part}{part}{/each}</span>
             {/each}
           {:else}{getColorText(color, format)}{/if}
         </span>
@@ -343,8 +361,10 @@
   <div bind:this={popup} id={`ant-color-picker-${id}`} role="dialog" aria-label="Color picker"
     popover="manual" hidden tabindex="-1" dir={config.direction}
     class={['ant-popover', prefixCls, 'ant-color-picker-css-var', 'color-picker-popup',
+      componentTheme.className, designTheme.enabled && 'color-picker-source-theme',
       `ant-popover-placement-${actualPlacement}`, config.direction === 'rtl' && `${prefixCls}-rtl`,
-      props.rootClassName, classes.popup?.root]} style={styles.popup?.root}
+      props.rootClassName, classes.popup?.root]} style={initialPopupStyle}
+    {@attach node => connectComponentTheme(node, popupThemeStyle)}
     data-ant-color-theme={config.theme.mode} data-ant-color-primary={config.theme.primary}
     onpointerenter={() => { if (timer) clearTimeout(timer); }} onpointerleave={() => hover(false)}>
     {#if arrow}<div class="ant-popover-arrow" style={arrowStyle} aria-hidden="true"></div>{/if}

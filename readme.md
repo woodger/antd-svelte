@@ -1539,7 +1539,19 @@ popup. DestroyOnHidden управляет сохранением чернови�
 portal, listeners и timers очищаются. Panel изолирует FormItem и Compact. Как upstream,
 ColorPicker не добавляет скрытое поле в FormData; значение передаётся callbacks.
 
-Остаются общий token/prefix engine, полный rc-trigger overflow/motion API и React
+`ConfigProvider.theme.components.ColorPicker` поддерживает alias overrides и
+component algorithms, dark/compact, cssVar prefix и вложенные темы. Собственных
+public component tokens у ColorPicker 6.6.8 нет. Trigger и popup получают общую
+тему; Popover, Collapse пресетов и поля сохраняют независимые темы и исходные
+приоритеты CSS. Bright-state пресетов использует глобальный colorBgElevated.
+
+Обновление темы сохраняет popup DOM/position, цвет, незавершённый HEX input,
+caret/focus и раскрытие пресетов. Локальные и semantic styles сохраняют приоритет;
+popup.root.color меняет внешний popup, содержимое сохраняет исходный colorText
+reset. Проверки и 15 UMD-тем — [color-picker-theme](./tests/browser/color-picker-theme.spec.ts),
+`?fixture=color-picker-theme`.
+
+Остаются произвольный prefix CSS, полный rc-trigger overflow/motion API и React
 development/PurePanel API. Native DOM и Svelte snippets заменяют React nodes/refs.
 Извлечённый [CSS](./src/lib/vendor/color-picker.css) воспроизводится рецептом из 94 правил.
 Логика сопровождается MIT [FastColor](./src/lib/vendor/LICENSE.fast-color) и

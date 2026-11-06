@@ -9,6 +9,12 @@
 
 ### Added
 
+- ColorPicker: alias overrides и algorithms, независимые темы Popover/Collapse
+  и внутренних полей. Theme updates сохраняют popup position, HEX draft/focus
+  и пресеты; восстановлены source body reset, flex-размеры полей и bright-state
+  от глобального colorBgElevated. Добавлены 15 UMD-тем / 120 scope-наборов,
+  60 popup-измерений и SSR/browser-проверки.
+
 - DatePicker, RangePicker, TimePicker и TimeRangePicker: общие component tokens
   через `components.DatePicker`, aliases/algorithms и независимые темы popup.
   Обновления сохраняют draft, фокус, выделение и исходную прокрутку колонок.

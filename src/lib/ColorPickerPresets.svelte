@@ -1,6 +1,8 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { generateColor, isBrightColor } from './color-picker.engine';
   import { toggleCollapseKey } from './collapse.engine';
   import { colorPickerRuRU } from './color-picker.locale';
@@ -16,10 +18,14 @@
     onChange: (value: AggregationColor) => void;
   } = $props();
   const config = useConfig();
+  const collapseTheme = useComponentTheme('Collapse');
+  const designTheme = useDesignTokenContext();
   const id = $props.id();
   let opened = $state(untrack(() => presets.flatMap((preset, index) =>
     preset.defaultOpen === false ? [] : [`panel-${preset.key ?? index}`])));
   let locale = $derived({ ...colorPickerRuRU, ...config.locale.colorPicker });
+  let background = $derived(designTheme.enabled ? designTheme.state.token.colorBgElevated
+    : config.theme.mode === 'dark' ? '#1f1f1f' : '#fff');
 </script>
 
 <style>
@@ -32,7 +38,8 @@
 
 <div class={`${prefixCls}-presets`}>
   <div class={['ant-collapse ant-collapse-css-var ant-collapse-ghost ant-collapse-icon-placement-start',
-    config.direction === 'rtl' && 'ant-collapse-rtl']}>
+    collapseTheme.className, config.direction === 'rtl' && 'ant-collapse-rtl']}
+    style={collapseTheme.style}>
     {#each presets as preset, index (preset.key ?? index)}
       {@const key = `panel-${preset.key ?? index}`}
       {@const open = opened.includes(key)}
@@ -65,7 +72,7 @@
                 aria-pressed={color.toCssString() === value.toCssString()}
                 class={[`${prefixCls}-color-block`, `${prefixCls}-presets-color`, 'preset-color',
                   color.toCssString() === value.toCssString() && `${prefixCls}-presets-color-checked`,
-                  isBrightColor(color, config.theme.mode === 'dark' ? '#1f1f1f' : '#fff')
+                  isBrightColor(color, background)
                     && `${prefixCls}-presets-color-bright`]}
                 onclick={() => onChange(color)}>
                 <span class={`${prefixCls}-color-block-inner`}

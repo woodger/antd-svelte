@@ -3980,7 +3980,7 @@
       "name": "ColorPicker",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Автономный перенос ColorPicker по общему поручению: исходная Color-модель, single/gradient, palette/sliders/inputs, controlled transitions, presets и semantic config. Общий token/motion/trigger engine остаётся отдельной областью.",
+      "scopeReason": "Автономный перенос ColorPicker по общему поручению: исходная Color-модель, single/gradient, palette/sliders/inputs, controlled transitions, presets и semantic config. Aliases/algorithms и темы дочерних controls перенесены; полный motion/trigger engine и произвольный prefix остаются отдельно.",
       "upstreamPath": "components/color-picker",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -4060,7 +4060,17 @@
         "tests/browser/fixtures/PopupContainerContent.svelte",
         "tests/browser/fixtures/PopupContainerFixtures.svelte",
         "tests/browser/popup-container.spec.ts",
-        "tests/package/popup-container.ssr.test.ts"
+        "tests/package/popup-container.ssr.test.ts",
+        "src/lib/theme-component-style.engine.ts",
+        "tests/browser/color-picker-theme.spec.ts",
+        "tests/browser/color-picker-theme-metrics.ts",
+        "tests/browser/fixtures/ColorPickerThemeCase.svelte",
+        "tests/browser/fixtures/ColorPickerThemeControl.svelte",
+        "tests/browser/fixtures/ColorPickerThemeFixtures.svelte",
+        "tests/browser/fixtures/color-picker-theme-presets.ts",
+        "tests/browser/fixtures/ant-design-color-picker-theme-reference.json",
+        "tests/package/color-picker-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -4128,11 +4138,11 @@
         },
         {
           "id": "advanced-trigger-theme",
-          "title": "Полный rc-trigger/motion и общий token/prefix engine",
+          "title": "Полный rc-trigger/motion, prefix CSS и diagnostics",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Произвольные component tokens/prefix CSS, полный rc-trigger DOM boundary для nested clipping/scaled containers, motion и React diagnostics/PurePanel не перенесены. Числовой viewport flip/shift, все 12 placements, arrow/pointAtCenter и custom container используют общий source engine с Tour. V1-ready не означает полный React API."
+          "note": "Произвольный prefix CSS, полный rc-trigger DOM boundary для nested clipping/scaled containers, motion и React diagnostics/PurePanel не перенесены. ColorPicker не имеет собственных public component tokens; alias overrides/algorithms и независимые темы дочерних controls перенесены отдельно. Числовой viewport flip/shift, все 12 placements, arrow/pointAtCenter и custom container используют общий source engine с Tour. V1-ready не означает полный React API."
         },
         {
           "id": "popup-container",
@@ -4155,6 +4165,27 @@
             "src/lib/ColorPicker.svelte"
           ],
           "note": "ColorPicker → Popover/Tooltip выбирает локальную функцию getPopupContainer или ConfigProvider fallback через ||; собственный undefined сохраняет provider, в отличие от Tabs. Вложенный provider наследует функцию и при undefined, независимо от theme.inherit. Общий portal принимает HTMLElement или ShadowRoot, переносит theme variables и сохраняет native modal fallback без getter. Смена функции с тем же DOM-контейнером сохраняет popup, inputs, state/focus/selection. ComposedPath отличает pointer внутри shadow popup от внешнего; закрытие возвращает focus в native trigger. Стили document не внедряются в ShadowRoot автоматически. Приоритеты, payload trigger и обновления сверены с официальным UMD; SSR не вызывает getter. Как source lazy popup, ColorPicker не вызывает локальный/provider getter до первого открытия; destroyOnHidden снимает скрытый custom portal. Остальные source consumers общего container context переносятся отдельно."
+        },
+        {
+          "id": "component-theme",
+          "title": "Aliases/algorithms ColorPicker и независимые темы popup/внутренних controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/ColorPicker.svelte",
+            "src/lib/ColorPickerPresets.svelte",
+            "tests/browser/color-picker-theme.spec.ts",
+            "tests/browser/color-picker-theme-metrics.ts",
+            "tests/browser/fixtures/ColorPickerThemeCase.svelte",
+            "tests/browser/fixtures/ColorPickerThemeControl.svelte",
+            "tests/browser/fixtures/ColorPickerThemeFixtures.svelte",
+            "tests/browser/fixtures/color-picker-theme-presets.ts",
+            "tests/browser/fixtures/ant-design-color-picker-theme-reference.json",
+            "tests/package/color-picker-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Собственный public ComponentToken пуст, как 6.6.8; ColorPicker получает aliases/algorithms, Popover defaults и source content colorText reset. Collapse пресетов получает собственную тему; bright-state использует глобальный colorBgElevated. Исходные flex sizing и приоритеты CSS полей сохраняют независимые Input/InputNumber/Select/Slider themes. 15 UMD-тем / 120 scope-наборов и 60 popup metrics покрывают single/gradient, HEX/RGB/HSB, размеры, RTL, local variables, style priorities, algorithms и nesting/reset/siblings. Theme updates сохраняют DOM/position popup, цвет, draft/caret/focus, пресеты и callback order; legacy reset и cleanup проверены. Native Select сохраняет отдельную flex wrapper, поэтому сравниваются используемые размеры видимой части; внутренние flex-only min constraints не равны source DOM и не используются как oracle."
         }
       ]
     },
