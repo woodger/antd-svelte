@@ -24,12 +24,17 @@ export function useDesignTokenContext(): DesignTokenContext {
 }
 
 /** Локальная theme создаёт scope, отсутствующая theme сохраняет родительский token/state. */
-export function provideDesignTokens(getTheme: () => ThemeConfig | undefined, id: string) {
+export function provideDesignTokens(
+  getTheme: () => ThemeConfig | undefined,
+  id: string,
+  getElement?: () => HTMLElement | undefined
+) {
   const parent = useDesignTokenContext();
   const config = $derived(mergeThemeConfig(getTheme(), parent.config, id));
   const enabled = $derived(hasSourceTheme(getTheme()) || parent.enabled);
   const state = $derived(getTheme() ? createDesignTokenState(config) : parent.state);
   const context: DesignTokenContext = {
+    get element() { return getElement?.() ?? parent.element; },
     get config() { return config; },
     get enabled() { return enabled; },
     get state() { return state; },

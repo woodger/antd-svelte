@@ -627,6 +627,11 @@
 
 ### Fixed
 
+- BorderBeam: alias tokens и algorithms подключены к декоративным слоям.
+  Внешний target получает тему владельца с CSS overrides; смена темы сохраняет
+  слои, focus/selection и измеренную рамку. Добавлены Source/SSR/browser-проверки
+  priority, scopes, updates и освобождения observer/listener.
+
 - Masonry: подключены alias tokens/algorithms и глобальный theme.token.motion.
   Fresh remeasure сохраняет DOM/draft/selection/focus; отключение motion завершает
   текущий переход, отсутствие реальной анимации больше не задерживает удаление.

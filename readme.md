@@ -7477,17 +7477,25 @@ ConfigProvider.borderBeam задаёт class/style слоёв. Вложенны�
 после style. Theme light/dark и primary работают через CSS variables; disabled,
 locale и направление не меняют декоративное поведение.
 
+BorderBeam принимает alias overrides и algorithms из theme.components.BorderBeam;
+собственных component tokens у него нет. Line width, primary gradient и typography
+обновляются без пересоздания слоёв. Внешний target получает тему владельца эффекта,
+включая CSS overrides его ConfigProvider, независимо от темы физического контейнера.
+Context/local style и явные параметры сохраняют приоритет над вычисленной темой.
+При удалении source theme возвращается прежнее наследование CSS от target.
+
 CSS-рецепт border-beam сохраняет 10 правил и antBorderBeamMove с проверкой
 SHA-256 архива. Слои видимы при поддержке mask-composite и offset-path:rect;
 иначе применяется исходный CSS fallback display:none. Reduced motion скрывает
 псевдоэлемент и отключает анимацию. Hover/pause настраиваются обычными CSS rules.
 Эффект не заменяет focus ring или validation border.
 
-PrefixCls и общий React theme/components token engine пока отсутствуют.
+Произвольный prefixCls пока не перенесён.
 Автоматический поиск host через React child/ref заменён описанным target API;
 прикладные обёртки и runtime React dependencies не добавляются. Fixture
 `?fixture=border-beam`, engine/SSR, package SSR и браузерные проверки принадлежат
-библиотеке; пример выше не требует изменения сайта-потребителя.
+библиотеке. Source aliases, scopes и reactive cleanup дополнительно проверяются
+через `?fixture=border-beam-theme`; пример выше не требует изменения сайта-потребителя.
 
 ## Watermark
 

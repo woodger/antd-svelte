@@ -456,6 +456,27 @@ Inner header использует colorFillAlter, inner body — общий ве
 они не входят в публичный ThemeConfig ни здесь, ни в 6.6.8. Оба значения оставляют
 CSS-переменные включёнными также в upstream.
 
+## Тема BorderBeam
+
+BorderBeam не объявляет собственных component tokens. Alias overrides и отдельный
+algorithm задают lineWidth, primary gradient и typography до context/local style
+и переменных явных параметров. Theme.token.motion=false не отключает его CSS
+keyframe в Ant Design 6.6.8; prefers-reduced-motion сохраняет отдельный CSS fallback.
+
+Декоративные слои могут находиться во внешнем target. Они получают переменные
+логического владельца из существующего ConfigProvider DOM boundary, включая
+его CSS overrides. Изменения атрибутов владельца/предков и resize обновляют снимок;
+смена темы сохраняет слои, draft/selection/focus и измеренную рамку target.
+Удаление эффекта освобождает observer/listener; отключение source theme возвращает
+наследование от физического target. На SSR DOM не читается и слои не создаются.
+
+Сверка с официальным UMD охватывает aliases, algorithms, нули/undefined,
+cssVar prefix/key, priority, nested/reset/sibling scopes и внешний target:
+[токены](../../src/lib/theme-border-beam-tokens-reference.test.ts),
+[браузерные метрики](../../tests/browser/fixtures/ant-design-border-beam-theme-reference.json),
+[поведение](../../tests/browser/border-beam-theme.spec.ts) и
+[SSR](../../tests/package/border-beam-theme.ssr.test.ts).
+
 ## Тема Masonry
 
 Masonry не объявляет собственных component tokens. Alias overrides и algorithms

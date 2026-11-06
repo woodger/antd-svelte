@@ -13613,12 +13613,29 @@
           "note": "Framework adaptation: target задаётся явно; snippets и содержимое отображаются без wrapper. React getNodeRef/supportRef/cloneElement не эмулируются."
         },
         {
+          "id": "source-theme-aliases",
+          "title": "Alias tokens, algorithms и тема владельца внешнего target",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/BorderBeam.svelte",
+            "src/lib/border-beam.dom.ts",
+            "src/lib/theme-context.svelte.ts",
+            "src/lib/theme-border-beam-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-border-beam-tokens-reference.json",
+            "tests/package/border-beam-theme.ssr.test.ts",
+            "tests/browser/border-beam-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-border-beam-theme-reference.json"
+          ],
+          "note": "ComponentToken BorderBeam в 6.6.8 пуст. Alias overrides/algorithms применяются до context/local style и явных параметров; lineWidth, primary gradient и typography сверены с UMD. Проверены dark/compact, zero/undefined, cssVar prefix/key, priority, nested/reset/sibling scopes и внешний target. Слои получают computed CSS variables владельца, включая overrides, независимо от физического target; атрибуты владельца/предков и resize обновляют снимок. Theme updates сохраняют DOM, draft/selection/focus и border snapshot. Unmount освобождает observer/listener; source off возвращает прежнее target inheritance. Theme.token.motion=false не отключает source keyframe; reduced-motion CSS сохраняется."
+        },
+        {
           "id": "theme-prefix",
-          "title": "PrefixCls и общий theme/components token engine",
+          "title": "Произвольный prefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Поддерживаются существующие CSS variables и настройки темы библиотеки; произвольные React prefixCls/theme algorithm/components tokens пока не перенесены."
+          "note": "Alias tokens/algorithms и owner theme подключены отдельной feature. CSS generation для произвольного prefixCls ещё отсутствует."
         }
       ]
     },

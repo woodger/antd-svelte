@@ -202,7 +202,8 @@
 
   const parent = useConfig();
   const themeId = $props.id();
-  const designTokens = provideDesignTokens(() => theme, themeId);
+  let element = $state<HTMLDivElement>();
+  const designTokens = provideDesignTokens(() => theme, themeId, () => element);
   const config: ConfigContext = {
     get tabs() {
       return tabs ?? parent.tabs;
@@ -444,6 +445,7 @@
 {/if}
 
 <div
+  bind:this={element}
   class={[
     'ant-svelte-theme',
     designTokens.enabled && designTokens.state.key,

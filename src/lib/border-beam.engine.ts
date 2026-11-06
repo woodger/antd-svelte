@@ -7,6 +7,8 @@ export interface BorderBeamRuntimeOptions extends Pick<
   'color' | 'count' | 'duration' | 'lineWidth' | 'outset' | 'size' | 'style'
 > {
   className: string;
+  themeStyle?: string;
+  themeOrigin?: HTMLElement;
   contextStyle?: string;
 }
 
@@ -49,6 +51,7 @@ export function getBorderBeamStyle(
     : borderWidth.map(inset).join(' ');
 
   return [
+    options.themeStyle,
     options.contextStyle,
     options.style,
     gradient && `--ant-border-beam-beam-gradient:${gradient}`,

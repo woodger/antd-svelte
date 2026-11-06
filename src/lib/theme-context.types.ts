@@ -29,6 +29,8 @@ export interface DesignTokenState extends ThemeTokenResult {
 }
 
 export interface DesignTokenContext {
+  /** DOM boundary владельца для portal CSS overrides; на SSR отсутствует. */
+  readonly element?: HTMLElement;
   readonly config: ResolvedThemeConfig;
   readonly enabled: boolean;
   readonly state: DesignTokenState;

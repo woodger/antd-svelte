@@ -92,6 +92,7 @@ describe('BorderBeam engine', () => {
     const style = getBorderBeamStyle(
       {
         className: '',
+        themeStyle: '--ant-line-width:4px',
         contextStyle: 'opacity:0.5;--ant-border-beam-size:80px',
         style: 'opacity:0.8;--ant-border-beam-size:90px;--ant-border-beam-delay:1s',
         size: 160,
@@ -102,7 +103,7 @@ describe('BorderBeam engine', () => {
     );
 
     expect(style).toBe(
-      'opacity:0.5;--ant-border-beam-size:80px;opacity:0.8;--ant-border-beam-size:90px;--ant-border-beam-delay:1s;--ant-border-beam-size:160px;--ant-border-beam-inset-offset:-2px -2px -2px -2px'
+      '--ant-line-width:4px;opacity:0.5;--ant-border-beam-size:80px;opacity:0.8;--ant-border-beam-size:90px;--ant-border-beam-delay:1s;--ant-border-beam-size:160px;--ant-border-beam-inset-offset:-2px -2px -2px -2px'
     );
   });
 });
