@@ -43,7 +43,7 @@ import type { RadioConfig } from './radio.types';
 import type { CheckboxConfig } from './checkbox.types';
 import type { SwitchConfig } from './switch.types';
 import type { WaveConfig } from './wave.types';
-import type { GetPopupContainer, RenderEmptyHandler } from './types';
+import type { GetPopupContainer, GetTargetContainer, RenderEmptyHandler } from './types';
 import type { RangePickerConfig } from './range-picker.types';
 import type { InputConfig } from './input.types';
 import type { InputPasswordConfig } from './input-password.types';
@@ -101,6 +101,7 @@ export interface ConfigContext {
   readonly virtual?: boolean;
   readonly renderEmpty?: RenderEmptyHandler;
   readonly getPopupContainer?: GetPopupContainer;
+  readonly getTargetContainer?: GetTargetContainer;
   readonly rangePicker?: RangePickerConfig;
   readonly textArea?: TextAreaConfig;
   readonly input?: InputConfig;

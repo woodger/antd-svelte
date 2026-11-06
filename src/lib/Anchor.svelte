@@ -37,8 +37,10 @@
   let ink = $state<HTMLSpanElement>();
   let runtime = $state.raw<ReturnType<typeof createAnchorRuntime>>();
   let registrations = $state.raw<readonly { href: string; targetOffset?: number; }[]>([]);
+  // Cleanup effects могут читать прошлый rune snapshot; Map сохраняет актуальные регистрации.
+  const registeredLinks = new Map<string, (typeof registrations)[number]>();
   const defaultContainer = () => window;
-  let container = $derived(getContainer ?? defaultContainer);
+  let container = $derived(getContainer ?? config.getTargetContainer ?? defaultContainer);
   let info = $derived(
     {
       props: {
@@ -80,14 +82,12 @@
       return slots;
     },
     register(href, targetOffset) {
-      const existing = registrations.find(link => link.href === href);
-      registrations = existing
-        ? registrations.map(
-          link => link === existing && targetOffset !== undefined ? { href, targetOffset } : link
-        )
-        : [...registrations, { href, targetOffset }];
+      if (!registeredLinks.has(href) || targetOffset !== undefined)
+        registeredLinks.set(href, { href, targetOffset });
+      registrations = [...registeredLinks.values()];
       return () => {
-        registrations = registrations.filter(link => link.href !== href);
+        registeredLinks.delete(href);
+        registrations = [...registeredLinks.values()];
       };
     },
     click(event, href, title, offset) {

@@ -1,0 +1,33 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "operation": "Declared ConfigProvider.getTargetContainer ShadowRoot return type with unmodified source consumers; real native ShadowRoot and layout, no geometry stubs."
+  },
+  "observations": [
+    {
+      "component": "Affix",
+      "target": "ShadowRoot",
+      "calls": 4,
+      "errors": [
+        "e.getBoundingClientRect is not a function",
+        "e.getBoundingClientRect is not a function"
+      ],
+      "consoleErrors": []
+    },
+    {
+      "component": "Anchor",
+      "target": "ShadowRoot",
+      "calls": 4,
+      "errors": [
+        "t.getBoundingClientRect is not a function"
+      ],
+      "consoleErrors": [
+        "TypeError: t.getBoundingClientRect is not a function\n    at ga (<anonymous>:119:27775)\n    at <anonymous>:119:28742\n    at Array.forEach (<anonymous>)\n    at <anonymous>:119:28645\n    at Object.current (<anonymous>:119:28834)\n    at <anonymous>:3:17746\n    at <anonymous>:119:29774\n    at Id (<anonymous>:165:137)\n    at Xb (<anonymous>:200:284)\n    at <anonymous>:197:106"
+      ]
+    }
+  ]
+}

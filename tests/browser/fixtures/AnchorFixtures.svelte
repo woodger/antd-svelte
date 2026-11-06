@@ -44,6 +44,7 @@
           id="fixture-anchor"
           items={legacy ? undefined : items}
           affix={fixed}
+          offsetTop={fixed ? 8 : undefined}
           getContainer={() => container!}
           direction={horizontal ? 'horizontal' : 'vertical'}
           showInkInFixed

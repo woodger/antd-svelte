@@ -46,7 +46,7 @@
     };
   });
   $effect(() => {
-    const getTarget = target ?? (() => window);
+    const getTarget = target ?? config.getTargetContainer ?? (() => window);
     getTarget();
     runtime?.configure({ target: getTarget, offsetTop, offsetBottom });
   });

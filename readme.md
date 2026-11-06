@@ -1112,7 +1112,9 @@ children Snippet; массив items имеет приоритет. `items={unde
 
 По умолчанию Affix включён; `affix` принимает false/true или дополнительные
 Affix props без offsetTop/target/children. getContainer возвращает окно
-(по умолчанию) или HTMLElement и используется для scroll и Affix. `offsetTop`
+или HTMLElement и используется для scroll и Affix. Приоритет контейнера:
+getContainer → ConfigProvider.getTargetContainer → window. Undefined во вложенном
+provider сохраняет родительскую функцию; локальный prop имеет приоритет. `offsetTop`
 задаёт закрепление; `targetOffset` переопределяет scroll offset, per-link
 `targetOffset` имеет высший приоритет, включая 0. `bounds` по умолчанию 5px.
 Выбирается наиболее близкий к границе уже достигнутый раздел; порядок items
@@ -1167,7 +1169,7 @@ catch binding; MIT-лицензии обоих пакетов сохранены
 Сохранено ограничение делегата 3.0.2: отрицательный scrollLeft RTL-контейнера
 не поддерживается при автоматическом раскрытии; нативная ручная прокрутка,
 выбор и геометрия indicator доступны.
-Глобальные component config, getTargetContainer и prefixCls ещё не перенесены.
+Глобальные component config и prefixCls ещё не перенесены.
 
 Фикстура — `?fixture=anchor`, пример — `/ant-design#anchor`. Unit/SSR/Chromium
 проверяют приоритеты offsets, callbacks/history, анимацию/cleanup, nested/legacy,
@@ -1186,6 +1188,8 @@ linkFocusDecoration также без cssVar; defaults равны none. Поль
 одновременном выполнении обоих условий приоритет у top. Сравнения координат
 округляются как в Ant Design 6.6.8. `onChange(affixed)` вызывается только при
 переходе между fixed и обычным потоком, после начального измерения в браузере.
+Контейнер выбирается через target → ConfigProvider.getTargetContainer → window.
+Функция вызывается только в браузере; общий тип GetTargetContainer экспортирован.
 
 ```svelte
 <script lang="ts">
@@ -1234,9 +1238,18 @@ draft/selection/focus и onChange; динамический stylesheet очищ�
 при custom target слушается сам контейнер, поэтому перемещение контейнера
 внешней прокруткой требует явного updatePosition. Null target или полностью
 нулевой скрытый root сохраняют последнее состояние до следующего измерения.
-Глобальный ConfigProvider prefix и getTargetContainer пока отсутствуют;
-target задаётся prop. React ref заменён Svelte bind:this,
+Глобальный ConfigProvider prefix пока отсутствует. React ref заменён Svelte bind:this,
 children — Snippet без React-клонирования.
+
+GetTargetContainer поддерживает Window/HTMLElement, как runtime context upstream.
+В props Ant Design 6.6.8 дополнительно заявлен ShadowRoot, но официальный UMD
+вызывает отсутствующий getBoundingClientRect в Affix и Anchor. Эта ветка исключена
+из нашего типа и записана для отдельного разбора. При смене общей функции native
+Affix сразу меняет target/позицию и снимает старые listeners. Исходник сохраняет
+старую позицию до явного updatePosition(); raw frames и корректное состояние после
+этого публичного вызова сохранены в [эталоне](./tests/browser/fixtures/ant-design-target-container-reference.json).
+Проверки наследования, приоритетов, href updates, refs/focus и cleanup —
+`?fixture=target-container`.
 
 Фикстура — `?fixture=affix`, пример — `/ant-design#affix`. Engine/DOM-тесты
 проверяют округление, очереди, смену target и очистку; SSR/Chromium — нативный

@@ -44,7 +44,7 @@
   import type { CheckboxConfig } from './checkbox.types';
   import type { SwitchConfig } from './switch.types';
   import type { WaveConfig } from './wave.types';
-  import type { GetPopupContainer, RenderEmptyHandler } from './types';
+  import type { GetPopupContainer, GetTargetContainer, RenderEmptyHandler } from './types';
   import type { RangePickerConfig } from './range-picker.types';
   import type { InputConfig } from './input.types';
   import type { InputPasswordConfig } from './input-password.types';
@@ -118,6 +118,8 @@
      * Функция вызывается только в браузере; ShadowRoot не получает стили из document автоматически.
      */
     getPopupContainer?: GetPopupContainer;
+    /** Общий scroll target Affix/Anchor; локальные параметры компонентов имеют приоритет. */
+    getTargetContainer?: GetTargetContainer;
     rangePicker?: RangePickerConfig;
     textArea?: TextAreaConfig;
     input?: InputConfig;
@@ -187,6 +189,7 @@
     virtual,
     renderEmpty,
     getPopupContainer,
+    getTargetContainer,
     rangePicker,
     textArea,
     input,
@@ -348,6 +351,9 @@
     },
     get getPopupContainer() {
       return getPopupContainer || parent.getPopupContainer;
+    },
+    get getTargetContainer() {
+      return getTargetContainer ?? parent.getTargetContainer;
     },
     get rangePicker() {
       return rangePicker ?? parent.rangePicker;

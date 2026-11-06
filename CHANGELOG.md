@@ -9,6 +9,12 @@
 
 ### Added
 
+- ConfigProvider.getTargetContainer: общий Window/HTMLElement target для Affix
+  и Anchor с вложенным наследованием и приоритетом локальных параметров.
+  Смена target сохраняет DOM, поля и focus; регистрации Anchor не теряются
+  при одновременной смене href. Source ShadowRoot error и stale Affix position
+  сохранены отдельно; native поддерживает немедленное обновление позиции.
+
 - Affix: перенесены ConfigProvider.affix class/style и локальный prefixCls.
   Сохранены whole-record inheritance, local style priority и независимые CSS
   variables. Prefix/config updates сохраняют fixed DOM, поля и callbacks;

@@ -1,0 +1,989 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "operation": "ConfigProvider.getTargetContainer for Window and HTMLElement in Affix and Anchor: global default, nested undefined inheritance, nested override, explicit consumer precedence and independent outside scope. Actual layout and native scroll, no patched source or mocked geometry."
+  },
+  "viewport": {
+    "width": 1100,
+    "height": 1000
+  },
+  "cases": [
+    {
+      "name": "element-a",
+      "target": "a",
+      "initial": {
+        "normal": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-1",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "inherited": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-1",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "nested": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-1",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "explicit": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-1",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "outside": {
+          "target": "window",
+          "fixed": false,
+          "position": "static",
+          "topOffset": null,
+          "placeholder": null,
+          "fieldCount": 1,
+          "active": null,
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        }
+      },
+      "scrolled": {
+        "normal": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-2",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "inherited": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-2",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "nested": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-2",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "explicit": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-2",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "outside": {
+          "target": "window",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#window-1",
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "element-b",
+      "target": "b",
+      "initial": {
+        "normal": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-1",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "inherited": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-1",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "nested": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-1",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "explicit": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-1",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "outside": {
+          "target": "window",
+          "fixed": false,
+          "position": "static",
+          "topOffset": null,
+          "placeholder": null,
+          "fieldCount": 1,
+          "active": null,
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        }
+      },
+      "scrolled": {
+        "normal": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-2",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "inherited": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-2",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "nested": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-2",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "explicit": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-2",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "outside": {
+          "target": "window",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#window-1",
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "window",
+      "target": "window",
+      "initial": {
+        "normal": {
+          "target": "window",
+          "fixed": false,
+          "position": "static",
+          "topOffset": null,
+          "placeholder": null,
+          "fieldCount": 1,
+          "active": null,
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        },
+        "inherited": {
+          "target": "window",
+          "fixed": false,
+          "position": "static",
+          "topOffset": null,
+          "placeholder": null,
+          "fieldCount": 1,
+          "active": null,
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        },
+        "nested": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-1",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "explicit": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-1",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "outside": {
+          "target": "window",
+          "fixed": false,
+          "position": "static",
+          "topOffset": null,
+          "placeholder": null,
+          "fieldCount": 1,
+          "active": null,
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        }
+      },
+      "scrolled": {
+        "normal": {
+          "target": "window",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#window-1",
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        },
+        "inherited": {
+          "target": "window",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#window-1",
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        },
+        "nested": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-2",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "explicit": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-2",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "outside": {
+          "target": "window",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#window-1",
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        }
+      }
+    },
+    {
+      "name": "unset",
+      "initial": {
+        "normal": {
+          "target": "window",
+          "fixed": false,
+          "position": "static",
+          "topOffset": null,
+          "placeholder": null,
+          "fieldCount": 1,
+          "active": null,
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        },
+        "inherited": {
+          "target": "window",
+          "fixed": false,
+          "position": "static",
+          "topOffset": null,
+          "placeholder": null,
+          "fieldCount": 1,
+          "active": null,
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        },
+        "nested": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-1",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "explicit": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-1",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "outside": {
+          "target": "window",
+          "fixed": false,
+          "position": "static",
+          "topOffset": null,
+          "placeholder": null,
+          "fieldCount": 1,
+          "active": null,
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        }
+      },
+      "scrolled": {
+        "normal": {
+          "target": "window",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#window-1",
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        },
+        "inherited": {
+          "target": "window",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#window-1",
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        },
+        "nested": {
+          "target": "b",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#b-2",
+          "links": [
+            "#b-1",
+            "#b-2"
+          ]
+        },
+        "explicit": {
+          "target": "a",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#a-2",
+          "links": [
+            "#a-1",
+            "#a-2"
+          ]
+        },
+        "outside": {
+          "target": "window",
+          "fixed": true,
+          "position": "fixed",
+          "topOffset": 7,
+          "placeholder": [
+            "260px",
+            "32px"
+          ],
+          "fieldCount": 1,
+          "active": "#window-1",
+          "links": [
+            "#window-1",
+            "#window-2"
+          ]
+        }
+      }
+    }
+  ],
+  "retarget": {
+    "from": "element-a",
+    "to": "element-b",
+    "initial": {
+      "normal": {
+        "target": "a",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#a-1",
+        "links": [
+          "#a-1",
+          "#a-2"
+        ]
+      },
+      "inherited": {
+        "target": "a",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#a-1",
+        "links": [
+          "#a-1",
+          "#a-2"
+        ]
+      },
+      "nested": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "explicit": {
+        "target": "a",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#a-1",
+        "links": [
+          "#a-1",
+          "#a-2"
+        ]
+      },
+      "outside": {
+        "target": "window",
+        "fixed": false,
+        "position": "static",
+        "topOffset": null,
+        "placeholder": null,
+        "fieldCount": 1,
+        "active": null,
+        "links": [
+          "#window-1",
+          "#window-2"
+        ]
+      }
+    },
+    "updated": {
+      "normal": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": -293,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "inherited": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": -293,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "nested": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "explicit": {
+        "target": "a",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#a-1",
+        "links": [
+          "#a-1",
+          "#a-2"
+        ]
+      },
+      "outside": {
+        "target": "window",
+        "fixed": false,
+        "position": "static",
+        "topOffset": null,
+        "placeholder": null,
+        "fieldCount": 1,
+        "active": null,
+        "links": [
+          "#window-1",
+          "#window-2"
+        ]
+      }
+    },
+    "retained": {
+      "input": true,
+      "link": true,
+      "content": true
+    },
+    "afterOldTargetEvent": {
+      "normal": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": -293,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "inherited": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": -293,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "nested": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "explicit": {
+        "target": "a",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#a-1",
+        "links": [
+          "#a-1",
+          "#a-2"
+        ]
+      },
+      "outside": {
+        "target": "window",
+        "fixed": false,
+        "position": "static",
+        "topOffset": null,
+        "placeholder": null,
+        "fieldCount": 1,
+        "active": null,
+        "links": [
+          "#window-1",
+          "#window-2"
+        ]
+      }
+    },
+    "afterManualUpdate": {
+      "normal": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "inherited": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "nested": {
+        "target": "b",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#b-1",
+        "links": [
+          "#b-1",
+          "#b-2"
+        ]
+      },
+      "explicit": {
+        "target": "a",
+        "fixed": true,
+        "position": "fixed",
+        "topOffset": 7,
+        "placeholder": [
+          "260px",
+          "32px"
+        ],
+        "fieldCount": 1,
+        "active": "#a-1",
+        "links": [
+          "#a-1",
+          "#a-2"
+        ]
+      },
+      "outside": {
+        "target": "window",
+        "fixed": false,
+        "position": "static",
+        "topOffset": null,
+        "placeholder": null,
+        "fieldCount": 1,
+        "active": null,
+        "links": [
+          "#window-1",
+          "#window-2"
+        ]
+      }
+    },
+    "observation": "ConfigProvider getter changes A→B while Affix target prop stays undefined. Source retains top 507px (offset -293px against B at 800px) after the render and the old A scroll event. Its public updatePosition() restores the correct 7px offset. Native automatically reconfigures the target and reaches this correct manual-update frame."
+  }
+}

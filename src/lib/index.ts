@@ -777,6 +777,7 @@ export {
   type RenderEmptyContent,
   type RenderEmptyHandler,
   type GetPopupContainer,
+  type GetTargetContainer,
   type GetContainer,
   type TableLocale,
   type ComponentSize,

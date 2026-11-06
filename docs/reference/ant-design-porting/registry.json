@@ -1924,11 +1924,11 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls и глобальный anchor/getTargetContainer config",
+          "title": "PrefixCls и ConfigProvider.anchor",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Component config/prefix отсутствуют; getContainer задаётся prop."
+          "note": "GetTargetContainer поддержан общим context. PrefixCls и ConfigProvider.anchor class/style/semantic config ещё не перенесены."
         },
         {
           "id": "anchor-theme-tokens",
@@ -1958,6 +1958,22 @@
             "tests/browser/fixtures/ant-design-link-decoration-reference.json"
           ],
           "note": "Scoped linkDecoration/linkHoverDecoration/linkFocusDecoration с fallback none вне source-only marker. Сравнение normal/hover/active/focus с 12 UMD-сценариями 6.6.8 для default/custom variables и inline priority, light/dark/compact; Svelte проверяет native/source, Anchor items/legacy и Breadcrumb plain/menu/itemRender. Legacy AnchorLink сохраняется отдельно: upstream Anchor игнорирует children, стили сравниваются с items. Внешние links, focus outline, DOM identity, href/callbacks и Dropdown keyboard не меняются."
+        },
+        {
+          "id": "target-container",
+          "title": "ConfigProvider.getTargetContainer для Affix/Anchor",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/Affix.svelte",
+            "src/lib/Anchor.svelte",
+            "tests/package/target-container.ssr.test.ts",
+            "tests/browser/target-container.spec.ts",
+            "tests/browser/fixtures/ant-design-target-container-reference.json"
+          ],
+          "note": "Общий getter Window/HTMLElement наследуется через undefined; local Affix.target/Anchor.getContainer имеют приоритет, без обоих используется window. Nested override и outside scope независимы. Четыре UMD presets фиксируют реальные native scroll, active href, fixed geometry, placeholder и одну копию input. Смена getter/hrefs сохраняет DOM, refs, draft/selection/focus и FormData; Anchor использует актуальный Map регистраций, cleanup одного href не теряет обновлённый соседний href из-за старого rune snapshot. Old target listeners снимаются, текущий target измеряется по собственному событию; SSR getter не вызывается. Отличия Source ShadowRoot/stale reconfiguration записаны отдельными observations."
         }
       ]
     },
@@ -13546,11 +13562,27 @@
         },
         {
           "id": "global-config",
-          "title": "Глобальный ConfigProvider prefix и getTargetContainer",
+          "title": "Глобальный ConfigProvider prefix",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Local prefixCls и ConfigProvider.affix class/style подключены отдельными features. Общий ConfigProvider prefix и target container пока не перенесены; target задаётся prop."
+          "note": "Локальный prefixCls и ConfigProvider.affix class/style поддержаны; общий ConfigProvider prefix остаётся отдельной областью."
+        },
+        {
+          "id": "target-container",
+          "title": "ConfigProvider.getTargetContainer для Affix/Anchor",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/Affix.svelte",
+            "src/lib/Anchor.svelte",
+            "tests/package/target-container.ssr.test.ts",
+            "tests/browser/target-container.spec.ts",
+            "tests/browser/fixtures/ant-design-target-container-reference.json"
+          ],
+          "note": "Общий getter Window/HTMLElement наследуется через undefined; local Affix.target/Anchor.getContainer имеют приоритет, без обоих используется window. Nested override и outside scope независимы. Четыре UMD presets фиксируют реальные native scroll, active href, fixed geometry, placeholder и одну копию input. Смена getter/hrefs сохраняет DOM, refs, draft/selection/focus и FormData; Anchor использует актуальный Map регистраций, cleanup одного href не теряет обновлённый соседний href из-за старого rune snapshot. Old target listeners снимаются, текущий target измеряется по собственному событию; SSR getter не вызывается. Отличия Source ShadowRoot/stale reconfiguration записаны отдельными observations."
         }
       ]
     },
@@ -14671,6 +14703,46 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Body/header padding, font/height, header/actions background, actions margin, tabs margin и extra color подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. Нули, CSS units, явный undefined, aliases, общий/компонентный dark/compact algorithm сверяются с официальным UMD: 13 наборов CSS-деклараций и 30 сценариев normal/small/inner/tabs/grid/loading, nested/reset/sibling scopes и RTL. Grid/Meta наследуют Card scope; Grid padding использует paddingLG, inner body — общий вертикальный padding. Reactive updates, inherit=false, снятие темы и unmount сохраняют native contracts; draft/focus/selection не сбрасываются при обновлении темы. Публичный cssVar, как в 6.6.8, принимает объект. True/false из сообщения о дефекте проверяются как JS runtime inputs; оба значения оставляют CSS-переменные включёнными также в upstream."
+        },
+        {
+          "id": "target-container",
+          "title": "ConfigProvider.getTargetContainer для Affix/Anchor",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/Affix.svelte",
+            "src/lib/Anchor.svelte",
+            "tests/package/target-container.ssr.test.ts",
+            "tests/browser/target-container.spec.ts",
+            "tests/browser/fixtures/ant-design-target-container-reference.json"
+          ],
+          "note": "Общий getter Window/HTMLElement наследуется через undefined; local Affix.target/Anchor.getContainer имеют приоритет, без обоих используется window. Nested override и outside scope независимы. Четыре UMD presets фиксируют реальные native scroll, active href, fixed geometry, placeholder и одну копию input. Смена getter/hrefs сохраняет DOM, refs, draft/selection/focus и FormData; Anchor использует актуальный Map регистраций, cleanup одного href не теряет обновлённый соседний href из-за старого rune snapshot. Old target listeners снимаются, текущий target измеряется по собственному событию; SSR getter не вызывается. Отличия Source ShadowRoot/stale reconfiguration записаны отдельными observations."
+        },
+        {
+          "id": "native-target-shadow-root",
+          "title": "Window/HTMLElement вместо неработающего Source ShadowRoot target",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/types.ts",
+            "tests/browser/fixtures/ant-design-target-shadow-root-observation.json",
+            "tests/package/target-container.ssr.test.ts"
+          ],
+          "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d объявляет ConfigProviderProps.getTargetContainer как HTMLElement|Window|ShadowRoot, но ConfigContext и оба потребителя рассчитывают на HTMLElement|Window. Реальный native ShadowRoot в официальном UMD вызывает getBoundingClientRect is not a function у Affix и Anchor; errors/calls сохранены без mocks или правки upstream. Svelte GetTargetContainer следует рабочему runtime context Window|HTMLElement; имитация или преобразование ShadowRoot не добавляются."
+        },
+        {
+          "id": "native-target-reconfiguration",
+          "title": "Немедленная смена Affix target вместо stale Source geometry",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Affix.svelte",
+            "tests/browser/target-container.spec.ts",
+            "tests/browser/fixtures/ant-design-target-container-reference.json"
+          ],
+          "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, ConfigProvider getter A→B при неизменном undefined target prop и offsetTop=7. При A.top=500/B.top=800 source Affix остаётся на top=507 (offset=-293 против B), также после old A scroll event. Source listener/update effects не зависят от getTargetContainer. Публичный updatePosition() восстанавливает top=807/offset=7; все raw frames и сохранённые input/link/content записаны в retarget. Svelte сохраняет существующую немедленную configure semantics: target и listeners меняются сразу без remount, DOM/draft/selection/focus остаются; ожидаемый correct frame взят из source afterManualUpdate без правки UMD."
         }
       ]
     },
