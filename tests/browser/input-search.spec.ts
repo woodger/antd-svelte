@@ -418,6 +418,13 @@ test(
       await page.getByRole('combobox', { name: 'Search size', exact: true }).selectOption(size);
 
       await expect(root).toHaveClass(new RegExp(`ant-input-search-${size}`));
+      await root.evaluate(async element => {
+        await Promise.all(element.getAnimations({ subtree: true })
+          .filter(animation => animation.effect?.getComputedTiming().endTime !== Infinity)
+          .map(animation => animation.finished.catch(error => {
+            if (!(error instanceof DOMException) || error.name !== 'AbortError') throw error;
+          })));
+      });
       const fieldBox = await input.locator('..').boundingBox();
       const buttonBox = await button.boundingBox();
 
