@@ -5877,9 +5877,28 @@ switcherIcon/switcherLoadingIcon, titleRender и filterTreeNode поддержа
 Height ограничивает native scroll viewport; виртуализация пока не применяется.
 SSR рендерит видимые строки без загрузки и browser APIs.
 
+`ConfigProvider.theme.components.Tree` подключён к общему механизму компонентной
+темы: метрики title/switcher/indent, hover/selected colors, alias overrides,
+global/component algorithms и custom cssVar prefix. Локальные CSS variables и
+`style` сохраняют приоритет. Два DirectoryTree-only tokens объявляются как в
+upstream, но отдельный DirectoryTree API ещё не реализован. Внутреннее дерево
+TreeSelect использует тему Select/TreeSelect, независимо от `components.Tree`.
+Отдельный UMD-замер проверяет одновременные конфликтующие настройки трёх компонентов.
+
+Сохранён прежний native contract: `Tree.style` оформляет внешний корень. В React
+этот prop относится к внутреннему `.ant-tree-list`; исходные замеры обоих слоёв
+сохранены в [UMD-эталоне](tests/browser/fixtures/ant-design-tree-theme-reference.json).
+Сверка видимого содержимого охватывает 14 тем / 112 наборов CSS-измерений, включая
+checkbox, disabled/selected/active nodes, RTL и nested/reset/sibling scopes.
+[Browser-проверки](tests/browser/tree-theme.spec.ts) также подтверждают сохранение
+DOM, фокуса, active descendant, отметок и pending load при обновлении токенов;
+[SSR-проверки](tests/package/tree-theme.ssr.test.ts) не запускают загрузку или
+браузерные ресурсы. Декларации сверяются с официальным UMD отдельным
+[unit-набором](src/lib/theme-tree-tokens-reference.test.ts).
+
 DirectoryTree, drag/drop, virtual/scrollTo, expandAction, fieldNames, полный generic
 node API, TreeNode children API, per-node switcherIcon, showLeafIcon snippet,
-semantic/config/token API и collapse/appear анимации ещё не перенесены. Реестр
+semantic/config API и collapse/appear анимации ещё не перенесены. Реестр
 отделяет этот объём от полного React API Tree.
 
 ## Upload / UploadDragger

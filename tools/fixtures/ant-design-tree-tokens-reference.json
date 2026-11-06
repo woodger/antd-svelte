@@ -1,0 +1,509 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "operation": "Unchanged public Tree with checkable rows: root, selected/half-checked/disabled/default node CSS, title/switcher/indent geometry and checkbox colors/sizes. Nine token declarations include DirectoryTree-only fields; DirectoryTree behavior is not migrated by this theme stage. Alias/algorithm, CSS-variable prefix, local style/variables, zero/undefined and independent nested/reset/sibling/RTL scopes. Native button/ARIA/keyboard/loading contracts and TreeSelect composition are verified separately."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "variables": {
+        "--ant-tree-title-height": "24px",
+        "--ant-tree-switcher-size": "24px",
+        "--ant-tree-indent-size": "24px",
+        "--ant-tree-node-hover-bg": "rgba(0,0,0,0.04)",
+        "--ant-tree-node-hover-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-node-selected-bg": "#e6f4ff",
+        "--ant-tree-node-selected-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#1677ff"
+      }
+    },
+    {
+      "name": "component-tokens",
+      "config": {
+        "components": {
+          "Tree": {
+            "titleHeight": 32,
+            "switcherSize": 36,
+            "indentSize": 28,
+            "nodeHoverBg": "#fff1b8",
+            "nodeHoverColor": "#0958d9",
+            "nodeSelectedBg": "#d3adf7",
+            "nodeSelectedColor": "#531dab",
+            "directoryNodeSelectedColor": "#fadb14",
+            "directoryNodeSelectedBg": "#7cb305"
+          }
+        }
+      },
+      "variables": {
+        "--ant-tree-title-height": "32px",
+        "--ant-tree-switcher-size": "36px",
+        "--ant-tree-indent-size": "28px",
+        "--ant-tree-node-hover-bg": "#fff1b8",
+        "--ant-tree-node-hover-color": "#0958d9",
+        "--ant-tree-node-selected-bg": "#d3adf7",
+        "--ant-tree-node-selected-color": "#531dab",
+        "--ant-tree-directory-node-selected-color": "#fadb14",
+        "--ant-tree-directory-node-selected-bg": "#7cb305"
+      }
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "fontSize": 20,
+          "lineHeight": 1.8,
+          "fontFamily": "monospace",
+          "colorText": "#722ed1",
+          "colorTextDisabled": "#cf1322",
+          "colorBgContainer": "#fffbe6",
+          "colorPrimary": "#fa541c",
+          "paddingXS": 10,
+          "controlInteractiveSize": 20,
+          "borderRadius": 8,
+          "lineWidth": 2
+        }
+      },
+      "variables": {
+        "--ant-tree-title-height": "24px",
+        "--ant-tree-switcher-size": "24px",
+        "--ant-tree-indent-size": "24px",
+        "--ant-tree-node-hover-bg": "rgba(0,0,0,0.04)",
+        "--ant-tree-node-hover-color": "#722ed1",
+        "--ant-tree-node-selected-bg": "#fff2e8",
+        "--ant-tree-node-selected-color": "#722ed1",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#fa541c"
+      }
+    },
+    {
+      "name": "component-aliases",
+      "config": {
+        "components": {
+          "Tree": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "paddingXS": 10,
+            "controlInteractiveSize": 20,
+            "borderRadius": 8,
+            "lineWidth": 2,
+            "titleHeight": 32,
+            "switcherSize": 36,
+            "indentSize": 28,
+            "nodeHoverBg": "#fff1b8",
+            "nodeHoverColor": "#0958d9",
+            "nodeSelectedBg": "#d3adf7",
+            "nodeSelectedColor": "#531dab",
+            "directoryNodeSelectedColor": "#fadb14",
+            "directoryNodeSelectedBg": "#7cb305"
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-disabled": "#cf1322",
+        "--ant-color-bg-container": "#fffbe6",
+        "--ant-color-primary": "#fa541c",
+        "--ant-padding-xs": "10px",
+        "--ant-control-interactive-size": "20px",
+        "--ant-border-radius": "8px",
+        "--ant-line-width": "2px",
+        "--ant-tree-title-height": "32px",
+        "--ant-tree-switcher-size": "36px",
+        "--ant-tree-indent-size": "28px",
+        "--ant-tree-node-hover-bg": "#fff1b8",
+        "--ant-tree-node-hover-color": "#0958d9",
+        "--ant-tree-node-selected-bg": "#d3adf7",
+        "--ant-tree-node-selected-color": "#531dab",
+        "--ant-tree-directory-node-selected-color": "#fadb14",
+        "--ant-tree-directory-node-selected-bg": "#7cb305"
+      }
+    },
+    {
+      "name": "updated-tokens",
+      "config": {
+        "components": {
+          "Tree": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "paddingXS": 10,
+            "controlInteractiveSize": 20,
+            "borderRadius": 8,
+            "lineWidth": 2,
+            "titleHeight": 40,
+            "switcherSize": 44,
+            "indentSize": 36,
+            "nodeHoverBg": "#fff1b8",
+            "nodeHoverColor": "#0958d9",
+            "nodeSelectedBg": "#b5f5ec",
+            "nodeSelectedColor": "#531dab",
+            "directoryNodeSelectedColor": "#fadb14",
+            "directoryNodeSelectedBg": "#7cb305"
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-disabled": "#cf1322",
+        "--ant-color-bg-container": "#fffbe6",
+        "--ant-color-primary": "#fa541c",
+        "--ant-padding-xs": "10px",
+        "--ant-control-interactive-size": "20px",
+        "--ant-border-radius": "8px",
+        "--ant-line-width": "2px",
+        "--ant-tree-title-height": "40px",
+        "--ant-tree-switcher-size": "44px",
+        "--ant-tree-indent-size": "36px",
+        "--ant-tree-node-hover-bg": "#fff1b8",
+        "--ant-tree-node-hover-color": "#0958d9",
+        "--ant-tree-node-selected-bg": "#b5f5ec",
+        "--ant-tree-node-selected-color": "#531dab",
+        "--ant-tree-directory-node-selected-color": "#fadb14",
+        "--ant-tree-directory-node-selected-bg": "#7cb305"
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-tree-title-height": "24px",
+        "--ant-tree-switcher-size": "24px",
+        "--ant-tree-indent-size": "24px",
+        "--ant-tree-node-hover-bg": "rgba(255,255,255,0.08)",
+        "--ant-tree-node-hover-color": "rgba(255,255,255,0.85)",
+        "--ant-tree-node-selected-bg": "#15325b",
+        "--ant-tree-node-selected-color": "rgba(255,255,255,0.85)",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#1668dc"
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-tree-title-height": "21px",
+        "--ant-tree-switcher-size": "21px",
+        "--ant-tree-indent-size": "21px",
+        "--ant-tree-node-hover-bg": "rgba(0,0,0,0.04)",
+        "--ant-tree-node-hover-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-node-selected-bg": "#e6f4ff",
+        "--ant-tree-node-selected-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#1677ff"
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-tree-title-height": "21px",
+        "--ant-tree-switcher-size": "21px",
+        "--ant-tree-indent-size": "21px",
+        "--ant-tree-node-hover-bg": "rgba(255,255,255,0.08)",
+        "--ant-tree-node-hover-color": "rgba(255,255,255,0.85)",
+        "--ant-tree-node-selected-bg": "#15325b",
+        "--ant-tree-node-selected-color": "rgba(255,255,255,0.85)",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#1668dc"
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Tree": {
+            "algorithm": true,
+            "fontSize": 18,
+            "colorPrimary": "#fa541c"
+          }
+        }
+      },
+      "variables": {
+        "--ant-color-primary": "#fa541c",
+        "--ant-font-size": "18px",
+        "--ant-color-primary-bg": "#fff2e8",
+        "--ant-color-primary-bg-hover": "#ffd8bf",
+        "--ant-color-primary-border": "#ffbb96",
+        "--ant-color-primary-border-hover": "#ff9c6e",
+        "--ant-color-primary-hover": "#ff7a45",
+        "--ant-color-primary-active": "#d4380d",
+        "--ant-color-primary-text-hover": "#ff7a45",
+        "--ant-color-primary-text": "#fa541c",
+        "--ant-color-primary-text-active": "#d4380d",
+        "--ant-font-size-sm": "14px",
+        "--ant-font-size-lg": "20px",
+        "--ant-font-size-xl": "26px",
+        "--ant-font-size-heading-1": "48px",
+        "--ant-font-size-heading-2": "40px",
+        "--ant-font-size-heading-3": "32px",
+        "--ant-font-size-heading-4": "26px",
+        "--ant-font-size-heading-5": "20px",
+        "--ant-line-height": "1.4444444444444444",
+        "--ant-line-height-lg": "1.4",
+        "--ant-line-height-sm": "1.5714285714285714",
+        "--ant-font-height": "26px",
+        "--ant-font-height-lg": "28px",
+        "--ant-font-height-sm": "22px",
+        "--ant-line-height-heading-1": "1.1666666666666667",
+        "--ant-line-height-heading-2": "1.2",
+        "--ant-line-height-heading-3": "1.25",
+        "--ant-line-height-heading-4": "1.3076923076923077",
+        "--ant-line-height-heading-5": "1.4",
+        "--ant-font-size-icon": "14px",
+        "--ant-control-item-bg-active": "#fff2e8",
+        "--ant-control-item-bg-active-hover": "#ffd8bf",
+        "--ant-control-outline": "rgba(255,125,25,0.1)",
+        "--ant-tree-title-height": "24px",
+        "--ant-tree-switcher-size": "24px",
+        "--ant-tree-indent-size": "24px",
+        "--ant-tree-node-hover-bg": "rgba(0,0,0,0.04)",
+        "--ant-tree-node-hover-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-node-selected-bg": "#fff2e8",
+        "--ant-tree-node-selected-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#fa541c"
+      }
+    },
+    {
+      "name": "component-compact",
+      "config": {
+        "components": {
+          "Tree": {
+            "algorithm": [
+              "compactAlgorithm"
+            ],
+            "fontSize": 18
+          }
+        }
+      },
+      "variables": {
+        "--ant-control-height": "28px",
+        "--ant-size-lg": "16px",
+        "--ant-size-md": "16px",
+        "--ant-size-ms": "12px",
+        "--ant-size": "8px",
+        "--ant-size-sm": "8px",
+        "--ant-size-xs": "4px",
+        "--ant-control-height-sm": "21px",
+        "--ant-control-height-xs": "14px",
+        "--ant-control-height-lg": "35px",
+        "--ant-control-interactive-size": "14px",
+        "--ant-padding-xs": "4px",
+        "--ant-padding-sm": "8px",
+        "--ant-padding": "8px",
+        "--ant-padding-md": "16px",
+        "--ant-padding-lg": "16px",
+        "--ant-padding-content-horizontal-lg": "16px",
+        "--ant-padding-content-vertical-lg": "12px",
+        "--ant-padding-content-horizontal": "12px",
+        "--ant-padding-content-vertical": "8px",
+        "--ant-padding-content-horizontal-sm": "8px",
+        "--ant-padding-content-vertical-sm": "4px",
+        "--ant-margin-xs": "4px",
+        "--ant-margin-sm": "8px",
+        "--ant-margin": "8px",
+        "--ant-margin-md": "16px",
+        "--ant-margin-lg": "16px",
+        "--ant-tree-title-height": "21px",
+        "--ant-tree-switcher-size": "21px",
+        "--ant-tree-indent-size": "21px",
+        "--ant-tree-node-hover-bg": "rgba(0,0,0,0.04)",
+        "--ant-tree-node-hover-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-node-selected-bg": "#e6f4ff",
+        "--ant-tree-node-selected-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#1677ff"
+      }
+    },
+    {
+      "name": "style-priority",
+      "config": {
+        "components": {
+          "Tree": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "paddingXS": 10,
+            "controlInteractiveSize": 20,
+            "borderRadius": 8,
+            "lineWidth": 2,
+            "titleHeight": 32,
+            "switcherSize": 36,
+            "indentSize": 28,
+            "nodeHoverBg": "#fff1b8",
+            "nodeHoverColor": "#0958d9",
+            "nodeSelectedBg": "#d3adf7",
+            "nodeSelectedColor": "#531dab",
+            "directoryNodeSelectedColor": "#fadb14",
+            "directoryNodeSelectedBg": "#7cb305"
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-disabled": "#cf1322",
+        "--ant-color-bg-container": "#fffbe6",
+        "--ant-color-primary": "#fa541c",
+        "--ant-padding-xs": "10px",
+        "--ant-control-interactive-size": "20px",
+        "--ant-border-radius": "8px",
+        "--ant-line-width": "2px",
+        "--ant-tree-title-height": "32px",
+        "--ant-tree-switcher-size": "36px",
+        "--ant-tree-indent-size": "28px",
+        "--ant-tree-node-hover-bg": "#fff1b8",
+        "--ant-tree-node-hover-color": "#0958d9",
+        "--ant-tree-node-selected-bg": "#d3adf7",
+        "--ant-tree-node-selected-color": "#531dab",
+        "--ant-tree-directory-node-selected-color": "#fadb14",
+        "--ant-tree-directory-node-selected-bg": "#7cb305"
+      }
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "key": "tree-probe",
+          "prefix": "owned"
+        },
+        "components": {
+          "Tree": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "paddingXS": 10,
+            "controlInteractiveSize": 20,
+            "borderRadius": 8,
+            "lineWidth": 2,
+            "titleHeight": 32,
+            "switcherSize": 36,
+            "indentSize": 28,
+            "nodeHoverBg": "#fff1b8",
+            "nodeHoverColor": "#0958d9",
+            "nodeSelectedBg": "#d3adf7",
+            "nodeSelectedColor": "#531dab",
+            "directoryNodeSelectedColor": "#fadb14",
+            "directoryNodeSelectedBg": "#7cb305"
+          }
+        }
+      },
+      "variables": {
+        "--owned-font-size": "20px",
+        "--owned-line-height": "1.8",
+        "--owned-font-family": "monospace",
+        "--owned-color-text": "#722ed1",
+        "--owned-color-text-disabled": "#cf1322",
+        "--owned-color-bg-container": "#fffbe6",
+        "--owned-color-primary": "#fa541c",
+        "--owned-padding-xs": "10px",
+        "--owned-control-interactive-size": "20px",
+        "--owned-border-radius": "8px",
+        "--owned-line-width": "2px",
+        "--owned-tree-title-height": "32px",
+        "--owned-tree-switcher-size": "36px",
+        "--owned-tree-indent-size": "28px",
+        "--owned-tree-node-hover-bg": "#fff1b8",
+        "--owned-tree-node-hover-color": "#0958d9",
+        "--owned-tree-node-selected-bg": "#d3adf7",
+        "--owned-tree-node-selected-color": "#531dab",
+        "--owned-tree-directory-node-selected-color": "#fadb14",
+        "--owned-tree-directory-node-selected-bg": "#7cb305"
+      }
+    },
+    {
+      "name": "zero-metrics",
+      "config": {
+        "components": {
+          "Tree": {
+            "titleHeight": 0,
+            "switcherSize": 0,
+            "indentSize": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-tree-title-height": "0px",
+        "--ant-tree-switcher-size": "0px",
+        "--ant-tree-indent-size": "0px",
+        "--ant-tree-node-hover-bg": "rgba(0,0,0,0.04)",
+        "--ant-tree-node-hover-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-node-selected-bg": "#e6f4ff",
+        "--ant-tree-node-selected-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#1677ff"
+      }
+    },
+    {
+      "name": "undefined-metrics",
+      "config": {
+        "components": {
+          "Tree": {
+            "titleHeight": {
+              "$type": "undefined"
+            },
+            "switcherSize": {
+              "$type": "undefined"
+            },
+            "indentSize": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "variables": {
+        "--ant-tree-node-hover-bg": "rgba(0,0,0,0.04)",
+        "--ant-tree-node-hover-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-node-selected-bg": "#e6f4ff",
+        "--ant-tree-node-selected-color": "rgba(0,0,0,0.88)",
+        "--ant-tree-directory-node-selected-color": "#fff",
+        "--ant-tree-directory-node-selected-bg": "#1677ff"
+      }
+    }
+  ]
+}

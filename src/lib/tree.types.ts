@@ -42,6 +42,10 @@ export interface TreeCheckInfo {
 }
 /** Дерево со стабильными keys, раскрытием, выбором, отметками и lazy children. */
 export interface TreeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'onselect'> {
+  /** @internal Тема составного владельца вместо Tree defaults, до пользовательского style. */
+  _themeStyle?: string;
+  /** CSS внешнего корня; прежний native contract сохранён, React style относится к inner list. */
+  style?: HTMLAttributes<HTMLDivElement>['style'];
   treeData?: readonly TreeDataNode[];
   /** Управляемые ключи раскрытия; изменения запрашиваются через onExpand. */
   expandedKeys?: readonly TreeKey[];

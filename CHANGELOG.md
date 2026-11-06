@@ -9,6 +9,11 @@
 
 ### Added
 
+- Tree: подключены component tokens, alias overrides и algorithms с независимой
+  темой внутреннего дерева TreeSelect. Сохранены native style contract, DOM,
+  фокус, active descendant, отметки и pending load при theme update. Добавлены
+  14 UMD-тем / 112 наборов CSS-измерений и unit/SSR/browser-проверки.
+
 - Listy: component tokens, alias overrides и algorithms для raw/virtual списков,
   исходная оценка высоты строк и обновление живого cache. Сохранены semantic
   priorities, ввод, фокус, refs и sticky scrollTo. Добавлены 16 UMD-тем / 128

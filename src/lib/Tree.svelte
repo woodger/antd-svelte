@@ -15,6 +15,7 @@
   } from './tree.engine';
   import { createTreeLoader } from './tree-load.engine';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
   import TreeIcon from './TreeIcon.svelte';
   let {
@@ -57,6 +58,7 @@
     class: className = '',
     rootClassName = '',
     style,
+    _themeStyle,
     nativeElement = $bindable(),
     tabindex = 0,
     onkeydown,
@@ -65,6 +67,8 @@
     ...attributes
   }: TreeProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Tree');
+  let themeStyle = $derived(_themeStyle ?? componentTheme.style);
   const form = useForm();
   const generated = $props.id();
   let index = $derived(buildTreeEntities(treeData));
@@ -371,6 +375,7 @@
 </style>
 <div bind:this={nativeElement} class={[
     'ant-tree ant-tree-css-var',
+    componentTheme.className,
     showLine && 'ant-tree-show-line',
     !showIcon && 'ant-tree-icon-hide',
     blockNode && 'ant-tree-block-node',
@@ -380,7 +385,7 @@
     config.direction === 'rtl' && 'ant-tree-rtl',
     className,
     rootClassName
-  ]} {style} dir={config.direction}>
+  ]} style={themeStyle ? [themeStyle, style].filter(Boolean).join(';') : style} dir={config.direction}>
   <div {...attributes} bind:this={focusElement} class="ant-tree-list" role="tree" tabindex={!blocked && focusable ? tabindex : undefined} aria-multiselectable={multiple || undefined} aria-disabled={blocked || undefined} aria-activedescendant={visible.some(entry => entry.key === active)
       ? nodeId(active!)
       : undefined} onkeydown={keyboard} onfocus={focusIn} onblur={event => {

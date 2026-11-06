@@ -11,3 +11,11 @@ export function prepareTreeSelectTokens(token: AliasToken) {
     nodeSelectedColor: token.colorText
   };
 }
+
+export function prepareTreeTokens(token: AliasToken) {
+  return {
+    ...prepareTreeSelectTokens(token),
+    directoryNodeSelectedColor: token.colorTextLightSolid,
+    directoryNodeSelectedBg: token.colorPrimary
+  };
+}

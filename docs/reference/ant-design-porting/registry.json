@@ -11970,7 +11970,38 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет fieldNames, TreeNode children API, полного generic data API, per-node switcherIcon, showLeafIcon snippet, onMouseEnter/Leave node events, semantic classNames/styles и ConfigProvider.tree/token engine. Ref предоставляет focus/blur и bind:nativeElement. Collapse/appear motion и полный rc-tree ref отдельно."
+          "note": "Нет fieldNames, TreeNode children API, полного generic data API, per-node switcherIcon, showLeafIcon snippet, onMouseEnter/Leave node events, semantic classNames/styles и ConfigProvider.tree. Ref предоставляет focus/blur и bind:nativeElement. Collapse/appear motion и полный rc-tree ref отдельно."
+        },
+        {
+          "id": "component-theme",
+          "title": "Tree component tokens, aliases/algorithms и независимая тема TreeSelect",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tree.svelte",
+            "src/lib/TreeSelect.svelte",
+            "src/lib/theme-tree-tokens.engine.ts",
+            "src/lib/theme-tree-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-tree-tokens-reference.json",
+            "tests/package/tree-theme.ssr.test.ts",
+            "tests/browser/tree-theme.spec.ts",
+            "tests/browser/tree-select-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-tree-theme-reference.json"
+          ],
+          "note": "Девять source token declarations: titleHeight/switcherSize/indentSize, hover/selected colors и два DirectoryTree-only поля; последние не добавляют DirectoryTree API. Font/color/spacing aliases, global/component algorithms, custom cssVar prefix и local style/variables подключены к общему bridge. 14 официальных UMD-тем / 112 наборов сверяют видимый list, node/checkbox/switcher/indent CSS в normal/RTL/local-priority/nested/reset/sibling scopes, zero/undefined и dark/compact. Отдельный source кадр с activeKey=b проверяет живое обновление активной строки. TreeSelect передаёт Select/TreeSelect variables вместо Tree defaults; отдельный UMD-кадр сверяет конфликтующие Tree/TreeSelect/Select tokens, прежняя source матрица сохраняется. Native DOM/focus/active descendant/selection/check/loading и SSR не меняются."
+        },
+        {
+          "id": "native-style-placement",
+          "title": "Прежний native Tree.style оформляет внешний корень",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tree.types.ts",
+            "src/lib/Tree.svelte",
+            "tests/browser/fixtures/ant-design-tree-theme-reference.json",
+            "readme.md"
+          ],
+          "note": "Существующий native contract сохранён: style применяется к внешнему .ant-tree. В React/rc-tree style передаётся внутреннему .ant-tree-list, а внешний корень получает rootStyle/semantic root styles. Исходные style attributes и computed font/color обоих слоёв сохранены в stylePlacementObservations; source сверка сравнивает видимый list и узлы отдельно от container background/border/direction. Это явное отличие размещения style, а не полное совпадение root style API."
         }
       ]
     },

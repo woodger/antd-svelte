@@ -8,7 +8,7 @@ import {
 import { prepareAvatarTokens, prepareBadgeTokens, prepareTagTokens }
   from './theme-display-tokens.engine';
 import { prepareSelectTokens } from './theme-select-tokens.engine';
-import { prepareTreeSelectTokens } from './theme-tree-tokens.engine';
+import { prepareTreeTokens, prepareTreeSelectTokens } from './theme-tree-tokens.engine';
 import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
 import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.engine';
 import { prepareTabsTokens } from './theme-tabs-tokens.engine';
@@ -33,9 +33,10 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List' | 'Listy';
+  | 'List' | 'Listy' | 'Tree';
 
 const factories = {
+  Tree: prepareTreeTokens,
   Listy: (token: GlobalToken) => ({
     itemPaddingBlock: token.paddingSM,
     itemPaddingInline: token.padding
@@ -312,6 +313,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Tree: [],
   Listy: [],
   List: [],
   Typography: [],

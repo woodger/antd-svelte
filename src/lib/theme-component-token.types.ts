@@ -611,6 +611,7 @@ export interface TagComponentToken {
   solidTextColor: string;
 }
 
+/** Метрики и состояния Tree; DirectoryTree-only tokens пока не добавляют его отдельный API. */
 export interface TreeComponentToken {
   titleHeight: number;
   switcherSize?: number;
