@@ -13452,6 +13452,11 @@
       ],
       "upstreamPackages": [
         {
+          "name": "@ant-design/cssinjs",
+          "range": "^2.1.2",
+          "referenceVersion": "2.1.2"
+        },
+        {
           "name": "@rc-component/resize-observer",
           "range": "^1.1.2",
           "referenceVersion": "1.1.2"
@@ -13496,6 +13501,21 @@
             "tests/browser/affix.spec.ts"
           ],
           "note": "SSR без чтения target и закрепления; один контентный узел без клонирования controls, placeholder только в fixed-состоянии."
+        },
+        {
+          "id": "component-theme",
+          "title": "Компонентный zIndexPopup, aliases и algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Affix.svelte",
+            "src/lib/theme-affix-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-affix-tokens-reference.json",
+            "tests/package/affix-theme.ssr.test.ts",
+            "tests/browser/affix-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-affix-theme-reference.json"
+          ],
+          "note": "Один component token zIndexPopup = zIndexBase + 10; unitless, zero/undefined и aliases рассчитываются по source style hook. Component scope/style применяются только к fixed content, до измеренных top/bottom/width/height; outer class/style и normal-flow typography сохраняют назначение. 12 UMD presets фиксируют raw declarations и unfixed/fixed CSS/geometry без mocks: dark/compact, component algorithms, cssVar key/prefix, outer CSS inheritance, independent nested/reset/sibling scopes, placeholder и один native input. Updates сохраняют DOM/ref/draft/selection/focus, не вызывают лишних onChange; возврат в поток/source off/unmount и прежние scroll/resize/target scenarios проверяются отдельно."
         },
         {
           "id": "global-config",

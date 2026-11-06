@@ -627,6 +627,10 @@
 
 ### Fixed
 
+- Affix: компонентный zIndexPopup и alias/algorithm overrides применяются к
+  закреплённому узлу. Смена темы сохраняет геометрию, placeholder, refs и поля
+  без лишних onChange; обычный поток и legacy defaults сохранены.
+
 - Watermark: Canvas defaults и z-index подключены к глобальным source tokens.
   Seed/alias/algorithm updates сохраняют wrapper, mark, refs и focus, включая
   унаследованные Modal/Drawer. Явные параметры и legacy CSS defaults сохранены.

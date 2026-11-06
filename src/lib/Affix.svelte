@@ -1,6 +1,7 @@
 <script lang="ts">
   import { createAffixRuntime } from './affix.dom';
   import { connectFeedbackFocus } from './feedback.dom';
+  import { useComponentTheme } from './theme-component.svelte';
   import type { AffixPosition, AffixProps, AffixUpdatePosition } from './affix.types';
   let {
     children,
@@ -14,6 +15,7 @@
     nativeElement = $bindable(),
     ...rest
   }: AffixProps = $props();
+  const componentTheme = useComponentTheme('Affix');
   let content = $state<HTMLDivElement>();
   let position = $state<AffixPosition>();
   let runtime = $state.raw<ReturnType<typeof createAffixRuntime>>();
@@ -46,12 +48,13 @@
 
 <div {...rest} bind:this={nativeElement} class={className} {style}>
   {#if position}<div aria-hidden="true" style={`width:${position.width}px;height:${position.height}px`}></div>{/if}
-  <div bind:this={content} class={position ? ['ant-affix ant-affix-css-var', rootClassName] : undefined} style={position
-      ? `position:fixed;${position
+  <div bind:this={content} class={position
+    ? ['ant-affix', componentTheme.className, 'ant-affix-css-var', rootClassName] : undefined} style={position
+      ? [componentTheme.style, `position:fixed;${position
         .edge}:${position
           .offset}px;width:${position
             .width}px;height:${position
-              .height}px`
+              .height}px`].filter(Boolean).join(';')
       : undefined}>
     {@render children?.()}
   </div>

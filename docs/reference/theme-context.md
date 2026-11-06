@@ -456,6 +456,23 @@ Inner header использует colorFillAlter, inner body — общий ве
 они не входят в публичный ThemeConfig ни здесь, ни в 6.6.8. Оба значения оставляют
 CSS-переменные включёнными также в upstream.
 
+## Тема Affix
+
+Affix объявляет один component token: zIndexPopup = zIndexBase + 10. Он остаётся
+unitless; ноль и undefined сохраняют исходные CSS semantics. Alias overrides и
+component algorithms применяются только в fixed-состоянии к внутреннему узлу.
+Top/bottom/width/height вычисляются после темы; class/style внешнего узла не меняют
+назначение. Возврат в поток снимает фиксированный scope и восстанавливает
+типографику контейнера, сохраняя поля и их значения.
+
+[Эталон токенов](../../src/lib/theme-affix-tokens-reference.test.ts) и
+[CSS/geometry](../../tests/browser/fixtures/ant-design-affix-theme-reference.json)
+охватывают 12 тем в обычном и fixed-состояниях. Проверяются separate algorithms,
+dark/compact, cssVar key/prefix, style inheritance, nested/reset/sibling scopes,
+placeholder, reactive updates без лишних onChange, refs/draft/selection/focus,
+[SSR](../../tests/package/affix-theme.ssr.test.ts) и
+[браузерное поведение](../../tests/browser/affix-theme.spec.ts).
+
 ## Тема Watermark
 
 Watermark читает raw global colorFill/fontSizeLG/zIndexPopupBase и не использует

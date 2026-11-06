@@ -32,9 +32,10 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
-  | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam';
+  | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix';
 
 const factories = {
+  Affix: (token: GlobalToken) => ({ zIndexPopup: token.zIndexBase + 10 }),
   BorderBeam: () => ({}),
   Masonry: () => ({}),
   Space: () => ({}),
@@ -278,6 +279,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Affix: [],
   BorderBeam: [],
   Masonry: [],
   Space: [],
