@@ -1,6 +1,6 @@
 // TimePanelBody/useTimeInfo из rc-picker 1.12.2; MIT, vendor/LICENSE.rc-picker.
 import type { Dayjs } from 'dayjs';
-import type { DatePickerFormat, DatePickerTimeConfig } from './date-picker.types';
+import type { DatePickerFormat, DatePickerProps, DatePickerTimeConfig } from './date-picker.types';
 import type { TimePickerProps, TimePickerColumnType, TimePickerUnit } from './time-picker.types';
 import { dayjsGenerateConfig as date } from './date-picker-dayjs.engine';
 import { validPickerTime } from './date-picker.engine';
@@ -92,6 +92,21 @@ export function timePickerClock(
   }
 
   return { ...config, ...show };
+}
+
+export function datePickerClock(
+  props: Pick<DatePickerProps, 'format' | 'showTime'>,
+  locale: NonNullable<DatePickerProps['locale']>['lang'] = {}
+): DatePickerTimeConfig {
+  const config = typeof props.showTime === 'object' ? props.showTime : {};
+  const first = config.format || (Array.isArray(props.format) ? props.format[0] : props.format);
+  const format = typeof first === 'string' && first
+    ? first : locale.fieldDateTimeFormat || `YYYY-MM-DD ${timeFormat(config)}`;
+  // Буквы в [literal] не включают units; исходная ошибка зафиксирована в реестре.
+  const baseline = format.replace(/\[[^\]]*\]/g, '');
+  const filled = timePickerClock({ ...config, format: baseline });
+
+  return { ...filled, format: config.format || timeFormat(filled) };
 }
 
 export function timePickerOptions(

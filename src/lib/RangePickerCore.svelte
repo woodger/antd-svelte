@@ -42,7 +42,9 @@
   import PickerRangeSeparator from './PickerRangeSeparator.svelte';
   import PickerClockIcon from './PickerClockIcon.svelte';
   import PickerTimePanel from './PickerTimePanel.svelte';
-  import { timePickerFormats, timePickerLang, timePickerSameValue } from './time-picker.engine';
+  import {
+    datePickerClock, timePickerFormats, timePickerLang, timePickerSameValue
+  } from './time-picker.engine';
   import {
     sameTimeRange,
     samePickerTime,
@@ -189,7 +191,10 @@
   let clock = $derived.by((): DatePickerTimeConfig => {
     if (time) return timeRangeClock(time, lang, active);
     const raw = typeof showTime === 'object' ? showTime : {};
-    return { ...raw, defaultOpenValue: raw.defaultOpenValue?.[active] };
+    return datePickerClock({
+      format,
+      showTime: { ...raw, defaultOpenValue: raw.defaultOpenValue?.[active] }
+    }, lang);
   });
   let timeFormat = $derived(
     clock.format ?? (typeof formats[0] === 'string' ? formats[0] : 'HH:mm:ss')

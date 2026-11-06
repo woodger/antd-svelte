@@ -20,11 +20,13 @@ export interface DatePickerTimeConfig extends Omit<
   DatePickerDisabledTime,
   'disabledMilliseconds'
 > {
+  /** Формат time panel; для определения колонок имеет приоритет над format поля. */
   format?: string;
   showHour?: boolean;
   showMinute?: boolean;
   showSecond?: boolean;
   showMillisecond?: boolean;
+  /** При отсутствии выводится из time/picker format; явное значение имеет приоритет. */
   use12Hours?: boolean;
   hourStep?: number;
   minuteStep?: number;

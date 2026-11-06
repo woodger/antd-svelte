@@ -685,6 +685,11 @@
 
 ### Fixed
 
+- DatePicker/RangePicker datetime: восстановлены приоритет panel/input/locale
+  formats, fallback колонок при date-only формате и вывод 12-hour режима.
+  Добавлены 40 raw UMD-измерений, unit/SSR/browser-проверки и проверки UTC/precision;
+  ошибочная обработка literal `[Hours]` в исходнике зафиксирована отдельно.
+
 - List/Listy: восстановлены source link reset, цвета и подчёркивания в обычном,
   hover/active/focus состояниях. Сохранены Meta colors, inline priority, native
   focus, навигация и оформление внешних ссылок; CSS извлекается из pin 6.6.8.

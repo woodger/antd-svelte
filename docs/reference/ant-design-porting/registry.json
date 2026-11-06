@@ -4249,7 +4249,14 @@
         "tests/browser/picker-theme-metrics.ts",
         "tests/browser/picker-theme.spec.ts",
         "tests/package/picker-theme.ssr.test.ts",
-        "src/lib/DatePickerTimePanel.svelte"
+        "src/lib/DatePickerTimePanel.svelte",
+        "src/lib/time-picker.engine.ts",
+        "src/lib/datetime-config.engine.test.ts",
+        "tests/browser/fixtures/DatetimeConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-datetime-config-reference.json",
+        "tests/browser/datetime-config-metrics.ts",
+        "tests/browser/datetime-config.spec.ts",
+        "tests/package/datetime-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -4376,6 +4383,39 @@
             "tests/package/picker-theme.ssr.test.ts"
           ],
           "note": "Исходные 45 component/internal defaults, aliases и algorithms; общий ключ components.DatePicker для DatePicker, RangePicker, TimePicker и TimeRangePicker. 15 UMD-тем задают CSS размеров/вариантов, focus, calendar/time/presets/footer и восьми theme scopes, включая RTL, local style, custom cssVar prefix, inheritance/reset и соседние provider. Тематические обновления сохраняют DOM, draft/caret/focus и Dayjs; изменение time cell height сохраняет scrollTop в пикселях, как Source. Локальные/semantic styles и независимый Button theme сохраняют приоритет; datetime header, null selection и отсутствие пустого footer сверены с UMD. Дополнительные picker modes, multiple, полный semantic/component config и retained popup lifecycle этой feature не заявляются."
+        },
+        {
+          "id": "datetime-clock",
+          "title": "DateTime columns: исходный приоритет форматов, fallback и inferred 12-hour mode",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/time-picker.engine.ts",
+            "src/lib/SinglePicker.svelte",
+            "src/lib/RangePickerCore.svelte",
+            "src/lib/DatePickerTimePanel.svelte",
+            "src/lib/datetime-config.engine.test.ts",
+            "tests/browser/fixtures/DatetimeConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-datetime-config-reference.json",
+            "tests/browser/datetime-config-metrics.ts",
+            "tests/browser/datetime-config.spec.ts",
+            "tests/package/datetime-config.ssr.test.ts"
+          ],
+          "note": "ShowTime.format → первый элемент picker.format, если это строка → locale datetime format; явные show flags и use12Hours имеют приоритет. Date-only baseline восстанавливает часы/минуты/секунды, SSS включает millisecond column, одиночный S — нет. Общая чистая нормализация single/range сохраняет исходные input formats, defaultOpenValue, disabled callbacks и steps. 40 raw UMD-измерений покрывают оба режима; подтверждение AM/PM сохраняет UTC, даты и исходное выравнивание точности. Literal observation выделен отдельно."
+        },
+        {
+          "id": "datetime-format-literals",
+          "title": "Сохранённое native исключение literals при выводе datetime units; дефект Source",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/time-picker.engine.ts",
+            "src/lib/datetime-config.engine.test.ts",
+            "tests/browser/fixtures/ant-design-datetime-config-reference.json",
+            "tests/browser/datetime-config.spec.ts",
+            "readme.md"
+          ],
+          "note": "Официальный UMD 6.6.8 для format=YYYY-MM-DD [Hours] трактует H/s внутри literal как units: только часы/секунды и header 12:56 при выбранном 12:34:56. Native сохраняет исключение текста в скобках и стандартный fallback всех трёх units; raw single/range measurements оставлены без подмены. Отличие намеренное и требует отдельного разбора; source defect не переносится."
         }
       ]
     },

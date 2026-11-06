@@ -4520,12 +4520,22 @@ Button autoInsertSpace и semantic props. Нативные disabled/type=button,
 скрытые; default millisecondStep=100, ближайшее разрешённое значение слева либо
 первое разрешённое. ShowTime.format задаёт формат time panel; формат input
 задаётся DatePicker.format либо locale.lang.fieldDateTimeFormat, как в upstream.
+Колонки определяются по showTime.format, затем первому элементу format, если это
+строка, затем datetime-формату locale. Явные showHour/showMinute/showSecond/
+showMillisecond имеют приоритет; use12Hours выводится из формата, если не задан.
+Формат поля только с датой сохраняет стандартные часы, минуты и секунды.
 Для миллисекундного шага задайте showTime={{millisecondStep:1}}.
 Ручной ввод через format с SSS использует строгий parser и не округляется этим
 panel helper. Адаптер не навязывает timezone: календарные операции сохраняют
 режим входного Dayjs, parser использует обычный dayjs(text,format), getNow учитывает
 подключённый потребителем timezone plugin как upstream. UTC/timezone плагины не
 включаются библиотекой автоматически.
+
+Текст формата в квадратных скобках не включает time units. Это сохранённое
+native правило: Ant Design 6.6.8 для `YYYY-MM-DD [Hours]` ошибочно оставляет только
+часы и секунды. У нас применяется обычный fallback часов/минут/секунд; raw source
+сохранён в [измерениях datetime config](./tests/browser/fixtures/ant-design-datetime-config-reference.json),
+отличие проверяется в [browser suite](./tests/browser/datetime-config.spec.ts).
 
 MinDate/maxDate и disabledDate ограничивают календарь; disabledTime возвращает
 запрещённые часы/минуты/секунды/миллисекунды. Size, status, variant, disabled,

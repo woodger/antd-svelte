@@ -30,6 +30,7 @@
   import PickerTimePanel from './PickerTimePanel.svelte';
   import { createRangeInteraction } from './range-picker-interaction.engine';
   import {
+    datePickerClock,
     timePickerClock,
     timePickerFormats,
     timePickerLang,
@@ -149,7 +150,7 @@
       : text !== '' && !valid(parsePicker(text, actualLocale.locale, formats)) && !readOnly
   );
   let clock = $derived(time ? timePickerClock(time, actualLocale)
-    : typeof showTime === 'object' ? showTime : {});
+    : datePickerClock({ format, showTime }, actualLocale));
   let timeFormat = $derived(
     clock.format ?? (typeof formats[0] === 'string' ? formats[0] : 'HH:mm:ss')
   );
