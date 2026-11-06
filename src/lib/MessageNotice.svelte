@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onDestroy, tick, untrack } from 'svelte';
   import Icon from './Icon.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
+  import { inheritedComponentThemeStyle } from './theme-component-style.engine';
   import { messageHolderKey, type MessageNotice } from './message.model.svelte.js';
   import { animateMessageNotice } from './message.dom';
   import type { MessageInstance } from './message.types';
@@ -8,6 +10,12 @@
   let { notice, message }: { notice: MessageNotice; message: MessageInstance; } = $props();
   const id = untrack(() => notice.id);
   const runtime = untrack(() => message[messageHolderKey]);
+  const designTheme = useDesignTokenContext();
+  // Канонические variables разрешаются здесь, после локальных variables другого prefix.
+  let inheritedStyle = $derived(designTheme.enabled && designTheme.state.prefix !== 'ant'
+    ? inheritedComponentThemeStyle('Message', designTheme.state.token, designTheme.state.prefix)
+    : undefined);
+  let rootStyle = $derived([inheritedStyle, notice.style].filter(Boolean).join(';') || undefined);
   const icons = {
     success: 'check-circle-filled',
     info: 'info-circle-filled',
@@ -63,6 +71,7 @@
   .ant-message-notice-title { min-width: 0; overflow-wrap: anywhere; }
   .ant-message-notice-wrapper { min-width: 0; }
   .ant-message-notice-icon { display: inline-flex; }
+  .message-source-theme .ant-message-notice-icon { display: block; }
   @media (prefers-reduced-motion: reduce) { .ant-message-notice-icon :global(.loading) { animation: none; } }
 </style>
 
@@ -70,8 +79,9 @@
   <div bind:this={node} {@attach mounted} role={notice.role} aria-atomic="true" aria-hidden={notice.closing || undefined} inert={notice.closing} class={[
       'ant-message-notice',
       `ant-message-notice-${notice.type}`,
+      designTheme.enabled && 'message-source-theme',
       notice.class
-    ]} style={notice.style} onpointerenter={(event) => {
+    ]} style={rootStyle} onpointerenter={(event) => {
       if (event.pointerType !== 'touch')
         runtime.hover(id, true);
     }} onpointerleave={() => runtime.hover(id, false)}>

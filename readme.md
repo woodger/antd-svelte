@@ -3688,6 +3688,19 @@ handle завершается true после анимации и фактиче
 чтобы не продолжать сценарий после удаления holder.
 
 Holder наследует тему, compact и направление ближайшего ConfigProvider.
+`theme.components.Message` настраивает zIndexPopup, contentBg и contentPadding,
+aliases и component algorithms. Отступ по умолчанию вычисляется без округления.
+Style сообщения и Holder сохраняют приоритет; локальные component variables
+другого cssVar prefix разрешаются на самом сообщении. Обновления меняют отдельные
+CSS declarations, сохраняя native viewport styles, очередь, handles и deadline
+таймеров. В теме Ant Design контейнер иконки повторяет исходную высоту строки;
+legacy-оформление сохраняется. [Проверки и исходные замеры](./docs/reference/theme-context.md#тема-message).
+
+Прежние min-width:0/overflow-wrap:anywhere у title сохранены. В официальной
+6.6.8 длинное неразрывное слово дало scrollWidth 3871px при карточке 1352px;
+это [отдельное наблюдение upstream](./tests/browser/fixtures/ant-design-message-wrap-observation.json).
+Raw CSS эталона не изменены; browser-сравнение явно учитывает только это отличие переноса.
+
 Нативный manual popover показывает обычный вертикальный список по центру сверху.
 Top по умолчанию 8px: число задаёт px, строка — CSS-длину. Id/class/style
 относятся к поверхности списка. Фокус и клавиши Tab/Escape остаются у страницы;

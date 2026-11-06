@@ -2,12 +2,16 @@
   import { untrack } from 'svelte';
   import MessageNotice from './MessageNotice.svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectInlineStyle } from './inline-style.dom';
+  import { serializeInlineStyleLayers, type InlineStyleLayer } from './inline-style.engine';
   import { messageHolderKey } from './message.model.svelte.js';
   import { connectMessageSurface } from './message.dom';
   import type { MessageHolderProps } from './message.types';
 
   let { message, top = 8, id, class: className = '', style }: MessageHolderProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Message');
   let anchor = $state<HTMLSpanElement>();
   let surface = $state<HTMLDivElement>();
   let runtime = $derived(message[messageHolderKey]);
@@ -17,6 +21,17 @@
       ? `${Number.isFinite(top) && top >= 0 ? top : 8}px`
       : top.trim() || '8px'
   );
+  let rootLayers = $derived<readonly InlineStyleLayer[]>([
+    componentTheme.style,
+    style,
+    [['--notification-top', resolvedTop]]
+  ]);
+  let rootStyle = $derived(serializeInlineStyleLayers(rootLayers));
+
+  function connectRootStyle(node: HTMLDivElement) {
+    const update = connectInlineStyle(node);
+    $effect(() => update(rootLayers));
+  }
 
   function connectHost(node: HTMLSpanElement) {
     const view = node.ownerDocument.defaultView!;
@@ -51,9 +66,10 @@
   {#if notices.length}
     <div bind:this={surface} popover="manual" {id} dir={config.direction} class={[
         'ant-message ant-message-css-var ant-message-list ant-message-top',
+        componentTheme.className,
         config.direction === 'rtl' && 'ant-message-rtl',
         className
-      ]} {style} style:--notification-top={resolvedTop}>
+      ]} style={untrack(() => rootStyle)} {@attach connectRootStyle}>
       <div class="ant-message-list-content">{#each notices as notice (notice.id)}<MessageNotice {notice} {message} />{/each}</div>
     </div>
   {/if}

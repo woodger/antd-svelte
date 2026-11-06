@@ -941,6 +941,31 @@ Theme updates/reset сохраняют dialog/content/Input DOM, draft/selection
 FormData и callbacks; unmount освобождает модальность. Подготовка confirm defaults
 не добавляет отсутствующие static confirm methods и полный Modal API.
 
+## Тема Message
+
+`components.Message` подготавливает три исходных CSS defaults: zIndexPopupBase+1010,
+contentBg из colorBgElevated и contentPadding из
+`(controlHeightLG-fontSize×lineHeight)/2` и paddingSM без округления. Поддерживаются
+aliases, algorithms, CSS lengths, нули/undefined, custom prefix и вложенные scopes.
+Holder и отдельное сообщение сохраняют свои style; при другом prefix локальные
+component variables разрешаются на notice, после наследования значений Holder.
+
+SSR выводит queued notice с начальным inline style, не запуская timers. В браузере
+существующий connectInlineStyle обновляет только принадлежащие теме/user style
+declarations, сохраняя viewport width/left и top. Обновление не заменяет очередь,
+notice/surface DOM, handles, deadlines или внешний editor focus/selection.
+Source icon layout восстанавливается только в теме Ant Design; legacy не меняется.
+
+16 UMD-тем / 240 CSS-состояний покрывают пять statuses, custom icon, multiline,
+notice/Holder style priority и девять scopes: [unit](../../src/lib/theme-message-tokens-reference.test.ts),
+[SSR](../../tests/package/message-theme.ssr.test.ts),
+[браузер](../../tests/browser/message-theme.spec.ts), fixture `?fixture=message-theme`.
+Raw source CSS сохраняет overflow-wrap:break-word; сравнение явно оставляет прежний
+native overflow-wrap:anywhere/min-width:0. [Исходное наблюдение](../../tests/browser/fixtures/ant-design-message-wrap-observation.json)
+фиксирует горизонтальный выход длинного слова за карточку: 3871px против 1352px
+в 6.6.8. Native-проверка защищает перенос; CSS upstream ради этого не копируются.
+Полный semantic/config/static API Message остаётся отдельной задачей.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

@@ -37,9 +37,15 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
   | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
-  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal';
+  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message';
 
 const factories = {
+  Message: (token: GlobalToken) => ({
+    zIndexPopup: token.zIndexPopupBase + 1010,
+    contentBg: token.colorBgElevated,
+    contentPadding:
+      `${(token.controlHeightLG - token.fontSize * token.lineHeight) / 2}px ${token.paddingSM}px`
+  }),
   Modal: (token: GlobalToken) => ({
     footerBg: 'transparent',
     headerBg: 'transparent',
@@ -400,6 +406,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Message: [],
   Modal: ['titleLineHeight'],
   Drawer: [],
   Upload: [],
@@ -552,9 +559,16 @@ export function componentThemeStyle(component: StyledComponent, token: GlobalTok
 }
 
 /** Вложенный CSS-корень сбрасывает vendor defaults и наследует переменные своего control. */
-export function inheritedComponentThemeStyle(component: StyledComponent, token: GlobalToken) {
-  const { defaultVariables } = resolveComponentVariables(component, token);
-  return serializeThemeVariables(Object.fromEntries(defaultVariables.map(name => [name, 'inherit'])));
+export function inheritedComponentThemeStyle(
+  component: StyledComponent,
+  token: GlobalToken,
+  prefix = 'ant'
+) {
+  const { defaultVariables } = resolveComponentVariables(component, token, prefix);
+  return serializeThemeVariables(
+    Object.fromEntries(defaultVariables.map(name => [name, 'inherit'])),
+    prefix
+  );
 }
 
 /** Native compact использует исходные метрики controls, сохраняя прежние цвета и остальные стили. */

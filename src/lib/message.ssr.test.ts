@@ -56,7 +56,7 @@ describe('MessageHolder server rendering', () => {
     );
 
     expect(body).toContain('role="alert"');
-    expect(body).toContain('--notification-top: 10vh');
+    expect(body).toMatch(/--notification-top:\s*10vh(?:;|")/);
     expect(body).toContain('id="page-messages"');
     expect(body).toContain('notice-custom');
     expect(body).toContain('holder-custom');

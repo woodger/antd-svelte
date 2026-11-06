@@ -9,6 +9,12 @@
 
 ### Added
 
+- Message: три component tokens, aliases/algorithms и scoped variables, включая
+  notice/Holder style priority и custom prefix. Добавлены 16 UMD-тем и unit/SSR/browser
+  проверки; обновления сохраняют viewport styles, очередь, handles и timer deadlines.
+  Восстановлена source-высота иконки; прежний перенос длинных слов сохранён,
+  наблюдаемое переполнение upstream записано отдельно.
+
 - Modal: основные и внутренние component tokens, aliases/algorithms и wireframe,
   portal theme sync и исходный close icon wrapper. Добавлены 19 UMD-тем и
   unit/SSR/browser-проверки. Native modality, draft/selection/focus, width,

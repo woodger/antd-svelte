@@ -12650,7 +12650,7 @@
       "scope": "target",
       "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
       "upstreamPath": "components/message",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "message",
@@ -12663,12 +12663,32 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/notification",
+          "range": "~2.1.1",
+          "referenceVersion": null
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/message.spec.ts"
+        "tests/browser/message.spec.ts",
+        "src/lib/MessageHolder.svelte",
+        "src/lib/MessageNotice.svelte",
+        "src/lib/theme-message-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-message-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-message-theme-reference.json",
+        "tests/browser/fixtures/ant-design-message-wrap-observation.json",
+        "tests/browser/fixtures/message-theme-presets.ts",
+        "tests/browser/fixtures/MessageThemeControl.svelte",
+        "tests/browser/fixtures/MessageThemeCase.svelte",
+        "tests/browser/fixtures/MessageThemeFixtures.svelte",
+        "tests/browser/message-theme-metrics.ts",
+        "tests/browser/message-theme.spec.ts",
+        "tests/package/message-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -12678,6 +12698,41 @@
           "requiredForV1": true,
           "evidence": [],
           "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+        },
+        {
+          "id": "component-theme",
+          "title": "Компонентные tokens, aliases/algorithms и реактивная тема feedback surface",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/MessageHolder.svelte",
+            "src/lib/MessageNotice.svelte",
+            "src/lib/theme-message-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-message-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-message-theme-reference.json",
+            "tests/browser/fixtures/ant-design-message-wrap-observation.json",
+            "tests/browser/fixtures/message-theme-presets.ts",
+            "tests/browser/fixtures/MessageThemeControl.svelte",
+            "tests/browser/fixtures/MessageThemeCase.svelte",
+            "tests/browser/fixtures/MessageThemeFixtures.svelte",
+            "tests/browser/message-theme-metrics.ts",
+            "tests/browser/message-theme.spec.ts",
+            "tests/package/message-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Три исходных defaults: zIndexPopup=zIndexPopupBase+1010, contentBg=colorBgElevated, contentPadding=(controlHeightLG-fontSize×lineHeight)/2 и paddingSM без округления. Финальные overrides, algorithms, aliases, дробные values/CSS lengths, нули/undefined и custom prefix. 16 UMD-тем / 240 raw CSS-состояний: пять statuses, custom icon/multiline, девять provider/style scopes, notice style и Holder styles.list priority. SSR начальный inline style и browser connectInlineStyle сохраняют viewport width/left/top; CSS variables другого prefix разрешаются на notice после наследования Holder. Source icon line box используется только в теме Ant Design; legacy сохранён. Theme updates/inherit reset сохраняют notice/surface DOM, очередь/handles/deadlines и внешний editor focus/selection/FormData; пустой Holder читает текущую тему при новом открытии, unmount удаляет surface. Native min-width:0/overflow-wrap:anywhere сохранены и явно отделены в browser matcher от raw source break-word; остальные raw CSS-метрики сравниваются без поправок. Полный semantic/config/static API и общий аудит семейства остаются отдельными задачами."
+        },
+        {
+          "id": "source-long-word-overflow",
+          "title": "Наблюдение upstream: горизонтальное переполнение длинного слова",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-message-wrap-observation.json",
+            "tests/browser/message-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "В закреплённом UMD 6.6.8 (984592267de88fbf9cdaecc96a56629e721c709d) message.useMessage с content=\"unbroken\"×60 при viewport 1400×1200 даёт карточку 1352px, title 3835px и scrollWidth карточки 3871px. Исходный title использует break-word без native min-width:0/anywhere. Прежнее Svelte-поведение переноса сохранено; source CSS не копируются ради повторения этого переполнения. Raw source замеры сохранены отдельно для разбора, browser-проверка защищает вместимость текста в карточку."
         }
       ]
     },
