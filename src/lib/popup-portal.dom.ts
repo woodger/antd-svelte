@@ -1,5 +1,44 @@
 import { getPopupActiveElement } from './popup.dom';
 
+function readPopupThemeVariables(origin: HTMLElement) {
+  const document = origin.ownerDocument;
+  const view = document.defaultView!;
+  const source = view.getComputedStyle(origin);
+  const values = new Map<string, string>();
+  for (const name of source) {
+    if (name.startsWith('--')) values.set(name, source.getPropertyValue(name));
+  }
+  const empty = [...values.keys()].filter(name => values.get(name) === '');
+  if (!empty.length) return values;
+
+  // CSSOM возвращает '' и для пустого списка токенов, и для guaranteed-invalid.
+  const typed = origin.computedStyleMap?.();
+  if (typed) {
+    for (const name of empty) values.set(name, typed.get(name) === undefined ? 'initial' : ' ');
+    return values;
+  }
+
+  const probe = document.createElement('span');
+  probe.hidden = true;
+  probe.style.setProperty('display', 'none', 'important');
+  empty.forEach((name, index) => {
+    probe.style.setProperty(`--ant-svelte-popup-probe-${index}`,
+      `var(${CSS.escape(name)}, ant-svelte-invalid)`, 'important');
+  });
+  origin.append(probe);
+  try {
+    const computed = view.getComputedStyle(probe);
+    empty.forEach((name, index) => {
+      const invalid = computed.getPropertyValue(`--ant-svelte-popup-probe-${index}`).trim()
+        === 'ant-svelte-invalid';
+      values.set(name, invalid ? 'initial' : ' ');
+    });
+  } finally {
+    probe.remove();
+  }
+  return values;
+}
+
 /** Portal сохраняет вычисленные CSS variables исходной Svelte theme boundary. */
 export function connectPopupPortal(element: HTMLElement, options: {
   getPopupContainer: false | ((reference?: HTMLElement) => Element | DocumentFragment) | undefined;
@@ -47,11 +86,7 @@ export function connectPopupPortal(element: HTMLElement, options: {
 
   function syncTheme() {
     if (!active || inline) return;
-    const source = view.getComputedStyle(origin);
-    const values = new Map<string, string>();
-    for (const name of source) {
-      if (name.startsWith('--')) values.set(name, source.getPropertyValue(name));
-    }
+    const values = readPopupThemeVariables(origin);
     const preserved = clearManaged();
     // Копируем готовые значения: локальный var() иначе пересчитается после записи соседней переменной.
     for (const [name, value] of values) {

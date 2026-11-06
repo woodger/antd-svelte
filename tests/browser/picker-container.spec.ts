@@ -131,6 +131,50 @@ for (const sample of reference.cases) {
   }
 }
 
+for (const fallback of [false, true]) {
+  test(`picker portals retain empty and invalid variables with CSSOM fallback=${fallback}`,
+    async ({ page }) => {
+      if (fallback) await page.evaluate(() => {
+        Object.defineProperty(Element.prototype, 'computedStyleMap', {
+          configurable: true, writable: true, value: undefined
+        });
+      });
+      await page.getByLabel('Picker reference', { exact: true }).selectOption('date-local-shadow');
+      await page.locator('#picker-shadow').evaluate(node => {
+        const style = node.ownerDocument.createElement('style');
+        style.textContent = '.ant-picker-dropdown{--portal-invalid:1050;'
+          + '--portal-empty:rgb(9,8,7);z-index:var(--portal-invalid,33);'
+          + 'border-top-color:var(--portal-empty,rgb(1,2,3))!important}';
+        node.shadowRoot!.append(style);
+      });
+      const origin = page.locator('#picker-container-form');
+      await origin.evaluate(node => {
+        const style = (node as HTMLElement).style;
+        style.setProperty('--portal-invalid', 'initial');
+        style.setProperty('--portal-empty', ' ');
+      });
+      const root = page.locator('.ant-picker');
+      const children = await root.evaluateHandle(node => [...node.children]);
+      await open(page, 'date-local-shadow');
+
+      const popup = page.locator(surface);
+      await expect(popup).toHaveCSS('z-index', '33');
+      const color = await popup.evaluate(node => getComputedStyle(node).color);
+      await expect(popup).toHaveCSS('border-top-color', color);
+      expect(await root.evaluate((node, initial) => node.children.length === initial.length
+        && [...node.children].every((child, index) => child === initial[index]), children)).toBe(true);
+
+      await origin.evaluate(node => {
+        const style = (node as HTMLElement).style;
+        style.removeProperty('--portal-invalid');
+        style.removeProperty('--portal-empty');
+      });
+
+      await expect(popup).toHaveCSS('z-index', '1050');
+      await expect(popup).toHaveCSS('border-top-color', 'rgb(9, 8, 7)');
+    });
+}
+
 test('picker portals copy resolved aliases and release removed variables', async ({ page }) => {
   await page.getByLabel('Picker reference', { exact: true }).selectOption('date-local-shadow');
   const names = ['--portal-alpha', '--portal-beta', '--portal-gamma', '--portal-delta'];

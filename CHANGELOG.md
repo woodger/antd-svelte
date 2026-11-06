@@ -638,6 +638,10 @@
 
 ### Fixed
 
+- Portal: сохранены пустые и guaranteed-invalid CSS variables, включая очищенные
+  component tokens Tabs. Vendor defaults больше не возвращаются после переноса;
+  различие var() fallbacks проверено также без CSS Typed OM.
+
 - TimePicker/TimeRangePicker: двойной клик подтверждает первый выбранный пункт,
   даже если автопрокрутка сместила колонку между кликами. Сохранены keyboard,
   callbacks, UTC/precision и отдельные подтверждения диапазона. Дефект upstream
