@@ -498,14 +498,23 @@ test('TimePicker keeps defaultValue initial-only and retains later uncontrolled 
   await expect(unit(page, 'hour 13')).toHaveAttribute('aria-pressed', 'true');
 });
 
-test('TimePicker double click confirms a unit without triggering the footer onOk callback', async ({ page }) => {
-  await input(page).click();
-  await unit(page, 'hour 13').dblclick();
+for (const delay of [0, 80]) {
+  test(`TimePicker double click confirms the first unit without footer onOk at ${delay}ms`, async ({ page }) => {
+    await input(page).click();
+    const column = popup(page).locator('[data-type="hour"]');
+    await expect.poll(() => column.evaluate(node => {
+      const first = node.querySelector<HTMLElement>('li')!;
+      const selected = node.querySelector<HTMLElement>('[data-value="10"]')!;
+      return Math.abs(node.scrollTop - (selected.offsetTop - first.offsetTop));
+    })).toBeLessThanOrEqual(1);
+    await unit(page, 'hour 13').dblclick({ delay });
 
-  await expect(popup(page)).toHaveCount(0);
-  await expect(owner(page)).toHaveText('2024-09-15T13:23:44.500Z');
-  await expect(events(page)).not.toContainText('ok:');
-});
+    await expect(popup(page)).toHaveCount(0);
+    await expect(owner(page)).toHaveText('2024-09-15T13:23:44.500Z');
+    expect((await events(page).textContent())?.match(/calendar:/g)).toHaveLength(1);
+    await expect(events(page)).not.toContainText('ok:');
+  });
+}
 
 for (const timezoneId of ['America/New_York', 'Pacific/Kiritimati']) {
   test.describe(`TimePicker in ${timezoneId}`, () => {

@@ -4608,7 +4608,10 @@ millisecondStep=100, ближайшее разрешённое значение 
 
 `needConfirm` по умолчанию true. Выбор в колонке меняет только calendar draft.
 OK вызывает onOk перед onChange; Enter/Tab подтверждают допустимый ввод без
-onOk. Двойной клик по единице подтверждает без onOk. При needConfirm={false}
+onOk. Двойной клик по единице подтверждает первый выбранный пункт без onOk.
+В [закреплённом upstream](./tests/browser/fixtures/ant-design-time-column-double-click-observation.json)
+автопрокрутка между двумя кликами может выбрать соседний час; это поведение
+намеренно не воспроизводится. При needConfirm={false}
 onChange вызывается при завершении ввода/закрытии, а не при каждом клике колонки.
 Escape отменяет draft; закрытие снаружи при needConfirm=true тоже отменяет его.
 Now и presets применяют значение сразу. OnCalendarChange получает пустой info

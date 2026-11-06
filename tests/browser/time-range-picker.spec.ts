@@ -60,6 +60,30 @@ test('TimeRangePicker confirms each field and publishes the pair after the secon
   );
 });
 
+test('TimeRangePicker double click confirms each first unit without footer onOk', async ({ page }) => {
+  await start(page).click();
+
+  for (const [selected, next] of [[10, 13], [17, 19]]) {
+    const column = popup(page).locator('[data-type="hour"]');
+    await expect.poll(() => column.evaluate((node, selected) => {
+      const first = node.querySelector<HTMLElement>('li')!;
+      const item = node.querySelector<HTMLElement>(`[data-value="${selected}"]`)!;
+      return Math.abs(node.scrollTop - (item.offsetTop - first.offsetTop));
+    }, selected)).toBeLessThanOrEqual(1);
+    await unit(page, `hour ${next}`).dblclick({ delay: 80 });
+
+    if (selected === 10) {
+      await expect(end(page)).toBeFocused();
+      await expect(owner(page)).toHaveText(initial);
+    }
+  }
+
+  await expect(owner(page)).toHaveText('2024-09-15T13:23:44.500Z,2024-09-15T19:45:56.700Z');
+  await expect(popup(page)).toHaveCount(0);
+  expect((await events(page).textContent())?.match(/calendar:/g)).toHaveLength(2);
+  await expect(events(page)).not.toContainText('ok:');
+});
+
 test('TimeRangePicker locks an unconfirmed field and cancels its draft on Escape', async ({ page }) => {
   await start(page).click();
   await unit(page, 'hour 13').click();

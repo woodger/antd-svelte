@@ -103,7 +103,10 @@
         className
       ]}
       {style}
-      onclick={() => { if (!option.disabled) onChange(option.value); }}
+      onclick={event => {
+        // Автопрокрутка после первого click может подставить другую ячейку под второй.
+        if (!option.disabled && event.detail < 2) onChange(option.value);
+      }}
       ondblclick={() => { if (!option.disabled) onDblClick?.(); }}
       onmouseenter={() => onHover?.(option.value)}
       onmouseleave={() => onHover?.(null)}

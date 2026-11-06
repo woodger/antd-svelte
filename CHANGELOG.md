@@ -638,6 +638,11 @@
 
 ### Fixed
 
+- TimePicker/TimeRangePicker: двойной клик подтверждает первый выбранный пункт,
+  даже если автопрокрутка сместила колонку между кликами. Сохранены keyboard,
+  callbacks, UTC/precision и отдельные подтверждения диапазона. Дефект upstream
+  сохранён в наблюдении с реальными pointer events закреплённого UMD.
+
 - Portal: theme variables копируются одним снимком без пересчёта стилей popup
   после каждой записи. Сохранены вычисленные значения var(), удаление устаревших
   variables, component overrides, DOM, фокус и выделение, включая TimePicker в ShadowRoot.

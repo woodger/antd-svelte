@@ -6403,7 +6403,8 @@
         "tests/browser/fixtures/PickerContainerFixtures.svelte",
         "tests/browser/fixtures/ant-design-picker-container-reference.json",
         "tests/browser/picker-container.spec.ts",
-        "tests/package/picker-container.ssr.test.ts"
+        "tests/package/picker-container.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-time-column-double-click-observation.json"
       ],
       "features": [
         {
@@ -6510,6 +6511,19 @@
             "tests/package/picker-container.ssr.test.ts"
           ],
           "note": "54 эталона официального UMD задают local → ConfigProvider fallback, undefined/nesting/theme reset, div.ant-picker trigger и defaultOpen с учётом нулевой/положительной арности getter. Исходные offset=4 с округлением координат вниз при scale=1, min-width selector и default bottomRight в RTL перенесены в общие single/range cores. Новый callback с прежним контейнером сохраняет panel/editor DOM, draft, state, focus/selection; смена самого DOM target пересоздаёт panel, как React portal. Поддержаны ShadowRoot со стилями потребителя, native refs/cleanup и SSR без вызова getter. Dayjs, точность/UTC, FormData и машины подтверждения сохранены; native conditional panel по-прежнему удаляется при закрытии, в отличие от retained popup rc-trigger."
+        },
+        {
+          "id": "native-unit-double-click",
+          "title": "Стабильный выбор первого пункта при double click; наблюдение дефекта upstream",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/PickerTimeColumn.svelte",
+            "tests/browser/time-picker.spec.ts",
+            "tests/browser/time-range-picker.spec.ts",
+            "tests/browser/fixtures/ant-design-time-column-double-click-observation.json"
+          ],
+          "note": "В закреплённом UMD реальный double click по hour 13 после выравнивания hour 10 выбирает 14 (delay=0) или 16 (delay=80ms): автопрокрутка смещает второй click. Native намеренно подтверждает первый выбранный пункт, не меняя draft вторым click; keyboard/programmatic clicks, onOk, отдельные range confirmations и UTC/precision сохранены. Raw source pointer trace оставлен для отдельного разбора."
         }
       ]
     },
