@@ -9,6 +9,11 @@
 
 ### Added
 
+- Modal: основные и внутренние component tokens, aliases/algorithms и wireframe,
+  portal theme sync и исходный close icon wrapper. Добавлены 19 UMD-тем и
+  unit/SSR/browser-проверки. Native modality, draft/selection/focus, width,
+  callbacks и legacy-оформление сохранены; static confirm API ещё не перенесён.
+
 - Drawer: component tokens, aliases и algorithms на native dialog, включая portal
   sync и приоритет локальных CSS variables; title наследует цвет source-панели.
   Добавлены 16 UMD-тем и unit/SSR/browser-проверки. Обновления сохраняют

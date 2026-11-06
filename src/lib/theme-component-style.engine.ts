@@ -37,9 +37,34 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
   | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
-  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer';
+  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal';
 
 const factories = {
+  Modal: (token: GlobalToken) => ({
+    footerBg: 'transparent',
+    headerBg: 'transparent',
+    titleLineHeight: token.lineHeightHeading5,
+    titleFontSize: token.fontSizeHeading5,
+    contentBg: token.colorBgElevated,
+    titleColor: token.colorTextHeading,
+    contentPadding: token.wireframe ? 0 : `${token.paddingMD}px ${token.paddingContentHorizontalLG}px`,
+    headerPadding: token.wireframe ? `${token.padding}px ${token.paddingLG}px` : 0,
+    headerBorderBottom: token.wireframe
+      ? `${token.lineWidth}px ${token.lineType} ${token.colorSplit}` : 'none',
+    headerMarginBottom: token.wireframe ? 0 : token.marginXS,
+    bodyPadding: token.wireframe ? token.paddingLG : 0,
+    footerPadding: token.wireframe ? `${token.paddingXS}px ${token.padding}px` : 0,
+    footerBorderTop: token.wireframe
+      ? `${token.lineWidth}px ${token.lineType} ${token.colorSplit}` : 'none',
+    footerBorderRadius: token.wireframe
+      ? `0 0 ${token.borderRadiusLG}px ${token.borderRadiusLG}px` : 0,
+    footerMarginTop: token.wireframe ? 0 : token.marginSM,
+    confirmBodyPadding: token.wireframe
+      ? `${token.padding * 2}px ${token.padding * 2}px ${token.paddingLG}px` : 0,
+    confirmIconMarginInlineEnd: token.wireframe ? token.margin : token.marginSM,
+    confirmBtnsMarginTop: token.wireframe ? token.marginLG : token.marginSM,
+    mask: true
+  }),
   Drawer: (token: GlobalToken) => ({
     zIndexPopup: token.zIndexPopupBase,
     footerPaddingBlock: token.paddingXS,
@@ -375,6 +400,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Modal: ['titleLineHeight'],
   Drawer: [],
   Upload: [],
   Tour: [],

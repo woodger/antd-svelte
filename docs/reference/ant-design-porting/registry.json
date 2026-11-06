@@ -12723,7 +12723,19 @@
         "tests/browser/fixtures/ant-design-dialog-container-reference.json",
         "tests/browser/dialog-container.spec.ts",
         "tests/browser/dialog-container-interaction.spec.ts",
-        "tests/package/dialog-container.ssr.test.ts"
+        "tests/package/dialog-container.ssr.test.ts",
+        "src/lib/Modal.svelte",
+        "src/lib/theme-modal-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-modal-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-modal-theme-reference.json",
+        "tests/browser/fixtures/modal-theme-presets.ts",
+        "tests/browser/fixtures/ModalThemeControl.svelte",
+        "tests/browser/fixtures/ModalThemeCase.svelte",
+        "tests/browser/fixtures/ModalThemeFixtures.svelte",
+        "tests/browser/modal-theme-metrics.ts",
+        "tests/browser/modal-theme.spec.ts",
+        "tests/package/modal-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -12759,6 +12771,35 @@
             "tests/package/dialog-container.ssr.test.ts"
           ],
           "note": "GetContainer: false, Element, DocumentFragment/ShadowRoot, selector и функция без аргументов. Undefined наследует global getter; Modal вызывает его без trigger. Первый перенос готового контейнера сохраняет SSR DOM; новая функция с тем же target сохраняет state/draft/selection/focus, смена target пересоздаёт содержимое. Detached nodes/DocumentFragment ожидают подключения; стили ShadowRoot принадлежат потребителю. Native modal/inert/fullscreen/scroll lock, возврат фокуса, прежний SSR shell и lifecycle сохранены. 36 UMD-эталонов покрывают priorities, payload, undefined/false, selectors, retention и remount. Полный аудит семейства и остальной Modal API ещё не завершены."
+        },
+        {
+          "id": "component-theme",
+          "title": "Основные и внутренние component tokens, aliases/algorithms и wireframe",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Modal.svelte",
+            "src/lib/theme-modal-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-modal-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-modal-theme-reference.json",
+            "tests/browser/fixtures/modal-theme-presets.ts",
+            "tests/browser/fixtures/ModalThemeControl.svelte",
+            "tests/browser/fixtures/ModalThemeCase.svelte",
+            "tests/browser/fixtures/ModalThemeFixtures.svelte",
+            "tests/browser/modal-theme-metrics.ts",
+            "tests/browser/modal-theme.spec.ts",
+            "tests/package/modal-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "18 исходных CSS defaults: шесть основных header/content/footer/title и внутренние spacing/borders/confirm metrics; boolean mask подготавливается, но не создаёт declaration и не меняет native modality. Финальные overrides, global/component algorithms, aliases, wireframe, дробные values, CSS lengths, нули/undefined и custom prefix. 19 UMD-тем / 228 raw CSS-состояний: default/custom/null footer, closable/hover, width 520/736, body text и шесть scopes. В теме Ant Design восстановлен исходный close wrapper для размера иконки; legacy markup/size сохранены. Native centering/top layer и прежний title close-space сохранены; Button/Input используют свои tokens. Theme updates/inherit reset и portal sync сохраняют dialog/container/Input DOM, draft/selection/focus, width, FormData и callbacks; SSR не открывает немодальное окно и не запускает browser timers. Confirm defaults не означают поддержку static confirm API; остальные API gaps и общий аудит остаются отдельными задачами."
+        },
+        {
+          "id": "extended-modal-api",
+          "title": "Static confirm/useModal, semantic slots и полный render/config API",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [],
+          "note": "Публичный native Modal сохраняет согласованный bind:open/snippets/callbacks API. Static confirm/info/success/error/warning, useModal/context holder, полный focusable/mask config, ConfigProvider.modal, semantic classNames/styles, loading/Skeleton и modalRender ещё не перенесены. Source centering/position и lifecycle требуют отдельного аудита относительно согласованной native реализации."
         }
       ]
     },

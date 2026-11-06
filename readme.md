@@ -3347,6 +3347,15 @@ DEV diagnostics пока не поддерживаются.
 Modal сохраняет нативный dialog, `bind:open`, footer/children snippets и существующие
 правила onOk/onCancel, confirmLoading, Escape и закрытия по фону.
 
+`theme.components.Modal` настраивает header/content/footer background, title color,
+font size/line height, внутренние отступы и wireframe. Поддерживаются aliases,
+component algorithms, CSS lengths и custom prefix; Button/Input внутри сохраняют
+собственные tokens. Source close wrapper задаёт размер иконки; legacy-размер сохранён.
+Тема обновляется без потери модальности, DOM, draft, selection и focus, включая
+getContainer. Нативное центрирование и резерв места title под close сохранены.
+[Сверка с официальным UMD](./docs/reference/theme-context.md#тема-modal) не означает
+поддержку пока отсутствующих static confirm methods и полного render/config API.
+
 GetContainer принимает DOM-узел, DocumentFragment (включая ShadowRoot), CSS-селектор,
 функцию без аргументов либо false. Локальное undefined использует
 ConfigProvider.getPopupContainer; Modal вызывает глобальный getter без trigger,

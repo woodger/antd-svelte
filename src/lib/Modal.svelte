@@ -2,6 +2,8 @@
   import NoCompactStyle from './NoCompactStyle.svelte';
   import type { Snippet } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { useWatermarkPanel } from './watermark-context';
   import { createDialogContainer } from './dialog-container.model.svelte.js';
   import type { GetContainer } from './types';
@@ -56,6 +58,8 @@
   }: ModalProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Modal');
+  const designTheme = useDesignTokenContext();
   const watermarkPanel = useWatermarkPanel();
   const generatedId = $props.id();
   const titleId = `ant-modal-${generatedId}`;
@@ -65,6 +69,7 @@
     component: 'modal',
     getContainer,
     getPopupContainer: config.getPopupContainer,
+    style: componentTheme.style,
     onPointerDown: event => { backdropPointer = isBackdrop(event); },
     onPointerUp: handlePointerUp
   }));
@@ -147,7 +152,8 @@
 {#key container.key}
 <dialog
   bind:this={dialog}
-  class={`ant-svelte-dialog ant-modal-css-var ${className}`}
+  class={['ant-svelte-dialog ant-modal-css-var', componentTheme.className, className]}
+  style={componentTheme.style}
   style:width={`${width}px`}
   dir={config.direction}
   aria-labelledby={titleId}
@@ -164,7 +170,7 @@
     <div class="ant-modal-container" {@attach watermarkPanel}>
       {#if closable}
         <button type="button" class="ant-modal-close" disabled={confirmLoading} aria-label={config.locale.closeText} onclick={cancel}>
-          <Icon name="close" />
+          {#if designTheme.enabled}<span class="ant-modal-close-x"><Icon name="close" /></span>{:else}<Icon name="close" />{/if}
         </button>
       {/if}
       <div class="ant-modal-header"><h2 id={titleId} class="ant-modal-title">{title}</h2></div>

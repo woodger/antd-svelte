@@ -919,6 +919,28 @@ React ConfigProvider не создаёт DOM: эталон использует 
 DOM-контексту Svelte ConfigProvider. Native fullscreen/modal contract сохраняется.
 Пользовательский native style сравнивается с source rootStyle, а не section style.
 
+## Тема Modal
+
+`components.Modal` подготавливает 18 исходных CSS defaults: шесть основных полей
+header/content/footer/title и внутренние отступы, borders и confirm metrics.
+Внутренний boolean mask сохраняется в подготовке tokens, но не создаёт CSS declaration
+и не меняет модальность. Wireframe использует исходные padding/border formulas.
+Aliases, algorithms, дробные значения, CSS lengths, нули/undefined и custom prefix
+применяются к native dialog; portal sync сохраняет его переменные и заданную width.
+Button/Input получают собственные themes. Source close wrapper задаёт исходный
+размер иконки; legacy markup и оформление сохраняются.
+
+19 UMD-тем / 228 CSS-состояний покрывают default/custom/null footer, close/hover,
+ширину 520/736, body text и шесть provider scopes:
+[unit](../../src/lib/theme-modal-tokens-reference.test.ts),
+[SSR](../../tests/package/modal-theme.ssr.test.ts),
+[браузер](../../tests/browser/modal-theme.spec.ts), fixture `?fixture=modal-theme`.
+Фокус в Input выравнивается на обоих стендах. Native centering/top layer и прежний
+резерв места title под close не подменяются геометрией React portal.
+Theme updates/reset сохраняют dialog/content/Input DOM, draft/selection/focus,
+FormData и callbacks; unmount освобождает модальность. Подготовка confirm defaults
+не добавляет отсутствующие static confirm methods и полный Modal API.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables
