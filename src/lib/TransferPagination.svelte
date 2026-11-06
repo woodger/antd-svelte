@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { getPaginationState, getPageSizeOptions } from './pagination.engine';
   import { transferPaginationItems } from './transfer.engine';
   import { ruRU } from './types';
@@ -20,6 +21,7 @@
     class?: string;
   } = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Pagination');
   let strings = $derived({ ...ruRU.pagination, ...config.locale.pagination });
   let paginationState = $derived(getPaginationState(total, current, pageSize));
   let pages = $derived(transferPaginationItems(
@@ -70,10 +72,11 @@
   button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
 </style>
 
-<ul class={['ant-pagination ant-pagination-small ant-pagination-mini',
+<ul class={['ant-pagination ant-pagination-css-var ant-pagination-small ant-pagination-mini',
+    componentTheme.className,
     simple && 'ant-pagination-simple',
     disabled && 'ant-pagination-disabled', config.direction === 'rtl' && 'ant-pagination-rtl',
-    className]} aria-label={strings.label}>
+    className]} style={componentTheme.style} aria-label={strings.label}>
   <li class={['ant-pagination-prev', (disabled || current <= 1) && 'ant-pagination-disabled']}>
     <button type="button" class="ant-pagination-item-link" aria-label={strings.previous}
       disabled={disabled || current <= 1} onclick={() => change(current - 1)}>

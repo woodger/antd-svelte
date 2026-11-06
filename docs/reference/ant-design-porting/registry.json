@@ -6606,7 +6606,7 @@
       "name": "Transfer",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Автономный перенос по общей цели: controlled перенос между списками, selection/search, oneWay, pagination и custom rendering; общий token API отдельно.",
+      "scopeReason": "Автономный перенос по общей цели: controlled перенос между списками, selection/search, oneWay, pagination, custom rendering и source component themes.",
       "upstreamPath": "components/transfer",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -6750,13 +6750,13 @@
         },
         {
           "id": "advanced-api",
-          "title": "Полный token и React-specific API",
+          "title": "Произвольный prefix CSS и React-specific API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Общий token engine, CSS generation для произвольного prefixCls, React-specific refs/dev warnings не перенесены. PrefixCls меняет DOM-классы, vendor CSS рассчитан на ant-transfer. ReactNode callbacks/cloneElement заменены явно описанными snippets/handlers; v1-ready не означает завершение полного React API."
+          "note": "CSS generation для произвольного prefixCls, React-specific refs/dev warnings не перенесены. PrefixCls меняет DOM-классы, vendor CSS рассчитан на ant-transfer. ReactNode callbacks/cloneElement заменены явно описанными snippets/handlers; v1-ready не означает завершение полного React API."
         },
         {
           "id": "render-empty",
@@ -6773,6 +6773,63 @@
             "docs/reference/render-empty.md"
           ],
           "note": "Общий renderer вычисляется до props.locale; local notFoundContent, включая own undefined/null, перекрывает default. Falsy callback выбирает simple small Empty, без callback сохраняется прежний simple Empty. Array выбирается по стороне, вложенный content/0 отображается рекурсивно."
+        },
+        {
+          "id": "component-theme",
+          "title": "Шесть component tokens, aliases/algorithms и независимые темы внутренних controls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Transfer.svelte",
+            "src/lib/TransferCheckbox.svelte",
+            "src/lib/TransferPagination.svelte",
+            "src/lib/theme-component-style.engine.ts",
+            "src/lib/theme-transfer-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-transfer-tokens-reference.json",
+            "tests/package/transfer-theme.ssr.test.ts",
+            "tests/browser/transfer-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-transfer-theme-reference.json"
+          ],
+          "note": "ListWidth/ListWidthLG/ListHeight/ItemHeight/ItemPaddingBlock/HeaderHeight, внутренний transferHeaderVerticalPadding, alias overrides, global/component algorithms и custom cssVar prefix подключены к общему bridge. Source fontHeight рассчитывается через Math.round(fontSize * lineHeight), header padding — через Math.ceil; одноимённый global fontHeight override не заменяет расчёт. Сохраняются string/zero/undefined metrics и config/semantic/local priorities. 17 официальных UMD-тем / 136 наборов сверяют basic списки во всех normal/RTL/local-variable/priority/nested/reset/sibling/outside scopes; oneWay/pagination/empty/custom lists дополнительно проверяются в normal/RTL/priority. Checkbox/Pagination получили собственные component scopes, внутренней пагинации возвращён ant-pagination-css-var, Input/Button сохраняют свои темы. Theme updates сохраняют native input draft/selection/focus, checked keys, page и keyed rows; controlled move публикует прежний порядок callbacks. SSR не запускает browser effects."
+        },
+        {
+          "id": "native-remove-font",
+          "title": "Native remove button наследует шрифт строки вместо browser default",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/TransferSection.svelte",
+            "tests/browser/fixtures/ant-design-transfer-theme-reference.json",
+            "tests/browser/transfer-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "В исходном UMD remove button сохраняет UA font-size 13.3333px при изменении Transfer fontSize, включая global/component aliases и semantic styles. Прежний native font:inherit сохранён: кнопка и SVG масштабируются вместе со строкой. Raw source remove font-size остаётся без изменений; comparator явно ожидает source item font-size только для этого поля. Остальные поля remove button сравниваются напрямую. Это объявленное native отличие, а не полное совпадение Source CSS."
+        },
+        {
+          "id": "native-empty-fallback",
+          "title": "Прежний native simple Empty без source ant-empty-small",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Transfer.svelte",
+            "docs/reference/render-empty.md",
+            "tests/browser/fixtures/ant-design-transfer-theme-reference.json",
+            "tests/browser/transfer-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "Без renderEmpty callback native сохраняет прежний обычный simple Empty; официальный default использует small variant. При undefined listHeight/itemHeight/headerHeight это меняет естественную высоту пустой секции. Стандартный source default сохранён в cases без изменений; nativeEmptyObservation отдельно измеряет неизменённый UMD с явным locale.notFoundContent=<Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/> без small class. Только empty sections undefined-metrics сравниваются с этим явным fallback, остальные свойства — с обычным source эталоном. Existing fallback contract не меняется при подключении theme engine."
+        },
+        {
+          "id": "source-inheritance-reset-remount",
+          "title": "Source remount/search/focus loss при reset inherited theme",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-transfer-theme-reference.json",
+            "tests/browser/transfer-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "В UMD 6.6.8 изменение вложенного ConfigProvider.theme.inherit на false в записанной конфигурации заменяет input: старый узел disconnected, document.activeElement уже другой, текущая query Al превращается в пустую строку. Before/after identity/focus/value сохранены в inheritanceFocusObservation. Native не повторяет remount и сохраняет DOM/query/focus. Для точной CSS-сверки focusedInheritanceReset получен в неизменённом UMD после восстановления той же query Al и фокуса публичными действиями, с ожиданием фактического цвета рамки и завершения CSS-переходов. Наблюдение относится к этой конфигурации, а не утверждает remount для всех ConfigProvider updates."
         }
       ]
     },

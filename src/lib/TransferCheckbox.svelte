@@ -1,5 +1,6 @@
 <script lang="ts">
   import { tick } from 'svelte';
+  import { useComponentTheme } from './theme-component.svelte';
 
   let { checked, indeterminate = false, disabled, label, onSelect,
     class: className = '', style }: {
@@ -12,6 +13,7 @@
     style?: string;
   } = $props();
   let input = $state<HTMLInputElement>();
+  const componentTheme = useComponentTheme('Checkbox');
 
   $effect(() => {
     if (input) input.indeterminate = indeterminate;
@@ -29,9 +31,9 @@
   }
 </script>
 
-<span class={['ant-checkbox-wrapper ant-checkbox-css-var', className,
+<span class={['ant-checkbox-wrapper ant-checkbox-css-var', componentTheme.className, className,
     checked && 'ant-checkbox-wrapper-checked', disabled && 'ant-checkbox-wrapper-disabled']}
-  {style}>
+  style={componentTheme.style ? [componentTheme.style, style].filter(Boolean).join(';') : style}>
   <span class={['ant-checkbox', checked && 'ant-checkbox-checked',
       indeterminate && 'ant-checkbox-indeterminate', disabled && 'ant-checkbox-disabled']}>
     <input bind:this={input} type="checkbox" class="ant-checkbox-input" {checked} {disabled}

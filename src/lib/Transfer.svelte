@@ -5,6 +5,7 @@
 <script lang="ts" generics="RecordType extends object = TransferItem">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { provideFormField, useForm, useFormField } from './form-context';
   import {
     transferData, transferDisabled, transferKey, transferMove, transferSelectAll,
@@ -22,6 +23,7 @@
 
   let { nativeElement = $bindable(), ...props }: TransferProps<RecordType> = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Transfer');
   const form = useForm();
   const field = useFormField();
   // Служебные checkbox/search не являются отдельными полями внешнего FormItem.
@@ -60,7 +62,7 @@
     root: join([contextClasses.root, localClasses.root], ' '),
     actions: join([contextClasses.actions, localClasses.actions], ' ')
   });
-  let rootStyle = $derived(join([contextStyles.root, config.transfer?.style,
+  let rootStyle = $derived(join([componentTheme.style, contextStyles.root, config.transfer?.style,
     localStyles.root, props.style], ';'));
   let actionsStyle = $derived(join([props.operationStyle, contextStyles.actions,
     localStyles.actions], ';'));
@@ -231,7 +233,7 @@
 </script>
 
 <div {...attributes} bind:this={nativeElement}
-  class={[prefix, 'ant-transfer-css-var', disabled && `${prefix}-disabled`,
+  class={[prefix, 'ant-transfer-css-var', componentTheme.className, disabled && `${prefix}-disabled`,
     config.direction === 'rtl' && `${prefix}-rtl`, props.children && `${prefix}-customize-list`,
     status && `${prefix}-status-${status}`, config.transfer?.class, props.class,
     props.rootClassName, classes.root]} style={rootStyle}>

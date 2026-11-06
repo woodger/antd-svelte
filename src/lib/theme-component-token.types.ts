@@ -651,6 +651,7 @@ export interface TimelineComponentToken {
   itemPaddingBottom?: number;
 }
 
+/** Размеры списков, строк и заголовка Transfer; числа преобразуются в px, CSS strings сохраняются. */
 export interface TransferComponentToken {
   listWidth: number | string;
   listWidthLG: number | string;

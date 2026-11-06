@@ -5144,16 +5144,45 @@ SSR не публикует callbacks и не обращается к DOM. Со�
 экземпляру; меню использует существующий Dropdown.
 
 RenderEmpty подключён через ConfigProvider с исходными fallback/locale приоритетами
-и выбором array content по стороне. Полный token engine, генерация CSS для произвольного prefixCls и
+и выбором array content по стороне. Генерация CSS для произвольного prefixCls и
 React-specific refs/dev warnings остаются вне этого этапа. PrefixCls меняет DOM
 классы; встроенный vendor CSS рассчитан на ant-transfer.
+
+`ConfigProvider.theme.components.Transfer` применяет шесть component tokens,
+alias overrides и global/component algorithms. Сохранены числовые и строковые
+CSS-размеры, zero/undefined и приоритет config/semantic/local styles. Внутренний
+header padding рассчитывается по исходному правилу с округлением вверх;
+fontHeight берётся из `Math.round(fontSize * lineHeight)`, а не из одноимённого
+переопределённого alias. Checkbox, Input, Button и Pagination используют свои
+компонентные темы. У внутренней пагинации восстановлен CSS scope, включая
+стандартное оформление без source theme.
+
+[UMD-эталон](tests/browser/fixtures/ant-design-transfer-theme-reference.json)
+содержит 17 тем / 136 наборов для восьми независимых scopes. Basic списки проверены
+во всех scopes; oneWay, pagination, empty и custom lists — в normal/RTL/priority.
+Сохранено прежнее native отличие: кнопка удаления наследует шрифт строки, тогда
+как в исходном UMD остаётся браузерный размер `13.33px`. Исходный размер сохранён
+в raw measurements; сравнение явно проверяет native inheritance по source item font.
+Ещё одно прежнее отличие — обычный simple Empty без source `ant-empty-small`.
+В эталоне оставлены стандартный source fallback и отдельный замер с явным
+`locale.notFoundContent`, соответствующим native fallback. Последний применяется
+только для сверки естественной высоты пустой секции с undefined metrics.
+[Browser-проверки темы](tests/browser/transfer-theme.spec.ts) также проверяют
+draft/selection/focus, страницы, keyed rows и порядок move callbacks при обновлении.
+В исходном UMD переход вложенного provider к `inherit:false` в конфигурации эталона
+заменяет input и теряет query/focus; raw observation сохранено отдельно.
+Native сохраняет поле и введённую строку. Для CSS-сверки эталон дополнительно
+восстанавливает ту же строку и фокус через публичный Input.
+Декларации сверяются с UMD отдельным
+[unit-набором](src/lib/theme-transfer-tokens-reference.test.ts),
+[SSR](tests/package/transfer-theme.ssr.test.ts) не создаёт браузерные ресурсы.
 
 Проверки: [engine](./src/lib/transfer.engine.test.ts),
 [SSR](./src/lib/transfer.ssr.test.ts),
 [public package](./tests/package/transfer.ssr.test.ts),
 [browser](./tests/browser/transfer.spec.ts) и `?fixture=transfer`.
 Оформление: [54 исходных CSS rules](./src/lib/vendor/transfer.css),
-[рецепт](./tools/ant-design-css-recipes.json); токены связаны с theme.css.
+[рецепт](./tools/ant-design-css-recipes.json); legacy defaults остаются в theme.css.
 Числовая/simple пагинация сверена с @rc-component/pagination 1.4.0;
 алгоритм страниц включён с [MIT-лицензией](./src/lib/vendor/LICENSE.rc-pagination).
 Delete icon перенесён из @ant-design/icons-svg 4.6.0 под существующей

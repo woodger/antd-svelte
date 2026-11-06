@@ -1,0 +1,659 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "operation": "Unchanged public Transfer with checked/disabled rows, search, one-way actions, paginated and empty sections, footer and custom lists. Six public tokens plus internal header padding; aliases/algorithms, nested/reset/sibling/RTL scopes, custom CSS-variable prefix, style priorities, zero/string/undefined metrics and independent child component themes."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "variables": {
+        "--ant-transfer-list-width": "180px",
+        "--ant-transfer-list-height": "200px",
+        "--ant-transfer-list-width-lg": "250px",
+        "--ant-transfer-header-height": "40px",
+        "--ant-transfer-item-height": "32px",
+        "--ant-transfer-item-padding-block": "5px",
+        "--ant-transfer-transfer-header-vertical-padding": "9px"
+      }
+    },
+    {
+      "name": "component-tokens",
+      "config": {
+        "components": {
+          "Transfer": {
+            "listWidth": 220,
+            "listWidthLG": 290,
+            "listHeight": 260,
+            "itemHeight": 44,
+            "itemPaddingBlock": 8,
+            "headerHeight": 52
+          }
+        }
+      },
+      "variables": {
+        "--ant-transfer-list-width": "220px",
+        "--ant-transfer-list-height": "260px",
+        "--ant-transfer-list-width-lg": "290px",
+        "--ant-transfer-header-height": "52px",
+        "--ant-transfer-item-height": "44px",
+        "--ant-transfer-item-padding-block": "8px",
+        "--ant-transfer-transfer-header-vertical-padding": "9px"
+      }
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "fontSize": 20,
+          "lineHeight": 1.8,
+          "fontFamily": "monospace",
+          "colorText": "#722ed1",
+          "colorTextDisabled": "#cf1322",
+          "colorBgContainer": "#fffbe6",
+          "colorPrimary": "#fa541c",
+          "colorBorder": "#531dab",
+          "paddingSM": 14,
+          "paddingXS": 10,
+          "marginXS": 10,
+          "marginXXS": 6,
+          "controlHeight": 40,
+          "controlHeightLG": 48,
+          "controlInteractiveSize": 20,
+          "borderRadiusLG": 12,
+          "lineWidth": 2
+        }
+      },
+      "variables": {
+        "--ant-transfer-list-width": "180px",
+        "--ant-transfer-list-height": "200px",
+        "--ant-transfer-list-width-lg": "250px",
+        "--ant-transfer-header-height": "48px",
+        "--ant-transfer-item-height": "40px",
+        "--ant-transfer-item-padding-block": "2px",
+        "--ant-transfer-transfer-header-vertical-padding": "5px"
+      }
+    },
+    {
+      "name": "component-aliases",
+      "config": {
+        "components": {
+          "Transfer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "colorBorder": "#531dab",
+            "paddingSM": 14,
+            "paddingXS": 10,
+            "marginXS": 10,
+            "marginXXS": 6,
+            "controlHeight": 40,
+            "controlHeightLG": 48,
+            "controlInteractiveSize": 20,
+            "borderRadiusLG": 12,
+            "lineWidth": 2,
+            "listWidth": 220,
+            "listWidthLG": 290,
+            "listHeight": 260,
+            "itemHeight": 44,
+            "itemPaddingBlock": 8,
+            "headerHeight": 52
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-disabled": "#cf1322",
+        "--ant-color-bg-container": "#fffbe6",
+        "--ant-color-primary": "#fa541c",
+        "--ant-color-border": "#531dab",
+        "--ant-padding-sm": "14px",
+        "--ant-padding-xs": "10px",
+        "--ant-margin-xs": "10px",
+        "--ant-margin-xxs": "6px",
+        "--ant-control-height": "40px",
+        "--ant-control-height-lg": "48px",
+        "--ant-control-interactive-size": "20px",
+        "--ant-border-radius-lg": "12px",
+        "--ant-line-width": "2px",
+        "--ant-transfer-list-width": "220px",
+        "--ant-transfer-list-height": "260px",
+        "--ant-transfer-list-width-lg": "290px",
+        "--ant-transfer-header-height": "52px",
+        "--ant-transfer-item-height": "44px",
+        "--ant-transfer-item-padding-block": "8px",
+        "--ant-transfer-transfer-header-vertical-padding": "5px"
+      }
+    },
+    {
+      "name": "updated-tokens",
+      "config": {
+        "components": {
+          "Transfer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "colorBorder": "#531dab",
+            "paddingSM": 14,
+            "paddingXS": 10,
+            "marginXS": 10,
+            "marginXXS": 6,
+            "controlHeight": 40,
+            "controlHeightLG": 48,
+            "controlInteractiveSize": 20,
+            "borderRadiusLG": 12,
+            "lineWidth": 2,
+            "listWidth": 240,
+            "listWidthLG": 310,
+            "listHeight": 280,
+            "itemHeight": 48,
+            "itemPaddingBlock": 10,
+            "headerHeight": 56
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-disabled": "#cf1322",
+        "--ant-color-bg-container": "#fffbe6",
+        "--ant-color-primary": "#fa541c",
+        "--ant-color-border": "#531dab",
+        "--ant-padding-sm": "14px",
+        "--ant-padding-xs": "10px",
+        "--ant-margin-xs": "10px",
+        "--ant-margin-xxs": "6px",
+        "--ant-control-height": "40px",
+        "--ant-control-height-lg": "48px",
+        "--ant-control-interactive-size": "20px",
+        "--ant-border-radius-lg": "12px",
+        "--ant-line-width": "2px",
+        "--ant-transfer-list-width": "240px",
+        "--ant-transfer-list-height": "280px",
+        "--ant-transfer-list-width-lg": "310px",
+        "--ant-transfer-header-height": "56px",
+        "--ant-transfer-item-height": "48px",
+        "--ant-transfer-item-padding-block": "10px",
+        "--ant-transfer-transfer-header-vertical-padding": "5px"
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-transfer-list-width": "180px",
+        "--ant-transfer-list-height": "200px",
+        "--ant-transfer-list-width-lg": "250px",
+        "--ant-transfer-header-height": "40px",
+        "--ant-transfer-item-height": "32px",
+        "--ant-transfer-item-padding-block": "5px",
+        "--ant-transfer-transfer-header-vertical-padding": "9px"
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-transfer-list-width": "180px",
+        "--ant-transfer-list-height": "200px",
+        "--ant-transfer-list-width-lg": "250px",
+        "--ant-transfer-header-height": "35px",
+        "--ant-transfer-item-height": "28px",
+        "--ant-transfer-item-padding-block": "4px",
+        "--ant-transfer-transfer-header-vertical-padding": "7px"
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-transfer-list-width": "180px",
+        "--ant-transfer-list-height": "200px",
+        "--ant-transfer-list-width-lg": "250px",
+        "--ant-transfer-header-height": "35px",
+        "--ant-transfer-item-height": "28px",
+        "--ant-transfer-item-padding-block": "4px",
+        "--ant-transfer-transfer-header-vertical-padding": "7px"
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Transfer": {
+            "algorithm": true,
+            "fontSize": 18,
+            "colorPrimary": "#fa541c"
+          }
+        }
+      },
+      "variables": {
+        "--ant-color-primary": "#fa541c",
+        "--ant-font-size": "18px",
+        "--ant-color-primary-bg": "#fff2e8",
+        "--ant-color-primary-bg-hover": "#ffd8bf",
+        "--ant-color-primary-border": "#ffbb96",
+        "--ant-color-primary-border-hover": "#ff9c6e",
+        "--ant-color-primary-hover": "#ff7a45",
+        "--ant-color-primary-active": "#d4380d",
+        "--ant-color-primary-text-hover": "#ff7a45",
+        "--ant-color-primary-text": "#fa541c",
+        "--ant-color-primary-text-active": "#d4380d",
+        "--ant-font-size-sm": "14px",
+        "--ant-font-size-lg": "20px",
+        "--ant-font-size-xl": "26px",
+        "--ant-font-size-heading-1": "48px",
+        "--ant-font-size-heading-2": "40px",
+        "--ant-font-size-heading-3": "32px",
+        "--ant-font-size-heading-4": "26px",
+        "--ant-font-size-heading-5": "20px",
+        "--ant-line-height": "1.4444444444444444",
+        "--ant-line-height-lg": "1.4",
+        "--ant-line-height-sm": "1.5714285714285714",
+        "--ant-font-height": "26px",
+        "--ant-font-height-lg": "28px",
+        "--ant-font-height-sm": "22px",
+        "--ant-line-height-heading-1": "1.1666666666666667",
+        "--ant-line-height-heading-2": "1.2",
+        "--ant-line-height-heading-3": "1.25",
+        "--ant-line-height-heading-4": "1.3076923076923077",
+        "--ant-line-height-heading-5": "1.4",
+        "--ant-font-size-icon": "14px",
+        "--ant-control-item-bg-active": "#fff2e8",
+        "--ant-control-item-bg-active-hover": "#ffd8bf",
+        "--ant-control-outline": "rgba(255,125,25,0.1)",
+        "--ant-transfer-list-width": "180px",
+        "--ant-transfer-list-height": "200px",
+        "--ant-transfer-list-width-lg": "250px",
+        "--ant-transfer-header-height": "40px",
+        "--ant-transfer-item-height": "32px",
+        "--ant-transfer-item-padding-block": "3px",
+        "--ant-transfer-transfer-header-vertical-padding": "7px"
+      }
+    },
+    {
+      "name": "component-compact",
+      "config": {
+        "components": {
+          "Transfer": {
+            "algorithm": [
+              "compactAlgorithm"
+            ],
+            "fontSize": 18
+          }
+        }
+      },
+      "variables": {
+        "--ant-control-height": "28px",
+        "--ant-size-lg": "16px",
+        "--ant-size-md": "16px",
+        "--ant-size-ms": "12px",
+        "--ant-size": "8px",
+        "--ant-size-sm": "8px",
+        "--ant-size-xs": "4px",
+        "--ant-control-height-sm": "21px",
+        "--ant-control-height-xs": "14px",
+        "--ant-control-height-lg": "35px",
+        "--ant-control-interactive-size": "14px",
+        "--ant-padding-xs": "4px",
+        "--ant-padding-sm": "8px",
+        "--ant-padding": "8px",
+        "--ant-padding-md": "16px",
+        "--ant-padding-lg": "16px",
+        "--ant-padding-content-horizontal-lg": "16px",
+        "--ant-padding-content-vertical-lg": "12px",
+        "--ant-padding-content-horizontal": "12px",
+        "--ant-padding-content-vertical": "8px",
+        "--ant-padding-content-horizontal-sm": "8px",
+        "--ant-padding-content-vertical-sm": "4px",
+        "--ant-margin-xs": "4px",
+        "--ant-margin-sm": "8px",
+        "--ant-margin": "8px",
+        "--ant-margin-md": "16px",
+        "--ant-margin-lg": "16px",
+        "--ant-transfer-list-width": "180px",
+        "--ant-transfer-list-height": "200px",
+        "--ant-transfer-list-width-lg": "250px",
+        "--ant-transfer-header-height": "35px",
+        "--ant-transfer-item-height": "28px",
+        "--ant-transfer-item-padding-block": "3px",
+        "--ant-transfer-transfer-header-vertical-padding": "6px"
+      }
+    },
+    {
+      "name": "style-priority",
+      "config": {
+        "components": {
+          "Transfer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "colorBorder": "#531dab",
+            "paddingSM": 14,
+            "paddingXS": 10,
+            "marginXS": 10,
+            "marginXXS": 6,
+            "controlHeight": 40,
+            "controlHeightLG": 48,
+            "controlInteractiveSize": 20,
+            "borderRadiusLG": 12,
+            "lineWidth": 2,
+            "listWidth": 220,
+            "listWidthLG": 290,
+            "listHeight": 260,
+            "itemHeight": 44,
+            "itemPaddingBlock": 8,
+            "headerHeight": 52
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-disabled": "#cf1322",
+        "--ant-color-bg-container": "#fffbe6",
+        "--ant-color-primary": "#fa541c",
+        "--ant-color-border": "#531dab",
+        "--ant-padding-sm": "14px",
+        "--ant-padding-xs": "10px",
+        "--ant-margin-xs": "10px",
+        "--ant-margin-xxs": "6px",
+        "--ant-control-height": "40px",
+        "--ant-control-height-lg": "48px",
+        "--ant-control-interactive-size": "20px",
+        "--ant-border-radius-lg": "12px",
+        "--ant-line-width": "2px",
+        "--ant-transfer-list-width": "220px",
+        "--ant-transfer-list-height": "260px",
+        "--ant-transfer-list-width-lg": "290px",
+        "--ant-transfer-header-height": "52px",
+        "--ant-transfer-item-height": "44px",
+        "--ant-transfer-item-padding-block": "8px",
+        "--ant-transfer-transfer-header-vertical-padding": "5px"
+      }
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "key": "transfer-probe",
+          "prefix": "owned"
+        },
+        "components": {
+          "Transfer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "colorBorder": "#531dab",
+            "paddingSM": 14,
+            "paddingXS": 10,
+            "marginXS": 10,
+            "marginXXS": 6,
+            "controlHeight": 40,
+            "controlHeightLG": 48,
+            "controlInteractiveSize": 20,
+            "borderRadiusLG": 12,
+            "lineWidth": 2,
+            "listWidth": 220,
+            "listWidthLG": 290,
+            "listHeight": 260,
+            "itemHeight": 44,
+            "itemPaddingBlock": 8,
+            "headerHeight": 52
+          }
+        }
+      },
+      "variables": {
+        "--owned-font-size": "20px",
+        "--owned-line-height": "1.8",
+        "--owned-font-family": "monospace",
+        "--owned-color-text": "#722ed1",
+        "--owned-color-text-disabled": "#cf1322",
+        "--owned-color-bg-container": "#fffbe6",
+        "--owned-color-primary": "#fa541c",
+        "--owned-color-border": "#531dab",
+        "--owned-padding-sm": "14px",
+        "--owned-padding-xs": "10px",
+        "--owned-margin-xs": "10px",
+        "--owned-margin-xxs": "6px",
+        "--owned-control-height": "40px",
+        "--owned-control-height-lg": "48px",
+        "--owned-control-interactive-size": "20px",
+        "--owned-border-radius-lg": "12px",
+        "--owned-line-width": "2px",
+        "--owned-transfer-list-width": "220px",
+        "--owned-transfer-list-height": "260px",
+        "--owned-transfer-list-width-lg": "290px",
+        "--owned-transfer-header-height": "52px",
+        "--owned-transfer-item-height": "44px",
+        "--owned-transfer-item-padding-block": "8px",
+        "--owned-transfer-transfer-header-vertical-padding": "5px"
+      }
+    },
+    {
+      "name": "string-metrics",
+      "config": {
+        "components": {
+          "Transfer": {
+            "listWidth": "15rem",
+            "listWidthLG": "19rem",
+            "listHeight": "18rem",
+            "itemHeight": "2.5rem",
+            "itemPaddingBlock": "0.5rem",
+            "headerHeight": "3.5rem"
+          }
+        }
+      },
+      "variables": {
+        "--ant-transfer-list-width": "15rem",
+        "--ant-transfer-list-height": "18rem",
+        "--ant-transfer-list-width-lg": "19rem",
+        "--ant-transfer-header-height": "3.5rem",
+        "--ant-transfer-item-height": "2.5rem",
+        "--ant-transfer-item-padding-block": "0.5rem",
+        "--ant-transfer-transfer-header-vertical-padding": "9px"
+      }
+    },
+    {
+      "name": "font-height-override",
+      "config": {
+        "token": {
+          "fontHeight": 80
+        },
+        "components": {
+          "Transfer": {
+            "fontSize": 19,
+            "lineHeight": 1.7,
+            "controlHeight": 42,
+            "controlHeightLG": 50,
+            "lineWidth": 3
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "19px",
+        "--ant-line-height": "1.7",
+        "--ant-control-height": "42px",
+        "--ant-control-height-lg": "50px",
+        "--ant-line-width": "3px",
+        "--ant-transfer-list-width": "180px",
+        "--ant-transfer-list-height": "200px",
+        "--ant-transfer-list-width-lg": "250px",
+        "--ant-transfer-header-height": "50px",
+        "--ant-transfer-item-height": "42px",
+        "--ant-transfer-item-padding-block": "5px",
+        "--ant-transfer-transfer-header-vertical-padding": "8px"
+      }
+    },
+    {
+      "name": "child-themes",
+      "config": {
+        "components": {
+          "Transfer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextDisabled": "#cf1322",
+            "colorBgContainer": "#fffbe6",
+            "colorPrimary": "#fa541c",
+            "colorBorder": "#531dab",
+            "paddingSM": 14,
+            "paddingXS": 10,
+            "marginXS": 10,
+            "marginXXS": 6,
+            "controlHeight": 40,
+            "controlHeightLG": 48,
+            "controlInteractiveSize": 20,
+            "borderRadiusLG": 12,
+            "lineWidth": 2,
+            "listWidth": 220,
+            "listWidthLG": 290,
+            "listHeight": 260,
+            "itemHeight": 44,
+            "itemPaddingBlock": 8,
+            "headerHeight": 52
+          },
+          "Checkbox": {
+            "colorPrimary": "#389e0d",
+            "controlInteractiveSize": 18
+          },
+          "Input": {
+            "fontSize": 16,
+            "colorText": "#ad6800"
+          },
+          "Pagination": {
+            "fontSize": 18,
+            "itemSizeSM": 28,
+            "colorText": "#08979c"
+          },
+          "Button": {
+            "fontSize": 16,
+            "controlHeightSM": 28
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-disabled": "#cf1322",
+        "--ant-color-bg-container": "#fffbe6",
+        "--ant-color-primary": "#fa541c",
+        "--ant-color-border": "#531dab",
+        "--ant-padding-sm": "14px",
+        "--ant-padding-xs": "10px",
+        "--ant-margin-xs": "10px",
+        "--ant-margin-xxs": "6px",
+        "--ant-control-height": "40px",
+        "--ant-control-height-lg": "48px",
+        "--ant-control-interactive-size": "20px",
+        "--ant-border-radius-lg": "12px",
+        "--ant-line-width": "2px",
+        "--ant-transfer-list-width": "220px",
+        "--ant-transfer-list-height": "260px",
+        "--ant-transfer-list-width-lg": "290px",
+        "--ant-transfer-header-height": "52px",
+        "--ant-transfer-item-height": "44px",
+        "--ant-transfer-item-padding-block": "8px",
+        "--ant-transfer-transfer-header-vertical-padding": "5px"
+      }
+    },
+    {
+      "name": "zero-metrics",
+      "config": {
+        "components": {
+          "Transfer": {
+            "listWidth": 0,
+            "listWidthLG": 0,
+            "listHeight": 0,
+            "itemHeight": 0,
+            "itemPaddingBlock": 0,
+            "headerHeight": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-transfer-list-width": "0px",
+        "--ant-transfer-list-height": "0px",
+        "--ant-transfer-list-width-lg": "0px",
+        "--ant-transfer-header-height": "0px",
+        "--ant-transfer-item-height": "0px",
+        "--ant-transfer-item-padding-block": "0px",
+        "--ant-transfer-transfer-header-vertical-padding": "9px"
+      }
+    },
+    {
+      "name": "undefined-metrics",
+      "config": {
+        "components": {
+          "Transfer": {
+            "listWidth": {
+              "$type": "undefined"
+            },
+            "listWidthLG": {
+              "$type": "undefined"
+            },
+            "listHeight": {
+              "$type": "undefined"
+            },
+            "itemHeight": {
+              "$type": "undefined"
+            },
+            "itemPaddingBlock": {
+              "$type": "undefined"
+            },
+            "headerHeight": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "variables": {
+        "--ant-transfer-transfer-header-vertical-padding": "9px"
+      }
+    }
+  ]
+}

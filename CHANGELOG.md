@@ -9,6 +9,12 @@
 
 ### Added
 
+- Transfer: подключены шесть component tokens, alias overrides и algorithms,
+  независимые темы внутренних Checkbox/Pagination и исходный CSS scope пагинации.
+  Сохранены search draft, выделение, фокус, страницы и move callbacks. Добавлены
+  17 UMD-тем / 136 наборов CSS-измерений и unit/SSR/browser-проверки;
+  прежнее native наследование шрифта remove button зафиксировано отдельно.
+
 - Tree: подключены component tokens, alias overrides и algorithms с независимой
   темой внутреннего дерева TreeSelect. Сохранены native style contract, DOM,
   фокус, active descendant, отметки и pending load при theme update. Добавлены

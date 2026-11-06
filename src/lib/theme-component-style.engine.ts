@@ -33,9 +33,23 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List' | 'Listy' | 'Tree';
+  | 'List' | 'Listy' | 'Tree' | 'Transfer';
 
 const factories = {
+  Transfer: (token: GlobalToken) => {
+    const fontHeight = Math.round(token.fontSize * token.lineHeight);
+
+    return {
+      listWidth: 180,
+      listHeight: 200,
+      listWidthLG: 250,
+      headerHeight: token.controlHeightLG,
+      itemHeight: token.controlHeight,
+      itemPaddingBlock: (token.controlHeight - fontHeight) / 2,
+      transferHeaderVerticalPadding:
+        Math.ceil((token.controlHeightLG - token.lineWidth - fontHeight) / 2)
+    };
+  },
   Tree: prepareTreeTokens,
   Listy: (token: GlobalToken) => ({
     itemPaddingBlock: token.paddingSM,
@@ -313,6 +327,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Transfer: [],
   Tree: [],
   Listy: [],
   List: [],
