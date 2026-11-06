@@ -7490,7 +7490,12 @@ SHA-256 архива. Слои видимы при поддержке mask-compo
 псевдоэлемент и отключает анимацию. Hover/pause настраиваются обычными CSS rules.
 Эффект не заменяет focus ring или validation border.
 
-Произвольный prefixCls пока не перенесён.
+Локальный prefixCls меняет классы слоёв и selectors, включая supports/media rules.
+Пустое значение возвращает ant-border-beam; CSS variables --ant-border-beam-*
+и keyframe сохраняют имена независимо от theme.cssVar.prefix. Смена префикса
+сохраняет слои, контейнер, draft и фокус. Scoped stylesheet удаляется вместе
+с эффектом либо при возврате к default prefix; глобальный ConfigProvider.prefixCls
+пока не перенесён. Проверки — `?fixture=border-beam-prefix`.
 Автоматический поиск host через React child/ref заменён описанным target API;
 прикладные обёртки и runtime React dependencies не добавляются. Fixture
 `?fixture=border-beam`, engine/SSR, package SSR и браузерные проверки принадлежат

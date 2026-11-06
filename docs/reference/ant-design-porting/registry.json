@@ -13631,11 +13631,18 @@
         },
         {
           "id": "theme-prefix",
-          "title": "Произвольный prefixCls",
-          "state": "missing",
+          "title": "Локальный prefixCls и scoped CSS",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Alias tokens/algorithms и owner theme подключены отдельной feature. CSS generation для произвольного prefixCls ещё отсутствует."
+          "evidence": [
+            "src/lib/border-beam.types.ts",
+            "src/lib/border-beam-prefix.engine.test.ts",
+            "tools/ant-design-css-recipes.json",
+            "tests/package/border-beam-prefix.ssr.test.ts",
+            "tests/browser/border-beam-prefix.spec.ts",
+            "tests/browser/fixtures/ant-design-border-beam-prefix-reference.json"
+          ],
+          "note": "Local prefixCls меняет root/descendant selectors и class attributes; empty/undefined возвращают ant-border-beam. Имена --ant-border-beam-* и antBorderBeamMove сохраняются, theme.cssVar.prefix независим. Все 10 правил, supports/media/reduced-motion и keyframe извлекаются как CSS data template из закреплённого архива с SHA-256. Default stylesheet не затрагивается; динамические selectors ограничены data marker своего слоя. Шесть official UMD presets проверяют пустой, custom, overlapping/shared-marker prefixes, aliases, named cssVar, multiple/explicit beams, external target и default sibling; native light/dark/compact сохраняются. Смена prefix сохраняет DOM, draft/selection/focus, snapshot рамки и внешний target; reset/unmount удаляет scoped CSS. Глобальный ConfigProvider.prefixCls остаётся отдельной незавершённой областью."
         }
       ]
     },

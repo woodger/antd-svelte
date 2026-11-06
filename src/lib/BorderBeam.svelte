@@ -4,9 +4,12 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { createBorderBeamRuntime } from './border-beam.dom';
+  import { getBorderBeamPrefixCss } from './border-beam-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { BorderBeamProps } from './border-beam.types';
 
   let {
+    prefixCls,
     target,
     children,
     color,
@@ -22,6 +25,8 @@
   const config = useConfig();
   const componentTheme = useComponentTheme('BorderBeam');
   const tokens = useDesignTokenContext();
+  let prefix = $derived(prefixCls || 'ant-border-beam');
+  let prefixCss = $derived(getBorderBeamPrefixCss(prefix));
   let runtime = $state.raw<ReturnType<typeof createBorderBeamRuntime>>();
   let options = $derived({
     color: Array.isArray(color) ? color.map(item => ({ ...item })) : color,
@@ -31,12 +36,13 @@
     outset,
     size,
     className: [
-      'ant-border-beam',
+      prefix,
       componentTheme.className,
       config.borderBeam?.class,
       className,
       'ant-border-beam-css-var'
     ].filter(Boolean).join(' '),
+    prefix: prefixCss ? prefix : undefined,
     // Portal target может находиться вне DOM scope владельца.
     themeStyle: tokens.enabled
       ? [tokens.element ? undefined : tokens.state.style, componentTheme.style].filter(Boolean)
@@ -67,4 +73,5 @@
   });
 </script>
 
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`border-beam-prefix:${prefix}`} />{/if}
 {#if typeof children === 'function'}{@render children()}{:else if typeof children !== 'boolean'}{children ?? ''}{/if}

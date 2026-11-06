@@ -1,10 +1,11 @@
 <script lang="ts">
   import { BorderBeam, ConfigProvider } from 'antd-svelte';
 
-  let { id, priority, prefix = 'ant', externalTarget }: {
+  let { id, priority, prefix = 'ant', prefixCls, externalTarget }: {
     id: string;
     priority?: boolean;
     prefix?: string;
+    prefixCls?: string;
     externalTarget?: HTMLElement;
   } = $props();
   let host = $state<HTMLDivElement>();
@@ -21,7 +22,7 @@
       <input aria-label={`Beam themed draft ${id}`} value="Draft" />
     </div>
   {/if}
-  <BorderBeam {target} count={id === 'multiple' ? 3 : id === 'external' ? 2 : 1}
+  <BorderBeam {target} {prefixCls} count={id === 'multiple' ? 3 : id === 'external' ? 2 : 1}
     color={id === 'explicit' ? '#389e0d' : undefined}
     duration={id === 'explicit' ? 9 : undefined}
     lineWidth={id === 'explicit' ? 7 : undefined}

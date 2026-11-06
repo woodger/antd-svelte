@@ -1,4 +1,4 @@
-export function snapshotBorderBeamTheme() {
+export function snapshotBorderBeamTheme(prefix = 'ant-border-beam') {
   const properties = (node: Element, names: string[], pseudo?: string) => {
     const style = getComputedStyle(node, pseudo);
 
@@ -7,7 +7,9 @@ export function snapshotBorderBeamTheme() {
   const result: Record<string, unknown> = {};
 
   for (const host of document.querySelectorAll<HTMLElement>('[data-beam-theme]')) {
-    result[host.dataset.beamTheme!] = [...host.querySelectorAll(':scope > .ant-border-beam')]
+    result[host.dataset.beamTheme!] = [...host.querySelectorAll(
+      `:scope > .${CSS.escape(prefix)},:scope > .ant-border-beam`
+    )]
       .map(layer => ({
         root: properties(layer, [
           'display', 'position', 'inset', 'width', 'height', 'padding', 'border-radius',

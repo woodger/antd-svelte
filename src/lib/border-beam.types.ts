@@ -15,6 +15,8 @@ export interface BorderBeamConfig {
 
 /** Декоративные CSS-лучи внутри контейнера без дополнительной обёртки. */
 export interface BorderBeamProps {
+  /** Локальный CSS prefix; пустая строка использует ant-border-beam. Имена variables не меняются. */
+  prefixCls?: string;
   /**
    * Svelte-замена React child ref: передайте bind:this нативного контейнера
    * или bind:nativeElement компонента. Без HTMLElement декорация не создаётся.

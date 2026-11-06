@@ -10,7 +10,8 @@ for (const sample of reference.cases) {
       await page.goto('/?fixture=border-beam-theme');
       await page.getByLabel('BorderBeam theme preset', { exact: true }).selectOption(sample.name);
 
-      await expect.poll(() => page.evaluate(snapshotBorderBeamTheme)).toEqual(sample.metrics);
+      await expect.poll(() => page.evaluate(snapshotBorderBeamTheme, 'ant-border-beam'))
+        .toEqual(sample.metrics);
     });
 }
 

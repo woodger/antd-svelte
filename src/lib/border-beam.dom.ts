@@ -53,6 +53,9 @@ export function createBorderBeamRuntime(host: HTMLElement) {
       if (layer.className !== options.className)
         layer.className = options.className;
 
+      if (options.prefix) layer.setAttribute('data-ant-border-beam-prefix', options.prefix);
+      else layer.removeAttribute('data-ant-border-beam-prefix');
+
       if (layer.getAttribute('style') !== style)
         layer.setAttribute('style', style);
 

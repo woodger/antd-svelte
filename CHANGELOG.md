@@ -632,6 +632,10 @@
   слои, focus/selection и измеренную рамку. Добавлены Source/SSR/browser-проверки
   priority, scopes, updates и освобождения observer/listener.
 
+- BorderBeam: перенесён локальный prefixCls, включая пустое значение,
+  selectors/pseudo-elements, supports/media и reduced motion. Смена префикса
+  сохраняет слои и focus; динамический stylesheet очищается при reset/unmount.
+
 - Masonry: подключены alias tokens/algorithms и глобальный theme.token.motion.
   Fresh remeasure сохраняет DOM/draft/selection/focus; отключение motion завершает
   текущий переход, отсутствие реальной анимации больше не задерживает удаление.

@@ -7,6 +7,7 @@ export interface BorderBeamRuntimeOptions extends Pick<
   'color' | 'count' | 'duration' | 'lineWidth' | 'outset' | 'size' | 'style'
 > {
   className: string;
+  prefix?: string;
   themeStyle?: string;
   themeOrigin?: HTMLElement;
   contextStyle?: string;
