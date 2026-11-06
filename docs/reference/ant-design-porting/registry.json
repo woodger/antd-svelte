@@ -5134,7 +5134,18 @@
         "tests/browser/fixtures/MentionsPopupCase.svelte",
         "tests/browser/fixtures/MentionsPopupFixtures.svelte",
         "tests/browser/mentions-popup.spec.ts",
-        "tests/package/mentions-popup.ssr.test.ts"
+        "tests/package/mentions-popup.ssr.test.ts",
+        "src/lib/theme-mentions-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-mentions-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-mentions-theme-reference.json",
+        "tests/browser/fixtures/mentions-theme-presets.ts",
+        "tests/browser/fixtures/MentionsThemeControl.svelte",
+        "tests/browser/fixtures/MentionsThemeCase.svelte",
+        "tests/browser/fixtures/MentionsThemeFixtures.svelte",
+        "tests/browser/mentions-theme-metrics.ts",
+        "tests/browser/mentions-theme.spec.ts",
+        "tests/package/mentions-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -5189,12 +5200,32 @@
           "note": "24 эталона официального UMD закрепляют local-only getter без ConfigProvider fallback, HTMLElement/ShadowRoot и span префикса. Getter нулевой арности сначала получает undefined; getter с параметром ждёт DOM ref. PopupRender получает стандартный menu Snippet, изолирует FormItem/SpaceCompact и сохраняет theme/locale. Закрытие и смена DOM-контейнера пересоздают custom content; новый callback с прежним контейнером сохраняет popup/editor DOM, state, focus/selection. Menu focus отменяет blur, footer вне menu закрывает подсказки; обработчики работают внутри ShadowRoot. SSR не вызывает getter. Native default inline shell и listbox/option сохраняются; выбор/клавиатура, FormData, loading/empty, native refs и cleanup покрыты отдельными browser/SSR-сценариями."
         },
         {
+          "id": "component-theme",
+          "title": "Исходные CSS defaults, component aliases/algorithms и изоляция popup",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-mentions-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-mentions-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-mentions-theme-reference.json",
+            "tests/browser/fixtures/mentions-theme-presets.ts",
+            "tests/browser/fixtures/MentionsThemeControl.svelte",
+            "tests/browser/fixtures/MentionsThemeCase.svelte",
+            "tests/browser/fixtures/MentionsThemeFixtures.svelte",
+            "tests/browser/mentions-theme-metrics.ts",
+            "tests/browser/mentions-theme.spec.ts",
+            "tests/package/mentions-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "22 CSS defaults по Mentions 6.6.8: shared Input tokens, dropdownHeight/controlItemWidth/zIndexPopup и внутренний itemPaddingVertical. Исходный публичный token type сохранён; внутренние CSS defaults не объявляются новыми public props. 16 официальных UMD-тем, восемь scopes, все размеры и variants, disabled/error/popup, dark/compact, algorithms, cssVar prefix и нули/undefined. Собственная тема Mentions не заменяется Input/Select; local style сохраняет приоритет. Theme updates/reset сохраняют textarea/popup DOM, active option, draft, caret/focus и FormData; unmount очищает popup/autoSize node. Native button reset имеет меньшую specificity, чем исходные active/hover правила. Semantic/config API и общий prefix/motion остаются отдельными пробелами."
+        },
+        {
           "id": "extended-api",
           "title": "Полный semantic/config API, legacy Option и motion",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет semantic classNames/styles/feedback suffix, ConfigProvider.mentions/token engine/prefixCls и legacy Mentions.Option children. Native listbox не предоставляет расширенный React Menu/ref API; callbacks получают исходные option data без React-generated key suffix. Rc-trigger motion не переносится этим этапом."
+          "note": "Нет semantic classNames/styles/feedback suffix, ConfigProvider.mentions/prefixCls и legacy Mentions.Option children. Native listbox не предоставляет расширенный React Menu/ref API; callbacks получают исходные option data без React-generated key suffix. Rc-trigger motion не переносится этим этапом."
         },
         {
           "id": "render-empty",

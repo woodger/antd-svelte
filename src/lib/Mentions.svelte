@@ -10,6 +10,9 @@
   } from './mentions.engine';
   import { connectMentionsMeasure } from './mentions.dom';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
+  import { connectComponentTheme } from './theme-component.dom';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { connectPopup } from './popup.dom';
@@ -62,6 +65,8 @@
     ...attributes
   }: MentionsProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Mentions');
+  const designTheme = useDesignTokenContext();
   const form = useForm();
   const field = useFormField();
   const compact = useCompact();
@@ -114,7 +119,8 @@
   const portal = createPopupContainer(() => ({
     open: visible,
     reference: prefixElement,
-    getPopupContainer: visible && getPopupContainer ? resolvePopupContainer : undefined
+    getPopupContainer: visible && getPopupContainer ? resolvePopupContainer : undefined,
+    themeStyle: componentTheme.style
   }));
   let measure: ReturnType<typeof connectMentionsMeasure> | undefined;
   let blurTimer: ReturnType<typeof setTimeout> | undefined;
@@ -181,6 +187,7 @@
       placement,
       align: config.direction === 'rtl' ? 'right' : 'left',
       gap: 4,
+      allowZeroSize: () => untrack(() => designTheme.enabled),
       autoAdjustOverflow: true,
       maxWidth: '100vw',
       preserveFocus: !popupRender,
@@ -367,7 +374,7 @@
   .ant-mentions-measure { position: absolute; inset: 0 auto auto 0; overflow: hidden; visibility: hidden; pointer-events: none; white-space: pre-wrap; }
   .caret-anchor { display: inline-block; width: 1px; height: 1em; vertical-align: text-bottom; }
   .popup { position: fixed; margin: 0; border: 0; overflow: auto; }
-  .ant-mentions-dropdown-menu-item { border: 0; width: 100%; background: transparent; font: inherit; text-align: start; }
+  :where(.ant-mentions-dropdown-menu-item) { border: 0; width: 100%; background: transparent; font: inherit; text-align: start; }
   .ant-mentions-clear { position: absolute; inset-inline-end: var(--ant-padding-xs); top: 50%; transform: translateY(-50%); display: flex; padding: 0; border: 0; color: var(--ant-color-text-quaternary); background: transparent; cursor: pointer; }
   .ant-mentions-clear:focus-visible { outline: 2px solid var(--ant-color-primary); }
 </style>
@@ -400,9 +407,11 @@
   </div>
 {/snippet}
 
-<div bind:this={root} {style} dir={config.direction}
+<div bind:this={root} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}
+  dir={config.direction}
   class={[
       'ant-mentions ant-mentions-css-var',
+      componentTheme.className,
       `ant-mentions-${variant}`,
       focused && 'ant-mentions-focused',
       blocked && 'ant-mentions-disabled',
@@ -440,7 +449,9 @@
   {#key popupContainer}
     {#if mounted}
       <div bind:this={popup} popover="manual" hidden={!visible || !shown}
-        class={['popup ant-mentions-dropdown ant-mentions-css-var', popupClassName]}
+        class={['popup ant-mentions-dropdown ant-mentions-css-var',
+          componentTheme.className, popupClassName]}
+        {@attach node => connectComponentTheme(node, componentTheme.style)}
         dir={config.direction} {@attach portal}>
         {#if popupRender}
           {#if visible}<MentionsPopupContent {popupRender} {menu} />{/if}

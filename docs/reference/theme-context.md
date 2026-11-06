@@ -860,6 +860,22 @@ upstream сохранено; raw measurements находятся в
 [наблюдении z-index](../../tests/browser/fixtures/ant-design-tour-z-index-observation.json).
 CSS default token и фактический runtime layer учитываются отдельно.
 
+## Тема Mentions
+
+`components.Mentions` подготавливает 22 исходных CSS defaults: shared Input,
+dropdownHeight/controlItemWidth/zIndexPopup и внутренний itemPaddingVertical.
+Aliases, algorithms и cssVar prefix применяются к control и отдельному popup;
+Input/Select сохраняют собственные темы. Local style перекрывает вычисленные
+переменные. Native button reset сохраняет исходные hover/active цвета подсказок.
+
+Реактивные обновления сохраняют textarea/popup DOM, draft, focus/selection,
+активный option и native FormData. Возврат к native теме удаляет source variables;
+unmount очищает popup и autoSize measure node. 16 тем официального UMD сравниваются
+в [браузере](../../tests/browser/mentions-theme.spec.ts), declarations —
+в [unit](../../src/lib/theme-mentions-tokens-reference.test.ts), серверная граница —
+в [SSR](../../tests/package/mentions-theme.ssr.test.ts). Fixture: `?fixture=mentions-theme`.
+Semantic/config API, prefixCls и rc-trigger motion требуют отдельного переноса.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

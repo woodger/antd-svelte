@@ -8001,8 +8001,21 @@ CSS-рецепт mentions извлекает 102 правила. Галерея 
 24 эталона официального UMD для контейнеров и popupRender —
 [mentions-popup](./tests/browser/mentions-popup.spec.ts), `?fixture=mentions-popup`.
 
+`ConfigProvider.theme.components.Mentions` применяет shared Input tokens,
+размеры списка, aliases и algorithms к textarea и popup. Подготавливаются 22
+исходных CSS defaults, включая внутренние lineWidthFocus/itemPaddingVertical;
+публичный список токенов остаётся в исходных типах. Темы Input/Select не подменяют
+тему Mentions. Local style имеет приоритет; обновления сохраняют открытый popup,
+draft, focus/caret и активный option. Native button reset не перекрывает исходные
+hover/active цвета пунктов.
+При нулевом inputFontSize подсказки сохраняются у префикса нулевого размера,
+как в исходном компоненте.
+16 тем официального UMD — [mentions-theme](./tests/browser/mentions-theme.spec.ts),
+`?fixture=mentions-theme`; [SSR](./tests/package/mentions-theme.ssr.test.ts) сохраняет
+native текст формы без popup, измеряющего textarea и timers.
+
 Semantic classNames/styles, feedback suffix,
-полный ConfigProvider.mentions/token API, prefixCls, legacy Option children и
+полный ConfigProvider.mentions API, prefixCls, legacy Option children и
 исходные rc-trigger motion пока отсутствуют.
 
 ## AutoComplete

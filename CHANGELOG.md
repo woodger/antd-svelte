@@ -9,6 +9,11 @@
 
 ### Added
 
+- Mentions: shared Input/component tokens, aliases и algorithms на textarea/popup,
+  16 UMD-тем с размерами/variants, disabled/error и вложенными контекстами.
+  Обновления сохраняют draft, caret/focus и активный option; native button reset
+  больше не перекрывает исходный фон активной подсказки. Добавлены unit/SSR/browser-проверки.
+
 - Tour: девять исходных CSS defaults, alias overrides и algorithms для panel,
   close и primary controls, независимая тема Button. Обновления сохраняют шаг,
   portal/editor DOM и фокус; добавлены 15 UMD-тем и unit/SSR/browser-проверки.

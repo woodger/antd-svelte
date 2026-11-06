@@ -36,7 +36,8 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker' | 'Tour';
+  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
+  | 'Tour' | 'Mentions';
 
 const factories = {
   Tour: (token: GlobalToken) => ({
@@ -47,6 +48,13 @@ const factories = {
       .onBackground(token.colorWhite).toRgbString(),
     ...prepareArrowOffsets(token.borderRadiusLG),
     ...prepareArrowTokens(token)
+  }),
+  Mentions: (token: GlobalToken) => ({
+    ...prepareInputTokens(token),
+    dropdownHeight: 250,
+    controlItemWidth: 100,
+    zIndexPopup: token.zIndexPopupBase + 50,
+    itemPaddingVertical: (token.controlHeight - token.fontHeight) / 2
   }),
   ColorPicker: () => ({}),
   DatePicker: (token: GlobalToken) => ({
@@ -358,6 +366,7 @@ const factories = {
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Tour: [],
+  Mentions: [],
   ColorPicker: [],
   DatePicker: [],
   Calendar: [],
