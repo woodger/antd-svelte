@@ -897,6 +897,28 @@ Theme updates/reset сохраняют input/list DOM, запросы и focus; 
 Наложение действий при нулевой карточке записано в raw interactions эталона
 как отдельное наблюдение upstream.
 
+## Тема Drawer
+
+`components.Drawer` подготавливает четыре исходных defaults: zIndexPopup из
+zIndexPopupBase, footerPaddingBlock из paddingXS, footerPaddingInline из padding
+и draggerSize=4. Последний готовит CSS variable, но не добавляет отсутствующий
+resize API. Aliases, algorithms, нули/undefined, custom prefix и provider scopes
+действуют на корневом dialog перед пользовательским style. Portal sync сохраняет
+этот bridge, включая локальные CSS variables; Button/Input используют свои tokens.
+
+В теме Ant Design title наследует цвет панели, как upstream. В legacy-теме
+сохраняется прежний colorTextHeading. Смена темы не пересоздаёт dialog/editor,
+не меняет open, focus, selection или содержимое формы; cleanup освобождает модальность.
+
+16 UMD-тем / 288 CSS-состояний покрывают четыре placement, два размера, slots,
+blur/hover и восемь scopes: [unit](../../src/lib/theme-drawer-tokens-reference.test.ts),
+[SSR](../../tests/package/drawer-theme.ssr.test.ts),
+[браузер](../../tests/browser/drawer-theme.spec.ts), fixture `?fixture=drawer-theme`.
+React ConfigProvider не создаёт DOM: эталон использует getContainer=false внутри
+статического host с типографикой из публичного theme.useToken(), эквивалентной
+DOM-контексту Svelte ConfigProvider. Native fullscreen/modal contract сохраняется.
+Пользовательский native style сравнивается с source rootStyle, а не section style.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

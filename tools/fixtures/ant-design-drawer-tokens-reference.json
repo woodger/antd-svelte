@@ -1,0 +1,558 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "operation": "Unmodified public Drawer with getContainer=false in a static host using public theme.useToken() typography to match the native ConfigProvider DOM context. Size 378/large 736, all placements, slots, blur and close hover. Explicit body Input focus for comparable focus CSS; native style contract compared to source rootStyle. Four source defaults include draggerSize without claiming a native resize API."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "variables": {
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "8px",
+        "--ant-drawer-footer-padding-inline": "16px",
+        "--ant-drawer-dragger-size": "4px"
+      }
+    },
+    {
+      "name": "component-tokens",
+      "config": {
+        "components": {
+          "Drawer": {
+            "zIndexPopup": 1750,
+            "footerPaddingBlock": 13,
+            "footerPaddingInline": 27,
+            "draggerSize": 12
+          }
+        }
+      },
+      "variables": {
+        "--ant-drawer-z-index-popup": "1750",
+        "--ant-drawer-footer-padding-block": "13px",
+        "--ant-drawer-footer-padding-inline": "27px",
+        "--ant-drawer-dragger-size": "12px"
+      }
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "fontSize": 20,
+          "lineHeight": 1.8,
+          "fontFamily": "monospace",
+          "colorText": "#722ed1",
+          "colorTextHeading": "#389e0d",
+          "colorIcon": "#d48806",
+          "colorIconHover": "#cf1322",
+          "colorPrimary": "#fa541c",
+          "colorBgElevated": "#fffbe6",
+          "colorBgMask": "rgba(250,84,28,0.25)",
+          "colorBgTextHover": "#f0f5ff",
+          "fontSizeLG": 22,
+          "lineHeightLG": 1.7,
+          "padding": 20,
+          "paddingLG": 28,
+          "paddingXS": 11,
+          "marginXS": 12,
+          "fontWeightStrong": 700
+        }
+      },
+      "variables": {
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "11px",
+        "--ant-drawer-footer-padding-inline": "20px",
+        "--ant-drawer-dragger-size": "4px"
+      }
+    },
+    {
+      "name": "component-aliases",
+      "config": {
+        "components": {
+          "Drawer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextHeading": "#389e0d",
+            "colorIcon": "#d48806",
+            "colorIconHover": "#cf1322",
+            "colorPrimary": "#fa541c",
+            "colorBgElevated": "#fffbe6",
+            "colorBgMask": "rgba(250,84,28,0.25)",
+            "colorBgTextHover": "#f0f5ff",
+            "fontSizeLG": 22,
+            "lineHeightLG": 1.7,
+            "padding": 20,
+            "paddingLG": 28,
+            "paddingXS": 11,
+            "marginXS": 12,
+            "fontWeightStrong": 700,
+            "zIndexPopup": 1750,
+            "footerPaddingBlock": 13,
+            "footerPaddingInline": 27,
+            "draggerSize": 12
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-heading": "#389e0d",
+        "--ant-color-icon": "#d48806",
+        "--ant-color-icon-hover": "#cf1322",
+        "--ant-color-primary": "#fa541c",
+        "--ant-color-bg-elevated": "#fffbe6",
+        "--ant-color-bg-mask": "rgba(250,84,28,0.25)",
+        "--ant-color-bg-text-hover": "#f0f5ff",
+        "--ant-font-size-lg": "22px",
+        "--ant-line-height-lg": "1.7",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "28px",
+        "--ant-padding-xs": "11px",
+        "--ant-margin-xs": "12px",
+        "--ant-font-weight-strong": "700",
+        "--ant-drawer-z-index-popup": "1750",
+        "--ant-drawer-footer-padding-block": "13px",
+        "--ant-drawer-footer-padding-inline": "27px",
+        "--ant-drawer-dragger-size": "12px"
+      }
+    },
+    {
+      "name": "updated-tokens",
+      "config": {
+        "components": {
+          "Drawer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextHeading": "#389e0d",
+            "colorIcon": "#d48806",
+            "colorIconHover": "#cf1322",
+            "colorPrimary": "#fa541c",
+            "colorBgElevated": "#fffbe6",
+            "colorBgMask": "rgba(250,84,28,0.25)",
+            "colorBgTextHover": "#f0f5ff",
+            "fontSizeLG": 22,
+            "lineHeightLG": 1.7,
+            "padding": 20,
+            "paddingLG": 28,
+            "paddingXS": 11,
+            "marginXS": 12,
+            "fontWeightStrong": 700,
+            "zIndexPopup": 1750,
+            "footerPaddingBlock": 19,
+            "footerPaddingInline": 31,
+            "draggerSize": 12
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-heading": "#389e0d",
+        "--ant-color-icon": "#d48806",
+        "--ant-color-icon-hover": "#cf1322",
+        "--ant-color-primary": "#fa541c",
+        "--ant-color-bg-elevated": "#fffbe6",
+        "--ant-color-bg-mask": "rgba(250,84,28,0.25)",
+        "--ant-color-bg-text-hover": "#f0f5ff",
+        "--ant-font-size-lg": "22px",
+        "--ant-line-height-lg": "1.7",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "28px",
+        "--ant-padding-xs": "11px",
+        "--ant-margin-xs": "12px",
+        "--ant-font-weight-strong": "700",
+        "--ant-drawer-z-index-popup": "1750",
+        "--ant-drawer-footer-padding-block": "19px",
+        "--ant-drawer-footer-padding-inline": "31px",
+        "--ant-drawer-dragger-size": "12px"
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "8px",
+        "--ant-drawer-footer-padding-inline": "16px",
+        "--ant-drawer-dragger-size": "4px"
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "4px",
+        "--ant-drawer-footer-padding-inline": "8px",
+        "--ant-drawer-dragger-size": "4px"
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "4px",
+        "--ant-drawer-footer-padding-inline": "8px",
+        "--ant-drawer-dragger-size": "4px"
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Drawer": {
+            "algorithm": true,
+            "fontSize": 18,
+            "colorPrimary": "#fa541c"
+          }
+        }
+      },
+      "variables": {
+        "--ant-color-primary": "#fa541c",
+        "--ant-font-size": "18px",
+        "--ant-color-primary-bg": "#fff2e8",
+        "--ant-color-primary-bg-hover": "#ffd8bf",
+        "--ant-color-primary-border": "#ffbb96",
+        "--ant-color-primary-border-hover": "#ff9c6e",
+        "--ant-color-primary-hover": "#ff7a45",
+        "--ant-color-primary-active": "#d4380d",
+        "--ant-color-primary-text-hover": "#ff7a45",
+        "--ant-color-primary-text": "#fa541c",
+        "--ant-color-primary-text-active": "#d4380d",
+        "--ant-font-size-sm": "14px",
+        "--ant-font-size-lg": "20px",
+        "--ant-font-size-xl": "26px",
+        "--ant-font-size-heading-1": "48px",
+        "--ant-font-size-heading-2": "40px",
+        "--ant-font-size-heading-3": "32px",
+        "--ant-font-size-heading-4": "26px",
+        "--ant-font-size-heading-5": "20px",
+        "--ant-line-height": "1.4444444444444444",
+        "--ant-line-height-lg": "1.4",
+        "--ant-line-height-sm": "1.5714285714285714",
+        "--ant-font-height": "26px",
+        "--ant-font-height-lg": "28px",
+        "--ant-font-height-sm": "22px",
+        "--ant-line-height-heading-1": "1.1666666666666667",
+        "--ant-line-height-heading-2": "1.2",
+        "--ant-line-height-heading-3": "1.25",
+        "--ant-line-height-heading-4": "1.3076923076923077",
+        "--ant-line-height-heading-5": "1.4",
+        "--ant-font-size-icon": "14px",
+        "--ant-control-item-bg-active": "#fff2e8",
+        "--ant-control-item-bg-active-hover": "#ffd8bf",
+        "--ant-control-outline": "rgba(255,125,25,0.1)",
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "8px",
+        "--ant-drawer-footer-padding-inline": "16px",
+        "--ant-drawer-dragger-size": "4px"
+      }
+    },
+    {
+      "name": "component-compact",
+      "config": {
+        "components": {
+          "Drawer": {
+            "algorithm": [
+              "compactAlgorithm"
+            ],
+            "fontSize": 18
+          }
+        }
+      },
+      "variables": {
+        "--ant-control-height": "28px",
+        "--ant-size-lg": "16px",
+        "--ant-size-md": "16px",
+        "--ant-size-ms": "12px",
+        "--ant-size": "8px",
+        "--ant-size-sm": "8px",
+        "--ant-size-xs": "4px",
+        "--ant-control-height-sm": "21px",
+        "--ant-control-height-xs": "14px",
+        "--ant-control-height-lg": "35px",
+        "--ant-control-interactive-size": "14px",
+        "--ant-padding-xs": "4px",
+        "--ant-padding-sm": "8px",
+        "--ant-padding": "8px",
+        "--ant-padding-md": "16px",
+        "--ant-padding-lg": "16px",
+        "--ant-padding-content-horizontal-lg": "16px",
+        "--ant-padding-content-vertical-lg": "12px",
+        "--ant-padding-content-horizontal": "12px",
+        "--ant-padding-content-vertical": "8px",
+        "--ant-padding-content-horizontal-sm": "8px",
+        "--ant-padding-content-vertical-sm": "4px",
+        "--ant-margin-xs": "4px",
+        "--ant-margin-sm": "8px",
+        "--ant-margin": "8px",
+        "--ant-margin-md": "16px",
+        "--ant-margin-lg": "16px",
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "4px",
+        "--ant-drawer-footer-padding-inline": "8px",
+        "--ant-drawer-dragger-size": "4px"
+      }
+    },
+    {
+      "name": "style-priority",
+      "priority": true,
+      "config": {
+        "components": {
+          "Drawer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextHeading": "#389e0d",
+            "colorIcon": "#d48806",
+            "colorIconHover": "#cf1322",
+            "colorPrimary": "#fa541c",
+            "colorBgElevated": "#fffbe6",
+            "colorBgMask": "rgba(250,84,28,0.25)",
+            "colorBgTextHover": "#f0f5ff",
+            "fontSizeLG": 22,
+            "lineHeightLG": 1.7,
+            "padding": 20,
+            "paddingLG": 28,
+            "paddingXS": 11,
+            "marginXS": 12,
+            "fontWeightStrong": 700,
+            "zIndexPopup": 1750,
+            "footerPaddingBlock": 13,
+            "footerPaddingInline": 27,
+            "draggerSize": 12
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-heading": "#389e0d",
+        "--ant-color-icon": "#d48806",
+        "--ant-color-icon-hover": "#cf1322",
+        "--ant-color-primary": "#fa541c",
+        "--ant-color-bg-elevated": "#fffbe6",
+        "--ant-color-bg-mask": "rgba(250,84,28,0.25)",
+        "--ant-color-bg-text-hover": "#f0f5ff",
+        "--ant-font-size-lg": "22px",
+        "--ant-line-height-lg": "1.7",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "28px",
+        "--ant-padding-xs": "11px",
+        "--ant-margin-xs": "12px",
+        "--ant-font-weight-strong": "700",
+        "--ant-drawer-z-index-popup": "1750",
+        "--ant-drawer-footer-padding-block": "13px",
+        "--ant-drawer-footer-padding-inline": "27px",
+        "--ant-drawer-dragger-size": "12px"
+      }
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "key": "drawer-probe",
+          "prefix": "owned"
+        },
+        "components": {
+          "Drawer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextHeading": "#389e0d",
+            "colorIcon": "#d48806",
+            "colorIconHover": "#cf1322",
+            "colorPrimary": "#fa541c",
+            "colorBgElevated": "#fffbe6",
+            "colorBgMask": "rgba(250,84,28,0.25)",
+            "colorBgTextHover": "#f0f5ff",
+            "fontSizeLG": 22,
+            "lineHeightLG": 1.7,
+            "padding": 20,
+            "paddingLG": 28,
+            "paddingXS": 11,
+            "marginXS": 12,
+            "fontWeightStrong": 700,
+            "zIndexPopup": 1750,
+            "footerPaddingBlock": 13,
+            "footerPaddingInline": 27,
+            "draggerSize": 12
+          }
+        }
+      },
+      "variables": {
+        "--owned-font-size": "20px",
+        "--owned-line-height": "1.8",
+        "--owned-font-family": "monospace",
+        "--owned-color-text": "#722ed1",
+        "--owned-color-text-heading": "#389e0d",
+        "--owned-color-icon": "#d48806",
+        "--owned-color-icon-hover": "#cf1322",
+        "--owned-color-primary": "#fa541c",
+        "--owned-color-bg-elevated": "#fffbe6",
+        "--owned-color-bg-mask": "rgba(250,84,28,0.25)",
+        "--owned-color-bg-text-hover": "#f0f5ff",
+        "--owned-font-size-lg": "22px",
+        "--owned-line-height-lg": "1.7",
+        "--owned-padding": "20px",
+        "--owned-padding-lg": "28px",
+        "--owned-padding-xs": "11px",
+        "--owned-margin-xs": "12px",
+        "--owned-font-weight-strong": "700",
+        "--owned-drawer-z-index-popup": "1750",
+        "--owned-drawer-footer-padding-block": "13px",
+        "--owned-drawer-footer-padding-inline": "27px",
+        "--owned-drawer-dragger-size": "12px"
+      }
+    },
+    {
+      "name": "child-themes",
+      "config": {
+        "components": {
+          "Drawer": {
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "fontFamily": "monospace",
+            "colorText": "#722ed1",
+            "colorTextHeading": "#389e0d",
+            "colorIcon": "#d48806",
+            "colorIconHover": "#cf1322",
+            "colorPrimary": "#fa541c",
+            "colorBgElevated": "#fffbe6",
+            "colorBgMask": "rgba(250,84,28,0.25)",
+            "colorBgTextHover": "#f0f5ff",
+            "fontSizeLG": 22,
+            "lineHeightLG": 1.7,
+            "padding": 20,
+            "paddingLG": 28,
+            "paddingXS": 11,
+            "marginXS": 12,
+            "fontWeightStrong": 700,
+            "zIndexPopup": 1750,
+            "footerPaddingBlock": 13,
+            "footerPaddingInline": 27,
+            "draggerSize": 12
+          },
+          "Button": {
+            "fontSize": 18,
+            "controlHeight": 40
+          },
+          "Input": {
+            "inputFontSize": 17,
+            "paddingInline": 19,
+            "activeBorderColor": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#722ed1",
+        "--ant-color-text-heading": "#389e0d",
+        "--ant-color-icon": "#d48806",
+        "--ant-color-icon-hover": "#cf1322",
+        "--ant-color-primary": "#fa541c",
+        "--ant-color-bg-elevated": "#fffbe6",
+        "--ant-color-bg-mask": "rgba(250,84,28,0.25)",
+        "--ant-color-bg-text-hover": "#f0f5ff",
+        "--ant-font-size-lg": "22px",
+        "--ant-line-height-lg": "1.7",
+        "--ant-padding": "20px",
+        "--ant-padding-lg": "28px",
+        "--ant-padding-xs": "11px",
+        "--ant-margin-xs": "12px",
+        "--ant-font-weight-strong": "700",
+        "--ant-drawer-z-index-popup": "1750",
+        "--ant-drawer-footer-padding-block": "13px",
+        "--ant-drawer-footer-padding-inline": "27px",
+        "--ant-drawer-dragger-size": "12px"
+      }
+    },
+    {
+      "name": "fractional-metrics",
+      "config": {
+        "components": {
+          "Drawer": {
+            "footerPaddingBlock": 3.375,
+            "footerPaddingInline": 9.625
+          }
+        }
+      },
+      "variables": {
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "3.375px",
+        "--ant-drawer-footer-padding-inline": "9.625px",
+        "--ant-drawer-dragger-size": "4px"
+      }
+    },
+    {
+      "name": "zero-metrics",
+      "config": {
+        "components": {
+          "Drawer": {
+            "footerPaddingBlock": 0,
+            "footerPaddingInline": 0,
+            "draggerSize": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-drawer-z-index-popup": "1000",
+        "--ant-drawer-footer-padding-block": "0px",
+        "--ant-drawer-footer-padding-inline": "0px",
+        "--ant-drawer-dragger-size": "0px"
+      }
+    },
+    {
+      "name": "undefined-metrics",
+      "config": {
+        "components": {
+          "Drawer": {
+            "footerPaddingBlock": {
+              "$type": "undefined"
+            },
+            "footerPaddingInline": {
+              "$type": "undefined"
+            },
+            "zIndexPopup": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "variables": {
+        "--ant-drawer-dragger-size": "4px"
+      }
+    }
+  ]
+}

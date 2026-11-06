@@ -9,6 +9,11 @@
 
 ### Added
 
+- Drawer: component tokens, aliases и algorithms на native dialog, включая portal
+  sync и приоритет локальных CSS variables; title наследует цвет source-панели.
+  Добавлены 16 UMD-тем и unit/SSR/browser-проверки. Обновления сохраняют
+  модальность, editor DOM, draft, selection и focus; legacy-оформление сохранено.
+
 - Upload/Dragger: два component tokens, aliases/algorithms и локальные CSS variables
   на области выбора/drop; 16 UMD-тем и unit/SSR/browser-проверки. Восстановлены
   link reset, канонические icon classes и полная высота error cards; theme updates

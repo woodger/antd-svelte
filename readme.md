@@ -3457,7 +3457,16 @@ DOM-черновики в закрытом dialog. ForceRender монтируе�
 При запросе закрытия dialog сохраняет модальность до завершения анимации.
 Повторное открытие прерывает уход без уничтожения черновика. Reduced motion
 отключает анимацию; изменение этой настройки завершает текущую анимацию.
-Темы и compact используют существующие глобальные токены Ant Design.
+`theme.components.Drawer` настраивает zIndexPopup, footerPaddingBlock и
+footerPaddingInline, aliases и component algorithms. Пользовательский style
+корневого dialog сохраняет приоритет. Title наследует цвет панели, как 6.6.8;
+Button и Input внутри сохраняют собственные tokens. DraggerSize вычисляется
+как в upstream, но resize-handle пока не реализован.
+Обновление темы и inherit reset сохраняют модальность, DOM, draft, selection
+и focus, в том числе после переноса через getContainer. Legacy-темы сохраняют
+прежнее оформление. [Сверка с UMD и проверки](./docs/reference/theme-context.md#тема-drawer)
+учитывают типографику внешнего ConfigProvider: в React она задана на статическом
+host через публичный theme.useToken(), в Svelte — на DOM-контейнере provider.
 
 Галерея `/ant-design#drawer` редактирует строку Table через Form с валидацией,
 Tabs и Collapse. Черновик сохраняется при закрытии той же карточки; переход

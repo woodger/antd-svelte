@@ -3,6 +3,8 @@
   import { onDestroy, untrack } from 'svelte';
   import Icon from './Icon.svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { useWatermarkPanel } from './watermark-context';
   import { createDrawerDialog } from './drawer.dom';
   import { getDrawerSize } from './drawer.engine';
@@ -33,6 +35,8 @@
   }: DrawerProps = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Drawer');
+  const designTheme = useDesignTokenContext();
   const watermarkPanel = useWatermarkPanel();
   const generatedId = $props.id();
   let dialog = $state<HTMLDialogElement>();
@@ -45,12 +49,13 @@
   let rootId = $derived(id ?? `ant-drawer-${generatedId}`);
   let titleId = $derived(`${rootId}-title`);
   let renderContent = $derived(open || closing || forceRender || mounted && !destroyOnHidden);
+  let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
   const container = createDialogContainer(() => ({
     component: 'drawer',
     getContainer,
     getPopupContainer: config.getPopupContainer,
     enabled: !destroyOnHidden || open || closing || forceRender,
-    style,
+    style: rootStyle,
     onPointerDown: event => {
       backdropPointer = event.button === 0 && isBackdrop(event) ? event.pointerId : undefined;
     },
@@ -149,6 +154,7 @@
   .ant-drawer-header { gap: var(--ant-margin-xs); }
   .ant-drawer-title, .ant-drawer-extra, .ant-drawer-body, .ant-drawer-footer { min-width: 0; overflow-wrap: anywhere; }
   .ant-drawer-title { color: var(--ant-color-text-heading); }
+  .drawer-source-theme .ant-drawer-title { color: inherit; }
   .ant-drawer-extra { max-width: 50%; }
   .ant-drawer-section { min-height: 0; }
   @media (prefers-reduced-motion: reduce) { .ant-drawer-close { transition: none; } }
@@ -158,10 +164,12 @@
 {#key container.key}
 <dialog bind:this={dialog} id={rootId} class={[
     'ant-drawer ant-drawer-css-var ant-svelte-drawer',
+    componentTheme.className,
+    designTheme.enabled && 'drawer-source-theme',
     `ant-drawer-${placement}`,
     config.direction === 'rtl' && 'ant-drawer-rtl',
     className
-  ]} {style} style:--ant-svelte-drawer-size={getDrawerSize(size)} dir={config.direction} aria-modal="true" aria-label={ariaLabel} aria-labelledby={ariaLabelledby
+  ]} style={rootStyle} style:--ant-svelte-drawer-size={getDrawerSize(size)} dir={config.direction} aria-modal="true" aria-label={ariaLabel} aria-labelledby={ariaLabelledby
       ?? (ariaLabel === undefined && title !== undefined
         ? titleId
         : undefined)} aria-describedby={ariaDescribedby} oncancel={handleCancel} onclose={handleClose}

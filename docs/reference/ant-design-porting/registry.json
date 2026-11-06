@@ -12563,7 +12563,19 @@
         "tests/browser/fixtures/ant-design-dialog-container-reference.json",
         "tests/browser/dialog-container.spec.ts",
         "tests/browser/dialog-container-interaction.spec.ts",
-        "tests/package/dialog-container.ssr.test.ts"
+        "tests/package/dialog-container.ssr.test.ts",
+        "src/lib/Drawer.svelte",
+        "src/lib/theme-drawer-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-drawer-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-drawer-theme-reference.json",
+        "tests/browser/fixtures/drawer-theme-presets.ts",
+        "tests/browser/fixtures/DrawerThemeControl.svelte",
+        "tests/browser/fixtures/DrawerThemeCase.svelte",
+        "tests/browser/fixtures/DrawerThemeFixtures.svelte",
+        "tests/browser/drawer-theme-metrics.ts",
+        "tests/browser/drawer-theme.spec.ts",
+        "tests/package/drawer-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -12607,6 +12619,27 @@
             "tests/package/dialog-container.ssr.test.ts"
           ],
           "note": "GetContainer: false, Element, DocumentFragment/ShadowRoot, selector и функция без аргументов. Undefined наследует global getter; Drawer передаёт document.body; destroyOnHidden без forceRender не вызывает getter, пока panel не нужен. Первый перенос готового контейнера сохраняет SSR DOM; новая функция с тем же target сохраняет state/draft/selection/focus, смена target пересоздаёт содержимое. Detached nodes/DocumentFragment ожидают подключения; стили ShadowRoot принадлежат потребителю. Native modal/inert/fullscreen/scroll lock, возврат фокуса, прежний SSR shell и lifecycle сохранены. 36 UMD-эталонов покрывают priorities, payload, undefined/false, selectors, retention и remount. Source absolute inline-геометрия при getContainer=false ещё отсутствует; false выбирает DOM-ветку с сохранением native fullscreen. Остальной API и подробный аудит остаются в работе."
+        },
+        {
+          "id": "component-theme",
+          "title": "Компонентные tokens, aliases/algorithms и тема native panel",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Drawer.svelte",
+            "src/lib/theme-drawer-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-drawer-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-drawer-theme-reference.json",
+            "tests/browser/fixtures/drawer-theme-presets.ts",
+            "tests/browser/fixtures/DrawerThemeControl.svelte",
+            "tests/browser/fixtures/DrawerThemeCase.svelte",
+            "tests/browser/fixtures/DrawerThemeFixtures.svelte",
+            "tests/browser/drawer-theme-metrics.ts",
+            "tests/browser/drawer-theme.spec.ts",
+            "tests/package/drawer-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Четыре исходных CSS defaults: zIndexPopup=zIndexPopupBase, footerPaddingBlock=paddingXS, footerPaddingInline=padding и draggerSize=4; финальные overrides, component algorithms, aliases, нули/undefined и custom prefix. DraggerSize подготавливается без заявления о поддержке отсутствующего resize API. 16 UMD-тем / 288 raw CSS-состояний: четыре placement, два размера, header/footer/extra/close, blur/hover, восемь provider scopes и root style priority. Source title наследует цвет panel; legacy colorTextHeading сохранён. Source getContainer=false в статическом host с типографикой из public theme.useToken() выравнивает DOM-контекст native ConfigProvider; native style сравнивается с Source rootStyle. Theme updates/inherit reset сохраняют native modality, Input/section/dialog DOM, draft/selection/focus и FormData. Portal sync сохраняет component aliases и локальные variables; unmount освобождает модальность, SSR не открывает немодальное окно и не запускает browser timers. Остальные API gaps и общий аудит остаются отдельными задачами."
         }
       ]
     },
