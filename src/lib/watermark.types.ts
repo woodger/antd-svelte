@@ -24,12 +24,14 @@ export interface WatermarkConfig {
 
 /** Повторяемая Canvas-подложка текста или изображения с наследованием в Modal/Drawer. */
 export interface WatermarkProps {
+  /** По умолчанию global token.zIndexPopupBase - 1; явный 0 сохраняется. */
   zIndex?: number;
   rotate?: number;
   width?: number;
   height?: number;
   image?: string;
   content?: WatermarkContent | readonly WatermarkContent[];
+  /** Color/fontSize используют global colorFill/fontSizeLG; построчный font имеет приоритет. */
   font?: WatermarkFont;
   class?: string;
   rootClassName?: string;

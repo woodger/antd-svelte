@@ -627,6 +627,11 @@
 
 ### Fixed
 
+- Watermark: Canvas defaults и z-index подключены к глобальным source tokens.
+  Seed/alias/algorithm updates сохраняют wrapper, mark, refs и focus, включая
+  унаследованные Modal/Drawer. Явные параметры и legacy CSS defaults сохранены.
+  Проверки сравнивают реальную Canvas-отрисовку, PNG и scoped layer styles с UMD.
+
 - BorderBeam: alias tokens и algorithms подключены к декоративным слоям.
   Внешний target получает тему владельца с CSS overrides; смена темы сохраняет
   слои, focus/selection и измеренную рамку. Добавлены Source/SSR/browser-проверки

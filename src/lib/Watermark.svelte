@@ -1,6 +1,7 @@
 <script lang="ts">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { createWatermarkRuntime } from './watermark.dom';
   import type { WatermarkContext } from './watermark-context';
   import type { WatermarkContent, WatermarkProps } from './watermark.types';
@@ -25,6 +26,7 @@
     nativeElement = $bindable()
   }: WatermarkProps = $props();
   const config = useConfig();
+  const tokens = useDesignTokenContext();
   let panels = $state.raw<ReadonlySet<HTMLElement>>(new Set());
   let runtime = $state.raw<ReturnType<typeof createWatermarkRuntime>>();
   let containerStyle = $derived(
@@ -67,6 +69,11 @@
       gap: [gap[0], gap[1]] as const,
       offset: offset ? [offset[0], offset[1]] as const : undefined,
       containerStyle,
+      defaults: tokens.enabled ? {
+        color: tokens.state.token.colorFill,
+        fontSize: tokens.state.token.fontSizeLG,
+        zIndex: tokens.state.token.zIndexPopupBase - 1
+      } : undefined,
       theme: `${config.theme.mode}:${config.theme.compact}`
     };
   });

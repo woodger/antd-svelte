@@ -456,6 +456,23 @@ Inner header использует colorFillAlter, inner body — общий ве
 они не входят в публичный ThemeConfig ни здесь, ни в 6.6.8. Оба значения оставляют
 CSS-переменные включёнными также в upstream.
 
+## Тема Watermark
+
+Watermark читает raw global colorFill/fontSizeLG/zIndexPopupBase и не использует
+component CSS hook. Seed, aliases и algorithms меняют шрифт, цвет PNG и z-index;
+font/zIndex и построчный font сохраняют приоритет. Components.Watermark и CSS
+overrides не участвуют в Canvas defaults, независимо от cssVar key/prefix.
+Нули и удалённые через undefined aliases сохраняют поведение native Canvas/CSS
+исходника. При отключении source theme возвращаются прежние CSS defaults библиотеки.
+
+Смена темы сохраняет DOM слоя и wrapper, refs, draft/selection/focus; дочерние
+Modal/Drawer получают тот же обновлённый PNG. Прежние image cache, scheduling,
+mutation repair и unmount cleanup сохраняются. SSR не читает Canvas или DOM.
+Сверка использует настоящие fillText и PNG официального UMD для 12 тем:
+[замеры](../../tests/browser/fixtures/ant-design-watermark-theme-reference.json),
+[браузерные проверки](../../tests/browser/watermark-theme.spec.ts) и
+[SSR](../../tests/package/watermark-theme.ssr.test.ts).
+
 ## Тема BorderBeam
 
 BorderBeam не объявляет собственных component tokens. Alias overrides и отдельный

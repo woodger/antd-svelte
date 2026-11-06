@@ -13,6 +13,7 @@ export interface WatermarkRuntimeOptions extends Pick<
   'zIndex' | 'rotate' | 'width' | 'height' | 'image' | 'content' | 'font' | 'gap' | 'offset'
 > {
   containerStyle: string;
+  defaults?: Pick<Required<WatermarkFont>, 'color' | 'fontSize'> & { zIndex: number; };
 }
 
 export function createWatermarkRuntime(
@@ -183,8 +184,9 @@ export function createWatermarkRuntime(
       };
       const nextFont = mergeWatermarkFont(
         {
-          color: computed.getPropertyValue('--ant-color-fill').trim() || 'rgba(0,0,0,0.15)',
-          fontSize: number('--ant-font-size-lg', 16),
+          color: next.defaults ? next.defaults.color
+            : computed.getPropertyValue('--ant-color-fill').trim() || 'rgba(0,0,0,0.15)',
+          fontSize: next.defaults ? next.defaults.fontSize : number('--ant-font-size-lg', 16),
           fontWeight: 400,
           fontStyle: 'normal',
           fontFamily: 'sans-serif',
@@ -202,7 +204,8 @@ export function createWatermarkRuntime(
         font = nextFont;
       lines = getWatermarkLines(next.content, font);
       gap = [next.gap?.[0] ?? 100, next.gap?.[1] ?? 100];
-      const zIndex = next.zIndex ?? number('--ant-z-index-popup-base', 1000) - 1;
+      const zIndex = next.zIndex
+        ?? (next.defaults ? next.defaults.zIndex : number('--ant-z-index-popup-base', 1000) - 1);
       markStyle = getWatermarkStyle(zIndex, gap, next.offset);
 
       const nextTargets = new Set([root, ...panels]);

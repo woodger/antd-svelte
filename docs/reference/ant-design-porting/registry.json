@@ -13416,11 +13416,18 @@
         },
         {
           "id": "theme",
-          "title": "Полный общий theme/token engine",
-          "state": "missing",
+          "title": "Глобальные source tokens и реактивная Canvas-отрисовка",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Default fontSizeLG/colorFill/zIndexPopupBase читаются из поддерживаемых CSS tokens, light/dark/compact реактивны. Произвольный React theme algorithm не перенесён; у Watermark нет собственных component CSS/tokens/prefixCls."
+          "evidence": [
+            "src/lib/Watermark.svelte",
+            "src/lib/watermark.dom.ts",
+            "tests/package/watermark-theme.ssr.test.ts",
+            "tests/browser/watermark-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-watermark-theme-reference.json",
+            "tests/browser/watermark.spec.ts"
+          ],
+          "note": "Raw global colorFill/fontSizeLG/zIndexPopupBase читаются из source token context; seed/alias/algorithms вызывают configure и перерисовку, без зависимости от CSS variables и components.Watermark, как в 6.6.8. Свой CSS/component token/prefixCls API у upstream Watermark отсутствует. Явный font/zIndex, построчные overrides, zero/undefined и independent nested/reset/sibling scopes сохраняют приоритет. 12 UMD presets фиксируют реальные fillText/font/color/align, повторяемый PNG и layer CSS; readback копии не меняет production Canvas. Проверены native refs, DOM/draft/selection/focus, отсутствие onRemove при смене темы, общий PNG и z-index в Modal/Drawer, cleanup и source off с возвратом legacy CSS defaults. Известные source image-cache/scheduling особенности остаются в исходных features."
         }
       ]
     },

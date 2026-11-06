@@ -7546,8 +7546,12 @@ zIndexPopupBase-1, то есть 999 в стандартной теме. Сло�
 после default/context. Вложенный явно заданный watermark config заменяет
 родительский. Bind:nativeElement возвращает div. Как исходный WatermarkProps,
 компонент не принимает произвольные HTML attrs/events; они остаются у children.
-Font defaults читают поддерживаемые colorFill/fontSizeLG CSS tokens; light/dark
-и compact реактивны. Общий disabled не отключает рисунок.
+В source theme font defaults читают глобальные colorFill/fontSizeLG, а zIndex —
+zIndexPopupBase - 1. Изменения aliases/seed/algorithm перерисовывают PNG без замены
+слоя, контейнера, ref или содержимого. Явный font/zIndex и построчные overrides
+имеют приоритет; CSS variables и components.Watermark на Canvas не влияют,
+как в исходнике. Без source theme сохранены прежние CSS defaults и реактивные
+light/dark/compact. Общий disabled не отключает рисунок.
 
 MutationObserver следует исходному набору subtree/childList/style/class.
 Изменение style/class слоя восстанавливает стили, снимает class/hidden;
@@ -7583,8 +7587,11 @@ SSR выводит только обёртку/children, без Canvas/Image/obs
 удаляются принадлежащие компоненту слои. Без 2D context остаются children; без
 MutationObserver рисунок создаётся, но не восстанавливается после DOM mutation.
 Watermark не имеет собственного CSS/component token/prefixCls API в upstream;
-нового CSS-рецепта не требуется. Общий произвольный React theme/token engine
-остаётся неперенесённым. Источник алгоритмов покрыт существующей
+нового CSS-рецепта не требуется. Source global tokens, algorithms, zero/undefined,
+cssVar prefix/key, priority и scopes проверяются через `?fixture=watermark-theme`
+по замерам официального UMD, включая Canvas calls и повторяемый PNG.
+Изменение темы обновляет унаследованные слои Modal/Drawer без потери фокуса.
+Источник алгоритмов покрыт существующей
 [MIT-лицензией Ant Design](./src/lib/vendor/LICENSE.ant-design).
 
 Галерея — `/ant-design#watermark`, fixture — `?fixture=watermark`.
