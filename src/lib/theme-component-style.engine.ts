@@ -9,6 +9,7 @@ import { prepareAvatarTokens, prepareBadgeTokens, prepareTagTokens }
   from './theme-display-tokens.engine';
 import { prepareSelectTokens } from './theme-select-tokens.engine';
 import { prepareTreeTokens, prepareTreeSelectTokens } from './theme-tree-tokens.engine';
+import { preparePickerPanelTokens } from './theme-picker-panel-tokens.engine';
 import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
 import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.engine';
 import { prepareTabsTokens } from './theme-tabs-tokens.engine';
@@ -33,9 +34,18 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List' | 'Listy' | 'Tree' | 'Transfer';
+  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar';
 
 const factories = {
+  Calendar: (token: GlobalToken) => ({
+    fullBg: token.colorBgContainer,
+    fullPanelBg: token.colorBgContainer,
+    itemActiveBg: token.controlItemBgActive,
+    yearControlWidth: 80,
+    monthControlWidth: 70,
+    miniContentHeight: 256,
+    ...preparePickerPanelTokens(token)
+  }),
   Transfer: (token: GlobalToken) => {
     const fontHeight = Math.round(token.fontSize * token.lineHeight);
 
@@ -327,6 +337,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Calendar: [],
   Transfer: [],
   Tree: [],
   Listy: [],

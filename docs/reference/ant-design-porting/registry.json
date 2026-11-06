@@ -8304,17 +8304,35 @@
             "tools/ant-design-css-recipes.json",
             "tests/browser/calendar-header.spec.ts"
           ],
-          "note": "123 исходных CSS rules, full/mini и mobile header. Все шесть semantic slots, functions и root style priority, component config replacement. Calendar locale отдельна от DatePicker; props.locale deep merge. Default ruRU сохраняет библиотечный контракт. Grid/roving focus и Enter/Space/Home/End/arrows — явная Svelte accessibility adaptation к pointer-only standalone PickerPanel. Локальная геометрия CalendarHeader учитывает внешние div Select: desktop widths 80/70px, nowrap mode switch; mobile поля рядом и режим ниже. Проверяются реальные границы controls при 300/360px и viewport 1280/390/320, обе панели, en/ru, compact/RTL и клавиатура без CSS сайта."
+          "note": "123 исходных CSS rules, full/mini и mobile header. Все шесть semantic slots, functions и root style priority, component config replacement. Calendar locale отдельна от DatePicker; props.locale deep merge. Default ruRU сохраняет библиотечный контракт. Grid/roving focus и Enter/Space/Home/End/arrows — явная Svelte accessibility adaptation к pointer-only standalone PickerPanel. Локальная геометрия CalendarHeader учитывает внешние div Select: legacy desktop widths 80/70px, source min-width с intrinsic readonly text, nowrap mode switch; mobile поля рядом и режим ниже. Проверяются реальные границы controls при 300/360px и viewport 1280/390/320, обе панели, en/ru, compact/RTL и клавиатура без CSS сайта."
         },
         {
           "id": "theme-prefix-diagnostics",
-          "title": "PrefixCls, произвольный token engine, все locales и React diagnostics",
+          "title": "PrefixCls, все locales и React diagnostics",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Произвольный prefix/token engine, полный каталог locale exports, React deprecated/invalid-value warnings и неаудированные возможности используемых Select/Radio не объявляются перенесёнными. Адаптация: class/styles strings, snippets, отдельный factory и nativeElement binding вместо React refs/statics."
+          "note": "Произвольный prefix CSS, полный каталог locale exports, React deprecated/invalid-value warnings и неаудированные возможности используемых Select/Radio не объявляются перенесёнными. Адаптация: class/styles strings, snippets, отдельный factory и nativeElement binding вместо React refs/statics."
+        },
+        {
+          "id": "component-theme",
+          "title": "Шесть Calendar tokens, 21 panel default, aliases/algorithms и intrinsic header",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/CalendarCore.svelte",
+            "src/lib/CalendarHeader.svelte",
+            "src/lib/Select.svelte",
+            "src/lib/theme-picker-panel-tokens.engine.ts",
+            "src/lib/theme-calendar-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-calendar-tokens-reference.json",
+            "tests/package/calendar-theme.ssr.test.ts",
+            "tests/browser/calendar-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-calendar-theme-reference.json"
+          ],
+          "note": "YearControlWidth/MonthControlWidth/MiniContentHeight/FullBg/FullPanelBg/ItemActiveBg и initPanelComponentToken defaults подключены к общему bridge. Внутренние 21 default не добавляют multiple/time API. Font/color/spacing aliases, global/component algorithms, custom cssVar prefix, config/semantic/local priorities и CSS variables сохраняются. 17 официальных UMD-тем / 136 наборов сверяют full/mini month/year панели в normal/RTL/priority, mini-month во всех восьми scopes; четыре дополнительных темы проверены при viewport 400px. Измеряются selected/today/disabled/default cells, header controls/Radio, backgrounds и panel/table metrics, string/zero/undefined размеры. Source header использует min-width и intrinsic text sizer readonly Select вместо fixed width, поэтому 0/10px не обрезают выбранный текст; legacy ширины 80/70 и public default Select остаются прежними. Theme update сохраняет DOM cells/input/options, focus, selected value, popup и прежние callbacks с UTC/milliseconds; inheritance/legacy reset и unmount не меняют sibling scopes. SSR не создаёт browser effects."
         }
       ]
     },

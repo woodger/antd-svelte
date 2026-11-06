@@ -690,6 +690,7 @@ export interface TabsComponentToken {
   cardGutter: number;
 }
 
+/** Минимальная ширина controls шапки, высота mini и цвета Calendar; panel defaults внутренние. */
 export interface CalendarComponentToken {
   yearControlWidth: number | string;
   monthControlWidth: number | string;

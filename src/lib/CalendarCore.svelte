@@ -2,6 +2,7 @@
   import { untrack, type Snippet } from 'svelte';
   import CalendarHeader from './CalendarHeader.svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import {
     calendarDateDisabled,
     calendarFilledLocale,
@@ -52,6 +53,7 @@
   }: CalendarProps<DateType> & { generateConfig: GenerateConfig<DateType>; } = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('Calendar');
   let innerValue = $state.raw<DateType | undefined>(
     untrack(() => defaultValue || generateConfig.getNow())
   );
@@ -184,6 +186,7 @@
 
   function slotStyle(slot: keyof CalendarSlots) {
     return [
+      slot === 'root' && componentTheme.style,
       contextStyles[slot],
       slot === 'root' && config.calendar?.style,
       localStyles[slot],
@@ -280,6 +283,7 @@
   bind:this={nativeElement}
   class={[
     'ant-picker-calendar',
+    componentTheme.className,
     fullscreen ? 'ant-picker-calendar-full' : 'ant-picker-calendar-mini',
     config.direction === 'rtl' && 'ant-picker-calendar-rtl',
     config.calendar?.class,

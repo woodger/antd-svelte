@@ -20,6 +20,7 @@
   import Icon from './Icon.svelte';
 
   let {
+    _autoWidth = false,
     options,
     mode,
     defaultValue,
@@ -85,6 +86,7 @@
   let canSearch = $derived(typeof showSearch === 'object' ? true : showSearch ?? multiple);
   // Readonly исключает input из нативной проверки; required multiple блокирует ввод через beforeinput.
   let isReadOnly = $derived(!canSearch && (!multiple || !attributes.required));
+  let intrinsicWidth = $derived(_autoWidth && !multiple && isReadOnly);
   let selectedValues = $derived(multiple ? getSelectValues(selectedValue) : []);
   let selectedKeys = $derived(new Set(selectedValues));
   let optionMap = $derived(new Map(options.map((option) => [option.value, option])));
@@ -462,6 +464,10 @@
     cursor: inherit;
   }
   .ant-select-input::placeholder { color: var(--ant-color-text-placeholder); }
+  .intrinsic-width { width: auto; }
+  .intrinsic-width .ant-select-content { position: relative; }
+  .intrinsic-width .ant-select.ant-select-single .ant-select-input { position: absolute; inset: 0; }
+  .intrinsic-label { visibility: hidden; white-space: pre; }
   .suffix { display: flex; flex: none; color: var(--ant-color-text-quaternary); pointer-events: none; }
   .clear { display: flex; padding: 0; margin-inline-end: 4px; border: 0; background: none; color: var(--ant-color-text-tertiary); cursor: pointer; }
   .clear:focus-visible { outline: 2px solid var(--ant-color-primary); outline-offset: 2px; }
@@ -495,6 +501,7 @@
 
 <div class={[
     'container ant-select-css-var',
+    intrinsicWidth && 'intrinsic-width',
     componentTheme.className,
     compactItemClasses,
     compact && resolvedSize === 'large' && 'ant-select-lg',
@@ -525,6 +532,7 @@
     style={componentTheme.style}
   >
     <div class="ant-select-content">
+      {#if intrinsicWidth}<span class="intrinsic-label" aria-hidden="true">{selected?.label ?? placeholder ?? ''}</span>{/if}
       {#if multiple}
         {#each tags as tag (tag.value)}
           <span class={[

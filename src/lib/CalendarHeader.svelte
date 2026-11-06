@@ -4,6 +4,7 @@
   import RadioButton from './RadioButton.svelte';
   import RadioGroup from './RadioGroup.svelte';
   import { provideFormField, useFormField } from './form-context';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { calendarMonthOptions, calendarSetYear, calendarYearOptions } from './calendar.engine';
   import type { CalendarLang, CalendarMode, CalendarSelectInfo } from './calendar.types';
   import type { GenerateConfig } from './date-generate.types';
@@ -33,6 +34,7 @@
   } = $props();
 
   const field = useFormField();
+  const designToken = useDesignTokenContext();
   // Внутренние controls заголовка не являются отдельными полями внешнего FormItem.
   provideFormField(field ? {
     get disabled() {
@@ -70,13 +72,14 @@
   .ant-picker-calendar-header :global(.ant-picker-calendar-month-select) { display: inline-block; flex: none; vertical-align: top; }
   .ant-picker-calendar-header :global(.ant-picker-calendar-mode-switch) { flex-shrink: 0; flex-wrap: nowrap; }
   @media (width > 480px) {
-    .ant-picker-calendar-header :global(.ant-picker-calendar-year-select) { width: var(--ant-calendar-year-control-width); }
-    .ant-picker-calendar-header :global(.ant-picker-calendar-month-select) { width: var(--ant-calendar-month-control-width); }
+    .ant-picker-calendar-header:not(.source-header) :global(.ant-picker-calendar-year-select) { width: var(--ant-calendar-year-control-width); }
+    .ant-picker-calendar-header:not(.source-header) :global(.ant-picker-calendar-month-select) { width: var(--ant-calendar-month-control-width); }
   }
 </style>
 
-<div class={['ant-picker-calendar-header', className]} {style}>
+<div class={['ant-picker-calendar-header', designToken.enabled && 'source-header', className]} {style}>
   <Select
+    _autoWidth={designToken.enabled}
     class="ant-picker-calendar-year-select"
     aria-label={locale.yearSelect ?? locale.year}
     size={fullscreen ? undefined : 'small'}
@@ -88,6 +91,7 @@
     }}
   />{#if mode === 'month'}
     <Select
+      _autoWidth={designToken.enabled}
       class="ant-picker-calendar-month-select"
       aria-label={locale.monthSelect ?? locale.month}
       size={fullscreen ? undefined : 'small'}

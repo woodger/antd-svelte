@@ -21,6 +21,8 @@ export interface SelectProps<
   HTMLInputAttributes,
   'value' | 'size' | 'class' | 'onchange' | 'oninput' | 'type' | 'children'
 > {
+  /** @internal Intrinsic ширина readonly single для составного владельца, без смены public default. */
+  _autoWidth?: boolean;
   options: readonly SelectOption<Value>[];
   mode?: Mode;
   /** Поддерживает bind:value; multiple использует массив того же типа Value. */

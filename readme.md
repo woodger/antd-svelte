@@ -4869,7 +4869,7 @@ Calendar.locale объединяет поля lang с базовым слова�
 
 `classNames`/`styles` принимают объекты или callbacks для root/header/body/content/
 item/itemContent. Callback props сохраняют переданные mode/showWeek, fullscreen
-получает default true. Приоритет root styles: context styles.root → context
+получает default true. Приоритет root styles после компонентной темы: context styles.root → context
 style → local styles.root → local style. Вложенный ConfigProvider.calendar
 заменяет component config целиком. `bind:nativeElement` возвращает root div и
 очищается при unmount. Календарь не добавляет скрытое поле с сериализованной
@@ -4890,18 +4890,39 @@ control предотвращает выбор родительской ячей�
 
 Из архива извлечены 123 CSS-правила Calendar, включая full/mini, week и mobile
 header. Темы, primary, compact и RTL используют текущие tokens библиотеки.
-В desktop-шапке внешние обёртки Select получают ширины yearControlWidth=80px и
-monthControlWidth=70px; переключатель режима не переносит отдельные кнопки.
+В desktop-шапке legacy обёртки Select сохраняют ширины 80/70px. При source theme
+yearControlWidth/monthControlWidth задают минимальную ширину, как upstream;
+скрытый текстовый sizer сохраняет intrinsic размер readonly input даже при 0/10px.
+Переключатель режима не переносит отдельные кнопки.
 При viewport до 480px год и месяц располагаются рядом, переключатель — ниже,
 как в исходном Calendar. Эти правила принадлежат CalendarHeader и не меняют
 геометрию остальных Select/RadioGroup. Границы полей и кнопок в мини-календарях
 300/360px, mobile/RTL и работа dropdown/клавиатуры проверяются в
 [calendar-header](./tests/browser/calendar-header.spec.ts).
+
+`ConfigProvider.theme.components.Calendar` применяет все шесть public tokens,
+alias overrides и global/component algorithms. Общий picker panel helper
+воспроизводит 21 внутренний default; это не добавляет TimePicker/multiple API
+в Calendar. Локальные CSS variables и config/semantic/local styles сохраняют
+приоритет. Внутренние Select/Radio используют свои темы; intrinsic sizing
+включён только для source-шапки Calendar, public default Select остаётся прежним.
+
+[UMD-эталон](tests/browser/fixtures/ant-design-calendar-theme-reference.json)
+содержит 17 тем / 136 наборов для восьми scopes: full/mini month/year панели
+сверяются в normal/RTL/priority, mini-month — также в variable/nested/reset/sibling/
+outside. Дополнительные замеры сделаны при viewport 400px. Проверяются цвета,
+метрики ячеек и шапки, string/zero/undefined размеры и независимые child themes.
+[Browser-проверки](tests/browser/calendar-theme.spec.ts) защищают фокус/выбор даты,
+точные timestamps callbacks, открытые options и DOM input при theme update,
+inherit reset и возврате к legacy. Декларации сверяются с UMD отдельным
+[unit-набором](src/lib/theme-calendar-tokens-reference.test.ts),
+[SSR](tests/package/calendar-theme.ssr.test.ts) не создаёт browser resources.
+
 Проверки: [engine](./src/lib/calendar.engine.test.ts),
 [SSR](./src/lib/calendar.ssr.test.ts),
 [public package](./tests/package/calendar.ssr.test.ts),
 [browser](./tests/browser/calendar.spec.ts) и `?fixture=calendar`, включая
-фабрику с собственным UTC Date adapter. PrefixCls, произвольный token engine,
+фабрику с собственным UTC Date adapter. PrefixCls,
 полный каталог locales, React warnings и неперенесённые возможности используемых
 Select/Radio остаются за пределами подтверждённого объёма этого этапа.
 
