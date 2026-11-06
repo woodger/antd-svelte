@@ -638,6 +638,10 @@
 
 ### Fixed
 
+- Portal: theme variables копируются одним снимком без пересчёта стилей popup
+  после каждой записи. Сохранены вычисленные значения var(), удаление устаревших
+  variables, component overrides, DOM, фокус и выделение, включая TimePicker в ShadowRoot.
+
 - Affix: компонентный zIndexPopup и alias/algorithm overrides применяются к
   закреплённому узлу. Смена темы сохраняет геометрию, placeholder, refs и поля
   без лишних onChange; обычный поток и legacy defaults сохранены.

@@ -131,6 +131,44 @@ for (const sample of reference.cases) {
   }
 }
 
+test('picker portals copy resolved aliases and release removed variables', async ({ page }) => {
+  await page.getByLabel('Picker reference', { exact: true }).selectOption('date-local-shadow');
+  const names = ['--portal-alpha', '--portal-beta', '--portal-gamma', '--portal-delta'];
+  await page.locator('#picker-shadow').evaluate(node => {
+    const style = node.ownerDocument.createElement('style');
+    style.textContent = '.ant-picker-dropdown{--portal-alpha:var(--portal-beta);'
+      + '--portal-beta:red;--portal-gamma:red;--portal-delta:var(--portal-gamma)}';
+    node.shadowRoot!.append(style);
+  });
+  const origin = page.locator('#picker-container-form');
+  await origin.evaluate((node, names) => {
+    ['red', 'green', 'green', 'red'].forEach((value, index) => {
+      (node as HTMLElement).style.setProperty(names[index], value);
+    });
+  }, names);
+  await open(page, 'date-local-shadow');
+
+  const variables = () => page.locator(surface).evaluate((node, names) => {
+    const style = getComputedStyle(node);
+    return names.map(name => style.getPropertyValue(name));
+  }, names);
+  await expect.poll(variables).toEqual(['red', 'green', 'green', 'red']);
+
+  await origin.evaluate(node => {
+    const style = (node as HTMLElement).style;
+    style.setProperty('--portal-beta', 'blue');
+    style.setProperty('--portal-gamma', 'blue');
+  });
+
+  await expect.poll(variables).toEqual(['red', 'blue', 'blue', 'red']);
+
+  await origin.evaluate((node, names) => {
+    for (const name of names) (node as HTMLElement).style.removeProperty(name);
+  }, names);
+
+  await expect.poll(variables).toEqual(['red', 'red', 'red', 'red']);
+});
+
 for (const component of ['date', 'date-range', 'time', 'time-range']) {
   test(
     `${component} keeps the native conditional lifetime when closing a portal`,
@@ -201,6 +239,18 @@ for (const component of ['date', 'date-range', 'time', 'time-range']) {
     ])).toEqual([1, 7]);
     expect(await page.locator(surface).evaluate((node, old) => node === old, popup)).toBe(true);
     await expect(page.locator(surface)).toHaveCSS('--picker-origin', 'dark');
+    const variables = [
+      '--ant-color-text', '--ant-color-bg-elevated', '--ant-color-primary', '--ant-font-size'
+    ];
+    const tokens = await entries(page).first().evaluate((node, names) => {
+      const style = getComputedStyle(node);
+      return names.map(name => style.getPropertyValue(name));
+    }, variables);
+    expect(tokens.every(value => value !== '')).toBe(true);
+    expect(await page.locator(surface).evaluate((node, names) => {
+      const style = getComputedStyle(node);
+      return names.map(name => style.getPropertyValue(name));
+    }, variables)).toEqual(tokens);
     await expect(page.locator(surface)).toBeVisible();
   });
 

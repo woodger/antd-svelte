@@ -53,13 +53,11 @@ export function connectPopupPortal(element: HTMLElement, options: {
       if (name.startsWith('--')) values.set(name, source.getPropertyValue(name));
     }
     const preserved = clearManaged();
-    const actual = view.getComputedStyle(element);
+    // Копируем готовые значения: локальный var() иначе пересчитается после записи соседней переменной.
     for (const [name, value] of values) {
       if (preserved.has(name)) continue;
-      if (actual.getPropertyValue(name) !== value) {
-        element.style.setProperty(name, value);
-        managed.add(name);
-      }
+      element.style.setProperty(name, value);
+      managed.add(name);
     }
   }
 
