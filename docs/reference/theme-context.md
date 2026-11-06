@@ -966,6 +966,47 @@ native overflow-wrap:anywhere/min-width:0. [Исходное наблюдени�
 в 6.6.8. Native-проверка защищает перенос; CSS upstream ради этого не копируются.
 Полный semantic/config/static API Message остаётся отдельной задачей.
 
+## Тема Notification
+
+`components.Notification` подготавливает семь исходных defaults: zIndexPopupBase+1050,
+width=384, progressBg и четыре undefined status backgrounds. Последние по умолчанию
+используют colorBgElevated, а не общий status palette. ProgressBg создаёт declaration,
+но отсутствующий showProgress API не добавляется. Aliases, algorithms, CSS lengths,
+дробные/нулевые values, undefined и custom prefix передаются native holder/notice.
+ConnectInlineStyle сохраняет viewport styles и top/bottom; notice разрешает локальные
+component variables другого prefix после наследования Holder.
+
+Actions вынесены из текстовой section, как в Source; wrapper существует только
+с иконкой, section — при наличии обоих текстовых блоков. Общий DOM остаётся стабильным
+при переключении темы: legacy grid сохраняет прежнюю геометрию, source flow-root
+восстанавливает BFC абсолютной карточки эталона при native relative positioning.
+Source icon line box и отсутствие status tint у custom icon включены только для
+темы Ant Design. Фокус, draft/selection, actions/callbacks, очередь и deadlines сохраняются.
+
+17 UMD-тем / 340 raw CSS-состояний проверяются в
+[unit](../../src/lib/theme-notification-tokens-reference.test.ts),
+[SSR](../../tests/package/notification-theme.ssr.test.ts) и
+[браузере](../../tests/browser/notification-theme.spec.ts), fixture `?fixture=notification-theme`.
+Сравнение сохраняет native close min24px/padding0, root/actions max-width:100%
+и title/description min-width:0/overflow-wrap:anywhere: эталон получает те же
+условия через публичные semantic styles. Исходная неограниченная zero-геометрия
+сохранена отдельно в наблюдении ширины.
+
+Отдельно записаны [ошибки status backgrounds](../../tests/browser/fixtures/ant-design-notification-background-observation.json)
+6.6.8: одинаковое с global alias значение теряется, хотя другой регистр hex работает;
+при cssVar prefix, отличном от ant, фон ссылается на переменную ant namespace.
+Native сохраняет явные component values и canonical bridge; алгоритмические aliases
+без явного override не превращаются в заданные пользователем status defaults.
+В общей матрице цвета записаны uppercase, а для custom prefix только background-color
+сравнивается с эквивалентной темой ant prefix. Исходные CSS и неправильные значения
+эталона сохранены; regression-проверки отдельно защищают исправленное поведение.
+
+В [наблюдении ширины](../../tests/browser/fixtures/ant-design-notification-width-observation.json)
+сохранены недоступный source close при width:undefined и выход actions при нулевой
+ширине. Прежний native layout/guard сохранён; отдельная browser-проверка закрывает
+уведомление настоящим click после width:undefined. Полный semantic/config/static,
+stack и showProgress API остаются отдельными пробелами.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

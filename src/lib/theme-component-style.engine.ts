@@ -37,9 +37,18 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
   | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
-  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message';
+  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification';
 
 const factories = {
+  Notification: (token: GlobalToken) => ({
+    zIndexPopup: token.zIndexPopupBase + 1050,
+    width: 384,
+    progressBg: `linear-gradient(90deg, ${token.colorPrimaryBorderHover}, ${token.colorPrimary})`,
+    colorSuccessBg: undefined,
+    colorErrorBg: undefined,
+    colorInfoBg: undefined,
+    colorWarningBg: undefined
+  }),
   Message: (token: GlobalToken) => ({
     zIndexPopup: token.zIndexPopupBase + 1010,
     contentBg: token.colorBgElevated,
@@ -406,6 +415,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Notification: [],
   Message: [],
   Modal: ['titleLineHeight'],
   Drawer: [],
@@ -504,7 +514,8 @@ const compactMetrics: Partial<Record<StyledComponent, readonly string[]>> = {
 function resolveComponentVariables(
   component: StyledComponent,
   token: GlobalToken,
-  prefix = 'ant'
+  prefix = 'ant',
+  explicitKeys: readonly string[] = []
 ) {
   const custom = { ...token[component] } as Record<string, unknown>;
   const defaults = factories[component]({ ...token, ...custom });
@@ -517,7 +528,9 @@ function resolveComponentVariables(
   const merged: Record<string, unknown> = { ...defaults, ...custom };
   const global = token as unknown as Record<string, unknown>;
   for (const key of Object.keys(merged)) {
-    if (merged[key] === global[key]) delete merged[key];
+    // В 6.6.8 одинаковые alias values теряют явный Notification status background.
+    const explicitComponentToken = Object.hasOwn(defaults, key) && explicitKeys.includes(key);
+    if (merged[key] === global[key] && !explicitComponentToken) delete merged[key];
   }
 
   const qualify = (key: string) => `${component}${key[0].toUpperCase()}${key.slice(1)}`;
@@ -543,13 +556,21 @@ function resolveComponentVariables(
 export function componentThemeVariables(
   component: StyledComponent,
   token: GlobalToken,
-  prefix = 'ant'
+  prefix = 'ant',
+  explicitKeys: readonly string[] = []
 ): Record<string, string> {
-  return resolveComponentVariables(component, token, prefix).variables;
+  return resolveComponentVariables(component, token, prefix, explicitKeys).variables;
 }
 
-export function componentThemeStyle(component: StyledComponent, token: GlobalToken, prefix = 'ant') {
-  const { variables, defaultVariables } = resolveComponentVariables(component, token, prefix);
+export function componentThemeStyle(
+  component: StyledComponent,
+  token: GlobalToken,
+  prefix = 'ant',
+  explicitKeys: readonly string[] = []
+) {
+  const { variables, defaultVariables } = resolveComponentVariables(
+    component, token, prefix, explicitKeys
+  );
   for (const name of defaultVariables) {
     // В upstream отсутствие декларации наследуется; vendor defaults не должны возвращать её.
     if (!(name in variables)) variables[name] = 'inherit';

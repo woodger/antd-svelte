@@ -2,6 +2,9 @@
   import { untrack } from 'svelte';
   import NotificationNotice from './NotificationNotice.svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
+  import { connectInlineStyle } from './inline-style.dom';
+  import { serializeInlineStyleLayers, type InlineStyleLayer } from './inline-style.engine';
   import { notificationHolderKey, notificationPlacements } from './notification.model.svelte.js';
   import { connectNoticeSurface } from './notice.dom';
   import type { NotificationHolderProps } from './notification.types';
@@ -15,12 +18,27 @@
     style
   }: NotificationHolderProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Notification');
   let anchor = $state<HTMLSpanElement>();
   let surface = $state<HTMLDivElement>();
   let runtime = $derived(notification[notificationHolderKey]);
   let notices = $derived(runtime.notices);
   let resolvedTop = $derived(Number.isFinite(top) && top >= 0 ? top : 24);
   let resolvedBottom = $derived(Number.isFinite(bottom) && bottom >= 0 ? bottom : 24);
+  let rootLayers = $derived<readonly InlineStyleLayer[]>([
+    componentTheme.style,
+    style,
+    [
+      ['--notification-top', `${resolvedTop}px`],
+      ['--notification-bottom', `${resolvedBottom}px`]
+    ]
+  ]);
+  let rootStyle = $derived(serializeInlineStyleLayers(rootLayers));
+
+  function connectRootStyle(node: HTMLDivElement) {
+    const update = connectInlineStyle(node);
+    $effect(() => update(rootLayers));
+  }
 
   function connectHost(node: HTMLSpanElement) {
     const view = node.ownerDocument.defaultView!;
@@ -56,7 +74,9 @@
 <span bind:this={anchor} class="ant-notification-anchor" aria-hidden="true" {@attach connectHost}></span>
 {#key notification}
   {#if notices.length}
-    <div bind:this={surface} popover="manual" {id} dir={config.direction} class={['ant-notification-surface ant-notification-css-var', className]} {style} style:--notification-top={`${resolvedTop}px`} style:--notification-bottom={`${resolvedBottom}px`}>
+    <div bind:this={surface} popover="manual" {id} dir={config.direction}
+      class={['ant-notification-surface ant-notification-css-var', componentTheme.className, className]}
+      style={untrack(() => rootStyle)} {@attach connectRootStyle}>
       {#each notificationPlacements as placement}
         {@const items = notices.filter((notice) => notice.placement === placement)}
         {#if items.length}

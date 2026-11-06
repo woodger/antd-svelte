@@ -3800,7 +3800,24 @@ Top/bottom у holder задают отступ в px, по умолчанию 24
 используют 24. Id/class/style относятся к нативной popover-поверхности holder;
 ширину карточек можно настроить CSS-переменной --ant-notification-width
 (по умолчанию 384px). Ширина ограничивается viewport, длинный текст переносится.
-Темы, compact, RTL и цвета статусов используют токены ConfigProvider.
+Темы, compact и RTL наследуются от ConfigProvider. `theme.components.Notification`
+настраивает width, zIndexPopup, status backgrounds, aliases и component algorithms.
+ProgressBg подготавливается, но showProgress пока отсутствует. Локальные CSS variables
+другого prefix разрешаются на notice; пользовательские variables Holder имеют приоритет.
+Обновления сохраняют viewport styles, очередь, deadlines, actions DOM, draft/focus/selection.
+Actions находятся на уровне корня, как в эталоне; wrapper выводится только с иконкой,
+section — только для пары title/description. Legacy grid сохраняет прежние отступы
+и расположение. Source flow-root сохраняет высоту float actions
+при native relative positioning; тема переключается без пересоздания controls.
+[Сверка и проверки](./docs/reference/theme-context.md#тема-notification).
+
+Явные status backgrounds применяются и при равенстве global alias, и при другом
+cssVar prefix. В 6.6.8 такие настройки иногда теряются: [исходные замеры](./tests/browser/fixtures/ant-design-notification-background-observation.json).
+В Svelte эти ошибки не повторяются. Сохраняются native close target минимум 24px,
+padding:0, root/actions max-width:100% и перенос title/description; сравнение задаёт
+те же условия через публичные semantic styles эталона.
+Raw замер [width:undefined](./tests/browser/fixtures/ant-design-notification-width-observation.json)
+также сохранён: Source обрезает close, а native относительный список сохраняет доступную кнопку.
 
 До первого монтирования можно поставить уведомления в очередь. SSR выводит
 закрытый popover без таймеров и callbacks; отсчёт начинается после показа.

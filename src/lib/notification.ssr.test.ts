@@ -45,8 +45,8 @@ describe('NotificationHolder server rendering', () => {
     for (const placement of notificationPlacements)
       expect(body).toContain(`data-placement="${placement}"`);
 
-    expect(body).toContain('--notification-top: 80px');
-    expect(body).toContain('--notification-bottom: 40px');
+    expect(body).toMatch(/--notification-top:\s*80px(?:;|")/);
+    expect(body).toMatch(/--notification-bottom:\s*40px(?:;|")/);
   });
 
   it('escapes strings and renders custom snippets, actions and decorative icons', () => {

@@ -9,6 +9,12 @@
 
 ### Added
 
+- Notification: семь component defaults, aliases/algorithms и reactive holder/notice
+  theme, 17 UMD-тем и unit/SSR/browser-проверки. Actions повторяют source structure;
+  legacy layout, editor DOM/focus, viewport styles и deadlines сохранены.
+  Явные status colors не теряются при равенстве global alias или другом cssVar prefix;
+  ошибки upstream и width:undefined записаны отдельно, native guards сохранены.
+
 - Message: три component tokens, aliases/algorithms и scoped variables, включая
   notice/Holder style priority и custom prefix. Добавлены 16 UMD-тем и unit/SSR/browser
   проверки; обновления сохраняют viewport styles, очередь, handles и timer deadlines.

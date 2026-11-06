@@ -12865,7 +12865,7 @@
       "scope": "target",
       "scopeReason": "Ранее реализованный публичный API; проверяется текущее покрытие.",
       "upstreamPath": "components/notification",
-      "reviewedRevision": null,
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
         {
           "upstream": "notification",
@@ -12878,12 +12878,34 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/notification",
+          "range": "~2.1.1",
+          "referenceVersion": null
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
         "readme.md",
-        "tests/browser/notification.spec.ts"
+        "tests/browser/notification.spec.ts",
+        "src/lib/NotificationHolder.svelte",
+        "src/lib/NotificationNotice.svelte",
+        "src/lib/theme-component.svelte.ts",
+        "src/lib/theme-notification-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-notification-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-notification-theme-reference.json",
+        "tests/browser/fixtures/ant-design-notification-background-observation.json",
+        "tests/browser/fixtures/ant-design-notification-width-observation.json",
+        "tests/browser/fixtures/notification-theme-presets.ts",
+        "tests/browser/fixtures/NotificationThemeControl.svelte",
+        "tests/browser/fixtures/NotificationThemeCase.svelte",
+        "tests/browser/fixtures/NotificationThemeFixtures.svelte",
+        "tests/browser/notification-theme-metrics.ts",
+        "tests/browser/notification-theme.spec.ts",
+        "tests/package/notification-theme.ssr.test.ts",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -12893,6 +12915,65 @@
           "requiredForV1": true,
           "evidence": [],
           "note": "Публичная реализация есть; детализация возможностей в реестре ещё не завершена."
+        },
+        {
+          "id": "component-theme",
+          "title": "Компонентные tokens, aliases/algorithms и тема feedback surface/actions",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/NotificationHolder.svelte",
+            "src/lib/NotificationNotice.svelte",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/theme-notification-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-notification-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-notification-theme-reference.json",
+            "tests/browser/fixtures/ant-design-notification-background-observation.json",
+            "tests/browser/fixtures/ant-design-notification-width-observation.json",
+            "tests/browser/fixtures/notification-theme-presets.ts",
+            "tests/browser/fixtures/NotificationThemeControl.svelte",
+            "tests/browser/fixtures/NotificationThemeCase.svelte",
+            "tests/browser/fixtures/NotificationThemeFixtures.svelte",
+            "tests/browser/notification-theme-metrics.ts",
+            "tests/browser/notification-theme.spec.ts",
+            "tests/package/notification-theme.ssr.test.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Семь defaults: zIndexPopup=zIndexPopupBase+1050, width384, progressBg и четыре undefined status backgrounds; последние fallback на colorBgElevated. ProgressBg готовится без отсутствующего showProgress API. Финальные overrides, algorithms, aliases, дробные values/CSS lengths, нули/undefined и custom prefix. 17 UMD-тем / 340 raw CSS-состояний: status/plain, slots, custom icon/hover, bottomLeft, девять scopes и notice/Holder variables priority. Source comparison получает native close min24/padding0, root/actions max-width100% и text min-width0/anywhere через public semantic styles. Wrapper существует только с icon, section только с обоими title/description; actions вынесены из text section в source sibling position; stable DOM, source flow-root BFC и legacy grid сохраняют controls, геометрию legacy, draft/selection/focus и callbacks. Source icon line box и отсутствие type tint у custom icon включены только в source theme. Theme updates/reset сохраняют viewport styles, очередь/deadlines; SSR не запускает timers, пустой Holder читает текущую тему. Явные status values, совпадающие с global alias, сохраняются отдельно от algorithm-derived aliases; native canonical bridge исправляет source prefix background. Raw uppercase matrix избегает source equality bug; в custom-prefix matcher только background-color берётся из эквивалентного ant-prefix профиля. Полный semantic/config/static/stack/showProgress API и общий аудит ещё не завершены."
+        },
+        {
+          "id": "source-status-background-observation",
+          "title": "Наблюдение upstream: потеря равных alias и status background другого prefix",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-notification-background-observation.json",
+            "src/lib/theme-component.svelte.ts",
+            "src/lib/theme-notification-tokens-reference.test.ts",
+            "tests/browser/notification-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "В закреплённой 6.6.8/984592267de88fbf9cdaecc96a56629e721c709d colorSuccessBg:#f6ffed и colorWarningBg:#fffbe6 теряются из-за сравнения с global aliases; uppercase тех же hex создаёт переменные и фон. При cssVar.prefix:owned исходные variables объявлены в owned namespace, но status background CSS читает ant namespace и fallback на colorBgElevated. Оба raw результата сохранены. Native удерживает четыре явно заданных component keys при фильтрации, не меняя algorithm-derived defaults, и использует canonical variable bridge. Отдельные регрессии проверяют lower-case public config, общий Source matcher фиксирует BG correction явно."
+        },
+        {
+          "id": "source-width-observation",
+          "title": "Наблюдение upstream: недоступный close при undefined width и zero actions overflow",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-notification-width-observation.json",
+            "tests/browser/notification-theme.spec.ts",
+            "readme.md"
+          ],
+          "note": "В закреплённом UMD явный width:undefined даёт close22px в x1330, но elementFromPoint его центра попадает на html из-за clipping списка. Native relative layout сохраняется, реальный click закрывает уведомление. При zero-metrics source actions имеет ширину73.4688px вне карточки0px; native max-width100% и min24/padding0 close сохранены. В общей матрице эквивалентные root/actions max-width100%, min24 close и text min0/anywhere guards задаются Source через public semantic styles; unadapted/source zero geometry записана отдельно для разбора. Никакой имитации недоступного Source click не добавлено."
+        },
+        {
+          "id": "extended-notification-api",
+          "title": "Полный static/config/semantic API, stack и встроенный progress",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [],
+          "note": "Public createNotification/NotificationHolder сохраняет native surface/queue API. Глобальные static API/config, ConfigProvider.notification, getContainer, semantic classNames/styles, collapsing stack, showProgress и card onClick ещё не перенесены. ProgressBg declaration не означает поддержку progress UI; полный аудит семейства и exact delegated referenceVersion остаются отдельной работой."
         }
       ]
     },
