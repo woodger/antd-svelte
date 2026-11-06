@@ -1,6 +1,7 @@
 <script lang="ts" generics="T = unknown">
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { provideList } from './list-context';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { gridBreakpoints } from './grid.engine';
@@ -44,6 +45,7 @@
   }: ListProps<T> = $props();
 
   const config = useConfig();
+  const componentTheme = useComponentTheme('List');
   const initial = untrack(() => listPaginationDefaults(pagination));
   const breakpoint = createBreakpoint();
   let current = $state(initial.current);
@@ -102,6 +104,7 @@
   class={[
     prefixCls,
     'ant-list-css-var',
+    componentTheme.className,
     itemLayout === 'vertical' && `${prefixCls}-vertical`,
     resolvedSize === 'small' && `${prefixCls}-sm`,
     resolvedSize === 'large' && `${prefixCls}-lg`,
@@ -114,7 +117,7 @@
     config.list?.class,
     className,
     rootClassName
-  ]} style={[config.list?.style, style].filter(Boolean).join(';')}>
+  ]} style={[componentTheme.style, config.list?.style, style].filter(Boolean).join(';')}>
   {#if paginationProps.position === 'top' || paginationProps.position === 'both'}
     {@render pager()}
   {/if}
@@ -124,13 +127,15 @@
   <Spin {...loadingProps}>
     {#if data.length > 0}
       {#if grid}
-        <Row class={`${prefixCls}-container ant-list-css-var`} gutter={grid.gutter}>
+        <Row class={[`${prefixCls}-container ant-list-css-var`, componentTheme.className]
+          .filter(Boolean).join(' ')} style={componentTheme.style} gutter={grid.gutter}>
           {#each rows as row (row.key)}
             <div style={colStyle}>{@render renderItem?.(row.item, row.index)}</div>
           {/each}
         </Row>
       {:else}
-        <ul class={`${prefixCls}-items ${prefixCls}-container ant-list-css-var`}>
+        <ul class={[`${prefixCls}-items ${prefixCls}-container ant-list-css-var`,
+          componentTheme.className]} style={componentTheme.style}>
           {#each rows as row (row.key)}{@render renderItem?.(row.item, row.index)}{/each}
         </ul>
       {/if}

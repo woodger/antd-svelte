@@ -9,6 +9,11 @@
 
 ### Added
 
+- List: подключены 11 component tokens, font/color/spacing aliases и algorithms.
+  Восстановлены source scopes root/container/Col; theme updates сохраняют
+  keyed rows, ввод, фокус и pagination. Добавлены 17 UMD-тем / 136 наборов
+  измерений, включая grid, empty и узкие экраны, unit/SSR/browser-проверки.
+
 - Typography: компонентные heading margins, alias overrides и algorithms
   для текста и редактора. Сохранены style priorities, draft/selection/focus
   и ожидающее async-копирование. Добавлены 15 UMD-тем / 120 наборов измерений

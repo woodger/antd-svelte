@@ -373,6 +373,7 @@ export interface LayoutComponentToken {
   lightTriggerColor: string;
 }
 
+/** Отступы, фон и размеры List/Item/Meta; defaults рассчитываются из alias tokens. */
 export interface ListComponentToken {
   contentWidth: number | string;
   itemPaddingLG: string;

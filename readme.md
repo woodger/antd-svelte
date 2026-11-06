@@ -5550,14 +5550,26 @@ Meta также поддерживает bind:ref с объектом nativeElem
 после mount и очищаются при unmount. SSR не создаёт DOM/media/observer/timer ресурсы.
 Нативные ссылки и кнопки сохраняют focus; поддержаны темы, compact, RTL и reduced motion.
 
-Полный token engine, CSS для произвольного prefixCls, расширенные ещё не перенесённые
-Spin props и React development warnings остаются в дальнейших этапах. Ограничение
+`theme.components.List` применяет 11 component tokens, font/color/spacing aliases
+и algorithms. Тема задаётся на root и контейнере строк внутри Spin; внутренний Col
+сохраняет исходный сброс общих токенов. Поддержаны отдельный CSS-variable prefix,
+dark/compact, nested/reset/sibling scopes и приоритеты config/local styles.
+Смена темы сохраняет keyed rows, draft/selection/focus и страницу pagination.
+Без source theme сохраняются прежние CSS defaults.
+
+Пользовательские breakpoint tokens, CSS для произвольного prefixCls,
+расширенные ещё не перенесённые Spin props и React development warnings
+остаются в дальнейших этапах. Ограничение
 SSR для непрозрачных snippets отмечено отдельно от поддержки массивов children.
 
 Проверки: [engine](./src/lib/list.engine.test.ts), [SSR](./src/lib/list.ssr.test.ts),
 [пакет](./tests/package/list.ssr.test.ts), [браузер](./tests/browser/list.spec.ts)
 и `?fixture=list`. [CSS](./src/lib/vendor/list.css) воспроизводится рецептом list:
 61 правило, две media-области 768/576px, без keyframes; [MIT](./src/lib/vendor/LICENSE.ant-design).
+11 токенов и стили сверяются с [официальным UMD](./tests/browser/fixtures/ant-design-list-theme-reference.json)
+в [unit](./src/lib/theme-list-tokens-reference.test.ts),
+[SSR](./tests/package/list-theme.ssr.test.ts) и
+[браузере](./tests/browser/list-theme.spec.ts), `?fixture=list-theme`.
 
 ## Listy
 

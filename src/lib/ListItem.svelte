@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useList } from './list-context';
   import { listHasContent, listMixedText } from './list.engine';
   import { connectListItemText } from './list.dom';
@@ -21,6 +22,8 @@
     ...attributes
   }: ListItemProps = $props();
   const config = useConfig();
+  // Grid Col сбрасывает общие aliases; собственные List tokens остаются у контейнера.
+  const componentTheme = useComponentTheme('List');
   const list = useList();
   let body = $state<HTMLElement>();
   let column = $state<HTMLDivElement>();
@@ -81,5 +84,6 @@
 {/snippet}
 
 {#if list.grid}
-  <Col flex={1} style={colStyle} bind:nativeElement={column}>{@render item()}</Col>
+  <Col flex={1} class={componentTheme.className} style={colStyle}
+    bind:nativeElement={column}>{@render item()}</Col>
 {:else}{@render item()}{/if}

@@ -9223,13 +9223,29 @@
         },
         {
           "id": "advanced-api",
-          "title": "Полный token/prefix/Spin API и React-specific development behavior",
+          "title": "Пользовательские breakpoints, prefix CSS и полный Spin API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Полный token engine и расширенные ещё не перенесённые Spin props остаются дальнейшими этапами; встроенный CSS рассчитан на ant-list, arbitrary prefix CSS не генерируется. React refs/nodes адаптированы к snippets/native bindings, deprecation/dev warnings не испускаются. V1-ready не означает полный React API."
+          "note": "Пользовательские breakpoint tokens responsive grid/media и расширенные ещё не перенесённые Spin props остаются дальнейшими этапами; встроенный CSS рассчитан на ant-list, arbitrary prefix CSS не генерируется. React refs/nodes адаптированы к snippets/native bindings, deprecation/dev warnings не испускаются. V1-ready не означает полный React API."
+        },
+        {
+          "id": "component-theme",
+          "title": "11 component tokens, font/color/spacing aliases и algorithms",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/List.svelte",
+            "src/lib/ListItem.svelte",
+            "src/lib/theme-list-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-list-tokens-reference.json",
+            "tests/package/list-theme.ssr.test.ts",
+            "tests/browser/list-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-list-theme-reference.json"
+          ],
+          "note": "Все 11 source defaults рассчитываются из component alias tokens; override/algorithm и отдельный CSS-variable prefix подключены к общему theme bridge. Root и контейнер строк восстанавливают List variables внутри Spin; Col сохраняет source global alias reset без переноса List typography на соседние controls. 17 официальных UMD-тем / 136 наборов CSS-измерений покрывают normal/small/large/vertical/grid/empty, header/footer, Meta/avatar/title/description, actions/extra/pagination, font/color/spacing aliases, dark/compact, zero/undefined, CSS lengths, config/local style priorities, CSS variables, RTL и nested/reset/sibling scopes. Проверены default media thresholds на 480/700px; пользовательские breakpoints остаются отдельным gap. Theme updates сохраняют keyed rows, page/callbacks и draft/selection/focus; inherit reset, legacy defaults и unmount не меняют sibling scopes. SSR не создаёт DOM/media/observers/timers; native data/rendering/ref/loading contracts сохранены."
         },
         {
           "id": "render-empty",

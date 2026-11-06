@@ -32,9 +32,23 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Steps' | 'Timeline' | 'Pagination' | 'Tabs' | 'Tag' | 'Slider' | 'Divider' | 'Flex' | 'Spin'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
-  | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography';
+  | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
+  | 'List';
 
 const factories = {
+  List: (token: GlobalToken) => ({
+    contentWidth: 220,
+    itemPadding: `${token.paddingContentVertical}px 0`,
+    itemPaddingSM: `${token.paddingContentVerticalSM}px ${token.paddingContentHorizontal}px`,
+    itemPaddingLG: `${token.paddingContentVerticalLG}px ${token.paddingContentHorizontalLG}px`,
+    headerBg: 'transparent',
+    footerBg: 'transparent',
+    emptyTextPadding: token.padding,
+    metaMarginBottom: token.padding,
+    avatarMarginRight: token.padding,
+    titleMarginBottom: token.paddingSM,
+    descriptionFontSize: token.fontSize
+  }),
   Typography: () => ({ titleMarginTop: '1.2em', titleMarginBottom: '0.5em' }),
   Form: (token: GlobalToken & Partial<FormComponentToken>) => ({
     labelRequiredMarkColor: token.colorError,
@@ -294,6 +308,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  List: [],
   Typography: [],
   Form: [],
   FloatButton: [],
