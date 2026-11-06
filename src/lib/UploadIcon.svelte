@@ -31,4 +31,4 @@
   @keyframes upload-spin { to { transform:rotate(360deg); } }
   @media (prefers-reduced-motion:reduce) { .spin { animation-duration:2s; } }
 </style>
-<span class="anticon" aria-hidden="true"><svg class:spin={name === 'loading'} viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor" focusable="false">{#each paths[name] as d}<path {d} />{/each}</svg></span>
+<span class={['anticon', `anticon-${name}`]} aria-hidden="true"><svg class:spin={name === 'loading'} viewBox="64 64 896 896" width="1em" height="1em" fill="currentColor" focusable="false">{#each paths[name] as d}<path {d} />{/each}</svg></span>

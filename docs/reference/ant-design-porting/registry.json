@@ -7236,7 +7236,21 @@
         "src/lib/upload-request.dom.test.ts",
         "tests/package/upload.ssr.test.ts",
         "tests/browser/upload.spec.ts",
-        "integration:upload"
+        "integration:upload",
+        "src/lib/theme-upload-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-upload-tokens-reference.json",
+        "tests/browser/fixtures/ant-design-upload-theme-reference.json",
+        "tests/browser/fixtures/upload-theme-presets.ts",
+        "tests/browser/fixtures/UploadThemeControl.svelte",
+        "tests/browser/fixtures/UploadThemeCase.svelte",
+        "tests/browser/fixtures/UploadThemeFixtures.svelte",
+        "tests/browser/upload-theme-metrics.ts",
+        "tests/browser/upload-theme.spec.ts",
+        "tests/package/upload-theme.ssr.test.ts",
+        "src/lib/vendor/upload-link-reset.css",
+        "src/lib/UploadIcon.svelte",
+        "src/lib/UploadListItem.svelte",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -7277,8 +7291,42 @@
           "note": "Children snippet, hasControlInside, keyboard chooser, multiple drop/accept, ShowUploadList flags/extra, исходные icons и thumbnail canvas. RU/EN, RTL, темы и disabled из ConfigProvider/Form. 82 CSS-правила из закреплённого архива; неиспользуемые React motion selectors исключены."
         },
         {
+          "id": "component-theme",
+          "title": "Компонентные tokens, aliases/algorithms и source CSS списков/карточек",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/theme-upload-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-upload-tokens-reference.json",
+            "tests/browser/fixtures/ant-design-upload-theme-reference.json",
+            "tests/browser/fixtures/upload-theme-presets.ts",
+            "tests/browser/fixtures/UploadThemeControl.svelte",
+            "tests/browser/fixtures/UploadThemeCase.svelte",
+            "tests/browser/fixtures/UploadThemeFixtures.svelte",
+            "tests/browser/upload-theme-metrics.ts",
+            "tests/browser/upload-theme.spec.ts",
+            "tests/package/upload-theme.ssr.test.ts",
+            "src/lib/vendor/upload-link-reset.css",
+            "src/lib/UploadIcon.svelte",
+            "src/lib/UploadListItem.svelte",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Два исходных defaults actionsColor и pictureCardSize=controlHeightLG×2.55 без округления; финальные overrides, component algorithms, aliases, нули/undefined и cssVar prefix. 16 UMD-тем / 288 raw CSS-состояний: text/picture/card/circle/Dragger, disabled/error/progress, hover, восемь scopes и trigger-only style priority. Root и trigger bridge сохраняют локальные CSS variables другого prefix; style не переносится на wrapper. Button/Progress/Tooltip сохраняют свои tokens; канонические anticon classes подключают исходные белые card actions, Tooltip wrapper сохраняет 100% card height. Link reset из 14 исходных правил ограничен Upload; error color приоритетнее. Theme updates/inherit reset сохраняют запрос, fileList, input/list DOM и focus; SSR не запускает транспорт/timers. Extended render/config/motion API остаются отдельными пробелами."
+        },
+        {
+          "id": "zero-card-overlap",
+          "title": "Наблюдение upstream: наложение действий при нулевом pictureCardSize",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-upload-theme-reference.json",
+            "readme.md"
+          ],
+          "note": "В закреплённом UMD при pictureCardSize:0 несколько карточек перекрывают область действий: реальный указатель в центре первой строки попадает на preview второй. В zero-metrics.interactions сохранены фактические hoveredIndices [1], обычный hover даёт [0]. Это крайний случай уже общих извлечённых CSS, не отдельный алгоритм Svelte; минимум размера и обработка наложения требуют отдельного решения."
+        },
+        {
           "id": "extended-api",
-          "title": "Directory/paste, render hooks, semantic slots и полный config/token API",
+          "title": "Directory/paste, render hooks, semantic slots и полный config API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],

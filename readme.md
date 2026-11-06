@@ -6009,6 +6009,8 @@ Upload переносит Ant Design 6.6.8 и AjaxUploader/request из @rc-comp
 экспорт аналога Upload.LIST_IGNORE. React и rc-upload runtime не устанавливаются.
 Лицензия rc-upload сохранена в vendor/LICENSE.rc-upload; CSS-рецепт извлекает
 82 правила из закреплённого antd.css, исключая неиспользуемые motion selectors.
+Отдельный рецепт `upload-link-reset` добавляет 14 исходных общих правил ссылок
+внутри Upload; цвета error rows сохраняют приоритет.
 Иконки взяты из закреплённого @ant-design/icons-svg 4.6.0 с существующей лицензией.
 
 ```svelte
@@ -6078,6 +6080,25 @@ OpenFileDialogOnClick=false оставляет drop без открытия choo
 это поведение сохранено. Input сбрасывается после выбора для повторного файла.
 Id удаляется при disabled/отсутствии children, чтобы label не открывал диалог.
 Bind:nativeElement/inputElement дают DOM-элементы, без запуска транспорта при SSR.
+
+`ConfigProvider.theme.components.Upload` применяет actionsColor/pictureCardSize,
+aliases и algorithms к wrapper, списку и Dragger. ActionsColor задаёт цвет обычных
+действий; в карточках сохраняются исходные белые иконки поверх затемнения.
+Button, Progress и Tooltip получают свои component tokens. Style остаётся на
+области выбора/drop; локальные CSS variables, включая другой cssVar.prefix,
+перекрывают вычисленную тему именно на этой области.
+
+Обновления темы сохраняют controller, запросы, fileList, native input и фокус.
+Канонические классы иконок подключают исходные размеры/цвета действий;
+обёртка Tooltip ошибки сохраняет полную высоту карточки. 16 тем официального UMD
+и состояния списка — [upload-theme](./tests/browser/upload-theme.spec.ts),
+`?fixture=upload-theme`; [SSR](./tests/package/upload-theme.ssr.test.ts) не запускает
+загрузку и browser timers.
+
+В общих с upstream стилях `pictureCardSize: 0` приводит к наложению карточек:
+центр первой карточки может попасть на preview соседней. Исходное наблюдение
+сохранено в `zero-metrics.interactions` [эталона](./tests/browser/fixtures/ant-design-upload-theme-reference.json).
+Этот крайний случай требует отдельного решения.
 
 Locale/upload из ConfigProvider, собственный locale, RU/EN, RTL и theme variables
 поддержаны. Directory/pastable, itemRender/iconRender/custom action icons,

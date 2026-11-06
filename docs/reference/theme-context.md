@@ -876,6 +876,27 @@ unmount очищает popup и autoSize measure node. 16 тем официал�
 в [SSR](../../tests/package/mentions-theme.ssr.test.ts). Fixture: `?fixture=mentions-theme`.
 Semantic/config API, prefixCls и rc-trigger motion требуют отдельного переноса.
 
+## Тема Upload
+
+`components.Upload` подготавливает два source defaults: actionsColor из colorIcon,
+pictureCardSize из controlHeightLG × 2.55 без округления. Aliases, algorithms,
+cssVar prefix и вложенные provider действуют на wrapper и список. Select/drag area
+получает bridge перед локальным style, чтобы CSS variables другого prefix
+переопределялись на этой границе. Style остаётся на исходной trigger area.
+
+Исходные правила карточек сохраняют белый цвет действий; actionsColor применяется
+к обычному списку. Button, Progress и Tooltip сохраняют собственные tokens.
+Общие правила ссылок извлечены отдельно и ограничены Upload. Канонические icon
+classes и высота Tooltip wrapper восстанавливают исходную геометрию карточек.
+Theme updates/reset сохраняют input/list DOM, запросы и focus; SSR не начинает
+транспорт и не создаёт browser timers.
+
+16 UMD-тем проверяются в [unit](../../src/lib/theme-upload-tokens-reference.test.ts),
+[SSR](../../tests/package/upload-theme.ssr.test.ts) и
+[браузере](../../tests/browser/upload-theme.spec.ts), fixture `?fixture=upload-theme`.
+Наложение действий при нулевой карточке записано в raw interactions эталона
+как отдельное наблюдение upstream.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

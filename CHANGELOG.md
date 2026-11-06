@@ -9,6 +9,11 @@
 
 ### Added
 
+- Upload/Dragger: два component tokens, aliases/algorithms и локальные CSS variables
+  на области выбора/drop; 16 UMD-тем и unit/SSR/browser-проверки. Восстановлены
+  link reset, канонические icon classes и полная высота error cards; theme updates
+  сохраняют список, input/focus и запросы. Нулевая карточка отмечена как наблюдение upstream.
+
 - Mentions: shared Input/component tokens, aliases и algorithms на textarea/popup,
   16 UMD-тем с размерами/variants, disabled/error и вложенными контекстами.
   Обновления сохраняют draft, caret/focus и активный option; native button reset

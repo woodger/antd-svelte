@@ -5,6 +5,7 @@
   import { filterUploadFile } from './upload.engine';
   import { uploadRequest } from './upload-request.dom';
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { useForm } from './form-context';
   import UploadListItem from './UploadListItem.svelte';
   let {
@@ -46,6 +47,7 @@
     ...attributes
   }: UploadProps<T> = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Upload');
   const form = useForm();
   const generatedId = $props.id();
   let counter = 0;
@@ -66,6 +68,8 @@
   );
   let listOptions = $derived(typeof showUploadList === 'object' ? showUploadList : {});
   let card = $derived(listType === 'picture-card' || listType === 'picture-circle');
+  // Bridge нужен и на trigger: локальный prefix должен перекрывать значение wrapper.
+  let triggerStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
   const controller = createUploadController({
     props: () => ({
       name,
@@ -152,10 +156,11 @@
       'ant-upload ant-upload-select',
       blocked && 'ant-upload-disabled',
       !children && 'ant-upload-hidden'
-    ]} {style}>{@render trigger()}</div>
+    ]} style={triggerStyle}>{@render trigger()}</div>
 {/snippet}
-<span bind:this={nativeElement} dir={config.direction} class={[
+<span bind:this={nativeElement} dir={config.direction} style={componentTheme.style} class={[
     'ant-upload-wrapper ant-upload-css-var',
+    componentTheme.className,
     config.direction === 'rtl' && 'ant-upload-rtl',
     card && `ant-upload-${listType}-wrapper`,
     className,
@@ -169,7 +174,7 @@
         dragState && 'ant-upload-drag-hover',
         blocked && 'ant-upload-disabled',
         config.direction === 'rtl' && 'ant-upload-rtl'
-      ]} {style} ondrop={drag} ondragover={drag} ondragleave={drag}>{@render trigger()}</div>
+      ]} style={triggerStyle} ondrop={drag} ondragover={drag} ondragleave={drag}>{@render trigger()}</div>
     {@render list()}
   {:else}
     {#if !card || !showUploadList}{@render selectTrigger()}{/if}{@render list()}

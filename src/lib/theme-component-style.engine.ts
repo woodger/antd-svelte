@@ -37,9 +37,13 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
   | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
-  | 'Tour' | 'Mentions';
+  | 'Tour' | 'Mentions' | 'Upload';
 
 const factories = {
+  Upload: (token: GlobalToken) => ({
+    actionsColor: token.colorIcon,
+    pictureCardSize: token.controlHeightLG * 2.55
+  }),
   Tour: (token: GlobalToken) => ({
     zIndexPopup: token.zIndexPopupBase + 70,
     closeBtnSize: token.fontSize * token.lineHeight,
@@ -365,6 +369,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Upload: [],
   Tour: [],
   Mentions: [],
   ColorPicker: [],

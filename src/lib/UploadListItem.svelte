@@ -83,6 +83,8 @@
 </script>
 <style>
   .ant-upload-list-item-container :global(.ant-tooltip-trigger) { display:block; }
+  :global(.ant-upload-list-picture-card) .ant-upload-list-item-container :global(.ant-tooltip-trigger),
+  :global(.ant-upload-list-picture-circle) .ant-upload-list-item-container :global(.ant-tooltip-trigger) { height:100%; }
   button.ant-upload-list-item-name { padding:0;border:0;background:transparent;color:inherit;font:inherit;text-align:inherit;cursor:pointer; }
   .ant-upload-list-item-name:focus-visible { outline:2px solid var(--ant-color-primary); }
 </style>

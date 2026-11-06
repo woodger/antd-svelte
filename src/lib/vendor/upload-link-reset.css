@@ -1,0 +1,21 @@
+/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
+ * Общий link reset ограничен ссылками внутри Upload.
+ * :where сохраняет исходную specificity a и псевдоклассов; цвета error rows приоритетнее.
+ * Два исходных набора правил сохранены в порядке npm CSS.
+ * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
+ */
+:where(.ant-upload-css-var) a{color:var(--ant-color-link);text-decoration:var(--ant-link-decoration);background-color:transparent;outline:none;cursor:pointer;transition:color var(--ant-motion-duration-slow);-webkit-text-decoration-skip:objects;}
+:where(.ant-upload-css-var) a:hover{color:var(--ant-color-link-hover);}
+:where(.ant-upload-css-var) a:active{color:var(--ant-color-link-active);}
+:where(.ant-upload-css-var) a:active,:where(.ant-upload-css-var) a:hover{text-decoration:var(--ant-link-hover-decoration);outline:0;}
+:where(.ant-upload-css-var) a:focus{text-decoration:var(--ant-link-focus-decoration);outline:0;}
+:where(.ant-upload-css-var) a:focus-visible{outline:var(--ant-line-width-focus) solid var(--ant-color-primary-border);outline-offset:1px;transition:outline-offset 0s,outline 0s;}
+:where(.ant-upload-css-var) a[disabled]{color:var(--ant-color-text-disabled);cursor:not-allowed;}
+:where(.ant-upload-css-var) a{color:var(--ant-color-link);text-decoration:var(--ant-link-decoration);background-color:transparent;outline:none;cursor:pointer;transition:color var(--ant-motion-duration-slow);-webkit-text-decoration-skip:objects;}
+:where(.ant-upload-css-var) a:hover{color:var(--ant-color-link-hover);}
+:where(.ant-upload-css-var) a:active{color:var(--ant-color-link-active);}
+:where(.ant-upload-css-var) a:active,:where(.ant-upload-css-var) a:hover{text-decoration:var(--ant-link-hover-decoration);outline:0;}
+:where(.ant-upload-css-var) a:focus{text-decoration:var(--ant-link-focus-decoration);outline:0;}
+:where(.ant-upload-css-var) a:focus-visible{outline:var(--ant-line-width-focus) solid var(--ant-color-primary-border);outline-offset:1px;transition:outline-offset 0s,outline 0s;}
+:where(.ant-upload-css-var) a[disabled]{color:var(--ant-color-text-disabled);cursor:not-allowed;}
