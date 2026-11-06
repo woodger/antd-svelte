@@ -5549,6 +5549,9 @@ ListContent принимает текст, числа, boolean, snippets и вл
 Meta также поддерживает bind:ref с объектом nativeElement. Значения появляются
 после mount и очищаются при unmount. SSR не создаёт DOM/media/observer/timer ресурсы.
 Нативные ссылки и кнопки сохраняют focus; поддержаны темы, compact, RTL и reduced motion.
+Ссылки Meta/actions получают source link decoration и цвета; собственный цвет
+заголовка/hover имеет приоритет. Inline CSS остаётся приоритетнее общих правил.
+Reset ограничен List/Listy; внешние ссылки сохраняют своё оформление.
 
 `theme.components.List` применяет 11 component tokens, font/color/spacing aliases
 и algorithms. Тема задаётся на root и контейнере строк внутри Spin; внутренний Col
@@ -5566,6 +5569,8 @@ SSR для непрозрачных snippets отмечено отдельно �
 [пакет](./tests/package/list.ssr.test.ts), [браузер](./tests/browser/list.spec.ts)
 и `?fixture=list`. [CSS](./src/lib/vendor/list.css) воспроизводится рецептом list:
 61 правило, две media-области 768/576px, без keyframes; [MIT](./src/lib/vendor/LICENSE.ant-design).
+Общий [link reset](./src/lib/vendor/list-link-reset.css) добавляет 14 исходных правил;
+[браузерная сверка](./tests/browser/list-links.spec.ts) — `?fixture=list-links`.
 11 токенов и стили сверяются с [официальным UMD](./tests/browser/fixtures/ant-design-list-theme-reference.json)
 в [unit](./src/lib/theme-list-tokens-reference.test.ts),
 [SSR](./tests/package/list-theme.ssr.test.ts) и
@@ -5638,6 +5643,9 @@ OnScroll (либо native onscroll) получает native UIEvent: currentTarg
 после mount. Нативные ссылки, controls, выделение и focus сохраняются; доступны
 RTL, dark, compact и reduced motion. Компонент не добавляет выбор строк,
 прикладную навигацию или собственное пустое состояние.
+Ссылки itemRender используют source color/decoration, hover/active/focus и inline
+priority. Общий [link reset](./src/lib/vendor/list-link-reset.css) действует внутри
+List/Listy; прежний native focus-visible ring и внешние ссылки сохраняются.
 
 `theme.components.Listy` применяет `itemPaddingBlock`/`itemPaddingInline`,
 font/color/spacing aliases и algorithms в raw/virtual ветках. Оценка высоты строки

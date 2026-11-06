@@ -1150,6 +1150,25 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Pagination: sizes, simple/quick jumper, options, variants и responsive media.\n * Корни ограничены :where(.ant-pagination-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "list-link-reset",
+    "output": "src/lib/vendor/list-link-reset.css",
+    "expectedRules": 14,
+    "include": [
+      "^a(?=:[\\w-]+(?:-|\\b)|\\[disabled\\]|$)"
+    ],
+    "exclude": [
+      "\\s"
+    ],
+    "replacements": [
+      {
+        "pattern": "^a",
+        "replacement": ":where(.ant-list-css-var,.ant-listy-css-var) a"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Общий link reset ограничен List/Listy и их descendant anchors.\n * :where сохраняет исходную specificity a и псевдоклассов; цвета Meta приоритетнее.\n * Два исходных набора правил сохранены в порядке npm CSS.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
     "id": "list",
     "output": "src/lib/vendor/list.css",
     "expectedRules": 61,

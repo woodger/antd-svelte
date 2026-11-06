@@ -1,0 +1,545 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "react": "18.3.1",
+    "documentMode": "CSS1Compat",
+    "operation": "Public List.Item.Meta title, List.Item action and raw Listy row anchors: normal/hover/active/focus colors and decorations; global aliases, dark/compact/RTL, named CSS variables, root CSS variables and inline priority. Source reset is scoped to List/Listy in the Svelte port, preserving unrelated links and the existing native focus-visible ring."
+  },
+  "viewport": {
+    "width": 1200,
+    "height": 1000
+  },
+  "cases": [
+    {
+      "name": "default",
+      "dark": false,
+      "compact": false,
+      "rtl": false,
+      "custom": false,
+      "inline": false,
+      "variables": false,
+      "prefix": "ant",
+      "links": {
+        "title": {
+          "normal": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "none"
+          }
+        },
+        "action": {
+          "normal": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(105, 177, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(9, 88, 217)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          }
+        },
+        "row": {
+          "normal": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(105, 177, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(9, 88, 217)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          }
+        }
+      }
+    },
+    {
+      "name": "dark",
+      "dark": true,
+      "compact": false,
+      "rtl": false,
+      "custom": false,
+      "inline": false,
+      "variables": false,
+      "prefix": "ant",
+      "links": {
+        "title": {
+          "normal": {
+            "color": "rgba(255, 255, 255, 0.85)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(22, 104, 220)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(22, 104, 220)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgba(255, 255, 255, 0.85)",
+            "decoration": "none"
+          }
+        },
+        "action": {
+          "normal": {
+            "color": "rgb(22, 104, 220)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(21, 65, 126)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(21, 84, 173)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 104, 220)",
+            "decoration": "none"
+          }
+        },
+        "row": {
+          "normal": {
+            "color": "rgb(22, 104, 220)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(21, 65, 126)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(21, 84, 173)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 104, 220)",
+            "decoration": "none"
+          }
+        }
+      }
+    },
+    {
+      "name": "compact",
+      "dark": false,
+      "compact": true,
+      "rtl": false,
+      "custom": false,
+      "inline": false,
+      "variables": false,
+      "prefix": "ant",
+      "links": {
+        "title": {
+          "normal": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "none"
+          }
+        },
+        "action": {
+          "normal": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(105, 177, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(9, 88, 217)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          }
+        },
+        "row": {
+          "normal": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(105, 177, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(9, 88, 217)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          }
+        }
+      }
+    },
+    {
+      "name": "rtl",
+      "dark": false,
+      "compact": false,
+      "rtl": true,
+      "custom": false,
+      "inline": false,
+      "variables": false,
+      "prefix": "ant",
+      "links": {
+        "title": {
+          "normal": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "none"
+          }
+        },
+        "action": {
+          "normal": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(105, 177, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(9, 88, 217)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          }
+        },
+        "row": {
+          "normal": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(105, 177, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(9, 88, 217)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          }
+        }
+      }
+    },
+    {
+      "name": "custom",
+      "dark": false,
+      "compact": false,
+      "rtl": false,
+      "custom": true,
+      "inline": false,
+      "variables": false,
+      "prefix": "ant",
+      "links": {
+        "title": {
+          "normal": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "overline"
+          },
+          "hover": {
+            "color": "rgb(82, 196, 26)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(82, 196, 26)",
+            "decoration": "line-through"
+          },
+          "focus": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "line-through"
+          }
+        },
+        "action": {
+          "normal": {
+            "color": "rgb(207, 19, 34)",
+            "decoration": "overline"
+          },
+          "hover": {
+            "color": "rgb(250, 84, 28)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(114, 46, 209)",
+            "decoration": "line-through"
+          },
+          "focus": {
+            "color": "rgb(207, 19, 34)",
+            "decoration": "line-through"
+          }
+        },
+        "row": {
+          "normal": {
+            "color": "rgb(207, 19, 34)",
+            "decoration": "overline"
+          },
+          "hover": {
+            "color": "rgb(250, 84, 28)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(114, 46, 209)",
+            "decoration": "line-through"
+          },
+          "focus": {
+            "color": "rgb(207, 19, 34)",
+            "decoration": "line-through"
+          }
+        }
+      }
+    },
+    {
+      "name": "owned-variables",
+      "dark": false,
+      "compact": false,
+      "rtl": false,
+      "custom": true,
+      "inline": false,
+      "variables": false,
+      "prefix": "owned",
+      "links": {
+        "title": {
+          "normal": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "overline"
+          },
+          "hover": {
+            "color": "rgb(82, 196, 26)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(82, 196, 26)",
+            "decoration": "line-through"
+          },
+          "focus": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "line-through"
+          }
+        },
+        "action": {
+          "normal": {
+            "color": "rgb(207, 19, 34)",
+            "decoration": "overline"
+          },
+          "hover": {
+            "color": "rgb(250, 84, 28)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(114, 46, 209)",
+            "decoration": "line-through"
+          },
+          "focus": {
+            "color": "rgb(207, 19, 34)",
+            "decoration": "line-through"
+          }
+        },
+        "row": {
+          "normal": {
+            "color": "rgb(207, 19, 34)",
+            "decoration": "overline"
+          },
+          "hover": {
+            "color": "rgb(250, 84, 28)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(114, 46, 209)",
+            "decoration": "line-through"
+          },
+          "focus": {
+            "color": "rgb(207, 19, 34)",
+            "decoration": "line-through"
+          }
+        }
+      }
+    },
+    {
+      "name": "inline-style",
+      "dark": false,
+      "compact": false,
+      "rtl": false,
+      "custom": true,
+      "inline": true,
+      "variables": false,
+      "prefix": "ant",
+      "links": {
+        "title": {
+          "normal": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "hover": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "focus": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          }
+        },
+        "action": {
+          "normal": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "hover": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "focus": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          }
+        },
+        "row": {
+          "normal": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "hover": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          },
+          "focus": {
+            "color": "rgb(0, 128, 0)",
+            "decoration": "underline"
+          }
+        }
+      }
+    },
+    {
+      "name": "root-variables",
+      "dark": false,
+      "compact": false,
+      "rtl": false,
+      "custom": false,
+      "inline": false,
+      "variables": true,
+      "prefix": "ant",
+      "links": {
+        "title": {
+          "normal": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "decoration": "none"
+          }
+        },
+        "action": {
+          "normal": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          },
+          "hover": {
+            "color": "rgb(105, 177, 255)",
+            "decoration": "none"
+          },
+          "active": {
+            "color": "rgb(9, 88, 217)",
+            "decoration": "none"
+          },
+          "focus": {
+            "color": "rgb(22, 119, 255)",
+            "decoration": "none"
+          }
+        },
+        "row": {
+          "normal": {
+            "color": "rgb(212, 56, 13)",
+            "decoration": "overline"
+          },
+          "hover": {
+            "color": "rgb(56, 158, 13)",
+            "decoration": "underline"
+          },
+          "active": {
+            "color": "rgb(83, 29, 171)",
+            "decoration": "line-through"
+          },
+          "focus": {
+            "color": "rgb(212, 56, 13)",
+            "decoration": "line-through"
+          }
+        }
+      }
+    }
+  ]
+}

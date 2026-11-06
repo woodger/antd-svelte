@@ -9262,6 +9262,20 @@
             "docs/reference/render-empty.md"
           ],
           "note": "Сохранены locale.emptyText || renderEmpty(List) || simple Empty, lazy producer и source falsy fallback. Общий рекурсивный renderer содержимого вынесен из приватного ListContent в RenderContent без новых DOM wrappers."
+        },
+        {
+          "id": "shared-link-reset",
+          "title": "Общие стили ссылок, состояния и inline priority",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/vendor/list-link-reset.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ListLinksFixtures.svelte",
+            "tests/browser/fixtures/ant-design-list-links-reference.json",
+            "tests/browser/list-links.spec.ts"
+          ],
+          "note": "14 общих source правил из закреплённого npm CSS ограничены :where(.ant-list-css-var,.ant-listy-css-var) a, без глобального reset внешних ссылок. Specificity a/pseudo сохранена; List Meta title/hover colors и inline styles приоритетнее. Восстановлены colorLink/hover/active и linkDecoration/hover/focus, named CSS-variable prefixes и исходные root-variable scope resets контейнера List. Восемь official UMD presets / 96 состояний фиксируют Meta/action/raw Listy links, light/dark/compact/RTL, aliases, CSS variables и local CSS priority. Native focus-visible ring, href/Enter/callbacks, DOM/focus при обновлении темы и оформление внешних anchors сохраняются; browser checks используют публичный пакет."
         }
       ]
     },
@@ -9443,6 +9457,20 @@
             "readme.md"
           ],
           "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, @rc-component/virtual-list 1.5.1 package/es/List.js: useMemo расчёта window/scrollHeight пропускает itemHeight. При стабильном items array и фиксированных semantic высотах строк смена estimate 66→74 не обновляет filler: 40 записей, пять измеренных строк по 49px, source 2555→2555px, fresh source mount 2835px. Активные delegated props и raw before/after/fresh кадры сохранены в staleEstimateObservation. Native derived расчёт сразу даёт 2835px без remount или потери cache/DOM; этот source дефект намеренно не воспроизводится и оставлен для отдельного разбора. Остальные warm scopes сравниваются с исходными кадрами без замены данных."
+        },
+        {
+          "id": "shared-link-reset",
+          "title": "Общие стили ссылок, состояния и inline priority",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/vendor/list-link-reset.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/ListLinksFixtures.svelte",
+            "tests/browser/fixtures/ant-design-list-links-reference.json",
+            "tests/browser/list-links.spec.ts"
+          ],
+          "note": "14 общих source правил из закреплённого npm CSS ограничены :where(.ant-list-css-var,.ant-listy-css-var) a, без глобального reset внешних ссылок. Specificity a/pseudo сохранена; List Meta title/hover colors и inline styles приоритетнее. Восстановлены colorLink/hover/active и linkDecoration/hover/focus, named CSS-variable prefixes и исходные root-variable scope resets контейнера List. Восемь official UMD presets / 96 состояний фиксируют Meta/action/raw Listy links, light/dark/compact/RTL, aliases, CSS variables и local CSS priority. Native focus-visible ring, href/Enter/callbacks, DOM/focus при обновлении темы и оформление внешних anchors сохраняются; browser checks используют публичный пакет."
         }
       ]
     },

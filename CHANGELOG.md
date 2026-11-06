@@ -663,6 +663,10 @@
 
 ### Fixed
 
+- List/Listy: восстановлены source link reset, цвета и подчёркивания в обычном,
+  hover/active/focus состояниях. Сохранены Meta colors, inline priority, native
+  focus, навигация и оформление внешних ссылок; CSS извлекается из pin 6.6.8.
+
 - Portal: сохранены пустые и guaranteed-invalid CSS variables, включая очищенные
   component tokens Tabs. Vendor defaults больше не возвращаются после переноса;
   различие var() fallbacks проверено также без CSS Typed OM.
