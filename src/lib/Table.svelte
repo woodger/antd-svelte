@@ -59,6 +59,8 @@
     disabled,
     bordered = false,
     size,
+    title,
+    footer,
     caption,
     empty,
     scroll,
@@ -113,6 +115,7 @@
         paging.current * paging.pageSize
       )
   );
+  let panelData = $derived(pageRows.map(row => row.record));
   let selectionOptions = $derived(typeof rowSelection === 'object' ? rowSelection : undefined);
   let visibleRows = $derived(
     pageRows.map(
@@ -381,6 +384,7 @@
       bordered && 'ant-table-bordered',
       !visibleRows.length && 'ant-table-empty'
     ]}>
+    {#if title}<div class="ant-table-title">{@render title(panelData)}</div>{/if}
     <div class="ant-table-container">
       <!-- svelte-ignore a11y_no_noninteractive_tabindex (Фокус нужен для прокрутки таблицы с клавиатуры.) -->
       <div bind:this={content} class={[
@@ -534,6 +538,7 @@
         </table>
       </div>
     </div>
+    {#if footer}<div class="ant-table-footer">{@render footer(panelData)}</div>{/if}
   </div>
   {#if pagination !== false}
     <Pagination {...pagination} total={paging.total} current={paging.current} pageSize={paging.pageSize} disabled={resolvedDisabled} size={resolvedSize} class="ant-table-pagination ant-table-pagination-end" onChange={changePage} />

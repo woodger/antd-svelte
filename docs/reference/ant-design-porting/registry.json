@@ -10948,7 +10948,7 @@
         {
           "name": "@rc-component/table",
           "range": "~1.11.1",
-          "referenceVersion": null
+          "referenceVersion": "1.11.1"
         },
         {
           "name": "@ant-design/icons",
@@ -10973,7 +10973,11 @@
         "tests/browser/table-theme.spec.ts",
         "tests/browser/fixtures/ant-design-table-theme-reference.json",
         "tests/browser/fixtures/ant-design-table-root-style-observation.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/table.types.ts",
+        "tests/package/table-panels.ssr.test.ts",
+        "tests/browser/table-panels.spec.ts",
+        "tests/browser/fixtures/ant-design-table-panels-reference.json"
       ],
       "features": [
         {
@@ -11025,7 +11029,22 @@
             "tests/browser/fixtures/ant-design-table-root-style-observation.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "37 defaults, aliases/algorithms, custom cssVar prefix, nested/reset contexts; cells, sort/hover, selection, expanded content и filter colors. Updates сохраняют draft/focus/scroll и controls; local style priority и legacy widths сохранены. Source duplicate registration сбрасывает root variable 11px в 7px; raw observation сохранено, native style остаётся 11px. Footer/title/summary, tree indentation, virtual и отдельная sticky scrollbar отсутствуют; declarations не заявляют этот API. Native size по-прежнему наследует middle; Source benchmark явно задаёт middle."
+          "note": "37 defaults, aliases/algorithms, custom cssVar prefix, nested/reset contexts; cells, sort/hover, selection, expanded content и filter colors. Updates сохраняют draft/focus/scroll и controls; local style priority и legacy widths сохранены. Source duplicate registration сбрасывает root variable 11px в 7px; raw observation сохранено, native style остаётся 11px. Summary, tree indentation, virtual и отдельная sticky scrollbar отсутствуют; declarations не заявляют этот API. Native size по-прежнему наследует middle; Source benchmark явно задаёт middle."
+        },
+        {
+          "id": "title-footer",
+          "title": "Title/footer snippets и данные текущей страницы",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Table.svelte",
+            "src/lib/table.types.ts",
+            "readme.md",
+            "tests/package/table-panels.ssr.test.ts",
+            "tests/browser/table-panels.spec.ts",
+            "tests/browser/fixtures/ant-design-table-panels-reference.json"
+          ],
+          "note": "Readonly records текущей страницы после client filter/sort/paging; server mode передаёт dataSource без повторного slice. Пустой набор и пустой snippet, размеры, RTL, footer theme tokens. Панели окружают scroll container, caption сохранён; updates сохраняют editor DOM/draft/focus и не создают дополнительные callbacks. Source UMD и отдельно изученные Panel/PanelRender rc-table1.11.1; полный runtime/core audit ещё не выполнен."
         }
       ]
     },

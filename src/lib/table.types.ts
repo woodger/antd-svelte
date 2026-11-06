@@ -105,6 +105,10 @@ export interface TableProps<Row extends object> {
   /** @defaultValue false */
   bordered?: boolean;
   size?: ComponentSize;
+  /** Панель перед таблицей; получает отсортированные/отфильтрованные записи текущей страницы. */
+  title?: Snippet<[data: readonly Row[]]>;
+  /** Панель после таблицы; получает те же записи страницы, включая пустой массив. */
+  footer?: Snippet<[data: readonly Row[]]>;
   caption?: string;
   empty?: Snippet;
   scroll?: { x?: number | string; y?: number | string; };

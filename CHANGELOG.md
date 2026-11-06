@@ -9,6 +9,11 @@
 
 ### Added
 
+- Table: title/footer snippets получают записи текущей страницы после сортировки
+  и фильтрации, включая пустые данные и ручной server mode. Исходная структура
+  панелей и footer tokens проверяются по 84 UMD-состояниям; caption, editor DOM,
+  draft/focus и controls сохраняются при обновлениях.
+
 - Table: 37 исходных component defaults, aliases/algorithms и реактивная тема
   ячеек, служебных колонок, sort/hover, раскрытых строк и фильтров. Добавлены
   15 UMD-профилей, исходные caret icons и unit/SSR/browser-проверки. Обновления

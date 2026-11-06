@@ -1047,9 +1047,16 @@ Source styles.root задаёт cellPaddingBlockMD=11px, но внутрення
 приоритет local style: padding остаётся 11px и после обновления темы.
 Это отличие не скрывается нормализацией эталонных измерений.
 
-Footer/title/summary, tree indentation, virtual rows и отдельная sticky scrollbar
-ещё не перенесены; declarations footerBg/footerColor, expandIconMarginTop и
-stickyScrollBarBorderRadius не означают наличие соответствующего API.
+Title/footer используют ту же тему и текущие page records; footerBg/footerColor
+действуют на `.ant-table-footer`. Структура, данные и стили панелей сверяются по
+[84 состояниям UMD](../../tests/browser/fixtures/ant-design-table-panels-reference.json),
+включая empty/empty-snippet, paging, filter/sort, RTL и разные размеры.
+[Browser](../../tests/browser/table-panels.spec.ts) проверяет сохранение editors,
+focus/selection, FormData и независимый lifecycle панелей; SSR проверяет page data.
+
+Summary, tree indentation, virtual rows и отдельная sticky scrollbar ещё не
+перенесены; declarations expandIconMarginTop и stickyScrollBarBorderRadius
+не означают наличие соответствующего API.
 
 ## CSS и совместимость
 

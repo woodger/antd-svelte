@@ -9027,6 +9027,31 @@ Snippet создаётся только для видимой раскрытой
 Раскрытие нажатием на всю строку, forceRender и иерархические данные пока не
 поддерживаются. Живой пример карточек участников доступен на `/ant-design`.
 
+### Панели title и footer
+
+`title` и `footer` принимают snippets с readonly-массивом записей текущей страницы.
+В client mode он уже отфильтрован, отсортирован и ограничен пагинацией; без
+пагинации передаётся весь обработанный набор. Server mode передаёт полученный
+`dataSource` без повторного разбиения. Для пустого набора передаётся `[]`.
+
+```svelte
+<Table dataSource={people} {columns} caption="Участники">
+  {#snippet title(currentPage)}На странице: {currentPage.length}{/snippet}
+  {#snippet footer(currentPage)}Всего баллов на странице:
+    {currentPage.reduce((sum, person) => sum + person.score, 0)}
+  {/snippet}
+</Table>
+```
+
+Панели находятся внутри `.ant-table` до и после scroll container. Caption
+сохраняет нативную подпись таблицы. Переданный пустой snippet сохраняет панель
+и её отступы; отсутствие snippet убирает панель. Footer использует footerBg и
+footerColor, обе панели — padding/font текущего размера и border/radius темы.
+Смена страницы, сортировки, фильтра, loading или темы сохраняет содержимое
+остающихся snippets и не создаёт дополнительных onChange callbacks.
+Source comparison: [browser](tests/browser/table-panels.spec.ts),
+[SSR](tests/package/table-panels.ssr.test.ts), fixture `?fixture=table-panels`.
+
 ### Компонентная тема Table
 
 `ConfigProvider.theme.components.Table` применяет исходные component tokens и
@@ -9041,7 +9066,7 @@ Native default size по-прежнему наследует `componentSize` (`m
 явный `expandable.columnWidth` имеет приоритет. Без source-темы обе колонки
 сохраняют default 48px. Для fixed cells сохраняется непрозрачная подложка.
 
-Footer, tree indentation и отдельная sticky scrollbar ещё не реализованы:
+Summary, tree indentation и отдельная sticky scrollbar ещё не реализованы:
 соответствующие declarations готовятся, но сами по себе не добавляют этот API.
 Сравнение с эталоном, границы покрытия и наблюдение root style описаны в
 [справочнике темы](docs/reference/theme-context.md#тема-table).
