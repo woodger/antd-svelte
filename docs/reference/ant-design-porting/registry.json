@@ -11050,7 +11050,11 @@
         "tests/browser/fixtures/ant-design-table-hover-observation.json",
         "tests/browser/table-header.spec.ts",
         "tests/package/table-header.ssr.test.ts",
-        "tests/browser/fixtures/ant-design-table-header-reference.json"
+        "tests/browser/fixtures/ant-design-table-header-reference.json",
+        "src/lib/table.types.ts",
+        "tests/package/table-column-classes.ssr.test.ts",
+        "tests/browser/table-column-classes.spec.ts",
+        "tests/browser/fixtures/ant-design-table-column-classes-reference.json"
       ],
       "features": [
         {
@@ -11150,6 +11154,20 @@
             "tests/browser/fixtures/ant-design-table-header-reference.json"
           ],
           "note": "Default true; false удаляет thead, сохраняя caption/title/footer, row state и controls. Source ant-table-no-header только при false и отсутствии title, включая пустой snippet. Fixed/expanded measurement берёт обычную body row и перевязывает ResizeObserver при смене данных; empty/restore и LTR/RTL проверяются в браузере. Header filter удаляется при скрытии; дополнительные callbacks не создаются."
+        },
+        {
+          "id": "column-class-name",
+          "title": "ClassName заголовка и ячеек колонки",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Table.svelte",
+            "src/lib/table.types.ts",
+            "tests/package/table-column-classes.ssr.test.ts",
+            "tests/browser/table-column-classes.spec.ts",
+            "tests/browser/fixtures/ant-design-table-column-classes-reference.json"
+          ],
+          "note": "Column className дополняет head/body cell classes, не затрагивая служебные selection/expand колонки. Несколько/пустые/отсутствующие классы, sort/selected/fixed, empty и RTL сверены с UMD; updates сохраняют cell/editor DOM, selection/focus и FormData. Остальной расширенный column API переносится отдельно."
         }
       ]
     },

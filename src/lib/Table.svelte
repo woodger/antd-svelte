@@ -446,6 +446,7 @@
                 {@const fixed = fixedCells[columnIndex + dataOffset]}
                 <th scope="col" class={[
                     'ant-table-cell',
+                    column.className,
                     fixed.side
                     && `table-fixed-cell ant-table-cell-fix ant-table-cell-fix-${fixed.side}`,
                     sortable && 'ant-table-column-has-sorters',
@@ -529,6 +530,7 @@
                   {@const fixed = fixedCells[columnIndex + dataOffset]}
                   <td class={[
                       'ant-table-cell',
+                      column.className,
                       fixed.side
                       && `table-fixed-cell ant-table-cell-fix ant-table-cell-fix-${fixed.side}`,
                       tableData.sorter?.columnKey === column.key && 'ant-table-column-sort'

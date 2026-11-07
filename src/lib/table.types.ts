@@ -30,6 +30,8 @@ export interface TableColumn<Row extends object> {
   onFilter?: (value: TableFilterValue, record: Row) => boolean;
   filterMultiple?: boolean;
   align?: 'left' | 'center' | 'right';
+  /** Дополняет классы заголовка и каждой ячейки данных этой колонки. */
+  className?: string;
   width?: number | string;
   fixed?: TableFixed;
 }

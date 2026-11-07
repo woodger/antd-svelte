@@ -8934,7 +8934,14 @@ primary-hover, disabled — disabled-цвет. Переменные цветов
 `keyof Row`; null/undefined отображаются пустой строкой, остальные значения —
 через безопасное текстовое преобразование. `render(record, index)` заменяет
 содержимое ячейки типизированным snippet; index начинается с 0 на текущей
-странице. Колонка также принимает `width` и `align`.
+странице. Колонка также принимает `width`, `align` и `className`. Поле `className`
+дополняет классы заголовка и ячеек данных своей колонки; служебные selection/expand
+колонки его не получают. Сортировка, selected/fixed classes и native semantics
+сохраняются. Обновление класса не пересоздаёт ячейку или snippet editor.
+8 состояний официального UMD сверяются в
+[browser](tests/browser/table-column-classes.spec.ts), серверная разметка —
+в [SSR](tests/package/table-column-classes.ssr.test.ts).
+Fixture `?fixture=table-column-classes`.
 
 `rowKey` задаёт поле или функцию получения ключа, по умолчанию используется
 поле `key`. Ключ должен быть уникальной строкой или конечным числом; `0`

@@ -9,6 +9,9 @@
 
 ### Added
 
+- TableColumn.className: пользовательские классы заголовка и ячеек своей колонки,
+  с сохранением sort/fixed/selection classes и DOM редактора при обновлении.
+
 - Grid: глобальные screen tokens управляют Row observer и scoped Col media CSS,
   включая SSR без JavaScript, вложенные/соседние темы и обновление после mount.
   Сохранены source-пороги screen*/screen*Min, reset-классы и приоритет локальных
