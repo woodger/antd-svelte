@@ -23,26 +23,23 @@ describe('Descriptions SSR', () => {
           layout,
           bordered: true,
           column: 1,
-          labelStyle: 'color:red',
           styles: { label: 'color:green', content: 'color:red' },
           items: [
             {
               label: 'Product',
               children: 'Database',
               style: 'background:yellow',
-              labelStyle: 'color:blue',
-              contentStyle: 'color:purple',
-              styles: { content: 'color:black' }
+              styles: { label: 'color:blue', content: 'color:black' }
             }
           ]
         }
       }).body;
 
       expect(body).toMatch(
-        /<th[^>]*class="ant-descriptions-item-label"[^>]*style="background:yellow;color:red;color:green;color:blue"[^>]*>.*?<span>.*?Product/s
+        /<th[^>]*class="ant-descriptions-item-label"[^>]*style="background:yellow;color:green;color:blue"[^>]*>.*?<span>.*?Product/s
       );
       expect(body).toMatch(
-        /<td[^>]*class="ant-descriptions-item-content"[^>]*style="background:yellow;color:red;color:purple;color:black"[^>]*>.*?<span>.*?Database/s
+        /<td[^>]*class="ant-descriptions-item-content"[^>]*style="background:yellow;color:red;color:black"[^>]*>.*?<span>.*?Database/s
       );
       expect(body).not.toContain('<span style=');
     }

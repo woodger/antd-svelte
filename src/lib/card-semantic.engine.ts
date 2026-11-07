@@ -3,7 +3,7 @@ import type { CardConfig, CardMetaConfig, CardProps, CardMetaProps, CardSlots, C
 
 import { mergeComponentSemantics } from './semantic-style.engine';
 
-/** Порядок useMergeSemantic Card; legacy header/body остаются ниже merged semantic styles. */
+/** Порядок текущих useMergeSemantic слоёв Card. */
 export function cardSemantics(context: CardConfig | undefined, props: CardProps) {
   return mergeComponentSemantics<keyof CardSlots, CardProps>(context, props,
     ['root', 'header', 'body', 'title', 'extra', 'actions', 'cover']);

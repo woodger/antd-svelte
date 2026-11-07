@@ -23,9 +23,6 @@
     size,
     type,
     variant,
-    bordered,
-    headStyle,
-    bodyStyle,
     containGrid,
     tabList,
     activeTabKey = $bindable(),
@@ -42,7 +39,7 @@
     ...rest
   }: CardProps = $props();
   const config = useConfig();
-  const variantContext = useVariant('card', () => ({ variant, bordered }));
+  const variantContext = useVariant('card', () => ({ variant }));
   const componentTheme = useComponentTheme('Card');
   const focus = createSkeletonFocus();
   let body = $state<HTMLDivElement>();
@@ -65,9 +62,6 @@
         size: mergedSize,
         type,
         variant: mergedVariant as CardProps['variant'],
-        bordered,
-        headStyle,
-        bodyStyle,
         containGrid,
         tabList,
         activeTabKey,
@@ -138,7 +132,7 @@
     ]}
   style={[componentTheme.style, slots.root].filter(Boolean).join(';')}>
   {#if cardHasContent(title) || cardHasContent(extra) || tabList}
-    <div class={['ant-card-head', classes.header]} style={[headStyle, slots.header].filter(Boolean).join(';')}>
+    <div class={['ant-card-head', classes.header]} style={slots.header ?? ''}>
       <div class="ant-card-head-wrapper">
         {#if cardHasContent(title)}<div class={['ant-card-head-title', classes.title]} style={slots.title}>{@render value(title)}</div>{/if}
         {#if cardHasContent(extra)}<div class={['ant-card-extra', classes.extra]} style={slots.extra}>{@render value(extra)}</div>{/if}
@@ -150,7 +144,7 @@
   {#if cardHasContent(cover)}<div class={['ant-card-cover', classes.cover]} style={slots.cover}>{@render value(cover)}</div>{/if}
   {#if loading || children}
     <!-- svelte-ignore a11y_no_noninteractive_tabindex (Фокус парковки при замене содержимого Skeleton.) -->
-    <div bind:this={body} class={['ant-card-body', classes.body]} style={[bodyStyle, slots.body].filter(Boolean).join(';')} tabindex="-1" aria-busy={loading || undefined}>
+    <div bind:this={body} class={['ant-card-body', classes.body]} style={slots.body ?? ''} tabindex="-1" aria-busy={loading || undefined}>
       {#if loading}<Skeleton active title={false} paragraph={{ rows: 4 }} />{:else}{@render children?.()}{/if}
     </div>
   {/if}

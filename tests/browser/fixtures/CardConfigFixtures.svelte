@@ -77,8 +77,6 @@
               root: `native-defaults-${props.loading}-${props.hoverable}-${typeof props.tabProps}`
             }) : localCard.classNames}
             {size} {variant}
-            headStyle={current.legacy ? 'padding-top:21px;color:#0000ff' : undefined}
-            bodyStyle={current.legacy ? 'padding-top:21px;color:#0000ff' : undefined}
             tabList={tabs ? [{ key: 'one', label: 'One' }, { key: 'two', label: 'Two' }] : undefined}
             defaultActiveTabKey="one" bind:activeTabKey={active} onTabChange={() => { changes++; }}>
             <CardMeta {...localMeta} {avatar} title={showTitle ? 'Meta title' : ''} {description} />

@@ -5,7 +5,7 @@
     "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
     "source": "package/dist/antd.min.js",
     "reactVersion": "18.3.1",
-    "operation": "Unmodified UMD: raw six semantic slots, all label/content cells, tags/colspans, computed properties and ordered custom classes; context/local/function/root/legacy/item layers, record replacement and themes. Explicit native flags and componentSize=medium; omitted default props observed separately."
+    "operation": "Unmodified UMD: raw six semantic slots, all label/content cells, tags/colspans, computed properties and ordered custom classes; context/local/function/root/current item layers, record replacement and themes. Explicit native flags and componentSize=medium; omitted default props observed separately."
   },
   "cases": [
     {
@@ -2710,510 +2710,9 @@
       }
     },
     {
-      "name": "legacy-cells",
-      "legacy": true,
-      "expected": {
-        "root": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [],
-            "styles": {
-              "color": "rgba(0, 0, 0, 0.88)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "0px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "header": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [],
-            "styles": {
-              "color": "rgba(0, 0, 0, 0.88)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "0px",
-              "margin-top": "0px",
-              "margin-bottom": "20px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "title": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [],
-            "styles": {
-              "color": "rgba(0, 0, 0, 0.88)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "0px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "extra": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [],
-            "styles": {
-              "color": "rgba(0, 0, 0, 0.88)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "0px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "label": [
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [],
-            "styles": {
-              "color": "rgb(0, 0, 255)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "21px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [],
-            "styles": {
-              "color": "rgb(0, 0, 255)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "21px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 2,
-            "classes": [],
-            "styles": {
-              "color": "rgb(0, 0, 255)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "21px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "content": [
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [],
-            "styles": {
-              "color": "rgb(0, 0, 255)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "22px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [],
-            "styles": {
-              "color": "rgb(0, 0, 255)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "22px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 2,
-            "classes": [],
-            "styles": {
-              "color": "rgb(0, 0, 255)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "22px",
-              "margin-top": "0px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "context-over-legacy",
-      "context": "objects",
-      "legacy": true,
-      "expected": {
-        "root": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [
-              "context-descriptions-plain",
-              "context-descriptions-root"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "header": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [
-              "context-descriptions-header"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "20px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "title": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [
-              "context-descriptions-title"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "extra": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [
-              "context-descriptions-extra"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "label": [
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [
-              "context-descriptions-label"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [
-              "context-descriptions-label"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 2,
-            "classes": [
-              "context-descriptions-label"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "content": [
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [
-              "context-descriptions-content"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [
-              "context-descriptions-content"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 2,
-            "classes": [
-              "context-descriptions-content"
-            ],
-            "styles": {
-              "color": "rgb(114, 46, 209)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "15px",
-              "margin-top": "5px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ]
-      }
-    },
-    {
-      "name": "local-over-legacy",
-      "context": "objects",
-      "local": "objects",
-      "legacy": true,
-      "expected": {
-        "root": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [
-              "context-descriptions-plain",
-              "context-descriptions-root",
-              "local-descriptions-root",
-              "local-descriptions-plain"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "header": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [
-              "context-descriptions-header",
-              "local-descriptions-header"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "20px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "title": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [
-              "context-descriptions-title",
-              "local-descriptions-title"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "extra": [
-          {
-            "tag": "div",
-            "colspan": null,
-            "classes": [
-              "context-descriptions-extra",
-              "local-descriptions-extra"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "label": [
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [
-              "context-descriptions-label",
-              "local-descriptions-label"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [
-              "context-descriptions-label",
-              "local-descriptions-label"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 2,
-            "classes": [
-              "context-descriptions-label",
-              "local-descriptions-label"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ],
-        "content": [
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [
-              "context-descriptions-content",
-              "local-descriptions-content"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 1,
-            "classes": [
-              "context-descriptions-content",
-              "local-descriptions-content"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          },
-          {
-            "tag": "span",
-            "colspan": 2,
-            "classes": [
-              "context-descriptions-content",
-              "local-descriptions-content"
-            ],
-            "styles": {
-              "color": "rgb(135, 56, 0)",
-              "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "25px",
-              "margin-top": "7px",
-              "margin-bottom": "0px",
-              "opacity": "1"
-            }
-          }
-        ]
-      }
-    },
-    {
       "name": "item-overrides",
       "context": "objects",
       "local": "objects",
-      "legacy": true,
       "item": true,
       "expected": {
         "root": [
@@ -3302,7 +2801,7 @@
             "styles": {
               "color": "rgb(196, 29, 127)",
               "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "31px",
+              "padding-top": "25px",
               "margin-top": "11px",
               "margin-bottom": "0px",
               "opacity": "1"
@@ -3353,7 +2852,7 @@
             "styles": {
               "color": "rgb(56, 158, 13)",
               "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "33px",
+              "padding-top": "25px",
               "margin-top": "13px",
               "margin-bottom": "0px",
               "opacity": "1"
@@ -3398,7 +2897,6 @@
       "name": "bordered-item-overrides",
       "context": "objects",
       "local": "objects",
-      "legacy": true,
       "item": true,
       "bordered": true,
       "expected": {
@@ -3488,7 +2986,7 @@
             "styles": {
               "color": "rgb(196, 29, 127)",
               "background-color": "rgba(0, 0, 0, 0.02)",
-              "padding-top": "31px",
+              "padding-top": "25px",
               "margin-top": "11px",
               "margin-bottom": "0px",
               "opacity": "1"
@@ -3539,7 +3037,7 @@
             "styles": {
               "color": "rgb(56, 158, 13)",
               "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "33px",
+              "padding-top": "25px",
               "margin-top": "13px",
               "margin-bottom": "0px",
               "opacity": "1"
@@ -3584,7 +3082,6 @@
       "name": "vertical-item-overrides",
       "context": "objects",
       "local": "objects",
-      "legacy": true,
       "item": true,
       "bordered": true,
       "layout": "vertical",
@@ -3675,7 +3172,7 @@
             "styles": {
               "color": "rgb(196, 29, 127)",
               "background-color": "rgba(0, 0, 0, 0.02)",
-              "padding-top": "31px",
+              "padding-top": "25px",
               "margin-top": "11px",
               "margin-bottom": "0px",
               "opacity": "1"
@@ -3726,7 +3223,7 @@
             "styles": {
               "color": "rgb(56, 158, 13)",
               "background-color": "rgba(0, 0, 0, 0)",
-              "padding-top": "33px",
+              "padding-top": "25px",
               "margin-top": "13px",
               "margin-bottom": "0px",
               "opacity": "1"

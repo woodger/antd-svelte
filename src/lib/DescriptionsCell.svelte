@@ -9,9 +9,7 @@
     bordered,
     colon,
     classNames,
-    styles,
-    labelStyle,
-    contentStyle
+    styles
   }: {
     item: ResolvedDescriptionsItem;
     component: 'th' | 'td';
@@ -21,21 +19,12 @@
     colon: boolean;
     classNames: DescriptionsCellSlots;
     styles: DescriptionsCellSlots;
-    labelStyle?: string;
-    contentStyle?: string;
   } = $props();
   let label = $derived(kind !== 'content' ? item.label : undefined);
   let content = $derived(kind !== 'label' ? item.children : undefined);
   let merged = $derived({
-    label: [labelStyle, styles.label, item.labelStyle, item.styles?.label].filter(Boolean).join(
-      ';'
-    ),
-    content: [contentStyle, styles.content, item.contentStyle, item.styles?.content].filter(
-      Boolean
-    )
-      .join(
-        ';'
-      )
+    label: [styles.label, item.styles?.label].filter(Boolean).join(';'),
+    content: [styles.content, item.styles?.content].filter(Boolean).join(';')
   });
 </script>
 

@@ -57,14 +57,12 @@
           {loading}
           bind:activeTabKey
           variant={borderless ? 'borderless' : undefined}
-          bodyStyle="padding:0"
-          headStyle="padding:0"
           styles={styled
             ? { header: 'padding:10px', body: 'padding:20px', title: 'color:rgb(1, 2, 3)' }
-            : undefined}
+            : { header: 'padding:0', body: 'padding:0' }}
           tabList={showTabs
             ? [
-              { key: '', tab: 'Alpha' },
+              { key: '', label: 'Alpha' },
               { key: 'locked', label: 'Locked', disabled: true },
               { key: 'beta', label: 'Beta' }
             ]

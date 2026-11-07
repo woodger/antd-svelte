@@ -6,7 +6,6 @@ export function cardHasContent(value: CardContent | undefined): boolean {
 }
 export function cardTabItems(items: CardProps['tabList']): TabsItem[] {
   return (items ?? []).map(item => {
-    const { tab, ...rest } = item;
-    return { ...rest, label: Object.hasOwn(item, 'label') ? item.label ?? null : tab ?? '' };
+    return { ...item, label: Object.hasOwn(item, 'label') ? item.label ?? null : '' };
   });
 }

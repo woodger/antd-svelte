@@ -31,7 +31,6 @@ export type CardSemantic = CardSlots | ((info: { props: CardProps; }) => CardSlo
 export type CardMetaSemantic = CardMetaSlots | ((info: { props: CardMetaProps; }) => CardMetaSlots);
 export interface CardTabItem extends Omit<TabsItem, 'label'> {
   label?: TabsContent;
-  tab?: TabsContent;
 }
 /** Карточка с title/extra/actions, tabs и сохранением содержимого при loading. */
 export interface CardProps extends Omit<
@@ -49,11 +48,8 @@ export interface CardProps extends Omit<
   hoverable?: boolean;
   size?: ComponentSize;
   type?: 'inner';
-  /** Локальный вариант перекрывает bordered=false, Form и ConfigProvider. */
+  /** Локальный вариант перекрывает Form и ConfigProvider. */
   variant?: 'outlined' | 'borderless';
-  bordered?: boolean;
-  headStyle?: string;
-  bodyStyle?: string;
   containGrid?: boolean;
   tabList?: readonly CardTabItem[];
   /** Поддерживает bind:activeTabKey. */

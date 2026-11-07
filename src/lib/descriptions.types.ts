@@ -25,8 +25,6 @@ export interface DescriptionsItem {
   span?: number | 'filled' | GridResponsive<number>;
   class?: string;
   style?: string;
-  labelStyle?: string;
-  contentStyle?: string;
   classNames?: DescriptionsCellSlots;
   styles?: DescriptionsCellSlots;
 }
@@ -46,8 +44,6 @@ export interface DescriptionsProps extends Omit<
   /** @defaultValue true */
   colon?: boolean;
   size?: ComponentSize;
-  labelStyle?: string;
-  contentStyle?: string;
   classNames?: DescriptionsSemantic;
   /** Root: context semantic → context style → local semantic → local style. */
   styles?: DescriptionsSemantic;

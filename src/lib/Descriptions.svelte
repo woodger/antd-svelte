@@ -17,8 +17,6 @@
     bordered = false,
     colon = true,
     size,
-    labelStyle,
-    contentStyle,
     classNames,
     styles,
     class: className = '',
@@ -45,8 +43,6 @@
         bordered,
         colon,
         size: mergedSize,
-        labelStyle,
-        contentStyle,
         classNames,
         styles,
         class: className,
@@ -88,12 +84,12 @@
     {#each rows as row}
       {#if layout === 'vertical'}
         {#each ['label', 'content'] as kind}
-          <tr class="ant-descriptions-row">{#each row as item, index (item.key ?? index)}<DescriptionsCell {item} component={kind === 'label' ? 'th' : 'td'} kind={kind as 'label' | 'content'} span={item.span ?? 1} {bordered} {colon} classNames={classes} styles={slots} {labelStyle} {contentStyle} />{/each}</tr>
+          <tr class="ant-descriptions-row">{#each row as item, index (item.key ?? index)}<DescriptionsCell {item} component={kind === 'label' ? 'th' : 'td'} kind={kind as 'label' | 'content'} span={item.span ?? 1} {bordered} {colon} classNames={classes} styles={slots} />{/each}</tr>
         {/each}
       {:else}
         <tr class="ant-descriptions-row">{#each row as item, index (item.key ?? index)}
-          {#if bordered}<DescriptionsCell {item} component="th" kind="label" span={1} {bordered} {colon} classNames={classes} styles={slots} {labelStyle} {contentStyle} />{/if}
-          <DescriptionsCell {item} component="td" kind={bordered ? 'content' : 'item'} span={bordered ? (item.span ?? 1) * 2 - 1 : item.span ?? 1} {bordered} {colon} classNames={classes} styles={slots} {labelStyle} {contentStyle} />
+          {#if bordered}<DescriptionsCell {item} component="th" kind="label" span={1} {bordered} {colon} classNames={classes} styles={slots} />{/if}
+          <DescriptionsCell {item} component="td" kind={bordered ? 'content' : 'item'} span={bordered ? (item.span ?? 1) * 2 - 1 : item.span ?? 1} {bordered} {colon} classNames={classes} styles={slots} />
         {/each}</tr>
       {/if}
     {/each}

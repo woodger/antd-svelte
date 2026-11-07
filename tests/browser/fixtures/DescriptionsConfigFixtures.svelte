@@ -29,8 +29,6 @@
     ? 'vertical' : 'horizontal');
   let items = $derived<DescriptionsItem[]>([
     { key: 'one', label: 'First', children: editor, ...(current.item ? {
-      labelStyle: 'color:#d4380d;padding-top:31px',
-      contentStyle: 'color:#0050b3;padding-top:33px',
       classNames: { label: 'item-label', content: 'item-content' },
       styles: { label: 'color:#c41d7f;margin-top:11px',
         content: 'color:#389e0d;margin-top:13px' }
@@ -71,9 +69,7 @@
           layout={probeDefaults ? undefined : layout} colon={probeDefaults ? undefined : true}
           classNames={probeDefaults ? ({ props }) => ({
             root: `native-descriptions-${props.bordered}-${props.layout}-${props.colon}`
-          }) : local.classNames}
-          labelStyle={current.legacy ? 'color:#0000ff;padding-top:21px' : undefined}
-          contentStyle={current.legacy ? 'color:#0000ff;padding-top:22px' : undefined} />
+          }) : local.classNames} />
       </form>
     </ConfigProvider>
   </ConfigProvider>

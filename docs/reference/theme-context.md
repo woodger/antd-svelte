@@ -423,7 +423,7 @@ paragraphMarginTop=marginLG+marginXXS. Deprecated color/colorGradientEnd обн�
 Avatar/Button/Input, поддерживают local prefixCls и object root/content semantic slots;
 style относится к content после styles.content. Main Skeleton поддерживает отдельный
 ConfigProvider.skeleton и object/function root/header/section/avatar/title/paragraph.
-Его root styles: context styles.root → context style → local styles.root; legacy local
+Его root styles: context styles.root → context style → local styles.root; local
 class/style остаются на native host. Local prefix меняет классы декоративного каркаса,
 nativeElement/ref указывают на него; при loading=false каркас отсутствует.
 Main сохраняет native host/status/focus, title/div, flex/responsive guards и normalization.

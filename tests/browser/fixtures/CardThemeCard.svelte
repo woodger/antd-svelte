@@ -13,9 +13,7 @@
   size={kind === 'small' || kind === 'small-inner' ? 'small' : undefined}
   type={kind === 'inner' || kind === 'small-inner' ? 'inner' : undefined}
   loading={kind === 'loading'} actions={[action]}
-  tabList={kind === 'tabs' ? [{ key: 'a', tab: 'Alpha' }, { key: 'b', tab: 'Beta' }] : undefined}
-  bodyStyle={priority ? 'padding:17px' : undefined}
-  headStyle={priority ? 'min-height:91px;padding:17px' : undefined}
+  tabList={kind === 'tabs' ? [{ key: 'a', label: 'Alpha' }, { key: 'b', label: 'Beta' }] : undefined}
   style={priority ? 'background-color:rgb(11, 12, 13)' : undefined}
   styles={priority ? {
     root: 'background-color:rgb(7, 8, 9)',

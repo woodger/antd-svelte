@@ -13,8 +13,6 @@
       label: 'Name',
       children: content,
       span: id === 'responsive' ? { xs: 1, md: 2 } : 1,
-      labelStyle: priority ? 'color:#237804' : undefined,
-      contentStyle: priority ? 'color:#c41d7f' : undefined,
       styles: priority ? { label: 'color:#531dab', content: 'color:#ad4e00' } : undefined
     },
     { key: 'b', label: 'Status', children: 'Active' },
@@ -29,8 +27,6 @@
   layout={kind.startsWith('vertical') ? 'vertical' : 'horizontal'}
   size={kind.startsWith('small') ? 'small' : kind.startsWith('medium') ? 'medium' : undefined}
   style={priority ? '--ant-descriptions-colon-margin-left:17px' : undefined}
-  labelStyle={priority ? 'color:#08979c' : undefined}
-  contentStyle={priority ? 'color:#08979c' : undefined}
   styles={priority ? {
     root: '--ant-descriptions-colon-margin-left:13px',
     header: 'margin-bottom:37px',

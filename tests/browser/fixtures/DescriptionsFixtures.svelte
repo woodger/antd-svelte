@@ -44,7 +44,6 @@
         {colon}
         layout={vertical ? 'vertical' : 'horizontal'}
         column={responsive ? { xs: 1, sm: 2, md: 3, xl: 4 } : 3}
-        labelStyle="color:red"
         styles={{ label: 'color:green' }}
         items={[
           {
@@ -52,9 +51,7 @@
             label: 'Product',
             children: 'Cloud database',
             style: 'background:rgb(255, 255, 0)',
-            labelStyle: 'color:blue',
-            contentStyle: 'color:purple',
-            styles: { content: 'color:rgb(1, 2, 3)' }
+            styles: { label: 'color:blue', content: 'color:rgb(1, 2, 3)' }
           },
           { key: 'zero', label: 0, children: 0, span: responsive ? { md: 2 } : 1 },
           { key: 'draft', label: 'Draft', children: draft, span: 'filled' },

@@ -14,15 +14,7 @@ const cases: [string, VariantOptions][] = [
   }],
   ['local-over-form', {
     globalVariant: 'underlined', componentVariant: 'filled', formVariant: 'borderless', variant: 'outlined'
-  }],
-  ['legacy-borderless', { bordered: false }],
-  ['legacy-over-form', {
-    globalVariant: 'underlined', componentVariant: 'filled', formVariant: 'outlined', bordered: false
-  }],
-  ['bordered-true-inherits-form', {
-    globalVariant: 'underlined', componentVariant: 'filled', formVariant: 'borderless', bordered: true
-  }],
-  ['local-over-legacy', { globalVariant: 'borderless', variant: 'outlined', bordered: false }]
+  }]
 ];
 
 describe('Variant source priorities', () => {

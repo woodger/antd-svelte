@@ -29,7 +29,7 @@
 
 {#snippet controls()}
   <ConfigVariantControls variant={configVariant(current.localVariant)}
-    bordered={current.bordered} onChanged={() => { changes++; }} />
+    onChanged={() => { changes++; }} />
 {/snippet}
 
 <section id="config-variants-fixture">

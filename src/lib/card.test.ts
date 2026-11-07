@@ -25,13 +25,12 @@ describe('Card SSR', () => {
     }
   );
   it(
-    'uses explicit variant before legacy bordered and passes merged values to semantic callbacks',
+    'passes resolved variant and size to semantic callbacks',
     () => {
       const body = render(
         Card,
         {
           props: {
-            bordered: false,
             variant: 'outlined',
             size: 'small',
             classNames: ({ props }) => ({ root: `variant-${props.variant}-size-${props.size}` })
@@ -41,7 +40,7 @@ describe('Card SSR', () => {
 
       expect(body).toContain('ant-card-bordered');
       expect(body).toContain('variant-outlined-size-small');
-      expect(render(Card, { props: { bordered: false } }).body).not.toContain(
+      expect(render(Card, { props: { variant: 'borderless' } }).body).not.toContain(
         'ant-card-bordered'
       );
     }
@@ -57,7 +56,7 @@ describe('Card SSR', () => {
     }
   );
   it(
-    'merges root styles after semantic root and semantic body/header after legacy styles',
+    'merges root style after semantic root and applies semantic body/header styles',
     () => {
       const children = createRawSnippet(() => ({ render: () => '<p>Content</p>' }));
       const body = render(
@@ -67,16 +66,14 @@ describe('Card SSR', () => {
             title: 'Title',
             children,
             style: 'color:blue',
-            headStyle: 'padding:2px',
-            bodyStyle: 'padding:3px',
             styles: { root: 'color:red', header: 'padding:4px', body: 'padding:5px' }
           }
         }
       ).body;
 
       expect(body).toContain('color:red;color:blue');
-      expect(body).toContain('padding:2px;padding:4px');
-      expect(body).toContain('padding:3px;padding:5px');
+      expect(body).toContain('padding:4px');
+      expect(body).toContain('padding:5px');
     }
   );
   it(
@@ -106,7 +103,7 @@ describe('Card SSR', () => {
         Card,
         {
           props: {
-            tabList: [{ key: '', tab: 'First' }, { key: 'b', label: 'Second' }],
+            tabList: [{ key: '', label: 'First' }, { key: 'b', label: 'Second' }],
             defaultActiveTabKey: '',
             tabProps: { defaultActiveKey: 'b' }
           }
@@ -156,21 +153,21 @@ describe('Card SSR', () => {
 
 describe('Card tab adaptation', () => {
   it(
-    'prioritizes explicit label, including null and undefined, over the legacy tab property',
+    'preserves current labels, including null and undefined',
     () => {
       expect(
         cardTabItems(
           [
-            { key: 'a', tab: 'Legacy' },
-            { key: 'b', tab: 'Old', label: 'New' },
-            { key: 'c', tab: 'Old', label: null },
-            { key: 'd', tab: 'Old', label: undefined }
+            { key: 'a', label: 'Current' },
+            { key: 'b', label: 'New' },
+            { key: 'c', label: null },
+            { key: 'd', label: undefined }
           ]
         ).map(
           item => item.label
         )
       ).toEqual(
-        ['Legacy', 'New', null, null]
+        ['Current', 'New', null, null]
       );
     }
   );

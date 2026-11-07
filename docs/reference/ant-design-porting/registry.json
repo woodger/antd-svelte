@@ -9174,11 +9174,11 @@
             "src/lib/card.test.ts",
             "tests/browser/card.spec.ts"
           ],
-          "note": "Skeleton заменяет только body; root style > semantic root, header/body semantic > legacy. Фокус body при загрузке и восстановление при unmount — доступная Svelte-адаптация."
+          "note": "Skeleton заменяет только body; root style > semantic root, header/body semantic styles. Фокус body при загрузке и восстановление при unmount — доступная Svelte-адаптация."
         },
         {
           "id": "tabs",
-          "title": "Active/default key, legacy tab label и tabProps/extra",
+          "title": "Active/default key, label и tabProps/extra",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
@@ -9186,7 +9186,7 @@
             "tests/browser/card.spec.ts",
             "tests/browser/tabs.spec.ts"
           ],
-          "note": "Локальные Tabs сохраняют согласованную ручную клавиатурную модель. Размер large/small, defaultActiveTabKey > tabProps.defaultActiveKey, label > legacy tab; левый/правый native extra."
+          "note": "Локальные Tabs сохраняют согласованную ручную клавиатурную модель. Размер large/small, defaultActiveTabKey > tabProps.defaultActiveKey, label; левый/правый native extra."
         },
         {
           "id": "component-theme-tokens",
@@ -9237,7 +9237,7 @@
             "tests/browser/config-variants.spec.ts",
             "tests/package/config-variants.ssr.test.ts"
           ],
-          "note": "Local outlined/borderless и bordered=false перекрывают Form, card.variant и global. Global/Form filled/underlined сохраняют исходную рамку Card; отдельные variants для неё не выдумываются. Semantic callbacks получают разрешённый variant как source, prefix и остальные Tab API остаются в работе."
+          "note": "Local outlined/borderless перекрывают Form, card.variant и global. Global/Form filled/underlined сохраняют исходную рамку Card; отдельные variants для неё не выдумываются. Semantic callbacks получают разрешённый variant как source, prefix и остальные Tab API остаются в работе."
         },
         {
           "id": "component-config",
@@ -9729,7 +9729,7 @@
             "tests/package/descriptions-config.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Source useMergeSemantic: независимый descriptions record с whole-record inheritance/replacement; class/style и object/function classNames/styles. Root layers context semantic, context plain, local semantic, local plain после component variables. Label/content: root legacy, merged root semantic, item legacy, item semantic; bordered cell styles перекрывают item.style. Callbacks читают resolved columns/items/size; старые native defaults остальных props сохранены. Raw UMD содержит все шесть semantic slots, labels/content каждой ячейки, tags/colspans, computed colors/spacing и custom classes для plain/bordered/horizontal/vertical, functions, nested/empty/replaced, item/legacy overrides, variables и algorithms/themes. Исходный порядок classes не переписан: проверки состава/числа сохраняют прежний native class order. Обновления сохраняют первую ячейку/editor DOM, focus/selection и FormData при смене config/column/size; переносимые между строками controls сохраняют прежний remount contract."
+          "note": "Source useMergeSemantic: независимый descriptions record с whole-record inheritance/replacement; class/style и object/function classNames/styles. Root layers context semantic, context plain, local semantic, local plain после component variables. Label/content: merged root semantic, item semantic; bordered cell styles перекрывают item.style. Callbacks читают resolved columns/items/size; старые native defaults остальных props сохранены. Raw UMD содержит все шесть semantic slots, labels/content каждой ячейки, tags/colspans, computed colors/spacing и custom classes для plain/bordered/horizontal/vertical, functions, nested/empty/replaced, item overrides, variables и algorithms/themes. Исходный порядок classes не переписан: проверки состава/числа сохраняют прежний native class order. Обновления сохраняют первую ячейку/editor DOM, focus/selection и FormData при смене config/column/size; переносимые между строками controls сохраняют прежний remount contract."
         },
         {
           "id": "semantic-native-defaults",

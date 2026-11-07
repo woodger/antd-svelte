@@ -952,17 +952,16 @@ ComponentDisabled не меняет read-only поля.
 
 ClassNames/styles поддерживают root/header/title/extra/label/content, объект
 либо callback ({ props }) с разрешёнными column/items/size. У items есть
-class/style, classNames/styles.label/content и legacy labelStyle/contentStyle.
-Приоритет label/content: root legacy style → root semantic style → item legacy
-style → item semantic style. В bordered эти стили относятся к th/td и перекрывают
-item.style; без рамки — к внутренним span. Style корня идёт после styles.root.
+class/style и classNames/styles.label/content.
+Приоритет label/content: root semantic style → item semantic style. В bordered
+эти стили относятся к th/td и перекрывают item.style; без рамки — к внутренним span. Style корня идёт после styles.root.
 Вложенные таблицы сохраняют собственные bordered/size и не получают row-стили
 внешней таблицы. Темы/RTL наследуются через ConfigProvider.
 
 ConfigProvider.descriptions задаёт class/style и object/function classNames/styles
 для тех же semantic slots. Классы context/local объединяются; root style layers:
 context semantic → context style → local semantic → local style. Для ячеек общий
-semantic слой идёт после root legacy и перед item legacy/semantic. Явный вложенный
+semantic слой идёт перед item semantic styles. Явный вложенный
 record, включая {}, заменяет родительский; undefined наследует его. Обновления
 сохраняют editor/focus/selection и FormData первой ячейки при смене column/size.
 Фикстура — `?fixture=descriptions-config`,
@@ -1010,21 +1009,20 @@ Skeleton без title с четырьмя строками; header/cover/actions
 body, он паркуется на body (tabindex=-1, aria-busy); unmount передаёт его соседнему
 control. Это доступная Svelte-адаптация поверх исходной разметки.
 
-Variant=outlined; variant имеет приоритет над legacy bordered=false. Hoverable
+Variant=outlined/borderless. Hoverable
 по умолчанию false, type=inner меняет header/body. Small наследуется из явно
 заданного ConfigProvider.componentSize; medium/large используют
 обычную геометрию. По умолчанию small body/header padding равен 12px;
 остальные размеры/цвета используют theme/compact tokens.
 ClassNames/styles Card принимают root/header/body/extra/title/actions/cover,
 Meta — root/section/avatar/title/description, объект либо callback ({ props }).
-Style корня перекрывает styles.root; styles.header/body перекрывают legacy
-headStyle/bodyStyle. Meta root следует тому же приоритету.
+Style корня перекрывает styles.root; styles.header/body оформляют header/body.
+Meta root следует тому же приоритету.
 
 ConfigProvider.card задаёт variant, class/style и те же semantic classNames/styles;
 ConfigProvider.cardMeta независимо настраивает Meta через class/style и semantic
 slots. Классы context/local объединяются. Стили корня: context semantic → context
-style → local semantic → local style; переменные темы идут перед ними. Для header/body
-все semantic styles, включая context, идут после legacy headStyle/bodyStyle.
+style → local semantic → local style; переменные темы идут перед ними.
 Явный вложенный record, включая {}, заменяет соответствующий родительский целиком;
 undefined наследует его. Обновления сохраняют editors, focus/selection, FormData,
 выбранную вкладку и существующие callbacks. Фикстура — `?fixture=card-config`,
@@ -1055,7 +1053,7 @@ Grid. Meta вне Card не подключает самостоятельные 
 
 TabList задаёт заголовки Tabs, а body остаётся children Card; выбор поддерживает
 bind:activeTabKey/onTabChange. DefaultActiveTabKey (включая пустую строку) имеет
-приоритет над tabProps.defaultActiveKey. Label перекрывает legacy tab, включая
+приоритет над tabProps.defaultActiveKey. Label задаёт заголовок, включая
 явные null/undefined. Размер вкладок large или small по размеру Card;
 tabProps.size переопределяет его. Card переопределяет tabProps items/class/onChange/
 tabBarExtraContent; остальные поддерживаемые Tabs props передаются. Верхний
