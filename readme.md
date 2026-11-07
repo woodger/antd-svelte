@@ -3372,6 +3372,8 @@ DEV diagnostics пока не поддерживаются.
 
 Modal сохраняет нативный dialog, `bind:open`, footer/children snippets и существующие
 правила onOk/onCancel, confirmLoading, Escape и закрытия по фону.
+Закрытие по фону настраивается через mask={{ closable: false }}; по умолчанию
+разрешено. Прежний maskClosable удалён. Остальные настройки mask пока не перенесены.
 
 `theme.components.Modal` настраивает header/content/footer background, title color,
 font size/line height, внутренние отступы и wireframe. Поддерживаются aliases,

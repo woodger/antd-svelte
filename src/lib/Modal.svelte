@@ -23,8 +23,8 @@
     closable?: boolean;
     /** @defaultValue true */
     keyboard?: boolean;
-    /** @defaultValue true */
-    maskClosable?: boolean;
+    /** Пока перенесён только closable; по умолчанию true. */
+    mask?: { closable?: boolean; };
     /** @defaultValue false */
     confirmLoading?: boolean;
     okText?: string;
@@ -47,7 +47,7 @@
     width = 520,
     closable = true,
     keyboard = true,
-    maskClosable = true,
+    mask,
     confirmLoading = false,
     okText,
     cancelText,
@@ -122,7 +122,7 @@
   }
 
   function handlePointerUp(event: PointerEvent) {
-    if (maskClosable && backdropPointer && isBackdrop(event)) {
+    if (mask?.closable !== false && backdropPointer && isBackdrop(event)) {
       cancel();
     }
 

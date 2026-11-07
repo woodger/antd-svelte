@@ -172,7 +172,7 @@
           title="Fixture modal"
           confirmLoading={controls.modalLoading}
           keyboard={controls.keyboard}
-          maskClosable={controls.maskClosable}
+          mask={{ closable: controls.maskClosable }}
           onCancel={controls.cancelModal}
           onOk={() => { void controls.confirmModal(); }}
         >

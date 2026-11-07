@@ -9,6 +9,9 @@
 
 ### Removed
 
+- У Modal удалён maskClosable; закрытие по фону настраивается через mask.closable.
+  Сохранены native dialog, pointer origin, callbacks и возврат фокуса.
+
 - У DatePicker/RangePicker/TimePicker/TimeRangePicker удалены popupClassName,
   popupStyle/dropdownClassName, showToday, прямые disabledHours/Minutes/Seconds,
   прежний clearIcon (включая timePicker config), addon/onSelect и deprecated
