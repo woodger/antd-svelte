@@ -695,7 +695,7 @@ providers изолированы. Size выбирает обычный, малы
 
 ConfigProvider.spin содержит indicator, class/style и semantic classNames/styles.
 Record наследуется целиком при undefined и заменяется явным объектом. Semantic slots
-root/section/indicator/description/container и deprecated tip/mask повторяют исходные
+root/section/indicator/description/container повторяют исходные
 ветви standalone/children/fullscreen. Внутри root сохраняется порядок provider styles.root,
 provider style и local styles.root; затем идут standalone section/fullscreen mask и local style.
 Snippet indicator получает вычисленный percent и оформляется через декоративный dot span.

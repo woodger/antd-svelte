@@ -24,7 +24,7 @@
       "name": "Button",
       "category": "general",
       "scope": "target",
-      "scopeReason": "Автономный полный перенос: аудит Button, расширение API и deprecated Group с сохранением native loading v1.",
+      "scopeReason": "Автономный полный перенос: аудит текущего Button API с сохранением native loading v1.",
       "upstreamPath": "components/button",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -916,7 +916,7 @@
             "tests/package/divider-config.ssr.test.ts",
             "tests/package/DividerConfigTypes.svelte"
           ],
-          "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка выбирает ant-divider. CSS data module из 33 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 28 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider и React development warnings остаются отдельным пробелом."
+          "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка выбирает ant-divider. CSS template из 27 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 26 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider и React development warnings остаются отдельным пробелом."
         },
         {
           "id": "component-theme-tokens",
@@ -1402,7 +1402,7 @@
         },
         {
           "id": "source-theme-tokens",
-          "title": "16 современных component tokens и три deprecated aliases Layout/Sider",
+          "title": "16 текущих component tokens Layout/Sider",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
@@ -1909,7 +1909,7 @@
         },
         {
           "id": "component-theme-tokens",
-          "title": "Три современных компонентных токена и deprecated resizeSpinnerSize",
+          "title": "Три текущих компонентных токена Splitter",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
@@ -2142,7 +2142,7 @@
       "name": "Breadcrumb",
       "category": "navigation",
       "scope": "target",
-      "scopeReason": "Автономный полный перенос: навигационный путь, legacy routes, параметры, Snippet renderer и меню на готовом Dropdown.",
+      "scopeReason": "Автономный полный перенос: навигационный путь, items, параметры, Snippet renderer и меню на готовом Dropdown.",
       "upstreamPath": "components/breadcrumb",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -2598,7 +2598,7 @@
         },
         {
           "id": "source-theme-tokens",
-          "title": "Source Menu defaults/aliases, deprecated mapping и component algorithms",
+          "title": "Source Menu defaults/aliases и component algorithms",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
@@ -2637,11 +2637,11 @@
         },
         {
           "id": "extended-api",
-          "title": "Полный semantic/config, render hooks, tooltip и legacy children API",
+          "title": "Полный semantic/config, render hooks и tooltip",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет prefixCls/component config вне темы, semantic classNames/styles, popupRender/placements/offset, expandIcon/itemIcon overrides, controlled activeKey/defaultActiveFirst, Menu.Item/SubMenu/ItemGroup/Divider children wrappers и полного Tooltip API collapsed items. Standalone Menu не меняет существующий Dropdown menu contract; интеграция остаётся отдельным этапом."
+          "note": "Нет prefixCls/component config вне темы, semantic classNames/styles, popupRender/placements/offset, expandIcon/itemIcon overrides, controlled activeKey/defaultActiveFirst, полного Tooltip API collapsed items. Deprecated Menu.Item/SubMenu/ItemGroup/Divider children wrappers исключены из переноса. Standalone Menu не меняет существующий Dropdown menu contract; интеграция остаётся отдельным этапом."
         },
         {
           "id": "link-reset",
@@ -2775,7 +2775,7 @@
         },
         {
           "id": "size-changer",
-          "title": "Boolean/Select props, threshold и custom/legacy size rendering",
+          "title": "Boolean/Select props, threshold и custom size rendering",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
@@ -5341,7 +5341,7 @@
         },
         {
           "id": "compact-context",
-          "title": "Compact и legacy addons",
+          "title": "Compact composition",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
@@ -5583,11 +5583,11 @@
         },
         {
           "id": "extended-api",
-          "title": "Полный semantic/config API, legacy Option и motion",
+          "title": "Полный semantic/config API и motion",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет semantic classNames/styles/feedback suffix, ConfigProvider.mentions/prefixCls и legacy Mentions.Option children. Native listbox не предоставляет расширенный React Menu/ref API; callbacks получают исходные option data без React-generated key suffix. Rc-trigger motion не переносится этим этапом."
+          "note": "Нет semantic classNames/styles/feedback suffix, ConfigProvider.mentions/prefixCls; deprecated Mentions.Option children исключены из переноса. Native listbox не предоставляет расширенный React Menu/ref API; callbacks получают исходные option data без React-generated key suffix. Rc-trigger motion не переносится этим этапом."
         },
         {
           "id": "render-empty",
@@ -8888,7 +8888,7 @@
         },
         {
           "id": "scalar-text-offset-size",
-          "title": "Scalar text, string CSS offsets и deprecated default size",
+          "title": "Scalar text, string CSS offsets и текущие размеры",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
@@ -9258,7 +9258,7 @@
             "tests/package/card-config.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Legacy head/body стоят ниже merged semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; prefixCls и полный Tabs API не включены."
+          "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Header/body настраиваются через semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; prefixCls и полный Tabs API не включены."
         },
         {
           "id": "semantic-native-defaults",
@@ -9429,7 +9429,7 @@
         },
         {
           "id": "component-theme-tokens",
-          "title": "Семь компонентных токенов и deprecated dotWidthActive",
+          "title": "Семь текущих компонентных токенов Carousel",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
@@ -10467,7 +10467,7 @@
         },
         {
           "id": "content-lifecycle",
-          "title": "Boolean content и destroyOnHidden/legacy lifecycle",
+          "title": "Boolean content и destroyOnHidden lifecycle",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
@@ -10488,7 +10488,7 @@
             "tests/package/avatar-group-popover.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Исходный isReactRenderable: false опускает секцию, true создаёт пустую, 0 отображается. DestroyOnHidden ?? Boolean(destroyTooltipOnHide); keepParent игнорируется, явный false modern prop имеет приоритет. Native default сохраняет прежнее eager/retained содержимое; удаляемые snippets не вызываются при SSR даже при начальном open/defaultOpen. Без forceRender при закрытии сначала возвращается фокус, затем удаляются title/content. Синхронный отказ function binding от открытия не блокирует повторные callbacks. Проверено по 33 UMD-последовательностям AvatarGroup, собственным SSR и standalone browser cases. Source CSSMotion/deadline/fresh cache не входят в эту feature; закрытие остаётся немедленным по прежнему native контракту."
+          "note": "Исходный isReactRenderable: false опускает секцию, true создаёт пустую, 0 отображается. DestroyOnHidden управляет удалением содержимого; deprecated destroyTooltipOnHide исключён. Native default сохраняет прежнее eager/retained содержимое; удаляемые snippets не вызываются при SSR даже при начальном open/defaultOpen. Без forceRender при закрытии сначала возвращается фокус, затем удаляются title/content. Синхронный отказ function binding от открытия не блокирует повторные callbacks. Проверено по 33 UMD-последовательностям AvatarGroup, собственным SSR и standalone browser cases. Source CSSMotion/deadline/fresh cache не входят в эту feature; закрытие остаётся немедленным по прежнему native контракту."
         },
         {
           "id": "corner-placements",
@@ -13030,7 +13030,7 @@
         },
         {
           "id": "source-content-close",
-          "title": "Scalar/array content, legacy aliases и source close priorities",
+          "title": "Scalar/array content и source closable priorities",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
@@ -15654,7 +15654,7 @@
         },
         {
           "id": "menu-theme-tokens",
-          "title": "Source Menu defaults/aliases, deprecated mapping и component algorithms",
+          "title": "Source Menu defaults/aliases и component algorithms",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
@@ -15801,7 +15801,7 @@
             "tests/package/tabs-semantic.ssr.test.ts",
             "tests/browser/tabs-semantic.spec.ts"
           ],
-          "note": "Tabs class/style/classNames/styles, indicator/indicatorSize и add/remove/more icons. Отсутствующий config наследуется; явный record заменяется целиком. Глобальный more использует только icon по Ant Design 6.6.8. Общий аудит ConfigProvider продолжается."
+          "note": "Tabs class/style/classNames/styles, indicator и add/remove/more icons. Отсутствующий config наследуется; явный record заменяется целиком. Глобальный more использует только icon по Ant Design 6.6.8. Общий аудит ConfigProvider продолжается."
         },
         {
           "id": "popup-container",
@@ -15988,7 +15988,7 @@
             "tests/package/divider-config.ssr.test.ts",
             "tests/package/DividerConfigTypes.svelte"
           ],
-          "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка выбирает ant-divider. CSS data module из 33 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 28 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider и React development warnings остаются отдельным пробелом."
+          "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка выбирает ant-divider. CSS template из 27 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 26 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider и React development warnings остаются отдельным пробелом."
         },
         {
           "id": "flex-component-config",
@@ -16190,7 +16190,7 @@
             "tests/package/card-config.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Legacy head/body стоят ниже merged semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; prefixCls и полный Tabs API не включены."
+          "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Header/body настраиваются через semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; prefixCls и полный Tabs API не включены."
         },
         {
           "id": "descriptions-component-config",
@@ -16211,7 +16211,7 @@
             "tests/package/descriptions-config.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Source useMergeSemantic: независимый descriptions record с whole-record inheritance/replacement; class/style и object/function classNames/styles. Root layers context semantic, context plain, local semantic, local plain после component variables. Label/content: root legacy, merged root semantic, item legacy, item semantic; bordered cell styles перекрывают item.style. Callbacks читают resolved columns/items/size; старые native defaults остальных props сохранены. Raw UMD содержит все шесть semantic slots, labels/content каждой ячейки, tags/colspans, computed colors/spacing и custom classes для plain/bordered/horizontal/vertical, functions, nested/empty/replaced, item/legacy overrides, variables и algorithms/themes. Исходный порядок classes не переписан: проверки состава/числа сохраняют прежний native class order. Обновления сохраняют первую ячейку/editor DOM, focus/selection и FormData при смене config/column/size; переносимые между строками controls сохраняют прежний remount contract."
+          "note": "Source useMergeSemantic: независимый descriptions record с whole-record inheritance/replacement; class/style и object/function classNames/styles. Root layers context semantic, context plain, local semantic, local plain после component variables. Label/content: merged root semantic, затем item semantic; bordered cell styles перекрывают item.style. Callbacks читают resolved columns/items/size; старые native defaults остальных props сохранены. Raw UMD содержит все шесть semantic slots, labels/content каждой ячейки, tags/colspans, computed colors/spacing и custom classes для plain/bordered/horizontal/vertical, functions, nested/empty/replaced, item overrides, variables и algorithms/themes. Исходный порядок classes не переписан: проверки состава/числа сохраняют прежний native class order. Обновления сохраняют первую ячейку/editor DOM, focus/selection и FormData при смене config/column/size; переносимые между строками controls сохраняют прежний remount contract."
         },
         {
           "id": "anchor-component-config",

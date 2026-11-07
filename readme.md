@@ -2693,9 +2693,9 @@ Form.disabled и ConfigProvider.componentDisabled не отключают нав
 Первый этап не включает responsive horizontal overflow/overflowedIndicator,
 исходные popup/collapse motion, controlled activeKey/defaultActiveFirst,
 component config вне темы, semantic classNames/styles, prefixCls, render hooks,
-placements/offset и overrides expandIcon/itemIcon. Legacy
-Menu.Item/SubMenu/ItemGroup/Divider children wrappers отсутствуют; данные задаются
-items. Standalone Menu пока не расширяет существующий контракт Dropdown.
+placements/offset и overrides expandIcon/itemIcon. Deprecated
+Menu.Item/SubMenu/ItemGroup/Divider children wrappers исключены из переноса; данные
+задаются items. Standalone Menu пока не расширяет существующий контракт Dropdown.
 
 ## Dropdown
 
@@ -6160,8 +6160,8 @@ FormData/FormItem/Compact, variants/semantic styles, темы и RTL.
 
 Input.Password, Input.Search и Input.OTP доступны как
 InputPassword, InputSearch и InputOTP. Общие prefixCls,
-arbitrary token engine и deprecated internal
-classes/structures остаются отдельными пробелами. Согласованный string bind:value
+arbitrary token engine остаются отдельными пробелами. Deprecated internal
+classes/structures исключены из переноса. Согласованный string bind:value
 сохраняется вместо React controlled rejection/broad value types; native DOM events
 и именованные Svelte bindings заменяют SyntheticEvent/ref object. Общий аудит
 семейства Input остаётся unreviewed.
@@ -7963,7 +7963,7 @@ hover/active цвета пунктов.
 native текст формы без popup, измеряющего textarea и timers.
 
 Semantic classNames/styles, feedback suffix,
-полный ConfigProvider.mentions API, prefixCls, legacy Option children и
+полный ConfigProvider.mentions API, prefixCls и
 исходные rc-trigger motion пока отсутствуют.
 
 ## AutoComplete
@@ -8049,8 +8049,8 @@ Custom Input сохраняет собственные `components.Input` и р�
 открытого popup. Native-only темы сохраняют прежнее оформление.
 
 Virtual/scrollTo, fieldNames, optionRender/popupRender, prefix/searchIcon,
-полный semantic/config API и legacy dataSource/Option/deprecated dropdown
-aliases пока отсутствуют. Generic numeric/object values не входят в первый этап.
+остальной semantic/config API пока отсутствует. Deprecated dataSource/Option
+и dropdown aliases исключены из переноса. Generic numeric/object values не входят в первый этап.
 
 ## Select
 
