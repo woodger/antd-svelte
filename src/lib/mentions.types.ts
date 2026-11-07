@@ -15,6 +15,10 @@ export interface MentionsConfig {
   prefix?: string | readonly string[];
   split?: string;
 }
+/** Настройки ConfigProvider.mentions; пока перенесён только variant, отдельно от getMentions. */
+export interface MentionsComponentConfig {
+  variant?: MentionsProps['variant'];
+}
 export interface MentionsEntity {
   prefix: string;
   value: string;

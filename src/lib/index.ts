@@ -784,6 +784,7 @@ export {
   type GetContainer,
   type TableLocale,
   type ComponentSize,
+  type Variant,
   type ThemeConfig,
   type SelectOption
 } from './types';
@@ -1034,3 +1035,9 @@ export type {
   QRPropsCanvas,
   QRPropsSvg
 } from './qrcode.types';
+
+export type { SelectConfig } from './select.types';
+export type { TreeSelectConfig } from './tree-select.types';
+export type { DatePickerConfig } from './date-picker.types';
+export type { CardConfig } from './card.types';
+export type { MentionsComponentConfig } from './mentions.types';

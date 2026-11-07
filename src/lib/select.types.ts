@@ -2,6 +2,11 @@ import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize, SelectOption } from './types';
 
+/** Настройки ConfigProvider.select; пока перенесён только variant. */
+export interface SelectConfig {
+  variant?: SelectProps['variant'];
+}
+
 /** Настройки controlled search и локальной фильтрации Select без сетевого транспорта. */
 export interface SelectSearchConfig<Value extends string | number = string> {
   searchValue?: string;
@@ -30,7 +35,7 @@ export interface SelectProps<
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */
   defaultValue?: Mode extends 'multiple' ? readonly Value[] : Value;
   size?: ComponentSize;
-  /** Оформление single/multiple; явный variant имеет приоритет над bordered. @defaultValue 'outlined' */
+  /** Приоритет: variant, bordered=false, Form, Select config, global variant, outlined. */
   variant?: 'outlined' | 'filled' | 'borderless' | 'underlined';
   /** @deprecated Используйте variant; false задаёт borderless, если variant не указан. */
   bordered?: boolean;

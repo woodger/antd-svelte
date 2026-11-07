@@ -1,6 +1,7 @@
 <script lang="ts" generics="Value extends InputNumberValue = number">
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -41,6 +42,7 @@
     ...props
   }: InputNumberProps<Value> = $props();
   const config = useConfig();
+  const variantContext = useVariant('inputNumber', () => props);
   const componentTheme = useComponentTheme('InputNumber');
   const compact = useCompact();
   const form = useForm();
@@ -70,8 +72,7 @@
     ?? config.componentDisabled);
   let readonly = $derived(props.readonly ?? props.readOnly);
   let prefixCls = $derived(props.prefixCls ?? 'ant-input-number');
-  let variant = $derived(props.variant ?? (props.bordered === false
-    ? 'borderless' : config.inputNumber?.variant ?? 'outlined'));
+  let variant = $derived(variantContext.variant);
   let mode = $derived(props.mode ?? 'input');
   let controls = $derived(props.controls !== false && !disabled && !readonly);
   let icons = $derived(typeof props.controls === 'object' ? props.controls : {});

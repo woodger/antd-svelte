@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { cardHasContent, cardTabItems } from './card.engine';
   import { connectCardGrid } from './card.dom';
@@ -40,12 +41,13 @@
     ...rest
   }: CardProps = $props();
   const config = useConfig();
+  const variantContext = useVariant('card', () => ({ variant, bordered }));
   const componentTheme = useComponentTheme('Card');
   const focus = createSkeletonFocus();
   let body = $state<HTMLDivElement>();
   let detectedGrid = $state(false);
   let mergedSize = $derived(size ?? config.explicitComponentSize);
-  let mergedVariant = $derived(variant ?? (bordered === false ? 'borderless' : 'outlined'));
+  let mergedVariant = $derived(variantContext.variant);
   let hasGrid = $derived(containGrid ?? detectedGrid);
   let tabs = $derived(cardTabItems(tabList));
   let info = $derived(
@@ -61,7 +63,7 @@
         hoverable,
         size: mergedSize,
         type,
-        variant: mergedVariant,
+        variant: mergedVariant as CardProps['variant'],
         bordered,
         headStyle,
         bodyStyle,

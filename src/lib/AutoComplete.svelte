@@ -12,6 +12,7 @@
     autoCompleteOption
   } from './auto-complete.engine';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm, useFormField } from './form-context';
@@ -47,7 +48,8 @@
     listHeight = 256,
     size,
     status,
-    variant = 'outlined',
+    variant,
+    bordered,
     children,
     class: className = '',
     rootClassName = '',
@@ -62,6 +64,8 @@
     ...attributes
   }: AutoCompleteProps = $props();
   const config = useConfig();
+  const variantContext = useVariant('select', () => ({ variant, bordered }));
+  let appearance = $derived(variantContext.variant);
   const field = useFormField();
   const form = useForm();
   const compact = useCompact();
@@ -380,7 +384,7 @@
       componentTheme.className && 'ant-select-source-theme',
       componentTheme.className && showClear && 'ant-select-allow-clear',
       componentTheme.className && config.direction === 'rtl' && 'ant-select-rtl',
-      `ant-select-${variant}`,
+      `ant-select-${appearance}`,
       resolvedSize === 'large' && 'ant-select-lg',
       resolvedSize === 'small' && 'ant-select-sm',
       focused && 'ant-select-focused',

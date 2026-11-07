@@ -13,6 +13,7 @@
   } from './date-picker.engine';
   import { datePickerEnUS } from './date-picker.locale';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import { useForm, useFormField } from './form-context';
@@ -62,7 +63,8 @@
     showToday = true,
     size,
     status,
-    variant = 'outlined',
+    variant,
+    bordered,
     locale,
     onChange,
     onCalendarChange,
@@ -88,6 +90,8 @@
     ...attributes
   }: DatePickerProps & { time?: TimePickerProps; } = $props();
   const config = useConfig();
+  const dateVariant = useVariant('datePicker', () => ({ variant, bordered }));
+  const timeVariant = useVariant('timePicker', () => time ?? {});
   const componentTheme = useComponentTheme('DatePicker');
   const field = useFormField();
   const form = useForm();
@@ -161,10 +165,7 @@
   let previousMergedValue = untrack(() => mergedValue);
   let wasVisible = untrack(() => visible);
   let panelWasOpen = false;
-  let actualVariant = $derived(time
-    ? time.variant ?? (time.bordered === false
-      ? 'borderless' : config.timePicker?.variant ?? 'outlined')
-    : variant);
+  let actualVariant = $derived(time ? timeVariant.variant : dateVariant.variant);
   let semantic = $derived(time ? timePickerSemantic(time, config.timePicker, {
     variant: actualVariant,
     size: resolvedSize === 'medium' ? 'middle' : resolvedSize,

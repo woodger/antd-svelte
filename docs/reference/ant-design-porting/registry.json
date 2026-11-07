@@ -2728,7 +2728,18 @@
         "tests/browser/fixtures/ant-design-pagination-metrics.json",
         "docs/reference/theme-context.md",
         "tests/browser/pagination-color.spec.ts",
-        "tests/browser/fixtures/PaginationColorFixtures.svelte"
+        "tests/browser/fixtures/PaginationColorFixtures.svelte",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -2803,13 +2814,13 @@
         },
         {
           "id": "advanced-api",
-          "title": "Полные Select props, Form variant и React-specific API",
+          "title": "Полные Select props, React-specific API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Global Form variant, расширенные ещё не перенесённые Select props, генерация CSS arbitrary prefixCls/selectPrefixCls и React-specific components/dev warnings не перенесены. SelectPrefixCls передаётся custom renderer info, штатный Select сохраняет ant-select. Native nav, snippets/handlers, bind API, число/option normalization и мобильный size changer являются сохранёнными Svelte adaptations; v1-ready не означает полный React API."
+          "note": "Расширенные ещё не перенесённые Select props, генерация CSS arbitrary prefixCls/selectPrefixCls и React-specific components/dev warnings не перенесены. SelectPrefixCls передаётся custom renderer info, штатный Select сохраняет ant-select. Native nav, snippets/handlers, bind API, число/option normalization и мобильный size changer являются сохранёнными Svelte adaptations; v1-ready не означает полный React API."
         },
         {
           "id": "source-theme-tokens",
@@ -2841,6 +2852,26 @@
             "tests/browser/fixtures/ant-design-pagination-metrics.json"
           ],
           "note": "Active, hover и disabled используют существующие переменные цветов также без source marker. Обычные/активные/disabled кнопки сравниваются с эталоном 6.6.8 для light/dark, LTR/RTL и native/source; native primary=blue сохраняет прежнюю seed-палитру также в dark mode. Custom CSS variables на semantic item и inline itemRender сохраняют приоритет. Native buttons, aria-current, binding, callbacks и отсутствие form submit сохраняются; padding и source-only bordered styles не меняются."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Root variants quick jumper читают общий Input priority Form/input/global. Outlined не добавляет variant class; size changer сохраняет независимый Select config. Native navigation, semantic styles и value/callback normalization не меняются."
         }
       ]
     },
@@ -3586,7 +3617,18 @@
         "tests/browser/fixtures/SelectContainerCase.svelte",
         "tests/browser/fixtures/SelectContainerFixtures.svelte",
         "tests/browser/select-container.spec.ts",
-        "tests/package/select-container.ssr.test.ts"
+        "tests/package/select-container.ssr.test.ts",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -3672,6 +3714,26 @@
             "tests/browser/fixtures/ant-design-render-empty-reference.json"
           ],
           "note": "Как в pinned Select mode=combobox, AutoComplete не вызывает ConfigProvider.renderEmpty и не открывает default Empty popup при отсутствии options/notFoundContent. Собственный notFoundContent сохраняет прежний API."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Как обёртка исходного Select, использует select.variant, Form и global с приоритетом local variant/bordered=false. Собственный AutoComplete variant config не добавляется. Legacy bordered потребляется без утечки в input; custom input сохраняет собственный контракт."
         }
       ]
     },
@@ -3772,7 +3834,18 @@
         "tests/browser/fixtures/ChoiceContainerContent.svelte",
         "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
         "tests/browser/choice-container.spec.ts",
-        "tests/package/choice-container.ssr.test.ts"
+        "tests/package/choice-container.ssr.test.ts",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -3909,6 +3982,26 @@
             "docs/reference/render-empty.md"
           ],
           "note": "Cascader и CascaderPanel сообщают одно имя Cascader; local notFoundContent !== undefined имеет приоритет. Falsy callback выбирает simple small Empty, без callback сохраняется прежний simple Empty. Suppressed local values и native controller не меняются."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Общий source priority local variant/bordered=false, Form, cascader.variant и global для trigger. Inline CascaderPanel по-прежнему не применяет trigger variant classes/config. Values/search/lazy/selection и semantic priorities сохранены."
         }
       ]
     },
@@ -4214,7 +4307,10 @@
         "tests/browser/fixtures/color-picker-theme-presets.ts",
         "tests/browser/fixtures/ant-design-color-picker-theme-reference.json",
         "tests/package/color-picker-theme.ssr.test.ts",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "tests/browser/config-variants.spec.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "docs/reference/control-variants.md"
       ],
       "features": [
         {
@@ -4330,6 +4426,19 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Собственный public ComponentToken пуст, как 6.6.8; ColorPicker получает aliases/algorithms, Popover defaults и source content colorText reset. Collapse пресетов получает собственную тему; bright-state использует глобальный colorBgElevated. Исходные flex sizing и приоритеты CSS полей сохраняют независимые Input/InputNumber/Select/Slider themes. 15 UMD-тем / 120 scope-наборов и 60 popup metrics покрывают single/gradient, HEX/RGB/HSB, размеры, RTL, local variables, style priorities, algorithms и nesting/reset/siblings. Theme updates сохраняют DOM/position popup, цвет, draft/caret/focus, пресеты и callback order; legacy reset и cleanup проверены. Native Select сохраняет отдельную flex wrapper, поэтому сравниваются используемые размеры видимой части; внутренние flex-only min constraints не равны source DOM и не используются как oracle."
+        },
+        {
+          "id": "format-select-variant",
+          "title": "Исходный borderless внутреннего Select формата",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ColorPickerInputs.svelte",
+            "tests/browser/config-variants.spec.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "docs/reference/control-variants.md"
+          ],
+          "note": "ColorInput 6.6.8 явно передаёт variant=borderless в Select. Native format selector сохраняет это локальное оформление внутри global filled и Form underlined, не наследуя их вместо исходного local prop; выбор RGB и соседние значения сохраняются. Input/InputNumber внутри picker продолжают читать свои обычные контексты."
         }
       ]
     },
@@ -4431,7 +4540,18 @@
         "tests/browser/fixtures/ant-design-datetime-config-reference.json",
         "tests/browser/datetime-config-metrics.ts",
         "tests/browser/datetime-config.spec.ts",
-        "tests/package/datetime-config.ssr.test.ts"
+        "tests/package/datetime-config.ssr.test.ts",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -4591,6 +4711,26 @@
             "readme.md"
           ],
           "note": "Официальный UMD 6.6.8 для format=YYYY-MM-DD [Hours] трактует H/s внутри literal как units: только часы/секунды и header 12:56 при выбранном 12:34:56. Native сохраняет исключение текста в скобках и стандартный fallback всех трёх units; raw single/range measurements оставлены без подмены. Отличие намеренное и требует отдельного разбора; source defect не переносится."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "DatePicker и RangePicker читают свои datePicker/rangePicker config после local variant/bordered=false и Form, затем global. DatePicker config пока только variant; legacy bordered добавлен в общий date/range API без утечки в input. Dayjs values, draft/confirmation и FormData сохраняют существующие контракты."
         }
       ]
     },
@@ -4636,7 +4776,18 @@
         "tests/browser/fixtures/FormThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-theme-reference.json",
         "tests/browser/form-theme.spec.ts",
-        "tests/package/form-theme.ssr.test.ts"
+        "tests/package/form-theme.ssr.test.ts",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -4685,6 +4836,26 @@
             "tests/package/form-theme.ssr.test.ts"
           ],
           "note": "Все 11 исходных declarations, включая internal verticalLabelHeight, подтверждены UMD; labelHeight override участвует в vertical default. Сверены 17 тем / 170 CSS-наборов: labels/required/colon/control/extra, horizontal/vertical/standalone, zero/undefined/CSS lengths, custom prefix и nested/reset/sibling scopes. Внутренний Row сбрасывает generic aliases как исходные Row/Col, сохраняя Form variables. Source direction-only оставляет физический LTR у Form/Item: raw observation сохранено в артефакте; сравнение использует явный DOM dir, соответствующий прежнему native ConfigProvider. Reactive updates сохраняют native store, values/errors/validation, labels/ARIA, DOM/focus/selection, FormData и submit/reset. Inline layout не добавлен; inlineItemMarginBottom подтверждён как declaration. Общий аудит Form v1 остаётся незавершённым."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Raw variant ближайшего Form имеет приоритет над component/global config; undefined сбрасывает внешний Form. Локальный variant и bordered=false остаются выше Form. Component=false сохраняет ближайший context без native form/attrs, позволяя вложить независимый Form без вложенных HTML-форм. Существующие модель, submit/reset, disabled, validation и layout по умолчанию сохранены; полный RcForm API не заявлен."
         }
       ]
     },
@@ -4810,7 +4981,18 @@
         "tests/package/control-theme.ssr.test.ts",
         "tests/browser/control-theme.spec.ts",
         "docs/reference/theme-context.md",
-        "tests/browser/fixtures/InputSelectFixtures.svelte"
+        "tests/browser/fixtures/InputSelectFixtures.svelte",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -4911,7 +5093,7 @@
             "tests/package/input-otp.ssr.test.ts",
             "src/lib/vendor/otp.css"
           ],
-          "note": "InputOTP сохраняет UTF-16 cells, sparse onInput перед onChange только полного изменившегося кода, formatter до ограничения length, paste/focus guard, arrows/backspace/undo, mask/type/autocomplete, semantic/otp config и Input fallback. Value синхронизируется при изменении prop после mount; локальный draft не отклоняется неизменённым prop, SSR использует defaultValue как upstream. Bind:value не добавлен; refs дают группу и focus/blur. FormItem association относится к группе, не к отдельным ячейкам; reset учитывает form.resetKey. PrefixCls, общий variant/token engine и React dev diagnostics остаются за пределами этого объёма."
+          "note": "InputOTP сохраняет UTF-16 cells, sparse onInput перед onChange только полного изменившегося кода, formatter до ограничения length, paste/focus guard, arrows/backspace/undo, mask/type/autocomplete, semantic/otp config и Input fallback. Value синхронизируется при изменении prop после mount; локальный draft не отклоняется неизменённым prop, SSR использует defaultValue как upstream. Bind:value не добавлен; refs дают группу и focus/blur. FormItem association относится к группе, не к отдельным ячейкам; reset учитывает form.resetKey. PrefixCls, token engine и React dev diagnostics остаются за пределами этого объёма."
         },
         {
           "id": "input-group",
@@ -4960,7 +5142,7 @@
         },
         {
           "id": "input-remaining",
-          "title": "Input prefixCls, общий variant/token engine и React value/ref conventions",
+          "title": "Input prefixCls, token engine и React value/ref conventions",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -4974,11 +5156,11 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. ConfigProvider.variant/Form.variant, prefixCls и deprecated internal hooks ещё не перенесены. Согласованные string bind:value, native refs/hidden и React dev diagnostics остаются прежними."
+          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. PrefixCls и deprecated internal hooks ещё не перенесены. Согласованные string bind:value, native refs/hidden и React dev diagnostics остаются прежними."
         },
         {
           "id": "textarea-remaining",
-          "title": "TextArea prefixCls, общий variant/token engine и React value/ref conventions",
+          "title": "TextArea prefixCls, token engine и React value/ref conventions",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -4992,7 +5174,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "TextArea использует source Input token preparation и CSS variables, включая wrappers и native leaf. PrefixCls и общий ConfigProvider.variant/Form.variant ещё не перенесены; string bind:value/native refs и React value conventions сохраняют прежнюю границу."
+          "note": "TextArea использует source Input token preparation и CSS variables, включая wrappers и native leaf. PrefixCls ещё не перенесён; string bind:value/native refs и React value conventions сохраняют прежнюю границу."
         },
         {
           "id": "control-theme-tokens",
@@ -5011,6 +5193,26 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежние цвета; compact font/padding metrics применяются отдельно. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Общий source priority для Input/TextArea/Password/Search/OTP: local, legacy false при наличии, Form, component, fallback Input у composed controls, global, outlined. Search input.variant fallback не задаёт variant кнопке; explicit outlined считается настройкой. Reactive scope сохраняет native values, DOM/focus/selection, FormData и callbacks; оставшиеся React value/ref/prefix API не включены."
         }
       ]
     },
@@ -5079,7 +5281,18 @@
         "tools/fixtures/ant-design-control-tokens-reference.json",
         "tests/package/control-theme.ssr.test.ts",
         "tests/browser/control-theme.spec.ts",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -5211,6 +5424,26 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежние цвета; compact font/padding metrics применяются отдельно. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Control читает общий source priority local/bordered/Form/inputNumber/global. Addon по-прежнему получает raw props.variant, как source SpaceAddon; отдельный addon config не меняется. Decimal values, editor drafts, native bindings/refs и semantic styles сохраняются."
         }
       ]
     },
@@ -5290,7 +5523,18 @@
         "tests/browser/mentions-theme-metrics.ts",
         "tests/browser/mentions-theme.spec.ts",
         "tests/package/mentions-theme.ssr.test.ts",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -5387,6 +5631,26 @@
             "docs/reference/render-empty.md"
           ],
           "note": "Local notFoundContent !== undefined имеет приоритет; falsy callback выбирает simple small Empty. Без callback сохраняется native locale.emptyText; loading option остаётся отдельной веткой."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Local variant перекрывает Form, mentions.variant и global. MentionsComponentConfig содержит только variant и не изменяет прежний MentionsConfig для getMentions. Textarea, measuring popup и native callbacks сохраняют существующий контракт."
         }
       ]
     },
@@ -5832,7 +6096,18 @@
         "tests/browser/fixtures/ant-design-select-variants-reference.json",
         "tests/browser/select-variants-metrics.ts",
         "tests/browser/select-variants.spec.ts",
-        "tests/package/select-variants.ssr.test.ts"
+        "tests/package/select-variants.ssr.test.ts",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -5922,7 +6197,7 @@
             "tests/browser/select-variants.spec.ts",
             "tests/package/select-variants.ssr.test.ts"
           ],
-          "note": "Outlined/filled/borderless/underlined в single и multiple; explicit variant перекрывает bordered=false, без них outlined. Существующие vendor rules и Select token scopes сохранены. Root classes/computed background, borders, shadow и radius сверены с неизменённым UMD 6.6.8: default/legacy/explicit priority, focus, disabled/status, RTL/dark/compact. Обновления сохраняют root/input DOM, query, selection/focus, открытый список, FormData и callbacks. Global ConfigProvider.variant/Form.variant и component config Select остаются в работе."
+          "note": "Outlined/filled/borderless/underlined в single и multiple; explicit variant перекрывает bordered=false, без них outlined. Существующие vendor rules и Select token scopes сохранены. Root classes/computed background, borders, shadow и radius сверены с неизменённым UMD 6.6.8: default/legacy/explicit priority, focus, disabled/status, RTL/dark/compact. Обновления сохраняют root/input DOM, query, selection/focus, открытый список, FormData и callbacks. Общий Form/ConfigProvider variant и component config Select подключены отдельной feature inherited-variants."
         },
         {
           "id": "select-theme-tokens",
@@ -5973,6 +6248,26 @@
             "docs/reference/render-empty.md"
           ],
           "note": "Local notFoundContent !== undefined перекрывает общий renderer. Falsy callback выбирает simple small Empty; отсутствие callback сохраняет native loading/empty text. Native local zero остаётся видимым, в отличие от source popup. Custom empty controls сохраняют popup при фокусе внутри, выход закрывает его; native input blur callback сохранён."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Single/multiple читают local variant, bordered=false, Form, ConfigProvider.select.variant, global и outlined. Новый Select config пока только variant. Поиск, opened popup, selection/focus, FormData и callbacks сохраняются при реактивной смене контекста; остальные rc-select props/config остаются отдельными пробелами."
         }
       ]
     },
@@ -6802,7 +7097,18 @@
         "tests/browser/picker-theme.spec.ts",
         "tests/package/picker-theme.ssr.test.ts",
         "src/lib/DatePickerTimePanel.svelte",
-        "tests/browser/time-picker-double-click.spec.ts"
+        "tests/browser/time-picker-double-click.spec.ts",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -6948,6 +7254,26 @@
             "tests/package/picker-theme.ssr.test.ts"
           ],
           "note": "Исходные 45 component/internal defaults, aliases и algorithms; общий ключ components.DatePicker для DatePicker, RangePicker, TimePicker и TimeRangePicker. 15 UMD-тем задают CSS размеров/вариантов, focus, calendar/time/presets/footer и восьми theme scopes, включая RTL, local style, custom cssVar prefix, inheritance/reset и соседние provider. Тематические обновления сохраняют DOM, draft/caret/focus и Dayjs; изменение time cell height сохраняет scrollTop в пикселях, как Source. Локальные/semantic styles и независимый Button theme сохраняют приоритет; datetime header, null selection и отсутствие пустого footer сверены с UMD. Дополнительные picker modes, multiple, полный semantic/component config и retained popup lifecycle этой feature не заявляются."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Single TimePicker читает timePicker.variant, Range — rangePicker.variant; datePicker config не перекрывает outer single variant, timePicker.variant не применяется к range. Form/global priority общий, outer/inner semantic callbacks и raw range props сохраняются."
         }
       ]
     },
@@ -7247,7 +7573,18 @@
         "tests/browser/fixtures/ChoiceContainerContent.svelte",
         "tests/browser/fixtures/ChoiceContainerFixtures.svelte",
         "tests/browser/choice-container.spec.ts",
-        "tests/package/choice-container.ssr.test.ts"
+        "tests/package/choice-container.ssr.test.ts",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -7352,6 +7689,26 @@
             "docs/reference/render-empty.md"
           ],
           "note": "Local notFoundContent !== undefined перекрывает общий renderer. Falsy callback выбирает simple small Empty; отсутствие callback сохраняет native locale text. Native local zero остаётся видимым, в отличие от source popup; свежий baseline закреплён отдельно."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Local variant/bordered=false, Form, treeSelect.variant, global и outlined. Config пока только variant; lazy tree/check/search/value и popup contracts не меняются."
         }
       ]
     },
@@ -8800,7 +9157,18 @@
         "tests/browser/card-theme.spec.ts",
         "tests/package/card-theme.ssr.test.ts",
         "readme.md",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -8862,11 +9230,31 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls, глобальный variant/component config и полный API Tabs",
+          "title": "PrefixCls, semantic component config и полный API Tabs",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Остаётся в полном объёме миграции; Card.tabProps пока ограничен существующим Svelte Tabs, включая отсутствие editable-card/renderTabBar/overflow menu."
+          "note": "ConfigProvider.card пока содержит только variant; semantic config и prefixCls остаются в работе. Остаётся в полном объёме миграции; Card.tabProps пока ограничен существующим Svelte Tabs, включая отсутствие editable-card/renderTabBar/overflow menu."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "Local outlined/borderless и bordered=false перекрывают Form, card.variant и global. Config пока только variant. Global/Form filled/underlined сохраняют исходную рамку Card; отдельные variants для неё не выдумываются. Semantic callbacks получают разрешённый variant как source, остальные config/Tab API остаются в работе."
         }
       ]
     },
@@ -15059,7 +15447,18 @@
         "tests/browser/slider-scalar.spec.ts",
         "tests/package/slider-scalar.ssr.test.ts",
         "tests/package/SliderScalarTypes.svelte",
-        "tests/browser/fixtures/ConfigProviderFixtures.svelte"
+        "tests/browser/fixtures/ConfigProviderFixtures.svelte",
+        "docs/reference/control-variants.md",
+        "src/lib/variant.engine.ts",
+        "src/lib/variant.svelte.ts",
+        "src/lib/variant.engine.test.ts",
+        "tests/browser/fixtures/ant-design-config-variants-reference.json",
+        "tests/browser/fixtures/config-variants-presets.ts",
+        "tests/browser/fixtures/ConfigVariantControls.svelte",
+        "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+        "tests/browser/config-variants-metrics.ts",
+        "tests/browser/config-variants.spec.ts",
+        "tests/package/config-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -15273,7 +15672,7 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization и portals/motion остаются в работе. AutoComplete, TreeSelect и Cascader получают общий Select token scope."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/semantic config, virtualization и portals/motion остаются в работе. AutoComplete, TreeSelect и Cascader получают общий Select token scope."
         },
         {
           "id": "tree-select-theme-tokens",
@@ -15830,6 +16229,26 @@
             "tests/browser/fixtures/ant-design-target-container-reference.json"
           ],
           "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, ConfigProvider getter A→B при неизменном undefined target prop и offsetTop=7. При A.top=500/B.top=800 source Affix остаётся на top=507 (offset=-293 против B), также после old A scroll event. Source listener/update effects не зависят от getTargetContainer. Публичный updatePosition() восстанавливает top=807/offset=7; все raw frames и сохранённые input/link/content записаны в retarget. Svelte сохраняет существующую немедленную configure semantics: target и listeners меняются сразу без remount, DOM/draft/selection/focus остаются; ожидаемый correct frame взят из source afterManualUpdate без правки UMD."
+        },
+        {
+          "id": "inherited-variants",
+          "title": "Общий variant, Form context и component defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/control-variants.md",
+            "src/lib/variant.engine.ts",
+            "src/lib/variant.svelte.ts",
+            "src/lib/variant.engine.test.ts",
+            "tests/browser/fixtures/ant-design-config-variants-reference.json",
+            "tests/browser/fixtures/config-variants-presets.ts",
+            "tests/browser/fixtures/ConfigVariantControls.svelte",
+            "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
+            "tests/browser/config-variants-metrics.ts",
+            "tests/browser/config-variants.spec.ts",
+            "tests/package/config-variants.ssr.test.ts"
+          ],
+          "note": "ConfigProvider.variant и Form.variant по form/hooks/useVariants 6.6.8: local, legacy false, ближайший Form, component, fallback Input, global, outlined. Подключены все 18 представлений source consumers, включая Search button/input, Card и Pagination. Component records наследуются либо заменяются целиком; вложенный global не отменяет inherited component variant, theme.inherit=false сохраняет config. Select/treeSelect/datePicker/card/mentions config пока содержат только variant. Source raw classes/colors/borders и native DOM/focus/selection/FormData/callback boundaries закреплены в evidence; общий аудит provider остаётся незавершённым."
         }
       ]
     },

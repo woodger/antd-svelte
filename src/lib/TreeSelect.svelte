@@ -19,6 +19,7 @@
   } from './tree-select.engine';
   import { expandTreeParents, treeCheckDisabled } from './tree.engine';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import RenderEmpty from './RenderEmpty.svelte';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
@@ -76,7 +77,8 @@
     rootClassName = '',
     size,
     status,
-    variant = 'outlined',
+    variant,
+    bordered,
     disabled,
     id,
     name,
@@ -93,6 +95,8 @@
     ValueType
   > = $props();
   const config = useConfig();
+  const variantContext = useVariant('treeSelect', () => ({ variant, bordered }));
+  let appearance = $derived(variantContext.variant);
   const form = useForm();
   const field = useFormField();
   const compact = useCompact();
@@ -537,7 +541,7 @@
       selectTheme.className && 'ant-select-source-theme',
       selectTheme.className && canSearch && 'ant-select-show-search',
       selectTheme.className && allowClear && 'ant-select-allow-clear',
-      `ant-select-${variant}`,
+      `ant-select-${appearance}`,
       isMultiple ? 'ant-select-multiple' : 'ant-select-single',
       visible && 'ant-select-open',
       focused && 'ant-select-focused',

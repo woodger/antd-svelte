@@ -1,4 +1,9 @@
 <script lang="ts">
+  import type { SelectConfig } from './select.types';
+  import type { TreeSelectConfig } from './tree-select.types';
+  import type { DatePickerConfig } from './date-picker.types';
+  import type { CardConfig } from './card.types';
+  import type { MentionsComponentConfig } from './mentions.types';
   import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
   import type { ButtonConfig } from './button.types';
   import type { TabsConfig } from './tabs.types';
@@ -56,7 +61,7 @@
   import { provideDesignTokens, useDesignTokenContext } from './theme-context.svelte';
   import { getGridMediaCss, getGridMediaScope } from './grid-style.engine';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
-  import type { ComponentSize, Locale, ThemeConfig } from './types';
+  import type { ComponentSize, Variant, Locale, ThemeConfig } from './types';
   import './styles.css';
 
   /** Наследуемые настройки темы, локали и компонентов для дочернего дерева Svelte. */
@@ -64,6 +69,13 @@
     children: Snippet;
     /** Частично переопределяет родительскую тему; остальные поля наследуются. */
     theme?: ThemeConfig;
+    /** Общее оформление полей и Card; локальные props, Form и component config имеют приоритет. */
+    variant?: Variant;
+    select?: SelectConfig;
+    treeSelect?: TreeSelectConfig;
+    datePicker?: DatePickerConfig;
+    card?: CardConfig;
+    mentions?: MentionsComponentConfig;
     button?: ButtonConfig;
     tabs?: TabsConfig;
     ribbon?: BadgeRibbonConfig;
@@ -143,6 +155,12 @@
   let {
     children,
     theme,
+    variant,
+    select,
+    treeSelect,
+    datePicker,
+    card,
+    mentions,
     button,
     tabs,
     ribbon,
@@ -219,6 +237,24 @@
   let gridMediaCss = $derived(gridMediaScope && gridMediaScope !== parentGridMediaScope
     ? getGridMediaCss(designTokens.state.token) : undefined);
   const config: ConfigContext = {
+    get variant() {
+      return variant ?? parent.variant;
+    },
+    get select() {
+      return select ?? parent.select;
+    },
+    get treeSelect() {
+      return treeSelect ?? parent.treeSelect;
+    },
+    get datePicker() {
+      return datePicker ?? parent.datePicker;
+    },
+    get card() {
+      return card ?? parent.card;
+    },
+    get mentions() {
+      return mentions ?? parent.mentions;
+    },
     get tabs() {
       return tabs ?? parent.tabs;
     },

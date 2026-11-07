@@ -53,7 +53,8 @@
 
 <div class={[`${prefixCls}-input-container`, 'color-fields']}>
   {#if !disabledFormat}
-    <Select bind:value={() => colorFormat, () => {}} size="small" aria-label="Color format"
+    <Select bind:value={() => colorFormat, () => {}} variant="borderless"
+      size="small" aria-label="Color format"
       class={`${prefixCls}-format-select`}
       style="min-width:0;width:max-content;flex:none;margin-inline-end:var(--ant-margin-xs)"
       options={['hex', 'hsb', 'rgb'].map(value => ({ value, label: value.toUpperCase() }))}

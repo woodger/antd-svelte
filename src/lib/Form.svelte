@@ -10,6 +10,8 @@
     form,
     children,
     layout = 'vertical',
+    variant,
+    component = 'form',
     disabled,
     onFinish,
     onFinishFailed,
@@ -36,6 +38,9 @@
   }
 
   provideForm({
+    get variant() {
+      return variant;
+    },
     get disabled() {
       return (disabled ?? config.componentDisabled) || form.isSubmitting;
     },
@@ -93,6 +98,9 @@
   }
 </script>
 
+{#if component === false}
+  {@render children()}
+{:else}
 <form
   {...attributes}
   novalidate
@@ -109,3 +117,4 @@
   {/if}
   {@render children()}
 </form>
+{/if}

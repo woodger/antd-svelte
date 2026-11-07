@@ -42,7 +42,7 @@ export interface InputPasswordProps extends Omit<InputProps, 'classNames' | 'sty
   visibilityToggle?: boolean | InputPasswordVisibilityToggle;
   /** Локальный renderer перекрывает ConfigProvider.inputPassword.iconRender. */
   iconRender?: InputPasswordIconRender;
-  /** Приоритет: variant, bordered=false, inputPassword.variant, input.variant, outlined. */
+  /** Приоритет: variant, bordered=false, Form, inputPassword, input, global variant, outlined. */
   variant?: InputVariant;
   classNames?: InputPasswordSemantic;
   /** Root: context styles.root → context style → local styles.root → local style. */

@@ -26,6 +26,7 @@
   import { dayjsGenerateConfig as adapter } from './date-picker-dayjs.engine';
   import { datePickerEnUS } from './date-picker.locale';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
   import { useForm, useFormField } from './form-context';
@@ -100,6 +101,7 @@
     size,
     status,
     variant,
+    bordered,
     locale,
     class: className = '',
     rootClassName = '',
@@ -112,6 +114,9 @@
     ...attributes
   }: RangePickerProps & { time?: TimeRangePickerProps; } = $props();
   const config = useConfig();
+  const variantContext = useVariant('rangePicker', () => ({
+    variant, bordered: time?.bordered ?? bordered
+  }));
   const componentTheme = useComponentTheme('DatePicker');
   const field = useFormField();
   const form = useForm();
@@ -237,8 +242,7 @@
   let verticalPlacement = $state<'top' | 'bottom'>('bottom');
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
   let resolvedStatus = $derived((time ? time.status : status) ?? field?.status);
-  let resolvedVariant = $derived(variant ?? (time?.bordered === false
-    ? 'borderless' : config.rangePicker?.variant ?? 'outlined'));
+  let resolvedVariant = $derived(variantContext.variant);
   let resolvedSeparator = $derived(separator ?? config.rangePicker?.separator);
   let semantic = $derived(time ? timeRangeSemantic(time, config.timePicker, config.rangePicker, {
     size: resolvedSize === 'medium' ? 'middle' : resolvedSize,

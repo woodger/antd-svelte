@@ -10,6 +10,7 @@
   } from './mentions.engine';
   import { connectMentionsMeasure } from './mentions.dom';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { connectComponentTheme } from './theme-component.dom';
@@ -35,7 +36,7 @@
     allowClear = false,
     size,
     status,
-    variant = 'outlined',
+    variant,
     onChange,
     onSearch,
     onSelect,
@@ -65,6 +66,8 @@
     ...attributes
   }: MentionsProps = $props();
   const config = useConfig();
+  const variantContext = useVariant('mentions', () => ({ variant }));
+  let appearance = $derived(variantContext.variant);
   const componentTheme = useComponentTheme('Mentions');
   const designTheme = useDesignTokenContext();
   const form = useForm();
@@ -412,7 +415,7 @@
   class={[
       'ant-mentions ant-mentions-css-var',
       componentTheme.className,
-      `ant-mentions-${variant}`,
+      `ant-mentions-${appearance}`,
       focused && 'ant-mentions-focused',
       blocked && 'ant-mentions-disabled',
       config.direction === 'rtl' && 'ant-mentions-rtl',

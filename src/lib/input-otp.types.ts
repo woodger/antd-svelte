@@ -62,7 +62,7 @@ export interface InputOTPProps extends Omit<HTMLAttributes<HTMLDivElement>, 'chi
   size?: ComponentSize | 'medium';
   disabled?: boolean;
   status?: 'error' | 'warning' | '';
-  /** Приоритет: локальный variant, ConfigProvider.otp.variant, input.variant, outlined. */
+  /** Приоритет: локальный variant, Form, otp, input, global variant, outlined. */
   variant?: InputVariant;
   /** Вызывается для ячеек, включая фокус, перенаправленный к первой пустой ячейке. */
   onFocus?: HTMLInputAttributes['onfocus'];

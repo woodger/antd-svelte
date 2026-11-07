@@ -35,6 +35,10 @@ export interface DatePickerTimeConfig extends Omit<
   hideDisabledOptions?: boolean;
   defaultOpenValue?: Dayjs;
 }
+/** Настройки ConfigProvider.datePicker; пока перенесён только variant. */
+export interface DatePickerConfig {
+  variant?: DatePickerProps['variant'];
+}
 /** Выбор одной даты или datetime через Dayjs, input и локализованную панель. */
 export interface DatePickerProps extends Omit<
   HTMLInputAttributes,
@@ -72,8 +76,10 @@ export interface DatePickerProps extends Omit<
   showToday?: boolean;
   size?: ComponentSize;
   status?: 'error' | 'warning';
-  /** @defaultValue 'outlined' */
+  /** Локальное оформление перекрывает Form и ConfigProvider; fallback outlined. */
   variant?: 'outlined' | 'borderless' | 'filled' | 'underlined';
+  /** @deprecated Используйте variant; false выбирает borderless без явного variant. */
+  bordered?: boolean;
   locale?: DatePickerLocale;
   onChange?: (value: Dayjs | null, dateString: string) => void;
   onCalendarChange?: (

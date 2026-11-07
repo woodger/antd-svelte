@@ -32,6 +32,7 @@
   } from './cascader.engine';
   import { connectCascaderTags, connectCascaderWidth, measureCascaderInput } from './cascader.dom';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -129,6 +130,7 @@
     semanticProps?: CascaderProps<OptionType, Multiple>;
   } = $props();
   const config = useConfig();
+  const variantContext = useVariant('cascader', () => ({ variant, bordered }));
   const field = useFormField();
   const form = useForm();
   const compact = useCompact();
@@ -161,8 +163,7 @@
   let resolvedSize = $derived(size ?? (compact?.size === 'medium' ? 'middle' : compact?.size)
     ?? config.componentSize);
   let resolvedStatus = $derived(status ?? field?.status);
-  let resolvedVariant = $derived(variant ?? (bordered === false ? 'borderless' : context?.variant)
-    ?? 'outlined');
+  let resolvedVariant = $derived(variantContext.variant);
   let semantic = $derived({
     props: {
       ...semanticProps,

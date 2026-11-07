@@ -5,6 +5,7 @@
 <script lang="ts">
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { provideFormField, useFormField } from './form-context';
@@ -66,6 +67,7 @@
   } = $derived(rawProps);
 
   const config = useConfig();
+  const variantContext = useVariant('input');
   const componentTheme = useComponentTheme('Pagination');
   const designToken = useDesignTokenContext();
   const field = useFormField();
@@ -332,8 +334,8 @@
         designToken.enabled && designToken.state.token.wireframe && `${prefixCls}-bordered`,
         mini && `${prefixCls}-mini`, align && `${prefixCls}-${align}`,
         simple && `${prefixCls}-simple`, blocked && `${prefixCls}-disabled`,
-        rtl && `${prefixCls}-rtl`, config.input?.variant && config.input.variant !== 'outlined'
-          && `${prefixCls}-${config.input.variant}`, className]}
+        rtl && `${prefixCls}-rtl`, variantContext.variant !== 'outlined'
+          && `${prefixCls}-${variantContext.variant}`, className]}
       style={componentTheme.inheritedStyle}>
       {#if showTotal}<li class={`${prefixCls}-total-text`}>
         {@render showTotal(pagination.total, pagination.range)}

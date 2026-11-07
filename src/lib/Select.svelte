@@ -1,6 +1,7 @@
 <script lang="ts" generics="Value extends string | number = string, Mode extends 'multiple' | undefined = undefined">
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import RenderEmpty from './RenderEmpty.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { connectComponentTheme } from './theme-component.dom';
@@ -55,10 +56,11 @@
   }: SelectProps<Value, Mode> = $props();
 
   const config = useConfig();
+  const variantContext = useVariant('select', () => ({ variant, bordered }));
   const componentTheme = useComponentTheme('Select');
   const compact = useCompact();
   const field = useFormField();
-  let appearance = $derived(variant ?? (bordered === false ? 'borderless' : 'outlined'));
+  let appearance = $derived(variantContext.variant);
   const generatedId = $props.id();
   const initialDefault = untrack(
     () => Array.isArray(defaultValue) ? [...defaultValue] : defaultValue

@@ -6,6 +6,7 @@
   import { onDestroy, untrack } from 'svelte';
   import Input from './Input.svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useForm, useFormField } from './form-context';
   import { inputPasswordIcons } from './input-password-icons';
   import type { InputPasswordProps } from './input-password.types';
@@ -30,6 +31,7 @@
   }: InputPasswordProps = $props();
 
   const config = useConfig();
+  const variantContext = useVariant('inputPassword', () => ({ variant, bordered }), 'input');
   const form = useForm();
   const field = useFormField();
   const slots = ['root', 'input', 'prefix', 'suffix', 'clear', 'count'] as const;
@@ -53,11 +55,7 @@
   let blocked = $derived(
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
-  let appearance = $derived(
-    variant ?? (bordered === false
-      ? 'borderless'
-      : config.inputPassword?.variant ?? config.input?.variant ?? 'outlined')
-  );
+  let appearance = $derived(variantContext.variant);
   let info = $derived<{ props: InputPasswordProps; }>({
     props: {
       ...attributes,

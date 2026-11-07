@@ -17,6 +17,7 @@ import type { TransferLocale } from './transfer.types';
 import { transferEnUS, transferRuRU } from './transfer.locale';
 import { qrCodeEnUS, qrCodeRuRU } from './qrcode.locale';
 export type ComponentSize = 'small' | 'middle' | 'large';
+export type Variant = 'outlined' | 'borderless' | 'filled' | 'underlined';
 
 /** Контейнер popup из ConfigProvider; trigger отсутствует у некоторых потребителей upstream. */
 export type GetPopupContainer = (triggerNode?: HTMLElement) => HTMLElement | ShadowRoot;

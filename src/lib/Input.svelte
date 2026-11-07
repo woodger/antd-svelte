@@ -5,6 +5,7 @@
 <script lang="ts">
   import { onDestroy, onMount, tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -68,6 +69,7 @@
   }: InputProps = $props();
 
   const config = useConfig();
+  const variantContext = useVariant('input', () => ({ variant, bordered }));
   const componentTheme = useComponentTheme('Input');
   const compact = useCompact();
   const form = useForm();
@@ -89,9 +91,7 @@
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
   let read = $derived(readonly ?? readOnly);
-  let appearance = $derived(
-    variant ?? (bordered === false ? 'borderless' : config.input?.variant ?? 'outlined')
-  );
+  let appearance = $derived(variantContext.variant);
   let clear = $derived(resolveInputClear(allowClear, config.input?.allowClear));
   let maximum = $derived(maxLength ?? attributes.maxlength ?? undefined);
   let counter = $derived(inputCountInfo(text, count, showCount, maximum));

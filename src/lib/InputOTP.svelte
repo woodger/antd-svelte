@@ -6,6 +6,7 @@
   import { untrack } from 'svelte';
   import InputOTPCell from './InputOTPCell.svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { provideFormField, useForm, useFormField } from './form-context';
   import { isOTPCompleteChange, patchOTPCells } from './input-otp.engine';
   import type { InputOTPProps } from './input-otp.types';
@@ -40,6 +41,7 @@
   }: InputOTPProps = $props();
 
   const config = useConfig();
+  const variantContext = useVariant('otp', () => ({ variant }), 'input');
   const form = useForm();
   const field = useFormField();
   // FormItem владеет группой: отдельные Input не получают одинаковые id/name/required.
@@ -57,7 +59,7 @@
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
   let resolvedStatus = $derived(status || field?.status);
-  let appearance = $derived(variant ?? config.otp?.variant ?? config.input?.variant ?? 'outlined');
+  let appearance = $derived(variantContext.variant);
   let info = $derived<{ props: InputOTPProps; }>({
     props: {
       ...attributes,

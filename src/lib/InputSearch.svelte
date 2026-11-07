@@ -7,6 +7,7 @@
   import Button from './Button.svelte';
   import SpaceCompact from './SpaceCompact.svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useCompact } from './space-compact-context';
   import { useForm, useFormField } from './form-context';
   import type { ButtonSlots } from './button.types';
@@ -39,6 +40,8 @@
   }: InputSearchProps = $props();
 
   const config = useConfig();
+  const buttonContextVariant = useVariant('inputSearch', () => ({ variant, bordered }));
+  const inputContextVariant = useVariant('inputSearch', () => ({ variant, bordered }), 'input');
   const compact = useCompact();
   const form = useForm();
   const field = useFormField();
@@ -59,10 +62,9 @@
   let blocked = $derived(
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
-  let buttonVariant = $derived(
-    variant ?? (bordered === false ? 'borderless' : config.inputSearch?.variant)
-  );
-  let inputVariant = $derived(buttonVariant ?? config.input?.variant ?? 'outlined');
+  let buttonVariant = $derived(buttonContextVariant.isConfigured
+    ? buttonContextVariant.variant : undefined);
+  let inputVariant = $derived(inputContextVariant.variant);
   let info = $derived<{ props: InputSearchProps; }>({
     props: {
       ...attributes,

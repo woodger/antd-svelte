@@ -1,6 +1,8 @@
 import { getContext, setContext } from 'svelte';
+import type { Variant } from './types';
 
 export interface FormContext {
+  readonly variant?: Variant;
   readonly disabled: boolean;
   readonly layout: 'vertical' | 'horizontal';
   readonly resetKey?: object;

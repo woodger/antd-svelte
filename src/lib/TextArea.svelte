@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onDestroy, tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
+  import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
@@ -63,6 +64,7 @@
     ...attributes
   }: TextAreaProps = $props();
   const config = useConfig();
+  const variantContext = useVariant('textArea', () => ({ variant, bordered }));
   const componentTheme = useComponentTheme('Input');
   const compact = useCompact();
   const form = useForm();
@@ -86,9 +88,7 @@
     disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   );
   let read = $derived(readonly ?? readOnly);
-  let appearance = $derived(
-    variant ?? (bordered === false ? 'borderless' : config.textArea?.variant ?? 'outlined')
-  );
+  let appearance = $derived(variantContext.variant);
   let clear = $derived(resolveTextAreaClear(allowClear, config.textArea?.allowClear));
   let maximum = $derived(maxLength ?? attributes.maxlength ?? undefined);
   let counter = $derived(textAreaCountInfo(text, count, showCount, maximum));

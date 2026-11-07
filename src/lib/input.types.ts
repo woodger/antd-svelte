@@ -1,6 +1,6 @@
 import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes } from 'svelte/elements';
-import type { ComponentSize } from './types';
+import type { ComponentSize, Variant } from './types';
 import type { InputAllowClear, InputCountConfig, InputShowCount } from './input-count.types';
 
 export type {
@@ -11,7 +11,7 @@ export type {
   InputCountContent
 } from './input-count.types';
 
-export type InputVariant = 'outlined' | 'filled' | 'borderless' | 'underlined';
+export type InputVariant = Variant;
 export type InputContent = string | number | boolean | null | Snippet;
 export type InputSemanticSlots = Partial<
   Record<'root' | 'input' | 'prefix' | 'suffix' | 'clear' | 'count', string>
@@ -61,7 +61,7 @@ export interface InputProps extends Omit<
   /** Нативный атрибут size; визуальный размер задаётся через size. */
   htmlSize?: number;
   status?: 'error' | 'warning' | '';
-  /** Приоритет: variant, bordered=false, ConfigProvider.input.variant, outlined. */
+  /** Приоритет: variant, bordered=false, Form, component config, global variant, outlined. */
   variant?: InputVariant;
   /** Совместимость с Ant Design: false выбирает borderless, если variant не задан. */
   bordered?: boolean;

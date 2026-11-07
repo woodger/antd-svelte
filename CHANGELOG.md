@@ -9,6 +9,16 @@
 
 ### Added
 
+- ConfigProvider/Form: общий variant с исходным приоритетом local/bordered/Form/
+  component/fallback/global для всех потребителей, включая Card и Pagination.
+  Подключены variant-only Select/TreeSelect/DatePicker/Card/Mentions config;
+  Search сохраняет отдельный fallback поля и настройки кнопки.
+  Внутренний Select формата ColorPicker сохраняет исходный explicit borderless.
+
+- Form.component=false: контекст без native wrapper для вложенных форм;
+  undefined variant ближайшего Form сбрасывает оформление внешнего Form.
+  Default form, validation, submit/reset и существующие bindings сохранены.
+
 - Select: локальные outlined/filled/borderless/underlined и legacy bordered=false
   с исходным приоритетом explicit variant. Смена оформления сохраняет поиск,
   focus/selection, DOM и FormData; single/multiple сверены с официальным UMD 6.6.8.

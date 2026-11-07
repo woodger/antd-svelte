@@ -1,3 +1,8 @@
+import type { SelectConfig } from './select.types';
+import type { TreeSelectConfig } from './tree-select.types';
+import type { DatePickerConfig } from './date-picker.types';
+import type { CardConfig } from './card.types';
+import type { MentionsComponentConfig } from './mentions.types';
 import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
 import type { ButtonConfig } from './button.types';
 import type { TabsConfig } from './tabs.types';
@@ -51,9 +56,15 @@ import type { InputSearchConfig } from './input-search.types';
 import type { InputOTPConfig } from './input-otp.types';
 import type { TextAreaConfig } from './textarea.types';
 import { getContext, setContext } from 'svelte';
-import { ruRU, type ComponentSize, type Locale, type ResolvedThemeConfig } from './types';
+import { ruRU, type ComponentSize, type Variant, type Locale, type ResolvedThemeConfig } from './types';
 
 export interface ConfigContext {
+  readonly variant?: Variant;
+  readonly select?: SelectConfig;
+  readonly treeSelect?: TreeSelectConfig;
+  readonly datePicker?: DatePickerConfig;
+  readonly card?: CardConfig;
+  readonly mentions?: MentionsComponentConfig;
   readonly tabs?: TabsConfig;
   readonly ribbon?: BadgeRibbonConfig;
   readonly badge?: BadgeConfig;

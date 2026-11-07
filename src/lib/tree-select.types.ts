@@ -44,6 +44,10 @@ export interface TreeSelectChangeInfo {
   selected?: boolean;
   checked?: boolean;
 }
+/** Настройки ConfigProvider.treeSelect; пока перенесён только variant. */
+export interface TreeSelectConfig {
+  variant?: TreeSelectProps['variant'];
+}
 /** Single/multiple выбор узлов дерева с check strategies, поиском и lazy load. */
 export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectValue> extends Omit<
   HTMLInputAttributes,
@@ -117,7 +121,10 @@ export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectV
   size?: ComponentSize;
   status?: 'error' | 'warning';
   /** @defaultValue 'outlined' */
+  /** Приоритет: variant, bordered=false, Form, treeSelect config, global variant, outlined. */
   variant?: 'outlined' | 'borderless' | 'filled' | 'underlined';
+  /** @deprecated Используйте variant; false выбирает borderless без явного variant. */
+  bordered?: boolean;
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
   /** Нативный ref доступен после mount и очищается при unmount. */

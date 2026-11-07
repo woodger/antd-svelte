@@ -4,6 +4,10 @@ import type { ComponentSize } from './types';
 import type { TabsContent, TabsExtraContent, TabsItem, TabsProps } from './tabs.types';
 
 export type CardContent = TabsContent;
+/** Настройки ConfigProvider.card; пока перенесён только variant. */
+export interface CardConfig {
+  variant?: CardProps['variant'];
+}
 export type CardSlots = Partial<
   Record<'root' | 'header' | 'body' | 'extra' | 'title' | 'actions' | 'cover', string>
 >;
@@ -30,6 +34,7 @@ export interface CardProps extends Omit<
   hoverable?: boolean;
   size?: ComponentSize | 'medium' | 'default';
   type?: 'inner';
+  /** Локальный вариант перекрывает bordered=false, Form и ConfigProvider. */
   variant?: 'outlined' | 'borderless';
   bordered?: boolean;
   headStyle?: string;

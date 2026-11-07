@@ -1048,7 +1048,7 @@ activeTabKey имеет приоритет над tabProps.activeKey. TabBarExtr
 проверяют стили, слоты, Grid, загрузку/фокус и вкладки. Рецепт card извлекает
 59 правил без keyframes. Компонентные темы отдельно сверяются с UMD 6.6.8 в
 `tests/browser/card-theme.spec.ts`, фикстура — `?fixture=card-theme`.
-PrefixCls, глобальный variant/component config
+PrefixCls, semantic component config
 и отсутствующие возможности Tabs остаются в полном объёме миграции.
 
 ## Breadcrumb
@@ -6253,7 +6253,8 @@ OnPressEnter срабатывает один раз до keyup, блокируе
 property value сохраняется, timers очищаются при unmount.
 
 Variant: outlined/filled/borderless/underlined; explicit variant → bordered=false
-→ ConfigProvider.input.variant → outlined. ClassNames/styles поддерживают
+→ Form.variant → ConfigProvider.input.variant → ConfigProvider.variant → outlined.
+ClassNames/styles поддерживают
 root/input/prefix/suffix/clear/count как object или callback({props}), где size и
 disabled уже разрешены из контекстов. Root priority: context styles.root → context
 style → local styles.root → local style. Без wrapper эти root styles идут после
@@ -6278,7 +6279,7 @@ FormData/FormItem/Compact, variants/semantic styles, темы и RTL.
 
 Input.Password, Input.Search, Input.OTP и deprecated Input.Group доступны как
 InputPassword, InputSearch, InputOTP и InputGroup. Общие prefixCls,
-ConfigProvider.variant/Form.variant, arbitrary token engine и deprecated internal
+arbitrary token engine и deprecated internal
 classes/structures остаются отдельными пробелами. Согласованный string bind:value
 сохраняется вместо React controlled rejection/broad value types; native DOM events
 и именованные Svelte bindings заменяют SyntheticEvent/ref object. Общий аудит
@@ -6401,7 +6402,7 @@ bind:this возвращают внутренний Input, не внешний C
 defaultValue, FormItem, RTL, Compact, темы и SSR сохраняют контракты Input.
 Fixture `?fixture=input-search` проверяет поиск, IME, callbacks, пользовательские
 кнопки, semantic/config приоритеты и геометрию. Общие ограничения Input для
-prefixCls, global variant/token engine и React value/ref conventions сохраняются;
+prefixCls, token engine и React value/ref conventions сохраняются;
 аудит всего семейства остаётся unreviewed.
 
 ## InputOTP (Input.OTP)
@@ -6468,7 +6469,7 @@ Size группы наследуется из componentSize; Compact продо�
 Стили извлекаются рецептом otp в vendor/otp.css: 16 правил, без keyframes,
 с проверкой SHA-256 исходного npm-архива. Fixture `?fixture=input-otp`, engine,
 SSR и проверки публичного пакета покрывают эти сценарии. Общий аудит Input
-остаётся unreviewed; prefixCls, глобальный variant/token engine и React dev
+остаётся unreviewed; prefixCls, token engine и React dev
 diagnostics, включая предупреждение о длинной маске, пока не перенесены.
 
 ## InputGroup (deprecated Input.Group)
@@ -6592,7 +6593,8 @@ Event proxy с делегированными DOM methods, а не React Synthet
 onMouseDown/onCompositionStart/End дополняют прежние native handlers.
 
 Variant поддерживает outlined/filled/borderless/underlined. Explicit variant имеет
-приоритет над bordered=false, затем применяется component config, затем outlined.
+приоритет над bordered=false, затем Form.variant, component config, общий variant
+и outlined.
 Medium — alias прежнего middle. ClassNames/styles принимают root/textarea/clear/
 count либо callback({props}); props отражает текущий Svelte value. Context и local
 semantic styles объединяются, root style идёт после соответствующих semantic root
@@ -6613,7 +6615,7 @@ Fixture `?fixture=textarea-features` дополняет `?fixture=textarea`. Uni
 
 Сохраняется согласованный строковый bind:value: он не заменяется React controlled
 rejection. React broad value types, исходный ref shape resizableTextArea, prefixCls,
-общий ConfigProvider.variant/Form.variant и полный theme/token engine этим этапом
+полный theme/token engine этим этапом
 не добавлены; refs представлены именованными Svelte bindings. Полный аудит всего
 семейства Input, включая прочие subcomponents, остаётся незавершённым.
 
@@ -8261,7 +8263,8 @@ Variant поддерживает outlined/filled/borderless/underlined в single
 поисковый текст, выделение, фокус и выбранные значения формы. Классы и computed
 styles сверены с официальным UMD 6.6.8 в
 [браузерных проверках](./tests/browser/select-variants.spec.ts).
-ConfigProvider.variant, Form.variant и component config Select пока не перенесены.
+Общие [ConfigProvider.variant/Form.variant и Select config](./docs/reference/control-variants.md)
+применяются после локальных props.
 
 ```svelte
 <script lang="ts">
@@ -8906,8 +8909,7 @@ pageSizeOptions сначала преобразуются в числа. В Reac
 исходному CSS и скрывается на XS. Для controlled compositing с отказом владельца
 используйте functional bindings с getter и обработчики onChange.
 
-Глобальный Form variant, генерация CSS для
-произвольных prefixCls/selectPrefixCls и React-specific components/dev warnings
+Генерация CSS для произвольных prefixCls/selectPrefixCls и React-specific components/dev warnings
 остаются в следующих этапах. `selectPrefixCls` доступен custom size changer info;
 штатный Select сохраняет свои классы. Обычный disabled, навигация native кнопками,
 возврат focus после отключения next и SSR без DOM/media/timers сохранены.
@@ -9430,6 +9432,11 @@ ConfigProvider принимает `theme={{ mode, primary, compact }}`, где `
 `componentSize` равен `small`, `middle` или `large`. Вложенный провайдер наследует
 неуказанные настройки родителя. `componentDisabled` можно переопределить на
 отдельном control.
+
+ConfigProvider.variant и Form.variant задают общее оформление полей, Card и
+внутренних controls Pagination. Локальные props сохраняют приоритет;
+[общий справочник](./docs/reference/control-variants.md) описывает fallback Input,
+вложенные контексты и component config.
 
 Тёмная тема и компактный режим реализованы локальными CSS-переопределениями.
 Spacing использует size map 6.6.8: compact size/SM=8, XS/XXS=4, LG/MD=16,
