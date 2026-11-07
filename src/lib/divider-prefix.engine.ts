@@ -1,8 +1,7 @@
 import template from './vendor/divider-prefix.css.js';
 
 const rootStates = new Set(['', '-horizontal', '-vertical', '-with-text', '-with-text-start',
-  '-with-text-end', '-dashed', '-dotted', '-plain', '-rtl', '-sm', '-md',
-  '-no-default-orientation-margin-start', '-no-default-orientation-margin-end']);
+  '-with-text-end', '-dashed', '-dotted', '-plain', '-rtl', '-sm', '-md']);
 
 /** Меняет componentCls и descendant resets; marker и CSS variables остаются общими. */
 export function getDividerPrefixCss(prefix: string) {

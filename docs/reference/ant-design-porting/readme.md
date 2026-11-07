@@ -139,7 +139,7 @@ percentPosition; первый сохраняет один keyframe, второй
 одиночного control не перезаписывается.
 Рецепт slider-prefix выводит CSS data module из 54 правил для обоих режимов;
 defaults ограничены корнем, shared marker и CSS variable names сохраняются.
-Рецепт divider-prefix выводит аналогичный data module из 33 правил Divider;
+Рецепт divider-prefix выводит аналогичный data module из 27 правил Divider;
 defaults ограничены корнем, интеграция ColorPicker исключена.
 Рецепт segmented-prefix выводит data module из 38 правил Segmented для локального
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.

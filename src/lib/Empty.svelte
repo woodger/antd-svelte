@@ -26,7 +26,6 @@
     style,
     prefixCls,
     rootClassName,
-    imageStyle,
     classNames,
     styles
   } = $derived(props);
@@ -58,7 +57,6 @@
     for (const slot of ['root', 'image', 'description', 'footer'] as const) {
       classes[slot] = [inheritedClasses?.[slot], localClasses?.[slot]].filter(Boolean).join(' ');
       slots[slot] = [
-        slot === 'image' && imageStyle,
         inheritedStyles?.[slot],
         slot === 'root' && config.empty?.style,
         localStyles?.[slot],

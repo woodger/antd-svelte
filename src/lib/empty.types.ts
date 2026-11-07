@@ -34,8 +34,6 @@ export interface EmptyProps {
   style?: string;
   prefixCls?: string;
   rootClassName?: string;
-  /** @deprecated Используйте styles.image. */
-  imageStyle?: string;
   classNames?: EmptySemantic;
   styles?: EmptySemantic;
   /** Присваивается после mount и очищается при unmount. */

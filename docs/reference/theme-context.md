@@ -675,8 +675,8 @@ description используют компонентные aliases; SVG встр�
 FastColor 3.0.1 для остальных цветов. Нативный режим сохраняет прежние SVG patterns.
 ConfigProvider.empty задаёт image и object/function semantic root/image/description/footer.
 Root styles: context styles.root → context style → local styles.root → local style;
-imageStyle предшествует semantic image styles.
-[57 UMD-сценариев](../../tests/browser/fixtures/ant-design-empty-reference.json) сверяют
+Styles.image задаёт оформление изображения.
+[55 UMD-сценариев](../../tests/browser/fixtures/ant-design-empty-reference.json) сверяют
 этот порядок, global SVG paint, aliases, algorithm и CSS variables.
 
 ## Токены Spin
@@ -710,25 +710,25 @@ refs/state/focus, token isolation и cleanup. Native inert/focus, нормали
 
 Divider подготавливает textPaddingInline=1em, orientationMargin=0.05 и
 verticalMarginInline из marginXS. OrientationMargin безразмерен и задаёт пропорцию
-rail; deprecated prop с тем же именем по-прежнему задаёт отдельный отступ подписи.
+rail. Отступ подписи задаётся через styles.content.
 Component aliases и algorithm меняют только Divider. Source key/hash и собственный
 CSS-variable prefix применяются уже при SSR; переменные идут перед semantic/root style.
 Без source-темы сохраняются прежние отступы, native separator и размеры.
 
 Нули и CSS-единицы сохраняются; явный undefined снимает declaration без возврата
 vendor defaults. Официальный UMD задаёт declarations для 15 тем и computed styles
-11 вариантов, включая plain, vertical, размеры, dashed/dotted и legacy margin.
+10 вариантов, включая plain, vertical, размеры и dashed/dotted.
 RTL, reactive updates, inherit=false, соседние scopes, удаление темы и unmount
 проверяются через [browser](../../tests/browser/divider-theme.spec.ts) и
 [SSR](../../tests/package/divider-theme.ssr.test.ts).
 
 Локальный prefixCls меняет BEM-классы независимо от CSS-variable prefix; stylesheet
-из 33 правил ограничивает defaults своим корнем и не меняет соседние controls.
+из 27 правил ограничивает defaults своим корнем и не меняет соседние controls.
 ConfigProvider.divider наследуется как record: undefined сохраняет родителя,
 явный объект заменяет его целиком. Object/function classNames/styles объединяются
 provider → local; provider style идёт после provider styles.root, local style — последним.
 Прежние нормализованные semantic props сохранены; callback может вернуть undefined.
-SSR, 28 официальных UMD-сценариев и живые updates проверяются через
+SSR, 26 официальных UMD-сценариев и живые updates проверяются через
 [prefix/config tests](../../tests/browser/divider-config.spec.ts).
 Общий prefix ConfigProvider и React development warnings остаются в работе.
 

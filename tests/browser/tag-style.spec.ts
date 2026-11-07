@@ -26,7 +26,7 @@ for (const sample of reference.cases) {
 }
 
 test('Tag updates semantic styles without replacing its close control or losing focus', async ({ page }) => {
-  await page.getByRole('combobox', { name: 'Tag style reference' }).selectOption('reactive-functions');
+  await page.getByRole('combobox', { name: 'Tag style reference' }).selectOption('current-functions');
   const close = page.locator('#tag-style-surface .ant-tag-close-icon');
   const original = await close.elementHandle();
   await close.focus();

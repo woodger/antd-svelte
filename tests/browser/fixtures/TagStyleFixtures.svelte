@@ -3,10 +3,15 @@
   import reference from './ant-design-tag-style-reference.json';
   import type { TagStyleCase as Sample } from './tag-style-presets';
 
-  let name = $state(reference.cases[0].name);
+  const cases = [
+    ...reference.cases,
+    { name: 'current-functions', functions: true, icon: true, close: true, color: 'blue',
+      patch: { color: 'green', variant: 'solid', disabled: true } }
+  ];
+  let name = $state(cases[0].name);
   let changed = $state(false);
   let mounted = $state(true);
-  let sample = $derived(reference.cases.find(sample => sample.name === name)! as Sample);
+  let sample = $derived(cases.find(sample => sample.name === name)! as Sample);
 </script>
 
 <section id="tag-style-fixture">
@@ -15,7 +20,7 @@
     changed = false;
     mounted = true;
   }}>
-    {#each reference.cases as sample}<option value={sample.name}>{sample.name}</option>{/each}
+    {#each cases as sample}<option value={sample.name}>{sample.name}</option>{/each}
   </select></label>
   <input aria-label="Tag style outside input" value="Outside draft" />
   <button type="button" onclick={() => changed = !changed}>Change Tag styles</button>

@@ -8,24 +8,10 @@ describe('Tag color and variant resolution', () => {
       .toMatchObject({ color: 'default', variant: 'solid', internal: true, style: [] });
   });
 
-  it('prioritizes local variant then inverse then bordered=false then context', () => {
-    expect(getTagColor({ color: 'blue-inverse', variant: 'outlined' }, 'filled').variant)
+  it('prioritizes local variant over context', () => {
+    expect(getTagColor({ color: 'blue', variant: 'outlined' }, 'filled').variant)
       .toBe('outlined');
-    expect(getTagColor({ color: 'blue-inverse', bordered: false }, 'outlined').variant)
-      .toBe('solid');
-    expect(getTagColor({ bordered: false }, 'solid').variant).toBe('filled');
-    expect(getTagColor({ bordered: true }, 'outlined').variant).toBe('outlined');
-  });
-
-  it('recognizes every preset inverse without generating inline colors', () => {
-    for (const color of [
-      'blue', 'purple', 'cyan', 'green', 'magenta', 'pink', 'red', 'orange',
-      'yellow', 'volcano', 'geekblue', 'lime', 'gold'
-    ]) {
-      expect(getTagColor({ color: `${color}-inverse` })).toEqual({
-        color, variant: 'solid', internal: true, style: []
-      });
-    }
+    expect(getTagColor({}, 'solid').variant).toBe('solid');
   });
 
   it('uses source HSL lightness and keeps the original CSS foreground', () => {

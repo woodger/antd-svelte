@@ -862,14 +862,14 @@
       "features": [
         {
           "id": "layout",
-          "title": "Направление, titlePlacement, RTL и aliases type/vertical/orientationMargin",
+          "title": "Направление, titlePlacement, RTL и vertical",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
             "src/lib/divider.ssr.test.ts",
             "tests/browser/divider.spec.ts"
           ],
-          "note": "Приоритет orientation → vertical → type; left/right физические, start/end логические."
+          "note": "Приоритет orientation → vertical; left/right физические, start/end логические."
         },
         {
           "id": "appearance",
@@ -936,7 +936,7 @@
             "tests/browser/divider-theme.spec.ts",
             "tests/package/divider-theme.ssr.test.ts"
           ],
-          "note": "TextPaddingInline, orientationMargin и verticalMarginInline подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. OrientationMargin — безразмерная доля rail, deprecated prop сохраняет собственный отступ подписи. Source component aliases/algorithms, key/hash, custom CSS-variable prefix, нули, CSS units и явный undefined сверяются с 15 официальными UMD-темами и computed styles 11 вариантов. Reactive updates сохраняют DOM и фокус соседнего input; nested/sibling scopes, inherit=false, удаление темы и unmount изолированы. Native separator, default spacing и explicit componentSize сохранены; локальный prefixCls и ConfigProvider.divider поддержаны отдельным feature."
+          "note": "TextPaddingInline, orientationMargin и verticalMarginInline подготавливаются по 6.6.8 и применяются к корню перед semantic/user styles. OrientationMargin — безразмерная доля rail. Source component aliases/algorithms, key/hash, custom CSS-variable prefix, нули, CSS units и явный undefined сверяются с 15 официальными UMD-темами и computed styles 10 вариантов. Reactive updates сохраняют DOM и фокус соседнего input; nested/sibling scopes, inherit=false, удаление темы и unmount изолированы. Native separator, default spacing и explicit componentSize сохранены; локальный prefixCls и ConfigProvider.divider поддержаны отдельным feature."
         },
         {
           "id": "source-extras",
@@ -947,7 +947,7 @@
             "src/lib/Divider.svelte",
             "src/lib/ConfigProvider.svelte"
           ],
-          "note": "Локальный prefixCls поддержан; общий getPrefixCls/rootPrefixCls и React-only warnings для legacy props/vertical children ещё не перенесены. Согласованные nativeElement/ARIA/snippet и semantic default normalization contracts сохранены."
+          "note": "Локальный prefixCls поддержан; общий getPrefixCls/rootPrefixCls и React-only warnings для vertical children ещё не перенесены. Согласованные nativeElement/ARIA/snippet и semantic default normalization contracts сохранены."
         }
       ]
     },
@@ -9815,7 +9815,7 @@
             "tests/package/empty.ssr.test.ts",
             "tests/browser/empty-source.spec.ts"
           ],
-          "note": "PRESENTED_IMAGE_DEFAULT/SIMPLE соответствуют сохранённым aliases. URL img получает исходные alt/draggable; 0 и true следуют isReactRenderable 1.14.0. ConfigProvider.empty image/class/style и object/function slots root/image/description/footer; raw callback props, local→context image fallback, nested record replacement. Source root style order, imageStyle перед semantic image, local prefix/rootClassName и bind:nativeElement/ref; cleanup после unmount и SSR без присваивания refs."
+          "note": "PRESENTED_IMAGE_DEFAULT/SIMPLE соответствуют сохранённым aliases. URL img получает исходные alt/draggable; 0 и true следуют isReactRenderable 1.14.0. ConfigProvider.empty image/class/style и object/function slots root/image/description/footer; raw callback props, local→context image fallback, nested record replacement. Source root style order, local prefix/rootClassName и bind:nativeElement/ref; cleanup после unmount и SSR без присваивания refs."
         },
         {
           "id": "theme-paint",
@@ -9829,7 +9829,7 @@
             "tests/browser/fixtures/ant-design-empty-reference.json",
             "tools/ant-design-css-recipes.json"
           ],
-          "note": "Source Empty не имеет component-only tokens. Поддержаны aliases/algorithm, cssVar prefix/key/hash, dark/compact, все 15 CSS rules с small и local prefix template. При source theme SVG colors используют глобальные tokens независимо от Empty aliases; FastColor 3.0.1 повторяет getAsSolidColor и сохраняет CSS variables без composition. 57 UMD-сценариев сравнивают классы, объявленные slot effects и SVG paths/paint."
+          "note": "Source Empty не имеет component-only tokens. Поддержаны aliases/algorithm, cssVar prefix/key/hash, dark/compact, все 15 CSS rules с small и local prefix template. При source theme SVG colors используют глобальные tokens независимо от Empty aliases; FastColor 3.0.1 повторяет getAsSolidColor и сохраняет CSS variables без composition. 55 UMD-сценариев сравнивают классы, объявленные slot effects и SVG paths/paint."
         },
         {
           "id": "native-boundaries",
@@ -11805,7 +11805,7 @@
             "tests/browser/fixtures/ant-design-tag-style-reference.json",
             "tests/package/tag-style.ssr.test.ts"
           ],
-          "note": "Перенесены useColor (HSL/alpha, CSS variables, inverse и bordered aliases), приоритет variant и root/icon/content/close semantic objects/functions. ConfigProvider.tag поддерживает class/style/variant/classNames/styles, наследование и замену record; CheckableTag читает только class/style. Source theme использует исходные Tag tokens, алгоритм и component overrides; native dark adaptation сохраняется отдельно. Reactive CSS diff сохраняет shorthand/longhand и нативный !important. 62 UMD-эталона и семь обратимых обновлений описывают проверяемый scope, без утверждения о полном API Tag."
+          "note": "Перенесены useColor (HSL/alpha и CSS variables), приоритет variant и root/icon/content/close semantic objects/functions. ConfigProvider.tag поддерживает class/style/variant/classNames/styles, наследование и замену record; CheckableTag читает только class/style. Source theme использует исходные Tag tokens, алгоритм и component overrides; native dark adaptation сохраняется отдельно. Reactive CSS diff сохраняет shorthand/longhand и нативный !important. 50 UMD-эталонов и текущие обратимые обновления описывают проверяемый scope, без утверждения о полном API Tag."
         },
         {
           "id": "remaining-api",

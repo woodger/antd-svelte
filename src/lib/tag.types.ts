@@ -16,7 +16,7 @@ export type TagPresetColor =
   | 'lime'
   | 'gold';
 export type TagStatusColor = 'success' | 'processing' | 'error' | 'default' | 'warning';
-export type TagColor = TagPresetColor | TagStatusColor | `${TagPresetColor}-inverse` | (string & {});
+export type TagColor = TagPresetColor | TagStatusColor | (string & {});
 export type TagVariant = 'filled' | 'outlined' | 'solid';
 export type TagCloseIcon = boolean | string | number | null | Snippet;
 
@@ -118,10 +118,8 @@ export interface TagProps extends Omit<
   prefixCls?: string;
   /** Preset, status или CSS-цвет; отсутствие сохраняет прежний default class. */
   color?: TagColor;
-  /** Локальный variant, color-inverse, bordered=false, context variant, затем filled. */
+  /** Локальный variant имеет приоритет над context variant, затем filled. */
   variant?: TagVariant;
-  /** @deprecated Используйте variant="filled"; false имеет приоритет над context variant. */
-  bordered?: boolean;
   rootClassName?: string;
   classNames?: TagSemantic;
   styles?: TagSemantic;

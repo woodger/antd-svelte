@@ -50,9 +50,8 @@ export interface ButtonProps extends Omit<
   /** @defaultValue false */
   ghost?: boolean;
   shape?: ButtonShape;
-  /** Имеет приоритет над совместимым alias iconPosition. */
+  /** Расположение иконки относительно текста. */
   iconPlacement?: 'start' | 'end';
-  iconPosition?: 'start' | 'end';
   target?: HTMLAnchorAttributes['target'];
   rel?: HTMLAnchorAttributes['rel'];
   download?: HTMLAnchorAttributes['download'];

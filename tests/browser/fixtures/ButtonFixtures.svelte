@@ -100,7 +100,6 @@
         autoInsertSpace={autoInsert}
         icon={icon ? actionIcon : undefined}
         iconPlacement={end ? 'end' : undefined}
-        iconPosition="start"
         href={link ? '#button-target' : undefined}
         htmlType={submit ? 'submit' : 'button'}
         onclick={() => { clicks++; }}

@@ -116,15 +116,6 @@ test(
     await expect(divider).toHaveCSS('font-weight', '400');
 
     await page.getByLabel('Divider placement').selectOption('start');
-    await page.getByLabel('Divider legacy margin').fill('10');
-
-    await expect(title).toHaveCSS('margin-inline-start', '10px');
-    await expect(divider.locator('.ant-divider-rail-start')).toHaveCSS('width', '0px');
-
-    await page.getByLabel('Divider legacy margin').fill('2em');
-
-    await expect(title).toHaveCSS('margin-inline-start', '28px');
-
     await page.getByLabel('Custom Divider slots').check();
 
     await expect(divider).toHaveClass(/custom-divider-start/);

@@ -48,7 +48,6 @@
         <Tag
           color={values.color}
           variant={values.variant}
-          bordered={values.bordered}
           disabled={values.disabled}
           class={values.class}
           style={values.style}

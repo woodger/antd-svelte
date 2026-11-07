@@ -45,8 +45,7 @@
     { id: 'small', props: { size: 'small' } },
     { id: 'middle', props: { size: 'middle' } },
     { id: 'dashed', props: { children: 'Title', variant: 'dashed' } },
-    { id: 'dotted', props: { children: 'Title', variant: 'dotted' } },
-    { id: 'margin', props: { children: 'Title', titlePlacement: 'start', orientationMargin: 12 } }
+    { id: 'dotted', props: { children: 'Title', variant: 'dotted' } }
   ];
 </script>
 

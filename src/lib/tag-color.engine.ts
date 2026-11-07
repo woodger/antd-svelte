@@ -3,19 +3,14 @@ import { presetColors } from './theme-token.types';
 import type { TagProps, TagVariant } from './tag.types';
 
 export function getTagColor(
-  props: Pick<TagProps, 'color' | 'variant' | 'bordered'>,
+  props: Pick<TagProps, 'color' | 'variant'>,
   contextVariant?: TagVariant
 ) {
-  const inverse = props.color?.endsWith('-inverse');
-  let variant: TagVariant;
-  if (props.variant) variant = props.variant;
-  else if (inverse) variant = 'solid';
-  else if (props.bordered === false) variant = 'filled';
-  else variant = contextVariant || 'filled';
-  let color = inverse ? props.color?.replace('-inverse', '') : props.color;
+  const variant = props.variant || contextVariant || 'filled';
+  let color = props.color;
   if (color === undefined && variant === 'solid') color = 'default';
 
-  const preset = presetColors.some(preset => color === preset || color === `${preset}-inverse`);
+  const preset = presetColors.some(preset => color === preset);
   const status = ['success', 'processing', 'error', 'default', 'warning'].includes(color ?? '');
   const style: (readonly [string, string])[] = [];
   if (!preset && !status && color) {

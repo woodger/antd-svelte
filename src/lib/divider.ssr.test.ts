@@ -84,9 +84,8 @@ describe('Divider server rendering', () => {
   });
 
   it.each<DividerProps>([
-    { orientation: 'vertical', vertical: false, type: 'horizontal' },
-    { vertical: true, type: 'horizontal' },
-    { type: 'vertical' }
+    { orientation: 'vertical', vertical: false },
+    { vertical: true }
   ])('hides vertical content with props %j', props => {
     const body = render(Divider, { props: { ...props, children: 'Hidden' } }).body;
 
@@ -97,30 +96,13 @@ describe('Divider server rendering', () => {
   });
 
   it.each<DividerProps>([
-    { orientation: 'horizontal', vertical: true, type: 'vertical' },
-    { vertical: false, type: 'vertical' }
+    { orientation: 'horizontal', vertical: true },
+    { vertical: false }
   ])('keeps explicit horizontal precedence with props %j', props => {
     const body = render(Divider, { props: { ...props, children: 'Visible' } }).body;
 
     expect(body).toContain('ant-divider-horizontal');
     expect(body).toContain('Visible');
-  });
-
-  it('supports legacy placement and normalizes numeric margins to pixels', () => {
-    const body = render(
-      Divider,
-      { props: { orientation: 'right', orientationMargin: '10', children: 'Title' } }
-    ).body;
-    const centered = render(
-      Divider,
-      { props: { titlePlacement: 'center', orientationMargin: 20, children: 'Title' } }
-    ).body;
-
-    expect(body).toContain('ant-divider-with-text-end');
-    expect(body).toContain('ant-divider-no-default-orientation-margin-end');
-    expect(body).toContain('margin-inline-end:10px');
-    expect(centered).not.toContain('no-default-orientation-margin');
-    expect(centered).not.toContain('margin-inline-');
   });
 
   it(
@@ -131,7 +113,6 @@ describe('Divider server rendering', () => {
           size: 'small',
           titlePlacement: 'left',
           children: 'Title',
-          orientationMargin: 10,
           classNames: ({ props }) => ({
             root: `root-${props.orientation}-${props.titlePlacement}-${props.size}`,
             rail: 'custom-rail',
@@ -159,7 +140,7 @@ describe('Divider server rendering', () => {
       expect(body).toContain('custom-rail');
       expect(body).toContain('custom-content');
       expect(body).toContain('opacity:0.5;opacity:1');
-      expect(body).toContain('margin-inline-start:10px;margin-inline-start:20px');
+      expect(body).toContain('margin-inline-start:20px');
       expect(empty).toContain('opacity:0.5;opacity:0.8;opacity:1');
     }
   );

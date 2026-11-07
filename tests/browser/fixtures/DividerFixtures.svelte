@@ -13,7 +13,6 @@
   let dark = $state(false);
   let compact = $state(false);
   let custom = $state(false);
-  let margin = $state('');
   let nativeElement = $state<HTMLDivElement>();
 </script>
 
@@ -27,7 +26,6 @@
   <label>Divider size<select bind:value={size}><option>inherit</option><option>small</option><option>medium</option><option>large</option></select></label>
   <label>Divider context size<select bind:value={contextSize}><option value={undefined}>inherit</option><option>small</option><option>middle</option><option>large</option></select></label>
   <label>Divider text<input bind:value={text} /></label>
-  <label>Divider legacy margin<input bind:value={margin} /></label>
   <label><input type="checkbox" bind:checked={rich} /> Rich Divider title</label>
   <label><input type="checkbox" bind:checked={dashed} /> Dashed Divider alias</label>
   <label><input type="checkbox" bind:checked={plain} /> Plain Divider title</label>
@@ -52,7 +50,6 @@
         {dashed}
         {plain}
         size={size === 'inherit' ? undefined : size}
-        orientationMargin={margin || undefined}
         children={rich ? title : text}
         classNames={({ props }) =>
           custom

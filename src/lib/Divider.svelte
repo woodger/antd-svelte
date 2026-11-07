@@ -10,9 +10,7 @@
     prefixCls,
     orientation,
     vertical,
-    type,
     titlePlacement,
-    orientationMargin,
     dashed = false,
     variant = 'solid',
     size,
@@ -33,14 +31,9 @@
     orientation === 'horizontal' || orientation === 'vertical'
       ? orientation : typeof vertical === 'boolean'
         ? vertical ? 'vertical' : 'horizontal'
-        : type ?? 'horizontal'
+        : 'horizontal'
   );
-  let placement = $derived(
-    titlePlacement
-    ?? (orientation && !['horizontal', 'vertical'].includes(orientation)
-      ? orientation
-      : 'center')
-  );
+  let placement = $derived(titlePlacement ?? 'center');
   let logicalPlacement = $derived<'start' | 'end' | 'center'>(
     placement === 'left' ? config.direction === 'rtl' ? 'end' : 'start'
       : placement === 'right'
@@ -51,12 +44,6 @@
   let hasChildren = $derived(
     children !== undefined && children !== null && children !== false && children !== ''
   );
-  let hasMargin = $derived(logicalPlacement !== 'center' && orientationMargin != null);
-  let margin = $derived(
-    typeof orientationMargin === 'number' || /^\d+$/.test(String(orientationMargin))
-      ? `${orientationMargin}px`
-      : orientationMargin
-  );
   let semanticInfo = $derived<DividerSemanticInfo>({
     props: {
       ...rest,
@@ -64,9 +51,7 @@
       prefixCls,
       orientation: direction,
       vertical,
-      type,
       titlePlacement: logicalPlacement,
-      orientationMargin,
       dashed,
       variant,
       size: mergedSize,
@@ -120,7 +105,6 @@
       variant !== 'solid' && `${prefix}-${variant}`,
       plain && `${prefix}-plain`,
       config.direction === 'rtl' && `${prefix}-rtl`,
-      hasMargin && `${prefix}-no-default-orientation-margin-${logicalPlacement}`,
       (mergedSize === 'medium' || mergedSize === 'middle') && `${prefix}-md`,
       mergedSize === 'small' && `${prefix}-sm`,
       !hasChildren && [`${prefix}-rail`, classes.rail],
@@ -137,10 +121,7 @@
 >
   {#if hasChildren && direction !== 'vertical'}
     <div class={[`${prefix}-rail ${prefix}-rail-start`, classes.rail]} style={semanticStyles.rail}></div>
-    <span class={[`${prefix}-inner-text`, classes.content]} style={[
-        hasMargin && `margin-inline-${logicalPlacement}:${margin}`,
-        semanticStyles.content
-      ].filter(Boolean).join(';')}>{#if typeof children === 'function'}{@render children()}{:else}{children}{/if}</span>
+    <span class={[`${prefix}-inner-text`, classes.content]} style={semanticStyles.content}>{#if typeof children === 'function'}{@render children()}{:else}{children}{/if}</span>
     <div class={[`${prefix}-rail ${prefix}-rail-end`, classes.rail]} style={semanticStyles.rail}></div>
   {/if}
 </div>

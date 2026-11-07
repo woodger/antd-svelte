@@ -21,13 +21,9 @@ export interface DividerProps extends Omit<
   /** Локальный BEM prefix; пустая строка использует ant-divider. */
   prefixCls?: string;
   children?: Snippet | string | number | null | false;
-  orientation?: DividerOrientation | DividerTitlePlacement;
+  orientation?: DividerOrientation;
   vertical?: boolean;
-  /** @deprecated Используйте orientation. */
-  type?: DividerOrientation;
   titlePlacement?: DividerTitlePlacement;
-  /** @deprecated Используйте styles.content. */
-  orientationMargin?: string | number;
   /** @defaultValue false */
   dashed?: boolean;
   /** @defaultValue 'solid' */

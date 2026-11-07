@@ -179,7 +179,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Empty | Пустое состояние, default/simple SVG, image/description snippets, действия, локаль, темы и восстановление фокуса |
 | Result | Семь статусов, официальные иконки/SVG, static images, component tokens, semantic/provider config, prefix/ref и восстановление фокуса |
 | Steps | Управляемые этапы, статусы, snippets, нативные кнопки, horizontal/vertical, medium/small, локаль, темы и восстановление фокуса |
-| Tag | Preset/status/CSS colors, варианты и legacy aliases, semantic styles, ConfigProvider.tag, snippets и отменяемое закрытие |
+| Tag | Preset/status/CSS colors, варианты, semantic styles, ConfigProvider.tag, snippets и отменяемое закрытие |
 | CheckableTag | Управляемый checked/onChange, click/keyboard callbacks, DOM attrs/ref, нативная toggle-кнопка, aria-pressed и disabled |
 | CheckableTagGroup | Одиночный/множественный выбор, controlled/defaultValue, options, семантические стили и native ref |
 | Badge | Числовой счётчик, overflow/showZero/dot, статусы/preset цвета, string/Snippet text, размеры, offset и доступное полное значение |
@@ -214,7 +214,7 @@ Button `type` задаёт оформление, `htmlType` задаёт нат�
 ## Button
 
 Button сохраняет прежние props и native onclick; добавлены href, color/variant,
-ghost, square shape, iconPlacement (приоритетнее legacy iconPosition),
+ghost, square shape, iconPlacement,
 classNames/styles и rootClassName. Children/icon принимают Snippet, текст,
 число или boolean; 0 отображается, true создаёт пустой присутствующий контент.
 ButtonProps остаётся интерфейсом native button и доступен по прежнему пути
@@ -288,12 +288,10 @@ Divider сохраняет структуру Ant Design 6.6.8: корневой
 Вертикальный Divider не монтирует подпись. Aria-orientation отражает направление;
 компонент не добавляет tabindex и не меняет фокус.
 
-Orientation=horizontal/vertical имеет приоритет над boolean vertical, затем
-используется deprecated type. Для совместимости orientation также принимает
-старые значения размещения подписи; titlePlacement имеет над ними приоритет.
-Start/end зависят от RTL, left/right сохраняют физическую сторону, default=center.
-Deprecated orientationMargin действует только у start/end и переводит число
-или строку из цифр в px. Styles.content может переопределить этот отступ.
+Orientation=horizontal/vertical имеет приоритет над boolean vertical.
+TitlePlacement задаёт положение подписи: start/end зависят от RTL,
+left/right сохраняют физическую сторону, default=center. Отступ подписи
+задаётся через styles.content.
 
 Variant=solid/dashed/dotted, dashed alias и plain повторяют классы эталона.
 Size=small/medium/large наследуется от явно заданного componentSize в ConfigProvider,
@@ -316,8 +314,7 @@ SSR и Chromium-проверки покрывают aliases, ноль, snippets,
 semantic slots, геометрию размещения, темы, RTL и узкий экран.
 `ConfigProvider.theme.components.Divider` поддерживает textPaddingInline,
 orientationMargin и verticalMarginInline, локальные alias-токены и algorithm.
-Токен orientationMargin задаёт долю ширины rail; одноимённый deprecated prop
-продолжает задавать отдельный отступ подписи. Тема применяется уже при SSR,
+Токен orientationMargin задаёт долю ширины rail. Тема применяется уже при SSR,
 обновляется без замены DOM и предшествует semantic styles и пользовательскому style.
 Нули, CSS-единицы, явный undefined и собственный cssVar.prefix сохраняются.
 Проверки: [SSR](./tests/package/divider-theme.ssr.test.ts),
@@ -327,7 +324,7 @@ orientationMargin и verticalMarginInline, локальные alias-токены
 
 Локальный prefixCls меняет BEM-классы корня, вариантов и потомков; пустой prefix
 использует ant-divider. CSS variables и общий marker сохраняют прежние имена.
-Собственный stylesheet из 33 правил добавляется при SSR и очищается при unmount.
+Собственный stylesheet из 27 правил добавляется при SSR и очищается при unmount.
 Defaults ограничены владельцем, включая prefix, совпадающий с общим marker.
 
 ConfigProvider.divider задаёт class/style и object/function classNames/styles.
@@ -343,7 +340,7 @@ Prefix/config updates сохраняют nativeElement, DOM, фокус и со�
 фикстура `?fixture=divider-config`. Общий prefix ConfigProvider и React development
 warnings ещё не перенесены.
 
-Vendor/divider.css содержит 33 правила из закреплённого архива; рецепт divider
+Vendor/divider.css содержит 27 правил из закреплённого архива; рецепт divider
 исключает интеграцию ColorPicker и воспроизводится через `npm run cli -- css`.
 Рецепт divider-prefix выводит CSS data module для локального prefix из тех же правил.
 
@@ -4348,7 +4345,7 @@ ConfigProvider.empty задаёт image, class/style и object/function classNam
 Локальный image имеет приоритет, null/undefined используют context image и затем default.
 Semantic slots root/image/description/footer получают исходные props без defaults.
 Root styles: context styles.root → context style → local styles.root → local style.
-Устаревший imageStyle применяется перед semantic image styles. PrefixCls меняет
+Styles.image задаёт оформление изображения. PrefixCls меняет
 BEM-классы с fallback ant-empty; rootClassName относится к корню.
 Bind:nativeElement и поле nativeElement объекта bind:ref указывают на корневой div после mount;
 при unmount bindings очищаются до undefined, при SSR не присваиваются.
@@ -4356,7 +4353,7 @@ Bind:nativeElement и поле nativeElement объекта bind:ref указы�
 Empty не имеет собственных component tokens; theme.components.Empty поддерживает
 общие aliases/algorithm, variable prefix/key/hash, dark и compact. Все 15 исходных
 CSS rules включают small; для совместимого размера можно добавить class="ant-empty-small".
-[57 UMD-сценариев](./tests/browser/fixtures/ant-design-empty-reference.json) сверяют классы,
+[55 UMD-сценариев](./tests/browser/fixtures/ant-design-empty-reference.json) сверяют классы,
 slot styles, изображения и их исходные цвета при явной source theme.
 Native image=false, inert/ARIA, responsive guards, footer wrapping, paint patterns
 прежнего режима и восстановление фокуса сохранены.
@@ -6690,10 +6687,7 @@ Outlined добавляет border-color. CSS variables используются
 foreground/border; FastColor не вычисляет их значение. Disabled убирает рассчитанные
 цвета, но сохраняет явно переданные styles/style.
 
-Приоритет variant: локальный prop, суффикс color="…-inverse", bordered=false,
-ConfigProvider.tag.variant, затем filled. Inverse удаляет первое вхождение -inverse и выбирает
-solid; явный variant сохраняет приоритет. Deprecated bordered=true не навязывает
-outlined и не отменяет context variant.
+Приоритет variant: локальный prop, ConfigProvider.tag.variant, затем filled.
 
 ConfigProvider.tag наследуется при отсутствии; явный объект, включая {}, заменяет
 родительский record. Поддерживаются class, style, variant, classNames, styles,

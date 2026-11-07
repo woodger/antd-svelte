@@ -56,7 +56,7 @@
     'children', 'icon', 'closeIcon', 'closable', 'closeLabel', 'disabled', 'onClose',
     'onClick', 'onclick', 'id', 'dir', 'role', 'href', 'target', 'aria-label',
     'aria-labelledby', 'aria-describedby', 'aria-disabled', 'class', 'style', 'rootClassName',
-    'classNames', 'styles', 'color', 'variant', 'bordered', 'prefixCls'
+    'classNames', 'styles', 'color', 'variant', 'prefixCls'
   ]);
   let attributes = $derived(Object.fromEntries(Object.entries(props)
     .filter(([key]) => !owned.has(key))));

@@ -1,7 +1,7 @@
 import type { TagConfig, TagProps, ThemeConfig } from 'antd-svelte';
 
 export interface TagStyleValues extends Pick<
-  TagProps, 'color' | 'variant' | 'bordered' | 'disabled' | 'class' | 'style' | 'rootClassName'
+  TagProps, 'color' | 'variant' | 'disabled' | 'class' | 'style' | 'rootClassName'
 > {
   icon?: boolean;
   close?: boolean;

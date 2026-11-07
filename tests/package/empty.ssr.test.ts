@@ -65,12 +65,12 @@ describe('Empty public package SSR', () => {
     expect(local).not.toContain('<svg');
   });
 
-  it('applies semantic image styles after the deprecated imageStyle', () => {
+  it('applies semantic image styles', () => {
     const { body } = render(Empty, { props: {
-      imageStyle: 'height:31px;padding-top:9px', styles: { image: 'height:37px' }
+      styles: { image: 'height:37px;padding-top:9px' }
     } });
 
-    expect(body).toContain('height:31px;padding-top:9px;height:37px');
+    expect(body).toContain('height:37px;padding-top:9px');
   });
 
   it('uses global SVG colors independently of Empty aliases and prepares prefix CSS without browser work', () => {

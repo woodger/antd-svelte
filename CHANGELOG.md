@@ -9,6 +9,11 @@
 
 ### Removed
 
+- Удалены `Button.iconPosition`, `Empty.imageStyle`, `Tag.bordered` и цвета
+  Tag с суффиксом `-inverse`, `Divider.type`, `Divider.orientationMargin`
+  и значения размещения подписи в `Divider.orientation`. Сохранены их актуальные
+  замены и одноимённый компонентный токен Divider.
+
 - Удалены публичный `AnchorLink`, его тип и `Anchor.children`;
   вложенные ссылки остаются доступны через `items[].children`.
 

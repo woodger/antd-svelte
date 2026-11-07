@@ -29,7 +29,6 @@
     ghost = false,
     disabled,
     iconPlacement,
-    iconPosition,
     autoInsertSpace,
     autoFocus,
     href,
@@ -70,7 +69,7 @@
   let loadingIcon = $derived(
     typeof loading === 'object' && loading.icon ? loading.icon : config.button?.loadingIcon
   );
-  let placement = $derived(iconPlacement ?? iconPosition ?? 'start');
+  let placement = $derived(iconPlacement ?? 'start');
   let insert = $derived(
     (autoInsertSpace
       ?? config.button?.autoInsertSpace
@@ -105,7 +104,6 @@
       hreflang,
       referrerpolicy,
       iconPlacement: placement,
-      iconPosition,
       autoInsertSpace,
       autoFocus,
       classNames,
