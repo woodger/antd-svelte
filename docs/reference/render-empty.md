@@ -30,12 +30,10 @@ Svelte Snippet или вложенные readonly arrays этих значени
 | Transfer | Transfer | locale.notFoundContent после вычисления default | `||`, simple small Empty |
 | Table | Table | Существующий empty Snippet | `||`, simple Empty |
 | Фильтр Table | Table.filter | — | `??`, локализованный Empty с image height=24px |
-| List | List | locale.emptyText через `||` | `||`, simple Empty |
 | AutoComplete | Не вызывается | notFoundContent | Как в upstream combobox, глобальный renderer не используется |
 
 В Select/TreeSelect/Cascader/Mentions локальные null, пустая строка и 0 не вызывают
-глобальный callback. List сохраняет исходный `locale.emptyText || renderEmpty || default`:
-локальные falsy используют следующий слой. Table сохраняет свой native empty Snippet
+глобальный callback. Table сохраняет свой native empty Snippet
 вместо ещё не перенесённого полного `locale.emptyText` API.
 
 Для большинства потребителей глобальные null/undefined/false/0/пустая строка выбирают

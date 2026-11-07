@@ -4,7 +4,7 @@
 
   let { componentName }: { componentName?: RenderEmptyComponent; } = $props();
   let simple = $derived(componentName !== undefined);
-  let small = $derived(componentName !== 'Table' && componentName !== 'List');
+  let small = $derived(componentName !== 'Table');
 </script>
 
 {#if componentName !== 'Table.filter'}<Empty

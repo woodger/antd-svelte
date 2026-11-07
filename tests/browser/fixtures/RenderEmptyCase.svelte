@@ -2,7 +2,7 @@
   import type { Snippet } from 'svelte';
   import {
     ConfigProvider, Select, TreeSelect, Cascader, CascaderPanel, Transfer,
-    Mentions, Table, List, AutoComplete, enUS
+    Mentions, Table, AutoComplete, enUS
   } from 'antd-svelte';
   import type {
     RenderEmptyComponent, RenderEmptyContent, RenderEmptyHandler, TableColumn
@@ -84,8 +84,6 @@
         pagination={false} empty={sample.local === 'snippet' ? localContent : undefined} />
       {:else if sample.component === 'Table.filter'}<Table dataSource={rows}
         columns={filterColumns} rowKey="id" mode="server" pagination={false} />
-      {:else if sample.component === 'List'}<List dataSource={[]}
-        locale={sample.local ? { emptyText: local } : undefined} />
       {:else}<AutoComplete options={[]} defaultOpen notFoundContent={local}
         aria-label="Empty AutoComplete" />{/if}
     </div>

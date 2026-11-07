@@ -28,7 +28,6 @@ import type { TimePickerConfig } from './time-picker.types';
 import type { CascaderConfig } from './cascader.types';
 import type { TransferConfig } from './transfer.types';
 import type { PaginationComponentConfig } from './pagination.types';
-import type { ListConfig } from './list.types';
 import type { ListyConfig } from './listy.types';
 import type { TypographyConfig } from './typography.types';
 import type { TourConfig } from './tour.types';
@@ -93,7 +92,6 @@ export interface ConfigContext {
   readonly cascader?: CascaderConfig;
   readonly transfer?: TransferConfig;
   readonly pagination?: PaginationComponentConfig;
-  readonly list?: ListConfig;
   readonly listy?: ListyConfig;
   readonly typography?: TypographyConfig;
   readonly tour?: TourConfig;

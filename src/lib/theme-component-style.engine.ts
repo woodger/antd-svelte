@@ -37,7 +37,7 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Progress' | 'Skeleton' | 'Empty' | 'Result' | 'Alert' | 'Collapse' | 'Card' | 'Carousel'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
-  | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
+  | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
   | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification' | 'Table' | 'Grid';
 
 const factories = {
@@ -145,19 +145,6 @@ const factories = {
   Listy: (token: GlobalToken) => ({
     itemPaddingBlock: token.paddingSM,
     itemPaddingInline: token.padding
-  }),
-  List: (token: GlobalToken) => ({
-    contentWidth: 220,
-    itemPadding: `${token.paddingContentVertical}px 0`,
-    itemPaddingSM: `${token.paddingContentVerticalSM}px ${token.paddingContentHorizontal}px`,
-    itemPaddingLG: `${token.paddingContentVerticalLG}px ${token.paddingContentHorizontalLG}px`,
-    headerBg: 'transparent',
-    footerBg: 'transparent',
-    emptyTextPadding: token.padding,
-    metaMarginBottom: token.padding,
-    avatarMarginRight: token.padding,
-    titleMarginBottom: token.paddingSM,
-    descriptionFontSize: token.fontSize
   }),
   Typography: () => ({ titleMarginTop: '1.2em', titleMarginBottom: '0.5em' }),
   Form: (token: GlobalToken & Partial<FormComponentToken>) => ({
@@ -433,7 +420,6 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Transfer: [],
   Tree: [],
   Listy: [],
-  List: [],
   Typography: [],
   Form: [],
   FloatButton: [],

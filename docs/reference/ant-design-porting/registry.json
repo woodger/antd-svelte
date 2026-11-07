@@ -9874,8 +9874,7 @@
           "requiredForV1": false,
           "evidence": [
             "readme.md",
-            "src/lib/config-context.ts",
-            "src/lib/List.svelte"
+            "src/lib/config-context.ts"
           ],
           "note": "Общий ConfigProvider prefix и React development warnings не перенесены; поддержка renderEmpty выделена отдельно."
         },
@@ -10018,30 +10017,11 @@
       "id": "list",
       "name": "List",
       "category": "data-display",
-      "scope": "target",
-      "scopeReason": "Существующий deprecated List включён в полную цель переноса 6.6.8. Listy остаётся отдельным семейством и не заменяет его API.",
+      "scope": "excluded",
+      "scopeReason": "Deprecated List полностью удалён по решению владельца; актуальная замена — Listy. Запись сохраняет закреплённый каталог, не задаёт будущую работу.",
       "upstreamPath": "components/list",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
-      "exports": [
-        {
-          "upstream": "List",
-          "local": [
-            "List"
-          ]
-        },
-        {
-          "upstream": "List.Item",
-          "local": [
-            "ListItem"
-          ]
-        },
-        {
-          "upstream": "List.Item.Meta",
-          "local": [
-            "ListItemMeta"
-          ]
-        }
-      ],
+      "exports": [],
       "dependencies": [
         "config-provider",
         "grid",
@@ -10059,153 +10039,16 @@
       "priority": "p2",
       "effort": "M",
       "evidence": [
-        "src/lib/List.svelte",
-        "src/lib/ListItem.svelte",
-        "src/lib/ListItemMeta.svelte",
-        "src/lib/RenderContent.svelte",
-        "src/lib/list.types.ts",
-        "src/lib/list.engine.ts",
-        "src/lib/list.dom.ts",
-        "src/lib/list.engine.test.ts",
-        "src/lib/list.ssr.test.ts",
-        "src/lib/vendor/list.css",
-        "tests/package/list.ssr.test.ts",
-        "tests/package/ListFixture.svelte",
-        "tests/browser/list.spec.ts",
-        "tests/browser/fixtures/ListFixtures.svelte",
-        "readme.md"
+        "docs/reference/ant-design-porting/readme.md"
       ],
       "features": [
         {
-          "id": "data-rendering",
-          "title": "Readonly records, row keys и Svelte content",
-          "state": "supported",
-          "requiredForV1": true,
-          "evidence": [
-            "src/lib/list.engine.test.ts",
-            "src/lib/list.ssr.test.ts",
-            "tests/package/list.ssr.test.ts",
-            "tests/browser/list.spec.ts"
-          ],
-          "note": "RenderItem — прямой generic snippet с page-local index; children добавляются после записей. Сохранены ключи 0/empty, React string coercion и fallback local index. Повторы не удаляют записи; occurrence key предотвращает фатальный Svelte duplicate-key exception. Непустые данные без renderer оставляют контейнер, как в upstream."
-        },
-        {
-          "id": "pagination",
-          "title": "Исходные defaults, controlled callbacks, server pages и позиции",
-          "state": "supported",
-          "requiredForV1": true,
-          "evidence": [
-            "src/lib/list.engine.test.ts",
-            "src/lib/list.ssr.test.ts",
-            "tests/package/list.ssr.test.ts",
-            "tests/browser/list.spec.ts"
-          ],
-          "note": "False/true/object/null, read-once defaults, undefined-skipping merge, controlled owner rejection и callback order onShowSizeChange→onChange. State сохраняется при скрытии pagination; top/bottom/both, default align=end; loadMore заменяет только bottom. Source slice сохраняет целую серверную порцию вне offset, current ограничен сверху без callbacks; общий Pagination сохраняет свой прежний bind/normalization contract."
-        },
-        {
-          "id": "grid-layout",
-          "title": "Responsive grid и horizontal/vertical item layout",
-          "state": "supported",
-          "requiredForV1": true,
-          "evidence": [
-            "src/lib/list.engine.test.ts",
-            "src/lib/list.ssr.test.ts",
-            "tests/package/list.ssr.test.ts",
-            "tests/browser/list.spec.ts"
-          ],
-          "note": "Row/Col/gutter, largest-active-breakpoint lookup без lower-configured fallback, SSR grid.column; native LI либо grid DIV/Col. Исходные children text rules для массивов, DOM measurement для snippets, vertical main/extra включая 0. Source CSS61 rules, media768/576, без keyframes. Размеры, margin, padding и геометрия сверяются с pin6.6.8."
-        },
-        {
-          "id": "meta-semantic",
-          "title": "Meta/actions/extra, config slots и native refs",
-          "state": "supported",
-          "requiredForV1": true,
-          "evidence": [
-            "src/lib/list.engine.test.ts",
-            "src/lib/list.ssr.test.ts",
-            "tests/package/list.ssr.test.ts",
-            "tests/browser/list.spec.ts"
-          ],
-          "note": "Avatar/title/description включая0/true; h4 title и исходные margins; Meta children и root extra не создают блоки. Actions/separators, horizontal raw extra, context/local class/style priority. bind:nativeElement для List/Item/Meta, Meta bind:ref object; Item grid ref указывает на внешний Col. Очистка refs на unmount."
-        },
-        {
-          "id": "loading-empty-lifecycle",
-          "title": "Spin/Empty, renderEmpty, SSR, темы и доступность",
-          "state": "supported",
-          "requiredForV1": true,
-          "evidence": [
-            "src/lib/list.engine.test.ts",
-            "src/lib/list.ssr.test.ts",
-            "tests/package/list.ssr.test.ts",
-            "tests/browser/list.spec.ts"
-          ],
-          "note": "Boolean/поддержанные Spin props, empty loading stub53, source loading={} distinction, delay и inert busy children существующего Spin; pager остаётся снаружи. Locale.emptyText || ConfigProvider.renderEmpty(List) || simple Empty; lazy producer, source falsy fallback. SSR без DOM/media/observer/timers, cleanup на unmount, нативные links/buttons с видимым focus, RTL/dark/compact/reduced motion."
-        },
-        {
-          "id": "opaque-snippet-ssr",
-          "title": "Автоматическое mixed-text SSR для непрозрачного snippet",
-          "state": "partial",
-          "requiredForV1": false,
-          "evidence": [
-            "readme.md"
-          ],
-          "note": "Массив children сохраняет виртуальные типы string/number и точный SSR no-flex. Для обычного snippet SSR начинает с flex, после mount DOM observer проверяет только диапазон children без видимой обёртки; DOM не различает string и number. Для точного SSR/числовых mixed children передайте массив. Это явная Svelte boundary; полная React.Children introspection не заявлена."
-        },
-        {
-          "id": "advanced-api",
-          "title": "Пользовательские breakpoints, prefix CSS и полный Spin API",
+          "id": "deprecated-excluded",
+          "title": "Deprecated List вне целевой библиотеки",
           "state": "missing",
-          "requiredForV1": false,
-          "evidence": [
-            "readme.md"
-          ],
-          "note": "Пользовательские breakpoint tokens responsive grid/media и расширенные ещё не перенесённые Spin props остаются дальнейшими этапами; встроенный CSS рассчитан на ant-list, arbitrary prefix CSS не генерируется. React refs/nodes адаптированы к snippets/native bindings, deprecation/dev warnings не испускаются. V1-ready не означает полный React API."
-        },
-        {
-          "id": "component-theme",
-          "title": "11 component tokens, font/color/spacing aliases и algorithms",
-          "state": "supported",
-          "requiredForV1": false,
-          "evidence": [
-            "src/lib/List.svelte",
-            "src/lib/ListItem.svelte",
-            "src/lib/theme-list-tokens-reference.test.ts",
-            "tools/fixtures/ant-design-list-tokens-reference.json",
-            "tests/package/list-theme.ssr.test.ts",
-            "tests/browser/list-theme.spec.ts",
-            "tests/browser/fixtures/ant-design-list-theme-reference.json"
-          ],
-          "note": "Все 11 source defaults рассчитываются из component alias tokens; override/algorithm и отдельный CSS-variable prefix подключены к общему theme bridge. Root и контейнер строк восстанавливают List variables внутри Spin; Col сохраняет source global alias reset без переноса List typography на соседние controls. 17 официальных UMD-тем / 136 наборов CSS-измерений покрывают normal/small/large/vertical/grid/empty, header/footer, Meta/avatar/title/description, actions/extra/pagination, font/color/spacing aliases, dark/compact, zero/undefined, CSS lengths, config/local style priorities, CSS variables, RTL и nested/reset/sibling scopes. Проверены default media thresholds на 480/700px; пользовательские breakpoints остаются отдельным gap. Theme updates сохраняют keyed rows, page/callbacks и draft/selection/focus; inherit reset, legacy defaults и unmount не меняют sibling scopes. SSR не создаёт DOM/media/observers/timers; native data/rendering/ref/loading contracts сохранены."
-        },
-        {
-          "id": "render-empty",
-          "title": "ConfigProvider.renderEmpty: source priorities и native boundaries",
-          "state": "supported",
-          "requiredForV1": false,
-          "evidence": [
-            "src/lib/List.svelte",
-            "src/lib/RenderEmpty.svelte",
-            "tests/package/render-empty.ssr.test.ts",
-            "tests/browser/render-empty.spec.ts",
-            "tests/browser/fixtures/ant-design-render-empty-reference.json",
-            "tests/browser/fixtures/render-empty-native-reference.json",
-            "docs/reference/render-empty.md"
-          ],
-          "note": "Сохранены locale.emptyText || renderEmpty(List) || simple Empty, lazy producer и source falsy fallback. Общий рекурсивный renderer содержимого вынесен из приватного ListContent в RenderContent без новых DOM wrappers."
-        },
-        {
-          "id": "shared-link-reset",
-          "title": "Общие стили ссылок, состояния и inline priority",
-          "state": "supported",
-          "requiredForV1": false,
-          "evidence": [
-            "src/lib/vendor/list-link-reset.css",
-            "tools/ant-design-css-recipes.json",
-            "tests/browser/fixtures/ListLinksFixtures.svelte",
-            "tests/browser/fixtures/ant-design-list-links-reference.json",
-            "tests/browser/list-links.spec.ts"
-          ],
-          "note": "14 общих source правил из закреплённого npm CSS ограничены :where(.ant-list-css-var,.ant-listy-css-var) a, без глобального reset внешних ссылок. Specificity a/pseudo сохранена; List Meta title/hover colors и inline styles приоритетнее. Восстановлены colorLink/hover/active и linkDecoration/hover/focus, named CSS-variable prefixes и исходные root-variable scope resets контейнера List. Восемь official UMD presets / 96 состояний фиксируют Meta/action/raw Listy links, light/dark/compact/RTL, aliases, CSS variables и local CSS priority. Native focus-visible ring, href/Enter/callbacks, DOM/focus при обновлении темы и оформление внешних anchors сохраняются; browser checks используют публичный пакет."
+          "requiredForV1": true,
+          "evidence": [],
+          "note": "Публичного переноса нет: прежние List/Item/Meta удалены. Scope excluded исключает семейство из очереди; missing фиксирует отсутствие реализации, не поручение на перенос."
         }
       ]
     },
@@ -14768,8 +14611,7 @@
           "evidence": [
             "src/lib/spin.model.test.ts",
             "src/lib/spin.ssr.test.ts",
-            "tests/browser/spin.spec.ts",
-            "tests/browser/list.spec.ts"
+            "tests/browser/spin.spec.ts"
           ],
           "note": "Standalone/children, default true, finite normalized delay и restart/cancel; размеры small/medium/middle/large/default, source description/tip и scalar children, locale/RTL/native palettes. SSR не создаёт таймеров. Native delay округляет/ограничивает положительное число, показывает delay=0 синхронно и заново откладывает уже видимый индикатор при смене delay; React debounce 5.0.2 сохраняет видимый статус при смене положительной delay. Этот ранее согласованный контракт сохранён и отделён от Source-покрытия. Loading props List с delay не требуют ref binding и сохраняют таймер при переходе из inactive state."
         },

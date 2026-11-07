@@ -370,21 +370,6 @@ export interface LayoutComponentToken {
   lightTriggerColor: string;
 }
 
-/** Отступы, фон и размеры List/Item/Meta; defaults рассчитываются из alias tokens. */
-export interface ListComponentToken {
-  contentWidth: number | string;
-  itemPaddingLG: string;
-  itemPaddingSM: string;
-  itemPadding: string;
-  headerBg: string;
-  footerBg: string;
-  emptyTextPadding: ThemeCSSValue;
-  metaMarginBottom: ThemeCSSValue;
-  avatarMarginRight: ThemeCSSValue;
-  titleMarginBottom: ThemeCSSValue;
-  descriptionFontSize: number;
-}
-
 /** Отступы Listy; itemPaddingBlock также участвует в source estimate виртуальных строк. */
 export interface ListyComponentToken {
   itemPaddingBlock: number;
@@ -942,7 +927,6 @@ export interface ComponentTokenMap {
   Input?: InputComponentToken;
   InputNumber?: InputNumberComponentToken;
   Layout?: LayoutComponentToken;
-  List?: ListComponentToken;
   Listy?: ListyComponentToken;
   Mentions?: MentionsComponentToken;
   Notification?: NotificationComponentToken;

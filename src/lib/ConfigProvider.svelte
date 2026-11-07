@@ -29,7 +29,6 @@
   import type { CascaderConfig } from './cascader.types';
   import type { TransferConfig } from './transfer.types';
   import type { PaginationComponentConfig } from './pagination.types';
-  import type { ListConfig } from './list.types';
   import type { ListyConfig } from './listy.types';
   import type { TypographyConfig } from './typography.types';
   import type { TourConfig } from './tour.types';
@@ -104,7 +103,6 @@
     cascader?: CascaderConfig;
     transfer?: TransferConfig;
     pagination?: PaginationComponentConfig;
-    list?: ListConfig;
     listy?: ListyConfig;
     typography?: TypographyConfig;
     tour?: TourConfig;
@@ -129,7 +127,7 @@
     wave?: WaveConfig;
     /** Наследуемый virtual; пока используется Listy. Без него Listy рендерит raw mode. */
     virtual?: boolean;
-    /** Producer callback пустого состояния; пока используется List. Наследуется от родителя. */
+    /** Producer callback пустых состояний контролов и Table. Наследуется от родителя. */
     renderEmpty?: RenderEmptyHandler;
     /**
      * Наследуемый контейнер popup. Undefined сохраняет родительскую функцию.
@@ -193,7 +191,6 @@
     cascader,
     transfer,
     pagination,
-    list,
     listy,
     typography,
     tour,
@@ -340,9 +337,6 @@
     },
     get pagination() {
       return pagination ?? parent.pagination;
-    },
-    get list() {
-      return list ?? parent.list;
     },
     get listy() {
       return listy ?? parent.listy;

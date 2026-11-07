@@ -6,7 +6,8 @@
     "documentMode": "CSS1Compat",
     "source": "package/dist/antd.min.js; runtime CSS-in-JS; React 18.3.1; inherited global-token typography/color; public consumer APIs and ConfigProvider.renderEmpty",
     "operation": "Open each actual public consumer and compare custom scalars/nodes/arrays, falsy OR/default vs Table.filter nullish fallback, local override, nested provider replacement and AutoComplete exclusion",
-    "nativeBoundary": "Without renderEmpty, existing native localized text/loading/defaults remain. With renderEmpty, source default simple/small Empty is used after falsy output; Table.filter uses its own localized 24px image. Table empty snippet represents locale.emptyText. Callback scheduling is consumption-driven, except Transfer derives locale at root; React render counts and native popup/table DOM/open state are not compared. Empty native ARIA/paint/responsive contracts remain. Visibility/blank slots normalize to an empty array. Local zero Select/TreeSelect stays visible and is compared against fresh pre-migration library revision 8847e8d rather than source popup suppression."
+    "nativeBoundary": "Without renderEmpty, existing native localized text/loading/defaults remain. With renderEmpty, source default simple/small Empty is used after falsy output; Table.filter uses its own localized 24px image. Table empty snippet represents locale.emptyText. Callback scheduling is consumption-driven, except Transfer derives locale at root; React render counts and native popup/table DOM/open state are not compared. Empty native ARIA/paint/responsive contracts remain. Visibility/blank slots normalize to an empty array. Local zero Select/TreeSelect stays visible and is compared against fresh pre-migration library revision 8847e8d rather than source popup suppression.",
+    "scope": "Current consumers only; deprecated List cases removed. Retained raw measurements unchanged."
   },
   "viewport": {
     "width": 1000,
@@ -1055,141 +1056,6 @@
       "snapshot": []
     },
     {
-      "name": "List-text",
-      "component": "List",
-      "renderer": "text",
-      "snapshot": [
-        {
-          "text": "Global List",
-          "empty": []
-        }
-      ]
-    },
-    {
-      "name": "List-snippet",
-      "component": "List",
-      "renderer": "snippet",
-      "snapshot": [
-        {
-          "text": "Global customEmpty global action 0",
-          "empty": []
-        }
-      ]
-    },
-    {
-      "name": "List-array",
-      "component": "List",
-      "renderer": "array",
-      "snapshot": [
-        {
-          "text": "Global List|0Global customEmpty global action 0|end",
-          "empty": []
-        }
-      ]
-    },
-    {
-      "name": "List-false",
-      "component": "List",
-      "renderer": "false",
-      "snapshot": [
-        {
-          "text": "No data",
-          "empty": [
-            {
-              "normal": true,
-              "small": false,
-              "description": "No data",
-              "imageHeight": "40px"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "List-null",
-      "component": "List",
-      "renderer": "null",
-      "snapshot": [
-        {
-          "text": "No data",
-          "empty": [
-            {
-              "normal": true,
-              "small": false,
-              "description": "No data",
-              "imageHeight": "40px"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "List-undefined",
-      "component": "List",
-      "renderer": "undefined",
-      "snapshot": [
-        {
-          "text": "No data",
-          "empty": [
-            {
-              "normal": true,
-              "small": false,
-              "description": "No data",
-              "imageHeight": "40px"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "List-zero",
-      "component": "List",
-      "renderer": "zero",
-      "snapshot": [
-        {
-          "text": "No data",
-          "empty": [
-            {
-              "normal": true,
-              "small": false,
-              "description": "No data",
-              "imageHeight": "40px"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "List-true",
-      "component": "List",
-      "renderer": "true",
-      "snapshot": []
-    },
-    {
-      "name": "List-empty",
-      "component": "List",
-      "renderer": "empty",
-      "snapshot": [
-        {
-          "text": "No data",
-          "empty": [
-            {
-              "normal": true,
-              "small": false,
-              "description": "No data",
-              "imageHeight": "40px"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "List-empty-array",
-      "component": "List",
-      "renderer": "empty-array",
-      "snapshot": []
-    },
-    {
       "name": "AutoComplete-text",
       "component": "AutoComplete",
       "renderer": "text",
@@ -1544,66 +1410,6 @@
       ]
     },
     {
-      "name": "List-local-null",
-      "component": "List",
-      "renderer": "text",
-      "local": "null",
-      "snapshot": [
-        {
-          "text": "Global List",
-          "empty": []
-        }
-      ]
-    },
-    {
-      "name": "List-local-zero",
-      "component": "List",
-      "renderer": "text",
-      "local": "zero",
-      "snapshot": [
-        {
-          "text": "Global List",
-          "empty": []
-        }
-      ]
-    },
-    {
-      "name": "List-local-empty",
-      "component": "List",
-      "renderer": "text",
-      "local": "empty",
-      "snapshot": [
-        {
-          "text": "Global List",
-          "empty": []
-        }
-      ]
-    },
-    {
-      "name": "List-local-text",
-      "component": "List",
-      "renderer": "text",
-      "local": "text",
-      "snapshot": [
-        {
-          "text": "Local empty",
-          "empty": []
-        }
-      ]
-    },
-    {
-      "name": "List-local-snippet",
-      "component": "List",
-      "renderer": "text",
-      "local": "snippet",
-      "snapshot": [
-        {
-          "text": "Local custom",
-          "empty": []
-        }
-      ]
-    },
-    {
       "name": "AutoComplete-local-null",
       "component": "AutoComplete",
       "renderer": "text",
@@ -1689,18 +1495,6 @@
       ]
     },
     {
-      "name": "List-nested-text",
-      "component": "List",
-      "renderer": "text",
-      "nested": "text",
-      "snapshot": [
-        {
-          "text": "Nested List",
-          "empty": []
-        }
-      ]
-    },
-    {
       "name": "AutoComplete-nested-text",
       "component": "AutoComplete",
       "renderer": "text",
@@ -1759,25 +1553,6 @@
     {
       "name": "Table-nested-false",
       "component": "Table",
-      "renderer": "text",
-      "nested": "false",
-      "snapshot": [
-        {
-          "text": "No data",
-          "empty": [
-            {
-              "normal": true,
-              "small": false,
-              "description": "No data",
-              "imageHeight": "40px"
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "List-nested-false",
-      "component": "List",
       "renderer": "text",
       "nested": "false",
       "snapshot": [

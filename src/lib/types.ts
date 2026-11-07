@@ -29,7 +29,7 @@ export type GetTargetContainer = () => HTMLElement | Window;
 export type GetContainer = string | Element | DocumentFragment
   | (() => Element | DocumentFragment) | false;
 
-export type RenderEmptyComponent = 'Table' | 'Table.filter' | 'List' | 'Select'
+export type RenderEmptyComponent = 'Table' | 'Table.filter' | 'Select'
   | 'TreeSelect' | 'Cascader' | 'Transfer' | 'Mentions';
 export type RenderEmptyContent = string | number | boolean | null | undefined | Snippet
   | readonly RenderEmptyContent[];

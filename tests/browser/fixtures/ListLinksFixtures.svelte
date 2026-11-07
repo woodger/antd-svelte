@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ConfigProvider, List, ListItem, ListItemMeta, Listy, theme,
+  import { ConfigProvider, Listy, theme,
     type ThemeConfig } from 'antd-svelte';
   import reference from './ant-design-list-links-reference.json';
 
@@ -8,7 +8,6 @@
   let mounted = $state(true);
   let clicks = $state(0);
   let sample = $derived(reference.cases.find(item => item.name === preset)!);
-  const rows = [{ key: 'one' }];
   const items = [{ id: 'one' }];
   let configured = $derived<ThemeConfig>({
     mode: sample.dark ? 'dark' : 'light',
@@ -37,7 +36,7 @@
 </script>
 
 <section id="list-links-fixture">
-  <h2>List / Listy links</h2>
+  <h2>Listy links</h2>
   <select aria-label="List links preset" bind:value={preset}>
     {#each reference.cases as item}<option value={item.name}>{item.name}</option>{/each}
   </select>
@@ -47,13 +46,6 @@
   <ConfigProvider theme={configured} direction={sample.rtl ? 'rtl' : 'ltr'}>
     {#if mounted}
       <div style="width:600px;max-width:90vw;margin:40px" dir={sample.rtl ? 'rtl' : 'ltr'}>
-        <List style={rootStyle} dataSource={rows} rowKey="key">
-          {#snippet renderItem()}
-            <ListItem actions={[action]}>
-              <ListItemMeta avatar="A" {title} description="Description" />
-            </ListItem>
-          {/snippet}
-        </List>
         <Listy style={rootStyle} {items} rowKey="id" virtual={false}>
           {#snippet itemRender()}<a id="list-link-row" href="#row" style={inlineStyle}
             onclick={() => clicks++}>Row link</a>{/snippet}
@@ -64,8 +56,3 @@
   </ConfigProvider>
   <output aria-label="List link clicks">{clicks}</output>
 </section>
-
-{#snippet title()}<a id="list-link-title" href="#title" style={inlineStyle}
-  onclick={() => clicks++}>Title link</a>{/snippet}
-{#snippet action()}<a id="list-link-action" href="#action" style={inlineStyle}
-  onclick={() => clicks++}>Action link</a>{/snippet}

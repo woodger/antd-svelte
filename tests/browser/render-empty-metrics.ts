@@ -9,8 +9,7 @@ export function snapshotRenderEmpty(component: string) {
     Transfer: '.ant-transfer-list-body-not-found',
     Mentions: '.ant-mentions-dropdown-menu-item-disabled',
     Table: '.ant-table-placeholder .ant-table-cell',
-    'Table.filter': '.filter-options,.ant-table-filter-dropdown',
-    List: '.ant-list-empty-text'
+    'Table.filter': '.filter-options,.ant-table-filter-dropdown'
   };
   const slots = [...frame.querySelectorAll<HTMLElement>(selectors[component])].filter(node =>
     node.getClientRects().length && getComputedStyle(node).visibility !== 'hidden'

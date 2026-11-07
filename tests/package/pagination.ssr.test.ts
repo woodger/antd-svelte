@@ -1,13 +1,12 @@
 import { render } from 'svelte/server';
 import { describe, expect, it, vi } from 'vitest';
-import { Pagination, type PaginationConfig, type PaginationProps } from 'antd-svelte';
+import { Pagination, type PaginationProps } from 'antd-svelte';
 import PaginationFeatures from '../browser/fixtures/PaginationFeaturesFixtures.svelte';
 
 describe('Pagination source public package', () => {
-  it('exports extended Props and List pagination config without changing binding props', () => {
-    const config: PaginationConfig = { position: 'both', simple: { readOnly: true } };
+  it('exports extended Props without changing pagination binding props', () => {
     const props: PaginationProps = {
-      ...config,
+      simple: { readOnly: true },
       total: 120,
       current: 2,
       pageSize: 10,
@@ -20,7 +19,6 @@ describe('Pagination source public package', () => {
     expect(body).toContain('ant-pagination-simple');
     expect(body).toContain('ant-pagination-end');
     expect(body).toContain('title="2/12"');
-    expect(body).not.toContain('position=');
   });
 
   it('renders the complete fixture without browser globals or scheduled work', () => {

@@ -4,7 +4,7 @@ import reference from './fixtures/ant-design-list-links-reference.json' with { t
 test.use({ viewport: reference.viewport });
 
 for (const sample of reference.cases) {
-  test(`List and Listy links match source colors and decorations for ${sample.name}`, async ({ page }) => {
+  test(`Listy links match source colors and decorations for ${sample.name}`, async ({ page }) => {
     await page.goto('/?fixture=list-links');
     await page.getByLabel('List links preset', { exact: true }).selectOption(sample.name);
 
@@ -34,12 +34,12 @@ for (const sample of reference.cases) {
 }
 
 for (const source of [false, true]) {
-  test(`List links preserve keyboard navigation and callbacks in ${source ? 'source' : 'legacy'} theme`,
+  test(`Listy links preserve keyboard navigation and callbacks in ${source ? 'source' : 'native'} theme`,
     async ({ page }) => {
       await page.goto('/?fixture=list-links');
       await page.getByLabel('Source list links', { exact: true }).setChecked(source);
 
-      for (const [index, kind] of ['title', 'action', 'row'].entries()) {
+      for (const [index, kind] of ['row'].entries()) {
         const link = page.locator(`#list-link-${kind}`);
         await expect(link).toHaveCSS('text-decoration-line', 'none');
         await link.focus();
@@ -57,7 +57,7 @@ for (const source of [false, true]) {
     });
 }
 
-test('List link tokens update without replacing the focused native anchor', async ({ page }) => {
+test('Listy link tokens update without replacing the focused native anchor', async ({ page }) => {
   await page.goto('/?fixture=list-links');
   const link = page.locator('#list-link-row');
   const original = await link.elementHandle();

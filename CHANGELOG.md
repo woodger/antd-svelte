@@ -9,6 +9,10 @@
 
 ### Removed
 
+- Deprecated List/ListItem/ListItemMeta, их types/config/tokens, CSS-рецепт,
+  отдельные tests/fixtures и List-ветка renderEmpty. Актуальный Listy сохранён;
+  общий reset ссылок ограничен Listy и сверяется с его собственным UMD.
+
 - Deprecated StatisticCountdown и Statistic.valueStyle. Обратный отсчёт задаётся
   через StatisticTimer type="countdown", оформление значения — styles.content.
 

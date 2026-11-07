@@ -47,13 +47,6 @@ export interface PaginationComponentConfig {
   totalBoundaryShowSizeChanger?: number;
 }
 
-export type PaginationPosition = 'top' | 'bottom' | 'both';
-
-/** Конфигурация пагинации List; position определяет расположение внутри списка. */
-export interface PaginationConfig extends Omit<PaginationProps, 'rootClassName'> {
-  position?: PaginationPosition;
-}
-
 /** Pagination сохраняет bind:current/pageSize и нормализацию чисел прежнего API. */
 export interface PaginationProps {
   /** @defaultValue 0 */

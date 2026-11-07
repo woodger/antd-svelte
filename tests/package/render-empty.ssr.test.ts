@@ -25,14 +25,6 @@ describe('ConfigProvider renderEmpty public consumers SSR', () => {
     expect(observed).toEqual([]);
   });
 
-  it('retains the source truthy fallback for List locale zero', () => {
-    const { body } = render(RenderEmptyCase, { props: { sample: {
-      name: 'list', component: 'List', renderer: 'text', local: 'zero'
-    } } });
-
-    expect(body).toContain('Global List');
-  });
-
   it('uses simple small source defaults after a falsy producer while preserving the native absence case', () => {
     const source = render(RenderEmptyCase, { props: { sample: {
       name: 'falsy', component: 'Transfer', renderer: 'zero'

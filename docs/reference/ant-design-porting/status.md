@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **111**.
-Есть публичная реализация у **70** семейств; отсутствует у **3**.
-Проверенный объём v1 покрыт у **58**; требуется аудит у **12**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **108**.
+Есть публичная реализация у **69** семейств; отсутствует у **4**.
+Проверенный объём v1 покрыт у **57**; требуется аудит у **12**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -60,7 +60,7 @@ Candidate означает запись каталога, для которой 
 | [Descriptions](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/descriptions) | data-display | target | Descriptions | Согласованный v1 покрыт | PrefixCls, пользовательские breakpoints (missing); Сохраняемые native defaults в semantic callback props (partial) |
 | [Empty](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/empty) | data-display | target | Empty | Согласованный v1 покрыт | Сохраняемые Svelte/native contracts (partial); Общий prefix и diagnostics (missing) |
 | [Image](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/image) | data-display | target | Image, ImagePreviewGroup | Согласованный v1 покрыт | Progress placeholder, полный semantic/config/icons API, container и motion (missing) |
-| [List](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/list) | data-display | target | List, ListItem, ListItemMeta | Согласованный v1 покрыт | Автоматическое mixed-text SSR для непрозрачного snippet (partial); Пользовательские breakpoints, prefix CSS и полный Spin API (missing) |
+| [List](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/list) | data-display | excluded | — | Нет публичной реализации | Deprecated List вне целевой библиотеки (missing) |
 | [Listy](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/listy) | data-display | target | Listy | Согласованный v1 покрыт | Произвольный prefix CSS и React-specific API (missing); Source stale estimate при неизменной измеренной высоте строк (partial) |
 | [Popover](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/popover) | data-display | target | Popover | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Остальные исходные Popover настройки (partial); Fresh/cache supported props и opaque Snippet boundary (partial) |
 | [QRCode](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/qr-code) | data-display | target | QRCode | Согласованный v1 покрыт | PrefixCls и React development warnings (missing) |
