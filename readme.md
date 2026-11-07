@@ -9389,6 +9389,31 @@ rules используются прежние правила createForm верх
 сохранено в [наблюдении](./tests/browser/fixtures/ant-design-form-touched-paths-observation.json)
 и не повторяется в Svelte. Запрос не создаёт поля и не меняет metadata.
 
+`isFieldsTouched()` проверяет, есть ли touched-поле. `isFieldsTouched(true)`
+проверяет все bindings; корни FormList сами не блокируют этот вариант проверки.
+Список имён задаёт группы по префиксам: `isFieldsTouched(names, true)` требует
+хотя бы одного touched-поля в каждой группе, как upstream. Это не проверка всех
+потомков группы. Например, `isFieldsTouched([['user']], true)` станет true после
+взаимодействия с одним полем внутри user; выбор обоих leaf paths требует оба.
+
+В общий набор входят FormItem/FormList, поля с правилами createForm и явно
+touched-поля модели. Корни initialValues без UI и правил не добавляют controls
+в проверку allTouched. Прежние правила blur/submit и модели без UI сохраняются.
+Пустой список имён возвращает false, а с allTouched=true — true. Вызов
+`isFieldsTouched(undefined, true)` равен `isFieldsTouched(true)`; `[[]]`
+выбирает модель как одну группу. Падения этих перегрузок Ant Design 6.6.8
+сохранены в [raw reference](./tests/browser/fixtures/ant-design-form-aggregate-touched-observation.json).
+
+`isFieldsValidating(names?)` проверяет, выполняется ли обычная validation хотя бы
+одного выбранного поля. Без списка учитываются все поля модели; имена совпадают
+точно, без выбора потомков. Пустой список не выбирает поля. ValidateOnly не
+добавляет validating и не прерывает видимую проверку; поле без правил не получает
+этот флаг. `isFieldValidating(name)` использует ту же проверку одного имени.
+Группы, списки, reset/unmount и параллельные запросы сверены
+[в браузере](./tests/browser/form-aggregate.spec.ts),
+[через публичный пакет](./tests/package/form-aggregate.ssr.test.ts) и
+[в модели](./src/lib/form-aggregate.test.ts).
+
 Правила включают required, min/max, pattern и синхронный либо
 асинхронный `validator(value, values)`. Для строк min/max считают Unicode
 code points, для чисел сравнивают значение, для массивов считают элементы.
@@ -9531,7 +9556,8 @@ setFieldValue/getFieldValue используют полный путь от ко
 независимый Form сбрасывает prefix. Начальный массив из Form имеет приоритет,
 включая []; отсутствующий массив может получить initialValue списка. При reset
 используется Form initialValues либо текущий initialValue списка; контролы строк
-создаются заново. Скрытие списка сохраняет его значения, но снимает локальные правила.
+создаются заново и сохраняют регистрацию для последующей validation и submit.
+Скрытие списка сохраняет его значения, но снимает локальные правила.
 
 Add принимает defaultValue и insertIndex, без индекса добавляет в конец;
 неверный индекс вставки также добавляет в конец. Remove принимает индекс или

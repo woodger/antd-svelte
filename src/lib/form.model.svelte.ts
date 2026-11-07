@@ -53,7 +53,13 @@ export interface FormInstance<Values extends FormValues> {
   getFieldWarning(name: NamePath): readonly string[];
   /** Учитывает само поле и известных модели потомков; пустой путь проверяет всю модель. */
   isFieldTouched(name: NamePath): boolean;
+  /** Без имён: любое touched-поле; true требует все bindings, кроме корней FormList. */
+  isFieldsTouched(allTouched?: boolean): boolean;
+  /** Для allTouched=true каждый выбранный префикс должен содержать хотя бы одно touched-поле. */
+  isFieldsTouched(names?: readonly NamePath[], allTouched?: boolean): boolean;
   isFieldValidating(name: NamePath): boolean;
+  /** Есть ли видимая validation; имена совпадают точно, без автоматического включения потомков. */
+  isFieldsValidating(names?: readonly NamePath[]): boolean;
   isFieldRequired(name: NamePath): boolean;
   setFieldValue<const Path extends NamePath>(name: Path, value: NamePathValue<Values, Path>): void;
   /** Объединяет plain objects, заменяет массивы и очищает ошибки изменённых полей. */
@@ -94,7 +100,9 @@ export function createForm<Values extends FormValues>({
   let lastValidation = 0;
   let values = $state<Values>(copyFormValue(defaults));
   let resetKey = $state.raw<object>({});
-  let fields = $state<StoredField[]>([]);
+  // При teardown Svelte читает прежний $state; реестр хранит актуальные регистрации.
+  const fieldRegistry = new Set<StoredField>();
+  let fields = $state.raw<StoredField[]>([]);
   let isSubmitting = $state(false);
   let submissionError = $state.raw<unknown>();
 
@@ -110,9 +118,17 @@ export function createForm<Values extends FormValues>({
     const existing = findField(name);
     if (existing) return existing;
 
-    fields.push({ path: formNamePath(name), touched: false, dirty: false, validating: false, run: 0 });
+    return addField(name);
+  }
 
-    return fields[fields.length - 1];
+  function addField(name: NamePath): StoredField {
+    const field = $state<StoredField>({
+      path: formNamePath(name), touched: false, dirty: false, validating: false, run: 0
+    });
+    fieldRegistry.add(field);
+    fields = [...fieldRegistry];
+
+    return field;
   }
 
   for (const name of new Set([...Object.keys(defaults), ...Object.keys(rules)])) {
@@ -147,6 +163,34 @@ export function createForm<Values extends FormValues>({
       }));
   }
 
+  function isFieldTouched(name: NamePath): boolean {
+    return fields.some((field) => containsFormPath(name, fieldPath(field)) && field.touched);
+  }
+
+  function isFieldsTouched(
+    namesOrAll?: readonly NamePath[] | boolean,
+    allTouched = false
+  ): boolean {
+    const names = Array.isArray(namesOrAll) ? namesOrAll as readonly NamePath[] : undefined;
+    const all = typeof namesOrAll === 'boolean' ? namesOrAll : allTouched;
+
+    if (names) return all ? names.every(isFieldTouched) : names.some(isFieldTouched);
+
+    // Корни initialValues без binding — контейнеры store, а не дополнительные controls.
+    const bindings = fields.filter((field) =>
+      field.registration || fieldRules(field).length || field.touched
+    );
+
+    return all
+      ? bindings.every((field) => field.touched || field.registration?.isList)
+      : bindings.some((field) => field.touched);
+  }
+
+  function isFieldsValidating(names?: readonly NamePath[]): boolean {
+    return fields.some((field) => field.validating
+      && (!names || names.some((name) => sameFormPath(name, fieldPath(field)))));
+  }
+
   async function validate(selected: readonly StoredField[], validateOnly = false): Promise<Values> {
     const snapshot = copyFormValue(values);
     const startRevision = revision;
@@ -157,10 +201,11 @@ export function createForm<Values extends FormValues>({
 
     if (!validateOnly) {
       for (const { field } of entries) {
+        const hasRules = fieldRules(field).length > 0;
         field.run = token;
-        field.validating = true;
+        field.validating = hasRules;
         field.warnings = [];
-        if (fieldRules(field).length) field.dirty = true;
+        if (hasRules) field.dirty = true;
       }
     }
 
@@ -288,10 +333,10 @@ export function createForm<Values extends FormValues>({
     getFieldsError,
     getFieldError: (name) => findField(name)?.errors ?? [],
     getFieldWarning: (name) => findField(name)?.warnings ?? [],
-    isFieldTouched: (name) => fields.some((field) =>
-      containsFormPath(name, fieldPath(field)) && field.touched
-    ),
-    isFieldValidating: (name) => findField(name)?.validating ?? false,
+    isFieldTouched,
+    isFieldsTouched,
+    isFieldValidating: (name) => isFieldsValidating([name]),
+    isFieldsValidating,
     isFieldRequired: (name) => {
       const field = findField(name);
 
@@ -442,13 +487,7 @@ export function createForm<Values extends FormValues>({
 
         let field = findField(registration.name);
 
-        if (!field || field.registration) {
-          fields.push({
-            path: formNamePath(registration.name), touched: false, dirty: false,
-            validating: false, run: 0
-          });
-          field = fields[fields.length - 1];
-        }
+        if (!field || field.registration) field = addField(registration.name);
 
         const registered = field;
         registered.registration = registration;
@@ -467,7 +506,8 @@ export function createForm<Values extends FormValues>({
             registered.registration = undefined;
           } else {
             registered.run = ++request;
-            fields = fields.filter((entry) => entry !== registered);
+            fieldRegistry.delete(registered);
+            fields = [...fieldRegistry];
           }
         };
       });

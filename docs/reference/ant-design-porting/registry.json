@@ -4871,7 +4871,14 @@
         "tests/browser/fixtures/ant-design-form-validation-concurrency-observation.json",
         "tests/package/form-validation-options.ssr.test.ts",
         "tests/package/form-touched-paths.ssr.test.ts",
-        "tests/browser/fixtures/ant-design-form-touched-paths-observation.json"
+        "tests/browser/fixtures/ant-design-form-touched-paths-observation.json",
+        "src/lib/form-aggregate.test.ts",
+        "tests/package/form-aggregate.ssr.test.ts",
+        "tests/browser/form-aggregate.spec.ts",
+        "tests/browser/fixtures/FormAggregateFixtures.svelte",
+        "tests/browser/fixtures/FormValidatingAggregateFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-aggregate-touched-observation.json",
+        "tests/browser/fixtures/ant-design-form-aggregate-validating-observation.json"
       ],
       "features": [
         {
@@ -5118,6 +5125,24 @@
             "tests/browser/form-validation-options.spec.ts"
           ],
           "note": "Как Ant Design 6.6.8 / rc-form 1.8.6, запрос родительского NamePath возвращает true, если touched само поле или любой потомок. Literal dotted keys и number/string segments различаются; reset снимает flags, запрос не создаёт metadata. Сохранён набор полей и прежние triggers touched модели. Для [] используется безопасный запрос всей модели; подтверждённое исключение UMD в NameMap при пустом пути записано в raw observation и не повторяется."
+        },
+        {
+          "id": "aggregate-metadata",
+          "title": "IsFieldsTouched/Validating, группы и точные пути",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form-aggregate.test.ts",
+            "tests/package/form-aggregate.ssr.test.ts",
+            "tests/browser/form-aggregate.spec.ts",
+            "tests/browser/form-list.spec.ts",
+            "tests/browser/fixtures/FormAggregateFixtures.svelte",
+            "tests/browser/fixtures/FormValidatingAggregateFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-aggregate-touched-observation.json",
+            "tests/browser/fixtures/ant-design-form-aggregate-validating-observation.json"
+          ],
+          "note": "Обе перегрузки isFieldsTouched, global any/all, группы префиксов с any touch на каждую группу, list-root exemption в global all, empty selection и безопасные []/undefined overloads. Учитываются UI bindings, правила createForm и явно touched-поля; синтетические корни initialValues не блокируют all. IsFieldsValidating выбирает точные имена, различает number/string, не включает validateOnly; ruleless fields не получают временный validating, singular query проверяет все matching bindings. Сохранены модельные правила/touched без UI. Reset/unregister и поздние результаты сверены с неизменённым UMD 6.6.8 / rc-form 1.8.6. Очистка старых list controls после reset сохраняет новые регистрации, validation и focus при submit. Исключения Source для [ [] ] и (undefined, true) записаны в raw reference и не повторяются."
         }
       ]
     },

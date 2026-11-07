@@ -119,6 +119,19 @@ test.describe('FormList operations', () => {
     )).toEqual([['users_0_name', 'Saved']]);
   });
 
+  test('retains row validation bindings after reset remounts the controls', async ({ page }) => {
+    await page.getByRole('button', { name: 'Reset list', exact: true }).click();
+    const input = page.getByLabel('User 1', { exact: true });
+    await input.fill('');
+    await input.blur();
+
+    await expect(input).toHaveAccessibleDescription('Name required');
+    await page.getByRole('button', { name: 'Submit list', exact: true }).click();
+    await expect(input).toBeFocused();
+    await expect(page.getByRole('status', { name: 'List error fields', exact: true }))
+      .toHaveText('[{"name":["users",1,"name"],"errors":["Name required"],"warnings":[]}]');
+  });
+
   test('validates the list itself on removal and clears its error after adding a row', async ({ page }) => {
     await page.getByRole('button', { name: 'Remove all users', exact: true }).click();
 

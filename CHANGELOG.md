@@ -135,6 +135,11 @@
 
 ### Added
 
+- Form: isFieldsTouched и isFieldsValidating, включая allTouched, группы путей,
+  списки и пустые выборки. Сохранены правила модели без UI; запросы metadata
+  ничего не меняют. Исключения upstream для пустого пути и undefined names
+  зафиксированы отдельно и не воспроизводятся.
+
 - Form: validateFields принимает validateOnly, recursive и dirty, включая их
   сочетания. Тихая проверка сохраняет UI metadata, recursive различает сегменты
   пути, dirty учитывает defaults, проверки, записи и reset. Параллельные запросы
@@ -943,6 +948,11 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Form: поля без validation rules не получают временный validating; одиночный
+  запрос учитывает все bindings с выбранным именем, как upstream.
+- FormList: после полного reset сохраняются регистрации новых контролов,
+  их validation rules и фокус первого ошибочного поля при submit.
 
 - Form: isFieldTouched родительского пути учитывает touched потомков с различием
   literal и numeric/string paths. Запрос [] безопасно проверяет всю модель;

@@ -1,0 +1,364 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "react": "18.3.1",
+    "source": "unmodified official UMD, runtime CSS-in-JS, no static CSS",
+    "delegatedForm": "1.8.6, reviewed separately from the bundled UMD"
+  },
+  "cases": [
+    {
+      "id": "initial",
+      "validating": {
+        "any": false,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "ruleless-pending",
+      "validating": {
+        "any": false,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "nested-pending",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": true,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": true,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": true
+      }
+    },
+    {
+      "id": "silent-pending",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": true,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": true,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": true
+      }
+    },
+    {
+      "id": "silent-complete",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": true,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": true,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": true
+      }
+    },
+    {
+      "id": "numeric-pending",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": true,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": true,
+        "string": false,
+        "pair": true,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": true
+      }
+    },
+    {
+      "id": "nested-complete",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": true,
+        "string": false,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "string-pending",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": true,
+        "string": true,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "numeric-complete",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": true,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "all-complete",
+      "validating": {
+        "any": false,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "before-reset",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": true,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": true,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": true
+      }
+    },
+    {
+      "id": "reset",
+      "validating": {
+        "any": false,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "reset-old-complete",
+      "validating": {
+        "any": false,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "before-remove",
+      "validating": {
+        "any": true,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": true,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": true,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": true
+      }
+    },
+    {
+      "id": "removed",
+      "validating": {
+        "any": false,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    },
+    {
+      "id": "removed-old-complete",
+      "validating": {
+        "any": false,
+        "empty": false,
+        "root": false,
+        "parent": false,
+        "nested": false,
+        "literal": false,
+        "rows": false,
+        "numericParent": false,
+        "numeric": false,
+        "string": false,
+        "pair": false,
+        "bare": false,
+        "missing": false
+      },
+      "single": {
+        "parent": false,
+        "nested": false
+      }
+    }
+  ]
+}
