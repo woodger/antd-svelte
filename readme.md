@@ -9414,6 +9414,33 @@ touched-поля модели. Корни initialValues без UI и прави�
 [через публичный пакет](./tests/package/form-aggregate.ssr.test.ts) и
 [в модели](./src/lib/form-aggregate.test.ts).
 
+`getFieldsValue()` возвращает проекцию известных bindings, а `getFieldsValue(true)`
+без фильтра — весь текущий store, включая значения без UI. Список путей выбирает
+соответствующие bindings и потомков: `getFieldsValue([['user']])` включает только
+известные поля user. Если bindings под этим путём нет, читается само значение
+store. Пустой список даёт `{}`, `[[]]` выбирает весь store. Строка с точкой
+остаётся буквальным ключом, number/string segments различаются.
+Bindings здесь — FormItem/FormList и поля с правилами createForm. Сам touched-флаг
+не добавляет значение без binding в проекцию.
+
+Фильтр передаётся вторым аргументом после списка/true либо через `{ filter }`.
+Он получает FormFieldMeta с touched, validating, errors, warnings, name и validated;
+для явно выбранного пути без binding приходит null. True с фильтром выбирает
+bindings, а не все ключи store. Validated становится true после обычной validation
+или изменения значения через setFieldsValue; validateOnly его не меняет.
+Прежние touched/triggers модели и защита от устаревших результатов сохранены.
+
+Как текущий код 6.6.8, метод проецирует поля строк FormList, затем заполняет
+отсутствующий корень списка пустым массивом. Корни не передаются фильтру: даже
+`getFieldsValue({ filter: () => false })` вернёт `{ people: [] }` для списка people.
+Полный список со значениями без controls доступен через true без фильтра.
+Это уточнение к описанию List в документации upstream подтверждено
+[неизменённым UMD](./tests/browser/fixtures/ant-design-form-get-fields-value-observation.json).
+UI-регистрации ожидают mount; при SSR полный store также читается через true.
+Проверки: [браузер](./tests/browser/form-get-fields-value.spec.ts),
+[публичный пакет](./tests/package/form-get-fields-value.ssr.test.ts),
+[модель](./src/lib/form-get-fields-value.test.ts).
+
 Правила включают required, min/max, pattern и синхронный либо
 асинхронный `validator(value, values)`. Для строк min/max считают Unicode
 code points, для чисел сравнивают значение, для массивов считают элементы.

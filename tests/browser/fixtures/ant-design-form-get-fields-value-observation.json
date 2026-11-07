@@ -1,0 +1,2000 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "react": "18.3.1",
+    "source": "unmodified official UMD, runtime CSS-in-JS, no static CSS",
+    "delegatedForm": "1.8.6, reviewed separately from the bundled UMD"
+  },
+  "cases": [
+    {
+      "id": "initial",
+      "values": {
+        "mounted": {
+          "user": {
+            "name": "Anna"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {},
+        "validated": {},
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "literal-touched",
+      "values": {
+        "mounted": {
+          "user": {
+            "name": "Anna"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {
+          "user.name": "Literal"
+        },
+        "validated": {},
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "unbound-touched",
+      "values": {
+        "mounted": {
+          "user": {
+            "name": "Anna"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {
+          "user.name": "Literal"
+        },
+        "validated": {},
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "silent-pending",
+      "values": {
+        "mounted": {
+          "user": {
+            "name": "Anna"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {
+          "user.name": "Literal"
+        },
+        "validated": {},
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "silent-complete",
+      "values": {
+        "mounted": {
+          "user": {
+            "name": "Anna"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {
+          "user.name": "Literal"
+        },
+        "validated": {},
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "normal-pending",
+      "values": {
+        "mounted": {
+          "user": {
+            "name": "Anna"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {
+          "user.name": "Literal"
+        },
+        "validated": {},
+        "validating": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": true,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": true,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "normal-complete",
+      "values": {
+        "mounted": {
+          "user": {
+            "name": "Anna"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {
+          "user.name": "Literal"
+        },
+        "validated": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [
+            "Name rejected"
+          ],
+          "warnings": [
+            "Heads up"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": true
+        },
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [
+            "Name rejected"
+          ],
+          "warnings": [
+            "Heads up"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": true
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "store-update",
+      "values": {
+        "mounted": {
+          "user": {
+            "name": "Anna"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Changed"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Changed"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Changed"
+        },
+        "touched": {
+          "user.name": "Literal"
+        },
+        "validated": {
+          "user": {
+            "name": "Anna"
+          }
+        },
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna"
+          },
+          "unbound": "Changed",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [
+            "Name rejected"
+          ],
+          "warnings": [
+            "Heads up"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": true
+        },
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [
+            "Name rejected"
+          ],
+          "warnings": [
+            "Heads up"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": true
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "removed",
+      "values": {
+        "mounted": {
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Changed"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Changed"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Changed"
+        },
+        "touched": {
+          "user.name": "Literal"
+        },
+        "validated": {},
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "unbound": "Changed",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        null,
+        null,
+        null,
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "reset",
+      "values": {
+        "mounted": {
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First"
+            }
+          ]
+        },
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {},
+        "validated": {},
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        null,
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "empty-form",
+      "values": {
+        "mounted": {},
+        "store": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          }
+        },
+        "literal": {
+          "user.name": "Literal"
+        },
+        "unbound": {
+          "unbound": "Hidden"
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "user.name": "Literal",
+          "rows": [
+            {
+              "name": "First",
+              "extra": "Hidden"
+            }
+          ],
+          "unbound": "Hidden"
+        },
+        "touched": {},
+        "validated": {},
+        "validating": {},
+        "rejected": {},
+        "list": {
+          "people": {
+            "$undefined": true
+          }
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "name": "Anna",
+            "role": "Writer",
+            "extra": "Hidden"
+          },
+          "unbound": "Hidden",
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {}
+      },
+      "meta": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "empty-list",
+      "values": {
+        "mounted": {
+          "people": []
+        },
+        "store": {
+          "people": []
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "$undefined": true
+          }
+        },
+        "literal": {
+          "user.name": {
+            "$undefined": true
+          }
+        },
+        "unbound": {
+          "unbound": {
+            "$undefined": true
+          }
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "people": []
+        },
+        "touched": {
+          "people": []
+        },
+        "validated": {
+          "people": []
+        },
+        "validating": {
+          "people": []
+        },
+        "rejected": {
+          "people": []
+        },
+        "list": {
+          "people": []
+        },
+        "row": {
+          "people": [
+            {
+              "$undefined": true
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "$undefined": true
+          },
+          "unbound": {
+            "$undefined": true
+          },
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {
+          "people": []
+        }
+      },
+      "meta": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "list",
+      "values": {
+        "mounted": {
+          "people": [
+            {
+              "name": "Anna"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "store": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "$undefined": true
+          }
+        },
+        "literal": {
+          "user.name": {
+            "$undefined": true
+          }
+        },
+        "unbound": {
+          "unbound": {
+            "$undefined": true
+          }
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "touched": {
+          "people": []
+        },
+        "validated": {
+          "people": []
+        },
+        "validating": {
+          "people": []
+        },
+        "rejected": {
+          "people": []
+        },
+        "list": {
+          "people": [
+            {
+              "name": "Anna"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "row": {
+          "people": [
+            {
+              "name": "Anna"
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "$undefined": true
+          },
+          "unbound": {
+            "$undefined": true
+          },
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {
+          "people": []
+        }
+      },
+      "meta": [
+        null,
+        null,
+        null,
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "list-touched",
+      "values": {
+        "mounted": {
+          "people": [
+            {
+              "name": "Anna"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "store": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "$undefined": true
+          }
+        },
+        "literal": {
+          "user.name": {
+            "$undefined": true
+          }
+        },
+        "unbound": {
+          "unbound": {
+            "$undefined": true
+          }
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "touched": {
+          "people": [
+            {
+              "name": "Anna"
+            }
+          ]
+        },
+        "validated": {
+          "people": []
+        },
+        "validating": {
+          "people": []
+        },
+        "rejected": {
+          "people": []
+        },
+        "list": {
+          "people": [
+            {
+              "name": "Anna"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "row": {
+          "people": [
+            {
+              "name": "Anna"
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "$undefined": true
+          },
+          "unbound": {
+            "$undefined": true
+          },
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {
+          "people": []
+        }
+      },
+      "meta": [
+        null,
+        null,
+        null,
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ]
+    },
+    {
+      "id": "list-unmounted",
+      "values": {
+        "mounted": {
+          "people": []
+        },
+        "store": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "$undefined": true
+          }
+        },
+        "literal": {
+          "user.name": {
+            "$undefined": true
+          }
+        },
+        "unbound": {
+          "unbound": {
+            "$undefined": true
+          }
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "touched": {
+          "people": []
+        },
+        "validated": {
+          "people": []
+        },
+        "validating": {
+          "people": []
+        },
+        "rejected": {
+          "people": []
+        },
+        "list": {
+          "people": []
+        },
+        "row": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "$undefined": true
+          },
+          "unbound": {
+            "$undefined": true
+          },
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {
+          "people": []
+        }
+      },
+      "meta": [
+        null,
+        null,
+        null
+      ]
+    },
+    {
+      "id": "list-reset",
+      "values": {
+        "mounted": {
+          "people": []
+        },
+        "store": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "empty": {},
+        "user": {
+          "user": {
+            "$undefined": true
+          }
+        },
+        "literal": {
+          "user.name": {
+            "$undefined": true
+          }
+        },
+        "unbound": {
+          "unbound": {
+            "$undefined": true
+          }
+        },
+        "missing": {
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "root": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            },
+            {
+              "name": "Bob"
+            }
+          ]
+        },
+        "touched": {
+          "people": []
+        },
+        "validated": {
+          "people": []
+        },
+        "validating": {
+          "people": []
+        },
+        "rejected": {
+          "people": []
+        },
+        "list": {
+          "people": []
+        },
+        "row": {
+          "people": [
+            {
+              "name": "Anna",
+              "extra": "Hidden"
+            }
+          ]
+        },
+        "filteredSelection": {
+          "user": {
+            "$undefined": true
+          },
+          "unbound": {
+            "$undefined": true
+          },
+          "missing": {
+            "$undefined": true
+          }
+        },
+        "meta": {
+          "people": []
+        }
+      },
+      "meta": [
+        null,
+        null,
+        null
+      ]
+    }
+  ]
+}

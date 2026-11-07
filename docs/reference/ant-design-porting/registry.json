@@ -4878,7 +4878,13 @@
         "tests/browser/fixtures/FormAggregateFixtures.svelte",
         "tests/browser/fixtures/FormValidatingAggregateFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-aggregate-touched-observation.json",
-        "tests/browser/fixtures/ant-design-form-aggregate-validating-observation.json"
+        "tests/browser/fixtures/ant-design-form-aggregate-validating-observation.json",
+        "src/lib/form-get-fields-value.test.ts",
+        "tests/package/form-get-fields-value.ssr.test.ts",
+        "tests/browser/form-get-fields-value.spec.ts",
+        "tests/browser/fixtures/FormGetFieldsValueFixtures.svelte",
+        "tests/browser/fixtures/form-value-projection.ts",
+        "tests/browser/fixtures/ant-design-form-get-fields-value-observation.json"
       ],
       "features": [
         {
@@ -5143,6 +5149,23 @@
             "tests/browser/fixtures/ant-design-form-aggregate-validating-observation.json"
           ],
           "note": "Обе перегрузки isFieldsTouched, global any/all, группы префиксов с any touch на каждую группу, list-root exemption в global all, empty selection и безопасные []/undefined overloads. Учитываются UI bindings, правила createForm и явно touched-поля; синтетические корни initialValues не блокируют all. IsFieldsValidating выбирает точные имена, различает number/string, не включает validateOnly; ruleless fields не получают временный validating, singular query проверяет все matching bindings. Сохранены модельные правила/touched без UI. Reset/unregister и поздние результаты сверены с неизменённым UMD 6.6.8 / rc-form 1.8.6. Очистка старых list controls после reset сохраняет новые регистрации, validation и focus при submit. Исключения Source для [ [] ] и (undefined, true) записаны в raw reference и не повторяются."
+        },
+        {
+          "id": "value-projection",
+          "title": "GetFieldsValue: bindings, пути, полный store и metadata filter",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.model.svelte.ts",
+            "src/lib/index.ts",
+            "src/lib/form-get-fields-value.test.ts",
+            "tests/package/form-get-fields-value.ssr.test.ts",
+            "tests/browser/form-get-fields-value.spec.ts",
+            "tests/browser/fixtures/FormGetFieldsValueFixtures.svelte",
+            "tests/browser/fixtures/form-value-projection.ts",
+            "tests/browser/fixtures/ant-design-form-get-fields-value-observation.json"
+          ],
+          "note": "Текущие overloads без deprecated strict: известные bindings, полный store через true без filter, список путей с включением потомков и config filter. Явный путь без binding передаёт null metadata и читает store; пустой список возвращает {}, пустой путь выбирает store. Named queries берут последний binding точного имени, exact parent идёт перед потомками; UI order отделён от синтетических initialValues. FormList проецирует поля строк и отдельно заполняет отсутствующие корни [], даже при отклоняющем filter; это текущее поведение 6.6.8, расходящееся с описанием List в upstream docs. Meta содержит touched/validating/errors/warnings/name/validated; silent validation не меняет flags, normal completion и external merge обновляют validated, reset очищает. Сохранены standalone rules, прежние touched/triggers и строгая защита от устаревших результатов модели. До mount UI bindings отсутствуют; true читает текущий store также при SSR. Plain projections и metadata изолированы, opaque values сохраняют identity. Values остаётся типом результата, как upstream, фактический состав определяется выборкой. Сверено с неизменённым официальным UMD; собственных React/deprecated adapters нет."
         }
       ]
     },

@@ -374,6 +374,9 @@ export {
   createForm,
   type FormInstance,
   type FormValidateOptions,
+  type FormFieldMeta,
+  type FormFilterFunc,
+  type FormGetFieldsValueConfig,
   type SubmissionResult
 } from './form.model.svelte.js';
 export { FormValidationError } from './FormValidationError';

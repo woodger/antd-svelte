@@ -135,6 +135,10 @@
 
 ### Added
 
+- Form: getFieldsValue с проекцией bindings/путей, чтением всего store и nullable
+  metadata filter. Списки и lifecycle validated сверены с текущими исходниками;
+  deprecated strict не переносится. Сохранены прежние модельные правила и touched.
+
 - Form: isFieldsTouched и isFieldsValidating, включая allTouched, группы путей,
   списки и пустые выборки. Сохранены правила модели без UI; запросы metadata
   ничего не меняют. Исключения upstream для пустого пути и undefined names

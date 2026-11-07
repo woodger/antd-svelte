@@ -38,6 +38,28 @@ export interface FormValidateOptions {
   dirty?: boolean;
 }
 
+/** Состояние конкретного binding; name сохраняет типы сегментов пути. */
+export interface FormFieldMeta {
+  touched: boolean;
+  validating: boolean;
+  errors: readonly string[];
+  warnings: readonly string[];
+  name: readonly (string | number)[];
+  /**
+   * Обычная validation завершена либо значение изменено через setFieldsValue;
+   * validateOnly не влияет.
+   */
+  validated: boolean;
+}
+
+/** Null передаётся для явно выбранного пути без известного binding. */
+export type FormFilterFunc = (meta: FormFieldMeta | null) => boolean;
+
+/** Фильтр полей для getFieldsValue; корни FormList заполняются отдельно от фильтра. */
+export interface FormGetFieldsValueConfig {
+  filter?: FormFilterFunc;
+}
+
 /** Реактивные значения, validation и submit одной формы; экземпляр не разделяется глобально. */
 export interface FormInstance<Values extends FormValues> {
   readonly values: Readonly<Values>;
@@ -46,6 +68,11 @@ export interface FormInstance<Values extends FormValues> {
   readonly isSubmitting: boolean;
   readonly submissionError: unknown;
   getFieldValue<const Path extends NamePath>(name: Path): NamePathValue<Values, Path>;
+  /** Значения известных bindings; форма результата может быть частичной, как в upstream. */
+  getFieldsValue(): Values;
+  /** True без фильтра возвращает весь store; пути выбирают binding и его потомков. */
+  getFieldsValue(names: readonly NamePath[] | true, filter?: FormFilterFunc): Values;
+  getFieldsValue(config: FormGetFieldsValueConfig): Values;
   /** Возвращает ошибки полей модели либо явно перечисленных путей. */
   getFieldsError(names?: readonly NamePath[]): FieldError[];
   getFieldError(name: NamePath): readonly string[];
@@ -75,11 +102,13 @@ interface StoredField {
   path: (string | number)[];
   persistent?: boolean;
   registration?: FormFieldRegistration;
+  registrationOrder?: number;
   errors?: string[];
   warnings?: string[];
   touched: boolean;
   dirty: boolean;
   validating: boolean;
+  validated: boolean;
   run: number;
 }
 
@@ -98,6 +127,7 @@ export function createForm<Values extends FormValues>({
   let revision = $state(0);
   let request = 0;
   let lastValidation = 0;
+  let registrationOrder = 0;
   let values = $state<Values>(copyFormValue(defaults));
   let resetKey = $state.raw<object>({});
   // При teardown Svelte читает прежний $state; реестр хранит актуальные регистрации.
@@ -123,7 +153,8 @@ export function createForm<Values extends FormValues>({
 
   function addField(name: NamePath): StoredField {
     const field = $state<StoredField>({
-      path: formNamePath(name), touched: false, dirty: false, validating: false, run: 0
+      path: formNamePath(name), touched: false, dirty: false, validating: false,
+      validated: false, run: 0
     });
     fieldRegistry.add(field);
     fields = [...fieldRegistry];
@@ -191,25 +222,92 @@ export function createForm<Values extends FormValues>({
       && (!names || names.some((name) => sameFormPath(name, fieldPath(field)))));
   }
 
+  function getFieldsValue(
+    namesOrConfig?: readonly NamePath[] | true | FormGetFieldsValueConfig,
+    filter?: FormFilterFunc
+  ): Values {
+    void revision;
+    if (namesOrConfig === true && !filter) return values;
+
+    const names = Array.isArray(namesOrConfig) ? namesOrConfig as readonly NamePath[] : undefined;
+    const select = names || namesOrConfig === true
+      ? filter : (namesOrConfig as FormGetFieldsValueConfig | undefined)?.filter;
+    // Порядок UI bindings не зависит от заранее созданных контейнеров initialValues.
+    const bindings = fields.filter((field) => fieldPath(field).length > 0
+      && (field.registration || fieldRules(field).length))
+      .sort((first, second) => (first.registrationOrder ?? 0) - (second.registrationOrder ?? 0));
+    // Именованный запрос выбирает последний binding каждого пути, сохраняя порядок имён.
+    const unique: StoredField[] = [];
+    if (names) {
+      for (const field of bindings) {
+        const index = unique.findIndex((entry) => sameFormPath(fieldPath(entry), fieldPath(field)));
+        if (index < 0) unique.push(field);
+        else unique[index] = field;
+      }
+    }
+    const selected: { path: (string | number)[]; field?: StoredField }[] = names
+      ? names.flatMap((name) => {
+        const path = formNamePath(name);
+        const exact = unique.find((field) => sameFormPath(path, fieldPath(field)));
+        const matches = path.length ? [
+          ...(exact ? [exact] : []),
+          ...unique.filter((field) => containsFormPath(path, fieldPath(field))
+            && !sameFormPath(path, fieldPath(field)))
+        ] : [];
+
+        return matches.length
+          ? matches.map((field) => ({ path: fieldPath(field), field })) : [{ path }];
+      })
+      : bindings.map((field) => ({ path: fieldPath(field), field }));
+    const lists: NamePath[] = [];
+    let result = {} as Values;
+
+    for (const { path, field } of selected) {
+      if (field?.registration?.isList) {
+        lists.push(path);
+        continue;
+      }
+
+      const meta: FormFieldMeta | null = field ? {
+        touched: field.touched, validating: field.validating,
+        errors: [...(field.errors ?? [])], warnings: [...(field.warnings ?? [])],
+        name: [...path], validated: field.validated
+      } : null;
+      if (!select || select(meta)) {
+        result = setFormValue(result, path, getFormValue(values, path)) as Values;
+      }
+    }
+
+    for (const path of lists) {
+      if (!getFormValue(result, path)) result = setFormValue(result, path, []) as Values;
+    }
+
+    return result;
+  }
+
   async function validate(selected: readonly StoredField[], validateOnly = false): Promise<Values> {
     const snapshot = copyFormValue(values);
     const startRevision = revision;
     const token = ++request;
     // Свежесть Promise общая; validateOnly не меняет field.run видимой проверки.
     lastValidation = token;
-    const entries = selected.map((field) => ({ field, path: fieldPath(field), run: field.run }));
+    const entries = selected.map((field) => ({
+      field, path: fieldPath(field), run: field.run, hasRules: fieldRules(field).length > 0
+    }));
 
     if (!validateOnly) {
-      for (const { field } of entries) {
-        const hasRules = fieldRules(field).length > 0;
+      for (const { field, hasRules } of entries) {
         field.run = token;
         field.validating = hasRules;
         field.warnings = [];
-        if (hasRules) field.dirty = true;
+        if (hasRules) {
+          field.dirty = true;
+          field.validated = false;
+        }
       }
     }
 
-    const results = await Promise.all(entries.map(async ({ field, path }) => {
+    const results = await Promise.all(entries.map(async ({ field, path, hasRules }) => {
       const messages = await validateFieldValue(
         getFormValue(snapshot, path), snapshot, fieldRules(field)
       );
@@ -220,6 +318,7 @@ export function createForm<Values extends FormValues>({
         if (revision === startRevision && sameFormPath(path, fieldPath(field))) {
           field.errors = messages.errors;
           field.warnings = messages.warnings;
+          if (hasRules) field.validated = true;
         }
       }
 
@@ -330,6 +429,7 @@ export function createForm<Values extends FormValues>({
 
       return getFormValue(values, name) as NamePathValue<Values, typeof name>;
     },
+    getFieldsValue,
     getFieldsError,
     getFieldError: (name) => findField(name)?.errors ?? [],
     getFieldWarning: (name) => findField(name)?.warnings ?? [],
@@ -370,6 +470,7 @@ export function createForm<Values extends FormValues>({
         const path = fieldPath(field);
         if (!sameFormValue(getFormValue(values, path), getFormValue(merged, path))) {
           field.dirty = true;
+          field.validated = true;
         }
 
         const parent = getFormValue(next, path.slice(0, -1));
@@ -415,6 +516,7 @@ export function createForm<Values extends FormValues>({
         field.touched = false;
         field.dirty = false;
         field.validating = false;
+        field.validated = false;
         field.run = ++request;
       }
 
@@ -491,6 +593,7 @@ export function createForm<Values extends FormValues>({
 
         const registered = field;
         registered.registration = registration;
+        registered.registrationOrder = ++registrationOrder;
 
         return () => {
           if (registered.persistent) {
@@ -501,6 +604,7 @@ export function createForm<Values extends FormValues>({
               registered.touched = false;
               registered.dirty = false;
               registered.validating = false;
+              registered.validated = false;
             }
 
             registered.registration = undefined;
