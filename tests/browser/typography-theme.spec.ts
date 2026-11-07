@@ -1,13 +1,19 @@
 import { test, expect } from './test';
+import type { Page } from '@playwright/test';
 import reference from './fixtures/ant-design-typography-theme-reference.json' with { type: 'json' };
 import { snapshotTypographyTheme } from './typography-theme-metrics';
 
 test.use({ viewport: reference.viewport });
 
+async function openTypographyFixture(page: Page) {
+  await page.goto('/?fixture=typography-theme');
+  await page.getByLabel('Typography theme preset', { exact: true }).waitFor();
+}
+
 for (const sample of reference.cases) {
   test(`Typography themes match source text, headings, links and editors for ${sample.name}`,
     async ({ page }) => {
-      await page.goto('/?fixture=typography-theme');
+      await openTypographyFixture(page);
       await page.getByLabel('Typography theme preset', { exact: true }).selectOption(sample.name);
 
       await expect.poll(() => page.evaluate(snapshotTypographyTheme)).toEqual(sample.metrics);
@@ -17,7 +23,7 @@ for (const sample of reference.cases) {
 for (const part of ['edit-text', 'edit-title']) {
   test(`Typography theme updates preserve the ${part} draft, DOM, focus and selection`,
     async ({ page }) => {
-      await page.goto('/?fixture=typography-theme');
+      await openTypographyFixture(page);
       await expect(page.locator(
         '[data-typography-theme="outside"] [data-typography-part="edit-title"] textarea'
       )).toBeFocused();
@@ -64,7 +70,7 @@ for (const part of ['edit-text', 'edit-title']) {
 
 test('Typography keeps async copy pending through theme updates', async ({ page, context }) => {
   await context.grantPermissions(['clipboard-read', 'clipboard-write']);
-  await page.goto('/?fixture=typography-theme');
+  await openTypographyFixture(page);
   await expect(page.locator(
     '[data-typography-theme="outside"] [data-typography-part="edit-title"] textarea'
   )).toBeFocused();
@@ -94,7 +100,7 @@ test('Typography keeps async copy pending through theme updates', async ({ page,
 });
 
 test('Typography resets inherited tokens while preserving its nested editor', async ({ page }) => {
-  await page.goto('/?fixture=typography-theme');
+  await openTypographyFixture(page);
   await expect(page.locator(
     '[data-typography-theme="outside"] [data-typography-part="edit-title"] textarea'
   )).toBeFocused();
@@ -117,7 +123,7 @@ test('Typography resets inherited tokens while preserving its nested editor', as
 });
 
 test('Typography restores legacy styles and preserves its editor draft', async ({ page }) => {
-  await page.goto('/?fixture=typography-theme');
+  await openTypographyFixture(page);
   await expect(page.locator(
     '[data-typography-theme="outside"] [data-typography-part="edit-title"] textarea'
   )).toBeFocused();

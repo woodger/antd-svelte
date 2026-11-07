@@ -774,6 +774,9 @@
 
 ### Fixed
 
+- Typography: browser-сценарии ожидают загрузку ленивой фикстуры до проверки
+  autofocus. Проверки focus/selection, async copy и общий лимит теста сохранены.
+
 - TimeRangePicker: тест Now сбрасывает часы перед pauseAt, чтобы загрузка фикстуры
   не переносила целевое время в прошлое. Ожидаемые UTC/precision и callbacks сохранены.
 
