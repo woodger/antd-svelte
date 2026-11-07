@@ -135,6 +135,12 @@
 
 ### Added
 
+- Form: resetFields принимает список точных NamePath. Выбранные FormItem и строки
+  FormList пересоздают содержимое; общий reset очищает локальное состояние обычных
+  controls, соседи сохраняют DOM/фокус/черновики. Добавлены empty/root paths,
+  List initialValue priority/conflicts и защита от поздней validation. Подтверждённый
+  stale input upstream записан отдельно; в Svelte видимое значение совпадает со store.
+
 - Form: setFields для пакетных значений, errors/warnings и ручных touched/validating
   без автоматической validation. Сохранены metadata полей без rules, native inputs,
   прежняя errors-проекция и защита snapshot; дефекты upstream с поздней ошибкой

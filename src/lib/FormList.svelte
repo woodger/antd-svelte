@@ -29,6 +29,8 @@
   let meta = $derived({
     errors: form.getFieldError(prefixName), warnings: form.getFieldWarning(prefixName)
   });
+  let fieldResetKey = $state.raw<object>({});
+  let resetKey = $derived({ form: form.resetKey, field: fieldResetKey });
 
   provideFormList({
     get prefixCls() {
@@ -50,7 +52,10 @@
       return initialValue;
     },
     isList: true,
-    isListField: Boolean(parent)
+    isListField: Boolean(parent),
+    onReset() {
+      fieldResetKey = {};
+    }
   }));
 
   $effect.pre(() => {
@@ -86,6 +91,6 @@
   };
 </script>
 
-{#key form.resetKey}
+{#key resetKey}
   {@render children(fields, operation, meta)}
 {/key}

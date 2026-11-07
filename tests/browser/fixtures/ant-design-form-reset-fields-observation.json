@@ -1,0 +1,2767 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "react": "18.3.1",
+    "source": "unmodified official UMD, runtime CSS-in-JS, no static CSS",
+    "settled": "two animation frames before every capture",
+    "delegatedForm": "1.8.6, reviewed separately from the bundled UMD"
+  },
+  "cases": [
+    {
+      "id": "initial",
+      "mode": "fields",
+      "values": {
+        "name": "Anna",
+        "sibling": "Sibling",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Row"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Anna",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Sibling",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        },
+        "numeric": {
+          "value": "Row",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        },
+        "string": {
+          "value": "Row",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        }
+      },
+      "focus": null
+    },
+    {
+      "id": "seeded",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Draft 2",
+          "role": "Changed role"
+        },
+        "user.name": "Draft 3",
+        "rows": [
+          {
+            "name": "Draft 5"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 2"
+          ],
+          "warnings": [
+            "Warning 2"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 3"
+          ],
+          "warnings": [
+            "Warning 3"
+          ],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 4"
+          ],
+          "warnings": [
+            "Warning 4"
+          ],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 5"
+          ],
+          "warnings": [
+            "Warning 5"
+          ],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Draft 2",
+          "local": "Scratch nested",
+          "retained": true,
+          "mounts": 1
+        },
+        "literal": {
+          "value": "Draft 3",
+          "local": "Scratch literal",
+          "retained": true,
+          "mounts": 1
+        },
+        "numeric": {
+          "value": "Draft 5",
+          "local": "Scratch numeric",
+          "retained": true,
+          "mounts": 1
+        },
+        "string": {
+          "value": "Draft 5",
+          "local": "Scratch string",
+          "retained": true,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "nested-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested",
+          "role": "Changed role"
+        },
+        "user.name": "Draft 3",
+        "rows": [
+          {
+            "name": "Draft 5"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 3"
+          ],
+          "warnings": [
+            "Warning 3"
+          ],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 4"
+          ],
+          "warnings": [
+            "Warning 4"
+          ],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 5"
+          ],
+          "warnings": [
+            "Warning 5"
+          ],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Draft 3",
+          "local": "Scratch literal",
+          "retained": true,
+          "mounts": 1
+        },
+        "numeric": {
+          "value": "Draft 5",
+          "local": "Scratch numeric",
+          "retained": true,
+          "mounts": 1
+        },
+        "string": {
+          "value": "Draft 5",
+          "local": "Scratch string",
+          "retained": true,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "parent-seeded",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested again",
+          "role": "Changed role"
+        },
+        "user.name": "Draft 3",
+        "rows": [
+          {
+            "name": "Draft 5"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 3"
+          ],
+          "warnings": [
+            "Warning 3"
+          ],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 4"
+          ],
+          "warnings": [
+            "Warning 4"
+          ],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 5"
+          ],
+          "warnings": [
+            "Warning 5"
+          ],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Draft 3",
+          "local": "Scratch literal",
+          "retained": true,
+          "mounts": 1
+        },
+        "numeric": {
+          "value": "Draft 5",
+          "local": "Scratch numeric",
+          "retained": true,
+          "mounts": 1
+        },
+        "string": {
+          "value": "Draft 5",
+          "local": "Scratch string",
+          "retained": true,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "parent-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Draft 3",
+        "rows": [
+          {
+            "name": "Draft 5"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 3"
+          ],
+          "warnings": [
+            "Warning 3"
+          ],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 4"
+          ],
+          "warnings": [
+            "Warning 4"
+          ],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 5"
+          ],
+          "warnings": [
+            "Warning 5"
+          ],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Draft 3",
+          "local": "Scratch literal",
+          "retained": true,
+          "mounts": 1
+        },
+        "numeric": {
+          "value": "Draft 5",
+          "local": "Scratch numeric",
+          "retained": true,
+          "mounts": 1
+        },
+        "string": {
+          "value": "Draft 5",
+          "local": "Scratch string",
+          "retained": true,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "literal-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Draft 5"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 4"
+          ],
+          "warnings": [
+            "Warning 4"
+          ],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 5"
+          ],
+          "warnings": [
+            "Warning 5"
+          ],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        },
+        "numeric": {
+          "value": "Draft 5",
+          "local": "Scratch numeric",
+          "retained": true,
+          "mounts": 1
+        },
+        "string": {
+          "value": "Draft 5",
+          "local": "Scratch string",
+          "retained": true,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "numeric-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Row"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 5"
+          ],
+          "warnings": [
+            "Warning 5"
+          ],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "numeric": {
+          "value": "Row",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        },
+        "string": {
+          "value": "Draft 5",
+          "local": "Scratch string",
+          "retained": true,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "string-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Row"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "numeric": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "string": {
+          "value": "Row",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "missing-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Row"
+          }
+        ],
+        "missing": {
+          "$undefined": true
+        }
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "numeric": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "string": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "empty-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Draft 0",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Row"
+          }
+        ],
+        "missing": {
+          "$undefined": true
+        }
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 0"
+          ],
+          "warnings": [
+            "Warning 0"
+          ],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Draft 0",
+          "local": "Scratch name",
+          "retained": true,
+          "mounts": 1
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "numeric": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "string": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "repeated-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Anna",
+        "sibling": "Draft 1",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Row"
+          }
+        ],
+        "missing": {
+          "$undefined": true
+        }
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Anna",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "numeric": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "string": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "root-value-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Anna",
+        "sibling": "Sibling",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Row"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Error 1"
+          ],
+          "warnings": [
+            "Warning 1"
+          ],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Parent error"
+          ],
+          "warnings": [
+            "Parent warning"
+          ],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Anna",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "sibling": {
+          "value": "Draft 1",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "nested": {
+          "value": "Nested again",
+          "local": "Nested scratch",
+          "retained": true,
+          "mounts": 2
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "numeric": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        },
+        "string": {
+          "value": "Row",
+          "local": "Local",
+          "retained": true,
+          "mounts": 2
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      }
+    },
+    {
+      "id": "full-reset",
+      "mode": "fields",
+      "values": {
+        "name": "Anna",
+        "sibling": "Sibling",
+        "user": {
+          "name": "Nested",
+          "role": "Role"
+        },
+        "user.name": "Literal",
+        "rows": [
+          {
+            "name": "Row"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user",
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "user.name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "rows",
+            "0",
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "name": {
+          "value": "Anna",
+          "local": "Local",
+          "retained": false,
+          "mounts": 3
+        },
+        "sibling": {
+          "value": "Sibling",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        },
+        "nested": {
+          "value": "Nested",
+          "local": "Local",
+          "retained": false,
+          "mounts": 3
+        },
+        "literal": {
+          "value": "Literal",
+          "local": "Local",
+          "retained": false,
+          "mounts": 3
+        },
+        "numeric": {
+          "value": "Row",
+          "local": "Local",
+          "retained": false,
+          "mounts": 3
+        },
+        "string": {
+          "value": "Row",
+          "local": "Local",
+          "retained": false,
+          "mounts": 3
+        }
+      },
+      "focus": null
+    },
+    {
+      "id": "list-initial",
+      "mode": "list-defaults",
+      "values": {
+        "sibling": "Sibling",
+        "people": [
+          {
+            "name": "Anna",
+            "extra": "Hidden"
+          },
+          {
+            "name": "Bob"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        },
+        "person-0": {
+          "value": "Anna",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        },
+        "person-1": {
+          "value": "Bob",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        }
+      },
+      "focus": null,
+      "keys": [
+        0,
+        1
+      ],
+      "list": {
+        "errors": [],
+        "warnings": [],
+        "touched": false
+      }
+    },
+    {
+      "id": "list-seeded",
+      "mode": "list-defaults",
+      "values": {
+        "sibling": "Sibling draft",
+        "people": [
+          {
+            "name": "Draft Anna",
+            "extra": "Hidden"
+          },
+          {
+            "name": "Draft Bob"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Sibling error"
+          ],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Person error"
+          ],
+          "warnings": [
+            "Person warning"
+          ],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Second error"
+          ],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling draft",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-0": {
+          "value": "Draft Anna",
+          "local": "Scratch person-0",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-1": {
+          "value": "Draft Bob",
+          "local": "Scratch person-1",
+          "retained": true,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      },
+      "keys": [
+        0,
+        1
+      ],
+      "list": {
+        "errors": [
+          "List error"
+        ],
+        "warnings": [
+          "List warning"
+        ],
+        "touched": true
+      }
+    },
+    {
+      "id": "row-value-reset",
+      "mode": "list-defaults",
+      "values": {
+        "sibling": "Sibling draft",
+        "people": [
+          {
+            "name": "Anna",
+            "extra": "Hidden"
+          },
+          {
+            "name": "Draft Bob"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Sibling error"
+          ],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Person error"
+          ],
+          "warnings": [
+            "Person warning"
+          ],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Second error"
+          ],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling draft",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-0": {
+          "value": "Draft Anna",
+          "local": "Scratch person-0",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-1": {
+          "value": "Draft Bob",
+          "local": "Scratch person-1",
+          "retained": true,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      },
+      "keys": [
+        0,
+        1
+      ],
+      "list": {
+        "errors": [
+          "List error"
+        ],
+        "warnings": [
+          "List warning"
+        ],
+        "touched": true
+      }
+    },
+    {
+      "id": "row-field-reset",
+      "mode": "list-defaults",
+      "values": {
+        "sibling": "Sibling draft",
+        "people": [
+          {
+            "name": "Anna",
+            "extra": "Hidden"
+          },
+          {
+            "name": "Bob"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Sibling error"
+          ],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Person error"
+          ],
+          "warnings": [
+            "Person warning"
+          ],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling draft",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-0": {
+          "value": "Draft Anna",
+          "local": "Scratch person-0",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-1": {
+          "value": "Bob",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      },
+      "keys": [
+        0,
+        1
+      ],
+      "list": {
+        "errors": [
+          "List error"
+        ],
+        "warnings": [
+          "List warning"
+        ],
+        "touched": true
+      }
+    },
+    {
+      "id": "list-reset",
+      "mode": "list-defaults",
+      "values": {
+        "sibling": "Sibling draft",
+        "people": [
+          {
+            "name": "Anna",
+            "extra": "Hidden"
+          },
+          {
+            "name": "Bob"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": true,
+          "validating": false,
+          "errors": [
+            "Sibling error"
+          ],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling draft",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-0": {
+          "value": "Anna",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        },
+        "person-1": {
+          "value": "Bob",
+          "local": "Local",
+          "retained": false,
+          "mounts": 3
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      },
+      "keys": [
+        0,
+        1
+      ],
+      "list": {
+        "errors": [],
+        "warnings": [],
+        "touched": false
+      }
+    },
+    {
+      "id": "list-full-reset",
+      "mode": "list-defaults",
+      "values": {
+        "sibling": "Sibling",
+        "people": [
+          {
+            "name": "Anna",
+            "extra": "Hidden"
+          },
+          {
+            "name": "Bob"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        },
+        "person-0": {
+          "value": "Anna",
+          "local": "Local",
+          "retained": false,
+          "mounts": 3
+        },
+        "person-1": {
+          "value": "Bob",
+          "local": "Local",
+          "retained": false,
+          "mounts": 4
+        }
+      },
+      "focus": null,
+      "keys": [
+        0,
+        1
+      ],
+      "list": {
+        "errors": [],
+        "warnings": [],
+        "touched": false
+      }
+    },
+    {
+      "id": "fallback-initial",
+      "mode": "list-initial-value",
+      "values": {
+        "sibling": "Sibling",
+        "people": [
+          {
+            "name": "List default"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        },
+        "person-0": {
+          "value": "List default",
+          "local": "Local",
+          "retained": null,
+          "mounts": 1
+        }
+      },
+      "focus": null,
+      "keys": [
+        0
+      ],
+      "list": {
+        "errors": [],
+        "warnings": [],
+        "touched": false
+      }
+    },
+    {
+      "id": "fallback-seeded",
+      "mode": "list-initial-value",
+      "values": {
+        "sibling": "Sibling",
+        "people": [
+          {
+            "name": "Changed default"
+          },
+          {
+            "name": "Added"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            1,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-0": {
+          "value": "Changed default",
+          "local": "Scratch person-0",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-1": {
+          "value": "Added",
+          "local": "Scratch person-1",
+          "retained": null,
+          "mounts": 1
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      },
+      "keys": [
+        0,
+        1
+      ],
+      "list": {
+        "errors": [
+          "List error"
+        ],
+        "warnings": [],
+        "touched": true
+      }
+    },
+    {
+      "id": "fallback-reset",
+      "mode": "list-initial-value",
+      "values": {
+        "sibling": "Sibling",
+        "people": [
+          {
+            "name": "List default"
+          }
+        ]
+      },
+      "meta": [
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "sibling"
+          ],
+          "validated": false
+        },
+        {
+          "touched": false,
+          "validating": false,
+          "errors": [],
+          "warnings": [],
+          "name": [
+            "people",
+            0,
+            "name"
+          ],
+          "validated": false
+        }
+      ],
+      "controls": {
+        "sibling": {
+          "value": "Sibling",
+          "local": "Scratch sibling",
+          "retained": true,
+          "mounts": 1
+        },
+        "person-0": {
+          "value": "List default",
+          "local": "Local",
+          "retained": false,
+          "mounts": 2
+        }
+      },
+      "focus": {
+        "tag": "sibling",
+        "selection": [
+          1,
+          3
+        ]
+      },
+      "keys": [
+        0
+      ],
+      "list": {
+        "errors": [],
+        "warnings": [],
+        "touched": false
+      }
+    }
+  ],
+  "observations": [
+    {
+      "case": "parent-reset",
+      "tag": "nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "store": "Nested",
+      "rendered": "Nested again"
+    },
+    {
+      "case": "literal-reset",
+      "tag": "nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "store": "Nested",
+      "rendered": "Nested again"
+    },
+    {
+      "case": "numeric-reset",
+      "tag": "nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "store": "Nested",
+      "rendered": "Nested again"
+    },
+    {
+      "case": "numeric-reset",
+      "tag": "string",
+      "name": [
+        "rows",
+        "0",
+        "name"
+      ],
+      "store": "Row",
+      "rendered": "Draft 5"
+    },
+    {
+      "case": "string-reset",
+      "tag": "nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "store": "Nested",
+      "rendered": "Nested again"
+    },
+    {
+      "case": "missing-reset",
+      "tag": "nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "store": "Nested",
+      "rendered": "Nested again"
+    },
+    {
+      "case": "empty-reset",
+      "tag": "nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "store": "Nested",
+      "rendered": "Nested again"
+    },
+    {
+      "case": "repeated-reset",
+      "tag": "nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "store": "Nested",
+      "rendered": "Nested again"
+    },
+    {
+      "case": "root-value-reset",
+      "tag": "sibling",
+      "name": "sibling",
+      "store": "Sibling",
+      "rendered": "Draft 1"
+    },
+    {
+      "case": "root-value-reset",
+      "tag": "nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "store": "Nested",
+      "rendered": "Nested again"
+    },
+    {
+      "case": "row-value-reset",
+      "tag": "person-0",
+      "name": [
+        "people",
+        0,
+        "name"
+      ],
+      "store": "Anna",
+      "rendered": "Draft Anna"
+    },
+    {
+      "case": "row-field-reset",
+      "tag": "person-0",
+      "name": [
+        "people",
+        0,
+        "name"
+      ],
+      "store": "Anna",
+      "rendered": "Draft Anna"
+    }
+  ]
+}

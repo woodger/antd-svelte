@@ -7,6 +7,8 @@ export interface FormFieldRegistration {
   readonly isList?: boolean;
   readonly isListField?: boolean;
   readonly initialValue?: readonly unknown[];
+  /** Пересоздаёт содержимое выбранного Field без замены соседних controls. */
+  readonly onReset?: () => void;
 }
 
 export interface FormHooks {

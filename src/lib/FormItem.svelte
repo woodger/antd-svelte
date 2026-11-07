@@ -1,10 +1,11 @@
 <script lang="ts">
-  import type { Snippet } from 'svelte';
+  import { tick, type Snippet } from 'svelte';
   import { provideFormField, useForm } from './form-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { formNamePath, type NamePath } from './form-store.engine';
   import type { ValidationRule } from './validation.engine';
   import { useFormList } from './form-list-context';
+  import { captureFormResetFocus } from './form-reset.dom';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
@@ -43,6 +44,8 @@
     ?? (rules ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path))
     ?? false);
   let descriptionId = $derived(errors.length || warnings.length || help ? `${id}-help` : undefined);
+  let resetKey = $state.raw<object>({});
+  let content: HTMLDivElement | undefined = $state();
 
   $effect.pre(() => {
     // В списке metadata следует за key строки; обычное поле хранит её по имени модели.
@@ -54,6 +57,11 @@
       },
       get rules() {
         return rules;
+      },
+      onReset() {
+        const restoreFocus = captureFormResetFocus(content, id);
+        resetKey = {};
+        if (restoreFocus) void tick().then(restoreFocus);
       }
     });
   });
@@ -123,7 +131,7 @@
     </div>
     <div class="ant-form-item-control">
       <div class="ant-form-item-control-input">
-        <div class="ant-form-item-control-input-content">{@render children()}</div>
+        <div bind:this={content} class="ant-form-item-control-input-content">{#key resetKey}{@render children()}{/key}</div>
       </div>
       {#if errors.length || warnings.length}
         <div id={descriptionId} class={[

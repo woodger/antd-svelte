@@ -106,7 +106,11 @@ export interface FormInstance<Values extends FormValues> {
   /** Применяет записи по порядку, не запускает validation; value работает и без binding. */
   setFields(fields: readonly FormFieldData[]): void;
   touchField(name: NamePath): void;
-  resetFields(): void;
+  /**
+   * Без имён сбрасывает всю модель; [] ничего не меняет, metadata выбирается точными путями.
+   * Содержимое выбранных UI bindings пересоздаётся; соседи сохраняют DOM и metadata.
+   */
+  resetFields(names?: readonly NamePath[]): void;
   validateFields(options?: FormValidateOptions): Promise<Values>;
   validateFields(names?: readonly NamePath[], options?: FormValidateOptions): Promise<Values>;
   submit(onFinish: (values: Values) => void | Promise<void>): Promise<SubmissionResult<Values>>;
@@ -555,23 +559,45 @@ export function createForm<Values extends FormValues>({
       field.dirty = true;
       revalidateTouched();
     },
-    resetFields() {
-      revision++;
-      values = copyFormValue(defaults);
-      resetKey = {};
+    resetFields(names) {
+      if (names?.length === 0) return;
 
-      for (const field of fields) {
+      const selected = names ? fields.filter((field) =>
+        names.some((name) => sameFormPath(name, fieldPath(field)))
+      ) : [...fields];
+      let next = names ? values : copyFormValue(defaults);
+
+      if (names) {
+        for (const name of names) {
+          next = setFormValue(next, name, getFormValue(defaults, name)) as Values;
+        }
+      }
+
+      for (const field of selected) {
         const registration = field.registration;
         const path = fieldPath(field);
 
         if (registration?.isList && !registration.isListField
           && registration.initialValue !== undefined
-          && getFormValue(values, path) === undefined) {
-          updateValues(setFormValue(values, path, registration.initialValue) as Values);
+          && getFormValue(next, path) === undefined) {
+          const conflicts = selected.some((other) => other !== field
+            && sameFormPath(path, fieldPath(other))
+            && other.registration?.initialValue !== undefined);
+
+          if (!conflicts) next = setFormValue(next, path, registration.initialValue) as Values;
         }
       }
 
-      for (const field of fields) {
+      if (names) {
+        if (!sameFormValue(values, next)) revision++;
+        updateValues(next);
+      } else {
+        revision++;
+        values = next;
+        resetKey = {};
+      }
+
+      for (const field of selected) {
         field.errors = undefined;
         field.warnings = undefined;
         field.touched = false;
@@ -582,6 +608,11 @@ export function createForm<Values extends FormValues>({
       }
 
       submissionError = undefined;
+
+      selected.sort((first, second) =>
+        (first.registrationOrder ?? 0) - (second.registrationOrder ?? 0)
+      );
+      for (const field of selected) field.registration?.onReset?.();
     },
     validateFields,
     async submit(onFinish) {
