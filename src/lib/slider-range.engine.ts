@@ -207,15 +207,10 @@ export function createSliderRangeOffset(options: SliderRangeOptions) {
 
 export function sliderRangeValues(
   value: readonly number[] | null | undefined,
-  options: SliderRangeOptions,
-  count?: number
+  options: SliderRangeOptions
 ) {
   let values = [...(value ?? [])];
-  if (count || value === undefined) {
-    const length = count !== undefined && count >= 0 ? count + 1 : 2;
-    values = values.slice(0, length);
-    while (values.length < length) values.push(values[values.length - 1] ?? options.min);
-  }
+  if (value === undefined) values = [options.min, options.min];
   return values.sort((a, b) => a - b).map(createSliderRangeOffset(options).format);
 }
 

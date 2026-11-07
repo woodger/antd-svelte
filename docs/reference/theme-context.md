@@ -752,7 +752,7 @@ handleLineWidthHover и outline. Hit targets и нативные value/form/keyb
 после theme variables; оба режима используют общий provider/semantic/local resolver.
 ConfigProvider.slider применяется к single и range; callback получает входные props
 с разрешёнными disabled и vertical. Provider styles.root/style идут перед local
-styles.root/style, legacy rail/track/handle — перед semantic styles. Вложенный record
+styles.root/style; rail/track/handle используют semantic styles. Вложенный record
 заменяется целиком, undefined наследуется; обновление styles сохраняет native DOM.
 Локальный prefixCls поддержан в обоих режимах и не меняет CSS variable namespace.
 Prefix stylesheet ограничивает defaults своим root; source variables/semantic styles

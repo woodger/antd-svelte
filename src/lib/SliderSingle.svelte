@@ -54,7 +54,6 @@
     included = true,
     track,
     orientation: orientationProp,
-    vertical,
     autoFocus,
     reverse = false,
     keyboard = true,
@@ -67,9 +66,6 @@
     prefixCls,
     classNames,
     styles: semanticStyles,
-    handleStyle,
-    trackStyle,
-    railStyle,
     dotStyle,
     activeDotStyle,
     tabIndex,
@@ -121,7 +117,7 @@
   let popupHovered = $state(false);
   let interaction: Interaction | null = null;
   let blurCallbacks: Pick<SliderSingleProps, 'onblur' | 'onBlur'> = {};
-  let orientation = $derived(orientationProp ?? (vertical ? 'vertical' : 'horizontal'));
+  let orientation = $derived(orientationProp ?? 'horizontal');
   let prefix = $derived(prefixCls || 'ant-slider');
   let customPrefix = $derived(prefix !== 'ant-slider');
   let prefixCss = $derived(getSliderPrefixCss(prefix));
@@ -149,7 +145,7 @@
   let resolvedDisabled = $derived(typeof mergedDisabled === 'boolean'
     ? mergedDisabled : mergedDisabled[0] ?? false);
   let semantics = $derived(sliderSemantics<SliderSingleProps>({
-    ...props, value, disabled: mergedDisabled, vertical: orientation === 'vertical'
+    ...props, value, disabled: mergedDisabled
   }, config.slider, classNames, semanticStyles));
   let classes = $derived(semantics.classNames);
   let styles = $derived(semantics.styles);
@@ -522,7 +518,7 @@
   data-ant-slider-primary={(hasDecorations || customPrefix) && !componentTheme.className
     ? config.theme.primary : undefined}>
   <div class={[`${prefix}-rail`, classes.rail]} data-ant-slider-part="rail" aria-hidden="true"
-    style={[railStyle, styles.rail].filter(Boolean).join(';') || undefined}></div>
+    style={styles.rail || undefined}></div>
   {#if included && track !== false}
     {#if classes.tracks || styles.tracks}
       <div class={[`${prefix}-tracks`, classes.tracks]} aria-hidden="true"
@@ -534,7 +530,7 @@
       aria-hidden="true" style={[
       orientation === 'horizontal'
       ? `left:${trackStart}%;width:${percentage}%`
-      : `top:${trackStart}%;height:${percentage}%`, indexed(trackStyle), styles.track
+      : `top:${trackStart}%;height:${percentage}%`, styles.track
     ].filter(Boolean).join(';')}></div>
   {/if}
   {#if stepDots.length}
@@ -549,7 +545,7 @@
       resolvedDisabled && `${prefix}-handle-disabled`, classes.handle]} data-ant-slider-part="handle" aria-hidden="true" style={[
         orientation === 'horizontal'
           ? `left:${position}%`
-          : `top:${position}%`, indexed(handleStyle), styles.handle
+          : `top:${position}%`, styles.handle
       ].filter(Boolean).join(';')}></div>
   <!-- svelte-ignore a11y_role_supports_aria_props_implicit (AriaRequired сохраняет исходный Slider prop; native required передаётся отдельно.) -->
   <input

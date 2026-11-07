@@ -31,8 +31,7 @@
       : sample.callback ? scalarStyles : sample.props.styles,
     ariaValueTextFormatterForHandle: valueText ? [point => `Value ${point}`] : undefined
   });
-  let isVertical = $derived(inputProps.orientation === 'vertical'
-    || inputProps.orientation === undefined && inputProps.vertical);
+  let isVertical = $derived(inputProps.orientation === 'vertical');
 </script>
 
 {#snippet control()}

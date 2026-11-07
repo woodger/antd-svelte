@@ -1662,7 +1662,7 @@ onChangeComplete при отпускании. Действие на уже до�
 
 `onChange(next)` получает число перед обновлением `bind:value`; `onValueChange`
 вызывается после. Этот alias не меняет сохранённые native правила завершения и
-отмены действий. Source onBeforeChange/onAfterChange и полная унификация lifecycle
+отмены действий. Source onBeforeChange и полная унификация lifecycle
 с range пока остаются отдельной задачей.
 
 По умолчанию min=0, max=100, step=1. Число ограничивается границами и
@@ -1699,7 +1699,7 @@ preventDefault отменяет обработку. PreventDefault в onpointerd
 aria-valuetext позволяет описать единицу измерения. Фокус остаётся у input,
 а видимый бегунок показывает кольцо клавиатурного фокуса.
 
-Orientation принимает horizontal/vertical и имеет приоритет над deprecated vertical.
+Orientation принимает horizontal/vertical.
 Вертикальному Slider задайте высоту,
 например `style="height: 160px"`; min по умолчанию находится снизу. Reverse
 меняет направление. В RTL горизонтальный min находится справа; reverse
@@ -1790,8 +1790,7 @@ native events и reset сохраняются. Точные интерфейсы
 
 Значения сортируются в новую копию; внешний массив не меняется. Без value и
 defaultValue создаются две точки у min. Null и [] оставляют диапазон пустым;
-нажатие на дорожку восстанавливает две совпадающие точки. Deprecated count
-сохраняет исходные правила заполнения. `SliderProps` по умолчанию описывает
+нажатие на дорожку восстанавливает две совпадающие точки. `SliderProps` по умолчанию описывает
 одиночные callbacks; `SliderProps<true>` и `SliderRangeProps` описывают массив.
 При прямом SSR-вызове TypeScript можно уточнить компонент как `Slider<true>`.
 
@@ -1815,8 +1814,8 @@ step=null перенос всей дорожки отключён. Во врем
 identity; после завершения и keyboard crossing фокус следует новому индексу.
 
 OnChange получает отсортированный массив перед обновлением bind:value;
-onValueChange — после него. OnBeforeChange и deprecated onAfterChange сохраняют
-порядок rc-slider. Range вызывает onChangeComplete по navigation keyup и release
+onValueChange — после него. OnBeforeChange вызывается перед взаимодействием.
+Range вызывает onChangeComplete по navigation keyup и release
 даже без изменения; Delete вызывает before/change без дополнительного complete.
 Click mark завершает изменение сразу. Keyboard=false блокирует перемещение,
 но сохраняет исходный callback keyup. Нативные input/change доступны отдельно;
@@ -1834,15 +1833,14 @@ Ref.focus()/blur() работают в обоих режимах; bind:nativeEle
 ref.nativeElement дают внешний div. При unmount очищаются pointer/touch listeners,
 capture, reset timers и ref. SSR не измеряет DOM, не фокусирует controls и не
 запускает callbacks/timers. Темы light/dark/compact и три существующих primary
-переключаются через ConfigProvider. Direction/reverse и orientation/vertical
-сохраняют исходные физические направления; orientation имеет приоритет.
+переключаются через ConfigProvider. Direction/reverse и orientation
+сохраняют исходные физические направления.
 
 ConfigProvider.slider задаёт class/style и semantic slots обоих режимов.
 ClassNames объединяются, styles применяются по порядку с приоритетом локального
-слоя. Есть slots root/tracks/track/rail/handle и deprecated style aliases.
-Provider styles.root → provider style → local styles.root → local style; legacy
-rail/track/handle styles идут перед semantic стилями соответствующего элемента.
-Callback видит входные props, разрешённые disabled и vertical; проверяйте props.range
+слоя. Есть slots root/tracks/track/rail/handle.
+Provider styles.root → provider style → local styles.root → local style.
+Callback видит входные props и разрешённый disabled; проверяйте props.range
 перед обращением к числовому/массивному value. Явный вложенный record заменяет
 родительскую config целиком; undefined наследует её. Root style применяется после
 theme variables и сохраняет приоритет при обновлении темы.

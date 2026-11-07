@@ -9,6 +9,10 @@
 
 ### Removed
 
+- У Slider удалены vertical, count, onAfterChange и handleStyle/trackStyle/railStyle
+  в обоих режимах. Сохранены orientation, range.minCount/maxCount,
+  onChangeComplete, semantic styles, native формы, фокус и gestures.
+
 - Удалены Alert.message/closeText/closeIcon/onClose/afterClose на корне,
   ErrorBoundary.message и ConfigProvider.alert.closeIcon; сохранён актуальный
   closable с closeIcon/onClose/afterClose. У Spin удалены tip/wrapperClassName

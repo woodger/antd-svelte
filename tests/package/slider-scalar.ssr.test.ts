@@ -50,8 +50,8 @@ describe('Slider scalar source API public package SSR', () => {
     expect(semantic).toContain('local-handle');
     expect(semantic).toContain('local-track');
     expect(semantic).toContain('semantic-tracks');
-    expect(semantic).toContain('height:12px;background:rgb(200,210,220);');
-    expect(semantic).not.toMatch(/<(?:input|div)[^>]*\s(?:marks|classNames|styles|vertical|ariaLabelForHandle)=/);
+    expect(semantic).toContain('height:7px;background:rgb(20,30,40);height:9px');
+    expect(semantic).not.toMatch(/<(?:input|div)[^>]*\s(?:marks|classNames|styles|orientation|ariaLabelForHandle)=/);
   });
 
   it('uses range preset colors for new decorations while keeping the plain native root', () => {

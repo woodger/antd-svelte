@@ -6,7 +6,8 @@
     "delegatedSlider": "@rc-component/slider@1.1.1",
     "source": "package/dist/antd.min.js; runtime CSS-in-JS only",
     "operation": "capture scalar marks/dots/alignment, semantic styles, ARIA and keyboard/pointer onChange transitions",
-    "nativeBoundary": "Svelte retains native input/mark buttons, exact legacy numeric grid and completion/cancellation policy. Tab navigation index excludes disabled inputs; empty tabIndex arrays retain native programmatic focus. Keyboard events are explicitly dispatched when the source div cannot focus; native callback targets are inputs"
+    "nativeBoundary": "Svelte retains native input/mark buttons, exact legacy numeric grid and completion/cancellation policy. Tab navigation index excludes disabled inputs; empty tabIndex arrays retain native programmatic focus. Keyboard events are explicitly dispatched when the source div cannot focus; native callback targets are inputs",
+    "currentApiScope": "Deprecated vertical/style aliases and alias-priority profile removed. Current orientation inputs retain equivalent measured geometry/callbacks; semantic style profile recaptured on unmodified 6.6.8 UMD."
   },
   "viewport": {
     "width": 1100,
@@ -2831,7 +2832,7 @@
           "48": "Mild",
           "100": "Hot"
         },
-        "vertical": true
+        "orientation": "vertical"
       },
       "base": {
         "value": "48",
@@ -3056,215 +3057,6 @@
         {
           "next": 2,
           "previous": 26
-        }
-      ]
-    },
-    {
-      "name": "orientation-priority",
-      "props": {
-        "value": 48,
-        "marks": {
-          "0": "Cold",
-          "25": {
-            "label": "Warm",
-            "style": "color:rgb(180,20,30)"
-          },
-          "48": "Mild",
-          "100": "Hot"
-        },
-        "vertical": true,
-        "orientation": "horizontal"
-      },
-      "base": {
-        "value": "48",
-        "aria": {
-          "label": null,
-          "labelledby": null,
-          "required": null,
-          "valuetext": null
-        },
-        "tabNavigationIndex": 0,
-        "classes": [
-          "ant-slider-horizontal",
-          "ant-slider-with-marks"
-        ],
-        "root": {
-          "width": "360px",
-          "height": "12px",
-          "color": "rgba(0, 0, 0, 0.88)",
-          "margin-bottom": "30px"
-        },
-        "rail": {
-          "height": "4px",
-          "width": "360px",
-          "background-color": "rgba(0, 0, 0, 0.04)"
-        },
-        "tracks": [],
-        "track": [
-          {
-            "height": "4px",
-            "width": "172.797px",
-            "background-color": "rgb(145, 202, 255)"
-          }
-        ],
-        "handle": {
-          "width": "10px",
-          "height": "10px",
-          "background-color": "rgba(0, 0, 0, 0)"
-        },
-        "marks": [
-          {
-            "text": "Cold",
-            "active": true,
-            "style": {
-              "left": "0px",
-              "right": "330.453px",
-              "top": "0px",
-              "bottom": "-22px",
-              "transform": "matrix(1, 0, 0, 1, -14.7734, 0)",
-              "color": "rgba(0, 0, 0, 0.88)",
-              "font-size": "14px"
-            }
-          },
-          {
-            "text": "Warm",
-            "active": true,
-            "style": {
-              "left": "90px",
-              "right": "230.531px",
-              "top": "0px",
-              "bottom": "-22px",
-              "transform": "matrix(1, 0, 0, 1, -19.7344, 0)",
-              "color": "rgb(180, 20, 30)",
-              "font-size": "14px"
-            }
-          },
-          {
-            "text": "Mild",
-            "active": true,
-            "style": {
-              "left": "172.797px",
-              "right": "158.656px",
-              "top": "0px",
-              "bottom": "-22px",
-              "transform": "matrix(1, 0, 0, 1, -14.2734, 0)",
-              "color": "rgba(0, 0, 0, 0.88)",
-              "font-size": "14px"
-            }
-          },
-          {
-            "text": "Hot",
-            "active": false,
-            "style": {
-              "left": "360px",
-              "right": "-23.9062px",
-              "top": "0px",
-              "bottom": "-22px",
-              "transform": "matrix(1, 0, 0, 1, -11.9531, 0)",
-              "color": "rgba(0, 0, 0, 0.45)",
-              "font-size": "14px"
-            }
-          }
-        ],
-        "dots": [
-          {
-            "active": true,
-            "style": {
-              "left": "0px",
-              "right": "352px",
-              "top": "-2px",
-              "bottom": "-2px",
-              "transform": "matrix(1, 0, 0, 1, -4, 0)",
-              "width": "8px",
-              "height": "8px",
-              "border-color": "rgb(145, 202, 255)"
-            }
-          },
-          {
-            "active": true,
-            "style": {
-              "left": "90px",
-              "right": "262px",
-              "top": "-2px",
-              "bottom": "-2px",
-              "transform": "matrix(1, 0, 0, 1, -4, 0)",
-              "width": "8px",
-              "height": "8px",
-              "border-color": "rgb(145, 202, 255)"
-            }
-          },
-          {
-            "active": true,
-            "style": {
-              "left": "172.797px",
-              "right": "179.203px",
-              "top": "-2px",
-              "bottom": "-2px",
-              "transform": "matrix(1, 0, 0, 1, -4, 0)",
-              "width": "8px",
-              "height": "8px",
-              "border-color": "rgb(145, 202, 255)"
-            }
-          },
-          {
-            "active": false,
-            "style": {
-              "left": "360px",
-              "right": "-8px",
-              "top": "-2px",
-              "bottom": "-2px",
-              "transform": "matrix(1, 0, 0, 1, -4, 0)",
-              "width": "8px",
-              "height": "8px",
-              "border-color": "rgb(240, 240, 240)"
-            }
-          }
-        ]
-      },
-      "keys": [
-        {
-          "key": "ArrowRight",
-          "value": "49"
-        },
-        {
-          "key": "ArrowUp",
-          "value": "50"
-        },
-        {
-          "key": "PageDown",
-          "value": "48"
-        },
-        {
-          "key": "Home",
-          "value": "0"
-        },
-        {
-          "key": "End",
-          "value": "100"
-        }
-      ],
-      "keysTransport": "physical",
-      "pointers": [],
-      "events": [
-        {
-          "next": 49,
-          "previous": 48
-        },
-        {
-          "next": 50,
-          "previous": 49
-        },
-        {
-          "next": 48,
-          "previous": 50
-        },
-        {
-          "next": 0,
-          "previous": 48
-        },
-        {
-          "next": 100,
-          "previous": 0
         }
       ]
     },
@@ -5561,10 +5353,7 @@
           "rail": "height:9px",
           "track": "height:8px",
           "handle": "background:rgb(100,110,120)"
-        },
-        "railStyle": "height:12px;background:rgb(200,210,220)",
-        "trackStyle": "height:11px",
-        "handleStyle": "background:rgb(170,180,190)"
+        }
       },
       "base": {
         "value": "48",
@@ -5785,7 +5574,7 @@
           "48": "Mild",
           "100": "Hot"
         },
-        "vertical": true
+        "orientation": "vertical"
       },
       "base": {
         "value": "48",

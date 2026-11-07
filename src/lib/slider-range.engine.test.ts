@@ -21,9 +21,6 @@ describe('Slider source range engine', () => {
     expect(sliderRangeValues(undefined, base)).toEqual([0, 0]);
     expect(sliderRangeValues(null, base)).toEqual([]);
     expect(sliderRangeValues([], base)).toEqual([]);
-    expect(sliderRangeValues([], base, 0)).toEqual([]);
-    expect(sliderRangeValues(undefined, base, 0)).toEqual([0]);
-    expect(sliderRangeValues([20], base, 2)).toEqual([20, 20, 20]);
   });
 
   it('sorts immutable owner values without changing the original order', () => {

@@ -44,8 +44,6 @@ export interface SliderSingleProps extends Omit<
   disabled?: boolean | readonly boolean[] | null;
   /** @defaultValue 'horizontal' */
   orientation?: 'horizontal' | 'vertical';
-  /** @deprecated Используйте orientation. */
-  vertical?: boolean;
   autoFocus?: boolean;
   /** @defaultValue false */
   reverse?: boolean;
@@ -70,12 +68,6 @@ export interface SliderSingleProps extends Omit<
   prefixCls?: string;
   classNames?: SliderSemanticValue<SliderClassNames, SliderSingleProps>;
   styles?: SliderSemanticValue<SliderStyles, SliderSingleProps>;
-  /** @deprecated Используйте styles.handle. */
-  handleStyle?: string | readonly string[];
-  /** @deprecated Используйте styles.track. */
-  trackStyle?: string | readonly string[];
-  /** @deprecated Используйте styles.rail. */
-  railStyle?: string;
   dotStyle?: string | ((value: number) => string);
   activeDotStyle?: string | ((value: number) => string);
   class?: string;

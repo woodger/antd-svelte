@@ -65,21 +65,15 @@ export interface SliderRangeProps extends Omit<
   /** Любая выключенная точка блокирует editable и draggableTrack. */
   disabled?: boolean | readonly boolean[] | null;
   orientation?: 'horizontal' | 'vertical';
-  /** Deprecated alias; orientation имеет приоритет. */
-  vertical?: boolean;
   reverse?: boolean;
   keyboard?: boolean;
   autoFocus?: boolean;
-  /** @deprecated Используйте range.minCount/maxCount. */
-  count?: number;
   /** Svelte callback после изменения bind:value. */
   onValueChange?: (value: number[]) => void;
   /** Исходный callback; не вызывается для неизменившегося отсортированного набора. */
   onChange?: (value: number[]) => void;
   /** Вызывается и для действий без изменения значения, как в rc-slider. */
   onBeforeChange?: (value: number[]) => void;
-  /** @deprecated Вызывается перед onChangeComplete. */
-  onAfterChange?: (value: number[]) => void;
   /** Mouse/pointer release, navigation keyup и click mark; Delete не завершает действие. */
   onChangeComplete?: (value: number[]) => void;
   onFocus?: (event: FocusEvent) => void;
@@ -96,12 +90,6 @@ export interface SliderRangeProps extends Omit<
   class?: string;
   classNames?: SliderSemanticValue<SliderClassNames>;
   styles?: SliderSemanticValue<SliderStyles>;
-  /** @deprecated Используйте styles.handle. */
-  handleStyle?: string | readonly string[];
-  /** @deprecated Используйте styles.track. */
-  trackStyle?: string | readonly string[];
-  /** @deprecated Используйте styles.rail. */
-  railStyle?: string;
   dotStyle?: string | ((value: number) => string);
   activeDotStyle?: string | ((value: number) => string);
   ref?: SliderRef;

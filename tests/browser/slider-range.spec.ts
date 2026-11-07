@@ -46,12 +46,12 @@ test('Slider range retains source callback order even for a boundary keyup', asy
 
   await expect(output(page, 'value')).toHaveText('[25,80]');
   await expect(output(page, 'events'))
-    .toHaveText('before:20,80|change:25,80|after:25,80|complete:25,80');
+    .toHaveText('before:20,80|change:25,80|complete:25,80');
   await handles(page).first().press('Home');
   await clear(page);
   await handles(page).first().press('ArrowLeft');
 
-  await expect(output(page, 'events')).toHaveText('before:0,80|after:0,80|complete:0,80');
+  await expect(output(page, 'events')).toHaveText('before:0,80|complete:0,80');
 });
 
 test('Slider range updates a rail selection and completes only on release', async ({ page }) => {
@@ -64,7 +64,7 @@ test('Slider range updates a rail selection and completes only on release', asyn
   await page.mouse.up();
 
   await expect(output(page, 'events'))
-    .toHaveText('before:20,50|change:20,50|after:20,50|complete:20,50');
+    .toHaveText('before:20,50|change:20,50|complete:20,50');
 });
 
 test('Slider range crosses while retaining drag identity and focuses the new sorted index', async ({ page }) => {
@@ -150,7 +150,7 @@ test('Slider range marks stay native buttons and complete without submitting the
   await button(page, 'Warm').click();
 
   await expect(output(page, 'value')).toHaveText('[25,100]');
-  await expect(output(page, 'events')).toContainText('after:25,100|complete:25,100');
+  await expect(output(page, 'events')).toContainText('complete:25,100');
   await expect(output(page, 'submissions')).toHaveText('0');
   await handles(page).first().press('ArrowRight');
   await expect(output(page, 'value')).toHaveText('[100,100]');
@@ -208,7 +208,7 @@ test('Slider range disables native keyboard changes and preserves source keyup c
   await handles(page).first().press('ArrowRight');
 
   await expect(output(page, 'value')).toHaveText('[20,80]');
-  await expect(output(page, 'events')).toHaveText('after:20,80|complete:20,80');
+  await expect(output(page, 'events')).toHaveText('complete:20,80');
 });
 
 test('Slider range lets native handlers cancel a key or pointer start', async ({ page }) => {
@@ -304,7 +304,7 @@ test('Slider range accepts native assistive input/change without a gesture', asy
 
   await expect(output(page, 'value')).toHaveText('[35,80]');
   await expect(output(page, 'events'))
-    .toHaveText('before:20,80|change:35,80|after:35,80|complete:35,80');
+    .toHaveText('before:20,80|change:35,80|complete:35,80');
 });
 
 test('Slider range respects cancellation of native form reset', async ({ page }) => {

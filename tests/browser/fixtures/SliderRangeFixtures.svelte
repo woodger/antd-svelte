@@ -88,7 +88,7 @@
             onpointerdown={event => { if (cancelPointer) event.preventDefault(); }}
             ariaLabelForHandle={['Range start', 'Range middle', 'Range end']}
             onBeforeChange={next => record('before', next)} onChange={next => record('change', next)}
-            onAfterChange={next => record('after', next)} onChangeComplete={next => record('complete', next)} />
+            onChangeComplete={next => record('complete', next)} />
         {/if}
       </div>
       <button type="submit">Submit range form</button>

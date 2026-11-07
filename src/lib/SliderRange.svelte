@@ -54,7 +54,7 @@
   let prefixCls = $derived(props.prefixCls || 'ant-slider');
   let customPrefix = $derived(prefixCls !== 'ant-slider');
   let prefixCss = $derived(getSliderPrefixCss(prefixCls));
-  let orientation = $derived(props.orientation ?? (props.vertical ? 'vertical' : 'horizontal'));
+  let orientation = $derived(props.orientation ?? 'horizontal');
   let direction = $derived(getSliderDirection(orientation, props.reverse ?? false,
     (internal?.direction ?? config.direction) === 'rtl'));
   let disabled = $derived(props.disabled ?? field?.disabled ?? form?.disabled
@@ -76,14 +76,14 @@
   let offset = $derived(createSliderRangeOffset(options));
   let settings = $derived(sliderRangeSettings(props.range));
   let raw = $derived(sliderRangeValues(value === undefined ? initialDefault : value,
-    options, props.count));
+    options));
   let disabledState = $derived(sliderDisabledState(disabled, raw));
   let editable = $derived(settings.editable && !disabledState[1]);
   let draggableTrack = $derived(settings.draggableTrack && !disabledState[1] && step !== null);
   let displayed = $derived(active ? sliderRangeCache(raw, cache, editable) : raw);
   let sorted = $derived([...displayed].sort((a, b) => a - b));
   let included = $derived(props.included ?? true);
-  let mergedProps = $derived({ ...props, value, disabled, vertical: orientation === 'vertical' });
+  let mergedProps = $derived({ ...props, value, disabled });
   let semantics = $derived(sliderSemantics(mergedProps, config.slider,
     props.classNames, props.styles));
   let classNames = $derived(semantics.classNames);
@@ -102,11 +102,11 @@
     && (Boolean(props.tooltip?.open) || hovered >= 0 || focused >= 0 || locked));
   const owned = new Set([
     'range', 'min', 'max', 'step', 'marks', 'dots', 'included', 'track', 'allowCross', 'pushable',
-    'disabled', 'orientation', 'vertical', 'reverse', 'keyboard', 'autoFocus', 'autofocus', 'count',
-    'onValueChange', 'onChange', 'onBeforeChange', 'onAfterChange', 'onChangeComplete',
+    'disabled', 'orientation', 'reverse', 'keyboard', 'autoFocus', 'autofocus',
+    'onValueChange', 'onChange', 'onBeforeChange', 'onChangeComplete',
     'onFocus', 'onBlur', 'tabIndex', 'ariaLabelForHandle', 'ariaLabelledByForHandle',
     'ariaRequired', 'ariaValueTextFormatterForHandle', 'tooltip', 'prefixCls', 'rootClassName',
-    'class', 'classNames', 'styles', 'handleStyle', 'trackStyle', 'railStyle', 'dotStyle',
+    'class', 'classNames', 'styles', 'dotStyle',
     'activeDotStyle', 'defaultValue', 'id', 'style', 'oninput', 'onchange', 'onkeydown',
     'onkeyup', 'onfocus', 'onblur', 'onpointerdown', 'onpointerenter', 'onpointerleave',
     'ontouchstart', 'ontouchmove'
@@ -186,7 +186,6 @@
 
   function complete(index = -1) {
     const result = [...raw];
-    props.onAfterChange?.(result);
     props.onChangeComplete?.(result);
     locked = false;
     if (index >= 0) dispatchNative('change', index);
@@ -286,7 +285,7 @@
       next.splice(before + 1, 0, point);
       focus = before + 1;
     } else next[index] = point;
-    if (!raw.length && props.count === undefined) next.push(point);
+    if (!raw.length) next.push(point);
     props.onBeforeChange?.(next);
     publish(next, focus);
     if (event) {
@@ -414,7 +413,7 @@
     const timer = setTimeout(() => {
       resetTimers.delete(timer);
       if (!mounted || event.defaultPrevented) return;
-      value = sliderRangeValues(initialDefault, options, props.count);
+      value = sliderRangeValues(initialDefault, options);
     }, 0);
     resetTimers.add(timer);
   }
@@ -451,7 +450,7 @@
   });
 
   $effect(() => {
-    const defaults = sliderRangeValues(initialDefault, options, props.count);
+    const defaults = sliderRangeValues(initialDefault, options);
     const current = displayed;
     for (let index = 0; index < inputs.length; index++) {
       const input = inputs[index];
@@ -497,7 +496,7 @@
   data-ant-slider-native={customPrefix && !componentTheme.className || undefined}
   data-ant-slider-theme={config.theme.mode}
   data-ant-slider-primary={config.theme.primary} onpointerdown={handleRootPointer}>
-  <div class={[`${prefixCls}-rail`, classNames.rail]} style={[props.railStyle, styles.rail].filter(Boolean).join(';')}></div>
+  <div class={[`${prefixCls}-rail`, classNames.rail]} style={styles.rail}></div>
   {#if included && props.track !== false}
     {#if sorted.length > 1 && (classNames.tracks || styles.tracks)}
       <div class={[`${prefixCls}-tracks`, classNames.tracks]} style={`${trackStyle(raw[0], raw[raw.length - 1])};${styles.tracks ?? ''}`}></div>
@@ -506,7 +505,7 @@
       <!-- svelte-ignore a11y_no_static_element_interactions (Draggable track — часть нативного slider interaction.) -->
       <div class={[`${prefixCls}-track`, `${prefixCls}-track-${index + 1}`, classNames.track,
         draggableTrack && `${prefixCls}-track-draggable`]}
-        style={[trackStyle(startPoint, raw[index + 1]), indexed(props.trackStyle, index), styles.track].filter(Boolean).join(';')}
+        style={[trackStyle(startPoint, raw[index + 1]), styles.track].filter(Boolean).join(';')}
         onpointerdown={event => {
           if (draggableTrack) {
             start(event, -1);
@@ -527,7 +526,7 @@
       active && draggingIndex === index && `${prefixCls}-handle-dragging`,
       active && draggingIndex === index && draggingDelete && `${prefixCls}-handle-dragging-delete`,
       sliderHandleDisabled(disabled, index) && `${prefixCls}-handle-disabled`]}
-      style={[sliderRangePosition(direction, point, minimum, maximum), indexed(props.handleStyle, index), styles.handle,
+      style={[sliderRangePosition(direction, point, minimum, maximum), styles.handle,
         internal?.handleStyle?.(index, point)].filter(Boolean).join(';')}>
       <!-- svelte-ignore a11y_role_supports_aria_props_implicit (AriaRequired сохраняет явный публичный prop rc-slider; native required передаётся отдельно.) -->
       <input {...inputAttributes} bind:this={inputs[index]} {@attach connectInput}

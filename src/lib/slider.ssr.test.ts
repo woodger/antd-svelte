@@ -3,6 +3,19 @@ import { describe, expect, expectTypeOf, it } from 'vitest';
 import Slider, { type SliderProps } from './Slider.svelte';
 
 describe('Slider server rendering', () => {
+  it.each([false, true])('preserves authored orientation in semantic callbacks for range=%s', range => {
+    const classNames = ({ props }: { props: { orientation?: 'horizontal' | 'vertical'; }; }) => ({
+      root: `reported-${props.orientation ?? 'absent'}`
+    });
+    const props = range ? { range: true as const, defaultValue: [20, 80], classNames }
+      : { range: false as const, defaultValue: 20, classNames };
+    const absent = render(Slider, { props }).body;
+    const vertical = render(Slider, { props: { ...props, orientation: 'vertical' } }).body;
+
+    expect(absent).toContain('reported-absent');
+    expect(vertical).toContain('reported-vertical');
+  });
+
   it(
     'renders a labelled native range with a numeric zero and one successful form control',
     () => {
