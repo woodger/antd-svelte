@@ -1,7 +1,7 @@
 import type { SelectConfig } from './select.types';
 import type { TreeSelectConfig } from './tree-select.types';
 import type { DatePickerConfig } from './date-picker.types';
-import type { CardConfig } from './card.types';
+import type { CardConfig, CardMetaConfig } from './card.types';
 import type { MentionsComponentConfig } from './mentions.types';
 import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
 import type { ButtonConfig } from './button.types';
@@ -64,6 +64,7 @@ export interface ConfigContext {
   readonly treeSelect?: TreeSelectConfig;
   readonly datePicker?: DatePickerConfig;
   readonly card?: CardConfig;
+  readonly cardMeta?: CardMetaConfig;
   readonly mentions?: MentionsComponentConfig;
   readonly tabs?: TabsConfig;
   readonly ribbon?: BadgeRibbonConfig;

@@ -1017,6 +1017,22 @@ Meta — root/section/avatar/title/description, объект либо callback (
 Style корня перекрывает styles.root; styles.header/body перекрывают legacy
 headStyle/bodyStyle. Meta root следует тому же приоритету.
 
+ConfigProvider.card задаёт variant, class/style и те же semantic classNames/styles;
+ConfigProvider.cardMeta независимо настраивает Meta через class/style и semantic
+slots. Классы context/local объединяются. Стили корня: context semantic → context
+style → local semantic → local style; переменные темы идут перед ними. Для header/body
+все semantic styles, включая context, идут после legacy headStyle/bodyStyle.
+Явный вложенный record, включая {}, заменяет соответствующий родительский целиком;
+undefined наследует его. Обновления сохраняют editors, focus/selection, FormData,
+выбранную вкладку и существующие callbacks. Фикстура — `?fixture=card-config`,
+[проверки](./tests/browser/card-config.spec.ts) используют неизменённый UMD 6.6.8.
+
+Semantic callbacks Card сохраняют прежние native defaults: loading/hoverable=false
+и tabProps={} при отсутствии этих props. Raw source mergedProps оставляет их
+undefined; size/variant разрешены в обоих случаях. Это отличие записано в
+[эталоне](./tests/browser/fixtures/ant-design-card-config-reference.json)
+отдельно от CSS-сценариев с явно заданными flags.
+
 ConfigProvider.theme.components.Card применяет все 13 компонентных токенов
 эталона, включая bodyPadding/bodyPaddingSM, headerHeight/headerHeightSM,
 headerBg и actionsBg. Defaults пересчитываются из aliases и component algorithm;
@@ -1048,7 +1064,7 @@ activeTabKey имеет приоритет над tabProps.activeKey. TabBarExtr
 проверяют стили, слоты, Grid, загрузку/фокус и вкладки. Рецепт card извлекает
 59 правил без keyframes. Компонентные темы отдельно сверяются с UMD 6.6.8 в
 `tests/browser/card-theme.spec.ts`, фикстура — `?fixture=card-theme`.
-PrefixCls, semantic component config
+PrefixCls
 и отсутствующие возможности Tabs остаются в полном объёме миграции.
 
 ## Breadcrumb

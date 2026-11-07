@@ -9,6 +9,12 @@
 
 ### Added
 
+- Card/CardMeta: class/style и object/function semantic defaults из ConfigProvider,
+  независимые records с nested replacement и исходные четыре root style слоя.
+  Header/body semantic styles перекрывают legacy; editors, focus/selection,
+  FormData, tabs и callbacks сохраняются. Прежние native callback defaults
+  сопоставлены с отдельным raw source observation без изменения контракта.
+
 - ConfigProvider/Form: общий variant с исходным приоритетом local/bordered/Form/
   component/fallback/global для всех потребителей, включая Card и Pagination.
   Подключены variant-only Select/TreeSelect/DatePicker/Card/Mentions config;

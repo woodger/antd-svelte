@@ -4,6 +4,7 @@
   import { useVariant } from './variant.svelte';
   import { useComponentTheme } from './theme-component.svelte';
   import { cardHasContent, cardTabItems } from './card.engine';
+  import { cardSemantics } from './card-semantic.engine';
   import { connectCardGrid } from './card.dom';
   import { createSkeletonFocus } from './skeleton.dom';
   import { connectFeedbackFocus } from './feedback.dom';
@@ -82,8 +83,9 @@
       }
     }
   );
-  let classes = $derived(typeof classNames === 'function' ? classNames(info) : classNames ?? {});
-  let slots = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
+  let semantic = $derived(cardSemantics(config.card, info.props));
+  let classes = $derived(semantic.classes);
+  let slots = $derived(semantic.styles);
   $effect(() => {
     if (nativeElement) return connectFeedbackFocus(nativeElement);
   });
@@ -121,6 +123,7 @@
   class={[
       'ant-card ant-card-css-var',
       componentTheme.className,
+      config.card?.class,
       loading && 'ant-card-loading',
       mergedVariant !== 'borderless' && 'ant-card-bordered',
       hoverable && 'ant-card-hoverable',
@@ -133,7 +136,7 @@
       rootClassName,
       classes.root
     ]}
-  style={[componentTheme.style, slots.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, slots.root].filter(Boolean).join(';')}>
   {#if cardHasContent(title) || cardHasContent(extra) || tabList}
     <div class={['ant-card-head', classes.header]} style={[headStyle, slots.header].filter(Boolean).join(';')}>
       <div class="ant-card-head-wrapper">

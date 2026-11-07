@@ -4,9 +4,20 @@ import type { ComponentSize } from './types';
 import type { TabsContent, TabsExtraContent, TabsItem, TabsProps } from './tabs.types';
 
 export type CardContent = TabsContent;
-/** Настройки ConfigProvider.card; пока перенесён только variant. */
+/** Настройки Card; явно заданный вложенный record заменяет родительский целиком. */
 export interface CardConfig {
   variant?: CardProps['variant'];
+  class?: string;
+  style?: string;
+  classNames?: CardSemantic;
+  styles?: CardSemantic;
+}
+/** Независимые от Card настройки ConfigProvider.cardMeta с тем же record replacement. */
+export interface CardMetaConfig {
+  class?: string;
+  style?: string;
+  classNames?: CardMetaSemantic;
+  styles?: CardMetaSemantic;
 }
 export type CardSlots = Partial<
   Record<'root' | 'header' | 'body' | 'extra' | 'title' | 'actions' | 'cover', string>
@@ -14,6 +25,10 @@ export type CardSlots = Partial<
 export type CardMetaSlots = Partial<
   Record<'root' | 'section' | 'avatar' | 'title' | 'description', string>
 >;
+/** Card callback получает разрешённые size/variant и прежние native defaults остальных Props. */
+export type CardSemantic = CardSlots | ((info: { props: CardProps; }) => CardSlots);
+/** Meta callback получает текущие Props; root — внешний div CardMeta. */
+export type CardMetaSemantic = CardMetaSlots | ((info: { props: CardMetaProps; }) => CardMetaSlots);
 export interface CardTabItem extends Omit<TabsItem, 'label'> {
   label?: TabsContent;
   tab?: TabsContent;
@@ -48,8 +63,9 @@ export interface CardProps extends Omit<
   tabBarExtraContent?: TabsExtraContent;
   tabProps?: Partial<Omit<TabsProps, 'items'>>;
   onTabChange?: (key: string) => void;
-  classNames?: CardSlots | ((info: { props: CardProps; }) => CardSlots);
-  styles?: CardSlots | ((info: { props: CardProps; }) => CardSlots);
+  classNames?: CardSemantic;
+  /** Root: context semantic → context style → local semantic → local style. */
+  styles?: CardSemantic;
   class?: string;
   rootClassName?: string;
   style?: string;
@@ -77,8 +93,9 @@ export interface CardMetaProps extends Omit<
   avatar?: CardContent;
   title?: CardContent;
   description?: CardContent;
-  classNames?: CardMetaSlots | ((info: { props: CardMetaProps; }) => CardMetaSlots);
-  styles?: CardMetaSlots | ((info: { props: CardMetaProps; }) => CardMetaSlots);
+  classNames?: CardMetaSemantic;
+  /** Root: context semantic → context style → local semantic → local style. */
+  styles?: CardMetaSemantic;
   class?: string;
   style?: string;
   /** Нативный ref доступен после mount и очищается при unmount. */

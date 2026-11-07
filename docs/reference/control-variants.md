@@ -63,8 +63,9 @@ Theme.inherit=false сбрасывает тему, сохраняя настро
 Существующие native events, bindings, semantic styles и theme tokens сохраняют
 свои контракты.
 
-ConfigProvider.select/treeSelect/datePicker/card/mentions на этом этапе принимают
+ConfigProvider.select/treeSelect/datePicker/mentions на этом этапе принимают
 только variant. Их остальные исходные component config props пока не перенесены.
+Card и Meta также поддерживают [class/style и semantic config](../../readme.md#card).
 MentionsComponentConfig относится к provider; прежний MentionsConfig остаётся
 настройкой функции getMentions. Form component поддерживает form/false;
 произвольные wrapper tags остаются отдельным пробелом.

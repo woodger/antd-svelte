@@ -2,7 +2,7 @@
   import type { SelectConfig } from './select.types';
   import type { TreeSelectConfig } from './tree-select.types';
   import type { DatePickerConfig } from './date-picker.types';
-  import type { CardConfig } from './card.types';
+  import type { CardConfig, CardMetaConfig } from './card.types';
   import type { MentionsComponentConfig } from './mentions.types';
   import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
   import type { ButtonConfig } from './button.types';
@@ -75,6 +75,7 @@
     treeSelect?: TreeSelectConfig;
     datePicker?: DatePickerConfig;
     card?: CardConfig;
+    cardMeta?: CardMetaConfig;
     mentions?: MentionsComponentConfig;
     button?: ButtonConfig;
     tabs?: TabsConfig;
@@ -160,6 +161,7 @@
     treeSelect,
     datePicker,
     card,
+    cardMeta,
     mentions,
     button,
     tabs,
@@ -251,6 +253,9 @@
     },
     get card() {
       return card ?? parent.card;
+    },
+    get cardMeta() {
+      return cardMeta ?? parent.cardMeta;
     },
     get mentions() {
       return mentions ?? parent.mentions;

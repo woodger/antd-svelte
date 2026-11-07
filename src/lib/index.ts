@@ -199,6 +199,9 @@ export type {
   CardContent,
   CardSlots,
   CardMetaSlots,
+  CardSemantic,
+  CardMetaSemantic,
+  CardMetaConfig,
   CardTabItem
 } from './card.types';
 export type { TabsContent, TabsExtraContent } from './tabs.types';

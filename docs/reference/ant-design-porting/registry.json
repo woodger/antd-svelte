@@ -9168,7 +9168,16 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/card.types.ts",
+        "src/lib/card-semantic.engine.ts",
+        "src/lib/ConfigProvider.svelte",
+        "tests/browser/fixtures/card-config-presets.ts",
+        "tests/browser/fixtures/CardConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-card-config-reference.json",
+        "tests/browser/card-config-metrics.ts",
+        "tests/browser/card-config.spec.ts",
+        "tests/package/card-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -9230,11 +9239,11 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls, semantic component config и полный API Tabs",
+          "title": "PrefixCls, полный API Tabs",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "ConfigProvider.card пока содержит только variant; semantic config и prefixCls остаются в работе. Остаётся в полном объёме миграции; Card.tabProps пока ограничен существующим Svelte Tabs, включая отсутствие editable-card/renderTabBar/overflow menu."
+          "note": "PrefixCls остаётся в работе. Остаётся в полном объёме миграции; Card.tabProps пока ограничен существующим Svelte Tabs, включая отсутствие editable-card/renderTabBar/overflow menu."
         },
         {
           "id": "inherited-variants",
@@ -9254,7 +9263,42 @@
             "tests/browser/config-variants.spec.ts",
             "tests/package/config-variants.ssr.test.ts"
           ],
-          "note": "Local outlined/borderless и bordered=false перекрывают Form, card.variant и global. Config пока только variant. Global/Form filled/underlined сохраняют исходную рамку Card; отдельные variants для неё не выдумываются. Semantic callbacks получают разрешённый variant как source, остальные config/Tab API остаются в работе."
+          "note": "Local outlined/borderless и bordered=false перекрывают Form, card.variant и global. Global/Form filled/underlined сохраняют исходную рамку Card; отдельные variants для неё не выдумываются. Semantic callbacks получают разрешённый variant как source, prefix и остальные Tab API остаются в работе."
+        },
+        {
+          "id": "component-config",
+          "title": "ConfigProvider.card/cardMeta: class/style и semantic defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/card.types.ts",
+            "src/lib/card-semantic.engine.ts",
+            "src/lib/Card.svelte",
+            "src/lib/CardMeta.svelte",
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/fixtures/card-config-presets.ts",
+            "tests/browser/fixtures/CardConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-card-config-reference.json",
+            "tests/browser/card-config-metrics.ts",
+            "tests/browser/card-config.spec.ts",
+            "tests/package/card-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Legacy head/body стоят ниже merged semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; prefixCls и полный Tabs API не включены."
+        },
+        {
+          "id": "semantic-native-defaults",
+          "title": "Сохраняемые native defaults в semantic callback props",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Card.svelte",
+            "src/lib/card.types.ts",
+            "tests/browser/fixtures/ant-design-card-config-reference.json",
+            "tests/package/card-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Уже опубликованные Svelte callbacks Card передают loading/hoverable=false и tabProps={} при отсутствии props. Ant Design 6.6.8/984592267de88fbf9cdaecc96a56629e721c709d mergedProps сохраняет отсутствие этих трёх props: raw UMD observation содержит own=false/type=undefined. Native контракт сохранён при добавлении provider callbacks; оба слоя используют один info. CSS matrix явно задаёт flags и componentSize=middle; raw defaultPropsObservation хранится отдельно и не подменяется. Это отличие native API, а не установленная ошибка upstream; пересмотр defaults требует отдельного решения о совместимости."
         }
       ]
     },
@@ -15458,7 +15502,17 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/card.types.ts",
+        "src/lib/card-semantic.engine.ts",
+        "src/lib/Card.svelte",
+        "src/lib/CardMeta.svelte",
+        "tests/browser/fixtures/card-config-presets.ts",
+        "tests/browser/fixtures/CardConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-card-config-reference.json",
+        "tests/browser/card-config-metrics.ts",
+        "tests/browser/card-config.spec.ts",
+        "tests/package/card-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -16248,7 +16302,28 @@
             "tests/browser/config-variants.spec.ts",
             "tests/package/config-variants.ssr.test.ts"
           ],
-          "note": "ConfigProvider.variant и Form.variant по form/hooks/useVariants 6.6.8: local, legacy false, ближайший Form, component, fallback Input, global, outlined. Подключены все 18 представлений source consumers, включая Search button/input, Card и Pagination. Component records наследуются либо заменяются целиком; вложенный global не отменяет inherited component variant, theme.inherit=false сохраняет config. Select/treeSelect/datePicker/card/mentions config пока содержат только variant. Source raw classes/colors/borders и native DOM/focus/selection/FormData/callback boundaries закреплены в evidence; общий аудит provider остаётся незавершённым."
+          "note": "ConfigProvider.variant и Form.variant по form/hooks/useVariants 6.6.8: local, legacy false, ближайший Form, component, fallback Input, global, outlined. Подключены все 18 представлений source consumers, включая Search button/input, Card и Pagination. Component records наследуются либо заменяются целиком; вложенный global не отменяет inherited component variant, theme.inherit=false сохраняет config. Select/treeSelect/datePicker/mentions config пока содержат только variant; Card поддерживает class/style/semantic config отдельной feature. Source raw classes/colors/borders и native DOM/focus/selection/FormData/callback boundaries закреплены в evidence; общий аудит provider остаётся незавершённым."
+        },
+        {
+          "id": "card-component-config",
+          "title": "ConfigProvider.card/cardMeta: class/style и semantic defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/card.types.ts",
+            "src/lib/card-semantic.engine.ts",
+            "src/lib/Card.svelte",
+            "src/lib/CardMeta.svelte",
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/fixtures/card-config-presets.ts",
+            "tests/browser/fixtures/CardConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-card-config-reference.json",
+            "tests/browser/card-config-metrics.ts",
+            "tests/browser/card-config.spec.ts",
+            "tests/package/card-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Legacy head/body стоят ниже merged semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; prefixCls и полный Tabs API не включены."
         }
       ]
     },
