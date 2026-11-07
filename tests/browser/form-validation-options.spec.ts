@@ -156,3 +156,22 @@ test('Form rejects a silent snapshot reset while validation is pending', async (
   await expect(page.getByLabel('Fresh', { exact: true })).toHaveAccessibleDescription('Fresh hint');
   await expect(page.getByLabel('Fresh', { exact: true })).not.toHaveAttribute('aria-invalid');
 });
+
+test('Form parent touched state follows child blur with distinct literal and typed paths', async ({ page }) => {
+  await expect(page.getByRole('status', { name: 'Touched any', exact: true })).toHaveText('false');
+  await page.getByLabel('User name', { exact: true }).focus();
+  await page.getByLabel('User name', { exact: true }).blur();
+
+  await expect(page.getByRole('status', { name: 'Touched user', exact: true })).toHaveText('true');
+  await expect(page.getByRole('status', { name: 'Touched literal', exact: true })).toHaveText('false');
+  await expect(page.getByRole('status', { name: 'Touched any', exact: true })).toHaveText('true');
+  await page.getByLabel('Numeric row', { exact: true }).focus();
+  await page.getByLabel('Numeric row', { exact: true }).blur();
+
+  await expect(page.getByRole('status', { name: 'Touched numeric row', exact: true })).toHaveText('true');
+  await expect(page.getByRole('status', { name: 'Touched string row', exact: true })).toHaveText('false');
+  await page.getByRole('button', { name: 'Reset nested options', exact: true }).click();
+
+  await expect(page.getByRole('status', { name: 'Touched user', exact: true })).toHaveText('false');
+  await expect(page.getByRole('status', { name: 'Touched any', exact: true })).toHaveText('false');
+});

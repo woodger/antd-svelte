@@ -4869,7 +4869,9 @@
         "tests/browser/fixtures/FormValidationOptionsFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-validation-options-observation.json",
         "tests/browser/fixtures/ant-design-form-validation-concurrency-observation.json",
-        "tests/package/form-validation-options.ssr.test.ts"
+        "tests/package/form-validation-options.ssr.test.ts",
+        "tests/package/form-touched-paths.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-form-touched-paths-observation.json"
       ],
       "features": [
         {
@@ -5102,6 +5104,20 @@
             "tests/package/form-validation-options.ssr.test.ts"
           ],
           "note": "Обе текущие перегрузки и сочетания флагов. ValidateOnly не меняет errors/warnings/touched/validating и историю dirty; recursive выбирает зарегистрированных потомков один раз с различием number/string; dirty включает заданные defaults (кроме undefined), обычную validation, touched и записи, reset очищает историю. Сохранены полный snapshot, правила touched createForm и защита после изменения/reset/unregister. Обычные и тихие запросы разделяют latest-request outOfDate, не отменяя UI metadata друг друга; сверено с неизменённым UMD 6.6.8 и rc-form 1.8.6. Подтверждённый дефект Source validateFields(undefined, options) не повторяется: второй аргумент применяется. Plain values для merge сравниваются по own content с поддержкой cycles/holes; opaque instances сохраняют identity contract. Полные rules, field adapters и semantic config остаются вне этапа."
+        },
+        {
+          "id": "touched-paths",
+          "title": "IsFieldTouched для родительских путей и потомков",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.model.svelte.ts",
+            "tests/package/form-touched-paths.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-form-touched-paths-observation.json",
+            "tests/browser/fixtures/FormValidationOptionsFixtures.svelte",
+            "tests/browser/form-validation-options.spec.ts"
+          ],
+          "note": "Как Ant Design 6.6.8 / rc-form 1.8.6, запрос родительского NamePath возвращает true, если touched само поле или любой потомок. Literal dotted keys и number/string segments различаются; reset снимает flags, запрос не создаёт metadata. Сохранён набор полей и прежние triggers touched модели. Для [] используется безопасный запрос всей модели; подтверждённое исключение UMD в NameMap при пустом пути записано в raw observation и не повторяется."
         }
       ]
     },

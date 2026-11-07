@@ -944,6 +944,10 @@
 
 ### Fixed
 
+- Form: isFieldTouched родительского пути учитывает touched потомков с различием
+  literal и numeric/string paths. Запрос [] безопасно проверяет всю модель;
+  падение upstream записано в raw reference.
+
 - Segmented: проверка thumb под scale ожидает завершение CSS transform корня
   перед новым выбором. Сравнение геометрии, пауза thumb и допуск 1px сохранены.
 

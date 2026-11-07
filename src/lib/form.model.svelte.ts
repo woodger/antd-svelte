@@ -51,6 +51,7 @@ export interface FormInstance<Values extends FormValues> {
   getFieldError(name: NamePath): readonly string[];
   /** Предупреждения warningOnly не входят в errors и не блокируют submit. */
   getFieldWarning(name: NamePath): readonly string[];
+  /** Учитывает само поле и известных модели потомков; пустой путь проверяет всю модель. */
   isFieldTouched(name: NamePath): boolean;
   isFieldValidating(name: NamePath): boolean;
   isFieldRequired(name: NamePath): boolean;
@@ -287,7 +288,9 @@ export function createForm<Values extends FormValues>({
     getFieldsError,
     getFieldError: (name) => findField(name)?.errors ?? [],
     getFieldWarning: (name) => findField(name)?.warnings ?? [],
-    isFieldTouched: (name) => findField(name)?.touched ?? false,
+    isFieldTouched: (name) => fields.some((field) =>
+      containsFormPath(name, fieldPath(field)) && field.touched
+    ),
     isFieldValidating: (name) => findField(name)?.validating ?? false,
     isFieldRequired: (name) => {
       const field = findField(name);

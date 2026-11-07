@@ -155,6 +155,11 @@
   </button>
   <button onclick={() => nested.resetFields()}>Reset nested options</button>
   <output aria-label="Nested calls">{JSON.stringify(nestedCalls)}</output>
+  <output aria-label="Touched user">{String(nested.isFieldTouched('user'))}</output>
+  <output aria-label="Touched literal">{String(nested.isFieldTouched('user.name'))}</output>
+  <output aria-label="Touched numeric row">{String(nested.isFieldTouched(['rows', 0]))}</output>
+  <output aria-label="Touched string row">{String(nested.isFieldTouched(['rows', '0']))}</output>
+  <output aria-label="Touched any">{String(nested.isFieldTouched([]))}</output>
   <output aria-label="Nested result">{nestedResult}</output>
   <output aria-label="Nested fields">{JSON.stringify(nested.getFieldsError(
     definitions.map(({ name }) => name)
