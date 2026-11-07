@@ -8,7 +8,6 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { useWave } from './wave.svelte';
   import { useCompact } from './space-compact-context';
-  import { useButtonGroup } from './button-group-context';
   import { compactClasses } from './space-compact.engine';
   import { useForm } from './form-context';
   import { buttonAppearance, buttonHasContent, buttonLoading, buttonText } from './button.engine';
@@ -58,9 +57,8 @@
   const componentTheme = useComponentTheme('Button');
   const wave = useWave('Button', () => innerLoading);
   const compact = useCompact();
-  const group = useButtonGroup();
   const form = useForm();
-  let resolvedSize = $derived(size ?? compact?.size ?? group?.size ?? config.componentSize);
+  let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
   let compactItemClasses = $derived(compactClasses('ant-btn', config.direction, compact));
   let appearance = $derived(buttonAppearance(type, danger, color, variant, ghost, config.button));
   let resolvedShape = $derived(shape || config.button?.shape || 'default');

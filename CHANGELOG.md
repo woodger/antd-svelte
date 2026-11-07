@@ -9,6 +9,10 @@
 
 ### Removed
 
+- Deprecated ButtonGroup/InputGroup, их типы, контекст размера Button.Group,
+  отдельные CSS-правила и фикстуры. Для композиции используется SpaceCompact;
+  размер Button определяется local prop, Compact и ConfigProvider.
+
 - Deprecated BackTop и BackTopProps, его компонентные токены, runtime CSS,
   отдельные тесты, фикстуры и документация. Актуальный FloatButtonBackTop
   и его общие scroll/motion механизмы сохранены.
@@ -752,21 +756,6 @@
   размеры/outset, наследование radius, config и reduced motion. Явный target
   заменяет React child ref без новой обёртки; слои очищаются при смене контейнера.
   Добавлены CSS-рецепт, unit/SSR, package и изолированные browser-проверки.
-- InputGroup переносит deprecated Input.Group через SpaceCompact с legacy size/
-  compact классами, keyed items и bubbling events. FormItem status/disabled
-  сохраняются без дублирования id/name/required на всех дочерних controls.
-- InputOTP переносит Input.OTP: UTF-16 ячейки, formatter до ограничения длины,
-  native paste/input, маску и разделители, focus/keyboard, otp config и callbacks
-  полного кода. Сохранены source value/defaultValue и SSR semantics; CSS извлечён
-  отдельным проверяемым рецептом.
-- InputSearch переносит Input.Search из Ant Design 6.6.8: поиск по кнопке/Enter/
-  очистке, loading/IME, semantic/config API и Compact. Пользовательские кнопки
-  передаются через Svelte snippet с контекстом вместо React cloneElement.
-- InputPassword переносит Input.Password из Ant Design 6.6.8: controlled/local
-  visibility, click/hover/keyboard, сохранение focus/selection, очистку value
-  attribute и ConfigProvider.inputPassword. Добавлены locale.global.show/hide,
-  изолированная браузерная фикстура и проверки публичного пакета.
-
 ### Changed
 
 - Описано ограничение доступности Splitter: свёрнутая панель с сохранённым DOM

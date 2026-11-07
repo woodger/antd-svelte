@@ -173,25 +173,25 @@ test(
 );
 
 test(
-  'ButtonGroup resolves explicit size and Compact before group and resets nested undefined group size',
+  'Button resolves explicit size before Compact and provider defaults',
   async ({ page }) => {
-    const root = page.locator('#button-group');
+    const root = page.locator('#button-size-context');
 
-    await expect(root.getByRole('button', { name: 'Group small', exact: true })).toHaveCSS(
+    await expect(root.getByRole('button', { name: 'Provider small', exact: true })).toHaveCSS(
       'height',
       '24px'
     );
-    await expect(root.getByRole('button', { name: 'Group explicit large', exact: true })).toHaveCSS(
+    await expect(root.getByRole('button', { name: 'Explicit large', exact: true })).toHaveCSS(
       'height',
       '40px'
     );
-    await expect(root.getByRole('button', { name: 'Compact over group', exact: true })).toHaveCSS(
+    await expect(root.getByRole('button', { name: 'Compact large', exact: true })).toHaveCSS(
       'height',
       '40px'
     );
-    await expect(root.getByRole('button', { name: 'Nested group resets size', exact: true })).toHaveCSS(
+    await expect(root.getByRole('button', { name: 'Explicit small in Compact', exact: true })).toHaveCSS(
       'height',
-      '40px'
+      '24px'
     );
   }
 );

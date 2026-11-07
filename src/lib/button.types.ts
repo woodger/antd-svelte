@@ -110,14 +110,3 @@ export interface ButtonConfig {
   classNames?: ButtonProps['classNames'];
   styles?: ButtonProps['styles'];
 }
-/** Общий визуальный размер и контейнер для группы Button. */
-export interface ButtonGroupProps {
-  children?: Snippet;
-  size?: ComponentSize | 'medium';
-  class?: string;
-  style?: string;
-  id?: string;
-  'aria-label'?: string;
-  /** Нативный ref доступен после mount и очищается при unmount. */
-  nativeElement?: HTMLDivElement;
-}

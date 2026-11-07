@@ -124,7 +124,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Компонент | Поддерживаемое поведение |
 | --- | --- |
 | ConfigProvider | Светлая и тёмная темы, три основных цвета, компактная плотность, размеры, disabled, направление и локаль |
-| Button / ButtonGroup | Native button/href, color/variant/ghost, loading delay/icon, semantic slots, config, Group и Compact |
+| Button | Native button/href, color/variant/ghost, loading delay/icon, semantic slots, config и Compact |
 | Typography / TypographyText / TypographyTitle / TypographyParagraph / TypographyLink | Нативный текст, decorations, copy/edit, CSS/JS ellipsis, expand/collapse и semantic config |
 | FloatButton / FloatButtonGroup / FloatButtonBackTop | Плавающие native actions, Badge/Tooltip, меню групп и возврат с прогрессом прокрутки |
 | Watermark | Text/image Canvas tiles, per-line fonts, offsets, mutation repair, наследование Modal/Drawer |
@@ -134,7 +134,6 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | InputPassword | Видимость пароля, click/hover/keyboard, controlled toggle, focus/selection и возможности Input |
 | InputSearch | Поиск по кнопке/Enter/очистке, loading/IME, custom button snippet и композиция Compact |
 | InputOTP | UTF-16 ячейки, formatter/paste, mask/separator, keyboard/focus и callbacks полного кода |
-| InputGroup | Deprecated Input.Group: legacy-классы, keyed items и композиция через SpaceCompact |
 | DatePicker | Single Dayjs date/datetime, input/calendar/time, confirmation, clear, ограничения, locale и native формы |
 | RangePicker | Пара Dayjs, связанные календари, время и подтверждение границ, allowEmpty/disabled, presets и hover |
 | Calendar | Full/mini date/month panels, controlled value/mode, header, week numbers, snippets и custom date adapter |
@@ -213,7 +212,7 @@ Button `type` задаёт оформление, `htmlType` задаёт нат�
 при href создаётся нативная ссылка. Кнопка loading недоступна для повторного
 нажатия. Подробности — в разделе Button ниже.
 
-## Button / ButtonGroup
+## Button
 
 Button сохраняет прежние props и native onclick; добавлены href, color/variant,
 ghost, square shape, iconPlacement (приоритетнее legacy iconPosition),
@@ -228,7 +227,7 @@ Bind:nativeElement возвращает фактический button или a.
 ```svelte
 <Button color="purple" variant="filled" iconPlacement="end">Действие</Button>
 <Button href="#details">К подробностям</Button>
-<ButtonGroup size="small"><Button>Назад</Button><Button>Вперёд</Button></ButtonGroup>
+<SpaceCompact size="small"><Button>Назад</Button><Button>Вперёд</Button></SpaceCompact>
 ```
 
 Полная пара color+variant имеет приоритет над type/danger. Без пары явный type
@@ -257,11 +256,8 @@ shape/color/variant, loadingIcon, class/style и semantic slots. Omitted button
 FloatButton может пропустить semantic slots этого config через внутренний
 _skipSemantic; обычные пользователи не должны использовать этот prop.
 
-ButtonGroup сохраняет deprecated div-композицию Button.Group. Его size имеет
-приоритет над ConfigProvider и уступает Compact и явному size кнопки. Вложенная
-группа без size возвращает fallback ConfigProvider, а не размер внешней группы.
-Направление и native Tab-порядок наследуются; новые role/keyboard shortcuts не
-добавляются. Для новых плотных групп используйте уже существующий SpaceCompact.
+Размер Button берётся из local size, затем Compact, затем ConfigProvider.
+Для плотных групп используется SpaceCompact; native Tab-порядок сохраняется.
 
 AutoInsertSpace по умолчанию true: scalar children из ровно двух символов
 U+4E00–U+9FA5 получают пробел на SSR, если нет icon и variant не text/link.
@@ -6337,7 +6333,7 @@ Unit/SSR и browser проверяют count/IME, focus/Enter, clear/event order
 FormData/FormItem/Compact, variants/semantic styles, темы и RTL.
 
 Input.Password, Input.Search, Input.OTP и deprecated Input.Group доступны как
-InputPassword, InputSearch, InputOTP и InputGroup. Общие prefixCls,
+InputPassword, InputSearch и InputOTP. Общие prefixCls,
 arbitrary token engine и deprecated internal
 classes/structures остаются отдельными пробелами. Согласованный string bind:value
 сохраняется вместо React controlled rejection/broad value types; native DOM events
@@ -6530,42 +6526,6 @@ Size группы наследуется из componentSize; Compact продо�
 SSR и проверки публичного пакета покрывают эти сценарии. Общий аудит Input
 остаётся unreviewed; prefixCls, token engine и React dev
 diagnostics, включая предупреждение о длинной маске, пока не перенесены.
-
-## InputGroup (deprecated Input.Group)
-
-InputGroup переносит Group.tsx Ant Design 6.6.8 как обёртку SpaceCompact без
-дополнительного DOM-узла. Для нового кода используйте SpaceCompact. Контракт
-совместимости описан в [исходных типах](./src/lib/input-group.types.ts).
-
-```svelte
-<script lang="ts">
-  import { InputGroup, Input, Button } from 'antd-svelte';
-</script>
-
-{#snippet field()}<Input aria-label="Имя" />{/snippet}
-{#snippet action()}<Button>Проверить</Button>{/snippet}
-<InputGroup items={[{ key: 'field', children: field }, { key: 'action', children: action }]} />
-```
-
-Items заменяет React children-array и сохраняет keys, фокус и отдельные Compact
-границы. Children snippet считается одним логическим item, как в SpaceCompact.
-Пустая группа не создаёт DOM. Class/style и nativeElement относятся к div Compact;
-onMouseEnter/Leave получают native mouse events, onFocus/Blur — всплывающие
-focusin/focusout на этом div.
-
-Как в Group.tsx, size=large/small задаёт только legacy-классы group-lg/group-sm,
-не размер Compact context. Логический размер детей наследуется из ConfigProvider,
-при этом legacy CSS может менять их видимые размеры. Compact=true добавляет
-legacy group-compact и его display:block; Compact=false всё равно использует
-SpaceCompact с display:inline-flex. RTL и темы продолжают действовать.
-
-Группа сохраняет FormItem status и disabled, но не присваивает всем детям один
-id/name/required. Явные native props детей сохраняются. Значениями управляют сами
-controls; для независимых полей используйте отдельные FormItem. Стили уже входят
-в vendor/antd.css и space-compact.css. Fixture `?fixture=input-group`, source SSR
-и проверки пакета покрывают обычные и смешанные controls, контексты и lifecycle.
-PrefixCls и React dev warning о deprecated Group пока не перенесены; общий аудит
-Input остаётся unreviewed.
 
 ## TextArea (Input.TextArea)
 

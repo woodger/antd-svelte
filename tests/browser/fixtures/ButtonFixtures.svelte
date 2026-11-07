@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, ButtonGroup, ConfigProvider, SpaceCompact } from 'antd-svelte';
+  import { Button, ConfigProvider, SpaceCompact } from 'antd-svelte';
   import type {
     ButtonColor,
     ButtonType,
@@ -118,10 +118,10 @@
     href="#button-target"
     onclick={event => { event.currentTarget.dataset.anchor = event.currentTarget.href; }}
   >Native link callback</Button>
-  <ConfigProvider componentSize="large">
-    <ButtonGroup id="button-group" size="small"><Button>Group small</Button><Button size="large">Group explicit large</Button><SpaceCompact
+  <ConfigProvider componentSize="small">
+    <div id="button-size-context"><Button>Provider small</Button><Button size="large">Explicit large</Button><SpaceCompact
       size="large"
-    ><Button>Compact over group</Button></SpaceCompact><ButtonGroup><Button>Nested group resets size</Button></ButtonGroup></ButtonGroup>
+    ><Button>Compact large</Button><Button size="small">Explicit small in Compact</Button></SpaceCompact></div>
   </ConfigProvider>
   {#if autoFocusMounted}<Button id="button-autofocus" autoFocus>Autofocus Button</Button>{/if}
   <p id="button-target">Button target</p>

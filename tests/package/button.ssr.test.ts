@@ -114,14 +114,22 @@ describe('Button SSR', () => {
     expect(body).toContain('Default');
     expect(body).toContain('ant-btn-color-default');
   });
-  it('renders composition with group size precedence and no automatic form submission', () => {
+  it('renders local and Compact size precedence with native button defaults', () => {
     const body = render(ButtonFixtures).body;
+    const buttons = [...body.matchAll(/<button\b[^>]*>[\s\S]*?<\/button>/g)]
+      .map(match => match[0]);
 
-    expect(body).toMatch(/id="button-group"[^>]*class="ant-btn-group ant-btn-group-sm/);
-    expect(body).toMatch(/class="[^"]*ant-btn-sm[^>]*>[\s\S]*?Group small/);
-    expect(body).toContain('Group explicit large');
-    expect(body).toContain('Compact over group');
-    expect(body).toContain('Nested group resets size');
+    for (const [caption, size] of [
+      ['Provider small', 'ant-btn-sm'],
+      ['Explicit large', 'ant-btn-lg'],
+      ['Compact large', 'ant-btn-lg'],
+      ['Explicit small in Compact', 'ant-btn-sm']
+    ]) {
+      const button = buttons.find(node => node.includes(caption));
+
+      expect(button).toContain(size);
+      expect(button).toContain('type="button"');
+    }
     expect(body).toContain('id="button-scalar-zero"');
     expect(body).toContain('按 钮');
   });

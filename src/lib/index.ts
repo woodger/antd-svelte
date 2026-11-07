@@ -218,10 +218,8 @@ export type {
 } from './descriptions.types';
 export { default as ConfigProvider } from './ConfigProvider.svelte';
 export { default as Button } from './Button.svelte';
-export { default as ButtonGroup } from './ButtonGroup.svelte';
 export type {
   ButtonLinkProps,
-  ButtonGroupProps,
   ButtonConfig,
   ButtonType,
   ButtonVariant,
@@ -236,8 +234,6 @@ export { default as Input } from './Input.svelte';
 export { default as InputPassword } from './InputPassword.svelte';
 export { default as InputSearch } from './InputSearch.svelte';
 export { default as InputOTP } from './InputOTP.svelte';
-export { default as InputGroup } from './InputGroup.svelte';
-export type { InputGroupProps } from './input-group.types';
 export type {
   InputOTPProps,
   InputOTPConfig,

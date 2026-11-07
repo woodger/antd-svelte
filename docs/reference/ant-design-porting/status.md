@@ -6,7 +6,7 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **114**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **112**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
 Проверенный объём v1 покрыт у **58**; требуется аудит у **12**; частично покрыт у **0**.
 
@@ -15,7 +15,7 @@ Candidate означает запись каталога, для которой 
 
 | Семейство | Категория | Scope | Экспорты Svelte | Аудит v1 | Известные пробелы |
 | --- | --- | --- | --- | --- | --- |
-| [Button](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/button) | general | target | Button, ButtonGroup | Согласованный v1 покрыт | Автопробел для двух китайских символов (partial); Source Wave, loading icon enter/leave и prefixCls (partial) |
+| [Button](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/button) | general | target | Button | Согласованный v1 покрыт | Автопробел для двух китайских символов (partial); Source Wave, loading icon enter/leave и prefixCls (partial) |
 | [FloatButton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/float-button) | general | target | FloatButton, FloatButtonGroup, FloatButtonBackTop | Согласованный v1 покрыт | Произвольный prefixCls и общий z-index context (missing) |
 | [Icon](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/icon) | general | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
 | [Typography](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/typography) | general | target | Typography, TypographyText, TypographyTitle, TypographyParagraph, TypographyLink | Согласованный v1 покрыт | Границы ReactNode и непрозрачных Svelte snippets (partial); Произвольный prefix CSS и расширенные Tooltip props (missing) |
@@ -39,7 +39,7 @@ Candidate означает запись каталога, для которой 
 | [ColorPicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/color-picker) | data-entry | target | ColorPicker | Согласованный v1 покрыт | Native trigger/popup и граница React nodes/events (partial); Полный rc-trigger/motion, prefix CSS и diagnostics (missing) |
 | [DatePicker](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/date-picker) | data-entry | target | DatePicker, RangePicker | Согласованный v1 покрыт | Другие picker modes, multiple, single presets/render hooks, mask и semantic API (missing); Глобальный DatePicker component config, prefix и полный popup motion/lifecycle (missing); Сохранённое native исключение literals при выводе datetime units; дефект Source (partial) |
 | [Form](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/form) | data-entry | target | Form, createForm, FormValidationError, FormItem | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Form.List и вложенные name paths (missing) |
-| [Input](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input) | data-entry | target | Input, TextArea, InputPassword, InputSearch, InputOTP, InputGroup | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Input prefixCls, token engine и React value/ref conventions (partial); TextArea prefixCls, token engine и React value/ref conventions (partial) |
+| [Input](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input) | data-entry | target | Input, TextArea, InputPassword, InputSearch, InputOTP | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Input prefixCls, token engine и React value/ref conventions (partial); TextArea prefixCls, token engine и React value/ref conventions (partial) |
 | [InputNumber](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/input-number) | data-entry | target | InputNumber | Согласованный v1 покрыт | Native Svelte contracts и отличия обычного числового режима (partial); Общий token/prefix engine, точная compact/focus тема и React diagnostics (partial) |
 | [Mentions](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/mentions) | data-entry | target | Mentions, getMentions | Согласованный v1 покрыт | Полный semantic/config API, legacy Option и motion (missing) |
 | [Radio](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/radio) | data-entry | target | Radio, RadioGroup, RadioButton | Согласованный v1 покрыт | Svelte/native contracts вместо React state/event/ref conventions (partial); Source themes/Wave, произвольный prefix CSS и React diagnostics/statics (partial) |
