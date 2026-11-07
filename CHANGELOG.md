@@ -774,6 +774,9 @@
 
 ### Fixed
 
+- Statistic: browser-проверка timer/countdown ожидает оба узла ленивой фикстуры
+  перед сохранением refs и текста; управление часами и identity checks сохранены.
+
 - Input/Select: общий интеграционный browser-набор использует отдельный маршрут
   с прежними BasicFixtures и shared controls. Проверки keyboard/search/disabled,
   numeric values и FormData выполняются без загрузки всей страницы компонентов.

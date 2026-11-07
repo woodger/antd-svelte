@@ -71,6 +71,7 @@ test('Statistic Timer and Countdown keep ticking through component token changes
   await page.goto('/?fixture=statistic-theme');
   const timers = page.locator('[data-statistic-theme="timer"], [data-statistic-theme="countdown"]');
   const values = timers.locator('.ant-statistic-content-value');
+  await expect(values).toHaveCount(2);
   const original = await values.elementHandles();
   const before = await values.allTextContents();
   await page.getByRole('button', { name: 'Update Statistic content font', exact: true })
