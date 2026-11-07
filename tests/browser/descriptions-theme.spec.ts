@@ -32,6 +32,7 @@ test('Descriptions theme updates preserve cells, drafts, focus and independent s
   await page.goto('/?fixture=descriptions-theme');
   const root = page.locator('[data-descriptions-theme="bordered"]');
   const draft = root.getByLabel('Descriptions theme draft', { exact: true });
+  await draft.waitFor();
   const spans = await root.locator('th,td').evaluateAll(cells => cells.map(cell => cell.getAttribute('colspan')));
   await draft.fill('Kept Descriptions draft');
   await draft.evaluate((node: HTMLInputElement) => node.setSelectionRange(2, 7));

@@ -778,6 +778,9 @@
 
 ### Fixed
 
+- Descriptions: тест смены темы ожидает поле перед чтением исходных colspan;
+  сравнение ячеек, DOM, focus/selection и изоляция тем сохранены.
+
 - Affix: проверка удаления configured owner ожидает все scroll targets перед
   прокруткой; проверки очистки prefix CSS и снятия фиксации сохранены.
 
