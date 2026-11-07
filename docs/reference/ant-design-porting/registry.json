@@ -10977,7 +10977,12 @@
         "src/lib/table.types.ts",
         "tests/package/table-panels.ssr.test.ts",
         "tests/browser/table-panels.spec.ts",
-        "tests/browser/fixtures/ant-design-table-panels-reference.json"
+        "tests/browser/fixtures/ant-design-table-panels-reference.json",
+        "tests/browser/table-row-options.spec.ts",
+        "tests/package/table-row-options.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-table-hover-reference.json",
+        "tests/browser/fixtures/ant-design-table-row-classes-reference.json",
+        "tests/browser/fixtures/ant-design-table-hover-observation.json"
       ],
       "features": [
         {
@@ -11045,6 +11050,23 @@
             "tests/browser/fixtures/ant-design-table-panels-reference.json"
           ],
           "note": "Readonly records текущей страницы после client filter/sort/paging; server mode передаёт dataSource без повторного slice. Пустой набор и пустой snippet, размеры, RTL, footer theme tokens. Панели окружают scroll container, caption сохранён; updates сохраняют editor DOM/draft/focus и не создают дополнительные callbacks. Source UMD и отдельно изученные Panel/PanelRender rc-table1.11.1; полный runtime/core audit ещё не выполнен."
+        },
+        {
+          "id": "row-options",
+          "title": "RowClassName и RowHoverable для плоских строк",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Table.svelte",
+            "src/lib/table.types.ts",
+            "readme.md",
+            "tests/browser/table-row-options.spec.ts",
+            "tests/package/table-row-options.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-table-hover-reference.json",
+            "tests/browser/fixtures/ant-design-table-row-classes-reference.json",
+            "tests/browser/fixtures/ant-design-table-hover-observation.json"
+          ],
+          "note": "Class string/callback(record,currentPageIndex,indent0) дополняет core/selection classes; defaults/explicit true/false hover сверяются с UMD, включая normal/selected/sorted. Updates сохраняют row/editor/checkbox DOM, focus/selection, keyboard и callbacks. Source true→false оставляет HoverContext paint после leave; raw observation сохранено, native CSS guard очищает сразу. Legacy-стили сохранены. Tree/rowspan варианты требуют отдельного расширения."
         }
       ]
     },

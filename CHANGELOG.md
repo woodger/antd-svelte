@@ -9,6 +9,11 @@
 
 ### Added
 
+- Table: rowClassName как строка/callback и rowHoverable с default true. Классы
+  дополняют состояние строки, hover отключается сразу при смене prop. Добавлены
+  UMD-сравнения классов и цветов, SSR/browser-проверки; stale hover upstream
+  записан отдельно и в native CSS не перенесён. Legacy-стили сохранены.
+
 - Table: title/footer snippets получают записи текущей страницы после сортировки
   и фильтрации, включая пустые данные и ручной server mode. Исходная структура
   панелей и footer tokens проверяются по 84 UMD-состояниям; caption, editor DOM,

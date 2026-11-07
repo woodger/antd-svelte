@@ -69,6 +69,10 @@ export interface TableProps<Row extends object> {
   dataSource: readonly Row[];
   columns: readonly TableColumn<Row>[];
   rowKey?: TableRowKey<Row>;
+  /** Дополняет классы строки; index относится к текущей странице, indent у плоских данных равен 0. */
+  rowClassName?: string | ((record: Row, index: number, indent: number) => string);
+  /** Подсветка строк при наведении; изменение сразу обновляет оформление. @defaultValue true */
+  rowHoverable?: boolean;
   /** Поддерживает bind:sorter. */
   sorter?: TableSorter | null;
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */

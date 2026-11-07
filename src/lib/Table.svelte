@@ -36,6 +36,8 @@
     dataSource,
     columns,
     rowKey,
+    rowClassName,
+    rowHoverable = true,
     sorter = $bindable(),
     defaultSorter = null,
     filters = $bindable(),
@@ -347,10 +349,10 @@
   .ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > .table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-bg), var(--ant-table-row-selected-bg)) var(--ant-color-bg-container); }
   .table-source-theme .ant-table-thead th.ant-table-column-has-sorters:hover .ant-table-column-sorter { color: var(--ant-table-header-icon-hover-color); }
   .ant-table-wrapper.table-source-theme .ant-table-thead th.ant-table-column-has-sorters.table-fixed-cell:hover { background: linear-gradient(var(--ant-table-fixed-header-sort-active-bg), var(--ant-table-fixed-header-sort-active-bg)) var(--ant-color-bg-container); }
-  .table-source-theme .ant-table-tbody > tr.ant-table-row:hover > td { background: var(--ant-table-row-hover-bg); }
-  .table-source-theme .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > td { background: var(--ant-table-row-selected-hover-bg); }
-  .table-source-theme .ant-table-tbody > tr.ant-table-row:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-hover-bg), var(--ant-table-row-hover-bg)) var(--ant-color-bg-container); }
-  .table-source-theme .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-hover-bg), var(--ant-table-row-selected-hover-bg)) var(--ant-color-bg-container); }
+  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row:hover > td { background: var(--ant-table-row-hover-bg); }
+  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > td { background: var(--ant-table-row-selected-hover-bg); }
+  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-hover-bg), var(--ant-table-row-hover-bg)) var(--ant-color-bg-container); }
+  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-hover-bg), var(--ant-table-row-selected-hover-bg)) var(--ant-color-bg-container); }
   .ant-table-content:focus-visible, .sort-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
   caption { padding: var(--ant-padding-sm); color: var(--ant-color-text-heading); text-align: start; font-weight: 600; }
   .sort-button { width: 100%; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; cursor: pointer; }
@@ -374,6 +376,7 @@
     'ant-table-wrapper ant-table-css-var',
     componentTheme.className,
     designTheme.enabled && 'table-source-theme',
+    !rowHoverable && 'table-hover-disabled',
     config.direction === 'rtl' && 'ant-table-wrapper-rtl',
     className
   ]} dir={config.direction} style={rootStyle}>
@@ -477,6 +480,8 @@
               {@const expanded = row.canExpand && expandedKeys.has(row.key)}
               <tr class={[
                   'ant-table-row',
+                  typeof rowClassName === 'function'
+                    ? rowClassName(row.record, index, 0) : rowClassName,
                   rowSelection && selectedKeys.has(row.key) && 'ant-table-row-selected'
                 ]}>
                 {#if expandable}

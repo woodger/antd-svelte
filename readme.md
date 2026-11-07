@@ -9027,6 +9027,28 @@ Snippet создаётся только для видимой раскрытой
 Раскрытие нажатием на всю строку, forceRender и иерархические данные пока не
 поддерживаются. Живой пример карточек участников доступен на `/ant-design`.
 
+### Классы и подсветка строк
+
+`rowClassName` принимает строку или `(record, index, indent) => string` и добавляет
+классы к основным классам строки и selection. Index начинается с 0 на текущей
+странице после filter/sort; indent у поддерживаемых плоских данных равен 0.
+Изменение callback или его реактивных зависимостей обновляет классы без замены
+строки и её controls.
+
+`rowHoverable` по умолчанию true и управляет встроенной подсветкой при наведении.
+В source-теме используются rowHoverBg/rowSelectedHoverBg; native-only темы
+сохраняют прежние стили. False снимает подсветку сразу, включая курсор внутри
+строки, и сохраняет выбранное состояние, сортировку, focus и keyboard controls.
+Проп не блокирует обработку пользовательских событий строки или inputs.
+
+В закреплённом UMD после true → false HoverContext сохраняет подсветку даже
+после ухода курсора. Raw [наблюдение](tests/browser/fixtures/ant-design-table-hover-observation.json)
+сохранено; native использует CSS guard и очищает paint сразу. Source classes
+HoverContext записаны как диагностика, сравнение с native CSS :hover проверяет
+цвета. Границы и текущие flat-row случаи покрывают
+[browser](tests/browser/table-row-options.spec.ts) и
+[SSR](tests/package/table-row-options.ssr.test.ts), fixture `?fixture=table-row-options`.
+
 ### Панели title и footer
 
 `title` и `footer` принимают snippets с readonly-массивом записей текущей страницы.

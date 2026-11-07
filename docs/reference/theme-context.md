@@ -1054,6 +1054,14 @@ Title/footer используют ту же тему и текущие page reco
 [Browser](../../tests/browser/table-panels.spec.ts) проверяет сохранение editors,
 focus/selection, FormData и независимый lifecycle панелей; SSR проверяет page data.
 
+RowHoverable управляет source-подсветкой обычных/selected/sorted rows и сохраняет
+остальные классы строки. 54 начальных CSS-состояния UMD сверяются по color/background;
+HoverContext class остаётся диагностикой Source. В
+[наблюдении переключения](../../tests/browser/fixtures/ant-design-table-hover-observation.json)
+6.6.8 disabled сохраняет прежний hover даже после ухода курсора. Native CSS guard
+снимает подсветку сразу, без сброса selected state или input/focus. Legacy-стили
+сохраняются. Проверки: [row options](../../tests/browser/table-row-options.spec.ts).
+
 Summary, tree indentation, virtual rows и отдельная sticky scrollbar ещё не
 перенесены; declarations expandIconMarginTop и stickyScrollBarBorderRadius
 не означают наличие соответствующего API.
