@@ -5,6 +5,15 @@ export type AnchorContainer = HTMLElement | Window;
 export type AnchorContent = string | number | boolean | null | undefined | Snippet;
 export type AnchorDirection = 'vertical' | 'horizontal';
 export type AnchorSlots = Partial<Record<'root' | 'item' | 'itemTitle' | 'indicator', string>>;
+/** Semantic callbacks получают текущие Props с resolved direction. */
+export type AnchorSemantic = AnchorSlots | ((info: { props: AnchorProps; }) => AnchorSlots);
+/** Общие стили Anchor; явно заданный вложенный record заменяет родительский целиком. */
+export interface AnchorConfig {
+  class?: string;
+  style?: string;
+  classNames?: AnchorSemantic;
+  styles?: AnchorSemantic;
+}
 export interface AnchorItem {
   key: string | number;
   href: string;
@@ -40,8 +49,9 @@ export interface AnchorProps extends Omit<
   /** @defaultValue 'vertical' */
   direction?: AnchorDirection;
   replace?: boolean;
-  classNames?: AnchorSlots | ((info: { props: AnchorProps; }) => AnchorSlots);
-  styles?: AnchorSlots | ((info: { props: AnchorProps; }) => AnchorSlots);
+  classNames?: AnchorSemantic;
+  /** Root: context semantic → context style → local semantic → local style. */
+  styles?: AnchorSemantic;
   class?: string;
   rootClassName?: string;
   style?: string;

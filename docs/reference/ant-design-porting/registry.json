@@ -2083,7 +2083,18 @@
         "tests/browser/fixtures/ant-design-anchor-metrics.json",
         "docs/reference/theme-context.md",
         "tests/browser/link-decoration.spec.ts",
-        "tests/browser/fixtures/ant-design-link-decoration-reference.json"
+        "tests/browser/fixtures/ant-design-link-decoration-reference.json",
+        "src/lib/anchor.types.ts",
+        "src/lib/anchor-semantic.engine.ts",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/semantic-style.engine.ts",
+        "tests/browser/fixtures/anchor-config-presets.ts",
+        "tests/browser/fixtures/AnchorConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-anchor-config-reference.json",
+        "tests/browser/anchor-config-metrics.ts",
+        "tests/browser/anchor-config.spec.ts",
+        "tests/package/anchor-config.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -2113,11 +2124,11 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls и ConfigProvider.anchor",
+          "title": "PrefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "GetTargetContainer поддержан общим context. PrefixCls и ConfigProvider.anchor class/style/semantic config ещё не перенесены."
+          "note": "GetTargetContainer и ConfigProvider.anchor class/style/semantic config поддержаны отдельными features. PrefixCls ещё не перенесён."
         },
         {
           "id": "anchor-theme-tokens",
@@ -2135,7 +2146,7 @@
             "tests/browser/fixtures/ant-design-anchor-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные linkPaddingBlock=paddingXXS и linkPaddingInlineStart=padding, финальные overrides, component algorithms/aliases, zero/undefined/negative и custom prefix. Первый horizontal item сохраняет нулевой inline padding, nested block padding зависит от paddingXXS/2 независимо от linkPaddingBlock, title margin от fontSize/14*3. Source compact inline padding=8px; native-only compact сохраняет прежние 16px. Source linkDecoration/linkHoverDecoration/linkFocusDecoration применяются к обычному, hover/active и focus состояниям; native-only стили сохранены. Scoped declarations и computed metrics horizontal/vertical/nested links, активных titles, границ, ink и link decorations сверяются с официальным UMD для 17 настроек. SSR scope внутри обычного и Affix root, style priority, DOM/focus, scroll/history/callbacks и cleanup сохраняются. Lifecycle измерения indicator не меняется; остальные config/prefixCls API остаются в работе."
+          "note": "Исходные linkPaddingBlock=paddingXXS и linkPaddingInlineStart=padding, финальные overrides, component algorithms/aliases, zero/undefined/negative и custom prefix. Первый horizontal item сохраняет нулевой inline padding, nested block padding зависит от paddingXXS/2 независимо от linkPaddingBlock, title margin от fontSize/14*3. Source compact inline padding=8px; native-only compact сохраняет прежние 16px. Source linkDecoration/linkHoverDecoration/linkFocusDecoration применяются к обычному, hover/active и focus состояниям; native-only стили сохранены. Scoped declarations и computed metrics horizontal/vertical/nested links, активных titles, границ, ink и link decorations сверяются с официальным UMD для 17 настроек. SSR scope внутри обычного и Affix root, style priority, DOM/focus, scroll/history/callbacks и cleanup сохраняются. Semantic updates пересчитывают indicator отдельной feature; prefixCls остаётся в работе."
         },
         {
           "id": "link-decoration-reset",
@@ -2163,6 +2174,40 @@
             "tests/browser/fixtures/ant-design-target-container-reference.json"
           ],
           "note": "Общий getter Window/HTMLElement наследуется через undefined; local Affix.target/Anchor.getContainer имеют приоритет, без обоих используется window. Nested override и outside scope независимы. Четыре UMD presets фиксируют реальные native scroll, active href, fixed geometry, placeholder и одну копию input. Смена getter/hrefs сохраняет DOM, refs, draft/selection/focus и FormData; Anchor использует актуальный Map регистраций, cleanup одного href не теряет обновлённый соседний href из-за старого rune snapshot. Old target listeners снимаются, текущий target измеряется по собственному событию; SSR getter не вызывается. Отличия Source ShadowRoot/stale reconfiguration записаны отдельными observations."
+        },
+        {
+          "id": "anchor-component-config",
+          "title": "ConfigProvider.anchor: class/style и semantic defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/anchor.types.ts",
+            "src/lib/anchor-semantic.engine.ts",
+            "src/lib/Anchor.svelte",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/semantic-style.engine.ts",
+            "tests/browser/fixtures/anchor-config-presets.ts",
+            "tests/browser/fixtures/AnchorConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-anchor-config-reference.json",
+            "tests/browser/anchor-config-metrics.ts",
+            "tests/browser/anchor-config.spec.ts",
+            "tests/package/anchor-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source useMergeSemantic: class/style и object/function classNames/styles, whole-record inheritance/replacement, включая {}. Root layers context semantic, context plain, local semantic, local plain после component variables/max-height; callbacks читают resolved direction, прежние native defaults остальных Props сохраняются. Четыре semantic slots, raw classes/tags/hrefs, computed CSS и начальная indicator geometry сверяются с неизменённым UMD для vertical/horizontal/nested links, Affix, functions, empty/replaced records, root priorities, custom variables, RTL и themes/algorithm. Обновления provider/local styles сохраняют DOM ссылок/индикатора, фокус, href/history и callbacks; indicator coordinates принадлежат runtime. Native исправление stale geometry отделено от исходных замеров."
+        },
+        {
+          "id": "upstream-indicator-style-updates",
+          "title": "Пересчёт indicator после стилей вместо stale Source geometry",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "docs/reference/anchor-indicator-observation.md",
+            "tests/browser/fixtures/ant-design-anchor-config-layout-observation.json",
+            "src/lib/Anchor.svelte",
+            "tests/browser/anchor-config.spec.ts"
+          ],
+          "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8, stable items/getCurrentAnchor, provider itemTitle paddingTop/Bottom 4→20. Высота активной ссылки 30→62px, offsetTop 42→74px, computed indicator height/top остаются 30/57px вместо 62/105px; raw UMD не исправлен. Source updateInk effect не зависит от semantic classes/styles. Svelte пересчитывает runtime coordinates после semantic updates и восстанавливает их после полной замены inline style индикатора; это намеренное исправление, отдельно от начальных source reference profiles. Произвольный внешний CSS/resize и ResizeObserver здесь не заявлены."
         }
       ]
     },
@@ -15569,7 +15614,16 @@
         "tests/browser/fixtures/ant-design-descriptions-config-reference.json",
         "tests/browser/descriptions-config-metrics.ts",
         "tests/browser/descriptions-config.spec.ts",
-        "tests/package/descriptions-config.ssr.test.ts"
+        "tests/package/descriptions-config.ssr.test.ts",
+        "src/lib/anchor.types.ts",
+        "src/lib/anchor-semantic.engine.ts",
+        "src/lib/Anchor.svelte",
+        "tests/browser/fixtures/anchor-config-presets.ts",
+        "tests/browser/fixtures/AnchorConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-anchor-config-reference.json",
+        "tests/browser/anchor-config-metrics.ts",
+        "tests/browser/anchor-config.spec.ts",
+        "tests/package/anchor-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -16402,6 +16456,27 @@
             "readme.md"
           ],
           "note": "Source useMergeSemantic: независимый descriptions record с whole-record inheritance/replacement; class/style и object/function classNames/styles. Root layers context semantic, context plain, local semantic, local plain после component variables. Label/content: root legacy, merged root semantic, item legacy, item semantic; bordered cell styles перекрывают item.style. Callbacks читают resolved columns/items/size; старые native defaults остальных props сохранены. Raw UMD содержит все шесть semantic slots, labels/content каждой ячейки, tags/colspans, computed colors/spacing и custom classes для plain/bordered/horizontal/vertical, functions, nested/empty/replaced, item/legacy overrides, variables и algorithms/themes. Исходный порядок classes не переписан: проверки состава/числа сохраняют прежний native class order. Обновления сохраняют первую ячейку/editor DOM, focus/selection и FormData при смене config/column/size; переносимые между строками controls сохраняют прежний remount contract."
+        },
+        {
+          "id": "anchor-component-config",
+          "title": "ConfigProvider.anchor: class/style и semantic defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/anchor.types.ts",
+            "src/lib/anchor-semantic.engine.ts",
+            "src/lib/Anchor.svelte",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/semantic-style.engine.ts",
+            "tests/browser/fixtures/anchor-config-presets.ts",
+            "tests/browser/fixtures/AnchorConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-anchor-config-reference.json",
+            "tests/browser/anchor-config-metrics.ts",
+            "tests/browser/anchor-config.spec.ts",
+            "tests/package/anchor-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source useMergeSemantic: class/style и object/function classNames/styles, whole-record inheritance/replacement, включая {}. Root layers context semantic, context plain, local semantic, local plain после component variables/max-height; callbacks читают resolved direction, прежние native defaults остальных Props сохраняются. Четыре semantic slots, raw classes/tags/hrefs, computed CSS и начальная indicator geometry сверяются с неизменённым UMD для vertical/horizontal/nested links, Affix, functions, empty/replaced records, root priorities, custom variables, RTL и themes/algorithm. Обновления provider/local styles сохраняют DOM ссылок/индикатора, фокус, href/history и callbacks; indicator coordinates принадлежат runtime. Native исправление stale geometry отделено от исходных замеров."
         }
       ]
     },

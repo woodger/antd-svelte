@@ -162,7 +162,9 @@ export type {
   AnchorDirection,
   AnchorContainer,
   AnchorContent,
-  AnchorSlots
+  AnchorSlots,
+  AnchorSemantic,
+  AnchorConfig
 } from './anchor.types';
 export { default as Affix } from './Affix.svelte';
 export type { AffixProps, AffixConfig, AffixTarget, AffixUpdatePosition } from './affix.types';

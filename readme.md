@@ -1197,11 +1197,21 @@ Item.replace переопределяет общий replace; legacy AnchorLink 
 не выбирает active link и не закрепляет контент. Фокус остаётся на ссылке.
 
 `classNames`/`styles` — объект либо функция от {props}, слоты root/item/itemTitle/
-indicator. Style корня имеет приоритет над styles.root; class/rootClassName и
+indicator. `ConfigProvider.anchor` задаёт общие class/style и semantic defaults.
+Undefined наследует родительский record; явно заданный объект, включая {},
+заменяет его целиком. Semantic classes накапливаются; root style слои идут после
+component variables и вычисленного max-height: context semantic, context plain,
+local semantic, local plain. Callback получает текущие Props с resolved direction;
+прежние native defaults остальных Props сохранены. Class/rootClassName и
 bind:nativeElement относятся к wrapper. `showInkInFixed` сохраняет исходный
 класс ant-anchor-fixed при false/affix=false. Тема и RTL наследуются; horizontal
 indicator использует offsetLeft/clientWidth и раскрывает активную ссылку
 в scrollable ancestors как upstream.
+
+Изменения semantic styles/classes сохраняют ссылки, фокус и callbacks и обновляют
+геометрию индикатора. Runtime владеет top/height/left/width индикатора; изменение
+его цвета сохраняет эти координаты. Обнаруженный upstream дефект пересчёта
+сохранён [отдельно с raw замерами](docs/reference/anchor-indicator-observation.md).
 
 Базовые отступы пункта Anchor — 4px по вертикали и 16px перед текстом.
 У первого горизонтального пункта отступ по inline-оси нулевой; у вложенного

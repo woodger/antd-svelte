@@ -9,6 +9,11 @@
 
 ### Added
 
+- Anchor: class/style и object/function semantic defaults из ConfigProvider,
+  исходные root style слои и whole-record replacement. Индикатор обновляется
+  после смены semantic styles/classes без потери DOM, фокуса и callbacks;
+  исходный дефект stale geometry сохранён в отдельном raw observation.
+
 - Descriptions: class/style и object/function semantic defaults из ConfigProvider
   с nested record replacement, исходными root слоями и приоритетами legacy/item
   ячеек. Общий flat semantic engine используется также Card/Meta; native callback

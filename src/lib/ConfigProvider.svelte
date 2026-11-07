@@ -5,6 +5,7 @@
   import type { CardConfig, CardMetaConfig } from './card.types';
   import type { MentionsComponentConfig } from './mentions.types';
   import type { DescriptionsConfig } from './descriptions.types';
+  import type { AnchorConfig } from './anchor.types';
   import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
   import type { ButtonConfig } from './button.types';
   import type { TabsConfig } from './tabs.types';
@@ -78,6 +79,7 @@
     card?: CardConfig;
     cardMeta?: CardMetaConfig;
     descriptions?: DescriptionsConfig;
+    anchor?: AnchorConfig;
     mentions?: MentionsComponentConfig;
     button?: ButtonConfig;
     tabs?: TabsConfig;
@@ -165,6 +167,7 @@
     card,
     cardMeta,
     descriptions,
+    anchor,
     mentions,
     button,
     tabs,
@@ -262,6 +265,9 @@
     },
     get descriptions() {
       return descriptions ?? parent.descriptions;
+    },
+    get anchor() {
+      return anchor ?? parent.anchor;
     },
     get mentions() {
       return mentions ?? parent.mentions;

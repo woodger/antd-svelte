@@ -4,6 +4,7 @@ import type { DatePickerConfig } from './date-picker.types';
 import type { CardConfig, CardMetaConfig } from './card.types';
 import type { MentionsComponentConfig } from './mentions.types';
 import type { DescriptionsConfig } from './descriptions.types';
+import type { AnchorConfig } from './anchor.types';
 import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
 import type { ButtonConfig } from './button.types';
 import type { TabsConfig } from './tabs.types';
@@ -67,6 +68,7 @@ export interface ConfigContext {
   readonly card?: CardConfig;
   readonly cardMeta?: CardMetaConfig;
   readonly descriptions?: DescriptionsConfig;
+  readonly anchor?: AnchorConfig;
   readonly mentions?: MentionsComponentConfig;
   readonly tabs?: TabsConfig;
   readonly ribbon?: BadgeRibbonConfig;

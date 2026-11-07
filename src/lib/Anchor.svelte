@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { untrack } from 'svelte';
+  import { tick, untrack } from 'svelte';
   import Affix from './Affix.svelte';
   import AnchorItems from './AnchorItems.svelte';
   import { useConfig } from './config-context';
   import { setAnchor } from './anchor-context';
   import { createAnchorRuntime } from './anchor.dom';
+  import { anchorSemantics } from './anchor-semantic.engine';
   import { revealAnchorLink } from './anchor-scroll.dom';
   import { connectFeedbackFocus } from './feedback.dom';
   import { useComponentTheme } from './theme-component.svelte';
@@ -33,6 +34,8 @@
   }: AnchorProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Anchor');
+  // Spread props могут сбросить выходной ref; runtime сохраняет собственный DOM host.
+  let host = $state<HTMLDivElement>();
   let activeLink = $state<string | null>(null);
   let ink = $state<HTMLSpanElement>();
   let runtime = $state.raw<ReturnType<typeof createAnchorRuntime>>();
@@ -66,8 +69,9 @@
       }
     }
   );
-  let classes = $derived(typeof classNames === 'function' ? classNames(info) : classNames ?? {});
-  let slots = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
+  let semantic = $derived(anchorSemantics(config.anchor, info.props));
+  let classes = $derived(semantic.classes);
+  let slots = $derived(semantic.styles);
   setAnchor({
     get activeLink() {
       return activeLink;
@@ -96,8 +100,12 @@
     }
   });
   $effect(() => {
-    if (!nativeElement) return;
-    const controller = createAnchorRuntime(nativeElement, href => {
+    nativeElement = host;
+    return () => { nativeElement = undefined; };
+  });
+  $effect(() => {
+    if (!host) return;
+    const controller = createAnchorRuntime(host, href => {
       activeLink = href;
     });
     runtime = controller;
@@ -121,23 +129,36 @@
     untrack(() => controller?.configure(options));
   });
   $effect(() => {
-    void [activeLink, direction, registrations, getCurrentAnchor];
-    const root = nativeElement;
+    // Semantic style заменяет inline attribute; измеряем после commit дочерних links/styles.
+    void [
+      activeLink, direction, registrations, getCurrentAnchor, classes, slots,
+      className, rootClassName, config.anchor?.class
+    ];
+    const root = host;
     const indicator = ink;
     if (!root || !indicator) return;
-    const link = root.querySelector<HTMLElement>('.ant-anchor-link-title-active');
-    if (!link) return;
-    indicator.style.top = direction === 'horizontal'
-      ? ''
-      : `${link.offsetTop + link.clientHeight / 2}px`;
-    indicator.style.height = direction === 'horizontal' ? '' : `${link.clientHeight}px`;
-    indicator.style.left = direction === 'horizontal' ? `${link.offsetLeft}px` : '';
-    indicator.style.width = direction === 'horizontal' ? `${link.clientWidth}px` : '';
-    if (direction === 'horizontal')
-      untrack(() => revealAnchorLink(link));
+    let active = true;
+
+    void tick().then(() => {
+      if (!active) return;
+      const link = root.querySelector<HTMLElement>('.ant-anchor-link-title-active');
+      if (!link) return;
+      indicator.style.top = direction === 'horizontal'
+        ? ''
+        : `${link.offsetTop + link.clientHeight / 2}px`;
+      indicator.style.height = direction === 'horizontal' ? '' : `${link.clientHeight}px`;
+      indicator.style.left = direction === 'horizontal' ? `${link.offsetLeft}px` : '';
+      indicator.style.width = direction === 'horizontal' ? `${link.clientWidth}px` : '';
+      if (direction === 'horizontal')
+        untrack(() => revealAnchorLink(link));
+    });
+
+    return () => {
+      active = false;
+    };
   });
   $effect(() => {
-    if (nativeElement) return connectFeedbackFocus(nativeElement);
+    if (host) return connectFeedbackFocus(host);
   });
 </script>
 
@@ -148,7 +169,7 @@
 </style>
 
 {#snippet content()}
-  <div {...rest} bind:this={nativeElement} dir={config.direction}
+  <div {...rest} bind:this={host} dir={config.direction}
     class={[
         'ant-anchor-wrapper ant-anchor-css-var',
         componentTheme.className,
@@ -156,14 +177,14 @@
         direction === 'horizontal' && 'ant-anchor-wrapper-horizontal',
         config.direction === 'rtl' && 'ant-anchor-rtl',
         className,
+        config.anchor?.class,
         rootClassName,
         classes.root
       ]}
     style={[
         componentTheme.style,
         `max-height:${offsetTop ? `calc(100vh - ${offsetTop}px)` : '100vh'}`,
-        slots.root,
-        style
+        slots.root
       ].filter(
         Boolean
       ).join(
