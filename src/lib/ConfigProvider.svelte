@@ -6,6 +6,7 @@
   import type { MentionsComponentConfig } from './mentions.types';
   import type { DescriptionsConfig } from './descriptions.types';
   import type { AnchorConfig } from './anchor.types';
+  import type { BreadcrumbConfig } from './breadcrumb.types';
   import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
   import type { ButtonConfig } from './button.types';
   import type { TabsConfig } from './tabs.types';
@@ -80,6 +81,7 @@
     cardMeta?: CardMetaConfig;
     descriptions?: DescriptionsConfig;
     anchor?: AnchorConfig;
+    breadcrumb?: BreadcrumbConfig;
     mentions?: MentionsComponentConfig;
     button?: ButtonConfig;
     tabs?: TabsConfig;
@@ -168,6 +170,7 @@
     cardMeta,
     descriptions,
     anchor,
+    breadcrumb,
     mentions,
     button,
     tabs,
@@ -268,6 +271,9 @@
     },
     get anchor() {
       return anchor ?? parent.anchor;
+    },
+    get breadcrumb() {
+      return breadcrumb ?? parent.breadcrumb;
     },
     get mentions() {
       return mentions ?? parent.mentions;

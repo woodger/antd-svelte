@@ -4,6 +4,21 @@ import type { DropdownClickInfo, DropdownProps } from './dropdown.types';
 
 export type BreadcrumbContent = string | number | boolean | null | Snippet;
 export type BreadcrumbSlots = Partial<Record<'root' | 'item' | 'separator', string>>;
+export type BreadcrumbSemantic<
+  Params extends Record<string, unknown> = Record<string, unknown>
+> = BreadcrumbSlots | ((info: { props: BreadcrumbProps<Params>; }) => BreadcrumbSlots);
+
+/** Общие defaults с теми же semantic callbacks, что у локальных Props. */
+export interface BreadcrumbConfig<
+  Params extends Record<string, unknown> = Record<string, unknown>
+> {
+  class?: string;
+  style?: string;
+  classNames?: BreadcrumbSemantic<Params>;
+  styles?: BreadcrumbSemantic<Params>;
+  separator?: BreadcrumbContent;
+  dropdownIcon?: BreadcrumbContent;
+}
 export interface BreadcrumbMenuItem {
   key?: string | number;
   title?: BreadcrumbContent;
@@ -44,8 +59,9 @@ export interface BreadcrumbProps<
   separator?: BreadcrumbContent;
   dropdownIcon?: BreadcrumbContent;
   itemRender?: Snippet<[BreadcrumbItem, Params, readonly BreadcrumbItem[], readonly string[]]>;
-  classNames?: BreadcrumbSlots | ((info: { props: BreadcrumbProps<Params>; }) => BreadcrumbSlots);
-  styles?: BreadcrumbSlots | ((info: { props: BreadcrumbProps<Params>; }) => BreadcrumbSlots);
+  classNames?: BreadcrumbSemantic<Params>;
+  /** Root: context semantic → context style → local semantic → local style. */
+  styles?: BreadcrumbSemantic<Params>;
   class?: string;
   rootClassName?: string;
   style?: string;

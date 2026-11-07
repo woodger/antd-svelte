@@ -189,7 +189,9 @@ export type {
   BreadcrumbItem,
   BreadcrumbMenuItem,
   BreadcrumbContent,
-  BreadcrumbSlots
+  BreadcrumbSlots,
+  BreadcrumbSemantic,
+  BreadcrumbConfig
 } from './breadcrumb.types';
 export { default as Card } from './Card.svelte';
 export { default as CardGrid } from './CardGrid.svelte';

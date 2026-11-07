@@ -2267,7 +2267,18 @@
         "tests/browser/fixtures/ant-design-breadcrumb-metrics.json",
         "docs/reference/theme-context.md",
         "tests/browser/link-decoration.spec.ts",
-        "tests/browser/fixtures/ant-design-link-decoration-reference.json"
+        "tests/browser/fixtures/ant-design-link-decoration-reference.json",
+        "src/lib/breadcrumb.types.ts",
+        "src/lib/breadcrumb-semantic.engine.ts",
+        "src/lib/semantic-style.engine.ts",
+        "src/lib/ConfigProvider.svelte",
+        "tests/browser/fixtures/breadcrumb-config-presets.ts",
+        "tests/browser/fixtures/BreadcrumbConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-breadcrumb-config-reference.json",
+        "tests/browser/breadcrumb-config-metrics.ts",
+        "tests/browser/breadcrumb-config.spec.ts",
+        "tests/package/breadcrumb-config.ssr.test.ts",
+        "readme.md"
       ],
       "features": [
         {
@@ -2310,11 +2321,11 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls, глобальный component config и полный Menu API",
+          "title": "PrefixCls и полный Menu API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Component tokens подключены через theme.components.Breadcrumb. PrefixCls, глобальный breadcrumb config вне темы и отсутствующие возможности standalone Dropdown/Menu требуют следующих этапов."
+          "note": "ConfigProvider.breadcrumb class/style/semantic defaults, separator и dropdownIcon перенесены отдельной feature. PrefixCls и произвольные Menu options ещё не перенесены."
         },
         {
           "id": "source-theme-tokens",
@@ -2345,6 +2356,27 @@
             "tests/browser/fixtures/ant-design-link-decoration-reference.json"
           ],
           "note": "Scoped linkDecoration/linkHoverDecoration/linkFocusDecoration с fallback none вне source-only marker. Сравнение normal/hover/active/focus с 12 UMD-сценариями 6.6.8 для default/custom variables и inline priority, light/dark/compact; Svelte проверяет native/source, Anchor items/legacy и Breadcrumb plain/menu/itemRender. Legacy AnchorLink сохраняется отдельно: upstream Anchor игнорирует children, стили сравниваются с items. Внешние links, focus outline, DOM identity, href/callbacks и Dropdown keyboard не меняются."
+        },
+        {
+          "id": "breadcrumb-component-config",
+          "title": "ConfigProvider.breadcrumb: semantic defaults, separator и dropdownIcon",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/breadcrumb.types.ts",
+            "src/lib/Breadcrumb.svelte",
+            "src/lib/breadcrumb-semantic.engine.ts",
+            "src/lib/semantic-style.engine.ts",
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/fixtures/breadcrumb-config-presets.ts",
+            "tests/browser/fixtures/BreadcrumbConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-breadcrumb-config-reference.json",
+            "tests/browser/breadcrumb-config-metrics.ts",
+            "tests/browser/breadcrumb-config.spec.ts",
+            "tests/package/breadcrumb-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source useMergeSemantic: class/style и object/function classNames/styles, whole-record inheritance/replacement, включая {}. Root слои context semantic, context plain, local semantic, local plain после component variables. Separator/dropdownIcon используют local → component config → исходный default, null/undefined переходят к следующему уровню, false/empty скрывают separator/icon, числовой 0 остаётся видимым. Callbacks читают resolved separator и прежний native params={} при отсутствующем prop; raw Source params own=false/type=undefined сохранён отдельно. Config принимает те же semantic callbacks, что local Props; конкретный params/itemRender сохраняет тип. Raw UMD фиксирует semantic classes/tags/computed CSS, root/item/separator text, hrefs и custom node markers для object/function priorities, nested empty/replaced, null/false/0, explicit separators, variables, themes/RTL/algorithm. Существующая native Dropdown/link обёртка сохранена и не выдаётся за идентичную Source структуру; Raw Source textContent остаётся без изменений; сравниваются hrefs и отдельные trigger/separator fragments с trim boundary whitespace, без сохранённого скрытого native меню. Обновления config/items сохраняют keyed DOM, focus, native navigation/callbacks и открытое меню. PrefixCls и полный Menu API не включены."
         }
       ]
     },
@@ -15623,7 +15655,16 @@
         "tests/browser/fixtures/ant-design-anchor-config-reference.json",
         "tests/browser/anchor-config-metrics.ts",
         "tests/browser/anchor-config.spec.ts",
-        "tests/package/anchor-config.ssr.test.ts"
+        "tests/package/anchor-config.ssr.test.ts",
+        "src/lib/breadcrumb.types.ts",
+        "src/lib/Breadcrumb.svelte",
+        "src/lib/breadcrumb-semantic.engine.ts",
+        "tests/browser/fixtures/breadcrumb-config-presets.ts",
+        "tests/browser/fixtures/BreadcrumbConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-breadcrumb-config-reference.json",
+        "tests/browser/breadcrumb-config-metrics.ts",
+        "tests/browser/breadcrumb-config.spec.ts",
+        "tests/package/breadcrumb-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -16477,6 +16518,27 @@
             "readme.md"
           ],
           "note": "Source useMergeSemantic: class/style и object/function classNames/styles, whole-record inheritance/replacement, включая {}. Root layers context semantic, context plain, local semantic, local plain после component variables/max-height; callbacks читают resolved direction, прежние native defaults остальных Props сохраняются. Четыре semantic slots, raw classes/tags/hrefs, computed CSS и начальная indicator geometry сверяются с неизменённым UMD для vertical/horizontal/nested links, Affix, functions, empty/replaced records, root priorities, custom variables, RTL и themes/algorithm. Обновления provider/local styles сохраняют DOM ссылок/индикатора, фокус, href/history и callbacks; indicator coordinates принадлежат runtime. Native исправление stale geometry отделено от исходных замеров."
+        },
+        {
+          "id": "breadcrumb-component-config",
+          "title": "ConfigProvider.breadcrumb: semantic defaults, separator и dropdownIcon",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/breadcrumb.types.ts",
+            "src/lib/Breadcrumb.svelte",
+            "src/lib/breadcrumb-semantic.engine.ts",
+            "src/lib/semantic-style.engine.ts",
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/fixtures/breadcrumb-config-presets.ts",
+            "tests/browser/fixtures/BreadcrumbConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-breadcrumb-config-reference.json",
+            "tests/browser/breadcrumb-config-metrics.ts",
+            "tests/browser/breadcrumb-config.spec.ts",
+            "tests/package/breadcrumb-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source useMergeSemantic: class/style и object/function classNames/styles, whole-record inheritance/replacement, включая {}. Root слои context semantic, context plain, local semantic, local plain после component variables. Separator/dropdownIcon используют local → component config → исходный default, null/undefined переходят к следующему уровню, false/empty скрывают separator/icon, числовой 0 остаётся видимым. Callbacks читают resolved separator и прежний native params={} при отсутствующем prop; raw Source params own=false/type=undefined сохранён отдельно. Config принимает те же semantic callbacks, что local Props; конкретный params/itemRender сохраняет тип. Raw UMD фиксирует semantic classes/tags/computed CSS, root/item/separator text, hrefs и custom node markers для object/function priorities, nested empty/replaced, null/false/0, explicit separators, variables, themes/RTL/algorithm. Существующая native Dropdown/link обёртка сохранена и не выдаётся за идентичную Source структуру; Raw Source textContent остаётся без изменений; сравниваются hrefs и отдельные trigger/separator fragments с trim boundary whitespace, без сохранённого скрытого native меню. Обновления config/items сохраняют keyed DOM, focus, native navigation/callbacks и открытое меню. PrefixCls и полный Menu API не включены."
         }
       ]
     },

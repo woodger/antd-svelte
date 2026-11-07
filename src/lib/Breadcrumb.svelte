@@ -2,6 +2,7 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { breadcrumbEntries, breadcrumbHasContent, breadcrumbItems } from './breadcrumb.engine';
+  import { breadcrumbSemantics } from './breadcrumb-semantic.engine';
   import BreadcrumbEntry from './BreadcrumbEntry.svelte';
   import type { BreadcrumbContent, BreadcrumbProps } from './breadcrumb.types';
 
@@ -24,7 +25,8 @@
   > = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Breadcrumb');
-  let mergedSeparator = $derived(separator ?? '/');
+  let mergedSeparator = $derived(separator ?? config.breadcrumb?.separator ?? '/');
+  let mergedDropdownIcon = $derived(dropdownIcon ?? config.breadcrumb?.dropdownIcon);
   let mergedItems = $derived(breadcrumbItems(items, routes));
   let entries = $derived(breadcrumbEntries(mergedItems, params));
   let info = $derived(
@@ -45,8 +47,9 @@
       }
     }
   );
-  let classes = $derived(typeof classNames === 'function' ? classNames(info) : classNames ?? {});
-  let slots = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
+  let semantic = $derived(breadcrumbSemantics(config.breadcrumb, info.props));
+  let classes = $derived(semantic.classes);
+  let slots = $derived(semantic.styles);
 </script>
 
 <style>
@@ -63,15 +66,16 @@
     componentTheme.className,
     componentTheme.className && 'ant-breadcrumb-source-theme',
     config.direction === 'rtl' && 'ant-breadcrumb-rtl',
+    config.breadcrumb?.class,
     className,
     rootClassName,
     classes.root
-  ]} style={[componentTheme.style, slots.root, style].filter(Boolean).join(';')}>
+  ]} style={[componentTheme.style, slots.root].filter(Boolean).join(';')}>
   <ol>{#each entries as entry, index (entry.item.key ?? index)}
     {#if entry.item.type === 'separator'}
       <li class={['ant-breadcrumb-separator', classes.separator]} style={slots.separator} aria-hidden="true">{@render value(entry.item.separator ?? '/')}</li>
     {:else if itemRender || entry.item.menu || entry.title !== null}
-      <BreadcrumbEntry {entry} {params} routes={items ?? routes ?? []} {itemRender} {dropdownIcon} {classes} styles={slots} />
+      <BreadcrumbEntry {entry} {params} routes={items ?? routes ?? []} {itemRender} dropdownIcon={mergedDropdownIcon} {classes} styles={slots} />
       {#if index < entries.length - 1 && breadcrumbHasContent(mergedSeparator)}<li class={['ant-breadcrumb-separator', classes.separator]} style={slots.separator} aria-hidden="true">{@render value(mergedSeparator)}</li>{/if}
     {/if}
   {/each}</ol>

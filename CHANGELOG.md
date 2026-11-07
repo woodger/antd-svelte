@@ -9,6 +9,11 @@
 
 ### Added
 
+- Breadcrumb: общие class/style/semantic defaults, separator и dropdownIcon из
+  ConfigProvider с исходным nullish приоритетом и whole-record replacement.
+  Callbacks читают resolved separator; native params defaults, типы itemRender,
+  ссылки, фокус и работа открытого меню сохраняются.
+
 - Anchor: class/style и object/function semantic defaults из ConfigProvider,
   исходные root style слои и whole-record replacement. Индикатор обновляется
   после смены semantic styles/classes без потери DOM, фокуса и callbacks;

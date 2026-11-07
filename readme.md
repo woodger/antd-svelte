@@ -1101,7 +1101,8 @@ item с path; item с одним href не добавляет сегмент. Ti
 включая пустой массив. Routes преобразует breadcrumbName и children в title/menu;
 React children sugar Breadcrumb.Item/Separator заменён массивом items.
 
-Separator по умолчанию "/", null также выбирает default, false/"" отключают
+Separator берётся из local prop, ConfigProvider.breadcrumb.separator, затем "/";
+null/undefined переходят к следующему уровню, false/"" отключают
 автоматический разделитель. { type:'separator', separator? } создаёт отдельный
 aria-hidden li, даже при отключённых автоматических разделителях; его default
 также "/". Как в исходнике, последний видимый item может сохранить разделитель,
@@ -1114,7 +1115,14 @@ ItemRender — Snippet<[route, params, originalItemsOrRoutes, paths]>, кото�
 Шаблон непрозрачен для родителя: пустой Snippet сохраняет li; React callback с
 null мог удалить его. В custom menu template задайте свой нативный trigger.
 ClassNames/styles поддерживают root/item/separator, объект либо callback ({ props });
-style корня перекрывает styles.root, item/separator styles применяются на li.
+ConfigProvider.breadcrumb задаёт общие class/style и semantic defaults. Классы
+накапливаются; root style слои идут после component variables: context semantic,
+context plain, local semantic, local plain. Item/separator styles применяются на li.
+Callbacks получают resolved separator и прежние native defaults остальных Props:
+в частности, params={} при отсутствии prop. Исходное отсутствие params в callbacks
+сохранено отдельно в [raw reference](tests/browser/fixtures/ant-design-breadcrumb-config-reference.json).
+Конкретный тип params и itemRender сохраняется; config принимает те же semantic
+callbacks, что локальные Props.
 Item.style в закреплённом BreadcrumbItem.tsx не применяется; сохранено поведение
 кода, для стилей элемента используйте styles.item либо itemRender.
 
@@ -1122,11 +1130,18 @@ Menu.items принимает key/title/label/path/disabled/danger/onClick. Labe
 приоритет над title; truthy path конкатенируется с разрешённым href родителя без
 добавления slash. Raw menu.items.href сам по себе не создаёт ссылку в upstream
 и здесь не используется; навигацию задаёт path. DropdownProps передаются текущему
-Svelte Dropdown с placement=bottom по умолчанию; dropdownIcon=null/undefined
-выбирает стрелку, false скрывает её. Нативные links меню сохраняют href и
+Svelte Dropdown с placement=bottom по умолчанию. DropdownIcon берётся из local
+prop, ConfigProvider.breadcrumb.dropdownIcon, затем используется обычная стрелка;
+null/undefined переходят к следующему уровню, false скрывает её, 0 отображается.
+Нативные links меню сохраняют href и
 поддерживают Enter/Space, callback/preventDefault, typeahead и disabled. Это
 адаптация прежнего плоского Dropdown; произвольные React Menu options ещё не
 поддержаны. Тема/compact/RTL наследуются через ConfigProvider.
+
+Undefined component config наследует родительский record; явно заданный объект,
+включая {}, заменяет его целиком. Смена стилей, separator/icon и items сохраняет
+ключевые DOM nodes, native href, фокус и callbacks. Иконки и разделители могут
+быть Snippet; существующая нативная обёртка Dropdown сохраняется.
 
 Обёртка Dropdown внутри пункта Breadcrumb сохраняет базовую линию текста
 соседних links/span/button, в том числе при переносе цепочки и custom itemRender.
@@ -1148,11 +1163,15 @@ Semantic root styles и plain style имеют приоритет после com
 Popup использует собственные Dropdown/Menu scopes. Обновление темы сохраняет
 нативные ссылки, фокус, навигацию и callbacks; native-only оформление сохранено.
 
-Галерея — `/ant-design#breadcrumb`, фикстуры — `?fixture=breadcrumb` и `?fixture=breadcrumb-theme`.
+Галерея — `/ant-design#breadcrumb`, фикстуры — `?fixture=breadcrumb`,
+`?fixture=breadcrumb-theme` и `?fixture=breadcrumb-config`.
 Unit/SSR/Chromium покрывают маршруты, параметры, разделители, шаблон, стили,
 меню, отмену перехода и production hydration. Рецепт breadcrumb извлекает 21
-правило без keyframes. PrefixCls и глобальный component config вне темы остаются
-в полном объёме миграции.
+правило без keyframes. PrefixCls и полный Menu API остаются в полном объёме миграции.
+
+Raw reference сохраняет полный textContent исходника. Сверка текста использует
+видимые trigger/separator fragments: закрытый native Dropdown сохраняется в DOM,
+а пробелы между элементами Svelte не меняют содержимое пунктов.
 
 ## Anchor / AnchorLink
 

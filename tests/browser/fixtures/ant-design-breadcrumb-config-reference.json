@@ -1,0 +1,4691 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "reactVersion": "18.3.1",
+    "viewport": {
+      "width": 1400,
+      "height": 1200
+    },
+    "operation": "Unmodified UMD: raw semantic classes/tags/computed properties, root/item/separator textContent and link hrefs, separator and icon nodes. Content records individual trigger/separator fragments with boundary whitespace trimmed; Native retained hidden menu and inter-tag whitespace are excluded from this comparison, while raw source text remains unchanged. Dropdown trigger/link wrapping remains a separate DOM boundary. Parent width=680px/color=rgb(0,0,0), explicit parent dir=profile RTL/LTR. All CSS profiles pass params.id as string 42; omitted props recorded separately."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.88)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "context-objects",
+      "context": "objects",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "context-and-local",
+      "context": "objects",
+      "local": "objects",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "local-breadcrumb-plain",
+              "context-breadcrumb-root",
+              "local-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "context-functions",
+      "context": "functions",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::SectionC::User 42",
+            "content": [
+              "First",
+              "::",
+              "SectionC",
+              "::",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root-3-configured"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "0.8",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "context-and-local-functions",
+      "context": "functions",
+      "local": "functions",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First|SectionL|User 42",
+            "content": [
+              "First",
+              "|",
+              "SectionL",
+              "|",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "local-breadcrumb-plain",
+              "context-breadcrumb-root-3-other",
+              "local-breadcrumb-root-3-other"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "0.8",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionL",
+            "content": [
+              "SectionL"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "|",
+            "content": [
+              "|"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "|",
+            "content": [
+              "|"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "functions-two-items",
+      "context": "functions",
+      "count": 2,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::SectionC",
+            "content": [
+              "First",
+              "::",
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root-2-configured"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "0.65",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "nested-inherits",
+      "context": "objects",
+      "nested": "inherit",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "nested-empty",
+      "context": "objects",
+      "nested": "empty",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.88)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "nested-replaces",
+      "context": "objects",
+      "nested": "replace",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-replaced"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.88)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "local-empty",
+      "context": "objects",
+      "local": "empty",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "root-priority",
+      "context": "priority",
+      "local": "priority",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "local-breadcrumb-plain",
+              "context-breadcrumb-root",
+              "local-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgb(255, 255, 0)",
+              "padding-top": "2px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.88)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "context-defaults",
+      "context": "defaults",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::SectionC::User 42",
+            "content": [
+              "First",
+              "::",
+              "SectionC",
+              "::",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "local-defaults",
+      "context": "defaults",
+      "local": "defaults",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First|SectionL|User 42",
+            "content": [
+              "First",
+              "|",
+              "SectionL",
+              "|",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "local-breadcrumb-plain",
+              "context-breadcrumb-root",
+              "local-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionL",
+            "content": [
+              "SectionL"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "|",
+            "content": [
+              "|"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "|",
+            "content": [
+              "|"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "empty-separator",
+      "context": "defaults",
+      "separator": "",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "FirstSectionCUser 42",
+            "content": [
+              "First",
+              "SectionC",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": []
+      }
+    },
+    {
+      "name": "zero-separator",
+      "context": "defaults",
+      "separator": 0,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First0SectionC0User 42",
+            "content": [
+              "First",
+              "0",
+              "SectionC",
+              "0",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "0",
+            "content": [
+              "0"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "0",
+            "content": [
+              "0"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "false-separator",
+      "context": "defaults",
+      "separator": false,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "FirstSectionCUser 42",
+            "content": [
+              "First",
+              "SectionC",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": []
+      }
+    },
+    {
+      "name": "null-separator",
+      "context": "defaults",
+      "separator": null,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::SectionC::User 42",
+            "content": [
+              "First",
+              "::",
+              "SectionC",
+              "::",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "zero-icon",
+      "context": "defaults",
+      "icon": 0,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::Section0::User 42",
+            "content": [
+              "First",
+              "::",
+              "Section0",
+              "::",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section0",
+            "content": [
+              "Section0"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "false-icon",
+      "context": "defaults",
+      "icon": false,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::Section::User 42",
+            "content": [
+              "First",
+              "::",
+              "Section",
+              "::",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "null-icon",
+      "context": "defaults",
+      "icon": null,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::SectionC::User 42",
+            "content": [
+              "First",
+              "::",
+              "SectionC",
+              "::",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "context-nodes",
+      "context": "nodes",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First~~SectionC~~User 42",
+            "content": [
+              "First",
+              "~~",
+              "SectionC",
+              "~~",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [
+              {
+                "source": "context",
+                "text": "C"
+              }
+            ],
+            "separators": [
+              {
+                "source": "context",
+                "text": "~~"
+              },
+              {
+                "source": "context",
+                "text": "~~"
+              }
+            ],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [
+              {
+                "source": "context",
+                "text": "C"
+              }
+            ],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "~~",
+            "content": [
+              "~~"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [
+              {
+                "source": "context",
+                "text": "~~"
+              }
+            ],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "~~",
+            "content": [
+              "~~"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [
+              {
+                "source": "context",
+                "text": "~~"
+              }
+            ],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "local-nodes",
+      "context": "nodes",
+      "local": "nodes",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First>>SectionL>>User 42",
+            "content": [
+              "First",
+              ">>",
+              "SectionL",
+              ">>",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [
+              {
+                "source": "local",
+                "text": "L"
+              }
+            ],
+            "separators": [
+              {
+                "source": "local",
+                "text": ">>"
+              },
+              {
+                "source": "local",
+                "text": ">>"
+              }
+            ],
+            "classes": [
+              "context-breadcrumb-plain",
+              "local-breadcrumb-plain",
+              "context-breadcrumb-root",
+              "local-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionL",
+            "content": [
+              "SectionL"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [
+              {
+                "source": "local",
+                "text": "L"
+              }
+            ],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": ">>",
+            "content": [
+              ">>"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [
+              {
+                "source": "local",
+                "text": ">>"
+              }
+            ],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": ">>",
+            "content": [
+              ">>"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [
+              {
+                "source": "local",
+                "text": ">>"
+              }
+            ],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "9px",
+              "margin-top": "7px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "explicit-item-separator",
+      "context": "defaults",
+      "extraSeparator": true,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::!SectionC::User 42",
+            "content": [
+              "First",
+              "::",
+              "!",
+              "SectionC",
+              "::",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "!",
+            "content": [
+              "!"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "context-variables",
+      "context": "variables",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.88)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(0, 62, 179)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(0, 62, 179)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "local-variables",
+      "context": "variables",
+      "local": "variables",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "local-breadcrumb-plain",
+              "context-breadcrumb-root",
+              "local-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.45)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item",
+              "local-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgba(0, 0, 0, 0.88)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator",
+              "local-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(135, 56, 0)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "0px",
+              "margin-top": "0px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "dark",
+      "context": "objects",
+      "theme": "dark",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "compact",
+      "context": "objects",
+      "theme": "compact",
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "12px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "12px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "12px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "12px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "4px",
+              "margin-right": "4px",
+              "opacity": "1",
+              "font-size": "12px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "4px",
+              "margin-right": "4px",
+              "opacity": "1",
+              "font-size": "12px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "rtl",
+      "context": "defaults",
+      "rtl": true,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First::SectionC::User 42",
+            "content": [
+              "First",
+              "::",
+              "SectionC",
+              "::",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "SectionC",
+            "content": [
+              "SectionC"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "::",
+            "content": [
+              "::"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "8px",
+              "margin-right": "8px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "context": "objects",
+      "token": true,
+      "expected": {
+        "root": [
+          {
+            "tag": "nav",
+            "text": "First/Section/User 42",
+            "content": [
+              "First",
+              "/",
+              "Section",
+              "/",
+              "User 42"
+            ],
+            "links": [
+              "#breadcrumb-config-first",
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-plain",
+              "context-breadcrumb-root"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "item": [
+          {
+            "tag": "li",
+            "text": "First",
+            "content": [
+              "First"
+            ],
+            "links": [
+              "#breadcrumb-config-first"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "Section",
+            "content": [
+              "Section"
+            ],
+            "links": [
+              "#breadcrumb-config-section"
+            ],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "User 42",
+            "content": [
+              "User 42"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-item"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "0px",
+              "margin-right": "0px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ],
+        "separator": [
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "13px",
+              "margin-right": "13px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          },
+          {
+            "tag": "li",
+            "text": "/",
+            "content": [
+              "/"
+            ],
+            "links": [],
+            "icons": [],
+            "separators": [],
+            "classes": [
+              "context-breadcrumb-separator"
+            ],
+            "styles": {
+              "color": "rgb(114, 46, 209)",
+              "background-color": "rgba(0, 0, 0, 0)",
+              "padding-top": "5px",
+              "margin-top": "3px",
+              "margin-left": "13px",
+              "margin-right": "13px",
+              "opacity": "1",
+              "font-size": "14px"
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "defaultPropsObservation": {
+    "params": {
+      "own": false,
+      "type": "undefined"
+    },
+    "separator": {
+      "own": true,
+      "type": "string"
+    },
+    "dropdownIcon": {
+      "own": false,
+      "type": "undefined"
+    }
+  }
+}
