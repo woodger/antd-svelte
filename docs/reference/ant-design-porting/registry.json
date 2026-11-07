@@ -3669,11 +3669,11 @@
         },
         {
           "id": "extended-api",
-          "title": "Virtual, fieldNames, render hooks, semantic/config API и legacy aliases",
+          "title": "Virtual, fieldNames, render hooks и остальные semantic/config API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет virtualization/scrollTo, fieldNames, optionRender/popupRender, prefix/searchIcon customization, полного semantic classNames/styles и ConfigProvider.select. Общие Select tokens подключены отдельно. Legacy dataSource/Option children/deprecated dropdown aliases и React option.props wrappers не перенесены. Поддерживается string value; React generic numeric/object значения за пределами первого этапа."
+          "note": "Нет virtualization/scrollTo, fieldNames, optionRender/popupRender, prefix/searchIcon customization, остальных semantic classNames/styles и ConfigProvider.select. Общие Select tokens подключены отдельно. Legacy dataSource/Option children/deprecated dropdown aliases исключены из переноса; React option.props wrappers отсутствуют. Поддерживается string value; React generic numeric/object значения за пределами первого этапа."
         },
         {
           "id": "source-select-theme",
@@ -3923,7 +3923,7 @@
             "tests/package/cascader.ssr.test.ts",
             "tests/browser/cascader.spec.ts"
           ],
-          "note": "108 исходных CSS rules с at-rules; Select base CSS используется без изменения Select API. Raw semantic props с resolved disabled/size/variant/status, root/dropdown/listItem style priority, icons, sizes/variants, common locale, themes/compact, popup widths и legacy aliases. Responsive/maxTagCount/truncate, display/option/tag/popup snippets. Panel наследует только disabled/direction и expand/loading icons, без root/popup semantic config."
+          "note": "108 исходных CSS rules с at-rules; Select base CSS используется без изменения Select API. Raw semantic props с resolved disabled/size/variant/status, root style priority, semantic popup/list/listItem, icons, sizes/variants, common locale, themes/compact и popup widths. Deprecated root clearIcon/showArrow, dropdown aliases и column styles удалены. Responsive/maxTagCount/truncate, display/option/tag/popup snippets. Panel наследует только disabled/direction и expand/loading icons, без root/popup semantic config."
         },
         {
           "id": "advanced-api",
@@ -7571,7 +7571,7 @@
             "tests/package/tree-select.ssr.test.ts",
             "tests/browser/tree-select.spec.ts"
           ],
-          "note": "Raw keys и labeled objects, null/undefined, numeric zero, onChange(value,labels,extra), onSelect/onDeselect и clear. TreeCheckStrictly форсирует multiple и labelInValue; labels=null в labeled mode. Missing values сохраняются; подписи доступны из labeled value либо внутреннего состояния."
+          "note": "Raw keys и labeled objects, null/undefined, numeric zero, onChange(value,labels,{triggerValue}), onSelect/onDeselect и clear. Deprecated preValue/checked/selected удалены. TreeCheckStrictly форсирует multiple и labelInValue; labels=null в labeled mode. Missing values сохраняются; подписи доступны из labeled value либо внутреннего состояния."
         },
         {
           "id": "checking-search",
@@ -7597,7 +7597,7 @@
         },
         {
           "id": "extended-api",
-          "title": "FieldNames/simple mode, maxCount/tags/render hooks, semantic/config/ref и legacy extras",
+          "title": "FieldNames/simple mode, maxCount/tags/render hooks и остальные semantic/config/ref API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],

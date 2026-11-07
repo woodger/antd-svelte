@@ -112,8 +112,8 @@ export interface AutoCompleteProps extends Omit<
   children?: Snippet<[AutoCompleteInput]>;
   class?: string;
   rootClassName?: string;
-  /** @defaultValue '' */
-  popupClassName?: string;
+  /** Класс popup; остальные semantic slots пока не перенесены. */
+  classNames?: { popup?: { root?: string; }; };
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
   /** Нативный ref доступен после mount и очищается при unmount. */

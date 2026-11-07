@@ -67,21 +67,21 @@ describe('Cascader SSR', () => {
     expect(onChange).not.toHaveBeenCalled();
   });
 
-  it('renders custom fields, semantic popup slots and the source legacy style precedence', () => {
+  it('renders custom fields, semantic popup slots and local root style priority', () => {
     const body = render(Cascader, { props: {
       options: [{ code: 0, title: 'Custom root' }],
       fieldNames: { label: 'title', value: 'code' },
       value: [0], defaultOpen: true,
       classNames: ({ props }) => ({ root: `size-${props.size}`, popup: { listItem: 'entry' } }),
       styles: { root: 'color:red', popup: { root: 'padding:1px', listItem: 'color:blue' } },
-      style: 'color:green', dropdownStyle: 'padding:2px', popupMenuColumnStyle: 'color:red'
+      style: 'color:green'
     } }).body;
 
     expect(body).toContain('Custom root');
     expect(body).toContain('size-medium');
     expect(body).toContain('color:red;color:green');
-    expect(body).toContain('padding:1px;padding:2px');
-    expect(body).toContain('color:red;color:blue');
+    expect(body).toContain('padding:1px');
+    expect(body).toContain('color:blue');
     expect(body).toContain('entry');
   });
 

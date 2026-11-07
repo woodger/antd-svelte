@@ -5100,7 +5100,7 @@ isLeaf=true либо удаления узла из options. Пустой childr
 выполняет скрытую загрузку и не добавляет собственные состояния ответа.
 
 Popup поддерживает controlled/defaultOpen, changeOnSelect, click/hover,
-размещение, ширину и popupRender; deprecated dropdown aliases сохранены.
+размещение, ширину и popupRender; deprecated dropdown aliases удалены.
 Поле удерживает focus при выборе; Up/Down обходят разрешённые строки,
 Left/Right переходят между колонками и меняются местами в RTL, Backspace
 возвращает родителя, Enter выбирает, Escape закрывает.
@@ -5113,8 +5113,8 @@ bind:nativeElement/inputElement и focus/blur доступны после mount.
 
 ConfigProvider.cascader задаёт variant, class/style, semantic slots и icons.
 Локальные поля уточняют конфигурацию; root style идёт после styles.root,
-dropdownStyle — после styles.popup.root, styles.popup.listItem — после
-popupMenuColumnStyle. AllowClear=true наследует clearIcon и обычную иконку Ant
+для popup/list/listItem применяются соответствующие semantic slots.
+AllowClear=true наследует ConfigProvider.cascader.clearIcon и обычную иконку Ant
 по умолчанию. Объект allowClear передаётся без наследования; его отсутствующий
 или falsy clearIcon использует fallback `×`.
 Semantic callbacks получают исходные props, включая raw
@@ -5782,10 +5782,10 @@ treeCheckStrictly также включает checkbox/multiple и принуд�
 OnChange(value,labels,extra) получает scalar либо массив; при labelInValue/strict
 это объекты с value/label/halfChecked/disabled, а labels=null. При полной очистке
 single возвращается undefined, multiple — []; labels=[] в raw mode. Extra включает
-preValue (массив исходных full values), triggerValue и checked либо selected.
+triggerValue; deprecated preValue/checked/selected удалены.
 OnSelect/onDeselect(value,node) вызываются для конкретного узла; clear вызывает
 onClear/onChange без onDeselect для каждого тега. Deprecated React getters
-triggerNode/allCheckedNodes и wrappers node.props не входят в этот этап.
+triggerNode/allCheckedNodes и wrappers node.props исключены из переноса.
 
 В checkbox-режиме исходная conduction уважает disabled/disableCheckbox/checkable
 границы. ShowCheckedStrategy по умолчанию SHOW_CHILD; отдельные экспорты
@@ -5851,8 +5851,9 @@ TreeSelect/Cascader с 40 сценариями официального UMD —
 [choice-container](./tests/browser/choice-container.spec.ts), `?fixture=choice-container`.
 
 Virtual/scrollTo, fieldNames/simple mode, TreeNode children, maxCount/maxTagCount,
-tag/popup render hooks, treeExpandAction, полный semantic/config/ref API,
-legacy React extras и исходные motion API ещё не перенесены.
+tag/popup render hooks, treeExpandAction, остальные semantic slots/config/ref API
+и исходные motion API ещё не перенесены. Deprecated React extras исключены.
+Класс popup задаётся через classNames.popup.root; popupClassName удалён.
 
 ## Tree
 
@@ -7994,6 +7995,8 @@ FilterOption по умолчанию false, как runtime combobox rc-select. T
 value без учёта регистра, без trim/Unicode folding. Совпавшая группа сохраняет
 всех детей; иначе проверяются дети. Predicate получает исходный option/group.
 ShowSearch object настраивает filterOption/onSearch; прежние top-level props удалены.
+Класс popup задаётся через classNames.popup.root; popupClassName удалён.
+Остальные semantic slots пока не перенесены.
 Загрузку данных, debounce и защиту от старых ответов выполняет потребитель.
 
 Open/defaultOpen задают controlled/uncontrolled popup. Без options и непустого

@@ -59,7 +59,6 @@
   let controlledOpen = $state(false);
   let open = $state(false);
   let acceptOpen = $state(true);
-  let legacy = $state(false);
   let defaultOpen = $state(false);
   let mounted = $state(true);
   let instance = $state(0);
@@ -234,7 +233,6 @@
     <label><input type="checkbox" bind:checked={controlledOpen} /> Controlled path popup</label>
     <label><input type="checkbox" bind:checked={open} /> Path popup open</label>
     <label><input type="checkbox" bind:checked={acceptOpen} /> Accept path popup</label>
-    <label><input type="checkbox" bind:checked={legacy} /> Legacy path popup props</label>
     <label><input type="checkbox" bind:checked={defaultOpen} /> Default path popup open</label>
     <label><input type="checkbox" bind:checked={loading} /> Path loading</label>
     <label><input type="checkbox" bind:checked={allowClear} /> Clearable paths</label>
@@ -253,7 +251,7 @@
     <label>Path tag count<select bind:value={count}><option>all</option><option>0</option><option>1</option></select></label>
     <label>Path width<input type="number" bind:value={width} /></label>
     <label>Path popup width<select bind:value={popupWidth}><option>default</option><option>true</option><option>240</option></select></label>
-    <label>Path clear icon<select aria-label="Path clear icon" bind:value={clearMode}><option>default</option><option>object</option><option>false</option><option>legacy-null</option></select></label>
+    <label>Path clear icon<select aria-label="Path clear icon" bind:value={clearMode}><option>default</option><option>object</option><option>false</option></select></label>
     <button type="button" onclick={reset}>Reset cascader</button>
     <button type="button" onclick={() => { value = multiple ? [['missing', 0], ['asia']] : ['asia', 'missing']; }}>Set missing path</button>
     <button type="button" onclick={() => { value = multiple ? [['asia']] : ['asia', 'china', 'hangzhou']; }}>Set owner path</button>
@@ -295,29 +293,23 @@
             showCheckedStrategy={childStrategy ? 'SHOW_CHILD' : 'SHOW_PARENT'}
             fieldNames={customFields ? { label: 'text', value: 'code', children: 'nodes' } : undefined}
             open={controlledOpen ? open : undefined} {defaultOpen}
-            onOpenChange={legacy ? undefined : next => opened(next)}
-            onDropdownVisibleChange={legacy ? next => opened(next, 'legacy-open') : undefined}
+            onOpenChange={next => opened(next)}
             allowClear={!allowClear ? false : clearMode === 'object' ? {}
               : clearMode === 'false' ? { clearIcon: false } : true}
-            clearIcon={clearMode === 'legacy-null' ? null : undefined}
             onClear={() => events.push('clear')}
             loadData={lazy ? loadData : undefined} {loading}
             disabled={localDisabled === 'inherit' ? undefined : localDisabled === 'true'}
             variant={variant === 'inherit' ? undefined : variant}
             optionRender={custom ? option : undefined} displayRender={custom ? display : undefined}
             tagRender={customTag ? tag : undefined} children={customTrigger ? trigger : undefined}
-            popupRender={!legacy ? popup : undefined} dropdownRender={legacy ? popup : undefined}
+            popupRender={popup}
             maxTagCount={responsive ? 'responsive' : count === 'all' ? undefined : Number(count)}
             maxTagTextLength={truncate ? 3 : undefined} maxTagPlaceholder={customRest ? rest : undefined}
             popupMatchSelectWidth={popupWidth === 'true' ? true
               : popupWidth === 'default' ? false : Number(popupWidth)}
-            popupClassName={!legacy && styled ? 'local-path-popup' : undefined}
-            dropdownClassName={legacy && styled ? 'legacy-path-popup' : undefined}
-            popupMenuColumnStyle={legacy && styled ? 'color:rgb(90, 10, 10)' : undefined}
             styles={styled ? { root: 'color:rgb(10, 20, 30)', popup: {
               root: 'padding:2px', list: 'min-width:123px', listItem: 'color:rgb(30, 40, 50)'
             } } : undefined}
-            dropdownStyle={legacy && styled ? 'padding:3px' : undefined}
             classNames={styled ? ({ props }) => ({
               root: `local-path-${props.size}-${props.variant}-${props.disabled}`,
               input: 'local-path-input', item: 'local-path-item',

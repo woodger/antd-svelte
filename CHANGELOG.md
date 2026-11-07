@@ -16,6 +16,13 @@
   classNames.popup.root, semantic styles, showNow, disabledTime, allowClear.clearIcon,
   renderExtraFooter/onCalendarChange и cellDateFormat.
 
+- У Cascader удалены прежние popup callbacks, root clearIcon/showArrow,
+  popup/dropdown class/style/render aliases и column styles; сохранены
+  onOpenChange, allowClear.clearIcon, suffixIcon, popupRender и semantic slots.
+  У AutoComplete/TreeSelect popupClassName заменён на classNames.popup.root;
+  у TreeSelect extra удалены preValue/checked/selected, сохранены triggerValue
+  и onSelect/onDeselect.
+
 - У Image удалены wrapperStyle и preview.rootClassName, включая групповой preview.
   Сохранены настройки обёртки через styles.root и viewer через classNames.popup.root;
   class/style по-прежнему относятся к img.

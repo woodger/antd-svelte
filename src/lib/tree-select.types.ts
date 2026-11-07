@@ -39,10 +39,7 @@ export interface TreeSelectSearchConfig {
   treeNodeFilterProp?: string;
 }
 export interface TreeSelectChangeInfo {
-  preValue: TreeSelectLabeledValue[];
   triggerValue?: TreeSelectRawValue;
-  selected?: boolean;
-  checked?: boolean;
 }
 /** Настройки ConfigProvider.treeSelect; пока перенесён только variant. */
 export interface TreeSelectConfig {
@@ -109,8 +106,8 @@ export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectV
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
   /** Локальный getter получает корень Select; undefined наследует ConfigProvider. */
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
-  /** @defaultValue '' */
-  popupClassName?: string;
+  /** Класс popup; остальные semantic slots пока не перенесены. */
+  classNames?: { popup?: { root?: string; }; };
   rootClassName?: string;
   size?: ComponentSize;
   status?: 'error' | 'warning';

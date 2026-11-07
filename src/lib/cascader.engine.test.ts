@@ -42,13 +42,12 @@ describe('Cascader paths and checks', () => {
   it('preserves Ant boolean clear icons and rc-select object and falsy fallbacks', () => {
     const icon = createRawSnippet(() => ({ render: () => '<span>Clear</span>' }));
 
-    expect(cascaderClearIcon(true, undefined, undefined)).toBeUndefined();
-    expect(cascaderClearIcon(true, undefined, icon)).toBe(icon);
-    expect(cascaderClearIcon({}, undefined, icon)).toBe('×');
-    expect(cascaderClearIcon({ clearIcon: icon }, null, undefined)).toBe(icon);
+    expect(cascaderClearIcon(true, undefined)).toBeUndefined();
+    expect(cascaderClearIcon(true, icon)).toBe(icon);
+    expect(cascaderClearIcon({}, icon)).toBe('×');
+    expect(cascaderClearIcon({ clearIcon: icon }, undefined)).toBe(icon);
     for (const empty of [null, false, 0, ''] as const) {
-      expect(cascaderClearIcon(true, empty, icon)).toBe('×');
-      expect(cascaderClearIcon({ clearIcon: empty }, undefined, icon)).toBe('×');
+      expect(cascaderClearIcon({ clearIcon: empty }, icon)).toBe('×');
     }
   });
 

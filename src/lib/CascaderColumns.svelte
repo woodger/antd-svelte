@@ -31,7 +31,6 @@
     label,
     classes,
     styles,
-    columnStyle,
     panel,
     empty,
     onActivate,
@@ -60,7 +59,6 @@
     label: string;
     classes: { list?: string; listItem?: string; };
     styles: { list?: string; listItem?: string; };
-    columnStyle?: string;
     panel: boolean;
     empty: Snippet;
     onActivate: (row: CascaderRow<OptionType>, hover: boolean) => void;
@@ -156,7 +154,7 @@
           blocked && 'ant-cascader-menu-item-disabled',
           pending && 'ant-cascader-menu-item-loading',
           classes.listItem
-        ]} style={[columnStyle, styles.listItem].filter(Boolean).join(';')}
+        ]} style={styles.listItem}
           data-cascader-active={current} data-path-key={row.key}
           onmouseenter={() => { if (hover && !blocked) onActivate(row, true); }}
           ondblclick={onClose}
@@ -216,7 +214,7 @@
       style={styles.list} onscroll={onScroll}>
       <li role="presentation" class={[
         'ant-cascader-menu-item ant-cascader-menu-item-disabled', classes.listItem
-      ]} style={[columnStyle, styles.listItem].filter(Boolean).join(';')} ondblclick={onClose}>
+      ]} style={styles.listItem} ondblclick={onClose}>
         <span role="menuitemcheckbox" aria-checked="false" aria-disabled="true">{@render empty()}</span>
       </li>
     </ul>{/if}

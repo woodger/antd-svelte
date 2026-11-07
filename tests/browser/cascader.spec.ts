@@ -449,22 +449,20 @@ test('Cascader resolves semantic slots and local styles above component config',
   await input(page).click();
 
   await expect(popup(page)).toHaveClass(/context-path-popup/);
-  await expect(popup(page)).toHaveClass(/local-path-popup/);
   await expect(popup(page)).toHaveClass(/local-semantic-popup/);
   await expect(popup(page)).toHaveCSS('padding-top', '2px');
   await expect(row(page, 'Asia').locator('..')).toHaveCSS('color', 'rgb(30, 40, 50)');
   await expect(popup(page).getByRole('menu')).toHaveCSS('min-width', '123px');
 });
 
-test('Cascader preserves legacy popup aliases and modern listItem style priority', async ({ page }) => {
+test('Cascader applies semantic popup styles and retains footer controls', async ({ page }) => {
   await control(page, 'Styled cascader').check();
-  await control(page, 'Legacy path popup props').check();
   await input(page).click();
 
-  await expect(popup(page)).toHaveClass(/legacy-path-popup/);
-  await expect(popup(page)).toHaveCSS('padding-top', '3px');
+  await expect(popup(page)).toHaveClass(/local-semantic-popup/);
+  await expect(popup(page)).toHaveCSS('padding-top', '2px');
   await expect(row(page, 'Asia').locator('..')).toHaveCSS('color', 'rgb(30, 40, 50)');
-  await expect(events(page)).toContainText('legacy-open:true');
+  await expect(events(page)).toContainText('open:true');
   await popup(page).getByRole('button', { name: 'Popup action', exact: true }).click();
 
   await expect(control(page, 'Path footer count')).toHaveText('1');
@@ -808,8 +806,6 @@ test('Cascader preserves object and explicit empty clear icons without inheritin
 
   await expect(clear).toHaveText('×');
   await select(page, 'Path clear icon').selectOption('false');
-  await expect(clear).toHaveText('×');
-  await select(page, 'Path clear icon').selectOption('legacy-null');
   await expect(clear).toHaveText('×');
 });
 

@@ -44,6 +44,7 @@
 {#snippet rich()}<strong>Beta rich</strong>{/snippet}
 <section id="auto-complete-fixture">
   {#if visible}<AutoComplete
+    classNames={{ popup: { root: 'completion-popup' } }}
     bind:this={instance}
     aria-label="Completion"
     name="completion"

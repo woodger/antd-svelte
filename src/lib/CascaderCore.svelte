@@ -70,15 +70,11 @@
     open,
     defaultOpen = false,
     onOpenChange,
-    onPopupVisibleChange,
-    onDropdownVisibleChange,
     allowClear = true,
     onClear,
     placeholder,
     prefix,
     suffixIcon,
-    clearIcon: customClearIcon,
-    showArrow,
     removeIcon,
     loading = false,
     size,
@@ -88,13 +84,7 @@
     styles,
     popupMatchSelectWidth = false,
     placement,
-    popupClassName,
-    dropdownClassName,
-    popupMenuColumnStyle,
-    dropdownMenuColumnStyle,
-    dropdownStyle,
     popupRender,
-    dropdownRender,
     tagRender,
     maxTagCount,
     maxTagTextLength,
@@ -217,7 +207,7 @@
     popupMatchSelectWidth === true ? 'width:var(--cascader-anchor-width)' : undefined,
     !columns.length || search && searchConfig.matchInputWidth !== false
       ? 'min-width:min(var(--cascader-anchor-width),calc(100vw - 16px))' : 'min-width:auto',
-    css.popup.root, dropdownStyle,
+    css.popup.root,
     typeof popupMatchSelectWidth === 'number' ? `width:${popupMatchSelectWidth}px` : undefined
   ].filter(Boolean).join(';'));
   const portal = createPopupContainer(() => ({
@@ -235,7 +225,7 @@
     ? `${listId}-${encodeURIComponent(activeKey)}` : undefined);
   let expand = $derived(expandIcon ?? context?.expandIcon);
   let loadingNode = $derived(loadingIcon ?? context?.loadingIcon);
-  let clearIcon = $derived(cascaderClearIcon(allowClear, customClearIcon, context?.clearIcon));
+  let clearIcon = $derived(cascaderClearIcon(allowClear, context?.clearIcon));
   let remove = $derived(removeIcon === undefined ? context?.removeIcon : removeIcon);
   let suffix = $derived(suffixIcon === undefined
     ? loading ? loadingNode
@@ -368,7 +358,7 @@
     if (next) mounted = true;
     internalOpen = next;
     if (changed)
-      (onOpenChange || onPopupVisibleChange || onDropdownVisibleChange)?.(next);
+      onOpenChange?.(next);
   }
   function publish(next: CascaderPath[]) {
     internalValue = next;
@@ -575,7 +565,7 @@
     label={attributes['aria-label'] ?? (typeof placeholder === 'string' ? placeholder
       : config.locale.searchText)}
     classes={classes.popup} styles={css.popup}
-    columnStyle={popupMenuColumnStyle || dropdownMenuColumnStyle} {panel} {empty}
+    {panel} {empty}
     onActivate={activate} onSelect={selectRow}
     onClose={changeOnSelect ? () => requestOpen(false) : undefined}
     onKeyDown={handleKeyDown} onKeyUp={handleKeyUp} onScroll={onPopupScroll} />
@@ -596,7 +586,7 @@
       cascaderTheme.className,
       cascaderTheme.className && 'ant-cascader-source-theme',
       !children && 'ant-select ant-select-css-var',
-      !children && showArrow !== false && suffix !== null && suffix !== false && 'ant-select-show-arrow',
+      !children && suffix !== null && suffix !== false && 'ant-select-show-arrow',
       !children && canSearch && 'ant-select-show-search',
       !children && hasClear && 'ant-select-allow-clear',
       !children && loading && 'ant-select-loading',
@@ -765,7 +755,7 @@
         {#if clearIcon === undefined}<Icon name="close-circle-filled" />
         {:else}{@render content(clearIcon)}{/if}
       </button>{/if}
-      {#if showArrow !== false && suffix !== null && suffix !== false}
+      {#if suffix !== null && suffix !== false}
         <span class={['suffix ant-select-suffix', classes.suffix]} style={css.suffix} aria-hidden="true">
           {#if suffix !== undefined}{@render content(suffix)}
           {:else}<Icon name={loading ? 'loading' : visible && canSearch ? 'search' : 'down'} />{/if}
@@ -781,7 +771,7 @@
           'popup ant-select-dropdown ant-select-css-var ant-cascader-dropdown ant-cascader-css-var',
           cascaderTheme.className,
           cascaderTheme.className && 'ant-cascader-source-theme',
-          rtl && 'ant-cascader-dropdown-rtl', popupClassName || dropdownClassName,
+          rtl && 'ant-cascader-dropdown-rtl',
           rootClassName, classes.popup.root
         ]} dir={resolvedDirection}
         style={[untrack(() => componentStyle), popupStyle].filter(Boolean).join(';')}
@@ -789,7 +779,7 @@
           [componentStyle, popupStyle].filter(Boolean).join(';'))}
         {@attach portal}
         onfocusout={blurWithin}>
-        {#if popupRender || dropdownRender}{@render (popupRender || dropdownRender)!(menus)}
+        {#if popupRender}{@render popupRender(menus)}
         {:else}{@render menus()}{/if}
       </div>
     {/if}

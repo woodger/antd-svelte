@@ -188,20 +188,12 @@ export interface CascaderProps<
   /** @defaultValue false */
   defaultOpen?: boolean;
   onOpenChange?: (open: boolean) => void;
-  /** @deprecated Используйте onOpenChange. */
-  onPopupVisibleChange?: (open: boolean) => void;
-  /** @deprecated Используйте onOpenChange. */
-  onDropdownVisibleChange?: (open: boolean) => void;
-  /** Объект не наследует clearIcon; пустой/falsy icon даёт rc-select fallback ×. @defaultValue true */
+  /** Объект не наследует ConfigProvider.cascader.clearIcon; пустой/falsy icon даёт rc-select fallback ×. @defaultValue true */
   allowClear?: boolean | { clearIcon?: CascaderContent; };
   onClear?: () => void;
   placeholder?: CascaderContent;
   prefix?: CascaderContent;
   suffixIcon?: CascaderContent;
-  /** @deprecated Используйте allowClear.clearIcon. */
-  clearIcon?: CascaderContent;
-  /** @deprecated Используйте suffixIcon={null}. */
-  showArrow?: boolean;
   removeIcon?: CascaderContent;
   loading?: boolean;
   size?: ComponentSize;
@@ -217,17 +209,7 @@ export interface CascaderProps<
    */
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   placement?: 'bottomLeft' | 'bottomRight' | 'topLeft' | 'topRight';
-  popupClassName?: string;
-  /** @deprecated Используйте popupClassName. */
-  dropdownClassName?: string;
-  popupMenuColumnStyle?: string;
-  /** @deprecated Используйте popupMenuColumnStyle. */
-  dropdownMenuColumnStyle?: string;
-  /** @deprecated Используйте styles.popup.root. */
-  dropdownStyle?: string;
   popupRender?: Snippet<[Snippet]>;
-  /** @deprecated Используйте popupRender. */
-  dropdownRender?: Snippet<[Snippet]>;
   tagRender?: Snippet<[CascaderTagInfo]>;
   maxTagCount?: number | 'responsive';
   maxTagTextLength?: number;

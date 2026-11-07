@@ -69,7 +69,7 @@
     placement,
     onPopupScroll,
     getPopupContainer,
-    popupClassName = '',
+    classNames,
     rootClassName = '',
     size,
     status,
@@ -308,7 +308,7 @@
   }
   function publish(
     raw: TreeSelectRawValue[],
-    extra: { triggerValue?: TreeSelectRawValue; selected?: boolean; }
+    triggerValue?: TreeSelectRawValue
   ) {
     const before = items;
     const nextItems = treeSelectLabels(
@@ -336,11 +336,7 @@
     onChange?.(
       (isMultiple ? returnValue : returnValue[0]) as ValueType,
       labeled ? null : returnItems.map(item => item.label!),
-      {
-        preValue: before.filter(item => !item.halfChecked),
-        triggerValue: extra.triggerValue,
-        ...checkable ? { checked: extra.selected } : { selected: extra.selected }
-      }
+      { triggerValue }
     );
   }
   function choose(raw: TreeSelectRawValue, source: 'option' | 'selection' = 'option') {
@@ -357,7 +353,7 @@
     const next = isMultiple
       ? toggleTreeSelect(raw, selected, items, checks, conduction, index)
       : [raw];
-    publish(next, { triggerValue: raw, selected });
+    publish(next, raw);
     if (selected)
       onSelect?.(raw, node
         ? { ...node }
@@ -372,7 +368,7 @@
   function clear() {
     if (blocked) return;
     onClear?.();
-    publish([], {});
+    publish([]);
     editor?.focus();
   }
   function panelSelect(node: TreeEventNode) {
@@ -575,7 +571,7 @@
     selectTheme.className,
     selectTheme.className && 'ant-tree-select-source-popup',
     config.direction === 'rtl' && 'ant-tree-select-dropdown-rtl',
-    popupClassName
+    classNames?.popup?.root
   ]} style={initialPopupStyle}
   {@attach node => connectComponentTheme(node, componentStyle)}
   {@attach portal}

@@ -64,6 +64,7 @@
     }}
   >
     <TreeSelect
+      classNames={{ popup: { root: 'tree-selection-popup' } }}
       aria-label="Parent select"
       name="parent"
       listHeight={96}

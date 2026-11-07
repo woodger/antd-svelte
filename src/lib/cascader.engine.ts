@@ -18,12 +18,10 @@ export const CASCADER_SHOW_CHILD = 'SHOW_CHILD';
 /** undefined обозначает Ant icon; объект allowClear передаётся в rc-select без наследования. */
 export function cascaderClearIcon(
   allowClear: boolean | { clearIcon?: CascaderContent; },
-  local: CascaderContent | undefined,
   context: CascaderContent | undefined
 ): CascaderContent | undefined {
   if (allowClear && typeof allowClear === 'object') return allowClear.clearIcon || '×';
-  const icon = local === undefined ? context : local;
-  return icon === undefined ? undefined : icon || '×';
+  return context === undefined ? undefined : context || '×';
 }
 
 export function cascaderFields(fields?: CascaderFieldNames): Required<CascaderFieldNames> {

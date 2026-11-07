@@ -51,7 +51,7 @@
     children,
     class: className = '',
     rootClassName = '',
-    popupClassName = '',
+    classNames,
     style,
     id,
     name,
@@ -405,7 +405,7 @@
       class={['popup ant-select-dropdown ant-select-css-var', componentTheme.className,
           componentTheme.className && entries.length > 0 && 'ant-select-source-popup',
           componentTheme.className && config.direction === 'rtl' && 'ant-select-dropdown-rtl',
-          popupClassName]} dir={config.direction}
+          classNames?.popup?.root]} dir={config.direction}
       {@attach node => connectComponentTheme(node, componentTheme.style)}
       {@attach portal}
       style:max-height={`${listHeight}px`}

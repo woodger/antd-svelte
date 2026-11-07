@@ -17,6 +17,10 @@ test(
     await expect(control(page)).toHaveValue('Alpha');
 
     await control(page).click();
+
+    await expect(page.locator('.ant-tree-select-dropdown:visible'))
+      .toHaveClass(/tree-selection-popup/);
+
     await choose(page, 'Beta');
 
     await expect(control(page)).toBeFocused();
@@ -327,8 +331,8 @@ test(
     )
       .map((event: string) => JSON.parse(event));
 
-    expect(events[0].extra.preValue).toEqual([]);
-    expect(events[1].extra.preValue).toEqual([{ label: 'Alpha', value: 'a' }]);
+    expect(events[0].value).toEqual(['a']);
+    expect(events[1].value).toEqual([]);
   }
 );
 

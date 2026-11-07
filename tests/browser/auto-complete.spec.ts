@@ -11,6 +11,7 @@ test('AutoComplete reports local and controlled open requests', async ({ page })
   await input(page).click();
 
   await expect(popup(page)).toBeVisible();
+  await expect(popup(page)).toHaveClass(/completion-popup/);
   await expect(page.getByLabel('Completion openings', { exact: true })).toHaveText('[true]');
   await input(page).press('Escape');
 
