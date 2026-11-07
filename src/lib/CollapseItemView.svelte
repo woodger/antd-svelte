@@ -11,19 +11,15 @@
 
   let {
     item,
-    legacy = false,
-    prefixCls,
     nativeElement = $bindable()
   }: {
     item: CollapseItem & { key: string };
-    legacy?: boolean;
-    prefixCls?: string;
     nativeElement?: HTMLDivElement;
   } = $props();
   const parent = useCollapse();
   const config = useConfig();
   const generatedId = $props.id();
-  let prefix = $derived(parent?.prefix || prefixCls || 'ant-collapse');
+  let prefix = $derived(parent?.prefix || 'ant-collapse');
   let direction = $derived(parent?.direction ?? config.direction);
   let mode = $derived(getCollapseTrigger(item, parent?.collapsible));
   let open = $derived(parent?.openKeys.includes(item.key) ?? false);
@@ -36,7 +32,7 @@
   let itemClasses = $derived.by(() => {
     const result: CollapseSemanticSlots = {};
     for (const slot of ['header', 'title', 'body', 'icon'] as const) {
-      result[slot] = [parent?.classes[slot], !legacy && item.classNames?.[slot]]
+      result[slot] = [parent?.classes[slot], item.classNames?.[slot]]
         .filter(Boolean).join(' ');
     }
     return result;
@@ -44,7 +40,7 @@
   let itemStyles = $derived.by(() => {
     const result: CollapseSemanticSlots = {};
     for (const slot of ['header', 'title', 'body', 'icon'] as const) {
-      result[slot] = [parent?.styles[slot], !legacy && item.styles?.[slot]]
+      result[slot] = [parent?.styles[slot], item.styles?.[slot]]
         .filter(Boolean).join(';');
     }
     return result;
@@ -60,8 +56,7 @@
   });
 
   function itemId(key: string, kind: 'header' | 'panel' | 'label') {
-    const value = legacy ? `${key}-${generatedId}` : key;
-    return parent?.itemId(value, kind) ?? `ant-collapse-${generatedId}-${kind}`;
+    return parent?.itemId(key, kind) ?? `ant-collapse-${generatedId}-${kind}`;
   }
 
   function handleToggle(event: MouseEvent) {

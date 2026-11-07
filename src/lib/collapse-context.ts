@@ -21,11 +21,6 @@ export interface CollapseContext {
     item: CollapseItem & { key: string }, open: boolean,
     classes: CollapseSemanticSlots, styles: CollapseSemanticSlots
   ): CollapseExpandIconInfo;
-  register(item: () => CollapseItem & { key: string }, element: () => HTMLDivElement | undefined): {
-    index: number;
-    mount(): void;
-    destroy(): void;
-  };
 }
 
 const key = Symbol('ant-collapse');

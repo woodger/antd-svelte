@@ -271,7 +271,7 @@ export { default as Popover } from './Popover.svelte';
 export { default as Popconfirm } from './Popconfirm.svelte';
 export { default as Dropdown } from './Dropdown.svelte';
 export { default as Tabs } from './Tabs.svelte';
-export { default as Collapse } from './collapse.component';
+export { default as Collapse } from './Collapse.svelte';
 export { default as Drawer } from './Drawer.svelte';
 export { default as Alert } from './alert.component';
 export { default as MessageHolder } from './MessageHolder.svelte';
@@ -496,7 +496,6 @@ export type {
 } from './tabs-motion.types';
 export type {
   CollapseProps,
-  CollapsePanelProps,
   CollapseItemEvents,
   CollapseItem,
   CollapseTrigger,

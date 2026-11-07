@@ -9507,14 +9507,9 @@
         "tools/ant-design-css-recipes.json",
         "readme.md",
         "docs/reference/theme-context.md",
-        "src/lib/CollapseLegacyPanel.svelte",
         "src/lib/CollapseItemView.svelte",
-        "src/lib/collapse.component.ts",
         "src/lib/collapse-context.ts",
-        "src/lib/collapse.dom.ts",
-        "src/lib/collapse-events.engine.ts",
-        "tests/browser/collapse-panel.spec.ts",
-        "tests/browser/collapse-panel-hydration.spec.ts"
+        "src/lib/collapse-events.engine.ts"
       ],
       "features": [
         {
@@ -9531,14 +9526,14 @@
         },
         {
           "id": "source-content-config",
-          "title": "Scalar/array content, numeric/index keys, aliases и ConfigProvider.collapse",
+          "title": "Scalar/array content, numeric/index keys, ConfigProvider.collapse",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "tests/package/collapse.ssr.test.ts",
             "tests/browser/collapse-source.spec.ts"
           ],
-          "note": "Числа→строки, omitted key→index; label/children/extra scalar/array/Snippet, extra presence сохраняет 0 и пустую строку. DestroyOnHidden перед destroyInactivePanel, expandIconPlacement перед expandIconPosition. Config record replacement, context→local expandIcon Snippet; payload header/isActive/panelKey/prefix/merged slots и raw accordion/collapsible/showArrow. Payload onItemClick переключает доступную панель через native guards. Item onItemClick вызывается после root onChange; trace сравнивается с UMD."
+          "note": "Числа→строки, omitted key→index; label/children/extra scalar/array/Snippet, extra presence сохраняет 0 и пустую строку. Config record replacement, context→local expandIcon Snippet; payload header/isActive/panelKey/prefix/merged slots и raw accordion/collapsible/showArrow. Payload onItemClick переключает доступную панель через native guards. Item onItemClick вызывается после root onChange; trace сравнивается с UMD."
         },
         {
           "id": "semantic-theme",
@@ -9551,7 +9546,7 @@
             "tests/browser/fixtures/ant-design-collapse-reference.json",
             "tools/ant-design-css-recipes.json"
           ],
-          "note": "Root/header/title/body/icon object/function slots с resolved size/bordered/placement; root context slots→context style→local slots→local style, item overrides last. Header относится к native button, body к содержимому. Root/item data/ARIA, item id/class/style и rootClassName; nativeElement/ref — DOM root, cleanup при unmount. Header/content/borderless padding/Bg, aliases/algorithm, zero, cssVar prefix/key, dark/compact и 49 CSS rules. 119 UMD-сценариев, live config/theme/prefix, focus/selection/refs и callback/lifecycle traces."
+          "note": "Root/header/title/body/icon object/function slots с resolved size/bordered/placement; root context slots→context style→local slots→local style, item overrides last. Header относится к native button, body к содержимому. Root/item data/ARIA, item id/class/style и rootClassName; nativeElement/ref — DOM root, cleanup при unmount. Header/content/borderless padding/Bg, aliases/algorithm, zero, cssVar prefix/key, dark/compact и 49 CSS rules. 92 UMD-сценария, live config/theme/prefix, focus/selection/refs и callback/lifecycle traces."
         },
         {
           "id": "native-boundaries",
@@ -9564,20 +9559,7 @@
             "tests/browser/collapse.spec.ts",
             "tests/browser/collapse-source.spec.ts"
           ],
-          "note": "Group/heading/button/region вместо Rc div role=button/tab, Space и full button hit area; independent extra не переключает панель. Native ARIA links, focus repair, first duplicate, binding и empty locale сохраняются. Source CSS метрики header сравниваются с native button; private structure, icon height/rotation/SVG исключены явно. Empty custom Snippet сохраняет wrapper, внутренний RenderContent не инспектирует DOM. Legacy composition отслеживает DOM moves/removal через observer, чтобы сохранять focus anchor при изменениях Snippet без parent items; явный blur и внешний фокус не возвращаются внутрь."
-        },
-        {
-          "id": "legacy-panel",
-          "title": "Deprecated Collapse.Panel и children composition",
-          "state": "partial",
-          "requiredForV1": false,
-          "evidence": [
-            "src/lib/CollapseLegacyPanel.svelte",
-            "tests/package/collapse.ssr.test.ts",
-            "tests/browser/collapse-panel.spec.ts",
-            "tests/browser/collapse-panel-hydration.spec.ts"
-          ],
-          "note": "Collapse.Panel compound component с SSR direct children, items precedence (включая []), context prefix/slots, no-arrow class и исходным undefined showArrow. Panel key change пересоздаёт DOM и refs; nested contexts, retain/destroy/force, reorder/focus/selection/cleanup и hydration сохранены. Стабильные явные keys повторяют источник; implicit keys считают initial Panel instances, смешанные DOM siblings и динамический React child cloning/reconciliation остаются Snippet boundary. Без accordion legacy panels не создают region; items сохраняет прежний лимит landmarks."
+          "note": "Group/heading/button/region вместо Rc div role=button/tab, Space и full button hit area; independent extra не переключает панель. Native ARIA links, focus repair, first duplicate, binding и empty locale сохраняются. Source CSS метрики header сравниваются с native button; private structure, icon height/rotation/SVG исключены явно. Empty custom Snippet сохраняет wrapper, внутренний RenderContent не инспектирует DOM."
         },
         {
           "id": "motion",
@@ -9608,7 +9590,7 @@
             "tests/package/collapse.ssr.test.ts",
             "tests/browser/collapse-source.spec.ts"
           ],
-          "note": "HeaderClass, HTML attributes, camelCase/capture aliases поверх native Svelte delegated events. Callback item.ref node/null, замена callback и стабильность при label update; SSR не вызывает refs. Native currentTarget и click/capture/bubble/stop/prevent/focus/key/mouse traces совпадают с изученными Source сценариями. React SyntheticEvent/input change normalization и RefObject не создаются; keyboard activation остаётся native button, refs используют post-DOM lifecycle Svelte. Panel использует bind:ref/nativeElement."
+          "note": "HeaderClass, HTML attributes, camelCase/capture aliases поверх native Svelte delegated events. Callback item.ref node/null, замена callback и стабильность при label update; SSR не вызывает refs. Native currentTarget и click/capture/bubble/stop/prevent/focus/key/mouse traces совпадают с изученными Source сценариями. React SyntheticEvent/input change normalization и RefObject не создаются; keyboard activation остаётся native button, refs используют post-DOM lifecycle Svelte."
         }
       ]
     },

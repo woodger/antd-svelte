@@ -72,25 +72,9 @@ export interface CollapseConfig extends Pick<
   CollapseProps, 'class' | 'style' | 'expandIcon' | 'classNames' | 'styles'
 > {}
 
-/** Deprecated children composition; items родителя имеют приоритет над Panel. */
-export interface CollapsePanelProps extends Omit<
-  CollapseItem, 'key' | 'label' | 'classNames' | 'styles' | 'ref'
-> {
-  /** Стабильный ключ; без него начальный индекс считает только Panel instances. */
-  key?: string | number;
-  header?: CollapseContent;
-  /** Внутри Collapse используется prefix родителя. */
-  prefixCls?: string;
-  /** Bind:nativeElement/ref получают обёртку панели; очищаются при unmount. */
-  nativeElement?: HTMLDivElement;
-  ref?: HTMLDivElement;
-}
-
 /** Независимые раскрываемые панели или accordion с управлением activeKey. */
 export interface CollapseProps {
   items?: readonly CollapseItem[];
-  /** Legacy Collapse.Panel composition; явный items (включая []) перекрывает children. */
-  children?: Snippet;
   /** Поддерживает bind:activeKey; числа сравниваются по строковому представлению. */
   activeKey?: CollapseActiveKey | undefined;
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */
@@ -102,8 +86,6 @@ export interface CollapseProps {
   collapsible?: CollapseTrigger;
   /** @defaultValue 'start' */
   expandIconPlacement?: 'start' | 'end';
-  /** @deprecated Используйте expandIconPlacement. */
-  expandIconPosition?: 'start' | 'end';
   /** Локальный Snippet приоритетнее ConfigProvider.collapse.expandIcon. */
   expandIcon?: Snippet<[CollapseExpandIconInfo]>;
   size?: ComponentSize;
@@ -111,10 +93,8 @@ export interface CollapseProps {
   bordered?: boolean;
   /** @defaultValue false */
   ghost?: boolean;
-  /** Приоритетнее destroyInactivePanel; forceRender item сохраняет содержимое. */
+  /** Удаляет скрытое содержимое; forceRender item сохраняет его. */
   destroyOnHidden?: boolean;
-  /** @deprecated Используйте destroyOnHidden. */
-  destroyInactivePanel?: boolean;
   /** @defaultValue 3 */
   headingLevel?: 2 | 3 | 4 | 5 | 6;
   id?: string;

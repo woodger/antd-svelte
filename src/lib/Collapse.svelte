@@ -5,7 +5,6 @@
   import { getCollapsePrefixCss } from './collapse-prefix.engine';
   import CollapseItemView from './CollapseItemView.svelte';
   import { provideCollapse } from './collapse-context';
-  import { retainCollapseFocus } from './collapse.dom';
   import { useConfig } from './config-context';
   import {
     getCollapseFocusKey,
@@ -26,19 +25,16 @@
   }: CollapseProps = $props();
   let {
     items: sourceItems,
-    children,
     defaultActiveKey,
     onChange,
     accordion = false,
     collapsible = 'header',
     expandIconPlacement,
-    expandIconPosition,
     expandIcon,
     size,
     bordered = true,
     ghost = false,
     destroyOnHidden,
-    destroyInactivePanel,
     headingLevel = 3,
     id,
     'aria-label': ariaLabel,
@@ -62,8 +58,8 @@
   let active = true;
   let prefix = $derived(prefixCls || 'ant-collapse');
   let prefixCss = $derived(getCollapsePrefixCss(prefix));
-  let placement = $derived(expandIconPlacement ?? expandIconPosition ?? 'start');
-  let rootDestroy = $derived(destroyOnHidden ?? destroyInactivePanel ?? false);
+  let placement = $derived(expandIconPlacement ?? 'start');
+  let rootDestroy = $derived(destroyOnHidden ?? false);
   let resolvedExpandIcon = $derived(expandIcon ?? config.collapse?.expandIcon);
   let attributes = $derived(Object.fromEntries(Object.entries(props).filter(([name]) =>
     name.startsWith('aria-') || name.startsWith('data-')
@@ -93,23 +89,10 @@
     return { classes, styles: slots };
   });
   let rootId = $derived(id ?? `ant-collapse-${generatedId}`);
-  let members = $state.raw(new Map<symbol, {
-    item: () => CollapseItem & { key: string };
-    element: () => HTMLDivElement | undefined;
-  }>());
-  let nextIndex = 0;
-  let legacy = $derived(!Array.isArray(sourceItems) && Boolean(children));
   let items = $derived(normalizeCollapseItems(sourceItems ?? []));
-  let focusedItems = $derived.by(() => {
-    if (!legacy) return items;
-    const positions = Array.from(root?.children ?? []);
-    return [...members.values()].sort((left, right) =>
-      positions.indexOf(left.element()!) - positions.indexOf(right.element()!)
-    ).map(member => member.item());
-  });
   let openKeys = $derived(getCollapseKeys(activeKey ?? initialDefault, accordion));
   let resolvedSize = $derived(size ?? config.componentSize);
-  let region = $derived(accordion || !legacy && items.length <= 6);
+  let region = $derived(accordion || items.length <= 6);
 
   provideCollapse({
     get prefix() { return prefix; },
@@ -124,34 +107,12 @@
     get expandIcon() { return resolvedExpandIcon; },
     itemId,
     toggle,
-    iconInfo: expandIconInfo,
-    register(item, element) {
-      const id = Symbol();
-      const index = nextIndex++;
-      // SSR выводится напрямую: registry нужен только для client focus и toggle lookup.
-      untrack(() => members.set(id, { item, element }));
-      let mounted = false;
-      return {
-        index,
-        mount() {
-          mounted = true;
-          members = new Map(untrack(() => members));
-        },
-        destroy() {
-          untrack(() => {
-            members.delete(id);
-            if (mounted) members = new Map(members);
-          });
-        }
-      };
-    }
+    iconInfo: expandIconInfo
   });
-
-  $effect(() => legacy && root ? retainCollapseFocus(root) : undefined);
 
   $effect.pre(() => {
     const container = root;
-    const current = focusedItems;
+    const current = items;
     const open = openKeys;
     const modes = current.map((item) => getCollapseTrigger(item, collapsible));
     repairFocus = false;
@@ -203,7 +164,7 @@
 
   $effect(() => {
     const container = root;
-    const target = getCollapseFocusKey(focusedItems, repairKey, openKeys, collapsible);
+    const target = getCollapseFocusKey(items, repairKey, openKeys, collapsible);
     const previous = retainedFocus;
     retainedFocus = undefined;
     if (!container) return;
@@ -272,7 +233,7 @@
   }
 
   function toggle(key: string, event?: MouseEvent, sourceItem?: CollapseItem) {
-    const item = focusedItems.find((entry) => entry.key === key);
+    const item = items.find((entry) => entry.key === key);
     if (!active
       || event?.defaultPrevented
       || !item
@@ -304,8 +265,7 @@
     config.direction === 'rtl' && `${prefix}-rtl`, config.collapse?.class, className,
     rootClassName, semantics.classes.root, componentTheme.className
   ]} style={[componentTheme.style, semantics.styles.root].filter(Boolean).join(';') || undefined}>
-  {#if legacy}{@render children?.()}
-  {:else}{#each items as item (item.key)}
+  {#each items as item (item.key)}
     <CollapseItemView {item} />
-  {:else}<div class="ant-collapse-empty">{config.locale.emptyText}</div>{/each}{/if}
+  {:else}<div class="ant-collapse-empty">{config.locale.emptyText}</div>{/each}
 </div>

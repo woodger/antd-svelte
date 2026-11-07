@@ -9,6 +9,9 @@
 
 ### Removed
 
+- Удалены deprecated `Collapse.Panel`, композиция через `children`,
+  `expandIconPosition` и `destroyInactivePanel`; актуальный `items` сохранён.
+
 - Deprecated List/ListItem/ListItemMeta, их types/config/tokens, CSS-рецепт,
   отдельные tests/fixtures и List-ветка renderEmpty. Актуальный Listy сохранён;
   общий reset ссылок ограничен Listy и сверяется с его собственным UMD.

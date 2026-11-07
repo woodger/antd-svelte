@@ -3,8 +3,6 @@
 
   export interface CollapseSourceSample {
     name: string;
-    legacy?: boolean;
-    panels?: readonly CollapseItem[];
     events?: 'click' | 'capture' | 'stop' | 'prevent' | 'focus' | 'key' | 'mouse';
     refs?: boolean;
     props: CollapseProps;
@@ -98,7 +96,6 @@
       } : {})
     };
   }
-  let panelItems = $derived((sample.panels ?? []).map(itemEvents));
   let frameAttributes = $derived(sample.events ? {
     onclick: () => events = [...events, 'frame-click']
   } : {});
@@ -106,7 +103,6 @@
     ...sample.props,
     items: sample.rich ? [{ key: 1, label: richTitle, children: richBody, extra: actions }]
       : sample.props.items?.map(itemEvents),
-    ...(sample.legacy ? { children: panels } : {}),
     ...(sample.semantic === 'object' ? { classNames: classes, styles } : {}),
     ...(sample.semantic === 'function' ? {
       classNames: info => ({ ...classes, root: `local-root ${flag(info)}` }),
@@ -137,11 +133,6 @@
   });
 </script>
 
-{#snippet panels()}
-  {#each panelItems as item, index (item.key ?? index)}
-    <Collapse.Panel {...item} ref={undefined} header={item.label} />
-  {/each}
-{/snippet}
 {#snippet eventDraft()}<input aria-label="Event draft" defaultValue="Draft" />{/snippet}
 {#snippet richTitle()}<strong>Rich title</strong>{/snippet}
 {#snippet richBody()}<em>Rich body</em><input

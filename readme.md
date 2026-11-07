@@ -3345,8 +3345,7 @@ extra и поля обходятся обычным Tab; стрелки не п�
 Содержимое впервые монтируется при открытии и по умолчанию сохраняет локальный
 state и DOM-черновики в скрытой панели. DestroyOnHidden=true удаляет содержимое
 при закрытии; отключение этой настройки не монтирует уже уничтоженную панель.
-Значение item переопределяет общее, включая false. Legacy destroyInactivePanel
-используется, если destroyOnHidden не задан. ForceRender=true монтирует
+Значение item переопределяет общее, включая false. ForceRender=true монтирует
 содержимое сразу и сохраняет его даже с destroyOnHidden. Удаление key уничтожает
 панель; состояние вне неё сохраняется. Скрытые сохранённые панели остаются в DOM,
 их таймеры и подписки продолжают работать. Поля посещённых/forceRender-панелей
@@ -3357,8 +3356,7 @@ state и DOM-черновики в скрытой панели. DestroyOnHidden=
 Size использует small/middle/large и ConfigProvider.componentSize. Bordered=false
 убирает внешнюю рамку, ghost — фон и разделители. ExpandIconPlacement задаёт
 start/end относительно кнопки заголовка и направления RTL; extra остаётся
-отдельным элементом после заголовка. Legacy expandIconPosition используется,
-если expandIconPlacement не задан. ExpandIcon — Snippet с данными панели:
+отдельным элементом после заголовка. ExpandIcon — Snippet с данными панели:
 isActive, header, panelKey, prefixCls, исходными showArrow/collapsible/accordion
 и объединёнными item slots. Его onItemClick переключает доступную панель и вызывает
 root/item callbacks. Пользовательская стрелка не поворачивается автоматически.
@@ -3384,29 +3382,6 @@ component algorithm, cssVar prefix/key, dark и compact используют о�
 Галерея `/ant-design#collapse` показывает анкету, вложенные панели, сохранение
 черновиков, destroyOnHidden и независимую кнопку сброса в extra. Сброс примера
 пересоздаёт поля с исходными значениями, сохраняя открытые внешние панели.
-Legacy composition поддержана через тот же native renderer:
-
-```svelte
-<Collapse defaultActiveKey={['profile']}>
-  <Collapse.Panel key="profile" header="Профиль">
-    <input aria-label="Имя" defaultValue="Анна" />
-  </Collapse.Panel>
-</Collapse>
-```
-
-Явный items, включая [], имеет приоритет над children. Панели рендерятся при SSR
-сразу; регистрация и effects не определяют их наличие. Родитель задаёт prefix,
-semantic slots, activeKey, accordion, destroyOnHidden и стрелку. ShowArrow=false
-добавляет legacy no-arrow class; исходный undefined в expandIcon payload сохраняется.
-Bind:nativeElement/ref относятся к обёртке Panel. Смена key пересоздаёт её DOM и поля.
-Legacy без accordion не добавляет region; items сохраняет прежний предел landmarks.
-
-Для перестановки/вставки используйте явные стабильные key. Без key или с пустым
-legacy key начальный индекс считает только Panel instances. Snippet непрозрачен:
-смешанные DOM siblings и динамические implicit indexes не повторяют React child
-cloning/reconciliation. Body Snippets, nested Collapse, retain/destroy/force,
-перестановка, удаление, фокус и живая смена config/theme/prefix проверены отдельно.
-
 Item поддерживает headerClass, HTML attributes, native lowercase events и camelCase
 aliases (включая Capture). Click/capture/bubble/stopPropagation/preventDefault,
 focus/blur, key и mouse traces сверяются с оригиналом. События остаются native DOM:
@@ -3414,7 +3389,7 @@ React SyntheticEvent и его input/change normalization не создаютс�
 сохраняют порядок активации нативной кнопки, включая возможность отменить default.
 Item.ref — callback с node после mount и null при замене ref или unmount; стабильный
 callback не вызывается повторно из-за label updates. Он использует post-DOM lifecycle
-Svelte; React RefObject не мутируется. Panel использует bind:ref вместо callback.
+Svelte; React RefObject не мутируется.
 
 React-анимация высоты пока не перенесена. Native group, heading/button/region,
 ARIA-связи, Space, full button hit area, независимость extra, focus recovery
