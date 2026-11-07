@@ -9,6 +9,10 @@
 
 ### Added
 
+- Select: локальные outlined/filled/borderless/underlined и legacy bordered=false
+  с исходным приоритетом explicit variant. Смена оформления сохраняет поиск,
+  focus/selection, DOM и FormData; single/multiple сверены с официальным UMD 6.6.8.
+
 - TableColumn.hidden: видимые col/header/body cells и fixed offsets обновляются
   без сброса sort/filter. Полностью скрытые данные сохраняют selection/expand
   либо исходную пустую колонку; соседние editors и expanded content сохраняются.

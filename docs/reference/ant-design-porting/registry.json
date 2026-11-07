@@ -5826,7 +5826,13 @@
         "tests/browser/fixtures/SelectContainerFixtures.svelte",
         "tests/browser/select-container.spec.ts",
         "tests/package/select-container.ssr.test.ts",
-        "tests/browser/fixtures/InputSelectFixtures.svelte"
+        "tests/browser/fixtures/InputSelectFixtures.svelte",
+        "src/lib/select.types.ts",
+        "tests/browser/fixtures/SelectVariantsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-variants-reference.json",
+        "tests/browser/select-variants-metrics.ts",
+        "tests/browser/select-variants.spec.ts",
+        "tests/package/select-variants.ssr.test.ts"
       ],
       "features": [
         {
@@ -5903,6 +5909,22 @@
           "note": "Без Compact сохраняется существующее поведение; общий подробный аудит семейства ещё не завершён."
         },
         {
+          "id": "local-variants",
+          "title": "Локальные варианты оформления и legacy bordered",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Select.svelte",
+            "src/lib/select.types.ts",
+            "tests/browser/fixtures/SelectVariantsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-variants-reference.json",
+            "tests/browser/select-variants-metrics.ts",
+            "tests/browser/select-variants.spec.ts",
+            "tests/package/select-variants.ssr.test.ts"
+          ],
+          "note": "Outlined/filled/borderless/underlined в single и multiple; explicit variant перекрывает bordered=false, без них outlined. Существующие vendor rules и Select token scopes сохранены. Root classes/computed background, borders, shadow и radius сверены с неизменённым UMD 6.6.8: default/legacy/explicit priority, focus, disabled/status, RTL/dark/compact. Обновления сохраняют root/input DOM, query, selection/focus, открытый список, FormData и callbacks. Global ConfigProvider.variant/Form.variant и component config Select остаются в работе."
+        },
+        {
           "id": "select-theme-tokens",
           "title": "Source Select token preparation и CSS consumption",
           "state": "supported",
@@ -5919,7 +5941,7 @@
             "tests/browser/fixtures/ant-design-select-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/variants/semantic config, virtualization и motion остаются в работе. AutoComplete, TreeSelect и Cascader получают общий Select token scope."
+          "note": "Исходные defaults/final overrides, component algorithms, aliases, zero/undefined, unitless optionLineHeight/optionSelectedFontWeight/zIndexPopup и custom prefix. Подключены selector/dropdown scopes, multiple tag/input metrics, option flex layout, arrow/clear и active focus styles; SSR и смена темы сохраняют DOM, поиск/выделение/фокус, callbacks и FormData. Полные declarations и computed metrics для 16 настроек официального UMD; single/multiple трёх размеров, disabled, options и пустая выдача. Native-only оформление и прежний API сохранены. Это не полный rc-select API: остальные props/semantic config, virtualization и motion остаются в работе. AutoComplete, TreeSelect и Cascader получают общий Select token scope."
         },
         {
           "id": "popup-container",

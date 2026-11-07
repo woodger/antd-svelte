@@ -26,6 +26,8 @@
     defaultValue,
     value = $bindable<SelectProps<Value, Mode>['value']>(),
     size,
+    variant,
+    bordered,
     showSearch,
     searchValue,
     onSearch,
@@ -56,6 +58,7 @@
   const componentTheme = useComponentTheme('Select');
   const compact = useCompact();
   const field = useFormField();
+  let appearance = $derived(variant ?? (bordered === false ? 'borderless' : 'outlined'));
   const generatedId = $props.id();
   const initialDefault = untrack(
     () => Array.isArray(defaultValue) ? [...defaultValue] : defaultValue
@@ -515,7 +518,9 @@
     role="presentation"
     onpointerdown={handlePointerDown}
     class={[
-        'ant-select ant-select-css-var ant-select-outlined ant-select-show-arrow',
+        'ant-select ant-select-css-var',
+        `ant-select-${appearance}`,
+        'ant-select-show-arrow',
         componentTheme.className && 'ant-select-source-theme',
         componentTheme.className && canSearch && 'ant-select-show-search',
         componentTheme.className && allowClear && 'ant-select-allow-clear',

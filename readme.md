@@ -8255,6 +8255,14 @@ aliases пока отсутствуют. Generic numeric/object values не вх
 `SelectProps<Value, 'multiple'>` — множественный. При использовании компонента
 типы значений и callback выводятся из options и mode.
 
+Variant поддерживает outlined/filled/borderless/underlined в single и multiple;
+по умолчанию outlined. Явный variant имеет приоритет над legacy bordered=false,
+который без variant выбирает borderless. Смена оформления сохраняет DOM,
+поисковый текст, выделение, фокус и выбранные значения формы. Классы и computed
+styles сверены с официальным UMD 6.6.8 в
+[браузерных проверках](./tests/browser/select-variants.spec.ts).
+ConfigProvider.variant, Form.variant и component config Select пока не перенесены.
+
 ```svelte
 <script lang="ts">
   import { Select } from 'antd-svelte';
