@@ -1,8 +1,5 @@
-import type { TooltipProps } from 'antd-svelte';
-
 export interface OverlayLifecycleOptions {
   destroyOnHidden?: boolean;
-  destroyTooltipOnHide?: TooltipProps['destroyTooltipOnHide'];
 }
 
 export interface OverlayLifecycleCase {

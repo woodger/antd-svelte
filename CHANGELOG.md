@@ -13,6 +13,11 @@
   Cascader, AutoComplete и date/time pickers. Оформление задаётся через variant;
   приоритет local → Form → component/fallback → global сохранён.
 
+- Удалены destroyTooltipOnHide, getTooltipContainer и overlayClassName/Style/InnerStyle
+  из Tooltip, Popover и Popconfirm и их consumers, включая Slider, Typography,
+  AvatarGroup и ColorPicker. Сохранены destroyOnHidden, getPopupContainer
+  и текущие semantic styles.
+
 - Удалены deprecated component token aliases Button, Menu, Layout, Skeleton,
   Steps, Carousel, Splitter и Popover, seed pink, controlTmpOutline и старые
   ключи палитр blue-1. Сохранены текущие tokens, UI preset pink и CSS-палитры.

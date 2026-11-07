@@ -121,7 +121,7 @@ test('Popconfirm releases destroyed pending controls and ignores the old result 
 });
 
 for (const mode of ['single', 'range']) {
-  for (const name of ['default', 'destroy', 'modern-keep']) {
+  for (const name of ['default', 'destroy', 'keep']) {
     test(`Slider ${mode} Tooltip follows the source content policy for ${name}`, async ({ page }) => {
       const sample = reference.cases.find(sample => sample.name === `tooltip-${name}`)!;
       await select(page, sample.name);

@@ -53,8 +53,6 @@ export interface ColorPickerProps extends Omit<HTMLButtonAttributes,
   autoAdjustOverflow?: boolean | { adjustX?: 0 | 1; adjustY?: 0 | 1; };
   /** По умолчанию скрытая панель сохраняет состояние; true уничтожает её при закрытии. */
   destroyOnHidden?: boolean;
-  /** @deprecated Используйте destroyOnHidden. */
-  destroyTooltipOnHide?: boolean;
   /**
    * Локальная функция перекрывает ConfigProvider; undefined сохраняет provider fallback.
    * До первого открытия не вызывается; после destroyOnHidden снова ждёт открытия.

@@ -11,7 +11,8 @@
       "trigger": "3.10.1",
       "util": "1.14.0"
     },
-    "operation": "Public Tooltip disabled raw open/event/delay lifecycle, forceRender with destroyOnHidden/portal/fresh, reactive id fallback/ARIA, explicit zero/negative/reactive zIndex and root style priority. Motion disabled and clock advanced by 100ms after each frame. Native eager retained shell, SSR and persistent description boundaries are compared separately; shared source zIndex context is outside these scalar prop cases."
+    "operation": "Public Tooltip disabled raw open/event/delay lifecycle, forceRender with destroyOnHidden/portal/fresh, reactive id fallback/ARIA, explicit zero/negative/reactive zIndex and root style priority. Motion disabled and clock advanced by 100ms after each frame. Native eager retained shell, SSR and persistent description boundaries are compared separately; shared source zIndex context is outside these scalar prop cases.",
+    "currentApiScope": "Z-index precedence starts at the existing measured Source frame with current semantic styles; the retired overlay style step and its input fields are removed. Measured snapshots are retained."
   },
   "cases": [
     {
@@ -3912,39 +3913,7 @@
             "trigger": [],
             "zIndex": 1234,
             "providerZIndex": 1300,
-            "rootZIndex": 1400,
-            "overlayZIndex": 1500
-          },
-          "snapshot": {
-            "visible": true,
-            "contentMounted": true,
-            "text": "Lifecycle content",
-            "id": "<generated>",
-            "openClass": true,
-            "described": true,
-            "existingDescription": true,
-            "zIndex": "1500",
-            "inlineZIndex": "1500",
-            "portal": false,
-            "getterUsed": false,
-            "events": []
-          }
-        },
-        {
-          "action": {
-            "kind": "props",
-            "props": {
-              "overlayZIndex": null
-            }
-          },
-          "props": {
-            "title": "Lifecycle content",
-            "open": true,
-            "trigger": [],
-            "zIndex": 1234,
-            "providerZIndex": 1300,
-            "rootZIndex": 1400,
-            "overlayZIndex": null
+            "rootZIndex": 1400
           },
           "snapshot": {
             "visible": true,
@@ -3974,8 +3943,7 @@
             "trigger": [],
             "zIndex": 1234,
             "providerZIndex": 1300,
-            "rootZIndex": null,
-            "overlayZIndex": null
+            "rootZIndex": null
           },
           "snapshot": {
             "visible": true,
@@ -4005,8 +3973,7 @@
             "trigger": [],
             "zIndex": 1234,
             "providerZIndex": null,
-            "rootZIndex": null,
-            "overlayZIndex": null
+            "rootZIndex": null
           },
           "snapshot": {
             "visible": true,
@@ -4036,8 +4003,7 @@
             "trigger": [],
             "zIndex": 0,
             "providerZIndex": null,
-            "rootZIndex": null,
-            "overlayZIndex": null
+            "rootZIndex": null
           },
           "snapshot": {
             "visible": true,
@@ -4067,8 +4033,7 @@
             "trigger": [],
             "zIndex": null,
             "providerZIndex": null,
-            "rootZIndex": null,
-            "overlayZIndex": null
+            "rootZIndex": null
           },
           "snapshot": {
             "visible": true,

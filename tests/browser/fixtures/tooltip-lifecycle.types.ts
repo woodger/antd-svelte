@@ -18,7 +18,6 @@ export interface TooltipLifecycleOptions {
   id?: string | null;
   zIndex?: number | null;
   rootZIndex?: number | null;
-  overlayZIndex?: number | null;
   providerZIndex?: number | null;
   tokenZIndex?: number;
   portal?: boolean;

@@ -625,11 +625,10 @@
     builtinPlacements={tooltip === false ? undefined : tooltip?.builtinPlacements}
     onPopupAlign={tooltip === false ? undefined : tooltip?.onPopupAlign}
     destroyOnHidden={tooltip === false ? undefined : tooltip?.destroyOnHidden}
-    destroyTooltipOnHide={tooltip === false ? undefined : tooltip?.destroyTooltipOnHide}
     autoAdjustOverflow={tooltip === false ? undefined : tooltip?.autoAdjustOverflow}
     getPopupContainer={(tooltip === false ? undefined : tooltip?.getPopupContainer)
       || config.getPopupContainer}
-    getTooltipContainer={tooltip === false ? undefined : tooltip?.getTooltipContainer} onDismiss={() => {
+    onDismiss={() => {
       tooltipState = { ...tooltipState, dismissed: true };
     }} onHoverChange={(next) => {
         popupHovered = next;

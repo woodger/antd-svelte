@@ -130,10 +130,7 @@ describe('Popover server rendering', () => {
   });
 
   it.each([
-    { destroyOnHidden: true },
-    { destroyTooltipOnHide: true },
-    { destroyTooltipOnHide: { keepParent: false } },
-    { destroyOnHidden: true, destroyTooltipOnHide: false }
+    { destroyOnHidden: true }
   ])('defers disposable snippets until hydration for %j', options => {
     const content = createRawSnippet(() => ({
       render: () => { throw new Error('Unexpected SSR content'); }
@@ -148,8 +145,7 @@ describe('Popover server rendering', () => {
   });
 
   it.each([
-    { destroyOnHidden: false, destroyTooltipOnHide: true },
-    { destroyTooltipOnHide: false }
+    { destroyOnHidden: false }
   ])('retains the existing eager SSR content for %j', options => {
     const { body } = render(Popover, {
       props: { children, title: 'Retained title', content: 'Retained body', ...options }

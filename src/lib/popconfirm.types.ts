@@ -63,13 +63,8 @@ export interface PopconfirmProps {
   forceRender?: boolean;
   /** Обновляет скрытое содержимое и semantic styles; по умолчанию false. */
   fresh?: boolean;
-  /** Передаётся Popover перед semantic/legacy root styles. */
+  /** Передаётся Popover перед semantic root styles. */
   zIndex?: number;
-  /**
-   * Явный destroyOnHidden приоритетнее, включая false; keepParent не меняет удаление.
-   * @deprecated Используйте destroyOnHidden.
-   */
-  destroyTooltipOnHide?: boolean | { keepParent?: boolean };
   disabled?: boolean;
   /** @defaultValue true */
   showCancel?: boolean;
@@ -104,10 +99,8 @@ export interface PopconfirmProps {
   mouseLeaveDelay?: number;
   /** @defaultValue true */
   autoAdjustOverflow?: boolean | AdjustOverflow;
-  /** Передаётся Popover: локальная функция → legacy getter → ConfigProvider. */
+  /** Передаётся Popover: локальная функция → ConfigProvider. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
-  /** @deprecated Используйте getPopupContainer. */
-  getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
   onOpenChange?: (open: boolean) => void;
   /** Promise удерживает loading; rejection сохраняет возможность повтора. */
   onConfirm?: (event: MouseEvent) => void | PromiseLike<unknown>;
@@ -118,10 +111,4 @@ export interface PopconfirmProps {
   rootClassName?: string;
   classNames?: PopconfirmSemantic;
   styles?: PopconfirmSemantic;
-  /** @deprecated Используйте classNames.root. */
-  overlayClassName?: string;
-  /** @deprecated Используйте styles.root. */
-  overlayStyle?: string;
-  /** @deprecated Используйте styles.container. */
-  overlayInnerStyle?: string;
 }

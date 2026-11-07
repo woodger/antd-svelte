@@ -30,7 +30,6 @@
     mouseEnterDelay,
     mouseLeaveDelay,
     getPopupContainer,
-    getTooltipContainer,
     class: className = '',
     style
   } = $derived(props);
@@ -258,7 +257,7 @@
   .ant-tooltip-trigger { display: inline-block; max-width: 100%; vertical-align: middle; }
 </style>
 
-<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu} ontouchstart={handleTouchStart}>{@render children()}</span><NoCompactStyle><TooltipPopup bind:this={popupController} title={content} color={props.color} prefixCls={props.prefixCls} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
+<span bind:this={host} role="presentation" class={['ant-tooltip-trigger', className]} {style} onpointerenter={handleEnter} onpointerleave={handleLeave} onfocusin={handleFocus} onfocusout={handleBlur} onclick={handleClick} oncontextmenu={handleContextMenu} ontouchstart={handleTouchStart}>{@render children()}</span><NoCompactStyle><TooltipPopup bind:this={popupController} title={content} color={props.color} prefixCls={props.prefixCls} open={visible} {anchor} describe={anchor} trigger={host} {placement} {arrow} {autoAdjustOverflow} {getPopupContainer}
   outsideEvents={actionOverrides ? 'mouse' : undefined}
   semanticProps={{ ...props, open: providedOpen, trigger: resolvedTrigger,
     mouseEnterDelay: enterDelay, mouseLeaveDelay: leaveDelay }}

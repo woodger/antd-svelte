@@ -38,7 +38,6 @@
     ...('destroyOnHidden' in options ? { destroyOnHidden: options.destroyOnHidden } : {}),
     getPopupContainer: options.portal ? getContainer : undefined,
     onOpenChange: recordOpen,
-    overlayStyle: options.overlayZIndex == null ? undefined : `z-index:${options.overlayZIndex}`,
     styles: {
       root: options.rootZIndex == null ? undefined : `z-index:${options.rootZIndex}`,
       container: options.containerPadding == null ? undefined : `padding:${options.containerPadding}px`,

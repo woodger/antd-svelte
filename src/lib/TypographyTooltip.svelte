@@ -243,7 +243,7 @@
       }}
       placement={options.placement} arrow={options.arrow} autoAdjustOverflow={options.autoAdjustOverflow}
       outsideEvents={actionOverrides ? 'mouse' : undefined}
-      getPopupContainer={options.getPopupContainer} getTooltipContainer={options.getTooltipContainer}
+      getPopupContainer={options.getPopupContainer}
       onDismiss={reason => dismiss(reason)} onHoverChange={value => hoverPopup(value)} />
   </NoCompactStyle>
 {/if}

@@ -22,7 +22,6 @@
       id,
       zIndex,
       rootZIndex,
-      overlayZIndex,
       providerZIndex,
       tokenZIndex,
       portal,
@@ -36,8 +35,7 @@
       hideAction: hideAction ?? undefined,
       id: existingId ? 'existing-description' : id ?? undefined,
       zIndex: zIndex ?? undefined,
-      styles: rootZIndex == null ? undefined : { root: `z-index:${rootZIndex}` },
-      overlayStyle: overlayZIndex == null ? undefined : `z-index:${overlayZIndex}`
+      styles: rootZIndex == null ? undefined : { root: `z-index:${rootZIndex}` }
     };
   });
 

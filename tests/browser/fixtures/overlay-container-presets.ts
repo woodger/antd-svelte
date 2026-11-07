@@ -5,7 +5,6 @@ export interface OverlayContainerCase {
   parent?: 'none' | 'parent' | 'shadow';
   child?: 'undefined' | 'child';
   local?: 'undefined' | 'local';
-  legacy?: boolean;
   tooltip?: 'undefined' | 'tooltip';
   svg?: boolean;
   resetTheme?: boolean;

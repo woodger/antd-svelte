@@ -7,7 +7,7 @@ export function snapshotOverlayConfig(component: string) {
     if (!node) return null;
     const style = getComputedStyle(node);
     return {
-      classes: [...node.classList].filter(name => /^(ctx-|local-|legacy-|outer-|inner-|cb-)/.test(name)).sort(),
+      classes: [...node.classList].filter(name => /^(ctx-|local-|outer-|inner-|cb-)/.test(name)).sort(),
       color: style.color,
       background: style.backgroundColor,
       opacity: style.opacity,

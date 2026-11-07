@@ -81,13 +81,8 @@ export interface PopoverProps {
   forceRender?: boolean;
   /** Обновляет скрытые title/content и semantic styles; по умолчанию false. */
   fresh?: boolean;
-  /** Явный z-index; semantic root и legacy overlayStyle имеют приоритет. */
+  /** Явный z-index; semantic root styles имеют приоритет. */
   zIndex?: number;
-  /**
-   * Современный destroyOnHidden имеет приоритет, включая false.
-   * @deprecated Используйте destroyOnHidden; keepParent не меняет результат.
-   */
-  destroyTooltipOnHide?: boolean | { keepParent?: boolean };
   /** Базовые события; [] отключает их без отдельных showAction/hideAction. */
   trigger?: PopoverTrigger | readonly PopoverTrigger[];
   /** Заменяет события открытия; undefined использует trigger, [] отключает их. */
@@ -114,10 +109,8 @@ export interface PopoverProps {
   mouseEnterDelay?: number;
   /** Задержка закрытия в секундах. */
   mouseLeaveDelay?: number;
-  /** Локальная функция → legacy getTooltipContainer → ConfigProvider. */
+  /** Локальная функция → ConfigProvider. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
-  /** @deprecated Используйте getPopupContainer. Undefined сохраняет provider fallback. */
-  getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
   'aria-label'?: string;
   'aria-labelledby'?: string;
   'aria-describedby'?: string;
@@ -128,10 +121,4 @@ export interface PopoverProps {
   rootClassName?: string;
   classNames?: PopoverSemantic;
   styles?: PopoverSemantic;
-  /** @deprecated Используйте classNames.root. */
-  overlayClassName?: string;
-  /** @deprecated Используйте styles.root. */
-  overlayStyle?: string;
-  /** @deprecated Используйте styles.container. */
-  overlayInnerStyle?: string;
 }

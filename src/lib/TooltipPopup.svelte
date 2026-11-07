@@ -40,7 +40,6 @@
     prefixCls,
     openClassName,
     destroyOnHidden,
-    destroyTooltipOnHide,
     fresh,
     open: rawOpen,
     id: providedId,
@@ -57,7 +56,6 @@
     arrow,
     autoAdjustOverflow = true,
     getPopupContainer,
-    getTooltipContainer,
     semanticProps,
     ownerClassName,
     outsideEvents,
@@ -70,7 +68,6 @@
     prefixCls?: string;
     openClassName?: string;
     destroyOnHidden?: boolean;
-    destroyTooltipOnHide?: TooltipProps['destroyTooltipOnHide'];
     fresh?: boolean;
     open: boolean;
     id?: string;
@@ -87,7 +84,6 @@
     arrow?: TooltipArrow;
     autoAdjustOverflow?: boolean | AdjustOverflow;
     getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
-    getTooltipContainer?: (trigger: HTMLElement) => HTMLElement;
     semanticProps?: Omit<TooltipProps, 'children'>;
     ownerClassName?: string;
     outsideEvents?: 'pointer' | 'mouse';
@@ -118,8 +114,7 @@
   let arrowConfig = $derived(getTooltipArrow(arrow, config.tooltip?.arrow));
   let sourcePlacement = $derived(Boolean(config.tooltip) || typeof arrow === 'object'
     || typeof autoAdjustOverflow === 'object' || customPosition);
-  let destroy = $derived(destroyOnHidden ?? semanticProps?.destroyOnHidden
-    ?? Boolean(destroyTooltipOnHide ?? semanticProps?.destroyTooltipOnHide));
+  let destroy = $derived(destroyOnHidden ?? semanticProps?.destroyOnHidden ?? false);
   let localClassNames = $derived(ownerClassName
     ? { root: ownerClassName } : semanticProps?.classNames);
   let callbackProps = $derived.by<TooltipSemanticProps>(() => {
@@ -142,7 +137,6 @@
         prefixCls,
         openClassName,
         destroyOnHidden,
-        destroyTooltipOnHide,
         align,
         builtinPlacements,
         onPopupAlign,
@@ -156,7 +150,7 @@
         || (config.tooltip ? 'hover' : ['hover', 'focus']),
       mouseEnterDelay: semanticProps?.mouseEnterDelay ?? config.tooltip?.mouseEnterDelay ?? 0.1,
       mouseLeaveDelay: semanticProps?.mouseLeaveDelay ?? config.tooltip?.mouseLeaveDelay ?? 0.1,
-      getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
+      getPopupContainer: getPopupContainer || config.getPopupContainer,
       destroyOnHidden: destroy,
       builtinPlacements: configuredPlacements || placements
     };
@@ -175,8 +169,7 @@
     config.tooltip,
     localClassNames,
     semanticProps?.styles,
-    callbackProps,
-    semanticProps?.overlayStyle
+    callbackProps
   ));
   let colorInfo = $derived(getTooltipColor(color, prefix));
   let rootLayers = $derived([
@@ -187,7 +180,7 @@
   ]);
   let rootStyle = $derived(serializeInlineStyleLayers(rootLayers));
   let containerLayers = $derived([
-    semantics.styles.container, semanticProps?.overlayInnerStyle, colorInfo.overlayStyle
+    semantics.styles.container, colorInfo.overlayStyle
   ]);
   let refresh = $derived(fresh ?? semanticProps?.fresh ?? false);
   let payload = $derived({
@@ -210,7 +203,7 @@
   const portal = createPopupContainer(() => ({
     open: force || open && available,
     reference: anchor,
-    getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
+    getPopupContainer: getPopupContainer || config.getPopupContainer,
     themeStyle: rootStyle
   }));
 
@@ -320,7 +313,7 @@
     colorInfo.className,
     classPlacement && `${prefix}-placement-${classPlacement}`,
     config.direction === 'rtl' && `${prefix}-rtl`,
-    semanticProps?.overlayClassName, semanticProps?.rootClassName,
+    semanticProps?.rootClassName,
     config.tooltip?.class, semantics.classNames.root
   ]} style={initialStyle}
   {@attach popupStyle.attach} {@attach portal}

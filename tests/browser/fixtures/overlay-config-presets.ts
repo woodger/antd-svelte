@@ -30,9 +30,6 @@ export interface OverlayConfigSpec {
   mouseLeaveDelay?: number;
   placement?: TooltipPlacement;
   rootClassName?: string;
-  overlayClassName?: string;
-  overlayStyle?: string;
-  overlayInnerStyle?: string;
   autoAdjustOverflow?: boolean | AdjustOverflow;
 }
 

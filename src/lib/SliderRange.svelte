@@ -574,10 +574,8 @@
         builtinPlacements={props.tooltip.builtinPlacements}
         onPopupAlign={props.tooltip.onPopupAlign}
         destroyOnHidden={props.tooltip.destroyOnHidden}
-        destroyTooltipOnHide={props.tooltip.destroyTooltipOnHide}
         autoAdjustOverflow={props.tooltip.autoAdjustOverflow}
         getPopupContainer={props.tooltip.getPopupContainer || config.getPopupContainer}
-        getTooltipContainer={props.tooltip.getTooltipContainer}
         onDismiss={() => { tooltipDismissed = true; }} />
     {/if}
   {/each}
@@ -616,11 +614,10 @@
       builtinPlacements={props.tooltip === false ? undefined : props.tooltip?.builtinPlacements}
       onPopupAlign={props.tooltip === false ? undefined : props.tooltip?.onPopupAlign}
       destroyOnHidden={props.tooltip === false ? undefined : props.tooltip?.destroyOnHidden}
-      destroyTooltipOnHide={props.tooltip === false ? undefined : props.tooltip?.destroyTooltipOnHide}
       autoAdjustOverflow={props.tooltip === false ? undefined : props.tooltip?.autoAdjustOverflow}
       getPopupContainer={(props.tooltip === false ? undefined : props.tooltip?.getPopupContainer)
         || config.getPopupContainer}
-      getTooltipContainer={props.tooltip === false ? undefined : props.tooltip?.getTooltipContainer}
+
       onDismiss={() => { tooltipDismissed = true; }} />
   {/if}
 </div>

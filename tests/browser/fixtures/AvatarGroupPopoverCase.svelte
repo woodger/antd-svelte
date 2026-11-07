@@ -46,7 +46,6 @@
     if (values.richTitle) result.title = heading;
     if (values.undefinedContent) result.content = undefined;
     if (values.undefinedTitle) result.title = undefined;
-    if (values.undefinedDestroy) result.destroyOnHidden = undefined;
     if (nativeOptions) Object.assign(result, {
       'aria-label': 'Owner accessible popup',
       'aria-describedby': 'group-popup-description',
@@ -55,11 +54,8 @@
       style: 'color:rgb(1,2,3)',
       popupClass: 'case-extra'
     });
-    if (values.container === 'local' || values.container === 'both') {
+    if (values.container === 'local') {
       result.getPopupContainer = trigger => target('local', trigger);
-    }
-    if (values.container === 'legacy' || values.container === 'both') {
-      result.getTooltipContainer = trigger => target('legacy', trigger);
     }
     return result;
   });
@@ -82,7 +78,6 @@
 
 <div id="group-popup-provider" data-group-popover-container="provider"></div>
 <div id="group-popup-local" data-group-popover-container="local"></div>
-<div id="group-popup-legacy" data-group-popover-container="legacy"></div>
 <div id="group-popup-alternate" data-group-popover-container="alternate"></div>
 <p id="group-popup-description">Owner popup help</p>
 <ConfigProvider {...provider} theme={{ mode: dark ? 'dark' : 'light', token: { motion: false } }}>

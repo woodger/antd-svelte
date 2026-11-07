@@ -51,7 +51,6 @@
     defaultOpen = false,
     onOpenChange,
     destroyOnHidden,
-    destroyTooltipOnHide,
     forceRender = false,
     fresh = false,
     zIndex,
@@ -62,7 +61,6 @@
     mouseEnterDelay,
     mouseLeaveDelay,
     getPopupContainer,
-    getTooltipContainer,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
     'aria-describedby': ariaDescribedby,
@@ -71,9 +69,6 @@
     rootClassName,
     classNames,
     styles,
-    overlayClassName,
-    overlayStyle,
-    overlayInnerStyle,
     class: className = '',
     style
   } = $derived(props);
@@ -110,15 +105,13 @@
     arrow: providedArrow,
     trigger: resolvedTrigger,
     mouseEnterDelay: enterDelay,
-    mouseLeaveDelay: leaveDelay,
-    overlayStyle
+    mouseLeaveDelay: leaveDelay
   });
   let semantics = $derived(getOverlaySemantics(
     config.popover,
     classNames,
     styles,
-    callbackProps,
-    overlayStyle
+    callbackProps
   ));
   let popupThemeStyle = $derived(
     [tooltipTheme.style, componentTheme.style, confirmTheme?.style].filter(Boolean).join(';')
@@ -133,7 +126,7 @@
   ]);
   let rootStyle = $derived(serializeInlineStyleLayers(rootLayers));
   let containerLayers = $derived([
-    semantics.styles.container, overlayInnerStyle, colorInfo.overlayStyle
+    semantics.styles.container, colorInfo.overlayStyle
   ]);
   const initialStyle = untrack(() => rootStyle);
   const popupStyle = createOverlayStyle(() => rootLayers);
@@ -196,7 +189,7 @@
   let hasBody = $derived(hasContent(content));
   let available = $derived(hasTitle || hasBody);
   let visible = $derived(!props.disabled && available && rawOpen);
-  let destroy = $derived(destroyOnHidden ?? Boolean(destroyTooltipOnHide));
+  let destroy = $derived(destroyOnHidden ?? false);
   let payload = $derived({
     id: providedId || fallbackId,
     title,
@@ -220,7 +213,7 @@
   const portal = createPopupContainer(() => ({
     open: forceRender || visible,
     reference: anchor,
-    getPopupContainer: getPopupContainer || getTooltipContainer || config.getPopupContainer,
+    getPopupContainer: getPopupContainer || config.getPopupContainer,
     themeStyle: rootStyle
   }));
 
@@ -648,7 +641,7 @@
         colorInfo.className,
         classPlacement && `${prefix}-placement-${classPlacement}`,
         config.direction === 'rtl' && `${prefix}-rtl`,
-        rootClassName, overlayClassName, config.popover?.class, semantics.classNames.root
+        rootClassName, config.popover?.class, semantics.classNames.root
       ]} style={initialStyle}
     {@attach popupStyle.attach} {@attach portal}
     onpointerenter={(event) => {

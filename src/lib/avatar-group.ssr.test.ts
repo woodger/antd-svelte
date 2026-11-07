@@ -105,8 +105,7 @@ describe('AvatarGroup server rendering', () => {
     { open: true },
     { defaultOpen: true },
     { open: false, defaultOpen: true },
-    { open: true, destroyOnHidden: false },
-    { defaultOpen: true, destroyOnHidden: undefined, destroyTooltipOnHide: false }
+    { open: true, destroyOnHidden: false }
   ])('keeps configured popup snippets lazy before hydration for %j', options => {
     const content = createRawSnippet(() => ({
       render: () => { throw new Error('Unexpected SSR popup'); }

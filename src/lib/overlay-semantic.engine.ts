@@ -14,8 +14,7 @@ export function getOverlaySemantics<Props>(
   context: { classNames?: Semantic<Props>; styles?: Semantic<Props>; style?: string } | undefined,
   classNames: Semantic<Props> | undefined,
   styles: Semantic<Props> | undefined,
-  props: Props,
-  overlayStyle?: string
+  props: Props
 ) {
   const resolve = (value: Semantic<Props> | undefined) =>
     (typeof value === 'function' ? value({ props }) : value) ?? {};
@@ -31,8 +30,7 @@ export function getOverlaySemantics<Props>(
     mergedStyles[slot] = [
       contextStyles[slot],
       slot === 'root' && context?.style,
-      localStyles[slot],
-      slot === 'root' && overlayStyle
+      localStyles[slot]
     ].filter(Boolean).join(';') || undefined;
   }
 

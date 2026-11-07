@@ -106,14 +106,8 @@ export interface TooltipProps {
    * @defaultValue false
    */
   forceRender?: boolean;
-  /** Явный z-index popup; semantic root и legacy overlayStyle имеют приоритет. */
+  /** Явный z-index popup; semantic root styles имеют приоритет. */
   zIndex?: number;
-  /**
-   * Явный destroyOnHidden приоритетнее, включая false.
-   * Объект включает удаление независимо от keepParent.
-   * @deprecated Используйте destroyOnHidden.
-   */
-  destroyTooltipOnHide?: boolean | { keepParent?: boolean };
   /** @defaultValue 'top' */
   placement?: TooltipPlacement;
   /** Накладывается поверх выбранной записи placements; вложенный overflow заменяется целиком. */
@@ -146,22 +140,14 @@ export interface TooltipProps {
   mouseEnterDelay?: number;
   /** Задержка закрытия в секундах. */
   mouseLeaveDelay?: number;
-  /** Локальная функция → legacy getTooltipContainer → ConfigProvider; undefined наследует fallback. */
+  /** Локальная функция → ConfigProvider; undefined наследует fallback. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
-  /** @deprecated Используйте getPopupContainer. Имеет приоритет над ConfigProvider. */
-  getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
   class?: string;
   style?: string;
   /** Применяется к popup; class/style сохраняют native wrapper contract. */
   rootClassName?: string;
   classNames?: TooltipSemantic;
   styles?: TooltipSemantic;
-  /** @deprecated Используйте classNames.root. */
-  overlayClassName?: string;
-  /** @deprecated Используйте styles.root. */
-  overlayStyle?: string;
-  /** @deprecated Используйте styles.container. */
-  overlayInnerStyle?: string;
 }
 
 /** Параметры Tooltip ручки Slider; formatter=null отключает содержимое подсказки. */
@@ -179,8 +165,6 @@ export interface SliderTooltipConfig {
   fresh?: boolean;
   /** Удаляет содержимое каждой скрытой подсказки; по умолчанию сохраняет. */
   destroyOnHidden?: boolean;
-  /** @deprecated Используйте destroyOnHidden, который имеет приоритет, включая false. */
-  destroyTooltipOnHide?: TooltipProps['destroyTooltipOnHide'];
   color?: TooltipColor;
   /** Локальный prefix Tooltip; относится ко всем подсказкам single/range. */
   prefixCls?: string;
@@ -196,6 +180,4 @@ export interface SliderTooltipConfig {
   formatter?: ((value: number) => string | null) | null;
   /** Имеет приоритет над ConfigProvider; у Slider нет корневого getPopupContainer. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
-  /** @deprecated Используйте getPopupContainer. Глобальный provider getter приоритетнее. */
-  getTooltipContainer?: (triggerNode: HTMLElement) => HTMLElement;
 }

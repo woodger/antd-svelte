@@ -53,7 +53,7 @@
   let portalOrigin: HTMLElement | undefined;
   let portalMarker: Comment | undefined;
   let visited = $state(false);
-  let rendered = $derived(open || visited && !(props.destroyOnHidden ?? props.destroyTooltipOnHide));
+  let rendered = $derived(open || visited && !props.destroyOnHidden);
   let portalTarget = $state<HTMLElement | ShadowRoot>();
   let containerGetter = $derived(props.getPopupContainer || config.getPopupContainer);
   let customContainer = $derived(rendered && containerGetter !== undefined);
@@ -88,7 +88,7 @@
   const owned = new Set([
     'value', 'defaultValue', 'mode', 'open', 'disabled', 'format', 'defaultFormat',
     'allowClear', 'disabledAlpha', 'disabledFormat', 'presets', 'size', 'trigger', 'placement',
-    'arrow', 'autoAdjustOverflow', 'destroyOnHidden', 'destroyTooltipOnHide', 'getPopupContainer',
+    'arrow', 'autoAdjustOverflow', 'destroyOnHidden', 'getPopupContainer',
     'children', 'showText', 'panelRender', 'onChange', 'onChangeComplete', 'onClear',
     'onOpenChange', 'onFormatChange', 'class', 'rootClassName', 'style', 'prefixCls',
     'classNames', 'styles', 'onblur'

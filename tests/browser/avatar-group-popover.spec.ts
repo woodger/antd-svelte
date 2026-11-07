@@ -126,7 +126,7 @@ test('AvatarGroup external open changes leave callbacks silent and return focus 
 });
 
 for (const name of [
-  'local-container', 'legacy-container', 'provider-container', 'local-container-priority'
+  'local-container', 'provider-container'
 ]) {
   test(`AvatarGroup container lifecycle preserves caller state for ${name}`, async ({ page }) => {
     await select(page, name);
@@ -184,7 +184,7 @@ test('Popover preserves its eager content and retained state by default', async 
   await expect(input).toHaveValue('Retained standalone draft');
 });
 
-for (const name of ['destroy-editor', 'legacy-destroy-true']) {
+for (const name of ['destroy-editor']) {
   test(`Popover destroys its own snippets after close for ${name}`, async ({ page }) => {
     await select(page, name);
     await page.getByLabel('Standalone group popup', { exact: true }).check();

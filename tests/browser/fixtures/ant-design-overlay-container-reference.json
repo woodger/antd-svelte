@@ -4,7 +4,8 @@
     "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
     "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
     "source": "package/dist/antd.min.js",
-    "browser": "156.0.8078.4"
+    "browser": "156.0.8078.4",
+    "currentApiScope": "Deprecated getter/destroy alias profiles are excluded; current measured frames are retained."
   },
   "cases": [
     {
@@ -603,235 +604,6 @@
       }
     },
     {
-      "name": "tooltip-legacy",
-      "component": "tooltip",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "legacy"
-        ],
-        "calls": [
-          {
-            "getter": "legacy",
-            "trigger": "tooltip",
-            "tag": "button"
-          }
-        ]
-      },
-      "refresh": {
-        "same": true,
-        "value": "Retained overlay draft",
-        "selection": [
-          2,
-          8
-        ],
-        "focused": true,
-        "count": "1"
-      }
-    },
-    {
-      "name": "tooltip-local-over-legacy",
-      "component": "tooltip",
-      "local": "local",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "local"
-        ],
-        "calls": [
-          {
-            "getter": "local",
-            "trigger": "tooltip",
-            "tag": "button"
-          }
-        ]
-      },
-      "refresh": {
-        "same": true,
-        "value": "Retained overlay draft",
-        "selection": [
-          2,
-          8
-        ],
-        "focused": true,
-        "count": "1"
-      }
-    },
-    {
-      "name": "popover-legacy",
-      "component": "popover",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "legacy"
-        ],
-        "calls": [
-          {
-            "getter": "legacy",
-            "trigger": "popover",
-            "tag": "button"
-          }
-        ]
-      },
-      "refresh": {
-        "same": true,
-        "value": "Retained overlay draft",
-        "selection": [
-          2,
-          8
-        ],
-        "focused": true,
-        "count": "1"
-      }
-    },
-    {
-      "name": "popover-local-over-legacy",
-      "component": "popover",
-      "local": "local",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "local"
-        ],
-        "calls": [
-          {
-            "getter": "local",
-            "trigger": "popover",
-            "tag": "button"
-          }
-        ]
-      },
-      "refresh": {
-        "same": true,
-        "value": "Retained overlay draft",
-        "selection": [
-          2,
-          8
-        ],
-        "focused": true,
-        "count": "1"
-      }
-    },
-    {
-      "name": "popconfirm-legacy",
-      "component": "popconfirm",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "legacy"
-        ],
-        "calls": [
-          {
-            "getter": "legacy",
-            "trigger": "popconfirm",
-            "tag": "button"
-          }
-        ]
-      },
-      "refresh": {
-        "same": true,
-        "value": "Retained overlay draft",
-        "selection": [
-          2,
-          8
-        ],
-        "focused": true,
-        "count": "1"
-      }
-    },
-    {
-      "name": "popconfirm-local-over-legacy",
-      "component": "popconfirm",
-      "local": "local",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "local"
-        ],
-        "calls": [
-          {
-            "getter": "local",
-            "trigger": "popconfirm",
-            "tag": "button"
-          }
-        ]
-      },
-      "refresh": {
-        "same": true,
-        "value": "Retained overlay draft",
-        "selection": [
-          2,
-          8
-        ],
-        "focused": true,
-        "count": "1"
-      }
-    },
-    {
-      "name": "tooltip-undefined-over-legacy",
-      "component": "tooltip",
-      "local": "undefined",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "legacy"
-        ],
-        "calls": [
-          {
-            "getter": "legacy",
-            "trigger": "tooltip",
-            "tag": "button"
-          }
-        ]
-      },
-      "refresh": {
-        "same": true,
-        "value": "Retained overlay draft",
-        "selection": [
-          2,
-          8
-        ],
-        "focused": true,
-        "count": "1"
-      }
-    },
-    {
-      "name": "popover-undefined-over-legacy",
-      "component": "popover",
-      "local": "undefined",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "legacy"
-        ],
-        "calls": [
-          {
-            "getter": "legacy",
-            "trigger": "popover",
-            "tag": "button"
-          }
-        ]
-      },
-      "refresh": {
-        "same": true,
-        "value": "Retained overlay draft",
-        "selection": [
-          2,
-          8
-        ],
-        "focused": true,
-        "count": "1"
-      }
-    },
-    {
       "name": "slider-parent",
       "component": "slider",
       "beforeOpen": [],
@@ -870,24 +642,6 @@
       "name": "slider-tooltip-undefined",
       "component": "slider",
       "tooltip": "undefined",
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "parent"
-        ],
-        "calls": [
-          {
-            "getter": "parent",
-            "trigger": "slider-handle",
-            "tag": "div"
-          }
-        ]
-      }
-    },
-    {
-      "name": "slider-legacy",
-      "component": "slider",
-      "legacy": true,
       "beforeOpen": [],
       "snapshot": {
         "targets": [
@@ -979,25 +733,6 @@
       "name": "slider-range-tooltip-undefined",
       "component": "slider-range",
       "tooltip": "undefined",
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "parent",
-          "parent"
-        ],
-        "calls": [
-          {
-            "getter": "parent",
-            "trigger": "slider-handle",
-            "tag": "div"
-          }
-        ]
-      }
-    },
-    {
-      "name": "slider-range-legacy",
-      "component": "slider-range",
-      "legacy": true,
       "beforeOpen": [],
       "snapshot": {
         "targets": [
@@ -1139,63 +874,6 @@
         ],
         "focused": true,
         "count": "1"
-      }
-    },
-    {
-      "name": "typography-legacy",
-      "component": "typography",
-      "legacy": true,
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "legacy"
-        ],
-        "calls": [
-          {
-            "getter": "legacy",
-            "trigger": "typography",
-            "tag": "span"
-          }
-        ]
-      }
-    },
-    {
-      "name": "slider-legacy-no-provider",
-      "component": "slider",
-      "legacy": true,
-      "parent": "none",
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "legacy"
-        ],
-        "calls": [
-          {
-            "getter": "legacy",
-            "trigger": "slider-handle",
-            "tag": "div"
-          }
-        ]
-      }
-    },
-    {
-      "name": "slider-range-legacy-no-provider",
-      "component": "slider-range",
-      "legacy": true,
-      "parent": "none",
-      "beforeOpen": [],
-      "snapshot": {
-        "targets": [
-          "legacy",
-          "legacy"
-        ],
-        "calls": [
-          {
-            "getter": "legacy",
-            "trigger": "slider-handle",
-            "tag": "div"
-          }
-        ]
       }
     }
   ]

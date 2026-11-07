@@ -31,7 +31,7 @@ describe('Overlay ConfigProvider and semantic slots SSR', () => {
 
         expect(root.tag).toContain('popover="manual"');
         expect(root.tag).toMatch(/\shidden(?:[\s=>])/);
-        const classes = root.classes.filter(name => /^(ctx-|local-|legacy-|outer-|inner-|cb-)/.test(name));
+        const classes = root.classes.filter(name => /^(ctx-|local-|outer-|inner-|cb-)/.test(name));
         expect([...new Set(classes)].sort()).toEqual(sample.snapshots[0]!.slots.root.classes);
         expect(tags.some(value => value.classes.includes(`${prefix}-arrow`)))
           .toBe(sample.snapshots[0]!.slots.arrow !== null);

@@ -6,9 +6,8 @@ export interface AvatarGroupPopoverValues {
   richTitle?: boolean;
   undefinedContent?: boolean;
   undefinedTitle?: boolean;
-  undefinedDestroy?: boolean;
   accept?: boolean;
-  container?: 'local' | 'legacy' | 'provider' | 'both';
+  container?: 'local' | 'provider';
 }
 
 export interface AvatarGroupPopoverCase extends AvatarGroupPopoverValues {

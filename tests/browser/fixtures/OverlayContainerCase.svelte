@@ -58,15 +58,11 @@
     return options;
   });
   let localOptions = $derived.by(() => {
-    const options: Pick<TooltipProps, 'getPopupContainer' | 'getTooltipContainer'> = {};
+    const options: Pick<TooltipProps, 'getPopupContainer'> = {};
     if (sample.local === 'undefined') options.getPopupContainer = undefined;
     else if (sample.local === 'local') options.getPopupContainer = trigger => {
       record('local', trigger);
       return document.getElementById('overlay-local')!;
-    };
-    if (sample.legacy) options.getTooltipContainer = trigger => {
-      record('legacy', trigger);
-      return document.getElementById('overlay-legacy')!;
     };
     return options;
   });
@@ -77,7 +73,6 @@
       record('tooltip', trigger);
       return document.getElementById('overlay-tooltip')!;
     };
-    if (sample.legacy) options.getTooltipContainer = localOptions.getTooltipContainer;
     return options;
   });
 
@@ -109,7 +104,6 @@
 <div id="overlay-parent" data-overlay-container="parent"></div>
 <div id="overlay-child" data-overlay-container="child"></div>
 <div id="overlay-local" data-overlay-container="local"></div>
-<div id="overlay-legacy" data-overlay-container="legacy"></div>
 <div id="overlay-tooltip" data-overlay-container="tooltip"></div>
 <div id="overlay-shadow" data-overlay-container="shadow" {@attach element => {
   const root = element.attachShadow({ mode: 'open' });

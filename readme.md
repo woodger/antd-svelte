@@ -1753,7 +1753,7 @@ Tooltip по умолчанию показывает число при наве�
 Escape скрывает подсказку, сохраняя фокус и число; следующее действие открывает
 её снова. Disabled скрывает подсказку. Текст дополняет aria-describedby поля,
 сохраняя help/ошибку FormItem. Числовые callbacks от показа подсказки не вызываются.
-Поля tooltip.destroyOnHidden и legacy tooltip.destroyTooltipOnHide работают во всех
+Поле tooltip.destroyOnHidden работает во всех
 трёх режимах подсказок Slider. Правила приоритета и lazy SSR
 такие же, как у самостоятельного Tooltip; по умолчанию содержимое сохраняется.
 
@@ -1848,8 +1848,7 @@ Callback видит входные props, разрешённые disabled и ver
 theme variables и сохраняет приоритет при обновлении темы.
 Сохраняется текущий SliderTooltipConfig: 12 placement, text formatter,
 native popover и описание input. Контейнер выбирается в исходном порядке:
-tooltip.getPopupContainer → ConfigProvider.getPopupContainer → legacy
-tooltip.getTooltipContainer. Корневого getPopupContainer у Slider нет.
+tooltip.getPopupContainer → ConfigProvider.getPopupContainer. Корневого getPopupContainer у Slider нет.
 Полный SliderTooltipProps и исходное управление focus-open остаются частично
 перенесёнными. Полный scalar lifecycle/callback API
 ещё не закрыты; сохранены описанные выше native numeric/form/event contracts.
@@ -1935,7 +1934,7 @@ fallback. При fresh=false скрытый ID кэшируется вместе
 не удаляются при смене ID или отключении.
 
 `zIndex` задаёт inline z-index popup, включая 0 и отрицательные значения.
-Provider root styles, local styles.root и legacy overlayStyle идут после него;
+Provider root styles и local styles.root идут после него;
 без prop сохраняется тематический zIndexPopup. Настройки передаются single/range
 Slider и ellipsis Tooltip Typography. В Typography disabled вычисляет сам ellipsis
 и перекрывает значение из tooltip options, как в upstream. Общий source zIndex
@@ -2006,9 +2005,7 @@ rc-trigger; переход фокуса с relatedTarget сохраняет ег
 
 DestroyOnHidden=true без forceRender удаляет содержимое при закрытии и создаёт заново при открытии:
 DOM-состояние и состояние вложенного
-компонента сбрасываются. Legacy destroyTooltipOnHide принимает boolean или объект
-с keepParent; объект включает удаление независимо от keepParent. Явный современный
-prop, включая false, приоритетнее alias. Смена флага у открытой подсказки сохраняет
+компонента сбрасываются. Смена destroyOnHidden у открытой подсказки сохраняет
 её DOM, ввод и фокус; включение удаления у закрытой без forceRender сразу очищает содержимое.
 При включённом удалении SSR не вызывает title snippet, включая начальный open/defaultOpen.
 Прежний скрытый native shell и его ID/ARIA сохраняются; default SSR остаётся eager.
@@ -2101,8 +2098,7 @@ source gap и глобальный borderRadius даже без source-наст�
 описания сохраняет существующие ID и отслеживает их изменения; cleanup удаляет
 только ID Tooltip.
 
-Контейнер выбирается через getPopupContainer → legacy getTooltipContainer →
-ConfigProvider.getPopupContainer. Undefined сохраняет fallback; функция получает
+Контейнер выбирается через getPopupContainer → ConfigProvider.getPopupContainer. Undefined сохраняет fallback; функция получает
 исходный DOM trigger, включая SVG, и вызывается только в браузере после открытия.
 Смена функции с тем же контейнером сохраняет DOM, state, focus и selection.
 Portal переносит наследуемые variables и сохраняет приоритет собственных component tokens.
@@ -2186,9 +2182,8 @@ Open в callback — исходный prop владельца; неконтро�
 Callbacks выполняются и при SSR, когда DOM ещё недоступен.
 
 Классы слоёв накапливаются. Порядок CSS: context styles → context style(root) →
-local styles → legacy overlayStyle(root). OverlayInnerStyle следует после semantic
-styles container, затем применяется цветовой слой color; overlayClassName остаётся
-alias для класса root. Эти aliases deprecated.
+local styles. Цветовой слой color применяется после semantic container styles.
+Класс popup задаётся через rootClassName и classNames.root.
 Root styles имеют приоритет над вычисленными координатами, как в rc-trigger;
 их обновление не сбрасывает variables темы, DOM, ввод, selection и focus.
 Настройки наследуются также подсказками Slider, overflow AvatarGroup и ellipsis
@@ -2226,9 +2221,9 @@ Tooltip.unique, motion, source zIndex context и остальные delegated rc
 RGB luminance с порогом 0.5; alpha не участвует. Color parser не разрешает CSS
 variables перед расчётом контраста, хотя browser использует их при отрисовке.
 Popover и Popconfirm сохраняют собственные цвета title/content, как upstream.
-Semantic `color` текста и legacy overlayInnerStyle могут их переопределить.
+Semantic `color` текста может их переопределить.
 
-Цветовой background следует после container styles и overlayInnerStyle. Root styles
+Цветовой background следует после container styles. Root styles
 могут переопределить цвет стрелки; у preset Tooltip variable задана на самой стрелке,
 поэтому для неё используется styles.arrow. Raw background передаётся одним CSS value,
 а не списком declarations. Реактивное невалидное значение может сохранить прежний
@@ -2270,7 +2265,7 @@ open class. SSR не клонирует непрозрачный children snippe
 ID, native wrapper и ARIA-поведение сохраняются.
 
 Настройки работают также в AvatarGroup.max.popover, Slider.tooltip и ellipsis Tooltip
-Typography. Последний передаёт color и semantic/legacy styles общему popup.
+Typography. Последний передаёт color и semantic styles общему popup.
 Смена prefix сохраняет DOM, ввод, выделение и фокус; stylesheet удаляется вместе
 с владельцем. Portal и native ограничения viewport остаются прежними, включая
 заголовок Popover на узком экране и восстановление фокуса AvatarGroup.
@@ -2413,8 +2408,7 @@ Bind:ref задаётся непосредственно компоненту; m
 `id` задаёт ID native dialog; пустая строка использует стабильный generated ID.
 Скрытый ID обновляется вместе с кэшем содержимого. Aria-controls trigger меняется
 без потери caller IDREF tokens, включая совпадение нового ID с существующим token.
-`zIndex`, включая 0 и отрицательные числа, задаёт явный слой перед semantic root
-и legacy overlayStyle; общий source zIndex context и порядок native top layer
+`zIndex`, включая 0 и отрицательные числа, задаёт явный слой перед semantic root styles; общий source zIndex context и порядок native top layer
 этот prop не заменяет.
 
 `forceRender=true` прогревает скрытое содержимое и portal после mount/hydration,
@@ -2446,7 +2440,7 @@ Aria-controls объединяется с имеющимися ID; при отк
 владельца. Позиционирование и связь с trigger подключаются после гидратации;
 в SSR поверхность скрыта.
 
-GetPopupContainer и legacy getTooltipContainer выбирают контейнер по тем же
+GetPopupContainer выбирает контейнер по тем же
 правилам, что Tooltip; локальный undefined сохраняет provider fallback.
 Getter не вызывается до первого открытия или forceRender и при SSR. Обновление контейнера
 и темы сохраняет native popup lifecycle; неизменный контейнер не перемещает DOM.
@@ -2456,9 +2450,7 @@ snippet, компонент считает содержимое доступны
 внутри snippet контролирует его владелец. Закрытое содержимое остаётся
 смонтированным и сохраняет состояние. Без forceRender destroyOnHidden=true удаляет title/content
 при закрытии и создаёт их заново при открытии; при SSR такие snippets не вызываются,
-включая начальный open/defaultOpen. Legacy destroyTooltipOnHide принимает boolean
-или объект с keepParent; объект включает удаление, keepParent не меняет результат.
-Явный destroyOnHidden, включая false, имеет приоритет перед alias.
+включая начальный open/defaultOpen.
 Фокус возвращается к trigger перед удалением содержимого. Отложенные открытия отменяются при
 удалении компонента, очистке содержимого и замене trigger.
 
@@ -2469,7 +2461,7 @@ ContextMenu и color поддержаны по общим правилам Toolt
 
 ## Popconfirm
 
-GetPopupContainer/getTooltipContainer передаются Popover с теми же приоритетами.
+GetPopupContainer передаётся Popover с теми же приоритетами.
 Контекст темы и Promise действия сохраняются при переносе popup в контейнер.
 Trigger и hover delays наследуются из ConfigProvider.popconfirm; локальные props
 имеют приоритет. Без настройки trigger остаётся click.
@@ -2484,8 +2476,7 @@ Bind:ref передаётся тому же Popover и использует об
 Id/forceRender/fresh/zIndex передаются также. Смена ID/слоя сохраняет ожидающий
 Promise, текущее содержимое и припаркованный фокус; его результат по-прежнему
 подчиняется controlled owner и защите от устаревших запросов.
-DestroyOnHidden и legacy destroyTooltipOnHide передаются Popover с исходным
-приоритетом современного prop, включая false. При удалении содержимого заново
+DestroyOnHidden передаётся Popover, включая явный false. При удалении содержимого заново
 создаются description snippet и кнопки; сам контроллер подтверждения сохраняет
 защиту от результата прежнего Promise после закрытия или повторного открытия.
 При включённом удалении SSR-содержимое остаётся ленивым даже при начальном open/defaultOpen;
@@ -5603,7 +5594,7 @@ blurDelay не наследуют mouse delays. Их приоритет, touch f
 внешнего закрытия описаны в [Tooltip](#tooltip).
 Подсказки copy/edit наследуют те же настройки; копирование, success title и вход
 в редактор сохраняют свои обычные действия.
-Ellipsis Tooltip также принимает destroyOnHidden и legacy destroyTooltipOnHide:
+Ellipsis Tooltip также принимает destroyOnHidden:
 при закрытии удаляется его содержимое, измерение текста и native shell сохраняются.
 Как в upstream, onOpenChange сообщает raw open даже для текста без усечения,
 но сама подсказка остаётся скрытой. Для native CSS ellipsis сначала требуется
@@ -5631,7 +5622,7 @@ draft/selection/focus редактора и ожидающее async-копир�
 
 Tooltip использует общий native popover внутри корня вместо React body portal.
 Доступны общие 12 placement, container getters, color, локальные popup prefixCls и
-openClassName, semantic/legacy styles. Callbacks получают разрешённые trigger/delays
+openClassName и semantic styles. Callbacks получают разрешённые trigger/delays
 и входной open владельца. Изменение config сохраняет popup DOM, ввод, выделение
 и фокус. Остальные delegated Tooltip props, включая UniqueProvider/motion
 и полную геометрию CSS-transform/scroll-container,
@@ -7323,8 +7314,8 @@ defaultOpen читается один раз при создании overflow. �
 DestroyOnHidden по умолчанию true: список и пользовательские snippets удаляются
 при закрытии. False сохраняет их DOM и состояние после первого открытия;
 сохраняющееся содержимое остаётся реактивным по правилам Svelte Popover.
-Явный ключ destroyOnHidden=undefined снимает default группы и оставляет выбор
-legacy destroyTooltipOnHide. GetPopupContainer/getTooltipContainer имеют те же
+Явный ключ destroyOnHidden=undefined снимает default группы; Popover сохраняет
+содержимое. GetPopupContainer имеет те же
 приоритеты и lifecycle, что у Popover; getter получает нативную кнопку +N.
 Переход элемента между видимой частью и Popover создаёт новый Avatar.
 Image preview внутри списка сохраняет открытый Popover: первый Escape закрывает

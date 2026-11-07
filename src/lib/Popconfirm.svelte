@@ -32,7 +32,6 @@
     icon,
     defaultOpen = false,
     destroyOnHidden,
-    destroyTooltipOnHide,
     disabled,
     showCancel = true,
     okText,
@@ -47,7 +46,6 @@
     mouseLeaveDelay,
     autoAdjustOverflow = true,
     getPopupContainer,
-    getTooltipContainer,
     onOpenChange,
     onConfirm,
     onCancel,
@@ -55,9 +53,6 @@
     rootClassName,
     classNames,
     styles,
-    overlayClassName,
-    overlayStyle,
-    overlayInnerStyle,
     class: className = '',
     style
   } = $derived(props);
@@ -75,15 +70,13 @@
     trigger: resolvedTrigger,
     mouseEnterDelay: enterDelay,
     mouseLeaveDelay: leaveDelay,
-    okType,
-    overlayStyle
+    okType
   });
   let semantics = $derived(getOverlaySemantics(
     config.popconfirm,
     classNames,
     styles,
-    callbackProps,
-    overlayStyle
+    callbackProps
   ));
   providePopconfirmTheme();
   const form = useForm();
@@ -113,7 +106,7 @@
     }
   });
   let errorVisible = $derived(session !== null && session === errorSession);
-  let destroy = $derived(destroyOnHidden ?? Boolean(destroyTooltipOnHide));
+  let destroy = $derived(destroyOnHidden ?? false);
   let force = $derived(props.forceRender ?? false);
   let refresh = $derived(props.fresh ?? false);
   let payload = $derived({
@@ -224,10 +217,10 @@
   focusDelay={props.focusDelay} blurDelay={props.blurDelay}
   align={props.align} builtinPlacements={props.builtinPlacements} onPopupAlign={props.onPopupAlign}
   id={props.id} forceRender={props.forceRender} fresh={props.fresh} zIndex={props.zIndex}
-  {destroyOnHidden} {destroyTooltipOnHide}
-  {placement} {arrow} {color} {openClassName} {autoAdjustOverflow} {getPopupContainer} {getTooltipContainer}
-  {rootClassName} {overlayInnerStyle} classNames={{
-    root: [config.popconfirm?.class, overlayClassName, semantics.classNames.root].filter(Boolean).join(' '),
+  {destroyOnHidden}
+  {placement} {arrow} {color} {openClassName} {autoAdjustOverflow} {getPopupContainer}
+  {rootClassName} classNames={{
+    root: [config.popconfirm?.class, semantics.classNames.root].filter(Boolean).join(' '),
     container: semantics.classNames.container,
     arrow: semantics.classNames.arrow
   }} styles={{ root: semantics.styles.root, container: semantics.styles.container,
