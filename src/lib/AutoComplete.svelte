@@ -49,7 +49,6 @@
     size,
     status,
     variant,
-    bordered,
     children,
     class: className = '',
     rootClassName = '',
@@ -64,7 +63,7 @@
     ...attributes
   }: AutoCompleteProps = $props();
   const config = useConfig();
-  const variantContext = useVariant('select', () => ({ variant, bordered }));
+  const variantContext = useVariant('select', () => ({ variant }));
   let appearance = $derived(variantContext.variant);
   const field = useFormField();
   const form = useForm();

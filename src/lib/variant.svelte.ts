@@ -10,7 +10,7 @@ type VariantComponent = 'input' | 'textArea' | 'inputPassword' | 'inputSearch' |
 /** Общая реактивная boundary оформления; Search отдельно читает isConfigured для кнопки. */
 export function useVariant(
   component: VariantComponent,
-  getProps?: () => { variant?: Variant; bordered?: boolean; },
+  getProps?: () => { variant?: Variant; },
   fallbackComponent?: VariantComponent
 ) {
   const config = useConfig();
@@ -18,7 +18,6 @@ export function useVariant(
   const props = $derived(getProps?.());
   const state = $derived(resolveVariant({
     variant: props?.variant,
-    bordered: props?.bordered,
     formVariant: form?.variant,
     componentVariant: config[component]?.variant,
     fallbackVariant: fallbackComponent ? config[fallbackComponent]?.variant : undefined,

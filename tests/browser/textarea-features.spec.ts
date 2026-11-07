@@ -239,14 +239,14 @@ test(
 );
 
 test(
-  'TextArea applies variants, legacy bordered and semantic style precedence in both root shapes',
+  'TextArea applies variants and semantic style precedence in both root shapes',
   async ({ page }) => {
     const root = page.locator('.feature-textarea');
     const input = page.getByRole('textbox', { name: 'Feature text', exact: true });
 
     await expect(root).toHaveClass(/ant-input-filled/);
 
-    await page.getByLabel('Legacy textarea bordered', { exact: true }).uncheck();
+    await page.getByRole('combobox', { name: 'Textarea variant', exact: true }).selectOption('borderless');
 
     await expect(root).toHaveClass(/ant-input-borderless/);
 

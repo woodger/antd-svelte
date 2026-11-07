@@ -101,7 +101,6 @@
     size,
     status,
     variant,
-    bordered,
     locale,
     class: className = '',
     rootClassName = '',
@@ -115,7 +114,7 @@
   }: RangePickerProps & { time?: TimeRangePickerProps; } = $props();
   const config = useConfig();
   const variantContext = useVariant('rangePicker', () => ({
-    variant, bordered: time?.bordered ?? bordered
+    variant
   }));
   const componentTheme = useComponentTheme('DatePicker');
   const field = useFormField();

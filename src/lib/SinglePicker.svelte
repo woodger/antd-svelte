@@ -64,7 +64,6 @@
     size,
     status,
     variant,
-    bordered,
     locale,
     onChange,
     onCalendarChange,
@@ -90,7 +89,7 @@
     ...attributes
   }: DatePickerProps & { time?: TimePickerProps; } = $props();
   const config = useConfig();
-  const dateVariant = useVariant('datePicker', () => ({ variant, bordered }));
+  const dateVariant = useVariant('datePicker', () => ({ variant }));
   const timeVariant = useVariant('timePicker', () => time ?? {});
   const componentTheme = useComponentTheme('DatePicker');
   const field = useFormField();

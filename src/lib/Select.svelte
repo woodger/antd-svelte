@@ -28,7 +28,6 @@
     value = $bindable<SelectProps<Value, Mode>['value']>(),
     size,
     variant,
-    bordered,
     showSearch,
     searchValue,
     onSearch,
@@ -56,7 +55,7 @@
   }: SelectProps<Value, Mode> = $props();
 
   const config = useConfig();
-  const variantContext = useVariant('select', () => ({ variant, bordered }));
+  const variantContext = useVariant('select', () => ({ variant }));
   const componentTheme = useComponentTheme('Select');
   const compact = useCompact();
   const field = useFormField();

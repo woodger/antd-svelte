@@ -61,10 +61,8 @@ export interface InputProps extends Omit<
   /** Нативный атрибут size; визуальный размер задаётся через size. */
   htmlSize?: number;
   status?: 'error' | 'warning' | '';
-  /** Приоритет: variant, bordered=false, Form, component config, global variant, outlined. */
+  /** Приоритет: variant, Form, component config, global variant, outlined. */
   variant?: InputVariant;
-  /** Совместимость с Ant Design: false выбирает borderless, если variant не задан. */
-  bordered?: boolean;
   prefix?: InputContent;
   suffix?: InputContent;
   addonBefore?: InputContent;

@@ -32,7 +32,6 @@
   let compact = $state(false);
   let size = $state<'small' | 'medium' | 'large'>('medium');
   let variant = $state<InputVariant | 'inherit'>('inherit');
-  let bordered = $state(true);
   let semantic = $state(false);
 
   let countEnabled = $state(false);
@@ -127,7 +126,6 @@
   <label>Input variant<select bind:value={variant}><option>inherit</option><option>outlined</option><option>filled</option><option>borderless</option><option>underlined</option></select></label>
   <label>Input feature size<select bind:value={size}><option>small</option><option>medium</option><option>large</option></select></label>
   <label>Input feature type<select bind:value={type}><option>text</option><option>email</option><option>password</option></select></label>
-  <label><input type="checkbox" bind:checked={bordered} /> Legacy input bordered</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark input feature theme</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact input feature theme</label>
   <label><input type="checkbox" bind:checked={semantic} /> Custom input semantics</label>
@@ -214,7 +212,6 @@
         {size}
         {type}
         {hidden}
-        {bordered}
         htmlSize={12}
         prefix={prefix ? prefixContent : undefined}
         suffix={suffix ? suffixContent : undefined}

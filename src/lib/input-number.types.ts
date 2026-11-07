@@ -71,8 +71,6 @@ export interface InputNumberProps<Value extends InputNumberValue = number> exten
   size?: ComponentSize | 'medium';
   status?: 'error' | 'warning';
   variant?: InputVariant;
-  /** @deprecated Используйте variant. */
-  bordered?: boolean;
   readOnly?: boolean;
   prefix?: InputNumberContent;
   suffix?: InputNumberContent;

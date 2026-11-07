@@ -78,7 +78,6 @@
     size,
     status,
     variant,
-    bordered,
     disabled,
     id,
     name,
@@ -95,7 +94,7 @@
     ValueType
   > = $props();
   const config = useConfig();
-  const variantContext = useVariant('treeSelect', () => ({ variant, bordered }));
+  const variantContext = useVariant('treeSelect', () => ({ variant }));
   let appearance = $derived(variantContext.variant);
   const form = useForm();
   const field = useFormField();

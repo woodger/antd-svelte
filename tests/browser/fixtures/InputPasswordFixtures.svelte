@@ -20,7 +20,6 @@
   let disabled = $state<boolean | undefined>();
   let size = $state<'inherit' | 'small' | 'medium' | 'large'>('inherit');
   let variant = $state<InputVariant | 'inherit'>('inherit');
-  let bordered = $state(true);
   let passwordConfig = $state(true);
   let contextIcon = $state(false);
   let iconMode = $state<'default' | 'local' | 'snippet' | 'empty'>('default');
@@ -86,7 +85,6 @@
     <option>inherit</option><option>outlined</option><option>filled</option>
     <option>borderless</option><option>underlined</option>
   </select></label>
-  <label><input type="checkbox" bind:checked={bordered} /> Password bordered</label>
   <label><input type="checkbox" bind:checked={passwordConfig} /> Password component config</label>
   <label><input type="checkbox" bind:checked={contextIcon} /> Context password icon</label>
   <label>Password icon<select bind:value={iconMode}>
@@ -159,7 +157,6 @@
         {disabled}
         {readonly}
         {action}
-        {bordered}
         size={size === 'inherit' ? undefined : size}
         variant={variant === 'inherit' ? undefined : variant}
         prefix="BEFORE"

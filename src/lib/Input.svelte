@@ -23,7 +23,6 @@
     htmlSize,
     status,
     variant,
-    bordered = true,
     disabled,
     readonly,
     readOnly,
@@ -69,7 +68,7 @@
   }: InputProps = $props();
 
   const config = useConfig();
-  const variantContext = useVariant('input', () => ({ variant, bordered }));
+  const variantContext = useVariant('input', () => ({ variant }));
   const componentTheme = useComponentTheme('Input');
   const compact = useCompact();
   const form = useForm();
@@ -107,7 +106,6 @@
       htmlSize,
       status,
       variant,
-      bordered,
       disabled: blocked,
       readonly,
       readOnly,

@@ -104,7 +104,7 @@ describe('TextArea SSR', () => {
                 : 'enabled-leaf'
             }),
             disabled: true,
-            bordered: false,
+            variant: 'borderless',
             style: 'resize:both',
             showCount: true
           }

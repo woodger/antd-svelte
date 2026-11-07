@@ -87,7 +87,6 @@
     size,
     status,
     variant,
-    bordered = true,
     classNames,
     styles,
     popupMatchSelectWidth = false,
@@ -130,7 +129,7 @@
     semanticProps?: CascaderProps<OptionType, Multiple>;
   } = $props();
   const config = useConfig();
-  const variantContext = useVariant('cascader', () => ({ variant, bordered }));
+  const variantContext = useVariant('cascader', () => ({ variant }));
   const field = useFormField();
   const form = useForm();
   const compact = useCompact();

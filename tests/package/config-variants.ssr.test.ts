@@ -34,7 +34,7 @@ describe('ConfigProvider and Form variants public package SSR', () => {
         }
       }
 
-      expect(body).not.toMatch(/<(?:input|textarea|form)\b[^>]*\b(?:variant|bordered)=/);
+      expect(body).not.toMatch(/<(?:input|textarea|form)\b[^>]*\bvariant=/);
       expect(body.match(/<form\b/g)).toHaveLength(1);
       expect(body).not.toContain('variant-context-only');
       expect(body).not.toContain('variant-context-wrapper');

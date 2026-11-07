@@ -432,7 +432,7 @@ test(
 
     await expect(root).toHaveClass(/ant-input-filled/);
 
-    await page.getByLabel('Password bordered', { exact: true }).uncheck();
+    await page.getByRole('combobox', { name: 'Password variant', exact: true }).selectOption('borderless');
 
     await expect(root).toHaveClass(/ant-input-borderless/);
 

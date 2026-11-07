@@ -121,10 +121,8 @@ export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectV
   size?: ComponentSize;
   status?: 'error' | 'warning';
   /** @defaultValue 'outlined' */
-  /** Приоритет: variant, bordered=false, Form, treeSelect config, global variant, outlined. */
+  /** Приоритет: variant, Form, treeSelect config, global variant, outlined. */
   variant?: 'outlined' | 'borderless' | 'filled' | 'underlined';
-  /** @deprecated Используйте variant; false выбирает borderless без явного variant. */
-  bordered?: boolean;
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
   /** Нативный ref доступен после mount и очищается при unmount. */

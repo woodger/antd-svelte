@@ -115,7 +115,7 @@
   const owned = new Set([
     'value', 'defaultValue', 'stringMode', 'min', 'max', 'step', 'precision', 'decimalSeparator',
     'formatter', 'parser', 'controls', 'keyboard', 'changeOnWheel', 'changeOnBlur', 'mode', 'size',
-    'status', 'variant', 'bordered', 'readOnly', 'readonly', 'disabled', 'prefix', 'suffix',
+    'status', 'variant', 'readOnly', 'readonly', 'disabled', 'prefix', 'suffix',
     'addonBefore', 'addonAfter', 'rootClassName', 'prefixCls', 'class', 'style', 'classNames',
     'styles', 'name',
     'inputElement', 'nativeElement', 'ref', 'autoFocus', 'autoComplete', 'tabIndex', 'maxLength',

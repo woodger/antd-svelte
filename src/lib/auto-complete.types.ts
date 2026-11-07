@@ -108,10 +108,8 @@ export interface AutoCompleteProps extends Omit<
   size?: ComponentSize;
   status?: 'error' | 'warning';
   /** @defaultValue 'outlined' */
-  /** Читает Select config; локальные variant/bordered перекрывают Form и provider. */
+  /** Читает Select config; локальные variant перекрывают Form и provider. */
   variant?: 'outlined' | 'borderless' | 'filled' | 'underlined';
-  /** @deprecated Используйте variant; false выбирает borderless без явного variant. */
-  bordered?: boolean;
   /** Собственный control: примените attributes и register из контекста snippet. */
   children?: Snippet<[AutoCompleteInput]>;
   class?: string;

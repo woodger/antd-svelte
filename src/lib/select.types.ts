@@ -35,10 +35,8 @@ export interface SelectProps<
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */
   defaultValue?: Mode extends 'multiple' ? readonly Value[] : Value;
   size?: ComponentSize;
-  /** Приоритет: variant, bordered=false, Form, Select config, global variant, outlined. */
+  /** Приоритет: variant, Form, Select config, global variant, outlined. */
   variant?: 'outlined' | 'filled' | 'borderless' | 'underlined';
-  /** @deprecated Используйте variant; false задаёт borderless, если variant не указан. */
-  bordered?: boolean;
   /** Объект объединяет настройки поиска с top-level props. */
   showSearch?: boolean | SelectSearchConfig<Value>;
   /** Управляемая строка поиска; options и выбранные значения обновляются независимо. */

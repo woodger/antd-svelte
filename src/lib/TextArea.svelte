@@ -22,7 +22,6 @@
     size,
     status,
     variant,
-    bordered = true,
     disabled,
     readonly,
     readOnly,
@@ -64,7 +63,7 @@
     ...attributes
   }: TextAreaProps = $props();
   const config = useConfig();
-  const variantContext = useVariant('textArea', () => ({ variant, bordered }));
+  const variantContext = useVariant('textArea', () => ({ variant }));
   const componentTheme = useComponentTheme('Input');
   const compact = useCompact();
   const form = useForm();
@@ -103,7 +102,6 @@
         size,
         status,
         variant,
-        bordered,
         disabled,
         readonly,
         readOnly,

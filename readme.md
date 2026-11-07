@@ -6160,8 +6160,7 @@ OnPressEnter срабатывает один раз до keyup, блокируе
 как upstream, value attribute удаляется отложенно при mount/change/focus/blur;
 property value сохраняется, timers очищаются при unmount.
 
-Variant: outlined/filled/borderless/underlined; explicit variant → bordered=false
-→ Form.variant → ConfigProvider.input.variant → ConfigProvider.variant → outlined.
+Variant: outlined/filled/borderless/underlined; explicit variant → Form.variant → ConfigProvider.input.variant → ConfigProvider.variant → outlined.
 ClassNames/styles поддерживают
 root/input/prefix/suffix/clear/count как object или callback({props}), где size и
 disabled уже разрешены из контекстов. Root priority: context styles.root → context
@@ -6465,8 +6464,7 @@ Event proxy с делегированными DOM methods, а не React Synthet
 onMouseDown/onCompositionStart/End дополняют прежние native handlers.
 
 Variant поддерживает outlined/filled/borderless/underlined. Explicit variant имеет
-приоритет над bordered=false, затем Form.variant, component config, общий variant
-и outlined.
+приоритет над Form.variant, component config и общим variant; fallback — outlined.
 ClassNames/styles принимают root/textarea/clear/
 count либо callback({props}); props отражает текущий Svelte value. Context и local
 semantic styles объединяются, root style идёт после соответствующих semantic root
@@ -8084,8 +8082,7 @@ aliases пока отсутствуют. Generic numeric/object values не вх
 типы значений и callback выводятся из options и mode.
 
 Variant поддерживает outlined/filled/borderless/underlined в single и multiple;
-по умолчанию outlined. Явный variant имеет приоритет над legacy bordered=false,
-который без variant выбирает borderless. Смена оформления сохраняет DOM,
+по умолчанию outlined. Явный variant имеет приоритет над настройками Form и provider. Смена оформления сохраняет DOM,
 поисковый текст, выделение, фокус и выбранные значения формы. Классы и computed
 styles сверены с официальным UMD 6.6.8 в
 [браузерных проверках](./tests/browser/select-variants.spec.ts).

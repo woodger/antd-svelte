@@ -29,7 +29,6 @@
   let compact = $state(false);
   let variant = $state<TextAreaVariant | 'inherit'>('inherit');
   let size = $state<'small' | 'medium' | 'large'>('medium');
-  let bordered = $state(true);
   let semantic = $state(false);
   let richCount = $state(false);
   let manual = $state(false);
@@ -102,7 +101,6 @@
   <label><input type="checkbox" bind:checked={contextDisabled} /> Context clear disabled</label>
   <label><input type="checkbox" bind:checked={disabled} /> Feature textarea disabled</label>
   <label><input type="checkbox" bind:checked={readonly} /> Feature textarea readonly</label>
-  <label><input type="checkbox" bind:checked={bordered} /> Legacy textarea bordered</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark textarea feature theme</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact textarea feature theme</label>
   <label><input type="checkbox" bind:checked={semantic} /> Custom textarea semantics</label>
@@ -149,7 +147,6 @@
         {disabled}
         {readonly}
         {size}
-        {bordered}
         {wrap}
         variant={variant === 'inherit' ? undefined : variant}
         autoSize={sizing === 'off' ? false : sizing === 'auto' ? true : { minRows: 2, maxRows: 4 }}

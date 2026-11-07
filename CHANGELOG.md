@@ -9,6 +9,10 @@
 
 ### Removed
 
+- Удалён bordered у Input/TextArea/Password/Search, InputNumber, Select, TreeSelect,
+  Cascader, AutoComplete и date/time pickers. Оформление задаётся через variant;
+  приоритет local → Form → component/fallback → global сохранён.
+
 - Удалены deprecated component token aliases Button, Menu, Layout, Skeleton,
   Steps, Carousel, Splitter и Popover, seed pink, controlTmpOutline и старые
   ключи палитр blue-1. Сохранены текущие tokens, UI preset pink и CSS-палитры.

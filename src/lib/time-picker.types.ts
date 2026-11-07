@@ -89,8 +89,6 @@ export interface TimePickerProps extends Omit<
   suffixIcon?: TimePickerContent | true;
   prefix?: TimePickerContent;
   status?: 'error' | 'warning' | 'success' | 'validating';
-  /** @deprecated Используйте variant. False включает borderless, если variant не задан. */
-  bordered?: boolean;
   /** @deprecated Используйте renderExtraFooter; современный snippet имеет приоритет. */
   addon?: Snippet;
   /** @deprecated Используйте styles.popup.root. */

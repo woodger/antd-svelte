@@ -54,10 +54,8 @@ export interface TextAreaProps extends Omit<
   defaultValue?: string;
   size?: ComponentSize | 'medium';
   status?: 'error' | 'warning' | '';
-  /** Приоритет: variant, bordered=false, Form, textArea config, global variant, outlined. */
+  /** Приоритет: variant, Form, textArea config, global variant, outlined. */
   variant?: TextAreaVariant;
-  /** @defaultValue true */
-  bordered?: boolean;
   /** Измеряет содержимое или placeholder; minRows/maxRows ограничивают высоту. */
   autoSize?: boolean | { minRows?: number; maxRows?: number; };
   allowClear?: boolean | TextAreaAllowClear;

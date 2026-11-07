@@ -18,17 +18,16 @@
 ```
 
 Первый Input будет underlined, второй — borderless, Select — outlined.
-Без настройки используется outlined. Приоритет повторяет Ant Design 6.6.8:
+Без настройки используется outlined. Для текущих props приоритет повторяет Ant Design 6.6.8:
 
 1. Локальный variant.
-2. Локальный legacy bordered=false, если компонент поддерживает этот prop.
-3. Variant ближайшего Form.
-4. Variant из component config.
-5. Fallback component config у Password, Search и OTP: input.variant.
-6. Общий ConfigProvider.variant.
-7. Outlined.
+2. Variant ближайшего Form.
+3. Variant из component config.
+4. Fallback component config у Password, Search и OTP: input.variant.
+5. Общий ConfigProvider.variant.
+6. Outlined.
 
-Bordered=true не отменяет наследование. У Search fallback input.variant меняет
+У Search fallback input.variant меняет
 только поле. Кнопка читает собственный inputSearch.variant, Form или global variant;
 без этих настроек она сохраняет обычное оформление Button.
 

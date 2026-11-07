@@ -21,7 +21,6 @@
     iconRender,
     disabled,
     variant,
-    bordered,
     suffix,
     class: className = '',
     style,
@@ -31,7 +30,7 @@
   }: InputPasswordProps = $props();
 
   const config = useConfig();
-  const variantContext = useVariant('inputPassword', () => ({ variant, bordered }), 'input');
+  const variantContext = useVariant('inputPassword', () => ({ variant }), 'input');
   const form = useForm();
   const field = useFormField();
   const slots = ['root', 'input', 'prefix', 'suffix', 'clear', 'count'] as const;
@@ -67,7 +66,6 @@
       iconRender,
       disabled: blocked,
       variant: appearance,
-      bordered,
       suffix,
       class: className,
       style,
@@ -208,7 +206,6 @@
   type={visible ? 'text' : 'password'}
   disabled={blocked}
   variant={appearance}
-  {bordered}
   class={[
     'ant-input-password',
     config.inputPassword?.class,

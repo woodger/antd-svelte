@@ -44,12 +44,12 @@
         : theme.defaultAlgorithm }}>
     <form id="select-variant-control" aria-label="Select variant form" style="width:220px">
       {#if current.mode === 'multiple'}
-        <Select {options} mode="multiple" variant={appearance} bordered={current.bordered}
+        <Select {options} mode="multiple" variant={appearance}
           disabled={current.disabled} {status} bind:value={multiple} allowClear
           showSearch={searchable} name="choice" aria-label="Variant select"
           onValueChange={() => { changes++; }} />
       {:else}
-        <Select {options} variant={appearance} bordered={current.bordered}
+        <Select {options} variant={appearance}
           disabled={current.disabled} {status} bind:value={single} allowClear
           showSearch={searchable} name="choice" aria-label="Variant select"
           onValueChange={() => { changes++; }} />

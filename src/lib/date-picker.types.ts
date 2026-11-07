@@ -78,8 +78,6 @@ export interface DatePickerProps extends Omit<
   status?: 'error' | 'warning';
   /** Локальное оформление перекрывает Form и ConfigProvider; fallback outlined. */
   variant?: 'outlined' | 'borderless' | 'filled' | 'underlined';
-  /** @deprecated Используйте variant; false выбирает borderless без явного variant. */
-  bordered?: boolean;
   locale?: DatePickerLocale;
   onChange?: (value: Dayjs | null, dateString: string) => void;
   onCalendarChange?: (

@@ -77,7 +77,7 @@ describe('InputPassword SSR', () => {
     const body = render(InputPassword, {
       props: {
         disabled: true,
-        bordered: false,
+        variant: 'borderless',
         classNames: ({ props }) => ({
           root: props.disabled && props.variant === 'borderless' ? 'resolved' : 'incorrect'
         }),

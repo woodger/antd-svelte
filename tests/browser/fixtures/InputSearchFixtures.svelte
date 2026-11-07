@@ -22,7 +22,6 @@
   let size = $state<'inherit' | 'small' | 'medium' | 'large'>('inherit');
   let variant = $state<InputVariant | 'inherit'>('inherit');
   let contextVariant = $state<InputVariant | 'inherit'>('inherit');
-  let bordered = $state(true);
   let semantic = $state(false);
   let contextIcon = $state(false);
   let localIcon = $state<'default' | 'custom' | 'empty'>('default');
@@ -104,7 +103,6 @@
     <option>inherit</option><option>outlined</option><option>filled</option>
     <option>borderless</option><option>underlined</option>
   </select></label>
-  <label><input type="checkbox" bind:checked={bordered} /> Search bordered</label>
   <label><input type="checkbox" bind:checked={semantic} /> Search semantics</label>
   <label><input type="checkbox" bind:checked={contextIcon} /> Context search icon</label>
   <label>Search icon<select bind:value={localIcon}>
@@ -158,7 +156,6 @@
         bind:this={instance}
         {loading}
         {disabled}
-        {bordered}
         {hidden}
         size={size === 'inherit' ? undefined : size}
         variant={variant === 'inherit' ? undefined : variant}

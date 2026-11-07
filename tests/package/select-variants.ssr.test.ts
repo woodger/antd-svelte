@@ -21,7 +21,7 @@ describe('Select local variants public package SSR', () => {
         classes.includes(`ant-select-${variant}`));
 
       expect(variants).toEqual(sample.expected.variants);
-      expect(body).not.toMatch(/<input\b[^>]*\b(?:variant|bordered)=/);
+      expect(body).not.toMatch(/<input\b[^>]*\bvariant=/);
       expect(body).toContain('name="choice"');
     });
   }

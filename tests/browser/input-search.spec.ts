@@ -268,7 +268,7 @@ test(
     await expect(button).toHaveClass(/ant-input-search-btn-filled/);
     await expect(button).toHaveClass(/ant-btn-variant-text/);
 
-    await page.getByLabel('Search bordered', { exact: true }).uncheck();
+    await page.getByRole('combobox', { name: 'Search variant', exact: true }).selectOption('borderless');
 
     await expect(inputRoot).toHaveClass(/ant-input-borderless/);
     await expect(button).toHaveClass(/ant-input-search-btn-borderless/);

@@ -87,7 +87,7 @@ describe('Input SSR', () => {
       props: {
         size: 'large',
         disabled: true,
-        bordered: false,
+        variant: 'borderless',
         classNames: ({ props }) => ({
           root: props.disabled && props.size === 'large' ? 'resolved-props' : 'invalid-props'
         })

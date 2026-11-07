@@ -213,8 +213,6 @@ export interface CascaderProps<
   size?: ComponentSize;
   status?: 'error' | 'warning';
   variant?: CascaderSemantic['props']['variant'];
-  /** @deprecated Используйте variant. */
-  bordered?: boolean;
   classNames?: CascaderSemanticValue<string>;
   styles?: CascaderSemanticValue<string>;
   /** @defaultValue false */

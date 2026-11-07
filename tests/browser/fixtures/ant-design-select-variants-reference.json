@@ -5,7 +5,7 @@
     "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
     "source": "package/dist/antd.min.js",
     "reactVersion": "18.3.1",
-    "operation": "Unmodified official UMD root variant classes and computed background/border/shadow/radius; local variant and legacy bordered only, no Form/global variant configuration."
+    "operation": "Unmodified official UMD root variant classes and computed background/border/shadow/radius; current local variants only, no Form/global variant configuration."
   },
   "cases": [
     {
@@ -109,70 +109,6 @@
           "border-bottom-color": "rgb(217, 217, 217)",
           "box-shadow": "none",
           "border-radius": "0px"
-        }
-      }
-    },
-    {
-      "name": "single-legacy-borderless",
-      "bordered": false,
-      "expected": {
-        "variants": [
-          "borderless"
-        ],
-        "disabled": false,
-        "styles": {
-          "background-color": "rgba(0, 0, 0, 0)",
-          "border-top-width": "1px",
-          "border-top-style": "solid",
-          "border-top-color": "rgba(0, 0, 0, 0)",
-          "border-bottom-width": "1px",
-          "border-bottom-style": "solid",
-          "border-bottom-color": "rgba(0, 0, 0, 0)",
-          "box-shadow": "none",
-          "border-radius": "6px"
-        }
-      }
-    },
-    {
-      "name": "single-bordered-true",
-      "bordered": true,
-      "expected": {
-        "variants": [
-          "outlined"
-        ],
-        "disabled": false,
-        "styles": {
-          "background-color": "rgb(255, 255, 255)",
-          "border-top-width": "1px",
-          "border-top-style": "solid",
-          "border-top-color": "rgb(217, 217, 217)",
-          "border-bottom-width": "1px",
-          "border-bottom-style": "solid",
-          "border-bottom-color": "rgb(217, 217, 217)",
-          "box-shadow": "none",
-          "border-radius": "6px"
-        }
-      }
-    },
-    {
-      "name": "single-explicit-wins",
-      "variant": "outlined",
-      "bordered": false,
-      "expected": {
-        "variants": [
-          "outlined"
-        ],
-        "disabled": false,
-        "styles": {
-          "background-color": "rgb(255, 255, 255)",
-          "border-top-width": "1px",
-          "border-top-style": "solid",
-          "border-top-color": "rgb(217, 217, 217)",
-          "border-bottom-width": "1px",
-          "border-bottom-style": "solid",
-          "border-bottom-color": "rgb(217, 217, 217)",
-          "box-shadow": "none",
-          "border-radius": "6px"
         }
       }
     },
@@ -480,73 +416,6 @@
           "border-bottom-color": "rgb(217, 217, 217)",
           "box-shadow": "none",
           "border-radius": "0px"
-        }
-      }
-    },
-    {
-      "name": "multiple-legacy-borderless",
-      "mode": "multiple",
-      "bordered": false,
-      "expected": {
-        "variants": [
-          "borderless"
-        ],
-        "disabled": false,
-        "styles": {
-          "background-color": "rgba(0, 0, 0, 0)",
-          "border-top-width": "1px",
-          "border-top-style": "solid",
-          "border-top-color": "rgba(0, 0, 0, 0)",
-          "border-bottom-width": "1px",
-          "border-bottom-style": "solid",
-          "border-bottom-color": "rgba(0, 0, 0, 0)",
-          "box-shadow": "none",
-          "border-radius": "6px"
-        }
-      }
-    },
-    {
-      "name": "multiple-bordered-true",
-      "mode": "multiple",
-      "bordered": true,
-      "expected": {
-        "variants": [
-          "outlined"
-        ],
-        "disabled": false,
-        "styles": {
-          "background-color": "rgb(255, 255, 255)",
-          "border-top-width": "1px",
-          "border-top-style": "solid",
-          "border-top-color": "rgb(217, 217, 217)",
-          "border-bottom-width": "1px",
-          "border-bottom-style": "solid",
-          "border-bottom-color": "rgb(217, 217, 217)",
-          "box-shadow": "none",
-          "border-radius": "6px"
-        }
-      }
-    },
-    {
-      "name": "multiple-explicit-wins",
-      "mode": "multiple",
-      "variant": "outlined",
-      "bordered": false,
-      "expected": {
-        "variants": [
-          "outlined"
-        ],
-        "disabled": false,
-        "styles": {
-          "background-color": "rgb(255, 255, 255)",
-          "border-top-width": "1px",
-          "border-top-style": "solid",
-          "border-top-color": "rgb(217, 217, 217)",
-          "border-bottom-width": "1px",
-          "border-bottom-style": "solid",
-          "border-bottom-color": "rgb(217, 217, 217)",
-          "box-shadow": "none",
-          "border-radius": "6px"
         }
       }
     },

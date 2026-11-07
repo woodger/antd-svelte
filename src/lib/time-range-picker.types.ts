@@ -38,8 +38,6 @@ export interface TimeRangePickerProps extends Omit<
   suffixIcon?: TimePickerContent;
   prefix?: TimePickerContent;
   status?: 'error' | 'warning' | 'success' | 'validating';
-  /** @deprecated Используйте variant. */
-  bordered?: boolean;
   /** @deprecated Используйте classNames.popup.root; popupClassName имеет приоритет. */
   dropdownClassName?: string;
   /** @deprecated Используйте styles.popup.root. */

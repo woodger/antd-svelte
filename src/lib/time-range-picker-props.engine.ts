@@ -5,7 +5,7 @@ const timeOnly = new Set([
   'hourStep', 'minuteStep', 'secondStep', 'millisecondStep', 'showHour', 'showMinute',
   'showSecond', 'showMillisecond', 'use12Hours', 'hideDisabledOptions', 'defaultOpenValue',
   'disabledHours', 'disabledMinutes', 'disabledSeconds', 'changeOnScroll', 'clearIcon',
-  'suffixIcon', 'prefix', 'bordered', 'dropdownClassName', 'popupStyle', 'classNames', 'styles',
+  'suffixIcon', 'prefix', 'dropdownClassName', 'popupStyle', 'classNames', 'styles',
   'cellRender', 'panelRender', 'onPickerValueChange', 'onPanelChange', 'disabledDate',
   'onclick', 'onClick', 'onFocus', 'onBlur', 'onKeyDown', 'onfocus', 'onblur',
   'allowClear', 'status', 'placeholder', 'renderExtraFooter', 'disabledTime'

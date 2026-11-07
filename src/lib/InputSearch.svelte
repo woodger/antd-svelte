@@ -24,7 +24,6 @@
     disabled,
     size,
     variant,
-    bordered,
     addonAfter,
     hidden,
     onSearch,
@@ -40,8 +39,8 @@
   }: InputSearchProps = $props();
 
   const config = useConfig();
-  const buttonContextVariant = useVariant('inputSearch', () => ({ variant, bordered }));
-  const inputContextVariant = useVariant('inputSearch', () => ({ variant, bordered }), 'input');
+  const buttonContextVariant = useVariant('inputSearch', () => ({ variant }));
+  const inputContextVariant = useVariant('inputSearch', () => ({ variant }), 'input');
   const compact = useCompact();
   const form = useForm();
   const field = useFormField();
@@ -77,7 +76,6 @@
       disabled,
       size,
       variant: buttonVariant,
-      bordered,
       addonAfter,
       hidden,
       onSearch,
@@ -253,7 +251,6 @@
     type="search"
     size={resolvedSize}
     {disabled}
-    {bordered}
     variant={inputVariant}
     classNames={inputClasses}
     styles={inputStyles}
