@@ -6,6 +6,28 @@ test.beforeEach(async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'Component browser fixtures' })).toBeVisible();
 });
 
+test('Table keeps controlled expansion until the owner accepts the requested keys', async ({ page }) => {
+  const fixture = page.getByRole('region', { name: 'Expandable table fixture', exact: true });
+  const trigger = fixture.getByRole('button', { name: 'Раскрыть строку 0', exact: true });
+
+  await fixture.getByLabel('Accept expansion requests', { exact: true }).uncheck();
+  await trigger.click();
+
+  await expect(trigger).toHaveAttribute('aria-expanded', 'false');
+  await expect(fixture.getByRole('status', { name: 'Expanded owner keys', exact: true }))
+    .toHaveText('[]');
+  await expect(fixture.getByRole('status', { name: 'Expansion events', exact: true }))
+    .toContainText('"keys":[0]');
+
+  await fixture.getByLabel('Accept expansion requests', { exact: true }).check();
+  await trigger.click();
+
+  await expect(fixture.getByRole('button', { name: 'Свернуть строку 0', exact: true }))
+    .toHaveAttribute('aria-expanded', 'true');
+  await expect(fixture.getByRole('status', { name: 'Expanded owner keys', exact: true }))
+    .toHaveText('[0]');
+});
+
 test(
   'Table expands zero with Enter and Space, reports callbacks in order and never submits the form',
   async ({ page }) => {
@@ -46,9 +68,9 @@ test(
     );
 
     expect(events).toEqual([
-      { type: 'expand', expanded: true, key: 0, name: 'Aster', owner: [0] },
+      { type: 'expand', expanded: true, key: 0, name: 'Aster', owner: [] },
       { type: 'keys', keys: [0] },
-      { type: 'expand', expanded: false, key: 0, name: 'Aster', owner: [] },
+      { type: 'expand', expanded: false, key: 0, name: 'Aster', owner: [0] },
       { type: 'keys', keys: [] }
     ]);
     await expect(fixture.getByRole('status', { name: 'Expansion data events', exact: true }))
@@ -262,8 +284,8 @@ test(
     );
 
     expect(events.filter((event: { type: string }) => event.type === 'expand')).toEqual([
-      { type: 'expand', expanded: true, key: 0, name: 'Aster', owner: [0] },
-      { type: 'expand', expanded: true, key: 3, name: 'Dahlia', owner: [0, 3] }
+      { type: 'expand', expanded: true, key: 0, name: 'Aster', owner: [] },
+      { type: 'expand', expanded: true, key: 3, name: 'Dahlia', owner: [0] }
     ]);
 
     const dataEvents = JSON.parse(

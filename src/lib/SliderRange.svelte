@@ -103,7 +103,7 @@
   const owned = new Set([
     'range', 'min', 'max', 'step', 'marks', 'dots', 'included', 'track', 'allowCross', 'pushable',
     'disabled', 'orientation', 'reverse', 'keyboard', 'autoFocus', 'autofocus',
-    'onValueChange', 'onChange', 'onBeforeChange', 'onChangeComplete',
+    'onValueChange', 'onChange', 'onChangeComplete',
     'onFocus', 'onBlur', 'tabIndex', 'ariaLabelForHandle', 'ariaLabelledByForHandle',
     'ariaRequired', 'ariaValueTextFormatterForHandle', 'tooltip', 'prefixCls', 'rootClassName',
     'class', 'classNames', 'styles', 'dotStyle',
@@ -286,7 +286,6 @@
       focus = before + 1;
     } else next[index] = point;
     if (!raw.length) next.push(point);
-    props.onBeforeChange?.(next);
     publish(next, focus);
     if (event) {
       (nativeElement?.ownerDocument.activeElement as HTMLElement | null)?.blur?.();
@@ -312,7 +311,6 @@
     event.stopPropagation();
     if (sliderHandleDisabled(disabled, index)) return;
     start(event, index, [...raw], true);
-    props.onBeforeChange?.([...raw]);
   }
 
   function handleKeydown(
@@ -334,13 +332,11 @@
     if (change !== undefined) {
       event.preventDefault();
       const next = offset.offset(raw, change, index);
-      props.onBeforeChange?.([...raw]);
       publish(next.values, index);
       focusIndex(raw[index] === next.value ? index : raw.indexOf(next.value));
     } else if ((event.key === 'Delete' || event.key === 'Backspace')
       && editable && raw.length > settings.minCount) {
       const next = raw.filter((_, item) => item !== index);
-      props.onBeforeChange?.(next);
       publish(next);
       focused = -1;
       focusIndex(Math.max(0, index - 1));
@@ -360,7 +356,6 @@
       const next = offset.offset(
         raw, event.currentTarget.valueAsNumber - raw[index], index, 'dist'
       );
-      props.onBeforeChange?.([...raw]);
       publish(next.values);
     }
     props.oninput?.(event);
@@ -509,7 +504,6 @@
         onpointerdown={event => {
           if (draggableTrack) {
             start(event, -1);
-            props.onBeforeChange?.([...raw]);
           }
         }}></div>
     {/each}

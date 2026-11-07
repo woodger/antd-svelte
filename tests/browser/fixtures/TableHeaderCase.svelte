@@ -54,12 +54,11 @@
         rowSelection={stateful ? { fixed: true,
           getCheckboxProps: record => ({ 'aria-label': `Select ${record.name}` }) } : false}
         bind:selectedRowKeys={selected}
-        expandable={stateful ? { expandedRowRender: details, fixed: true } : undefined}
-        defaultExpandedRowKeys={[1]}
+        expandable={stateful ? { expandedRowRender: details, fixed: true,
+          defaultExpandedRowKeys: [1], onExpandedRowsChange: () => events.push('expand') } : undefined}
         scroll={stateful ? { x: 960, y: 180 } : undefined}
         onChange={change => events.push(change.action)}
-        onSelectionChange={() => events.push('selection')}
-        onExpandedRowsChange={() => events.push('expand')} />
+        onSelectionChange={() => events.push('selection')} />
     </form>
     <output aria-label="Table header events">{JSON.stringify(events)}</output>
   </div>

@@ -1,0 +1,107 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "react": "18.3.1",
+    "source": "unmodified official UMD, runtime CSS-in-JS, no static CSS",
+    "operation": "Controlled expandable.expandedRowKeys: reject request, accept request, collapse; callbacks capture owner keys before the owner accepts onExpandedRowsChange."
+  },
+  "cases": [
+    {
+      "id": "rejected",
+      "keys": [],
+      "expanded": "false",
+      "events": [
+        {
+          "type": "expand",
+          "expanded": true,
+          "key": 0,
+          "owner": []
+        },
+        {
+          "type": "keys",
+          "keys": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "accepted",
+      "keys": [
+        0
+      ],
+      "expanded": "true",
+      "events": [
+        {
+          "type": "expand",
+          "expanded": true,
+          "key": 0,
+          "owner": []
+        },
+        {
+          "type": "keys",
+          "keys": [
+            0
+          ]
+        },
+        {
+          "type": "expand",
+          "expanded": true,
+          "key": 0,
+          "owner": []
+        },
+        {
+          "type": "keys",
+          "keys": [
+            0
+          ]
+        }
+      ]
+    },
+    {
+      "id": "collapsed",
+      "keys": [],
+      "expanded": "false",
+      "events": [
+        {
+          "type": "expand",
+          "expanded": true,
+          "key": 0,
+          "owner": []
+        },
+        {
+          "type": "keys",
+          "keys": [
+            0
+          ]
+        },
+        {
+          "type": "expand",
+          "expanded": true,
+          "key": 0,
+          "owner": []
+        },
+        {
+          "type": "keys",
+          "keys": [
+            0
+          ]
+        },
+        {
+          "type": "expand",
+          "expanded": false,
+          "key": 0,
+          "owner": [
+            0
+          ]
+        },
+        {
+          "type": "keys",
+          "keys": []
+        }
+      ]
+    }
+  ]
+}

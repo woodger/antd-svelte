@@ -59,7 +59,6 @@
     disabled,
     readonly,
     nativeElement = $bindable(),
-    textarea = $bindable(),
     oninput,
     onkeydown,
     onkeyup,
@@ -138,10 +137,6 @@
   $effect(() => {
     nativeElement = root;
     return () => { nativeElement = undefined; };
-  });
-  $effect(() => {
-    textarea = editor;
-    return () => { textarea = undefined; };
   });
 
   $effect(() => {

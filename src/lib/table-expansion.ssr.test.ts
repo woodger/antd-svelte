@@ -38,12 +38,14 @@ describe('Table expanded row rendering', () => {
         props: {
           columns,
           dataSource: people,
-          expandable: { expandedRowRender: unusedDetails },
-          onExpand: () => {
-            throw new Error('Unexpected expansion');
-          },
-          onExpandedRowsChange: () => {
-            throw new Error('Unexpected keys callback');
+          expandable: {
+            expandedRowRender: unusedDetails,
+            onExpand: () => {
+              throw new Error('Unexpected expansion');
+            },
+            onExpandedRowsChange: () => {
+              throw new Error('Unexpected keys callback');
+            }
           },
           onChange: () => {
             throw new Error('Unexpected data callback');
@@ -71,8 +73,7 @@ describe('Table expanded row rendering', () => {
             columns,
             dataSource: people,
             rowSelection: true,
-            expandable: { expandedRowRender: details },
-            defaultExpandedRowKeys: defaults
+            expandable: { expandedRowRender: details, defaultExpandedRowKeys: defaults },
           }
         }
       );
@@ -98,9 +99,7 @@ describe('Table expanded row rendering', () => {
         props: {
           columns,
           dataSource: people,
-          expandedRowKeys: keys,
-          defaultExpandedRowKeys: [0],
-          expandable: { expandedRowRender: unusedDetails }
+          expandable: { expandedRowRender: unusedDetails, expandedRowKeys: keys, defaultExpandedRowKeys: [0] }
         }
       }
     );
@@ -116,8 +115,7 @@ describe('Table expanded row rendering', () => {
         props: {
           columns,
           dataSource: people,
-          expandedRowKeys: [0, 2],
-          expandable: { expandedRowRender: details },
+          expandable: { expandedRowRender: details, expandedRowKeys: [0, 2] },
           sorter: { columnKey: 'score', order: 'ascend' },
           current: 2,
           pageSize: 1
@@ -142,8 +140,7 @@ describe('Table expanded row rendering', () => {
           total: 95,
           current: 4,
           pageSize: 1,
-          expandedRowKeys: [2],
-          expandable: { expandedRowRender: details }
+          expandable: { expandedRowRender: details, expandedRowKeys: [2] }
         }
       });
 
@@ -160,8 +157,7 @@ describe('Table expanded row rendering', () => {
       props: {
         columns,
         dataSource: people,
-        expandedRowKeys: keys,
-        expandable: { expandedRowRender: unusedDetails, rowExpandable: () => false }
+        expandable: { expandedRowRender: unusedDetails, rowExpandable: () => false, expandedRowKeys: keys }
       }
     });
 
@@ -170,7 +166,7 @@ describe('Table expanded row rendering', () => {
     expect(keys).toEqual([0]);
     const plain = render(
       Table<Person>,
-      { props: { columns, dataSource: people, expandedRowKeys: keys } }
+      { props: { columns, dataSource: people, } }
     ).body;
 
     expect(plain).not.toContain('ant-table-row-expand-icon-cell');
@@ -219,8 +215,7 @@ describe('Table expanded row rendering', () => {
       props: {
         columns,
         dataSource: keys.map((key) => ({ key, name: 'Person', score: 0 })),
-        expandedRowKeys: keys,
-        expandable: { expandedRowRender: details },
+        expandable: { expandedRowRender: details, expandedRowKeys: keys },
         pagination: false
       }
     });

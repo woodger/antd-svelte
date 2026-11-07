@@ -6,6 +6,7 @@
 
   let { sample }: { sample?: typeof reference.cases[number]; } = $props();
   let selectedCase = $state('default');
+  let expandedKeys = $state<TableKey[]>([0]);
   let current = $derived(sample ?? reference.cases.find(item => item.name === selectedCase)
     ?? reference.cases[0]);
   let nameOverride = $state<boolean>();
@@ -68,8 +69,8 @@
           size="medium" pagination={false} rowSelection={current.selection}
           showHeader={current.name !== 'no-header-hidden'}
           scroll={current.name.includes('fixed') ? { x: 600 } : undefined}
-          expandable={current.expand ? { expandedRowRender: details, columnTitle: 'Expand' } : undefined}
-          defaultExpandedRowKeys={[0]}
+          expandable={current.expand ? { expandedRowRender: details, columnTitle: 'Expand',
+            expandedRowKeys: expandedKeys, onExpandedRowsChange: keys => { expandedKeys = keys; } } : undefined}
           bind:selectedRowKeys={() => selection, value => { selectedKeys = value; }}
           bind:sorter={() => sorter, value => { sorterState = value; }}
           bind:filters={() => filters, value => { filtersState = value; }}

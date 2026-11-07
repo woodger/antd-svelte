@@ -35,13 +35,15 @@
       rowSelection={selection ? { fixed: mode === 'stateful' } : false}
       bind:selectedRowKeys={selected} bind:sorter
       defaultSorter={mode === 'sorted' ? { columnKey: 'name', order: 'ascend' } : null}
-      expandable={expansion ? { expandedRowRender: details, fixed: mode === 'stateful' } : undefined}
-      bind:expandedRowKeys={expanded}
+      expandable={expansion ? { expandedRowRender: details, fixed: mode === 'stateful',
+        expandedRowKeys: expanded, onExpandedRowsChange: keys => {
+          expanded = keys;
+          events.push('expand');
+        } } : undefined}
       scroll={fixed ? { x: 960, y: 180 } : undefined}
       style={mode === 'root-style' ? '--ant-table-cell-padding-block-md:11px' : undefined}
       onChange={change => events.push(change.action)}
-      onSelectionChange={() => events.push('selection')}
-      onExpandedRowsChange={() => events.push('expand')} />
+      onSelectionChange={() => events.push('selection')} />
   </form>
   <output aria-label="Table theme events">{JSON.stringify(events)}</output>
   <output aria-label="Table theme selected">{JSON.stringify(selected)}</output>

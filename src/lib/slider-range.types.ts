@@ -73,7 +73,6 @@ export interface SliderRangeProps extends Omit<
   /** Исходный callback; не вызывается для неизменившегося отсортированного набора. */
   onChange?: (value: number[]) => void;
   /** Вызывается и для действий без изменения значения, как в rc-slider. */
-  onBeforeChange?: (value: number[]) => void;
   /** Mouse/pointer release, navigation keyup и click mark; Delete не завершает действие. */
   onChangeComplete?: (value: number[]) => void;
   onFocus?: (event: FocusEvent) => void;

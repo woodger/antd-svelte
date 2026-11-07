@@ -32,7 +32,6 @@ export interface QRProps {
   bgColor?: string;
   fgColor?: string;
   style?: string;
-  includeMargin?: boolean;
   marginSize?: number;
   imageSettings?: ImageSettings;
   title?: string;

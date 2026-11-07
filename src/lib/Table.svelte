@@ -54,10 +54,6 @@
     onChange,
     onSelectionChange,
     expandable,
-    expandedRowKeys = $bindable(),
-    defaultExpandedRowKeys = [],
-    onExpand,
-    onExpandedRowsChange,
     loading = false,
     disabled,
     bordered = false,
@@ -84,7 +80,7 @@
   const initialCurrent = untrack(() => defaultCurrent);
   const initialSize = untrack(() => defaultPageSize);
   const initialSelection = untrack(() => [...defaultSelectedRowKeys]);
-  const initialExpansion = untrack(() => [...defaultExpandedRowKeys]);
+  let internalExpansion = $state(untrack(() => [...expandable?.defaultExpandedRowKeys ?? []]));
   const initialFilters: TableFilters = untrack(
     () => Object.fromEntries(
       Object.entries(defaultFilters).map(([key, values]) => [key, [...values]])
@@ -134,7 +130,7 @@
   );
   let selectedKeys = $derived(new Set(selectedRowKeys ?? initialSelection));
   let selection = $derived(getTableSelection(changeableKeys, [...selectedKeys]));
-  let expandedKeys = $derived(new Set(expandedRowKeys ?? initialExpansion));
+  let expandedKeys = $derived(new Set(expandable?.expandedRowKeys ?? internalExpansion));
   let resolvedDisabled = $derived((disabled ?? config.componentDisabled) || loading);
   let resolvedSize = $derived(size ?? config.componentSize);
   let strings = $derived({ ...ruRU.table, ...config.locale.table });
@@ -316,7 +312,8 @@
       next.add(key);
     else next.delete(key);
 
-    expandedRowKeys = [...next];
+    internalExpansion = [...next];
+    const { onExpand, onExpandedRowsChange } = expandable;
     onExpand?.(expanded, record);
     onExpandedRowsChange?.([...next]);
   }

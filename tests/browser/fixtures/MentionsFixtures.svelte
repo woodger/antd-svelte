@@ -30,7 +30,7 @@
   );
   let instance = $state<Mentions>();
   let nativeRoot = $state<HTMLDivElement>();
-  let editor = $state<HTMLTextAreaElement>();
+  let editor = $derived(nativeRoot?.querySelector('textarea'));
   let submitted = $state('');
   const form = createForm(
     {
@@ -44,7 +44,6 @@
   {#if visible}<Mentions
     bind:this={instance}
     bind:nativeElement={nativeRoot}
-    bind:textarea={editor}
     aria-label="Mention text"
     name="mentions"
     {value}

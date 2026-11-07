@@ -47,6 +47,12 @@ export interface TableRowSelection<Row extends object> {
 
 export interface TableExpandable<Row extends object> {
   expandedRowRender: Snippet<[record: Row, index: number]>;
+  /** Управляемые ключи; новое значение принимает владелец через onExpandedRowsChange. */
+  expandedRowKeys?: TableKey[];
+  /** Начальные ключи; последующие изменения не переинициализируют состояние. */
+  defaultExpandedRowKeys?: readonly TableKey[];
+  onExpand?: (expanded: boolean, record: Row) => void;
+  onExpandedRowsChange?: (keys: TableKey[]) => void;
   rowExpandable?: (record: Row) => boolean;
   columnTitle?: string;
   columnWidth?: number | string;
@@ -106,11 +112,6 @@ export interface TableProps<Row extends object> {
   onChange?: (change: TableChange<Row>) => void;
   onSelectionChange?: (keys: TableKey[], rows: Row[], info: { type: 'single' | 'all'; }) => void;
   expandable?: TableExpandable<Row>;
-  /** Поддерживает bind:expandedRowKeys. */
-  expandedRowKeys?: TableKey[];
-  defaultExpandedRowKeys?: readonly TableKey[];
-  onExpand?: (expanded: boolean, record: Row) => void;
-  onExpandedRowsChange?: (keys: TableKey[]) => void;
   /** @defaultValue false */
   loading?: boolean;
   disabled?: boolean;

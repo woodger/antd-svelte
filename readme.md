@@ -1661,8 +1661,8 @@ onChangeComplete при отпускании. Действие на уже до�
 
 `onChange(next)` получает число перед обновлением `bind:value`; `onValueChange`
 вызывается после. Этот alias не меняет сохранённые native правила завершения и
-отмены действий. Source onBeforeChange и полная унификация lifecycle
-с range пока остаются отдельной задачей.
+отмены действий. Deprecated onBeforeChange исключён; полная унификация lifecycle
+с range пока остаётся отдельной задачей.
 
 По умолчанию min=0, max=100, step=1. Число ограничивается границами и
 выравнивается по ближайшему шагу от min; равные расстояния округляются
@@ -1813,9 +1813,9 @@ step=null перенос всей дорожки отключён. Во врем
 identity; после завершения и keyboard crossing фокус следует новому индексу.
 
 OnChange получает отсортированный массив перед обновлением bind:value;
-onValueChange — после него. OnBeforeChange вызывается перед взаимодействием.
+onValueChange — после него.
 Range вызывает onChangeComplete по navigation keyup и release
-даже без изменения; Delete вызывает before/change без дополнительного complete.
+даже без изменения; Delete вызывает change без дополнительного complete.
 Click mark завершает изменение сразу. Keyboard=false блокирует перемещение,
 но сохраняет исходный callback keyup. Нативные input/change доступны отдельно;
 для pointer/keyboard действий диапазона они отправляются после DOM update и
@@ -7940,7 +7940,8 @@ listeners удаляются при unmount. OnResize получает {width,he
 AllowClear — boolean/{clearIcon,disabled}; очистка вызывает change(''), затем
 onClear. Size/status/variant, native name/required/maxlength, FormItem/validation/
 reset, Form/ConfigProvider disabled, locale/themes/compact density/RTL поддержаны.
-Focus/blur, bind:nativeElement и bind:textarea предоставляют native refs.
+Focus/blur и bind:nativeElement предоставляют текущий ref API. Текстовое поле
+доступно через nativeElement.querySelector('textarea'); deprecated textarea ref удалён.
 CSS-рецепт mentions извлекает 102 правила. Галерея `/ant-design#mentions`,
 фикстура `?fixture=mentions`; SSR не измеряет DOM и не ставит таймеры.
 24 эталона официального UMD для контейнеров и popupRender —
@@ -8878,20 +8879,24 @@ disabled-строки при расчёте checked/indeterminate и отклю�
 {#snippet details(person: Person, index: number)}<p>{index + 1}. {person.name}: {person.email}</p>{/snippet}
 <Button onclick={() => { expanded = []; }}>Свернуть все</Button>
 <Table dataSource={people} {columns} caption="Участники"
-  expandable={{ expandedRowRender: details, rowExpandable: (person) => person.active, fixed: true }}
-  bind:expandedRowKeys={expanded} />
+  expandable={{ expandedRowRender: details, rowExpandable: (person) => person.active,
+    fixed: true, expandedRowKeys: expanded, onExpandedRowsChange: next => { expanded = next; } }} />
 ```
 
-`expandedRowKeys` поддерживает привязку. Для отдельной таблицы доступны
-`defaultExpandedRowKeys`, которые читаются один раз. `[]` сворачивает все строки.
+`expandable.expandedRowKeys` управляется владельцем через
+`expandable.onExpandedRowsChange`. Для локального состояния доступны
+`expandable.defaultExpandedRowKeys`, которые читаются один раз. `[]` сворачивает все строки.
 Раскрытие использует тот же rowKey, что и выбор; числовой `0` и строковый `"0"`
 различаются. Ключи сохраняются при сортировке, фильтрации, смене страниц,
 замене/удалении данных, выключении expandable и изменении rowExpandable.
 Подробности отображаются только для доступных строк текущего dataSource и страницы;
 кэша записей нет. Возвращённая запись с сохранённым ключом снова раскрывается.
 
-Пользовательское переключение сначала обновляет привязку, затем вызывает
-`onExpand(expanded, record)` и `onExpandedRowsChange(keys)` в этом порядке.
+Пользовательское переключение обновляет внутренние ключи и вызывает
+`expandable.onExpand(expanded, record)`, затем `expandable.onExpandedRowsChange(keys)`.
+Управляемые ключи обновляет владелец; callbacks сами не меняют его массив.
+[Замер официального UMD](./tools/fixtures/ant-design-current-table-expansion-observation.json)
+фиксирует отказ владельца, принятие новых ключей и порядок callbacks.
 Keys содержит все раскрытые ключи, включая отсутствующие на текущей странице.
 Внешние изменения props не вызывают эти callbacks. Раскрытие не меняет выбор
 или пагинацию и не вызывает общий onChange. currentDataSource и total считают

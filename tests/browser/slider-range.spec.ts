@@ -46,12 +46,12 @@ test('Slider range retains source callback order even for a boundary keyup', asy
 
   await expect(output(page, 'value')).toHaveText('[25,80]');
   await expect(output(page, 'events'))
-    .toHaveText('before:20,80|change:25,80|complete:25,80');
+    .toHaveText('change:25,80|complete:25,80');
   await handles(page).first().press('Home');
   await clear(page);
   await handles(page).first().press('ArrowLeft');
 
-  await expect(output(page, 'events')).toHaveText('before:0,80|complete:0,80');
+  await expect(output(page, 'events')).toHaveText('complete:0,80');
 });
 
 test('Slider range updates a rail selection and completes only on release', async ({ page }) => {
@@ -60,11 +60,11 @@ test('Slider range updates a rail selection and completes only on release', asyn
   await page.mouse.down();
 
   await expect(output(page, 'value')).toHaveText('[20,50]');
-  await expect(output(page, 'events')).toHaveText('before:20,50|change:20,50');
+  await expect(output(page, 'events')).toHaveText('change:20,50');
   await page.mouse.up();
 
   await expect(output(page, 'events'))
-    .toHaveText('before:20,50|change:20,50|complete:20,50');
+    .toHaveText('change:20,50|complete:20,50');
 });
 
 test('Slider range crosses while retaining drag identity and focuses the new sorted index', async ({ page }) => {
@@ -127,7 +127,7 @@ test('Slider range adds editable points and applies source deletion without an e
   await handles(page).nth(1).press('Delete');
 
   await expect(output(page, 'value')).toHaveText('[20,80]');
-  await expect(output(page, 'events')).toHaveText('before:20,80|change:20,80');
+  await expect(output(page, 'events')).toHaveText('change:20,80');
   await handles(page).first().press('Delete');
   await expect(handles(page)).toHaveCount(2);
 });
@@ -304,7 +304,7 @@ test('Slider range accepts native assistive input/change without a gesture', asy
 
   await expect(output(page, 'value')).toHaveText('[35,80]');
   await expect(output(page, 'events'))
-    .toHaveText('before:20,80|change:35,80|complete:35,80');
+    .toHaveText('change:35,80|complete:35,80');
 });
 
 test('Slider range respects cancellation of native form reset', async ({ page }) => {

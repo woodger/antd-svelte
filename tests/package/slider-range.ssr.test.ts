@@ -63,7 +63,7 @@ describe('Slider range public package', () => {
     const callback = vi.fn();
     try {
       const props: SliderRangeProps = { range: { editable: true }, autoFocus: true,
-        onBeforeChange: callback, onChange: callback, onChangeComplete: callback,
+        onChange: callback, onChangeComplete: callback,
         tooltip: { open: true } };
       const body = render(Slider<SliderRangeProps['range']>, { props }).body;
 

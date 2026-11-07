@@ -78,6 +78,4 @@ export interface MentionsProps extends Omit<
   popupClassName?: string;
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
-  /** Поддерживает bind:textarea. */
-  textarea?: HTMLTextAreaElement;
 }

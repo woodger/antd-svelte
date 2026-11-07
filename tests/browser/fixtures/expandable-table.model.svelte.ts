@@ -33,6 +33,7 @@ export function createExpansionControls() {
   let sorter = $state<TableSorter | null>(null);
   let filters = $state<TableFilters>({});
   let expanded = $state<TableKey[]>([]);
+  let acceptExpansion = $state(true);
   let selected = $state<TableKey[]>([]);
   let enabled = $state(true);
   let locked = $state(false);
@@ -58,6 +59,8 @@ export function createExpansionControls() {
     set sorter(value: TableSorter | null) { sorter = value; },
     get filters() { return filters; },
     set filters(value: TableFilters) { filters = value; },
+    get acceptExpansion() { return acceptExpansion; },
+    set acceptExpansion(value: boolean) { acceptExpansion = value; },
     get expanded() { return expanded; },
     set expanded(value: TableKey[]) { expanded = value; },
     get selected() { return selected; },
@@ -91,7 +94,10 @@ export function createExpansionControls() {
         }
       );
     },
-    changeKeys(keys: TableKey[]) { events.push({ type: 'keys', keys }); },
+    changeKeys(keys: TableKey[]) {
+      if (acceptExpansion) expanded = keys;
+      events.push({ type: 'keys', keys });
+    },
     get dataEvents() { return JSON.stringify(dataEvents); },
     change(event: TableChange<ExpandedPerson>) {
       dataEvents.push(

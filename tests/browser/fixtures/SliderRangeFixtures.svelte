@@ -87,7 +87,7 @@
             {keyboard} onkeydown={event => { if (cancelKeys) event.preventDefault(); }}
             onpointerdown={event => { if (cancelPointer) event.preventDefault(); }}
             ariaLabelForHandle={['Range start', 'Range middle', 'Range end']}
-            onBeforeChange={next => record('before', next)} onChange={next => record('change', next)}
+            onChange={next => record('change', next)}
             onChangeComplete={next => record('complete', next)} />
         {/if}
       </div>

@@ -43,6 +43,7 @@
 
 <section id="expandable-table-fixture" aria-label="Expandable table fixture">
   <label><input type="checkbox" bind:checked={controls.enabled} /> Enable row expansion</label>
+  <label><input type="checkbox" bind:checked={controls.acceptExpansion} /> Accept expansion requests</label>
   <label><input type="checkbox" bind:checked={controls.locked} /> Block zero expansion</label>
   <label><input type="checkbox" bind:checked={controls.loading} /> Expandable table loading</label>
   <label><input type="checkbox" bind:checked={controls.selection} /> Show expandable selection</label>
@@ -63,12 +64,12 @@
             expandedRowRender: details,
             rowExpandable: (row) => row.key !== 1 && !(controls.locked && row.key === 0),
             fixed: controls.fixed,
-            columnWidth: '3rem'
+            columnWidth: '3rem',
+            expandedRowKeys: controls.expanded,
+            onExpand: controls.expand,
+            onExpandedRowsChange: controls.changeKeys
           }
           : undefined}
-        bind:expandedRowKeys={controls.expanded}
-        onExpand={controls.expand}
-        onExpandedRowsChange={controls.changeKeys}
         rowSelection={controls.selection
           ? {
             fixed: controls.fixed,
@@ -113,8 +114,7 @@
     dataSource={controls.defaults}
     {columns}
     caption="Initial expansion"
-    expandable={{ expandedRowRender: details }}
-    defaultExpandedRowKeys={[0]}
+    expandable={{ expandedRowRender: details, defaultExpandedRowKeys: [0] }}
     pagination={false}
     disabled={false}
   />

@@ -23,6 +23,12 @@
   у TreeSelect extra удалены preValue/checked/selected, сохранены triggerValue
   и onSelect/onDeselect.
 
+- У Table удалены root expandedRowKeys/defaultExpandedRowKeys/onExpand/
+  onExpandedRowsChange; текущие поля перенесены внутрь expandable. У Slider range
+  удалён onBeforeChange, у Mentions — deprecated textarea ref, у публичного
+  низкоуровневого QRProps — includeMargin. Сохранены текущие callbacks, nativeElement
+  и marginSize.
+
 - У Image удалены wrapperStyle и preview.rootClassName, включая групповой preview.
   Сохранены настройки обёртки через styles.root и viewer через classNames.popup.root;
   class/style по-прежнему относятся к img.
