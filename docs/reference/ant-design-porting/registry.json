@@ -11135,7 +11135,13 @@
         "src/lib/table.types.ts",
         "tests/package/table-column-classes.ssr.test.ts",
         "tests/browser/table-column-classes.spec.ts",
-        "tests/browser/fixtures/ant-design-table-column-classes-reference.json"
+        "tests/browser/fixtures/ant-design-table-column-classes-reference.json",
+        "src/lib/Table.svelte",
+        "tests/browser/table-row-scope.spec.ts",
+        "tests/browser/table-row-scope-metrics.ts",
+        "tests/browser/fixtures/TableRowScopeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-table-row-scope-reference.json",
+        "tests/package/table-row-scope.ssr.test.ts"
       ],
       "features": [
         {
@@ -11249,6 +11255,23 @@
             "tests/browser/fixtures/ant-design-table-column-classes-reference.json"
           ],
           "note": "Column className дополняет head/body cell classes, не затрагивая служебные selection/expand колонки. Несколько/пустые/отсутствующие классы, sort/selected/fixed, empty и RTL сверены с UMD; updates сохраняют cell/editor DOM, selection/focus и FormData. Остальной расширенный column API переносится отдельно."
+        },
+        {
+          "id": "column-row-scope",
+          "title": "Column rowScope: native row/rowgroup headers",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Table.svelte",
+            "src/lib/table.types.ts",
+            "tests/browser/table-row-scope.spec.ts",
+            "tests/browser/table-row-scope-metrics.ts",
+            "tests/browser/fixtures/TableRowScopeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-table-row-scope-reference.json",
+            "tests/package/table-row-scope.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "RowScope задаёт th/scope только ячейкам данных своей колонки; default td, column headers, selection/expand и expanded rows сохраняются. Header aliases, selected/hover, sorted/fixed, RTL/dark/compact проверяются по 18 raw UMD cases. Sticky paint сохраняет прежнюю непрозрачную base под source headerBg; это явно отдельные CSS layers, а не подмена measured source CSS. Row→rowgroup сохраняет DOM/editor/focus/selection/FormData, смена типа th/td пересоздаёт содержимое, как Source React."
         }
       ]
     },

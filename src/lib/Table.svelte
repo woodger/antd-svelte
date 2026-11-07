@@ -343,6 +343,7 @@
   .table-sticky { isolation: isolate; scroll-padding-inline: var(--ant-table-fixed-start-width, 0px) var(--ant-table-fixed-end-width, 0px); }
   .table-scroll-y { overflow-y: auto; overscroll-behavior-y: contain; scroll-padding-top: var(--ant-table-header-height, 0px); }
   .ant-table-wrapper .ant-table-cell.table-fixed-cell { position: var(--ant-table-fixed-position, relative); background: var(--ant-color-bg-container); }
+  .ant-table-wrapper .ant-table-tbody > tr > th.table-fixed-cell { background: linear-gradient(var(--ant-table-header-bg), var(--ant-table-header-bg)) var(--ant-color-bg-container); }
   .ant-table-wrapper .table-scroll-y .ant-table-thead > tr > th { position: sticky; top: 0; z-index: 2; }
   /* Непрозрачная подложка нужна и для токенов темы с alpha. */
   .ant-table-wrapper .table-scroll-y .ant-table-thead > tr > th,
@@ -351,14 +352,14 @@
   .ant-table-wrapper .ant-table-thead > tr > .table-fixed-cell.ant-table-column-sort { background: linear-gradient(var(--ant-table-header-sort-active-bg), var(--ant-table-header-sort-active-bg)) var(--ant-color-bg-container); }
   .ant-table-wrapper .table-scroll-y .ant-table-thead > tr > th.ant-table-column-has-sorters:hover,
   .ant-table-wrapper .ant-table-thead > tr > .table-fixed-cell.ant-table-column-has-sorters:hover { background: linear-gradient(var(--ant-table-header-sort-hover-bg), var(--ant-table-header-sort-hover-bg)) var(--ant-color-bg-container); }
-  .ant-table-wrapper .ant-table-tbody > tr > .table-fixed-cell.ant-table-column-sort { background: linear-gradient(var(--ant-table-body-sort-bg), var(--ant-table-body-sort-bg)) var(--ant-color-bg-container); }
+  .ant-table-wrapper .ant-table-tbody > tr > :where(td).table-fixed-cell.ant-table-column-sort { background: linear-gradient(var(--ant-table-body-sort-bg), var(--ant-table-body-sort-bg)) var(--ant-color-bg-container); }
   .ant-table-wrapper .ant-table-tbody > tr.ant-table-row-selected > .table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-bg), var(--ant-table-row-selected-bg)) var(--ant-color-bg-container); }
   .table-source-theme .ant-table-thead th.ant-table-column-has-sorters:hover .ant-table-column-sorter { color: var(--ant-table-header-icon-hover-color); }
   .ant-table-wrapper.table-source-theme .ant-table-thead th.ant-table-column-has-sorters.table-fixed-cell:hover { background: linear-gradient(var(--ant-table-fixed-header-sort-active-bg), var(--ant-table-fixed-header-sort-active-bg)) var(--ant-color-bg-container); }
   .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row:hover > td { background: var(--ant-table-row-hover-bg); }
-  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > td { background: var(--ant-table-row-selected-hover-bg); }
+  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > :is(th, td) { background: var(--ant-table-row-selected-hover-bg); }
   .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-hover-bg), var(--ant-table-row-hover-bg)) var(--ant-color-bg-container); }
-  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > td.table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-hover-bg), var(--ant-table-row-selected-hover-bg)) var(--ant-color-bg-container); }
+  .table-source-theme:not(.table-hover-disabled) .ant-table-tbody > tr.ant-table-row.ant-table-row-selected:hover > :is(th, td).table-fixed-cell { background: linear-gradient(var(--ant-table-row-selected-hover-bg), var(--ant-table-row-selected-hover-bg)) var(--ant-color-bg-container); }
   .ant-table-content:focus-visible, .sort-button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 2px; }
   caption { padding: var(--ant-padding-sm); color: var(--ant-color-text-heading); text-align: start; font-weight: 600; }
   .sort-button { width: 100%; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; cursor: pointer; }
@@ -528,7 +529,7 @@
                 {/if}
                 {#each columns as column, columnIndex (column.key)}
                   {@const fixed = fixedCells[columnIndex + dataOffset]}
-                  <td class={[
+                  <svelte:element this={column.rowScope ? 'th' : 'td'} scope={column.rowScope} class={[
                       'ant-table-cell',
                       column.className,
                       fixed.side
@@ -536,7 +537,7 @@
                       tableData.sorter?.columnKey === column.key && 'ant-table-column-sort'
                     ]} style:inset-inline-start={fixed.side === 'start' ? fixed.offset : undefined} style:inset-inline-end={fixed.side === 'end' ? fixed.offset : undefined} style:z-index={fixed.side ? 1 : undefined} style:text-align={column.align}>
                     {#if column.render}{@render column.render(row.record, index)}{:else}{cellValue(row.record, column.dataIndex)}{/if}
-                  </td>
+                  </svelte:element>
                 {/each}
               </tr>
               {#if expanded && expandable}

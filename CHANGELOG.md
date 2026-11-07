@@ -9,6 +9,10 @@
 
 ### Added
 
+- TableColumn.rowScope: нативные th с scope=row/rowgroup, исходные header colors,
+  selection/hover и fixed columns. Обновление scope сохраняет editor/focus/selection;
+  обычные ячейки, column headers и expanded rows сохраняют свою семантику.
+
 - BackTop: отдельный deprecated export с исходными style/tokens/media, targets,
   smooth scroll и fade. Default action — native button; callbacks/root refs,
   opaque snippets и локализованное имя сохранены. Отмечены пропущенный rootCls,

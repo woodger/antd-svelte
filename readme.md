@@ -9124,6 +9124,24 @@ Snippet создаётся только для видимой раскрытой
 Сравнение 48 состояний UMD: [browser](tests/browser/table-header.spec.ts),
 [SSR](tests/package/table-header.ssr.test.ts), fixture `?fixture=table-header`.
 
+### Заголовки строк
+
+`TableColumn.rowScope` принимает `'row'` или `'rowgroup'`: ячейки данных этой
+колонки становятся `th` с соответствующим scope, как в Ant Design 6.6.8.
+Без настройки используются `td`. Заголовки колонок, selection/expand cells и
+строки раскрытого содержимого сохраняют свою семантику. RowScope не объединяет
+записи. У заголовков строк используются headerBg/headerColor/fontWeightStrong;
+выделение строки и rowHoverable сохраняют исходные цвета.
+
+Fixed row headers используют source headerBg поверх прежней непрозрачной
+подложки native sticky cells. Это отдельные CSS-слои; raw UMD computed CSS
+сохранён без подмены значений. Row → rowgroup обновляет scope без замены ячейки,
+editor, focus/selection или FormData. Добавление/снятие rowScope меняет тег и
+пересоздаёт содержимое ячейки, как source React.
+
+18 случаев UMD, DOM/CSS и controls: [browser](tests/browser/table-row-scope.spec.ts),
+[SSR](tests/package/table-row-scope.ssr.test.ts), fixture `?fixture=table-row-scope`.
+
 ### Классы и подсветка строк
 
 `rowClassName` принимает строку или `(record, index, indent) => string` и добавляет

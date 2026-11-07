@@ -32,6 +32,8 @@ export interface TableColumn<Row extends object> {
   align?: 'left' | 'center' | 'right';
   /** Дополняет классы заголовка и каждой ячейки данных этой колонки. */
   className?: string;
+  /** Ячейки данных этой колонки становятся th с указанным scope. */
+  rowScope?: 'row' | 'rowgroup';
   width?: number | string;
   fixed?: TableFixed;
 }
