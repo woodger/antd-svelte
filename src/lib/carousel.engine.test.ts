@@ -70,7 +70,7 @@ const swipe: CarouselSwipeSpec = {
 describe('Carousel settings and grouping', () => {
   it('preserves Ant Design defaults and derives the physical axis before RTL', () => {
     const normal = getCarouselSettings({}, 'ltr');
-    const vertical = getCarouselSettings({ dotPosition: 'left', rtl: true }, 'rtl');
+    const vertical = getCarouselSettings({ dotPlacement: 'start', rtl: true }, 'rtl');
 
     expect(normal).toMatchObject({
       dots: true,
@@ -82,7 +82,7 @@ describe('Carousel settings and grouping', () => {
     expect(vertical).toMatchObject({
       dotPlacement: 'start', vertical: true, verticalSwiping: true, rtl: false
     });
-    expect(getCarouselSettings({ dotPosition: 'left', dotPlacement: 'top' }, 'rtl'))
+    expect(getCarouselSettings({ dotPlacement: 'top' }, 'rtl'))
       .toMatchObject({ dotPlacement: 'top', vertical: false, rtl: true });
   });
 

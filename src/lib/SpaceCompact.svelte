@@ -13,7 +13,6 @@
     size,
     orientation,
     vertical,
-    direction,
     block = false,
     class: className = '',
     rootClassName = '',
@@ -24,7 +23,7 @@
   const config = useConfig();
   const parent = useCompact();
   let entries = $derived(compactEntries(items, children));
-  let actualOrientation = $derived(spaceOrientation(orientation, vertical, direction));
+  let actualOrientation = $derived(spaceOrientation(orientation, vertical));
   let actualSize = $derived(size ?? config.explicitComponentSize);
   let retainedFocus: HTMLElement | undefined;
   $effect.pre(() => {

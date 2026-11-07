@@ -60,11 +60,9 @@ export interface SplitterConfig {
 export interface SplitterProps {
   /** Явная замена анализа React children/Panel; содержимое задаётся scalar или Snippet. */
   items?: SplitterPanelProps[];
-  /** Приоритет: orientation, boolean vertical, deprecated layout, horizontal. */
+  /** Приоритет: orientation, boolean vertical, horizontal. */
   orientation?: SplitterOrientation;
   vertical?: boolean;
-  /** @deprecated Используйте orientation. */
-  layout?: SplitterOrientation;
   /** Lazy меняет размеры только на release и вызывает onResizeEnd без onResize. */
   lazy?: boolean;
   /** По умолчанию содержимое collapsed панелей остаётся в DOM. */
@@ -72,13 +70,10 @@ export interface SplitterProps {
   collapsible?: {
     /** CSS transition; по умолчанию false, на время drag отключается. */
     motion?: boolean;
-    /** Новый объект имеет приоритет над deprecated collapsibleIcon целиком. */
     icon?: { start?: SplitterContent; end?: SplitterContent; };
   };
   /** undefined оставляет исходный spinner; null/false создают пустой custom wrapper. */
   draggerIcon?: SplitterContent;
-  /** @deprecated Используйте collapsible.icon. */
-  collapsibleIcon?: { start?: SplitterContent; end?: SplitterContent; };
   /** Вызывается также у resizable=false; второй mousedown в пределах 300ms не начинает drag. */
   onDraggerDoubleClick?: (index: number) => void;
   onResizeStart?: (sizes: number[]) => void;

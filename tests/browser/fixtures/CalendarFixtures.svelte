@@ -95,8 +95,6 @@
     <input aria-label={`Cell note ${value.format('YYYY-MM-DD')}`} style="width:100%;min-width:0" />
   </div>
 {/snippet}
-{#snippet legacyDate(value: Dayjs)}<span class="legacy-date">Legacy date {value.date()}</span>{/snippet}
-{#snippet legacyMonth(value: Dayjs)}<span class="legacy-month">Legacy month {value.month()}</span>{/snippet}
 {#snippet empty()}{/snippet}
 
 <section id="calendar-fixture">
@@ -122,8 +120,8 @@
     </select></label>
     <label>Calendar renderer<select bind:value={renderer}>
       <option value="none">Default Calendar cells</option><option value="cell">Calendar content snippet</option>
-      <option value="full">Calendar full snippet</option><option value="legacy-cell">Calendar legacy content</option>
-      <option value="legacy-full">Calendar legacy full</option><option value="precedence">Calendar renderer precedence</option>
+      <option value="full">Calendar full snippet</option>
+      <option value="precedence">Calendar renderer precedence</option>
       <option value="empty">Calendar empty full snippet</option>
     </select></label>
     <label>Calendar external date<input bind:value={externalText} /></label>
@@ -158,10 +156,6 @@
           headerRender={customHeader ? header : undefined}
           cellRender={renderer === 'cell' || renderer === 'precedence' ? content : undefined}
           fullCellRender={renderer === 'empty' ? empty : renderer === 'full' || renderer === 'precedence' ? full : undefined}
-          dateCellRender={renderer === 'legacy-cell' || renderer === 'precedence' ? legacyDate : undefined}
-          monthCellRender={renderer === 'legacy-cell' || renderer === 'precedence' ? legacyMonth : undefined}
-          dateFullCellRender={renderer === 'legacy-full' || renderer === 'precedence' ? legacyDate : undefined}
-          monthFullCellRender={renderer === 'legacy-full' || renderer === 'precedence' ? legacyMonth : undefined}
           class="fixture-calendar"
           rootClassName="calendar-owner"
           data-owner="calendar"

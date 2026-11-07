@@ -51,7 +51,6 @@ describe('Splitter SSR', () => {
     const body = render(Splitter, { props: {
       orientation: 'horizontal',
       vertical: true,
-      layout: 'vertical',
       classNames: ({ props }) => ({ root: `reported-${props.orientation}-${props.vertical}` }),
       styles: { root: 'height:200px' },
       style: 'height:300px'

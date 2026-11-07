@@ -1660,7 +1660,7 @@
       "features": [
         {
           "id": "layout",
-          "title": "Orientation/vertical/direction, align, gaps, wrap и semantic styles",
+          "title": "Orientation/vertical, align, gaps, wrap и semantic styles",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
@@ -1671,7 +1671,7 @@
         },
         {
           "id": "content",
-          "title": "Keyed items, пустые значения и separator/split",
+          "title": "Keyed items, пустые значения и separator",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
@@ -1868,7 +1868,7 @@
             "tests/browser/splitter.spec.ts",
             "tests/browser/fixtures/ant-design-splitter-focus-reference.json"
           ],
-          "note": "Collapse/expand rechecks limits, resize→end→collapse, physical RTL и true/auto/false visibility. Panel destroy override; retained DOM по умолчанию. Как в pinned upstream, retained controls остаются в Tab-порядке и доступном дереве: нет inert/aria-hidden или переноса фокуса; destroyOnHidden удаляет потомков и сбрасывает uncontrolled state при раскрытии. Native type=button заменяет div role=button с исходными Enter/Space и English labels. Новый icon object перекрывает legacy целиком; пустые icons сохраняются. CSS reduced motion и отключение transition во время drag."
+          "note": "Collapse/expand rechecks limits, resize→end→collapse, physical RTL и true/auto/false visibility. Panel destroy override; retained DOM по умолчанию. Как в pinned upstream, retained controls остаются в Tab-порядке и доступном дереве: нет inert/aria-hidden или переноса фокуса; destroyOnHidden удаляет потомков и сбрасывает uncontrolled state при раскрытии. Native type=button заменяет div role=button с исходными Enter/Space и English labels. Collapsible.icon задаёт иконки; null/false icons сохраняются. CSS reduced motion и отключение transition во время drag."
         },
         {
           "id": "ssr-lifecycle",
@@ -9001,14 +9001,14 @@
         },
         {
           "id": "renderers-week",
-          "title": "Header/cell/full snippets, deprecated renderers, originNode и week column",
+          "title": "Header/cell/full snippets, originNode и week column",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
             "src/lib/calendar.ssr.test.ts",
             "tests/browser/calendar.spec.ts"
           ],
-          "note": "Svelte snippets вместо React renderers; современные выше legacy. Full заменяет inner, cell добавляет content. Date info получает filled locale, month raw locale. Week cells не вызывают renderer и выбирают начало строки. Ячейки и черновики сохраняются по позиции строк/столбцов."
+          "note": "Svelte snippets вместо React renderers; fullCellRender приоритетнее cellRender. Full заменяет inner, cell добавляет content. Date info получает filled locale, month raw locale. Week cells не вызывают renderer и выбирают начало строки. Ячейки и черновики сохраняются по позиции строк/столбцов."
         },
         {
           "id": "factory-ssr-lifecycle",
@@ -9403,7 +9403,7 @@
             "tests/package/carousel.ssr.test.ts",
             "tests/browser/carousel.spec.ts"
           ],
-          "note": "Custom arrows/paging/appendDots получают исходные render props. DotPlacement и deprecated dotPosition; ConfigProvider.carousel class/style относятся к inner slider, rootClassName/id — к wrapper. Locale.carousel и исходный Carousel alias. Light/dark/compact, CSS variables, source arrow spacing и duration keyframes; клавиатурный фокус имеет видимый outline."
+          "note": "Custom arrows/paging/appendDots получают исходные render props. DotPlacement; ConfigProvider.carousel class/style относятся к inner slider, rootClassName/id — к wrapper. Locale.carousel и исходный Carousel alias. Light/dark/compact, CSS variables, source arrow spacing и duration keyframes; клавиатурный фокус имеет видимый outline."
         },
         {
           "id": "ssr-lifecycle",

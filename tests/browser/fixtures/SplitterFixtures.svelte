@@ -86,7 +86,6 @@
 {#snippet third()}<div class="content">Splitter third content</div>{/snippet}
 {#snippet handle()}<span data-icon="dragger">Drag</span>{/snippet}
 {#snippet arrow()}<span data-icon="collapse">Collapse</span>{/snippet}
-{#snippet legacy()}<span data-icon="legacy">Legacy</span>{/snippet}
 
 <section id="splitter-fixture">
   <h2>Splitter</h2>
@@ -114,8 +113,8 @@
     </select></label>
     <label>Splitter icons<select bind:value={icons}>
       <option value="default">Splitter default icons</option><option value="custom">Splitter custom icons</option>
-      <option value="empty">Splitter empty icons</option><option value="legacy">Splitter legacy icons</option>
-      <option value="empty-new">Splitter empty new icon object</option>
+      <option value="empty">Splitter empty icons</option>
+      <option value="empty-object">Splitter empty icon object</option>
     </select></label>
     <label><input type="checkbox" bind:checked={lazy} /> Lazy Splitter</label>
     <label><input type="checkbox" bind:checked={motion} /> Animated Splitter collapse</label>
@@ -163,10 +162,9 @@
               motion,
               icon: icons === 'custom' ? { start: arrow, end: false }
                 : icons === 'empty' ? { start: null, end: false }
-                  : icons === 'empty-new' ? {} : undefined
+                  : icons === 'empty-object' ? {} : undefined
             }}
             draggerIcon={icons === 'custom' ? handle : icons === 'empty' ? null : undefined}
-            collapsibleIcon={icons === 'legacy' || icons === 'empty-new' ? { start: legacy } : undefined}
             onResizeStart={value => events.push({ event: 'start', sizes: [...value] })}
             onResize={value => record('resize', value)}
             onResizeEnd={value => record('end', value)}

@@ -8,12 +8,11 @@ import type {
 
 export function spaceOrientation(
   orientation?: SpaceOrientation,
-  vertical?: boolean,
-  direction?: SpaceOrientation
+  vertical?: boolean
 ): SpaceOrientation {
   if (orientation === 'horizontal' || orientation === 'vertical') return orientation;
   if (typeof vertical === 'boolean') return vertical ? 'vertical' : 'horizontal';
-  return direction === 'vertical' ? 'vertical' : 'horizontal';
+  return 'horizontal';
 }
 export function spaceHasContent(content: SpaceContent): boolean {
   // React.Children нормализует оба boolean в null до проверки isReactRenderable.

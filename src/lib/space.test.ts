@@ -31,18 +31,18 @@ describe('Space SSR', () => {
     }
   );
   it(
-    'does not render numeric-zero separators and gives separator precedence over legacy split',
+    'renders a separator only when it has content',
     () => {
       expect(render(Space, { props: { items: ['A', 'B'], separator: 0 } }).body).not.toContain(
         'ant-space-item-separator'
       );
-      expect(render(Space, { props: { items: ['A', 'B'], separator: '', split: '|' } })
+      expect(render(Space, { props: { items: ['A', 'B'], separator: '' } })
         .body)
         .not
         .toContain(
           'ant-space-item-separator'
         );
-      expect(render(Space, { props: { items: ['A', 'B'], split: '|' } }).body).toContain(
+      expect(render(Space, { props: { items: ['A', 'B'], separator: '|' } }).body).toContain(
         'ant-space-item-separator'
       );
     }
@@ -87,10 +87,10 @@ describe('Space SSR', () => {
 });
 
 describe('Space orientation and gap', () => {
-  it('prioritizes orientation, explicit vertical and then the legacy direction', () => {
-    expect(spaceOrientation('horizontal', true, 'vertical')).toBe('horizontal');
-    expect(spaceOrientation(undefined, false, 'vertical')).toBe('horizontal');
-    expect(spaceOrientation(undefined, undefined, 'vertical')).toBe('vertical');
+  it('prioritizes orientation before explicit vertical', () => {
+    expect(spaceOrientation('horizontal', true)).toBe('horizontal');
+    expect(spaceOrientation(undefined, false)).toBe('horizontal');
+    expect(spaceOrientation(undefined, true)).toBe('vertical');
     expect(spaceOrientation()).toBe('horizontal');
   });
   it('uses numeric styles only for nonzero numbers and separate preset axes for tuples', () => {

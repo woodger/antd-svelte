@@ -85,16 +85,14 @@ describe('Calendar SSR', () => {
     expect(dates[41]).toBe('2024-10-12T12:34:56.789Z');
   });
 
-  it('uses fullCellRender before legacy renderers and omits the default cell wrapper', () => {
+  it('uses fullCellRender before cellRender and omits the default cell wrapper', () => {
     const body = render(Calendar, { props: {
       value: dayjs('2024-09-15'),
       fullCellRender: createRawSnippet(() => ({ render: () => '<span>Full replacement</span>' })),
-      dateFullCellRender: createRawSnippet(() => ({ render: () => '<span>Legacy full</span>' })),
       cellRender: createRawSnippet(() => ({ render: () => '<span>Cell content</span>' }))
     } }).body;
 
     expect(body.match(/Full replacement/g)).toHaveLength(42);
-    expect(body).not.toContain('Legacy full');
     expect(body).not.toContain('Cell content');
     expect(body).not.toContain('ant-picker-calendar-date-value');
   });

@@ -31,7 +31,7 @@
     aria: { now: number; min: number; max: number; };
     container: number;
     draggerIcon: SplitterProps['draggerIcon'];
-    icons: SplitterProps['collapsibleIcon'];
+    icons: NonNullable<SplitterProps['collapsible']>['icon'];
     classDefault?: string;
     classActive?: string;
     style?: SplitterStyleSlots['dragger'];

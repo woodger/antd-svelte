@@ -84,14 +84,6 @@ export interface CalendarProps<DateType = Dayjs> extends Omit<
   headerRender?: Snippet<[CalendarHeaderRenderInfo<DateType>]>;
   cellRender?: Snippet<[DateType, CalendarCellRenderInfo<DateType>]>;
   fullCellRender?: Snippet<[DateType, CalendarCellRenderInfo<DateType>]>;
-  /** @deprecated Используйте cellRender. */
-  dateCellRender?: Snippet<[DateType]>;
-  /** @deprecated Используйте cellRender. */
-  monthCellRender?: Snippet<[DateType]>;
-  /** @deprecated Используйте fullCellRender. */
-  dateFullCellRender?: Snippet<[DateType]>;
-  /** @deprecated Используйте fullCellRender. */
-  monthFullCellRender?: Snippet<[DateType]>;
   class?: string;
   rootClassName?: string;
   /** После context и semantic root styles. */

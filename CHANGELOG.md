@@ -9,6 +9,12 @@
 
 ### Removed
 
+- Удалены старые date/month CellRender и FullCellRender у Calendar,
+  `Carousel.dotPosition`, `Splitter.layout/collapsibleIcon`,
+  `Space.direction/split` и `SpaceCompact.direction`. Текущие
+  `cellRender/fullCellRender`, `dotPlacement`, `orientation`,
+  `collapsible.icon` и `separator` сохранены.
+
 - Удалены `AvatarGroup.maxCount`, `maxStyle`, `maxPopoverPlacement` и
   `maxPopoverTrigger`; актуальная настройка через `max` сохранена.
 

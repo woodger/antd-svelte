@@ -14,7 +14,6 @@ export interface SpaceCompactProps extends Omit<
   size?: SpaceCompactSize;
   orientation?: SpaceOrientation;
   vertical?: boolean;
-  direction?: SpaceOrientation;
   /** @defaultValue false */
   block?: boolean;
   class?: string;

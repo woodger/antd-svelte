@@ -37,10 +37,8 @@ export interface SpaceProps extends Omit<
   size?: SpaceSize | readonly [SpaceSize, SpaceSize];
   orientation?: SpaceOrientation;
   vertical?: boolean;
-  direction?: SpaceOrientation;
   align?: 'start' | 'end' | 'center' | 'baseline';
   separator?: SpaceContent;
-  split?: SpaceContent;
   wrap?: boolean;
   classNames?: SpaceSemantic;
   styles?: SpaceSemantic;

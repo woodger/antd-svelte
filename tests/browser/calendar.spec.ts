@@ -265,27 +265,12 @@ test('Calendar snippets preserve originNode, renderer priorities and date versus
   await select(page, 'Calendar renderer').selectOption('precedence');
 
   await expect(root(page).locator('.custom-calendar-full')).toHaveCount(12);
-  await expect(root(page).locator('.custom-calendar-content,.legacy-date,.legacy-month'))
+  await expect(root(page).locator('.custom-calendar-content'))
     .toHaveCount(0);
   await expect(root(page).locator('.ant-picker-calendar-date-value')).toHaveCount(0);
   await select(page, 'Calendar renderer').selectOption('empty');
 
   await expect(root(page).getByRole('gridcell').first()).toBeEmpty();
-});
-
-test('Calendar legacy content and full renderers retain separate date and month contracts', async ({ page }) => {
-  await select(page, 'Calendar renderer').selectOption('legacy-cell');
-
-  await expect(root(page).locator('.ant-picker-calendar-date-content > .legacy-date'))
-    .toHaveCount(42);
-  await mode(page, 1).click();
-
-  await expect(root(page).locator('.ant-picker-calendar-date-content > .legacy-month'))
-    .toHaveCount(12);
-  await select(page, 'Calendar renderer').selectOption('legacy-full');
-
-  await expect(root(page).locator('td > .legacy-month')).toHaveCount(12);
-  await expect(root(page).locator('.ant-picker-calendar-date-content')).toHaveCount(0);
 });
 
 test('Calendar custom interactive cells stop selection and retain drafts by panel position', async ({ page }) => {

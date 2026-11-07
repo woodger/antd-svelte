@@ -135,8 +135,6 @@ export interface CarouselProps extends Omit<
   id?: string;
   /** Присутствует в upstream types, но не управляет текущим слайдом; используйте ref.goTo. */
   slickGoTo?: number;
-  /** @deprecated Используйте dotPlacement. Left/right преобразуются в start/end. */
-  dotPosition?: DotPlacement | 'left' | 'right';
   dotPlacement?: DotPlacement;
   dots?: boolean | { class?: string; className?: string; };
   /** @defaultValue false */

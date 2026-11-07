@@ -444,7 +444,7 @@ test(
 );
 
 test(
-  'Splitter keeps explicit empty icons and gives the new icon object precedence over legacy',
+  'Splitter keeps explicit empty icons and uses defaults for an empty icon object',
   async ({ page }) => {
     const start = root(page).getByRole('button', { name: 'Toggle start panel', exact: true });
     await expect(start.locator('svg')).toHaveAttribute('viewBox', '64 64 896 896');
@@ -460,12 +460,8 @@ test(
     await expect(separator(page).locator('.ant-splitter-bar-dragger-icon')).toHaveText('');
     await expect(start).toHaveText('');
     await expect(start.locator('svg')).toHaveCount(0);
-    await select(page, 'Splitter icons').selectOption('legacy');
+    await select(page, 'Splitter icons').selectOption('empty-object');
 
-    await expect(start.locator('[data-icon="legacy"]')).toHaveText('Legacy');
-    await select(page, 'Splitter icons').selectOption('empty-new');
-
-    await expect(start.locator('[data-icon="legacy"]')).toHaveCount(0);
     await expect(start.locator('svg')).toHaveCount(1);
   }
 );

@@ -11,10 +11,8 @@
     size: customizeSize,
     orientation,
     vertical,
-    direction,
     align,
     separator,
-    split,
     wrap,
     classNames,
     styles,
@@ -31,11 +29,11 @@
   let latest = $derived(
     entries.reduce((index, item, next) => spaceHasContent(item.children) ? next : index, 0)
   );
-  let actualOrientation = $derived(spaceOrientation(orientation, vertical, direction));
+  let actualOrientation = $derived(spaceOrientation(orientation, vertical));
   let actualAlign = $derived(
     align ?? (actualOrientation === 'horizontal' ? 'center' : undefined)
   );
-  let actualSeparator = $derived(separator ?? split);
+  let actualSeparator = $derived(separator);
   let gap = $derived(spaceGap(size));
   let info = $derived(
     {
@@ -46,10 +44,8 @@
         size,
         orientation: actualOrientation,
         vertical,
-        direction,
         align: actualAlign,
         separator,
-        split,
         wrap,
         classNames,
         styles,

@@ -13,10 +13,8 @@
     items = [],
     orientation,
     vertical,
-    layout,
     lazy = false,
     collapsible,
-    collapsibleIcon,
     destroyOnHidden = false,
     draggerIcon,
     onResizeStart,
@@ -34,7 +32,7 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Splitter');
-  let actualOrientation = $derived(spaceOrientation(orientation, vertical, layout));
+  let actualOrientation = $derived(spaceOrientation(orientation, vertical));
   let isVertical = $derived(actualOrientation === 'vertical');
   let reverse = $derived(!isVertical && config.direction === 'rtl');
   const model = createSplitterModel(
@@ -46,10 +44,8 @@
       items,
       orientation: actualOrientation,
       vertical: isVertical,
-      layout,
       lazy,
       collapsible,
-      collapsibleIcon,
       destroyOnHidden,
       draggerIcon,
       onResizeStart,
@@ -136,7 +132,7 @@
       aria={getSplitterAria(model.sizes, index)}
       container={model.containerSize}
       {draggerIcon}
-      icons={collapsible?.icon || collapsibleIcon}
+      icons={collapsible?.icon}
       classDefault={draggerClass.default}
       classActive={draggerClass.active}
       style={draggerStyle}

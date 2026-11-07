@@ -39,10 +39,6 @@
     headerRender,
     cellRender,
     fullCellRender,
-    dateCellRender,
-    monthCellRender,
-    dateFullCellRender,
-    monthFullCellRender,
     class: className,
     rootClassName,
     style,
@@ -85,10 +81,6 @@
       headerRender,
       cellRender,
       fullCellRender,
-      dateCellRender,
-      monthCellRender,
-      dateFullCellRender,
-      monthFullCellRender,
       class: className,
       rootClassName,
       style,
@@ -368,10 +360,6 @@
                         {@const renderInfo = cellInfo(cell.date, originNode)}
                         {#if fullCellRender}
                           {@render fullCellRender(cell.date, renderInfo)}
-                        {:else if panelType === 'date' && dateFullCellRender}
-                          {@render dateFullCellRender(cell.date)}
-                        {:else if panelType === 'month' && monthFullCellRender}
-                          {@render monthFullCellRender(cell.date)}
                         {:else}
                           <div class={[
                             'ant-picker-cell-inner ant-picker-calendar-date',
@@ -382,8 +370,7 @@
                               : months[generateConfig.getMonth(cell.date)]}</div>
                             <div class={['ant-picker-calendar-date-content', slotClass('itemContent')]} style={slotStyle('itemContent')}>
                               {#if cellRender}{@render cellRender(cell.date, renderInfo)}
-                              {:else if panelType === 'date' && dateCellRender}{@render dateCellRender(cell.date)}
-                              {:else if panelType === 'month' && monthCellRender}{@render monthCellRender(cell.date)}{/if}
+                              {/if}
                             </div>
                           </div>
                         {/if}

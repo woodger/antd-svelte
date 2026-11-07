@@ -797,7 +797,7 @@ controlled, а defaults остальных панелей не использу�
 несовместимые ограничения не имеют отдельного error callback. В ненулевой группе
 размер 0 остаётся collapsed даже при min > 0; если все размеры равны 0, группа
 делится поровну. Orientation имеет приоритет над boolean vertical,
-затем используется deprecated layout, по умолчанию horizontal.
+по умолчанию horizontal.
 
 Mouse и одиночный touch считают смещение от начала gesture. Normal drag
 вызывает onResizeStart, onResize и onResizeEnd; end сообщает текущие размеры,
@@ -841,8 +841,8 @@ nested config заменяет объект целиком. Root style идёт 
 а вычисленные flex-basis/flex-grow панели — после её style. Dragger classes
 принимают строку или default/active; как в upstream, из styles.dragger применяется
 только default. Semantic callbacks получают resolved orientation/vertical.
-Новый collapsible.icon целиком перекрывает deprecated collapsibleIcon, включая
-пустой объект. Null/false icons оставляют пустой custom wrapper.
+Collapsible.icon задаёт иконки сворачивания; пустой объект сохраняет defaults.
+Null/false icons оставляют пустой custom wrapper.
 
 CSS-рецепт splitter воспроизводит все 59 правил эталона, включая reduced motion,
 с проверкой SHA-256. Темы, primary и RTL наследуются; локальный hover alias bar
@@ -1347,12 +1347,12 @@ Boolean/null/undefined/пустые строки не создают item wrappe
 Это учитывает React.Children, который нормализует оба boolean в null перед
 rc-component/util.toArray. Snippet, ничего не отрисовавший, сохраняет wrapper,
 скрытый CSS :empty; как React child component с null, он всё ещё участвует в
-расчёте позиции разделителя. Separator ?? split задаёт span между renderable
+расчёте позиции разделителя. Separator задаёт span между renderable
 entries, кроме последнего; falsy separator, включая 0, не создаёт span. Такой
 separator не помечается aria-hidden автоматически: Snippet может содержать
 собственный содержательный элемент.
 
-Orientation имеет приоритет над явным vertical, затем legacy direction;
+Orientation имеет приоритет над явным vertical;
 по умолчанию horizontal. Align=start/end/center/baseline, horizontal по умолчанию
 center, vertical без align использует естественное stretch. Size выбирается из
 локального prop, ConfigProvider.space.size и затем small; componentSize не участвует.
@@ -1404,8 +1404,7 @@ items; один children Snippet представляет одну позици�
 
 Size=small/medium/middle/large, по умолчанию явно заданный componentSize;
 приоритет control.size → Compact.size → ConfigProvider.componentSize. Block
-включает width=100% и display=flex, иначе inline-flex. Orientation/vertical/
-legacy direction следуют приоритету Space. Нативные attrs, class/rootClassName/
+включает width=100% и display=flex, иначе inline-flex. Orientation/vertical следуют приоритету Space. Нативные attrs, class/rootClassName/
 style и bind:nativeElement относятся к root. Подключены Button, Input,
 InputNumber и Select. Горизонтальные стыки используют логические углы и
 перекрытие на lineWidth; vertical compact-стыки поддержаны для Button, как
@@ -4992,8 +4991,8 @@ Month disabled вычисляется по первому и последнем�
 
 `headerRender` получает value/type/onChange/onTypeChange и полностью заменяет
 заголовок. `fullCellRender` заменяет содержимое ячейки; cellRender добавляет
-содержимое в стандартный date-content. Современные snippets имеют приоритет
-над deprecated date/monthCellRender и date/monthFullCellRender. OriginNode в
+содержимое в стандартный date-content. FullCellRender имеет приоритет
+над cellRender. OriginNode в
 CalendarCellRenderInfo — Svelte snippet исходного rc-picker inner. Date info.locale
 содержит filled formats, month info.locale — исходный lang. `showWeek` добавляет
 отдельные ячейки без render snippets; они выбирают начало строки с source=date.
@@ -5378,7 +5377,7 @@ snippet. Клоны создают независимые экземпляры s
 По умолчанию dots включены, arrows/draggable/autoplay/waitForAnimate выключены,
 infinite включён, speed равен 500ms. Effect="fade" включает fade и один слайд на
 страницу; centerMode устанавливает slidesToScroll=1. DotPlacement принимает
-top/bottom/start/end; deprecated dotPosition также преобразует left/right.
+top/bottom/start/end.
 Start/end включают vertical по умолчанию; явный vertical имеет приоритет.
 Вертикальный режим отключает наследуемое зеркалирование RTL. В горизонтальном
 RTL currentSlide зеркальный, но next/prev сохраняют исходное направление Slick.

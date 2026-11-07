@@ -46,8 +46,7 @@ export function getCarouselSettings(
   direction: 'ltr' | 'rtl',
   breakpoint: number | null = null
 ) {
-  const placement = props.dotPlacement ?? props.dotPosition ?? 'bottom';
-  const dotPlacement = placement === 'left' ? 'start' : placement === 'right' ? 'end' : placement;
+  const dotPlacement = props.dotPlacement ?? 'bottom';
   const vertical = props.vertical ?? (dotPlacement === 'start' || dotPlacement === 'end');
   const rtl = (props.rtl ?? direction === 'rtl') && !vertical;
   const settings = {
