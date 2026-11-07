@@ -778,6 +778,9 @@
 
 ### Fixed
 
+- Affix: проверка удаления configured owner ожидает все scroll targets перед
+  прокруткой; проверки очистки prefix CSS и снятия фиксации сохранены.
+
 - Typography: browser-сценарии ожидают загрузку ленивой фикстуры до проверки
   autofocus. Проверки focus/selection, async copy и общий лимит теста сохранены.
 

@@ -85,6 +85,7 @@ for (const preset of ['tenant', 'source-theme', 'native-light', 'native-dark', '
 
 test('Affix releases custom prefix CSS when its fixed owner is removed', async ({ page }) => {
   await page.goto('/?fixture=affix-config');
+  await expect(page.locator('[data-affix-scroll]')).toHaveCount(6);
   await page.locator('[data-affix-scroll]').evaluateAll(nodes => {
     for (const node of nodes) node.scrollTop = 80;
   });
