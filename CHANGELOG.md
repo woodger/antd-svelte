@@ -770,6 +770,10 @@
 
 ### Fixed
 
+- Input/Select: общий интеграционный browser-набор использует отдельный маршрут
+  с прежними BasicFixtures и shared controls. Проверки keyboard/search/disabled,
+  numeric values и FormData выполняются без загрузки всей страницы компонентов.
+
 - Browser fixtures: Affix ждёт mount всех scroll targets перед прокруткой;
   ConfigProvider проверяет прежние Select/Modal и shared controls в отдельном
   маршруте без загрузки общей страницы. Assertions и таймауты сохранены.

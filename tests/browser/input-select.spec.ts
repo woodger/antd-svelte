@@ -2,7 +2,7 @@ import type { Locator } from '@playwright/test';
 import { test, expect } from './test';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/?fixture=input-select');
 
   await page.getByRole('heading', { name: 'Component browser fixtures' }).waitFor();
 });
@@ -91,7 +91,7 @@ test(
 );
 
 test('Select opens when the arrow area is clicked', async ({ page }) => {
-  const trigger = page.locator('#select-fixture .ant-select').first();
+  const trigger = page.locator('#input-select-select-fixture .ant-select').first();
   const bounds = (await trigger.boundingBox())!;
 
   await trigger.click({ position: { x: bounds.width - 6, y: bounds.height / 2 } });
@@ -141,7 +141,7 @@ test('Select dismisses on Escape, Tab and outside pointer interaction', async ({
 
   await expect(select).toHaveAttribute('aria-expanded', 'false');
   await expect(
-    page.locator('#select-fixture').getByRole(
+    page.locator('#input-select-select-fixture').getByRole(
       'button',
       { name: 'Очистить', exact: true }
     )
@@ -194,7 +194,7 @@ test(
 test(
   'Select preserves numeric zero in bindings and FormData after clearing and selecting again',
   async ({ page }) => {
-    const fixture = page.locator('#numeric-fixture');
+    const fixture = page.locator('#input-select-numeric-fixture');
     const select = page.getByLabel('Numeric select', { exact: true });
 
     await expect(select).toHaveValue('Zero');
