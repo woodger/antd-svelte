@@ -86,18 +86,3 @@ for (const viewport of [1280, 320]) {
     }
   }
 }
-
-test('legacy Anchor links receive the same default spacing', async ({ page }) => {
-  await page.goto('/?fixture=anchor-spacing');
-  await page.getByLabel('Legacy spacing Anchor', { exact: true }).check();
-  const items = page.locator('#spacing-anchor .ant-anchor > .ant-anchor-link');
-
-  await expect(items.first()).toHaveCSS('padding-inline-start', '0px');
-  await expect(items.nth(1)).toHaveCSS('padding-inline-start', '16px');
-  await page.getByLabel('Horizontal spacing Anchor', { exact: true }).uncheck();
-
-  await expect(items.first()).toHaveCSS('padding-block-start', '4px');
-  await expect(items.first()).toHaveCSS('padding-inline-start', '16px');
-  await expect(page.locator('#spacing-anchor .ant-anchor-link .ant-anchor-link'))
-    .toHaveCSS('padding-block-start', '2px');
-});

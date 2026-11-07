@@ -6,7 +6,7 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **108**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **107**.
 Есть публичная реализация у **69** семейств; отсутствует у **4**.
 Проверенный объём v1 покрыт у **57**; требуется аудит у **12**; частично покрыт у **0**.
 
@@ -26,7 +26,7 @@ Candidate означает запись каталога, для которой 
 | [Masonry](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/masonry) | layout | target | Masonry | Согласованный v1 покрыт | Сохранённый native CSS marker вместо пропуска source (partial); Завершение CSS phase без собственной браузерной анимации (partial); Произвольный prefixCls (missing) |
 | [Space](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/space) | layout | target | Space, SpaceCompact, SpaceAddon | Согласованный v1 покрыт | Произвольный prefixCls Space/Compact/Addon (missing); Compact-адаптеры ещё не перенесённых controls (missing) |
 | [Splitter](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/splitter) | layout | target | Splitter | Согласованный v1 покрыт | Адаптация React Panel declarations к Svelte items/snippets (partial); Наследование CSS direction через native ConfigProvider (partial); PrefixCls (missing) |
-| [Anchor](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/anchor) | navigation | target | Anchor, AnchorLink | Согласованный v1 покрыт | PrefixCls (missing); Пересчёт indicator после стилей вместо stale Source geometry (partial) |
+| [Anchor](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/anchor) | navigation | target | Anchor | Согласованный v1 покрыт | PrefixCls (missing); Пересчёт indicator после стилей вместо stale Source geometry (partial) |
 | [Breadcrumb](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/breadcrumb) | navigation | target | Breadcrumb | Согласованный v1 покрыт | PrefixCls и полный Menu API (missing) |
 | [Dropdown](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/dropdown) | navigation | target | Dropdown | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Вложенные меню (missing); Полный onOpenChange info и callback при выборе команды (partial); Semantic/config/prefixCls, render/container и дополнительные trigger API (missing) |
 | [Menu](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/menu) | navigation | target | Menu | Согласованный v1 покрыт | Адаптивное horizontal overflow и исходные popup/inline motion (missing); Полный semantic/config, render hooks, tooltip и legacy children API (missing) |

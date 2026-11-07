@@ -50,23 +50,20 @@ describe('Anchor SSR', () => {
     expect(body).not.toContain('href="#b"');
     expect(body).toContain('ant-anchor-fixed');
   });
-  it('uses items over legacy snippet children and permits title snippets', () => {
-    const children = createRawSnippet(() => ({ render: () => '<span>Legacy children</span>' }));
-    const { body } = render(Anchor, { props: { items: [], children } });
-
-    expect(body).not.toContain('Legacy children');
+  it('renders title snippets and shows the fixed indicator when requested', () => {
+    const title = createRawSnippet(() => ({ render: () => '<span>Title snippet</span>' }));
     const snippet = render(
       Anchor,
       {
         props: {
-          items: [{ key: 'a', href: '#a', title: children }],
+          items: [{ key: 'a', href: '#a', title }],
           affix: false,
           showInkInFixed: true
         }
       }
     ).body;
 
-    expect(snippet).toContain('Legacy children');
+    expect(snippet).toContain('Title snippet');
     expect(snippet).not.toContain('ant-anchor-fixed');
   });
 });

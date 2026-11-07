@@ -10,39 +10,37 @@ const selectors = {
 
 test.use({ viewport: { width: 1000, height: 800 } });
 for (const source of [false, true]) {
-  for (const legacy of [false, true]) {
-    for (const sample of reference.cases) {
-      test(`navigation links match pinned decoration in ${source ? 'source' : 'native'} ${legacy ? 'legacy' : 'items'} ${sample.name}`, async ({ page }) => {
-        await page.goto('/?fixture=link-decoration');
-        for (const [name, value] of Object.entries({
-          'Source link theme': source, 'Custom link decorations': sample.custom,
-          'Inline link decoration': sample.inline, 'Legacy Anchor links': legacy,
-          'Dark link theme': sample.dark, 'Compact link theme': sample.compact
-        })) {
-          await page.getByLabel(name, { exact: true }).setChecked(value);
-        }
+  for (const sample of reference.cases) {
+    test(`navigation links match pinned decoration in ${source ? 'source' : 'native'} items ${sample.name}`, async ({ page }) => {
+      await page.goto('/?fixture=link-decoration');
+      for (const [name, value] of Object.entries({
+        'Source link theme': source, 'Custom link decorations': sample.custom,
+        'Inline link decoration': sample.inline,
+        'Dark link theme': sample.dark, 'Compact link theme': sample.compact
+      })) {
+        await page.getByLabel(name, { exact: true }).setChecked(value);
+      }
 
-        for (const [name, expected] of Object.entries(sample.links)) {
-          const link = page.locator(selectors[name as keyof typeof selectors]);
-          await page.mouse.move(990, 790);
-          await expect(link).toHaveCSS('text-decoration-line', expected.normal);
-          await link.hover();
-          await expect(link).toHaveCSS('text-decoration-line', expected.hover);
-          await page.mouse.down();
-          await expect(link).toHaveCSS('text-decoration-line', expected.active);
-          await page.mouse.move(990, 790);
-          await page.mouse.up();
-          await page.keyboard.press('Tab');
-          await link.focus();
-          await expect(link).toHaveCSS('text-decoration-line', expected.focus);
-          await expect(link).toBeFocused();
-          await expect.poll(() => link.evaluate(node => getComputedStyle(node).outlineStyle))
-            .not.toBe('none');
-          await link.evaluate(node => node.blur());
-        }
-        await expect(page.locator('#outside-decoration')).toHaveCSS('text-decoration-line', 'underline');
-      });
-    }
+      for (const [name, expected] of Object.entries(sample.links)) {
+        const link = page.locator(selectors[name as keyof typeof selectors]);
+        await page.mouse.move(990, 790);
+        await expect(link).toHaveCSS('text-decoration-line', expected.normal);
+        await link.hover();
+        await expect(link).toHaveCSS('text-decoration-line', expected.hover);
+        await page.mouse.down();
+        await expect(link).toHaveCSS('text-decoration-line', expected.active);
+        await page.mouse.move(990, 790);
+        await page.mouse.up();
+        await page.keyboard.press('Tab');
+        await link.focus();
+        await expect(link).toHaveCSS('text-decoration-line', expected.focus);
+        await expect(link).toBeFocused();
+        await expect.poll(() => link.evaluate(node => getComputedStyle(node).outlineStyle))
+          .not.toBe('none');
+        await link.evaluate(node => node.blur());
+      }
+      await expect(page.locator('#outside-decoration')).toHaveCSS('text-decoration-line', 'underline');
+    });
   }
 }
 

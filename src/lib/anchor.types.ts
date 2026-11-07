@@ -24,17 +24,12 @@ export interface AnchorItem {
   targetOffset?: number;
   children?: readonly AnchorItem[];
 }
-/** Ссылка навигации Anchor; нативные href/target сохраняют браузерную семантику. */
-export interface AnchorLinkProps extends Omit<AnchorItem, 'key' | 'children'> {
-  children?: Snippet;
-}
 /** Навигация по разделам с отслеживанием прокрутки, вложенными items и Affix. */
 export interface AnchorProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style' | 'onchange' | 'onclick'
 > {
   items?: readonly AnchorItem[];
-  children?: Snippet;
   offsetTop?: number;
   bounds?: number;
   /** @defaultValue true */

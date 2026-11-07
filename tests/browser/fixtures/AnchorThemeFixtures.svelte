@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Anchor, AnchorLink, ConfigProvider, type AnchorItem, type ThemeConfig } from 'antd-svelte';
+  import { Anchor, ConfigProvider, type AnchorItem, type ThemeConfig } from 'antd-svelte';
   import { anchorThemePresets } from './anchor-theme-presets';
 
   let preset = $state('default');
@@ -7,7 +7,6 @@
   let mounted = $state(true);
   let hashed = $state(true);
   let compact = $state(false);
-  let legacy = $state(false);
   let parentAliases = $state(false);
   let spacingOverride = $state(false);
   let color = $state('');
@@ -48,7 +47,6 @@
   <label><input type="checkbox" bind:checked={mounted} /> Mount themed Anchor</label>
   <label><input type="checkbox" bind:checked={hashed} /> Hash themed Anchor</label>
   <label><input type="checkbox" bind:checked={compact} /> Native compact Anchor</label>
-  <label><input type="checkbox" bind:checked={legacy} /> Legacy themed Anchor</label>
   <label><input type="checkbox" bind:checked={parentAliases} /> Parent Anchor aliases</label>
   <label><input type="checkbox" bind:checked={spacingOverride} /> Override Anchor spacing</label>
   <label>Anchor color override <input bind:value={color} /></label>
@@ -57,13 +55,7 @@
       <div class="samples" style={parentAliases ? '--ant-font-size:30px;--ant-color-text:red' : undefined}>
         {#each directions as direction}
           <Anchor class={`anchor-token-${direction}`} {direction} affix={false} showInkInFixed
-            items={legacy ? undefined : items} getCurrentAnchor={current}>
-            <AnchorLink href="#theme-overview" title="Overview" />
-            <AnchorLink href="#theme-delivery" title="Delivery">
-              <AnchorLink href="#theme-details" title="Details" />
-            </AnchorLink>
-            <AnchorLink href="#theme-payment" title="Payment" />
-          </Anchor>
+            {items} getCurrentAnchor={current} />
         {/each}
         <Anchor class="anchor-token-main" {items} affix={false} showInkInFixed
           getContainer={() => container!} onClick={() => clicks++}

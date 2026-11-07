@@ -12,7 +12,6 @@
   import type { AnchorProps } from './anchor.types';
   let {
     items,
-    children,
     offsetTop,
     bounds,
     affix = true,
@@ -49,7 +48,6 @@
       props: {
         ...rest,
         items,
-        children,
         offsetTop,
         bounds,
         affix,
@@ -196,7 +194,7 @@
           classes.indicator,
           activeLink && 'ant-anchor-ink-visible'
         ]} style={slots.indicator}></span>
-      {#if items !== undefined}<AnchorItems {items} {replace} />{:else}{@render children?.()}{/if}
+      <AnchorItems {items} {replace} />
     </div>
   </div>
 {/snippet}

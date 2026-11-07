@@ -1,10 +1,9 @@
 <script lang="ts">
-  import { Anchor, AnchorLink, Breadcrumb, ConfigProvider } from 'antd-svelte';
+  import { Anchor, Breadcrumb, ConfigProvider } from 'antd-svelte';
 
   let source = $state(false);
   let custom = $state(false);
   let inline = $state(false);
-  let legacy = $state(false);
   let dark = $state(false);
   let compact = $state(false);
   let clicks = $state(0);
@@ -24,7 +23,6 @@
   <label><input type="checkbox" bind:checked={source} /> Source link theme</label>
   <label><input type="checkbox" bind:checked={custom} /> Custom link decorations</label>
   <label><input type="checkbox" bind:checked={inline} /> Inline link decoration</label>
-  <label><input type="checkbox" bind:checked={legacy} /> Legacy Anchor links</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark link theme</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact link theme</label>
   <ConfigProvider theme={themeConfig}>
@@ -34,9 +32,7 @@
         event.preventDefault();
         clicks++;
       }}
-      items={legacy ? undefined : [{ key: 'link', href: '#decoration-target', title: 'Anchor link' }]}>
-      <AnchorLink href="#decoration-target" title="Anchor link" />
-    </Anchor>
+      items={[{ key: 'link', href: '#decoration-target', title: 'Anchor link' }]} />
     <Breadcrumb aria-label="Decoration Breadcrumb" class="decoration-breadcrumb" style={variables}
       items={[
         { key: 'plain', title: 'Breadcrumb link', href: '#decoration-target',

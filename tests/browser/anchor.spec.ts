@@ -168,28 +168,6 @@ test(
 );
 
 test(
-  'Anchor legacy links register, track scrolling and omit descendants in horizontal mode',
-  async ({ page }) => {
-    await page.getByLabel('Legacy Anchor links', { exact: true }).check();
-
-    const root = page.locator('#fixture-anchor');
-
-    await expect(root.getByRole('link', { name: 'Legacy nested', exact: true })).toBeVisible();
-
-    await root.getByRole('link', { name: 'Legacy second', exact: true }).click();
-    await expect.poll(() => page.locator('#anchor-scroll').evaluate(node => node.scrollTop))
-      .toBe(310);
-
-    await expect(root.getByRole('link', { name: 'Legacy second', exact: true }))
-      .toHaveClass(/-title-active/);
-
-    await page.getByLabel('Horizontal Anchor', { exact: true }).check();
-
-    await expect(root.getByRole('link', { name: 'Legacy nested', exact: true })).toHaveCount(0);
-  }
-);
-
-test(
   'Anchor uses Affix against its custom container without cloning native links',
   async ({ page }) => {
     await page.getByLabel('Affixed Anchor', { exact: true }).check();

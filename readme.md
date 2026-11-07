@@ -1164,13 +1164,11 @@ Raw reference сохраняет полный textContent исходника. С
 видимые trigger/separator fragments: закрытый native Dropdown сохраняется в DOM,
 а пробелы между элементами Svelte не меняют содержимое пунктов.
 
-## Anchor / AnchorLink
+## Anchor
 
 `Anchor` содержит `items` с key/href/title/target/class, вложенными children,
 replace и targetOffset; title принимает текст, число или Snippet. В horizontal
-вложенные items не монтируются. Legacy-композиция использует `AnchorLink` и
-children Snippet; массив items имеет приоритет. `items={undefined}` возвращает children
-как адаптация optional prop Svelte; пустой массив скрывает children. Ссылки остаются
+вложенные items не монтируются. Ссылки остаются
 нативными a: Tab и Enter работают без дополнительного keyboard engine.
 
 ```svelte
@@ -1195,7 +1193,7 @@ provider сохраняет родительскую функцию; локал�
 только изменение URL; выбор и анимация всё равно выполняются как в upstream.
 Внутренние href используют history.pushState/replaceState (без :target эффекта),
 HTTP(S) сохраняют нативный переход, при replace — location.replace.
-Item.replace переопределяет общий replace; legacy AnchorLink принимает свой prop.
+Item.replace переопределяет общий replace.
 `getCurrentAnchor(rawHref)` меняет визуальное выделение; onChange получает
 исходный href. Повторная прокрутка с тем же mapped highlight не дублирует callback,
 выбор другой raw ссылки сохраняет callback даже при одинаковом highlight.
@@ -1252,12 +1250,12 @@ catch binding; MIT-лицензии обоих пакетов сохранены
 Глобальные component config и prefixCls ещё не перенесены.
 
 Фикстура — `?fixture=anchor`, пример — `/ant-design#anchor`. Unit/SSR/Chromium
-проверяют приоритеты offsets, callbacks/history, анимацию/cleanup, nested/legacy,
+проверяют приоритеты offsets, callbacks/history, анимацию/cleanup, nested items,
 RTL/indicator и production hydration. Source tokens и метрики проверяются
 [по официальному UMD](./src/lib/theme-anchor-tokens-reference.test.ts) и
 [в браузере](./tests/browser/anchor-theme.spec.ts). CSS-рецепт anchor содержит 22 правила.
 
-Ссылки items и legacy AnchorLink используют linkDecoration/linkHoverDecoration/
+Ссылки items используют linkDecoration/linkHoverDecoration/
 linkFocusDecoration также без cssVar; defaults равны none. Пользовательские
 переменные и inline styles.itemTitle сохраняют приоритет.
 

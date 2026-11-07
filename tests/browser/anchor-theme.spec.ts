@@ -43,18 +43,6 @@ for (const sample of reference.cases) {
   });
 }
 
-test('legacy links retain source nested spacing and the first horizontal exception', async ({ page }) => {
-  await page.getByLabel('Anchor token preset', { exact: true }).selectOption('own-tokens');
-  await page.getByLabel('Legacy themed Anchor', { exact: true }).check();
-
-  await expect(page.locator('.anchor-token-vertical .ant-anchor > .ant-anchor-link').first())
-    .toHaveCSS('padding-block-start', '9px');
-  await expect(page.locator('.anchor-token-vertical .ant-anchor-link .ant-anchor-link'))
-    .toHaveCSS('padding-block-start', '3px');
-  const horizontal = page.locator('.anchor-token-horizontal .ant-anchor > .ant-anchor-link');
-  await expect(horizontal.first()).toHaveCSS('padding-inline-start', '0px');
-  await expect(horizontal.nth(1)).toHaveCSS('padding-inline-start', '27px');
-});
 
 test('theme colors retain links, focus, scroll, history and callback state', async ({ page }) => {
   const root = page.locator('.anchor-token-main');

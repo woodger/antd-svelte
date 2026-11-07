@@ -9,6 +9,9 @@
 
 ### Removed
 
+- Удалены публичный `AnchorLink`, его тип и `Anchor.children`;
+  вложенные ссылки остаются доступны через `items[].children`.
+
 - Удалены deprecated `Collapse.Panel`, композиция через `children`,
   `expandIconPosition` и `destroyInactivePanel`; актуальный `items` сохранён.
 

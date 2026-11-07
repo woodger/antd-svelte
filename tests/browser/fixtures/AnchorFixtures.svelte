@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Anchor } from 'antd-svelte';
-  import { AnchorLink } from 'antd-svelte';
   import type { AnchorItem } from 'antd-svelte';
 
   let container = $state<HTMLDivElement>();
@@ -9,7 +8,6 @@
   let prevent = $state(false);
   let replace = $state(false);
   let mapped = $state(false);
-  let legacy = $state(false);
   let mounted = $state(true);
   let targetOffset = $state(20);
   let changes = $state<string[]>([]);
@@ -32,7 +30,6 @@
   <label><input type="checkbox" bind:checked={prevent} /> Prevent Anchor history</label>
   <label><input type="checkbox" bind:checked={replace} /> Replace Anchor history</label>
   <label><input type="checkbox" bind:checked={mapped} /> Map Anchor highlight</label>
-  <label><input type="checkbox" bind:checked={legacy} /> Legacy Anchor links</label>
   <label><input type="checkbox" bind:checked={mounted} /> Mount Anchor</label>
   <label>Anchor target offset <input type="number" bind:value={targetOffset} /></label>
   <output aria-label="Anchor changes">{JSON.stringify(changes)}</output>
@@ -42,7 +39,7 @@
       {#if mounted}
         <Anchor
           id="fixture-anchor"
-          items={legacy ? undefined : items}
+          {items}
           affix={fixed}
           offsetTop={fixed ? 8 : undefined}
           getContainer={() => container!}
@@ -58,13 +55,7 @@
           }}
           classNames={{ item: 'anchor-custom-item' }}
           styles={{ itemTitle: 'font-weight:500' }}
-        >
-          <AnchorLink href="#anchor-one" title="Legacy first"><AnchorLink
-            href="#anchor-nested"
-            title="Legacy nested"
-          /></AnchorLink>
-          <AnchorLink href="#anchor-two" title="Legacy second" targetOffset={50} />
-        </Anchor>
+        />
       {/if}
     </div>
     <div

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { untrack } from 'svelte';
+  import { untrack, type Snippet } from 'svelte';
   import { useAnchor } from './anchor-context';
-  import type { AnchorLinkProps } from './anchor.types';
+  import type { AnchorItem } from './anchor.types';
   let {
     href,
     title,
@@ -10,7 +10,7 @@
     replace,
     targetOffset,
     children
-  }: AnchorLinkProps = $props();
+  }: Omit<AnchorItem, 'key' | 'children'> & { children?: Snippet; } = $props();
   const context = useAnchor();
   $effect(() => {
     const link = href;
