@@ -2,9 +2,10 @@
   import { Button, Form, FormItem, Input, Modal, Select } from 'antd-svelte';
   import { createControls } from './controls.model.svelte';
 
-  let { kind, controls = createControls() }: {
+  let { kind, controls = createControls(), rootIdPrefix = '' }: {
     kind: string;
-    controls?: ReturnType<typeof createControls>
+    controls?: ReturnType<typeof createControls>;
+    rootIdPrefix?: string;
   } = $props();
   const options = [
     { value: 'alpha', label: 'Alpha' },
@@ -27,7 +28,7 @@
 />
 
 {#if kind === 'input'}
-    <section id="input-fixture" aria-label="Input fixture">
+    <section id={`${rootIdPrefix}input-fixture`} aria-label="Input fixture">
       <label for="bound-input">Bound input</label>
       <Input id="bound-input" bind:value={controls.input} onValueChange={controls.changeInput} />
       <output aria-label="Input value">{controls.input ?? 'undefined'}</output>
@@ -43,7 +44,7 @@
 {/if}
 
 {#if kind === 'select'}
-    <section id="select-fixture" aria-label="Select fixture">
+    <section id={`${rootIdPrefix}select-fixture`} aria-label="Select fixture">
       <label for="plain-select">Plain select</label>
       <Select
         id="plain-select"
@@ -69,7 +70,7 @@
 {/if}
 
 {#if kind === 'select-numeric'}
-    <section id="numeric-fixture" aria-label="Numeric select fixture">
+    <section id={`${rootIdPrefix}numeric-fixture`} aria-label="Numeric select fixture">
       <form id="numeric-form" onsubmit={controls.recordNativeValue}>
         <label for="numeric-select">Numeric select</label>
         <Select
@@ -89,7 +90,7 @@
 {/if}
 
 {#if kind === 'form'}
-    <section id="form-fixture" aria-label="Form fixture">
+    <section id={`${rootIdPrefix}form-fixture`} aria-label="Form fixture">
       <label><input type="checkbox" bind:checked={controls.horizontalForm} /> Horizontal form</label>
       <label><input type="checkbox" bind:checked={controls.asyncValidation} /> Async validation</label>
       <label><input type="checkbox" bind:checked={controls.holdSubmission} /> Hold submission</label>
@@ -156,7 +157,7 @@
 {/if}
 
 {#if kind === 'modal'}
-    <section id="modal-fixture" aria-label="Modal fixture">
+    <section id={`${rootIdPrefix}modal-fixture`} aria-label="Modal fixture">
       <label for="modal-outside-input">Outside modal input</label>
       <Input id="modal-outside-input" />
       <label><input type="checkbox" bind:checked={controls.holdConfirmation} /> Hold confirmation</label>

@@ -3,14 +3,15 @@ import { test, expect } from './test';
 test(
   'ConfigProvider updates inherited direction and locale in controls and dialogs',
   async ({ page }) => {
-    await page.goto('/');
+    await page.goto('/?fixture=config-provider');
     await page.getByRole('heading', { name: 'Component browser fixtures' }).waitFor();
     await page.getByLabel('Right to left').check();
     await page.getByLabel('English locale').check();
 
     await expect(page.getByLabel('Plain select', { exact: true })).toHaveCSS('direction', 'rtl');
     await expect(
-      page.locator('#select-fixture').getByRole('button', { name: 'Clear', exact: true })
+      page.locator('#config-provider-select-fixture')
+        .getByRole('button', { name: 'Clear', exact: true })
     )
       .toBeVisible();
 

@@ -770,6 +770,10 @@
 
 ### Fixed
 
+- Browser fixtures: Affix ждёт mount всех scroll targets перед прокруткой;
+  ConfigProvider проверяет прежние Select/Modal и shared controls в отдельном
+  маршруте без загрузки общей страницы. Assertions и таймауты сохранены.
+
 - TimePicker/TimeRangePicker: подтверждение первого выбранного пункта сохраняется,
   когда автопрокрутка переносит второй click/dblclick с ячейки на колонку. Пустая
   область не подтверждает предыдущий выбор; отдельные range confirmations и

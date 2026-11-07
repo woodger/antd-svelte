@@ -25,6 +25,7 @@ test('Affix theme updates retain the fixed node, draft, native ref and transitio
     const host = page.locator('[data-affix-theme="normal"]');
     const root = host.locator('.theme-affix');
     const content = root.locator(':scope > div').last();
+    await expect(page.locator('[data-affix-scroll]')).toHaveCount(6);
     await page.locator('[data-affix-scroll]').evaluateAll(nodes => {
       for (const node of nodes) node.scrollTop = 80;
     });
