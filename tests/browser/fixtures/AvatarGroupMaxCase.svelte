@@ -17,10 +17,6 @@
     <AvatarGroup
       {items}
       max={values.max}
-      maxCount={values.maxCount}
-      maxStyle={values.maxStyle}
-      maxPopoverPlacement={values.maxPopoverPlacement}
-      maxPopoverTrigger={values.maxPopoverTrigger}
     />
   </div>
 </ConfigProvider>

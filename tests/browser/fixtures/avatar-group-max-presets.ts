@@ -2,7 +2,7 @@ import type { AvatarGroupProps } from 'antd-svelte';
 
 export type AvatarGroupMaxValues = Pick<
   AvatarGroupProps,
-  'max' | 'maxCount' | 'maxStyle' | 'maxPopoverPlacement' | 'maxPopoverTrigger'
+  'max'
 >;
 
 export interface AvatarGroupMaxCase extends AvatarGroupMaxValues {

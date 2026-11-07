@@ -9,7 +9,7 @@
 </script>
 
 <section id="avatar-group-max-fixture">
-  <h2>AvatarGroup legacy max aliases</h2>
+  <h2>AvatarGroup max configuration</h2>
   <label>AvatarGroup max reference <select bind:value={name} onchange={() => changed = false}>
     {#each reference.cases as sample}<option value={sample.name}>{sample.name}</option>{/each}
   </select></label>

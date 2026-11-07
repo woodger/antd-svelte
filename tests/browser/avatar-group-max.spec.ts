@@ -17,7 +17,7 @@ const change = (page: Page) => page.getByRole('button', { name: 'Change AvatarGr
   .dispatchEvent('click');
 
 for (const sample of reference.cases as AvatarGroupMaxCase[]) {
-  test(`AvatarGroup max aliases match source for ${sample.name}`, async ({ page }) => {
+  test(`AvatarGroup max matches source for ${sample.name}`, async ({ page }) => {
     await select(page, sample.name);
     const snapshot = () => page.locator('#avatar-group-max-surface')
       .evaluate(snapshotAvatarGroupMax);
@@ -45,8 +45,8 @@ for (const sample of reference.cases as AvatarGroupMaxCase[]) {
   });
 }
 
-test('AvatarGroup modern focus trigger suppresses the legacy hover trigger', async ({ page }) => {
-  await select(page, 'modern-trigger');
+test('AvatarGroup focus trigger does not open on hover', async ({ page }) => {
+  await select(page, 'focus-trigger');
   await page.clock.install();
   await button(page).hover();
   await page.clock.runFor(1000);
@@ -59,8 +59,8 @@ test('AvatarGroup modern focus trigger suppresses the legacy hover trigger', asy
   await expect(button(page)).toBeFocused();
 });
 
-test('AvatarGroup modern trigger array suppresses the legacy focus trigger', async ({ page }) => {
-  await select(page, 'modern-trigger-array');
+test('AvatarGroup hover/click trigger array does not open on focus', async ({ page }) => {
+  await select(page, 'trigger-array');
   await page.clock.install();
   await button(page).focus();
   await page.clock.runFor(1000);
@@ -73,8 +73,8 @@ test('AvatarGroup modern trigger array suppresses the legacy focus trigger', asy
   await expect(popup(page)).toBeVisible();
 });
 
-test('AvatarGroup alias updates retain the open popup, focus and hidden avatars', async ({ page }) => {
-  await select(page, 'reactive-aliases');
+test('AvatarGroup max updates retain the open popup, focus and hidden avatars', async ({ page }) => {
+  await select(page, 'reactive-style-placement');
   await button(page).click();
   await expect(popup(page)).toBeFocused();
   const hidden = popup(page).locator('.ant-avatar').first();
@@ -95,7 +95,7 @@ test('AvatarGroup alias updates retain the open popup, focus and hidden avatars'
   await expect(button(page)).toBeFocused();
 });
 
-test('AvatarGroup count alias updates remove overflow and recover nearby focus', async ({ page }) => {
+test('AvatarGroup count updates remove overflow and recover nearby focus', async ({ page }) => {
   await select(page, 'reactive-limit');
   await button(page).click();
   await expect(popup(page)).toBeFocused();

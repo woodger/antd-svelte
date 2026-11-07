@@ -15,9 +15,7 @@ export function snapshotAvatarGroupMax(host: HTMLElement) {
       height: style.height,
       radius: style.borderRadius,
       fontSize: style.fontSize
-    } : null,
-    attributes: ['maxcount', 'maxstyle', 'maxpopoverplacement', 'maxpopovertrigger']
-      .map(name => root.getAttribute(name))
+    } : null
   };
 }
 

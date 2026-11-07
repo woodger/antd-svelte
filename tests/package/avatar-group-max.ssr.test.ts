@@ -5,7 +5,7 @@ import AvatarGroupMaxCase from '../browser/fixtures/AvatarGroupMaxCase.svelte';
 import reference from '../browser/fixtures/ant-design-avatar-group-max-reference.json';
 import type { AvatarGroupMaxCase as Sample } from '../browser/fixtures/avatar-group-max-presets';
 
-describe('AvatarGroup source max aliases SSR', () => {
+describe('AvatarGroup source max SSR', () => {
   it('pins evidence to the official archive', () => {
     expect(reference.reference).toMatchObject({
       version: registry.upstream.version,
@@ -28,7 +28,6 @@ describe('AvatarGroup source max aliases SSR', () => {
           expect(avatars).toHaveLength(snapshot.texts.length + (snapshot.counter ? 1 : 0));
           if (snapshot.counter) expect(texts).toContain(`>${snapshot.counter.text}<`);
           expect(body).not.toContain('ant-avatar-group-list');
-          expect(body).not.toMatch(/\smax(?:count|style|popoverplacement|popovertrigger)=/i);
           expect(vi.getTimerCount()).toBe(0);
         }
       } finally {

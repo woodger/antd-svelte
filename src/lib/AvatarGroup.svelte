@@ -15,10 +15,6 @@
     size,
     shape,
     max,
-    maxCount,
-    maxStyle,
-    maxPopoverPlacement,
-    maxPopoverTrigger,
     id,
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledby,
@@ -35,17 +31,7 @@
   let host = $derived(nativeElement);
   let prefix = $derived(prefixCls || 'ant-avatar');
   let prefixCss = $derived(getAvatarPrefixCss(prefix));
-  // Upstream использует truthy fallback, в том числе для count=0 и пустого style.
-  let resolvedMax = $derived({
-    ...max,
-    count: max?.count || maxCount,
-    style: max?.style || maxStyle,
-    popover: {
-      ...max?.popover,
-      placement: max?.popover?.placement || maxPopoverPlacement,
-      trigger: max?.popover?.trigger || maxPopoverTrigger
-    }
-  });
+  let resolvedMax = $derived(max ?? {});
   let layout = $derived(getAvatarGroupItems(items, resolvedMax.count));
   let strings = $derived({ ...ruRU.avatarGroup, ...config.locale.avatarGroup });
   $effect(() => {

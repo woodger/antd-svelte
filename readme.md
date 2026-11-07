@@ -7272,14 +7272,14 @@ Max.count ограничивает число видимых участнико�
 до целого, но не ниже 1. При лимите не меньше числа уникальных участников
 кнопка отсутствует. Max.style задаёт style Avatar внутри кнопки +N.
 
-Для совместимости с Ant Design доступны deprecated aliases maxCount, maxStyle,
-maxPopoverPlacement (top/bottom) и maxPopoverTrigger (hover/focus/click).
-Соответствующее truthy поле max имеет приоритет: max.count=0 допускает fallback
-к maxCount, пустой max.style — к maxStyle, а пустой массив max.popover.trigger=[]
-подавляет legacy trigger. После выбора count действуют те же правила нормализации
-лимита. Без собственных triggers сохраняется нативный default hover/click.
-Новый код использует max; alias-пропы не попадают в DOM. При обновлении aliases
-кнопка и открытый список сохраняются, пока остаются скрытые участники.
+Без собственных triggers сохраняется нативный default hover/click.
+При обновлении max кнопка и открытый список сохраняются, пока остаются
+скрытые участники.
+
+В исходнике overflow Avatar — span, которому браузер не передаёт фокус.
+В Svelte сохранена нативная кнопка +N: focus trigger доступен с клавиатуры.
+В raw source-замерах отдельно записан результат настоящего focus;
+событие focusin отправляется отдельно для проверки обработчика Popover.
 
 Max.popover принимает настройки текущего Svelte Popover, кроме children:
 содержимое, видимость, callbacks, container getters, ARIA, classes/styles,

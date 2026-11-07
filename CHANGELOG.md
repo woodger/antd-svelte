@@ -9,6 +9,9 @@
 
 ### Removed
 
+- Удалены `AvatarGroup.maxCount`, `maxStyle`, `maxPopoverPlacement` и
+  `maxPopoverTrigger`; актуальная настройка через `max` сохранена.
+
 - Удалены `Button.iconPosition`, `Empty.imageStyle`, `Tag.bordered` и цвета
   Tag с суффиксом `-inverse`, `Divider.type`, `Divider.orientationMargin`
   и значения размещения подписи в `Divider.orientation`. Сохранены их актуальные
