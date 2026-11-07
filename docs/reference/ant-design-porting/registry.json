@@ -198,7 +198,7 @@
       "name": "FloatButton",
       "category": "general",
       "scope": "target",
-      "scopeReason": "Перенос FloatButton/Group/BackTop с исходными placements, native Button и scroll lifecycle.",
+      "scopeReason": "Перенос актуальных FloatButton/Group/FloatButton.BackTop; deprecated самостоятельный BackTop исключён и удалён.",
       "upstreamPath": "components/float-button",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -218,12 +218,6 @@
           "upstream": "FloatButton.BackTop",
           "local": [
             "FloatButtonBackTop"
-          ]
-        },
-        {
-          "upstream": "BackTop",
-          "local": [
-            "BackTop"
           ]
         }
       ],
@@ -279,28 +273,6 @@
         "src/lib/float-button-motion.dom.ts",
         "tests/browser/float-button-motion.spec.ts",
         "tests/browser/fixtures/ant-design-float-back-top-motion-reference.json",
-        "src/lib/BackTop.svelte",
-        "src/lib/back-top.types.ts",
-        "src/lib/back-top-style.engine.ts",
-        "src/lib/back-top-style.engine.test.ts",
-        "src/lib/vendor/back-top.css.js",
-        "src/lib/theme-back-top-tokens-reference.test.ts",
-        "tools/fixtures/ant-design-back-top-tokens-reference.json",
-        "tools/fixtures/ant-design-back-top-css-origin.json",
-        "tests/package/back-top.ssr.test.ts",
-        "tests/package/back-top-theme.ssr.test.ts",
-        "tests/browser/back-top.spec.ts",
-        "tests/browser/back-top-theme.spec.ts",
-        "tests/browser/back-top-ssr.spec.ts",
-        "tests/browser/fixtures/back-top.server.ts",
-        "tests/browser/back-top-theme-metrics.ts",
-        "tests/browser/fixtures/BackTopFixtures.svelte",
-        "tests/browser/fixtures/BackTopThemeCase.svelte",
-        "tests/browser/fixtures/BackTopThemeFixtures.svelte",
-        "tests/browser/fixtures/back-top-theme-presets.ts",
-        "tests/browser/fixtures/ant-design-back-top-observation.json",
-        "tests/browser/fixtures/ant-design-back-top-theme-observation.json",
-        "tests/browser/fixtures/ant-design-back-top-theme-reference.json",
         "docs/reference/theme-context.md",
         "readme.md"
       ],
@@ -404,39 +376,6 @@
             "readme.md"
           ],
           "note": "FloatButtonBackTop fade анимирует только opacity по linear, как antFadeIn/antFadeOut. Raw UMD enter/leave кадры на50/200ms, локальный transform и cleanup после завершения проверяются через настоящий приостановленный WAAPI. Геометрия и easing меню группы сохраняются."
-        },
-        {
-          "id": "deprecated-back-top",
-          "title": "Отдельный deprecated BackTop",
-          "state": "supported",
-          "requiredForV1": false,
-          "evidence": [
-            "src/lib/BackTop.svelte",
-            "src/lib/back-top.types.ts",
-            "src/lib/back-top-style.engine.ts",
-            "src/lib/back-top-style.engine.test.ts",
-            "src/lib/vendor/back-top.css.js",
-            "src/lib/theme-back-top-tokens-reference.test.ts",
-            "tools/fixtures/ant-design-back-top-tokens-reference.json",
-            "tools/fixtures/ant-design-back-top-css-origin.json",
-            "tests/package/back-top.ssr.test.ts",
-            "tests/package/back-top-theme.ssr.test.ts",
-            "tests/browser/back-top.spec.ts",
-            "tests/browser/back-top-theme.spec.ts",
-            "tests/browser/back-top-ssr.spec.ts",
-            "tests/browser/fixtures/back-top.server.ts",
-            "tests/browser/back-top-theme-metrics.ts",
-            "tests/browser/fixtures/BackTopFixtures.svelte",
-            "tests/browser/fixtures/BackTopThemeCase.svelte",
-            "tests/browser/fixtures/BackTopThemeFixtures.svelte",
-            "tests/browser/fixtures/back-top-theme-presets.ts",
-            "tests/browser/fixtures/ant-design-back-top-observation.json",
-            "tests/browser/fixtures/ant-design-back-top-theme-observation.json",
-            "tests/browser/fixtures/ant-design-back-top-theme-reference.json",
-            "docs/reference/theme-context.md",
-            "readme.md"
-          ],
-          "note": "Самостоятельный legacy export из components/back-top, не алиас FloatButton.BackTop. Target Window/Document/Element/null, inclusive visibilityHeight=400, duration=450, root ref/currentTarget и локализованный native action; custom Snippet сохраняет controls/focus/selection/FormData. Source runtime CSSOM из закреплённого UMD, private prefix/media scope, aliases/algorithms и nested/reset scopes. BackTop отсутствует в static dist/antd.css. Исходные 117 CSS-состояний сохранены: UMD пропускает rootCls и не применяет зарегистрированные tokens; отдельный явно помеченный diagnostic добавляет только ожидаемый DOM class. Native применяет зарегистрированные declarations. Raw observations также фиксируют source stale threshold и RTL; эти ошибки не перенесены. SSR работает без JS при обоих порядках CSS; fade следует actual snippet root, inert ставится сразу, obsolete animations/listeners/RAF очищаются."
         }
       ]
     },

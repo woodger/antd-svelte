@@ -52,7 +52,7 @@ info содержит полный текущий GlobalToken, component, classN
 как в upstream. Закрытие Tag сохраняет stopPropagation и не вызывает его onClick.
 Непрозрачный Svelte snippet Tag проверяется по отрендеренным прямым children;
 React children.type в Svelte отсутствует.
-FloatButton, BackTop и trigger FloatButtonGroup наследуют Wave через общий Button;
+FloatButton, FloatButtonBackTop и trigger FloatButtonGroup наследуют Wave через общий Button;
 их info.component равен Button, как в source composition.
 Кнопки подтверждения DatePicker/RangePicker и TimePicker/TimeRangePicker также
 используют общий Button и получают его Wave, сохраняя native picker lifecycle.

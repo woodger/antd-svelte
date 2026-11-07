@@ -127,7 +127,6 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Button / ButtonGroup | Native button/href, color/variant/ghost, loading delay/icon, semantic slots, config, Group и Compact |
 | Typography / TypographyText / TypographyTitle / TypographyParagraph / TypographyLink | Нативный текст, decorations, copy/edit, CSS/JS ellipsis, expand/collapse и semantic config |
 | FloatButton / FloatButtonGroup / FloatButtonBackTop | Плавающие native actions, Badge/Tooltip, меню групп и возврат с прогрессом прокрутки |
-| BackTop (deprecated) | Legacy scroll control, component theme/media, native default action и custom snippets |
 | Watermark | Text/image Canvas tiles, per-line fonts, offsets, mutation repair, наследование Modal/Drawer |
 | BorderBeam | CSS-лучи по рамке нативного контейнера, градиенты, фазы, размеры и reduced motion |
 | Rate | Value/defaultValue, half/clear, hover, keyboard/RTL, character/tooltips, размеры и focus ref |
@@ -6713,15 +6712,15 @@ visibilityHeight=0, target не вызывается. После mount scroll о
 и progress; resize обновляет только progress. Click запускает cubic scroll к 0
 перед пользовательским callback. При reduced motion прокрутка мгновенная;
 собственные RAF/listeners отменяются при unmount. NativeElement с bind доступен
-у кнопки/BackTop, у Group указывает на div группы.
+у кнопки/FloatButtonBackTop, у Group указывает на div группы.
 
-ConfigProvider.floatButton.backTopIcon задаёт BackTop icon. Как в исходной 6.6.8,
+ConfigProvider.floatButton.backTopIcon задаёт иконку FloatButtonBackTop. Как в исходной 6.6.8,
 FloatButton не потребляет объявленные в глобальном floatButton config class/style/
 semantic slots; локальные props работают. Config вложенного provider наследуется
 при undefined и заменяется целиком при заданном объекте.
 
 `theme.components.FloatButton` применяет alias overrides и algorithms к кнопкам,
-Group и BackTop. Собственных component tokens у закреплённого FloatButton нет:
+Group и FloatButtonBackTop. Собственных component tokens у закреплённого FloatButton нет:
 размер задаёт controlHeightLG, иконку — fontSizeIcon, отступы — paddingXXS,
 marginXXL/marginLG и padding группы. Button сохраняет свои component tokens;
 его config style, semantic styles и локальный style имеют приоритет над темой.
@@ -6734,7 +6733,7 @@ marginXXL/marginLG и padding группы. Button сохраняет свои c
 У FloatButtonBackTop fade меняет только opacity по linear-кривой; локальный
 transform сохраняется во время появления и исчезновения. Промежуточные кадры
 официального UMD сверяются в [browser](tests/browser/float-button-motion.spec.ts).
-Wave наследуется через общий Button, включая BackTop и trigger группы.
+Wave наследуется через общий Button, включая FloatButtonBackTop и trigger группы.
 
 ```svelte
 <FloatButton tooltip="Помощь" aria-label="Помощь" onclick={showHelp} />
@@ -6743,47 +6742,6 @@ Wave наследуется через общий Button, включая BackTop
   <FloatButtonBackTop visibilityHeight={0} aria-label="К началу" />
 </FloatButtonGroup>
 ```
-
-## BackTop (deprecated)
-
-BackTop воспроизводит отдельный legacy export Ant Design 6.6.8. Для новых
-интерфейсов используйте FloatButtonBackTop. Корень BackTop имеет размер 40×40px;
-content/icon и логические отступы используют controlHeightLG/fontSizeHeading3.
-Границы media включают screenMD и screenXS. Компонентный token zIndexPopup
-по умолчанию равен zIndexBase + 10; aliases/algorithms, custom CSS prefix,
-вложенные темы и реактивные media поддержаны.
-
-VisibilityHeight=400 сравнивается со scrollTop включительно, duration=450 задаёт
-скролл к нулю. Target возвращает Window, Document, HTMLElement либо null;
-по умолчанию используется ownerDocument корня. Смена target/порога обновляет
-подписки, unmount отменяет listeners/RAF/анимации. Reduced motion отключает
-скролл и fade. OnClick/onclick получают нативный click с currentTarget корня;
-onclick имеет приоритет. Class/rootClassName, style, DOM attributes и
-bind:nativeElement относятся к div; локальный style применяется после tokens.
-
-По умолчанию внутри div находится нативная кнопка с локализованным именем
-locale.global.backToTop; aria-label уточняет его. Children Snippet задаёт
-собственный control с его клавиатурой и доступным именем. Контейнер делегирует
-click, сохраняя действия controls внутри snippet. При скрытии subtree сразу
-получает inert, после fade содержимое удаляется; пустой snippet скрывает корень.
-Обновления темы сохраняют root/action и input selection/focus/FormData в snippet.
-
-```svelte
-<BackTop visibilityHeight={400} duration={450} aria-label="К началу страницы" />
-```
-
-117 CSS-состояний / 13 тем проверяются в
-[browser](tests/browser/back-top-theme.spec.ts); target, клавиатура и lifecycle —
-в [основных сценариях](tests/browser/back-top.spec.ts), SSR — в
-[package tests](tests/package/back-top-theme.ssr.test.ts) и
-[браузере без JavaScript](tests/browser/back-top-ssr.spec.ts) при обоих порядках CSS.
-В закреплённом UMD найден пропущенный rootCls: исходные
-[замеры](tests/browser/fixtures/ant-design-back-top-theme-observation.json) сохранены;
-отдельная CSS-матрица восстанавливает ровно этот класс, без изменения scripts,
-styles или измеренных значений. Native BackTop применяет зарегистрированные tokens.
-[Происхождение CSS и наблюдения upstream](docs/reference/theme-context.md#тема-backtop)
-описывают также RTL и обновление visibilityHeight. Fixtures: `?fixture=back-top`
-и `?fixture=back-top-theme`.
 
 ## Timeline
 

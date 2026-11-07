@@ -7,6 +7,12 @@
 
 ## [Unreleased]
 
+### Removed
+
+- Deprecated BackTop и BackTopProps, его компонентные токены, runtime CSS,
+  отдельные тесты, фикстуры и документация. Актуальный FloatButtonBackTop
+  и его общие scroll/motion механизмы сохранены.
+
 ### Added
 
 - Breadcrumb: общие class/style/semantic defaults, separator и dropdownIcon из
@@ -51,11 +57,6 @@
 - TableColumn.rowScope: нативные th с scope=row/rowgroup, исходные header colors,
   selection/hover и fixed columns. Обновление scope сохраняет editor/focus/selection;
   обычные ячейки, column headers и expanded rows сохраняют свою семантику.
-
-- BackTop: отдельный deprecated export с исходными style/tokens/media, targets,
-  smooth scroll и fade. Default action — native button; callbacks/root refs,
-  opaque snippets и локализованное имя сохранены. Отмечены пропущенный rootCls,
-  RTL и stale threshold в upstream; исходные и registration CSS-замеры разделены.
 
 - TableColumn.className: пользовательские классы заголовка и ячеек своей колонки,
   с сохранением sort/fixed/selection classes и DOM редактора при обновлении.

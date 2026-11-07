@@ -6,7 +6,7 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **115**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **114**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
 Проверенный объём v1 покрыт у **58**; требуется аудит у **12**; частично покрыт у **0**.
 
@@ -16,7 +16,7 @@ Candidate означает запись каталога, для которой 
 | Семейство | Категория | Scope | Экспорты Svelte | Аудит v1 | Известные пробелы |
 | --- | --- | --- | --- | --- | --- |
 | [Button](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/button) | general | target | Button, ButtonGroup | Согласованный v1 покрыт | Автопробел для двух китайских символов (partial); Source Wave, loading icon enter/leave и prefixCls (partial) |
-| [FloatButton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/float-button) | general | target | FloatButton, FloatButtonGroup, FloatButtonBackTop, BackTop | Согласованный v1 покрыт | Произвольный prefixCls и общий z-index context (missing) |
+| [FloatButton](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/float-button) | general | target | FloatButton, FloatButtonGroup, FloatButtonBackTop | Согласованный v1 покрыт | Произвольный prefixCls и общий z-index context (missing) |
 | [Icon](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/icon) | general | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
 | [Typography](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/typography) | general | target | Typography, TypographyText, TypographyTitle, TypographyParagraph, TypographyLink | Согласованный v1 покрыт | Границы ReactNode и непрозрачных Svelte snippets (partial); Произвольный prefix CSS и расширенные Tooltip props (missing) |
 | [Divider](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/divider) | layout | target | Divider | Согласованный v1 покрыт | Общий ConfigProvider prefix и React development diagnostics (missing) |

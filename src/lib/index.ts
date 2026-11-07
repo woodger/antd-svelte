@@ -126,9 +126,6 @@ export type {
 export { default as FloatButton } from './FloatButton.svelte';
 export { default as FloatButtonGroup } from './FloatButtonGroup.svelte';
 export { default as FloatButtonBackTop } from './FloatButtonBackTop.svelte';
-/** @deprecated Используйте FloatButtonBackTop для новых интерфейсов. */
-export { default as BackTop } from './BackTop.svelte';
-export type { BackTopProps } from './back-top.types';
 export type {
   FloatButtonProps,
   FloatButtonGroupProps,

@@ -44,10 +44,6 @@ export interface AvatarComponentToken {
   groupBorderColor: string;
 }
 
-export interface BackTopComponentToken {
-  zIndexPopup: number;
-}
-
 export interface BadgeComponentToken {
   indicatorZIndex: number | string;
   indicatorHeight: number | string;
@@ -921,7 +917,6 @@ export interface ComponentTokenMap {
   Alert?: AlertComponentToken;
   Anchor?: AnchorComponentToken;
   Avatar?: AvatarComponentToken;
-  BackTop?: BackTopComponentToken;
   Badge?: BadgeComponentToken;
   BorderBeam?: BorderBeamComponentToken;
   Button?: ButtonComponentToken;

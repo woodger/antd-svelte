@@ -38,8 +38,7 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
   | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
-  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification' | 'Table' | 'Grid'
-  | 'BackTop';
+  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification' | 'Table' | 'Grid';
 
 const factories = {
   Grid: () => ({}),
@@ -175,7 +174,6 @@ const factories = {
     inlineItemMarginBottom: 0
   }),
   FloatButton: () => ({}),
-  BackTop: (token: GlobalToken) => ({ zIndexPopup: token.zIndexBase + 10 }),
   Affix: (token: GlobalToken) => ({ zIndexPopup: token.zIndexBase + 10 }),
   BorderBeam: () => ({}),
   Masonry: () => ({}),
@@ -439,7 +437,6 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Typography: [],
   Form: [],
   FloatButton: [],
-  BackTop: [],
   Affix: [],
   BorderBeam: [],
   Masonry: [],
