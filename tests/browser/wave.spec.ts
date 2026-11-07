@@ -1,4 +1,5 @@
 import { test, expect } from './test';
+import tokenReference from './fixtures/ant-design-wave-token-keys-reference.json' with { type: 'json' };
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/?fixture=wave');
@@ -100,6 +101,8 @@ test('Tag callbacks and a single anchor get Wave while plain and CheckableTag st
 });
 
 test('custom effect receives full current tokens, native events and the chosen target', async ({ page }) => {
+  const tokenKeys = [...tokenReference.aliasKeys, 'Button'].sort();
+
   await page.getByLabel('Custom wave effect', { exact: true }).check();
   await page.locator('#wave-primary').click();
 
@@ -108,7 +111,7 @@ test('custom effect receives full current tokens, native events and the chosen t
   const [report] = JSON.parse(await output.innerText());
   expect(report).toMatchObject({ target: 'wave-primary', event: 'click', primary: '#1677ff',
     fontSize: 17, buttonPrimary: '#ff0000', colorSource: null, receiver: 'undefined' });
-  expect(report.fields).toBeGreaterThanOrEqual(537);
+  expect(report.tokenKeys).toEqual(tokenKeys);
   expect(report.className).toBe(`ant-wave ${report.hashId}`);
   await expect(page.locator('.ant-wave')).toHaveCount(0);
 
@@ -121,6 +124,7 @@ test('custom effect receives full current tokens, native events and the chosen t
   const next = JSON.parse(await output.innerText()).at(-1);
   expect(next.className).toBe('ant-wave');
   expect(next.hashId).toBe('');
+  expect(next.tokenKeys).toEqual(tokenKeys);
 });
 
 test('custom Checkbox effect also receives uncheck and Steps exposes its color source', async ({ page }) => {

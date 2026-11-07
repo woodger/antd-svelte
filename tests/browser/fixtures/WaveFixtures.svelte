@@ -34,7 +34,8 @@
       hashId: info.hashId,
       primary: info.token.colorPrimary,
       fontSize: info.token.fontSize,
-      fields: Object.keys(info.token).length,
+      // Ключ внутреннего кэша не относится к публичному набору токенов.
+      tokenKeys: Object.keys(info.token).filter(key => key !== '_tokenKey').sort(),
       buttonPrimary: info.token.Button && 'colorPrimary' in info.token.Button
         ? info.token.Button.colorPrimary : undefined,
       colorSource: info.colorSource ?? null,

@@ -93,6 +93,9 @@ pending RAF, timers, observers и holder DOM. Повторные эффекты 
 - [SSR публичного пакета](../../tests/package/wave.ssr.test.ts).
 - [События, геометрия и lifecycle в Chromium](../../tests/browser/wave.spec.ts),
   маршрут ?fixture=wave.
+- [Публичные ключи токенов](../../tests/browser/fixtures/ant-design-wave-token-keys-reference.json)
+  извлечены из закреплённого эталона текущего AliasToken; компонентные записи
+  проверяются вместе с ними. Приватный ключ кэша в эту сверку не входит.
 
 Лицензии: [Ant Design](../../src/lib/vendor/LICENSE.ant-design),
 [rc-util](../../src/lib/vendor/LICENSE.rc-util),
