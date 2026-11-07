@@ -211,7 +211,9 @@ export type {
   DescriptionsItem,
   DescriptionsContent,
   DescriptionsSlots,
-  DescriptionsCellSlots
+  DescriptionsCellSlots,
+  DescriptionsConfig,
+  DescriptionsSemantic
 } from './descriptions.types';
 export { default as ConfigProvider } from './ConfigProvider.svelte';
 export { default as Button } from './Button.svelte';

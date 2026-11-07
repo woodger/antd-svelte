@@ -4,6 +4,7 @@
   import type { DatePickerConfig } from './date-picker.types';
   import type { CardConfig, CardMetaConfig } from './card.types';
   import type { MentionsComponentConfig } from './mentions.types';
+  import type { DescriptionsConfig } from './descriptions.types';
   import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
   import type { ButtonConfig } from './button.types';
   import type { TabsConfig } from './tabs.types';
@@ -76,6 +77,7 @@
     datePicker?: DatePickerConfig;
     card?: CardConfig;
     cardMeta?: CardMetaConfig;
+    descriptions?: DescriptionsConfig;
     mentions?: MentionsComponentConfig;
     button?: ButtonConfig;
     tabs?: TabsConfig;
@@ -162,6 +164,7 @@
     datePicker,
     card,
     cardMeta,
+    descriptions,
     mentions,
     button,
     tabs,
@@ -256,6 +259,9 @@
     },
     get cardMeta() {
       return cardMeta ?? parent.cardMeta;
+    },
+    get descriptions() {
+      return descriptions ?? parent.descriptions;
     },
     get mentions() {
       return mentions ?? parent.mentions;

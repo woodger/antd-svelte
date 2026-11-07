@@ -9,6 +9,11 @@
 
 ### Added
 
+- Descriptions: class/style и object/function semantic defaults из ConfigProvider
+  с nested record replacement, исходными root слоями и приоритетами legacy/item
+  ячеек. Общий flat semantic engine используется также Card/Meta; native callback
+  defaults сохранены рядом с отдельным raw source observation.
+
 - Card/CardMeta: class/style и object/function semantic defaults из ConfigProvider,
   независимые records с nested replacement и исходные четыре root style слоя.
   Header/body semantic styles перекрывают legacy; editors, focus/selection,

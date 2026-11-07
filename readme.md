@@ -971,6 +971,21 @@ item.style; без рамки — к внутренним span. Style корня
 Вложенные таблицы сохраняют собственные bordered/size и не получают row-стили
 внешней таблицы. Темы/RTL наследуются через ConfigProvider.
 
+ConfigProvider.descriptions задаёт class/style и object/function classNames/styles
+для тех же semantic slots. Классы context/local объединяются; root style layers:
+context semantic → context style → local semantic → local style. Для ячеек общий
+semantic слой идёт после root legacy и перед item legacy/semantic. Явный вложенный
+record, включая {}, заменяет родительский; undefined наследует его. Обновления
+сохраняют editor/focus/selection и FormData первой ячейки при смене column/size.
+Фикстура — `?fixture=descriptions-config`,
+[браузерная сверка](./tests/browser/descriptions-config.spec.ts) сохраняет raw UMD
+classes/tags/colspan/computed styles; проверка классов учитывает состав и количество.
+
+Callbacks сохраняют прежние native bordered=false, layout=horizontal и colon=true
+при отсутствии этих props. У upstream raw mergedProps они отсутствуют; наблюдение
+записано отдельно в [эталоне](./tests/browser/fixtures/ant-design-descriptions-config-reference.json).
+Column/items/size разрешены в обоих вариантах.
+
 ConfigProvider.theme.components.Descriptions применяет все десять компонентных
 токенов, включая цвета title/extra/label/content, фон label, отступ заголовка,
 ячеек и двоеточия. Значения рассчитываются из общих alias tokens; поддержаны
@@ -987,8 +1002,8 @@ itemPaddingBottom/itemPaddingEnd собственными отступами.
 Галерея — `/ant-design#descriptions`, фикстура — `?fixture=descriptions`.
 Unit/SSR/Chromium проверяют раскладку, media, приоритет стилей и вложенность.
 Рецепт descriptions извлекает 40 правил без keyframes, включая две интеграции
-Table expanded-row. PrefixCls, произвольные breakpoints и глобальный
-component config пока не поддержаны и остаются в полном объёме миграции.
+Table expanded-row. PrefixCls и произвольные breakpoints пока не поддержаны
+и остаются в полном объёме миграции.
 
 ## Card
 

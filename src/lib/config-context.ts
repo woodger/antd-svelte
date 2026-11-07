@@ -3,6 +3,7 @@ import type { TreeSelectConfig } from './tree-select.types';
 import type { DatePickerConfig } from './date-picker.types';
 import type { CardConfig, CardMetaConfig } from './card.types';
 import type { MentionsComponentConfig } from './mentions.types';
+import type { DescriptionsConfig } from './descriptions.types';
 import type { FloatButtonConfig, FloatButtonGroupConfig } from './float-button.types';
 import type { ButtonConfig } from './button.types';
 import type { TabsConfig } from './tabs.types';
@@ -65,6 +66,7 @@ export interface ConfigContext {
   readonly datePicker?: DatePickerConfig;
   readonly card?: CardConfig;
   readonly cardMeta?: CardMetaConfig;
+  readonly descriptions?: DescriptionsConfig;
   readonly mentions?: MentionsComponentConfig;
   readonly tabs?: TabsConfig;
   readonly ribbon?: BadgeRibbonConfig;

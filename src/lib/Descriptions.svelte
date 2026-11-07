@@ -4,6 +4,7 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { descriptionsColumn, descriptionsItems, descriptionsRows } from './descriptions.engine';
+  import { descriptionsSemantics } from './descriptions-semantic.engine';
   import DescriptionsCell from './DescriptionsCell.svelte';
   import type { DescriptionsContent, DescriptionsProps } from './descriptions.types';
 
@@ -54,8 +55,9 @@
       }
     }
   );
-  let classes = $derived(typeof classNames === 'function' ? classNames(info) : classNames ?? {});
-  let slots = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
+  let semantic = $derived(descriptionsSemantics(config.descriptions, info.props));
+  let classes = $derived(semantic.classes);
+  let slots = $derived(semantic.styles);
   $effect(() => untrack(() => breakpoint.connect(window)));
 </script>
 
@@ -66,6 +68,7 @@
   class={[
       'ant-descriptions ant-descriptions-css-var',
       componentTheme.className,
+      config.descriptions?.class,
       bordered && 'ant-descriptions-bordered',
       mergedSize === 'small' && 'ant-descriptions-small',
       (mergedSize === 'middle' || mergedSize === 'medium') && 'ant-descriptions-medium',
@@ -74,7 +77,7 @@
       rootClassName,
       classes.root
     ]}
-  style={[componentTheme.style, slots.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, slots.root].filter(Boolean).join(';')}>
   {#if title !== undefined && title !== null && title !== false && title !== '' || extra !== undefined && extra !== null && extra !== false && extra !== ''}
     <div class={['ant-descriptions-header', classes.header]} style={slots.header}>
       {#if title !== undefined && title !== null && title !== false && title !== ''}<div class={['ant-descriptions-title', classes.title]} style={slots.title}>{@render value(title)}</div>{/if}

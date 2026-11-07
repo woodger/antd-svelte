@@ -8,6 +8,16 @@ export type DescriptionsCellSlots = Partial<Record<'label' | 'content', string>>
 export type DescriptionsSlots = Partial<
   Record<'root' | 'header' | 'title' | 'extra' | 'label' | 'content', string>
 >;
+/** Callback получает resolved column/items/size и прежние native defaults остальных Props. */
+export type DescriptionsSemantic = DescriptionsSlots
+  | ((info: { props: DescriptionsProps; }) => DescriptionsSlots);
+/** Общие стили Descriptions; явно заданный вложенный record заменяет родительский целиком. */
+export interface DescriptionsConfig {
+  class?: string;
+  style?: string;
+  classNames?: DescriptionsSemantic;
+  styles?: DescriptionsSemantic;
+}
 export interface DescriptionsItem {
   key?: string | number;
   label?: DescriptionsContent;
@@ -38,8 +48,9 @@ export interface DescriptionsProps extends Omit<
   size?: ComponentSize | 'medium' | 'default';
   labelStyle?: string;
   contentStyle?: string;
-  classNames?: DescriptionsSlots | ((info: { props: DescriptionsProps; }) => DescriptionsSlots);
-  styles?: DescriptionsSlots | ((info: { props: DescriptionsProps; }) => DescriptionsSlots);
+  classNames?: DescriptionsSemantic;
+  /** Root: context semantic → context style → local semantic → local style. */
+  styles?: DescriptionsSemantic;
   class?: string;
   rootClassName?: string;
   style?: string;

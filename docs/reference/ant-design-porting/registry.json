@@ -9177,7 +9177,8 @@
         "tests/browser/fixtures/ant-design-card-config-reference.json",
         "tests/browser/card-config-metrics.ts",
         "tests/browser/card-config.spec.ts",
-        "tests/package/card-config.ssr.test.ts"
+        "tests/package/card-config.ssr.test.ts",
+        "src/lib/semantic-style.engine.ts"
       ],
       "features": [
         {
@@ -9678,7 +9679,17 @@
         "tests/browser/descriptions-theme-metrics.ts",
         "tests/browser/descriptions-theme.spec.ts",
         "tests/package/descriptions-theme.ssr.test.ts",
-        "readme.md"
+        "readme.md",
+        "src/lib/descriptions.types.ts",
+        "src/lib/DescriptionsCell.svelte",
+        "src/lib/descriptions-semantic.engine.ts",
+        "src/lib/semantic-style.engine.ts",
+        "tests/browser/fixtures/descriptions-config-presets.ts",
+        "tests/browser/fixtures/DescriptionsConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-descriptions-config-reference.json",
+        "tests/browser/descriptions-config-metrics.ts",
+        "tests/browser/descriptions-config.spec.ts",
+        "tests/package/descriptions-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -9738,11 +9749,46 @@
         },
         {
           "id": "global-configuration",
-          "title": "PrefixCls, пользовательские breakpoints и глобальный component config",
+          "title": "PrefixCls, пользовательские breakpoints",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
           "note": "Остаётся в полном объёме миграции после основного семейства; v1-ready не означает полный API React."
+        },
+        {
+          "id": "component-config",
+          "title": "ConfigProvider.descriptions: class/style и semantic defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/descriptions.types.ts",
+            "src/lib/Descriptions.svelte",
+            "src/lib/DescriptionsCell.svelte",
+            "src/lib/descriptions-semantic.engine.ts",
+            "src/lib/semantic-style.engine.ts",
+            "tests/browser/fixtures/descriptions-config-presets.ts",
+            "tests/browser/fixtures/DescriptionsConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-descriptions-config-reference.json",
+            "tests/browser/descriptions-config-metrics.ts",
+            "tests/browser/descriptions-config.spec.ts",
+            "tests/package/descriptions-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source useMergeSemantic: независимый descriptions record с whole-record inheritance/replacement; class/style и object/function classNames/styles. Root layers context semantic, context plain, local semantic, local plain после component variables. Label/content: root legacy, merged root semantic, item legacy, item semantic; bordered cell styles перекрывают item.style. Callbacks читают resolved columns/items/size; старые native defaults остальных props сохранены. Raw UMD содержит все шесть semantic slots, labels/content каждой ячейки, tags/colspans, computed colors/spacing и custom classes для plain/bordered/horizontal/vertical, functions, nested/empty/replaced, item/legacy overrides, variables и algorithms/themes. Исходный порядок classes не переписан: проверки состава/числа сохраняют прежний native class order. Обновления сохраняют первую ячейку/editor DOM, focus/selection и FormData при смене config/column/size; переносимые между строками controls сохраняют прежний remount contract."
+        },
+        {
+          "id": "semantic-native-defaults",
+          "title": "Сохраняемые native defaults в semantic callback props",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Descriptions.svelte",
+            "src/lib/descriptions.types.ts",
+            "tests/browser/fixtures/ant-design-descriptions-config-reference.json",
+            "tests/package/descriptions-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Опубликованный Svelte info включает bordered=false, layout=horizontal и colon=true при отсутствии props. Source 6.6.8/984592267de88fbf9cdaecc96a56629e721c709d mergedProps сохраняет отсутствие этих полей: отдельный raw UMD defaultPropsObservation записывает own=false/type=undefined. Native defaults сохранены для обоих semantic слоёв; column/items/size разрешаются в обоих runtime. CSS matrix явно задаёт flags, отдельная SSR проверка защищает native контракт. Это установленное различие API, а не ошибка upstream."
         }
       ]
     },
@@ -15512,7 +15558,18 @@
         "tests/browser/fixtures/ant-design-card-config-reference.json",
         "tests/browser/card-config-metrics.ts",
         "tests/browser/card-config.spec.ts",
-        "tests/package/card-config.ssr.test.ts"
+        "tests/package/card-config.ssr.test.ts",
+        "src/lib/descriptions.types.ts",
+        "src/lib/Descriptions.svelte",
+        "src/lib/DescriptionsCell.svelte",
+        "src/lib/descriptions-semantic.engine.ts",
+        "src/lib/semantic-style.engine.ts",
+        "tests/browser/fixtures/descriptions-config-presets.ts",
+        "tests/browser/fixtures/DescriptionsConfigFixtures.svelte",
+        "tests/browser/fixtures/ant-design-descriptions-config-reference.json",
+        "tests/browser/descriptions-config-metrics.ts",
+        "tests/browser/descriptions-config.spec.ts",
+        "tests/package/descriptions-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -16324,6 +16381,27 @@
             "readme.md"
           ],
           "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Legacy head/body стоят ниже merged semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; prefixCls и полный Tabs API не включены."
+        },
+        {
+          "id": "descriptions-component-config",
+          "title": "ConfigProvider.descriptions: class/style и semantic defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/descriptions.types.ts",
+            "src/lib/Descriptions.svelte",
+            "src/lib/DescriptionsCell.svelte",
+            "src/lib/descriptions-semantic.engine.ts",
+            "src/lib/semantic-style.engine.ts",
+            "tests/browser/fixtures/descriptions-config-presets.ts",
+            "tests/browser/fixtures/DescriptionsConfigFixtures.svelte",
+            "tests/browser/fixtures/ant-design-descriptions-config-reference.json",
+            "tests/browser/descriptions-config-metrics.ts",
+            "tests/browser/descriptions-config.spec.ts",
+            "tests/package/descriptions-config.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source useMergeSemantic: независимый descriptions record с whole-record inheritance/replacement; class/style и object/function classNames/styles. Root layers context semantic, context plain, local semantic, local plain после component variables. Label/content: root legacy, merged root semantic, item legacy, item semantic; bordered cell styles перекрывают item.style. Callbacks читают resolved columns/items/size; старые native defaults остальных props сохранены. Raw UMD содержит все шесть semantic slots, labels/content каждой ячейки, tags/colspans, computed colors/spacing и custom classes для plain/bordered/horizontal/vertical, functions, nested/empty/replaced, item/legacy overrides, variables и algorithms/themes. Исходный порядок classes не переписан: проверки состава/числа сохраняют прежний native class order. Обновления сохраняют первую ячейку/editor DOM, focus/selection и FormData при смене config/column/size; переносимые между строками controls сохраняют прежний remount contract."
         }
       ]
     },
