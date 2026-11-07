@@ -761,6 +761,9 @@
 
 ### Fixed
 
+- FloatButtonBackTop: fade использует исходную linear-кривую и не сбрасывает
+  пользовательский transform. Enter/leave проверяются на промежуточном кадре UMD.
+
 - Progress Circle: browser-проверка rapid/spaced updates останавливает часы;
   интервалы 20/150 мс сохраняются независимо от времени выполнения DOM-действий.
 

@@ -6666,6 +6666,9 @@ marginXXL/marginLG и padding группы. Button сохраняет свои c
 Сохраняются прежние ограничения Button/Badge/Tooltip; произвольный prefixCls и
 общий React z-index context ещё не перенесены. CSS-рецепт воспроизводит 42 правила;
 глобальный fade адаптирован через WAAPI с исходными длительностями и reduced motion.
+У FloatButtonBackTop fade меняет только opacity по linear-кривой; локальный
+transform сохраняется во время появления и исчезновения. Промежуточные кадры
+официального UMD сверяются в [browser](tests/browser/float-button-motion.spec.ts).
 Wave наследуется через общий Button, включая BackTop и trigger группы.
 
 ```svelte

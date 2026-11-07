@@ -269,7 +269,10 @@
         "tests/browser/fixtures/FloatButtonThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-float-button-theme-reference.json",
         "tests/browser/float-button-theme.spec.ts",
-        "tests/package/float-button-theme.ssr.test.ts"
+        "tests/package/float-button-theme.ssr.test.ts",
+        "src/lib/float-button-motion.dom.ts",
+        "tests/browser/float-button-motion.spec.ts",
+        "tests/browser/fixtures/ant-design-float-back-top-motion-reference.json"
       ],
       "features": [
         {
@@ -358,6 +361,19 @@
             "tests/package/float-button-theme.ssr.test.ts"
           ],
           "note": "В закреплённом source ComponentToken пуст; поддержаны реальные alias overrides, global/component algorithms, custom cssVar prefix и nested/reset/sibling scopes. Размер controlHeightLG, icon fontSizeIcon×1.5, paddingXXS, marginXXL/marginLG, group padding и остальные alias declarations сверяются с 15 UMD-темами / 225 наборами CSS/geometry. Group и BackTop используют scope FloatButton; отдельные вымышленные tokens не добавлены. Button component tokens, config style, semantic/local CSS variables и plain styles сохраняют исходный приоритет; reactive updates/disable/inherit reset сохраняют DOM/ref/focus, draft/selection, FormData и native keyboard submit."
+        },
+        {
+          "id": "source-fade",
+          "title": "Source opacity fade без сброса user transform",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/float-button-motion.dom.ts",
+            "tests/browser/float-button-motion.spec.ts",
+            "tests/browser/fixtures/ant-design-float-back-top-motion-reference.json",
+            "readme.md"
+          ],
+          "note": "FloatButtonBackTop fade анимирует только opacity по linear, как antFadeIn/antFadeOut. Raw UMD enter/leave кадры на50/200ms, локальный transform и cleanup после завершения проверяются через настоящий приостановленный WAAPI. Геометрия и easing меню группы сохраняются."
         }
       ]
     },

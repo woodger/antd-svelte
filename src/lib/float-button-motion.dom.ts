@@ -30,7 +30,10 @@ export function createFloatButtonMotion(
       }
       target = visible;
       const style = view.getComputedStyle(node);
-      const from = animation ? { opacity: style.opacity, transform: style.transform } : undefined;
+      const from = animation ? {
+        opacity: style.opacity,
+        ...(menu ? { transform: style.transform } : {})
+      } : undefined;
       cancel();
       const token = style.getPropertyValue(
         menu ? '--ant-motion-duration-slow' : '--ant-motion-duration-mid'
@@ -50,9 +53,15 @@ export function createFloatButtonMotion(
         : 'none';
       const current = revision;
       animation = node.animate([
-        from ?? { opacity: visible ? '0' : '1', transform: visible ? shift : 'none' },
-        { opacity: visible ? '1' : '0', transform: visible ? 'none' : shift }
-      ], { duration, easing: menu ? 'ease' : 'cubic-bezier(0.645,0.045,0.355,1)', fill: 'both' });
+        from ?? {
+          opacity: visible ? '0' : '1',
+          ...(menu ? { transform: visible ? shift : 'none' } : {})
+        },
+        {
+          opacity: visible ? '1' : '0',
+          ...(menu ? { transform: visible ? 'none' : shift } : {})
+        }
+      ], { duration, easing: menu ? 'ease' : 'linear', fill: 'both' });
       void animation.finished.then(() => {
         if (!active || revision !== current) return;
         cancel();
