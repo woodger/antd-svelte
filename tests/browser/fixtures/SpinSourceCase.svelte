@@ -37,12 +37,11 @@
   const classes = (info: SpinSemanticInfo): SpinSemanticSlots => ({
     root: `local-root size-${info.props.size ?? 'none'} visible-${info.props.spinning} full-${info.props.fullscreen} percent-${info.props.percent ?? 'none'}`,
     section: 'local-section', indicator: 'local-indicator', description: 'local-description',
-    container: 'local-container', tip: 'local-tip', mask: 'local-mask'
+    container: 'local-container'
   });
   const styles = (): SpinSemanticSlots => ({
     root: 'padding-top:7px;color:#cc2200', section: 'padding-top:6px',
-    indicator: 'color:#1122aa', description: 'font-size:19px', container: 'background-color:#eee',
-    tip: 'color:#118833;font-size:17px', mask: 'background-color:#445566'
+    indicator: 'color:#1122aa', description: 'font-size:19px', container: 'background-color:#eee'
   });
   let provider = $derived<SpinConfig>({
     class: 'provider-spin', style: 'padding-top:9px', indicator: provided,

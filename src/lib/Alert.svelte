@@ -19,7 +19,6 @@
     type,
     variant,
     title,
-    message,
     description,
     showIcon,
     icon,
@@ -53,7 +52,6 @@
   let prefix = $derived(prefixCls || 'ant-alert');
   let prefixCss = $derived(getAlertPrefixCss(prefix));
   let resolvedVariant = $derived(variant ?? config.alert?.variant ?? 'outlined');
-  let resolvedTitle = $derived(title ?? message);
   let resolvedType = $derived(type ?? (banner ? 'warning' : 'info'));
   let hasIcon = $derived(banner && showIcon === undefined ? true : showIcon);
   let closeConfig = $derived(resolveAlertClose(props, config.alert));
@@ -176,9 +174,9 @@
     </span>{/if}
     <div class={[`${prefix}-section`, semantics.classes.section]} data-ant-alert-part="section"
       style={semantics.styles.section || undefined}>
-      {#if isRenderable(resolvedTitle)}<div class={[`${prefix}-title`, semantics.classes.title]}
+      {#if isRenderable(title)}<div class={[`${prefix}-title`, semantics.classes.title]}
         data-ant-alert-part="title" style={semantics.styles.title || undefined}>
-        <RenderContent value={resolvedTitle} /></div>{/if}
+        <RenderContent value={title} /></div>{/if}
       {#if isRenderable(description)}<div class={[`${prefix}-description`, semantics.classes.description]}
         data-ant-alert-part="description" style={semantics.styles.description || undefined}>
         <RenderContent value={description} /></div>{/if}

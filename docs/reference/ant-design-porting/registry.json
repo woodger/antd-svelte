@@ -13036,7 +13036,7 @@
             "tests/package/alert.ssr.test.ts",
             "tests/browser/fixtures/ant-design-alert-reference.json"
           ],
-          "note": "IsReactRenderable 1.14.0, 0/true/массивы и nullish title→message. CloseText truthy включает кнопку даже при closable=false; иначе local boolean перед legacy icon/context, object включает закрытие. Truthy local object icon→closeText→defined legacy icon→context object icon→context icon. Прежний local object closeIcon empty string сохранён отдельно. Local callbacks перед legacy callbacks; preventDefault не отменяет закрытие, stopPropagation блокирует root click. Context status icons используют nullish local fallback."
+          "note": "IsReactRenderable 1.14.0: 0/true/массивы и текущий title. Явный closable boolean перекрывает context, объект включает закрытие. Truthy local closable.closeIcon → context closable.closeIcon; пустой local closeIcon сохранён отдельно. Callbacks задаются в closable; preventDefault не отменяет закрытие, stopPropagation блокирует root click. Context status icons используют nullish local fallback. Deprecated root aliases удалены."
         },
         {
           "id": "semantic-config",
@@ -13049,7 +13049,7 @@
             "tests/browser/alert-source.spec.ts",
             "tests/package/alert.ssr.test.ts"
           ],
-          "note": "Variant/closable/closeIcon, четыре icons, class/style и object/function root/icon/section/title/description/actions/close. Callback props разрешают prefix/type/variant/showIcon/boolean closable; root style order: context slots→context style→local slots→local style. Record replacement, local prefix/rootClassName, раздельные root/close data/ARIA и root mouse callbacks. Ref хранит root snapshot после mount, nativeElement отражает DOM; unmount очищает оба. Live config/theme/prefix сохраняет nodes, draft, focus и selection."
+          "note": "Variant/closable с closeIcon, четыре icons, class/style и object/function root/icon/section/title/description/actions/close. Callback props разрешают prefix/type/variant/showIcon/boolean closable; root style order: context slots→context style→local slots→local style. Record replacement, local prefix/rootClassName, раздельные root/close data/ARIA и root mouse callbacks. Ref хранит root snapshot после mount, nativeElement отражает DOM; unmount очищает оба. Live config/theme/prefix сохраняет nodes, draft, focus и selection."
         },
         {
           "id": "theme-tokens",
@@ -13063,7 +13063,7 @@
             "tests/browser/fixtures/ant-design-result-reference.json",
             "tools/ant-design-css-recipes.json"
           ],
-          "note": "BorderRadius/defaultPadding/withDescriptionPadding/withDescriptionIconSize с исходными defaults, 0, aliases, component algorithm, dark/compact и cssVar prefix/key. Сохранено source omission: borderRadius=6 либо явный undefined в изученной конфигурации даёт 0px. Все 37 CSS rules без React motion и local prefix template воспроизводятся из проверенного архива. 110 UMD-сценариев сверяют CSS, классы, полные status paths и viewBox; source theme использует fitted 64 64 896 896 из icons-svg 4.6.0, legacy сохраняет 0 0 1024 1024. Обновлён также Result golden."
+          "note": "BorderRadius/defaultPadding/withDescriptionPadding/withDescriptionIconSize с исходными defaults, 0, aliases, component algorithm, dark/compact и cssVar prefix/key. Сохранено source omission: borderRadius=6 либо явный undefined в изученной конфигурации даёт 0px. Все 37 CSS rules без React motion и local prefix template воспроизводятся из проверенного архива. 94 UMD-сценария сверяют CSS, классы, полные status paths и viewBox; source theme использует fitted 64 64 896 896 из icons-svg 4.6.0, legacy сохраняет 0 0 1024 1024. Обновлён также Result golden."
         },
         {
           "id": "native-boundaries",
@@ -13076,7 +13076,7 @@
             "tests/browser/alert-source.spec.ts",
             "tests/browser/fixtures/alert-native-reference.json"
           ],
-          "note": "Atomic alert по умолчанию, локализованное close имя, декоративный close wrapper/glyph/palette, 24px hit target и responsive actions сохраняются. Старый local closeIcon empty string остаётся пустым, Source берёт fallback; свежий baseline 425e047 подтверждает SSR. WAAPI/cleanup/reduced motion, callbacks snapshot и afterClose после удаления сохранены; Source callback видит подключённый node. Эти guards/close geometry/private hashes исключены из CSS snapshot, explicit close semantic color проверяется. Порядок 5 реальных close traces соответствует source; Ref snapshot остаётся detached node после закрытия до unmount."
+          "note": "Atomic alert по умолчанию, локализованное close имя, декоративный close wrapper/glyph/palette, 24px hit target и responsive actions сохраняются. Старый local closeIcon empty string остаётся пустым, Source берёт fallback; свежий baseline 425e047 подтверждает SSR. WAAPI/cleanup/reduced motion, callbacks snapshot и afterClose после удаления сохранены; Source callback видит подключённый node. Эти guards/close geometry/private hashes исключены из CSS snapshot, explicit close semantic color проверяется. Порядок 3 реальных close traces соответствует source; Ref snapshot остаётся detached node после закрытия до unmount."
         },
         {
           "id": "error-boundary",
@@ -13092,7 +13092,7 @@
             "tests/browser/alert-boundary-hydration.spec.ts",
             "tests/browser/fixtures/ant-design-alert-boundary-reference.json"
           ],
-          "note": "Alert.ErrorBoundary — Svelte component с scalar/array/snippet children, title ?? message ?? Error.toString и description ?? stack внутри source pre. Healthy children без wrapper/id; failure остаётся при props/children updates до remount/key. Fallback находится вне собственной boundary, поэтому его ошибку ловит родитель. Onerror-only boundary сохраняет исходный SSR throw; реальная hydration сохраняет DOM/focus/selection и последующий recovery. 19 Source UMD-сценариев и отдельные SSR, retained-root и nesting probes фиксируют public API; обычный Alert API/namespace сохраняется."
+          "note": "Alert.ErrorBoundary — Svelte component с scalar/array/snippet children, title ?? Error.toString и description ?? stack внутри source pre. Healthy children без wrapper/id; failure остаётся при props/children updates до remount/key. Fallback находится вне собственной boundary, поэтому его ошибку ловит родитель. Onerror-only boundary сохраняет исходный SSR throw; реальная hydration сохраняет DOM/focus/selection и последующий recovery. 16 Source UMD-сценариев и отдельные SSR, retained-root и nesting probes фиксируют public API; обычный Alert API/namespace сохраняется."
         },
         {
           "id": "shared-config",
@@ -14589,7 +14589,7 @@
             "src/lib/spin.ssr.test.ts",
             "tests/browser/spin.spec.ts"
           ],
-          "note": "Standalone/children, default true, finite normalized delay и restart/cancel; размеры small/medium/large, source description/tip и scalar children, locale/RTL/native palettes. SSR не создаёт таймеров. Native delay округляет/ограничивает положительное число, показывает delay=0 синхронно и заново откладывает уже видимый индикатор при смене delay; React debounce 5.0.2 сохраняет видимый статус при смене положительной delay. Этот ранее согласованный контракт сохранён и отделён от Source-покрытия. Loading props List с delay не требуют ref binding и сохраняют таймер при переходе из inactive state."
+          "note": "Standalone/children, default true, finite normalized delay и restart/cancel; размеры small/medium/large, source description и scalar children, locale/RTL/native palettes. SSR не создаёт таймеров. Native delay округляет/ограничивает положительное число, показывает delay=0 синхронно и заново откладывает уже видимый индикатор при смене delay; React debounce 5.0.2 сохраняет видимый статус при смене положительной delay. Этот ранее согласованный контракт сохранён и отделён от Source-покрытия."
         },
         {
           "id": "children-focus",
@@ -14639,7 +14639,7 @@
             "tests/browser/spin-source.spec.ts",
             "tests/package/spin-source.ssr.test.ts"
           ],
-          "note": "Provider record class/style/indicator/classNames/styles; undefined наследует, явный объект заменяет целиком. Object/function root/section/indicator/description/container и aliases tip/mask получают нормализованные size/spinning/description/tip/fullscreen/percent. Source style order: provider slots → provider style → local slots; root → standalone section/fullscreen mask → local style. RootClassName и deprecated wrapperClassName/size/default/tip сохраняют source ветви."
+          "note": "Provider record class/style/indicator/classNames/styles; undefined наследует, явный объект заменяет целиком. Object/function root/section/indicator/description/container получают нормализованные size/spinning/description/fullscreen/percent. Style order: provider slots → provider style → local slots; root → standalone section → local style. RootClassName сохранён. Deprecated tip/wrapperClassName и semantic tip/mask удалены; текущие semantic-профили заново измерены на неизменённом UMD."
         },
         {
           "id": "theme-tokens",
@@ -14694,7 +14694,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Deprecated aliases работают, но React development warning messages и displayName не переносятся этим этапом."
+          "note": "React development warning messages и displayName не воспроизводятся; deprecated API исключён."
         }
       ]
     },
@@ -16084,7 +16084,7 @@
             "tests/browser/alert-source.spec.ts",
             "tests/browser/fixtures/ant-design-alert-reference.json"
           ],
-          "note": "Source variant, closable/closeIcon, четыре status icons, class/style и object/function slots с record replacement и локальными priorities. Alert получает четыре tokens/aliases/algorithm и local prefix CSS; native accessibility, закрытие и layout сохраняются отдельно."
+          "note": "Source variant, closable с closeIcon, четыре status icons, class/style и object/function slots с record replacement и локальными priorities. Alert получает четыре tokens/aliases/algorithm и local prefix CSS; native accessibility, закрытие и layout сохраняются отдельно."
         },
         {
           "id": "card-theme-tokens",

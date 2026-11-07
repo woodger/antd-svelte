@@ -4,7 +4,7 @@ import type { HTMLAttributes } from 'svelte/elements';
 export type SpinSize = 'small' | 'medium' | 'large';
 export type SpinContent = string | number | Snippet | null | boolean;
 export type SpinSemanticSlots = Partial<Record<
-  'root' | 'section' | 'indicator' | 'description' | 'container' | 'tip' | 'mask', string
+  'root' | 'section' | 'indicator' | 'description' | 'container', string
 >>;
 export interface SpinSemanticInfo {
   props: SpinProps & { spinning: boolean; fullscreen: boolean; percent?: number; };
@@ -33,8 +33,6 @@ export interface SpinProps extends Omit<
   /** Medium сохраняет обычный размер. */
   size?: SpinSize;
   description?: SpinContent;
-  /** @deprecated Используйте description. */
-  tip?: SpinContent;
   indicator?: SpinIndicator | null;
   children?: SpinContent;
   /** Фиксированный слой в текущей DOM-ветке, без portal или focus trap. */
@@ -43,8 +41,6 @@ export interface SpinProps extends Omit<
   'aria-hidden'?: boolean;
   class?: string;
   rootClassName?: string;
-  /** @deprecated Используйте classNames.root. */
-  wrapperClassName?: string;
   style?: string;
   classNames?: SpinSemanticSlots
     | ((info: SpinSemanticInfo) => SpinSemanticSlots | undefined);

@@ -21,14 +21,14 @@ describe('Alert public package SSR', () => {
     expect(arrays).not.toContain('>true<');
   });
 
-  it('uses nullish title fallback without replacing explicit false, zero or empty strings', () => {
-    const fallback = render(Alert, { props: { title: null, message: 'Legacy title' } }).body;
-    const zero = render(Alert, { props: { title: 0, message: 'Legacy title' } }).body;
-    const empty = render(Alert, { props: { title: '', message: 'Legacy title' } }).body;
+  it('preserves explicit title values and omits absent content', () => {
+    const absent = render(Alert, { props: { title: null } }).body;
+    const zero = render(Alert, { props: { title: 0 } }).body;
+    const empty = render(Alert, { props: { title: '' } }).body;
 
-    expect(fallback).toContain('Legacy title');
-    expect(zero).not.toContain('Legacy title');
+    expect(absent).not.toContain('ant-alert-title');
     expect(zero).toContain('ant-alert-title');
+    expect(zero).toContain('>0<');
     expect(empty).not.toContain('ant-alert-title');
   });
 

@@ -18,7 +18,7 @@ export interface AlertClosable extends AlertCloseAttributes {
   disabled?: boolean;
   /** Пустая строка сохраняет прежнюю пустую кнопку; остальные falsy values выбирают fallback. */
   closeIcon?: AlertContent;
-  /** Приоритетнее onClose на корне; preventDefault не отменяет закрытие. */
+  /** Callback закрытия; preventDefault не отменяет закрытие. */
   onClose?: (event: MouseEvent) => void;
   /** Snapshot при запросе; вызывается после удаления DOM и отменяется при unmount. */
   afterClose?: () => void;
@@ -48,7 +48,7 @@ export interface AlertRef {
 }
 /** Наследуемое оформление и close/icon defaults; явный record заменяет родительский. */
 export interface AlertConfig extends Pick<
-  AlertProps, 'class' | 'style' | 'variant' | 'closeIcon' | 'classNames' | 'styles'
+  AlertProps, 'class' | 'style' | 'variant' | 'classNames' | 'styles'
 > {
   closable?: boolean | (AlertCloseAttributes & Pick<AlertClosable, 'closeIcon'>);
   successIcon?: AlertContent;
@@ -63,8 +63,6 @@ export interface AlertProps {
   /** @defaultValue 'outlined' */
   variant?: AlertVariant;
   title?: AlertContent;
-  /** @deprecated Используйте title. Title ?? message сохраняет 0/false/пустую строку. */
-  message?: AlertContent;
   description?: AlertContent;
   /** Undefined включает иконку в banner; в обычном режиме она скрыта. */
   showIcon?: boolean;
@@ -75,14 +73,6 @@ export interface AlertProps {
   banner?: boolean;
   /** @defaultValue false */
   closable?: boolean | AlertClosable;
-  /** @deprecated Используйте closable.closeIcon. */
-  closeText?: AlertContent;
-  /** @deprecated Используйте closable.closeIcon. */
-  closeIcon?: AlertContent;
-  /** @deprecated Используйте closable.onClose; preventDefault не отменяет закрытие. */
-  onClose?: (event: MouseEvent) => void;
-  /** @deprecated Используйте closable.afterClose; callback фиксируется при запросе. */
-  afterClose?: () => void;
   /** @defaultValue 'alert' */
   role?: HTMLAttributes<HTMLDivElement>['role'];
   id?: string;

@@ -5,7 +5,8 @@
     "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
     "source": "package/dist/antd.min.js; runtime CSS-in-JS only",
     "operation": "capture Spin fullscreen/percent, native BEM prefixes, component tokens, context and semantic precedence; auto timeline uses Playwright clock",
-    "nativeBoundary": "Svelte retains named status/group, immediate inert/focus parking, finite normalized delay/restart, reduced motion and wrapping. Snippets use a decorative dot wrapper; custom indicator receives percent via its argument. Inactive standalone uses hidden, so only classes/absence are compared in that case; no claim of React warnings or global provider prefix."
+    "nativeBoundary": "Svelte retains named status/group, immediate inert/focus parking, finite normalized delay/restart, reduced motion and wrapping. Snippets use a decorative dot wrapper; custom indicator receives percent via its argument. Inactive standalone uses hidden, so only classes/absence are compared in that case; no claim of React warnings or global provider prefix.",
+    "currentApiScope": "Deprecated tip/wrapperClassName and semantic tip/mask aliases removed. Current semantic profiles recaptured against the unmodified pinned UMD."
   },
   "viewport": {
     "width": 1000,
@@ -1667,115 +1668,10 @@
       }
     },
     {
-      "name": "legacy",
-      "children": true,
-      "semantic": true,
-      "provider": true,
-      "props": {
-        "fullscreen": true,
-        "tip": "Legacy",
-        "wrapperClassName": "legacy-wrapper",
-        "style": "padding-top:11px"
-      },
-      "snapshot": {
-        "root": {
-          "classes": [
-            "ant-spin",
-            "ant-spin-fullscreen",
-            "ant-spin-spinning",
-            "full-true",
-            "legacy-wrapper",
-            "local-mask",
-            "local-root",
-            "percent-none",
-            "provider-root",
-            "provider-spin",
-            "size-none",
-            "visible-true"
-          ],
-          "style": {
-            "position": "fixed",
-            "display": "block",
-            "width": "1000px",
-            "height": "900px",
-            "color": "rgb(204, 34, 0)",
-            "font-size": "14px",
-            "line-height": "22px",
-            "background-color": "rgb(68, 85, 102)",
-            "z-index": "1000",
-            "opacity": "1",
-            "pointer-events": "auto",
-            "padding-top": "11px"
-          }
-        },
-        "section": {
-          "classes": [
-            "ant-spin-section",
-            "local-section",
-            "provider-section"
-          ],
-          "style": {
-            "position": "absolute",
-            "display": "flex",
-            "color": "rgb(255, 255, 255)",
-            "gap": "12px",
-            "padding-top": "6px"
-          }
-        },
-        "holder": null,
-        "dot": {
-          "classes": [
-            "ant-spin-dot",
-            "local-indicator",
-            "provider-indicator"
-          ],
-          "style": {
-            "width": "20px",
-            "height": "20px",
-            "color": "rgb(17, 34, 170)"
-          }
-        },
-        "progress": null,
-        "description": {
-          "classes": [
-            "ant-spin-description",
-            "local-description",
-            "local-tip",
-            "provider-description"
-          ],
-          "text": "Legacy",
-          "style": {
-            "color": "rgb(17, 136, 51)",
-            "font-size": "19px",
-            "line-height": "19px"
-          }
-        },
-        "container": {
-          "classes": [
-            "ant-spin-container",
-            "local-container",
-            "provider-container"
-          ],
-          "text": "Child counter 0",
-          "style": {
-            "opacity": "0.5",
-            "position": "relative",
-            "pointer-events": "none",
-            "background-color": "rgb(238, 238, 238)"
-          }
-        },
-        "custom": {
-          "name": "provider",
-          "percent": null
-        }
-      }
-    },
-    {
       "name": "description-priority",
       "semantic": true,
       "provider": true,
       "props": {
-        "tip": "Legacy",
         "description": "Current",
         "class": "own-spin",
         "rootClassName": "outer-spin"
@@ -1856,12 +1752,11 @@
           "classes": [
             "ant-spin-description",
             "local-description",
-            "local-tip",
             "provider-description"
           ],
           "text": "Current",
           "style": {
-            "color": "rgb(17, 136, 51)",
+            "color": "rgb(204, 34, 0)",
             "font-size": "19px",
             "line-height": "19px"
           }
@@ -1876,7 +1771,6 @@
     {
       "name": "empty-description",
       "props": {
-        "tip": "Legacy",
         "description": ""
       },
       "snapshot": {
@@ -2783,12 +2677,11 @@
           "classes": [
             "ant-spin-description",
             "local-description",
-            "local-tip",
             "provider-description"
           ],
           "text": "Semantic",
           "style": {
-            "color": "rgb(17, 136, 51)",
+            "color": "rgb(204, 34, 0)",
             "font-size": "19px",
             "line-height": "19px"
           }
@@ -2869,12 +2762,11 @@
           "classes": [
             "ant-spin-description",
             "local-description",
-            "local-tip",
             "provider-description"
           ],
           "text": "Nested",
           "style": {
-            "color": "rgb(17, 136, 51)",
+            "color": "rgb(22, 119, 255)",
             "font-size": "19px",
             "line-height": "19px"
           }
@@ -2915,7 +2807,6 @@
             "ant-spin-fullscreen",
             "ant-spin-spinning",
             "full-true",
-            "local-mask",
             "local-root",
             "percent-none",
             "provider-root",
@@ -2931,7 +2822,7 @@
             "color": "rgb(204, 34, 0)",
             "font-size": "14px",
             "line-height": "22px",
-            "background-color": "rgb(68, 85, 102)",
+            "background-color": "rgba(0, 0, 0, 0.45)",
             "z-index": "1000",
             "opacity": "1",
             "pointer-events": "auto",
@@ -2970,12 +2861,11 @@
           "classes": [
             "ant-spin-description",
             "local-description",
-            "local-tip",
             "provider-description"
           ],
           "text": "Full",
           "style": {
-            "color": "rgb(17, 136, 51)",
+            "color": "rgb(255, 255, 255)",
             "font-size": "19px",
             "line-height": "19px"
           }

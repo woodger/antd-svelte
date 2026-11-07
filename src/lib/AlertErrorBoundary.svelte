@@ -4,7 +4,7 @@
   import type { AlertErrorBoundaryProps } from './alert-error-boundary.types';
 
   let {
-    title, message, description: customDescription, children, id
+    title, description: customDescription, children, id
   }: AlertErrorBoundaryProps = $props();
   let failure = $state<{ message: string; stack?: string; }>();
 
@@ -21,7 +21,7 @@
   <RenderContent value={children} />
 </svelte:boundary>
 {#if failure}
-  <Alert {id} type="error" title={title ?? message ?? failure.message}>
+  <Alert {id} type="error" title={title ?? failure.message}>
     {#snippet description()}<pre style="font-size:0.9em;overflow-x:auto"><RenderContent
       value={customDescription ?? failure?.stack ?? null} /></pre>{/snippet}
   </Alert>

@@ -5,22 +5,19 @@ import type { AlertConfig, AlertProps } from './alert.types';
 describe('resolveAlertClose', () => {
   const cases: [string, AlertProps, AlertConfig | undefined, boolean, unknown][] = [
     ['default', {}, undefined, false, undefined],
-    ['zero icon', { closeIcon: 0 }, undefined, true, 0],
-    ['empty legacy icon', { closeIcon: '' }, undefined, true, ''],
-    ['explicit false', { closable: false, closeIcon: 'Close' }, undefined, false, 'Close'],
-    ['close text priority', { closable: false, closeText: 'Dismiss' }, undefined, true, 'Dismiss'],
-    ['local icon priority', { closable: { closeIcon: 'Local' }, closeText: 'Text' },
-      undefined, true, 'Local'],
-    ['zero object icon fallback', { closable: { closeIcon: 0 }, closeIcon: 'Legacy' },
-      undefined, true, 'Legacy'],
-    ['false object icon fallback', { closable: { closeIcon: false }, closeIcon: 'Legacy' },
-      undefined, true, 'Legacy'],
+    ['local icon', { closable: { closeIcon: 'Local' } }, undefined, true, 'Local'],
+    ['explicit false', { closable: false }, { closable: { closeIcon: 'Context' } },
+      false, 'Context'],
+    ['local icon priority', { closable: { closeIcon: 'Local' } },
+      { closable: { closeIcon: 'Context' } }, true, 'Local'],
+    ['zero object icon fallback', { closable: { closeIcon: 0 } },
+      { closable: { closeIcon: 'Context' } }, true, 'Context'],
+    ['false object icon fallback', { closable: { closeIcon: false } },
+      { closable: { closeIcon: 'Context' } }, true, 'Context'],
     ['native empty object icon', { closable: { closeIcon: '' } }, undefined, true, ''],
-    ['context icon', {}, { closable: true, closeIcon: 'Context' }, true, 'Context'],
-    ['context object icon', {}, { closable: { closeIcon: 'Object' }, closeIcon: 'Context' },
-      true, 'Object'],
-    ['null legacy icon override', { closeIcon: null }, { closable: true, closeIcon: 'Context' },
-      true, null]
+    ['context object icon', {}, { closable: { closeIcon: 'Object' } }, true, 'Object'],
+    ['context empty icon fallback', {}, { closable: { closeIcon: '' } }, true, undefined],
+    ['context zero icon fallback', {}, { closable: { closeIcon: 0 } }, true, undefined]
   ];
 
   it.each(cases)('resolves %s without losing explicit values', (_, props, config, enabled, icon) => {
@@ -30,18 +27,16 @@ describe('resolveAlertClose', () => {
     expect(result.icon).toBe(icon);
   });
 
-  it('uses local callbacks before legacy fallbacks and keeps context ARIA separate', () => {
+  it('keeps local callbacks and context ARIA separate', () => {
     const localClose = () => {};
-    const legacyClose = () => {};
-    const legacyAfter = () => {};
+    const afterClose = () => {};
     const props: AlertProps = {
-      closable: { disabled: true, onClose: localClose, 'data-owner': 'local' },
-      onClose: legacyClose, afterClose: legacyAfter
+      closable: { disabled: true, onClose: localClose, afterClose, 'data-owner': 'local' }
     };
     const result = resolveAlertClose(props, { closable: { 'aria-label': 'Context close' } });
 
     expect(result.onClose).toBe(localClose);
-    expect(result.afterClose).toBe(legacyAfter);
+    expect(result.afterClose).toBe(afterClose);
     expect(result.disabled).toBe(true);
     expect(result.attributes).toEqual({ 'data-owner': 'local' });
   });

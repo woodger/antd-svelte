@@ -17,7 +17,6 @@
     delay = 0,
     size,
     description,
-    tip,
     indicator,
     children,
     fullscreen = false,
@@ -30,7 +29,6 @@
     'aria-hidden': ariaHidden,
     class: className = '',
     rootClassName,
-    wrapperClassName,
     style,
     classNames,
     styles,
@@ -55,18 +53,17 @@
   let prefix = $derived(prefixCls || 'ant-spin');
   let prefixCss = $derived(getSpinPrefixCss(prefix));
   let resolvedSize = $derived(size ?? config.explicitComponentSize);
-  let resolvedDescription = $derived(description ?? tip);
   let resolvedPercent = $derived(percent === 'auto' ? mockPercent : percent);
   let hasChildren = $derived(children !== undefined);
   let nested = $derived(hasChildren || fullscreen);
   let strings = $derived({ ...ruRU.spin, ...config.locale.spin });
   let hasDescription = $derived(
-    typeof resolvedDescription === 'function' || Boolean(resolvedDescription)
+    typeof description === 'function' || Boolean(description)
   );
   let label = $derived(
     ariaLabel ?? (ariaLabelledby ? undefined
-      : typeof resolvedDescription === 'string' && resolvedDescription
-        ? resolvedDescription : strings.loadingText)
+      : typeof description === 'string' && description
+        ? description : strings.loadingText)
   );
   let announce = $derived(visible && !ariaHidden);
   let semanticInfo = $derived<SpinSemanticInfo>({
@@ -76,8 +73,7 @@
       spinning: visible,
       delay,
       size: resolvedSize,
-      description: resolvedDescription,
-      tip: resolvedDescription,
+      description: description,
       indicator,
       children,
       fullscreen,
@@ -85,7 +81,6 @@
       prefixCls,
       class: className,
       rootClassName,
-      wrapperClassName,
       style,
       classNames,
       styles,
@@ -109,7 +104,7 @@
     const slots: SpinSemanticSlots = {};
 
     for (const slot of [
-      'root', 'section', 'indicator', 'description', 'container', 'tip', 'mask'
+      'root', 'section', 'indicator', 'description', 'container'
     ] as const) {
       classes[slot] = [contextClasses?.[slot], localClasses?.[slot]].filter(Boolean).join(' ');
       slots[slot] = [
@@ -203,10 +198,10 @@
     <SpinProgress prefixCls={prefix} percent={resolvedPercent ?? 0} {label} />
   {/if}
   {#if hasDescription}
-    <div class={[`${prefix}-description`, semantics.classes.tip, semantics.classes.description]}
-      style={[semantics.styles.tip, semantics.styles.description].filter(Boolean).join(';')}
-      data-ant-spin-part="description">{#if typeof resolvedDescription === 'function'}{@render resolvedDescription()}{:else if typeof resolvedDescription !== 'boolean'}{resolvedDescription}{/if}</div>
-  {:else if resolvedDescription === 0}0{/if}
+    <div class={[`${prefix}-description`, semantics.classes.description]}
+      style={semantics.styles.description}
+      data-ant-spin-part="description">{#if typeof description === 'function'}{@render description()}{:else if typeof description !== 'boolean'}{description}{/if}</div>
+  {:else if description === 0}0{/if}
 {/snippet}
 
 {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`spin-prefix:${prefix}`} />{/if}<!-- svelte-ignore a11y_no_noninteractive_tabindex (Отрицательный tabindex временно паркует фокус вне inert children.) --><div
@@ -225,11 +220,10 @@
     visible && `${prefix}-spinning`, fullscreen && `${prefix}-fullscreen`,
     resolvedSize === 'small' && `${prefix}-sm`, resolvedSize === 'large' && `${prefix}-lg`,
     config.direction === 'rtl' && `${prefix}-rtl`, rootClassName, semantics.classes.root,
-    fullscreen && semantics.classes.mask,
-    nested ? wrapperClassName : [`${prefix}-section`, semantics.classes.section],
+    !nested && [`${prefix}-section`, semantics.classes.section],
     config.spin?.class, className
   ]} style={[componentTheme.style, semantics.styles.root, !nested && semantics.styles.section,
-    fullscreen && semantics.styles.mask, style].filter(Boolean).join(';') || undefined} {...rest}>
+    style].filter(Boolean).join(';') || undefined} {...rest}>
   {#if visible}
     {#if nested}
       <div class={[`${prefix}-section`, semantics.classes.section]}
@@ -237,8 +231,8 @@
         role={hasChildren && announce ? 'status' : undefined}
         aria-live={hasChildren && announce ? 'polite' : undefined}
         aria-atomic={hasChildren && announce || undefined}
-        aria-label={hasChildren ? typeof resolvedDescription === 'string' && resolvedDescription
-          ? resolvedDescription : strings.loadingText : undefined}>{@render visual()}</div>
+        aria-label={hasChildren ? typeof description === 'string' && description
+          ? description : strings.loadingText : undefined}>{@render visual()}</div>
     {:else}{@render visual()}{/if}
   {/if}
   {#if hasChildren}<div bind:this={content} class={[`${prefix}-container`, semantics.classes.container]}

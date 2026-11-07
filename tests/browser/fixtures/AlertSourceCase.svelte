@@ -9,7 +9,7 @@
     childProvider?: 'inherit' | 'empty';
     rich?: boolean;
     customIcon?: boolean;
-    events?: 'legacy' | 'local' | 'both' | 'prevent' | 'stop';
+    events?: 'local' | 'prevent' | 'stop';
     mouse?: boolean;
     rtl?: boolean;
     theme?: string;
@@ -43,8 +43,8 @@
     info.props.title === undefined ? 'unset-title' : 'given-title'
   ].join(' ');
   const provider = {
-    variant: 'filled', closeIcon: 'Context close',
-    closable: { 'aria-label': 'Context close', 'data-owner': 'context' },
+    variant: 'filled',
+    closable: { closeIcon: 'Context close', 'aria-label': 'Context close', 'data-owner': 'context' },
     class: 'provider-alert', style: 'padding-top:5px',
     classNames: {
       root: 'provider-root', icon: 'provider-icon', section: 'provider-section',
@@ -84,12 +84,10 @@
       onMouseLeave: () => events = [...events, 'leave']
     } : {}),
     ...(sample.events ? {
-      closable: sample.events === 'legacy' ? true : {
+      closable: {
         onClose: event => close(event, 'local-close'),
         afterClose: () => events = [...events, 'local-after']
       },
-      onClose: event => close(event, 'legacy-close'),
-      afterClose: () => events = [...events, 'legacy-after'],
       onClick: () => events = [...events, 'root-click']
     } : {})
   });

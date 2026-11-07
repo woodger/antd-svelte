@@ -9,6 +9,11 @@
 
 ### Removed
 
+- Удалены Alert.message/closeText/closeIcon/onClose/afterClose на корне,
+  ErrorBoundary.message и ConfigProvider.alert.closeIcon; сохранён актуальный
+  closable с closeIcon/onClose/afterClose. У Spin удалены tip/wrapperClassName
+  и semantic aliases tip/mask; актуальные description/root и lifecycle сохранены.
+
 - Удалены addonBefore/addonAfter у Input/Password/Search и InputNumber,
   их внутренние wrappers, context adapter и CSS-селекторы. Текущие prefix/suffix,
   Search button и композиция SpaceCompact/SpaceAddon сохранены.

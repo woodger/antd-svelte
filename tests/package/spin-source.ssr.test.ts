@@ -38,16 +38,14 @@ describe('Spin source API public package SSR', () => {
     }
   });
 
-  it('preserves zero children and the canonical description over the legacy alias', () => {
+  it('preserves zero children, description and busy content', () => {
     const { body } = render(Spin, {
-      props: { children: 0, description: 'Current', tip: 'Legacy', wrapperClassName: 'wrapper' }
+      props: { children: 0, description: 'Current' }
     });
 
     expect(body).toContain('ant-spin-container');
     expect(body).toContain('>0<');
     expect(body).toContain('Current');
-    expect(body).not.toContain('Legacy');
-    expect(body).toContain('wrapper');
     expect(body).toContain('inert');
   });
 
@@ -100,7 +98,7 @@ describe('Spin source API public package SSR', () => {
     expect(prefixed.body).toContain('--ant-spin-dot-size:var(--spin-x-spin-dot-size)');
   });
 
-  it('keeps root, standalone section, fullscreen mask and local style precedence', () => {
+  it('keeps root, standalone section and local style precedence', () => {
     const standalone = render(SpinSourceCase, { props: { sample: {
       name: 'semantic', semantic: true, provider: true, props: { style: 'padding-top:11px' }
     } } }).body;
@@ -109,7 +107,7 @@ describe('Spin source API public package SSR', () => {
     } } }).body;
 
     expect(standalone).toMatch(/padding-top:3px;padding-top:9px;padding-top:7px;[^>]*padding-top:6px;padding-top:11px/);
-    expect(fullscreen).toContain('local-mask');
-    expect(fullscreen).toContain('background-color:#445566');
+    expect(fullscreen).toContain('local-root');
+    expect(fullscreen).toContain('padding-top:7px;color:#cc2200');
   });
 });

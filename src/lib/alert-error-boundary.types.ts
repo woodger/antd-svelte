@@ -5,10 +5,8 @@ import type { AlertContent } from './alert.types';
  * SSR ошибки не ловит.
  */
 export interface AlertErrorBoundaryProps {
-  /** По умолчанию Error.toString(); null/undefined выбирают message, затем ошибку. */
+  /** По умолчанию Error.toString(); null/undefined выбирают текст ошибки. */
   title?: AlertContent;
-  /** @deprecated Используйте title. */
-  message?: AlertContent;
   /** По умолчанию Error.stack из Svelte вместо React componentStack; выводится внутри pre. */
   description?: AlertContent;
   children?: AlertContent;

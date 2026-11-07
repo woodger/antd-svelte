@@ -170,7 +170,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Tabs | Типизированные панели, bind:activeKey, line/card/editable-card, четыре положения, centered/gutter, меню more, ручная клавиатурная активация, сохранение содержимого и destroyOnHidden |
 | Collapse | Независимые панели и accordion, bind:activeKey, snippets, extra, header/icon/disabled, сохранение содержимого и destroyOnHidden |
 | Drawer | Модальная выдвижная панель, bind:open, четыре стороны, размеры, snippets, анимация, сохранение содержимого и destroyOnHidden |
-| Alert | Четыре статуса, scalar/snippet content, legacy aliases, semantic/provider config, component tokens, prefix/ref и закрытие с доступным фокусом |
+| Alert | Четыре статуса, scalar/snippet content, semantic/provider config, component tokens, prefix/ref и закрытие с доступным фокусом |
 | MessageHolder / createMessage | Изолированная очередь пяти типов сообщений, ключи и обновления, таймеры, hover-пауза, maxCount, callable/thenable handle и контекст ConfigProvider |
 | NotificationHolder / createNotification | Подробные уведомления с title/description/actions snippets, четыре статуса, шесть положений, ключи, таймеры, hover/focus-пауза и закрытие |
 | Progress | Line/circle/dashboard, steps, gradients, success и percentPosition; component tokens, semantic/provider config, local prefix и formatter snippets; ARIA/RTL/SSR |
@@ -3560,8 +3560,7 @@ warning и видимую иконку. В обычном режиме showIcon=
 Title/description/icon/action принимают строку, число, boolean, null, Snippet
 и вложенные массивы такого содержимого. Null/undefined/false/пустая строка не
 создают title/description/actions; 0, true и массивы создают контейнеры,
-но boolean не выводится текстом. Title ?? message поддерживает deprecated message,
-сохраняя явные 0/false/пустую строку. Snippet
+но boolean не выводится текстом. Явные 0/false/пустая строка сохраняются. Snippet
 считается присутствующим; условное отсутствие содержимого выражайте через
 undefined у владельца. Description включает увеличенные отступы и иконку.
 Icon декоративный и отображается только при showIcon, включая пользовательский
@@ -3574,12 +3573,10 @@ ConfigProvider.locale.closeText. Объект дополнительно под�
 closeIcon (строка или Snippet), aria-label/aria-labelledby/aria-describedby,
 onClose(MouseEvent) и afterClose(). Пользовательский текст closeIcon остаётся
 декоративным содержимым; доступное имя задаётся через aria-label или локаль.
-Deprecated closeText/closeIcon и onClose/afterClose на корне поддержаны.
-Truthy closeText включает закрытие даже при closable=false; явный boolean иначе
-приоритетнее closeIcon/context, а объект всегда включает кнопку. Локальный truthy
-closable.closeIcon → truthy closeText → заданный closeIcon → context object icon →
-context closeIcon задают содержимое. Прежний local closable.closeIcon='' остаётся
-пустым; Source выбирает fallback. Local callbacks приоритетнее верхнеуровневых.
+Явный boolean closable приоритетнее context, а объект включает кнопку.
+Содержимое задаёт truthy local closable.closeIcon, затем context closable.closeIcon.
+Пустой local closable.closeIcon='' сохраняет пустую кнопку; Source выбирает fallback.
+Callbacks задаются в локальном closable.
 Disabled запрещает закрытие, сохраняя действия. Alert не наследует disabled
 от Form/ConfigProvider; вложенные controls используют собственный контекст.
 
@@ -3611,7 +3608,7 @@ Modal/Drawer ограничен активным dialog. Фокус снаруж
 использует естественную клавиатуру и не отправляет окружающую форму;
 тип пользовательских action-кнопок задаёт их владелец.
 
-ConfigProvider.alert поддерживает variant, closable/closeIcon, четыре status icons,
+ConfigProvider.alert поддерживает variant, closable с closeIcon, четыре status icons,
 class/style и object/function classNames/styles для root/icon/section/title/
 description/actions/close. Undefined наследует record, явный объект заменяет его
 целиком. Callbacks получают входные props с разрешёнными prefixCls/variant/type/
@@ -3631,15 +3628,15 @@ fitted viewBox статусных иконок из icons-svg 4.6.0; legacy со
 Ошибка загрузки `/ant-design#server-table` использует Alert с прежним retry:
 текущая страница и query сохраняются.
 
-110 официальных UMD-сценариев фиксируют API, computed styles, геометрию status icons,
+94 официальных UMD-сценария фиксируют API, computed styles, геометрию status icons,
 порядок callbacks и исходные corner cases. Отдельный свежий SSR baseline подтверждает
 прежний пустой local closeIcon. Сохранены native atomic/ARIA, локализованное имя,
 декоративный close wrapper/glyph/palette, hit target и responsive/focus guards.
 WAAPI закрытие сохраняет snapshot callbacks, afterClose после удаления и reduced motion;
 в Source afterClose видит ещё подключённый узел. Эти различия исключены из source metrics.
 Alert.ErrorBoundary возвращает здоровые children без контейнера. Ошибка дочернего
-render или синхронного effect заменяет их на Alert type=error. Title ?? message
-?? Error.toString() задаёт заголовок; description ?? Error.stack выводится внутри
+render или синхронного effect заменяет их на Alert type=error. Title ?? Error.toString()
+задаёт заголовок; description ?? Error.stack выводится внутри
 pre с font-size:0.9em и overflow-x:auto. Явные 0/false/пустая строка сохраняются,
 id относится только к fallback. Изменение props обновляет тот же Alert, но не
 сбрасывает ошибку даже при здоровых новых children; для сброса нужен remount/key.
@@ -3649,7 +3646,7 @@ Promise/timer callbacks и SSR ошибки эта граница не пере�
 
 Вместо React componentStack используется доступный Error.stack Svelte/JavaScript;
 React recovery diagnostics не воспроизводятся. Эти framework differences отделены
-от [19 официальных сценариев](tests/browser/fixtures/ant-design-alert-boundary-reference.json),
+от [16 официальных сценариев](tests/browser/fixtures/ant-design-alert-boundary-reference.json),
 SSR, hydration и lifecycle-проверок. Общий ConfigProvider prefix и React diagnostics
 ещё не перенесены.
 
@@ -4057,8 +4054,8 @@ compact, primary, RTL и динамический prefers-reduced-motion. Ста
 таймерами, SVG/JavaScript-анимацией собственного snippet управляет его владелец.
 Высота wrapper определяется содержимым.
 
-Description принимает строку, число или пассивный Snippet; deprecated tip используется
-только при description=null/undefined. Indicator — пассивный Snippet, заменяющий четыре точки.
+Description принимает строку, число или пассивный Snippet.
+Indicator — пассивный Snippet, заменяющий четыре точки.
 Он получает аргумент { percent, prefixCls, class, style }; прежние snippets без аргументов
 работают как раньше. В отличие от React cloneElement, Svelte не клонирует содержимое snippet:
 класс dot и semantic style применяются к декоративному span вокруг него. Строки экранируются. Indicator декоративный, без controls
@@ -4109,18 +4106,17 @@ Undefined наследует record целиком; явный объект, в�
 Локальный indicator имеет приоритет над provider, затем Spin.setDefaultIndicator(snippet).
 Статический setter хранит модульный fallback, принимает null/undefined для сброса и сам
 не обновляет смонтированные Spin: новое значение читается при следующем обновлении props.
-Semantic callbacks получают нормализованные size, spinning, description/tip, fullscreen и
-числовой percent. Поддержаны root, section, indicator, description, container и aliases tip/mask.
-Provider styles.root → provider style → local styles.root; затем для standalone идут section,
-для fullscreen — mask, а локальный style применяется последним. Deprecated wrapperClassName
-относится только к children/fullscreen. RootClassName, native attrs/events, bind:nativeElement
+Semantic callbacks получают нормализованные size, spinning, description, fullscreen и
+числовой percent. Поддержаны root, section, indicator, description и container.
+Provider styles.root → provider style → local styles.root; для standalone затем идут section,
+а локальный style применяется последним. RootClassName, native attrs/events, bind:nativeElement
 и bind:ref с nativeElement сохраняются при обновлениях; refs очищаются при unmount.
 
 PrefixCls меняет BEM classes; undefined/пустая строка возвращают ant-spin. CSS template из
 35 правил закреплённого архива сохраняет namespace переменных и изолирует root defaults.
 Component tokens, aliases, algorithm и CSS-variable prefix/key/hash работают через общий
 [контекст темы](./docs/reference/theme-context.md#токены-spin).
-Сверка 52 браузерных сценариев и auto timeline принадлежит библиотеке; примеры потребителя
+Сверка 49 Source-профилей и auto timeline принадлежит библиотеке; примеры потребителя
 не заменяют эти проверки. Сохранённые native delay/inert/focus/ARIA и reduced motion — явные
 отличия от React. Общий ConfigProvider prefix и React development warnings ещё не перенесены.
 
