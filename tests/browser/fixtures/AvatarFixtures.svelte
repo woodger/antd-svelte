@@ -20,7 +20,7 @@
   let size = $state<'inherit' | 'custom' | Exclude<AvatarSize, number>>('inherit');
   let numericSize = $state<number | undefined>(48);
   let gap = $state<number | undefined>(4);
-  let contextSize = $state<ComponentSize>('middle');
+  let contextSize = $state<ComponentSize>('medium');
   let text = $state('AVATAR');
   let alt = $state('Fixture user');
   let label = $state('');
@@ -98,7 +98,7 @@
     bind:value={gap}
   /></label><label>Avatar context size<select
     bind:value={contextSize}
-  ><option>small</option><option>middle</option><option>large</option></select></label>
+  ><option>small</option><option>medium</option><option>large</option></select></label>
   <label>Avatar text<input bind:value={text} /></label><label>Avatar alt<input bind:value={alt} /></label><label>Avatar root label<input
     bind:value={label}
   /></label><label>Avatar root style<input

@@ -57,7 +57,7 @@
         headerColor: '#123456', bodySortBg: '#334455' } } } : {}) }}>
     <div id="table-row-scope-control" style="width:320px;max-width:100%">
       <form aria-label="Table row scope form">
-        <Table {columns} dataSource={rows} size="middle" rowSelection pagination={false}
+        <Table {columns} dataSource={rows} size="medium" rowSelection pagination={false}
           rowHoverable={!current.name.includes('no-hover')} showHeader={current.name !== 'no-header'}
           scroll={current.name.startsWith('fixed') ? { x: 600 } : undefined}
           expandable={expandable ? { expandedRowRender: details } : undefined}

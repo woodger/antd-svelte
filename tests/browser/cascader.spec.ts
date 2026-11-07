@@ -429,7 +429,7 @@ test('Cascader inherits sizes and theme density with the source column dimension
   await expect(root(page)).toHaveCSS('height', '24px');
   await select(page, 'Path size').selectOption('large');
   await expect(root(page)).toHaveCSS('height', '40px');
-  await select(page, 'Path size').selectOption('middle');
+  await select(page, 'Path size').selectOption('medium');
   await control(page, 'Compact cascader').check();
   await expect(root(page)).toHaveCSS('height', '28px');
   await input(page).click();
@@ -442,7 +442,7 @@ test('Cascader resolves semantic slots and local styles above component config',
   await control(page, 'Styled cascader').check();
 
   await expect(root(page)).toHaveClass(/context-path-root/);
-  await expect(root(page)).toHaveClass(/local-path-middle-filled-false/);
+  await expect(root(page)).toHaveClass(/local-path-medium-filled-false/);
   await expect(root(page)).toHaveCSS('color', 'rgb(50, 60, 70)');
   await expect(root(page)).toHaveCSS('border-top-color', 'rgb(1, 2, 3)');
   await expect(input(page)).toHaveClass(/local-path-input/);

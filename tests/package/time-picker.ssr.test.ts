@@ -41,7 +41,7 @@ describe('TimePicker public package SSR', () => {
 
       expect(body).toContain('time-context');
       expect(body).toContain('local-time-raw');
-      expect(body).toContain('context-time-middle');
+      expect(body).toContain('context-time-medium');
       expect(body).toContain('ant-picker-filled');
       expect(body).toContain('value="10:23:44"');
       expect(body).toContain('Required time');

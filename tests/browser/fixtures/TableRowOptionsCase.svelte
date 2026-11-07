@@ -53,7 +53,7 @@
       <Table columns={columns}
         dataSource={classes && classMode === 'empty' ? [] : classes && classMode === 'zero'
           ? [{ key: 0, name: 'Zero', score: 0 }] : classes ? rows : rows.slice(0, 2)}
-        aria-label="Row people" size="middle"
+        aria-label="Row people" size="medium"
         rowHoverable={setting === 'default' ? undefined : setting === 'enabled'}
         rowClassName={classMode === 'none' ? undefined : classMode === 'constant'
           ? `${customPrefix}-constant ${customPrefix}-extra` : rowClass}

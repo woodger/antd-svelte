@@ -9,7 +9,6 @@
   } = $props();
   const sizes: Record<string, SpaceProps['size']> = {
     small: 'small',
-    middle: 'middle',
     medium: 'medium',
     large: 'large',
     tuple: ['small', 'large'],

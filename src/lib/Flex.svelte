@@ -31,7 +31,7 @@
   let wrapping = $derived(wrap === true ? 'wrap' : wrap);
   let alignment = $derived(align || (isVertical ? 'stretch' : undefined));
   let presetGap = $derived(
-    typeof gap === 'string' && ['small', 'medium', 'middle', 'large'].includes(gap)
+    typeof gap === 'string' && ['small', 'medium', 'large'].includes(gap)
   );
   let rootStyle = $derived([
     componentTheme.style,

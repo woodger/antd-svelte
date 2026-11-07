@@ -3,7 +3,7 @@
   import { ConfigProvider, Input, theme, type ComponentSize, type ThemeConfig } from 'antd-svelte';
   import CompactThemeControls from './CompactThemeControls.svelte';
 
-  let { initialMode = 'native', initialPreset = 'compact', initialSize = 'middle' }: {
+  let { initialMode = 'native', initialPreset = 'compact', initialSize = 'medium' }: {
     initialMode?: string; initialPreset?: string; initialSize?: ComponentSize;
   } = $props();
   let mode = $state(untrack(() => initialMode));
@@ -36,7 +36,7 @@
     <option value="custom-compact">Custom compact</option>
   </select></label>
   <label>Compact control size <select bind:value={size} aria-label="Compact control size">
-    <option value="small">Small</option><option value="middle">Middle</option>
+    <option value="small">Small</option><option value="medium">Middle</option>
     <option value="large">Large</option>
   </select></label>
   <ConfigProvider theme={mode === 'source-parent'

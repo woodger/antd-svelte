@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'svelte/elements';
 
 export type ProgressType = 'line' | 'circle' | 'dashboard';
 export type ProgressStatus = 'normal' | 'active' | 'exception' | 'success';
-export type ProgressCircleSize = 'small' | 'medium' | 'middle' | 'default' | number
+export type ProgressCircleSize = 'small' | 'medium' | number
   | [number | string, number];
 export type ProgressLineSize = ProgressCircleSize
   | { width?: number | string; height?: number; };

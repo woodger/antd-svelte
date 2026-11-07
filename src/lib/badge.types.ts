@@ -4,8 +4,8 @@ import type { TagPresetColor } from './tag.types';
 
 export type BadgeStatus = 'success' | 'processing' | 'default' | 'error' | 'warning';
 export type BadgeColor = TagPresetColor | (string & {});
-/** Deprecated default имеет геометрию medium; semantic callbacks получают исходное значение. */
-export type BadgeSize = 'medium' | 'small' | 'default';
+/** Обычный или уменьшенный счётчик. */
+export type BadgeSize = 'medium' | 'small';
 export type BadgeText = string | number | boolean | null | Snippet;
 export type BadgeOffset = readonly [number | string, number | string];
 /** Атрибуты исходного custom count; Snippet применяет их к собственному корню. */

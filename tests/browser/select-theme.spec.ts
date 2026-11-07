@@ -189,7 +189,7 @@ test('source clear keeps its native button and returns focus without changing se
 test('source multiple tags use logical spacing and selection in RTL', async ({ page }) => {
   await page.getByLabel('Right to left', { exact: true }).check();
   const root = page.locator('.select-token-multiple-middle .ant-select');
-  const input = page.getByRole('combobox', { name: 'Themed multiple middle', exact: true });
+  const input = page.getByRole('combobox', { name: 'Themed multiple medium', exact: true });
 
   await expect(root).toHaveCSS('direction', 'rtl');
   await expect(root.locator('.ant-select-selection-item')).toHaveCSS('margin-left', '4px');

@@ -47,7 +47,7 @@ export interface CardProps extends Omit<
   loading?: boolean;
   /** @defaultValue false */
   hoverable?: boolean;
-  size?: ComponentSize | 'medium' | 'default';
+  size?: ComponentSize;
   type?: 'inner';
   /** Локальный вариант перекрывает bordered=false, Form и ConfigProvider. */
   variant?: 'outlined' | 'borderless';

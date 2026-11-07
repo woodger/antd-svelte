@@ -47,7 +47,7 @@
 
 {#if mounted}
   <ConfigProvider componentSize="large" theme={configured} space={context}>
-    {#each ['default', 'small', 'middle', 'medium', 'large', 'tuple', 'variable',
+    {#each ['default', 'small', 'medium', 'large', 'tuple', 'variable',
       'numeric', 'zero', 'vertical', 'rtl', 'compact'] as id}
       <SpaceThemeControl {id} {priority} {prefix} {reversed} />
     {/each}

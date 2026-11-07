@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { referenceSizeLabel } from './reference-size';
   import {
     Cascader,
     CascaderPanel,
@@ -23,7 +24,7 @@
   let searches = $state(0);
   let focusEvents = $state(0);
   let openings = $state<boolean[]>([]);
-  const sizes = ['middle', 'small', 'large'] as const;
+  const sizes = ['medium', 'small', 'large'] as const;
   const options = [
     {
       value: 'p',
@@ -70,12 +71,12 @@
     <ConfigProvider theme={enabled ? config : { compact }}>
       <div class="samples" style={parentAliases ? '--ant-font-size:30px;--ant-color-text:red' : undefined}>
         {#each sizes as size}
-          <Cascader {size} {options} defaultValue={['p', 'a']} class={`cascader-token-single-${size}`}
+          <Cascader {size} {options} defaultValue={['p', 'a']} class={`cascader-token-single-${referenceSizeLabel(size)}`}
             aria-label={`Themed single path ${size}`} />
         {/each}
         {#each sizes as size}
           <Cascader {size} {options} defaultValue={[[ 'p', 'a' ]]} multiple
-            class={`cascader-token-multiple-${size}`} aria-label={`Themed multiple path ${size}`} />
+            class={`cascader-token-multiple-${referenceSizeLabel(size)}`} aria-label={`Themed multiple path ${size}`} />
         {/each}
         <Cascader {options} defaultValue={[[ 'p', 'a' ]]} multiple disabled
           class="cascader-token-disabled" aria-label="Themed disabled path" />

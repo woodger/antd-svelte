@@ -1,8 +1,8 @@
 <script lang="ts">
   import { Badge, ConfigProvider, Radio, RadioButton, RadioGroup } from 'antd-svelte';
 
-  let size = $state<'small' | 'middle' | 'large' | 'inherit'>('inherit');
-  let parentSize = $state<'small' | 'middle' | 'large'>('middle');
+  let size = $state<'small' | 'medium' | 'large' | 'inherit'>('inherit');
+  let parentSize = $state<'small' | 'medium' | 'large'>('medium');
   let optionType = $state<'button' | 'default' | 'inherit'>('button');
   let buttonStyle = $state<'outline' | 'solid'>('outline');
   let block = $state(false);
@@ -33,10 +33,10 @@
   <div class="controls">
     <label>Radio button size<select bind:value={size}>
       <option value="inherit">Button inherit size</option><option value="small">Button small</option>
-      <option value="middle">Button middle</option><option value="large">Button large</option>
+      <option value="medium">Button medium</option><option value="large">Button large</option>
     </select></label>
     <label>Radio button parent size<select bind:value={parentSize}>
-      <option value="small">Parent small</option><option value="middle">Parent middle</option>
+      <option value="small">Parent small</option><option value="medium">Parent medium</option>
       <option value="large">Parent large</option>
     </select></label>
     <label>Radio button option type<select bind:value={optionType}>

@@ -55,7 +55,7 @@ describe('TimeRangePicker SSR', () => {
     const body = render(TimeRangePicker, { props: {
       placeholder: 'Choose interval',
       format: date => date.format('HH:mm'), inputReadOnly: false,
-      classNames: ({ props }) => ({ root: props.size === 'middle'
+      classNames: ({ props }) => ({ root: props.size === 'medium'
         && props.variant === undefined && props.disabled === false ? 'resolved-props' : 'wrong' }),
       styles: { root: 'outline-offset:2px' }, style: 'outline-offset:4px',
       suffixIcon: false

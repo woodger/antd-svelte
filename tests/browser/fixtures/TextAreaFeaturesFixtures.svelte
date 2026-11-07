@@ -28,7 +28,7 @@
   let dark = $state(false);
   let compact = $state(false);
   let variant = $state<TextAreaVariant | 'inherit'>('inherit');
-  let size = $state<'small' | 'middle' | 'large'>('middle');
+  let size = $state<'small' | 'medium' | 'large'>('medium');
   let bordered = $state(true);
   let semantic = $state(false);
   let richCount = $state(false);
@@ -90,7 +90,7 @@
   <label>Textarea clear disabled<select bind:value={clearDisabled}><option>inherit</option><option>true</option><option>false</option></select></label>
   <label>Textarea clear icon<select bind:value={iconMode}><option>context</option><option>custom</option><option>falsy</option></select></label>
   <label>Textarea variant<select bind:value={variant}><option>inherit</option><option>outlined</option><option>filled</option><option>borderless</option><option>underlined</option></select></label>
-  <label>Textarea feature size<select bind:value={size}><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Textarea feature size<select bind:value={size}><option>small</option><option>medium</option><option>large</option></select></label>
   <label>Textarea wrap<select bind:value={wrap}><option>soft</option><option>off</option></select></label>
   <label>Textarea soft maximum<input type="number" bind:value={max} /></label>
   <label><input type="checkbox" bind:checked={show} /> Show textarea count</label>

@@ -55,7 +55,7 @@
   <label><input type="checkbox" bind:checked={vertical} /> Vertical Segmented alias</label>
   <label>Segmented orientation<select bind:value={orientation}><option>inherit</option><option>horizontal</option><option>vertical</option></select></label>
   <label>Segmented shape<select bind:value={shape}><option>default</option><option>round</option></select></label>
-  <label>Segmented size<select bind:value={size}><option>inherit</option><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Segmented size<select bind:value={size}><option>inherit</option><option>small</option><option>medium</option><option>large</option></select></label>
   <label><input type="checkbox" bind:checked={dark} /> Dark Segmented theme</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact Segmented theme</label>
   <label><input type="checkbox" bind:checked={custom} /> Custom Segmented slots</label>

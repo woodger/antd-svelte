@@ -45,7 +45,7 @@ export interface DescriptionsProps extends Omit<
   bordered?: boolean;
   /** @defaultValue true */
   colon?: boolean;
-  size?: ComponentSize | 'medium' | 'default';
+  size?: ComponentSize;
   labelStyle?: string;
   contentStyle?: string;
   classNames?: DescriptionsSemantic;

@@ -30,7 +30,7 @@
 <div id="table-theme-control" style="width:640px;max-width:100%">
   <form aria-label="Table theme form">
     <Table dataSource={rows} {columns} aria-label="Themed people" pagination={false}
-      size={mode === 'large' ? 'large' : mode === 'small' ? 'small' : 'middle'}
+      size={mode === 'large' ? 'large' : mode === 'small' ? 'small' : 'medium'}
       bordered={mode === 'bordered' || mode === 'bordered-selection'}
       rowSelection={selection ? { fixed: mode === 'stateful' } : false}
       bind:selectedRowKeys={selected} bind:sorter

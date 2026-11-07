@@ -295,7 +295,7 @@ left/right сохраняют физическую сторону, default=cente
 
 Variant=solid/dashed/dotted, dashed alias и plain повторяют классы эталона.
 Size=small/medium/large наследуется от явно заданного componentSize в ConfigProvider,
-включая вложенные провайдеры; middle — совместимый alias medium. Без явного
+включая вложенные провайдеры. Без явного
 размера Divider сохраняет стандартный отступ 24px без подписи и 16px с подписью.
 В semantic callbacks size в этом случае undefined. Без подписи large имеет
 отступ 24px, medium — 16px, small — 8px;
@@ -360,7 +360,7 @@ Orientation=horizontal/vertical имеет приоритет над vertical. �
 для которых эталон генерирует классы; остальные CSS-настройки доступны через style.
 Wrap принимает boolean или wrap/nowrap/wrap-reverse; false не добавляет класс.
 
-Gap принимает small/medium/middle/large, число в px или CSS-строку, включая
+Gap принимает small/medium/large, число в px или CSS-строку, включая
 составной row/column gap. Preset-интервалы используют токены padding: 8/16/24px.
 Ноль сохраняется. Flex принимает CSS shorthand либо число без единицы.
 Числовой и произвольный CSS gap, а также flex имеют приоритет над одноимёнными
@@ -403,7 +403,7 @@ FlexComponentProps; FlexProps остаётся расширяемым интер
 `components.Flex` принимает alias overrides и algorithm; собственных component defaults
 у upstream нет. PaddingXS/padding/paddingLG меняют preset gaps, а font/color reset не
 добавляется. CSS-variable prefix настраивается независимо от BEM prefix.
-Сверка с 36 официальными UMD-сценариями:
+Сверка с 33 официальными UMD-сценариями:
 [browser](./tests/browser/flex-source.spec.ts),
 [SSR](./tests/package/flex-source.ssr.test.ts),
 [эталон](./tests/browser/fixtures/ant-design-flex-source-reference.json),
@@ -947,8 +947,8 @@ Layout=horizontal по умолчанию; vertical создаёт отдель�
 Bordered=false, colon=true. В horizontal bordered label получает th/span=1,
 content — td/span=2*span-1; vertical сохраняет span на обеих строках. Colon
 управляет псевдоэлементом label только без рамки. Без явного size/componentSize
-используется размер large; medium/middle и small уменьшают отступы, default —
-legacy alias без отдельного класса. ComponentDisabled не меняет read-only поля.
+используется размер large; medium и small уменьшают отступы.
+ComponentDisabled не меняет read-only поля.
 
 ClassNames/styles поддерживают root/header/title/extra/label/content, объект
 либо callback ({ props }) с разрешёнными column/items/size. У items есть
@@ -1012,7 +1012,7 @@ control. Это доступная Svelte-адаптация поверх исх
 
 Variant=outlined; variant имеет приоритет над legacy bordered=false. Hoverable
 по умолчанию false, type=inner меняет header/body. Small наследуется из явно
-заданного ConfigProvider.componentSize; medium/middle/default/large используют
+заданного ConfigProvider.componentSize; medium/large используют
 обычную геометрию. По умолчанию small body/header padding равен 12px;
 остальные размеры/цвета используют theme/compact tokens.
 ClassNames/styles Card принимают root/header/body/extra/title/actions/cover,
@@ -1356,7 +1356,7 @@ Orientation имеет приоритет над явным vertical;
 по умолчанию horizontal. Align=start/end/center/baseline, horizontal по умолчанию
 center, vertical без align использует естественное stretch. Size выбирается из
 локального prop, ConfigProvider.space.size и затем small; componentSize не участвует.
-Поддержаны small/medium/middle/large
+Поддержаны small/medium/large
 либо число, tuple [horizontal, vertical]. Числовой 0 не создаёт inline gap,
 NaN игнорируется. Wrap добавляет flex-wrap:wrap. Gap/wrap styles идут перед
 styles.root и style: пользовательский inline style перекрывает также числовой
@@ -1402,7 +1402,7 @@ items; один children Snippet представляет одну позици�
 вернувший несколько узлов. Null/undefined/boolean удаляются из позиций, пустая
 строка и 0 сохраняются, как rc-component/util.toArray без keepEmpty.
 
-Size=small/medium/middle/large, по умолчанию явно заданный componentSize;
+Size=small/medium/large, по умолчанию явно заданный componentSize;
 приоритет control.size → Compact.size → ConfigProvider.componentSize. Block
 включает width=100% и display=flex, иначе inline-flex. Orientation/vertical следуют приоритету Space. Нативные attrs, class/rootClassName/
 style и bind:nativeElement относятся к root. Подключены Button, Input,
@@ -1486,7 +1486,7 @@ Enter по-прежнему подтверждает ввод, в том чис�
 `oninput` и остальные нативные события получают DOM-текст; числовое значение
 получайте через onValueChange.
 
-Размеры small/middle/large, disabled и направление наследуются из
+Размеры small/medium/large, disabled и направление наследуются из
 ConfigProvider. Явные props переопределяют наследование. Readonly задаётся
 нативным `readonly` либо alias readOnly; disabled/readonly блокируют изменение числа и скрывают
 кнопки. Status принимает error/warning и наследует ошибку FormItem.
@@ -2430,7 +2430,7 @@ Bind:ref задаётся непосредственно компоненту; m
 disabled guards и локализация остаются текущими. Внутреннее состояние виджета
 сохраняется до его удаления, а opaque Snippet captures остаются реактивными по
 правилам Svelte: полная заморозка React.memo здесь не обещается.
-Сверка: [52 UMD-сценария / 399 кадров](./tests/browser/fixtures/ant-design-popover-lifecycle-reference.json),
+Сверка: [50 UMD-сценария / 399 кадров](./tests/browser/fixtures/ant-design-popover-lifecycle-reference.json),
 [SSR](./tests/package/popover-lifecycle.ssr.test.ts) и
 [browser](./tests/browser/popover-lifecycle.spec.ts), `?fixture=popover-lifecycle`.
 
@@ -2910,7 +2910,7 @@ Start/end разрешаются относительно RTL. Устаревш�
 tabPlacement имеет приоритет. На экране шириной до 575px вертикальный
 список переходит наверх. Переполнение прокручивается; навигация показывает
 сфокусированный заголовок без прокрутки всей страницы. Size использует общий
-ComponentSize: small/middle/large и исходный medium, эквивалентный middle;
+ComponentSize: small/medium/large;
 по умолчанию используется ConfigProvider.componentSize. Явный medium имеет
 приоритет над размером провайдера.
 Тема, compact, RTL и reduced motion применяются через существующие токены.
@@ -3347,7 +3347,7 @@ state и DOM-черновики в скрытой панели. DestroyOnHidden=
 полей в FormData нет. Перед фокусом ошибки скрытой панели владелец формы должен
 открыть её. Кнопки заголовков не отправляют окружающую форму.
 
-Size использует small/middle/large и ConfigProvider.componentSize. Bordered=false
+Size использует small/medium/large и ConfigProvider.componentSize. Bordered=false
 убирает внешнюю рамку, ghost — фон и разделители. ExpandIconPlacement задаёт
 start/end относительно кнопки заголовка и направления RTL; extra остаётся
 отдельным элементом после заголовка. ExpandIcon — Snippet с данными панели:
@@ -3989,7 +3989,7 @@ Line поддерживает success={{ percent, strokeColor? }} как отд�
 Наличие success.percent определяет автоматический status вместо общего percent, в том числе
 при success.percent=0. Длины обоих tracks ограничиваются отдельно; success может выходить
 за основной track, как в upstream. Deprecated strokeWidth задаёт высоту line, когда size —
-preset; предпочтителен size. Дополнительные aliases middle/default дают обычный размер.
+preset; предпочтителен size.
 
 Steps задаёт число отдельных элементов line. Math.round определяет активное количество;
 rounding получает steps*percent/100. Size задаёт размер одного элемента, а не общей полосы.
@@ -4063,7 +4063,7 @@ Delay задаётся в миллисекундах и откладывает �
 Unmount отменяет таймер; SSR не создаёт таймеров и скрывает отложенный индикатор.
 
 Size принимает small, medium и large с точками 14, 20 и 32px по умолчанию. Без size
-используется ConfigProvider.componentSize; middle и deprecated default сохраняют обычный размер.
+используется ConfigProvider.componentSize.
 `theme.components.Spin` меняет размеры независимо от других компонентов. Поддерживаются темы,
 compact, primary, RTL и динамический prefers-reduced-motion. Стандартная анимация
 и CSS-анимации/переходы внутри indicator отключаются при reduced motion;
@@ -4230,7 +4230,7 @@ Bind:nativeElement указывает на div каркаса, при loading=fa
 Самостоятельные `Skeleton.Avatar`, `Skeleton.Button`, `Skeleton.Input`, `Skeleton.Image`
 и `Skeleton.Node` доступны также как SkeletonAvatar/Button/Input/Image/Node. Это одни
 и те же Svelte-компоненты. Avatar/Button/Input наследуют componentSize; локальный size
-имеет приоритет, включая 0 у Avatar. Поддержаны small/medium/middle/large/default;
+имеет приоритет, включая 0 у Avatar. Поддержаны small/medium/large;
 Avatar принимает числовой размер. У основного Skeleton default avatar остаётся large.
 
 Button принимает circle/square/round/default и block; Input поддерживает block.
@@ -4254,7 +4254,7 @@ CSS-variable prefix/key/hash. Основной Skeleton сохраняет nativ
 размеры и normalization. Общий ConfigProvider prefix и React development warnings
 остаются следующими этапами.
 
-[116 UMD-сценариев](./tests/browser/fixtures/ant-design-skeleton-element-reference.json)
+[110 UMD-сценариев](./tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 сверяют каждый primitive с Ant Design 6.6.8 в стандартном режиме браузера, с одинаковой
 унаследованной typography/color из global design tokens.
 [34 сценария основного Skeleton](./tests/browser/fixtures/ant-design-skeleton-main-reference.json)
@@ -6122,7 +6122,7 @@ onchange/onblur, атрибуты и FormItem associations сохраняютс�
 name/required/maxlength/readonly остаются на реальном input, а class/style/hidden
 относятся к самому внешнему элементу. ReadOnly/maxLength/autoComplete/autoFocus —
 добавочные camel aliases; lowercase native attrs сохраняются. Size принимает
-прежний middle и upstream medium, htmlSize задаёт native size отдельно.
+medium, htmlSize задаёт native size отдельно.
 
 Prefix/suffix и addonBefore/addonAfter принимают scalar/Snippet. Без affixes,
 clear/count/addons остаётся один input. Prefix/suffix/clear/count добавляют
@@ -6472,7 +6472,7 @@ onMouseDown/onCompositionStart/End дополняют прежние native hand
 Variant поддерживает outlined/filled/borderless/underlined. Explicit variant имеет
 приоритет над bordered=false, затем Form.variant, component config, общий variant
 и outlined.
-Medium — alias прежнего middle. ClassNames/styles принимают root/textarea/clear/
+ClassNames/styles принимают root/textarea/clear/
 count либо callback({props}); props отражает текущий Svelte value. Context и local
 semantic styles объединяются, root style идёт после соответствующих semantic root
 styles. Root resize переносится в textarea; styles.textarea имеет приоритет над
@@ -6936,8 +6936,7 @@ lime, gold. Также поддерживаются CSS-цвета, CSS variable
 Text принимает string/number/boolean/null или Snippet. Число не становится count
 или BadgeContext.count. True учитывается как присутствующее значение, но подпись
 не выводит; false/null считаются пустыми. Text=0 выводится только с showZero.
-Deprecated size="default" сохраняет геометрию medium, но semantic callbacks
-получают исходное default. Предупреждение консоли не выводится.
+Размеры Badge — small и medium.
 
 Offset — readonly-пара [x, y] из number|string: y задаёт margin-top,
 положительный x сдвигает от логического конца наружу, в RTL направление зеркально.
@@ -6992,8 +6991,7 @@ Badge.style по-прежнему применяется к корню и не �
 на обычный индикатор; для него используйте styles.indicator. Для custom count
 Badge.style остаётся частью BadgeCountContext. Прежний числовой layout без нового
 API сохраняется; ConfigProvider.badge, semantic props, rootClassName и custom
-CSS color, новые scalar text, строковый offset и size="default" включают исходный
-layout. Bind:nativeElement предоставляет корневой
+CSS color, новые scalar text и строковый offset включают исходный layout. Bind:nativeElement предоставляет корневой
 HTMLSpanElement и очищается при unmount. Нативные span attrs/events передаются
 корню; onclick имеет приоритет над React-compatible onClick. Изменение props/config
 сохраняет DOM, состояние, selection и фокус. 49 вариантов и реактивные обновления
@@ -7127,7 +7125,7 @@ icon/children. Его DOM, атрибуты, события и интеракт�
 и не вводит таймеров или повторных сетевых запросов поверх нативного img.
 
 Shape по умолчанию circle; доступен square. Размер наследуется от
-ConfigProvider.componentSize: middle соответствует medium. Именованные размеры
+ConfigProvider.componentSize. Именованные размеры
 small/medium/large равны 24/32/40 px. Явный size переопределяет контекст;
 числовой size принимает положительное конечное число, включая дробное.
 Неположительное/неконечное число заменяется размером из контекста. Для числового
@@ -7842,7 +7840,7 @@ Ant wrapper, он заменяет автоматическую Tooltip composit
 строки или поддерживаемые локальные TooltipProps без children. Tooltip использует
 существующую обёртку с display:contents; отступы между stars сохранены.
 
-Size принимает small/medium/large и совместимое middle, наследует componentSize.
+Size принимает small/medium/large, наследует componentSize.
 Disabled наследует общий disabled-контекст, включая Form; явный false имеет
 приоритет. ConfigProvider.rate принимает class/style, локальные class/rootClassName
 добавляются, style накладывается после контекстного. Вложенный явно заданный rate
@@ -8491,7 +8489,7 @@ keyboard, name/FormData, required и существующий reset/bind кон�
 сохраняет собственный вид. Привязка value и checked использует прежний Svelte API.
 
 `buttonStyle` выбирает outline (default) или solid. `size` наследует componentSize;
-локальный small/middle/large имеет приоритет. Block растягивает группу и делит
+локальный small/medium/large имеет приоритет. Block растягивает группу и делит
 ширину между вариантами; vertical сохраняет стыки и радиусы кнопок. Темы, primary,
 compact и RTL используют текущие настройки библиотеки. Нативный fieldset и
 существующий приоритет disabled группы сохранены.
@@ -8569,8 +8567,8 @@ unCheckedChildren предназначены для коротких подпи�
 Они скрыты от accessibility tree, поэтому имя control не меняется вместе
 с текстом состояния.
 
-Размеры — medium, small и aliases middle/default. По умолчанию наследуется componentSize;
-small включает малый размер, middle/large провайдера используют обычный.
+Размеры — medium и small. По умолчанию наследуется componentSize;
+small включает малый размер, medium/large провайдера используют обычный.
 Явный size переопределяет наследование. Disabled наследуется из Form/FormItem
 и ConfigProvider, disabled=false переопределяет его. Loading показывает
 индикатор, выставляет aria-busy и блокирует действия даже с disabled=false.
@@ -9060,7 +9058,7 @@ aliases к ячейкам, границам, сортировке, hover/selecti
 после mount. Local `style` сохраняет приоритет. Смена темы не пересоздаёт строки,
 не меняет выбор/сортировку и не сбрасывает draft/focus в раскрытом snippet.
 
-Native default size по-прежнему наследует `componentSize` (`middle` без настройки).
+Native default size по-прежнему наследует `componentSize` (`medium` без настройки).
 В теме Ant Design ширина selection column берётся из `selectionColumnWidth`,
 а expand column — из исходной формулы `controlInteractiveSize + padding × 2`;
 явный `expandable.columnWidth` имеет приоритет. Без source-темы обе колонки
@@ -9262,7 +9260,10 @@ signal в fetch и возвращайте строки страницы вмес
 
 ConfigProvider принимает `theme={{ mode, primary, compact }}`, где `mode` равен
 `light` или `dark`, а `primary` — `blue`, `purple` или `green`.
-`componentSize` равен `small`, `middle` или `large`. Вложенный провайдер наследует
+`componentSize` равен `small`, `medium` или `large`. Обычный размер по умолчанию — `medium`;
+устаревшие значения `middle` и `size="default"` удалены.
+[Замеры исходника](docs/reference/current-size-observation.md) объясняют границы сравнения.
+ Вложенный провайдер наследует
 неуказанные настройки родителя. `componentDisabled` можно переопределить на
 отдельном control.
 
@@ -9280,7 +9281,7 @@ Card/Flex/Divider и вложенных provider — `tests/browser/theme.spec.t
 
 `compact: true` согласует fontSize/lineHeight/fontHeight и высоты controls с
 compactAlgorithm, а Button/Input/TextArea/InputNumber получают рассчитанные
-font/padding metrics при SSR. Для Input, Select, InputNumber и Button middle=28px,
+font/padding metrics при SSR. Для Input, Select, InputNumber и Button medium=28px,
 large=35px. В small первые три имеют минимум 22px из-за строки и рамок,
 Button — 21px, как в React 6.6.8. Native цвета сохраняются; пустой `token: {}`
 для корректной геометрии не требуется. Браузерная сверка —

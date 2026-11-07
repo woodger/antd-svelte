@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'svelte/elements';
 
 export type DividerOrientation = 'horizontal' | 'vertical';
 export type DividerTitlePlacement = 'start' | 'end' | 'center' | 'left' | 'right';
-export type DividerSize = 'small' | 'medium' | 'middle' | 'large';
+export type DividerSize = 'small' | 'medium' | 'large';
 export type DividerSemanticSlots = Partial<Record<'root' | 'rail' | 'content', string>>;
 export interface DividerSemanticInfo {
   props: DividerProps & {

@@ -23,7 +23,7 @@
   let portal = $state(false);
   let dark = $state(false);
   let compact = $state(false);
-  let size = $state<ComponentSize>('middle');
+  let size = $state<ComponentSize>('medium');
   let placement = $state<ColorPickerPlacement>('bottomLeft');
   let centeredArrow = $state(false);
   let noArrow = $state(false);
@@ -77,7 +77,7 @@
     <label><input type="checkbox" bind:checked={compact} /> Compact color</label>
     <label><input type="checkbox" bind:checked={centeredArrow} /> Center color arrow</label>
     <label><input type="checkbox" bind:checked={noArrow} /> Hide color arrow</label>
-    <label>Color size <select bind:value={size}><option>small</option><option>middle</option><option>large</option></select></label>
+    <label>Color size <select bind:value={size}><option>small</option><option>medium</option><option>large</option></select></label>
     <label>Color placement <select bind:value={placement}>
       {#each ['top','bottom','left','right','topLeft','topRight','bottomLeft','bottomRight',
         'leftTop','leftBottom','rightTop','rightBottom'] as point}

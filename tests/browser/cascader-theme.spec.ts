@@ -233,7 +233,7 @@ test('custom prefixes and RTL scopes retain paths and clean up on unmount', asyn
   await page.getByLabel('Right to left', { exact: true }).check();
   await page.getByLabel('Hash themed Cascader', { exact: true }).uncheck();
   await page.setViewportSize({ width: 375, height: 1400 });
-  const input = page.getByRole('combobox', { name: 'Themed single path middle', exact: true });
+  const input = page.getByRole('combobox', { name: 'Themed single path medium', exact: true });
   await input.click();
   const popup = page.locator('.popup:not([hidden])');
 

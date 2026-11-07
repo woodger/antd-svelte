@@ -35,7 +35,7 @@
   let precision = $state<number | undefined>();
   let maximum = $state(10);
   let variant = $state<InputVariant>('outlined');
-  let size = $state<'small' | 'middle' | 'large'>('middle');
+  let size = $state<'small' | 'medium' | 'large'>('medium');
   let events = $state<string[]>([]);
   let highEvents = $state<(string | null)[]>([]);
   let formatInputs = $state<string[]>([]);
@@ -101,7 +101,7 @@
       <option>outlined</option><option>filled</option><option>borderless</option><option>underlined</option>
     </select></label>
     <label>Source number size <select bind:value={size} aria-label="Source number size">
-      <option>small</option><option>middle</option><option>large</option>
+      <option>small</option><option>medium</option><option>large</option>
     </select></label>
   </div>
   <div class="actions">

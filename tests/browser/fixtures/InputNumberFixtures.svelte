@@ -109,7 +109,7 @@
       <InputNumber id="default-number" name="defaultAmount" {defaultValue} />
       <div class="variants">
         <InputNumber aria-label="Large number" size="large" defaultValue={1} />
-        <InputNumber aria-label="Middle number" size="middle" defaultValue={1} />
+        <InputNumber aria-label="Middle number" size="medium" defaultValue={1} />
         <InputNumber aria-label="Small number" size="small" defaultValue={1} />
         <InputNumber aria-label="Warning number" status="warning" defaultValue={1} />
       </div>

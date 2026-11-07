@@ -260,7 +260,7 @@
   data-ant-collapse-prefix={prefixCss ? prefix : undefined} data-size={resolvedSize}
   data-placement={placement} class={[
     prefix, 'ant-collapse-css-var', `${prefix}-icon-placement-${placement}`,
-    resolvedSize !== 'middle' && `${prefix}-${resolvedSize}`,
+    resolvedSize !== 'medium' && `${prefix}-${resolvedSize}`,
     !bordered && `${prefix}-borderless`, ghost && `${prefix}-ghost`,
     config.direction === 'rtl' && `${prefix}-rtl`, config.collapse?.class, className,
     rootClassName, semantics.classes.root, componentTheme.className

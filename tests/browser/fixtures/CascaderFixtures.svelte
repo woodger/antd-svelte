@@ -67,7 +67,7 @@
   let loading = $state(false);
   let allowClear = $state(true);
   let clearMode = $state('default');
-  let size = $state<'small' | 'middle' | 'large'>('middle');
+  let size = $state<'small' | 'medium' | 'large'>('medium');
   let variant = $state<'outlined' | 'filled' | 'borderless' | 'underlined' | 'inherit'>('inherit');
   let dark = $state(false);
   let compact = $state(false);
@@ -247,7 +247,7 @@
     <label><input type="checkbox" bind:checked={truncate} /> Truncate path tags</label>
     <label><input type="checkbox" bind:checked={mounted} /> Mount cascader</label>
     <label>Path disabled<select bind:value={localDisabled}><option>inherit</option><option>true</option><option>false</option></select></label>
-    <label>Path size<select bind:value={size}><option>middle</option><option>small</option><option>large</option></select></label>
+    <label>Path size<select bind:value={size}><option>medium</option><option>small</option><option>large</option></select></label>
     <label>Path variant<select bind:value={variant}><option>inherit</option><option>outlined</option><option>filled</option><option>borderless</option><option>underlined</option></select></label>
     <label>Search path limit<select bind:value={limit}><option>50</option><option>1</option><option>false</option><option>0</option></select></label>
     <label>Path tag count<select bind:value={count}><option>all</option><option>0</option><option>1</option></select></label>

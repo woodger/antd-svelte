@@ -48,7 +48,7 @@
   <label><input type="checkbox" bind:checked={controls.compact} /> Compact table theme</label>
   <label for="table-size">Table size</label>
   <select id="table-size" bind:value={controls.size}><option value="small">Small</option><option
-    value="middle"
+    value="medium"
   >Middle</option><option
     value="large"
   >Large</option></select>

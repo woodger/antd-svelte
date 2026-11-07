@@ -1,11 +1,12 @@
 <script lang="ts" module>
-  import type { CollapseItem, CollapseProps } from 'antd-svelte';
+  import type { CollapseItem, CollapseProps, ComponentSize } from 'antd-svelte';
 
   export interface CollapseSourceSample {
     name: string;
     events?: 'click' | 'capture' | 'stop' | 'prevent' | 'focus' | 'key' | 'mouse';
     refs?: boolean;
     props: CollapseProps;
+    providerSize?: ComponentSize;
     semantic?: 'object' | 'function' | 'undefined';
     provider?: 'object' | 'function' | 'icon';
     childProvider?: 'inherit' | 'empty';
@@ -142,7 +143,7 @@
 {#snippet localIcon(info: CollapseExpandIconInfo)}{@render icon(rememberIcon(info), 'Local')}{/snippet}
 {#snippet contextIcon(info: CollapseExpandIconInfo)}{@render icon(info, 'Context')}{/snippet}
 
-<ConfigProvider theme={sourceTheme} direction={sample.rtl ? 'rtl' : 'ltr'}
+<ConfigProvider componentSize={sample.providerSize} theme={sourceTheme} direction={sample.rtl ? 'rtl' : 'ltr'}
   collapse={sample.provider ? providerConfig : undefined}>
   <ConfigProvider collapse={sample.childProvider === 'empty' ? {} : undefined}>
     <div {...frameAttributes} data-collapse-source-frame style="width:600px;max-width:100%">

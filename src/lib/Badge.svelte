@@ -128,7 +128,7 @@
   // Новый API следует source layout; прежние числовые DOM/spacing сохраняются.
   let sourceCount = $derived(typeof count === 'string' || typeof count === 'boolean'
     || Boolean(customCount || config.badge || classNames || styles || rootClassName)
-    || color !== undefined && !isPreset || sourceOffset || size === 'default'
+    || color !== undefined && !isPreset || sourceOffset
     || typeof text === 'number' || typeof text === 'boolean' || text === null
     || prefixCls !== undefined || scrollNumberPrefixCls !== undefined);
   let descriptionId = $derived(

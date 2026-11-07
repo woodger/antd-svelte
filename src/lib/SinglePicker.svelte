@@ -168,7 +168,7 @@
   let actualVariant = $derived(time ? timeVariant.variant : dateVariant.variant);
   let semantic = $derived(time ? timePickerSemantic(time, config.timePicker, {
     variant: actualVariant,
-    size: resolvedSize === 'medium' ? 'middle' : resolvedSize,
+    size: resolvedSize,
     disabled: blocked
   }) : undefined);
   let timeAllowClear = $derived(time?.allowClear ?? config.timePicker?.allowClear ?? true);

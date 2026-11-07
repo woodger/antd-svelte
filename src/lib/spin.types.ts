@@ -1,7 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { HTMLAttributes } from 'svelte/elements';
 
-export type SpinSize = 'small' | 'medium' | 'middle' | 'large' | 'default';
+export type SpinSize = 'small' | 'medium' | 'large';
 export type SpinContent = string | number | Snippet | null | boolean;
 export type SpinSemanticSlots = Partial<Record<
   'root' | 'section' | 'indicator' | 'description' | 'container' | 'tip' | 'mask', string
@@ -30,7 +30,7 @@ export interface SpinProps extends Omit<
   spinning?: boolean;
   /** @defaultValue 0 */
   delay?: number;
-  /** middle/default сохраняют обычный размер; default — deprecated alias. */
+  /** Medium сохраняет обычный размер. */
   size?: SpinSize;
   description?: SpinContent;
   /** @deprecated Используйте description. */

@@ -78,7 +78,7 @@ describe('Cascader SSR', () => {
     } }).body;
 
     expect(body).toContain('Custom root');
-    expect(body).toContain('size-middle');
+    expect(body).toContain('size-medium');
     expect(body).toContain('color:red;color:green');
     expect(body).toContain('padding:1px;padding:2px');
     expect(body).toContain('color:red;color:blue');
@@ -122,7 +122,7 @@ describe('Cascader SSR', () => {
     expect(seen[0].placeholder).toBe('Raw placeholder');
     expect(seen[0].multiple).toBeUndefined();
     expect(seen[0].disabled).toBe(false);
-    expect(seen[0].size).toBe('middle');
+    expect(seen[0].size).toBe('medium');
     expect(seen[0].variant).toBe('outlined');
   });
 });

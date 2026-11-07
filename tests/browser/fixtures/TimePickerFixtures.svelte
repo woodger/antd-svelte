@@ -22,8 +22,8 @@
   let preview = $state(true);
   let scroll = $state(false);
   let format = $state('default');
-  let localSize = $state<'small' | 'middle' | 'large' | 'inherit'>('inherit');
-  let parentSize = $state<'small' | 'middle' | 'large'>('middle');
+  let localSize = $state<'small' | 'medium' | 'large' | 'inherit'>('inherit');
+  let parentSize = $state<'small' | 'medium' | 'large'>('medium');
   let variant = $state<'outlined' | 'filled' | 'borderless' | 'underlined' | 'inherit'>('inherit');
   let dark = $state(false);
   let compact = $state(false);
@@ -116,10 +116,10 @@
     </select></label>
     <label>Time size<select aria-label="Time size" bind:value={localSize}>
       <option value="inherit">Inherit time size</option><option value="small">Small time size</option>
-      <option value="middle">Middle time size</option><option value="large">Large time size</option>
+      <option value="medium">Middle time size</option><option value="large">Large time size</option>
     </select></label>
     <label>Time parent size<select aria-label="Time parent size" bind:value={parentSize}>
-      <option value="small">Small parent time size</option><option value="middle">Middle parent time size</option>
+      <option value="small">Small parent time size</option><option value="medium">Middle parent time size</option>
       <option value="large">Large parent time size</option>
     </select></label>
     <label>Time variant<select aria-label="Time variant" bind:value={variant}>

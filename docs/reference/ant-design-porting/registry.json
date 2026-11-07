@@ -1024,7 +1024,7 @@
             "tools/ant-design-css-recipes.json",
             "tests/browser/flex.spec.ts"
           ],
-          "note": "Small/medium/middle/large; числовые интервалы в px; нулевые значения сохраняются. Числовой/CSS gap и flex имеют приоритет над style; preset gap задаёт класс, который уступает inline style."
+          "note": "Small/medium/large; числовые интервалы в px; нулевые значения сохраняются. Числовой/CSS gap и flex имеют приоритет над style; preset gap задаёт класс, который уступает inline style."
         },
         {
           "id": "native-root",
@@ -1091,7 +1091,7 @@
             "tests/package/FlexSourceTypes.svelte",
             "tests/package/flex-source.ssr.test.ts"
           ],
-          "note": "Локальный BEM prefix меняет все 32 исходных root rules, включая empty/RTL/wrap/align/justify/preset gaps; variables и shared marker сохраняются, selectors ограничены собственным data root. Undefined и пустой prefix дают ant-flex. ConfigProvider.flex поддерживает vertical/class/style; undefined наследует record, явный объект, включая {}, заменяет его целиком. Приоритет направления: orientation → local vertical → provider vertical. Provider style идёт перед local style, затем flex/custom gap; preset gap уступает inline style. SSR CSS, scope isolation и живое снятие prefix проверены. 36 официальных UMD-сценариев сверяют классы, атрибуты, computed styles и direct-child geometry, custom roots, nested replacement, нулевые/CSS gaps, aliases/algorithms, RTL и narrow wrap. Общий ConfigProvider prefix остаётся отдельным пробелом."
+          "note": "Локальный BEM prefix меняет все 32 исходных root rules, включая empty/RTL/wrap/align/justify/preset gaps; variables и shared marker сохраняются, selectors ограничены собственным data root. Undefined и пустой prefix дают ant-flex. ConfigProvider.flex поддерживает vertical/class/style; undefined наследует record, явный объект, включая {}, заменяет его целиком. Приоритет направления: orientation → local vertical → provider vertical. Provider style идёт перед local style, затем flex/custom gap; preset gap уступает inline style. SSR CSS, scope isolation и живое снятие prefix проверены. 33 официальных UMD-сценариев сверяют классы, атрибуты, computed styles и direct-child geometry, custom roots, nested replacement, нулевые/CSS gaps, aliases/algorithms, RTL и narrow wrap. Общий ConfigProvider prefix остаётся отдельным пробелом."
         },
         {
           "id": "component-aliases",
@@ -1716,7 +1716,7 @@
             "tests/browser/space-theme.spec.ts",
             "tests/browser/fixtures/ant-design-space-theme-reference.json"
           ],
-          "note": "Ant Design 6.6.8: собственный ComponentToken пуст; aliases и component algorithms задают CSS scope обычного Space. Preset small/middle/medium/large читают paddingXS/padding/paddingLG без font reset; numeric gap, semantic/plain styles и ручные CSS variables сохраняют приоритет. Dark/compact, zero/undefined, cssVar key/prefix и independent nested/reset/sibling scopes сверены с официальным UMD. Compact не читает ConfigProvider.space и не применяет свой source cssVar class; его layout/typography/config isolation сверяются без alias probes, native DOM provider inheritance не меняется. Addon сохраняет ранее перенесённый отдельный scope."
+          "note": "Ant Design 6.6.8: собственный ComponentToken пуст; aliases и component algorithms задают CSS scope обычного Space. Preset small/medium/large читают paddingXS/padding/paddingLG без font reset; numeric gap, semantic/plain styles и ручные CSS variables сохраняют приоритет. Dark/compact, zero/undefined, cssVar key/prefix и independent nested/reset/sibling scopes сверены с официальным UMD. Compact не читает ConfigProvider.space и не применяет свой source cssVar class; его layout/typography/config isolation сверяются без alias probes, native DOM provider inheritance не меняется. Addon сохраняет ранее перенесённый отдельный scope."
         },
         {
           "id": "component-config",
@@ -3384,7 +3384,7 @@
             "tests/browser/tabs-compat.spec.ts",
             "tests/browser/fixtures/TabsLayoutFixtures.svelte"
           ],
-          "note": "Medium даёт исходный средний размер без small/large класса и локально перекрывает ConfigProvider.componentSize; существующий middle сохраняется. Deprecated tabPosition принимает top/right/bottom/left, физические left/right не переотражаются в RTL; tabPlacement ?? tabPosition ?? top задаёт приоритет. Согласованный native mobile fallback до 575px распространяется и на физические вертикальные позиции. При смене props сохраняются keyed panes, drafts, selection и focus; callbacks и native manual keyboard не меняются."
+          "note": "Medium даёт исходный средний размер без small/large класса и локально перекрывает ConfigProvider.componentSize; Deprecated tabPosition принимает top/right/bottom/left, физические left/right не переотражаются в RTL; tabPlacement ?? tabPosition ?? top задаёт приоритет. Согласованный native mobile fallback до 575px распространяется и на физические вертикальные позиции. При смене props сохраняются keyed panes, drafts, selection и focus; callbacks и native manual keyboard не меняются."
         },
         {
           "id": "indicator",
@@ -6886,7 +6886,7 @@
             "tests/package/switch-features.ssr.test.ts",
             "tests/browser/switch-features.spec.ts"
           ],
-          "note": "ConfigProvider.switch наследуется, classNames/styles принимают objects/functions от props с resolved size/disabled. Root style priority config.styles.root -> config.style -> styles.root -> style; content на обеих подписях, indicator на handle. String/number/snippets сохраняют zero. Medium/middle/default — ordinary, small — малый размер; inherited large остаётся ordinary. PrefixCls/rootClassName, текущие темы/RTL/mobile/reduced motion сохранены."
+          "note": "ConfigProvider.switch наследуется, classNames/styles принимают objects/functions от props с resolved size/disabled. Root style priority config.styles.root -> config.style -> styles.root -> style; content на обеих подписях, indicator на handle. String/number/snippets сохраняют zero. Medium — ordinary, small — малый размер; inherited large остаётся ordinary. PrefixCls/rootClassName, текущие темы/RTL/mobile/reduced motion сохранены."
         },
         {
           "id": "refs-lifecycle",
@@ -8787,7 +8787,7 @@
             "tests/browser/badge.spec.ts",
             "tests/browser/badge-count.spec.ts"
           ],
-          "note": "Сохранены конечный numeric count, нормализация overflow/offset, числовой BadgeContext.count, root class/style, доступные описания и прежний standalone/non-status text layout числового режима без нового API. Эти соглашения отличаются от React. Строки/Snippet не расширяют тип существующего BadgeContext.count. Непрозрачный Snippet не клонируется автоматически: caller получает root attrs и должен применить их сам. ReactNode arrays/portals не анализируются. ConfigProvider.badge, semantic props, rootClassName и custom CSS colors, новые scalar text/строковый offset/size=\"default\" включают source layout. Local style остаётся на корне и в custom count context; обычный indicator настраивается через styles.indicator."
+          "note": "Сохранены конечный numeric count, нормализация overflow/offset, числовой BadgeContext.count, root class/style, доступные описания и прежний standalone/non-status text layout числового режима без нового API. Эти соглашения отличаются от React. Строки/Snippet не расширяют тип существующего BadgeContext.count. Непрозрачный Snippet не клонируется автоматически: caller получает root attrs и должен применить их сам. ReactNode arrays/portals не анализируются. ConfigProvider.badge, semantic props, rootClassName и custom CSS colors, новые scalar text/строковый offset включают source layout. Local style остаётся на корне и в custom count context; обычный indicator настраивается через styles.indicator."
         },
         {
           "id": "advanced-api",
@@ -8909,7 +8909,7 @@
             "tests/browser/badge-values.spec.ts",
             "tests/package/badge-values.ssr.test.ts"
           ],
-          "note": "Text принимает string/number/boolean/null/Snippet. Число 0 участвует в общем zero и showZero; true считается присутствующим, но не выводит подпись, false/null отсутствуют. Numeric text не становится count или BadgeContext.count; сохранены source truthiness для NaN/Infinity. String X разбирается parseFloat, Y сохраняет CSS units без автоматического px; numeric nonfinite по прежнему native контракту заменяется на 0. Raw offset у обычного indicator/status root использует отдельные DOM properties, сохраняет прежнюю координату при невалидном обновлении и не интерпретирует value как дополнительные declarations. Custom count получает прежнюю CSS-строку контекста. Deprecated size=\"default\" имеет геометрию medium и остаётся default в semantic callback; Svelte не выводит deprecation warning. Source layout включается для нового API, прежний numeric layout сохраняется. 58 UMD-эталонов и обратимые обновления фиксируют состояния/count/text/геометрию/styles/callbacks/SSR, CSS units, malformed strings, RTL и custom count."
+          "note": "Text принимает string/number/boolean/null/Snippet. Число 0 участвует в общем zero и showZero; true считается присутствующим, но не выводит подпись, false/null отсутствуют. Numeric text не становится count или BadgeContext.count; сохранены source truthiness для NaN/Infinity. String X разбирается parseFloat, Y сохраняет CSS units без автоматического px; numeric nonfinite по прежнему native контракту заменяется на 0. Raw offset у обычного indicator/status root использует отдельные DOM properties, сохраняет прежнюю координату при невалидном обновлении и не интерпретирует value как дополнительные declarations. Custom count получает прежнюю CSS-строку контекста. Source layout включается для нового API, прежний numeric layout сохраняется. 56 UMD-эталонов и обратимые обновления фиксируют состояния/count/text/геометрию/styles/callbacks/SSR, CSS units, malformed strings, RTL и custom count."
         }
       ]
     },
@@ -9272,7 +9272,7 @@
             "tests/package/card-config.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Уже опубликованные Svelte callbacks Card передают loading/hoverable=false и tabProps={} при отсутствии props. Ant Design 6.6.8/984592267de88fbf9cdaecc96a56629e721c709d mergedProps сохраняет отсутствие этих трёх props: raw UMD observation содержит own=false/type=undefined. Native контракт сохранён при добавлении provider callbacks; оба слоя используют один info. CSS matrix явно задаёт flags и componentSize=middle; raw defaultPropsObservation хранится отдельно и не подменяется. Это отличие native API, а не установленная ошибка upstream; пересмотр defaults требует отдельного решения о совместимости."
+          "note": "Уже опубликованные Svelte callbacks Card передают loading/hoverable=false и tabProps={} при отсутствии props. Ant Design 6.6.8/984592267de88fbf9cdaecc96a56629e721c709d mergedProps сохраняет отсутствие этих трёх props: raw UMD observation содержит own=false/type=undefined. Native контракт сохранён при добавлении provider callbacks; оба слоя используют один info. CSS matrix явно задаёт flags и componentSize=medium; raw defaultPropsObservation хранится отдельно и не подменяется. Это отличие native API, а не установленная ошибка upstream; пересмотр defaults требует отдельного решения о совместимости."
         }
       ]
     },
@@ -9540,7 +9540,7 @@
             "tests/browser/fixtures/ant-design-collapse-reference.json",
             "tools/ant-design-css-recipes.json"
           ],
-          "note": "Root/header/title/body/icon object/function slots с resolved size/bordered/placement; root context slots→context style→local slots→local style, item overrides last. Header относится к native button, body к содержимому. Root/item data/ARIA, item id/class/style и rootClassName; nativeElement/ref — DOM root, cleanup при unmount. Header/content/borderless padding/Bg, aliases/algorithm, zero, cssVar prefix/key, dark/compact и 49 CSS rules. 92 UMD-сценария, live config/theme/prefix, focus/selection/refs и callback/lifecycle traces."
+          "note": "Root/header/title/body/icon object/function slots с resolved size/bordered/placement; root context slots→context style→local slots→local style, item overrides last. Header относится к native button, body к содержимому. Root/item data/ARIA, item id/class/style и rootClassName; nativeElement/ref — DOM root, cleanup при unmount. Header/content/borderless padding/Bg, aliases/algorithm, zero, cssVar prefix/key, dark/compact и 49 CSS rules. 81 UMD-сценарий, live config/theme/prefix, focus/selection/refs и callback/lifecycle traces."
         },
         {
           "id": "native-boundaries",
@@ -9678,7 +9678,7 @@
             "src/lib/descriptions.ssr.test.ts",
             "tests/browser/descriptions.spec.ts"
           ],
-          "note": "Без явного componentSize размер large; middle остаётся локальным alias medium. Label/content styles на ячейках bordered, item-level приоритет сохранён; вложенные таблицы изолированы."
+          "note": "Без явного componentSize размер large; локальный medium задаёт средний размер. Label/content styles на ячейках bordered, item-level приоритет сохранён; вложенные таблицы изолированы."
         },
         {
           "id": "component-theme-tokens",
@@ -9700,7 +9700,7 @@
             "tests/package/descriptions-theme.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Фабрика и root theme hook следуют 6.6.8: десять component tokens, глобальные/component alias tokens и algorithms, нулевые и undefined значения, cssVar.prefix. Bordered использует labelBg и общий colorTextSecondary; size/bordered padding сохраняет source priority над itemPaddingBottom/itemPaddingEnd. Horizontal/vertical, normal/small/middle, responsive column/span/filled, RTL, nested/reset/sibling providers. Реактивная смена темы сохраняет DOM ячеек, draft/focus/selection; semantic/user/item styles приоритетнее переменных темы. SSR не создаёт DOM/media subscriptions/timers."
+          "note": "Фабрика и root theme hook следуют 6.6.8: десять component tokens, глобальные/component alias tokens и algorithms, нулевые и undefined значения, cssVar.prefix. Bordered использует labelBg и общий colorTextSecondary; size/bordered padding сохраняет source priority над itemPaddingBottom/itemPaddingEnd. Horizontal/vertical, large/small/medium, responsive column/span/filled, RTL, nested/reset/sibling providers. Реактивная смена темы сохраняет DOM ячеек, draft/focus/selection; semantic/user/item styles приоритетнее переменных темы. SSR не создаёт DOM/media subscriptions/timers."
         },
         {
           "id": "global-configuration",
@@ -11490,7 +11490,7 @@
             "tests/browser/fixtures/ant-design-table-root-style-observation.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "37 defaults, aliases/algorithms, custom cssVar prefix, nested/reset contexts; cells, sort/hover, selection, expanded content и filter colors. Updates сохраняют draft/focus/scroll и controls; local style priority и legacy widths сохранены. Source duplicate registration сбрасывает root variable 11px в 7px; raw observation сохранено, native style остаётся 11px. Summary, tree indentation, virtual и отдельная sticky scrollbar отсутствуют; declarations не заявляют этот API. Native size по-прежнему наследует middle; Source benchmark явно задаёт middle."
+          "note": "37 defaults, aliases/algorithms, custom cssVar prefix, nested/reset contexts; cells, sort/hover, selection, expanded content и filter colors. Updates сохраняют draft/focus/scroll и controls; local style priority и legacy widths сохранены. Source duplicate registration сбрасывает root variable 11px в 7px; raw observation сохранено, native style остаётся 11px. Summary, tree indentation, virtual и отдельная sticky scrollbar отсутствуют; declarations не заявляют этот API. Native наследует текущий medium; Source benchmark сохраняет локальный middle как метку исходного замера. Новые замеры подтверждают совпадение локальной геометрии."
         },
         {
           "id": "title-footer",
@@ -14219,7 +14219,7 @@
             "src/lib/progress-line-reference.test.ts",
             "tests/browser/progress-line.spec.ts"
           ],
-          "note": "Количество и rounding по source steps*percent/100, per-item dimensions, small width 2/default 14, strokeWidth height, colors per index и rail fallback. Object steps использует count, gap в line не меняет интервалы. Gradient object в steps игнорируется. Preset middle/default и локальный prefix поддержаны; широкие steps следуют source layout."
+          "note": "Количество и rounding по source steps*percent/100, per-item dimensions, small width 2/default 14, strokeWidth height, colors per index и rail fallback. Object steps использует count, gap в line не меняет интервалы. Gradient object в steps игнорируется. Preset medium и локальный prefix поддержаны; широкие steps следуют source layout."
         },
         {
           "id": "component-config",
@@ -14259,7 +14259,7 @@
             "tests/package/progress-circle.ssr.test.ts",
             "tests/browser/fixtures/ant-design-progress-circle-reference.json"
           ],
-          "note": "81 UMD-сценарий в standards mode и rapid-update trace: circle/dashboard, success paint order, logical/physical gaps с RTL, width/size aliases, round cap correction и source step spacing. Circular rounding игнорируется; gradient использует insertion order процентных stops, masks/foreignObject/conic background и butt cap. SVG styles пишутся через общий declaration writer с приоритетом semantic slots. Сохранены source особенности: default inactive steps наследуют основной stroke без railColor, gradient steps ссылаются на отсутствующее definition, gap у circle без placement не применяет rotation. Tiny Tooltip ленивый, сохраняет содержимое после закрытия и не добавляет Tab stop; используется native Svelte wrapper. Source outlined status icons, уникальные SSR masks и cleanup refs/popup проверены."
+          "note": "79 UMD-сценарий в standards mode и rapid-update trace: circle/dashboard, success paint order, logical/physical gaps с RTL, width/size aliases, round cap correction и source step spacing. Circular rounding игнорируется; gradient использует insertion order процентных stops, masks/foreignObject/conic background и butt cap. SVG styles пишутся через общий declaration writer с приоритетом semantic slots. Сохранены source особенности: default inactive steps наследуют основной stroke без railColor, gradient steps ссылаются на отсутствующее definition, gap у circle без placement не применяет rotation. Tiny Tooltip ленивый, сохраняет содержимое после закрытия и не добавляет Tab stop; используется native Svelte wrapper. Source outlined status icons, уникальные SSR masks и cleanup refs/popup проверены."
         },
         {
           "id": "global-prefix-warnings",
@@ -14495,7 +14495,7 @@
             "tests/browser/skeleton-element.spec.ts",
             "tests/package/skeleton-element.ssr.test.ts"
           ],
-          "note": "Skeleton.Avatar/Button/Input/Image/Node и одинаковые named Svelte exports. Исходные Element/Node div/span/SVG, size context с локальным приоритетом и 0, aliases medium/middle/default, shapes/block, active и object root/content semantic styles. Style относится к content и идёт после styles.content; styles.root отдельный. Node поддерживает исходный internalClassName, принимает Svelte snippet и сохраняет его native/local state при theme/prefix changes. Primitives не создают controls/live status и поддерживают native reduced motion."
+          "note": "Skeleton.Avatar/Button/Input/Image/Node и одинаковые named Svelte exports. Исходные Element/Node div/span/SVG, size context с локальным приоритетом и 0, текущий medium, shapes/block, active и object root/content semantic styles. Style относится к content и идёт после styles.content; styles.root отдельный. Node поддерживает исходный internalClassName, принимает Svelte snippet и сохраняет его native/local state при theme/prefix changes. Primitives не создают controls/live status и поддерживают native reduced motion."
         },
         {
           "id": "component-theme-prefix",
@@ -14508,7 +14508,7 @@
             "src/lib/vendor/skeleton.css",
             "tests/browser/fixtures/ant-design-skeleton-element-reference.json"
           ],
-          "note": "Все восемь defaults, deprecated color/colorGradientEnd mapping, современные overrides, component aliases/algorithm, dark/compact, нули и variable prefix/key/hash. Inline variables применяются к основному Skeleton и primitives до user styles. 48 исходных CSS rules/один keyframe, CSS prefix template и marker collision. 116 source UMD-сценариев в standards mode; сравниваемая inherited typography/color задаётся исходными global design tokens."
+          "note": "Все восемь defaults, deprecated color/colorGradientEnd mapping, современные overrides, component aliases/algorithm, dark/compact, нули и variable prefix/key/hash. Inline variables применяются к основному Skeleton и primitives до user styles. 48 исходных CSS rules/один keyframe, CSS prefix template и marker collision. 110 source UMD-сценариев в standards mode; сравниваемая inherited typography/color задаётся исходными global design tokens."
         },
         {
           "id": "main-source-api",
@@ -14589,7 +14589,7 @@
             "src/lib/spin.ssr.test.ts",
             "tests/browser/spin.spec.ts"
           ],
-          "note": "Standalone/children, default true, finite normalized delay и restart/cancel; размеры small/medium/middle/large/default, source description/tip и scalar children, locale/RTL/native palettes. SSR не создаёт таймеров. Native delay округляет/ограничивает положительное число, показывает delay=0 синхронно и заново откладывает уже видимый индикатор при смене delay; React debounce 5.0.2 сохраняет видимый статус при смене положительной delay. Этот ранее согласованный контракт сохранён и отделён от Source-покрытия. Loading props List с delay не требуют ref binding и сохраняют таймер при переходе из inactive state."
+          "note": "Standalone/children, default true, finite normalized delay и restart/cancel; размеры small/medium/large, source description/tip и scalar children, locale/RTL/native palettes. SSR не создаёт таймеров. Native delay округляет/ограничивает положительное число, показывает delay=0 синхронно и заново откладывает уже видимый индикатор при смене delay; React debounce 5.0.2 сохраняет видимый статус при смене положительной delay. Этот ранее согласованный контракт сохранён и отделён от Source-покрытия. Loading props List с delay не требуют ref binding и сохраняют таймер при переходе из inactive state."
         },
         {
           "id": "children-focus",
@@ -15376,7 +15376,8 @@
         "tests/browser/fixtures/ant-design-breadcrumb-config-reference.json",
         "tests/browser/breadcrumb-config-metrics.ts",
         "tests/browser/breadcrumb-config.spec.ts",
-        "tests/package/breadcrumb-config.ssr.test.ts"
+        "tests/package/breadcrumb-config.ssr.test.ts",
+        "docs/reference/current-size-observation.md"
       ],
       "features": [
         {
@@ -15456,7 +15457,7 @@
             "tests/package/compact-theme.ssr.test.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Закреплённые default/compact size maps, локальное разрешение aliases во вложенных provider, explicit compact=false и inline token override. Native compact fontSize/lineHeight/fontHeight/controlHeight согласованы с compactAlgorithm; Button/Input/TextArea/InputNumber получают только font/padding metrics без source colors/hash/scope. Исходный small Input/Select/InputNumber минимум 22px, Button 21px; middle 28px и large 35px. Полный аудит остальных compact consumers продолжается."
+          "note": "Закреплённые default/compact size maps, локальное разрешение aliases во вложенных provider, explicit compact=false и inline token override. Native compact fontSize/lineHeight/fontHeight/controlHeight согласованы с compactAlgorithm; Button/Input/TextArea/InputNumber получают только font/padding metrics без source colors/hash/scope. Исходный small Input/Select/InputNumber минимум 22px, Button 21px; medium 28px и large 35px. Полный аудит остальных compact consumers продолжается."
         },
         {
           "id": "button-config",
@@ -16251,6 +16252,19 @@
             "readme.md"
           ],
           "note": "Source useMergeSemantic: class/style и object/function classNames/styles, whole-record inheritance/replacement, включая {}. Root слои context semantic, context plain, local semantic, local plain после component variables. Separator/dropdownIcon используют local → component config → исходный default, null/undefined переходят к следующему уровню, false/empty скрывают separator/icon, числовой 0 остаётся видимым. Callbacks читают resolved separator и прежний native params={} при отсутствующем prop; raw Source params own=false/type=undefined сохранён отдельно. Config принимает те же semantic callbacks, что local Props; конкретный params/itemRender сохраняет тип. Raw UMD фиксирует semantic classes/tags/computed CSS, root/item/separator text, hrefs и custom node markers для object/function priorities, nested empty/replaced, null/false/0, explicit separators, variables, themes/RTL/algorithm. Существующая native Dropdown/link обёртка сохранена и не выдаётся за идентичную Source структуру; Raw Source textContent остаётся без изменений; сравниваются hrefs и отдельные trigger/separator fragments с trim boundary whitespace, без сохранённого скрытого native меню. Обновления config/items сохраняют keyed DOM, focus, native navigation/callbacks и открытое меню. PrefixCls и полный Menu API не включены."
+        },
+        {
+          "id": "current-size-names",
+          "title": "Текущие имена размеров без deprecated middle/default",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/types.ts",
+            "src/lib/config-context.ts",
+            "docs/reference/current-size-observation.md",
+            "tools/fixtures/ant-design-current-size-observation.json"
+          ],
+          "note": "ComponentSize и обычный fallback medium; наследование provider/Compact и локальный приоритет сохранены. Raw UMD-замеры различают CSS и semantic имена: у Table context middle/medium и Descriptions local default/medium есть измеренные отличия, они не нормализуются в source evidence. Старые API-размеры исключены; current Grid alignment и Skeleton shape не затронуты."
         }
       ]
     },

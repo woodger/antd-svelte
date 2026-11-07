@@ -80,7 +80,7 @@
     <option>inherit</option><option>small</option><option>medium</option><option>large</option>
   </select></label>
   <label>Context OTP size<select bind:value={contextSize}>
-    <option>inherit</option><option>small</option><option>middle</option><option>large</option>
+    <option>inherit</option><option>small</option><option>medium</option><option>large</option>
   </select></label>
   <label>OTP variant<select bind:value={variant}>
     <option>inherit</option><option>outlined</option><option>filled</option>

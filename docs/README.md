@@ -7,6 +7,7 @@
 - [Сводка покрытия](reference/ant-design-porting/status.md).
 - [Статический расчёт design tokens](reference/design-tokens.md).
 - [ConfigProvider и реактивный контекст темы](reference/theme-context.md).
+- [Текущие размеры и raw замеры Ant Design](reference/current-size-observation.md).
 - [Варианты оформления ConfigProvider и Form](reference/control-variants.md).
 - [Пустые состояния ConfigProvider.renderEmpty](reference/render-empty.md).
 - [Wave: настройки, targets и lifecycle](reference/wave.md).

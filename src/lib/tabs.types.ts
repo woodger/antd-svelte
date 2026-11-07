@@ -210,7 +210,7 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   tabBarGutter?: number;
   /** CSS-строка для панели заголовков; style по-прежнему относится к корню Tabs. */
   tabBarStyle?: string;
-  /** Medium соответствует middle; при отсутствии используется ConfigProvider.componentSize. */
+  /** При отсутствии используется ConfigProvider.componentSize. */
   size?: ComponentSize | 'medium';
   /** @defaultValue false */
   destroyOnHidden?: boolean;

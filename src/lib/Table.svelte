@@ -392,7 +392,7 @@
   {#if loading}<div class="loading-state" role="status"><Spin size="small" aria-hidden />{strings.loadingText}</div>{/if}
   <div class={[
       'ant-table',
-      `ant-table-${resolvedSize === 'middle' ? 'medium' : resolvedSize}`,
+      `ant-table-${resolvedSize}`,
       bordered && 'ant-table-bordered',
       showHeader === false && !title && 'ant-table-no-header',
       !visibleRows.length && 'ant-table-empty'

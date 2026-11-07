@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { referenceSizeLabel } from './reference-size';
   import { ConfigProvider, TreeSelect, type ThemeConfig, type TreeSelectValue } from 'antd-svelte';
   import { treeSelectThemePresets } from './tree-select-theme-presets';
 
@@ -20,7 +21,7 @@
   let openings = $state<boolean[]>([]);
   let nativeRoot = $state<HTMLDivElement>();
   let editor = $state<HTMLInputElement>();
-  const sizes = ['middle', 'small', 'large'] as const;
+  const sizes = ['medium', 'small', 'large'] as const;
   const treeData = [{ value: 'p', title: 'Parent', children: [
     { value: 'a', title: 'Alpha' }, { value: 'b', title: 'Beta' },
     { value: 'd', title: 'Disabled', disabled: true }
@@ -58,12 +59,12 @@
       <form id="themed-tree-select-form">
         <div class="samples" style={parentAliases ? '--ant-font-size:30px;--ant-color-text:red' : undefined}>
           {#each sizes as size}
-            <TreeSelect {size} {treeData} defaultValue="a" class={`tree-token-single-${size}`}
+            <TreeSelect {size} {treeData} defaultValue="a" class={`tree-token-single-${referenceSizeLabel(size)}`}
               aria-label={`Themed single tree ${size}`} style="width:240px" />
           {/each}
           {#each sizes as size}
             <TreeSelect {size} {treeData} defaultValue={['a']} multiple
-              class={`tree-token-multiple-${size}`} name={size === 'middle' ? 'teams' : undefined}
+              class={`tree-token-multiple-${referenceSizeLabel(size)}`} name={size === 'medium' ? 'teams' : undefined}
               aria-label={`Themed multiple tree ${size}`} style="width:240px" />
           {/each}
           <TreeSelect {treeData} defaultValue={['a']} multiple disabled class="tree-token-disabled"

@@ -448,8 +448,8 @@ test('TimeRangePicker resolves a single semantic layer and supports nested range
   await control(page, 'Compact interval').check();
   await control(page, 'Right to left').check();
 
-  await expect(root).toHaveClass(/context-interval-middle context-range-value/);
-  await expect(root).toHaveClass(/local-interval-middle variant-raw/);
+  await expect(root).toHaveClass(/context-interval-medium context-range-value/);
+  await expect(root).toHaveClass(/local-interval-medium variant-raw/);
   await expect(root).toHaveCSS('outline-offset', '8px');
   await expect(root.locator('.local-interval-prefix')).toHaveText('At');
   await expect(root.locator('.local-interval-suffix')).toHaveText('T');

@@ -25,7 +25,7 @@ export type FlexJustify =
   | 'normal'
   | 'left'
   | 'right';
-export type FlexGap = 'small' | 'medium' | 'middle' | 'large' | string | number;
+export type FlexGap = 'small' | 'medium' | 'large' | string | number;
 
 /**
  * Props пользовательского корня. Class/style/dir и children передаются без обёртки.

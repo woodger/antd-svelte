@@ -342,7 +342,9 @@
     "include": [
       "\\.ant-flex(?![\\w])"
     ],
-    "exclude": [],
+    "exclude": [
+      "\\.ant-flex-gap-middle$"
+    ],
     "replacements": [
       {
         "pattern": "\\.ant-flex(?![-\\w])",
@@ -359,7 +361,9 @@
     "include": [
       "\\.ant-flex(?![\\w])"
     ],
-    "exclude": [],
+    "exclude": [
+      "\\.ant-flex-gap-middle$"
+    ],
     "replacements": [
       {
         "pattern": "\\.ant-flex(?![-\\w])",
@@ -555,7 +559,8 @@
       "^\\.ant-space(?![\\w])"
     ],
     "exclude": [
-      "ant-space-(?:compact|addon)"
+      "ant-space-(?:compact|addon)",
+      "\\.ant-space-gap-(?:row|col)-middle$"
     ],
     "replacements": [
       {

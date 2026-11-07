@@ -3,8 +3,8 @@ import type { ComponentSize } from './types';
 
 export function resolveAvatarSize(size:
   AvatarSize
-  | undefined, context: ComponentSize = 'middle'): AvatarSize {
-  const inherited = context === 'middle' ? 'medium' : context;
+  | undefined, context: ComponentSize = 'medium'): AvatarSize {
+  const inherited = context;
   return typeof size === 'number'
     ? Number.isFinite(size) && size > 0 ? size : inherited
     : size ?? inherited;

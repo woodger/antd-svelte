@@ -25,7 +25,7 @@
   let drawerOpen = $state(false);
   let modalBusy = $state(false);
   let drawerBusy = $state(false);
-  let providerSize = $state<'small' | 'middle' | 'large'>('middle');
+  let providerSize = $state<'small' | 'medium' | 'large'>('medium');
   let avatarConfig = $derived(
     avatar
       ? {
@@ -90,7 +90,7 @@
   <label><input type="checkbox" bind:checked={perRow} /> Per-row Skeleton widths</label>
   <label>Skeleton avatar size<select bind:value={size}><option>auto</option><option>small</option><option>medium</option><option>large</option><option>64</option><option>1000</option></select></label>
   <label>Skeleton avatar shape<select bind:value={shape}><option>auto</option><option>circle</option><option>square</option></select></label>
-  <label>Skeleton provider size<select bind:value={providerSize}><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Skeleton provider size<select bind:value={providerSize}><option>small</option><option>medium</option><option>large</option></select></label>
   <label><input type="checkbox" bind:checked={dark} /> Dark Skeleton theme</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact Skeleton theme</label>
   <label><input type="checkbox" bind:checked={translated} /> Custom Skeleton locale</label>

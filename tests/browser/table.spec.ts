@@ -438,7 +438,7 @@ test(
 
     await expect(cell).toHaveCSS('padding-block-start', '16px');
 
-    await page.getByLabel('Table size', { exact: true }).selectOption('middle');
+    await page.getByLabel('Table size', { exact: true }).selectOption('medium');
     await table.getByRole('checkbox', { name: 'Select Anna', exact: true }).check();
 
     const checked = table.locator('tbody .ant-checkbox-checked');

@@ -51,7 +51,7 @@
     <form aria-label="Table panels form">
       <Table dataSource={mode === 'empty' ? [] : server ? rows.slice(2, 4) : rows} {columns}
         caption="Panel people" mode={server ? 'server' : 'client'} total={server ? 50 : undefined}
-        size={mode === 'large' ? 'large' : mode === 'small' ? 'small' : 'middle'}
+        size={mode === 'large' ? 'large' : mode === 'small' ? 'small' : 'medium'}
         bordered={mode === 'bordered'} {loading}
         pagination={mode === 'all' ? false : { showSizeChanger: false }}
         defaultPageSize={2}

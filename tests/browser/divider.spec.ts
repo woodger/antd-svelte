@@ -98,7 +98,7 @@ test(
     const divider = page.locator('#fixture-divider');
     const title = divider.locator('.ant-divider-inner-text');
 
-    for (const [size, margin] of [['small', '8px'], ['middle', '16px'], ['large', '16px']]) {
+    for (const [size, margin] of [['small', '8px'], ['medium', '16px'], ['large', '16px']]) {
       await page.getByLabel('Divider context size').selectOption(size);
       await expect(divider).toHaveCSS('margin-top', margin);
     }
@@ -142,7 +142,7 @@ test(
 
     for (const [size, margin] of [
       ['small', '8px'],
-      ['middle', '16px'],
+      ['medium', '16px'],
       ['large', '24px'],
       [
         'inherit',

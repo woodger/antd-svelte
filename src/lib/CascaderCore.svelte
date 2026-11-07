@@ -160,7 +160,7 @@
   );
   let resolvedDirection = $derived(direction || config.direction);
   let rtl = $derived(resolvedDirection === 'rtl');
-  let resolvedSize = $derived(size ?? (compact?.size === 'medium' ? 'middle' : compact?.size)
+  let resolvedSize = $derived(size ?? compact?.size
     ?? config.componentSize);
   let resolvedStatus = $derived(status ?? field?.status);
   let resolvedVariant = $derived(variantContext.variant);

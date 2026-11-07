@@ -315,7 +315,7 @@ test('TimePicker combines source semantic layers, themes, RTL and nested config 
   await control(page, 'Right to left').check();
   const root = page.locator('.fixture-time-picker');
 
-  await expect(root).toHaveClass(/context-time-middle context-time-raw local-time-raw/);
+  await expect(root).toHaveClass(/context-time-medium context-time-raw local-time-raw/);
   await expect(root).toHaveClass(/ant-picker-filled/);
   await expect(root).toHaveCSS('outline-offset', '8px');
   await expect(root).toHaveAttribute('dir', 'rtl');
@@ -336,7 +336,7 @@ test('TimePicker combines source semantic layers, themes, RTL and nested config 
   await control(page, 'Replace time picker config').check();
 
   await expect(root).toHaveClass(/nested-time-context/);
-  await expect(root).not.toHaveClass(/context-time-middle/);
+  await expect(root).not.toHaveClass(/context-time-medium/);
   await expect(root).toHaveClass(/ant-picker-outlined/);
 });
 
@@ -412,7 +412,8 @@ test('TimePicker integrates with Form validation, labels and reset without seria
 });
 
 test('TimePicker uses Now without OK and aligns the source millisecond step', async ({ page }) => {
-  await page.clock.pauseAt(new Date('2024-09-15T12:35:00.789Z'));
+  // Now читает фиксированную дату; загрузка страницы не ограничена четырьмя секундами.
+  await page.clock.setFixedTime(new Date('2024-09-15T12:35:00.789Z'));
   await input(page).click();
   await unit(page, 'Сейчас').click();
 

@@ -51,4 +51,4 @@
 <output aria-label="Flex source ref">{nativeElement?.tagName ?? 'none'}</output>
 <output aria-label="Flex source events">{events}</output>
 <output aria-label="Flex source event target">{lastTarget}</output>
-<div data-flex-neighbor><Flex gap="middle"><Input aria-label="Flex sibling" /><span>Neighbor</span></Flex></div>
+<div data-flex-neighbor><Flex gap="medium"><Input aria-label="Flex sibling" /><span>Neighbor</span></Flex></div>

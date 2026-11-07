@@ -15,7 +15,7 @@
 
   let type = $state<TabsType>('line');
   let placement = $state<TabsPlacement>('top');
-  let size = $state<ComponentSize>('middle');
+  let size = $state<ComponentSize>('medium');
   let width = $state(360);
   let rtl = $state(false);
   let dark = $state(false);
@@ -130,7 +130,7 @@
     {#each ['top', 'bottom', 'start', 'end'] as value}<option>{value}</option>{/each}
   </select></label>
   <label>Overflow size <select aria-label="Overflow size" bind:value={size}>
-    {#each ['middle', 'small', 'large'] as value}<option>{value}</option>{/each}
+    {#each ['medium', 'small', 'large'] as value}<option>{value}</option>{/each}
   </select></label>
   <label>Overflow width <input type="number" bind:value={width} /></label>
   <label>Overflow count <input type="number" bind:value={count} /></label>

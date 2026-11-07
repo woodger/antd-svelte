@@ -61,7 +61,7 @@
       : { goButton: quick === 'button' ? true : goLabel },
     align,
     responsive,
-    size: size === 'inherit' ? undefined : size as 'small' | 'middle' | 'large',
+    size: size === 'inherit' ? undefined : size as 'small' | 'medium' | 'large',
     disabled: localDisabled === 'inherit' ? undefined : localDisabled === 'true',
     showSizeChanger: changer === 'auto' ? undefined : changer === 'yes' ? true
       : changer === 'no' ? false : {
@@ -142,11 +142,11 @@
     </select></label>
     <label>Pagination size<select aria-label="Pagination size" bind:value={size}>
       <option value="inherit">Inherit</option><option value="small">Small</option>
-      <option value="middle">Middle</option><option value="large">Large</option>
+      <option value="medium">Middle</option><option value="large">Large</option>
     </select></label>
     <label>Context pagination size<select aria-label="Context pagination size" bind:value={contextSize}>
       <option value="inherit">Inherit</option><option value="small">Small</option>
-      <option value="middle">Middle</option><option value="large">Large</option>
+      <option value="medium">Middle</option><option value="large">Large</option>
     </select></label>
     <label>Size changer<select aria-label="Size changer" bind:value={changer}>
       <option value="auto">Auto</option><option value="yes">Yes</option>
@@ -179,7 +179,7 @@
     <button type="button" onclick={() => log = []}>Clear pager events</button>
   </div>
   <ConfigProvider pagination={context} theme={{ mode: dark ? 'dark' : 'light', compact }}
-    componentSize={contextSize === 'inherit' ? undefined : contextSize as 'small' | 'middle' | 'large'}
+    componentSize={contextSize === 'inherit' ? undefined : contextSize as 'small' | 'medium' | 'large'}
     style="background:var(--ant-color-bg-container);color:var(--ant-color-text)">
     <form onsubmit={event => event.preventDefault()}>
       {#if mounted}

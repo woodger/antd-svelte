@@ -252,7 +252,7 @@ for (const [size, width] of [['small', 14], ['medium', 20], ['large', 32]] as co
     );
 
     await setting(page, 'size', 'inherit');
-    await setting(page, 'provider size', size === 'medium' ? 'middle' : size);
+    await setting(page, 'provider size', size === 'medium' ? 'medium' : size);
 
     await expect(standalone(page).locator('.ant-spin-dot')).toHaveCSS('width', `${width}px`);
   });

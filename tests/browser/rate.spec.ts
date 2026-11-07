@@ -222,7 +222,7 @@ test(
 
     for(const [size, pixels] of [
       ['small', '15px'],
-      ['middle', '20px'],
+      ['medium', '20px'],
       ['medium', '20px'],
       [
         'large',

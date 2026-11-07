@@ -65,7 +65,7 @@
     <div id="table-column-hidden-control" style="width:320px;max-width:100%">
       <form aria-label="Table hidden column form">
         <Table {columns} dataSource={current.name === 'all-hidden-empty' ? [] : rows}
-          size="middle" pagination={false} rowSelection={current.selection}
+          size="medium" pagination={false} rowSelection={current.selection}
           showHeader={current.name !== 'no-header-hidden'}
           scroll={current.name.includes('fixed') ? { x: 600 } : undefined}
           expandable={current.expand ? { expandedRowRender: details, columnTitle: 'Expand' } : undefined}

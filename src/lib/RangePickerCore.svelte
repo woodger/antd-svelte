@@ -245,7 +245,7 @@
   let resolvedVariant = $derived(variantContext.variant);
   let resolvedSeparator = $derived(separator ?? config.rangePicker?.separator);
   let semantic = $derived(time ? timeRangeSemantic(time, config.timePicker, config.rangePicker, {
-    size: resolvedSize === 'medium' ? 'middle' : resolvedSize,
+    size: resolvedSize,
     disabled: disabled ?? field?.disabled ?? form?.disabled ?? config.componentDisabled
   }) : undefined);
   let timeLocale = $derived(time ? timePickerLang(time, lang) : undefined);

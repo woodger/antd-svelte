@@ -58,7 +58,7 @@
   <button onclick={() => { updated = !updated; }}>Update Descriptions configuration</button>
   <button onclick={() => { wide = !wide; }}>Toggle configured Descriptions columns</button>
   <button onclick={() => { small = !small; }}>Toggle configured Descriptions size</button>
-  <ConfigProvider descriptions={context} componentSize="middle"
+  <ConfigProvider descriptions={context} componentSize="medium"
     direction={current.direction === 'rtl' ? 'rtl' : 'ltr'}
     theme={{ cssVar: {}, token: { motion: false }, algorithm: current.theme === 'dark'
       ? theme.darkAlgorithm : current.theme === 'compact' ? theme.compactAlgorithm

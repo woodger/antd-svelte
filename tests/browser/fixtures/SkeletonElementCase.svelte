@@ -16,7 +16,7 @@
       block?: boolean;
       internalClassName?: string;
     };
-    contextSize?: 'small' | 'middle' | 'large';
+    contextSize?: 'small' | 'medium' | 'large';
     rtl?: boolean;
     theme?: string;
     child?: boolean;

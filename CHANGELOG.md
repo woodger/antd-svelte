@@ -9,6 +9,10 @@
 
 ### Removed
 
+- Удалены размеры `middle` и `default` из соответствующих component API;
+  обычный `ComponentSize` и fallback ConfigProvider теперь `medium`.
+  Текущие `Row.align="middle"` и `Skeleton.shape="default"` сохранены.
+
 - Удалены старые date/month CellRender и FullCellRender у Calendar,
   `Carousel.dotPosition`, `Splitter.layout/collapsibleIcon`,
   `Space.direction/split` и `SpaceCompact.direction`. Текущие

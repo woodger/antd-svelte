@@ -119,7 +119,7 @@ test(
   async ({ page }) => {
     const root = page.locator('#fixture-segmented');
 
-    for (const [size, height] of [['small', 24], ['middle', 32], ['large', 40]] as const) {
+    for (const [size, height] of [['small', 24], ['medium', 32], ['large', 40]] as const) {
       await page.getByRole('combobox', { name: 'Segmented size', exact: true }).selectOption(size);
       expect((await root.boundingBox())!.height).toBe(height);
     }
@@ -140,7 +140,7 @@ test(
 
     await page.getByLabel('Dark Segmented theme').check();
     await page.getByLabel('Compact Segmented theme').check();
-    await page.getByRole('combobox', { name: 'Segmented size', exact: true }).selectOption('middle');
+    await page.getByRole('combobox', { name: 'Segmented size', exact: true }).selectOption('medium');
 
     expect((await root.boundingBox())!.height).toBe(28);
     await expect(root).toHaveCSS('background-color', 'rgb(0, 0, 0)');

@@ -18,7 +18,7 @@
   let drawerOpen = $state(false);
   let modalBusy = $state(false);
   let drawerBusy = $state(false);
-  let contextSize = $state<'small' | 'middle' | 'large'>('middle');
+  let contextSize = $state<'small' | 'medium' | 'large'>('medium');
 
   function hotkey(event: KeyboardEvent) {
     if (!event.ctrlKey || !event.altKey) return;
@@ -67,7 +67,7 @@
     value={-1}
   >Invalid</option></select></label>
   <label>Spin size<select bind:value={size}><option>small</option><option>medium</option><option>large</option><option>inherit</option></select></label>
-  <label>Spin provider size<select bind:value={contextSize}><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Spin provider size<select bind:value={contextSize}><option>small</option><option>medium</option><option>large</option></select></label>
   <label>Spin description<input bind:value={description} /></label>
   <label><input type="checkbox" bind:checked={rich} /> Rich Spin description</label>
   <label><input type="checkbox" bind:checked={custom} /> Custom Spin indicator</label>

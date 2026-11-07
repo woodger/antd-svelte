@@ -60,7 +60,7 @@
   <button onclick={() => { updated = !updated; }}>Update Card configuration</button>
   <button onclick={() => { small = !small; }}>Toggle configured Card size</button>
   <button onclick={() => { showTitle = !showTitle; }}>Toggle configured Meta title</button>
-  <ConfigProvider card={contextCard} cardMeta={contextMeta} componentSize="middle"
+  <ConfigProvider card={contextCard} cardMeta={contextMeta} componentSize="medium"
     direction={current.direction === 'rtl' ? 'rtl' : 'ltr'}
     theme={{ cssVar: {}, token: { motion: false }, algorithm: current.theme === 'dark'
       ? theme.darkAlgorithm : current.theme === 'compact' ? theme.compactAlgorithm

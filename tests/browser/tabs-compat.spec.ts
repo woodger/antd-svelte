@@ -73,7 +73,7 @@ test('Tabs prioritizes logical placement and preserves native panes when switchi
     await expect(page.getByLabel('Tabs layout clicks', { exact: true })).toHaveText('[]');
   });
 
-test('Tabs source medium overrides provider size and matches the existing middle size',
+test('Tabs medium overrides provider size and preserves geometry across provider changes',
   async ({ page }) => {
     await page.getByLabel('Tabs provider size', { exact: true }).selectOption('small');
     await expect(root(page)).toHaveClass(/ant-tabs-small/);
@@ -82,11 +82,10 @@ test('Tabs source medium overrides provider size and matches the existing middle
 
     await expect(tab(page, 'Alpha')).toHaveCSS('font-size', '14px');
     await expect(tab(page, 'Alpha')).toHaveCSS('padding-top', '12px');
-    await expect(root(page)).not.toHaveClass(/ant-tabs-(small|large|medium|middle)/);
+    await expect(root(page)).not.toHaveClass(/ant-tabs-(small|large|medium)/);
     const medium = await tab(page, 'Alpha').boundingBox();
-    await page.getByLabel('Tabs layout size', { exact: true }).selectOption('middle');
-    await expect.poll(() => tab(page, 'Alpha').boundingBox()).toEqual(medium);
     await page.getByLabel('Tabs provider size', { exact: true }).selectOption('large');
+    await expect.poll(() => tab(page, 'Alpha').boundingBox()).toEqual(medium);
 
     await expect(tab(page, 'Alpha')).toHaveCSS('font-size', '14px');
     await page.getByLabel('Tabs layout size', { exact: true }).selectOption('');

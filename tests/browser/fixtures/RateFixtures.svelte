@@ -21,7 +21,7 @@
   let formDisabled = $state(false);
   let formOverride = $state(false);
   let size = $state<'inherit' | ComponentSize | 'medium'>('inherit');
-  let providerSize = $state<ComponentSize>('middle');
+  let providerSize = $state<ComponentSize>('medium');
   let dark = $state(false);
   let compact = $state(false);
   let custom = $state(false);
@@ -68,8 +68,8 @@
   <label><input type="checkbox" bind:checked={replace} /> Replace Rate render</label>
   <label><input type="checkbox" bind:checked={autofocus} /> Autofocus Rate</label>
   <label>Rate disabled<select bind:value={disabled}><option>inherit</option><option>true</option><option>false</option></select></label>
-  <label>Rate size<select bind:value={size}><option>inherit</option><option>small</option><option>middle</option><option>medium</option><option>large</option></select></label>
-  <label>Provider Rate size<select bind:value={providerSize}><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Rate size<select bind:value={size}><option>inherit</option><option>small</option><option>medium</option><option>medium</option><option>large</option></select></label>
+  <label>Provider Rate size<select bind:value={providerSize}><option>small</option><option>medium</option><option>large</option></select></label>
   <label>Rate count<select bind:value={count}><option value={0}>0</option><option value={3}>3</option><option
     value={5}
   >5</option></select></label>

@@ -24,7 +24,7 @@
   <label>Divider placement<select bind:value={placement}><option>center</option><option>start</option><option>end</option><option>left</option><option>right</option></select></label>
   <label>Divider variant<select bind:value={variant}><option>solid</option><option>dashed</option><option>dotted</option></select></label>
   <label>Divider size<select bind:value={size}><option>inherit</option><option>small</option><option>medium</option><option>large</option></select></label>
-  <label>Divider context size<select bind:value={contextSize}><option value={undefined}>inherit</option><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Divider context size<select bind:value={contextSize}><option value={undefined}>inherit</option><option>small</option><option>medium</option><option>large</option></select></label>
   <label>Divider text<input bind:value={text} /></label>
   <label><input type="checkbox" bind:checked={rich} /> Rich Divider title</label>
   <label><input type="checkbox" bind:checked={dashed} /> Dashed Divider alias</label>

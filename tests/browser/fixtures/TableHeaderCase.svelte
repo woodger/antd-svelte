@@ -49,7 +49,7 @@
   <div id="table-header-control" style="width:640px;max-width:100%">
     <form aria-label="Table header form">
       <Table dataSource={rows} {columns} showHeader={header} title={hasTitle ? title : undefined}
-        caption="Header people" size="middle" pagination={false}
+        caption="Header people" size="medium" pagination={false}
         bordered={stateful || ['hidden-bordered', 'hidden-title-bordered'].includes(mode)}
         rowSelection={stateful ? { fixed: true,
           getCheckboxProps: record => ({ 'aria-label': `Select ${record.name}` }) } : false}

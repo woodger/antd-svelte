@@ -12,7 +12,7 @@
 
   let sample = $state('default');
   let placement = $state<TabsPlacement>('top');
-  let size = $state<ComponentSize>('middle');
+  let size = $state<ComponentSize>('medium');
   let type = $state<TabsType>('editable-card');
   let rtl = $state(false);
   let dark = $state(false);
@@ -93,7 +93,7 @@
     {#each ['top', 'bottom', 'start', 'end'] as value}<option>{value}</option>{/each}
   </select></label>
   <label>Editable Tabs size <select bind:value={size} aria-label="Editable Tabs size">
-    {#each ['middle', 'small', 'large'] as value}<option>{value}</option>{/each}
+    {#each ['medium', 'small', 'large'] as value}<option>{value}</option>{/each}
   </select></label>
   <label>Editable Tabs type <select bind:value={type} aria-label="Editable Tabs type">
     {#each ['line', 'card', 'editable-card'] as value}<option>{value}</option>{/each}

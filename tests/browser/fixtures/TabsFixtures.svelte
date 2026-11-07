@@ -14,7 +14,7 @@
   let activeKey = $state<string | undefined>();
   let placement = $state<TabsPlacement>('top');
   let type = $state<TabsType>('line');
-  let size = $state<ComponentSize>('middle');
+  let size = $state<ComponentSize>('medium');
   let destroy = $state(false);
   let force = $state(false);
   let betaKeep = $state(false);
@@ -139,7 +139,7 @@
   <label><input type="checkbox" bind:checked={compact} /> Compact Tabs theme</label>
   <label>Tabs placement <select bind:value={placement}><option>top</option><option>bottom</option><option>start</option><option>end</option></select></label>
   <label>Tabs type <select bind:value={type}><option>line</option><option>card</option></select></label>
-  <label>Tabs size <select bind:value={size}><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Tabs size <select bind:value={size}><option>small</option><option>medium</option><option>large</option></select></label>
   <ConfigProvider
     theme={{ mode: dark ? 'dark' : 'light', compact, primary: 'purple' }}
     componentSize={size}

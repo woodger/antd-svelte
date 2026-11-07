@@ -60,7 +60,7 @@ describe('Flex server rendering', () => {
     }
   );
 
-  it.each(['small', 'middle', 'medium', 'large'])(
+  it.each(['small', 'medium', 'large'])(
     'renders preset gap %s through upstream classes',
     gap => {
       const body = render(Flex, { props: { gap, children } }).body;

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { referenceSizeLabel } from './reference-size';
   import { ConfigProvider, Select, type ThemeConfig } from 'antd-svelte';
   import { selectThemePresets } from './select-theme-presets';
 
@@ -17,7 +18,7 @@
   let focusReceiver = $state(true);
   let parentAliases = $state(false);
   let localFilter = $state(false);
-  const sizes = ['middle', 'small', 'large'] as const;
+  const sizes = ['medium', 'small', 'large'] as const;
   const options = [
     { value: 'a', label: 'Alpha' },
     { value: 'b', label: 'Beta' },
@@ -64,15 +65,15 @@
       <form id="themed-select-form">
         <div class="samples" style={parentAliases ? '--ant-font-size:30px;--ant-color-text:#ff0000' : undefined}>
           {#each sizes as size}
-            <div class={`select-token-single-${size}`}>
+            <div class={`select-token-single-${referenceSizeLabel(size)}`}>
               <Select {options} {size} bind:value={single} aria-label={`Themed single ${size}`}
                 onValueChange={() => changes++} />
             </div>
           {/each}
           {#each sizes as size}
-            <div class={`select-token-multiple-${size}`}>
+            <div class={`select-token-multiple-${referenceSizeLabel(size)}`}>
               <Select {options} {size} mode="multiple" bind:value={multiple}
-                aria-label={`Themed multiple ${size}`} name={size === 'middle' ? 'teams' : undefined}
+                aria-label={`Themed multiple ${size}`} name={size === 'medium' ? 'teams' : undefined}
                 onValueChange={() => changes++} />
             </div>
           {/each}

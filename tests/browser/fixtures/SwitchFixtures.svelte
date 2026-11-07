@@ -51,7 +51,7 @@
         name="defaultSetting"
         onCheckedChange={controls.changeDefault}
       />
-      <Switch aria-label="Middle Switch override" size="middle" />
+      <Switch aria-label="Middle Switch override" size="medium" />
       <Switch aria-label="Small Switch override" size="small" />
       <Switch aria-label="Icon Switch">
         {#snippet checkedChildren()}<svg

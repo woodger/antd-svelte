@@ -61,7 +61,6 @@
     <label><input type="checkbox" bind:checked={autoFocus} /> Autofocus source switch</label>
     <label>Source switch size <select bind:value={size} aria-label="Source switch size">
       <option value="medium">Medium</option><option value="small">Small</option>
-      <option value="middle">Middle</option><option value="default">Default</option>
     </select></label>
     <button type="button" onclick={() => { checked = true; }}>Set source switch owner</button>
     <button type="button" onclick={() => { value = !value; }}>Set source switch alias</button>

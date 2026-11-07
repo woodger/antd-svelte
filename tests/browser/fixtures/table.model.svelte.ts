@@ -35,7 +35,7 @@ export function createTableControls() {
   let dark = $state(false);
   let purple = $state(false);
   let compact = $state(false);
-  let size = $state<ComponentSize>('middle');
+  let size = $state<ComponentSize>('medium');
   let events = $state<TableChange<FixturePerson>[]>([]);
   let selectionEvents = $state<{ keys: TableKey[]; ids: number[]; names: string[]; type: string }[]>([]);
   let action = $state('');

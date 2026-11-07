@@ -194,7 +194,7 @@ test(
       .toHaveCSS('color', 'rgb(128, 0, 128)');
     await expect(control.locator('.ant-switch-inner-unchecked')).toHaveCSS('font-weight', '700');
     await expect(page.getByRole('switch', { name: 'Inherited switch config', exact: true }))
-      .toHaveClass(/switch-config-middle-false/);
+      .toHaveClass(/switch-config-medium-false/);
 
     await control.click();
 
@@ -204,11 +204,11 @@ test(
 );
 
 test(
-  'Switch medium, middle and default sizes use the ordinary track while small stays small',
+  'Switch medium size uses the ordinary track while small stays small',
   async ({ page }) => {
     const control = page.getByRole('switch', { name: 'Source switch', exact: true });
 
-    for (const size of ['medium', 'middle', 'default', 'small']) {
+    for (const size of ['medium', 'small']) {
       await page.getByLabel('Source switch size', { exact: true }).selectOption(size);
 
       await expect(control).toHaveCSS('height', size === 'small' ? '16px' : '22px');

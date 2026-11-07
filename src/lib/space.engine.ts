@@ -39,7 +39,7 @@ export function spaceGap(size: SpaceProps['size'] = 'small'): {
   const classes: string[] = [];
   const styles: string[] = [];
   function axis(value: SpaceSize, direction: 'row' | 'col') {
-    if (['small', 'medium', 'middle', 'large'].includes(String(value)))
+    if (['small', 'medium', 'large'].includes(String(value)))
       classes.push(`ant-space-gap-${direction}-${value}`);
     else if (typeof value === 'number' && value && !Number.isNaN(value))
       styles.push(`${direction === 'col' ? 'column' : 'row'}-gap:${value}px`);

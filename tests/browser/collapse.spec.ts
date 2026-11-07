@@ -545,7 +545,7 @@ test(
   async ({ page }) => {
     const heights: number[] = [];
 
-    for (const size of ['small', 'middle', 'large']) {
+    for (const size of ['small', 'medium', 'large']) {
       await setting(page, 'size', size);
       heights.push((await profile(page).boundingBox())!.height);
     }

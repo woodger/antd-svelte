@@ -41,8 +41,8 @@ describe('Switch source package features', () => {
       .toMatch(/ant-switch-inner-unchecked[^>]*>\s*0\s*<\/span>/);
   });
 
-  it('keeps medium, middle and default ordinary while small changes the size', () => {
-    for (const size of ['medium', 'middle', 'default', 'small'] as const) {
+  it('keeps medium ordinary while small changes the size', () => {
+    for (const size of ['medium', 'small'] as const) {
       const body = render(Switch, { props: { size } }).body;
 
       expect(body.includes('ant-switch-small')).toBe(size === 'small');

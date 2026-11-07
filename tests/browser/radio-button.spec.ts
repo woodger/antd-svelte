@@ -76,7 +76,7 @@ test('RadioButton uses source heights and lets local size override the inherited
   await select(page, 'Radio button size').selectOption('large');
 
   await expect(label(page)).toHaveCSS('height', '40px');
-  await select(page, 'Radio button size').selectOption('middle');
+  await select(page, 'Radio button size').selectOption('medium');
 
   await expect(label(page)).toHaveCSS('height', '32px');
   await expect(label(page)).toHaveCSS('padding-inline-start', '15px');

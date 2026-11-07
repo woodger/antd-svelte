@@ -105,7 +105,7 @@
       variant !== 'solid' && `${prefix}-${variant}`,
       plain && `${prefix}-plain`,
       config.direction === 'rtl' && `${prefix}-rtl`,
-      (mergedSize === 'medium' || mergedSize === 'middle') && `${prefix}-md`,
+      mergedSize === 'medium' && `${prefix}-md`,
       mergedSize === 'small' && `${prefix}-sm`,
       !hasChildren && [`${prefix}-rail`, classes.rail],
       className,

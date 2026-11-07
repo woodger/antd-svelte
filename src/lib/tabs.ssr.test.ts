@@ -30,15 +30,12 @@ describe('Tabs server rendering', () => {
     expect(body).toContain('aria-orientation="vertical"');
   });
 
-  it('renders source medium size with the same default classes as native middle', () => {
+  it('renders medium size without small or large classes', () => {
     const medium = render(Tabs, { props: { items, size: 'medium' } }).body;
-    const middle = render(Tabs, { props: { items, size: 'middle' } }).body;
 
-    for (const body of [medium, middle]) {
-      expect(body).not.toMatch(/\bant-tabs-(?:small|large|medium|middle)\b/);
-      expect(body.match(/role="tab"/g)).toHaveLength(3);
-      expect(body).toContain('Alpha content');
-    }
+    expect(medium).not.toMatch(/\bant-tabs-(?:small|large|medium)\b/);
+    expect(medium.match(/role="tab"/g)).toHaveLength(3);
+    expect(medium).toContain('Alpha content');
   });
 
   it(

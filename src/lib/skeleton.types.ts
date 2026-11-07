@@ -1,7 +1,7 @@
 import type { Snippet } from 'svelte';
 
 export type SkeletonWidth = number | string;
-export type SkeletonElementSize = 'small' | 'medium' | 'middle' | 'large' | 'default';
+export type SkeletonElementSize = 'small' | 'medium' | 'large';
 export type SkeletonAvatarSize = SkeletonElementSize | number;
 export interface SkeletonElementSlots {
   root?: string;

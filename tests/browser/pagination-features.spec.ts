@@ -407,7 +407,7 @@ test('Pagination reactive resources reconnect after repeated unmount', async ({ 
   await control(page, 'Mount pager').uncheck();
   await page.setViewportSize({ width: 1280, height: 800 });
   await control(page, 'Mount pager').check();
-  await expect(pager(page)).toHaveClass(/ant-pagination-middle/);
+  await expect(pager(page)).toHaveClass(/ant-pagination-medium/);
 });
 
 test('Pagination responsive size defers to explicit context and local sizes', async ({ page }) => {
@@ -416,8 +416,8 @@ test('Pagination responsive size defers to explicit context and local sizes', as
   await expect(pager(page)).toHaveClass(/ant-pagination-mini/);
   await expect(pager(page).locator('.ant-pagination-item-6')).toHaveCSS('height', '32px');
   await expect(changer(page)).toBeVisible();
-  await control(page, 'Context pagination size').selectOption('middle');
-  await expect(pager(page)).toHaveClass(/ant-pagination-middle/);
+  await control(page, 'Context pagination size').selectOption('medium');
+  await expect(pager(page)).toHaveClass(/ant-pagination-medium/);
   await control(page, 'Pagination size').selectOption('large');
   await expect(pager(page)).toHaveClass(/ant-pagination-large/);
 });

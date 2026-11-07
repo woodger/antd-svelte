@@ -30,7 +30,7 @@
 
   let dark = $state(false);
   let compact = $state(false);
-  let size = $state<'small' | 'middle' | 'large'>('middle');
+  let size = $state<'small' | 'medium' | 'large'>('medium');
   let variant = $state<InputVariant | 'inherit'>('inherit');
   let bordered = $state(true);
   let semantic = $state(false);
@@ -125,7 +125,7 @@
   <label><input type="checkbox" bind:checked={readonly} /> Feature input readonly</label>
   <label><input type="checkbox" bind:checked={hidden} /> Feature input hidden</label>
   <label>Input variant<select bind:value={variant}><option>inherit</option><option>outlined</option><option>filled</option><option>borderless</option><option>underlined</option></select></label>
-  <label>Input feature size<select bind:value={size}><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Input feature size<select bind:value={size}><option>small</option><option>medium</option><option>large</option></select></label>
   <label>Input feature type<select bind:value={type}><option>text</option><option>email</option><option>password</option></select></label>
   <label><input type="checkbox" bind:checked={bordered} /> Legacy input bordered</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark input feature theme</label>

@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { referenceSizeLabel } from './reference-size';
   import {
     AutoComplete, ConfigProvider, type AutoCompleteItem, type ThemeConfig
   } from 'antd-svelte';
@@ -26,7 +27,7 @@
     { value: 'a', label: 'Alpha' }, { value: 'b', label: 'Beta' },
     { value: 'd', label: 'Disabled', disabled: true }
   ] }, { value: 'c', label: 'Gamma' }];
-  const sizes = ['middle', 'small', 'large'] as const;
+  const sizes = ['medium', 'small', 'large'] as const;
   const variants = ['filled', 'borderless', 'underlined'] as const;
   let config = $derived<ThemeConfig>({
     ...autoCompleteThemePresets[preset],
@@ -61,7 +62,7 @@
       <form id="themed-completion-form">
         <div class="samples" style={parentAliases ? '--ant-font-size:30px;--ant-color-text:red' : undefined}>
           {#each sizes as size}
-            <AutoComplete {size} {options} defaultValue="b" class={`completion-token-${size}`}
+            <AutoComplete {size} {options} defaultValue="b" class={`completion-token-${referenceSizeLabel(size)}`}
               aria-label={`Themed completion ${size}`} style="width:240px" />
           {/each}
           {#each variants as variant}

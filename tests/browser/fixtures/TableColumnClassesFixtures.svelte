@@ -52,7 +52,7 @@
     <div id="table-column-classes-control" style="width:320px;max-width:100%">
       <form aria-label="Table column form">
         <Table {columns} dataSource={current.name === 'empty-data' ? [] : rows}
-          size="middle" rowSelection pagination={false}
+          size="medium" rowSelection pagination={false}
           scroll={current.name === 'fixed' ? { x: 600 } : undefined}
           bind:selectedRowKeys={() => selection, value => { selectedKeys = value; }}
           bind:sorter={() => sorter, value => { sorterState = value; }}

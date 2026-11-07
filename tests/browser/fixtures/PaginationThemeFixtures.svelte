@@ -7,6 +7,7 @@
   } from 'antd-svelte';
   import { paginationThemePresets } from './pagination-theme-presets';
   import reference from './ant-design-pagination-metrics.json';
+  import { currentReferenceSize } from './reference-size';
 
   let preset = $state('default');
   let enabled = $state(true);
@@ -31,7 +32,10 @@
     } : paginationThemePresets[preset].components
   });
   let variants = $derived(reference.variants.filter((_, index) => index < 6
-    || ['default', 'own-tokens', 'wireframe', 'custom-prefix'].includes(preset)) as {
+    || ['default', 'own-tokens', 'wireframe', 'custom-prefix'].includes(preset)).map(variant => ({
+      ...variant, props: { ...variant.props,
+        size: currentReferenceSize(variant.props && 'size' in variant.props ? variant.props.size : undefined) }
+    })) as {
     name: string;
     inputVariant?: 'filled' | 'borderless' | 'underlined';
     props?: Partial<PaginationProps>;

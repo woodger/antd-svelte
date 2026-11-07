@@ -127,7 +127,7 @@ export interface ConfigContext {
   readonly floatButton?: FloatButtonConfig;
   readonly floatButtonGroup?: FloatButtonGroupConfig;
   readonly componentSize: ComponentSize;
-  // Divider отличает явно заданный размер от общего fallback middle.
+  // Divider отличает явно заданный размер от общего fallback medium.
   readonly explicitComponentSize?: ComponentSize;
   readonly componentDisabled: boolean;
   readonly direction: 'ltr' | 'rtl';
@@ -139,7 +139,7 @@ export interface ConfigContext {
 
 const configKey = Symbol('ant-design-config');
 const defaultConfig: ConfigContext = {
-  componentSize: 'middle',
+  componentSize: 'medium',
   componentDisabled: false,
   direction: 'ltr',
   theme: { mode: 'light', primary: 'blue', compact: false },

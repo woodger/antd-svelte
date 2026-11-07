@@ -16,7 +16,7 @@ export interface AvatarApiCase extends AvatarApiValues {
   name: string;
   group?: boolean;
   direction?: 'ltr' | 'rtl';
-  componentSize?: 'small' | 'middle' | 'large';
+  componentSize?: 'small' | 'medium' | 'large';
   componentDisabled?: boolean;
   token?: ThemeConfig['token'];
   avatarTokens?: NonNullable<ThemeConfig['components']>['Avatar'];

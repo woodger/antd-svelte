@@ -15,7 +15,7 @@
   let accordion = $state(false);
   let collapsible = $state<CollapseTrigger>('header');
   let placement = $state<'start' | 'end'>('start');
-  let size = $state<ComponentSize>('middle');
+  let size = $state<ComponentSize>('medium');
   let bordered = $state(true);
   let ghost = $state(false);
   let destroy = $state(false);
@@ -178,7 +178,7 @@
   <label><input type="checkbox" bind:checked={compact} /> Compact Collapse theme</label>
   <label>Collapse mode <select bind:value={collapsible}><option>header</option><option>icon</option><option>disabled</option></select></label>
   <label>Collapse icon placement <select bind:value={placement}><option>start</option><option>end</option></select></label>
-  <label>Collapse size <select bind:value={size}><option>small</option><option>middle</option><option>large</option></select></label>
+  <label>Collapse size <select bind:value={size}><option>small</option><option>medium</option><option>large</option></select></label>
   <label><input type="checkbox" bind:checked={bordered} /> Bordered Collapse</label>
   <label><input type="checkbox" bind:checked={ghost} /> Ghost Collapse</label>
   <ConfigProvider

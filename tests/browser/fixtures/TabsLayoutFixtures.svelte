@@ -18,7 +18,7 @@
   let physicalPlacement = $state<TabsPosition>('left');
   let type = $state<TabsType>('line');
   let size = $state<ComponentSize | 'medium' | ''>('');
-  let providerSize = $state<ComponentSize>('middle');
+  let providerSize = $state<ComponentSize>('medium');
   let rtl = $state(false);
   let dark = $state(false);
   let compact = $state(false);
@@ -67,10 +67,10 @@
   </select></label>
   <label>Tabs layout size <select aria-label="Tabs layout size" bind:value={size}>
     <option value="">inherit</option>
-    {#each ['small', 'middle', 'medium', 'large'] as value}<option>{value}</option>{/each}
+    {#each ['small', 'medium', 'large'] as value}<option>{value}</option>{/each}
   </select></label>
   <label>Tabs provider size <select aria-label="Tabs provider size" bind:value={providerSize}>
-    {#each ['small', 'middle', 'large'] as value}<option>{value}</option>{/each}
+    {#each ['small', 'medium', 'large'] as value}<option>{value}</option>{/each}
   </select></label>
   <label><input type="checkbox" bind:checked={rtl} /> RTL Tabs layout</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark Tabs layout</label>

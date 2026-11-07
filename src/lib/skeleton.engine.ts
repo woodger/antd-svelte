@@ -35,7 +35,7 @@ export function resolveSkeletonLayout(
   return {
     avatar: avatar
       ? {
-        size: typeof size === 'string' && ['small', 'medium', 'middle', 'large', 'default'].includes(size)
+        size: typeof size === 'string' && ['small', 'medium', 'large'].includes(size)
           ? size
           : 'large',
         width: avatarWidth,

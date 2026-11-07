@@ -43,7 +43,7 @@
     { id: 'plain', props: { children: 'Title', plain: true } },
     { id: 'vertical', props: { children: 'Title', orientation: 'vertical' } },
     { id: 'small', props: { size: 'small' } },
-    { id: 'middle', props: { size: 'middle' } },
+    { id: 'middle', props: { size: 'medium' } },
     { id: 'dashed', props: { children: 'Title', variant: 'dashed' } },
     { id: 'dotted', props: { children: 'Title', variant: 'dotted' } }
   ];

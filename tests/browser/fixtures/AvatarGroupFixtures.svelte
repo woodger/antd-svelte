@@ -28,7 +28,7 @@
   let limit = $state<number | undefined>(2);
   let size = $state<'inherit' | 'custom' | Exclude<AvatarSize, number>>('inherit');
   let numeric = $state<number | undefined>(48);
-  let contextSize = $state<ComponentSize>('middle');
+  let contextSize = $state<ComponentSize>('medium');
   let shape = $state<AvatarShape>('circle');
   let placement = $state<PopoverPlacement>('top');
   let trigger = $state<PopoverTrigger | 'default'>('default');
@@ -98,7 +98,7 @@
     bind:value={numeric}
   /></label><label>AvatarGroup context size<select
     bind:value={contextSize}
-  ><option>small</option><option>middle</option><option>large</option></select></label><label>AvatarGroup shape<select
+  ><option>small</option><option>medium</option><option>large</option></select></label><label>AvatarGroup shape<select
     bind:value={shape}
   ><option>circle</option><option>square</option></select></label>
   <label>AvatarGroup placement<select bind:value={placement}><option>top</option><option>bottom</option><option>left</option><option>right</option></select></label><label>AvatarGroup trigger<select

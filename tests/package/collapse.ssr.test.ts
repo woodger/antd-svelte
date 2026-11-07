@@ -42,7 +42,7 @@ describe('Collapse public package SSR', () => {
       provider: 'function', semantic: 'function'
     } } });
 
-    expect(body).toContain('flag-size-middle flag-placement-end flag-border-true');
+    expect(body).toContain('flag-size-medium flag-placement-end flag-border-true');
     expect(body).toContain('provider-title local-title item-title');
     expect(body).toContain('color:red;padding-top:3px;color:#335577;color:orange');
     expect(body).toContain('padding-top:7px;background:#112233;padding-top:11px');

@@ -27,7 +27,7 @@
 <Descriptions data-descriptions-theme={id} title="Parameters" extra="Extra" {items} {bordered}
   column={id === 'responsive' ? { xs: 1, md: 3 } : 3}
   layout={kind.startsWith('vertical') ? 'vertical' : 'horizontal'}
-  size={kind.startsWith('small') ? 'small' : kind.startsWith('medium') ? 'middle' : undefined}
+  size={kind.startsWith('small') ? 'small' : kind.startsWith('medium') ? 'medium' : undefined}
   style={priority ? '--ant-descriptions-colon-margin-left:17px' : undefined}
   labelStyle={priority ? 'color:#08979c' : undefined}
   contentStyle={priority ? 'color:#08979c' : undefined}

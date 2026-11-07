@@ -407,7 +407,7 @@ Line success, gradients, steps/rounding, percentPosition и приоритеты
 для size=24 есть отдельный baseline прежней Svelte-библиотеки. Deprecated aliases работают
 без React development warnings. Общий ConfigProvider prefix ещё не перенесён.
 Circle/dashboard, success/steps/gradient, gap placement и шесть tokens проверяются по
-[81 UMD-сценарию и transition trace](../../tests/browser/fixtures/ant-design-progress-circle-reference.json).
+[79 UMD-сценариям и transition trace](../../tests/browser/fixtures/ant-design-progress-circle-reference.json).
 Стили SVG-частей используют общий CSS declaration writer с исходным приоритетом semantic styles.
 
 ## Токены Skeleton
@@ -427,7 +427,7 @@ ConfigProvider.skeleton и object/function root/header/section/avatar/title/para
 class/style остаются на native host. Local prefix меняет классы декоративного каркаса,
 nativeElement/ref указывают на него; при loading=false каркас отсутствует.
 Main сохраняет native host/status/focus, title/div, flex/responsive guards и normalization.
-[116 source-сценариев](../../tests/browser/fixtures/ant-design-skeleton-element-reference.json)
+[110 source-сценариев](../../tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 primitives и [34 main-сценария](../../tests/browser/fixtures/ant-design-skeleton-main-reference.json)
 сняты из закреплённого UMD с одинаковым inherited global-token окружением.
 
@@ -546,7 +546,7 @@ marker находятся в unscoped, отдельный зависший CSS0 
 
 Space не объявляет собственных component tokens. Alias overrides из
 components.Space и отдельный algorithm применяются на корне до gap/wrap,
-semantic и plain styles. Preset small/middle/medium/large используют
+semantic и plain styles. Preset small/medium/large используют
 paddingXS/padding/paddingLG; числовые gaps остаются inline. Typography reset
 не добавляется: собственный шрифт контейнера сохраняется независимо от fontSize alias.
 
@@ -700,7 +700,7 @@ Spin.setDefaultIndicator задаёт общий fallback после local/provi
 
 Local prefix использует [CSS template](../../src/lib/vendor/spin-prefix.css.js) из 35 правил.
 Static и auto progress, fullscreen, context/style priorities и компонентные темы сверяются с
-[52 UMD-сценариями](../../tests/browser/fixtures/ant-design-spin-source-reference.json).
+[50 UMD-сценариями](../../tests/browser/fixtures/ant-design-spin-source-reference.json).
 [Browser tests](../../tests/browser/spin-source.spec.ts) также проверяют live updates,
 refs/state/focus, token isolation и cleanup. Native inert/focus, нормализованная delay с
 перезапуском и ARIA/reduced motion сохраняются отдельно от React; global provider prefix
@@ -1016,7 +1016,7 @@ custom cssVar prefix, undefined и вложенные provider проходят 
 Служебные col используют исходные CSS widths; явно подготовленный
 selectionColumnWidth становится inline columnWidth, как в InternalTable,
 и имеет приоритет перед bordered CSS. Явный expandable.columnWidth
-сохраняет приоритет. Native default size остаётся middle из ConfigProvider.
+сохраняет приоритет. Native default size — medium из ConfigProvider.
 
 Тема применяется к cells, sort/hover/selection, expanded content и filter popup.
 Filter options получают filterDropdownMenuBg, footer границу borderColor;
@@ -1030,7 +1030,8 @@ Legacy-оформление не меняется.
 [unit](../../src/lib/theme-table-tokens-reference.test.ts),
 [SSR](../../tests/package/table-theme.ssr.test.ts) и
 [браузере](../../tests/browser/table-theme.spec.ts), fixture `?fixture=table-theme`.
-Source size явно задан middle для сравнения с опубликованным native default;
+Raw Source-набор Table сохраняет локальный size=middle; Native использует medium.
+Локальная геометрия совпадает в новых [замерах размеров](current-size-observation.md);
 Source typography host использует public theme.useToken(), потому что React
 ConfigProvider не создаёт DOM-обёртку. Expanded padding сравнивается на Source td
 и native viewport content. Fixed hover сверяется отдельно с raw Source цветом:
@@ -1142,7 +1143,7 @@ fontHeight и controlHeight согласованы с compactAlgorithm. Button/I
 InputNumber получают рассчитанные font/padding metrics уже при SSR, без включения
 source colors, hash-классов и scope-правил.
 
-В compact режиме middle у Input, Select, InputNumber и Button имеет высоту 28px,
+В compact режиме medium у Input, Select, InputNumber и Button имеет высоту 28px,
 large — 35px. Для small Input, одиночный Select и InputNumber имеют минимум 22px: строка 20px
 и две рамки по 1px. Button имеет фиксированную высоту 21px. Эти значения получены
 в официальном React-компоненте 6.6.8; одинаковая высота всех small controls не

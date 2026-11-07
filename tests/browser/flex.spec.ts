@@ -77,7 +77,7 @@ test(
 
     for (const [gap, expected] of [
       ['small', '8px'],
-      ['middle', '16px'],
+      ['medium', '16px'],
       ['medium', '16px'],
       ['large', '24px'],
       ['2px 12px', '2px 12px']

@@ -50,7 +50,7 @@ export interface StepsProps extends Omit<
   status?: StepsStatus;
   onChange?: (current: number) => void;
   orientation?: StepsOrientation;
-  size?: StepsSize | 'default';
+  size?: StepsSize;
   /** @defaultValue true */
   responsive?: boolean;
   disabled?: boolean;

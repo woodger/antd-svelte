@@ -460,7 +460,7 @@ test(
     const root = input.locator('..');
 
     await expect(root).toHaveClass(/number-context/);
-    await expect(root).toHaveClass(/number-local-middle/);
+    await expect(root).toHaveClass(/number-local-medium/);
     await expect(root).toHaveClass(/ant-input-number-filled/);
     await expect(root).toHaveCSS('color', 'rgb(255, 165, 0)');
     await expect(input).toHaveClass(/number-context-input/);

@@ -71,7 +71,7 @@
       config.descriptions?.class,
       bordered && 'ant-descriptions-bordered',
       mergedSize === 'small' && 'ant-descriptions-small',
-      (mergedSize === 'middle' || mergedSize === 'medium') && 'ant-descriptions-medium',
+      mergedSize === 'medium' && 'ant-descriptions-medium',
       config.direction === 'rtl' && 'ant-descriptions-rtl',
       className,
       rootClassName,

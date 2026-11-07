@@ -1,7 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { HTMLButtonAttributes } from 'svelte/elements';
 
-export type SwitchSize = 'small' | 'medium' | 'middle' | 'default';
+export type SwitchSize = 'small' | 'medium';
 export type SwitchContent = string | number | null | undefined | Snippet;
 export type SwitchEvent = (MouseEvent | KeyboardEvent) & {
   currentTarget: EventTarget & HTMLButtonElement;
@@ -33,7 +33,7 @@ export interface SwitchProps extends Omit<
   defaultValue?: boolean;
   /** Блокирует кнопку и native FormData даже с disabled=false. */
   loading?: boolean;
-  /** Medium/default/middle — обычный размер; без prop наследуется componentSize. */
+  /** Medium — обычный размер; без prop наследуется componentSize. */
   size?: SwitchSize;
   checkedChildren?: SwitchContent;
   unCheckedChildren?: SwitchContent;

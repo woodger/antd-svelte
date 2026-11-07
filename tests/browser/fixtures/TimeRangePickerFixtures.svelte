@@ -56,7 +56,7 @@
   const pickerValues: [Dayjs, Dayjs] = [
     dayjs.utc('2024-09-15T06:07:08.123Z'), dayjs.utc('2024-09-15T18:19:20.456Z')
   ];
-  let size = $state<'small' | 'middle' | 'large' | 'inherit'>('inherit');
+  let size = $state<'small' | 'medium' | 'large' | 'inherit'>('inherit');
   let variant = $state<'outlined' | 'filled' | 'borderless' | 'underlined' | 'inherit'>('inherit');
   let root = $state<HTMLDivElement>();
   let start = $state<HTMLInputElement>();
@@ -148,7 +148,7 @@
     </select></label>
     <label>Interval size<select aria-label="Interval size" bind:value={size}>
       <option value="inherit">Inherit</option><option value="small">Small</option>
-      <option value="middle">Middle</option><option value="large">Large</option>
+      <option value="medium">Middle</option><option value="large">Large</option>
     </select></label>
     <label>Interval variant<select aria-label="Interval variant" bind:value={variant}>
       <option value="inherit">Inherit</option><option value="outlined">Outlined</option>
@@ -174,7 +174,7 @@
     <button type="button">Outside interval</button>
   </div>
   <ConfigProvider
-    componentSize="middle"
+    componentSize="medium"
     theme={{ mode: dark ? 'dark' : 'light', compact, primary: 'purple' }}
     timePicker={{
       class: 'unused-time-context', style: 'outline-offset:88px', variant: 'filled',
