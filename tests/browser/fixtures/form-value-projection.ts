@@ -1,15 +1,15 @@
 import type { FormFieldMeta, FormInstance } from 'antd-svelte';
 
-function encode(value: unknown): unknown {
+export function encodeFormValues(value: unknown): unknown {
   if (value === undefined) return { $undefined: true };
   if (Array.isArray(value)) {
     return Array.from({ length: value.length }, (_, index) =>
-      Object.hasOwn(value, index) ? encode(value[index]) : { $hole: true }
+      Object.hasOwn(value, index) ? encodeFormValues(value[index]) : { $hole: true }
     );
   }
   if (value && typeof value === 'object') {
     return Object.fromEntries(Object.keys(value).map((key) =>
-      [key, encode((value as Record<string, unknown>)[key])]
+      [key, encodeFormValues((value as Record<string, unknown>)[key])]
     ));
   }
 
@@ -37,7 +37,9 @@ export function snapshotFormValues(form: FormInstance<Record<string, unknown>>) 
     filteredSelection: () => form.getFieldsValue([['user'], 'unbound', 'missing'], filter),
     meta: () => form.getFieldsValue({ filter: (value) => { meta.push(value); return false; } })
   };
-  const values = Object.fromEntries(Object.entries(queries).map(([key, get]) => [key, encode(get())]));
+  const values = Object.fromEntries(Object.entries(queries).map(([key, get]) =>
+    [key, encodeFormValues(get())]
+  ));
 
-  return { values, meta: encode(meta) };
+  return { values, meta: encodeFormValues(meta) };
 }

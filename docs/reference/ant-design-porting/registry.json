@@ -4884,7 +4884,12 @@
         "tests/browser/form-get-fields-value.spec.ts",
         "tests/browser/fixtures/FormGetFieldsValueFixtures.svelte",
         "tests/browser/fixtures/form-value-projection.ts",
-        "tests/browser/fixtures/ant-design-form-get-fields-value-observation.json"
+        "tests/browser/fixtures/ant-design-form-get-fields-value-observation.json",
+        "src/lib/form-set-fields.test.ts",
+        "tests/package/form-set-fields.ssr.test.ts",
+        "tests/browser/form-set-fields.spec.ts",
+        "tests/browser/fixtures/FormSetFieldsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-set-fields-observation.json"
       ],
       "features": [
         {
@@ -5166,6 +5171,22 @@
             "tests/browser/fixtures/ant-design-form-get-fields-value-observation.json"
           ],
           "note": "Текущие overloads без deprecated strict: известные bindings, полный store через true без filter, список путей с включением потомков и config filter. Явный путь без binding передаёт null metadata и читает store; пустой список возвращает {}, пустой путь выбирает store. Named queries берут последний binding точного имени, exact parent идёт перед потомками; UI order отделён от синтетических initialValues. FormList проецирует поля строк и отдельно заполняет отсутствующие корни [], даже при отклоняющем filter; это текущее поведение 6.6.8, расходящееся с описанием List в upstream docs. Meta содержит touched/validating/errors/warnings/name/validated; silent validation не меняет flags, normal completion и external merge обновляют validated, reset очищает. Сохранены standalone rules, прежние touched/triggers и строгая защита от устаревших результатов модели. До mount UI bindings отсутствуют; true читает текущий store также при SSR. Plain projections и metadata изолированы, opaque values сохраняют identity. Values остаётся типом результата, как upstream, фактический состав определяется выборкой. Сверено с неизменённым официальным UMD; собственных React/deprecated adapters нет."
+        },
+        {
+          "id": "field-data",
+          "title": "SetFields: пакетные значения и ручная metadata",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.model.svelte.ts",
+            "src/lib/index.ts",
+            "src/lib/form-set-fields.test.ts",
+            "tests/package/form-set-fields.ssr.test.ts",
+            "tests/browser/form-set-fields.spec.ts",
+            "tests/browser/fixtures/FormSetFieldsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-set-fields-observation.json"
+          ],
+          "note": "Записи применяются по порядку, без автоматической validation; value отличается от отсутствующего свойства, включая явный undefined. Сохраняются непереданные errors/warnings/touched, повторные записи заменяют только заданные свойства. Metadata работает для UI bindings и прежних модельных rules; неизвестный путь обновляет store, но не создаёт metadata. Пустые/undefined errors и warnings очищают сообщения; явный validating заменяет управление metadata ожидающего validator, validated остаётся вычисляемым. Validation без rules сохраняет ручные сообщения/validating и не блокируется ими; обычная проверка с rules заменяет временные сообщения. Legacy errors-проекция с пустыми root keys, touched/triggers остальных setters и копирование caller values сохранены. Защита snapshot строже source: изменение value отменяет старую UI validation, поздний ответ не заменяет свежие сообщения. Подтверждённые дефекты неизменённого UMD с поздней ошибкой прежнего value и undefined touched metadata записаны в observations; optional undefined flags нормализуются в false. Native values/FormData, доступное описание ошибок, фокус/выделение, numeric/string paths, reset/remount и source lifecycle покрыты 22 UMD-состояниями и отдельными наблюдениями."
         }
       ]
     },

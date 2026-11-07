@@ -135,6 +135,11 @@
 
 ### Added
 
+- Form: setFields для пакетных значений, errors/warnings и ручных touched/validating
+  без автоматической validation. Сохранены metadata полей без rules, native inputs,
+  прежняя errors-проекция и защита snapshot; дефекты upstream с поздней ошибкой
+  прежнего значения и undefined touched записаны отдельно и не повторяются.
+
 - Form: getFieldsValue с проекцией bindings/путей, чтением всего store и nullable
   metadata filter. Списки и lifecycle validated сверены с текущими исходниками;
   deprecated strict не переносится. Сохранены прежние модельные правила и touched.

@@ -9441,6 +9441,35 @@ UI-регистрации ожидают mount; при SSR полный store т
 [публичный пакет](./tests/package/form-get-fields-value.ssr.test.ts),
 [модель](./src/lib/form-get-fields-value.test.ts).
 
+`setFields(entries)` применяет записи по порядку без запуска validation. Можно
+передать value, errors, warnings, touched и validating; отсутствующие свойства
+сохраняются. Например, для зарегистрированного поля:
+
+```ts
+form.setFields([{ name: ['user', 'name'], errors: ['Name is unavailable'], touched: true }]);
+```
+
+Пустой массив сообщений или явный undefined очищает errors/warnings. Value с
+undefined записывает пустое значение; отсутствие value ничего не записывает.
+Значения можно менять без UI, но metadata для пути без binding игнорируется
+и не откладывается до будущего mount. Поля с правилами createForm работают также
+без UI. Как в upstream, входной validated принимается, но не заменяет вычисляемый
+флаг; явный validating=false делает validated=true без запуска правил.
+
+Validation пропускает поля без rules: ручные errors/warnings/validating такого
+поля сохраняются и сами по себе не блокируют validateFields/submit. Обычная
+проверка поля с rules может заменить временно заданные сообщения; явный
+validating заменяет её управление metadata. Для изменённого value сохранена
+прежняя защита snapshot: старый validator не заменяет свежие сообщения.
+Дефект 6.6.8 с поздней ошибкой для прежнего значения записан
+[в raw reference](./tests/browser/fixtures/ant-design-form-set-fields-observation.json).
+Там же сохранён undefined touched в metadata upstream; Svelte нормализует
+явные undefined touched/validating в false, сохраняя булевый контракт.
+Прежние правила setFieldValue/setFieldsValue/touchField и проекция errors остаются.
+Проверки: [браузер](./tests/browser/form-set-fields.spec.ts),
+[публичный пакет](./tests/package/form-set-fields.ssr.test.ts),
+[модель](./src/lib/form-set-fields.test.ts).
+
 Правила включают required, min/max, pattern и синхронный либо
 асинхронный `validator(value, values)`. Для строк min/max считают Unicode
 code points, для чисел сравнивают значение, для массивов считают элементы.

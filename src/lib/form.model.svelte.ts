@@ -47,7 +47,7 @@ export interface FormFieldMeta {
   name: readonly (string | number)[];
   /**
    * Обычная validation завершена либо значение изменено через setFieldsValue;
-   * validateOnly не влияет.
+   * setFields.validating задаёт флаг вручную, validateOnly не влияет.
    */
   validated: boolean;
 }
@@ -58,6 +58,18 @@ export type FormFilterFunc = (meta: FormFieldMeta | null) => boolean;
 /** Фильтр полей для getFieldsValue; корни FormList заполняются отдельно от фильтра. */
 export interface FormGetFieldsValueConfig {
   filter?: FormFilterFunc;
+}
+
+/** Отсутствующие свойства сохраняются; metadata обновляет только известные bindings. */
+export interface FormFieldData {
+  name: NamePath;
+  value?: unknown;
+  touched?: boolean;
+  validating?: boolean;
+  errors?: readonly string[];
+  warnings?: readonly string[];
+  /** Принимается, как в upstream, но вычисляемый validated не заменяет. */
+  validated?: boolean;
 }
 
 /** Реактивные значения, validation и submit одной формы; экземпляр не разделяется глобально. */
@@ -91,6 +103,8 @@ export interface FormInstance<Values extends FormValues> {
   setFieldValue<const Path extends NamePath>(name: Path, value: NamePathValue<Values, Path>): void;
   /** Объединяет plain objects, заменяет массивы и очищает ошибки изменённых полей. */
   setFieldsValue(next: PartialFormValues<Values>): void;
+  /** Применяет записи по порядку, не запускает validation; value работает и без binding. */
+  setFields(fields: readonly FormFieldData[]): void;
   touchField(name: NamePath): void;
   resetFields(): void;
   validateFields(options?: FormValidateOptions): Promise<Values>;
@@ -297,17 +311,24 @@ export function createForm<Values extends FormValues>({
 
     if (!validateOnly) {
       for (const { field, hasRules } of entries) {
-        field.run = token;
-        field.validating = hasRules;
-        field.warnings = [];
-        if (hasRules) {
-          field.dirty = true;
-          field.validated = false;
+        if (!hasRules) {
+          // Прежняя errors-проекция сохраняет пустые ключи; ручные metadata не очищаются.
+          field.errors ??= [];
+          field.warnings ??= [];
+          continue;
         }
+
+        field.run = token;
+        field.validating = true;
+        field.warnings = [];
+        field.dirty = true;
+        field.validated = false;
       }
     }
 
     const results = await Promise.all(entries.map(async ({ field, path, hasRules }) => {
+      if (!hasRules) return { name: path, errors: [], warnings: [] };
+
       const messages = await validateFieldValue(
         getFormValue(snapshot, path), snapshot, fieldRules(field)
       );
@@ -318,7 +339,7 @@ export function createForm<Values extends FormValues>({
         if (revision === startRevision && sameFormPath(path, fieldPath(field))) {
           field.errors = messages.errors;
           field.warnings = messages.warnings;
-          if (hasRules) field.validated = true;
+          field.validated = true;
         }
       }
 
@@ -328,8 +349,8 @@ export function createForm<Values extends FormValues>({
     const nextErrors = results.filter((field) => field.errors.length);
 
     const outOfDate = lastValidation !== token || revision !== startRevision
-      || entries.some(({ field, path, run }) =>
-        field.run !== (validateOnly ? run : token) || !fields.includes(field)
+      || entries.some(({ field, path, run, hasRules }) =>
+        field.run !== (validateOnly || !hasRules ? run : token) || !fields.includes(field)
           || !sameFormPath(path, fieldPath(field))
       );
 
@@ -487,6 +508,46 @@ export function createForm<Values extends FormValues>({
       revision++;
       submissionError = undefined;
       revalidateTouched();
+    },
+    setFields(updates) {
+      for (const update of updates) {
+        const { name, ...data } = update;
+
+        if ('value' in data) {
+          const next = setFormValue(values, name, data.value) as Values;
+          const changed = !sameFormValue(values, next);
+          updateValues(next);
+
+          if (changed) {
+            revision++;
+            submissionError = undefined;
+
+            for (const field of fields) {
+              if (containsFormPath(name, fieldPath(field))) {
+                field.run = ++request;
+                field.validating = false;
+              }
+            }
+          }
+        }
+
+        for (const field of fields) {
+          if (!sameFormPath(name, fieldPath(field))
+            || (!field.registration && !fieldRules(field).length)) {
+            continue;
+          }
+
+          if ('touched' in update) field.touched = !!update.touched;
+          if ('validating' in update) {
+            field.run = ++request;
+            field.validating = !!update.validating;
+            field.validated = !field.validating;
+          }
+          if ('errors' in update) field.errors = [...(update.errors ?? [])];
+          if ('warnings' in update) field.warnings = [...(update.warnings ?? [])];
+          field.dirty = true;
+        }
+      }
     },
     touchField(name) {
       const field = ensureField(name);
