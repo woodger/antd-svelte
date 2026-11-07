@@ -3,8 +3,9 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { provideForm } from './form-context';
+  import { getFormHooks } from './form-internal';
   import type { FormProps } from './form.types';
-  import type { FieldName, FormValues } from './validation.engine';
+  import type { FormValues } from './validation.engine';
 
   let {
     form,
@@ -29,14 +30,6 @@
     active = false;
   });
 
-  function getFieldName(name: string): FieldName<Values> {
-    if (!Object.hasOwn(form.values, name)) {
-      throw new Error(`FormItem name "${name}" is missing from initialValues`);
-    }
-
-    return name as FieldName<Values>;
-  }
-
   provideForm({
     get variant() {
       return variant;
@@ -50,9 +43,10 @@
     get resetKey() {
       return form.values;
     },
-    getFieldError: (name) => form.getFieldError(getFieldName(name)),
-    isFieldRequired: (name) => form.isFieldRequired(getFieldName(name)),
-    touchField: (name) => form.touchField(getFieldName(name))
+    getFieldError: (name) => form.getFieldError(name),
+    isFieldRequired: (name) => form.isFieldRequired(name),
+    touchField: (name) => form.touchField(name),
+    registerField: (field) => getFormHooks(form)?.registerField(field)
   });
 
   async function handleSubmit(

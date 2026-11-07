@@ -1,13 +1,5 @@
-import type { Dayjs } from 'dayjs';
-
-export type FormValue =
-  string
-  | number
-  | boolean
-  | null
-  | undefined
-  | Dayjs
-  | readonly (string | number | boolean | Dayjs | null | undefined)[];
+/** Значение поля может быть скаляром, вложенным контейнером или экземпляром класса. */
+export type FormValue = unknown;
 export type FormValues = Record<string, FormValue>;
 export type FieldName<Values> = Extract<keyof Values, string>;
 
@@ -28,6 +20,14 @@ export type FormRules<Values extends FormValues> = Partial<
 >;
 
 export type FieldErrors<Values extends FormValues> = Partial<Record<FieldName<Values>, string[]>>;
+
+/** Ошибки поля сохраняют исходные сегменты пути, включая различие строк и чисел. */
+export interface FieldError {
+  name: (string | number)[];
+  errors: string[];
+  /** Пустой массив: warningOnly rules пока не перенесены. */
+  warnings: string[];
+}
 
 export async function validateValue<Values extends FormValues>(
   value: FormValue,

@@ -762,6 +762,8 @@ export type {
   FormValue,
   FormValues
 } from './validation.engine';
+export type { FieldError } from './validation.engine';
+export type { NamePath, NamePathValue, PartialFormValues } from './form-store.engine';
 export {
   ruRU,
   enUS,

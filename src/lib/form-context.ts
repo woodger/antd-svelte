@@ -1,4 +1,6 @@
 import { getContext, setContext } from 'svelte';
+import type { FormFieldRegistration } from './form-internal';
+import type { NamePath } from './form-store.engine';
 import type { Variant } from './types';
 
 export interface FormContext {
@@ -6,9 +8,10 @@ export interface FormContext {
   readonly disabled: boolean;
   readonly layout: 'vertical' | 'horizontal';
   readonly resetKey?: object;
-  getFieldError(name: string): readonly string[];
-  isFieldRequired(name: string): boolean;
-  touchField(name: string): void;
+  getFieldError(name: NamePath): readonly string[];
+  isFieldRequired(name: NamePath): boolean;
+  touchField(name: NamePath): void;
+  registerField?(field: FormFieldRegistration): (() => void) | undefined;
 }
 
 export interface FormFieldContext {

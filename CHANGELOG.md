@@ -135,6 +135,11 @@
 
 ### Added
 
+- Form поддерживает вложенные NamePath, getFieldValue/getFieldsError,
+  FormItem.rules и errorFields. Строки с точками остаются буквальными ключами;
+  setFieldsValue объединяет объекты и заменяет массивы. Сохранены createForm,
+  изоляция значений, native submit/reset и защита от устаревшей validation.
+
 - Breadcrumb: общие class/style/semantic defaults, separator и dropdownIcon из
   ConfigProvider с исходным nullish приоритетом и whole-record replacement.
   Callbacks читают resolved separator; native params defaults, типы itemRender,

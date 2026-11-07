@@ -2,15 +2,19 @@
   import type { Snippet } from 'svelte';
   import { provideFormField, useForm } from './form-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { formNamePath, type NamePath } from './form-store.engine';
+  import type { ValidationRule } from './validation.engine';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
-    /** Имя существующего поля initialValues; вложенные name paths не поддерживаются. */
-    name: string;
+    /** Буквальный ключ либо вложенный путь. Строка с точкой не разбивается на сегменты. */
+    name: NamePath;
     label: string;
     children: Snippet;
     help?: string;
     required?: boolean;
+    /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
+    rules?: readonly ValidationRule[];
     htmlFor?: string;
     class?: string;
   }
@@ -21,6 +25,7 @@
     children,
     help,
     required,
+    rules,
     htmlFor,
     class: className = ''
   }: FormItemProps = $props();
@@ -30,15 +35,26 @@
   const generatedId = $props.id();
   let id = $derived(htmlFor ?? `ant-field-${generatedId}`);
   let errors = $derived(form?.getFieldError(name) ?? []);
-  let isRequired = $derived(required ?? form?.isFieldRequired(name) ?? false);
+  let isRequired = $derived(required
+    ?? (rules ? rules.some((rule) => rule.required) : form?.isFieldRequired(name))
+    ?? false);
   let descriptionId = $derived(errors.length || help ? `${id}-help` : undefined);
+
+  $effect.pre(() => form?.registerField?.({
+    get name() {
+      return name;
+    },
+    get rules() {
+      return rules;
+    }
+  }));
 
   provideFormField({
     get id() {
       return id;
     },
     get name() {
-      return name;
+      return formNamePath(name).map(String).join('_');
     },
     get label() {
       return label;

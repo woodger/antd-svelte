@@ -4746,7 +4746,7 @@
       "name": "Form",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Существующий Form; частичный аудит Dayjs value по DatePicker/Form API, общий подробный аудит v1 ещё не завершён.",
+      "scopeReason": "Текущий Form с вложенными NamePath и локальными правилами; общий подробный аудит API ещё не завершён.",
       "upstreamPath": "components/form",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -4768,7 +4768,13 @@
       "dependencies": [
         "config-provider"
       ],
-      "upstreamPackages": [],
+      "upstreamPackages": [
+        {
+          "name": "@rc-component/form",
+          "range": "~1.8.6",
+          "referenceVersion": "1.8.6"
+        }
+      ],
       "priority": "unassigned",
       "effort": "unknown",
       "evidence": [
@@ -4794,7 +4800,18 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/form-store.engine.ts",
+        "src/lib/form-store.engine.test.ts",
+        "src/lib/form.model.svelte.ts",
+        "src/lib/form.model.test.ts",
+        "src/lib/Form.svelte",
+        "src/lib/FormItem.svelte",
+        "src/lib/FormValidationError.ts",
+        "tests/browser/form-paths.spec.ts",
+        "tests/browser/fixtures/FormPathsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-name-paths-observation.json",
+        "tests/package/form-paths.ssr.test.ts"
       ],
       "features": [
         {
@@ -4808,10 +4825,22 @@
         {
           "id": "gap-1",
           "title": "Form.List и вложенные name paths",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Ограничение зафиксировано в README модуля."
+          "evidence": [
+            "src/lib/form-store.engine.ts",
+            "src/lib/form-store.engine.test.ts",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form.model.test.ts",
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/FormValidationError.ts",
+            "tests/browser/form-paths.spec.ts",
+            "tests/browser/fixtures/FormPathsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-name-paths-observation.json",
+            "tests/package/form-paths.ssr.test.ts"
+          ],
+          "note": "NamePath поддерживает string/number и массивы сегментов без dot parsing; числовые сегменты создают массивы, string 0 — объект. Вложенные setters/getters, deep object merge с заменой массивов, FormItem.rules, field metadata/cleanup и errorFields сверены с pin. Сохранены Svelte clone isolation, native name через _, root reset identity, blur/dependent revalidation и submit lock. Form.List ещё отсутствует; warningOnly, полный validation/options и field adapters остаются за текущим объёмом."
         },
         {
           "id": "dayjs-values",
@@ -4863,6 +4892,26 @@
             "tests/package/config-variants.ssr.test.ts"
           ],
           "note": "Raw variant ближайшего Form имеет приоритет над component/global config; undefined сбрасывает внешний Form. Локальный variant остаётся выше Form. Component=false сохраняет ближайший context без native form/attrs, позволяя вложить независимый Form без вложенных HTML-форм. Существующие модель, submit/reset, disabled, validation и layout по умолчанию сохранены; полный RcForm API не заявлен."
+        },
+        {
+          "id": "name-paths",
+          "title": "Вложенные значения и локальные правила FormItem",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form-store.engine.ts",
+            "src/lib/form-store.engine.test.ts",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form.model.test.ts",
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/FormValidationError.ts",
+            "tests/browser/form-paths.spec.ts",
+            "tests/browser/fixtures/FormPathsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-name-paths-observation.json",
+            "tests/package/form-paths.ssr.test.ts"
+          ],
+          "note": "Проверены буквальные dotted keys, numeric/string segments, новые поля вне initialValues, nested merge/array replacement, reset, snapshots/Dayjs, native labels/names/errors/focus, смена пути и удаление с pending validation. getFieldsError/errorFields сохраняют сегменты; прежний errors остаётся проекцией верхнего уровня. Источник — неизменённый UMD 6.6.8, отдельно изучен rc-form 1.8.6. Это частичный этап текущего Form API."
         }
       ]
     },

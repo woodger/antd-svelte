@@ -1,26 +1,25 @@
+import { untrack } from 'svelte';
 import { FormValidationError } from './FormValidationError';
+import { setFormHooks, type FormFieldRegistration } from './form-internal';
+import {
+  containsFormPath,
+  copyFormValue,
+  formNamePath,
+  getFormValue,
+  mergeFormValues,
+  sameFormPath,
+  setFormValue,
+  type NamePath,
+  type NamePathValue,
+  type PartialFormValues
+} from './form-store.engine';
 import {
   validateValue,
+  type FieldError,
   type FieldErrors,
-  type FieldName,
   type FormRules,
-  type FormValue,
   type FormValues
 } from './validation.engine';
-
-function copyValue<Value extends FormValue>(value: Value): Value {
-  return (Array.isArray(value) ? [...value] : value) as Value;
-}
-
-function copyValues<Values extends FormValues>(source: Values): Values {
-  const copy = { ...source };
-
-  for (const name of Object.keys(copy) as FieldName<Values>[]) {
-    copy[name] = copyValue(copy[name]);
-  }
-
-  return copy;
-}
 
 export type SubmissionResult<Values extends FormValues> =
   | { status: 'success'; }
@@ -31,23 +30,38 @@ export type SubmissionResult<Values extends FormValues> =
 /** Реактивные значения, validation и submit одной формы; экземпляр не разделяется глобально. */
 export interface FormInstance<Values extends FormValues> {
   readonly values: Readonly<Values>;
+  /** Прежняя проекция ошибок верхнего уровня; для вложенных полей используйте getFieldsError. */
   readonly errors: Readonly<FieldErrors<Values>>;
   readonly isSubmitting: boolean;
   readonly submissionError: unknown;
-  getFieldError(name: FieldName<Values>): readonly string[];
-  isFieldTouched(name: FieldName<Values>): boolean;
-  isFieldValidating(name: FieldName<Values>): boolean;
-  isFieldRequired(name: FieldName<Values>): boolean;
-  setFieldValue<Name extends FieldName<Values>>(name: Name, value: Values[Name]): void;
-  setFieldsValue(next: Partial<Values>): void;
-  touchField(name: FieldName<Values>): void;
+  getFieldValue<const Path extends NamePath>(name: Path): NamePathValue<Values, Path>;
+  /** Возвращает ошибки полей модели либо явно перечисленных путей. */
+  getFieldsError(names?: readonly NamePath[]): FieldError[];
+  getFieldError(name: NamePath): readonly string[];
+  isFieldTouched(name: NamePath): boolean;
+  isFieldValidating(name: NamePath): boolean;
+  isFieldRequired(name: NamePath): boolean;
+  setFieldValue<const Path extends NamePath>(name: Path, value: NamePathValue<Values, Path>): void;
+  /** Объединяет plain objects, заменяет массивы и очищает ошибки изменённых полей. */
+  setFieldsValue(next: PartialFormValues<Values>): void;
+  touchField(name: NamePath): void;
   resetFields(): void;
-  validateFields(names?: readonly FieldName<Values>[]): Promise<Values>;
+  validateFields(names?: readonly NamePath[]): Promise<Values>;
   submit(onFinish: (values: Values) => void | Promise<void>): Promise<SubmissionResult<Values>>;
 }
 
+interface StoredField {
+  path: (string | number)[];
+  persistent?: boolean;
+  registration?: FormFieldRegistration;
+  errors?: string[];
+  touched: boolean;
+  validating: boolean;
+  run: number;
+}
+
 /**
- * Создаёт изолированную реактивную модель формы. Начальные значения копируются;
+ * Создаёт изолированную реактивную модель формы. Plain objects и массивы копируются;
  * устаревшая асинхронная validation не заменяет ошибки новой версии значений.
  */
 export function createForm<Values extends FormValues>({
@@ -57,78 +71,142 @@ export function createForm<Values extends FormValues>({
   initialValues: Values;
   rules?: FormRules<Values>;
 }): FormInstance<Values> {
-  const defaults = copyValues(initialValues);
-  const names = Object.keys(defaults) as FieldName<Values>[];
-  const runs = new Map<FieldName<Values>, number>();
-  let revision = 0;
+  const defaults = copyFormValue(initialValues);
+  let revision = $state(0);
   let request = 0;
-  let values = $state<Values>(copyValues(defaults));
-  let errors = $state<FieldErrors<Values>>({});
-  let touched = $state<Partial<Record<FieldName<Values>, boolean>>>({});
-  let validating = $state<Partial<Record<FieldName<Values>, boolean>>>({});
+  // Store меняется только через setters; версия уведомляет readers, не проксируя пользовательские данные.
+  let values = $state.raw<Values>(copyFormValue(defaults));
+  let fields = $state<StoredField[]>([]);
   let isSubmitting = $state(false);
   let submissionError = $state.raw<unknown>();
 
-  async function validateFields(fields: readonly FieldName<Values>[] = names): Promise<Values> {
-    const snapshot = copyValues(values);
+  function fieldPath(field: StoredField): (string | number)[] {
+    return formNamePath(field.registration?.name ?? field.path);
+  }
+
+  function findField(name: NamePath): StoredField | undefined {
+    return fields.find((field) => sameFormPath(fieldPath(field), name));
+  }
+
+  function ensureField(name: NamePath): StoredField {
+    const existing = findField(name);
+    if (existing) return existing;
+
+    fields.push({ path: formNamePath(name), touched: false, validating: false, run: 0 });
+
+    return fields[fields.length - 1];
+  }
+
+  for (const name of new Set([...Object.keys(defaults), ...Object.keys(rules)])) {
+    ensureField(name).persistent = true;
+  }
+
+  function fieldRules(field: StoredField) {
+    const path = fieldPath(field);
+
+    return field.registration?.rules
+      ?? (path.length === 1 && Object.hasOwn(rules, path[0])
+        ? rules[path[0] as keyof typeof rules] : undefined)
+      ?? [];
+  }
+
+  function rootErrors(entries: readonly FieldError[]): FieldErrors<Values> {
+    return Object.fromEntries(entries.filter((field) => field.name.length === 1)
+      .map((field) => [field.name[0], [...field.errors]])) as FieldErrors<Values>;
+  }
+
+  function getFieldsError(names?: readonly NamePath[]): FieldError[] {
+    return names
+      ? names.map((name) => ({
+        name: formNamePath(name), errors: [...(findField(name)?.errors ?? [])], warnings: []
+      }))
+      : fields.map((field) => ({
+        name: fieldPath(field), errors: [...(field.errors ?? [])], warnings: []
+      }));
+  }
+
+  async function validate(selected: readonly StoredField[]): Promise<Values> {
+    const snapshot = copyFormValue(values);
     const startRevision = revision;
     const token = ++request;
-    const nextErrors: FieldErrors<Values> = {};
+    const entries = selected.map((field) => ({ field, path: fieldPath(field) }));
 
-    for (const name of fields) {
-      runs.set(name, token);
-      validating[name] = true;
+    for (const { field } of entries) {
+      field.run = token;
+      field.validating = true;
     }
 
-    await Promise.all(fields.map(async (name) => {
-      const messages = await validateValue(snapshot[name], snapshot, rules[name] ?? []);
+    const results = await Promise.all(entries.map(async ({ field, path }) => {
+      const messages = await validateValue(getFormValue(snapshot, path), snapshot, fieldRules(field));
 
-      if (messages.length) {
-        nextErrors[name] = messages;
-      }
+      if (field.run === token) {
+        field.validating = false;
 
-      if (runs.get(name) === token) {
-        validating[name] = false;
-
-        if (revision === startRevision) {
-          errors[name] = messages;
+        if (revision === startRevision && sameFormPath(path, fieldPath(field))) {
+          field.errors = messages;
         }
       }
+
+      return { name: path, errors: messages, warnings: [] };
     }));
 
-    const outOfDate = revision !== startRevision || fields.some(
-      (name) => runs.get(name) !== token
+    const nextErrors = results.filter((field) => field.errors.length);
+
+    const outOfDate = revision !== startRevision || entries.some(({ field, path }) =>
+      field.run !== token || !fields.includes(field) || !sameFormPath(path, fieldPath(field))
     );
 
-    if (outOfDate || Object.keys(nextErrors).length) {
-      throw new FormValidationError(snapshot, nextErrors, outOfDate);
+    if (outOfDate || nextErrors.length) {
+      throw new FormValidationError(snapshot, rootErrors(nextErrors), outOfDate, nextErrors);
     }
 
     return snapshot;
   }
 
+  function validateFields(names?: readonly NamePath[]): Promise<Values> {
+    return validate(names ? names.map(ensureField) : [...fields]);
+  }
+
   function revalidateTouched() {
-    if (isSubmitting) {
-      return;
-    }
+    if (isSubmitting) return;
 
-    const fields = names.filter((name) => touched[name]);
+    const selected = fields.filter((field) => field.touched);
 
-    if (fields.length) {
-      void validateFields(fields).catch((error: unknown) => {
-        if (!(error instanceof FormValidationError)) {
-          throw error;
-        }
+    if (selected.length) {
+      void validate(selected).catch((error: unknown) => {
+        if (!(error instanceof FormValidationError)) throw error;
       });
     }
   }
 
-  return {
+  // Сохраняем identity корня до reset: native controls используют её как resetKey.
+  function updateValues(next: Values) {
+    for (const name of Object.keys(values)) {
+      if (!Object.hasOwn(next, name)) delete (values as FormValues)[name];
+    }
+
+    for (const name of Object.keys(next)) {
+      Object.defineProperty(values, name, {
+        value: next[name], enumerable: true, configurable: true, writable: true
+      });
+    }
+  }
+
+  function clearField(field: StoredField) {
+    field.errors = [];
+    field.validating = false;
+    field.run = ++request;
+  }
+
+  const form: FormInstance<Values> = {
     get values() {
+      void revision;
+
       return values;
     },
     get errors() {
-      return errors;
+      return rootErrors(fields.filter((field) => field.errors !== undefined)
+        .map((field) => ({ name: fieldPath(field), errors: field.errors ?? [], warnings: [] })));
     },
     get isSubmitting() {
       return isSubmitting;
@@ -136,69 +214,90 @@ export function createForm<Values extends FormValues>({
     get submissionError() {
       return submissionError;
     },
-    getFieldError: (name) => errors[name] ?? [],
-    isFieldTouched: (name) => touched[name] ?? false,
-    isFieldValidating: (name) => validating[name] ?? false,
-    isFieldRequired: (name) => rules[name]?.some((rule) => rule.required) ?? false,
+    getFieldValue(name) {
+      void revision;
+
+      return getFormValue(values, name) as NamePathValue<Values, typeof name>;
+    },
+    getFieldsError,
+    getFieldError: (name) => findField(name)?.errors ?? [],
+    isFieldTouched: (name) => findField(name)?.touched ?? false,
+    isFieldValidating: (name) => findField(name)?.validating ?? false,
+    isFieldRequired: (name) => {
+      const field = findField(name);
+
+      return field ? fieldRules(field).some((rule) => rule.required) : false;
+    },
     setFieldValue(name, value) {
-      if (Object.is(values[name], value)) {
-        return;
+      if (Object.is(getFormValue(values, name), value)) return;
+
+      updateValues(setFormValue(values, name, value) as Values);
+      const field = ensureField(name);
+      clearField(field);
+
+      for (const child of fields) {
+        if (child !== field && containsFormPath(name, fieldPath(child))) clearField(child);
       }
 
-      values[name] = copyValue(value);
-      errors[name] = [];
       revision++;
       submissionError = undefined;
       revalidateTouched();
     },
     setFieldsValue(next) {
-      for (const name of names) {
-        if (Object.hasOwn(next, name)) {
-          values[name] = copyValue(next[name] as Values[typeof name]);
-          errors[name] = [];
+      const merged = mergeFormValues(values, next);
+
+      for (const field of fields) {
+        const path = fieldPath(field);
+        const parent = getFormValue(next, path.slice(0, -1));
+        const provided = parent !== null && typeof parent === 'object'
+          && path.length > 0 && Object.hasOwn(parent, path[path.length - 1]);
+
+        if (!Object.is(getFormValue(values, path), getFormValue(merged, path))
+          || provided) {
+          clearField(field);
         }
       }
 
+      updateValues(merged);
       revision++;
       submissionError = undefined;
       revalidateTouched();
     },
     touchField(name) {
-      touched[name] = true;
+      ensureField(name).touched = true;
       revalidateTouched();
     },
     resetFields() {
       revision++;
-      runs.clear();
-      values = copyValues(defaults);
-      errors = {};
-      touched = {};
-      validating = {};
+      values = copyFormValue(defaults);
+
+      for (const field of fields) {
+        field.errors = undefined;
+        field.touched = false;
+        field.validating = false;
+        field.run = ++request;
+      }
+
       submissionError = undefined;
     },
     validateFields,
     async submit(onFinish) {
-      if (isSubmitting) {
-        return { status: 'busy' };
-      }
+      if (isSubmitting) return { status: 'busy' };
 
       isSubmitting = true;
       submissionError = undefined;
 
-      for (const name of names) {
-        touched[name] = true;
+      for (const field of fields) {
+        field.touched = true;
       }
 
       try {
         const result = await validateFields();
-
         await onFinish(result);
 
         return { status: 'success' };
       } catch (error) {
-        if (error instanceof FormValidationError) {
-          return { status: 'invalid', error };
-        }
+        if (error instanceof FormValidationError) return { status: 'invalid', error };
 
         submissionError = error;
 
@@ -208,4 +307,36 @@ export function createForm<Values extends FormValues>({
       }
     }
   };
+
+  setFormHooks(form, {
+    registerField(registration) {
+      return untrack(() => {
+        let field = findField(registration.name);
+
+        if (!field || field.registration) {
+          fields.push({
+            path: formNamePath(registration.name), touched: false, validating: false, run: 0
+          });
+          field = fields[fields.length - 1];
+        }
+
+        const registered = field;
+        registered.registration = registration;
+
+        return () => {
+          registered.run = ++request;
+          if (registered.persistent) {
+            registered.registration = undefined;
+            registered.errors = undefined;
+            registered.touched = false;
+            registered.validating = false;
+          } else {
+            fields = fields.filter((entry) => entry !== registered);
+          }
+        };
+      });
+    }
+  });
+
+  return form;
 }

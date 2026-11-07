@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, expectTypeOf, it } from 'vitest';
 import { createForm } from './form.model.svelte.js';
 import { FormValidationError } from './FormValidationError';
 
@@ -368,3 +368,137 @@ it(
     expect(first.millisecond()).toBe(123);
   }
 );
+
+it('updates nested paths without replacing the root or conflating dotted names', () => {
+  const form = createForm({
+    initialValues: { user: { name: 'Anna', role: 'developer' }, 'user.name': 'Literal' }
+  });
+  const root = form.values;
+
+  form.setFieldValue(['user', 'name'], 'Alice');
+
+  expect(form.values).toBe(root);
+  expect(form.getFieldValue(['user', 'name'])).toBe('Alice');
+  expectTypeOf(form.getFieldValue(['user', 'name'])).toEqualTypeOf<string>();
+  expect(form.getFieldValue('user.name')).toBe('Literal');
+  expect(form.values.user.role).toBe('developer');
+});
+
+it('isolates nested defaults, writes and validation snapshots while preserving Dayjs', async () => {
+  const dayjs = (await import('dayjs')).default;
+  const date = dayjs('2026-10-15T10:20:30.123');
+  const initial = { rows: [{ title: 'Initial', date }] };
+  const form = createForm({ initialValues: initial });
+  initial.rows[0].title = 'Changed outside';
+  const next = { title: 'Replacement', date };
+
+  form.setFieldValue(['rows', 0], next);
+  next.title = 'Changed argument';
+  const snapshot = await form.validateFields();
+  snapshot.rows[0].title = 'Changed snapshot';
+
+  expect(form.values.rows[0].title).toBe('Replacement');
+  expect(form.values.rows[0].date).toBe(date);
+
+  form.resetFields();
+
+  expect(form.values.rows[0]).toEqual({ title: 'Initial', date });
+  expect(form.values.rows[0].date).toBe(date);
+  expect(initial.rows[0].title).toBe('Changed outside');
+});
+
+it('merges partial nested objects and replaces complete arrays', () => {
+  const form = createForm({
+    initialValues: { user: { name: 'Anna', role: 'developer' }, rows: [{ title: 'First' }] }
+  });
+
+  form.setFieldsValue({ user: { role: 'reviewer' }, rows: [] });
+
+  expect(form.values).toEqual({ user: { name: 'Anna', role: 'reviewer' }, rows: [] });
+  form.setFieldValue(['rows', 0, 'title'], 'New row');
+
+  expect(form.values.rows).toEqual([{ title: 'New row' }]);
+});
+
+it('creates missing fields and distinguishes numeric segments from string keys', () => {
+  const form = createForm({ initialValues: {} });
+
+  form.setFieldValue(['numeric', 0, 'title'], 'Array row');
+  form.setFieldValue(['stringNumeric', '0', 'title'], 'Object row');
+  form.touchField(['numeric', 0, 'title']);
+
+  expect(form.getFieldValue('numeric')).toEqual([{ title: 'Array row' }]);
+  expect(form.getFieldValue('stringNumeric')).toEqual({ 0: { title: 'Object row' } });
+  expect(form.isFieldTouched(['numeric', 0, 'title'])).toBe(true);
+  expect(form.isFieldTouched(['stringNumeric', '0', 'title'])).toBe(false);
+  expect(form.getFieldsError([['numeric', 0, 'title']])).toEqual([
+    { name: ['numeric', 0, 'title'], errors: [], warnings: [] }
+  ]);
+});
+
+it('exposes validation errorFields while preserving the flat errors projection', async () => {
+  const form = createForm({
+    initialValues: { title: '' }, rules: { title: [{ required: true, message: 'Title required' }] }
+  });
+  const error = await form.validateFields().catch((reason: unknown) => reason);
+
+  expect(error).toBeInstanceOf(FormValidationError);
+  expect(error).toMatchObject({
+    errors: { title: ['Title required'] },
+    errorFields: [{ name: ['title'], errors: ['Title required'] }],
+    outOfDate: false
+  });
+  expect(form.getFieldsError()).toEqual([
+    { name: ['title'], errors: ['Title required'], warnings: [] }
+  ]);
+});
+
+it('rejects an async validation snapshot after a nested object changes', async () => {
+  const pending = deferred<string>();
+  const form = createForm({
+    initialValues: { user: { name: 'Anna' } },
+    rules: { user: [{ validator: () => pending.promise }] }
+  });
+  const validation = form.validateFields().catch((error: unknown) => error);
+
+  form.setFieldValue(['user', 'name'], 'Alice');
+  pending.resolve('Old user rejected');
+  const error = await validation;
+
+  expect(error).toMatchObject({ outOfDate: true, values: { user: { name: 'Anna' } } });
+  expect(form.values.user.name).toBe('Alice');
+  expect(form.getFieldError('user')).toEqual([]);
+});
+
+it('clears field errors when a partial update explicitly supplies undefined', async () => {
+  const form = createForm<{ title: string | undefined }>({
+    initialValues: { title: undefined }, rules: { title: [{ required: true }] }
+  });
+  await form.validateFields().catch(() => {});
+
+  form.setFieldsValue({ title: undefined });
+
+  expect(form.getFieldError('title')).toEqual([]);
+  expect(form.values.title).toBeUndefined();
+});
+
+it('returns undefined for an optional parent without losing the nested value type', () => {
+  const form = createForm<{ user?: { name: string } | null }>({ initialValues: {} });
+
+  expectTypeOf(form.getFieldValue(['user', 'name'])).toEqualTypeOf<string | undefined>();
+  expect(form.getFieldValue(['user', 'name'])).toBeUndefined();
+  form.setFieldValue(['user', 'name'], 'Anna');
+
+  expect(form.values.user?.name).toBe('Anna');
+});
+
+it('replaces the root through an empty NamePath without retaining removed fields', () => {
+  const form = createForm<{ title: string; hidden?: string }>({
+    initialValues: { title: 'Initial', hidden: 'Removed' }
+  });
+
+  form.setFieldValue([], { title: 'Replacement' });
+
+  expect(form.getFieldValue([])).toEqual({ title: 'Replacement' });
+  expect(form.getFieldValue('hidden')).toBeUndefined();
+});

@@ -9349,7 +9349,11 @@ FormItem предоставляет label, status, required, description и об
 Расположение подписи наследуется из `Form.layout`: `vertical` размещает её
 над control, `horizontal` — рядом с ним на широком экране.
 Значением владеет модель: обновляйте его явно через `setFieldValue` или
-`setFieldsValue`. Имя FormItem должно присутствовать в `initialValues`.
+`setFieldsValue`. `FormItem.name` принимает буквальный string/number либо массив
+сегментов: `['users', 0, 'name']`. Строка `"user.name"` остаётся отдельным ключом.
+Поля могут отсутствовать в initialValues; числовой сегмент отсутствующего
+контейнера создаёт массив, строковый `"0"` — объект. Native name вложенного control
+собирается через `_`; при необходимости задайте ему собственный name.
 Состояние `values` и ошибки предназначены для чтения.
 
 `theme.components.Form` настраивает Form и каждый FormItem: цвет и размер подписи,
@@ -9363,8 +9367,14 @@ validation, submit/reset, фокус и native attributes сохраняются
 `?fixture=form-theme`. Реальные layouts остаются vertical/horizontal; декларация
 inlineItemMarginBottom переносится без добавления inline layout.
 
-Поддерживаются плоские поля со значениями string, number, boolean, null,
-undefined, immutable Dayjs и массивами string/number/boolean. Правила включают required, min/max, pattern и синхронный либо
+Модель хранит скаляры, вложенные plain objects, массивы и экземпляры классов.
+`getFieldValue(name)` читает значение пути; `setFieldValue(name, value)` заменяет
+его целиком. `setFieldsValue` рекурсивно объединяет plain objects и заменяет
+массивы. `FormItem.rules` задаёт правила вложенного поля; при отсутствии локальных
+rules используются прежние правила createForm верхнего уровня.
+Правила модели действуют и без FormItem в DOM; локальные rules удаляются вместе
+с их полем, а значение по-прежнему сохраняется.
+Правила включают required, min/max, pattern и синхронный либо
 асинхронный `validator(value, values)`. Для строк min/max считают Unicode
 code points, для чисел сравнивают значение, для массивов считают элементы.
 Пустой массив считается пустым значением; массивы с 0 или false — непустыми.
@@ -9372,16 +9382,21 @@ Pattern проверяет скалярные значения; для пров�
 используйте custom validator. Пустые необязательные значения
 пропускают встроенные проверки, но передаются в custom validator.
 
-Массивы копируются при создании модели, установке полей, в snapshot проверки
+Plain objects и массивы копируются при создании модели, установке полей, в snapshot проверки
 и при каждом reset. Defaults, snapshot и аргументы владельца не разделяют
-изменяемые массивы. Значения модели, включая массивы, изменяйте через setters.
+изменяемые контейнеры. Значения модели изменяйте через setters.
 Dayjs|null также поддержан: immutable экземпляр сохраняется без proxy, coercion
 или сериализации; заменяйте его новым значением через setter.
 
 `validateFields()` возвращает snapshot значений или отклоняется с
-FormValidationError. Ошибка содержит `errors`, `values` и `outOfDate`.
+FormValidationError. Ошибка содержит `values`, `outOfDate` и `errorFields` с
+массивами сегментов name и сообщениями errors. `getFieldError(name)` и
+`getFieldsError(names?)` читают ошибки вложенных полей. Прежний `errors` сохраняет
+проекцию верхнего уровня. Warnings пока пусты: warningOnly rules не перенесены.
+Переданные в `validateFields(names)` пути выбирают проверяемые поля; snapshot
+по-прежнему содержит всю модель. Upstream возвращает проекцию выбранных путей.
 Устаревшие результаты не перезаписывают состояние после изменения или сброса
-формы. После blur поле считается touched; изменение любого поля повторно
+формы или удаления поля. После blur поле считается touched; изменение любого поля повторно
 проверяет touched-поля, включая зависимые validators.
 
 `form.submit(onFinish)` блокирует повторную отправку и возвращает результат
@@ -9394,6 +9409,14 @@ FormValidationError. Ошибка содержит `errors`, `values` и `outOfD
 сообщением. Нативная браузерная проверка отключена через novalidate, чтобы
 использовать единый набор правил. Серверная проверка данных остаётся
 ответственностью приложения.
+
+Семантика путей и merge сверена с неизменённым UMD Ant Design 6.6.8 и
+@rc-component/form 1.8.6. Svelte-модель сохраняет прежнюю изоляцию копий;
+upstream передаёт значения store без такой гарантии. Подтверждения —
+[browser и raw reference](./tests/browser/form-paths.spec.ts),
+[SSR](./tests/package/form-paths.ssr.test.ts) и [модель](./src/lib/form.model.test.ts).
+Form.List, полный validation API, dependencies, field adapters и остальные
+настройки Form ещё не перенесены; наличие методов чтения не означает полного RcForm API.
 
 ## Клавиатура и фокус
 
@@ -9674,7 +9697,7 @@ Popover и SSR; модель — нормализацию имён, Unicode-ин
 
 Эта версия покрывает перечисленное ядро. Древовидные/поисковые фильтры Table,
 расширенные режимы DatePicker,
-расширения Tree/TreeSelect/Upload/Menu, Select tags, Form.List, вложенные name paths,
+расширения Tree/TreeSelect/Upload/Menu, Select tags, Form.List,
 порталы, виртуализация и статические методы Modal пока отсутствуют. Совместимость
 всего React API и визуальная идентичность всех состояний не заявлены.
 
