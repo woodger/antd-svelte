@@ -370,7 +370,12 @@ export { default as Form } from './Form.svelte';
 export { default as FormItem } from './FormItem.svelte';
 export { default as FormList } from './FormList.svelte';
 export { default as FormErrorList } from './FormErrorList.svelte';
-export { createForm, type FormInstance, type SubmissionResult } from './form.model.svelte.js';
+export {
+  createForm,
+  type FormInstance,
+  type FormValidateOptions,
+  type SubmissionResult
+} from './form.model.svelte.js';
 export { FormValidationError } from './FormValidationError';
 export type { ButtonProps } from './Button.svelte';
 export type {

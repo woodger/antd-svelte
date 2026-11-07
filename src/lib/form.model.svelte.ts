@@ -8,6 +8,7 @@ import {
   getFormValue,
   mergeFormValues,
   sameFormPath,
+  sameFormValue,
   setFormValue,
   type NamePath,
   type NamePathValue,
@@ -26,6 +27,16 @@ export type SubmissionResult<Values extends FormValues> =
   | { status: 'invalid'; error: FormValidationError<Values>; }
   | { status: 'failed'; error: unknown; }
   | { status: 'busy'; };
+
+/** Все флаги по умолчанию false; возвращаемый snapshot сохраняет прежний полный объём values. */
+export interface FormValidateOptions {
+  /** Не меняет errors/warnings/touched/validating и не помечает поле проверенным для dirty. */
+  validateOnly?: boolean;
+  /** Проверяет также зарегистрированные поля, чей путь начинается с выбранного имени. */
+  recursive?: boolean;
+  /** Проверяет изменённые, touched, уже запущенные обычной validation поля и заданные defaults. */
+  dirty?: boolean;
+}
 
 /** Реактивные значения, validation и submit одной формы; экземпляр не разделяется глобально. */
 export interface FormInstance<Values extends FormValues> {
@@ -48,7 +59,8 @@ export interface FormInstance<Values extends FormValues> {
   setFieldsValue(next: PartialFormValues<Values>): void;
   touchField(name: NamePath): void;
   resetFields(): void;
-  validateFields(names?: readonly NamePath[]): Promise<Values>;
+  validateFields(options?: FormValidateOptions): Promise<Values>;
+  validateFields(names?: readonly NamePath[], options?: FormValidateOptions): Promise<Values>;
   submit(onFinish: (values: Values) => void | Promise<void>): Promise<SubmissionResult<Values>>;
 }
 
@@ -59,6 +71,7 @@ interface StoredField {
   errors?: string[];
   warnings?: string[];
   touched: boolean;
+  dirty: boolean;
   validating: boolean;
   run: number;
 }
@@ -77,6 +90,7 @@ export function createForm<Values extends FormValues>({
   const defaults = copyFormValue(initialValues);
   let revision = $state(0);
   let request = 0;
+  let lastValidation = 0;
   let values = $state<Values>(copyFormValue(defaults));
   let resetKey = $state.raw<object>({});
   let fields = $state<StoredField[]>([]);
@@ -95,7 +109,7 @@ export function createForm<Values extends FormValues>({
     const existing = findField(name);
     if (existing) return existing;
 
-    fields.push({ path: formNamePath(name), touched: false, validating: false, run: 0 });
+    fields.push({ path: formNamePath(name), touched: false, dirty: false, validating: false, run: 0 });
 
     return fields[fields.length - 1];
   }
@@ -132,16 +146,21 @@ export function createForm<Values extends FormValues>({
       }));
   }
 
-  async function validate(selected: readonly StoredField[]): Promise<Values> {
+  async function validate(selected: readonly StoredField[], validateOnly = false): Promise<Values> {
     const snapshot = copyFormValue(values);
     const startRevision = revision;
     const token = ++request;
-    const entries = selected.map((field) => ({ field, path: fieldPath(field) }));
+    // Свежесть Promise общая; validateOnly не меняет field.run видимой проверки.
+    lastValidation = token;
+    const entries = selected.map((field) => ({ field, path: fieldPath(field), run: field.run }));
 
-    for (const { field } of entries) {
-      field.run = token;
-      field.validating = true;
-      field.warnings = [];
+    if (!validateOnly) {
+      for (const { field } of entries) {
+        field.run = token;
+        field.validating = true;
+        field.warnings = [];
+        if (fieldRules(field).length) field.dirty = true;
+      }
     }
 
     const results = await Promise.all(entries.map(async ({ field, path }) => {
@@ -149,7 +168,7 @@ export function createForm<Values extends FormValues>({
         getFormValue(snapshot, path), snapshot, fieldRules(field)
       );
 
-      if (field.run === token) {
+      if (!validateOnly && field.run === token) {
         field.validating = false;
 
         if (revision === startRevision && sameFormPath(path, fieldPath(field))) {
@@ -163,9 +182,11 @@ export function createForm<Values extends FormValues>({
 
     const nextErrors = results.filter((field) => field.errors.length);
 
-    const outOfDate = revision !== startRevision || entries.some(({ field, path }) =>
-      field.run !== token || !fields.includes(field) || !sameFormPath(path, fieldPath(field))
-    );
+    const outOfDate = lastValidation !== token || revision !== startRevision
+      || entries.some(({ field, path, run }) =>
+        field.run !== (validateOnly ? run : token) || !fields.includes(field)
+          || !sameFormPath(path, fieldPath(field))
+      );
 
     if (outOfDate || nextErrors.length) {
       throw new FormValidationError(snapshot, rootErrors(nextErrors), outOfDate, nextErrors);
@@ -174,8 +195,35 @@ export function createForm<Values extends FormValues>({
     return snapshot;
   }
 
-  function validateFields(names?: readonly NamePath[]): Promise<Values> {
-    return validate(names ? names.map(ensureField) : [...fields]);
+  function validateFields(
+    namesOrOptions?: readonly NamePath[] | FormValidateOptions,
+    options?: FormValidateOptions
+  ): Promise<Values> {
+    const names = Array.isArray(namesOrOptions) ? namesOrOptions as readonly NamePath[] : undefined;
+    const settings = (names ? options : namesOrOptions ?? options) as FormValidateOptions | undefined;
+    let selected = [...fields];
+
+    if (names) {
+      if (settings?.recursive) {
+        selected = fields.filter((field) =>
+          names.some((name) => containsFormPath(name, fieldPath(field)))
+        );
+      } else if (settings?.validateOnly) {
+        selected = fields.filter((field) =>
+          names.some((name) => sameFormPath(name, fieldPath(field)))
+        );
+      } else {
+        selected = names.map(ensureField);
+      }
+    }
+
+    if (settings?.dirty) {
+      selected = selected.filter((field) => field.dirty || field.touched
+        || field.registration?.initialValue !== undefined
+        || getFormValue(defaults, fieldPath(field)) !== undefined);
+    }
+
+    return validate(selected, settings?.validateOnly);
   }
 
   function revalidateTouched() {
@@ -247,10 +295,16 @@ export function createForm<Values extends FormValues>({
       return field ? fieldRules(field).some((rule) => rule.required && !rule.warningOnly) : false;
     },
     setFieldValue(name, value) {
-      if (Object.is(getFormValue(values, name), value)) return;
+      if (Object.is(getFormValue(values, name), value)) {
+        const field = findField(name);
+        if (field) field.dirty = true;
+
+        return;
+      }
 
       updateValues(setFormValue(values, name, value) as Values);
       const field = ensureField(name);
+      field.dirty = true;
       clearField(field);
 
       for (const child of fields) {
@@ -266,6 +320,10 @@ export function createForm<Values extends FormValues>({
 
       for (const field of fields) {
         const path = fieldPath(field);
+        if (!sameFormValue(getFormValue(values, path), getFormValue(merged, path))) {
+          field.dirty = true;
+        }
+
         const parent = getFormValue(next, path.slice(0, -1));
         const provided = parent !== null && typeof parent === 'object'
           && path.length > 0 && Object.hasOwn(parent, path[path.length - 1]);
@@ -282,7 +340,9 @@ export function createForm<Values extends FormValues>({
       revalidateTouched();
     },
     touchField(name) {
-      ensureField(name).touched = true;
+      const field = ensureField(name);
+      field.touched = true;
+      field.dirty = true;
       revalidateTouched();
     },
     resetFields() {
@@ -305,6 +365,7 @@ export function createForm<Values extends FormValues>({
         field.errors = undefined;
         field.warnings = undefined;
         field.touched = false;
+        field.dirty = false;
         field.validating = false;
         field.run = ++request;
       }
@@ -360,6 +421,7 @@ export function createForm<Values extends FormValues>({
       const list = ensureField(name);
       clearField(list);
       list.touched = true;
+      list.dirty = true;
 
       for (const field of fields) {
         if (field !== list && containsFormPath(name, fieldPath(field))) {
@@ -379,7 +441,8 @@ export function createForm<Values extends FormValues>({
 
         if (!field || field.registration) {
           fields.push({
-            path: formNamePath(registration.name), touched: false, validating: false, run: 0
+            path: formNamePath(registration.name), touched: false, dirty: false,
+            validating: false, run: 0
           });
           field = fields[fields.length - 1];
         }
@@ -394,6 +457,7 @@ export function createForm<Values extends FormValues>({
               registered.errors = undefined;
               registered.warnings = undefined;
               registered.touched = false;
+              registered.dirty = false;
               registered.validating = false;
             }
 

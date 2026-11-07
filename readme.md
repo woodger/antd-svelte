@@ -9415,6 +9415,47 @@ warning. Предупреждение входит в доступное опи�
 формы или удаления локального поля. После blur поле считается touched; изменение любого поля повторно
 проверяет touched-поля, включая зависимые validators.
 
+`validateFields(options)` и `validateFields(names, options)` принимают
+`FormValidateOptions`. Все флаги по умолчанию false и могут сочетаться:
+
+```ts
+await form.validateFields([['users']], {
+  recursive: true,
+  dirty: true,
+  validateOnly: true
+});
+```
+
+`validateOnly` возвращает результат правил без изменения errors, warnings,
+touched и validating. Уже показанные сообщения сохраняются; такая проверка
+не делает нетронутое поле dirty. Фокус и значения controls не меняются.
+`recursive` выбирает зарегистрированных потомков указанного пути, включая
+само поле; пересекающиеся пути не запускают его правила повторно. Строка с
+точкой остаётся буквальным именем, числовой и строковый сегменты различаются.
+
+`dirty` выбирает touched, изменённые поля и поля, для которых уже запускалась
+обычная проверка.
+Как upstream, он включает поля с initialValues/initialValue, кроме undefined:
+пустая строка, 0, false и null также считаются заданными начальными значениями.
+`setFieldValue` делает известное поле dirty и при записи прежнего значения;
+setFieldsValue — при изменении содержимого. Plain containers сравниваются по
+собственным значениям, непрозрачные экземпляры — по identity. Reset очищает
+историю dirty; заданные defaults продолжают участвовать в фильтрации.
+Прежние правила touched модели сохраняются: запись сама не заменяет blur/submit.
+
+Новый вызов validation помечает предыдущий Promise outOfDate, как upstream.
+При этом validateOnly не отменяет видимую проверку: её собственные сообщения
+и validating завершаются независимо от результата тихой проверки.
+Защита snapshot после изменения, reset и удаления поля сохраняется и для validateOnly.
+
+В Ant Design 6.6.8 вызов `validateFields(undefined, options)` игнорирует options
+вопреки объявленной перегрузке. В Svelte второй аргумент применяется; наблюдение
+сохранено в [raw reference](./tests/browser/fixtures/ant-design-form-validation-options-observation.json).
+Фильтрация и параллельные запросы сверены с неизменённым UMD:
+[браузер](./tests/browser/form-validation-options.spec.ts),
+[публичный пакет](./tests/package/form-validation-options.ssr.test.ts) и
+[модель](./src/lib/form-validation-options.test.ts).
+
 `form.submit(onFinish)` блокирует повторную отправку и возвращает результат
 `success`, `invalid`, `failed` или `busy`. Изменение значений во время проверки
 делает результат устаревшим и предотвращает вызов onFinish. Уже начавшуюся

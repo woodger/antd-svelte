@@ -127,3 +127,30 @@ export function mergeFormValues<Values>(store: Values, next: unknown): Values {
 
   return merge(store, next) as Values;
 }
+
+/** Plain containers сравниваются по собственным значениям; непрозрачные экземпляры — по identity. */
+export function sameFormValue(left: unknown, right: unknown): boolean {
+  const pairs = new WeakMap<object, WeakSet<object>>();
+
+  function equal(first: unknown, second: unknown): boolean {
+    if (Object.is(first, second)) return true;
+    if ((!Array.isArray(first) && !isPlainObject(first))
+      || (!Array.isArray(second) && !isPlainObject(second))) return false;
+    if (Array.isArray(first) !== Array.isArray(second)) return false;
+    if (Array.isArray(first) && Array.isArray(second) && first.length !== second.length) return false;
+
+    const keys = Object.keys(first);
+    if (keys.length !== Object.keys(second).length) return false;
+    if (pairs.get(first)?.has(second)) return true;
+
+    const matched = pairs.get(first) ?? new WeakSet<object>();
+    matched.add(second);
+    pairs.set(first, matched);
+
+    return keys.every((key) => Object.hasOwn(second, key) && equal(
+      (first as Record<string, unknown>)[key], (second as Record<string, unknown>)[key]
+    ));
+  }
+
+  return equal(left, right);
+}

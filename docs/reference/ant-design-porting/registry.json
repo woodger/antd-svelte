@@ -4863,7 +4863,13 @@
         "tests/browser/fixtures/FormErrorListFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-error-list-observation.json",
         "tests/package/form-error-list.ssr.test.ts",
-        "tests/browser/fixtures/ant-design-form-warning-lifecycle-observation.json"
+        "tests/browser/fixtures/ant-design-form-warning-lifecycle-observation.json",
+        "src/lib/form-validation-options.test.ts",
+        "tests/browser/form-validation-options.spec.ts",
+        "tests/browser/fixtures/FormValidationOptionsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-validation-options-observation.json",
+        "tests/browser/fixtures/ant-design-form-validation-concurrency-observation.json",
+        "tests/package/form-validation-options.ssr.test.ts"
       ],
       "features": [
         {
@@ -4876,7 +4882,7 @@
         },
         {
           "id": "gap-1",
-          "title": "Полный API Form.List и вложенных name paths",
+          "title": "Полный API Form и настройки полей",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -4924,9 +4930,15 @@
             "tests/browser/form-error-list.spec.ts",
             "tests/browser/fixtures/FormErrorListFixtures.svelte",
             "tests/browser/fixtures/ant-design-form-error-list-observation.json",
-            "tests/package/form-error-list.ssr.test.ts"
+            "tests/package/form-error-list.ssr.test.ts",
+            "src/lib/form-validation-options.test.ts",
+            "tests/browser/form-validation-options.spec.ts",
+            "tests/browser/fixtures/FormValidationOptionsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-validation-options-observation.json",
+            "tests/browser/fixtures/ant-design-form-validation-concurrency-observation.json",
+            "tests/package/form-validation-options.ssr.test.ts"
           ],
-          "note": "NamePath и FormList core перенесены: массивы, add/remove/move, stable keys, вложенный prefix, initialValue/reset и custom validators, warningOnly и FormErrorList с prefixCls списка. Полный API остаётся partial: Form semantic config, validation options, field adapters и остальные настройки Form ещё не перенесены."
+          "note": "NamePath и FormList core перенесены: массивы, add/remove/move, stable keys, вложенный prefix, initialValue/reset и custom validators, warningOnly и FormErrorList с prefixCls списка, validateOnly/recursive/dirty. Полный API остаётся partial: Form semantic config, полный набор правил и field lifecycle, field adapters и остальные настройки Form ещё не перенесены."
         },
         {
           "id": "dayjs-values",
@@ -5071,6 +5083,25 @@
             "tests/package/form-error-list.ssr.test.ts"
           ],
           "note": "Текущие errors/warnings, non-null help (включая false/0/пустую строку), helpStatus, fieldId и callback видимости; class заменяет React className, snippets заменяют ReactNode. Вложенный FormList задаёт prefixCls без изменения соседних FormItem. Темы Form, opacity/height motion, CSS easing, deadline 500 ms, debounce очистки 10 ms, disabled/reduced motion и cleanup перенесены. Порядок leaving rows сверён с неизменённым diffKeys @rc-component/motion 1.3.3; в поставке есть MIT-лицензия. Обычные сообщения сохраняют key при перестановке, дубликаты получают уникальные keys. Дефект неизменённого UMD 6.6.8 с текстом toString зафиксирован: после обновления остаются 7 DOM-сообщений вместо переданных 5; здесь лишние строки не сохраняются. Общие semantic classNames/styles Form (help/helpItem) остаются вне этого этапа."
+        },
+        {
+          "id": "validation-options",
+          "title": "ValidateFields: validateOnly, recursive, dirty и параллельные запросы",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.model.svelte.ts",
+            "src/lib/index.ts",
+            "src/lib/form-validation-options.test.ts",
+            "src/lib/form-store.engine.ts",
+            "src/lib/form-store.engine.test.ts",
+            "tests/browser/form-validation-options.spec.ts",
+            "tests/browser/fixtures/FormValidationOptionsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-validation-options-observation.json",
+            "tests/browser/fixtures/ant-design-form-validation-concurrency-observation.json",
+            "tests/package/form-validation-options.ssr.test.ts"
+          ],
+          "note": "Обе текущие перегрузки и сочетания флагов. ValidateOnly не меняет errors/warnings/touched/validating и историю dirty; recursive выбирает зарегистрированных потомков один раз с различием number/string; dirty включает заданные defaults (кроме undefined), обычную validation, touched и записи, reset очищает историю. Сохранены полный snapshot, правила touched createForm и защита после изменения/reset/unregister. Обычные и тихие запросы разделяют latest-request outOfDate, не отменяя UI metadata друг друга; сверено с неизменённым UMD 6.6.8 и rc-form 1.8.6. Подтверждённый дефект Source validateFields(undefined, options) не повторяется: второй аргумент применяется. Plain values для merge сравниваются по own content с поддержкой cycles/holes; opaque instances сохраняют identity contract. Полные rules, field adapters и semantic config остаются вне этапа."
         }
       ]
     },

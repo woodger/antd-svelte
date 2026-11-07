@@ -1,5 +1,41 @@
 import { describe, expect, it } from 'vitest';
-import { getFormValue, mergeFormValues, setFormValue } from './form-store.engine';
+import { getFormValue, mergeFormValues, sameFormValue, setFormValue } from './form-store.engine';
+
+describe('sameFormValue', () => {
+  it('compares own nested content without confusing missing keys or sparse positions', () => {
+    const sparse: unknown[] = [];
+    sparse.length = 1;
+
+    expect(sameFormValue({ rows: [{ count: 1 }] }, { rows: [{ count: 1 }] })).toBe(true);
+    expect(sameFormValue({ first: undefined }, { second: undefined })).toBe(false);
+    expect(sameFormValue(sparse, [undefined])).toBe(false);
+    expect(sameFormValue(NaN, NaN)).toBe(true);
+  });
+
+  it('compares shared and cyclic containers without treating repeated references as changes', () => {
+    const left: { value: number; self?: unknown } = { value: 1 };
+    left.self = left;
+    const right: { value: number; self?: unknown } = { value: 1 };
+    right.self = right;
+
+    expect(sameFormValue(left, right)).toBe(true);
+    right.value = 2;
+    expect(sameFormValue(left, right)).toBe(false);
+    const shared = { value: 1 };
+    const equivalent = { value: 1 };
+    expect(sameFormValue({ first: shared, second: shared }, {
+      first: equivalent, second: equivalent
+    })).toBe(true);
+  });
+
+  it('retains opaque instance identity instead of comparing only enumerable properties', () => {
+    const date = new Date('2026-01-01');
+
+    expect(sameFormValue(date, date)).toBe(true);
+    expect(sameFormValue(date, new Date('2026-01-01'))).toBe(false);
+    expect(sameFormValue(new Map(), new Map())).toBe(false);
+  });
+});
 
 // Expected values описывают публичную семантику NamePath, независимо от устройства store.
 describe('Form NamePath store', () => {

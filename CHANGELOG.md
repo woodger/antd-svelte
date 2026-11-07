@@ -135,6 +135,12 @@
 
 ### Added
 
+- Form: validateFields принимает validateOnly, recursive и dirty, включая их
+  сочетания. Тихая проверка сохраняет UI metadata, recursive различает сегменты
+  пути, dirty учитывает defaults, проверки, записи и reset. Параллельные запросы
+  сверены с upstream; полный snapshot и прежние правила touched сохранены.
+  Второй аргумент после undefined применяется; дефект upstream записан отдельно.
+
 - FormErrorList: ошибки и предупреждения FormList, приоритет help, snippets,
   fieldId, темы, prefixCls списка и callback видимости. Сохранены задержка
   очистки и порядок leaving rows; motion и таймеры отменяются при unmount.
