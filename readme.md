@@ -4492,9 +4492,8 @@ ConfigProvider. Отсутствующие значения дополняютс
 
 Type поддерживает default/dot/inline/navigation/panel, variant — filled/outlined.
 Panel всегда горизонтальный. Dot/inline используют вертикальные заголовки в
-горизонтальном списке; navigation сохраняет горизонтальные заголовки. Явный
-orientation имеет приоритет над legacy direction; titlePlacement — над
-labelPlacement. ProgressDot включает dot только без другого явного type.
+горизонтальном списке; navigation сохраняет горизонтальные заголовки.
+Orientation задаёт направление списка, titlePlacement — размещение заголовков.
 Inline скрывает content в строке и показывает его в Tooltip по hover/focus;
 Snippet title сохраняет rich content, Escape закрывает tooltip без смены фокуса.
 Wrapper Tooltip находится внутри li, сохраняя нативную ol/li-семантику.
@@ -4519,12 +4518,11 @@ header/title/subtitle/content/rail; локальные слои перекрыв
 перекрывает styles.root. Root style имеет приоритет над styles.root. Стрелки navigation наследуют
 colorTextDisabled активной темы; прямой --ant-steps-nav-arrow-color имеет приоритет.
 Item.onClick вызывается перед onChange, включая повторный выбор current;
-в disabled оба callback подавлены. Description служит fallback для content.
+в disabled оба callback подавлены. Содержимое шага задаётся через content.
 
 IconRender — Snippet<[originalIcon, info]>, где info содержит index/active/item/
 components.Icon. Можно отрендерить исходный Snippet или использовать переданный
-Svelte Icon-компонент. Legacy progressDot принимает аналогичный Snippet с
-index/status/title/content/description; iconRender имеет приоритет.
+Svelte Icon-компонент.
 Bind:nativeElement возвращает ol; rootClassName добавляется к его class.
 
 Сохранены согласованные отличия v1 от React: нативные кнопки внутри именованного

@@ -18,15 +18,12 @@
     status = 'process',
     onChange,
     orientation,
-    direction,
     size,
     responsive = true,
     disabled,
     type,
     variant = 'filled',
     titlePlacement,
-    labelPlacement,
-    progressDot,
     percent,
     maxCount,
     ellipsis,
@@ -57,13 +54,10 @@
   let layout = $derived(
     stepsLayout(
       type,
-      Boolean(progressDot),
       orientation,
-      direction,
       responsive,
       mobile,
-      titlePlacement,
-      labelPlacement
+      titlePlacement
     )
   );
   let actualPercent = $derived(layout.type === 'inline' ? undefined : percent);
@@ -81,15 +75,12 @@
         status,
         onChange,
         orientation: layout.vertical ? 'vertical' as const : 'horizontal' as const,
-        direction,
         size,
         responsive,
         disabled,
         type: layout.type,
         variant,
         titlePlacement: layout.titlePlacement as 'horizontal' | 'vertical',
-        labelPlacement,
-        progressDot,
         percent: actualPercent,
         maxCount,
         ellipsis,
@@ -128,8 +119,6 @@
   $effect(() => {
     if (!responsive
       || orientation === 'vertical'
-      || !orientation
-      && direction === 'vertical'
       || layout.type === 'panel') return;
     const media = window.matchMedia(
       composition?.timeline ? '(max-width: 575.98px)' : '(max-width: 531.98px)'
@@ -194,9 +183,7 @@
           || Boolean(step.item.disabled)} nextStatus={index < displayed.length - 1
               ? composition?.railFollowPrevStatus ? statuses[index] : statuses[index + 1]
               : undefined} {rootId} statusText={composition?.timeline ? undefined : strings[statuses[index]]} composed={composition?.timeline} {classes} {slots}
-      dot={layout.dot} panel={layout.type === 'panel'} inline={layout.type === 'inline'} percent={actualPercent} {iconRender} progressDotRender={layout.type === 'dot' && typeof progressDot === 'function'
-          ? progressDot
-          : undefined}
+      dot={layout.dot} panel={layout.type === 'panel'} inline={layout.type === 'inline'} percent={actualPercent} {iconRender}
       ellipsis={step.originIndex < 0} sourceKey={step.item.originalKey
           ?? (display.collapsed && step.originIndex >= 0
             ? step.originIndex

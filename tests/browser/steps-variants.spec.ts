@@ -67,7 +67,7 @@ test(
 );
 
 test(
-  'Steps dot and legacy progressDot honor type priority and expose snippet render info',
+  'Steps dot and navigation preserve their icon and title layout',
   async ({ page }) => {
     await page.getByLabel('Steps type', { exact: true }).selectOption('dot');
 
@@ -77,14 +77,8 @@ test(
     await expect(root.locator('.ant-steps-item:not(.ant-steps-item-ellipsis) .ant-steps-item-icon'))
       .toHaveCount(3);
 
-    await page.getByLabel('Legacy Steps dots', { exact: true }).check();
-
-    await expect(root.getByTestId('legacy-dot')).toHaveCount(5);
-    await expect(root.getByTestId('legacy-dot').nth(2)).toHaveAttribute('data-index', '14');
-
     await page.getByLabel('Steps type', { exact: true }).selectOption('navigation');
 
-    await expect(root.getByTestId('legacy-dot')).toHaveCount(0);
     await expect(root).not.toHaveClass(/ant-steps-dot/);
     await expect(root).toHaveClass(/ant-steps-title-horizontal/);
   }

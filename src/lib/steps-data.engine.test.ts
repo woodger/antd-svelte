@@ -29,19 +29,19 @@ describe('Steps expanded data and layout', () => {
     expect(items).toHaveLength(4);
     expect(new Set(items.map(item => item.key)).size).toBe(4);
   });
-  it('uses legacy description only for nullish content and retains valid falsy content', () => {
+  it('retains explicit scalar content and its source presence rules', () => {
     expect(
       stepsDataItems(
         [
-          { content: 0, description: 'Ignored' },
-          { content: false, description: 'Ignored' },
-          { content: null, description: 'Legacy' }
+          { content: 0 },
+          { content: false },
+          { content: null }
         ]
       ).map(
         item => item.content
       )
     ).toEqual(
-      [0, false, 'Legacy']
+      [0, false, null]
     );
     for (const value of [0, false, '', true])
       expect(stepsDataHasContent(value)).toBe(true);
@@ -49,39 +49,39 @@ describe('Steps expanded data and layout', () => {
     expect(stepsDataHasContent(null)).toBe(false);
   });
   it(
-    'gives explicit non-default type priority over progressDot and forces panel horizontal',
+    'preserves layout constraints for navigation, panel and dot',
     () => {
-      expect(stepsLayout('navigation', true, undefined, undefined, true, false, 'vertical'))
+      expect(stepsLayout('navigation', undefined, true, false, 'vertical'))
         .toEqual(
           { type: 'navigation', dot: false, vertical: false, titlePlacement: 'horizontal' }
         );
-      expect(stepsLayout('panel', false, 'vertical', undefined, true, true)).toEqual(
+      expect(stepsLayout('panel', 'vertical', true, true)).toEqual(
         { type: 'panel', dot: false, vertical: false, titlePlacement: 'horizontal' }
       );
-      expect(stepsLayout('default', true, undefined, undefined, true, false)).toEqual(
+      expect(stepsLayout('dot', undefined, true, false)).toEqual(
         { type: 'dot', dot: true, vertical: false, titlePlacement: 'vertical' }
       );
     }
   );
   it(
-    'resolves orientation before direction and title placement after dot and vertical constraints',
+    'resolves orientation and title placement within dot and vertical constraints',
     () => {
       expect(
-        stepsLayout(undefined, false, 'horizontal', 'vertical', false, true, 'vertical').vertical
+        stepsLayout(undefined, 'horizontal', false, true, 'vertical').vertical
       ).toBe(
         false
       );
-      expect(stepsLayout('inline', false, undefined, undefined, true, true).titlePlacement).toBe(
+      expect(stepsLayout('inline', undefined, true, true).titlePlacement).toBe(
         'horizontal'
       );
       expect(
-        stepsLayout(undefined, false, 'vertical', undefined, false, false, 'vertical')
+        stepsLayout(undefined, 'vertical', false, false, 'vertical')
           .titlePlacement
       ).toBe(
         'horizontal'
       );
       expect(
-        stepsLayout(undefined, false, undefined, undefined, false, false, undefined, 'vertical')
+        stepsLayout(undefined, undefined, false, false, 'vertical')
           .titlePlacement
       ).toBe(
         'vertical'

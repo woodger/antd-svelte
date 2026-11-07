@@ -28,7 +28,6 @@ export interface StepsDataItem {
   title?: StepsDataContent;
   subTitle?: StepsDataContent;
   content?: StepsDataContent;
-  description?: StepsDataContent;
   icon?: StepsDataContent;
   status?: StepsStatus;
   disabled?: boolean;
@@ -61,7 +60,7 @@ export function stepsDataItems(items: readonly (
       : item.key === undefined ? `${namespace}index:${index}` : `${namespace}number:${item.key}`;
     if (seen.has(key)) return [];
     seen.add(key);
-    return [{ ...item, key, originalKey: item.key, content: item.content ?? item.description }];
+    return [{ ...item, key, originalKey: item.key, content: item.content }];
   });
 }
 export function stepsDataHasContent(value: StepsDataContent): boolean {
@@ -69,27 +68,21 @@ export function stepsDataHasContent(value: StepsDataContent): boolean {
 }
 export function stepsLayout(
   type: 'default' | 'dot' | 'inline' | 'navigation' | 'panel' | undefined,
-  progressDot: boolean,
   orientation: 'horizontal' | 'vertical' | undefined,
-  direction: 'horizontal' | 'vertical' | undefined,
   responsive: boolean,
   mobile: boolean,
-  titlePlacement?: 'horizontal' | 'vertical',
-  labelPlacement?: 'horizontal' | 'vertical'
+  titlePlacement?: 'horizontal' | 'vertical'
 ) {
-  const actualType = type && type !== 'default' ? type : progressDot ? 'dot' : type;
-  const dot = actualType === 'dot' || actualType === 'inline';
-  const vertical = actualType !== 'panel'
-    && ((responsive
-      && mobile)
-      || (orientation
-        || direction) === 'vertical');
+  const dot = type === 'dot' || type === 'inline';
+  const vertical = type !== 'panel'
+    && ((responsive && mobile) || orientation === 'vertical');
+
   return {
-    type: actualType,
+    type,
     dot,
     vertical,
     titlePlacement: dot || vertical
       ? vertical ? 'horizontal' : 'vertical'
-      : type === 'navigation' ? 'horizontal' : titlePlacement || labelPlacement || 'horizontal'
+      : type === 'navigation' ? 'horizontal' : titlePlacement || 'horizontal'
   };
 }

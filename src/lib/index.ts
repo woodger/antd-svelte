@@ -606,8 +606,7 @@ export type {
   StepsSemanticSlots,
   StepsType,
   StepsIconInfo,
-  StepsIconRender,
-  StepsProgressDotRender
+  StepsIconRender
 } from './steps-expanded.types';
 export type { StepsLocale } from './types';
 export type {

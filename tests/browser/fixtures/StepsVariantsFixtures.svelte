@@ -4,8 +4,7 @@
   import type {
     StepsDataItem,
     StepsType,
-    StepsIconRender,
-    StepsProgressDotRender
+    StepsIconRender
   } from 'antd-svelte';
 
   let type = $state<StepsType>('default');
@@ -18,7 +17,6 @@
   let percentage = $state(false);
   let vertical = $state(false);
   let custom = $state(false);
-  let legacy = $state(false);
   let mappedIcon = $state(false);
   let titleVertical = $state(false);
   let semantics = $state(false);
@@ -46,10 +44,6 @@
   {#if mappedIcon}<info.components.Icon data-testid="custom-step-icon">{info.index + 1}</info.components.Icon>{:else}{@render original()}{/if}
   <span class="custom-icon-index" aria-hidden="true">{info.index}</span>
 {/snippet}
-{#snippet legacyDot(original: Snippet, info: Parameters<StepsProgressDotRender>[1])}<span
-  data-testid="legacy-dot"
-  data-index={info.index}
->{@render original()}</span>{/snippet}
 <section id="steps-variants-fixture" aria-label="Steps variants fixture">
   <label>Steps type <select aria-label="Steps type" bind:value={type}><option>default</option><option>dot</option><option>inline</option><option>navigation</option><option>panel</option></select></label>
   <label>Steps variant <select aria-label="Steps variant" bind:value={variant}><option>filled</option><option>outlined</option></select></label>
@@ -59,7 +53,6 @@
   <label><input type="checkbox" bind:checked={titleVertical} /> Vertical Steps titles</label>
   <label><input type="checkbox" bind:checked={custom} /> Custom Steps icons</label>
   <label><input type="checkbox" bind:checked={mappedIcon} /> Replace Steps icon node</label>
-  <label><input type="checkbox" bind:checked={legacy} /> Legacy Steps dots</label>
   <label><input type="checkbox" bind:checked={semantics} /> Semantic Steps variants</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark Steps variants</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact Steps variants</label>
@@ -83,7 +76,6 @@
       percent={percentage ? 60 : undefined}
       orientation={vertical ? 'vertical' : 'horizontal'}
       titlePlacement={titleVertical ? 'vertical' : 'horizontal'}
-      progressDot={legacy ? legacyDot : undefined}
       iconRender={custom ? renderedIcon : undefined}
       classNames={semantics ? { root: 'semantic-steps-root', itemTitle: 'semantic-steps-title' } : undefined}
       styles={semantics ? { root: 'color:red', item: 'color:red' } : undefined}

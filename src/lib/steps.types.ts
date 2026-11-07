@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from 'svelte/elements';
 import type { StepsDataItem, StepsSemanticSlots } from './steps-data.engine';
-import type { StepsType, StepsIconRender, StepsProgressDotRender } from './steps-expanded.types';
+import type { StepsType, StepsIconRender } from './steps-expanded.types';
 import type { Snippet } from 'svelte';
 
 export type StepsStatus = 'wait' | 'process' | 'finish' | 'error';
@@ -29,10 +29,7 @@ export interface StepsProps extends Omit<
   /** @defaultValue 'filled' */
   variant?: 'filled' | 'outlined';
   type?: StepsType;
-  direction?: StepsOrientation;
   titlePlacement?: StepsOrientation;
-  labelPlacement?: StepsOrientation;
-  progressDot?: boolean | StepsProgressDotRender;
   percent?: number;
   maxCount?: number;
   ellipsis?: boolean;

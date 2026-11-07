@@ -12,6 +12,10 @@
 - У Progress удалены trailColor, width, gapPosition и strokeWidth для line/steps.
   Сохранены railColor, size, gapPlacement и актуальный strokeWidth у circle/dashboard.
 
+- У Steps удалены direction, labelPlacement, progressDot и item.description,
+  а также принадлежащие progressDot тип и renderer. Сохранены orientation,
+  titlePlacement, type="dot", iconRender и content.
+
 - У Slider удалены vertical, count, onAfterChange и handleStyle/trackStyle/railStyle
   в обоих режимах. Сохранены orientation, range.minCount/maxCount,
   onChangeComplete, semantic styles, native формы, фокус и gestures.

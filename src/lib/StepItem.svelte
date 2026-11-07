@@ -24,7 +24,6 @@
     inline,
     percent,
     iconRender,
-    progressDotRender,
     ellipsis,
     sourceKey,
     onChoose,
@@ -113,10 +112,6 @@
     {#if iconRender}{@render iconRender(
         originalIcon,
         { index, active, item: iconItem, components: { Icon: StepIcon } }
-      )}
-    {:else if progressDotRender}{@render progressDotRender(
-        originalIcon,
-        { index, status, title: item.title, description: item.description, content: item.content }
       )}
     {:else}{@render originalIcon()}{/if}
     <div class={[

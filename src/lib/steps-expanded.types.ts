@@ -4,7 +4,6 @@ import type { StepsStatus } from './steps.types';
 import type {
   NormalizedStepsDataItem,
   StepsDataItem,
-  StepsDataContent,
   StepsSemanticSlots
 } from './steps-data.engine';
 export type { StepsDataItem, StepsDataContent, StepsItemSlots, StepsSemanticSlots } from './steps-data.engine';
@@ -16,18 +15,6 @@ export interface StepsIconInfo {
   components: { Icon: typeof StepIcon; };
 }
 export type StepsIconRender = Snippet<[Snippet, StepsIconInfo]>;
-export type StepsProgressDotRender = Snippet<
-  [
-    Snippet,
-    {
-      index: number;
-      status: StepsStatus;
-      title?: StepsDataContent;
-      description?: StepsDataContent;
-      content?: StepsDataContent;
-    }
-  ]
->;
 /** Внутренние параметры отображения одного элемента Steps. */
 export interface StepItemViewProps {
   item: NormalizedStepsDataItem;
@@ -46,7 +33,6 @@ export interface StepItemViewProps {
   inline?: boolean;
   percent?: number;
   iconRender?: StepsIconRender;
-  progressDotRender?: StepsProgressDotRender;
   ellipsis?: boolean;
   sourceKey?: string | number;
   onChoose?: (event: MouseEvent) => void;

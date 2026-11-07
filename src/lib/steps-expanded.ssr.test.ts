@@ -8,7 +8,7 @@ import type { Snippet } from 'svelte';
 
 const snippet = createRawSnippet(() => ({ render: () => '<strong>Rich description</strong>' }));
 const items = [
-  { title: 'First', description: 'Legacy content' },
+  { title: 'First', content: 'First content' },
   { title: 0, content: 0 },
   { title: 'Last', content: snippet }
 ];
@@ -22,7 +22,7 @@ describe('Steps extended rendering', () => {
       expect(body).toContain(`ant-steps-${type}`);
       expect(body).toContain('ant-steps-outlined');
       expect(body.match(/<li /g)).toHaveLength(3);
-      expect(body).toContain('Legacy content');
+      expect(body).toContain('First content');
       expect(body.replace(/<!--.*?-->/g, '')).toMatch(/ant-steps-item-title[^>]*>0</);
       expect(body).toContain('Rich description');
       expect(body).not.toContain('<button');
@@ -105,15 +105,14 @@ describe('Steps extended rendering', () => {
     expect(body).toContain('color:red;color:black');
     expect(body).toContain('font-weight:700');
   });
-  it('supports legacy layout aliases with explicit orientation and type priority', () => {
+  it('preserves authored orientation and title placement within type constraints', () => {
     const body = render(
       Steps,
       {
         props: {
-          direction: 'vertical',
           orientation: 'horizontal',
           responsive: false,
-          labelPlacement: 'vertical',
+          titlePlacement: 'vertical',
           items
         }
       }
@@ -124,7 +123,7 @@ describe('Steps extended rendering', () => {
     expect(
       render(
         Steps,
-        { props: { type: 'navigation', progressDot: true, labelPlacement: 'vertical', items } }
+        { props: { type: 'navigation', titlePlacement: 'vertical', items } }
       ).body
     ).toContain(
       'ant-steps-title-horizontal'
