@@ -75,7 +75,7 @@ describe('Breadcrumb SSR', () => {
     expect(markup).toContain('/</li>');
   });
   it(
-    'passes original routes and prefix path snapshots to a custom snippet without imposing link wrappers',
+    'passes original items and prefix path snapshots to a custom snippet without imposing link wrappers',
     () => {
       const itemRender = createRawSnippet<
         [BreadcrumbItem, Record<string, unknown>, readonly BreadcrumbItem[], readonly string[]]

@@ -13,6 +13,10 @@
   mode="left"/"right" и тип TimelinePosition. Сохранены title/content/icon/placement,
   mode=start/end/alternate и loading-элементы в items.
 
+- У Breadcrumb удалены routes, item.breadcrumbName/children, прежнее имя в menu item
+  и принадлежащий им adapter. Сохранены items/title/menu, path/params,
+  itemRender с исходным массивом items и нативные ссылки.
+
 - У Progress удалены trailColor, width, gapPosition и strokeWidth для line/steps.
   Сохранены railColor, size, gapPlacement и актуальный strokeWidth у circle/dashboard.
 

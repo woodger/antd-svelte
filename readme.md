@@ -1081,8 +1081,7 @@ Path удаляет один начальный slash, подставляет к
 сохраняются; URL encoding не выполняется. Path перекрывает href только на самом
 item с path; item с одним href не добавляет сегмент. Title подставляет все
 совпадения :key, но falsy parameter оставляет исходный текст. Эти особенности
-взяты из getPath/getBreadcrumbName 6.6.8. Items имеет приоритет над legacy routes,
-включая пустой массив. Routes преобразует breadcrumbName и children в title/menu;
+взяты из getPath/getBreadcrumbName 6.6.8.
 React children sugar Breadcrumb.Item/Separator заменён массивом items.
 
 Separator берётся из local prop, ConfigProvider.breadcrumb.separator, затем "/";

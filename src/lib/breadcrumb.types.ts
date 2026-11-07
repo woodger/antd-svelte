@@ -22,7 +22,6 @@ export interface BreadcrumbConfig<
 export interface BreadcrumbMenuItem {
   key?: string | number;
   title?: BreadcrumbContent;
-  breadcrumbName?: string;
   label?: BreadcrumbContent;
   path?: string;
   href?: string;
@@ -35,10 +34,8 @@ export interface BreadcrumbItem extends AriaAttributes {
   href?: string;
   path?: string;
   title?: BreadcrumbContent;
-  breadcrumbName?: string;
   menu?: { items?: readonly BreadcrumbMenuItem[]; onClick?: (info: DropdownClickInfo) => void; };
   dropdownProps?: Partial<Omit<DropdownProps, 'children' | 'menu'>>;
-  children?: readonly BreadcrumbMenuItem[];
   class?: string;
   style?: string;
   onClick?: (event: MouseEvent) => void;
@@ -54,7 +51,6 @@ export interface BreadcrumbProps<
   'children' | 'class' | 'style'
 > {
   items?: readonly BreadcrumbItem[];
-  routes?: readonly BreadcrumbItem[];
   params?: Params;
   separator?: BreadcrumbContent;
   dropdownIcon?: BreadcrumbContent;

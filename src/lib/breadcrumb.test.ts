@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 import {
   breadcrumbAttributes,
   breadcrumbEntries,
-  breadcrumbItems,
   breadcrumbName
 } from './breadcrumb.engine';
 
@@ -42,20 +41,6 @@ describe('Breadcrumb routing', () => {
       expect(breadcrumbName(0, {})).toBe('0');
       expect(breadcrumbName(true, {})).toBe('true');
       expect(breadcrumbName(false, {})).toBeNull();
-    }
-  );
-  it(
-    'uses items before routes and converts legacy names and children without changing source arrays',
-    () => {
-      const routes = [
-        { breadcrumbName: 'Parent', children: [{ breadcrumbName: 'Child', path: '/child' }] }
-      ];
-
-      expect(breadcrumbItems([], routes)).toEqual([]);
-      expect(breadcrumbItems(undefined, routes)).toEqual(
-        [{ title: 'Parent', menu: { items: [{ title: 'Child', path: '/child' }] } }]
-      );
-      expect(routes[0].children[0].breadcrumbName).toBe('Child');
     }
   );
   it(

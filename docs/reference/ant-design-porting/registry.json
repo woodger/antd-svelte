@@ -2217,7 +2217,7 @@
             "src/lib/breadcrumb.ssr.test.ts",
             "tests/browser/breadcrumb.spec.ts"
           ],
-          "note": "Сохраняет пустые сегменты, отсутствие URL encoding, однократную подстановку каждого path-param и глобальную подстановку title с исходным falsy fallback. Нативные nav/ol/li/a."
+          "note": "Сохраняет пустые сегменты, отсутствие URL encoding, однократную подстановку каждого path-param и глобальную подстановку title с исходным falsy fallback. Нативные nav/ol/li/a. Deprecated routes/breadcrumbName/children adapter удалён; текущие items/title/menu и исходный массив itemRender сохранены."
         },
         {
           "id": "rendering",
@@ -2281,7 +2281,7 @@
             "tests/browser/link-decoration.spec.ts",
             "tests/browser/fixtures/ant-design-link-decoration-reference.json"
           ],
-          "note": "Scoped linkDecoration/linkHoverDecoration/linkFocusDecoration с fallback none вне source-only marker. Сравнение normal/hover/active/focus с 12 UMD-сценариями 6.6.8 для default/custom variables и inline priority, light/dark/compact; Svelte проверяет native/source, Anchor items/legacy и Breadcrumb plain/menu/itemRender. Legacy AnchorLink сохраняется отдельно: upstream Anchor игнорирует children, стили сравниваются с items. Внешние links, focus outline, DOM identity, href/callbacks и Dropdown keyboard не меняются."
+          "note": "Scoped linkDecoration/linkHoverDecoration/linkFocusDecoration с fallback none вне source-only marker. Сравнение normal/hover/active/focus с 12 UMD-сценариями 6.6.8 для default/custom variables и inline priority, light/dark/compact; Svelte проверяет native/source, Anchor items и Breadcrumb plain/menu/itemRender. Внешние links, focus outline, DOM identity, href/callbacks и Dropdown keyboard не меняются."
         },
         {
           "id": "breadcrumb-component-config",

@@ -3,26 +3,6 @@ import type { BreadcrumbContent, BreadcrumbItem } from './breadcrumb.types';
 export function breadcrumbHasContent(value: BreadcrumbContent | undefined): boolean {
   return value !== undefined && value !== null && value !== false && value !== '';
 }
-export function breadcrumbItems(
-  items: readonly BreadcrumbItem[] | undefined,
-  routes: readonly BreadcrumbItem[] | undefined
-): readonly BreadcrumbItem[] {
-  if (items) return items;
-
-  return (routes ?? []).map(({ breadcrumbName, children, ...item }) => ({
-    title: breadcrumbName,
-    ...item,
-    ...(children
-      ? {
-        menu: {
-          items: children.map(
-            ({ breadcrumbName: name, ...child }) => ({ ...child, title: name })
-          )
-        }
-      }
-      : {})
-  }));
-}
 export function breadcrumbName(title:
   BreadcrumbContent
   | undefined, params: Record<string, unknown>):
