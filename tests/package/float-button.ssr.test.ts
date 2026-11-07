@@ -20,16 +20,13 @@ describe('FloatButton SSR', () => {
     }
   );
   it(
-    'renders zero content directly without inventing a fallback icon and keeps legacy description fallback',
+    'renders zero content directly without inventing a fallback icon',
     () => {
       const body = render(FloatButton, { props: { content: 0, shape: 'square' } }).body;
 
       expect(body).not.toContain('anticon-file-text');
       expect(body).not.toContain('ant-float-btn-icon-only');
       expect(body.replace(/<!--.*?-->/g, '')).toMatch(/>\s*0\s*<\/button>/);
-      expect(render(FloatButton, { props: { description: 'Legacy' } }).body).toContain('Legacy');
-      expect(render(FloatButton, { props: { content: false, description: 'Ignored' } }).body).not
-        .toContain('Ignored');
     }
   );
   it('uses native href and badge composition with semantic style priority', () => {

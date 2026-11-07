@@ -26,7 +26,7 @@ test(
 );
 
 test(
-  'FloatButton keeps source content zero, legacy description, native submit and href',
+  'FloatButton keeps source content zero, native submit and href',
   async ({ page }) => {
     const button = page.locator('#fixture-float-button');
 
@@ -46,10 +46,6 @@ test(
 
     await expect(page.getByLabel('FloatButton submissions', { exact: true }))
       .toHaveText('1');
-
-    await page.getByLabel('FloatButton content', { exact: true }).selectOption('legacy');
-
-    await expect(button).toHaveText('Old');
 
     await page.getByLabel('FloatButton href', { exact: true }).check();
     await button.click();

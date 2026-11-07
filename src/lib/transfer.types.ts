@@ -183,8 +183,6 @@ export interface TransferProps<RecordType extends object = TransferItem> extends
   selectAllLabels?: readonly TransferSelectAllLabel[];
   locale?: TransferLocale;
   actions?: readonly TransferAction[];
-  /** @deprecated Используйте actions. */
-  operations?: readonly string[];
   /** @defaultValue false */
   oneWay?: boolean;
   /** Не действует при children, как в Ant Design. @defaultValue false */
@@ -197,10 +195,6 @@ export interface TransferProps<RecordType extends object = TransferItem> extends
   selectionsIcon?: TransferContent;
   classNames?: TransferSemanticValue<string>;
   styles?: TransferSemanticValue<string>;
-  /** @deprecated Используйте styles.section/source.section/target.section. */
-  listStyle?: string | ((info: { direction: TransferDirection; }) => string | undefined);
-  /** @deprecated Используйте styles.actions. */
-  operationStyle?: string;
   /** @defaultValue 'ant-transfer' */
   prefixCls?: string;
   rootClassName?: string;

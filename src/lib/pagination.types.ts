@@ -14,7 +14,7 @@ export interface PaginationItemInfo {
   onClick: (event: MouseEvent) => void;
 }
 
-export interface PaginationSizeChangerInfo extends Partial<SelectProps<number>> {
+export interface PaginationSizeChangerInfo {
   value: number;
   disabled: boolean;
   class: string;
@@ -92,8 +92,6 @@ export interface PaginationProps {
   jumpPrevIcon?: PaginationContent;
   jumpNextIcon?: PaginationContent;
   components?: { sizeChanger?: Snippet<[PaginationSizeChangerInfo]>; };
-  /** @deprecated Используйте components.sizeChanger. */
-  selectComponentClass?: Snippet<[PaginationSizeChangerInfo]>;
   classNames?: PaginationSemantic;
   styles?: PaginationSemantic;
   rootClassName?: string;

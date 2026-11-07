@@ -5264,15 +5264,15 @@ Actions принимает текст либо snippet с disabled/direction/ico
 Свяжите info.disabled/info.onClick с native control: это замена React cloneElement.
 Собственный onClick вызывается перед переносом; preventDefault его не отменяет,
 как в Ant Design. Последующие actions отображаются отдельно; в oneWay это
-все entries после первого. Operations/listStyle/operationStyle сохранены как aliases.
+все entries после первого.
 SelectAllLabels принимает текст либо callback, который возвращает текст/snippet.
 Значение 0 показывается; null/false/пустая строка включают стандартный счётчик.
 
 ConfigProvider.transfer задаёт class/style, semantic classNames/styles и
 selectionsIcon. Common slots дополняются source/target slots; стили конкретной
 стороны имеют приоритет над common, локальные слои — над соответствующими context.
-Root style имеет приоритет над styles.root; styles.section/actions перекрывают
-deprecated listStyle/operationStyle. Поддержаны locale, темы/compact, RTL и status.
+Root style имеет приоритет над styles.root; styles.section/actions задают
+оформление списков и действий. Поддержаны locale, темы/compact, RTL и status.
 Success/validating из исходного InputStatus сохраняют классы без отдельного оформления;
 пустой status наследует FormItem.
 В корень передаются только aria-/data-атрибуты. NativeElement привязывается к div;
@@ -6475,7 +6475,7 @@ rejection. React broad value types, исходный ref shape resizableTextArea
 ## FloatButton, FloatButtonGroup и FloatButtonBackTop
 
 FloatButton сохраняет native Button/href, type=default|primary, shape=circle|square,
-icon, content и deprecated description (content ?? description). Текст, число,
+icon и content. Текст, число,
 boolean и Snippet заменяют ReactNode; число 0 не включает default icon. Без
 renderable content/icon используется FileTextOutlined из закреплённого icons-svg.
 Кнопка имеет размер 40px и fixed-положение: inline-end 24px, bottom 48px.
@@ -8693,9 +8693,7 @@ quick jumper и его кнопка скрыты. Вложенный в quick ju
 `showSizeChanger` допускает boolean или поддержанные Select props. Собственный
 onChange вызывается после onShowSizeChange и основного onChange Pagination.
 Размер Pagination имеет приоритет над size из Select props.
-`components.sizeChanger` получает snippet с value/disabled/class/options/onChange;
-устаревший selectComponentClass адаптирован тем же способом и дополнительно
-получает Select props.
+`components.sizeChanger` получает snippet с value/disabled/class/options/onChange.
 Не все расширенные React Select props уже существуют у Svelte Select.
 
 ConfigProvider.pagination задаёт class/style, semantic classNames/styles,

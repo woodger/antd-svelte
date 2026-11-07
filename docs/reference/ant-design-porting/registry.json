@@ -279,7 +279,7 @@
             "tests/package/float-button.ssr.test.ts",
             "tests/browser/float-button.spec.ts"
           ],
-          "note": "Сохранены renderable zero, shape/type, native forms/disabled, приоритет стилей. Snippet заменяет ReactNode; используются существующие Svelte Button/Badge/Tooltip контракты."
+          "note": "Сохранены renderable zero, shape/type, native forms/disabled, приоритет стилей. Snippet заменяет ReactNode; используются существующие Svelte Button/Badge/Tooltip контракты. Deprecated description удалён, включая унаследованный API Group/BackTop; сохранён content."
         },
         {
           "id": "group",
@@ -2785,7 +2785,7 @@
             "tests/browser/pagination-features.spec.ts",
             "tests/browser/checkbox-pagination.spec.ts"
           ],
-          "note": "Auto threshold50, context/local override, numeric/string options и current size; прежние sorting/dedup/invalid filtering сохранены. onShowSizeChange перед onChange, затем Select callback; размер Pagination перекрывает Select size. Components.sizeChanger и selectComponentClass заменены snippets с value/disabled/class/options/onChange; legacy получает Select props и явный resolved size."
+          "note": "Auto threshold50, context/local override, numeric/string options и current size; прежние sorting/dedup/invalid filtering сохранены. onShowSizeChange перед onChange, затем Select callback; размер Pagination перекрывает Select size. Components.sizeChanger получает snippet с value/disabled/class/options/onChange; параметры showSizeChanger принадлежат встроенному Select. Deprecated selectComponentClass удалён."
         },
         {
           "id": "render-semantic",
@@ -7395,7 +7395,7 @@
             "tests/package/transfer.ssr.test.ts",
             "tests/browser/transfer.spec.ts"
           ],
-          "note": "54 исходных CSS rules без keyframes/at-rules, theme token aliases и MIT rc-pagination. Common/nested context/local semantic slots, исходный root/legacy style priority, ConfigProvider.transfer, locale и status. Native checkbox/labels, Tab/Space, dropdown keyboard/focus. RTL меняет физические callbacks/footer/empty sides и arrows; source/target semantics остаются логическими. SSR без DOM/timers/change callbacks. Native reset сохраняет model/query; checked DOM следует исходному React/native reset поведению. Input value attribute синхронизирован локально без изменения публичного Input."
+          "note": "54 исходных CSS rules без keyframes/at-rules, theme token aliases и MIT rc-pagination. Common/nested context/local semantic slots, root и текущие semantic style priorities, ConfigProvider.transfer, locale и status. Native checkbox/labels, Tab/Space, dropdown keyboard/focus. RTL меняет физические callbacks/footer/empty sides и arrows; source/target semantics остаются логическими. SSR без DOM/timers/change callbacks. Native reset сохраняет model/query; checked DOM следует исходному React/native reset поведению. Input value attribute синхронизирован локально без изменения публичного Input."
         },
         {
           "id": "advanced-api",

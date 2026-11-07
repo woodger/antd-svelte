@@ -16,7 +16,6 @@
     shape = 'circle',
     icon,
     content,
-    description,
     tooltip,
     badge,
     classNames,
@@ -32,8 +31,7 @@
   const group = useFloatButton();
   let actualShape = $derived(group?.shape || shape);
   let individual = $derived(group?.individual ?? true);
-  let actualContent = $derived(content ?? description);
-  let actualIcon = $derived(!buttonHasContent(actualContent) && !icon ? defaultIcon : icon);
+  let actualIcon = $derived(!buttonHasContent(content) && !icon ? defaultIcon : icon);
   let info = $derived(
     {
       props: {
@@ -42,7 +40,6 @@
         shape: actualShape,
         icon,
         content,
-        description,
         tooltip,
         badge,
         classNames,
@@ -107,9 +104,9 @@
 {#snippet defaultIcon()}<FloatButtonIcon name="file-text" />{/snippet}
 {#snippet emptyTooltip()}{/snippet}
 {#snippet contentNode()}
-  {#if typeof actualContent === 'number'}{actualContent}
-  {:else if typeof actualContent === 'function' || typeof actualContent === 'string' && actualContent !== ''}
-    <span class={combinedClasses.content} style={combinedStyles.content}>{#if typeof actualContent === 'function'}{@render actualContent()}{:else}{buttonText(actualContent, insert)}{/if}</span>
+  {#if typeof content === 'number'}{content}
+  {:else if typeof content === 'function' || typeof content === 'string' && content !== ''}
+    <span class={combinedClasses.content} style={combinedStyles.content}>{#if typeof content === 'function'}{@render content()}{:else}{buttonText(content, insert)}{/if}</span>
   {/if}
   {#if badge !== undefined}<Badge {...cleanBadge} class={[
       'ant-float-btn-badge',
@@ -134,7 +131,7 @@
         `ant-float-btn-${actualShape}`,
         config.direction === 'rtl' && 'ant-float-btn-rtl',
         individual && 'ant-float-btn-individual',
-        !buttonHasContent(actualContent) && 'ant-float-btn-icon-only',
+        !buttonHasContent(content) && 'ant-float-btn-icon-only',
         className,
         rootClassName
       ].filter(

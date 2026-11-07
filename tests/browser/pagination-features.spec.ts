@@ -236,15 +236,12 @@ test('Pagination size Select props retain source callback order', async ({ page 
   await expect(events(page)).toHaveText('size:6:20|change:6:20|select:20');
 });
 
-test('Pagination size overrides Select props for built-in and legacy changers', async ({ page }) => {
+test('Pagination size overrides built-in Select props', async ({ page }) => {
   await control(page, 'Size changer').selectOption('props');
   await control(page, 'Pagination size').selectOption('large');
 
   await expect(root(page).locator('.ant-select')).toHaveClass(/ant-select-lg/);
   await expect(root(page).locator('.ant-select')).not.toHaveClass(/ant-select-sm/);
-  await control(page, 'Legacy size changer').check();
-
-  await expect(control(page, 'Custom page size')).toHaveAttribute('data-size', 'large');
 });
 
 test('Pagination custom size changer receives value, disabled and callback', async ({ page }) => {
@@ -255,22 +252,6 @@ test('Pagination custom size changer receives value, disabled and callback', asy
   await expect(events(page)).toHaveText('size:6:50|change:4:50');
   await control(page, 'Disable all components').check();
   await expect(control(page, 'Custom page size')).toBeDisabled();
-});
-
-test('Pagination retains the deprecated custom size changer adapter', async ({ page }) => {
-  await control(page, 'Legacy size changer').check();
-  await expect(control(page, 'Custom page size')).toBeVisible();
-  await control(page, 'Custom page size').fill('20');
-
-  await expect(owner(page)).toHaveText('6:20');
-});
-
-test('Pagination legacy size adapter retains the configured Select callback', async ({ page }) => {
-  await control(page, 'Legacy size changer').check();
-  await control(page, 'Size changer').selectOption('props');
-  await control(page, 'Custom page size').fill('20');
-
-  await expect(events(page)).toHaveText('size:6:20|change:6:20|select:20');
 });
 
 test('Pagination itemRender receives working original controls and source pages', async ({ page }) => {

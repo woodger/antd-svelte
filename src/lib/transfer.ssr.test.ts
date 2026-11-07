@@ -54,14 +54,13 @@ describe('Transfer SSR', () => {
   });
 
   it(
-    'keeps only aria/data attributes on root and respects legacy/semantic style precedence',
+    'keeps only aria/data attributes on root and respects semantic style precedence',
     () => {
       const body = render(Transfer<TransferItem>, { props: {
         dataSource: records, 'data-testid': 'root', 'aria-label': 'Transfer', id: 'ignored',
         title: 'ignored title', class: 'local', rootClassName: 'extra',
         style: 'color:green',
-        listStyle: ({ direction }) => `width:${direction === 'left' ? 201 : 202}px`,
-        operationStyle: 'margin:1px', styles: { root: 'color:red', section: 'width:203px',
+        styles: { root: 'color:red', section: 'width:203px',
           source: { section: 'width:204px' }, actions: 'margin:2px' }
       } }).body;
 
@@ -70,9 +69,9 @@ describe('Transfer SSR', () => {
       expect(body).not.toContain('id="ignored"');
       expect(body).not.toContain('title="ignored title"');
       expect(body).toContain('color:red;color:green');
-      expect(body).toContain('width:201px;width:203px;width:204px');
-      expect(body).toContain('width:202px;width:203px');
-      expect(body).toContain('margin:1px;margin:2px');
+      expect(body).toContain('width:203px;width:204px');
+      expect(body).toContain('width:203px');
+      expect(body).toContain('margin:2px');
     }
   );
 

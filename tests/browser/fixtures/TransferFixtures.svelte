@@ -204,8 +204,6 @@
             } }, 'Back', extraAction] : undefined}
           class="fixture-transfer" rootClassName={semantics ? 'root-extra' : undefined}
           style={semantics ? 'padding:4px;color:green' : undefined}
-          listStyle={semantics ? ({ direction }) => `width:${direction === 'left' ? 212 : 213}px`
-            : undefined}
           classNames={semantics ? ({ props }) => ({ root: `local-disabled-${props.disabled}`,
             item: 'local-item', source: { item: 'local-source' }, target: { item: 'local-target' } })
             : undefined}

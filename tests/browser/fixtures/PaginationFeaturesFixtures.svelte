@@ -26,7 +26,6 @@
   let threshold = $state('inherit');
   let optionOrder = $state(false);
   let customChanger = $state(false);
-  let legacyChanger = $state(false);
   let searchChanger = $state(true);
   let custom = $state(false);
   let customControl = $state(false);
@@ -74,7 +73,6 @@
     hideOnSinglePage: hide,
     itemRender: custom ? item : undefined,
     components: customChanger ? { sizeChanger: sizeChanger } : undefined,
-    selectComponentClass: legacyChanger ? sizeChanger : undefined,
     prevIcon: customIcons ? '←' : undefined,
     nextIcon: customIcons ? '→' : undefined,
     jumpPrevIcon: customIcons ? '«' : undefined,
@@ -163,7 +161,6 @@
     <label><input type="checkbox" bind:checked={responsive} /> Responsive pager</label>
     <label><input type="checkbox" bind:checked={optionOrder} /> String size options</label>
     <label><input type="checkbox" bind:checked={customChanger} /> Custom size changer</label>
-    <label><input type="checkbox" bind:checked={legacyChanger} /> Legacy size changer</label>
     <label><input type="checkbox" bind:checked={searchChanger} /> Search size options</label>
     <label><input type="checkbox" bind:checked={custom} /> Custom pager items</label>
     <label><input type="checkbox" bind:checked={customControl} /> Replace pager controls</label>
@@ -211,7 +208,6 @@
 
 {#snippet sizeChanger(info: PaginationSizeChangerInfo)}
   <input type="number" value={info.value} disabled={info.disabled} class={info.class}
-    data-size={info.size}
     aria-label="Custom page size" oninput={event => info.onChange(Number(event.currentTarget.value))} />
 {/snippet}
 

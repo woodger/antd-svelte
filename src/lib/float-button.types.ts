@@ -34,7 +34,6 @@ export interface FloatButtonProps extends Omit<
   /** @defaultValue 'circle' */
   shape?: FloatButtonShape;
   content?: FloatButtonContent;
-  description?: FloatButtonContent;
   tooltip?: FloatButtonContent | Omit<TooltipProps, 'children'>;
   href?: string;
   badge?: FloatButtonBadge;

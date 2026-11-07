@@ -64,14 +64,14 @@
   });
   let rootStyle = $derived(join([componentTheme.style, contextStyles.root, config.transfer?.style,
     localStyles.root, props.style], ';'));
-  let actionsStyle = $derived(join([props.operationStyle, contextStyles.actions,
+  let actionsStyle = $derived(join([contextStyles.actions,
     localStyles.actions], ';'));
   let contextEmpty = $derived(config.renderEmpty?.('Transfer'));
   let locale = $derived({ ...transferRuRU, ...config.locale.transfer,
     notFoundContent: contextEmpty || defaultEmpty, ...props.locale });
   let titles = $derived(props.titles ?? locale.titles ?? []);
   let icon = $derived(props.selectionsIcon ?? config.transfer?.selectionsIcon);
-  let actions = $derived(props.actions ?? props.operations ?? []);
+  let actions = $derived(props.actions ?? []);
   let rightActive = $derived(data.left.some(item =>
     sourceSelected.includes(transferKey(item)) && !transferDisabled(item)));
   let leftActive = $derived(data.right.some(item =>
@@ -137,8 +137,6 @@
       selectionsIcon: icon,
       classNames: sectionSlots(left ? 'source' : 'target', false),
       styles: sectionSlots(left ? 'source' : 'target', true),
-      style: typeof props.listStyle === 'function'
-        ? props.listStyle({ direction }) : props.listStyle,
       footer: props.footer,
       renderList: props.children,
       onItemSelect: (key, check, event, items) => select(direction, key, check, event, items),
@@ -238,7 +236,7 @@
     status && `${prefix}-status-${status}`, config.transfer?.class, props.class,
     props.rootClassName, classes.root]} style={rootStyle}>
   <TransferSection section={source} children={props.children} footer={props.footer}
-    style={join([source.style, source.styles.section], ';')}
+    style={source.styles.section}
     onSearch={value => search('left', value)} />
   <div class={[`${prefix}-actions`, classes.actions]} style={actionsStyle}>
     <TransferAction action={actions[0]} direction="right" disabled={disabled || !rightActive}
@@ -252,7 +250,7 @@
     {/each}
   </div>
   <TransferSection section={target} children={props.children} footer={props.footer}
-    style={join([target.style, target.styles.section], ';')}
+    style={target.styles.section}
     onSearch={value => search('right', value)} />
 </div>
 

@@ -50,7 +50,6 @@
     jumpPrevIcon,
     jumpNextIcon,
     components,
-    selectComponentClass,
     classNames,
     styles,
     rootClassName,
@@ -128,18 +127,14 @@
   let sizeDisabled = $derived(selectConfig.disabled ?? blocked);
   let sizeOptions = $derived(getPageSizeOptions(pageSizeOptions.map(Number), pagination.pageSize)
     .map(value => ({ value, label: `${value} ${strings.itemsPerPage}` })));
-  let sizeRenderer = $derived(components?.sizeChanger ?? selectComponentClass);
+  let sizeRenderer = $derived(components?.sizeChanger);
   let sizeInfo: PaginationSizeChangerInfo = $derived({
-    ...(components?.sizeChanger ? {} : { ...selectConfig, size: explicitSize }),
     value: pagination.pageSize,
-    disabled: Boolean(components?.sizeChanger ? blocked : sizeDisabled),
-    class: components?.sizeChanger ? `${prefixCls}-options-size-changer`
-      : join([`${prefixCls}-options-size-changer`, `${prefixCls}-options-size-changer-select`,
-        selectConfig.class], ' ')!,
+    disabled: blocked,
+    class: `${prefixCls}-options-size-changer`,
     prefixCls: selectPrefixCls ?? 'ant-select',
-    options: components?.sizeChanger ? sizeOptions : selectConfig.options ?? sizeOptions,
-    onChange: value => components?.sizeChanger ? chooseSize(value, true, blocked)
-      : chooseSelectSize(value, true)
+    options: sizeOptions,
+    onChange: value => chooseSize(value, true, blocked)
   });
   let semanticProps = $derived({
     ...rawProps,

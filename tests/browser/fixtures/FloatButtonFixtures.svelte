@@ -54,7 +54,7 @@
 />{/snippet}
 <section id="float-button-fixture" aria-label="FloatButton fixture">
   <label>FloatButton shape <select aria-label="FloatButton shape" bind:value={shape}><option>circle</option><option>square</option></select></label>
-  <label>FloatButton content <select aria-label="FloatButton content" bind:value={content}><option>none</option><option>text</option><option>zero</option><option>legacy</option><option>true</option></select></label>
+  <label>FloatButton content <select aria-label="FloatButton content" bind:value={content}><option>none</option><option>text</option><option>zero</option><option>true</option></select></label>
   <label>FloatButton tooltip <select aria-label="FloatButton tooltip" bind:value={tooltip}><option>none</option><option>zero</option><option>props</option><option>rich</option></select></label>
   <label><input type="checkbox" bind:checked={primary} /> Primary FloatButton</label>
   <label><input type="checkbox" bind:checked={disabled} /> Disable FloatButton</label>
@@ -79,7 +79,6 @@
       href={link ? '#float-target' : undefined}
       htmlType={submit ? 'submit' : 'button'}
       content={content === 'text' ? 'Do' : content === 'zero' ? 0 : content === 'true' ? true : undefined}
-      description={content === 'legacy' ? 'Old' : undefined}
       tooltip={tooltip === 'zero'
         ? 0
         : tooltip === 'rich'

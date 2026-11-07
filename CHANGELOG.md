@@ -14,6 +14,10 @@
   closable с closeIcon/onClose/afterClose. У Spin удалены tip/wrapperClassName
   и semantic aliases tip/mask; актуальные description/root и lifecycle сохранены.
 
+- Удалены FloatButton.description (включая Group/BackTop),
+  Transfer.operations/listStyle/operationStyle и Pagination.selectComponentClass.
+  Сохранены content, actions/semantic styles и components.sizeChanger.
+
 - Удалены addonBefore/addonAfter у Input/Password/Search и InputNumber,
   их внутренние wrappers, context adapter и CSS-селекторы. Текущие prefix/suffix,
   Search button и композиция SpaceCompact/SpaceAddon сохранены.
