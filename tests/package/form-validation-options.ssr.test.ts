@@ -84,6 +84,30 @@ describe('Form validation options public package', () => {
       check('visible-result-after-silent', await first);
     }
   });
+
+  it('matches source freshness across different fields without discarding their independent UI result', async () => {
+    let complete!: (message: string) => void;
+    const pending = new Promise<string>((resolve) => { complete = resolve; });
+    const form = createForm({ initialValues: { first: '', second: '' }, rules: {
+      first: [{ validator: () => pending }], second: [{ validator: () => {} }]
+    } });
+    const older = form.validateFields(['first']).then(() => ({ status: 'success' }), summarize);
+
+    await form.validateFields(['second']);
+    const current = concurrency.cases.find(({ id }) => id === 'disjoint-current-complete')!;
+    expect(form.getFieldsError()).toEqual(current.fields);
+    expect({ first: form.isFieldValidating('first'), second: form.isFieldValidating('second') })
+      .toEqual(current.validatingFields);
+
+    complete('First error');
+    const result = await older;
+    const previous = concurrency.cases.find(({ id }) => id === 'disjoint-older-complete')!;
+
+    expect(result).toEqual(previous.result);
+    expect(form.getFieldsError()).toEqual(previous.fields);
+    expect({ first: form.isFieldValidating('first'), second: form.isFieldValidating('second') })
+      .toEqual(previous.validatingFields);
+  });
 });
 
 function summarize(error: unknown) {

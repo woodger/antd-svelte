@@ -155,6 +155,69 @@
       ],
       "validating": false,
       "touched": false
+    },
+    {
+      "id": "disjoint-current-complete",
+      "fields": [
+        {
+          "name": [
+            "first"
+          ],
+          "errors": [],
+          "warnings": []
+        },
+        {
+          "name": [
+            "second"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validatingFields": {
+        "first": true,
+        "second": false
+      }
+    },
+    {
+      "id": "disjoint-older-complete",
+      "result": {
+        "status": "invalid",
+        "outOfDate": true,
+        "errorFields": [
+          {
+            "name": [
+              "first"
+            ],
+            "errors": [
+              "First error"
+            ],
+            "warnings": []
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": [
+            "first"
+          ],
+          "errors": [
+            "First error"
+          ],
+          "warnings": []
+        },
+        {
+          "name": [
+            "second"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validatingFields": {
+        "first": false,
+        "second": false
+      }
     }
   ]
 }
