@@ -426,10 +426,40 @@
       {
         "pattern": "\\.ant-(row|col)(?![-\\w])",
         "replacement": ".ant-$1:where(.ant-grid-css-var)"
+      },
+      {
+        "pattern": "(\\.ant-col(?![-\\w])|\\.ant-col-(?!css-var\\b)[\\w-]+)",
+        "replacement": "$1:where(:not(.ant-grid-custom-media))"
       }
     ],
     "keyframes": [],
-    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Grid Row/Col: 24 колонки, xs–xxxl, responsive flex и логические отступы.\n * Сохранены media scopes 576/768/992/1200/1600/1920px; исключены чужие интеграции.\n * Корни ограничены :where(.ant-grid-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Grid Row/Col: 24 колонки, xs–xxxl, responsive flex и логические отступы.\n * Сохранены media scopes 576/768/992/1200/1600/1920px; исключены чужие интеграции.\n * Корни ограничены :where(.ant-grid-css-var); custom media Col получают отдельный scoped CSS.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "grid-responsive",
+    "output": "src/lib/vendor/grid-responsive.css.js",
+    "expectedRules": 1027,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-col(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-(?:row|col)",
+        "replacement": ".ant-grid-css-var"
+      },
+      {
+        "pattern": "\\.ant-(row|col)(?![-\\w])",
+        "replacement": ".ant-$1:where(.ant-grid-css-var)"
+      },
+      {
+        "pattern": "(\\.ant-col(?:-[\\w-]+)?)",
+        "replacement": "$1:where(.__ANT_GRID_MEDIA_SCOPE__)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Grid Col: полный scoped шаблон для пользовательских global media thresholds.\n * Сохранены media scopes 576/768/992/1200/1600/1920px; исключены чужие интеграции.\n * Маркер __ANT_GRID_MEDIA_SCOPE__ и шесть min-width заменяются grid-style.engine.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   },
   {
     "id": "layout",
