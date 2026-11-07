@@ -127,6 +127,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Button / ButtonGroup | Native button/href, color/variant/ghost, loading delay/icon, semantic slots, config, Group и Compact |
 | Typography / TypographyText / TypographyTitle / TypographyParagraph / TypographyLink | Нативный текст, decorations, copy/edit, CSS/JS ellipsis, expand/collapse и semantic config |
 | FloatButton / FloatButtonGroup / FloatButtonBackTop | Плавающие native actions, Badge/Tooltip, меню групп и возврат с прогрессом прокрутки |
+| BackTop (deprecated) | Legacy scroll control, component theme/media, native default action и custom snippets |
 | Watermark | Text/image Canvas tiles, per-line fonts, offsets, mutation repair, наследование Modal/Drawer |
 | BorderBeam | CSS-лучи по рамке нативного контейнера, градиенты, фазы, размеры и reduced motion |
 | Rate | Value/defaultValue, half/clear, hover, keyboard/RTL, character/tooltips, размеры и focus ref |
@@ -6678,6 +6679,47 @@ Wave наследуется через общий Button, включая BackTop
   <FloatButtonBackTop visibilityHeight={0} aria-label="К началу" />
 </FloatButtonGroup>
 ```
+
+## BackTop (deprecated)
+
+BackTop воспроизводит отдельный legacy export Ant Design 6.6.8. Для новых
+интерфейсов используйте FloatButtonBackTop. Корень BackTop имеет размер 40×40px;
+content/icon и логические отступы используют controlHeightLG/fontSizeHeading3.
+Границы media включают screenMD и screenXS. Компонентный token zIndexPopup
+по умолчанию равен zIndexBase + 10; aliases/algorithms, custom CSS prefix,
+вложенные темы и реактивные media поддержаны.
+
+VisibilityHeight=400 сравнивается со scrollTop включительно, duration=450 задаёт
+скролл к нулю. Target возвращает Window, Document, HTMLElement либо null;
+по умолчанию используется ownerDocument корня. Смена target/порога обновляет
+подписки, unmount отменяет listeners/RAF/анимации. Reduced motion отключает
+скролл и fade. OnClick/onclick получают нативный click с currentTarget корня;
+onclick имеет приоритет. Class/rootClassName, style, DOM attributes и
+bind:nativeElement относятся к div; локальный style применяется после tokens.
+
+По умолчанию внутри div находится нативная кнопка с локализованным именем
+locale.global.backToTop; aria-label уточняет его. Children Snippet задаёт
+собственный control с его клавиатурой и доступным именем. Контейнер делегирует
+click, сохраняя действия controls внутри snippet. При скрытии subtree сразу
+получает inert, после fade содержимое удаляется; пустой snippet скрывает корень.
+Обновления темы сохраняют root/action и input selection/focus/FormData в snippet.
+
+```svelte
+<BackTop visibilityHeight={400} duration={450} aria-label="К началу страницы" />
+```
+
+117 CSS-состояний / 13 тем проверяются в
+[browser](tests/browser/back-top-theme.spec.ts); target, клавиатура и lifecycle —
+в [основных сценариях](tests/browser/back-top.spec.ts), SSR — в
+[package tests](tests/package/back-top-theme.ssr.test.ts) и
+[браузере без JavaScript](tests/browser/back-top-ssr.spec.ts) при обоих порядках CSS.
+В закреплённом UMD найден пропущенный rootCls: исходные
+[замеры](tests/browser/fixtures/ant-design-back-top-theme-observation.json) сохранены;
+отдельная CSS-матрица восстанавливает ровно этот класс, без изменения scripts,
+styles или измеренных значений. Native BackTop применяет зарегистрированные tokens.
+[Происхождение CSS и наблюдения upstream](docs/reference/theme-context.md#тема-backtop)
+описывают также RTL и обновление visibilityHeight. Fixtures: `?fixture=back-top`
+и `?fixture=back-top-theme`.
 
 ## Timeline
 

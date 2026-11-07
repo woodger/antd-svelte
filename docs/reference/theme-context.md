@@ -1122,6 +1122,49 @@ CSS media в замере также остаются прежними. Это �
 обновляет Row observer и Col CSS вместе. Raw CSS/token values сохранены без
 подмены; fresh-mount матрица и live-update проверка разделены.
 
+## Тема BackTop
+
+Отдельный deprecated BackTop использует source factory zIndexPopup=zIndexBase+10,
+common aliases и algorithms. Private stylesheet scope зависит от component prefix
+и global screenMD/screenXS; оба максимума включительны. CSS variables остаются
+локальными для root, соседние providers с одинаковым cssVar.key изолированы.
+Смена media обновляет stylesheet без пересоздания action или пользовательского
+snippet. Default action — native button; custom controls сохраняют свою семантику.
+
+BackTop отсутствует в закреплённом package/dist/antd.css. Его 12 правил взяты из
+CSSOM неизменённого официального dist/antd.min.js, archive SHA-256 проверен.
+[Origin fixture](../../tools/fixtures/ant-design-back-top-css-origin.json) содержит
+raw CSS и описание нормализации: удаляются только generated hash/provider
+selectors; декларации и media сохранены. [Template](../../src/lib/vendor/back-top.css.js)
+применяется через ThemeScopeStyle уже при SSR. CLI css all проверяет свои
+зарегистрированные рецепты и не заявляет охват этого runtime capture.
+
+В официальном UMD root содержит css-var-r0 и ant-back-top, но не ожидаемый
+ant-back-top-css-var. Зарегистрированная .css-var-r0.ant-back-top-css-var не
+совпадает с root: zIndexPopup=10 даёт computed z-index=auto, component overrides
+controlHeightLG/fontSize/colors также не действуют. Исходные
+[117 CSS-замеров](../../tests/browser/fixtures/ant-design-back-top-theme-observation.json)
+не менялись. Отдельный
+[registration diagnostic](../../tests/browser/fixtures/ant-design-back-top-theme-reference.json)
+добавляет один `<prefix>-css-var` class на root и снимает CSS/styles из того же UMD,
+на свежем page для каждого состояния. Scripts, styles и измеренные значения
+не подменяются; metadata явно помечает опыт. Native class/hook подключены сразу.
+[Unit](../../src/lib/theme-back-top-tokens-reference.test.ts) проверяет исходные
+registered declarations; [browser](../../tests/browser/back-top-theme.spec.ts) —
+117 состояний, [SSR](../../tests/package/back-top-theme.ssr.test.ts) — server boundary.
+[No-JS browser](../../tests/browser/back-top-ssr.spec.ts) проверяет responsive CSS
+при подключении package styles до и после scoped стилей.
+
+В [raw observation](../../tests/browser/fixtures/ant-design-back-top-observation.json)
+сохранены ещё два результата неизменённого UMD: direction=rtl при neutral body
+оставляет computed direction=ltr; visibilityHeight=0→400 при scrollTop=0
+оставляет control видимым даже после scroll event. Source classString не включает
+rootCls, а scroll effect зависит только от target. Эти ошибки не перенесены:
+native root получает dir, scroll runtime реагирует на порог/target. При скрытии
+content становится inert до завершения fade, callbacks/RAF очищаются при unmount.
+ARIA label по умолчанию задаёт optional locale.global.backToTop, explicit aria-label
+имеет приоритет. Контейнер сохраняет Root currentTarget при делегировании click.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

@@ -1,5 +1,5 @@
 export function createFloatButtonMotion(
-  node: HTMLElement,
+  node: Element,
   menu: boolean,
   remove: () => void,
   initialTarget?: boolean

@@ -9,6 +9,11 @@
 
 ### Added
 
+- BackTop: отдельный deprecated export с исходными style/tokens/media, targets,
+  smooth scroll и fade. Default action — native button; callbacks/root refs,
+  opaque snippets и локализованное имя сохранены. Отмечены пропущенный rootCls,
+  RTL и stale threshold в upstream; исходные и registration CSS-замеры разделены.
+
 - TableColumn.className: пользовательские классы заголовка и ячеек своей колонки,
   с сохранением sort/fixed/selection classes и DOM редактора при обновлении.
 

@@ -65,7 +65,7 @@ export interface Locale {
   typography?: Partial<TypographyLocale>;
   /** Исходный alias Ant Design; локальные поля Text перекрывают typography. */
   Text?: Partial<TypographyLocale>;
-  global?: { show?: string; hide?: string; close?: string; };
+  global?: { show?: string; hide?: string; close?: string; backToTop?: string; };
   tour?: Partial<TourLocale>;
   /** Исходный alias Ant Design; локальный Tour имеет приоритет над tour. */
   Tour?: Partial<TourLocale>;
@@ -255,7 +255,7 @@ export const ruRU = {
   okText: 'Подтвердить',
   cancelText: 'Отмена',
   closeText: 'Закрыть',
-  global: { show: 'Показать', hide: 'Скрыть', close: 'Закрыть' },
+  global: { show: 'Показать', hide: 'Скрыть', close: 'Закрыть', backToTop: 'Наверх' },
   image: { preview: 'Просмотр изображения' },
   clearText: 'Очистить',
   emptyText: 'Ничего не найдено',
@@ -343,7 +343,7 @@ export const enUS = {
   okText: 'OK',
   cancelText: 'Cancel',
   closeText: 'Close',
-  global: { show: 'Show', hide: 'Hide', close: 'Close' },
+  global: { show: 'Show', hide: 'Hide', close: 'Close', backToTop: 'Back to top' },
   image: { preview: 'Image preview' },
   clearText: 'Clear',
   emptyText: 'No options',

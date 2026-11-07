@@ -1,0 +1,262 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "reactVersion": "18.3.1"
+  },
+  "registration": {
+    "addedClass": "<prefix>-css-var",
+    "sourceCodeChanged": false
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "variables": {
+        "--ant-back-top-z-index-popup": "10"
+      }
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-back-top-z-index-popup": "10"
+      }
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-back-top-z-index-popup": "10"
+      }
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {
+        "--ant-back-top-z-index-popup": "10"
+      }
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "controlHeightLG": 48,
+          "fontSizeHeading3": 32,
+          "fontSize": 18,
+          "fontFamily": "monospace",
+          "colorText": "#123456",
+          "colorTextDescription": "rgba(90,10,70,0.3)",
+          "colorTextLightSolid": "#f0f4fa",
+          "zIndexBase": 20
+        }
+      },
+      "variables": {
+        "--ant-back-top-z-index-popup": "30"
+      }
+    },
+    {
+      "name": "component-overrides",
+      "config": {
+        "components": {
+          "BackTop": {
+            "controlHeightLG": 48,
+            "fontSizeHeading3": 32,
+            "fontSize": 18,
+            "fontFamily": "monospace",
+            "colorText": "#123456",
+            "colorTextDescription": "rgba(90,10,70,0.3)",
+            "colorTextLightSolid": "#f0f4fa",
+            "zIndexPopup": 345
+          }
+        }
+      },
+      "variables": {
+        "--ant-control-height-lg": "48px",
+        "--ant-font-size-heading-3": "32px",
+        "--ant-font-size": "18px",
+        "--ant-font-family": "monospace",
+        "--ant-color-text": "#123456",
+        "--ant-color-text-description": "rgba(90,10,70,0.3)",
+        "--ant-color-text-light-solid": "#f0f4fa",
+        "--ant-back-top-z-index-popup": "345"
+      }
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "BackTop": {
+            "algorithm": true,
+            "fontSize": 18,
+            "controlHeight": 34,
+            "colorPrimary": "#fa541c",
+            "zIndexBase": 30
+          }
+        }
+      },
+      "variables": {
+        "--ant-color-primary": "#fa541c",
+        "--ant-font-size": "18px",
+        "--ant-control-height": "34px",
+        "--ant-z-index-base": "30",
+        "--ant-color-primary-bg": "#fff2e8",
+        "--ant-color-primary-bg-hover": "#ffd8bf",
+        "--ant-color-primary-border": "#ffbb96",
+        "--ant-color-primary-border-hover": "#ff9c6e",
+        "--ant-color-primary-hover": "#ff7a45",
+        "--ant-color-primary-active": "#d4380d",
+        "--ant-color-primary-text-hover": "#ff7a45",
+        "--ant-color-primary-text": "#fa541c",
+        "--ant-color-primary-text-active": "#d4380d",
+        "--ant-font-size-sm": "14px",
+        "--ant-font-size-lg": "20px",
+        "--ant-font-size-xl": "26px",
+        "--ant-font-size-heading-1": "48px",
+        "--ant-font-size-heading-2": "40px",
+        "--ant-font-size-heading-3": "32px",
+        "--ant-font-size-heading-4": "26px",
+        "--ant-font-size-heading-5": "20px",
+        "--ant-line-height": "1.4444444444444444",
+        "--ant-line-height-lg": "1.4",
+        "--ant-line-height-sm": "1.5714285714285714",
+        "--ant-font-height": "26px",
+        "--ant-font-height-lg": "28px",
+        "--ant-font-height-sm": "22px",
+        "--ant-line-height-heading-1": "1.1666666666666667",
+        "--ant-line-height-heading-2": "1.2",
+        "--ant-line-height-heading-3": "1.25",
+        "--ant-line-height-heading-4": "1.3076923076923077",
+        "--ant-line-height-heading-5": "1.4",
+        "--ant-control-height-sm": "25.5px",
+        "--ant-control-height-xs": "17px",
+        "--ant-control-height-lg": "42.5px",
+        "--ant-font-size-icon": "14px",
+        "--ant-control-interactive-size": "17px",
+        "--ant-control-item-bg-active": "#fff2e8",
+        "--ant-control-item-bg-active-hover": "#ffd8bf",
+        "--ant-control-outline": "rgba(255,125,25,0.1)",
+        "--ant-back-top-z-index-popup": "40"
+      }
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "prefix": "owned",
+          "key": "back-top-shared"
+        },
+        "hashed": false,
+        "components": {
+          "BackTop": {
+            "controlHeightLG": 48,
+            "fontSizeHeading3": 32,
+            "fontSize": 18,
+            "fontFamily": "monospace",
+            "colorText": "#123456",
+            "colorTextDescription": "rgba(90,10,70,0.3)",
+            "colorTextLightSolid": "#f0f4fa",
+            "zIndexPopup": 654
+          }
+        }
+      },
+      "variables": {
+        "--owned-control-height-lg": "48px",
+        "--owned-font-size-heading-3": "32px",
+        "--owned-font-size": "18px",
+        "--owned-font-family": "monospace",
+        "--owned-color-text": "#123456",
+        "--owned-color-text-description": "rgba(90,10,70,0.3)",
+        "--owned-color-text-light-solid": "#f0f4fa",
+        "--owned-back-top-z-index-popup": "654"
+      }
+    },
+    {
+      "name": "local-prefix",
+      "prefix": "owned-top",
+      "config": {
+        "components": {
+          "BackTop": {
+            "zIndexPopup": 432
+          }
+        }
+      },
+      "variables": {
+        "--ant-back-top-z-index-popup": "432"
+      }
+    },
+    {
+      "name": "zero",
+      "config": {
+        "components": {
+          "BackTop": {
+            "zIndexPopup": 0,
+            "controlHeightLG": 0,
+            "fontSizeHeading3": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-control-height-lg": "0px",
+        "--ant-font-size-heading-3": "0px",
+        "--ant-back-top-z-index-popup": "0"
+      }
+    },
+    {
+      "name": "undefined",
+      "config": {
+        "components": {
+          "BackTop": {
+            "zIndexPopup": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "variables": {}
+    },
+    {
+      "name": "global-media",
+      "config": {
+        "token": {
+          "screenMD": 900,
+          "screenXS": 600
+        }
+      },
+      "variables": {
+        "--ant-back-top-z-index-popup": "10"
+      }
+    },
+    {
+      "name": "component-media",
+      "config": {
+        "components": {
+          "BackTop": {
+            "screenMD": 900,
+            "screenXS": 600
+          }
+        }
+      },
+      "variables": {
+        "--ant-screen-md": "900px",
+        "--ant-screen-xs": "600px",
+        "--ant-back-top-z-index-popup": "10"
+      }
+    }
+  ]
+}
