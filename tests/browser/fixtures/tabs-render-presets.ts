@@ -21,7 +21,6 @@ export interface TabsRenderCase {
     extraRight?: string;
     moreIcon?: string;
     locale?: TabsLocale;
-    popupClassName?: string;
     classNames?: TabsSlots;
     styles?: TabsSlots;
     many?: boolean;

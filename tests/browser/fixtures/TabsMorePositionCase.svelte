@@ -71,7 +71,7 @@
   }}>
     {#if mounted}
       <Tabs id="tabs-more-position-main" {more}
-        popupClassName={sample.styledArrow ? 'position-arrow-custom' : undefined}
+        classNames={sample.styledArrow ? { popup: { root: 'position-arrow-custom' } } : undefined}
         items={Array.from({ length: 10 }, (_, index) => ({
           key: String(index), label: `Tab ${index + 1}`
         }))} />

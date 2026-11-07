@@ -5,7 +5,7 @@ import { Tabs } from 'antd-svelte';
 import registry from 'antd-svelte/porting/registry.json';
 import reference from '../browser/fixtures/ant-design-tabs-destroy-reference.json';
 
-describe('Tabs legacy destruction SSR', () => {
+describe('Tabs destruction SSR', () => {
   it('pins the reference to the audited upstream and records native priority differences', () => {
     expect(reference.reference).toMatchObject({
       version: registry.upstream.version,
@@ -18,18 +18,17 @@ describe('Tabs legacy destruction SSR', () => {
   });
 
   it.each([false, true])('keeps unvisited content lazy unless forceRender=%s', forceRender => {
-    const children = createRawSnippet(() => ({ render: () => '<p>Legacy hidden content</p>' }));
+    const children = createRawSnippet(() => ({ render: () => '<p>Hidden content</p>' }));
     const { body } = render(Tabs, { props: {
-      destroyInactiveTabPane: true,
+      destroyOnHidden: true,
       items: [
         { key: 'alpha', label: 'Alpha' },
-        { key: 'beta', label: 'Beta', children, destroyInactiveTabPane: true, forceRender }
+        { key: 'beta', label: 'Beta', children, destroyOnHidden: true, forceRender }
       ]
     } });
 
-    expect(body.includes('Legacy hidden content')).toBe(forceRender);
+    expect(body.includes('Hidden content')).toBe(forceRender);
     expect(body).toContain('role="tabpanel"');
     expect(body).toContain('aria-selected="true"');
-    expect(body).not.toContain('destroyInactiveTabPane=');
   });
 });

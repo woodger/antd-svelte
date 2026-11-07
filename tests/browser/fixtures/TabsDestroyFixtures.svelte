@@ -6,15 +6,13 @@
   interface DestroySample {
     name: string;
     rootModern?: boolean;
-    rootLegacy?: boolean;
     itemModern?: boolean;
-    itemLegacy?: boolean;
     force?: boolean;
   }
 
   let name = $state(reference.cases[0].name);
   let sample: DestroySample = $derived(reference.cases.find(item => item.name === name)!);
-  let legacy = $state(true);
+  let enabled = $state(true);
   let current = $state<string | undefined>('alpha');
   let events = $state<string[]>([]);
   let changes = $state<string[]>([]);
@@ -27,20 +25,19 @@
 {#snippet alpha()}<TabsContent name="Alpha" onLifecycle={event => events.push(event)} />{/snippet}
 {#snippet beta()}<TabsContent name="Beta" onLifecycle={event => events.push(event)} />{/snippet}
 <section id="tabs-destroy-fixture">
-  <h2>Tabs legacy destruction</h2>
+  <h2>Tabs destruction</h2>
   <label>Tabs destruction reference <select aria-label="Tabs destruction reference" bind:value={name}>
     {#each reference.cases as item}<option value={item.name}>{item.name}</option>{/each}
   </select></label>
-  <label><input type="checkbox" bind:checked={legacy} /> Use legacy destruction flags</label>
-  <button type="button" onclick={() => current = 'beta'}>Hide legacy Alpha</button>
+  <label><input type="checkbox" bind:checked={enabled} /> Use destruction flags</label>
+  <button type="button" onclick={() => current = 'beta'}>Hide Alpha</button>
   <form id="tabs-destroy-form" onsubmit={event => event.preventDefault()}>
-    <Tabs id="tabs-destroy-main" aria-label="Legacy destruction sections" bind:activeKey={current}
-      destroyOnHidden={sample.rootModern} destroyInactiveTabPane={legacy ? sample.rootLegacy : undefined}
+    <Tabs id="tabs-destroy-main" aria-label="Destruction sections" bind:activeKey={current}
+      destroyOnHidden={enabled ? sample.rootModern : undefined}
       items={[
         {
           key: 'alpha', label: 'Alpha', children: alpha, forceRender: sample.force,
-          destroyOnHidden: sample.itemModern,
-          destroyInactiveTabPane: legacy ? sample.itemLegacy : undefined
+          destroyOnHidden: enabled ? sample.itemModern : undefined
         },
         { key: 'beta', label: 'Beta', children: beta }
       ]} onChange={key => changes.push(key)} />

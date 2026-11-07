@@ -27,13 +27,12 @@
     const kind = selected.size;
     let size: TabsIndicatorSize | undefined;
     if (kind === 'fixed') size = 12.5;
-    if (kind === 'function' || kind === 'legacy-function') size = origin => origin - 20;
-    if (kind === 'zero' || kind === 'legacy-zero') size = 0;
+    if (kind === 'function') size = origin => origin - 20;
+    if (kind === 'zero') size = 0;
     if (kind === 'negative') size = -3;
     return {
       size,
-      align: kind === 'legacy-align' ? 'end'
-        : 'align' in selected ? selected.align as TabsIndicator['align'] : undefined
+      align: 'align' in selected ? selected.align as TabsIndicator['align'] : undefined
     };
   });
   let items = $derived(empty ? [] : Array.from({ length: overflow ? 16 : 3 }, (_, index) => ({
@@ -75,7 +74,6 @@
     <div class="stage" class:narrow={overflow}>
       {#if mounted}
         <Tabs id="tabs-indicator-main" aria-label="Indicator sections" {items} {indicator}
-          indicatorSize={selected.size.startsWith('legacy') ? 21 : undefined}
           bind:activeKey={current} tabPlacement={selected.placement as TabsPlacement}
           tabBarGutter={12.5} style={`height:${overflow ? 180 : 320}px`}
           onTabScroll={alternate ? info => record(info, 'new') : info => record(info, 'original')}

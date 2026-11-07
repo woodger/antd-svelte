@@ -3,6 +3,7 @@ import type {
   TabsContent,
   TabsMoreProps,
   TabsProps,
+  TabsIndicatorSize,
   TabsSemanticProps,
   TabsSlots
 } from 'antd-svelte';
@@ -17,8 +18,7 @@ interface SourceSettings {
   addIcon?: TabsContent;
   removeIcon?: TabsContent;
   moreIcon?: TabsContent;
-  indicator?: { size?: TabsProps['indicatorSize']; align?: string; };
-  indicatorSize?: TabsProps['indicatorSize'];
+  indicator?: { size?: TabsIndicatorSize; align?: string; };
   more?: SourceMore;
 }
 export interface TabsSemanticCase {
@@ -115,7 +115,6 @@ export function tabsSemanticSettings(
       ...local,
       class: 's-local-plain',
       rootClassName: 's-extra-root',
-      popupClassName: 's-legacy-popup',
       style: 'color:rgb(40,50,60)',
       tabBarStyle: 'margin-bottom:3px',
       classNames: classes('local'),

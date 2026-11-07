@@ -1,4 +1,4 @@
-import type { TabsItem, TabsPlacement, TabsPosition } from './tabs.types';
+import type { TabsItem, TabsPlacement } from './tabs.types';
 
 /** ID native заголовка или панели для полностью пользовательской навигации Tabs. */
 export function getTabsItemId(rootId: string, key: string, kind: 'tab' | 'panel'): string {
@@ -55,7 +55,7 @@ export function getTabsNavigationKey(
     : -1) + available.length) % available.length].key;
 }
 
-export function getTabsPlacement(placement: TabsPlacement | TabsPosition, direction:
+export function getTabsPlacement(placement: TabsPlacement, direction:
   'ltr'
   | 'rtl', mobile = false):
   'top'
@@ -64,7 +64,6 @@ export function getTabsPlacement(placement: TabsPlacement | TabsPosition, direct
   | 'right' {
   if (placement === 'top' || placement === 'bottom') return placement;
   if (mobile) return 'top';
-  if (placement === 'left' || placement === 'right') return placement;
 
   return (placement === 'start') === (direction === 'ltr') ? 'left' : 'right';
 }

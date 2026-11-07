@@ -42,7 +42,7 @@ for (const sample of reference.cases) {
         };
         const classes = Object.fromEntries(Object.entries(nodes).map(([key, element]) => [key,
           element ? Array.from(element.classList)
-            .filter(name => /^s-(?:context|local|extra|legacy|more)-/.test(name)) : null
+            .filter(name => /^s-(?:context|local|extra|more)-/.test(name)) : null
         ]));
         const fields: Record<string, string[]> = {
           root: ['color', 'fontSize'],

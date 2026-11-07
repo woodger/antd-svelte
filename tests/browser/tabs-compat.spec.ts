@@ -21,58 +21,6 @@ test.beforeEach(async ({ page }) => {
   await check(page, 'Interactive Tabs layout');
 });
 
-for (const direction of ['ltr', 'rtl']) {
-  for (const position of ['top', 'right', 'bottom', 'left']) {
-    test(`Tabs keeps source physical ${position} placement in ${direction}`, async ({ page }) => {
-      await check(page, 'Use legacy Tabs placement');
-      await check(page, 'RTL Tabs layout', direction === 'rtl');
-      await page.getByLabel('Tabs physical position', { exact: true }).selectOption(position);
-      const vertical = position === 'left' || position === 'right';
-
-      await expect(root(page)).toHaveClass(new RegExp(`ant-tabs-${position}`));
-      await expect(root(page).getByRole('tablist')).toHaveAttribute(
-        'aria-orientation',
-        vertical ? 'vertical' : 'horizontal'
-      );
-      await tab(page, 'Alpha').focus();
-      await page.keyboard.press(vertical ? 'ArrowDown'
-        : direction === 'rtl' ? 'ArrowLeft' : 'ArrowRight');
-
-      await expect(tab(page, 'Beta')).toBeFocused();
-      await expect(tab(page, 'Alpha')).toHaveAttribute('aria-selected', 'true');
-      await page.keyboard.press('Enter');
-
-      await expect(tab(page, 'Beta')).toHaveAttribute('aria-selected', 'true');
-      await expect(page.getByLabel('Tabs layout changes', { exact: true })).toHaveText('["beta"]');
-    });
-  }
-}
-
-test('Tabs prioritizes logical placement and preserves native panes when switching to the alias',
-  async ({ page }) => {
-    await check(page, 'RTL Tabs layout');
-    await page.getByLabel('Tabs physical position', { exact: true }).selectOption('left');
-    await page.getByLabel('Tabs layout placement', { exact: true }).selectOption('start');
-    const draft = page.getByRole('textbox', { name: 'Layout Alpha draft', exact: true });
-    await draft.fill('Retained alias draft');
-    const original = await draft.elementHandle();
-    await draft.focus();
-
-    await expect(root(page)).toHaveClass(/ant-tabs-right/);
-    await check(page, 'Use legacy Tabs placement');
-
-    await expect(root(page)).toHaveClass(/ant-tabs-left/);
-    await expect(draft).toBeFocused();
-    expect(await draft.evaluate((element, previous) => element === previous, original)).toBe(true);
-    await check(page, 'Use legacy Tabs placement', false);
-
-    await expect(root(page)).toHaveClass(/ant-tabs-right/);
-    await expect(draft).toHaveValue('Retained alias draft');
-    await expect(draft).toBeFocused();
-    await expect(page.getByLabel('Tabs layout changes', { exact: true })).toHaveText('[]');
-    await expect(page.getByLabel('Tabs layout clicks', { exact: true })).toHaveText('[]');
-  });
-
 test('Tabs medium overrides provider size and preserves geometry across provider changes',
   async ({ page }) => {
     await page.getByLabel('Tabs provider size', { exact: true }).selectOption('small');
@@ -93,21 +41,4 @@ test('Tabs medium overrides provider size and preserves geometry across provider
     await expect(tab(page, 'Alpha')).toHaveCSS('font-size', '16px');
     await expect(root(page)).toHaveClass(/ant-tabs-large/);
     await expect(page.getByLabel('Tabs layout changes', { exact: true })).toHaveText('[]');
-  });
-
-test('physical vertical Tabs keep the native mobile fallback and restore their side on resize',
-  async ({ page }) => {
-    await check(page, 'RTL Tabs layout');
-    await check(page, 'Use legacy Tabs placement');
-    await page.getByLabel('Tabs physical position', { exact: true }).selectOption('left');
-
-    await expect(root(page)).toHaveClass(/ant-tabs-left/);
-    await page.setViewportSize({ width: 575, height: 1000 });
-
-    await expect(root(page)).toHaveClass(/ant-tabs-top/);
-    await expect(root(page).getByRole('tablist')).toHaveAttribute('aria-orientation', 'horizontal');
-    await page.setViewportSize({ width: 576, height: 1000 });
-
-    await expect(root(page)).toHaveClass(/ant-tabs-left/);
-    await expect(root(page).getByRole('tablist')).toHaveAttribute('aria-orientation', 'vertical');
   });

@@ -36,7 +36,7 @@
       key: String(index),
       label: `Tab ${index + 1}`,
       disabled: index === 2,
-      destroyInactiveTabPane: index === 1 ? false : undefined,
+      destroyOnHidden: index === 1 ? false : undefined,
       children: index === 0 ? draft : undefined
     }))} />
 {/snippet}

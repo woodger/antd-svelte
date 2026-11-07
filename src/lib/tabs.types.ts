@@ -106,10 +106,8 @@ export interface TabsItem {
   /** Null/false скрывают кнопку при не заданном closable; closable=true сохраняет её. */
   closeIcon?: TabsContent;
   forceRender?: boolean;
-  /** Настройка панели перекрывает корневую; современное имя перекрывает alias. */
+  /** Настройка панели перекрывает корневую, включая явное false. */
   destroyOnHidden?: boolean;
-  /** @deprecated Используйте destroyOnHidden. */
-  destroyInactiveTabPane?: boolean;
 }
 
 /** Исходные доступные имена управляющих кнопок Tabs. */
@@ -148,8 +146,6 @@ export interface TabsConfig {
   classNames?: TabsSemantic;
   styles?: TabsSemantic;
   indicator?: TabsIndicator;
-  /** @deprecated Используйте indicator.size. */
-  indicatorSize?: TabsIndicatorSize;
   addIcon?: TabsContent;
   removeIcon?: TabsContent;
   moreIcon?: TabsContent;
@@ -172,8 +168,6 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
    */
   onTabScroll?: (info: TabsScrollInfo) => void;
   indicator?: TabsIndicator;
-  /** @deprecated Используйте indicator.size; его nullish значение сохраняет этот fallback. */
-  indicatorSize?: TabsIndicatorSize;
   type?: TabsType;
   /** Исходный default: inkBar=true, tabPane=false; true включает обе анимации. */
   animated?: boolean | TabsAnimatedConfig;
@@ -189,18 +183,14 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   locale?: TabsLocale;
   more?: TabsMoreProps;
   /**
-   * Legacy иконка: глобальные tabs.more.icon ?? tabs.moreIcon имеют приоритет.
+   * Иконка More: глобальные tabs.more.icon ?? tabs.moreIcon имеют приоритет.
    * Явное локальное more.icon перекрывает их, включая null/false/undefined.
    */
   moreIcon?: TabsContent;
-  /** @deprecated Используйте classNames.popup.root. */
-  popupClassName?: string;
   /** Отсутствие наследует ConfigProvider; собственный undefined выключает наследование. */
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   /** @defaultValue 'top' */
   tabPlacement?: TabsPlacement;
-  /** Физическая сторона без RTL-переотражения. @deprecated Используйте tabPlacement. */
-  tabPosition?: TabsPosition;
   /**
    * Центрирует горизонтальные заголовки; вертикальный список растягивается как в source.
    * @defaultValue false
@@ -214,8 +204,6 @@ export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'childre
   size?: ComponentSize | 'medium';
   /** @defaultValue false */
   destroyOnHidden?: boolean;
-  /** @deprecated Используйте destroyOnHidden; явное современное false перекрывает alias. */
-  destroyInactiveTabPane?: boolean;
   tabBarExtraContent?: TabsExtraContent;
   /** Snippet получает разрешённые props и стандартную навигацию с заменяемыми props. */
   renderTabBar?: TabsRenderTabBar;

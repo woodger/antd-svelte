@@ -1,6 +1,7 @@
 import type { Page } from '@playwright/test';
 import { test, expect } from './test';
 import reference from './fixtures/ant-design-tabs-editable-metrics.json' with { type: 'json' };
+import { currentReferenceSize } from './fixtures/reference-size';
 
 const owned = (page: Page) => page.locator('#tabs-editable-main');
 const tab = (page: Page, name: string) => owned(page).getByRole('tab', { name, exact: true });
@@ -49,7 +50,7 @@ for (const sample of reference.metrics) {
       await check(page, 'RTL editable Tabs', sample.direction === 'rtl');
       await page.getByLabel('Editable Tabs placement', { exact: true })
         .selectOption(sample.tabPlacement);
-      await page.getByLabel('Editable Tabs size', { exact: true }).selectOption(sample.size);
+      await page.getByLabel('Editable Tabs size', { exact: true }).selectOption(currentReferenceSize(sample.size)!);
       const root = page.locator('#tabs-editable-reference');
       const selectors = {
         cell: '.ant-tabs-tab',

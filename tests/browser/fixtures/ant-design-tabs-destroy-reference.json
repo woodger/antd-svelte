@@ -8,78 +8,29 @@
       "revision": "dea2f5f48991865ddbf743b0f783f45eb72ff671"
     },
     "source": "package/dist/antd.min.js",
-    "browser": "156.0.8078.4"
+    "browser": "156.0.8078.4",
+    "currentApiScope": "Deprecated destruction flags removed. Current flags reproduce the originally measured normalized inputs; native item-before-root priority remains explicit. Current Source retention rechecked separately."
   },
   "cases": [
-    {
-      "name": "root-legacy-true",
-      "rootLegacy": true,
-      "sourceRetained": false
-    },
-    {
-      "name": "root-legacy-false",
-      "rootLegacy": false,
-      "sourceRetained": true
-    },
-    {
-      "name": "root-modern-false-wins",
-      "rootModern": false,
-      "rootLegacy": true,
-      "sourceRetained": true
-    },
-    {
-      "name": "root-modern-true-wins",
-      "rootModern": true,
-      "rootLegacy": false,
-      "sourceRetained": false
-    },
-    {
-      "name": "item-legacy-true",
-      "itemLegacy": true,
-      "sourceRetained": false
-    },
-    {
-      "name": "item-legacy-false",
-      "itemLegacy": false,
-      "sourceRetained": true
-    },
-    {
-      "name": "item-modern-false-wins",
-      "itemModern": false,
-      "itemLegacy": true,
-      "sourceRetained": true
-    },
-    {
-      "name": "item-modern-true-wins",
-      "itemModern": true,
-      "itemLegacy": false,
-      "sourceRetained": false
-    },
+    {"name":"root-destroy","sourceRetained":false,"rootModern":true},
+    {"name":"root-retain","sourceRetained":true,"rootModern":false},
+    {"name":"item-destroy","sourceRetained":false,"itemModern":true},
+    {"name":"item-retain","sourceRetained":true,"itemModern":false},
     {
       "name": "native-item-retains-before-root",
       "itemModern": false,
-      "rootLegacy": true,
       "nativeRetained": true,
-      "sourceRetained": false
+      "sourceRetained": false,
+      "rootModern": true
     },
     {
       "name": "native-item-destroys-before-root",
-      "itemLegacy": true,
       "rootModern": false,
       "nativeRetained": false,
-      "sourceRetained": true
+      "sourceRetained": true,
+      "itemModern": true
     },
-    {
-      "name": "root-legacy-force-render",
-      "rootLegacy": true,
-      "force": true,
-      "sourceRetained": true
-    },
-    {
-      "name": "item-legacy-force-render",
-      "itemLegacy": true,
-      "force": true,
-      "sourceRetained": true
-    }
+    {"name":"root-force-render","force":true,"sourceRetained":true,"rootModern":true},
+    {"name":"item-force-render","force":true,"sourceRetained":true,"itemModern":true}
   ]
 }

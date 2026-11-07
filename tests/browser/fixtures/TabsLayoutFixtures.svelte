@@ -4,7 +4,6 @@
     Tabs,
     type ComponentSize,
     type TabsPlacement,
-    type TabsPosition,
     type TabsType
   } from 'antd-svelte';
   import reference from './ant-design-tabs-layout-metrics.json';
@@ -14,8 +13,6 @@
   let centered = $state(false);
   let gutter = $state<number | undefined>();
   let placement = $state<TabsPlacement>('top');
-  let legacyPlacement = $state(false);
-  let physicalPlacement = $state<TabsPosition>('left');
   let type = $state<TabsType>('line');
   let size = $state<ComponentSize | 'medium' | ''>('');
   let providerSize = $state<ComponentSize>('medium');
@@ -58,10 +55,6 @@
   <label>Tabs layout placement <select aria-label="Tabs layout placement" bind:value={placement}>
     {#each ['top', 'bottom', 'start', 'end'] as value}<option>{value}</option>{/each}
   </select></label>
-  <label><input type="checkbox" bind:checked={legacyPlacement} /> Use legacy Tabs placement</label>
-  <label>Tabs physical position <select aria-label="Tabs physical position" bind:value={physicalPlacement}>
-    {#each ['top', 'right', 'bottom', 'left'] as value}<option>{value}</option>{/each}
-  </select></label>
   <label>Tabs layout type <select aria-label="Tabs layout type" bind:value={type}>
     {#each ['line', 'card', 'editable-card'] as value}<option>{value}</option>{/each}
   </select></label>
@@ -86,8 +79,7 @@
       {#if mounted}
         <Tabs id="tabs-layout-main" aria-label="Layout sections" bind:activeKey={current}
           type={options.type as TabsType}
-          tabPlacement={interactive && legacyPlacement ? undefined : options.tabPlacement as TabsPlacement}
-          tabPosition={interactive ? physicalPlacement : undefined}
+          tabPlacement={options.tabPlacement as TabsPlacement}
           size={interactive ? size || undefined : undefined}
           centered={options.centered} tabBarGutter={options.gutter}
           tabBarStyle={options.headerStyle} style="height:320px;color:rgb(170,20,30)"

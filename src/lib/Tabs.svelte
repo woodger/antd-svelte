@@ -28,7 +28,6 @@
     onTabClick,
     onTabScroll,
     indicator,
-    indicatorSize,
     type,
     animated,
     onEdit,
@@ -38,15 +37,12 @@
     locale,
     more,
     moreIcon,
-    popupClassName,
     tabPlacement,
-    tabPosition,
     centered,
     tabBarGutter,
     tabBarStyle,
     size,
     destroyOnHidden,
-    destroyInactiveTabPane,
     tabBarExtraContent,
     renderTabBar,
     id,
@@ -85,9 +81,9 @@
   let items = $derived(normalizeTabsItems(sourceItems));
   let selectedKey = $derived(getTabsActiveKey(items, activeKey ?? initialDefault));
   let resolvedSize = $derived(size ?? config.componentSize);
-  let rootDestroy = $derived(destroyOnHidden ?? destroyInactiveTabPane ?? false);
+  let rootDestroy = $derived(destroyOnHidden ?? false);
   let placement = $derived(getTabsPlacement(
-    tabPlacement ?? tabPosition ?? 'top',
+    tabPlacement ?? 'top',
     config.direction,
     mobile
   ));
@@ -95,17 +91,13 @@
   let animation = $derived(getTabsAnimation(animated));
   let semanticProps = $derived({
     ...rest,
-    items: items.map(item => ({
-      ...item,
-      destroyOnHidden: item.destroyOnHidden ?? item.destroyInactiveTabPane
-    })),
+    items: items.map(item => ({ ...item, destroyOnHidden: item.destroyOnHidden })),
     activeKey,
     defaultActiveKey,
     onChange,
     onTabClick,
     onTabScroll,
     indicator,
-    indicatorSize,
     type,
     animated,
     onEdit,
@@ -115,17 +107,14 @@
     locale,
     more,
     moreIcon,
-    popupClassName,
     getPopupContainer,
-    tabPlacement: (tabPlacement ?? tabPosition) === undefined ? undefined
-      : getTabsPlacement((tabPlacement ?? tabPosition)!, config.direction),
-    tabPosition,
+    tabPlacement: tabPlacement === undefined ? undefined
+      : getTabsPlacement(tabPlacement, config.direction),
     centered,
     tabBarGutter,
     tabBarStyle,
     size: size ?? config.explicitComponentSize,
     destroyOnHidden,
-    destroyInactiveTabPane,
     tabBarExtraContent,
     renderTabBar,
     id,
@@ -199,15 +188,14 @@
     extra: tabBarExtraContent,
     style: tabBarStyle,
     getPopupContainer: popupContainer,
-    popupClassName: [popupClassName, classes.popup.root].filter(Boolean).join(' ') || undefined,
+    popupClassName: classes.popup.root || undefined,
     indicator: {
-      size: indicator?.size ?? indicatorSize
-        ?? config.tabs?.indicator?.size ?? config.tabs?.indicatorSize,
+      size: indicator?.size ?? config.tabs?.indicator?.size,
       align: indicator?.align ?? config.tabs?.indicator?.align
     },
     classNames: {
       ...classes,
-      popup: [popupClassName, classes.popup.root].filter(Boolean).join(' ') || undefined
+      popup: classes.popup.root || undefined
     },
     styles: { ...slots, popup: slots.popup.root }
   });
@@ -320,7 +308,7 @@
   ]} style={slots.body}>
     {#each items as item (item.key)}
       <TabsPanel id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'tab')} itemKey={item.key} active={selectedKey === item.key} children={item.children} forceRender={item.forceRender}
-        destroyOnHidden={item.destroyOnHidden ?? item.destroyInactiveTabPane ?? rootDestroy}
+        destroyOnHidden={item.destroyOnHidden ?? rootDestroy}
         class={[classes.content, item.className].filter(Boolean).join(' ') || undefined}
         style={[slots.content, item.style].filter(Boolean).join(';') || undefined}
         motion={animation.tabPaneMotion} motionEnabled={designTokens.token.motion} />

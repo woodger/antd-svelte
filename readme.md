@@ -2874,13 +2874,8 @@ DestroyOnHidden=true удаляет содержимое при скрытии, 
 его даже вместе с destroyOnHidden. Удаление key всегда уничтожает панель.
 Состояние, которое владелец хранит снаружи Tabs, уничтожение панели не сбрасывает.
 
-Устаревший destroyInactiveTabPane поддерживается у Tabs и каждого item.
-На одном уровне destroyOnHidden имеет приоритет, включая явное false.
-Между уровнями сохраняется описанный выше контракт: настройка item, современная
-или legacy, перекрывает корневую. ForceRender, ленивое повторное монтирование,
-локальный state, FormData и восстановление фокуса работают так же, как с destroyOnHidden.
-Фикстура `?fixture=tabs-destroy` сопоставляет 12 сценариев официального UMD:
-десять совпадают с upstream, два фиксируют сохранённое отличие приоритета item.
+Фикстура `?fixture=tabs-destroy` сопоставляет восемь актуальных сценариев официального
+UMD: шесть совпадают с upstream, два фиксируют сохранённый приоритет item.
 
 Сохранённая скрытая панель остаётся в DOM; её таймеры и подписки продолжают
 работать. Поля посещённых/forceRender-панелей участвуют в нативной FormData,
@@ -2890,9 +2885,7 @@ Tabs не является полем формы и не наследует disa
 button type=button и не отправляют окружающую форму.
 
 Type поддерживает line/card/editable-card, tabPlacement — top, bottom, start, end.
-Start/end разрешаются относительно RTL. Устаревший tabPosition принимает
-физические top/right/bottom/left; left/right не отражаются в RTL. Явный
-tabPlacement имеет приоритет. На экране шириной до 575px вертикальный
+Start/end разрешаются относительно RTL. На экране шириной до 575px вертикальный
 список переходит наверх. Переполнение прокручивается; навигация показывает
 сфокусированный заголовок без прокрутки всей страницы. Size использует общий
 ComponentSize: small/medium/large;
@@ -2946,7 +2939,7 @@ mobile fallback и items с нормализованным destroyOnHidden.
 Остальные поля сохраняют переданные Svelte props; bind:activeKey остаётся живым.
 
 `ConfigProvider.tabs` задаёт class/style, semantic slots, add/remove/more icons и
-indicator/indicatorSize. Отсутствующий record наследуется; явно переданный объект
+indicator. Отсутствующий record наследуется; явно переданный объект
 во вложенном провайдере заменяет его целиком, как в Ant Design. Классы провайдера
 и компонента накапливаются. Порядок root CSS: provider styles.root → provider style
 → local styles.root → local style; tabBarStyle идёт после styles.header.
@@ -2963,11 +2956,10 @@ Semantic indicator styles идут после вычисленной геоме�
 ```
 
 У More сохраняется исходный порядок: локальное more.icon, затем глобальные
-tabs.more.icon ?? tabs.moreIcon, затем локальное legacy moreIcon. Явное локальное
+tabs.more.icon ?? tabs.moreIcon, затем локальное moreIcon. Явное локальное
 more.icon, включая null/false/undefined, перекрывает fallback. Глобальный tabs.more
 использует только icon, как в 6.6.8; trigger и остальные параметры задаются локально.
-Собственные поля more.overlayClassName/overlayStyle перекрывают deprecated popup
-class и semantic popup.root, даже при явном undefined.
+Собственные поля more.overlayClassName/overlayStyle перекрывают semantic popup.root, даже при явном undefined.
 
 `rootClassName` добавляет класс корню; нативные title/data-атрибуты и обработчики
 передаются HTMLDivElement. `bind:nativeElement` предоставляет сам корневой div
@@ -2979,9 +2971,8 @@ class и semantic popup.root, даже при явном undefined.
 Size также принимает чистую функцию `(origin) => origin - 20`: origin — полная
 ширина горизонтального или высота вертикального заголовка с дробной точностью.
 По умолчанию используется полный размер и align=center; start/end учитывают RTL.
-Нули и отрицательные значения передаются в CSS без ограничения. Устаревший
-indicatorSize используется, когда indicator.size nullish, затем берутся
-ConfigProvider.tabs.indicator.size ?? ConfigProvider.tabs.indicatorSize.
+Нули и отрицательные значения передаются в CSS без ограничения. Nullish
+indicator.size наследует ConfigProvider.tabs.indicator.size.
 Align наследуется отдельно.
 Формулы, включая
 end transform в RTL, повторяют rc-tabs 1.13.0. Измерение выполняется после mount;
@@ -3080,8 +3071,8 @@ MouseEvent, включая его подтип PointerEvent. Close вызыва�
 даёт строку «More», как rc-tabs. У пустой декоративной кнопки остаётся native имя
 «ellipsis». More принимает placement, mouseEnterDelay/mouseLeaveDelay, autoFocus,
 minOverlayWidthMatchTrigger, overlayClassName/overlayStyle, onOverlayClick и
-getPopupContainer; CSS styles задаются строкой. Корневые popupClassName и
-getPopupContainer также поддерживаются; одноимённые more overrides имеют приоритет,
+getPopupContainer; CSS styles задаются строкой. Корневой getPopupContainer
+также поддерживается; одноимённый more override имеет приоритет,
 включая явно заданный undefined. Portal сохраняет тему и собственные CSS variables popup.
 ConfigProvider.getPopupContainer наследуется, если корневой prop Tabs отсутствует.
 Явный root getPopupContainer=undefined выключает provider, как исходный spread props.
@@ -3116,7 +3107,7 @@ CSS overlayStyle имеет приоритет над offsets и arrow variables
 
 `arrow=true` добавляет div-arrow и show-arrow class низкоуровневого Dropdown.
 Tabs upstream не задаёт стили этому div; потребитель может оформить его через
-popupClassName. AutoFocus/Tab работают с overlay, пропуская div-arrow.
+semantic popup.root. AutoFocus/Tab работают с overlay, пропуская div-arrow.
 AutoFocus запускается при открытии; обновление align/размеров внутри сеанса
 сохраняет фокус в пользовательском поле. Смена getPopupContainer callback с тем же
 DOM-контейнером сохраняет portal и выделение текста. Flip переключает CSS insets даже тогда,
@@ -3214,14 +3205,16 @@ Attributes позволяют сохранить class/style/handlers и доб�
 панелями, включая пустые и Unicode keys. Панели, их состояние и корневой ref
 не пересоздаются при обновлении или замене renderer'а. Точные типы находятся в
 [tabs-nav.types.ts](src/lib/tabs-nav.types.ts).
+Поля tabPosition/popupClassName стандартной панели следуют текущему интерфейсу
+TabNavList закреплённого rc-tabs; они независимы от удалённых корневых props Tabs.
 
 Фикстура `?fixture=tabs-editable` сверяет truthiness, иконки и размеры с Ant Design
 6.6.8 и @rc-component/tabs 1.13.0. Проверяются callbacks, принятие/отказ владельца,
 фокус, FormData, layout/RTL и сохранение панелей. Фикстура `?fixture=tabs-layout`
 сравнивает centered/gutter/header style с 31 эталоном официального UMD, включая
 все типы и положения в LTR/RTL, нулевой отступ и пустой editable список.
-Здесь же проверяются физический tabPosition, его приоритет, medium, наследование
-размера и сохранение панелей при смене способа расположения.
+Здесь же проверяются medium, наследование размера и сохранение панелей
+при смене расположения.
 Галерея `/ant-design#tabs`
 показывает профиль, настройки, историю Table, destroyOnHidden и Tabs внутри Modal.
 Фикстура `?fixture=tabs-overflow` сверяет 35 эталонов More из официального UMD:
@@ -3235,10 +3228,10 @@ placements, offsets, overflow/regions, point targeting, arrow, callback payload 
 container. Живые проверки защищают DOM/state/draft/selection/focus, callback loop,
 scroll/resize, уход anchor за viewport и cleanup. Общий числовой engine проверяется
 также прежними сценариями Tour.
-Фикстура `?fixture=tabs-indicator` сверяет 64 эталона indicator/indicatorSize из
+Фикстура `?fixture=tabs-indicator` сверяет 52 эталона indicator из
 официального UMD и направления onTabScroll в восьми сочетаниях RTL/placement.
 Здесь же проверяются сохранение DOM, focus, More, прокрутки и cleanup кадров/listeners.
-Фикстура `?fixture=tabs-semantic` сравнивает 23 эталона semantic slots, CSS-слоёв,
+Фикстура `?fixture=tabs-semantic` сравнивает 22 эталона semantic slots, CSS-слоёв,
 callback props, provider inheritance и icon precedence с официальным UMD.
 Проверяются native attrs/events/ref и живое обновление открытого popup.
 Фикстура `?fixture=tabs-motion` сверяет 41 UMD-эталон фаз, CSS, callbacks,

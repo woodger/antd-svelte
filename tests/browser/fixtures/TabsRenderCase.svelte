@@ -201,7 +201,7 @@
       tabBarGutter={config.gutter} tabBarStyle={config.tabBarStyle}
       tabBarExtraContent={config.extraLeft || config.extraRight
         ? { left: config.extraLeft, right: config.extraRight } : undefined}
-      locale={config.locale} moreIcon={config.moreIcon} popupClassName={config.popupClassName}
+      locale={config.locale} moreIcon={config.moreIcon}
       classNames={config.classNames} styles={config.styles}
       renderTabBar={custom ? renderTabBar : undefined} onTabClick={handleTabClick}
       onChange={key => trace.push(`change:${key}`)} />

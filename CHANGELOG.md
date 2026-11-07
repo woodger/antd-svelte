@@ -13,6 +13,11 @@
   в обоих режимах. Сохранены orientation, range.minCount/maxCount,
   onChangeComplete, semantic styles, native формы, фокус и gestures.
 
+- У Tabs удалены tabPosition, indicatorSize, popupClassName и destroyInactiveTabPane
+  у корня/items; ConfigProvider.tabs.indicatorSize также удалён. Сохранены
+  tabPlacement, indicator, semantic popup.root, destroyOnHidden и текущий
+  renderTabBar API закреплённого rc-tabs.
+
 - Удалены Alert.message/closeText/closeIcon/onClose/afterClose на корне,
   ErrorBoundary.message и ConfigProvider.alert.closeIcon; сохранён актуальный
   closable с closeIcon/onClose/afterClose. У Spin удалены tip/wrapperClassName

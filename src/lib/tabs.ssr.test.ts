@@ -12,24 +12,6 @@ const items: TabsItem[] = [
 ];
 
 describe('Tabs server rendering', () => {
-  it.each(['top', 'right', 'bottom', 'left'] as const)(
-    'renders physical tabPosition=%s before hydration', tabPosition => {
-      const { body } = render(Tabs, { props: { items, tabPosition } });
-
-      expect(body).toContain(`ant-tabs-${tabPosition}`);
-      expect(body).toContain(`aria-orientation="${tabPosition === 'top' || tabPosition === 'bottom'
-        ? 'horizontal' : 'vertical'}"`);
-    }
-  );
-
-  it('gives tabPlacement priority over the deprecated physical position', () => {
-    const { body } = render(Tabs, { props: { items, tabPlacement: 'end', tabPosition: 'top' } });
-
-    expect(body).toContain('ant-tabs-right');
-    expect(body).not.toContain('ant-tabs-top');
-    expect(body).toContain('aria-orientation="vertical"');
-  });
-
   it('renders medium size without small or large classes', () => {
     const medium = render(Tabs, { props: { items, size: 'medium' } }).body;
 

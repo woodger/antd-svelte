@@ -14,14 +14,13 @@ describe('Tabs indicator SSR', () => {
     });
   });
 
-  it.each(['size', 'legacy'] as const)('keeps %s callbacks and scroll events out of SSR', kind => {
+  it('keeps size callbacks and scroll events out of SSR', () => {
     const fail: TabsIndicatorSize = () => { throw new Error('Unexpected SSR size measurement'); };
     const scroll = (_info: TabsScrollInfo) => { throw new Error('Unexpected SSR scroll'); };
     const { body } = render(Tabs, { props: {
       id: 'indicator-ssr',
       items: [{ key: 'beta', label: 'Beta' }],
-      indicator: { size: kind === 'size' ? fail : undefined, align: 'end' },
-      indicatorSize: fail,
+      indicator: { size: fail, align: 'end' },
       onTabScroll: scroll
     } });
     const ink = /<div[^>]*class="ant-tabs-ink-bar[^>]*>/.exec(body)![0];
