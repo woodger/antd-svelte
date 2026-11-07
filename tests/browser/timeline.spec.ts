@@ -30,7 +30,7 @@ test(
 );
 
 test(
-  'Timeline computes alternate placement before reverse and connects reversed pending from the preceding status',
+  'Timeline computes alternate placement before reverse and connects a reversed loading item from the preceding status',
   async ({ page }) => {
     const root = page.locator('#fixture-timeline');
 
@@ -38,7 +38,7 @@ test(
 
     await expect(root.locator('li').nth(1)).toHaveClass(/ant-timeline-item-placement-end/);
 
-    await page.getByLabel('Pending Timeline', { exact: true }).check();
+    await page.getByLabel('Waiting Timeline item', { exact: true }).check();
     await page.getByLabel('Reverse Timeline', { exact: true }).check();
 
     await expect(root.locator('.ant-timeline-item-content').first()).toHaveText('Waiting');

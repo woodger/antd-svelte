@@ -11965,7 +11965,7 @@
       "features": [
         {
           "id": "core-v1",
-          "title": "Items, mode/placement, pending/loading и reverse",
+          "title": "Items, mode/placement, loading и reverse",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
@@ -11973,7 +11973,7 @@
             "src/lib/timeline.ssr.test.ts",
             "tests/browser/timeline.spec.ts"
           ],
-          "note": "Nullish legacy aliases, truthy pending, alternate before reverse, railFollowPrevStatus. React Timeline.Item был JSX sugar без собственного runtime; используется items."
+          "note": "Текущие title/content/icon/placement, loading items и mode=start/end/alternate. Alternate назначает стороны до reverse; railFollowPrevStatus сохранён. Deprecated item aliases, pending/pendingDot и mode=left/right удалены. React Timeline.Item был JSX sugar без собственного runtime; используется items."
         },
         {
           "id": "presentation",

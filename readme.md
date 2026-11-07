@@ -6536,29 +6536,28 @@ Title и content допускают блоковые Snippet; input/links вну
 ```svelte
 <Timeline titleSpan="80px" items={[
   { key: 'created', title: '09:00', content: 'Создано', color: 'green' },
-  { key: 'processing', title: '09:30', content: 'Обработка', loading: true }
-]} pending="Ожидается подтверждение" />
+  { key: 'processing', title: '09:30', content: 'Обработка' },
+  { key: 'waiting', content: 'Ожидается подтверждение', loading: true }
+]} />
 ```
 
 Items поддерживают key/title/content/icon/loading/color/placement, class/style и
 локальные semantic classNames/styles. Title/content/icon принимают текст, число,
 boolean или Snippet. Ноль отображается; boolean создаёт присутствующий пустой
-контент. Legacy label/children/dot/position служат fallback через ??, поэтому
-явные 0/false имеют приоритет. React Timeline.Item был только JSX sugar без
+контент. React Timeline.Item был только JSX sugar без
 собственного runtime; в Svelte данные задаются items, отдельный пустой компонент
 не экспортируется. Для контроля сохранения state используйте стабильные key.
 
-Mode=start/end/alternate; left/right нормализуются в start/end. Item.placement
-переопределяет position и mode; legacy item.position сохраняется буквально как
-в исходнике. Alternate назначает сторону до reverse. Даже при mode=start/end
+Mode=start/end/alternate; item.placement имеет приоритет над mode.
+Alternate назначает сторону до reverse. Даже при mode=start/end
 vertical использует двухколоночный layout, если есть хотя бы один truthy title;
 число 0 само по себе этот layout не включает. TitleSpan — число долей из 24 либо
 строка CSS (100px/25%); в mode=alternate игнорируется. Его вычисленная переменная
 имеет приоритет над тем же ключом в styles.root/style, как в upstream.
 
-Loading задаёт process и добавляет spinner только при falsy icon/dot;
-остальные элементы имеют finish. Pending добавляется только для truthy значения,
-pendingDot использует nullish fallback; reverse разворачивает и pending.
+Loading задаёт process и добавляет spinner только при falsy icon;
+остальные элементы имеют finish. Ожидание показывается отдельным loading-элементом
+в items. Reverse разворачивает весь массив событий.
 В reverse линия наследует статус предыдущего события, иначе — следующего.
 SVG LoadingOutlined перенесён точно из @ant-design/icons-svg 4.6.0 под уже
 включённой MIT-лицензией; React-зависимости не добавлены.

@@ -51,14 +51,14 @@ describe('Timeline SSR', () => {
     }
   );
   it(
-    'reverses the pending event while retaining its process status and following previous rail status',
+    'reverses a loading event while retaining its process status and following previous rail status',
     () => {
       const body = render(
         Timeline,
         {
           props: {
-            items: [{ content: 'Created' }, { content: 'Approved' }],
-            pending: 'Waiting',
+            items: [{ content: 'Created' }, { content: 'Approved' },
+              { content: 'Waiting', loading: true }],
             reverse: true
           }
         }
@@ -67,11 +67,10 @@ describe('Timeline SSR', () => {
       expect(body.indexOf('Waiting')).toBeLessThan(body.indexOf('Approved'));
       expect(body.indexOf('Approved')).toBeLessThan(body.indexOf('Created'));
       expect(body).toContain('ant-steps-item-rail-process');
-      expect(render(Timeline, { props: { pending: 0 } }).body).not.toContain('<li');
     }
   );
   it(
-    'supports colors, deprecated aliases and semantic priority without losing native root attributes',
+    'supports colors and semantic priority without losing native root attributes',
     () => {
       const body = render(
         Timeline,
@@ -79,14 +78,14 @@ describe('Timeline SSR', () => {
           props: {
             id: 'audit',
             'aria-label': 'Audit events',
-            mode: 'right',
+            mode: 'end',
             titleSpan: 8,
             class: 'owner',
             rootClassName: 'root',
             items: [
               {
-                label: 'Legacy label',
-                children: 'Legacy event',
+                title: 'Event title',
+                content: 'Event content',
                 color: 'green',
                 styles: { root: 'color:green' },
                 style: 'color:blue'
@@ -104,8 +103,8 @@ describe('Timeline SSR', () => {
       expect(body).toContain('ant-timeline-item-color-green');
       expect(body).toContain('ant-timeline-item-placement-end');
       expect(body).toContain('owner-event');
-      expect(body).toContain('Legacy label');
-      expect(body).toContain('Legacy event');
+      expect(body).toContain('Event title');
+      expect(body).toContain('Event content');
       expect(body).toContain('color:red;color:green;color:blue');
       expect(body.indexOf('--ant-timeline-head-span:8')).toBeGreaterThan(
         body.indexOf('--ant-timeline-head-span:3')

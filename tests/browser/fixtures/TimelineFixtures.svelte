@@ -5,7 +5,7 @@
   let mode = $state<TimelineMode>('start');
   let horizontal = $state(false);
   let reverse = $state(false);
-  let pending = $state(false);
+  let waiting = $state(false);
   let labels = $state(true);
   let dark = $state(false);
   let compact = $state(false);
@@ -21,7 +21,8 @@
       content: 'Processing',
       loading: true
     },
-    { key: 'approved', title: labels ? '10:30' : undefined, content: 0, color: 'red' }
+    { key: 'approved', title: labels ? '10:30' : undefined, content: 0, color: 'red' },
+    ...(waiting ? [{ key: 'waiting', content: 'Waiting', loading: true }] : [])
   ]);
 </script>
 <svelte:window onkeydown={event => { if (event.key === 'F4') reverse = !reverse; }} />
@@ -32,7 +33,7 @@
   style="width:100%;min-width:0;box-sizing:border-box"
 /></label>{/snippet}
 <section id="timeline-fixture" aria-label="Timeline fixture">
-  <label>Timeline mode <select aria-label="Timeline mode" bind:value={mode}><option>start</option><option>end</option><option>alternate</option><option>left</option><option>right</option></select></label>
+  <label>Timeline mode <select aria-label="Timeline mode" bind:value={mode}><option>start</option><option>end</option><option>alternate</option></select></label>
   <label>Timeline title span <select aria-label="Timeline title span" bind:value={span}><option
     value="default"
   >Default</option><option
@@ -44,7 +45,7 @@
   >8</option></select></label>
   <label><input type="checkbox" bind:checked={horizontal} /> Horizontal Timeline</label>
   <label><input type="checkbox" bind:checked={reverse} /> Reverse Timeline</label>
-  <label><input type="checkbox" bind:checked={pending} /> Pending Timeline</label>
+  <label><input type="checkbox" bind:checked={waiting} /> Waiting Timeline item</label>
   <label><input type="checkbox" bind:checked={labels} /> Timeline labels</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark Timeline</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact Timeline</label>
@@ -58,7 +59,6 @@
       items={events}
       {reverse}
       orientation={horizontal ? 'horizontal' : 'vertical'}
-      pending={pending ? 'Waiting' : undefined}
       titleSpan={span === 'default' ? undefined : span === '8' ? 8 : span}
       classNames={semantic ? { root: 'custom-timeline-root', itemTitle: 'custom-timeline-title' } : undefined}
       styles={semantic ? { itemTitle: 'font-weight:700', root: 'color:red' } : undefined}

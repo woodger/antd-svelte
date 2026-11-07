@@ -9,6 +9,10 @@
 
 ### Removed
 
+- У Timeline удалены pending/pendingDot, item.label/children/dot/position,
+  mode="left"/"right" и тип TimelinePosition. Сохранены title/content/icon/placement,
+  mode=start/end/alternate и loading-элементы в items.
+
 - У Progress удалены trailColor, width, gapPosition и strokeWidth для line/steps.
   Сохранены railColor, size, gapPlacement и актуальный strokeWidth у circle/dashboard.
 

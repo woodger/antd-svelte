@@ -1,28 +1,20 @@
 import type { StepsDataItem } from './steps-data.engine';
 import type { TimelineContent, TimelineItem, TimelineMode } from './timeline.types';
 export function timelineMode(mode?: TimelineMode): 'start' | 'end' | 'alternate' {
-  return mode === 'left'
-    ? 'start'
-    : mode === 'right' ? 'end' : mode === 'alternate' || mode === 'end' ? mode : 'start';
+  return mode === 'alternate' || mode === 'end' ? mode : 'start';
 }
 export function timelineItems(
   items: readonly TimelineItem[],
   mode: 'start' | 'end' | 'alternate',
   loadingIcon: TimelineContent,
-  pending?: TimelineContent,
-  pendingDot?: TimelineContent,
   reverse?: boolean
 ): StepsDataItem[] {
   const result: StepsDataItem[] = items.map((item, index) => {
     const {
       color,
       placement,
-      position,
       loading,
       icon,
-      dot,
-      label,
-      children,
       title,
       content,
       class: className,
@@ -30,16 +22,15 @@ export function timelineItems(
       ...rest
     } = item;
     const actualPlacement = placement
-      ?? position
       ?? (mode === 'alternate'
         ? index % 2 === 0 ? 'start' : 'end'
         : mode);
     const preset = color && ['blue', 'red', 'green', 'gray'].includes(color);
-    const actualIcon = icon ?? dot;
+    const actualIcon = icon ?? undefined;
     return {
       ...rest,
-      title: title ?? label,
-      content: content ?? children,
+      title: title ?? undefined,
+      content: content ?? undefined,
       icon: !actualIcon && loading ? loadingIcon : actualIcon,
       status: loading ? 'process' : 'finish',
       class: [
@@ -58,8 +49,6 @@ export function timelineItems(
       )
     };
   });
-  if (pending)
-    result.push({ icon: pendingDot ?? loadingIcon, content: pending, status: 'process' });
   return reverse ? result.reverse() : result;
 }
 export function timelineLayoutAlternate(

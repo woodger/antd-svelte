@@ -147,7 +147,6 @@ export type {
   TimelineContent,
   TimelineMode,
   TimelinePlacement,
-  TimelinePosition,
   TimelineSlots
 } from './timeline.types';
 export { default as Anchor } from './Anchor.svelte';

@@ -12,8 +12,6 @@
     mode,
     orientation = 'vertical',
     titleSpan,
-    pending,
-    pendingDot,
     reverse = false,
     classNames,
     styles,
@@ -42,7 +40,7 @@
   });
   let actualMode = $derived(timelineMode(mode));
   let converted = $derived(
-    timelineItems(items, actualMode, loading, pending, pendingDot, reverse)
+    timelineItems(items, actualMode, loading, reverse)
   );
   let alternate = $derived(timelineLayoutAlternate(actualMode, orientation, converted));
   let info = $derived(
@@ -54,8 +52,6 @@
         mode: actualMode,
         orientation,
         titleSpan,
-        pending,
-        pendingDot,
         reverse,
         classNames,
         styles,
