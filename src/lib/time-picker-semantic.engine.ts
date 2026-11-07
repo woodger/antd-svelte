@@ -37,19 +37,18 @@ export function timePickerSemantic(
     typeof value === 'function' ? value({ props }) : value;
   const outerProps = { ...props, variant: resolved.variant };
   const outerClasses = mergePickerSlots([
-    resolve(config?.classNames, outerProps), resolve(props.classNames, outerProps),
-    { popup: { root: props.popupClassName } }
+    resolve(config?.classNames, outerProps), resolve(props.classNames, outerProps)
   ], ' ');
   const outerStyles = mergePickerSlots([
     resolve(config?.styles, outerProps), { root: config?.style },
-    resolve(props.styles, outerProps), { popup: { root: props.popupStyle } }
+    resolve(props.styles, outerProps)
   ], ';');
   const innerProps: TimePickerProps = {
     ...outerProps,
     ...resolved,
     classNames: outerClasses,
     styles: outerStyles,
-    renderExtraFooter: props.renderExtraFooter || props.addon
+    renderExtraFooter: props.renderExtraFooter
   };
 
   return {

@@ -167,8 +167,7 @@ describe('TimePicker common props and semantic styles', () => {
     const shared = timePickerSharedProps({
       name: 'time', required: true, minuteStep: 15, previewValue: false,
       onChange: (value, text) => events.push(['change', value, text]),
-      onCalendarChange: (value, text, info) => events.push(['calendar', value, text, info]),
-      onSelect: value => events.push(['legacy', value])
+      onCalendarChange: (value, text, info) => events.push(['calendar', value, text, info])
     });
 
     shared.onCalendarChange?.(null, '', { source: 'time' });
@@ -177,21 +176,21 @@ describe('TimePicker common props and semantic styles', () => {
     expect(shared).toMatchObject({ name: 'time', required: true, showTime: true });
     expect(shared).not.toHaveProperty('minuteStep');
     expect(shared).not.toHaveProperty('previewValue');
-    expect(events).toEqual([['calendar', null, '', {}], ['legacy', null], ['change', null, null]]);
+    expect(events).toEqual([['calendar', null, '', {}], ['change', null, null]]);
   });
 
   it('preserves both upstream semantic layers and root style priority', () => {
     const result = timePickerSemantic({
-      classNames: ({ props }) => ({ root: props.size === undefined ? 'raw-size' : 'wrong' }),
-      styles: { root: 'outline-offset:6px' },
-      popupClassName: 'legacy-popup', popupStyle: 'outline-offset:8px'
+      classNames: ({ props }) => ({ root: props.size === undefined ? 'raw-size' : 'wrong',
+        popup: { root: 'local-popup' } }),
+      styles: { root: 'outline-offset:6px', popup: { root: 'outline-offset:8px' } }
     }, {
       classNames: ({ props }) => ({ root: props.size ? 'inner-context' : 'outer-context' }),
       style: 'outline-offset:4px', styles: { root: 'outline-offset:2px' }
     }, { size: 'small', disabled: false, variant: 'filled' });
 
     expect(result.classes.root).toBe('inner-context outer-context raw-size');
-    expect(result.classes.popup.root).toBe('legacy-popup');
+    expect(result.classes.popup.root).toBe('local-popup');
     expect(result.styles.root?.endsWith('outline-offset:4px;outline-offset:6px')).toBe(true);
     expect(result.styles.popup.root).toBe('outline-offset:8px');
   });

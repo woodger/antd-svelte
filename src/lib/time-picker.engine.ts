@@ -142,9 +142,9 @@ export function timePickerPanel(
   now: Dayjs
 ) {
   const dynamic = disabledTime?.(value || now) || {};
-  const disabledHours = dynamic.disabledHours || config.disabledHours;
-  const disabledMinutes = dynamic.disabledMinutes || config.disabledMinutes;
-  const disabledSeconds = dynamic.disabledSeconds || config.disabledSeconds;
+  const disabledHours = dynamic.disabledHours;
+  const disabledMinutes = dynamic.disabledMinutes;
+  const disabledSeconds = dynamic.disabledSeconds;
   const hours = timePickerOptions(
     24, config.hourStep, disabledHours?.(), config.hideDisabledOptions
   ).map(option => ({

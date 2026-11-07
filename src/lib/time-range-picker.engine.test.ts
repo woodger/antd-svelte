@@ -79,11 +79,12 @@ describe('TimeRangePicker values and validation', () => {
     expect(calls).toEqual([['end', { from: undefined }], ['end', { from: start }]]);
   });
 
-  it('keeps time boundary equality independent of dates and applies legacy disabled units', () => {
+  it('keeps time boundary equality independent of dates and applies disabledTime', () => {
     expect(timeRangeInvalid(start, { minDate: start.add(1, 'year') }, {}, 0)).toBe(false);
-    expect(timeRangeInvalid(start, {}, { disabledHours: () => [10] }, 0)).toBe(true);
+    expect(timeRangeInvalid(start, { disabledTime: () => ({ disabledHours: () => [10] }) },
+      {}, 0)).toBe(true);
     expect(timeRangeInvalid(start, { disabledTime: () => ({ disabledHours: () => [] }) },
-      { disabledHours: () => [10] }, 0)).toBe(false);
+      {}, 0)).toBe(false);
   });
 });
 
@@ -94,8 +95,7 @@ describe('TimeRangePicker semantic config', () => {
       value,
       classNames: ({ props }) => ({ root: props.size === 'small'
         && props.variant === undefined && props.disabled === true ? 'source-props' : 'wrong' }),
-      styles: { root: 'outline-offset:6px', popup: { root: 'outline-offset:5px' } },
-      popupStyle: 'outline-offset:8px'
+      styles: { root: 'outline-offset:6px', popup: { root: 'outline-offset:5px' } }
     }, {
       classNames: ({ props }) => ({ root: Array.isArray(props.value) ? 'range-context' : 'wrong' }),
       style: 'outline-offset:88px', styles: { root: 'outline-offset:2px' }
@@ -103,6 +103,6 @@ describe('TimeRangePicker semantic config', () => {
 
     expect(result.classes.root).toBe('range-context source-props');
     expect(result.styles.root).toBe('outline-offset:2px;outline-offset:4px;outline-offset:6px');
-    expect(result.styles.popup.root).toBe('outline-offset:5px;outline-offset:8px');
+    expect(result.styles.popup.root).toBe('outline-offset:5px');
   });
 });

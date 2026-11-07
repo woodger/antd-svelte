@@ -38,7 +38,7 @@ test('TimePicker retains a draft until OK and preserves the source callback orde
   await expect(input(page)).toHaveValue('13:23:44');
   await expect(owner(page)).toHaveText('2024-09-15T10:23:44.567Z');
   await expect(events(page)).toHaveText(
-    'open:true|calendar:2024-09-15T13:23:44.500Z:13:23:44:{}|select:2024-09-15T13:23:44.500Z'
+    'open:true|calendar:2024-09-15T13:23:44.500Z:13:23:44:{}'
   );
   await unit(page, 'ОК').click();
 
@@ -46,7 +46,7 @@ test('TimePicker retains a draft until OK and preserves the source callback orde
   await expect(owner(page)).toHaveText('2024-09-15T13:23:44.500Z');
   await expect(control(page, 'Time mode')).toHaveText('UTC');
   await expect(events(page)).toHaveText(
-    'open:true|calendar:2024-09-15T13:23:44.500Z:13:23:44:{}|select:2024-09-15T13:23:44.500Z|ok:2024-09-15T13:23:44.500Z|change:2024-09-15T13:23:44.500Z:"13:23:44"|open:false'
+    'open:true|calendar:2024-09-15T13:23:44.500Z:13:23:44:{}|ok:2024-09-15T13:23:44.500Z|change:2024-09-15T13:23:44.500Z:"13:23:44"|open:false'
   );
 });
 
@@ -102,7 +102,7 @@ test('TimePicker clearing emits null for both onChange arguments and empty calen
 
   await expect(owner(page)).toHaveText('null');
   await expect(input(page)).toHaveValue('');
-  await expect(events(page)).toHaveText('calendar:null::{}|select:null|change:null:null|clear');
+  await expect(events(page)).toHaveText('calendar:null::{}|change:null:null|clear');
   await expect(input(page)).toBeFocused();
 });
 
@@ -288,14 +288,13 @@ test('TimePicker retains a rejected controlled draft while the owner keeps the p
   await expect(owner(page)).toHaveText('2025-02-28T18:45:56.789Z');
 });
 
-test('TimePicker presets commit immediately and footer snippets preserve modern precedence', async ({ page }) => {
+test('TimePicker presets commit immediately and footer snippets preserve native controls', async ({ page }) => {
   await control(page, 'Time presets').check();
   await control(page, 'Time footer').selectOption('modern');
   await control(page, 'Custom time panel').check();
   await input(page).click();
 
   await expect(control(page, 'Custom time panel')).toHaveCount(2);
-  await expect(unit(page, 'Legacy time footer')).toHaveCount(0);
   await unit(page, 'Modern time footer').click();
 
   await expect(control(page, 'Time footer clicks')).toHaveText('1');

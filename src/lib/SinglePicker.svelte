@@ -60,7 +60,6 @@
     inputReadOnly,
     preserveInvalidOnBlur = false,
     showNow = true,
-    showToday = true,
     size,
     status,
     variant,
@@ -82,7 +81,7 @@
     onfocus,
     class: className = '',
     rootClassName = '',
-    popupClassName = '',
+    classNames,
     getPopupContainer,
     style,
     nativeElement = $bindable(),
@@ -173,9 +172,9 @@
   let timeAllowClear = $derived(time?.allowClear ?? config.timePicker?.allowClear ?? true);
   let clearContent = $derived.by(() => {
     const local = typeof time?.allowClear === 'object'
-      ? time.allowClear.clearIcon : time?.clearIcon;
+      ? time.allowClear.clearIcon : undefined;
     const context = typeof config.timePicker?.allowClear === 'object'
-      ? config.timePicker.allowClear.clearIcon : config.timePicker?.clearIcon;
+      ? config.timePicker.allowClear.clearIcon : undefined;
     return local !== undefined ? local : context;
   });
   let suffixContent = $derived(time?.suffixIcon === undefined
@@ -783,7 +782,7 @@
         componentTheme.className,
         config.direction === 'rtl' && 'ant-picker-dropdown-rtl',
         `ant-picker-dropdown-placement-${popupPlacement === 'top' ? 'top' : 'bottom'}${actualPlacement.endsWith('Right') ? 'Right' : 'Left'}`,
-        time ? semantic?.classes.popup.root : popupClassName,
+        time ? semantic?.classes.popup.root : classNames?.popup?.root,
         time && rootClassName
       ]} style={initialPopupStyle}
       {@attach node => connectComponentTheme(node, popupThemeStyle)} {@attach container.portal}>
@@ -804,7 +803,7 @@
           {#if showTime && mode === 'date'}<DatePickerTimePanel value={draft ?? clock.defaultOpenValue ?? panel} selectedValue={draft} config={clock} format={timeFormat} locale={actualLocale.locale} {disabledTime} onSelect={selectTime} />{/if}
         </div>
         {#if renderExtraFooter}<div class="ant-picker-footer-extra">{@render renderExtraFooter()}</div>{/if}
-        {#if mode === 'date' && (confirm || (showTime ? showNow : showToday))}<div class="ant-picker-footer">
+        {#if mode === 'date' && (confirm || showNow)}<div class="ant-picker-footer">
           {#if confirm || showTime}<ul class="ant-picker-ranges">
             {#if showNow}<li class="ant-picker-now"><button type="button" class="ant-picker-now-btn" disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
                 const next = validPickerTime(adapter.getNow(), clock, disabledTime);
@@ -818,7 +817,7 @@
                 finish(true);
                 input?.focus();
               }} children={actualLocale.ok} /></li>{/if}
-          </ul>{:else if showToday}<button type="button" class="ant-picker-today-btn" disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
+          </ul>{:else if showNow}<button type="button" class="ant-picker-today-btn" disabled={pickerDateDisabled(now, restrictions)} onclick={() => {
               const next = validPickerTime(adapter.getNow());
               if (commit(next))
                 requestOpen(false);

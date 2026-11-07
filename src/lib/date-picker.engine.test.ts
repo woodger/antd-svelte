@@ -96,17 +96,6 @@ describe('DatePicker date adapter and input', () => {
     expect(
       pickerTimeDisabled(
         value,
-        {
-          showTime: { disabledHours: () => [10] },
-          disabledTime: () => ({ disabledHours: undefined })
-        }
-      )
-    ).toBe(
-      true
-    );
-    expect(
-      pickerTimeDisabled(
-        value,
         { showTime: false, disabledTime: () => ({ disabledHours: () => [10] }) }
       )
     ).toBe(

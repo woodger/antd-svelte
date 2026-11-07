@@ -75,7 +75,6 @@
   <section class="custom-time-panel" aria-label="Custom time panel">{@render content()}</section>
 {/snippet}
 {#snippet extra()}<button type="button" onclick={() => { footerClicks++; }}>Modern time footer</button>{/snippet}
-{#snippet legacy()}<button type="button" onclick={() => { footerClicks++; }}>Legacy time footer</button>{/snippet}
 {#snippet empty()}{/snippet}
 {#snippet suffix()}<span class="custom-time-suffix">T</span>{/snippet}
 {#snippet clear()}<span class="custom-time-clear">C</span>{/snippet}
@@ -129,7 +128,7 @@
     </select></label>
     <label>Time footer<select aria-label="Time footer" bind:value={footer}>
       <option value="default">Default time footer</option><option value="modern">Modern time footer</option>
-      <option value="legacy">Legacy time footer</option><option value="empty">Empty time footer</option>
+      <option value="empty">Empty time footer</option>
     </select></label>
     <button type="button" onclick={() => {
       value = null;
@@ -183,7 +182,6 @@
             onCalendarChange={(next, text, info) => events.push(
               `calendar:${stamp(next)}:${text}:${JSON.stringify(info)}`
             )}
-            onSelect={next => events.push(`select:${stamp(next)}`)}
             onOk={next => events.push(`ok:${stamp(next)}`)}
             onClear={() => events.push('clear')}
             inputReadOnly={readOnly}
@@ -211,8 +209,6 @@
             cellRender={custom ? customCell : undefined}
             panelRender={renderPanel ? panel : undefined}
             renderExtraFooter={footer === 'modern' ? extra : footer === 'empty' ? empty : undefined}
-            addon={footer === 'legacy' || footer === 'modern' || footer === 'empty'
-              ? legacy : undefined}
             presets={presets ? [
               { label: 'Morning time preset', value: dayjs.utc('2024-09-15T09:10:11.123Z') },
               { label: presetLabel, value: () => dayjs.utc('2024-09-15T15:20:30.456Z') }

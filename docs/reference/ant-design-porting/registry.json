@@ -7104,7 +7104,7 @@
             "src/lib/time-picker.engine.test.ts",
             "tests/browser/time-picker.spec.ts"
           ],
-          "note": "HH:mm:ss/hh:mm:ss A, locale field formats, display callback readonly, строгие input formats, show flags, legacy/dynamic disabled units, hideDisabledOptions. Panel selection выравнивает все units, включая скрытые milliseconds (default step=100); step=1 сохраняет точность. Сохранены дата и UTC режим входного Dayjs; parser/getNow используют общий adapter."
+          "note": "HH:mm:ss/hh:mm:ss A, locale field formats, display callback readonly, строгие input formats, show flags, disabledTime units, hideDisabledOptions. Panel selection выравнивает все units, включая скрытые milliseconds (default step=100); step=1 сохраняет точность. Сохранены дата и UTC режим входного Dayjs; parser/getNow используют общий adapter."
         },
         {
           "id": "hover-scroll-lifecycle",
@@ -7129,7 +7129,7 @@
             "tests/browser/time-picker.spec.ts",
             "tests/browser/time-range-picker.spec.ts"
           ],
-          "note": "Общие DatePickerLocale/lang/timePickerLocale и en/ru, отдельный ConfigProvider.timePicker с replacement. SinglePicker сохраняет два semantic слоя и raw local props; RangePicker один слой с resolved size/disabled и raw variant. Prefix/icons/clear, cellRender originNode/range, panelRender, presets и footer — Svelte snippets; single legacy addon сохранён. Используется существующий извлечённый CSS DatePicker, source RTL marker; React runtime не добавляется."
+          "note": "Общие DatePickerLocale/lang/timePickerLocale с cellDateFormat и en/ru, отдельный ConfigProvider.timePicker с replacement. SinglePicker сохраняет два semantic слоя и raw local props; RangePicker один слой с resolved size/disabled и raw variant. Prefix/icons/clear, cellRender originNode/range, panelRender, presets и footer — Svelte snippets; deprecated addon/onSelect, popup aliases, clearIcon и прямые disabled units удалены. Используется существующий извлечённый CSS DatePicker, source RTL marker; React runtime не добавляется."
         },
         {
           "id": "range-picker",

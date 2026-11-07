@@ -79,16 +79,14 @@ describe('datetime time configuration', () => {
     });
   });
 
-  it('retains the default date, steps and disabled callbacks without mutating the config', () => {
+  it('retains the default date and steps without mutating the config', () => {
     const date = dayjs('2024-09-15T12:34:56.789Z');
-    const disabledHours = () => [11];
-    const config = { format: 'HH:mm', minuteStep: 15, defaultOpenValue: date, disabledHours };
+    const config = { format: 'HH:mm', minuteStep: 15, defaultOpenValue: date };
     const clock = datePickerClock({ showTime: config });
 
     expect(clock.defaultOpenValue).toBe(date);
     expect(clock.minuteStep).toBe(15);
-    expect(clock.disabledHours?.()).toEqual([11]);
-    expect(config).toEqual({ format: 'HH:mm', minuteStep: 15, defaultOpenValue: date, disabledHours });
+    expect(config).toEqual({ format: 'HH:mm', minuteStep: 15, defaultOpenValue: date });
     expect(config).not.toHaveProperty('showHour');
   });
 });

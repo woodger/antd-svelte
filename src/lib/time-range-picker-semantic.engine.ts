@@ -19,12 +19,10 @@ export function timeRangeSemantic(
   };
   return {
     classes: mergePickerSlots([
-      resolveContext(context?.classNames), resolve(props.classNames),
-      { popup: { root: props.popupClassName || props.dropdownClassName } }
+      resolveContext(context?.classNames), resolve(props.classNames)
     ], ' '),
     styles: mergePickerSlots([
-      resolveContext(context?.styles), { root: range?.style }, resolve(props.styles),
-      { popup: { root: props.popupStyle } }
+      resolveContext(context?.styles), { root: range?.style }, resolve(props.styles)
     ], ';')
   };
 }

@@ -78,11 +78,7 @@
   let dynamic = $derived(disabledTime?.(value));
   let restrictions = $derived(
     {
-      ...config,
-      ...dynamic,
-      disabledHours: dynamic?.disabledHours ?? config.disabledHours,
-      disabledMinutes: dynamic?.disabledMinutes ?? config.disabledMinutes,
-      disabledSeconds: dynamic?.disabledSeconds ?? config.disabledSeconds
+      ...dynamic
     }
   );
   function blocked(unit: 'hour' | 'minute' | 'second' | 'millisecond', item: number) {

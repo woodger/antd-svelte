@@ -4580,8 +4580,8 @@ preserveInvalidOnBlur сохраняет его. InputReadOnly блокируе�
 сохраняет календарь и очистку. AllowClear=true по умолчанию.
 
 ShowTime=true или объект добавляет time columns. Поддержаны format, видимость
-units, шаги, use12Hours, hideDisabledOptions, defaultOpenValue и disabled time
-callbacks. NeedConfirm по умолчанию true для datetime и false для date. Выбор
+units, шаги, use12Hours, hideDisabledOptions и defaultOpenValue. Ограничения
+времени задаются через disabledTime, а не через поля showTime. NeedConfirm по умолчанию true для datetime и false для date. Выбор
 с подтверждением меняет draft/onCalendarChange; OK меняет value/onChange и вызывает
 onOk. Escape/внешний клик отменяют неподтверждённый draft. Now использует исходный
 путь preset submit и сразу применяет допустимое текущее время.
@@ -4697,7 +4697,7 @@ DefaultPickerValue задаёт время панели при открытии;
 строку, массив допустимых форматов или display callback. Callback делает input
 readonly, даже при inputReadOnly={false}. Флаги showHour/showMinute/showSecond/
 showMillisecond задают колонки; остальные выводятся из формата по правилам
-rc-picker. Шаги и disabledTime/legacy disabledHours/Minutes/Seconds управляют
+rc-picker. Шаги и disabledTime управляют
 единицами; hideDisabledOptions скрывает запрещённые пункты.
 
 Panel selection выравнивает все четыре единицы, включая скрытые: default
@@ -4718,7 +4718,7 @@ onOk. Двойной клик по единице подтверждает пе�
 onChange вызывается при завершении ввода/закрытии, а не при каждом клике колонки.
 Escape отменяет draft; закрытие снаружи при needConfirm=true тоже отменяет его.
 Now и presets применяют значение сразу. OnCalendarChange получает пустой info
-объект; deprecated onSelect вызывается после него. При полной очистке onChange
+объект. При полной очистке onChange
 получает `(null, null)`, а onCalendarChange — `(null, '', {})`, как SinglePicker.
 
 `previewValue='hover'` временно показывает время под указателем, включая disabled
@@ -4736,9 +4736,9 @@ root/content/item/footer/container. Локальный callback получает
 с разрешённым variant; контекст проходит оба исходных слоя TimePicker/SinglePicker.
 Локальный style применяется последним к root.
 
-Prefix/suffixIcon/clearIcon, cellRender, panelRender, renderExtraFooter, legacy
-addon и presets принимают Svelte snippets вместо React nodes/render functions.
-Современный footer имеет приоритет над addon. Cell info.originNode — snippet
+Prefix/suffixIcon/allowClear.clearIcon, cellRender, panelRender, renderExtraFooter
+и presets принимают Svelte snippets вместо React nodes/render functions.
+Cell info.originNode — snippet
 нативной кнопки, остальные поля описаны в [time-picker.types.ts](./src/lib/time-picker.types.ts).
 Bind:nativeElement даёт root div, bind:this — focus({cursor,preventScroll})/blur().
 Native name/id/required и FormItem работают без скрытого ISO input; FormData
@@ -4746,7 +4746,11 @@ Native name/id/required и FormItem работают без скрытого ISO
 
 Адаптация доступности использует native buttons для единиц, стрелки/Home/End,
 ArrowDown из input, Enter/Tab и Escape с возвратом фокуса. Popup использует общий
-native popover lifecycle библиотеки. Темы, compact, RTL, status и размеры
+native popover lifecycle библиотеки. Класс popup задаётся через classNames.popup.root
+у всех четырёх picker-компонентов; остальные semantic slots у DatePicker/RangePicker
+ещё не перенесены. ShowNow управляет Today/Now, ограничения времени задаются
+функцией disabledTime, иконка очистки — allowClear.clearIcon. Прежние popup aliases,
+showToday, прямые disabled units, addon/onSelect и второй аргумент onKeyDown удалены. Темы, compact, RTL, status и размеры
 наследуют текущие контексты.
 
 Проверки: [engine](./src/lib/time-picker.engine.test.ts),
@@ -4893,8 +4897,8 @@ boolean либо [start,end]. Очистка сохраняет заблокир
 порядка посещения полей, как в rc-picker. Проверяются границы диапазона:
 запрещённая дата внутри него сама по себе не запрещает диапазон. MinDate/maxDate
 ограничивают выбор и навигацию. Presets принимают пару либо фабрику, previewValue
-по умолчанию 'hover'; false отключает предварительный просмотр. ShowNow/showToday
-по умолчанию выключены для диапазона; явное включение подтверждает текущую границу.
+по умолчанию 'hover'; false отключает предварительный просмотр. ShowNow
+по умолчанию выключен для диапазона; явное включение подтверждает текущую границу.
 
 Format, showTime units/steps/defaultOpenValue, inputReadOnly,
 preserveInvalidOnBlur, size/status/variant/Compact, локали, тема и RTL используют

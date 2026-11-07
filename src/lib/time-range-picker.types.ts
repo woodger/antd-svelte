@@ -27,21 +27,16 @@ export interface TimeRangePickerProps extends Omit<
   RangePickerProps,
   'showTime' | 'allowClear' | 'status' | 'disabledDate' | 'disabledTime'
     | 'onPickerValueChange' | 'onPanelChange' | 'prefix' | 'onclick'
-    | 'onfocus' | 'onblur' | 'multiple' | 'placeholder' | 'renderExtraFooter'
+    | 'onfocus' | 'onblur' | 'multiple' | 'placeholder' | 'renderExtraFooter' | 'classNames'
 >, Omit<DatePickerTimeConfig, 'format' | 'defaultOpenValue'> {
   placeholder?: string | [string, string];
   /** Заполняет только панель и кандидат OK; одиночный Dayjs относится к start. */
   defaultOpenValue?: Dayjs | [Dayjs, Dayjs];
   changeOnScroll?: boolean;
   allowClear?: boolean | { clearIcon?: TimePickerContent; };
-  clearIcon?: TimePickerContent;
   suffixIcon?: TimePickerContent;
   prefix?: TimePickerContent;
   status?: 'error' | 'warning' | 'success' | 'validating';
-  /** @deprecated Используйте classNames.popup.root; popupClassName имеет приоритет. */
-  dropdownClassName?: string;
-  /** @deprecated Используйте styles.popup.root. */
-  popupStyle?: string;
   classNames?: TimeRangePickerSemantic;
   styles?: TimeRangePickerSemantic;
   cellRender?: Snippet<[number | 'am' | 'pm', TimePickerCellRenderInfo]>;
@@ -65,5 +60,5 @@ export interface TimeRangePickerProps extends Omit<
   onblur?: (event: FocusEvent, info: RangePickerInfo) => void;
   onFocus?: TimeRangePickerProps['onfocus'];
   onBlur?: TimeRangePickerProps['onblur'];
-  onKeyDown?: (event: KeyboardEvent, preventDefault?: () => void) => void;
+  onKeyDown?: (event: KeyboardEvent) => void;
 }

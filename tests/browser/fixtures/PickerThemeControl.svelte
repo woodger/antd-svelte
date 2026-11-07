@@ -46,18 +46,18 @@
       status: mode === 'error' ? 'error' : undefined,
       variant: mode === 'filled' || mode === 'borderless' || mode === 'underlined' ? mode : undefined,
       open: id === 'normal' && opened === mode,
-      popupClassName: id === 'normal' && opened === mode ? 'theme-picker-popup' : undefined,
+      classNames: { popup: { root: id === 'normal' && opened === mode
+        ? 'theme-picker-popup' : undefined } },
       style: ['width:280px', styled && 'color:rgb(0,128,0);padding-top:13px',
         id === 'variable' && `--${prefix}-date-picker-padding-inline:21px`]
         .filter(Boolean).join(';'),
       showNow: false,
-      showToday: false,
       onOpenChange: next => {
         if (id === 'normal') onOpen?.(next ? mode : '');
       }
     } satisfies Pick<DatePickerProps,
-      'size' | 'disabled' | 'status' | 'variant' | 'open' | 'onOpenChange' | 'popupClassName'
-      | 'style' | 'showNow' | 'showToday'>;
+      'size' | 'disabled' | 'status' | 'variant' | 'open' | 'onOpenChange' | 'classNames'
+      | 'style' | 'showNow'>;
   }
 </script>
 

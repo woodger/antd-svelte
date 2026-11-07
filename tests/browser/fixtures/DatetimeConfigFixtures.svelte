@@ -52,7 +52,7 @@
       {:else}
         <DatePicker defaultValue={start} format={sample.format}
           showTime={sample.config ?? true} locale={{ lang: sample.locale ?? {} }}
-          open showNow={false} showToday={false} style="width:280px"
+          open showNow={false} style="width:280px"
           aria-label="Datetime config single" onChange={record} />
       {/if}
     {/key}

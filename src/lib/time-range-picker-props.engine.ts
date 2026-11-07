@@ -4,8 +4,7 @@ import type { TimeRangePickerProps } from './time-range-picker.types';
 const timeOnly = new Set([
   'hourStep', 'minuteStep', 'secondStep', 'millisecondStep', 'showHour', 'showMinute',
   'showSecond', 'showMillisecond', 'use12Hours', 'hideDisabledOptions', 'defaultOpenValue',
-  'disabledHours', 'disabledMinutes', 'disabledSeconds', 'changeOnScroll', 'clearIcon',
-  'suffixIcon', 'prefix', 'dropdownClassName', 'popupStyle', 'classNames', 'styles',
+  'changeOnScroll', 'suffixIcon', 'prefix', 'classNames', 'styles',
   'cellRender', 'panelRender', 'onPickerValueChange', 'onPanelChange', 'disabledDate',
   'onclick', 'onClick', 'onFocus', 'onBlur', 'onKeyDown', 'onfocus', 'onblur',
   'allowClear', 'status', 'placeholder', 'renderExtraFooter', 'disabledTime'

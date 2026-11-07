@@ -208,7 +208,7 @@ describe('Calendar date engine', () => {
   });
 
   it('fills panel formats while leaving the raw month render locale intact', () => {
-    const raw = calendarLocale(undefined, { lang: { dayFormat: 'DD', fieldMonthFormat: '' } }).lang;
+    const raw = calendarLocale(undefined, { lang: { cellDateFormat: 'DD', fieldMonthFormat: '' } }).lang;
 
     const filled = calendarFilledLocale(raw);
 
@@ -217,7 +217,7 @@ describe('Calendar date engine', () => {
     expect(filled.fieldDateTimeFormat).toBe('YYYY-MM-DD HH:mm:ss');
     expect(filled.fieldTimeFormat).toBe('HH:mm:ss');
     expect(filled.fieldWeekFormat).toBe('gggg-wo');
-    expect(raw).not.toHaveProperty('cellDateFormat');
+    expect(raw.cellDateFormat).toBe('DD');
     expect(raw.fieldMonthFormat).toBe('');
   });
 });

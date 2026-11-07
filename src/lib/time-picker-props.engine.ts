@@ -4,9 +4,9 @@ import type { TimePickerProps } from './time-picker.types';
 const timeOnly = new Set([
   'hourStep', 'minuteStep', 'secondStep', 'millisecondStep', 'showHour', 'showMinute',
   'showSecond', 'showMillisecond', 'use12Hours', 'hideDisabledOptions', 'defaultOpenValue',
-  'disabledHours', 'disabledMinutes', 'disabledSeconds', 'changeOnScroll', 'previewValue',
-  'clearIcon', 'suffixIcon', 'prefix', 'addon', 'popupStyle', 'classNames', 'styles',
-  'cellRender', 'panelRender', 'presets', 'onSelect', 'onPickerValueChange', 'onPanelChange',
+  'changeOnScroll', 'previewValue',
+  'suffixIcon', 'prefix', 'classNames', 'styles',
+  'cellRender', 'panelRender', 'presets', 'onPickerValueChange', 'onPanelChange',
   'disabledDate', 'onCalendarChange', 'onChange', 'onclick', 'onClick', 'onFocus', 'onBlur',
   'onKeyDown', 'allowClear', 'status', 'multiple'
 ]);
@@ -24,12 +24,10 @@ export function timePickerSharedProps(props: TimePickerProps): DatePickerProps {
     allowClear: true,
     onfocus: props.onfocus ?? props.onFocus,
     onblur: props.onblur ?? props.onBlur,
-    onkeydown: props.onkeydown ?? (props.onKeyDown
-      ? event => props.onKeyDown?.(event, () => event.preventDefault()) : undefined),
-    renderExtraFooter: props.renderExtraFooter || props.addon,
+    onkeydown: props.onkeydown ?? props.onKeyDown,
+    renderExtraFooter: props.renderExtraFooter,
     onCalendarChange: (value, text) => {
       props.onCalendarChange?.(value, text, {});
-      props.onSelect?.(value);
     },
     onChange: (value, text) => props.onChange?.(value, value ? text : null)
   };

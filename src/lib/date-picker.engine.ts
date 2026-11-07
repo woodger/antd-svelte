@@ -81,15 +81,7 @@ export function pickerTimeDisabled(
   props: Pick<DatePickerProps, 'showTime' | 'disabledTime'>
 ): boolean {
   if (!props.showTime) return false;
-  const base = typeof props.showTime === 'object' ? props.showTime : {};
-  const dynamic = props.disabledTime?.(value);
-  const config = {
-    ...base,
-    ...dynamic,
-    disabledHours: dynamic?.disabledHours ?? base.disabledHours,
-    disabledMinutes: dynamic?.disabledMinutes ?? base.disabledMinutes,
-    disabledSeconds: dynamic?.disabledSeconds ?? base.disabledSeconds
-  };
+  const config = props.disabledTime?.(value) ?? {};
   return Boolean(
     config.disabledHours?.().includes(value.hour())
     || config.disabledMinutes?.(value.hour()).includes(
@@ -170,19 +162,19 @@ export function validPickerTime(
       unit: 'hour' as const,
       count: 24,
       step: config.hourStep ?? 1,
-      disabled: () => (dynamic.disabledHours ?? config.disabledHours)?.() ?? []
+      disabled: () => dynamic.disabledHours?.() ?? []
     },
     {
       unit: 'minute' as const,
       count: 60,
       step: config.minuteStep ?? 1,
-      disabled: () => (dynamic.disabledMinutes ?? config.disabledMinutes)?.(next.hour()) ?? []
+      disabled: () => dynamic.disabledMinutes?.(next.hour()) ?? []
     },
     {
       unit: 'second' as const,
       count: 60,
       step: config.secondStep ?? 1,
-      disabled: () => (dynamic.disabledSeconds ?? config.disabledSeconds)?.(
+      disabled: () => dynamic.disabledSeconds?.(
         next.hour(),
         next.minute()
       )

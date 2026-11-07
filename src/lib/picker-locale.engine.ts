@@ -14,6 +14,6 @@ export function fillPickerLocale(locale: PickerLocale, timeFormat = 'HH:mm:ss'):
     yearFormat: locale.yearFormat || 'YYYY',
     cellYearFormat: locale.cellYearFormat || 'YYYY',
     cellQuarterFormat: locale.cellQuarterFormat || '[Q]Q',
-    cellDateFormat: locale.cellDateFormat || locale.dayFormat || 'D'
+    cellDateFormat: locale.cellDateFormat || 'D'
   };
 }

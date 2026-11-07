@@ -79,7 +79,6 @@
     defaultOpen = false,
     needConfirm,
     showNow,
-    showToday,
     allowClear = true,
     inputReadOnly,
     preserveInvalidOnBlur = false,
@@ -104,7 +103,7 @@
     locale,
     class: className = '',
     rootClassName = '',
-    popupClassName = '',
+    classNames,
     getPopupContainer,
     style,
     nativeElement = $bindable(),
@@ -219,7 +218,7 @@
   }));
   let view = $derived(panelValues()[active]);
   let mode = $state<DatePickerMode>('date');
-  let showCurrent = $derived((showNow ?? showToday ?? false) && mode === 'date');
+  let showCurrent = $derived((showNow ?? false) && mode === 'date');
   let hover = $state.raw<Dayjs | null>(null);
   let presetHover = $state.raw<RangePickerValue | null>(null);
   let displayRange = $derived.by((): RangePickerValue => {
@@ -259,9 +258,9 @@
   let timeAllowClear = $derived(time?.allowClear ?? config.timePicker?.allowClear ?? true);
   let clearContent = $derived.by(() => {
     const local = typeof time?.allowClear === 'object'
-      ? time.allowClear.clearIcon : time?.clearIcon;
+      ? time.allowClear.clearIcon : undefined;
     const context = typeof config.timePicker?.allowClear === 'object'
-      ? config.timePicker.allowClear.clearIcon : config.timePicker?.clearIcon;
+      ? config.timePicker.allowClear.clearIcon : undefined;
     return local !== undefined ? local : context;
   });
   let suffixContent = $derived(time?.suffixIcon === undefined
@@ -746,9 +745,7 @@
         send(active, 'esc');
         requestOpen(false);
       }
-      (time.onkeydown ?? (time.onKeyDown
-        ? (event: KeyboardEvent) => time.onKeyDown?.(event, () => event.preventDefault())
-        : undefined))?.(event);
+      (time.onkeydown ?? time.onKeyDown)?.(event);
       if (event.defaultPrevented || event.isComposing || blocked[index]) return;
       if (event.key === 'Enter') {
         event.preventDefault();
@@ -1119,7 +1116,7 @@
           `ant-picker-dropdown-placement-${verticalPlacement}${actualPlacement.endsWith('Right')
             ? 'Right'
             : 'Left'}`,
-          time ? semantic?.classes.popup.root : popupClassName,
+          time ? semantic?.classes.popup.root : classNames?.popup?.root,
           time && rootClassName
         ]}
       style={initialPopupStyle}

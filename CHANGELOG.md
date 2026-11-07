@@ -9,6 +9,13 @@
 
 ### Removed
 
+- У DatePicker/RangePicker/TimePicker/TimeRangePicker удалены popupClassName,
+  popupStyle/dropdownClassName, showToday, прямые disabledHours/Minutes/Seconds,
+  прежний clearIcon (включая timePicker config), addon/onSelect и deprecated
+  второй аргумент onKeyDown. У локалей удалён dayFormat. Сохранены
+  classNames.popup.root, semantic styles, showNow, disabledTime, allowClear.clearIcon,
+  renderExtraFooter/onCalendarChange и cellDateFormat.
+
 - У Image удалены wrapperStyle и preview.rootClassName, включая групповой preview.
   Сохранены настройки обёртки через styles.root и viewer через classNames.popup.root;
   class/style по-прежнему относятся к img.

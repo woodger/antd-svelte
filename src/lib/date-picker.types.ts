@@ -16,10 +16,7 @@ export interface DatePickerDisabledTime {
   disabledMilliseconds?: (hour: number, minute: number, second: number) => number[];
 }
 /** Время в календаре: отображение разрядов, шаги, ограничения и начальная дата панели. */
-export interface DatePickerTimeConfig extends Omit<
-  DatePickerDisabledTime,
-  'disabledMilliseconds'
-> {
+export interface DatePickerTimeConfig {
   /** Формат time panel; для определения колонок имеет приоритет над format поля. */
   format?: string;
   showHour?: boolean;
@@ -72,8 +69,6 @@ export interface DatePickerProps extends Omit<
   preserveInvalidOnBlur?: boolean;
   /** @defaultValue true */
   showNow?: boolean;
-  /** @defaultValue true */
-  showToday?: boolean;
   size?: ComponentSize;
   status?: 'error' | 'warning';
   /** Локальное оформление перекрывает Form и ConfigProvider; fallback outlined. */
@@ -97,8 +92,8 @@ export interface DatePickerProps extends Omit<
   getPopupContainer?: (trigger: HTMLElement) => HTMLElement | ShadowRoot;
   class?: string;
   rootClassName?: string;
-  /** @defaultValue '' */
-  popupClassName?: string;
+  /** Класс popup; остальные semantic slots пока не перенесены. */
+  classNames?: { popup?: { root?: string; }; };
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
 }

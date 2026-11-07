@@ -65,13 +65,12 @@ export interface TimePickerConfig {
   styles?: TimePickerSemantic;
   suffixIcon?: TimePickerContent | true;
   allowClear?: boolean | { clearIcon?: TimePickerContent; };
-  clearIcon?: TimePickerContent;
 }
 
 /** Выбор времени через Dayjs; дата, UTC/timezone и точность не сериализуются компонентом. */
 export interface TimePickerProps extends Omit<
   DatePickerProps,
-  'showTime' | 'showToday' | 'allowClear' | 'status' | 'onCalendarChange'
+  'showTime' | 'allowClear' | 'status' | 'onCalendarChange' | 'classNames'
     | 'onPanelChange' | 'onPickerValueChange' | 'disabledDate' | 'onChange'
     | 'prefix' | 'onclick' | 'multiple'
 >, Omit<DatePickerTimeConfig, 'format'> {
@@ -83,16 +82,11 @@ export interface TimePickerProps extends Omit<
   previewValue?: false | 'hover';
   /** Выбирает ближайший разрешённый unit через 300 ms после ручной прокрутки. */
   changeOnScroll?: boolean;
-  /** По умолчанию true; иконка объекта имеет приоритет над clearIcon. */
+  /** По умолчанию true; объект настраивает иконку очистки. */
   allowClear?: boolean | { clearIcon?: TimePickerContent; };
-  clearIcon?: TimePickerContent;
   suffixIcon?: TimePickerContent | true;
   prefix?: TimePickerContent;
   status?: 'error' | 'warning' | 'success' | 'validating';
-  /** @deprecated Используйте renderExtraFooter; современный snippet имеет приоритет. */
-  addon?: Snippet;
-  /** @deprecated Используйте styles.popup.root. */
-  popupStyle?: string;
   classNames?: TimePickerSemantic;
   styles?: TimePickerSemantic;
   cellRender?: Snippet<[number | 'am' | 'pm', TimePickerCellRenderInfo]>;
@@ -104,14 +98,12 @@ export interface TimePickerProps extends Omit<
   onClick?: HTMLAttributes<HTMLDivElement>['onclick'];
   onFocus?: DatePickerProps['onfocus'];
   onBlur?: DatePickerProps['onblur'];
-  onKeyDown?: (event: KeyboardEvent, preventDefault?: () => void) => void;
+  onKeyDown?: (event: KeyboardEvent) => void;
   disabledDate?: (date: Dayjs, info: { type: 'time'; }) => boolean;
   /** Третий аргумент SinglePicker — пустой объект после удаления range. */
   onCalendarChange?: (value: Dayjs | null, dateString: string, info: Record<string, never>) => void;
   /** При полной очистке dateString=null, как в runtime SinglePicker rc-picker. */
   onChange?: (value: Dayjs | null, dateString: string | null) => void;
-  /** @deprecated Вызывается после onCalendarChange; при очистке может получить null. */
-  onSelect?: (value: Dayjs | null) => void;
   onPanelChange?: (value: Dayjs, mode: 'time') => void;
   onPickerValueChange?: (value: Dayjs, info: { source: 'reset' | 'panel'; mode: 'time'; }) => void;
 }
