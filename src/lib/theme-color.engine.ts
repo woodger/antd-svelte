@@ -1,6 +1,7 @@
 import { FastColor } from './fast-color.engine';
 import { generatePalette } from './theme-palette.engine';
 import { presetColors } from './theme-token.types';
+import { defaultPresetColors } from './theme-seed';
 import type { ColorMapToken, ColorNeutralMapToken, SeedToken } from './theme-token.types';
 
 export interface ColorMap {
@@ -183,7 +184,7 @@ export function genColorMapToken(
 
   const presetColorTokens: Record<string, string> = {};
   presetColors.forEach((colorKey) => {
-    const colorBase = seed[colorKey];
+    const colorBase = colorKey === 'pink' ? defaultPresetColors.pink : seed[colorKey];
     if (colorBase) {
       const colorPalette = generateColorPalettes(colorBase);
       presetColorTokens[`${colorKey}Hover`] = colorPalette[5];

@@ -33,7 +33,7 @@ export function archiveEntry(bytes, wanted) {
   throw new Error(`Missing npm archive entry: ${wanted}`);
 }
 
-// Нужны границы CSS-блоков и селекторов; тела деклараций сохраняются побайтно.
+// Нужны границы CSS-блоков и селекторов; преобразования деклараций задаёт рецепт.
 export function cssBlocks(css) {
   const blocks = [];
   let start = 0;
@@ -187,6 +187,10 @@ export function extractCss(css, recipe) {
   const replace = recipe.replacements.map(
     ({ pattern, replacement }) => ({ pattern: new RegExp(pattern, 'g'), replacement })
   );
+  const replaceDeclarations = (recipe.declarationReplacements ?? []).map(
+    ({ pattern, replacement }) => ({ pattern: new RegExp(pattern, 'g'), replacement })
+  );
+  const excludeAtRules = (recipe.excludeAtRules ?? []).map(pattern => new RegExp(pattern));
   const foundKeyframes = new Set();
   const appended = [];
   let count = 0;
@@ -195,6 +199,8 @@ export function extractCss(css, recipe) {
     for (const block of cssBlocks(input)) {
       if (block.body === null)
         continue;
+      if (block.prelude.startsWith('@')
+        && excludeAtRules.some(pattern => pattern.test(block.prelude))) continue;
       const keyframe = /^@(?:-webkit-)?keyframes\s+([\w-]+)$/.exec(block.prelude);
       if (keyframe) {
         if (recipe.keyframes.includes(keyframe[1])) {
@@ -225,7 +231,9 @@ export function extractCss(css, recipe) {
             )
           ).join(
             ','
-          )}{${block.body}}`
+          )}{${replaceDeclarations.reduce(
+            (body, entry) => body.replace(entry.pattern, entry.replacement), block.body
+          )}}`
         );
       }
     }

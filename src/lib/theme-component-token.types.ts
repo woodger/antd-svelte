@@ -75,7 +75,6 @@ export interface ButtonComponentToken {
   defaultActiveBg: string;
   defaultActiveColor: string;
   defaultActiveBorderColor: string;
-  borderColorDisabled: string;
   defaultGhostColor: string;
   ghostBg: string;
   defaultGhostBorderColor: string;
@@ -86,9 +85,6 @@ export interface ButtonComponentToken {
   paddingInline: ThemeCSSValue;
   paddingInlineLG: ThemeCSSValue;
   paddingInlineSM: ThemeCSSValue;
-  paddingBlock: ThemeCSSValue;
-  paddingBlockLG: ThemeCSSValue;
-  paddingBlockSM: ThemeCSSValue;
   onlyIconSize: number | string;
   onlyIconSizeLG: number | string;
   onlyIconSizeSM: number | string;
@@ -97,9 +93,6 @@ export interface ButtonComponentToken {
   contentFontSize: number;
   contentFontSizeLG: number;
   contentFontSizeSM: number;
-  contentLineHeight: number;
-  contentLineHeightLG: number;
-  contentLineHeightSM: number;
   defaultBgDisabled: string;
   dashedBgDisabled: string;
 }
@@ -135,8 +128,6 @@ export interface CarouselComponentToken {
   dotHeight: number | string;
   dotGap: number;
   dotOffset: number;
-  /** @deprecated Используйте dotActiveWidth; современное имя имеет приоритет, включая 0. */
-  dotWidthActive: number;
   dotActiveWidth: number | string;
   arrowSize: number;
   arrowOffset: number;
@@ -346,12 +337,6 @@ export interface InputNumberComponentToken {
 }
 
 export interface LayoutComponentToken {
-  /** @deprecated Используйте headerBg. */
-  colorBgHeader: string;
-  /** @deprecated Используйте bodyBg. */
-  colorBgBody: string;
-  /** @deprecated Используйте triggerBg. */
-  colorBgTrigger: string;
   bodyBg: string;
   headerBg: string;
   headerHeight: number | string;
@@ -430,8 +415,6 @@ export interface PopoverComponentToken {
   arrowPolygon: string;
   arrowOffsetHorizontal: number;
   arrowOffsetVertical: number;
-  width?: number | string;
-  minWidth?: number | string;
   titleMinWidth: number | string;
   zIndexPopup: number;
   innerPadding: number;
@@ -520,8 +503,6 @@ export interface SelectComponentToken {
 }
 
 export interface SkeletonComponentToken {
-  color: string;
-  colorGradientEnd: string;
   gradientFromColor: string;
   gradientToColor: string;
   titleHeight: number | string;
@@ -580,8 +561,6 @@ export interface SwitchComponentToken {
 }
 
 export interface SplitterComponentToken {
-  /** @deprecated Используйте splitBarDraggableSize; современное имя принимает явный 0. */
-  resizeSpinnerSize: number;
   splitBarDraggableSize: number;
   splitBarSize: number;
   splitTriggerSize: number;
@@ -683,7 +662,6 @@ export interface CalendarComponentToken {
 }
 
 export interface StepsComponentToken {
-  descriptionMaxWidth?: number;
   customIconSize: number;
   customIconTop: number;
   customIconFontSize: number;
@@ -695,60 +673,37 @@ export interface StepsComponentToken {
   navArrowColor: string;
   navContentMaxWidth: ThemeCSSValue;
   iconSizeSM: number | string;
-  titleLineHeight: number | string;
+
 }
 
 export interface MenuComponentToken {
   dropdownWidth: number | string;
   zIndexPopup: number;
-  colorGroupTitle: string;
   groupTitleColor: string;
   groupTitleLineHeight: string | number;
   groupTitleFontSize: number;
-  radiusItem: number;
   itemBorderRadius: number;
-  radiusSubMenuItem: number;
   subMenuItemBorderRadius: number;
-  colorItemText: string;
   itemColor: string;
-  colorItemTextHover: string;
   itemHoverColor: string;
-  colorItemTextHoverHorizontal: string;
   horizontalItemHoverColor: string;
-  colorItemTextSelected: string;
   itemSelectedColor: string;
   subMenuItemSelectedColor: string;
-  colorItemTextSelectedHorizontal: string;
   horizontalItemSelectedColor: string;
-  colorItemTextDisabled: string;
   itemDisabledColor: string;
-  colorDangerItemText: string;
   dangerItemColor: string;
-  colorDangerItemTextHover: string;
   dangerItemHoverColor: string;
-  colorDangerItemTextSelected: string;
   dangerItemSelectedColor: string;
-  colorDangerItemBgActive: string;
   dangerItemActiveBg: string;
-  colorDangerItemBgSelected: string;
   dangerItemSelectedBg: string;
-  colorItemBg: string;
   itemBg: string;
-  colorItemBgHover: string;
   itemHoverBg: string;
-  colorSubItemBg: string;
   subMenuItemBg: string;
-  colorItemBgActive: string;
   itemActiveBg: string;
-  colorItemBgSelected: string;
   itemSelectedBg: string;
-  colorItemBgSelectedHorizontal: string;
   horizontalItemSelectedBg: string;
-  colorActiveBarWidth: number | string;
   activeBarWidth: number | string;
-  colorActiveBarHeight: number;
   activeBarHeight: number;
-  colorActiveBarBorderSize: number;
   activeBarBorderWidth: number | string;
   itemMarginInline: number;
   horizontalItemHoverBg: string;

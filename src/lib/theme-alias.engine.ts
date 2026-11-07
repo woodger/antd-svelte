@@ -108,7 +108,6 @@ export function formatAliasToken(derivativeToken: RawMergedToken): AliasToken {
     controlItemBgActive: mergedToken.colorPrimaryBg,
     controlItemBgActiveHover: mergedToken.colorPrimaryBgHover,
     controlItemBgActiveDisabled: mergedToken.colorFill,
-    controlTmpOutline: mergedToken.colorFillQuaternary,
     controlOutline: getAlphaColor(mergedToken.colorPrimaryBg, mergedToken.colorBgContainer),
 
     lineType: mergedToken.lineType,

@@ -14,9 +14,6 @@ export function prepareButtonTokens(token: AliasToken & Partial<ButtonComponentT
   const contentFontSize = token.contentFontSize ?? token.fontSize;
   const contentFontSizeSM = token.contentFontSizeSM ?? token.fontSize;
   const contentFontSizeLG = token.contentFontSizeLG ?? token.fontSizeLG;
-  const contentLineHeight = token.contentLineHeight ?? (contentFontSize + 8) / contentFontSize;
-  const contentLineHeightSM = token.contentLineHeightSM ?? (contentFontSizeSM + 8) / contentFontSizeSM;
-  const contentLineHeightLG = token.contentLineHeightLG ?? (contentFontSizeLG + 8) / contentFontSizeLG;
   const solidTextColor = isBrightColor(new AggregationColor(token.colorBgSolid), '#fff')
     ? '#000' : '#fff';
   const shadows: Record<string, string> = {};
@@ -30,12 +27,11 @@ export function prepareButtonTokens(token: AliasToken & Partial<ButtonComponentT
     ...shadows,
     fontWeight: 400,
     iconGap: token.marginXS,
-    defaultShadow: `0 ${token.controlOutlineWidth}px 0 ${token.controlTmpOutline}`,
+    defaultShadow: `0 ${token.controlOutlineWidth}px 0 ${token.colorFillQuaternary}`,
     primaryShadow: `0 ${token.controlOutlineWidth}px 0 ${token.controlOutline}`,
     dangerShadow: `0 ${token.controlOutlineWidth}px 0 ${token.colorErrorOutline}`,
     primaryColor: token.colorTextLightSolid,
     dangerColor: token.colorTextLightSolid,
-    borderColorDisabled: token.colorBorderDisabled,
     defaultGhostColor: token.colorBgContainer,
     ghostBg: 'transparent',
     defaultGhostBorderColor: token.colorBgContainer,
@@ -45,7 +41,6 @@ export function prepareButtonTokens(token: AliasToken & Partial<ButtonComponentT
     onlyIconSize: 'inherit',
     onlyIconSizeSM: 'inherit',
     onlyIconSizeLG: 'inherit',
-    groupBorderColor: token.colorPrimaryHover,
     linkHoverBg: 'transparent',
     textTextColor: token.colorText,
     textTextHoverColor: token.colorText,
@@ -65,18 +60,6 @@ export function prepareButtonTokens(token: AliasToken & Partial<ButtonComponentT
     contentFontSize,
     contentFontSizeSM,
     contentFontSizeLG,
-    contentLineHeight,
-    contentLineHeightSM,
-    contentLineHeightLG,
-    paddingBlock: Math.max(
-      (token.controlHeight - contentFontSize * contentLineHeight) / 2 - token.lineWidth, 0
-    ),
-    paddingBlockSM: Math.max(
-      (token.controlHeightSM - contentFontSizeSM * contentLineHeightSM) / 2 - token.lineWidth, 0
-    ),
-    paddingBlockLG: Math.max(
-      (token.controlHeightLG - contentFontSizeLG * contentLineHeightLG) / 2 - token.lineWidth, 0
-    ),
     defaultBgDisabled: token.colorBgContainerDisabled,
     dashedBgDisabled: token.colorBgContainerDisabled
   };

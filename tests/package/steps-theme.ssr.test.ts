@@ -7,7 +7,6 @@ describe('Source Steps/Timeline theme SSR', () => {
     const { body, head } = render(StepsThemeFixture);
 
     expect(body).toContain('--ant-steps-icon-size:32px');
-    expect(body).toContain('--ant-steps-description-max-width:inherit');
     expect(body).toContain('--ant-timeline-tail-width:2px');
     expect(body).toContain('--ant-timeline-dot-size:inherit');
     expect(body).toContain('ant-steps-source-theme');
@@ -27,14 +26,12 @@ describe('Source Steps/Timeline theme SSR', () => {
     expect(body).toContain('--ant-timeline-item-padding-bottom:10px');
   });
 
-  it('keeps source tokens including legacy declarations that do not affect layout', () => {
+  it('exposes current source tokens including unused default declarations', () => {
     const { body } = render(StepsThemeFixture, { props: { preset: 'steps-tokens' } });
 
     expect(body).toContain('--ant-steps-icon-size:38px');
     expect(body).toContain('--ant-steps-custom-icon-font-size:30px');
-    expect(body).toContain('--ant-steps-title-line-height:27px');
     expect(body).toContain('--ant-steps-custom-icon-top:5px');
-    expect(body).toContain('--ant-steps-description-max-width:160px');
   });
 
   it('applies Timeline overrides after the shared Steps scope', () => {

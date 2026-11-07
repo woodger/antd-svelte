@@ -31,7 +31,7 @@ MapToken с палитрами, размерами, шрифтами, радиу
 
 `getDesignToken(config?)` копирует defaultSeed и config.token, выполняет алгоритмы
 по порядку и возвращает новый AliasToken. В стандартном результате 536 полей,
-включая обе нотации палитр `blue1` и `blue-1`. Расчёт сохраняет исходные округления,
+с текущими ключами палитр `blue1`. Расчёт сохраняет исходные округления,
 формулы и строки теней. Явные нули и отрицательные числовые значения не заменяются
 дополнительными defaults библиотеки.
 
@@ -89,7 +89,7 @@ algorithms и alias formatter Ant Design 6.6.8. Изучены @ant-design/color
 
 [Эталонные данные](../../tools/fixtures/ant-design-theme-reference.json) получены
 из официального `package/dist/antd.min.js` после проверки SHA-256 npm-архива.
-Они содержат полные map/alias результаты для 25 настроек: цепочки алгоритмов,
+Они содержат текущие map/alias поля для 24 настроек: цепочки алгоритмов,
 custom seed, все preset colors, прозрачность, размеры, motion/focus, overrides
 и ошибки. Encoding сохраняет undefined, NaN, infinities и negative zero;
 он не нормализует результаты. Тесты проверяют также порядок ключей.
@@ -105,3 +105,7 @@ custom seed, все preset colors, прозрачность, размеры, mot
 [colors](../../src/lib/vendor/LICENSE.ant-design-colors),
 [cssinjs](../../src/lib/vendor/LICENSE.cssinjs) и
 [FastColor](../../src/lib/vendor/LICENSE.fast-color).
+
+Deprecated seed pink, controlTmpOutline и ключи палитр вида blue-1 удалены.
+Preset-цвет pink и текущие pink1…pink10 сохранены; CSS-переменная --ant-blue-1
+по-прежнему соответствует текущему blue1.

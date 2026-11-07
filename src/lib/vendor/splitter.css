@@ -1,6 +1,7 @@
 /* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
  * Splitter: panels, dragger/preview, collapse controls и reduced motion.
  * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * Deprecated token declarations исключены; актуальные CSS variables сохранены.
  * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
  */
 .ant-splitter-css-var{font-family:var(--ant-font-family);font-size:var(--ant-font-size);box-sizing:border-box;}
@@ -61,4 +62,4 @@
 .ant-splitter .ant-splitter-panel:has(.ant-splitter:only-child){overflow:hidden;}
 .ant-splitter .ant-splitter-panel-transition{transition:flex-basis var(--ant-motion-duration-slow) var(--ant-motion-ease-in-out);}
 @media (prefers-reduced-motion: reduce){.ant-splitter .ant-splitter-panel-transition,.ant-splitter .ant-splitter-panel-transition::before,.ant-splitter .ant-splitter-panel-transition::after{transition:none;animation:none;}}
-.ant-splitter-css-var{--ant-splitter-split-bar-size:2px;--ant-splitter-split-trigger-size:6px;--ant-splitter-split-bar-draggable-size:20px;--ant-splitter-resize-spinner-size:20px;}
+.ant-splitter-css-var{--ant-splitter-split-bar-size:2px;--ant-splitter-split-trigger-size:6px;--ant-splitter-split-bar-draggable-size:20px;}

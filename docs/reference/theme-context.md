@@ -62,6 +62,11 @@ useToken вызывается при инициализации компонен
 token, а не объект настроек prefix/key. Типы не требуют React.CSSProperties;
 CSS lengths и font metrics представлены string/number, как исходные поля.
 
+Deprecated token aliases и их преобразования удалены. Эталоны сверяют текущие
+поля; private _tokenKey меняется вместе с составом токенов. Его стабильность и
+изоляция проверяются отдельно; scope hash, значения и порядок текущих полей
+продолжают сверяться с официальным UMD.
+
 ## Наследование и алгоритмы
 
 Provider без theme сохраняет родительский context. Локальная theme объединяет
@@ -85,7 +90,8 @@ algorithms. Native primary выбирает seed colorPrimary; явный token.
 
 ## Компонентные overrides
 
-ComponentTokenMap сохраняет все 70 записей и 679 полей закреплённого upstream.
+ComponentTokenMap содержит текущие записи закреплённого upstream без deprecated
+компонентов и полей.
 components.Input.algorithm=true повторно использует общий Theme, false сохраняет
 только переданные компонентные overrides. Отдельная функция или массив задают
 собственный алгоритм компонента. Пересчёт не меняет глобальные и соседние токены.
@@ -119,7 +125,7 @@ ComponentTokenMap не подтверждает его визуальное по
 
 Подготовка получает глобальные токены, объединённые с record компонента;
 после расчёта явные component overrides сохраняют приоритет. Button использует
-собственные font/line-height metrics, preset shadows и padding; Input/TextArea —
+собственные font metrics, preset shadows и горизонтальные отступы; Input/TextArea —
 общий расчёт размеров и теней фокуса. Нулевые значения сохраняют source-поведение:
 Button font overrides используют ??, Input inputFontSize — ||.
 
@@ -283,9 +289,9 @@ callbacks и native-only оформление. PrefixCls и глобальный
 
 ## Токены Steps и Timeline
 
-Steps подготавливает 18 defaults, включая descriptionMaxWidth=undefined.
+Steps подготавливает 16 текущих defaults.
 Размеры обычной/small иконки, dot/active dot, custom icon font и navigation
-используют исходные CSS-переменные. TitleLineHeight, customIconSize/customIconTop,
+используют исходные CSS-переменные. CustomIconSize/customIconTop,
 iconTop и legacy waitIcon*/finishIcon* defaults по-прежнему сериализуются,
 но CSS 6.6.8 их не читает; дополнительные правила для них не вводятся.
 Wireframe меняет исходные defaults без добавления отсутствующего source-оформления.
@@ -413,10 +419,9 @@ Circle/dashboard, success/steps/gradient, gap placement и шесть tokens п�
 ## Токены Skeleton
 
 Основной Skeleton и его пять primitives используют общий компонентный scope. Defaults:
-color/gradientFromColor=colorFillContent, colorGradientEnd/gradientToColor=colorFill,
+gradientFromColor=colorFillContent, gradientToColor=colorFill,
 titleHeight/paragraphLiHeight=controlHeight/2, blockRadius=borderRadiusSM,
-paragraphMarginTop=marginLG+marginXXS. Deprecated color/colorGradientEnd обновляют современные
-поля при отсутствии их override; явные современные значения имеют приоритет.
+paragraphMarginTop=marginLG+marginXXS. Явные component overrides имеют приоритет.
 
 Поддержаны aliases/algorithm, dark/compact, нули и variable prefix/key/hash. Переменные
 на root предшествуют user styles. Primitives наследуют componentSize только для
@@ -568,10 +573,9 @@ Compact не использует ConfigProvider.space, собственных t
 
 ## Токены Layout
 
-Layout и Sider подготавливают общие 19 defaults: 16 актуальных component tokens
-и deprecated colorBgHeader/colorBgBody/colorBgTrigger. Старые имена сопоставляются
-с headerBg/bodyBg/triggerBg после подготовки defaults и до финальных overrides;
-явные современные значения имеют приоритет. Поддержаны aliases, отдельный
+Layout и Sider подготавливают общие 16 component defaults, включая
+headerBg/bodyBg/triggerBg; явные component overrides имеют приоритет.
+Поддержаны aliases, отдельный
 algorithm, dark/compact, CSS lengths, нули, undefined и cssVar prefix/key.
 
 Header/Content/Footer внутри Layout наследуют его переменные, включая CSS overrides
@@ -806,10 +810,8 @@ Native-only оформление сохраняется.
 
 Tooltip рассчитывает maxWidth, zIndexPopup, смещения и форму стрелки. Popover
 добавляет titleMinWidth, собственный zIndexPopup и arrow tokens, padding и
-wireframe-разделение заголовка/содержимого. Deprecated width имеет приоритет
-перед minWidth; оба используются только для отсутствующего titleMinWidth.
-Нулевой titleMinWidth сохраняется, нулевые deprecated aliases игнорируются,
-как в source cssinjs-utils. Popconfirm подготавливает собственный zIndexPopup.
+wireframe-разделение заголовка/содержимого. Нулевой titleMinWidth сохраняется.
+Popover.width/minWidth удалены. Popconfirm подготавливает собственный zIndexPopup.
 
 Popover использует также scope внутреннего Tooltip. На корне Popconfirm aliases
 применяются в исходном порядке Tooltip → Popover → Popconfirm. Вложенный Popover
@@ -1200,8 +1202,8 @@ zeroRuntime наследуется; опубликованные стили ко
   маршрут `?fixture=avatar-badge-theme`. Проверяются также AvatarGroup/Popover,
   alias isolation, подгонка текста и сохранение native DOM/focus.
 - [Эталон Tooltip/Popover/Popconfirm](../../src/lib/theme-overlay-tokens-reference.test.ts):
-  все scoped declarations официального UMD для 19 настроек, включая wireframe,
-  deprecated aliases, нули/undefined, component algorithms и custom CSS prefix.
+  текущие scoped declarations официального UMD для 14 настроек, включая wireframe,
+  нули/undefined, component algorithms и custom CSS prefix.
   [Браузерная геометрия и lifecycle](../../tests/browser/overlay-theme.spec.ts),
   [SSR](../../tests/package/overlay-theme.ssr.test.ts),
   маршрут `?fixture=overlay-theme`. Проверяются исходные отступы/стрелки,

@@ -44,7 +44,7 @@ describe('ConfigProvider source design-token SSR', () => {
     expect(body).toContain('data-ant-primary="purple"');
     expect(body).toContain('data-ant-compact="true"');
     expect(body).toContain('data-primary="#642ab5"');
-    expect(body).toContain('--ant-button-padding-block:3px');
+    expect(body).toContain('--ant-button-content-font-size:12px');
     expect(body).not.toContain('--ant-color-primary:');
     expect(head).not.toContain('data-ant-svelte-theme=');
   });

@@ -9,6 +9,10 @@
 
 ### Removed
 
+- Удалены deprecated component token aliases Button, Menu, Layout, Skeleton,
+  Steps, Carousel, Splitter и Popover, seed pink, controlTmpOutline и старые
+  ключи палитр blue-1. Сохранены текущие tokens, UI preset pink и CSS-палитры.
+
 - Удалены размеры `middle` и `default` из соответствующих component API;
   обычный `ComponentSize` и fallback ConfigProvider теперь `medium`.
   Текущие `Row.align="middle"` и `Skeleton.shape="default"` сохранены.

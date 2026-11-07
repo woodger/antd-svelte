@@ -36,24 +36,6 @@ describe('Source Menu theme SSR', () => {
     expect(body).toContain('--ant-menu-horizontal-line-height:40.25px');
   });
 
-  it('maps deprecated names after preparing derived widths', () => {
-    const { body } = render(MenuThemeFixture, { props: { preset: 'legacy-tokens' } });
-
-    expect(body).toContain('--ant-menu-item-border-radius:15px');
-    expect(body).toContain('--ant-menu-active-bar-width:7px');
-    expect(body).toContain('--ant-menu-active-bar-border-width:3px');
-    expect(body).toContain('--ant-menu-item-width:calc(100% - 8px)');
-  });
-
-  it('keeps current zero values when deprecated names conflict', () => {
-    const { body } = render(MenuThemeFixture, { props: { preset: 'legacy-conflicts' } });
-
-    expect(body).toContain('--ant-menu-color-active-bar-width:8px');
-    expect(body).toContain('--ant-menu-active-bar-width:0px');
-    expect(body).toContain('--ant-menu-active-bar-height:0px');
-    expect(body).toContain('--ant-menu-active-bar-border-width:0px');
-  });
-
   it('preserves explicit zero dimensions and unitless values', () => {
     const { body } = render(MenuThemeFixture, { props: { preset: 'zero' } });
 

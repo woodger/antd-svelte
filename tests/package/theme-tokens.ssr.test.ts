@@ -13,11 +13,11 @@ describe('theme design-token package API', () => {
     expect(body).toContain('data-motion="0s"');
   });
 
-  it('exposes typed algorithms, complete seed and alias output through the public entry point', () => {
+  it('exposes typed algorithms, current seed and alias output through the public entry point', () => {
     const map = theme.defaultAlgorithm(theme.defaultSeed);
     const token = theme.getDesignToken();
 
-    expect(Object.keys(token)).toHaveLength(536);
+    expect(Object.keys(token)).toHaveLength(404);
     expect(map.fontSize).toBe(14);
     expect(token.colorPrimary).toBe('#1677ff');
     expectTypeOf(theme.defaultSeed).toEqualTypeOf<SeedToken>();

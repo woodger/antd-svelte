@@ -54,9 +54,6 @@
         borderRadiusSM: 7, colorFillContent: '#116633', colorFill: '#33aa88'
       } : {}),
       ...(sample.theme === 'algorithm' ? { algorithm: true, colorPrimary: '#cc22ff' } : {}),
-      ...(sample.theme === 'deprecated' ? { color: '#cc2244', colorGradientEnd: '#3344aa' } : {}),
-      ...(sample.theme === 'deprecated-priority' ? { color: 'red',
-        gradientFromColor: '#cc2244', colorGradientEnd: 'blue', gradientToColor: '#3344aa' } : {}),
       ...(sample.theme === 'zero' ? {
         titleHeight: 0, blockRadius: 0, paragraphLiHeight: 0, paragraphMarginTop: 0
       } : {}),

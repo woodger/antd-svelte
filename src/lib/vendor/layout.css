@@ -2,6 +2,7 @@
  * Layout/Header/Content/Footer/Sider и контекстные Menu-интеграции.
  * Корни ограничены :where(.ant-layout-css-var).
  * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * Deprecated token declarations исключены; актуальные CSS variables сохранены.
  * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
  */
 .ant-layout-sider:where(.ant-layout-css-var){font-family:var(--ant-font-family);font-size:var(--ant-font-size);box-sizing:border-box;}
@@ -22,7 +23,7 @@
 .ant-layout-sider-light{background:var(--ant-layout-light-sider-bg);}
 .ant-layout-sider-light .ant-layout-sider-trigger{color:var(--ant-layout-light-trigger-color);background:var(--ant-layout-light-trigger-bg);}
 .ant-layout-sider-light .ant-layout-sider-zero-width-trigger{color:var(--ant-layout-light-trigger-color);background:var(--ant-layout-light-trigger-bg);border:var(--ant-line-width) var(--ant-line-type) var(--ant-layout-body-bg);border-inline-start:0;}
-.ant-layout-sider:where(.ant-layout-css-var).ant-layout-css-var{--ant-layout-color-bg-header:#001529;--ant-layout-color-bg-body:#f5f5f5;--ant-layout-color-bg-trigger:#002140;--ant-layout-body-bg:#f5f5f5;--ant-layout-header-bg:#001529;--ant-layout-header-height:64px;--ant-layout-header-padding:0 50px;--ant-layout-header-color:rgba(0,0,0,0.88);--ant-layout-footer-padding:24px 50px;--ant-layout-footer-bg:#f5f5f5;--ant-layout-sider-bg:#001529;--ant-layout-trigger-height:48px;--ant-layout-trigger-bg:#002140;--ant-layout-trigger-color:#fff;--ant-layout-zero-trigger-width:40px;--ant-layout-zero-trigger-height:40px;--ant-layout-light-sider-bg:#ffffff;--ant-layout-light-trigger-bg:#ffffff;--ant-layout-light-trigger-color:rgba(0,0,0,0.88);}
+.ant-layout-sider:where(.ant-layout-css-var).ant-layout-css-var{--ant-layout-body-bg:#f5f5f5;--ant-layout-header-bg:#001529;--ant-layout-header-height:64px;--ant-layout-header-padding:0 50px;--ant-layout-header-color:rgba(0,0,0,0.88);--ant-layout-footer-padding:24px 50px;--ant-layout-footer-bg:#f5f5f5;--ant-layout-sider-bg:#001529;--ant-layout-trigger-height:48px;--ant-layout-trigger-bg:#002140;--ant-layout-trigger-color:#fff;--ant-layout-zero-trigger-width:40px;--ant-layout-zero-trigger-height:40px;--ant-layout-light-sider-bg:#ffffff;--ant-layout-light-trigger-bg:#ffffff;--ant-layout-light-trigger-color:rgba(0,0,0,0.88);}
 .ant-layout:where(.ant-layout-css-var){font-family:var(--ant-font-family);font-size:var(--ant-font-size);box-sizing:border-box;}
 .ant-layout:where(.ant-layout-css-var)::before,.ant-layout:where(.ant-layout-css-var)::after{box-sizing:border-box;}
 .ant-layout:where(.ant-layout-css-var) [class^="ant-layout"],.ant-layout:where(.ant-layout-css-var) [class*=" ant-layout"]{box-sizing:border-box;}
@@ -37,5 +38,5 @@
 .ant-layout-header:where(.ant-layout-css-var) .ant-menu{line-height:inherit;}
 .ant-layout-footer:where(.ant-layout-css-var){padding:var(--ant-layout-footer-padding);color:var(--ant-color-text);font-size:var(--ant-font-size);background:var(--ant-layout-footer-bg);}
 .ant-layout-content:where(.ant-layout-css-var){flex:auto;color:var(--ant-color-text);min-height:0;}
-.ant-layout:where(.ant-layout-css-var).ant-layout-css-var{--ant-layout-color-bg-header:#001529;--ant-layout-color-bg-body:#f5f5f5;--ant-layout-color-bg-trigger:#002140;--ant-layout-body-bg:#f5f5f5;--ant-layout-header-bg:#001529;--ant-layout-header-height:64px;--ant-layout-header-padding:0 50px;--ant-layout-header-color:rgba(0,0,0,0.88);--ant-layout-footer-padding:24px 50px;--ant-layout-footer-bg:#f5f5f5;--ant-layout-sider-bg:#001529;--ant-layout-trigger-height:48px;--ant-layout-trigger-bg:#002140;--ant-layout-trigger-color:#fff;--ant-layout-zero-trigger-width:40px;--ant-layout-zero-trigger-height:40px;--ant-layout-light-sider-bg:#ffffff;--ant-layout-light-trigger-bg:#ffffff;--ant-layout-light-trigger-color:rgba(0,0,0,0.88);}
+.ant-layout:where(.ant-layout-css-var).ant-layout-css-var{--ant-layout-body-bg:#f5f5f5;--ant-layout-header-bg:#001529;--ant-layout-header-height:64px;--ant-layout-header-padding:0 50px;--ant-layout-header-color:rgba(0,0,0,0.88);--ant-layout-footer-padding:24px 50px;--ant-layout-footer-bg:#f5f5f5;--ant-layout-sider-bg:#001529;--ant-layout-trigger-height:48px;--ant-layout-trigger-bg:#002140;--ant-layout-trigger-color:#fff;--ant-layout-zero-trigger-width:40px;--ant-layout-zero-trigger-height:40px;--ant-layout-light-sider-bg:#ffffff;--ant-layout-light-trigger-bg:#ffffff;--ant-layout-light-trigger-color:rgba(0,0,0,0.88);}
 .ant-layout-header:where(.ant-layout-css-var) .ant-menu{line-height:inherit;}

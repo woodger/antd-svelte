@@ -16,9 +16,11 @@ export const defaultPresetColors: PresetColorType = {
   lime: '#A0D911',
 };
 
+const { pink: _pink, ...seedColors } = defaultPresetColors;
+
 /** Исходный seed Ant Design 6.6.8; getDesignToken копирует его перед расчётом. */
 const defaultSeed: SeedToken = {
-  ...defaultPresetColors,
+  ...seedColors,
 
   colorPrimary: '#1677ff',
   colorSuccess: '#52c41a',

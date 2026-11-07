@@ -11,7 +11,7 @@ import { prepareSelectTokens } from './theme-select-tokens.engine';
 import { prepareTreeTokens, prepareTreeSelectTokens } from './theme-tree-tokens.engine';
 import { preparePickerPanelTokens } from './theme-picker-panel-tokens.engine';
 import { prepareCascaderTokens } from './theme-cascader-tokens.engine';
-import { prepareMenuTokens, menuDeprecatedTokens } from './theme-menu-tokens.engine';
+import { prepareMenuTokens } from './theme-menu-tokens.engine';
 import { prepareTabsTokens } from './theme-tabs-tokens.engine';
 import { prepareSliderTokens } from './theme-slider-tokens.engine';
 import { prepareTableTokens } from './theme-table-tokens.engine';
@@ -169,9 +169,6 @@ const factories = {
     const paddingInline = token.controlHeightLG * 1.25;
 
     return {
-      colorBgHeader: '#001529',
-      colorBgBody: token.colorBgLayout,
-      colorBgTrigger: '#002140',
       bodyBg: token.colorBgLayout,
       headerBg: '#001529',
       headerHeight: token.controlHeight * 2,
@@ -211,13 +208,10 @@ const factories = {
     starBg: token.colorFillContent
   }),
   Splitter: (token: GlobalToken & Partial<SplitterComponentToken>) => {
-    const resizeSpinnerSize = token.resizeSpinnerSize || 20;
-
     return {
       splitBarSize: token.splitBarSize || 2,
       splitTriggerSize: token.splitTriggerSize || 6,
-      splitBarDraggableSize: token.splitBarDraggableSize ?? resizeSpinnerSize,
-      resizeSpinnerSize
+      splitBarDraggableSize: token.splitBarDraggableSize ?? 20
     };
   },
   Segmented: (token: GlobalToken) => ({
@@ -253,7 +247,6 @@ const factories = {
     dotHeight: 3,
     dotGap: token.marginXXS,
     dotOffset: 12,
-    dotWidthActive: 24,
     dotActiveWidth: 24
   }),
   Card: (token: GlobalToken & Partial<CardComponentToken>) => ({
@@ -298,8 +291,6 @@ const factories = {
   }),
   Empty: () => ({}),
   Skeleton: (token: GlobalToken) => ({
-    color: token.colorFillContent,
-    colorGradientEnd: token.colorFill,
     gradientFromColor: token.colorFillContent,
     gradientToColor: token.colorFill,
     titleHeight: token.controlHeight / 2,
@@ -361,7 +352,6 @@ const factories = {
     separatorMargin: token.marginXS
   }),
   Steps: (token: GlobalToken) => ({
-    titleLineHeight: token.controlHeight,
     customIconSize: token.controlHeight,
     customIconTop: 0,
     customIconFontSize: token.controlHeightSM,
@@ -373,7 +363,6 @@ const factories = {
     dotCurrentSize: token.controlHeightLG / 4,
     navArrowColor: token.colorTextDisabled,
     navContentMaxWidth: 'unset',
-    descriptionMaxWidth: undefined,
     waitIconColor: token.wireframe ? token.colorTextDisabled : token.colorTextLabel,
     waitIconBgColor: token.wireframe ? token.colorBgContainer : token.colorFillContent,
     waitIconBorderColor: token.wireframe ? token.colorTextDisabled : 'transparent',
@@ -429,7 +418,7 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Space: [],
   Layout: [],
   Image: [],
-  Button: ['fontWeight', 'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG'],
+  Button: ['fontWeight'],
   Input: [],
   InputNumber: ['handleOpacity'],
   Addon: [],
@@ -472,19 +461,6 @@ const componentUnitless: Record<StyledComponent, readonly string[]> = {
   Rate: [],
   QRCode: []
 };
-const deprecatedTokens: Partial<Record<
-  StyledComponent, readonly (readonly [string, string])[]
->> = {
-  Layout: [
-    ['colorBgBody', 'bodyBg'],
-    ['colorBgHeader', 'headerBg'],
-    ['colorBgTrigger', 'triggerBg']
-  ],
-  Popover: [['width', 'titleMinWidth'], ['minWidth', 'titleMinWidth']],
-  Skeleton: [['color', 'gradientFromColor'], ['colorGradientEnd', 'gradientToColor']],
-  Menu: menuDeprecatedTokens,
-  Carousel: [['dotWidthActive', 'dotActiveWidth']]
-};
 const inputMetrics = [
   'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',
   'paddingInline', 'paddingInlineSM', 'paddingInlineLG',
@@ -493,8 +469,6 @@ const inputMetrics = [
 const compactMetrics: Partial<Record<StyledComponent, readonly string[]>> = {
   Button: [
     'contentFontSize', 'contentFontSizeSM', 'contentFontSizeLG',
-    'contentLineHeight', 'contentLineHeightSM', 'contentLineHeightLG',
-    'paddingBlock', 'paddingBlockSM', 'paddingBlockLG',
     'paddingInline', 'paddingInlineSM', 'paddingInlineLG'
   ],
   Input: inputMetrics,
@@ -510,11 +484,6 @@ function resolveComponentVariables(
 ) {
   const custom = { ...token[component] } as Record<string, unknown>;
   const defaults = factories[component]({ ...token, ...custom });
-
-  for (const [old, current] of deprecatedTokens[component] ?? []) {
-    // Defaults рассчитаны до mapping; truthy alias не заменяет явно переданный 0.
-    if (custom[old] || custom[current]) custom[current] ??= custom[old];
-  }
 
   const merged: Record<string, unknown> = { ...defaults, ...custom };
   const global = token as unknown as Record<string, unknown>;

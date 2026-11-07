@@ -1413,7 +1413,7 @@
             "tests/browser/layout-theme.spec.ts",
             "tests/browser/fixtures/ant-design-layout-theme-reference.json"
           ],
-          "note": "Ant Design 6.6.8: исходная подготовка 19 defaults, deprecated mapping colorBgBody/header/trigger после defaults с приоритетом современных имён. Layout и Sider получают собственные variables перед semantic/local styles; секции внутри Layout наследуют его scope и CSS overrides. Aliases/component algorithms/dark/compact, CSS lengths/zero/undefined, cssVar prefix/key и вложенные/reset/sibling scopes сверены с официальным UMD. Смена темы сохраняет collapse, DOM, refs, draft/selection/focus и callbacks; native responsive/inert contracts сохранены."
+          "note": "Ant Design 6.6.8: подготовка 16 текущих defaults с headerBg/bodyBg/triggerBg; deprecated mapping удалён. Layout и Sider получают собственные variables перед semantic/local styles; секции внутри Layout наследуют его scope и CSS overrides. Aliases/component algorithms/dark/compact, CSS lengths/zero/undefined, cssVar prefix/key и вложенные/reset/sibling scopes сверены с официальным UMD. Смена темы сохраняет collapse, DOM, refs, draft/selection/focus и callbacks; native responsive/inert contracts сохранены."
         },
         {
           "id": "native-standalone-sections",
@@ -1929,7 +1929,7 @@
             "tests/package/splitter-theme.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Фабрика и root theme hook следуют 6.6.8: splitBarSize, splitTriggerSize, splitBarDraggableSize и deprecated resizeSpinnerSize с исходными fallback/приоритетами, включая современный 0 и отдельный deprecated 0→20. Global/component aliases и algorithms, undefined, cssVar.prefix, normal/vertical/RTL/disabled/custom/lazy, nested/reset/sibling scopes и semantic/user style priority. Native bar hover alias ограничен native темой; token theme наследует настроенные aliases. Реактивная смена сохраняет panels/draft/selection/focus/ref и активный lazy preview; SSR не запускает DOM/observer/events/timers."
+          "note": "Фабрика и root theme hook следуют 6.6.8: splitBarSize, splitTriggerSize, splitBarDraggableSize, включая 0 и обычный fallback 20; deprecated alias удалён. Global/component aliases и algorithms, undefined, cssVar.prefix, normal/vertical/RTL/disabled/custom/lazy, nested/reset/sibling scopes и semantic/user style priority. Native bar hover alias ограничен native темой; token theme наследует настроенные aliases. Реактивная смена сохраняет panels/draft/selection/focus/ref и активный lazy preview; SSR не запускает DOM/observer/events/timers."
         },
         {
           "id": "native-direction-inheritance",
@@ -2440,7 +2440,7 @@
             "docs/reference/theme-context.md",
             "tests/browser/breadcrumb-theme.spec.ts"
           ],
-          "note": "Семь Dropdown defaults и 79 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены. Явная автоматическая высота source rows сохраняет геометрию native links внутри Breadcrumb при отдельных Menu font/height aliases."
+          "note": "Семь Dropdown defaults и 56 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены. Явная автоматическая высота source rows сохраняет геометрию native links внутри Breadcrumb при отдельных Menu font/height aliases."
         },
         {
           "id": "open-event-info",
@@ -2612,7 +2612,7 @@
             "tests/browser/fixtures/ant-design-menu-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные 79 defaults и 23 deprecated mapping; defaults рассчитываются до mapping, финальные overrides и явно заданные нули сохраняют приоритет. Размеры/отступы/active bar, шрифты и light/dark палитра, component algorithms, custom CSS prefix, hash, zero/undefined и CSS lengths. Scoped declarations и computed metrics для 20 настроек: inline/vertical/horizontal/collapsed, пункты/иконки/заголовки/стрелки, вложенные списки, группы/разделители и light/dark popup. Внутренние CSS roots наследуют Menu variables вместо vendor defaults; popup получает собственный scope и paddingXS как промежуток до заголовка. SSR и смена темы сохраняют DOM/focus, selected/open keys, callbacks и controller left/top; plain root overrides достигают inline children, popup использует component tokens. Закрытые forceSubMenuRender popup остаются скрытыми в horizontal mode. Native-only темы сохранены; остальные advanced API остаются в работе."
+          "note": "56 текущих defaults; deprecated mapping удалён, финальные overrides и явно заданные нули сохраняют приоритет. Размеры/отступы/active bar, шрифты и light/dark палитра, component algorithms, custom CSS prefix, hash, zero/undefined и CSS lengths. Scoped declarations и computed metrics для 17 настроек: inline/vertical/horizontal/collapsed, пункты/иконки/заголовки/стрелки, вложенные списки, группы/разделители и light/dark popup. Внутренние CSS roots наследуют Menu variables вместо vendor defaults; popup получает собственный scope и paddingXS как промежуток до заголовка. SSR и смена темы сохраняют DOM/focus, selected/open keys, callbacks и controller left/top; plain root overrides достигают inline children, popup использует component tokens. Закрытые forceSubMenuRender popup остаются скрытыми в horizontal mode. Native-only темы сохранены; остальные advanced API остаются в работе."
         },
         {
           "id": "popup-container",
@@ -3040,7 +3040,7 @@
             "tests/browser/fixtures/ant-design-steps-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные 18 Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. Legacy titleLineHeight/customIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
+          "note": "16 текущих Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. CustomIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
         }
       ]
     },
@@ -9448,7 +9448,7 @@
             "tests/package/carousel-theme.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Фабрика и root theme hook следуют 6.6.8: семь современных токенов, dotWidthActive→dotActiveWidth с приоритетом современного имени, включая 0; отдельно deprecated 0 сохраняет source default 24. CSS lengths, alias tokens, global/component algorithms, undefined, cssVar.prefix, четыре размещения точек и RTL. Вложенные/reset/sibling providers изолированы; реактивная смена сохраняет slides/draft/focus и управление. Class/style и ConfigProvider.carousel остаются на inner slider, после наследуемых root variables."
+          "note": "Фабрика и root theme hook следуют 6.6.8: семь текущих токенов, dotActiveWidth поддерживает 0 и обычный default 24; deprecated alias удалён. CSS lengths, alias tokens, global/component algorithms, undefined, cssVar.prefix, четыре размещения точек и RTL. Вложенные/reset/sibling providers изолированы; реактивная смена сохраняет slides/draft/focus и управление. Class/style и ConfigProvider.carousel остаются на inner slider, после наследуемых root variables."
         },
         {
           "id": "advanced-source-api",
@@ -10440,7 +10440,7 @@
             "tests/browser/fixtures/ant-design-overlay-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Прежние native-only API/отступы, viewport limits и top layer сохранены. 12 placements добавлены отдельной feature; source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
+          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, текущий titleMinWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 14 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Прежние native-only API/отступы, viewport limits и top layer сохранены. 12 placements добавлены отдельной feature; source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
         },
         {
           "id": "popup-container",
@@ -12022,7 +12022,7 @@
             "tests/browser/fixtures/ant-design-steps-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные 18 Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. Legacy titleLineHeight/customIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
+          "note": "16 текущих Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. CustomIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
         }
       ]
     },
@@ -12259,7 +12259,7 @@
             "tests/browser/fixtures/ant-design-overlay-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Прежние native-only API/отступы, viewport limits и top layer сохранены. 12 placements добавлены отдельной feature; source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
+          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, текущий titleMinWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 14 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Прежние native-only API/отступы, viewport limits и top layer сохранены. 12 placements добавлены отдельной feature; source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
         },
         {
           "id": "popup-container",
@@ -13766,7 +13766,7 @@
             "tests/browser/fixtures/ant-design-overlay-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Прежние native-only API/отступы, viewport limits и top layer сохранены. 12 placements добавлены отдельной feature; source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
+          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, текущий titleMinWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 14 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Прежние native-only API/отступы, viewport limits и top layer сохранены. 12 placements добавлены отдельной feature; source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
         },
         {
           "id": "popup-container",
@@ -14508,7 +14508,7 @@
             "src/lib/vendor/skeleton.css",
             "tests/browser/fixtures/ant-design-skeleton-element-reference.json"
           ],
-          "note": "Все восемь defaults, deprecated color/colorGradientEnd mapping, современные overrides, component aliases/algorithm, dark/compact, нули и variable prefix/key/hash. Inline variables применяются к основному Skeleton и primitives до user styles. 48 исходных CSS rules/один keyframe, CSS prefix template и marker collision. 110 source UMD-сценариев в standards mode; сравниваемая inherited typography/color задаётся исходными global design tokens."
+          "note": "Шесть текущих defaults, gradientFromColor/gradientToColor и overrides, component aliases/algorithm, dark/compact, нули и variable prefix/key/hash. Inline variables применяются к основному Skeleton и primitives до user styles. 48 исходных CSS rules/один keyframe, CSS prefix template и marker collision. 98 source UMD-сценариев в standards mode; сравниваемая inherited typography/color задаётся исходными global design tokens."
         },
         {
           "id": "main-source-api",
@@ -15439,7 +15439,7 @@
             "tests/browser/theme-context.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "token/algorithm/components merge, inherit=false с сохранением hashed/cssVar/zeroRuntime, runtime [] fallback, component algorithm true/false/custom chains, source Theme cache, 70 записей и 679 полей ComponentTokenMap без React, raw/CSS-variable tokens и исходные hashes. Глобальные CSS variables при SSR и реактивных обновлениях, custom CSS prefix bridge, local generated key, явный inline style priority и theme boundaries/portals ColorPicker/Tour. Полные outputs/order/meta сверяются с официальным UMD в 23 сценариях. Компонентные overrides рассчитываются в GlobalToken; полное визуальное применение всех ComponentToken остаётся частичным."
+          "note": "token/algorithm/components merge, inherit=false с сохранением hashed/cssVar/zeroRuntime, runtime [] fallback, component algorithm true/false/custom chains, source Theme cache, текущие записи/поля ComponentTokenMap без deprecated API и React, raw/CSS-variable tokens и исходные hashes. Глобальные CSS variables при SSR и реактивных обновлениях, custom CSS prefix bridge, local generated key, явный inline style priority и theme boundaries/portals ColorPicker/Tour. Полные outputs/order/meta сверяются с официальным UMD в 23 сценариях. Компонентные overrides рассчитываются в GlobalToken; полное визуальное применение всех ComponentToken остаётся частичным."
         },
         {
           "id": "compact-spacing",
@@ -15572,7 +15572,7 @@
             "tests/browser/fixtures/ant-design-overlay-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, deprecated width/minWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 19 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Прежние native-only API/отступы, viewport limits и top layer сохранены. 12 placements добавлены отдельной feature; source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
+          "note": "Source preparation Tooltip/Popover/Popconfirm, внутренний Tooltip scope и порядок component aliases, wireframe padding/border, текущий titleMinWidth, unitless zIndexPopup и rounded arrow paths/offsets. Все scoped CSS declarations и computed metrics закреплены по официальному UMD для 14 настроек, включая algorithms, нули/undefined и custom prefix. Source позиционирование использует глобальные sizePopupArrow/marginXXS; обновления и отключение темы сохраняют позицию/DOM/фокус и ожидающий Promise. Прежние native-only API/отступы, viewport limits и top layer сохранены. 12 placements добавлены отдельной feature; source zIndex context и motion остаются в работе; общий аудит семейств не завершён."
         },
         {
           "id": "select-theme-tokens",
@@ -15666,7 +15666,7 @@
             "tests/browser/fixtures/ant-design-menu-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные 79 defaults и 23 deprecated mapping; defaults рассчитываются до mapping, финальные overrides и явно заданные нули сохраняют приоритет. Размеры/отступы/active bar, шрифты и light/dark палитра, component algorithms, custom CSS prefix, hash, zero/undefined и CSS lengths. Scoped declarations и computed metrics для 20 настроек: inline/vertical/horizontal/collapsed, пункты/иконки/заголовки/стрелки, вложенные списки, группы/разделители и light/dark popup. Внутренние CSS roots наследуют Menu variables вместо vendor defaults; popup получает собственный scope и paddingXS как промежуток до заголовка. SSR и смена темы сохраняют DOM/focus, selected/open keys, callbacks и controller left/top; plain root overrides достигают inline children, popup использует component tokens. Закрытые forceSubMenuRender popup остаются скрытыми в horizontal mode. Native-only темы сохранены; остальные advanced API остаются в работе."
+          "note": "56 текущих defaults; deprecated mapping удалён, финальные overrides и явно заданные нули сохраняют приоритет. Размеры/отступы/active bar, шрифты и light/dark палитра, component algorithms, custom CSS prefix, hash, zero/undefined и CSS lengths. Scoped declarations и computed metrics для 17 настроек: inline/vertical/horizontal/collapsed, пункты/иконки/заголовки/стрелки, вложенные списки, группы/разделители и light/dark popup. Внутренние CSS roots наследуют Menu variables вместо vendor defaults; popup получает собственный scope и paddingXS как промежуток до заголовка. SSR и смена темы сохраняют DOM/focus, selected/open keys, callbacks и controller left/top; plain root overrides достигают inline children, popup использует component tokens. Закрытые forceSubMenuRender popup остаются скрытыми в horizontal mode. Native-only темы сохранены; остальные advanced API остаются в работе."
         },
         {
           "id": "dropdown-theme-tokens",
@@ -15685,7 +15685,7 @@
             "tests/browser/fixtures/ant-design-dropdown-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Семь Dropdown defaults и 79 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены."
+          "note": "Семь Dropdown defaults и 56 defaults внутреннего Menu, component algorithms/aliases, zero/undefined, CSS strings и custom prefix/hash. Внутренний Menu дополняет Dropdown aliases без общего provider reset; itemHeight Menu не задаёт высоту Dropdown rows. Scoped declarations и computed metrics для 18 настроек: menu/rows/icons/divider, hover/disabled/danger, шесть положений arrow/pseudo-elements и глобальные placement gaps с arrow и без неё. Source padding/box sizing, corner arrow offsets и maxHeight сохранены с native button/link semantics. Смена темы сохраняет DOM/focus, controller left/top и native link navigation; native-only оформление и прежние Svelte bind/callback contracts сохранены."
         },
         {
           "id": "breadcrumb-theme-tokens",
@@ -15723,7 +15723,7 @@
             "tests/browser/fixtures/ant-design-steps-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные 18 Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. Legacy titleLineHeight/customIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
+          "note": "16 текущих Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. CustomIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
         },
         {
           "id": "pagination-theme-tokens",

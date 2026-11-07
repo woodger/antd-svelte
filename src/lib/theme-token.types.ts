@@ -20,17 +20,12 @@ export type PresetColorType = Record<PresetColorKey, string>;
 
 type ColorPaletteKeyIndex = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10;
 
-export type LegacyColorPalettes = {
-  /** @deprecated Используйте нотацию blue1 вместо blue-1. */
-  [key in `${keyof PresetColorType}-${ColorPaletteKeyIndex}`]: string;
-};
-
 export type ColorPalettes = {
   [key in `${keyof PresetColorType}${ColorPaletteKeyIndex}`]: string;
 };
 
 /** Исходные seed-параметры Ant Design 6.6.8. Defaults доступны через theme.defaultSeed. */
-export interface SeedToken extends PresetColorType {
+export interface SeedToken extends Omit<PresetColorType, 'pink'> {
   colorPrimary: string;
   colorSuccess: string;
   colorWarning: string;
@@ -236,7 +231,6 @@ export interface CommonMapToken extends StyleMapToken {
 export interface MapToken
   extends SeedToken,
     ColorPalettes,
-    LegacyColorPalettes,
     ColorMapToken,
     SizeMapToken,
     HeightMapToken,
@@ -327,7 +321,6 @@ export interface AliasToken extends MapToken {
   screenXXLMax: number;
   screenXXXL: number;
   screenXXXLMin: number;
-  controlTmpOutline: string;
   boxShadowPopoverArrow: string;
   dropShadowPopover: string;
   boxShadowCard: string;

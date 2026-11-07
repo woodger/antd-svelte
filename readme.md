@@ -849,9 +849,8 @@ CSS-рецепт splitter воспроизводит все 59 правил эт
 сохраняется для native темы, а в token theme bar наследует настроенные aliases.
 
 ConfigProvider.theme.components.Splitter применяет splitBarSize, splitTriggerSize
-и splitBarDraggableSize, включая 0. Deprecated resizeSpinnerSize задаёт fallback
-для splitBarDraggableSize; современное имя имеет приоритет, включая 0.
-Отдельный deprecated 0 сохраняет исходный fallback 20. Поддержаны global/component
+и splitBarDraggableSize, включая 0; обычный splitBarDraggableSize равен 20.
+Поддержаны global/component
 aliases и algorithms, cssVar.prefix, undefined, вложенные/reset/sibling scopes.
 Тематические переменные идут перед semantic/user styles. Реактивные изменения
 сохраняют размеры панелей, draft/selection/focus и текущий lazy drag/preview.
@@ -912,11 +911,10 @@ expand/collapse, с expandLabel/collapseLabel override. Reduced motion откл�
 переходы. Галерея — `/ant-design#layout`, фикстура — `?fixture=layout`; unit/SSR/
 Chromium покрывают структуру, SSR без JS, callbacks, размеры, breakpoint/cleanup,
 фокус, locale и темы. Рецепт layout извлекает 35 правил, включая Menu-интеграции.
-ConfigProvider.theme.components.Layout поддерживает 16 актуальных токенов и
-три deprecated aliases colorBgHeader/colorBgBody/colorBgTrigger. Aliases, отдельный
+ConfigProvider.theme.components.Layout поддерживает 16 актуальных токенов. Aliases, отдельный
 algorithm и cssVar prefix/key применяются к Layout/Sider; секции внутри Layout
-наследуют его переменные, включая CSS overrides в style. Явные современные имена
-имеют приоритет над deprecated, semantic styles.root — перед style, вычисляемая
+наследуют его переменные, включая CSS overrides в style. Semantic styles.root
+идут перед style, вычисляемая
 ширина Sider — последней. Смена темы сохраняет collapse, DOM, refs, фокус и черновики.
 Отдельные Header/Content/Footer получают собственные переменные: в закреплённом
 upstream standalone-секции остаются без Layout variables. Наблюдение и выбранное
@@ -4246,13 +4244,13 @@ prefixCls меняет BEM-классы с fallback ant-skeleton; перемен
 Primitives повторяют исходную изоляцию от ConfigProvider.skeleton: используют размер,
 тему и prefix, а component record основного Skeleton к ним не применяется.
 
-Тема Skeleton подготавливает восемь исходных tokens для основного каркаса и primitives,
-включая deprecated color/colorGradientEnd, современные overrides, aliases/algorithm и
+Тема Skeleton подготавливает шесть текущих tokens для основного каркаса и primitives,
+поддерживает gradientFromColor/gradientToColor, overrides, aliases/algorithm и
 CSS-variable prefix/key/hash. Основной Skeleton сохраняет native host/status/focus,
 размеры и normalization. Общий ConfigProvider prefix и React development warnings
 остаются следующими этапами.
 
-[110 UMD-сценариев](./tests/browser/fixtures/ant-design-skeleton-element-reference.json)
+[98 UMD-сценариев](./tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 сверяют каждый primitive с Ant Design 6.6.8 в стандартном режиме браузера, с одинаковой
 унаследованной typography/color из global design tokens.
 [34 сценария основного Skeleton](./tests/browser/fixtures/ant-design-skeleton-main-reference.json)
@@ -4566,8 +4564,8 @@ rich tooltip и доступность процента.
 Source `theme.components.Steps` применяет исходные defaults, aliases и отдельные
 algorithms к размерам иконок/точек, шрифтам, цветам и navigation. Поддержаны
 CSS prefix/hash, нули/undefined и переданные во время выполнения CSS lengths.
-Semantic root styles и plain style сохраняют приоритет. Старые titleLineHeight,
-customIconSize/customIconTop и iconTop создают переменные, но не меняют оформление,
+Semantic root styles и plain style сохраняют приоритет. CustomIconSize/customIconTop
+и iconTop создают переменные, но не меняют оформление,
 как в 6.6.8; то же относится к legacy waitIcon*/finishIcon* defaults.
 Метрики вариантов и композиции Timeline сверяются с официальным UMD в
 `?fixture=steps-theme`; native-only темы сохраняют прежнее оформление.
@@ -5419,8 +5417,7 @@ ConfigProvider.theme.components.Carousel применяет семь компо�
 точки. Вертикальный режим меняет местами размеры точек по исходным правилам.
 Поддержаны alias tokens, глобальные и компонентные algorithms, cssVar.prefix,
 вложенные providers и реактивное обновление без пересоздания слайдов.
-Deprecated dotWidthActive переносится в dotActiveWidth; современное имя приоритетнее,
-включая 0. Как в 6.6.8, отдельно переданный deprecated 0 не заменяет default 24.
+DotActiveWidth поддерживает явный 0; по умолчанию используется 24.
 Тематические переменные задаются wrapper; пользовательские class/style и
 ConfigProvider.carousel по-прежнему относятся к inner slider и сохраняют приоритет.
 Сверка: [официальные CSS tokens](./tools/fixtures/ant-design-carousel-tokens-reference.json),

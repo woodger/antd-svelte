@@ -16,9 +16,9 @@ test(
 
     const full = JSON.parse(await page.getByLabel('Full design tokens', { exact: true }).innerText());
 
-    expect(Object.keys(full)).toHaveLength(536);
+    expect(Object.keys(full)).toHaveLength(404);
     expect(full.blue1).toBe('#e6f4ff');
-    expect(full['blue-1']).toBe('#e6f4ff');
+    expect(full.pink1).toBe('#fff0f6');
   }
 );
 

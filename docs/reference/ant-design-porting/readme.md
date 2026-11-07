@@ -161,7 +161,14 @@ runtime ограничивает каждый selector собственным ro
 Остальные текущие vendor-файлы
 этим выпуском инструмента не перегенерируются. Новый компонент получает отдельный
 проверенный рецепт: include/exclude для селекторов, replacements, keyframes,
-ожидаемое число правил, заголовок происхождения и путь вывода.
+ожидаемое число правил, заголовок происхождения и путь вывода. Необязательные
+declarationReplacements меняют только тела обычных правил, сохраняя selectors
+и keyframes; excludeAtRules исключает явно заданные at-rule scopes вместе с их
+дочерними правилами. Steps исключает контейнеры deprecated descriptionMaxWidth;
+его рецепт содержит 137 правил. Удаляемые token declarations перечислены в
+соответствующих рецептах. Исходный vendor/antd.css пока не имеет полного рецепта;
+из него удалены те же старые declarations, а disabled Button читает текущий
+colorBorderDisabled с native fallback colorBorder.
 
 ```sh
 npm run cli -- css --list

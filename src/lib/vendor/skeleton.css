@@ -2,6 +2,7 @@
  * Skeleton: основной каркас и Button/Avatar/Input/Image/Node, block и active.
  * Root reset ограничен marker; имена CSS variables сохранены.
  * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * Deprecated token declarations исключены; актуальные CSS variables сохранены.
  * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
  */
 .ant-skeleton:where(.ant-skeleton-css-var){font-family:var(--ant-font-family);font-size:var(--ant-font-size);box-sizing:border-box;}
@@ -51,5 +52,5 @@
 .ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-block .ant-skeleton-button{width:100%;}
 .ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-block .ant-skeleton-input{width:100%;}
 .ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-active .ant-skeleton-title,.ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-active .ant-skeleton-paragraph>li,.ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-active .ant-skeleton-avatar,.ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-active .ant-skeleton-button,.ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-active .ant-skeleton-input,.ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-active .ant-skeleton-node,.ant-skeleton:where(.ant-skeleton-css-var).ant-skeleton-active .ant-skeleton-image{background:linear-gradient(90deg, var(--ant-skeleton-gradient-from-color) 25%, var(--ant-skeleton-gradient-to-color) 37%, var(--ant-skeleton-gradient-from-color) 63%);background-size:400% 100%;animation-name:ant-skeleton-loading;animation-duration:1.4s;animation-timing-function:ease;animation-iteration-count:infinite;}
-.ant-skeleton-css-var{--ant-skeleton-color:rgba(0,0,0,0.06);--ant-skeleton-color-gradient-end:rgba(0,0,0,0.15);--ant-skeleton-gradient-from-color:rgba(0,0,0,0.06);--ant-skeleton-gradient-to-color:rgba(0,0,0,0.15);--ant-skeleton-title-height:16px;--ant-skeleton-block-radius:4px;--ant-skeleton-paragraph-margin-top:28px;--ant-skeleton-paragraph-li-height:16px;}
+.ant-skeleton-css-var{--ant-skeleton-gradient-from-color:rgba(0,0,0,0.06);--ant-skeleton-gradient-to-color:rgba(0,0,0,0.15);--ant-skeleton-title-height:16px;--ant-skeleton-block-radius:4px;--ant-skeleton-paragraph-margin-top:28px;--ant-skeleton-paragraph-li-height:16px;}
 @keyframes ant-skeleton-loading{0%{background-position:100% 50%;}100%{background-position:0 50%;}}

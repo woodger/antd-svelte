@@ -66,7 +66,7 @@ describe('Skeleton primitives public package SSR', () => {
     expect(body).toContain('width:160px');
   });
 
-  it('prepares all eight tokens for main and primitive placeholders without browser work', () => {
+  it('prepares all six current tokens for main and primitive placeholders without browser work', () => {
     vi.useFakeTimers();
     try {
       const { body, head } = render(SkeletonElementCase, { props: { sample: {
@@ -75,8 +75,6 @@ describe('Skeleton primitives public package SSR', () => {
 
       expect(body).toContain('--ant-skeleton-gradient-from-color:#112233');
       expect(body).toContain('--ant-skeleton-gradient-to-color:#445566');
-      expect(body).toContain('--ant-skeleton-color:');
-      expect(body).toContain('--ant-skeleton-color-gradient-end:');
       expect(body).toContain('--ant-skeleton-title-height:20px');
       expect(body).toContain('--ant-skeleton-block-radius:9px');
       expect(body).toContain('--ant-skeleton-paragraph-margin-top:31px');

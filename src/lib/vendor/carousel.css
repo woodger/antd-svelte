@@ -2,6 +2,7 @@
  * Carousel: slick track, slides, arrows, dots и duration animations.
  * Корни ограничены :where(.ant-carousel-css-var).
  * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
+ * Deprecated token declarations исключены; актуальные CSS variables сохранены.
  * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
  */
 .ant-carousel:where(.ant-carousel-css-var){font-family:var(--ant-font-family);font-size:var(--ant-font-size);box-sizing:border-box;}
@@ -63,4 +64,4 @@
 .ant-carousel-rtl:where(.ant-carousel-css-var){direction:rtl;}
 @keyframes ant-carousel-dot-animation{from{width:0;}to{width:var(--ant-carousel-dot-active-width);}}
 @keyframes ant-carousel-dot-vertical-animation{from{height:0;}to{height:var(--ant-carousel-dot-active-width);}}
-.ant-carousel-css-var{--ant-carousel-arrow-size:16px;--ant-carousel-arrow-offset:8px;--ant-carousel-dot-width:16px;--ant-carousel-dot-height:3px;--ant-carousel-dot-gap:4px;--ant-carousel-dot-offset:12px;--ant-carousel-dot-width-active:24px;--ant-carousel-dot-active-width:24px;}
+.ant-carousel-css-var{--ant-carousel-arrow-size:16px;--ant-carousel-arrow-offset:8px;--ant-carousel-dot-width:16px;--ant-carousel-dot-height:3px;--ant-carousel-dot-gap:4px;--ant-carousel-dot-offset:12px;--ant-carousel-dot-active-width:24px;}

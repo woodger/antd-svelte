@@ -52,7 +52,7 @@ describe('Ant Design 6.6.8 official UMD overlay CSS-token conformance', () => {
       archiveSha256: '8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa',
       source: 'package/dist/antd.min.js'
     });
-    expect(reference.cases).toHaveLength(19);
+    expect(reference.cases).toHaveLength(14);
   });
 
   for (const sample of reference.cases) {

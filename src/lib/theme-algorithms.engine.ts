@@ -18,29 +18,28 @@ import {
 import { presetColors } from './theme-token.types';
 import type {
   ColorPalettes,
-  LegacyColorPalettes,
   MapToken,
   PresetColorKey,
   SeedToken
 } from './theme-token.types';
 
-function getPresetTokens(seed: SeedToken, dark = false): ColorPalettes & LegacyColorPalettes {
+function getPresetTokens(seed: SeedToken, dark = false): ColorPalettes {
   const palettes: Record<string, string> = {};
 
   for (const name of Object.keys(defaultPresetColors) as PresetColorKey[]) {
+    const color = name === 'pink' ? defaultPresetColors.pink : seed[name];
     let colors: readonly string[];
-    if (dark) colors = generatePalette(seed[name], { theme: 'dark' });
-    else if (seed[name] === presetPrimaryColors[name]) colors = presetPalettes[name];
-    else colors = generatePalette(seed[name]);
+    if (dark) colors = generatePalette(color, { theme: 'dark' });
+    else if (color === presetPrimaryColors[name]) colors = presetPalettes[name];
+    else colors = generatePalette(color);
 
     for (let index = 0; index < 10; index++) {
-      palettes[`${name}-${index + 1}`] = colors[index];
       palettes[`${name}${index + 1}`] = colors[index];
     }
   }
 
-  // Закреплённый каталог создаёт все 13 × 10 ключей в двух исходных нотациях.
-  return palettes as ColorPalettes & LegacyColorPalettes;
+  // Preset pink остаётся цветом UI, но больше не является настраиваемым seed.
+  return palettes as ColorPalettes;
 }
 
 /** Исходный defaultAlgorithm: seed → MapToken, без alias overrides и UI side effects. */
@@ -70,9 +69,10 @@ export function darkAlgorithm(seed: SeedToken, mapToken?: MapToken): MapToken {
   const states: Record<string, string> = {};
 
   for (const name of presetColors) {
-    if (!seed[name]) continue;
+    const color = name === 'pink' ? defaultPresetColors.pink : seed[name];
+    if (!color) continue;
 
-    const palette = generateDarkColorPalettes(seed[name]);
+    const palette = generateDarkColorPalettes(color);
     states[`${name}Hover`] = palette[7];
     states[`${name}Active`] = palette[5];
   }

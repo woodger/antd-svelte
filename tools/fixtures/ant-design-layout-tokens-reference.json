@@ -6,16 +6,14 @@
     "source": "package/dist/antd.min.js",
     "react": "18.3.1",
     "documentMode": "CSS1Compat",
-    "operation": "Layout/Sider share nineteen prepared tokens including three deprecated aliases. Root/header/content/footer, dark/light and zero/reverse/RTL Sider, global/component aliases and algorithms, lengths/zero/undefined, cssVar key/prefix, inherited CSS-variable root style, semantic/local/dimension priorities and nested/reset/sibling scopes. Explicit host font/line-height/color and rem size isolate document context. Standalone source sections are recorded separately as an observation, not a native conformance expectation."
+    "operation": "Layout/Sider share nineteen prepared tokens including three deprecated aliases. Root/header/content/footer, dark/light and zero/reverse/RTL Sider, global/component aliases and algorithms, lengths/zero/undefined, cssVar key/prefix, inherited CSS-variable root style, semantic/local/dimension priorities and nested/reset/sibling scopes. Explicit host font/line-height/color and rem size isolate document context. Standalone source sections are recorded separately as an observation, not a native conformance expectation.",
+    "currentApiScope": "Current API only: deprecated input profiles and output fields/declarations are excluded. Remaining measured values are retained."
   },
   "cases": [
     {
       "name": "default",
       "config": {},
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "64px",
@@ -34,9 +32,6 @@
         "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "64px",
@@ -80,9 +75,6 @@
         }
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#e6f4ff",
         "--ant-layout-header-bg": "#531dab",
         "--ant-layout-header-height": "72px",
@@ -101,9 +93,6 @@
         "--ant-layout-light-trigger-color": "#391085"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#e6f4ff",
         "--ant-layout-header-bg": "#531dab",
         "--ant-layout-header-height": "72px",
@@ -120,117 +109,6 @@
         "--ant-layout-light-sider-bg": "#f9f0ff",
         "--ant-layout-light-trigger-bg": "#efdbff",
         "--ant-layout-light-trigger-color": "#391085"
-      }
-    },
-    {
-      "name": "deprecated-aliases",
-      "config": {
-        "components": {
-          "Layout": {
-            "colorBgHeader": "#722ed1",
-            "colorBgBody": "#fff7e6",
-            "colorBgTrigger": "#0958d9"
-          }
-        }
-      },
-      "variables": {
-        "--ant-layout-color-bg-header": "#722ed1",
-        "--ant-layout-color-bg-body": "#fff7e6",
-        "--ant-layout-color-bg-trigger": "#0958d9",
-        "--ant-layout-body-bg": "#fff7e6",
-        "--ant-layout-header-bg": "#722ed1",
-        "--ant-layout-header-height": "64px",
-        "--ant-layout-header-padding": "0 50px",
-        "--ant-layout-header-color": "rgba(0,0,0,0.88)",
-        "--ant-layout-footer-padding": "24px 50px",
-        "--ant-layout-footer-bg": "#f5f5f5",
-        "--ant-layout-sider-bg": "#001529",
-        "--ant-layout-trigger-height": "48px",
-        "--ant-layout-trigger-bg": "#0958d9",
-        "--ant-layout-trigger-color": "#fff",
-        "--ant-layout-zero-trigger-width": "40px",
-        "--ant-layout-zero-trigger-height": "40px",
-        "--ant-layout-light-sider-bg": "#ffffff",
-        "--ant-layout-light-trigger-bg": "#ffffff",
-        "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
-      },
-      "siderVariables": {
-        "--ant-layout-color-bg-header": "#722ed1",
-        "--ant-layout-color-bg-body": "#fff7e6",
-        "--ant-layout-color-bg-trigger": "#0958d9",
-        "--ant-layout-body-bg": "#fff7e6",
-        "--ant-layout-header-bg": "#722ed1",
-        "--ant-layout-header-height": "64px",
-        "--ant-layout-header-padding": "0 50px",
-        "--ant-layout-header-color": "rgba(0,0,0,0.88)",
-        "--ant-layout-footer-padding": "24px 50px",
-        "--ant-layout-footer-bg": "#f5f5f5",
-        "--ant-layout-sider-bg": "#001529",
-        "--ant-layout-trigger-height": "48px",
-        "--ant-layout-trigger-bg": "#0958d9",
-        "--ant-layout-trigger-color": "#fff",
-        "--ant-layout-zero-trigger-width": "40px",
-        "--ant-layout-zero-trigger-height": "40px",
-        "--ant-layout-light-sider-bg": "#ffffff",
-        "--ant-layout-light-trigger-bg": "#ffffff",
-        "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
-      }
-    },
-    {
-      "name": "modern-priority",
-      "config": {
-        "components": {
-          "Layout": {
-            "colorBgHeader": "#722ed1",
-            "headerBg": "#135200",
-            "colorBgBody": "#fff7e6",
-            "bodyBg": "#f6ffed",
-            "colorBgTrigger": "#0958d9",
-            "triggerBg": "#391085"
-          }
-        }
-      },
-      "variables": {
-        "--ant-layout-color-bg-header": "#722ed1",
-        "--ant-layout-color-bg-body": "#fff7e6",
-        "--ant-layout-color-bg-trigger": "#0958d9",
-        "--ant-layout-body-bg": "#f6ffed",
-        "--ant-layout-header-bg": "#135200",
-        "--ant-layout-header-height": "64px",
-        "--ant-layout-header-padding": "0 50px",
-        "--ant-layout-header-color": "rgba(0,0,0,0.88)",
-        "--ant-layout-footer-padding": "24px 50px",
-        "--ant-layout-footer-bg": "#f5f5f5",
-        "--ant-layout-sider-bg": "#001529",
-        "--ant-layout-trigger-height": "48px",
-        "--ant-layout-trigger-bg": "#391085",
-        "--ant-layout-trigger-color": "#fff",
-        "--ant-layout-zero-trigger-width": "40px",
-        "--ant-layout-zero-trigger-height": "40px",
-        "--ant-layout-light-sider-bg": "#ffffff",
-        "--ant-layout-light-trigger-bg": "#ffffff",
-        "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
-      },
-      "siderVariables": {
-        "--ant-layout-color-bg-header": "#722ed1",
-        "--ant-layout-color-bg-body": "#fff7e6",
-        "--ant-layout-color-bg-trigger": "#0958d9",
-        "--ant-layout-body-bg": "#f6ffed",
-        "--ant-layout-header-bg": "#135200",
-        "--ant-layout-header-height": "64px",
-        "--ant-layout-header-padding": "0 50px",
-        "--ant-layout-header-color": "rgba(0,0,0,0.88)",
-        "--ant-layout-footer-padding": "24px 50px",
-        "--ant-layout-footer-bg": "#f5f5f5",
-        "--ant-layout-sider-bg": "#001529",
-        "--ant-layout-trigger-height": "48px",
-        "--ant-layout-trigger-bg": "#391085",
-        "--ant-layout-trigger-color": "#fff",
-        "--ant-layout-zero-trigger-width": "40px",
-        "--ant-layout-zero-trigger-height": "40px",
-        "--ant-layout-light-sider-bg": "#ffffff",
-        "--ant-layout-light-trigger-bg": "#ffffff",
-        "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
       }
     },
     {
@@ -252,9 +130,6 @@
         }
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#fff1f0",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#fff1f0",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "72px",
@@ -273,9 +148,6 @@
         "--ant-layout-light-trigger-color": "#123456"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#fff1f0",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#fff1f0",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "72px",
@@ -327,9 +199,6 @@
         "--ant-font-size-xl": "26px",
         "--ant-border-radius-lg": "15px",
         "--ant-line-width": "3px",
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#fff1f0",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#fff1f0",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "72px",
@@ -360,9 +229,6 @@
         "--ant-font-size-xl": "26px",
         "--ant-border-radius-lg": "15px",
         "--ant-line-width": "3px",
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#fff1f0",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#fff1f0",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "72px",
@@ -389,9 +255,6 @@
         ]
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#000000",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#000000",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "64px",
@@ -410,9 +273,6 @@
         "--ant-layout-light-trigger-color": "rgba(255,255,255,0.85)"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#000000",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#000000",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "64px",
@@ -439,9 +299,6 @@
         ]
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "56px",
@@ -460,9 +317,6 @@
         "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "56px",
@@ -490,9 +344,6 @@
         ]
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#000000",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#000000",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "56px",
@@ -511,9 +362,6 @@
         "--ant-layout-light-trigger-color": "rgba(255,255,255,0.85)"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#000000",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#000000",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "56px",
@@ -596,9 +444,6 @@
         "--ant-margin-lg": "30px",
         "--ant-margin-xl": "40px",
         "--ant-margin-xxl": "60px",
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "64px",
@@ -669,9 +514,6 @@
         "--ant-margin-lg": "30px",
         "--ant-margin-xl": "40px",
         "--ant-margin-xxl": "60px",
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "64px",
@@ -947,7 +789,6 @@
         "--ant-control-item-bg-active": "#491734",
         "--ant-control-item-bg-active-hover": "#631844",
         "--ant-control-item-bg-active-disabled": "rgba(0,0,0,0.18)",
-        "--ant-control-tmp-outline": "rgba(0,0,0,0.04)",
         "--ant-control-outline": "rgba(55,0,32,0.91)",
         "--ant-box-shadow": "0 6px 16px 0 rgba(255,255,255,0.016),\n      0 3px 6px -4px rgba(255,255,255,0.024),\n      0 9px 28px 8px rgba(255,255,255,0.010000000000000002)",
         "--ant-box-shadow-secondary": "0 6px 16px 0 rgba(255,255,255,0.016),\n      0 3px 6px -4px rgba(255,255,255,0.024),\n      0 9px 28px 8px rgba(255,255,255,0.010000000000000002)",
@@ -963,9 +804,6 @@
         "--ant-box-shadow-tabs-overflow-right": "inset -10px 0 8px -8px rgba(255,255,255,0.016)",
         "--ant-box-shadow-tabs-overflow-top": "inset 0 10px 8px -8px rgba(255,255,255,0.016)",
         "--ant-box-shadow-tabs-overflow-bottom": "inset 0 -10px 8px -8px rgba(255,255,255,0.016)",
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#ffffff",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#ffffff",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "64px",
@@ -1228,7 +1066,6 @@
         "--ant-control-item-bg-active": "#491734",
         "--ant-control-item-bg-active-hover": "#631844",
         "--ant-control-item-bg-active-disabled": "rgba(0,0,0,0.18)",
-        "--ant-control-tmp-outline": "rgba(0,0,0,0.04)",
         "--ant-control-outline": "rgba(55,0,32,0.91)",
         "--ant-box-shadow": "0 6px 16px 0 rgba(255,255,255,0.016),\n      0 3px 6px -4px rgba(255,255,255,0.024),\n      0 9px 28px 8px rgba(255,255,255,0.010000000000000002)",
         "--ant-box-shadow-secondary": "0 6px 16px 0 rgba(255,255,255,0.016),\n      0 3px 6px -4px rgba(255,255,255,0.024),\n      0 9px 28px 8px rgba(255,255,255,0.010000000000000002)",
@@ -1244,9 +1081,6 @@
         "--ant-box-shadow-tabs-overflow-right": "inset -10px 0 8px -8px rgba(255,255,255,0.016)",
         "--ant-box-shadow-tabs-overflow-top": "inset 0 10px 8px -8px rgba(255,255,255,0.016)",
         "--ant-box-shadow-tabs-overflow-bottom": "inset 0 -10px 8px -8px rgba(255,255,255,0.016)",
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#ffffff",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#ffffff",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "64px",
@@ -1326,9 +1160,6 @@
         "--ant-margin": "8px",
         "--ant-margin-md": "16px",
         "--ant-margin-lg": "16px",
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "48px",
@@ -1395,9 +1226,6 @@
         "--ant-margin": "8px",
         "--ant-margin-md": "16px",
         "--ant-margin-lg": "16px",
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "48px",
@@ -1429,9 +1257,6 @@
         }
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "calc(3rem + 2px)",
@@ -1450,9 +1275,6 @@
         "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "calc(3rem + 2px)",
@@ -1486,9 +1308,6 @@
         }
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "0px",
@@ -1507,9 +1326,6 @@
         "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-height": "0px",
@@ -1543,9 +1359,6 @@
         }
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-padding": "0 50px",
@@ -1562,9 +1375,6 @@
         "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#f5f5f5",
         "--ant-layout-header-bg": "#001529",
         "--ant-layout-header-padding": "0 50px",
@@ -1573,61 +1383,6 @@
         "--ant-layout-footer-bg": "#f5f5f5",
         "--ant-layout-sider-bg": "#001529",
         "--ant-layout-trigger-height": "48px",
-        "--ant-layout-trigger-color": "#fff",
-        "--ant-layout-zero-trigger-width": "40px",
-        "--ant-layout-zero-trigger-height": "40px",
-        "--ant-layout-light-sider-bg": "#ffffff",
-        "--ant-layout-light-trigger-bg": "#ffffff",
-        "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
-      }
-    },
-    {
-      "name": "undefined-current-alias",
-      "config": {
-        "components": {
-          "Layout": {
-            "colorBgHeader": "#722ed1",
-            "headerBg": {
-              "$type": "undefined"
-            }
-          }
-        }
-      },
-      "variables": {
-        "--ant-layout-color-bg-header": "#722ed1",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
-        "--ant-layout-body-bg": "#f5f5f5",
-        "--ant-layout-header-bg": "#722ed1",
-        "--ant-layout-header-height": "64px",
-        "--ant-layout-header-padding": "0 50px",
-        "--ant-layout-header-color": "rgba(0,0,0,0.88)",
-        "--ant-layout-footer-padding": "24px 50px",
-        "--ant-layout-footer-bg": "#f5f5f5",
-        "--ant-layout-sider-bg": "#001529",
-        "--ant-layout-trigger-height": "48px",
-        "--ant-layout-trigger-bg": "#002140",
-        "--ant-layout-trigger-color": "#fff",
-        "--ant-layout-zero-trigger-width": "40px",
-        "--ant-layout-zero-trigger-height": "40px",
-        "--ant-layout-light-sider-bg": "#ffffff",
-        "--ant-layout-light-trigger-bg": "#ffffff",
-        "--ant-layout-light-trigger-color": "rgba(0,0,0,0.88)"
-      },
-      "siderVariables": {
-        "--ant-layout-color-bg-header": "#722ed1",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
-        "--ant-layout-body-bg": "#f5f5f5",
-        "--ant-layout-header-bg": "#722ed1",
-        "--ant-layout-header-height": "64px",
-        "--ant-layout-header-padding": "0 50px",
-        "--ant-layout-header-color": "rgba(0,0,0,0.88)",
-        "--ant-layout-footer-padding": "24px 50px",
-        "--ant-layout-footer-bg": "#f5f5f5",
-        "--ant-layout-sider-bg": "#001529",
-        "--ant-layout-trigger-height": "48px",
-        "--ant-layout-trigger-bg": "#002140",
         "--ant-layout-trigger-color": "#fff",
         "--ant-layout-zero-trigger-width": "40px",
         "--ant-layout-zero-trigger-height": "40px",
@@ -1665,9 +1420,6 @@
         }
       },
       "variables": {
-        "--owned-layout-color-bg-header": "#001529",
-        "--owned-layout-color-bg-body": "#f5f5f5",
-        "--owned-layout-color-bg-trigger": "#002140",
         "--owned-layout-body-bg": "#e6f4ff",
         "--owned-layout-header-bg": "#531dab",
         "--owned-layout-header-height": "72px",
@@ -1686,9 +1438,6 @@
         "--owned-layout-light-trigger-color": "#391085"
       },
       "siderVariables": {
-        "--owned-layout-color-bg-header": "#001529",
-        "--owned-layout-color-bg-body": "#f5f5f5",
-        "--owned-layout-color-bg-trigger": "#002140",
         "--owned-layout-body-bg": "#e6f4ff",
         "--owned-layout-header-bg": "#531dab",
         "--owned-layout-header-height": "72px",
@@ -1732,9 +1481,6 @@
         }
       },
       "variables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#e6f4ff",
         "--ant-layout-header-bg": "#531dab",
         "--ant-layout-header-height": "72px",
@@ -1753,9 +1499,6 @@
         "--ant-layout-light-trigger-color": "#391085"
       },
       "siderVariables": {
-        "--ant-layout-color-bg-header": "#001529",
-        "--ant-layout-color-bg-body": "#f5f5f5",
-        "--ant-layout-color-bg-trigger": "#002140",
         "--ant-layout-body-bg": "#e6f4ff",
         "--ant-layout-header-bg": "#531dab",
         "--ant-layout-header-height": "72px",

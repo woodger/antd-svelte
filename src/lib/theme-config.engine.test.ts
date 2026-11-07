@@ -55,6 +55,20 @@ describe('ConfigProvider theme inheritance', () => {
 });
 
 describe('ConfigProvider design-token state', () => {
+  it('reuses cache keys for equal tokens and separates different values and prefixes', () => {
+    const config = { ...defaultThemeConfig, token: { colorPrimary: '#123456' } };
+    const first = createDesignTokenState(config);
+    const repeated = createDesignTokenState({ ...config, token: { ...config.token } });
+    const changed = createDesignTokenState({ ...config, token: { colorPrimary: '#654321' } });
+    const prefixed = createDesignTokenState({ ...config, cssVar: { prefix: 'custom' } });
+
+    expect(repeated.token._tokenKey).toBe(first.token._tokenKey);
+    expect(changed.token._tokenKey).not.toBe(first.token._tokenKey);
+    expect(prefixed.token._tokenKey).not.toBe(first.token._tokenKey);
+    expect(changed.hashId).toBe(first.hashId);
+    expect(prefixed.hashId).not.toBe(first.hashId);
+  });
+
   it('maps existing native theme selectors into source tokens without changing their input', () => {
     const config = { ...defaultThemeConfig, mode: 'dark' as const,
       primary: 'purple' as const, compact: true };

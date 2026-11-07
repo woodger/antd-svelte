@@ -115,6 +115,32 @@ describe('CSS extraction', () => {
     );
     expect(result.keyframes).toEqual(['pulse']);
   });
+  it('applies explicit declaration changes without rewriting selectors or keyframes', () => {
+    const result = extractCss(
+      '.ant-test[data-label="retired"]{--retired:4px;color:var(--retired);padding:2px}'
+        + '@keyframes pulse{to{--retired:0;opacity:0}}',
+      recipe({
+        declarationReplacements: [
+          { pattern: '--retired:[^;]+;', replacement: '' },
+          { pattern: 'var\\(--retired\\)', replacement: 'var(--current)' }
+        ],
+        keyframes: ['pulse']
+      })
+    );
+
+    expect(result.content).toBe('/* Test source */\n.ant-test:where(.test-vars)[data-label="retired"]{color:var(--current);padding:2px}\n@keyframes pulse{to{--retired:0;opacity:0}}\n');
+    expect(result.rules).toBe(1);
+  });
+  it('excludes explicitly selected at-rules while retaining other scopes and their rule counts', () => {
+    const result = extractCss(
+      '@container style(--retired){.ant-test{color:red}}'
+        + '@media(width>20px){.ant-test{color:blue}}',
+      recipe({ excludeAtRules: ['^@container style\\(--retired\\)$'] })
+    );
+
+    expect(result.content).toBe('/* Test source */\n@media(width>20px){.ant-test:where(.test-vars){color:blue}}\n');
+    expect(result.rules).toBe(1);
+  });
   it('appends explicitly selected root keyframes when a recipe requires that order', () => {
     const result = extractCss(
       '@keyframes pulse{to{opacity:0}}.ant-test{color:red}',

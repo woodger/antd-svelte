@@ -30,7 +30,7 @@ describe('Source control theme SSR', () => {
     const { body, head } = render(ControlThemeFixture, { props: { native: true } });
 
     expect(body).toContain('data-ant-compact="true"');
-    expect(body).toContain('--ant-button-content-line-height:1.6666666666666667');
+    expect(body).toContain('--ant-button-content-font-size:12px');
     expect(body).toContain('--ant-button-padding-inline:11px');
     expect(body).toContain('--ant-input-padding-block:3px');
     expect(body).toContain('--ant-input-number-padding-block:3px');
