@@ -21,7 +21,7 @@
   const componentTheme = useComponentTheme('Radio');
   const wave = useWave('Radio', () => resolvedDisabled);
   const form = useForm();
-  const field = useFormField();
+  const field = useFormField(() => ref);
   const group = useRadioGroup();
   const optionType = useRadioOptionType();
   const initialDefault = untrack(() => props.defaultChecked ?? false);

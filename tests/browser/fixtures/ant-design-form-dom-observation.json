@@ -1,0 +1,401 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "two animation frames before lifecycle captures"
+  },
+  "cases": [
+    {
+      "id": "focus-input",
+      "name": "input",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "input",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "focus-textarea",
+      "name": "textarea",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "textarea",
+        "node": "TEXTAREA",
+        "type": null
+      }
+    },
+    {
+      "id": "focus-number",
+      "name": "number",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "number",
+        "node": "INPUT",
+        "type": null
+      }
+    },
+    {
+      "id": "focus-checkbox",
+      "name": "checkbox",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "checkbox",
+        "node": "INPUT",
+        "type": "checkbox"
+      }
+    },
+    {
+      "id": "focus-radio",
+      "name": "radio",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "radio",
+        "node": "INPUT",
+        "type": "radio"
+      }
+    },
+    {
+      "id": "focus-switch",
+      "name": "switch",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "switch",
+        "node": "BUTTON",
+        "type": "button"
+      }
+    },
+    {
+      "id": "focus-select",
+      "name": "select",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "select",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "focus-slider",
+      "name": "slider",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "slider",
+        "node": "DIV",
+        "type": null
+      }
+    },
+    {
+      "id": "focus-range",
+      "name": "range",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "range",
+        "node": "DIV",
+        "type": null
+      }
+    },
+    {
+      "id": "focus-otp",
+      "name": "otp",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "otp",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "focus-date",
+      "name": "date",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "date",
+        "node": "INPUT",
+        "type": null
+      }
+    },
+    {
+      "id": "focus-dates",
+      "name": "dates",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "dates",
+        "node": "INPUT",
+        "type": null
+      }
+    },
+    {
+      "id": "focus-rate",
+      "name": "rate",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "rate",
+        "node": "UL",
+        "type": null
+      }
+    },
+    {
+      "id": "focus-nested",
+      "name": [
+        "user",
+        "name"
+      ],
+      "instance": true,
+      "sameRef": false,
+      "active": {
+        "tag": "literal",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "focus-literal",
+      "name": "user_name",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "literal",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "focus-numeric",
+      "name": [
+        "rows",
+        0,
+        "name"
+      ],
+      "instance": true,
+      "sameRef": false,
+      "active": {
+        "tag": "string",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "focus-string",
+      "name": [
+        "rows",
+        "0",
+        "name"
+      ],
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "string",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "list-first",
+      "name": [
+        "people",
+        0
+      ],
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "person-0",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "list-moved",
+      "name": [
+        "people",
+        0
+      ],
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "person-1",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "list-removed",
+      "name": [
+        "people",
+        0
+      ],
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "person-0",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "reset",
+      "name": "input",
+      "instance": true,
+      "sameRef": true,
+      "active": {
+        "tag": "input",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "removed",
+      "name": "removable",
+      "instance": false,
+      "sameRef": false,
+      "active": {
+        "tag": "input",
+        "node": "INPUT",
+        "type": "text"
+      }
+    },
+    {
+      "id": "missing",
+      "name": "missing",
+      "instance": false,
+      "sameRef": true,
+      "active": {
+        "tag": "input",
+        "node": "INPUT",
+        "type": "text"
+      }
+    }
+  ],
+  "resetChanged": true,
+  "scrollCases": [
+    {
+      "id": "missing",
+      "top": 0,
+      "left": 0,
+      "focused": false
+    },
+    {
+      "id": "nearest",
+      "top": 184,
+      "left": 220,
+      "focused": false
+    },
+    {
+      "id": "visible",
+      "top": 184,
+      "left": 220,
+      "focused": false
+    },
+    {
+      "id": "start",
+      "top": 320,
+      "left": 400,
+      "focused": false
+    },
+    {
+      "id": "center",
+      "top": 252,
+      "left": 310,
+      "focused": false
+    },
+    {
+      "id": "end-focus",
+      "top": 184,
+      "left": 220,
+      "focused": true
+    },
+    {
+      "id": "custom",
+      "top": 0,
+      "left": 0,
+      "focused": false
+    }
+  ],
+  "custom": [
+    {
+      "box": true,
+      "top": 184,
+      "left": 220
+    }
+  ],
+  "scrollMarginCases": [
+    {
+      "id": "missing",
+      "top": 0,
+      "left": 0,
+      "focused": false
+    },
+    {
+      "id": "nearest",
+      "top": 164,
+      "left": 221,
+      "focused": false
+    },
+    {
+      "id": "visible",
+      "top": 164,
+      "left": 225,
+      "focused": false
+    },
+    {
+      "id": "start",
+      "top": 300,
+      "left": 401,
+      "focused": false
+    },
+    {
+      "id": "center",
+      "top": 236,
+      "left": 318,
+      "focused": false
+    },
+    {
+      "id": "end-focus",
+      "top": 188,
+      "left": 231,
+      "focused": true
+    },
+    {
+      "id": "custom",
+      "top": 0,
+      "left": 0,
+      "focused": false
+    }
+  ],
+  "scrollMarginCustom": [
+    {
+      "box": true,
+      "top": 172,
+      "left": 217
+    }
+  ],
+  "observations": [
+    {
+      "case": "scrollMarginCases",
+      "issue": "Bundled compute 3.1.1 and its 3.1.0 wrapper both apply margins: nearest can clip the control and repeated reveal drifts horizontally."
+    },
+    {
+      "case": "focus-nested",
+      "issue": "Underscore-joined names collide: nested path resolves the literal key ref."
+    },
+    {
+      "case": "focus-numeric",
+      "issue": "Number and string segments share the same itemRef key; the other binding receives focus."
+    }
+  ]
+}

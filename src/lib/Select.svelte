@@ -55,7 +55,14 @@
   const variantContext = useVariant('select', () => ({ variant }));
   const componentTheme = useComponentTheme('Select');
   const compact = useCompact();
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return container;
+    },
+    focus: () => control?.focus(),
+    blur: () => control?.blur()
+  };
+  const field = useFormField(() => controlRef);
   let appearance = $derived(variantContext.variant);
   const generatedId = $props.id();
   const initialDefault = untrack(

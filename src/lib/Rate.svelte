@@ -46,7 +46,13 @@
       : `--ant-rate-star-hover-scale:var(--${tokens.state.prefix}-rate-star-hover-scale,scale(1.1))`;
   });
   const form = useForm();
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return nativeElement;
+    },
+    focus, blur
+  };
+  const field = useFormField(() => controlRef);
   let innerValue = $state<number | undefined>(untrack(() => defaultValue || 0));
   let actualValue = $derived(value !== undefined ? value : innerValue);
   let hoverValue = $state<number | null>(null);

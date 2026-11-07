@@ -1,6 +1,8 @@
 import { tick, untrack } from 'svelte';
 import { FormValidationError } from './FormValidationError';
 import { setFormHooks, type FormFieldRegistration } from './form-internal';
+import { focusFormField, getFormFieldElement, scrollFormField } from './form-field.dom';
+import type { FormScrollOptions } from './form.types';
 import {
   containsFormPath,
   copyFormValue,
@@ -90,6 +92,15 @@ export interface FormInstance<Values extends FormValues> {
   getFieldError(name: NamePath): readonly string[];
   /** Предупреждения warningOnly не входят в errors и не блокируют submit. */
   getFieldWarning(name: NamePath): readonly string[];
+  /**
+   * Опубликованный ref, native element либо стабильный handle смонтированного control.
+   * Тип Instance задаётся вызывающей стороной; до mount и после удаления — undefined.
+   */
+  getFieldInstance<Instance = unknown>(name: NamePath): Instance | undefined;
+  /** Делегирует focus ref компонента; без ref использует связанный native id. */
+  focusField(name: NamePath): void;
+  /** Прокручивает корень ref либо control с native id; неизвестный путь ничего не делает. */
+  scrollToField(name: NamePath, options?: FormScrollOptions): void;
   /** Учитывает само поле и известных модели потомков; пустой путь проверяет всю модель. */
   isFieldTouched(name: NamePath): boolean;
   /** Без имён: любое touched-поле; true требует все bindings, кроме корней FormList. */
@@ -160,6 +171,19 @@ export function createForm<Values extends FormValues>({
 
   function findField(name: NamePath): StoredField | undefined {
     return fields.find((field) => sameFormPath(fieldPath(field), name));
+  }
+
+  function controlRegistration(name: NamePath): FormFieldRegistration | undefined {
+    let found: StoredField | undefined;
+    for (const field of fieldRegistry) {
+      if (field.registration && !field.registration.isList
+        && sameFormPath(fieldPath(field), name)
+        && (field.registrationOrder ?? 0) > (found?.registrationOrder ?? 0)) {
+        found = field;
+      }
+    }
+
+    return found?.registration;
   }
 
   function ensureField(name: NamePath): StoredField {
@@ -458,6 +482,22 @@ export function createForm<Values extends FormValues>({
     getFieldsError,
     getFieldError: (name) => findField(name)?.errors ?? [],
     getFieldWarning: (name) => findField(name)?.warnings ?? [],
+    getFieldInstance<Instance = unknown>(name: NamePath) {
+      return controlRegistration(name)?.getInstance?.() as Instance | undefined;
+    },
+    focusField(name) {
+      const field = controlRegistration(name);
+      focusFormField(field?.getInstance?.(), () => field?.getElement?.());
+    },
+    scrollToField(name, options) {
+      const field = controlRegistration(name);
+      const instance = field?.getInstance?.();
+      const node = getFormFieldElement(instance) ?? field?.getElement?.();
+      if (!node) return;
+
+      scrollFormField(node, options);
+      if (options?.focus) form.focusField(name);
+    },
     isFieldTouched,
     isFieldsTouched,
     isFieldValidating: (name) => isFieldsValidating([name]),

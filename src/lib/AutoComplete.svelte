@@ -64,7 +64,13 @@
   const config = useConfig();
   const variantContext = useVariant('select', () => ({ variant }));
   let appearance = $derived(variantContext.variant);
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return nativeElement;
+    },
+    focus, blur
+  };
+  const field = useFormField(() => controlRef);
   const form = useForm();
   const compact = useCompact();
   const componentTheme = useComponentTheme('Select');

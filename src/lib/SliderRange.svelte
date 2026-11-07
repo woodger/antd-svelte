@@ -31,7 +31,7 @@
   const componentTheme = useComponentTheme('Slider');
   const internal = useSliderInternal();
   const form = useForm();
-  const field = useFormField();
+  const field = useFormField(() => ref);
   const initialDefault = untrack(() => props.defaultValue);
   const autoFocus = untrack(() => props.autoFocus ?? props.autofocus);
   let inputs = $state<HTMLInputElement[]>([]);

@@ -44,7 +44,7 @@
   const config = useConfig();
   const componentTheme = useComponentTheme('Radio');
   const form = useForm();
-  const field = useFormField();
+  const field = useFormField(() => nativeElement);
   const generatedId = $props.id();
   const initialDefault = untrack(() => defaultValue);
   const resets = new Set<ReturnType<typeof setTimeout>>();

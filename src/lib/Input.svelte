@@ -69,7 +69,13 @@
   const componentTheme = useComponentTheme('Input');
   const compact = useCompact();
   const form = useForm();
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return affix ?? inputElement;
+    },
+    focus, blur, select, setSelectionRange
+  };
+  const field = useFormField(() => controlRef);
   const initialDefault = untrack(() => defaultValue);
   let useDefault = $state(true);
   let focused = $state(false);

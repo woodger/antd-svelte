@@ -25,7 +25,7 @@
   const config = useConfig();
   const componentTheme = useComponentTheme('Transfer');
   const form = useForm();
-  const field = useFormField();
+  const field = useFormField(() => nativeElement);
   // Служебные checkbox/search не являются отдельными полями внешнего FormItem.
   provideFormField(field ? {
     get disabled() {

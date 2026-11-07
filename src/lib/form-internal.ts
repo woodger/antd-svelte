@@ -9,6 +9,8 @@ export interface FormFieldRegistration {
   readonly initialValue?: readonly unknown[];
   /** Пересоздаёт содержимое выбранного Field без замены соседних controls. */
   readonly onReset?: () => void;
+  readonly getInstance?: () => unknown;
+  readonly getElement?: () => Element | undefined;
 }
 
 export interface FormHooks {

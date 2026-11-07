@@ -46,7 +46,7 @@
   const componentTheme = useComponentTheme('InputNumber');
   const compact = useCompact();
   const form = useForm();
-  const field = useFormField();
+  const field = useFormField(() => ref);
   const generatedId = $props.id();
   const initialDefault = untrack(() => props.defaultValue);
   const resets = new Set<ReturnType<typeof setTimeout>>();

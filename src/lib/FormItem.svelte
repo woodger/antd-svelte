@@ -18,6 +18,11 @@
     /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
     rules?: readonly ValidationRule[];
     htmlFor?: string;
+    /**
+     * Native element, bind:this либо объект с focus/nativeElement пользовательского control.
+     * Имеет приоритет над встроенной регистрацией и возвращается getFieldInstance без обёртки.
+     */
+    controlRef?: unknown;
     class?: string;
   }
 
@@ -29,6 +34,7 @@
     required,
     rules,
     htmlFor,
+    controlRef,
     class: className = ''
   }: FormItemProps = $props();
 
@@ -46,6 +52,7 @@
   let descriptionId = $derived(errors.length || warnings.length || help ? `${id}-help` : undefined);
   let resetKey = $state.raw<object>({});
   let content: HTMLDivElement | undefined = $state();
+  const controls = new Set<() => unknown>();
 
   $effect.pre(() => {
     // В списке metadata следует за key строки; обычное поле хранит её по имени модели.
@@ -57,6 +64,21 @@
       },
       get rules() {
         return rules;
+      },
+      getInstance() {
+        if (controlRef != null) return controlRef;
+        for (const getInstance of controls) {
+          const instance = getInstance();
+          if (instance != null) return instance;
+        }
+      },
+      getElement() {
+        const host = content;
+        if (!host?.isConnected) return;
+
+        // Сначала свой binding: одинаковый htmlFor соседней формы не выбирает чужой control.
+        return [...host.querySelectorAll<HTMLElement>('[id]')].find((node) => node.id === id)
+          ?? host.ownerDocument.getElementById(id) ?? undefined;
       },
       onReset() {
         const restoreFocus = captureFormResetFocus(content, id);
@@ -87,6 +109,10 @@
     },
     get describedBy() {
       return descriptionId;
+    },
+    registerControl(getInstance) {
+      controls.add(getInstance);
+      return () => { controls.delete(getInstance); };
     },
     onBlur() {
       form?.touchField(path);

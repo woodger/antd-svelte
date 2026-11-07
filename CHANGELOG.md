@@ -135,6 +135,12 @@
 
 ### Added
 
+- Form: getFieldInstance, focusField и scrollToField с автоматическими refs controls,
+  custom controlRef, native id fallback, точными NamePath и lifecycle FormList/reset.
+  Поддержаны scroll boundaries, alignment, smooth/custom behavior и optional focus.
+  Подтверждённые коллизии refs и scroll-margin drift upstream записаны отдельно;
+  CSS margins пока не участвуют в программном расчёте прокрутки.
+
 - Form: resetFields принимает список точных NamePath. Выбранные FormItem и строки
   FormList пересоздают содержимое; общий reset очищает локальное состояние обычных
   controls, соседи сохраняют DOM/фокус/черновики. Добавлены empty/root paths,

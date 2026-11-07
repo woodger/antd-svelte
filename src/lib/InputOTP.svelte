@@ -43,7 +43,13 @@
   const config = useConfig();
   const variantContext = useVariant('otp', () => ({ variant }), 'input');
   const form = useForm();
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return nativeElement;
+    },
+    focus, blur
+  };
+  const field = useFormField(() => controlRef);
   // FormItem владеет группой: отдельные Input не получают одинаковые id/name/required.
   provideFormField(undefined);
 

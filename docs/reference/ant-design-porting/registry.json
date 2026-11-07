@@ -4790,6 +4790,11 @@
           "name": "@rc-component/motion",
           "range": "^1.3.3",
           "referenceVersion": "1.3.3"
+        },
+        {
+          "name": "scroll-into-view-if-needed",
+          "range": "^3.1.0",
+          "referenceVersion": "3.1.0"
         }
       ],
       "priority": "unassigned",
@@ -4897,7 +4902,17 @@
         "tests/browser/fixtures/FormResetControl.svelte",
         "tests/browser/fixtures/ant-design-form-reset-fields-observation.json",
         "tests/browser/fixtures/ant-design-form-reset-conflicts-observation.json",
-        "src/lib/form-reset.dom.ts"
+        "src/lib/form-reset.dom.ts",
+        "src/lib/form-field.dom.ts",
+        "src/lib/form-context.ts",
+        "src/lib/form-internal.ts",
+        "src/lib/form.types.ts",
+        "src/lib/form-dom.test.ts",
+        "tests/package/form-dom.ssr.test.ts",
+        "tests/browser/form-dom.spec.ts",
+        "tests/browser/fixtures/FormDomFixtures.svelte",
+        "tests/browser/fixtures/FormDomScrollFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-dom-observation.json"
       ],
       "features": [
         {
@@ -5217,6 +5232,28 @@
             "tests/browser/input-number.spec.ts"
           ],
           "note": "Опциональный readonly список NamePath: values восстанавливаются по пути, metadata выбирается точно; родитель не очищает metadata потомков сам по себе. Empty selection — no-op; [] как один путь восстанавливает store без выбора всех именованных bindings; неизвестный путь получает own undefined. Literal/numeric/string имена различаются, дубликаты не повторяют reset. Выбранный FormItem пересоздаёт children, полный reset также очищает локальное состояние обычных controls. Reset List пересоздаёт строки с сохранением key manager; Form defaults выше live root List initialValue, nested defaults не подставляются адресным reset; конфликт нескольких List defaults не выбирает произвольный. Соседние DOM/локальные черновики/фокус/выделение и standalone rules сохраняются. Строгая защита snapshot исключает поздние ошибки; disjoint validation остаётся текущей при отсутствии изменений store. Сверены 22 состояния неизменённого UMD после двух кадров и отдельный конфликт List. Подтверждённый stale input после reset родителя/typed alias сохранён в observations: source store уже новый, видимое значение старое; Svelte показывает актуальное. SSR не создаёт браузерных ресурсов. Прежний native focus/selection связанного контрола восстанавливается после remount внутри живого владельца, если фокус не переведён пользователем; InputNumber same-value draft reset сохраняет существующий контракт."
+        },
+        {
+          "id": "dom-methods",
+          "title": "GetFieldInstance, focusField и scrollToField",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.model.svelte.ts",
+            "src/lib/FormItem.svelte",
+            "src/lib/index.ts",
+            "src/lib/form-field.dom.ts",
+            "src/lib/form-context.ts",
+            "src/lib/form-internal.ts",
+            "src/lib/form.types.ts",
+            "src/lib/form-dom.test.ts",
+            "tests/package/form-dom.ssr.test.ts",
+            "tests/browser/form-dom.spec.ts",
+            "tests/browser/fixtures/FormDomFixtures.svelte",
+            "tests/browser/fixtures/FormDomScrollFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-dom-observation.json"
+          ],
+          "note": "Автоматические refs Input/TextArea, InputNumber, checkables/groups, Switch, Select, Slider, OTP, pickers, Rate, Mentions, AutoComplete, TreeSelect, Cascader и Transfer. Где опубликован bind:ref, возвращается он; остальные refs — стабильные Svelte handles либо опубликованный native element. Явный controlRef пользовательского поля имеет приоритет и сохраняет identity/receiver, native id служит fallback. Смонтированные bindings выбираются точным typed NamePath; reset, замена модели, удаление и keyed FormList очищают/обновляют ссылки. SSR не обращается к DOM. Прокрутка использует существующий compute-scroll-into-view 3.0.2, if-needed/nearest по умолчанию, alignment, boundary element/predicate, hidden overflow, native/custom behavior и optional focus. Сверено с неизменённым UMD; source коллизии underscore refs и number/string paths не повторяются. CSS scroll-margin пока не участвует в расчёте: bundled compute 3.1.1 и wrapper 3.1.0 дважды применяют margins, обрезают control и вызывают drift при повторной прокрутке; raw наблюдение сохранено отдельно. Это ограничение оставляет feature partial; полный Form API не заявлен."
         }
       ]
     },

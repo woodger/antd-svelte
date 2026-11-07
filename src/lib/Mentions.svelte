@@ -70,7 +70,13 @@
   const componentTheme = useComponentTheme('Mentions');
   const designTheme = useDesignTokenContext();
   const form = useForm();
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return nativeElement;
+    },
+    focus, blur
+  };
+  const field = useFormField(() => controlRef);
   const compact = useCompact();
   const generated = $props.id();
   let internalValue = $state(untrack(() => value ?? defaultValue));

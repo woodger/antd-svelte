@@ -9574,6 +9574,60 @@ validation сохраняется. Проверки: [браузер](./tests/br
 [публичный пакет](./tests/package/form-reset-fields.ssr.test.ts),
 [модель](./src/lib/form-reset-fields.test.ts).
 
+`getFieldInstance(name)`, `focusField(name)` и `scrollToField(name, options?)`
+работают с текущим UI binding. Встроенные Input, TextArea, InputNumber, Select,
+Checkbox/Radio, Switch, Slider, OTP, pickers, Rate, Mentions, AutoComplete,
+TreeSelect, Cascader и группы регистрируются автоматически. Когда компонент
+публикует `bind:ref`, возвращается этот ref; иначе — стабильный handle с
+nativeElement и поддержанными методами либо опубликованный native element.
+Это Svelte refs: например, Slider фокусирует прежний native range input.
+
+У пользовательского control исходный ref передаётся в `FormItem.controlRef`.
+Он имеет приоритет над автоматической регистрацией и возвращается без обёртки.
+Можно передать native element, Svelte `bind:this` с экспортированным focus
+или объект с nativeElement/focus. Для native binding:
+
+```svelte
+<script lang="ts">
+  import { Form, FormItem, Input, createForm } from 'antd-svelte';
+
+  const form = createForm({ initialValues: { title: '' } });
+  let controlRef = $state<HTMLInputElement>();
+</script>
+
+<Form {form}>
+  <FormItem name="title" label="Title" {controlRef}>
+    <Input value={form.values.title} onValueChange={(value) => form.setFieldValue('title', value)}
+      bind:inputElement={controlRef} />
+  </FormItem>
+</Form>
+<button onclick={() => form.scrollToField('title', { block: 'center', focus: true })}>
+  Show title
+</button>
+```
+
+До mount, после удаления и без binding getFieldInstance возвращает undefined.
+Без ref фокус и прокрутка используют связанный id; для своего native markup
+задайте htmlFor. Сначала ищется control внутри собственного FormItem, чтобы
+соседняя форма с тем же явным id не перехватила фокус. Динамические refs, reset,
+замена модели и keyed FormList обновляют регистрацию без хранения снятых controls.
+GetFieldInstance — императивный запрос, не подписка на mount; generic Instance
+задаёт ожидаемый вызывающей стороной тип и не выполняет runtime validation.
+
+FocusField вызывает focus с исходным receiver. ScrollToField использует
+nativeElement ref либо связанный control и по умолчанию if-needed/nearest.
+Поддержаны block/inline, scrollMode, behavior auto/instant/smooth либо callback
+actions, boundary element/predicate, skipOverflowHiddenElements и focus.
+Callback управляет прокруткой самостоятельно; его Promise не ожидается.
+Неизвестный путь ничего не делает. При SSR эти методы безопасны без UI.
+CSS scroll-margin пока не участвует в расчёте: upstream дважды учитывает margins,
+может обрезать control и смещает его при повторном вызове. Этот дефект и коллизии
+underscore refs сохранены в [raw reference](./tests/browser/fixtures/ant-design-form-dom-observation.json),
+в Svelte они не повторяются. Проверки:
+[браузер](./tests/browser/form-dom.spec.ts),
+[публичный пакет](./tests/package/form-dom.ssr.test.ts),
+[регистрация модели](./src/lib/form-dom.test.ts).
+
 `form.submit(onFinish)` блокирует повторную отправку и возвращает результат
 `success`, `invalid`, `failed` или `busy`. Изменение значений во время проверки
 делает результат устаревшим и предотвращает вызов onFinish. Уже начавшуюся

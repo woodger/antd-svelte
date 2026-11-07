@@ -106,7 +106,7 @@
   const config = useConfig();
   const componentTheme = useComponentTheme('Slider');
   const form = useForm();
-  const field = useFormField();
+  const field = useFormField(() => ref);
   const initialDefault = untrack(() => defaultValue);
   const resets = new Set<ReturnType<typeof setTimeout>>();
   let control = $state<HTMLInputElement>();

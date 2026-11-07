@@ -117,7 +117,13 @@
   } = $props();
   const config = useConfig();
   const variantContext = useVariant('cascader', () => ({ variant }));
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return nativeElement;
+    },
+    focus, blur
+  };
+  const field = useFormField(() => controlRef);
   const form = useForm();
   const compact = useCompact();
   const selectTheme = useComponentTheme('Select');

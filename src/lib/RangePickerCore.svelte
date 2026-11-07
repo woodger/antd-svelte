@@ -116,7 +116,13 @@
     variant
   }));
   const componentTheme = useComponentTheme('DatePicker');
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return nativeElement;
+    },
+    focus, blur
+  };
+  const field = useFormField(() => controlRef);
   const form = useForm();
   const compact = useCompact();
   const generatedId = $props.id();

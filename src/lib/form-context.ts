@@ -1,4 +1,4 @@
-import { getContext, setContext } from 'svelte';
+import { getContext, onDestroy, onMount, setContext } from 'svelte';
 import type { FormFieldRegistration } from './form-internal';
 import type { NamePath } from './form-store.engine';
 import type { Variant } from './types';
@@ -27,6 +27,7 @@ export interface FormFieldContext {
   readonly required: boolean;
   readonly status: 'error' | 'warning' | undefined;
   readonly describedBy: string | undefined;
+  registerControl?(getInstance: () => unknown): () => void;
   onBlur(): void;
 }
 
@@ -45,6 +46,18 @@ export function provideFormField(field: FormFieldContext | undefined) {
   setContext(fieldKey, field);
 }
 
-export function useFormField(): FormFieldContext | undefined {
-  return getContext(fieldKey);
+export function useFormField(getInstance?: () => unknown): FormFieldContext | undefined {
+  const field = getContext<FormFieldContext | undefined>(fieldKey);
+  if (field?.registerControl && getInstance) {
+    // Порядок определяется деревом компонентов, а не порядком mount дочерних controls.
+    let mounted = false;
+    const remove = field.registerControl(() => mounted ? getInstance() : undefined);
+    onMount(() => {
+      mounted = true;
+      return () => { mounted = false; };
+    });
+    onDestroy(remove);
+  }
+
+  return field;
 }

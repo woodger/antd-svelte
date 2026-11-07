@@ -93,7 +93,13 @@
   const variantContext = useVariant('treeSelect', () => ({ variant }));
   let appearance = $derived(variantContext.variant);
   const form = useForm();
-  const field = useFormField();
+  const controlRef = {
+    get nativeElement() {
+      return nativeElement;
+    },
+    focus, blur
+  };
+  const field = useFormField(() => controlRef);
   const compact = useCompact();
   const selectTheme = useComponentTheme('Select');
   const treeSelectTheme = useComponentTheme('TreeSelect');

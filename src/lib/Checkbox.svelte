@@ -26,7 +26,7 @@
   const componentTheme = useComponentTheme('Checkbox');
   const wave = useWave('Checkbox', () => resolvedDisabled);
   const form = useForm();
-  const field = useFormField();
+  const field = useFormField(() => ref);
   const group = useCheckboxGroup();
   const initialDefault = untrack(() => props.defaultChecked ?? false);
   const clickLock = createCheckableClickLock();

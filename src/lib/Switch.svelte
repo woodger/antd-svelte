@@ -23,7 +23,7 @@
   const componentTheme = useComponentTheme('Switch');
   const wave = useWave('Switch', () => resolvedDisabled);
   const form = useForm();
-  const field = useFormField();
+  const field = useFormField(() => ref);
   const initialDefault = untrack(() => props.defaultChecked ?? props.defaultValue ?? false);
   const resets = new Set<ReturnType<typeof setTimeout>>();
   let alive = true;
