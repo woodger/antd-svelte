@@ -1,0 +1,967 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "reactVersion": "18.3.1",
+    "operation": "Compare rendered innerText for headers/data/expanded cells, selection controls and table structure. Empty cell scope/spans and native description are checked separately. Raw textContent/total checkbox count and colspan attributes remain diagnostic; native closed TableFilter retains its shell. DOM colSpan defaults are compared as properties."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Name",
+            "textContent": "Name",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": true,
+            "score": false
+          },
+          {
+            "tagName": "TH",
+            "text": "Score",
+            "textContent": "Score",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": true
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "Alpha",
+              "textContent": "Alpha",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            },
+            {
+              "tagName": "TD",
+              "text": "20",
+              "textContent": "20",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Beta",
+              "textContent": "Beta",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            },
+            {
+              "tagName": "TD",
+              "text": "10",
+              "textContent": "10",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Gamma",
+              "textContent": "Gamma",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            },
+            {
+              "tagName": "TD",
+              "text": "30",
+              "textContent": "30",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "140px",
+          "120px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "hide-name",
+      "hideName": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Score",
+            "textContent": "Score",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": true
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "20",
+              "textContent": "20",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "10",
+              "textContent": "10",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "30",
+              "textContent": "30",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "120px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "hide-score",
+      "hideScore": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Name",
+            "textContent": "Name",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": true,
+            "score": false
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "Alpha",
+              "textContent": "Alpha",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Beta",
+              "textContent": "Beta",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Gamma",
+              "textContent": "Gamma",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "140px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "all-hidden",
+      "hideName": true,
+      "hideScore": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "",
+            "textContent": "",
+            "scope": null,
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": false
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [],
+        "colgroups": 0,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "all-hidden-empty",
+      "hideName": true,
+      "hideScore": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "",
+            "textContent": "",
+            "scope": null,
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": false
+          }
+        ],
+        "rows": [],
+        "expanded": [],
+        "empty": [
+          {
+            "tagName": "TD",
+            "text": "No data",
+            "textContent": "No dataNo data",
+            "scope": null,
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": false
+          }
+        ],
+        "colgroup": [],
+        "colgroups": 0,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "all-hidden-selected",
+      "hideName": true,
+      "hideScore": true,
+      "selection": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "",
+            "textContent": "",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": false
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          ""
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 4,
+        "checkboxes": 4
+      }
+    },
+    {
+      "name": "all-hidden-expanded",
+      "hideName": true,
+      "hideScore": true,
+      "expand": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Expand",
+            "textContent": "Expand",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": false
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ]
+        ],
+        "expanded": [
+          {
+            "tagName": "TD",
+            "text": "Details for Alpha",
+            "textContent": "Details for Alpha",
+            "scope": null,
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": false
+          }
+        ],
+        "empty": [],
+        "colgroup": [
+          ""
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "all-hidden-both",
+      "hideName": true,
+      "hideScore": true,
+      "selection": true,
+      "expand": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Expand",
+            "textContent": "Expand",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": false
+          },
+          {
+            "tagName": "TH",
+            "text": "",
+            "textContent": "",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": false
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            },
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            },
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            },
+            {
+              "tagName": "TD",
+              "text": "",
+              "textContent": "",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": false
+            }
+          ]
+        ],
+        "expanded": [
+          {
+            "tagName": "TD",
+            "text": "Details for Alpha",
+            "textContent": "Details for Alpha",
+            "scope": null,
+            "colspan": "2",
+            "colSpan": 2,
+            "name": false,
+            "score": false
+          }
+        ],
+        "empty": [],
+        "colgroup": [
+          "",
+          ""
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 4,
+        "checkboxes": 4
+      }
+    },
+    {
+      "name": "hidden-sort",
+      "hideScore": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Name",
+            "textContent": "Name",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": true,
+            "score": false
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "Beta",
+              "textContent": "Beta",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Alpha",
+              "textContent": "Alpha",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Gamma",
+              "textContent": "Gamma",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "140px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "hidden-filter",
+      "hideScore": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Name",
+            "textContent": "Name",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": true,
+            "score": false
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "Alpha",
+              "textContent": "Alpha",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Gamma",
+              "textContent": "Gamma",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "140px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "fixed-visible",
+      "hideScore": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Name",
+            "textContent": "Name",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": true,
+            "score": false
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "Alpha",
+              "textContent": "Alpha",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Beta",
+              "textContent": "Beta",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "Gamma",
+              "textContent": "Gamma",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": true,
+              "score": false
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "140px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "hide-fixed",
+      "hideName": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Score",
+            "textContent": "Score",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": true
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "20",
+              "textContent": "20",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "10",
+              "textContent": "10",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "30",
+              "textContent": "30",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "120px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "no-header-hidden",
+      "hideName": true,
+      "expected": {
+        "head": [],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "20",
+              "textContent": "20",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "10",
+              "textContent": "10",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "30",
+              "textContent": "30",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "120px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    },
+    {
+      "name": "rtl-hidden",
+      "hideName": true,
+      "expected": {
+        "head": [
+          {
+            "tagName": "TH",
+            "text": "Score",
+            "textContent": "Score",
+            "scope": "col",
+            "colspan": null,
+            "colSpan": 1,
+            "name": false,
+            "score": true
+          }
+        ],
+        "rows": [
+          [
+            {
+              "tagName": "TD",
+              "text": "20",
+              "textContent": "20",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "10",
+              "textContent": "10",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ],
+          [
+            {
+              "tagName": "TD",
+              "text": "30",
+              "textContent": "30",
+              "scope": null,
+              "colspan": null,
+              "colSpan": 1,
+              "name": false,
+              "score": true
+            }
+          ]
+        ],
+        "expanded": [],
+        "empty": [],
+        "colgroup": [
+          "120px"
+        ],
+        "colgroups": 1,
+        "selectionCheckboxes": 0,
+        "checkboxes": 0
+      }
+    }
+  ]
+}

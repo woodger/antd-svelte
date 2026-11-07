@@ -34,6 +34,8 @@ export interface TableColumn<Row extends object> {
   className?: string;
   /** Ячейки данных этой колонки становятся th с указанным scope. */
   rowScope?: 'row' | 'rowgroup';
+  /** Убирает колонку из DOM, сохраняя её сортировку и фильтры данных. @defaultValue false */
+  hidden?: boolean;
   width?: number | string;
   fixed?: TableFixed;
 }

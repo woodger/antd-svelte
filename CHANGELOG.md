@@ -9,6 +9,10 @@
 
 ### Added
 
+- TableColumn.hidden: видимые col/header/body cells и fixed offsets обновляются
+  без сброса sort/filter. Полностью скрытые данные сохраняют selection/expand
+  либо исходную пустую колонку; соседние editors и expanded content сохраняются.
+
 - TableColumn.rowScope: нативные th с scope=row/rowgroup, исходные header colors,
   selection/hover и fixed columns. Обновление scope сохраняет editor/focus/selection;
   обычные ячейки, column headers и expanded rows сохраняют свою семантику.

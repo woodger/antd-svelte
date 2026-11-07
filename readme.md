@@ -9124,6 +9124,26 @@ Snippet создаётся только для видимой раскрытой
 Сравнение 48 состояний UMD: [browser](tests/browser/table-header.spec.ts),
 [SSR](tests/package/table-header.ssr.test.ts), fixture `?fixture=table-header`.
 
+### Видимость колонок
+
+`TableColumn.hidden` по умолчанию false. True убирает col/header/body cells
+колонки и её controls из DOM. Сортировка и активные фильтры этой колонки
+продолжают обрабатывать данные, как InternalTable перед rc-table. Переданный
+список columns остаётся непустым.
+
+При отсутствии видимых колонок данных остаются selection/expand cells.
+Без них таблица показывает одну пустую ячейку на запись и пустой заголовок;
+colgroup в этом случае отсутствует. Empty и expanded cells получают актуальный
+colSpan, минимум 1. Восстановление колонок сохраняет выбранные/раскрытые строки,
+controls соседних ячеек и expanded editor, focus/selection и FormData.
+Смена hidden не вызывает onChange; controls самой скрытой колонки удаляются.
+
+14 случаев UMD: [browser](tests/browser/table-column-hidden.spec.ts),
+[SSR](tests/package/table-column-hidden.ssr.test.ts), fixture `?fixture=table-column-hidden`.
+Сравниваются видимый текст, структура и selection controls. Raw textContent,
+checkbox counts и colspan attributes сохранены: native TableFilter сохраняет
+закрытый popover в DOM, а colSpan=1 может быть явным атрибутом.
+
 ### Заголовки строк
 
 `TableColumn.rowScope` принимает `'row'` или `'rowgroup'`: ячейки данных этой

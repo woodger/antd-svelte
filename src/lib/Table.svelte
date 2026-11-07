@@ -142,11 +142,13 @@
   let table = $state<HTMLTableElement>();
   let expansionOffset = $derived(expandable ? 1 : 0);
   let dataOffset = $derived(expansionOffset + (rowSelection ? 1 : 0));
+  // Hidden влияет только на разметку: InternalTable сохраняет sort/filter до rc-table.
+  let visibleColumns = $derived(columns.filter(column => !column.hidden));
   let fixedColumns = $derived(
     [
       ...(expandable ? [expandable.fixed ?? false] : []),
       ...(rowSelection ? [selectionOptions?.fixed ?? false] : []),
-      ...columns.map((column) => column.fixed)
+      ...visibleColumns.map((column) => column.fixed)
     ]
   );
   let fixedCells = $derived(fixedColumns.map((fixed, index) => ({
@@ -405,7 +407,7 @@
         ]} style:max-height={typeof scroll?.y === 'number' ? `${scroll.y}px` : scroll?.y} role="region" aria-label={caption ?? ariaLabel ?? strings.label} tabindex="0">
         <table bind:this={table} aria-label={ariaLabel ?? (caption ? undefined : strings.label)} aria-busy={loading || undefined} style:min-width={typeof scroll?.x === 'number' ? `${scroll.x}px` : scroll?.x}>
           {#if caption}<caption>{caption}</caption>{/if}
-          <colgroup>
+          {#if visibleColumns.length || dataOffset}<colgroup>
             {#if expandable}<col class={designTheme.enabled ? 'ant-table-expand-icon-col' : undefined}
               style:width={typeof expandable.columnWidth === 'number'
                 ? `${expandable.columnWidth}px`
@@ -413,10 +415,10 @@
             {#if rowSelection}<col class={designTheme.enabled ? 'ant-table-selection-col' : undefined}
               style:width={typeof selectionWidth === 'number'
                 ? `${selectionWidth}px` : selectionWidth} />{/if}
-            {#each columns as column (column.key)}<col style:width={typeof column.width === 'number'
+            {#each visibleColumns as column (column.key)}<col style:width={typeof column.width === 'number'
                 ? `${column.width}px`
                 : column.width} />{/each}
-          </colgroup>
+          </colgroup>{/if}
           {#if showHeader}<thead class="ant-table-thead">
             <tr>
               {#if expandable}
@@ -441,7 +443,7 @@
                     )} />
                 </th>
               {/if}
-              {#each columns as column, columnIndex (column.key)}
+              {#each visibleColumns as column, columnIndex (column.key)}
                 {@const sortable = typeof column.sorter === 'function' || (mode === 'server' && column.sorter === true)}
                 {@const order = tableData.sorter?.columnKey === column.key ? tableData.sorter.order : undefined}
                 {@const fixed = fixedCells[columnIndex + dataOffset]}
@@ -481,6 +483,8 @@
                     {/if}
                   </div>
                 </th>
+              {:else}
+                {#if !dataOffset}<th class="ant-table-cell"></th>{/if}
               {/each}
             </tr>
           </thead>{/if}
@@ -527,7 +531,7 @@
                           )} />
                   </td>
                 {/if}
-                {#each columns as column, columnIndex (column.key)}
+                {#each visibleColumns as column, columnIndex (column.key)}
                   {@const fixed = fixedCells[columnIndex + dataOffset]}
                   <svelte:element this={column.rowScope ? 'th' : 'td'} scope={column.rowScope} class={[
                       'ant-table-cell',
@@ -538,13 +542,15 @@
                     ]} style:inset-inline-start={fixed.side === 'start' ? fixed.offset : undefined} style:inset-inline-end={fixed.side === 'end' ? fixed.offset : undefined} style:z-index={fixed.side ? 1 : undefined} style:text-align={column.align}>
                     {#if column.render}{@render column.render(row.record, index)}{:else}{cellValue(row.record, column.dataIndex)}{/if}
                   </svelte:element>
+                {:else}
+                  {#if !dataOffset}<td class="ant-table-cell"></td>{/if}
                 {/each}
               </tr>
               {#if expanded && expandable}
-                <tr class="ant-table-expanded-row"><td class="ant-table-cell" colspan={columns.length + dataOffset}><div class="expanded-content" id={expansionId(row.key)}>{@render expandable.expandedRowRender(row.record, index)}</div></td></tr>
+                <tr class="ant-table-expanded-row"><td class="ant-table-cell" colspan={Math.max(visibleColumns.length + dataOffset, 1)}><div class="expanded-content" id={expansionId(row.key)}>{@render expandable.expandedRowRender(row.record, index)}</div></td></tr>
               {/if}
             {:else}
-              <tr class="ant-table-placeholder"><td class="ant-table-cell" colspan={columns.length + dataOffset}>{#if !loading}
+              <tr class="ant-table-placeholder"><td class="ant-table-cell" colspan={Math.max(visibleColumns.length + dataOffset, 1)}>{#if !loading}
                 {#snippet nativeEmpty()}<Empty image="simple" description={strings.emptyText} />{/snippet}
                 <RenderEmpty componentName="Table" local={empty} fallback={nativeEmpty} />
               {:else}&nbsp;{/if}</td></tr>

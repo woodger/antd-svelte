@@ -11143,7 +11143,12 @@
         "tests/browser/table-row-scope-metrics.ts",
         "tests/browser/fixtures/TableRowScopeFixtures.svelte",
         "tests/browser/fixtures/ant-design-table-row-scope-reference.json",
-        "tests/package/table-row-scope.ssr.test.ts"
+        "tests/package/table-row-scope.ssr.test.ts",
+        "tests/browser/table-column-hidden.spec.ts",
+        "tests/browser/table-column-hidden-metrics.ts",
+        "tests/browser/fixtures/TableColumnHiddenFixtures.svelte",
+        "tests/browser/fixtures/ant-design-table-column-hidden-reference.json",
+        "tests/package/table-column-hidden.ssr.test.ts"
       ],
       "features": [
         {
@@ -11274,6 +11279,23 @@
             "readme.md"
           ],
           "note": "RowScope задаёт th/scope только ячейкам данных своей колонки; default td, column headers, selection/expand и expanded rows сохраняются. Header aliases, selected/hover, sorted/fixed, RTL/dark/compact проверяются по 18 raw UMD cases. Sticky paint сохраняет прежнюю непрозрачную base под source headerBg; это явно отдельные CSS layers, а не подмена measured source CSS. Row→rowgroup сохраняет DOM/editor/focus/selection/FormData, смена типа th/td пересоздаёт содержимое, как Source React."
+        },
+        {
+          "id": "column-hidden",
+          "title": "Column hidden: видимость с сохранением sort/filter",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Table.svelte",
+            "src/lib/table.types.ts",
+            "tests/browser/table-column-hidden.spec.ts",
+            "tests/browser/table-column-hidden-metrics.ts",
+            "tests/browser/fixtures/TableColumnHiddenFixtures.svelte",
+            "tests/browser/fixtures/ant-design-table-column-hidden-reference.json",
+            "tests/package/table-column-hidden.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Hidden убирает col/header/body cells; сортировка/фильтры продолжают использовать все исходные columns, как InternalTable перед rc-table. Полностью скрытые данные оставляют selection/expand columns либо одну пустую колонку без colgroup; пустой header сохраняет исходный unset scope. Empty/expanded spans учитывают видимые колонки и минимум1. 14 UMD cases задают data pipeline/DOM, отдельные сценарии сохраняют live sorting, соседние row headers/editors/focus/selection/FormData и expanded editor. Raw textContent/checkbox counts/colspan attrs сохранены; UI сравнивается по innerText и selection controls, потому что принятый native TableFilter сохраняет закрытый shell. Исходное требование непустого columns сохраняется; callback onChange при prop update не вызывается."
         }
       ]
     },
