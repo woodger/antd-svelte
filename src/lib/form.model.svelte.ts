@@ -1,4 +1,4 @@
-import { untrack } from 'svelte';
+import { tick, untrack } from 'svelte';
 import { FormValidationError } from './FormValidationError';
 import { setFormHooks, type FormFieldRegistration } from './form-internal';
 import {
@@ -74,8 +74,8 @@ export function createForm<Values extends FormValues>({
   const defaults = copyFormValue(initialValues);
   let revision = $state(0);
   let request = 0;
-  // Store меняется только через setters; версия уведомляет readers, не проксируя пользовательские данные.
-  let values = $state.raw<Values>(copyFormValue(defaults));
+  let values = $state<Values>(copyFormValue(defaults));
+  let resetKey = $state.raw<object>({});
   let fields = $state<StoredField[]>([]);
   let isSubmitting = $state(false);
   let submissionError = $state.raw<unknown>();
@@ -179,16 +179,21 @@ export function createForm<Values extends FormValues>({
     }
   }
 
-  // Сохраняем identity корня до reset: native controls используют её как resetKey.
   function updateValues(next: Values) {
+    // Svelte перечисляет inherited names лишь при наличии own property в исходном target.
+    if (Object.keys(next).some((name) => !Object.hasOwn(values, name)
+      && Object.hasOwn(Object.prototype, name))) {
+      values = copyFormValue(next);
+
+      return;
+    }
+
     for (const name of Object.keys(values)) {
       if (!Object.hasOwn(next, name)) delete (values as FormValues)[name];
     }
 
     for (const name of Object.keys(next)) {
-      Object.defineProperty(values, name, {
-        value: next[name], enumerable: true, configurable: true, writable: true
-      });
+      (values as FormValues)[name] = next[name];
     }
   }
 
@@ -270,6 +275,18 @@ export function createForm<Values extends FormValues>({
     resetFields() {
       revision++;
       values = copyFormValue(defaults);
+      resetKey = {};
+
+      for (const field of fields) {
+        const registration = field.registration;
+        const path = fieldPath(field);
+
+        if (registration?.isList && !registration.isListField
+          && registration.initialValue !== undefined
+          && getFormValue(values, path) === undefined) {
+          updateValues(setFormValue(values, path, registration.initialValue) as Values);
+        }
+      }
 
       for (const field of fields) {
         field.errors = undefined;
@@ -308,9 +325,42 @@ export function createForm<Values extends FormValues>({
     }
   };
 
+  function initializeList(name: NamePath, initialValue?: readonly unknown[]) {
+    untrack(() => {
+      if (initialValue !== undefined && getFormValue(values, name) === undefined) {
+        updateValues(setFormValue(values, name, initialValue) as Values);
+        revision++;
+      }
+    });
+  }
+
   setFormHooks(form, {
+    get resetKey() {
+      return resetKey;
+    },
+    initializeList,
+    changeList(name, next) {
+      updateValues(setFormValue(values, name, next) as Values);
+      revision++;
+      submissionError = undefined;
+      const list = ensureField(name);
+      clearField(list);
+      list.touched = true;
+
+      for (const field of fields) {
+        if (field !== list && containsFormPath(name, fieldPath(field))) {
+          field.run = ++request;
+          field.validating = false;
+        }
+      }
+
+      // Имена keyed rows обновятся при flush; metadata остаётся у прежнего экземпляра строки.
+      void tick().then(revalidateTouched);
+    },
     registerField(registration) {
       return untrack(() => {
+        if (registration.isList) initializeList(registration.name, registration.initialValue);
+
         let field = findField(registration.name);
 
         if (!field || field.registration) {
@@ -324,13 +374,17 @@ export function createForm<Values extends FormValues>({
         registered.registration = registration;
 
         return () => {
-          registered.run = ++request;
           if (registered.persistent) {
+            if (registration.rules !== undefined) {
+              registered.run = ++request;
+              registered.errors = undefined;
+              registered.touched = false;
+              registered.validating = false;
+            }
+
             registered.registration = undefined;
-            registered.errors = undefined;
-            registered.touched = false;
-            registered.validating = false;
           } else {
+            registered.run = ++request;
             fields = fields.filter((entry) => entry !== registered);
           }
         };

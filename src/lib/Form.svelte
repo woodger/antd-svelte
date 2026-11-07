@@ -4,6 +4,7 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { provideForm } from './form-context';
   import { getFormHooks } from './form-internal';
+  import { provideFormList } from './form-list-context';
   import type { FormProps } from './form.types';
   import type { FormValues } from './validation.engine';
 
@@ -30,6 +31,8 @@
     active = false;
   });
 
+  provideFormList(undefined);
+
   provideForm({
     get variant() {
       return variant;
@@ -41,12 +44,20 @@
       return layout;
     },
     get resetKey() {
-      return form.values;
+      return getFormHooks(form)?.resetKey ?? form.values;
     },
     getFieldError: (name) => form.getFieldError(name),
     isFieldRequired: (name) => form.isFieldRequired(name),
     touchField: (name) => form.touchField(name),
-    registerField: (field) => getFormHooks(form)?.registerField(field)
+    registerField: (field) => getFormHooks(form)?.registerField(field),
+    getFieldValue: (name) => form.getFieldValue(name),
+    initializeList: (name, initialValue) => getFormHooks(form)?.initializeList(name, initialValue),
+    changeList: (name, values) => {
+      const hooks = getFormHooks(form);
+      if (!hooks) throw new Error('FormList requires a createForm model');
+
+      hooks.changeList(name, values);
+    }
   });
 
   async function handleSubmit(

@@ -4,10 +4,11 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { formNamePath, type NamePath } from './form-store.engine';
   import type { ValidationRule } from './validation.engine';
+  import { useFormList } from './form-list-context';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
-    /** Буквальный ключ либо вложенный путь. Строка с точкой не разбивается на сегменты. */
+    /** Буквальный ключ либо путь от ближайшего FormList; строка с точкой остаётся одним ключом. */
     name: NamePath;
     label: string;
     children: Snippet;
@@ -31,30 +32,37 @@
   }: FormItemProps = $props();
 
   const form = useForm();
+  const list = useFormList();
   const componentTheme = useComponentTheme('Form');
   const generatedId = $props.id();
   let id = $derived(htmlFor ?? `ant-field-${generatedId}`);
-  let errors = $derived(form?.getFieldError(name) ?? []);
+  let path = $derived([...(list?.prefixName ?? []), ...formNamePath(name)]);
+  let errors = $derived(form?.getFieldError(path) ?? []);
   let isRequired = $derived(required
-    ?? (rules ? rules.some((rule) => rule.required) : form?.isFieldRequired(name))
+    ?? (rules ? rules.some((rule) => rule.required) : form?.isFieldRequired(path))
     ?? false);
   let descriptionId = $derived(errors.length || help ? `${id}-help` : undefined);
 
-  $effect.pre(() => form?.registerField?.({
-    get name() {
-      return name;
-    },
-    get rules() {
-      return rules;
-    }
-  }));
+  $effect.pre(() => {
+    // В списке metadata следует за key строки; обычное поле хранит её по имени модели.
+    const registeredName = list ? undefined : path;
+
+    return form?.registerField?.({
+      get name() {
+        return registeredName ?? path;
+      },
+      get rules() {
+        return rules;
+      }
+    });
+  });
 
   provideFormField({
     get id() {
       return id;
     },
     get name() {
-      return formNamePath(name).map(String).join('_');
+      return path.map(String).join('_');
     },
     get label() {
       return label;
@@ -72,7 +80,7 @@
       return descriptionId;
     },
     onBlur() {
-      form?.touchField(name);
+      form?.touchField(path);
     }
   });
 

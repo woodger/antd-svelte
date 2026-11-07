@@ -12,6 +12,9 @@ export interface FormContext {
   isFieldRequired(name: NamePath): boolean;
   touchField(name: NamePath): void;
   registerField?(field: FormFieldRegistration): (() => void) | undefined;
+  getFieldValue(name: NamePath): unknown;
+  initializeList(name: NamePath, initialValue?: readonly unknown[]): void;
+  changeList(name: NamePath, values: readonly unknown[]): void;
 }
 
 export interface FormFieldContext {

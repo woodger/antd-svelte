@@ -49,7 +49,7 @@ test('Form connects nested errors, labels and native names without conflating li
 
   await expect(page.getByRole('status', { name: 'Submitted nested values', exact: true }))
     .toContainText('"rows":[{"title":"Saved"},{"title":"Second"}]');
-  expect(await page.locator('#form-paths-fixture form').evaluate((form) =>
+  expect(await page.locator('#form-paths-model').evaluate((form) =>
     Array.from(new FormData(form as HTMLFormElement).entries())
   )).toEqual([['user_name', 'Anna'], ['user.name', 'Literal'], ['rows_0_title', 'Saved']]);
 });
@@ -124,4 +124,34 @@ test('Form retains model rules when an initial field leaves the DOM', async ({ p
   await expect(page.getByRole('status', { name: 'Nested errors', exact: true }))
     .toHaveText('[{"name":["user.name"],"errors":["Literal required"],"warnings":[]}]');
   await expect(page.getByRole('status', { name: 'Submitted nested values', exact: true })).toBeEmpty();
+});
+
+test('Form keeps a cached values reference reactive while setters update the model', async ({ page }) => {
+  await page.getByRole('button', { name: 'Set nested name', exact: true }).click();
+
+  await expect(page.getByRole('status', { name: 'Cached values name', exact: true }))
+    .toHaveText('Alice');
+  await page.getByLabel('Nested name', { exact: true }).fill('Updated');
+
+  await expect(page.getByRole('status', { name: 'Cached values name', exact: true }))
+    .toHaveText('Updated');
+});
+
+test('Form keeps model errors on their names when a field switches between flat keys', async ({ page }) => {
+  const field = page.getByLabel('Dynamic model field', { exact: true });
+  const id = await field.getAttribute('id');
+  await field.focus();
+  await field.blur();
+  await expect(field).toHaveAccessibleDescription('First required');
+  await page.getByRole('button', { name: 'Switch model field', exact: true }).click();
+
+  await expect(field).toHaveAttribute('id', id!);
+  await expect(field).toHaveValue('Ready');
+  await expect(field).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(page.getByRole('status', { name: 'First model errors', exact: true }))
+    .toHaveText('["First required"]');
+  await page.getByRole('button', { name: 'Switch model field', exact: true }).click();
+
+  await expect(field).toHaveValue('');
+  await expect(field).toHaveAccessibleDescription('First required');
 });

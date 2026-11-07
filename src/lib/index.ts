@@ -368,6 +368,7 @@ export { default as Select } from './Select.svelte';
 export { default as Modal } from './Modal.svelte';
 export { default as Form } from './Form.svelte';
 export { default as FormItem } from './FormItem.svelte';
+export { default as FormList } from './FormList.svelte';
 export { createForm, type FormInstance, type SubmissionResult } from './form.model.svelte.js';
 export { FormValidationError } from './FormValidationError';
 export type { ButtonProps } from './Button.svelte';
@@ -755,6 +756,13 @@ export type {
   ShowWaveEffect
 } from './wave.types';
 export type { FormItemProps } from './FormItem.svelte';
+export type {
+  FormListProps,
+  FormListFieldData,
+  FormListOperation,
+  FormListMeta,
+  FormListRule
+} from './form-list.types';
 export type {
   ValidationRule,
   FormRules,

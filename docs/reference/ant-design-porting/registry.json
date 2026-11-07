@@ -4746,7 +4746,7 @@
       "name": "Form",
       "category": "data-entry",
       "scope": "target",
-      "scopeReason": "Текущий Form с вложенными NamePath и локальными правилами; общий подробный аудит API ещё не завершён.",
+      "scopeReason": "Текущий Form с вложенными NamePath, локальными правилами и Form.List; полный аудит API продолжается.",
       "upstreamPath": "components/form",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -4762,6 +4762,12 @@
           "upstream": "Form.Item",
           "local": [
             "FormItem"
+          ]
+        },
+        {
+          "upstream": "Form.List",
+          "local": [
+            "FormList"
           ]
         }
       ],
@@ -4811,7 +4817,22 @@
         "tests/browser/form-paths.spec.ts",
         "tests/browser/fixtures/FormPathsFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-name-paths-observation.json",
-        "tests/package/form-paths.ssr.test.ts"
+        "tests/package/form-paths.ssr.test.ts",
+        "src/lib/FormList.svelte",
+        "src/lib/form-list.types.ts",
+        "src/lib/form-list.engine.ts",
+        "src/lib/form-list.engine.test.ts",
+        "src/lib/form-list-context.ts",
+        "src/lib/vendor/LICENSE.rc-form",
+        "tests/browser/form-list.spec.ts",
+        "tests/browser/fixtures/FormListFixtures.svelte",
+        "tests/browser/fixtures/FormListDefaultsFixtures.svelte",
+        "tests/browser/fixtures/FormListNestedFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-list-observation.json",
+        "tests/package/form-list.ssr.test.ts",
+        "tests/browser/fixtures/FormValuesView.svelte",
+        "tests/browser/fixtures/FormListSparseFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-sparse-list-observation.json"
       ],
       "features": [
         {
@@ -4824,7 +4845,7 @@
         },
         {
           "id": "gap-1",
-          "title": "Form.List и вложенные name paths",
+          "title": "Полный API Form.List и вложенных name paths",
           "state": "partial",
           "requiredForV1": false,
           "evidence": [
@@ -4838,9 +4859,24 @@
             "tests/browser/form-paths.spec.ts",
             "tests/browser/fixtures/FormPathsFixtures.svelte",
             "tests/browser/fixtures/ant-design-form-name-paths-observation.json",
-            "tests/package/form-paths.ssr.test.ts"
+            "tests/package/form-paths.ssr.test.ts",
+            "src/lib/FormList.svelte",
+            "src/lib/form-list.types.ts",
+            "src/lib/form-list.engine.ts",
+            "src/lib/form-list.engine.test.ts",
+            "src/lib/form-list-context.ts",
+            "src/lib/vendor/LICENSE.rc-form",
+            "tests/browser/form-list.spec.ts",
+            "tests/browser/fixtures/FormListFixtures.svelte",
+            "tests/browser/fixtures/FormListDefaultsFixtures.svelte",
+            "tests/browser/fixtures/FormListNestedFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-list-observation.json",
+            "tests/package/form-list.ssr.test.ts",
+            "tests/browser/fixtures/FormValuesView.svelte",
+            "tests/browser/fixtures/FormListSparseFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-sparse-list-observation.json"
           ],
-          "note": "NamePath поддерживает string/number и массивы сегментов без dot parsing; числовые сегменты создают массивы, string 0 — объект. Вложенные setters/getters, deep object merge с заменой массивов, FormItem.rules, field metadata/cleanup и errorFields сверены с pin. Сохранены Svelte clone isolation, native name через _, root reset identity, blur/dependent revalidation и submit lock. Form.List ещё отсутствует; warningOnly, полный validation/options и field adapters остаются за текущим объёмом."
+          "note": "NamePath и FormList core перенесены: массивы, add/remove/move, stable keys, вложенный prefix, initialValue/reset и custom error validators. Полный API остаётся partial: warningOnly, Form.ErrorList/prefixCls context, validation options, field adapters и остальные настройки Form ещё не перенесены."
         },
         {
           "id": "dayjs-values",
@@ -4909,9 +4945,33 @@
             "tests/browser/form-paths.spec.ts",
             "tests/browser/fixtures/FormPathsFixtures.svelte",
             "tests/browser/fixtures/ant-design-form-name-paths-observation.json",
-            "tests/package/form-paths.ssr.test.ts"
+            "tests/package/form-paths.ssr.test.ts",
+            "tests/browser/fixtures/FormValuesView.svelte"
           ],
-          "note": "Проверены буквальные dotted keys, numeric/string segments, новые поля вне initialValues, nested merge/array replacement, reset, snapshots/Dayjs, native labels/names/errors/focus, смена пути и удаление с pending validation. getFieldsError/errorFields сохраняют сегменты; прежний errors остаётся проекцией верхнего уровня. Источник — неизменённый UMD 6.6.8, отдельно изучен rc-form 1.8.6. Это частичный этап текущего Form API."
+          "note": "Проверены буквальные dotted keys, numeric/string segments, новые поля вне initialValues, nested merge/array replacement, reset, snapshots/Dayjs, native labels/names/errors/focus, смена пути и удаление с pending validation. getFieldsError/errorFields сохраняют сегменты; прежний errors остаётся проекцией верхнего уровня. Источник — неизменённый UMD 6.6.8, отдельно изучен rc-form 1.8.6. Это частичный этап текущего Form API. Сохранена реактивность values, переданных дочернему компоненту по сохранённой ссылке; native reset использует отдельную identity. При смене name обычного FormItem metadata остаётся у имени модели; модельные правила сохраняют errors/touched и pending validation без UI, локальные правила снимаются. В FormList metadata следует за key."
+        },
+        {
+          "id": "list-operations",
+          "title": "Массивы FormList, ключи, вложенность и custom validation",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormList.svelte",
+            "src/lib/form-list.types.ts",
+            "src/lib/form-list.engine.ts",
+            "src/lib/form-list.engine.test.ts",
+            "src/lib/form-list-context.ts",
+            "src/lib/vendor/LICENSE.rc-form",
+            "tests/browser/form-list.spec.ts",
+            "tests/browser/fixtures/FormListFixtures.svelte",
+            "tests/browser/fixtures/FormListDefaultsFixtures.svelte",
+            "tests/browser/fixtures/FormListNestedFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-list-observation.json",
+            "tests/package/form-list.ssr.test.ts",
+            "tests/browser/fixtures/FormListSparseFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-sparse-list-observation.json"
+          ],
+          "note": "Изучены Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d и rc-form 1.8.6. Поддержаны текущие индексы/ключи, add с вставкой/defaultValue, remove-many, move, external replacement/shrink, вложенные списки и независимый Form, Form initialValues над List initialValue, reset/remount и pending validation cleanup. Svelte Snippet заменяет render prop, each ключуется field.key; bindings используют полный путь, имена FormItem относительны списку. Meta.warnings пока пуст. Подтверждённый дефект upstream: move(0.5,1) на двух строках теряет первую и вставляет undefined (raw observation); здесь дробные move игнорируются. PrefixCls/ErrorList и warningOnly остаются за этим этапом. Регистрация сохраняется через Svelte $state proxy и переключается при замене модели, включая завершение старой async validation. Sparse positions рендерятся плотным массивом descriptors с исходными name/key; root setFieldValue и add сверены с отдельным raw reference. Там же сохранены наблюдения для общего аудита Form: initialValues merge upstream материализует holes в массивах объектов, а вложенная запись за границы List меняет store без немедленного показа строки. Svelte сохраняет исходные holes и обновляет List реактивно."
         }
       ]
     },

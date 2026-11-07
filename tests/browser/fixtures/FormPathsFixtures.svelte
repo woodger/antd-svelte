@@ -1,5 +1,6 @@
 <script lang="ts">
   import { Button, Form, FormItem, Input, createForm, type FieldError } from 'antd-svelte';
+  import FormValuesView from './FormValuesView.svelte';
 
   const form = createForm({
     initialValues: {
@@ -9,6 +10,12 @@
     },
     rules: { 'user.name': [{ required: true, message: 'Literal required' }] }
   });
+  const values = form.values;
+  const dynamic = createForm({
+    initialValues: { first: '', second: 'Ready' },
+    rules: { first: [{ required: true, message: 'First required' }] }
+  });
+  let second = $state(false);
   let errors = $state<readonly FieldError[]>([]);
   let outOfDate = $state(false);
   let failure = $state('');
@@ -41,6 +48,7 @@
 
 <section id="form-paths-fixture" aria-label="Nested form">
   <Form
+    id="form-paths-model"
     {form}
     onFinish={(values) => { submitted = JSON.stringify(values); }}
     onError={(error) => { failure = String(error); }}
@@ -97,6 +105,7 @@
   <label><input type="checkbox" bind:checked={asyncValidation} /> Hold title validation</label>
   <button onclick={completeValidation}>Reject pending title</button>
   <output aria-label="Nested values">{JSON.stringify(form.values)}</output>
+  <FormValuesView {values} />
   <output aria-label="Nested errors">{JSON.stringify(errors)}</output>
   <output aria-label="Validation out of date">{String(outOfDate)}</output>
   <output aria-label="Submission failure">{failure}</output>
@@ -104,4 +113,14 @@
   <output aria-label="Title touched">{String(form.isFieldTouched(['rows', 0, 'title']))}</output>
   <output aria-label="Pending title validations">{validationCount}</output>
   <output aria-label="Validated title">{observedError}</output>
+  <Form form={dynamic}>
+    <FormItem name={second ? 'second' : 'first'} label="Dynamic model field">
+      <Input
+        value={dynamic.values[second ? 'second' : 'first']}
+        onValueChange={(value) => dynamic.setFieldValue(second ? 'second' : 'first', value)}
+      />
+    </FormItem>
+  </Form>
+  <button onclick={() => { second = !second; }}>Switch model field</button>
+  <output aria-label="First model errors">{JSON.stringify(dynamic.getFieldError('first'))}</output>
 </section>

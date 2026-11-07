@@ -135,6 +135,12 @@
 
 ### Added
 
+- FormList: вложенные списки, initialValue, add/remove/move, устойчивые ключи,
+  custom validation и reset. Сохранены controls, фокус и полевые ошибки при
+  перестановке; ошибки удалённых строк не возвращаются после async validation.
+  Дробный индекс move игнорируется: подтверждённая потеря строки в upstream
+  не воспроизводится.
+
 - Form поддерживает вложенные NamePath, getFieldValue/getFieldsError,
   FormItem.rules и errorFields. Строки с точками остаются буквальными ключами;
   setFieldsValue объединяет объекты и заменяет массивы. Сохранены createForm,

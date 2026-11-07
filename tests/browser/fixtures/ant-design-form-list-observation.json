@@ -1,0 +1,430 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "react": "18.3.1",
+    "source": "unmodified official UMD, runtime CSS-in-JS, no static CSS",
+    "delegatedForm": "1.8.6, reviewed separately from the bundled UMD"
+  },
+  "cases": [
+    {
+      "id": "initial",
+      "values": {
+        "users": [
+          {
+            "name": "Anna"
+          },
+          {
+            "name": "Bob"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 0
+        },
+        {
+          "name": 1,
+          "key": 1
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-0",
+          "value": "Anna"
+        },
+        {
+          "id": "user-1",
+          "value": "Bob"
+        }
+      ]
+    },
+    {
+      "id": "insert",
+      "values": {
+        "users": [
+          {
+            "name": "Anna"
+          },
+          {
+            "name": "Cora"
+          },
+          {
+            "name": "Bob"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 0
+        },
+        {
+          "name": 1,
+          "key": 2
+        },
+        {
+          "name": 2,
+          "key": 1
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-0",
+          "value": "Anna"
+        },
+        {
+          "id": "user-2",
+          "value": "Cora"
+        },
+        {
+          "id": "user-1",
+          "value": "Bob"
+        }
+      ]
+    },
+    {
+      "id": "move",
+      "values": {
+        "users": [
+          {
+            "name": "Bob"
+          },
+          {
+            "name": "Anna"
+          },
+          {
+            "name": "Cora"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 1
+        },
+        {
+          "name": 1,
+          "key": 0
+        },
+        {
+          "name": 2,
+          "key": 2
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-1",
+          "value": "Bob"
+        },
+        {
+          "id": "user-0",
+          "value": "Anna"
+        },
+        {
+          "id": "user-2",
+          "value": "Cora"
+        }
+      ]
+    },
+    {
+      "id": "remove-many",
+      "values": {
+        "users": [
+          {
+            "name": "Bob"
+          },
+          {
+            "name": "Cora"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 1
+        },
+        {
+          "name": 1,
+          "key": 2
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-1",
+          "value": "Bob"
+        },
+        {
+          "id": "user-2",
+          "value": "Cora"
+        }
+      ]
+    },
+    {
+      "id": "append-invalid-index",
+      "values": {
+        "users": [
+          {
+            "name": "Bob"
+          },
+          {
+            "name": "Cora"
+          },
+          {
+            "name": "Dina"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 1
+        },
+        {
+          "name": 1,
+          "key": 2
+        },
+        {
+          "name": 2,
+          "key": 3
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-1",
+          "value": "Bob"
+        },
+        {
+          "id": "user-2",
+          "value": "Cora"
+        },
+        {
+          "id": "user-3",
+          "value": "Dina"
+        }
+      ]
+    },
+    {
+      "id": "ignore-invalid-move",
+      "values": {
+        "users": [
+          {
+            "name": "Bob"
+          },
+          {
+            "name": "Cora"
+          },
+          {
+            "name": "Dina"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 1
+        },
+        {
+          "name": 1,
+          "key": 2
+        },
+        {
+          "name": 2,
+          "key": 3
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-1",
+          "value": "Bob"
+        },
+        {
+          "id": "user-2",
+          "value": "Cora"
+        },
+        {
+          "id": "user-3",
+          "value": "Dina"
+        }
+      ]
+    },
+    {
+      "id": "external-replacement",
+      "values": {
+        "users": [
+          {
+            "name": "Evan"
+          },
+          {
+            "name": "Fran"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 1
+        },
+        {
+          "name": 1,
+          "key": 2
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-1",
+          "value": "Evan"
+        },
+        {
+          "id": "user-2",
+          "value": "Fran"
+        }
+      ]
+    },
+    {
+      "id": "external-shrink",
+      "values": {
+        "users": [
+          {
+            "name": "Gina"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 1
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-1",
+          "value": "Gina"
+        }
+      ]
+    },
+    {
+      "id": "append-after-shrink",
+      "values": {
+        "users": [
+          {
+            "name": "Gina"
+          },
+          {
+            "name": "Hana"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 1
+        },
+        {
+          "name": 1,
+          "key": 2
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-1",
+          "value": "Gina"
+        },
+        {
+          "id": "user-2",
+          "value": "Hana"
+        }
+      ]
+    },
+    {
+      "id": "reset",
+      "values": {
+        "users": [
+          {
+            "name": "Anna"
+          },
+          {
+            "name": "Bob"
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 1
+        },
+        {
+          "name": 1,
+          "key": 2
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [],
+      "inputs": [
+        {
+          "id": "user-1",
+          "value": "Anna"
+        },
+        {
+          "id": "user-2",
+          "value": "Bob"
+        }
+      ]
+    },
+    {
+      "id": "fractional-move-observation",
+      "values": {
+        "users": [
+          {
+            "name": "Bob"
+          },
+          null
+        ]
+      },
+      "fields": [
+        {
+          "name": 0,
+          "key": 2
+        },
+        {
+          "name": 1,
+          "key": 5
+        }
+      ],
+      "errors": [],
+      "undefinedRowIndices": [
+        1
+      ],
+      "inputs": [
+        {
+          "id": "user-2",
+          "value": "Bob"
+        },
+        {
+          "id": "user-5",
+          "value": ""
+        }
+      ]
+    }
+  ]
+}

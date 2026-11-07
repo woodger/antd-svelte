@@ -1,0 +1,174 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "react": "18.3.1",
+    "source": "unmodified official UMD, runtime CSS-in-JS, no static CSS",
+    "delegatedForm": "1.8.6, reviewed separately from the bundled UMD",
+    "operation": "cases: replace the users array with a sparse array through setFieldValue after mounting an empty Form.List, then add. Other observations come from separate probes on the same pinned UMD."
+  },
+  "cases": [
+    {
+      "id": "sparse-array-write",
+      "values": {
+        "users": [
+          null,
+          null,
+          {
+            "name": "Sparse row"
+          }
+        ]
+      },
+      "valueIndices": [
+        "2"
+      ],
+      "fieldIndices": [
+        "2"
+      ],
+      "renderedFields": [
+        {
+          "name": 2,
+          "key": 0
+        }
+      ],
+      "inputs": [
+        {
+          "id": "user-0",
+          "value": "Sparse row"
+        }
+      ]
+    },
+    {
+      "id": "append-after-sparse",
+      "values": {
+        "users": [
+          null,
+          null,
+          {
+            "name": "Sparse row"
+          },
+          {
+            "name": "Hana"
+          }
+        ]
+      },
+      "valueIndices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "fieldIndices": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "renderedFields": [
+        {
+          "name": 0,
+          "key": 2
+        },
+        {
+          "name": 1,
+          "key": 3
+        },
+        {
+          "name": 2,
+          "key": 0
+        },
+        {
+          "name": 3,
+          "key": 1
+        }
+      ],
+      "inputs": [
+        {
+          "id": "user-2",
+          "value": ""
+        },
+        {
+          "id": "user-3",
+          "value": ""
+        },
+        {
+          "id": "user-0",
+          "value": "Sparse row"
+        },
+        {
+          "id": "user-1",
+          "value": "Hana"
+        }
+      ]
+    }
+  ],
+  "initialObjectNormalization": {
+    "id": "initial-sparse",
+    "values": {
+      "users": [
+        null,
+        null,
+        {
+          "name": "Sparse row"
+        }
+      ]
+    },
+    "valueIndices": [
+      "0",
+      "1",
+      "2"
+    ],
+    "fieldIndices": [
+      "0",
+      "1",
+      "2"
+    ],
+    "renderedFields": [
+      {
+        "name": 0,
+        "key": 0
+      },
+      {
+        "name": 1,
+        "key": 1
+      },
+      {
+        "name": 2,
+        "key": 2
+      }
+    ],
+    "inputs": [
+      {
+        "id": "user-0",
+        "value": ""
+      },
+      {
+        "id": "user-1",
+        "value": ""
+      },
+      {
+        "id": "user-2",
+        "value": "Sparse row"
+      }
+    ]
+  },
+  "nestedPathWrite": {
+    "id": "sparse-path-write",
+    "values": {
+      "users": [
+        null,
+        null,
+        {
+          "name": "Sparse row"
+        }
+      ]
+    },
+    "valueIndices": [
+      "2"
+    ],
+    "fieldIndices": [],
+    "renderedFields": [],
+    "inputs": []
+  }
+}

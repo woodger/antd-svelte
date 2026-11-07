@@ -199,6 +199,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Space / SpaceCompact / SpaceAddon | Wrappers/gaps/separators, компактные стыки controls, размеры, вложенность и addon variants/status |
 | Form | Типизированная модель, валидация, submit, reset и обработка ошибок |
 | FormItem | Label, required, help, ошибки и контекст доступности одного control |
+| FormList | Вложенные массивы, initialValue, add/remove/move, устойчивые ключи и custom validation |
 
 Input и Select поддерживают `bind:value` и `onValueChange`. Очистка одиночного
 Select возвращает `undefined`, множественного — `[]`; числовой `0` остаётся допустимым значением. `defaultValue`
@@ -9355,6 +9356,8 @@ FormItem предоставляет label, status, required, description и об
 контейнера создаёт массив, строковый `"0"` — объект. Native name вложенного control
 собирается через `_`; при необходимости задайте ему собственный name.
 Состояние `values` и ошибки предназначены для чтения.
+Модель можно хранить в `$state` и заменять во время жизни Form; регистрация полей
+переключается на новый экземпляр, поздние проверки прежней модели изолированы.
 
 `theme.components.Form` настраивает Form и каждый FormItem: цвет и размер подписи,
 required mark, высоту, отступы colon и полей, vertical padding/margin.
@@ -9374,6 +9377,8 @@ inlineItemMarginBottom переносится без добавления inline
 rules используются прежние правила createForm верхнего уровня.
 Правила модели действуют и без FormItem в DOM; локальные rules удаляются вместе
 с их полем, а значение по-прежнему сохраняется.
+Ошибки и touched модельных правил остаются у имени поля при переключении name.
+В FormList локальная metadata следует за key строки.
 Правила включают required, min/max, pattern и синхронный либо
 асинхронный `validator(value, values)`. Для строк min/max считают Unicode
 code points, для чисел сравнивают значение, для массивов считают элементы.
@@ -9396,7 +9401,7 @@ FormValidationError. Ошибка содержит `values`, `outOfDate` и `err
 Переданные в `validateFields(names)` пути выбирают проверяемые поля; snapshot
 по-прежнему содержит всю модель. Upstream возвращает проекцию выбранных путей.
 Устаревшие результаты не перезаписывают состояние после изменения или сброса
-формы или удаления поля. После blur поле считается touched; изменение любого поля повторно
+формы или удаления локального поля. После blur поле считается touched; изменение любого поля повторно
 проверяет touched-поля, включая зависимые validators.
 
 `form.submit(onFinish)` блокирует повторную отправку и возвращает результат
@@ -9415,8 +9420,73 @@ FormValidationError. Ошибка содержит `values`, `outOfDate` и `err
 upstream передаёт значения store без такой гарантии. Подтверждения —
 [browser и raw reference](./tests/browser/form-paths.spec.ts),
 [SSR](./tests/package/form-paths.ssr.test.ts) и [модель](./src/lib/form.model.test.ts).
-Form.List, полный validation API, dependencies, field adapters и остальные
+Полный validation API, dependencies, field adapters и остальные
 настройки Form ещё не перенесены; наличие методов чтения не означает полного RcForm API.
+
+### FormList
+
+`FormList` — Svelte-эквивалент Form.List. Он читает массив ближайшего Form,
+не добавляет DOM-обёртку и передаёт в children поля, операции и ошибки списка:
+
+```svelte
+<Form {form}>
+  <FormList name="users">
+    {#snippet children(fields, { add, remove }, meta)}
+      {#each fields as field (field.key)}
+        <FormItem name={[field.name, 'name']} label="Имя" rules={[{ required: true }]}>
+          <Input
+            value={form.getFieldValue(['users', field.name, 'name']) ?? ''}
+            onValueChange={(value) => form.setFieldValue(['users', field.name, 'name'], value)}
+          />
+        </FormItem>
+        <button type="button" onclick={() => remove(field.name)}>Удалить</button>
+      {/each}
+      {#each meta.errors as error}<p role="alert">{error}</p>{/each}
+      <button type="button" onclick={() => add({ name: '' })}>Добавить</button>
+    {/snippet}
+  </FormList>
+</Form>
+```
+
+Модель примера создаётся как
+`createForm<{ users: { name: string }[] }>({ initialValues: { users: [] } })`.
+Импортируйте FormList вместе с Form, FormItem, Input и createForm из пакета.
+`field.name` — текущий индекс, `field.key` — устойчивый ключ строки. Используйте
+key в each: при move и remove соседних строк сохраняются controls, фокус,
+выделение и ошибки оставшихся строк. Новые строки получают новые ключи.
+Внешняя замена массива сохраняет ключи по индексам, как upstream.
+Для sparse arrays fields содержит только существующие позиции с исходными
+индексами name: это сохраняет строки React map при рендеринге Svelte each.
+Замена массива с пропущенными позициями сверена с
+[raw reference](./tests/browser/fixtures/ant-design-form-sparse-list-observation.json).
+Там же сохранено наблюдение: merge initialValues upstream превращает пустые
+позиции массива объектов в undefined; createForm сохраняет holes. Это отличие
+инициализации модели остаётся для общего аудита Form.
+В отдельном замере nested setFieldValue увеличивает массив в store upstream,
+но List не показывает новую строку до следующей операции; Svelte обновляет её сразу.
+
+Имена FormItem и вложенного FormList считаются от ближайшего списка;
+setFieldValue/getFieldValue используют полный путь от корня Form. Вложенный
+независимый Form сбрасывает prefix. Начальный массив из Form имеет приоритет,
+включая []; отсутствующий массив может получить initialValue списка. При reset
+используется Form initialValues либо текущий initialValue списка; контролы строк
+создаются заново. Скрытие списка сохраняет его значения, но снимает локальные правила.
+
+Add принимает defaultValue и insertIndex, без индекса добавляет в конец;
+неверный индекс вставки также добавляет в конец. Remove принимает индекс или
+массив индексов; повторы и отсутствующие индексы не удаляют лишние строки.
+Move переносит строку и её key. Rules списка принимают только custom validators
+с прежней Svelte-сигнатурой `(value, values)`. Ошибки приходят в meta.errors;
+после remove/reset поздняя validation не возвращает ошибки удалённых controls.
+WarningOnly и Form.ErrorList/prefixCls context пока не перенесены.
+
+Отличие от Ant Design 6.6.8: move с дробным индексом игнорируется. В исходном
+UMD `move(0.5, 1)` теряет первую строку и вставляет undefined; этот дефект
+сохранён как отдельное наблюдение в [raw reference](./tests/browser/fixtures/ant-design-form-list-observation.json).
+Остальные операции сверены [в браузере](./tests/browser/form-list.spec.ts),
+вложенность и initialValue — также [через SSR](./tests/package/form-list.ssr.test.ts).
+Логика ключей адаптирована из @rc-component/form 1.8.6; [MIT-лицензия](./src/lib/vendor/LICENSE.rc-form)
+включена в пакет. React runtime не добавлен.
 
 ## Клавиатура и фокус
 
@@ -9697,7 +9767,7 @@ Popover и SSR; модель — нормализацию имён, Unicode-ин
 
 Эта версия покрывает перечисленное ядро. Древовидные/поисковые фильтры Table,
 расширенные режимы DatePicker,
-расширения Tree/TreeSelect/Upload/Menu, Select tags, Form.List,
+расширения Tree/TreeSelect/Upload/Menu, Select tags, полный Form API,
 порталы, виртуализация и статические методы Modal пока отсутствуют. Совместимость
 всего React API и визуальная идентичность всех состояний не заявлены.
 

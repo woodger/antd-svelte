@@ -4,19 +4,25 @@ import type { ValidationRule } from './validation.engine';
 export interface FormFieldRegistration {
   readonly name: NamePath;
   readonly rules?: readonly ValidationRule[];
+  readonly isList?: boolean;
+  readonly isListField?: boolean;
+  readonly initialValue?: readonly unknown[];
 }
 
 export interface FormHooks {
+  readonly resetKey: object;
   registerField(field: FormFieldRegistration): () => void;
+  initializeList(name: NamePath, initialValue?: readonly unknown[]): void;
+  changeList(name: NamePath, values: readonly unknown[]): void;
 }
 
-// Регистрация относится к экземпляру createForm и не расширяет публичный FormInstance.
-const formHooks = new WeakMap<object, FormHooks>();
+// Неперечисляемый Symbol сохраняет связь и через Svelte proxy, не расширяя публичный FormInstance.
+const formHooksKey = Symbol('ant-design-form-hooks');
 
 export function setFormHooks(form: object, hooks: FormHooks) {
-  formHooks.set(form, hooks);
+  Object.defineProperty(form, formHooksKey, { value: hooks });
 }
 
 export function getFormHooks(form: object): FormHooks | undefined {
-  return formHooks.get(form);
+  return (form as { [formHooksKey]?: FormHooks })[formHooksKey];
 }
