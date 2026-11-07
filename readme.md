@@ -130,7 +130,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Watermark | Text/image Canvas tiles, per-line fonts, offsets, mutation repair, наследование Modal/Drawer |
 | BorderBeam | CSS-лучи по рамке нативного контейнера, градиенты, фазы, размеры и reduced motion |
 | Rate | Value/defaultValue, half/clear, hover, keyboard/RTL, character/tooltips, размеры и focus ref |
-| Input | Native text/events/forms, prefix/suffix/addons, clear/count, variants, semantic slots и input config |
+| Input | Native text/events/forms, prefix/suffix, clear/count, variants, semantic slots и input config |
 | InputPassword | Видимость пароля, click/hover/keyboard, controlled toggle, focus/selection и возможности Input |
 | InputSearch | Поиск по кнопке/Enter/очистке, loading/IME, custom button snippet и композиция Compact |
 | InputOTP | UTF-16 ячейки, formatter/paste, mask/separator, keyboard/focus и callbacks полного кода |
@@ -1424,7 +1424,7 @@ Addon. Поддержаны нативные attrs, class/style и bind:nativeEl
 Chromium проверяют размеры, границы/RTL, вложенность, фокус, Popup isolation,
 variants/status/disabled и hydration. Рецепты space-compact/space-addon/
 input-number-compact извлекают 4/29/8 правил без keyframes. InputSearch использует
-внутренний Compact с отдельными items для Input, кнопки и addonAfter. Состояние
+внутренний Compact с отдельными items для Input и кнопки. Состояние
 Compact-интеграций остальных семейств описано в реестре.
 
 ## InputNumber
@@ -1533,9 +1533,9 @@ handler/keyboard/wheel, направление и offset; onPressEnter вызы�
 Для отклонения обновлений владельцем используйте function binding с getter/setter.
 
 Есть outlined/filled/borderless/underlined, mode="spinner", prefix/suffix и custom
-иконки в controls. Контент принимает строки, числа и snippets. Legacy addonBefore/
-addonAfter собираются через SpaceCompact/SpaceAddon; rootClassName относится к
-Compact, а nativeElement — к самому control. ConfigProvider.inputNumber задаёт
+иконки в controls. Контент принимает строки, числа и snippets. RootClassName
+и nativeElement относятся к control; для внешней композиции используйте
+SpaceCompact/SpaceAddon. ConfigProvider.inputNumber задаёт
 variant, class/style и semantic slots. Локальные styles имеют приоритет.
 
 Bind:inputElement возвращает input, bind:nativeElement — корень control, bind:ref —
@@ -6110,16 +6110,13 @@ name/required/maxlength/readonly остаются на реальном input, �
 добавочные camel aliases; lowercase native attrs сохраняются. Size принимает
 medium, htmlSize задаёт native size отдельно.
 
-Prefix/suffix и addonBefore/addonAfter принимают scalar/Snippet. Без affixes,
-clear/count/addons остаётся один input. Prefix/suffix/clear/count добавляют
-ant-input-affix-wrapper; addons добавляют ant-input-group-wrapper/group/addon.
+Prefix/suffix принимают scalar/Snippet. Без affixes и clear/count остаётся
+один input. Prefix/suffix/clear/count добавляют ant-input-affix-wrapper.
 Порядок suffix: clear → count → suffix content. Счётчик и очистка следуют
 исходным useCount/resolveOnChange правилам; их логика находится в
 input-count.engine.ts и input-event.dom.ts. Root class/semantic root styles не
-попадают на вложенное поле. Click внутри affix wrapper фокусирует input; addon
-сам по себе focus не переводит. Addon content изолируется от FormItem и Compact:
-не получает имя/id/required/status соседнего поля и compact size, но сохраняет
-Form/ConfigProvider disabled и локаль/темы. Deprecated addons пока поддержаны.
+попадают на вложенное поле. Click внутри affix wrapper фокусирует input.
+Для внешней композиции используйте SpaceCompact/SpaceAddon.
 
 AllowClear — boolean/{disabled,clearIcon}; непереданные поля наследуют
 ConfigProvider.input.allowClear, explicit false выключает control. Default icon —
@@ -6159,8 +6156,7 @@ style → local styles.root → local style. Без wrapper эти root styles �
 styles.input. ConfigProvider.input задаёт allowClear/autoComplete/variant/class/
 style/classNames/styles; nested config наследуется целиком либо явно заменяется.
 Form/FormItem disabled, errors/reset, Compact, темы/compact density, RTL, locale
-и reduced motion сохраняются. Outlined addon background следует colorFillAlter
-(в текущей палитре colorFillQuaternary), filled — colorFillTertiary.
+и reduced motion сохраняются.
 
 Bind:inputElement даёт HTMLInputElement, bind:nativeElement — внешний input/span,
 как upstream nativeElement. Bind:this предоставляет focus({cursor:'start'|'end'|
@@ -6175,7 +6171,7 @@ Fixture `?fixture=input-features` дополняет прежний Input/Select
 Unit/SSR и browser проверяют count/IME, focus/Enter, clear/event order, refs,
 FormData/FormItem/Compact, variants/semantic styles, темы и RTL.
 
-Input.Password, Input.Search, Input.OTP и deprecated Input.Group доступны как
+Input.Password, Input.Search и Input.OTP доступны как
 InputPassword, InputSearch и InputOTP. Общие prefixCls,
 arbitrary token engine и deprecated internal
 classes/structures остаются отдельными пробелами. Согласованный string bind:value
@@ -6187,7 +6183,7 @@ classes/structures остаются отдельными пробелами. С�
 
 Переключатель видимости перенесён из Password.tsx и его тестов Ant Design 6.6.8.
 InputPassword использует существующий Input: bind:value, defaultValue, native
-атрибуты и события, clear/count, affixes/addons, FormItem, Compact и методы refs
+атрибуты и события, clear/count, affixes, FormItem, Compact и методы refs
 сохраняют его контракт. Точные настройки описаны в
 [исходных типах](./src/lib/input-password.types.ts).
 
@@ -6294,8 +6290,8 @@ variant. Semantic root относится к Compact, а button содержит
 строка в button — сокращение для button.root.
 
 Class/style/hidden и data-* передаются Compact root; id/name/ARIA/constraints
-остаются на Input. RootClassName относится к внутреннему Input. AddonAfter идёт
-после кнопки как отдельный Compact item. InputElement/nativeElement и методы
+остаются на Input. RootClassName относится к внутреннему Input.
+InputElement/nativeElement и методы
 bind:this возвращают внутренний Input, не внешний Compact. String bind:value,
 defaultValue, FormItem, RTL, Compact, темы и SSR сохраняют контракты Input.
 Fixture `?fixture=input-search` проверяет поиск, IME, callbacks, пользовательские

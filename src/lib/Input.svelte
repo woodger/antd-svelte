@@ -14,7 +14,6 @@
   import { inputChangeEvent } from './input-event.dom';
   import type { InputProps, InputContent } from './input.types';
   import Icon from './Icon.svelte';
-  import InputAddonContent from './InputAddonContent.svelte';
 
   let {
     value = $bindable(),
@@ -31,8 +30,6 @@
     type = 'text',
     prefix,
     suffix,
-    addonBefore,
-    addonAfter,
     allowClear,
     showCount,
     count,
@@ -80,7 +77,6 @@
   let keyLock = false;
   let alive = true;
   let affix = $state<HTMLSpanElement>();
-  let group = $state<HTMLSpanElement>();
   const passwordTimers = new Set<ReturnType<typeof setTimeout>>();
 
   let text = $derived(String(value ?? (useDefault ? initialDefault : '') ?? ''));
@@ -95,7 +91,6 @@
   let maximum = $derived(maxLength ?? attributes.maxlength ?? undefined);
   let counter = $derived(inputCountInfo(text, count, showCount, maximum));
   let wrapped = $derived(Boolean(prefix || suffix || clear || counter.show));
-  let grouped = $derived(Boolean(addonBefore || addonAfter));
   let canClear = $derived(Boolean(clear && !clear.disabled && !blocked && !read && text));
   let info = $derived({
     props: {
@@ -114,8 +109,6 @@
       type,
       prefix,
       suffix,
-      addonBefore,
-      addonAfter,
       allowClear,
       showCount,
       count,
@@ -185,7 +178,7 @@
   ]);
 
   $effect(() => {
-    nativeElement = group ?? affix ?? inputElement;
+    nativeElement = affix ?? inputElement;
   });
 
   $effect(() => {
@@ -322,7 +315,7 @@
     disabled={blocked}
     readonly={read}
     maxlength={maximum}
-    hidden={!wrapped && !grouped ? hidden : undefined}
+    hidden={!wrapped ? hidden : undefined}
     autocomplete={attributes.autocomplete
         ?? autoComplete
         ?? config.input?.autoComplete}
@@ -393,13 +386,13 @@
         contextClasses?.input,
         localClasses?.input,
         !wrapped && variantClasses,
-        !wrapped && !grouped && rootClasses
+        !wrapped && rootClasses
       ]}
     style={[
-        (wrapped || grouped) && componentTheme.style,
+        wrapped && componentTheme.style,
         contextStyles?.input,
         localStyles?.input,
-        !wrapped && !grouped && rootStyle
+        !wrapped && rootStyle
       ].filter(Boolean).join(';')} />
 {/snippet}
 {#snippet fieldControl()}
@@ -407,7 +400,7 @@
     <span
       bind:this={affix}
       use:focusOnClick
-      hidden={grouped ? undefined : hidden}
+      {hidden}
       class={[
           'ant-input-affix-wrapper',
           variantClasses,
@@ -422,9 +415,9 @@
           && clear
           && text
           && 'ant-input-affix-wrapper-input-with-clear-btn',
-          !grouped && rootClasses
+          rootClasses
         ]}
-      style={!grouped ? rootStyle : undefined}>
+      style={rootStyle}>
       {#if prefix}<span
         class={[
             'ant-input-prefix',
@@ -494,28 +487,4 @@
   {:else}{@render control()}{/if}
 {/snippet}
 
-{#if grouped}
-  <span
-    bind:this={group}
-    {hidden}
-    class={[
-        'ant-input-group-wrapper',
-        `ant-input-group-wrapper-${appearance}`,
-        resolvedStatus && `ant-input-group-wrapper-status-${resolvedStatus}`,
-        blocked && 'ant-input-group-wrapper-disabled',
-        resolvedSize === 'small' && 'ant-input-group-wrapper-sm',
-        resolvedSize === 'large' && 'ant-input-group-wrapper-lg',
-        config.direction === 'rtl' && 'ant-input-group-wrapper-rtl',
-        rootClasses
-      ]}
-    style={rootStyle}>
-    <span class={[
-        'ant-input-wrapper ant-input-group',
-        config.direction === 'rtl' && 'ant-input-group-rtl'
-      ]}>
-      {#if addonBefore}<span class="ant-input-group-addon"><InputAddonContent>{@render content(addonBefore)}</InputAddonContent></span>{/if}
-      {@render fieldControl()}
-      {#if addonAfter}<span class="ant-input-group-addon"><InputAddonContent>{@render content(addonAfter)}</InputAddonContent></span>{/if}
-    </span>
-  </span>
-{:else}{@render fieldControl()}{/if}
+{@render fieldControl()}

@@ -429,28 +429,6 @@ test(
 );
 
 test(
-  'InputNumber legacy addons use Compact edges and preserve the owned value and rootClassName',
-  async ({ page }) => {
-    const input = sourceNumber(page);
-    await page.getByLabel('Source number addons', { exact: true }).check();
-    const compact = page.locator('.ant-space-compact.number-feature-root');
-
-    await expect(compact).toBeVisible();
-    await expect(compact).toContainText('Before');
-    await expect(compact).toContainText('After');
-    await expect(input.locator('..')).toHaveClass(/ant-input-number-compact-item/);
-    await expect(input.locator('..')).not.toHaveClass(/number-feature-root/);
-    await input.fill('2.5');
-
-    await page.getByLabel('Source number addons', { exact: true }).uncheck();
-
-    await expect(input).toHaveValue('2.5');
-    await expect(input.locator('..')).toHaveClass(/number-feature-root/);
-    await expect(page.locator('.number-feature-root')).toHaveCount(1);
-  }
-);
-
-test(
   'InputNumber config and local semantic layers merge with the source root-style priority',
   async ({ page }) => {
     const input = sourceNumber(page);

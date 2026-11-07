@@ -83,14 +83,13 @@ describe('InputSearch SSR', () => {
     expect(body).toContain('color:blue');
   });
 
-  it('keeps clear count suffix and a trailing addon without invoking callbacks on SSR', () => {
+  it('keeps clear count and suffix without invoking callbacks on SSR', () => {
     const body = render(InputSearch, {
       props: {
         defaultValue: 'query',
         allowClear: true,
         showCount: true,
         suffix: 'SUFFIX',
-        addonAfter: 'AFTER',
         onSearch: () => {
           throw new Error('search callback on SSR');
         },
@@ -103,7 +102,5 @@ describe('InputSearch SSR', () => {
     expect(body).toContain('ant-input-clear-icon');
     expect(body).toContain('ant-input-show-count-suffix');
     expect(body).toContain('SUFFIX');
-    expect(body.indexOf('ant-input-search-btn')).toBeLessThan(body.indexOf('AFTER'));
-    expect(body).not.toContain('ant-input-group-addon');
   });
 });

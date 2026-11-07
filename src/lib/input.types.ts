@@ -65,8 +65,6 @@ export interface InputProps extends Omit<
   variant?: InputVariant;
   prefix?: InputContent;
   suffix?: InputContent;
-  addonBefore?: InputContent;
-  addonAfter?: InputContent;
   /** false отключает очистку; иначе отсутствующие поля наследуются из ConfigProvider.input. */
   allowClear?: boolean | InputAllowClear;
   /** По умолчанию скрыт; count.show имеет приоритет. */
@@ -84,7 +82,7 @@ export interface InputProps extends Omit<
   styles?: InputSemantic;
   /** bind:inputElement возвращает нативный input. */
   inputElement?: HTMLInputElement;
-  /** bind:nativeElement возвращает внешний root: input или span при affixes/addons. */
+  /** bind:nativeElement возвращает внешний root: input или span при affixes. */
   nativeElement?: HTMLElement;
   /** Вызывается при вводе и очистке перед onChange; bind:value к этому моменту обновлён. */
   onValueChange?: (value: string) => void;

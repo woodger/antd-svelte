@@ -116,7 +116,7 @@
     'value', 'defaultValue', 'stringMode', 'min', 'max', 'step', 'precision', 'decimalSeparator',
     'formatter', 'parser', 'controls', 'keyboard', 'changeOnWheel', 'changeOnBlur', 'mode', 'size',
     'status', 'variant', 'readOnly', 'readonly', 'disabled', 'prefix', 'suffix',
-    'addonBefore', 'addonAfter', 'rootClassName', 'prefixCls', 'class', 'style', 'classNames',
+    'rootClassName', 'prefixCls', 'class', 'style', 'classNames',
     'styles', 'name',
     'inputElement', 'nativeElement', 'ref', 'autoFocus', 'autoComplete', 'tabIndex', 'maxLength',
     'onValueChange', 'onChange', 'onInput', 'onStep', 'onPressEnter', 'onFocus', 'onBlur',

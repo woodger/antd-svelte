@@ -24,7 +24,6 @@
     disabled,
     size,
     variant,
-    addonAfter,
     hidden,
     onSearch,
     onChange,
@@ -76,7 +75,6 @@
       disabled,
       size,
       variant: buttonVariant,
-      addonAfter,
       hidden,
       onSearch,
       onChange,
@@ -128,7 +126,6 @@
   let inputAttributes = $derived(Object.fromEntries(Object.entries(attributes).filter(([key]) =>
     !key.startsWith('data-')
   )));
-  let hasAfter = $derived(Boolean(addonAfter) && typeof addonAfter !== 'boolean');
 
   const buttonContext: InputSearchButtonContext = {
     getButtonProps(props = {}) {
@@ -290,8 +287,6 @@
   {/if}
 {/snippet}
 
-{#snippet afterContent()}{@render content(addonAfter)}{/snippet}
-
 <SpaceCompact
   {...rootData}
   {hidden}
@@ -308,7 +303,6 @@
   style={rootStyle}
   items={[
     { key: 'input', children: fieldControl },
-    { key: 'button', children: searchButton },
-    ...(hasAfter ? [{ key: 'after', children: afterContent }] : [])
+    { key: 'button', children: searchButton }
   ]}
 />

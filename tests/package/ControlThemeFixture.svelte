@@ -14,7 +14,6 @@
 }}>
   <Button>Source Button</Button>
   <Input id="plain" defaultValue="Input" />
-  <Input id="grouped" addonBefore="HTTPS" defaultValue="Input" />
   <TextArea id="area" allowClear defaultValue="Text" />
   <InputNumber defaultValue={3} />
   <SpaceAddon>Addon</SpaceAddon>

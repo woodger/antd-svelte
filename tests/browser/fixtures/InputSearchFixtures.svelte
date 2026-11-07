@@ -4,7 +4,6 @@
     InputSearch,
     Button,
     SpaceCompact,
-    SpaceAddon,
     Form,
     FormItem,
     createForm,
@@ -25,7 +24,6 @@
   let semantic = $state(false);
   let contextIcon = $state(false);
   let localIcon = $state<'default' | 'custom' | 'empty'>('default');
-  let after = $state(false);
   let dark = $state(false);
   let compact = $state(false);
   let hidden = $state(false);
@@ -70,7 +68,6 @@
     onclick: () => { events.push('native-click'); }
   })}>Native search</button>
 {/snippet}
-{#snippet afterContent()}<SpaceAddon>AFTER</SpaceAddon>{/snippet}
 {#snippet contextSearchIcon()}<span>Context search icon</span>{/snippet}
 {#snippet ownSearchIcon()}<span>Local search icon</span>{/snippet}
 
@@ -108,7 +105,6 @@
   <label>Search icon<select bind:value={localIcon}>
     <option>default</option><option>custom</option><option>empty</option>
   </select></label>
-  <label><input type="checkbox" bind:checked={after} /> Search trailing addon</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark search theme</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact search theme</label>
   <label><input type="checkbox" bind:checked={hidden} /> Hide search root</label>
@@ -164,7 +160,6 @@
         searchIcon={localIcon === 'custom' ? ownSearchIcon : localIcon === 'empty' ? null : undefined}
         prefix="PREFIX"
         suffix="SUFFIX"
-        addonAfter={after ? afterContent : undefined}
         allowClear
         showCount
         required

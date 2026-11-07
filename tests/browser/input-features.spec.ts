@@ -339,11 +339,6 @@ test(
     await expect(page.getByLabel('Input feature refs', { exact: true })).toHaveText('INPUT:INPUT');
     await expect(input).toHaveValue('stable');
 
-    await page.getByLabel('Input addon before', { exact: true }).check();
-
-    await expect(page.locator('.feature-input')).toHaveClass(/ant-input-group-wrapper/);
-    await expect(input).toHaveValue('stable');
-
     await page.getByLabel('Mount feature input', { exact: true }).uncheck();
 
     await expect(page.getByLabel('Input feature refs', { exact: true })).toHaveText(':');
@@ -351,61 +346,7 @@ test(
 );
 
 test(
-  'Input supports addons without moving native form data or field attributes onto wrappers',
-  async ({ page }) => {
-    await page.getByLabel('Input addon before', { exact: true }).check();
-    await page.getByLabel('Input addon after', { exact: true }).check();
-
-    const root = page.locator('.feature-input');
-    const input = page.getByRole('textbox', { name: 'Feature input', exact: true });
-
-    await expect(root).toHaveClass(/ant-input-group-wrapper-filled/);
-    await expect(root.locator('.ant-input-group-addon')).toHaveText(['https://', '.org']);
-
-    await input.fill('domain');
-    await page.getByRole('button', { name: 'Read feature input FormData', exact: true }).click();
-
-    await expect(page.getByLabel('Input feature FormData', { exact: true })).toHaveText('domain');
-    await expect(input).toHaveAttribute('name', 'feature');
-    await expect(root).not.toHaveAttribute('name');
-  }
-);
-
-test(
-  'Input addons isolate FormItem and Compact while retaining form disabled and error focus reset',
-  async ({ page }) => {
-    const field = page.getByRole('textbox', { name: '* Counted input', exact: true });
-    const addon = page.getByRole('textbox', { name: 'Isolated input addon', exact: true });
-
-    await page.getByRole('button', { name: 'Validate counted input', exact: true }).click();
-
-    await expect(field).toBeFocused();
-    await expect(field).toHaveAccessibleDescription('Counted input required');
-    await expect(field).toHaveClass(/ant-input-sm/);
-    await expect(addon).not.toHaveClass(/ant-input-sm|compact|status-error/);
-    await expect(addon).not.toHaveAttribute('name');
-    await expect(addon).not.toHaveAttribute('required');
-    await expect(addon).not.toHaveAttribute('aria-invalid');
-
-    await field.fill('valid');
-    await field.blur();
-    await page.getByRole('button', { name: 'Validate counted input', exact: true }).click();
-
-    await expect(field).not.toHaveAttribute('aria-invalid');
-
-    await page.getByRole('button', { name: 'Reset counted input', exact: true }).click();
-
-    await expect(field).toHaveValue('');
-
-    await page.getByLabel('Disable counted input form', { exact: true }).check();
-
-    await expect(field).toBeDisabled();
-    await expect(addon).toBeDisabled();
-  }
-);
-
-test(
-  'Input variants and semantic styles preserve root priority for plain affix and addon shapes',
+  'Input variants and semantic styles preserve root priority for plain and affix shapes',
   async ({ page }) => {
     const root = page.locator('.feature-input');
     const input = page.getByRole('textbox', { name: 'Feature input', exact: true });
@@ -428,12 +369,6 @@ test(
     await expect(input).toHaveCSS('color', 'rgb(0, 255, 255)');
     await expect(root.locator('.semantic-count')).toHaveCSS('font-weight', '700');
 
-    await page.getByLabel('Input addon before', { exact: true }).check();
-
-    await expect(root).toHaveCSS('color', 'rgb(0, 0, 255)');
-    await expect(input).toHaveCSS('color', 'rgb(0, 255, 255)');
-
-    await page.getByLabel('Input addon before', { exact: true }).uncheck();
     await page.getByRole('combobox', { name: 'Input clear mode', exact: true })
       .selectOption('false');
     await page.getByLabel('Input prefix', { exact: true }).uncheck();
@@ -452,12 +387,6 @@ test(
     await expect(page.locator('.feature-input')).toHaveAttribute('hidden');
     await expect(page.locator('.feature-input')).toHaveCSS('display', 'inline-flex');
 
-    await page.getByLabel('Input addon before', { exact: true }).check();
-
-    await expect(page.locator('.feature-input')).toHaveAttribute('hidden');
-    await expect(page.locator('.feature-input')).toHaveCSS('display', 'inline-block');
-
-    await page.getByLabel('Input addon before', { exact: true }).uncheck();
     await page.getByRole('combobox', { name: 'Input clear mode', exact: true })
       .selectOption('false');
     await page.getByLabel('Input prefix', { exact: true }).uncheck();
@@ -515,21 +444,6 @@ test(
     await page.getByLabel('Dark input feature theme', { exact: true }).check();
 
     await expect(input).not.toHaveCSS('color', 'rgb(0, 0, 0)');
-
-    await page.getByLabel('Input addon before', { exact: true }).check();
-
-    await expect(root.locator('.ant-input-group-addon')).toHaveCSS(
-      'background-color',
-      'rgba(255, 255, 255, 0.08)'
-    );
-
-    await page.getByRole('combobox', { name: 'Input variant', exact: true })
-      .selectOption('outlined');
-
-    await expect(root.locator('.ant-input-group-addon')).toHaveCSS(
-      'background-color',
-      'rgba(255, 255, 255, 0.04)'
-    );
 
     await page.emulateMedia({ reducedMotion: 'reduce' });
 

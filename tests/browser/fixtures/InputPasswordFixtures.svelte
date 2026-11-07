@@ -24,7 +24,6 @@
   let contextIcon = $state(false);
   let iconMode = $state<'default' | 'local' | 'snippet' | 'empty'>('default');
   let suffix = $state(true);
-  let addons = $state(false);
   let semantic = $state(false);
   let dark = $state(false);
   let compact = $state(false);
@@ -91,7 +90,6 @@
     <option>default</option><option>local</option><option>snippet</option><option>empty</option>
   </select></label>
   <label><input type="checkbox" bind:checked={suffix} /> Password suffix</label>
-  <label><input type="checkbox" bind:checked={addons} /> Password addons</label>
   <label><input type="checkbox" bind:checked={semantic} /> Password semantics</label>
   <label><input type="checkbox" bind:checked={dark} /> Dark password theme</label>
   <label><input type="checkbox" bind:checked={compact} /> Compact password theme</label>
@@ -161,8 +159,6 @@
         variant={variant === 'inherit' ? undefined : variant}
         prefix="BEFORE"
         suffix={suffix ? 'AFTER' : undefined}
-        addonBefore={addons ? 'ACCOUNT' : undefined}
-        addonAfter={addons ? 'SUFFIX' : undefined}
         visibilityToggle={showToggle ? {
           visible: mode === 'uncontrolled' ? undefined : parentVisible,
           tabIndex,

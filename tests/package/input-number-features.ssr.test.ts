@@ -57,17 +57,14 @@ describe('InputNumber source package features', () => {
     expect(body).toMatch(/<input[^>]*type="hidden"[^>]*value="1.25"/);
   });
 
-  it('does not start callbacks or step timers while rendering spinner and legacy addons', () => {
+  it('keeps spinner SSR free of callbacks and step timers', () => {
     vi.useFakeTimers();
     const callback = vi.fn();
 
     try {
-      const body = render(InputNumber, { props: { defaultValue: 1, addonBefore: 'Before',
-        addonAfter: 'After', mode: 'spinner', onChange: callback, onStep: callback } }).body;
+      const body = render(InputNumber, { props: { defaultValue: 1, mode: 'spinner', onChange: callback, onStep: callback } }).body;
 
-      expect(body).toContain('ant-space-compact');
-      expect(body).toContain('Before');
-      expect(body).toContain('After');
+      expect(body).toContain('ant-input-number-mode-spinner');
       expect(callback).not.toHaveBeenCalled();
       expect(vi.getTimerCount()).toBe(0);
     } finally {

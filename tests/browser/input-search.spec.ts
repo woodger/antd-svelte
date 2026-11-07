@@ -356,24 +356,6 @@ test(
 );
 
 test(
-  'InputSearch places addonAfter after the search button and updates Compact boundaries',
-  async ({ page }) => {
-    const root = page.locator('.search-field');
-    const button = root.locator('.ant-input-search-btn');
-
-    await page.getByLabel('Search trailing addon', { exact: true }).check();
-
-    await expect(button).not.toHaveClass(/ant-btn-compact-last-item/);
-    await expect(root.locator('.ant-space-addon')).toHaveText('AFTER');
-    expect(await button.evaluate(element => element.nextElementSibling?.textContent)).toBe('AFTER');
-
-    await page.getByLabel('Search trailing addon', { exact: true }).uncheck();
-
-    await expect(button).toHaveClass(/ant-btn-compact-last-item/);
-  }
-);
-
-test(
   'InputSearch retains FormItem validation reset disabled and Compact size',
   async ({ page }) => {
     const input = page.getByLabel('Form query', { exact: true });

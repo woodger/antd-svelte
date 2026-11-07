@@ -12,8 +12,8 @@ test('Button consumes its own aliases, font weight and icon gap', async ({ page 
   await expect(page.locator('#outside-control-primary')).toHaveCSS('background-color', 'rgb(22, 119, 255)');
 });
 
-test('Input tokens reach plain, affix, grouped and TextArea controls', async ({ page }) => {
-  for (const id of ['themed-input', 'themed-affix', 'themed-group', 'themed-textarea',
+test('Input tokens reach plain, affix and TextArea controls', async ({ page }) => {
+  for (const id of ['themed-input', 'themed-affix', 'themed-textarea',
     'themed-wrapped-textarea']) {
     await expect(page.locator('#' + id)).toHaveCSS('font-size', '17px');
     const paddingRoot = id === 'themed-affix'

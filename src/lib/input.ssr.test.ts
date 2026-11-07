@@ -53,13 +53,11 @@ describe('Input SSR', () => {
   });
 
   it(
-    'places root styles and hidden on the outer addon wrapper while preserving field attrs',
+    'places root styles and hidden on the affix wrapper while preserving field attrs',
     () => {
       const body = render(Input, {
         props: {
           value: 'abc',
-          addonBefore: 'https://',
-          addonAfter: '.org',
           prefix: 'PRE',
           hidden: true,
           style: 'color:blue',
@@ -69,10 +67,8 @@ describe('Input SSR', () => {
         }
       }).body;
 
-      expect(body).toMatch(/<span[^>]*hidden[^>]*class="[^"]*ant-input-group-wrapper/);
-      expect(body).toContain('ant-input-group-wrapper-underlined');
-      expect(body).toContain('https://');
-      expect(body).toContain('.org');
+      expect(body).toMatch(/<span[^>]*hidden[^>]*class="[^"]*ant-input-affix-wrapper/);
+      expect(body).toContain('ant-input-underlined');
 
       const control = body.match(/<input[^>]*>/)![0];
 

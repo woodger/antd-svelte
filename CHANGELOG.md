@@ -9,6 +9,10 @@
 
 ### Removed
 
+- Удалены addonBefore/addonAfter у Input/Password/Search и InputNumber,
+  их внутренние wrappers, context adapter и CSS-селекторы. Текущие prefix/suffix,
+  Search button и композиция SpaceCompact/SpaceAddon сохранены.
+
 - Удалён bordered у Input/TextArea/Password/Search, InputNumber, Select, TreeSelect,
   Cascader, AutoComplete и date/time pickers. Оформление задаётся через variant;
   приоритет local → Form → component/fallback → global сохранён.

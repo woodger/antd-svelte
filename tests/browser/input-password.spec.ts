@@ -440,12 +440,8 @@ test(
       .getByRole('combobox', { name: 'Password variant', exact: true })
       .selectOption('outlined');
     await page.getByRole('combobox', { name: 'Password size', exact: true }).selectOption('small');
-    await page.getByLabel('Password addons', { exact: true }).check();
-
-    await expect(root).toHaveClass(/ant-input-group-wrapper-outlined/);
     await expect(root).toHaveClass(/ant-input-password-small/);
-    await expect(root.locator('.ant-input-affix-wrapper'))
-      .toHaveClass(/ant-input-affix-wrapper-sm/);
+    await expect(root).toHaveClass(/ant-input-affix-wrapper-sm/);
     await expect(root).toHaveCSS('color', 'rgb(0, 0, 255)');
     await expect(input).toHaveAttribute('name', 'password');
     await expect(page.getByLabel('Password refs', { exact: true })).toHaveText('INPUT:SPAN');

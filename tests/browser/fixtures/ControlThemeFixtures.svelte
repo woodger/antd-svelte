@@ -42,12 +42,10 @@
       <Button id="themed-icon-gap" icon="plus">Themed icon gap</Button>
       <Input id="themed-input" aria-label="Themed plain input" defaultValue="Input" />
       <Input id="themed-affix" aria-label="Themed affix input" prefix="@" allowClear defaultValue="Affix" />
-      <Input id="themed-group" aria-label="Themed grouped input" addonBefore="HTTPS" defaultValue="Grouped" />
       <TextArea id="themed-textarea" aria-label="Themed plain textarea" rows={2} defaultValue="Text" />
       <TextArea id="themed-wrapped-textarea" aria-label="Themed wrapped textarea" allowClear showCount
         defaultValue="Wrapped" />
       <InputNumber id="themed-number" aria-label="Themed number" defaultValue={3} />
-      <InputNumber id="themed-addon-number" aria-label="Themed addon number" addonBefore="USD" defaultValue={3} />
       <InputPassword id="themed-password" aria-label="Themed password" defaultValue="Password" />
       <InputSearch id="themed-search" aria-label="Themed search" enterButton defaultValue="Search" />
       <InputOTP aria-label="Themed OTP" length={3} defaultValue="123" />

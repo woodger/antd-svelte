@@ -25,7 +25,6 @@
   let customIcons = $state(false);
   let controls = $state(true);
   let affixes = $state(false);
-  let addons = $state(false);
   let styled = $state(false);
   let inherited = $state(false);
   let dark = $state(false);
@@ -90,7 +89,6 @@
     <label><input type="checkbox" bind:checked={controls} /> Source number controls</label>
     <label><input type="checkbox" bind:checked={customIcons} /> Custom source number icons</label>
     <label><input type="checkbox" bind:checked={affixes} /> Source number affixes</label>
-    <label><input type="checkbox" bind:checked={addons} /> Source number addons</label>
     <label><input type="checkbox" bind:checked={styled} /> Source number config</label>
     <label><input type="checkbox" bind:checked={inherited} /> Inherit source number variant</label>
     <label><input type="checkbox" bind:checked={dark} /> Dark source number</label>
@@ -140,7 +138,6 @@
             decimalSeparator={comma ? ',' : undefined}
             controls={controls ? customIcons ? { upIcon: 'UP', downIcon: 'DOWN' } : true : false}
             prefix={affixes ? '$' : undefined} suffix={affixes ? 'kg' : undefined}
-            addonBefore={addons ? 'Before' : undefined} addonAfter={addons ? 'After' : undefined}
             variant={inherited ? undefined : variant} rootClassName="number-feature-root"
             classNames={info => ({ root: `number-local-${info.props.size}`, action: 'number-local-action' })}
             styles={styled ? { root: 'color:green', input: 'text-align:center' } : undefined}

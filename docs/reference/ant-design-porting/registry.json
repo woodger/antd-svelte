@@ -5041,7 +5041,7 @@
             "tests/package/input-config.ssr.test.ts",
             "tests/browser/input-features.spec.ts"
           ],
-          "note": "Перенесено из woodger/ant-design@cf3e20c по @rc-component/input 1.3.1: count/clear/event proxy, compositionend/Enter, input/root refs, password attribute cleanup и изоляция FormItem/Compact в addons. Прежний string bind:value/native handlers сохраняются. Полный аудит семейства остаётся unreviewed."
+          "note": "Перенесено из woodger/ant-design@cf3e20c по @rc-component/input 1.3.1: count/clear/event proxy, compositionend/Enter, input/root refs, password attribute cleanup. Прежний string bind:value/native handlers сохраняются. Полный аудит семейства остаётся unreviewed."
         },
         {
           "id": "input-password",
@@ -5129,7 +5129,7 @@
             "tests/browser/control-theme.spec.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. PrefixCls и deprecated internal hooks ещё не перенесены. Согласованные string bind:value, native refs/hidden и React dev diagnostics остаются прежними."
+          "note": "Компонентные tokens Input и composed Password/Search/OTP подключены к CSS. PrefixCls ещё не перенесён; deprecated internal hooks исключены из scope. Согласованные string bind:value, native refs/hidden и React dev diagnostics остаются прежними."
         },
         {
           "id": "textarea-remaining",
@@ -5185,7 +5185,7 @@
             "tests/browser/config-variants.spec.ts",
             "tests/package/config-variants.ssr.test.ts"
           ],
-          "note": "Общий source priority для Input/TextArea/Password/Search/OTP: local, legacy false при наличии, Form, component, fallback Input у composed controls, global, outlined. Search input.variant fallback не задаёт variant кнопке; explicit outlined считается настройкой. Reactive scope сохраняет native values, DOM/focus/selection, FormData и callbacks; оставшиеся React value/ref/prefix API не включены."
+          "note": "Общий source priority для Input/TextArea/Password/Search/OTP: local, Form, component, fallback Input у composed controls, global, outlined. Search input.variant fallback не задаёт variant кнопке; explicit outlined считается настройкой. Reactive scope сохраняет native values, DOM/focus/selection, FormData и callbacks; оставшиеся React value/ref/prefix API не включены."
         }
       ]
     },
@@ -5349,7 +5349,7 @@
             "tests/browser/space-compact.spec.ts",
             "tests/browser/input-number-features.spec.ts"
           ],
-          "note": "Размер/edge flags, legacy addonBefore/addonAfter через SpaceCompact/SpaceAddon, изоляция addon content и rootClassName на внешнем Compact."
+          "note": "Размер и edge flags наследуются из SpaceCompact; rootClassName и nativeElement относятся к самому control. Deprecated addon props и их внутренний Compact удалены."
         },
         {
           "id": "native-boundary",
@@ -5416,7 +5416,7 @@
             "tests/browser/config-variants.spec.ts",
             "tests/package/config-variants.ssr.test.ts"
           ],
-          "note": "Control читает общий source priority local/Form/inputNumber/global. Addon по-прежнему получает raw props.variant, как source SpaceAddon; отдельный addon config не меняется. Decimal values, editor drafts, native bindings/refs и semantic styles сохраняются."
+          "note": "Control читает общий source priority local/Form/inputNumber/global. Decimal values, editor drafts, native bindings/refs и semantic styles сохраняются."
         }
       ]
     },

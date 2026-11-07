@@ -74,10 +74,6 @@ export interface InputNumberProps<Value extends InputNumberValue = number> exten
   readOnly?: boolean;
   prefix?: InputNumberContent;
   suffix?: InputNumberContent;
-  /** @deprecated Используйте SpaceCompact и SpaceAddon. */
-  addonBefore?: InputNumberContent;
-  /** @deprecated Используйте SpaceCompact и SpaceAddon. */
-  addonAfter?: InputNumberContent;
   rootClassName?: string;
   /** Меняет классы; CSS для произвольного префикса предоставляет потребитель. */
   prefixCls?: string;

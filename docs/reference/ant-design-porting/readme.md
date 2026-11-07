@@ -246,3 +246,8 @@ BasicFixtures input/select/select-numeric с одной createControls; label/in
 интеграции приложения с установленным пакетом. Компонентный браузерный стенд
 принадлежит библиотеке; галерея и прикладные сценарии принадлежат потребителю.
 Ни один из стендов не требуется для установки или сборки другого репозитория.
+
+Deprecated Input/InputNumber addons исключены из runtime и CSS. В исходном
+vendor/antd.css удалены 48 правил группировки, а из смешанных selectors удалены
+только старые классы; текущие selectors и declarations сохранены. Рецепт
+input-number-features исключает старый addon selector и содержит 64 правила.

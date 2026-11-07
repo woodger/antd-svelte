@@ -2,10 +2,6 @@
   import {
     ConfigProvider,
     Input,
-    Form,
-    FormItem,
-    SpaceCompact,
-    createForm,
     type InputChangeEvent,
     type InputCountInfo,
     type InputVariant,
@@ -14,8 +10,6 @@
 
   let value = $state('😀demo');
   let mounted = $state(true);
-  let before = $state(false);
-  let after = $state(false);
   let prefix = $state(true);
   let suffix = $state(true);
   let show = $state(true);
@@ -49,18 +43,12 @@
   let inputElement = $state<HTMLInputElement>();
   let root = $state<HTMLElement>();
   let formData = $state('');
-  let formDisabled = $state(false);
   let instance: {
     focus(options?: FocusOptions & { cursor?: 'start' | 'end' | 'all' }): void;
     blur(): void;
     select(): void;
     setSelectionRange(start: number, end: number): void;
   } | undefined = $state();
-
-  const form = createForm({
-    initialValues: { counted: '' },
-    rules: { counted: [{ required: true, message: 'Counted input required' }] }
-  });
 
   let localClear = $derived<boolean | InputAllowClear | undefined>(
     clearMode === 'inherit'
@@ -99,15 +87,12 @@
 {#snippet formattedCount(info: InputCountInfo)}<strong>{info.count} of {info.maxLength ?? '∞'}</strong>{/snippet}
 {#snippet prefixContent()}<span>Prefix</span>{/snippet}
 {#snippet suffixContent()}<span>Suffix</span>{/snippet}
-{#snippet isolatedAddon()}<Input aria-label="Isolated input addon" defaultValue="addon" />{/snippet}
 
 <section id="input-features-fixture">
   <h2>Input features</h2>
   <label><input type="checkbox" bind:checked={mounted} /> Mount feature input</label>
   <label><input type="checkbox" bind:checked={prefix} /> Input prefix</label>
   <label><input type="checkbox" bind:checked={suffix} /> Input suffix</label>
-  <label><input type="checkbox" bind:checked={before} /> Input addon before</label>
-  <label><input type="checkbox" bind:checked={after} /> Input addon after</label>
   <label><input type="checkbox" bind:checked={show} /> Show input count</label>
   <label>Input clear mode<select bind:value={clearMode}><option>inherit</option><option>true</option><option>false</option></select></label>
   <label>Input clear disabled<select bind:value={clearDisabled}><option>inherit</option><option>true</option><option>false</option></select></label>
@@ -135,7 +120,6 @@
   <label><input type="checkbox" bind:checked={richCount} /> Rich input count</label>
   <label><input type="checkbox" bind:checked={nativeLimit} /> Native input maximum</label>
   <label>Input soft maximum<input type="number" bind:value={max} /></label>
-  <label><input type="checkbox" bind:checked={formDisabled} /> Disable counted input form</label>
   <button type="button" onclick={() => { value = 'Parent replacement'; }}>Replace feature input</button>
   <button type="button" onclick={() => { events = []; }}>Clear input feature events</button>
   <button
@@ -215,8 +199,6 @@
         htmlSize={12}
         prefix={prefix ? prefixContent : undefined}
         suffix={suffix ? suffixContent : undefined}
-        addonBefore={before ? 'https://' : undefined}
-        addonAfter={after ? '.org' : undefined}
         variant={variant === 'inherit' ? undefined : variant}
         allowClear={localClear}
         showCount={show}
@@ -274,17 +256,7 @@
         }}
       />{/if}
     </form>
-    <Form {form} disabled={formDisabled}><FormItem name="counted" label="Counted input"><SpaceCompact
-      size="small"
-    ><Input
-      showCount
-      allowClear
-      addonBefore={isolatedAddon}
-      value={form.values.counted}
-      onValueChange={value => form.setFieldValue('counted', value)}
-    /></SpaceCompact></FormItem><button type="submit">Validate counted input</button><button
-      type="reset"
-    >Reset counted input</button></Form>
+
     <ConfigProvider><Input aria-label="Inherited input config" defaultValue="inherited" /></ConfigProvider>
     <ConfigProvider input={{ variant: 'underlined', allowClear: false }}><Input
       aria-label="Replaced input config"
