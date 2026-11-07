@@ -766,6 +766,11 @@
 
 ### Fixed
 
+- TimePicker/TimeRangePicker: подтверждение первого выбранного пункта сохраняется,
+  когда автопрокрутка переносит второй click/dblclick с ячейки на колонку. Пустая
+  область не подтверждает предыдущий выбор; отдельные range confirmations и
+  callbacks без onOk сохранены.
+
 - FloatButtonBackTop: fade использует исходную linear-кривую и не сбрасывает
   пользовательский transform. Enter/leave проверяются на промежуточном кадре UMD.
 

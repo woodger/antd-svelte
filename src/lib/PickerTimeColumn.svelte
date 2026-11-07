@@ -43,6 +43,7 @@
   } = $props();
 
   let element = $state<HTMLUListElement>();
+  let firstClickEnabled = false;
   let signature = $derived(options.map(option =>
     `${option.value},${option.label},${option.disabled}`).join(';'));
 
@@ -60,6 +61,27 @@
       () => changeOnScroll,
       next => onChange(next)
     ));
+  });
+
+  $effect(() => {
+    const column = element;
+    if (!column) return;
+    const handleBlankClick = (event: MouseEvent) => {
+      if (event.target === column && event.detail < 2) firstClickEnabled = false;
+    };
+    const handleDoubleClick = (event: MouseEvent) => {
+      // Скролл между вторыми down/up переносит click/dblclick на общий ul.
+      if (event.target !== column || !firstClickEnabled) return;
+      firstClickEnabled = false;
+      onDblClick?.();
+    };
+    column.addEventListener('click', handleBlankClick);
+    column.addEventListener('dblclick', handleDoubleClick);
+
+    return () => {
+      column.removeEventListener('click', handleBlankClick);
+      column.removeEventListener('dblclick', handleDoubleClick);
+    };
   });
 
   function handleKeydown(event: KeyboardEvent) {
@@ -105,7 +127,9 @@
       {style}
       onclick={event => {
         // Автопрокрутка после первого click может подставить другую ячейку под второй.
-        if (!option.disabled && event.detail < 2) onChange(option.value);
+        if (event.detail >= 2) return;
+        firstClickEnabled = !option.disabled;
+        if (firstClickEnabled) onChange(option.value);
       }}
       ondblclick={() => { if (!option.disabled) onDblClick?.(); }}
       onmouseenter={() => onHover?.(option.value)}

@@ -6777,7 +6777,8 @@
         "tests/browser/picker-theme-metrics.ts",
         "tests/browser/picker-theme.spec.ts",
         "tests/package/picker-theme.ssr.test.ts",
-        "src/lib/DatePickerTimePanel.svelte"
+        "src/lib/DatePickerTimePanel.svelte",
+        "tests/browser/time-picker-double-click.spec.ts"
       ],
       "features": [
         {
@@ -6894,9 +6895,10 @@
             "src/lib/PickerTimeColumn.svelte",
             "tests/browser/time-picker.spec.ts",
             "tests/browser/time-range-picker.spec.ts",
-            "tests/browser/fixtures/ant-design-time-column-double-click-observation.json"
+            "tests/browser/fixtures/ant-design-time-column-double-click-observation.json",
+            "tests/browser/time-picker-double-click.spec.ts"
           ],
-          "note": "В закреплённом UMD реальный double click по hour 13 после выравнивания hour 10 выбирает 14 (delay=0) или 16 (delay=80ms): автопрокрутка смещает второй click. Native намеренно подтверждает первый выбранный пункт, не меняя draft вторым click; keyboard/programmatic clicks, onOk, отдельные range confirmations и UTC/precision сохранены. Raw source pointer trace оставлен для отдельного разбора."
+          "note": "В закреплённом UMD реальный double click по hour 13 после выравнивания hour 10 выбирает 14 (delay=0) или 16 (delay=80ms): автопрокрутка смещает второй click. Native намеренно подтверждает первый выбранный пункт, не меняя draft вторым click; keyboard/programmatic clicks, onOk, отдельные range confirmations и UTC/precision сохранены. Raw source pointer trace оставлен для отдельного разбора. При разных ячейках под вторыми down/up Chromium направляет click/dblclick общему ul: колонка подтверждает первый enabled выбор, а новый click по пустой области сбрасывает его. Реальные pointer events с управляемыми RAF покрывают single/range и custom cellRender; callbacks/onOk/UTC не меняются."
         },
         {
           "id": "component-theme",
