@@ -304,11 +304,12 @@ test(
     await expect(root.getByRole('radio', { name: 'Weekly', exact: true })).toBeChecked();
     await expect(root.getByRole('radio', { name: 'Weekly', exact: true })).toBeFocused();
 
-    await root.evaluate(node => {
+    await root.evaluate(async node => {
       const element = node as HTMLElement;
       element.style.setProperty('--ant-motion-duration-slow', '2s');
       element.style.transform = 'scale(0.8)';
       element.style.transformOrigin = 'left top';
+      await Promise.allSettled(element.getAnimations().map(animation => animation.finished));
     });
     await root.getByText('Monthly', { exact: true }).click();
 
