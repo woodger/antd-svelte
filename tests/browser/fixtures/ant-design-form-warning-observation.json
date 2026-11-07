@@ -1,0 +1,161 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "react": "18.3.1",
+    "source": "unmodified official UMD, runtime CSS-in-JS, no static CSS",
+    "delegatedForm": "1.8.6, reviewed separately from the bundled UMD"
+  },
+  "cases": [
+    {
+      "id": "required-warning",
+      "validation": {
+        "status": "success",
+        "values": {
+          "name": ""
+        }
+      },
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": [
+            "Name recommended"
+          ]
+        }
+      ],
+      "warnings": [
+        "Name recommended"
+      ],
+      "required": false,
+      "ariaRequired": null,
+      "ariaInvalid": null,
+      "requiredLabel": false,
+      "warningClass": true,
+      "errorClass": false,
+      "messages": [
+        "Name recommended"
+      ],
+      "submitted": [
+        {
+          "name": ""
+        }
+      ],
+      "rejected": []
+    },
+    {
+      "id": "required-warning-reset",
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "mixed-error-warning",
+      "validation": {
+        "status": "invalid",
+        "errorFields": [
+          {
+            "name": [
+              "name"
+            ],
+            "errors": [
+              "Name required"
+            ],
+            "warnings": [
+              "Name recommended"
+            ]
+          }
+        ]
+      },
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "Name required"
+          ],
+          "warnings": [
+            "Name recommended"
+          ]
+        }
+      ],
+      "warnings": [
+        "Name recommended"
+      ],
+      "required": false,
+      "ariaRequired": "true",
+      "ariaInvalid": "true",
+      "requiredLabel": true,
+      "warningClass": false,
+      "errorClass": true,
+      "messages": [
+        "Name required",
+        "Name recommended"
+      ],
+      "submitted": [],
+      "rejected": [
+        [
+          {
+            "name": [
+              "name"
+            ],
+            "errors": [
+              "Name required"
+            ],
+            "warnings": [
+              "Name recommended"
+            ]
+          }
+        ]
+      ]
+    },
+    {
+      "id": "mixed-error-warning-reset",
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "warnings": []
+    },
+    {
+      "id": "list-warning",
+      "values": {
+        "users": []
+      },
+      "fields": [
+        {
+          "name": [
+            "users"
+          ],
+          "errors": [],
+          "warnings": [
+            "Add a user"
+          ]
+        }
+      ],
+      "meta": {
+        "errors": [],
+        "warnings": [
+          "Add a user"
+        ]
+      },
+      "text": "Add a user"
+    }
+  ]
+}

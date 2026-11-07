@@ -38,10 +38,11 @@
   let id = $derived(htmlFor ?? `ant-field-${generatedId}`);
   let path = $derived([...(list?.prefixName ?? []), ...formNamePath(name)]);
   let errors = $derived(form?.getFieldError(path) ?? []);
+  let warnings = $derived(form?.getFieldWarning(path) ?? []);
   let isRequired = $derived(required
-    ?? (rules ? rules.some((rule) => rule.required) : form?.isFieldRequired(path))
+    ?? (rules ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path))
     ?? false);
-  let descriptionId = $derived(errors.length || help ? `${id}-help` : undefined);
+  let descriptionId = $derived(errors.length || warnings.length || help ? `${id}-help` : undefined);
 
   $effect.pre(() => {
     // В списке metadata следует за key строки; обычное поле хранит её по имени модели.
@@ -74,7 +75,7 @@
       return isRequired;
     },
     get status() {
-      return errors.length ? 'error' : undefined;
+      return errors.length ? 'error' : warnings.length ? 'warning' : undefined;
     },
     get describedBy() {
       return descriptionId;
@@ -110,6 +111,7 @@
     componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
     `ant-form-item-${form?.layout ?? 'vertical'}`,
     errors.length && 'ant-form-item-has-error',
+    !errors.length && warnings.length && 'ant-form-item-has-warning',
     className
   ]} style={componentTheme.style}>
   <!-- Source Row/Col сбрасывают общие aliases, сохраняя наследование Form tokens. -->
@@ -123,9 +125,12 @@
       <div class="ant-form-item-control-input">
         <div class="ant-form-item-control-input-content">{@render children()}</div>
       </div>
-      {#if errors.length}
-        <div id={descriptionId} class="ant-form-item-explain ant-form-item-explain-error" role="alert">
-          {#each errors as error}<div>{error}</div>{/each}
+      {#if errors.length || warnings.length}
+        <div id={descriptionId} class={[
+          'ant-form-item-explain', errors.length && 'ant-form-item-explain-error'
+        ]} role={errors.length ? 'alert' : 'status'}>
+          {#each errors as error}<div class="ant-form-item-explain-error">{error}</div>{/each}
+          {#each warnings as warning}<div class="ant-form-item-explain-warning">{warning}</div>{/each}
         </div>
       {:else if help}
         <div id={descriptionId} class="ant-form-item-extra">{help}</div>

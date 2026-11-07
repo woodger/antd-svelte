@@ -9399,7 +9399,12 @@ Dayjs|null также поддержан: immutable экземпляр сохр�
 FormValidationError. Ошибка содержит `values`, `outOfDate` и `errorFields` с
 массивами сегментов name и сообщениями errors. `getFieldError(name)` и
 `getFieldsError(names?)` читают ошибки вложенных полей. Прежний `errors` сохраняет
-проекцию верхнего уровня. Warnings пока пусты: warningOnly rules не перенесены.
+проекцию верхнего уровня. Правило с `warningOnly: true` записывает сообщение
+в warnings; оно не блокирует validateFields/submit и не делает поле обязательным.
+`getFieldWarning(name)` читает предупреждения, `getFieldsError` возвращает оба
+массива. При наличии ошибки errorFields включает также предупреждения этого поля.
+FormItem показывает ошибки перед предупреждениями; error имеет приоритет над
+warning. Предупреждение входит в доступное описание, но не выставляет aria-invalid.
 Переданные в `validateFields(names)` пути выбирают проверяемые поля; snapshot
 по-прежнему содержит всю модель. Upstream возвращает проекцию выбранных путей.
 Устаревшие результаты не перезаписывают состояние после изменения или сброса
@@ -9478,9 +9483,12 @@ Add принимает defaultValue и insertIndex, без индекса доб
 неверный индекс вставки также добавляет в конец. Remove принимает индекс или
 массив индексов; повторы и отсутствующие индексы не удаляют лишние строки.
 Move переносит строку и её key. Rules списка принимают только custom validators
-с прежней Svelte-сигнатурой `(value, values)`. Ошибки приходят в meta.errors;
+с прежней Svelte-сигнатурой `(value, values)`. Ошибки приходят в meta.errors,
+предупреждения warningOnly — в meta.warnings;
 после remove/reset поздняя validation не возвращает ошибки удалённых controls.
-WarningOnly и Form.ErrorList/prefixCls context пока не перенесены.
+Form.ErrorList/prefixCls context пока не перенесены.
+WarningOnly сверено с официальным UMD: [браузерные проверки и raw reference](./tests/browser/form-warnings.spec.ts),
+[SSR](./tests/package/form-warnings.ssr.test.ts) и [модель](./src/lib/form-warnings.test.ts).
 
 Отличие от Ant Design 6.6.8: move с дробным индексом игнорируется. В исходном
 UMD `move(0.5, 1)` теряет первую строку и вставляет undefined; этот дефект

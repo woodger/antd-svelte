@@ -26,7 +26,9 @@
   )));
   // React map пропускает holes; each получает плотный список реально существующих позиций.
   let fields = $derived(values.flatMap((_, index) => ({ name: index, key: keys.keys[index] })));
-  let meta = $derived({ errors: form.getFieldError(prefixName), warnings: [] });
+  let meta = $derived({
+    errors: form.getFieldError(prefixName), warnings: form.getFieldWarning(prefixName)
+  });
 
   provideFormList({
     get prefixName() {

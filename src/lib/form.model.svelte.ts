@@ -14,7 +14,7 @@ import {
   type PartialFormValues
 } from './form-store.engine';
 import {
-  validateValue,
+  validateFieldValue,
   type FieldError,
   type FieldErrors,
   type FormRules,
@@ -38,6 +38,8 @@ export interface FormInstance<Values extends FormValues> {
   /** Возвращает ошибки полей модели либо явно перечисленных путей. */
   getFieldsError(names?: readonly NamePath[]): FieldError[];
   getFieldError(name: NamePath): readonly string[];
+  /** Предупреждения warningOnly не входят в errors и не блокируют submit. */
+  getFieldWarning(name: NamePath): readonly string[];
   isFieldTouched(name: NamePath): boolean;
   isFieldValidating(name: NamePath): boolean;
   isFieldRequired(name: NamePath): boolean;
@@ -55,6 +57,7 @@ interface StoredField {
   persistent?: boolean;
   registration?: FormFieldRegistration;
   errors?: string[];
+  warnings?: string[];
   touched: boolean;
   validating: boolean;
   run: number;
@@ -118,10 +121,14 @@ export function createForm<Values extends FormValues>({
   function getFieldsError(names?: readonly NamePath[]): FieldError[] {
     return names
       ? names.map((name) => ({
-        name: formNamePath(name), errors: [...(findField(name)?.errors ?? [])], warnings: []
+        name: formNamePath(name),
+        errors: [...(findField(name)?.errors ?? [])],
+        warnings: [...(findField(name)?.warnings ?? [])]
       }))
       : fields.map((field) => ({
-        name: fieldPath(field), errors: [...(field.errors ?? [])], warnings: []
+        name: fieldPath(field),
+        errors: [...(field.errors ?? [])],
+        warnings: [...(field.warnings ?? [])]
       }));
   }
 
@@ -137,17 +144,20 @@ export function createForm<Values extends FormValues>({
     }
 
     const results = await Promise.all(entries.map(async ({ field, path }) => {
-      const messages = await validateValue(getFormValue(snapshot, path), snapshot, fieldRules(field));
+      const messages = await validateFieldValue(
+        getFormValue(snapshot, path), snapshot, fieldRules(field)
+      );
 
       if (field.run === token) {
         field.validating = false;
 
         if (revision === startRevision && sameFormPath(path, fieldPath(field))) {
-          field.errors = messages;
+          field.errors = messages.errors;
+          field.warnings = messages.warnings;
         }
       }
 
-      return { name: path, errors: messages, warnings: [] };
+      return { name: path, ...messages };
     }));
 
     const nextErrors = results.filter((field) => field.errors.length);
@@ -199,6 +209,7 @@ export function createForm<Values extends FormValues>({
 
   function clearField(field: StoredField) {
     field.errors = [];
+    field.warnings = [];
     field.validating = false;
     field.run = ++request;
   }
@@ -226,12 +237,13 @@ export function createForm<Values extends FormValues>({
     },
     getFieldsError,
     getFieldError: (name) => findField(name)?.errors ?? [],
+    getFieldWarning: (name) => findField(name)?.warnings ?? [],
     isFieldTouched: (name) => findField(name)?.touched ?? false,
     isFieldValidating: (name) => findField(name)?.validating ?? false,
     isFieldRequired: (name) => {
       const field = findField(name);
 
-      return field ? fieldRules(field).some((rule) => rule.required) : false;
+      return field ? fieldRules(field).some((rule) => rule.required && !rule.warningOnly) : false;
     },
     setFieldValue(name, value) {
       if (Object.is(getFormValue(values, name), value)) return;
@@ -290,6 +302,7 @@ export function createForm<Values extends FormValues>({
 
       for (const field of fields) {
         field.errors = undefined;
+        field.warnings = undefined;
         field.touched = false;
         field.validating = false;
         field.run = ++request;
@@ -378,6 +391,7 @@ export function createForm<Values extends FormValues>({
             if (registration.rules !== undefined) {
               registered.run = ++request;
               registered.errors = undefined;
+              registered.warnings = undefined;
               registered.touched = false;
               registered.validating = false;
             }

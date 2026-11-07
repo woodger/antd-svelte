@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { validateValue } from './validation.engine';
+import { validateFieldValue, validateValue } from './validation.engine';
 
 describe('validateValue', () => {
   it('rejects blank required text while preserving zero and false', async () => {
@@ -111,5 +111,39 @@ describe('validateValue', () => {
     ).toEqual(
       []
     );
+  });
+});
+
+describe('validateFieldValue', () => {
+  it('separates built-in warnings from errors in their rule order', async () => {
+    const result = await validateFieldValue('a', {}, [
+      { min: 2, warningOnly: true, message: 'Longer name recommended' },
+      { pattern: /^b/, message: 'Must start with b' },
+      { pattern: /^c/, warningOnly: true, message: 'Consider c' }
+    ]);
+
+    expect(result).toEqual({
+      errors: ['Must start with b'], warnings: ['Longer name recommended', 'Consider c']
+    });
+  });
+
+  it('keeps a required warning out of the blocking validation result', async () => {
+    const rules = [{ required: true, warningOnly: true, message: 'Name recommended' }];
+
+    expect(await validateFieldValue('', {}, rules))
+      .toEqual({ errors: [], warnings: ['Name recommended'] });
+    expect(await validateValue('', {}, rules)).toEqual([]);
+  });
+
+  it('collects returned and rejected custom warnings without losing errors', async () => {
+    const result = await validateFieldValue([], {}, [
+      { warningOnly: true, validator: async () => 'Add a user' },
+      { warningOnly: true, validator: async () => { throw new Error('Review users'); } },
+      { validator: () => 'Users unavailable' }
+    ]);
+
+    expect(result).toEqual({
+      errors: ['Users unavailable'], warnings: ['Add a user', 'Review users']
+    });
   });
 });

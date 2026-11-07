@@ -18,7 +18,6 @@ export interface FormListOperation {
 
 export interface FormListMeta {
   errors: readonly string[];
-  /** Пустой массив, пока warningOnly rules не перенесены. */
   warnings: readonly string[];
 }
 
@@ -26,6 +25,8 @@ export interface FormListMeta {
 export interface FormListRule {
   validator: NonNullable<ValidationRule['validator']>;
   message?: string;
+  /** Предупреждение отображается в meta.warnings и не блокирует submit. */
+  warningOnly?: boolean;
 }
 
 /** Управляет массивом в ближайшем Form; вложенный name считается от родительского FormList. */

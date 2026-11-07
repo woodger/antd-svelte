@@ -135,6 +135,11 @@
 
 ### Added
 
+- Form: warningOnly, getFieldWarning и warnings в getFieldsError/FormList meta.
+  Предупреждения не блокируют submit, не делают поле required и не выставляют
+  aria-invalid; ошибки сохраняют приоритет. Поздняя validation не возвращает
+  предупреждения после reset, изменения значения или удаления локального поля.
+
 - FormList: вложенные списки, initialValue, add/remove/move, устойчивые ключи,
   custom validation и reset. Сохранены controls, фокус и полевые ошибки при
   перестановке; ошибки удалённых строк не возвращаются после async validation.

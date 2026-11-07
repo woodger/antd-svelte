@@ -9,6 +9,7 @@ export interface FormContext {
   readonly layout: 'vertical' | 'horizontal';
   readonly resetKey?: object;
   getFieldError(name: NamePath): readonly string[];
+  getFieldWarning(name: NamePath): readonly string[];
   isFieldRequired(name: NamePath): boolean;
   touchField(name: NamePath): void;
   registerField?(field: FormFieldRegistration): (() => void) | undefined;
@@ -24,7 +25,7 @@ export interface FormFieldContext {
   readonly label?: string;
   readonly disabled: boolean | undefined;
   readonly required: boolean;
-  readonly status: 'error' | undefined;
+  readonly status: 'error' | 'warning' | undefined;
   readonly describedBy: string | undefined;
   onBlur(): void;
 }

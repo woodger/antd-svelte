@@ -5,6 +5,8 @@ export type FieldName<Values> = Extract<keyof Values, string>;
 
 export interface ValidationRule<Values extends FormValues = FormValues> {
   required?: boolean;
+  /** По умолчанию false; сообщение попадает в warnings и не блокирует submit. */
+  warningOnly?: boolean;
   min?: number;
   max?: number;
   pattern?: RegExp;
@@ -25,7 +27,6 @@ export type FieldErrors<Values extends FormValues> = Partial<Record<FieldName<Va
 export interface FieldError {
   name: (string | number)[];
   errors: string[];
-  /** Пустой массив: warningOnly rules пока не перенесены. */
   warnings: string[];
 }
 
@@ -34,7 +35,16 @@ export async function validateValue<Values extends FormValues>(
   values: Readonly<Values>,
   rules: readonly ValidationRule<Values>[]
 ): Promise<string[]> {
+  return (await validateFieldValue(value, values, rules)).errors;
+}
+
+export async function validateFieldValue<Values extends FormValues>(
+  value: FormValue,
+  values: Readonly<Values>,
+  rules: readonly ValidationRule<Values>[]
+): Promise<{ errors: string[]; warnings: string[] }> {
   const errors: string[] = [];
+  const warnings: string[] = [];
   const array = Array.isArray(value);
   const empty = value === null
     || value === undefined
@@ -44,8 +54,10 @@ export async function validateValue<Values extends FormValues>(
       && value.length === 0);
 
   for (const rule of rules) {
+    const messages = rule.warningOnly ? warnings : errors;
+
     if (empty && rule.required) {
-      errors.push(rule.message ?? 'Заполните это поле.');
+      messages.push(rule.message ?? 'Заполните это поле.');
       continue;
     }
 
@@ -60,14 +72,14 @@ export async function validateValue<Values extends FormValues>(
         : typeof value === 'number' ? value : undefined;
 
     if (length !== undefined && rule.min !== undefined && length < rule.min) {
-      errors.push(
+      messages.push(
         rule.message ?? `${array ? 'Минимальное количество' : 'Минимальное значение'}: ${rule.min}.`
       );
       continue;
     }
 
     if (length !== undefined && rule.max !== undefined && length > rule.max) {
-      errors.push(
+      messages.push(
         rule.message
         ?? `${array
           ? 'Максимальное количество'
@@ -82,7 +94,7 @@ export async function validateValue<Values extends FormValues>(
       && !new RegExp(rule.pattern.source, rule.pattern.flags).test(
         String(value)
       )) {
-      errors.push(rule.message ?? 'Проверьте формат значения.');
+      messages.push(rule.message ?? 'Проверьте формат значения.');
       continue;
     }
 
@@ -91,10 +103,10 @@ export async function validateValue<Values extends FormValues>(
         const message = await rule.validator(value, values);
 
         if (message) {
-          errors.push(message);
+          messages.push(message);
         }
       } catch (error) {
-        errors.push(rule.message
+        messages.push(rule.message
           ?? (error instanceof Error
             ? error.message
             : 'Проверьте значение.'));
@@ -102,5 +114,5 @@ export async function validateValue<Values extends FormValues>(
     }
   }
 
-  return errors;
+  return { errors, warnings };
 }

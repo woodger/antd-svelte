@@ -47,6 +47,7 @@
       return getFormHooks(form)?.resetKey ?? form.values;
     },
     getFieldError: (name) => form.getFieldError(name),
+    getFieldWarning: (name) => form.getFieldWarning(name),
     isFieldRequired: (name) => form.isFieldRequired(name),
     touchField: (name) => form.touchField(name),
     registerField: (field) => getFormHooks(form)?.registerField(field),
