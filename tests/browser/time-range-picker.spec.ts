@@ -423,6 +423,7 @@ test('TimeRangePicker presets submit immediately and snippets keep mode and rang
 });
 
 test('TimeRangePicker Now confirms one field and applies current time restrictions without onOk', async ({ page }) => {
+  await page.clock.setSystemTime(new Date('2024-09-15T12:34:00.700Z'));
   await page.clock.pauseAt(new Date('2024-09-15T12:35:00.700Z'));
   await control(page, 'Show interval Now').check();
   await start(page).click();

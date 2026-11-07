@@ -774,6 +774,9 @@
 
 ### Fixed
 
+- TimeRangePicker: тест Now сбрасывает часы перед pauseAt, чтобы загрузка фикстуры
+  не переносила целевое время в прошлое. Ожидаемые UTC/precision и callbacks сохранены.
+
 - Statistic: browser-проверка timer/countdown ожидает оба узла ленивой фикстуры
   перед сохранением refs и текста; управление часами и identity checks сохранены.
 
