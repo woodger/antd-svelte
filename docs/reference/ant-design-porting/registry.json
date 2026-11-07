@@ -1169,7 +1169,14 @@
         "src/lib/grid.types.ts",
         "src/lib/grid.engine.ts",
         "readme.md",
-        "integration:grid"
+        "integration:grid",
+        "src/lib/theme-grid-tokens-reference.test.ts",
+        "tools/fixtures/ant-design-grid-tokens-reference.json",
+        "tests/package/grid-theme.ssr.test.ts",
+        "tests/browser/grid-theme.spec.ts",
+        "tests/browser/fixtures/ant-design-grid-theme-reference.json",
+        "tests/browser/fixtures/ant-design-grid-media-observation.json",
+        "docs/reference/theme-context.md"
       ],
       "features": [
         {
@@ -1211,10 +1218,33 @@
         {
           "id": "global-config",
           "title": "Пользовательские breakpoint/theme tokens и prefixCls",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "CSS-рецепт закрепляет default media thresholds; глобальный configurable token engine переносится отдельно."
+          "evidence": [
+            "src/lib/Row.svelte",
+            "src/lib/Col.svelte",
+            "tests/browser/grid-theme.spec.ts",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Grid aliases/algorithms и scoped variables подключены к Row/Col. CSS-рецепт пока сохраняет default media thresholds; глобальные screen tokens и prefixCls остаются в работе. Component screen*Min в CSS-variable режиме Source создают только declarations; raw observation сохранено."
+        },
+        {
+          "id": "component-theme",
+          "title": "Grid aliases/algorithms, typography и reactive scope",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Row.svelte",
+            "src/lib/Col.svelte",
+            "src/lib/theme-grid-tokens-reference.test.ts",
+            "tools/fixtures/ant-design-grid-tokens-reference.json",
+            "tests/package/grid-theme.ssr.test.ts",
+            "tests/browser/grid-theme.spec.ts",
+            "tests/browser/fixtures/ant-design-grid-theme-reference.json",
+            "tests/browser/fixtures/ant-design-grid-media-observation.json",
+            "docs/reference/theme-context.md"
+          ],
+          "note": "Пустые defaults, source alias variables на обоих roots; font reset, algorithm, cssVar prefix, nested/reset и style precedence. Updates/reset сохраняют slots/editor/refs/focus и layout. Component media vars не означают responsive overrides, как в Source CSS-variable режиме; global screen tokens отдельно."
         }
       ]
     },
@@ -14846,7 +14876,7 @@
             "src/lib/theme-context.svelte.ts",
             "docs/reference/theme-context.md"
           ],
-          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены, в частности, для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs, Slider и Divider получили исходные component tokens и CSS consumption; Flex и Space получили source alias overrides без собственных defaults и typography reset, Layout/Sider — общие component tokens и наследуемые переменные секций. Полное покрытие CSS-потребителей ещё переносится."
+          "note": "Runtime token/algorithm/components, source inheritance и useToken, полные 70 component token records, raw/CSS-variable tokens, source hash metadata и глобальные CSS variables доступны. Применение ComponentToken/alias overrides и prepareComponentToken ко всем CSS-потребителям, hash/cssVar class на каждом component root, prefixCls, CSP/style extraction остаются в работе. Native mode/primary/compact без source-настроек сохраняют прежние цвета; compact font/control metrics согласованы с source отдельно. Source preparation/CSS consumption уже подключены, в частности, для Button, Input/TextArea/Password/Search/OTP, InputNumber, SpaceAddon, Radio/RadioButton/RadioGroup, Checkbox/CheckboxGroup и Switch; остальные consumers требуют переноса. Source Avatar/AvatarGroup и Badge подключены; Tooltip/Popover/Popconfirm, Select, AutoComplete, TreeSelect, Cascader/CascaderPanel и Anchor получили собственную подготовку tokens и CSS consumption; Tabs, Slider и Divider получили исходные component tokens и CSS consumption; Flex и Space получили source alias overrides без собственных defaults и typography reset, Layout/Sider — общие component tokens и наследуемые переменные секций. Полное покрытие CSS-потребителей ещё переносится. Grid Row/Col получили пустую source factory и alias/algorithm CSS consumption; scoped global breakpoint CSS остаётся в работе."
         },
         {
           "id": "static-design-tokens",

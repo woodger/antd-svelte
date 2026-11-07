@@ -1,5 +1,6 @@
 <script lang="ts">
   import { useConfig } from './config-context';
+  import { useComponentTheme } from './theme-component.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { provideGridRow } from './grid-context';
   import { gridGutters, gridHalfGutter, gridResponsiveValue } from './grid.engine';
@@ -17,6 +18,7 @@
     ...rest
   }: RowProps = $props();
   const config = useConfig();
+  const componentTheme = useComponentTheme('Grid');
   const breakpoint = createBreakpoint();
   let screens = $derived(breakpoint.connected ? breakpoint.screens : null);
   let gutters = $derived(gridGutters(gutter, screens));
@@ -38,6 +40,7 @@
 <div {...rest} bind:this={nativeElement} dir={config.direction}
   class={[
       'ant-row ant-grid-css-var',
+      componentTheme.className,
       wrap === false && 'ant-row-no-wrap',
       alignment && `ant-row-${alignment}`,
       justification && `ant-row-${justification}`,
@@ -45,6 +48,7 @@
       className
     ]}
   style={[
+      componentTheme.style,
       margin && `margin-inline:${margin}`,
       rowGap !== undefined && `row-gap:${rowGap}`,
       style

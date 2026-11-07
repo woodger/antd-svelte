@@ -9,6 +9,11 @@
 
 ### Added
 
+- Grid Row/Col: общие component aliases/algorithms и scoped variables уже при SSR,
+  включая typography, nested providers и custom CSS prefix. Сохранены приоритеты
+  gutter/flex/style, refs и содержимое slots. Ограничение component media variables
+  upstream записано отдельно; глобальные breakpoint tokens ещё требуют переноса.
+
 - Table: showHeader с default true, source no-header corners и сохранением caption,
   панелей и состояния строк. При скрытой шапке fixed offsets измеряются по tbody
   и обновляются после смены/опустошения данных. Добавлены UMD/SSR/browser-проверки.

@@ -1,0 +1,266 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "package/dist/antd.min.js",
+    "reactVersion": "18.3.1"
+  },
+  "cases": [
+    {
+      "name": "default",
+      "config": {},
+      "variables": {}
+    },
+    {
+      "name": "component-aliases",
+      "config": {
+        "components": {
+          "Grid": {
+            "fontFamily": "monospace",
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-family": "monospace",
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-color-text": "#722ed1"
+      }
+    },
+    {
+      "name": "global-aliases",
+      "config": {
+        "token": {
+          "fontFamily": "monospace",
+          "fontSize": 20,
+          "lineHeight": 1.8,
+          "colorText": "#722ed1"
+        }
+      },
+      "variables": {}
+    },
+    {
+      "name": "dark",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm"
+        ]
+      },
+      "variables": {}
+    },
+    {
+      "name": "compact",
+      "config": {
+        "algorithm": [
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {}
+    },
+    {
+      "name": "dark-compact",
+      "config": {
+        "algorithm": [
+          "darkAlgorithm",
+          "compactAlgorithm"
+        ]
+      },
+      "variables": {}
+    },
+    {
+      "name": "wireframe",
+      "config": {
+        "token": {
+          "wireframe": true
+        }
+      },
+      "variables": {}
+    },
+    {
+      "name": "component-algorithm",
+      "config": {
+        "components": {
+          "Grid": {
+            "algorithm": true,
+            "fontSize": 18,
+            "colorPrimary": "#fa541c"
+          }
+        }
+      },
+      "variables": {
+        "--ant-color-primary": "#fa541c",
+        "--ant-font-size": "18px",
+        "--ant-color-primary-bg": "#fff2e8",
+        "--ant-color-primary-bg-hover": "#ffd8bf",
+        "--ant-color-primary-border": "#ffbb96",
+        "--ant-color-primary-border-hover": "#ff9c6e",
+        "--ant-color-primary-hover": "#ff7a45",
+        "--ant-color-primary-active": "#d4380d",
+        "--ant-color-primary-text-hover": "#ff7a45",
+        "--ant-color-primary-text": "#fa541c",
+        "--ant-color-primary-text-active": "#d4380d",
+        "--ant-font-size-sm": "14px",
+        "--ant-font-size-lg": "20px",
+        "--ant-font-size-xl": "26px",
+        "--ant-font-size-heading-1": "48px",
+        "--ant-font-size-heading-2": "40px",
+        "--ant-font-size-heading-3": "32px",
+        "--ant-font-size-heading-4": "26px",
+        "--ant-font-size-heading-5": "20px",
+        "--ant-line-height": "1.4444444444444444",
+        "--ant-line-height-lg": "1.4",
+        "--ant-line-height-sm": "1.5714285714285714",
+        "--ant-font-height": "26px",
+        "--ant-font-height-lg": "28px",
+        "--ant-font-height-sm": "22px",
+        "--ant-line-height-heading-1": "1.1666666666666667",
+        "--ant-line-height-heading-2": "1.2",
+        "--ant-line-height-heading-3": "1.25",
+        "--ant-line-height-heading-4": "1.3076923076923077",
+        "--ant-line-height-heading-5": "1.4",
+        "--ant-font-size-icon": "14px",
+        "--ant-control-item-bg-active": "#fff2e8",
+        "--ant-control-item-bg-active-hover": "#ffd8bf",
+        "--ant-control-outline": "rgba(255,125,25,0.1)"
+      }
+    },
+    {
+      "name": "component-compact",
+      "config": {
+        "components": {
+          "Grid": {
+            "algorithm": [
+              "compactAlgorithm"
+            ],
+            "fontSize": 18
+          }
+        }
+      },
+      "variables": {
+        "--ant-control-height": "28px",
+        "--ant-size-lg": "16px",
+        "--ant-size-md": "16px",
+        "--ant-size-ms": "12px",
+        "--ant-size": "8px",
+        "--ant-size-sm": "8px",
+        "--ant-size-xs": "4px",
+        "--ant-control-height-sm": "21px",
+        "--ant-control-height-xs": "14px",
+        "--ant-control-height-lg": "35px",
+        "--ant-control-interactive-size": "14px",
+        "--ant-padding-xs": "4px",
+        "--ant-padding-sm": "8px",
+        "--ant-padding": "8px",
+        "--ant-padding-md": "16px",
+        "--ant-padding-lg": "16px",
+        "--ant-padding-content-horizontal-lg": "16px",
+        "--ant-padding-content-vertical-lg": "12px",
+        "--ant-padding-content-horizontal": "12px",
+        "--ant-padding-content-vertical": "8px",
+        "--ant-padding-content-horizontal-sm": "8px",
+        "--ant-padding-content-vertical-sm": "4px",
+        "--ant-margin-xs": "4px",
+        "--ant-margin-sm": "8px",
+        "--ant-margin": "8px",
+        "--ant-margin-md": "16px",
+        "--ant-margin-lg": "16px"
+      }
+    },
+    {
+      "name": "custom-css-prefix",
+      "config": {
+        "cssVar": {
+          "key": "grid-reference",
+          "prefix": "owned"
+        },
+        "components": {
+          "Grid": {
+            "fontFamily": "monospace",
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "colorText": "#722ed1"
+          }
+        }
+      },
+      "variables": {
+        "--owned-font-family": "monospace",
+        "--owned-font-size": "20px",
+        "--owned-line-height": "1.8",
+        "--owned-color-text": "#722ed1"
+      }
+    },
+    {
+      "name": "fractional-metrics",
+      "config": {
+        "components": {
+          "Grid": {
+            "fontSize": 15.375,
+            "lineHeight": 1.375
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "15.375px",
+        "--ant-line-height": "1.375"
+      }
+    },
+    {
+      "name": "zero-metrics",
+      "config": {
+        "components": {
+          "Grid": {
+            "fontSize": 0,
+            "lineHeight": 0
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-size": "0px",
+        "--ant-line-height": "0"
+      }
+    },
+    {
+      "name": "undefined-metrics",
+      "config": {
+        "components": {
+          "Grid": {
+            "fontSize": {
+              "$type": "undefined"
+            },
+            "fontFamily": {
+              "$type": "undefined"
+            }
+          }
+        }
+      },
+      "variables": {}
+    },
+    {
+      "name": "component-media-vars",
+      "config": {
+        "components": {
+          "Grid": {
+            "fontFamily": "monospace",
+            "fontSize": 20,
+            "lineHeight": 1.8,
+            "colorText": "#722ed1",
+            "screenSMMin": 640,
+            "screenMDMin": 900
+          }
+        }
+      },
+      "variables": {
+        "--ant-font-family": "monospace",
+        "--ant-font-size": "20px",
+        "--ant-line-height": "1.8",
+        "--ant-color-text": "#722ed1",
+        "--ant-screen-sm-min": "640px",
+        "--ant-screen-md-min": "900px"
+      }
+    }
+  ]
+}

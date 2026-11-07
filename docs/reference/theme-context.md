@@ -1066,6 +1066,33 @@ Summary, tree indentation, virtual rows и отдельная sticky scrollbar �
 перенесены; declarations expandIconMarginTop и stickyScrollBarBorderRadius
 не означают наличие соответствующего API.
 
+## Тема Grid
+
+`components.Grid` имеет пустую default factory. Alias overrides и algorithms
+применяются отдельно к Row и Col; source common styles читают fontFamily/fontSize.
+Остальные aliases сериализуются по исходным правилам и используются только там,
+где исходный CSS их потребляет. Gutter/flex/style layers сохраняют прежний приоритет;
+native-only стили не меняются. Обновления/reset сохраняют DOM, nativeElement refs,
+slot input, selection/focus и FormData; соседний provider остаётся независимым.
+
+14 профилей / 140 CSS-состояний официального UMD проверяются в
+[unit](../../src/lib/theme-grid-tokens-reference.test.ts),
+[SSR](../../tests/package/grid-theme.ssr.test.ts) и
+[браузере](../../tests/browser/grid-theme.spec.ts), fixture `?fixture=grid-theme`.
+Typography host Source использует public theme.useToken(); width=640px с той же
+границей viewport, что у стенда. Inherit/reset, RTL, gutter/nowrap и локальные
+Row/Col styles используют настроенный cssVar prefix на обеих сторонах; native
+совместимость с canonical ant variables проверяется отдельно. CSS values эталона
+сохраняются без нормализации.
+
+В [наблюдении media](../../tests/browser/fixtures/ant-design-grid-media-observation.json)
+components.Grid.screenSMMin=640 и screenMDMin=900 создают declarations, но при
+width=800px Col всё равно использует md=33.3333%. Поведение подтверждено на свежем
+page, без ранее загруженной Grid темы. Component declarations сохранены, media
+не меняется этим этапом. Подключение глобальных screen tokens и scoped responsive
+CSS остаётся отдельной задачей; Row JS observer и Col CSS имеют разные исходные
+пороги screen* и screen*Min.
+
 ## CSS и совместимость
 
 При source-настройках provider размещает рассчитанные глобальные CSS variables

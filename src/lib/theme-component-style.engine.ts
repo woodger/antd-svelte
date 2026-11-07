@@ -38,9 +38,10 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
   | 'List' | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
-  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification' | 'Table';
+  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification' | 'Table' | 'Grid';
 
 const factories = {
+  Grid: () => ({}),
   Table: prepareTableTokens,
   Notification: (token: GlobalToken) => ({
     zIndexPopup: token.zIndexPopupBase + 1050,
@@ -417,6 +418,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  Grid: [],
   Table: ['expandIconScale'],
   Notification: [],
   Message: [],

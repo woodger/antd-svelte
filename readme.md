@@ -639,7 +639,21 @@ bind:nativeElement и RTL без изменения DOM-порядка. Гале
 фикстура — `?fixture=grid`. Рецепт grid извлекает 1043 правила с исходными media
 scopes и без keyframes. Unit/SSR/Chromium проверяют gutters, вложенность, ширины,
 границы media, нулевые reset-значения, CSS units, RTL и cleanup.
-PrefixCls и пользовательские breakpoint/theme tokens пока не поддержаны.
+Theme.components.Grid применяет aliases и algorithms к Row/Col, включая
+fontSize/fontFamily, вложенные provider и custom cssVar prefix. Собственных defaults
+у Grid нет. Component variables ставятся перед прежними gutter/flex/style layers;
+локальный style сохраняет приоритет. Обновления сохраняют Row/Col refs, slots,
+редактируемое значение, focus/selection и responsive layout.
+14 тем / 140 CSS-состояний UMD сверяются в
+[browser](tests/browser/grid-theme.spec.ts), declarations —
+в [unit](src/lib/theme-grid-tokens-reference.test.ts), серверная граница —
+в [SSR](tests/package/grid-theme.ssr.test.ts). Fixture `?fixture=grid-theme`.
+
+PrefixCls и глобальные пользовательские breakpoint tokens ещё не подключены.
+В CSS-variable режиме эталон записывает components.Grid.screen*Min в CSS variables,
+но Col media queries продолжают использовать глобальные thresholds. Это
+[наблюдение](tests/browser/fixtures/ant-design-grid-media-observation.json) сохранено;
+declarations сами по себе не заявляют изменения media layout.
 
 ## Masonry
 
