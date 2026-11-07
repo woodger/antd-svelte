@@ -649,7 +649,21 @@ fontSize/fontFamily, вложенные provider и custom cssVar prefix. Соб
 в [unit](src/lib/theme-grid-tokens-reference.test.ts), серверная граница —
 в [SSR](tests/package/grid-theme.ssr.test.ts). Fixture `?fixture=grid-theme`.
 
-PrefixCls и глобальные пользовательские breakpoint tokens ещё не подключены.
+Глобальные theme.token.screen* задают Row observer, а screen*Min — Col media CSS.
+Пороги могут различаться: между screenSMMin и screenSM меняется ширина Col,
+но Row ещё не выбирает sm gutter/align/justify. Сохраняются source validation
+порядка порогов и безусловные xs column styles. Пользовательские media работают
+при SSR без JavaScript и обновляются после mount; nested/reset/sibling providers
+изолированы, включая одинаковый cssVar.key и hashed=false. Стандартный режим
+и createBreakpoint().connect(window) без явных queries сохраняют прежние пороги.
+5 конфигураций / 126 состояний на свежих pages эталона сверяются в
+[browser](tests/browser/grid-breakpoints.spec.ts); загрузка CSS в обоих порядках
+без JavaScript — [отдельно](tests/browser/grid-breakpoints-ssr.spec.ts).
+Source не обновляет Row/Col layout при смене глобальных порогов после mount,
+хотя публичные tokens уже изменились. [Наблюдение](tests/browser/fixtures/ant-design-grid-breakpoints-update-observation.json)
+сохранено; Svelte обновляет обе части без потери DOM и состояния slot input.
+
+PrefixCls ещё не подключён.
 В CSS-variable режиме эталон записывает components.Grid.screen*Min в CSS variables,
 но Col media queries продолжают использовать глобальные thresholds. Это
 [наблюдение](tests/browser/fixtures/ant-design-grid-media-observation.json) сохранено;

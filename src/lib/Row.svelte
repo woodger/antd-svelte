@@ -1,9 +1,13 @@
 <script lang="ts">
+  import { untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { useDesignTokenContext } from './theme-context.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { provideGridRow } from './grid-context';
-  import { gridGutters, gridHalfGutter, gridResponsiveValue } from './grid.engine';
+  import {
+    getGridMediaQueries, gridGutters, gridHalfGutter, gridResponsiveValue
+  } from './grid.engine';
   import type { RowProps } from './grid.types';
 
   let {
@@ -19,7 +23,12 @@
   }: RowProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Grid');
+  const designTokens = useDesignTokenContext();
   const breakpoint = createBreakpoint();
+  let mediaQueries = $derived(designTokens.enabled
+    ? getGridMediaQueries(designTokens.state.token) : undefined);
+  // $derived ленивый: Source проверяет пороги при SSR до подключения observer.
+  untrack(() => mediaQueries);
   let screens = $derived(breakpoint.connected ? breakpoint.screens : null);
   let gutters = $derived(gridGutters(gutter, screens));
   let alignment = $derived(gridResponsiveValue(align, screens));
@@ -34,7 +43,7 @@
       return wrap;
     }
   });
-  $effect(() => breakpoint.connect(window));
+  $effect(() => breakpoint.connect(window, mediaQueries));
 </script>
 
 <div {...rest} bind:this={nativeElement} dir={config.direction}

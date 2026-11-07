@@ -9,6 +9,11 @@
 
 ### Added
 
+- Grid: глобальные screen tokens управляют Row observer и scoped Col media CSS,
+  включая SSR без JavaScript, вложенные/соседние темы и обновление после mount.
+  Сохранены source-пороги screen*/screen*Min, reset-классы и приоритет локальных
+  стилей. Зависание раскладки при обновлении темы в upstream записано отдельно.
+
 - Grid Row/Col: общие component aliases/algorithms и scoped variables уже при SSR,
   включая typography, nested providers и custom CSS prefix. Сохранены приоритеты
   gutter/flex/style, refs и содержимое slots. Ограничение component media variables

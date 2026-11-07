@@ -1088,10 +1088,39 @@ Row/Col styles используют настроенный cssVar prefix на о
 В [наблюдении media](../../tests/browser/fixtures/ant-design-grid-media-observation.json)
 components.Grid.screenSMMin=640 и screenMDMin=900 создают declarations, но при
 width=800px Col всё равно использует md=33.3333%. Поведение подтверждено на свежем
-page, без ранее загруженной Grid темы. Component declarations сохранены, media
-не меняется этим этапом. Подключение глобальных screen tokens и scoped responsive
-CSS остаётся отдельной задачей; Row JS observer и Col CSS имеют разные исходные
-пороги screen* и screen*Min.
+page, без ранее загруженной Grid темы. Component declarations сохранены; media
+используют глобальные, а не компонентные пороги.
+
+Глобальные screen* управляют Row observer/gutter/align/justify; screen*Min задают
+Col media. XS column styles безусловны, а Row xs использует screenXSMax.
+Проверка порядка порогов совпадает с responsiveObserver. При custom minima
+provider добавляет полный source Col stylesheet с приватным scope, независимым
+от cssVar.key и hashed. Default stylesheet исключает такие Col без изменения
+specificity; оба порядка загрузки CSS работают ещё до JavaScript. Вложенный
+provider с теми же media не дублирует stylesheet; reset получает default rules,
+смена порогов/unmount удаляет старый owned style. Row обновляет media listeners
+с cleanup, сохраняя refs, DOM и редактор внутри Col. Публичный standalone
+createBreakpoint без queries сохраняет прежний default contract.
+
+5 конфигураций / 126 состояний в
+[raw UMD reference](../../tests/browser/fixtures/ant-design-grid-breakpoints-reference.json)
+сняты на свежем page для каждого сочетания config/scope/direction. Проверяются
+все шесть CSS boundaries, раздельные screen/screenMin, RTL, zero reset, responsive
+flex и user styles: [browser](../../tests/browser/grid-breakpoints.spec.ts),
+[SSR без JavaScript](../../tests/browser/grid-breakpoints-ssr.spec.ts),
+[package SSR](../../tests/package/grid-breakpoints.ssr.test.ts),
+[engine](../../src/lib/grid-style.engine.test.ts). Fixture `?fixture=grid-breakpoints`.
+Рецепт grid-responsive воспроизводит 1027 Col rules, включая base/xs и at-rules;
+runtime меняет только приватный marker и шесть media minima.
+
+В [наблюдении обновления](../../tests/browser/fixtures/ant-design-grid-breakpoints-update-observation.json)
+Source public useToken уже возвращает screenMD=900 после смены темы при width=800,
+но Row gap остаётся 18px, а обе Col — 33.3333%, как при старом screenMD=768.
+Свежий mount той же новой темы даёт gap=12px и первую Col=50%.
+Source useBreakpoint подписывается по refreshOnChange, не по смене observer;
+CSS media в замере также остаются прежними. Это поведение не перенесено: Svelte
+обновляет Row observer и Col CSS вместе. Raw CSS/token values сохранены без
+подмены; fresh-mount матрица и live-update проверка разделены.
 
 ## CSS и совместимость
 

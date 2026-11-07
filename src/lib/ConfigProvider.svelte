@@ -53,7 +53,8 @@
   import type { TextAreaConfig } from './textarea.types';
   import type { Snippet } from 'svelte';
   import { provideConfig, useConfig, type ConfigContext } from './config-context';
-  import { provideDesignTokens } from './theme-context.svelte';
+  import { provideDesignTokens, useDesignTokenContext } from './theme-context.svelte';
+  import { getGridMediaCss, getGridMediaScope } from './grid-style.engine';
   import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { ComponentSize, Locale, ThemeConfig } from './types';
   import './styles.css';
@@ -207,9 +208,16 @@
   }: ConfigProviderProps = $props();
 
   const parent = useConfig();
+  const parentDesignTokens = useDesignTokenContext();
   const themeId = $props.id();
   let element = $state<HTMLDivElement>();
   const designTokens = provideDesignTokens(() => theme, themeId, () => element);
+  let gridMediaScope = $derived(designTokens.enabled
+    ? getGridMediaScope(designTokens.state.token) : undefined);
+  let parentGridMediaScope = $derived(parentDesignTokens.enabled
+    ? getGridMediaScope(parentDesignTokens.state.token) : undefined);
+  let gridMediaCss = $derived(gridMediaScope && gridMediaScope !== parentGridMediaScope
+    ? getGridMediaCss(designTokens.state.token) : undefined);
   const config: ConfigContext = {
     get tabs() {
       return tabs ?? parent.tabs;
@@ -454,6 +462,9 @@
 
 {#if designTokens.enabled && theme}
   <ThemeScopeStyle css={designTokens.state.scopeCSS} scope={designTokens.state.key} />
+{/if}
+{#if gridMediaCss && gridMediaScope}
+  <ThemeScopeStyle css={gridMediaCss} scope={gridMediaScope} />
 {/if}
 
 <div
