@@ -1,0 +1,77 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "source": "unmodified UMD with runtime CSS-in-JS",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "viewport": {
+      "width": 600,
+      "height": 400
+    },
+    "theme": {
+      "token": {
+        "motion": false
+      }
+    },
+    "operation": "Compare unsupported nested preview.classNames.root with current top-level classNames.popup.root for Image and Image.PreviewGroup; Image.styles.root padding is 7px. Unmodified official UMD, React/DOM 18.3.1, no static CSS.",
+    "observed": "Nested preview.classNames.root is not part of the declared preview config in rc-image 1.10.0 and is ignored in 6.6.8; top-level classNames.popup.root applies to the preview root. The Svelte subset supports the working top-level semantic field."
+  },
+  "cases": [
+    {
+      "kind": "single",
+      "snapshot": {
+        "rootPadding": "7px",
+        "previewClassNode": [],
+        "previewRoots": [
+          "ant-image-preview css-1y106cm css-var-r0 ant-image-css-var css-1y106cm css-var-r0 ant-image-css-var ant-image-preview-movable",
+          "ant-image-preview-mask",
+          "ant-image-preview-body",
+          "ant-image-preview-img"
+        ]
+      }
+    },
+    {
+      "kind": "group",
+      "snapshot": {
+        "rootPadding": "7px",
+        "previewClassNode": [],
+        "previewRoots": [
+          "ant-image-preview css-1y106cm css-var-r3 ant-image-css-var ant-image-preview-movable",
+          "ant-image-preview-mask",
+          "ant-image-preview-body",
+          "ant-image-preview-img"
+        ]
+      }
+    },
+    {
+      "kind": "single-popup",
+      "snapshot": {
+        "rootPadding": "7px",
+        "previewClassNode": [
+          "ant-image-preview css-1y106cm css-var-r6 ant-image-css-var css-1y106cm css-var-r6 ant-image-css-var current-preview ant-image-preview-movable"
+        ],
+        "previewRoots": [
+          "ant-image-preview css-1y106cm css-var-r6 ant-image-css-var css-1y106cm css-var-r6 ant-image-css-var current-preview ant-image-preview-movable",
+          "ant-image-preview-mask",
+          "ant-image-preview-body",
+          "ant-image-preview-img"
+        ]
+      }
+    },
+    {
+      "kind": "group-popup",
+      "snapshot": {
+        "rootPadding": "7px",
+        "previewClassNode": [
+          "ant-image-preview css-1y106cm css-var-r9 ant-image-css-var current-preview ant-image-preview-movable"
+        ],
+        "previewRoots": [
+          "ant-image-preview css-1y106cm css-var-r9 ant-image-css-var current-preview ant-image-preview-movable",
+          "ant-image-preview-mask",
+          "ant-image-preview-body",
+          "ant-image-preview-img"
+        ]
+      }
+    }
+  ]
+}

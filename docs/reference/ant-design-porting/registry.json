@@ -9926,9 +9926,10 @@
           "requiredForV1": true,
           "evidence": [
             "tests/package/image.ssr.test.ts",
-            "tests/browser/image.spec.ts"
+            "tests/browser/image.spec.ts",
+            "tools/fixtures/ant-design-image-current-styling-observation.json"
           ],
-          "note": "Width/height/src/alt/native image attrs, class/style и rootClassName/wrapperStyle. Preview=true по умолчанию, отдельный preview.src, open/onOpenChange/afterOpenChange, cover/closeIcon. Boolean/Snippet placeholder, кешированные complete images и source probe; старые invalid/load callbacks не меняют новый src. Fallback сохраняет исходный error status. Native button вместо div role=button; preview DOM ленивый и сохраняется после закрытия."
+          "note": "Width/height/src/alt/native image attrs, class/style у img, rootClassName/styles.root у обёртки, classNames.popup.root у viewer. Preview=true по умолчанию, отдельный preview.src, open/onOpenChange/afterOpenChange, cover/closeIcon. Boolean/Snippet placeholder, кешированные complete images и source probe; старые invalid/load callbacks не меняют новый src. Fallback сохраняет исходный error status. Native button вместо div role=button; preview DOM ленивый и сохраняется после закрытия."
         },
         {
           "id": "transforms",
@@ -9977,7 +9978,7 @@
             "tests/browser/image-theme.spec.ts",
             "tests/browser/fixtures/ant-design-image-theme-reference.json"
           ],
-          "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d: исходная подготовка zIndexPopup, previewOperationSize, трёх operation colors и progressAnimationDuration через общий token engine. Цвета получают абсолютную alpha 0.65/0.85/0.25; zIndexPopup без px. Component variables применяются отдельно к thumbnail и viewer Image/ImagePreviewGroup, до wrapperStyle/preview.zIndex. Проверяются aliases/algorithms/dark/compact, zero/undefined, именованные cssVar, single/group/RTL/nested/reset/sibling scopes и реактивная смена без потери DOM/transforms/current/focus/refs. Native dialog stack поверх Modal сохранён, React z-index context не добавлен. ProgressAnimationDuration проверен только как CSS variable: placeholder.progress/render и фактическая progress-анимация остаются в extended-api."
+          "note": "Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d: исходная подготовка zIndexPopup, previewOperationSize, трёх operation colors и progressAnimationDuration через общий token engine. Цвета получают абсолютную alpha 0.65/0.85/0.25; zIndexPopup без px. Component variables применяются отдельно к thumbnail и viewer Image/ImagePreviewGroup, до styles.root/preview.zIndex. Проверяются aliases/algorithms/dark/compact, zero/undefined, именованные cssVar, single/group/RTL/nested/reset/sibling scopes и реактивная смена без потери DOM/transforms/current/focus/refs. Native dialog stack поверх Modal сохранён, React z-index context не добавлен. ProgressAnimationDuration проверен только как CSS variable: placeholder.progress/render и фактическая progress-анимация остаются в extended-api."
         },
         {
           "id": "extended-api",
@@ -9985,7 +9986,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Нет placeholder.progress/render, полного classNames/styles и ConfigProvider.image/prefixCls, getContainer, icons и React info.icons node wrappers, deprecated aliases. ImageRender/actionsRender имеют native Snippet adaptation. Rc-motion fade/appear/leave и mousePosition transform origin ещё не перенесены."
+          "note": "Нет placeholder.progress/render, остальных slots classNames/styles и ConfigProvider.image/prefixCls, getContainer, icons и React info.icons node wrappers. Deprecated aliases исключены из переноса. ImageRender/actionsRender имеют native Snippet adaptation. Rc-motion fade/appear/leave и mousePosition transform origin ещё не перенесены."
         }
       ]
     },

@@ -7356,7 +7356,7 @@ ImagePreview для групповой навигации.
 
 Src/alt/width/height и native image attrs поддержаны. Числовые размеры задаются
 в px, CSS-строки сохраняются. Class/style относятся к img; rootClassName и
-wrapperStyle — к обёртке. Bind:nativeElement и bind:imageElement дают native refs.
+styles.root — к обёртке. Bind:nativeElement и bind:imageElement дают native refs.
 Preview по умолчанию true; false оставляет пассивное изображение. Интерактивная
 обёртка — native button вместо React div role=button, поэтому не отправляет форму.
 Enter/Space открывают preview, onKeyDown доступен; pointer opening вызывается до
@@ -7381,9 +7381,9 @@ Viewer — native dialog, SSR не открывает его. После пер�
 смонтированным. FocusTrap по умолчанию true; false допускает фокус вне viewer.
 Escape закрывает верхний preview, фокус возвращается opener, scroll освобождается
 при закрытии/unmount и остаётся заперт при открытом host Modal. Mask принимает
-boolean/{enabled,blur,closable}; closable по умолчанию true. RootClassName/zIndex
-в preview применяются к viewer. AfterOpenChange выполняется после native смены
-видимости; rc-motion fade timing пока отсутствует.
+boolean/{enabled,blur,closable}; closable по умолчанию true. ClassNames.popup.root
+на Image/ImagePreviewGroup и preview.zIndex применяются к viewer. AfterOpenChange
+выполняется после native смены видимости; rc-motion fade timing пока отсутствует.
 
 Default transform: x=y=rotate=0, scale=1, flipX=flipY=false. По умолчанию
 minScale=1, maxScale=50, scaleStep=0.5. Toolbar zoom использует множитель 1+step;
@@ -7410,15 +7410,19 @@ ConfigProvider.theme.components.Image задаёт zIndexPopup, previewOperation
 previewOperationColor, previewOperationHoverColor, previewOperationColorDisabled
 и progressAnimationDuration. Общая тема применяется к миниатюре и viewer, включая
 ImagePreviewGroup; aliases, algorithms, cssVar prefix/key и вложенные providers
-поддержаны. Preview.zIndex имеет приоритет над токеном, wrapperStyle — над
+поддержаны. Preview.zIndex имеет приоритет над токеном, styles.root — над
 переменными миниатюры. Смена темы сохраняет viewer, transforms, current и фокус.
 ProgressAnimationDuration пока доступен только как CSS variable: placeholder.progress
 и его анимация ещё не перенесены. Native dialog stack поверх Modal сохранён;
 числовой React z-index context не добавляется.
 
-Placeholder progress/render, полный semantic classNames/styles, ConfigProvider.image/
-prefixCls, getContainer, icons/React info.icons wrappers, deprecated
-aliases и исходные fade/appear/leave/mousePosition motion пока отсутствуют.
+Из semantic API пока перенесены styles.root у Image и classNames.popup.root у
+Image/ImagePreviewGroup. Остальные slots, placeholder progress/render,
+ConfigProvider.image/prefixCls, getContainer, icons/React info.icons wrappers и
+исходные fade/appear/leave/mousePosition motion пока отсутствуют. Deprecated aliases
+исключены из переноса. [Замер текущих полей оформления](./tools/fixtures/ant-design-image-current-styling-observation.json)
+подтверждает styles.root и classNames.popup.root в закреплённом UMD; вложенный
+preview.classNames не входит в текущий тип preview и игнорируется upstream.
 
 ## ImagePreviewGroup (Image.PreviewGroup)
 

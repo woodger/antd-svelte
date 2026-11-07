@@ -18,7 +18,8 @@
     class: className = '',
     style,
     rootClassName = '',
-    wrapperStyle,
+    styles,
+    classNames,
     onError,
     onLoad,
     onClick,
@@ -129,7 +130,7 @@
       componentTheme.style,
       width !== undefined && `width:${dimension(width)}`,
       height !== undefined && `height:${dimension(height)}`,
-      wrapperStyle
+      styles?.root
     ].filter(
       Boolean
     ).join(
@@ -175,4 +176,4 @@
     </div>
   {/if}
 </svelte:element>
-{#if canPreview && !group}<ImagePreview open={actualOpen} image={{ url: previewSource, alt: alt ?? undefined, width, height }} config={config} {fallback} imageAttributes={common} onClose={() => requestOpen(false)} />{/if}
+{#if canPreview && !group}<ImagePreview open={actualOpen} image={{ url: previewSource, alt: alt ?? undefined, width, height }} config={config} className={classNames?.popup?.root} {fallback} imageAttributes={common} onClose={() => requestOpen(false)} />{/if}

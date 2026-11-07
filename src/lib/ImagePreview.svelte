@@ -31,11 +31,13 @@
     count = 1,
     group = false,
     onChange,
-    countRender
+    countRender,
+    className
   }: {
     open: boolean;
     image: ImageInfo;
     config?: ImagePreviewConfig;
+    className?: string;
     fallback?: string;
     imageAttributes?: ImageElementData;
     onClose: () => void;
@@ -326,7 +328,7 @@
     <dialog bind:this={dialog} tabindex="-1" class={[
         'image-preview-dialog ant-image-preview ant-image-css-var',
         componentTheme.className,
-        preview.rootClassName,
+        className,
         preview.movable !== false && 'ant-image-preview-movable',
         moving && 'ant-image-preview-moving'
       ]}

@@ -19,6 +19,8 @@ export interface ImagePreviewGroupProps {
   items?: readonly ImagePreviewGroupItem[];
   /** @defaultValue true */
   preview?: boolean | ImagePreviewGroupConfig;
+  /** Класс корня общего preview; остальные semantic slots пока не перенесены. */
+  classNames?: { popup?: { root?: string; }; };
   fallback?: string;
   children?: Snippet;
 }

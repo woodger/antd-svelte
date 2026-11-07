@@ -68,7 +68,6 @@ export interface ImagePreviewConfig {
   mask?: boolean | { enabled?: boolean; blur?: boolean; closable?: boolean; };
   closeIcon?: Snippet | boolean | null;
   cover?: boolean | Snippet | { coverNode?: Snippet; placement?: 'top' | 'bottom' | 'center'; };
-  rootClassName?: string;
   zIndex?: number;
   /** Snippet получает исходную панель действий и контекст viewer. */
   actionsRender?: Snippet<[Snippet, ImagePreviewRenderInfo]>;
@@ -98,7 +97,10 @@ export interface ImageProps extends Omit<
   fallback?: string;
   placeholder?: boolean | Snippet;
   rootClassName?: string;
-  wrapperStyle?: string;
+  /** Класс корня preview; остальные semantic slots пока не перенесены. */
+  classNames?: { popup?: { root?: string; }; };
+  /** CSS корневой обёртки; style по-прежнему относится к img. */
+  styles?: { root?: string; };
   class?: string;
   style?: string;
   onError?: (event: Event) => void;

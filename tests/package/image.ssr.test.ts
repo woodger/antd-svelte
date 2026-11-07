@@ -39,6 +39,19 @@ describe('Image SSR', () => {
       } finally { vi.useRealTimers(); }
     }
   );
+  it('keeps wrapper styles separate from the native image styles', () => {
+    const body = render(Image, { props: {
+      src: 'photo.svg', preview: false, width: 80, height: 40,
+      styles: { root: 'width:72px;padding-top:7px' }, style: 'opacity:0.5'
+    } }).body;
+    const root = body.match(/<div[^>]*class="[^"]*ant-image[^>]*>/)![0];
+    const image = body.match(/<img[^>]*>/)![0];
+
+    expect(root).toContain('width:80px;height:40px;width:72px;padding-top:7px');
+    expect(image).toContain('height:40px;opacity:0.5');
+    expect(image).not.toContain('padding-top');
+  });
+
   it('preserves placeholder snippets and lazy preview while rendering the fixture', () => {
     const body = render(ImageFixtures).body;
 

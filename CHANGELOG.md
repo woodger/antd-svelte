@@ -9,6 +9,10 @@
 
 ### Removed
 
+- У Image удалены wrapperStyle и preview.rootClassName, включая групповой preview.
+  Сохранены настройки обёртки через styles.root и viewer через classNames.popup.root;
+  class/style по-прежнему относятся к img.
+
 - У Timeline удалены pending/pendingDot, item.label/children/dot/position,
   mode="left"/"right" и тип TimelinePosition. Сохранены title/content/icon/placement,
   mode=start/end/alternate и loading-элементы в items.

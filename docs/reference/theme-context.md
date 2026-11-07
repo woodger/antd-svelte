@@ -599,7 +599,7 @@ previewOperationSize, три цвета operation и progressAnimationDuration.
 включая полупрозрачный исходный цвет. Duration по умолчанию равен 3s.
 
 Миниатюра и общий viewer Image/ImagePreviewGroup получают собственные component
-variables перед пользовательскими styles. WrapperStyle меняет только миниатюру;
+variables перед пользовательскими styles. Styles.root меняет только миниатюру;
 preview.zIndex перекрывает токен viewer. Aliases, component algorithms, dark/compact,
 нули, cssVar prefix/key и вложенные/соседние providers проверены по
 [официальным замерам](../../tests/browser/fixtures/ant-design-image-theme-reference.json).
