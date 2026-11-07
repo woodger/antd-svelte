@@ -6,7 +6,7 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **112**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **111**.
 Есть публичная реализация у **70** семейств; отсутствует у **3**.
 Проверенный объём v1 покрыт у **58**; требуется аудит у **12**; частично покрыт у **0**.
 
@@ -65,7 +65,7 @@ Candidate означает запись каталога, для которой 
 | [Popover](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/popover) | data-display | target | Popover | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Остальные исходные Popover настройки (partial); Fresh/cache supported props и opaque Snippet boundary (partial) |
 | [QRCode](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/qr-code) | data-display | target | QRCode | Согласованный v1 покрыт | PrefixCls и React development warnings (missing) |
 | [Segmented](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/segmented) | data-display | target | Segmented | Согласованный v1 покрыт | Существующие native defaults в semantic callback props (partial); Глобальный ConfigProvider.prefixCls (missing) |
-| [Statistic](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/statistic) | data-display | target | Statistic, StatisticTimer, StatisticCountdown | Согласованный v1 покрыт | Native RTL direction и обёртки Skeleton (partial); PrefixCls и глобальный component config (missing) |
+| [Statistic](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/statistic) | data-display | target | Statistic, StatisticTimer | Согласованный v1 покрыт | Native RTL direction и обёртки Skeleton (partial); PrefixCls и глобальный component config (missing) |
 | [Table](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/table) | data-display | target | Table | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Виртуализация и древовидные данные (missing); Component tokens, aliases/algorithms и реактивная тема Table (partial) |
 | [Tag](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/tag) | data-display | target | Tag, CheckableTag, CheckableTagGroup | Согласованный v1 покрыт | Сохранённые native controls, DOM и Snippet boundaries (partial) |
 | [Timeline](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/timeline) | data-display | target | Timeline | Согласованный v1 покрыт | PrefixCls и глобальный timeline config вне темы (missing) |

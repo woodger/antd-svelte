@@ -62,7 +62,6 @@
         custom
           ? { root: `metric-${props.loading ? 'loading' : 'ready'}`, value: 'metric-value' }
           : {}}
-      valueStyle="font-weight:400"
       styles={custom
         ? {
           root: 'padding:4px',

@@ -338,10 +338,8 @@ export type {
   SegmentedConfig
 } from './segmented.types';
 export { default as StatisticTimer } from './StatisticTimer.svelte';
-export { default as StatisticCountdown } from './StatisticCountdown.svelte';
 export type {
   StatisticTimerProps,
-  StatisticCountdownProps,
   StatisticTimerType
 } from './statistic-timer.types';
 export type {

@@ -14,7 +14,7 @@ describe('Statistic component theme public package SSR', () => {
     });
   });
 
-  it('renders shared Statistic tokens for values, loading, Timer and Countdown', () => {
+  it('renders shared Statistic tokens for values, loading and both Timer modes', () => {
     const sample = reference.cases.find(item => item.name === 'component-tokens')!;
 
     const { body } = render(StatisticThemeCase, { props: { sample } });

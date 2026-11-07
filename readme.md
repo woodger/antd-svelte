@@ -189,7 +189,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Divider | Направления, подпись, titlePlacement, варианты линий, размеры, semantic slots и nativeElement |
 | Flex | Прямые дети, направления, align/justify, wrap, gap/flex, нативный component и nativeElement |
 | Statistic | Числа/строки, precision без округления, разделители, formatter, snippets, semantic slots и loading |
-| StatisticTimer / StatisticCountdown | Отсчёт времени вверх/вниз, формат, callbacks, SSR-placeholder и отмена интервалов |
+| StatisticTimer | Отсчёт времени вверх/вниз, формат, callbacks, SSR-placeholder и отмена интервалов |
 | Segmented | Типизированный одиночный выбор, native radio, стрелки, размеры, block/round, snippets и semantic slots |
 | Row / Col | 24 колонки, responsive span/offset/order/push/pull/flex, gutter, align/justify и вложенные контексты |
 | Masonry | DOM-высоты, кратчайшие колонки, responsive gutters, fresh, keyed items и CSS appear/leave |
@@ -436,9 +436,8 @@ Title/prefix/suffix принимают string/number/Snippet, null или false.
 присутствующим даже при пустом выводе. ValueRender — Snippet<[Snippet]>:
 полученный snippet выводит готовый span значения, который можно обернуть.
 ClassNames/styles поддерживают root/header/title/content/value/prefix/suffix
-и callback ({ props }) с default value/loading/separators. Styles/valueStyle
-передаются CSS-строками. Style перекрывает styles.root, styles.content —
-deprecated valueStyle. Bind:nativeElement даёт HTMLDivElement.
+и callback ({ props }) с default value/loading/separators. Styles передаются CSS-строками; style перекрывает styles.root,
+styles.content задаёт оформление значения. Bind:nativeElement даёт HTMLDivElement.
 
 Loading сохраняет заголовок и заменяет content существующим Skeleton с active
 и paragraph=false. Используются его доступный статус и служебные обёртки;
@@ -448,18 +447,17 @@ formatter и valueRender скрытого значения не вызывают
 Темы наследуют цвета; compact меняет title/content с 14/24px на 12/20px.
 
 ConfigProvider.theme.components.Statistic задаёт titleFontSize/contentFontSize
-также для Timer и Countdown. Defaults рассчитываются из fontSize/fontSizeHeading3;
+также для обоих режимов Timer. Defaults рассчитываются из fontSize/fontSizeHeading3;
 поддержаны числовой 0, строковый contentFontSize, alias tokens, глобальные
 и компонентные algorithms, cssVar.prefix и вложенные providers.
 Реактивная смена темы сохраняет содержимое, snippets, фокус и работу таймеров.
-Переменные темы применяются перед styles.root/style; semantic styles и
-приоритет styles.content над deprecated valueStyle сохраняются.
+Переменные темы применяются перед styles.root/style; semantic styles сохраняются.
 Отступ loading host берётся из собственной темы Skeleton, включая его
 component aliases/algorithm; Statistic.padding не перекрывает этот отступ.
 В эталоне 6.6.8 RTL class Statistic не задаёт direction в LTR-документе.
 Svelte сохраняет существующий dir=rtl и LTR value; наблюдение записано в реестре.
 Сверка: [официальные CSS tokens](./tools/fixtures/ant-design-statistic-tokens-reference.json),
-[оформление normal/loading/Timer/Countdown](./tests/browser/fixtures/ant-design-statistic-theme-reference.json),
+[оформление normal/loading/Timer countup/countdown](./tests/browser/fixtures/ant-design-statistic-theme-reference.json),
 [SSR](./tests/package/statistic-theme.ssr.test.ts) и
 [browser](./tests/browser/statistic-theme.spec.ts), `?fixture=statistic-theme`.
 
@@ -468,9 +466,8 @@ Svelte сохраняет существующий dir=rtl и LTR value; наб�
 Рецепт statistic воспроизводит 14 правил vendor/statistic.css из закреплённого
 архива. PrefixCls и глобальный component config пока отсутствуют.
 
-StatisticTimer и StatisticCountdown — отдельные Svelte-экспорты для upstream
-Statistic.Timer и deprecated Statistic.Countdown. Timer требует type=countdown/countup;
-Countdown фиксирует countdown без deprecation warning в консоли. Остальные props
+StatisticTimer переносит актуальный Statistic.Timer и требует type=countdown/countup;
+Остальные props
 Statistic, включая loading и semantic slots, передаются показателю, но formatter
 и valueRender заменяются встроенным выводом времени, как в upstream.
 
@@ -486,7 +483,7 @@ Format по умолчанию HH:mm:ss; Y/M/D/H/m/s/S обозначают фи
 накапливаются в следующей: HH может превышать 24.
 
 Отображаемая разница ограничена нулём, onChange(number) получает исходную
-знаковую разницу на каждом тике. Countdown вызывает onFinish один раз на первом
+знаковую разницу на каждом тике. В режиме countdown onFinish вызывается один раз на первом
 тике строго после цели и останавливается; на точном равенстве времени не завершает
 интервал. Countup не вызывает onFinish. При смене value/type интервал перезапускается,
 смена format/callbacks не требует перезапуска. Loading скрывает значение, сохраняя

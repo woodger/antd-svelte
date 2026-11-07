@@ -9,6 +9,9 @@
 
 ### Removed
 
+- Deprecated StatisticCountdown и Statistic.valueStyle. Обратный отсчёт задаётся
+  через StatisticTimer type="countdown", оформление значения — styles.content.
+
 - Deprecated ButtonGroup/InputGroup, их типы, контекст размера Button.Group,
   отдельные CSS-правила и фикстуры. Для композиции используется SpaceCompact;
   размер Button определяется local prop, Compact и ConfigProvider.
@@ -921,7 +924,7 @@
   CSS declarations, геометрии и состояний с Ant Design 6.6.8, SSR и browser.
 
 - Statistic: titleFontSize/contentFontSize применяются через общую компонентную
-  тему также в Timer и Countdown. Сохранены native compact, semantic/value styles,
+  тему также в обоих режимах Timer. Сохранены native compact и semantic styles,
   вложенные providers, snippets и интервалы при смене токенов. Добавлена сверка
   CSS declarations и оформления с Ant Design 6.6.8, SSR и browser.
 
@@ -1129,14 +1132,14 @@
   через Web Animations API с отменой/resize/reduced motion и option.tooltip через
   существующий Tooltip, включая disabled options и block/scale-геометрию.
   Добавлены CSS-рецепт, unit/SSR/Chromium, отдельная фикстура и галерея.
-- StatisticTimer и совместимый StatisticCountdown: countup/countdown, формат
+- StatisticTimer: countup/countdown, формат
   длительности, onChange/onFinish, стабильный SSR-placeholder, cleanup и защита
   от поздних callbacks. Добавлены unit/SSR/Chromium, отдельная фикстура и запуск
   отсчёта в галерее; реестр отмечает покрытый основной объём семейства Statistic.
 - Statistic: строковое форматирование чисел с precision без округления,
   разделителями и formatter, title/prefix/suffix snippets, valueRender,
   semantic slots и loading через Skeleton. Добавлены CSS-рецепт, unit/SSR/Chromium,
-  изолированная фикстура и пример галереи; Timer/Countdown пока не перенесены.
+  изолированная фикстура и пример галереи; Timer на этом этапе ещё не перенесён.
 - Flex: направления, align/justify, wrap, preset/числовой/CSS gap и flex shorthand
   с прямыми детьми без обёрток. Добавлены нативный component/bind:nativeElement,
   CSS-рецепт, SSR/Chromium-проверки, изолированная фикстура и галерея.

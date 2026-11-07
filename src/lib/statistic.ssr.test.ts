@@ -67,7 +67,6 @@ describe('Statistic server rendering', () => {
           'aria-label': 'Total',
           class: 'custom',
           style: 'color:red',
-          valueStyle: 'color:blue',
           classNames: ({ props }) => ({
             root: `value-${props.value}-${props.loading}`,
             content: 'custom-content'
@@ -82,7 +81,7 @@ describe('Statistic server rendering', () => {
       expect(body).toContain('value-42-false');
       expect(body).toContain('custom-content');
       expect(body).toContain('color:green;color:red');
-      expect(body).toContain('color:blue;color:purple');
+      expect(body).toContain('style="color:purple"');
       expect(body).toContain('font-weight:600');
     }
   );

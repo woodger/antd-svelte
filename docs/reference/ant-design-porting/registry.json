@@ -11401,7 +11401,7 @@
       "name": "Statistic",
       "category": "data-display",
       "scope": "target",
-      "scopeReason": "Поэтапный перенос Statistic 6.6.8: базовый показатель, затем отдельные Timer/Countdown.",
+      "scopeReason": "Перенос актуальных Statistic и Statistic.Timer 6.6.8 с type=countup/countdown; deprecated Countdown и valueStyle удалены.",
       "upstreamPath": "components/statistic",
       "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
       "exports": [
@@ -11415,12 +11415,6 @@
           "upstream": "Statistic.Timer",
           "local": [
             "StatisticTimer"
-          ]
-        },
-        {
-          "upstream": "Statistic.Countdown",
-          "local": [
-            "StatisticCountdown"
           ]
         }
       ],
@@ -11444,7 +11438,6 @@
         "readme.md",
         "integration:statistic",
         "src/lib/StatisticTimer.svelte",
-        "src/lib/StatisticCountdown.svelte",
         "src/lib/theme-component-style.engine.ts",
         "src/lib/theme-statistic-tokens-reference.test.ts",
         "tools/fixtures/ant-design-statistic-tokens-reference.json",
@@ -11479,7 +11472,7 @@
             "src/lib/statistic.ssr.test.ts",
             "tests/browser/statistic.spec.ts"
           ],
-          "note": "ReactNode заменён string/number/Snippet; valueRender — Snippet<[Snippet]>; styles и valueStyle — CSS-строки. Пустой Snippet считается присутствующим содержимым."
+          "note": "ReactNode заменён string/number/Snippet; valueRender — Snippet<[Snippet]>; Semantic styles — CSS-строки; deprecated valueStyle удалён. Пустой Snippet считается присутствующим содержимым."
         },
         {
           "id": "loading",
@@ -11495,7 +11488,7 @@
         },
         {
           "id": "timer",
-          "title": "Statistic.Timer и deprecated Countdown",
+          "title": "Statistic.Timer: countup/countdown",
           "state": "supported",
           "requiredForV1": true,
           "evidence": [
@@ -11503,17 +11496,16 @@
             "src/lib/statistic-timer.ssr.test.ts",
             "tests/browser/statistic-timer.spec.ts"
           ],
-          "note": "Отдельные Svelte-экспорты StatisticTimer/StatisticCountdown. SSR выводит -, время форматируется фиксированными единицами эталона; onChange получает знаковый остаток, onFinish только после deadline. При отсутствующем value отображение использует default=0 из Statistic, callbacks — исходную цель и NaN. React deprecation console warning Countdown не воспроизводится."
+          "note": "Актуальный StatisticTimer с обязательным type=countup/countdown; deprecated StatisticCountdown удалён. SSR выводит -, время форматируется фиксированными единицами; onChange получает знаковый остаток, onFinish только после deadline. При отсутствующем value отображение использует default=0 из Statistic, callbacks — исходную цель и NaN."
         },
         {
           "id": "component-theme-tokens",
-          "title": "TitleFontSize/contentFontSize для Statistic, Timer и Countdown",
+          "title": "TitleFontSize/contentFontSize для Statistic и обоих режимов Timer",
           "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Statistic.svelte",
             "src/lib/StatisticTimer.svelte",
-            "src/lib/StatisticCountdown.svelte",
             "src/lib/theme-component-style.engine.ts",
             "src/lib/theme-statistic-tokens-reference.test.ts",
             "tools/fixtures/ant-design-statistic-tokens-reference.json",
@@ -11527,7 +11519,7 @@
             "tests/package/statistic-theme.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Фабрика и root theme hook следуют 6.6.8: titleFontSize/contentFontSize из fontSize/fontSizeHeading3, zero/string/undefined, global/component alias tokens и algorithms, cssVar.prefix. Normal/loading/Timer/Countdown, RTL, nested/reset/sibling providers и semantic/value/user priority. Native compact сохраняет прежние метрики; смена темы сохраняет значения, snippets, draft/focus/selection и работу таймеров. SSR не запускает часы или интервалы. Отступ native loading host использует собственный resolved Skeleton.padding вместо Statistic.padding, как CSS-variable root Skeleton в source."
+          "note": "Фабрика и root theme hook следуют 6.6.8: titleFontSize/contentFontSize из fontSize/fontSizeHeading3, zero/string/undefined, global/component alias tokens и algorithms, cssVar.prefix. Normal/loading/Timer countup/countdown, RTL, nested/reset/sibling providers и semantic/user priority. Native compact сохраняет прежние метрики; смена темы сохраняет значения, snippets, draft/focus/selection и работу таймеров. SSR не запускает часы или интервалы. Отступ native loading host использует собственный resolved Skeleton.padding вместо Statistic.padding, как CSS-variable root Skeleton в source."
         },
         {
           "id": "source-theme-boundaries",

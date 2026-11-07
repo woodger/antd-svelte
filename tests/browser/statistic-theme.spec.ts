@@ -65,7 +65,7 @@ test('Statistic theme updates preserve snippets, focus and independent provider 
     .toHaveCSS('font-size', '24px');
 });
 
-test('Statistic Timer and Countdown keep ticking through component token changes', async ({ page }) => {
+test('Statistic Timer countup and countdown keep ticking through component token changes', async ({ page }) => {
   await page.clock.install({ time: new Date('2026-11-05T12:00:00Z') });
   await page.clock.pauseAt(new Date('2026-11-05T12:00:01Z'));
   await page.goto('/?fixture=statistic-theme');

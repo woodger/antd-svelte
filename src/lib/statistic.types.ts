@@ -34,8 +34,6 @@ export interface StatisticProps extends Omit<
   /** @defaultValue false */
   loading?: boolean;
   valueRender?: Snippet<[Snippet]>;
-  /** @deprecated Используйте styles.content. */
-  valueStyle?: string;
   class?: string;
   rootClassName?: string;
   style?: string;

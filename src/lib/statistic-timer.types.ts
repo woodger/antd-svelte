@@ -11,5 +11,3 @@ export interface StatisticTimerProps extends StatisticProps {
   /** Вызывается при достижении нуля countdown. */
   onFinish?: () => void;
 }
-/** Совместимый countdown-вариант StatisticTimer без явного type. */
-export type StatisticCountdownProps = Omit<StatisticTimerProps, 'type'>;

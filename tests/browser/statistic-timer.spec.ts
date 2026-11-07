@@ -67,9 +67,8 @@ test(
 );
 
 test(
-  'StatisticCountdown shares the timer lifecycle and unmount cancels all later callbacks',
+  'StatisticTimer unmount cancels all later callbacks and remount restarts the current target',
   async ({ page }) => {
-    await page.getByLabel('Countdown alias').check();
     await page.clock.runFor(100);
 
     await expect(page.locator('#fixture-timer .ant-statistic-content-value')).toHaveText('00:00:09');

@@ -2,7 +2,6 @@
   import {
     Statistic,
     StatisticTimer,
-    StatisticCountdown,
     type StatisticProps
   } from 'antd-svelte';
 
@@ -20,7 +19,6 @@
     precision: 2,
     loading: kind === 'loading',
     style: priority ? '--ant-statistic-title-font-size:19px' : undefined,
-    valueStyle: priority ? 'font-size:31px;color:#873800' : undefined,
     styles: priority ? {
       root: '--ant-statistic-title-font-size:17px',
       title: 'font-size:21px',
@@ -37,7 +35,7 @@
 {#if kind === 'timer'}
   <StatisticTimer {...shared} type="countup" value={Date.UTC(2025, 0, 1)} />
 {:else if kind === 'countdown'}
-  <StatisticCountdown {...shared} value={Date.UTC(2027, 0, 1)} />
+  <StatisticTimer {...shared} type="countdown" value={Date.UTC(2027, 0, 1)} />
 {:else}
   <Statistic {...shared} value={1234.56} />
 {/if}

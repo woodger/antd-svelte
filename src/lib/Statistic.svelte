@@ -18,7 +18,6 @@
     groupSeparator = ',',
     formatter,
     valueRender,
-    valueStyle,
     class: className = '',
     rootClassName = '',
     style,
@@ -49,7 +48,6 @@
       groupSeparator,
       formatter,
       valueRender,
-      valueStyle,
       class: className,
       rootClassName,
       style,
@@ -100,7 +98,7 @@
   {#if hasContent(title)}<div class={['ant-statistic-header', classes.header]} style={slotStyles.header}><div class={['ant-statistic-title', classes.title]} style={slotStyles.title}>{@render content(title)}</div></div>{/if}
   {#if loading}<Skeleton paragraph={false} active class="ant-statistic-skeleton" style={skeletonStyle} />
   {:else}
-    <div class={['ant-statistic-content', classes.content]} style={[valueStyle, slotStyles.content].filter(Boolean).join(';')}>
+    <div class={['ant-statistic-content', classes.content]} style={slotStyles.content ?? ''}>
       {#if hasContent(prefix)}<span class={['ant-statistic-content-prefix', classes.prefix]} style={slotStyles.prefix}>{@render content(prefix)}</span>{/if}
       {#if valueRender}{@render valueRender(valueNode)}{:else}{@render valueNode()}{/if}
       {#if hasContent(suffix)}<span class={['ant-statistic-content-suffix', classes.suffix]} style={slotStyles.suffix}>{@render content(suffix)}</span>{/if}
