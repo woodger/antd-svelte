@@ -66,9 +66,6 @@
     disabled,
     direction,
     showSearch = false,
-    searchValue,
-    onSearch,
-    autoClearSearchValue,
     displayRender,
     open,
     defaultOpen = false,
@@ -183,10 +180,9 @@
     !panel ? resolveSlots(context?.styles) : undefined,
     { root: !panel ? context?.style : undefined }, resolveSlots(styles)
   ], ';'));
-  let searchConfig: CascaderSearchConfig<OptionType> = $derived(showSearch ? {
-    searchValue, onSearch, autoClearSearchValue,
-    ...typeof showSearch === 'object' ? showSearch : {}
-  } : {});
+  let searchConfig: CascaderSearchConfig<OptionType> = $derived(
+    { ...(typeof showSearch === 'object' ? showSearch : {}) }
+  );
   let canSearch = $derived(!panel && Boolean(showSearch));
   let internalSearch = $state('');
   let search = $derived(canSearch ? searchConfig.searchValue ?? internalSearch : '');

@@ -110,16 +110,16 @@
       {#if mounted}
         <form id="select-container-form">
           {#if sample.component === 'select'}
-            <Select {...localOptions} {options} showSearch name="selected" aria-label="Container select"
-              onSearch={value => searches.push(value)} onValueChange={value => values.push(value)}
+            <Select {...localOptions} {options} name="selected" aria-label="Container select"
+              showSearch={{ onSearch: value => searches.push(value) }} onValueChange={value => values.push(value)}
               onPopupScroll={() => scrolls++} />
           {:else if sample.component === 'select-multiple'}
             <Select {...localOptions} {options} mode="multiple" name="selected"
-              aria-label="Container select" onSearch={value => searches.push(value)}
+              aria-label="Container select" showSearch={{ onSearch: value => searches.push(value) }}
               onValueChange={value => values.push(value)} onPopupScroll={() => scrolls++} />
           {:else}
             <AutoComplete {...localOptions} {options} name="selected" aria-label="Container select"
-              onSearch={value => searches.push(value)} onChange={value => values.push(value)}
+              showSearch={{ onSearch: value => searches.push(value) }} onChange={value => values.push(value)}
               onPopupScroll={() => scrolls++}
               children={sample.component === 'auto-complete-textarea' ? textarea : undefined} />
           {/if}

@@ -5075,8 +5075,7 @@ tagRender и maxTagPlaceholder меняют отображение, сохран
 
 ShowSearch по умолчанию false. True включает поиск по любому label в пути;
 объект настраивает controlled searchValue/onSearch, filter/sort/render, limit,
-matchInputWidth, searchIcon и autoClearSearchValue. Поля объекта имеют приоритет
-над deprecated top-level props. Default limit=50; false и неположительное число
+matchInputWidth, searchIcon и autoClearSearchValue. Default limit=50; false и неположительное число
 снимают лимит. Без sort лимит останавливает обход, с sort применяется после
 сортировки. ChangeOnSelect/multiple включают промежуточные пути в выдачу;
 disabled родителя распространяется на результаты его детей.
@@ -5766,7 +5765,7 @@ TreeTitleRender принимает snippet с исходным TreeSelectNode и
 панели и выбранных значений.
 
 Value/defaultValue принимают scalar, массив или {value,label?,halfChecked?}.
-Null очищает; undefined включает внутреннее состояние. Value/open/searchValue —
+Null очищает; undefined включает внутреннее состояние. Value/open/showSearch.searchValue —
 controlled props с callbacks, без автоматического переписывания владельца.
 При отказе владельца принять onSearch поле восстанавливается из searchValue.
 Enter игнорирует активный узел, удалённый из treeData; выбранные отсутствующие
@@ -5800,7 +5799,7 @@ value без подписи отображается самим значение
 
 ShowSearch по умолчанию false для single и true для multiple. Объект showSearch
 поддерживает searchValue/onSearch, autoClearSearchValue, filterTreeNode и
-treeNodeFilterProp; его поля имеют приоритет над одноимёнными top-level props.
+treeNodeFilterProp. Одноимённые deprecated top-level props удалены.
 Default filter prop — value, не title. Поиск без учёта регистра сохраняет предков
 совпадения и всех потомков совпавшего родителя. FilterTreeNode=false сохраняет
 всё дерево; callback задаёт predicate. Отметка фильтрованного родителя всё равно
@@ -7976,7 +7975,7 @@ Combobox-логика находится в AutoComplete и его engine; су�
 </script>
 <AutoComplete {value} {options} allowClear backfill
   onChange={next => { value = next ?? ''; }}
-  onSearch={next => { search = next; }} aria-label="Email" />
+  showSearch={{ onSearch: next => { search = next; } }} aria-label="Email" />
 ```
 
 Value/defaultValue — произвольная строка; совпадение с options не требуется.
@@ -7990,7 +7989,7 @@ OnChange(value,option) вызывается при изменении ввода
 FilterOption по умолчанию false, как runtime combobox rc-select. True фильтрует
 value без учёта регистра, без trim/Unicode folding. Совпавшая группа сохраняет
 всех детей; иначе проверяются дети. Predicate получает исходный option/group.
-ShowSearch object объединяет filterOption/onSearch с прежними top-level props.
+ShowSearch object настраивает filterOption/onSearch; прежние top-level props удалены.
 Загрузку данных, debounce и защиту от старых ответов выполняет потребитель.
 
 Open/defaultOpen задают controlled/uncontrolled popup. Без options и непустого
@@ -8137,10 +8136,10 @@ disabled control не передаёт значения. Поисковый те
 
 ### Удалённый поиск
 
-Select принимает searchValue, onSearch, filterOption, loading, notFoundContent и
-onPopupScroll. Вариант Ant Design 6.6.8 showSearch={{ searchValue, onSearch,
-filterOption }} также поддержан; поля объекта имеют приоритет над одноимёнными
-верхними props. Boolean showSearch сохраняет прежнее поведение. FilterOption=false
+Select принимает loading, notFoundContent и onPopupScroll. Поиск настраивается
+через текущий API Ant Design 6.6.8: showSearch={{ searchValue, onSearch, filterOption }}.
+Одноимённые deprecated top-level props удалены. Boolean showSearch включает
+встроенный поиск. FilterOption=false
 полностью отключает локальную фильтрацию, true сохраняет прежний поиск по label;
 callback (search, option) позволяет собственную фильтрацию непустого запроса.
 

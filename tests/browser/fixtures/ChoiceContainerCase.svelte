@@ -157,24 +157,24 @@
           {#if panel}
             <CascaderPanel {options} />
           {:else if sample.component.startsWith('tree-select')}
-            <TreeSelect {...localOptions} {treeData} showSearch treeDefaultExpandAll
-              treeNodeFilterProp="title" treeCheckable={sample.component === 'tree-select-checkable'}
-              name="selected" aria-label="Container choice" onSearch={value => searches.push(value)}
+            <TreeSelect {...localOptions} {treeData} treeDefaultExpandAll
+              treeCheckable={sample.component === 'tree-select-checkable'}
+              name="selected" aria-label="Container choice" showSearch={{ treeNodeFilterProp: 'title', onSearch: value => searches.push(value) }}
               onChange={value => values.push(value)} onPopupScroll={() => scrolls++}
               loadData={lazy ? loadTree : undefined} onTreeLoad={() => completed++} />
           {:else if sample.component === 'cascader-multiple'}
-            <Cascader {...localOptions} {options} multiple showSearch aria-label="Container choice"
+            <Cascader {...localOptions} {options} multiple aria-label="Container choice"
               value={paths} onChange={value => {
                 values.push(value);
                 paths = value;
-              }} onSearch={value => searches.push(value)} onPopupScroll={() => scrolls++}
+              }} showSearch={{ onSearch: value => searches.push(value) }} onPopupScroll={() => scrolls++}
               loadData={lazy ? loadPath : undefined} />
           {:else}
-            <Cascader {...localOptions} {options} showSearch aria-label="Container choice"
+            <Cascader {...localOptions} {options} aria-label="Container choice"
               value={form.values.path} onChange={value => {
                 values.push(value);
                 form.setFieldValue('path', value ?? []);
-              }} onSearch={value => searches.push(value)} onPopupScroll={() => scrolls++}
+              }} showSearch={{ onSearch: value => searches.push(value) }} onPopupScroll={() => scrolls++}
               loadData={lazy ? loadPath : undefined}
               children={sample.component === 'cascader-custom' ? trigger : undefined}
               popupRender={sample.component === 'cascader-custom' ? popupContent : undefined}

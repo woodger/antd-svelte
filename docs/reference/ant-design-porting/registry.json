@@ -3886,7 +3886,7 @@
             "tests/package/cascader.ssr.test.ts",
             "tests/browser/cascader.spec.ts"
           ],
-          "note": "Default any-label filter и limit=50; limit до обхода без sort и после сортировки с comparator. ChangeOnSelect/multiple включают parents, disabled наследуется. Object search config перекрывает top-level aliases. Исходный search lifecycle/autoClear, null notFoundContent suppresses popup без очистки query. Поиск при выбранном пути сохраняет высоту строки и видимый цвет текста; повторный ввод не меняет value. OptionRender получает raw option и originNode snippet вместо React search clone с rendered label."
+          "note": "Default any-label filter и limit=50; limit до обхода без sort и после сортировки с comparator. ChangeOnSelect/multiple включают parents, disabled наследуется. Поиск настраивается через текущий showSearch object; top-level aliases удалены. Исходный search lifecycle/autoClear, null notFoundContent suppresses popup без очистки query. Поиск при выбранном пути сохраняет высоту строки и видимый цвет текста; повторный ввод не меняет value. OptionRender получает raw option и originNode snippet вместо React search clone с rendered label."
         },
         {
           "id": "lazy-paths",
@@ -6135,7 +6135,7 @@
             "tests/browser/remote-select.spec.ts",
             "integration:select/remote-search"
           ],
-          "note": "SearchValue/onSearch/filterOption и showSearch object subset, loading/notFoundContent/onPopupScroll; cache только selected labels/disabled, включая single и numeric zero. Requests/debounce/stale guards/pagination/retry/dispose принадлежат consumer model; ошибка через status/content. Остальной rc-select API не заявлен."
+          "note": "ShowSearch object с searchValue/onSearch/filterOption, loading/notFoundContent/onPopupScroll; cache только selected labels/disabled, включая single и numeric zero. Requests/debounce/stale guards/pagination/retry/dispose принадлежат consumer model; ошибка через status/content. Остальной rc-select API не заявлен."
         },
         {
           "id": "virtualization",
@@ -7582,7 +7582,7 @@
             "src/lib/tree-select.engine.test.ts",
             "tests/browser/tree-select.spec.ts"
           ],
-          "note": "SHOW_ALL/PARENT/CHILD как TREE_SELECT_SHOW_*; display отдельно от полных checked keys. Search сохраняет предков и всех потомков совпавшего родителя, default filter prop=value, predicate/bypass и autoClearSearchValue. Проверка фильтрованного родителя использует полное исходное дерево."
+          "note": "SHOW_ALL/PARENT/CHILD как TREE_SELECT_SHOW_*; display отдельно от полных checked keys. Search сохраняет предков и всех потомков совпавшего родителя, default filter prop=value, predicate/bypass и autoClearSearchValue в showSearch object. Проверка фильтрованного родителя использует полное исходное дерево."
         },
         {
           "id": "async-keyboard",

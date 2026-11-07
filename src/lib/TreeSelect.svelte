@@ -2,6 +2,7 @@
   import { tick, untrack } from 'svelte';
   import type {
     TreeSelectProps,
+    TreeSelectSearchConfig,
     TreeSelectValue,
     TreeSelectRawValue,
     TreeSelectLabeledValue,
@@ -44,11 +45,6 @@
     onSelect,
     onDeselect,
     showSearch,
-    searchValue,
-    onSearch,
-    autoClearSearchValue,
-    filterTreeNode,
-    treeNodeFilterProp,
     treeNodeLabelProp,
     open,
     defaultOpen = false,
@@ -130,15 +126,8 @@
       item => ({ ...item, label: item.label ?? item.value })
     )
   );
-  let searchConfig = $derived(
-    {
-      searchValue,
-      onSearch,
-      autoClearSearchValue,
-      filterTreeNode,
-      treeNodeFilterProp,
-      ...typeof showSearch === 'object' ? showSearch : {}
-    }
+  let searchConfig = $derived<TreeSelectSearchConfig>(
+    { ...(typeof showSearch === 'object' ? showSearch : {}) }
   );
   let internalSearch = $state('');
   let search = $derived(searchConfig.searchValue ?? internalSearch);

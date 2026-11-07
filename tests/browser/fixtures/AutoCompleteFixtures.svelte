@@ -50,14 +50,13 @@
     {options}
     {value}
     {backfill}
-    filterOption={filter}
+    showSearch={{ filterOption: filter, onSearch: next => { searches = [...searches, next]; } }}
     open={lockClosed ? false : forced ? true : undefined}
     allowClear
     onChange={next => {
       events = [...events, `change:${String(next)}`];
       if (accept) value = next;
     }}
-    onSearch={next => { searches = [...searches, next]; }}
     onSelect={(next, option) => { events = [...events, `select:${next}:${option.value}`]; }}
     onOpenChange={next => { openings = [...openings, next]; }}
     onClear={() => { events = [...events, 'clear']; }}

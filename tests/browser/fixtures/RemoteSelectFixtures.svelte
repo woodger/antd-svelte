@@ -12,7 +12,6 @@
   let query = $state('');
   let calls = $state<string[]>([]);
   let accept = $state(true);
-  let configObject = $state(false);
   let loading = $state(false);
   let error = $state(false);
   let scrolls = $state(0);
@@ -55,10 +54,7 @@
       name="single"
       options={options}
       bind:value={single}
-      showSearch={configObject ? { searchValue: query, onSearch: search, filterOption: false } : true}
-      searchValue={configObject ? 'legacy ignored' : query}
-      onSearch={search}
-      filterOption={configObject ? true : false}
+      showSearch={{ searchValue: query, onSearch: search, filterOption: false }}
       {loading}
       status={error ? 'error' : undefined}
       notFoundContent={empty}
@@ -79,16 +75,12 @@
       mode="multiple"
       options={options}
       bind:value={multiple}
-      showSearch
-      searchValue={query}
-      onSearch={search}
-      filterOption={false}
+      showSearch={{ searchValue: query, onSearch: search, filterOption: false }}
       allowClear
     />
     <button type="submit">Read remote values</button>
   </form>
   <label><input type="checkbox" bind:checked={accept} /> Accept remote search</label>
-  <label><input type="checkbox" bind:checked={configObject} /> Object search config</label>
   <label><input type="checkbox" bind:checked={loading} /> Remote loading state</label>
   <button type="button" onclick={() => { options = []; }}>Remove remote results</button>
   <button type="button" onclick={page}>Replace remote page</button>

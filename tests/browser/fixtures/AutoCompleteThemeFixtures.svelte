@@ -88,7 +88,7 @@
             allowClear {listHeight} popupMatchSelectWidth={width}
             onFocus={() => focusEvents++}
             onChange={value => { changes = [...changes, String(value)]; }}
-            onSearch={value => { searches = [...searches, value]; }}
+            showSearch={{ onSearch: value => { searches = [...searches, value]; } }}
             onSelect={value => { selections = [...selections, value]; }}
             onOpenChange={value => { openings = [...openings, value]; }} />
           <AutoComplete options={[]} notFoundContent="No results" class="completion-token-empty"

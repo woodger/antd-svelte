@@ -2,6 +2,7 @@
   import { onMount, tick, untrack } from 'svelte';
   import type {
     AutoCompleteProps,
+    AutoCompleteSearchConfig,
     AutoCompleteInput,
     AutoCompleteOption
   } from './auto-complete.types';
@@ -29,8 +30,6 @@
     open,
     defaultOpen = false,
     showSearch = true,
-    filterOption,
-    onSearch,
     onChange,
     onSelect,
     onOpenChange,
@@ -81,8 +80,8 @@
   let resolvedStatus = $derived(status ?? field?.status);
   let showClear = $derived(Boolean(allowClear && text && !blocked && !readonly));
   let controlId = $derived(id ?? field?.id ?? `ant-auto-complete-${generated}`);
-  let searchConfig = $derived(
-    { filterOption, onSearch, ...(typeof showSearch === 'object' ? showSearch : {}) }
+  let searchConfig = $derived<AutoCompleteSearchConfig>(
+    { ...(typeof showSearch === 'object' ? showSearch : {}) }
   );
   let entries = $derived(
     flattenAutoCompleteOptions(

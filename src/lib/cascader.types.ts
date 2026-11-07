@@ -35,7 +35,7 @@ export interface CascaderRenderInfo<OptionType extends CascaderOption = Cascader
   originNode: Snippet;
 }
 
-/** Поиск полных путей; поля объекта перекрывают одноимённые top-level props. */
+/** Поиск полных путей и управление строкой поиска через showSearch. */
 export interface CascaderSearchConfig<OptionType extends CascaderOption = CascaderOption> {
   filter?: (search: string, path: OptionType[], fields: CascaderFieldNames) => boolean;
   render?: Snippet<[string, OptionType[], string, Required<CascaderFieldNames>]>;
@@ -183,12 +183,6 @@ export interface CascaderProps<
 > {
   /** @defaultValue false */
   showSearch?: boolean | CascaderSearchConfig<OptionType>;
-  /** @deprecated Используйте showSearch.searchValue. */
-  searchValue?: string;
-  /** @deprecated Используйте showSearch.onSearch. */
-  onSearch?: (search: string) => void;
-  /** @deprecated Используйте showSearch.autoClearSearchValue. */
-  autoClearSearchValue?: boolean;
   displayRender?: Snippet<[CascaderContent[], (OptionType | undefined)[]]>;
   open?: boolean;
   /** @defaultValue false */

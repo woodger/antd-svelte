@@ -13,9 +13,7 @@ describe('remote Select SSR', () => {
             options: [],
             value: 0,
             name: 'person',
-            searchValue: 'query',
-            showSearch: true,
-            filterOption: false,
+            showSearch: { searchValue: 'query', filterOption: false },
             loading: true,
             notFoundContent: 'Retry later'
           }
@@ -25,8 +23,7 @@ describe('remote Select SSR', () => {
       expect(body).toContain('value="0"');
       expect(body).toContain('aria-busy="true"');
       expect(body).toContain('ant-select-loading');
-      expect(body).not.toContain('searchValue=');
-      expect(body).not.toContain('filterOption=');
+      expect(body).not.toContain('showSearch=');
       expect(body).not.toContain('notFoundContent=');
     }
   );

@@ -37,7 +37,7 @@ test(
 );
 
 test(
-  'remote Select controlled search respects owner rejection and object config overrides legacy props',
+  'remote Select controlled search respects owner rejection and accepts a new query',
   async ({ page }) => {
     const input = page.getByRole('combobox', { name: 'Remote single', exact: true });
 
@@ -48,7 +48,6 @@ test(
     await expect(page.getByLabel('Remote search calls', { exact: true })).toHaveText('["rejected"]');
 
     await page.getByLabel('Accept remote search', { exact: true }).check();
-    await page.getByLabel('Object search config', { exact: true }).check();
     await input.fill('server query');
 
     await expect(input).toHaveValue('server query');

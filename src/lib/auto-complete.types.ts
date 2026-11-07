@@ -78,8 +78,6 @@ export interface AutoCompleteProps extends Omit<
   defaultOpen?: boolean;
   /** @defaultValue true */
   showSearch?: boolean | AutoCompleteSearchConfig;
-  filterOption?: AutoCompleteSearchConfig['filterOption'];
-  onSearch?: (text: string) => void;
   /** Свободный ввод и выбор; очистка может передать undefined, затем пустую строку. */
   onChange?: (value: string | undefined, option: Partial<AutoCompleteOption> | undefined) => void;
   onSelect?: (value: string, option: AutoCompleteOption) => void;

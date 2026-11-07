@@ -9,6 +9,7 @@ export interface SelectConfig {
 
 /** Настройки controlled search и локальной фильтрации Select без сетевого транспорта. */
 export interface SelectSearchConfig<Value extends string | number = string> {
+  /** Управляемая строка поиска; undefined оставляет локальное состояние. */
   searchValue?: string;
   /**
    * Уведомляет о пользовательском поиске; запросы и защиту от старых ответов делает потребитель.
@@ -37,12 +38,8 @@ export interface SelectProps<
   size?: ComponentSize;
   /** Приоритет: variant, Form, Select config, global variant, outlined. */
   variant?: 'outlined' | 'filled' | 'borderless' | 'underlined';
-  /** Объект объединяет настройки поиска с top-level props. */
+  /** Объект задаёт настройки поиска; boolean включает или отключает его. */
   showSearch?: boolean | SelectSearchConfig<Value>;
-  /** Управляемая строка поиска; options и выбранные значения обновляются независимо. */
-  searchValue?: string;
-  onSearch?: (value: string) => void;
-  filterOption?: SelectSearchConfig<Value>['filterOption'];
   /** @defaultValue false */
   loading?: boolean;
   notFoundContent?: string | number | Snippet | null;

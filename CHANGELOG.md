@@ -13,6 +13,10 @@
   Сохранены настройки обёртки через styles.root и viewer через classNames.popup.root;
   class/style по-прежнему относятся к img.
 
+- У Select, AutoComplete, TreeSelect и Cascader удалены deprecated top-level
+  настройки поиска. Сохранены showSearch object, controlled query, callbacks,
+  remote selection cache, фильтрация и режим без локальной фильтрации.
+
 - У Timeline удалены pending/pendingDot, item.label/children/dot/position,
   mode="left"/"right" и тип TimelinePosition. Сохранены title/content/icon/placement,
   mode=start/end/alternate и loading-элементы в items.

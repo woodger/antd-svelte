@@ -17,7 +17,7 @@
     resolveSelectedOptions
   } from './select.engine';
   import { ruRU, type SelectOption } from './types';
-  import type { SelectProps } from './select.types';
+  import type { SelectProps, SelectSearchConfig } from './select.types';
   import Icon from './Icon.svelte';
 
   let {
@@ -29,9 +29,6 @@
     size,
     variant,
     showSearch,
-    searchValue,
-    onSearch,
-    filterOption,
     loading = false,
     notFoundContent,
     onPopupScroll,
@@ -68,8 +65,8 @@
   let isOpen = $state(false);
   let focused = $state(false);
   let internalSearch = $state('');
-  let searchConfig = $derived(
-    { searchValue, onSearch, filterOption, ...(typeof showSearch === 'object' ? showSearch : {}) }
+  let searchConfig = $derived<SelectSearchConfig<Value>>(
+    { ...(typeof showSearch === 'object' ? showSearch : {}) }
   );
   let controlledSearch = $derived(searchConfig.searchValue);
   let search = $derived(controlledSearch ?? internalSearch);

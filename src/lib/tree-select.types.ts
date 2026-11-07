@@ -75,12 +75,6 @@ export interface TreeSelectProps<ValueType extends TreeSelectValue = TreeSelectV
   onSelect?: (value: TreeSelectRawValue, node: TreeSelectNode | undefined) => void;
   onDeselect?: (value: TreeSelectRawValue, node: TreeSelectNode | undefined) => void;
   showSearch?: boolean | TreeSelectSearchConfig;
-  /** Управляемая строка поиска; отсутствующее значение оставляет локальный поиск. */
-  searchValue?: string;
-  onSearch?: (search: string) => void;
-  autoClearSearchValue?: boolean;
-  filterTreeNode?: TreeSelectSearchConfig['filterTreeNode'];
-  treeNodeFilterProp?: string;
   treeNodeLabelProp?: string;
   open?: boolean;
   /** @defaultValue false */
