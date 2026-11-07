@@ -2794,8 +2794,10 @@ bind:open/callback contracts сохранены.
 
 Галерея `/ant-design#dropdown` показывает действия строки Table: открытие Modal,
 копирование и архивирование участника. Первая версия ограничена плоскими командами:
-интеграция standalone Menu, подменю, selectable/checkable items, contextMenu,
-Dropdown.Button, href и popupRender пока отсутствуют.
+интеграция standalone Menu, подменю, selectable/checkable items, contextMenu
+и popupRender пока отсутствуют. Пункты с href уже создают нативные ссылки.
+Deprecated Dropdown.Button исключён из переноса; актуальная композиция —
+SpaceCompact с Dropdown и Button.
 
 ## Tabs
 
