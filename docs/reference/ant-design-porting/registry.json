@@ -14207,7 +14207,7 @@
             "tests/browser/progress-line.spec.ts",
             "tests/package/progress-line.ssr.test.ts"
           ],
-          "note": "Два независимых tracks, source success status precedence, railColor/trailColor и strokeWidth/size aliases. PercentPosition inner/outer + start/center/end; внутренний текст вместо status icon и brightness по FastColor. Format получает optional success percent, возвращает string/number/passive Snippet; старый format.length<=1 без success вызывается с одним аргументом. Snippet использует numeric ARIA fallback или явный aria-valuetext. Label clipping для size=24 сохраняет исходный native contract и отдельно сверяется с fresh-build baseline 850ad08; source эталон остаётся неизменным."
+          "note": "Два независимых tracks, source success status precedence, railColor и size. PercentPosition inner/outer + start/center/end; внутренний текст вместо status icon и brightness по FastColor. Format получает optional success percent, возвращает string/number/passive Snippet; старый format.length<=1 без success вызывается с одним аргументом. Snippet использует numeric ARIA fallback или явный aria-valuetext. Label clipping для size=24 сохраняет исходный native contract и отдельно сверяется с fresh-build baseline 850ad08; source эталон остаётся неизменным."
         },
         {
           "id": "line-steps",
@@ -14219,7 +14219,7 @@
             "src/lib/progress-line-reference.test.ts",
             "tests/browser/progress-line.spec.ts"
           ],
-          "note": "Количество и rounding по source steps*percent/100, per-item dimensions, small width 2/default 14, strokeWidth height, colors per index и rail fallback. Object steps использует count, gap в line не меняет интервалы. Gradient object в steps игнорируется. Preset medium и локальный prefix поддержаны; широкие steps следуют source layout."
+          "note": "Количество и rounding по source steps*percent/100, per-item dimensions, small width 2/default 14, height через size, colors per index и rail fallback. Object steps использует count, gap в line не меняет интервалы. Gradient object в steps игнорируется. Preset medium и локальный prefix поддержаны; широкие steps следуют source layout."
         },
         {
           "id": "component-config",
@@ -14259,7 +14259,7 @@
             "tests/package/progress-circle.ssr.test.ts",
             "tests/browser/fixtures/ant-design-progress-circle-reference.json"
           ],
-          "note": "79 UMD-сценарий в standards mode и rapid-update trace: circle/dashboard, success paint order, logical/physical gaps с RTL, width/size aliases, round cap correction и source step spacing. Circular rounding игнорируется; gradient использует insertion order процентных stops, masks/foreignObject/conic background и butt cap. SVG styles пишутся через общий declaration writer с приоритетом semantic slots. Сохранены source особенности: default inactive steps наследуют основной stroke без railColor, gradient steps ссылаются на отсутствующее definition, gap у circle без placement не применяет rotation. Tiny Tooltip ленивый, сохраняет содержимое после закрытия и не добавляет Tab stop; используется native Svelte wrapper. Source outlined status icons, уникальные SSR masks и cleanup refs/popup проверены."
+          "note": "69 UMD-сценариев в standards mode и rapid-update trace: circle/dashboard, success paint order, logical gaps с RTL, size и текущий circle strokeWidth, round cap correction и source step spacing. Circular rounding игнорируется; gradient использует insertion order процентных stops, masks/foreignObject/conic background и butt cap. SVG styles пишутся через общий declaration writer с приоритетом semantic slots. Сохранены source особенности: default inactive steps наследуют основной stroke без railColor, gradient steps ссылаются на отсутствующее definition, gap у circle без placement не применяет rotation. Tiny Tooltip ленивый, сохраняет содержимое после закрытия и не добавляет Tab stop; используется native Svelte wrapper. Source outlined status icons, уникальные SSR masks и cleanup refs/popup проверены."
         },
         {
           "id": "global-prefix-warnings",

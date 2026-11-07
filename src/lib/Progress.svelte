@@ -35,11 +35,8 @@
     format,
     strokeColor,
     railColor,
-    trailColor,
-    width,
     gapDegree,
     gapPlacement,
-    gapPosition,
     strokeLinecap = 'round',
     success,
     steps,
@@ -76,24 +73,17 @@
     success?.percent === undefined ? value : Number.parseInt(String(success.percent), 10),
     status
   ));
-  let lineSize = $derived.by(() => {
-    const resolved = resolveProgressLineSize(size);
-    if (type === 'line' && strokeWidth && typeof size === 'string') {
-      return { ...resolved, height: strokeWidth };
-    }
-    return resolved;
-  });
+  let lineSize = $derived(resolveProgressLineSize(size));
   let diameter = $derived(resolveProgressCircleSize(
-    (providedSize ?? width ?? 'medium') as ProgressCircleSize
+    (providedSize ?? 'medium') as ProgressCircleSize
   ));
   let circle = $derived(getProgressCircleGeometry(value, diameter, strokeWidth));
   let stepCount = $derived(typeof steps === 'object' ? steps.count : steps ?? 0);
   let stepLayout = $derived(steps
-    ? progressLineSteps(stepCount, percent, size, strokeWidth, rounding) : undefined);
+    ? progressLineSteps(stepCount, percent, size, rounding) : undefined);
   let pureLine = $derived(type === 'line' && !steps);
   let infoAlign = $derived(percentPosition.align ?? 'end');
   let infoPosition = $derived(percentPosition.type ?? 'outer');
-  let mergedRail = $derived(railColor ?? trailColor);
   let lineColor = $derived(Array.isArray(strokeColor) ? strokeColor[0] : strokeColor);
   let background = $derived(typeof lineColor === 'object'
     ? progressGradient(lineColor, config.direction === 'rtl') : lineColor);
@@ -127,11 +117,8 @@
     format,
     strokeColor,
     railColor,
-    trailColor,
-    width,
     gapDegree,
     gapPlacement,
-    gapPosition,
     strokeLinecap,
     success,
     steps,
@@ -222,8 +209,8 @@
   {...rest}>
   {#if type !== 'line'}
     <ProgressCircle {prefix} {type} percent={value} {diameter} strokeWidth={circle.strokeWidth}
-      strokeColor={lineColor} railColor={mergedRail} {strokeLinecap} {success} {steps}
-      {gapDegree} {gapPlacement} {gapPosition} classes={semantics.classes}
+      strokeColor={lineColor} railColor={railColor} {strokeLinecap} {success} {steps}
+      {gapDegree} {gapPlacement} classes={semantics.classes}
       styles={semantics.styles} indicator={showInfo ? indicator : undefined} />
   {:else if steps && stepLayout}
     <div class={[`${prefix}-steps-body`, semantics.classes.body]} style={semantics.styles.body}
@@ -231,7 +218,7 @@
       {#each stepLayout.items as active, index}
         <div class={[`${prefix}-steps-item`, active && `${prefix}-steps-item-active`,
           semantics.classes.track]} data-ant-progress-part="step"
-          style={`background-color: ${active ? (Array.isArray(strokeColor) ? strokeColor[index] : typeof strokeColor === 'string' ? strokeColor : '') ?? '' : mergedRail ?? ''};width: ${stepLayout.width}px;height: ${stepLayout.height}px;${semantics.styles.track ?? ''}`}></div>
+          style={`background-color: ${active ? (Array.isArray(strokeColor) ? strokeColor[index] : typeof strokeColor === 'string' ? strokeColor : '') ?? '' : railColor ?? ''};width: ${stepLayout.width}px;height: ${stepLayout.height}px;${semantics.styles.track ?? ''}`}></div>
       {/each}
       {#if showInfo}{@render indicator()}{/if}
     </div>
@@ -240,7 +227,7 @@
       && `${prefix}-body-layout-bottom`, semantics.classes.body]} data-ant-progress-part="body"
       style={`width: ${lineSize.width};${semantics.styles.body ?? ''}`}>
       <div class={[`${prefix}-rail`, semantics.classes.rail]} data-ant-progress-part="rail"
-        style={`height: ${lineSize.height}px;${mergedRail ? `background: ${mergedRail};` : ''}${strokeLinecap !== 'round' ? 'border-radius: 0px;' : ''}${semantics.styles.rail ?? ''}`}>
+        style={`height: ${lineSize.height}px;${railColor ? `background: ${railColor};` : ''}${strokeLinecap !== 'round' ? 'border-radius: 0px;' : ''}${semantics.styles.rail ?? ''}`}>
         <div class={[`${prefix}-track`, semantics.classes.track]} data-ant-progress-part="track"
           style={`width: ${value}%;height: ${lineSize.height}px;${background ? `background: ${background};--progress-line-stroke-color: ${background};` : ''}${strokeLinecap !== 'round' ? 'border-radius: 0px;' : ''}${semantics.styles.track ?? ''}`}>
           {#if showInfo && infoPosition === 'inner'}{@render indicator()}{/if}

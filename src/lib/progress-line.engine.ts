@@ -35,11 +35,10 @@ export function progressLineSteps(
   count: number,
   percent: number,
   size: ProgressLineSize | undefined,
-  strokeWidth = 8,
   rounding: (value: number) => number = Math.round
 ) {
   let width: number | string = size === 'small' ? 2 : 14;
-  let height = strokeWidth;
+  let height = 8;
   if (typeof size === 'number') {
     width = size;
     height = size;

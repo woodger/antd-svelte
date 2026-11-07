@@ -3910,8 +3910,7 @@ Size по умолчанию medium. Для line medium/small задают вы�
 Доступная ширина контейнера ограничивает индикатор на узких экранах.
 
 Для circle/dashboard size принимает medium=120px, small=60px или положительный конечный
-диаметр в px. Middle/default дают обычный размер. Совместимая пара использует первый
-размер; deprecated width действует при отсутствующем size. Невалидный диаметр заменяется
+диаметр в px. Совместимая пара использует первый размер. Невалидный диаметр заменяется
 на 120px. SVG сохраняет пропорции и помещается в контейнер. При диаметре ≤20px подпись
 показывается в Tooltip; доступные значения сохраняются, остановка Tab не добавляется.
 Подпись Tooltip создаётся при первом открытии и сохраняется при закрытии. У circle strokeWidth задаётся
@@ -3926,7 +3925,7 @@ dash attributes сохраняют прежнюю геометрию для из
 определяют CSS declarations. Минимальная толщина вычисляется в исходном порядке операций.
 
 StrokeColor/railColor принимают CSS-цвета и переопределяют цвет заполнения/фона,
-включая при success/exception. RailColor имеет приоритет над deprecated trailColor.
+включая при success/exception.
 Для line strokeColor также принимает { from, to, direction? } или record процентных
 stops: ключи сортируются по исходному parseFloat, direction по умолчанию to right/to left
 в LTR/RTL. В обычном line массив strokeColor использует первый цвет; в steps цвета
@@ -3963,12 +3962,11 @@ unmount и защищает повтор от результата предыд�
 Line поддерживает success={{ percent, strokeColor? }} как отдельный track поверх основного.
 Наличие success.percent определяет автоматический status вместо общего percent, в том числе
 при success.percent=0. Длины обоих tracks ограничиваются отдельно; success может выходить
-за основной track, как в upstream. Deprecated strokeWidth задаёт высоту line, когда size —
-preset; предпочтителен size.
+за основной track, как в upstream. Высота line задаётся через size.
 
 Steps задаёт число отдельных элементов line. Math.round определяет активное количество;
 rounding получает steps*percent/100. Size задаёт размер одного элемента, а не общей полосы.
-По умолчанию ширина 14px (2px при small), высота strokeWidth либо 8px. Object steps использует
+По умолчанию ширина 14px (2px при small), высота 8px. Object steps использует
 count; gap в этой ветке не меняет интервалы. PercentPosition выбирает start/center/end и
 inner/outer. Внутренняя подпись всегда текстовая, в том числе при success/exception;
 яркость первого заданного цвета выбирает контраст подписи по исходному FastColor.
@@ -3984,8 +3982,7 @@ Bind:nativeElement возвращает текущий root после mount и 
 prefix/key/hash; переменные идут перед semantic/user styles.
 
 Dashboard использует gapDegree=75, circle — 0. GapPlacement принимает top/bottom/start/end;
-start/end учитывают RTL. Deprecated gapPosition задаёт физические top/bottom/left/right;
-gapPlacement имеет приоритет. Для circle с положительным gapDegree задавайте placement:
+start/end учитывают RTL. Для circle с положительным gapDegree задавайте placement:
 без него исходный renderer не применяет rotation. Success у круга рисуется отдельным
 сегментом перед остатком percent-success, с исходным порядком наложения.
 
@@ -3996,11 +3993,11 @@ Success вычитается из процента перед расчётом �
 ссылаются на отсутствующее gradient definition. Эти случаи входят в source-проверки.
 
 [Эталоны line/steps](./tests/browser/fixtures/ant-design-progress-line-reference.json)
-сняты из официального UMD в стандартном режиме браузера для 70 сценариев.
+сняты из официального UMD в стандартном режиме браузера для 65 сценариев.
 Для узкого size=24 отдельно сохранён
 [эталон native clipping](./tests/browser/fixtures/progress-native-clipping-reference.json)
 из свежей сборки прежнего коммита библиотеки. Для circle/dashboard есть
-[81 UMD-сценарий и transition trace](./tests/browser/fixtures/ant-design-progress-circle-reference.json).
+[69 UMD-сценариев и transition trace](./tests/browser/fixtures/ant-design-progress-circle-reference.json).
 Сохранены native finite bounds, clipping длинной подписи и числовые SVG attributes;
 Tooltip использует существующую Svelte-обёртку. Общий ConfigProvider prefix и React
 development warnings остаются следующими этапами. Исходная лицензия

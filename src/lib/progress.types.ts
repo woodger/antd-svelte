@@ -20,7 +20,6 @@ export interface PercentPositionType {
   type?: 'inner' | 'outer';
 }
 export type ProgressGapPlacement = 'top' | 'bottom' | 'start' | 'end';
-export type ProgressGapPosition = 'top' | 'bottom' | 'left' | 'right';
 export type ProgressSemanticSlots = Partial<Record<
   'root' | 'body' | 'rail' | 'track' | 'indicator', string
 >>;
@@ -43,14 +42,8 @@ interface ProgressBaseProps extends Omit<
   /** Прежний formatter с одним аргументом вызывается один раз; второй — success percent. */
   format?: (percent: number, successPercent?: number) => ProgressContent;
   railColor?: string;
-  /** @deprecated Используйте railColor. */
-  trailColor?: string;
-  /** @deprecated Используйте size. В line значение не используется. */
-  width?: number;
   gapDegree?: number;
   gapPlacement?: ProgressGapPlacement;
-  /** @deprecated Используйте gapPlacement. */
-  gapPosition?: ProgressGapPosition;
   strokeLinecap?: 'round' | 'butt' | 'square';
   class?: string;
   rootClassName?: string;
@@ -71,7 +64,7 @@ export type ProgressProps = ProgressBaseProps & (
     type?: 'line';
     status?: ProgressStatus;
     size?: ProgressLineSize;
-    strokeWidth?: number;
+    strokeWidth?: never;
     strokeColor?: string | string[] | ProgressGradient;
     success?: ProgressSuccess;
     steps?: number | { count: number; gap: number; };

@@ -8,7 +8,7 @@
     from './progress-circle.engine';
   import type { Snippet } from 'svelte';
   import type {
-    ProgressGapPlacement, ProgressGapPosition, ProgressGradient, ProgressSemanticSlots,
+    ProgressGapPlacement, ProgressGradient, ProgressSemanticSlots,
     ProgressSuccess
   } from './progress.types';
 
@@ -25,7 +25,6 @@
     steps,
     gapDegree,
     gapPlacement,
-    gapPosition,
     classes,
     styles,
     indicator
@@ -42,7 +41,6 @@
     steps?: number | { count: number; gap: number; };
     gapDegree?: number;
     gapPlacement?: ProgressGapPlacement;
-    gapPosition?: ProgressGapPosition;
     classes: ProgressSemanticSlots;
     styles: ProgressSemanticSlots;
     indicator?: Snippet;
@@ -74,7 +72,7 @@
     cap: strokeLinecap,
     steps,
     gap,
-    position: progressGapPosition(type, config.direction, gapPlacement, gapPosition)
+    position: progressGapPosition(type, config.direction, gapPlacement)
   }));
 
   $effect(() => {

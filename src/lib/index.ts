@@ -554,7 +554,6 @@ export type {
   ProgressSuccess,
   PercentPositionType,
   ProgressGapPlacement,
-  ProgressGapPosition,
   ProgressSemanticSlots,
   ProgressSemanticInfo,
   ProgressConfig

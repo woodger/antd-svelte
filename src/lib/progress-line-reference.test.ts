@@ -28,7 +28,7 @@ describe('Ant Design 6.6.8 UMD Progress line conformance', () => {
         const rounding = sample.rounding === 'floor' ? Math.floor
           : sample.rounding === 'ceil' ? Math.ceil : undefined;
         const layout = progressLineSteps(count, sample.props.percent ?? 0,
-          sample.props.size as ProgressLineSize, sample.props.strokeWidth, rounding);
+          sample.props.size as ProgressLineSize, rounding);
 
         const prefix = sample.props.prefixCls || 'ant-progress';
         expect(layout.items).toEqual(sample.snapshot.tracks.map(track =>

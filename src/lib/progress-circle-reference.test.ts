@@ -17,16 +17,16 @@ describe('Ant Design 6.6.8 UMD circular Progress conformance', () => {
     it(`reproduces captured circular geometry for ${sample.name}`, () => {
       const props = sample.props as Extract<ProgressProps, { type: 'circle' | 'dashboard' }>;
       const percent = props.percent ?? 0;
-      const diameter = resolveProgressCircleSize(props.size ?? props.width);
+      const diameter = resolveProgressCircleSize(props.size);
       const native = getProgressCircleGeometry(percent, diameter, props.strokeWidth);
       const color = Array.isArray(props.strokeColor) ? props.strokeColor[0] : props.strokeColor;
       const result = progressCircleLayout({
         percent, success: props.success, strokeWidth: native.strokeWidth,
-        color, railColor: props.railColor ?? props.trailColor,
+        color, railColor: props.railColor,
         cap: props.strokeLinecap ?? 'round', steps: props.steps,
         gap: props.gapDegree ?? (props.type === 'dashboard' ? 75 : 0),
         position: progressGapPosition(props.type, sample.rtl ? 'rtl' : 'ltr',
-          props.gapPlacement, props.gapPosition)
+          props.gapPlacement)
       });
       const paths = result.rail ? [result.rail, ...result.paths] : result.paths;
 

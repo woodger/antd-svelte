@@ -1,9 +1,11 @@
 // Геометрия @rc-component/progress 1.0.3 (MIT); см. vendor/LICENSE.rc-progress.
 // https://github.com/react-component/progress/tree/2f59aea058f27098fd1e73a2cca985faf520e3d2
 import type {
-  ProgressGapPlacement, ProgressGapPosition, ProgressGradient, ProgressSuccess
+  ProgressGapPlacement, ProgressGradient, ProgressSuccess
 } from './progress.types';
 import { progressSuccessPercent } from './progress-line.engine';
+
+type CircleGapPosition = 'top' | 'bottom' | 'left' | 'right';
 
 const transition = 'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s, '
   + 'stroke .3s, stroke-width .06s ease .3s, opacity .3s ease 0s';
@@ -11,10 +13,9 @@ const transition = 'stroke-dashoffset .3s ease 0s, stroke-dasharray .3s ease 0s,
 export function progressGapPosition(
   type: 'circle' | 'dashboard',
   direction: 'ltr' | 'rtl',
-  placement?: ProgressGapPlacement,
-  position?: ProgressGapPosition
+  placement?: ProgressGapPlacement
 ) {
-  const value = (placement ?? position) || (type === 'dashboard' ? 'bottom' : undefined);
+  const value = placement || (type === 'dashboard' ? 'bottom' : undefined);
   return value === 'start' ? direction === 'rtl' ? 'right' : 'left'
     : value === 'end' ? direction === 'rtl' ? 'left' : 'right' : value;
 }
@@ -26,7 +27,7 @@ export function progressCircleStyle(
   percent: number,
   rotation: number,
   gap: number,
-  position: ProgressGapPosition | undefined,
+  position: CircleGapPosition | undefined,
   color: string | ProgressGradient | undefined,
   cap: 'round' | 'butt' | 'square',
   strokeWidth: number,
@@ -69,7 +70,7 @@ export function progressCircleLayout(options: {
   cap: 'round' | 'butt' | 'square';
   steps?: number | { count: number; gap: number; };
   gap: number;
-  position?: ProgressGapPosition;
+  position?: CircleGapPosition;
 }) {
   const { percent, success, strokeWidth, color, railColor, steps, gap, position } = options;
   const radius = 50 - strokeWidth / 2;
