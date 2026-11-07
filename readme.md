@@ -9404,6 +9404,9 @@ FormValidationError. Ошибка содержит `values`, `outOfDate` и `err
 в warnings; оно не блокирует validateFields/submit и не делает поле обязательным.
 `getFieldWarning(name)` читает предупреждения, `getFieldsError` возвращает оба
 массива. При наличии ошибки errorFields включает также предупреждения этого поля.
+Новая проверка сразу очищает прежние warnings, включая ожидание async validator;
+после ответа записывается новый результат. Этот lifecycle сверён с
+[официальным UMD](./tests/browser/fixtures/ant-design-form-warning-lifecycle-observation.json).
 FormItem показывает ошибки перед предупреждениями; error имеет приоритет над
 warning. Предупреждение входит в доступное описание, но не выставляет aria-invalid.
 Переданные в `validateFields(names)` пути выбирают проверяемые поля; snapshot

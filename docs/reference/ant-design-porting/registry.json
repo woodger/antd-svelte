@@ -4862,7 +4862,8 @@
         "tests/browser/form-error-list.spec.ts",
         "tests/browser/fixtures/FormErrorListFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-error-list-observation.json",
-        "tests/package/form-error-list.ssr.test.ts"
+        "tests/package/form-error-list.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-form-warning-lifecycle-observation.json"
       ],
       "features": [
         {
@@ -5045,9 +5046,10 @@
             "tests/browser/form-warnings.spec.ts",
             "tests/browser/fixtures/FormWarningsFixtures.svelte",
             "tests/browser/fixtures/ant-design-form-warning-observation.json",
-            "tests/package/form-warnings.ssr.test.ts"
+            "tests/package/form-warnings.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-form-warning-lifecycle-observation.json"
           ],
-          "note": "Встроенные и custom warningOnly rules собираются отдельно; getFieldWarning/getFieldsError/FormList meta сохраняют предупреждения. Ошибки имеют приоритет в status, errorFields содержит warnings ошибочного поля. Warning-only required не задаёт required mark/attribute, aria-invalid и не блокирует submit. Сброс, запись и снятие локального поля отменяют устаревшие результаты; сохраняется прежняя сигнатура validator(value, values). Сверено с неизменённым UMD Ant Design 6.6.8."
+          "note": "Встроенные и custom warningOnly rules собираются отдельно; getFieldWarning/getFieldsError/FormList meta сохраняют предупреждения. Ошибки имеют приоритет в status, errorFields содержит warnings ошибочного поля. Warning-only required не задаёт required mark/attribute, aria-invalid и не блокирует submit. Сброс, запись и снятие локального поля отменяют устаревшие результаты; сохраняется прежняя сигнатура validator(value, values). Сверено с неизменённым UMD Ant Design 6.6.8. Предыдущие warnings очищаются сразу при запуске новой validation; состояния до, во время и после async validator сверены с отдельным raw reference UMD."
         },
         {
           "id": "error-list",

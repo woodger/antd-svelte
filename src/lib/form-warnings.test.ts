@@ -10,6 +10,31 @@ function deferred<Value>() {
 }
 
 describe('createForm warningOnly', () => {
+  it('clears previous warnings while a replacement validation is pending', async () => {
+    const pending = deferred<string>();
+    let held = false;
+    const form = createForm({
+      initialValues: { name: 'Anna' },
+      rules: { name: [{
+        warningOnly: true, validator: () => held ? pending.promise : 'First warning'
+      }] }
+    });
+    await form.validateFields();
+    expect(form.getFieldWarning('name')).toEqual(['First warning']);
+
+    held = true;
+    const validation = form.validateFields();
+
+    expect(form.getFieldWarning('name')).toEqual([]);
+    expect(form.getFieldsError()).toEqual([{ name: ['name'], errors: [], warnings: [] }]);
+    expect(form.isFieldValidating('name')).toBe(true);
+    pending.resolve('Next warning');
+    await validation;
+
+    expect(form.getFieldWarning('name')).toEqual(['Next warning']);
+    expect(form.isFieldValidating('name')).toBe(false);
+  });
+
   it('submits warning-only values without marking the field as required', async () => {
     const form = createForm({
       initialValues: { name: '' },

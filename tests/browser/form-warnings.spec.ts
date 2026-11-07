@@ -87,6 +87,27 @@ test('FormList exposes source warning metadata without rejecting submit', async 
     .toHaveText('{"errors":[],"warnings":[]}');
 });
 
+test('Form clears previous warnings while asynchronous revalidation is pending', async ({ page }) => {
+  const input = page.getByLabel('Recommended name', { exact: true });
+  await page.getByRole('button', { name: 'Validate warnings', exact: true }).click();
+  await expect(input).toHaveAccessibleDescription('Name recommended');
+
+  await page.getByRole('checkbox', { name: 'Hold name warning', exact: true }).check();
+  await page.getByRole('button', { name: 'Validate warnings', exact: true }).click();
+  await expect(page.getByRole('status', { name: 'Pending warning count', exact: true }))
+    .toHaveText('1');
+
+  await expect(page.getByRole('status', { name: 'Warning fields', exact: true }))
+    .toHaveText('[{"name":["name"],"errors":[],"warnings":[]}]');
+  await expect(input).toHaveAccessibleDescription('Optional name');
+  await expect(input).not.toHaveAttribute('aria-invalid');
+  await page.getByRole('button', { name: 'Complete warnings', exact: true }).click();
+
+  await expect(input).toHaveAccessibleDescription('Name recommended Delayed warning');
+  await expect(page.getByRole('status', { name: 'Warning validation', exact: true }))
+    .toHaveText('complete');
+});
+
 for (const operation of ['reset', 'remove'] as const) {
   test(`Form ignores a delayed warning after ${operation}`, async ({ page }) => {
     await page.getByRole('button', { name: 'Toggle pending field', exact: true }).click();

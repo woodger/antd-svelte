@@ -1,9 +1,13 @@
 <script lang="ts">
   import { Button, Form, FormErrorList, FormItem, FormList, Input, createForm } from 'antd-svelte';
 
+  let holdName = $state(false);
   const form = createForm({
     initialValues: { name: '' },
-    rules: { name: [{ required: true, warningOnly: true, message: 'Name recommended' }] }
+    rules: { name: [
+      { required: true, warningOnly: true, message: 'Name recommended' },
+      { warningOnly: true, validator: () => holdName ? validatePending() : undefined }
+    ] }
   });
   const mixed = createForm({ initialValues: { name: '' } });
   const list = createForm({ initialValues: { users: [] as string[] } });
@@ -57,6 +61,7 @@
     <Button htmlType="reset">Reset warnings</Button>
   </Form>
   <button onclick={validate}>Validate warnings</button>
+  <label><input type="checkbox" bind:checked={holdName} />Hold name warning</label>
   <button onclick={() => { showPending = !showPending; }}>Toggle pending field</button>
   <button onclick={completePending}>Complete warnings</button>
   <output aria-label="Warning fields">{JSON.stringify(form.getFieldsError(['name']))}</output>
