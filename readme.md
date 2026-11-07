@@ -9027,6 +9027,21 @@ Snippet создаётся только для видимой раскрытой
 Раскрытие нажатием на всю строку, forceRender и иерархические данные пока не
 поддерживаются. Живой пример карточек участников доступен на `/ant-design`.
 
+### Видимость заголовка колонок
+
+`showHeader` по умолчанию true. False удаляет `thead`, сохраняя caption, title/footer,
+данные, сортировку и выбор строк. Внешние изменения видимости не вызывают onChange.
+Пустой title snippet сохраняет панель. Класс ant-table-no-header применяется
+при отсутствии title и showHeader=false; в bordered-таблице CSS скругляет
+верхние углы первой строки body по исходным правилам.
+
+Без шапки ширины fixed columns берутся из первой обычной строки tbody и заново
+измеряются после замены страницы или восстановления пустого набора. Закрепление
+и expanded viewport работают в LTR/RTL. Скрытие шапки удаляет её открытый фильтр;
+содержимое и фокус controls в остающихся body rows сохраняются.
+Сравнение 48 состояний UMD: [browser](tests/browser/table-header.spec.ts),
+[SSR](tests/package/table-header.ssr.test.ts), fixture `?fixture=table-header`.
+
 ### Классы и подсветка строк
 
 `rowClassName` принимает строку или `(record, index, indent) => string` и добавляет

@@ -9,6 +9,10 @@
 
 ### Added
 
+- Table: showHeader с default true, source no-header corners и сохранением caption,
+  панелей и состояния строк. При скрытой шапке fixed offsets измеряются по tbody
+  и обновляются после смены/опустошения данных. Добавлены UMD/SSR/browser-проверки.
+
 - Table: rowClassName как строка/callback и rowHoverable с default true. Классы
   дополняют состояние строки, hover отключается сразу при смене prop. Добавлены
   UMD-сравнения классов и цветов, SSR/browser-проверки; stale hover upstream

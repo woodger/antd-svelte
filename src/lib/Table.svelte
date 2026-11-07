@@ -38,6 +38,7 @@
     rowKey,
     rowClassName,
     rowHoverable = true,
+    showHeader = true,
     sorter = $bindable(),
     defaultSorter = null,
     filters = $bindable(),
@@ -157,14 +158,19 @@
     const element = table;
     const viewport = content;
     const fixed = fixedColumns;
-    const hasHeader = scroll?.y !== undefined;
+    const hasHeader = showHeader && scroll?.y !== undefined;
     const hasExpansion = Boolean(expandable);
 
     if (!element || !viewport || (!fixed.some(Boolean) && !hasHeader && !hasExpansion)) {
       return;
     }
 
-    const cells = Array.from(element.tHead?.rows[0]?.cells ?? []);
+    let measurementRow = element.tHead?.rows[0];
+    if (!showHeader) {
+      // Без thead ширины и новые строки страницы измеряются по обычной строке tbody.
+      measurementRow = visibleRows.length ? element.tBodies[0]?.rows[0] : undefined;
+    }
+    const cells = Array.from(measurementRow?.cells ?? []);
 
     const measure = () => {
       const widths = cells.map((cell) => cell.getBoundingClientRect().width);
@@ -385,6 +391,7 @@
       'ant-table',
       `ant-table-${resolvedSize === 'middle' ? 'medium' : resolvedSize}`,
       bordered && 'ant-table-bordered',
+      showHeader === false && !title && 'ant-table-no-header',
       !visibleRows.length && 'ant-table-empty'
     ]}>
     {#if title}<div class="ant-table-title">{@render title(panelData)}</div>{/if}
@@ -409,7 +416,7 @@
                 ? `${column.width}px`
                 : column.width} />{/each}
           </colgroup>
-          <thead class="ant-table-thead">
+          {#if showHeader}<thead class="ant-table-thead">
             <tr>
               {#if expandable}
                 <th scope="col" aria-label={expandable.columnTitle ?? strings.expandColumn} class={[
@@ -474,7 +481,7 @@
                 </th>
               {/each}
             </tr>
-          </thead>
+          </thead>{/if}
           <tbody class="ant-table-tbody">
             {#each visibleRows as row, index (row.key)}
               {@const expanded = row.canExpand && expandedKeys.has(row.key)}

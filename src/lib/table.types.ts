@@ -73,6 +73,8 @@ export interface TableProps<Row extends object> {
   rowClassName?: string | ((record: Row, index: number, indent: number) => string);
   /** Подсветка строк при наведении; изменение сразу обновляет оформление. @defaultValue true */
   rowHoverable?: boolean;
+  /** Отображает заголовок колонок, сохраняя данные, caption и панели. @defaultValue true */
+  showHeader?: boolean;
   /** Поддерживает bind:sorter. */
   sorter?: TableSorter | null;
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */

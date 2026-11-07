@@ -10982,7 +10982,10 @@
         "tests/package/table-row-options.ssr.test.ts",
         "tests/browser/fixtures/ant-design-table-hover-reference.json",
         "tests/browser/fixtures/ant-design-table-row-classes-reference.json",
-        "tests/browser/fixtures/ant-design-table-hover-observation.json"
+        "tests/browser/fixtures/ant-design-table-hover-observation.json",
+        "tests/browser/table-header.spec.ts",
+        "tests/package/table-header.ssr.test.ts",
+        "tests/browser/fixtures/ant-design-table-header-reference.json"
       ],
       "features": [
         {
@@ -11067,6 +11070,21 @@
             "tests/browser/fixtures/ant-design-table-hover-observation.json"
           ],
           "note": "Class string/callback(record,currentPageIndex,indent0) дополняет core/selection classes; defaults/explicit true/false hover сверяются с UMD, включая normal/selected/sorted. Updates сохраняют row/editor/checkbox DOM, focus/selection, keyboard и callbacks. Source true→false оставляет HoverContext paint после leave; raw observation сохранено, native CSS guard очищает сразу. Legacy-стили сохранены. Tree/rowspan варианты требуют отдельного расширения."
+        },
+        {
+          "id": "show-header",
+          "title": "ShowHeader и fixed columns без thead",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Table.svelte",
+            "src/lib/table.types.ts",
+            "readme.md",
+            "tests/browser/table-header.spec.ts",
+            "tests/package/table-header.ssr.test.ts",
+            "tests/browser/fixtures/ant-design-table-header-reference.json"
+          ],
+          "note": "Default true; false удаляет thead, сохраняя caption/title/footer, row state и controls. Source ant-table-no-header только при false и отсутствии title, включая пустой snippet. Fixed/expanded measurement берёт обычную body row и перевязывает ResizeObserver при смене данных; empty/restore и LTR/RTL проверяются в браузере. Header filter удаляется при скрытии; дополнительные callbacks не создаются."
         }
       ]
     },
