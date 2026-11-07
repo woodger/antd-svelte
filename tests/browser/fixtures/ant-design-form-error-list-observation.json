@@ -1,0 +1,296 @@
+{
+  "setup": {
+    "wrapper": "Form > Form.List > Form.Item > Form.ErrorList",
+    "theme": {
+      "cssVar": {},
+      "components": {
+        "Form": {
+          "fontSize": 18,
+          "colorError": "#b81234",
+          "colorWarning": "#945600"
+        }
+      }
+    }
+  },
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "react": "18.3.1",
+    "source": "unmodified official UMD, runtime CSS-in-JS, no static CSS",
+    "delegatedForm": "1.8.6, reviewed separately from the bundled UMD"
+  },
+  "cases": [
+    {
+      "id": "initial-empty",
+      "input": {
+        "errors": [],
+        "warnings": [],
+        "fieldId": "people"
+      },
+      "rendered": false,
+      "display": null,
+      "idAttribute": null,
+      "items": [],
+      "callbacks": []
+    },
+    {
+      "id": "errors-and-warnings",
+      "input": {
+        "errors": [
+          "First",
+          "Second"
+        ],
+        "warnings": [
+          "Warning"
+        ],
+        "fieldId": "people"
+      },
+      "rendered": true,
+      "display": "block",
+      "idAttribute": "people_help",
+      "items": [
+        {
+          "text": "First",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        },
+        {
+          "text": "Second",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        },
+        {
+          "text": "Warning",
+          "status": "warning",
+          "color": "rgb(148, 86, 0)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        }
+      ],
+      "callbacks": [
+        true
+      ]
+    },
+    {
+      "id": "help-priority",
+      "input": {
+        "help": "Advice",
+        "helpStatus": "warning",
+        "errors": [
+          "Ignored"
+        ],
+        "warnings": [
+          "Ignored warning"
+        ],
+        "fieldId": "people"
+      },
+      "rendered": true,
+      "display": "block",
+      "idAttribute": "people_help",
+      "items": [
+        {
+          "text": "Advice",
+          "status": "warning",
+          "color": "rgb(148, 86, 0)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        }
+      ],
+      "callbacks": [
+        true
+      ]
+    },
+    {
+      "id": "empty-help",
+      "input": {
+        "help": "",
+        "helpStatus": "error",
+        "errors": [
+          "Ignored"
+        ]
+      },
+      "rendered": true,
+      "display": "block",
+      "idAttribute": "",
+      "items": [
+        {
+          "text": "",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        }
+      ],
+      "callbacks": [
+        true
+      ]
+    },
+    {
+      "id": "false-help",
+      "input": {
+        "help": false,
+        "errors": [
+          "Ignored"
+        ]
+      },
+      "rendered": true,
+      "display": "block",
+      "idAttribute": "",
+      "items": [
+        {
+          "text": "",
+          "status": "",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        }
+      ],
+      "callbacks": [
+        true
+      ]
+    },
+    {
+      "id": "zero-help",
+      "input": {
+        "help": 0,
+        "helpStatus": "success",
+        "errors": [
+          "Ignored"
+        ]
+      },
+      "rendered": true,
+      "display": "block",
+      "idAttribute": "",
+      "items": [
+        {
+          "text": "0",
+          "status": "success",
+          "color": "rgba(0, 0, 0, 0.45)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        }
+      ],
+      "callbacks": [
+        true
+      ]
+    },
+    {
+      "id": "null-help-falls-through",
+      "input": {
+        "help": null,
+        "errors": [
+          "Visible error"
+        ],
+        "fieldId": "people"
+      },
+      "rendered": true,
+      "display": "block",
+      "idAttribute": "people_help",
+      "items": [
+        {
+          "text": "Visible error",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        }
+      ],
+      "callbacks": [
+        true
+      ]
+    },
+    {
+      "id": "duplicate-and-prototype-messages",
+      "input": {
+        "errors": [
+          "toString",
+          "toString",
+          "constructor",
+          "__proto__"
+        ],
+        "warnings": [
+          "toString"
+        ],
+        "fieldId": "people"
+      },
+      "rendered": true,
+      "display": "block",
+      "idAttribute": "people_help",
+      "items": [
+        {
+          "text": "toString",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        },
+        {
+          "text": "toString",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        },
+        {
+          "text": "toString",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        },
+        {
+          "text": "toString",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        },
+        {
+          "text": "constructor",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        },
+        {
+          "text": "__proto__",
+          "status": "error",
+          "color": "rgb(184, 18, 52)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        },
+        {
+          "text": "toString",
+          "status": "warning",
+          "color": "rgb(148, 86, 0)",
+          "fontSize": "18px",
+          "lineHeight": "28.2857px"
+        }
+      ],
+      "callbacks": [
+        true
+      ]
+    },
+    {
+      "id": "empty-after-messages",
+      "input": {
+        "errors": [],
+        "warnings": [],
+        "fieldId": "people"
+      },
+      "rendered": false,
+      "display": null,
+      "idAttribute": null,
+      "items": [],
+      "callbacks": [
+        true,
+        false
+      ]
+    }
+  ]
+}

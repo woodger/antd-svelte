@@ -200,6 +200,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Form | Типизированная модель, валидация, submit, reset и обработка ошибок |
 | FormItem | Label, required, help, ошибки и контекст доступности одного control |
 | FormList | Вложенные массивы, initialValue, add/remove/move, устойчивые ключи и custom validation |
+| FormErrorList | Ошибки и предупреждения FormList, help, темы и lifecycle сообщений |
 
 Input и Select поддерживают `bind:value` и `onValueChange`. Очистка одиночного
 Select возвращает `undefined`, множественного — `[]`; числовой `0` остаётся допустимым значением. `defaultValue`
@@ -9448,7 +9449,9 @@ upstream передаёт значения store без такой гарант�
         </FormItem>
         <button type="button" onclick={() => remove(field.name)}>Удалить</button>
       {/each}
-      {#each meta.errors as error}<p role="alert">{error}</p>{/each}
+      <div class="ant-form-item">
+        <FormErrorList errors={meta.errors} warnings={meta.warnings} />
+      </div>
       <button type="button" onclick={() => add({ name: '' })}>Добавить</button>
     {/snippet}
   </FormList>
@@ -9457,7 +9460,7 @@ upstream передаёт значения store без такой гарант�
 
 Модель примера создаётся как
 `createForm<{ users: { name: string }[] }>({ initialValues: { users: [] } })`.
-Импортируйте FormList вместе с Form, FormItem, Input и createForm из пакета.
+Импортируйте FormList вместе с Form, FormItem, FormErrorList, Input и createForm из пакета.
 `field.name` — текущий индекс, `field.key` — устойчивый ключ строки. Используйте
 key в each: при move и remove соседних строк сохраняются controls, фокус,
 выделение и ошибки оставшихся строк. Новые строки получают новые ключи.
@@ -9486,7 +9489,8 @@ Move переносит строку и её key. Rules списка прини�
 с прежней Svelte-сигнатурой `(value, values)`. Ошибки приходят в meta.errors,
 предупреждения warningOnly — в meta.warnings;
 после remove/reset поздняя validation не возвращает ошибки удалённых controls.
-Form.ErrorList/prefixCls context пока не перенесены.
+`prefixCls` списка задаёт префикс вложенного FormErrorList, по умолчанию ant-form.
+Он не меняет prefix соседних FormItem.
 WarningOnly сверено с официальным UMD: [браузерные проверки и raw reference](./tests/browser/form-warnings.spec.ts),
 [SSR](./tests/package/form-warnings.ssr.test.ts) и [модель](./src/lib/form-warnings.test.ts).
 
@@ -9497,6 +9501,39 @@ UMD `move(0.5, 1)` теряет первую строку и вставляет 
 вложенность и initialValue — также [через SSR](./tests/package/form-list.ssr.test.ts).
 Логика ключей адаптирована из @rc-component/form 1.8.6; [MIT-лицензия](./src/lib/vendor/LICENSE.rc-form)
 включена в пакет. React runtime не добавлен.
+
+### FormErrorList
+
+`FormErrorList` — Svelte-эквивалент Form.ErrorList. Передавайте errors и warnings
+из FormList meta, как в примере выше. Класс ant-form-item у обёртки сохраняет
+исходные explain styles; при custom prefix используется соответствующий
+`<prefix>-item`. Компонент не регистрирует поле и не меняет значения формы.
+
+Ошибки идут перед предупреждениями. Сообщения принимают строки, числа, вложенные
+массивы и snippets; ReactNode заменён обычным Svelte content.
+Любой help, кроме null/undefined, заменяет оба списка, включая false, 0 и ''.
+`helpStatus` задаёт его status class, fieldId — id `${fieldId}_help`,
+class добавляет класс контейнера. Без сообщений контейнер отсутствует.
+
+Очистка errors/warnings задерживается на 10 ms, чтобы короткий промежуточный
+пустой список не скрывал сообщения. Появление и удаление сохраняют opacity/height
+motion с токенами Form, CSS easing и deadline 500 ms; motion=false и reduced motion
+отключают анимацию. `onVisibleChanged` вызывается после появления/скрытия,
+не вызывается для исходного пустого списка и после unmount.
+Повторная вставка во время скрытия отменяет прежний callback.
+
+Порядок leaving rows сверён с @rc-component/motion 1.3.3;
+[MIT-лицензия](./src/lib/vendor/LICENSE.rc-motion) включена в пакет.
+Повторяющиеся сообщения получают отдельные ключи, обычный текст сохраняет DOM
+при перестановке. Подтверждённый дефект Ant Design 6.6.8 с текстом toString
+не воспроизводится: после обновления upstream оставляет 7 сообщений вместо
+переданных 5. Входы и результат сохранены в
+[raw reference](./tests/browser/fixtures/ant-design-form-error-list-observation.json).
+
+Темы, приоритет help, snippets, callbacks, отмена при unmount и изолированный
+prefix проверяются [в браузере](./tests/browser/form-error-list.spec.ts),
+рендер без таймеров — [через SSR](./tests/package/form-error-list.ssr.test.ts).
+Общие classNames/styles Form, включая help/helpItem, ещё не перенесены.
 
 ## Клавиатура и фокус
 

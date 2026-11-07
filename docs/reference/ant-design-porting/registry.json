@@ -4769,6 +4769,12 @@
           "local": [
             "FormList"
           ]
+        },
+        {
+          "upstream": "Form.ErrorList",
+          "local": [
+            "FormErrorList"
+          ]
         }
       ],
       "dependencies": [
@@ -4779,6 +4785,11 @@
           "name": "@rc-component/form",
           "range": "~1.8.6",
           "referenceVersion": "1.8.6"
+        },
+        {
+          "name": "@rc-component/motion",
+          "range": "^1.3.3",
+          "referenceVersion": "1.3.3"
         }
       ],
       "priority": "unassigned",
@@ -4839,7 +4850,19 @@
         "tests/browser/form-warnings.spec.ts",
         "tests/browser/fixtures/FormWarningsFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-warning-observation.json",
-        "tests/package/form-warnings.ssr.test.ts"
+        "tests/package/form-warnings.ssr.test.ts",
+        "src/lib/FormErrorList.svelte",
+        "src/lib/form-error-list.types.ts",
+        "src/lib/form-error-list.engine.ts",
+        "src/lib/form-error-list.engine.test.ts",
+        "src/lib/form-error-list.dom.ts",
+        "src/lib/form-error-list.dom.test.ts",
+        "src/lib/form-error-list-prefix.engine.ts",
+        "src/lib/vendor/LICENSE.rc-motion",
+        "tests/browser/form-error-list.spec.ts",
+        "tests/browser/fixtures/FormErrorListFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-error-list-observation.json",
+        "tests/package/form-error-list.ssr.test.ts"
       ],
       "features": [
         {
@@ -4888,9 +4911,21 @@
             "tests/browser/form-warnings.spec.ts",
             "tests/browser/fixtures/FormWarningsFixtures.svelte",
             "tests/browser/fixtures/ant-design-form-warning-observation.json",
-            "tests/package/form-warnings.ssr.test.ts"
+            "tests/package/form-warnings.ssr.test.ts",
+            "src/lib/FormErrorList.svelte",
+            "src/lib/form-error-list.types.ts",
+            "src/lib/form-error-list.engine.ts",
+            "src/lib/form-error-list.engine.test.ts",
+            "src/lib/form-error-list.dom.ts",
+            "src/lib/form-error-list.dom.test.ts",
+            "src/lib/form-error-list-prefix.engine.ts",
+            "src/lib/vendor/LICENSE.rc-motion",
+            "tests/browser/form-error-list.spec.ts",
+            "tests/browser/fixtures/FormErrorListFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-error-list-observation.json",
+            "tests/package/form-error-list.ssr.test.ts"
           ],
-          "note": "NamePath и FormList core перенесены: массивы, add/remove/move, stable keys, вложенный prefix, initialValue/reset и custom validators, warningOnly. Полный API остаётся partial: Form.ErrorList/prefixCls context, validation options, field adapters и остальные настройки Form ещё не перенесены."
+          "note": "NamePath и FormList core перенесены: массивы, add/remove/move, stable keys, вложенный prefix, initialValue/reset и custom validators, warningOnly и FormErrorList с prefixCls списка. Полный API остаётся partial: Form semantic config, validation options, field adapters и остальные настройки Form ещё не перенесены."
         },
         {
           "id": "dayjs-values",
@@ -4987,9 +5022,11 @@
             "tests/browser/form-warnings.spec.ts",
             "tests/browser/fixtures/FormWarningsFixtures.svelte",
             "tests/browser/fixtures/ant-design-form-warning-observation.json",
-            "tests/package/form-warnings.ssr.test.ts"
+            "tests/package/form-warnings.ssr.test.ts",
+            "src/lib/FormErrorList.svelte",
+            "tests/browser/form-error-list.spec.ts"
           ],
-          "note": "Изучены Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d и rc-form 1.8.6. Поддержаны текущие индексы/ключи, add с вставкой/defaultValue, remove-many, move, external replacement/shrink, вложенные списки и независимый Form, Form initialValues над List initialValue, reset/remount и pending validation cleanup. Svelte Snippet заменяет render prop, each ключуется field.key; bindings используют полный путь, имена FormItem относительны списку. Подтверждённый дефект upstream: move(0.5,1) на двух строках теряет первую и вставляет undefined (raw observation); здесь дробные move игнорируются. WarningOnly передаёт предупреждения в meta.warnings без блокировки submit. PrefixCls/ErrorList остаётся за этим этапом. Регистрация сохраняется через Svelte $state proxy и переключается при замене модели, включая завершение старой async validation. Sparse positions рендерятся плотным массивом descriptors с исходными name/key; root setFieldValue и add сверены с отдельным raw reference. Там же сохранены наблюдения для общего аудита Form: initialValues merge upstream материализует holes в массивах объектов, а вложенная запись за границы List меняет store без немедленного показа строки. Svelte сохраняет исходные holes и обновляет List реактивно."
+          "note": "Изучены Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d и rc-form 1.8.6. Поддержаны текущие индексы/ключи, add с вставкой/defaultValue, remove-many, move, external replacement/shrink, вложенные списки и независимый Form, Form initialValues над List initialValue, reset/remount и pending validation cleanup. Svelte Snippet заменяет render prop, each ключуется field.key; bindings используют полный путь, имена FormItem относительны списку. Подтверждённый дефект upstream: move(0.5,1) на двух строках теряет первую и вставляет undefined (raw observation); здесь дробные move игнорируются. WarningOnly передаёт предупреждения в meta.warnings без блокировки submit. FormErrorList выводит meta.errors/warnings и наследует prefixCls ближайшего списка. Регистрация сохраняется через Svelte $state proxy и переключается при замене модели, включая завершение старой async validation. Sparse positions рендерятся плотным массивом descriptors с исходными name/key; root setFieldValue и add сверены с отдельным raw reference. Там же сохранены наблюдения для общего аудита Form: initialValues merge upstream материализует holes в массивах объектов, а вложенная запись за границы List меняет store без немедленного показа строки. Svelte сохраняет исходные holes и обновляет List реактивно."
         },
         {
           "id": "warning-only",
@@ -5011,6 +5048,27 @@
             "tests/package/form-warnings.ssr.test.ts"
           ],
           "note": "Встроенные и custom warningOnly rules собираются отдельно; getFieldWarning/getFieldsError/FormList meta сохраняют предупреждения. Ошибки имеют приоритет в status, errorFields содержит warnings ошибочного поля. Warning-only required не задаёт required mark/attribute, aria-invalid и не блокирует submit. Сброс, запись и снятие локального поля отменяют устаревшие результаты; сохраняется прежняя сигнатура validator(value, values). Сверено с неизменённым UMD Ant Design 6.6.8."
+        },
+        {
+          "id": "error-list",
+          "title": "FormErrorList: сообщения, help, prefix и lifecycle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormErrorList.svelte",
+            "src/lib/form-error-list.types.ts",
+            "src/lib/form-error-list.engine.ts",
+            "src/lib/form-error-list.engine.test.ts",
+            "src/lib/form-error-list.dom.ts",
+            "src/lib/form-error-list.dom.test.ts",
+            "src/lib/form-error-list-prefix.engine.ts",
+            "src/lib/vendor/LICENSE.rc-motion",
+            "tests/browser/form-error-list.spec.ts",
+            "tests/browser/fixtures/FormErrorListFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-error-list-observation.json",
+            "tests/package/form-error-list.ssr.test.ts"
+          ],
+          "note": "Текущие errors/warnings, non-null help (включая false/0/пустую строку), helpStatus, fieldId и callback видимости; class заменяет React className, snippets заменяют ReactNode. Вложенный FormList задаёт prefixCls без изменения соседних FormItem. Темы Form, opacity/height motion, CSS easing, deadline 500 ms, debounce очистки 10 ms, disabled/reduced motion и cleanup перенесены. Порядок leaving rows сверён с неизменённым diffKeys @rc-component/motion 1.3.3; в поставке есть MIT-лицензия. Обычные сообщения сохраняют key при перестановке, дубликаты получают уникальные keys. Дефект неизменённого UMD 6.6.8 с текстом toString зафиксирован: после обновления остаются 7 DOM-сообщений вместо переданных 5; здесь лишние строки не сохраняются. Общие semantic classNames/styles Form (help/helpItem) остаются вне этого этапа."
         }
       ]
     },

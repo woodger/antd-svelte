@@ -135,6 +135,12 @@
 
 ### Added
 
+- FormErrorList: ошибки и предупреждения FormList, приоритет help, snippets,
+  fieldId, темы, prefixCls списка и callback видимости. Сохранены задержка
+  очистки и порядок leaving rows; motion и таймеры отменяются при unmount.
+  Дефект upstream с повторяющимся текстом toString зафиксирован отдельно;
+  лишние сообщения в Svelte не создаются.
+
 - Form: warningOnly, getFieldWarning и warnings в getFieldsError/FormList meta.
   Предупреждения не блокируют submit, не делают поле required и не выставляют
   aria-invalid; ошибки сохраняют приоритет. Поздняя validation не возвращает

@@ -76,10 +76,12 @@ test('FormList exposes source warning metadata without rejecting submit', async 
     .toHaveText(JSON.stringify(sample.fields));
   await expect(page.getByRole('status', { name: 'Submitted warning list', exact: true }))
     .toHaveText(JSON.stringify(sample.values));
+  await expect(page.locator('#list-warning-form [data-ant-form-error-message]')).toHaveText(['Add a user']);
   await page.getByRole('button', { name: 'Add warning user', exact: true }).click();
 
   await expect(page.getByRole('status', { name: 'List warning meta', exact: true }))
     .toHaveText('{"errors":[],"warnings":[]}');
+  await expect(page.locator('#list-warning-form [data-ant-form-error-list]')).toHaveCount(0);
   await page.getByRole('button', { name: 'Reset warning list', exact: true }).click();
   await expect(page.getByRole('status', { name: 'List warning meta', exact: true }))
     .toHaveText('{"errors":[],"warnings":[]}');

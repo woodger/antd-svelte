@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { Button, Form, FormItem, FormList, Input, createForm } from 'antd-svelte';
+  import { Button, Form, FormErrorList, FormItem, FormList, Input, createForm } from 'antd-svelte';
 
   const form = createForm({
     initialValues: { name: '' },
@@ -90,6 +90,7 @@
         {#each fields as field (field.key)}<div>User {field.name}</div>{/each}
         <button type="button" onclick={() => operation.add('Anna')}>Add warning user</button>
         <output aria-label="List warning meta">{JSON.stringify(meta)}</output>
+        <div class="ant-form-item"><FormErrorList errors={meta.errors} warnings={meta.warnings} /></div>
       {/snippet}
     </FormList>
     <Button htmlType="submit">Submit warning list</Button>

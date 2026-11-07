@@ -2,6 +2,7 @@ import { getContext, setContext } from 'svelte';
 
 interface FormListContext {
   readonly prefixName: readonly (string | number)[];
+  readonly prefixCls: string;
 }
 
 const listKey = Symbol('ant-design-form-list');

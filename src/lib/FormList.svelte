@@ -6,7 +6,7 @@
   import { formNamePath } from './form-store.engine';
   import type { FormListOperation, FormListProps } from './form-list.types';
 
-  let { name, initialValue, rules, children }: FormListProps = $props();
+  let { name, initialValue, rules, children, prefixCls }: FormListProps = $props();
   const form = useForm();
   const parent = useFormList();
   if (!form) throw new Error('FormList requires Form');
@@ -31,6 +31,9 @@
   });
 
   provideFormList({
+    get prefixCls() {
+      return prefixCls || 'ant-form';
+    },
     get prefixName() {
       return prefixName;
     }
