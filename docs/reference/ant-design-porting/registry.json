@@ -4963,7 +4963,13 @@
         "tests/browser/form-columns-metrics.ts",
         "tests/browser/fixtures/FormColumnsFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-columns-reference.json",
-        "tests/package/form-columns.ssr.test.ts"
+        "tests/package/form-columns.ssr.test.ts",
+        "src/lib/form-columns.engine.ts",
+        "src/lib/form-columns.engine.test.ts",
+        "tests/browser/form-label-presence.spec.ts",
+        "tests/browser/fixtures/FormLabelPresenceFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-label-presence-reference.json",
+        "tests/package/form-label-presence.ssr.test.ts"
       ],
       "features": [
         {
@@ -5452,7 +5458,25 @@
             "tests/browser/fixtures/ant-design-form-columns-reference.json",
             "tests/package/form-columns.ssr.test.ts"
           ],
-          "note": "Form и FormItem принимают labelCol/wrapperCol по существующим ColProps: span/offset/order/push/pull/flex, responsive размеры, native class и строковый style. Локальный Item object заменяет соответствующий Form object целиком; {} сбрасывает его. Разметка использует Row/Col; control subtree сбрасывает только колонки FormContext, сохраняя getters модели, labels/validation/variant и прочие defaults. Вложенный Item может задать собственные колонки, вложенный Form использует свои props/defaults. 42 UMD-состояния сверяют классы, computed display/flex/max-width/margins/order/padding, относительные boxes и RTL: три layouts, styles/flex, offsets, span=0, nested Item/Form и границы 576/768/992px. Private CSS-var/hash markers исключены, display:none не имеет координат; значения видимой геометрии сохранены без допусков. Реактивные настройки сохраняют DOM, model values/errors/warnings/touched, focus/selection, FormData и label click. SSR использует те же scopes и Col classes без DOM API. Label остаётся строкой; source label=null и автоматический wrapper offset остаются отдельным пробелом. Default vertical и прежние native contracts сохранены, FormConfig не получает отсутствующие в upstream global col props."
+          "note": "Form и FormItem принимают labelCol/wrapperCol по существующим ColProps: span/offset/order/push/pull/flex, responsive размеры, native class и строковый style. Локальный Item object заменяет соответствующий Form object целиком; {} сбрасывает его. Разметка использует Row/Col; control subtree сбрасывает только колонки FormContext, сохраняя getters модели, labels/validation/variant и прочие defaults. Вложенный Item может задать собственные колонки, вложенный Form использует свои props/defaults. 42 UMD-состояния сверяют классы, computed display/flex/max-width/margins/order/padding, относительные boxes и RTL: три layouts, styles/flex, offsets, span=0, nested Item/Form и границы 576/768/992px. Private CSS-var/hash markers исключены, display:none не имеет координат; значения видимой геометрии сохранены без допусков. Реактивные настройки сохраняют DOM, model values/errors/warnings/touched, focus/selection, FormData и label click. SSR использует те же scopes и Col classes без DOM API. Необязательная текстовая label/null и автоматический wrapper offset описаны отдельной feature label-presence; rich labels пока не перенесены. Default vertical и прежние native contracts сохранены, FormConfig не получает отсутствующие в upstream global col props."
+        },
+        {
+          "id": "label-presence",
+          "title": "Необязательная текстовая label, null и автоматическое выравнивание wrapper",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/form-columns.engine.ts",
+            "src/lib/form-columns.engine.test.ts",
+            "src/lib/form-context.ts",
+            "tests/browser/form-label-presence.spec.ts",
+            "tests/browser/form-columns-metrics.ts",
+            "tests/browser/fixtures/FormLabelPresenceFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-label-presence-reference.json",
+            "tests/package/form-label-presence.ssr.test.ts"
+          ],
+          "note": "FormItem.label принимает string/null/undefined. Undefined/пустая строка убирают label, whitespace сохраняет контейнер; null дополнительно выводит wrapper offsets из Form.labelCol для span<24. Local labelCol/wrapperCol, включая {}, отключают расчёт; существующий offset, включая 0/undefined, сохраняется. Root/responsive размеры независимы, caller col objects не изменяются. Числовой responsive shorthand нормализуется в ColSize и сохраняет span/offset как эквивалентный object. В raw UMD записаны два подтверждённых source-дефекта: numeric label span не участвует в offset, numeric wrapper span теряется при записи offset; Svelte их не повторяет. 42 UMD-состояния сверяют label absence/whitespace, scope/priority, offsets, full/zero spans, shorthand, responsive и RTL. Для numeric случаев native результат сравнивается с реально измеренной эквивалентной object-конфигурацией. Вставка/удаление label сохраняют control DOM/value/metadata/focus/selection/FormData; unlabelled control поддерживает явные aria-label/labelledby, required и validation/error focus. SSR не использует DOM. Rich label/number/boolean/array/Snippet и nameless fields пока не перенесены; name остаётся обязательным."
         }
       ]
     },

@@ -13,12 +13,14 @@
   import Col from './Col.svelte';
   import NoFormItemColumns from './NoFormItemColumns.svelte';
   import type { ColProps } from './grid.types';
+  import { resolveFormWrapperCol } from './form-columns.engine';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
     /** Буквальный ключ либо путь от ближайшего FormList; строка с точкой остаётся одним ключом. */
     name: NamePath;
-    label: string;
+    /** Undefined/'' убирают label; null также выравнивает control по Form.labelCol. */
+    label?: string | null;
     children: Snippet;
     help?: string;
     /** Постоянное пояснение рядом с errors/warnings; false/null/undefined/'' скрывают его. */
@@ -86,10 +88,13 @@
   let resolvedLayout = $derived(layout ?? form?.layout ?? 'vertical');
   let resolvedLabelAlign = $derived(labelAlign ?? form?.labelAlign ?? 'right');
   let resolvedLabelCol = $derived(labelCol ?? form?.labelCol);
-  let resolvedWrapperCol = $derived(wrapperCol ?? form?.wrapperCol);
+  let resolvedWrapperCol = $derived(resolveFormWrapperCol({
+    label, labelCol, wrapperCol, formLabelCol: form?.labelCol, formWrapperCol: form?.wrapperCol
+  }));
   let computedColon = $derived(colon === true || form?.colon !== false && colon !== false);
   let haveColon = $derived(resolvedLayout !== 'vertical' && computedColon);
-  let labelText = $derived(haveColon && label.trim() ? label.replace(/[:：]\s*$/, '') : label);
+  let hasLabel = $derived(label !== undefined && label !== null && label !== '');
+  let labelText = $derived(haveColon && label?.trim() ? label.replace(/[:：]\s*$/, '') : label ?? '');
   let requiredMark = $derived(form?.requiredMark ?? true);
   let optionalText = $derived(config.locale.Form?.optional || enUS.Form.optional);
   let errors = $derived(form?.getFieldError(path) ?? []);
@@ -152,7 +157,7 @@
       return path.map(String).join('_');
     },
     get label() {
-      return label;
+      return label ?? undefined;
     },
     get disabled() {
       return form?.disabled;
@@ -202,25 +207,27 @@
     className
   ]} style={componentTheme.style}>
   <Row class={['ant-form-item-row', componentTheme.className].filter(Boolean).join(' ')}>
-    <Col {...resolvedLabelCol} class={[
-      'ant-form-item-label',
-      resolvedLabelAlign === 'left' && 'ant-form-item-label-left',
-      form?.labelWrap === true && 'ant-form-item-label-wrap',
-      resolvedLabelCol?.class
-    ].filter(Boolean).join(' ')}>
-      <label for={id} class:ant-form-item-required={isRequired}
-        class:ant-form-item-required-mark-hidden={requiredMark === false}
-        class:ant-form-item-required-mark-optional={requiredMark === 'optional'
-          || typeof requiredMark === 'function'}
-        class:ant-form-item-no-colon={!computedColon}
-        title={label} use:focusGroupLabel>
-        {#if typeof requiredMark === 'function'}
-          {@render requiredMark(labelText, { required: isRequired })}
-        {:else}
-          {labelText}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
-        {/if}
-      </label>
-    </Col>
+    {#if hasLabel}
+      <Col {...resolvedLabelCol} class={[
+        'ant-form-item-label',
+        resolvedLabelAlign === 'left' && 'ant-form-item-label-left',
+        form?.labelWrap === true && 'ant-form-item-label-wrap',
+        resolvedLabelCol?.class
+      ].filter(Boolean).join(' ')}>
+        <label for={id} class:ant-form-item-required={isRequired}
+          class:ant-form-item-required-mark-hidden={requiredMark === false}
+          class:ant-form-item-required-mark-optional={requiredMark === 'optional'
+            || typeof requiredMark === 'function'}
+          class:ant-form-item-no-colon={!computedColon}
+          title={label} use:focusGroupLabel>
+          {#if typeof requiredMark === 'function'}
+            {@render requiredMark(labelText, { required: isRequired })}
+          {:else}
+            {labelText}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
+          {/if}
+        </label>
+      </Col>
+    {/if}
     <NoFormItemColumns>
       <Col {...resolvedWrapperCol}
         class={['ant-form-item-control', resolvedWrapperCol?.class].filter(Boolean).join(' ')}>

@@ -9381,11 +9381,29 @@ span/offset/order/push/pull/flex, responsive размеры, class и строк
 внутри controls, остальные настройки и модель остаются реактивными. Локальные
 колонки вложенного Item применяются заново; вложенный Form использует свои defaults.
 Переключения сохраняют control, values/metadata и focus/selection.
-Label остаётся строкой; исходное авто-смещение wrapper для label=null пока не перенесено.
+Label принимает необязательную строку или null; выравнивание null описано ниже.
 Проверены приоритеты, сбросы, стили, скрытие span=0, RTL, три layouts и границы
 576/768/992px: [42 эталона](./tests/browser/fixtures/ant-design-form-columns-reference.json),
 [браузер](./tests/browser/form-columns.spec.ts),
 [публичные типы и SSR](./tests/package/form-columns.ssr.test.ts), `?fixture=form-columns`.
+
+`FormItem.label` можно опустить. Undefined и пустая строка не создают label;
+строка из пробелов сохраняет контейнер, как upstream. Null также убирает label,
+но добавляет wrapper offset из Form.labelCol для span меньше 24, включая 0.
+Явные local labelCol/wrapperCol, даже {}, отключают этот расчёт. Существующий
+offset, включая 0 и undefined, не заменяется; responsive offsets независимы.
+Если видимой подписи нет, задайте control aria-label или aria-labelledby.
+Вставка и удаление подписи сохраняют input, metadata, value, focus/selection,
+native required и validation. Rich labels/Snippets пока не перенесены.
+
+У 6.6.8 есть две ошибки расчёта null-label offset: числовой responsive label span
+игнорируется, а числовой wrapper span может потеряться. Они сохранены в
+[42 raw-эталонах](./tests/browser/fixtures/ant-design-form-label-presence-reference.json).
+В Svelte числовой shorthand сохраняет span/offset и совпадает с эквивалентными
+исходными настройками `{ span }`. Проверки: [engine](./src/lib/form-columns.engine.test.ts),
+[браузер](./tests/browser/form-label-presence.spec.ts),
+[публичные типы и SSR](./tests/package/form-label-presence.ssr.test.ts),
+`?fixture=form-label-presence`.
 
 `Form.requiredMark` наследует ConfigProvider.form.requiredMark, затем true.
 False скрывает звёздочку, 'optional' помечает необязательные поля, Svelte snippet

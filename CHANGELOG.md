@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: необязательная текстовая label и label=null с исходным выравниванием
+  controls по колонкам Form. Сохранены explicit offsets и native validation;
+  числовой responsive shorthand сохраняет span/offset вместо ошибок upstream.
+
 - Form/FormItem: labelCol и wrapperCol через существующие Row/Col, с responsive
   размерами, локальным приоритетом и сбросом колонок вложенных полей. Проверены
   исходные метрики, RTL, три layouts и сохранение native control/focus/metadata.

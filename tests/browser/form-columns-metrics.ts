@@ -32,8 +32,8 @@ export function formColumnsMetrics() {
 
     return {
       name: item.classList.contains('columns-root') ? 'root' : 'inner',
-      label: metrics(label), control: metrics(control),
-      row: properties(row, ['display', 'flex-wrap', 'direction']), text: label.textContent
+      label: label ? metrics(label) : null, control: metrics(control),
+      row: properties(row, ['display', 'flex-wrap', 'direction']), text: label?.textContent ?? null
     };
   });
 }
