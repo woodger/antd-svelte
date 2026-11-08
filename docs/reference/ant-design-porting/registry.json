@@ -7579,7 +7579,14 @@
         "tests/browser/fixtures/select-tags-cases.ts",
         "tests/browser/fixtures/ant-design-select-tags-options-reference.json",
         "tests/browser/fixtures/ant-design-select-tags-interaction-reference.json",
-        "tests/package/select-tags.ssr.test.ts"
+        "tests/package/select-tags.ssr.test.ts",
+        "src/lib/select-token.engine.ts",
+        "src/lib/select-token.engine.test.ts",
+        "tests/browser/select-token-separators.spec.ts",
+        "tests/browser/fixtures/SelectTokenFixtures.svelte",
+        "tests/browser/fixtures/select-token-cases.ts",
+        "tests/browser/fixtures/ant-design-select-token-separators-reference.json",
+        "tests/package/select-token.ssr.test.ts"
       ],
       "features": [
         {
@@ -7635,7 +7642,7 @@
             "tests/browser/fixtures/ant-design-select-tags-interaction-reference.json",
             "tests/package/select-tags.ssr.test.ts"
           ],
-          "note": "Mode=\"tags\" расширяет native multiple UI свободными строками; public value/defaultValue/onValueChange допускают Value|string только для tags, остальные mode-specific types сохраняются. Source value filtering, selected missing options, synthetic query option, disabled exact-value guard, uppercase OR optionFilterProp fields и autoClearSearchValue в showSearch; legacy single/multiple label/NFKD defaults сохранены. Созданные/selected labels и disabled сохраняют native cache при remote выдаче, numeric 0 и string 0 различаются. Двадцать восемь UMD option cases и двадцать четыре Playwright interaction cases фиксируют Enter/open/closed, raw selection versus trimmed blur, duplicates, disabled, Escape, controlled query, clear callbacks и multiple autoClearSearchValue=false. Native required/clear/reset/FormData, readonly defaults, disabled/RTL, cache и SSR защищены отдельно. Options остаётся явным primitive массивом, без новых dependencies/CSS/script/config changes. Token separators и остальные rc-select API выделены в отдельные gaps."
+          "note": "Mode=\"tags\" расширяет native multiple UI свободными строками; public value/defaultValue/onValueChange допускают Value|string только для tags, остальные mode-specific types сохраняются. Source value filtering, selected missing options, synthetic query option, disabled exact-value guard, uppercase OR optionFilterProp fields и autoClearSearchValue в showSearch; legacy single/multiple label/NFKD defaults сохранены. Созданные/selected labels и disabled сохраняют native cache при remote выдаче, numeric 0 и string 0 различаются. Двадцать восемь UMD option cases и двадцать четыре Playwright interaction cases фиксируют Enter/open/closed, raw selection versus trimmed blur, duplicates, disabled, Escape, controlled query, clear callbacks и multiple autoClearSearchValue=false. Native required/clear/reset/FormData, readonly defaults, disabled/RTL, cache и SSR защищены отдельно. Options остаётся явным primitive массивом, без новых dependencies/CSS/script/config changes. Token separators описаны отдельной supported feature; остальные rc-select API остаются gaps."
         },
         {
           "id": "remote-search",
@@ -7758,13 +7765,21 @@
         {
           "id": "token-separators",
           "title": "Строковые и функциональные tokenSeparators",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/select.types.ts",
-            "src/lib/Select.svelte"
+            "src/lib/Select.svelte",
+            "src/lib/select-token.engine.ts",
+            "src/lib/select-token.engine.test.ts",
+            "tests/browser/select-token-separators.spec.ts",
+            "tests/browser/fixtures/SelectTokenFixtures.svelte",
+            "tests/browser/fixtures/select-token-cases.ts",
+            "tests/browser/fixtures/ant-design-select-token-separators-reference.json",
+            "tests/package/select-token.ssr.test.ts",
+            "tests/browser/fixtures/SelectTagsCase.svelte"
           ],
-          "note": "Текущий rc-select 1.10.1 поддерживает string[] и function для multiple/tags, включая paste/IME. В Native ещё не перенесено."
+          "note": "Ant Design 6.6.8, rc-select 1.10.1: readonly string[] либо split function, raw segments, целая строка при найденном separator, label/explicit search fields для multiple, string values для tags, typed keys и dedup. Callback order, controlled search, autoClearSearchValue=false, CRLF/LF paste, composition deferral и native event receiver/cancellation сохранены. Source raw corpus включает disabled/blank defects; Native не добавляет новые disabled options в обоих modes и не создаёт implicit blank tags. Native forms/required/reset/disabled/RTL и teardown focused input сохранены; другие Source API остаются в extended-api."
         },
         {
           "id": "extended-api",
@@ -7795,9 +7810,30 @@
             "tests/browser/fixtures/select-tags-cases.ts",
             "tests/browser/fixtures/ant-design-select-tags-options-reference.json",
             "tests/browser/fixtures/ant-design-select-tags-interaction-reference.json",
-            "tests/package/select-tags.ssr.test.ts"
+            "tests/package/select-tags.ssr.test.ts",
+            "src/lib/select-token.engine.ts",
+            "src/lib/select-token.engine.test.ts",
+            "tests/browser/select-token-separators.spec.ts",
+            "tests/browser/fixtures/SelectTokenFixtures.svelte",
+            "tests/browser/fixtures/select-token-cases.ts",
+            "tests/browser/fixtures/ant-design-select-token-separators-reference.json",
+            "tests/package/select-token.ssr.test.ts"
           ],
-          "note": "Для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, официальный UMD/React 18.3.1. Search из трёх пробелов создаёт synthetic option, Enter по открытому списку добавляет value=\"   \", тогда как submit/blur отвергает пустую trimmed строку. Raw options/blank-enter сохраняют поведение Source. Native не синтезирует такой новый вариант и не отправляет change; явный option с пробельным value разрешён. Browser/engine corrections ограничены этими blank cases. Непустой padded текст выбора сохраняется, blur trim и Enter deselect соответствуют Source."
+          "note": "Для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, официальный UMD/React 18.3.1. Search из трёх пробелов создаёт synthetic option, Enter по открытому списку добавляет value=\"   \", тогда как submit/blur отвергает пустую trimmed строку. Raw options/blank-enter сохраняют поведение Source. Native не синтезирует такой новый вариант и не отправляет change; явный option с пробельным value разрешён. Browser/engine corrections ограничены этими blank cases. Непустой padded текст выбора сохраняется, blur trim и Enter deselect соответствуют Source. Token separators сохраняют raw whitespace-token observation; Native отбрасывает неявную blank часть, сохраняя непустые raw segments и явные whitespace options."
+        },
+        {
+          "id": "native-disabled-token",
+          "title": "Запрет добавления disabled option через multiple token separators",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select-token.engine.ts",
+            "src/lib/select-token.engine.test.ts",
+            "tests/browser/select-token-separators.spec.ts",
+            "tests/browser/fixtures/ant-design-select-token-separators-reference.json",
+            "tests/package/select-token.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: unmodified official UMD Ant Design 6.6.8 с React 18.3.1 добавляет disabled option в mode=multiple через tokenSeparators, по label или explicit value field; tags такую опцию пропускает. Raw multiple-disabled/multiple-explicit-value сохраняют результат Source. Native не добавляет disabled в обоих modes; существующие selected disabled значения не удаляются."
         }
       ]
     },

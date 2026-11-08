@@ -9,6 +9,11 @@
 
 ### Added
 
+- Select поддерживает массивы и функции tokenSeparators в multiple/tags,
+  многострочный paste и отложенное разделение IME. Сохранены controlled search,
+  порядок callbacks и native формы/events; исходные disabled/blank ошибки
+  записаны в raw reference и не воспроизводятся при добавлении новых значений.
+
 - Select поддерживает mode="tags": свободные строки, Enter/blur/Escape, cache
   выбранных options, typed numeric/string values, native формы и readonly defaults.
   Добавлены showSearch.optionFilterProp и autoClearSearchValue; прежние single/multiple

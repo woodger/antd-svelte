@@ -1,13 +1,21 @@
 <script lang="ts">
-  import { ConfigProvider, Select } from 'antd-svelte';
+  import {
+    ConfigProvider, Select, type SelectProps, type SelectTokenSeparators
+  } from 'antd-svelte';
   import { untrack } from 'svelte';
   import { selectTagsBaseOptions, type SelectTagsSample } from './select-tags-cases';
 
-  let { sample, phase = 'interaction', nativeChecks = false, missingOptions = false }: {
+  let {
+    sample, phase = 'interaction', nativeChecks = false, missingOptions = false,
+    tokenSeparators, inputHandlers
+  }: {
     sample: SelectTagsSample;
     phase?: 'interaction' | 'options';
     nativeChecks?: boolean;
     missingOptions?: boolean;
+    tokenSeparators?: SelectTokenSeparators;
+    inputHandlers?: Pick<SelectProps<string | number, 'tags'>,
+      'onpaste' | 'oncompositionstart' | 'oncompositionend'>;
   } = $props();
   let values = $state<(string | number)[]>(untrack(() => [...(sample.values ?? [])]));
   let events = $state<unknown[]>([]);
@@ -28,7 +36,9 @@
     <button type="button" id="tags-outside">Outside</button>
     {#if nativeChecks}<button type="reset">Reset tags</button>{/if}
     <div data-select-tags>
-      <Select mode={sample.mode ?? 'tags'} {options} bind:value={values} defaultValue={sample.values}
+      <Select mode={sample.mode ?? 'tags'} {options} {tokenSeparators}
+        {...inputHandlers}
+        bind:value={values} defaultValue={sample.values}
         name="tags" aria-label="Tags" required={nativeChecks} allowClear={nativeChecks || sample.clear}
         showSearch={searchConfig} onValueChange={next => {
           values = next;

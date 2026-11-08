@@ -2,6 +2,10 @@ import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
 import type { ComponentSize, SelectOption } from './types';
 
+/** Разделители multiple/tags либо пользовательский разбор всей строки. */
+export type SelectTokenSeparators = readonly string[]
+  | ((input: string) => readonly string[]);
+
 /** Настройки ConfigProvider.select; пока перенесён только variant. */
 export interface SelectConfig {
   variant?: SelectProps['variant'];
@@ -35,6 +39,8 @@ export interface SelectProps<
   _autoWidth?: boolean;
   options: readonly SelectOption<Value>[];
   mode?: Mode;
+  /** Разбор строк в multiple/tags; function получает текущий ввод, включая восстановленный paste. */
+  tokenSeparators?: SelectTokenSeparators;
   /** Bind:value; multiple сохраняет Value[], tags допускает также новые string values. */
   value?: (Mode extends 'tags' ? (Value | string)[] : Mode extends 'multiple' ? Value[] : Value)
     | undefined;

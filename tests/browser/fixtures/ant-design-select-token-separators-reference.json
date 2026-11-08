@@ -1,0 +1,704 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "interaction": "Playwright fill/press/outside click"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "tags-list",
+        "text": "a,b",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-trailing",
+        "text": "a,",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-repeat",
+        "text": "a,a,b",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-disabled",
+        "text": "locked,free",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "free"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "free"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "free"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-labels",
+        "mode": "multiple",
+        "text": "Alpha,Zero",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          0
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              0
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "Zero"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-values",
+        "mode": "multiple",
+        "text": "a,0",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [],
+        "query": "",
+        "labels": [],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-disabled",
+        "mode": "multiple",
+        "text": "Alpha,Locked",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "locked"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "locked"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "Locked"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-explicit-value",
+        "mode": "multiple",
+        "text": "a,locked",
+        "separators": [
+          ","
+        ],
+        "optionFilterProp": "value"
+      },
+      "result": {
+        "values": [
+          "a",
+          "locked"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "locked"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "Locked"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "no-match",
+        "text": "none",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "none"
+          }
+        ],
+        "query": "none",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "multi-character",
+        "text": "a::b::",
+        "separators": [
+          "::"
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-separators",
+        "text": "a,b;c",
+        "separators": [
+          ",",
+          ";"
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "b",
+          "c"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b",
+              "c"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b",
+          "c"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-first",
+        "text": "a,b",
+        "separators": [
+          "",
+          ","
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "a,b"
+          }
+        ],
+        "query": "a,b",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "function-csv",
+        "text": "a,b",
+        "splitter": "csv"
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "function-unchanged",
+        "text": "a",
+        "splitter": "csv"
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "a"
+          }
+        ],
+        "query": "a",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "function-spaces",
+        "text": "a b",
+        "splitter": "spaces"
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "function-noop",
+        "text": "a,b",
+        "splitter": "noop"
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "a,b"
+          }
+        ],
+        "query": "a,b",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "function-empty",
+        "text": "a,b",
+        "splitter": "empty"
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "a,b"
+          }
+        ],
+        "query": "a,b",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "whitespace-token",
+        "text": "a,   ,b",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "   ",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "   ",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "   ",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "existing-typed",
+        "values": [
+          0,
+          "0"
+        ],
+        "text": "0,z",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          0,
+          "0",
+          "z"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              0,
+              "0",
+              "z"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Zero",
+          "0",
+          "z"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "controlled",
+        "controlled": "held",
+        "text": "a,b",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          },
+          {
+            "type": "search",
+            "query": ""
+          }
+        ],
+        "query": "held",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "keep-search",
+        "autoClear": false,
+        "text": "a,b",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "paste-crlf",
+        "text": "a\r\nb\r\n",
+        "separators": [
+          "\r\n"
+        ],
+        "paste": true
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "paste-lf-function",
+        "text": "a\nb",
+        "splitter": "spaces",
+        "paste": true
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "compose-tags",
+        "text": "a,b",
+        "separators": [
+          ","
+        ],
+        "compose": true
+      },
+      "intermediate": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "a,b"
+          }
+        ],
+        "query": "a,b",
+        "labels": [],
+        "open": true
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "a,b"
+          },
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          },
+          {
+            "type": "search",
+            "query": ""
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false
+      }
+    }
+  ]
+}

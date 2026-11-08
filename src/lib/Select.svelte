@@ -19,6 +19,7 @@
   import { ruRU, type SelectOption } from './types';
   import type { SelectProps, SelectSearchConfig } from './select.types';
   import { getSelectTagOptions } from './select-tags.engine';
+  import { resolveSelectTokenOptions, splitSelectTokens } from './select-token.engine';
   import Icon from './Icon.svelte';
 
   type RawValue = Value | string;
@@ -27,6 +28,7 @@
     _autoWidth = false,
     options,
     mode,
+    tokenSeparators,
     defaultValue,
     value = $bindable<SelectProps<Value, Mode>['value']>(),
     size,
@@ -46,6 +48,9 @@
     onOpenChange,
     onkeydown,
     onbeforeinput,
+    onpaste,
+    oncompositionstart,
+    oncompositionend,
     onfocus,
     onblur,
     onclick,
@@ -92,6 +97,8 @@
   let shown = $state(false);
   let typeahead = '';
   let lastTyped = 0;
+  let composing = false;
+  let pastedText: string | undefined;
   let controlId = $derived(id ?? field?.id ?? `ant-select-${generatedId}`);
   let selectedValue = $derived(value ?? (useDefault ? initialDefault : undefined));
   let tagMode = $derived(mode === 'tags');
@@ -304,6 +311,8 @@
       value = getSelectValues(initialDefault) as typeof value;
       internalSearch = '';
       isOpen = false;
+      composing = false;
+      pastedText = undefined;
     });
   }
 
@@ -312,7 +321,7 @@
   ) {
     onkeydown?.(event);
 
-    if (event.defaultPrevented || resolvedDisabled || event.isComposing) {
+    if (event.defaultPrevented || resolvedDisabled || event.isComposing || composing) {
       return;
     }
 
@@ -390,27 +399,95 @@
       event.preventDefault();
   }
 
-  function handleInput(event: Event & { currentTarget: EventTarget & HTMLInputElement; }) {
-    if (multiple && !canSearch) {
-      event.currentTarget.value = search;
-      return;
-    }
+  function restoreControlledSearch(input: HTMLInputElement) {
+    if (controlledSearch === undefined) return;
 
-    const next = event.currentTarget.value;
+    void tick().then(() => {
+      if (input === control && input.isConnected && (multiple || expanded) && canSearch)
+        input.value = search;
+    });
+  }
+
+  function updateSearch(next: string, input: HTMLInputElement, compositionEnd = false) {
+    if (multiple && tokenSeparators !== undefined && !composing) {
+      const words = splitSelectTokens(next, tokenSeparators);
+      if (words !== null) {
+        const previousSearch = search;
+        const onSearch = searchCallback;
+        const additions = resolveSelectTokenOptions<RawValue>(
+          options, words, tagMode, searchConfig.optionFilterProp
+        );
+        const nextValues = new Set(selectedValues);
+        const nextOptions = new Map(cachedOptions);
+        for (const option of additions) {
+          nextValues.add(option.value);
+          nextOptions.set(option.value, option);
+        }
+        cachedOptions = nextOptions;
+        if (nextValues.size !== selectedValues.length) changeMultiple([...nextValues]);
+        internalSearch = '';
+        activeValue = undefined;
+        setOpen(false);
+        if (previousSearch !== '') onSearch?.('');
+        input.value = controlledSearch ?? '';
+        restoreControlledSearch(input);
+        return;
+      }
+    }
+    if (compositionEnd && next === search) return;
+
     internalSearch = next;
     searchCallback?.(next);
     const matches = tagMode
       ? getSelectTagOptions(options, selectionOptions, next, filter, searchConfig.optionFilterProp)
       : filterOptions<RawValue>(options, next, filter, searchConfig.optionFilterProp);
-    if (controlledSearch !== undefined) {
-      const input = event.currentTarget;
-      void tick().then(() => {
-        if (input === control && input.isConnected && (multiple || expanded) && canSearch)
-          input.value = search;
-      });
-    }
+    restoreControlledSearch(input);
     activeValue = matches[getEnabledIndex(matches, -1, 'first')]?.value;
     setOpen(true);
+  }
+
+  function handleInput(event: Event & { currentTarget: EventTarget & HTMLInputElement; }) {
+    const input = event.currentTarget;
+    if (multiple && (!canSearch || resolvedDisabled)) {
+      input.value = search;
+      pastedText = undefined;
+      return;
+    }
+
+    let next = input.value;
+    if (pastedText && /[\r\n]/.test(pastedText)) {
+      const normalized = pastedText.replace(/[\r\n]+$/, '')
+        .replace(/\r\n/g, ' ').replace(/[\r\n]/g, ' ');
+      next = next.replace(normalized, pastedText);
+    }
+    pastedText = undefined;
+    updateSearch(next, input);
+  }
+
+  function handlePaste(event: ClipboardEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
+    onpaste?.call(event.currentTarget, event);
+    const tokenWithEnter = typeof tokenSeparators === 'function'
+      || tokenSeparators?.some(token => token === '\n' || token === '\r\n');
+    pastedText = !event.defaultPrevented && multiple && tokenWithEnter
+      ? event.clipboardData?.getData('text') : undefined;
+  }
+
+  function handleCompositionStart(
+    event: CompositionEvent & { currentTarget: EventTarget & HTMLInputElement; }
+  ) {
+    oncompositionstart?.call(event.currentTarget, event);
+    composing = true;
+  }
+
+  function handleCompositionEnd(
+    event: CompositionEvent & { currentTarget: EventTarget & HTMLInputElement; }
+  ) {
+    composing = false;
+    oncompositionend?.call(event.currentTarget, event);
+    if (!event.defaultPrevented && multiple && tokenSeparators !== undefined
+      && canSearch && !resolvedDisabled) {
+      updateSearch(event.currentTarget.value, event.currentTarget, true);
+    }
   }
 
   function handleClick(event: MouseEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
@@ -427,6 +504,8 @@
 
   function handleBlur(event: FocusEvent & { currentTarget: EventTarget & HTMLInputElement; }) {
     focused = false;
+    composing = false;
+    pastedText = undefined;
     const next = event.relatedTarget;
 
     if (!(next instanceof Node && list?.contains(next))) {
@@ -630,6 +709,9 @@
         onkeydown={handleKeydown}
         onbeforeinput={handleBeforeInput}
         oninput={handleInput}
+        onpaste={handlePaste}
+        oncompositionstart={handleCompositionStart}
+        oncompositionend={handleCompositionEnd}
         onclick={handleClick}
         onblur={handleBlur}
         onfocus={handleFocus}

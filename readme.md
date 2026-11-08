@@ -8308,7 +8308,35 @@ multiple/tags. Blur multiple очищает локальный поиск без
 Сверка с [исходными options](tests/browser/fixtures/ant-design-select-tags-options-reference.json)
 и [событиями](tests/browser/fixtures/ant-design-select-tags-interaction-reference.json)
 использует неизменённый UMD 6.6.8; логика изучена по @rc-component/select 1.10.1,
-его MIT-лицензия уже включена в пакет. TokenSeparators пока не перенесены.
+его MIT-лицензия уже включена в пакет.
+
+### Разделители ввода
+
+TokenSeparators работает в multiple/tags: readonly массив разделителей или функция
+`(input: string) => readonly string[]`. Найденный разделитель завершает все части
+строки, включая последнюю; значения дополняют выбор без дубликатов, popup закрывается.
+В tags части становятся string values, в multiple принимаются только существующие
+options с совпавшим label либо явно заданным showSearch.optionFilterProp. Числовой
+ключ не совпадает со строкой автоматически; raw пробелы непустых частей сохраняются.
+
+```svelte
+<Select mode="tags" options={[]} bind:value={tags} tokenSeparators={[',', ';', '\n']} />
+```
+
+Функция получает всю строку, включая восстановленные переносы вставленного текста.
+Пустой результат или единственная неизменённая строка оставляют обычный поиск.
+При IME разделение откладывается до compositionend. После разделения локальный
+поиск очищается независимо от autoClearSearchValue; controlled search меняет
+владелец. OnValueChange предшествует onSearch(''); последний вызывается, только
+если до ввода поисковая строка была непустой. Разделённый ввод не отправляет
+промежуточный onSearch с полной исходной строкой.
+
+Native paste/composition handlers сохраняют receiver input и preventDefault.
+[Raw наблюдения Source](tests/browser/fixtures/ant-design-select-token-separators-reference.json)
+включают два намеренно исправленных случая: multiple не добавляет disabled option,
+а tags не создаёт неявный whitespace-only value. Уже выбранные disabled значения
+сохраняются, явный пробельный option допускается; дефекты upstream остаются в raw data
+для отдельного разбора.
 
 ### Удалённый поиск
 
@@ -8360,7 +8388,7 @@ OnPopupScroll получает native scroll event с currentTarget=listbox; р�
 уже во время debounce, стабильным объединением страниц по value и повтором
 последнего неудачного cursor. Dispose отменяет таймер/запрос. Источник демонстрационный,
 сетевые API, таймеры и server-specific ошибки не входят в библиотечный Select.
-Пока не перенесены tokenSeparators, остальные поля showSearch config, labelInValue,
+Пока не перенесены остальные поля showSearch config, labelInValue,
 fieldNames/groups, render hooks, virtualization, произвольный popupRender
 и общий полный rc-select API.
 
