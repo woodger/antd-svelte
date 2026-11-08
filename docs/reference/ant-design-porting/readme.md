@@ -155,6 +155,8 @@ prefix меняет Timeline selectors, namespace Steps и токенов сох
 runtime изолирует root states, сохраняет token namespace и deprecated exclusions.
 Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
 группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
+Тот же template используется для Header/Content/Footer: выбираются selectors
+своей роли, scoped defaults добавляются только standalone-секциям.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.

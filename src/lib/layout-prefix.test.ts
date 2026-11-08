@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getLayoutPrefixCss } from './layout-prefix.engine';
+import { getLayoutPrefixCss, getLayoutSectionPrefixCss } from './layout-prefix.engine';
 
 describe('Layout local prefix boundary', () => {
   it('uses the shared sheet by default and keeps independent Layout and Sider namespaces', () => {
@@ -30,5 +30,28 @@ describe('Layout local prefix boundary', () => {
 
     expect(css).toContain('frame-$&<\\/style><script>-header');
     expect(css).not.toMatch(/<\/style/i);
+  });
+
+  it('keeps wrapped section variables inherited and supplies isolated standalone defaults', () => {
+    expect(getLayoutSectionPrefixCss('ant-layout-header', 'header', false)).toBeUndefined();
+    const wrapped = getLayoutSectionPrefixCss('region', 'header', false)!;
+    const standalone = getLayoutSectionPrefixCss('region', 'header', true)!;
+
+    expect(wrapped).toContain('height:var(--ant-layout-header-height)');
+    expect(wrapped).not.toContain('--ant-layout-header-height:64px');
+    expect(standalone).toContain('--ant-layout-header-height:64px');
+    expect(standalone).toContain('[data-ant-layout-standalone]');
+    expect(standalone).toContain('box-sizing:border-box');
+  });
+
+  it('isolates shared section names by role and keeps Menu selectors unchanged', () => {
+    const header = getLayoutSectionPrefixCss('region-$&</style>', 'header', false)!;
+    const footer = getLayoutSectionPrefixCss('region', 'footer', false)!;
+
+    expect(header).toContain('[data-ant-layout-prefix="header"]');
+    expect(header).toContain('.ant-menu');
+    expect(header).not.toMatch(/<\/style/i);
+    expect(footer).toContain('[data-ant-layout-prefix="footer"]');
+    expect(footer).not.toContain('height:var(--ant-layout-header-height)');
   });
 });

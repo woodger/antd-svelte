@@ -968,8 +968,10 @@ prefix; namespace --ant-layout-* и общий marker ant-layout-css-var сох�
 Native SSR-определение прямого Sider использует внутренние атрибуты; смена prefix
 сохраняет DOM, ids/aria-controls, collapse, черновики, выделение и фокус.
 Восстановление фокуса использует фактический DOM body и сохраняет явный выбор владельца.
-Header/Content/Footer пока не принимают собственный prefixCls; общий prefix
-ConfigProvider тоже ещё не перенесён.
+LayoutHeader/LayoutContent/LayoutFooter принимают собственный literal prefixCls:
+он задаёт полный класс секции, без добавления suffix. Пустая строка возвращает
+стандартный класс. Префикс контейнера не меняет префиксы секций.
+Общий prefix ConfigProvider ещё не перенесён.
 
 Исходные коллизии prefix с Layout/Sider/variable classes и сохранённым CSS-кэшем
 записаны в [raw reference](tests/browser/fixtures/ant-design-layout-prefix-reference.json).
@@ -977,7 +979,15 @@ Native markers защищают измеренные роли и соседни�
 ограничены фоном, position и flex-direction известных alias cases. Замеры каждого
 варианта получены в новом документе, transitions — отдельно в одном документе.
 У секций upstream [свой дефект prefix](tests/browser/fixtures/ant-design-layout-section-prefix-observation.json):
-Header/Content/Footer получают оформление контейнера; наблюдение оставлено для отдельного разбора.
+Header/Content/Footer получают оформление контейнера; наблюдение сохранено для отдельного разбора.
+Svelte сохраняет оформление своей секции, включая explicit default/shared prefix.
+В [парных замерах](tests/browser/fixtures/ant-design-layout-section-prefix-reference.json)
+raw custom-prefix сравнивается с обычной секцией в независимом документе upstream.
+Текстовый контейнер эталона берёт font/color/line-height из его getDesignToken
+для сверки с текстовым контекстом native provider.
+Standalone fallback variables и border-box доступны до hydration, включая legacy
+dark/compact; внутри Layout новые variables не объявляются и parent style наследуется.
+Локальные style сохраняют приоритет; обновление prefix не заменяет controls и их drafts/selection.
 
 ## Descriptions
 

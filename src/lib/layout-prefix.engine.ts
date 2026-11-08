@@ -32,3 +32,36 @@ export function getLayoutPrefixCss(prefix: string, part: LayoutPrefixPart) {
         .replaceAll(`" ${original}"`, () => `" ${prefix}"`);
     }).join('\n').replace(/<\/style/gi, '<\\/style');
 }
+
+/** Секции сохраняют свою роль; variables внутри Layout наследуются от его корня. */
+export function getLayoutSectionPrefixCss(
+  prefix: string,
+  part: 'header' | 'content' | 'footer',
+  standalone: boolean
+) {
+  const original = `ant-layout-${part}`;
+  const custom = prefix !== original;
+  if (!custom && !standalone) return undefined;
+
+  const marker = `[data-ant-layout-prefix="${part}"]`;
+  const rules: string[] = [];
+  for (const rule of template.split('\n')) {
+    const boundary = rule.indexOf('{');
+    if (boundary < 0) continue;
+    const declarations = rule.slice(boundary);
+
+    if (standalone && rule.startsWith('.ant-layout:')
+      && declarations.startsWith('{--ant-layout-')) {
+      rules.push(`:where(.ant-layout-css-var${marker}[data-ant-layout-standalone])${declarations}`);
+    }
+    if (!custom) continue;
+    const selectors = rule.slice(0, boundary).split(',')
+      .filter(selector => selector.includes(`.${original}:`));
+    if (!selectors.length) continue;
+    rules.push(selectors.join(',').replaceAll(`.${original}`, () => `.${prefix}:where(${marker})`)
+      + declarations);
+  }
+  rules.push(`.${prefix}:where(${marker}){display:block;box-sizing:border-box;}`);
+
+  return rules.join('\n').replace(/<\/style/gi, '<\\/style');
+}

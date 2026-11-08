@@ -9,6 +9,11 @@
 
 ### Added
 
+- LayoutHeader/LayoutContent/LayoutFooter поддерживают literal prefixCls,
+  shared names и возврат стандартного класса. Секции сохраняют собственное
+  оформление, inherited variables и controls при смене prefix; ошибочное
+  контейнерное оформление upstream сохранено в парных raw/reference замерах.
+
 - Layout и LayoutSider поддерживают независимые локальные prefixCls. Новый
   CSS-рецепт layout-prefix воспроизводит 35 правил; сохранены namespace токенов,
   native SSR-определение Sider, состояния, ids, ARIA, темы и keyed DOM.
@@ -1141,6 +1146,10 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Standalone Layout sections получают fallback variables и border-box до hydration,
+  включая legacy light/dark/compact. Внутри Layout сохранены inherited variables
+  и overrides владельца, локальные styles остаются последними.
 
 - Sider сохраняет восстановление фокуса при обновляемых props и сворачивании
   содержимого до нулевой ширины. Внутренний focus lifecycle использует реальный DOM

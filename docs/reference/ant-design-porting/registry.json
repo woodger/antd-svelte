@@ -1374,7 +1374,14 @@
         "tests/browser/fixtures/LayoutPrefixFixtures.svelte",
         "tests/browser/fixtures/ant-design-layout-prefix-reference.json",
         "tests/browser/fixtures/ant-design-layout-section-prefix-observation.json",
-        "tests/package/layout-prefix.ssr.test.ts"
+        "tests/package/layout-prefix.ssr.test.ts",
+        "tests/browser/layout-section-prefix.spec.ts",
+        "tests/browser/layout-section-prefix-metrics.ts",
+        "tests/browser/fixtures/LayoutSectionPrefixCase.svelte",
+        "tests/browser/fixtures/LayoutSectionPrefixFixtures.svelte",
+        "tests/browser/fixtures/layout-section-prefix-cases.ts",
+        "tests/browser/fixtures/ant-design-layout-section-prefix-reference.json",
+        "tests/package/layout-section-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -1447,9 +1454,16 @@
             "src/lib/LayoutPart.svelte",
             "tests/browser/layout-theme.spec.ts",
             "tests/browser/fixtures/ant-design-layout-theme-reference.json",
-            "tests/package/layout-theme.ssr.test.ts"
+            "tests/package/layout-theme.ssr.test.ts",
+            "tests/browser/layout-section-prefix.spec.ts",
+            "tests/browser/layout-section-prefix-metrics.ts",
+            "tests/browser/fixtures/LayoutSectionPrefixCase.svelte",
+            "tests/browser/fixtures/LayoutSectionPrefixFixtures.svelte",
+            "tests/browser/fixtures/layout-section-prefix-cases.ts",
+            "tests/browser/fixtures/ant-design-layout-section-prefix-reference.json",
+            "tests/package/layout-section-prefix.ssr.test.ts"
           ],
-          "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, ConfigProvider theme.components.Layout с headerHeight=72 и footerPadding=\"14px 30px\" вокруг Header/Footer без Layout. Scope class есть, но component variables не объявлены: header height=22px, footer padding=0px; raw замеры находятся в standalone эталона. Svelte не повторяет потерю настройки: секции вне ближайшего Layout получают собственные variables. Внутри Layout сохранено исходное CSS-наследование, в том числе parent style; wrapper, native tags и legacy-only темы не меняются."
+          "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, ConfigProvider theme.components.Layout с headerHeight=72 и footerPadding=\"14px 30px\" вокруг Header/Footer без Layout. Scope class есть, но component variables не объявлены: header height=22px, footer padding=0px; raw замеры находятся в standalone эталона. Svelte не повторяет потерю настройки: секции вне ближайшего Layout получают собственные variables. Внутри Layout сохранено исходное CSS-наследование, в том числе parent style; wrapper, native tags и legacy-only темы не меняются. Standalone fallback variables и border-box теперь доступны также в legacy light/dark/compact до hydration; marker не создаёт новых variables внутри Layout и сохраняет parent overrides. Парные default-role baselines и native prefix toggles защищают эту границу."
         },
         {
           "id": "global-config",
@@ -1470,12 +1484,12 @@
             "tests/browser/fixtures/ant-design-layout-config-reference.json",
             "tests/package/layout-config.ssr.test.ts"
           ],
-          "note": "LayoutConfig экспортирован; ConfigProvider.layout class/style применяются только к контейнеру Layout, не к Header/Content/Footer/Sider. Context/local/rootClassName классы накапливаются, root style идёт после config style и component variables. Undefined наследует record, собственный объект включая {} заменяет его целиком. Двадцать два unmodified UMD cases и четыре transitions фиксируют LTR/RTL, классы, partial style priority, nested inherit/empty/replacement, sections и hasSider. Source body inherited color явно согласован с Native base context. Raw standalone Header/Footer без Layout variables и standalone RTL Source сохранены в reference; native themed/RTL поведение явно проверяется через documented corrections. Root identity и sibling scopes сохраняются; native lifecycle защищает drafts/selection/focus, Sider DOM/collapse и отсутствие лишних callbacks. Component tokens/aliases/algorithms не меняются; local/global prefixCls остаются отдельной недостающей возможностью. Без новых dependencies, CSS и script/config changes."
+          "note": "LayoutConfig экспортирован; ConfigProvider.layout class/style применяются только к контейнеру Layout, не к Header/Content/Footer/Sider. Context/local/rootClassName классы накапливаются, root style идёт после config style и component variables. Undefined наследует record, собственный объект включая {} заменяет его целиком. Двадцать два unmodified UMD cases и четыре transitions фиксируют LTR/RTL, классы, partial style priority, nested inherit/empty/replacement, sections и hasSider. Source body inherited color явно согласован с Native base context. Raw standalone Header/Footer без Layout variables и standalone RTL Source сохранены в reference; native themed/RTL поведение явно проверяется через documented corrections. Root identity и sibling scopes сохраняются; native lifecycle защищает drafts/selection/focus, Sider DOM/collapse и отсутствие лишних callbacks. Component tokens/aliases/algorithms не меняются; локальные prefixCls всех Layout частей поддерживаются отдельной feature; общий ConfigProvider.prefixCls ещё не перенесён. Без новых dependencies, CSS и script/config changes."
         },
         {
           "id": "prefix-cls",
-          "title": "Локальный prefixCls Layout/Sider и секций",
-          "state": "partial",
+          "title": "Локальные prefixCls Layout/Sider/Header/Content/Footer",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Layout.svelte",
@@ -1491,9 +1505,17 @@
             "tests/browser/fixtures/LayoutPrefixFixtures.svelte",
             "tests/browser/fixtures/ant-design-layout-prefix-reference.json",
             "tests/browser/fixtures/ant-design-layout-section-prefix-observation.json",
-            "tests/package/layout-prefix.ssr.test.ts"
+            "tests/package/layout-prefix.ssr.test.ts",
+            "src/lib/LayoutPart.svelte",
+            "tests/browser/layout-section-prefix.spec.ts",
+            "tests/browser/layout-section-prefix-metrics.ts",
+            "tests/browser/fixtures/LayoutSectionPrefixCase.svelte",
+            "tests/browser/fixtures/LayoutSectionPrefixFixtures.svelte",
+            "tests/browser/fixtures/layout-section-prefix-cases.ts",
+            "tests/browser/fixtures/ant-design-layout-section-prefix-reference.json",
+            "tests/package/layout-section-prefix.ssr.test.ts"
           ],
-          "note": "Layout.prefixCls и LayoutSider.prefixCls поддерживаются независимо, empty string восстанавливает ant-layout/ant-layout-sider. Классы root/states/body/trigger следуют своему prefix, --ant-layout-* / ant-layout-css-var и Menu namespace сохраняются. CSS data module layout-prefix воспроизводит 35 flat rules; runtime выбирает Layout или Sider, state selectors имеют own marker, variable defaults zero specificity. Native SSR :has fallback использует data markers независимо от классов. Тридцать два unmodified UMD cases в независимых документах и четыре transitions в отдельном документе фиксируют LTR/RTL, single/both/default prefixes, collapsed/zero/reverse/light, aliases, nested records, semantic priority и tokens. DOM/ids/aria-controls, keyboard, drafts/selection/focus, inert, collapse, explicit owner focus и legacy dark compact сохраняются; внутренний focus не зависит от обновления публичного ref. Собственный prefixCls Header/Content/Footer пока не перенесён. Общий ConfigProvider.prefixCls остаётся отдельным gap; component config/themes сохранены. Без новых dependencies и script/config changes."
+          "note": "Layout.prefixCls и LayoutSider.prefixCls поддерживаются независимо, empty string восстанавливает ant-layout/ant-layout-sider. Классы root/states/body/trigger следуют своему prefix, --ant-layout-* / ant-layout-css-var и Menu namespace сохраняются. CSS data module layout-prefix воспроизводит 35 flat rules; runtime выбирает Layout или Sider, state selectors имеют own marker, variable defaults zero specificity. Native SSR :has fallback использует data markers независимо от классов. Тридцать два unmodified UMD cases в независимых документах и четыре transitions в отдельном документе фиксируют LTR/RTL, single/both/default prefixes, collapsed/zero/reverse/light, aliases, nested records, semantic priority и tokens. DOM/ids/aria-controls, keyboard, drafts/selection/focus, inert, collapse, explicit owner focus и legacy dark compact сохраняются; внутренний focus не зависит от обновления публичного ref. Header/Content/Footer принимают literal prefixCls без дополнительного suffix, empty/default/shared prefixes сохраняют свою роль. Template выбирает selectors секции, изолирует shared names по part marker; fallback variables/border-box получают только standalone-секции, wrapped sections наследуют variables и parent style без новых declarations. Двадцать четыре paired Source cases в независимых документах сохраняют raw custom-prefix defect и отдельные default-role baselines: normal/standalone/sibling, LTR/RTL, default/empty/shared/variable aliases, component tokens, parent CSS-variable overrides, local styles, parent prefix и dark/compact algorithms. Text scope Source использует официальный getDesignToken(config) для согласования с native provider. Raw custom/header/footer failures и upstream standalone gaps не копируются. Default legacy standalone, reactive DOM/control identity, drafts/selection/focus, SSR variables и native tags проверяются отдельно. Общий ConfigProvider.prefixCls остаётся отдельным gap; component config/themes сохранены. Без новых dependencies и script/config changes."
         },
         {
           "id": "native-style-shorthand-reset",
@@ -1517,7 +1539,7 @@
             "src/lib/config-context.ts",
             "src/lib/Layout.svelte"
           ],
-          "note": "Локальные Layout/Sider prefixes и ConfigProvider.layout class/style поддерживаются; общий ConfigProvider.prefixCls пока не перенесён."
+          "note": "Локальные Layout/Sider/Header/Content/Footer prefixes и ConfigProvider.layout class/style поддерживаются; общий ConfigProvider.prefixCls пока не перенесён."
         },
         {
           "id": "native-prefix-style-collisions",
@@ -1529,9 +1551,16 @@
             "tests/browser/layout-prefix.spec.ts",
             "tests/browser/fixtures/ant-design-layout-prefix-reference.json",
             "tests/browser/fixtures/ant-design-layout-section-prefix-observation.json",
-            "tests/package/layout-prefix.ssr.test.ts"
+            "tests/package/layout-prefix.ssr.test.ts",
+            "tests/browser/layout-section-prefix.spec.ts",
+            "tests/browser/layout-section-prefix-metrics.ts",
+            "tests/browser/fixtures/LayoutSectionPrefixCase.svelte",
+            "tests/browser/fixtures/LayoutSectionPrefixFixtures.svelte",
+            "tests/browser/fixtures/layout-section-prefix-cases.ts",
+            "tests/browser/fixtures/ant-design-layout-section-prefix-reference.json",
+            "tests/package/layout-section-prefix.ssr.test.ts"
           ],
-          "note": "Для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, unmodified UMD/React 18.3.1. Prefix Layout=ant-layout-sider, Sider=ant-layout или общий ant-layout-css-var смешивают background/position/flex-direction ролей и sibling roots. CSSinJS сохраняет созданные стили после unmount: после alias кейса обычный local-priority sibling root остаётся position=relative/background=sider; в новом документе position=static/background=body. Raw cases, transitions и observations.sequentialStyleCache сохраняют эти значения. Native markers изолируют измеренные свойства; browser corrections ограничены известными alias combinations и сравнивают фон/position/flex-direction с независимым normal baseline, остальные Source metrics остаются неизменны. Матрица снята в отдельных документах с согласованными inherited color/font-size/unitless line-height, reactive sequence отдельно. Другое raw observation: Header/Content/Footer с собственным prefix получают Layout container display:flex/flex-direction:column и body background вместо section styles; для Header исчезают 64px и padding 0 50px, Footer теряет padding 24px 50px. Эти section prefixes пока не реализованы; перенос ошибки не требуется."
+          "note": "Для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, unmodified UMD/React 18.3.1. Prefix Layout=ant-layout-sider, Sider=ant-layout или общий ant-layout-css-var смешивают background/position/flex-direction ролей и sibling roots. CSSinJS сохраняет созданные стили после unmount: после alias кейса обычный local-priority sibling root остаётся position=relative/background=sider; в новом документе position=static/background=body. Raw cases, transitions и observations.sequentialStyleCache сохраняют эти значения. Native markers изолируют измеренные свойства; browser corrections ограничены известными alias combinations и сравнивают фон/position/flex-direction с независимым normal baseline, остальные Source metrics остаются неизменны. Матрица снята в отдельных документах с согласованными inherited color/font-size/unitless line-height, reactive sequence отдельно. Другое raw observation: Header/Content/Footer с собственным prefix получают Layout container display:flex/flex-direction:column и body background вместо section styles; для Header исчезают 64px и padding 0 50px, Footer теряет padding 24px 50px. Section prefixes реализованы с обычными стилями своей роли: парные raw/default baselines сняты отдельно и сохраняют ошибку Source как наблюдение. Namespace классов переносится, контейнерное оформление секций не копируется."
         }
       ]
     },
