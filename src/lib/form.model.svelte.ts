@@ -133,6 +133,7 @@ interface StoredField {
   registration?: FormFieldRegistration;
   registrationOrder?: number;
   initialValueOrder?: number;
+  metaCache?: FormFieldMeta;
   errors?: string[];
   warnings?: string[];
   touched: boolean;
@@ -174,6 +175,33 @@ export function createForm<Values extends FormValues>({
 
   function findField(name: NamePath): StoredField | undefined {
     return fields.find((field) => sameFormPath(fieldPath(field), name));
+  }
+
+  function fieldMeta(field: StoredField): FormFieldMeta {
+    return {
+      name: [...fieldPath(field)], touched: field.touched, validating: field.validating,
+      validated: field.validated, errors: [...(field.errors ?? [])],
+      warnings: [...(field.warnings ?? [])]
+    };
+  }
+
+  function notifyFieldMeta(field: StoredField, destroy = false) {
+    // UI callbacks не становятся dependencies эффекта, вызвавшего model setter.
+    untrack(() => {
+      const callback = field.registration?.onMetaChange;
+      if (destroy) {
+        field.metaCache = undefined;
+        callback?.(undefined);
+        return;
+      }
+      if (!callback) return;
+
+      const meta = fieldMeta(field);
+      if (!sameFormValue(meta, field.metaCache)) {
+        field.metaCache = meta;
+        callback(meta);
+      }
+    });
   }
 
   function controlRegistration(name: NamePath): FormFieldRegistration | undefined {
@@ -358,7 +386,10 @@ export function createForm<Values extends FormValues>({
   ): Promise<Values> {
     if (!validateOnly) {
       for (const field of selected) {
-        if (cancelValidationDelay(field)) field.validating = false;
+        if (cancelValidationDelay(field)) {
+          field.validating = false;
+          notifyFieldMeta(field);
+        }
       }
     }
 
@@ -386,6 +417,7 @@ export function createForm<Values extends FormValues>({
         field.warnings = [];
         field.dirty = true;
         field.validated = false;
+        notifyFieldMeta(field);
       }
     }
 
@@ -398,7 +430,10 @@ export function createForm<Values extends FormValues>({
         const elapsed = await delayValidation(field, delay);
         if (!elapsed || field.run !== token || revision !== startRevision
           || !fields.includes(field) || !sameFormPath(path, fieldPath(field))) {
-          if (field.run === token) field.validating = false;
+          if (field.run === token) {
+            field.validating = false;
+            notifyFieldMeta(field);
+          }
 
           return { name: path, errors: [], warnings: [], cancelled: true };
         }
@@ -416,6 +451,7 @@ export function createForm<Values extends FormValues>({
           field.warnings = messages.warnings;
           field.validated = true;
         }
+        notifyFieldMeta(field);
       }
 
       return { name: path, ...messages };
@@ -504,6 +540,7 @@ export function createForm<Values extends FormValues>({
     field.warnings = [];
     field.validating = false;
     field.run = ++request;
+    notifyFieldMeta(field);
   }
 
   const form: FormInstance<Values> = {
@@ -619,7 +656,9 @@ export function createForm<Values extends FormValues>({
               if (containsFormPath(name, fieldPath(field))) {
                 cancelValidationDelay(field);
                 field.run = ++request;
+                const wasValidating = field.validating;
                 field.validating = false;
+                if (wasValidating) notifyFieldMeta(field);
               }
             }
           }
@@ -641,6 +680,7 @@ export function createForm<Values extends FormValues>({
           if ('errors' in update) field.errors = [...(update.errors ?? [])];
           if ('warnings' in update) field.warnings = [...(update.warnings ?? [])];
           field.dirty = true;
+          notifyFieldMeta(field);
         }
       }
     },
@@ -648,6 +688,7 @@ export function createForm<Values extends FormValues>({
       const field = ensureField(name);
       field.touched = true;
       field.dirty = true;
+      notifyFieldMeta(field);
       revalidateTouched();
     },
     resetFields(names) {
@@ -702,6 +743,7 @@ export function createForm<Values extends FormValues>({
         field.validating = false;
         field.validated = false;
         field.run = ++request;
+        notifyFieldMeta(field);
       }
 
       submissionError = undefined;
@@ -720,6 +762,7 @@ export function createForm<Values extends FormValues>({
 
       for (const field of fields) {
         field.touched = true;
+        notifyFieldMeta(field);
       }
 
       try {
@@ -754,13 +797,8 @@ export function createForm<Values extends FormValues>({
     },
     getFieldMeta(name) {
       const field = findField(name);
-      if (!field) return;
 
-      return {
-        name: [...fieldPath(field)], touched: field.touched, validating: field.validating,
-        validated: field.validated, errors: [...(field.errors ?? [])],
-        warnings: [...(field.warnings ?? [])]
-      };
+      return field ? fieldMeta(field) : undefined;
     },
     initializeField: initializeFieldValue,
     initializeList: initializeFieldValue,
@@ -782,6 +820,7 @@ export function createForm<Values extends FormValues>({
           cancelValidationDelay(field);
           field.run = ++request;
           field.validating = false;
+          notifyFieldMeta(field);
         }
       }
 
@@ -800,8 +839,14 @@ export function createForm<Values extends FormValues>({
         registered.registration = registration;
         registered.registrationOrder = ++registrationOrder;
         registered.initialValueOrder = ++initialValueOrder;
+        registered.metaCache = undefined;
+        if (registered.touched || registered.validating || registered.validated
+          || registered.errors?.length || registered.warnings?.length) {
+          notifyFieldMeta(registered);
+        }
 
         return () => {
+          notifyFieldMeta(registered, true);
           if (cancelValidationDelay(registered)) {
             registered.run = ++request;
             registered.validating = false;

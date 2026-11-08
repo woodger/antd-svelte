@@ -5093,7 +5093,9 @@
         "tests/browser/fixtures/FormUseStatusFixtures.svelte",
         "tests/browser/fixtures/FormStatusReadout.svelte",
         "tests/browser/fixtures/ant-design-form-use-status-reference.json",
-        "tests/package/form-use-status.ssr.test.ts"
+        "tests/package/form-use-status.ssr.test.ts",
+        "src/lib/form-meta-events.test.ts",
+        "tools/fixtures/ant-design-form-no-style-reference.json"
       ],
       "features": [
         {
@@ -5871,6 +5873,19 @@
             "tests/package/form-use-status.ssr.test.ts"
           ],
           "note": "Export useFormItemStatus и FormItemStatus type переносят публичный Form.Item.useStatus через getter-object, как существующий useToken. Функция вызывается при инициализации; status/errors/warnings читаются реактивно, destructuring фиксирует snapshot, массивы сообщений readonly по native контракту модели. Отдельный context и приватный Provider окружает только main controls, без DOM: label/extra читают внешний scope, вложенный Item — собственный, вне Item status undefined и пустые сообщения. Pristine Item status пустая строка. Root Form повторяет Source NoFormStyle status: сбрасывает только visual status, errors/warnings ближайшего внешнего Item остаются; InputOTP переопределяет status своим prop и сохраняет сообщения. Четырнадцать UMD-состояний проверяют raw context shapes, named/nameless/manual/metadata statuses, scopes outside/form-only/label/extra/inner/inner-form и OTP custom status. Live getter reads не регистрируют control и сохраняют input/ref/DOM/value/focus/selection; reset очищает metadata. Hook не меняет существующий native binding context и правила ошибок. Source default context не содержит массивов, fallback arrays принадлежат конкретному hook result. Публичный импорт и SSR работают без DOM. Feedback/noStyle aggregation и остальные Form возможности остаются отдельными пробелами."
+        },
+        {
+          "id": "no-style",
+          "title": "FormItem.noStyle: сбор сообщений без layout",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form-internal.ts",
+            "src/lib/form-meta-events.test.ts",
+            "tools/fixtures/ant-design-form-no-style-reference.json"
+          ],
+          "note": "Подготовлен private onMetaChange stream модели: snapshots, deduplication, reset/unregister, видимая validation и защита silent/stale результатов. Порядок первого meta event важен для сообщений: reverse setFields в неизменённом UMD даёт Second error перед First error. Публичный noStyle, collector и render branch ещё не реализованы. Двадцать raw UMD-сценариев фиксируют wrapper suppression, inherited/explicit statuses, help=false, hidden, nameless и parent-owned status/hook metadata при агрегированном message list. Зафиксированы дефекты source: aria-describedby у noStyle input указывает на отсутствующий собственный help даже при реальном сообщении родителя; ignored help/extra тоже оставляют dangling description. При динамическом noStyle=false или help=false исходный parent сохраняет stale сообщения. Эти ошибки не следует переносить; raw snapshots и transitions сохранены для отдельного разбора."
         }
       ]
     },

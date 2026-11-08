@@ -1,0 +1,1170 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after render"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": null,
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(217, 217, 217)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "error",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "warnings",
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [
+            "Check"
+          ],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": "warning",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(250, 173, 20)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "warning",
+            "errors": [],
+            "warnings": [
+              "Check"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "errors-warnings",
+        "errors": [
+          "Invalid"
+        ],
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [
+            "Check"
+          ],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": [
+              "Check"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "help-false",
+        "errors": [
+          "Invalid"
+        ],
+        "helpFalse": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "decorations-ignored",
+        "decorated": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": null,
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(217, 217, 217)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "required",
+        "required": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": "true",
+          "status": null,
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(217, 217, 217)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "touched",
+        "touched": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": "success",
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(217, 217, 217)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "success",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "pending",
+        "errors": [
+          "Previous"
+        ],
+        "validating": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Previous"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "validating",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(217, 217, 217)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "validating",
+            "errors": [
+              "Previous"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "parent-named",
+        "parentNamed": true,
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "parent-and-child",
+        "parentNamed": true,
+        "parentErrors": [
+          "Group error"
+        ],
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Group error",
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [
+            "has-error"
+          ],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "error",
+            "errors": [
+              "Group error"
+            ],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "inherited-error",
+        "parentStatus": "error"
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [
+            "has-error"
+          ],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": "error",
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "error",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "inherited-warning",
+        "parentStatus": "warning"
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [
+            "has-warning"
+          ],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": "warning",
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(250, 173, 20)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "cleared-parent-error",
+        "parentStatus": "error",
+        "status": ""
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [
+            "has-error"
+          ],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": null,
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(217, 217, 217)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "error",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "override-parent-error",
+        "parentStatus": "error",
+        "status": "success"
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [
+            "has-error"
+          ],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": "success",
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(217, 217, 217)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "error",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "success",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nameless-inherit",
+        "parentStatus": "warning",
+        "nameless": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [
+            "has-warning"
+          ],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "",
+          "invalid": null,
+          "required": null,
+          "status": "warning",
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(250, 173, 20)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "warning",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "hidden",
+        "hidden": true,
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "roots": 2,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [
+            "has-error",
+            "hidden"
+          ],
+          "display": "none",
+          "margin": "24px"
+        },
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": true,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "styled-child",
+        "noStyle": false,
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "roots": 2,
+        "parent": {
+          "errors": [],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [
+            "has-error"
+          ],
+          "display": "block",
+          "margin": "24px"
+        },
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": true,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "standalone",
+        "standalone": true
+      },
+      "metrics": {
+        "roots": 0,
+        "parent": null,
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": null,
+          "required": null,
+          "status": null,
+          "descriptionPresent": false,
+          "descriptionConnected": false,
+          "border": "rgb(217, 217, 217)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "first": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "standalone-error",
+        "standalone": true,
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "roots": 0,
+        "parent": null,
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    }
+  ],
+  "eventOrder": {
+    "roots": 1,
+    "parent": {
+      "errors": [
+        "Second error",
+        "First error"
+      ],
+      "warnings": [],
+      "classes": [],
+      "display": "block",
+      "margin": "24px"
+    },
+    "child": null,
+    "input": {
+      "value": "Alpha",
+      "invalid": "true",
+      "required": null,
+      "status": "error",
+      "descriptionPresent": true,
+      "descriptionConnected": false,
+      "border": "rgb(255, 77, 79)"
+    },
+    "labelIgnored": true,
+    "extraIgnored": true,
+    "contexts": {
+      "parent": {
+        "status": "",
+        "errors": [],
+        "warnings": []
+      },
+      "first": {
+        "status": "error",
+        "errors": [
+          "First error"
+        ],
+        "warnings": []
+      },
+      "second": {
+        "status": "error",
+        "errors": [
+          "Second error"
+        ],
+        "warnings": []
+      }
+    }
+  },
+  "transitions": [
+    {
+      "id": "no-style-error",
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "noStyle": false
+      },
+      "metrics": {
+        "roots": 2,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [
+            "has-error"
+          ],
+          "display": "block",
+          "margin": "24px"
+        },
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": true,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "noStyle": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "noStyle": true,
+        "helpFalse": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "noStyle": true
+      },
+      "metrics": {
+        "roots": 1,
+        "parent": {
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [],
+          "classes": [],
+          "display": "block",
+          "margin": "24px"
+        },
+        "child": null,
+        "input": {
+          "value": "Alpha",
+          "invalid": "true",
+          "required": null,
+          "status": "error",
+          "descriptionPresent": true,
+          "descriptionConnected": false,
+          "border": "rgb(255, 77, 79)"
+        },
+        "labelIgnored": true,
+        "extraIgnored": true,
+        "contexts": {
+          "parent": {
+            "status": "",
+            "errors": [],
+            "warnings": []
+          },
+          "first": {
+            "status": "error",
+            "errors": [
+              "Invalid"
+            ],
+            "warnings": []
+          }
+        }
+      }
+    }
+  ]
+}
