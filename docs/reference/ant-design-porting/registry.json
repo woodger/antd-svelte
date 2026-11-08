@@ -7688,7 +7688,14 @@
         "tests/browser/fixtures/SelectTagRenderFixtures.svelte",
         "tests/browser/fixtures/select-tag-render-cases.ts",
         "tests/browser/fixtures/ant-design-select-tag-render-reference.json",
-        "tests/package/select-tag-render.ssr.test.ts"
+        "tests/package/select-tag-render.ssr.test.ts",
+        "src/lib/types.ts",
+        "src/lib/index.ts",
+        "tests/browser/fixtures/SelectOptionRenderCase.svelte",
+        "tests/browser/fixtures/SelectOptionRenderFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-option-render-reference.json",
+        "tests/browser/select-option-render.spec.ts",
+        "tests/package/select-option-render.ssr.test.ts"
       ],
       "features": [
         {
@@ -8014,6 +8021,24 @@
           "note": "Mode multiple/tags: label Snippet после maxTagTextLength, typed value/index/option disabled/closable/onClose для обычного тега; summary isMaxTag=true с disabled=false, closable=false и без value/index/onClose. Source mousedown toggle, close/open/change order и focus сохраняются; single игнорирует renderer и сохраняет Native label в input вместо Source overlay span. Проверены Svelte Tag composition, numeric/rest и responsive slots, reactive renderer без потери input/query/values, SSR/native fields. Custom CSS/a11y принадлежат renderer. Disabled Native не отправляет Source ложный open request."
         },
         {
+          "id": "option-render",
+          "title": "OptionRender Snippet для плоских options",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Select.svelte",
+            "src/lib/select.types.ts",
+            "src/lib/types.ts",
+            "src/lib/index.ts",
+            "tests/browser/fixtures/SelectOptionRenderCase.svelte",
+            "tests/browser/fixtures/SelectOptionRenderFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-option-render-reference.json",
+            "tests/browser/select-option-render.spec.ts",
+            "tests/package/select-option-render.ssr.test.ts"
+          ],
+          "note": "Пассивный Snippet получает FlattenOption metadata и info.index после filter/sort: key/value/label, data той же identity и groupOption=false. Source key=option.key??value сохраняет 0/empty string; extras доступны как unknown. Limit-disabled UI не подменяет raw data/disabled; synthetic и missing selected tags получают собственные временные records. Default/empty/alternate renderers, single/multiple/tags, selected labels, native buttons, FormData/reset/keyboard/focus и live renderer replacement сохранены. Closed SSR не вызывает Snippet. Raw 16 UMD cases pinned to rc-select study 1.10.1. Native DOM остаётся keyed by value; option.key добавлен как metadata. Группы/fieldNames, full option attrs и semantic/render API остаются отдельными gaps."
+        },
+        {
           "id": "extended-api",
           "title": "LabelInValue, fieldNames/groups, render/semantic/config и остальные Source API",
           "state": "missing",
@@ -8022,7 +8047,7 @@
             "src/lib/select.types.ts",
             "src/lib/Select.svelte"
           ],
-          "note": "Полный source API остаётся в работе: fieldNames/groups, labelInValue, searchIcon, renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
+          "note": "Полный source API остаётся в работе: fieldNames/groups, labelInValue, searchIcon, остальные renderers, полный callback/ref/open/semantic/config/prefix/motion API и option attrs. OptionRender для плоских данных перенесён. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
         },
         {
           "id": "native-whitespace-tag",

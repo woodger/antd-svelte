@@ -204,6 +204,8 @@ export interface SelectOption<Value extends string | number = string> {
   value: Value;
   label: string;
   disabled?: boolean;
+  /** Необязательный ключ optionRender; без него используется value. */
+  key?: string | number | null;
 }
 
 export const ruRU = {

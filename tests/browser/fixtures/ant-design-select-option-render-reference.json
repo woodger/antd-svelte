@@ -1,0 +1,1988 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "observation": "flat nonvirtual optionRender; key/data/index/extra fields and disabled versus maxCount"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "single",
+        "mode": "single",
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "multiple",
+        "mode": "multiple",
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags",
+        "mode": "tags",
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "single-selected",
+        "mode": "single",
+        "values": [
+          "a"
+        ],
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ]
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": true
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "multiple-selected",
+        "mode": "multiple",
+        "values": [
+          0,
+          "a"
+        ],
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ]
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": true
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": true
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [
+        "Zero",
+        "Alpha"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-selected",
+        "mode": "tags",
+        "values": [
+          "a"
+        ],
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ]
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": true
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [
+        "Alpha"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "ascending",
+        "mode": "multiple",
+        "sort": true,
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "label-search",
+        "mode": "single",
+        "search": "a",
+        "field": "label",
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "extra-field-search",
+        "mode": "tags",
+        "search": "zero",
+        "field": "desc",
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": "zero",
+          "value": "zero",
+          "label": "zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": false,
+          "rawDisabled": null,
+          "desc": null
+        },
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "zero / no desc",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-synthetic",
+        "mode": "tags",
+        "search": "new",
+        "filter": false,
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": "new",
+          "value": "new",
+          "label": "new",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": false,
+          "rawDisabled": null,
+          "desc": null
+        },
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 5,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "new / no desc",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-missing",
+        "mode": "tags",
+        "values": [
+          "outside"
+        ],
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ]
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        },
+        {
+          "key": "outside",
+          "value": "outside",
+          "label": "outside",
+          "index": 5,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": false,
+          "rawDisabled": null,
+          "desc": null
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "outside / no desc",
+          "disabled": false,
+          "selected": true
+        }
+      ],
+      "selectedLabels": [
+        "outside"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "multiple-cap",
+        "mode": "multiple",
+        "values": [
+          "a"
+        ],
+        "maxCount": 1,
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ]
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": false,
+          "selected": true
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": true,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [
+        "Alpha"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-zero-cap",
+        "mode": "tags",
+        "maxCount": 0,
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Zero / numeric zero",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "String zero / text zero",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Alpha / first",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Bravo / locked",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Gamma / last",
+          "disabled": true,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "empty-renderer",
+        "mode": "multiple",
+        "renderer": "empty",
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "alternate-renderer",
+        "mode": "single",
+        "renderer": "alternate",
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [
+        {
+          "key": 0,
+          "value": 0,
+          "label": "Zero",
+          "index": 0,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "numeric zero"
+        },
+        {
+          "key": "",
+          "value": "0",
+          "label": "String zero",
+          "index": 1,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "text zero"
+        },
+        {
+          "key": "a",
+          "value": "a",
+          "label": "Alpha",
+          "index": 2,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "first"
+        },
+        {
+          "key": "b",
+          "value": "b",
+          "label": "Bravo",
+          "index": 3,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": true,
+          "desc": "locked"
+        },
+        {
+          "key": "g",
+          "value": "g",
+          "label": "Gamma",
+          "index": 4,
+          "group": null,
+          "groupOption": false,
+          "hasGroupOption": true,
+          "owner": true,
+          "rawDisabled": null,
+          "desc": "last"
+        }
+      ],
+      "rendered": [
+        {
+          "content": "Rendered 0",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Rendered 0",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Rendered a",
+          "disabled": false,
+          "selected": false
+        },
+        {
+          "content": "Rendered b",
+          "disabled": true,
+          "selected": false
+        },
+        {
+          "content": "Rendered g",
+          "disabled": false,
+          "selected": false
+        }
+      ],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "empty-result",
+        "mode": "single",
+        "search": "absent",
+        "field": "label",
+        "options": [
+          {
+            "value": 0,
+            "key": 0,
+            "label": "Zero",
+            "desc": "numeric zero"
+          },
+          {
+            "value": "0",
+            "key": "",
+            "label": "String zero",
+            "desc": "text zero"
+          },
+          {
+            "value": "a",
+            "key": null,
+            "label": "Alpha",
+            "desc": "first"
+          },
+          {
+            "value": "b",
+            "label": "Bravo",
+            "disabled": true,
+            "desc": "locked"
+          },
+          {
+            "value": "g",
+            "label": "Gamma",
+            "desc": "last"
+          }
+        ],
+        "values": []
+      },
+      "metadata": [],
+      "rendered": [],
+      "selectedLabels": [],
+      "ownerOptionsUnchanged": true
+    }
+  ]
+}

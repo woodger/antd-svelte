@@ -16,7 +16,12 @@ describe('Select search sorting public package', () => {
 
   it('accepts typed comparator info without reordering native selected fields during SSR', () => {
     expectTypeOf<Parameters<NonNullable<SelectSearchConfig<number>['filterSort']>>[0]>()
-      .toEqualTypeOf<{ value: number; label: string; disabled?: boolean }>();
+      .toEqualTypeOf<{
+        value: number;
+        label: string;
+        disabled?: boolean;
+        key?: string | number | null;
+      }>();
     expectTypeOf<Parameters<NonNullable<SelectSearchConfig<number>['filterSort']>>[2]>()
       .toEqualTypeOf<{ searchValue: string }>();
     const options = Object.freeze([{ value: 2, label: 'Two' }, { value: 1, label: 'One' }]);

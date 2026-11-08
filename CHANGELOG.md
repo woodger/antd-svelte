@@ -9,6 +9,9 @@
 
 ### Added
 
+- Select.optionRender: Snippet с исходными data, key/value/label и текущим index;
+  фильтрация, сортировка, synthetic tags, maxCount и выбранные labels сохранены.
+
 - App и App.useApp()/useApp(): общий контекст Message/Notification/Modal,
   встроенные holders, наследование настроек вложенных App, реактивные defaults,
   HTML-root/fragment, local prefix, ConfigProvider.app и nativeElement.

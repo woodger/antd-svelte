@@ -6,6 +6,16 @@ import type { ComponentSize, SelectOption } from './types';
 export type SelectTokenSeparators = readonly string[]
   | ((input: string) => readonly string[]);
 
+/** Metadata плоского пункта; data сохраняет ссылку на исходный option владельца. */
+export interface SelectFlattenOption<Value extends string | number = string> {
+  key: string | number;
+  value: Value;
+  label: string;
+  data: SelectOption<Value> & Readonly<Record<string, unknown>>;
+  groupOption?: boolean;
+  group?: boolean;
+}
+
 /** Скрытый tag в maxTagPlaceholder; label не усечён, key совпадает с typed value. */
 export interface SelectOmittedTag<Value extends string | number = string> extends SelectOption<Value> {
   key: Value;
@@ -71,6 +81,11 @@ export interface SelectProps<
   _autoWidth?: boolean;
   /** Пустой список по умолчанию; tags может создавать значения без options. */
   options?: readonly SelectOption<Value>[];
+  /** Пассивное содержимое пункта; выбранный label и native option button сохраняются. */
+  optionRender?: Snippet<[
+    SelectFlattenOption<Mode extends 'tags' ? Value | string : Value>,
+    { index: number }
+  ]>;
   mode?: Mode;
   /** Разбор строк в multiple/tags; function получает текущий ввод, включая восстановленный paste. */
   tokenSeparators?: SelectTokenSeparators;

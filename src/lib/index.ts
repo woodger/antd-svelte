@@ -780,6 +780,7 @@ export type {
 export type {
   SelectProps,
   SelectSearchConfig,
+  SelectFlattenOption,
   SelectTokenSeparators,
   SelectOmittedTag,
   SelectTagPlaceholder,

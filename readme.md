@@ -8343,6 +8343,42 @@ disabled control не передаёт значения. Поисковый те
 Галерея `/ant-design` содержит форму выбора от одной до трёх команд с отправкой
 и сбросом.
 
+### Содержимое пунктов Select
+
+OptionRender задаёт пассивный Snippet внутри существующего native option button.
+Он получает `(option, { index })`: key/value/label, data с исходным объектом
+владельца и groupOption=false для плоского списка. Group отсутствует. Key берётся
+из option.key либо value; 0 и пустая строка сохраняются. Дополнительные data-поля
+имеют тип unknown, поэтому сложные значения требуют обычного TypeScript narrowing.
+
+```svelte
+<script lang="ts">
+  import { Select, type SelectFlattenOption } from 'antd-svelte';
+  const options = [{ value: 'happy', label: 'Happy', emoji: '😄' }];
+</script>
+
+{#snippet optionRender(option: SelectFlattenOption<string>, info: { index: number })}
+  <span aria-hidden="true">{option.data.emoji}</span> {option.label} ({info.index + 1})
+{/snippet}
+<Select {options} {optionRender} />
+```
+
+Index относится к текущему порядку после фильтрации и сортировки. Data сохраняет
+ссылку на исходный option, включая key и дополнительные поля; maxCount меняет
+доступность кнопки, но не raw disabled внутри data. Для synthetic tags и выбранных
+значений вне options передаётся соответствующий временный объект. Selected label,
+token matching, callbacks и FormData используют прежние данные, независимо от
+Snippet. Пустой renderer оставляет выбираемый пункт без содержимого. Вложенные
+интерактивные controls не допускаются семантикой native option button.
+
+Renderer и его отключение обновляются в открытом списке без потери input,
+query, selection и focus. В закрытом SSR popup renderer не вызывается.
+Этот этап сохраняет существующие Native value keys и оформление пунктов;
+groups/fieldNames и полные option attrs/semantic slots остаются отдельными gaps.
+Основа — [16 исходных случаев](./tests/browser/fixtures/ant-design-select-option-render-reference.json),
+[браузерные проверки](./tests/browser/select-option-render.spec.ts) и
+[SSR/типизация](./tests/package/select-option-render.ssr.test.ts).
+
 ### Tags
 
 ```svelte

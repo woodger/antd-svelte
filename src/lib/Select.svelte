@@ -22,6 +22,7 @@
   import { ruRU, type SelectOption } from './types';
   import type {
     SelectProps,
+    SelectFlattenOption,
     SelectSearchConfig,
     SelectTagPlaceholder,
     SelectTagInfo
@@ -38,6 +39,7 @@
   let {
     _autoWidth = false,
     options = [],
+    optionRender,
     mode,
     tokenSeparators,
     maxCount,
@@ -167,6 +169,20 @@
   let filtered = $derived(getSelectLimitOptions(
     orderedOptions, selectedKeys, multiple ? maxCount : undefined
   ));
+  let renderOption = $derived(optionRender as Snippet<[
+    SelectFlattenOption<RawValue>, { index: number }
+  ]> | undefined);
+
+  function getRenderOption(index: number): SelectFlattenOption<RawValue> {
+    const data = orderedOptions[index];
+    return {
+      key: data.key ?? data.value,
+      value: data.value,
+      label: data.label,
+      data: data as SelectFlattenOption<RawValue>['data'],
+      groupOption: false
+    };
+  }
   $effect(() => {
     cachedOptions = selectionOptions;
   });
@@ -923,7 +939,7 @@
             }}
           onclick={() => choose(option)}
         >
-          <span class="ant-select-item-option-content">{option.label}</span>
+          <span class="ant-select-item-option-content">{#if renderOption}{@render renderOption(getRenderOption(index), { index })}{:else}{option.label}{/if}</span>
           {#if multiple ? selectedKeys.has(option.value) : option.value === selectedValue}<span class="ant-select-item-option-state"><Icon name="check" /></span>{/if}
         </button>
       {:else}
