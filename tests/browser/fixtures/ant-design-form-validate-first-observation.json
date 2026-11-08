@@ -1,0 +1,931 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "two animation frames before every capture"
+  },
+  "cases": [
+    {
+      "id": "default",
+      "phase": "started",
+      "mode": null,
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "default",
+      "phase": "second",
+      "mode": null,
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "default",
+      "phase": "first",
+      "mode": null,
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "First",
+                "Second"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "First",
+            "Second"
+          ],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "all",
+      "phase": "started",
+      "mode": false,
+      "calls": [
+        "first",
+        "second",
+        "warning"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "all",
+      "phase": "second",
+      "mode": false,
+      "calls": [
+        "first",
+        "second",
+        "warning"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "all",
+      "phase": "warning",
+      "mode": false,
+      "calls": [
+        "first",
+        "second",
+        "warning"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "all",
+      "phase": "first",
+      "mode": false,
+      "calls": [
+        "first",
+        "second",
+        "warning"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "First",
+                "Second"
+              ],
+              "warnings": [
+                "Warning"
+              ]
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "First",
+            "Second"
+          ],
+          "warnings": [
+            "Warning"
+          ]
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "serial",
+      "phase": "started",
+      "mode": true,
+      "calls": [
+        "first"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "serial",
+      "phase": "first",
+      "mode": true,
+      "calls": [
+        "first"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "First"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "First"
+          ],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "serial-pass",
+      "phase": "started",
+      "mode": true,
+      "calls": [
+        "first"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "serial-pass",
+      "phase": "first",
+      "mode": true,
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "serial-pass",
+      "phase": "second",
+      "mode": true,
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Second"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "Second"
+          ],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "serial-warning-sort",
+      "phase": "started",
+      "mode": true,
+      "calls": [
+        "first"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "serial-warning-sort",
+      "phase": "first",
+      "mode": true,
+      "calls": [
+        "first"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "First"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "First"
+          ],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "serial-warning",
+      "phase": "started",
+      "mode": true,
+      "calls": [
+        "first"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "serial-warning",
+      "phase": "first",
+      "mode": true,
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "serial-warning",
+      "phase": "warning",
+      "mode": true,
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [
+        {
+          "status": "success"
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": [
+            "Warning"
+          ]
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel",
+      "phase": "started",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "parallel",
+      "phase": "second",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Second"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "Second"
+          ],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel",
+      "phase": "first",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Second"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "Second"
+          ],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-pass",
+      "phase": "started",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "parallel-pass",
+      "phase": "first",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "parallel-pass",
+      "phase": "second",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "second"
+      ],
+      "outcomes": [
+        {
+          "status": "success"
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-warning-early",
+      "phase": "started",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "parallel-warning-early",
+      "phase": "warning",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [
+        {
+          "status": "success"
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": [
+            "Warning"
+          ]
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-warning-early",
+      "phase": "first",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [
+        {
+          "status": "success"
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": [
+            "Warning"
+          ]
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-warning-pass",
+      "phase": "started",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "parallel-warning-pass",
+      "phase": "warning",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [
+        {
+          "status": "success"
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": [
+            "Warning"
+          ]
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-warning-pass",
+      "phase": "first",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [
+        {
+          "status": "success"
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": [
+            "Warning"
+          ]
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-error-early",
+      "phase": "started",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "parallel-error-early",
+      "phase": "first",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "First"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "First"
+          ],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-error-early",
+      "phase": "warning",
+      "mode": "parallel",
+      "calls": [
+        "first",
+        "warning"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "First"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [
+            "First"
+          ],
+          "warnings": []
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-warnings",
+      "phase": "started",
+      "mode": "parallel",
+      "calls": [
+        "warning",
+        "warning2"
+      ],
+      "outcomes": [],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": []
+        }
+      ],
+      "validating": true
+    },
+    {
+      "id": "parallel-warnings",
+      "phase": "warning2",
+      "mode": "parallel",
+      "calls": [
+        "warning",
+        "warning2"
+      ],
+      "outcomes": [
+        {
+          "status": "success"
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": [
+            "Second warning"
+          ]
+        }
+      ],
+      "validating": false
+    },
+    {
+      "id": "parallel-warnings",
+      "phase": "warning",
+      "mode": "parallel",
+      "calls": [
+        "warning",
+        "warning2"
+      ],
+      "outcomes": [
+        {
+          "status": "success"
+        }
+      ],
+      "fields": [
+        {
+          "name": [
+            "name"
+          ],
+          "errors": [],
+          "warnings": [
+            "Second warning"
+          ]
+        }
+      ],
+      "validating": false
+    }
+  ],
+  "observations": [
+    {
+      "case": "parallel-warning-early",
+      "issue": "The first warning settles parallel validation successfully while a blocking validator is pending; its later error is discarded."
+    }
+  ]
+}

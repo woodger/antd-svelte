@@ -135,6 +135,12 @@
 
 ### Added
 
+- FormItem: validateFirst для последовательной остановки и первого параллельного
+  отказа. По умолчанию правила запускаются параллельно и сохраняют порядок сообщений.
+  Errors идут перед warningOnly; раннее предупреждение ждёт блокирующие проверки.
+  Дефект upstream, допускающий успешный submit до поздней ошибки, записан отдельно.
+  Сохранены silent validation, outOfDate, reset/unmount, native фокус и выделение.
+
 - Form: getFieldInstance, focusField и scrollToField с автоматическими refs controls,
   custom controlRef, native id fallback, точными NamePath и lifecycle FormList/reset.
   Поддержаны scroll boundaries, alignment, smooth/custom behavior и optional focus.

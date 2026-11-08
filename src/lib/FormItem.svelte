@@ -17,6 +17,12 @@
     required?: boolean;
     /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
     rules?: readonly ValidationRule[];
+    /**
+     * False по умолчанию собирает все сообщения параллельно, true останавливает правила
+     * последовательно, 'parallel' выбирает первую завершившуюся ошибку.
+     * Предупреждение не обходит ожидающие блокирующие правила.
+     */
+    validateFirst?: boolean | 'parallel';
     htmlFor?: string;
     /**
      * Native element, bind:this либо объект с focus/nativeElement пользовательского control.
@@ -33,6 +39,7 @@
     help,
     required,
     rules,
+    validateFirst,
     htmlFor,
     controlRef,
     class: className = ''
@@ -64,6 +71,9 @@
       },
       get rules() {
         return rules;
+      },
+      get validateFirst() {
+        return validateFirst;
       },
       getInstance() {
         if (controlRef != null) return controlRef;

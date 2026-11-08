@@ -4912,7 +4912,12 @@
         "tests/browser/form-dom.spec.ts",
         "tests/browser/fixtures/FormDomFixtures.svelte",
         "tests/browser/fixtures/FormDomScrollFixtures.svelte",
-        "tests/browser/fixtures/ant-design-form-dom-observation.json"
+        "tests/browser/fixtures/ant-design-form-dom-observation.json",
+        "src/lib/form-validate-first.test.ts",
+        "tests/package/form-validate-first.ssr.test.ts",
+        "tests/browser/form-validate-first.spec.ts",
+        "tests/browser/fixtures/FormValidateFirstFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-validate-first-observation.json"
       ],
       "features": [
         {
@@ -5254,6 +5259,24 @@
             "tests/browser/fixtures/ant-design-form-dom-observation.json"
           ],
           "note": "Автоматические refs Input/TextArea, InputNumber, checkables/groups, Switch, Select, Slider, OTP, pickers, Rate, Mentions, AutoComplete, TreeSelect, Cascader и Transfer. Где опубликован bind:ref, возвращается он; остальные refs — стабильные Svelte handles либо опубликованный native element. Явный controlRef пользовательского поля имеет приоритет и сохраняет identity/receiver, native id служит fallback. Смонтированные bindings выбираются точным typed NamePath; reset, замена модели, удаление и keyed FormList очищают/обновляют ссылки. SSR не обращается к DOM. Прокрутка использует существующий compute-scroll-into-view 3.0.2, if-needed/nearest по умолчанию, alignment, boundary element/predicate, hidden overflow, native/custom behavior и optional focus. Сверено с неизменённым UMD; source коллизии underscore refs и number/string paths не повторяются. CSS scroll-margin пока не участвует в расчёте: bundled compute 3.1.1 и wrapper 3.1.0 дважды применяют margins, обрезают control и вызывают drift при повторной прокрутке; raw наблюдение сохранено отдельно. Это ограничение оставляет feature partial; полный Form API не заявлен."
+        },
+        {
+          "id": "validate-first",
+          "title": "ValidateFirst: все правила, последовательная и параллельная остановка",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/validation.engine.ts",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form-internal.ts",
+            "src/lib/FormItem.svelte",
+            "src/lib/form-validate-first.test.ts",
+            "tests/package/form-validate-first.ssr.test.ts",
+            "tests/browser/form-validate-first.spec.ts",
+            "tests/browser/fixtures/FormValidateFirstFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-validate-first-observation.json"
+          ],
+          "note": "FormItem.validateFirst false/default запускает все правила параллельно и собирает errors/warnings в порядке правил; true последовательно останавливается на первом сообщении, parallel выбирает первую завершившуюся ошибку. Блокирующие правила идут перед warningOnly без изменения caller array. Все-success ждёт все правила; warning-only parallel выбирает первое предупреждение по ответам. Ранний warning не обходит ожидающий блокирующий validator: подтверждённый дефект успешной validation/submit и потери поздней ошибки UMD 6.6.8 записан отдельно и не повторяется. Живое изменение mode действует на следующий запрос без remount. Сохранены validator(value, values), встроенные native сообщения/empty semantics, полный snapshot, silent metadata и строгие outOfDate/reset/unregister guards. Сверены 35 состояний неизменённого UMD и rc-form 1.8.6 validateUtil/Field; deprecated callback validators и React adapters не добавлены."
         }
       ]
     },

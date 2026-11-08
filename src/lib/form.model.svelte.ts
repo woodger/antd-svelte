@@ -358,7 +358,7 @@ export function createForm<Values extends FormValues>({
       if (!hasRules) return { name: path, errors: [], warnings: [] };
 
       const messages = await validateFieldValue(
-        getFormValue(snapshot, path), snapshot, fieldRules(field)
+        getFormValue(snapshot, path), snapshot, fieldRules(field), field.registration?.validateFirst
       );
 
       if (!validateOnly && field.run === token) {

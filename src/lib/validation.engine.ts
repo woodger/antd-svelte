@@ -41,10 +41,71 @@ export async function validateValue<Values extends FormValues>(
 export async function validateFieldValue<Values extends FormValues>(
   value: FormValue,
   values: Readonly<Values>,
-  rules: readonly ValidationRule<Values>[]
+  rules: readonly ValidationRule<Values>[],
+  validateFirst: boolean | 'parallel' = false
 ): Promise<{ errors: string[]; warnings: string[] }> {
+  const ordered = [...rules].sort((first, second) =>
+    Number(Boolean(first.warningOnly)) - Number(Boolean(second.warningOnly))
+  );
+
+  if (validateFirst === true) {
+    for (const rule of ordered) {
+      const messages = await validateRuleValue(value, values, rule);
+      if (messages.length) {
+        return rule.warningOnly
+          ? { errors: [], warnings: messages } : { errors: messages, warnings: [] };
+      }
+    }
+
+    return { errors: [], warnings: [] };
+  }
+
+  const checks = ordered.map((rule) => validateRuleValue(value, values, rule));
+  if (validateFirst === 'parallel') {
+    if (!checks.length) return { errors: [], warnings: [] };
+
+    return new Promise((resolve, reject) => {
+      let remaining = checks.length;
+      let blocking = ordered.filter((rule) => !rule.warningOnly).length;
+      let warning: string[] | undefined;
+
+      checks.forEach((check, index) => {
+        check.then((messages) => {
+          remaining--;
+          if (!ordered[index].warningOnly) {
+            blocking--;
+            if (messages.length) {
+              resolve({ errors: messages, warnings: [] });
+              return;
+            }
+          } else if (messages.length) {
+            warning ??= messages;
+          }
+
+          // Source выбирает и ранний warning, теряя позднюю ошибку; блокирующие правила ждём.
+          if (!blocking && warning) resolve({ errors: [], warnings: warning });
+          else if (!remaining) resolve({ errors: [], warnings: [] });
+        }, reject);
+      });
+    });
+  }
+
+  const results = await Promise.all(checks);
   const errors: string[] = [];
   const warnings: string[] = [];
+  results.forEach((messages, index) => {
+    (ordered[index].warningOnly ? warnings : errors).push(...messages);
+  });
+
+  return { errors, warnings };
+}
+
+async function validateRuleValue<Values extends FormValues>(
+  value: FormValue,
+  values: Readonly<Values>,
+  rule: ValidationRule<Values>
+): Promise<string[]> {
+  const messages: string[] = [];
   const array = Array.isArray(value);
   const empty = value === null
     || value === undefined
@@ -53,66 +114,62 @@ export async function validateFieldValue<Values extends FormValues>(
     || (array
       && value.length === 0);
 
-  for (const rule of rules) {
-    const messages = rule.warningOnly ? warnings : errors;
+  if (empty && rule.required) {
+    messages.push(rule.message ?? 'Заполните это поле.');
+    return messages;
+  }
 
-    if (empty && rule.required) {
-      messages.push(rule.message ?? 'Заполните это поле.');
-      continue;
-    }
+  if (empty && !rule.validator) {
+    return messages;
+  }
 
-    if (empty && !rule.validator) {
-      continue;
-    }
+  const length = array
+    ? value.length
+    : typeof value === 'string'
+      ? [...value].length
+      : typeof value === 'number' ? value : undefined;
 
-    const length = array
-      ? value.length
-      : typeof value === 'string'
-        ? [...value].length
-        : typeof value === 'number' ? value : undefined;
+  if (length !== undefined && rule.min !== undefined && length < rule.min) {
+    messages.push(
+      rule.message ?? `${array ? 'Минимальное количество' : 'Минимальное значение'}: ${rule.min}.`
+    );
+    return messages;
+  }
 
-    if (length !== undefined && rule.min !== undefined && length < rule.min) {
-      messages.push(
-        rule.message ?? `${array ? 'Минимальное количество' : 'Минимальное значение'}: ${rule.min}.`
-      );
-      continue;
-    }
+  if (length !== undefined && rule.max !== undefined && length > rule.max) {
+    messages.push(
+      rule.message
+      ?? `${array
+        ? 'Максимальное количество'
+        : 'Максимальное значение'}: ${rule.max}.`
+    );
+    return messages;
+  }
 
-    if (length !== undefined && rule.max !== undefined && length > rule.max) {
-      messages.push(
-        rule.message
-        ?? `${array
-          ? 'Максимальное количество'
-          : 'Максимальное значение'}: ${rule.max}.`
-      );
-      continue;
-    }
+  if (!empty
+    && !array
+    && rule.pattern
+    && !new RegExp(rule.pattern.source, rule.pattern.flags).test(
+      String(value)
+    )) {
+    messages.push(rule.message ?? 'Проверьте формат значения.');
+    return messages;
+  }
 
-    if (!empty
-      && !array
-      && rule.pattern
-      && !new RegExp(rule.pattern.source, rule.pattern.flags).test(
-        String(value)
-      )) {
-      messages.push(rule.message ?? 'Проверьте формат значения.');
-      continue;
-    }
+  if (rule.validator) {
+    try {
+      const message = await rule.validator(value, values);
 
-    if (rule.validator) {
-      try {
-        const message = await rule.validator(value, values);
-
-        if (message) {
-          messages.push(message);
-        }
-      } catch (error) {
-        messages.push(rule.message
-          ?? (error instanceof Error
-            ? error.message
-            : 'Проверьте значение.'));
+      if (message) {
+        messages.push(message);
       }
+    } catch (error) {
+      messages.push(rule.message
+        ?? (error instanceof Error
+          ? error.message
+          : 'Проверьте значение.'));
     }
   }
 
-  return { errors, warnings };
+  return messages;
 }
