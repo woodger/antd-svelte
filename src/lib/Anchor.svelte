@@ -9,8 +9,11 @@
   import { revealAnchorLink } from './anchor-scroll.dom';
   import { connectFeedbackFocus } from './feedback.dom';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getAnchorPrefixCss } from './anchor-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { AnchorProps } from './anchor.types';
   let {
+    prefixCls,
     items,
     offsetTop,
     bounds,
@@ -32,6 +35,8 @@
     ...rest
   }: AnchorProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('anchor', prefixCls));
+  let prefixCss = $derived(getAnchorPrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Anchor');
   // Spread props могут сбросить выходной ref; runtime сохраняет собственный DOM host.
   let host = $state<HTMLDivElement>();
@@ -47,6 +52,7 @@
     {
       props: {
         ...rest,
+        prefixCls,
         items,
         offsetTop,
         bounds,
@@ -71,6 +77,9 @@
   let classes = $derived(semantic.classes);
   let slots = $derived(semantic.styles);
   setAnchor({
+    get prefixCls() {
+      return componentPrefix;
+    },
     get activeLink() {
       return activeLink;
     },
@@ -129,7 +138,7 @@
   $effect(() => {
     // Semantic style заменяет inline attribute; измеряем после commit дочерних links/styles.
     void [
-      activeLink, direction, registrations, getCurrentAnchor, classes, slots,
+      activeLink, direction, registrations, getCurrentAnchor, classes, slots, componentPrefix,
       className, rootClassName, config.anchor?.class
     ];
     const root = host;
@@ -139,7 +148,7 @@
 
     void tick().then(() => {
       if (!active) return;
-      const link = root.querySelector<HTMLElement>('.ant-anchor-link-title-active');
+      const link = root.querySelector<HTMLElement>('[data-ant-anchor-title-active]');
       if (!link) return;
       indicator.style.top = direction === 'horizontal'
         ? ''
@@ -161,19 +170,22 @@
 </script>
 
 <style>
-  .ant-anchor-wrapper :global(.ant-anchor-link-title) { text-decoration:var(--ant-link-decoration, none); }
-  .ant-anchor-wrapper :global(.ant-anchor-link-title:is(:hover,:active)) { text-decoration:var(--ant-link-hover-decoration, none); }
-  .ant-anchor-wrapper :global(.ant-anchor-link-title:focus) { text-decoration:var(--ant-link-focus-decoration, none); }
+  [data-ant-anchor-root] :global([data-ant-anchor-link-title]) { text-decoration:var(--ant-link-decoration, none); }
+  [data-ant-anchor-root] :global([data-ant-anchor-link-title]:is(:hover,:active)) { text-decoration:var(--ant-link-hover-decoration, none); }
+  [data-ant-anchor-root] :global([data-ant-anchor-link-title]:focus) { text-decoration:var(--ant-link-focus-decoration, none); }
 </style>
 
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`anchor-prefix:${componentPrefix}`} />{/if}
 {#snippet content()}
   <div {...rest} bind:this={host} dir={config.direction}
+    data-ant-anchor-root
+    data-ant-anchor-prefix={prefixCss ? componentPrefix : undefined}
     class={[
-        'ant-anchor-wrapper ant-anchor-css-var',
+        `${componentPrefix}-wrapper ant-anchor-css-var`,
         componentTheme.className,
         componentTheme.className && 'ant-anchor-source-theme',
-        direction === 'horizontal' && 'ant-anchor-wrapper-horizontal',
-        config.direction === 'rtl' && 'ant-anchor-rtl',
+        direction === 'horizontal' && `${componentPrefix}-wrapper-horizontal`,
+        config.direction === 'rtl' && `${componentPrefix}-rtl`,
         className,
         config.anchor?.class,
         rootClassName,
@@ -188,11 +200,11 @@
       ).join(
         ';'
       )}>
-    <div class={['ant-anchor', !affix && !showInkInFixed && 'ant-anchor-fixed']}>
+    <div class={[componentPrefix, !affix && !showInkInFixed && `${componentPrefix}-fixed`]}>
       <span bind:this={ink} class={[
-          'ant-anchor-ink',
+          `${componentPrefix}-ink`,
           classes.indicator,
-          activeLink && 'ant-anchor-ink-visible'
+          activeLink && `${componentPrefix}-ink-visible`
         ]} style={slots.indicator}></span>
       <AnchorItems {items} {replace} />
     </div>

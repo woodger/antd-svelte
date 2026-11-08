@@ -1,6 +1,7 @@
 import { getContext, setContext } from 'svelte';
 import type { AnchorContent, AnchorDirection, AnchorSlots } from './anchor.types';
 export interface AnchorContext {
+  readonly prefixCls: string;
   readonly activeLink: string | null;
   readonly direction: AnchorDirection;
   readonly classNames: AnchorSlots;

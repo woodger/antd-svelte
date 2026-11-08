@@ -1343,13 +1343,31 @@ catch binding; MIT-лицензии обоих пакетов сохранены
 Сохранено ограничение делегата 3.0.2: отрицательный scrollLeft RTL-контейнера
 не поддерживается при автоматическом раскрытии; нативная ручная прокрутка,
 выбор и геометрия indicator доступны.
-Глобальные component config и prefixCls ещё не перенесены.
+PrefixCls задаёт wrapper/content/link/indicator classes. Empty/undefined наследуют
+ConfigProvider.prefixCls (по умолчанию ant-anchor), локальный prefix имеет приоритет.
+Items по умолчанию наследуют разрешённый prefix Anchor; item.prefixCls позволяет
+явный override, а пустая строка у item возвращает общий prefix провайдера.
+Для отдельного item prefix нужны соответствующие внешние стили, как в Source.
+Semantic callbacks получают исходный локальный prefix; canonical token marker
+сохранён. Смена prefix сохраняет ссылки, refs, ink, фокус, callbacks и history.
+Affix получает свой общий prefix независимо от локального prefix Anchor.
+
+В 6.6.8 локальный Anchor.prefixCls не передаётся в items: ссылки остаются с общим
+prefix, теряют отступы, а updateInk не находит активную ссылку. Native наследует
+prefix владельца, сохраняя явный item override. В
+[эталоне](./tests/browser/fixtures/ant-design-anchor-prefix-reference.json) записаны
+оба случая: raw Source и matchedItems с тем же публичным prefixCls у каждого item,
+без правки официального UMD. Сверка полной геометрии использует matchedItems;
+исходное наблюдение оставлено для отдельного разбора.
 
 Фикстура — `?fixture=anchor`, пример — `/ant-design#anchor`. Unit/SSR/Chromium
 проверяют приоритеты offsets, callbacks/history, анимацию/cleanup, nested items,
 RTL/indicator и production hydration. Source tokens и метрики проверяются
 [по официальному UMD](./src/lib/theme-anchor-tokens-reference.test.ts) и
-[в браузере](./tests/browser/anchor-theme.spec.ts). CSS-рецепт anchor содержит 22 правила.
+[в браузере](./tests/browser/anchor-theme.spec.ts). CSS-рецепты anchor и anchor-prefix
+содержат 22 правила; второй хранит module template для local classes. Prefix
+проверяют [browser](./tests/browser/anchor-prefix.spec.ts),
+[SSR](./tests/package/anchor-prefix.ssr.test.ts) и fixture `?fixture=anchor-prefix`.
 
 Ссылки items используют linkDecoration/linkHoverDecoration/
 linkFocusDecoration также без cssVar; defaults равны none. Пользовательские
@@ -9921,7 +9939,7 @@ PrefixCls задаёт базовый префикс CSS-классов; по у
 LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex,
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
-Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry и Splitter. Остальные
+Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter и Anchor. Остальные
 семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

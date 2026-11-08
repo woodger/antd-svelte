@@ -9,6 +9,10 @@
 
 ### Added
 
+- Anchor поддерживает local/shared prefixCls и отдельный item override. Links
+  наследуют prefix владельца; Source пропуск этого наследования записан raw/matched
+  замерами. Сохранены отступы, indicator, link decorations, DOM/focus и history.
+
 - Splitter поддерживает локальный prefixCls и общий ConfigProvider.prefixCls для
   всех частей и namespace lazy preview. Смена prefix сохраняет панели, editor/focus
   и текущий drag. Source cache defect при shared local class записан отдельно;

@@ -1,8 +1,10 @@
 <script lang="ts">
   import { untrack, type Snippet } from 'svelte';
   import { useAnchor } from './anchor-context';
+  import { useConfig } from './config-context';
   import type { AnchorItem } from './anchor.types';
   let {
+    prefixCls,
     href,
     title,
     target,
@@ -12,6 +14,11 @@
     children
   }: Omit<AnchorItem, 'key' | 'children'> & { children?: Snippet; } = $props();
   const context = useAnchor();
+  const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls(
+    'anchor',
+    prefixCls === undefined ? context?.prefixCls : prefixCls
+  ));
   $effect(() => {
     const link = href;
     const offset = targetOffset;
@@ -33,16 +40,18 @@
 </script>
 
 <div class={[
-    'ant-anchor-link',
+    `${componentPrefix}-link`,
     className,
     context?.classNames.item,
-    context?.activeLink === href && 'ant-anchor-link-active'
+    context?.activeLink === href && `${componentPrefix}-link-active`
   ]} style={context?.styles.item}>
   <a class={[
-      'ant-anchor-link-title',
+      `${componentPrefix}-link-title`,
       context?.classNames.itemTitle,
-      context?.activeLink === href && 'ant-anchor-link-title-active'
+      context?.activeLink === href && `${componentPrefix}-link-title-active`
     ]} style={context?.styles.itemTitle}
+    data-ant-anchor-link-title
+    data-ant-anchor-title-active={context?.activeLink === href || undefined}
     {href} {target} title={typeof title === 'string' ? title : undefined} onclick={click}>
     {#if typeof title === 'function'}{@render title()}{:else if title !== true && title !== false}{title ?? ''}{/if}
   </a>

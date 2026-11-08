@@ -2289,10 +2289,27 @@
         {
           "id": "global-config",
           "title": "PrefixCls",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "GetTargetContainer и ConfigProvider.anchor class/style/semantic config поддержаны отдельными features. PrefixCls ещё не перенесён."
+          "evidence": [
+            "src/lib/Anchor.svelte",
+            "src/lib/AnchorLink.svelte",
+            "src/lib/AnchorItems.svelte",
+            "src/lib/anchor.types.ts",
+            "src/lib/anchor-context.ts",
+            "src/lib/anchor-prefix.engine.ts",
+            "src/lib/anchor-prefix.engine.test.ts",
+            "src/lib/vendor/anchor-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/AnchorPrefixScope.svelte",
+            "tests/browser/fixtures/AnchorPrefixFixtures.svelte",
+            "tests/browser/fixtures/AnchorPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-anchor-prefix-reference.json",
+            "tests/browser/anchor-prefix-metrics.ts",
+            "tests/browser/anchor-prefix.spec.ts",
+            "tests/package/anchor-prefix.ssr.test.ts"
+          ],
+          "note": "Локальный непустой prefixCls имеет приоритет; empty/undefined наследуют ConfigProvider prefix. Wrapper/content/link/indicator classes и 22 CSS rules подключены с сохранением canonical token marker и native link decoration states. Items без prefix наследуют владельца; явный item prefix имеет приоритет, empty item prefix использует provider fallback. Raw semantic metadata, nested/sibling scopes, RTL, horizontal/vertical, tokens, независимый cssVar prefix и Affix сверяются с UMD; source local owner omission записан отдельной feature, полная геометрия сравнивается с публичными matched item prefixes. Live updates сохраняют root/link/ink/ref/focus, callbacks и history; SSR не вызывает DOM getter и не выбирает active link."
         },
         {
           "id": "anchor-theme-tokens",
@@ -2310,7 +2327,7 @@
             "tests/browser/fixtures/ant-design-anchor-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "Исходные linkPaddingBlock=paddingXXS и linkPaddingInlineStart=padding, финальные overrides, component algorithms/aliases, zero/undefined/negative и custom prefix. Первый horizontal item сохраняет нулевой inline padding, nested block padding зависит от paddingXXS/2 независимо от linkPaddingBlock, title margin от fontSize/14*3. Source compact inline padding=8px; native-only compact сохраняет прежние 16px. Source linkDecoration/linkHoverDecoration/linkFocusDecoration применяются к обычному, hover/active и focus состояниям; native-only стили сохранены. Scoped declarations и computed metrics horizontal/vertical/nested links, активных titles, границ, ink и link decorations сверяются с официальным UMD для 17 настроек. SSR scope внутри обычного и Affix root, style priority, DOM/focus, scroll/history/callbacks и cleanup сохраняются. Semantic updates пересчитывают indicator отдельной feature; prefixCls остаётся в работе."
+          "note": "Исходные linkPaddingBlock=paddingXXS и linkPaddingInlineStart=padding, финальные overrides, component algorithms/aliases, zero/undefined/negative и custom prefix. Первый horizontal item сохраняет нулевой inline padding, nested block padding зависит от paddingXXS/2 независимо от linkPaddingBlock, title margin от fontSize/14*3. Source compact inline padding=8px; native-only compact сохраняет прежние 16px. Source linkDecoration/linkHoverDecoration/linkFocusDecoration применяются к обычному, hover/active и focus состояниям; native-only стили сохранены. Scoped declarations и computed metrics horizontal/vertical/nested links, активных titles, границ, ink и link decorations сверяются с официальным UMD для 17 настроек. SSR scope внутри обычного и Affix root, style priority, DOM/focus, scroll/history/callbacks и cleanup сохраняются. Semantic updates пересчитывают indicator отдельной feature; prefixCls подключён отдельной feature."
         },
         {
           "id": "link-decoration-reset",
@@ -2372,6 +2389,21 @@
             "tests/browser/anchor-config.spec.ts"
           ],
           "note": "Наблюдение для отдельного разбора: Ant Design 6.6.8, stable items/getCurrentAnchor, provider itemTitle paddingTop/Bottom 4→20. Высота активной ссылки 30→62px, offsetTop 42→74px, computed indicator height/top остаются 30/57px вместо 62/105px; raw UMD не исправлен. Source updateInk effect не зависит от semantic classes/styles. Svelte пересчитывает runtime coordinates после semantic updates и восстанавливает их после полной замены inline style индикатора; это намеренное исправление, отдельно от начальных source reference profiles. Произвольный внешний CSS/resize и ResizeObserver здесь не заявлены."
+        },
+        {
+          "id": "source-local-item-prefix",
+          "title": "Наследование local owner prefix ссылками вместо исходного пропуска",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Anchor.svelte",
+            "src/lib/AnchorLink.svelte",
+            "src/lib/AnchorItems.svelte",
+            "tests/browser/fixtures/ant-design-anchor-prefix-reference.json",
+            "tests/browser/anchor-prefix.spec.ts",
+            "tests/package/anchor-prefix.ssr.test.ts"
+          ],
+          "note": "Наблюдение для отдельного разбора: unmodified Ant Design 6.6.8, ConfigProvider prefix=suite и Anchor prefixCls=nav. Source createNestedLink не передаёт prefixCls владельца; titles остаются suite-anchor-link-title, inline/block padding=0 и ink geometry пустая. Публичный item.prefixCls=nav восстанавливает исходную геометрию и indicator; raw и matchedItems записаны раздельно. Native по умолчанию передаёт разрешённый owner prefix всем items и ищет active title по стабильному marker, сохраняя явный item override и empty→provider fallback. Это намеренное исправление; Source UMD и raw measurements не менялись."
         }
       ]
     },
@@ -19430,9 +19462,12 @@
             "tests/package/masonry-prefix.ssr.test.ts",
             "src/lib/Splitter.svelte",
             "tests/browser/splitter-prefix.spec.ts",
-            "tests/package/splitter-prefix.ssr.test.ts"
+            "tests/package/splitter-prefix.ssr.test.ts",
+            "src/lib/Anchor.svelte",
+            "tests/browser/anchor-prefix.spec.ts",
+            "tests/package/anchor-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry и Splitter подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter и Anchor подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink."
         },
         {
           "id": "native-legacy-prefix-namespace",

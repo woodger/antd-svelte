@@ -6,7 +6,7 @@
 </script>
 
 {#each items ?? [] as item (item.key)}
-  <AnchorLink href={item.href} title={item.title} target={item.target} class={item.class} targetOffset={item.targetOffset} replace={'replace' in item ? item.replace : replace}>
+  <AnchorLink prefixCls={item.prefixCls} href={item.href} title={item.title} target={item.target} class={item.class} targetOffset={item.targetOffset} replace={'replace' in item ? item.replace : replace}>
     <AnchorItems items={item.children} {replace} />
   </AnchorLink>
 {/each}

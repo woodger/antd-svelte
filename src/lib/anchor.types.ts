@@ -15,6 +15,8 @@ export interface AnchorConfig {
   styles?: AnchorSemantic;
 }
 export interface AnchorItem {
+  /** undefined наследует Anchor prefix; явная пустая строка — общий prefix провайдера. */
+  prefixCls?: string;
   key: string | number;
   href: string;
   title?: AnchorContent;
@@ -29,6 +31,8 @@ export interface AnchorProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style' | 'onchange' | 'onclick'
 > {
+  /** Локальный CSS prefix; empty/undefined наследуют ConfigProvider.prefixCls. */
+  prefixCls?: string;
   items?: readonly AnchorItem[];
   offsetTop?: number;
   bounds?: number;
