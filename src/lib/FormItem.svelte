@@ -9,6 +9,10 @@
   import { captureFormResetFocus } from './form-reset.dom';
   import { enUS, type RenderEmptyContent } from './types';
   import RenderContent from './RenderContent.svelte';
+  import Row from './Row.svelte';
+  import Col from './Col.svelte';
+  import NoFormItemColumns from './NoFormItemColumns.svelte';
+  import type { ColProps } from './grid.types';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
@@ -26,6 +30,10 @@
     layout?: 'horizontal' | 'vertical';
     /** Локальное выравнивание подписи имеет приоритет над ближайшим Form. */
     labelAlign?: 'left' | 'right';
+    /** Колонки label заменяют Form.labelCol целиком, включая явный {}. */
+    labelCol?: ColProps;
+    /** Колонки controls заменяют Form.wrapperCol; вложенные Item их не наследуют. */
+    wrapperCol?: ColProps;
     /** Управляет добавленным colon; true имеет приоритет и над Form.colon=false. */
     colon?: boolean;
     /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
@@ -57,6 +65,8 @@
     hidden = false,
     layout,
     labelAlign,
+    labelCol,
+    wrapperCol,
     colon,
     rules,
     validateFirst,
@@ -75,6 +85,8 @@
   let path = $derived([...(list?.prefixName ?? []), ...formNamePath(name)]);
   let resolvedLayout = $derived(layout ?? form?.layout ?? 'vertical');
   let resolvedLabelAlign = $derived(labelAlign ?? form?.labelAlign ?? 'right');
+  let resolvedLabelCol = $derived(labelCol ?? form?.labelCol);
+  let resolvedWrapperCol = $derived(wrapperCol ?? form?.wrapperCol);
   let computedColon = $derived(colon === true || form?.colon !== false && colon !== false);
   let haveColon = $derived(resolvedLayout !== 'vertical' && computedColon);
   let labelText = $derived(haveColon && label.trim() ? label.replace(/[:：]\s*$/, '') : label);
@@ -180,10 +192,6 @@
   }
 </script>
 
-<style>
-  .ant-form-item-row { display: flex; flex-wrap: wrap; }
-</style>
-
 <div class={[
     'ant-form-item',
     componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
@@ -193,10 +201,13 @@
     !errors.length && warnings.length && 'ant-form-item-has-warning',
     className
   ]} style={componentTheme.style}>
-  <!-- Source Row/Col сбрасывают общие aliases, сохраняя наследование Form tokens. -->
-  <div class={['ant-form-item-row', componentTheme.className]}>
-    <div class="ant-form-item-label" class:ant-form-item-label-left={resolvedLabelAlign === 'left'}
-      class:ant-form-item-label-wrap={form?.labelWrap === true}>
+  <Row class={['ant-form-item-row', componentTheme.className].filter(Boolean).join(' ')}>
+    <Col {...resolvedLabelCol} class={[
+      'ant-form-item-label',
+      resolvedLabelAlign === 'left' && 'ant-form-item-label-left',
+      form?.labelWrap === true && 'ant-form-item-label-wrap',
+      resolvedLabelCol?.class
+    ].filter(Boolean).join(' ')}>
       <label for={id} class:ant-form-item-required={isRequired}
         class:ant-form-item-required-mark-hidden={requiredMark === false}
         class:ant-form-item-required-mark-optional={requiredMark === 'optional'
@@ -209,24 +220,27 @@
           {labelText}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
         {/if}
       </label>
-    </div>
-    <div class="ant-form-item-control">
-      <div class="ant-form-item-control-input">
-        <div bind:this={content} class="ant-form-item-control-input-content">{#key resetKey}{@render children()}{/key}</div>
-      </div>
-      {#if errors.length || warnings.length}
-        <div id={descriptionId} class={[
-          'ant-form-item-explain', errors.length && 'ant-form-item-explain-error'
-        ]} role={errors.length ? 'alert' : 'status'}>
-          {#each errors as error}<div class="ant-form-item-explain-error">{error}</div>{/each}
-          {#each warnings as warning}<div class="ant-form-item-explain-warning">{warning}</div>{/each}
+    </Col>
+    <NoFormItemColumns>
+      <Col {...resolvedWrapperCol}
+        class={['ant-form-item-control', resolvedWrapperCol?.class].filter(Boolean).join(' ')}>
+        <div class="ant-form-item-control-input">
+          <div bind:this={content} class="ant-form-item-control-input-content">{#key resetKey}{@render children()}{/key}</div>
         </div>
-      {:else if help}
-        <div id={descriptionId} class="ant-form-item-extra">{help}</div>
-      {/if}
-      {#if hasExtra}
-        <div id={extraId} class="ant-form-item-extra"><RenderContent value={extra} /></div>
-      {/if}
-    </div>
-  </div>
+        {#if errors.length || warnings.length}
+          <div id={descriptionId} class={[
+            'ant-form-item-explain', errors.length && 'ant-form-item-explain-error'
+          ]} role={errors.length ? 'alert' : 'status'}>
+            {#each errors as error}<div class="ant-form-item-explain-error">{error}</div>{/each}
+            {#each warnings as warning}<div class="ant-form-item-explain-warning">{warning}</div>{/each}
+          </div>
+        {:else if help}
+          <div id={descriptionId} class="ant-form-item-extra">{help}</div>
+        {/if}
+        {#if hasExtra}
+          <div id={extraId} class="ant-form-item-extra"><RenderContent value={extra} /></div>
+        {/if}
+      </Col>
+    </NoFormItemColumns>
+  </Row>
 </div>

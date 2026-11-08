@@ -9374,6 +9374,19 @@ Form к своим defaults. Изменения сохраняют control, focu
 [браузер](./tests/browser/form-labels.spec.ts),
 [публичные типы и SSR](./tests/package/form-labels.ssr.test.ts), `?fixture=form-labels`.
 
+`Form.labelCol`/`wrapperCol` и одноимённые props FormItem принимают настройки Col:
+span/offset/order/push/pull/flex, responsive размеры, class и строковый style.
+Объект FormItem заменяет соответствующий объект Form целиком; {} сбрасывает его.
+Внутренние Row/Col используют существующий Grid. Колонки сбрасываются для FormItem
+внутри controls, остальные настройки и модель остаются реактивными. Локальные
+колонки вложенного Item применяются заново; вложенный Form использует свои defaults.
+Переключения сохраняют control, values/metadata и focus/selection.
+Label остаётся строкой; исходное авто-смещение wrapper для label=null пока не перенесено.
+Проверены приоритеты, сбросы, стили, скрытие span=0, RTL, три layouts и границы
+576/768/992px: [42 эталона](./tests/browser/fixtures/ant-design-form-columns-reference.json),
+[браузер](./tests/browser/form-columns.spec.ts),
+[публичные типы и SSR](./tests/package/form-columns.ssr.test.ts), `?fixture=form-columns`.
+
 `Form.requiredMark` наследует ConfigProvider.form.requiredMark, затем true.
 False скрывает звёздочку, 'optional' помечает необязательные поля, Svelte snippet
 получает `(label, { required })` и целиком заменяет содержимое label. Label передаётся

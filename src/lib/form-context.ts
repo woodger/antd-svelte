@@ -1,6 +1,7 @@
 import { getContext, onDestroy, onMount, setContext } from 'svelte';
 import type { FormFieldRegistration } from './form-internal';
 import type { FormRequiredMark } from './form.types';
+import type { ColProps } from './grid.types';
 import type { NamePath } from './form-store.engine';
 import type { Variant } from './types';
 
@@ -11,6 +12,8 @@ export interface FormContext {
   readonly colon?: boolean;
   readonly labelAlign?: 'left' | 'right';
   readonly labelWrap?: boolean;
+  readonly labelCol?: ColProps;
+  readonly wrapperCol?: ColProps;
   readonly requiredMark?: FormRequiredMark;
   readonly resetKey?: object;
   getFieldError(name: NamePath): readonly string[];

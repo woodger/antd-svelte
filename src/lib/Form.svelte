@@ -15,6 +15,8 @@
     colon,
     labelAlign,
     labelWrap,
+    labelCol,
+    wrapperCol,
     requiredMark,
     variant,
     component = 'form',
@@ -56,6 +58,12 @@
     },
     get labelWrap() {
       return labelWrap ?? config.form?.labelWrap;
+    },
+    get labelCol() {
+      return labelCol;
+    },
+    get wrapperCol() {
+      return wrapperCol;
     },
     get requiredMark() {
       return resolvedRequiredMark;

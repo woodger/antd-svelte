@@ -4955,7 +4955,15 @@
         "tests/browser/form-validate-debounce.spec.ts",
         "tests/browser/fixtures/FormValidateDebounceFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-debounce-observation.json",
-        "tests/package/form-validate-debounce.ssr.test.ts"
+        "tests/package/form-validate-debounce.ssr.test.ts",
+        "src/lib/NoFormItemColumns.svelte",
+        "src/lib/Row.svelte",
+        "src/lib/Col.svelte",
+        "tests/browser/form-columns.spec.ts",
+        "tests/browser/form-columns-metrics.ts",
+        "tests/browser/fixtures/FormColumnsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-columns-reference.json",
+        "tests/package/form-columns.ssr.test.ts"
       ],
       "features": [
         {
@@ -5424,6 +5432,27 @@
             "tests/package/form-validate-debounce.ssr.test.ts"
           ],
           "note": "FormItem.validateDebounce задаёт задержку в ms для автоматической validation; undefined/0 сохраняют немедленный запуск. Pending входит в validating; новый автоматический/обычный запрос отменяет прежний timer. Rules/validateFirst/delay и snapshot значения фиксируются до ожидания; props действуют на следующий запуск. ValidateFields/submit обходят задержку, validateOnly выполняется сразу и не отменяет видимую попытку. Сохранены прежние native blur/touched triggers, повторная проверка touched bindings при записи, model-owned rules, ручная ruleless metadata, полный snapshot и защита outOfDate. Reset/setFields value/validating, unmount и смена list path исключают устаревшие validators. Таймеры очищаются при field cleanup; уже запущенные Promise не заменяют свежие сообщения. 35 raw UMD-состояний с управляемыми часами подтверждают burst, explicit/silent/submit, reset, изменения delay и нулевой режим. Отдельно записан дефект source: validator стартует после unmount; Svelte отменяет такую работу. Browser проверяет реальный input/blur, ARIA, FormData, focus/selection, remount; unit покрывает независимые задержки, rules snapshots и model lifecycle. SSR не регистрирует browser field и не запускает validation. Полный validateTrigger/event adapter API пока не перенесён."
+        },
+        {
+          "id": "columns",
+          "title": "LabelCol/wrapperCol: Grid, responsive размеры и вложенные поля",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/NoFormItemColumns.svelte",
+            "src/lib/Row.svelte",
+            "src/lib/Col.svelte",
+            "tests/browser/form-columns.spec.ts",
+            "tests/browser/form-columns-metrics.ts",
+            "tests/browser/fixtures/FormColumnsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-columns-reference.json",
+            "tests/package/form-columns.ssr.test.ts"
+          ],
+          "note": "Form и FormItem принимают labelCol/wrapperCol по существующим ColProps: span/offset/order/push/pull/flex, responsive размеры, native class и строковый style. Локальный Item object заменяет соответствующий Form object целиком; {} сбрасывает его. Разметка использует Row/Col; control subtree сбрасывает только колонки FormContext, сохраняя getters модели, labels/validation/variant и прочие defaults. Вложенный Item может задать собственные колонки, вложенный Form использует свои props/defaults. 42 UMD-состояния сверяют классы, computed display/flex/max-width/margins/order/padding, относительные boxes и RTL: три layouts, styles/flex, offsets, span=0, nested Item/Form и границы 576/768/992px. Private CSS-var/hash markers исключены, display:none не имеет координат; значения видимой геометрии сохранены без допусков. Реактивные настройки сохраняют DOM, model values/errors/warnings/touched, focus/selection, FormData и label click. SSR использует те же scopes и Col classes без DOM API. Label остаётся строкой; source label=null и автоматический wrapper offset остаются отдельным пробелом. Default vertical и прежние native contracts сохранены, FormConfig не получает отсутствующие в upstream global col props."
         }
       ]
     },

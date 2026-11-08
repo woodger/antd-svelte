@@ -2,6 +2,7 @@ import type { Snippet } from 'svelte';
 import type { HTMLFormAttributes } from 'svelte/elements';
 import type { FormValidationError } from './FormValidationError';
 import type { FormInstance } from './form.model.svelte.js';
+import type { ColProps } from './grid.types';
 import type { FormValues } from './validation.engine';
 import type { Variant } from './types';
 import type { Options, ScrollAction } from './vendor/compute-scroll-into-view';
@@ -46,6 +47,10 @@ export interface FormProps<Values extends FormValues> extends Omit<
   labelAlign?: 'left' | 'right';
   /** Перенос текста подписи; undefined наследует ConfigProvider.form, затем false. */
   labelWrap?: boolean;
+  /** Колонки label по ColProps; FormItem заменяет объект целиком, включая {}. */
+  labelCol?: ColProps;
+  /** Колонки controls по ColProps; вложенный FormItem не наследует колонки внешнего. */
+  wrapperCol?: ColProps;
   /** Только оформление label, без изменения required/validation; config, затем true. */
   requiredMark?: FormRequiredMark;
   /** Оформление дочерних полей; undefined сбрасывает внешний Form, сохраняя ConfigProvider. */

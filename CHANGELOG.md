@@ -135,6 +135,10 @@
 
 ### Added
 
+- Form/FormItem: labelCol и wrapperCol через существующие Row/Col, с responsive
+  размерами, локальным приоритетом и сбросом колонок вложенных полей. Проверены
+  исходные метрики, RTL, три layouts и сохранение native control/focus/metadata.
+
 - FormItem: validateDebounce задерживает автоматическую validation, заменяет
   устаревшие таймеры и отменяет работу при reset/unmount. Явные проверки и submit
   работают сразу; validateOnly сохраняет ожидающую видимую проверку.
