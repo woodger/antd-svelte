@@ -19,6 +19,44 @@ async function freeze(page: Page) {
   await page.clock.pauseAt(new Date('2026-01-01T00:00:01Z'));
 }
 
+test('Dropdown retains unbound visibility, menu DOM and focus when spread props refresh', async ({ page }) => {
+  await page.getByLabel('Mount default Dropdown', { exact: true }).check();
+  const popup = menu(page, 'Default menu');
+  const item = popup.getByRole('menuitem', { name: 'Default action', exact: true });
+  await item.focus();
+  const oldItem = await item.elementHandle();
+  const refresh = page.getByRole('button', { name: 'Refresh default Dropdown props', exact: true });
+  await refresh.dispatchEvent('click');
+
+  await expect(item).toBeFocused();
+  expect(await item.evaluate((node, old) => node === old, oldItem)).toBe(true);
+  await item.press('Escape');
+  await expect(popup).toBeHidden();
+  await refresh.dispatchEvent('click');
+  await expect(popup).toBeHidden();
+  await page.getByLabel('Default Dropdown initial visibility', { exact: true }).uncheck();
+  await page.getByLabel('Default Dropdown initial visibility', { exact: true }).check();
+  await expect(popup).toBeHidden();
+  await expect(page.getByRole('status', { name: 'Default Dropdown changes', exact: true }))
+    .toHaveText('[false]');
+});
+
+test('Dropdown keeps its initial fallback when an external open owner is released', async ({ page }) => {
+  await page.getByLabel('Mount default Dropdown', { exact: true }).check();
+  const popup = menu(page, 'Default menu');
+  await expect(popup).toBeVisible();
+  await page.getByRole('button', { name: 'Hide default Dropdown externally', exact: true })
+    .dispatchEvent('click');
+
+  await expect(popup).toBeHidden();
+  await page.getByRole('button', { name: 'Release default Dropdown owner', exact: true })
+    .dispatchEvent('click');
+
+  await expect(popup).toBeVisible();
+  await expect(page.getByRole('status', { name: 'Default Dropdown changes', exact: true }))
+    .toHaveText('[]');
+});
+
 test.beforeEach(async ({ page }) => {
   await page.goto('/?fixture=dropdown');
 

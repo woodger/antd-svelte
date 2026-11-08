@@ -1,12 +1,15 @@
 <script lang="ts" generics="Params extends Record<string, unknown> = Record<string, unknown>">
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getBreadcrumbPrefixCss } from './breadcrumb-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { breadcrumbEntries, breadcrumbHasContent } from './breadcrumb.engine';
   import { breadcrumbSemantics } from './breadcrumb-semantic.engine';
   import BreadcrumbEntry from './BreadcrumbEntry.svelte';
   import type { BreadcrumbContent, BreadcrumbProps } from './breadcrumb.types';
 
   let {
+    prefixCls,
     items,
     params = {} as Params,
     separator,
@@ -23,6 +26,8 @@
     Params
   > = $props();
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('breadcrumb', prefixCls));
+  let prefixCss = $derived(getBreadcrumbPrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Breadcrumb');
   let mergedSeparator = $derived(separator ?? config.breadcrumb?.separator ?? '/');
   let mergedDropdownIcon = $derived(dropdownIcon ?? config.breadcrumb?.dropdownIcon);
@@ -31,6 +36,7 @@
     {
       props: {
         ...rest,
+        prefixCls,
         items,
         params,
         separator: mergedSeparator,
@@ -50,30 +56,33 @@
 </script>
 
 <style>
-  .ant-breadcrumb :global(:where(a)) { text-decoration:var(--ant-link-decoration, none); }
-  .ant-breadcrumb :global(:where(a:hover, a:active)) { text-decoration:var(--ant-link-hover-decoration, none); }
-  .ant-breadcrumb :global(:where(a:focus)) { text-decoration:var(--ant-link-focus-decoration, none); }
+  [data-ant-breadcrumb-root] :global(:where(a)) { text-decoration:var(--ant-link-decoration, none); }
+  [data-ant-breadcrumb-root] :global(:where(a:hover, a:active)) { text-decoration:var(--ant-link-hover-decoration, none); }
+  [data-ant-breadcrumb-root] :global(:where(a:focus)) { text-decoration:var(--ant-link-focus-decoration, none); }
 </style>
 
 {#snippet value(node: BreadcrumbContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`breadcrumb-prefix:${componentPrefix}`} />{/if}
 <nav {...rest} bind:this={nativeElement} dir={config.direction} class={[
-    'ant-breadcrumb ant-breadcrumb-css-var',
+    `${componentPrefix} ant-breadcrumb-css-var`,
     componentTheme.className,
     componentTheme.className && 'ant-breadcrumb-source-theme',
-    config.direction === 'rtl' && 'ant-breadcrumb-rtl',
+    config.direction === 'rtl' && `${componentPrefix}-rtl`,
     config.breadcrumb?.class,
     className,
     rootClassName,
     classes.root
-  ]} style={[componentTheme.style, slots.root].filter(Boolean).join(';')}>
+  ]} data-ant-breadcrumb-root
+  data-ant-breadcrumb-prefix={prefixCss ? componentPrefix : undefined}
+  style={[componentTheme.style, slots.root].filter(Boolean).join(';')}>
   <ol>{#each entries as entry, index (entry.item.key ?? index)}
     {#if entry.item.type === 'separator'}
-      <li class={['ant-breadcrumb-separator', classes.separator]} style={slots.separator} aria-hidden="true">{@render value(entry.item.separator ?? '/')}</li>
+      <li class={[`${componentPrefix}-separator`, classes.separator]} style={slots.separator} aria-hidden="true">{@render value(entry.item.separator ?? '/')}</li>
     {:else if itemRender || entry.item.menu || entry.title !== null}
-      <BreadcrumbEntry {entry} {params} routes={items ?? []} {itemRender} dropdownIcon={mergedDropdownIcon} {classes} styles={slots} />
-      {#if index < entries.length - 1 && breadcrumbHasContent(mergedSeparator)}<li class={['ant-breadcrumb-separator', classes.separator]} style={slots.separator} aria-hidden="true">{@render value(mergedSeparator)}</li>{/if}
+      <BreadcrumbEntry prefixCls={componentPrefix} {entry} {params} routes={items ?? []} {itemRender} dropdownIcon={mergedDropdownIcon} {classes} styles={slots} />
+      {#if index < entries.length - 1 && breadcrumbHasContent(mergedSeparator)}<li class={[`${componentPrefix}-separator`, classes.separator]} style={slots.separator} aria-hidden="true">{@render value(mergedSeparator)}</li>{/if}
     {/if}
   {/each}</ol>
 </nav>

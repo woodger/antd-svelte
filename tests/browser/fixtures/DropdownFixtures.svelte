@@ -34,6 +34,14 @@
   let events = $state<string[]>([]);
   let defaultMounted = $state(false);
   let defaultChanges = $state<boolean[]>([]);
+  let defaultRevision = $state(0);
+  let defaultVisible = $state(true);
+  let defaultControlled = $state(false);
+  let defaultOwner = $state<boolean | undefined>();
+  let defaultProps = $derived({
+    style: `outline-offset:${defaultRevision}px`,
+    ...(defaultControlled ? { open: defaultOwner } : {})
+  });
   let modalOpen = $state(false);
   let modalChoice = $state('');
   let items: DropdownItem[] = $derived(
@@ -188,12 +196,20 @@
       }}
     ><Button>Clipped Dropdown trigger</Button></Dropdown></div>
     <label><input type="checkbox" bind:checked={defaultMounted} /> Mount default Dropdown</label>
-    {#if defaultMounted}<Dropdown
+    {#if defaultMounted}<Dropdown {...defaultProps}
       aria-label="Default menu"
-      defaultOpen
+      defaultOpen={defaultVisible}
       onOpenChange={(next) => defaultChanges.push(next)}
       menu={{ items: [{ key: 'default', label: 'Default action' }] }}
-    ><Button>Default Dropdown trigger</Button></Dropdown>{/if}
+    ><Button>Default Dropdown trigger</Button></Dropdown>
+      <button type="button" onclick={() => defaultRevision++}>Refresh default Dropdown props</button>
+      <label><input type="checkbox" bind:checked={defaultVisible} /> Default Dropdown initial visibility</label>
+      <button type="button" onclick={() => {
+        defaultControlled = true;
+        defaultOwner = false;
+      }}>Hide default Dropdown externally</button>
+      <button type="button" onclick={() => defaultOwner = undefined}>Release default Dropdown owner</button>
+    {/if}
   </ConfigProvider>
   <span id="dropdown-owner-help">Owner menu help.</span>
   <span id="dropdown-owner-controls">Owner control.</span>

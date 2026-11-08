@@ -50,6 +50,8 @@ export interface BreadcrumbProps<
   HTMLAttributes<HTMLElement>,
   'children' | 'class' | 'style'
 > {
+  /** Локальный CSS prefix; empty/undefined наследуют ConfigProvider.prefixCls. */
+  prefixCls?: string;
   items?: readonly BreadcrumbItem[];
   params?: Params;
   separator?: BreadcrumbContent;

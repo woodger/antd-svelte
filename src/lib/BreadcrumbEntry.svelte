@@ -7,7 +7,17 @@
   import type { BreadcrumbContent, BreadcrumbProps, BreadcrumbSlots } from './breadcrumb.types';
   import type { DropdownMenuProps } from './dropdown.types';
 
-  let { entry, params, routes, itemRender, dropdownIcon, classes, styles }: {
+  let {
+    prefixCls = 'ant-breadcrumb',
+    entry,
+    params,
+    routes,
+    itemRender,
+    dropdownIcon,
+    classes,
+    styles
+  }: {
+    prefixCls?: string;
     entry: ReturnType<typeof breadcrumbEntries>[number];
     params: Params;
     routes: readonly import('./breadcrumb.types').BreadcrumbItem[];
@@ -39,16 +49,16 @@
   button { appearance: none; margin-block: 0; border: 0; color: inherit; background: transparent; font: inherit; cursor: pointer; }
   button:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
   /* Обёртка Svelte Dropdown сохраняет базовую линию соседних пунктов. */
-  .ant-breadcrumb-item > :global(.ant-dropdown-trigger) { vertical-align: baseline; }
+  [data-ant-breadcrumb-item] > :global(.breadcrumb-dropdown-trigger) { vertical-align: baseline; }
   .breadcrumb-arrow { display: inline-flex; margin-inline-start: var(--ant-margin-xxs); font-size: var(--ant-font-size-icon); }
   /* В upstream текст ссылки и стрелка наследуют цвет от разных элементов. */
-  :global(.ant-breadcrumb-source-theme) a.ant-breadcrumb-overlay-link { color: inherit; }
-  :global(.ant-breadcrumb-source-theme) a.ant-breadcrumb-overlay-link > .breadcrumb-overlay-title { color: var(--ant-breadcrumb-link-color); display: inline-block; box-sizing: border-box; height: var(--ant-font-height); padding: 0 var(--ant-padding-xxs); margin-inline: calc(var(--ant-margin-xxs) * -1); }
-  :global(.ant-breadcrumb-source-theme) a.ant-breadcrumb-overlay-link:hover, :global(.ant-breadcrumb-source-theme) a.ant-breadcrumb-overlay-link:hover > .breadcrumb-overlay-title { color: var(--ant-breadcrumb-link-hover-color); }
+  :global(.ant-breadcrumb-source-theme) a[data-ant-breadcrumb-overlay] { color: inherit; }
+  :global(.ant-breadcrumb-source-theme) a[data-ant-breadcrumb-overlay] > .breadcrumb-overlay-title { color: var(--ant-breadcrumb-link-color); display: inline-block; box-sizing: border-box; height: var(--ant-font-height); padding: 0 var(--ant-padding-xxs); margin-inline: calc(var(--ant-margin-xxs) * -1); }
+  :global(.ant-breadcrumb-source-theme) a[data-ant-breadcrumb-overlay]:hover, :global(.ant-breadcrumb-source-theme) a[data-ant-breadcrumb-overlay]:hover > .breadcrumb-overlay-title { color: var(--ant-breadcrumb-link-hover-color); }
   :global(.ant-breadcrumb-source-theme) .breadcrumb-arrow { vertical-align: -0.125em; }
   .breadcrumb-overlay-title > :global(svg) { display: inline-block; vertical-align: middle; margin-block-end: 0.2em; }
   .breadcrumb-overlay-title > :global(.anticon + span), .breadcrumb-overlay-title > :global(.anticon + a), .breadcrumb-overlay-title > :global(svg + span), .breadcrumb-overlay-title > :global(svg + a) { margin-inline-start: var(--ant-margin-xxs); }
-  :global(.ant-breadcrumb-source-theme) :is(a, button).ant-breadcrumb-overlay-link > :global(svg) { display: inline; vertical-align: baseline; margin-block-end: 0; }
+  :global(.ant-breadcrumb-source-theme) :is(a, button)[data-ant-breadcrumb-overlay] > :global(svg) { display: inline; vertical-align: baseline; margin-block-end: 0; }
 </style>
 
 {#snippet value(node: BreadcrumbContent | undefined)}
@@ -60,7 +70,7 @@
 {/snippet}
 {#snippet link(overlay: boolean)}
   {#if itemRender}
-    {#if overlay}<span class="ant-breadcrumb-overlay-link" tabindex="-1"
+    {#if overlay}<span class={`${prefixCls}-overlay-link`} data-ant-breadcrumb-overlay tabindex="-1"
       onfocus={event => {
         // Dropdown возвращает фокус overlay span; Tab должен вести прямо в native itemRender.
         focusPopover(event.currentTarget);
@@ -68,18 +78,19 @@
     {:else}{@render itemRender(entry.item, params, routes, entry.paths)}{/if}
   {:else if entry.href !== undefined}
     <a {...attributes} href={entry.href} class={[
-        'ant-breadcrumb-link',
-        overlay && 'ant-breadcrumb-overlay-link',
+        `${prefixCls}-link`,
+        overlay && `${prefixCls}-overlay-link`,
         entry.item.class
-      ]} onclick={entry.item.onClick}>{#if overlay}<span class="breadcrumb-overlay-title">{@render value(entry.title)}</span>{@render arrow()}{:else}{@render value(entry.title)}{/if}</a>
+      ]} data-ant-breadcrumb-overlay={overlay || undefined} onclick={entry.item.onClick}>{#if overlay}<span class="breadcrumb-overlay-title">{@render value(entry.title)}</span>{@render arrow()}{:else}{@render value(entry.title)}{/if}</a>
   {:else if overlay || entry.item.onClick}
     <button {...attributes} type="button" class={[
-        'ant-breadcrumb-link',
-        overlay && 'ant-breadcrumb-overlay-link',
+        `${prefixCls}-link`,
+        overlay && `${prefixCls}-overlay-link`,
         entry.item.class
-      ]} onclick={entry.item.onClick}>{#if overlay}<span class="breadcrumb-overlay-title">{@render value(entry.title)}</span>{@render arrow()}{:else}{@render value(entry.title)}{/if}</button>
-  {:else}<span {...attributes} class={['ant-breadcrumb-link', entry.item.class]}>{@render value(entry.title)}</span>{/if}
+      ]} data-ant-breadcrumb-overlay={overlay || undefined} onclick={entry.item.onClick}>{#if overlay}<span class="breadcrumb-overlay-title">{@render value(entry.title)}</span>{@render arrow()}{:else}{@render value(entry.title)}{/if}</button>
+  {:else}<span {...attributes} class={[`${prefixCls}-link`, entry.item.class]}>{@render value(entry.title)}</span>{/if}
 {/snippet}
-<li class={['ant-breadcrumb-item', classes.item]} style={styles.item}>
-  {#if entry.item.menu}<Dropdown placement="bottom" {...entry.item.dropdownProps} {menu}>{@render link(true)}</Dropdown>{:else}{@render link(false)}{/if}
+<li class={[`${prefixCls}-item`, classes.item]} style={styles.item} data-ant-breadcrumb-item>
+  {#if entry.item.menu}<Dropdown placement="bottom" {...entry.item.dropdownProps} {menu}
+    class={['breadcrumb-dropdown-trigger', entry.item.dropdownProps?.class].filter(Boolean).join(' ')}>{@render link(true)}</Dropdown>{:else}{@render link(false)}{/if}
 </li>

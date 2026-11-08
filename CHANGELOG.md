@@ -9,6 +9,10 @@
 
 ### Added
 
+- Breadcrumb поддерживает local/shared prefixCls, включая разделители и меню
+  пункта. Source потеря separator margins при local prefix записана raw/matched
+  замерами. DOM, focus, baseline, link decorations и navigation сохранены.
+
 - Space, SpaceCompact и SpaceAddon поддерживают local/shared prefixCls. Badge
   selector и служебные Addon variables используют общий prefix независимо от
   local layout classes. Source shared-class cache observation сохранён отдельно;
@@ -1250,6 +1254,10 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Dropdown сохраняет неконтролируемое open/closed состояние и focus при обновлении
+  spread props. DefaultOpen остаётся initial-only; снятие внешнего open сохраняет
+  прежний fallback, binding и callbacks.
 
 - Responsive overflow Select/Cascader измеряет собственные tags/rest/input.
   Input внутри maxTagPlaceholder больше не скрывает все выбранные tags.

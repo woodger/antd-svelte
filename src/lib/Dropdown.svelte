@@ -28,6 +28,7 @@
     children,
     menu,
     open = $bindable<boolean | undefined>(),
+    open: providedOpen,
     defaultOpen = false,
     onOpenChange,
     trigger = ['hover'],
@@ -52,6 +53,10 @@
   const menuId = `ant-dropdown-${generatedId}-menu`;
   const triggerId = `ant-dropdown-${generatedId}-trigger`;
   const initialDefault = untrack(() => defaultOpen);
+  let internalOpen = $state(initialDefault);
+  let previousOwnerOpen = untrack(() => providedOpen);
+  // Spread update может вернуть omitted open в undefined; собственное состояние сохраняется отдельно.
+  let isOpen = $derived(providedOpen === undefined ? internalOpen : open ?? initialDefault);
   let host = $state<HTMLSpanElement>();
   let anchor = $state<Element>();
   let popup = $state<HTMLDivElement>();
@@ -75,7 +80,7 @@
   let items = $derived(normalizeDropdownItems(menu?.items ?? []));
   let resolvedKey = $derived(getDropdownActiveKey(items, activeKey));
   let resolvedDisabled = $derived(disabled ?? form?.disabled ?? config.componentDisabled);
-  let visible = $derived(!resolvedDisabled && (open ?? initialDefault));
+  let visible = $derived(!resolvedDisabled && isOpen);
   const portal = createPopupContainer(() => ({
     open: visible,
     reference: anchor,
@@ -96,6 +101,14 @@
       ? 'Left'
       : align === 'right' ? 'Right' : ''}` as DropdownPlacement
   );
+
+  $effect.pre(() => {
+    const next = providedOpen;
+
+    // Сохраняем прежний fallback defaultOpen при снятии внешнего управления.
+    if (next === undefined && previousOwnerOpen !== undefined) internalOpen = initialDefault;
+    previousOwnerOpen = next;
+  });
 
   $effect(() => {
     const element = host;
@@ -225,7 +238,7 @@
   function request(next: boolean, delay = 0, notify = true) {
     cancelPending();
     const source = anchor;
-    const ownerValue = open;
+    const ownerValue = isOpen;
 
     function apply() {
       pending = undefined;
@@ -236,11 +249,12 @@
         || !source?.isConnected
         || source !== anchor
         || !Object.is(
-          open,
+          isOpen,
           ownerValue
         )) return;
 
-      if (next !== (open ?? initialDefault)) {
+      if (next !== isOpen) {
+        internalOpen = next;
         open = next;
         if (notify)
           onOpenChange?.(next);

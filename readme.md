@@ -1254,7 +1254,24 @@ Popup использует собственные Dropdown/Menu scopes. Обно
 `?fixture=breadcrumb-theme` и `?fixture=breadcrumb-config`.
 Unit/SSR/Chromium покрывают маршруты, параметры, разделители, шаблон, стили,
 меню, отмену перехода и production hydration. Рецепт breadcrumb извлекает 21
-правило без keyframes. PrefixCls и полный Menu API остаются в полном объёме миграции.
+правило без keyframes. Полный Menu API остаётся в полном объёме миграции.
+
+PrefixCls задаёт root/item/link/overlay/separator classes; empty/undefined
+наследуют ConfigProvider.prefixCls (по умолчанию ant-breadcrumb), local prefix
+имеет приоритет. Semantic callbacks получают исходное локальное значение.
+Смена prefix сохраняет DOM ссылок и открытого меню, focus, callbacks и navigation.
+Canonical theme marker, Native Dropdown wrapper/baseline и link decoration states
+сохранены; настройки Dropdown/Menu принадлежат своим семействам.
+CSS-рецепт breadcrumb-prefix воспроизводит те же 21 правило как module template.
+
+В 6.6.8 BreadcrumbSeparator игнорирует local owner prefix: при prefixCls="trail"
+в provider prefixCls="suite" его class остаётся suite-breadcrumb-separator,
+боковые margins становятся 0px вместо 8px. Native передаёт owner prefix и
+разделителям. [Эталон](./tests/browser/fixtures/ant-design-breadcrumb-prefix-reference.json)
+сохраняет raw classes/geometry и matchedSeparators: публичный classNames.separator
+добавляет Source нужный owner class, без изменения UMD. Проверки:
+[browser](./tests/browser/breadcrumb-prefix.spec.ts),
+[SSR](./tests/package/breadcrumb-prefix.ssr.test.ts), `?fixture=breadcrumb-prefix`.
 
 Raw reference сохраняет полный textContent исходника. Сверка текста использует
 видимые trigger/separator fragments: закрытый native Dropdown сохраняется в DOM,
@@ -2887,6 +2904,10 @@ Space активируют его; preventDefault в callbacks отменяет 
 и закрытие меню. Без href сохраняется прежняя нативная кнопка команды.
 
 Open поддерживает bind:open; defaultOpen читается при создании компонента.
+Без внешнего open состояние хранится отдельно от входных props: обновление
+spread-объекта сохраняет открытое/закрытое меню, DOM команд и focus, без callbacks.
+Изменение defaultOpen после mount не сбрасывает состояние. При снятии внешнего
+open сохраняется прежний fallback к начальному defaultOpen.
 `onOpenChange(boolean)` сообщает запросы видимости от trigger, hover, Escape,
 Tab и клика снаружи. Изменение open владельцем и закрытие из-за disabled
 не вызывают callback. В существующем Svelte API выбор команды закрывает меню и обновляет
@@ -9962,7 +9983,7 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon. Остальные семейства подключаются отдельно. Например,
+Space/SpaceCompact/SpaceAddon и Breadcrumb. Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 
