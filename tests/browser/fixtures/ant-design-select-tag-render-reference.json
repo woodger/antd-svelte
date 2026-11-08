@@ -1,0 +1,613 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "interaction": "Playwright fill/press/outside click"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "ordinary",
+        "values": [
+          "a",
+          0
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          0
+        ],
+        "events": [],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Alpha"
+          },
+          {
+            "value": 0,
+            "index": 1,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Zero"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled-option",
+        "values": [
+          "a",
+          "locked"
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "locked"
+        ],
+        "events": [],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "index": 1,
+            "disabled": true,
+            "closable": false,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Locked"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled-component",
+        "values": [
+          "a",
+          0
+        ],
+        "disabled": true
+      },
+      "result": {
+        "values": [
+          "a",
+          0
+        ],
+        "events": [],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": false,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Alpha"
+          },
+          {
+            "value": 0,
+            "index": 1,
+            "closable": false,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Zero"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "numeric-rest",
+        "values": [
+          "a",
+          "locked",
+          0,
+          "missing"
+        ],
+        "count": 1
+      },
+      "result": {
+        "values": [
+          "a",
+          "locked",
+          0,
+          "missing"
+        ],
+        "events": [],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Alpha"
+          },
+          {
+            "disabled": false,
+            "closable": false,
+            "isMaxTag": true,
+            "onCloseType": "undefined",
+            "label": "+ 3 ..."
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "zero-rest",
+        "values": [
+          "a",
+          0
+        ],
+        "count": 0
+      },
+      "result": {
+        "values": [
+          "a",
+          0
+        ],
+        "events": [],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "disabled": false,
+            "closable": false,
+            "isMaxTag": true,
+            "onCloseType": "undefined",
+            "label": "+ 2 ..."
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "truncated",
+        "values": [
+          "a",
+          0
+        ],
+        "textLength": 2
+      },
+      "result": {
+        "values": [
+          "a",
+          0
+        ],
+        "events": [],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Al..."
+          },
+          {
+            "value": 0,
+            "index": 1,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Ze..."
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "typed-keys",
+        "mode": "tags",
+        "values": [
+          0,
+          "0"
+        ]
+      },
+      "result": {
+        "values": [
+          0,
+          "0"
+        ],
+        "events": [],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": 0,
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Zero"
+          },
+          {
+            "value": "0",
+            "index": 1,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "0"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "single-ignore",
+        "mode": "single",
+        "values": [
+          "a"
+        ]
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": []
+      }
+    },
+    {
+      "sample": {
+        "id": "click-tag",
+        "values": [
+          "a"
+        ],
+        "clicks": 1
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "open",
+            "open": true
+          }
+        ],
+        "query": "",
+        "open": true,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Alpha"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "toggle-tag",
+        "values": [
+          "a"
+        ],
+        "clicks": 2
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "open",
+            "open": true
+          },
+          {
+            "type": "open",
+            "open": false
+          }
+        ],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Alpha"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled-click",
+        "values": [
+          "a"
+        ],
+        "disabled": true,
+        "clicks": 1
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "open",
+            "open": true
+          }
+        ],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": false,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Alpha"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "close-unfocused",
+        "values": [
+          "a",
+          0
+        ],
+        "close": "string:a"
+      },
+      "result": {
+        "values": [
+          0
+        ],
+        "events": [
+          {
+            "type": "open",
+            "open": true
+          },
+          {
+            "type": "close",
+            "value": "a"
+          },
+          {
+            "type": "change",
+            "values": [
+              0
+            ]
+          }
+        ],
+        "query": "",
+        "open": true,
+        "focus": false,
+        "tags": [
+          {
+            "value": 0,
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Zero"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "close-focused",
+        "values": [
+          "a",
+          0
+        ],
+        "focus": true,
+        "close": "string:a"
+      },
+      "result": {
+        "values": [
+          0
+        ],
+        "events": [
+          {
+            "type": "open",
+            "open": true
+          },
+          {
+            "type": "close",
+            "value": "a"
+          },
+          {
+            "type": "change",
+            "values": [
+              0
+            ]
+          }
+        ],
+        "query": "",
+        "open": true,
+        "focus": true,
+        "tags": [
+          {
+            "value": 0,
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Zero"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "close-stop-down",
+        "values": [
+          "a",
+          0
+        ],
+        "stopClose": true,
+        "close": "string:a"
+      },
+      "result": {
+        "values": [
+          0
+        ],
+        "events": [
+          {
+            "type": "close",
+            "value": "a"
+          },
+          {
+            "type": "change",
+            "values": [
+              0
+            ]
+          }
+        ],
+        "query": "",
+        "open": false,
+        "focus": false,
+        "tags": [
+          {
+            "value": 0,
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Zero"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "free-tag",
+        "mode": "tags",
+        "values": [],
+        "text": "created",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "created"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "created"
+          },
+          {
+            "type": "open",
+            "open": true
+          },
+          {
+            "type": "change",
+            "values": [
+              "created"
+            ]
+          }
+        ],
+        "query": "",
+        "open": true,
+        "focus": true,
+        "tags": [
+          {
+            "value": "created",
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "created"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "close-number",
+        "values": [
+          0,
+          "a"
+        ],
+        "close": "number:0"
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "open",
+            "open": true
+          },
+          {
+            "type": "close",
+            "value": 0
+          },
+          {
+            "type": "change",
+            "values": [
+              "a"
+            ]
+          }
+        ],
+        "query": "",
+        "open": true,
+        "focus": false,
+        "tags": [
+          {
+            "value": "a",
+            "index": 0,
+            "closable": true,
+            "isMaxTag": false,
+            "onCloseType": "function",
+            "label": "Alpha"
+          }
+        ]
+      }
+    }
+  ]
+}

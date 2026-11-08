@@ -7682,7 +7682,13 @@
         "tests/package/select-optional-options.ssr.test.ts",
         "tests/browser/select-overflow-owner.spec.ts",
         "tests/browser/fixtures/CascaderOverflowOwnerFixtures.svelte",
-        "tests/browser/fixtures/ant-design-select-owned-overflow-reference.json"
+        "tests/browser/fixtures/ant-design-select-owned-overflow-reference.json",
+        "tests/browser/select-tag-render.spec.ts",
+        "tests/browser/fixtures/SelectTagRenderCase.svelte",
+        "tests/browser/fixtures/SelectTagRenderFixtures.svelte",
+        "tests/browser/fixtures/select-tag-render-cases.ts",
+        "tests/browser/fixtures/ant-design-select-tag-render-reference.json",
+        "tests/package/select-tag-render.ssr.test.ts"
       ],
       "features": [
         {
@@ -7990,6 +7996,24 @@
           "note": "Select допускает omitted/undefined options, как Ant Design 6.6.8 и rc-select 1.10.1. Native empty-list defaults сохраняют single numeric zero, readonly multiple/tags defaults и SSR поля. Free-text tags не требуют массива; добавление и повторное удаление remote options сохраняет selected label cache. Forms/required/reset/RTL/disabled не меняются, groups/fieldNames остаются отдельными gaps."
         },
         {
+          "id": "tag-render",
+          "title": "Пользовательский tagRender Snippet",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte",
+            "src/lib/index.ts",
+            "tests/browser/select-tag-render.spec.ts",
+            "tests/browser/fixtures/SelectTagRenderCase.svelte",
+            "tests/browser/fixtures/SelectTagRenderFixtures.svelte",
+            "tests/browser/fixtures/select-tag-render-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tag-render-reference.json",
+            "tests/package/select-tag-render.ssr.test.ts"
+          ],
+          "note": "Mode multiple/tags: label Snippet после maxTagTextLength, typed value/index/option disabled/closable/onClose для обычного тега; summary isMaxTag=true с disabled=false, closable=false и без value/index/onClose. Source mousedown toggle, close/open/change order и focus сохраняются; single игнорирует renderer и сохраняет Native label в input вместо Source overlay span. Проверены Svelte Tag composition, numeric/rest и responsive slots, reactive renderer без потери input/query/values, SSR/native fields. Custom CSS/a11y принадлежат renderer. Disabled Native не отправляет Source ложный open request."
+        },
+        {
           "id": "extended-api",
           "title": "LabelInValue, fieldNames/groups, render/semantic/config и остальные Source API",
           "state": "missing",
@@ -8114,6 +8138,24 @@
             "tests/package/select-responsive.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1, rc-select study 1.10.1 и rc-overflow study 1.0.0. Long-rest-400/snippet-rest-400 скрывают все selected tags при сумме measured widths + input меньше available. Raw corpus сохраняет source tags/rest и независимые widths. Native сначала проверяет полный список, затем резервирует rest только при недостатке места. Shared Native measurement применяется в Select и Cascader; snapshot corpus снят для Select."
+        },
+        {
+          "id": "native-disabled-custom-tag-open",
+          "title": "Запрет onOpenChange при клике disabled custom tag",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte",
+            "src/lib/index.ts",
+            "tests/browser/select-tag-render.spec.ts",
+            "tests/browser/fixtures/SelectTagRenderCase.svelte",
+            "tests/browser/fixtures/SelectTagRenderFixtures.svelte",
+            "tests/browser/fixtures/select-tag-render-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tag-render-reference.json",
+            "tests/package/select-tag-render.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: official UMD Ant Design 6.6.8 / React 18.3.1 / rc-select 1.10.1. Custom tagRender, disabled=true, mousedown label: onOpenChange(true) отправляется, но popup остаётся закрыт. Raw disabled-click сохраняет callback. Native сохраняет прежний disabled контракт: popup закрыт, open callback не отправляется."
         }
       ]
     },

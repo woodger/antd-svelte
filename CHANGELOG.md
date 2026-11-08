@@ -9,6 +9,11 @@
 
 ### Added
 
+- Select поддерживает tagRender Snippet с normal/rest metadata, typed values,
+  label Snippet и onClose. Сохранены custom mousedown/close event order, focus,
+  native Tag composition, смена renderer и responsive overflow. Source disabled
+  запрос открытия не воспроизводится; raw observation сохранён.
+
 - Select разрешает опускать options, как текущий upstream. Пустой список по
   умолчанию сохраняет single/multiple defaults, свободные tags, remote cache и native формы.
 

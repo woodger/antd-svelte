@@ -1,5 +1,5 @@
 <script lang="ts" generics="Value extends string | number = string, Mode extends 'multiple' | 'tags' | undefined = undefined">
-  import { tick, untrack } from 'svelte';
+  import { tick, untrack, type Snippet } from 'svelte';
   import { useConfig } from './config-context';
   import { useVariant } from './variant.svelte';
   import RenderEmpty from './RenderEmpty.svelte';
@@ -20,7 +20,12 @@
     sortSelectOptions
   } from './select.engine';
   import { ruRU, type SelectOption } from './types';
-  import type { SelectProps, SelectSearchConfig, SelectTagPlaceholder } from './select.types';
+  import type {
+    SelectProps,
+    SelectSearchConfig,
+    SelectTagPlaceholder,
+    SelectTagInfo
+  } from './select.types';
   import { getSelectTagOptions } from './select-tags.engine';
   import { getSelectTagText } from './select-tag-text.engine';
   import { getSelectTagOverflow } from './select-tag-overflow.engine';
@@ -39,6 +44,7 @@
     maxTagTextLength,
     maxTagCount,
     maxTagPlaceholder,
+    tagRender,
     defaultValue,
     value = $bindable<SelectProps<Value, Mode>['value']>(),
     size,
@@ -149,6 +155,7 @@
   let renderedTags = $derived(responsiveTags ? tags : tagOverflow.visible);
   let visibleTagKeys = $derived(new Set(tagOverflow.visible.map(tag => tag.value)));
   let tagPlaceholder = $derived(maxTagPlaceholder as SelectTagPlaceholder<RawValue> | undefined);
+  let renderTag = $derived(tagRender as Snippet<[SelectTagInfo<RawValue>]> | undefined);
   let tagPlaceholderTitle = $derived(tagPlaceholder == null
     ? `+ ${tagOverflow.omitted.length} ...`
     : typeof tagPlaceholder === 'string' || typeof tagPlaceholder === 'number'
@@ -191,6 +198,7 @@
     void tags;
     void maxTagTextLength;
     void tagPlaceholder;
+    void renderTag;
     void search;
     const host = contentElement;
     let disposed = false;
@@ -360,14 +368,20 @@
     control?.focus();
   }
 
-  function remove(item: RawValue) {
+  function remove(item: RawValue, focus = true) {
     if (resolvedDisabled || selectionOptions.get(item)?.disabled) return;
 
     const next = new Set(selectedValues);
 
     if (next.delete(item))
       changeMultiple([...next]);
-    control?.focus();
+    if (focus) control?.focus();
+  }
+
+  function handleCustomTagMouseDown(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    setOpen(!expanded);
   }
 
   function connectTagElement(node: HTMLElement, value: RawValue) {
@@ -624,6 +638,7 @@
     event: PointerEvent & { currentTarget: EventTarget & HTMLDivElement; }
   ) {
     const target = event.target;
+    if (renderTag && target instanceof Element && target.closest('[data-select-custom-tag]')) return;
 
     if (multiple
       && target instanceof Element
@@ -694,6 +709,7 @@
   .ant-select.ant-select-multiple .ant-select-input { flex: 1 1 60px; width: 60px; min-width: 40px; max-width: 100%; }
   .ant-select.ant-select-responsive-tags .ant-select-input { flex: none; width: 4px; min-width: 4px; }
   .measure-tag { position: absolute; inset-block-start: 0; inset-inline-start: 0; visibility: hidden; pointer-events: none; }
+  .custom-tag { display: inline-flex; flex: none; min-width: 0; max-width: 100%; }
   .ant-select.ant-select-source-theme.ant-select-multiple .ant-select-input { line-height: calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-select-multi-item-height)); }
   .ant-select.ant-select-multiple .ant-select-selection-item { flex: none; box-sizing: border-box; max-width: calc(100% - var(--ant-select-internal_fixed_item_margin) * 2); min-width: 0; }
   .ant-select-selection-item-remove { flex: none; padding: 0; border: 0; background: transparent; }
@@ -746,32 +762,51 @@
     <div class="ant-select-content" bind:this={contentElement}>
       {#if intrinsicWidth}<span class="intrinsic-label" aria-hidden="true">{selected?.label ?? placeholder ?? ''}</span>{/if}
       {#if multiple}
-        {#each renderedTags as tag (tag.value)}
+        {#each renderedTags as tag, index (tag.value)}
           {@const hidden = responsiveTags && !visibleTagKeys.has(tag.value)}
+          {#snippet tagLabel()}{getSelectTagText(tag.label, maxTagTextLength)}{/snippet}
           <span class={[
-              'ant-select-selection-item',
+              renderTag ? 'custom-tag' : 'ant-select-selection-item',
               hidden && 'measure-tag',
-              (resolvedDisabled || tag.disabled) && 'ant-select-selection-item-disabled'
-            ]} title={tag.label} data-select-tag={responsiveTags || undefined}
+              !renderTag && (resolvedDisabled || tag.disabled) && 'ant-select-selection-item-disabled'
+            ]} title={renderTag ? undefined : tag.label} data-select-tag={responsiveTags || undefined}
+            data-select-custom-tag={renderTag ? '' : undefined}
+            role="presentation" onmousedown={renderTag ? handleCustomTagMouseDown : undefined}
             aria-hidden={hidden || undefined} inert={hidden}
             {@attach node => connectTagElement(node, tag.value)}>
-            <span class="ant-select-selection-item-content">{getSelectTagText(
-              tag.label, maxTagTextLength
-            )}</span>
-            {#if !resolvedDisabled && !tag.disabled}<button type="button" class="ant-select-selection-item-remove" aria-label={`${config.locale.removeText
+            {#if renderTag}
+              {@render renderTag({
+                label: tagLabel, value: tag.value, index, disabled: tag.disabled,
+                closable: !resolvedDisabled && !tag.disabled, isMaxTag: false,
+                onClose: event => {
+                  event?.stopPropagation();
+                  remove(tag.value, false);
+                }
+              })}
+            {:else}
+              <span class="ant-select-selection-item-content">{@render tagLabel()}</span>
+              {#if !resolvedDisabled && !tag.disabled}<button type="button" class="ant-select-selection-item-remove" aria-label={`${config.locale.removeText
                 ?? ruRU.removeText} ${tag.label}`} onpointerdown={(event) => event.preventDefault()} onclick={() => remove(tag.value)}><Icon name="close" /></button>{/if}
+            {/if}
           </span>
         {/each}
         {#if tagOverflow.omitted.length || responsiveTags && tags.length}
-          <span class={['ant-select-selection-item ant-select-selection-overflow-item-rest',
+          {#snippet restLabel()}
+            {#if typeof tagPlaceholder === 'function'}{@render tagPlaceholder(tagOverflow.omitted)}
+            {:else if tagPlaceholder == null}+ {tagOverflow.omitted.length} ...
+            {:else if typeof tagPlaceholder !== 'boolean'}{tagPlaceholder}{/if}
+          {/snippet}
+          <span class={['ant-select-selection-overflow-item-rest',
+              renderTag ? 'custom-tag' : 'ant-select-selection-item',
               !tagOverflow.omitted.length && 'measure-tag']}
-            title={tagPlaceholderTitle} data-select-rest={responsiveTags || undefined}
+            title={renderTag ? undefined : tagPlaceholderTitle}
+            data-select-rest={responsiveTags || undefined}
+            data-select-custom-tag={renderTag ? '' : undefined}
+            role="presentation" onmousedown={renderTag ? handleCustomTagMouseDown : undefined}
             aria-hidden={!tagOverflow.omitted.length || undefined} inert={!tagOverflow.omitted.length}>
-            <span class="ant-select-selection-item-content">
-              {#if typeof tagPlaceholder === 'function'}{@render tagPlaceholder(tagOverflow.omitted)}
-              {:else if tagPlaceholder == null}+ {tagOverflow.omitted.length} ...
-              {:else if typeof tagPlaceholder !== 'boolean'}{tagPlaceholder}{/if}
-            </span>
+            {#if renderTag}{@render renderTag({
+              label: restLabel, isMaxTag: true, disabled: false, closable: false
+            })}{:else}<span class="ant-select-selection-item-content">{@render restLabel()}</span>{/if}
           </span>
         {/if}
       {/if}

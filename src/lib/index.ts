@@ -762,7 +762,8 @@ export type {
   SelectSearchConfig,
   SelectTokenSeparators,
   SelectOmittedTag,
-  SelectTagPlaceholder
+  SelectTagPlaceholder,
+  SelectTagInfo
 } from './select.types';
 export type {
   FormProps, FormConfig, FormScrollOptions, FormRequiredMark, FormRequiredMarkInfo, FormLocale,

@@ -8406,6 +8406,42 @@ MaxTagCount="responsive" измеряет доступную ширину, tags,
 [Raw геометрия](tests/browser/fixtures/ant-design-select-responsive-tags-reference.json)
 сохраняет это исключение upstream с отдельными замерами доступной и занятой ширины.
 
+### Пользовательский рендер тегов
+
+TagRender — Svelte Snippet с SelectTagInfo. Обычный tag получает typed value,
+index, option disabled, closable и onClose(event?). Label — Snippet с уже усечённым
+текстом. Сводный tag получает isMaxTag=true, disabled=false, closable=false,
+без value/index/onClose; его label использует maxTagPlaceholder. Single игнорирует
+renderer. Исходные selected values и поля формы сохраняются.
+
+```svelte
+<script lang="ts">
+  import { Select, Tag, type SelectTagInfo } from 'antd-svelte';
+  let values = $state<string[]>(['a']);
+</script>
+
+{#snippet customTag(info: SelectTagInfo<string>)}
+  <Tag closable={info.closable} disabled={info.disabled} onClose={info.onClose}
+    onmousedown={event => {
+      event.preventDefault();
+      event.stopPropagation();
+    }}>{@render info.label()}</Tag>
+{/snippet}
+<Select mode="tags" bind:value={values} tagRender={customTag} />
+```
+
+Mousedown custom wrapper переключает popup без принудительного фокуса input;
+обработчик дочернего control может остановить его, как в примере. OnClose удаляет
+разрешённое значение, сохраняя текущий фокус; стандартные Native remove buttons
+по-прежнему возвращают фокус input. Renderer управляет собственными стилями,
+title и доступными controls. Numeric/responsive overflow и смена renderer после
+mount сохраняют поиск и DOM input.
+
+[Raw metadata/events](tests/browser/fixtures/ant-design-select-tag-render-reference.json)
+сохраняют source disabled-click, отправляющий onOpenChange(true) при закрытом popup.
+Native disabled не отправляет запрос открытия. Согласованный single label в input
+также сохраняется; React использует отдельный span.
+
 ### Ограничение выбора
 
 MaxCount задаёт максимум выбранных значений в multiple/tags; single его игнорирует.

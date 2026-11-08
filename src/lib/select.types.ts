@@ -15,6 +15,23 @@ export interface SelectOmittedTag<Value extends string | number = string> extend
 export type SelectTagPlaceholder<Value extends string | number = string> = string | number
   | boolean | null | Snippet<[SelectOmittedTag<Value>[]]>;
 
+/** Label — Snippet с итоговым текстом; summary не имеет value/index/onClose. */
+export type SelectTagInfo<Value extends string | number = string> = { label: Snippet } & ({
+  isMaxTag: false;
+  value: Value;
+  index: number;
+  disabled?: boolean;
+  closable: boolean;
+  onClose: (event?: Event) => void;
+} | {
+  isMaxTag: true;
+  value?: undefined;
+  index?: undefined;
+  disabled: false;
+  closable: false;
+  onClose?: undefined;
+});
+
 /** Настройки ConfigProvider.select; пока перенесён только variant. */
 export interface SelectConfig {
   variant?: SelectProps['variant'];
@@ -65,6 +82,8 @@ export interface SelectProps<
   maxTagCount?: number | 'responsive';
   /** Содержимое сводного тега без remove button; omitted labels остаются полными. */
   maxTagPlaceholder?: SelectTagPlaceholder<Mode extends 'tags' ? Value | string : Value>;
+  /** Рендер обычных и сводного tags в multiple/tags; single игнорирует Snippet. */
+  tagRender?: Snippet<[SelectTagInfo<Mode extends 'tags' ? Value | string : Value>]>;
   /** Bind:value; multiple сохраняет Value[], tags допускает также новые string values. */
   value?: (Mode extends 'tags' ? (Value | string)[] : Mode extends 'multiple' ? Value[] : Value)
     | undefined;

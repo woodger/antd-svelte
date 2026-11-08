@@ -19,7 +19,8 @@ describe('Select and Cascader tag text public package', () => {
       defaultValue: Object.freeze(['a']), maxTagTextLength: 1, name: 'tag-text'
     } }).body;
 
-    expect(body).toMatch(/ant-select-selection-item-content[^>]*>\s*\.\.\./);
+    expect(body.replace(/<!--.*?-->/gs, ''))
+      .toMatch(/ant-select-selection-item-content[^>]*>\s*\.\.\./);
     expect(body).toContain('title="😀tag"');
     expect(body).toContain('Удалить 😀tag');
     expect(body).toMatch(/type="hidden"[^>]*name="tag-text"[^>]*value="a"/);
