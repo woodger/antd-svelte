@@ -9,6 +9,10 @@
 
 ### Added
 
+- Select.open/defaultOpen и bind:open: controlled запросы, безопасный SSR,
+  selected active option и переходы disabled. Пустой popup скрывается для
+  null/false/пустой строки; numeric 0 сохранён, исходное исключение записано.
+
 - Select.optionRender: Snippet с исходными data, key/value/label и текущим index;
   фильтрация, сортировка, synthetic tags, maxCount и выбранные labels сохранены.
 

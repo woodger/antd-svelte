@@ -7579,6 +7579,11 @@
           "name": "@rc-component/select",
           "range": "~1.10.1",
           "referenceVersion": "1.10.1"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
         }
       ],
       "priority": "p1",
@@ -7695,7 +7700,12 @@
         "tests/browser/fixtures/SelectOptionRenderFixtures.svelte",
         "tests/browser/fixtures/ant-design-select-option-render-reference.json",
         "tests/browser/select-option-render.spec.ts",
-        "tests/package/select-option-render.ssr.test.ts"
+        "tests/package/select-option-render.ssr.test.ts",
+        "tests/browser/fixtures/SelectOpenCase.svelte",
+        "tests/browser/fixtures/SelectOpenFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-open-reference.json",
+        "tests/browser/select-open.spec.ts",
+        "tests/package/select-open.ssr.test.ts"
       ],
       "features": [
         {
@@ -8039,6 +8049,38 @@
           "note": "Пассивный Snippet получает FlattenOption metadata и info.index после filter/sort: key/value/label, data той же identity и groupOption=false. Source key=option.key??value сохраняет 0/empty string; extras доступны как unknown. Limit-disabled UI не подменяет raw data/disabled; synthetic и missing selected tags получают собственные временные records. Default/empty/alternate renderers, single/multiple/tags, selected labels, native buttons, FormData/reset/keyboard/focus и live renderer replacement сохранены. Closed SSR не вызывает Snippet. Raw 16 UMD cases pinned to rc-select study 1.10.1. Native DOM остаётся keyed by value; option.key добавлен как metadata. Группы/fieldNames, full option attrs и semantic/render API остаются отдельными gaps."
         },
         {
+          "id": "popup-visibility",
+          "title": "Open/defaultOpen, controlled requests и bind:open",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Select.svelte",
+            "src/lib/select.types.ts",
+            "tests/browser/fixtures/SelectOpenCase.svelte",
+            "tests/browser/fixtures/SelectOpenFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-open-reference.json",
+            "tests/browser/select-open.spec.ts",
+            "tests/package/select-open.ssr.test.ts"
+          ],
+          "note": "DefaultOpen initial snapshot; explicit open follows owner, onOpenChange request can be rejected or accepted by callback/bind. External/default transitions do not notify or steal focus; controlled handoff to undefined closes. Native preserves input identity, selected values, focus and existing ArrowUp last-option behavior. External single close clears internal search; controlled query remains owned. Disabled clears uncontrolled raw state silently; controlled true can reopen after enable. Null/false/empty-string notFoundContent hides empty popup without discarding raw query/open; zero and arrays remain content. SSR always closed, lazy renderer/getter; client hydrates actual open. Native reset closes bind:open without callbacks. Source 25 client/ReactDOMServer cases, rc-select 1.10.1 useOpen and util 1.14.0 useControlledState studied."
+        },
+        {
+          "id": "native-empty-zero-and-close",
+          "title": "Видимый numeric empty content и Native немедленное закрытие",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Select.svelte",
+            "src/lib/select.types.ts",
+            "tests/browser/fixtures/SelectOpenCase.svelte",
+            "tests/browser/fixtures/SelectOpenFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-open-reference.json",
+            "tests/browser/select-open.spec.ts",
+            "tests/package/select-open.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: raw UMD 6.6.8 скрывает пустой dropdown при notFoundContent=0, хотя [0] отображается; Source useOpen проверяет falsy content. Native сохраняет число 0 и общий RenderEmptyContent. Null/false/empty string следуют source hiding. React закрывает через MessageChannel и временно lock-ит options; прежнее Native немедленное закрытие и удаление списка сохранены, без переноса искусственной задержки."
+        },
+        {
           "id": "extended-api",
           "title": "LabelInValue, fieldNames/groups, render/semantic/config и остальные Source API",
           "state": "missing",
@@ -8047,7 +8089,7 @@
             "src/lib/select.types.ts",
             "src/lib/Select.svelte"
           ],
-          "note": "Полный source API остаётся в работе: fieldNames/groups, labelInValue, searchIcon, остальные renderers, полный callback/ref/open/semantic/config/prefix/motion API и option attrs. OptionRender для плоских данных перенесён. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
+          "note": "Полный source API остаётся в работе: fieldNames/groups, labelInValue, searchIcon, остальные renderers, полный callback/ref/semantic/config/prefix/motion API и option attrs. OptionRender для плоских данных и open/defaultOpen перенесены. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
         },
         {
           "id": "native-whitespace-tag",

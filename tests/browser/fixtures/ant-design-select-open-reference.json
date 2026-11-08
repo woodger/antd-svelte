@@ -1,0 +1,658 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1 and ReactDOMServer",
+    "rcSelectStudyVersion": "1.10.1",
+    "rcUtilStudyVersion": "1.14.0"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "absent",
+        "mode": "single"
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-false",
+        "mode": "single",
+        "defaultOpen": false
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "single-default-open",
+        "mode": "single",
+        "defaultOpen": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "multiple-default-open",
+        "mode": "multiple",
+        "defaultOpen": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "tags-default-open",
+        "mode": "tags",
+        "defaultOpen": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-selected",
+        "mode": "single",
+        "defaultOpen": true,
+        "values": [
+          "g"
+        ]
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Gamma",
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-empty",
+        "mode": "single",
+        "defaultOpen": true,
+        "empty": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-hidden-empty",
+        "mode": "single",
+        "defaultOpen": true,
+        "empty": true,
+        "noContent": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-zero-empty",
+        "mode": "single",
+        "defaultOpen": true,
+        "empty": true,
+        "emptyText": 0
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-string-empty",
+        "mode": "single",
+        "defaultOpen": true,
+        "empty": true,
+        "emptyText": ""
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-false-empty",
+        "mode": "single",
+        "defaultOpen": true,
+        "empty": true,
+        "emptyText": false
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-array-zero",
+        "mode": "single",
+        "defaultOpen": true,
+        "empty": true,
+        "emptyText": [
+          0
+        ]
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-array-empty",
+        "mode": "single",
+        "defaultOpen": true,
+        "empty": true,
+        "emptyText": []
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "default-disabled",
+        "mode": "single",
+        "defaultOpen": true,
+        "disabled": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "change-default",
+        "mode": "single",
+        "defaultOpen": false,
+        "update": {
+          "defaultOpen": true
+        }
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "false",
+            "popup": false,
+            "activeLabel": null,
+            "focused": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "clear-default",
+        "mode": "single",
+        "defaultOpen": true,
+        "update": {
+          "defaultOpen": false
+        }
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "true",
+            "popup": true,
+            "activeLabel": "Alpha",
+            "focused": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "disable-default",
+        "mode": "single",
+        "defaultOpen": true,
+        "update": {
+          "disabled": true
+        },
+        "thenEnable": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "false",
+            "popup": false,
+            "activeLabel": null,
+            "focused": false,
+            "events": []
+          }
+        },
+        {
+          "phase": "enable",
+          "result": {
+            "expanded": "false",
+            "popup": false,
+            "activeLabel": null,
+            "focused": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-open",
+        "mode": "single",
+        "open": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "controlled-closed",
+        "mode": "single",
+        "open": false,
+        "defaultOpen": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": []
+    },
+    {
+      "sample": {
+        "id": "controlled-reject-open",
+        "mode": "single",
+        "open": false,
+        "action": "click"
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "false",
+            "popup": false,
+            "activeLabel": null,
+            "focused": true,
+            "events": [
+              true
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-reject-close",
+        "mode": "single",
+        "open": true,
+        "action": "escape"
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "true",
+            "popup": true,
+            "activeLabel": "Alpha",
+            "focused": true,
+            "events": [
+              false
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-disable",
+        "mode": "single",
+        "open": true,
+        "update": {
+          "disabled": true
+        },
+        "thenEnable": true
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "false",
+            "popup": false,
+            "activeLabel": null,
+            "focused": false,
+            "events": []
+          }
+        },
+        {
+          "phase": "enable",
+          "result": {
+            "expanded": "true",
+            "popup": true,
+            "activeLabel": "Alpha",
+            "focused": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-release",
+        "mode": "single",
+        "open": true,
+        "update": {
+          "open": null
+        }
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "true",
+        "popup": true,
+        "activeLabel": "Alpha",
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "false",
+            "popup": false,
+            "activeLabel": null,
+            "focused": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-external-open",
+        "mode": "single",
+        "open": false,
+        "update": {
+          "open": true
+        }
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "true",
+            "popup": true,
+            "activeLabel": "Alpha",
+            "focused": false,
+            "events": []
+          }
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "controlled-external-selected",
+        "mode": "single",
+        "open": false,
+        "defaultOpen": true,
+        "values": [
+          "g"
+        ],
+        "update": {
+          "open": true
+        }
+      },
+      "ssr": {
+        "expanded": "false",
+        "listbox": false
+      },
+      "initial": {
+        "expanded": "false",
+        "popup": false,
+        "activeLabel": null,
+        "focused": false,
+        "events": []
+      },
+      "phases": [
+        {
+          "phase": "update",
+          "result": {
+            "expanded": "true",
+            "popup": true,
+            "activeLabel": "Gamma",
+            "focused": false,
+            "events": []
+          }
+        }
+      ]
+    }
+  ]
+}

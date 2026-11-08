@@ -1,5 +1,5 @@
 <script lang="ts" generics="Value extends string | number = string, Mode extends 'multiple' | 'tags' | undefined = undefined">
-  import { tick, untrack, type Snippet } from 'svelte';
+  import { onMount, tick, untrack, type Snippet } from 'svelte';
   import { useConfig } from './config-context';
   import { useVariant } from './variant.svelte';
   import RenderEmpty from './RenderEmpty.svelte';
@@ -41,6 +41,9 @@
     options = [],
     optionRender,
     mode,
+    open = $bindable<boolean | undefined>(),
+    open: providedOpen,
+    defaultOpen,
     tokenSeparators,
     maxCount,
     maxTagTextLength,
@@ -95,7 +98,10 @@
     () => Array.isArray(defaultValue) ? [...defaultValue] : defaultValue
   );
   let useDefault = $state(true);
-  let isOpen = $state(false);
+  let internalOpen = $state(untrack(() => defaultOpen ?? false));
+  let isOpen = $derived(providedOpen ?? internalOpen);
+  let previousOwnerOpen = untrack(() => providedOpen);
+  let hydrated = $state(false);
   let focused = $state(false);
   let internalSearch = $state('');
   let searchConfig = $derived<SelectSearchConfig<RawValue>>(
@@ -239,7 +245,35 @@
   let resolvedStatus = $derived(status ?? field?.status);
   let resolvedSize = $derived(size ?? compact?.size ?? config.componentSize);
   let compactItemClasses = $derived(compactClasses('ant-select', config.direction, compact));
-  let expanded = $derived(isOpen && !resolvedDisabled);
+  // Число 0 остаётся содержимым; null/empty string скрывают пустой список.
+  let hiddenEmpty = $derived(filtered.length === 0
+    && (notFoundContent === null || notFoundContent === false || notFoundContent === ''));
+  let expanded = $derived(hydrated && isOpen && !resolvedDisabled && !hiddenEmpty);
+
+  function initialActiveValue() {
+    return !multiple && selected && !selected.disabled
+      ? selected.value : filtered[getEnabledIndex(filtered, -1, 'first')]?.value;
+  }
+
+  onMount(() => {
+    if (isOpen) activeValue = initialActiveValue();
+    hydrated = true;
+    if (providedOpen === undefined) open = internalOpen;
+  });
+
+  $effect.pre(() => {
+    const next = providedOpen;
+    if (!Object.is(next, previousOwnerOpen)) {
+      previousOwnerOpen = next;
+      if (next) activeValue = initialActiveValue();
+      internalOpen = next ?? false;
+      if (!next && !multiple) internalSearch = '';
+    }
+    if (resolvedDisabled) {
+      internalOpen = false;
+      focused = false;
+    }
+  });
   let popupContainerGetter = $derived(getPopupContainer || config.getPopupContainer);
   const portal = createPopupContainer(() => ({
     open: expanded,
@@ -303,10 +337,12 @@
       return;
     }
 
-    if (isOpen !== next) {
-      isOpen = next;
-      onOpenChange?.(next);
-    }
+    const notify = expanded !== next;
+    internalOpen = next;
+    open = next;
+    if (notify) onOpenChange?.(next);
+    // Принятый bind/callback сохраняет active, выбранный текущим keyboard event.
+    if (providedOpen === next) previousOwnerOpen = next;
 
     if (!next && !tagMode && (!multiple || autoClearSearch)) {
       internalSearch = '';
@@ -418,7 +454,8 @@
       useDefault = false;
       value = getSelectValues(initialDefault) as typeof value;
       internalSearch = '';
-      isOpen = false;
+      internalOpen = false;
+      open = false;
       composing = false;
       pastedText = undefined;
     });

@@ -1,6 +1,6 @@
 import type { Snippet } from 'svelte';
 import type { HTMLInputAttributes, HTMLAttributes } from 'svelte/elements';
-import type { ComponentSize, SelectOption } from './types';
+import type { ComponentSize, RenderEmptyContent, SelectOption } from './types';
 
 /** Разделители multiple/tags либо пользовательский разбор всей строки. */
 export type SelectTokenSeparators = readonly string[]
@@ -87,6 +87,10 @@ export interface SelectProps<
     { index: number }
   ]>;
   mode?: Mode;
+  /** Управляемая видимость; onOpenChange сообщает запрос. Поддерживает bind:open. */
+  open?: boolean;
+  /** Начальная uncontrolled видимость; SSR остаётся закрытым. @defaultValue false */
+  defaultOpen?: boolean;
   /** Разбор строк в multiple/tags; function получает текущий ввод, включая восстановленный paste. */
   tokenSeparators?: SelectTokenSeparators;
   /** Максимум выбранных значений в multiple/tags; existing/default values не обрезаются. */
@@ -112,7 +116,7 @@ export interface SelectProps<
   showSearch?: boolean | SelectSearchConfig<Mode extends 'tags' ? Value | string : Value>;
   /** @defaultValue false */
   loading?: boolean;
-  notFoundContent?: string | number | Snippet | null;
+  notFoundContent?: RenderEmptyContent;
   onPopupScroll?: HTMLAttributes<HTMLDivElement>['onscroll'];
   /**
    * Getter получает корень Select; undefined наследует ConfigProvider, без getter список inline.

@@ -8343,6 +8343,49 @@ disabled control не передаёт значения. Поисковый те
 Галерея `/ant-design` содержит форму выбора от одной до трёх команд с отправкой
 и сбросом.
 
+### Видимость списка Select
+
+DefaultOpen задаёт только начальную видимость. Open управляет видимостью;
+onOpenChange сообщает запрос, который владелец может принять либо отклонить.
+Для двустороннего состояния Svelte используется bind:open. Внешняя замена open
+и начальное открытие не вызывают onOpenChange и не переводят фокус в поле.
+
+```svelte
+<script lang="ts">
+  import { Select } from 'antd-svelte';
+  let open = $state(false);
+  const options = [{ value: 'a', label: 'Alpha' }];
+</script>
+
+<Select {options} bind:open />
+<!-- Владелец может принимать только разрешённые запросы. -->
+<Select {options} {open} onOpenChange={next => { open = next; }} />
+```
+
+Open имеет приоритет над defaultOpen. Удаление controlled open возвращает закрытое
+uncontrolled состояние, как исходный useControlledState. Смена defaultOpen после
+mount не переоткрывает список. Disabled скрывает popup; uncontrolled состояние
+закрывается и не возвращается после enable, explicit open=true сохраняет запрос
+владельца и снова показывает popup после enable. Эти переходы не создают callbacks.
+Внешнее закрытие single очищает внутренний поиск; controlled search меняет владелец.
+Input DOM, выбранные values и focus сохраняются. Активный пункт при внешнем открытии
+учитывает выбранное single value; ArrowUp при пользовательском открытии сохраняет
+прежнее Native поведение перехода к последнему enabled option.
+
+При пустой выдаче notFoundContent=null/false/пустая строка скрывает popup, не сбрасывая
+raw open и ввод. После появления options он становится видимым. Число 0 остаётся
+видимым содержимым; исходный Select ошибочно скрывает его из-за проверки falsy.
+NotFoundContent принимает общий RenderEmptyContent, включая boolean и readonly arrays.
+Форма по-прежнему сбрасывает multiple/tags без callbacks; bind:open при этом закрывается.
+Явный controlled open продолжает принадлежать владельцу.
+
+SSR всегда выводит aria-expanded=false без popup и без вызова optionRender/getter.
+После mount применяется актуальное состояние. Source React откладывает закрытие
+через MessageChannel; прежнее немедленное Native закрытие сохранено.
+Эталоны: [25 client/React SSR сценариев](./tests/browser/fixtures/ant-design-select-open-reference.json).
+Проверки: [браузер](./tests/browser/select-open.spec.ts),
+[SSR и публичные типы](./tests/package/select-open.ssr.test.ts).
+
 ### Содержимое пунктов Select
 
 OptionRender задаёт пассивный Snippet внутри существующего native option button.
@@ -8583,7 +8626,8 @@ FormData и не меняет выбранные value. OnSearch не имеет
 
 Loading показывает spinner и aria-busy, сохраняя доступность уже выданных options.
 При пустой выдаче по умолчанию выводится локализованный текст loading/empty;
-notFoundContent заменяет его строкой, числом или Snippet, null убирает содержимое.
+notFoundContent заменяет его общим RenderEmptyContent; null/false/пустая строка
+скрывает пустой popup, 0 остаётся видимым.
 При отсутствии local notFoundContent используется ConfigProvider.renderEmpty('Select');
 его falsy результат выбирает simple small Empty. Без callback сохраняется прежний
 локализованный текст. Остальные правила — в [общем справочнике](./docs/reference/render-empty.md).
