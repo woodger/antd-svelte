@@ -18,6 +18,7 @@ export const notificationPlacements: readonly NotificationPlacement[] = [
   'bottomLeft',
   'bottomRight'
 ];
+export const notificationOptionsKey = Symbol('ant-notification-options');
 export {
   noticeQueueKey as notificationHolderKey
 } from './notice-queue.model.svelte.js';
@@ -33,7 +34,7 @@ export type NotificationNotice = QueueNotice<ResolvedNotification>;
  * holder таймеры не запускаются; отсоединение очищает очередь без onClose.
  */
 export function createNotification(options: NotificationOptions = {}) {
-  const placement = notificationPlacements.includes(options.placement!)
+  let placement = notificationPlacements.includes(options.placement!)
     ? options.placement!
     : 'topRight';
   const queue = createNoticeQueue<ResolvedNotification>(
@@ -63,6 +64,13 @@ export function createNotification(options: NotificationOptions = {}) {
     warning: typed('warning'),
     error: typed('error'),
     destroy: queue.destroy,
+    [notificationOptionsKey](next: NotificationOptions) {
+      placement = notificationPlacements.includes(next.placement!) ? next.placement! : 'topRight';
+      queue[noticeQueueKey].configure({
+        ...next,
+        duration: next.duration === false ? 0 : next.duration
+      });
+    },
     [noticeQueueKey]: queue[noticeQueueKey]
   };
 }

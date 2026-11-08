@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SelectConfig } from './select.types';
   import type { FormConfig } from './form.types';
+  import type { AppConfig } from './app.types';
   import type { StatisticConfig } from './statistic.types';
   import type { TimelineConfig } from './timeline.types';
   import type { StepsConfig } from './steps.types';
@@ -80,6 +81,8 @@
     variant?: Variant;
     /** Defaults Form; undefined наследует record, любой объект заменяет его целиком. */
     form?: FormConfig;
+    /** Общие class/style обёртки App; локальные props имеют приоритет. */
+    app?: AppConfig;
     /** Общие классы и стили Statistic/Timer; собственный record заменяет родительский целиком. */
     statistic?: StatisticConfig;
     /** Общие классы и semantic styles Timeline; собственный record заменяет родительский. */
@@ -177,6 +180,7 @@
     theme,
     variant,
     form,
+    app,
     statistic,
     timeline,
     steps,
@@ -270,6 +274,9 @@
     },
     get form() {
       return form ?? parent.form;
+    },
+    get app() {
+      return app ?? parent.app;
     },
     get statistic() {
       return statistic ?? parent.statistic;

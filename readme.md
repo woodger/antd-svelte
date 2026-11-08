@@ -124,6 +124,7 @@ Day.js должен удовлетворять peer-диапазону ^1.11.11;
 | Компонент | Поддерживаемое поведение |
 | --- | --- |
 | ConfigProvider | Светлая и тёмная темы, три основных цвета, компактная плотность, размеры, disabled, направление и локаль |
+| App | Контекст Message/Notification/Modal, встроенные holders, вложенные настройки, root/fragment и App.useApp() |
 | Button | Native button/href, color/variant/ghost, loading delay/icon, semantic slots, config и Compact |
 | Typography / TypographyText / TypographyTitle / TypographyParagraph / TypographyLink | Нативный текст, decorations, copy/edit, CSS/JS ellipsis, expand/collapse и semantic config |
 | FloatButton / FloatButtonGroup / FloatButtonBackTop | Плавающие native actions, Badge/Tooltip, меню групп и возврат с прогрессом прокрутки |
@@ -3542,7 +3543,8 @@ Callback с аргументом close оставляет закрытие вл�
 Destroy и удаление holder завершают ожидающие handles с false; поздние async
 результаты не возвращают окно. Удаление holder не вызывает onCancel/afterClose,
 освобождает модальность и возвращает фокус, если владелец не перевёл его сам.
-Отсоединённый экземпляр повторно не подключается: создайте новый createModal().
+После повторного подключения holder очередь пуста, новые вызовы работают;
+вызовы между отсоединением и подключением завершаются с false.
 В SSR фабрика не обращается к DOM, а holder выводит закрытые dialog shells.
 
 [13 исходных сценариев](./tests/browser/fixtures/ant-design-modal-controller-reference.json)
@@ -9693,6 +9695,75 @@ TreeSelect/Cascader добавляют 40 эталонов в
 частичное переопределение подписей кнопок и служебных сообщений. Вложенная группа
 `locale.pagination`, `locale.table` и `locale.inputNumber` также объединяются с настройками родителя по отдельным
 подписям. Тексты правил валидации задаются в `message` или возвращаются из validator.
+
+## App
+
+App объединяет MessageHolder, NotificationHolder и ModalHolder. Дочерний компонент
+получает их API через `App.useApp()` либо отдельный `useApp()` при инициализации.
+Вызов требует ближайшего App; глобальная очередь между SSR-запросами не создаётся.
+
+```svelte
+<!-- Application.svelte -->
+<script lang="ts">
+  import { App, ConfigProvider } from 'antd-svelte';
+  import Actions from './Actions.svelte';
+</script>
+
+<ConfigProvider theme={{ cssVar: {} }}>
+  <App message={{ maxCount: 3 }} notification={{ placement: 'bottomRight' }}>
+    <Actions />
+  </App>
+</ConfigProvider>
+```
+
+```svelte
+<!-- Actions.svelte -->
+<script lang="ts">
+  import { App, Button } from 'antd-svelte';
+  const { message, notification, modal } = App.useApp();
+
+  async function confirm() {
+    if (await modal.confirm({ title: 'Продолжить?' })) {
+      message.success('Готово');
+      notification.info({ title: 'Операция завершена' });
+    }
+  }
+</script>
+
+<Button onclick={confirm}>Продолжить</Button>
+```
+
+Ближайший ConfigProvider задаёт тему, локаль и RTL holders. Настройки message и
+notification объединяются по полям с ближайшим App; локальное undefined тоже
+перекрывает родительское поле и возвращает default соответствующего holder.
+Top/bottom меняют расположение поверхности; duration/pauseOnHover/maxCount и
+notification.placement применяются к следующим вызовам. Изменение defaults не
+перезапускает таймеры и не удаляет существующие записи. Новый maxCount применяется
+при следующем добавлении; прежние placements уведомлений сохраняются.
+Родительская, вложенная и соседняя очереди независимы. API остаются стабильными
+на протяжении жизни App. В React notification API получает новый объект после
+изменения config; это отличие механизма контекста записано в реестре.
+
+По умолчанию root — div с исходной типографикой Ant Design. Component принимает
+HTML-тег либо false; false оставляет children/holders без дополнительного root,
+не применяет его class/style/attrs и не создаёт nativeElement. Смена тега или
+fragment-режима пересоздаёт дочернее DOM-дерево и очищает holders; те же API
+работают после повторного подключения. Bind:nativeElement даёт текущий HTML-root
+и очищается при его удалении. Local prefixCls задаёт root-классы. ConfigProvider.app
+наследует record class/style целиком; локальные class/rootClassName/style дополняют
+его, style имеет приоритет. Обычные HTML attrs передаются корню.
+
+В SSR App не открывает dialog/popover и не запускает таймеры. Удаление App
+закрывает поверхности, снимает inert/scroll lock и завершает ожидающие Modal
+handles с false. Поддерживаются текущие настройки Native Message/Notification;
+их полные React semantic/render/stack/container options, React custom root
+components и общий ConfigProvider.prefixCls остаются за пределами этого этапа.
+
+Основа сверки — [исходные снимки App](./tests/browser/fixtures/ant-design-app-reference.json).
+Из девяти root-примеров проверяются восемь: global-prefix сохранён как ещё
+не перенесённый случай. Проверки:
+[браузер](./tests/browser/app.spec.ts), [SSR и типы](./tests/package/app.ssr.test.ts),
+[обновление defaults](./src/lib/notice-config.test.ts).
 
 ## Формы и валидация
 

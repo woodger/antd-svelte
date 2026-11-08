@@ -1,5 +1,6 @@
 import type { SelectConfig } from './select.types';
 import type { FormConfig } from './form.types';
+import type { AppConfig } from './app.types';
 import type { StatisticConfig } from './statistic.types';
 import type { TimelineConfig } from './timeline.types';
 import type { StepsConfig } from './steps.types';
@@ -68,6 +69,7 @@ import { ruRU, type ComponentSize, type Variant, type Locale, type ResolvedTheme
 export interface ConfigContext {
   readonly variant?: Variant;
   readonly form?: FormConfig;
+  readonly app?: AppConfig;
   readonly statistic?: StatisticConfig;
   readonly timeline?: TimelineConfig;
   readonly steps?: StepsConfig;

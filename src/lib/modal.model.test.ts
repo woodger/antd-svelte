@@ -249,4 +249,19 @@ describe('createModal context confirmations', () => {
     expect(await handle).toBe(true);
     expect(runtime.confirmations).toEqual([]);
   });
+
+  it('reconnects an empty holder without reviving detached confirmations', async () => {
+    const { modal, runtime, disconnect } = setup();
+    const previous = modal.confirm({ title: 'Detached' });
+    disconnect();
+    expect(await previous).toBe(false);
+    expect(await modal.info({ title: 'Between holders' })).toBe(false);
+    runtime.connect();
+    const next = modal.confirm({ title: 'Reconnected' });
+    disconnect();
+
+    expect(runtime.confirmations.map(entry => entry.config.title)).toEqual(['Reconnected']);
+    runtime.act(runtime.confirmations[0].id, true);
+    expect(await next).toBe(true);
+  });
 });

@@ -9,6 +9,10 @@
 
 ### Added
 
+- App и App.useApp()/useApp(): общий контекст Message/Notification/Modal,
+  встроенные holders, наследование настроек вложенных App, реактивные defaults,
+  HTML-root/fragment, local prefix, ConfigProvider.app и nativeElement.
+
 - createModal и ModalHolder: пять контекстных подтверждений, update/destroy,
   await результата, ручные/async callbacks, loading и retry. Тема, locale, RTL,
   native modality и focus сохраняются; source dangling await при destroy записан

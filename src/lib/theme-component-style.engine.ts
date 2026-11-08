@@ -38,9 +38,11 @@ export type StyledComponent = 'Button' | 'Input' | 'InputNumber' | 'Addon'
   | 'Descriptions' | 'Statistic' | 'Segmented' | 'Splitter' | 'Rate' | 'QRCode' | 'Image'
   | 'Layout' | 'Space' | 'Masonry' | 'BorderBeam' | 'Affix' | 'FloatButton' | 'Form' | 'Typography'
   | 'Listy' | 'Tree' | 'Transfer' | 'Calendar' | 'DatePicker' | 'ColorPicker'
-  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification' | 'Table' | 'Grid';
+  | 'Tour' | 'Mentions' | 'Upload' | 'Drawer' | 'Modal' | 'Message' | 'Notification' | 'Table' | 'Grid'
+  | 'App';
 
 const factories = {
+  App: () => ({}),
   Grid: () => ({}),
   Table: prepareTableTokens,
   Notification: (token: GlobalToken) => ({
@@ -394,6 +396,7 @@ const factories = {
   })
 };
 const componentUnitless: Record<StyledComponent, readonly string[]> = {
+  App: [],
   Grid: [],
   Table: ['expandIconScale'],
   Notification: [],

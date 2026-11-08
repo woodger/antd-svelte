@@ -1,4 +1,14 @@
 export { default as ImagePreviewGroup } from './ImagePreviewGroup.svelte';
+export { default as App } from './app.component';
+export { useApp } from './app-context';
+export type {
+  AppProps,
+  AppOptions,
+  AppConfig,
+  AppMessageConfig,
+  AppNotificationConfig,
+  AppInstance
+} from './app.types';
 export { default as ModalHolder } from './ModalHolder.svelte';
 export { createModal } from './modal.model.svelte.js';
 export type {

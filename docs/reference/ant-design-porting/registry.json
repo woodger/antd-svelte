@@ -17149,24 +17149,137 @@
       "id": "app",
       "name": "App",
       "category": "other",
-      "scope": "candidate",
-      "scopeReason": "Позиция каталога; объём и приоритет будущего переноса ещё не согласованы.",
+      "scope": "target",
+      "scopeReason": "Автономный перенос nondeprecated каталога: общий контекст и holders существующих Native Message/Notification/Modal.",
       "upstreamPath": "components/app",
-      "reviewedRevision": null,
-      "exports": [],
-      "dependencies": [],
+      "reviewedRevision": "984592267de88fbf9cdaecc96a56629e721c709d",
+      "exports": [
+        {
+          "upstream": "App",
+          "local": [
+            "App",
+            "useApp"
+          ]
+        }
+      ],
+      "dependencies": [
+        "config-provider",
+        "message",
+        "notification",
+        "modal"
+      ],
       "upstreamPackages": [],
-      "priority": "unassigned",
-      "effort": "unknown",
-      "evidence": [],
+      "priority": "p2",
+      "effort": "M",
+      "evidence": [
+        "src/lib/App.svelte",
+        "src/lib/app.component.ts",
+        "src/lib/app-context.ts",
+        "src/lib/app.types.ts",
+        "src/lib/notice-config.test.ts",
+        "tests/browser/fixtures/AppFixtures.svelte",
+        "tests/browser/fixtures/AppConsumer.svelte",
+        "tests/browser/fixtures/AppSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-app-reference.json",
+        "tests/browser/app.spec.ts",
+        "tests/package/app.ssr.test.ts",
+        "readme.md"
+      ],
       "features": [
         {
           "id": "core-v1",
-          "title": "Подробный аудит согласованного API v1",
-          "state": "unreviewed",
+          "title": "App context API и встроенные holders",
+          "state": "supported",
           "requiredForV1": true,
+          "evidence": [
+            "src/lib/App.svelte",
+            "src/lib/app.component.ts",
+            "src/lib/app-context.ts",
+            "src/lib/app.types.ts",
+            "src/lib/notice-config.test.ts",
+            "tests/browser/fixtures/AppFixtures.svelte",
+            "tests/browser/fixtures/AppConsumer.svelte",
+            "tests/browser/fixtures/AppSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-app-reference.json",
+            "tests/browser/app.spec.ts",
+            "tests/package/app.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "App.useApp()/useApp() вызывается в дочернем Svelte init и возвращает изолированные Message/Notification/Modal API. Один holder каждого вида наследует ConfigProvider theme/locale/RTL; nearest App context и independent queues. SSR без глобальной очереди, timers или открытых native surfaces; отсутствие App даёт явную ошибку. Размонтирование завершает Modal handles с false, снимает modality и очищает очереди."
+        },
+        {
+          "id": "root-and-config",
+          "title": "HTML-root/fragment, типографика, prefix и ConfigProvider.app",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/App.svelte",
+            "src/lib/app.component.ts",
+            "src/lib/app-context.ts",
+            "src/lib/app.types.ts",
+            "src/lib/notice-config.test.ts",
+            "tests/browser/fixtures/AppFixtures.svelte",
+            "tests/browser/fixtures/AppConsumer.svelte",
+            "tests/browser/fixtures/AppSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-app-reference.json",
+            "tests/browser/app.spec.ts",
+            "tests/package/app.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Default div, HTML tag/component=false, attrs/class/rootClassName/style, bind:nativeElement, local prefixCls и RTL class. App default typography и component aliases color/font/lineHeight используют общий theme engine. ConfigProvider.app наследует record class/style целиком; локальный style имеет приоритет. Из девяти raw UMD roots проверяются восемь; общий ConfigProvider.prefixCls остаётся отдельным gap. Смена HTML-тега/fragment пересоздаёт children и holders, сохраняя работоспособные API после reconnect; native refs очищаются."
+        },
+        {
+          "id": "nested-notice-config",
+          "title": "Вложенные настройки и обновление defaults без потери открытых записей",
+          "state": "supported",
+          "requiredForV1": true,
+          "evidence": [
+            "src/lib/App.svelte",
+            "src/lib/app.component.ts",
+            "src/lib/app-context.ts",
+            "src/lib/app.types.ts",
+            "src/lib/notice-config.test.ts",
+            "tests/browser/fixtures/AppFixtures.svelte",
+            "tests/browser/fixtures/AppConsumer.svelte",
+            "tests/browser/fixtures/AppSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-app-reference.json",
+            "tests/browser/app.spec.ts",
+            "tests/package/app.ssr.test.ts",
+            "readme.md",
+            "src/lib/notice-queue.model.svelte.ts",
+            "src/lib/notification.model.svelte.ts",
+            "src/lib/modal.model.test.ts"
+          ],
+          "note": "Message/Notification records объединяются по полям с ближайшим App, включая явный undefined. Top/bottom реактивны; duration/pauseOnHover/maxCount/notification placement применяются к новым вызовам. Существующие timers, notice DOM и placements сохраняются; cap применяется при следующем open. Source queue snapshots подтверждают count/placement update. Повторное подключение очищенного ModalHolder согласовано с жизненным циклом Message/Notification: одна одновременная поверхность, stale pending handles false и никаких поздних callbacks."
+        },
+        {
+          "id": "extended-app-options",
+          "title": "Полные message/notification options и custom component root",
+          "state": "missing",
+          "requiredForV1": false,
           "evidence": [],
-          "note": "Объём v1 требует согласования; публичный аналог отсутствует."
+          "note": "Текущий App принимает уже перенесённые Native MessageOptions/NotificationOptions и holder offsets. Полные React semantic/render/stack/container/progress options зависят от расширения соответствующих семейств. Root принимает HTML tag/false; custom Svelte component root ещё не перенесён. Общий ConfigProvider.prefixCls и React diagnostics остаются отдельными gaps."
+        },
+        {
+          "id": "native-context-lifecycle",
+          "title": "Стабильные Native API и завершение await при удалении holder",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/App.svelte",
+            "src/lib/app.component.ts",
+            "src/lib/app-context.ts",
+            "src/lib/app.types.ts",
+            "src/lib/notice-config.test.ts",
+            "tests/browser/fixtures/AppFixtures.svelte",
+            "tests/browser/fixtures/AppConsumer.svelte",
+            "tests/browser/fixtures/AppSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-app-reference.json",
+            "tests/browser/app.spec.ts",
+            "tests/package/app.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Framework differences: raw UMD после изменения notification config пересоздаёт notification API object, сохраняя message/modal; Native сохраняет все три factory API в течение жизни App. Это наблюдение, а не объявленная ошибка upstream. Native useApp без App даёт явную ошибку вместо исходных пустых objects. При удалении/смене root pending Modal handles завершаются false; Source destroy/unmount pending результат описан в Modal observation. Native top-layer/centering, locale.okText/cancelText и ConfigProvider DOM boundary сохранены."
         }
       ]
     },

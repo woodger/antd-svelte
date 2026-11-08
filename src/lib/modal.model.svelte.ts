@@ -141,10 +141,12 @@ export function createModal() {
   }
 
   function connect() {
-    if (state !== 'fresh') throw new Error('A modal instance supports one mounted ModalHolder.');
+    if (state === 'mounted') throw new Error('A modal instance supports one mounted ModalHolder.');
     state = 'mounted';
+    let connected = true;
     return () => {
-      if (state !== 'mounted') return;
+      if (!connected) return;
+      connected = false;
       state = 'detached';
       const pending = [...entries.values()];
       entries.clear();

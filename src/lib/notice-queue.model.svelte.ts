@@ -67,15 +67,18 @@ export function createNoticeQueue<Config extends NoticeConfig>(
   connectionError: string,
   defaultDuration = 3
 ) {
-  const defaults = {
-    duration: durationOf(options.duration, defaultDuration * 1000),
-    pauseOnHover: options.pauseOnHover ?? true,
-    maxCount: options.maxCount !== undefined
-      && Number.isFinite(options.maxCount)
-      && options.maxCount >= 1
-      ? Math.floor(options.maxCount)
-      : Infinity
-  };
+  function resolveDefaults(config: NoticeOptions) {
+    return {
+      duration: durationOf(config.duration, defaultDuration * 1000),
+      pauseOnHover: config.pauseOnHover ?? true,
+      maxCount: config.maxCount !== undefined
+        && Number.isFinite(config.maxCount)
+        && config.maxCount >= 1
+        ? Math.floor(config.maxCount)
+        : Infinity
+    };
+  }
+  let defaults = resolveDefaults(options);
   const entries = new Map<number, Entry<Config>>();
   let notices = $state.raw<readonly QueueNotice<Config>[]>([]);
   let visible = $state(false);
@@ -240,6 +243,10 @@ export function createNoticeQueue<Config extends NoticeConfig>(
       );
     },
     [noticeQueueKey]: {
+      /** Новые defaults относятся к следующим open; существующие записи не перезапускаются. */
+      configure(next: NoticeOptions) {
+        defaults = resolveDefaults(next);
+      },
       get notices() {
         return notices;
       },

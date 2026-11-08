@@ -6,9 +6,9 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **110**.
-Есть публичная реализация у **69** семейств; отсутствует у **4**.
-Проверенный объём v1 покрыт у **57**; требуется аудит у **12**; частично покрыт у **0**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **111**.
+Есть публичная реализация у **70** семейств; отсутствует у **3**.
+Проверенный объём v1 покрыт у **58**; требуется аудит у **12**; частично покрыт у **0**.
 
 Наличие экспорта, полнота согласованного v1 и результаты тестов учитываются отдельно.
 Candidate означает запись каталога, для которой целевой объём ещё не согласован.
@@ -84,7 +84,7 @@ Candidate означает запись каталога, для которой 
 | [Spin](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/spin) | feedback | target | Spin | Согласованный v1 покрыт | Общий prefixCls ConfigProvider (missing); React development warnings (missing) |
 | [Watermark](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/watermark) | feedback | target | Watermark | Согласованный v1 покрыт |  |
 | [Affix](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/affix) | other | target | Affix | Согласованный v1 покрыт | Глобальный ConfigProvider prefix (missing) |
-| [App](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/app) | other | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
+| [App](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/app) | other | target | App, useApp | Согласованный v1 покрыт | Полные message/notification options и custom component root (missing); Стабильные Native API и завершение await при удалении holder (partial) |
 | [BorderBeam](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/border-beam) | other | target | BorderBeam | Согласованный v1 покрыт | Автоматическое клонирование children с составным React ref (partial) |
 | [ConfigProvider](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/config-provider) | other | target | ConfigProvider, theme | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Применение всех source component tokens и style hooks к DOM/CSS (partial); Наследование getPopupContainer и подключение потребителей (partial); Window/HTMLElement вместо неработающего Source ShadowRoot target (partial); Немедленная смена Affix target вместо stale Source geometry (partial) |
 | [Util](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/_util) | other | candidate | — | Нет публичной реализации | Подробный аудит согласованного API v1 (unreviewed) |
