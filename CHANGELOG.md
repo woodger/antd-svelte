@@ -9,6 +9,10 @@
 
 ### Added
 
+- ConfigProvider.timeline задаёт общие классы и semantic styles/callbacks.
+  Сохранены локальные/item приоритеты, titleSpan, reverse, ol/li, refs и фокус;
+  вложенный record заменяет родительский, reactive config не пересоздаёт корень.
+
 - QRCode поддерживает локальный prefixCls для root, cover и status classes.
   Новый CSS-рецепт qrcode-prefix воспроизводит 11 исходных правил; сохранены
   canvas/SVG, статусы, темы, refs, keyboard refresh и изоляция соседних QRCode.

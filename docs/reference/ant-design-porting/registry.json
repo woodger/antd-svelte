@@ -13385,7 +13385,15 @@
         "tests/browser/steps-theme.spec.ts",
         "tests/browser/fixtures/StepsThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-steps-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/semantic-style.engine.ts",
+        "tests/browser/timeline-config.spec.ts",
+        "tests/browser/timeline-config-metrics.ts",
+        "tests/browser/fixtures/TimelineConfigCase.svelte",
+        "tests/browser/fixtures/TimelineConfigFixtures.svelte",
+        "tests/browser/fixtures/timeline-config-cases.ts",
+        "tests/browser/fixtures/ant-design-timeline-config-reference.json",
+        "tests/package/timeline-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -13424,11 +13432,25 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls и глобальный timeline config вне темы",
-          "state": "missing",
+          "title": "ConfigProvider.timeline: общие классы, стили и callbacks",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Исходные component tokens/aliases подключены отдельно; произвольный component config и prefixCls ещё не перенесены."
+          "evidence": [
+            "src/lib/Timeline.svelte",
+            "src/lib/timeline.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "src/lib/semantic-style.engine.ts",
+            "tests/browser/timeline-config.spec.ts",
+            "tests/browser/timeline-config-metrics.ts",
+            "tests/browser/fixtures/TimelineConfigCase.svelte",
+            "tests/browser/fixtures/TimelineConfigFixtures.svelte",
+            "tests/browser/fixtures/timeline-config-cases.ts",
+            "tests/browser/fixtures/ant-design-timeline-config-reference.json",
+            "tests/package/timeline-config.ssr.test.ts"
+          ],
+          "note": "TimelineConfig экспортирован; ConfigProvider.timeline поддерживает class/style/classNames/styles для девяти slots root/item/itemWrapper/itemIcon/itemSection/itemHeader/itemTitle/itemContent/itemRail. Context/local classes накапливаются; root CSS применяет config.styles.root, config.style, local styles.root, local style, после них прежний titleSpan. Item-specific styles/classNames и item.style сохраняют приоритет, Steps renderer/composition не меняются. Callbacks получают прежние native info.props с transformed items и resolved mode/orientation/variant/reverse=false; Source optional reverse без prop остаётся undefined, native default сохранён. Undefined наследует timeline-record, {} или другой собственный record заменяет его; config/props reactive, root identity и sibling isolation сохраняются. Двадцать четыре unmodified UMD cases и четыре transitions фиксируют все slots, style layers, callbacks/defaults, reverse/horizontal/alternate, item priority и nested empty/replacement. SSR сохраняет passive ol/li и не обращается к DOM. Component tokens/themes, текущие item APIs, snippets, refs, keyed focus и отсутствие deprecated слоя сохраняются; новых npm dependencies/скриптов/CSS нет."
         },
         {
           "id": "source-theme-tokens",
@@ -13448,6 +13470,17 @@
             "docs/reference/theme-context.md"
           ],
           "note": "16 текущих Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. CustomIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный/global prefixCls",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Timeline.svelte",
+            "src/lib/timeline.types.ts"
+          ],
+          "note": "Произвольный prefixCls ещё не перенесён; ConfigProvider.timeline class/style/semantics и theme components поддерживаются отдельно."
         }
       ]
     },

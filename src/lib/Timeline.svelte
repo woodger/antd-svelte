@@ -3,6 +3,7 @@
   import { setStepsComposition } from './steps-composition-context';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { mergeComponentSemantics } from './semantic-style.engine';
   import { timelineItems, timelineLayoutAlternate, timelineMode } from './timeline.engine';
   import type { StepsProps } from './steps.types';
   import type { TimelineProps, TimelineSlots } from './timeline.types';
@@ -61,8 +62,14 @@
       }
     }
   );
-  let classes = $derived(typeof classNames === 'function' ? classNames(info) : classNames ?? {});
-  let slots = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
+  let semantic = $derived(mergeComponentSemantics<keyof TimelineSlots, TimelineProps>(
+    config.timeline,
+    info.props,
+    ['root', 'item', 'itemWrapper', 'itemIcon', 'itemSection', 'itemHeader',
+      'itemTitle', 'itemContent', 'itemRail']
+  ));
+  let classes = $derived(semantic.classes);
+  let slots = $derived(semantic.styles);
   const names: TimelineSlots = {
     item: 'ant-timeline-item',
     itemTitle: 'ant-timeline-item-title',
@@ -144,10 +151,11 @@
       orientation === 'horizontal' && 'ant-timeline-horizontal',
       alternate && 'ant-timeline-layout-alternate',
       config.direction === 'rtl' && 'ant-timeline-rtl',
+      config.timeline?.class,
       className
     ].filter(
       Boolean
     ).join(
       ' '
     )}
-  {rootClassName} classNames={combined} styles={{ ...slots, root: [componentTheme.style, slots.root, style].filter(Boolean).join(';') }} style={spanStyle} bind:nativeElement />
+  {rootClassName} classNames={combined} styles={{ ...slots, root: [componentTheme.style, slots.root].filter(Boolean).join(';') }} style={spanStyle} bind:nativeElement />

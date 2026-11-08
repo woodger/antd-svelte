@@ -143,6 +143,7 @@ export type {
 export { default as Timeline } from './Timeline.svelte';
 export type {
   TimelineProps,
+  TimelineConfig,
   TimelineItem,
   TimelineContent,
   TimelineMode,

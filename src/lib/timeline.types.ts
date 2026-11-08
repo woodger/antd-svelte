@@ -39,3 +39,6 @@ export interface TimelineProps extends Omit<
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLOListElement;
 }
+
+/** Общие классы/стили Timeline; локальные и item-specific настройки приоритетнее. */
+export type TimelineConfig = Pick<TimelineProps, 'class' | 'style' | 'classNames' | 'styles'>;

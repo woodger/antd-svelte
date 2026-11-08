@@ -2,6 +2,7 @@
   import type { SelectConfig } from './select.types';
   import type { FormConfig } from './form.types';
   import type { StatisticConfig } from './statistic.types';
+  import type { TimelineConfig } from './timeline.types';
   import type { TreeSelectConfig } from './tree-select.types';
   import type { DatePickerConfig } from './date-picker.types';
   import type { CardConfig, CardMetaConfig } from './card.types';
@@ -79,6 +80,8 @@
     form?: FormConfig;
     /** Общие классы и стили Statistic/Timer; собственный record заменяет родительский целиком. */
     statistic?: StatisticConfig;
+    /** Общие классы и semantic styles Timeline; собственный record заменяет родительский. */
+    timeline?: TimelineConfig;
     select?: SelectConfig;
     treeSelect?: TreeSelectConfig;
     datePicker?: DatePickerConfig;
@@ -169,6 +172,7 @@
     variant,
     form,
     statistic,
+    timeline,
     select,
     treeSelect,
     datePicker,
@@ -261,6 +265,9 @@
     },
     get statistic() {
       return statistic ?? parent.statistic;
+    },
+    get timeline() {
+      return timeline ?? parent.timeline;
     },
     get select() {
       return select ?? parent.select;

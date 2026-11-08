@@ -6610,11 +6610,22 @@ itemIcon/itemSection/itemHeader/itemTitle/itemContent/itemRail; принимаю
 styles.root до применения titleSpan. Tail/dot/spacing связаны с токенами темы,
 включая dark/compact и RTL.
 
+ConfigProvider.timeline задаёт общие class/style/classNames/styles. Классы config
+и local накапливаются; root styles идут в порядке config.styles.root → config.style
+→ local styles.root → local style, затем применяется titleSpan. Item-specific
+styles сохраняют приоритет. Callbacks используют те же native props с разрешёнными
+mode/orientation/variant, преобразованными items и прежним reverse=false.
+Undefined наследует timeline-record, любой собственный объект, включая {}, заменяет его.
+Обновление config/props сохраняет ol; соседний provider остаётся изолированным.
+Сверка: [24 исходных случая и 4 обновления](./tests/browser/fixtures/ant-design-timeline-config-reference.json),
+[браузер](./tests/browser/timeline-config.spec.ts),
+[публичные типы и SSR](./tests/package/timeline-config.ssr.test.ts), `?fixture=timeline-config`.
+
 Horizontal сохраняет поведение исходных Steps: ниже xs=576 он получает класс
 ant-steps-vertical, но явный ant-timeline-horizontal остаётся. Это отличается от
 согласованного v1-порога самостоятельного Steps (532px); базовые Steps не меняются.
-SSR не измеряет DOM/viewport и оставляет объявленную ориентацию. Произвольные
-prefixCls и глобальный timeline component config вне темы ещё не перенесены.
+SSR не измеряет DOM/viewport и оставляет объявленную ориентацию. Произвольный
+prefixCls пока не перенесён.
 
 Source `theme.components.Timeline` подготавливает шесть defaults для tail/dot/spacing
 и поддерживает aliases, отдельные algorithms, CSS prefix/hash и нули/undefined.
