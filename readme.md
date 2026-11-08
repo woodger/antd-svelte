@@ -8365,6 +8365,35 @@ combining/ZWJ текст. Это не подсчёт grapheme clusters.
 включают исходные broken-pair результаты. Изменение длины не пересоздаёт input,
 не меняет выбранные значения и не вызывает value callbacks.
 
+### Количество видимых тегов
+
+Числовой maxTagCount ограничивает отображение multiple/tags; остальные выбранные
+values остаются в FormData, reset, cache и Backspace. Сводный тег по умолчанию
+показывает `+ N ...` без кнопки удаления. MaxTagPlaceholder заменяет его строкой,
+числом, boolean либо Snippet со скрытыми SelectOmittedTag в исходном порядке.
+У записей сохраняются typed value/key, полный label и disabled. Null/undefined
+выбирают default; false оставляет пустой сводный тег. Scalar content задаёт title,
+Snippet управляет своим содержимым. Single игнорирует обе настройки.
+
+```svelte
+<script lang="ts">
+  import { Select, type SelectOmittedTag } from 'antd-svelte';
+  let tags = $state<string[]>([]);
+</script>
+
+{#snippet omittedTags(omitted: SelectOmittedTag<string>[])}
+  <span>Hidden: {omitted.map(tag => tag.label).join(', ')}</span>
+{/snippet}
+<Select mode="tags" options={[]} bind:value={tags} maxTagCount={2}
+  maxTagPlaceholder={omittedTags} />
+```
+
+Числовое ограничение следует Array.slice Source, включая fractional/negative count;
+NaN сохраняет весь список вместо исходного исчезновения tags. Скрываемая native
+кнопка удаления передаёт фокус input, если владелец не выбрал другой control.
+[Эталоны](tests/browser/fixtures/ant-design-select-tag-count-reference.json) сохраняют
+Source NaN и responsive observations. MaxTagCount="responsive" пока не перенесён.
+
 ### Ограничение выбора
 
 MaxCount задаёт максимум выбранных значений в multiple/tags; single его игнорирует.

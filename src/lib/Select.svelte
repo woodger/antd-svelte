@@ -20,9 +20,10 @@
     sortSelectOptions
   } from './select.engine';
   import { ruRU, type SelectOption } from './types';
-  import type { SelectProps, SelectSearchConfig } from './select.types';
+  import type { SelectProps, SelectSearchConfig, SelectTagPlaceholder } from './select.types';
   import { getSelectTagOptions } from './select-tags.engine';
   import { getSelectTagText } from './select-tag-text.engine';
+  import { getSelectTagOverflow } from './select-tag-overflow.engine';
   import { resolveSelectTokenOptions, splitSelectTokens } from './select-token.engine';
   import Icon from './Icon.svelte';
 
@@ -35,6 +36,8 @@
     tokenSeparators,
     maxCount,
     maxTagTextLength,
+    maxTagCount,
+    maxTagPlaceholder,
     defaultValue,
     value = $bindable<SelectProps<Value, Mode>['value']>(),
     size,
@@ -100,6 +103,7 @@
   let reference = $state<HTMLDivElement>();
   let control = $state<HTMLInputElement>();
   let list = $state<HTMLDivElement>();
+  const tagElements = new Map<RawValue, HTMLElement>();
   let shown = $state(false);
   let typeahead = '';
   let lastTyped = 0;
@@ -136,6 +140,12 @@
       : undefined
   );
   let tags = $derived(selectedValues.map(item => selectionOptions.get(item)!));
+  let tagOverflow = $derived(getSelectTagOverflow(tags, maxTagCount));
+  let tagPlaceholder = $derived(maxTagPlaceholder as SelectTagPlaceholder<RawValue> | undefined);
+  let tagPlaceholderTitle = $derived(tagPlaceholder == null
+    ? `+ ${tagOverflow.omitted.length} ...`
+    : typeof tagPlaceholder === 'string' || typeof tagPlaceholder === 'number'
+      ? String(tagPlaceholder) : undefined);
   let filteredOptions = $derived(tagMode
     ? getSelectTagOptions(options, selectionOptions, search, filter, searchConfig.optionFilterProp)
     : filterOptions<RawValue>(options, search, filter, searchConfig.optionFilterProp));
@@ -145,6 +155,21 @@
   ));
   $effect(() => {
     cachedOptions = selectionOptions;
+  });
+  $effect.pre(() => {
+    const visible = new Set(tagOverflow.visible.map(tag => tag.value));
+    const input = control;
+    const active = input?.ownerDocument.activeElement;
+    if (!input || !active || ![...tagElements].some(([value, node]) =>
+      !visible.has(value) && node.contains(active))) return;
+
+    // Скрытый native remove button передаёт фокус input, не отменяя новый выбор владельца.
+    void tick().then(() => {
+      if (!input.isConnected || active.isConnected) return;
+      const doc = input.ownerDocument;
+      if (!doc.activeElement || doc.activeElement === doc.body
+        || doc.activeElement === doc.documentElement) input.focus();
+    });
   });
   let activeIndex = $derived.by(() => {
     const index = filtered.findIndex(
@@ -310,6 +335,13 @@
     if (next.delete(item))
       changeMultiple([...next]);
     control?.focus();
+  }
+
+  function connectTagElement(node: HTMLElement, value: RawValue) {
+    tagElements.set(value, node);
+    return () => {
+      if (tagElements.get(value) === node) tagElements.delete(value);
+    };
   }
 
   function handleReset(event: Event) {
@@ -678,11 +710,11 @@
     <div class="ant-select-content">
       {#if intrinsicWidth}<span class="intrinsic-label" aria-hidden="true">{selected?.label ?? placeholder ?? ''}</span>{/if}
       {#if multiple}
-        {#each tags as tag (tag.value)}
+        {#each tagOverflow.visible as tag (tag.value)}
           <span class={[
               'ant-select-selection-item',
               (resolvedDisabled || tag.disabled) && 'ant-select-selection-item-disabled'
-            ]} title={tag.label}>
+            ]} title={tag.label} {@attach node => connectTagElement(node, tag.value)}>
             <span class="ant-select-selection-item-content">{getSelectTagText(
               tag.label, maxTagTextLength
             )}</span>
@@ -690,6 +722,16 @@
                 ?? ruRU.removeText} ${tag.label}`} onpointerdown={(event) => event.preventDefault()} onclick={() => remove(tag.value)}><Icon name="close" /></button>{/if}
           </span>
         {/each}
+        {#if tagOverflow.omitted.length}
+          <span class="ant-select-selection-item ant-select-selection-overflow-item-rest"
+            title={tagPlaceholderTitle}>
+            <span class="ant-select-selection-item-content">
+              {#if typeof tagPlaceholder === 'function'}{@render tagPlaceholder(tagOverflow.omitted)}
+              {:else if tagPlaceholder == null}+ {tagOverflow.omitted.length} ...
+              {:else if typeof tagPlaceholder !== 'boolean'}{tagPlaceholder}{/if}
+            </span>
+          </span>
+        {/if}
       {/if}
       <input
         {...attributes}

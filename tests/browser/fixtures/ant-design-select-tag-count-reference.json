@@ -1,0 +1,934 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "observation": "selected visible tags/rest, omission callback fields and fixed widths"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Locked",
+          "title": "Locked",
+          "disabled": true,
+          "removable": false
+        },
+        {
+          "text": "Zero",
+          "title": "Zero",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Zeta",
+          "title": "Zeta",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "one",
+        "count": 1,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "+ 3 ...",
+          "title": "+ 3 ...",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "zero",
+        "count": 0,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "+ 4 ...",
+          "title": "+ 4 ...",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "all",
+        "count": 4,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Locked",
+          "title": "Locked",
+          "disabled": true,
+          "removable": false
+        },
+        {
+          "text": "Zero",
+          "title": "Zero",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Zeta",
+          "title": "Zeta",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "large",
+        "count": 10,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Locked",
+          "title": "Locked",
+          "disabled": true,
+          "removable": false
+        },
+        {
+          "text": "Zero",
+          "title": "Zero",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Zeta",
+          "title": "Zeta",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "negative",
+        "count": -1,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Locked",
+          "title": "Locked",
+          "disabled": true,
+          "removable": false
+        },
+        {
+          "text": "Zero",
+          "title": "Zero",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "+ 1 ...",
+          "title": "+ 1 ...",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "fraction",
+        "count": 1.5,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "+ 3 ...",
+          "title": "+ 3 ...",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "nan",
+        "count": "nan",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": []
+    },
+    {
+      "sample": {
+        "id": "infinite",
+        "count": "infinity",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Locked",
+          "title": "Locked",
+          "disabled": true,
+          "removable": false
+        },
+        {
+          "text": "Zero",
+          "title": "Zero",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Zeta",
+          "title": "Zeta",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "empty",
+        "count": 0,
+        "values": [],
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ]
+      },
+      "tags": []
+    },
+    {
+      "sample": {
+        "id": "string-placeholder",
+        "count": 1,
+        "placeholder": "Hidden",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Hidden",
+          "title": "Hidden",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "zero-placeholder",
+        "count": 1,
+        "placeholder": 0,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "0",
+          "title": "0",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "false-placeholder",
+        "count": 1,
+        "placeholder": false,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "",
+          "title": null,
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "null-placeholder",
+        "count": 1,
+        "placeholder": null,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "+ 3 ...",
+          "title": "+ 3 ...",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "snippet-placeholder",
+        "count": 1,
+        "placeholder": "snippet",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "string:locked=Locked|number:0=Zero|string:z=Zeta",
+          "title": null,
+          "disabled": false,
+          "removable": false
+        }
+      ],
+      "omitted": [
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true,
+          "key": "locked"
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "key": 0
+        },
+        {
+          "value": "z",
+          "label": "Zeta",
+          "key": "z"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "text-length",
+        "count": 1,
+        "textLength": 2,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Al...",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "+ 3 ...",
+          "title": "+ 3 ...",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "tags",
+        "count": 2,
+        "mode": "tags",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Locked",
+          "title": "Locked",
+          "disabled": true,
+          "removable": false
+        },
+        {
+          "text": "+ 2 ...",
+          "title": "+ 2 ...",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "responsive-narrow",
+        "count": "responsive",
+        "width": 200,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "+ 3 ...",
+          "title": "+ 3 ...",
+          "disabled": false,
+          "removable": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "responsive-wide",
+        "count": "responsive",
+        "width": 400,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "z",
+            "label": "Zeta"
+          }
+        ],
+        "values": [
+          "a",
+          "locked",
+          0,
+          "z"
+        ]
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Locked",
+          "title": "Locked",
+          "disabled": true,
+          "removable": false
+        },
+        {
+          "text": "Zero",
+          "title": "Zero",
+          "disabled": false,
+          "removable": true
+        },
+        {
+          "text": "Zeta",
+          "title": "Zeta",
+          "disabled": false,
+          "removable": true
+        }
+      ]
+    }
+  ]
+}

@@ -757,7 +757,13 @@ export type {
   TableFixed,
   TableExpandable
 } from './table.types';
-export type { SelectProps, SelectSearchConfig, SelectTokenSeparators } from './select.types';
+export type {
+  SelectProps,
+  SelectSearchConfig,
+  SelectTokenSeparators,
+  SelectOmittedTag,
+  SelectTagPlaceholder
+} from './select.types';
 export type {
   FormProps, FormConfig, FormScrollOptions, FormRequiredMark, FormRequiredMarkInfo, FormLocale,
   FormSemanticSlots, FormSemantic, FormTooltipProps, FormItemTooltip

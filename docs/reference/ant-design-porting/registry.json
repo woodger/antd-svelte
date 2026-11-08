@@ -7632,7 +7632,15 @@
         "tests/browser/fixtures/TagTextFixtures.svelte",
         "tests/browser/fixtures/tag-text-cases.ts",
         "tests/browser/fixtures/ant-design-select-tag-text-reference.json",
-        "tests/package/select-tag-text.ssr.test.ts"
+        "tests/package/select-tag-text.ssr.test.ts",
+        "src/lib/select-tag-overflow.engine.ts",
+        "src/lib/select-tag-overflow.engine.test.ts",
+        "tests/browser/select-tag-count.spec.ts",
+        "tests/browser/fixtures/SelectTagCountCase.svelte",
+        "tests/browser/fixtures/SelectTagCountFixtures.svelte",
+        "tests/browser/fixtures/select-tag-count-cases.ts",
+        "tests/browser/fixtures/ant-design-select-tag-count-reference.json",
+        "tests/package/select-tag-count.ssr.test.ts"
       ],
       "features": [
         {
@@ -7885,6 +7893,37 @@
           "note": "Общий rc-select maxTagTextLength в multiple/tags, Source slice/ellipsis и UTF-16 units, default/zero/negative/fraction/NaN/Infinity. Full label/title/remove accessible names/values/FormData и single сохраняются; reactive length не заменяет input, не теряет focus и не вызывает value callback. Shared helper применяется также к существующему Cascader. Разрыв корректной surrogate pair исправлен явно; raw Source corpus сохранён."
         },
         {
+          "id": "numeric-tag-count",
+          "title": "Числовой maxTagCount и сводный maxTagPlaceholder",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte",
+            "src/lib/select-tag-overflow.engine.ts",
+            "src/lib/select-tag-overflow.engine.test.ts",
+            "tests/browser/select-tag-count.spec.ts",
+            "tests/browser/fixtures/SelectTagCountCase.svelte",
+            "tests/browser/fixtures/SelectTagCountFixtures.svelte",
+            "tests/browser/fixtures/select-tag-count-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tag-count-reference.json",
+            "tests/package/select-tag-count.ssr.test.ts"
+          ],
+          "note": "Source numeric Array.slice, default + N ... / scalar / typed Svelte Snippet, value/key/label/disabled в omission records. Nullish placeholder выбирает default, false пустой rest; summary не имеет remove button, full titles/labels сохраняются. Native focus handoff при удалении focused tag уважает owner focus; FormData/reset/cache/Backspace включают hidden values, disabled/RTL/clear сохраняются. NaN не скрывает весь список в отличие от raw Source observation. Responsive вынесен в отдельную missing feature."
+        },
+        {
+          "id": "responsive-tag-count",
+          "title": "MaxTagCount=responsive и измерение overflow",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-select-tag-count-reference.json",
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte"
+          ],
+          "note": "Source corpus содержит narrow/wide observations; runtime и public type responsive ещё не перенесены. Числовой maxTagCount и custom placeholders поддержаны отдельно."
+        },
+        {
           "id": "extended-api",
           "title": "LabelInValue, fieldNames/groups, render/semantic/config и остальные Source API",
           "state": "missing",
@@ -7893,7 +7932,7 @@
             "src/lib/select.types.ts",
             "src/lib/Select.svelte"
           ],
-          "note": "Полный source API остаётся в работе: необязательный options, fieldNames/groups, labelInValue, searchIcon, maxTagCount/renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
+          "note": "Полный source API остаётся в работе: необязательный options, fieldNames/groups, labelInValue, searchIcon, renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
         },
         {
           "id": "native-whitespace-tag",
@@ -7973,6 +8012,25 @@
             "tests/package/select-tag-text.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1 / rc-select 1.10.1, Select и Cascader. MaxTagTextLength=1 для 😀tag и =2 для A😀tag оставляет одинокий high surrogate перед ... . Raw select/cascader emoji-split и middle-pair сохраняют этот результат. Native исключает только разрезанную пару, сохраняя UTF-16 slice, title и full values; grapheme/combining/ZWJ semantics не меняются."
+        },
+        {
+          "id": "native-nan-tag-count",
+          "title": "Сохранение selected tags при NaN maxTagCount",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte",
+            "src/lib/select-tag-overflow.engine.ts",
+            "src/lib/select-tag-overflow.engine.test.ts",
+            "tests/browser/select-tag-count.spec.ts",
+            "tests/browser/fixtures/SelectTagCountCase.svelte",
+            "tests/browser/fixtures/SelectTagCountFixtures.svelte",
+            "tests/browser/fixtures/select-tag-count-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tag-count-reference.json",
+            "tests/package/select-tag-count.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1 при maxTagCount=NaN не показывает ни tags, ни rest, сохраняя values. Raw nan фиксирует пустой tags array. Native считает NaN отсутствием ограничения и показывает весь выбранный список; другие numeric slice boundaries сохраняются."
         }
       ]
     },

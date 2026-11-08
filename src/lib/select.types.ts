@@ -6,6 +6,15 @@ import type { ComponentSize, SelectOption } from './types';
 export type SelectTokenSeparators = readonly string[]
   | ((input: string) => readonly string[]);
 
+/** Скрытый tag в maxTagPlaceholder; label не усечён, key совпадает с typed value. */
+export interface SelectOmittedTag<Value extends string | number = string> extends SelectOption<Value> {
+  key: Value;
+}
+
+/** Snippet получает скрытые selected values; null/undefined выбирают исходное + N ... . */
+export type SelectTagPlaceholder<Value extends string | number = string> = string | number
+  | boolean | null | Snippet<[SelectOmittedTag<Value>[]]>;
+
 /** Настройки ConfigProvider.select; пока перенесён только variant. */
 export interface SelectConfig {
   variant?: SelectProps['variant'];
@@ -51,6 +60,10 @@ export interface SelectProps<
   maxCount?: number;
   /** Ограничивает отображаемый текст multiple/tags; title и полный label сохраняются. */
   maxTagTextLength?: number;
+  /** Числовой предел видимых tags; hidden values сохраняются. Responsive пока не перенесён. */
+  maxTagCount?: number;
+  /** Содержимое сводного тега без remove button; omitted labels остаются полными. */
+  maxTagPlaceholder?: SelectTagPlaceholder<Mode extends 'tags' ? Value | string : Value>;
   /** Bind:value; multiple сохраняет Value[], tags допускает также новые string values. */
   value?: (Mode extends 'tags' ? (Value | string)[] : Mode extends 'multiple' ? Value[] : Value)
     | undefined;

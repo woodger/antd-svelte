@@ -9,6 +9,10 @@
 
 ### Added
 
+- Select поддерживает числовой maxTagCount и scalar/Snippet maxTagPlaceholder.
+  Полные hidden values сохраняются в формах, reset и Backspace; скрываемая remove
+  button передаёт focus input. Source исчезновение списка при NaN не воспроизводится.
+
 - Select поддерживает maxTagTextLength с полными title, remove names и form values.
   Общая с Cascader функция сохраняет правила rc-select и не разрывает UTF-16 пары;
   исходные Unicode-дефекты сохранены в raw reference.
