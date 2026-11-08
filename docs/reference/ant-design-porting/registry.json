@@ -7670,7 +7670,10 @@
         "tests/browser/select-responsive-tags.spec.ts",
         "tests/browser/fixtures/SelectResponsiveTagsFixtures.svelte",
         "tests/browser/fixtures/ant-design-select-responsive-tags-reference.json",
-        "tests/package/select-responsive.ssr.test.ts"
+        "tests/package/select-responsive.ssr.test.ts",
+        "tests/browser/select-optional-options.spec.ts",
+        "tests/browser/fixtures/OptionalSelectFixtures.svelte",
+        "tests/package/select-optional-options.ssr.test.ts"
       ],
       "features": [
         {
@@ -7726,7 +7729,7 @@
             "tests/browser/fixtures/ant-design-select-tags-interaction-reference.json",
             "tests/package/select-tags.ssr.test.ts"
           ],
-          "note": "Mode=\"tags\" расширяет native multiple UI свободными строками; public value/defaultValue/onValueChange допускают Value|string только для tags, остальные mode-specific types сохраняются. Source value filtering, selected missing options, synthetic query option, disabled exact-value guard, uppercase OR optionFilterProp fields и autoClearSearchValue в showSearch; legacy single/multiple label/NFKD defaults сохранены. Созданные/selected labels и disabled сохраняют native cache при remote выдаче, numeric 0 и string 0 различаются. Двадцать восемь UMD option cases и двадцать четыре Playwright interaction cases фиксируют Enter/open/closed, raw selection versus trimmed blur, duplicates, disabled, Escape, controlled query, clear callbacks и multiple autoClearSearchValue=false. Native required/clear/reset/FormData, readonly defaults, disabled/RTL, cache и SSR защищены отдельно. Options остаётся явным primitive массивом, без новых dependencies/CSS/script/config changes. Token separators описаны отдельной supported feature; остальные rc-select API остаются gaps."
+          "note": "Mode=\"tags\" расширяет native multiple UI свободными строками; public value/defaultValue/onValueChange допускают Value|string только для tags, остальные mode-specific types сохраняются. Source value filtering, selected missing options, synthetic query option, disabled exact-value guard, uppercase OR optionFilterProp fields и autoClearSearchValue в showSearch; legacy single/multiple label/NFKD defaults сохранены. Созданные/selected labels и disabled сохраняют native cache при remote выдаче, numeric 0 и string 0 различаются. Двадцать восемь UMD option cases и двадцать четыре Playwright interaction cases фиксируют Enter/open/closed, raw selection versus trimmed blur, duplicates, disabled, Escape, controlled query, clear callbacks и multiple autoClearSearchValue=false. Native required/clear/reset/FormData, readonly defaults, disabled/RTL, cache и SSR защищены отдельно. Options остаётся primitive массивом и по умолчанию пуст, без новых dependencies/CSS/script/config changes. Token separators описаны отдельной supported feature; остальные rc-select API остаются gaps."
         },
         {
           "id": "remote-search",
@@ -7961,6 +7964,20 @@
           "note": "Геометрия Source проверена по official UMD при фиксированных ширинах. Общие browser-only ResizeObserver/RAF измеряют content/tags/rest/input. Скрытые tags сохраняют измеряемую ширину с aria-hidden/inert; typed values/cache/SSR fields и native handoff сфокусированной remove button сохранены. Width/query/data updates и повторные mount cycles сохраняют input identity и очищают ресурсы. Существующий Cascader использует тот же владелец измерений; prefix/render/semantic APIs остаются отдельными gaps. Full-fit проверка исправляет raw дефект длинного сводного тега."
         },
         {
+          "id": "optional-options",
+          "title": "Пустой options по умолчанию",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte",
+            "tests/browser/select-optional-options.spec.ts",
+            "tests/browser/fixtures/OptionalSelectFixtures.svelte",
+            "tests/package/select-optional-options.ssr.test.ts"
+          ],
+          "note": "Select допускает omitted/undefined options, как Ant Design 6.6.8 и rc-select 1.10.1. Native empty-list defaults сохраняют single numeric zero, readonly multiple/tags defaults и SSR поля. Free-text tags не требуют массива; добавление и повторное удаление remote options сохраняет selected label cache. Forms/required/reset/RTL/disabled не меняются, groups/fieldNames остаются отдельными gaps."
+        },
+        {
           "id": "extended-api",
           "title": "LabelInValue, fieldNames/groups, render/semantic/config и остальные Source API",
           "state": "missing",
@@ -7969,7 +7986,7 @@
             "src/lib/select.types.ts",
             "src/lib/Select.svelte"
           ],
-          "note": "Полный source API остаётся в работе: необязательный options, fieldNames/groups, labelInValue, searchIcon, renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
+          "note": "Полный source API остаётся в работе: fieldNames/groups, labelInValue, searchIcon, renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
         },
         {
           "id": "native-whitespace-tag",

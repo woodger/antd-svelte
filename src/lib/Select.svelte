@@ -32,7 +32,7 @@
 
   let {
     _autoWidth = false,
-    options,
+    options = [],
     mode,
     tokenSeparators,
     maxCount,

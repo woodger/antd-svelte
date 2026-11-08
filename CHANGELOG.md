@@ -9,6 +9,9 @@
 
 ### Added
 
+- Select разрешает опускать options, как текущий upstream. Пустой список по
+  умолчанию сохраняет single/multiple defaults, свободные tags, remote cache и native формы.
+
 - Select поддерживает maxTagCount="responsive" с общими измерениями Cascader,
   динамическим input width, inert hidden tags и cleanup observer/RAF. Full-fit
   проверка сохраняет видимые tags при длинном custom rest; raw дефект upstream записан.

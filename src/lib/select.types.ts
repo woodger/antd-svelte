@@ -52,7 +52,8 @@ export interface SelectProps<
 > {
   /** @internal Intrinsic ширина readonly single для составного владельца, без смены public default. */
   _autoWidth?: boolean;
-  options: readonly SelectOption<Value>[];
+  /** Пустой список по умолчанию; tags может создавать значения без options. */
+  options?: readonly SelectOption<Value>[];
   mode?: Mode;
   /** Разбор строк в multiple/tags; function получает текущий ввод, включая восстановленный paste. */
   tokenSeparators?: SelectTokenSeparators;
