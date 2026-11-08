@@ -9,6 +9,10 @@
 
 ### Added
 
+- Carousel поддерживает local/shared prefixCls для wrapper, RTL/vertical CSS и
+  duration keyframes. Общий prefix Radio/Checkbox selectors независим от local
+  wrapper. Смена prefix сохраняет текущий слайд, DOM/ref и draft/selection/focus.
+
 - Typography поддерживает local/shared prefixCls для текста, заголовков,
   decorations, actions, ellipsis и редактора. DOM, draft/selection/focus и copy
   success сохраняются. Source stale action classes записаны raw/fresh замерами;

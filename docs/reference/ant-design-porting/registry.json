@@ -11835,11 +11835,25 @@
         },
         {
           "id": "advanced-source-api",
-          "title": "Генерация CSS для произвольного prefixCls",
-          "state": "missing",
+          "title": "Локальный и общий Carousel prefixCls с исходным CSS",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "DOM prefixCls поддержан; генерация CSS для него остаётся общим пробелом. React development diagnostics и устаревшие IE event/CSS fallbacks не воспроизводятся. Исходный RTL reset использует число children до rows grouping; известные особенности upstream не заменяются прикладным поведением. V1-ready не означает полный React API."
+          "evidence": [
+            "src/lib/Carousel.svelte",
+            "src/lib/carousel.types.ts",
+            "src/lib/carousel-prefix.engine.ts",
+            "src/lib/carousel-prefix.engine.test.ts",
+            "src/lib/vendor/carousel-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/CarouselPrefixScope.svelte",
+            "tests/browser/fixtures/CarouselPrefixFixtures.svelte",
+            "tests/browser/fixtures/CarouselPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-carousel-prefix-reference.json",
+            "tests/browser/carousel-prefix-metrics.ts",
+            "tests/browser/carousel-prefix.spec.ts",
+            "tests/package/carousel-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty prefix wins; empty/undefined наследуют ConfigProvider prefix. Wrapper/RTL/vertical classes, 58 CSS rules и два duration keyframes используют resolved prefix; Slick classes и canonical component token marker сохранены. Radio/Checkbox selectors используют общий prefix независимо от local Carousel и cssVar.prefix. UMD cases покрывают nested/sibling providers, placements, RTL/fade и alias tokens. Live transitions сохраняют current slide, root/slide/editor DOM, refs, draft/selection/focus, callbacks и navigation; SSR не создаёт browser resources. React diagnostics и устаревшие IE fallbacks не воспроизводятся. Исходный RTL reset использует число children до rows grouping; известные особенности upstream не заменяются прикладным поведением. V1-ready не означает полный React API."
         }
       ]
     },

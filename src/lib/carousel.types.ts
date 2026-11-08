@@ -130,6 +130,7 @@ export interface CarouselProps extends Omit<
   items?: readonly CarouselItem[];
   effect?: CarouselEffect;
   style?: string;
+  /** Непустой локальный prefix имеет приоритет; иначе используется ConfigProvider.prefixCls. */
   prefixCls?: string;
   rootClassName?: string;
   id?: string;
@@ -143,7 +144,7 @@ export interface CarouselProps extends Omit<
   waitForAnimate?: boolean;
   /** Доступен после mount; методы сохраняют отложенный вызов исходного slick. */
   ref?: CarouselRef;
-  /** Внешний ant-carousel div; поддерживает bind:nativeElement. */
+  /** Внешний div карусели; поддерживает bind:nativeElement. */
   nativeElement?: HTMLDivElement;
 }
 

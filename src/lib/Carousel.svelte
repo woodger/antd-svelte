@@ -2,6 +2,8 @@
   import { onMount, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getCarouselPrefixCss } from './carousel-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import {
     getCarouselItems,
     getCarouselRows,
@@ -31,7 +33,9 @@
     nextSlide: 'Следующий слайд',
     ...config.locale.carousel
   });
-  let prefixCls = $derived(props.prefixCls ?? 'ant-carousel');
+  let prefixCls = $derived(config.getPrefixCls('carousel', props.prefixCls));
+  let rootPrefixCls = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getCarouselPrefixCss(prefixCls, rootPrefixCls));
   let className = $derived([props.class, config.carousel?.class].filter(Boolean).join(' '));
   let style = $derived([config.carousel?.style, props.style].filter(Boolean).join(';'));
   let duration = $derived(typeof props.autoplay === 'object' && props.autoplay.dotDuration
@@ -86,7 +90,12 @@
   }
 </style>
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`carousel-prefix:${prefixCls}:${rootPrefixCls}`} />
+{/if}
 <div bind:this={nativeElement} id={props.id}
+  data-ant-carousel-prefix={prefixCss ? prefixCls : undefined}
+  data-ant-carousel-global={prefixCss ? rootPrefixCls : undefined}
   class={[prefixCls, 'ant-carousel-css-var', componentTheme.className,
     resolved.rootRtl && `${prefixCls}-rtl`, resolved.rootVertical && `${prefixCls}-vertical`,
     props.rootClassName]} style={[componentTheme.style, duration].filter(Boolean).join(';')}>

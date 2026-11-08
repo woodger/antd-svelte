@@ -5668,6 +5668,15 @@ ConfigProvider.carousel задаёт class/style внутреннего slick-sl
 Locale.carousel и исходный alias Carousel задают имена стрелок; локальный
 Carousel имеет приоритет. Темы light/dark/compact и RTL используют общие CSS variables.
 
+Локальный `prefixCls` задаёт wrapper, RTL/vertical classes и имена duration
+keyframes; пустое значение наследует `ConfigProvider.prefixCls`. Классы Slick
+сохраняются. Prefix вложенных Radio/Checkbox selectors берётся из общего provider,
+независимо от локального имени Carousel и namespace theme variables. Смена prefix
+сохраняет текущий слайд, DOM, ref, draft/selection/focus и управление стрелками.
+Сверка: [официальные замеры](./tests/browser/fixtures/ant-design-carousel-prefix-reference.json),
+[браузер](./tests/browser/carousel-prefix.spec.ts) и
+[SSR](./tests/package/carousel-prefix.ssr.test.ts), `?fixture=carousel-prefix`.
+
 ConfigProvider.theme.components.Carousel применяет семь компонентных токенов:
 размеры и отступ стрелок, ширину/высоту/отступ/интервал точек и ширину активной
 точки. Вертикальный режим меняет местами размеры точек по исходным правилам.
@@ -5684,8 +5693,7 @@ ConfigProvider.carousel по-прежнему относятся к inner slider
 SSR выводит исходную процентную либо variable-width геометрию и lazy placeholders
 без DOM, callbacks, timers или media queries. При уничтожении очищаются timers,
 ResizeObserver, image/focus/touch/media listeners и refs; поздние callbacks не
-вызываются. Генерация CSS для произвольного prefixCls,
-React development diagnostics и устаревшие IE fallbacks остаются вне этапа.
+вызываются. React development diagnostics и устаревшие IE fallbacks не воспроизводятся.
 
 Проверки: [engine](./src/lib/carousel.engine.test.ts),
 [public package SSR](./tests/package/carousel.ssr.test.ts),
@@ -10004,7 +10012,8 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon, Breadcrumb, Row и Typography. Остальные семейства подключаются отдельно. Например,
+Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography и Carousel.
+Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 
