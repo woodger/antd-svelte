@@ -14,6 +14,9 @@
   import NoFormItemColumns from './NoFormItemColumns.svelte';
   import type { ColProps } from './grid.types';
   import { resolveFormWrapperCol } from './form-columns.engine';
+  import type { FormItemTooltip as FormItemTooltipContent } from './form.types';
+  import { resolveFormTooltip } from './form-tooltip.engine';
+  import FormItemTooltip from './FormItemTooltip.svelte';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
@@ -21,6 +24,8 @@
     name: NamePath;
     /** Текст/число/массив/Snippet; false/null/undefined/'' скрывают label, null сохраняет offset. */
     label?: RenderEmptyContent;
+    /** Содержимое подсказки либо Tooltip options; defaults наследуются из Form. */
+    tooltip?: FormItemTooltipContent;
     children: Snippet;
     help?: string;
     /** Постоянное пояснение рядом с errors/warnings; false/null/undefined/'' скрывают его. */
@@ -64,6 +69,7 @@
   let {
     name,
     label,
+    tooltip,
     children,
     help,
     extra,
@@ -105,6 +111,7 @@
   let labelledBy = $derived(hasLabel && typeof label !== 'string' && typeof label !== 'number'
     ? `${id}_label` : undefined);
   let requiredMark = $derived(form?.requiredMark ?? true);
+  let tooltipOptions = $derived(resolveFormTooltip(tooltip, form?.tooltip));
   let optionalText = $derived(config.locale.Form?.optional || enUS.Form.optional);
   let errors = $derived(form?.getFieldError(path) ?? []);
   let warnings = $derived(form?.getFieldWarning(path) ?? []);
@@ -209,6 +216,10 @@
   }
 </script>
 
+{#snippet captionWithTooltip()}
+  <RenderContent value={labelContent} />{#if tooltipOptions}<FormItemTooltip options={tooltipOptions} />{/if}
+{/snippet}
+
 <div class={[
     'ant-form-item',
     componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
@@ -236,9 +247,10 @@
           title={typeof label === 'string' ? label : undefined} use:focusGroupLabel>
           {#key resetKey}
             {#if typeof requiredMark === 'function'}
-              {@render requiredMark(labelContent, { required: isRequired })}
+              {@render requiredMark(tooltipOptions ? captionWithTooltip : labelContent,
+                { required: isRequired })}
             {:else}
-              <RenderContent value={labelContent} />{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
+              {@render captionWithTooltip()}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
             {/if}
           {/key}
         </label>

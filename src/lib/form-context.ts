@@ -1,6 +1,6 @@
 import { getContext, onDestroy, onMount, setContext } from 'svelte';
 import type { FormFieldRegistration } from './form-internal';
-import type { FormRequiredMark, FormSemanticSlots } from './form.types';
+import type { FormRequiredMark, FormSemanticSlots, FormTooltipProps } from './form.types';
 import type { ColProps } from './grid.types';
 import type { NamePath } from './form-store.engine';
 import type { Variant } from './types';
@@ -17,6 +17,7 @@ export interface FormContext {
   readonly requiredMark?: FormRequiredMark;
   readonly classNames?: FormSemanticSlots;
   readonly styles?: FormSemanticSlots;
+  readonly tooltip?: FormTooltipProps;
   readonly resetKey?: object;
   getFieldError(name: NamePath): readonly string[];
   getFieldWarning(name: NamePath): readonly string[];

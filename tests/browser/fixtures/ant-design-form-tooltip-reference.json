@@ -1,0 +1,1110 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after render and activation; motion disabled",
+    "normalization": "rich React nodes map to Svelte snippets; dimensions rounded to 0.01px; popup coordinates excluded; explicit host dir matches native inherited direction, config-only RTL capture retained separately"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "absent"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": null,
+        "popup": null,
+        "click": null
+      }
+    },
+    {
+      "sample": {
+        "id": "context-only",
+        "parent": {
+          "title": "Context"
+        }
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": null,
+        "popup": null,
+        "click": null
+      }
+    },
+    {
+      "sample": {
+        "id": "text",
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "options",
+        "tooltip": {
+          "title": "Details",
+          "placement": "right",
+          "color": "blue"
+        }
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgb(22, 119, 255)",
+          "placement": "right"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "zero",
+        "tooltip": 0
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "0",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "false",
+        "tooltip": false
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": null,
+        "popup": null,
+        "click": null
+      }
+    },
+    {
+      "sample": {
+        "id": "null",
+        "tooltip": null
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": null,
+        "popup": null,
+        "click": null
+      }
+    },
+    {
+      "sample": {
+        "id": "empty",
+        "tooltip": ""
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": null,
+        "popup": null,
+        "click": null
+      }
+    },
+    {
+      "sample": {
+        "id": "true",
+        "tooltip": true
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "array",
+        "tooltip": [
+          "Details ",
+          0
+        ]
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "array-title",
+        "tooltip": {
+          "title": [
+            "Details ",
+            0
+          ]
+        }
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details 0",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rich",
+        "richTitle": true
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Rich tip",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "context-icon",
+        "parent": {
+          "icon": "global",
+          "placement": "bottom"
+        },
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "CaptionG",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "G",
+          "tabIndex": -1,
+          "kind": "global",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 10.2,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "bottom"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "options-inherit-icon",
+        "parent": {
+          "icon": "global"
+        },
+        "tooltip": {
+          "title": "Details"
+        }
+      },
+      "metrics": {
+        "label": {
+          "text": "CaptionG",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "G",
+          "tabIndex": -1,
+          "kind": "global",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 10.2,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "form-icon",
+        "parent": {
+          "icon": "global",
+          "placement": "bottom"
+        },
+        "form": {
+          "icon": "local"
+        },
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "CaptionL",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "L",
+          "tabIndex": -1,
+          "kind": "local",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 7.34,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "bottom"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "item-icon",
+        "parent": {
+          "icon": "global"
+        },
+        "form": {
+          "icon": "local"
+        },
+        "tooltip": {
+          "icon": "item",
+          "title": "Details"
+        }
+      },
+      "metrics": {
+        "label": {
+          "text": "CaptionI",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "I",
+          "tabIndex": -1,
+          "kind": "item",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 4.75,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "children-icon",
+        "tooltip": {
+          "children": "I",
+          "title": "Details"
+        }
+      },
+      "metrics": {
+        "label": {
+          "text": "CaptionI",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "I",
+          "tabIndex": -1,
+          "kind": "children",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 4.75,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "null-icon",
+        "parent": {
+          "icon": "global"
+        },
+        "tooltip": {
+          "icon": null,
+          "children": "I",
+          "title": "Details"
+        }
+      },
+      "metrics": {
+        "label": {
+          "text": "CaptionI",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "I",
+          "tabIndex": -1,
+          "kind": "children",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 4.75,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-options",
+        "parent": {
+          "title": "Inherited"
+        },
+        "tooltip": {}
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Inherited",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "context-reset",
+        "parent": {
+          "icon": "global",
+          "placement": "right"
+        },
+        "child": "reset",
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "context-replace",
+        "parent": {
+          "icon": "global",
+          "placement": "right"
+        },
+        "child": {
+          "icon": "local"
+        },
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "CaptionL",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "L",
+          "tabIndex": -1,
+          "kind": "local",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 7.34,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-form",
+        "outer": true,
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "no-label",
+        "label": null,
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": null,
+        "icon": null,
+        "popup": null,
+        "click": null
+      }
+    },
+    {
+      "sample": {
+        "id": "optional",
+        "mark": "optional",
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption(optional)",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "custom-mark",
+        "mark": "custom",
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption marked",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 19,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rtl",
+        "direction": "rtl",
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 13.77
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "horizontal",
+        "layout": "horizontal",
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 32
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "compact",
+        "compact": true,
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 20
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 12,
+          "height": 20,
+          "offset": 47.81
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "dark",
+        "dark": true,
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(255, 255, 255, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgb(66, 66, 66)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "hover",
+        "activate": "hover",
+        "tooltip": "Details"
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "click",
+        "activate": "click",
+        "tooltip": {
+          "title": "Details",
+          "trigger": "click"
+        }
+      },
+      "metrics": {
+        "label": {
+          "text": "Caption",
+          "title": "Caption",
+          "height": 22
+        },
+        "icon": {
+          "text": "",
+          "tabIndex": -1,
+          "kind": "default",
+          "css": {
+            "color": "rgba(0, 0, 0, 0.45)",
+            "cursor": "help",
+            "marginInlineStart": "4px"
+          },
+          "width": 14,
+          "height": 22,
+          "offset": 55.11
+        },
+        "popup": {
+          "text": "Details",
+          "background": "rgba(0, 0, 0, 0.85)",
+          "placement": "top"
+        },
+        "click": {
+          "prevented": true,
+          "inputFocused": false
+        }
+      }
+    }
+  ],
+  "defaultIcon": {
+    "attributes": {
+      "role": "img",
+      "aria-label": "question-circle",
+      "class": "anticon anticon-question-circle"
+    },
+    "svg": "<svg viewBox=\"64 64 896 896\" focusable=\"false\" data-icon=\"question-circle\" width=\"1em\" height=\"1em\" fill=\"currentColor\" aria-hidden=\"true\"><path d=\"M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z\"></path><path d=\"M623.6 316.7C593.6 290.4 554 276 512 276s-81.6 14.5-111.6 40.7C369.2 344 352 380.7 352 420v7.6c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8V420c0-44.1 43.1-80 96-80s96 35.9 96 80c0 31.1-22 59.6-56.1 72.7-21.2 8.1-39.2 22.3-52.1 40.9-13.1 19-19.9 41.8-19.9 64.9V620c0 4.4 3.6 8 8 8h48c4.4 0 8-3.6 8-8v-22.7a48.3 48.3 0 0130.9-44.8c59-22.7 97.1-74.7 97.1-132.5.1-39.3-17.1-76-48.3-103.3zM472 732a40 40 0 1080 0 40 40 0 10-80 0z\"></path></svg>"
+  },
+  "configOnlyDirection": {
+    "sample": {
+      "id": "rtl",
+      "direction": "rtl",
+      "tooltip": "Details"
+    },
+    "metrics": {
+      "label": {
+        "text": "Caption",
+        "title": "Caption",
+        "height": 22
+      },
+      "icon": {
+        "text": "",
+        "tabIndex": -1,
+        "kind": "default",
+        "css": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "cursor": "help",
+          "marginInlineStart": "4px"
+        },
+        "width": 14,
+        "height": 22,
+        "offset": 55.11
+      },
+      "popup": {
+        "text": "Details",
+        "background": "rgba(0, 0, 0, 0.85)",
+        "placement": "top"
+      },
+      "click": {
+        "prevented": true,
+        "inputFocused": false
+      }
+    }
+  },
+  "accessibility": "- textbox \"Caption question-circle\": Alpha",
+  "observations": [
+    {
+      "id": "array-as-options",
+      "issue": "convertToTooltipProps uses isPlainObject as any non-null object; arrays spread into options without title. Native arrays render content like the measured title-array equivalent."
+    },
+    {
+      "id": "decorative-name",
+      "issue": "Default QuestionCircleOutlined has role img and aria-label question-circle inside the label; raw accessible name is captured. Native decorative SVG stays hidden from accessibility."
+    }
+  ]
+}

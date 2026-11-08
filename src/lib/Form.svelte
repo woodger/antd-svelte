@@ -22,6 +22,7 @@
     requiredMark,
     variant,
     size,
+    tooltip,
     component = 'form',
     disabled,
     onFinish,
@@ -40,6 +41,7 @@
   const componentTheme = useComponentTheme('Form');
   let resolvedSize = $derived(size ?? config.explicitComponentSize);
   let resolvedRequiredMark = $derived(requiredMark ?? config.form?.requiredMark ?? true);
+  let resolvedTooltip = $derived({ ...config.form?.tooltip, ...tooltip });
   let semanticProps: FormProps<Values> = $derived({
     ...props, classNames, styles, layout, size: resolvedSize,
     disabled: disabled ?? config.componentDisabled,
@@ -97,6 +99,9 @@
     },
     get styles() {
       return semantic.styles;
+    },
+    get tooltip() {
+      return resolvedTooltip;
     },
     get resetKey() {
       return getFormHooks(form)?.resetKey ?? form.values;

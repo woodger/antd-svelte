@@ -135,6 +135,11 @@
 
 ### Added
 
+- FormItem: tooltip с content/options, собственным icon и defaults Form/ConfigProvider.
+  Подсказка входит в custom requiredMark; сохранены label click, исходная геометрия,
+  RTL, темы и native field state. Массивы отображаются как content, декоративный SVG
+  не добавляет техническое имя значка к доступному имени поля.
+
 - Form: scrollToFirstError и ConfigProvider.form.scrollToFirstError с локальным
   приоритетом, options и opt-in focus. Сохранён прежний автофокус без настройки;
   устаревшие submit, reset, смена модели и unmount не прокручивают старые controls.

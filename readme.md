@@ -9480,6 +9480,27 @@ enUS — «(optional)». Эта группа заменяется целиком
 [публичные типы и SSR](./tests/package/form-required-mark.ssr.test.ts),
 `?fixture=form-required-mark`.
 
+`FormItem.tooltip` принимает текст, число, массив, Svelte snippet или Tooltip options.
+Form.tooltip и ConfigProvider.form.tooltip задают defaults; сами по себе они не
+показывают значок. Options объединяются по свойствам: config → Form → Item.
+Пустой объект Item включает унаследованный title; undefined/null/false/'' убирают
+значок. Вложенный Form сбрасывает внешние локальные options к props/config.
+Icon задаётся snippet; без него используется children, затем QuestionCircleOutlined.
+При custom requiredMark renderer получает составную подпись вместе с подсказкой.
+
+Сохранены исходные отступы, hover/click settings и tabindex=-1 значка: Tab ведёт к
+control, клик по значку не фокусирует поле. Popup по умолчанию находится в body,
+getPopupContainer сохраняет local/global приоритет. Обновления сохраняют control,
+focus/selection, metadata и native FormData; общие native Tooltip contracts сохраняются.
+Две неточности 6.6.8 не повторены: массивы выводятся как содержимое, а декоративный
+SVG не добавляет «question-circle» к доступному имени поля. Raw source и эквивалентный
+title-array сохранены в [31 эталоне и наблюдениях](./tests/browser/fixtures/ant-design-form-tooltip-reference.json).
+Для RTL матрица использует одинаковый DOM dir; raw замер только с ConfigProvider.direction
+также сохранён. SVG взят из закреплённого UMD, [лицензия Ant Design Icons](./src/lib/vendor/LICENSE.ant-design-icons).
+Проверки: [нормализация](./src/lib/form-tooltip.engine.test.ts),
+[браузер](./tests/browser/form-tooltip.spec.ts),
+[публичные типы и SSR](./tests/package/form-tooltip.ssr.test.ts), `?fixture=form-tooltip`.
+
 Значением владеет модель: обновляйте его явно через `setFieldValue` или
 `setFieldsValue`. `FormItem.name` принимает буквальный string/number либо массив
 сегментов: `['users', 0, 'name']`. Строка `"user.name"` остаётся отдельным ключом.

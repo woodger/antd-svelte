@@ -6,6 +6,17 @@ import type { ColProps } from './grid.types';
 import type { FormValues } from './validation.engine';
 import type { ComponentSize, RenderEmptyContent, Variant } from './types';
 import type { Options, ScrollAction } from './vendor/compute-scroll-into-view';
+import type { TooltipProps } from './tooltip.types';
+
+/** Defaults подсказки label; icon заменяет React element Svelte snippet. */
+export interface FormTooltipProps extends Omit<TooltipProps, 'children'> {
+  icon?: Snippet | null;
+  /** Fallback содержимого значка, если icon не задан. */
+  children?: RenderEmptyContent;
+}
+
+/** Content включает массивы; объект содержит Tooltip options и локальный icon. */
+export type FormItemTooltip = FormTooltipProps | RenderEmptyContent;
 
 /**
  * Прокрутка Form: по умолчанию if-needed/nearest, без изменения фокуса.
@@ -23,7 +34,7 @@ export interface FormRequiredMarkInfo {
 }
 
 /**
- * Визуальная отметка label; snippet получает content после обработки colon.
+ * Визуальная отметка label; content после обработки colon включает значок tooltip, если он задан.
  * Bivariant renderer сохраняет совместимость существующих строковых snippets.
  */
 export type FormRequiredMark = boolean | 'optional'
@@ -74,6 +85,8 @@ export interface FormProps<Values extends FormValues> extends Omit<
   variant?: Variant;
   /** Размер формы и дочерних компонентов; undefined наследует ближайший Form/ConfigProvider. */
   size?: ComponentSize;
+  /** Defaults подсказок; не показывают значок без FormItem.tooltip. */
+  tooltip?: FormTooltipProps;
   /** По умолчанию form; false оставляет контекст без native wrapper и DOM-атрибутов. */
   component?: 'form' | false;
   disabled?: boolean;
@@ -100,5 +113,5 @@ export interface FormProps<Values extends FormValues> extends Omit<
 /** Defaults Form; undefined наследует родительский record, {} заменяет его. */
 export type FormConfig = Pick<
   FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap' | 'requiredMark'
-    | 'class' | 'style' | 'classNames' | 'styles' | 'scrollToFirstError'
+    | 'class' | 'style' | 'classNames' | 'styles' | 'scrollToFirstError' | 'tooltip'
 >;
