@@ -17897,7 +17897,53 @@
             "tests/browser/border-beam-prefix.spec.ts",
             "tests/browser/fixtures/ant-design-border-beam-prefix-reference.json"
           ],
-          "note": "Local prefixCls меняет root/descendant selectors и class attributes; empty/undefined возвращают ant-border-beam. Имена --ant-border-beam-* и antBorderBeamMove сохраняются, theme.cssVar.prefix независим. Все 10 правил, supports/media/reduced-motion и keyframe извлекаются как CSS data template из закреплённого архива с SHA-256. Default stylesheet не затрагивается; динамические selectors ограничены data marker своего слоя. Шесть official UMD presets проверяют пустой, custom, overlapping/shared-marker prefixes, aliases, named cssVar, multiple/explicit beams, external target и default sibling; native light/dark/compact сохраняются. Смена prefix сохраняет DOM, draft/selection/focus, snapshot рамки и внешний target; reset/unmount удаляет scoped CSS. Глобальный ConfigProvider.prefixCls остаётся отдельной незавершённой областью."
+          "note": "Local prefixCls меняет root/descendant selectors и class attributes; empty/undefined наследуют ConfigProvider (по умолчанию ant-border-beam). Локальный class не меняет namespace служебных variables; его задаёт общий ConfigProvider prefix. AntBorderBeamMove сохраняет имя, theme.cssVar.prefix независим. Все 10 правил, supports/media/reduced-motion и keyframe извлекаются как CSS data template из закреплённого архива с SHA-256. Default stylesheet не затрагивается; динамические selectors ограничены data markers class/variable namespace своего слоя. Шесть official UMD presets проверяют пустой, custom, overlapping/shared-marker prefixes, aliases, named cssVar, multiple/explicit beams, external target и default sibling; native light/dark/compact сохраняются. Смена prefix сохраняет DOM, draft/selection/focus, snapshot рамки и внешний target; reset/unmount удаляет scoped CSS. Общий ConfigProvider.prefixCls поддержан отдельной feature."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Общий prefix классов и служебных CSS variables",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/BorderBeam.svelte",
+            "src/lib/border-beam.engine.ts",
+            "src/lib/border-beam.engine.test.ts",
+            "src/lib/border-beam-prefix.engine.ts",
+            "src/lib/border-beam-prefix.engine.test.ts",
+            "src/lib/border-beam.dom.ts",
+            "tests/browser/fixtures/BeamGlobalScope.svelte",
+            "tests/browser/fixtures/BeamGlobalFixtures.svelte",
+            "tests/browser/fixtures/BeamGlobalSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-beam-global-reference.json",
+            "tests/browser/fixtures/ant-design-beam-global-isolated.json",
+            "tests/browser/beam-global-metrics.ts",
+            "tests/browser/beam-global.spec.ts",
+            "tests/package/beam-global.ssr.test.ts"
+          ],
+          "note": "Class prefix наследуется, local nonempty prefixCls приоритетнее. Namespace --rootPrefix-border-beam-* следует общему prefix и удаляет точки по source genCssVar; theme.cssVar.prefix и локальный class независимы. Runtime props/style, class и CSS references обновляются вместе, сохраняя layers/target/border snapshot/draft/focus/selection и reduced motion. 14 raw UMD cases, три transitions и четыре nested-only fresh page references; variables, computed root/pseudo paint, timing, local/default/shared aliases, nested/sibling/RTL, named token namespace и style/prop priority. CSS изолирован парой class/variable namespace; SSR публикует оба stylesheet scopes без DOM слоёв."
+        },
+        {
+          "id": "source-shared-class-cache",
+          "title": "Исходный CSS-кэш shared class и namespace вложенного BorderBeam",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/BorderBeam.svelte",
+            "src/lib/border-beam.engine.ts",
+            "src/lib/border-beam.engine.test.ts",
+            "src/lib/border-beam-prefix.engine.ts",
+            "src/lib/border-beam-prefix.engine.test.ts",
+            "src/lib/border-beam.dom.ts",
+            "tests/browser/fixtures/BeamGlobalScope.svelte",
+            "tests/browser/fixtures/BeamGlobalFixtures.svelte",
+            "tests/browser/fixtures/BeamGlobalSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-beam-global-reference.json",
+            "tests/browser/fixtures/ant-design-beam-global-isolated.json",
+            "tests/browser/beam-global-metrics.ts",
+            "tests/browser/beam-global.spec.ts",
+            "tests/package/beam-global.ssr.test.ts"
+          ],
+          "note": "Source observation для отдельного разбора: unmodified UMD 6.6.8 повторно использует CSS declarations родительского namespace при том же local class и новом общем prefix. В raw shared-local/local-default вложенный луч получает padding=1px/inset=0px/width=100px/duration=6s вместо явных 3px/outsets/34px/8s; private-style/prop-priority читают size родителя. На свежей странице nested-only тот же source корректно использует inner namespace. Native сохраняет изоляцию обоих scopes через data marker и соответствует fresh reference; ошибочный cache reuse не воспроизводится. Это намеренное исправление, а не недостающая реализация поведения."
         }
       ]
     },
@@ -19304,9 +19350,23 @@
             "tests/browser/fixtures/ant-design-popup-prefix-reference.json",
             "tests/browser/popup-prefix-metrics.ts",
             "tests/browser/popup-prefix.spec.ts",
-            "tests/package/popup-prefix.ssr.test.ts"
+            "tests/package/popup-prefix.ssr.test.ts",
+            "src/lib/BorderBeam.svelte",
+            "src/lib/border-beam.engine.ts",
+            "src/lib/border-beam.engine.test.ts",
+            "src/lib/border-beam-prefix.engine.ts",
+            "src/lib/border-beam-prefix.engine.test.ts",
+            "src/lib/border-beam.dom.ts",
+            "tests/browser/fixtures/BeamGlobalScope.svelte",
+            "tests/browser/fixtures/BeamGlobalFixtures.svelte",
+            "tests/browser/fixtures/BeamGlobalSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-beam-global-reference.json",
+            "tests/browser/fixtures/ant-design-beam-global-isolated.json",
+            "tests/browser/beam-global-metrics.ts",
+            "tests/browser/beam-global.spec.ts",
+            "tests/package/beam-global.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm и Slider подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider и BorderBeam подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён."
         },
         {
           "id": "native-legacy-prefix-namespace",

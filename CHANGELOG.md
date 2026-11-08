@@ -9,6 +9,10 @@
 
 ### Added
 
+- BorderBeam наследует ConfigProvider.prefixCls для классов и служебных CSS variables.
+  Local class и namespace изолированы; исходный cache defect при shared local class
+  записан в raw/fresh-page эталонах и не перенесён. DOM/focus и reduced motion сохранены.
+
 - Tooltip, Popover, Popconfirm и оба режима Slider наследуют ConfigProvider.prefixCls.
   Префиксы Tooltip у ручек и внешнего Popover независимы от local owner prefix;
   при обновлении сохраняются открытые поверхности, DOM, фокус и клавиатура Slider.

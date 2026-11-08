@@ -15,7 +15,7 @@ export interface BorderBeamConfig {
 
 /** Декоративные CSS-лучи внутри контейнера без дополнительной обёртки. */
 export interface BorderBeamProps {
-  /** Локальный CSS prefix; пустая строка использует ant-border-beam. Имена variables не меняются. */
+  /** Локальный CSS prefix; иначе ConfigProvider. Namespace variables задаёт общий prefix. */
   prefixCls?: string;
   /**
    * Svelte-замена React child ref: передайте bind:this нативного контейнера

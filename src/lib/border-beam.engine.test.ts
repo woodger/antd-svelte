@@ -106,4 +106,26 @@ describe('BorderBeam engine', () => {
       '--ant-line-width:4px;opacity:0.5;--ant-border-beam-size:80px;opacity:0.8;--ant-border-beam-size:90px;--ant-border-beam-delay:1s;--ant-border-beam-size:160px;--ant-border-beam-inset-offset:-2px -2px -2px -2px'
     );
   });
+
+  it('uses the global namespace for private variables independently of the local class', () => {
+    const style = getBorderBeamStyle({
+      className: 'local-beam',
+      rootPrefix: 'suite.v1',
+      count: 2,
+      color: 'red',
+      duration: 8,
+      lineWidth: 0,
+      size: 40,
+      style: '--suitev1-border-beam-size:55px'
+    }, [1, 2, 3, 4], 1);
+
+    expect(style).toContain('--suitev1-border-beam-beam-gradient:');
+    expect(style).toContain('--suitev1-border-beam-duration:8s');
+    expect(style).toContain('--suitev1-border-beam-line-width:0px');
+    expect(style).toContain('--suitev1-border-beam-delay:-4s');
+    expect(style).toContain('--suitev1-border-beam-inset-offset:-1px -2px -3px -4px');
+    expect(style.indexOf('--suitev1-border-beam-size:55px'))
+      .toBeLessThan(style.indexOf('--suitev1-border-beam-size:40px'));
+    expect(style).not.toContain('--ant-border-beam-');
+  });
 });

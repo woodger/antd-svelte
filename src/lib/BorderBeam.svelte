@@ -25,12 +25,14 @@
   const config = useConfig();
   const componentTheme = useComponentTheme('BorderBeam');
   const tokens = useDesignTokenContext();
-  let prefix = $derived(prefixCls || 'ant-border-beam');
-  let prefixCss = $derived(getBorderBeamPrefixCss(prefix));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefix = $derived(config.getPrefixCls('border-beam', prefixCls));
+  let prefixCss = $derived(getBorderBeamPrefixCss(prefix, rootPrefix));
   let runtime = $state.raw<ReturnType<typeof createBorderBeamRuntime>>();
   let options = $derived({
     color: Array.isArray(color) ? color.map(item => ({ ...item })) : color,
     count,
+    rootPrefix,
     duration,
     lineWidth,
     outset,

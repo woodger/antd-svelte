@@ -1,0 +1,500 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "observation": "Fresh page for each nested-only BorderBeam case; same inherited source theme and global/private namespaces; prevents previous component style cache from masking expected source CSS declarations"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "shared-local",
+        "prefix": "suite",
+        "childPrefix": "inner",
+        "local": "shared-beam",
+        "color": "#722ed1",
+        "duration": 8,
+        "lineWidth": 3,
+        "size": 34
+      },
+      "result": {
+        "nested": [
+          {
+            "classes": [
+              "shared-beam"
+            ],
+            "variables": [
+              [
+                "--inner-border-beam-beam-gradient",
+                "linear-gradient(to left, #722ed1 0%, #722ed1 70%, transparent)"
+              ],
+              [
+                "--inner-border-beam-duration",
+                "8s"
+              ],
+              [
+                "--inner-border-beam-inset-offset",
+                "-1px -2px -3px -4px"
+              ],
+              [
+                "--inner-border-beam-line-width",
+                "3px"
+              ],
+              [
+                "--inner-border-beam-size",
+                "34px"
+              ]
+            ],
+            "root": {
+              "display": "block",
+              "position": "absolute",
+              "inset": "-1px -2px -3px -4px",
+              "width": "300px",
+              "height": "100px",
+              "padding": "3px",
+              "border-radius": "12px",
+              "font-family": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+              "font-size": "14px",
+              "direction": "ltr",
+              "opacity": "1",
+              "pointer-events": "none",
+              "mask-composite": "exclude, exclude"
+            },
+            "pseudo": {
+              "display": "block",
+              "width": "34px",
+              "aspect-ratio": "1 / 1",
+              "background-image": "linear-gradient(to left, rgb(114, 46, 209) 0%, rgb(114, 46, 209) 70%, rgba(0, 0, 0, 0))",
+              "offset-path": "inset(0px 0% 0% 0px round 34px)",
+              "offset-anchor": "90% 50%",
+              "animation-duration": "8s",
+              "animation-delay": "0s",
+              "animation-timing-function": "linear",
+              "animation-iteration-count": "infinite"
+            },
+            "namedAnimation": true
+          },
+          {
+            "classes": [
+              "shared-beam"
+            ],
+            "variables": [
+              [
+                "--inner-border-beam-beam-gradient",
+                "linear-gradient(to left, #722ed1 0%, #722ed1 70%, transparent)"
+              ],
+              [
+                "--inner-border-beam-delay",
+                "-4s"
+              ],
+              [
+                "--inner-border-beam-duration",
+                "8s"
+              ],
+              [
+                "--inner-border-beam-inset-offset",
+                "-1px -2px -3px -4px"
+              ],
+              [
+                "--inner-border-beam-line-width",
+                "3px"
+              ],
+              [
+                "--inner-border-beam-size",
+                "34px"
+              ]
+            ],
+            "root": {
+              "display": "block",
+              "position": "absolute",
+              "inset": "-1px -2px -3px -4px",
+              "width": "300px",
+              "height": "100px",
+              "padding": "3px",
+              "border-radius": "12px",
+              "font-family": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+              "font-size": "14px",
+              "direction": "ltr",
+              "opacity": "1",
+              "pointer-events": "none",
+              "mask-composite": "exclude, exclude"
+            },
+            "pseudo": {
+              "display": "block",
+              "width": "34px",
+              "aspect-ratio": "1 / 1",
+              "background-image": "linear-gradient(to left, rgb(114, 46, 209) 0%, rgb(114, 46, 209) 70%, rgba(0, 0, 0, 0))",
+              "offset-path": "inset(0px 0% 0% 0px round 34px)",
+              "offset-anchor": "90% 50%",
+              "animation-duration": "8s",
+              "animation-delay": "-4s",
+              "animation-timing-function": "linear",
+              "animation-iteration-count": "infinite"
+            },
+            "namedAnimation": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "local-default",
+        "prefix": "suite",
+        "childPrefix": "inner",
+        "local": "ant-border-beam",
+        "color": "#722ed1",
+        "duration": 8,
+        "lineWidth": 3,
+        "size": 34
+      },
+      "result": {
+        "nested": [
+          {
+            "classes": [
+              "ant-border-beam"
+            ],
+            "variables": [
+              [
+                "--inner-border-beam-beam-gradient",
+                "linear-gradient(to left, #722ed1 0%, #722ed1 70%, transparent)"
+              ],
+              [
+                "--inner-border-beam-duration",
+                "8s"
+              ],
+              [
+                "--inner-border-beam-inset-offset",
+                "-1px -2px -3px -4px"
+              ],
+              [
+                "--inner-border-beam-line-width",
+                "3px"
+              ],
+              [
+                "--inner-border-beam-size",
+                "34px"
+              ]
+            ],
+            "root": {
+              "display": "block",
+              "position": "absolute",
+              "inset": "-1px -2px -3px -4px",
+              "width": "300px",
+              "height": "100px",
+              "padding": "3px",
+              "border-radius": "12px",
+              "font-family": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+              "font-size": "14px",
+              "direction": "ltr",
+              "opacity": "1",
+              "pointer-events": "none",
+              "mask-composite": "exclude, exclude"
+            },
+            "pseudo": {
+              "display": "block",
+              "width": "34px",
+              "aspect-ratio": "1 / 1",
+              "background-image": "linear-gradient(to left, rgb(114, 46, 209) 0%, rgb(114, 46, 209) 70%, rgba(0, 0, 0, 0))",
+              "offset-path": "inset(0px 0% 0% 0px round 34px)",
+              "offset-anchor": "90% 50%",
+              "animation-duration": "8s",
+              "animation-delay": "0s",
+              "animation-timing-function": "linear",
+              "animation-iteration-count": "infinite"
+            },
+            "namedAnimation": true
+          },
+          {
+            "classes": [
+              "ant-border-beam"
+            ],
+            "variables": [
+              [
+                "--inner-border-beam-beam-gradient",
+                "linear-gradient(to left, #722ed1 0%, #722ed1 70%, transparent)"
+              ],
+              [
+                "--inner-border-beam-delay",
+                "-4s"
+              ],
+              [
+                "--inner-border-beam-duration",
+                "8s"
+              ],
+              [
+                "--inner-border-beam-inset-offset",
+                "-1px -2px -3px -4px"
+              ],
+              [
+                "--inner-border-beam-line-width",
+                "3px"
+              ],
+              [
+                "--inner-border-beam-size",
+                "34px"
+              ]
+            ],
+            "root": {
+              "display": "block",
+              "position": "absolute",
+              "inset": "-1px -2px -3px -4px",
+              "width": "300px",
+              "height": "100px",
+              "padding": "3px",
+              "border-radius": "12px",
+              "font-family": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+              "font-size": "14px",
+              "direction": "ltr",
+              "opacity": "1",
+              "pointer-events": "none",
+              "mask-composite": "exclude, exclude"
+            },
+            "pseudo": {
+              "display": "block",
+              "width": "34px",
+              "aspect-ratio": "1 / 1",
+              "background-image": "linear-gradient(to left, rgb(114, 46, 209) 0%, rgb(114, 46, 209) 70%, rgba(0, 0, 0, 0))",
+              "offset-path": "inset(0px 0% 0% 0px round 34px)",
+              "offset-anchor": "90% 50%",
+              "animation-duration": "8s",
+              "animation-delay": "-4s",
+              "animation-timing-function": "linear",
+              "animation-iteration-count": "infinite"
+            },
+            "namedAnimation": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "private-style",
+        "prefix": "suite",
+        "childPrefix": "inner",
+        "local": "shared-beam",
+        "style": {
+          "--suite-border-beam-size": "55px",
+          "--inner-border-beam-size": "66px"
+        }
+      },
+      "result": {
+        "nested": [
+          {
+            "classes": [
+              "shared-beam"
+            ],
+            "variables": [
+              [
+                "--inner-border-beam-inset-offset",
+                "-1px -2px -3px -4px"
+              ],
+              [
+                "--inner-border-beam-size",
+                "66px"
+              ],
+              [
+                "--suite-border-beam-size",
+                "55px"
+              ]
+            ],
+            "root": {
+              "display": "block",
+              "position": "absolute",
+              "inset": "-1px -2px -3px -4px",
+              "width": "300px",
+              "height": "100px",
+              "padding": "1px",
+              "border-radius": "12px",
+              "font-family": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+              "font-size": "14px",
+              "direction": "ltr",
+              "opacity": "1",
+              "pointer-events": "none",
+              "mask-composite": "exclude, exclude"
+            },
+            "pseudo": {
+              "display": "block",
+              "width": "66px",
+              "aspect-ratio": "1 / 1",
+              "background-image": "linear-gradient(to left, rgb(22, 119, 255) 0%, rgb(64, 150, 255) 70%, rgba(0, 0, 0, 0))",
+              "offset-path": "inset(0px 0% 0% 0px round 66px)",
+              "offset-anchor": "90% 50%",
+              "animation-duration": "6s",
+              "animation-delay": "0s",
+              "animation-timing-function": "linear",
+              "animation-iteration-count": "infinite"
+            },
+            "namedAnimation": true
+          },
+          {
+            "classes": [
+              "shared-beam"
+            ],
+            "variables": [
+              [
+                "--inner-border-beam-delay",
+                "-3s"
+              ],
+              [
+                "--inner-border-beam-inset-offset",
+                "-1px -2px -3px -4px"
+              ],
+              [
+                "--inner-border-beam-size",
+                "66px"
+              ],
+              [
+                "--suite-border-beam-size",
+                "55px"
+              ]
+            ],
+            "root": {
+              "display": "block",
+              "position": "absolute",
+              "inset": "-1px -2px -3px -4px",
+              "width": "300px",
+              "height": "100px",
+              "padding": "1px",
+              "border-radius": "12px",
+              "font-family": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+              "font-size": "14px",
+              "direction": "ltr",
+              "opacity": "1",
+              "pointer-events": "none",
+              "mask-composite": "exclude, exclude"
+            },
+            "pseudo": {
+              "display": "block",
+              "width": "66px",
+              "aspect-ratio": "1 / 1",
+              "background-image": "linear-gradient(to left, rgb(22, 119, 255) 0%, rgb(64, 150, 255) 70%, rgba(0, 0, 0, 0))",
+              "offset-path": "inset(0px 0% 0% 0px round 66px)",
+              "offset-anchor": "90% 50%",
+              "animation-duration": "6s",
+              "animation-delay": "-3s",
+              "animation-timing-function": "linear",
+              "animation-iteration-count": "infinite"
+            },
+            "namedAnimation": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "prop-priority",
+        "prefix": "suite",
+        "childPrefix": "inner",
+        "local": "shared-beam",
+        "size": 34,
+        "style": {
+          "--suite-border-beam-size": "55px",
+          "--inner-border-beam-size": "66px"
+        }
+      },
+      "result": {
+        "nested": [
+          {
+            "classes": [
+              "shared-beam"
+            ],
+            "variables": [
+              [
+                "--inner-border-beam-inset-offset",
+                "-1px -2px -3px -4px"
+              ],
+              [
+                "--inner-border-beam-size",
+                "34px"
+              ],
+              [
+                "--suite-border-beam-size",
+                "55px"
+              ]
+            ],
+            "root": {
+              "display": "block",
+              "position": "absolute",
+              "inset": "-1px -2px -3px -4px",
+              "width": "300px",
+              "height": "100px",
+              "padding": "1px",
+              "border-radius": "12px",
+              "font-family": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+              "font-size": "14px",
+              "direction": "ltr",
+              "opacity": "1",
+              "pointer-events": "none",
+              "mask-composite": "exclude, exclude"
+            },
+            "pseudo": {
+              "display": "block",
+              "width": "34px",
+              "aspect-ratio": "1 / 1",
+              "background-image": "linear-gradient(to left, rgb(22, 119, 255) 0%, rgb(64, 150, 255) 70%, rgba(0, 0, 0, 0))",
+              "offset-path": "inset(0px 0% 0% 0px round 34px)",
+              "offset-anchor": "90% 50%",
+              "animation-duration": "6s",
+              "animation-delay": "0s",
+              "animation-timing-function": "linear",
+              "animation-iteration-count": "infinite"
+            },
+            "namedAnimation": true
+          },
+          {
+            "classes": [
+              "shared-beam"
+            ],
+            "variables": [
+              [
+                "--inner-border-beam-delay",
+                "-3s"
+              ],
+              [
+                "--inner-border-beam-inset-offset",
+                "-1px -2px -3px -4px"
+              ],
+              [
+                "--inner-border-beam-size",
+                "34px"
+              ],
+              [
+                "--suite-border-beam-size",
+                "55px"
+              ]
+            ],
+            "root": {
+              "display": "block",
+              "position": "absolute",
+              "inset": "-1px -2px -3px -4px",
+              "width": "300px",
+              "height": "100px",
+              "padding": "1px",
+              "border-radius": "12px",
+              "font-family": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, \"Helvetica Neue\", Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
+              "font-size": "14px",
+              "direction": "ltr",
+              "opacity": "1",
+              "pointer-events": "none",
+              "mask-composite": "exclude, exclude"
+            },
+            "pseudo": {
+              "display": "block",
+              "width": "34px",
+              "aspect-ratio": "1 / 1",
+              "background-image": "linear-gradient(to left, rgb(22, 119, 255) 0%, rgb(64, 150, 255) 70%, rgba(0, 0, 0, 0))",
+              "offset-path": "inset(0px 0% 0% 0px round 34px)",
+              "offset-anchor": "90% 50%",
+              "animation-duration": "6s",
+              "animation-delay": "-3s",
+              "animation-timing-function": "linear",
+              "animation-iteration-count": "infinite"
+            },
+            "namedAnimation": true
+          }
+        ]
+      }
+    }
+  ]
+}

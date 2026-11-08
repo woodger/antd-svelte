@@ -55,6 +55,10 @@ export function createBorderBeamRuntime(host: HTMLElement) {
 
       if (options.prefix) layer.setAttribute('data-ant-border-beam-prefix', options.prefix);
       else layer.removeAttribute('data-ant-border-beam-prefix');
+      layer.setAttribute(
+        'data-ant-border-beam-vars',
+        (options.rootPrefix ?? 'ant').replace(/\./g, '')
+      );
 
       if (layer.getAttribute('style') !== style)
         layer.setAttribute('style', style);

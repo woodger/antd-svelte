@@ -25,7 +25,9 @@ describe('BorderBeam prefix public package SSR', () => {
         expect(head).not.toContain('data-ant-svelte-theme="border-beam-prefix:');
       } else {
         expect(head).toContain(`data-ant-svelte-theme="border-beam-prefix:${prefix}"`);
-        expect(head).toContain(`.${prefix}:where([data-ant-border-beam-prefix])`);
+        expect(head).toContain(
+          `.${prefix}:where([data-ant-border-beam-prefix][data-ant-border-beam-vars="ant"])`
+        );
         expect(head).toContain('--ant-border-beam-line-width');
         expect(head).toContain('@keyframes antBorderBeamMove');
       }

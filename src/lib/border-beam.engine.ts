@@ -8,6 +8,7 @@ export interface BorderBeamRuntimeOptions extends Pick<
 > {
   className: string;
   prefix?: string;
+  rootPrefix?: string;
   themeStyle?: string;
   themeOrigin?: HTMLElement;
   contextStyle?: string;
@@ -41,6 +42,7 @@ export function getBorderBeamStyle(
   index: number
 ) {
   const { color, duration, lineWidth, outset, size } = options;
+  const variablePrefix = `--${(options.rootPrefix ?? 'ant').replace(/\./g, '')}-border-beam-`;
   const gradient = getBorderBeamGradient(color);
   const validDuration = typeof duration === 'number' && !Number.isNaN(duration) && duration > 0;
   const unit = (value: number | string) => typeof value === 'number' ? `${value}px` : value;
@@ -55,12 +57,12 @@ export function getBorderBeamStyle(
     options.themeStyle,
     options.contextStyle,
     options.style,
-    gradient && `--ant-border-beam-beam-gradient:${gradient}`,
-    validDuration && `--ant-border-beam-duration:${duration}s`,
-    lineWidth !== undefined && lineWidth !== null && `--ant-border-beam-line-width:${unit(lineWidth)}`,
-    size !== undefined && size !== null && `--ant-border-beam-size:${unit(size)}`,
+    gradient && `${variablePrefix}beam-gradient:${gradient}`,
+    validDuration && `${variablePrefix}duration:${duration}s`,
+    lineWidth !== undefined && lineWidth !== null && `${variablePrefix}line-width:${unit(lineWidth)}`,
+    size !== undefined && size !== null && `${variablePrefix}size:${unit(size)}`,
     index > 0
-      && `--ant-border-beam-delay:${(-(validDuration ? duration : 6) * index) / getBorderBeamCount(options.count)}s`,
-    `--ant-border-beam-inset-offset:${insetOffset}`
+      && `${variablePrefix}delay:${(-(validDuration ? duration : 6) * index) / getBorderBeamCount(options.count)}s`,
+    `${variablePrefix}inset-offset:${insetOffset}`
   ].filter(Boolean).join(';');
 }

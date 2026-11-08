@@ -7872,11 +7872,26 @@ SHA-256 архива. Слои видимы при поддержке mask-compo
 Эффект не заменяет focus ring или validation border.
 
 Локальный prefixCls меняет классы слоёв и selectors, включая supports/media rules.
-Пустое значение возвращает ant-border-beam; CSS variables --ant-border-beam-*
-и keyframe сохраняют имена независимо от theme.cssVar.prefix. Смена префикса
+Пустое значение наследует ConfigProvider.prefixCls (по умолчанию ant-border-beam).
+Общий prefix задаёт namespace служебных переменных --prefix-border-beam-*;
+точки удаляются из namespace, как в source genCssVar. Локальный prefix на него не
+влияет, theme.cssVar.prefix независим, имя antBorderBeamMove сохраняется. Смена префикса
 сохраняет слои, контейнер, draft и фокус. Scoped stylesheet удаляется вместе
-с эффектом либо при возврате к default prefix; глобальный ConfigProvider.prefixCls
-пока не перенесён. Проверки — `?fixture=border-beam-prefix`.
+с эффектом либо при возврате к стандартным class/variable prefixes.
+Проверки локального prefix — `?fixture=border-beam-prefix`.
+
+Общий prefix проверяется по
+[14 исходным примерам и трём переходам](./tests/browser/fixtures/ant-design-beam-global-reference.json):
+[browser](./tests/browser/beam-global.spec.ts),
+[SSR](./tests/package/beam-global.ssr.test.ts), `?fixture=beam-global`.
+CSS-кэш 6.6.8 при одинаковом local class и разных общих prefixes повторно использует
+namespace родителя: у вложенного луча теряются outset/параметры либо читается размер
+родителя. Четыре случая сохранены в raw данных; те же вложенные компоненты на
+[отдельной свежей странице](./tests/browser/fixtures/ant-design-beam-global-isolated.json)
+читают свои переменные правильно. Svelte ограничивает CSS парой class/namespace и
+сверяется с этими изолированными исходными результатами. Дефект кэша не перенесён;
+raw наблюдение остаётся для отдельного разбора. Слои, target, border snapshot,
+draft/focus/selection и reduced motion сохраняются.
 Автоматический поиск host через React child/ref заменён описанным target API;
 прикладные обёртки и runtime React dependencies не добавляются. Fixture
 `?fixture=border-beam`, engine/SSR, package SSR и браузерные проверки принадлежат
@@ -9875,7 +9890,8 @@ PrefixCls задаёт базовый префикс CSS-классов; по у
 LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex,
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
-Tooltip, Popover, Popconfirm и Slider. Остальные семейства подключаются отдельно. Например,
+Tooltip, Popover, Popconfirm, Slider и BorderBeam. Остальные семейства подключаются
+отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 
