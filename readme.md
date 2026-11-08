@@ -437,6 +437,25 @@ ClassNames/styles поддерживают root/header/title/content/value/prefi
 и callback ({ props }) с default value/loading/separators. Styles передаются CSS-строками; style перекрывает styles.root,
 styles.content задаёт оформление значения. Bind:nativeElement даёт HTMLDivElement.
 
+ConfigProvider.statistic задаёт общие class/style/classNames/styles для Statistic
+и StatisticTimer. Классы config и local накапливаются. Root styles применяются
+в порядке config.styles.root → config.style → local styles.root → local style;
+остальные slots объединяются с приоритетом local. Оба callback получают те же
+props с разрешёнными value/loading/separators. Undefined наследует родительский
+statistic-record, любой собственный объект, включая {}, заменяет его целиком.
+
+```svelte
+<ConfigProvider statistic={{ class: 'metric', styles: { value: 'font-weight:600' } }}>
+  <Statistic title="Баланс" value={1234.5} styles={{ value: 'color:green' }} />
+</ConfigProvider>
+```
+
+Реактивная смена config и callback props сохраняет DOM корня, вложенные и соседние
+провайдеры изолированы. Сверка: [26 исходных случаев и 4 обновления](./tests/browser/fixtures/ant-design-statistic-config-reference.json),
+[браузерные метрики](./tests/browser/statistic-config.spec.ts),
+[публичные типы и SSR](./tests/package/statistic-config.ssr.test.ts), `?fixture=statistic-config`.
+Прежние Svelte defaults, native RTL direction и доступный loading Skeleton сохранены.
+
 Loading сохраняет заголовок и заменяет content существующим Skeleton с active
 и paragraph=false. Используются его доступный статус и служебные обёртки;
 formatter и valueRender скрытого значения не вызываются. Statistic не добавляет
@@ -462,7 +481,7 @@ Svelte сохраняет существующий dir=rtl и LTR value; наб�
 Пример — `/ant-design#statistic`, фикстура — `?fixture=statistic`. Unit/SSR/Chromium
 проверяют форматирование, loading, snippets, semantic styles, темы, RTL и фокус.
 Рецепт statistic воспроизводит 14 правил vendor/statistic.css из закреплённого
-архива. PrefixCls и глобальный component config пока отсутствуют.
+архива. PrefixCls пока отсутствует.
 
 StatisticTimer переносит актуальный Statistic.Timer и требует type=countdown/countup;
 Остальные props

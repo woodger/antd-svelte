@@ -341,6 +341,7 @@ export type {
 } from './statistic-timer.types';
 export type {
   StatisticProps,
+  StatisticConfig,
   StatisticValue,
   StatisticContent,
   StatisticSemanticSlots,

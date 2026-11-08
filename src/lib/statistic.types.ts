@@ -42,3 +42,6 @@ export interface StatisticProps extends Omit<
   /** Нативный ref доступен после mount и очищается при unmount. */
   nativeElement?: HTMLDivElement;
 }
+
+/** Классы и стили Statistic/StatisticTimer; локальные semantic slots и style приоритетнее. */
+export type StatisticConfig = Pick<StatisticProps, 'class' | 'style' | 'classNames' | 'styles'>;

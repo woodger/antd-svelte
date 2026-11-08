@@ -1,6 +1,7 @@
 <script lang="ts">
   import type { SelectConfig } from './select.types';
   import type { FormConfig } from './form.types';
+  import type { StatisticConfig } from './statistic.types';
   import type { TreeSelectConfig } from './tree-select.types';
   import type { DatePickerConfig } from './date-picker.types';
   import type { CardConfig, CardMetaConfig } from './card.types';
@@ -76,6 +77,8 @@
     variant?: Variant;
     /** Defaults Form; undefined наследует record, любой объект заменяет его целиком. */
     form?: FormConfig;
+    /** Общие классы и стили Statistic/Timer; собственный record заменяет родительский целиком. */
+    statistic?: StatisticConfig;
     select?: SelectConfig;
     treeSelect?: TreeSelectConfig;
     datePicker?: DatePickerConfig;
@@ -165,6 +168,7 @@
     theme,
     variant,
     form,
+    statistic,
     select,
     treeSelect,
     datePicker,
@@ -254,6 +258,9 @@
     },
     get form() {
       return form ?? parent.form;
+    },
+    get statistic() {
+      return statistic ?? parent.statistic;
     },
     get select() {
       return select ?? parent.select;

@@ -9,6 +9,11 @@
 
 ### Added
 
+- ConfigProvider.statistic задаёт общие классы, стили и semantic callbacks для
+  Statistic и StatisticTimer. Сохранены локальные приоритеты, defaults callbacks,
+  вложенные scopes, native RTL/loading, форматирование и работа таймеров.
+  Обновление config и props сохраняет DOM корня.
+
 - Form.validateMessages, ConfigProvider.form.validateMessages и
   locale.Form.defaultValidateMessages настраивают общие строки и функции шаблонов,
   включая source printf, приоритеты групп, reactive scopes и messageVariables.

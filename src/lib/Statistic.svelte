@@ -4,8 +4,11 @@
   import { componentThemeVariables } from './theme-component-style.engine';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { formatStatisticValue } from './statistic.engine';
+  import { mergeComponentSemantics } from './semantic-style.engine';
   import Skeleton from './Skeleton.svelte';
-  import type { StatisticContent, StatisticProps, StatisticSemanticInfo } from './statistic.types';
+  import type {
+    StatisticContent, StatisticProps, StatisticSemanticInfo, StatisticSemanticSlots
+  } from './statistic.types';
 
   let {
     value = 0,
@@ -55,10 +58,15 @@
       styles
     }
   });
-  let classes = $derived(
-    typeof classNames === 'function' ? classNames(semanticInfo) : classNames ?? {}
-  );
-  let slotStyles = $derived(typeof styles === 'function' ? styles(semanticInfo) : styles ?? {});
+  let semantic = $derived(mergeComponentSemantics<
+    keyof StatisticSemanticSlots, StatisticSemanticInfo['props']
+  >(
+    config.statistic,
+    semanticInfo.props,
+    ['root', 'header', 'title', 'content', 'value', 'prefix', 'suffix']
+  ));
+  let classes = $derived(semantic.classes);
+  let slotStyles = $derived(semantic.styles);
   let formatted = $derived(typeof formatter === 'function' ? formatter(value) : undefined);
   let parts = $derived(formatStatisticValue(value, precision, decimalSeparator, groupSeparator));
 
@@ -90,11 +98,12 @@
       componentTheme.className,
       config.direction === 'rtl' && 'ant-statistic-rtl',
       config.theme.compact && 'ant-statistic-compact',
+      config.statistic?.class,
       className,
       rootClassName,
       classes.root
     ]}
-  style={[componentTheme.style, slotStyles.root, style].filter(Boolean).join(';')}>
+  style={[componentTheme.style, slotStyles.root].filter(Boolean).join(';')}>
   {#if hasContent(title)}<div class={['ant-statistic-header', classes.header]} style={slotStyles.header}><div class={['ant-statistic-title', classes.title]} style={slotStyles.title}>{@render content(title)}</div></div>{/if}
   {#if loading}<Skeleton paragraph={false} active class="ant-statistic-skeleton" style={skeletonStyle} />
   {:else}
