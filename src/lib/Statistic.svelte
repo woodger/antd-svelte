@@ -33,7 +33,7 @@
     ...rest
   }: StatisticProps = $props();
   const config = useConfig();
-  let componentPrefix = $derived(prefixCls || 'ant-statistic');
+  let componentPrefix = $derived(config.getPrefixCls('statistic', prefixCls));
   let prefixCss = $derived(getStatisticPrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Statistic');
   const designTokens = useDesignTokenContext();

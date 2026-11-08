@@ -49,7 +49,7 @@
   }: QRCodeProps = $props();
 
   const config = useConfig();
-  let componentPrefix = $derived(prefixCls || 'ant-qrcode');
+  let componentPrefix = $derived(config.getPrefixCls('qrcode', prefixCls));
   let prefixCss = $derived(getQRCodePrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('QRCode');
   const tokens = useDesignTokenContext();

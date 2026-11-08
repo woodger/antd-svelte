@@ -458,7 +458,8 @@ statistic-record, любой собственный объект, включая
 Прежние Svelte defaults, native RTL direction и доступный loading Skeleton сохранены.
 
 Локальный `prefixCls` меняет root и имена частей Statistic/Timer; пустая строка
-возвращает ant-statistic. CSS variables сохраняют namespace Statistic, marker
+наследует ConfigProvider.prefixCls (по умолчанию ant-statistic). CSS variables
+сохраняют namespace Statistic, marker
 ограничивает динамический CSS своим корнем. Соседние default-компоненты не меняются,
 включая prefix, совпадающий с ant-statistic-content или ant-statistic-css-var.
 Смена prefix сохраняет DOM корня, semantic styles, темы и native compact defaults.
@@ -466,7 +467,7 @@ statistic-record, любой собственный объект, включая
 [браузер](./tests/browser/statistic-prefix.spec.ts),
 [CSS boundary](./src/lib/statistic-prefix.test.ts),
 [публичный пакет и SSR](./tests/package/statistic-prefix.ssr.test.ts), `?fixture=statistic-prefix`.
-Глобальный ConfigProvider.prefixCls пока не перенесён.
+Общий ConfigProvider.prefixCls применяется также к Timer; локальный prefix имеет приоритет.
 
 Loading сохраняет заголовок и заменяет content существующим Skeleton с active
 и paragraph=false. Используются его доступный статус и служебные обёртки;
@@ -4668,13 +4669,13 @@ Undefined наследует steps-record, любой собственный о�
 semantic classNames/styles Steps не применяются и их callbacks не вызываются.
 
 Локальный prefixCls меняет классы root, layout, item и progress; пустая строка
-восстанавливает ant-steps. CSS извлечён из закреплённого архива отдельным рецептом
+наследует ConfigProvider.prefixCls (по умолчанию ant-steps). CSS извлечён из закреплённого архива отдельным рецептом
 steps-prefix. Namespace --ant-steps-* / --ant-cmp-steps-* и общий marker
 ant-steps-css-var сохраняются. Смена prefix не пересоздаёт ol или кнопки, не меняет
 их ids, выбор и фокус. Components.Icon из iconRender наследует тот же prefix;
 восстановление фокуса при удалении шага от классов не зависит. Соседние Steps
 изолированы, локальные/semantic styles и компонентные токены сохраняют приоритет.
-Общий prefix ConfigProvider ещё не перенесён.
+Общий prefix ConfigProvider применяется и внутри Timeline.
 Настройки самого ConfigProvider.timeline и локальные Timeline слои сохраняют приоритет.
 Сверка: [36 исходных случаев и 4 обновления](./tests/browser/fixtures/ant-design-steps-config-reference.json),
 [браузер](./tests/browser/steps-config.spec.ts),
@@ -6753,11 +6754,12 @@ Undefined наследует timeline-record, любой собственный 
 Horizontal сохраняет поведение исходных Steps: ниже xs=576 он получает класс
 ant-steps-vertical, но явный ant-timeline-horizontal остаётся. Это отличается от
 согласованного v1-порога самостоятельного Steps (532px); базовые Steps не меняются.
-SSR не измеряет DOM/viewport и оставляет объявленную ориентацию. Произвольный
-глобальный ConfigProvider.prefixCls пока не перенесён.
+SSR не измеряет DOM/viewport и оставляет объявленную ориентацию.
 
 Локальный prefixCls меняет root и Timeline item/state/color classes; пустая строка
-восстанавливает ant-timeline. Steps остаётся в своём namespace, а CSS variables
+наследует ConfigProvider.prefixCls (по умолчанию ant-timeline). Вложенный Steps
+отдельно наследует общий prefix; локальный Timeline.prefixCls на него не влияет.
+CSS variables
 Timeline/Steps и marker сохраняют прежние имена. Соседние показатели изолированы,
 включая совпадение prefix с ant-timeline-item/ant-timeline-css-var. Обновление
 prefix сохраняет ol, theme/semantics, titleSpan и назначение placement до reverse.
@@ -7770,7 +7772,8 @@ quiet zone, иконку/CORS, statuses, refs, темы, стили и fallback.
 включая все 40 версий, четыре уровня коррекции и восемь масок.
 
 Локальный prefixCls меняет root/cover/expired/scanned/borderless classes; пустая
-строка использует ant-qrcode. CSS module ограничен marker своего корня, namespace
+строка наследует ConfigProvider.prefixCls (по умолчанию ant-qrcode). CSS module
+ограничен marker своего корня, namespace
 токенов и классы Button/Spin сохраняются. Соседние QRCode не меняются, включая
 совпадения prefix с cover/css-var/borderless. При смене prefix сохраняются root,
 canvas/SVG, encoding, status, refs и доступная с клавиатуры кнопка refresh.
@@ -7781,7 +7784,7 @@ Native RTL наследуется, исходное LTR-направление �
 [браузер](./tests/browser/qrcode-prefix.spec.ts),
 [публичный пакет и SSR](./tests/package/qrcode-prefix.ssr.test.ts), `?fixture=qrcode-prefix`.
 Рецепт qrcode-prefix воспроизводит те же 11 правил CSS data module с проверкой SHA-256.
-Глобальный ConfigProvider.prefixCls пока не перенесён.
+Общий ConfigProvider.prefixCls применяется к QRCode, локальный prefix имеет приоритет.
 React development warnings для пустого value и icon с уровнем L
 пока не воспроизводятся; production-поведение этих случаев сохранено.
 
@@ -9850,8 +9853,9 @@ components остаются за пределами этого этапа.
 
 PrefixCls задаёт базовый префикс CSS-классов; по умолчанию ant. Undefined и пустая
 строка наследуют родительский prefix. Локальный непустой prefixCls компонента имеет
-приоритет. Сейчас общий prefix подключён к App, Layout, LayoutSider и
-LayoutHeader/Content/Footer; остальные семейства подключаются отдельно. Например,
+приоритет. Сейчас общий prefix подключён к App, Layout, LayoutSider,
+LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline и Steps;
+остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 
@@ -9871,6 +9875,13 @@ markers и --ant-* bridge сохраняются. В SSR классы и исх�
 [browser](./tests/browser/config-prefix.spec.ts),
 [SSR](./tests/package/config-prefix.ssr.test.ts),
 [приоритет namespace](./src/lib/theme-prefix.test.ts).
+
+Statistic/Timer, QRCode, Timeline и Steps проверяются также по
+[девяти исходным примерам и трём переходам](./tests/browser/fixtures/ant-design-widget-prefix-reference.json):
+[browser](./tests/browser/widget-prefix.spec.ts),
+[SSR](./tests/package/widget-prefix.ssr.test.ts), `?fixture=widget-prefix`.
+При сравнении родительские typography/direction совпадают с DOM-провайдером Svelte;
+текущее время Timer не участвует в снимках.
 
 ## Формы и валидация
 

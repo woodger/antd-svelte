@@ -46,7 +46,7 @@
     ...rest
   }: StepsProps = $props();
   const config = useConfig();
-  let componentPrefix = $derived(prefixCls || 'ant-steps');
+  let componentPrefix = $derived(config.getPrefixCls('steps', prefixCls));
   let prefixCss = $derived(getStepsPrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Steps');
   const composition = useStepsComposition();

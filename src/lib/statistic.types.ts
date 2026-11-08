@@ -20,7 +20,7 @@ export interface StatisticProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'title' | 'class' | 'style' | 'children' | 'prefix'
 > {
-  /** Локальный CSS prefix; пустая строка использует ant-statistic. */
+  /** Локальный CSS prefix; пустая строка наследует ConfigProvider prefix. */
   prefixCls?: string;
   /** @defaultValue 0 */
   value?: StatisticValue;

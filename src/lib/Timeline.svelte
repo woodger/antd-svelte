@@ -35,7 +35,7 @@
     }
   );
   const config = useConfig();
-  let componentPrefix = $derived(prefixCls || 'ant-timeline');
+  let componentPrefix = $derived(config.getPrefixCls('timeline', prefixCls));
   let prefixCss = $derived(getTimelinePrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Timeline');
   setStepsComposition({

@@ -67,7 +67,7 @@ export interface QRCodeConfig {
 
 /** QRCode Ant Design 6.6.8 с canvas/SVG; children и title не передаются в рисунок. */
 export interface QRCodeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'style' | 'class'> {
-  /** Локальный prefix root/cover/status classes; пустая строка использует ant-qrcode. */
+  /** Локальный prefix root/cover/status classes; пустая строка наследует ConfigProvider prefix. */
   prefixCls?: string;
   /** Пустая строка не создаёт DOM; массив задаёт отдельные сегменты, включая пустой массив. */
   value: string | string[];
