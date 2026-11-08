@@ -81,6 +81,11 @@ export interface FormProps<Values extends FormValues> extends Omit<
   onFinish?: (values: Values) => void | Promise<void>;
   /** Ошибки validation; outOfDate отличает устаревший результат проверки. */
   onFinishFailed?: (error: FormValidationError<Values>) => void;
+  /**
+   * Прокрутка первой ошибки после onFinishFailed; local prop заменяет config целиком.
+   * True прокручивает без фокуса, false отключает действие. Без настройки сохранён native автофокус.
+   */
+  scrollToFirstError?: boolean | FormScrollOptions;
   /** Ошибка выполнения onFinish; ошибки validation поступают в onFinishFailed. */
   onError?: (error: unknown) => void;
   /** Классы semantic slots накапливаются после ConfigProvider.form.classNames. */
@@ -95,5 +100,5 @@ export interface FormProps<Values extends FormValues> extends Omit<
 /** Defaults Form; undefined наследует родительский record, {} заменяет его. */
 export type FormConfig = Pick<
   FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap' | 'requiredMark'
-    | 'class' | 'style' | 'classNames' | 'styles'
+    | 'class' | 'style' | 'classNames' | 'styles' | 'scrollToFirstError'
 >;

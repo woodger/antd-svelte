@@ -9784,6 +9784,19 @@ TreeSelect, Cascader и группы регистрируются автомат
 nativeElement и поддержанными методами либо опубликованный native element.
 Это Svelte refs: например, Slider фокусирует прежний native range input.
 
+`Form.scrollToFirstError` прокручивает первую ошибку после onFinishFailed.
+Настройка Form целиком заменяет ConfigProvider.form.scrollToFirstError;
+undefined наследует config, false отключает прокрутку и фокус. True использует
+if-needed/nearest без фокуса. Объект принимает FormScrollOptions, в том числе
+block, behavior и focus:true. Прокрутка использует текущий ref поля.
+Без настройки в обоих местах сохранён прежний native автофокус первой ошибки;
+Ant Design в этом случае не переводит фокус. Это отличие также действует после
+сброса config record через {}. Устаревшие validation, смена модели и unmount
+не вызывают позднюю прокрутку, включая удаление формы в onFinishFailed.
+Сверка: [15 эталонов](./tests/browser/fixtures/ant-design-form-scroll-first-reference.json),
+[браузер](./tests/browser/form-scroll-first.spec.ts),
+[публичные типы и SSR](./tests/package/form-scroll-first.ssr.test.ts), `?fixture=form-scroll-first`.
+
 У пользовательского control исходный ref передаётся в `FormItem.controlRef`.
 Он имеет приоритет над автоматической регистрацией и возвращается без обёртки.
 Можно передать native element, Svelte `bind:this` с экспортированным focus

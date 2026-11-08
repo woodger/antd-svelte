@@ -5015,7 +5015,12 @@
         "tests/browser/form-size-metrics.ts",
         "tests/browser/fixtures/FormSizeFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-size-reference.json",
-        "tests/package/form-size.ssr.test.ts"
+        "tests/package/form-size.ssr.test.ts",
+        "tests/browser/form-scroll-first.spec.ts",
+        "tests/browser/form-scroll-first-metrics.ts",
+        "tests/browser/fixtures/FormScrollFirstFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-scroll-first-reference.json",
+        "tests/package/form-scroll-first.ssr.test.ts"
       ],
       "features": [
         {
@@ -5606,6 +5611,24 @@
             "tests/package/form-size.ssr.test.ts"
           ],
           "note": "Form.size принимает актуальные small/medium/large; undefined наследует nearest Form/ConfigProvider, без явного контекста сохраняет implicit medium controls и undefined semantic props.size. Локальные control props и Compact size приоритетнее; nested Form без size наследует, локальные provider/inner Form могут переопределить, соседние controls изолированы. Small/large root classes задают исходные label height/control min-height; component=false передаёт размер без wrapper. ConfigContext сохраняет все прочие reactive getters и различие explicit/implicit size для Divider/Compact. FormConfig.size не добавлен: у source нет такого global record prop. 25 неизменённых UMD-состояний сверяют реальные CSS/высоты Input/InputNumber/Select/DatePicker/Button/Switch/Compact/Divider, label containers, nested/sibling scopes, semantic callback normalization, local overrides, три layouts, RTL и compact/component theme. Смена размера сохраняет DOM/focus/selection, values/errors/warnings/touched и native FormData; SSR публикует size classes и не forward-ит size в form attribute. Native Form default vertical и остальные form/model contracts сохранены; prefix, tooltip и другие Form settings остаются отдельными пробелами."
+        },
+        {
+          "id": "scroll-first-error",
+          "title": "Form.scrollToFirstError: submit scroll, options и безопасный lifecycle",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form-field.dom.ts",
+            "tests/browser/form-scroll-first.spec.ts",
+            "tests/browser/form-scroll-first-metrics.ts",
+            "tests/browser/fixtures/FormScrollFirstFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-scroll-first-reference.json",
+            "tests/package/form-scroll-first.ssr.test.ts"
+          ],
+          "note": "Form.scrollToFirstError принимает boolean/FormScrollOptions; local prop целиком заменяет ConfigProvider.form.scrollToFirstError. True вызывает публичный scrollToField первого errorFields.name с block nearest; options заменяют defaults, включая focus/behavior. False отключает и прокрутку, и фокус. OnFinishFailed вызывается перед действием; после tick проверяются active/model owner, outOfDate не вызывает DOM работу. В отсутствие обоих settings сохранён прежний native автофокус первой ошибки, включая config record reset {}; source 6.6.8 без настройки не фокусирует. Это явное сохранение существующего Svelte контракта, raw source reset-state приложен. 15 неизменённых UMD-сценариев подтверждают argument/options identity, callback order, фактические scrollTop/target bounds и focus, nested NamePath, второе ошибочное поле после valid first, уже видимый control, config inherit/replace/reset и local priority. Native browser сверяет source requests/order во всех случаях, source focus/geometry при явном setting; config-reset отдельно проверяет native default focus. Reactive props сохраняют control/value/focus/selection; reset, replace/unmount во время validation и непосредственно в onFinishFailed не вызывают поздний scroll. SSR/types не требуют DOM, prop не уходит в form attrs. Используются существующие scroll/focus/ref механизмы; согласованное исключение source scroll-margin bug сохранено."
         }
       ]
     },
@@ -16179,7 +16202,14 @@
         "tests/browser/fixtures/FormSemanticFixtures.svelte",
         "tests/browser/fixtures/form-semantic-settings.ts",
         "tests/browser/fixtures/ant-design-form-semantic-reference.json",
-        "tests/package/form-semantic.ssr.test.ts"
+        "tests/package/form-semantic.ssr.test.ts",
+        "src/lib/form.model.svelte.ts",
+        "src/lib/form-field.dom.ts",
+        "tests/browser/form-scroll-first.spec.ts",
+        "tests/browser/form-scroll-first-metrics.ts",
+        "tests/browser/fixtures/FormScrollFirstFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-scroll-first-reference.json",
+        "tests/package/form-scroll-first.ssr.test.ts"
       ],
       "features": [
         {
@@ -17148,6 +17178,24 @@
             "tests/package/form-semantic.ssr.test.ts"
           ],
           "note": "FormConfig включает classNames/styles как object/callback для шести source slots. Local Form settings приоритетнее; context class/style слои и record replacement следуют прежнему контракту. Callbacks видят native merged FormProps, могут вернуть undefined; slots передаются полям/ErrorList, nested Form сбрасывает outer local maps к props/config. Полные source layers и callback normalization подтверждены Form semantic-styles fixture/reference; native help/standalone ErrorList policies сохранены. Прочие global Form settings остаются отдельными пробелами."
+        },
+        {
+          "id": "form-scroll-first-error",
+          "title": "ConfigProvider.form.scrollToFirstError: defaults и local override",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form-field.dom.ts",
+            "tests/browser/form-scroll-first.spec.ts",
+            "tests/browser/form-scroll-first-metrics.ts",
+            "tests/browser/fixtures/FormScrollFirstFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-scroll-first-reference.json",
+            "tests/package/form-scroll-first.ssr.test.ts"
+          ],
+          "note": "FormConfig включает scrollToFirstError boolean/FormScrollOptions. Undefined record наследует, object/{} заменяют config record целиком. Local Form prop заменяет весь setting, включая false, true не наследует focus/block из config options. Source requests, callback order, реальная прокрутка/focus и native отсутствие late actions подтверждены Form scroll-first-error. При сброшенной или отсутствующей настройке сохраняется существующий native autofocus, source отсутствие autofocus записано как согласованное отличие."
         }
       ]
     },

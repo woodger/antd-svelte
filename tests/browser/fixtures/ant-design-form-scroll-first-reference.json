@@ -1,0 +1,564 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after failed result; motion disabled",
+    "normalization": "public scrollToField arguments and callback order; native viewport positions rounded to 0.01px"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "local-true",
+        "scroll": true
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "nearest"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 482,
+        "targetTop": 148,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "local-false",
+        "scroll": false
+      },
+      "metrics": {
+        "order": [
+          "failed"
+        ],
+        "calls": [],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 0,
+        "targetTop": 630,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "local-center",
+        "scroll": {
+          "block": "center",
+          "behavior": "instant"
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "center",
+              "behavior": "instant"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 556,
+        "targetTop": 74,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "local-end",
+        "scroll": {
+          "block": "end",
+          "behavior": "instant"
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "end",
+              "behavior": "instant"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 482,
+        "targetTop": 148,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "local-focus",
+        "scroll": {
+          "block": "center",
+          "focus": true,
+          "behavior": "instant"
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "center",
+              "focus": true,
+              "behavior": "instant"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 556,
+        "targetTop": 74,
+        "active": "target"
+      }
+    },
+    {
+      "sample": {
+        "id": "local-no-focus",
+        "scroll": {
+          "focus": false,
+          "behavior": "instant"
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "nearest",
+              "focus": false,
+              "behavior": "instant"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 482,
+        "targetTop": 148,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "context-true",
+        "parent": {
+          "scrollToFirstError": true
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "nearest"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 482,
+        "targetTop": 148,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "local-cancel-context",
+        "scroll": false,
+        "parent": {
+          "scrollToFirstError": true
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed"
+        ],
+        "calls": [],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 0,
+        "targetTop": 630,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "local-replace-options",
+        "scroll": true,
+        "parent": {
+          "scrollToFirstError": {
+            "block": "center",
+            "focus": true
+          }
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "nearest"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 482,
+        "targetTop": 148,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "context-inherit",
+        "parent": {
+          "scrollToFirstError": {
+            "block": "center",
+            "focus": true,
+            "behavior": "instant"
+          }
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "center",
+              "focus": true,
+              "behavior": "instant"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 556,
+        "targetTop": 74,
+        "active": "target"
+      }
+    },
+    {
+      "sample": {
+        "id": "context-reset",
+        "parent": {
+          "scrollToFirstError": true
+        },
+        "child": {}
+      },
+      "metrics": {
+        "order": [
+          "failed"
+        ],
+        "calls": [],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 0,
+        "targetTop": 630,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "context-replace",
+        "parent": {
+          "scrollToFirstError": true
+        },
+        "child": {
+          "scrollToFirstError": false
+        }
+      },
+      "metrics": {
+        "order": [
+          "failed"
+        ],
+        "calls": [],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 0,
+        "targetTop": 630,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "second-field",
+        "scroll": true,
+        "firstValid": true
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "second"
+            ],
+            "options": {
+              "block": "nearest"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 788,
+        "targetTop": 148,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-path",
+        "scroll": true,
+        "nested": true
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "user",
+              "name"
+            ],
+            "options": {
+              "block": "nearest"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "user",
+              "name"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 482,
+        "targetTop": 148,
+        "active": "submit"
+      }
+    },
+    {
+      "sample": {
+        "id": "already-visible",
+        "scroll": {
+          "block": "center",
+          "behavior": "instant"
+        },
+        "visible": true
+      },
+      "metrics": {
+        "order": [
+          "failed",
+          "scroll"
+        ],
+        "calls": [
+          {
+            "name": [
+              "first"
+            ],
+            "options": {
+              "block": "center",
+              "behavior": "instant"
+            }
+          }
+        ],
+        "failed": {
+          "names": [
+            [
+              "first"
+            ],
+            [
+              "second"
+            ]
+          ],
+          "outOfDate": false
+        },
+        "scrollTop": 0,
+        "targetTop": 30,
+        "active": "submit"
+      }
+    }
+  ]
+}

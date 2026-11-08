@@ -135,6 +135,10 @@
 
 ### Added
 
+- Form: scrollToFirstError и ConfigProvider.form.scrollToFirstError с локальным
+  приоритетом, options и opt-in focus. Сохранён прежний автофокус без настройки;
+  устаревшие submit, reset, смена модели и unmount не прокручивают старые controls.
+
 - Form: size с наследованием Form/ConfigProvider и передачей размера вложенным
   controls/Compact. Small/large задают исходные высоты label/control; сохранены
   приоритеты local props, изоляция соседей, semantic callbacks и native field state.

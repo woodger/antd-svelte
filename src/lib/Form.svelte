@@ -26,6 +26,7 @@
     disabled,
     onFinish,
     onFinishFailed,
+    scrollToFirstError,
     onError,
     rootClassName,
     classNames,
@@ -138,14 +139,26 @@
     }
 
     if (result.status === 'invalid') {
+      const scroll = scrollToFirstError !== undefined
+        ? scrollToFirstError : config.form?.scrollToFirstError;
       onFinishFailed?.(result.error);
 
       if (!result.error.outOfDate) {
         await tick();
-        element.querySelector<HTMLElement>(
-          '[data-ant-form-invalid="true"], [aria-invalid="true"]'
-        )
-          ?.focus();
+        if (!active || form !== submittedForm) return;
+
+        if (scroll !== undefined) {
+          const first = result.error.errorFields[0];
+          if (scroll && first) {
+            submittedForm.scrollToField(first.name, {
+              block: 'nearest', ...(typeof scroll === 'object' ? scroll : {})
+            });
+          }
+        } else {
+          element.querySelector<HTMLElement>(
+            '[data-ant-form-invalid="true"], [aria-invalid="true"]'
+          )?.focus();
+        }
       }
     } else if (result.status === 'failed') {
       onError?.(result.error);
