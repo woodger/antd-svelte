@@ -4795,6 +4795,11 @@
           "name": "scroll-into-view-if-needed",
           "range": "^3.1.0",
           "referenceVersion": "3.1.0"
+        },
+        {
+          "name": "@rc-component/util",
+          "range": "^1.14.0",
+          "referenceVersion": "1.14.0"
         }
       ],
       "priority": "unassigned",
@@ -4926,7 +4931,12 @@
         "tests/browser/form-hidden.spec.ts",
         "tests/browser/fixtures/FormHiddenFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-hidden-reference.json",
-        "tests/package/form-hidden.ssr.test.ts"
+        "tests/package/form-hidden.ssr.test.ts",
+        "tests/browser/form-extra.spec.ts",
+        "tests/browser/form-extra-metrics.ts",
+        "tests/browser/fixtures/FormExtraFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-extra-reference.json",
+        "tests/package/form-extra.ssr.test.ts"
       ],
       "features": [
         {
@@ -5319,6 +5329,23 @@
             "tests/package/form-hidden.ssr.test.ts"
           ],
           "note": "Hidden false/default сохраняет прежний markup; true добавляет исходный ant-form-item-hidden без размонтирования children или снятия регистрации. Сохраняются DOM/native ref, значение, errors/warnings/touched и локальные черновики; hidden fields продолжают участвовать в validation/submit и native FormData. CSS display:none исключает controls из Tab и accessibility tree, focusField скрытого control не перехватывает фокус. Сброс скрытого поля по-прежнему пересоздаёт children/ref и восстанавливает defaults; показ возвращает сохранённое доступное описание. Семь состояний неизменённого UMD 6.6.8, три layouts и native submit/keyboard сверены отдельно; SSR сохраняет содержимое и class без DOM side effects. Условное удаление binding, preserve и прочий field lifecycle этим этапом не расширены."
+        },
+        {
+          "id": "extra-content",
+          "title": "FormItem extra с messages и доступным описанием",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/RenderContent.svelte",
+            "src/lib/types.ts",
+            "tests/browser/form-extra.spec.ts",
+            "tests/browser/form-extra-metrics.ts",
+            "tests/browser/fixtures/FormExtraFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-extra-reference.json",
+            "tests/package/form-extra.ssr.test.ts"
+          ],
+          "note": "Постоянное extra отображается вместе с errors/warnings и получает собственный _extra id в описании встроенного control. Общий RenderEmptyContent/RenderContent сохраняет strings, numbers, 0, arrays и Svelte snippets вместо ReactNode. Изучена isReactRenderable @rc-component/util 1.14.0: null/undefined/false/пустая строка отсутствуют, true/[]/opaque snippets оставляют контейнер. Четырнадцать состояний неизменённого UMD сверяют literal extra text, container color/font-size/line-height/display, порядок ARIA targets и нормализованный видимый текст описания; исходные DOM-пробелы сообщений сохранены. Изменение content/snippet/ARIA не заменяет input, values, focus или selection; внешние пользовательские aria-describedby остаются перед Form targets. Прежние native help priority и layout сообщений сохранены; полный upstream FormItem help override/additional motion и generic field adapters этим этапом не перенесены. SSR сохраняет caption/id/association без DOM API; dependencies/lockfile не меняются."
         }
       ]
     },

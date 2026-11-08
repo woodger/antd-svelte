@@ -9383,6 +9383,19 @@ Inline, локальные overrides и мобильный перенос про
 Component=false по-прежнему передаёт контекст без native form и layout-wrapper;
 сам по себе контекст не создаёт flex-контейнер.
 
+`FormItem.extra` задаёт постоянное пояснение, которое показывается вместе с
+errors/warnings. Поддержаны строки, числа, массивы и Svelte snippets; 0 сохраняется.
+Null/undefined/false/пустая строка убирают пояснение. True, пустой массив и opaque
+snippet сохраняют контейнер, как текущая проверка renderability upstream.
+Extra получает собственный id и добавляется к aria-describedby после сообщений;
+существующие внешние описания встроенного control сохраняются.
+Обновление extra или snippet сохраняет input, значение, фокус и выделение.
+Прежний приоритет help сохранён: errors/warnings заменяют help, extra остаётся.
+Четырнадцать случаев сверены с
+[upstream](./tests/browser/fixtures/ant-design-form-extra-reference.json):
+[браузер](./tests/browser/form-extra.spec.ts),
+[SSR](./tests/package/form-extra.ssr.test.ts), `?fixture=form-extra`.
+
 `FormItem.hidden` скрывает весь блок поля через исходный CSS, сохраняя его control,
 ref, значение, metadata и локальное состояние children. По умолчанию false.
 Скрытое поле продолжает участвовать в validation, submit и native FormData;

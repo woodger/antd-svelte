@@ -1,0 +1,262 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "two animation frames before every capture",
+    "descriptions": "rendered text with normalized prose whitespace"
+  },
+  "cases": [
+    {
+      "id": "missing",
+      "extra": null,
+      "described": [],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "null",
+      "extra": null,
+      "described": [],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "false",
+      "extra": null,
+      "described": [],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "empty",
+      "extra": null,
+      "described": [],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "zero",
+      "extra": {
+        "text": "0",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "extra",
+          "text": "0"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "true",
+      "extra": {
+        "text": "",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "extra",
+          "text": ""
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "space",
+      "extra": {
+        "text": " ",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "extra",
+          "text": ""
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "array",
+      "extra": {
+        "text": "",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "extra",
+          "text": ""
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "nested",
+      "extra": {
+        "text": "0Text",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "extra",
+          "text": "0Text"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "text",
+      "extra": {
+        "text": "Extra text",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "extra",
+          "text": "Extra text"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "rich",
+      "extra": {
+        "text": "Read more",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "extra",
+          "text": "Read more"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    },
+    {
+      "id": "with-messages",
+      "extra": {
+        "text": "Persistent extra",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "help",
+          "text": "Error Warning"
+        },
+        {
+          "kind": "extra",
+          "text": "Persistent extra"
+        }
+      ],
+      "errors": [
+        "Error"
+      ],
+      "warnings": [
+        "Warning"
+      ],
+      "value": "Anna"
+    },
+    {
+      "id": "messages-without-extra",
+      "extra": null,
+      "described": [
+        {
+          "kind": "help",
+          "text": "Error Warning"
+        }
+      ],
+      "errors": [
+        "Error"
+      ],
+      "warnings": [
+        "Warning"
+      ],
+      "value": "Anna"
+    },
+    {
+      "id": "help-and-extra",
+      "extra": {
+        "text": "Extra text",
+        "style": {
+          "color": "rgba(0, 0, 0, 0.45)",
+          "font-size": "14px",
+          "line-height": "22px",
+          "display": "block"
+        }
+      },
+      "described": [
+        {
+          "kind": "help",
+          "text": "Help text"
+        },
+        {
+          "kind": "extra",
+          "text": "Extra text"
+        }
+      ],
+      "errors": [],
+      "warnings": [],
+      "value": "Anna"
+    }
+  ]
+}

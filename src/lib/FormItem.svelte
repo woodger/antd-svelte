@@ -6,6 +6,8 @@
   import type { ValidationRule } from './validation.engine';
   import { useFormList } from './form-list-context';
   import { captureFormResetFocus } from './form-reset.dom';
+  import type { RenderEmptyContent } from './types';
+  import RenderContent from './RenderContent.svelte';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
@@ -14,6 +16,8 @@
     label: string;
     children: Snippet;
     help?: string;
+    /** Постоянное пояснение рядом с errors/warnings; false/null/undefined/'' скрывают его. */
+    extra?: RenderEmptyContent;
     required?: boolean;
     /** Скрывает блок без удаления control, значения и регистрации validation. @defaultValue false */
     hidden?: boolean;
@@ -41,6 +45,7 @@
     label,
     children,
     help,
+    extra,
     required,
     hidden = false,
     layout,
@@ -64,6 +69,8 @@
     ?? (rules ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path))
     ?? false);
   let descriptionId = $derived(errors.length || warnings.length || help ? `${id}-help` : undefined);
+  let hasExtra = $derived(extra !== undefined && extra !== null && extra !== false && extra !== '');
+  let extraId = $derived(hasExtra ? `${id}_extra` : undefined);
   let resetKey = $state.raw<object>({});
   let content: HTMLDivElement | undefined = $state();
   const controls = new Set<() => unknown>();
@@ -125,7 +132,7 @@
       return errors.length ? 'error' : warnings.length ? 'warning' : undefined;
     },
     get describedBy() {
-      return descriptionId;
+      return [descriptionId, extraId].filter(Boolean).join(' ') || undefined;
     },
     registerControl(getInstance) {
       controls.add(getInstance);
@@ -186,6 +193,9 @@
         </div>
       {:else if help}
         <div id={descriptionId} class="ant-form-item-extra">{help}</div>
+      {/if}
+      {#if hasExtra}
+        <div id={extraId} class="ant-form-item-extra"><RenderContent value={extra} /></div>
       {/if}
     </div>
   </div>

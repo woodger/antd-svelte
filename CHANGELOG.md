@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: extra с текстом, числами, массивами и snippets отображается вместе с
+  errors/warnings и входит в aria-describedby. Сохранены 0, текущая renderability,
+  внешние описания, фокус/выделение и прежний приоритет help.
+
 - FormItem: hidden скрывает весь блок без удаления binding, значения, refs и local
   state. Скрытое поле участвует в validation/submit/FormData; Tab пропускает его
   controls. Reset сохраняет прежний remount, а показ возвращает доступные ошибки.
