@@ -17,6 +17,7 @@
   import type { FormItemTooltip as FormItemTooltipContent } from './form.types';
   import { resolveFormTooltip } from './form-tooltip.engine';
   import FormItemTooltip from './FormItemTooltip.svelte';
+  import NoFormItemBinding from './NoFormItemBinding.svelte';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
@@ -238,7 +239,7 @@
         form?.labelWrap === true && 'ant-form-item-label-wrap',
         resolvedLabelCol?.class
       ].filter(Boolean).join(' ')}>
-        <label for={id} id={labelledBy} class={form?.classNames?.label}
+        <NoFormItemBinding><label for={id} id={labelledBy} class={form?.classNames?.label}
           style={form?.styles?.label} class:ant-form-item-required={isRequired}
           class:ant-form-item-required-mark-hidden={requiredMark === false}
           class:ant-form-item-required-mark-optional={requiredMark === 'optional'
@@ -253,7 +254,7 @@
               {@render captionWithTooltip()}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
             {/if}
           {/key}
-        </label>
+        </label></NoFormItemBinding>
       </Col>
     {/if}
     <NoFormItemColumns>
@@ -286,7 +287,7 @@
         {/if}
         {#if hasExtra}
           <div id={extraId} class={['ant-form-item-extra', form?.classNames?.extra]}
-            style={form?.styles?.extra}>{#key resetKey}<RenderContent value={extra} />{/key}</div>
+            style={form?.styles?.extra}>{#key resetKey}<NoFormItemBinding><RenderContent value={extra} /></NoFormItemBinding>{/key}</div>
         {/if}
       </Col>
     </NoFormItemColumns>

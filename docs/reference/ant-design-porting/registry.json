@@ -5039,7 +5039,13 @@
         "tests/browser/fixtures/FormExplanationResetFixtures.svelte",
         "tests/browser/fixtures/FormExplanationCounter.svelte",
         "tests/browser/fixtures/ant-design-form-explanation-reset-reference.json",
-        "tests/package/form-explanation-reset.ssr.test.ts"
+        "tests/package/form-explanation-reset.ssr.test.ts",
+        "src/lib/NoFormItemBinding.svelte",
+        "tests/browser/form-slot-context.spec.ts",
+        "tests/browser/form-slot-context-metrics.ts",
+        "tests/browser/fixtures/FormSlotContextFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-slot-context-reference.json",
+        "tests/package/form-slot-context.ssr.test.ts"
       ],
       "features": [
         {
@@ -5680,6 +5686,24 @@
             "tests/package/form-tooltip.ssr.test.ts"
           ],
           "note": "FormItem.tooltip принимает RenderEmptyContent или FormTooltipProps; Form.tooltip и ConfigProvider.form.tooltip задают defaults, без local Item tooltip значок отсутствует. Options объединяются по ключам config → Form → Item; {} включает наследованный title, undefined/null/false/пустая строка отключают tooltip, 0/true/arrays/snippets renderable. Icon — Svelte snippet/null, fallback children → QuestionCircleOutlined. RequiredMark renderer получает составной label+tooltip snippet, обычные подписи без tooltip сохраняют прежние аргументы. Приватный consumer использует текущий Tooltip: source hover default/явные actions, задержки/цвет/placement/options, отмену label click без блокировки click-trigger. Табуляция пропускает tabindex=-1 icon; popup в body, local getPopupContainer → global → body, общий ShadowRoot остаётся в config. Display contents native shell сохраняет исходные flex/inline размеры; source SVG из pinned UMD покрыт существующей MIT license Ant Design Icons, без новой npm зависимости. 31 UMD-состояние подтверждает content/icon presence, per-key priority, record reset/replacement, nested Form reset, custom/optional mark, label/title и точные icon offsets/dimensions/CSS, popup content/colors/placement, hover/click и cancelable label events, compact/dark/RTL. DOM dir одинаков в обеих матрицах, raw config-only RTL capture сохранён отдельно. Исходные 6.6.8/revision из reference имеют две подтверждённые неточности: isPlainObject ошибочно принимает массив за options без title; default SVG role img с aria-label question-circle входит в доступное имя поля. Svelte выводит массив как content, совпадая с измеренным title-array equivalent, и скрывает декоративный SVG от accessibility. Raw array/default icon/accessible name сохранены для последующего разбора. Native Tooltip whitespace/cache/SSR/motion/ref contracts сохранены. Reactive props сохраняют input/focus/selection, values/errors/warnings/touched и FormData; публичные типы и SSR не читают DOM. Полный help/motion, feedback, nameless fields, prefix и другие Form возможности остаются отдельными пробелами."
+        },
+        {
+          "id": "decoration-field-context",
+          "title": "Label/extra/tooltip controls: самостоятельные bindings и сохранение Form settings",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/NoFormItemBinding.svelte",
+            "src/lib/form-context.ts",
+            "src/lib/config-context.ts",
+            "tests/browser/form-slot-context.spec.ts",
+            "tests/browser/form-slot-context-metrics.ts",
+            "tests/browser/fixtures/FormSlotContextFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-slot-context-reference.json",
+            "tests/package/form-slot-context.ssr.test.ts"
+          ],
+          "note": "Приватный NoFormItemBinding очищает FormFieldContext только в label (включая его tooltip) и extra; основной children/controlRef продолжают принадлежать полю. Сохраняется FormContext и reactive ConfigContext со всеми getters, componentDisabled берётся из Form.disabled, чтобы unbound widgets сохраняли global/Form disabled и прежний submitting contract. Size/variant/theme/locale не меняются. Inputs/selects пояснений не получают id/name, required, error/warning status/ARIA, description основного поля и не регистрируют себя в его ref. Explicit helper props приоритетнее. Helper input/blur не меняет main value/touched, native FormData содержит единственное main значение, getFieldInstance указывает на основной Input. Семь неизменённых UMD-состояний фиксируют Input extra/popup и Select: default, required, errors, disabled, small, filled и explicit owner props; source helper blur и ref ownership приложены. Scoped helper contexts не добавляют DOM, selected reset/lifecycle и внешний вид labels/slots сохраняются. Package SSR проверяет отсутствие скопированных field attributes у helpers и сохранение errors/name основного control; source default native HTML name основного поля по-прежнему заменён согласованной Svelte FormData association."
         }
       ]
     },

@@ -1035,6 +1035,10 @@
 
 ### Fixed
 
+- FormItem: controls в label/extra/tooltip не наследуют binding основного поля.
+  Убраны дубли id/name, лишние required/error ARIA и влияние helper blur на touched;
+  getFieldInstance возвращает основной control. Настройки Form и явные props сохранены.
+
 - FormItem: resetFields сбрасывает локальное состояние extra выбранного поля,
   как label/tooltip и upstream. Соседние slots, значения и фокус сохраняются.
 

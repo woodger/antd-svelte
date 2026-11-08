@@ -9547,6 +9547,15 @@ ResetFields пересоздаёт content extra вместе с label, tooltip 
 [браузер](./tests/browser/form-extra.spec.ts),
 [SSR](./tests/package/form-extra.ssr.test.ts), `?fixture=form-extra`.
 
+Controls внутри label, extra и tooltip подписи наследуют disabled/size/variant Form,
+но не binding текущего поля: id/name, required, status, ARIA ошибок и ref не копируются.
+Blur и ввод вспомогательного control не меняют touched/value основного поля;
+getFieldInstance возвращает основной control, а FormData не получает лишние значения
+под его именем. Явные props вспомогательного control сохраняются.
+Сверка: [семь эталонов](./tests/browser/fixtures/ant-design-form-slot-context-reference.json),
+[браузер](./tests/browser/form-slot-context.spec.ts),
+[SSR](./tests/package/form-slot-context.ssr.test.ts), `?fixture=form-slot-context`.
+
 `FormItem.hidden` скрывает весь блок поля через исходный CSS, сохраняя его control,
 ref, значение, metadata и локальное состояние children. По умолчанию false.
 Скрытое поле продолжает участвовать в validation, submit и native FormData;
