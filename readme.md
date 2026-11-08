@@ -9455,6 +9455,28 @@ value binding, ref или фокус control и работает при SSR.
 [браузер](./tests/browser/form-use-status.spec.ts),
 [публичные типы и SSR](./tests/package/form-use-status.ssr.test.ts), `?fixture=form-use-status`.
 
+`FormItem.noStyle` убирает layout, label, help и extra, сохраняя field binding,
+правила, ref и reset. Ошибки и предупреждения передаются ближайшему FormItem
+с layout; help=false отключает эту передачу. Hidden сохраняет собственную
+скрытую обёртку и при noStyle=true. Без оформленного родителя сообщения остаются
+в metadata и useFormItemStatus, отдельного списка в DOM нет.
+
+Родитель показывает собственные сообщения, затем сообщения noStyle-полей в порядке
+первых metadata events. Одинаковые имена объединяются; строки FormList сохраняют
+свои сообщения при перестановке. Статус и useFormItemStatus родителя описывают
+только его собственное поле, как upstream. NoStyle наследует visual status родителя,
+если у него нет своего статуса, errors/warnings, pending validation или touched.
+Reset пересоздаёт control; прежние native focus/selection contracts сохраняются.
+
+Две ошибки 6.6.8 не повторены: описание noStyle-control связано с реальным списком
+родителя, а переключение noStyle/help и удаление поля сразу обновляют этот список.
+Игнорируемые собственные help/extra не оставляют висячих aria-describedby.
+Исходные наблюдения сохранены в
+[20 raw-сценариях и transitions](./tests/browser/fixtures/ant-design-form-no-style-reference.json).
+Проверки: [сбор сообщений](./src/lib/form-no-style.engine.test.ts),
+[браузер и lifecycle](./tests/browser/form-no-style.spec.ts),
+[публичный пакет и SSR](./tests/package/form-no-style.ssr.test.ts), `?fixture=form-no-style`.
+
 `Form.colon`, `labelAlign` и `labelWrap` наследуют defaults из `ConfigProvider.form`.
 При отсутствии настройки colon включён, labelAlign равен right, labelWrap — false.
 Локальные FormItem.colon/labelAlign имеют приоритет над Form; true включает colon

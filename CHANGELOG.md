@@ -7,6 +7,14 @@
 
 ## [Unreleased]
 
+### Added
+
+- FormItem.noStyle сохраняет field binding без layout и собирает ошибки и
+  предупреждения в ближайшем оформленном FormItem. Сохранены собственные статусы,
+  keyed строки FormList, reset и native focus/selection. Описание control связано
+  с реальным списком сообщений; переключение noStyle/help и удаление поля
+  освобождают сообщения без двух подтверждённых дефектов исходного 6.6.8.
+
 ### Removed
 
 - У Modal удалён maskClosable; закрытие по фону настраивается через mask.closable.

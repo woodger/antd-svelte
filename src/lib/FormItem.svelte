@@ -1,13 +1,15 @@
 <script lang="ts">
-  import { onMount, tick, untrack, type Snippet } from 'svelte';
+  import { onDestroy, onMount, tick, untrack, type Snippet } from 'svelte';
   import type { FormFieldRegistration } from './form-internal';
+  import type { FormFieldMeta } from './form.model.svelte';
   import { useForm, type FormFieldContext } from './form-context';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { formNamePath, type NamePath } from './form-store.engine';
   import type { ValidationRule } from './validation.engine';
   import { useFormList } from './form-list-context';
-  import { captureFormResetFocus } from './form-reset.dom';
+  import { captureFormControlResetFocus, captureFormResetFocus } from './form-reset.dom';
+  import { getFormFieldElement } from './form-field.dom';
   import { enUS, type RenderEmptyContent } from './types';
   import RenderContent from './RenderContent.svelte';
   import Row from './Row.svelte';
@@ -23,7 +25,9 @@
   import NoFormItemBinding from './NoFormItemBinding.svelte';
   import FormItemBinding from './FormItemBinding.svelte';
   import FormItemStatusProvider from './FormItemStatusProvider.svelte';
-  import type { FormItemStatus } from './form-item-status';
+  import { useFormItemStatusContext, type FormItemStatus } from './form-item-status';
+  import { useFormItemMeta, type FormItemMetaContext } from './form-item-meta-context';
+  import { mergeFormItemMessages, type FormItemMessages } from './form-no-style.engine';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
@@ -43,6 +47,8 @@
     required?: boolean;
     /** Скрывает блок без удаления control, значения и регистрации validation. @defaultValue false */
     hidden?: boolean;
+    /** Убирает layout; ошибки передаются ближайшему styled Item, help=false отключает передачу. */
+    noStyle?: boolean;
     /** Локальный layout поля; иначе наследуется ближайший Form, standalone остаётся vertical. */
     layout?: 'horizontal' | 'vertical';
     /** Локальное выравнивание подписи имеет приоритет над ближайшим Form. */
@@ -88,6 +94,7 @@
     extra,
     required,
     hidden = false,
+    noStyle = false,
     layout,
     labelAlign,
     labelCol,
@@ -107,9 +114,12 @@
   const form = useForm();
   const config = useConfig();
   const list = useFormList();
+  const parentStatus = useFormItemStatusContext();
+  const parentMeta = useFormItemMeta();
   const componentTheme = useComponentTheme('Form');
   const generatedId = $props.id();
   let hasName = $derived(name !== undefined && name !== null);
+  let hasLayout = $derived(!noStyle || hidden);
   let id = $derived(htmlFor ?? `ant-field-${generatedId}`);
   let path = $derived([...(list?.prefixName ?? []), ...formNamePath(name ?? [])]);
   let resolvedLayout = $derived(layout ?? form?.layout ?? 'vertical');
@@ -123,7 +133,8 @@
   let hasLabel = $derived(label !== undefined && label !== null && label !== false && label !== '');
   let labelContent = $derived(typeof label === 'string' && haveColon && label.trim()
     ? label.replace(/[:：]\s*$/, '') : label);
-  let labelledBy = $derived(hasName && hasLabel && typeof label !== 'string' && typeof label !== 'number'
+  let labelledBy = $derived(hasLayout && hasName && hasLabel
+    && typeof label !== 'string' && typeof label !== 'number'
     ? `${id}_label` : undefined);
   let requiredMark = $derived(form?.requiredMark ?? true);
   let tooltipOptions = $derived(resolveFormTooltip(tooltip, form?.tooltip));
@@ -133,23 +144,99 @@
   let meta = $derived(hasName ? form?.getFieldMeta(path) : undefined);
   let status = $derived(resolveFormStatus({
     validateStatus, errors, warnings, touched: meta?.touched, validating: meta?.validating
-  }));
+  }) ?? (!hasLayout ? parentStatus.status : undefined));
   let isRequired = $derived(required
     ?? (hasName && (rules
       ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path)))
     ?? false);
   let hasHelp = $derived(help !== undefined && help !== null && help !== false && help !== '');
-  let descriptionId = $derived(hasName && (errors.length || warnings.length || hasHelp)
+  const reportedFields = new Set<FormItemMessages>();
+  let reportVersion = $state.raw<object>({});
+  let reports = $derived.by(() => {
+    void reportVersion;
+    return [...reportedFields];
+  });
+  let messages = $derived(mergeFormItemMessages(errors, warnings, reports));
+  let hasReportedMessages = $derived(reports.some(field => field.errors.length || field.warnings.length));
+  let descriptionId = $derived(hasLayout && (hasName || hasReportedMessages)
+    && (messages.errors.length || messages.warnings.length || hasHelp)
     ? `${id}-help` : undefined);
   let hasExtra = $derived(extra !== undefined && extra !== null && extra !== false && extra !== '');
-  let extraId = $derived(hasName && hasExtra ? `${id}_extra` : undefined);
+  let extraId = $derived(hasLayout && hasName && hasExtra ? `${id}_extra` : undefined);
   let resetKey = $state.raw<object>({});
   let content: HTMLDivElement | undefined = $state();
   const controls = new Set<() => unknown>();
   let registration: FormFieldRegistration | undefined;
+  let hasMetaEvent = false;
+  let removeReport: (() => void) | undefined;
+  const report: FormItemMessages = {
+    get name() { return path; },
+    get errors() { return errors; },
+    get warnings() { return warnings; }
+  };
+  const collector: FormItemMetaContext = {
+    get describedBy() { return descriptionId; },
+    register(field) {
+      reportedFields.add(field);
+      reportVersion = {};
+
+      return () => {
+        // Canonical Set не читает прежние $state values во время teardown siblings.
+        if (reportedFields.delete(field)) reportVersion = {};
+      };
+    }
+  };
+
+  function releaseReport() {
+    removeReport?.();
+    removeReport = undefined;
+  }
+
+  function syncReport() {
+    if (!noStyle || !hasName || help === false || !hasMetaEvent || !parentMeta) {
+      releaseReport();
+      return;
+    }
+    removeReport ??= parentMeta.register(report);
+  }
+
+  function handleFieldMeta(value: FormFieldMeta | undefined) {
+    hasMetaEvent = value !== undefined;
+    syncReport();
+  }
+
+  function getControlInstance() {
+    if (controlRef != null) return controlRef;
+    for (const getInstance of controls) {
+      const instance = getInstance();
+      if (instance != null) return instance;
+    }
+  }
+
+  function getControlElement() {
+    const root = getFormFieldElement(getControlInstance());
+    if (!root || root.id === id) return root;
+
+    return [...root.querySelectorAll<HTMLElement>('[id]')].find(node => node.id === id) ?? root;
+  }
 
   untrack(() => {
     if (hasName) form?.initializeField(path, initialValue);
+    // SSR и поздний mount уже могут читать model-owned metadata до UI registration.
+    hasMetaEvent = !!(errors.length || warnings.length || meta?.touched || meta?.validating);
+    syncReport();
+  });
+
+  onDestroy(releaseReport);
+
+  $effect.pre(() => {
+    const active = noStyle && hasName && help !== false;
+    untrack(() => {
+      if (active && (errors.length || warnings.length || meta?.touched || meta?.validating)) {
+        hasMetaEvent = true;
+      }
+      syncReport();
+    });
   });
 
   $effect.pre(() => {
@@ -178,24 +265,22 @@
       get initialValue() {
         return initialValue;
       },
-      isListField: Boolean(list),
-      getInstance() {
-        if (controlRef != null) return controlRef;
-        for (const getInstance of controls) {
-          const instance = getInstance();
-          if (instance != null) return instance;
-        }
+      get onMetaChange() {
+        return noStyle ? handleFieldMeta : undefined;
       },
+      isListField: Boolean(list),
+      getInstance: getControlInstance,
       getElement() {
         const host = content;
-        if (!host?.isConnected) return;
+        if (!host?.isConnected) return getControlElement();
 
         // Сначала свой binding: одинаковый htmlFor соседней формы не выбирает чужой control.
         return [...host.querySelectorAll<HTMLElement>('[id]')].find((node) => node.id === id)
           ?? host.ownerDocument.getElementById(id) ?? undefined;
       },
       onReset() {
-        const restoreFocus = captureFormResetFocus(content, id);
+        const restoreFocus = hasLayout ? captureFormResetFocus(content, id)
+          : captureFormControlResetFocus(getControlElement);
         resetKey = {};
         if (restoreFocus) void tick().then(restoreFocus);
       }
@@ -222,7 +307,7 @@
       return hasName ? path.map(String).join('_') : undefined;
     },
     get label() {
-      return hasName && (typeof label === 'string' || typeof label === 'number')
+      return hasLayout && hasName && (typeof label === 'string' || typeof label === 'number')
         ? String(label) : undefined;
     },
     get labelledBy() {
@@ -238,10 +323,15 @@
       return status;
     },
     get invalid() {
-      return errors.length > 0;
+      return hasName && (hasLayout ? messages.errors.length > 0 : errors.length > 0);
     },
     get describedBy() {
-      return [descriptionId, extraId].filter(Boolean).join(' ') || undefined;
+      if (!hasName) return;
+
+      const controlDescription = hasLayout ? descriptionId
+        : help !== false && (errors.length || warnings.length) ? parentMeta?.describedBy : undefined;
+
+      return [controlDescription, extraId].filter(Boolean).join(' ') || undefined;
     },
     registerControl(getInstance) {
       controls.add(getInstance);
@@ -319,16 +409,16 @@
           <div class="ant-form-item-control-input">
             <div bind:this={content}
               class={['ant-form-item-control-input-content', form?.classNames?.content]}
-              style={form?.styles?.content}>{#key resetKey}<FormItemStatusProvider value={itemStatus}>{@render children()}</FormItemStatusProvider>{/key}</div>
+              style={form?.styles?.content}>{#key resetKey}<FormItemStatusProvider value={itemStatus} meta={collector}>{@render children()}</FormItemStatusProvider>{/key}</div>
           </div>
-          {#if errors.length || warnings.length}
+          {#if messages.errors.length || messages.warnings.length}
             <div id={descriptionId} class={['ant-form-item-explain', form?.classNames?.help]}
-              style={form?.styles?.help} role={errors.length ? 'alert' : 'status'}>
-              {#each errors as error}
+              style={form?.styles?.help} role={messages.errors.length ? 'alert' : 'status'}>
+              {#each messages.errors as error}
                 <div class={['ant-form-item-explain-error', form?.classNames?.helpItem]}
                   style={form?.styles?.helpItem}>{error}</div>
               {/each}
-              {#each warnings as warning}
+              {#each messages.warnings as warning}
                 <div class={['ant-form-item-explain-warning', form?.classNames?.helpItem]}
                   style={form?.styles?.helpItem}>{warning}</div>
               {/each}
@@ -351,10 +441,15 @@
   </div>
 {/snippet}
 
+{#snippet itemBody()}
+  {#if hasLayout}{@render itemLayout()}
+  {:else}{#key resetKey}<FormItemStatusProvider value={itemStatus}>{@render children()}</FormItemStatusProvider>{/key}{/if}
+{/snippet}
+
 {#if hasName}
-  <FormItemBinding field={fieldContext}>{@render itemLayout()}</FormItemBinding>
+  <FormItemBinding field={fieldContext}>{@render itemBody()}</FormItemBinding>
 {:else}
   <NoFormItemBinding><FormItemBinding field={fieldContext}>
-    {@render itemLayout()}
+    {@render itemBody()}
   </FormItemBinding></NoFormItemBinding>
 {/if}

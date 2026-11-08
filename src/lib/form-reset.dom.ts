@@ -1,15 +1,22 @@
 /** Сохраняет native focus связанного контрола при пересоздании Field. */
 export function captureFormResetFocus(host: HTMLElement | undefined, id: string) {
   if (!host?.isConnected) return;
-  const document = host.ownerDocument;
-  const view = document.defaultView;
-  const tree = host.getRootNode();
-  const active = () => 'activeElement' in tree ? tree.activeElement : document.activeElement;
-  const control = () => [...host.querySelectorAll<HTMLElement>('[id]')]
-    .find((node) => node.id === id);
-  const focused = active();
+
+  return captureFormControlResetFocus(() => host.isConnected
+    ? [...host.querySelectorAll<HTMLElement>('[id]')].find((node) => node.id === id) : undefined);
+}
+
+/** NoStyle ищет новый control через регистрацию, поскольку собственного DOM-контейнера нет. */
+export function captureFormControlResetFocus(control: () => Element | undefined) {
   const previous = control();
-  if (!view || !(focused instanceof view.HTMLElement) || !previous?.contains(focused)) return;
+  if (!previous?.isConnected) return;
+
+  const document = previous.ownerDocument;
+  const view = document.defaultView;
+  const tree = previous.getRootNode();
+  const active = () => 'activeElement' in tree ? tree.activeElement : document.activeElement;
+  const focused = active();
+  if (!view || !(focused instanceof view.HTMLElement) || !previous.contains(focused)) return;
 
   const path: number[] = [];
   let node: Element = focused;
@@ -26,7 +33,7 @@ export function captureFormResetFocus(host: HTMLElement | undefined, id: string)
 
   return () => {
     const current = active();
-    if (!host.isConnected || focused.isConnected
+    if (!control()?.isConnected || focused.isConnected
       || current !== null && current !== document.body && current !== focused) {
       return;
     }

@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { createForm, type FormFieldMeta } from './form.model.svelte';
 import { FormValidationError } from './FormValidationError';
 import { getFormHooks } from './form-internal';
-import reference from '../../tools/fixtures/ant-design-form-no-style-reference.json';
+import reference from '../../tests/browser/fixtures/ant-design-form-no-style-reference.json';
 
 describe('Form internal field metadata events', () => {
   it('retains explicit update order and suppresses repeated equal metadata', () => {
