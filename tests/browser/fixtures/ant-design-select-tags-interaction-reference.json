@@ -1,0 +1,696 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "interaction": "Playwright fill/press/outside click"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "free-enter",
+        "text": "novel",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "novel"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "novel"
+          },
+          {
+            "type": "change",
+            "values": [
+              "novel"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "novel"
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "value-enter",
+        "text": "a",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "a"
+          },
+          {
+            "type": "change",
+            "values": [
+              "a"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "label-enter",
+        "text": "Alpha",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "Alpha"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "Alpha"
+          },
+          {
+            "type": "change",
+            "values": [
+              "Alpha"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "spaces-enter",
+        "text": "  novel  ",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "  novel  "
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "  novel  "
+          },
+          {
+            "type": "change",
+            "values": [
+              "  novel  "
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "  novel  "
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "spaces-blur",
+        "text": "  novel  ",
+        "blur": true
+      },
+      "result": {
+        "values": [
+          "novel"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "  novel  "
+          },
+          {
+            "type": "change",
+            "values": [
+              "novel"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "novel"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "blank-enter",
+        "text": "   ",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "   "
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "   "
+          },
+          {
+            "type": "change",
+            "values": [
+              "   "
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "   "
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "blank-blur",
+        "text": "   ",
+        "blur": true
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "   "
+          }
+        ],
+        "query": "   ",
+        "labels": [],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "escape",
+        "text": "novel",
+        "keys": [
+          "Escape"
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "novel"
+          }
+        ],
+        "query": "novel",
+        "labels": [],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "escape-enter",
+        "text": "  novel  ",
+        "keys": [
+          "Escape",
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "  novel  "
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "  novel  "
+          },
+          {
+            "type": "change",
+            "values": [
+              "  novel  "
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "  novel  "
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-enter",
+        "text": "",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "escape-blur",
+        "text": "novel",
+        "keys": [
+          "Escape"
+        ],
+        "blur": true
+      },
+      "result": {
+        "values": [
+          "novel"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "novel"
+          },
+          {
+            "type": "change",
+            "values": [
+              "novel"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "novel"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "duplicate-enter",
+        "values": [
+          "a"
+        ],
+        "text": "a",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "a"
+          },
+          {
+            "type": "change",
+            "values": []
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "duplicate-blur",
+        "values": [
+          "a"
+        ],
+        "text": "a",
+        "blur": true
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "a"
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "numeric-enter",
+        "values": [
+          0
+        ],
+        "text": "0",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          0,
+          "0"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "0"
+          },
+          {
+            "type": "change",
+            "values": [
+              0,
+              "0"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Zero",
+          "0"
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled-enter",
+        "text": "locked",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "locked"
+          }
+        ],
+        "query": "locked",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled-blur",
+        "text": "locked",
+        "blur": true
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "locked"
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "keep-search",
+        "text": "novel",
+        "keys": [
+          "Enter"
+        ],
+        "autoClear": false
+      },
+      "result": {
+        "values": [
+          "novel"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "novel"
+          },
+          {
+            "type": "change",
+            "values": [
+              "novel"
+            ]
+          }
+        ],
+        "query": "novel",
+        "labels": [
+          "novel"
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-keep-enter",
+        "mode": "multiple",
+        "text": "a",
+        "keys": [
+          "Enter"
+        ],
+        "autoClear": false
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "a"
+          },
+          {
+            "type": "change",
+            "values": [
+              "a"
+            ]
+          }
+        ],
+        "query": "a",
+        "labels": [
+          "Alpha"
+        ],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-keep-escape",
+        "mode": "multiple",
+        "text": "a",
+        "keys": [
+          "Escape"
+        ],
+        "autoClear": false
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "a"
+          }
+        ],
+        "query": "a",
+        "labels": [],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-keep-blur",
+        "mode": "multiple",
+        "text": "a",
+        "blur": true,
+        "autoClear": false
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "a"
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": false
+      }
+    },
+    {
+      "sample": {
+        "id": "clear-pending",
+        "text": "pending",
+        "clear": true
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "pending"
+          },
+          {
+            "type": "search",
+            "query": ""
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "clear-query",
+        "text": "novel",
+        "keys": [
+          "Enter"
+        ],
+        "autoClear": false,
+        "clear": true
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "novel"
+          },
+          {
+            "type": "change",
+            "values": [
+              "novel"
+            ]
+          },
+          {
+            "type": "change",
+            "values": []
+          },
+          {
+            "type": "search",
+            "query": ""
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "clear-controlled",
+        "text": "typed",
+        "keys": [
+          "Enter"
+        ],
+        "controlled": "held",
+        "clear": true
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "search",
+            "query": "typed"
+          },
+          {
+            "type": "change",
+            "values": [
+              "held"
+            ]
+          },
+          {
+            "type": "change",
+            "values": []
+          },
+          {
+            "type": "search",
+            "query": ""
+          }
+        ],
+        "query": "held",
+        "labels": [],
+        "open": true
+      }
+    },
+    {
+      "sample": {
+        "id": "controlled",
+        "text": "typed",
+        "keys": [
+          "Enter"
+        ],
+        "controlled": "held"
+      },
+      "result": {
+        "values": [
+          "held"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "typed"
+          },
+          {
+            "type": "change",
+            "values": [
+              "held"
+            ]
+          }
+        ],
+        "query": "held",
+        "labels": [
+          "held"
+        ],
+        "open": true
+      }
+    }
+  ]
+}

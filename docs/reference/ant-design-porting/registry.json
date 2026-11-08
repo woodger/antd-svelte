@@ -7568,7 +7568,18 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/select.engine.ts",
+        "src/lib/select.engine.test.ts",
+        "src/lib/select-tags.engine.ts",
+        "src/lib/select-tags.engine.test.ts",
+        "tests/browser/select-tags.spec.ts",
+        "tests/browser/fixtures/SelectTagsCase.svelte",
+        "tests/browser/fixtures/SelectTagsFixtures.svelte",
+        "tests/browser/fixtures/select-tags-cases.ts",
+        "tests/browser/fixtures/ant-design-select-tags-options-reference.json",
+        "tests/browser/fixtures/ant-design-select-tags-interaction-reference.json",
+        "tests/package/select-tags.ssr.test.ts"
       ],
       "features": [
         {
@@ -7607,10 +7618,24 @@
         {
           "id": "tags",
           "title": "Свободный ввод tags",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Отсутствует в публичном mode."
+          "evidence": [
+            "src/lib/Select.svelte",
+            "src/lib/select.types.ts",
+            "src/lib/select.engine.ts",
+            "src/lib/select.engine.test.ts",
+            "src/lib/select-tags.engine.ts",
+            "src/lib/select-tags.engine.test.ts",
+            "tests/browser/select-tags.spec.ts",
+            "tests/browser/fixtures/SelectTagsCase.svelte",
+            "tests/browser/fixtures/SelectTagsFixtures.svelte",
+            "tests/browser/fixtures/select-tags-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tags-options-reference.json",
+            "tests/browser/fixtures/ant-design-select-tags-interaction-reference.json",
+            "tests/package/select-tags.ssr.test.ts"
+          ],
+          "note": "Mode=\"tags\" расширяет native multiple UI свободными строками; public value/defaultValue/onValueChange допускают Value|string только для tags, остальные mode-specific types сохраняются. Source value filtering, selected missing options, synthetic query option, disabled exact-value guard, uppercase OR optionFilterProp fields и autoClearSearchValue в showSearch; legacy single/multiple label/NFKD defaults сохранены. Созданные/selected labels и disabled сохраняют native cache при remote выдаче, numeric 0 и string 0 различаются. Двадцать восемь UMD option cases и двадцать четыре Playwright interaction cases фиксируют Enter/open/closed, raw selection versus trimmed blur, duplicates, disabled, Escape, controlled query, clear callbacks и multiple autoClearSearchValue=false. Native required/clear/reset/FormData, readonly defaults, disabled/RTL, cache и SSR защищены отдельно. Options остаётся явным primitive массивом, без новых dependencies/CSS/script/config changes. Token separators и остальные rc-select API выделены в отдельные gaps."
         },
         {
           "id": "remote-search",
@@ -7729,6 +7754,50 @@
             "tests/package/config-variants.ssr.test.ts"
           ],
           "note": "Single/multiple читают local variant, Form, ConfigProvider.select.variant, global и outlined. Новый Select config пока только variant. Поиск, opened popup, selection/focus, FormData и callbacks сохраняются при реактивной смене контекста; остальные rc-select props/config остаются отдельными пробелами."
+        },
+        {
+          "id": "token-separators",
+          "title": "Строковые и функциональные tokenSeparators",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte"
+          ],
+          "note": "Текущий rc-select 1.10.1 поддерживает string[] и function для multiple/tags, включая paste/IME. В Native ещё не перенесено."
+        },
+        {
+          "id": "extended-api",
+          "title": "LabelInValue, fieldNames/groups, render/semantic/config и остальные Source API",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte"
+          ],
+          "note": "Полный source API остаётся в работе: необязательный options, fieldNames/groups, labelInValue, filterSort/searchIcon, maxCount/maxTagCount/renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
+        },
+        {
+          "id": "native-whitespace-tag",
+          "title": "Отсечение нового whitespace-only tag",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Select.svelte",
+            "src/lib/select.types.ts",
+            "src/lib/select.engine.ts",
+            "src/lib/select.engine.test.ts",
+            "src/lib/select-tags.engine.ts",
+            "src/lib/select-tags.engine.test.ts",
+            "tests/browser/select-tags.spec.ts",
+            "tests/browser/fixtures/SelectTagsCase.svelte",
+            "tests/browser/fixtures/SelectTagsFixtures.svelte",
+            "tests/browser/fixtures/select-tags-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tags-options-reference.json",
+            "tests/browser/fixtures/ant-design-select-tags-interaction-reference.json",
+            "tests/package/select-tags.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, официальный UMD/React 18.3.1. Search из трёх пробелов создаёт synthetic option, Enter по открытому списку добавляет value=\"   \", тогда как submit/blur отвергает пустую trimmed строку. Raw options/blank-enter сохраняют поведение Source. Native не синтезирует такой новый вариант и не отправляет change; явный option с пробельным value разрешён. Browser/engine corrections ограничены этими blank cases. Непустой padded текст выбора сохраняется, blur trim и Enter deselect соответствуют Source."
         }
       ]
     },

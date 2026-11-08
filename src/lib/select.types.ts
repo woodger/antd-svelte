@@ -17,12 +17,16 @@ export interface SelectSearchConfig<Value extends string | number = string> {
   onSearch?: (value: string) => void;
   /** false отключает локальную фильтрацию; predicate получает исходный option. */
   filterOption?: boolean | ((search: string, option: SelectOption<Value>) => boolean);
+  /** Явные поля Source search; несколько полей объединяются через OR. */
+  optionFilterProp?: string | readonly string[];
+  /** Очищает локальный search при выборе multiple/tags; controlled query меняет владелец. */
+  autoClearSearchValue?: boolean;
 }
 
-/** Single/multiple выбор строковых или числовых значений с нативным FormData. */
+/** Single/multiple/tags с нативным FormData; свободные tags добавляют строковые значения. */
 export interface SelectProps<
   Value extends string | number = string,
-  Mode extends 'multiple' | undefined = undefined
+  Mode extends 'multiple' | 'tags' | undefined = undefined
 > extends Omit<
   HTMLInputAttributes,
   'value' | 'size' | 'class' | 'onchange' | 'oninput' | 'type' | 'children'
@@ -31,15 +35,17 @@ export interface SelectProps<
   _autoWidth?: boolean;
   options: readonly SelectOption<Value>[];
   mode?: Mode;
-  /** Поддерживает bind:value; multiple использует массив того же типа Value. */
-  value?: (Mode extends 'multiple' ? Value[] : Value) | undefined;
+  /** Bind:value; multiple сохраняет Value[], tags допускает также новые string values. */
+  value?: (Mode extends 'tags' ? (Value | string)[] : Mode extends 'multiple' ? Value[] : Value)
+    | undefined;
   /** Начальное локальное значение; последующие изменения prop не переинициализируют состояние. */
-  defaultValue?: Mode extends 'multiple' ? readonly Value[] : Value;
+  defaultValue?: Mode extends 'tags' ? readonly (Value | string)[]
+    : Mode extends 'multiple' ? readonly Value[] : Value;
   size?: ComponentSize;
   /** Приоритет: variant, Form, Select config, global variant, outlined. */
   variant?: 'outlined' | 'filled' | 'borderless' | 'underlined';
   /** Объект задаёт настройки поиска; boolean включает или отключает его. */
-  showSearch?: boolean | SelectSearchConfig<Value>;
+  showSearch?: boolean | SelectSearchConfig<Mode extends 'tags' ? Value | string : Value>;
   /** @defaultValue false */
   loading?: boolean;
   notFoundContent?: string | number | Snippet | null;
@@ -51,7 +57,8 @@ export interface SelectProps<
   /** @defaultValue false */
   allowClear?: boolean;
   status?: 'error' | 'warning';
-  onValueChange?: (value: Mode extends 'multiple' ? Value[] : Value | undefined) => void;
+  onValueChange?: (value: Mode extends 'tags' ? (Value | string)[]
+    : Mode extends 'multiple' ? Value[] : Value | undefined) => void;
   onOpenChange?: (open: boolean) => void;
   class?: string;
 }

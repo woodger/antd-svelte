@@ -1,4 +1,4 @@
-<script lang="ts" generics="Value extends string | number = string, Mode extends 'multiple' | undefined = undefined">
+<script lang="ts" generics="Value extends string | number = string, Mode extends 'multiple' | 'tags' | undefined = undefined">
   import { tick, untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useVariant } from './variant.svelte';
@@ -18,7 +18,10 @@
   } from './select.engine';
   import { ruRU, type SelectOption } from './types';
   import type { SelectProps, SelectSearchConfig } from './select.types';
+  import { getSelectTagOptions } from './select-tags.engine';
   import Icon from './Icon.svelte';
+
+  type RawValue = Value | string;
 
   let {
     _autoWidth = false,
@@ -72,15 +75,16 @@
   let isOpen = $state(false);
   let focused = $state(false);
   let internalSearch = $state('');
-  let searchConfig = $derived<SelectSearchConfig<Value>>(
-    { ...(typeof showSearch === 'object' ? showSearch : {}) }
+  let searchConfig = $derived<SelectSearchConfig<RawValue>>(
+    { ...(typeof showSearch === 'object' ? showSearch : {}) } as SelectSearchConfig<RawValue>
   );
   let controlledSearch = $derived(searchConfig.searchValue);
   let search = $derived(controlledSearch ?? internalSearch);
   let searchCallback = $derived(searchConfig.onSearch);
   let filter = $derived(searchConfig.filterOption ?? true);
-  let cachedOptions = $state.raw<ReadonlyMap<Value, SelectOption<Value>>>(new Map());
-  let activeValue = $state<Value>();
+  let autoClearSearch = $derived(searchConfig.autoClearSearchValue ?? true);
+  let cachedOptions = $state.raw<ReadonlyMap<RawValue, SelectOption<RawValue>>>(new Map());
+  let activeValue = $state<RawValue>();
   let container: HTMLDivElement;
   let reference = $state<HTMLDivElement>();
   let control = $state<HTMLInputElement>();
@@ -90,20 +94,23 @@
   let lastTyped = 0;
   let controlId = $derived(id ?? field?.id ?? `ant-select-${generatedId}`);
   let selectedValue = $derived(value ?? (useDefault ? initialDefault : undefined));
-  let multiple = $derived(mode === 'multiple');
+  let tagMode = $derived(mode === 'tags');
+  let multiple = $derived(mode === 'multiple' || tagMode);
   let canSearch = $derived(typeof showSearch === 'object' ? true : showSearch ?? multiple);
   // Readonly исключает input из нативной проверки; required multiple блокирует ввод через beforeinput.
   let isReadOnly = $derived(!canSearch && (!multiple || !attributes.required));
   let intrinsicWidth = $derived(_autoWidth && !multiple && isReadOnly);
-  let selectedValues = $derived(multiple ? getSelectValues(selectedValue) : []);
+  let selectedValues = $derived(multiple ? getSelectValues<RawValue>(selectedValue) : []);
   let selectedKeys = $derived(new Set(selectedValues));
-  let optionMap = $derived(new Map(options.map((option) => [option.value, option])));
+  let optionMap = $derived<Map<RawValue, SelectOption<RawValue>>>(
+    new Map(options.map((option) => [option.value, option]))
+  );
   let selectionOptions = $derived(
     resolveSelectedOptions(
       multiple
         ? selectedValues
         : typeof selectedValue === 'string' || typeof selectedValue === 'number'
-          ? [selectedValue as Value]
+          ? [selectedValue as RawValue]
           : [],
       optionMap,
       cachedOptions
@@ -111,11 +118,13 @@
   );
   let selected = $derived(
     typeof selectedValue === 'string' || typeof selectedValue === 'number'
-      ? selectionOptions.get(selectedValue as Value)
+      ? selectionOptions.get(selectedValue as RawValue)
       : undefined
   );
   let tags = $derived(selectedValues.map(item => selectionOptions.get(item)!));
-  let filtered = $derived(filterOptions(options, search, filter));
+  let filtered = $derived(tagMode
+    ? getSelectTagOptions(options, selectionOptions, search, filter, searchConfig.optionFilterProp)
+    : filterOptions<RawValue>(options, search, filter, searchConfig.optionFilterProp));
   $effect(() => {
     cachedOptions = selectionOptions;
   });
@@ -199,32 +208,45 @@
       onOpenChange?.(next);
     }
 
-    if (!next) {
+    if (!next && !tagMode && (!multiple || autoClearSearch)) {
       internalSearch = '';
     }
   }
 
   function openList(direction: 'first' | 'last' = 'first') {
     if (!isOpen) {
-      internalSearch = '';
+      if (!tagMode && (!multiple || autoClearSearch)) internalSearch = '';
       activeValue = !multiple && selected && !selected.disabled
         ? selected.value
-        : options[getEnabledIndex(options, -1, direction)]?.value;
+        : tagMode ? filtered[getEnabledIndex(filtered, -1, direction)]?.value
+          : options[getEnabledIndex(options, -1, direction)]?.value;
     }
 
     setOpen(true);
   }
 
-  function changeMultiple(next: Value[]) {
-    if (mode !== 'multiple') return;
+  function changeMultiple(next: RawValue[]) {
+    if (!multiple) return;
 
     useDefault = false;
     // TypeScript не сужает generic Mode при проверке его значения.
     value = [...next] as typeof value;
-    (onValueChange as ((values: Value[]) => void) | undefined)?.(next);
+    (onValueChange as ((values: RawValue[]) => void) | undefined)?.(next);
   }
 
-  function choose(option: SelectOption<Value> | undefined) {
+  function submitTag(text: string) {
+    if (!tagMode || resolvedDisabled) return;
+    const next = text.trim();
+    if (!next) return;
+    if (!optionMap.get(next)?.disabled && !selectedKeys.has(next)) {
+      cachedOptions = new Map(cachedOptions).set(next,
+        optionMap.get(next) ?? { value: next, label: next });
+      changeMultiple([...selectedValues, next]);
+    }
+    internalSearch = '';
+  }
+
+  function choose(option: SelectOption<RawValue> | undefined) {
     if (resolvedDisabled || option?.disabled) {
       return;
     }
@@ -234,30 +256,33 @@
 
     if (multiple) {
       const next = new Set(selectedValues);
+      const clearQuery = tagMode && !option && Boolean(search);
+      const onClearSearch = clearQuery ? searchCallback : undefined;
 
       if (option) {
         if (next.has(option.value))
           next.delete(option.value);
         else next.add(option.value);
       } else {
-        if (!next.size) return;
+        if (!next.size && !clearQuery) return;
         next.clear();
       }
 
-      changeMultiple([...next]);
-      internalSearch = '';
+      if (option || selectedValues.length) changeMultiple([...next]);
+      if (!option || autoClearSearch) internalSearch = '';
+      onClearSearch?.('');
       control?.focus();
       return;
     }
 
     useDefault = false;
     value = option?.value as typeof value;
-    (onValueChange as ((value: Value | undefined) => void) | undefined)?.(option?.value);
+    (onValueChange as ((value: RawValue | undefined) => void) | undefined)?.(option?.value);
     setOpen(false);
     control?.focus();
   }
 
-  function remove(item: Value) {
+  function remove(item: RawValue) {
     if (resolvedDisabled || selectionOptions.get(item)?.disabled) return;
 
     const next = new Set(selectedValues);
@@ -313,6 +338,7 @@
 
       if (!expanded) {
         openList();
+        if (tagMode && event.key === 'Enter' && activeIndex >= 0) choose(filtered[activeIndex]);
       } else if (activeIndex >= 0) {
         choose(filtered[activeIndex]);
       }
@@ -373,7 +399,9 @@
     const next = event.currentTarget.value;
     internalSearch = next;
     searchCallback?.(next);
-    const matches = filterOptions(options, next, filter);
+    const matches = tagMode
+      ? getSelectTagOptions(options, selectionOptions, next, filter, searchConfig.optionFilterProp)
+      : filterOptions<RawValue>(options, next, filter, searchConfig.optionFilterProp);
     if (controlledSearch !== undefined) {
       const input = event.currentTarget;
       void tick().then(() => {
@@ -401,7 +429,11 @@
     focused = false;
     const next = event.relatedTarget;
 
-    if (!(next instanceof Node && list?.contains(next))) setOpen(false);
+    if (!(next instanceof Node && list?.contains(next))) {
+      if (tagMode) submitTag(search);
+      else if (multiple) internalSearch = '';
+      setOpen(false);
+    }
     field?.onBlur();
     onblur?.(event);
   }
@@ -412,6 +444,8 @@
     if (next instanceof Node && (container.contains(next) || list?.contains(next))) return;
 
     focused = false;
+    if (tagMode) submitTag(search);
+    else if (multiple) internalSearch = '';
     setOpen(false);
   }
 
@@ -601,7 +635,7 @@
         onfocus={handleFocus}
       />
     </div>
-    {#if allowClear && (multiple ? selectedValues.length : selected) && !resolvedDisabled}
+    {#if allowClear && (multiple ? selectedValues.length || tagMode && search : selected) && !resolvedDisabled}
       <button type="button" class={['clear', componentTheme.className && 'ant-select-clear']} aria-label={config.locale.clearText} onpointerdown={(event) => event.preventDefault()} onclick={() => choose(undefined)}><Icon name="close" /></button>
     {/if}
     <span class={['suffix', componentTheme.className && 'ant-select-suffix']}><Icon name={loading ? 'loading' : 'down'} /></span>

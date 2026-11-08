@@ -8186,9 +8186,11 @@ Virtual/scrollTo, fieldNames, optionRender/popupRender, prefix/searchIcon,
 из options, а выбранные элементы показываются с кнопками удаления.
 `SelectProps<Value>` описывает прежний одиночный API,
 `SelectProps<Value, 'multiple'>` — множественный. При использовании компонента
-типы значений и callback выводятся из options и mode.
+типы значений и callback выводятся из options и mode. `SelectProps<Value, 'tags'>`
+принимает массив Value | string: свободный ввод создаёт строки, исходные числовые
+ключи сохраняются.
 
-Variant поддерживает outlined/filled/borderless/underlined в single и multiple;
+Variant поддерживает outlined/filled/borderless/underlined в single/multiple/tags;
 по умолчанию outlined. Явный variant имеет приоритет над настройками Form и provider. Смена оформления сохраняет DOM,
 поисковый текст, выделение, фокус и выбранные значения формы. Классы и computed
 styles сверены с официальным UMD 6.6.8 в
@@ -8269,7 +8271,44 @@ disabled control не передаёт значения. Поисковый те
 массива явно, например `createForm<{ teams: number[] }>({ initialValues: { teams: [] } })`.
 `required` отклоняет пустой массив, min/max ограничивают количество элементов.
 Галерея `/ant-design` содержит форму выбора от одной до трёх команд с отправкой
-и сбросом. Режим tags пока не поддерживается.
+и сбросом.
+
+### Tags
+
+```svelte
+<script lang="ts">
+  import { Select } from 'antd-svelte';
+  let tags = $state<string[]>([]);
+</script>
+
+<Select mode="tags" options={[]} bind:value={tags} name="tags" allowClear />
+```
+
+Tags сохраняет multiple UI, native FormData/required/reset, удаление, disabled,
+RTL и selected cache. Options остаётся явным массивом; свободные строки дополняют
+его временными вариантами. Выбранные значения вне текущей выдачи доступны в списке
+с сохранёнными label/disabled. Число 0 и строка "0" остаются разными ключами.
+По умолчанию tags фильтрует value через uppercase substring, как source. Для
+поиска по подписи задайте showSearch.optionFilterProp="label"; string[] объединяет
+собственные поля через OR. В single/multiple без явных полей сохранён прежний
+label/NFKD поиск. Predicate filterOption перекрывает выбор полей.
+
+Enter выбирает активный вариант, включая новый; закрытый список открывается и
+выбирает первый вариант тем же Enter. Повторный выбор активного выбранного
+варианта снимает его. Blur добавляет trimmed строку без дубликата; Escape закрывает
+список и сохраняет ввод. Source сохраняет пробелы в выбранном варианте списка,
+но обрезает их на blur; это различие сохранено. Новый whitespace-only вариант
+не создаётся: исходная ошибка записана в raw reference, явный option с таким value
+остаётся допустимым. Clear очищает также pending search и сообщает onSearch(''),
+не создавая tag; controlled search по-прежнему меняет владелец.
+
+ShowSearch.autoClearSearchValue=false сохраняет поиск при выборе и Escape в
+multiple/tags. Blur multiple очищает локальный поиск без callback, blur tags
+завершает ввод. Остальные selection/blur/reset пути не вызывают onSearch.
+Сверка с [исходными options](tests/browser/fixtures/ant-design-select-tags-options-reference.json)
+и [событиями](tests/browser/fixtures/ant-design-select-tags-interaction-reference.json)
+использует неизменённый UMD 6.6.8; логика изучена по @rc-component/select 1.10.1,
+его MIT-лицензия уже включена в пакет. TokenSeparators пока не перенесены.
 
 ### Удалённый поиск
 
@@ -8279,11 +8318,14 @@ Select принимает loading, notFoundContent и onPopupScroll. Поиск 
 встроенный поиск. FilterOption=false
 полностью отключает локальную фильтрацию, true сохраняет прежний поиск по label;
 callback (search, option) позволяет собственную фильтрацию непустого запроса.
+Для явных Source fields используется optionFilterProp, для поведения при выборе —
+autoClearSearchValue в том же объекте showSearch.
 
 SearchValue управляет текстом поиска, onSearch получает пользовательский ввод.
 Владелец может отклонить запрос, оставив searchValue прежним; внешняя замена текста
 не вызывает onSearch. Без searchValue используется внутренний текст. Выбор,
-закрытие и reset очищают внутренний поиск без onSearch; при управляемом поиске
+закрытие и reset по умолчанию очищают внутренний поиск без onSearch; исключения
+tags/autoClearSearchValue описаны выше. При управляемом поиске
 владелец сам очищает searchValue, если это нужно. Поисковый текст не попадает в
 FormData и не меняет выбранные value. OnSearch не имеет встроенного debounce.
 
@@ -8318,8 +8360,9 @@ OnPopupScroll получает native scroll event с currentTarget=listbox; р�
 уже во время debounce, стабильным объединением страниц по value и повтором
 последнего неудачного cursor. Dispose отменяет таймер/запрос. Источник демонстрационный,
 сетевые API, таймеры и server-specific ошибки не входят в библиотечный Select.
-Пока не перенесены остальные поля showSearch config, labelInValue, tags,
-виртуализация, произвольный popupRender и общий полный rc-select API.
+Пока не перенесены tokenSeparators, остальные поля showSearch config, labelInValue,
+fieldNames/groups, render hooks, virtualization, произвольный popupRender
+и общий полный rc-select API.
 
 ## Checkbox
 

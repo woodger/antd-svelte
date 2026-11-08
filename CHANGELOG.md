@@ -9,6 +9,11 @@
 
 ### Added
 
+- Select поддерживает mode="tags": свободные строки, Enter/blur/Escape, cache
+  выбранных options, typed numeric/string values, native формы и readonly defaults.
+  Добавлены showSearch.optionFilterProp и autoClearSearchValue; прежние single/multiple
+  defaults сохранены. Исходный whitespace-only tag не создаётся, raw observation сохранён.
+
 - LayoutHeader/LayoutContent/LayoutFooter поддерживают literal prefixCls,
   shared names и возврат стандартного класса. Секции сохраняют собственное
   оформление, inherited variables и controls при смене prefix; ошибочное

@@ -48,6 +48,19 @@ describe('filterOptions', () => {
   it('returns no options for an unmatched query', () => {
     expect(filterOptions(options, 'missing')).toEqual([]);
   });
+
+  it('searches explicit value/label fields with Source OR matching and no implicit trim', () => {
+    expect(filterOptions(options, '2', true, 'value')).toEqual([options[2]]);
+    expect(filterOptions(options, 'Svelte', true, ['value', 'label'])).toEqual([options[0]]);
+    expect(filterOptions(options, ' Svelte ', true, 'label')).toEqual([]);
+    expect(filterOptions(options, 'Svelte', true, [])).toEqual([options[0]]);
+  });
+
+  it('keeps predicates authoritative and does not search inherited option properties', () => {
+    expect(filterOptions(options, 'raw', (query, option) => query === 'raw'
+      && option.value === 2, 'absent')).toEqual([options[2]]);
+    expect(filterOptions(options, 'function', true, 'constructor')).toEqual([]);
+  });
 });
 
 describe('getEnabledIndex', () => {

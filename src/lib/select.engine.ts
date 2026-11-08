@@ -9,17 +9,33 @@ export function getSelectValues<Value extends string | number>(
 export function filterOptions<Value extends string | number>(
   options: readonly SelectOption<Value>[],
   search: string,
-  filter: boolean | ((search: string, option: SelectOption<Value>) => boolean) = true
+  filter: boolean | ((search: string, option: SelectOption<Value>) => boolean) = true,
+  optionFilterProp?: string | readonly string[]
 ): readonly SelectOption<Value>[] {
   if (filter === false) return options;
   if (typeof filter === 'function') return search
     ? options.filter(option => filter(search, option))
     : options;
+  const fields = typeof optionFilterProp === 'string' ? [optionFilterProp] : optionFilterProp;
+  if (fields?.length) return search
+    ? options.filter(option => selectOptionMatchesFields(option, search, fields)) : options;
   const query = search.trim().normalize('NFKD').toLowerCase();
 
   return query
     ? options.filter((option) => option.label.normalize('NFKD').toLowerCase().includes(query))
     : options;
+}
+
+/** Явные Source search fields: OR, uppercase matching и только собственные свойства. */
+export function selectOptionMatchesFields<Value extends string | number>(
+  option: SelectOption<Value>, search: string, fields: readonly string[]
+) {
+  const query = search.toUpperCase();
+  return fields.some(field => {
+    const value: unknown = Object.hasOwn(option, field) ? Reflect.get(option, field) : undefined;
+    const text = Array.isArray(value) ? value.join('') : String(value ?? '');
+    return text.toUpperCase().includes(query);
+  });
 }
 
 // Храним только выбранные options с последними известными label и disabled.

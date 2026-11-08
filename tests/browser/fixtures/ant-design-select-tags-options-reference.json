@@ -1,0 +1,901 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "observation": "controlled values/search, open nonvirtual list; official optionRender exposes flattened option value"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "empty",
+        "search": "",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "value",
+        "search": "a",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "label",
+        "search": "Alpha",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "Alpha",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "case",
+        "search": "A",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "A",
+          "label": "A",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "numeric-string",
+        "search": "0",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "0",
+          "label": "0",
+          "disabled": false
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "disabled-exact",
+        "search": "locked",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "disabled-partial",
+        "search": "lock",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "lock",
+          "label": "lock",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "free",
+        "search": "novel",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "novel",
+          "label": "novel",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "spaces",
+        "search": " a ",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": " a ",
+          "label": " a ",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "whitespace",
+        "search": "   ",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "   ",
+          "label": "   ",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "selected",
+        "search": "",
+        "values": [
+          "z",
+          "b"
+        ],
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ]
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "b",
+          "disabled": false
+        },
+        {
+          "value": "z",
+          "label": "z",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "selected-search",
+        "search": "z",
+        "values": [
+          "z",
+          "b"
+        ],
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ]
+      },
+      "options": [
+        {
+          "value": "z",
+          "label": "z",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "selected-unknown",
+        "search": "c",
+        "values": [
+          "z",
+          "b"
+        ],
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ]
+      },
+      "options": [
+        {
+          "value": "c",
+          "label": "c",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "selected-typed-keys",
+        "search": "",
+        "values": [
+          0,
+          "0",
+          "z"
+        ],
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ]
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "0",
+          "label": "0",
+          "disabled": false
+        },
+        {
+          "value": "z",
+          "label": "z",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "remote-empty",
+        "search": "novel",
+        "options": [],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "novel",
+          "label": "novel",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "remote-selected",
+        "search": "",
+        "values": [
+          "a",
+          "z"
+        ],
+        "options": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "a",
+          "disabled": false
+        },
+        {
+          "value": "z",
+          "label": "z",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "filter-off",
+        "search": "no-match",
+        "filter": false,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "no-match",
+          "label": "no-match",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "filter-off-exact",
+        "search": "a",
+        "filter": false,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "predicate-none",
+        "search": "a",
+        "filter": "none",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "a",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "predicate-disabled",
+        "search": "locked",
+        "filter": "none",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": []
+    },
+    {
+      "sample": {
+        "id": "predicate-label",
+        "search": "Alpha",
+        "filter": "label",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "Alpha",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "unicode",
+        "search": "É",
+        "options": [
+          {
+            "value": "éclair",
+            "label": "Pastry"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "É",
+          "label": "É",
+          "disabled": false
+        },
+        {
+          "value": "éclair",
+          "label": "Pastry",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "unicode-no-fold",
+        "search": "e",
+        "options": [
+          {
+            "value": "éclair",
+            "label": "Pastry"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "e",
+          "label": "e",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "label-prop",
+        "search": "Alpha",
+        "optionFilterProp": "label",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "either-prop",
+        "search": "Alpha",
+        "optionFilterProp": [
+          "label",
+          "value"
+        ],
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "empty-props",
+        "search": "Alpha",
+        "optionFilterProp": [],
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "Alpha",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "unknown-prop",
+        "search": "a",
+        "optionFilterProp": "absent",
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "a",
+          "disabled": false
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "whitespace-existing",
+        "search": "   ",
+        "options": [
+          {
+            "value": "   ",
+            "label": "Explicit spaces"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "   ",
+          "label": "Explicit spaces",
+          "disabled": false
+        }
+      ]
+    }
+  ]
+}
