@@ -4,7 +4,8 @@ export function connectCardGrid(body: HTMLElement, update: (
   let active = true;
   const publish = () => {
     if (active)
-      update([...body.children].some(child => child.classList.contains('ant-card-grid')));
+      update([...body.children].some(child => child.hasAttribute('data-ant-card-grid')
+        || child.classList.contains('ant-card-grid')));
   };
   const Observer = body.ownerDocument.defaultView!.MutationObserver;
   const observer = new Observer(publish);

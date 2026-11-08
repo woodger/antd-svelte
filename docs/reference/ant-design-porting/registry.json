@@ -11638,11 +11638,11 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls, полный API Tabs",
+          "title": "Полный React Tabs API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "PrefixCls остаётся в работе. Остаётся в полном объёме миграции; Card.tabProps пока ограничен существующим Svelte Tabs, включая отсутствие editable-card/renderTabBar/overflow menu."
+          "note": "Card.tabProps передаёт поддерживаемые Svelte Tabs props, включая editable/renderTabBar/overflow, container, semantic и motion настройки. Полный React Tabs/Trigger API остаётся отдельным аудитом семейства Tabs; prefixCls Card/Grid/Meta перенесён отдельной feature."
         },
         {
           "id": "inherited-variants",
@@ -11683,7 +11683,7 @@
             "tests/package/card-config.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Header/body настраиваются через semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; prefixCls и полный Tabs API не включены."
+          "note": "Независимые card/cardMeta class/style и object/function classNames/styles с whole-record inheritance/replacement, включая {}. Классы накапливаются; root style layers context semantic, context plain, local semantic, local plain. Header/body настраиваются через semantic styles; component variables остаются первыми. Card callbacks получают resolved size/variant и прежние native defaults остальных props, Meta — текущие local props. Все семь Card и пять Meta semantic parts сверены с исходным UMD: object/function/local priorities, inherited/empty/replaced records, custom variables, sizes/variants/Form, dark/compact/RTL и component aliases/algorithm. Обновления сохраняют DOM, editors/focus/selection, FormData, active tab и onTabChange. CardGrid конфигурацию Card не читает, как source; Полный Tabs API описан отдельно; local/shared Card prefix поддержан отдельной feature."
         },
         {
           "id": "semantic-native-defaults",
@@ -11698,6 +11698,45 @@
             "readme.md"
           ],
           "note": "Уже опубликованные Svelte callbacks Card передают loading/hoverable=false и tabProps={} при отсутствии props. Ant Design 6.6.8/984592267de88fbf9cdaecc96a56629e721c709d mergedProps сохраняет отсутствие этих трёх props: raw UMD observation содержит own=false/type=undefined. Native контракт сохранён при добавлении provider callbacks; оба слоя используют один info. CSS matrix явно задаёт flags и componentSize=medium; raw defaultPropsObservation хранится отдельно и не подменяется. Это отличие native API, а не установленная ошибка upstream; пересмотр defaults требует отдельного решения о совместимости."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный и общий Card/Grid/Meta prefixCls с owner inheritance",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Card.svelte",
+            "src/lib/CardGrid.svelte",
+            "src/lib/CardMeta.svelte",
+            "src/lib/card.types.ts",
+            "src/lib/card-context.ts",
+            "src/lib/card.dom.ts",
+            "src/lib/card-prefix.engine.ts",
+            "src/lib/card-prefix.engine.test.ts",
+            "src/lib/vendor/card-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/CardPrefixScope.svelte",
+            "tests/browser/fixtures/CardPrefixFixtures.svelte",
+            "tests/browser/fixtures/CardPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-card-prefix-reference.json",
+            "tests/browser/card-prefix-metrics.ts",
+            "tests/browser/card-prefix.spec.ts",
+            "tests/package/card-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty Card prefix wins; empty/undefined наследуют ConfigProvider. Grid/Meta prefixCls — базовый Card prefix: undefined наследует owner, explicit nonempty overrides, empty выбирает provider. Root/header/body/cover/actions/state/Grid/Meta classes и 59 CSS rules подключены с canonical theme marker; global Typography/Tabs selectors независимы от local class и cssVar prefix. Callback props сохраняют raw prefix, остальные native defaults не меняются. Stable Grid marker сохраняет direct detection с canonical fallback; Skeleton/focus/reduced motion adapters работают с любым Card prefix. UMD matrix покрывает sizes/inner/variant/loading/tabs/grids, explicit child overrides, RTL, aliases и nested/sibling scopes. Live updates сохраняют Card/Meta/Grid/input DOM, refs, tab selection, callback count, draft/selection/focus и FormData; SSR не создаёт browser resources."
+        },
+        {
+          "id": "prefix-owner-cache-observations",
+          "title": "Source child prefix omission и cache selectors для shared local Card class",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-card-prefix-reference.json",
+            "tests/browser/card-prefix.spec.ts",
+            "tests/package/card-prefix.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Raw result сохраняет отсутствие owner inheritance в Source Meta/Grid; matched задаёт их public prefixCls явно, кроме explicit overrides. Native наследует owner по умолчанию. Aliases case сохраняет raw/matched Source shared-class cache observation: nested Inner Typography margins остаются 26.6px/10px вместо 0. freshNested — измерение unmodified Source fresh Inner provider с теми же public props/theme, expectedNative заменяет nested scope этим измерением. Native scopes включают local class и global namespace, поэтому stale selectors не перенесены. Meta/Grid вне Card не подключают standalone styles, как прежде."
         }
       ]
     },

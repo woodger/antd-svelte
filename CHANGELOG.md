@@ -9,6 +9,11 @@
 
 ### Added
 
+- Card/Grid/Meta поддерживает local/shared prefixCls и наследование от владельца.
+  Typography/Tabs namespaces независимы; direct Grid detection, DOM/ref, active tab
+  и draft/selection/focus/FormData сохранены. Source пропуск child prefix и shared
+  class cache observation записаны raw/matched/fresh замерами.
+
 - Tabs поддерживает local/shared prefixCls для навигации, панелей, More и motion.
   DOM/ref, активная вкладка и draft/selection/focus внутри панели и открытого popup
   сохраняются; canonical theme markers и shared slide keyframes не переименованы.

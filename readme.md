@@ -1148,6 +1148,25 @@ Meta — root/section/avatar/title/description, объект либо callback (
 Style корня перекрывает styles.root; styles.header/body оформляют header/body.
 Meta root следует тому же приоритету.
 
+Непустой `Card.prefixCls` задаёт корень, состояния, header/body/cover/actions;
+пустое значение наследует `ConfigProvider.prefixCls`. Grid/Meta используют базовый
+Card prefix: undefined наследует ближайшего владельца, непустое значение задаёт
+свой prefix, явная пустая строка выбирает общий provider. Callback props сохраняют
+исходный локальный prefix. Typography и Tabs используют общий namespace независимо
+от local Card; component theme variables и canonical markers сохраняются.
+Смена prefix сохраняет Card/Grid/Meta DOM/ref, active tab, draft/selection/focus
+и FormData. Grid detection использует стабильный marker с прежним canonical fallback.
+
+В Ant Design Card не передаёт local prefix в Meta/Grid: raw и matched замеры
+через их публичный prefixCls сохранены отдельно. Native наследует owner prefix.
+При shared local class между Suite/Inner исходный CSS cache также может оставить
+selector только для Suite Typography/Tabs. Raw/matched snapshot сохранён;
+freshNested измеряет свежий Source Inner с той же темой, expectedNative использует
+его для nested scope. Native изолирует class и namespace.
+Сверка: [официальные prefix-замеры](./tests/browser/fixtures/ant-design-card-prefix-reference.json),
+[браузер](./tests/browser/card-prefix.spec.ts) и
+[SSR](./tests/package/card-prefix.ssr.test.ts), `?fixture=card-prefix`.
+
 ConfigProvider.card задаёт variant, class/style и те же semantic classNames/styles;
 ConfigProvider.cardMeta независимо настраивает Meta через class/style и semantic
 slots. Классы context/local объединяются. Стили корня: context semantic → context
@@ -1194,8 +1213,7 @@ activeTabKey имеет приоритет над tabProps.activeKey. TabBarExtr
 проверяют стили, слоты, Grid, загрузку/фокус и вкладки. Рецепт card извлекает
 59 правил без keyframes. Компонентные темы отдельно сверяются с UMD 6.6.8 в
 `tests/browser/card-theme.spec.ts`, фикстура — `?fixture=card-theme`.
-PrefixCls
-и отсутствующие возможности Tabs остаются в полном объёме миграции.
+Отсутствующие возможности Tabs остаются в полном объёме миграции.
 
 ## Breadcrumb
 
@@ -10040,7 +10058,8 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions и Tabs.
+Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions, Tabs
+и Card с Grid/Meta.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

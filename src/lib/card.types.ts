@@ -38,6 +38,8 @@ export interface CardProps extends Omit<
   'children' | 'title' | 'class' | 'style'
 > {
   children?: Snippet;
+  /** Непустой локальный prefix имеет приоритет; иначе используется ConfigProvider.prefixCls. */
+  prefixCls?: string;
   title?: CardContent;
   extra?: CardContent;
   cover?: CardContent;
@@ -74,6 +76,8 @@ export interface CardGridProps extends Omit<
   'children' | 'class' | 'style'
 > {
   children?: Snippet;
+  /** Базовый Card prefix; undefined наследует owner Card, пустая строка — ConfigProvider. */
+  prefixCls?: string;
   /** @defaultValue true */
   hoverable?: boolean;
   class?: string;
@@ -87,6 +91,8 @@ export interface CardMetaProps extends Omit<
   'children' | 'title' | 'class' | 'style'
 > {
   avatar?: CardContent;
+  /** Базовый Card prefix; undefined наследует owner Card, пустая строка — ConfigProvider. */
+  prefixCls?: string;
   title?: CardContent;
   description?: CardContent;
   classNames?: CardMetaSemantic;
