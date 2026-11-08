@@ -1,0 +1,1624 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "observation": "ConfigProvider prefix inheritance and CSS variable fallback; App and Layout roles"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "result": {
+        "normal": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "global",
+        "prefix": "suite"
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rtl",
+        "prefix": "suite",
+        "rtl": true
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app",
+              "suite-app-rtl"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider",
+              "suite-layout-rtl"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app",
+              "suite-app-rtl"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider",
+              "suite-layout-rtl"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "child-empty",
+        "prefix": "suite",
+        "childPrefix": ""
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "child-override",
+        "prefix": "suite",
+        "childPrefix": "inner"
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "inner",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "inner-app"
+            ],
+            "layout": [
+              "inner-layout",
+              "inner-layout-has-sider"
+            ],
+            "sider": [
+              "inner-layout-sider",
+              "inner-layout-sider-dark",
+              "inner-layout-sider-has-trigger"
+            ],
+            "header": [
+              "inner-layout-header"
+            ],
+            "content": [
+              "inner-layout-content"
+            ],
+            "footer": [
+              "inner-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "child-theme",
+        "prefix": "suite",
+        "childPrefix": "inner",
+        "childTheme": true
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "inner",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "inner-app"
+            ],
+            "layout": [
+              "inner-layout",
+              "inner-layout-has-sider"
+            ],
+            "sider": [
+              "inner-layout-sider",
+              "inner-layout-sider-dark",
+              "inner-layout-sider-has-trigger"
+            ],
+            "header": [
+              "inner-layout-header"
+            ],
+            "content": [
+              "inner-layout-content"
+            ],
+            "footer": [
+              "inner-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "child-reset",
+        "prefix": "suite",
+        "childPrefix": "inner",
+        "childTheme": true,
+        "reset": true
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "inner",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "inner-app"
+            ],
+            "layout": [
+              "inner-layout",
+              "inner-layout-has-sider"
+            ],
+            "sider": [
+              "inner-layout-sider",
+              "inner-layout-sider-dark",
+              "inner-layout-sider-has-trigger"
+            ],
+            "header": [
+              "inner-layout-header"
+            ],
+            "content": [
+              "inner-layout-content"
+            ],
+            "footer": [
+              "inner-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "child-clear-variable",
+        "prefix": "suite",
+        "childPrefix": "inner",
+        "childTheme": true,
+        "clearVariablePrefix": true
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "inner",
+          "token": {
+            "fontSize": "var(--inner-font-size)",
+            "colorText": "var(--inner-color-text)"
+          },
+          "classes": {
+            "app": [
+              "inner-app"
+            ],
+            "layout": [
+              "inner-layout",
+              "inner-layout-has-sider"
+            ],
+            "sider": [
+              "inner-layout-sider",
+              "inner-layout-sider-dark",
+              "inner-layout-sider-has-trigger"
+            ],
+            "header": [
+              "inner-layout-header"
+            ],
+            "content": [
+              "inner-layout-content"
+            ],
+            "footer": [
+              "inner-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "local",
+        "prefix": "suite",
+        "app": "local-app",
+        "layout": "frame",
+        "sider": "sidebar",
+        "header": "head",
+        "content": "body",
+        "footer": "foot"
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "local-app"
+            ],
+            "layout": [
+              "frame",
+              "frame-has-sider"
+            ],
+            "sider": [
+              "sidebar",
+              "sidebar-dark",
+              "sidebar-has-trigger"
+            ],
+            "header": [
+              "head"
+            ],
+            "content": [
+              "body"
+            ],
+            "footer": [
+              "foot"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "local-app"
+            ],
+            "layout": [
+              "frame",
+              "frame-has-sider"
+            ],
+            "sider": [
+              "sidebar",
+              "sidebar-dark",
+              "sidebar-has-trigger"
+            ],
+            "header": [
+              "head"
+            ],
+            "content": [
+              "body"
+            ],
+            "footer": [
+              "foot"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "local-empty",
+        "prefix": "suite",
+        "app": "",
+        "layout": "",
+        "sider": "",
+        "header": "",
+        "content": "",
+        "footer": ""
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-global",
+        "prefix": ""
+      },
+      "result": {
+        "normal": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "explicit-variable-prefix",
+        "prefix": "suite",
+        "variablePrefix": "vars"
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--vars-font-size)",
+            "colorText": "var(--vars-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--vars-font-size)",
+            "colorText": "var(--vars-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "without-theme",
+        "prefix": "suite",
+        "noTheme": true
+      },
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "transitions": [
+    {
+      "prefix": "new",
+      "result": {
+        "normal": {
+          "prefix": "new",
+          "token": {
+            "fontSize": "var(--new-font-size)",
+            "colorText": "var(--new-color-text)"
+          },
+          "classes": {
+            "app": [
+              "new-app"
+            ],
+            "layout": [
+              "new-layout",
+              "new-layout-has-sider"
+            ],
+            "sider": [
+              "new-layout-sider",
+              "new-layout-sider-dark",
+              "new-layout-sider-has-trigger"
+            ],
+            "header": [
+              "new-layout-header"
+            ],
+            "content": [
+              "new-layout-content"
+            ],
+            "footer": [
+              "new-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "new",
+          "token": {
+            "fontSize": "var(--new-font-size)",
+            "colorText": "var(--new-color-text)"
+          },
+          "classes": {
+            "app": [
+              "new-app"
+            ],
+            "layout": [
+              "new-layout",
+              "new-layout-has-sider"
+            ],
+            "sider": [
+              "new-layout-sider",
+              "new-layout-sider-dark",
+              "new-layout-sider-has-trigger"
+            ],
+            "header": [
+              "new-layout-header"
+            ],
+            "content": [
+              "new-layout-content"
+            ],
+            "footer": [
+              "new-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      },
+      "sameRoot": true,
+      "sameInput": true,
+      "value": "kept draft",
+      "focused": true,
+      "selection": [
+        1,
+        5
+      ]
+    },
+    {
+      "prefix": "",
+      "result": {
+        "normal": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      },
+      "sameRoot": true,
+      "sameInput": true,
+      "value": "kept draft",
+      "focused": true,
+      "selection": [
+        1,
+        5
+      ]
+    },
+    {
+      "prefix": "suite",
+      "result": {
+        "normal": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "nested": {
+          "prefix": "suite",
+          "token": {
+            "fontSize": "var(--suite-font-size)",
+            "colorText": "var(--suite-color-text)"
+          },
+          "classes": {
+            "app": [
+              "suite-app"
+            ],
+            "layout": [
+              "suite-layout",
+              "suite-layout-has-sider"
+            ],
+            "sider": [
+              "suite-layout-sider",
+              "suite-layout-sider-dark",
+              "suite-layout-sider-has-trigger"
+            ],
+            "header": [
+              "suite-layout-header"
+            ],
+            "content": [
+              "suite-layout-content"
+            ],
+            "footer": [
+              "suite-layout-footer"
+            ]
+          }
+        },
+        "sibling": {
+          "prefix": "ant",
+          "token": {
+            "fontSize": "var(--ant-font-size)",
+            "colorText": "var(--ant-color-text)"
+          },
+          "classes": {
+            "app": [
+              "ant-app"
+            ],
+            "layout": [
+              "ant-layout",
+              "ant-layout-has-sider"
+            ],
+            "sider": [
+              "ant-layout-sider",
+              "ant-layout-sider-dark",
+              "ant-layout-sider-has-trigger"
+            ],
+            "header": [
+              "ant-layout-header"
+            ],
+            "content": [
+              "ant-layout-content"
+            ],
+            "footer": [
+              "ant-layout-footer"
+            ]
+          }
+        }
+      },
+      "sameRoot": true,
+      "sameInput": true,
+      "value": "kept draft",
+      "focused": true,
+      "selection": [
+        1,
+        5
+      ]
+    }
+  ]
+}

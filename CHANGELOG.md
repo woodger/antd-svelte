@@ -9,6 +9,10 @@
 
 ### Added
 
+- ConfigProvider.prefixCls: наследуемый class prefix для App и Layout/sections,
+  local priority и source theme CSS-variable fallback. Смена prefix сохраняет
+  DOM/focus; legacy namespace и неподключённые семейства отмечены отдельно.
+
 - Select.open/defaultOpen и bind:open: controlled запросы, безопасный SSR,
   selected active option и переходы disabled. Пустой popup скрывается для
   null/false/пустой строки; numeric 0 сохранён, исходное исключение записано.

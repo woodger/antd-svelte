@@ -39,7 +39,7 @@
     ...rest
   }: LayoutSiderProps = $props();
   const config = useConfig();
-  let componentPrefix = $derived(prefixCls || 'ant-layout-sider');
+  let componentPrefix = $derived(config.getPrefixCls('layout-sider', prefixCls));
   let prefixCss = $derived(getLayoutPrefixCss(componentPrefix, 'sider'));
   const componentTheme = useComponentTheme('Layout');
   const layout = useLayout();

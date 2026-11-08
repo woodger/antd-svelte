@@ -27,12 +27,15 @@ export function useDesignTokenContext(): DesignTokenContext {
 export function provideDesignTokens(
   getTheme: () => ThemeConfig | undefined,
   id: string,
-  getElement?: () => HTMLElement | undefined
+  getElement?: () => HTMLElement | undefined,
+  getPrefixCls?: () => string
 ) {
   const parent = useDesignTokenContext();
-  const config = $derived(mergeThemeConfig(getTheme(), parent.config, id));
   const enabled = $derived(hasSourceTheme(getTheme()) || parent.enabled);
-  const state = $derived(getTheme() ? createDesignTokenState(config) : parent.state);
+  const config = $derived(mergeThemeConfig(getTheme(), parent.config, id,
+    enabled ? getPrefixCls?.() : undefined));
+  const state = $derived(getTheme()
+    ? createDesignTokenState(config, enabled ? getPrefixCls?.() : undefined) : parent.state);
   const context: DesignTokenContext = {
     get element() { return getElement?.() ?? parent.element; },
     get config() { return config; },

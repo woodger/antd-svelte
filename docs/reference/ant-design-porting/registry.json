@@ -1381,7 +1381,17 @@
         "tests/browser/fixtures/LayoutSectionPrefixFixtures.svelte",
         "tests/browser/fixtures/layout-section-prefix-cases.ts",
         "tests/browser/fixtures/ant-design-layout-section-prefix-reference.json",
-        "tests/package/layout-section-prefix.ssr.test.ts"
+        "tests/package/layout-section-prefix.ssr.test.ts",
+        "src/lib/theme-context.svelte.ts",
+        "src/lib/theme-config.engine.ts",
+        "src/lib/theme-prefix.test.ts",
+        "tests/browser/fixtures/ConfigPrefixScope.svelte",
+        "tests/browser/fixtures/ConfigPrefixFixtures.svelte",
+        "tests/browser/fixtures/ConfigPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-config-prefix-reference.json",
+        "tests/browser/config-prefix-metrics.ts",
+        "tests/browser/config-prefix.spec.ts",
+        "tests/package/config-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -1515,7 +1525,7 @@
             "tests/browser/fixtures/ant-design-layout-section-prefix-reference.json",
             "tests/package/layout-section-prefix.ssr.test.ts"
           ],
-          "note": "Layout.prefixCls и LayoutSider.prefixCls поддерживаются независимо, empty string восстанавливает ant-layout/ant-layout-sider. Классы root/states/body/trigger следуют своему prefix, --ant-layout-* / ant-layout-css-var и Menu namespace сохраняются. CSS data module layout-prefix воспроизводит 35 flat rules; runtime выбирает Layout или Sider, state selectors имеют own marker, variable defaults zero specificity. Native SSR :has fallback использует data markers независимо от классов. Тридцать два unmodified UMD cases в независимых документах и четыре transitions в отдельном документе фиксируют LTR/RTL, single/both/default prefixes, collapsed/zero/reverse/light, aliases, nested records, semantic priority и tokens. DOM/ids/aria-controls, keyboard, drafts/selection/focus, inert, collapse, explicit owner focus и legacy dark compact сохраняются; внутренний focus не зависит от обновления публичного ref. Header/Content/Footer принимают literal prefixCls без дополнительного suffix, empty/default/shared prefixes сохраняют свою роль. Template выбирает selectors секции, изолирует shared names по part marker; fallback variables/border-box получают только standalone-секции, wrapped sections наследуют variables и parent style без новых declarations. Двадцать четыре paired Source cases в независимых документах сохраняют raw custom-prefix defect и отдельные default-role baselines: normal/standalone/sibling, LTR/RTL, default/empty/shared/variable aliases, component tokens, parent CSS-variable overrides, local styles, parent prefix и dark/compact algorithms. Text scope Source использует официальный getDesignToken(config) для согласования с native provider. Raw custom/header/footer failures и upstream standalone gaps не копируются. Default legacy standalone, reactive DOM/control identity, drafts/selection/focus, SSR variables и native tags проверяются отдельно. Общий ConfigProvider.prefixCls остаётся отдельным gap; component config/themes сохранены. Без новых dependencies и script/config changes."
+          "note": "Layout.prefixCls и LayoutSider.prefixCls поддерживаются независимо, empty string использует ближайший ConfigProvider prefix (ant по умолчанию). Классы root/states/body/trigger следуют своему prefix, --ant-layout-* / ant-layout-css-var и Menu namespace сохраняются. CSS data module layout-prefix воспроизводит 35 flat rules; runtime выбирает Layout или Sider, state selectors имеют own marker, variable defaults zero specificity. Native SSR :has fallback использует data markers независимо от классов. Тридцать два unmodified UMD cases в независимых документах и четыре transitions в отдельном документе фиксируют LTR/RTL, single/both/default prefixes, collapsed/zero/reverse/light, aliases, nested records, semantic priority и tokens. DOM/ids/aria-controls, keyboard, drafts/selection/focus, inert, collapse, explicit owner focus и legacy dark compact сохраняются; внутренний focus не зависит от обновления публичного ref. Header/Content/Footer принимают literal prefixCls без дополнительного suffix, empty/default/shared prefixes сохраняют свою роль. Template выбирает selectors секции, изолирует shared names по part marker; fallback variables/border-box получают только standalone-секции, wrapped sections наследуют variables и parent style без новых declarations. Двадцать четыре paired Source cases в независимых документах сохраняют raw custom-prefix defect и отдельные default-role baselines: normal/standalone/sibling, LTR/RTL, default/empty/shared/variable aliases, component tokens, parent CSS-variable overrides, local styles, parent prefix и dark/compact algorithms. Text scope Source использует официальный getDesignToken(config) для согласования с native provider. Raw custom/header/footer failures и upstream standalone gaps не копируются. Default legacy standalone, reactive DOM/control identity, drafts/selection/focus, SSR variables и native tags проверяются отдельно. Общий ConfigProvider.prefixCls остаётся отдельным gap; component config/themes сохранены. Без новых dependencies и script/config changes."
         },
         {
           "id": "native-style-shorthand-reset",
@@ -1533,13 +1543,23 @@
         {
           "id": "global-prefix-cls",
           "title": "Общий ConfigProvider.prefixCls",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
+            "src/lib/ConfigProvider.svelte",
             "src/lib/config-context.ts",
-            "src/lib/Layout.svelte"
+            "src/lib/theme-context.svelte.ts",
+            "src/lib/theme-config.engine.ts",
+            "src/lib/theme-prefix.test.ts",
+            "tests/browser/fixtures/ConfigPrefixScope.svelte",
+            "tests/browser/fixtures/ConfigPrefixFixtures.svelte",
+            "tests/browser/fixtures/ConfigPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-config-prefix-reference.json",
+            "tests/browser/config-prefix-metrics.ts",
+            "tests/browser/config-prefix.spec.ts",
+            "tests/package/config-prefix.ssr.test.ts"
           ],
-          "note": "Локальные Layout/Sider/Header/Content/Footer prefixes и ConfigProvider.layout class/style поддерживаются; общий ConfigProvider.prefixCls пока не перенесён."
+          "note": "ConfigProvider.prefixCls наследуется через undefined/empty string, local nonempty prefixes приоритетнее. App/Layout/Sider/Header/Content/Footer получают новые root/state/body/trigger classes без пересоздания DOM. Namespace canonical --ant-layout-* и shared markers, native roles, known alias corrections, SSR :has, refs/draft/selection/focus/collapse сохранены. Source theme CSS-variable prefix fallback и explicit/inherited priorities проверены отдельно; legacy style behavior сохранено."
         },
         {
           "id": "native-prefix-style-collisions",
@@ -17250,7 +17270,19 @@
         "tests/browser/fixtures/ant-design-app-reference.json",
         "tests/browser/app.spec.ts",
         "tests/package/app.ssr.test.ts",
-        "readme.md"
+        "readme.md",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/theme-context.svelte.ts",
+        "src/lib/theme-config.engine.ts",
+        "src/lib/theme-prefix.test.ts",
+        "tests/browser/fixtures/ConfigPrefixScope.svelte",
+        "tests/browser/fixtures/ConfigPrefixFixtures.svelte",
+        "tests/browser/fixtures/ConfigPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-config-prefix-reference.json",
+        "tests/browser/config-prefix-metrics.ts",
+        "tests/browser/config-prefix.spec.ts",
+        "tests/package/config-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -17293,7 +17325,7 @@
             "tests/package/app.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Default div, HTML tag/component=false, attrs/class/rootClassName/style, bind:nativeElement, local prefixCls и RTL class. App default typography и component aliases color/font/lineHeight используют общий theme engine. ConfigProvider.app наследует record class/style целиком; локальный style имеет приоритет. Из девяти raw UMD roots проверяются восемь; общий ConfigProvider.prefixCls остаётся отдельным gap. Смена HTML-тега/fragment пересоздаёт children и holders, сохраняя работоспособные API после reconnect; native refs очищаются."
+          "note": "Default div, HTML tag/component=false, attrs/class/rootClassName/style, bind:nativeElement, local prefixCls и RTL class. App default typography и component aliases color/font/lineHeight используют общий theme engine. ConfigProvider.app наследует record class/style целиком; локальный style имеет приоритет. Все девять raw UMD roots, включая ConfigProvider.prefixCls, проверяются. Local prefix имеет приоритет; empty/undefined наследуют provider. Смена HTML-тега/fragment пересоздаёт children и holders, сохраняя работоспособные API после reconnect; native refs очищаются."
         },
         {
           "id": "nested-notice-config",
@@ -17325,7 +17357,7 @@
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Текущий App принимает уже перенесённые Native MessageOptions/NotificationOptions и holder offsets. Полные React semantic/render/stack/container/progress options зависят от расширения соответствующих семейств. Root принимает HTML tag/false; custom Svelte component root ещё не перенесён. Общий ConfigProvider.prefixCls и React diagnostics остаются отдельными gaps."
+          "note": "Текущий App принимает уже перенесённые Native MessageOptions/NotificationOptions и holder offsets. Полные React semantic/render/stack/container/progress options зависят от расширения соответствующих семейств. Root принимает HTML tag/false; custom Svelte component root ещё не перенесён. Общий prefix подключён к App; React diagnostics остаются отдельным gap."
         },
         {
           "id": "native-context-lifecycle",
@@ -17804,7 +17836,15 @@
         "tests/browser/form-tooltip-metrics.ts",
         "tests/browser/fixtures/FormTooltipFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-tooltip-reference.json",
-        "tests/package/form-tooltip.ssr.test.ts"
+        "tests/package/form-tooltip.ssr.test.ts",
+        "src/lib/theme-prefix.test.ts",
+        "tests/browser/fixtures/ConfigPrefixScope.svelte",
+        "tests/browser/fixtures/ConfigPrefixFixtures.svelte",
+        "tests/browser/fixtures/ConfigPrefixSSRFixtures.svelte",
+        "tests/browser/fixtures/ant-design-config-prefix-reference.json",
+        "tests/browser/config-prefix-metrics.ts",
+        "tests/browser/config-prefix.spec.ts",
+        "tests/package/config-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -18813,6 +18853,48 @@
             "tests/package/form-tooltip.ssr.test.ts"
           ],
           "note": "FormConfig включает FormTooltipProps. Config/form/Item options объединяются по ключам; целый form record наследуется при undefined и заменяется object/{}. Настройка defaults сама по себе не показывает значок без Item.tooltip; вложенный Form сбрасывает outer local options к props/config. Local icon/title, children fallback, options reset, nested scope, native tooltip/ref/field lifecycle, source array/accessibility observations подтверждены Form label-tooltips. Icon и rich React nodes заменены Svelte snippets, существующий Tooltip переиспользован без npm изменений."
+        },
+        {
+          "id": "shared-prefix",
+          "title": "Наследуемый prefixCls и подключение компонентов",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/theme-context.svelte.ts",
+            "src/lib/theme-config.engine.ts",
+            "src/lib/theme-prefix.test.ts",
+            "tests/browser/fixtures/ConfigPrefixScope.svelte",
+            "tests/browser/fixtures/ConfigPrefixFixtures.svelte",
+            "tests/browser/fixtures/ConfigPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-config-prefix-reference.json",
+            "tests/browser/config-prefix-metrics.ts",
+            "tests/browser/config-prefix.spec.ts",
+            "tests/package/config-prefix.ssr.test.ts"
+          ],
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR."
+        },
+        {
+          "id": "native-legacy-prefix-namespace",
+          "title": "Сохранённый namespace legacy темы без source config",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/theme-context.svelte.ts",
+            "src/lib/theme-config.engine.ts",
+            "src/lib/theme-prefix.test.ts",
+            "tests/browser/fixtures/ConfigPrefixScope.svelte",
+            "tests/browser/fixtures/ConfigPrefixFixtures.svelte",
+            "tests/browser/fixtures/ConfigPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-config-prefix-reference.json",
+            "tests/browser/config-prefix-metrics.ts",
+            "tests/browser/config-prefix.spec.ts",
+            "tests/package/config-prefix.ssr.test.ts"
+          ],
+          "note": "Framework/Native boundary: без source theme Svelte сохраняет прежние цвета и canonical variables; useToken.cssVar остаётся в унаследованном ant namespace, даже если class prefix изменён. UMD 6.6.8 useToken использует getPrefixCls fallback и без DesignTokenContext override, возвращая var(--suite-...). Raw without-theme case сохранён; сравнение явно ограничено Native legacy token exception. Source theme с собственным cssVar/token config использует общий fallback точно. Это наблюдение для отдельного разбора, а не объявленная ошибка upstream."
         }
       ]
     },

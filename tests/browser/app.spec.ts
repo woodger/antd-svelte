@@ -5,7 +5,7 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/?fixture=app');
 });
 
-for (const entry of reference.cases.filter(entry => entry.sample.id !== 'global-prefix')) {
+for (const entry of reference.cases) {
   test(`App root styles and API match source for ${entry.sample.id}`, async ({ page }) => {
     await page.getByRole('combobox', { name: 'App sample', exact: true })
       .selectOption(entry.sample.id);
@@ -13,7 +13,8 @@ for (const entry of reference.cases.filter(entry => entry.sample.id !== 'global-
     const snapshot = () => child.evaluate((node, sample) => {
       const root = node.parentElement!;
       const style = getComputedStyle(root);
-      const prefix = ('prefix' in sample ? sample.prefix : undefined) || 'ant-app';
+      const prefix = ('prefix' in sample ? sample.prefix : undefined)
+        || `${'globalPrefix' in sample ? sample.globalPrefix : 'ant'}-app`;
       return {
         tag: root.tagName.toLowerCase(), root: root.classList.contains(prefix),
         rtl: root.classList.contains(`${prefix}-rtl`),

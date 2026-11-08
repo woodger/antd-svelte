@@ -14,6 +14,7 @@
     component?: 'main' | false;
     rtl?: boolean;
     prefix?: string;
+    globalPrefix?: string;
     aliases?: boolean;
     context?: boolean;
     local?: boolean;
@@ -47,7 +48,7 @@
 
 <section id="app-fixture" aria-label="App context fixture">
   <label>App sample <select bind:value={selected}>
-    {#each reference.cases.filter(entry => entry.sample.id !== 'global-prefix') as { sample }}
+    {#each reference.cases as { sample }}
       <option value={sample.id}>{sample.id}</option>
     {/each}
   </select></label>
@@ -68,7 +69,7 @@
   <output id="app-native-tag">{nativeElement?.tagName.toLowerCase() ?? 'none'}</output>
   <div id="app-host">
     {#if mounted}
-      <ConfigProvider direction={sample.rtl ? 'rtl' : undefined}
+      <ConfigProvider prefixCls={sample.globalPrefix} direction={sample.rtl ? 'rtl' : undefined}
         theme={{ hashed: false, cssVar: {}, components: sample.aliases ? { App: {
           colorText: '#123456', fontSize: 20, fontFamily: 'monospace', lineHeight: 2
         } } : undefined }}

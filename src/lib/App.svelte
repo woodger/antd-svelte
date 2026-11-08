@@ -26,7 +26,7 @@
   const config = useConfig();
   const parent = useAppOptions();
   const componentTheme = useComponentTheme('App');
-  let componentPrefix = $derived(prefixCls || 'ant-app');
+  let componentPrefix = $derived(config.getPrefixCls('app', prefixCls));
   let messageOptions = $derived({ ...parent?.message, ...message });
   let notificationOptions = $derived({ ...parent?.notification, ...notification });
   const api = {

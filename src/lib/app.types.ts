@@ -40,7 +40,7 @@ export interface AppProps extends AppOptions, Omit<
   children?: Snippet;
   /** @defaultValue 'div' */
   component?: keyof HTMLElementTagNameMap | false;
-  /** Локальный CSS prefix; по умолчанию ant-app. */
+  /** Локальный CSS prefix; иначе ConfigProvider prefix + app. */
   prefixCls?: string;
   class?: string;
   rootClassName?: string;

@@ -75,6 +75,8 @@
   /** Наследуемые настройки темы, локали и компонентов для дочернего дерева Svelte. */
   export interface ConfigProviderProps {
     children: Snippet;
+    /** Общий prefix классов App/Layout; остальные семейства подключаются постепенно. */
+    prefixCls?: string;
     /** Частично переопределяет родительскую тему; остальные поля наследуются. */
     theme?: ThemeConfig;
     /** Общее оформление полей и Card; локальные props, Form и component config имеют приоритет. */
@@ -177,6 +179,7 @@
 
   let {
     children,
+    prefixCls,
     theme,
     variant,
     form,
@@ -261,7 +264,12 @@
   const parentDesignTokens = useDesignTokenContext();
   const themeId = $props.id();
   let element = $state<HTMLDivElement>();
-  const designTokens = provideDesignTokens(() => theme, themeId, () => element);
+  function getPrefixCls(suffix?: string, custom?: string) {
+    if (custom) return custom;
+    const prefix = prefixCls || parent.getPrefixCls();
+    return suffix ? `${prefix}-${suffix}` : prefix;
+  }
+  const designTokens = provideDesignTokens(() => theme, themeId, () => element, () => getPrefixCls());
   let gridMediaScope = $derived(designTokens.enabled
     ? getGridMediaScope(designTokens.state.token) : undefined);
   let parentGridMediaScope = $derived(parentDesignTokens.enabled
@@ -269,6 +277,7 @@
   let gridMediaCss = $derived(gridMediaScope && gridMediaScope !== parentGridMediaScope
     ? getGridMediaCss(designTokens.state.token) : undefined);
   const config: ConfigContext = {
+    getPrefixCls,
     get variant() {
       return variant ?? parent.variant;
     },

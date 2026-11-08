@@ -7,7 +7,7 @@ export interface LayoutSectionProps extends Omit<
   HTMLAttributes<HTMLElement>,
   'children' | 'class' | 'style'
 > {
-  /** Локальный CSS prefix; пустая строка использует стандартный класс своего компонента. */
+  /** Локальный CSS prefix; пустая строка использует prefix ближайшего ConfigProvider. */
   prefixCls?: string;
   children?: Snippet;
   class?: string;

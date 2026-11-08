@@ -67,6 +67,7 @@ import { getContext, setContext } from 'svelte';
 import { ruRU, type ComponentSize, type Variant, type Locale, type ResolvedThemeConfig } from './types';
 
 export interface ConfigContext {
+  readonly getPrefixCls: (suffix?: string, custom?: string) => string;
   readonly variant?: Variant;
   readonly form?: FormConfig;
   readonly app?: AppConfig;
@@ -151,6 +152,7 @@ export interface ConfigContext {
 
 const configKey = Symbol('ant-design-config');
 const defaultConfig: ConfigContext = {
+  getPrefixCls: (suffix, custom) => custom || (suffix ? `ant-${suffix}` : 'ant'),
   componentSize: 'medium',
   componentDisabled: false,
   direction: 'ltr',

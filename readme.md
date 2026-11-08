@@ -962,8 +962,8 @@ ConfigProvider.layout задаёт общие class/style только для к
 В эталоне также зафиксирован сброс неизменившегося padding после удаления
 локального paddingTop при React update; native строка стилей сохраняет отступ.
 
-Layout.prefixCls и LayoutSider.prefixCls независимы; пустая строка возвращает
-ant-layout и ant-layout-sider. Классы состояний, children и trigger следуют своему
+Layout.prefixCls и LayoutSider.prefixCls независимы; пустая строка использует
+prefix ближайшего ConfigProvider (ant по умолчанию). Классы состояний, children и trigger следуют своему
 prefix; namespace --ant-layout-* и общий marker ant-layout-css-var сохраняются.
 Рецепт layout-prefix извлекает 35 правил, runtime выбирает свою группу Layout/Sider.
 Native SSR-определение прямого Sider использует внутренние атрибуты; смена prefix
@@ -971,8 +971,9 @@ Native SSR-определение прямого Sider использует вн
 Восстановление фокуса использует фактический DOM body и сохраняет явный выбор владельца.
 LayoutHeader/LayoutContent/LayoutFooter принимают собственный literal prefixCls:
 он задаёт полный класс секции, без добавления suffix. Пустая строка возвращает
-стандартный класс. Префикс контейнера не меняет префиксы секций.
-Общий prefix ConfigProvider ещё не перенесён.
+класс из ConfigProvider. Префикс контейнера не меняет префиксы секций.
+Общий ConfigProvider.prefixCls применяется к Layout и всем его секциям; локальный
+literal prefix имеет приоритет. Остальные правила CSS/SSR/фокуса сохранены.
 
 Исходные коллизии prefix с Layout/Sider/variable classes и сохранённым CSS-кэшем
 записаны в [raw reference](tests/browser/fixtures/ant-design-layout-prefix-reference.json).
@@ -9829,7 +9830,8 @@ HTML-тег либо false; false оставляет children/holders без д�
 не применяет его class/style/attrs и не создаёт nativeElement. Смена тега или
 fragment-режима пересоздаёт дочернее DOM-дерево и очищает holders; те же API
 работают после повторного подключения. Bind:nativeElement даёт текущий HTML-root
-и очищается при его удалении. Local prefixCls задаёт root-классы. ConfigProvider.app
+и очищается при его удалении. Local prefixCls задаёт root-классы, иначе используется
+ConfigProvider.prefixCls + app. ConfigProvider.app
 наследует record class/style целиком; локальные class/rootClassName/style дополняют
 его, style имеет приоритет. Обычные HTML attrs передаются корню.
 
@@ -9837,13 +9839,38 @@ fragment-режима пересоздаёт дочернее DOM-дерево �
 закрывает поверхности, снимает inert/scroll lock и завершает ожидающие Modal
 handles с false. Поддерживаются текущие настройки Native Message/Notification;
 их полные React semantic/render/stack/container options, React custom root
-components и общий ConfigProvider.prefixCls остаются за пределами этого этапа.
+components остаются за пределами этого этапа.
 
 Основа сверки — [исходные снимки App](./tests/browser/fixtures/ant-design-app-reference.json).
-Из девяти root-примеров проверяются восемь: global-prefix сохранён как ещё
-не перенесённый случай. Проверки:
+Все девять root-примеров, включая global-prefix, проверяются. Проверки:
 [браузер](./tests/browser/app.spec.ts), [SSR и типы](./tests/package/app.ssr.test.ts),
 [обновление defaults](./src/lib/notice-config.test.ts).
+
+## Общий префикс ConfigProvider
+
+PrefixCls задаёт базовый префикс CSS-классов; по умолчанию ant. Undefined и пустая
+строка наследуют родительский prefix. Локальный непустой prefixCls компонента имеет
+приоритет. Сейчас общий prefix подключён к App, Layout, LayoutSider и
+LayoutHeader/Content/Footer; остальные семейства подключаются отдельно. Например,
+ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
+suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
+
+Для source theme базовый prefix задаёт fallback namespace CSS-переменных.
+Унаследованный theme.cssVar.prefix имеет приоритет над новой настройкой провайдера,
+локальный cssVar.prefix — над обоими. Явный undefined удаляет унаследованное значение
+и возвращает fallback текущего провайдера, даже при inherit=false. Без локальной
+темы сохраняется родительский theme scope и namespace. Legacy режим без source
+theme сохраняет прежние переменные/цвета: useToken.cssVar пока использует ant namespace
+вместо source fallback к class prefix. Это отличие записано отдельно в реестре.
+
+Живая смена prefix не пересоздаёт Layout/controls, сохраняет refs, collapse, draft,
+selection и focus; соседние и вложенные scopes независимы. Canonical Native
+markers и --ant-* bridge сохраняются. В SSR классы и исходные variables доступны
+до hydration.
+Сверка: [13 UMD случаев и три перехода](./tests/browser/fixtures/ant-design-config-prefix-reference.json),
+[browser](./tests/browser/config-prefix.spec.ts),
+[SSR](./tests/package/config-prefix.ssr.test.ts),
+[приоритет namespace](./src/lib/theme-prefix.test.ts).
 
 ## Формы и валидация
 

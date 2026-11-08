@@ -25,7 +25,8 @@ export function hasSourceTheme(config?: ThemeConfig): boolean {
 export function mergeThemeConfig(
   local: ThemeConfig | undefined,
   parent: ResolvedThemeConfig,
-  id: string
+  id: string,
+  prefixCls?: string
 ): ResolvedThemeConfig {
   if (!local) return parent;
 
@@ -46,6 +47,7 @@ export function mergeThemeConfig(
     token: { ...base.token, ...local.token },
     components,
     cssVar: {
+      ...(prefixCls === undefined ? {} : { prefix: prefixCls }),
       ...base.cssVar,
       ...local.cssVar,
       key: local.cssVar?.key || `css-var-${id.replace(/:/g, '')}`
@@ -76,7 +78,10 @@ function computeToken(
 }
 
 /** Runtime [] использует defaultTheme; component algorithm=true наследует общий Theme. */
-export function createDesignTokenState(config: ResolvedThemeConfig): DesignTokenState {
+export function createDesignTokenState(
+  config: ResolvedThemeConfig,
+  prefixCls = 'ant'
+): DesignTokenState {
   let algorithm = config.algorithm;
   if (!algorithm) {
     const native: MappingAlgorithm[] = [];
@@ -114,7 +119,7 @@ export function createDesignTokenState(config: ResolvedThemeConfig): DesignToken
   };
   const merged = computeToken(seed, seed, components, theme);
   const actualToken = { ...merged };
-  const prefix = config.cssVar?.prefix ?? 'ant';
+  const prefix = config.cssVar?.prefix ?? prefixCls;
   const key = config.cssVar?.key ?? 'css-var-root';
   const salt = `6.6.8-${config.hashed || ''}`;
   const mergedSalt = `${salt}_${prefix}`;

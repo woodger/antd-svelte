@@ -19,7 +19,7 @@
     ...rest
   }: LayoutProps = $props();
   const config = useConfig();
-  let componentPrefix = $derived(prefixCls || 'ant-layout');
+  let componentPrefix = $derived(config.getPrefixCls('layout', prefixCls));
   let prefixCss = $derived(getLayoutPrefixCss(componentPrefix, 'layout'));
   const componentTheme = useComponentTheme('Layout');
   const model = createLayoutState();
