@@ -1509,7 +1509,11 @@ component tokens в 6.6.8 нет. Preset gaps читают paddingXS/padding/pad
 numeric gaps сохраняют inline priority, typography reset не добавляется. Поддержаны
 именованные cssVar, нули/undefined и независимые provider scopes; обновление темы
 или config сохраняет keyed DOM, черновики, выделение и фокус.
-Произвольный prefixCls остаётся в полном объёме миграции.
+PrefixCls меняет root/orientation/align/gap/item/separator classes. Empty/undefined
+наследуют ConfigProvider.prefixCls (по умолчанию ant-space), локальный prefix
+имеет приоритет. Semantic callbacks получают исходный local prefix.
+Badge selector использует общий prefix провайдера независимо от local Space.
+Смена prefix сохраняет keyed DOM, refs, draft/selection/focus и приоритет стилей.
 
 ### SpaceCompact и SpaceAddon
 
@@ -1542,12 +1546,30 @@ status=error/warning меняет границу/фон/текст. Disabled з�
 Размер берётся только из Compact context; вне Compact componentSize не меняет
 Addon. Поддержаны нативные attrs, class/style и bind:nativeElement.
 
+SpaceCompact и SpaceAddon имеют собственные prefixCls с теми же правилами
+наследования: ant-space-compact/ant-space-addon по умолчанию. Local prefix Compact
+не меняет prefixes вложенных Addon и controls. Служебные variant/status variables
+Addon используют общий prefix без точек, независимо от local class и theme.cssVar.prefix.
+Canonical markers и прежние Compact adapters сохраняются; prefixes остальных
+controls подключаются в своих семействах.
+
+В 6.6.8 общий local class Space кэшируется с первым global prefix. Во вложенном
+провайдере правило Badge может продолжать искать родительский class и оставлять
+display:inline-block вместо block. Native ограничивает CSS по local и global
+prefix; [raw](./tests/browser/fixtures/ant-design-space-prefix-reference.json) и
+[fresh-page](./tests/browser/fixtures/ant-design-space-prefix-isolated.json)
+замеры сохранены для разбора. Prefix проверяют
+[browser](./tests/browser/space-prefix.spec.ts),
+[SSR](./tests/package/space-prefix.ssr.test.ts) и fixture `?fixture=space-prefix`.
+
 Фикстура — `?fixture=space-compact`, пример — `/ant-design#space`. Unit/SSR/
 Chromium проверяют размеры, границы/RTL, вложенность, фокус, Popup isolation,
 variants/status/disabled и hydration. Рецепты space-compact/space-addon/
 input-number-compact извлекают 4/29/8 правил без keyframes. InputSearch использует
 внутренний Compact с отдельными items для Input и кнопки. Состояние
 Compact-интеграций остальных семейств описано в реестре.
+Рецепты space-prefix/space-compact-prefix/space-addon-prefix воспроизводят
+16/4/29 правил CSS-модулями с проверкой SHA-256; namespace и selectors меняет runtime.
 
 ## InputNumber
 
@@ -9939,8 +9961,8 @@ PrefixCls задаёт базовый префикс CSS-классов; по у
 LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex,
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
-Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter и Anchor. Остальные
-семейства подключаются отдельно. Например,
+Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
+Space/SpaceCompact/SpaceAddon. Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 

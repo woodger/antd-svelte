@@ -1942,10 +1942,33 @@
         {
           "id": "global-config",
           "title": "Произвольный prefixCls Space/Compact/Addon",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Component config Space, alias tokens/algorithms и прежний Addon scope перенесены отдельными features. CSS generation для произвольного prefixCls семейства ещё отсутствует."
+          "evidence": [
+            "src/lib/Space.svelte",
+            "src/lib/SpaceCompact.svelte",
+            "src/lib/SpaceAddon.svelte",
+            "src/lib/space.types.ts",
+            "src/lib/space-compact.types.ts",
+            "src/lib/space.engine.ts",
+            "src/lib/space-prefix.engine.ts",
+            "src/lib/space-compact-prefix.engine.ts",
+            "src/lib/space-addon-prefix.engine.ts",
+            "src/lib/space-prefix.engine.test.ts",
+            "src/lib/vendor/space-prefix.css.js",
+            "src/lib/vendor/space-compact-prefix.css.js",
+            "src/lib/vendor/space-addon-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/SpacePrefixScope.svelte",
+            "tests/browser/fixtures/SpacePrefixFixtures.svelte",
+            "tests/browser/fixtures/SpacePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-space-prefix-reference.json",
+            "tests/browser/fixtures/ant-design-space-prefix-isolated.json",
+            "tests/browser/space-prefix-metrics.ts",
+            "tests/browser/space-prefix.spec.ts",
+            "tests/package/space-prefix.ssr.test.ts"
+          ],
+          "note": "Space/Compact/Addon разрешают собственный local prefixCls; empty/undefined наследуют общий ConfigProvider prefix. Root/parts/gap/compact/status/variant classes и 16/4/29 CSS rules подключены с сохранением canonical markers. Space Badge selector следует общему prefix независимо от local Space; Addon private variables следуют общему namespace без точек независимо от local class и theme.cssVar.prefix. Compact не меняет собственные prefixes children. Raw semantic props, explicit keys, native input lifecycle, refs/draft/selection/focus, RTL/vertical, sizes, aliases и nested/sibling scopes сверяются с официальным UMD. Связанные CSS recipes проверяют исходный archive SHA; Source shared-class Badge cache observation записан отдельно. Existing Compact adapters и отключённые deprecated aliases не меняются; prefixes остальных controls остаются задачами их семейств."
         },
         {
           "id": "remaining-controls",
@@ -1972,6 +1995,20 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Button, Input/TextArea и их Password/Search/OTP composition, InputNumber и SpaceAddon: исходные defaults + final overrides, alias isolation на CSS roots, hash/cssVar classes, semantic/plain style priority, custom CSS prefix, SSR body/head и cleanup scope. 12 source CSS configurations из официального UMD; точные rounding/zero/font/padding/shadow/handle rules. Native-only темы сохраняют прежние цвета; compact font/padding metrics применяются отдельно. Публичный prefixCls/CSP/full style renderer и остальные компонентные families остаются в работе."
+        },
+        {
+          "id": "source-shared-class-badge-cache",
+          "title": "Изоляция Badge selector при shared local Space class",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/space-prefix.engine.ts",
+            "tests/browser/fixtures/ant-design-space-prefix-reference.json",
+            "tests/browser/fixtures/ant-design-space-prefix-isolated.json",
+            "tests/browser/space-prefix.spec.ts",
+            "tests/package/space-prefix.ssr.test.ts"
+          ],
+          "note": "Наблюдение для отдельного разбора: unmodified Ant Design 6.6.8 регистрирует local Space class=flow с global prefix=suite; вложенный inner provider с тем же local class оставляет Badge display:inline-block, поскольку CSS selector ищет suite-badge-not-a-wrapper. Fresh document с первой регистрацией flow под inner даёт display:block. Raw composite и fresh-page references сохранены. Native scope учитывает local и global prefixes, не воспроизводя зависимость от первого CSS registration."
         }
       ]
     },
@@ -19465,9 +19502,14 @@
             "tests/package/splitter-prefix.ssr.test.ts",
             "src/lib/Anchor.svelte",
             "tests/browser/anchor-prefix.spec.ts",
-            "tests/package/anchor-prefix.ssr.test.ts"
+            "tests/package/anchor-prefix.ssr.test.ts",
+            "src/lib/Space.svelte",
+            "src/lib/SpaceCompact.svelte",
+            "src/lib/SpaceAddon.svelte",
+            "tests/browser/space-prefix.spec.ts",
+            "tests/package/space-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter и Anchor подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и Space/Compact/Addon подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены."
         },
         {
           "id": "native-legacy-prefix-namespace",

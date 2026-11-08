@@ -9,6 +9,8 @@ export interface SpaceCompactProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style'
 > {
+  /** Локальный CSS prefix; не меняет собственные prefixes дочерних controls. */
+  prefixCls?: string;
   items?: SpaceProps['items'];
   children?: Snippet;
   size?: SpaceCompactSize;
@@ -27,6 +29,8 @@ export interface SpaceAddonProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style'
 > {
+  /** Локальный CSS prefix; namespace служебных variables задаёт общий provider prefix. */
+  prefixCls?: string;
   children?: Snippet;
   /** @defaultValue 'outlined' */
   variant?: 'outlined' | 'filled' | 'borderless' | 'underlined';

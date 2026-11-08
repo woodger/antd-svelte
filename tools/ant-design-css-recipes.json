@@ -662,6 +662,27 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Space: orientation, align, gaps, empty wrappers и Badge; без Compact/Addon.\n * Без typography reset; корни ограничены :where(.ant-space-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "space-prefix",
+    "output": "src/lib/vendor/space-prefix.css.js",
+    "expectedRules": 16,
+    "include": [
+      "^\\.ant-space(?![\\w])"
+    ],
+    "exclude": [
+      "ant-space-(?:compact|addon)",
+      "\\.ant-space-gap-(?:row|col)-middle$"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.ant-space(?![-\\w])",
+        "replacement": ".ant-space:where(.ant-space-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Space: orientation, align, gaps, empty wrappers и Badge; без Compact/Addon.\n * Без typography reset; корни ограничены :where(.ant-space-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
+  },
+  {
     "id": "space-compact",
     "output": "src/lib/vendor/space-compact.css",
     "expectedRules": 4,
@@ -679,6 +700,24 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Space.Compact: block, vertical и RTL; без typography reset.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "space-compact-prefix",
+    "output": "src/lib/vendor/space-compact-prefix.css.js",
+    "expectedRules": 4,
+    "include": [
+      "^\\.ant-space-compact(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.ant-space-compact(?![-\\w])",
+        "replacement": ".ant-space-compact:where(.ant-space-compact-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Space.Compact: block, vertical и RTL; без typography reset.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
+  },
+  {
     "id": "space-addon",
     "output": "src/lib/vendor/space-addon.css",
     "expectedRules": 29,
@@ -694,6 +733,24 @@
     ],
     "keyframes": [],
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Space.Addon: variants/status, размеры, compact borders и z-index.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
+  },
+  {
+    "id": "space-addon-prefix",
+    "output": "src/lib/vendor/space-addon-prefix.css.js",
+    "expectedRules": 29,
+    "include": [
+      "\\.ant-space-addon(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.ant-space-addon(?![-\\w])",
+        "replacement": ".ant-space-addon:where(.ant-space-addon-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Space.Addon: variants/status, размеры, compact borders и z-index.\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
   },
   {
     "id": "input-number-compact",

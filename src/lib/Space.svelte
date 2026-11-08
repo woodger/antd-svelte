@@ -1,11 +1,14 @@
 <script lang="ts">
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getSpacePrefixCss } from './space-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { spaceEntries, spaceGap, spaceHasContent, spaceOrientation } from './space.engine';
   import { connectFeedbackFocus } from './feedback.dom';
   import type { SpaceContent, SpaceProps, SpaceSlots } from './space.types';
 
   let {
+    prefixCls,
     items,
     children,
     size: customizeSize,
@@ -23,6 +26,9 @@
     ...rest
   }: SpaceProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('space', prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getSpacePrefixCss(componentPrefix, rootPrefix));
   const componentTheme = useComponentTheme('Space');
   let size = $derived(customizeSize === undefined ? config.space?.size ?? 'small' : customizeSize);
   let entries = $derived(spaceEntries(items, children));
@@ -34,11 +40,12 @@
     align ?? (actualOrientation === 'horizontal' ? 'center' : undefined)
   );
   let actualSeparator = $derived(separator);
-  let gap = $derived(spaceGap(size));
+  let gap = $derived(spaceGap(size, componentPrefix));
   let info = $derived(
     {
       props: {
         ...rest,
+        prefixCls,
         items,
         children,
         size,
@@ -123,18 +130,20 @@
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
 {#if entries.length}
+  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`space-prefix:${componentPrefix}:${rootPrefix}`} />{/if}
   <div {...rest} bind:this={nativeElement} dir={config.direction} class={[
-      'ant-space ant-space-css-var',
+      `${componentPrefix} ant-space-css-var`,
       componentTheme.className,
       config.space?.class,
-      `ant-space-${actualOrientation}`,
-      config.direction === 'rtl' && 'ant-space-rtl',
-      actualAlign && `ant-space-align-${actualAlign}`,
+      `${componentPrefix}-${actualOrientation}`,
+      config.direction === 'rtl' && `${componentPrefix}-rtl`,
+      actualAlign && `${componentPrefix}-align-${actualAlign}`,
       gap.classes,
       className,
       rootClassName,
       classes.root
-    ]}
+    ]} data-ant-space-prefix={prefixCss ? componentPrefix : undefined}
+    data-ant-space-global={prefixCss ? rootPrefix : undefined}
     style={[componentTheme.style, wrap && 'flex-wrap:wrap', gap.style, slots.root].filter(
         Boolean
       ).join(
@@ -142,8 +151,8 @@
       )}>
     {#each entries as item, index (item.key)}
       {#if spaceHasContent(item.children)}
-        <div class={['ant-space-item', classes.item]} style={slots.item}>{@render value(item.children)}</div>
-        {#if index < latest && actualSeparator}<span class={['ant-space-item-separator', classes.separator]} style={slots.separator}>{@render value(actualSeparator)}</span>{/if}
+        <div class={[`${componentPrefix}-item`, classes.item]} style={slots.item}>{@render value(item.children)}</div>
+        {#if index < latest && actualSeparator}<span class={[`${componentPrefix}-item-separator`, classes.separator]} style={slots.separator}>{@render value(actualSeparator)}</span>{/if}
       {/if}
     {/each}
   </div>

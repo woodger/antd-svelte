@@ -31,6 +31,8 @@ export interface SpaceProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style'
 > {
+  /** Локальный CSS prefix; empty/undefined наследуют ConfigProvider.prefixCls. */
+  prefixCls?: string;
   items?: readonly (SpaceContent | SpaceItem)[];
   children?: Snippet;
   /** Локальное значение → ConfigProvider.space.size → small. */

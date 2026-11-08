@@ -9,6 +9,11 @@
 
 ### Added
 
+- Space, SpaceCompact и SpaceAddon поддерживают local/shared prefixCls. Badge
+  selector и служебные Addon variables используют общий prefix независимо от
+  local layout classes. Source shared-class cache observation сохранён отдельно;
+  keyed DOM, refs, draft/selection/focus и прежние Compact adapters сохранены.
+
 - Anchor поддерживает local/shared prefixCls и отдельный item override. Links
   наследуют prefix владельца; Source пропуск этого наследования записан raw/matched
   замерами. Сохранены отступы, indicator, link decorations, DOM/focus и history.
