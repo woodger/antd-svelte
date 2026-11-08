@@ -9,6 +9,11 @@
 
 ### Added
 
+- ValidationRule.type поддерживает primitive string/number/integer/float/boolean/
+  array/object/date/regexp/method/any с исходным выбором constraints и пустых значений.
+  Правила без type сохраняют прежнее поведение. Исправлены исходные классификации
+  scientific-notation integers; BigInt/Symbol дают ошибку правила без console/page errors.
+
 - Правила Form поддерживают len и whitespace. Точная длина учитывает Unicode
   code points и элементы массива, имеет приоритет над min/max и проверяет
   пустой массив; whitespace запрещает непустую строку из одних пробелов.

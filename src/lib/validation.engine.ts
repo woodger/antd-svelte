@@ -1,22 +1,30 @@
+import {
+  matchesValidationType, normalizeValidationType, type ValidationRuleType
+} from './validation-type.engine';
+export type { ValidationRuleType } from './validation-type.engine';
+
 /** Значение поля может быть скаляром, вложенным контейнером или экземпляром класса. */
 export type FormValue = unknown;
 export type FormValues = Record<string, FormValue>;
 export type FieldName<Values> = Extract<keyof Values, string>;
 
 export interface ValidationRule<Values extends FormValues = FormValues> {
+  /** Явный primitive type включает исходные правила пустых значений и выбора constraints. */
+  type?: ValidationRuleType;
   required?: boolean;
   /** По умолчанию false; сообщение попадает в warnings и не блокирует submit. */
   warningOnly?: boolean;
   min?: number;
   max?: number;
-  /** Точное число, число Unicode code points строки или элементов массива; приоритет над min/max. */
+  /** Точное число/длина; date сравнивает timestamp. Приоритет над min/max. */
   len?: number;
-  /** Отклоняет непустую строку только из whitespace; пустое optional значение остаётся допустимым. */
+  /** В implicit/string rule отклоняет непустую строку только из whitespace. */
   whitespace?: boolean;
   pattern?: RegExp;
   message?: string;
   /** Синхронно преобразует значение только для этого правила, не записывая результат в Form. */
   transform?: (value: FormValue) => FormValue;
+  /** При явном type заменяет встроенные проверки; native signature value/values сохраняется. */
   validator?: (
     value: FormValue,
     values: Readonly<Values>
@@ -121,21 +129,22 @@ async function validateRuleValue<Values extends FormValues>(
       return [rule.message ?? (error instanceof Error ? error.message : 'Проверьте значение.')];
     }
   }
-  const value = transformedValue;
-  const array = Array.isArray(value);
-  const empty = value === null
-    || value === undefined
-    || (typeof value === 'string'
-      && !value.trim())
-    || (array
-      && value.length === 0);
+  const type = rule.type;
+  if (type && rule.validator) return validateCustomRule(transformedValue, values, rule);
 
-  if (empty && rule.required) {
+  const value = normalizeValidationType(transformedValue, type);
+  const array = Array.isArray(value);
+  const missing = value === null || value === undefined;
+  const empty = type ? missing
+    || (type === 'string' || type === 'date') && value === ''
+    : missing || typeof value === 'string' && !value.trim() || array && value.length === 0;
+
+  if (rule.required && (empty || type === 'array' && array && value.length === 0)) {
     messages.push(rule.message ?? 'Заполните это поле.');
     return messages;
   }
 
-  if (rule.whitespace === true && typeof value === 'string' && value !== '' && !value.trim()) {
+  if (!type && rule.whitespace === true && typeof value === 'string' && value !== '' && !value.trim()) {
     return [rule.message ?? 'Поле не может состоять только из пробелов.'];
   }
 
@@ -145,11 +154,17 @@ async function validateRuleValue<Values extends FormValues>(
     return messages;
   }
 
+  if (type && !matchesValidationType(value, type)) {
+    return [rule.message ?? `Проверьте тип значения: ${type}.`];
+  }
+  if (type && ['boolean', 'object', 'regexp', 'method', 'any'].includes(type)) return [];
+
   const length = array
     ? value.length
     : typeof value === 'string'
       ? [...value].length
-      : typeof value === 'number' ? value : undefined;
+      : typeof value === 'number' ? value
+        : type === 'date' && value instanceof Date ? value.getTime() : undefined;
 
   if (length !== undefined && exactLength && length !== rule.len) {
     return [rule.message ?? `${array ? 'Точное количество элементов'
@@ -173,7 +188,7 @@ async function validateRuleValue<Values extends FormValues>(
     return messages;
   }
 
-  if (!empty
+  if ((!type || type === 'string') && !empty
     && !array
     && rule.pattern
     && !new RegExp(rule.pattern.source, rule.pattern.flags).test(
@@ -183,6 +198,18 @@ async function validateRuleValue<Values extends FormValues>(
     return messages;
   }
 
+  if (type === 'string' && rule.whitespace === true && value !== ''
+    && typeof value === 'string' && !value.trim()) {
+    return [rule.message ?? 'Поле не может состоять только из пробелов.'];
+  }
+
+  return validateCustomRule(value, values, rule);
+}
+
+async function validateCustomRule<Values extends FormValues>(
+  value: FormValue, values: Readonly<Values>, rule: ValidationRule<Values>
+): Promise<string[]> {
+  const messages: string[] = [];
   if (rule.validator) {
     try {
       const message = await rule.validator(value, values);

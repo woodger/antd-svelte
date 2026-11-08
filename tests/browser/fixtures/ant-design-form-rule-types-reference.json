@@ -1,0 +1,4322 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after validation"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "string-undefined",
+        "type": "string",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-null",
+        "type": "string",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-string",
+        "type": "string",
+        "kind": "string"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-empty",
+        "type": "string",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-spaces",
+        "type": "string",
+        "kind": "spaces"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-zero",
+        "type": "string",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-integer",
+        "type": "string",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-fraction",
+        "type": "string",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-false",
+        "type": "string",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-true",
+        "type": "string",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-array",
+        "type": "string",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-empty-array",
+        "type": "string",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-object",
+        "type": "string",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-date",
+        "type": "string",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-invalid-date",
+        "type": "string",
+        "kind": "invalid-date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-regexp",
+        "type": "string",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-invalid-regexp",
+        "type": "string",
+        "kind": "invalid-regexp"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-method",
+        "type": "string",
+        "kind": "method"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-nan",
+        "type": "string",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-infinity",
+        "type": "string",
+        "kind": "infinity"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-bigint",
+        "type": "string",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-symbol",
+        "type": "string",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-large-integer",
+        "type": "string",
+        "kind": "large-integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-undefined-required",
+        "type": "string",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-null-required",
+        "type": "string",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-empty-required",
+        "type": "string",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-spaces-required",
+        "type": "string",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-zero-required",
+        "type": "string",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-false-required",
+        "type": "string",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-empty-array-required",
+        "type": "string",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-undefined",
+        "type": "number",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-null",
+        "type": "number",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-string",
+        "type": "number",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-empty",
+        "type": "number",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-spaces",
+        "type": "number",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-zero",
+        "type": "number",
+        "kind": "zero"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-integer",
+        "type": "number",
+        "kind": "integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-fraction",
+        "type": "number",
+        "kind": "fraction"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-false",
+        "type": "number",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-true",
+        "type": "number",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-array",
+        "type": "number",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-empty-array",
+        "type": "number",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-object",
+        "type": "number",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-date",
+        "type": "number",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-invalid-date",
+        "type": "number",
+        "kind": "invalid-date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-regexp",
+        "type": "number",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-invalid-regexp",
+        "type": "number",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-method",
+        "type": "number",
+        "kind": "method"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-nan",
+        "type": "number",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-infinity",
+        "type": "number",
+        "kind": "infinity"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-bigint",
+        "type": "number",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-symbol",
+        "type": "number",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-large-integer",
+        "type": "number",
+        "kind": "large-integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-undefined-required",
+        "type": "number",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-null-required",
+        "type": "number",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-empty-required",
+        "type": "number",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-spaces-required",
+        "type": "number",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-zero-required",
+        "type": "number",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-false-required",
+        "type": "number",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-empty-array-required",
+        "type": "number",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-undefined",
+        "type": "integer",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-null",
+        "type": "integer",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-string",
+        "type": "integer",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-empty",
+        "type": "integer",
+        "kind": "empty"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-spaces",
+        "type": "integer",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-zero",
+        "type": "integer",
+        "kind": "zero"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-integer",
+        "type": "integer",
+        "kind": "integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-fraction",
+        "type": "integer",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-false",
+        "type": "integer",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-true",
+        "type": "integer",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-array",
+        "type": "integer",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-empty-array",
+        "type": "integer",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-object",
+        "type": "integer",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-date",
+        "type": "integer",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-invalid-date",
+        "type": "integer",
+        "kind": "invalid-date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-regexp",
+        "type": "integer",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-invalid-regexp",
+        "type": "integer",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-method",
+        "type": "integer",
+        "kind": "method"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-nan",
+        "type": "integer",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-infinity",
+        "type": "integer",
+        "kind": "infinity"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-bigint",
+        "type": "integer",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-symbol",
+        "type": "integer",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-large-integer",
+        "type": "integer",
+        "kind": "large-integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-undefined-required",
+        "type": "integer",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-null-required",
+        "type": "integer",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-empty-required",
+        "type": "integer",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-spaces-required",
+        "type": "integer",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-zero-required",
+        "type": "integer",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-false-required",
+        "type": "integer",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-empty-array-required",
+        "type": "integer",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-undefined",
+        "type": "float",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-null",
+        "type": "float",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-string",
+        "type": "float",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-empty",
+        "type": "float",
+        "kind": "empty"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-spaces",
+        "type": "float",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-zero",
+        "type": "float",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-integer",
+        "type": "float",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-fraction",
+        "type": "float",
+        "kind": "fraction"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-false",
+        "type": "float",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-true",
+        "type": "float",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-array",
+        "type": "float",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-empty-array",
+        "type": "float",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-object",
+        "type": "float",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-date",
+        "type": "float",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-invalid-date",
+        "type": "float",
+        "kind": "invalid-date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-regexp",
+        "type": "float",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-invalid-regexp",
+        "type": "float",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-method",
+        "type": "float",
+        "kind": "method"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-nan",
+        "type": "float",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-infinity",
+        "type": "float",
+        "kind": "infinity"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-bigint",
+        "type": "float",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-symbol",
+        "type": "float",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-large-integer",
+        "type": "float",
+        "kind": "large-integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-undefined-required",
+        "type": "float",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-null-required",
+        "type": "float",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-empty-required",
+        "type": "float",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-spaces-required",
+        "type": "float",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-zero-required",
+        "type": "float",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-false-required",
+        "type": "float",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-empty-array-required",
+        "type": "float",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-undefined",
+        "type": "boolean",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-null",
+        "type": "boolean",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-string",
+        "type": "boolean",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-empty",
+        "type": "boolean",
+        "kind": "empty"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-spaces",
+        "type": "boolean",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-zero",
+        "type": "boolean",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-integer",
+        "type": "boolean",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-fraction",
+        "type": "boolean",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-false",
+        "type": "boolean",
+        "kind": "false"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-true",
+        "type": "boolean",
+        "kind": "true"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-array",
+        "type": "boolean",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-empty-array",
+        "type": "boolean",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-object",
+        "type": "boolean",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-date",
+        "type": "boolean",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-invalid-date",
+        "type": "boolean",
+        "kind": "invalid-date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-regexp",
+        "type": "boolean",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-invalid-regexp",
+        "type": "boolean",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-method",
+        "type": "boolean",
+        "kind": "method"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-nan",
+        "type": "boolean",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-infinity",
+        "type": "boolean",
+        "kind": "infinity"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-bigint",
+        "type": "boolean",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-symbol",
+        "type": "boolean",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-large-integer",
+        "type": "boolean",
+        "kind": "large-integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-undefined-required",
+        "type": "boolean",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-null-required",
+        "type": "boolean",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-empty-required",
+        "type": "boolean",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-spaces-required",
+        "type": "boolean",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-zero-required",
+        "type": "boolean",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-false-required",
+        "type": "boolean",
+        "kind": "false",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "boolean-empty-array-required",
+        "type": "boolean",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-undefined",
+        "type": "array",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-null",
+        "type": "array",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-string",
+        "type": "array",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-empty",
+        "type": "array",
+        "kind": "empty"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-spaces",
+        "type": "array",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-zero",
+        "type": "array",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-integer",
+        "type": "array",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-fraction",
+        "type": "array",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-false",
+        "type": "array",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-true",
+        "type": "array",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-array",
+        "type": "array",
+        "kind": "array"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-empty-array",
+        "type": "array",
+        "kind": "empty-array"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-object",
+        "type": "array",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-date",
+        "type": "array",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-invalid-date",
+        "type": "array",
+        "kind": "invalid-date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-regexp",
+        "type": "array",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-invalid-regexp",
+        "type": "array",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-method",
+        "type": "array",
+        "kind": "method"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-nan",
+        "type": "array",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-infinity",
+        "type": "array",
+        "kind": "infinity"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-bigint",
+        "type": "array",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-symbol",
+        "type": "array",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-large-integer",
+        "type": "array",
+        "kind": "large-integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-undefined-required",
+        "type": "array",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-null-required",
+        "type": "array",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-empty-required",
+        "type": "array",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-spaces-required",
+        "type": "array",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-zero-required",
+        "type": "array",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-false-required",
+        "type": "array",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-empty-array-required",
+        "type": "array",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-undefined",
+        "type": "object",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-null",
+        "type": "object",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-string",
+        "type": "object",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-empty",
+        "type": "object",
+        "kind": "empty"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-spaces",
+        "type": "object",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-zero",
+        "type": "object",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-integer",
+        "type": "object",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-fraction",
+        "type": "object",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-false",
+        "type": "object",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-true",
+        "type": "object",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-array",
+        "type": "object",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-empty-array",
+        "type": "object",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-object",
+        "type": "object",
+        "kind": "object"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-date",
+        "type": "object",
+        "kind": "date"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-invalid-date",
+        "type": "object",
+        "kind": "invalid-date"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-regexp",
+        "type": "object",
+        "kind": "regexp"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-invalid-regexp",
+        "type": "object",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-method",
+        "type": "object",
+        "kind": "method"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-nan",
+        "type": "object",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-infinity",
+        "type": "object",
+        "kind": "infinity"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-bigint",
+        "type": "object",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-symbol",
+        "type": "object",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-large-integer",
+        "type": "object",
+        "kind": "large-integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-undefined-required",
+        "type": "object",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-null-required",
+        "type": "object",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-empty-required",
+        "type": "object",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-spaces-required",
+        "type": "object",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-zero-required",
+        "type": "object",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-false-required",
+        "type": "object",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "object-empty-array-required",
+        "type": "object",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-undefined",
+        "type": "date",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-null",
+        "type": "date",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-string",
+        "type": "date",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-empty",
+        "type": "date",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-spaces",
+        "type": "date",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-zero",
+        "type": "date",
+        "kind": "zero"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-integer",
+        "type": "date",
+        "kind": "integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-fraction",
+        "type": "date",
+        "kind": "fraction"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-false",
+        "type": "date",
+        "kind": "false"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-true",
+        "type": "date",
+        "kind": "true"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-array",
+        "type": "date",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-empty-array",
+        "type": "date",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-object",
+        "type": "date",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-date",
+        "type": "date",
+        "kind": "date"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-invalid-date",
+        "type": "date",
+        "kind": "invalid-date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-regexp",
+        "type": "date",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-invalid-regexp",
+        "type": "date",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-method",
+        "type": "date",
+        "kind": "method"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-nan",
+        "type": "date",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-infinity",
+        "type": "date",
+        "kind": "infinity"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-bigint",
+        "type": "date",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-symbol",
+        "type": "date",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-large-integer",
+        "type": "date",
+        "kind": "large-integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-undefined-required",
+        "type": "date",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-null-required",
+        "type": "date",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-empty-required",
+        "type": "date",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-spaces-required",
+        "type": "date",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-zero-required",
+        "type": "date",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-false-required",
+        "type": "date",
+        "kind": "false",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-empty-array-required",
+        "type": "date",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-undefined",
+        "type": "regexp",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-null",
+        "type": "regexp",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-string",
+        "type": "regexp",
+        "kind": "string"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-empty",
+        "type": "regexp",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-spaces",
+        "type": "regexp",
+        "kind": "spaces"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-zero",
+        "type": "regexp",
+        "kind": "zero"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-integer",
+        "type": "regexp",
+        "kind": "integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-fraction",
+        "type": "regexp",
+        "kind": "fraction"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-false",
+        "type": "regexp",
+        "kind": "false"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-true",
+        "type": "regexp",
+        "kind": "true"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-array",
+        "type": "regexp",
+        "kind": "array"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-empty-array",
+        "type": "regexp",
+        "kind": "empty-array"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-object",
+        "type": "regexp",
+        "kind": "object"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-date",
+        "type": "regexp",
+        "kind": "date"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-invalid-date",
+        "type": "regexp",
+        "kind": "invalid-date"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-regexp",
+        "type": "regexp",
+        "kind": "regexp"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-invalid-regexp",
+        "type": "regexp",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-method",
+        "type": "regexp",
+        "kind": "method"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-nan",
+        "type": "regexp",
+        "kind": "nan"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-infinity",
+        "type": "regexp",
+        "kind": "infinity"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-bigint",
+        "type": "regexp",
+        "kind": "bigint"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-symbol",
+        "type": "regexp",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-large-integer",
+        "type": "regexp",
+        "kind": "large-integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-undefined-required",
+        "type": "regexp",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-null-required",
+        "type": "regexp",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-empty-required",
+        "type": "regexp",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-spaces-required",
+        "type": "regexp",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-zero-required",
+        "type": "regexp",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-false-required",
+        "type": "regexp",
+        "kind": "false",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "regexp-empty-array-required",
+        "type": "regexp",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-undefined",
+        "type": "method",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-null",
+        "type": "method",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-string",
+        "type": "method",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-empty",
+        "type": "method",
+        "kind": "empty"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-spaces",
+        "type": "method",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-zero",
+        "type": "method",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-integer",
+        "type": "method",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-fraction",
+        "type": "method",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-false",
+        "type": "method",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-true",
+        "type": "method",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-array",
+        "type": "method",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-empty-array",
+        "type": "method",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-object",
+        "type": "method",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-date",
+        "type": "method",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-invalid-date",
+        "type": "method",
+        "kind": "invalid-date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-regexp",
+        "type": "method",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-invalid-regexp",
+        "type": "method",
+        "kind": "invalid-regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-method",
+        "type": "method",
+        "kind": "method"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-nan",
+        "type": "method",
+        "kind": "nan"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-infinity",
+        "type": "method",
+        "kind": "infinity"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-bigint",
+        "type": "method",
+        "kind": "bigint"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-symbol",
+        "type": "method",
+        "kind": "symbol"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-large-integer",
+        "type": "method",
+        "kind": "large-integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-undefined-required",
+        "type": "method",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-null-required",
+        "type": "method",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-empty-required",
+        "type": "method",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-spaces-required",
+        "type": "method",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-zero-required",
+        "type": "method",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-false-required",
+        "type": "method",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "method-empty-array-required",
+        "type": "method",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-undefined",
+        "type": "any",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-null",
+        "type": "any",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-string",
+        "type": "any",
+        "kind": "string"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-empty",
+        "type": "any",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-spaces",
+        "type": "any",
+        "kind": "spaces"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-zero",
+        "type": "any",
+        "kind": "zero"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-integer",
+        "type": "any",
+        "kind": "integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-fraction",
+        "type": "any",
+        "kind": "fraction"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-false",
+        "type": "any",
+        "kind": "false"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-true",
+        "type": "any",
+        "kind": "true"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-array",
+        "type": "any",
+        "kind": "array"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-empty-array",
+        "type": "any",
+        "kind": "empty-array"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-object",
+        "type": "any",
+        "kind": "object"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-date",
+        "type": "any",
+        "kind": "date"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-invalid-date",
+        "type": "any",
+        "kind": "invalid-date"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-regexp",
+        "type": "any",
+        "kind": "regexp"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-invalid-regexp",
+        "type": "any",
+        "kind": "invalid-regexp"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-method",
+        "type": "any",
+        "kind": "method"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-nan",
+        "type": "any",
+        "kind": "nan"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-infinity",
+        "type": "any",
+        "kind": "infinity"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-bigint",
+        "type": "any",
+        "kind": "bigint"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-symbol",
+        "type": "any",
+        "kind": "symbol"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-large-integer",
+        "type": "any",
+        "kind": "large-integer"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-undefined-required",
+        "type": "any",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-null-required",
+        "type": "any",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-empty-required",
+        "type": "any",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-spaces-required",
+        "type": "any",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-zero-required",
+        "type": "any",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-false-required",
+        "type": "any",
+        "kind": "false",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-empty-array-required",
+        "type": "any",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-range-330",
+        "type": "string",
+        "kind": "string",
+        "min": 4
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-range-331",
+        "type": "string",
+        "kind": "string",
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-range-332",
+        "type": "string",
+        "kind": "string",
+        "len": 2
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-range-333",
+        "type": "string",
+        "kind": "string",
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-range-334",
+        "type": "string",
+        "kind": "string",
+        "len": 3,
+        "min": 5,
+        "max": 1
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-range-335",
+        "type": "number",
+        "kind": "integer",
+        "min": 4
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-range-336",
+        "type": "number",
+        "kind": "integer",
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-range-337",
+        "type": "number",
+        "kind": "integer",
+        "len": 2
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-range-338",
+        "type": "number",
+        "kind": "integer",
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-range-339",
+        "type": "number",
+        "kind": "integer",
+        "len": 3,
+        "min": 5,
+        "max": 1
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-range-340",
+        "type": "integer",
+        "kind": "integer",
+        "min": 4
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-range-341",
+        "type": "integer",
+        "kind": "integer",
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-range-342",
+        "type": "integer",
+        "kind": "integer",
+        "len": 2
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-range-343",
+        "type": "integer",
+        "kind": "integer",
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "integer-range-344",
+        "type": "integer",
+        "kind": "integer",
+        "len": 3,
+        "min": 5,
+        "max": 1
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-range-345",
+        "type": "float",
+        "kind": "fraction",
+        "min": 4
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-range-346",
+        "type": "float",
+        "kind": "fraction",
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-range-347",
+        "type": "float",
+        "kind": "fraction",
+        "len": 2
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-range-348",
+        "type": "float",
+        "kind": "fraction",
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "float-range-349",
+        "type": "float",
+        "kind": "fraction",
+        "len": 3,
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-range-350",
+        "type": "array",
+        "kind": "array",
+        "min": 4
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-range-351",
+        "type": "array",
+        "kind": "array",
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-range-352",
+        "type": "array",
+        "kind": "array",
+        "len": 2
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-range-353",
+        "type": "array",
+        "kind": "array",
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "array-range-354",
+        "type": "array",
+        "kind": "array",
+        "len": 3,
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-range-355",
+        "type": "date",
+        "kind": "date",
+        "min": 4
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-range-356",
+        "type": "date",
+        "kind": "date",
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-range-357",
+        "type": "date",
+        "kind": "date",
+        "len": 2
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-range-358",
+        "type": "date",
+        "kind": "date",
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "date-range-359",
+        "type": "date",
+        "kind": "date",
+        "len": 3,
+        "min": 5,
+        "max": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-spaces-whitespace",
+        "type": "string",
+        "kind": "spaces",
+        "whitespace": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-pattern",
+        "type": "string",
+        "kind": "string",
+        "pattern": "^no$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-ignores-pattern",
+        "type": "number",
+        "kind": "integer",
+        "pattern": "^no$"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "any-ignores-range",
+        "type": "any",
+        "kind": "string",
+        "min": 10,
+        "max": 1,
+        "len": 0,
+        "whitespace": true,
+        "pattern": "^no$"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "string-custom-overrides-constraints",
+        "type": "string",
+        "kind": "empty",
+        "required": true,
+        "min": 5,
+        "custom": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "number-custom-overrides-type",
+        "type": "number",
+        "kind": "string",
+        "custom": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "diagnostics": [
+    "TypeError: Cannot convert a BigInt value to a number\n    at isNaN (<anonymous>)\n    at Object.number (<anonymous>:130:33797)\n    at Object.type (<anonymous>:130:35720)\n    at Object.number [as validator] (<anonymous>:130:37709)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32218",
+    "Cannot convert a BigInt value to a number",
+    "TypeError: Cannot convert a Symbol value to a number\n    at isNaN (<anonymous>)\n    at Object.number (<anonymous>:130:33797)\n    at Object.type (<anonymous>:130:35720)\n    at Object.number [as validator] (<anonymous>:130:37709)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32218",
+    "Cannot convert a Symbol value to a number",
+    "TypeError: Cannot convert a BigInt value to a number\n    at isNaN (<anonymous>)\n    at Object.number (<anonymous>:130:33797)\n    at Object.integer (<anonymous>:130:33455)\n    at Object.type (<anonymous>:130:35720)\n    at Object.integer [as validator] (<anonymous>:130:38262)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)",
+    "Cannot convert a BigInt value to a number",
+    "TypeError: Cannot convert a Symbol value to a number\n    at isNaN (<anonymous>)\n    at Object.number (<anonymous>:130:33797)\n    at Object.integer (<anonymous>:130:33455)\n    at Object.type (<anonymous>:130:35720)\n    at Object.integer [as validator] (<anonymous>:130:38262)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)",
+    "Cannot convert a Symbol value to a number",
+    "TypeError: Cannot convert a BigInt value to a number\n    at isNaN (<anonymous>)\n    at Object.number (<anonymous>:130:33797)\n    at Object.float (<anonymous>:130:33505)\n    at Object.type (<anonymous>:130:35720)\n    at Object.float [as validator] (<anonymous>:130:38461)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)",
+    "Cannot convert a BigInt value to a number",
+    "TypeError: Cannot convert a Symbol value to a number\n    at isNaN (<anonymous>)\n    at Object.number (<anonymous>:130:33797)\n    at Object.float (<anonymous>:130:33505)\n    at Object.type (<anonymous>:130:35720)\n    at Object.float [as validator] (<anonymous>:130:38461)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)",
+    "Cannot convert a Symbol value to a number",
+    "TypeError: Cannot convert a BigInt value to a number\n    at new Date (<anonymous>)\n    at Object.date [as validator] (<anonymous>:130:39450)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32218\n    at new Promise (<anonymous>)\n    at wd (<anonymous>:130:32089)",
+    "Cannot convert a BigInt value to a number",
+    "TypeError: Cannot convert a Symbol value to a number\n    at new Date (<anonymous>)\n    at Object.date [as validator] (<anonymous>:130:39450)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32218\n    at new Promise (<anonymous>)\n    at wd (<anonymous>:130:32089)",
+    "Cannot convert a Symbol value to a number"
+  ]
+}

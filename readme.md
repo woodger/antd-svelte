@@ -9809,6 +9809,35 @@ Pattern и custom validator продолжают применяться посл
 [браузер](./tests/browser/form-constraints.spec.ts),
 [публичный пакет и SSR](./tests/package/form-constraints.ssr.test.ts), `?fixture=form-constraints`.
 
+`ValidationRule.type` поддерживает string, number, integer, float, boolean, array,
+object, date, regexp, method и any; union экспортируется как ValidationRuleType.
+Явный type включает исходный выбор constraints. String проверяет длину/pattern/whitespace,
+числовые типы и array — диапазон/len, date — timestamp после стандартного JS parsing.
+Boolean/object/regexp/method/any не применяют range/pattern/whitespace.
+RegExp принимает готовое выражение или значение, из которого можно создать RegExp;
+object исключает массив, method означает функцию.
+
+У явного string пробелы считаются содержимым, whitespace=true запрещает их отдельно.
+У array диапазон проверяет и пустой массив; required запрещает его. Number считает
+'' отсутствующим значением, integer/float проверяют его как неверный тип. Any
+проверяет только отсутствие null/undefined при required. Custom validator заменяет
+встроенные проверки явного type и получает значение после transform, до date/number
+normalization. Возвращённые и преобразованные значения не заменяют store.
+Правила без type сохраняют прежние native empty values и порядок constraints/validator.
+Сообщения по умолчанию сохраняют native русский текст и первую ошибку правила;
+полные source validateMessages/messageVariables и format types ещё не перенесены.
+
+Две классификации 6.6.8 исправлены: integer принимает 1e21, float его отклоняет;
+source использует parseInt и ошибается на scientific notation. BigInt/Symbol
+отклоняются числовыми/date правилами без исходных console/page errors.
+Raw classifications и diagnostics сохранены в
+[366 исходных случаях](./tests/browser/fixtures/ant-design-form-rule-types-reference.json).
+Проверки: [правила и модель](./src/lib/form-rule-types.test.ts),
+[браузер](./tests/browser/form-rule-types.spec.ts),
+[публичный пакет и SSR](./tests/package/form-rule-types.ssr.test.ts), `?fixture=form-rule-types`.
+Логика адаптирована из async-validator 6.0.0;
+[MIT-лицензия](./src/lib/vendor/LICENSE.rc-async-validator) включена в пакет.
+
 `ValidationRule.transform(value)` синхронно преобразует вход только для своего
 правила, до required/min/max/pattern и validator. Другие правила получают исходное
 значение. Возвращённый результат не записывается в модель, native FormData, submit payload или

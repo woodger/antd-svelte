@@ -781,6 +781,7 @@ export type {
 } from './form-list.types';
 export type {
   ValidationRule,
+  ValidationRuleType,
   FormRules,
   FieldErrors,
   FormValue,
