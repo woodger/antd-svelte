@@ -5132,7 +5132,15 @@
         "tests/browser/fixtures/FormRuleTypesFixtures.svelte",
         "tests/browser/fixtures/form-rule-types-cases.ts",
         "tests/browser/fixtures/ant-design-form-rule-types-reference.json",
-        "tests/package/form-rule-types.ssr.test.ts"
+        "tests/package/form-rule-types.ssr.test.ts",
+        "src/lib/validation-format.engine.ts",
+        "src/lib/form-rule-formats.test.ts",
+        "tests/browser/form-rule-formats.spec.ts",
+        "tests/browser/fixtures/FormRuleFormatsCase.svelte",
+        "tests/browser/fixtures/FormRuleFormatsFixtures.svelte",
+        "tests/browser/fixtures/form-rule-formats-cases.ts",
+        "tests/browser/fixtures/ant-design-form-rule-formats-reference.json",
+        "tests/package/form-rule-formats.ssr.test.ts"
       ],
       "features": [
         {
@@ -5951,7 +5959,7 @@
             "tests/browser/fixtures/ant-design-form-transform-reference.json",
             "tests/package/form-transform.ssr.test.ts"
           ],
-          "note": "Синхронный transform применяется отдельно для каждого правила до native required/min/max/pattern/custom validator. Результат не заменяет value в модели, FormData, обычном submit payload и reset defaults; validator(value, values) сохраняет прежний native signature и original snapshot values. Разные правила получают исходный input, validateFirst/warningOnly/validateOnly и latest-request-wins сохраняются. Пятнадцать неизменённых UMD-сценариев 6.6.8 фиксируют trim/required/min/pattern, default/null/undefined, custom callbacks, независимость правил, serial/all и warnings; изучены rc-form 1.8.6 validateUtil и async-validator 6.0.0 (npm archive SHA-256 02177b46469af6612ddb674a5987638492a0587039f252cf37c48e82fc99b9a3), без установки зависимостей. Source defect: thrown transform попадает в catch без errors и даёт success; raw transform-throw сохранён, Svelte возвращает message/Error.message/fallback как ошибку правила, warningOnly остаётся предупреждением. Прежняя защита plain snapshot copies и identity opaque Date сохраняется; in-place mutation snapshot внутри callback не изменяет store, но общий snapshot текущей validation остаётся прежним native контрактом. Public types и SSR не запускают transform при render. Format types, enum и nested Rule API остаётся отдельным пробелом."
+          "note": "Синхронный transform применяется отдельно для каждого правила до native required/min/max/pattern/custom validator. Результат не заменяет value в модели, FormData, обычном submit payload и reset defaults; validator(value, values) сохраняет прежний native signature и original snapshot values. Разные правила получают исходный input, validateFirst/warningOnly/validateOnly и latest-request-wins сохраняются. Пятнадцать неизменённых UMD-сценариев 6.6.8 фиксируют trim/required/min/pattern, default/null/undefined, custom callbacks, независимость правил, serial/all и warnings; изучены rc-form 1.8.6 validateUtil и async-validator 6.0.0 (npm archive SHA-256 02177b46469af6612ddb674a5987638492a0587039f252cf37c48e82fc99b9a3), без установки зависимостей. Source defect: thrown transform попадает в catch без errors и даёт success; raw transform-throw сохранён, Svelte возвращает message/Error.message/fallback как ошибку правила, warningOnly остаётся предупреждением. Прежняя защита plain snapshot copies и identity opaque Date сохраняется; in-place mutation snapshot внутри callback не изменяет store, но общий snapshot текущей validation остаётся прежним native контрактом. Public types и SSR не запускают transform при render. Nested Rule API и rule factories остаётся отдельным пробелом."
         },
         {
           "id": "rule-length-whitespace",
@@ -5988,7 +5996,27 @@
             "tests/browser/fixtures/ant-design-form-rule-types-reference.json",
             "tests/package/form-rule-types.ssr.test.ts"
           ],
-          "note": "Публичный ValidationRuleType: string/number/integer/float/boolean/array/object/date/regexp/method/any. Явный type включает source-specific empty/required и dispatch: string range/pattern/whitespace, numeric/array range/len, date Date parsing+timestamp range; остальные primitive types только presence/type. Number empty string normalizes to undefined для проверки; integer/float empty string rejected, string whitespace allowed unless whitespace=true, array empty range/required и any presence следуют source. Typed custom validator заменяет built-ins, сохраняя native value/values signature и transform-before-validator; normalization не записывается в store. Прежние implicit rules без type не меняют native empty, first-error/default Russian messages и constraint/custom порядок. Полные source message templates/validateMessages/messageVariables, formats (enum/email/url/hex/tel/pattern type), nested fields/defaultField и rule factories остаются отдельными пробелами. Триста шестьдесят шесть unmodified UMD-сценариев 6.6.8/rc-form 1.8.6/async-validator 6.0.0 фиксируют 11 типов, scalar/object/array/Date/RegExp/function, NaN/Infinity/BigInt/Symbol, required и constraints/custom dispatch. Raw source diagnostics сохранены: numeric/Date coercion BigInt/Symbol валидирует с ошибкой, но также выводит console errors и бросает page errors. Native guards дают те же validation errors без console/page exceptions. Source parseInt ошибочно отклоняет integer 1e21 и принимает его как float; Native Number.isInteger исправляет эти две классификации, raw значения сохранены для разбора. MIT license async-validator включена, новых npm зависимостей нет. SSR публикует type union и не запускает validation."
+          "note": "Базовая часть ValidationRuleType: string/number/integer/float/boolean/array/object/date/regexp/method/any. Явный type включает source-specific empty/required и dispatch: string range/pattern/whitespace, numeric/array range/len, date Date parsing+timestamp range; остальные primitive types только presence/type. Number empty string normalizes to undefined для проверки; integer/float empty string rejected, string whitespace allowed unless whitespace=true, array empty range/required и any presence следуют source. Typed custom validator заменяет built-ins, сохраняя native value/values signature и transform-before-validator; normalization не записывается в store. Прежние implicit rules без type не меняют native empty, first-error/default Russian messages и constraint/custom порядок. Полные source message templates/validateMessages/messageVariables, nested fields/defaultField и rule factories остаются отдельными пробелами. Триста шестьдесят шесть unmodified UMD-сценариев 6.6.8/rc-form 1.8.6/async-validator 6.0.0 фиксируют 11 типов, scalar/object/array/Date/RegExp/function, NaN/Infinity/BigInt/Symbol, required и constraints/custom dispatch. Raw source diagnostics сохранены: numeric/Date coercion BigInt/Symbol валидирует с ошибкой, но также выводит console errors и бросает page errors. Native guards дают те же validation errors без console/page exceptions. Source parseInt ошибочно отклоняет integer 1e21 и принимает его как float; Native Number.isInteger исправляет эти две классификации, raw значения сохранены для разбора. MIT license async-validator включена, новых npm зависимостей нет. SSR публикует type union и не запускает validation."
+        },
+        {
+          "id": "format-rule-types",
+          "title": "Rule.enum, string pattern и enum/email/url/hex/tel/pattern types",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/validation.engine.ts",
+            "src/lib/validation-type.engine.ts",
+            "src/lib/validation-format.engine.ts",
+            "src/lib/form-rule-formats.test.ts",
+            "src/lib/vendor/LICENSE.rc-async-validator",
+            "tests/browser/form-rule-formats.spec.ts",
+            "tests/browser/fixtures/FormRuleFormatsCase.svelte",
+            "tests/browser/fixtures/FormRuleFormatsFixtures.svelte",
+            "tests/browser/fixtures/form-rule-formats-cases.ts",
+            "tests/browser/fixtures/ant-design-form-rule-formats-reference.json",
+            "tests/package/form-rule-formats.ssr.test.ts"
+          ],
+          "note": "ValidationRuleType содержит все 17 исходных значений; эта feature добавляет enum/email/url/hex/tel/pattern. Enum readonly unknown[] использует strict indexOf без coercion/NaN equivalence, nil optional skips, empty string participates, отсутствие type=enum не включает constraint. Pattern: RegExp или string; explicit type=pattern пропускает прочие constraints и допускает исходный ToString arrays/objects, legacy implicit pattern сохраняет прежний scalar/String contract. Caller RegExp lastIndex не меняется, invalid string pattern возвращает validation error без source console/page exceptions. Email<=320, tel<=32, URL<=2048, hex 3/6 digits с optional #, форматы проверяют только required/type, custom validator по-прежнему приоритетнее typed built-ins. Сто восемьдесят восемь unmodified UMD-сценариев фиксируют primitives/empty/required, strict enum, format limits и ignored constraints, string/global/malformed patterns. Raw URL source defects сохранены: отвергает bracketed IPv6/one-digit port, принимает bare IPv6/out-of-range port. Native URL parser проверяет адрес, включая brackets и допустимые порты; source protocol/schema-relative/www/domain policy и length cap сохраняются, линейные domain labels заменяют неоднозначные вложенные source repetitions. No store normalization, прежние native Russian defaults и first-error messages сохраняются; полного source message override, nested fields/defaultField и rule factories ещё нет. Runtime использует только встроенные RegExp/URL; MIT source license включена, npm dependencies не добавлены. Public types и SSR не запускают validation. Static source observation: rc-form 1.8.6 declarations contain 15 types without any/pattern and pattern:RegExp; Form docs delegate other types to async-validator, official UMD accepts all 17 and string patterns. Svelte exposes this verified runtime surface; narrower React declarations are recorded in reactDeclarations reference."
         }
       ]
     },

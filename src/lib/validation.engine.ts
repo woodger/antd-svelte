@@ -1,6 +1,7 @@
 import {
   matchesValidationType, normalizeValidationType, type ValidationRuleType
 } from './validation-type.engine';
+import { matchesValidationPattern } from './validation-format.engine';
 export type { ValidationRuleType } from './validation-type.engine';
 
 /** Значение поля может быть скаляром, вложенным контейнером или экземпляром класса. */
@@ -9,7 +10,7 @@ export type FormValues = Record<string, FormValue>;
 export type FieldName<Values> = Extract<keyof Values, string>;
 
 export interface ValidationRule<Values extends FormValues = FormValues> {
-  /** Явный primitive type включает исходные правила пустых значений и выбора constraints. */
+  /** Явный type включает исходные правила пустых значений и выбора constraints. */
   type?: ValidationRuleType;
   required?: boolean;
   /** По умолчанию false; сообщение попадает в warnings и не блокирует submit. */
@@ -20,7 +21,9 @@ export interface ValidationRule<Values extends FormValues = FormValues> {
   len?: number;
   /** В implicit/string rule отклоняет непустую строку только из whitespace. */
   whitespace?: boolean;
-  pattern?: RegExp;
+  pattern?: RegExp | string;
+  /** Строгое сравнение без coercion; используется при type='enum'. */
+  enum?: readonly FormValue[];
   message?: string;
   /** Синхронно преобразует значение только для этого правила, не записывая результат в Form. */
   transform?: (value: FormValue) => FormValue;
@@ -136,7 +139,7 @@ async function validateRuleValue<Values extends FormValues>(
   const array = Array.isArray(value);
   const missing = value === null || value === undefined;
   const empty = type ? missing
-    || (type === 'string' || type === 'date') && value === ''
+    || ['string', 'date', 'email', 'url', 'hex', 'tel', 'pattern'].includes(type) && value === ''
     : missing || typeof value === 'string' && !value.trim() || array && value.length === 0;
 
   if (rule.required && (empty || type === 'array' && array && value.length === 0)) {
@@ -157,9 +160,15 @@ async function validateRuleValue<Values extends FormValues>(
   if (type && !matchesValidationType(value, type)) {
     return [rule.message ?? `Проверьте тип значения: ${type}.`];
   }
-  if (type && ['boolean', 'object', 'regexp', 'method', 'any'].includes(type)) return [];
+  const choices = Array.isArray(rule.enum) ? rule.enum : [];
+  if (type === 'enum' && choices.indexOf(value) === -1) {
+    return [rule.message ?? (choices.length
+      ? `Значение должно быть одним из: ${choices.map(String).join(', ')}.` : 'Недопустимое значение.')];
+  }
+  if (type && ['boolean', 'object', 'regexp', 'method', 'any',
+    'enum', 'email', 'url', 'hex', 'tel'].includes(type)) return [];
 
-  const length = array
+  const length = type === 'pattern' ? undefined : array
     ? value.length
     : typeof value === 'string'
       ? [...value].length
@@ -188,12 +197,10 @@ async function validateRuleValue<Values extends FormValues>(
     return messages;
   }
 
-  if ((!type || type === 'string') && !empty
-    && !array
+  if ((!type || type === 'string' || type === 'pattern') && !empty
+    && (!array || type === 'pattern')
     && rule.pattern
-    && !new RegExp(rule.pattern.source, rule.pattern.flags).test(
-      String(value)
-    )) {
+    && !matchesValidationPattern(value, rule.pattern, !type || type === 'string')) {
     messages.push(rule.message ?? 'Проверьте формат значения.');
     return messages;
   }

@@ -1,0 +1,2255 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after validation"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "email-undefined",
+        "type": "email",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-null",
+        "type": "email",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-string",
+        "type": "email",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-empty",
+        "type": "email",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-spaces",
+        "type": "email",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-zero",
+        "type": "email",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-integer",
+        "type": "email",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-fraction",
+        "type": "email",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-false",
+        "type": "email",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-true",
+        "type": "email",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-array",
+        "type": "email",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-empty-array",
+        "type": "email",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-object",
+        "type": "email",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-date",
+        "type": "email",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-regexp",
+        "type": "email",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-undefined-required",
+        "type": "email",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-null-required",
+        "type": "email",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-empty-required",
+        "type": "email",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-spaces-required",
+        "type": "email",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-zero-required",
+        "type": "email",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-false-required",
+        "type": "email",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-empty-array-required",
+        "type": "email",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-undefined",
+        "type": "url",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-null",
+        "type": "url",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-string",
+        "type": "url",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-empty",
+        "type": "url",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-spaces",
+        "type": "url",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-zero",
+        "type": "url",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-integer",
+        "type": "url",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-fraction",
+        "type": "url",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-false",
+        "type": "url",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-true",
+        "type": "url",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-array",
+        "type": "url",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-empty-array",
+        "type": "url",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-object",
+        "type": "url",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-date",
+        "type": "url",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-regexp",
+        "type": "url",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-undefined-required",
+        "type": "url",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-null-required",
+        "type": "url",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-empty-required",
+        "type": "url",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-spaces-required",
+        "type": "url",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-zero-required",
+        "type": "url",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-false-required",
+        "type": "url",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-empty-array-required",
+        "type": "url",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-undefined",
+        "type": "hex",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-null",
+        "type": "hex",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-string",
+        "type": "hex",
+        "kind": "string"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-empty",
+        "type": "hex",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-spaces",
+        "type": "hex",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-zero",
+        "type": "hex",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-integer",
+        "type": "hex",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-fraction",
+        "type": "hex",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-false",
+        "type": "hex",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-true",
+        "type": "hex",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-array",
+        "type": "hex",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-empty-array",
+        "type": "hex",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-object",
+        "type": "hex",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-date",
+        "type": "hex",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-regexp",
+        "type": "hex",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-undefined-required",
+        "type": "hex",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-null-required",
+        "type": "hex",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-empty-required",
+        "type": "hex",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-spaces-required",
+        "type": "hex",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-zero-required",
+        "type": "hex",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-false-required",
+        "type": "hex",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-empty-array-required",
+        "type": "hex",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-undefined",
+        "type": "tel",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-null",
+        "type": "tel",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-string",
+        "type": "tel",
+        "kind": "string"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-empty",
+        "type": "tel",
+        "kind": "empty"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-spaces",
+        "type": "tel",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-zero",
+        "type": "tel",
+        "kind": "zero"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-integer",
+        "type": "tel",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-fraction",
+        "type": "tel",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-false",
+        "type": "tel",
+        "kind": "false"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-true",
+        "type": "tel",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-array",
+        "type": "tel",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-empty-array",
+        "type": "tel",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-object",
+        "type": "tel",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-date",
+        "type": "tel",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-regexp",
+        "type": "tel",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-undefined-required",
+        "type": "tel",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-null-required",
+        "type": "tel",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-empty-required",
+        "type": "tel",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-spaces-required",
+        "type": "tel",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-zero-required",
+        "type": "tel",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-false-required",
+        "type": "tel",
+        "kind": "false",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-empty-array-required",
+        "type": "tel",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-undefined",
+        "type": "enum",
+        "kind": "undefined"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-null",
+        "type": "enum",
+        "kind": "null"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-string",
+        "type": "enum",
+        "kind": "string"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-empty",
+        "type": "enum",
+        "kind": "empty"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-spaces",
+        "type": "enum",
+        "kind": "spaces"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-zero",
+        "type": "enum",
+        "kind": "zero"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-integer",
+        "type": "enum",
+        "kind": "integer"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-fraction",
+        "type": "enum",
+        "kind": "fraction"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-false",
+        "type": "enum",
+        "kind": "false"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-true",
+        "type": "enum",
+        "kind": "true"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-array",
+        "type": "enum",
+        "kind": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-empty-array",
+        "type": "enum",
+        "kind": "empty-array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-object",
+        "type": "enum",
+        "kind": "object"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-date",
+        "type": "enum",
+        "kind": "date"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-regexp",
+        "type": "enum",
+        "kind": "regexp"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-undefined-required",
+        "type": "enum",
+        "kind": "undefined",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-null-required",
+        "type": "enum",
+        "kind": "null",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-empty-required",
+        "type": "enum",
+        "kind": "empty",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-spaces-required",
+        "type": "enum",
+        "kind": "spaces",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-zero-required",
+        "type": "enum",
+        "kind": "zero",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-false-required",
+        "type": "enum",
+        "kind": "false",
+        "required": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-empty-array-required",
+        "type": "enum",
+        "kind": "empty-array",
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-undefined",
+        "type": "pattern",
+        "kind": "undefined",
+        "pattern": "^abc$"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-null",
+        "type": "pattern",
+        "kind": "null",
+        "pattern": "^abc$"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-string",
+        "type": "pattern",
+        "kind": "string",
+        "pattern": "^abc$"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-empty",
+        "type": "pattern",
+        "kind": "empty",
+        "pattern": "^abc$"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-spaces",
+        "type": "pattern",
+        "kind": "spaces",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-zero",
+        "type": "pattern",
+        "kind": "zero",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-integer",
+        "type": "pattern",
+        "kind": "integer",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-fraction",
+        "type": "pattern",
+        "kind": "fraction",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-false",
+        "type": "pattern",
+        "kind": "false",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-true",
+        "type": "pattern",
+        "kind": "true",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-array",
+        "type": "pattern",
+        "kind": "array",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-empty-array",
+        "type": "pattern",
+        "kind": "empty-array",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-object",
+        "type": "pattern",
+        "kind": "object",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-date",
+        "type": "pattern",
+        "kind": "date",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-regexp",
+        "type": "pattern",
+        "kind": "regexp",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-undefined-required",
+        "type": "pattern",
+        "kind": "undefined",
+        "required": true,
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-null-required",
+        "type": "pattern",
+        "kind": "null",
+        "required": true,
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-empty-required",
+        "type": "pattern",
+        "kind": "empty",
+        "required": true,
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-spaces-required",
+        "type": "pattern",
+        "kind": "spaces",
+        "required": true,
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-zero-required",
+        "type": "pattern",
+        "kind": "zero",
+        "required": true,
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-false-required",
+        "type": "pattern",
+        "kind": "false",
+        "required": true,
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-empty-array-required",
+        "type": "pattern",
+        "kind": "empty-array",
+        "required": true,
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-0",
+        "type": "email",
+        "value": "user@example.com"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-1",
+        "type": "email",
+        "value": "user+tag@example.com"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-2",
+        "type": "email",
+        "value": "\"user name\"@example.com"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-3",
+        "type": "email",
+        "value": "юзер@пример.рф"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-4",
+        "type": "email",
+        "value": "user@localhost"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-5",
+        "type": "email",
+        "value": "user@"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-6",
+        "type": "email",
+        "value": "user@[127.0.0.1]"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-7",
+        "type": "email",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-format-8",
+        "type": "email",
+        "value": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@example.com"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-0",
+        "type": "url",
+        "value": "https://example.com/a?q=1#x"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-1",
+        "type": "url",
+        "value": "//example.com/a"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-2",
+        "type": "url",
+        "value": "www.example.com"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-3",
+        "type": "url",
+        "value": "http://localhost:80"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-4",
+        "type": "url",
+        "value": "http://127.0.0.1:80"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-5",
+        "type": "url",
+        "value": "http://[::1]"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-6",
+        "type": "url",
+        "value": "http://::1"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-7",
+        "type": "url",
+        "value": "http://example.com:1"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-8",
+        "type": "url",
+        "value": "http://example.com:99999"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-9",
+        "type": "url",
+        "value": "example.com"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-10",
+        "type": "url",
+        "value": "mailto:user@example.com"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-11",
+        "type": "url",
+        "value": "https://пример.рф"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-12",
+        "type": "url",
+        "value": "https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-format-13",
+        "type": "url",
+        "value": "https://example.com/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-format-0",
+        "type": "hex",
+        "value": "#abc"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-format-1",
+        "type": "hex",
+        "value": "ABC"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-format-2",
+        "type": "hex",
+        "value": "abcdef"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-format-3",
+        "type": "hex",
+        "value": "#A1B2C3"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-format-4",
+        "type": "hex",
+        "value": "#abcd"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-format-5",
+        "type": "hex",
+        "value": "#12345678"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-format-6",
+        "type": "hex",
+        "value": "abcde"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-format-7",
+        "type": "hex",
+        "value": "g00"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-0",
+        "type": "tel",
+        "value": "+1 (555) 123-4567"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-1",
+        "type": "tel",
+        "value": "+1-555-123-4567"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-2",
+        "type": "tel",
+        "value": "(555) 123-4567"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-3",
+        "type": "tel",
+        "value": "5551234567"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-4",
+        "type": "tel",
+        "value": "+7 999 123 45 67"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-5",
+        "type": "tel",
+        "value": "123‑456"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-6",
+        "type": "tel",
+        "value": "a123"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-7",
+        "type": "tel",
+        "value": "+"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-8",
+        "type": "tel",
+        "value": "11111111111111111111111111111111"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-format-9",
+        "type": "tel",
+        "value": "111111111111111111111111111111111"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-empty-included",
+        "type": "enum",
+        "value": "",
+        "enum": [
+          ""
+        ]
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-strict-number",
+        "type": "enum",
+        "value": "0",
+        "enum": [
+          0
+        ]
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-empty-list",
+        "type": "enum",
+        "value": "abc",
+        "enum": []
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-string",
+        "type": "pattern",
+        "value": "abc",
+        "pattern": "^abc$"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-global",
+        "type": "pattern",
+        "value": "abc",
+        "pattern": "^abc$",
+        "regex": true,
+        "flags": "g"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-invalid",
+        "type": "pattern",
+        "value": "abc",
+        "pattern": "["
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "pattern-absent",
+        "type": "pattern",
+        "value": "abc"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "legacy-string-pattern",
+        "value": "abc",
+        "pattern": "^abc$"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "legacy-string-pattern-error",
+        "value": "no",
+        "pattern": "^abc$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-ignores-constraints",
+        "type": "email",
+        "value": "user@example.com",
+        "constraints": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "url-ignores-constraints",
+        "type": "url",
+        "value": "https://example.com",
+        "constraints": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "hex-ignores-constraints",
+        "type": "hex",
+        "value": "#abc",
+        "constraints": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "tel-ignores-constraints",
+        "type": "tel",
+        "value": "5551234567",
+        "constraints": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "enum-ignores-constraints",
+        "type": "enum",
+        "value": "abc",
+        "constraints": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    },
+    {
+      "sample": {
+        "id": "email-custom-overrides-type",
+        "type": "email",
+        "value": "no",
+        "custom": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": []
+    }
+  ],
+  "diagnostics": [
+    "SyntaxError: Invalid regular expression: /[/: Unterminated character class\n    at new RegExp (<anonymous>)\n    at Object.pattern (<anonymous>:130:36766)\n    at Object.pattern [as validator] (<anonymous>:130:39233)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32218\n    at new Promise (<anonymous>)",
+    "Invalid regular expression: /[/: Unterminated character class"
+  ],
+  "reactDeclarations": {
+    "package": "@rc-component/form",
+    "version": "1.8.6",
+    "file": "es/interface.d.ts",
+    "typeValues": [
+      "string",
+      "number",
+      "boolean",
+      "method",
+      "regexp",
+      "integer",
+      "float",
+      "object",
+      "enum",
+      "date",
+      "url",
+      "hex",
+      "email",
+      "tel",
+      "array"
+    ],
+    "pattern": "RegExp",
+    "observation": "Form docs refer to additional async-validator types; unmodified UMD also accepts any/pattern and string patterns despite narrower rc-form declarations."
+  }
+}

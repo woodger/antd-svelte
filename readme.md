@@ -9810,7 +9810,8 @@ Pattern и custom validator продолжают применяться посл
 [публичный пакет и SSR](./tests/package/form-constraints.ssr.test.ts), `?fixture=form-constraints`.
 
 `ValidationRule.type` поддерживает string, number, integer, float, boolean, array,
-object, date, regexp, method и any; union экспортируется как ValidationRuleType.
+object, date, regexp, method, any, enum, email, url, hex, tel и pattern;
+union экспортируется как ValidationRuleType.
 Явный type включает исходный выбор constraints. String проверяет длину/pattern/whitespace,
 числовые типы и array — диапазон/len, date — timestamp после стандартного JS parsing.
 Boolean/object/regexp/method/any не применяют range/pattern/whitespace.
@@ -9825,7 +9826,7 @@ object исключает массив, method означает функцию.
 normalization. Возвращённые и преобразованные значения не заменяют store.
 Правила без type сохраняют прежние native empty values и порядок constraints/validator.
 Сообщения по умолчанию сохраняют native русский текст и первую ошибку правила;
-полные source validateMessages/messageVariables и format types ещё не перенесены.
+полные source validateMessages/messageVariables ещё не перенесены.
 
 Две классификации 6.6.8 исправлены: integer принимает 1e21, float его отклоняет;
 source использует parseInt и ошибается на scientific notation. BigInt/Symbol
@@ -9837,6 +9838,31 @@ Raw classifications и diagnostics сохранены в
 [публичный пакет и SSR](./tests/package/form-rule-types.ssr.test.ts), `?fixture=form-rule-types`.
 Логика адаптирована из async-validator 6.0.0;
 [MIT-лицензия](./src/lib/vendor/LICENSE.rc-async-validator) включена в пакет.
+
+`type='enum'` проверяет enum через строгое сравнение без преобразования типов:
+0 отличается от '0', NaN не совпадает с NaN. Массив выбора может быть readonly;
+без type='enum' это свойство не добавляет constraint. Optional null/undefined
+пропускаются, пустая строка проверяется как обычный элемент списка.
+
+Pattern принимает строку или RegExp. У type='pattern' проверяется только required
+и выражение; у string и implicit rules сохраняется прежний порядок constraints.
+Переданный RegExp не меняет lastIndex, включая global flag. Ошибочная строка
+выражения становится validation error без исходных console/page errors.
+
+Email/hex/tel/url проверяют тип и формат, игнорируя range/pattern/whitespace.
+Пределы source сохранены: email — 320 символов, tel — 32, URL — 2048; hex — 3 или
+6 цифр с необязательным #. URL сохраняет схемы с //, адреса вида //example.com и www.example.com.
+Четыре ошибки source исправлены: IPv6 требует скобки, порт допускает одну цифру
+и проверяется стандартным URL parser. Адрес не нормализуется в store.
+Raw source cases и diagnostics сохранены в
+[188 исходных случаях](./tests/browser/fixtures/ant-design-form-rule-formats-reference.json).
+Проверки: [правила](./src/lib/form-rule-formats.test.ts),
+[браузер](./tests/browser/form-rule-formats.spec.ts),
+[публичный пакет и SSR](./tests/package/form-rule-formats.ssr.test.ts), `?fixture=form-rule-formats`.
+У rc-form 1.8.6 декларации уже runtime: type union содержит 15 значений без any/pattern,
+pattern объявлен как RegExp. Документация Form отсылает к дополнительным типам
+async-validator; неизменённый UMD принимает any/pattern и строковый pattern.
+Svelte публикует проверенный runtime API; эта разница исходных типов записана в reference.
 
 `ValidationRule.transform(value)` синхронно преобразует вход только для своего
 правила, до required/min/max/pattern и validator. Другие правила получают исходное

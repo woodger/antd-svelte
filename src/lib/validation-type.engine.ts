@@ -1,6 +1,9 @@
-/** Primitive Rule.type по async-validator 6.0.0; MIT: vendor/LICENSE.rc-async-validator. */
+import { matchesValidationFormat } from './validation-format.engine';
+
+/** Rule.type по async-validator 6.0.0; MIT: vendor/LICENSE.rc-async-validator. */
 export type ValidationRuleType = 'string' | 'number' | 'integer' | 'float' | 'boolean'
-  | 'array' | 'object' | 'date' | 'regexp' | 'method' | 'any';
+  | 'array' | 'object' | 'date' | 'regexp' | 'method' | 'any'
+  | 'enum' | 'email' | 'url' | 'hex' | 'tel' | 'pattern';
 
 export function normalizeValidationType(value: unknown, type: ValidationRuleType | undefined) {
   if (type === 'number' && value === '') return undefined;
@@ -31,6 +34,8 @@ export function matchesValidationType(value: unknown, type: ValidationRuleType) 
       try { new RegExp(value as string); return true; }
       catch { return false; }
     case 'any': return true;
+    case 'enum': case 'pattern': return true;
+    case 'email': case 'url': case 'hex': case 'tel': return matchesValidationFormat(value, type);
     default: return false;
   }
 }

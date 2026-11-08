@@ -9,6 +9,11 @@
 
 ### Added
 
+- Rule.type дополнен enum/email/url/hex/tel/pattern, pattern принимает строку или
+  RegExp. Сохранены строгий enum, readonly choices и caller RegExp state.
+  Исправлены четыре исходные ошибки URL IPv6/ports; malformed pattern даёт
+  validation error без console/page exceptions. Полная type union содержит 17 значений.
+
 - ValidationRule.type поддерживает primitive string/number/integer/float/boolean/
   array/object/date/regexp/method/any с исходным выбором constraints и пустых значений.
   Правила без type сохраняют прежнее поведение. Исправлены исходные классификации
