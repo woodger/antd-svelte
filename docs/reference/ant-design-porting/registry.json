@@ -4922,7 +4922,11 @@
         "tests/browser/form-layout-metrics.ts",
         "tests/browser/fixtures/FormLayoutFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-layout-reference.json",
-        "tests/package/form-layout.ssr.test.ts"
+        "tests/package/form-layout.ssr.test.ts",
+        "tests/browser/form-hidden.spec.ts",
+        "tests/browser/fixtures/FormHiddenFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-hidden-reference.json",
+        "tests/package/form-hidden.ssr.test.ts"
       ],
       "features": [
         {
@@ -5300,6 +5304,21 @@
             "tests/package/form-layout.ssr.test.ts"
           ],
           "note": "Form.layout принимает inline с исходным flex/wrap, margin-inline-end и inlineItemMarginBottom; существующий default vertical сохранён. FormItem.layout horizontal/vertical имеет приоритет над ближайшим Form, undefined возвращает наследование. Используется существующий vendor CSS без новых правил и изменения прежних horizontal/vertical layouts. Сверены 36 случаев неизменённого UMD 6.6.8: viewport 1280/320, контейнер 640/272, LTR/RTL с явным native direction, default/compact/custom/zero tokens, local overrides и три parent layouts. Метрики включают относительные bounds, размеры/отступы labels/colon/input, flow и перенос; допуски не расширены. Реактивные переключения сохраняют DOM, фокус/выделение, values/errors/warnings; native FormData/validation/submit/reset и изоляция соседей сохранены. Component=false передаёт layout context без wrapper и без автоматического flex container; SSR публикует классы без браузерных side effects. Полный Form semantic/config/field API остаётся за пределами этого этапа."
+        },
+        {
+          "id": "hidden-fields",
+          "title": "FormItem hidden с сохранением binding и validation",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/vendor/antd.css",
+            "tests/browser/form-hidden.spec.ts",
+            "tests/browser/fixtures/FormHiddenFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-hidden-reference.json",
+            "tests/package/form-hidden.ssr.test.ts"
+          ],
+          "note": "Hidden false/default сохраняет прежний markup; true добавляет исходный ant-form-item-hidden без размонтирования children или снятия регистрации. Сохраняются DOM/native ref, значение, errors/warnings/touched и локальные черновики; hidden fields продолжают участвовать в validation/submit и native FormData. CSS display:none исключает controls из Tab и accessibility tree, focusField скрытого control не перехватывает фокус. Сброс скрытого поля по-прежнему пересоздаёт children/ref и восстанавливает defaults; показ возвращает сохранённое доступное описание. Семь состояний неизменённого UMD 6.6.8, три layouts и native submit/keyboard сверены отдельно; SSR сохраняет содержимое и class без DOM side effects. Условное удаление binding, preserve и прочий field lifecycle этим этапом не расширены."
         }
       ]
     },

@@ -1,0 +1,234 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "two animation frames before every capture"
+  },
+  "cases": [
+    {
+      "id": "initial",
+      "hidden": false,
+      "display": "block",
+      "retained": null,
+      "stableRef": null,
+      "sameRef": true,
+      "instance": true,
+      "local": "Local",
+      "value": "Alpha",
+      "values": {
+        "concealed": "Alpha",
+        "sibling": "Beta"
+      },
+      "field": {
+        "name": [
+          "concealed"
+        ],
+        "errors": [],
+        "warnings": []
+      },
+      "touched": false,
+      "formData": {
+        "concealed": "Alpha",
+        "sibling": "Beta"
+      },
+      "active": null
+    },
+    {
+      "id": "seeded",
+      "hidden": false,
+      "display": "block",
+      "retained": true,
+      "stableRef": true,
+      "sameRef": true,
+      "instance": true,
+      "local": "Scratch",
+      "value": "Changed",
+      "values": {
+        "concealed": "Changed",
+        "sibling": "Beta"
+      },
+      "field": {
+        "name": [
+          "concealed"
+        ],
+        "errors": [
+          "Concealed error"
+        ],
+        "warnings": [
+          "Concealed note"
+        ]
+      },
+      "touched": true,
+      "formData": {
+        "concealed": "Changed",
+        "sibling": "Beta"
+      },
+      "active": "sibling"
+    },
+    {
+      "id": "hidden",
+      "hidden": true,
+      "display": "none",
+      "retained": true,
+      "stableRef": true,
+      "sameRef": true,
+      "instance": true,
+      "local": "Scratch",
+      "value": "Changed",
+      "values": {
+        "concealed": "Changed",
+        "sibling": "Beta"
+      },
+      "field": {
+        "name": [
+          "concealed"
+        ],
+        "errors": [
+          "Concealed error"
+        ],
+        "warnings": [
+          "Concealed note"
+        ]
+      },
+      "touched": true,
+      "formData": {
+        "concealed": "Changed",
+        "sibling": "Beta"
+      },
+      "active": "sibling"
+    },
+    {
+      "id": "reset-hidden",
+      "hidden": true,
+      "display": "none",
+      "retained": false,
+      "stableRef": false,
+      "sameRef": true,
+      "instance": true,
+      "local": "Local",
+      "value": "Alpha",
+      "values": {
+        "concealed": "Alpha",
+        "sibling": "Beta"
+      },
+      "field": {
+        "name": [
+          "concealed"
+        ],
+        "errors": [],
+        "warnings": []
+      },
+      "touched": false,
+      "formData": {
+        "concealed": "Alpha",
+        "sibling": "Beta"
+      },
+      "active": "sibling"
+    },
+    {
+      "id": "shown",
+      "hidden": false,
+      "display": "block",
+      "retained": true,
+      "stableRef": true,
+      "sameRef": true,
+      "instance": true,
+      "local": "Local",
+      "value": "Alpha",
+      "values": {
+        "concealed": "Alpha",
+        "sibling": "Beta"
+      },
+      "field": {
+        "name": [
+          "concealed"
+        ],
+        "errors": [],
+        "warnings": []
+      },
+      "touched": false,
+      "formData": {
+        "concealed": "Alpha",
+        "sibling": "Beta"
+      },
+      "active": "sibling"
+    },
+    {
+      "id": "hidden-invalid",
+      "hidden": true,
+      "display": "none",
+      "retained": true,
+      "stableRef": true,
+      "sameRef": true,
+      "instance": true,
+      "local": "Local",
+      "value": "",
+      "values": {
+        "concealed": "",
+        "sibling": "Beta"
+      },
+      "field": {
+        "name": [
+          "concealed"
+        ],
+        "errors": [
+          "Concealed required"
+        ],
+        "warnings": []
+      },
+      "touched": true,
+      "formData": {
+        "concealed": "",
+        "sibling": "Beta"
+      },
+      "active": "sibling",
+      "outcome": {
+        "status": "invalid",
+        "outOfDate": false,
+        "errorFields": [
+          {
+            "name": [
+              "concealed"
+            ],
+            "errors": [
+              "Concealed required"
+            ],
+            "warnings": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "revealed-invalid",
+      "hidden": false,
+      "display": "block",
+      "retained": true,
+      "stableRef": true,
+      "sameRef": true,
+      "instance": true,
+      "local": "Local",
+      "value": "",
+      "values": {
+        "concealed": "",
+        "sibling": "Beta"
+      },
+      "field": {
+        "name": [
+          "concealed"
+        ],
+        "errors": [
+          "Concealed required"
+        ],
+        "warnings": []
+      },
+      "touched": true,
+      "formData": {
+        "concealed": "",
+        "sibling": "Beta"
+      },
+      "active": "concealed"
+    }
+  ]
+}

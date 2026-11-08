@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: hidden скрывает весь блок без удаления binding, значения, refs и local
+  state. Скрытое поле участвует в validation/submit/FormData; Tab пропускает его
+  controls. Reset сохраняет прежний remount, а показ возвращает доступные ошибки.
+
 - Form: layout=inline с исходными отступами, переносом строк и component tokens;
   FormItem.layout задаёт локальный horizontal/vertical override. Сверены desktop,
   mobile, RTL, compact и нулевые отступы. Прежний vertical default, DOM controls,

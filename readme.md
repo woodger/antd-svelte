@@ -9383,6 +9383,16 @@ Inline, локальные overrides и мобильный перенос про
 Component=false по-прежнему передаёт контекст без native form и layout-wrapper;
 сам по себе контекст не создаёт flex-контейнер.
 
+`FormItem.hidden` скрывает весь блок поля через исходный CSS, сохраняя его control,
+ref, значение, metadata и локальное состояние children. По умолчанию false.
+Скрытое поле продолжает участвовать в validation, submit и native FormData;
+ошибка required может блокировать отправку. Его controls исключаются из Tab
+и accessibility tree; после показа доступное описание ошибки восстанавливается.
+Обычное скрытие сохраняет DOM, а reset по-прежнему пересоздаёт children и ref.
+Проверки: [эталон upstream](./tests/browser/fixtures/ant-design-form-hidden-reference.json),
+[браузер](./tests/browser/form-hidden.spec.ts),
+[SSR](./tests/package/form-hidden.ssr.test.ts), `?fixture=form-hidden`.
+
 Модель хранит скаляры, вложенные plain objects, массивы и экземпляры классов.
 `getFieldValue(name)` читает значение пути; `setFieldValue(name, value)` заменяет
 его целиком. `setFieldsValue` рекурсивно объединяет plain objects и заменяет

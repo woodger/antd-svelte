@@ -15,6 +15,8 @@
     children: Snippet;
     help?: string;
     required?: boolean;
+    /** Скрывает блок без удаления control, значения и регистрации validation. @defaultValue false */
+    hidden?: boolean;
     /** Локальный layout поля; иначе наследуется ближайший Form, standalone остаётся vertical. */
     layout?: 'horizontal' | 'vertical';
     /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
@@ -40,6 +42,7 @@
     children,
     help,
     required,
+    hidden = false,
     layout,
     rules,
     validateFirst,
@@ -158,6 +161,7 @@
     'ant-form-item',
     componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
     `ant-form-item-${resolvedLayout}`,
+    hidden && 'ant-form-item-hidden',
     errors.length && 'ant-form-item-has-error',
     !errors.length && warnings.length && 'ant-form-item-has-warning',
     className
