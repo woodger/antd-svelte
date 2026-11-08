@@ -24,6 +24,7 @@
   import { getSelectTagOptions } from './select-tags.engine';
   import { getSelectTagText } from './select-tag-text.engine';
   import { getSelectTagOverflow } from './select-tag-overflow.engine';
+  import { connectSelectTagOverflow, measureSelectInput } from './select-tag-overflow.dom';
   import { resolveSelectTokenOptions, splitSelectTokens } from './select-token.engine';
   import Icon from './Icon.svelte';
 
@@ -103,6 +104,8 @@
   let reference = $state<HTMLDivElement>();
   let control = $state<HTMLInputElement>();
   let list = $state<HTMLDivElement>();
+  let contentElement = $state<HTMLDivElement>();
+  let responsiveCount = $state(Number.POSITIVE_INFINITY);
   const tagElements = new Map<RawValue, HTMLElement>();
   let shown = $state(false);
   let typeahead = '';
@@ -140,7 +143,11 @@
       : undefined
   );
   let tags = $derived(selectedValues.map(item => selectionOptions.get(item)!));
-  let tagOverflow = $derived(getSelectTagOverflow(tags, maxTagCount));
+  let responsiveTags = $derived(multiple && maxTagCount === 'responsive');
+  let tagOverflow = $derived(getSelectTagOverflow(tags,
+    responsiveTags ? responsiveCount : typeof maxTagCount === 'number' ? maxTagCount : undefined));
+  let renderedTags = $derived(responsiveTags ? tags : tagOverflow.visible);
+  let visibleTagKeys = $derived(new Set(tagOverflow.visible.map(tag => tag.value)));
   let tagPlaceholder = $derived(maxTagPlaceholder as SelectTagPlaceholder<RawValue> | undefined);
   let tagPlaceholderTitle = $derived(tagPlaceholder == null
     ? `+ ${tagOverflow.omitted.length} ...`
@@ -165,11 +172,37 @@
 
     // Скрытый native remove button передаёт фокус input, не отменяя новый выбор владельца.
     void tick().then(() => {
-      if (!input.isConnected || active.isConnected) return;
+      if (!input.isConnected || active.isConnected && !active.closest('[inert]')) return;
       const doc = input.ownerDocument;
-      if (!doc.activeElement || doc.activeElement === doc.body
+      if (!doc.activeElement || doc.activeElement === active || doc.activeElement === doc.body
         || doc.activeElement === doc.documentElement) input.focus();
     });
+  });
+  $effect(() => {
+    if (!control || !responsiveTags) return;
+    void search;
+    const input = control;
+    const previous = input.style.width;
+    input.style.width = `${measureSelectInput(input)}px`;
+    return () => { input.style.width = previous; };
+  });
+  $effect(() => {
+    if (!contentElement || !responsiveTags) return;
+    void tags;
+    void maxTagTextLength;
+    void tagPlaceholder;
+    void search;
+    const host = contentElement;
+    let disposed = false;
+    let disconnect: (() => void) | undefined;
+    void tick().then(() => {
+      if (!disposed) disconnect = connectSelectTagOverflow(host,
+        count => { responsiveCount = count; });
+    });
+    return () => {
+      disposed = true;
+      disconnect?.();
+    };
   });
   let activeIndex = $derived.by(() => {
     const index = filtered.findIndex(
@@ -659,6 +692,8 @@
   .ant-select.ant-select-multiple { height: auto; min-height: var(--ant-select-height); }
   .ant-select.ant-select-multiple .ant-select-content { gap: 0; }
   .ant-select.ant-select-multiple .ant-select-input { flex: 1 1 60px; width: 60px; min-width: 40px; max-width: 100%; }
+  .ant-select.ant-select-responsive-tags .ant-select-input { flex: none; width: 4px; min-width: 4px; }
+  .measure-tag { position: absolute; inset-block-start: 0; inset-inline-start: 0; visibility: hidden; pointer-events: none; }
   .ant-select.ant-select-source-theme.ant-select-multiple .ant-select-input { line-height: calc(var(--ant-select-internal_fixed_item_margin) * 2 + var(--ant-select-multi-item-height)); }
   .ant-select.ant-select-multiple .ant-select-selection-item { flex: none; box-sizing: border-box; max-width: calc(100% - var(--ant-select-internal_fixed_item_margin) * 2); min-width: 0; }
   .ant-select-selection-item-remove { flex: none; padding: 0; border: 0; background: transparent; }
@@ -698,6 +733,7 @@
         componentTheme.className && config.direction === 'rtl' && 'ant-select-rtl',
         loading && 'ant-select-loading',
         multiple ? 'ant-select-multiple' : 'ant-select-single',
+        responsiveTags && 'ant-select-responsive-tags',
         expanded && 'ant-select-open',
         (expanded || componentTheme.className && focused) && 'ant-select-focused',
         resolvedDisabled && 'ant-select-disabled',
@@ -707,14 +743,18 @@
       ]}
     style={componentTheme.style}
   >
-    <div class="ant-select-content">
+    <div class="ant-select-content" bind:this={contentElement}>
       {#if intrinsicWidth}<span class="intrinsic-label" aria-hidden="true">{selected?.label ?? placeholder ?? ''}</span>{/if}
       {#if multiple}
-        {#each tagOverflow.visible as tag (tag.value)}
+        {#each renderedTags as tag (tag.value)}
+          {@const hidden = responsiveTags && !visibleTagKeys.has(tag.value)}
           <span class={[
               'ant-select-selection-item',
+              hidden && 'measure-tag',
               (resolvedDisabled || tag.disabled) && 'ant-select-selection-item-disabled'
-            ]} title={tag.label} {@attach node => connectTagElement(node, tag.value)}>
+            ]} title={tag.label} data-select-tag={responsiveTags || undefined}
+            aria-hidden={hidden || undefined} inert={hidden}
+            {@attach node => connectTagElement(node, tag.value)}>
             <span class="ant-select-selection-item-content">{getSelectTagText(
               tag.label, maxTagTextLength
             )}</span>
@@ -722,9 +762,11 @@
                 ?? ruRU.removeText} ${tag.label}`} onpointerdown={(event) => event.preventDefault()} onclick={() => remove(tag.value)}><Icon name="close" /></button>{/if}
           </span>
         {/each}
-        {#if tagOverflow.omitted.length}
-          <span class="ant-select-selection-item ant-select-selection-overflow-item-rest"
-            title={tagPlaceholderTitle}>
+        {#if tagOverflow.omitted.length || responsiveTags && tags.length}
+          <span class={['ant-select-selection-item ant-select-selection-overflow-item-rest',
+              !tagOverflow.omitted.length && 'measure-tag']}
+            title={tagPlaceholderTitle} data-select-rest={responsiveTags || undefined}
+            aria-hidden={!tagOverflow.omitted.length || undefined} inert={!tagOverflow.omitted.length}>
             <span class="ant-select-selection-item-content">
               {#if typeof tagPlaceholder === 'function'}{@render tagPlaceholder(tagOverflow.omitted)}
               {:else if tagPlaceholder == null}+ {tagOverflow.omitted.length} ...

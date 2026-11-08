@@ -8367,8 +8367,9 @@ combining/ZWJ текст. Это не подсчёт grapheme clusters.
 
 ### Количество видимых тегов
 
-Числовой maxTagCount ограничивает отображение multiple/tags; остальные выбранные
-values остаются в FormData, reset, cache и Backspace. Сводный тег по умолчанию
+MaxTagCount ограничивает отображение multiple/tags числом либо значением responsive;
+остальные выбранные values остаются в FormData, reset, cache и Backspace.
+Сводный тег по умолчанию
 показывает `+ N ...` без кнопки удаления. MaxTagPlaceholder заменяет его строкой,
 числом, boolean либо Snippet со скрытыми SelectOmittedTag в исходном порядке.
 У записей сохраняются typed value/key, полный label и disabled. Null/undefined
@@ -8392,7 +8393,16 @@ Snippet управляет своим содержимым. Single игнори�
 NaN сохраняет весь список вместо исходного исчезновения tags. Скрываемая native
 кнопка удаления передаёт фокус input, если владелец не выбрал другой control.
 [Эталоны](tests/browser/fixtures/ant-design-select-tag-count-reference.json) сохраняют
-Source NaN и responsive observations. MaxTagCount="responsive" пока не перенесён.
+Source NaN и responsive observations.
+
+MaxTagCount="responsive" измеряет доступную ширину, tags, сводный тег и текущий
+ввод через общий с Cascader ResizeObserver/RAF механизм. Скрытые tags остаются
+измеряемыми вне flow, с aria-hidden/inert; до браузерного измерения SSR показывает
+все выбранные значения. Смена ширины, текста и поиска не меняет values или DOM input;
+ресурсы очищаются при выходе из responsive/unmount. Сначала проверяется, помещается
+ли весь список: длинный custom rest не скрывает теги, для которых хватает места.
+[Raw геометрия](tests/browser/fixtures/ant-design-select-responsive-tags-reference.json)
+сохраняет это исключение upstream с отдельными замерами доступной и занятой ширины.
 
 ### Ограничение выбора
 

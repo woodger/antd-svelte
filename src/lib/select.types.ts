@@ -60,8 +60,8 @@ export interface SelectProps<
   maxCount?: number;
   /** Ограничивает отображаемый текст multiple/tags; title и полный label сохраняются. */
   maxTagTextLength?: number;
-  /** Числовой предел видимых tags; hidden values сохраняются. Responsive пока не перенесён. */
-  maxTagCount?: number;
+  /** Числовой предел либо responsive измерение видимых tags; hidden values сохраняются. */
+  maxTagCount?: number | 'responsive';
   /** Содержимое сводного тега без remove button; omitted labels остаются полными. */
   maxTagPlaceholder?: SelectTagPlaceholder<Mode extends 'tags' ? Value | string : Value>;
   /** Bind:value; multiple сохраняет Value[], tags допускает также новые string values. */

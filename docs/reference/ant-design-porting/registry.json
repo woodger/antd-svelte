@@ -4049,7 +4049,14 @@
         "tests/browser/fixtures/TagTextFixtures.svelte",
         "tests/browser/fixtures/tag-text-cases.ts",
         "tests/browser/fixtures/ant-design-select-tag-text-reference.json",
-        "tests/package/select-tag-text.ssr.test.ts"
+        "tests/package/select-tag-text.ssr.test.ts",
+        "src/lib/select-tag-overflow.engine.ts",
+        "src/lib/select-tag-overflow.engine.test.ts",
+        "src/lib/select-tag-overflow.dom.ts",
+        "tests/browser/select-responsive-tags.spec.ts",
+        "tests/browser/fixtures/SelectResponsiveTagsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-responsive-tags-reference.json",
+        "tests/package/select-responsive.ssr.test.ts"
       ],
       "features": [
         {
@@ -4223,6 +4230,23 @@
             "tests/package/select-tag-text.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1 / rc-select 1.10.1, Select и Cascader. MaxTagTextLength=1 для 😀tag и =2 для A😀tag оставляет одинокий high surrogate перед ... . Raw select/cascader emoji-split и middle-pair сохраняют этот результат. Native исключает только разрезанную пару, сохраняя UTF-16 slice, title и full values; grapheme/combining/ZWJ semantics не меняются."
+        },
+        {
+          "id": "native-full-fit-responsive-tags",
+          "title": "Показ всех помещающихся responsive tags при длинном rest",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select-tag-overflow.engine.ts",
+            "src/lib/select-tag-overflow.engine.test.ts",
+            "src/lib/select-tag-overflow.dom.ts",
+            "src/lib/cascader.dom.ts",
+            "tests/browser/select-responsive-tags.spec.ts",
+            "tests/browser/fixtures/SelectResponsiveTagsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-responsive-tags-reference.json",
+            "tests/package/select-responsive.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1, rc-select study 1.10.1 и rc-overflow study 1.0.0. Long-rest-400/snippet-rest-400 скрывают все selected tags при сумме measured widths + input меньше available. Raw corpus сохраняет source tags/rest и независимые widths. Native сначала проверяет полный список, затем резервирует rest только при недостатке места. Shared Native measurement применяется в Select и Cascader; snapshot corpus снят для Select."
         }
       ]
     },
@@ -7640,7 +7664,13 @@
         "tests/browser/fixtures/SelectTagCountFixtures.svelte",
         "tests/browser/fixtures/select-tag-count-cases.ts",
         "tests/browser/fixtures/ant-design-select-tag-count-reference.json",
-        "tests/package/select-tag-count.ssr.test.ts"
+        "tests/package/select-tag-count.ssr.test.ts",
+        "src/lib/select-tag-overflow.dom.ts",
+        "src/lib/cascader.dom.ts",
+        "tests/browser/select-responsive-tags.spec.ts",
+        "tests/browser/fixtures/SelectResponsiveTagsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-responsive-tags-reference.json",
+        "tests/package/select-responsive.ssr.test.ts"
       ],
       "features": [
         {
@@ -7909,19 +7939,26 @@
             "tests/browser/fixtures/ant-design-select-tag-count-reference.json",
             "tests/package/select-tag-count.ssr.test.ts"
           ],
-          "note": "Source numeric Array.slice, default + N ... / scalar / typed Svelte Snippet, value/key/label/disabled в omission records. Nullish placeholder выбирает default, false пустой rest; summary не имеет remove button, full titles/labels сохраняются. Native focus handoff при удалении focused tag уважает owner focus; FormData/reset/cache/Backspace включают hidden values, disabled/RTL/clear сохраняются. NaN не скрывает весь список в отличие от raw Source observation. Responsive вынесен в отдельную missing feature."
+          "note": "Source numeric Array.slice, default + N ... / scalar / typed Svelte Snippet, value/key/label/disabled в omission records. Nullish placeholder выбирает default, false пустой rest; summary не имеет remove button, full titles/labels сохраняются. Native focus handoff при удалении focused tag уважает owner focus; FormData/reset/cache/Backspace включают hidden values, disabled/RTL/clear сохраняются. NaN не скрывает весь список в отличие от raw Source observation. Responsive описан отдельной supported feature."
         },
         {
           "id": "responsive-tag-count",
           "title": "MaxTagCount=responsive и измерение overflow",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
-            "tests/browser/fixtures/ant-design-select-tag-count-reference.json",
-            "src/lib/select.types.ts",
-            "src/lib/Select.svelte"
+            "src/lib/select-tag-overflow.engine.ts",
+            "src/lib/select-tag-overflow.engine.test.ts",
+            "src/lib/select-tag-overflow.dom.ts",
+            "src/lib/cascader.dom.ts",
+            "tests/browser/select-responsive-tags.spec.ts",
+            "tests/browser/fixtures/SelectResponsiveTagsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-responsive-tags-reference.json",
+            "tests/package/select-responsive.ssr.test.ts",
+            "src/lib/Select.svelte",
+            "src/lib/select.types.ts"
           ],
-          "note": "Source corpus содержит narrow/wide observations; runtime и public type responsive ещё не перенесены. Числовой maxTagCount и custom placeholders поддержаны отдельно."
+          "note": "Геометрия Source проверена по official UMD при фиксированных ширинах. Общие browser-only ResizeObserver/RAF измеряют content/tags/rest/input. Скрытые tags сохраняют измеряемую ширину с aria-hidden/inert; typed values/cache/SSR fields и native handoff сфокусированной remove button сохранены. Width/query/data updates и повторные mount cycles сохраняют input identity и очищают ресурсы. Существующий Cascader использует тот же владелец измерений; prefix/render/semantic APIs остаются отдельными gaps. Full-fit проверка исправляет raw дефект длинного сводного тега."
         },
         {
           "id": "extended-api",
@@ -8031,6 +8068,23 @@
             "tests/package/select-tag-count.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1 при maxTagCount=NaN не показывает ни tags, ни rest, сохраняя values. Raw nan фиксирует пустой tags array. Native считает NaN отсутствием ограничения и показывает весь выбранный список; другие numeric slice boundaries сохраняются."
+        },
+        {
+          "id": "native-full-fit-responsive-tags",
+          "title": "Показ всех помещающихся responsive tags при длинном rest",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select-tag-overflow.engine.ts",
+            "src/lib/select-tag-overflow.engine.test.ts",
+            "src/lib/select-tag-overflow.dom.ts",
+            "src/lib/cascader.dom.ts",
+            "tests/browser/select-responsive-tags.spec.ts",
+            "tests/browser/fixtures/SelectResponsiveTagsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-responsive-tags-reference.json",
+            "tests/package/select-responsive.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1, rc-select study 1.10.1 и rc-overflow study 1.0.0. Long-rest-400/snippet-rest-400 скрывают все selected tags при сумме measured widths + input меньше available. Raw corpus сохраняет source tags/rest и независимые widths. Native сначала проверяет полный список, затем резервирует rest только при недостатке места. Shared Native measurement применяется в Select и Cascader; snapshot corpus снят для Select."
         }
       ]
     },

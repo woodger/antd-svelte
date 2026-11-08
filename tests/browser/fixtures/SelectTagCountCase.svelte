@@ -8,6 +8,8 @@
   let changes = $state(0);
   let override = $state(false);
   let count = $state(2);
+  let width = $state(untrack(() => sample.width ?? 400));
+  let mounted = $state(true);
   let componentProps = $derived({
     maxTagCount: override ? count : getSelectTagCount(sample.count),
     maxTagTextLength: sample.textLength,
@@ -22,15 +24,19 @@
 
 <label><input type="checkbox" bind:checked={override} />Override visible tag count</label>
 <label>Visible tag count<input type="number" bind:value={count} /></label>
+<label>Tag count width<input type="number" bind:value={width} /></label>
+<label><input type="checkbox" bind:checked={mounted} />Mount counted Select</label>
 <button type="button" id="tag-count-outside">Outside tag count</button>
 <ConfigProvider theme={{ token: { motion: false } }}>
   <form aria-label="Tag count native form" onsubmit={event => event.preventDefault()}>
     <button type="reset">Reset tag count</button>
-    <div data-tag-count style="width:400px">
+    <div data-tag-count style={`width:${width}px`}>
+      {#if mounted}
       <Select {...componentProps} options={sample.options} mode={sample.mode === 'tags'
         ? 'tags' : 'multiple'} bind:value={values} defaultValue={sample.values}
         name="tag-count" aria-label="Counted values" allowClear
         onValueChange={() => { changes += 1; }} />
+      {/if}
     </div>
   </form>
 </ConfigProvider>

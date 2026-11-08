@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import reference from '../../tests/browser/fixtures/ant-design-select-tag-count-reference.json';
-import { getSelectTagOverflow } from './select-tag-overflow.engine';
+import { getResponsiveTagCount, getSelectTagOverflow } from './select-tag-overflow.engine';
 import type { SelectOption } from './types';
 
 describe('Select numeric tag count source boundaries', () => {
@@ -39,5 +39,13 @@ describe('Select numeric tag count source boundaries', () => {
     expect(options[0].label).toBe('Number');
     expect(getSelectTagOverflow(options).visible).toBe(options);
     expect(getSelectTagOverflow(options, Number.NaN).visible).toBe(options);
+  });
+
+  it('fits every tag before reserving rest and otherwise finds the largest fitting prefix', () => {
+    expect(getResponsiveTagCount([50, 60, 40], 150, 1000)).toBe(3);
+    expect(getResponsiveTagCount([50, 60, 40], 140, 20)).toBe(2);
+    expect(getResponsiveTagCount([50, 60, 40], 100, 20)).toBe(1);
+    expect(getResponsiveTagCount([50], 49, 20)).toBe(0);
+    expect(getResponsiveTagCount([], 0, 20)).toBe(0);
   });
 });

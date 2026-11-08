@@ -9,6 +9,10 @@
 
 ### Added
 
+- Select поддерживает maxTagCount="responsive" с общими измерениями Cascader,
+  динамическим input width, inert hidden tags и cleanup observer/RAF. Full-fit
+  проверка сохраняет видимые tags при длинном custom rest; raw дефект upstream записан.
+
 - Select поддерживает числовой maxTagCount и scalar/Snippet maxTagPlaceholder.
   Полные hidden values сохраняются в формах, reset и Backspace; скрываемая remove
   button передаёт focus input. Source исчезновение списка при NaN не воспроизводится.
