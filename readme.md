@@ -895,8 +895,9 @@ nested config заменяет объект целиком. Root style идёт 
 Collapsible.icon задаёт иконки сворачивания; пустой объект сохраняет defaults.
 Null/false icons оставляют пустой custom wrapper.
 
-CSS-рецепт splitter воспроизводит все 59 правил эталона, включая reduced motion,
-с проверкой SHA-256. Темы, primary и RTL наследуются; локальный hover alias bar
+CSS-рецепты splitter и splitter-prefix воспроизводят все 59 правил эталона,
+включая reduced motion, с проверкой SHA-256. Второй сохраняет module template для
+локального prefix. Темы, primary и RTL наследуются; локальный hover alias bar
 сохраняется для native темы, а в token theme bar наследует настроенные aliases.
 
 ConfigProvider.theme.components.Splitter применяет splitBarSize, splitTriggerSize
@@ -910,7 +911,22 @@ aliases и algorithms, cssVar.prefix, undefined, вложенные/reset/siblin
 [browser](./tests/browser/splitter-theme.spec.ts), `?fixture=splitter-theme`.
 RTL-метрики измерены с явным dir=rtl на host; отдельно записано source-наследование
 LTR без этого host. Существующий native direction провайдера сохранён.
-Произвольный prefixCls пока не перенесён.
+PrefixCls задаёт root/panel/bar/collapse/preview/mask classes. Пустая строка и
+undefined наследуют ConfigProvider.prefixCls (по умолчанию ant-splitter); локальный
+prefix имеет приоритет. Semantic callbacks получают исходный local prefix.
+Служебная preview-offset variable следует общему prefix без точек, независимо от
+локального класса и theme.cssVar.prefix. Canonical token marker сохранён.
+Смена prefix сохраняет панели, refs, draft/focus/selection и активный lazy drag.
+
+В 6.6.8 CSS-кэш связывает общий local class с первым namespace: у вложенного
+Splitter preview-offset=30px может дать transform:none. В свежем документе с
+тем же вложенным namespace получается смещение 30px. Native изолирует CSS по
+local class и общему namespace; исходные
+[raw](./tests/browser/fixtures/ant-design-splitter-prefix-reference.json) и
+[fresh-page](./tests/browser/fixtures/ant-design-splitter-prefix-isolated.json)
+замеры сохранены для разбора. Prefix проверяют
+[browser](./tests/browser/splitter-prefix.spec.ts),
+[SSR](./tests/package/splitter-prefix.ssr.test.ts) и fixture `?fixture=splitter-prefix`.
 
 Fixture — `?fixture=splitter`. Engine, DOM lifecycle, SSR, package и browser
 проверяют размеры, ограничения, callbacks, controlled/lazy, collapse, native
@@ -9905,8 +9921,8 @@ PrefixCls задаёт базовый префикс CSS-классов; по у
 LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex,
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
-Tooltip, Popover, Popconfirm, Slider, BorderBeam и Masonry. Остальные семейства подключаются
-отдельно. Например,
+Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry и Splitter. Остальные
+семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 

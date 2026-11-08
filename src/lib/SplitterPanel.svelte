@@ -2,8 +2,17 @@
   import { splitterPanelHidden, type SplitterPanel } from './splitter.engine';
   import type { SplitterSize } from './splitter.types';
 
-  let { panel, size, class: className, style, motion, destroyOnHidden }: {
+  let {
+    panel,
+    prefixCls = 'ant-splitter',
+    size,
+    class: className,
+    style,
+    motion,
+    destroyOnHidden
+  }: {
     panel: SplitterPanel;
+    prefixCls?: string;
     size?: SplitterSize;
     class?: string;
     style: string;
@@ -17,9 +26,9 @@
 
 <div
   class={[
-    'ant-splitter-panel',
-    hidden && 'ant-splitter-panel-hidden',
-    motion && 'ant-splitter-panel-transition',
+    `${prefixCls}-panel`,
+    hidden && `${prefixCls}-panel-hidden`,
+    motion && `${prefixCls}-panel-transition`,
     className,
     panel.class
   ]}

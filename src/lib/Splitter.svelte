@@ -1,6 +1,8 @@
 <script lang="ts">
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getSplitterPrefixCss } from './splitter-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { getSplitterAria, splitterDraggerClasses } from './splitter.engine';
   import { observeSplitterSize } from './splitter.dom';
   import { createSplitterModel } from './splitter.model.svelte.js';
@@ -10,6 +12,7 @@
   import SplitterPanel from './SplitterPanel.svelte';
 
   let {
+    prefixCls,
     items = [],
     orientation,
     vertical,
@@ -31,6 +34,9 @@
   }: SplitterProps = $props();
 
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('splitter', prefixCls));
+  let rootPrefix = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getSplitterPrefixCss(componentPrefix, rootPrefix));
   const componentTheme = useComponentTheme('Splitter');
   let actualOrientation = $derived(spaceOrientation(orientation, vertical));
   let isVertical = $derived(actualOrientation === 'vertical');
@@ -41,6 +47,7 @@
   );
   let info = $derived({
     props: {
+      prefixCls,
       items,
       orientation: actualOrientation,
       vertical: isVertical,
@@ -94,15 +101,18 @@
   });
 </script>
 
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`splitter-prefix:${componentPrefix}:${rootPrefix}`} />{/if}
 <div
   bind:this={nativeElement}
   data-ant-splitter-native={!componentTheme.className || undefined}
+  data-ant-splitter-prefix={prefixCss ? componentPrefix : undefined}
+  data-ant-splitter-vars={prefixCss ? rootPrefix.replace(/\./g, '') : undefined}
   class={[
-    'ant-splitter',
+    componentPrefix,
     componentTheme.className,
     className,
-    `ant-splitter-${actualOrientation}`,
-    config.direction === 'rtl' && 'ant-splitter-rtl',
+    `${componentPrefix}-${actualOrientation}`,
+    config.direction === 'rtl' && `${componentPrefix}-rtl`,
     rootClassName,
     contextClasses.root,
     localClasses.root,
@@ -115,6 +125,7 @@
 >
   {#each model.items as panel, index}
     <SplitterPanel
+      prefixCls={componentPrefix}
       {panel}
       size={model.sizes.panels[index]}
       class={[contextClasses.panel, localClasses.panel].filter(Boolean).join(' ')}
@@ -123,6 +134,8 @@
       destroyOnHidden={panel.destroyOnHidden ?? destroyOnHidden}
     />
     {#if model.resizable[index]}<SplitterBar
+      prefixCls={componentPrefix}
+      {rootPrefix}
       {index}
       {lazy}
       {reverse}
@@ -147,6 +160,6 @@
   {/each}
   {#if model.movingIndex !== undefined}<div
     aria-hidden="true"
-    class={`ant-splitter-mask ant-splitter-mask-${actualOrientation}`}
+    class={`${componentPrefix}-mask ${componentPrefix}-mask-${actualOrientation}`}
   ></div>{/if}
 </div>

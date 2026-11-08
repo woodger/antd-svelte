@@ -9,6 +9,11 @@
 
 ### Added
 
+- Splitter поддерживает локальный prefixCls и общий ConfigProvider.prefixCls для
+  всех частей и namespace lazy preview. Смена prefix сохраняет панели, editor/focus
+  и текущий drag. Source cache defect при shared local class записан отдельно;
+  Native изолирует оформление по классу и namespace.
+
 - Masonry поддерживает локальный prefixCls и общий ConfigProvider.prefixCls,
   включая item/motion classes и namespace служебной ширины. Смена prefix сохраняет
   раскладку, DOM, focus/selection и текущую анимацию. Source RTL alias collision

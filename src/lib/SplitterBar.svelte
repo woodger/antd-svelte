@@ -6,6 +6,8 @@
   import SplitterArrow from './SplitterArrow.svelte';
 
   let {
+    prefixCls = 'ant-splitter',
+    rootPrefix = 'ant',
     index,
     active,
     vertical,
@@ -22,6 +24,8 @@
     callbacks,
     onCollapse
   }: {
+    prefixCls?: string;
+    rootPrefix?: string;
     index: number;
     active: boolean;
     vertical: boolean;
@@ -42,6 +46,8 @@
   let dragger = $state<HTMLDivElement>();
   let preview = $state(0);
   let runtime = $state.raw<ReturnType<typeof connectSplitterDrag>>();
+  let barPrefix = $derived(`${prefixCls}-bar`);
+  let previewVariable = $derived(`--${rootPrefix.replace(/\./g, '')}-splitter-bar-preview-offset`);
   const visibility = (mode: boolean | 'auto') => mode === true ? 'always-visible'
     : mode === false ? 'always-hidden' : 'hover-only';
 
@@ -93,21 +99,21 @@
 
 <style>
   /* Native button сохраняет геометрию исходного div role=button. */
-  .ant-splitter-bar-collapse-bar { border: 0; padding: 0; font-family: inherit; line-height: inherit; }
+  [data-ant-splitter-collapse] { border: 0; padding: 0; font-family: inherit; line-height: inherit; }
 </style>
 
-<div class="ant-splitter-bar">
+<div class={barPrefix} data-ant-splitter-bar>
   {#if lazy}<div
-    class={['ant-splitter-bar-preview', Boolean(preview) && 'ant-splitter-bar-preview-active']}
-    style={`--ant-splitter-bar-preview-offset:${preview}px`}
+    class={[`${barPrefix}-preview`, Boolean(preview) && `${barPrefix}-preview-active`]}
+    style={`${previewVariable}:${preview}px`}
   ></div>{/if}
   <div
     bind:this={dragger}
     class={[
-      'ant-splitter-bar-dragger',
-      !resizable.resizable && 'ant-splitter-bar-dragger-disabled',
-      active && 'ant-splitter-bar-dragger-active',
-      draggerIcon !== undefined && 'ant-splitter-bar-dragger-customize',
+      `${barPrefix}-dragger`,
+      !resizable.resizable && `${barPrefix}-dragger-disabled`,
+      active && `${barPrefix}-dragger-active`,
+      draggerIcon !== undefined && `${barPrefix}-dragger-customize`,
       classDefault,
       active && classActive
     ]}
@@ -119,7 +125,7 @@
     aria-valuemin={splitterAriaNumber(aria.min)}
     aria-valuemax={splitterAriaNumber(aria.max)}
   >
-    {#if draggerIcon !== undefined}<div class="ant-splitter-bar-dragger-icon">
+    {#if draggerIcon !== undefined}<div class={`${barPrefix}-dragger-icon`}>
       {#if typeof draggerIcon === 'function'}{@render draggerIcon()}{:else if typeof draggerIcon !== 'boolean'}{draggerIcon ?? ''}{/if}
     </div>{/if}
   </div>
@@ -131,15 +137,16 @@
     {#if shown}<button
       type="button"
       class={[
-        'ant-splitter-bar-collapse-bar',
-        `ant-splitter-bar-collapse-bar-${side}`,
-        icon !== undefined && 'ant-splitter-bar-collapse-bar-customize',
-        `ant-splitter-bar-collapse-bar-${visibility(mode)}`
+        `${barPrefix}-collapse-bar`,
+        `${barPrefix}-collapse-bar-${side}`,
+        icon !== undefined && `${barPrefix}-collapse-bar-customize`,
+        `${barPrefix}-collapse-bar-${visibility(mode)}`
       ]}
+      data-ant-splitter-collapse
       aria-label={`Toggle ${side} panel`}
       onclick={() => onCollapse(index, isStart ? 'start' : 'end')}
       onkeydown={event => handleCollapseKey(event, isStart ? 'start' : 'end')}
-    ><span class={`ant-splitter-bar-collapse-icon ant-splitter-bar-collapse-${side}`}>
+    ><span class={`${barPrefix}-collapse-icon ${barPrefix}-collapse-${side}`}>
       {#if icon === undefined}<SplitterArrow name={vertical ? isStart ? 'up' : 'down' : isStart ? 'left' : 'right'} />
       {:else if typeof icon === 'function'}{@render icon()}{:else if typeof icon !== 'boolean'}{icon ?? ''}{/if}
     </span></button>{/if}

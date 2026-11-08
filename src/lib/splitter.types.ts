@@ -58,6 +58,8 @@ export interface SplitterConfig {
 
 /** Splitter с исходными правилами размеров, drag/lazy и collapse Ant Design 6.6.8. */
 export interface SplitterProps {
+  /** Локальный CSS prefix; empty/undefined наследуют ConfigProvider.prefixCls. */
+  prefixCls?: string;
   /** Явная замена анализа React children/Panel; содержимое задаётся scalar или Snippet. */
   items?: SplitterPanelProps[];
   /** Приоритет: orientation, boolean vertical, horizontal. */
