@@ -1,12 +1,13 @@
 <script lang="ts">
   import { tick, type Snippet } from 'svelte';
   import { provideFormField, useForm } from './form-context';
+  import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { formNamePath, type NamePath } from './form-store.engine';
   import type { ValidationRule } from './validation.engine';
   import { useFormList } from './form-list-context';
   import { captureFormResetFocus } from './form-reset.dom';
-  import type { RenderEmptyContent } from './types';
+  import { enUS, type RenderEmptyContent } from './types';
   import RenderContent from './RenderContent.svelte';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
@@ -63,6 +64,7 @@
   }: FormItemProps = $props();
 
   const form = useForm();
+  const config = useConfig();
   const list = useFormList();
   const componentTheme = useComponentTheme('Form');
   const generatedId = $props.id();
@@ -73,6 +75,8 @@
   let computedColon = $derived(colon === true || form?.colon !== false && colon !== false);
   let haveColon = $derived(resolvedLayout !== 'vertical' && computedColon);
   let labelText = $derived(haveColon && label.trim() ? label.replace(/[:：]\s*$/, '') : label);
+  let requiredMark = $derived(form?.requiredMark ?? true);
+  let optionalText = $derived(config.locale.Form?.optional || enUS.Form.optional);
   let errors = $derived(form?.getFieldError(path) ?? []);
   let warnings = $derived(form?.getFieldWarning(path) ?? []);
   let isRequired = $derived(required
@@ -187,9 +191,17 @@
   <div class={['ant-form-item-row', componentTheme.className]}>
     <div class="ant-form-item-label" class:ant-form-item-label-left={resolvedLabelAlign === 'left'}
       class:ant-form-item-label-wrap={form?.labelWrap === true}>
-      <label for={id} class:ant-form-item-required={isRequired} class:ant-form-item-no-colon={!computedColon}
+      <label for={id} class:ant-form-item-required={isRequired}
+        class:ant-form-item-required-mark-hidden={requiredMark === false}
+        class:ant-form-item-required-mark-optional={requiredMark === 'optional'
+          || typeof requiredMark === 'function'}
+        class:ant-form-item-no-colon={!computedColon}
         title={label} use:focusGroupLabel>
-        {labelText}
+        {#if typeof requiredMark === 'function'}
+          {@render requiredMark(labelText, { required: isRequired })}
+        {:else}
+          {labelText}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
+        {/if}
       </label>
     </div>
     <div class="ant-form-item-control">

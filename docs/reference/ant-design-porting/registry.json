@@ -4944,7 +4944,13 @@
         "tests/browser/form-labels-metrics.ts",
         "tests/browser/fixtures/FormLabelsFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-labels-reference.json",
-        "tests/package/form-labels.ssr.test.ts"
+        "tests/package/form-labels.ssr.test.ts",
+        "src/lib/types.ts",
+        "tests/browser/form-required-mark.spec.ts",
+        "tests/browser/form-required-mark-metrics.ts",
+        "tests/browser/fixtures/FormRequiredMarkFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-required-mark-reference.json",
+        "tests/package/form-required-mark.ssr.test.ts"
       ],
       "features": [
         {
@@ -5374,7 +5380,28 @@
             "tests/browser/fixtures/ant-design-form-labels-reference.json",
             "tests/package/form-labels.ssr.test.ts"
           ],
-          "note": "Form принимает colon/labelAlign/labelWrap и наследует ConfigProvider.form; локальные FormItem.colon/labelAlign выше Form. True восстанавливает colon поверх parent false, vertical скрывает добавленный colon независимо от computedColon, который управляет no-colon class. Последний ASCII/fullwidth colon с whitespace удаляется только при добавленном colon, title остаётся исходным. Label alignment/wrap используют существующий CSS, logical start/end и alias scopes. FormConfig содержит только три поддержанные настройки; undefined record наследуется, {} или иной object заменяет родительский. Вложенный Form читает собственные props/config, а не label context внешнего. Сверены 32 состояния неизменённого UMD в LTR/RTL: приоритеты props/config, reset/replacement, width-constrained wrap, три layouts, nested Form и punctuation. Реактивные обновления сохраняют input/value/metadata/focus/selection и native label click. Прежние vertical default и raw variant context сохранены; прочий global/semantic Form config не объявлен."
+          "note": "Form принимает colon/labelAlign/labelWrap и наследует ConfigProvider.form; локальные FormItem.colon/labelAlign выше Form. True восстанавливает colon поверх parent false, vertical скрывает добавленный colon независимо от computedColon, который управляет no-colon class. Последний ASCII/fullwidth colon с whitespace удаляется только при добавленном colon, title остаётся исходным. Label alignment/wrap используют существующий CSS, logical start/end и alias scopes. FormConfig содержит эти настройки и отдельно описанный requiredMark; undefined record наследуется, {} или иной object заменяет родительский. Вложенный Form читает собственные props/config, а не label context внешнего. Сверены 32 состояния неизменённого UMD в LTR/RTL: приоритеты props/config, reset/replacement, width-constrained wrap, три layouts, nested Form и punctuation. Реактивные обновления сохраняют input/value/metadata/focus/selection и native label click. Прежние vertical default и raw variant context сохранены; прочий global/semantic Form config не объявлен."
+        },
+        {
+          "id": "required-mark",
+          "title": "RequiredMark: boolean, optional, Svelte snippet и Form locale",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/index.ts",
+            "tests/browser/form-required-mark.spec.ts",
+            "tests/browser/form-required-mark-metrics.ts",
+            "tests/browser/fixtures/FormRequiredMarkFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-required-mark-reference.json",
+            "tests/package/form-required-mark.ssr.test.ts"
+          ],
+          "note": "Form.requiredMark принимает true/false/optional и Svelte snippet вместо React render function; local prop → ConfigProvider.form → true. False скрывает только звёздочку; optional/custom используют исходные mark classes. Snippet получает строковую label после обработки colon и required boolean, заменяет label children; исходный title и native label association сохраняются. Поле required и validation не зависят от визуальной отметки. Locale.Form.optional поддерживает RU/EN/custom и исходную замену всей группы: {} или пустой optional дают английский fallback, undefined locale наследует. Вложенный Form сбрасывает внешний mark к своим props/config. Сверены 18 UMD-состояний: modes, callbacks, fullwidth/ASCII colon, provider replacement/priority, locale fallback и nested Form. Live updates сохраняют native input, values, errors/warnings/touched, focus/selection; submit по-прежнему проверяет required и сериализует native values. Rich label/tooltip и прочие global/semantic Form settings остаются отдельными пробелами; deprecated hideRequiredMark API не добавлен."
         }
       ]
     },
@@ -15905,7 +15932,14 @@
         "tests/browser/form-labels-metrics.ts",
         "tests/browser/fixtures/FormLabelsFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-labels-reference.json",
-        "tests/package/form-labels.ssr.test.ts"
+        "tests/package/form-labels.ssr.test.ts",
+        "src/lib/Form.svelte",
+        "src/lib/FormItem.svelte",
+        "tests/browser/form-required-mark.spec.ts",
+        "tests/browser/form-required-mark-metrics.ts",
+        "tests/browser/fixtures/FormRequiredMarkFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-required-mark-reference.json",
+        "tests/package/form-required-mark.ssr.test.ts"
       ],
       "features": [
         {
@@ -16812,7 +16846,28 @@
             "tests/browser/fixtures/ant-design-form-labels-reference.json",
             "tests/package/form-labels.ssr.test.ts"
           ],
-          "note": "Новый FormConfig/record form содержит colon, labelAlign и labelWrap; undefined наследует ближайший record, object и {} заменяют его. Локальные props Form/Item приоритетнее; реактивные изменения и scope reset подтверждены Form source labels reference. Остальные глобальные Form settings, class/style/semantic config этим этапом не принимаются и не заявлены."
+          "note": "Новый FormConfig/record form содержит colon, labelAlign, labelWrap и отдельно описанный requiredMark; undefined наследует ближайший record, object и {} заменяют его. Локальные props Form/Item приоритетнее; реактивные изменения и scope reset подтверждены Form source labels reference. Остальные глобальные Form settings, class/style/semantic config этим этапом не принимаются и не заявлены."
+        },
+        {
+          "id": "form-required-mark",
+          "title": "ConfigProvider.form.requiredMark и locale.Form.optional",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/index.ts",
+            "tests/browser/form-required-mark.spec.ts",
+            "tests/browser/form-required-mark-metrics.ts",
+            "tests/browser/fixtures/FormRequiredMarkFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-required-mark-reference.json",
+            "tests/package/form-required-mark.ssr.test.ts"
+          ],
+          "note": "Form defaults включают современный requiredMark: boolean/optional/Svelte snippet. Undefined form наследует record, object/{} заменяют его; local Form prop выше config. Locale.Form повторяет source replacement/fallback вместо нового deep merge: undefined group наследуется, {} и пустой optional выбирают английский fallback. Native default RU сохранён. Class/content/renderer/locale подтверждены Form required-mark reference; остальные настройки FormConfig не объявлены."
         }
       ]
     },

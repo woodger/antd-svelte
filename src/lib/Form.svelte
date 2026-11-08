@@ -15,6 +15,7 @@
     colon,
     labelAlign,
     labelWrap,
+    requiredMark,
     variant,
     component = 'form',
     disabled,
@@ -28,6 +29,7 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Form');
+  let resolvedRequiredMark = $derived(requiredMark ?? config.form?.requiredMark ?? true);
   let active = true;
 
   onDestroy(() => {
@@ -54,6 +56,9 @@
     },
     get labelWrap() {
       return labelWrap ?? config.form?.labelWrap;
+    },
+    get requiredMark() {
+      return resolvedRequiredMark;
     },
     get resetKey() {
       return getFormHooks(form)?.resetKey ?? form.values;
@@ -123,6 +128,7 @@
   {...attributes}
   novalidate
   class={[`ant-form ant-form-css-var ant-form-${layout} ${className}`,
+    resolvedRequiredMark === false && 'ant-form-hide-required-mark',
     componentTheme.className].filter(Boolean).join(' ')}
   style={componentTheme.style
     ? [componentTheme.style, style].filter(Boolean).join(';') : style}

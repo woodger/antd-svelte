@@ -1,0 +1,844 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "two animation frames before every capture",
+    "locale": "explicit ru baseline preserves native Svelte locale default"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": false,
+            "before": {
+              "content": "\"*\"",
+              "display": "block",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": false,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "hidden",
+        "mark": false
+      },
+      "metrics": {
+        "hideClass": true,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": true,
+            "optionalClass": false,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": true,
+            "optionalClass": false,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "optional-ru",
+        "mark": "optional"
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional(необязательно)",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": {
+              "text": "(необязательно)",
+              "style": {
+                "color": "rgba(0, 0, 0, 0.45)",
+                "margin-inline-start": "4px"
+              }
+            },
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "optional-en",
+        "mark": "optional",
+        "locale": {
+          "locale": "en",
+          "Form": {
+            "optional": "(optional)"
+          }
+        }
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional(optional)",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": {
+              "text": "(optional)",
+              "style": {
+                "color": "rgba(0, 0, 0, 0.45)",
+                "margin-inline-start": "4px"
+              }
+            },
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "custom",
+        "mark": "custom"
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": "required"
+          },
+          {
+            "text": "Optional optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": "optional"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "custom-colon",
+        "mark": "custom",
+        "layout": "horizontal",
+        "labels": [
+          "Required:",
+          "Optional： "
+        ]
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required required",
+            "title": "Required:",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": "required"
+          },
+          {
+            "text": "Optional optional",
+            "title": "Optional： ",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": "optional"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "custom-vertical-colon",
+        "mark": "custom",
+        "labels": [
+          "Required:",
+          "Optional： "
+        ]
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required: required",
+            "title": "Required:",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": "required"
+          },
+          {
+            "text": "Optional：  optional",
+            "title": "Optional： ",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": "optional"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-form-reset",
+        "outer": false
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": false,
+            "before": {
+              "content": "\"*\"",
+              "display": "block",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": false,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "config-hide",
+        "config": {
+          "requiredMark": false
+        }
+      },
+      "metrics": {
+        "hideClass": true,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": true,
+            "optionalClass": false,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": true,
+            "optionalClass": false,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "local-show",
+        "config": {
+          "requiredMark": false
+        },
+        "mark": true
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": false,
+            "before": {
+              "content": "\"*\"",
+              "display": "block",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": false,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "config-optional",
+        "config": {
+          "requiredMark": "optional"
+        }
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional(необязательно)",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": {
+              "text": "(необязательно)",
+              "style": {
+                "color": "rgba(0, 0, 0, 0.45)",
+                "margin-inline-start": "4px"
+              }
+            },
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "local-hide",
+        "config": {
+          "requiredMark": "optional"
+        },
+        "mark": false
+      },
+      "metrics": {
+        "hideClass": true,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": true,
+            "optionalClass": false,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": true,
+            "optionalClass": false,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "config-custom",
+        "config": {
+          "requiredMark": "custom"
+        }
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": "required"
+          },
+          {
+            "text": "Optional optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": "optional"
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-inherit",
+        "parent": {
+          "requiredMark": "optional"
+        }
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional(необязательно)",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": {
+              "text": "(необязательно)",
+              "style": {
+                "color": "rgba(0, 0, 0, 0.45)",
+                "margin-inline-start": "4px"
+              }
+            },
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-reset",
+        "parent": {
+          "requiredMark": "optional"
+        },
+        "config": {}
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": false,
+            "before": {
+              "content": "\"*\"",
+              "display": "block",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": false,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": null,
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "custom-locale",
+        "mark": "optional",
+        "locale": {
+          "locale": "en",
+          "Form": {
+            "optional": "Custom optional"
+          }
+        }
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "OptionalCustom optional",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": {
+              "text": "Custom optional",
+              "style": {
+                "color": "rgba(0, 0, 0, 0.45)",
+                "margin-inline-start": "4px"
+              }
+            },
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-locale",
+        "mark": "optional",
+        "locale": {
+          "locale": "ru",
+          "Form": {
+            "optional": ""
+          }
+        }
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional(optional)",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": {
+              "text": "(optional)",
+              "style": {
+                "color": "rgba(0, 0, 0, 0.45)",
+                "margin-inline-start": "4px"
+              }
+            },
+            "custom": null
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "locale-inherit",
+        "mark": "optional",
+        "parentLocale": {
+          "locale": "en",
+          "Form": {
+            "optional": "Parent optional"
+          }
+        },
+        "locale": {
+          "Form": {}
+        }
+      },
+      "metrics": {
+        "hideClass": false,
+        "labels": [
+          {
+            "text": "Required",
+            "title": "Required",
+            "required": true,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "\"*\"",
+              "display": "none",
+              "color": "rgb(255, 77, 79)",
+              "margin-inline-end": "4px"
+            },
+            "optional": null,
+            "custom": null
+          },
+          {
+            "text": "Optional(optional)",
+            "title": "Optional",
+            "required": false,
+            "hidden": false,
+            "optionalClass": true,
+            "before": {
+              "content": "none",
+              "display": "block",
+              "color": "rgba(0, 0, 0, 0.88)",
+              "margin-inline-end": "0px"
+            },
+            "optional": {
+              "text": "(optional)",
+              "style": {
+                "color": "rgba(0, 0, 0, 0.45)",
+                "margin-inline-start": "4px"
+              }
+            },
+            "custom": null
+          }
+        ]
+      }
+    }
+  ]
+}

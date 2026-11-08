@@ -135,6 +135,10 @@
 
 ### Added
 
+- Form: requiredMark=true/false/'optional'/Snippet и defaults ConfigProvider.form.
+  Сохранены исходные классы, приоритеты, обработка colon, локализация Locale.Form
+  и замена группы locale; отметка не меняет native required, validation и значения.
+
 - Form/FormItem: colon и labelAlign, Form.labelWrap и defaults ConfigProvider.form.
   Добавлены приоритеты Form/Item, сброс record, RTL, удаление последнего colon
   из отображаемой подписи и сохранение title/native label association. Динамические

@@ -9366,13 +9366,27 @@ undefined возвращает наследование. Переключени�
 LabelWrap включает перенос в доступной ширине подписи; labelAlign использует
 исходные логические start/end, включая RTL.
 
-`FormConfig` содержит эти три поля. Undefined record наследуется от внешнего
+`FormConfig` содержит эти поля и requiredMark. Undefined record наследуется от внешнего
 ConfigProvider, любой объект, включая {}, заменяет его целиком. Ближайший Form
 применяет собственные props и config; вложенный Form сбрасывает настройки внешнего
 Form к своим defaults. Изменения сохраняют control, focus/selection и metadata.
 Сверка: [32 эталона](./tests/browser/fixtures/ant-design-form-labels-reference.json),
 [браузер](./tests/browser/form-labels.spec.ts),
 [публичные типы и SSR](./tests/package/form-labels.ssr.test.ts), `?fixture=form-labels`.
+
+`Form.requiredMark` наследует ConfigProvider.form.requiredMark, затем true.
+False скрывает звёздочку, 'optional' помечает необязательные поля, Svelte snippet
+получает `(label, { required })` и целиком заменяет содержимое label. Label передаётся
+после обработки colon; title и native association сохраняются. Это только
+оформление: required controls, правила validation и FormData не меняются.
+Настройки ближайшего Form сбрасывают внешний Form, сохраняя provider defaults.
+Текст optional берётся из Locale.Form.optional: ruRU — «(необязательно)»,
+enUS — «(optional)». Эта группа заменяется целиком вложенным locale.Form;
+пустая строка и отсутствующий optional используют английский fallback, как в upstream.
+Сверка: [18 эталонов](./tests/browser/fixtures/ant-design-form-required-mark-reference.json),
+[браузер](./tests/browser/form-required-mark.spec.ts),
+[публичные типы и SSR](./tests/package/form-required-mark.ssr.test.ts),
+`?fixture=form-required-mark`.
 
 Значением владеет модель: обновляйте его явно через `setFieldValue` или
 `setFieldsValue`. `FormItem.name` принимает буквальный string/number либо массив

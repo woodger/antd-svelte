@@ -55,7 +55,8 @@ describe('TextArea SSR', () => {
       expect(body).toContain('name="description"');
       expect(body).toContain('rows="3"');
 
-      const label = body.match(/<label[^>]*for="([^"]+)"[^>]*>[^<]*Task description/);
+      const label = body.replace(/<!--[\s\S]*?-->/g, '')
+        .match(/<label[^>]*for="([^"]+)"[^>]*>[^<]*Task description/);
 
       expect(label).not.toBeNull();
       expect(body).toContain(`id="${label![1]}"`);

@@ -1,6 +1,7 @@
 import type { Snippet } from 'svelte';
 import type { DesignTokenConfig } from './theme-token.types';
 import type { ComponentsConfig } from './theme-component-token.types';
+import type { FormLocale } from './form.types';
 import type { TypographyLocale } from './typography.types';
 import type { ColorPickerLocale } from './color-picker.types';
 import { colorPickerEnUS, colorPickerRuRU } from './color-picker.locale';
@@ -61,6 +62,7 @@ export type ResolvedThemeConfig = ThemeConfig
   & Required<Pick<ThemeConfig, 'mode' | 'primary' | 'compact'>>;
 
 export interface Locale {
+  Form?: FormLocale;
   colorPicker?: Partial<ColorPickerLocale>;
   ColorPicker?: Partial<ColorPickerLocale>;
   typography?: Partial<TypographyLocale>;
@@ -205,6 +207,7 @@ export interface SelectOption<Value extends string | number = string> {
 }
 
 export const ruRU = {
+  Form: { optional: '(необязательно)' },
   colorPicker: colorPickerRuRU,
   typography: typographyRuRU,
   tour: tourRuRU,
@@ -297,6 +300,7 @@ export const ruRU = {
 } satisfies Locale;
 
 export const enUS = {
+  Form: { optional: '(optional)' },
   colorPicker: colorPickerEnUS,
   typography: typographyEnUS,
   tour: tourEnUS,

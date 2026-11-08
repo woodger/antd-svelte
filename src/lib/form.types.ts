@@ -17,6 +17,19 @@ export interface FormScrollOptions extends Options {
   focus?: boolean;
 }
 
+export interface FormRequiredMarkInfo {
+  required: boolean;
+}
+
+/** Визуальная отметка label; snippet получает текст после удаления добавленного colon. */
+export type FormRequiredMark = boolean | 'optional'
+  | Snippet<[label: string, info: FormRequiredMarkInfo]>;
+
+export interface FormLocale {
+  /** Пустая строка использует исходный английский fallback. */
+  optional?: string;
+}
+
 /** Нативная форма для реактивной модели, validation и асинхронного onFinish. */
 export interface FormProps<Values extends FormValues> extends Omit<
   HTMLFormAttributes,
@@ -33,6 +46,8 @@ export interface FormProps<Values extends FormValues> extends Omit<
   labelAlign?: 'left' | 'right';
   /** Перенос текста подписи; undefined наследует ConfigProvider.form, затем false. */
   labelWrap?: boolean;
+  /** Только оформление label, без изменения required/validation; config, затем true. */
+  requiredMark?: FormRequiredMark;
   /** Оформление дочерних полей; undefined сбрасывает внешний Form, сохраняя ConfigProvider. */
   variant?: Variant;
   /** По умолчанию form; false оставляет контекст без native wrapper и DOM-атрибутов. */
@@ -48,4 +63,6 @@ export interface FormProps<Values extends FormValues> extends Omit<
 }
 
 /** Defaults подписей Form; undefined наследует родительский record, {} заменяет его. */
-export type FormConfig = Pick<FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap'>;
+export type FormConfig = Pick<
+  FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap' | 'requiredMark'
+>;
