@@ -135,6 +135,11 @@
 
 ### Added
 
+- Form: layout=inline с исходными отступами, переносом строк и component tokens;
+  FormItem.layout задаёт локальный horizontal/vertical override. Сверены desktop,
+  mobile, RTL, compact и нулевые отступы. Прежний vertical default, DOM controls,
+  фокус/выделение, values/metadata, native submit/reset и component=false сохранены.
+
 - FormItem: validateFirst для последовательной остановки и первого параллельного
   отказа. По умолчанию правила запускаются параллельно и сохраняют порядок сообщений.
   Errors идут перед warningOnly; раннее предупреждение ждёт блокирующие проверки.

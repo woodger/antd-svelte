@@ -6,7 +6,7 @@ import type { Variant } from './types';
 export interface FormContext {
   readonly variant?: Variant;
   readonly disabled: boolean;
-  readonly layout: 'vertical' | 'horizontal';
+  readonly layout: 'vertical' | 'horizontal' | 'inline';
   readonly resetKey?: object;
   getFieldError(name: NamePath): readonly string[];
   getFieldWarning(name: NamePath): readonly string[];

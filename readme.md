@@ -9351,7 +9351,11 @@ TreeSelect/Cascader добавляют 40 эталонов в
 
 FormItem предоставляет label, status, required, description и обработчик blur.
 Расположение подписи наследуется из `Form.layout`: `vertical` размещает её
-над control, `horizontal` — рядом с ним на широком экране.
+над control, `horizontal` — рядом с ним на широком экране, `inline` располагает
+поля в строке с переносом по доступной ширине. Прежний default остаётся vertical.
+Локальный `FormItem.layout` (`horizontal` или `vertical`) имеет приоритет над Form;
+undefined возвращает наследование. Переключение layout не пересоздаёт controls,
+не меняет values/metadata и сохраняет фокус и выделение.
 Значением владеет модель: обновляйте его явно через `setFieldValue` или
 `setFieldsValue`. `FormItem.name` принимает буквальный string/number либо массив
 сегментов: `['users', 0, 'name']`. Строка `"user.name"` остаётся отдельным ключом.
@@ -9370,8 +9374,14 @@ required mark, высоту, отступы colon и полей, vertical paddin
 tokens наследуются. Локальный style относится к нативному form; значения,
 validation, submit/reset, фокус и native attributes сохраняются при смене темы.
 Сверка с Ant Design — [form-theme](./tests/browser/form-theme.spec.ts),
-`?fixture=form-theme`. Реальные layouts остаются vertical/horizontal; декларация
-inlineItemMarginBottom переносится без добавления inline layout.
+`?fixture=form-theme`. Для inline `inlineItemMarginBottom` задаёт нижний отступ,
+общий margin — промежуток между полями; compact и нулевые значения поддержаны.
+Inline, локальные overrides и мобильный перенос проверены на 36 случаях LTR/RTL
+по [эталонным метрикам](./tests/browser/fixtures/ant-design-form-layout-reference.json):
+[браузер](./tests/browser/form-layout.spec.ts),
+[SSR и публичные props](./tests/package/form-layout.ssr.test.ts), `?fixture=form-layout`.
+Component=false по-прежнему передаёт контекст без native form и layout-wrapper;
+сам по себе контекст не создаёт flex-контейнер.
 
 Модель хранит скаляры, вложенные plain objects, массивы и экземпляры классов.
 `getFieldValue(name)` читает значение пути; `setFieldValue(name, value)` заменяет

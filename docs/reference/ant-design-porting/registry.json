@@ -4917,7 +4917,12 @@
         "tests/package/form-validate-first.ssr.test.ts",
         "tests/browser/form-validate-first.spec.ts",
         "tests/browser/fixtures/FormValidateFirstFixtures.svelte",
-        "tests/browser/fixtures/ant-design-form-validate-first-observation.json"
+        "tests/browser/fixtures/ant-design-form-validate-first-observation.json",
+        "tests/browser/form-layout.spec.ts",
+        "tests/browser/form-layout-metrics.ts",
+        "tests/browser/fixtures/FormLayoutFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-layout-reference.json",
+        "tests/package/form-layout.ssr.test.ts"
       ],
       "features": [
         {
@@ -5017,7 +5022,7 @@
             "tests/browser/form-theme.spec.ts",
             "tests/package/form-theme.ssr.test.ts"
           ],
-          "note": "Все 11 исходных declarations, включая internal verticalLabelHeight, подтверждены UMD; labelHeight override участвует в vertical default. Сверены 17 тем / 170 CSS-наборов: labels/required/colon/control/extra, horizontal/vertical/standalone, zero/undefined/CSS lengths, custom prefix и nested/reset/sibling scopes. Внутренний Row сбрасывает generic aliases как исходные Row/Col, сохраняя Form variables. Source direction-only оставляет физический LTR у Form/Item: raw observation сохранено в артефакте; сравнение использует явный DOM dir, соответствующий прежнему native ConfigProvider. Reactive updates сохраняют native store, values/errors/validation, labels/ARIA, DOM/focus/selection, FormData и submit/reset. Inline layout не добавлен; inlineItemMarginBottom подтверждён как declaration. Общий аудит Form v1 остаётся незавершённым."
+          "note": "Все 11 исходных declarations, включая internal verticalLabelHeight, подтверждены UMD; labelHeight override участвует в vertical default. Сверены 17 тем / 170 CSS-наборов: labels/required/colon/control/extra, horizontal/vertical/standalone, zero/undefined/CSS lengths, custom prefix и nested/reset/sibling scopes. Внутренний Row сбрасывает generic aliases как исходные Row/Col, сохраняя Form variables. Source direction-only оставляет физический LTR у Form/Item: raw observation сохранено в артефакте; сравнение использует явный DOM dir, соответствующий прежнему native ConfigProvider. Reactive updates сохраняют native store, values/errors/validation, labels/ARIA, DOM/focus/selection, FormData и submit/reset. Inline layout и inlineItemMarginBottom проверены в отдельной feature layouts. Общий аудит Form v1 остаётся незавершённым."
         },
         {
           "id": "inherited-variants",
@@ -5277,6 +5282,24 @@
             "tests/browser/fixtures/ant-design-form-validate-first-observation.json"
           ],
           "note": "FormItem.validateFirst false/default запускает все правила параллельно и собирает errors/warnings в порядке правил; true последовательно останавливается на первом сообщении, parallel выбирает первую завершившуюся ошибку. Блокирующие правила идут перед warningOnly без изменения caller array. Все-success ждёт все правила; warning-only parallel выбирает первое предупреждение по ответам. Ранний warning не обходит ожидающий блокирующий validator: подтверждённый дефект успешной validation/submit и потери поздней ошибки UMD 6.6.8 записан отдельно и не повторяется. Живое изменение mode действует на следующий запрос без remount. Сохранены validator(value, values), встроенные native сообщения/empty semantics, полный snapshot, silent metadata и строгие outOfDate/reset/unregister guards. Сверены 35 состояний неизменённого UMD и rc-form 1.8.6 validateUtil/Field; deprecated callback validators и React adapters не добавлены."
+        },
+        {
+          "id": "layouts",
+          "title": "Form inline и локальный layout FormItem",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/FormItem.svelte",
+            "src/lib/Form.svelte",
+            "tests/browser/form-layout.spec.ts",
+            "tests/browser/form-layout-metrics.ts",
+            "tests/browser/fixtures/FormLayoutFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-layout-reference.json",
+            "tests/package/form-layout.ssr.test.ts"
+          ],
+          "note": "Form.layout принимает inline с исходным flex/wrap, margin-inline-end и inlineItemMarginBottom; существующий default vertical сохранён. FormItem.layout horizontal/vertical имеет приоритет над ближайшим Form, undefined возвращает наследование. Используется существующий vendor CSS без новых правил и изменения прежних horizontal/vertical layouts. Сверены 36 случаев неизменённого UMD 6.6.8: viewport 1280/320, контейнер 640/272, LTR/RTL с явным native direction, default/compact/custom/zero tokens, local overrides и три parent layouts. Метрики включают относительные bounds, размеры/отступы labels/colon/input, flow и перенос; допуски не расширены. Реактивные переключения сохраняют DOM, фокус/выделение, values/errors/warnings; native FormData/validation/submit/reset и изоляция соседей сохранены. Component=false передаёт layout context без wrapper и без автоматического flex container; SSR публикует классы без браузерных side effects. Полный Form semantic/config/field API остаётся за пределами этого этапа."
         }
       ]
     },

@@ -26,7 +26,7 @@ export interface FormProps<Values extends FormValues> extends Omit<
   form: FormInstance<Values>;
   children: Snippet;
   /** @defaultValue 'vertical' */
-  layout?: 'vertical' | 'horizontal';
+  layout?: 'vertical' | 'horizontal' | 'inline';
   /** Оформление дочерних полей; undefined сбрасывает внешний Form, сохраняя ConfigProvider. */
   variant?: Variant;
   /** По умолчанию form; false оставляет контекст без native wrapper и DOM-атрибутов. */

@@ -15,6 +15,8 @@
     children: Snippet;
     help?: string;
     required?: boolean;
+    /** Локальный layout поля; иначе наследуется ближайший Form, standalone остаётся vertical. */
+    layout?: 'horizontal' | 'vertical';
     /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
     rules?: readonly ValidationRule[];
     /**
@@ -38,6 +40,7 @@
     children,
     help,
     required,
+    layout,
     rules,
     validateFirst,
     htmlFor,
@@ -51,6 +54,7 @@
   const generatedId = $props.id();
   let id = $derived(htmlFor ?? `ant-field-${generatedId}`);
   let path = $derived([...(list?.prefixName ?? []), ...formNamePath(name)]);
+  let resolvedLayout = $derived(layout ?? form?.layout ?? 'vertical');
   let errors = $derived(form?.getFieldError(path) ?? []);
   let warnings = $derived(form?.getFieldWarning(path) ?? []);
   let isRequired = $derived(required
@@ -153,7 +157,7 @@
 <div class={[
     'ant-form-item',
     componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
-    `ant-form-item-${form?.layout ?? 'vertical'}`,
+    `ant-form-item-${resolvedLayout}`,
     errors.length && 'ant-form-item-has-error',
     !errors.length && warnings.length && 'ant-form-item-has-warning',
     className
