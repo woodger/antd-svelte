@@ -24,6 +24,7 @@
     onFinish,
     onFinishFailed,
     onError,
+    rootClassName,
     class: className = '',
     style,
     ...attributes
@@ -135,11 +136,11 @@
 <form
   {...attributes}
   novalidate
-  class={[`ant-form ant-form-css-var ant-form-${layout} ${className}`,
+  class={[`ant-form ant-form-css-var ant-form-${layout}`,
     resolvedRequiredMark === false && 'ant-form-hide-required-mark',
-    componentTheme.className].filter(Boolean).join(' ')}
-  style={componentTheme.style
-    ? [componentTheme.style, style].filter(Boolean).join(';') : style}
+    componentTheme.className, config.form?.class, className, rootClassName].filter(Boolean).join(' ')}
+  style={componentTheme.style || config.form?.style
+    ? [componentTheme.style, config.form?.style, style].filter(Boolean).join(';') : style}
   aria-busy={form.isSubmitting || undefined}
   onsubmit={handleSubmit}
   onreset={handleReset}

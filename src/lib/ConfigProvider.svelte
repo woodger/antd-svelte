@@ -74,7 +74,7 @@
     theme?: ThemeConfig;
     /** Общее оформление полей и Card; локальные props, Form и component config имеют приоритет. */
     variant?: Variant;
-    /** Defaults подписей Form; undefined наследует record, любой объект заменяет его целиком. */
+    /** Defaults Form; undefined наследует record, любой объект заменяет его целиком. */
     form?: FormConfig;
     select?: SelectConfig;
     treeSelect?: TreeSelectConfig;

@@ -67,10 +67,12 @@ export interface FormProps<Values extends FormValues> extends Omit<
   onFinishFailed?: (error: FormValidationError<Values>) => void;
   /** Ошибка выполнения onFinish; ошибки validation поступают в onFinishFailed. */
   onError?: (error: unknown) => void;
+  /** Дополнительный класс native wrapper; component=false не создаёт корень. */
+  rootClassName?: string;
   class?: string;
 }
 
-/** Defaults подписей Form; undefined наследует родительский record, {} заменяет его. */
+/** Defaults Form; undefined наследует родительский record, {} заменяет его. */
 export type FormConfig = Pick<
-  FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap' | 'requiredMark'
+  FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap' | 'requiredMark' | 'class' | 'style'
 >;

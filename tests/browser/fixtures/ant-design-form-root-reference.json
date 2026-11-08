@@ -1,0 +1,610 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "two animation frames before capture",
+    "normalization": "native class/CSS string props mapped to React className/style; only owner classes sampled"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "metrics": {
+        "form": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "local-root",
+        "form": {
+          "class": "owner-local",
+          "rootClassName": "owner-escape",
+          "style": "color:rgb(44, 55, 66);padding-top:7px"
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [
+            "owner-local",
+            "owner-escape"
+          ],
+          "css": {
+            "color": "rgb(44, 55, 66)",
+            "outline-color": "rgb(44, 55, 66)",
+            "padding-top": "7px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "field-root",
+        "item": {
+          "class": "owner-field",
+          "rootClassName": "owner-field-escape",
+          "style": "color:rgb(77, 88, 99);padding-top:5px;margin-bottom:11px"
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [
+            "owner-field",
+            "owner-field-escape"
+          ],
+          "css": {
+            "color": "rgb(77, 88, 99)",
+            "outline-color": "rgb(77, 88, 99)",
+            "padding-top": "5px",
+            "margin-bottom": "11px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "config-root",
+        "parent": {
+          "class": "owner-parent",
+          "style": "color:rgb(12, 34, 56);outline-color:rgb(15, 25, 35);padding-top:3px"
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [
+            "owner-parent"
+          ],
+          "css": {
+            "color": "rgb(12, 34, 56)",
+            "outline-color": "rgb(15, 25, 35)",
+            "padding-top": "3px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "inherit",
+        "parent": {
+          "class": "owner-parent",
+          "style": "color:rgb(12, 34, 56);outline-color:rgb(15, 25, 35);padding-top:3px"
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [
+            "owner-parent"
+          ],
+          "css": {
+            "color": "rgb(12, 34, 56)",
+            "outline-color": "rgb(15, 25, 35)",
+            "padding-top": "3px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "config-reset",
+        "parent": {
+          "class": "owner-parent",
+          "style": "color:rgb(12, 34, 56);outline-color:rgb(15, 25, 35);padding-top:3px"
+        },
+        "child": {}
+      },
+      "metrics": {
+        "form": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "config-replace",
+        "parent": {
+          "class": "owner-parent",
+          "style": "color:rgb(12, 34, 56);outline-color:rgb(15, 25, 35);padding-top:3px"
+        },
+        "child": {
+          "class": "owner-child",
+          "style": "padding-top:6px"
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [
+            "owner-child"
+          ],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "6px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "local-over-config",
+        "parent": {
+          "class": "owner-parent",
+          "style": "color:rgb(12, 34, 56);outline-color:rgb(15, 25, 35);padding-top:3px"
+        },
+        "form": {
+          "class": "owner-local",
+          "rootClassName": "owner-escape",
+          "style": "color:rgb(44, 55, 66);padding-top:9px"
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [
+            "owner-parent",
+            "owner-local",
+            "owner-escape"
+          ],
+          "css": {
+            "color": "rgb(44, 55, 66)",
+            "outline-color": "rgb(15, 25, 35)",
+            "padding-top": "9px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-local-style",
+        "parent": {
+          "class": "owner-parent",
+          "style": "color:rgb(12, 34, 56);outline-color:rgb(15, 25, 35);padding-top:3px"
+        },
+        "form": {
+          "class": "owner-local",
+          "style": ""
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [
+            "owner-parent",
+            "owner-local"
+          ],
+          "css": {
+            "color": "rgb(12, 34, 56)",
+            "outline-color": "rgb(15, 25, 35)",
+            "padding-top": "3px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "field-css-vars",
+        "parent": {
+          "class": "owner-parent",
+          "style": "color:rgb(12, 34, 56);outline-color:rgb(15, 25, 35);padding-top:3px"
+        },
+        "item": {
+          "style": "--ant-form-label-color:rgb(123, 45, 67);--ant-form-label-font-size:18px"
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [
+            "owner-parent"
+          ],
+          "css": {
+            "color": "rgb(12, 34, 56)",
+            "outline-color": "rgb(15, 25, 35)",
+            "padding-top": "3px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgb(123, 45, 67)",
+            "outline-color": "rgb(123, 45, 67)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "18px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "component-false",
+        "parent": {
+          "class": "owner-parent",
+          "style": "color:rgb(12, 34, 56);outline-color:rgb(15, 25, 35);padding-top:3px"
+        },
+        "form": {
+          "component": false,
+          "class": "owner-local",
+          "rootClassName": "owner-escape",
+          "style": "padding-top:9px"
+        },
+        "item": {
+          "class": "owner-field",
+          "rootClassName": "owner-field-escape",
+          "style": "padding-top:5px"
+        }
+      },
+      "metrics": {
+        "form": null,
+        "item": {
+          "classes": [
+            "owner-field",
+            "owner-field-escape"
+          ],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "5px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "source-form-variant",
+        "parent": {
+          "variant": "filled"
+        }
+      },
+      "metrics": {
+        "form": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "item": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "24px",
+            "font-size": "14px"
+          }
+        },
+        "label": {
+          "classes": [],
+          "css": {
+            "color": "rgba(0, 0, 0, 0.88)",
+            "outline-color": "rgba(0, 0, 0, 0.88)",
+            "padding-top": "0px",
+            "margin-bottom": "0px",
+            "font-size": "14px"
+          }
+        },
+        "input": {
+          "value": "Alpha",
+          "filled": false,
+          "outlined": true
+        }
+      }
+    }
+  ],
+  "observations": [
+    {
+      "id": "source-form-variant",
+      "issue": "FormConfig declares variant but Form passes only its local variant to VariantContext; ConfigProvider.form.variant does not style the input."
+    }
+  ]
+}

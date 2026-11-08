@@ -54,6 +54,10 @@
      * Имеет приоритет над встроенной регистрацией и возвращается getFieldInstance без обёртки.
      */
     controlRef?: unknown;
+    /** Дополнительный класс корня поля; не передаётся в FormContext. */
+    rootClassName?: string;
+    /** Inline CSS корня после вычисленных компонентных токенов. */
+    style?: string;
     class?: string;
   }
 
@@ -75,6 +79,8 @@
     validateDebounce,
     htmlFor,
     controlRef,
+    rootClassName,
+    style,
     class: className = ''
   }: FormItemProps = $props();
 
@@ -210,8 +216,9 @@
     hidden && 'ant-form-item-hidden',
     errors.length && 'ant-form-item-has-error',
     !errors.length && warnings.length && 'ant-form-item-has-warning',
-    className
-  ]} style={componentTheme.style}>
+    className,
+    rootClassName
+  ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
   <Row class={['ant-form-item-row', componentTheme.className].filter(Boolean).join(' ')}>
     {#if hasLabel}
       <Col {...resolvedLabelCol} class={[

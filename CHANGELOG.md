@@ -135,6 +135,10 @@
 
 ### Added
 
+- Form/FormItem: rootClassName, inline style поля и ConfigProvider.form.class/style.
+  Сверены накопление классов, приоритет CSS, nested record replacement и
+  component=false; динамическое оформление сохраняет DOM/focus/metadata.
+
 - FormItem: label с числами, массивами и Svelte snippets; исходные renderability,
   title/colon и аргументы requiredMark. Reset сбрасывает локальный content label,
   rich label именует composite controls с сохранением пользовательских ARIA.

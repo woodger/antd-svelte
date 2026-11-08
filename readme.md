@@ -9357,6 +9357,18 @@ FormItem предоставляет label, status, required, description и об
 undefined возвращает наследование. Переключение layout не пересоздаёт controls,
 не меняет values/metadata и сохраняет фокус и выделение.
 
+Form и FormItem принимают rootClassName; FormItem также принимает строковый style.
+ConfigProvider.form.class/style оформляют native корень Form: классы config,
+local class и rootClassName накапливаются, inline CSS идёт после component theme
+в порядке config.style → local style. FormItem.style применяется к своему корню
+после компонентных токенов. Component=false сохраняет контекст без native wrapper.
+Undefined record наследуется, {} сбрасывает config; настройки и соседние поля
+не теряют значения, metadata, фокус и выделение при обновлениях оформления.
+Проверки: [12 эталонов](./tests/browser/fixtures/ant-design-form-root-reference.json),
+[браузер](./tests/browser/form-root.spec.ts),
+[публичные типы и SSR](./tests/package/form-root.ssr.test.ts), `?fixture=form-root`.
+В том же артефакте записан неработающий ConfigProvider.form.variant исходника 6.6.8.
+
 `Form.colon`, `labelAlign` и `labelWrap` наследуют defaults из `ConfigProvider.form`.
 При отсутствии настройки colon включён, labelAlign равен right, labelWrap — false.
 Локальные FormItem.colon/labelAlign имеют приоритет над Form; true включает colon
