@@ -5170,6 +5170,10 @@ CASCADER_SHOW_PARENT/CASCADER_SHOW_CHILD. Клик по содержимому �
 колонку, checkbox выбирает ветку. Default display — весь путь через ` / ` для
 single и последний label для multiple. MaxTagCount, responsive, maxTagTextLength,
 tagRender и maxTagPlaceholder меняют отображение, сохраняя выбранные пути.
+MaxTagTextLength сохраняет исходный title и считает UTF-16 units, как rc-select;
+при усечении корректной surrogate pair не остаётся её оборванная половина.
+Общие [raw замеры Select/Cascader](tests/browser/fixtures/ant-design-select-tag-text-reference.json)
+сохраняют исходный дефект Unicode для отдельного разбора.
 
 ShowSearch по умолчанию false. True включает поиск по любому label в пути;
 объект настраивает controlled searchValue/onSearch, filter/sort/render, limit,
@@ -8347,6 +8351,19 @@ Native paste/composition handlers сохраняют receiver input и preventDe
 а tags не создаёт неявный whitespace-only value. Уже выбранные disabled значения
 сохраняются, явный пробельный option допускается; дефекты upstream остаются в raw data
 для отдельного разбора.
+
+### Длина текста тегов
+
+MaxTagTextLength ограничивает только видимый текст multiple/tags и добавляет
+исходное `...` при усечении. Полные label/title, имена кнопок удаления и values
+сохраняются. Single игнорирует ограничение. Длина считается в UTF-16 units, как в
+rc-select; Native дополнительно не разрывает корректную surrogate pair. Усечённая
+половина emoji исключается целиком, сохраняя остальные правила slice, включая
+combining/ZWJ текст. Это не подсчёт grapheme clusters.
+
+[Общие эталоны Select/Cascader](tests/browser/fixtures/ant-design-select-tag-text-reference.json)
+включают исходные broken-pair результаты. Изменение длины не пересоздаёт input,
+не меняет выбранные значения и не вызывает value callbacks.
 
 ### Ограничение выбора
 

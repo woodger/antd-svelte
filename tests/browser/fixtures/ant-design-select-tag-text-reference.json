@@ -1,0 +1,458 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "observation": "selected text/title from Select and Cascader; maxTagTextLength counts UTF-16 units"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "select-default",
+        "text": "Alphabet",
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "Alphabet",
+          "title": "Alphabet"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-short",
+        "text": "Short",
+        "length": 10,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "Short",
+          "title": "Short"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-equal",
+        "text": "Alpha",
+        "length": 5,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-cut",
+        "text": "Alphabet",
+        "length": 3,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "Alp...",
+          "title": "Alphabet"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-zero",
+        "text": "Alpha",
+        "length": 0,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "...",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-empty",
+        "text": "",
+        "length": 0,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "",
+          "title": ""
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-negative",
+        "text": "Alpha",
+        "length": -1,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "Alph...",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-fraction",
+        "text": "Alpha",
+        "length": 2.9,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "Al...",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-infinite",
+        "text": "Alpha",
+        "length": "infinity",
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-nan",
+        "text": "Alpha",
+        "length": "nan",
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-emoji-split",
+        "text": "😀tag",
+        "length": 1,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "\ud83d...",
+          "title": "😀tag"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-emoji-pair",
+        "text": "😀tag",
+        "length": 2,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "😀...",
+          "title": "😀tag"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-middle-pair",
+        "text": "A😀tag",
+        "length": 2,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "A\ud83d...",
+          "title": "A😀tag"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-combining",
+        "text": "éclair",
+        "length": 1,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "e...",
+          "title": "éclair"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-zwj",
+        "text": "👩‍💻dev",
+        "length": 2,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "👩...",
+          "title": "👩‍💻dev"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "select-chinese",
+        "text": "中文标签",
+        "length": 2,
+        "component": "select"
+      },
+      "tags": [
+        {
+          "text": "中文...",
+          "title": "中文标签"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-default",
+        "text": "Alphabet",
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "Alphabet",
+          "title": "Alphabet"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-short",
+        "text": "Short",
+        "length": 10,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "Short",
+          "title": "Short"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-equal",
+        "text": "Alpha",
+        "length": 5,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-cut",
+        "text": "Alphabet",
+        "length": 3,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "Alp...",
+          "title": "Alphabet"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-zero",
+        "text": "Alpha",
+        "length": 0,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "...",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-empty",
+        "text": "",
+        "length": 0,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "",
+          "title": ""
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-negative",
+        "text": "Alpha",
+        "length": -1,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "Alph...",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-fraction",
+        "text": "Alpha",
+        "length": 2.9,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "Al...",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-infinite",
+        "text": "Alpha",
+        "length": "infinity",
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-nan",
+        "text": "Alpha",
+        "length": "nan",
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "Alpha",
+          "title": "Alpha"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-emoji-split",
+        "text": "😀tag",
+        "length": 1,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "\ud83d...",
+          "title": "😀tag"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-emoji-pair",
+        "text": "😀tag",
+        "length": 2,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "😀...",
+          "title": "😀tag"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-middle-pair",
+        "text": "A😀tag",
+        "length": 2,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "A\ud83d...",
+          "title": "A😀tag"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-combining",
+        "text": "éclair",
+        "length": 1,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "e...",
+          "title": "éclair"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-zwj",
+        "text": "👩‍💻dev",
+        "length": 2,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "👩...",
+          "title": "👩‍💻dev"
+        }
+      ]
+    },
+    {
+      "sample": {
+        "id": "cascader-chinese",
+        "text": "中文标签",
+        "length": 2,
+        "component": "cascader"
+      },
+      "tags": [
+        {
+          "text": "中文...",
+          "title": "中文标签"
+        }
+      ]
+    }
+  ]
+}

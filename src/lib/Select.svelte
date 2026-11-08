@@ -22,6 +22,7 @@
   import { ruRU, type SelectOption } from './types';
   import type { SelectProps, SelectSearchConfig } from './select.types';
   import { getSelectTagOptions } from './select-tags.engine';
+  import { getSelectTagText } from './select-tag-text.engine';
   import { resolveSelectTokenOptions, splitSelectTokens } from './select-token.engine';
   import Icon from './Icon.svelte';
 
@@ -33,6 +34,7 @@
     mode,
     tokenSeparators,
     maxCount,
+    maxTagTextLength,
     defaultValue,
     value = $bindable<SelectProps<Value, Mode>['value']>(),
     size,
@@ -681,7 +683,9 @@
               'ant-select-selection-item',
               (resolvedDisabled || tag.disabled) && 'ant-select-selection-item-disabled'
             ]} title={tag.label}>
-            <span class="ant-select-selection-item-content">{tag.label}</span>
+            <span class="ant-select-selection-item-content">{getSelectTagText(
+              tag.label, maxTagTextLength
+            )}</span>
             {#if !resolvedDisabled && !tag.disabled}<button type="button" class="ant-select-selection-item-remove" aria-label={`${config.locale.removeText
                 ?? ruRU.removeText} ${tag.label}`} onpointerdown={(event) => event.preventDefault()} onclick={() => remove(tag.value)}><Icon name="close" /></button>{/if}
           </span>

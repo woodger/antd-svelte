@@ -36,6 +36,7 @@
   import { useForm, useFormField } from './form-context';
   import { useCompact } from './space-compact-context';
   import { compactClasses } from './space-compact.engine';
+  import { getSelectTagText } from './select-tag-text.engine';
   import { connectPopup, getPopupActiveElement } from './popup.dom';
   import { createPopupContainer } from './popup-container.model.svelte.js';
   import { useComponentTheme } from './theme-component.svelte';
@@ -488,9 +489,7 @@
     onkeyup?.(event);
   }
   function tagText(item: typeof display[number]) {
-    return item.text !== undefined && maxTagTextLength !== undefined
-      && item.text.length > maxTagTextLength
-      ? `${item.text.slice(0, maxTagTextLength)}...` : item.text;
+    return item.text === undefined ? undefined : getSelectTagText(item.text, maxTagTextLength);
   }
   export function focus(options?: FocusOptions) {
     const target = editor ?? root?.querySelector<HTMLElement>(

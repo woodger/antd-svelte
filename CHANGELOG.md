@@ -9,6 +9,10 @@
 
 ### Added
 
+- Select поддерживает maxTagTextLength с полными title, remove names и form values.
+  Общая с Cascader функция сохраняет правила rc-select и не разрывает UTF-16 пары;
+  исходные Unicode-дефекты сохранены в raw reference.
+
 - Select поддерживает maxCount в multiple/tags: доступность options, ввод,
   tokenSeparators, reactive limit и сохранение существующих values. Native
   исправляет записанный обход лимита через controlled query на Enter/blur.

@@ -4041,7 +4041,15 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/select-tag-text.engine.ts",
+        "src/lib/select-tag-text.engine.test.ts",
+        "tests/browser/select-tag-text.spec.ts",
+        "tests/browser/fixtures/TagTextCase.svelte",
+        "tests/browser/fixtures/TagTextFixtures.svelte",
+        "tests/browser/fixtures/tag-text-cases.ts",
+        "tests/browser/fixtures/ant-design-select-tag-text-reference.json",
+        "tests/package/select-tag-text.ssr.test.ts"
       ],
       "features": [
         {
@@ -4198,6 +4206,23 @@
             "tests/package/config-variants.ssr.test.ts"
           ],
           "note": "Общий source priority local variant, Form, cascader.variant и global для trigger. Inline CascaderPanel по-прежнему не применяет trigger variant classes/config. Values/search/lazy/selection и semantic priorities сохранены."
+        },
+        {
+          "id": "native-tag-text-unicode",
+          "title": "Сохранение Unicode пары при усечении текста tag",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select-tag-text.engine.ts",
+            "src/lib/select-tag-text.engine.test.ts",
+            "tests/browser/select-tag-text.spec.ts",
+            "tests/browser/fixtures/TagTextCase.svelte",
+            "tests/browser/fixtures/TagTextFixtures.svelte",
+            "tests/browser/fixtures/tag-text-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tag-text-reference.json",
+            "tests/package/select-tag-text.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1 / rc-select 1.10.1, Select и Cascader. MaxTagTextLength=1 для 😀tag и =2 для A😀tag оставляет одинокий high surrogate перед ... . Raw select/cascader emoji-split и middle-pair сохраняют этот результат. Native исключает только разрезанную пару, сохраняя UTF-16 slice, title и full values; grapheme/combining/ZWJ semantics не меняются."
         }
       ]
     },
@@ -7599,7 +7624,15 @@
         "tests/browser/fixtures/SelectLimitFixtures.svelte",
         "tests/browser/fixtures/select-limit-cases.ts",
         "tests/browser/fixtures/ant-design-select-max-count-reference.json",
-        "tests/package/select-limit.ssr.test.ts"
+        "tests/package/select-limit.ssr.test.ts",
+        "src/lib/select-tag-text.engine.ts",
+        "src/lib/select-tag-text.engine.test.ts",
+        "tests/browser/select-tag-text.spec.ts",
+        "tests/browser/fixtures/TagTextCase.svelte",
+        "tests/browser/fixtures/TagTextFixtures.svelte",
+        "tests/browser/fixtures/tag-text-cases.ts",
+        "tests/browser/fixtures/ant-design-select-tag-text-reference.json",
+        "tests/package/select-tag-text.ssr.test.ts"
       ],
       "features": [
         {
@@ -7833,6 +7866,25 @@
           "note": "Ant Design 6.6.8 / rc-select 1.10.1: multiple/tags limit блокирует новые options и search на границе, разрешает deselect/remove/clear, не обрезает controlled/default values. Token arrays/functions ограничивают сырые части до lookup/disabled/dedup; NaN игнорируется, zero/negative блокируют добавление, Infinity не ограничивает. Native single, forms/reset/required/RTL/disabled, input DOM/search/focus при reactive limit сохранены. Raw official UMD corpus включает controlled query submit bypass; Native не добавляет tags сверх лимита ни Enter, ни blur."
         },
         {
+          "id": "tag-text-length",
+          "title": "Усечение видимого текста maxTagTextLength",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/Select.svelte",
+            "src/lib/select-tag-text.engine.ts",
+            "src/lib/select-tag-text.engine.test.ts",
+            "tests/browser/select-tag-text.spec.ts",
+            "tests/browser/fixtures/TagTextCase.svelte",
+            "tests/browser/fixtures/TagTextFixtures.svelte",
+            "tests/browser/fixtures/tag-text-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tag-text-reference.json",
+            "tests/package/select-tag-text.ssr.test.ts"
+          ],
+          "note": "Общий rc-select maxTagTextLength в multiple/tags, Source slice/ellipsis и UTF-16 units, default/zero/negative/fraction/NaN/Infinity. Full label/title/remove accessible names/values/FormData и single сохраняются; reactive length не заменяет input, не теряет focus и не вызывает value callback. Shared helper применяется также к существующему Cascader. Разрыв корректной surrogate pair исправлен явно; raw Source corpus сохранён."
+        },
+        {
           "id": "extended-api",
           "title": "LabelInValue, fieldNames/groups, render/semantic/config и остальные Source API",
           "state": "missing",
@@ -7904,6 +7956,23 @@
             "tests/package/select-limit.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: официальный UMD 6.6.8 / React 18.3.1, values=[a], maxCount=1 и controlled searchValue=held. Ввод блокируется без onSearch, но Enter/blur submit добавляет held сверх лимита. Raw controlled-query-enter/controlled-query-blur сохраняют исходные значения/события. Native сохраняет values=[a], query владельца и исходный open/closed lifecycle; новый synthetic option остаётся disabled и change не отправляется."
+        },
+        {
+          "id": "native-tag-text-unicode",
+          "title": "Сохранение Unicode пары при усечении текста tag",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select-tag-text.engine.ts",
+            "src/lib/select-tag-text.engine.test.ts",
+            "tests/browser/select-tag-text.spec.ts",
+            "tests/browser/fixtures/TagTextCase.svelte",
+            "tests/browser/fixtures/TagTextFixtures.svelte",
+            "tests/browser/fixtures/tag-text-cases.ts",
+            "tests/browser/fixtures/ant-design-select-tag-text-reference.json",
+            "tests/package/select-tag-text.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: official UMD 6.6.8 / React 18.3.1 / rc-select 1.10.1, Select и Cascader. MaxTagTextLength=1 для 😀tag и =2 для A😀tag оставляет одинокий high surrogate перед ... . Raw select/cascader emoji-split и middle-pair сохраняют этот результат. Native исключает только разрезанную пару, сохраняя UTF-16 slice, title и full values; grapheme/combining/ZWJ semantics не меняются."
         }
       ]
     },
