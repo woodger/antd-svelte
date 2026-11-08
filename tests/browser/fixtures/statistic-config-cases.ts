@@ -1,5 +1,5 @@
 import type {
-  StatisticConfig, StatisticProps, StatisticSemanticInfo, StatisticSemanticSlots
+  StatisticConfig, StatisticProps, StatisticSemanticInfo, StatisticSemanticSlots, ThemeConfig
 } from 'antd-svelte';
 
 interface StatisticConfigDescriptor {
@@ -22,6 +22,11 @@ export interface StatisticConfigSample {
   loading?: boolean;
   value?: string | number;
   kind?: string;
+  prefixCls?: string;
+  mode?: 'countup' | 'countdown';
+  theme?: Omit<ThemeConfig, 'algorithm'> & {
+    algorithm?: ('defaultAlgorithm' | 'darkAlgorithm' | 'compactAlgorithm')[];
+  };
 }
 
 const parts = ['root', 'header', 'title', 'content', 'value', 'prefix', 'suffix'] as const;

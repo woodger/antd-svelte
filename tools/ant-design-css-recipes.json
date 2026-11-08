@@ -396,6 +396,28 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Statistic: header/title/content/value/prefix/suffix и loading Skeleton.\n * Корни ограничены :where(.ant-statistic-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "statistic-prefix",
+    "output": "src/lib/vendor/statistic-prefix.css.js",
+    "expectedRules": 14,
+    "include": [
+      "\\.ant-statistic(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-statistic",
+        "replacement": ".ant-statistic-css-var"
+      },
+      {
+        "pattern": "\\.ant-statistic(?![-\\w])",
+        "replacement": ".ant-statistic:where(.ant-statistic-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Statistic prefix template: header/title/content/value/prefix/suffix и loading Skeleton; CSS data module.\n * Корни ограничены :where(.ant-statistic-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
+  },
+  {
     "id": "segmented",
     "output": "src/lib/vendor/segmented.css",
     "expectedRules": 38,

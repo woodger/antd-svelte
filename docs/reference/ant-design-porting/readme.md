@@ -145,6 +145,8 @@ defaults ограничены корнем, интеграция ColorPicker и�
 prefixCls; runtime сохраняет CSS variables/marker и ограничивает defaults корнем.
 Рецепт flex-prefix выводит data module из 32 правил Flex без typography reset;
 runtime ограничивает каждый selector собственным root.
+Рецепт statistic-prefix выводит data module из 14 правил Statistic; runtime
+сохраняет namespace токенов и изолирует alias prefixes marker своего корня.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.

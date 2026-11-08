@@ -456,6 +456,17 @@ statistic-record, любой собственный объект, включая
 [публичные типы и SSR](./tests/package/statistic-config.ssr.test.ts), `?fixture=statistic-config`.
 Прежние Svelte defaults, native RTL direction и доступный loading Skeleton сохранены.
 
+Локальный `prefixCls` меняет root и имена частей Statistic/Timer; пустая строка
+возвращает ant-statistic. CSS variables сохраняют namespace Statistic, marker
+ограничивает динамический CSS своим корнем. Соседние default-компоненты не меняются,
+включая prefix, совпадающий с ant-statistic-content или ant-statistic-css-var.
+Смена prefix сохраняет DOM корня, semantic styles, темы и native compact defaults.
+Сверка: [22 исходных случая и 4 смены prefix](./tests/browser/fixtures/ant-design-statistic-prefix-reference.json),
+[браузер](./tests/browser/statistic-prefix.spec.ts),
+[CSS boundary](./src/lib/statistic-prefix.test.ts),
+[публичный пакет и SSR](./tests/package/statistic-prefix.ssr.test.ts), `?fixture=statistic-prefix`.
+Глобальный ConfigProvider.prefixCls пока не перенесён.
+
 Loading сохраняет заголовок и заменяет content существующим Skeleton с active
 и paragraph=false. Используются его доступный статус и служебные обёртки;
 formatter и valueRender скрытого значения не вызываются. Statistic не добавляет
@@ -481,7 +492,7 @@ Svelte сохраняет существующий dir=rtl и LTR value; наб�
 Пример — `/ant-design#statistic`, фикстура — `?fixture=statistic`. Unit/SSR/Chromium
 проверяют форматирование, loading, snippets, semantic styles, темы, RTL и фокус.
 Рецепт statistic воспроизводит 14 правил vendor/statistic.css из закреплённого
-архива. PrefixCls пока отсутствует.
+архива; statistic-prefix выводит те же 14 правил CSS-модулем для локального prefixCls.
 
 StatisticTimer переносит актуальный Statistic.Timer и требует type=countdown/countup;
 Остальные props

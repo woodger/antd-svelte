@@ -5,6 +5,8 @@
   import { useDesignTokenContext } from './theme-context.svelte';
   import { formatStatisticValue } from './statistic.engine';
   import { mergeComponentSemantics } from './semantic-style.engine';
+  import { getStatisticPrefixCss } from './statistic-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import Skeleton from './Skeleton.svelte';
   import type {
     StatisticContent, StatisticProps, StatisticSemanticInfo, StatisticSemanticSlots
@@ -12,6 +14,7 @@
 
   let {
     value = 0,
+    prefixCls,
     title,
     prefix,
     suffix,
@@ -30,6 +33,8 @@
     ...rest
   }: StatisticProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(prefixCls || 'ant-statistic');
+  let prefixCss = $derived(getStatisticPrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Statistic');
   const designTokens = useDesignTokenContext();
   let skeletonPadding = $derived(componentThemeVariables('Skeleton', designTokens.state.token)
@@ -42,6 +47,7 @@
     props: {
       ...rest,
       value,
+      prefixCls,
       title,
       prefix,
       suffix,
@@ -85,18 +91,22 @@
 {/snippet}
 
 {#snippet valueNode()}
-  <span class={['ant-statistic-content-value', classes.value]} style={slotStyles.value}>
+  <span class={[`${componentPrefix}-content-value`, classes.value]} style={slotStyles.value}>
     {#if typeof formatter === 'function'}{@render content(formatted)}
     {:else if 'text' in parts}{parts.text}
-    {:else}<span class="ant-statistic-content-value-int">{parts.integer}</span>{#if parts.decimal}<span class="ant-statistic-content-value-decimal">{parts.decimal}</span>{/if}{/if}
+    {:else}<span class={`${componentPrefix}-content-value-int`}>{parts.integer}</span>{#if parts.decimal}<span class={`${componentPrefix}-content-value-decimal`}>{parts.decimal}</span>{/if}{/if}
   </span>
 {/snippet}
 
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`statistic-prefix:${componentPrefix}`} />
+{/if}
 <div {...rest} bind:this={nativeElement} dir={config.direction}
+  data-ant-statistic-prefix={prefixCss ? componentPrefix : undefined}
   class={[
-      'ant-statistic ant-statistic-css-var',
+      componentPrefix, 'ant-statistic-css-var',
       componentTheme.className,
-      config.direction === 'rtl' && 'ant-statistic-rtl',
+      config.direction === 'rtl' && `${componentPrefix}-rtl`,
       config.theme.compact && 'ant-statistic-compact',
       config.statistic?.class,
       className,
@@ -104,13 +114,13 @@
       classes.root
     ]}
   style={[componentTheme.style, slotStyles.root].filter(Boolean).join(';')}>
-  {#if hasContent(title)}<div class={['ant-statistic-header', classes.header]} style={slotStyles.header}><div class={['ant-statistic-title', classes.title]} style={slotStyles.title}>{@render content(title)}</div></div>{/if}
-  {#if loading}<Skeleton paragraph={false} active class="ant-statistic-skeleton" style={skeletonStyle} />
+  {#if hasContent(title)}<div class={[`${componentPrefix}-header`, classes.header]} style={slotStyles.header}><div class={[`${componentPrefix}-title`, classes.title]} style={slotStyles.title}>{@render content(title)}</div></div>{/if}
+  {#if loading}<Skeleton paragraph={false} active class={`${componentPrefix}-skeleton`} style={skeletonStyle} />
   {:else}
-    <div class={['ant-statistic-content', classes.content]} style={slotStyles.content ?? ''}>
-      {#if hasContent(prefix)}<span class={['ant-statistic-content-prefix', classes.prefix]} style={slotStyles.prefix}>{@render content(prefix)}</span>{/if}
+    <div class={[`${componentPrefix}-content`, classes.content]} style={slotStyles.content ?? ''}>
+      {#if hasContent(prefix)}<span class={[`${componentPrefix}-content-prefix`, classes.prefix]} style={slotStyles.prefix}>{@render content(prefix)}</span>{/if}
       {#if valueRender}{@render valueRender(valueNode)}{:else}{@render valueNode()}{/if}
-      {#if hasContent(suffix)}<span class={['ant-statistic-content-suffix', classes.suffix]} style={slotStyles.suffix}>{@render content(suffix)}</span>{/if}
+      {#if hasContent(suffix)}<span class={[`${componentPrefix}-content-suffix`, classes.suffix]} style={slotStyles.suffix}>{@render content(suffix)}</span>{/if}
     </div>
   {/if}
 </div>

@@ -9,6 +9,11 @@
 
 ### Added
 
+- Statistic и StatisticTimer поддерживают локальный prefixCls, fallback пустой
+  строки, смену namespace частей без замены DOM корня и изолированный CSS.
+  Новый рецепт statistic-prefix воспроизводит 14 правил закреплённого архива;
+  сохранены semantic styles, темы, compact defaults и соседние показатели.
+
 - ConfigProvider.statistic задаёт общие классы, стили и semantic callbacks для
   Statistic и StatisticTimer. Сохранены локальные приоритеты, defaults callbacks,
   вложенные scopes, native RTL/loading, форматирование и работа таймеров.

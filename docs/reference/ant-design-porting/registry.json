@@ -12603,7 +12603,16 @@
         "tests/browser/fixtures/StatisticConfigFixtures.svelte",
         "tests/browser/fixtures/statistic-config-cases.ts",
         "tests/browser/fixtures/ant-design-statistic-config-reference.json",
-        "tests/package/statistic-config.ssr.test.ts"
+        "tests/package/statistic-config.ssr.test.ts",
+        "src/lib/statistic-prefix.engine.ts",
+        "src/lib/statistic-prefix.test.ts",
+        "src/lib/vendor/statistic-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/statistic-prefix.spec.ts",
+        "tests/browser/statistic-prefix-metrics.ts",
+        "tests/browser/fixtures/StatisticPrefixFixtures.svelte",
+        "tests/browser/fixtures/ant-design-statistic-prefix-reference.json",
+        "tests/package/statistic-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -12713,14 +12722,35 @@
         },
         {
           "id": "prefix-cls",
-          "title": "Произвольный prefixCls",
+          "title": "Локальный prefixCls Statistic и StatisticTimer",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Statistic.svelte",
+            "src/lib/statistic.types.ts",
+            "tests/browser/fixtures/StatisticConfigCase.svelte",
+            "tests/browser/fixtures/statistic-config-cases.ts",
+            "src/lib/statistic-prefix.engine.ts",
+            "src/lib/statistic-prefix.test.ts",
+            "src/lib/vendor/statistic-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/statistic-prefix.spec.ts",
+            "tests/browser/statistic-prefix-metrics.ts",
+            "tests/browser/fixtures/StatisticPrefixFixtures.svelte",
+            "tests/browser/fixtures/ant-design-statistic-prefix-reference.json",
+            "tests/package/statistic-prefix.ssr.test.ts"
+          ],
+          "note": "StatisticProps.prefixCls и наследующий Timer меняют root/RTL/header/title/content/value/int/decimal/prefix/suffix/loading names; undefined/empty string возвращает ant-statistic. CSS-variable namespace/общий marker сохраняются, дополнительные selectors требуют data-ant-statistic-prefix своего root, включая alias ant-statistic-content/ant-statistic-css-var. Отдельный рецепт statistic-prefix воспроизводит 14 правил закреплённого dist в CSS data module; runtime дополнительно сохраняет прежние native title/compact defaults и экранирует closing style text. Callback props сохраняют raw prefixCls, local/config semantics, tokens/algorithms/cssVar.prefix и refs не меняются; Timer использует ту же Statistic boundary. Двадцать два unmodified UMD cases в LTR/RTL фиксируют normal/loading/countup/countdown, empty/default prefixes, alias names, local/global semantic styles, component tokens и compact algorithm. Четыре transitions подтверждают смену prefix, fallback/default и alias без замены root; sibling styles/classes не меняются. Source RTL root=ltr остаётся raw, native dir=rtl сохранён по source-theme-boundaries. Unit CSS-boundary, SSR/public props и обычные Statistic/Timer сценарии используют текущий пакет. Глобальный ConfigProvider.prefixCls не заявлен; runtime React, новые dependencies и script/config changes не добавлены."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Глобальный ConfigProvider.prefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
-            "src/lib/statistic.types.ts",
-            "src/lib/Statistic.svelte"
+            "src/lib/ConfigProvider.svelte"
           ],
-          "note": "Локальный и глобальный prefixCls пока не перенесены; ConfigProvider.statistic class/style/semantics поддерживаются отдельно."
+          "note": "Глобальный prefix context ещё не перенесён; Statistic/Timer поддерживают локальный prefixCls и отдельный ConfigProvider.statistic record."
         }
       ]
     },
