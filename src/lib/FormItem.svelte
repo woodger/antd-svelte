@@ -28,7 +28,7 @@
     tooltip?: FormItemTooltipContent;
     children: Snippet;
     help?: string;
-    /** Постоянное пояснение рядом с errors/warnings; false/null/undefined/'' скрывают его. */
+    /** Пояснение рядом с errors/warnings; reset пересоздаёт content, false/null/undefined/'' скрывают. */
     extra?: RenderEmptyContent;
     required?: boolean;
     /** Скрывает блок без удаления control, значения и регистрации validation. @defaultValue false */
@@ -286,7 +286,7 @@
         {/if}
         {#if hasExtra}
           <div id={extraId} class={['ant-form-item-extra', form?.classNames?.extra]}
-            style={form?.styles?.extra}><RenderContent value={extra} /></div>
+            style={form?.styles?.extra}>{#key resetKey}<RenderContent value={extra} />{/key}</div>
         {/if}
       </Col>
     </NoFormItemColumns>

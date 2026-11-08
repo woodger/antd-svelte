@@ -1035,6 +1035,9 @@
 
 ### Fixed
 
+- FormItem: resetFields сбрасывает локальное состояние extra выбранного поля,
+  как label/tooltip и upstream. Соседние slots, значения и фокус сохраняются.
+
 - FormItem: удалён лишний error-класс контейнера пояснений, как в upstream.
   Классы и цвета отдельных сообщений, role alert/status сохранены.
 

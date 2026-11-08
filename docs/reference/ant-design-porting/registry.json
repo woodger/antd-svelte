@@ -5034,7 +5034,12 @@
         "tests/browser/form-tooltip-metrics.ts",
         "tests/browser/fixtures/FormTooltipFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-tooltip-reference.json",
-        "tests/package/form-tooltip.ssr.test.ts"
+        "tests/package/form-tooltip.ssr.test.ts",
+        "tests/browser/form-explanation-reset.spec.ts",
+        "tests/browser/fixtures/FormExplanationResetFixtures.svelte",
+        "tests/browser/fixtures/FormExplanationCounter.svelte",
+        "tests/browser/fixtures/ant-design-form-explanation-reset-reference.json",
+        "tests/package/form-explanation-reset.ssr.test.ts"
       ],
       "features": [
         {
@@ -5351,9 +5356,14 @@
             "tests/browser/fixtures/ant-design-form-reset-fields-observation.json",
             "tests/browser/fixtures/ant-design-form-reset-conflicts-observation.json",
             "src/lib/form-reset.dom.ts",
-            "tests/browser/input-number.spec.ts"
+            "tests/browser/input-number.spec.ts",
+            "tests/browser/form-explanation-reset.spec.ts",
+            "tests/browser/fixtures/FormExplanationResetFixtures.svelte",
+            "tests/browser/fixtures/FormExplanationCounter.svelte",
+            "tests/browser/fixtures/ant-design-form-explanation-reset-reference.json",
+            "tests/package/form-explanation-reset.ssr.test.ts"
           ],
-          "note": "Опциональный readonly список NamePath: values восстанавливаются по пути, metadata выбирается точно; родитель не очищает metadata потомков сам по себе. Empty selection — no-op; [] как один путь восстанавливает store без выбора всех именованных bindings; неизвестный путь получает own undefined. Literal/numeric/string имена различаются, дубликаты не повторяют reset. Выбранный FormItem пересоздаёт children, полный reset также очищает локальное состояние обычных controls. Reset List пересоздаёт строки с сохранением key manager; Form defaults выше live root List initialValue, nested defaults не подставляются адресным reset; конфликт нескольких List defaults не выбирает произвольный. Соседние DOM/локальные черновики/фокус/выделение и standalone rules сохраняются. Строгая защита snapshot исключает поздние ошибки; disjoint validation остаётся текущей при отсутствии изменений store. Сверены 22 состояния неизменённого UMD после двух кадров и отдельный конфликт List. Подтверждённый stale input после reset родителя/typed alias сохранён в observations: source store уже новый, видимое значение старое; Svelte показывает актуальное. SSR не создаёт браузерных ресурсов. Прежний native focus/selection связанного контрола восстанавливается после remount внутри живого владельца, если фокус не переведён пользователем; InputNumber same-value draft reset сохраняет существующий контракт."
+          "note": "Опциональный readonly список NamePath: values восстанавливаются по пути, metadata выбирается точно; родитель не очищает metadata потомков сам по себе. Empty selection — no-op; [] как один путь восстанавливает store без выбора всех именованных bindings; неизвестный путь получает own undefined. Literal/numeric/string имена различаются, дубликаты не повторяют reset. Выбранный FormItem пересоздаёт children, полный reset также очищает локальное состояние обычных controls. Reset List пересоздаёт строки с сохранением key manager; Form defaults выше live root List initialValue, nested defaults не подставляются адресным reset; конфликт нескольких List defaults не выбирает произвольный. Соседние DOM/локальные черновики/фокус/выделение и standalone rules сохраняются. Строгая защита snapshot исключает поздние ошибки; disjoint validation остаётся текущей при отсутствии изменений store. Сверены 22 состояния неизменённого UMD после двух кадров и отдельный конфликт List. Подтверждённый stale input после reset родителя/typed alias сохранён в observations: source store уже новый, видимое значение старое; Svelte показывает актуальное. SSR не создаёт браузерных ресурсов. Прежний native focus/selection связанного контрола восстанавливается после remount внутри живого владельца, если фокус не переведён пользователем; InputNumber same-value draft reset сохраняет существующий контракт. Content extra теперь пересоздаётся по reset key выбранного поля вместе с label/tooltip/control; постоянный extra container/id и соседи сохраняются. Локальный state counters сверён по пяти снимкам неизменённого UMD: initial, incremented, selected, repeated и all. Прежний extra сохранял локальный state вместо source reset; поправлен только lifecycle content extra. Браузерные тесты проверяют удаление старого selected extra DOM и сохранение соседнего control/slot DOM, value, focus и selection; источник и package SSR приложены."
         },
         {
           "id": "dom-methods",
@@ -5441,9 +5451,14 @@
             "tests/browser/form-extra-metrics.ts",
             "tests/browser/fixtures/FormExtraFixtures.svelte",
             "tests/browser/fixtures/ant-design-form-extra-reference.json",
-            "tests/package/form-extra.ssr.test.ts"
+            "tests/package/form-extra.ssr.test.ts",
+            "tests/browser/form-explanation-reset.spec.ts",
+            "tests/browser/fixtures/FormExplanationResetFixtures.svelte",
+            "tests/browser/fixtures/FormExplanationCounter.svelte",
+            "tests/browser/fixtures/ant-design-form-explanation-reset-reference.json",
+            "tests/package/form-explanation-reset.ssr.test.ts"
           ],
-          "note": "Постоянное extra отображается вместе с errors/warnings и получает собственный _extra id в описании встроенного control. Общий RenderEmptyContent/RenderContent сохраняет strings, numbers, 0, arrays и Svelte snippets вместо ReactNode. Изучена isReactRenderable @rc-component/util 1.14.0: null/undefined/false/пустая строка отсутствуют, true/[]/opaque snippets оставляют контейнер. Четырнадцать состояний неизменённого UMD сверяют literal extra text, container color/font-size/line-height/display, порядок ARIA targets и нормализованный видимый текст описания; исходные DOM-пробелы сообщений сохранены. Изменение content/snippet/ARIA не заменяет input, values, focus или selection; внешние пользовательские aria-describedby остаются перед Form targets. Прежние native help priority и layout сообщений сохранены; полный upstream FormItem help override/additional motion и generic field adapters этим этапом не перенесены. SSR сохраняет caption/id/association без DOM API; dependencies/lockfile не меняются."
+          "note": "Постоянное extra отображается вместе с errors/warnings и получает собственный _extra id в описании встроенного control. Общий RenderEmptyContent/RenderContent сохраняет strings, numbers, 0, arrays и Svelte snippets вместо ReactNode. Изучена isReactRenderable @rc-component/util 1.14.0: null/undefined/false/пустая строка отсутствуют, true/[]/opaque snippets оставляют контейнер. Четырнадцать состояний неизменённого UMD сверяют literal extra text, container color/font-size/line-height/display, порядок ARIA targets и нормализованный видимый текст описания; исходные DOM-пробелы сообщений сохранены. Изменение content/snippet/ARIA не заменяет input, values, focus или selection; внешние пользовательские aria-describedby остаются перед Form targets. Прежние native help priority и layout сообщений сохранены; полный upstream FormItem help override/additional motion и generic field adapters этим этапом не перенесены. SSR сохраняет caption/id/association без DOM API; dependencies/lockfile не меняются. Content extra теперь пересоздаётся по reset key выбранного поля вместе с label/tooltip/control; постоянный extra container/id и соседи сохраняются. Локальный state counters сверён по пяти снимкам неизменённого UMD: initial, incremented, selected, repeated и all. Прежний extra сохранял локальный state вместо source reset; поправлен только lifecycle content extra. Браузерные тесты проверяют удаление старого selected extra DOM и сохранение соседнего control/slot DOM, value, focus и selection; источник и package SSR приложены."
         },
         {
           "id": "label-settings",

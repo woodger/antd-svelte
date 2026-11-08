@@ -9535,6 +9535,12 @@ snippet сохраняют контейнер, как текущая прове�
 Extra получает собственный id и добавляется к aria-describedby после сообщений;
 существующие внешние описания встроенного control сохраняются.
 Обновление extra или snippet сохраняет input, значение, фокус и выделение.
+ResetFields пересоздаёт content extra вместе с label, tooltip и control выбранного
+поля. Локальное состояние snippet сбрасывается; соседние поля сохраняют свои
+компоненты, значения, фокус и выделение. Выборочный, повторный и полный reset
+сверены с [эталоном](./tests/browser/fixtures/ant-design-form-explanation-reset-reference.json):
+[браузер](./tests/browser/form-explanation-reset.spec.ts),
+[SSR](./tests/package/form-explanation-reset.ssr.test.ts), `?fixture=form-explanation-reset`.
 Прежний приоритет help сохранён: errors/warnings заменяют help, extra остаётся.
 Четырнадцать случаев сверены с
 [upstream](./tests/browser/fixtures/ant-design-form-extra-reference.json):
