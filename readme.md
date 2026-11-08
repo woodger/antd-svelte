@@ -1925,7 +1925,8 @@ tooltip.getPopupContainer → ConfigProvider.getPopupContainer. Корневог
 ещё не закрыты; сохранены описанные выше native numeric/form/event contracts.
 
 Локальный `prefixCls` меняет BEM-классы обоих режимов, tracks, marks/dots и handles.
-Пустой prefix, как и undefined, выбирает `ant-slider`. Для собственного prefix
+Пустой prefix, как и undefined, наследует ConfigProvider.prefixCls
+(по умолчанию ant-slider). Для собственного prefix
 stylesheet из 54 исходных правил добавляется уже при SSR; defaults ограничены
 владельцем и не меняют соседние Slider. CSS variables сохраняют пространство
 Slider, а `theme.cssVar.prefix` настраивает их независимо от BEM-классов.
@@ -2314,9 +2315,10 @@ popup/anchor; геометрия проверяется отдельными н�
 ### Локальные префиксы и классы открытого trigger
 
 `prefixCls` меняет классы Tooltip/Popover, их slots, placements и preset colors.
-Defaults — `ant-tooltip` и `ant-popover`; пустая строка также выбирает default.
+Без локального prefix используется ConfigProvider.prefixCls; пустая строка также
+наследует его. По умолчанию это ant-tooltip и ant-popover.
 У Popconfirm default `ant-popconfirm`: его локальный prefix меняет только классы
-подтверждения, наружный Popover остаётся `ant-popover`, как upstream.
+подтверждения. Наружный Popover отдельно наследует общий prefix, как upstream.
 CSS variables и глобальные `.anticon` сохраняют имена. Это отдельная настройка
 от `theme.cssVar.prefix`; совместимые aliases и существующие native markers/hash
 остаются частью Svelte-адаптации.
@@ -9872,9 +9874,8 @@ PrefixCls задаёт базовый префикс CSS-классов; по у
 приоритет. Сейчас общий prefix подключён к App, Layout, LayoutSider,
 LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex,
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
-Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse и Affix.
-Остальные семейства подключаются
-отдельно. Например,
+Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
+Tooltip, Popover, Popconfirm и Slider. Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 
@@ -9928,6 +9929,18 @@ Alert, Collapse и активный Affix сверяются по
 Affix использует отдельные scroll targets; в SSR остаётся незакреплённым, как source.
 Обновление prefix сохраняет fixed node и редактор раскрытой панели Collapse,
 его значение, focus/selection и состояние остальных панелей.
+
+Tooltip, Popover, Popconfirm и single/range Slider сверяются по
+[45 исходным примерам и 15 переходам](./tests/browser/fixtures/ant-design-popup-prefix-reference.json):
+[browser](./tests/browser/popup-prefix.spec.ts),
+[SSR](./tests/package/popup-prefix.ssr.test.ts), `?fixture=popup-prefix`.
+Открытые подсказки Slider отдельно наследуют Tooltip prefix; локальный Slider prefix
+задаёт только owner class. Prefix Popconfirm не меняет prefix внешнего Popover.
+Смена общего prefix сохраняет trigger/control, popup DOM, draft/focus/selection и
+клавиатуру Slider. Проверка программно меняет контекст, как raw UMD transitions;
+внешний pointerdown проверяется отдельно и сохраняет прежнее Native dismiss behavior.
+Raw textContent сохранён; сравниваются непустые текстовые узлы без пробелов между
+Svelte slots. В SSR остаются прежние hidden shells, без открытия popup и DOM containers.
 
 ## Формы и валидация
 

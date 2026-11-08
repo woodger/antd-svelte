@@ -58,7 +58,7 @@
   } = $derived(props);
 
   const config = useConfig();
-  let prefix = $derived(prefixCls || 'ant-popconfirm');
+  let prefix = $derived(config.getPrefixCls('popconfirm', prefixCls));
   let prefixCss = $derived(getOverlayPrefixCss('popconfirm', prefix, prefixTemplate));
   let resolvedTrigger = $derived(trigger || config.popconfirm?.trigger || 'click');
   let enterDelay = $derived(mouseEnterDelay ?? config.popconfirm?.mouseEnterDelay ?? 0.1);

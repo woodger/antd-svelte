@@ -118,7 +118,7 @@
   let interaction: Interaction | null = null;
   let blurCallbacks: Pick<SliderSingleProps, 'onblur' | 'onBlur'> = {};
   let orientation = $derived(orientationProp ?? 'horizontal');
-  let prefix = $derived(prefixCls || 'ant-slider');
+  let prefix = $derived(config.getPrefixCls('slider', prefixCls));
   let customPrefix = $derived(prefix !== 'ant-slider');
   let prefixCss = $derived(getSliderPrefixCss(prefix));
   let options = $derived(resolveSliderOptions({ min, max, step: step ?? undefined }));

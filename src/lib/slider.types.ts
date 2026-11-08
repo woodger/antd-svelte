@@ -64,7 +64,7 @@ export interface SliderSingleProps extends Omit<
   ariaValueTextFormatterForHandle?: ((value: number) => string)
     | readonly ((value: number) => string)[];
   rootClassName?: string;
-  /** Локальный BEM prefix; CSS variables сохраняют пространство Slider. */
+  /** Локальный BEM prefix; иначе ConfigProvider. CSS variables сохраняют пространство Slider. */
   prefixCls?: string;
   classNames?: SliderSemanticValue<SliderClassNames, SliderSingleProps>;
   styles?: SliderSemanticValue<SliderStyles, SliderSingleProps>;

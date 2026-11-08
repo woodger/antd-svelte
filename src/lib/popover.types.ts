@@ -62,7 +62,7 @@ export interface PopoverProps {
   id?: string;
   /** Цвет панели и стрелки; title/content сохраняют собственные semantic цвета. */
   color?: TooltipColor;
-  /** Меняет классы панели, slots и default openClassName; CSS variables сохраняются. */
+  /** Локальный prefix панели; иначе ConfigProvider. CSS variables сохраняются. */
   prefixCls?: string;
   /** DOM-класс открытого trigger после hydration; по умолчанию `${prefixCls}-open`. */
   openClassName?: string;

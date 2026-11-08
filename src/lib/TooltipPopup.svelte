@@ -92,7 +92,7 @@
   } = $props();
 
   const config = useConfig();
-  let prefix = $derived(prefixCls || 'ant-tooltip');
+  let prefix = $derived(config.getPrefixCls('tooltip', prefixCls));
   let prefixCss = $derived(getOverlayPrefixCss('tooltip', prefix, prefixTemplate));
   let resolvedOpenClassName = $derived(openClassName || semanticProps?.openClassName || `${prefix}-open`);
   const componentTheme = useComponentTheme('Tooltip');

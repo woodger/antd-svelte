@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tooltip, Popover, Popconfirm и оба режима Slider наследуют ConfigProvider.prefixCls.
+  Префиксы Tooltip у ручек и внешнего Popover независимы от local owner prefix;
+  при обновлении сохраняются открытые поверхности, DOM, фокус и клавиатура Slider.
+
 - Alert, Collapse и Affix наследуют ConfigProvider.prefixCls. Смена prefix
   сохраняет fixed node, раскрытые панели, их поля и фокус; SSR не закрепляет Affix.
 

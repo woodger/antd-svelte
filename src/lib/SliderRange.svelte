@@ -51,7 +51,7 @@
   let tooltipDismissed = $state(false);
   let locked = $state(false);
   let blurCallbacks: Pick<SliderRangeProps, 'onBlur' | 'onblur'> = {};
-  let prefixCls = $derived(props.prefixCls || 'ant-slider');
+  let prefixCls = $derived(config.getPrefixCls('slider', props.prefixCls));
   let customPrefix = $derived(prefixCls !== 'ant-slider');
   let prefixCss = $derived(getSliderPrefixCss(prefixCls));
   let orientation = $derived(props.orientation ?? 'horizontal');

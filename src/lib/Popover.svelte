@@ -74,7 +74,7 @@
   } = $derived(props);
 
   const config = useConfig();
-  let prefix = $derived(prefixCls || 'ant-popover');
+  let prefix = $derived(config.getPrefixCls('popover', prefixCls));
   let prefixCss = $derived(getOverlayPrefixCss('popover', prefix, prefixTemplate));
   let resolvedOpenClassName = $derived(openClassName || `${prefix}-open`);
   const designTokens = useDesignTokenContext();
