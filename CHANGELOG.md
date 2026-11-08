@@ -9,6 +9,10 @@
 
 ### Added
 
+- Modal поддерживает необязательные title/children, scalar/Snippet title и явные
+  ARIA-имена. Native dialog, центрирование, focus и callbacks сохранены; исходные
+  потеря title=0 и игнорирование ARIA props записаны и не воспроизводятся.
+
 - Select поддерживает tagRender Snippet с normal/rest metadata, typed values,
   label Snippet и onClose. Сохранены custom mousedown/close event order, focus,
   native Tag composition, смена renderer и responsive overflow. Source disabled

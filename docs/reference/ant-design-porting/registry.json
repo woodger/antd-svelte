@@ -15494,7 +15494,12 @@
         "tests/browser/modal-theme-metrics.ts",
         "tests/browser/modal-theme.spec.ts",
         "tests/package/modal-theme.ssr.test.ts",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/modal.types.ts",
+        "tests/browser/modal-content.spec.ts",
+        "tests/browser/fixtures/ModalContentFixtures.svelte",
+        "tests/browser/fixtures/ant-design-modal-content-reference.json",
+        "tests/package/modal-content.ssr.test.ts"
       ],
       "features": [
         {
@@ -15553,12 +15558,60 @@
           "note": "18 исходных CSS defaults: шесть основных header/content/footer/title и внутренние spacing/borders/confirm metrics; boolean mask подготавливается, но не создаёт declaration и не меняет native modality. Финальные overrides, global/component algorithms, aliases, wireframe, дробные values, CSS lengths, нули/undefined и custom prefix. 19 UMD-тем / 228 raw CSS-состояний: default/custom/null footer, closable/hover, width 520/736, body text и шесть scopes. В теме Ant Design восстановлен исходный close wrapper для размера иконки; legacy markup/size сохранены. Native centering/top layer и прежний title close-space сохранены; Button/Input используют свои tokens. Theme updates/inherit reset и portal sync сохраняют dialog/container/Input DOM, draft/selection/focus, width, FormData и callbacks; SSR не открывает немодальное окно и не запускает browser timers. Confirm defaults не означают поддержку static confirm API; остальные API gaps и общий аудит остаются отдельными задачами."
         },
         {
+          "id": "optional-content-title",
+          "title": "Необязательные title/children и rich title Snippet",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Modal.svelte",
+            "src/lib/index.ts",
+            "src/lib/modal.types.ts",
+            "tests/browser/modal-content.spec.ts",
+            "tests/browser/fixtures/ModalContentFixtures.svelte",
+            "tests/browser/fixtures/ant-design-modal-content-reference.json",
+            "tests/package/modal-content.ssr.test.ts"
+          ],
+          "note": "Публичные ModalProps/ModalContent выделены в type boundary; прежний Modal.svelte type export сохранён. Missing/empty/null/false title не создаёт header, scalar/Snippet title связан с native h2 id, children optional. Explicit aria-labelledby/непустой aria-label имеют приоритет перед generated name. Native dialog/bind:open/SSR shell/centering/title close-space/callbacks и retained children сохранены; title updates не пересоздают input/dialog и не теряют draft/selection/focus. Общий аудит семейства и imperative API остаются отдельными задачами."
+        },
+        {
           "id": "extended-modal-api",
           "title": "Static confirm/useModal, semantic slots и полный render/config API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
           "note": "Публичный native Modal сохраняет согласованный bind:open/snippets/callbacks API. Static confirm/info/success/error/warning, useModal/context holder, полный focusable/mask config, ConfigProvider.modal, semantic classNames/styles, loading/Skeleton и modalRender ещё не перенесены. Source centering/position и lifecycle требуют отдельного аудита относительно согласованной native реализации."
+        },
+        {
+          "id": "native-zero-title",
+          "title": "Отображение числового title=0",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Modal.svelte",
+            "src/lib/index.ts",
+            "src/lib/modal.types.ts",
+            "tests/browser/modal-content.spec.ts",
+            "tests/browser/fixtures/ModalContentFixtures.svelte",
+            "tests/browser/fixtures/ant-design-modal-content-reference.json",
+            "tests/package/modal-content.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: Raw official UMD 6.6.8 / rc-dialog study 1.10.0 не создаёт header/aria-labelledby для title=0. Native сохраняет 0 как видимый h2 title с generated name; string empty/null/false остаются без header."
+        },
+        {
+          "id": "native-explicit-aria",
+          "title": "Применение явных ARIA-имён к dialog",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Modal.svelte",
+            "src/lib/index.ts",
+            "src/lib/modal.types.ts",
+            "tests/browser/modal-content.spec.ts",
+            "tests/browser/fixtures/ModalContentFixtures.svelte",
+            "tests/browser/fixtures/ant-design-modal-content-reference.json",
+            "tests/package/modal-content.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: Raw official UMD 6.6.8 / rc-dialog study 1.10.0 не переносит aria-label и aria-labelledby на role=dialog; source Panel строит только generated title association. Native применяет attrs к native dialog, учитывает приоритет явного имени и не меняет focus/modal lifecycle."
         }
       ]
     },

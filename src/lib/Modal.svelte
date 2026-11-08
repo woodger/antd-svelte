@@ -1,48 +1,22 @@
 <script lang="ts">
   import NoCompactStyle from './NoCompactStyle.svelte';
-  import type { Snippet } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { useWatermarkPanel } from './watermark-context';
   import { createDialogContainer } from './dialog-container.model.svelte.js';
-  import type { GetContainer } from './types';
+  import type { ModalContent, ModalProps as ModalComponentProps } from './modal.types';
   import Button from './Button.svelte';
   import Icon from './Icon.svelte';
 
-  /** Модальный native dialog с управлением open и snippets содержимого/footer. */
-  export interface ModalProps {
-    /** Поддерживает bind:open. */
-    open?: boolean;
-    title: string;
-    children: Snippet;
-    footer?: Snippet | null;
-    /** @defaultValue 520 */
-    width?: number;
-    /** @defaultValue true */
-    closable?: boolean;
-    /** @defaultValue true */
-    keyboard?: boolean;
-    /** Пока перенесён только closable; по умолчанию true. */
-    mask?: { closable?: boolean; };
-    /** @defaultValue false */
-    confirmLoading?: boolean;
-    okText?: string;
-    cancelText?: string;
-    onOk?: () => void;
-    onCancel?: () => void;
-    /**
-     * Undefined наследует ConfigProvider; false оставляет DOM на месте.
-     * Global getter вызывается без trigger.
-     */
-    getContainer?: GetContainer;
-    class?: string;
-  }
+  export type ModalProps = ModalComponentProps;
 
   let {
     open = $bindable(false),
     title,
     children,
+    'aria-label': ariaLabel,
+    'aria-labelledby': ariaLabelledBy,
     footer,
     width = 520,
     closable = true,
@@ -63,6 +37,7 @@
   const watermarkPanel = useWatermarkPanel();
   const generatedId = $props.id();
   const titleId = `ant-modal-${generatedId}`;
+  let hasTitle = $derived(title !== undefined && title !== null && title !== false && title !== '');
   let dialog = $state<HTMLDialogElement>();
   let backdropPointer = false;
   const container = createDialogContainer(() => ({
@@ -148,6 +123,11 @@
   .ant-modal-close { display: flex; align-items: center; justify-content: center; }
 </style>
 
+{#snippet content(value: ModalContent | undefined)}
+  {#if typeof value === 'function'}{@render value()}
+  {:else if typeof value !== 'boolean'}{value ?? ''}{/if}
+{/snippet}
+
 <NoCompactStyle>
 {#key container.key}
 <dialog
@@ -156,7 +136,8 @@
   style={componentTheme.style}
   style:width={`${width}px`}
   dir={config.direction}
-  aria-labelledby={titleId}
+  aria-label={ariaLabel}
+  aria-labelledby={ariaLabelledBy ?? (ariaLabel?.trim() ? undefined : hasTitle ? titleId : undefined)}
   aria-modal="true"
   oncancel={handleCancel}
   onclose={event => {
@@ -173,8 +154,8 @@
           {#if designTheme.enabled}<span class="ant-modal-close-x"><Icon name="close" /></span>{:else}<Icon name="close" />{/if}
         </button>
       {/if}
-      <div class="ant-modal-header"><h2 id={titleId} class="ant-modal-title">{title}</h2></div>
-      <div class="ant-modal-body">{@render children()}</div>
+      {#if hasTitle}<div class="ant-modal-header"><h2 id={titleId} class="ant-modal-title">{@render content(title)}</h2></div>{/if}
+      <div class="ant-modal-body">{@render children?.()}</div>
       {#if footer !== null}
         <div class="ant-modal-footer">
           {#if footer}

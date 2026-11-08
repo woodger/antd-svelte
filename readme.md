@@ -3442,6 +3442,14 @@ DEV diagnostics пока не поддерживаются.
 
 Modal сохраняет нативный dialog, `bind:open`, footer/children snippets и существующие
 правила onOk/onCancel, confirmLoading, Escape и закрытия по фону.
+Title и children необязательны. Title принимает scalar либо Snippet; пустой/null/false
+title убирает header, число 0 остаётся видимым. Без видимого заголовка задайте
+aria-label или aria-labelledby. Явные ARIA-имена применяются к самому dialog;
+aria-labelledby имеет приоритет, затем непустой aria-label, затем generated title id.
+Смена title сохраняет dialog, draft, selection и focus.
+[Raw content/ARIA случаи](./tests/browser/fixtures/ant-design-modal-content-reference.json)
+фиксируют исходные исключения: React теряет title=0 и явные ARIA props. Native
+показывает 0 и сохраняет имя, заданное владельцем.
 Закрытие по фону настраивается через mask={{ closable: false }}; по умолчанию
 разрешено. Прежний maskClosable удалён. Остальные настройки mask пока не перенесены.
 

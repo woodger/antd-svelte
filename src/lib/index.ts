@@ -769,7 +769,7 @@ export type {
   FormProps, FormConfig, FormScrollOptions, FormRequiredMark, FormRequiredMarkInfo, FormLocale,
   FormSemanticSlots, FormSemantic, FormTooltipProps, FormItemTooltip
 } from './form.types';
-export type { ModalProps } from './Modal.svelte';
+export type { ModalProps, ModalContent } from './modal.types';
 export type { ConfigProviderProps } from './ConfigProvider.svelte';
 export type {
   WaveConfig,

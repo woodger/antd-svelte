@@ -1,0 +1,156 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcDialogStudyVersion": "1.10.0",
+    "observation": "inline opened modal header/title and generated aria-labelledby"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "missing"
+      },
+      "result": {
+        "headers": 0,
+        "title": null,
+        "labelledBy": false,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "string",
+        "title": "Title"
+      },
+      "result": {
+        "headers": 1,
+        "title": "Title",
+        "labelledBy": true,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "empty",
+        "title": ""
+      },
+      "result": {
+        "headers": 0,
+        "title": null,
+        "labelledBy": false,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "null",
+        "title": null
+      },
+      "result": {
+        "headers": 0,
+        "title": null,
+        "labelledBy": false,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "false",
+        "title": false
+      },
+      "result": {
+        "headers": 0,
+        "title": null,
+        "labelledBy": false,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "zero",
+        "title": 0
+      },
+      "result": {
+        "headers": 0,
+        "title": null,
+        "labelledBy": false,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "number",
+        "title": 7
+      },
+      "result": {
+        "headers": 1,
+        "title": "7",
+        "labelledBy": true,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "node",
+        "title": "node"
+      },
+      "result": {
+        "headers": 1,
+        "title": "Rich title",
+        "labelledBy": true,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "aria-label",
+        "title": "Title",
+        "label": "Explicit"
+      },
+      "result": {
+        "headers": 1,
+        "title": "Title",
+        "labelledBy": true,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "aria-labelledby",
+        "title": "Title",
+        "labelledBy": "external-title"
+      },
+      "result": {
+        "headers": 1,
+        "title": "Title",
+        "labelledBy": true,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    },
+    {
+      "sample": {
+        "id": "aria-missing",
+        "label": "Explicit"
+      },
+      "result": {
+        "headers": 0,
+        "title": null,
+        "labelledBy": false,
+        "externalLabelledBy": false,
+        "ariaLabel": null
+      }
+    }
+  ]
+}
