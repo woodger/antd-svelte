@@ -1,4 +1,14 @@
 export { default as ImagePreviewGroup } from './ImagePreviewGroup.svelte';
+export { default as ModalHolder } from './ModalHolder.svelte';
+export { createModal } from './modal.model.svelte.js';
+export type {
+  ModalConfirmType,
+  ModalConfirmAction,
+  ModalConfirmConfig,
+  ModalConfirmHandle,
+  ModalInstance,
+  ModalHolderProps
+} from './modal-confirm.types';
 export { getTableData } from './table.engine';
 export { getPaginationState } from './pagination.engine';
 export type {

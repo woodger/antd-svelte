@@ -9,6 +9,11 @@
 
 ### Added
 
+- createModal и ModalHolder: пять контекстных подтверждений, update/destroy,
+  await результата, ручные/async callbacks, loading и retry. Тема, locale, RTL,
+  native modality и focus сохраняются; source dangling await при destroy записан
+  отдельно. Удаление открытого Modal возвращает фокус после удаления DOM.
+
 - Modal поддерживает необязательные title/children, scalar/Snippet title и явные
   ARIA-имена. Native dialog, центрирование, focus и callbacks сохранены; исходные
   потеря title=0 и игнорирование ARIA props записаны и не воспроизводятся.

@@ -1,0 +1,341 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcDialogStudyVersion": "1.10.0",
+    "observation": "Modal.useModal holder; every handle is awaited; update/destroy/manual/async actions"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "confirm",
+        "type": "confirm"
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 1,
+        "settled": null,
+        "events": [],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "info",
+        "type": "info"
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 1,
+        "settled": null,
+        "events": [],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "success",
+        "type": "success"
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 1,
+        "settled": null,
+        "events": [],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "error",
+        "type": "error"
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 1,
+        "settled": null,
+        "events": [],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "warning",
+        "type": "warning"
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 1,
+        "settled": null,
+        "events": [],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "update-object",
+        "type": "confirm",
+        "update": "object"
+      },
+      "before": {
+        "title": "Changed title",
+        "content": "Changed content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 1,
+        "settled": null,
+        "events": [],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "update-function",
+        "type": "confirm",
+        "update": "function"
+      },
+      "before": {
+        "title": "Confirm title updated",
+        "content": "Confirm content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 1,
+        "settled": null,
+        "events": [],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "ok",
+        "type": "confirm",
+        "action": "ok"
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 0,
+        "settled": true,
+        "events": [
+          "ok",
+          "after-close",
+          "result:true"
+        ],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "cancel",
+        "type": "confirm",
+        "action": "cancel"
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 0,
+        "settled": false,
+        "events": [
+          "cancel",
+          "after-close",
+          "result:false"
+        ],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "destroy",
+        "type": "confirm",
+        "action": "destroy"
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "after": {
+        "dialogs": 0,
+        "settled": null,
+        "events": [
+          "after-close"
+        ],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "manual-ok",
+        "type": "confirm",
+        "action": "ok",
+        "manual": true
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "pending": {
+        "dialogs": 1,
+        "settled": null,
+        "loading": false
+      },
+      "after": {
+        "dialogs": 0,
+        "settled": true,
+        "events": [
+          "ok",
+          "result:true",
+          "after-close"
+        ],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "async-ok",
+        "type": "confirm",
+        "action": "ok",
+        "async": true
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "pending": {
+        "dialogs": 1,
+        "settled": null,
+        "loading": true
+      },
+      "after": {
+        "dialogs": 0,
+        "settled": true,
+        "events": [
+          "ok",
+          "result:true",
+          "after-close"
+        ],
+        "loading": false
+      }
+    },
+    {
+      "sample": {
+        "id": "async-reject",
+        "type": "confirm",
+        "action": "ok",
+        "async": true,
+        "reject": true
+      },
+      "before": {
+        "title": "Confirm title",
+        "content": "Confirm content",
+        "buttons": [
+          "Cancel",
+          "OK"
+        ],
+        "width": "416px",
+        "closable": false
+      },
+      "pending": {
+        "dialogs": 1,
+        "settled": null,
+        "loading": true
+      },
+      "after": {
+        "dialogs": 1,
+        "settled": null,
+        "events": [
+          "ok"
+        ],
+        "loading": false
+      }
+    }
+  ]
+}

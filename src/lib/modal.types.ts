@@ -29,6 +29,8 @@ export interface ModalProps {
   cancelText?: string;
   onOk?: () => void;
   onCancel?: () => void;
+  /** Вызывается после фактического закрытия native dialog. */
+  afterClose?: () => void;
   /**
    * Undefined наследует ConfigProvider; false оставляет DOM на месте.
    * Global getter вызывается без trigger.
@@ -36,4 +38,3 @@ export interface ModalProps {
   getContainer?: GetContainer;
   class?: string;
 }
-

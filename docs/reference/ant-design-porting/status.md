@@ -6,7 +6,7 @@
 
 Эталон: Ant Design 6.6.8, commit `984592267de88fbf9cdaecc96a56629e721c709d`.
 
-Каталог: **73 семейств**, публичных Svelte-компонентов: **109**.
+Каталог: **73 семейств**, публичных Svelte-компонентов: **110**.
 Есть публичная реализация у **69** семейств; отсутствует у **4**.
 Проверенный объём v1 покрыт у **57**; требуется аудит у **12**; частично покрыт у **0**.
 
@@ -75,7 +75,7 @@ Candidate означает запись каталога, для которой 
 | [Alert](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/alert) | feedback | target | Alert | Согласованный v1 покрыт | Сохраняемые native motion, close presentation, ARIA/focus и layout (partial); Общий ConfigProvider prefix и React diagnostics (missing); Framework differences ErrorBoundary (partial) |
 | [Drawer](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/drawer) | feedback | target | Drawer | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Немодальные панели, push и resize (missing); Локальный getContainer и ConfigProvider fallback (partial) |
 | [Message](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/message) | feedback | target | MessageHolder, createMessage | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Наблюдение upstream: горизонтальное переполнение длинного слова (partial) |
-| [Modal](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/modal) | feedback | target | Modal | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Static confirm/useModal, semantic slots и полный render/config API (missing); Отображение числового title=0 (partial); Применение явных ARIA-имён к dialog (partial) |
+| [Modal](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/modal) | feedback | target | Modal, ModalHolder, createModal | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Global static API, semantic slots и полный render/config API (missing); Отображение числового title=0 (partial); Применение явных ARIA-имён к dialog (partial); Завершение await при destroy контекстного подтверждения (partial) |
 | [Notification](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/notification) | feedback | target | NotificationHolder, createNotification | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Наблюдение upstream: потеря равных alias и status background другого prefix (partial); Наблюдение upstream: недоступный close при undefined width и zero actions overflow (partial); Полный static/config/semantic API, stack и встроенный progress (missing) |
 | [Popconfirm](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/popconfirm) | feedback | target | Popconfirm | Требуется аудит v1 | Подробный аудит согласованного API v1 (unreviewed); Fresh/cache supported props и opaque Snippet boundary (partial) |
 | [Progress](https://github.com/ant-design/ant-design/tree/984592267de88fbf9cdaecc96a56629e721c709d/components/progress) | feedback | target | Progress | Согласованный v1 покрыт | Общий prefix и React diagnostics (missing); Сохраняемые Svelte/native contracts (partial) |

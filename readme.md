@@ -3460,7 +3460,7 @@ component algorithms, CSS lengths и custom prefix; Button/Input внутри с
 Тема обновляется без потери модальности, DOM, draft, selection и focus, включая
 getContainer. Нативное центрирование и резерв места title под close сохранены.
 [Сверка с официальным UMD](./docs/reference/theme-context.md#тема-modal) не означает
-поддержку пока отсутствующих static confirm methods и полного render/config API.
+поддержку полного render/config API. Контекстные подтверждения описаны ниже.
 
 GetContainer принимает DOM-узел, DocumentFragment (включая ShadowRoot), CSS-селектор,
 функцию без аргументов либо false. Локальное undefined использует
@@ -3498,6 +3498,62 @@ children сохранены; полное API Modal, semantic styles и render h
 [browser-проверки](./tests/browser/dialog-container.spec.ts) и
 [проверки взаимодействия](./tests/browser/dialog-container-interaction.spec.ts),
 фикстура — `?fixture=dialog-container`.
+
+### Контекстные подтверждения Modal
+
+`createModal()` и единственный `ModalHolder` заменяют React `Modal.useModal()`.
+Holder размещается под нужным ConfigProvider: открытые подтверждения наследуют его
+тему, локаль, RTL и контейнер, включая последующие изменения контекста.
+
+```svelte
+<script lang="ts">
+  import { Button, ModalHolder, createModal } from 'antd-svelte';
+  const modal = createModal();
+
+  async function confirm() {
+    const accepted = await modal.confirm({ title: 'Продолжить?', content: 'Подтвердите действие.' });
+    if (accepted) {
+      // Выполнить подтверждённое действие.
+    }
+  }
+</script>
+
+<Button onclick={confirm}>Продолжить</Button>
+<ModalHolder {modal} />
+```
+
+Методы info/success/error/warning/confirm возвращают handle с destroy(),
+update(object | previous => patch) и await результата true/false. Confirm показывает
+OK и Cancel; остальные типы — только OK. По умолчанию ширина 416px, close скрыт,
+Escape разрешён, закрытие по фону запрещено. Нативное центрирование сохранено.
+Title/content и подписи кнопок принимают scalar/Snippet; icon — Snippet/null/false,
+footer — Snippet/null. Опции okCancel, closable, keyboard, mask.closable,
+getContainer и class применяются отдельно к каждому подтверждению.
+
+Callback onOk/onCancel без аргумента закрывает окно после синхронного результата.
+Callback с аргументом close оставляет закрытие владельцу. Возвращённый Promise
+включает loading соответствующей кнопки: fulfillment закрывает окно, rejection
+оставляет его для повторного действия. Повторное нажатие во время ожидания
+не запускает callback заново. Escape/close/mask закрывают сразу с вызовом onCancel;
+они доступны и при ожидающем onOk. Destroy не вызывает onCancel. AfterClose
+вызывается после фактического закрытия native dialog, один раз; уничтожение
+ещё не смонтированного подтверждения завершает его сразу.
+
+Destroy и удаление holder завершают ожидающие handles с false; поздние async
+результаты не возвращают окно. Удаление holder не вызывает onCancel/afterClose,
+освобождает модальность и возвращает фокус, если владелец не перевёл его сам.
+Отсоединённый экземпляр повторно не подключается: создайте новый createModal().
+В SSR фабрика не обращается к DOM, а holder выводит закрытые dialog shells.
+
+[13 исходных сценариев](./tests/browser/fixtures/ant-design-modal-controller-reference.json)
+сняты с официального UMD. Source destroy оставляет await незавершённым; это
+исключение записано и не воспроизводится. Асинхронный rejection использует
+поведение исходного await-режима, без unhandled rejection. Прежние Native
+подписи кнопок из locale.okText/cancelText сохранены. Глобальные static methods,
+полные button/focusable/semantic/render options пока не перенесены. Проверки:
+[модель](./src/lib/modal.model.test.ts),
+[браузер](./tests/browser/modal-controller.spec.ts),
+[SSR и декларации](./tests/package/modal-controller.ssr.test.ts).
 
 ## Drawer
 

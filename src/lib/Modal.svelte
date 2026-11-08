@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { tick } from 'svelte';
   import NoCompactStyle from './NoCompactStyle.svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
@@ -27,6 +28,7 @@
     cancelText,
     onOk,
     onCancel,
+    afterClose,
     getContainer,
     class: className = ''
   }: ModalProps = $props();
@@ -40,6 +42,7 @@
   let hasTitle = $derived(title !== undefined && title !== null && title !== false && title !== '');
   let dialog = $state<HTMLDialogElement>();
   let backdropPointer = false;
+  let focusTrigger: HTMLElement | undefined;
   const container = createDialogContainer(() => ({
     component: 'modal',
     getContainer,
@@ -56,6 +59,7 @@
 
     if (open && !dialog.matches(':modal')) {
       if (dialog.open) dialog.close();
+      focusTrigger = dialog.ownerDocument.activeElement as HTMLElement | undefined;
       dialog.showModal();
     } else if (!open && dialog.open) {
       dialog.close();
@@ -64,7 +68,19 @@
 
   function connectDialog(node: HTMLDialogElement) {
     return () => {
+      const document = node.ownerDocument;
+      const active = document.activeElement;
+      const trigger = focusTrigger;
+      const restore = node.open && (active === document.body || !active || node.contains(active));
       if (node.open) node.close();
+      if (restore) {
+        void tick().then(() => {
+          const current = document.activeElement;
+          if (trigger?.isConnected && (current === document.body || !current || current === node)) {
+            trigger.focus();
+          }
+        });
+      }
     };
   }
 
@@ -141,8 +157,10 @@
   aria-modal="true"
   oncancel={handleCancel}
   onclose={event => {
-      if (event.currentTarget === dialog && !dialog.open)
+      if (event.currentTarget === dialog && !dialog.open) {
         open = false;
+        afterClose?.();
+      }
     }}
   {@attach container.attach}
   {@attach connectDialog}

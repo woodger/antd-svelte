@@ -15452,7 +15452,9 @@
         {
           "upstream": "Modal",
           "local": [
-            "Modal"
+            "Modal",
+            "ModalHolder",
+            "createModal"
           ]
         }
       ],
@@ -15499,7 +15501,16 @@
         "tests/browser/modal-content.spec.ts",
         "tests/browser/fixtures/ModalContentFixtures.svelte",
         "tests/browser/fixtures/ant-design-modal-content-reference.json",
-        "tests/package/modal-content.ssr.test.ts"
+        "tests/package/modal-content.ssr.test.ts",
+        "src/lib/ModalHolder.svelte",
+        "src/lib/ModalConfirmation.svelte",
+        "src/lib/modal.model.svelte.ts",
+        "src/lib/modal-confirm.types.ts",
+        "src/lib/modal.model.test.ts",
+        "tests/browser/fixtures/ModalControllerFixtures.svelte",
+        "tests/browser/fixtures/ant-design-modal-controller-reference.json",
+        "tests/browser/modal-controller.spec.ts",
+        "tests/package/modal-controller.ssr.test.ts"
       ],
       "features": [
         {
@@ -15574,12 +15585,30 @@
           "note": "Публичные ModalProps/ModalContent выделены в type boundary; прежний Modal.svelte type export сохранён. Missing/empty/null/false title не создаёт header, scalar/Snippet title связан с native h2 id, children optional. Explicit aria-labelledby/непустой aria-label имеют приоритет перед generated name. Native dialog/bind:open/SSR shell/centering/title close-space/callbacks и retained children сохранены; title updates не пересоздают input/dialog и не теряют draft/selection/focus. Общий аудит семейства и imperative API остаются отдельными задачами."
         },
         {
+          "id": "context-confirmations",
+          "title": "Контекстные подтверждения createModal / ModalHolder",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ModalHolder.svelte",
+            "src/lib/ModalConfirmation.svelte",
+            "src/lib/modal.model.svelte.ts",
+            "src/lib/modal-confirm.types.ts",
+            "src/lib/modal.model.test.ts",
+            "tests/browser/fixtures/ModalControllerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-modal-controller-reference.json",
+            "tests/browser/modal-controller.spec.ts",
+            "tests/package/modal-controller.ssr.test.ts"
+          ],
+          "note": "Svelte-эквивалент Modal.useModal: info/success/error/warning/confirm, typed PromiseLike handle, destroy, object/function update, scalar/Snippet title/content/button labels, icon/footer, width, okCancel, closable/keyboard/mask.closable/getContainer/class. Callback arity/manual close, per-button async loading, rejection retry, duplicate/reentrant guard, first-close-wins и late-result cleanup. Holder наследует и обновляет тему/локаль/RTL/container; sibling scopes и nested dialogs изолированы. Native centering и прежние locale.okText/cancelText сохранены. AfterClose вызывается по native close; holder detach тихо завершает pending handles с false и восстанавливает фокус, не перехватывая явный перевод владельцем. SSR не обращается к DOM и выводит closed shells. Source raw 13 cases pinned; full button/focusable/semantic/render options и global static API остаются missing."
+        },
+        {
           "id": "extended-modal-api",
-          "title": "Static confirm/useModal, semantic slots и полный render/config API",
+          "title": "Global static API, semantic slots и полный render/config API",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Публичный native Modal сохраняет согласованный bind:open/snippets/callbacks API. Static confirm/info/success/error/warning, useModal/context holder, полный focusable/mask config, ConfigProvider.modal, semantic classNames/styles, loading/Skeleton и modalRender ещё не перенесены. Source centering/position и lifecycle требуют отдельного аудита относительно согласованной native реализации."
+          "note": "Контекстный Modal.useModal перенесён как createModal/ModalHolder. Публичный native Modal сохраняет bind:open/snippets/callbacks API. Global static methods без holder, полный button/focusable/mask config, ConfigProvider.modal, semantic classNames/styles, loading/Skeleton и modalRender ещё не перенесены. Source centering/position и lifecycle требуют отдельного аудита относительно согласованной native реализации."
         },
         {
           "id": "native-zero-title",
@@ -15612,6 +15641,24 @@
             "tests/package/modal-content.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: Raw official UMD 6.6.8 / rc-dialog study 1.10.0 не переносит aria-label и aria-labelledby на role=dialog; source Panel строит только generated title association. Native применяет attrs к native dialog, учитывает приоритет явного имени и не меняет focus/modal lifecycle."
+        },
+        {
+          "id": "native-destroy-result",
+          "title": "Завершение await при destroy контекстного подтверждения",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ModalHolder.svelte",
+            "src/lib/ModalConfirmation.svelte",
+            "src/lib/modal.model.svelte.ts",
+            "src/lib/modal-confirm.types.ts",
+            "src/lib/modal.model.test.ts",
+            "tests/browser/fixtures/ModalControllerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-modal-controller-reference.json",
+            "tests/browser/modal-controller.spec.ts",
+            "tests/package/modal-controller.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: официальный UMD 6.6.8 Modal.useModal удаляет dialog и вызывает afterClose после handle.destroy(), но PromiseLike result остаётся pending. Native destroy завершает handle с false без onCancel; holder removal также завершает ожидания без consumer callbacks. Late async fulfillment/rejection не меняет уже закрытое состояние."
         }
       ]
     },
