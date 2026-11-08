@@ -1,6 +1,6 @@
 <script lang="ts" generics="Values extends FormValues">
   import { onDestroy, tick } from 'svelte';
-  import { useConfig } from './config-context';
+  import { provideConfig, useConfig, type ConfigContext } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { provideForm } from './form-context';
   import { getFormHooks } from './form-internal';
@@ -21,6 +21,7 @@
     wrapperCol,
     requiredMark,
     variant,
+    size,
     component = 'form',
     disabled,
     onFinish,
@@ -36,9 +37,11 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Form');
+  let resolvedSize = $derived(size ?? config.explicitComponentSize);
   let resolvedRequiredMark = $derived(requiredMark ?? config.form?.requiredMark ?? true);
   let semanticProps: FormProps<Values> = $derived({
-    ...props, classNames, styles, layout, disabled: disabled ?? config.componentDisabled,
+    ...props, classNames, styles, layout, size: resolvedSize,
+    disabled: disabled ?? config.componentDisabled,
     colon: colon ?? config.form?.colon, labelAlign: labelAlign ?? config.form?.labelAlign,
     labelWrap: labelWrap ?? config.form?.labelWrap, requiredMark: resolvedRequiredMark
   });
@@ -52,6 +55,13 @@
   });
 
   provideFormList(undefined);
+
+  // Form меняет только SizeContext; остальные reactive defaults сохраняют своего владельца.
+  const fieldConfig: ConfigContext = Object.create(config, {
+    componentSize: { get: () => size ?? config.componentSize },
+    explicitComponentSize: { get: () => resolvedSize }
+  });
+  provideConfig(fieldConfig);
 
   provideForm({
     get variant() {
@@ -156,6 +166,8 @@
   novalidate
   class={[`ant-form ant-form-css-var ant-form-${layout}`,
     resolvedRequiredMark === false && 'ant-form-hide-required-mark',
+    resolvedSize === 'small' && 'ant-form-small',
+    resolvedSize === 'large' && 'ant-form-large',
     componentTheme.className, config.form?.class, className, rootClassName,
     semantic.classes.root].filter(Boolean).join(' ')}
   style={componentTheme.style || semantic.styles.root

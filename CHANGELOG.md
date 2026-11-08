@@ -135,6 +135,10 @@
 
 ### Added
 
+- Form: size с наследованием Form/ConfigProvider и передачей размера вложенным
+  controls/Compact. Small/large задают исходные высоты label/control; сохранены
+  приоритеты local props, изоляция соседей, semantic callbacks и native field state.
+
 - Form: semantic classNames/styles для root/label/content/help/helpItem/extra,
   callbacks и defaults ConfigProvider.form. Slots наследуются полями/ErrorList;
   сохранены приоритеты CSS, native help/ARIA и фокус при динамическом оформлении.

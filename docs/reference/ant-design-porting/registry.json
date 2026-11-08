@@ -5010,7 +5010,12 @@
         "tests/browser/fixtures/FormSemanticFixtures.svelte",
         "tests/browser/fixtures/form-semantic-settings.ts",
         "tests/browser/fixtures/ant-design-form-semantic-reference.json",
-        "tests/package/form-semantic.ssr.test.ts"
+        "tests/package/form-semantic.ssr.test.ts",
+        "tests/browser/form-size.spec.ts",
+        "tests/browser/form-size-metrics.ts",
+        "tests/browser/fixtures/FormSizeFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-size-reference.json",
+        "tests/package/form-size.ssr.test.ts"
       ],
       "features": [
         {
@@ -5583,7 +5588,24 @@
             "tests/browser/fixtures/ant-design-form-semantic-reference.json",
             "tests/package/form-semantic.ssr.test.ts"
           ],
-          "note": "Form.classNames/styles и ConfigProvider.form.classNames/styles принимают object/callback с root/label/content/help/helpItem/extra. Root относится к Form; прочие slots передаются FormItem/FormErrorList через reactive FormContext. Context/local classes накапливаются; CSS root следует component theme → config.styles.root → config.style → local.styles.root → local style, прочие slots context → local. Callbacks получают native props с разрешёнными layout/disabled/requiredMark и merged colon/labelAlign/labelWrap; последние остаются undefined до внутренних label/CSS defaults. Callback может вернуть undefined. Generic callback работает с native FormProps любого Values; прежние handlers/model contracts сохранены. Nested Item наследует slots, nested Form применяет собственные props/config; component=false сохраняет slots полей без root DOM. Field extra и messages/help имеют раздельные slots; legacy help priority, доступные role/id/description и control refs/values/metadata сохранены. Лишний error class контейнера удалён, class/status/colors каждого сообщения остаются source. Для styled legacy helpItem добавлен собственный узел без изменения прежнего DOM при отсутствии slot. ErrorList внутри FormList получает help/helpItem; ранее выбранные native цвета bare standalone ErrorList сохранены, source вне FormItem наследует обычный цвет формы — raw observation приложено. 16 UMD-состояний подтверждают все слои/classes/CSS, normalized callback props, undefined return, disabled overrides, nested/reset/false scopes и ErrorList; reactive updates сохраняют input/focus/selection/metadata. Shared semantic helper расширен только типами nullable style и callback undefined, runtime остальных компонентов не меняется. Root prefix/size, полный help override/motion, tooltip и другие Form settings остаются отдельными пробелами."
+          "note": "Form.classNames/styles и ConfigProvider.form.classNames/styles принимают object/callback с root/label/content/help/helpItem/extra. Root относится к Form; прочие slots передаются FormItem/FormErrorList через reactive FormContext. Context/local classes накапливаются; CSS root следует component theme → config.styles.root → config.style → local.styles.root → local style, прочие slots context → local. Callbacks получают native props с разрешёнными layout/disabled/requiredMark и merged colon/labelAlign/labelWrap; последние остаются undefined до внутренних label/CSS defaults. Callback может вернуть undefined. Generic callback работает с native FormProps любого Values; прежние handlers/model contracts сохранены. Nested Item наследует slots, nested Form применяет собственные props/config; component=false сохраняет slots полей без root DOM. Field extra и messages/help имеют раздельные slots; legacy help priority, доступные role/id/description и control refs/values/metadata сохранены. Лишний error class контейнера удалён, class/status/colors каждого сообщения остаются source. Для styled legacy helpItem добавлен собственный узел без изменения прежнего DOM при отсутствии slot. ErrorList внутри FormList получает help/helpItem; ранее выбранные native цвета bare standalone ErrorList сохранены, source вне FormItem наследует обычный цвет формы — raw observation приложено. 16 UMD-состояний подтверждают все слои/classes/CSS, normalized callback props, undefined return, disabled overrides, nested/reset/false scopes и ErrorList; reactive updates сохраняют input/focus/selection/metadata. Shared semantic helper расширен только типами nullable style и callback undefined, runtime остальных компонентов не меняется. Размеры описаны в size-context; root prefix, полный help override/motion, tooltip и другие Form settings остаются отдельными пробелами."
+        },
+        {
+          "id": "size-context",
+          "title": "Form.size: размеры labels/controls и наследование контекста",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/config-context.ts",
+            "tests/browser/form-size.spec.ts",
+            "tests/browser/form-size-metrics.ts",
+            "tests/browser/fixtures/FormSizeFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-size-reference.json",
+            "tests/package/form-size.ssr.test.ts"
+          ],
+          "note": "Form.size принимает актуальные small/medium/large; undefined наследует nearest Form/ConfigProvider, без явного контекста сохраняет implicit medium controls и undefined semantic props.size. Локальные control props и Compact size приоритетнее; nested Form без size наследует, локальные provider/inner Form могут переопределить, соседние controls изолированы. Small/large root classes задают исходные label height/control min-height; component=false передаёт размер без wrapper. ConfigContext сохраняет все прочие reactive getters и различие explicit/implicit size для Divider/Compact. FormConfig.size не добавлен: у source нет такого global record prop. 25 неизменённых UMD-состояний сверяют реальные CSS/высоты Input/InputNumber/Select/DatePicker/Button/Switch/Compact/Divider, label containers, nested/sibling scopes, semantic callback normalization, local overrides, три layouts, RTL и compact/component theme. Смена размера сохраняет DOM/focus/selection, values/errors/warnings/touched и native FormData; SSR публикует size classes и не forward-ит size в form attribute. Native Form default vertical и остальные form/model contracts сохранены; prefix, tooltip и другие Form settings остаются отдельными пробелами."
         }
       ]
     },

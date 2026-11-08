@@ -9390,6 +9390,18 @@ ErrorList сохранены. Проверки: [16 эталонов и набл
 [браузер](./tests/browser/form-semantic.spec.ts),
 [публичные типы и SSR](./tests/package/form-semantic.ssr.test.ts), `?fixture=form-semantic`.
 
+`Form.size` задаёт small, medium или large для формы и вложенных компонентов.
+Undefined наследует ближайший Form/ConfigProvider; локальный размер control
+и размер SpaceCompact сохраняют свой приоритет. Настройки соседей не меняются.
+Small/large также задают исходную высоту подписей и control containers; component=false
+передаёт размер без wrapper. Semantic callbacks получают разрешённый size:
+undefined без явной настройки, medium при явном medium. Divider сохраняет различие
+между размером по умолчанию и medium. Динамическая смена сохраняет control,
+focus/selection, metadata и native FormData.
+Сверка: [25 эталонов](./tests/browser/fixtures/ant-design-form-size-reference.json),
+[браузер](./tests/browser/form-size.spec.ts),
+[публичные типы и SSR](./tests/package/form-size.ssr.test.ts), `?fixture=form-size`.
+
 `Form.colon`, `labelAlign` и `labelWrap` наследуют defaults из `ConfigProvider.form`.
 При отсутствии настройки colon включён, labelAlign равен right, labelWrap — false.
 Локальные FormItem.colon/labelAlign имеют приоритет над Form; true включает colon

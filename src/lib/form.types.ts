@@ -4,7 +4,7 @@ import type { FormValidationError } from './FormValidationError';
 import type { FormInstance } from './form.model.svelte.js';
 import type { ColProps } from './grid.types';
 import type { FormValues } from './validation.engine';
-import type { RenderEmptyContent, Variant } from './types';
+import type { ComponentSize, RenderEmptyContent, Variant } from './types';
 import type { Options, ScrollAction } from './vendor/compute-scroll-into-view';
 
 /**
@@ -72,6 +72,8 @@ export interface FormProps<Values extends FormValues> extends Omit<
   requiredMark?: FormRequiredMark;
   /** Оформление дочерних полей; undefined сбрасывает внешний Form, сохраняя ConfigProvider. */
   variant?: Variant;
+  /** Размер формы и дочерних компонентов; undefined наследует ближайший Form/ConfigProvider. */
+  size?: ComponentSize;
   /** По умолчанию form; false оставляет контекст без native wrapper и DOM-атрибутов. */
   component?: 'form' | false;
   disabled?: boolean;
