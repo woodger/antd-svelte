@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: initialValue с приоритетом store/Form defaults, SSR, обновлением
+  будущего reset и dirty validation. Сохранены копии значений, touched и binding;
+  вложенные defaults следуют mount order, сценарии FormList сверены с upstream.
+
 - FormItem: validateStatus с явным пустым значением и автоматическими
   validating/success. Статус работает без name; ошибки остаются доступны
   при изменении оформления. Сверены source классы и цвета, темы и controls.

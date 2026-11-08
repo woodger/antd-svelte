@@ -9541,7 +9541,7 @@ title-array сохранены в [31 эталоне и наблюдениях](
 переключается на новый экземпляр, поздние проверки прежней модели изолированы.
 
 `FormItem` без name служит строкой layout: label, help/extra, колонки и настройки
-Form сохраняются, но rules не регистрируются в модели. Required управляет отметкой
+Form сохраняются, но rules/initialValue не регистрируются в модели. Required управляет отметкой
 подписи; required/name/id/ARIA самого control задаёт его владелец. Для связи подписи
 используйте FormItem.htmlFor вместе с id control либо его явное доступное имя.
 В этом режиме getFieldsValue/getFieldInstance не получают binding строки,
@@ -9552,6 +9552,28 @@ Form сохраняются, но rules не регистрируются в м�
 Сверка: [восемь эталонов и переходы](./tests/browser/fixtures/ant-design-form-nameless-reference.json),
 [браузер](./tests/browser/form-nameless.spec.ts),
 [публичные типы и SSR](./tests/package/form-nameless.ssr.test.ts), `?fixture=form-nameless`.
+
+`FormItem.initialValue` заполняет отсутствующее значение перед render control,
+включая SSR. Значение модели приоритетнее, в том числе null, false, 0 и '';
+undefined позволяет применить local default. Поздний mount сохраняет уже записанное
+значение. Начальные значения не меняют touched, но участвуют в dirty validation.
+Привязка value/onValueChange к модели остаётся явной.
+
+Изменение initialValue не перезаписывает текущий draft. Reset использует текущий prop,
+при этом исходное initialValues модели имеет приоритет по точному пути. Plain containers
+копируются, Date/Dayjs и другие непрозрачные значения сохраняют identity.
+Если несколько bindings задают initialValue одному пути, первый mount заполняет store,
+а reset не выбирает между конфликтующими defaults. При перекрывающихся parent/child
+путях defaults следуют порядку mount, как source; порядок проекции values/refs сохранён.
+
+В FormList задавайте начальный массив через initialValue списка или initialValues модели.
+Локальный initialValue поля списка применяется при создании control, но не восстанавливается
+при reset только этого поля. Полный reset списка пересоздаёт строки и применяет defaults
+заново. Намеренно пустое значение и пропущенный ключ различаются как в модели.
+Сверка: [22 случая и lifecycle](./tests/browser/fixtures/ant-design-form-initial-reference.json),
+[браузер](./tests/browser/form-initial.spec.ts),
+[модель](./src/lib/form-initial-value.test.ts),
+[публичные типы и SSR](./tests/package/form-initial.ssr.test.ts), `?fixture=form-initial`.
 
 `theme.components.Form` настраивает Form и каждый FormItem: цвет и размер подписи,
 required mark, высоту, отступы colon и полей, vertical padding/margin.

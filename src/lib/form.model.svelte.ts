@@ -132,6 +132,7 @@ interface StoredField {
   persistent?: boolean;
   registration?: FormFieldRegistration;
   registrationOrder?: number;
+  initialValueOrder?: number;
   errors?: string[];
   warnings?: string[];
   touched: boolean;
@@ -157,6 +158,7 @@ export function createForm<Values extends FormValues>({
   let request = 0;
   let lastValidation = 0;
   let registrationOrder = 0;
+  let initialValueOrder = 0;
   let values = $state<Values>(copyFormValue(defaults));
   let resetKey = $state.raw<object>({});
   // При teardown Svelte читает прежний $state; реестр хранит актуальные регистрации.
@@ -662,13 +664,18 @@ export function createForm<Values extends FormValues>({
         }
       }
 
-      for (const field of selected) {
+      // Defaults следуют mount order, как React Field; registrationOrder сохраняет
+      // прежний порядок value projection, refs и reset callbacks.
+      const initialFields = [...selected].sort((first, second) =>
+        (first.initialValueOrder ?? 0) - (second.initialValueOrder ?? 0)
+      );
+      for (const field of initialFields) {
         const registration = field.registration;
         const path = fieldPath(field);
 
-        if (registration?.isList && !registration.isListField
+        if (registration && !registration.isListField
           && registration.initialValue !== undefined
-          && getFormValue(next, path) === undefined) {
+          && getFormValue(defaults, path) === undefined) {
           const conflicts = selected.some((other) => other !== field
             && sameFormPath(path, fieldPath(other))
             && other.registration?.initialValue !== undefined);
@@ -732,7 +739,7 @@ export function createForm<Values extends FormValues>({
     }
   };
 
-  function initializeList(name: NamePath, initialValue?: readonly unknown[]) {
+  function initializeFieldValue(name: NamePath, initialValue?: unknown) {
     untrack(() => {
       if (initialValue !== undefined && getFormValue(values, name) === undefined) {
         updateValues(setFormValue(values, name, initialValue) as Values);
@@ -755,7 +762,12 @@ export function createForm<Values extends FormValues>({
         warnings: [...(field.warnings ?? [])]
       };
     },
-    initializeList,
+    initializeField: initializeFieldValue,
+    initializeList: initializeFieldValue,
+    markFieldMounted(mountKey) {
+      const field = fields.find((field) => field.registration?.mountKey === mountKey);
+      if (field) field.initialValueOrder = ++initialValueOrder;
+    },
     changeList(name, next) {
       updateValues(setFormValue(values, name, next) as Values);
       revision++;
@@ -778,7 +790,7 @@ export function createForm<Values extends FormValues>({
     },
     registerField(registration) {
       return untrack(() => {
-        if (registration.isList) initializeList(registration.name, registration.initialValue);
+        initializeFieldValue(registration.name, registration.initialValue);
 
         let field = findField(registration.name);
 
@@ -787,6 +799,7 @@ export function createForm<Values extends FormValues>({
         const registered = field;
         registered.registration = registration;
         registered.registrationOrder = ++registrationOrder;
+        registered.initialValueOrder = ++initialValueOrder;
 
         return () => {
           if (cancelValidationDelay(registered)) {

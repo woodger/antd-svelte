@@ -29,7 +29,9 @@ export interface FormContext {
   isFieldRequired(name: NamePath): boolean;
   touchField(name: NamePath): void;
   registerField?(field: FormFieldRegistration): (() => void) | undefined;
+  markFieldMounted(mountKey: symbol): void;
   getFieldValue(name: NamePath): unknown;
+  initializeField(name: NamePath, initialValue?: unknown): void;
   initializeList(name: NamePath, initialValue?: readonly unknown[]): void;
   changeList(name: NamePath, values: readonly unknown[]): void;
 }

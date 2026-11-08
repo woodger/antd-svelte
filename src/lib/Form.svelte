@@ -122,7 +122,9 @@
     isFieldRequired: (name) => form.isFieldRequired(name),
     touchField: (name) => form.touchField(name),
     registerField: (field) => getFormHooks(form)?.registerField(field),
+    markFieldMounted: (mountKey) => getFormHooks(form)?.markFieldMounted(mountKey),
     getFieldValue: (name) => form.getFieldValue(name),
+    initializeField: (name, initialValue) => getFormHooks(form)?.initializeField(name, initialValue),
     initializeList: (name, initialValue) => getFormHooks(form)?.initializeList(name, initialValue),
     changeList: (name, values) => {
       const hooks = getFormHooks(form);

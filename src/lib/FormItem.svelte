@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { tick, type Snippet } from 'svelte';
+  import { onMount, tick, untrack, type Snippet } from 'svelte';
+  import type { FormFieldRegistration } from './form-internal';
   import { useForm, type FormFieldContext } from './form-context';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
@@ -26,6 +27,8 @@
   export interface FormItemProps {
     /** Ключ/путь от FormList; без name остаётся layout без model binding, rules и native name. */
     name?: NamePath;
+    /** Заполняет undefined перед render control/SSR; изменение prop используется будущим reset. */
+    initialValue?: unknown;
     /** Текст/число/массив/Snippet; false/null/undefined/'' скрывают label, null сохраняет offset. */
     label?: RenderEmptyContent;
     /** Содержимое подсказки либо Tooltip options; defaults наследуются из Form. */
@@ -75,6 +78,7 @@
 
   let {
     name,
+    initialValue,
     label,
     tooltip,
     children,
@@ -140,14 +144,23 @@
   let resetKey = $state.raw<object>({});
   let content: HTMLDivElement | undefined = $state();
   const controls = new Set<() => unknown>();
+  let registration: FormFieldRegistration | undefined;
+
+  untrack(() => {
+    if (hasName) form?.initializeField(path, initialValue);
+  });
 
   $effect.pre(() => {
-    if (!hasName) return;
+    if (!hasName) {
+      registration = undefined;
+      return;
+    }
 
     // В списке metadata следует за key строки; обычное поле хранит её по имени модели.
     const registeredName = list ? undefined : path;
 
-    return form?.registerField?.({
+    registration = {
+      mountKey: Symbol('ant-design-field-mount'),
       get name() {
         return registeredName ?? path;
       },
@@ -160,6 +173,10 @@
       get validateDebounce() {
         return validateDebounce;
       },
+      get initialValue() {
+        return initialValue;
+      },
+      isListField: Boolean(list),
       getInstance() {
         if (controlRef != null) return controlRef;
         for (const getInstance of controls) {
@@ -180,7 +197,13 @@
         resetKey = {};
         if (restoreFocus) void tick().then(restoreFocus);
       }
-    });
+    };
+
+    return form?.registerField?.(registration);
+  });
+
+  onMount(() => {
+    if (registration?.mountKey) form?.markFieldMounted(registration.mountKey);
   });
 
   const fieldContext: FormFieldContext = {

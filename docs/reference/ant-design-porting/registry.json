@@ -5073,7 +5073,14 @@
         "tests/browser/fixtures/FormStatusControls.svelte",
         "tests/browser/fixtures/ant-design-form-status-reference.json",
         "tests/package/form-status.ssr.test.ts",
-        "src/lib/Transfer.svelte"
+        "src/lib/Transfer.svelte",
+        "src/lib/form-initial-value.test.ts",
+        "tests/browser/form-initial.spec.ts",
+        "tests/browser/form-initial-metrics.ts",
+        "tests/browser/fixtures/FormInitialFixtures.svelte",
+        "tests/browser/fixtures/FormInitialCase.svelte",
+        "tests/browser/fixtures/ant-design-form-initial-reference.json",
+        "tests/package/form-initial.ssr.test.ts"
       ],
       "features": [
         {
@@ -5766,7 +5773,7 @@
             "tests/browser/fixtures/ant-design-form-nameless-reference.json",
             "tests/package/form-nameless.ssr.test.ts"
           ],
-          "note": "FormItem.name стал optional; undefined/null runtime означают отсутствие binding, непустые/пустые допустимые NamePath по-прежнему считаются именованными. В nameless режиме layout/labels/columns/help/extra/theme и Form disabled/size/variant сохраняются, local rules игнорируются, автоматические errors/required/status/id/name/description/ref model-поля не передаются controls. Required управляет только mark; htmlFor и owner input id сохраняют явную label association. Вычисление и регистрация model name/prefix/rules выполняются только для hasName; NoFormItemBinding очищает association и сохраняет Form settings; отдельный status context поддерживает ручной validateStatus без model binding. Именованный layout получает прежний reactive FieldContext через приватный FormItemBinding, getters продолжают читать props/model. Смена hasName переключает render branch и пересоздаёт control, как source; name→name сохраняет прежний lifecycle. Reset модели не пересоздаёт unbound local draft и сохраняет focus/selection/DOM. Восемь UMD-состояний подтверждают отсутствие attributes/binding, ignored rules, визуальный required, manual htmlFor, disabled/small/filled, отдельный named reference; raw named id/name отличаются по согласованным native Svelte/FormData контрактам, они сохранены. Source reset и обе ownership transitions проверяются по node identity, value/store/bindings/ref. Публичные optional types и SSR не требуют DOM. NoStyle, dependencies, initialValue, feedback и остальные Field API остаются отдельными пробелами."
+          "note": "FormItem.name стал optional; undefined/null runtime означают отсутствие binding, непустые/пустые допустимые NamePath по-прежнему считаются именованными. В nameless режиме layout/labels/columns/help/extra/theme и Form disabled/size/variant сохраняются, local rules игнорируются, автоматические errors/required/status/id/name/description/ref model-поля не передаются controls. Required управляет только mark; htmlFor и owner input id сохраняют явную label association. Вычисление и регистрация model name/prefix/rules выполняются только для hasName; NoFormItemBinding очищает association и сохраняет Form settings; отдельный status context поддерживает ручной validateStatus без model binding. Именованный layout получает прежний reactive FieldContext через приватный FormItemBinding, getters продолжают читать props/model. Смена hasName переключает render branch и пересоздаёт control, как source; name→name сохраняет прежний lifecycle. Reset модели не пересоздаёт unbound local draft и сохраняет focus/selection/DOM. Восемь UMD-состояний подтверждают отсутствие attributes/binding, ignored rules, визуальный required, manual htmlFor, disabled/small/filled, отдельный named reference; raw named id/name отличаются по согласованным native Svelte/FormData контрактам, они сохранены. Source reset и обе ownership transitions проверяются по node identity, value/store/bindings/ref. Публичные optional types и SSR не требуют DOM. NoStyle, dependencies, feedback и остальные Field API остаются отдельными пробелами."
         },
         {
           "id": "disabled-context",
@@ -5811,6 +5818,27 @@
             "src/lib/Transfer.svelte"
           ],
           "note": "Используется существующий публичный FormValidateStatus: success/warning/error/validating/пустая строка. Явный prop приоритетнее metadata, включая явный пустой статус; автоматический порядок — validating, errors, warnings, touched success, pristine без статуса. Приватный getFieldMeta читает точный binding, сохраняя публичную aggregate семантику isFieldTouched. Отсутствие meta не создаёт binding; правила/triggers/touched/reset модели не меняются. Двадцать девять неизменённых UMD-состояний фиксируют root/control classes, border colors и messages при metadata overrides, explicit empty, pending с прежней ошибкой, touched/validated, nameless, local control status и dark/compact/RTL. В nameless режиме передаётся только visual status: нет id/name/required/description/ref и model registration. Отдельный invalid в private context сохраняет доступность model errors при визуальном success/validating/empty и local status control; scoped child contexts передают этот флаг без association. InputOTP передаёт ячейкам visual status через private context, не расширяя публичный status Input/OTP; Cascader semantic props отражают разрешённые Form statuses. У Input/Select прежняя native политика aria-invalid для visual error без model errors сохранена: source не задаёт такой attribute, raw значения приложены. Реактивная смена сохраняет DOM/draft/focus/selection; pending validation, touched success и reset проверяются отдельно. Transfer root получает model aria-invalid/description независимо от visual status; пять отдельных UMD-состояний подтверждают connected description при default/success/warning/validating/empty. Package SSR выводит named/nameless/manual/automatic statuses и Transfer error association без DOM. HasFeedback/feedbackIcons, noStyle aggregation и остальной Field API остаются отдельными пробелами."
+        },
+        {
+          "id": "field-initial-value",
+          "title": "FormItem.initialValue: store, SSR, reset и lifecycle defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/form-context.ts",
+            "src/lib/form-internal.ts",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form-initial-value.test.ts",
+            "tests/browser/form-initial.spec.ts",
+            "tests/browser/form-initial-metrics.ts",
+            "tests/browser/fixtures/FormInitialFixtures.svelte",
+            "tests/browser/fixtures/FormInitialCase.svelte",
+            "tests/browser/fixtures/ant-design-form-initial-reference.json",
+            "tests/package/form-initial.ssr.test.ts"
+          ],
+          "note": "FormItem.initialValue заполняет undefined до render children, включая SSR; name отсутствует — default игнорируется. Существующее значение store приоритетнее, включая null/false/0/пустую строку. Явный setFieldValue undefined перед поздним mount допускает local default, как source, даже если раньше в модели был Form default. Изменение prop не перезаписывает current value; reset читает текущий getter и исходные defaults модели по точному NamePath. Начальная инициализация не меняет touched и не запускает validators, но initialValue участвует в dirty validation. Plain mutable containers копируются, opaque values сохраняют identity согласно прежнему native контракту. Регистрация хранит unknown initialValue, не расширяя FormList.initialValue array API. Существующие projection/ref/callback registrationOrder сохранены; отдельный initialValueOrder следует фактическому mount, как React Field. Symbol mountKey сохраняет identity через Svelte proxies. Двадцать два неизменённых UMD-сценария проверяют scalar/object/array/default priorities, nested/literal/numeric paths, duplicate defaults, nameless и FormList с selected/full reset. Дополнительные snapshots фиксируют prop update/добавленный позже default, пять поздних mounts со store и parent/child overlap при статическом и позднем mount. При duplicate initialValue source первый mount заполняет store, reset не выбирает default; при overlap reset использует mount order. ListField локальный default применяется при создании, но selected child reset его не восстанавливает; полный reset списка пересоздаёт строки с defaults. Сохранены native keyed list lifecycle, guards stale validation и явная Svelte value binding. Package SSR выводит initial control value и store без DOM. Dependencies/preserve/feedback и остальные Field возможности остаются отдельными пробелами."
         }
       ]
     },

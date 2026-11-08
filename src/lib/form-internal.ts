@@ -4,12 +4,14 @@ import type { FormFieldMeta } from './form.model.svelte';
 
 export interface FormFieldRegistration {
   readonly name: NamePath;
+  // Symbol сохраняет identity, когда registration хранится внутри Svelte proxy.
+  readonly mountKey?: symbol;
   readonly rules?: readonly ValidationRule[];
   readonly validateFirst?: boolean | 'parallel';
   readonly validateDebounce?: number;
   readonly isList?: boolean;
   readonly isListField?: boolean;
-  readonly initialValue?: readonly unknown[];
+  readonly initialValue?: unknown;
   /** Пересоздаёт содержимое выбранного Field без замены соседних controls. */
   readonly onReset?: () => void;
   readonly getInstance?: () => unknown;
@@ -20,6 +22,8 @@ export interface FormHooks {
   readonly resetKey: object;
   getFieldMeta(name: NamePath): FormFieldMeta | undefined;
   registerField(field: FormFieldRegistration): () => void;
+  markFieldMounted(mountKey: symbol): void;
+  initializeField(name: NamePath, initialValue?: unknown): void;
   initializeList(name: NamePath, initialValue?: readonly unknown[]): void;
   changeList(name: NamePath, values: readonly unknown[]): void;
 }
