@@ -1,4 +1,14 @@
 import type { SelectOption } from './types';
+import type { SelectSearchConfig } from './select.types';
+
+/** Стабильная Source сортировка после фильтрации; массив владельца не изменяется. */
+export function sortSelectOptions<Value extends string | number>(
+  options: readonly SelectOption<Value>[],
+  searchValue: string,
+  filterSort?: SelectSearchConfig<Value>['filterSort']
+): readonly SelectOption<Value>[] {
+  return filterSort ? [...options].sort((a, b) => filterSort(a, b, { searchValue })) : options;
+}
 
 export function getSelectValues<Value extends string | number>(
   value: Value | readonly Value[] | undefined

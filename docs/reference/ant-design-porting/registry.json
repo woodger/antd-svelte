@@ -7586,7 +7586,14 @@
         "tests/browser/fixtures/SelectTokenFixtures.svelte",
         "tests/browser/fixtures/select-token-cases.ts",
         "tests/browser/fixtures/ant-design-select-token-separators-reference.json",
-        "tests/package/select-token.ssr.test.ts"
+        "tests/package/select-token.ssr.test.ts",
+        "src/lib/select-sort.engine.test.ts",
+        "tests/browser/select-sort.spec.ts",
+        "tests/browser/fixtures/SelectSortCase.svelte",
+        "tests/browser/fixtures/SelectSortFixtures.svelte",
+        "tests/browser/fixtures/select-sort-cases.ts",
+        "tests/browser/fixtures/ant-design-select-sort-reference.json",
+        "tests/package/select-sort.ssr.test.ts"
       ],
       "features": [
         {
@@ -7763,6 +7770,25 @@
           "note": "Single/multiple читают local variant, Form, ConfigProvider.select.variant, global и outlined. Новый Select config пока только variant. Поиск, opened popup, selection/focus, FormData и callbacks сохраняются при реактивной смене контекста; остальные rc-select props/config остаются отдельными пробелами."
         },
         {
+          "id": "search-sort",
+          "title": "Сортировка showSearch.filterSort",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/select.engine.ts",
+            "src/lib/Select.svelte",
+            "src/lib/select-sort.engine.test.ts",
+            "tests/browser/select-sort.spec.ts",
+            "tests/browser/fixtures/SelectSortCase.svelte",
+            "tests/browser/fixtures/SelectSortFixtures.svelte",
+            "tests/browser/fixtures/select-sort-cases.ts",
+            "tests/browser/fixtures/ant-design-select-sort-reference.json",
+            "tests/package/select-sort.ssr.test.ts"
+          ],
+          "note": "Ant Design 6.6.8 / rc-select 1.10.1: современный nested filterSort применяется после фильтрации и synthetic/selected missing tag options, получает raw option objects и текущий searchValue. Стабильные ties, owner array и native selection order сохраняются. Raw UMD corpus фиксирует single/multiple/tags, search-aware comparator, disabled, numeric keys, equality и отсутствующие selected options. Native keyboard first active, reactive callback/options/query, controlled rejection, input DOM/focus и FormData защищены отдельно. Groups/fieldNames и deprecated top-level filterSort не добавлены."
+        },
+        {
           "id": "token-separators",
           "title": "Строковые и функциональные tokenSeparators",
           "state": "supported",
@@ -7790,7 +7816,7 @@
             "src/lib/select.types.ts",
             "src/lib/Select.svelte"
           ],
-          "note": "Полный source API остаётся в работе: необязательный options, fieldNames/groups, labelInValue, filterSort/searchIcon, maxCount/maxTagCount/renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
+          "note": "Полный source API остаётся в работе: необязательный options, fieldNames/groups, labelInValue, searchIcon, maxCount/maxTagCount/renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
         },
         {
           "id": "native-whitespace-tag",

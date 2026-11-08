@@ -14,7 +14,8 @@
     filterOptions,
     getEnabledIndex,
     getSelectValues,
-    resolveSelectedOptions
+    resolveSelectedOptions,
+    sortSelectOptions
   } from './select.engine';
   import { ruRU, type SelectOption } from './types';
   import type { SelectProps, SelectSearchConfig } from './select.types';
@@ -129,9 +130,10 @@
       : undefined
   );
   let tags = $derived(selectedValues.map(item => selectionOptions.get(item)!));
-  let filtered = $derived(tagMode
+  let filteredOptions = $derived(tagMode
     ? getSelectTagOptions(options, selectionOptions, search, filter, searchConfig.optionFilterProp)
     : filterOptions<RawValue>(options, search, filter, searchConfig.optionFilterProp));
+  let filtered = $derived(sortSelectOptions(filteredOptions, search, searchConfig.filterSort));
   $effect(() => {
     cachedOptions = selectionOptions;
   });
@@ -225,7 +227,8 @@
       if (!tagMode && (!multiple || autoClearSearch)) internalSearch = '';
       activeValue = !multiple && selected && !selected.disabled
         ? selected.value
-        : tagMode ? filtered[getEnabledIndex(filtered, -1, direction)]?.value
+        : tagMode || searchConfig.filterSort
+          ? filtered[getEnabledIndex(filtered, -1, direction)]?.value
           : options[getEnabledIndex(options, -1, direction)]?.value;
     }
 
@@ -438,7 +441,7 @@
 
     internalSearch = next;
     searchCallback?.(next);
-    const matches = tagMode
+    const matches = searchConfig.filterSort ? filtered : tagMode
       ? getSelectTagOptions(options, selectionOptions, next, filter, searchConfig.optionFilterProp)
       : filterOptions<RawValue>(options, next, filter, searchConfig.optionFilterProp);
     restoreControlledSearch(input);

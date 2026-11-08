@@ -23,6 +23,12 @@ export interface SelectSearchConfig<Value extends string | number = string> {
   filterOption?: boolean | ((search: string, option: SelectOption<Value>) => boolean);
   /** Явные поля Source search; несколько полей объединяются через OR. */
   optionFilterProp?: string | readonly string[];
+  /** Сортирует отфильтрованные options и synthetic tags; получает текущий searchValue. */
+  filterSort?: (
+    optionA: SelectOption<Value>,
+    optionB: SelectOption<Value>,
+    info: { searchValue: string }
+  ) => number;
   /** Очищает локальный search при выборе multiple/tags; controlled query меняет владелец. */
   autoClearSearchValue?: boolean;
 }

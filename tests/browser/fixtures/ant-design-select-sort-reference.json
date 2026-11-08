@@ -1,0 +1,1247 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "observation": "controlled search, open nonvirtual list; official optionRender exposes option values; filterSort lives in showSearch"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "single-default",
+        "mode": "single",
+        "search": "",
+        "sort": "none",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        }
+      ],
+      "callbackSearchValues": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "single-ascending",
+        "mode": "single",
+        "search": "",
+        "sort": "asc",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "multiple-ascending",
+        "mode": "multiple",
+        "search": "",
+        "sort": "asc",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-ascending",
+        "mode": "tags",
+        "search": "",
+        "sort": "asc",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "single-descending",
+        "mode": "single",
+        "search": "",
+        "sort": "desc",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "multiple-descending",
+        "mode": "multiple",
+        "search": "",
+        "sort": "desc",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-descending",
+        "mode": "tags",
+        "search": "",
+        "sort": "desc",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "stable-equal",
+        "mode": "multiple",
+        "search": "",
+        "sort": "equal",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-synthetic",
+        "mode": "tags",
+        "search": "turn",
+        "sort": "asc",
+        "filter": false,
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": "turn",
+          "label": "turn",
+          "disabled": false
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        "turn"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-missing-selected",
+        "mode": "tags",
+        "search": "",
+        "sort": "desc",
+        "values": [
+          "outside",
+          "before"
+        ],
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ]
+      },
+      "options": [
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "outside",
+          "label": "outside",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "before",
+          "label": "before",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "query-empty",
+        "mode": "tags",
+        "search": "",
+        "sort": "query",
+        "filter": false,
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "query-reverse",
+        "mode": "tags",
+        "search": "turn",
+        "sort": "query",
+        "filter": false,
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "turn",
+          "label": "turn",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        "turn"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "raw-query",
+        "mode": "multiple",
+        "search": " turn ",
+        "sort": "query",
+        "filter": false,
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        " turn "
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "single-filtered",
+        "mode": "single",
+        "search": "a",
+        "sort": "desc",
+        "field": "label",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        "a"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "multiple-filtered",
+        "mode": "multiple",
+        "search": "a",
+        "sort": "desc",
+        "field": "label",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        "a"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-filtered",
+        "mode": "tags",
+        "search": "a",
+        "sort": "desc",
+        "field": "label",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        "a"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-exact",
+        "mode": "tags",
+        "search": "a",
+        "sort": "asc",
+        "filter": false,
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "a",
+          "label": "Alpha",
+          "disabled": false
+        },
+        {
+          "value": "b",
+          "label": "Bravo",
+          "disabled": false
+        },
+        {
+          "value": "g",
+          "label": "Gamma",
+          "disabled": false
+        },
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        },
+        {
+          "value": 0,
+          "label": "Zero",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        "a"
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "single-empty",
+        "mode": "single",
+        "search": "absent",
+        "sort": "asc",
+        "field": "label",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [],
+      "callbackSearchValues": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "tags-disabled-exact",
+        "mode": "tags",
+        "search": "locked",
+        "sort": "desc",
+        "options": [
+          {
+            "value": "g",
+            "label": "Gamma"
+          },
+          {
+            "value": "a",
+            "label": "Alpha"
+          },
+          {
+            "value": "b",
+            "label": "Bravo"
+          },
+          {
+            "value": 0,
+            "label": "Zero"
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": "locked",
+          "label": "Locked",
+          "disabled": true
+        }
+      ],
+      "callbackSearchValues": [],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "equal-labels",
+        "mode": "multiple",
+        "search": "",
+        "sort": "asc",
+        "options": [
+          {
+            "value": "z",
+            "label": "Same"
+          },
+          {
+            "value": "x",
+            "label": "Same"
+          },
+          {
+            "value": 0,
+            "label": "Before"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": 0,
+          "label": "Before",
+          "disabled": false
+        },
+        {
+          "value": "z",
+          "label": "Same",
+          "disabled": false
+        },
+        {
+          "value": "x",
+          "label": "Same",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    },
+    {
+      "sample": {
+        "id": "numeric-values",
+        "mode": "multiple",
+        "search": "",
+        "sort": "value",
+        "options": [
+          {
+            "value": 2,
+            "label": "Two"
+          },
+          {
+            "value": 10,
+            "label": "Ten"
+          },
+          {
+            "value": "2",
+            "label": "String two"
+          }
+        ],
+        "values": []
+      },
+      "options": [
+        {
+          "value": 10,
+          "label": "Ten",
+          "disabled": false
+        },
+        {
+          "value": 2,
+          "label": "Two",
+          "disabled": false
+        },
+        {
+          "value": "2",
+          "label": "String two",
+          "disabled": false
+        }
+      ],
+      "callbackSearchValues": [
+        ""
+      ],
+      "ownerOptionsUnchanged": true
+    }
+  ]
+}

@@ -9,6 +9,10 @@
 
 ### Added
 
+- Select поддерживает showSearch.filterSort с текущим searchValue, стабильными
+  равными элементами и сортировкой synthetic tags. Массив options, порядок выбранных
+  значений, controlled query, focus и DOM input сохраняются.
+
 - Select поддерживает массивы и функции tokenSeparators в multiple/tags,
   многострочный paste и отложенное разделение IME. Сохранены controlled search,
   порядок callbacks и native формы/events; исходные disabled/blank ошибки
