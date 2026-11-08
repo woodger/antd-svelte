@@ -9,6 +9,10 @@
 
 ### Added
 
+- Row поддерживает local/shared prefixCls для корня, wrap/align/justify и RTL.
+  Responsive gutters, layout, child context, refs, draft/selection/focus и FormData
+  сохраняются; перенос Col namespace и связанных правил FormItem идёт отдельно.
+
 - Breadcrumb поддерживает local/shared prefixCls, включая разделители и меню
   пункта. Source потеря separator margins при local prefix записана raw/matched
   замерами. DOM, focus, baseline, link decorations и navigation сохранены.

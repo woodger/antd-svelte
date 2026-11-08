@@ -20,6 +20,8 @@ export interface RowProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style' | 'align'
 > {
+  /** Локальный CSS prefix строки; empty/undefined наследуют ConfigProvider.prefixCls. */
+  prefixCls?: string;
   children?: Snippet;
   /** @defaultValue 0 */
   gutter?: GridGutter | [GridGutter, GridGutter];

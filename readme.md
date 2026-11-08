@@ -688,7 +688,17 @@ Source не обновляет Row/Col layout при смене глобальн
 хотя публичные tokens уже изменились. [Наблюдение](tests/browser/fixtures/ant-design-grid-breakpoints-update-observation.json)
 сохранено; Svelte обновляет обе части без потери DOM и состояния slot input.
 
-PrefixCls ещё не подключён.
+Row.prefixCls задаёт корень и состояния wrap/align/justify/RTL. Empty/undefined
+наследуют ConfigProvider.prefixCls (по умолчанию ant-row); local prefix имеет
+приоритет. Canonical Grid marker и gutter context сохраняются. Смена prefix
+сохраняет Row/children DOM, refs, draft/selection/focus и FormData.
+Сверка: [UMD](./tests/browser/fixtures/ant-design-grid-row-prefix-reference.json),
+[browser](./tests/browser/grid-row-prefix.spec.ts),
+[SSR](./tests/package/grid-row-prefix.ssr.test.ts), `?fixture=grid-row-prefix`.
+Рецепт grid-row-prefix извлекает 16 Row rules без Col/media scopes.
+Col.prefixCls и его private variable namespace пока не перенесены; их перенос
+также затрагивает правила Grid в FormItem. В Row reference официальный Col
+получает публичный prefixCls=ant-col, чтобы сверять существующую раскладку колонок.
 В CSS-variable режиме эталон записывает components.Grid.screen*Min в CSS variables,
 но Col media queries продолжают использовать глобальные thresholds. Это
 [наблюдение](tests/browser/fixtures/ant-design-grid-media-observation.json) сохранено;
@@ -9983,7 +9993,7 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon и Breadcrumb. Остальные семейства подключаются отдельно. Например,
+Space/SpaceCompact/SpaceAddon, Breadcrumb и Row. Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 

@@ -2,6 +2,8 @@
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getGridRowPrefixCss } from './grid-row-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { provideGridRow } from './grid-context';
@@ -11,6 +13,7 @@
   import type { RowProps } from './grid.types';
 
   let {
+    prefixCls,
     children,
     gutter = 0,
     align,
@@ -22,6 +25,8 @@
     ...rest
   }: RowProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('row', prefixCls));
+  let prefixCss = $derived(getGridRowPrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Grid');
   const designTokens = useDesignTokenContext();
   const breakpoint = createBreakpoint();
@@ -46,14 +51,16 @@
   $effect(() => breakpoint.connect(window, mediaQueries));
 </script>
 
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`grid-row-prefix:${componentPrefix}`} />{/if}
 <div {...rest} bind:this={nativeElement} dir={config.direction}
+  data-ant-grid-row-prefix={prefixCss ? componentPrefix : undefined}
   class={[
-      'ant-row ant-grid-css-var',
+      `${componentPrefix} ant-grid-css-var`,
       componentTheme.className,
-      wrap === false && 'ant-row-no-wrap',
-      alignment && `ant-row-${alignment}`,
-      justification && `ant-row-${justification}`,
-      config.direction === 'rtl' && 'ant-row-rtl',
+      wrap === false && `${componentPrefix}-no-wrap`,
+      alignment && `${componentPrefix}-${alignment}`,
+      justification && `${componentPrefix}-${justification}`,
+      config.direction === 'rtl' && `${componentPrefix}-rtl`,
       className
     ]}
   style={[

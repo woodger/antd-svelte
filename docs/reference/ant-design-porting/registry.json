@@ -1285,7 +1285,7 @@
             "tests/browser/fixtures/ant-design-grid-breakpoints-reference.json",
             "tests/browser/fixtures/ant-design-grid-breakpoints-update-observation.json"
           ],
-          "note": "Grid aliases/algorithms и global screen tokens подключены: Row observer по screen*, Col scoped CSS по screen*Min, SSR без JavaScript, updates и scope isolation. PrefixCls остаётся в работе. Component screen*Min в Source CSS-variable режиме — только declarations."
+          "note": "Grid aliases/algorithms и global screen tokens подключены: Row observer по screen*, Col scoped CSS по screen*Min, SSR без JavaScript, updates и scope isolation. Row prefixCls подключён отдельной feature; Col prefixCls/private namespace и FormItem Grid CSS остаются в работе. Component screen*Min в Source CSS-variable режиме — только declarations."
         },
         {
           "id": "component-theme",
@@ -1325,6 +1325,41 @@
             "docs/reference/theme-context.md"
           ],
           "note": "Row screen*/XSMax отдельно от Col screen*Min; source order validation, base/xs и все responsive reset/flex rules. Scoped stylesheet работает до JS, в обоих порядках CSS, с nested/reset/sibling и shared cssVar.key/hashed=false. Updates сохраняют DOM/editor/refs и снимают старые listeners/styles. Source live-update stale layout записан отдельно и не перенесён; fresh-mount CSS совпадает с UMD."
+        },
+        {
+          "id": "row-prefix-cls",
+          "title": "Локальный и общий Row prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Row.svelte",
+            "src/lib/grid.types.ts",
+            "src/lib/grid-row-prefix.engine.ts",
+            "src/lib/grid-row-prefix.engine.test.ts",
+            "src/lib/vendor/grid-row-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/GridRowPrefixScope.svelte",
+            "tests/browser/fixtures/GridRowPrefixFixtures.svelte",
+            "tests/browser/fixtures/GridRowPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-grid-row-prefix-reference.json",
+            "tests/browser/grid-row-prefix-metrics.ts",
+            "tests/browser/grid-row-prefix.spec.ts",
+            "tests/package/grid-row-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty prefix wins, empty/undefined наследуют ConfigProvider prefix. Root/wrap/align/justify/RTL classes и 16 Row rules подключены с canonical Grid marker. UMD cases сверяют nested/sibling scopes, responsive gutter/align/justify, no-wrap flex и aliases. Официальный Col получает публичный prefixCls=ant-col, изолируя Row от отдельной миграции Col/private variables/Form CSS. Live transitions сохраняют Row/column/editor DOM, refs, draft/selection/focus и FormData. SSR получает исходный gutter/style priority без observer/DOM."
+        },
+        {
+          "id": "col-prefix-cls",
+          "title": "Col prefixCls, private Grid/Col namespace и FormItem integration",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Col.svelte",
+            "src/lib/grid.engine.ts",
+            "src/lib/grid-style.engine.ts",
+            "src/lib/FormItem.svelte"
+          ],
+          "note": "Col пока использует canonical ant-col classes и --ant-col/--ant-grid private variables. Полный перенос должен охватить base/xs/responsive CSS, custom media scopes, independent local/global prefix namespaces и текущие FormItem selector/display contracts, включая --ant-grid-display:flex. Row prefix перенесён отдельно."
         }
       ]
     },
@@ -19560,9 +19595,12 @@
             "tests/package/space-prefix.ssr.test.ts",
             "src/lib/Breadcrumb.svelte",
             "tests/browser/breadcrumb-prefix.spec.ts",
-            "tests/package/breadcrumb-prefix.ssr.test.ts"
+            "tests/package/breadcrumb-prefix.ssr.test.ts",
+            "src/lib/Row.svelte",
+            "tests/browser/grid-row-prefix.spec.ts",
+            "tests/package/grid-row-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon и Breadcrumb подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor, Space/Compact/Addon, Breadcrumb и Row подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно. Splitter подключён для всех частей и отдельного global namespace lazy preview; обновления сохраняют активный drag и существующее поведение hidden panels. Source shared-class CSS cache observation записан отдельно. Anchor подключён с inherited item prefixes, explicit per-item override и независимым Affix prefix. Source omission local owner→items записан raw/matched observations; Native сохраняет coherent classes/spacing/ink. Space family подключена с независимыми local prefixes, global Badge selector и Addon private variable namespace. Source shared-class Badge cache observation записан отдельно; существующие Compact adapters сохранены. Breadcrumb подключён для root/items/links/overlay/separators; исходный local separator namespace omission записан raw/matched measurements. Unbound Dropdown state сохраняется при parent spread updates, с прежними Native bind/callback/default fallback contracts. Row подключён отдельно от Col с прежним gutter context и responsive observer; Col/private namespace/Form CSS остаются отдельной миграцией."
         },
         {
           "id": "native-legacy-prefix-namespace",
