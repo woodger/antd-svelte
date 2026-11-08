@@ -4563,6 +4563,15 @@ Callbacks получают прежние native props с вычисленным
 Undefined наследует steps-record, любой собственный объект, включая {}, заменяет его.
 В композиции Timeline, как в Source InternalContext, действуют только plain class/style:
 semantic classNames/styles Steps не применяются и их callbacks не вызываются.
+
+Локальный prefixCls меняет классы root, layout, item и progress; пустая строка
+восстанавливает ant-steps. CSS извлечён из закреплённого архива отдельным рецептом
+steps-prefix. Namespace --ant-steps-* / --ant-cmp-steps-* и общий marker
+ant-steps-css-var сохраняются. Смена prefix не пересоздаёт ol или кнопки, не меняет
+их ids, выбор и фокус. Components.Icon из iconRender наследует тот же prefix;
+восстановление фокуса при удалении шага от классов не зависит. Соседние Steps
+изолированы, локальные/semantic styles и компонентные токены сохраняют приоритет.
+Общий prefix ConfigProvider ещё не перенесён.
 Настройки самого ConfigProvider.timeline и локальные Timeline слои сохраняют приоритет.
 Сверка: [36 исходных случаев и 4 обновления](./tests/browser/fixtures/ant-design-steps-config-reference.json),
 [браузер](./tests/browser/steps-config.spec.ts),

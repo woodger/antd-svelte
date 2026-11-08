@@ -9,6 +9,10 @@
 
 ### Added
 
+- Steps поддерживает локальный prefixCls для root, layout, частей и progress.
+  Новый CSS-рецепт steps-prefix воспроизводит 137 правил; сохранены namespace
+  токенов, ids, native keyboard/focus, mapped Icon и изоляция соседних Steps.
+
 - Timeline поддерживает локальный prefixCls для root, частей, placement/color
   и layout states. Новый CSS-рецепт timeline-prefix воспроизводит 43 исходных
   правила; namespace Steps, переменные темы, titleSpan и keyed root сохраняются.

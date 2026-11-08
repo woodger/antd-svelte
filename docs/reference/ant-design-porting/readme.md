@@ -151,6 +151,8 @@ runtime ограничивает каждый selector собственным ro
 defaults ограничены marker, остальные namespace Button/Spin и токенов сохраняются.
 Рецепт timeline-prefix выводит 43 правила Timeline поверх Steps dot; локальный
 prefix меняет Timeline selectors, namespace Steps и токенов сохраняются.
+Рецепт steps-prefix выводит 137 правил Steps, включая layouts и progress;
+runtime изолирует root states, сохраняет token namespace и deprecated exclusions.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.

@@ -1,5 +1,5 @@
 import type {
-  StepsConfig, StepsDataItem, StepsProps, StepsSemanticSlots, TimelineConfig
+  StepsConfig, StepsDataItem, StepsProps, StepsSemanticSlots, TimelineConfig, ThemeConfig
 } from 'antd-svelte';
 
 interface StepsConfigDescriptor {
@@ -24,6 +24,12 @@ export interface StepsConfigSample {
   type?: StepsProps['type'];
   timeline?: StepsConfigDescriptor;
   orientation?: StepsProps['orientation'];
+  prefixCls?: string;
+  size?: StepsProps['size'];
+  percent?: number;
+  maxCount?: number;
+  many?: boolean;
+  theme?: ThemeConfig;
 }
 
 const parts = ['root', 'item', 'itemWrapper', 'itemIcon', 'itemSection', 'itemHeader',
@@ -77,7 +83,8 @@ export function stepsContextConfig(sample: StepsConfigSample): StepsConfig {
 export function stepsLocalProps(sample: StepsConfigSample): Partial<StepsProps> {
   const props: Partial<StepsProps> = {
     ...stepsConfigRecord(sample.local), rootClassName: sample.local?.rootClassName,
-    type: sample.type, orientation: sample.orientation, current: sample.current
+    type: sample.type, orientation: sample.orientation, current: sample.current,
+    size: sample.size, percent: sample.percent, maxCount: sample.maxCount
   };
   if (!sample.localCallback) return props;
 
@@ -91,6 +98,12 @@ export function stepsLocalProps(sample: StepsConfigSample): Partial<StepsProps> 
 }
 
 export function stepsConfigItems(sample: StepsConfigSample): readonly StepsDataItem[] {
+  if (sample.many) {
+    return Array.from({ length: 9 }, (_, index) => ({
+      key: String(index), title: `Step ${index}`, content: `Content ${index}`
+    }));
+  }
+
   return [
     { key: 'a', title: 'First', subTitle: sample.kind === 'timeline' ? undefined : 'Sub A', content: 'Content A',
       ...(sample.itemStyles ? {

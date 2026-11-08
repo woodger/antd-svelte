@@ -13,6 +13,9 @@
   const context = useStepsIcon();
 </script>
 
-<span {...rest} class={['ant-steps-item-icon', context?.className, className]} style={[context?.style, style].filter(Boolean).join(';')} aria-hidden={context?.decorative === false ? undefined : true} inert={context?.decorative !== false}>
+<span {...rest} data-ant-step-part="icon"
+  class={[`${context?.prefixCls ?? 'ant-steps'}-item-icon`, context?.className, className]}
+  style={[context?.style, style].filter(Boolean).join(';')}
+  aria-hidden={context?.decorative === false ? undefined : true} inert={context?.decorative !== false}>
   {@render children?.()}
 </span>

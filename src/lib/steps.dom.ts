@@ -5,7 +5,7 @@ export function connectStepsFocus(root: HTMLElement) {
   const document = root.ownerDocument;
   let focused: HTMLButtonElement | undefined;
   let keys: string[] = [];
-  const buttons = () => [...root.querySelectorAll<HTMLButtonElement>('.ant-steps-item-trigger')];
+  const buttons = () => [...root.querySelectorAll<HTMLButtonElement>('[data-ant-step-part="trigger"]')];
   const available = (node: HTMLButtonElement) => !node.disabled
     && !node.closest('[inert]')
     && node.getClientRects().length > 0
@@ -18,7 +18,7 @@ export function connectStepsFocus(root: HTMLElement) {
     if (node instanceof HTMLButtonElement
       && root.contains(node)
       && node.matches(
-        '.ant-steps-item-trigger'
+        '[data-ant-step-part="trigger"]'
       )) {
       focused = node;
       keys = buttons().map(button => button.dataset.stepsKey!);

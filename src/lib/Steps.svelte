@@ -3,6 +3,8 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { mergeComponentSemantics } from './semantic-style.engine';
+  import { getStepsPrefixCss } from './steps-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import StepItem from './StepItem.svelte';
   import { connectStepsFocus } from './steps.dom';
   import { getStepsStatus, normalizeStepsCurrent } from './steps.engine';
@@ -14,6 +16,7 @@
 
   let {
     items: sourceItems = [],
+    prefixCls,
     current = 0,
     initial = 0,
     status = 'process',
@@ -43,6 +46,8 @@
     ...rest
   }: StepsProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(prefixCls || 'ant-steps');
+  let prefixCss = $derived(getStepsPrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('Steps');
   const composition = useStepsComposition();
   const generatedId = $props.id();
@@ -71,6 +76,7 @@
       props: {
         ...rest,
         items: sourceItems,
+        prefixCls,
         current,
         initial,
         status,
@@ -153,29 +159,33 @@
 </script>
 
 <style>
-  .ant-steps { min-width: 0; max-width: 100%; }
-  .ant-steps-horizontal { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
-  @media (prefers-reduced-motion: reduce) { .ant-steps :global(*) { transition: none; animation: none; } }
+  [data-ant-steps-root] { min-width: 0; max-width: 100%; }
+  [data-ant-steps-orientation="horizontal"] { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; }
+  @media (prefers-reduced-motion: reduce) { [data-ant-steps-root] :global(*) { transition: none; animation: none; } }
 </style>
 
-<ol {...rest} bind:this={nativeElement} id={composition?.timeline ? id : rootId} role="list" aria-label={ariaLabel
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`steps-prefix:${componentPrefix}`} />{/if}
+<ol {...rest} bind:this={nativeElement} data-ant-steps-root=""
+  data-ant-steps-prefix={prefixCss ? componentPrefix : undefined}
+  data-ant-steps-orientation={layout.vertical ? 'vertical' : 'horizontal'}
+  id={composition?.timeline ? id : rootId} role="list" aria-label={ariaLabel
     ?? (ariaLabelledby || composition?.timeline
       ? undefined
       : strings.label)} aria-labelledby={ariaLabelledby} aria-describedby={ariaDescribedby} dir={config.direction}
   class={[
-      'ant-steps ant-steps-css-var',
+      componentPrefix, 'ant-steps-css-var',
       componentTheme.className,
       componentTheme.className && 'ant-steps-source-theme',
-      `ant-steps-${variant}`,
-      `ant-steps-title-${layout.titlePlacement}`,
-      layout.vertical ? 'ant-steps-vertical' : 'ant-steps-horizontal',
-      small && 'ant-steps-small',
-      layout.type && layout.type !== 'dot' && `ant-steps-${layout.type}`,
-      layout.dot && 'ant-steps-dot',
-      ellipsis && 'ant-steps-ellipsis',
-      display.collapsed && 'ant-steps-max-count',
-      actualPercent !== undefined && 'ant-steps-with-progress',
-      config.direction === 'rtl' && 'ant-steps-rtl',
+      `${componentPrefix}-${variant}`,
+      `${componentPrefix}-title-${layout.titlePlacement}`,
+      layout.vertical ? `${componentPrefix}-vertical` : `${componentPrefix}-horizontal`,
+      small && `${componentPrefix}-small`,
+      layout.type && layout.type !== 'dot' && `${componentPrefix}-${layout.type}`,
+      layout.dot && `${componentPrefix}-dot`,
+      ellipsis && `${componentPrefix}-ellipsis`,
+      display.collapsed && `${componentPrefix}-max-count`,
+      actualPercent !== undefined && `${componentPrefix}-with-progress`,
+      config.direction === 'rtl' && `${componentPrefix}-rtl`,
       config.steps?.class,
       className,
       rootClassName,
@@ -187,7 +197,7 @@
       ';'
     )}>
   {#each displayed as step, index (step.key)}
-    <StepItem item={step.item} index={step.originIndex >= 0 ? initial + step.originIndex : index} status={statuses[index]} active={index === display.current}
+    <StepItem prefixCls={componentPrefix} item={step.item} index={step.originIndex >= 0 ? initial + step.originIndex : index} status={statuses[index]} active={index === display.current}
       waveDisabled={!onChange} waveColorSource={variant === 'filled' ? 'color' : null}
       blocked={(disabled
           ?? config.componentDisabled)

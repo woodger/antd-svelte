@@ -23,6 +23,8 @@ export interface StepsProps extends Omit<
   HTMLAttributes<HTMLOListElement>,
   'children' | 'class' | 'style' | 'onchange'
 > {
+  /** Локальный CSS prefix; пустая строка использует ant-steps, ids и namespace токенов сохраняются. */
+  prefixCls?: string;
   items?: readonly (StepsItem | StepsDataItem | false | null | undefined)[];
   /** @defaultValue 0 */
   initial?: number;

@@ -1,5 +1,6 @@
 import { getContext, setContext } from 'svelte';
 export interface StepsIconContext {
+  readonly prefixCls?: string;
   readonly className?: string;
   readonly style?: string;
   readonly decorative: boolean;

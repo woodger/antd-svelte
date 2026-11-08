@@ -2966,7 +2966,18 @@
         "tests/browser/fixtures/StepsConfigFixtures.svelte",
         "tests/browser/fixtures/steps-config-cases.ts",
         "tests/browser/fixtures/ant-design-steps-config-reference.json",
-        "tests/package/steps-config.ssr.test.ts"
+        "tests/package/steps-config.ssr.test.ts",
+        "src/lib/steps-prefix.engine.ts",
+        "src/lib/steps-prefix.test.ts",
+        "src/lib/StepItem.svelte",
+        "src/lib/StepIcon.svelte",
+        "src/lib/steps.dom.ts",
+        "src/lib/vendor/steps-prefix.css.js",
+        "tests/browser/steps-prefix.spec.ts",
+        "tests/browser/steps-prefix-metrics.ts",
+        "tests/browser/fixtures/StepsPrefixFixtures.svelte",
+        "tests/browser/fixtures/ant-design-steps-prefix-reference.json",
+        "tests/package/steps-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -3065,18 +3076,40 @@
             "tests/browser/fixtures/ant-design-steps-metrics.json",
             "docs/reference/theme-context.md"
           ],
-          "note": "16 текущих Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. CustomIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
+          "note": "16 текущих Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. CustomIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; локальный prefixCls и ConfigProvider.steps поддерживаются отдельными features; общий ConfigProvider.prefixCls остаётся в работе."
         },
         {
           "id": "prefix-cls",
-          "title": "Локальный/global prefixCls",
+          "title": "Локальный prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Steps.svelte",
+            "src/lib/steps.types.ts",
+            "src/lib/steps-prefix.engine.ts",
+            "src/lib/steps-prefix.test.ts",
+            "src/lib/StepItem.svelte",
+            "src/lib/StepIcon.svelte",
+            "src/lib/steps.dom.ts",
+            "src/lib/vendor/steps-prefix.css.js",
+            "tests/browser/steps-prefix.spec.ts",
+            "tests/browser/steps-prefix-metrics.ts",
+            "tests/browser/fixtures/StepsPrefixFixtures.svelte",
+            "tests/browser/fixtures/ant-design-steps-prefix-reference.json",
+            "tests/package/steps-prefix.ssr.test.ts"
+          ],
+          "note": "Локальный prefixCls меняет root/layout/item/progress classes, пустая строка возвращает ant-steps. CSS data module steps-prefix воспроизводит 137 правил закреплённого архива с прежними deprecated exclusions; shared marker ant-steps-css-var и --ant-steps-* / --ant-cmp-steps-* сохраняются. Root states ограничены marker, fallback variable defaults имеют нулевую specificity. Тридцать unmodified UMD cases и четыре transitions фиксируют LTR/RTL, current, vertical, dot/inline/navigation/panel, percent, maxCount, small, empty и alias prefixes, semantic priority, component tokens и sibling isolation. Native ol/li/buttons, ids, selection, keyboard, keyed root/button identity и mapped components.Icon сохраняются; восстановление фокуса использует внутренний data marker вместо фиксированного CSS prefix. Общий ConfigProvider.prefixCls остаётся отдельной недостающей возможностью; React development warnings не перенесены."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Общий ConfigProvider.prefixCls",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Steps.svelte",
-            "src/lib/steps.types.ts"
+            "src/lib/config-context.ts"
           ],
-          "note": "Произвольный prefixCls ещё не перенесён; ConfigProvider.steps и component themes поддерживаются отдельно."
+          "note": "Локальный Steps.prefixCls поддерживается; общий ConfigProvider.prefixCls ещё не перенесён."
         }
       ]
     },
