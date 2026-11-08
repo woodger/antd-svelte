@@ -4,10 +4,13 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { provideLayout } from './layout-context';
   import { createLayoutState } from './layout.model.svelte.js';
+  import { getLayoutPrefixCss } from './layout-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { LayoutProps } from './layout.types';
 
   let {
     children,
+    prefixCls,
     hasSider,
     class: className = '',
     rootClassName = '',
@@ -16,18 +19,23 @@
     ...rest
   }: LayoutProps = $props();
   const config = useConfig();
+  let componentPrefix = $derived(prefixCls || 'ant-layout');
+  let prefixCss = $derived(getLayoutPrefixCss(componentPrefix, 'layout'));
   const componentTheme = useComponentTheme('Layout');
   const model = createLayoutState();
   provideLayout(model);
   onDestroy(() => model.destroy());
 </script>
 
-<div {...rest} bind:this={nativeElement} dir={config.direction} data-ant-has-sider={hasSider === false ? 'false' : undefined}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`layout-prefix:${componentPrefix}`} />{/if}
+<div {...rest} bind:this={nativeElement} dir={config.direction} data-ant-layout-root=""
+  data-ant-layout-prefix={prefixCss ? 'layout' : undefined}
+  data-ant-has-sider={hasSider === false ? 'false' : undefined}
   class={[
-      'ant-layout ant-layout-css-var',
+      componentPrefix, 'ant-layout-css-var',
       componentTheme.className,
-      (hasSider ?? model.hasSider) && 'ant-layout-has-sider',
-      config.direction === 'rtl' && 'ant-layout-rtl',
+      (hasSider ?? model.hasSider) && `${componentPrefix}-has-sider`,
+      config.direction === 'rtl' && `${componentPrefix}-rtl`,
       config.layout?.class,
       className,
       rootClassName

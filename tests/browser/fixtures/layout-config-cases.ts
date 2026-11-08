@@ -1,4 +1,4 @@
-import type { LayoutConfig } from 'antd-svelte';
+import type { LayoutConfig, LayoutSiderProps, ThemeConfig } from 'antd-svelte';
 
 export interface LayoutConfigDescriptor {
   className?: string;
@@ -15,6 +15,27 @@ export interface LayoutConfigSample {
   sectionStyle?: boolean;
   withSider?: boolean;
   hasSider?: boolean;
+  prefixCls?: string;
+  siderPrefixCls?: string;
+  collapsed?: boolean;
+  collapsedWidth?: number;
+  reverseArrow?: boolean;
+  siderTheme?: LayoutSiderProps['theme'];
+  theme?: ThemeConfig;
+  siderLocal?: LayoutConfigDescriptor & {
+    classNames?: LayoutSiderProps['classNames'];
+    styles?: Partial<Record<'root' | 'body', Readonly<Record<string, string | number>>>>;
+  };
+}
+
+export function layoutSiderLocalProps(sample: LayoutConfigSample): Partial<LayoutSiderProps> {
+  return {
+    ...layoutConfigRecord(sample.siderLocal),
+    classNames: sample.siderLocal?.classNames,
+    styles: Object.fromEntries(Object.entries(sample.siderLocal?.styles ?? {}).map(
+      ([key, style]) => [key, layoutConfigRecord({ style })?.style]
+    ))
+  };
 }
 
 export function layoutConfigRecord(descriptor?: LayoutConfigDescriptor): LayoutConfig | undefined {

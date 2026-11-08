@@ -153,6 +153,8 @@ defaults ограничены marker, остальные namespace Button/Spin �
 prefix меняет Timeline selectors, namespace Steps и токенов сохраняются.
 Рецепт steps-prefix выводит 137 правил Steps, включая layouts и progress;
 runtime изолирует root states, сохраняет token namespace и deprecated exclusions.
+Рецепт layout-prefix выводит 35 flat rules Layout/Sider; runtime выбирает свою
+группу, сохраняет Menu namespace и ограничивает defaults/state selectors корнем.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.

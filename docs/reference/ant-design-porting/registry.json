@@ -1363,7 +1363,18 @@
         "tests/browser/fixtures/LayoutConfigFixtures.svelte",
         "tests/browser/fixtures/layout-config-cases.ts",
         "tests/browser/fixtures/ant-design-layout-config-reference.json",
-        "tests/package/layout-config.ssr.test.ts"
+        "tests/package/layout-config.ssr.test.ts",
+        "src/lib/layout-prefix.engine.ts",
+        "src/lib/layout-prefix.test.ts",
+        "src/lib/vendor/layout-prefix.css.js",
+        "src/lib/theme.css",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/layout-prefix.spec.ts",
+        "tests/browser/layout-prefix-metrics.ts",
+        "tests/browser/fixtures/LayoutPrefixFixtures.svelte",
+        "tests/browser/fixtures/ant-design-layout-prefix-reference.json",
+        "tests/browser/fixtures/ant-design-layout-section-prefix-observation.json",
+        "tests/package/layout-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -1463,15 +1474,26 @@
         },
         {
           "id": "prefix-cls",
-          "title": "Локальный/global prefixCls Layout и секций",
-          "state": "missing",
+          "title": "Локальный prefixCls Layout/Sider и секций",
+          "state": "partial",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Layout.svelte",
-            "src/lib/LayoutPart.svelte",
-            "src/lib/LayoutSider.svelte"
+            "src/lib/LayoutSider.svelte",
+            "src/lib/layout.types.ts",
+            "src/lib/layout-prefix.engine.ts",
+            "src/lib/layout-prefix.test.ts",
+            "src/lib/vendor/layout-prefix.css.js",
+            "src/lib/theme.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/layout-prefix.spec.ts",
+            "tests/browser/layout-prefix-metrics.ts",
+            "tests/browser/fixtures/LayoutPrefixFixtures.svelte",
+            "tests/browser/fixtures/ant-design-layout-prefix-reference.json",
+            "tests/browser/fixtures/ant-design-layout-section-prefix-observation.json",
+            "tests/package/layout-prefix.ssr.test.ts"
           ],
-          "note": "ConfigProvider.layout class/style и component themes поддерживаются отдельно; произвольный prefixCls Layout/Header/Content/Footer/Sider ещё не перенесён."
+          "note": "Layout.prefixCls и LayoutSider.prefixCls поддерживаются независимо, empty string восстанавливает ant-layout/ant-layout-sider. Классы root/states/body/trigger следуют своему prefix, --ant-layout-* / ant-layout-css-var и Menu namespace сохраняются. CSS data module layout-prefix воспроизводит 35 flat rules; runtime выбирает Layout или Sider, state selectors имеют own marker, variable defaults zero specificity. Native SSR :has fallback использует data markers независимо от классов. Тридцать два unmodified UMD cases в независимых документах и четыре transitions в отдельном документе фиксируют LTR/RTL, single/both/default prefixes, collapsed/zero/reverse/light, aliases, nested records, semantic priority и tokens. DOM/ids/aria-controls, keyboard, drafts/selection/focus, inert, collapse, explicit owner focus и legacy dark compact сохраняются; внутренний focus не зависит от обновления публичного ref. Собственный prefixCls Header/Content/Footer пока не перенесён. Общий ConfigProvider.prefixCls остаётся отдельным gap; component config/themes сохранены. Без новых dependencies и script/config changes."
         },
         {
           "id": "native-style-shorthand-reset",
@@ -1485,6 +1507,31 @@
             "tests/package/layout-config.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, официальный UMD с React 18.3.1. ConfigProvider.layout.style padding=13, затем Layout.style paddingTop=9, затем удаление локального style. На повторно используемом root получается padding-top=0px при padding-right=13px; fresh mount того же итогового config даёт 13px по обеим сторонам. Raw observations.shorthandRemoval хранит оба замера. Причина соответствует React diff удаления longhand без повторного применения неизменившегося shorthand. Native Svelte style-string сохраняет ожидаемые 13px; React update defect не копируется. Browser expected correction ограничена sibling.root.paddingTop на config-clear, остальные layers и Source metrics сравниваются без изменений, кроме ранее согласованных standalone variables/RTL."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Общий ConfigProvider.prefixCls",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/config-context.ts",
+            "src/lib/Layout.svelte"
+          ],
+          "note": "Локальные Layout/Sider prefixes и ConfigProvider.layout class/style поддерживаются; общий ConfigProvider.prefixCls пока не перенесён."
+        },
+        {
+          "id": "native-prefix-style-collisions",
+          "title": "Исходные коллизии prefix, CSS-кэш и оформление секций",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/layout-prefix.engine.ts",
+            "tests/browser/layout-prefix.spec.ts",
+            "tests/browser/fixtures/ant-design-layout-prefix-reference.json",
+            "tests/browser/fixtures/ant-design-layout-section-prefix-observation.json",
+            "tests/package/layout-prefix.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, unmodified UMD/React 18.3.1. Prefix Layout=ant-layout-sider, Sider=ant-layout или общий ant-layout-css-var смешивают background/position/flex-direction ролей и sibling roots. CSSinJS сохраняет созданные стили после unmount: после alias кейса обычный local-priority sibling root остаётся position=relative/background=sider; в новом документе position=static/background=body. Raw cases, transitions и observations.sequentialStyleCache сохраняют эти значения. Native markers изолируют измеренные свойства; browser corrections ограничены известными alias combinations и сравнивают фон/position/flex-direction с независимым normal baseline, остальные Source metrics остаются неизменны. Матрица снята в отдельных документах с согласованными inherited color/font-size/unitless line-height, reactive sequence отдельно. Другое raw observation: Header/Content/Footer с собственным prefix получают Layout container display:flex/flex-direction:column и body background вместо section styles; для Header исчезают 64px и padding 0 50px, Footer теряет padding 24px 50px. Эти section prefixes пока не реализованы; перенос ошибки не требуется."
         }
       ]
     },

@@ -16,6 +16,8 @@ export interface LayoutSectionProps extends Omit<
 }
 /** Контейнер Layout; hasSider позволяет явно задать структуру при SSR. */
 export interface LayoutProps extends LayoutSectionProps {
+  /** Локальный CSS prefix контейнера; namespace секций, Sider и токенов независимы. */
+  prefixCls?: string;
   hasSider?: boolean;
 }
 /** Общие class/style применяются только к контейнерам Layout, без его секций и Sider. */
@@ -25,6 +27,8 @@ export type LayoutCollapseType = 'clickTrigger' | 'responsive';
 export type LayoutSiderSemanticSlots = Partial<Record<'root' | 'body', string>>;
 /** Боковая секция Layout с collapse, responsive breakpoint и trigger. */
 export interface LayoutSiderProps extends LayoutSectionProps {
+  /** Локальный CSS prefix Sider; пустая строка восстанавливает ant-layout-sider. */
+  prefixCls?: string;
   /** Поддерживает bind:collapsed. */
   collapsed?: boolean;
   /** @defaultValue false */

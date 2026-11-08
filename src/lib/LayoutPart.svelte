@@ -23,6 +23,7 @@
 </script>
 
 <svelte:element this={tag} {...rest} bind:this={nativeElement} dir={config.direction}
+  data-ant-layout-part={part}
   class={['ant-layout-css-var', `ant-layout-${part}`, componentTheme.className, className, rootClassName]}
   style={[!layout && componentTheme.style, style].filter(Boolean).join(';')}>
   {@render children?.()}

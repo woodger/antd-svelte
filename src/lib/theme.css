@@ -107,7 +107,9 @@
 }
 
 .ant-layout.ant-layout-css-var,
-.ant-layout-sider.ant-layout-css-var {
+.ant-layout-sider.ant-layout-css-var,
+[data-ant-layout-root].ant-layout-css-var,
+[data-ant-layout-sider].ant-layout-css-var {
   --ant-layout-body-bg: var(--ant-color-bg-layout);
   --ant-layout-footer-bg: var(--ant-color-bg-layout);
   --ant-layout-header-color: var(--ant-color-text);
@@ -126,6 +128,9 @@
 .ant-layout:not([data-ant-has-sider='false']):has(> .ant-layout-sider) { flex-direction: row; }
 .ant-layout:not([data-ant-has-sider='false']):has(> .ant-layout-sider) > .ant-layout,
 .ant-layout:not([data-ant-has-sider='false']):has(> .ant-layout-sider) > .ant-layout-content { width: 0; }
+[data-ant-layout-root]:not([data-ant-has-sider='false']):has(> [data-ant-layout-sider]) { flex-direction: row; }
+[data-ant-layout-root]:not([data-ant-has-sider='false']):has(> [data-ant-layout-sider]) > [data-ant-layout-root],
+[data-ant-layout-root]:not([data-ant-has-sider='false']):has(> [data-ant-layout-sider]) > [data-ant-layout-part='content'] { width: 0; }
 
 .ant-svelte-theme[data-ant-theme='dark'] {
   color-scheme: dark;

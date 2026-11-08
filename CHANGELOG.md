@@ -9,6 +9,11 @@
 
 ### Added
 
+- Layout и LayoutSider поддерживают независимые локальные prefixCls. Новый
+  CSS-рецепт layout-prefix воспроизводит 35 правил; сохранены namespace токенов,
+  native SSR-определение Sider, состояния, ids, ARIA, темы и keyed DOM.
+  Исходные prefix collisions/cache leaks и дефект префиксов секций сохранены в raw data.
+
 - ConfigProvider.layout задаёт общие class/style только для контейнеров Layout.
   Сохранены локальные приоритеты, nested replacement, секции, темы, native RTL,
   DOM, drafts/selection/focus и collapse-состояние Sider при обновлении config.
@@ -1136,6 +1141,10 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Sider сохраняет восстановление фокуса при обновляемых props и сворачивании
+  содержимого до нулевой ширины. Внутренний focus lifecycle использует реальный DOM
+  body; явный переход владельца на другой control не перезаписывается.
 
 - Transfer: model errors передают aria-invalid и description на корень,
   в том числе при ручном success/validating/пустом статусе FormItem.

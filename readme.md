@@ -957,9 +957,27 @@ ConfigProvider.layout задаёт общие class/style только для к
 включая {}, заменяет его целиком. Header/Content/Footer/Sider напрямую этот record
 не получают. Обновление config сохраняет DOM, черновики, выделение/фокус и collapse.
 Самостоятельные секции сохраняют native variables/RTL; исходные отличия записаны
-в raw reference и учтены явно при сравнении. PrefixCls пока не поддержан.
+в raw reference и учтены явно при сравнении.
 В эталоне также зафиксирован сброс неизменившегося padding после удаления
 локального paddingTop при React update; native строка стилей сохраняет отступ.
+
+Layout.prefixCls и LayoutSider.prefixCls независимы; пустая строка возвращает
+ant-layout и ant-layout-sider. Классы состояний, children и trigger следуют своему
+prefix; namespace --ant-layout-* и общий marker ant-layout-css-var сохраняются.
+Рецепт layout-prefix извлекает 35 правил, runtime выбирает свою группу Layout/Sider.
+Native SSR-определение прямого Sider использует внутренние атрибуты; смена prefix
+сохраняет DOM, ids/aria-controls, collapse, черновики, выделение и фокус.
+Восстановление фокуса использует фактический DOM body и сохраняет явный выбор владельца.
+Header/Content/Footer пока не принимают собственный prefixCls; общий prefix
+ConfigProvider тоже ещё не перенесён.
+
+Исходные коллизии prefix с Layout/Sider/variable classes и сохранённым CSS-кэшем
+записаны в [raw reference](tests/browser/fixtures/ant-design-layout-prefix-reference.json).
+Native markers защищают измеренные роли и соседние scopes; expected corrections
+ограничены фоном, position и flex-direction известных alias cases. Замеры каждого
+варианта получены в новом документе, transitions — отдельно в одном документе.
+У секций upstream [свой дефект prefix](tests/browser/fixtures/ant-design-layout-section-prefix-observation.json):
+Header/Content/Footer получают оформление контейнера; наблюдение оставлено для отдельного разбора.
 
 ## Descriptions
 
