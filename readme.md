@@ -4555,6 +4555,19 @@ colorTextDisabled активной темы; прямой --ant-steps-nav-arrow-
 Item.onClick вызывается перед onChange, включая повторный выбор current;
 в disabled оба callback подавлены. Содержимое шага задаётся через content.
 
+ConfigProvider.steps задаёт общие class/style/classNames/styles для десяти slots.
+Классы config и local накапливаются. Root styles идут в порядке config.styles.root
+→ config.style → local styles.root → local style; item-specific слои сохраняют приоритет.
+Callbacks получают прежние native props с вычисленными layout/type/titlePlacement
+и percent; текущие defaults/status/size и правила current не меняются.
+Undefined наследует steps-record, любой собственный объект, включая {}, заменяет его.
+В композиции Timeline, как в Source InternalContext, действуют только plain class/style:
+semantic classNames/styles Steps не применяются и их callbacks не вызываются.
+Настройки самого ConfigProvider.timeline и локальные Timeline слои сохраняют приоритет.
+Сверка: [36 исходных случаев и 4 обновления](./tests/browser/fixtures/ant-design-steps-config-reference.json),
+[браузер](./tests/browser/steps-config.spec.ts),
+[публичные типы и SSR](./tests/package/steps-config.ssr.test.ts), `?fixture=steps-config`.
+
 IconRender — Snippet<[originalIcon, info]>, где info содержит index/active/item/
 components.Icon. Можно отрендерить исходный Snippet или использовать переданный
 Svelte Icon-компонент.
@@ -4563,7 +4576,7 @@ Bind:nativeElement возвращает ol; rootClassName добавляется
 Сохранены согласованные отличия v1 от React: нативные кнопки внутри именованного
 списка, keyed focus recovery, clamp current, responsive-порог 532px (исходный
 useBreakpoint версии 6.6.8 использует xs), componentDisabled и locale.steps.
-Произвольные prefixCls и component config вне темы ещё не перенесены.
+Произвольный prefixCls пока не перенесён.
 Wave работает для доступных items при общем onChange.
 Новые сценарии находятся в ?fixture=steps-variants и втором примере #steps;
 unit/SSR/Chromium проверяют layouts, collapse/index mapping, render Snippets,

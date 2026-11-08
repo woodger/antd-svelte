@@ -2958,7 +2958,15 @@
         "tests/browser/steps-theme.spec.ts",
         "tests/browser/fixtures/StepsThemeFixtures.svelte",
         "tests/browser/fixtures/ant-design-steps-metrics.json",
-        "docs/reference/theme-context.md"
+        "docs/reference/theme-context.md",
+        "src/lib/semantic-style.engine.ts",
+        "tests/browser/steps-config.spec.ts",
+        "tests/browser/steps-config-metrics.ts",
+        "tests/browser/fixtures/StepsConfigCase.svelte",
+        "tests/browser/fixtures/StepsConfigFixtures.svelte",
+        "tests/browser/fixtures/steps-config-cases.ts",
+        "tests/browser/fixtures/ant-design-steps-config-reference.json",
+        "tests/package/steps-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -2999,11 +3007,25 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls и глобальный steps config вне темы",
-          "state": "missing",
+          "title": "ConfigProvider.steps: общие классы и semantic styles",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Исходные component tokens/aliases подключены отдельно; произвольный component config и prefixCls ещё не перенесены."
+          "evidence": [
+            "src/lib/Steps.svelte",
+            "src/lib/steps.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "src/lib/semantic-style.engine.ts",
+            "tests/browser/steps-config.spec.ts",
+            "tests/browser/steps-config-metrics.ts",
+            "tests/browser/fixtures/StepsConfigCase.svelte",
+            "tests/browser/fixtures/StepsConfigFixtures.svelte",
+            "tests/browser/fixtures/steps-config-cases.ts",
+            "tests/browser/fixtures/ant-design-steps-config-reference.json",
+            "tests/package/steps-config.ssr.test.ts"
+          ],
+          "note": "StepsConfig экспортирован; ConfigProvider.steps class/style/classNames/styles для десяти slots root/item/itemWrapper/itemIcon/itemSection/itemHeader/itemTitle/itemSubtitle/itemContent/itemRail. Classes context/local накапливаются; root styles: config.styles.root, config.style, local styles.root, local style. Item-specific styles/class и item.style сохраняют приоритет. Callbacks получают прежний native info.props с вычисленными layout/type/titlePlacement/percent и существующими defaults/status/size/current semantics. Undefined наследует record, любой собственный объект включая {} заменяет его. В Timeline composition Source InternalContext исключает Steps classNames/styles полностью, включая вызовы callbacks; plain class/style наследуются, затем Timeline layers имеют приоритет. Тридцать шесть unmodified UMD cases и четыре transitions фиксируют slots, root/context/local/item priority, callbacks/current/layouts default/dot/inline/navigation/panel/vertical, nested empty/replacement и Timeline composition/overrides. Throwing native callbacks в composed fixture защищают запрет их вызова, SSR сохраняет native ol/li и scoped props без DOM. Root identity/sibling isolation проверяются при config и prop updates; clamp current, keys/focus, responsive 532px standalone/576px Timeline, componentDisabled/locale, tokens и отсутствие deprecated слоя сохраняются. Новых npm dependencies, CSS или script/config changes нет."
         },
         {
           "id": "source-wave",
@@ -3044,6 +3066,17 @@
             "docs/reference/theme-context.md"
           ],
           "note": "16 текущих Steps и шесть Timeline defaults, aliases и отдельные component algorithms, zero/undefined, runtime CSS lengths и custom CSS prefix/hash. Общий корень объединяет Steps → Timeline aliases в исходном порядке; semantic/plain styles и вычисленный titleSpan сохраняют приоритет. CustomIconSize/customIconTop/iconTop и waitIcon*/finishIcon* создают переменные, но исходный CSS их не читает. Scoped UMD declarations и 328 наборов computed metrics для 18 тем: LTR/RTL, размеры/статусы/custom icons, dot/navigation/outlined/vertical/title-vertical/panel/inline/progress и обе ориентации Timeline. SSR и обновления сохраняют DOM, нативные кнопки/поля, фокус/выделение и callbacks. Native-only темы и согласованные Svelte contracts сохранены; произвольные prefixCls/component config вне темы остаются в работе."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный/global prefixCls",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Steps.svelte",
+            "src/lib/steps.types.ts"
+          ],
+          "note": "Произвольный prefixCls ещё не перенесён; ConfigProvider.steps и component themes поддерживаются отдельно."
         }
       ]
     },

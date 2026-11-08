@@ -9,6 +9,10 @@
 
 ### Added
 
+- ConfigProvider.steps задаёт общие классы и semantic styles/callbacks.
+  Сохранены локальные/item приоритеты и native поведение. В Timeline передаются
+  только plain class/style Steps; исключённые semantic callbacks не вызываются.
+
 - ConfigProvider.timeline задаёт общие классы и semantic styles/callbacks.
   Сохранены локальные/item приоритеты, titleSpan, reverse, ol/li, refs и фокус;
   вложенный record заменяет родительский, reactive config не пересоздаёт корень.

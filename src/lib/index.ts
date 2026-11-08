@@ -605,6 +605,7 @@ export type {
 } from './result.types';
 export type {
   StepsProps,
+  StepsConfig,
   StepsItem,
   StepsStatus,
   StepsOrientation,

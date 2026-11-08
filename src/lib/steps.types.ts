@@ -58,3 +58,6 @@ export interface StepsProps extends Omit<
   class?: string;
   style?: string;
 }
+
+/** Общие классы/стили; Timeline наследует только class/style, как internal Steps в source. */
+export type StepsConfig = Pick<StepsProps, 'class' | 'style' | 'classNames' | 'styles'>;

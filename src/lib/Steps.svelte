@@ -2,13 +2,14 @@
   import { useStepsComposition } from './steps-composition-context';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { mergeComponentSemantics } from './semantic-style.engine';
   import StepItem from './StepItem.svelte';
   import { connectStepsFocus } from './steps.dom';
   import { getStepsStatus, normalizeStepsCurrent } from './steps.engine';
   import { stepsDataItems, stepsLayout } from './steps-data.engine';
   import { displaySteps } from './steps-display.engine';
   import { ruRU } from './types';
-  import type { NormalizedStepsDataItem } from './steps-data.engine';
+  import type { NormalizedStepsDataItem, StepsSemanticSlots } from './steps-data.engine';
   import type { StepsProps } from './steps.types';
 
   let {
@@ -95,8 +96,17 @@
       }
     }
   );
-  let classes = $derived(typeof classNames === 'function' ? classNames(info) : classNames ?? {});
-  let slots = $derived(typeof styles === 'function' ? styles(info) : styles ?? {});
+  // Source InternalContext Timeline исключает Steps semantics, сохраняя plain root style/class.
+  let componentConfig = $derived(composition?.timeline
+    ? { style: config.steps?.style } : config.steps);
+  let semantic = $derived(mergeComponentSemantics<keyof StepsSemanticSlots, StepsProps>(
+    componentConfig,
+    info.props,
+    ['root', 'item', 'itemWrapper', 'itemIcon', 'itemSection', 'itemHeader',
+      'itemTitle', 'itemSubtitle', 'itemContent', 'itemRail']
+  ));
+  let classes = $derived(semantic.classes);
+  let slots = $derived(semantic.styles);
   let displayed = $derived(
     display.steps.map(
       step => ({
@@ -166,11 +176,12 @@
       display.collapsed && 'ant-steps-max-count',
       actualPercent !== undefined && 'ant-steps-with-progress',
       config.direction === 'rtl' && 'ant-steps-rtl',
+      config.steps?.class,
       className,
       rootClassName,
       classes.root
     ]}
-  style={[componentTheme.style, `--ant-cmp-steps-items-offset:${offset}`, slots.root, style].filter(
+  style={[componentTheme.style, `--ant-cmp-steps-items-offset:${offset}`, slots.root].filter(
       Boolean
     ).join(
       ';'
