@@ -64,7 +64,7 @@
     circle: { success: 'check', exception: 'close' }
   } as const;
   let host = $state<HTMLDivElement>();
-  let prefix = $derived(prefixCls || 'ant-progress');
+  let prefix = $derived(config.getPrefixCls('progress', prefixCls));
   let prefixCss = $derived(getProgressPrefixCss(prefix));
   let size = $derived(providedSize ?? 'medium');
   let value = $derived(normalizeProgressPercent(percent));

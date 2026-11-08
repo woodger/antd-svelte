@@ -16,7 +16,7 @@
   let { nativeElement = $bindable(), ...props }: CheckableTagGroupProps<Value> = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Tag');
-  let prefix = $derived(props.prefixCls || 'ant-tag');
+  let prefix = $derived(config.getPrefixCls('tag', props.prefixCls));
   let prefixCss = $derived(getTagPrefixCss(prefix));
   let groupPrefix = $derived(`${prefix}-checkable-group`);
   let innerValue = $state.raw<Value | Value[] | null | undefined>(

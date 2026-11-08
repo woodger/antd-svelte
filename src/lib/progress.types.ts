@@ -36,6 +36,7 @@ export interface ProgressSemanticInfo {
 interface ProgressBaseProps extends Omit<
   HTMLAttributes<HTMLDivElement>, 'children' | 'class' | 'style'
 > {
+  /** Локальный CSS prefix; отсутствие и пустая строка наследуют ConfigProvider. */
   prefixCls?: string;
   percent?: number;
   showInfo?: boolean;

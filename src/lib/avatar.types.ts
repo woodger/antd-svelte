@@ -30,7 +30,7 @@ export interface AvatarProps extends Omit<
   gap?: number;
   icon?: Snippet;
   children?: Snippet;
-  /** Локальный component prefix; отсутствие и пустая строка используют ant-avatar. */
+  /** Локальный component prefix; отсутствие и пустая строка наследуют ConfigProvider. */
   prefixCls?: string;
   onError?: () => boolean | void;
   /**

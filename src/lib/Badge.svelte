@@ -51,9 +51,9 @@
   const token = useToken();
   let indicator = $state<HTMLElement>();
   let zoom = $state.raw<BadgeZoomState>({ rendered: false });
-  let prefix = $derived(prefixCls || 'ant-badge');
-  let numberPrefix = $derived(scrollNumberPrefixCls || 'ant-scroll-number');
-  let prefixCss = $derived(getBadgePrefixCss(prefix));
+  let prefix = $derived(config.getPrefixCls('badge', prefixCls));
+  let numberPrefix = $derived(config.getPrefixCls('scroll-number', scrollNumberPrefixCls));
+  let prefixCss = $derived(getBadgePrefixCss(prefix, config.getPrefixCls()));
   let nativeIndicator = $derived(prefix === 'ant-badge' && numberPrefix === 'ant-scroll-number');
   let motionClass = $derived(zoom.className?.split('ant-badge-zoom').join(`${prefix}-zoom`));
   const generatedId = $props.id();

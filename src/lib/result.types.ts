@@ -53,6 +53,7 @@ export interface ResultProps {
   'aria-describedby'?: string;
   class?: string;
   style?: string;
+  /** Локальный CSS prefix; отсутствие и пустая строка наследуют ConfigProvider. */
   prefixCls?: string;
   rootClassName?: string;
   /** Object/function slots; callbacks получают входные props с разрешённым status. */

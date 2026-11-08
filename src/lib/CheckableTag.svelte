@@ -31,7 +31,7 @@
   }: CheckableTagProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Tag');
-  let prefix = $derived(prefixCls || 'ant-tag');
+  let prefix = $derived(config.getPrefixCls('tag', prefixCls));
   let prefixCss = $derived(getTagPrefixCss(prefix));
   let blocked = $derived(disabled ?? config.componentDisabled);
   let rootStyle = $derived([

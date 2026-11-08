@@ -25,6 +25,7 @@ export interface SpinRef {
 export interface SpinProps extends Omit<
   HTMLAttributes<HTMLDivElement>, 'children' | 'class' | 'style' | 'aria-hidden'
 > {
+  /** Локальный CSS prefix; отсутствие и пустая строка наследуют ConfigProvider. */
   prefixCls?: string;
   /** @defaultValue true */
   spinning?: boolean;

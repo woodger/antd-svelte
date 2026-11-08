@@ -47,7 +47,7 @@
   const theme = useToken();
   const breakpoint = createBreakpoint();
   let host = $derived(nativeElement);
-  let prefix = $derived(prefixCls || 'ant-avatar');
+  let prefix = $derived(config.getPrefixCls('avatar', prefixCls));
   let prefixCss = $derived(getAvatarPrefixCss(prefix));
   let imageSnippet = $derived(typeof src === 'function' ? src : undefined);
   let sourceSrc = $derived(typeof src === 'string' ? src : undefined);

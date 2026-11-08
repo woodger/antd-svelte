@@ -44,7 +44,7 @@
     warning: 'warning-filled'
   } as const;
   let host = $state<HTMLDivElement>();
-  let prefix = $derived(prefixCls || 'ant-result');
+  let prefix = $derived(config.getPrefixCls('result', prefixCls));
   let prefixCss = $derived(getResultPrefixCss(prefix));
   let kind = $derived(
     String(status) as 'success' | 'error' | 'info' | 'warning' | '403' | '404' | '500'

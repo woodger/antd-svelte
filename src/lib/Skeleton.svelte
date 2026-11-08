@@ -40,7 +40,7 @@
   let host = $state<HTMLDivElement>();
   let content = $state<HTMLDivElement>();
   let placeholder = $state<HTMLDivElement>();
-  let prefix = $derived(prefixCls || 'ant-skeleton');
+  let prefix = $derived(config.getPrefixCls('skeleton', prefixCls));
   let prefixCss = $derived(getSkeletonPrefixCss(prefix));
   let layout = $derived(resolveSkeletonLayout({ avatar, title, paragraph }));
   let strings = $derived({ ...ruRU.skeleton, ...config.locale.skeleton });

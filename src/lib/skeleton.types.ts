@@ -8,6 +8,7 @@ export interface SkeletonElementSlots {
   content?: string;
 }
 export interface SkeletonElementProps {
+  /** Локальный CSS prefix; отсутствие и пустая строка наследуют ConfigProvider. */
   prefixCls?: string;
   class?: string;
   rootClassName?: string;
@@ -77,6 +78,7 @@ export interface SkeletonProps {
   class?: string;
   /** Существующий native host; styles.root относится к декоративному каркасу. */
   style?: string;
+  /** Локальный CSS prefix каркаса; отсутствие и пустая строка наследуют ConfigProvider. */
   prefixCls?: string;
   rootClassName?: string;
   classNames?: SkeletonSemanticSlots

@@ -66,9 +66,9 @@ export interface BadgeProps extends Omit<
   class?: string;
   style?: string;
   rootClassName?: string;
-  /** Локальный Badge prefix; связанные styles создаются из закреплённого CSS template. */
+  /** Локальный Badge prefix; иначе ConfigProvider. CSS берётся из закреплённого template. */
   prefixCls?: string;
-  /** Меняет ScrollNumber/digit classes; stylesheet использует глобальный ant-scroll-number. */
+  /** Локальные ScrollNumber/digit classes; иначе ConfigProvider. CSS следует общему prefix. */
   scrollNumberPrefixCls?: string;
   /** Нативный onclick имеет приоритет над React-compatible alias. */
   onClick?: HTMLAttributes<HTMLSpanElement>['onclick'];

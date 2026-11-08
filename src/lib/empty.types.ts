@@ -32,6 +32,7 @@ export interface EmptyProps {
   'aria-describedby'?: string;
   class?: string;
   style?: string;
+  /** Локальный CSS prefix; отсутствие и пустая строка наследуют ConfigProvider. */
   prefixCls?: string;
   rootClassName?: string;
   classNames?: EmptySemantic;

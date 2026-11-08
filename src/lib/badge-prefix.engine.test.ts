@@ -25,4 +25,23 @@ describe('Badge prefix stylesheet', () => {
     expect(getBadgePrefixCss('badge-$&')).toContain('.badge-$&-count');
     expect(getBadgePrefixCss('badge-</style><script>')).not.toContain('</style');
   });
+
+  it('keeps global number selectors independent of a local Badge prefix', () => {
+    const css = getBadgePrefixCss('local-badge', 'suite')!;
+
+    expect(css).toContain('.local-badge:where(.ant-badge-css-var) .suite-scroll-number');
+    expect(css).toContain('.suite-scroll-number-only');
+    expect(css).not.toContain('.ant-scroll-number');
+    expect(getBadgePrefixCss('ant-badge', 'suite')).toContain('.suite-scroll-number');
+  });
+
+  it('does not rewrite an inserted Badge alias as a number selector', () => {
+    const css = getBadgePrefixCss('ant-scroll-number', 'suite')!;
+
+    expect(css).toContain('.ant-scroll-number:where(.ant-badge-css-var)');
+    expect(css).toContain('.ant-scroll-number-count');
+    expect(css).toContain('.suite-scroll-number-only');
+    expect(getBadgePrefixCss('badge', 'root-$&')).toContain('.root-$&-scroll-number-only');
+    expect(getBadgePrefixCss('badge', '</style><script>')).not.toContain('</style');
+  });
 });

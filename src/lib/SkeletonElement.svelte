@@ -30,7 +30,7 @@
   } = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Skeleton');
-  let prefix = $derived(prefixCls || 'ant-skeleton');
+  let prefix = $derived(config.getPrefixCls('skeleton', prefixCls));
   let prefixCss = $derived(getSkeletonPrefixCss(prefix));
   let mergedSize = $derived(size ?? config.componentSize);
   let contentClass = $derived(kind === 'node' && internalClassName

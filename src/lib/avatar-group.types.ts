@@ -22,7 +22,7 @@ export interface AvatarGroupProps {
   items: readonly AvatarGroupItem[];
   size?: AvatarSize;
   shape?: AvatarShape;
-  /** Меняет group/popover classes; префиксы Avatar участников остаются независимыми. */
+  /** Локальный group/popover prefix; иначе ConfigProvider. Avatar участников независимы. */
   prefixCls?: string;
   max?: AvatarGroupMax;
   id?: string;

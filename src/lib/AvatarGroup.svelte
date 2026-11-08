@@ -29,7 +29,7 @@
   const componentTheme = useComponentTheme('Avatar');
   let rootStyle = $derived([componentTheme.style, style].filter(Boolean).join(';') || undefined);
   let host = $derived(nativeElement);
-  let prefix = $derived(prefixCls || 'ant-avatar');
+  let prefix = $derived(config.getPrefixCls('avatar', prefixCls));
   let prefixCss = $derived(getAvatarPrefixCss(prefix));
   let resolvedMax = $derived(max ?? {});
   let layout = $derived(getAvatarGroupItems(items, resolvedMax.count));

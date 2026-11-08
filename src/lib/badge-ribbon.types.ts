@@ -29,7 +29,7 @@ export interface BadgeRibbonProps extends BadgeRibbonConfig {
   /** @defaultValue 'end' */
   placement?: BadgeRibbonPlacement;
   rootClassName?: string;
-  /** Переопределяет DOM prefix; vendor CSS использует исходный ant-ribbon. */
+  /** Локальный DOM prefix; иначе ConfigProvider. Markers и namespace variables сохраняются. */
   prefixCls?: string;
   /** bind:nativeElement заменяет RibbonRef.nativeElement и очищается при unmount. */
   nativeElement?: HTMLDivElement;

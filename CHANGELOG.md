@@ -9,6 +9,11 @@
 
 ### Added
 
+- Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton с primitives,
+  Spin, Progress и Result наследуют ConfigProvider.prefixCls. ScrollNumber и CSS
+  Ribbon используют общий prefix отдельно от локального. Сохранены native
+  wrappers/classes/spacing, DOM/focus и reduced motion цифр Badge.
+
 - Divider, Flex и Segmented наследуют ConfigProvider.prefixCls с локальным
   приоритетом. Смена prefix сохраняет DOM, выбор, FormData, callbacks и фокус.
 

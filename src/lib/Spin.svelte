@@ -50,7 +50,7 @@
   const model = createSpinModel(() => request);
   const focus = createSpinFocus();
   let visible = $derived(model.visible);
-  let prefix = $derived(prefixCls || 'ant-spin');
+  let prefix = $derived(config.getPrefixCls('spin', prefixCls));
   let prefixCss = $derived(getSpinPrefixCss(prefix));
   let resolvedSize = $derived(size ?? config.explicitComponentSize);
   let resolvedPercent = $derived(percent === 'auto' ? mockPercent : percent);

@@ -49,7 +49,7 @@ export type CheckableTagGroupSemantic<Value extends CheckableTagValue = Checkabl
   | ((info: { props: CheckableTagGroupProps<Value>; }) => CheckableTagGroupSlots);
 
 interface CheckableTagGroupBaseProps<Value extends CheckableTagValue> extends AriaAttributes {
-  /** Локальный component prefix; не передаётся дочерним CheckableTag, как upstream. */
+  /** Локальный prefix; иначе ConfigProvider. Дочерние CheckableTag получают prefix независимо. */
   prefixCls?: string;
   /** Стабильные уникальные values; строка и число с одинаковым текстом различаются. */
   options?: readonly (Value | CheckableTagOption<Value>)[];
@@ -114,7 +114,7 @@ export interface TagProps extends Omit<
   HTMLAttributes<HTMLSpanElement | HTMLAnchorElement>, 'children' | 'class' | 'style' | 'color'
 > {
   children: Snippet;
-  /** Локальный component prefix; пустая строка использует ant-tag. */
+  /** Локальный component prefix; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
   /** Preset, status или CSS-цвет; отсутствие сохраняет прежний default class. */
   color?: TagColor;
@@ -154,7 +154,7 @@ export interface CheckableTagProps extends Omit<
   HTMLAttributes<HTMLButtonElement>,
   'children' | 'class' | 'style'
 > {
-  /** Локальный component prefix; пустая строка использует ant-tag. */
+  /** Локальный component prefix; пустая строка наследует ConfigProvider. */
   prefixCls?: string;
   children: Snippet;
   /** @defaultValue false */

@@ -32,7 +32,7 @@
   const config = useConfig();
   const componentTheme = useComponentTheme('Empty');
   let host = $state<HTMLDivElement>();
-  let prefix = $derived(prefixCls || 'ant-empty');
+  let prefix = $derived(config.getPrefixCls('empty', prefixCls));
   let prefixCss = $derived(getEmptyPrefixCss(prefix));
   let mergedImage = $derived(image ?? config.empty?.image ?? 'default');
   let strings = $derived({ ...ruRU.empty, ...config.locale.empty });

@@ -30,10 +30,10 @@
 </script>
 
 <style>
-  @media (prefers-reduced-motion: reduce) { .ant-scroll-number-only { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { :global(.ant-badge-css-var) span[data-ant-badge-digit] { transition: none; } }
 </style>
 
-<span class={`${prefixCls}-only`}
+<span class={`${prefixCls}-only`} data-ant-badge-digit
   style={plan.transform ? `transform:${plan.transform}` : 'transition:none'}
   ontransitionend={finish}>{#each plan.units as unit (String(unit.key))}<span
     class={[`${prefixCls}-only-unit`, unit.current && 'current']}

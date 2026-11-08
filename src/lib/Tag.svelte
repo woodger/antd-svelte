@@ -43,7 +43,7 @@
   const wave = useWave('Tag', () => blocked);
   const generatedId = $props.id();
   let host = $derived(nativeElement);
-  let prefix = $derived(prefixCls || 'ant-tag');
+  let prefix = $derived(config.getPrefixCls('tag', prefixCls));
   let prefixCss = $derived(getTagPrefixCss(prefix));
   let waveLink = $state(false);
   let closed = $state(false);

@@ -5,6 +5,8 @@
   import { useToken } from './theme-context.svelte';
   import { presetColors } from './theme-token.types';
   import { connectBadgeRibbonStyle } from './badge-ribbon.dom';
+  import { getBadgeRibbonPrefixCss } from './badge-ribbon-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { BadgeRibbonProps, BadgeRibbonSemantic } from './badge-ribbon.types';
 
   let { nativeElement = $bindable(), ...props }: BadgeRibbonProps = $props();
@@ -26,7 +28,8 @@
   const token = useToken();
   // Indicator наследует Badge aliases от wrapper без повторного сброса CSS-var scope.
   let indicatorHash = $derived(componentTheme.className ? token.hashId : undefined);
-  let prefix = $derived(prefixCls || 'ant-ribbon');
+  let prefix = $derived(config.getPrefixCls('ribbon', prefixCls));
+  let prefixCss = $derived(getBadgeRibbonPrefixCss(config.getPrefixCls()));
   let isPreset = $derived(presetColors.some(preset => preset === color));
   let info = $derived({ props: { ...props, placement } });
   const resolve = (value: BadgeRibbonSemantic | undefined) =>
@@ -85,6 +88,7 @@
   .ant-ribbon-css-var::before, .ant-ribbon-css-var::after, .ant-ribbon-content-css-var::before, .ant-ribbon-content-css-var::after, .ant-ribbon-corner-css-var::before, .ant-ribbon-corner-css-var::after { box-sizing: border-box; }
 </style>
 
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`ribbon-global-prefix:${config.getPrefixCls()}`} />{/if}
 <div bind:this={nativeElement} class={[
     `${prefix}-wrapper`,
     'ant-ribbon-wrapper-css-var',

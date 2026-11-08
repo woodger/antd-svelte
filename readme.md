@@ -4117,7 +4117,8 @@ root/body/rail/track/indicator. Undefined наследует record, явный 
 Callbacks получают props с defaults для type/percent/size/showInfo/percentPosition.
 Provider styles.root → provider style → local styles.root → local style сохраняют приоритет;
 styles отдельных частей применяются после вычисленных размеров/цветов.
-PrefixCls меняет BEM classes с fallback ant-progress для undefined/пустой строки.
+PrefixCls меняет BEM classes; undefined/пустая строка наследуют ConfigProvider.prefixCls
+(по умолчанию ant-progress).
 Bind:nativeElement возвращает текущий root после mount и очищается при unmount.
 Тема Progress подключает шесть исходных component tokens, aliases/algorithm и CSS-variable
 prefix/key/hash; переменные идут перед semantic/user styles.
@@ -4140,8 +4141,8 @@ Success вычитается из процента перед расчётом �
 из свежей сборки прежнего коммита библиотеки. Для circle/dashboard есть
 [69 UMD-сценариев и transition trace](./tests/browser/fixtures/ant-design-progress-circle-reference.json).
 Сохранены native finite bounds, clipping длинной подписи и числовые SVG attributes;
-Tooltip использует существующую Svelte-обёртку. Общий ConfigProvider prefix и React
-development warnings остаются следующими этапами. Исходная лицензия
+Tooltip использует существующую Svelte-обёртку. Общий ConfigProvider prefix поддержан;
+React development warnings остаются следующим этапом. Исходная лицензия
 [@rc-component/progress](./src/lib/vendor/LICENSE.rc-progress) включена в пакет.
 
 ## Spin
@@ -4241,13 +4242,15 @@ Provider styles.root → provider style → local styles.root; для standalone
 а локальный style применяется последним. RootClassName, native attrs/events, bind:nativeElement
 и bind:ref с nativeElement сохраняются при обновлениях; refs очищаются при unmount.
 
-PrefixCls меняет BEM classes; undefined/пустая строка возвращают ant-spin. CSS template из
+PrefixCls меняет BEM classes; undefined/пустая строка наследуют ConfigProvider.prefixCls
+(по умолчанию ant-spin). CSS template из
 35 правил закреплённого архива сохраняет namespace переменных и изолирует root defaults.
 Component tokens, aliases, algorithm и CSS-variable prefix/key/hash работают через общий
 [контекст темы](./docs/reference/theme-context.md#токены-spin).
 Сверка 49 Source-профилей и auto timeline принадлежит библиотеке; примеры потребителя
 не заменяют эти проверки. Сохранённые native delay/inert/focus/ARIA и reduced motion — явные
-отличия от React. Общий ConfigProvider prefix и React development warnings ещё не перенесены.
+отличия от React. Общий ConfigProvider prefix поддержан; React development warnings
+ещё не перенесены.
 
 ## Skeleton
 
@@ -4315,7 +4318,8 @@ Root styles применяются в порядке context styles.root → con
 context class/style и semantic root относятся к декоративному каркасу и отсутствуют
 при loading=false. Это сохраняет прежний native контракт без дублирования padding.
 
-Локальный prefixCls меняет BEM-классы каркаса с fallback ant-skeleton;
+Локальный prefixCls меняет BEM-классы каркаса; иначе он наследует ConfigProvider
+(по умолчанию ant-skeleton);
 переменные темы сохраняют свой namespace. Вложенные avatar/title/paragraph принимают
 class и prefixCls, которые заменяют соответствующие semantic class и default prefix,
 как при spread в исходнике. Их style заменяется объединённым semantic style;
@@ -4356,15 +4360,16 @@ Node поддерживает исходный internalClassName: он заме�
 У primitives object classNames/styles задают root/content. Class/rootClassName относятся
 к внешнему div, styles.root применяется к нему после component variables. Style относится
 к content и имеет приоритет над styles.content и числовым размером Avatar. Локальный
-prefixCls меняет BEM-классы с fallback ant-skeleton; переменные темы сохраняют namespace.
+prefixCls меняет BEM-классы; иначе он наследует ConfigProvider (по умолчанию ant-skeleton).
+Переменные темы сохраняют namespace.
 Primitives повторяют исходную изоляцию от ConfigProvider.skeleton: используют размер,
 тему и prefix, а component record основного Skeleton к ним не применяется.
 
 Тема Skeleton подготавливает шесть текущих tokens для основного каркаса и primitives,
 поддерживает gradientFromColor/gradientToColor, overrides, aliases/algorithm и
 CSS-variable prefix/key/hash. Основной Skeleton сохраняет native host/status/focus,
-размеры и normalization. Общий ConfigProvider prefix и React development warnings
-остаются следующими этапами.
+размеры и normalization. Основной Skeleton и primitives наследуют общий
+ConfigProvider prefix; React development warnings остаются следующим этапом.
 
 [98 UMD-сценариев](./tests/browser/fixtures/ant-design-skeleton-element-reference.json)
 сверяют каждый primitive с Ant Design 6.6.8 в стандартном режиме браузера, с одинаковой
@@ -4457,7 +4462,8 @@ ConfigProvider.empty задаёт image, class/style и object/function classNam
 Semantic slots root/image/description/footer получают исходные props без defaults.
 Root styles: context styles.root → context style → local styles.root → local style.
 Styles.image задаёт оформление изображения. PrefixCls меняет
-BEM-классы с fallback ant-empty; rootClassName относится к корню.
+BEM-классы; иначе он наследует ConfigProvider (по умолчанию ant-empty).
+RootClassName относится к корню.
 Bind:nativeElement и поле nativeElement объекта bind:ref указывают на корневой div после mount;
 при unmount bindings очищаются до undefined, при SSR не присваиваются.
 
@@ -4468,7 +4474,7 @@ CSS rules включают small; для совместимого размера
 slot styles, изображения и их исходные цвета при явной source theme.
 Native image=false, inert/ARIA, responsive guards, footer wrapping, paint patterns
 прежнего режима и восстановление фокуса сохранены.
-Общий ConfigProvider prefix и React diagnostics остаются в работе.
+Общий ConfigProvider prefix поддержан; React diagnostics остаются в работе.
 [RenderEmpty](./docs/reference/render-empty.md) подключён к Select/TreeSelect,
 Cascader/Panel, Mentions, Transfer, Table/фильтру; AutoComplete сохраняет
 исходное исключение combobox. Без callback действуют прежние native defaults.
@@ -4555,7 +4561,8 @@ responsive inline padding/image, flex/wrapping действий и восста�
 path d сравнивается через браузерный CSSOM, который разбирает compact arc flags.
 Source theme использует исходный fitted viewBox статусных иконок; legacy viewport сохранён.
 Эти native layout/ARIA boundaries исключены из source snapshots и проверяются
-отдельно. Общий prefix ConfigProvider и React development warnings ещё не перенесены.
+отдельно. Общий prefix ConfigProvider поддержан; React development warnings
+ещё не перенесены.
 
 ## Steps
 
@@ -6953,8 +6960,9 @@ undefined наследует componentDisabled, false явно снимает б
 focus recovery и отсутствие FormData сохраняются. Это осознанная граница с React span.
 
 Tag, CheckableTag и CheckableTagGroup принимают локальный prefixCls. Отсутствие
-или пустая строка используют ant-tag; root/modifier/close classes следуют префиксу.
-У группы меняются group/item classes, но вложенные CheckableTag сохраняют ant-tag,
+или пустая строка наследуют ConfigProvider.prefixCls (по умолчанию ant-tag);
+root/modifier/close classes следуют префиксу. У группы меняются group/item classes,
+но вложенные CheckableTag отдельно наследуют общий prefix,
 как в закреплённом upstream. PrefixCls не передаётся HTML-атрибутом и не меняет
 имена CSS variables. Приватные content/icon wrappers и native dark class сохраняются.
 
@@ -7174,14 +7182,17 @@ root style и оформление standalone/non-status text; эти грани
 [engine](./src/lib/badge.engine.test.ts) и
 [SSR](./tests/package/badge-values.ssr.test.ts), фикстура — `?fixture=badge-values`.
 
-PrefixCls меняет классы Badge, status/text и zoom; пустая строка использует ant-badge.
+PrefixCls меняет классы Badge, status/text и zoom; пустая строка наследует
+ConfigProvider.prefixCls (по умолчанию ant-badge).
 Для локального префикса Badge выводит в head stylesheet из закреплённого CSS template.
 Стили обновляются вместе с префиксом и удаляются при unmount; root, digits и caller
 controls сохраняются. ScrollNumberPrefixCls меняет классы sup/custom count и разрядов,
-с fallback ant-scroll-number. Как в исходнике, Badge CSS использует глобальный
-ant-scroll-number: произвольный scrollNumberPrefixCls сам по себе не создаёт CSS
+иначе он наследует ConfigProvider.prefixCls (по умолчанию ant-scroll-number).
+Как в исходнике, Badge CSS использует общий prefix для scroll-number:
+произвольный scrollNumberPrefixCls сам по себе не создаёт CSS
 для новых классов. Эта связь влияет на standalone positioning, overflow и стили
-разрядов. ConfigProvider.prefixCls пока не поддерживается общим движком.
+разрядов. Общий prefix применяется также к count/digit classes и CSS.
+Reduced motion цифр не зависит от prefix.
 31 вариант классов/styles/геометрии и шесть zoom-последовательностей/30 кадров
 закреплены в [UMD-эталонах](./tests/browser/fixtures/ant-design-badge-prefix-reference.json)
 и [motion-эталонах](./tests/browser/fixtures/ant-design-badge-prefix-motion-reference.json).
@@ -7236,8 +7247,8 @@ algorithm, compact/dark и custom cssVar.prefix.
 
 `bind:nativeElement` возвращает div обёртки вместо React RibbonRef и очищается
 при unmount. Локальный prefixCls меняет DOM-классы и shared reset; геометрия,
-как в исходнике, привязана к глобальному prefix. Генерация стилей для другого
-ConfigProvider.prefixCls пока не поддерживается общим движком.
+как в исходнике, привязана к ConfigProvider.prefixCls. Общий prefix меняет также
+wrapper/indicator/content/corner selectors; локальный prefix отдельно эту связь не меняет.
 44 эталона — [официальный UMD](./tests/browser/fixtures/ant-design-badge-ribbon-reference.json),
 проверки — [browser](./tests/browser/badge-ribbon.spec.ts) и
 [SSR](./tests/package/badge-ribbon.ssr.test.ts), фикстура — `?fixture=badge-ribbon`.
@@ -7363,7 +7374,8 @@ Drawer. Выбор фото/инициалов/ошибочного источн
 
 AvatarProps, AvatarShape, AvatarSize и AvatarConfig экспортируются через index.ts.
 Локальный prefixCls меняет root/modifier/string classes; отсутствие и пустая строка
-используют ant-avatar. Имена CSS variables, Image и anticon остаются общими.
+наследуют ConfigProvider.prefixCls (по умолчанию ant-avatar).
+Имена CSS variables, Image и anticon остаются общими.
 Шаблон из 24 исходных правил ограничен текущим prefix и сохраняет шрифты/aliases
 соседних стандартных Avatar. Смена prefix сохраняет root, img, text fit, src Snippet,
 focus и ref; stylesheet живёт вместе с экземпляром и выводится также в SSR head.
@@ -9856,8 +9868,10 @@ components остаются за пределами этого этапа.
 PrefixCls задаёт базовый префикс CSS-классов; по умолчанию ant. Undefined и пустая
 строка наследуют родительский prefix. Локальный непустой prefixCls компонента имеет
 приоритет. Сейчас общий prefix подключён к App, Layout, LayoutSider,
-LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline и Steps;
-также Divider, Flex и Segmented. Остальные семейства подключаются отдельно. Например,
+LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex,
+Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
+Empty, Skeleton с primitives, Spin, Progress и Result. Остальные семейства подключаются
+отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 
@@ -9892,6 +9906,17 @@ Divider, Flex и Segmented сверяются с
 Смена prefix сохраняет выбранную опцию, radio DOM, callbacks, FormData и фокус.
 Raw замеры отдельно фиксируют существующее поведение Segmented: radio не имеет
 value-атрибута и отправляет "on"; типизированное значение передаётся через value/onChange.
+
+Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton и его пять primitives,
+Spin, Progress и Result сверяются с
+[исходными замерами 17 вариантов](./tests/browser/fixtures/ant-design-status-prefix-reference.json):
+[browser](./tests/browser/status-prefix.spec.ts),
+[SSR](./tests/package/status-prefix.ssr.test.ts), `?fixture=status-prefix`.
+Raw данные сохраняют React-результат. Сравнение отдельно учитывает прежний отступ
+AvatarGroup, default-класс Tag и RTL-класс CheckableTag. Native Skeleton host/status,
+имена CSS variables и canonical markers сохраняются. Badge ScrollNumber использует
+общий prefix независимо от локального Badge.prefixCls; CSS Ribbon также следует
+общему prefix. Изменение префикса сохраняет все 17 корней, draft, focus и selection.
 
 ## Формы и валидация
 
@@ -11445,14 +11470,19 @@ ScrollNumber/SingleNumber slots. Селекторы и декларации из
 lifecycle реализован в Badge и badge-zoom.dom по @rc-component/motion 1.3.3.
 [vendor/badge-prefix.css.js](./src/lib/vendor/badge-prefix.css.js) содержит portable
 CSS template из того же архива: 59 правил и шесть keyframes для локального Badge prefix.
-Селекторы Badge/common reset меняются в badge-prefix.engine; CSS-variable marker,
-глобальные ScrollNumber/icon selectors и keyframe names сохраняются. Тела деклараций
+Селекторы Badge/common reset меняются в badge-prefix.engine; ScrollNumber selectors
+следуют общему prefix. CSS-variable marker, icon selectors и keyframe names сохраняются. Тела деклараций
 не меняются; обычные vendor-файлы остаются прежними. ES-модуль генерируется рецептом
 badge-prefix через тот же CSS CLI, без runtime import с Vite-specific ?raw.
 [vendor/badge-ribbon.css](./src/lib/vendor/badge-ribbon.css) содержит 27 правил
 Badge.Ribbon из того же архива: wrapper, indicator, content/corner, логические
 placement, RTL и preset colors. Декларации сохранены; корни ограничены классами
 .ant-ribbon-wrapper-css-var и .ant-ribbon-css-var.
+
+[badge-ribbon-prefix.css.js](./src/lib/vendor/badge-ribbon-prefix.css.js) содержит те же
+27 правил как CSS data module; рецепт badge-ribbon-prefix проверяет закреплённый
+SHA-256. [Engine](./src/lib/badge-ribbon-prefix.engine.ts) меняет общий префикс selectors,
+сохраняя markers и namespace variables; локальный Ribbon.prefixCls остаётся независимым.
 [vendor/avatar.css](./src/lib/vendor/avatar.css) содержит 17 правил Avatar из того же
 архива, включая display:block для Image. Group и anticon исключены,
 declarations сохранены.
