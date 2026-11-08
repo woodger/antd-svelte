@@ -6,6 +6,7 @@
 
   let {
     entry,
+    prefixCls = 'ant-masonry',
     runtime,
     motionEnabled = true,
     class: className,
@@ -14,6 +15,7 @@
     onRemove
   }: {
     entry: MasonryEntry<Data>;
+    prefixCls?: string;
     runtime?: ReturnType<typeof createMasonryRuntime<Data>>;
     motionEnabled?: boolean;
     class?: string;
@@ -24,6 +26,9 @@
 
   let element = $state<HTMLDivElement>();
   let motionClass = $state('');
+  let renderedMotionClass = $derived(
+    motionClass.split('ant-masonry-item-fade').join(`${prefixCls}-item-fade`)
+  );
   let motion = $state.raw<ReturnType<typeof createMasonryMotion>>();
   let content = $derived(entry.item.children);
   let column = $derived(entry.position?.column ?? 0);
@@ -61,7 +66,7 @@
 
 <div
   bind:this={element}
-  class={['ant-masonry-item', className, motionClass]}
+  class={[`${prefixCls}-item`, className, renderedMotionClass]}
   {style}
   style:top={entry.position?.top === undefined ? undefined : `${entry.position.top}px`}
 >

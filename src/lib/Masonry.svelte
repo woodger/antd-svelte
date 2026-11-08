@@ -4,6 +4,8 @@
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
+  import { getMasonryPrefixCss } from './masonry-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { gridGutters } from './grid.engine';
   import { captureMasonryFocus, createMasonryRuntime } from './masonry.dom';
   import {
@@ -19,6 +21,7 @@
 
   let {
     children,
+    prefixCls,
     items,
     itemRender,
     columns,
@@ -34,6 +37,11 @@
   }: MasonryProps<Data> = $props();
 
   const config = useConfig();
+  let componentPrefix = $derived(config.getPrefixCls('masonry', prefixCls));
+  let prefixCss = $derived(getMasonryPrefixCss(componentPrefix));
+  let widthVariable = $derived(
+    `--${config.getPrefixCls().replace(/\./g, '')}-masonry-item-width`
+  );
   const componentTheme = useComponentTheme('Masonry');
   const tokens = useDesignTokenContext();
   const breakpoint = createBreakpoint();
@@ -64,6 +72,7 @@
   let info = $derived({
     props: {
       children,
+      prefixCls,
       items,
       itemRender,
       columns: columnCount,
@@ -99,9 +108,9 @@
     return [
       contextStyles.item,
       localStyles.item,
-      `--ant-masonry-item-width:calc((100% + ${horizontalGutter}px) / ${columnCount})`,
-      `inset-inline-start:calc(var(--ant-masonry-item-width) * ${entry.position?.column ?? 0})`,
-      `width:calc(var(--ant-masonry-item-width) - ${horizontalGutter}px)`,
+      `${widthVariable}:calc((100% + ${horizontalGutter}px) / ${columnCount})`,
+      `inset-inline-start:calc(var(${widthVariable}) * ${entry.position?.column ?? 0})`,
+      `width:calc(var(${widthVariable}) - ${horizontalGutter}px)`,
       'position:absolute'
     ].filter(Boolean).join(';');
   }
@@ -175,10 +184,11 @@
   });
 </script>
 
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`masonry-prefix:${componentPrefix}`} />{/if}
 <div
   bind:this={nativeElement}
   class={[
-    'ant-masonry',
+    componentPrefix,
     componentTheme.className,
     config.masonry?.class,
     contextClasses.root,
@@ -186,12 +196,14 @@
     rootClassName,
     className,
     'ant-masonry-css-var',
-    config.direction === 'rtl' && 'ant-masonry-rtl'
+    config.direction === 'rtl' && `${componentPrefix}-rtl`
   ]}
+  data-ant-masonry-prefix={prefixCss ? componentPrefix : undefined}
   style={rootStyle}
 >
   {#each entries as entry (entry.key)}
     <MasonryItem
+      prefixCls={componentPrefix}
       {entry}
       {runtime}
       {motionEnabled}

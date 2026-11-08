@@ -757,8 +757,9 @@ OnLayoutChange сообщает элементы с исходными поля�
 уникальны после String(key): CSSMotionList использует строковые ключи, тогда
 как geometry map сохраняет исходный number/string key.
 
-CSS-рецепт masonry воспроизводит все 12 правил эталона, без keyframes, с
-проверкой SHA-256. Appear/leave используют исходные CSS classes и два RAF до
+CSS-рецепты masonry и masonry-prefix воспроизводят все 12 правил эталона,
+без keyframes, с проверкой SHA-256. Второй сохраняет CSS как module template для
+локального prefix. Appear/leave используют исходные CSS classes и два RAF до
 active. Удаляемая ячейка остаётся до собственного transitionend/animationend;
 события вложенного содержимого её не удаляют. Возврат того же key сохраняет DOM
 и отменяет удаление. Если браузер не создал собственную анимацию, phase завершается
@@ -788,11 +789,25 @@ Theme.token.motion=false завершает текущий appear/leave и уд�
 эталон получает его через публичный rootClassName без изменения исходников.
 Исходные значения без marker и зависший zero-duration leave сохранены в
 [эталоне](./tests/browser/fixtures/ant-design-masonry-theme-reference.json).
-PrefixCls пока не перенесён. В закреплённом CSS нет отдельного reduced-motion override.
+PrefixCls меняет root/item/motion classes; пустая строка и undefined наследуют
+ConfigProvider.prefixCls (по умолчанию ant-masonry). Локальный prefix имеет
+приоритет, semantic callbacks получают исходное локальное значение. Служебная
+item-width variable использует общий prefix провайдера без точек, независимо от
+локального класса и theme.cssVar.prefix. Смена prefix сохраняет DOM, текущую
+motion phase, draft, focus и selection. Canonical theme marker остаётся прежним.
+
+В 6.6.8 prefixCls="ant-masonry-rtl" в LTR наследует RTL от стандартного stylesheet,
+если рядом был обычный Masonry. В свежем документе без этого stylesheet раскладка
+LTR. Native ограничивает root/RTL rules владельцем и сохраняет заданное направление;
+[raw замеры](./tests/browser/fixtures/ant-design-masonry-prefix-reference.json) и
+[изолированный замер](./tests/browser/fixtures/ant-design-masonry-prefix-isolated.json)
+сохранены для разбора. В закреплённом CSS нет отдельного reduced-motion override.
 
 Fixture — `?fixture=masonry`. Engine, SSR, DOM lifecycle, package SSR и browser
 проверяют геометрию, breakpoints, fresh/load/error, данные/callbacks, motion,
-focus/selection, semantic/config, темы, RTL и cleanup.
+focus/selection, semantic/config, темы, RTL и cleanup. Prefix отдельно проверяют
+[browser](./tests/browser/masonry-prefix.spec.ts),
+[SSR](./tests/package/masonry-prefix.ssr.test.ts) и fixture `?fixture=masonry-prefix`.
 
 ## Splitter
 
@@ -9890,7 +9905,7 @@ PrefixCls задаёт базовый префикс CSS-классов; по у
 LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex,
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
-Tooltip, Popover, Popconfirm, Slider и BorderBeam. Остальные семейства подключаются
+Tooltip, Popover, Popconfirm, Slider, BorderBeam и Masonry. Остальные семейства подключаются
 отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

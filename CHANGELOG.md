@@ -9,6 +9,11 @@
 
 ### Added
 
+- Masonry поддерживает локальный prefixCls и общий ConfigProvider.prefixCls,
+  включая item/motion classes и namespace служебной ширины. Смена prefix сохраняет
+  раскладку, DOM, focus/selection и текущую анимацию. Source RTL alias collision
+  записан в raw/fresh-page эталонах; Native сохраняет настроенное направление.
+
 - BorderBeam наследует ConfigProvider.prefixCls для классов и служебных CSS variables.
   Local class и namespace изолированы; исходный cache defect при shared local class
   записан в raw/fresh-page эталонах и не перенесён. DOM/focus и reduced motion сохранены.

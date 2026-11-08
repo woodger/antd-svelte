@@ -1766,10 +1766,39 @@
         {
           "id": "theme-prefix-motion",
           "title": "Произвольный prefixCls",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Alias tokens/algorithms и глобальный theme.token.motion подключены отдельными features. CSS generation для произвольного prefixCls ещё отсутствует. У Masonry нет отдельного reduced-motion override в закреплённом CSS."
+          "evidence": [
+            "src/lib/Masonry.svelte",
+            "src/lib/MasonryItem.svelte",
+            "src/lib/masonry.types.ts",
+            "src/lib/masonry-prefix.engine.ts",
+            "src/lib/masonry-prefix.engine.test.ts",
+            "src/lib/vendor/masonry-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/MasonryPrefixScope.svelte",
+            "tests/browser/fixtures/MasonryPrefixFixtures.svelte",
+            "tests/browser/fixtures/MasonryPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-masonry-prefix-reference.json",
+            "tests/browser/fixtures/ant-design-masonry-prefix-isolated.json",
+            "tests/browser/masonry-prefix-metrics.ts",
+            "tests/browser/masonry-prefix.spec.ts",
+            "tests/package/masonry-prefix.ssr.test.ts"
+          ],
+          "note": "Локальный prefixCls имеет приоритет; empty/undefined наследуют общий ConfigProvider prefix. Root/item/motion classes и 12 исходных CSS rules подключены без изменения geometry/motion controllers. Inline item-width namespace следует общему root prefix с удалением точек, независимо от local class и theme.cssVar.prefix. Semantic callback получает raw local prefix. UMD cases сверяют nested/sibling scopes, RTL, explicit aliases и cssVar prefix с публичным source rootClassName marker; его исходный пропуск записан отдельно. Live transitions сохраняют root/items/editor, draft/focus/selection и текущую leave phase. Отдельного reduced-motion override в закреплённом CSS нет."
+        },
+        {
+          "id": "source-rtl-prefix-alias",
+          "title": "Изоляция локального prefix, совпавшего со стандартным RTL class",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/masonry-prefix.engine.ts",
+            "tests/browser/fixtures/ant-design-masonry-prefix-reference.json",
+            "tests/browser/fixtures/ant-design-masonry-prefix-isolated.json",
+            "tests/browser/masonry-prefix.spec.ts"
+          ],
+          "note": "Наблюдение для отдельного разбора: unmodified Ant Design 6.6.8 с prefixCls=ant-masonry-rtl и direction=ltr получает direction:rtl от стандартного Masonry stylesheet соседнего компонента. В свежем документе без этого stylesheet тот же компонент имеет LTR и соответствующие x coordinates. Raw mixed-page и isolated measurements сохранены. Native ограничивает root/RTL selectors владельцем и наследует заданное направление, не воспроизводя случайную смену раскладки."
         }
       ]
     },
@@ -19364,9 +19393,12 @@
             "tests/browser/fixtures/ant-design-beam-global-isolated.json",
             "tests/browser/beam-global-metrics.ts",
             "tests/browser/beam-global.spec.ts",
-            "tests/package/beam-global.ssr.test.ts"
+            "tests/package/beam-global.ssr.test.ts",
+            "src/lib/Masonry.svelte",
+            "tests/browser/masonry-prefix.spec.ts",
+            "tests/package/masonry-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider и BorderBeam подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse, Affix, Tooltip/Popover/Popconfirm, Slider, BorderBeam и Masonry подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели. Popup/single/range группа сверяется с 45 raw UMD cases и 15 transitions; delegated Tooltip/Popover namespaces независимы от local owner prefix, открытые DOM surfaces сохраняются. BorderBeam подключает также private variable namespace и двухмерный CSS scope; исходный shared-class cache defect записан отдельно и не перенесён. Masonry подключён с local priority, root/item/motion classes и отдельным global namespace inline width; source RTL-alias observation сохранён отдельно."
         },
         {
           "id": "native-legacy-prefix-namespace",

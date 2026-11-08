@@ -40,6 +40,8 @@ export interface MasonryConfig {
 
 /** Измеряемая раскладка элементов разной высоты в самые короткие колонки. */
 export interface MasonryProps<Data = unknown> {
+  /** Локальный CSS prefix; иначе ConfigProvider. Namespace item width задаёт общий prefix. */
+  prefixCls?: string;
   /** Как в React PropsWithChildren, принимается, но не используется для отображения ячеек. */
   children?: MasonryContent;
   /** Элементы появляются после mount, как в React useEffect; на SSR root пустой. */
