@@ -5,6 +5,7 @@ export interface FormFieldRegistration {
   readonly name: NamePath;
   readonly rules?: readonly ValidationRule[];
   readonly validateFirst?: boolean | 'parallel';
+  readonly validateDebounce?: number;
   readonly isList?: boolean;
   readonly isListField?: boolean;
   readonly initialValue?: readonly unknown[];

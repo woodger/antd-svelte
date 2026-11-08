@@ -1,0 +1,556 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "clock": "Playwright controlled clock; 32ms flush after actions, then 80ms/600ms advances"
+  },
+  "cases": [
+    {
+      "id": "change",
+      "phase": "started",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-first",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "change",
+      "phase": "waiting",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-first",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "change",
+      "phase": "settled",
+      "calls": [
+        "bad-first"
+      ],
+      "outcomes": [],
+      "value": "bad-first",
+      "errors": [
+        "Invalid bad-first"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "burst",
+      "phase": "started",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "burst",
+      "phase": "changed",
+      "calls": [],
+      "outcomes": [],
+      "value": "Good new",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "burst",
+      "phase": "action",
+      "calls": [],
+      "outcomes": [],
+      "value": "Good new",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "burst",
+      "phase": "waiting",
+      "calls": [],
+      "outcomes": [],
+      "value": "Good new",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "burst",
+      "phase": "settled",
+      "calls": [
+        "Good new"
+      ],
+      "outcomes": [],
+      "value": "Good new",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "explicit",
+      "phase": "started",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "explicit",
+      "phase": "action",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Invalid bad-old"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "value": "bad-old",
+      "errors": [
+        "Invalid bad-old"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "explicit",
+      "phase": "waiting",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Invalid bad-old"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "value": "bad-old",
+      "errors": [
+        "Invalid bad-old"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "explicit",
+      "phase": "settled",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Invalid bad-old"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "value": "bad-old",
+      "errors": [
+        "Invalid bad-old"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "silent",
+      "phase": "started",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "silent",
+      "phase": "action",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Invalid bad-old"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "silent",
+      "phase": "waiting",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Invalid bad-old"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "silent",
+      "phase": "settled",
+      "calls": [
+        "bad-old",
+        "bad-old"
+      ],
+      "outcomes": [
+        {
+          "status": "invalid",
+          "outOfDate": false,
+          "errorFields": [
+            {
+              "name": [
+                "name"
+              ],
+              "errors": [
+                "Invalid bad-old"
+              ],
+              "warnings": []
+            }
+          ]
+        }
+      ],
+      "value": "bad-old",
+      "errors": [
+        "Invalid bad-old"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "submit",
+      "phase": "started",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "submit",
+      "phase": "action",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [
+        "Invalid bad-old"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "submit",
+      "phase": "waiting",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [
+        "Invalid bad-old"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "submit",
+      "phase": "settled",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [
+        "Invalid bad-old"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "reset",
+      "phase": "started",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "reset",
+      "phase": "action",
+      "calls": [],
+      "outcomes": [],
+      "value": "Alpha",
+      "errors": [],
+      "warnings": [],
+      "touched": false,
+      "validating": false
+    },
+    {
+      "id": "reset",
+      "phase": "waiting",
+      "calls": [],
+      "outcomes": [],
+      "value": "Alpha",
+      "errors": [],
+      "warnings": [],
+      "touched": false,
+      "validating": false
+    },
+    {
+      "id": "reset",
+      "phase": "settled",
+      "calls": [],
+      "outcomes": [],
+      "value": "Alpha",
+      "errors": [],
+      "warnings": [],
+      "touched": false,
+      "validating": false
+    },
+    {
+      "id": "unmount",
+      "phase": "started",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "unmount",
+      "phase": "action",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": false,
+      "validating": false
+    },
+    {
+      "id": "unmount",
+      "phase": "waiting",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": false,
+      "validating": false
+    },
+    {
+      "id": "unmount",
+      "phase": "settled",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": false,
+      "validating": false
+    },
+    {
+      "id": "delay-update",
+      "phase": "started",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "delay-update",
+      "phase": "action",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "delay-update",
+      "phase": "waiting",
+      "calls": [],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [],
+      "warnings": [],
+      "touched": true,
+      "validating": true
+    },
+    {
+      "id": "delay-update",
+      "phase": "settled",
+      "calls": [
+        "bad-old"
+      ],
+      "outcomes": [],
+      "value": "bad-old",
+      "errors": [
+        "Invalid bad-old"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "zero",
+      "phase": "started",
+      "calls": [
+        "bad-first"
+      ],
+      "outcomes": [],
+      "value": "bad-first",
+      "errors": [
+        "Invalid bad-first"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "zero",
+      "phase": "waiting",
+      "calls": [
+        "bad-first"
+      ],
+      "outcomes": [],
+      "value": "bad-first",
+      "errors": [
+        "Invalid bad-first"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    },
+    {
+      "id": "zero",
+      "phase": "settled",
+      "calls": [
+        "bad-first"
+      ],
+      "outcomes": [],
+      "value": "bad-first",
+      "errors": [
+        "Invalid bad-first"
+      ],
+      "warnings": [],
+      "touched": true,
+      "validating": false
+    }
+  ],
+  "observations": [
+    {
+      "id": "unmount",
+      "phase": "settled",
+      "issue": "The delayed validator still starts after its field unmounts. Native Svelte cancels its timer and does not start obsolete work."
+    }
+  ]
+}

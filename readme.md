@@ -9569,6 +9569,25 @@ validateFields/submit до завершения блокирующего validat
 [публичный пакет](./tests/package/form-validate-first.ssr.test.ts),
 [engine и модель](./src/lib/form-validate-first.test.ts).
 
+`FormItem.validateDebounce` откладывает автоматическую validation на заданное число
+миллисекунд; undefined/0 сохраняют немедленный запуск. Ожидание входит в validating.
+Повторный запуск заменяет таймер, устаревшие значения не передаются validator.
+Правила, validateFirst и задержка фиксируются для текущего запуска; изменения props
+действуют на следующий. ValidateFields и submit обходят задержку; validateOnly
+работает сразу и не отменяет ожидающую видимую проверку. Прежние blur/touched
+triggers и повторная проверка touched-полей при записи сохраняются.
+Reset, ручная замена value/validating и удаление поля отменяют отложенную работу.
+Уже запущенные Promise сохраняют прежнюю защиту от устаревших ответов.
+
+В Ant Design 6.6.8 таймер может запустить validator после unmount поля.
+Это [наблюдение сохранено](./tests/browser/fixtures/ant-design-form-debounce-observation.json);
+Svelte отменяет таймер и не запускает validator удалённого control. Артефакт содержит
+35 состояний: calls, values, errors/warnings, touched/validating и явные проверки
+с управляемым временем. Проверки: [модель](./src/lib/form-validate-debounce.test.ts),
+[браузер](./tests/browser/form-validate-debounce.spec.ts),
+[публичные типы и SSR](./tests/package/form-validate-debounce.ssr.test.ts),
+`?fixture=form-validate-debounce`.
+
 Plain objects и массивы копируются при создании модели, установке полей, в snapshot проверки
 и при каждом reset. Defaults, snapshot и аргументы владельца не разделяют
 изменяемые контейнеры. Значения модели изменяйте через setters.

@@ -36,6 +36,8 @@
      * Предупреждение не обходит ожидающие блокирующие правила.
      */
     validateFirst?: boolean | 'parallel';
+    /** Задержка автоматической validation в ms; validateFields/submit запускаются сразу. */
+    validateDebounce?: number;
     htmlFor?: string;
     /**
      * Native element, bind:this либо объект с focus/nativeElement пользовательского control.
@@ -58,6 +60,7 @@
     colon,
     rules,
     validateFirst,
+    validateDebounce,
     htmlFor,
     controlRef,
     class: className = ''
@@ -102,6 +105,9 @@
       },
       get validateFirst() {
         return validateFirst;
+      },
+      get validateDebounce() {
+        return validateDebounce;
       },
       getInstance() {
         if (controlRef != null) return controlRef;

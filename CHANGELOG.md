@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: validateDebounce задерживает автоматическую validation, заменяет
+  устаревшие таймеры и отменяет работу при reset/unmount. Явные проверки и submit
+  работают сразу; validateOnly сохраняет ожидающую видимую проверку.
+
 - Form: requiredMark=true/false/'optional'/Snippet и defaults ConfigProvider.form.
   Сохранены исходные классы, приоритеты, обработка colon, локализация Locale.Form
   и замена группы locale; отметка не меняет native required, validation и значения.

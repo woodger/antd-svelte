@@ -161,6 +161,7 @@ export function createForm<Values extends FormValues>({
   let resetKey = $state.raw<object>({});
   // При teardown Svelte читает прежний $state; реестр хранит актуальные регистрации.
   const fieldRegistry = new Set<StoredField>();
+  const validationDelays = new Map<StoredField, () => void>();
   let fields = $state.raw<StoredField[]>([]);
   let isSubmitting = $state(false);
   let submissionError = $state.raw<unknown>();
@@ -327,14 +328,46 @@ export function createForm<Values extends FormValues>({
     return result;
   }
 
-  async function validate(selected: readonly StoredField[], validateOnly = false): Promise<Values> {
+  function cancelValidationDelay(field: StoredField): boolean {
+    const cancel = validationDelays.get(field);
+    if (!cancel) return false;
+
+    cancel();
+
+    return true;
+  }
+
+  function delayValidation(field: StoredField, delay: number): Promise<boolean> {
+    return new Promise((resolve) => {
+      const timer = setTimeout(() => {
+        validationDelays.delete(field);
+        resolve(true);
+      }, delay);
+      validationDelays.set(field, () => {
+        clearTimeout(timer);
+        validationDelays.delete(field);
+        resolve(false);
+      });
+    });
+  }
+
+  async function validate(
+    selected: readonly StoredField[], validateOnly = false, triggered = false
+  ): Promise<Values> {
+    if (!validateOnly) {
+      for (const field of selected) {
+        if (cancelValidationDelay(field)) field.validating = false;
+      }
+    }
+
     const snapshot = copyFormValue(values);
     const startRevision = revision;
     const token = ++request;
     // Свежесть Promise общая; validateOnly не меняет field.run видимой проверки.
     lastValidation = token;
     const entries = selected.map((field) => ({
-      field, path: fieldPath(field), run: field.run, hasRules: fieldRules(field).length > 0
+      field, path: fieldPath(field), run: field.run, hasRules: fieldRules(field).length > 0,
+      delay: triggered ? field.registration?.validateDebounce : undefined
     }));
 
     if (!validateOnly) {
@@ -354,11 +387,23 @@ export function createForm<Values extends FormValues>({
       }
     }
 
-    const results = await Promise.all(entries.map(async ({ field, path, hasRules }) => {
+    const results = await Promise.all(entries.map(async ({ field, path, hasRules, delay }) => {
       if (!hasRules) return { name: path, errors: [], warnings: [] };
 
+      const rules = fieldRules(field);
+      const validateFirst = field.registration?.validateFirst;
+      if (delay) {
+        const elapsed = await delayValidation(field, delay);
+        if (!elapsed || field.run !== token || revision !== startRevision
+          || !fields.includes(field) || !sameFormPath(path, fieldPath(field))) {
+          if (field.run === token) field.validating = false;
+
+          return { name: path, errors: [], warnings: [], cancelled: true };
+        }
+      }
+
       const messages = await validateFieldValue(
-        getFormValue(snapshot, path), snapshot, fieldRules(field), field.registration?.validateFirst
+        getFormValue(snapshot, path), snapshot, rules, validateFirst
       );
 
       if (!validateOnly && field.run === token) {
@@ -377,6 +422,7 @@ export function createForm<Values extends FormValues>({
     const nextErrors = results.filter((field) => field.errors.length);
 
     const outOfDate = lastValidation !== token || revision !== startRevision
+      || results.some((result) => result.cancelled)
       || entries.some(({ field, path, run, hasRules }) =>
         field.run !== (validateOnly || !hasRules ? run : token) || !fields.includes(field)
           || !sameFormPath(path, fieldPath(field))
@@ -426,7 +472,7 @@ export function createForm<Values extends FormValues>({
     const selected = fields.filter((field) => field.touched);
 
     if (selected.length) {
-      void validate(selected).catch((error: unknown) => {
+      void validate(selected, false, true).catch((error: unknown) => {
         if (!(error instanceof FormValidationError)) throw error;
       });
     }
@@ -451,6 +497,7 @@ export function createForm<Values extends FormValues>({
   }
 
   function clearField(field: StoredField) {
+    cancelValidationDelay(field);
     field.errors = [];
     field.warnings = [];
     field.validating = false;
@@ -568,6 +615,7 @@ export function createForm<Values extends FormValues>({
 
             for (const field of fields) {
               if (containsFormPath(name, fieldPath(field))) {
+                cancelValidationDelay(field);
                 field.run = ++request;
                 field.validating = false;
               }
@@ -583,6 +631,7 @@ export function createForm<Values extends FormValues>({
 
           if ('touched' in update) field.touched = !!update.touched;
           if ('validating' in update) {
+            cancelValidationDelay(field);
             field.run = ++request;
             field.validating = !!update.validating;
             field.validated = !field.validating;
@@ -638,6 +687,7 @@ export function createForm<Values extends FormValues>({
       }
 
       for (const field of selected) {
+        cancelValidationDelay(field);
         field.errors = undefined;
         field.warnings = undefined;
         field.touched = false;
@@ -707,6 +757,7 @@ export function createForm<Values extends FormValues>({
 
       for (const field of fields) {
         if (field !== list && containsFormPath(name, fieldPath(field))) {
+          cancelValidationDelay(field);
           field.run = ++request;
           field.validating = false;
         }
@@ -728,6 +779,11 @@ export function createForm<Values extends FormValues>({
         registered.registrationOrder = ++registrationOrder;
 
         return () => {
+          if (cancelValidationDelay(registered)) {
+            registered.run = ++request;
+            registered.validating = false;
+          }
+
           if (registered.persistent) {
             if (registration.rules !== undefined) {
               registered.run = ++request;

@@ -4950,7 +4950,12 @@
         "tests/browser/form-required-mark-metrics.ts",
         "tests/browser/fixtures/FormRequiredMarkFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-required-mark-reference.json",
-        "tests/package/form-required-mark.ssr.test.ts"
+        "tests/package/form-required-mark.ssr.test.ts",
+        "src/lib/form-validate-debounce.test.ts",
+        "tests/browser/form-validate-debounce.spec.ts",
+        "tests/browser/fixtures/FormValidateDebounceFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-debounce-observation.json",
+        "tests/package/form-validate-debounce.ssr.test.ts"
       ],
       "features": [
         {
@@ -5402,6 +5407,23 @@
             "tests/package/form-required-mark.ssr.test.ts"
           ],
           "note": "Form.requiredMark принимает true/false/optional и Svelte snippet вместо React render function; local prop → ConfigProvider.form → true. False скрывает только звёздочку; optional/custom используют исходные mark classes. Snippet получает строковую label после обработки colon и required boolean, заменяет label children; исходный title и native label association сохраняются. Поле required и validation не зависят от визуальной отметки. Locale.Form.optional поддерживает RU/EN/custom и исходную замену всей группы: {} или пустой optional дают английский fallback, undefined locale наследует. Вложенный Form сбрасывает внешний mark к своим props/config. Сверены 18 UMD-состояний: modes, callbacks, fullwidth/ASCII colon, provider replacement/priority, locale fallback и nested Form. Live updates сохраняют native input, values, errors/warnings/touched, focus/selection; submit по-прежнему проверяет required и сериализует native values. Rich label/tooltip и прочие global/semantic Form settings остаются отдельными пробелами; deprecated hideRequiredMark API не добавлен."
+        },
+        {
+          "id": "validation-debounce",
+          "title": "ValidateDebounce: отложенная автоматическая validation и отмена таймеров",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/form-internal.ts",
+            "src/lib/form-validate-debounce.test.ts",
+            "tests/browser/form-validate-debounce.spec.ts",
+            "tests/browser/fixtures/FormValidateDebounceFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-debounce-observation.json",
+            "tests/package/form-validate-debounce.ssr.test.ts"
+          ],
+          "note": "FormItem.validateDebounce задаёт задержку в ms для автоматической validation; undefined/0 сохраняют немедленный запуск. Pending входит в validating; новый автоматический/обычный запрос отменяет прежний timer. Rules/validateFirst/delay и snapshot значения фиксируются до ожидания; props действуют на следующий запуск. ValidateFields/submit обходят задержку, validateOnly выполняется сразу и не отменяет видимую попытку. Сохранены прежние native blur/touched triggers, повторная проверка touched bindings при записи, model-owned rules, ручная ruleless metadata, полный snapshot и защита outOfDate. Reset/setFields value/validating, unmount и смена list path исключают устаревшие validators. Таймеры очищаются при field cleanup; уже запущенные Promise не заменяют свежие сообщения. 35 raw UMD-состояний с управляемыми часами подтверждают burst, explicit/silent/submit, reset, изменения delay и нулевой режим. Отдельно записан дефект source: validator стартует после unmount; Svelte отменяет такую работу. Browser проверяет реальный input/blur, ARIA, FormData, focus/selection, remount; unit покрывает независимые задержки, rules snapshots и model lifecycle. SSR не регистрирует browser field и не запускает validation. Полный validateTrigger/event adapter API пока не перенесён."
         }
       ]
     },
