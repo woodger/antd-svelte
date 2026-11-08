@@ -918,7 +918,7 @@
             "tests/package/divider-config.ssr.test.ts",
             "tests/package/DividerConfigTypes.svelte"
           ],
-          "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка выбирает ant-divider. CSS template из 27 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 26 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider и React development warnings остаются отдельным пробелом."
+          "note": "Локальный BEM prefix меняет корень, варианты и rail/content; пустая строка наследует provider (по умолчанию ant-divider). CSS template из 27 закреплённых правил сохраняет variables/shared marker и ограничивает defaults своим владельцем, в том числе при совпадении prefix с marker. ConfigProvider.divider поддерживает class/style и object/function semantic slots: provider slots/style → local slots/style; без подписи rail styles применяются к корню перед local style. Undefined наследует record, явный объект заменяет его целиком. Callbacks получают прежние нормализованные props и могут вернуть undefined. 26 официальных UMD-сценариев сверяют публичные классы и computed styles, context replacement, callbacks, RTL, token/algorithm scopes, CSS-variable prefix и aliases. SSR CSS, live prefix/config updates, nativeElement/DOM/focus/draft, соседние scopes, inline whitespace и cleanup проверяются отдельно. Native ARIA, opaque snippets и нормализация defaults сохранены; private hash/marker classes исключены из сравнения. Общий prefix ConfigProvider поддержан отдельно; React development warnings не перенесены."
         },
         {
           "id": "component-theme-tokens",
@@ -943,13 +943,38 @@
         {
           "id": "source-extras",
           "title": "Общий ConfigProvider prefix и React development diagnostics",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Divider.svelte",
-            "src/lib/ConfigProvider.svelte"
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/fixtures/CorePrefixScope.svelte",
+            "tests/browser/fixtures/CorePrefixFixtures.svelte",
+            "tests/browser/fixtures/CorePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-core-prefix-reference.json",
+            "tests/browser/core-prefix-metrics.ts",
+            "tests/browser/core-prefix.spec.ts",
+            "tests/package/core-prefix.ssr.test.ts"
           ],
-          "note": "Локальный prefixCls поддержан; общий getPrefixCls/rootPrefixCls и React-only warnings для vertical children ещё не перенесены. Согласованные nativeElement/ARIA/snippet и semantic default normalization contracts сохранены."
+          "note": "Общий и локальный prefixCls поддержаны отдельными features. React-only warnings для vertical children ещё не перенесены. Согласованные nativeElement/ARIA/snippet и semantic default normalization contracts сохранены."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Общий ConfigProvider.prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/Divider.svelte",
+            "tests/browser/fixtures/CorePrefixScope.svelte",
+            "tests/browser/fixtures/CorePrefixFixtures.svelte",
+            "tests/browser/fixtures/CorePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-core-prefix-reference.json",
+            "tests/browser/core-prefix-metrics.ts",
+            "tests/browser/core-prefix.spec.ts",
+            "tests/package/core-prefix.ssr.test.ts"
+          ],
+          "note": "Общий getPrefixCls подключён; локальная непустая строка имеет приоритет, empty/undefined наследуют provider. Девять unmodified UMD cases и три live transitions сверяют default/empty/local/nested/sibling/RTL и отдельный CSS-variable prefix. Root/parts CSS, SSR head, DOM/radio identity, selection, callbacks, draft/focus/selection и текущий FormData сохраняются."
         }
       ]
     },
@@ -1093,7 +1118,7 @@
             "tests/package/FlexSourceTypes.svelte",
             "tests/package/flex-source.ssr.test.ts"
           ],
-          "note": "Локальный BEM prefix меняет все 32 исходных root rules, включая empty/RTL/wrap/align/justify/preset gaps; variables и shared marker сохраняются, selectors ограничены собственным data root. Undefined и пустой prefix дают ant-flex. ConfigProvider.flex поддерживает vertical/class/style; undefined наследует record, явный объект, включая {}, заменяет его целиком. Приоритет направления: orientation → local vertical → provider vertical. Provider style идёт перед local style, затем flex/custom gap; preset gap уступает inline style. SSR CSS, scope isolation и живое снятие prefix проверены. 33 официальных UMD-сценариев сверяют классы, атрибуты, computed styles и direct-child geometry, custom roots, nested replacement, нулевые/CSS gaps, aliases/algorithms, RTL и narrow wrap. Общий ConfigProvider prefix остаётся отдельным пробелом."
+          "note": "Локальный BEM prefix меняет все 32 исходных root rules, включая empty/RTL/wrap/align/justify/preset gaps; variables и shared marker сохраняются, selectors ограничены собственным data root. Undefined и пустой prefix наследуют provider (по умолчанию ant-flex). ConfigProvider.flex поддерживает vertical/class/style; undefined наследует record, явный объект, включая {}, заменяет его целиком. Приоритет направления: orientation → local vertical → provider vertical. Provider style идёт перед local style, затем flex/custom gap; preset gap уступает inline style. SSR CSS, scope isolation и живое снятие prefix проверены. 33 официальных UMD-сценариев сверяют классы, атрибуты, computed styles и direct-child geometry, custom roots, nested replacement, нулевые/CSS gaps, aliases/algorithms, RTL и narrow wrap. Общий ConfigProvider prefix поддержан отдельной feature."
         },
         {
           "id": "component-aliases",
@@ -1126,13 +1151,20 @@
         {
           "id": "shared-prefix",
           "title": "Общий ConfigProvider prefix",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Flex.svelte",
-            "src/lib/ConfigProvider.svelte"
+            "src/lib/ConfigProvider.svelte",
+            "tests/browser/fixtures/CorePrefixScope.svelte",
+            "tests/browser/fixtures/CorePrefixFixtures.svelte",
+            "tests/browser/fixtures/CorePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-core-prefix-reference.json",
+            "tests/browser/core-prefix-metrics.ts",
+            "tests/browser/core-prefix.spec.ts",
+            "tests/package/core-prefix.ssr.test.ts"
           ],
-          "note": "Локальный prefixCls поддержан; общий getPrefixCls/rootPrefixCls ещё не перенесён. Svelte component/ref/children/event conventions являются сохранённой границей адаптера."
+          "note": "Общий getPrefixCls подключён; локальная непустая строка имеет приоритет, empty/undefined наследуют provider. Девять unmodified UMD cases и три live transitions сверяют default/empty/local/nested/sibling/RTL и отдельный CSS-variable prefix. Root/parts CSS, SSR head, DOM/radio identity, selection, callbacks, draft/focus/selection и текущий FormData сохраняются."
         }
       ]
     },
@@ -13301,15 +13333,25 @@
             "tests/package/segmented-prefix.ssr.test.ts",
             "readme.md"
           ],
-          "note": "Локальный prefixCls следует 6.6.8: root/options/icon/thumb classes и stylesheet из 38 закреплённых правил; пустая строка возвращает ant-segmented. CSS variables и marker сохраняются, defaults/root states ограничены собственным control, включая пересечение prefix с marker. Размеры, block/round, vertical/RTL, disabled, hover/active, icon-only/0, native/token themes, cssVar.prefix и semantic styles. Динамическая смена сохраняет radio/value/focus/ref и callbacks, отменяет прежний thumb; Tooltip остаётся собственным компонентом. SSR включает head stylesheet без DOM/timers, unmount удаляет локальные styles."
+          "note": "Локальный prefixCls следует 6.6.8: root/options/icon/thumb classes и stylesheet из 38 закреплённых правил; пустая строка наследует provider (по умолчанию ant-segmented). CSS variables и marker сохраняются, defaults/root states ограничены собственным control, включая пересечение prefix с marker. Размеры, block/round, vertical/RTL, disabled, hover/active, icon-only/0, native/token themes, cssVar.prefix и semantic styles. Динамическая смена сохраняет radio/value/focus/ref и callbacks, отменяет прежний thumb; Tooltip остаётся собственным компонентом. SSR включает head stylesheet без DOM/timers, unmount удаляет локальные styles."
         },
         {
           "id": "global-config",
           "title": "Глобальный ConfigProvider.prefixCls",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Единый глобальный ConfigProvider.prefixCls остаётся общим пробелом миграции. Локальный prefixCls Segmented и ConfigProvider.segmented реализованы отдельно; v1-ready не означает полный React API."
+          "evidence": [
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/Segmented.svelte",
+            "tests/browser/fixtures/CorePrefixScope.svelte",
+            "tests/browser/fixtures/CorePrefixFixtures.svelte",
+            "tests/browser/fixtures/CorePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-core-prefix-reference.json",
+            "tests/browser/core-prefix-metrics.ts",
+            "tests/browser/core-prefix.spec.ts",
+            "tests/package/core-prefix.ssr.test.ts"
+          ],
+          "note": "Общий getPrefixCls подключён; локальная непустая строка имеет приоритет, empty/undefined наследуют provider. Девять unmodified UMD cases и три live transitions сверяют default/empty/local/nested/sibling/RTL и отдельный CSS-variable prefix. Root/parts CSS, SSR head, DOM/radio identity, selection, callbacks, draft/focus/selection и текущий FormData сохраняются. Source и Native radio не имеют value-атрибута: FormData отправляет on, типизированное значение передаётся через value/onChange. Raw результат сохранён для отдельного разбора; текущий контракт не меняется."
         }
       ]
     },
@@ -18928,9 +18970,16 @@
             "tests/browser/fixtures/ant-design-widget-prefix-reference.json",
             "tests/browser/widget-prefix-metrics.ts",
             "tests/browser/widget-prefix.spec.ts",
-            "tests/package/widget-prefix.ssr.test.ts"
+            "tests/package/widget-prefix.ssr.test.ts",
+            "tests/browser/fixtures/CorePrefixScope.svelte",
+            "tests/browser/fixtures/CorePrefixFixtures.svelte",
+            "tests/browser/fixtures/CorePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-core-prefix-reference.json",
+            "tests/browser/core-prefix-metrics.ts",
+            "tests/browser/core-prefix.spec.ts",
+            "tests/package/core-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline и Steps подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex и Segmented подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on."
         },
         {
           "id": "native-legacy-prefix-namespace",

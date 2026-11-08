@@ -9,6 +9,9 @@
 
 ### Added
 
+- Divider, Flex и Segmented наследуют ConfigProvider.prefixCls с локальным
+  приоритетом. Смена prefix сохраняет DOM, выбор, FormData, callbacks и фокус.
+
 - Statistic/Timer, QRCode, Timeline и Steps наследуют ConfigProvider.prefixCls.
   Локальный prefix имеет приоритет; вложенный Steps в Timeline получает общий
   prefix отдельно. Сохранены темы, SSR, DOM, фокус и выделение при обновлении.

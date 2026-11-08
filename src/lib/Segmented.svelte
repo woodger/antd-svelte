@@ -45,7 +45,7 @@
   let nativeName = $derived(name ?? `ant-segmented-${generatedId}`);
   let isVertical = $derived(orientation ? orientation === 'vertical' : vertical);
   let mergedSize = $derived(size ?? config.componentSize);
-  let prefix = $derived(prefixCls || 'ant-segmented');
+  let prefix = $derived(config.getPrefixCls('segmented', prefixCls));
   let prefixCss = $derived(getSegmentedPrefixCss(prefix));
   let info = $derived(
     {

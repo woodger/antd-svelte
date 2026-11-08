@@ -53,7 +53,7 @@ export interface FlexProps<Props extends object = {}> extends Omit<
   align?: FlexAlign;
   flex?: string | number;
   gap?: FlexGap;
-  /** Локальный BEM prefix; пустая строка использует ant-flex. */
+  /** Локальный BEM prefix; пустая строка наследует ConfigProvider prefix. */
   prefixCls?: string;
   /** Нативный tag или Svelte component, получающий props корня. @defaultValue 'div' */
   component?: keyof HTMLElementTagNameMap | Component<Props>;

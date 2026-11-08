@@ -25,7 +25,7 @@
   }: DividerProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Divider');
-  let prefix = $derived(prefixCls || 'ant-divider');
+  let prefix = $derived(config.getPrefixCls('divider', prefixCls));
   let prefixCss = $derived(getDividerPrefixCss(prefix));
   let direction = $derived<DividerOrientation>(
     orientation === 'horizontal' || orientation === 'vertical'

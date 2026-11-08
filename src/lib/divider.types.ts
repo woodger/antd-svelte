@@ -18,7 +18,7 @@ export interface DividerProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style'
 > {
-  /** Локальный BEM prefix; пустая строка использует ant-divider. */
+  /** Локальный BEM prefix; пустая строка наследует ConfigProvider prefix. */
   prefixCls?: string;
   children?: Snippet | string | number | null | false;
   orientation?: DividerOrientation;

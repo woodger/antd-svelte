@@ -24,7 +24,7 @@
   }: FlexComponentProps<Props> = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Flex');
-  let prefix = $derived(prefixCls || 'ant-flex');
+  let prefix = $derived(config.getPrefixCls('flex', prefixCls));
   let prefixCss = $derived(getFlexPrefixCss(prefix));
   let isVertical = $derived(orientation ? orientation === 'vertical'
     : vertical ?? config.flex?.vertical ?? false);

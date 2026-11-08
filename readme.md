@@ -326,7 +326,8 @@ orientationMargin и verticalMarginInline, локальные alias-токены
 фикстура `?fixture=divider-theme`.
 
 Локальный prefixCls меняет BEM-классы корня, вариантов и потомков; пустой prefix
-использует ant-divider. CSS variables и общий marker сохраняют прежние имена.
+наследует ConfigProvider.prefixCls (по умолчанию ant-divider).
+CSS variables и общий marker сохраняют прежние имена.
 Собственный stylesheet из 27 правил добавляется при SSR и очищается при unmount.
 Defaults ограничены владельцем, включая prefix, совпадающий с общим marker.
 
@@ -340,8 +341,8 @@ Prefix/config updates сохраняют nativeElement, DOM, фокус и со�
 [SSR](./tests/package/divider-config.ssr.test.ts),
 [browser](./tests/browser/divider-config.spec.ts),
 [эталон UMD](./tests/browser/fixtures/ant-design-divider-config-reference.json),
-фикстура `?fixture=divider-config`. Общий prefix ConfigProvider и React development
-warnings ещё не перенесены.
+фикстура `?fixture=divider-config`. Общий prefix ConfigProvider поддержан;
+React development warnings ещё не перенесены.
 
 Vendor/divider.css содержит 27 правил из закреплённого архива; рецепт divider
 исключает интеграцию ColorPicker и воспроизводится через `npm run cli -- css`.
@@ -413,7 +414,7 @@ FlexComponentProps; FlexProps остаётся расширяемым интер
 фикстура `?fixture=flex-source`. Live updates сохраняют custom state, DOM/ref,
 фокус и selection; смена component заменяет корень, как в React.
 Рецепты flex и flex-prefix воспроизводят 32 правила закреплённого CSS без reset типографики.
-Общий prefix ConfigProvider остаётся в работе.
+Flex наследует ConfigProvider.prefixCls; непустой локальный prefix имеет приоритет.
 
 ## Statistic
 
@@ -603,7 +604,8 @@ children. Поддержаны hover/focus/Escape, в том числе для d
 label остаётся flex-item для block и измерений thumb. Пользовательский tooltip.style
 может переопределить display; это меняет компоновку по явному выбору владельца.
 Локальный prefixCls меняет классы корня, options, icon и thumb и подключает
-извлечённый CSS для этого префикса. Пустая строка использует ant-segmented.
+извлечённый CSS для этого префикса. Пустая строка наследует ConfigProvider.prefixCls
+(по умолчанию ant-segmented).
 Имена CSS variables и общий marker сохраняются; defaults ограничены собственным
 корнем. Смена префикса сохраняет radio, значение, фокус и ref, отменяя старый thumb;
 при unmount удаляется локальный stylesheet. Поддержаны native и token themes,
@@ -611,7 +613,7 @@ label остаётся flex-item для block и измерений thumb. По�
 Сверка: [UMD](./tests/browser/fixtures/ant-design-segmented-prefix-reference.json),
 [SSR](./tests/package/segmented-prefix.ssr.test.ts),
 [browser](./tests/browser/segmented-prefix.spec.ts), `?fixture=segmented-prefix`.
-Глобальный ConfigProvider.prefixCls пока отсутствует.
+Segmented наследует ConfigProvider.prefixCls; непустой локальный prefix имеет приоритет.
 
 ## Grid: Row, Col и breakpoints
 
@@ -9855,7 +9857,7 @@ PrefixCls задаёт базовый префикс CSS-классов; по у
 строка наследуют родительский prefix. Локальный непустой prefixCls компонента имеет
 приоритет. Сейчас общий prefix подключён к App, Layout, LayoutSider,
 LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline и Steps;
-остальные семейства подключаются отдельно. Например,
+также Divider, Flex и Segmented. Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 
@@ -9882,6 +9884,14 @@ Statistic/Timer, QRCode, Timeline и Steps проверяются также п�
 [SSR](./tests/package/widget-prefix.ssr.test.ts), `?fixture=widget-prefix`.
 При сравнении родительские typography/direction совпадают с DOM-провайдером Svelte;
 текущее время Timer не участвует в снимках.
+
+Divider, Flex и Segmented сверяются с
+[девятью исходными примерами и тремя переходами](./tests/browser/fixtures/ant-design-core-prefix-reference.json):
+[browser](./tests/browser/core-prefix.spec.ts),
+[SSR](./tests/package/core-prefix.ssr.test.ts), `?fixture=core-prefix`.
+Смена prefix сохраняет выбранную опцию, radio DOM, callbacks, FormData и фокус.
+Raw замеры отдельно фиксируют существующее поведение Segmented: radio не имеет
+value-атрибута и отправляет "on"; типизированное значение передаётся через value/onChange.
 
 ## Формы и валидация
 
