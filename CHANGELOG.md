@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: rich help с числами, массивами и Svelte snippets, reset локального
+  состояния и изоляция вспомогательных controls. Ноль входит в описание поля;
+  прежний приоритет errors/warnings и оформление semantic help/helpItem сохранены.
+
 - FormItem: tooltip с content/options, собственным icon и defaults Form/ConfigProvider.
   Подсказка входит в custom requiredMark; сохранены label click, исходная геометрия,
   RTL, темы и native field state. Массивы отображаются как content, декоративный SVG

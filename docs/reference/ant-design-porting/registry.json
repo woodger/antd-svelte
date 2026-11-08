@@ -5045,7 +5045,13 @@
         "tests/browser/form-slot-context-metrics.ts",
         "tests/browser/fixtures/FormSlotContextFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-slot-context-reference.json",
-        "tests/package/form-slot-context.ssr.test.ts"
+        "tests/package/form-slot-context.ssr.test.ts",
+        "src/lib/RenderContent.svelte",
+        "tests/browser/form-help.spec.ts",
+        "tests/browser/form-help-metrics.ts",
+        "tests/browser/fixtures/FormHelpFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-help-reference.json",
+        "tests/package/form-help.ssr.test.ts"
       ],
       "features": [
         {
@@ -5704,6 +5710,23 @@
             "tests/package/form-slot-context.ssr.test.ts"
           ],
           "note": "Приватный NoFormItemBinding очищает FormFieldContext только в label (включая его tooltip) и extra; основной children/controlRef продолжают принадлежать полю. Сохраняется FormContext и reactive ConfigContext со всеми getters, componentDisabled берётся из Form.disabled, чтобы unbound widgets сохраняли global/Form disabled и прежний submitting contract. Size/variant/theme/locale не меняются. Inputs/selects пояснений не получают id/name, required, error/warning status/ARIA, description основного поля и не регистрируют себя в его ref. Explicit helper props приоритетнее. Helper input/blur не меняет main value/touched, native FormData содержит единственное main значение, getFieldInstance указывает на основной Input. Семь неизменённых UMD-состояний фиксируют Input extra/popup и Select: default, required, errors, disabled, small, filled и explicit owner props; source helper blur и ref ownership приложены. Scoped helper contexts не добавляют DOM, selected reset/lifecycle и внешний вид labels/slots сохраняются. Package SSR проверяет отсутствие скопированных field attributes у helpers и сохранение errors/name основного control; source default native HTML name основного поля по-прежнему заменён согласованной Svelte FormData association."
+        },
+        {
+          "id": "rich-help",
+          "title": "FormItem.help: rich content, доступное описание и reset state",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/RenderContent.svelte",
+            "src/lib/NoFormItemBinding.svelte",
+            "tests/browser/form-help.spec.ts",
+            "tests/browser/form-help-metrics.ts",
+            "tests/browser/fixtures/FormHelpFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-help-reference.json",
+            "tests/package/form-help.ssr.test.ts"
+          ],
+          "note": "FormItem.help расширен со string до RenderEmptyContent: numbers, nested arrays, booleans/nullish и Svelte snippets. Undefined/null/false/пустая строка скрывают fallback help, whitespace/0/true/arrays/snippets сохраняют source content semantics. Сохранены прежние native error/warning priority и контейнер ant-form-item-extra для fallback help; semantic help/helpItem и доступные сообщения работают как прежде. Source 6.6.8 explicit help перекрывает errors, включая false; это намеренно не меняет существующий Svelte контракт, raw observations приложены. Help=0 отображается и входит в description; source проверяет truthiness и теряет aria-describedby для числового нуля. Native zero сопоставляется с реально измеренным source string-zero, исходный zero snapshot сохранён для разбора. Пятнадцать UMD-состояний сверяют scalar/array/rich content, description relations, helper input attributes и lifecycle; counter после selected reset пересоздаётся. Help content живёт под тем же resetKey и NoFormItemBinding: вспомогательные controls не получают name/id/required/error binding текущего поля. Изменение help сохраняет основной input/selection/focus, value и FormData. Package SSR публикует rich help type и description для нуля без DOM. Это перенос content/lifecycle; source help override и полный message motion остаются отдельными пробелами."
         }
       ]
     },

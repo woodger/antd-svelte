@@ -1,0 +1,282 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after render/metadata/reset",
+    "normalization": "message text, rich content and relation to input description; raw explicit-help priority observations retained"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "absent"
+      },
+      "metrics": {
+        "text": "",
+        "described": false,
+        "hasDescription": false,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "text",
+        "help": "Details"
+      },
+      "metrics": {
+        "text": "Details",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "zero",
+        "help": 0
+      },
+      "metrics": {
+        "text": "0",
+        "described": false,
+        "hasDescription": false,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "string-zero",
+        "help": "0"
+      },
+      "metrics": {
+        "text": "0",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "number",
+        "help": 12
+      },
+      "metrics": {
+        "text": "12",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "true",
+        "help": true
+      },
+      "metrics": {
+        "text": "",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "false",
+        "help": false
+      },
+      "metrics": {
+        "text": "",
+        "described": false,
+        "hasDescription": false,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "null",
+        "help": null
+      },
+      "metrics": {
+        "text": "",
+        "described": false,
+        "hasDescription": false,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "empty",
+        "help": ""
+      },
+      "metrics": {
+        "text": "",
+        "described": false,
+        "hasDescription": false,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "space",
+        "help": " "
+      },
+      "metrics": {
+        "text": " ",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "array",
+        "help": [
+          "Details ",
+          [
+            0,
+            false
+          ]
+        ]
+      },
+      "metrics": {
+        "text": "Details 0",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-array",
+        "help": []
+      },
+      "metrics": {
+        "text": "",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "rich",
+        "rich": true
+      },
+      "metrics": {
+        "text": "Rich details",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": true,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "helper-input",
+        "helperInput": true
+      },
+      "metrics": {
+        "text": "",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": {
+          "name": null,
+          "id": null,
+          "required": false,
+          "invalid": null
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "counter",
+        "counter": true
+      },
+      "metrics": {
+        "text": "Help: 0",
+        "described": true,
+        "hasDescription": true,
+        "invalid": null,
+        "rich": false,
+        "helper": null
+      }
+    }
+  ],
+  "observations": [
+    {
+      "sample": {
+        "id": "error-with-help",
+        "help": "Details",
+        "error": true
+      },
+      "metrics": {
+        "text": "Details",
+        "described": true,
+        "hasDescription": true,
+        "invalid": "true",
+        "rich": false,
+        "helper": null
+      }
+    },
+    {
+      "sample": {
+        "id": "false-with-error",
+        "help": false,
+        "error": true
+      },
+      "metrics": {
+        "text": "",
+        "described": true,
+        "hasDescription": true,
+        "invalid": "true",
+        "rich": false,
+        "helper": null
+      }
+    }
+  ],
+  "counter": {
+    "incremented": {
+      "text": "Help: 1",
+      "described": true,
+      "hasDescription": true,
+      "invalid": null,
+      "rich": false,
+      "helper": null
+    },
+    "reset": {
+      "text": "Help: 0",
+      "described": true,
+      "hasDescription": true,
+      "invalid": null,
+      "rich": false,
+      "helper": null
+    }
+  }
+}

@@ -9556,6 +9556,21 @@ getFieldInstance возвращает основной control, а FormData не
 [браузер](./tests/browser/form-slot-context.spec.ts),
 [SSR](./tests/package/form-slot-context.ssr.test.ts), `?fixture=form-slot-context`.
 
+`FormItem.help` также принимает RenderEmptyContent: числа, вложенные массивы
+и Svelte snippets. Undefined/null/false/'' скрывают пояснение; 0 отображается
+и входит в aria-describedby. True и пустой массив сохраняют контейнер.
+Semantic help/helpItem продолжают оформлять пояснение; reset выбранного поля
+пересоздаёт его snippet, а обновление help сохраняет основной control и его фокус.
+Controls внутри help изолированы от binding поля, как extra.
+
+Сохранён прежний native приоритет: errors/warnings заменяют help. Source 6.6.8
+отдаёт приоритет явно заданному help, включая false; raw наблюдения сохранены.
+Help={0} входит в описание поля, как строковый '0'. Source 6.6.8 пропускает
+связь для числового нуля; этот дефект не повторяется в Svelte.
+Сверка: [15 эталонов и reset](./tests/browser/fixtures/ant-design-form-help-reference.json),
+[браузер](./tests/browser/form-help.spec.ts),
+[публичные типы и SSR](./tests/package/form-help.ssr.test.ts), `?fixture=form-help`.
+
 `FormItem.hidden` скрывает весь блок поля через исходный CSS, сохраняя его control,
 ref, значение, metadata и локальное состояние children. По умолчанию false.
 Скрытое поле продолжает участвовать в validation, submit и native FormData;

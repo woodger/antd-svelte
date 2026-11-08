@@ -28,7 +28,8 @@
     /** Содержимое подсказки либо Tooltip options; defaults наследуются из Form. */
     tooltip?: FormItemTooltipContent;
     children: Snippet;
-    help?: string;
+    /** Пояснение без errors/warnings; поддерживает rich content и сбрасывает state вместе с полем. */
+    help?: RenderEmptyContent;
     /** Пояснение рядом с errors/warnings; reset пересоздаёт content, false/null/undefined/'' скрывают. */
     extra?: RenderEmptyContent;
     required?: boolean;
@@ -119,7 +120,8 @@
   let isRequired = $derived(required
     ?? (rules ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path))
     ?? false);
-  let descriptionId = $derived(errors.length || warnings.length || help ? `${id}-help` : undefined);
+  let hasHelp = $derived(help !== undefined && help !== null && help !== false && help !== '');
+  let descriptionId = $derived(errors.length || warnings.length || hasHelp ? `${id}-help` : undefined);
   let hasExtra = $derived(extra !== undefined && extra !== null && extra !== false && extra !== '');
   let extraId = $derived(hasExtra ? `${id}_extra` : undefined);
   let resetKey = $state.raw<object>({});
@@ -277,12 +279,12 @@
                 style={form?.styles?.helpItem}>{warning}</div>
             {/each}
           </div>
-        {:else if help}
+        {:else if hasHelp}
           <div id={descriptionId} class={['ant-form-item-extra', form?.classNames?.help]}
             style={form?.styles?.help}>
-            {#if form?.classNames?.helpItem || form?.styles?.helpItem}
-              <div class={form?.classNames?.helpItem} style={form?.styles?.helpItem}>{help}</div>
-            {:else}{help}{/if}
+            {#key resetKey}<NoFormItemBinding>{#if form?.classNames?.helpItem || form?.styles?.helpItem}
+              <div class={form?.classNames?.helpItem} style={form?.styles?.helpItem}><RenderContent value={help} /></div>
+            {:else}<RenderContent value={help} />{/if}</NoFormItemBinding>{/key}
           </div>
         {/if}
         {#if hasExtra}
