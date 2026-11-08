@@ -147,6 +147,8 @@ prefixCls; runtime сохраняет CSS variables/marker и ограничив
 runtime ограничивает каждый selector собственным root.
 Рецепт statistic-prefix выводит data module из 14 правил Statistic; runtime
 сохраняет namespace токенов и изолирует alias prefixes marker своего корня.
+Рецепт qrcode-prefix выводит 11 правил QRCode CSS data module; root/borderless
+defaults ограничены marker, остальные namespace Button/Spin и токенов сохраняются.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.

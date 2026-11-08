@@ -3,6 +3,8 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { useDesignTokenContext } from './theme-context.svelte';
+  import { getQRCodePrefixCss } from './qrcode-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import {
     encodeQRCode,
     excavateQRCode,
@@ -20,6 +22,7 @@
 
   let {
     value,
+    prefixCls,
     type = 'canvas',
     icon,
     size = 160,
@@ -46,6 +49,8 @@
   }: QRCodeProps = $props();
 
   const config = useConfig();
+  let componentPrefix = $derived(prefixCls || 'ant-qrcode');
+  let prefixCss = $derived(getQRCodePrefixCss(componentPrefix));
   const componentTheme = useComponentTheme('QRCode');
   const tokens = useDesignTokenContext();
   let canvas = $state<HTMLCanvasElement>();
@@ -84,6 +89,7 @@
     props: {
       ...attributes,
       value,
+      prefixCls,
       type,
       icon,
       size,
@@ -163,32 +169,34 @@
 {/snippet}
 
 {#if value}
+  {#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`qrcode-prefix:${componentPrefix}`} />{/if}
   <div
     bind:this={nativeElement}
     {...splitAttributes.root}
     onclick={onclick ?? onClick}
+    data-ant-qrcode-prefix={prefixCss ? componentPrefix : undefined}
     class={[
-      'ant-qrcode ant-qrcode-css-var',
+      componentPrefix, 'ant-qrcode-css-var',
       componentTheme.className,
       className,
       rootClassName,
       config.qrcode?.class,
       contextClasses?.root,
       localClasses?.root,
-      !bordered && 'ant-qrcode-borderless'
+      !bordered && `${componentPrefix}-borderless`
     ]}
     style={rootStyle}
   >
     {#if status !== 'active'}<div
-      class={['ant-qrcode-cover', contextClasses?.cover, localClasses?.cover]}
+      class={[`${componentPrefix}-cover`, contextClasses?.cover, localClasses?.cover]}
       style={[contextStyles?.cover, localStyles?.cover].filter(Boolean).join(';') || undefined}
     >
       {#if statusRender}{@render statusRender(statusInfo)}
       {:else if status === 'expired'}
-        <p class="ant-qrcode-expired">{locale.expired}</p>
+        <p class={`${componentPrefix}-expired`}>{locale.expired}</p>
         {#if onRefresh}<Button type="link" icon={reloadIcon} onclick={onRefresh}>{locale.refresh}</Button>{/if}
       {:else if status === 'loading'}<Spin />
-      {:else if status === 'scanned'}<p class="ant-qrcode-scanned">{locale.scanned}</p>{/if}
+      {:else if status === 'scanned'}<p class={`${componentPrefix}-scanned`}>{locale.scanned}</p>{/if}
     </div>{/if}
     {#if type === 'canvas'}
       <canvas

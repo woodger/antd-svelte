@@ -7617,7 +7617,19 @@ quiet zone, иконку/CORS, statuses, refs, темы, стили и fallback.
 с [фиксированными результатами npm-пакета](./tests/package/qrcode-vectors.json),
 включая все 40 версий, четыре уровня коррекции и восемь масок.
 
-Произвольный prefixCls пока не перенесён.
+Локальный prefixCls меняет root/cover/expired/scanned/borderless classes; пустая
+строка использует ant-qrcode. CSS module ограничен marker своего корня, namespace
+токенов и классы Button/Spin сохраняются. Соседние QRCode не меняются, включая
+совпадения prefix с cover/css-var/borderless. При смене prefix сохраняются root,
+canvas/SVG, encoding, status, refs и доступная с клавиатуры кнопка refresh.
+Fallback-переменная module не перекрывает адаптивный cover прежней light/dark темы.
+Native RTL наследуется, исходное LTR-направление корня хранится в raw reference.
+Сверка: [44 исходных случая и 4 обновления](./tests/browser/fixtures/ant-design-qrcode-prefix-reference.json),
+[CSS boundary](./src/lib/qrcode-prefix.test.ts),
+[браузер](./tests/browser/qrcode-prefix.spec.ts),
+[публичный пакет и SSR](./tests/package/qrcode-prefix.ssr.test.ts), `?fixture=qrcode-prefix`.
+Рецепт qrcode-prefix воспроизводит те же 11 правил CSS data module с проверкой SHA-256.
+Глобальный ConfigProvider.prefixCls пока не перенесён.
 React development warnings для пустого value и icon с уровнем L
 пока не воспроизводятся; production-поведение этих случаев сохранено.
 

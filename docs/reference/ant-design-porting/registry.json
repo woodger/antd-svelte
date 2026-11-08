@@ -12222,7 +12222,17 @@
         "tests/browser/qrcode-theme-metrics.ts",
         "tests/browser/qrcode-theme.spec.ts",
         "tests/package/qrcode-theme.ssr.test.ts",
-        "readme.md"
+        "readme.md",
+        "src/lib/qrcode-prefix.engine.ts",
+        "src/lib/qrcode-prefix.test.ts",
+        "src/lib/vendor/qrcode-prefix.css.js",
+        "tests/browser/qrcode-prefix.spec.ts",
+        "tests/browser/qrcode-prefix-metrics.ts",
+        "tests/browser/fixtures/QRCodePrefixCase.svelte",
+        "tests/browser/fixtures/QRCodePrefixFixtures.svelte",
+        "tests/browser/fixtures/qrcode-prefix-cases.ts",
+        "tests/browser/fixtures/ant-design-qrcode-prefix-reference.json",
+        "tests/package/qrcode-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -12309,11 +12319,33 @@
         },
         {
           "id": "theme-prefix-diagnostics",
-          "title": "PrefixCls и React development warnings",
+          "title": "Глобальный prefixCls и React development warnings",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Произвольный локальный/global prefixCls и React dev warnings (пустой value, icon с L) пока не перенесены; production behavior этих input сохранён. Theme aliases/algorithms и global default foreground реализованы отдельной feature; собственных публичных component tokens в QRCode upstream нет."
+          "note": "Глобальный ConfigProvider.prefixCls и React dev warnings (пустой value, icon с L) пока не перенесены; production behavior этих input сохранён. Локальный prefixCls поддерживается отдельной feature. Theme aliases/algorithms и global default foreground реализованы; собственных публичных component tokens в QRCode upstream нет."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный prefixCls и изолированный CSS QRCode",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/QRCode.svelte",
+            "src/lib/qrcode.types.ts",
+            "src/lib/qrcode-prefix.engine.ts",
+            "src/lib/qrcode-prefix.test.ts",
+            "src/lib/vendor/qrcode-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/qrcode-prefix.spec.ts",
+            "tests/browser/qrcode-prefix-metrics.ts",
+            "tests/browser/fixtures/QRCodePrefixCase.svelte",
+            "tests/browser/fixtures/QRCodePrefixFixtures.svelte",
+            "tests/browser/fixtures/qrcode-prefix-cases.ts",
+            "tests/browser/fixtures/ant-design-qrcode-prefix-reference.json",
+            "tests/package/qrcode-prefix.ssr.test.ts"
+          ],
+          "note": "QRCodeProps.prefixCls меняет root/cover/expired/scanned/borderless names; undefined/empty string возвращает ant-qrcode. Общий CSS-variable marker и namespace --ant-qr-code-* сохраняются; root/borderless rules требуют data-ant-qrcode-prefix, включая совпадения со служебными cover/css-var/borderless classes. Рецепт qrcode-prefix выводит 11 исходных правил в CSS data module, SHA-256 архива проверяется. Fallback variables имеют zero specificity, чтобы не перекрывать адаптивный cover color-mix прежней light/dark темы. Classes Button/Spin, native attrs/a11y routing, semantic callback raw prefixCls, config/local styles, size/bordered/status/encoding, refs и callbacks не меняются. Сорок четыре unmodified UMD cases проверяют canvas/SVG в LTR/RTL, active/expired/loading/scanned, borderless, empty prefix, три aliases, themed CSS variables и local semantic styles; четыре transitions сохраняют root и drawing identity. Native RTL inheritance сохраняется при raw Source root direction=ltr. Keyboard refresh остаётся доступным после изменения prefix. Unit защищает default/alias CSS scope и closing style escape, SSR публикует проп и SVG/classes без DOM. Глобальный prefix и React development warnings остаются отдельными пробелами; новых dependencies, runtime React и script/config changes нет."
         }
       ]
     },

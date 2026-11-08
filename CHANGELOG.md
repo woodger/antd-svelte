@@ -9,6 +9,10 @@
 
 ### Added
 
+- QRCode поддерживает локальный prefixCls для root, cover и status classes.
+  Новый CSS-рецепт qrcode-prefix воспроизводит 11 исходных правил; сохранены
+  canvas/SVG, статусы, темы, refs, keyboard refresh и изоляция соседних QRCode.
+
 - Statistic и StatisticTimer поддерживают локальный prefixCls, fallback пустой
   строки, смену namespace частей без замены DOM корня и изолированный CSS.
   Новый рецепт statistic-prefix воспроизводит 14 правил закреплённого архива;
