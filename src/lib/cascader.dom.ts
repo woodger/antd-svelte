@@ -16,6 +16,8 @@ export function connectCascaderWidth(popup: HTMLElement, anchor: Element) {
 /** Измеряет теги rc-overflow; hidden теги сохраняют ширину, но не участвуют в flow. */
 export function connectCascaderTags(host: HTMLElement, update: (count: number) => void) {
   return connectSelectTagOverflow(host, update, {
-    tag: '[data-cascader-tag]', rest: '[data-cascader-rest]'
+    tag: ':scope > .overflow-item > [data-cascader-tag]',
+    rest: ':scope > .overflow-item > [data-cascader-rest]',
+    input: ':scope > .overflow-item > input'
   });
 }

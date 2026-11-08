@@ -4056,7 +4056,10 @@
         "tests/browser/select-responsive-tags.spec.ts",
         "tests/browser/fixtures/SelectResponsiveTagsFixtures.svelte",
         "tests/browser/fixtures/ant-design-select-responsive-tags-reference.json",
-        "tests/package/select-responsive.ssr.test.ts"
+        "tests/package/select-responsive.ssr.test.ts",
+        "tests/browser/select-overflow-owner.spec.ts",
+        "tests/browser/fixtures/CascaderOverflowOwnerFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-owned-overflow-reference.json"
       ],
       "features": [
         {
@@ -4129,9 +4132,12 @@
             "src/lib/cascader.engine.test.ts",
             "src/lib/cascader.ssr.test.ts",
             "tests/package/cascader.ssr.test.ts",
-            "tests/browser/cascader.spec.ts"
+            "tests/browser/cascader.spec.ts",
+            "tests/browser/select-overflow-owner.spec.ts",
+            "tests/browser/fixtures/CascaderOverflowOwnerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-owned-overflow-reference.json"
           ],
-          "note": "108 исходных CSS rules с at-rules; Select base CSS используется без изменения Select API. Raw semantic props с resolved disabled/size/variant/status, root style priority, semantic popup/list/listItem, icons, sizes/variants, common locale, themes/compact и popup widths. Deprecated root clearIcon/showArrow, dropdown aliases и column styles удалены. Responsive/maxTagCount/truncate, display/option/tag/popup snippets. Panel наследует только disabled/direction и expand/loading icons, без root/popup semantic config."
+          "note": "108 исходных CSS rules с at-rules; Select base CSS используется без изменения Select API. Raw semantic props с resolved disabled/size/variant/status, root style priority, semantic popup/list/listItem, icons, sizes/variants, common locale, themes/compact и popup widths. Deprecated root clearIcon/showArrow, dropdown aliases и column styles удалены. Responsive/maxTagCount/truncate, display/option/tag/popup snippets. Panel наследует только disabled/direction и expand/loading icons, без root/popup semantic config. Общий overflow observer выбирает только собственные tags/rest/input через scoped selectors; input внутри custom summary не заменяет editor при измерениях. Отдельный raw UMD случай и native сценарии Select/Cascader защищают вложенные controls."
         },
         {
           "id": "advanced-api",
@@ -7673,7 +7679,10 @@
         "tests/package/select-responsive.ssr.test.ts",
         "tests/browser/select-optional-options.spec.ts",
         "tests/browser/fixtures/OptionalSelectFixtures.svelte",
-        "tests/package/select-optional-options.ssr.test.ts"
+        "tests/package/select-optional-options.ssr.test.ts",
+        "tests/browser/select-overflow-owner.spec.ts",
+        "tests/browser/fixtures/CascaderOverflowOwnerFixtures.svelte",
+        "tests/browser/fixtures/ant-design-select-owned-overflow-reference.json"
       ],
       "features": [
         {
@@ -7959,9 +7968,12 @@
             "tests/browser/fixtures/ant-design-select-responsive-tags-reference.json",
             "tests/package/select-responsive.ssr.test.ts",
             "src/lib/Select.svelte",
-            "src/lib/select.types.ts"
+            "src/lib/select.types.ts",
+            "tests/browser/select-overflow-owner.spec.ts",
+            "tests/browser/fixtures/CascaderOverflowOwnerFixtures.svelte",
+            "tests/browser/fixtures/ant-design-select-owned-overflow-reference.json"
           ],
-          "note": "Геометрия Source проверена по official UMD при фиксированных ширинах. Общие browser-only ResizeObserver/RAF измеряют content/tags/rest/input. Скрытые tags сохраняют измеряемую ширину с aria-hidden/inert; typed values/cache/SSR fields и native handoff сфокусированной remove button сохранены. Width/query/data updates и повторные mount cycles сохраняют input identity и очищают ресурсы. Существующий Cascader использует тот же владелец измерений; prefix/render/semantic APIs остаются отдельными gaps. Full-fit проверка исправляет raw дефект длинного сводного тега."
+          "note": "Геометрия Source проверена по official UMD при фиксированных ширинах. Общие browser-only ResizeObserver/RAF измеряют content/tags/rest/input. Скрытые tags сохраняют измеряемую ширину с aria-hidden/inert; typed values/cache/SSR fields и native handoff сфокусированной remove button сохранены. Width/query/data updates и повторные mount cycles сохраняют input identity и очищают ресурсы. Существующий Cascader использует тот же владелец измерений; prefix/render/semantic APIs остаются отдельными gaps. Full-fit проверка исправляет raw дефект длинного сводного тега. Общий overflow observer выбирает только собственные tags/rest/input через scoped selectors; input внутри custom summary не заменяет editor при измерениях. Отдельный raw UMD случай и native сценарии Select/Cascader защищают вложенные controls."
         },
         {
           "id": "optional-options",

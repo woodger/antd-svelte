@@ -15,12 +15,16 @@ export function measureSelectInput(input: HTMLInputElement): number {
 export function connectSelectTagOverflow(
   host: HTMLElement,
   update: (count: number) => void,
-  selectors = { tag: '[data-select-tag]', rest: '[data-select-rest]' }
+  selectors = {
+    tag: ':scope > [data-select-tag]',
+    rest: ':scope > [data-select-rest]',
+    input: ':scope > input'
+  }
 ) {
   const view = host.ownerDocument.defaultView!;
   const tags = [...host.querySelectorAll<HTMLElement>(selectors.tag)];
   const rest = host.querySelector<HTMLElement>(selectors.rest);
-  const input = host.querySelector<HTMLInputElement>('input');
+  const input = host.querySelector<HTMLInputElement>(selectors.input);
   let frame = 0;
   let previous = -1;
 

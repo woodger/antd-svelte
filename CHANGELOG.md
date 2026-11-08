@@ -1180,6 +1180,9 @@
 
 ### Fixed
 
+- Responsive overflow Select/Cascader измеряет собственные tags/rest/input.
+  Input внутри maxTagPlaceholder больше не скрывает все выбранные tags.
+
 - Standalone Layout sections получают fallback variables и border-box до hydration,
   включая legacy light/dark/compact. Внутри Layout сохранены inherited variables
   и overrides владельца, локальные styles остаются последними.

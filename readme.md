@@ -8399,7 +8399,9 @@ MaxTagCount="responsive" измеряет доступную ширину, tags,
 ввод через общий с Cascader ResizeObserver/RAF механизм. Скрытые tags остаются
 измеряемыми вне flow, с aria-hidden/inert; до браузерного измерения SSR показывает
 все выбранные значения. Смена ширины, текста и поиска не меняет values или DOM input;
-ресурсы очищаются при выходе из responsive/unmount. Сначала проверяется, помещается
+ресурсы очищаются при выходе из responsive/unmount.
+Измеряются только собственные элементы content; controls внутри maxTagPlaceholder
+не заменяют поисковое поле при расчёте ширины. Сначала проверяется, помещается
 ли весь список: длинный custom rest не скрывает теги, для которых хватает места.
 [Raw геометрия](tests/browser/fixtures/ant-design-select-responsive-tags-reference.json)
 сохраняет это исключение upstream с отдельными замерами доступной и занятой ширины.
