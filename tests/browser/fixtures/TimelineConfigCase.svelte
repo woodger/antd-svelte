@@ -13,10 +13,15 @@
 </script>
 
 {#snippet timeline(id: string)}
-  <div data-timeline-config={id}><Timeline {...componentProps} {items} /></div>
+  <div data-timeline-config={id} data-timeline-prefix={id}
+    data-prefix={id === 'sibling' ? 'ant-timeline' : sample.prefixCls || 'ant-timeline'}>
+    <Timeline {...componentProps} {items} prefixCls={id === 'sibling' ? undefined : sample.prefixCls}
+      titleSpan={sample.titleSpan} />
+  </div>
 {/snippet}
 
-<ConfigProvider direction={sample.direction} theme={{ token: { motion: false } }} timeline={context}>
+<ConfigProvider direction={sample.direction}
+  theme={{ ...sample.theme, token: { motion: false, ...sample.theme?.token } }} timeline={context}>
   {@render timeline('normal')}
   <ConfigProvider timeline={inner}>{@render timeline('nested')}</ConfigProvider>
 </ConfigProvider>

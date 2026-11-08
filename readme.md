@@ -6638,7 +6638,19 @@ Horizontal сохраняет поведение исходных Steps: ниж�
 ant-steps-vertical, но явный ant-timeline-horizontal остаётся. Это отличается от
 согласованного v1-порога самостоятельного Steps (532px); базовые Steps не меняются.
 SSR не измеряет DOM/viewport и оставляет объявленную ориентацию. Произвольный
-prefixCls пока не перенесён.
+глобальный ConfigProvider.prefixCls пока не перенесён.
+
+Локальный prefixCls меняет root и Timeline item/state/color classes; пустая строка
+восстанавливает ant-timeline. Steps остаётся в своём namespace, а CSS variables
+Timeline/Steps и marker сохраняют прежние имена. Соседние показатели изолированы,
+включая совпадение prefix с ant-timeline-item/ant-timeline-css-var. Обновление
+prefix сохраняет ol, theme/semantics, titleSpan и назначение placement до reverse.
+Рецепт timeline-prefix воспроизводит 43 исходных правила CSS data module;
+fallback variables не перекрывают прежние adaptive theme defaults.
+Сверка: [28 исходных случаев и 4 обновления](./tests/browser/fixtures/ant-design-timeline-prefix-reference.json),
+[CSS и item classes](./src/lib/timeline-prefix.test.ts),
+[браузер](./tests/browser/timeline-prefix.spec.ts),
+[публичный пакет и SSR](./tests/package/timeline-prefix.ssr.test.ts), `?fixture=timeline-prefix`.
 
 Source `theme.components.Timeline` подготавливает шесть defaults для tail/dot/spacing
 и поддерживает aliases, отдельные algorithms, CSS prefix/hash и нули/undefined.

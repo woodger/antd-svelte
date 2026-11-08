@@ -1,4 +1,6 @@
-import type { TimelineConfig, TimelineItem, TimelineProps, TimelineSlots } from 'antd-svelte';
+import type {
+  TimelineConfig, TimelineItem, TimelineProps, TimelineSlots, ThemeConfig
+} from 'antd-svelte';
 
 interface TimelineConfigDescriptor {
   className?: string;
@@ -20,6 +22,11 @@ export interface TimelineConfigSample {
   reverse?: boolean;
   orientation?: TimelineProps['orientation'];
   mode?: TimelineProps['mode'];
+  prefixCls?: string;
+  titleSpan?: TimelineProps['titleSpan'];
+  loading?: boolean;
+  width?: number;
+  theme?: ThemeConfig;
 }
 
 const parts = ['root', 'item', 'itemWrapper', 'itemIcon', 'itemSection', 'itemHeader',
@@ -82,7 +89,7 @@ export function timelineLocalProps(sample: TimelineConfigSample): Partial<Timeli
 
 export function timelineConfigItems(sample: TimelineConfigSample): readonly TimelineItem[] {
   return [
-    { key: 'a', title: 'First', content: 'Content A', color: 'green',
+    { key: 'a', title: 'First', content: 'Content A', color: 'green', loading: sample.loading,
       ...(sample.itemStyles ? {
         classNames: { content: 'item-local-content' },
         styles: { content: 'color:#001122', title: 'font-weight:700' }

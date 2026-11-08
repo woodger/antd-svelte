@@ -9,6 +9,10 @@
 
 ### Added
 
+- Timeline поддерживает локальный prefixCls для root, частей, placement/color
+  и layout states. Новый CSS-рецепт timeline-prefix воспроизводит 43 исходных
+  правила; namespace Steps, переменные темы, titleSpan и keyed root сохраняются.
+
 - ConfigProvider.steps задаёт общие классы и semantic styles/callbacks.
   Сохранены локальные/item приоритеты и native поведение. В Timeline передаются
   только plain class/style Steps; исключённые semantic callbacks не вызываются.

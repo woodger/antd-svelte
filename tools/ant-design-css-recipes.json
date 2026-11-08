@@ -780,6 +780,28 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Timeline: все правила, оформление поверх Steps dot.\n * Корни ограничены :where(.ant-timeline-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "timeline-prefix",
+    "output": "src/lib/vendor/timeline-prefix.css.js",
+    "expectedRules": 43,
+    "include": [
+      "^(?:\\.css-var-_R_0_)?\\.ant-timeline(?![\\w])"
+    ],
+    "exclude": [],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-timeline",
+        "replacement": ".ant-timeline-css-var"
+      },
+      {
+        "pattern": "\\.ant-timeline(?![-\\w])",
+        "replacement": ".ant-timeline:where(.ant-timeline-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Timeline prefix template: оформление поверх Steps dot; CSS data module.\n * Корни ограничены :where(.ant-timeline-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
+  },
+  {
     "id": "float-button",
     "output": "src/lib/vendor/float-button.css",
     "expectedRules": 42,

@@ -7,7 +7,8 @@ export function timelineItems(
   items: readonly TimelineItem[],
   mode: 'start' | 'end' | 'alternate',
   loadingIcon: TimelineContent,
-  reverse?: boolean
+  reverse?: boolean,
+  prefix = 'ant-timeline'
 ): StepsDataItem[] {
   const result: StepsDataItem[] = items.map((item, index) => {
     const {
@@ -35,8 +36,8 @@ export function timelineItems(
       status: loading ? 'process' : 'finish',
       class: [
         className,
-        preset && `ant-timeline-item-color-${color}`,
-        `ant-timeline-item-placement-${actualPlacement}`
+        preset && `${prefix}-item-color-${color}`,
+        `${prefix}-item-placement-${actualPlacement}`
       ].filter(
         Boolean
       ).join(

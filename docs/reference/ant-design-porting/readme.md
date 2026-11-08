@@ -149,6 +149,8 @@ runtime ограничивает каждый selector собственным ro
 сохраняет namespace токенов и изолирует alias prefixes marker своего корня.
 Рецепт qrcode-prefix выводит 11 правил QRCode CSS data module; root/borderless
 defaults ограничены marker, остальные namespace Button/Spin и токенов сохраняются.
+Рецепт timeline-prefix выводит 43 правила Timeline поверх Steps dot; локальный
+prefix меняет Timeline selectors, namespace Steps и токенов сохраняются.
 Рецепт color-picker извлекает trigger, palette, sliders, inputs, presets и compact.
 Рецепт input-number-features извлекает variants, spinner, prefix/suffix и addon;
 прежние outlined/compact файлы не перезаписываются.

@@ -22,6 +22,8 @@ export interface TimelineProps extends Omit<
   HTMLAttributes<HTMLOListElement>,
   'children' | 'class' | 'style'
 > {
+  /** Локальный CSS prefix; пустая строка использует ant-timeline, Steps namespace сохраняется. */
+  prefixCls?: string;
   items?: readonly TimelineItem[];
   /** @defaultValue 'outlined' */
   variant?: 'filled' | 'outlined';

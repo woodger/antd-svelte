@@ -13426,7 +13426,16 @@
         "tests/browser/fixtures/TimelineConfigFixtures.svelte",
         "tests/browser/fixtures/timeline-config-cases.ts",
         "tests/browser/fixtures/ant-design-timeline-config-reference.json",
-        "tests/package/timeline-config.ssr.test.ts"
+        "tests/package/timeline-config.ssr.test.ts",
+        "src/lib/timeline-prefix.engine.ts",
+        "src/lib/timeline-prefix.test.ts",
+        "src/lib/vendor/timeline-prefix.css.js",
+        "tools/ant-design-css-recipes.json",
+        "tests/browser/timeline-prefix.spec.ts",
+        "tests/browser/timeline-prefix-metrics.ts",
+        "tests/browser/fixtures/TimelinePrefixFixtures.svelte",
+        "tests/browser/fixtures/ant-design-timeline-prefix-reference.json",
+        "tests/package/timeline-prefix.ssr.test.ts"
       ],
       "features": [
         {
@@ -13506,14 +13515,36 @@
         },
         {
           "id": "prefix-cls",
-          "title": "Локальный/global prefixCls",
-          "state": "missing",
+          "title": "Локальный prefixCls Timeline",
+          "state": "supported",
           "requiredForV1": false,
           "evidence": [
             "src/lib/Timeline.svelte",
-            "src/lib/timeline.types.ts"
+            "src/lib/timeline.types.ts",
+            "src/lib/timeline.engine.ts",
+            "tests/browser/fixtures/TimelineConfigCase.svelte",
+            "tests/browser/fixtures/timeline-config-cases.ts",
+            "src/lib/timeline-prefix.engine.ts",
+            "src/lib/timeline-prefix.test.ts",
+            "src/lib/vendor/timeline-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/timeline-prefix.spec.ts",
+            "tests/browser/timeline-prefix-metrics.ts",
+            "tests/browser/fixtures/TimelinePrefixFixtures.svelte",
+            "tests/browser/fixtures/ant-design-timeline-prefix-reference.json",
+            "tests/package/timeline-prefix.ssr.test.ts"
           ],
-          "note": "Произвольный prefixCls ещё не перенесён; ConfigProvider.timeline class/style/semantics и theme components поддерживаются отдельно."
+          "note": "TimelineProps.prefixCls меняет root/horizontal/alternate/rtl и item/title/icon/content/rail/wrapper/section/header/color/placement classes; undefined/empty string возвращает ant-timeline. Подлежащий Steps сохраняет свой namespace; --ant-timeline-* и --ant-cmp-steps-* variables/общий marker сохраняются. Data marker изолирует root/state selectors и aliases ant-timeline-item/ant-timeline-css-var, low-specificity fallback не перекрывает adaptive legacy defaults. Новый рецепт timeline-prefix извлекает все 43 правила в CSS data module с закреплённым SHA-256; runtime React и новые dependencies отсутствуют. Engine принимает внутренний prefix для item classes, назначает placement до reverse и сохраняет custom-color variable и defaults существующих вызовов. Двадцать восемь unmodified UMD cases в LTR/RTL и четыре transitions фиксируют normal/end/alternate/reverse/horizontal/loading/titleSpan, viewport 575/576, alias/empty prefixes, config/local semantics, component tokens/cssVar.prefix, root identity и default sibling isolation. SSR публикует prefix, styles и native ol/li без DOM, Svelte snippets/focus/refs и titleSpan приоритет сохраняются. Глобальный ConfigProvider.prefixCls остаётся отдельным пробелом."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Глобальный ConfigProvider.prefixCls",
+          "state": "missing",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/ConfigProvider.svelte"
+          ],
+          "note": "Глобальный prefix context ещё не перенесён; локальный Timeline.prefixCls и ConfigProvider.timeline поддерживаются отдельно."
         }
       ]
     },
