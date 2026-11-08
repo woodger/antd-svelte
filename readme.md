@@ -9511,6 +9511,19 @@ title-array сохранены в [31 эталоне и наблюдениях](
 Модель можно хранить в `$state` и заменять во время жизни Form; регистрация полей
 переключается на новый экземпляр, поздние проверки прежней модели изолированы.
 
+`FormItem` без name служит строкой layout: label, help/extra, колонки и настройки
+Form сохраняются, но rules не регистрируются в модели. Required управляет отметкой
+подписи; required/name/id/ARIA самого control задаёт его владелец. Для связи подписи
+используйте FormItem.htmlFor вместе с id control либо его явное доступное имя.
+В этом режиме getFieldsValue/getFieldInstance не получают binding строки,
+а reset модели сохраняет локальные черновик, DOM, фокус и выделение control.
+При переходе между name и его отсутствием control пересоздаётся, как в исходнике;
+переход между двумя заданными именами сохраняет прежний native lifecycle.
+Согласованные Svelte id/name/FormData и label association именованных полей сохранены.
+Сверка: [восемь эталонов и переходы](./tests/browser/fixtures/ant-design-form-nameless-reference.json),
+[браузер](./tests/browser/form-nameless.spec.ts),
+[публичные типы и SSR](./tests/package/form-nameless.ssr.test.ts), `?fixture=form-nameless`.
+
 `theme.components.Form` настраивает Form и каждый FormItem: цвет и размер подписи,
 required mark, высоту, отступы colon и полей, vertical padding/margin.
 Поддержаны aliases/algorithms, custom cssVar prefix и вложенные темы. LabelHeight

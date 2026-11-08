@@ -1,6 +1,6 @@
 <script lang="ts">
   import { tick, type Snippet } from 'svelte';
-  import { provideFormField, useForm } from './form-context';
+  import { useForm, type FormFieldContext } from './form-context';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { formNamePath, type NamePath } from './form-store.engine';
@@ -18,11 +18,12 @@
   import { resolveFormTooltip } from './form-tooltip.engine';
   import FormItemTooltip from './FormItemTooltip.svelte';
   import NoFormItemBinding from './NoFormItemBinding.svelte';
+  import FormItemBinding from './FormItemBinding.svelte';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
-    /** Буквальный ключ либо путь от ближайшего FormList; строка с точкой остаётся одним ключом. */
-    name: NamePath;
+    /** Ключ/путь от FormList; без name остаётся layout без model binding, rules и native name. */
+    name?: NamePath;
     /** Текст/число/массив/Snippet; false/null/undefined/'' скрывают label, null сохраняет offset. */
     label?: RenderEmptyContent;
     /** Содержимое подсказки либо Tooltip options; defaults наследуются из Form. */
@@ -97,8 +98,9 @@
   const list = useFormList();
   const componentTheme = useComponentTheme('Form');
   const generatedId = $props.id();
+  let hasName = $derived(name !== undefined && name !== null);
   let id = $derived(htmlFor ?? `ant-field-${generatedId}`);
-  let path = $derived([...(list?.prefixName ?? []), ...formNamePath(name)]);
+  let path = $derived([...(list?.prefixName ?? []), ...formNamePath(name ?? [])]);
   let resolvedLayout = $derived(layout ?? form?.layout ?? 'vertical');
   let resolvedLabelAlign = $derived(labelAlign ?? form?.labelAlign ?? 'right');
   let resolvedLabelCol = $derived(labelCol ?? form?.labelCol);
@@ -110,25 +112,29 @@
   let hasLabel = $derived(label !== undefined && label !== null && label !== false && label !== '');
   let labelContent = $derived(typeof label === 'string' && haveColon && label.trim()
     ? label.replace(/[:：]\s*$/, '') : label);
-  let labelledBy = $derived(hasLabel && typeof label !== 'string' && typeof label !== 'number'
+  let labelledBy = $derived(hasName && hasLabel && typeof label !== 'string' && typeof label !== 'number'
     ? `${id}_label` : undefined);
   let requiredMark = $derived(form?.requiredMark ?? true);
   let tooltipOptions = $derived(resolveFormTooltip(tooltip, form?.tooltip));
   let optionalText = $derived(config.locale.Form?.optional || enUS.Form.optional);
-  let errors = $derived(form?.getFieldError(path) ?? []);
-  let warnings = $derived(form?.getFieldWarning(path) ?? []);
+  let errors = $derived(hasName ? form?.getFieldError(path) ?? [] : []);
+  let warnings = $derived(hasName ? form?.getFieldWarning(path) ?? [] : []);
   let isRequired = $derived(required
-    ?? (rules ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path))
+    ?? (hasName && (rules
+      ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path)))
     ?? false);
   let hasHelp = $derived(help !== undefined && help !== null && help !== false && help !== '');
-  let descriptionId = $derived(errors.length || warnings.length || hasHelp ? `${id}-help` : undefined);
+  let descriptionId = $derived(hasName && (errors.length || warnings.length || hasHelp)
+    ? `${id}-help` : undefined);
   let hasExtra = $derived(extra !== undefined && extra !== null && extra !== false && extra !== '');
-  let extraId = $derived(hasExtra ? `${id}_extra` : undefined);
+  let extraId = $derived(hasName && hasExtra ? `${id}_extra` : undefined);
   let resetKey = $state.raw<object>({});
   let content: HTMLDivElement | undefined = $state();
   const controls = new Set<() => unknown>();
 
   $effect.pre(() => {
+    if (!hasName) return;
+
     // В списке metadata следует за key строки; обычное поле хранит её по имени модели.
     const registeredName = list ? undefined : path;
 
@@ -168,7 +174,7 @@
     });
   });
 
-  provideFormField({
+  const fieldContext: FormFieldContext = {
     get id() {
       return id;
     },
@@ -198,9 +204,9 @@
       return () => { controls.delete(getInstance); };
     },
     onBlur() {
-      form?.touchField(path);
+      if (hasName) form?.touchField(path);
     }
-  });
+  };
 
   function focusGroupLabel(label: HTMLLabelElement) {
     function handleClick(event: MouseEvent) {
@@ -223,75 +229,84 @@
   <RenderContent value={labelContent} />{#if tooltipOptions}<FormItemTooltip options={tooltipOptions} />{/if}
 {/snippet}
 
-<div class={[
-    'ant-form-item',
-    componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
-    `ant-form-item-${resolvedLayout}`,
-    hidden && 'ant-form-item-hidden',
-    errors.length && 'ant-form-item-has-error',
-    !errors.length && warnings.length && 'ant-form-item-has-warning',
-    className,
-    rootClassName
-  ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
-  <Row class={['ant-form-item-row', componentTheme.className].filter(Boolean).join(' ')}>
-    {#if hasLabel}
-      <Col {...resolvedLabelCol} class={[
-        'ant-form-item-label',
-        resolvedLabelAlign === 'left' && 'ant-form-item-label-left',
-        form?.labelWrap === true && 'ant-form-item-label-wrap',
-        resolvedLabelCol?.class
-      ].filter(Boolean).join(' ')}>
-        <NoFormItemBinding><label for={id} id={labelledBy} class={form?.classNames?.label}
-          style={form?.styles?.label} class:ant-form-item-required={isRequired}
-          class:ant-form-item-required-mark-hidden={requiredMark === false}
-          class:ant-form-item-required-mark-optional={requiredMark === 'optional'
-            || typeof requiredMark === 'function'}
-          class:ant-form-item-no-colon={!computedColon}
-          title={typeof label === 'string' ? label : undefined} use:focusGroupLabel>
-          {#key resetKey}
-            {#if typeof requiredMark === 'function'}
-              {@render requiredMark(tooltipOptions ? captionWithTooltip : labelContent,
-                { required: isRequired })}
-            {:else}
-              {@render captionWithTooltip()}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
-            {/if}
-          {/key}
-        </label></NoFormItemBinding>
-      </Col>
-    {/if}
-    <NoFormItemColumns>
-      <Col {...resolvedWrapperCol}
-        class={['ant-form-item-control', resolvedWrapperCol?.class].filter(Boolean).join(' ')}>
-        <div class="ant-form-item-control-input">
-          <div bind:this={content}
-            class={['ant-form-item-control-input-content', form?.classNames?.content]}
-            style={form?.styles?.content}>{#key resetKey}{@render children()}{/key}</div>
-        </div>
-        {#if errors.length || warnings.length}
-          <div id={descriptionId} class={['ant-form-item-explain', form?.classNames?.help]}
-            style={form?.styles?.help} role={errors.length ? 'alert' : 'status'}>
-            {#each errors as error}
-              <div class={['ant-form-item-explain-error', form?.classNames?.helpItem]}
-                style={form?.styles?.helpItem}>{error}</div>
-            {/each}
-            {#each warnings as warning}
-              <div class={['ant-form-item-explain-warning', form?.classNames?.helpItem]}
-                style={form?.styles?.helpItem}>{warning}</div>
-            {/each}
+{#snippet itemLayout()}
+  <div class={[
+      'ant-form-item',
+      componentTheme.className && `ant-form-css-var ${componentTheme.className}`,
+      `ant-form-item-${resolvedLayout}`,
+      hidden && 'ant-form-item-hidden',
+      errors.length && 'ant-form-item-has-error',
+      !errors.length && warnings.length && 'ant-form-item-has-warning',
+      className,
+      rootClassName
+    ]} style={[componentTheme.style, style].filter(Boolean).join(';') || undefined}>
+    <Row class={['ant-form-item-row', componentTheme.className].filter(Boolean).join(' ')}>
+      {#if hasLabel}
+        <Col {...resolvedLabelCol} class={[
+          'ant-form-item-label',
+          resolvedLabelAlign === 'left' && 'ant-form-item-label-left',
+          form?.labelWrap === true && 'ant-form-item-label-wrap',
+          resolvedLabelCol?.class
+        ].filter(Boolean).join(' ')}>
+          <NoFormItemBinding><label for={hasName ? id : htmlFor} id={labelledBy}
+            class={form?.classNames?.label}
+            style={form?.styles?.label} class:ant-form-item-required={isRequired}
+            class:ant-form-item-required-mark-hidden={requiredMark === false}
+            class:ant-form-item-required-mark-optional={requiredMark === 'optional'
+              || typeof requiredMark === 'function'}
+            class:ant-form-item-no-colon={!computedColon}
+            title={typeof label === 'string' ? label : undefined} use:focusGroupLabel>
+            {#key resetKey}
+              {#if typeof requiredMark === 'function'}
+                {@render requiredMark(tooltipOptions ? captionWithTooltip : labelContent,
+                  { required: isRequired })}
+              {:else}
+                {@render captionWithTooltip()}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
+              {/if}
+            {/key}
+          </label></NoFormItemBinding>
+        </Col>
+      {/if}
+      <NoFormItemColumns>
+        <Col {...resolvedWrapperCol}
+          class={['ant-form-item-control', resolvedWrapperCol?.class].filter(Boolean).join(' ')}>
+          <div class="ant-form-item-control-input">
+            <div bind:this={content}
+              class={['ant-form-item-control-input-content', form?.classNames?.content]}
+              style={form?.styles?.content}>{#key resetKey}{@render children()}{/key}</div>
           </div>
-        {:else if hasHelp}
-          <div id={descriptionId} class={['ant-form-item-extra', form?.classNames?.help]}
-            style={form?.styles?.help}>
-            {#key resetKey}<NoFormItemBinding>{#if form?.classNames?.helpItem || form?.styles?.helpItem}
-              <div class={form?.classNames?.helpItem} style={form?.styles?.helpItem}><RenderContent value={help} /></div>
-            {:else}<RenderContent value={help} />{/if}</NoFormItemBinding>{/key}
-          </div>
-        {/if}
-        {#if hasExtra}
-          <div id={extraId} class={['ant-form-item-extra', form?.classNames?.extra]}
-            style={form?.styles?.extra}>{#key resetKey}<NoFormItemBinding><RenderContent value={extra} /></NoFormItemBinding>{/key}</div>
-        {/if}
-      </Col>
-    </NoFormItemColumns>
-  </Row>
-</div>
+          {#if errors.length || warnings.length}
+            <div id={descriptionId} class={['ant-form-item-explain', form?.classNames?.help]}
+              style={form?.styles?.help} role={errors.length ? 'alert' : 'status'}>
+              {#each errors as error}
+                <div class={['ant-form-item-explain-error', form?.classNames?.helpItem]}
+                  style={form?.styles?.helpItem}>{error}</div>
+              {/each}
+              {#each warnings as warning}
+                <div class={['ant-form-item-explain-warning', form?.classNames?.helpItem]}
+                  style={form?.styles?.helpItem}>{warning}</div>
+              {/each}
+            </div>
+          {:else if hasHelp}
+            <div id={descriptionId} class={['ant-form-item-extra', form?.classNames?.help]}
+              style={form?.styles?.help}>
+              {#key resetKey}<NoFormItemBinding>{#if form?.classNames?.helpItem || form?.styles?.helpItem}
+                <div class={form?.classNames?.helpItem} style={form?.styles?.helpItem}><RenderContent value={help} /></div>
+              {:else}<RenderContent value={help} />{/if}</NoFormItemBinding>{/key}
+            </div>
+          {/if}
+          {#if hasExtra}
+            <div id={extraId} class={['ant-form-item-extra', form?.classNames?.extra]}
+              style={form?.styles?.extra}>{#key resetKey}<NoFormItemBinding><RenderContent value={extra} /></NoFormItemBinding>{/key}</div>
+          {/if}
+        </Col>
+      </NoFormItemColumns>
+    </Row>
+  </div>
+{/snippet}
+
+{#if hasName}
+  <FormItemBinding field={fieldContext}>{@render itemLayout()}</FormItemBinding>
+{:else}
+  <NoFormItemBinding>{@render itemLayout()}</NoFormItemBinding>
+{/if}

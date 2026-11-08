@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: name стал необязательным для layout-строк. Без него controls не получают
+  binding/rules поля и сохраняют локальный state при reset модели; required-mark,
+  явный htmlFor, оформление Form и lifecycle перехода к name соответствуют upstream.
+
 - FormItem: rich help с числами, массивами и Svelte snippets, reset локального
   состояния и изоляция вспомогательных controls. Ноль входит в описание поля;
   прежний приоритет errors/warnings и оформление semantic help/helpItem сохранены.
