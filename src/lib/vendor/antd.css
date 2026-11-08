@@ -1,6 +1,7 @@
 /* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.
  * Стили Button, Input, Select, Modal, Form, Checkbox, Pagination и Table из официального dist/antd.css.
  * Селекторы css-var-_R_0_ заменены на :root/.ant-svelte-theme и классы компонентов.
+ * Два правила Table/Descriptions ограничены default owner; custom prefixes оформляются отдельно.
  * Источник: https://registry.npmjs.org/antd/-/antd-6.6.8.tgz
  * SHA-256 архива: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa
  */
@@ -1227,8 +1228,8 @@ input.ant-input-number-filled.ant-input-number-status-warning:not(.ant-input-num
 .ant-table-wrapper .ant-table-row-expand-icon-spaced::before,.ant-table-wrapper .ant-table-row-expand-icon-spaced::after{display:none;content:none;}
 .ant-table-wrapper .ant-table-row-indent+.ant-table-row-expand-icon{margin-top:var(--ant-table-expand-icon-margin-top);margin-inline-end:var(--ant-padding-xs);}
 .ant-table-wrapper tr.ant-table-expanded-row >th,.ant-table-wrapper tr.ant-table-expanded-row:hover >th,.ant-table-wrapper tr.ant-table-expanded-row >td,.ant-table-wrapper tr.ant-table-expanded-row:hover >td{background:var(--ant-table-row-expanded-bg);}
-.ant-table-wrapper tr.ant-table-expanded-row .ant-descriptions-view{display:flex;}
-.ant-table-wrapper tr.ant-table-expanded-row .ant-descriptions-view table{flex:auto;width:100%;}
+.ant-table-wrapper tr.ant-table-expanded-row :where(.ant-descriptions:not([data-ant-descriptions-global])) .ant-descriptions-view{display:flex;}
+.ant-table-wrapper tr.ant-table-expanded-row :where(.ant-descriptions:not([data-ant-descriptions-global])) .ant-descriptions-view table{flex:auto;width:100%;}
 .ant-table-wrapper .ant-table-expanded-row-fixed{position:relative;margin:calc(var(--ant-table-cell-padding-block) * -1) calc(var(--ant-table-cell-padding-inline) * -1);padding:var(--ant-table-cell-padding-block) var(--ant-table-cell-padding-inline);}
 .ant-table-wrapper .ant-table-summary{position:relative;z-index:2;background:var(--ant-color-bg-container);}
 .ant-table-wrapper .ant-table-summary >tr >th,.ant-table-wrapper .ant-table-summary >tr >td{border-bottom:var(--ant-line-width) var(--ant-line-type) var(--ant-table-border-color);}

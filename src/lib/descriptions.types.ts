@@ -44,6 +44,8 @@ export interface DescriptionsProps extends Omit<
   /** @defaultValue true */
   colon?: boolean;
   size?: ComponentSize;
+  /** Непустой локальный prefix имеет приоритет; иначе используется ConfigProvider.prefixCls. */
+  prefixCls?: string;
   classNames?: DescriptionsSemantic;
   /** Root: context semantic → context style → local semantic → local style. */
   styles?: DescriptionsSemantic;

@@ -2,6 +2,8 @@
   import { untrack } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getDescriptionsPrefixCss } from './descriptions-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { createBreakpoint } from './grid-breakpoint.model.svelte.js';
   import { descriptionsColumn, descriptionsItems, descriptionsRows } from './descriptions.engine';
   import { descriptionsSemantics } from './descriptions-semantic.engine';
@@ -17,6 +19,7 @@
     bordered = false,
     colon = true,
     size,
+    prefixCls: customizePrefixCls,
     classNames,
     styles,
     class: className = '',
@@ -27,6 +30,9 @@
   }: DescriptionsProps = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Descriptions');
+  let prefixCls = $derived(config.getPrefixCls('descriptions', customizePrefixCls));
+  let rootPrefixCls = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getDescriptionsPrefixCss(prefixCls, rootPrefixCls));
   const breakpoint = createBreakpoint();
   let columns = $derived(descriptionsColumn(column, breakpoint.screens));
   let rows = $derived(descriptionsRows(items, columns, breakpoint.screens));
@@ -43,6 +49,7 @@
         bordered,
         colon,
         size: mergedSize,
+        prefixCls: customizePrefixCls,
         classNames,
         styles,
         class: className,
@@ -60,36 +67,42 @@
 {#snippet value(node: DescriptionsContent | undefined)}
   {#if typeof node === 'function'}{@render node()}{:else if node !== true && node !== false}{node ?? ''}{/if}
 {/snippet}
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`descriptions-prefix:${prefixCls}:${rootPrefixCls}`} />
+{/if}
 <div {...rest} bind:this={nativeElement} dir={config.direction}
+  data-ant-descriptions-prefix={prefixCss ? prefixCls : undefined}
+  data-ant-descriptions-global={prefixCss ? rootPrefixCls : undefined}
   class={[
-      'ant-descriptions ant-descriptions-css-var',
+      prefixCls,
+      'ant-descriptions-css-var',
       componentTheme.className,
       config.descriptions?.class,
-      bordered && 'ant-descriptions-bordered',
-      mergedSize === 'small' && 'ant-descriptions-small',
-      mergedSize === 'medium' && 'ant-descriptions-medium',
-      config.direction === 'rtl' && 'ant-descriptions-rtl',
+      bordered && `${prefixCls}-bordered`,
+      mergedSize === 'small' && `${prefixCls}-small`,
+      mergedSize === 'medium' && `${prefixCls}-medium`,
+      config.direction === 'rtl' && `${prefixCls}-rtl`,
       className,
       rootClassName,
       classes.root
     ]}
   style={[componentTheme.style, slots.root].filter(Boolean).join(';')}>
   {#if title !== undefined && title !== null && title !== false && title !== '' || extra !== undefined && extra !== null && extra !== false && extra !== ''}
-    <div class={['ant-descriptions-header', classes.header]} style={slots.header}>
-      {#if title !== undefined && title !== null && title !== false && title !== ''}<div class={['ant-descriptions-title', classes.title]} style={slots.title}>{@render value(title)}</div>{/if}
-      {#if extra !== undefined && extra !== null && extra !== false && extra !== ''}<div class={['ant-descriptions-extra', classes.extra]} style={slots.extra}>{@render value(extra)}</div>{/if}
+    <div class={[`${prefixCls}-header`, classes.header]} style={slots.header}>
+      {#if title !== undefined && title !== null && title !== false && title !== ''}<div class={[`${prefixCls}-title`, classes.title]} style={slots.title}>{@render value(title)}</div>{/if}
+      {#if extra !== undefined && extra !== null && extra !== false && extra !== ''}<div class={[`${prefixCls}-extra`, classes.extra]} style={slots.extra}>{@render value(extra)}</div>{/if}
     </div>
   {/if}
-  <div class="ant-descriptions-view"><table><tbody>
+  <div class={`${prefixCls}-view`}><table><tbody>
     {#each rows as row}
       {#if layout === 'vertical'}
         {#each ['label', 'content'] as kind}
-          <tr class="ant-descriptions-row">{#each row as item, index (item.key ?? index)}<DescriptionsCell {item} component={kind === 'label' ? 'th' : 'td'} kind={kind as 'label' | 'content'} span={item.span ?? 1} {bordered} {colon} classNames={classes} styles={slots} />{/each}</tr>
+          <tr class={`${prefixCls}-row`}>{#each row as item, index (item.key ?? index)}<DescriptionsCell {prefixCls} {item} component={kind === 'label' ? 'th' : 'td'} kind={kind as 'label' | 'content'} span={item.span ?? 1} {bordered} {colon} classNames={classes} styles={slots} />{/each}</tr>
         {/each}
       {:else}
-        <tr class="ant-descriptions-row">{#each row as item, index (item.key ?? index)}
-          {#if bordered}<DescriptionsCell {item} component="th" kind="label" span={1} {bordered} {colon} classNames={classes} styles={slots} />{/if}
-          <DescriptionsCell {item} component="td" kind={bordered ? 'content' : 'item'} span={bordered ? (item.span ?? 1) * 2 - 1 : item.span ?? 1} {bordered} {colon} classNames={classes} styles={slots} />
+        <tr class={`${prefixCls}-row`}>{#each row as item, index (item.key ?? index)}
+          {#if bordered}<DescriptionsCell {prefixCls} {item} component="th" kind="label" span={1} {bordered} {colon} classNames={classes} styles={slots} />{/if}
+          <DescriptionsCell {prefixCls} {item} component="td" kind={bordered ? 'content' : 'item'} span={bordered ? (item.span ?? 1) * 2 - 1 : item.span ?? 1} {bordered} {colon} classNames={classes} styles={slots} />
         {/each}</tr>
       {/if}
     {/each}

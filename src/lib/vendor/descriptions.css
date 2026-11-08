@@ -42,5 +42,5 @@
 .ant-descriptions-medium >.ant-descriptions-view>table>tbody>.ant-descriptions-row >th,.ant-descriptions-medium >.ant-descriptions-view>table>tbody>.ant-descriptions-row >td{padding-bottom:var(--ant-padding-sm);}
 .ant-descriptions-small >.ant-descriptions-view>table>tbody>.ant-descriptions-row >th,.ant-descriptions-small >.ant-descriptions-view>table>tbody>.ant-descriptions-row >td{padding-bottom:var(--ant-padding-xs);}
 .ant-descriptions-css-var{--ant-descriptions-label-bg:rgba(0,0,0,0.02);--ant-descriptions-label-color:rgba(0,0,0,0.45);--ant-descriptions-title-color:rgba(0,0,0,0.88);--ant-descriptions-title-margin-bottom:20px;--ant-descriptions-item-padding-bottom:16px;--ant-descriptions-item-padding-end:16px;--ant-descriptions-colon-margin-right:8px;--ant-descriptions-colon-margin-left:2px;--ant-descriptions-content-color:rgba(0,0,0,0.88);--ant-descriptions-extra-color:rgba(0,0,0,0.88);}
-.ant-table-wrapper tr.ant-table-expanded-row .ant-descriptions-view{display:flex;}
-.ant-table-wrapper tr.ant-table-expanded-row .ant-descriptions-view table{flex:auto;width:100%;}
+.ant-table-wrapper tr.ant-table-expanded-row :where(.ant-descriptions:not([data-ant-descriptions-global])) .ant-descriptions-view{display:flex;}
+.ant-table-wrapper tr.ant-table-expanded-row :where(.ant-descriptions:not([data-ant-descriptions-global])) .ant-descriptions-view table{flex:auto;width:100%;}

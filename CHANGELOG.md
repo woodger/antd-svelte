@@ -9,6 +9,11 @@
 
 ### Added
 
+- Descriptions поддерживает local/shared prefixCls для всех частей и ячеек,
+  включая Table expanded-row selectors с независимым общим prefix. Responsive
+  layout, semantic props, DOM/ref и draft/selection/focus/FormData сохранены.
+  Source пропуск local prefix в Table записан отдельно; Native сохраняет оформление.
+
 - Carousel поддерживает local/shared prefixCls для wrapper, RTL/vertical CSS и
   duration keyframes. Общий prefix Radio/Checkbox selectors независим от local
   wrapper. Смена prefix сохраняет текущий слайд, DOM/ref и draft/selection/focus.

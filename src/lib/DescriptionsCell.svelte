@@ -2,6 +2,7 @@
   import type { DescriptionsCellSlots } from './descriptions.types';
   import type { ResolvedDescriptionsItem } from './descriptions.engine';
   let {
+    prefixCls,
     item,
     component,
     kind,
@@ -11,6 +12,7 @@
     classNames,
     styles
   }: {
+    prefixCls: string;
     item: ResolvedDescriptionsItem;
     component: 'th' | 'td';
     kind: 'label' | 'content' | 'item';
@@ -36,11 +38,11 @@
       item.class,
       bordered
         ? [
-          `ant-descriptions-item-${kind}`,
+          `${prefixCls}-item-${kind}`,
           classNames[kind as 'label' | 'content'],
           item.classNames?.[kind as 'label' | 'content']
         ]
-        : 'ant-descriptions-item'
+        : `${prefixCls}-item`
     ]}
   style={[item.style, bordered
       && kind !== 'item'
@@ -51,18 +53,18 @@
     {#if label !== undefined && label !== null && label !== false && label !== ''}<span>{@render value(label)}</span>{/if}
     {#if content !== undefined && content !== null && content !== false && content !== ''}<span>{@render value(content)}</span>{/if}
   {:else}
-    <div class="ant-descriptions-item-container">
+    <div class={`${prefixCls}-item-container`}>
       {#if label !== undefined && label !== null && label !== false && label !== ''}
         <span class={[
-            'ant-descriptions-item-label',
-            !colon && 'ant-descriptions-item-no-colon',
+            `${prefixCls}-item-label`,
+            !colon && `${prefixCls}-item-no-colon`,
             classNames.label,
             item.classNames?.label
           ]} style={merged.label}>{@render value(label)}</span>
       {/if}
       {#if content !== undefined && content !== null && content !== false && content !== ''}
         <span class={[
-            'ant-descriptions-item-content',
+            `${prefixCls}-item-content`,
             classNames.content,
             item.classNames?.content
           ]} style={merged.content}>{@render value(content)}</span>

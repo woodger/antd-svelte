@@ -1070,6 +1070,23 @@ class/style и classNames/styles.label/content.
 Вложенные таблицы сохраняют собственные bordered/size и не получают row-стили
 внешней таблицы. Темы/RTL наследуются через ConfigProvider.
 
+Непустой локальный `prefixCls` задаёт корень, header/title/extra, view/row и все
+ячейки; пустое значение наследует `ConfigProvider.prefixCls`. Semantic callbacks
+получают исходный локальный prefix. Namespace theme variables независим.
+Смена prefix сохраняет DOM/ref, draft/selection/focus и FormData.
+
+Два правила Descriptions внутри Table expanded-row используют общий prefix Table
+и локальный prefix Descriptions; namespace владельца изолирует соседние scopes.
+Их default-копии в descriptions.css и общем vendor/antd.css ограничены стандартным
+owner через zero-specificity selector, чтобы не перекрывать custom namespace.
+В оригинале Table ищет только общий Descriptions class и пропускает local prefix.
+Raw UMD замеры сохранены; Native сохраняет expanded-row оформление и с local prefix.
+Для этого случая expectedNative в эталоне меняет только display view и flex table
+на измеренные значения обычного Table context. Полный перенос prefix Table идёт отдельно.
+Сверка: [prefix-эталон](./tests/browser/fixtures/ant-design-descriptions-prefix-reference.json),
+[браузер](./tests/browser/descriptions-prefix.spec.ts) и
+[SSR](./tests/package/descriptions-prefix.ssr.test.ts), `?fixture=descriptions-prefix`.
+
 ConfigProvider.descriptions задаёт class/style и object/function classNames/styles
 для тех же semantic slots. Классы context/local объединяются; root style layers:
 context semantic → context style → local semantic → local style. Для ячеек общий
@@ -1101,7 +1118,7 @@ itemPaddingBottom/itemPaddingEnd собственными отступами.
 Галерея — `/ant-design#descriptions`, фикстура — `?fixture=descriptions`.
 Unit/SSR/Chromium проверяют раскладку, media, приоритет стилей и вложенность.
 Рецепт descriptions извлекает 40 правил без keyframes, включая две интеграции
-Table expanded-row. PrefixCls и произвольные breakpoints пока не поддержаны
+Table expanded-row. Произвольные breakpoints пока не поддержаны
 и остаются в полном объёме миграции.
 
 ## Card
@@ -10012,7 +10029,7 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography и Carousel.
+Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel и Descriptions.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

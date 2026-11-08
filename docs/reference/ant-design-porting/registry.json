@@ -12126,7 +12126,7 @@
         },
         {
           "id": "global-configuration",
-          "title": "PrefixCls, пользовательские breakpoints",
+          "title": "Пользовательские breakpoints",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
@@ -12166,6 +12166,44 @@
             "readme.md"
           ],
           "note": "Опубликованный Svelte info включает bordered=false, layout=horizontal и colon=true при отсутствии props. Source 6.6.8/984592267de88fbf9cdaecc96a56629e721c709d mergedProps сохраняет отсутствие этих полей: отдельный raw UMD defaultPropsObservation записывает own=false/type=undefined. Native defaults сохранены для обоих semantic слоёв; column/items/size разрешаются в обоих runtime. CSS matrix явно задаёт flags, отдельная SSR проверка защищает native контракт. Это установленное различие API, а не ошибка upstream."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный и общий Descriptions prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Descriptions.svelte",
+            "src/lib/DescriptionsCell.svelte",
+            "src/lib/descriptions.types.ts",
+            "src/lib/descriptions-prefix.engine.ts",
+            "src/lib/descriptions-prefix.engine.test.ts",
+            "src/lib/vendor/descriptions-prefix.css.js",
+            "src/lib/vendor/descriptions.css",
+            "src/lib/vendor/antd.css",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/DescriptionsPrefixScope.svelte",
+            "tests/browser/fixtures/DescriptionsPrefixFixtures.svelte",
+            "tests/browser/fixtures/DescriptionsPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-descriptions-prefix-reference.json",
+            "tests/browser/descriptions-prefix-metrics.ts",
+            "tests/browser/descriptions-prefix.spec.ts",
+            "tests/package/descriptions-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty prefix wins; empty/undefined наследуют ConfigProvider prefix. Root/header/title/extra/view/row/cell classes и 40 CSS rules используют owner prefix; canonical token marker и theme variables сохранены. Semantic callbacks получают raw local prefix, остальные native defaults сохранены. Table expanded-row selectors используют общий Table prefix независимо от local Descriptions, с owner scope для изоляции. Две default-копии в descriptions.css и общем vendor/antd.css ограничены default owner через :where, без увеличения specificity. UMD matrix покрывает sizes/layout/bordered/colon, aliases, nested/sibling, custom cssVar prefix и responsive columns. Live prefix updates сохраняют root/cell/input DOM, refs, draft/selection/focus и FormData; SSR не запускает browser resources."
+        },
+        {
+          "id": "prefix-table-observation",
+          "title": "Исходный пропуск local Descriptions prefix в Table expanded-row CSS",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-descriptions-prefix-reference.json",
+            "tests/browser/descriptions-prefix.spec.ts",
+            "tests/package/descriptions-prefix.ssr.test.ts",
+            "readme.md"
+          ],
+          "note": "Source Table 6.6.8 style/expand ищет global antCls-descriptions-view, поэтому local Descriptions prefix оставляет display:block/flex:0 1 auto. Raw UMD result сохранён. expectedNative — явно производный expected snapshot: только view.display и table.flex заменены измерениями public Source global Table case; остальные поля совпадают с raw local case. Native сохраняет expanded-row оформление с local prefix и namespace isolation. Стенд загружает Source Table CSS через hidden public Table, использует public theme.useToken().hashId на native wrapper и одинаковые width/border-spacing. Полный Table prefix этим этапом не объявляется перенесённым."
         }
       ]
     },
