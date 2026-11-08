@@ -5003,7 +5003,14 @@
         "tests/browser/form-root-metrics.ts",
         "tests/browser/fixtures/FormRootFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-root-reference.json",
-        "tests/package/form-root.ssr.test.ts"
+        "tests/package/form-root.ssr.test.ts",
+        "src/lib/semantic-style.engine.ts",
+        "tests/browser/form-semantic.spec.ts",
+        "tests/browser/form-semantic-metrics.ts",
+        "tests/browser/fixtures/FormSemanticFixtures.svelte",
+        "tests/browser/fixtures/form-semantic-settings.ts",
+        "tests/browser/fixtures/ant-design-form-semantic-reference.json",
+        "tests/package/form-semantic.ssr.test.ts"
       ],
       "features": [
         {
@@ -5454,7 +5461,7 @@
             "tests/browser/fixtures/ant-design-form-required-mark-reference.json",
             "tests/package/form-required-mark.ssr.test.ts"
           ],
-          "note": "Form.requiredMark принимает true/false/optional и Svelte snippet вместо React render function; local prop → ConfigProvider.form → true. False скрывает только звёздочку; optional/custom используют исходные mark classes. Snippet получает label content после обработки строкового colon и required boolean, заменяет label children; исходный title и native label association сохраняются. Поле required и validation не зависят от визуальной отметки. Locale.Form.optional поддерживает RU/EN/custom и исходную замену всей группы: {} или пустой optional дают английский fallback, undefined locale наследует. Вложенный Form сбрасывает внешний mark к своим props/config. Сверены 18 UMD-состояний: modes, callbacks, fullwidth/ASCII colon, provider replacement/priority, locale fallback и nested Form. Live updates сохраняют native input, values, errors/warnings/touched, focus/selection; submit по-прежнему проверяет required и сериализует native values. Rich label описана отдельной feature rich-labels; tooltip и прочие global/semantic Form settings остаются отдельными пробелами; deprecated hideRequiredMark API не добавлен."
+          "note": "Form.requiredMark принимает true/false/optional и Svelte snippet вместо React render function; local prop → ConfigProvider.form → true. False скрывает только звёздочку; optional/custom используют исходные mark classes. Snippet получает label content после обработки строкового colon и required boolean, заменяет label children; исходный title и native label association сохраняются. Поле required и validation не зависят от визуальной отметки. Locale.Form.optional поддерживает RU/EN/custom и исходную замену всей группы: {} или пустой optional дают английский fallback, undefined locale наследует. Вложенный Form сбрасывает внешний mark к своим props/config. Сверены 18 UMD-состояний: modes, callbacks, fullwidth/ASCII colon, provider replacement/priority, locale fallback и nested Form. Live updates сохраняют native input, values, errors/warnings/touched, focus/selection; submit по-прежнему проверяет required и сериализует native values. Rich label описана отдельной feature rich-labels; tooltip и прочие global Form settings остаются отдельными пробелами; semantic slots описаны отдельно в semantic-styles; deprecated hideRequiredMark API не добавлен."
         },
         {
           "id": "validation-debounce",
@@ -5536,7 +5543,7 @@
             "tests/browser/fixtures/ant-design-form-rich-labels-reference.json",
             "tests/package/form-rich-labels.ssr.test.ts"
           ],
-          "note": "FormItem.label использует общий RenderEmptyContent/RenderContent: strings/numbers/booleans/nullish/nested arrays/Svelte snippets вместо ReactNode. Undefined/null/false/пустая строка скрывают label; null сохраняет выравнивание columns. 0 отображается, true/[]/opaque snippets оставляют контейнер. Только строка получает title и удаление последнего colon; requiredMark получает исходный content после этой обработки и required boolean. Bivariant snippet renderer сохраняет типосовместимость прежних строковых snippets при строковых label; rich renderer принимает RenderEmptyContent. Reset пересоздаёт content подписи/вложенные компоненты вместе с выбранным control, сбрасывая локальное состояние; DOM label и прежние native contracts сохраняются. Rich label получает стабильный id для RadioGroup/CheckboxGroup/InputOTP/Slider/стандартного trigger ColorPicker; явные aria-label/aria-labelledby и per-handle labels приоритетнее. Caption updates и переход к строкам сохраняют доступное имя, DOM/value/metadata/focus/selection и label click. 42 состояния неизменённого UMD плюс counter/reset lifecycle подтверждают content, literal text, title/classes/CSS, renderer value kind/required и native label association. React elements нормализованы в rich kind Svelte snippet, scalar/array kinds сохранены. SSR и публичные типы проверяются без DOM; прежние native field roles/HTML и explicit ARIA policy сохранены. Общий FormItem help/semantic/tooltip и nameless field API остаются отдельными пробелами."
+          "note": "FormItem.label использует общий RenderEmptyContent/RenderContent: strings/numbers/booleans/nullish/nested arrays/Svelte snippets вместо ReactNode. Undefined/null/false/пустая строка скрывают label; null сохраняет выравнивание columns. 0 отображается, true/[]/opaque snippets оставляют контейнер. Только строка получает title и удаление последнего colon; requiredMark получает исходный content после этой обработки и required boolean. Bivariant snippet renderer сохраняет типосовместимость прежних строковых snippets при строковых label; rich renderer принимает RenderEmptyContent. Reset пересоздаёт content подписи/вложенные компоненты вместе с выбранным control, сбрасывая локальное состояние; DOM label и прежние native contracts сохраняются. Rich label получает стабильный id для RadioGroup/CheckboxGroup/InputOTP/Slider/стандартного trigger ColorPicker; явные aria-label/aria-labelledby и per-handle labels приоритетнее. Caption updates и переход к строкам сохраняют доступное имя, DOM/value/metadata/focus/selection и label click. 42 состояния неизменённого UMD плюс counter/reset lifecycle подтверждают content, literal text, title/classes/CSS, renderer value kind/required и native label association. React elements нормализованы в rich kind Svelte snippet, scalar/array kinds сохранены. SSR и публичные типы проверяются без DOM; прежние native field roles/HTML и explicit ARIA policy сохранены. Form semantic slots описаны в semantic-styles; полный FormItem help/tooltip и nameless field API остаются отдельными пробелами."
         },
         {
           "id": "root-appearance",
@@ -5554,7 +5561,29 @@
             "tests/browser/fixtures/ant-design-form-root-reference.json",
             "tests/package/form-root.ssr.test.ts"
           ],
-          "note": "Form/FormItem принимают rootClassName, FormItem.style — CSS string. FormConfig включает native class/style для корня Form: context class → local class → rootClassName; inline component theme → config.style → local style. Field style идёт после компонентных токенов и позволяет локальные CSS variable overrides. Config root settings не копируются в FormItem; component=false сохраняет только контекст без root DOM/attrs/styles. Undefined record наследуется, {} и иной object заменяют его. 12 состояний неизменённого UMD подтверждают owner classes/computed color/outline/padding/margin/font-size, config replacement/local priority, field tokens и отсутствие wrapper. Live updates сохраняют input/value/errors/warnings/touched, focus/selection; SSR не forward-ит rootClassName в HTML attrs. В raw reference отдельно записан source-дефект: FormConfig.variant объявлен, но не передаётся в VariantContext и оставляет Input outlined. Этот неработающий global prop не заявлен в публичном FormConfig; действующие local Form.variant/global ConfigProvider.variant сохранены. Semantic classNames/styles и прочие global Form settings остаются отдельными пробелами."
+          "note": "Form/FormItem принимают rootClassName, FormItem.style — CSS string. FormConfig включает native class/style для корня Form: context class → local class → rootClassName; inline component theme → config.style → local style. Field style идёт после компонентных токенов и позволяет локальные CSS variable overrides. Config root settings не копируются в FormItem; component=false сохраняет только контекст без root DOM/attrs/styles. Undefined record наследуется, {} и иной object заменяют его. 12 состояний неизменённого UMD подтверждают owner classes/computed color/outline/padding/margin/font-size, config replacement/local priority, field tokens и отсутствие wrapper. Live updates сохраняют input/value/errors/warnings/touched, focus/selection; SSR не forward-ит rootClassName в HTML attrs. В raw reference отдельно записан source-дефект: FormConfig.variant объявлен, но не передаётся в VariantContext и оставляет Input outlined. Этот неработающий global prop не заявлен в публичном FormConfig; действующие local Form.variant/global ConfigProvider.variant сохранены. Semantic classNames/styles перенесены в semantic-styles; прочие global Form settings остаются отдельными пробелами."
+        },
+        {
+          "id": "semantic-styles",
+          "title": "Form classNames/styles: шесть slots, callbacks и context defaults",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/FormErrorList.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/semantic-style.engine.ts",
+            "src/lib/index.ts",
+            "tests/browser/form-semantic.spec.ts",
+            "tests/browser/form-semantic-metrics.ts",
+            "tests/browser/fixtures/FormSemanticFixtures.svelte",
+            "tests/browser/fixtures/form-semantic-settings.ts",
+            "tests/browser/fixtures/ant-design-form-semantic-reference.json",
+            "tests/package/form-semantic.ssr.test.ts"
+          ],
+          "note": "Form.classNames/styles и ConfigProvider.form.classNames/styles принимают object/callback с root/label/content/help/helpItem/extra. Root относится к Form; прочие slots передаются FormItem/FormErrorList через reactive FormContext. Context/local classes накапливаются; CSS root следует component theme → config.styles.root → config.style → local.styles.root → local style, прочие slots context → local. Callbacks получают native props с разрешёнными layout/disabled/requiredMark и merged colon/labelAlign/labelWrap; последние остаются undefined до внутренних label/CSS defaults. Callback может вернуть undefined. Generic callback работает с native FormProps любого Values; прежние handlers/model contracts сохранены. Nested Item наследует slots, nested Form применяет собственные props/config; component=false сохраняет slots полей без root DOM. Field extra и messages/help имеют раздельные slots; legacy help priority, доступные role/id/description и control refs/values/metadata сохранены. Лишний error class контейнера удалён, class/status/colors каждого сообщения остаются source. Для styled legacy helpItem добавлен собственный узел без изменения прежнего DOM при отсутствии slot. ErrorList внутри FormList получает help/helpItem; ранее выбранные native цвета bare standalone ErrorList сохранены, source вне FormItem наследует обычный цвет формы — raw observation приложено. 16 UMD-состояний подтверждают все слои/classes/CSS, normalized callback props, undefined return, disabled overrides, nested/reset/false scopes и ErrorList; reactive updates сохраняют input/focus/selection/metadata. Shared semantic helper расширен только типами nullable style и callback undefined, runtime остальных компонентов не меняется. Root prefix/size, полный help override/motion, tooltip и другие Form settings остаются отдельными пробелами."
         }
       ]
     },
@@ -16121,7 +16150,14 @@
         "tests/browser/form-root-metrics.ts",
         "tests/browser/fixtures/FormRootFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-root-reference.json",
-        "tests/package/form-root.ssr.test.ts"
+        "tests/package/form-root.ssr.test.ts",
+        "src/lib/FormErrorList.svelte",
+        "tests/browser/form-semantic.spec.ts",
+        "tests/browser/form-semantic-metrics.ts",
+        "tests/browser/fixtures/FormSemanticFixtures.svelte",
+        "tests/browser/fixtures/form-semantic-settings.ts",
+        "tests/browser/fixtures/ant-design-form-semantic-reference.json",
+        "tests/package/form-semantic.ssr.test.ts"
       ],
       "features": [
         {
@@ -17028,7 +17064,7 @@
             "tests/browser/fixtures/ant-design-form-labels-reference.json",
             "tests/package/form-labels.ssr.test.ts"
           ],
-          "note": "Новый FormConfig/record form содержит colon, labelAlign, labelWrap и отдельно описанный requiredMark; undefined наследует ближайший record, object и {} заменяют его. Локальные props Form/Item приоритетнее; реактивные изменения и scope reset подтверждены Form source labels reference. Root class/style описаны в form-root-defaults; semantic config и прочие global Form settings остаются отдельными пробелами."
+          "note": "Новый FormConfig/record form содержит colon, labelAlign, labelWrap и отдельно описанный requiredMark; undefined наследует ближайший record, object и {} заменяют его. Локальные props Form/Item приоритетнее; реактивные изменения и scope reset подтверждены Form source labels reference. Root class/style описаны в form-root-defaults; semantic config перенесён в form-semantic-defaults; прочие global Form settings остаются отдельными пробелами."
         },
         {
           "id": "form-required-mark",
@@ -17067,7 +17103,29 @@
             "tests/browser/fixtures/ant-design-form-root-reference.json",
             "tests/package/form-root.ssr.test.ts"
           ],
-          "note": "FormConfig принимает class/style по native соглашению библиотеки. Настройки применяются только к native корню Form: context class, local class и rootClassName накапливаются; CSS config.style предшествует local style и следует component theme. Undefined наследует record, {} и object заменяют его; component=false не создаёт wrapper. 12 UMD-состояний, reactive native lifecycle и package SSR отражены в Form root-appearance. Source объявляет FormConfig.variant, но его Form читает только local variant; raw observation сохранено, неработающий API не объявлен. Семантические slots и остальные global settings остаются отдельными пробелами."
+          "note": "FormConfig принимает class/style по native соглашению библиотеки. Настройки применяются только к native корню Form: context class, local class и rootClassName накапливаются; CSS config.style предшествует local style и следует component theme. Undefined наследует record, {} и object заменяют его; component=false не создаёт wrapper. 12 UMD-состояний, reactive native lifecycle и package SSR отражены в Form root-appearance. Source объявляет FormConfig.variant, но его Form читает только local variant; raw observation сохранено, неработающий API не объявлен. Семантические slots описаны в form-semantic-defaults; остальные global settings остаются отдельными пробелами."
+        },
+        {
+          "id": "form-semantic-defaults",
+          "title": "ConfigProvider.form.classNames/styles: reactive semantic slots",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/FormItem.svelte",
+            "src/lib/FormErrorList.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/semantic-style.engine.ts",
+            "src/lib/index.ts",
+            "tests/browser/form-semantic.spec.ts",
+            "tests/browser/form-semantic-metrics.ts",
+            "tests/browser/fixtures/FormSemanticFixtures.svelte",
+            "tests/browser/fixtures/form-semantic-settings.ts",
+            "tests/browser/fixtures/ant-design-form-semantic-reference.json",
+            "tests/package/form-semantic.ssr.test.ts"
+          ],
+          "note": "FormConfig включает classNames/styles как object/callback для шести source slots. Local Form settings приоритетнее; context class/style слои и record replacement следуют прежнему контракту. Callbacks видят native merged FormProps, могут вернуть undefined; slots передаются полям/ErrorList, nested Form сбрасывает outer local maps к props/config. Полные source layers и callback normalization подтверждены Form semantic-styles fixture/reference; native help/standalone ErrorList policies сохранены. Прочие global Form settings остаются отдельными пробелами."
         }
       ]
     },

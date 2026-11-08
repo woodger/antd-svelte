@@ -11,6 +11,7 @@
   import { getFormErrorListPrefixCss } from './form-error-list-prefix.engine';
   import type { FormErrorListProps } from './form-error-list.types';
   import type { RenderEmptyContent } from './types';
+  import { useForm } from './form-context';
 
   let {
     fieldId,
@@ -22,6 +23,7 @@
     onVisibleChanged
   }: FormErrorListProps = $props();
   const list = useFormList();
+  const form = useForm();
   const componentTheme = useComponentTheme('Form');
   let prefix = $derived(list?.prefixCls ?? 'ant-form');
   let prefixCss = $derived(getFormErrorListPrefixCss(prefix));
@@ -84,16 +86,17 @@
     id={fieldId ? `${fieldId}_help` : undefined}
     class={[
       `${prefix}-item-explain`, componentTheme.className && 'ant-form-css-var',
-      componentTheme.className, className
+      componentTheme.className, form?.classNames?.help, className
     ]}
-    style={componentTheme.style}
+    style={[componentTheme.style, form?.styles?.help].filter(Boolean).join(';') || undefined}
     data-ant-form-error-list
     data-visible={visible}
     use:formErrorMotion={{ visible, kind: 'holder', onFinish: finishHolder }}
   >
     {#each entries as entry (entry.key)}
       <div
-        class={entry.status ? `${prefix}-item-explain-${entry.status}` : undefined}
+        class={[entry.status && `${prefix}-item-explain-${entry.status}`, form?.classNames?.helpItem]}
+        style={form?.styles?.helpItem}
         data-ant-form-error-message
         data-visible={entry.visible}
         use:formErrorMotion={{

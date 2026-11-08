@@ -9369,6 +9369,27 @@ Undefined record наследуется, {} сбрасывает config; нас�
 [публичные типы и SSR](./tests/package/form-root.ssr.test.ts), `?fixture=form-root`.
 В том же артефакте записан неработающий ConfigProvider.form.variant исходника 6.6.8.
 
+`Form.classNames/styles` и одноимённые поля ConfigProvider.form принимают объект
+или callback для slots root, label, content, help, helpItem и extra. Root оформляет
+сам Form, остальные slots — подпись, content и пояснения FormItem/ErrorList.
+Классы config и local накапливаются. CSS root применяется в порядке component theme,
+config.styles.root, config.style, local.styles.root, local style; остальные slots
+объединяют config.styles и local.styles. CSS задаётся строками.
+
+Callback получает native Form props с разрешёнными layout, disabled и requiredMark;
+colon/labelAlign/labelWrap объединены с config и могут остаться undefined до
+внутренних CSS defaults. Возврат undefined сохраняет предыдущий слой.
+Вложенный Item наследует slots, вложенный Form применяет свои props/config.
+Component=false сохраняет slots полей без DOM root. Обновления сохраняют controls,
+фокус/выделение и metadata; прежний приоритет help и доступные сообщения сохранены.
+Классы error/warning относятся к сообщениям, контейнер сохраняет role alert/status.
+
+FormErrorList в FormList получает help/helpItem. Source без обёртки FormItem
+наследует обычный цвет формы; это записано отдельно, native цвета standalone
+ErrorList сохранены. Проверки: [16 эталонов и наблюдение](./tests/browser/fixtures/ant-design-form-semantic-reference.json),
+[браузер](./tests/browser/form-semantic.spec.ts),
+[публичные типы и SSR](./tests/package/form-semantic.ssr.test.ts), `?fixture=form-semantic`.
+
 `Form.colon`, `labelAlign` и `labelWrap` наследуют defaults из `ConfigProvider.form`.
 При отсутствии настройки colon включён, labelAlign равен right, labelWrap — false.
 Локальные FormItem.colon/labelAlign имеют приоритет над Form; true включает colon

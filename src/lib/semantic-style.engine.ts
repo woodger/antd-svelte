@@ -1,12 +1,12 @@
 /** Плоские semantic slots: классы накапливаются, CSS-строки сохраняют source порядок слоёв. */
 type Semantic<Key extends string, Props> = Partial<Record<Key, string>>
-  | ((info: { props: Props; }) => Partial<Record<Key, string>>);
+  | ((info: { props: Props; }) => Partial<Record<Key, string>> | undefined);
 
-export function mergeComponentSemantics<Key extends string, Props extends { style?: string; }>(
+export function mergeComponentSemantics<Key extends string, Props extends { style?: string | null; }>(
   context: {
     classNames?: Semantic<Key, Props>;
     styles?: Semantic<Key, Props>;
-    style?: string;
+    style?: string | null;
   } | undefined,
   props: Props & { classNames?: Semantic<Key, Props>; styles?: Semantic<Key, Props>; },
   keys: readonly Key[]
@@ -17,7 +17,7 @@ export function mergeComponentSemantics<Key extends string, Props extends { styl
   const localClasses = resolve(props.classNames);
   const contextStyles = resolve(context?.styles);
   const localStyles = resolve(props.styles);
-  const join = (values: (string | undefined)[], separator: string) =>
+  const join = (values: (string | null | undefined)[], separator: string) =>
     values.filter(Boolean).join(separator) || undefined;
   const classes: Partial<Record<Key, string>> = {};
   const styles: Partial<Record<Key, string>> = {};

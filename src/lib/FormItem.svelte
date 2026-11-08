@@ -227,7 +227,8 @@
         form?.labelWrap === true && 'ant-form-item-label-wrap',
         resolvedLabelCol?.class
       ].filter(Boolean).join(' ')}>
-        <label for={id} id={labelledBy} class:ant-form-item-required={isRequired}
+        <label for={id} id={labelledBy} class={form?.classNames?.label}
+          style={form?.styles?.label} class:ant-form-item-required={isRequired}
           class:ant-form-item-required-mark-hidden={requiredMark === false}
           class:ant-form-item-required-mark-optional={requiredMark === 'optional'
             || typeof requiredMark === 'function'}
@@ -247,20 +248,33 @@
       <Col {...resolvedWrapperCol}
         class={['ant-form-item-control', resolvedWrapperCol?.class].filter(Boolean).join(' ')}>
         <div class="ant-form-item-control-input">
-          <div bind:this={content} class="ant-form-item-control-input-content">{#key resetKey}{@render children()}{/key}</div>
+          <div bind:this={content}
+            class={['ant-form-item-control-input-content', form?.classNames?.content]}
+            style={form?.styles?.content}>{#key resetKey}{@render children()}{/key}</div>
         </div>
         {#if errors.length || warnings.length}
-          <div id={descriptionId} class={[
-            'ant-form-item-explain', errors.length && 'ant-form-item-explain-error'
-          ]} role={errors.length ? 'alert' : 'status'}>
-            {#each errors as error}<div class="ant-form-item-explain-error">{error}</div>{/each}
-            {#each warnings as warning}<div class="ant-form-item-explain-warning">{warning}</div>{/each}
+          <div id={descriptionId} class={['ant-form-item-explain', form?.classNames?.help]}
+            style={form?.styles?.help} role={errors.length ? 'alert' : 'status'}>
+            {#each errors as error}
+              <div class={['ant-form-item-explain-error', form?.classNames?.helpItem]}
+                style={form?.styles?.helpItem}>{error}</div>
+            {/each}
+            {#each warnings as warning}
+              <div class={['ant-form-item-explain-warning', form?.classNames?.helpItem]}
+                style={form?.styles?.helpItem}>{warning}</div>
+            {/each}
           </div>
         {:else if help}
-          <div id={descriptionId} class="ant-form-item-extra">{help}</div>
+          <div id={descriptionId} class={['ant-form-item-extra', form?.classNames?.help]}
+            style={form?.styles?.help}>
+            {#if form?.classNames?.helpItem || form?.styles?.helpItem}
+              <div class={form?.classNames?.helpItem} style={form?.styles?.helpItem}>{help}</div>
+            {:else}{help}{/if}
+          </div>
         {/if}
         {#if hasExtra}
-          <div id={extraId} class="ant-form-item-extra"><RenderContent value={extra} /></div>
+          <div id={extraId} class={['ant-form-item-extra', form?.classNames?.extra]}
+            style={form?.styles?.extra}><RenderContent value={extra} /></div>
         {/if}
       </Col>
     </NoFormItemColumns>

@@ -5,9 +5,11 @@
   import { provideForm } from './form-context';
   import { getFormHooks } from './form-internal';
   import { provideFormList } from './form-list-context';
-  import type { FormProps } from './form.types';
+  import type { FormProps, FormSemanticSlots } from './form.types';
   import type { FormValues } from './validation.engine';
+  import { mergeComponentSemantics } from './semantic-style.engine';
 
+  let props: FormProps<Values> = $props();
   let {
     form,
     children,
@@ -25,14 +27,24 @@
     onFinishFailed,
     onError,
     rootClassName,
+    classNames,
+    styles,
     class: className = '',
     style,
     ...attributes
-  }: FormProps<Values> = $props();
+  } = $derived(props);
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Form');
   let resolvedRequiredMark = $derived(requiredMark ?? config.form?.requiredMark ?? true);
+  let semanticProps: FormProps<Values> = $derived({
+    ...props, classNames, styles, layout, disabled: disabled ?? config.componentDisabled,
+    colon: colon ?? config.form?.colon, labelAlign: labelAlign ?? config.form?.labelAlign,
+    labelWrap: labelWrap ?? config.form?.labelWrap, requiredMark: resolvedRequiredMark
+  });
+  let semantic = $derived(mergeComponentSemantics<keyof FormSemanticSlots, FormProps<Values>>(
+    config.form, semanticProps, ['root', 'label', 'content', 'help', 'helpItem', 'extra']
+  ));
   let active = true;
 
   onDestroy(() => {
@@ -68,6 +80,12 @@
     },
     get requiredMark() {
       return resolvedRequiredMark;
+    },
+    get classNames() {
+      return semantic.classes;
+    },
+    get styles() {
+      return semantic.styles;
     },
     get resetKey() {
       return getFormHooks(form)?.resetKey ?? form.values;
@@ -138,9 +156,10 @@
   novalidate
   class={[`ant-form ant-form-css-var ant-form-${layout}`,
     resolvedRequiredMark === false && 'ant-form-hide-required-mark',
-    componentTheme.className, config.form?.class, className, rootClassName].filter(Boolean).join(' ')}
-  style={componentTheme.style || config.form?.style
-    ? [componentTheme.style, config.form?.style, style].filter(Boolean).join(';') : style}
+    componentTheme.className, config.form?.class, className, rootClassName,
+    semantic.classes.root].filter(Boolean).join(' ')}
+  style={componentTheme.style || semantic.styles.root
+    ? [componentTheme.style, semantic.styles.root].filter(Boolean).join(';') : style}
   aria-busy={form.isSubmitting || undefined}
   onsubmit={handleSubmit}
   onreset={handleReset}

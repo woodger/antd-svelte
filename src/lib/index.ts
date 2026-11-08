@@ -755,7 +755,8 @@ export type {
 } from './table.types';
 export type { SelectProps, SelectSearchConfig } from './select.types';
 export type {
-  FormProps, FormConfig, FormScrollOptions, FormRequiredMark, FormRequiredMarkInfo, FormLocale
+  FormProps, FormConfig, FormScrollOptions, FormRequiredMark, FormRequiredMarkInfo, FormLocale,
+  FormSemanticSlots, FormSemantic
 } from './form.types';
 export type { ModalProps } from './Modal.svelte';
 export type { ConfigProviderProps } from './ConfigProvider.svelte';

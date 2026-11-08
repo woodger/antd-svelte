@@ -34,6 +34,20 @@ export interface FormLocale {
   optional?: string;
 }
 
+/** Плоские class/CSS slots Form; root относится к Form, остальные — к полям и ErrorList. */
+export interface FormSemanticSlots {
+  root?: string;
+  label?: string;
+  content?: string;
+  help?: string;
+  helpItem?: string;
+  extra?: string;
+}
+
+/** Callback получает native props с разрешёнными layout/disabled и defaults подписей. */
+export type FormSemantic = FormSemanticSlots
+  | (<Values extends FormValues>(info: { props: FormProps<Values> }) => FormSemanticSlots | undefined);
+
 /** Нативная форма для реактивной модели, validation и асинхронного onFinish. */
 export interface FormProps<Values extends FormValues> extends Omit<
   HTMLFormAttributes,
@@ -67,6 +81,10 @@ export interface FormProps<Values extends FormValues> extends Omit<
   onFinishFailed?: (error: FormValidationError<Values>) => void;
   /** Ошибка выполнения onFinish; ошибки validation поступают в onFinishFailed. */
   onError?: (error: unknown) => void;
+  /** Классы semantic slots накапливаются после ConfigProvider.form.classNames. */
+  classNames?: FormSemantic;
+  /** CSS-строки semantic slots после config.styles; local style перекрывает root. */
+  styles?: FormSemantic;
   /** Дополнительный класс native wrapper; component=false не создаёт корень. */
   rootClassName?: string;
   class?: string;
@@ -74,5 +92,6 @@ export interface FormProps<Values extends FormValues> extends Omit<
 
 /** Defaults Form; undefined наследует родительский record, {} заменяет его. */
 export type FormConfig = Pick<
-  FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap' | 'requiredMark' | 'class' | 'style'
+  FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap' | 'requiredMark'
+    | 'class' | 'style' | 'classNames' | 'styles'
 >;

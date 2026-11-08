@@ -135,6 +135,10 @@
 
 ### Added
 
+- Form: semantic classNames/styles для root/label/content/help/helpItem/extra,
+  callbacks и defaults ConfigProvider.form. Slots наследуются полями/ErrorList;
+  сохранены приоритеты CSS, native help/ARIA и фокус при динамическом оформлении.
+
 - Form/FormItem: rootClassName, inline style поля и ConfigProvider.form.class/style.
   Сверены накопление классов, приоритет CSS, nested record replacement и
   component=false; динамическое оформление сохраняет DOM/focus/metadata.
@@ -1017,6 +1021,9 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- FormItem: удалён лишний error-класс контейнера пояснений, как в upstream.
+  Классы и цвета отдельных сообщений, role alert/status сохранены.
 
 - Form: поля без validation rules не получают временный validating; одиночный
   запрос учитывает все bindings с выбранным именем, как upstream.
