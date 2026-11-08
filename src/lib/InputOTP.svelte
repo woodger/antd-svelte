@@ -8,6 +8,7 @@
   import { useConfig } from './config-context';
   import { useVariant } from './variant.svelte';
   import { provideFormField, useForm, useFormField } from './form-context';
+  import { provideFormItemStatus, useFormItemStatusContext } from './form-item-status';
   import { isOTPCompleteChange, patchOTPCells } from './input-otp.engine';
   import type { InputOTPProps } from './input-otp.types';
 
@@ -50,6 +51,10 @@
     focus, blur
   };
   const field = useFormField(() => controlRef);
+  const itemStatus = useFormItemStatusContext();
+  provideFormItemStatus(Object.create(itemStatus, {
+    status: { get: () => status || itemStatus.status }
+  }));
   // FormItem владеет группой: отдельные Input не получают одинаковые id/name/required.
   // Ячейки наследуют visual status без id/name/ref и blur binding корневого OTP.
   provideFormField({

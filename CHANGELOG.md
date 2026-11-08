@@ -135,6 +135,9 @@
 
 ### Added
 
+- Form: useFormItemStatus с reactive getters status/errors/warnings для собственных
+  controls. Перенесены вложенные границы Form/Item и OTP, SSR и reset; API не меняет refs.
+
 - FormItem: initialValue с приоритетом store/Form defaults, SSR, обновлением
   будущего reset и dirty validation. Сохранены копии значений, touched и binding;
   вложенные defaults следуют mount order, сценарии FormList сверены с upstream.

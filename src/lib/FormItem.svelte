@@ -22,6 +22,8 @@
   import FormItemTooltip from './FormItemTooltip.svelte';
   import NoFormItemBinding from './NoFormItemBinding.svelte';
   import FormItemBinding from './FormItemBinding.svelte';
+  import FormItemStatusProvider from './FormItemStatusProvider.svelte';
+  import type { FormItemStatus } from './form-item-status';
 
   /** Связывает поле модели Form с label, validation status и доступным описанием ошибок. */
   export interface FormItemProps {
@@ -206,6 +208,12 @@
     if (registration?.mountKey) form?.markFieldMounted(registration.mountKey);
   });
 
+  const itemStatus: FormItemStatus = {
+    get status() { return status ?? ''; },
+    get errors() { return errors; },
+    get warnings() { return warnings; }
+  };
+
   const fieldContext: FormFieldContext = {
     get id() {
       return hasName ? id : undefined;
@@ -311,7 +319,7 @@
           <div class="ant-form-item-control-input">
             <div bind:this={content}
               class={['ant-form-item-control-input-content', form?.classNames?.content]}
-              style={form?.styles?.content}>{#key resetKey}{@render children()}{/key}</div>
+              style={form?.styles?.content}>{#key resetKey}<FormItemStatusProvider value={itemStatus}>{@render children()}</FormItemStatusProvider>{/key}</div>
           </div>
           {#if errors.length || warnings.length}
             <div id={descriptionId} class={['ant-form-item-explain', form?.classNames?.help]}

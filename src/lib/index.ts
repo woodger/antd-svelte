@@ -769,6 +769,8 @@ export type {
   ShowWaveEffect
 } from './wave.types';
 export type { FormItemProps } from './FormItem.svelte';
+export { useFormItemStatus } from './form-item-status';
+export type { FormItemStatus } from './form-item-status';
 export type { FormErrorListProps, FormValidateStatus } from './form-error-list.types';
 export type {
   FormListProps,

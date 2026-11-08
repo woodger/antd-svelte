@@ -9431,6 +9431,30 @@ HasFeedback/feedbackIcons пока не перенесены.
 [браузер и доступность controls](./tests/browser/form-status.spec.ts),
 [публичный пакет и SSR](./tests/package/form-status.ssr.test.ts), `?fixture=form-status`.
 
+`useFormItemStatus()` — Svelte-аналог Form.Item.useStatus для собственных controls.
+Вызывайте его при инициализации дочернего компонента FormItem и читайте поля
+возвращённого объекта: status, errors и warnings обновляются через getters.
+Destructuring сохраняет snapshot. Массивы сообщений доступны только для чтения.
+
+```svelte
+<script lang="ts">
+  import { useFormItemStatus } from 'antd-svelte';
+  const field = useFormItemStatus();
+</script>
+
+{#each field.errors as error}<p>{error}</p>{/each}
+```
+
+Pristine FormItem возвращает status='', вне FormItem status равен undefined.
+Вложенный Item читает собственное состояние. Label/extra читают внешний контекст,
+поскольку status provider окружает только controls. Вложенный Form сбрасывает
+status в undefined и сохраняет errors/warnings ближайшего внешнего Item, как source.
+InputOTP учитывает свой status, сохраняя родительские сообщения. Hook не меняет
+value binding, ref или фокус control и работает при SSR.
+Сверка: [14 исходных состояний](./tests/browser/fixtures/ant-design-form-use-status-reference.json),
+[браузер](./tests/browser/form-use-status.spec.ts),
+[публичные типы и SSR](./tests/package/form-use-status.ssr.test.ts), `?fixture=form-use-status`.
+
 `Form.colon`, `labelAlign` и `labelWrap` наследуют defaults из `ConfigProvider.form`.
 При отсутствии настройки colon включён, labelAlign равен right, labelWrap — false.
 Локальные FormItem.colon/labelAlign имеют приоритет над Form; true включает colon

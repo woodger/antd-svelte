@@ -1,0 +1,682 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after render"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "main": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "error",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": []
+        },
+        "main": {
+          "status": "error",
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "warnings",
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [],
+          "warnings": [
+            "Check"
+          ]
+        },
+        "main": {
+          "status": "warning",
+          "errors": [],
+          "warnings": [
+            "Check"
+          ]
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "errors-warnings",
+        "errors": [
+          "Invalid"
+        ],
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [
+            "Check"
+          ]
+        },
+        "main": {
+          "status": "error",
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [
+            "Check"
+          ]
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "pending",
+        "errors": [
+          "Previous"
+        ],
+        "validating": true
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [
+            "Previous"
+          ],
+          "warnings": []
+        },
+        "main": {
+          "status": "validating",
+          "errors": [
+            "Previous"
+          ],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "touched",
+        "touched": true
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "main": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "validated",
+        "validating": false
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "main": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "success-with-errors",
+        "status": "success",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": []
+        },
+        "main": {
+          "status": "success",
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-with-errors",
+        "status": "",
+        "errors": [
+          "Invalid"
+        ]
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": []
+        },
+        "main": {
+          "status": "",
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "manual-error",
+        "status": "error"
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "main": {
+          "status": "error",
+          "errors": [],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "manual-warning",
+        "status": "warning"
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "main": {
+          "status": "warning",
+          "errors": [],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nameless",
+        "nameless": true
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "main": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nameless-success",
+        "nameless": true,
+        "status": "success"
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "main": {
+          "status": "success",
+          "errors": [],
+          "warnings": []
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "otp-override",
+        "otp": true,
+        "errors": [
+          "Invalid"
+        ],
+        "warnings": [
+          "Check"
+        ]
+      },
+      "metrics": {
+        "outside": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "form-only": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "label": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        },
+        "inner": {
+          "status": "",
+          "errors": [],
+          "warnings": []
+        },
+        "inner-form": {
+          "status": null,
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [
+            "Check"
+          ]
+        },
+        "otp": {
+          "status": "warning",
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [
+            "Check"
+          ]
+        },
+        "main": {
+          "status": "error",
+          "errors": [
+            "Invalid"
+          ],
+          "warnings": [
+            "Check"
+          ]
+        },
+        "extra": {
+          "status": null,
+          "errors": [],
+          "warnings": []
+        }
+      }
+    }
+  ]
+}

@@ -5,6 +5,7 @@
   import { provideForm } from './form-context';
   import { getFormHooks } from './form-internal';
   import { provideFormList } from './form-list-context';
+  import { provideFormItemStatus, useFormItemStatusContext } from './form-item-status';
   import type { FormProps, FormSemanticSlots } from './form.types';
   import type { FormValues } from './validation.engine';
   import { mergeComponentSemantics } from './semantic-style.engine';
@@ -58,6 +59,10 @@
   });
 
   provideFormList(undefined);
+  // Source NoFormStyle сбрасывает visual status, сохраняя metadata ближайшего внешнего Item.
+  provideFormItemStatus(Object.create(useFormItemStatusContext(), {
+    status: { get: () => undefined }
+  }));
 
   // Form передаёт SizeContext/DisabledContext; остальные reactive defaults сохраняют владельца.
   const fieldConfig: ConfigContext = Object.create(config, {
