@@ -11,6 +11,8 @@ export interface ValidationRule<Values extends FormValues = FormValues> {
   max?: number;
   pattern?: RegExp;
   message?: string;
+  /** Синхронно преобразует значение только для этого правила, не записывая результат в Form. */
+  transform?: (value: FormValue) => FormValue;
   validator?: (
     value: FormValue,
     values: Readonly<Values>
@@ -101,11 +103,21 @@ export async function validateFieldValue<Values extends FormValues>(
 }
 
 async function validateRuleValue<Values extends FormValues>(
-  value: FormValue,
+  originalValue: FormValue,
   values: Readonly<Values>,
   rule: ValidationRule<Values>
 ): Promise<string[]> {
   const messages: string[] = [];
+  let transformedValue = originalValue;
+  if (rule.transform) {
+    try {
+      transformedValue = rule.transform(originalValue);
+    } catch (error) {
+      // Source теряет исключение transform и принимает значение; ошибка не должна давать success.
+      return [rule.message ?? (error instanceof Error ? error.message : 'Проверьте значение.')];
+    }
+  }
+  const value = transformedValue;
   const array = Array.isArray(value);
   const empty = value === null
     || value === undefined

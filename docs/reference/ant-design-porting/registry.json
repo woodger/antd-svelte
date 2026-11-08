@@ -4828,6 +4828,11 @@
           "name": "@ant-design/icons",
           "range": "^6.3.4",
           "referenceVersion": null
+        },
+        {
+          "name": "@rc-component/async-validator",
+          "range": "^6.0.0",
+          "referenceVersion": "6.0.0"
         }
       ],
       "priority": "unassigned",
@@ -5104,7 +5109,14 @@
         "tests/browser/fixtures/FormNoStyleFixtures.svelte",
         "tests/browser/fixtures/FormNoStyleCase.svelte",
         "tests/browser/fixtures/FormNoStyleCompositionFixtures.svelte",
-        "tests/package/form-no-style.ssr.test.ts"
+        "tests/package/form-no-style.ssr.test.ts",
+        "src/lib/form-transform.test.ts",
+        "tests/browser/form-transform.spec.ts",
+        "tests/browser/fixtures/FormTransformCase.svelte",
+        "tests/browser/fixtures/FormTransformFixtures.svelte",
+        "tests/browser/fixtures/form-transform-cases.ts",
+        "tests/browser/fixtures/ant-design-form-transform-reference.json",
+        "tests/package/form-transform.ssr.test.ts"
       ],
       "features": [
         {
@@ -5907,6 +5919,23 @@
             "tests/browser/fixtures/ant-design-form-no-style-reference.json"
           ],
           "note": "FormItem.noStyle убирает ItemHolder/layout, label/help/extra/class/style, сохраняя native binding, registration, initialValue, validation, controlRef и reset. Hidden имеет приоритет и сохраняет скрытый ItemHolder. Private onMetaChange activates collectors в порядке первых metadata events; parent list: own errors/warnings, затем children с dedup по typed NamePath. Parent visual status и useFormItemStatus остаются собственными, как source; noStyle без собственного status/metadata наследует visual status ближайшего Item. Вложенные noStyle передают сообщения ближайшему styled Item; FormList live paths/keyed metadata следуют move/insert/remove, очистка и async unmount освобождают отчёт. Help=false отключает report. Двадцать raw UMD-состояний и event-order/transition observations закреплены на 6.6.8; hidden/nameless/standalone, inherited/explicit statuses и parent-owned hook metadata сопоставлены с source. Native обязательность сохраняет required вместо исходного aria-required; visual error сохраняет прежний aria-invalid. Source defects не повторены: dangling собственные help/extra descriptions заменены реальным parent list или отсутствуют; dynamic noStyle/help не оставляют stale parent messages. Смена render branch/remount и reset сохраняют значения/metadata; native focus/selection восстанавливаются через field ref без DOM wrapper, caller-moved focus приоритетнее. SSR собирает model-owned errors и connected parent description, публичные типы не требуют DOM. Прежние native model-owned metadata/reset/trigger semantics не изменены. Полный feedback, dependencies и field adapters остаются отдельными пробелами."
+        },
+        {
+          "id": "rule-transform",
+          "title": "ValidationRule.transform: значение для отдельного правила",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/validation.engine.ts",
+            "src/lib/form-transform.test.ts",
+            "tests/browser/form-transform.spec.ts",
+            "tests/browser/fixtures/FormTransformCase.svelte",
+            "tests/browser/fixtures/FormTransformFixtures.svelte",
+            "tests/browser/fixtures/form-transform-cases.ts",
+            "tests/browser/fixtures/ant-design-form-transform-reference.json",
+            "tests/package/form-transform.ssr.test.ts"
+          ],
+          "note": "Синхронный transform применяется отдельно для каждого правила до native required/min/max/pattern/custom validator. Результат не заменяет value в модели, FormData, обычном submit payload и reset defaults; validator(value, values) сохраняет прежний native signature и original snapshot values. Разные правила получают исходный input, validateFirst/warningOnly/validateOnly и latest-request-wins сохраняются. Пятнадцать неизменённых UMD-сценариев 6.6.8 фиксируют trim/required/min/pattern, default/null/undefined, custom callbacks, независимость правил, serial/all и warnings; изучены rc-form 1.8.6 validateUtil и async-validator 6.0.0 (npm archive SHA-256 02177b46469af6612ddb674a5987638492a0587039f252cf37c48e82fc99b9a3), без установки зависимостей. Source defect: thrown transform попадает в catch без errors и даёт success; raw transform-throw сохранён, Svelte возвращает message/Error.message/fallback как ошибку правила, warningOnly остаётся предупреждением. Прежняя защита plain snapshot copies и identity opaque Date сохраняется; in-place mutation snapshot внутри callback не изменяет store, но общий snapshot текущей validation остаётся прежним native контрактом. Public types и SSR не запускают transform при render. Полный type/len/enum/whitespace/nested Rule API остаётся отдельным пробелом."
         }
       ]
     },

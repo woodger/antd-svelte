@@ -9,6 +9,11 @@
 
 ### Added
 
+- ValidationRule.transform преобразует значение только для проверки отдельного
+  правила, сохраняя исходный store, native FormData, submit payload и reset defaults.
+  Исключение преобразования становится ошибкой validation, сохраняя warningOnly;
+  исходный дефект 6.6.8 с успешной проверкой после исключения записан отдельно.
+
 - FormItem.noStyle сохраняет field binding без layout и собирает ошибки и
   предупреждения в ближайшем оформленном FormItem. Сохранены собственные статусы,
   keyed строки FormList, reset и native focus/selection. Описание control связано

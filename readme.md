@@ -9796,6 +9796,23 @@ Pattern проверяет скалярные значения; для пров�
 используйте custom validator. Пустые необязательные значения
 пропускают встроенные проверки, но передаются в custom validator.
 
+`ValidationRule.transform(value)` синхронно преобразует вход только для своего
+правила, до required/min/max/pattern и validator. Другие правила получают исходное
+значение. Возвращённый результат не записывается в модель, native FormData, submit payload или
+reset defaults. Например, `{ transform: value => String(value).trim(), min: 3 }`
+проверяет длину без крайних пробелов, сохраняя введённый текст.
+Не изменяйте объект на месте: callbacks видят общий snapshot текущей проверки.
+Plain containers скопированы; экземпляры классов сохраняют свою identity.
+
+Исключение transform становится ошибкой правила: message имеет приоритет,
+затем Error.message и обычный fallback; warningOnly сохраняет свой смысл.
+В 6.6.8 такое исключение ошибочно даёт успешную validation. Raw наблюдение оставлено
+для отдельного разбора; этот дефект не повторён. Сверка:
+[15 исходных сценариев](./tests/browser/fixtures/ant-design-form-transform-reference.json),
+[модель и правила](./src/lib/form-transform.test.ts),
+[браузер](./tests/browser/form-transform.spec.ts),
+[публичный пакет и SSR](./tests/package/form-transform.ssr.test.ts), `?fixture=form-transform`.
+
 `FormItem.validateFirst` управляет правилами одного поля:
 
 - `false` по умолчанию запускает правила параллельно и собирает все сообщения

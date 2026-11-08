@@ -1,0 +1,325 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after validation"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "trim-valid",
+        "kind": "min",
+        "value": " abc "
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": " abc ",
+      "calls": [
+        [
+          "transform",
+          " abc "
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "trim-short",
+        "kind": "min",
+        "value": " ab "
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": " ab ",
+      "calls": [
+        [
+          "transform",
+          " ab "
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "trim-required",
+        "kind": "required",
+        "value": "   "
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "   ",
+      "calls": [
+        [
+          "transform",
+          "   "
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-empty-required",
+        "kind": "empty",
+        "value": "abc"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "abc",
+      "calls": [
+        [
+          "transform",
+          "abc"
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-default-undefined",
+        "kind": "default"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": null,
+      "calls": [
+        [
+          "transform",
+          null
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-default-null",
+        "kind": "default",
+        "value": null
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": null,
+      "calls": [
+        [
+          "transform",
+          null
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-uppercase",
+        "kind": "upper",
+        "value": "abc"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "abc",
+      "calls": [
+        [
+          "transform",
+          "abc"
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-pattern-rejected",
+        "kind": "upper",
+        "value": "no"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "no",
+      "calls": [
+        [
+          "transform",
+          "no"
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-custom-validator",
+        "kind": "custom",
+        "value": " raw ",
+        "expected": "raw"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": " raw ",
+      "calls": [
+        [
+          "transform",
+          " raw "
+        ],
+        [
+          "first-validator",
+          "raw"
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-per-rule",
+        "kind": "custom",
+        "value": " raw ",
+        "expected": "raw",
+        "multiple": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": " raw ",
+      "calls": [
+        [
+          "transform",
+          " raw "
+        ],
+        [
+          "first-validator",
+          "raw"
+        ],
+        [
+          "second-transform",
+          " raw "
+        ],
+        [
+          "second-validator",
+          " raw "
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-no-coercion",
+        "kind": "custom",
+        "value": 0,
+        "expected": 0
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": 0,
+      "calls": [
+        [
+          "transform",
+          0
+        ],
+        [
+          "first-validator",
+          0
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-warning",
+        "kind": "warning",
+        "value": " no "
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Rejected"
+      ],
+      "store": " no ",
+      "calls": [
+        [
+          "transform",
+          " no "
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-throw",
+        "kind": "throw",
+        "value": "abc"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "abc",
+      "calls": [
+        [
+          "transform",
+          "abc"
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-first",
+        "kind": "custom",
+        "value": " raw ",
+        "expected": "other",
+        "multiple": true,
+        "first": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": " raw ",
+      "calls": [
+        [
+          "transform",
+          " raw "
+        ],
+        [
+          "first-validator",
+          "raw"
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "transform-all",
+        "kind": "custom",
+        "value": " raw ",
+        "expected": "other",
+        "multiple": true,
+        "first": false
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": " raw ",
+      "calls": [
+        [
+          "transform",
+          " raw "
+        ],
+        [
+          "first-validator",
+          "raw"
+        ],
+        [
+          "second-transform",
+          " raw "
+        ],
+        [
+          "second-validator",
+          " raw "
+        ]
+      ]
+    }
+  ]
+}
