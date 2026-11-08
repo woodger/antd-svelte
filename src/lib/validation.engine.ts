@@ -9,6 +9,10 @@ export interface ValidationRule<Values extends FormValues = FormValues> {
   warningOnly?: boolean;
   min?: number;
   max?: number;
+  /** Точное число, число Unicode code points строки или элементов массива; приоритет над min/max. */
+  len?: number;
+  /** Отклоняет непустую строку только из whitespace; пустое optional значение остаётся допустимым. */
+  whitespace?: boolean;
   pattern?: RegExp;
   message?: string;
   /** Синхронно преобразует значение только для этого правила, не записывая результат в Form. */
@@ -131,7 +135,13 @@ async function validateRuleValue<Values extends FormValues>(
     return messages;
   }
 
-  if (empty && !rule.validator) {
+  if (rule.whitespace === true && typeof value === 'string' && value !== '' && !value.trim()) {
+    return [rule.message ?? 'Поле не может состоять только из пробелов.'];
+  }
+
+  const exactLength = typeof rule.len === 'number';
+  if (empty && !rule.validator && !(exactLength
+    && (array || typeof value === 'string' && value.length > 0))) {
     return messages;
   }
 
@@ -141,14 +151,19 @@ async function validateRuleValue<Values extends FormValues>(
       ? [...value].length
       : typeof value === 'number' ? value : undefined;
 
-  if (length !== undefined && rule.min !== undefined && length < rule.min) {
+  if (length !== undefined && exactLength && length !== rule.len) {
+    return [rule.message ?? `${array ? 'Точное количество элементов'
+      : typeof value === 'string' ? 'Точная длина' : 'Точное значение'}: ${rule.len}.`];
+  }
+
+  if (!exactLength && length !== undefined && rule.min !== undefined && length < rule.min) {
     messages.push(
       rule.message ?? `${array ? 'Минимальное количество' : 'Минимальное значение'}: ${rule.min}.`
     );
     return messages;
   }
 
-  if (length !== undefined && rule.max !== undefined && length > rule.max) {
+  if (!exactLength && length !== undefined && rule.max !== undefined && length > rule.max) {
     messages.push(
       rule.message
       ?? `${array

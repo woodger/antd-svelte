@@ -9788,13 +9788,26 @@ validating заменяет её управление metadata. Для изме�
 [публичный пакет](./tests/package/form-set-fields.ssr.test.ts),
 [модель](./src/lib/form-set-fields.test.ts).
 
-Правила включают required, min/max, pattern и синхронный либо
-асинхронный `validator(value, values)`. Для строк min/max считают Unicode
+Правила включают required, min/max/len, whitespace, pattern и синхронный либо
+асинхронный `validator(value, values)`. Для строк min/max/len считают Unicode
 code points, для чисел сравнивают значение, для массивов считают элементы.
 Пустой массив считается пустым значением; массивы с 0 или false — непустыми.
 Pattern проверяет скалярные значения; для проверки содержимого массива
-используйте custom validator. Пустые необязательные значения
-пропускают встроенные проверки, но передаются в custom validator.
+используйте custom validator. Пустые необязательные значения пропускают прежние
+встроенные проверки, но передаются в custom validator. Len также проверяет пустой
+массив и пробелы в непустой строке; optional null/undefined/'' пропускаются.
+
+`len` задаёт точную длину или число и имеет приоритет над min/max, включая len=0.
+Pattern и custom validator продолжают применяться после успешной проверки длины.
+Как и у min/max, текущий native API определяет строку, число и массив по значению;
+в исходных числовых и массивных эталонах задан соответствующий type.
+`whitespace: true` отклоняет непустую строку из одних пробелов, tab или newline,
+сохраняя текст в модели. Пустая optional-строка допустима; required сохраняет
+прежний native запрет пустых строк, пробелов и массивов. WarningOnly остаётся
+неблокирующим. Сверка: [35 исходных сценариев](./tests/browser/fixtures/ant-design-form-constraints-reference.json),
+[правила и модель](./src/lib/form-constraints.test.ts),
+[браузер](./tests/browser/form-constraints.spec.ts),
+[публичный пакет и SSR](./tests/package/form-constraints.ssr.test.ts), `?fixture=form-constraints`.
 
 `ValidationRule.transform(value)` синхронно преобразует вход только для своего
 правила, до required/min/max/pattern и validator. Другие правила получают исходное

@@ -9,6 +9,11 @@
 
 ### Added
 
+- Правила Form поддерживают len и whitespace. Точная длина учитывает Unicode
+  code points и элементы массива, имеет приоритет над min/max и проверяет
+  пустой массив; whitespace запрещает непустую строку из одних пробелов.
+  Сохранены transform, warningOnly, исходные значения и прежние правила без новых props.
+
 - ValidationRule.transform преобразует значение только для проверки отдельного
   правила, сохраняя исходный store, native FormData, submit payload и reset defaults.
   Исключение преобразования становится ошибкой validation, сохраняя warningOnly;

@@ -1,0 +1,467 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after validation"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "exact-length",
+        "value": "ab",
+        "len": 2
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "short-length",
+        "value": "ab",
+        "len": 3
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "long-length",
+        "value": "abc",
+        "len": 2
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "abc"
+    },
+    {
+      "sample": {
+        "id": "unicode-astral",
+        "value": "🙂",
+        "len": 1
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "🙂"
+    },
+    {
+      "sample": {
+        "id": "unicode-combining",
+        "value": "é",
+        "len": 2
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "é"
+    },
+    {
+      "sample": {
+        "id": "optional-empty-length",
+        "value": "",
+        "len": 2
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": ""
+    },
+    {
+      "sample": {
+        "id": "required-empty-length",
+        "value": "",
+        "len": 0,
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": ""
+    },
+    {
+      "sample": {
+        "id": "exact-before-min-max",
+        "value": "ab",
+        "len": 2,
+        "min": 5,
+        "max": 1
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "zero-length",
+        "value": "a",
+        "len": 0
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "a"
+    },
+    {
+      "sample": {
+        "id": "negative-length",
+        "value": "a",
+        "len": -1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "a"
+    },
+    {
+      "sample": {
+        "id": "fractional-length",
+        "value": "ab",
+        "len": 1.5
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "length-pattern",
+        "value": "aa",
+        "len": 2,
+        "pattern": "^ab$"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "aa"
+    },
+    {
+      "sample": {
+        "id": "trim-length",
+        "value": " ab ",
+        "len": 2,
+        "trim": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": " ab "
+    },
+    {
+      "sample": {
+        "id": "space-allowed",
+        "value": "   ",
+        "whitespace": false
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "   "
+    },
+    {
+      "sample": {
+        "id": "space-rejected",
+        "value": "   ",
+        "whitespace": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "   "
+    },
+    {
+      "sample": {
+        "id": "tab-newline-rejected",
+        "value": "\t\n",
+        "whitespace": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "\t\n"
+    },
+    {
+      "sample": {
+        "id": "nonbreaking-space-rejected",
+        "value": " ",
+        "whitespace": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": " "
+    },
+    {
+      "sample": {
+        "id": "zero-width-space-allowed",
+        "value": "​",
+        "whitespace": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "​"
+    },
+    {
+      "sample": {
+        "id": "text-with-space",
+        "value": " abc ",
+        "whitespace": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": " abc "
+    },
+    {
+      "sample": {
+        "id": "empty-space-optional",
+        "value": "",
+        "whitespace": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": ""
+    },
+    {
+      "sample": {
+        "id": "empty-space-required",
+        "value": "",
+        "whitespace": true,
+        "required": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": ""
+    },
+    {
+      "sample": {
+        "id": "trim-space-optional",
+        "value": "   ",
+        "trim": true,
+        "whitespace": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "   "
+    },
+    {
+      "sample": {
+        "id": "space-warning",
+        "value": "   ",
+        "whitespace": true,
+        "warningOnly": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Rejected"
+      ],
+      "store": "   "
+    },
+    {
+      "sample": {
+        "id": "length-warning",
+        "value": "abc",
+        "len": 2,
+        "warningOnly": true
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Rejected"
+      ],
+      "store": "abc"
+    },
+    {
+      "sample": {
+        "id": "length-and-space",
+        "value": "  ",
+        "len": 1,
+        "whitespace": true
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "  "
+    },
+    {
+      "sample": {
+        "id": "space-exact-length",
+        "value": "  ",
+        "len": 2
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": "  "
+    },
+    {
+      "sample": {
+        "id": "space-wrong-length",
+        "value": "  ",
+        "len": 1
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": "  "
+    },
+    {
+      "sample": {
+        "id": "array-exact-empty",
+        "value": [],
+        "len": 0,
+        "sourceType": "array"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": []
+    },
+    {
+      "sample": {
+        "id": "array-wrong-empty",
+        "value": [],
+        "len": 2,
+        "sourceType": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": []
+    },
+    {
+      "sample": {
+        "id": "array-required-empty",
+        "value": [],
+        "len": 0,
+        "required": true,
+        "sourceType": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": []
+    },
+    {
+      "sample": {
+        "id": "array-exact-length",
+        "value": [
+          0,
+          false
+        ],
+        "len": 2,
+        "sourceType": "array"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": [
+        0,
+        false
+      ]
+    },
+    {
+      "sample": {
+        "id": "array-wrong-length",
+        "value": [
+          0,
+          false
+        ],
+        "len": 3,
+        "sourceType": "array"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": [
+        0,
+        false
+      ]
+    },
+    {
+      "sample": {
+        "id": "number-zero",
+        "value": 0,
+        "len": 0,
+        "sourceType": "number"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": 0
+    },
+    {
+      "sample": {
+        "id": "number-wrong-length",
+        "value": 2,
+        "len": 3,
+        "sourceType": "number"
+      },
+      "valid": false,
+      "errors": [
+        "Rejected"
+      ],
+      "warnings": [],
+      "store": 2
+    },
+    {
+      "sample": {
+        "id": "number-exact-before-min-max",
+        "value": 2,
+        "len": 2,
+        "min": 5,
+        "max": 1,
+        "sourceType": "number"
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "store": 2
+    }
+  ]
+}
