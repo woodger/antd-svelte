@@ -61,6 +61,8 @@
     colon?: boolean;
     /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
     rules?: readonly FormRule[];
+    /** Перекрывает label/name и другие ${variables} сообщений текущего поля. */
+    messageVariables?: Readonly<Record<string, string>>;
     /**
      * False по умолчанию собирает все сообщения параллельно, true останавливает правила
      * последовательно, 'parallel' выбирает первую завершившуюся ошибку.
@@ -101,6 +103,7 @@
     wrapperCol,
     colon,
     rules,
+    messageVariables,
     validateFirst,
     validateDebounce,
     validateStatus,
@@ -266,6 +269,12 @@
       },
       get initialValue() {
         return initialValue;
+      },
+      get messageVariables() {
+        return {
+          label: typeof label === 'string' ? label : String(name),
+          ...messageVariables
+        };
       },
       get onMetaChange() {
         return noStyle ? handleFieldMeta : undefined;

@@ -5155,7 +5155,15 @@
         "tests/browser/fixtures/FormNestedRulesFixtures.svelte",
         "tests/browser/fixtures/form-nested-rules-cases.ts",
         "tests/browser/fixtures/ant-design-form-nested-rules-reference.json",
-        "tests/package/form-nested-rules.ssr.test.ts"
+        "tests/package/form-nested-rules.ssr.test.ts",
+        "src/lib/validation-message.engine.ts",
+        "src/lib/form-message-variables.test.ts",
+        "tests/browser/form-message-variables.spec.ts",
+        "tests/browser/fixtures/FormMessageVariablesCase.svelte",
+        "tests/browser/fixtures/FormMessageVariablesFixtures.svelte",
+        "tests/browser/fixtures/form-message-variables-cases.ts",
+        "tests/browser/fixtures/ant-design-form-message-variables-reference.json",
+        "tests/package/form-message-variables.ssr.test.ts"
       ],
       "features": [
         {
@@ -6011,7 +6019,7 @@
             "tests/browser/fixtures/ant-design-form-rule-types-reference.json",
             "tests/package/form-rule-types.ssr.test.ts"
           ],
-          "note": "Базовая часть ValidationRuleType: string/number/integer/float/boolean/array/object/date/regexp/method/any. Явный type включает source-specific empty/required и dispatch: string range/pattern/whitespace, numeric/array range/len, date Date parsing+timestamp range; остальные primitive types только presence/type. Number empty string normalizes to undefined для проверки; integer/float empty string rejected, string whitespace allowed unless whitespace=true, array empty range/required и any presence следуют source. Typed custom validator заменяет built-ins, сохраняя native value/values signature и transform-before-validator; normalization не записывается в store. Прежние implicit rules без type не меняют native empty, first-error/default Russian messages и constraint/custom порядок. Полные source message templates/validateMessages/messageVariables остаются отдельными пробелами. Триста шестьдесят шесть unmodified UMD-сценариев 6.6.8/rc-form 1.8.6/async-validator 6.0.0 фиксируют 11 типов, scalar/object/array/Date/RegExp/function, NaN/Infinity/BigInt/Symbol, required и constraints/custom dispatch. Raw source diagnostics сохранены: numeric/Date coercion BigInt/Symbol валидирует с ошибкой, но также выводит console errors и бросает page errors. Native guards дают те же validation errors без console/page exceptions. Source parseInt ошибочно отклоняет integer 1e21 и принимает его как float; Native Number.isInteger исправляет эти две классификации, raw значения сохранены для разбора. MIT license async-validator включена, новых npm зависимостей нет. SSR публикует type union и не запускает validation."
+          "note": "Базовая часть ValidationRuleType: string/number/integer/float/boolean/array/object/date/regexp/method/any. Явный type включает source-specific empty/required и dispatch: string range/pattern/whitespace, numeric/array range/len, date Date parsing+timestamp range; остальные primitive types только presence/type. Number empty string normalizes to undefined для проверки; integer/float empty string rejected, string whitespace allowed unless whitespace=true, array empty range/required и any presence следуют source. Typed custom validator заменяет built-ins, сохраняя native value/values signature и transform-before-validator; normalization не записывается в store. Прежние implicit rules без type не меняют native empty, first-error/default Russian messages и constraint/custom порядок. Шаблоны строковых сообщений и messageVariables поддерживаются отдельной feature; source validateMessages остаётся пробелом. Триста шестьдесят шесть unmodified UMD-сценариев 6.6.8/rc-form 1.8.6/async-validator 6.0.0 фиксируют 11 типов, scalar/object/array/Date/RegExp/function, NaN/Infinity/BigInt/Symbol, required и constraints/custom dispatch. Raw source diagnostics сохранены: numeric/Date coercion BigInt/Symbol валидирует с ошибкой, но также выводит console errors и бросает page errors. Native guards дают те же validation errors без console/page exceptions. Source parseInt ошибочно отклоняет integer 1e21 и принимает его как float; Native Number.isInteger исправляет эти две классификации, raw значения сохранены для разбора. MIT license async-validator включена, новых npm зависимостей нет. SSR публикует type union и не запускает validation."
         },
         {
           "id": "format-rule-types",
@@ -6072,7 +6080,29 @@
             "tests/browser/fixtures/ant-design-form-nested-rules-reference.json",
             "tests/package/form-nested-rules.ssr.test.ts"
           ],
-          "note": "Fields readonly Record literal keys=>ValidationRule/readonly ValidationRule[] для object/array; defaultField single rule проверяет все существующие array indices после explicit fields при отсутствии parent/explicit errors. Object defaultField применяется к own keys без explicit override, как измеренный delegated runtime. Optional отсутствующий parent пропускает схему; errors/warnings принадлежат root binding, child registrations не создаются. Child validator сохраняет native value/full readonly form snapshot; root transform применяется до children без store normalization, nested schema shallow-captured перед async parent validator. Own primitive errors и explicit fields errors агрегируются как source; fields order следует completion, array default order сохраняет index. Child warningOnly сохраняет warnings; root warningOnly преобразует всю свою схему в warnings. ValidateFirst выбирает root rule outcomes, все child rules внутри root собираются; nested warnings не опережают более поздний blocking root в serial/parallel. Тридцать unmodified UMD-наблюдений фиксируют nested objects/arrays/overrides/multiple child rules, literal dots, async order и source defects. Исправлены source false failures/acceptance: child warnings игнорируются и блокируют; array defaultField использует исходный массив после root transform; nested required 0 ошибочно получает string type; toString series-map collision даёт console/page errors и success; sparse array defaultField теряет ошибку. Native own-property Map и present-index traversal устраняют inherited-name/sparse false pass, implicit required 0 сохраняет прежний native contract. Ancestor pair schema/value останавливает cycles без ложных ошибок shared siblings; cycle behavior Source не замерялся. Native message defaults/validator signature и leaf rules без nested props сохраняются, stale/reset/validateOnly guards модели действуют на весь root job. Fields/defaultField принимают object rules, factories остаются на root rule list. Полные messageVariables/validateMessages и другие Form возможности ещё не перенесены; runtime React и новые npm dependencies не добавлены."
+          "note": "Fields readonly Record literal keys=>ValidationRule/readonly ValidationRule[] для object/array; defaultField single rule проверяет все существующие array indices после explicit fields при отсутствии parent/explicit errors. Object defaultField применяется к own keys без explicit override, как измеренный delegated runtime. Optional отсутствующий parent пропускает схему; errors/warnings принадлежат root binding, child registrations не создаются. Child validator сохраняет native value/full readonly form snapshot; root transform применяется до children без store normalization, nested schema shallow-captured перед async parent validator. Own primitive errors и explicit fields errors агрегируются как source; fields order следует completion, array default order сохраняет index. Child warningOnly сохраняет warnings; root warningOnly преобразует всю свою схему в warnings. ValidateFirst выбирает root rule outcomes, все child rules внутри root собираются; nested warnings не опережают более поздний blocking root в serial/parallel. Тридцать unmodified UMD-наблюдений фиксируют nested objects/arrays/overrides/multiple child rules, literal dots, async order и source defects. Исправлены source false failures/acceptance: child warnings игнорируются и блокируют; array defaultField использует исходный массив после root transform; nested required 0 ошибочно получает string type; toString series-map collision даёт console/page errors и success; sparse array defaultField теряет ошибку. Native own-property Map и present-index traversal устраняют inherited-name/sparse false pass, implicit required 0 сохраняет прежний native contract. Ancestor pair schema/value останавливает cycles без ложных ошибок shared siblings; cycle behavior Source не замерялся. Native message defaults/validator signature и leaf rules без nested props сохраняются, stale/reset/validateOnly guards модели действуют на весь root job. Fields/defaultField принимают object rules, factories остаются на root rule list. MessageVariables поддерживаются отдельной feature, validateMessages и другие Form возможности ещё не перенесены; runtime React и новые npm dependencies не добавлены."
+        },
+        {
+          "id": "message-variables",
+          "title": "FormItem.messageVariables и шаблоны строковых сообщений",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/form-internal.ts",
+            "src/lib/form.model.svelte.ts",
+            "src/lib/validation.engine.ts",
+            "src/lib/validation-nested.engine.ts",
+            "src/lib/validation-message.engine.ts",
+            "src/lib/form-message-variables.test.ts",
+            "tests/browser/form-message-variables.spec.ts",
+            "tests/browser/fixtures/FormMessageVariablesCase.svelte",
+            "tests/browser/fixtures/FormMessageVariablesFixtures.svelte",
+            "tests/browser/fixtures/form-message-variables-cases.ts",
+            "tests/browser/fixtures/ant-design-form-message-variables-reference.json",
+            "tests/package/form-message-variables.ssr.test.ts"
+          ],
+          "note": "Строковые rule.message и результаты native validator поддерживают однократную подстановку ${label}/${name}, rule aliases min/max/len/type/required/pattern/enum и messageVariables readonly Record<string,string>. Строковый label используется без normalization, иначе String(name); programmatic model без Item использует dot path. Name вложенного правила включает literal child key, aliases принадлежат child rule; label и явные variables наследуются от Item. Явные own variables перекрывают defaults/aliases, unknown даёт undefined, backslash экранирует placeholder; replacement не обрабатывается повторно. Контекст фиксируется до debounce/async и обновляется при следующей validation. Native ordinary messages, русские defaults/first-error, validator(value,values), metadata setFields и submit errors сохранены; manual errors остаются literal. Двадцать два unmodified UMD-состояния фиксируют aliases, rich/empty/null/numeric labels, array/zero NamePath, enum/pattern, escaping, nested object/array и inherited names. Source ошибочно теряет label имени 0, использует inherited constructor/toString и параметры root rule для object child; Native исправляет эти случаи, raw errors сохранены. Reactive props, async/debounce capture, warning channels, nested cycles и публичный SSR проверяются; source validateMessages пока отдельный пробел. Новых npm dependencies и runtime React нет."
         }
       ]
     },

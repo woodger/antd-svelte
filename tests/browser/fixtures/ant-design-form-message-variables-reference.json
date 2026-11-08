@@ -1,0 +1,310 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after validation"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "label-name",
+        "message": "${label}/${name}",
+        "variables": {}
+      },
+      "valid": false,
+      "errors": [
+        "Field label/field"
+      ]
+    },
+    {
+      "sample": {
+        "id": "variables-label",
+        "message": "${label}/${name}",
+        "variables": {
+          "label": "Custom"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Custom/field"
+      ]
+    },
+    {
+      "sample": {
+        "id": "variables-name",
+        "message": "${label}/${name}",
+        "variables": {
+          "name": "Custom name"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Field label/Custom name"
+      ]
+    },
+    {
+      "sample": {
+        "id": "rule-aliases",
+        "message": "${min}/${max}/${type}/${required}",
+        "variables": {},
+        "rule": {
+          "min": 5,
+          "max": 10,
+          "type": "string",
+          "required": true
+        }
+      },
+      "valid": false,
+      "errors": [
+        "5/10/string/true"
+      ]
+    },
+    {
+      "sample": {
+        "id": "variable-alias",
+        "message": "${min}/${custom}",
+        "variables": {
+          "min": "99",
+          "custom": "Custom"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "99/Custom"
+      ]
+    },
+    {
+      "sample": {
+        "id": "unknown",
+        "message": "${missing}",
+        "variables": {}
+      },
+      "valid": false,
+      "errors": [
+        "undefined"
+      ]
+    },
+    {
+      "sample": {
+        "id": "literal-escape",
+        "message": "\\${label}",
+        "variables": {}
+      },
+      "valid": false,
+      "errors": [
+        "${label}"
+      ]
+    },
+    {
+      "sample": {
+        "id": "double-escape",
+        "message": "\\\\${label}",
+        "variables": {}
+      },
+      "valid": false,
+      "errors": [
+        "\\${label}"
+      ]
+    },
+    {
+      "sample": {
+        "id": "nonrecursive",
+        "message": "${label}",
+        "variables": {
+          "label": "${min}"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "${min}"
+      ]
+    },
+    {
+      "sample": {
+        "id": "rich-label",
+        "message": "${label}/${name}",
+        "variables": {},
+        "rich": true
+      },
+      "valid": false,
+      "errors": [
+        "field/field"
+      ]
+    },
+    {
+      "sample": {
+        "id": "empty-label",
+        "message": "${label}/${name}",
+        "variables": {},
+        "label": ""
+      },
+      "valid": false,
+      "errors": [
+        "/field"
+      ]
+    },
+    {
+      "sample": {
+        "id": "null-label",
+        "message": "${label}/${name}",
+        "variables": {},
+        "label": null
+      },
+      "valid": false,
+      "errors": [
+        "field/field"
+      ]
+    },
+    {
+      "sample": {
+        "id": "number-label",
+        "message": "${label}/${name}",
+        "variables": {},
+        "label": 0
+      },
+      "valid": false,
+      "errors": [
+        "field/field"
+      ]
+    },
+    {
+      "sample": {
+        "id": "array-name",
+        "message": "${label}/${name}",
+        "variables": {},
+        "label": null,
+        "name": [
+          "user",
+          "name"
+        ]
+      },
+      "valid": false,
+      "errors": [
+        "user,name/user.name"
+      ]
+    },
+    {
+      "sample": {
+        "id": "zero-name",
+        "message": "${label}/${name}",
+        "variables": {},
+        "label": null,
+        "name": 0
+      },
+      "valid": false,
+      "errors": [
+        "undefined/0"
+      ]
+    },
+    {
+      "sample": {
+        "id": "pattern-alias",
+        "message": "${pattern}",
+        "variables": {},
+        "rule": {
+          "pattern": "^no$"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "/^no$/"
+      ]
+    },
+    {
+      "sample": {
+        "id": "enum-alias",
+        "message": "${enum}",
+        "variables": {},
+        "rule": {
+          "type": "enum",
+          "enum": [
+            "a",
+            "b"
+          ]
+        }
+      },
+      "valid": false,
+      "errors": [
+        "a, b"
+      ]
+    },
+    {
+      "sample": {
+        "id": "no-variables",
+        "message": "${label}/${name}"
+      },
+      "valid": false,
+      "errors": [
+        "Field label/field"
+      ]
+    },
+    {
+      "sample": {
+        "id": "prototype-name",
+        "message": "${constructor}",
+        "variables": {}
+      },
+      "valid": false,
+      "errors": [
+        "function Object() { [native code] }"
+      ]
+    },
+    {
+      "sample": {
+        "id": "prototype-to-string",
+        "message": "${toString}",
+        "variables": {}
+      },
+      "valid": false,
+      "errors": [
+        "function toString() { [native code] }"
+      ]
+    },
+    {
+      "sample": {
+        "id": "object-child-context",
+        "variables": {},
+        "value": {
+          "name": "ab"
+        },
+        "rule": {
+          "type": "object",
+          "min": 99,
+          "fields": {
+            "name": {
+              "min": 5,
+              "message": "${label}/${name}/${min}"
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Field label/field/99"
+      ]
+    },
+    {
+      "sample": {
+        "id": "array-child-context",
+        "variables": {},
+        "value": [
+          "ab"
+        ],
+        "rule": {
+          "type": "array",
+          "min": 0,
+          "defaultField": {
+            "min": 5,
+            "message": "${label}/${name}/${min}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Field label/field.0/5"
+      ]
+    }
+  ]
+}

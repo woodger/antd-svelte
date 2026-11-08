@@ -9826,7 +9826,7 @@ object исключает массив, method означает функцию.
 normalization. Возвращённые и преобразованные значения не заменяют store.
 Правила без type сохраняют прежние native empty values и порядок constraints/validator.
 Сообщения по умолчанию сохраняют native русский текст и первую ошибку правила;
-полные source validateMessages/messageVariables ещё не перенесены.
+source validateMessages ещё не перенесён.
 
 Две классификации 6.6.8 исправлены: integer принимает 1e21, float его отклоняет;
 source использует parseInt и ошибается на scientific notation. BigInt/Symbol
@@ -9930,6 +9930,36 @@ required без type принимает числовой 0, поля читаю�
 [правила и lifecycle](./src/lib/form-nested-rules.test.ts),
 [браузер](./tests/browser/form-nested-rules.spec.ts),
 [публичный пакет и SSR](./tests/package/form-nested-rules.ssr.test.ts), `?fixture=form-nested-rules`.
+
+Строковые сообщения правил поддерживают `${label}`, `${name}` и параметры правила,
+например `${min}` или `${enum}`. FormItem.messageVariables перекрывает эти значения
+для текущего поля. Label берётся из строковой подписи, иначе из имени; name — полный
+путь через точку. У вложенных правил name и параметры относятся к дочернему правилу,
+label и явные messageVariables сохраняются от FormItem. Без FormItem подписью служит путь.
+
+```svelte
+<FormItem name="title" label="Заголовок"
+  messageVariables={{ min: 'трёх' }}
+  rules={[{ min: 3, message: '${label}: минимум ${min} символа.' }]}>
+  <Input value={form.values.title}
+    onValueChange={(value) => form.setFieldValue('title', value)} />
+</FormItem>
+```
+
+Подстановка однократная: содержимое replacement не интерпретируется снова.
+Backslash перед `${label}` сохраняет буквальный placeholder; в JS-строке его нужно
+экранировать: `'\\${label}'`. Неизвестный ключ даёт текст undefined. Переменные
+фиксируются до debounce/async validator; следующая проверка читает свежие props.
+Это относится и к строковым результатам validator, но не к готовым errors/warnings
+из setFields и не к ошибкам обработчика submit. Обычные сообщения и native defaults сохранены.
+
+Исправлены исходные ошибки подписи имени 0, inherited constructor/toString и
+родительского контекста вложенного object. Raw source behavior сохранён в
+[22 исходных состояниях](./tests/browser/fixtures/ant-design-form-message-variables-reference.json).
+Проверки: [модель и шаблоны](./src/lib/form-message-variables.test.ts),
+[браузер](./tests/browser/form-message-variables.spec.ts),
+[публичные типы и SSR](./tests/package/form-message-variables.ssr.test.ts),
+`?fixture=form-message-variables`. Form.validateMessages остаётся отдельным пробелом.
 
 `ValidationRule.transform(value)` синхронно преобразует вход только для своего
 правила, до required/min/max/pattern и validator. Другие правила получают исходное

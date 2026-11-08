@@ -12,6 +12,7 @@ export interface FormFieldRegistration {
   readonly isList?: boolean;
   readonly isListField?: boolean;
   readonly initialValue?: unknown;
+  readonly messageVariables?: Readonly<Record<string, string>>;
   /** Snapshot metadata для UI collector; undefined снимает прежний binding. */
   readonly onMetaChange?: (meta: FormFieldMeta | undefined) => void;
   /** Пересоздаёт содержимое выбранного Field без замены соседних controls. */

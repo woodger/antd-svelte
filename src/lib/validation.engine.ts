@@ -7,6 +7,7 @@ import {
   collectValidationMessages, validateNestedRule,
   type ValidationMessages, type ValidationAncestor
 } from './validation-nested.engine';
+import { formatValidationMessages, type ValidationMessageContext } from './validation-message.engine';
 export type { ValidationRuleType } from './validation-type.engine';
 
 /** Значение поля может быть скаляром, вложенным контейнером или экземпляром класса. */
@@ -84,14 +85,19 @@ export async function validateFieldValue<Values extends FormValues>(
   value: FormValue,
   values: Readonly<Values>,
   rules: readonly ValidationRule<Values>[],
-  validateFirst: boolean | 'parallel' = false
+  validateFirst: boolean | 'parallel' = false,
+  context?: ValidationMessageContext
 ): Promise<{ errors: string[]; warnings: string[] }> {
-  return validateRules(value, values, rules, validateFirst);
+  return validateRules(value, values, rules, validateFirst, undefined, context);
 }
 
 async function validateRules<Values extends FormValues>(
-  value: FormValue, values: Readonly<Values>, rules: readonly ValidationRule<Values>[],
-  validateFirst: boolean | 'parallel' = false, ancestor?: ValidationAncestor
+  value: FormValue,
+  values: Readonly<Values>,
+  rules: readonly ValidationRule<Values>[],
+  validateFirst: boolean | 'parallel' = false,
+  ancestor?: ValidationAncestor,
+  context?: ValidationMessageContext
 ): Promise<ValidationMessages> {
   const ordered = [...rules].sort((first, second) =>
     Number(Boolean(first.warningOnly)) - Number(Boolean(second.warningOnly))
@@ -101,7 +107,7 @@ async function validateRules<Values extends FormValues>(
     let warnings: string[] | undefined;
     for (const rule of ordered) {
       if (rule.warningOnly && warnings) return { errors: [], warnings };
-      const messages = await validateRuleValue(value, values, rule, ancestor);
+      const messages = await validateRuleValue(value, values, rule, ancestor, context);
       if (messages.errors.length) return { errors: messages.errors, warnings: [] };
       if (messages.warnings.length) warnings ??= messages.warnings;
     }
@@ -109,7 +115,7 @@ async function validateRules<Values extends FormValues>(
     return { errors: [], warnings: warnings ?? [] };
   }
 
-  const checks = ordered.map((rule) => validateRuleValue(value, values, rule, ancestor));
+  const checks = ordered.map((rule) => validateRuleValue(value, values, rule, ancestor, context));
   if (validateFirst === 'parallel') {
     if (!checks.length) return { errors: [], warnings: [] };
 
@@ -152,7 +158,9 @@ async function validateRules<Values extends FormValues>(
 async function validateRuleValue<Values extends FormValues>(
   originalValue: FormValue,
   values: Readonly<Values>,
-  configuration: ValidationRule<Values>, ancestor?: ValidationAncestor
+  configuration: ValidationRule<Values>,
+  ancestor?: ValidationAncestor,
+  context?: ValidationMessageContext
 ): Promise<ValidationMessages> {
   const rule = ancestor || (configuration.type === 'object' || configuration.type === 'array')
     && (configuration.fields || configuration.defaultField) ? { ...configuration } : configuration;
@@ -162,13 +170,36 @@ async function validateRuleValue<Values extends FormValues>(
       transformedValue = rule.transform(originalValue);
     } catch (error) {
       // Source теряет исключение transform и принимает значение; ошибка не должна давать success.
-      return collectValidationMessages(rule, [rule.message
-        ?? (error instanceof Error ? error.message : 'Проверьте значение.')], []);
+      return collectValidationMessages(rule, formatValidationMessages(
+        [rule.message ?? (error instanceof Error ? error.message : 'Проверьте значение.')],
+        rule,
+        context
+      ), []);
     }
   }
-  const messages = await validatePrimitiveRule(transformedValue, values, rule);
-  return validateNestedRule(transformedValue, originalValue, rule, messages,
-    (child, rules, parent) => validateRules(child, values, rules, false, parent), ancestor, configuration);
+  const messages = formatValidationMessages(
+    await validatePrimitiveRule(transformedValue, values, rule),
+    rule,
+    context
+  );
+
+  return validateNestedRule(
+    transformedValue,
+    originalValue,
+    rule,
+    messages,
+    (child, rules, parent, key) => validateRules(
+      child,
+      values,
+      rules,
+      false,
+      parent,
+      { ...context, name: context?.name ? `${context.name}.${key}` : key }
+    ),
+    ancestor,
+    configuration,
+    context
+  );
 }
 
 async function validatePrimitiveRule<Values extends FormValues>(

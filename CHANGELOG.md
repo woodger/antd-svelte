@@ -9,6 +9,11 @@
 
 ### Added
 
+- FormItem.messageVariables и строковые сообщения правил поддерживают однократную
+  подстановку label/name и параметров правила, включая вложенные поля и экранирование.
+  Сохранены native defaults и literal metadata setFields; исправлены исходные ошибки
+  подписи 0, inherited переменных и контекста вложенного object.
+
 - Правила Form поддерживают вложенные fields и defaultField, readonly-массивы
   дочерних правил и рекурсивные схемы. Сохранены корневые bindings, transform,
   validator snapshot, validateFirst и async/reset guards. Исправлены source ошибки

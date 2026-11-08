@@ -436,6 +436,10 @@ export function createForm<Values extends FormValues>({
         }
         throw error;
       }
+      const messageContext = {
+        name: path.map(String).join('.'),
+        variables: { label: path.map(String).join('.'), ...field.registration?.messageVariables }
+      };
       const validateFirst = field.registration?.validateFirst;
       if (delay) {
         const elapsed = await delayValidation(field, delay);
@@ -451,7 +455,11 @@ export function createForm<Values extends FormValues>({
       }
 
       const messages = await validateFieldValue(
-        getFormValue(snapshot, path), snapshot, rules, validateFirst
+        getFormValue(snapshot, path),
+        snapshot,
+        rules,
+        validateFirst,
+        messageContext
       );
 
       if (!validateOnly && field.run === token) {
