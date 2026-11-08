@@ -7,6 +7,7 @@ import type { ColProps } from './grid.types';
 import type { NamePath } from './form-store.engine';
 import type { Variant } from './types';
 import { useConfig } from './config-context';
+import type { FormRule } from './validation.engine';
 
 export interface FormContext {
   readonly variant?: Variant;
@@ -27,6 +28,7 @@ export interface FormContext {
   getFieldWarning(name: NamePath): readonly string[];
   getFieldMeta(name: NamePath): Pick<FormFieldMeta, 'touched' | 'validating'> | undefined;
   isFieldRequired(name: NamePath): boolean;
+  hasRequiredRules(rules: readonly FormRule[]): boolean;
   touchField(name: NamePath): void;
   registerField?(field: FormFieldRegistration): (() => void) | undefined;
   markFieldMounted(mountKey: symbol): void;

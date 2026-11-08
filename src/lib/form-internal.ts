@@ -1,12 +1,12 @@
 import type { NamePath } from './form-store.engine';
-import type { ValidationRule } from './validation.engine';
+import type { FormRule } from './validation.engine';
 import type { FormFieldMeta } from './form.model.svelte';
 
 export interface FormFieldRegistration {
   readonly name: NamePath;
   // Symbol сохраняет identity, когда registration хранится внутри Svelte proxy.
   readonly mountKey?: symbol;
-  readonly rules?: readonly ValidationRule[];
+  readonly rules?: readonly FormRule[];
   readonly validateFirst?: boolean | 'parallel';
   readonly validateDebounce?: number;
   readonly isList?: boolean;

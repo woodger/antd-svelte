@@ -9,6 +9,11 @@
 
 ### Added
 
+- FormRule поддерживает фабрики `(form) => rule` в createForm и FormItem.
+  Они получают текущую модель, вычисляют required/constraints перед проверкой
+  и фиксируют настройки до debounce. Сохранены object rules и native validator API;
+  required mark работает при SSR, исключение фабрики не оставляет validating.
+
 - Rule.type дополнен enum/email/url/hex/tel/pattern, pattern принимает строку или
   RegExp. Сохранены строгий enum, readonly choices и caller RegExp state.
   Исправлены четыре исходные ошибки URL IPv6/ports; malformed pattern даёт

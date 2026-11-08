@@ -9864,6 +9864,36 @@ pattern объявлен как RegExp. Документация Form отсыл
 async-validator; неизменённый UMD принимает any/pattern и строковый pattern.
 Svelte публикует проверенный runtime API; эта разница исходных типов записана в reference.
 
+`FormRule` принимает объект ValidationRule или ValidationRuleFactory — чистую
+функцию `(form) => rule`. Фабрики работают в createForm.rules и FormItem.rules.
+Аргументом служит текущая native модель с getFieldValue/getFieldsValue и остальным
+публичным API. Функция вычисляется заново перед каждой проверкой, до debounce;
+возвращённые настройки фиксируются для этого запуска. Getters значений/errors/touched
+сами по себе фабрики не запускают. IsFieldRequired и отметка required вычисляют их
+отдельно, включая SSR; warningOnly не делает control обязательным.
+
+```ts
+const form = createForm({
+  initialValues: { password: '', confirmation: '' },
+  rules: {
+    confirmation: [form => {
+      const password = form.getFieldValue('password');
+      return { validator: value => value === password ? undefined : 'Пароли различаются.' };
+    }]
+  }
+});
+```
+
+Фабрика должна возвращать объект правила и не менять форму. Без ближайшего Form
+локальная factory не используется для required; standalone Item сохраняет explicit
+required и object rules. Исключение фабрики при validateFields отклоняет Promise
+и снимает validating; следующий запрос может повторить проверку. Прежние native
+validator(value, values), setters/touched, reset и правила без фабрик сохранены.
+Сверка: [14 исходных состояний](./tests/browser/fixtures/ant-design-form-rule-factories-reference.json),
+[модель и debounce](./src/lib/form-rule-factories.test.ts),
+[браузер](./tests/browser/form-rule-factories.spec.ts),
+[публичные типы и SSR](./tests/package/form-rule-factories.ssr.test.ts), `?fixture=form-rule-factories`.
+
 `ValidationRule.transform(value)` синхронно преобразует вход только для своего
 правила, до required/min/max/pattern и validator. Другие правила получают исходное
 значение. Возвращённый результат не записывается в модель, native FormData, submit payload или

@@ -6,7 +6,7 @@
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
   import { formNamePath, type NamePath } from './form-store.engine';
-  import type { ValidationRule } from './validation.engine';
+  import type { FormRule } from './validation.engine';
   import { useFormList } from './form-list-context';
   import { captureFormControlResetFocus, captureFormResetFocus } from './form-reset.dom';
   import { getFormFieldElement } from './form-field.dom';
@@ -60,7 +60,7 @@
     /** Управляет добавленным colon; true имеет приоритет и над Form.colon=false. */
     colon?: boolean;
     /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
-    rules?: readonly ValidationRule[];
+    rules?: readonly FormRule[];
     /**
      * False по умолчанию собирает все сообщения параллельно, true останавливает правила
      * последовательно, 'parallel' выбирает первую завершившуюся ошибку.
@@ -147,7 +147,9 @@
   }) ?? (!hasLayout ? parentStatus.status : undefined));
   let isRequired = $derived(required
     ?? (hasName && (rules
-      ? rules.some((rule) => rule.required && !rule.warningOnly) : form?.isFieldRequired(path)))
+      ? form?.hasRequiredRules(rules) ?? rules.some((rule) =>
+        typeof rule !== 'function' && rule.required && !rule.warningOnly)
+      : form?.isFieldRequired(path)))
     ?? false);
   let hasHelp = $derived(help !== undefined && help !== null && help !== false && help !== '');
   const reportedFields = new Set<FormItemMessages>();

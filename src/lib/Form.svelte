@@ -7,7 +7,7 @@
   import { provideFormList } from './form-list-context';
   import { provideFormItemStatus, useFormItemStatusContext } from './form-item-status';
   import type { FormProps, FormSemanticSlots } from './form.types';
-  import type { FormValues } from './validation.engine';
+  import { resolveValidationRules, type FormValues } from './validation.engine';
   import { mergeComponentSemantics } from './semantic-style.engine';
 
   let props: FormProps<Values> = $props();
@@ -125,6 +125,8 @@
       };
     },
     isFieldRequired: (name) => form.isFieldRequired(name),
+    hasRequiredRules: rules => resolveValidationRules(rules, form)
+      .some(rule => rule.required && !rule.warningOnly),
     touchField: (name) => form.touchField(name),
     registerField: (field) => getFormHooks(form)?.registerField(field),
     markFieldMounted: (mountKey) => getFormHooks(form)?.markFieldMounted(mountKey),

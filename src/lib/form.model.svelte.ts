@@ -18,10 +18,12 @@ import {
 } from './form-store.engine';
 import {
   validateFieldValue,
+  resolveValidationRules,
   type FieldError,
   type FieldErrors,
   type FormRules,
-  type FormValues
+  type FormValues,
+  type ValidationRule
 } from './validation.engine';
 
 export type SubmissionResult<Values extends FormValues> =
@@ -424,7 +426,16 @@ export function createForm<Values extends FormValues>({
     const results = await Promise.all(entries.map(async ({ field, path, hasRules, delay }) => {
       if (!hasRules) return { name: path, errors: [], warnings: [] };
 
-      const rules = fieldRules(field);
+      let rules: readonly ValidationRule<Values>[];
+      try {
+        rules = resolveValidationRules(fieldRules(field), form);
+      } catch (error) {
+        if (!validateOnly && field.run === token) {
+          field.validating = false;
+          notifyFieldMeta(field);
+        }
+        throw error;
+      }
       const validateFirst = field.registration?.validateFirst;
       if (delay) {
         const elapsed = await delayValidation(field, delay);
@@ -591,7 +602,8 @@ export function createForm<Values extends FormValues>({
     isFieldRequired: (name) => {
       const field = findField(name);
 
-      return field ? fieldRules(field).some((rule) => rule.required && !rule.warningOnly) : false;
+      return field ? resolveValidationRules(fieldRules(field), form)
+        .some((rule) => rule.required && !rule.warningOnly) : false;
     },
     setFieldValue(name, value) {
       if (Object.is(getFormValue(values, name), value)) {

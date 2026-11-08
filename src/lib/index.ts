@@ -782,6 +782,8 @@ export type {
 export type {
   ValidationRule,
   ValidationRuleType,
+  ValidationRuleFactory,
+  FormRule,
   FormRules,
   FieldErrors,
   FormValue,

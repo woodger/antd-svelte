@@ -1,0 +1,315 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after validation"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "required-enabled",
+        "mode": "required",
+        "value": "",
+        "enabled": true
+      },
+      "phase": "initial",
+      "valid": false,
+      "errors": [
+        "Required"
+      ],
+      "warnings": [],
+      "required": true,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true
+      },
+      "store": ""
+    },
+    {
+      "sample": {
+        "id": "required-disabled",
+        "mode": "required",
+        "value": "",
+        "enabled": false
+      },
+      "phase": "initial",
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true
+      },
+      "store": ""
+    },
+    {
+      "sample": {
+        "id": "required-warning",
+        "mode": "required",
+        "value": "",
+        "enabled": true,
+        "warning": true
+      },
+      "phase": "initial",
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Required"
+      ],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true
+      },
+      "store": ""
+    },
+    {
+      "sample": {
+        "id": "minimum-valid",
+        "mode": "min",
+        "value": "ab",
+        "minimum": 2
+      },
+      "phase": "initial",
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true,
+        "minimum": 2
+      },
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "minimum-invalid",
+        "mode": "min",
+        "value": "ab",
+        "minimum": 3
+      },
+      "phase": "initial",
+      "valid": false,
+      "errors": [
+        "Minimum"
+      ],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true,
+        "minimum": 3
+      },
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "enum-number",
+        "mode": "enum",
+        "value": 0
+      },
+      "phase": "initial",
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true
+      },
+      "store": 0
+    },
+    {
+      "sample": {
+        "id": "enum-string",
+        "mode": "enum",
+        "value": "0"
+      },
+      "phase": "initial",
+      "valid": false,
+      "errors": [
+        "Choice"
+      ],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true
+      },
+      "store": "0"
+    },
+    {
+      "sample": {
+        "id": "compare-valid",
+        "mode": "compare",
+        "value": "abc",
+        "other": "abc"
+      },
+      "phase": "initial",
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true
+      },
+      "store": "abc"
+    },
+    {
+      "sample": {
+        "id": "compare-invalid",
+        "mode": "compare",
+        "value": "abc",
+        "other": "other"
+      },
+      "phase": "initial",
+      "valid": false,
+      "errors": [
+        "Mismatch"
+      ],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true
+      },
+      "store": "abc"
+    },
+    {
+      "sample": {
+        "id": "transformed",
+        "mode": "transform",
+        "value": " abc "
+      },
+      "phase": "initial",
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true
+      },
+      "store": " abc "
+    },
+    {
+      "sample": {
+        "id": "mixed",
+        "mode": "min",
+        "value": "ab",
+        "minimum": 3,
+        "plain": true
+      },
+      "phase": "initial",
+      "valid": false,
+      "errors": [
+        "Minimum",
+        "Plain"
+      ],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true,
+        "minimum": 3
+      },
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "mixed-first",
+        "mode": "min",
+        "value": "ab",
+        "minimum": 3,
+        "plain": true,
+        "first": true
+      },
+      "phase": "initial",
+      "valid": false,
+      "errors": [
+        "Minimum"
+      ],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true,
+        "minimum": 3
+      },
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "updated-minimum",
+        "mode": "min",
+        "value": "ab",
+        "minimum": 2
+      },
+      "phase": "initial",
+      "valid": true,
+      "errors": [],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true,
+        "minimum": 2
+      },
+      "store": "ab"
+    },
+    {
+      "sample": {
+        "id": "updated-minimum",
+        "mode": "min",
+        "value": "ab",
+        "minimum": 2
+      },
+      "phase": "updated",
+      "valid": false,
+      "errors": [
+        "Minimum"
+      ],
+      "warnings": [],
+      "required": false,
+      "factory": {
+        "sameInstance": false,
+        "hasGetFieldValue": true,
+        "hasValidateFields": true,
+        "hasScrollToField": true,
+        "minimum": 3
+      },
+      "store": "ab"
+    }
+  ]
+}

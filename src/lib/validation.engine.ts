@@ -2,6 +2,7 @@ import {
   matchesValidationType, normalizeValidationType, type ValidationRuleType
 } from './validation-type.engine';
 import { matchesValidationPattern } from './validation-format.engine';
+import type { FormInstance } from './form.model.svelte';
 export type { ValidationRuleType } from './validation-type.engine';
 
 /** Значение поля может быть скаляром, вложенным контейнером или экземпляром класса. */
@@ -34,9 +35,25 @@ export interface ValidationRule<Values extends FormValues = FormValues> {
   ) => string | void | Promise<string | void>;
 }
 
+/** Чистая фабрика настроек получает текущую модель формы; вызывается до проверки правил. */
+export type ValidationRuleFactory<Values extends FormValues = FormValues> =
+  (form: FormInstance<Values>) => ValidationRule<Values>;
+
+export type FormRule<Values extends FormValues = FormValues> =
+  ValidationRule<Values> | ValidationRuleFactory<Values>;
+
 export type FormRules<Values extends FormValues> = Partial<
-  Record<FieldName<Values>, readonly ValidationRule<Values>[]>
+  Record<FieldName<Values>, readonly FormRule<Values>[]>
 >;
+
+export function resolveValidationRules<Values extends FormValues>(
+  rules: readonly FormRule<Values>[], form: FormInstance<Values>
+): readonly ValidationRule<Values>[] {
+  // Object-only arrays сохраняют прежнюю identity и capture semantics.
+  if (rules.every(rule => typeof rule !== 'function')) return rules;
+
+  return rules.map(rule => typeof rule === 'function' ? rule(form) : rule);
+}
 
 export type FieldErrors<Values extends FormValues> = Partial<Record<FieldName<Values>, string[]>>;
 
