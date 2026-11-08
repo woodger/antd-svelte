@@ -5057,7 +5057,12 @@
         "tests/browser/form-nameless-metrics.ts",
         "tests/browser/fixtures/FormNamelessFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-nameless-reference.json",
-        "tests/package/form-nameless.ssr.test.ts"
+        "tests/package/form-nameless.ssr.test.ts",
+        "tests/browser/form-disabled.spec.ts",
+        "tests/browser/form-disabled-metrics.ts",
+        "tests/browser/fixtures/FormDisabledFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-disabled-reference.json",
+        "tests/package/form-disabled.ssr.test.ts"
       ],
       "features": [
         {
@@ -5751,6 +5756,23 @@
             "tests/package/form-nameless.ssr.test.ts"
           ],
           "note": "FormItem.name стал optional; undefined/null runtime означают отсутствие binding, непустые/пустые допустимые NamePath по-прежнему считаются именованными. В nameless режиме layout/labels/columns/help/extra/theme и Form disabled/size/variant сохраняются, local rules игнорируются, errors/required/status/id/name/description/ref model-поля не передаются controls. Required управляет только mark; htmlFor и owner input id сохраняют явную label association. Вычисление и регистрация model name/prefix/rules выполняются только для hasName; NoFormItemBinding очищает контекст и сохраняет Form settings. Именованный layout получает прежний reactive FieldContext через приватный FormItemBinding, getters продолжают читать props/model. Смена hasName переключает render branch и пересоздаёт control, как source; name→name сохраняет прежний lifecycle. Reset модели не пересоздаёт unbound local draft и сохраняет focus/selection/DOM. Восемь UMD-состояний подтверждают отсутствие attributes/binding, ignored rules, визуальный required, manual htmlFor, disabled/small/filled, отдельный named reference; raw named id/name отличаются по согласованным native Svelte/FormData контрактам, они сохранены. Source reset и обе ownership transitions проверяются по node identity, value/store/bindings/ref. Публичные optional types и SSR не требуют DOM. NoStyle, dependencies, initialValue, feedback и остальные Field API остаются отдельными пробелами."
+        },
+        {
+          "id": "disabled-context",
+          "title": "Form.disabled: ближайший provider и controls без FormItem",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Form.svelte",
+            "src/lib/form-context.ts",
+            "src/lib/form.types.ts",
+            "tests/browser/form-disabled.spec.ts",
+            "tests/browser/form-disabled-metrics.ts",
+            "tests/browser/fixtures/FormDisabledFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-disabled-reference.json",
+            "tests/package/form-disabled.ssr.test.ts"
+          ],
+          "note": "Form передаёт disabled через reactive ConfigContext, включая controls без FormItem; undefined наследует ближайший Form/ConfigProvider, false разрешает controls поверх внешнего true. Вложенный ConfigProvider.componentDisabled переопределяет Form для своего поддерева, локальный prop control приоритетнее. Приватные useForm/useFormField читают disabled текущего ConfigContext вместо захваченного внешнего; отдельный submitting getter сохраняет прежнюю блокировку связанных controls и Form-aware widgets при async onFinish. Настройки соседей и остальные getters/регистрация/metadata не меняются. Двенадцать неизменённых UMD-состояний фиксируют defaults, global/Form true/false, nested Form, child ConfigProvider и local props для свободных/связанных Input, Select, Button и Tag. Динамическая смена сохраняет DOM/input selection/value и выбранную option; native submitting и explicit disabled=false проверяются отдельно. Публичный пакет рендерит disabled scope при SSR без DOM. Полный Form API и остальные Field возможности остаются отдельными пробелами."
         }
       ]
     },

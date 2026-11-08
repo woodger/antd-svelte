@@ -9402,6 +9402,17 @@ focus/selection, metadata и native FormData.
 [браузер](./tests/browser/form-size.spec.ts),
 [публичные типы и SSR](./tests/package/form-size.ssr.test.ts), `?fixture=form-size`.
 
+`Form.disabled` передаётся всем дочерним Ant Design controls, включая компоненты
+без FormItem. Undefined наследует ConfigProvider или внешний Form; false разрешает
+controls поверх внешнего disabled=true. Вложенный ConfigProvider.componentDisabled
+переопределяет Form для своего поддерева; локальный disabled компонента приоритетнее.
+Переключение сохраняет DOM, значения, выделение текста и выбранные options.
+Прежняя блокировка связанного control на время async onFinish сохраняется отдельно;
+явный disabled=false компонента по-прежнему разрешает его.
+Сверка: [12 эталонов](./tests/browser/fixtures/ant-design-form-disabled-reference.json),
+[браузер](./tests/browser/form-disabled.spec.ts),
+[публичный пакет и SSR](./tests/package/form-disabled.ssr.test.ts), `?fixture=form-disabled`.
+
 `Form.colon`, `labelAlign` и `labelWrap` наследуют defaults из `ConfigProvider.form`.
 При отсутствии настройки colon включён, labelAlign равен right, labelWrap — false.
 Локальные FormItem.colon/labelAlign имеют приоритет над Form; true включает colon

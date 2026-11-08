@@ -1,0 +1,261 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after render"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "default"
+      },
+      "metrics": {
+        "free": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        },
+        "field": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "form-disabled",
+        "disabled": true
+      },
+      "metrics": {
+        "free": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        },
+        "field": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "form-enabled-over-config",
+        "global": true,
+        "disabled": false
+      },
+      "metrics": {
+        "free": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        },
+        "field": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "form-disabled-over-config",
+        "global": false,
+        "disabled": true
+      },
+      "metrics": {
+        "free": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        },
+        "field": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "config-inherit",
+        "global": true
+      },
+      "metrics": {
+        "free": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        },
+        "field": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-inherit",
+        "disabled": true,
+        "nested": true
+      },
+      "metrics": {
+        "free": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        },
+        "field": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-enable",
+        "disabled": true,
+        "nested": true,
+        "nestedDisabled": false
+      },
+      "metrics": {
+        "free": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        },
+        "field": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-disable",
+        "disabled": false,
+        "nested": true,
+        "nestedDisabled": true
+      },
+      "metrics": {
+        "free": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        },
+        "field": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "child-config-enable",
+        "disabled": true,
+        "child": false
+      },
+      "metrics": {
+        "free": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        },
+        "field": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "child-config-disable",
+        "disabled": false,
+        "child": true
+      },
+      "metrics": {
+        "free": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        },
+        "field": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "local-enable",
+        "disabled": true,
+        "local": false
+      },
+      "metrics": {
+        "free": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        },
+        "field": {
+          "input": false,
+          "select": false,
+          "button": false,
+          "tag": false
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "local-disable",
+        "disabled": false,
+        "local": true
+      },
+      "metrics": {
+        "free": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        },
+        "field": {
+          "input": true,
+          "select": true,
+          "button": true,
+          "tag": true
+        }
+      }
+    }
+  ]
+}

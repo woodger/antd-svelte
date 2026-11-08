@@ -4,10 +4,12 @@ import type { FormRequiredMark, FormSemanticSlots, FormTooltipProps } from './fo
 import type { ColProps } from './grid.types';
 import type { NamePath } from './form-store.engine';
 import type { Variant } from './types';
+import { useConfig } from './config-context';
 
 export interface FormContext {
   readonly variant?: Variant;
   readonly disabled: boolean;
+  readonly submitting: boolean;
   readonly layout: 'vertical' | 'horizontal' | 'inline';
   readonly colon?: boolean;
   readonly labelAlign?: 'left' | 'right';
@@ -51,7 +53,16 @@ export function provideForm(form: FormContext) {
 }
 
 export function useForm(): FormContext | undefined {
-  return getContext(formKey);
+  const parent = getContext<FormContext | undefined>(formKey);
+  if (!parent) return;
+
+  const config = useConfig();
+  const form: FormContext = Object.create(parent, {
+    // Source DisabledContext следует ближайшему provider; native submitting остаётся отдельным.
+    disabled: { get: () => config.componentDisabled || parent.submitting }
+  });
+
+  return form;
 }
 
 export function provideFormField(field: FormFieldContext | undefined) {
@@ -59,7 +70,12 @@ export function provideFormField(field: FormFieldContext | undefined) {
 }
 
 export function useFormField(getInstance?: () => unknown): FormFieldContext | undefined {
-  const field = getContext<FormFieldContext | undefined>(fieldKey);
+  const parent = getContext<FormFieldContext | undefined>(fieldKey);
+  const config = useConfig();
+  const form = useForm();
+  const field: FormFieldContext | undefined = parent ? Object.create(parent, {
+    disabled: { get: () => config.componentDisabled || form?.submitting }
+  }) : undefined;
   if (field?.registerControl && getInstance) {
     // Порядок определяется деревом компонентов, а не порядком mount дочерних controls.
     let mounted = false;

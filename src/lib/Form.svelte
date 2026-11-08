@@ -59,10 +59,11 @@
 
   provideFormList(undefined);
 
-  // Form меняет только SizeContext; остальные reactive defaults сохраняют своего владельца.
+  // Form передаёт SizeContext/DisabledContext; остальные reactive defaults сохраняют владельца.
   const fieldConfig: ConfigContext = Object.create(config, {
     componentSize: { get: () => size ?? config.componentSize },
-    explicitComponentSize: { get: () => resolvedSize }
+    explicitComponentSize: { get: () => resolvedSize },
+    componentDisabled: { get: () => disabled ?? config.componentDisabled }
   });
   provideConfig(fieldConfig);
 
@@ -72,6 +73,9 @@
     },
     get disabled() {
       return (disabled ?? config.componentDisabled) || form.isSubmitting;
+    },
+    get submitting() {
+      return form.isSubmitting;
     },
     get layout() {
       return layout;

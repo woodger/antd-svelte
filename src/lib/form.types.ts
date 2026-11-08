@@ -89,6 +89,7 @@ export interface FormProps<Values extends FormValues> extends Omit<
   tooltip?: FormTooltipProps;
   /** По умолчанию form; false оставляет контекст без native wrapper и DOM-атрибутов. */
   component?: 'form' | false;
+  /** Defaults disabled для дочерних controls; ближайший ConfigProvider и prop control приоритетнее. */
   disabled?: boolean;
   /** Вызывается после успешной validation; Promise удерживает submitting до завершения. */
   onFinish?: (values: Values) => void | Promise<void>;

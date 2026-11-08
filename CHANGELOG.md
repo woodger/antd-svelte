@@ -1043,6 +1043,10 @@
 
 ### Fixed
 
+- Form: disabled распространяется на controls без FormItem; вложенный
+  ConfigProvider и явный prop control сохраняют исходный приоритет.
+  Значения, выделение и прежняя блокировка при отправке сохранены.
+
 - FormItem: controls в label/extra/tooltip не наследуют binding основного поля.
   Убраны дубли id/name, лишние required/error ARIA и влияние helper blur на touched;
   getFieldInstance возвращает основной control. Настройки Form и явные props сохранены.
