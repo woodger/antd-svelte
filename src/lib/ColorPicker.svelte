@@ -295,6 +295,8 @@
     <button {...attributes} type="button" disabled={disabled} id={props.id ?? field?.id}
       data-ant-color-theme={config.theme.mode} data-ant-color-primary={config.theme.primary}
       aria-label={props['aria-label'] ?? field?.label ?? 'Color picker'}
+      aria-labelledby={props['aria-labelledby']
+        ?? (props['aria-label'] != null ? undefined : field?.labelledBy)}
       aria-haspopup="dialog" aria-expanded={open} aria-controls={`ant-color-picker-${id}`}
       aria-describedby={props['aria-describedby'] ?? field?.describedBy}
       onblur={event => {

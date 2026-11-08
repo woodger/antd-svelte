@@ -162,7 +162,9 @@
     ? 100 - percentage
     : percentage);
   let trackStart = $derived(direction === 'rtl' || direction === 'btt' ? 100 - percentage : 0);
-  let labelledBy = $derived(indexed(ariaLabelledByForHandle) ?? attributes['aria-labelledby']);
+  let labelledBy = $derived(indexed(ariaLabelledByForHandle) ?? attributes['aria-labelledby']
+    ?? (indexed(ariaLabelForHandle) != null || attributes['aria-label'] != null
+      ? undefined : field?.labelledBy));
   let configuredTooltipOpen = $derived(tooltip === false ? false : tooltip?.open);
   let tooltipState = $derived(
     { ownerOpen: configuredTooltipOpen, disabled: resolvedDisabled, dismissed: false }

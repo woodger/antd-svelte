@@ -19,8 +19,8 @@
   export interface FormItemProps {
     /** Буквальный ключ либо путь от ближайшего FormList; строка с точкой остаётся одним ключом. */
     name: NamePath;
-    /** Undefined/'' убирают label; null также выравнивает control по Form.labelCol. */
-    label?: string | null;
+    /** Текст/число/массив/Snippet; false/null/undefined/'' скрывают label, null сохраняет offset. */
+    label?: RenderEmptyContent;
     children: Snippet;
     help?: string;
     /** Постоянное пояснение рядом с errors/warnings; false/null/undefined/'' скрывают его. */
@@ -93,8 +93,11 @@
   }));
   let computedColon = $derived(colon === true || form?.colon !== false && colon !== false);
   let haveColon = $derived(resolvedLayout !== 'vertical' && computedColon);
-  let hasLabel = $derived(label !== undefined && label !== null && label !== '');
-  let labelText = $derived(haveColon && label?.trim() ? label.replace(/[:：]\s*$/, '') : label ?? '');
+  let hasLabel = $derived(label !== undefined && label !== null && label !== false && label !== '');
+  let labelContent = $derived(typeof label === 'string' && haveColon && label.trim()
+    ? label.replace(/[:：]\s*$/, '') : label);
+  let labelledBy = $derived(hasLabel && typeof label !== 'string' && typeof label !== 'number'
+    ? `${id}_label` : undefined);
   let requiredMark = $derived(form?.requiredMark ?? true);
   let optionalText = $derived(config.locale.Form?.optional || enUS.Form.optional);
   let errors = $derived(form?.getFieldError(path) ?? []);
@@ -157,7 +160,10 @@
       return path.map(String).join('_');
     },
     get label() {
-      return label ?? undefined;
+      return typeof label === 'string' || typeof label === 'number' ? String(label) : undefined;
+    },
+    get labelledBy() {
+      return labelledBy;
     },
     get disabled() {
       return form?.disabled;
@@ -214,17 +220,19 @@
         form?.labelWrap === true && 'ant-form-item-label-wrap',
         resolvedLabelCol?.class
       ].filter(Boolean).join(' ')}>
-        <label for={id} class:ant-form-item-required={isRequired}
+        <label for={id} id={labelledBy} class:ant-form-item-required={isRequired}
           class:ant-form-item-required-mark-hidden={requiredMark === false}
           class:ant-form-item-required-mark-optional={requiredMark === 'optional'
             || typeof requiredMark === 'function'}
           class:ant-form-item-no-colon={!computedColon}
-          title={label} use:focusGroupLabel>
-          {#if typeof requiredMark === 'function'}
-            {@render requiredMark(labelText, { required: isRequired })}
-          {:else}
-            {labelText}{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
-          {/if}
+          title={typeof label === 'string' ? label : undefined} use:focusGroupLabel>
+          {#key resetKey}
+            {#if typeof requiredMark === 'function'}
+              {@render requiredMark(labelContent, { required: isRequired })}
+            {:else}
+              <RenderContent value={labelContent} />{#if requiredMark === 'optional' && !isRequired}<span class="ant-form-item-optional">{optionalText}</span>{/if}
+            {/if}
+          {/key}
         </label>
       </Col>
     {/if}

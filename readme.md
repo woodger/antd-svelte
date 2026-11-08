@@ -9381,20 +9381,20 @@ span/offset/order/push/pull/flex, responsive размеры, class и строк
 внутри controls, остальные настройки и модель остаются реактивными. Локальные
 колонки вложенного Item применяются заново; вложенный Form использует свои defaults.
 Переключения сохраняют control, values/metadata и focus/selection.
-Label принимает необязательную строку или null; выравнивание null описано ниже.
+Label принимает RenderEmptyContent; выравнивание null описано ниже.
 Проверены приоритеты, сбросы, стили, скрытие span=0, RTL, три layouts и границы
 576/768/992px: [42 эталона](./tests/browser/fixtures/ant-design-form-columns-reference.json),
 [браузер](./tests/browser/form-columns.spec.ts),
 [публичные типы и SSR](./tests/package/form-columns.ssr.test.ts), `?fixture=form-columns`.
 
-`FormItem.label` можно опустить. Undefined и пустая строка не создают label;
+`FormItem.label` можно опустить. Undefined, false и пустая строка не создают label;
 строка из пробелов сохраняет контейнер, как upstream. Null также убирает label,
 но добавляет wrapper offset из Form.labelCol для span меньше 24, включая 0.
 Явные local labelCol/wrapperCol, даже {}, отключают этот расчёт. Существующий
 offset, включая 0 и undefined, не заменяется; responsive offsets независимы.
 Если видимой подписи нет, задайте control aria-label или aria-labelledby.
 Вставка и удаление подписи сохраняют input, metadata, value, focus/selection,
-native required и validation. Rich labels/Snippets пока не перенесены.
+native required и validation.
 
 У 6.6.8 есть две ошибки расчёта null-label offset: числовой responsive label span
 игнорируется, а числовой wrapper span может потеряться. Они сохранены в
@@ -9404,6 +9404,22 @@ native required и validation. Rich labels/Snippets пока не перенес
 [браузер](./tests/browser/form-label-presence.spec.ts),
 [публичные типы и SSR](./tests/package/form-label-presence.ssr.test.ts),
 `?fixture=form-label-presence`.
+
+Label также принимает числа, вложенные массивы и Svelte snippets. Числовой 0
+отображается; true, пустой массив и пустой opaque snippet сохраняют контейнер.
+Colon удаляется только из строкового label, title также задаётся только для строки.
+RequiredMark snippet получает исходный content после обработки colon и required;
+существующие строковые snippets остаются типосовместимыми для строковых label.
+При новых типах содержимого renderer принимает RenderEmptyContent.
+ResetFields пересоздаёт content подписи вместе с выбранным control, сбрасывая
+локальное состояние вложенных компонентов, как upstream.
+
+RadioGroup, CheckboxGroup, InputOTP, Slider и стандартный trigger ColorPicker
+получают доступное имя из rich label через aria-labelledby. Snippet обновляет имя без замены
+controls; явные aria-label/aria-labelledby и handle labels сохраняют приоритет.
+Сверка: [42 эталона и reset](./tests/browser/fixtures/ant-design-form-rich-labels-reference.json),
+[браузер](./tests/browser/form-rich-labels.spec.ts),
+[публичные типы и SSR](./tests/package/form-rich-labels.ssr.test.ts), `?fixture=form-rich-labels`.
 
 `Form.requiredMark` наследует ConfigProvider.form.requiredMark, затем true.
 False скрывает звёздочку, 'optional' помечает необязательные поля, Svelte snippet

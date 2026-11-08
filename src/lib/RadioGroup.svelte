@@ -187,6 +187,8 @@
       ?? (attributes['aria-labelledby']
         ? undefined
         : field?.label)}
+  aria-labelledby={attributes['aria-labelledby']
+    ?? (attributes['aria-label'] != null ? undefined : field?.labelledBy)}
   aria-required={resolvedRequired || undefined}
   aria-invalid={field?.status === 'error' || ariaInvalid || undefined}
   aria-orientation={resolvedOrientation}

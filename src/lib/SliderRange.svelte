@@ -531,7 +531,9 @@
         tabindex={tabIndex(index)}
         aria-label={indexed(props.ariaLabelForHandle, index) ?? props['aria-label']
           ?? (props['aria-labelledby'] ? undefined : field?.label)}
-        aria-labelledby={indexed(props.ariaLabelledByForHandle, index) ?? props['aria-labelledby']}
+        aria-labelledby={indexed(props.ariaLabelledByForHandle, index) ?? props['aria-labelledby']
+          ?? (indexed(props.ariaLabelForHandle, index) != null || props['aria-label'] != null
+            ? undefined : field?.labelledBy)}
         aria-required={props.ariaRequired ?? props['aria-required']}
         aria-valuemin={minimum} aria-valuemax={maximum} aria-valuenow={point}
         aria-valuetext={indexed(props.ariaValueTextFormatterForHandle, index)?.(point) ?? props['aria-valuetext']}

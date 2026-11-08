@@ -135,6 +135,10 @@
 
 ### Added
 
+- FormItem: label с числами, массивами и Svelte snippets; исходные renderability,
+  title/colon и аргументы requiredMark. Reset сбрасывает локальный content label,
+  rich label именует composite controls с сохранением пользовательских ARIA.
+
 - FormItem: необязательная текстовая label и label=null с исходным выравниванием
   controls по колонкам Form. Сохранены explicit offsets и native validation;
   числовой responsive shorthand сохраняет span/offset вместо ошибок upstream.

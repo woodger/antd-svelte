@@ -1,0 +1,1244 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "two animation frames before capture",
+    "normalization": "React elements and native Svelte snippets use rich kind; array/scalar kind unchanged"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "text-default",
+        "kind": "text",
+        "mark": "default",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "Name:",
+          "title": "Name:",
+          "noColon": false,
+          "required": true,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "text-optional",
+        "kind": "text",
+        "mark": "optional",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "Name:",
+          "title": "Name:",
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "text-custom",
+        "kind": "text",
+        "mark": "custom",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "Name:!",
+          "title": "Name:",
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": "string",
+          "rendererRequired": "true",
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "zero-default",
+        "kind": "zero",
+        "mark": "default",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "0",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "zero-optional",
+        "kind": "zero",
+        "mark": "optional",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "0(optional)",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "zero-custom",
+        "kind": "zero",
+        "mark": "custom",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "0!",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": "number",
+          "rendererRequired": "false",
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "number-default",
+        "kind": "number",
+        "mark": "default",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "12",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "number-optional",
+        "kind": "number",
+        "mark": "optional",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "12",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "number-custom",
+        "kind": "number",
+        "mark": "custom",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "12!",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": "number",
+          "rendererRequired": "true",
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "true-default",
+        "kind": "true",
+        "mark": "default",
+        "required": false,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "true-optional",
+        "kind": "true",
+        "mark": "optional",
+        "required": false,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "(optional)",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "true-custom",
+        "kind": "true",
+        "mark": "custom",
+        "required": false,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "!",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": "boolean",
+          "rendererRequired": "false",
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "false-default",
+        "kind": "false",
+        "mark": "default",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "false-optional",
+        "kind": "false",
+        "mark": "optional",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "false-custom",
+        "kind": "false",
+        "mark": "custom",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "missing-default",
+        "kind": "missing",
+        "mark": "default",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "missing-optional",
+        "kind": "missing",
+        "mark": "optional",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "missing-custom",
+        "kind": "missing",
+        "mark": "custom",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "null-default",
+        "kind": "null",
+        "mark": "default",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "null-optional",
+        "kind": "null",
+        "mark": "optional",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "null-custom",
+        "kind": "null",
+        "mark": "custom",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-default",
+        "kind": "empty",
+        "mark": "default",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-optional",
+        "kind": "empty",
+        "mark": "optional",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-custom",
+        "kind": "empty",
+        "mark": "custom",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": null,
+        "input": {
+          "value": "Alpha",
+          "associated": 0
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "space-default",
+        "kind": "space",
+        "mark": "default",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": " ",
+          "title": " ",
+          "noColon": false,
+          "required": true,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "space-optional",
+        "kind": "space",
+        "mark": "optional",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": " ",
+          "title": " ",
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "space-custom",
+        "kind": "space",
+        "mark": "custom",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": " !",
+          "title": " ",
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": "string",
+          "rendererRequired": "true",
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "array-default",
+        "kind": "array",
+        "mark": "default",
+        "required": false,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "array-optional",
+        "kind": "array",
+        "mark": "optional",
+        "required": false,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "(optional)",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "array-custom",
+        "kind": "array",
+        "mark": "custom",
+        "required": false,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "!",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": "array",
+          "rendererRequired": "false",
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-default",
+        "kind": "nested",
+        "mark": "default",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "0Name:",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-optional",
+        "kind": "nested",
+        "mark": "optional",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "0Name:",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "nested-custom",
+        "kind": "nested",
+        "mark": "custom",
+        "required": true,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "0Name:!",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": "array",
+          "rendererRequired": "true",
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rich-default",
+        "kind": "rich",
+        "mark": "default",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "Rich name:",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": "Rich name:",
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rich-optional",
+        "kind": "rich",
+        "mark": "optional",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "Rich name:(optional)",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": "Rich name:",
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rich-custom",
+        "kind": "rich",
+        "mark": "custom",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "Rich name:!",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": "rich",
+          "rendererRequired": "false",
+          "strong": "Rich name:",
+          "em": null,
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-rich-default",
+        "kind": "empty-rich",
+        "mark": "default",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-rich-optional",
+        "kind": "empty-rich",
+        "mark": "optional",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "empty-rich-custom",
+        "kind": "empty-rich",
+        "mark": "custom",
+        "required": true,
+        "layout": "vertical"
+      },
+      "metrics": {
+        "label": {
+          "text": "!",
+          "title": null,
+          "noColon": false,
+          "required": true,
+          "optional": true,
+          "kind": "rich",
+          "rendererRequired": "true",
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "22px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rich-array-default",
+        "kind": "rich-array",
+        "mark": "default",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "Name rich0",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": "rich",
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rich-array-optional",
+        "kind": "rich-array",
+        "mark": "optional",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "Name rich0(optional)",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": "rich",
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "sample": {
+        "id": "rich-array-custom",
+        "kind": "rich-array",
+        "mark": "custom",
+        "required": false,
+        "layout": "horizontal"
+      },
+      "metrics": {
+        "label": {
+          "text": "Name rich0!",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": true,
+          "kind": "array",
+          "rendererRequired": "false",
+          "strong": null,
+          "em": "rich",
+          "css": {
+            "height": "32px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": null
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    }
+  ],
+  "lifecycle": [
+    {
+      "phase": "initial",
+      "metrics": {
+        "label": {
+          "text": "Counter 0",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "28px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": "Counter 0"
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "phase": "clicked",
+      "metrics": {
+        "label": {
+          "text": "Counter 1",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "28px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": "Counter 1"
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    },
+    {
+      "phase": "reset",
+      "metrics": {
+        "label": {
+          "text": "Counter 0",
+          "title": null,
+          "noColon": false,
+          "required": false,
+          "optional": false,
+          "kind": null,
+          "rendererRequired": null,
+          "strong": null,
+          "em": null,
+          "css": {
+            "height": "28px",
+            "fontSize": "14px",
+            "color": "rgba(0, 0, 0, 0.88)"
+          },
+          "counter": "Counter 0"
+        },
+        "input": {
+          "value": "Alpha",
+          "associated": 1
+        }
+      }
+    }
+  ]
+}

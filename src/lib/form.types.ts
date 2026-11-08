@@ -4,7 +4,7 @@ import type { FormValidationError } from './FormValidationError';
 import type { FormInstance } from './form.model.svelte.js';
 import type { ColProps } from './grid.types';
 import type { FormValues } from './validation.engine';
-import type { Variant } from './types';
+import type { RenderEmptyContent, Variant } from './types';
 import type { Options, ScrollAction } from './vendor/compute-scroll-into-view';
 
 /**
@@ -22,9 +22,12 @@ export interface FormRequiredMarkInfo {
   required: boolean;
 }
 
-/** Визуальная отметка label; snippet получает текст после удаления добавленного colon. */
+/**
+ * Визуальная отметка label; snippet получает content после обработки colon.
+ * Bivariant renderer сохраняет совместимость существующих строковых snippets.
+ */
 export type FormRequiredMark = boolean | 'optional'
-  | Snippet<[label: string, info: FormRequiredMarkInfo]>;
+  | { render(label: RenderEmptyContent, info: FormRequiredMarkInfo): ReturnType<Snippet> }['render'];
 
 export interface FormLocale {
   /** Пустая строка использует исходный английский fallback. */

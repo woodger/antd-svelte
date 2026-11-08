@@ -172,6 +172,8 @@
   id={attributes.id ?? field?.id}
   role="group"
   aria-label={attributes['aria-label'] ?? (attributes['aria-labelledby'] ? undefined : field?.label)}
+  aria-labelledby={attributes['aria-labelledby']
+    ?? (attributes['aria-label'] != null ? undefined : field?.labelledBy)}
   data-ant-form-invalid={resolvedStatus === 'error'
     || attributes['aria-invalid'] === true || attributes['aria-invalid'] === 'true' || undefined}
   aria-describedby={[attributes['aria-describedby'], field?.describedBy].filter(Boolean).join(' ') || undefined}

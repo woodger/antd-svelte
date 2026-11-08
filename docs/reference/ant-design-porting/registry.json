@@ -4093,7 +4093,11 @@
         "tests/package/wave.ssr.test.ts",
         "tests/browser/wave.spec.ts",
         "tests/browser/fixtures/WaveFixtures.svelte",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/FormItem.svelte",
+        "src/lib/form-context.ts",
+        "tests/browser/form-rich-labels.spec.ts",
+        "tests/browser/fixtures/FormRichLabelControls.svelte"
       ],
       "features": [
         {
@@ -4104,9 +4108,13 @@
           "evidence": [
             "src/lib/checkbox-group.ssr.test.ts",
             "tests/browser/checkbox-pagination.spec.ts",
-            "tests/browser/checkbox-group.spec.ts"
+            "tests/browser/checkbox-group.spec.ts",
+            "src/lib/FormItem.svelte",
+            "src/lib/form-context.ts",
+            "tests/browser/form-rich-labels.spec.ts",
+            "tests/browser/fixtures/FormRichLabelControls.svelte"
           ],
-          "note": "Checked/defaultChecked, bind:checked/indeterminate/value, typed primitives, native names/FormData/required/FormItem, disabled precedence, captured defaults/reset/canceled reset и внешние формы сохранены. Внешние изменения не вызывают callbacks."
+          "note": "Checked/defaultChecked, bind:checked/indeterminate/value, typed primitives, native names/FormData/required/FormItem, disabled precedence, captured defaults/reset/canceled reset и внешние формы сохранены. Внешние изменения не вызывают callbacks. Rich FormItem label передаёт доступное имя через стабильный aria-labelledby; caption updates, переход к строковой label и explicit ARIA priorities подтверждены Form rich-labels browser fixture. Прежние native roles/controls сохранены."
         },
         {
           "id": "group-children",
@@ -4317,7 +4325,11 @@
         "docs/reference/theme-context.md",
         "tests/browser/config-variants.spec.ts",
         "tests/browser/fixtures/ConfigVariantControls.svelte",
-        "docs/reference/control-variants.md"
+        "docs/reference/control-variants.md",
+        "src/lib/FormItem.svelte",
+        "src/lib/form-context.ts",
+        "tests/browser/form-rich-labels.spec.ts",
+        "tests/browser/fixtures/FormRichLabelControls.svelte"
       ],
       "features": [
         {
@@ -4379,9 +4391,13 @@
           "requiredForV1": false,
           "evidence": [
             "src/lib/color-picker.types.ts",
-            "tests/browser/color-picker.spec.ts"
+            "tests/browser/color-picker.spec.ts",
+            "src/lib/FormItem.svelte",
+            "src/lib/form-context.ts",
+            "tests/browser/form-rich-labels.spec.ts",
+            "tests/browser/fixtures/FormRichLabelControls.svelte"
           ],
-          "note": "Trigger/presets/clear/handler используют native buttons; popup — native popover. ReactNode renderers заменены snippets; внутренний Select сохраняет существующий native combobox. ColorPicker не добавляет скрытое поле FormData, как и исходный control."
+          "note": "Trigger/presets/clear/handler используют native buttons; popup — native popover. ReactNode renderers заменены snippets; внутренний Select сохраняет существующий native combobox. ColorPicker не добавляет скрытое поле FormData, как и исходный control. Rich FormItem label передаёт доступное имя через стабильный aria-labelledby; caption updates, переход к строковой label и explicit ARIA priorities подтверждены Form rich-labels browser fixture. Прежние native roles/controls сохранены."
         },
         {
           "id": "advanced-trigger-theme",
@@ -4969,7 +4985,20 @@
         "tests/browser/form-label-presence.spec.ts",
         "tests/browser/fixtures/FormLabelPresenceFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-label-presence-reference.json",
-        "tests/package/form-label-presence.ssr.test.ts"
+        "tests/package/form-label-presence.ssr.test.ts",
+        "src/lib/RadioGroup.svelte",
+        "src/lib/CheckboxGroup.svelte",
+        "src/lib/InputOTP.svelte",
+        "src/lib/SliderSingle.svelte",
+        "src/lib/SliderRange.svelte",
+        "src/lib/ColorPicker.svelte",
+        "tests/browser/form-rich-labels.spec.ts",
+        "tests/browser/form-rich-labels-metrics.ts",
+        "tests/browser/fixtures/FormRichLabelsFixtures.svelte",
+        "tests/browser/fixtures/FormLabelCounter.svelte",
+        "tests/browser/fixtures/FormRichLabelControls.svelte",
+        "tests/browser/fixtures/ant-design-form-rich-labels-reference.json",
+        "tests/package/form-rich-labels.ssr.test.ts"
       ],
       "features": [
         {
@@ -5420,7 +5449,7 @@
             "tests/browser/fixtures/ant-design-form-required-mark-reference.json",
             "tests/package/form-required-mark.ssr.test.ts"
           ],
-          "note": "Form.requiredMark принимает true/false/optional и Svelte snippet вместо React render function; local prop → ConfigProvider.form → true. False скрывает только звёздочку; optional/custom используют исходные mark classes. Snippet получает строковую label после обработки colon и required boolean, заменяет label children; исходный title и native label association сохраняются. Поле required и validation не зависят от визуальной отметки. Locale.Form.optional поддерживает RU/EN/custom и исходную замену всей группы: {} или пустой optional дают английский fallback, undefined locale наследует. Вложенный Form сбрасывает внешний mark к своим props/config. Сверены 18 UMD-состояний: modes, callbacks, fullwidth/ASCII colon, provider replacement/priority, locale fallback и nested Form. Live updates сохраняют native input, values, errors/warnings/touched, focus/selection; submit по-прежнему проверяет required и сериализует native values. Rich label/tooltip и прочие global/semantic Form settings остаются отдельными пробелами; deprecated hideRequiredMark API не добавлен."
+          "note": "Form.requiredMark принимает true/false/optional и Svelte snippet вместо React render function; local prop → ConfigProvider.form → true. False скрывает только звёздочку; optional/custom используют исходные mark classes. Snippet получает label content после обработки строкового colon и required boolean, заменяет label children; исходный title и native label association сохраняются. Поле required и validation не зависят от визуальной отметки. Locale.Form.optional поддерживает RU/EN/custom и исходную замену всей группы: {} или пустой optional дают английский fallback, undefined locale наследует. Вложенный Form сбрасывает внешний mark к своим props/config. Сверены 18 UMD-состояний: modes, callbacks, fullwidth/ASCII colon, provider replacement/priority, locale fallback и nested Form. Live updates сохраняют native input, values, errors/warnings/touched, focus/selection; submit по-прежнему проверяет required и сериализует native values. Rich label описана отдельной feature rich-labels; tooltip и прочие global/semantic Form settings остаются отдельными пробелами; deprecated hideRequiredMark API не добавлен."
         },
         {
           "id": "validation-debounce",
@@ -5458,7 +5487,7 @@
             "tests/browser/fixtures/ant-design-form-columns-reference.json",
             "tests/package/form-columns.ssr.test.ts"
           ],
-          "note": "Form и FormItem принимают labelCol/wrapperCol по существующим ColProps: span/offset/order/push/pull/flex, responsive размеры, native class и строковый style. Локальный Item object заменяет соответствующий Form object целиком; {} сбрасывает его. Разметка использует Row/Col; control subtree сбрасывает только колонки FormContext, сохраняя getters модели, labels/validation/variant и прочие defaults. Вложенный Item может задать собственные колонки, вложенный Form использует свои props/defaults. 42 UMD-состояния сверяют классы, computed display/flex/max-width/margins/order/padding, относительные boxes и RTL: три layouts, styles/flex, offsets, span=0, nested Item/Form и границы 576/768/992px. Private CSS-var/hash markers исключены, display:none не имеет координат; значения видимой геометрии сохранены без допусков. Реактивные настройки сохраняют DOM, model values/errors/warnings/touched, focus/selection, FormData и label click. SSR использует те же scopes и Col classes без DOM API. Необязательная текстовая label/null и автоматический wrapper offset описаны отдельной feature label-presence; rich labels пока не перенесены. Default vertical и прежние native contracts сохранены, FormConfig не получает отсутствующие в upstream global col props."
+          "note": "Form и FormItem принимают labelCol/wrapperCol по существующим ColProps: span/offset/order/push/pull/flex, responsive размеры, native class и строковый style. Локальный Item object заменяет соответствующий Form object целиком; {} сбрасывает его. Разметка использует Row/Col; control subtree сбрасывает только колонки FormContext, сохраняя getters модели, labels/validation/variant и прочие defaults. Вложенный Item может задать собственные колонки, вложенный Form использует свои props/defaults. 42 UMD-состояния сверяют классы, computed display/flex/max-width/margins/order/padding, относительные boxes и RTL: три layouts, styles/flex, offsets, span=0, nested Item/Form и границы 576/768/992px. Private CSS-var/hash markers исключены, display:none не имеет координат; значения видимой геометрии сохранены без допусков. Реактивные настройки сохраняют DOM, model values/errors/warnings/touched, focus/selection, FormData и label click. SSR использует те же scopes и Col classes без DOM API. Необязательная текстовая label/null и автоматический wrapper offset описаны отдельной feature label-presence; rich content описан в rich-labels. Default vertical и прежние native contracts сохранены, FormConfig не получает отсутствующие в upstream global col props."
         },
         {
           "id": "label-presence",
@@ -5476,7 +5505,33 @@
             "tests/browser/fixtures/ant-design-form-label-presence-reference.json",
             "tests/package/form-label-presence.ssr.test.ts"
           ],
-          "note": "FormItem.label принимает string/null/undefined. Undefined/пустая строка убирают label, whitespace сохраняет контейнер; null дополнительно выводит wrapper offsets из Form.labelCol для span<24. Local labelCol/wrapperCol, включая {}, отключают расчёт; существующий offset, включая 0/undefined, сохраняется. Root/responsive размеры независимы, caller col objects не изменяются. Числовой responsive shorthand нормализуется в ColSize и сохраняет span/offset как эквивалентный object. В raw UMD записаны два подтверждённых source-дефекта: numeric label span не участвует в offset, numeric wrapper span теряется при записи offset; Svelte их не повторяет. 42 UMD-состояния сверяют label absence/whitespace, scope/priority, offsets, full/zero spans, shorthand, responsive и RTL. Для numeric случаев native результат сравнивается с реально измеренной эквивалентной object-конфигурацией. Вставка/удаление label сохраняют control DOM/value/metadata/focus/selection/FormData; unlabelled control поддерживает явные aria-label/labelledby, required и validation/error focus. SSR не использует DOM. Rich label/number/boolean/array/Snippet и nameless fields пока не перенесены; name остаётся обязательным."
+          "note": "FormItem поддерживает отсутствие label, пустую строку и null. Undefined/пустая строка убирают label, whitespace сохраняет контейнер; null дополнительно выводит wrapper offsets из Form.labelCol для span<24. Local labelCol/wrapperCol, включая {}, отключают расчёт; существующий offset, включая 0/undefined, сохраняется. Root/responsive размеры независимы, caller col objects не изменяются. Числовой responsive shorthand нормализуется в ColSize и сохраняет span/offset как эквивалентный object. В raw UMD записаны два подтверждённых source-дефекта: numeric label span не участвует в offset, numeric wrapper span теряется при записи offset; Svelte их не повторяет. 42 UMD-состояния сверяют label absence/whitespace, scope/priority, offsets, full/zero spans, shorthand, responsive и RTL. Для numeric случаев native результат сравнивается с реально измеренной эквивалентной object-конфигурацией. Вставка/удаление label сохраняют control DOM/value/metadata/focus/selection/FormData; unlabelled control поддерживает явные aria-label/labelledby, required и validation/error focus. SSR не использует DOM. Общее содержимое label расширено в rich-labels; nameless fields пока не перенесены, name остаётся обязательным."
+        },
+        {
+          "id": "rich-labels",
+          "title": "Label content: numbers, arrays, Svelte snippets, reset и доступное имя",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/form-columns.engine.ts",
+            "src/lib/RadioGroup.svelte",
+            "src/lib/CheckboxGroup.svelte",
+            "src/lib/InputOTP.svelte",
+            "src/lib/SliderSingle.svelte",
+            "src/lib/SliderRange.svelte",
+            "src/lib/ColorPicker.svelte",
+            "tests/browser/form-rich-labels.spec.ts",
+            "tests/browser/form-rich-labels-metrics.ts",
+            "tests/browser/fixtures/FormRichLabelsFixtures.svelte",
+            "tests/browser/fixtures/FormLabelCounter.svelte",
+            "tests/browser/fixtures/FormRichLabelControls.svelte",
+            "tests/browser/fixtures/ant-design-form-rich-labels-reference.json",
+            "tests/package/form-rich-labels.ssr.test.ts"
+          ],
+          "note": "FormItem.label использует общий RenderEmptyContent/RenderContent: strings/numbers/booleans/nullish/nested arrays/Svelte snippets вместо ReactNode. Undefined/null/false/пустая строка скрывают label; null сохраняет выравнивание columns. 0 отображается, true/[]/opaque snippets оставляют контейнер. Только строка получает title и удаление последнего colon; requiredMark получает исходный content после этой обработки и required boolean. Bivariant snippet renderer сохраняет типосовместимость прежних строковых snippets при строковых label; rich renderer принимает RenderEmptyContent. Reset пересоздаёт content подписи/вложенные компоненты вместе с выбранным control, сбрасывая локальное состояние; DOM label и прежние native contracts сохраняются. Rich label получает стабильный id для RadioGroup/CheckboxGroup/InputOTP/Slider/стандартного trigger ColorPicker; явные aria-label/aria-labelledby и per-handle labels приоритетнее. Caption updates и переход к строкам сохраняют доступное имя, DOM/value/metadata/focus/selection и label click. 42 состояния неизменённого UMD плюс counter/reset lifecycle подтверждают content, literal text, title/classes/CSS, renderer value kind/required и native label association. React elements нормализованы в rich kind Svelte snippet, scalar/array kinds сохранены. SSR и публичные типы проверяются без DOM; прежние native field roles/HTML и explicit ARIA policy сохранены. Общий FormItem help/semantic/tooltip и nameless field API остаются отдельными пробелами."
         }
       ]
     },
@@ -5602,7 +5657,11 @@
         "tests/browser/fixtures/ConfigVariantsFixtures.svelte",
         "tests/browser/config-variants-metrics.ts",
         "tests/browser/config-variants.spec.ts",
-        "tests/package/config-variants.ssr.test.ts"
+        "tests/package/config-variants.ssr.test.ts",
+        "src/lib/FormItem.svelte",
+        "src/lib/form-context.ts",
+        "tests/browser/form-rich-labels.spec.ts",
+        "tests/browser/fixtures/FormRichLabelControls.svelte"
       ],
       "features": [
         {
@@ -5701,9 +5760,13 @@
             "src/lib/input-otp.ssr.test.ts",
             "tests/browser/input-otp.spec.ts",
             "tests/package/input-otp.ssr.test.ts",
-            "src/lib/vendor/otp.css"
+            "src/lib/vendor/otp.css",
+            "src/lib/FormItem.svelte",
+            "src/lib/form-context.ts",
+            "tests/browser/form-rich-labels.spec.ts",
+            "tests/browser/fixtures/FormRichLabelControls.svelte"
           ],
-          "note": "InputOTP сохраняет UTF-16 cells, sparse onInput перед onChange только полного изменившегося кода, formatter до ограничения length, paste/focus guard, arrows/backspace/undo, mask/type/autocomplete, semantic/otp config и Input fallback. Value синхронизируется при изменении prop после mount; локальный draft не отклоняется неизменённым prop, SSR использует defaultValue как upstream. Bind:value не добавлен; refs дают группу и focus/blur. FormItem association относится к группе, не к отдельным ячейкам; reset учитывает form.resetKey. PrefixCls, token engine и React dev diagnostics остаются за пределами этого объёма."
+          "note": "InputOTP сохраняет UTF-16 cells, sparse onInput перед onChange только полного изменившегося кода, formatter до ограничения length, paste/focus guard, arrows/backspace/undo, mask/type/autocomplete, semantic/otp config и Input fallback. Value синхронизируется при изменении prop после mount; локальный draft не отклоняется неизменённым prop, SSR использует defaultValue как upstream. Bind:value не добавлен; refs дают группу и focus/blur. FormItem association относится к группе, не к отдельным ячейкам; reset учитывает form.resetKey. PrefixCls, token engine и React dev diagnostics остаются за пределами этого объёма. Rich FormItem label передаёт доступное имя через стабильный aria-labelledby; caption updates, переход к строковой label и explicit ARIA priorities подтверждены Form rich-labels browser fixture. Прежние native roles/controls сохранены."
         },
         {
           "id": "input-subcomponents",
@@ -6336,7 +6399,11 @@
         "tests/package/wave.ssr.test.ts",
         "tests/browser/wave.spec.ts",
         "tests/browser/fixtures/WaveFixtures.svelte",
-        "docs/reference/wave.md"
+        "docs/reference/wave.md",
+        "src/lib/FormItem.svelte",
+        "src/lib/form-context.ts",
+        "tests/browser/form-rich-labels.spec.ts",
+        "tests/browser/fixtures/FormRichLabelControls.svelte"
       ],
       "features": [
         {
@@ -6347,9 +6414,13 @@
           "evidence": [
             "src/lib/radio.engine.test.ts",
             "src/lib/radio.ssr.test.ts",
-            "tests/browser/radio.spec.ts"
+            "tests/browser/radio.spec.ts",
+            "src/lib/FormItem.svelte",
+            "src/lib/form-context.ts",
+            "tests/browser/form-rich-labels.spec.ts",
+            "tests/browser/fixtures/FormRichLabelControls.svelte"
           ],
-          "note": "Checked/defaultChecked, bind:checked/value, string/number/boolean, native peers/name/FormData, required/FormItem, callbacks только при пользовательском изменении, disabled precedence, captured defaults/reset/canceled reset и внешние формы сохранены."
+          "note": "Checked/defaultChecked, bind:checked/value, string/number/boolean, native peers/name/FormData, required/FormItem, callbacks только при пользовательском изменении, disabled precedence, captured defaults/reset/canceled reset и внешние формы сохранены. Rich FormItem label передаёт доступное имя через стабильный aria-labelledby; caption updates, переход к строковой label и explicit ARIA priorities подтверждены Form rich-labels browser fixture. Прежние native roles/controls сохранены."
         },
         {
           "id": "button-options",
@@ -7000,7 +7071,11 @@
         "tests/browser/fixtures/SliderPrefixFixtures.svelte",
         "tests/browser/slider-prefix-metrics.ts",
         "tests/browser/slider-prefix.spec.ts",
-        "tests/package/slider-prefix.ssr.test.ts"
+        "tests/package/slider-prefix.ssr.test.ts",
+        "src/lib/FormItem.svelte",
+        "src/lib/form-context.ts",
+        "tests/browser/form-rich-labels.spec.ts",
+        "tests/browser/fixtures/FormRichLabelControls.svelte"
       ],
       "features": [
         {
@@ -7070,9 +7145,13 @@
           "evidence": [
             "src/lib/slider.types.ts",
             "src/lib/slider-range.types.ts",
-            "tests/browser/slider-range.spec.ts"
+            "tests/browser/slider-range.spec.ts",
+            "src/lib/FormItem.svelte",
+            "src/lib/form-context.ts",
+            "tests/browser/form-rich-labels.spec.ts",
+            "tests/browser/fixtures/FormRichLabelControls.svelte"
           ],
-          "note": "Сохраняется Svelte bind-модель; onChange получает число/массив до bind update, onValueChange после. Range pointer/keyboard публикует дополнительные input/change после DOM update с isTrusted=false. Native inputs/form/label и keyboardable mark buttons заменяют React div/span; typed refs не являются React instance. DOM dir наследуется от существующего Svelte ConfigProvider wrapper; UMD-сверка использует такой же frame dir."
+          "note": "Сохраняется Svelte bind-модель; onChange получает число/массив до bind update, onValueChange после. Range pointer/keyboard публикует дополнительные input/change после DOM update с isTrusted=false. Native inputs/form/label и keyboardable mark buttons заменяют React div/span; typed refs не являются React instance. DOM dir наследуется от существующего Svelte ConfigProvider wrapper; UMD-сверка использует такой же frame dir. Rich FormItem label передаёт доступное имя через стабильный aria-labelledby; caption updates, переход к строковой label и explicit ARIA priorities подтверждены Form rich-labels browser fixture. Прежние native roles/controls сохранены."
         },
         {
           "id": "range-tooltip",

@@ -31,6 +31,7 @@ export interface FormFieldContext {
   readonly id?: string;
   readonly name?: string;
   readonly label?: string;
+  readonly labelledBy?: string;
   readonly disabled: boolean | undefined;
   readonly required: boolean;
   readonly status: 'error' | 'warning' | undefined;

@@ -1,5 +1,6 @@
 import type { ColProps, ColSize, GridBreakpoint } from './grid.types';
 import { gridBreakpoints } from './grid.engine';
+import type { RenderEmptyContent } from './types';
 
 function colSize(value: ColProps[GridBreakpoint]): ColSize {
   // Source теряет numeric shorthand при выводе offset; сохраняем обычную семантику Col.
@@ -12,7 +13,7 @@ function colSize(value: ColProps[GridBreakpoint]): ColSize {
 export function resolveFormWrapperCol({
   label, labelCol, wrapperCol, formLabelCol, formWrapperCol
 }: {
-  label?: string | null;
+  label?: RenderEmptyContent;
   labelCol?: ColProps;
   wrapperCol?: ColProps;
   formLabelCol?: ColProps;
