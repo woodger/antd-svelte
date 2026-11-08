@@ -13,7 +13,9 @@
   import {
     filterOptions,
     getEnabledIndex,
+    getSelectLimitOptions,
     getSelectValues,
+    isSelectCountReached,
     resolveSelectedOptions,
     sortSelectOptions
   } from './select.engine';
@@ -30,6 +32,7 @@
     options,
     mode,
     tokenSeparators,
+    maxCount,
     defaultValue,
     value = $bindable<SelectProps<Value, Mode>['value']>(),
     size,
@@ -110,6 +113,7 @@
   let intrinsicWidth = $derived(_autoWidth && !multiple && isReadOnly);
   let selectedValues = $derived(multiple ? getSelectValues<RawValue>(selectedValue) : []);
   let selectedKeys = $derived(new Set(selectedValues));
+  let countReached = $derived(multiple && isSelectCountReached(selectedValues.length, maxCount));
   let optionMap = $derived<Map<RawValue, SelectOption<RawValue>>>(
     new Map(options.map((option) => [option.value, option]))
   );
@@ -133,7 +137,10 @@
   let filteredOptions = $derived(tagMode
     ? getSelectTagOptions(options, selectionOptions, search, filter, searchConfig.optionFilterProp)
     : filterOptions<RawValue>(options, search, filter, searchConfig.optionFilterProp));
-  let filtered = $derived(sortSelectOptions(filteredOptions, search, searchConfig.filterSort));
+  let orderedOptions = $derived(sortSelectOptions(filteredOptions, search, searchConfig.filterSort));
+  let filtered = $derived(getSelectLimitOptions(
+    orderedOptions, selectedKeys, multiple ? maxCount : undefined
+  ));
   $effect(() => {
     cachedOptions = selectionOptions;
   });
@@ -227,7 +234,7 @@
       if (!tagMode && (!multiple || autoClearSearch)) internalSearch = '';
       activeValue = !multiple && selected && !selected.disabled
         ? selected.value
-        : tagMode || searchConfig.filterSort
+        : tagMode || searchConfig.filterSort || countReached
           ? filtered[getEnabledIndex(filtered, -1, direction)]?.value
           : options[getEnabledIndex(options, -1, direction)]?.value;
     }
@@ -248,7 +255,7 @@
     if (!tagMode || resolvedDisabled) return;
     const next = text.trim();
     if (!next) return;
-    if (!optionMap.get(next)?.disabled && !selectedKeys.has(next)) {
+    if (!countReached && !optionMap.get(next)?.disabled && !selectedKeys.has(next)) {
       cachedOptions = new Map(cachedOptions).set(next,
         optionMap.get(next) ?? { value: next, label: next });
       changeMultiple([...selectedValues, next]);
@@ -257,7 +264,8 @@
   }
 
   function choose(option: SelectOption<RawValue> | undefined) {
-    if (resolvedDisabled || option?.disabled) {
+    if (resolvedDisabled || option?.disabled
+      || option && countReached && !selectedKeys.has(option.value)) {
       return;
     }
 
@@ -412,8 +420,16 @@
   }
 
   function updateSearch(next: string, input: HTMLInputElement, compositionEnd = false) {
+    if (countReached) {
+      input.value = search;
+      restoreControlledSearch(input);
+      return;
+    }
+
     if (multiple && tokenSeparators !== undefined && !composing) {
-      const words = splitSelectTokens(next, tokenSeparators);
+      const cap = maxCount !== undefined && !Number.isNaN(maxCount)
+        ? maxCount - selectedValues.length : undefined;
+      const words = splitSelectTokens(next, tokenSeparators, cap);
       if (words !== null) {
         const previousSearch = search;
         const onSearch = searchCallback;

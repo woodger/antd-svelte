@@ -1,0 +1,839 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "rcSelectStudyVersion": "1.10.1",
+    "interaction": "Playwright fill/press/outside click"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "multiple-open-at-limit",
+        "mode": "multiple",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "open": true
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": false
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-open-at-limit",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "open": true
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": false
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-enter-at-limit",
+        "mode": "multiple",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "open": true,
+        "keys": [
+          "ArrowDown",
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "change",
+            "values": []
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": false
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-enter-at-limit",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "open": true,
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "change",
+            "values": []
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": false
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-block-input",
+        "mode": "multiple",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "text": "new"
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-block-input",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "text": "new"
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "zero",
+        "limit": 0,
+        "text": "new",
+        "open": true
+      },
+      "result": {
+        "values": [],
+        "events": [],
+        "query": "",
+        "labels": [],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": true
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "negative",
+        "limit": -1,
+        "text": "new",
+        "open": true
+      },
+      "result": {
+        "values": [],
+        "events": [],
+        "query": "",
+        "labels": [],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": true
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "nan",
+        "limit": "nan",
+        "text": "new",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "new"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "new"
+          },
+          {
+            "type": "change",
+            "values": [
+              "new"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "new"
+        ],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": false
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": false
+          },
+          {
+            "value": "new",
+            "label": "new",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "infinity",
+        "limit": "infinity",
+        "text": "new",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "new"
+        ],
+        "events": [
+          {
+            "type": "search",
+            "query": "new"
+          },
+          {
+            "type": "change",
+            "values": [
+              "new"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "new"
+        ],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": false
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": false
+          },
+          {
+            "value": "new",
+            "label": "new",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-list-cap",
+        "limit": 2,
+        "text": "a,b,c",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "multiple-label-cap",
+        "mode": "multiple",
+        "limit": 1,
+        "text": "Alpha,Zero",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-duplicate-cap",
+        "limit": 2,
+        "text": "a,a,b",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-existing-cap",
+        "values": [
+          "a"
+        ],
+        "limit": 2,
+        "text": "a,b,c",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-disabled-cap",
+        "limit": 1,
+        "text": "locked,free",
+        "separators": [
+          ","
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [],
+        "query": "",
+        "labels": [],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "tags-function-cap",
+        "limit": 2,
+        "text": "a,b,c",
+        "splitter": "csv"
+      },
+      "result": {
+        "values": [
+          "a",
+          "b"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "b"
+            ]
+          }
+        ],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "b"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "over-limit-default",
+        "values": [
+          "a",
+          0
+        ],
+        "limit": 1,
+        "open": true
+      },
+      "result": {
+        "values": [
+          "a",
+          0
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Alpha",
+          "Zero"
+        ],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": false
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "controlled-query-input",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "controlled": "held",
+        "text": "new"
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "held",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "controlled-query-enter",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "controlled": "held",
+        "keys": [
+          "Enter"
+        ]
+      },
+      "result": {
+        "values": [
+          "a",
+          "held"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "held"
+            ]
+          }
+        ],
+        "query": "held",
+        "labels": [
+          "Alpha",
+          "held"
+        ],
+        "open": true,
+        "options": [
+          {
+            "value": "held",
+            "label": "held",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "controlled-query-blur",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "controlled": "held",
+        "text": "new",
+        "blur": true
+      },
+      "result": {
+        "values": [
+          "a",
+          "held"
+        ],
+        "events": [
+          {
+            "type": "change",
+            "values": [
+              "a",
+              "held"
+            ]
+          }
+        ],
+        "query": "held",
+        "labels": [
+          "Alpha",
+          "held"
+        ],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "selected-key-removal",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "open": true,
+        "keys": [
+          "Backspace"
+        ]
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "change",
+            "values": []
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": false
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": false
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "disabled-selected",
+        "values": [
+          "locked"
+        ],
+        "limit": 1,
+        "open": true,
+        "keys": [
+          "Backspace"
+        ]
+      },
+      "result": {
+        "values": [
+          "locked"
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Locked"
+        ],
+        "open": true,
+        "options": [
+          {
+            "value": "a",
+            "label": "Alpha",
+            "disabled": true
+          },
+          {
+            "value": "locked",
+            "label": "Locked",
+            "disabled": true
+          },
+          {
+            "value": 0,
+            "label": "Zero",
+            "disabled": true
+          }
+        ]
+      }
+    },
+    {
+      "sample": {
+        "id": "clear-at-limit",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "clear": true
+      },
+      "result": {
+        "values": [],
+        "events": [
+          {
+            "type": "change",
+            "values": []
+          }
+        ],
+        "query": "",
+        "labels": [],
+        "open": false,
+        "options": []
+      }
+    },
+    {
+      "sample": {
+        "id": "compose-at-limit",
+        "values": [
+          "a"
+        ],
+        "limit": 1,
+        "text": "a,b",
+        "separators": [
+          ","
+        ],
+        "compose": true
+      },
+      "intermediate": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false,
+        "options": []
+      },
+      "result": {
+        "values": [
+          "a"
+        ],
+        "events": [],
+        "query": "",
+        "labels": [
+          "Alpha"
+        ],
+        "open": false,
+        "options": []
+      }
+    }
+  ]
+}

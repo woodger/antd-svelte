@@ -2,11 +2,13 @@ import type { SelectOption } from './types';
 import type { SelectTokenSeparators } from './select.types';
 
 /** @rc-component/select 1.10.1; MIT, см. vendor/LICENSE.rc-select. */
-export function splitSelectTokens(text: string, separators?: SelectTokenSeparators) {
+export function splitSelectTokens(
+  text: string, separators?: SelectTokenSeparators, end?: number
+) {
   if (typeof separators === 'function') {
     const words = separators(text);
     return Array.isArray(words) && words.length && !(words.length === 1 && words[0] === text)
-      ? [...words] : null;
+      ? words.slice(0, end) : null;
   }
   if (!separators?.length) return null;
   const tokens = separators;
@@ -21,7 +23,7 @@ export function splitSelectTokens(text: string, separators?: SelectTokenSeparato
   }
 
   const words = split(text, 0);
-  return matched ? words : null;
+  return matched ? words.slice(0, end) : null;
 }
 
 /** Multiple разрешает label/явные search fields, tags создаёт строки; disabled не добавляются. */

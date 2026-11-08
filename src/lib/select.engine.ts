@@ -1,6 +1,22 @@
 import type { SelectOption } from './types';
 import type { SelectSearchConfig } from './select.types';
 
+export function isSelectCountReached(count: number, maxCount?: number) {
+  return maxCount !== undefined && !Number.isNaN(maxCount) && count >= maxCount;
+}
+
+/** На лимите выбранные enabled options остаются доступны для снятия выбора. */
+export function getSelectLimitOptions<Value extends string | number>(
+  options: readonly SelectOption<Value>[],
+  selected: ReadonlySet<Value>,
+  maxCount?: number
+): readonly SelectOption<Value>[] {
+  if (!isSelectCountReached(selected.size, maxCount)) return options;
+
+  return options.map(option => option.disabled || selected.has(option.value)
+    ? option : { ...option, disabled: true });
+}
+
 /** Стабильная Source сортировка после фильтрации; массив владельца не изменяется. */
 export function sortSelectOptions<Value extends string | number>(
   options: readonly SelectOption<Value>[],

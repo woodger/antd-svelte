@@ -9,6 +9,10 @@
 
 ### Added
 
+- Select поддерживает maxCount в multiple/tags: доступность options, ввод,
+  tokenSeparators, reactive limit и сохранение существующих values. Native
+  исправляет записанный обход лимита через controlled query на Enter/blur.
+
 - Select поддерживает showSearch.filterSort с текущим searchValue, стабильными
   равными элементами и сортировкой synthetic tags. Массив options, порядок выбранных
   значений, controlled query, focus и DOM input сохраняются.

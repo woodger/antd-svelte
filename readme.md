@@ -8348,6 +8348,24 @@ Native paste/composition handlers сохраняют receiver input и preventDe
 сохраняются, явный пробельный option допускается; дефекты upstream остаются в raw data
 для отдельного разбора.
 
+### Ограничение выбора
+
+MaxCount задаёт максимум выбранных значений в multiple/tags; single его игнорирует.
+На лимите новые варианты недоступны, выбранные enabled options можно снять,
+удаление и clear продолжают работать. Поисковый ввод на лимите не меняет query и
+не вызывает onSearch. Переданные value/defaultValue, включая значения сверх
+уменьшенного лимита, сохраняются. Смена лимита обновляет список без пересоздания
+input, сброса фокуса или выбранных полей формы.
+
+При tokenSeparators число сырых частей ограничивается оставшимися местами до
+lookup, disabled-проверки и удаления дубликатов, как в Source: повтор или неизвестная
+опция может оставить место незаполненным. Нулевой/отрицательный maxCount запрещает
+новые добавления; NaN и undefined не задают лимит, Infinity его не ограничивает.
+
+[Raw замеры](tests/browser/fixtures/ant-design-select-max-count-reference.json)
+сохраняют исходный обход maxCount через controlled search на Enter/blur.
+Native не добавляет такие сверхлимитные tags; query по-прежнему меняет владелец.
+
 ### Удалённый поиск
 
 Select принимает loading, notFoundContent и onPopupScroll. Поиск настраивается

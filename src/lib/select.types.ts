@@ -47,6 +47,8 @@ export interface SelectProps<
   mode?: Mode;
   /** Разбор строк в multiple/tags; function получает текущий ввод, включая восстановленный paste. */
   tokenSeparators?: SelectTokenSeparators;
+  /** Максимум выбранных значений в multiple/tags; existing/default values не обрезаются. */
+  maxCount?: number;
   /** Bind:value; multiple сохраняет Value[], tags допускает также новые string values. */
   value?: (Mode extends 'tags' ? (Value | string)[] : Mode extends 'multiple' ? Value[] : Value)
     | undefined;

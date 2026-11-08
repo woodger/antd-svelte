@@ -7593,7 +7593,13 @@
         "tests/browser/fixtures/SelectSortFixtures.svelte",
         "tests/browser/fixtures/select-sort-cases.ts",
         "tests/browser/fixtures/ant-design-select-sort-reference.json",
-        "tests/package/select-sort.ssr.test.ts"
+        "tests/package/select-sort.ssr.test.ts",
+        "src/lib/select-limit.engine.test.ts",
+        "tests/browser/select-max-count.spec.ts",
+        "tests/browser/fixtures/SelectLimitFixtures.svelte",
+        "tests/browser/fixtures/select-limit-cases.ts",
+        "tests/browser/fixtures/ant-design-select-max-count-reference.json",
+        "tests/package/select-limit.ssr.test.ts"
       ],
       "features": [
         {
@@ -7808,6 +7814,25 @@
           "note": "Ant Design 6.6.8, rc-select 1.10.1: readonly string[] либо split function, raw segments, целая строка при найденном separator, label/explicit search fields для multiple, string values для tags, typed keys и dedup. Callback order, controlled search, autoClearSearchValue=false, CRLF/LF paste, composition deferral и native event receiver/cancellation сохранены. Source raw corpus включает disabled/blank defects; Native не добавляет новые disabled options в обоих modes и не создаёт implicit blank tags. Native forms/required/reset/disabled/RTL и teardown focused input сохранены; другие Source API остаются в extended-api."
         },
         {
+          "id": "max-count",
+          "title": "Максимум выбранных значений maxCount",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/select.engine.ts",
+            "src/lib/select-token.engine.ts",
+            "src/lib/Select.svelte",
+            "src/lib/select-limit.engine.test.ts",
+            "tests/browser/select-max-count.spec.ts",
+            "tests/browser/fixtures/SelectLimitFixtures.svelte",
+            "tests/browser/fixtures/select-limit-cases.ts",
+            "tests/browser/fixtures/ant-design-select-max-count-reference.json",
+            "tests/package/select-limit.ssr.test.ts"
+          ],
+          "note": "Ant Design 6.6.8 / rc-select 1.10.1: multiple/tags limit блокирует новые options и search на границе, разрешает deselect/remove/clear, не обрезает controlled/default values. Token arrays/functions ограничивают сырые части до lookup/disabled/dedup; NaN игнорируется, zero/negative блокируют добавление, Infinity не ограничивает. Native single, forms/reset/required/RTL/disabled, input DOM/search/focus при reactive limit сохранены. Raw official UMD corpus включает controlled query submit bypass; Native не добавляет tags сверх лимита ни Enter, ни blur."
+        },
+        {
           "id": "extended-api",
           "title": "LabelInValue, fieldNames/groups, render/semantic/config и остальные Source API",
           "state": "missing",
@@ -7816,7 +7841,7 @@
             "src/lib/select.types.ts",
             "src/lib/Select.svelte"
           ],
-          "note": "Полный source API остаётся в работе: необязательный options, fieldNames/groups, labelInValue, searchIcon, maxCount/maxTagCount/renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
+          "note": "Полный source API остаётся в работе: необязательный options, fieldNames/groups, labelInValue, searchIcon, maxTagCount/renderers, полный callback/ref/open/semantic/config/prefix/motion API. Native primitive options/value, binding/onValueChange и согласованные формы сохраняются. Deprecated top-level search и boolean tags/multiple/combobox не возвращаются."
         },
         {
           "id": "native-whitespace-tag",
@@ -7860,6 +7885,25 @@
             "tests/package/select-token.ssr.test.ts"
           ],
           "note": "Для отдельного разбора: unmodified official UMD Ant Design 6.6.8 с React 18.3.1 добавляет disabled option в mode=multiple через tokenSeparators, по label или explicit value field; tags такую опцию пропускает. Raw multiple-disabled/multiple-explicit-value сохраняют результат Source. Native не добавляет disabled в обоих modes; существующие selected disabled значения не удаляются."
+        },
+        {
+          "id": "native-controlled-count-limit",
+          "title": "Запрет обхода maxCount через controlled query submit",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/select.types.ts",
+            "src/lib/select.engine.ts",
+            "src/lib/select-token.engine.ts",
+            "src/lib/Select.svelte",
+            "src/lib/select-limit.engine.test.ts",
+            "tests/browser/select-max-count.spec.ts",
+            "tests/browser/fixtures/SelectLimitFixtures.svelte",
+            "tests/browser/fixtures/select-limit-cases.ts",
+            "tests/browser/fixtures/ant-design-select-max-count-reference.json",
+            "tests/package/select-limit.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: официальный UMD 6.6.8 / React 18.3.1, values=[a], maxCount=1 и controlled searchValue=held. Ввод блокируется без onSearch, но Enter/blur submit добавляет held сверх лимита. Raw controlled-query-enter/controlled-query-blur сохраняют исходные значения/события. Native сохраняет values=[a], query владельца и исходный open/closed lifecycle; новый synthetic option остаётся disabled и change не отправляется."
         }
       ]
     },

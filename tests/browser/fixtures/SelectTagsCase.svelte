@@ -7,13 +7,14 @@
 
   let {
     sample, phase = 'interaction', nativeChecks = false, missingOptions = false,
-    tokenSeparators, inputHandlers
+    tokenSeparators, inputHandlers, maxCount
   }: {
     sample: SelectTagsSample;
     phase?: 'interaction' | 'options';
     nativeChecks?: boolean;
     missingOptions?: boolean;
     tokenSeparators?: SelectTokenSeparators;
+    maxCount?: number;
     inputHandlers?: Pick<SelectProps<string | number, 'tags'>,
       'onpaste' | 'oncompositionstart' | 'oncompositionend'>;
   } = $props();
@@ -36,7 +37,7 @@
     <button type="button" id="tags-outside">Outside</button>
     {#if nativeChecks}<button type="reset">Reset tags</button>{/if}
     <div data-select-tags>
-      <Select mode={sample.mode ?? 'tags'} {options} {tokenSeparators}
+      <Select mode={sample.mode ?? 'tags'} {options} {tokenSeparators} {maxCount}
         {...inputHandlers}
         bind:value={values} defaultValue={sample.values}
         name="tags" aria-label="Tags" required={nativeChecks} allowClear={nativeChecks || sample.clear}
