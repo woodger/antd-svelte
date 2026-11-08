@@ -4936,7 +4936,15 @@
         "tests/browser/form-extra-metrics.ts",
         "tests/browser/fixtures/FormExtraFixtures.svelte",
         "tests/browser/fixtures/ant-design-form-extra-reference.json",
-        "tests/package/form-extra.ssr.test.ts"
+        "tests/package/form-extra.ssr.test.ts",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/index.ts",
+        "tests/browser/form-labels.spec.ts",
+        "tests/browser/form-labels-metrics.ts",
+        "tests/browser/fixtures/FormLabelsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-labels-reference.json",
+        "tests/package/form-labels.ssr.test.ts"
       ],
       "features": [
         {
@@ -5346,6 +5354,27 @@
             "tests/package/form-extra.ssr.test.ts"
           ],
           "note": "Постоянное extra отображается вместе с errors/warnings и получает собственный _extra id в описании встроенного control. Общий RenderEmptyContent/RenderContent сохраняет strings, numbers, 0, arrays и Svelte snippets вместо ReactNode. Изучена isReactRenderable @rc-component/util 1.14.0: null/undefined/false/пустая строка отсутствуют, true/[]/opaque snippets оставляют контейнер. Четырнадцать состояний неизменённого UMD сверяют literal extra text, container color/font-size/line-height/display, порядок ARIA targets и нормализованный видимый текст описания; исходные DOM-пробелы сообщений сохранены. Изменение content/snippet/ARIA не заменяет input, values, focus или selection; внешние пользовательские aria-describedby остаются перед Form targets. Прежние native help priority и layout сообщений сохранены; полный upstream FormItem help override/additional motion и generic field adapters этим этапом не перенесены. SSR сохраняет caption/id/association без DOM API; dependencies/lockfile не меняются."
+        },
+        {
+          "id": "label-settings",
+          "title": "Colon, labelAlign, labelWrap и FormConfig",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/FormItem.svelte",
+            "src/lib/Form.svelte",
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "tests/browser/form-labels.spec.ts",
+            "tests/browser/form-labels-metrics.ts",
+            "tests/browser/fixtures/FormLabelsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-labels-reference.json",
+            "tests/package/form-labels.ssr.test.ts"
+          ],
+          "note": "Form принимает colon/labelAlign/labelWrap и наследует ConfigProvider.form; локальные FormItem.colon/labelAlign выше Form. True восстанавливает colon поверх parent false, vertical скрывает добавленный colon независимо от computedColon, который управляет no-colon class. Последний ASCII/fullwidth colon с whitespace удаляется только при добавленном colon, title остаётся исходным. Label alignment/wrap используют существующий CSS, logical start/end и alias scopes. FormConfig содержит только три поддержанные настройки; undefined record наследуется, {} или иной object заменяет родительский. Вложенный Form читает собственные props/config, а не label context внешнего. Сверены 32 состояния неизменённого UMD в LTR/RTL: приоритеты props/config, reset/replacement, width-constrained wrap, три layouts, nested Form и punctuation. Реактивные обновления сохраняют input/value/metadata/focus/selection и native label click. Прежние vertical default и raw variant context сохранены; прочий global/semantic Form config не объявлен."
         }
       ]
     },
@@ -15869,7 +15898,14 @@
         "tests/browser/breadcrumb-config-metrics.ts",
         "tests/browser/breadcrumb-config.spec.ts",
         "tests/package/breadcrumb-config.ssr.test.ts",
-        "docs/reference/current-size-observation.md"
+        "docs/reference/current-size-observation.md",
+        "src/lib/form.types.ts",
+        "src/lib/form-context.ts",
+        "tests/browser/form-labels.spec.ts",
+        "tests/browser/form-labels-metrics.ts",
+        "tests/browser/fixtures/FormLabelsFixtures.svelte",
+        "tests/browser/fixtures/ant-design-form-labels-reference.json",
+        "tests/package/form-labels.ssr.test.ts"
       ],
       "features": [
         {
@@ -16758,6 +16794,25 @@
             "tools/fixtures/ant-design-current-size-observation.json"
           ],
           "note": "ComponentSize и обычный fallback medium; наследование provider/Compact и локальный приоритет сохранены. Raw UMD-замеры различают CSS и semantic имена: у Table context middle/medium и Descriptions local default/medium есть измеренные отличия, они не нормализуются в source evidence. Старые API-размеры исключены; current Grid alignment и Skeleton shape не затронуты."
+        },
+        {
+          "id": "form-label-defaults",
+          "title": "ConfigProvider.form: defaults подписей",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/form.types.ts",
+            "src/lib/form-context.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "tests/browser/form-labels.spec.ts",
+            "tests/browser/form-labels-metrics.ts",
+            "tests/browser/fixtures/FormLabelsFixtures.svelte",
+            "tests/browser/fixtures/ant-design-form-labels-reference.json",
+            "tests/package/form-labels.ssr.test.ts"
+          ],
+          "note": "Новый FormConfig/record form содержит colon, labelAlign и labelWrap; undefined наследует ближайший record, object и {} заменяют его. Локальные props Form/Item приоритетнее; реактивные изменения и scope reset подтверждены Form source labels reference. Остальные глобальные Form settings, class/style/semantic config этим этапом не принимаются и не заявлены."
         }
       ]
     },

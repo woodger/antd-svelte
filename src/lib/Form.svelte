@@ -12,6 +12,9 @@
     form,
     children,
     layout = 'vertical',
+    colon,
+    labelAlign,
+    labelWrap,
     variant,
     component = 'form',
     disabled,
@@ -42,6 +45,15 @@
     },
     get layout() {
       return layout;
+    },
+    get colon() {
+      return colon ?? config.form?.colon;
+    },
+    get labelAlign() {
+      return labelAlign ?? config.form?.labelAlign;
+    },
+    get labelWrap() {
+      return labelWrap ?? config.form?.labelWrap;
     },
     get resetKey() {
       return getFormHooks(form)?.resetKey ?? form.values;

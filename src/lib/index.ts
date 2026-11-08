@@ -754,7 +754,7 @@ export type {
   TableExpandable
 } from './table.types';
 export type { SelectProps, SelectSearchConfig } from './select.types';
-export type { FormProps, FormScrollOptions } from './form.types';
+export type { FormProps, FormConfig, FormScrollOptions } from './form.types';
 export type { ModalProps } from './Modal.svelte';
 export type { ConfigProviderProps } from './ConfigProvider.svelte';
 export type {

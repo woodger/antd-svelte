@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SelectConfig } from './select.types';
+  import type { FormConfig } from './form.types';
   import type { TreeSelectConfig } from './tree-select.types';
   import type { DatePickerConfig } from './date-picker.types';
   import type { CardConfig, CardMetaConfig } from './card.types';
@@ -73,6 +74,8 @@
     theme?: ThemeConfig;
     /** Общее оформление полей и Card; локальные props, Form и component config имеют приоритет. */
     variant?: Variant;
+    /** Defaults подписей Form; undefined наследует record, любой объект заменяет его целиком. */
+    form?: FormConfig;
     select?: SelectConfig;
     treeSelect?: TreeSelectConfig;
     datePicker?: DatePickerConfig;
@@ -161,6 +164,7 @@
     children,
     theme,
     variant,
+    form,
     select,
     treeSelect,
     datePicker,
@@ -247,6 +251,9 @@
   const config: ConfigContext = {
     get variant() {
       return variant ?? parent.variant;
+    },
+    get form() {
+      return form ?? parent.form;
     },
     get select() {
       return select ?? parent.select;

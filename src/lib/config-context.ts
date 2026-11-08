@@ -1,4 +1,5 @@
 import type { SelectConfig } from './select.types';
+import type { FormConfig } from './form.types';
 import type { TreeSelectConfig } from './tree-select.types';
 import type { DatePickerConfig } from './date-picker.types';
 import type { CardConfig, CardMetaConfig } from './card.types';
@@ -62,6 +63,7 @@ import { ruRU, type ComponentSize, type Variant, type Locale, type ResolvedTheme
 
 export interface ConfigContext {
   readonly variant?: Variant;
+  readonly form?: FormConfig;
   readonly select?: SelectConfig;
   readonly treeSelect?: TreeSelectConfig;
   readonly datePicker?: DatePickerConfig;

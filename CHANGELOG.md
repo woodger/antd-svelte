@@ -135,6 +135,11 @@
 
 ### Added
 
+- Form/FormItem: colon и labelAlign, Form.labelWrap и defaults ConfigProvider.form.
+  Добавлены приоритеты Form/Item, сброс record, RTL, удаление последнего colon
+  из отображаемой подписи и сохранение title/native label association. Динамические
+  настройки сохраняют DOM, значения, focus/selection и metadata.
+
 - FormItem: extra с текстом, числами, массивами и snippets отображается вместе с
   errors/warnings и входит в aria-describedby. Сохранены 0, текущая renderability,
   внешние описания, фокус/выделение и прежний приоритет help.

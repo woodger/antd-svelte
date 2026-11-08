@@ -23,6 +23,10 @@
     hidden?: boolean;
     /** Локальный layout поля; иначе наследуется ближайший Form, standalone остаётся vertical. */
     layout?: 'horizontal' | 'vertical';
+    /** Локальное выравнивание подписи имеет приоритет над ближайшим Form. */
+    labelAlign?: 'left' | 'right';
+    /** Управляет добавленным colon; true имеет приоритет и над Form.colon=false. */
+    colon?: boolean;
     /** Локальные правила поля; при отсутствии используются правила модели верхнего уровня. */
     rules?: readonly ValidationRule[];
     /**
@@ -49,6 +53,8 @@
     required,
     hidden = false,
     layout,
+    labelAlign,
+    colon,
     rules,
     validateFirst,
     htmlFor,
@@ -63,6 +69,10 @@
   let id = $derived(htmlFor ?? `ant-field-${generatedId}`);
   let path = $derived([...(list?.prefixName ?? []), ...formNamePath(name)]);
   let resolvedLayout = $derived(layout ?? form?.layout ?? 'vertical');
+  let resolvedLabelAlign = $derived(labelAlign ?? form?.labelAlign ?? 'right');
+  let computedColon = $derived(colon === true || form?.colon !== false && colon !== false);
+  let haveColon = $derived(resolvedLayout !== 'vertical' && computedColon);
+  let labelText = $derived(haveColon && label.trim() ? label.replace(/[:：]\s*$/, '') : label);
   let errors = $derived(form?.getFieldError(path) ?? []);
   let warnings = $derived(form?.getFieldWarning(path) ?? []);
   let isRequired = $derived(required
@@ -175,9 +185,11 @@
   ]} style={componentTheme.style}>
   <!-- Source Row/Col сбрасывают общие aliases, сохраняя наследование Form tokens. -->
   <div class={['ant-form-item-row', componentTheme.className]}>
-    <div class="ant-form-item-label">
-      <label for={id} class:ant-form-item-required={isRequired} title={label} use:focusGroupLabel>
-        {label}
+    <div class="ant-form-item-label" class:ant-form-item-label-left={resolvedLabelAlign === 'left'}
+      class:ant-form-item-label-wrap={form?.labelWrap === true}>
+      <label for={id} class:ant-form-item-required={isRequired} class:ant-form-item-no-colon={!computedColon}
+        title={label} use:focusGroupLabel>
+        {labelText}
       </label>
     </div>
     <div class="ant-form-item-control">

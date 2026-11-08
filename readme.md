@@ -9356,6 +9356,24 @@ FormItem предоставляет label, status, required, description и об
 Локальный `FormItem.layout` (`horizontal` или `vertical`) имеет приоритет над Form;
 undefined возвращает наследование. Переключение layout не пересоздаёт controls,
 не меняет values/metadata и сохраняет фокус и выделение.
+
+`Form.colon`, `labelAlign` и `labelWrap` наследуют defaults из `ConfigProvider.form`.
+При отсутствии настройки colon включён, labelAlign равен right, labelWrap — false.
+Локальные FormItem.colon/labelAlign имеют приоритет над Form; true включает colon
+и поверх Form.colon=false. Вертикальный layout сохраняет скрытый CSS colon.
+Если colon добавляется, последний `:` или `：` с пробелами удаляется из текста
+подписи, а исходный title сохраняется. При colon=false текст владельца остаётся целиком.
+LabelWrap включает перенос в доступной ширине подписи; labelAlign использует
+исходные логические start/end, включая RTL.
+
+`FormConfig` содержит эти три поля. Undefined record наследуется от внешнего
+ConfigProvider, любой объект, включая {}, заменяет его целиком. Ближайший Form
+применяет собственные props и config; вложенный Form сбрасывает настройки внешнего
+Form к своим defaults. Изменения сохраняют control, focus/selection и metadata.
+Сверка: [32 эталона](./tests/browser/fixtures/ant-design-form-labels-reference.json),
+[браузер](./tests/browser/form-labels.spec.ts),
+[публичные типы и SSR](./tests/package/form-labels.ssr.test.ts), `?fixture=form-labels`.
+
 Значением владеет модель: обновляйте его явно через `setFieldValue` или
 `setFieldsValue`. `FormItem.name` принимает буквальный string/number либо массив
 сегментов: `['users', 0, 'name']`. Строка `"user.name"` остаётся отдельным ключом.

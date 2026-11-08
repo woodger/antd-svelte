@@ -27,6 +27,12 @@ export interface FormProps<Values extends FormValues> extends Omit<
   children: Snippet;
   /** @defaultValue 'vertical' */
   layout?: 'vertical' | 'horizontal' | 'inline';
+  /** Добавляет colon к горизонтальной подписи; undefined наследует ConfigProvider.form, затем true. */
+  colon?: boolean;
+  /** Выравнивание подписи; undefined наследует ConfigProvider.form, затем right. */
+  labelAlign?: 'left' | 'right';
+  /** Перенос текста подписи; undefined наследует ConfigProvider.form, затем false. */
+  labelWrap?: boolean;
   /** Оформление дочерних полей; undefined сбрасывает внешний Form, сохраняя ConfigProvider. */
   variant?: Variant;
   /** По умолчанию form; false оставляет контекст без native wrapper и DOM-атрибутов. */
@@ -40,3 +46,6 @@ export interface FormProps<Values extends FormValues> extends Omit<
   onError?: (error: unknown) => void;
   class?: string;
 }
+
+/** Defaults подписей Form; undefined наследует родительский record, {} заменяет его. */
+export type FormConfig = Pick<FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap'>;

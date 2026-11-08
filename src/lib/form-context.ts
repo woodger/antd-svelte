@@ -7,6 +7,9 @@ export interface FormContext {
   readonly variant?: Variant;
   readonly disabled: boolean;
   readonly layout: 'vertical' | 'horizontal' | 'inline';
+  readonly colon?: boolean;
+  readonly labelAlign?: 'left' | 'right';
+  readonly labelWrap?: boolean;
   readonly resetKey?: object;
   getFieldError(name: NamePath): readonly string[];
   getFieldWarning(name: NamePath): readonly string[];
