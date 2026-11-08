@@ -4,6 +4,7 @@
   import type { StatisticConfig } from './statistic.types';
   import type { TimelineConfig } from './timeline.types';
   import type { StepsConfig } from './steps.types';
+  import type { LayoutConfig } from './layout.types';
   import type { TreeSelectConfig } from './tree-select.types';
   import type { DatePickerConfig } from './date-picker.types';
   import type { CardConfig, CardMetaConfig } from './card.types';
@@ -85,6 +86,8 @@
     timeline?: TimelineConfig;
     /** Общие классы/стили Steps; собственный record заменяет родительский целиком. */
     steps?: StepsConfig;
+    /** Общие class/style контейнера Layout; собственный record заменяет родительский. */
+    layout?: LayoutConfig;
     select?: SelectConfig;
     treeSelect?: TreeSelectConfig;
     datePicker?: DatePickerConfig;
@@ -177,6 +180,7 @@
     statistic,
     timeline,
     steps,
+    layout,
     select,
     treeSelect,
     datePicker,
@@ -275,6 +279,9 @@
     },
     get steps() {
       return steps ?? parent.steps;
+    },
+    get layout() {
+      return layout ?? parent.layout;
     },
     get select() {
       return select ?? parent.select;

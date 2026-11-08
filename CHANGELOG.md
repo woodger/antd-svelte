@@ -9,6 +9,10 @@
 
 ### Added
 
+- ConfigProvider.layout задаёт общие class/style только для контейнеров Layout.
+  Сохранены локальные приоритеты, nested replacement, секции, темы, native RTL,
+  DOM, drafts/selection/focus и collapse-состояние Sider при обновлении config.
+
 - Steps поддерживает локальный prefixCls для root, layout, частей и progress.
   Новый CSS-рецепт steps-prefix воспроизводит 137 правил; сохранены namespace
   токенов, ids, native keyboard/focus, mapped Icon и изоляция соседних Steps.

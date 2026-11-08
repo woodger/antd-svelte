@@ -18,6 +18,9 @@ export interface LayoutSectionProps extends Omit<
 export interface LayoutProps extends LayoutSectionProps {
   hasSider?: boolean;
 }
+/** Общие class/style применяются только к контейнерам Layout, без его секций и Sider. */
+export type LayoutConfig = Pick<LayoutProps, 'class' | 'style'>;
+
 export type LayoutCollapseType = 'clickTrigger' | 'responsive';
 export type LayoutSiderSemanticSlots = Partial<Record<'root' | 'body', string>>;
 /** Боковая секция Layout с collapse, responsive breakpoint и trigger. */

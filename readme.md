@@ -951,7 +951,15 @@ algorithm и cssVar prefix/key применяются к Layout/Sider; секц�
 Отдельные Header/Content/Footer получают собственные переменные: в закреплённом
 upstream standalone-секции остаются без Layout variables. Наблюдение и выбранное
 поведение записаны в реестре; это отличие не переносится в Svelte.
-PrefixCls и глобальный layout component config вне темы пока не поддержаны.
+ConfigProvider.layout задаёт общие class/style только для контейнеров Layout.
+Классы config и local накапливаются; локальный style перекрывает общий, оба идут
+после переменных темы. Undefined наследует родительский record; собственный объект,
+включая {}, заменяет его целиком. Header/Content/Footer/Sider напрямую этот record
+не получают. Обновление config сохраняет DOM, черновики, выделение/фокус и collapse.
+Самостоятельные секции сохраняют native variables/RTL; исходные отличия записаны
+в raw reference и учтены явно при сравнении. PrefixCls пока не поддержан.
+В эталоне также зафиксирован сброс неизменившегося padding после удаления
+локального paddingTop при React update; native строка стилей сохраняет отступ.
 
 ## Descriptions
 

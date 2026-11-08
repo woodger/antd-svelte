@@ -28,8 +28,9 @@
       componentTheme.className,
       (hasSider ?? model.hasSider) && 'ant-layout-has-sider',
       config.direction === 'rtl' && 'ant-layout-rtl',
+      config.layout?.class,
       className,
       rootClassName
-    ]} style={[componentTheme.style, style].filter(Boolean).join(';')}>
+    ]} style={[componentTheme.style, config.layout?.style, style].filter(Boolean).join(';')}>
   {@render children?.()}
 </div>

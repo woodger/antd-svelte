@@ -307,6 +307,7 @@ export { default as LayoutFooter } from './LayoutFooter.svelte';
 export { default as LayoutSider } from './LayoutSider.svelte';
 export type {
   LayoutProps,
+  LayoutConfig,
   LayoutSectionProps,
   LayoutSiderProps,
   LayoutCollapseType,

@@ -1353,7 +1353,17 @@
         "src/lib/LayoutSider.svelte",
         "src/lib/layout.types.ts",
         "readme.md",
-        "integration:layout"
+        "integration:layout",
+        "src/lib/ConfigProvider.svelte",
+        "src/lib/config-context.ts",
+        "src/lib/index.ts",
+        "tests/browser/layout-config.spec.ts",
+        "tests/browser/layout-config-metrics.ts",
+        "tests/browser/fixtures/LayoutConfigCase.svelte",
+        "tests/browser/fixtures/LayoutConfigFixtures.svelte",
+        "tests/browser/fixtures/layout-config-cases.ts",
+        "tests/browser/fixtures/ant-design-layout-config-reference.json",
+        "tests/package/layout-config.ssr.test.ts"
       ],
       "features": [
         {
@@ -1432,11 +1442,49 @@
         },
         {
           "id": "global-config",
-          "title": "PrefixCls и глобальный component config вне темы",
+          "title": "ConfigProvider.layout: общие class/style",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Layout.svelte",
+            "src/lib/layout.types.ts",
+            "src/lib/ConfigProvider.svelte",
+            "src/lib/config-context.ts",
+            "src/lib/index.ts",
+            "tests/browser/layout-config.spec.ts",
+            "tests/browser/layout-config-metrics.ts",
+            "tests/browser/fixtures/LayoutConfigCase.svelte",
+            "tests/browser/fixtures/LayoutConfigFixtures.svelte",
+            "tests/browser/fixtures/layout-config-cases.ts",
+            "tests/browser/fixtures/ant-design-layout-config-reference.json",
+            "tests/package/layout-config.ssr.test.ts"
+          ],
+          "note": "LayoutConfig экспортирован; ConfigProvider.layout class/style применяются только к контейнеру Layout, не к Header/Content/Footer/Sider. Context/local/rootClassName классы накапливаются, root style идёт после config style и component variables. Undefined наследует record, собственный объект включая {} заменяет его целиком. Двадцать два unmodified UMD cases и четыре transitions фиксируют LTR/RTL, классы, partial style priority, nested inherit/empty/replacement, sections и hasSider. Source body inherited color явно согласован с Native base context. Raw standalone Header/Footer без Layout variables и standalone RTL Source сохранены в reference; native themed/RTL поведение явно проверяется через documented corrections. Root identity и sibling scopes сохраняются; native lifecycle защищает drafts/selection/focus, Sider DOM/collapse и отсутствие лишних callbacks. Component tokens/aliases/algorithms не меняются; local/global prefixCls остаются отдельной недостающей возможностью. Без новых dependencies, CSS и script/config changes."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный/global prefixCls Layout и секций",
           "state": "missing",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Component tokens, aliases и algorithms подключены отдельной feature. Произвольный prefixCls и ConfigProvider.layout class/style вне темы ещё не перенесены."
+          "evidence": [
+            "src/lib/Layout.svelte",
+            "src/lib/LayoutPart.svelte",
+            "src/lib/LayoutSider.svelte"
+          ],
+          "note": "ConfigProvider.layout class/style и component themes поддерживаются отдельно; произвольный prefixCls Layout/Header/Content/Footer/Sider ещё не перенесён."
+        },
+        {
+          "id": "native-style-shorthand-reset",
+          "title": "Сохранение shorthand после удаления локального longhand",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Layout.svelte",
+            "tests/browser/layout-config.spec.ts",
+            "tests/browser/fixtures/ant-design-layout-config-reference.json",
+            "tests/package/layout-config.ssr.test.ts"
+          ],
+          "note": "Для отдельного разбора: Ant Design 6.6.8 / 984592267de88fbf9cdaecc96a56629e721c709d, официальный UMD с React 18.3.1. ConfigProvider.layout.style padding=13, затем Layout.style paddingTop=9, затем удаление локального style. На повторно используемом root получается padding-top=0px при padding-right=13px; fresh mount того же итогового config даёт 13px по обеим сторонам. Raw observations.shorthandRemoval хранит оба замера. Причина соответствует React diff удаления longhand без повторного применения неизменившегося shorthand. Native Svelte style-string сохраняет ожидаемые 13px; React update defect не копируется. Browser expected correction ограничена sibling.root.paddingTop на config-clear, остальные layers и Source metrics сравниваются без изменений, кроме ранее согласованных standalone variables/RTL."
         }
       ]
     },
