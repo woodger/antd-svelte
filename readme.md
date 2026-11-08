@@ -5878,6 +5878,12 @@ ConfigProvider.typography задаёт class/style и semantic root/actions/acti
 действий; Text имеет приоритет при совместном использовании. Сохранены dark,
 compact, RTL, native focus и исходные heading margins.
 
+Все варианты Typography используют локальный `prefixCls` либо наследуют общий
+`ConfigProvider.prefixCls`; пустое значение выбирает наследование. Prefix охватывает
+заголовки, decorations, ellipsis, actions и отдельный editor root. Смена prefix
+сохраняет DOM, draft/selection/focus и состояние копирования. Namespace theme
+variables и prefix вложенного Tooltip остаются независимыми.
+
 `theme.components.Typography` применяет `titleMarginTop`/`titleMarginBottom`,
 alias overrides и algorithms к обычному тексту и редактору. Global tokens,
 вложенные/reset/sibling scopes и отдельный CSS-variable prefix следуют source;
@@ -5892,8 +5898,13 @@ openClassName и semantic styles. Callbacks получают разрешённ�
 и фокус. Остальные delegated Tooltip props, включая UniqueProvider/motion
 и полную геометрию CSS-transform/scroll-container,
 ещё требуют переноса. Граница fresh для opaque Snippet описана в Tooltip.
-Vendor CSS рассчитан на `ant-typography`, произвольный prefix
-не генерирует новый CSS.
+В исходном Ellipsis memoization не учитывает смену prefix: во вложенном provider
+кнопки copy/edit могут сохранить старые классы и потерять оформление. Raw live
+замеры и fresh mount с теми же public props сохранены в
+[prefix-эталоне](./tests/browser/fixtures/ant-design-typography-prefix-reference.json).
+Native обновляет классы действий вместе с корнем; этот дефект не перенесён.
+Проверки prefix: [браузер](./tests/browser/typography-prefix.spec.ts) и
+[SSR](./tests/package/typography-prefix.ssr.test.ts), `?fixture=typography-prefix`.
 
 Проверки: [engine](./src/lib/typography.engine.test.ts),
 [copy lifecycle](./src/lib/typography-copy.model.test.ts),
@@ -9993,7 +10004,7 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon, Breadcrumb и Row. Остальные семейства подключаются отдельно. Например,
+Space/SpaceCompact/SpaceAddon, Breadcrumb, Row и Typography. Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
 

@@ -29,7 +29,7 @@
   let {
     children,
     component = 'span',
-    prefixCls = 'ant-typography',
+    prefixCls: customizePrefixCls,
     direction,
     classNames,
     styles,
@@ -60,6 +60,7 @@
   } = $derived(rawProps);
 
   const config = useConfig();
+  let prefixCls = $derived(config.getPrefixCls('typography', customizePrefixCls));
   let resolvedDirection = $derived(direction ?? config.direction);
   let semantic = $derived(typographySemantics(
     config.typography,

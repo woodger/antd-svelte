@@ -9,7 +9,7 @@
   let {
     children,
     component,
-    prefixCls = 'ant-typography',
+    prefixCls: customizePrefixCls,
     direction,
     classNames,
     styles,
@@ -25,6 +25,7 @@
     ...attributes
   } = $derived(rawProps);
   const config = useConfig();
+  let prefixCls = $derived(config.getPrefixCls('typography', customizePrefixCls));
   let resolvedDirection = $derived(direction ?? config.direction);
   let semantics = $derived(typographySemantics(
     config.typography,

@@ -627,11 +627,11 @@
         },
         {
           "id": "advanced-source-api",
-          "title": "Произвольный prefix CSS и расширенные Tooltip props",
+          "title": "Расширенные delegated Tooltip props",
           "state": "missing",
           "requiredForV1": false,
           "evidence": [],
-          "note": "Typography CSS для собственного prefixCls остаётся gap. Вложенный Tooltip поддерживает локальные prefixCls/openClassName, color, semantic styles, ConfigProvider trigger/delays и click/contextMenu; unique/fresh/motion, полный align и остальные delegated props ещё требуют переноса. React dev warnings не воспроизводятся. V1-ready не означает полный React API."
+          "note": "Вложенный Tooltip поддерживает локальные prefixCls/openClassName, color, semantic styles, ConfigProvider trigger/delays и click/contextMenu; unique/fresh/motion, полный align и остальные delegated props ещё требуют переноса. React dev warnings не воспроизводятся. V1-ready не означает полный React API."
         },
         {
           "id": "component-theme",
@@ -800,6 +800,43 @@
             "readme.md"
           ],
           "note": "Независимые списки заменяют trigger; undefined возвращает его, [] отключает выбранное направление. FocusDelay/blurDelay задаются в секундах с default 0 независимо от mouse delays; отрицательные значения сохраняют асинхронный timer 0 rc-trigger. Неявный touch добавляется к hover без click отдельно для show/hide; touched подавляет совместимые mouse события до обработанного click. Новые overrides используют исходное outside mousedown/contextmenu только для hide click/contextMenu/touch; Escape сохраняется. Отключённый hide и замена actions не отменяют ожидающий show. 54 официальных UMD-сценария / 310 кадров фиксируют Tooltip и Typography JS ellipsis, raw callbacks и sync timing, controlled owner через getter/setter binding, prop removal, popup hover, disabled visibility и touch. Четыре source cleanup traces закрепляют отсутствие callback после удаления pending/visible focused trigger. Native blur без relatedTarget ждёт microtask для проверки connected/cleanup; blur с relatedTarget сохраняет source sync timing. SSR не запускает DOM/timers, unmount отменяет задержку. Native defaults без новых actions, Svelte binding и существующий popup lifecycle сохраняются; Typography вычисляет disabled по ellipsis. Source motion/UniqueProvider и полный аудит остальных delegated props этим этапом не объявляются завершёнными."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный и общий prefixCls всех вариантов Typography",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Typography.svelte",
+            "src/lib/TypographyBlock.svelte",
+            "src/lib/TypographyElement.svelte",
+            "src/lib/TypographyEditable.svelte",
+            "src/lib/typography.types.ts",
+            "src/lib/typography-prefix.engine.ts",
+            "src/lib/typography-prefix.engine.test.ts",
+            "src/lib/vendor/typography-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/TypographyPrefixScope.svelte",
+            "tests/browser/fixtures/TypographyPrefixFixtures.svelte",
+            "tests/browser/fixtures/TypographyPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-typography-prefix-reference.json",
+            "tests/browser/typography-prefix-metrics.ts",
+            "tests/browser/typography-prefix.spec.ts",
+            "tests/package/typography-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty prefix wins; empty/undefined наследуют ConfigProvider prefix. Root/decorations/headings/ellipsis/actions/editor CSS используют resolved prefix; canonical theme/compact markers и component tokens сохранены. Nested/sibling scopes, RTL, aliases и cssVar prefix независимы. Live updates сохраняют editor/link DOM, draft/selection/focus, save callback и copy success. SSR формирует root/editor CSS без browser resources; semantic callbacks получают resolved prefix, local style имеет приоритет."
+        },
+        {
+          "id": "prefix-action-memo-observation",
+          "title": "Исходные stale action classes при смене prefix",
+          "state": "partial",
+          "requiredForV1": false,
+          "evidence": [
+            "tests/browser/fixtures/ant-design-typography-prefix-reference.json",
+            "tests/browser/typography-prefix.spec.ts",
+            "readme.md"
+          ],
+          "note": "Unmodified UMD live transitions сохраняют старые edit/copy classes во вложенном provider, хотя root prefix уже изменён; оформление кнопок теряется. Base/Ellipsis finalContent memo dependencies не включают prefixCls. Raw result сохранён отдельно от freshResult с теми же public props и editing state. Native обновляет actions вместе с root и совпадает с fresh mount; дефект Source не перенесён."
         }
       ]
     },

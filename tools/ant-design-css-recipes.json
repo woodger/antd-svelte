@@ -1639,6 +1639,30 @@
     "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Typography: headings, decorations, actions, editing и ellipsis.\n * Базовый корень ограничен :where(.ant-typography-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */"
   },
   {
+    "id": "typography-prefix",
+    "output": "src/lib/vendor/typography-prefix.css.js",
+    "expectedRules": 73,
+    "include": [
+      "\\.ant-typography(?![\\w])"
+    ],
+    "exclude": [
+      "\\.ant-(?:menu|select)(?![\\w])"
+    ],
+    "replacements": [
+      {
+        "pattern": "\\.css-var-_R_0_\\.ant-typography(?:-css-var)?(?![-\\w])",
+        "replacement": ".ant-typography-css-var"
+      },
+      {
+        "pattern": "\\.ant-typography(?![-\\w])",
+        "replacement": ".ant-typography:where(.ant-typography-css-var)"
+      }
+    ],
+    "keyframes": [],
+    "header": "/* Ant Design 6.6.8 — MIT; см. LICENSE.ant-design.\n * Typography prefix template: headings, decorations, actions, editing и ellipsis.\n * Базовый корень ограничен :where(.ant-typography-css-var).\n * https://registry.npmjs.org/antd/-/antd-6.6.8.tgz\n * SHA-256: 8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa\n */",
+    "format": "module"
+  },
+  {
     "id": "tour",
     "output": "src/lib/vendor/tour.css",
     "expectedRules": 61,

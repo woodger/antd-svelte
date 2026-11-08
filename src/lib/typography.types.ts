@@ -97,6 +97,7 @@ export interface TypographyProps extends Omit<
   children?: TypographyContent;
   component?: keyof HTMLElementTagNameMap;
   direction?: 'ltr' | 'rtl';
+  /** Непустой локальный prefix имеет приоритет; иначе используется ConfigProvider.prefixCls. */
   prefixCls?: string;
   classNames?: TypographySemantic;
   styles?: TypographySemantic;

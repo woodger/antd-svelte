@@ -9,6 +9,11 @@
 
 ### Added
 
+- Typography поддерживает local/shared prefixCls для текста, заголовков,
+  decorations, actions, ellipsis и редактора. DOM, draft/selection/focus и copy
+  success сохраняются. Source stale action classes записаны raw/fresh замерами;
+  Native обновляет действия вместе с корнем.
+
 - Row поддерживает local/shared prefixCls для корня, wrap/align/justify и RTL.
   Responsive gutters, layout, child context, refs, draft/selection/focus и FormData
   сохраняются; перенос Col namespace и связанных правил FormItem идёт отдельно.

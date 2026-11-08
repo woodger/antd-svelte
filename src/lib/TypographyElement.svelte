@@ -2,6 +2,8 @@
   import type { Snippet } from 'svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getTypographyPrefixCss } from './typography-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import type { TypographySlots } from './typography.types';
 
   let {
@@ -35,11 +37,14 @@
   } = $props();
   const config = useConfig();
   const componentTheme = useComponentTheme('Typography');
+  let prefixCss = $derived(getTypographyPrefixCss(prefixCls));
 </script>
 
 {#snippet content()}{@render children?.()}{/snippet}
+{#if prefixCss}<ThemeScopeStyle css={prefixCss} scope={`typography-prefix:${prefixCls}`} />{/if}
 {#if controlClamp}
   <svelte:element this={component} {...attributes} bind:this={nativeElement}
+    data-ant-typography-prefix={prefixCss ? prefixCls : undefined}
     class={[prefixCls, componentTheme.className,
       direction === 'rtl' && `${prefixCls}-rtl`, className, rootClassName,
       'ant-typography-css-var', config.theme.compact && 'ant-typography-compact', classNames.root]}
@@ -49,6 +54,7 @@
   </svelte:element>
 {:else}
   <svelte:element this={component} {...attributes} bind:this={nativeElement}
+  data-ant-typography-prefix={prefixCss ? prefixCls : undefined}
   class={[prefixCls, componentTheme.className,
     direction === 'rtl' && `${prefixCls}-rtl`, className, rootClassName,
     'ant-typography-css-var', config.theme.compact && 'ant-typography-compact', classNames.root]}
