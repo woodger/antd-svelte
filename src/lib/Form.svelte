@@ -9,6 +9,7 @@
   import type { FormProps, FormSemanticSlots } from './form.types';
   import { resolveValidationRules, type FormValues } from './validation.engine';
   import { mergeComponentSemantics } from './semantic-style.engine';
+  import { mergeValidationMessages } from './validation-message.engine';
 
   let props: FormProps<Values> = $props();
   let {
@@ -24,6 +25,7 @@
     variant,
     size,
     tooltip,
+    validateMessages,
     component = 'form',
     disabled,
     onFinish,
@@ -40,6 +42,13 @@
 
   const config = useConfig();
   const componentTheme = useComponentTheme('Form');
+  $effect(() => getFormHooks(form)?.registerValidateMessages(() => ({
+    ...mergeValidationMessages(
+      config.locale.Form?.defaultValidateMessages,
+      config.form?.validateMessages
+    ),
+    ...validateMessages
+  })));
   let resolvedSize = $derived(size ?? config.explicitComponentSize);
   let resolvedRequiredMark = $derived(requiredMark ?? config.form?.requiredMark ?? true);
   let resolvedTooltip = $derived({ ...config.form?.tooltip, ...tooltip });

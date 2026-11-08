@@ -1,6 +1,7 @@
 import type { NamePath } from './form-store.engine';
 import type { FormRule } from './validation.engine';
 import type { FormFieldMeta } from './form.model.svelte';
+import type { ValidateMessages } from './validation-messages.types';
 
 export interface FormFieldRegistration {
   readonly name: NamePath;
@@ -23,6 +24,7 @@ export interface FormFieldRegistration {
 
 export interface FormHooks {
   readonly resetKey: object;
+  registerValidateMessages(getMessages: () => ValidateMessages | undefined): () => void;
   getFieldMeta(name: NamePath): FormFieldMeta | undefined;
   registerField(field: FormFieldRegistration): () => void;
   markFieldMounted(mountKey: symbol): void;

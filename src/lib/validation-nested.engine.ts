@@ -1,5 +1,7 @@
 import type { FormValues, ValidationRule } from './validation.engine';
-import { formatValidationMessages, type ValidationMessageContext } from './validation-message.engine';
+import {
+  formatValidationMessages, resolveValidationMessage, type ValidationMessageContext
+} from './validation-message.engine';
 
 export interface ValidationMessages {
   errors: string[];
@@ -55,7 +57,9 @@ export async function validateNestedRule<Values extends FormValues>(
 
   if (rule.required && !value && (rule.fields || rule.type === 'object' && rule.defaultField)) {
     return collectValidationMessages(rule, own.length ? own
-      : formatValidationMessages([rule.message ?? 'Заполните это поле.'], rule, context), []);
+      : formatValidationMessages([
+        resolveValidationMessage(rule, context, 'required', 'Заполните это поле.')
+      ], rule, context), []);
   }
 
   for (let parent = ancestor; parent; parent = parent.parent) {

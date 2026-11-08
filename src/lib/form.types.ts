@@ -7,6 +7,7 @@ import type { FormValues } from './validation.engine';
 import type { ComponentSize, RenderEmptyContent, Variant } from './types';
 import type { Options, ScrollAction } from './vendor/compute-scroll-into-view';
 import type { TooltipProps } from './tooltip.types';
+import type { ValidateMessages } from './validation-messages.types';
 
 /** Defaults подсказки label; icon заменяет React element Svelte snippet. */
 export interface FormTooltipProps extends Omit<TooltipProps, 'children'> {
@@ -43,6 +44,8 @@ export type FormRequiredMark = boolean | 'optional'
 export interface FormLocale {
   /** Пустая строка использует исходный английский fallback. */
   optional?: string;
+  /** Шаблоны локали; ConfigProvider.form и Form.validateMessages приоритетнее. */
+  defaultValidateMessages?: ValidateMessages;
 }
 
 /** Плоские class/CSS slots Form; root относится к Form, остальные — к полям и ErrorList. */
@@ -87,6 +90,8 @@ export interface FormProps<Values extends FormValues> extends Omit<
   size?: ComponentSize;
   /** Defaults подсказок; не показывают значок без FormItem.tooltip. */
   tooltip?: FormTooltipProps;
+  /** Локальные группы заменяют config целиком; message отдельного правила приоритетнее. */
+  validateMessages?: ValidateMessages;
   /** По умолчанию form; false оставляет контекст без native wrapper и DOM-атрибутов. */
   component?: 'form' | false;
   /** Defaults disabled для дочерних controls; ближайший ConfigProvider и prop control приоритетнее. */
@@ -115,4 +120,5 @@ export interface FormProps<Values extends FormValues> extends Omit<
 export type FormConfig = Pick<
   FormProps<FormValues>, 'colon' | 'labelAlign' | 'labelWrap' | 'requiredMark'
     | 'class' | 'style' | 'classNames' | 'styles' | 'scrollToFirstError' | 'tooltip'
+    | 'validateMessages'
 >;

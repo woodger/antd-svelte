@@ -1,0 +1,1139 @@
+{
+  "reference": {
+    "version": "6.6.8",
+    "revision": "984592267de88fbf9cdaecc96a56629e721c709d",
+    "archiveSha256": "8eb361740b62dc79762f21d036dea685d5e7c1d714315ea3247b9aa5d2269dfa",
+    "renderer": "unmodified official UMD with React 18.3.1",
+    "settled": "three animation frames after validation"
+  },
+  "cases": [
+    {
+      "sample": {
+        "id": "required",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": "Required ${label}"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Required Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "enum",
+        "value": "c",
+        "rule": {
+          "type": "enum",
+          "enum": [
+            "a",
+            "b"
+          ]
+        },
+        "local": {
+          "enum": "Enum ${label}/${enum}"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Enum Field label/a, b"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "whitespace",
+        "value": "  ",
+        "rule": {
+          "type": "string",
+          "whitespace": true
+        },
+        "local": {
+          "whitespace": "Blank ${label}"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Blank Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-string",
+        "value": 2,
+        "rule": {
+          "type": "string"
+        },
+        "local": {
+          "types": {
+            "string": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/string"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-number",
+        "value": "invalid",
+        "rule": {
+          "type": "number"
+        },
+        "local": {
+          "types": {
+            "number": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/number"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-integer",
+        "value": "invalid",
+        "rule": {
+          "type": "integer"
+        },
+        "local": {
+          "types": {
+            "integer": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/integer"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-float",
+        "value": "invalid",
+        "rule": {
+          "type": "float"
+        },
+        "local": {
+          "types": {
+            "float": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/float"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-boolean",
+        "value": "invalid",
+        "rule": {
+          "type": "boolean"
+        },
+        "local": {
+          "types": {
+            "boolean": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/boolean"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-array",
+        "value": "invalid",
+        "rule": {
+          "type": "array"
+        },
+        "local": {
+          "types": {
+            "array": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/array"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-object",
+        "value": "invalid",
+        "rule": {
+          "type": "object"
+        },
+        "local": {
+          "types": {
+            "object": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/object"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-date",
+        "value": "invalid",
+        "rule": {
+          "type": "date"
+        },
+        "local": {
+          "types": {
+            "date": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/date"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-regexp",
+        "value": "[",
+        "rule": {
+          "type": "regexp"
+        },
+        "local": {
+          "types": {
+            "regexp": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/regexp"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-method",
+        "value": "invalid",
+        "rule": {
+          "type": "method"
+        },
+        "local": {
+          "types": {
+            "method": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/method"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-email",
+        "value": "invalid",
+        "rule": {
+          "type": "email"
+        },
+        "local": {
+          "types": {
+            "email": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/email"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-tel",
+        "value": "invalid",
+        "rule": {
+          "type": "tel"
+        },
+        "local": {
+          "types": {
+            "tel": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/tel"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-url",
+        "value": "invalid",
+        "rule": {
+          "type": "url"
+        },
+        "local": {
+          "types": {
+            "url": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/url"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "type-hex",
+        "value": "invalid",
+        "rule": {
+          "type": "hex"
+        },
+        "local": {
+          "types": {
+            "hex": "Type ${label}/${type}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Type Field label/hex"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "string-len",
+        "value": "ab",
+        "rule": {
+          "type": "string",
+          "len": 4
+        },
+        "local": {
+          "string": {
+            "len": "len ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "len Field label/4/undefined/undefined"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "string-min",
+        "value": "ab",
+        "rule": {
+          "type": "string",
+          "min": 4
+        },
+        "local": {
+          "string": {
+            "min": "min ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "min Field label/undefined/4/undefined"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "string-max",
+        "value": "ab",
+        "rule": {
+          "type": "string",
+          "max": 1
+        },
+        "local": {
+          "string": {
+            "max": "max ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "max Field label/undefined/undefined/1"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "string-range",
+        "value": "ab",
+        "rule": {
+          "type": "string",
+          "min": 4,
+          "max": 8
+        },
+        "local": {
+          "string": {
+            "range": "range ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "range Field label/undefined/4/8"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "number-len",
+        "value": 2,
+        "rule": {
+          "type": "number",
+          "len": 4
+        },
+        "local": {
+          "number": {
+            "len": "len ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "len Field label/4/undefined/undefined"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "number-min",
+        "value": 2,
+        "rule": {
+          "type": "number",
+          "min": 4
+        },
+        "local": {
+          "number": {
+            "min": "min ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "min Field label/undefined/4/undefined"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "number-max",
+        "value": 2,
+        "rule": {
+          "type": "number",
+          "max": 1
+        },
+        "local": {
+          "number": {
+            "max": "max ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "max Field label/undefined/undefined/1"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "number-range",
+        "value": 2,
+        "rule": {
+          "type": "number",
+          "min": 4,
+          "max": 8
+        },
+        "local": {
+          "number": {
+            "range": "range ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "range Field label/undefined/4/8"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "array-len",
+        "value": [
+          "a",
+          "b"
+        ],
+        "rule": {
+          "type": "array",
+          "len": 4
+        },
+        "local": {
+          "array": {
+            "len": "len ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "len Field label/4/undefined/undefined"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "array-min",
+        "value": [
+          "a",
+          "b"
+        ],
+        "rule": {
+          "type": "array",
+          "min": 4
+        },
+        "local": {
+          "array": {
+            "min": "min ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "min Field label/undefined/4/undefined"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "array-max",
+        "value": [
+          "a",
+          "b"
+        ],
+        "rule": {
+          "type": "array",
+          "max": 1
+        },
+        "local": {
+          "array": {
+            "max": "max ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "max Field label/undefined/undefined/1"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "array-range",
+        "value": [
+          "a",
+          "b"
+        ],
+        "rule": {
+          "type": "array",
+          "min": 4,
+          "max": 8
+        },
+        "local": {
+          "array": {
+            "range": "range ${label}/${len}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "range Field label/undefined/4/8"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "pattern",
+        "value": "ab",
+        "rule": {
+          "pattern": "^no$"
+        },
+        "local": {
+          "pattern": {
+            "mismatch": "Pattern ${label}/${pattern}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Pattern Field label//^no$/"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "rule-priority",
+        "value": "",
+        "rule": {
+          "required": true,
+          "message": "Rule ${label}"
+        },
+        "local": {
+          "required": "Local"
+        },
+        "outer": {
+          "required": "Outer"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Rule Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "empty-template",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": ""
+        }
+      },
+      "valid": false,
+      "errors": [
+        ""
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "function-template",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": "@function"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Function Field label"
+      ],
+      "warnings": [],
+      "functionCalls": [
+        [
+          "field"
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "printf-required",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": "%s %% ${label}"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "field % Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "printf-range",
+        "value": 2,
+        "rule": {
+          "type": "number",
+          "min": 4,
+          "max": 8
+        },
+        "local": {
+          "number": {
+            "range": "%s %d %j %% ${label}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "field 4 8 % Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "printf-pattern",
+        "value": "ab",
+        "rule": {
+          "pattern": "^no$"
+        },
+        "local": {
+          "pattern": {
+            "mismatch": "%s %s %s"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "field ab /^no$/"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "config-required",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "outer": {
+          "required": "Outer ${label}"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Outer Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "config-inherit",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "outer": {
+          "required": "Outer ${label}"
+        },
+        "inner": {}
+      },
+      "valid": false,
+      "errors": [
+        "Outer Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "config-replace",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "outer": {
+          "required": "Outer ${label}"
+        },
+        "inner": {
+          "form": {
+            "colon": false
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Please enter Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "config-locale",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "outer": {
+          "required": "Outer ${label}"
+        },
+        "inner": {
+          "locale": {
+            "Form": {
+              "defaultValidateMessages": {
+                "required": "Locale ${label}"
+              }
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Outer Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "locale-required",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "inner": {
+          "locale": {
+            "Form": {
+              "defaultValidateMessages": {
+                "required": "Locale ${label}"
+              }
+            }
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Locale Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "local-required",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": "Local ${label}"
+        },
+        "outer": {
+          "required": "Outer ${label}"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Local Field label"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "local-group-replace",
+        "value": 2,
+        "rule": {
+          "type": "number",
+          "min": 4,
+          "max": 8
+        },
+        "local": {
+          "number": {
+            "min": "Local min"
+          }
+        },
+        "outer": {
+          "number": {
+            "range": "Outer range"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "'field' must be between 4 and 8"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "config-local-groups",
+        "value": 2,
+        "rule": {
+          "type": "number",
+          "min": 4,
+          "max": 8
+        },
+        "local": {
+          "required": "Local required"
+        },
+        "outer": {
+          "number": {
+            "range": "Outer ${label}/${min}/${max}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Outer Field label/4/8"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "nested-object",
+        "value": {
+          "child": "ab"
+        },
+        "rule": {
+          "type": "object",
+          "fields": {
+            "child": {
+              "min": 4
+            }
+          }
+        },
+        "local": {
+          "string": {
+            "min": "Nested ${label}/${name}/${min}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Nested Field label/field/undefined"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "nested-array",
+        "value": [
+          "ab"
+        ],
+        "rule": {
+          "type": "array",
+          "defaultField": {
+            "min": 4
+          }
+        },
+        "local": {
+          "string": {
+            "min": "Nested ${label}/${name}/${min}"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Nested Field label/field.0/4"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "warning",
+        "value": "",
+        "rule": {
+          "required": true,
+          "warningOnly": true
+        },
+        "local": {
+          "required": "Warning ${label}"
+        }
+      },
+      "valid": true,
+      "errors": [],
+      "warnings": [
+        "Warning Field label"
+      ],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "variables",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": "Required ${label}"
+        },
+        "variables": {
+          "label": "Custom"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Required Custom"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "escaped",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": "\\${label}"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "${label}"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "function-range",
+        "value": 2,
+        "rule": {
+          "type": "number",
+          "min": 4,
+          "max": 8
+        },
+        "local": {
+          "number": {
+            "range": "@arguments"
+          }
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Function field/4/8 Field label"
+      ],
+      "warnings": [],
+      "functionCalls": [
+        [
+          "field",
+          "4",
+          "8"
+        ]
+      ]
+    },
+    {
+      "sample": {
+        "id": "function-throws",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": "@throws"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Template exploded"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    },
+    {
+      "sample": {
+        "id": "undefined-template",
+        "value": "",
+        "rule": {
+          "required": true
+        },
+        "local": {
+          "required": "@undefined"
+        }
+      },
+      "valid": false,
+      "errors": [
+        "Cannot read properties of undefined (reading 'field')"
+      ],
+      "warnings": [],
+      "functionCalls": []
+    }
+  ],
+  "diagnostics": [
+    {
+      "sample": "function-throws",
+      "kind": "error",
+      "message": "Error: Template exploded\n    at eval (eval at evaluate (:370:30), <anonymous>:46:47)\n    at bd (<anonymous>:130:31114)\n    at Object.Nd [as required] (<anonymous>:130:33010)\n    at Object.required [as validator] (<anonymous>:130:39622)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32218"
+    },
+    {
+      "sample": "function-throws",
+      "kind": "pageerror",
+      "message": "Template exploded"
+    },
+    {
+      "sample": "undefined-template",
+      "kind": "error",
+      "message": "TypeError: Cannot read properties of undefined (reading 'field')\n    at <anonymous>:130:32585\n    at Array.map (<anonymous>)\n    at t (<anonymous>:130:41580)\n    at Object.required [as validator] (<anonymous>:130:39644)\n    at <anonymous>:130:42502\n    at <anonymous>:130:32366\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32354\n    at Array.forEach (<anonymous>)\n    at <anonymous>:130:32218"
+    },
+    {
+      "sample": "undefined-template",
+      "kind": "pageerror",
+      "message": "Cannot read properties of undefined (reading 'field')"
+    }
+  ]
+}

@@ -3,6 +3,8 @@ import { FormValidationError } from './FormValidationError';
 import { setFormHooks, type FormFieldRegistration } from './form-internal';
 import { focusFormField, getFormFieldElement, scrollFormField } from './form-field.dom';
 import type { FormScrollOptions } from './form.types';
+import type { ValidateMessages } from './validation-messages.types';
+import { mergeValidationMessages } from './validation-message.engine';
 import {
   containsFormPath,
   copyFormValue,
@@ -167,6 +169,7 @@ export function createForm<Values extends FormValues>({
   // При teardown Svelte читает прежний $state; реестр хранит актуальные регистрации.
   const fieldRegistry = new Set<StoredField>();
   const validationDelays = new Map<StoredField, () => void>();
+  const messageProviders = new Set<() => ValidateMessages | undefined>();
   let fields = $state.raw<StoredField[]>([]);
   let isSubmitting = $state(false);
   let submissionError = $state.raw<unknown>();
@@ -438,7 +441,8 @@ export function createForm<Values extends FormValues>({
       }
       const messageContext = {
         name: path.map(String).join('.'),
-        variables: { label: path.map(String).join('.'), ...field.registration?.messageVariables }
+        variables: { label: path.map(String).join('.'), ...field.registration?.messageVariables },
+        messages: mergeValidationMessages([...messageProviders].at(-1)?.())
       };
       const validateFirst = field.registration?.validateFirst;
       if (delay) {
@@ -814,6 +818,10 @@ export function createForm<Values extends FormValues>({
   setFormHooks(form, {
     get resetKey() {
       return resetKey;
+    },
+    registerValidateMessages(getMessages) {
+      messageProviders.add(getMessages);
+      return () => { messageProviders.delete(getMessages); };
     },
     getFieldMeta(name) {
       const field = findField(name);

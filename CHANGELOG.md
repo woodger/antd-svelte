@@ -9,6 +9,12 @@
 
 ### Added
 
+- Form.validateMessages, ConfigProvider.form.validateMessages и
+  locale.Form.defaultValidateMessages настраивают общие строки и функции шаблонов,
+  включая source printf, приоритеты групп, reactive scopes и messageVariables.
+  Сохранены native русские defaults; undefined и исключения template callback
+  дают обычную ошибку поля без исходных console/page errors.
+
 - FormItem.messageVariables и строковые сообщения правил поддерживают однократную
   подстановку label/name и параметров правила, включая вложенные поля и экранирование.
   Сохранены native defaults и literal metadata setFields; исправлены исходные ошибки

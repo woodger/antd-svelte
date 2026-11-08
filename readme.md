@@ -9826,7 +9826,7 @@ object исключает массив, method означает функцию.
 normalization. Возвращённые и преобразованные значения не заменяют store.
 Правила без type сохраняют прежние native empty values и порядок constraints/validator.
 Сообщения по умолчанию сохраняют native русский текст и первую ошибку правила;
-source validateMessages ещё не перенесён.
+общие шаблоны настраиваются через validateMessages.
 
 Две классификации 6.6.8 исправлены: integer принимает 1e21, float его отклоняет;
 source использует parseInt и ошибается на scientific notation. BigInt/Symbol
@@ -9959,7 +9959,46 @@ Backslash перед `${label}` сохраняет буквальный placehol
 Проверки: [модель и шаблоны](./src/lib/form-message-variables.test.ts),
 [браузер](./tests/browser/form-message-variables.spec.ts),
 [публичные типы и SSR](./tests/package/form-message-variables.ssr.test.ts),
-`?fixture=form-message-variables`. Form.validateMessages остаётся отдельным пробелом.
+`?fixture=form-message-variables`.
+
+`Form.validateMessages` задаёт общие шаблоны required/enum/whitespace, types,
+string/number/array len/min/max/range и pattern.mismatch. Те же настройки доступны
+в ConfigProvider.form.validateMessages и locale.Form.defaultValidateMessages.
+Rule.message приоритетнее Form, затем config и locale. Locale/config объединяют
+вложенные группы; локальный Form заменяет переданную группу целиком, как source.
+ConfigProvider.form сохраняет правило замены record: собственный {} или другой
+form-record убирает родительские настройки Form. Отсутствующие шаблоны используют
+прежние native русские сообщения; встроенные ruRU/enUS их не меняют.
+
+```svelte
+<Form {form} validateMessages={{ string: { min: '${label}: минимум ${min} символа.' } }}>
+  <FormItem name="title" label="Заголовок" rules={[{ min: 3 }]}>
+    <Input value={form.values.title}
+      onValueChange={(value) => form.setFieldValue('title', value)} />
+  </FormItem>
+</Form>
+```
+
+ValidateMessage принимает строку или функцию, возвращающую строку. Шаблон
+вычисляется только при ошибке соответствующего constraint. Source printf
+`%s/%d/%j/%%` применяется до `${variables}`; аргументы функции/printf — путь поля,
+затем соответствующие constraint values. Rule.message обрабатывает только `${}`.
+Date, как source validator, использует types.date для неверной даты и number
+для timestamp range; date.format/parse/invalid сохранены в типах без новых проверок.
+Default перекрывает native fallback custom rejection без Error.message; готовые
+строки validator и ручные ошибки metadata сохраняют прежний приоритет.
+
+Настройки фиксируются перед debounce/async; изменение props действует при следующей
+проверке и само не переписывает старые errors. Провайдер Form снимается при unmount
+и замене модели. SSR не запускает validation, а standalone createForm без Form
+сохраняет native defaults. Undefined вместо шаблона и исключение template callback
+используют обычное сообщение без исходных console/page errors; поле остаётся invalid.
+Raw failures и контексты сохранены в
+[52 исходных случаях](./tests/browser/fixtures/ant-design-form-validate-messages-reference.json).
+Проверки: [шаблоны и lifecycle](./src/lib/form-validate-messages.test.ts),
+[браузерные scopes](./tests/browser/form-validate-messages.spec.ts),
+[публичные типы и SSR](./tests/package/form-validate-messages.ssr.test.ts),
+`?fixture=form-validate-messages`.
 
 `ValidationRule.transform(value)` синхронно преобразует вход только для своего
 правила, до required/min/max/pattern и validator. Другие правила получают исходное

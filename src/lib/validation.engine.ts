@@ -7,7 +7,9 @@ import {
   collectValidationMessages, validateNestedRule,
   type ValidationMessages, type ValidationAncestor
 } from './validation-nested.engine';
-import { formatValidationMessages, type ValidationMessageContext } from './validation-message.engine';
+import {
+  formatValidationMessages, resolveValidationMessage, type ValidationMessageContext
+} from './validation-message.engine';
 export type { ValidationRuleType } from './validation-type.engine';
 
 /** Значение поля может быть скаляром, вложенным контейнером или экземпляром класса. */
@@ -178,7 +180,7 @@ async function validateRuleValue<Values extends FormValues>(
     }
   }
   const messages = formatValidationMessages(
-    await validatePrimitiveRule(transformedValue, values, rule),
+    await validatePrimitiveRule(transformedValue, values, rule, context),
     rule,
     context
   );
@@ -203,11 +205,20 @@ async function validateRuleValue<Values extends FormValues>(
 }
 
 async function validatePrimitiveRule<Values extends FormValues>(
-  transformedValue: FormValue, values: Readonly<Values>, rule: ValidationRule<Values>
+  transformedValue: FormValue,
+  values: Readonly<Values>,
+  rule: ValidationRule<Values>,
+  context?: ValidationMessageContext
 ): Promise<string[]> {
   const messages: string[] = [];
   const type = rule.type;
-  if (type && rule.validator) return validateCustomRule(transformedValue, values, rule);
+  if (type && rule.validator) return validateCustomRule(transformedValue, values, rule, context);
+
+  const message = (
+    path: string | readonly [string, string],
+    fallback: string,
+    ...args: unknown[]
+  ) => resolveValidationMessage(rule, context, path, fallback, [context?.name, ...args]);
 
   const value = normalizeValidationType(transformedValue, type);
   const array = Array.isArray(value);
@@ -217,12 +228,12 @@ async function validatePrimitiveRule<Values extends FormValues>(
     : missing || typeof value === 'string' && !value.trim() || array && value.length === 0;
 
   if (rule.required && (empty || type === 'array' && array && value.length === 0)) {
-    messages.push(rule.message ?? 'Заполните это поле.');
+    messages.push(message('required', 'Заполните это поле.'));
     return messages;
   }
 
   if (!type && rule.whitespace === true && typeof value === 'string' && value !== '' && !value.trim()) {
-    return [rule.message ?? 'Поле не может состоять только из пробелов.'];
+    return [message('whitespace', 'Поле не может состоять только из пробелов.')];
   }
 
   const exactLength = typeof rule.len === 'number';
@@ -232,12 +243,18 @@ async function validatePrimitiveRule<Values extends FormValues>(
   }
 
   if (type && !matchesValidationType(value, type)) {
-    return [rule.message ?? `Проверьте тип значения: ${type}.`];
+    return [message(['types', type], `Проверьте тип значения: ${type}.`, type)];
   }
   const choices = Array.isArray(rule.enum) ? rule.enum : [];
   if (type === 'enum' && choices.indexOf(value) === -1) {
-    return [rule.message ?? (choices.length
-      ? `Значение должно быть одним из: ${choices.map(String).join(', ')}.` : 'Недопустимое значение.')];
+    if (rule.message !== undefined) return [rule.message];
+
+    return [message(
+      'enum',
+      choices.length ? `Значение должно быть одним из: ${choices.map(String).join(', ')}.`
+        : 'Недопустимое значение.',
+      choices.map(value => value == null ? '' : String(value)).join(', ')
+    )];
   }
   if (type && ['boolean', 'object', 'regexp', 'method', 'any',
     'enum', 'email', 'url', 'hex', 'tel'].includes(type)) return [];
@@ -248,25 +265,35 @@ async function validatePrimitiveRule<Values extends FormValues>(
       ? [...value].length
       : typeof value === 'number' ? value
         : type === 'date' && value instanceof Date ? value.getTime() : undefined;
+  const rangeType = array ? 'array' : typeof value === 'string' ? 'string' : 'number';
 
   if (length !== undefined && exactLength && length !== rule.len) {
-    return [rule.message ?? `${array ? 'Точное количество элементов'
-      : typeof value === 'string' ? 'Точная длина' : 'Точное значение'}: ${rule.len}.`];
+    return [message(
+      [rangeType, 'len'],
+      `${array ? 'Точное количество элементов'
+        : typeof value === 'string' ? 'Точная длина' : 'Точное значение'}: ${rule.len}.`,
+      rule.len
+    )];
   }
 
   if (!exactLength && length !== undefined && rule.min !== undefined && length < rule.min) {
     messages.push(
-      rule.message ?? `${array ? 'Минимальное количество' : 'Минимальное значение'}: ${rule.min}.`
+      message(
+        [rangeType, rule.max !== undefined ? 'range' : 'min'],
+        `${array ? 'Минимальное количество' : 'Минимальное значение'}: ${rule.min}.`,
+        ...(rule.max !== undefined ? [rule.min, rule.max] : [rule.min])
+      )
     );
     return messages;
   }
 
   if (!exactLength && length !== undefined && rule.max !== undefined && length > rule.max) {
     messages.push(
-      rule.message
-      ?? `${array
-        ? 'Максимальное количество'
-        : 'Максимальное значение'}: ${rule.max}.`
+      message(
+        [rangeType, rule.min !== undefined ? 'range' : 'max'],
+        `${array ? 'Максимальное количество' : 'Максимальное значение'}: ${rule.max}.`,
+        ...(rule.min !== undefined ? [rule.min, rule.max] : [rule.max])
+      )
     );
     return messages;
   }
@@ -275,20 +302,23 @@ async function validatePrimitiveRule<Values extends FormValues>(
     && (!array || type === 'pattern')
     && rule.pattern
     && !matchesValidationPattern(value, rule.pattern, !type || type === 'string')) {
-    messages.push(rule.message ?? 'Проверьте формат значения.');
+    messages.push(message(['pattern', 'mismatch'], 'Проверьте формат значения.', value, rule.pattern));
     return messages;
   }
 
   if (type === 'string' && rule.whitespace === true && value !== ''
     && typeof value === 'string' && !value.trim()) {
-    return [rule.message ?? 'Поле не может состоять только из пробелов.'];
+    return [message('whitespace', 'Поле не может состоять только из пробелов.')];
   }
 
-  return validateCustomRule(value, values, rule);
+  return validateCustomRule(value, values, rule, context);
 }
 
 async function validateCustomRule<Values extends FormValues>(
-  value: FormValue, values: Readonly<Values>, rule: ValidationRule<Values>
+  value: FormValue,
+  values: Readonly<Values>,
+  rule: ValidationRule<Values>,
+  context?: ValidationMessageContext
 ): Promise<string[]> {
   const messages: string[] = [];
   if (rule.validator) {
@@ -302,7 +332,7 @@ async function validateCustomRule<Values extends FormValues>(
       messages.push(rule.message
         ?? (error instanceof Error
           ? error.message
-          : 'Проверьте значение.'));
+          : resolveValidationMessage(rule, context, 'default', 'Проверьте значение.')));
     }
   }
 
