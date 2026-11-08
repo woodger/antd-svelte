@@ -79,6 +79,8 @@ export interface TabsNavApi {
 }
 
 export interface TabsNavContext {
+  readonly prefixCls: string;
+  readonly rootPrefixCls: string;
   readonly items: readonly TabsItem[];
   readonly root: HTMLDivElement | undefined;
   readonly ownerId: string;

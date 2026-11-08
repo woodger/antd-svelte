@@ -6,6 +6,8 @@
   import TabsMoreIcon from './TabsMoreIcon.svelte';
   import { useConfig } from './config-context';
   import { useComponentTheme } from './theme-component.svelte';
+  import { getTabsPrefixCss } from './tabs-prefix.engine';
+  import ThemeScopeStyle from './ThemeScopeStyle.svelte';
   import { tabsSemantics } from './tabs-semantic.engine';
   import { getTabsAnimation } from './tabs-motion.engine';
   import { useToken } from './theme-context.svelte';
@@ -53,6 +55,7 @@
     classNames,
     styles,
     style,
+    prefixCls: customizePrefixCls,
     nativeElement = $bindable<HTMLDivElement>(),
     ...rest
   }: TabsProps = $props();
@@ -66,6 +69,9 @@
     return attributes;
   });
   const componentTheme = useComponentTheme('Tabs');
+  let prefixCls = $derived(config.getPrefixCls('tabs', customizePrefixCls));
+  let rootPrefixCls = $derived(config.getPrefixCls());
+  let prefixCss = $derived(getTabsPrefixCss(prefixCls, rootPrefixCls));
   const designTokens = useToken();
   const generatedId = $props.id();
   const initialDefault = untrack(() => defaultActiveKey);
@@ -88,7 +94,7 @@
     mobile
   ));
   let editable = $derived(type === 'editable-card');
-  let animation = $derived(getTabsAnimation(animated));
+  let animation = $derived(getTabsAnimation(animated, prefixCls));
   let semanticProps = $derived({
     ...rest,
     items: items.map(item => ({ ...item, destroyOnHidden: item.destroyOnHidden })),
@@ -124,7 +130,8 @@
     rootClassName,
     classNames,
     styles,
-    style
+    style,
+    prefixCls: customizePrefixCls
   });
   let semantics = $derived(tabsSemantics(config.tabs, classNames, styles, semanticProps));
   let classes = $derived(semantics.classes);
@@ -146,6 +153,8 @@
   });
 
   const navContext: TabsNavContext = {
+    get prefixCls() { return prefixCls; },
+    get rootPrefixCls() { return rootPrefixCls; },
     get items() { return items; },
     get root() { return root; },
     get ownerId() { return rootId; },
@@ -164,7 +173,7 @@
   };
   let resolvedMore = $derived({
     icon: config.tabs?.more?.icon ?? config.tabs?.moreIcon ?? moreIcon ?? defaultMore,
-    transitionName: 'ant-slide-up',
+    transitionName: `${rootPrefixCls}-slide-up`,
     ...more
   });
   let bar = $derived<TabsTabBarProps>({
@@ -272,8 +281,8 @@
 </script>
 
 <style>
-  .ant-tabs { min-width: 0; max-width: 100%; }
-  .ant-tabs-empty { padding: var(--ant-padding-sm); color: var(--ant-color-text-description); }
+  [data-ant-tabs-root] { min-width: 0; max-width: 100%; }
+  [data-ant-tabs-part="empty"] { padding: var(--ant-padding-sm); color: var(--ant-color-text-description); }
 </style>
 
 {#snippet defaultMore()}<TabsMoreIcon />{/snippet}
@@ -283,16 +292,23 @@
   <TabsNav bar={props} context={navContext} />
 {/snippet}
 
-<div {...attributes} bind:this={nativeElement} id={rootId} dir={config.direction} class={[
-    'ant-tabs ant-tabs-css-var',
+{#if prefixCss}
+  <ThemeScopeStyle css={prefixCss} scope={`tabs-prefix:${prefixCls}:${rootPrefixCls}`} />
+{/if}
+<div {...attributes} bind:this={nativeElement} id={rootId} dir={config.direction}
+  data-ant-tabs-root
+  data-ant-tabs-prefix={prefixCss ? prefixCls : undefined}
+  data-ant-tabs-global={prefixCss ? rootPrefixCls : undefined} class={[
+    prefixCls,
+    'ant-tabs-css-var',
     componentTheme.className,
     componentTheme.className && 'ant-tabs-source-theme',
-    `ant-tabs-${placement}`,
-    (type === 'card' || editable) && 'ant-tabs-card',
-    editable && 'ant-tabs-editable ant-tabs-editable-card',
-    centered && 'ant-tabs-centered',
-    (resolvedSize === 'small' || resolvedSize === 'large') && `ant-tabs-${resolvedSize}`,
-    config.direction === 'rtl' && 'ant-tabs-rtl',
+    `${prefixCls}-${placement}`,
+    (type === 'card' || editable) && `${prefixCls}-card`,
+    editable && `${prefixCls}-editable ${prefixCls}-editable-card`,
+    centered && `${prefixCls}-centered`,
+    (resolvedSize === 'small' || resolvedSize === 'large') && `${prefixCls}-${resolvedSize}`,
+    config.direction === 'rtl' && `${prefixCls}-rtl`,
     config.tabs?.class,
     className,
     rootClassName,
@@ -300,18 +316,18 @@
   ]} style={[componentTheme.style, slots.root].filter(Boolean).join(';') || undefined}>
   {#if renderTabBar}{@render renderTabBar(bar, defaultTabBar)}
   {:else}{@render defaultTabBar(bar)}{/if}
-  <div class="ant-tabs-body-holder"><div bind:this={body} class={[
-    'ant-tabs-body',
-    `ant-tabs-body-${placement}`,
-    animation.tabPane && 'ant-tabs-body-animated',
+  <div class={`${prefixCls}-body-holder`}><div bind:this={body} class={[
+    `${prefixCls}-body`,
+    `${prefixCls}-body-${placement}`,
+    animation.tabPane && `${prefixCls}-body-animated`,
     classes.body
   ]} style={slots.body}>
     {#each items as item (item.key)}
-      <TabsPanel id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'tab')} itemKey={item.key} active={selectedKey === item.key} children={item.children} forceRender={item.forceRender}
+      <TabsPanel {prefixCls} id={itemId(item.key, 'panel')} labelledBy={itemId(item.key, 'tab')} itemKey={item.key} active={selectedKey === item.key} children={item.children} forceRender={item.forceRender}
         destroyOnHidden={item.destroyOnHidden ?? rootDestroy}
         class={[classes.content, item.className].filter(Boolean).join(' ') || undefined}
         style={[slots.content, item.style].filter(Boolean).join(';') || undefined}
         motion={animation.tabPaneMotion} motionEnabled={designTokens.token.motion} />
-    {:else}<div class="ant-tabs-empty">{config.locale.emptyText}</div>{/each}
+    {:else}<div data-ant-tabs-part="empty" class={`${prefixCls}-empty`}>{config.locale.emptyText}</div>{/each}
   </div></div>
 </div>

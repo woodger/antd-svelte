@@ -48,15 +48,15 @@ export interface TabsMoreProps {
   showAction?: readonly TabsMoreTrigger[];
   /** Перекрывает действия закрытия; contextMenu default — ['click'], focus закрывает при blur кнопки. */
   hideAction?: readonly TabsMoreTrigger[];
-  /** Собственный класс открытого More; undefined сохраняет ant-tabs-dropdown-open. */
+  /** Собственный класс открытого More; undefined использует текущий Tabs prefix + dropdown-open. */
   openClassName?: string;
   /** Заменяет стандартное меню и popupRender; содержимое ленивое. */
   overlay?: Snippet;
   /** Удаляет popup и его state после окончания leave. @defaultValue false */
   autoDestroy?: boolean;
-  /** Motion class prefix, у Tabs default — ant-slide-up; пустая строка отключает CSS motion. */
+  /** Motion class prefix; default — общий ConfigProvider prefix + slide-up; '' отключает CSS motion. */
   transitionName?: string;
-  /** Перекрывает transitionName с префиксом ant-tabs-dropdown-; пустая строка не перекрывает. */
+  /** Перекрывает transitionName с текущим Tabs prefix + dropdown-; '' не перекрывает. */
   animation?: string;
   /** @defaultValue 'bottomLeft' */
   placement?: TabsMorePlacement;
@@ -155,6 +155,8 @@ export interface TabsConfig {
 
 /** Набор keyed панелей с bind:activeKey, ручной клавиатурной активацией и overflow. */
 export interface TabsProps extends Omit<HTMLAttributes<HTMLDivElement>, 'children' | 'class' | 'style'> {
+  /** Непустой локальный prefix имеет приоритет; иначе используется ConfigProvider.prefixCls. */
+  prefixCls?: string;
   items: readonly TabsItem[];
   /** Поддерживает bind:activeKey. */
   activeKey?: string | undefined;

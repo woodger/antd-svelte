@@ -9,6 +9,10 @@
 
 ### Added
 
+- Tabs поддерживает local/shared prefixCls для навигации, панелей, More и motion.
+  DOM/ref, активная вкладка и draft/selection/focus внутри панели и открытого popup
+  сохраняются; canonical theme markers и shared slide keyframes не переименованы.
+
 - Descriptions поддерживает local/shared prefixCls для всех частей и ячеек,
   включая Table expanded-row selectors с независимым общим prefix. Responsive
   layout, semantic props, DOM/ref и draft/selection/focus/FormData сохранены.
@@ -1272,6 +1276,9 @@
   тип результата `createMessage` подготовлен к генерации деклараций.
 
 ### Fixed
+
+- Editable/custom Tabs прокручивает выбранную ячейку целиком, включая remove.
+  Активная вкладка больше не попадает в More, когда виден только её внутренний текст.
 
 - Dropdown сохраняет неконтролируемое open/closed состояние и focus при обновлении
   spread props. DefaultOpen остаётся initial-only; снятие внешнего open сохраняет

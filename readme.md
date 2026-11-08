@@ -3245,6 +3245,18 @@ Locale.dropdownAriaLabel именует listbox скрытых вкладок, �
 устройства повторяет default is-mobile 5.0.0, отдельно от breakpoint расположения:
 на мобильном user agent More скрыт, прокрутка и Add остаются доступны.
 
+Непустой `prefixCls` задаёт классы Tabs, навигации, панелей и More; пустое значение
+наследует `ConfigProvider.prefixCls`. Имена switch используют локальный Tabs prefix,
+default More slide — общий prefix, независимо от cssVar.prefix. Canonical theme
+markers и shared keyframes сохраняются. Смена prefix сохраняет активную панель,
+DOM/ref, draft/selection/focus и открытый popup с его редактором.
+Внутренние запросы фокуса используют стабильные атрибуты. Editable/custom cells
+прокручиваются целиком, включая кнопку удаления, чтобы активная вкладка не
+попадала в More из-за видимого только текста.
+Сверка: [официальный prefix-эталон](./tests/browser/fixtures/ant-design-tabs-prefix-reference.json),
+[браузер](./tests/browser/tabs-prefix.spec.ts) и
+[SSR](./tests/package/tabs-prefix.ssr.test.ts), `?fixture=tabs-prefix`.
+
 More открывается через hover с задержками 0.1/0.1 секунды. `more.trigger` также
 поддерживает click, focus, contextMenu и массив событий. `showAction` и `hideAction`
 раздельно заменяют действия открытия и закрытия; пустой массив отключает сторону.
@@ -3439,10 +3451,9 @@ forceRender и RTL; живое обновление проверяется та�
 per-tab wrappers/attributes, callbacks, More, RTL и пустого editable набора.
 Проверяются также SSR, native keyboard/cancellation, attachments и обновления
 шапки без потери DOM/state/draft/selection/focus и открытого More.
-Остаются произвольный prefixCls и общий ConfigProvider.getPopupContainer;
-приоритет уничтожения панелей сохраняет native v1.
-Полные low-level Dropdown props в more ещё не перенесены: arrow, align/alignPoint,
-placements, showAction/hideAction, onPopupAlign, autoDestroy, raw overlay и motion/prefix.
+Приоритет уничтожения панелей сохраняет native v1. Остальные low-level
+Dropdown/Trigger возможности More требуют отдельного аудита; перенесённые
+arrow, align/alignPoint, placements, actions, callbacks, overlay и motion описаны выше.
 
 ## Collapse
 
@@ -10029,7 +10040,7 @@ LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, 
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
 Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse, Affix,
 Tooltip, Popover, Popconfirm, Slider, BorderBeam, Masonry, Splitter, Anchor и
-Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel и Descriptions.
+Space/SpaceCompact/SpaceAddon, Breadcrumb, Row, Typography, Carousel, Descriptions и Tabs.
 Остальные семейства подключаются отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.

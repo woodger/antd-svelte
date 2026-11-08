@@ -4044,13 +4044,13 @@
         },
         {
           "id": "extended-api",
-          "title": "PrefixCls и React JSX sugar",
-          "state": "missing",
+          "title": "Framework-specific children/ref и native adapters",
+          "state": "partial",
           "requiredForV1": false,
           "evidence": [
             "readme.md"
           ],
-          "note": "Нет произвольного prefixCls. Общий ConfigProvider.getPopupContainer описан отдельной feature. Scalar children и React TabPane JSX sugar пока заменяются согласованными Svelte children Snippets/items; source dev warnings не воспроизводятся. Native root attributes/events и bind:nativeElement поддерживаются как Svelte API, без React ref wrapper."
+          "note": "React children/instance API представлен согласованными Svelte Snippets/items, native root attributes/events и bind:nativeElement без React ref wrapper. Deprecated TabPane JSX sugar исключён из переноса; source dev warnings не воспроизводятся. Общий ConfigProvider.getPopupContainer и local/shared prefixCls перенесены отдельными features."
         },
         {
           "id": "popup-container",
@@ -4074,6 +4074,48 @@
             "src/lib/TabsOverflow.svelte"
           ],
           "note": "Перенесён порядок ConfigProvider → Tabs → OperationNode/Dropdown: отсутствие корневого getPopupContainer наследует provider, собственный undefined выключает его; more.getPopupContainer имеет следующий приоритет, включая undefined. Вложенный provider с undefined сохраняет родителя; theme.inherit=false не меняет container context. Стандартный bar/renderTabBar получает разрешённую функцию, semantic callbacks сохраняют raw props. Portal принимает HTMLElement или ShadowRoot; стили shadow subtree предоставляет потребитель. Native top layer и modal fallback без getter сохранены. Смена функции с тем же контейнером не перемещает popup и сохраняет DOM/state/draft/focus/selection; composedPath защищает внутри-popup pointer/keyboard, lookup и focus используют фактический root. 30 общих эталонов UMD включают локальные/глобальные приоритеты, ShadowRoot и отсутствие наследования Tour. Общий перенос provider container на остальные families продолжается; React-specific event wrappers не добавляются."
+        },
+        {
+          "id": "prefix-cls",
+          "title": "Локальный и общий prefixCls Tabs, навигации, панелей и More",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Tabs.svelte",
+            "src/lib/TabsNav.svelte",
+            "src/lib/TabsPanel.svelte",
+            "src/lib/TabsOverflow.svelte",
+            "src/lib/tabs.types.ts",
+            "src/lib/tabs-nav.types.ts",
+            "src/lib/tabs.dom.ts",
+            "src/lib/tabs-overflow.dom.ts",
+            "src/lib/tabs-motion.engine.ts",
+            "src/lib/tabs-prefix.engine.ts",
+            "src/lib/tabs-prefix.engine.test.ts",
+            "src/lib/vendor/tabs-prefix.css.js",
+            "tools/ant-design-css-recipes.json",
+            "tests/browser/fixtures/TabsPrefixScope.svelte",
+            "tests/browser/fixtures/TabsPrefixFixtures.svelte",
+            "tests/browser/fixtures/TabsPrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-tabs-prefix-reference.json",
+            "tests/browser/tabs-prefix-metrics.ts",
+            "tests/browser/tabs-prefix.spec.ts",
+            "tests/package/tabs-prefix.ssr.test.ts"
+          ],
+          "note": "Local nonempty prefix wins; empty/undefined наследуют ConfigProvider prefix. Root/state/nav/cell/panel/More classes и 203 CSS rules используют local prefix; switch motion name тоже local, default More slide classes используют global root prefix. Четыре shared keyframes, canonical component/theme markers и Native Add relocation marker сохранены. CSS-variable namespace независим; callbacks получают raw local prefix. Focus/overflow DOM queries и native adapters используют stable data attributes. UMD matrix покрывает sizes, line/card/editable, RTL/placements, nested/sibling, aliases, cssVar prefix и открытый More. Live updates сохраняют active panel/root/input/popup/menu DOM, refs, draft/selection/focus без callbacks. Native button, encoded ID, panel lifecycle и scroll contracts сохранены; SSR не запускает DOM/getters/timers."
+        },
+        {
+          "id": "selected-cell-reveal",
+          "title": "Прокрутка выбранной editable/custom ячейки целиком",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/tabs.dom.ts",
+            "tests/browser/tabs-prefix.spec.ts",
+            "tests/browser/fixtures/ant-design-tabs-prefix-reference.json",
+            "readme.md"
+          ],
+          "note": "При отсутствии фокуса в заголовке Native раньше показывал только внутренний tab button: remove оставался за viewport, а активная внешняя ячейка попадала в More. Reveal теперь измеряет весь data-tabs-cell для editable/custom wrappers, как rc-tabs, включая текущий Ant prefix. Source popup options после выбора третьей вкладки совпадают; default prefix отдельно защищён полной геометрией ячейки. Focused header controls и plain tabs сохраняют прежний путь."
         }
       ]
     },

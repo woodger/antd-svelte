@@ -27,6 +27,8 @@
   } from './tabs.types';
 
   let {
+    prefixCls = 'ant-tabs',
+    rootPrefixCls = 'ant',
     nativeElement = $bindable<HTMLDivElement | undefined>(),
     rootId,
     ownerId,
@@ -51,6 +53,8 @@
     onRemove,
     onUnavailable
   }: {
+    prefixCls?: string;
+    rootPrefixCls?: string;
     nativeElement?: HTMLDivElement;
     rootId: string;
     ownerId?: string;
@@ -115,7 +119,7 @@
   let focusReady = $derived(visible && shown && dropdownVisible !== undefined);
   let actions = $derived(getTabsMoreActions(more ?? {}));
   let autoDestroy = $derived(more?.autoDestroy === true);
-  let motionName = $derived(more?.animation ? `ant-tabs-dropdown-${more.animation}`
+  let motionName = $derived(more?.animation ? `${prefixCls}-dropdown-${more.animation}`
     : more?.transitionName);
   let present = $derived(visible || motionState.running);
   let motionConfig = $derived({
@@ -449,7 +453,7 @@
         onKeydown: event => {
           if (!visible || event.key !== 'Tab' || dropdownVisible === undefined) return;
           const overlay = more && Object.hasOwn(more, 'overlay')
-            ? popup?.querySelector(':scope > :not(.ant-tabs-dropdown-arrow)') : list;
+            ? popup?.querySelector(':scope > :not([data-ant-tabs-part="dropdown-arrow"])') : list;
           if (!focusAttempted && overlay instanceof HTMLElement) {
             overlay.focus({ preventScroll: true });
             focusAttempted = true;
@@ -518,7 +522,7 @@
       else if (active && visible) {
         focusFrame = 0;
         const overlay = more && Object.hasOwn(more, 'overlay')
-          ? popup?.querySelector(':scope > :not(.ant-tabs-dropdown-arrow)') : list;
+          ? popup?.querySelector(':scope > :not([data-ant-tabs-part="dropdown-arrow"])') : list;
         if (overlay instanceof HTMLElement) {
           overlay.focus({ preventScroll: true });
           focusAttempted = true;
@@ -578,7 +582,7 @@
       }
       return;
     }
-    if (target instanceof Element && target.closest('.ant-tabs-dropdown-menu-item-remove'))
+    if (target instanceof Element && target.closest('[data-ant-tabs-part="dropdown-menu-item-remove"]'))
       return;
     if (!fromMore && target instanceof Element && target.closest('[role="option"]')
       && (event.key === 'Enter' || event.key === ' ')) return;
@@ -625,14 +629,14 @@
 </script>
 
 <style>
-  .ant-tabs-nav-more[hidden] { display: none; }
-  .ant-tabs-dropdown { position: fixed; inset: auto; border: 0; margin: 0; padding: 0; background: transparent; visibility: visible; overflow: visible; }
-  .ant-tabs-dropdown[hidden] { display: none; }
-  .ant-tabs-dropdown-menu-item { position: relative; }
-  .ant-tabs-dropdown-menu-option { appearance: none; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: inherit; }
-  .ant-tabs-dropdown-menu-option::after { content: ''; position: absolute; inset: 0; }
-  .ant-tabs-dropdown-menu-item-remove { position: relative; z-index: 1; }
-  @media (prefers-reduced-motion: reduce) { .ant-tabs-dropdown-menu-item { transition: none; } }
+  [data-ant-tabs-part="nav-more"][hidden] { display: none; }
+  [data-ant-tabs-part="dropdown"] { position: fixed; inset: auto; border: 0; margin: 0; padding: 0; background: transparent; visibility: visible; overflow: visible; }
+  [data-ant-tabs-part="dropdown"][hidden] { display: none; }
+  [data-ant-tabs-part="dropdown-menu-item"] { position: relative; }
+  [data-ant-tabs-part="dropdown-menu-option"] { appearance: none; padding: 0; border: 0; background: transparent; color: inherit; font: inherit; text-align: inherit; flex: 1; min-width: 0; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; cursor: inherit; }
+  [data-ant-tabs-part="dropdown-menu-option"]::after { content: ''; position: absolute; inset: 0; }
+  [data-ant-tabs-part="dropdown-menu-item-remove"] { position: relative; z-index: 1; }
+  @media (prefers-reduced-motion: reduce) { [data-ant-tabs-part="dropdown-menu-item"] { transition: none; } }
 </style>
 
 {#snippet value(node: TabsContent | undefined)}
@@ -642,26 +646,26 @@
 {#snippet menu()}
   <ul bind:this={list} id={popupId} role="listbox" tabindex="-1"
     aria-label={locale?.dropdownAriaLabel !== undefined ? locale.dropdownAriaLabel : 'expanded dropdown'}
-    aria-activedescendant={selectedId} class="ant-tabs-dropdown-menu ant-tabs-dropdown-menu-root ant-tabs-dropdown-menu-vertical"
+    aria-activedescendant={selectedId} data-ant-tabs-part="dropdown-menu" class={`${prefixCls}-dropdown-menu ${prefixCls}-dropdown-menu-root ${prefixCls}-dropdown-menu-vertical`}
     onkeydown={handleKeydown}>
     {#each items as item (item.key)}
-      <li role="presentation" class={[
-        'ant-tabs-dropdown-menu-item',
-        item.disabled && 'ant-tabs-dropdown-menu-item-disabled',
-        selectedKey === item.key && 'ant-tabs-dropdown-menu-item-selected'
+      <li role="presentation" data-ant-tabs-part="dropdown-menu-item" class={[
+        `${prefixCls}-dropdown-menu-item`,
+        item.disabled && `${prefixCls}-dropdown-menu-item-disabled`,
+        selectedKey === item.key && `${prefixCls}-dropdown-menu-item-selected`
       ]} onpointerenter={event => {
         if (!item.disabled && event.pointerType !== 'touch') menuKey = item.key;
       }}>
         <button type="button" role="option" id={optionId(item.key)}
           data-tabs-overflow-key={item.key} aria-controls={panelId(item.key)}
           aria-selected={selectedKey === item.key} aria-disabled={item.disabled || undefined}
-          disabled={item.disabled} tabindex="-1" class="ant-tabs-dropdown-menu-option"
+          disabled={item.disabled} tabindex="-1" data-ant-tabs-part="dropdown-menu-option" class={`${prefixCls}-dropdown-menu-option`}
           onfocus={() => menuKey = item.key}
           onpointerdown={event => event.preventDefault()} onclick={event => select(item, event)}>
           {@render value(item.label)}
         </button>
         {#if isTabsItemRemovable(item, editable)}
-          <button type="button" class={['ant-tabs-dropdown-menu-item-remove', removeClassName]}
+          <button type="button" data-ant-tabs-part="dropdown-menu-item-remove" class={[`${prefixCls}-dropdown-menu-item-remove`, removeClassName]}
             style={removeStyle} data-tabs-overflow-key={item.key}
             aria-label={locale?.removeAriaLabel || 'remove'} tabindex="0"
             onclick={event => onRemove(item, event)}>
@@ -673,13 +677,14 @@
   </ul>
 {/snippet}
 
-<div bind:this={nativeElement} class={[
-  'ant-tabs-nav-operations',
-  !items.length && 'ant-tabs-nav-operations-hidden'
+<div bind:this={nativeElement} data-ant-tabs-part="nav-operations"
+  data-tabs-operations-hidden={!items.length ? '' : undefined} class={[
+  `${prefixCls}-nav-operations`,
+  !items.length && `${prefixCls}-nav-operations-hidden`
 ]}>
-  <button bind:this={button} type="button" id={`${rootId}-more`} class={[
-      'ant-tabs-nav-more',
-      dropdownVisible && (more?.openClassName ?? 'ant-tabs-dropdown-open')
+  <button data-ant-tabs-part="nav-more" bind:this={button} type="button" id={`${rootId}-more`} class={[
+      `${prefixCls}-nav-more`,
+      dropdownVisible && (more?.openClassName ?? `${prefixCls}-dropdown-open`)
     ]} hidden={mobile}
     style={`${tabBarGutter === undefined ? '' : `margin-inline-start:${tabBarGutter}px;`}${items.length ? '' : 'visibility:hidden;order:1'}`}
     aria-haspopup="listbox" aria-controls={popupId} aria-expanded={open}
@@ -711,24 +716,27 @@
     {@render value(icon)}
   </button>
   {#if !autoDestroy || rendered}
-    <div bind:this={popup} popover="manual" hidden={!shown || !present} role="presentation"
+    <div data-ant-tabs-part="dropdown"
+      data-ant-tabs-prefix={prefixCls} data-ant-tabs-global={rootPrefixCls}
+      bind:this={popup} popover="manual" hidden={!shown || !present} role="presentation"
       inert={!visible} aria-hidden={!visible}
       data-tabs-popup-owner={ownerId ?? rootId}
       dir={popupDirection} class={[
-        'ant-tabs-dropdown ant-tabs-css-var',
+        `${prefixCls}-dropdown`,
+        'ant-tabs-css-var',
         motionState.className,
-        rendered && !present && 'ant-tabs-dropdown-hidden',
+        rendered && !present && `${prefixCls}-dropdown-hidden`,
         themeClassName,
-        more?.arrow && 'ant-tabs-dropdown-show-arrow',
+        more?.arrow && `${prefixCls}-dropdown-show-arrow`,
         (aligned ? actualPlacement : initialPlacement)
-          && `ant-tabs-dropdown-placement-${aligned ? actualPlacement : initialPlacement}`,
+          && `${prefixCls}-dropdown-placement-${aligned ? actualPlacement : initialPlacement}`,
         !ownOverlayClass && (rtl ?? config.direction === 'rtl')
-          && 'ant-tabs-dropdown-rtl',
+          && `${prefixCls}-dropdown-rtl`,
         more && Object.hasOwn(more, 'overlayClassName') ? more.overlayClassName : popupClassName
       ]} style={initialStyle}
       onpointerenter={event => hover(true, event)} onpointerleave={event => hover(false, event)}
       onclick={event => more?.onOverlayClick?.(event)}>
-      {#if rendered && more?.arrow}<div class="ant-tabs-dropdown-arrow"></div>{/if}
+      {#if rendered && more?.arrow}<div data-ant-tabs-part="dropdown-arrow" class={`${prefixCls}-dropdown-arrow`}></div>{/if}
       {#if rendered && more && Object.hasOwn(more, 'overlay')}
         {@render more.overlay?.()}
       {:else if rendered && more?.popupRender}

@@ -51,9 +51,11 @@ export function connectTabsOverflow(
       placeholder.style.cssText = `display:block;box-sizing:border-box;flex:none;visibility:hidden;width:${options.vertical ? 'auto' : `${box.width}px`};height:${options.vertical ? `${box.height}px` : 'auto'};margin:${style.marginTop} ${style.marginRight} ${style.marginBottom} ${style.marginLeft}`;
       placeholder.hidden = false;
       add.classList.add('ant-tabs-add-in-operations');
+      add.setAttribute('data-tabs-add-in-operations', '');
       move(add, operations, null);
     } else if (!overflow && add.parentElement === operations) {
       add.classList.remove('ant-tabs-add-in-operations');
+      add.removeAttribute('data-tabs-add-in-operations');
       move(add, marker.parentElement, marker.nextSibling);
       placeholder.hidden = true;
       placeholder.style.display = 'none';
@@ -70,7 +72,7 @@ export function connectTabsOverflow(
 
     const vertical = options.vertical;
     const unit = vertical ? 'height' : 'width';
-    const hidden = operations.classList.contains('ant-tabs-nav-operations-hidden');
+    const hidden = operations.hasAttribute('data-tabs-operations-hidden');
     const operationLength = sizeOf(operations)[unit]
       + (add && add.parentElement !== operations ? sizeOf(add)[unit] : 0);
     const available = sizeOf(viewport)[unit] + (hidden ? 0 : sizeOf(operations)[unit]);
@@ -113,7 +115,7 @@ export function connectTabsOverflow(
     resize.observe(element);
   }
   const attributes = new view.MutationObserver(update);
-  attributes.observe(list.closest('.ant-tabs')!, {
+  attributes.observe(list.closest('[data-ant-tabs-root]')!, {
     attributes: true,
     attributeFilter: ['class', 'dir', 'style']
   });

@@ -15,6 +15,7 @@
   import type { TabsNavContext, TabsTabAttributes, TabsTabBarProps } from './tabs-nav.types';
 
   let { bar, context }: { bar: TabsTabBarProps; context: TabsNavContext; } = $props();
+  let prefixCls = $derived(context.prefixCls);
   let element = $state<HTMLDivElement>();
   let navRef = $derived(bar.ref);
   let viewport = $state<HTMLDivElement>();
@@ -88,7 +89,7 @@
       );
     const focused = nav.ownerDocument.activeElement;
     if (!canAdd && focused instanceof HTMLElement && root?.contains(focused)
-      && focused.matches('.ant-tabs-nav-add')) {
+      && focused.matches('[data-ant-tabs-part="nav-add"]')) {
       focusKey = undefined;
       repairFocus = true;
     }
@@ -98,8 +99,8 @@
       else if (focused instanceof HTMLElement) {
         const focusedKey = focused.dataset.tabsKey
           ?? focused.closest<HTMLElement>('[data-tabs-cell]')?.dataset.tabsCell;
-        const adding = focused.matches('.ant-tabs-nav-add');
-        const removing = focused.matches('.ant-tabs-tab-remove');
+        const adding = focused.matches('[data-ant-tabs-part="nav-add"]');
+        const removing = focused.matches('[data-ant-tabs-part="tab-remove"]');
         const candidates = focused.matches('[role="tab"]') || adding || removing
           ? available : items;
         const item = candidates.find(item => item.key === focusedKey);
@@ -223,7 +224,7 @@
     if (event.target instanceof Element && event.target !== list
       && !event.target.closest('[role="tab"]')) return;
     if (event.target instanceof Element
-      && event.target.closest('.ant-tabs-tab-remove, .ant-tabs-nav-add')) return;
+      && event.target.closest('[data-ant-tabs-part="tab-remove"], [data-ant-tabs-part="nav-add"]')) return;
 
     if (editable && (event.key === 'Delete' || event.key === 'Backspace')) {
       const item = items.find(item => item.key === focusKey);
@@ -306,17 +307,18 @@
       role: 'tab',
       id: itemId(item.key, 'tab'),
       'data-tabs-key': item.key,
+      'data-ant-tabs-part': editing ? 'tab-btn' : 'tab',
       'aria-controls': itemId(item.key, 'panel'),
       'aria-selected': selectedKey === item.key,
       disabled: item.disabled,
       tabindex: tabStop === item.key ? 0 : -1,
       style: editing ? undefined :
         [first ? undefined : gutterStyle, slots.item].filter(Boolean).join(';') || undefined,
-      class: editing ? 'ant-tabs-tab-btn' : [
-        'ant-tabs-tab',
+      class: editing ? `${prefixCls}-tab-btn` : [
+        `${prefixCls}-tab`,
         classes.item,
-        selectedKey === item.key && 'ant-tabs-tab-active',
-        item.disabled && 'ant-tabs-tab-disabled'
+        selectedKey === item.key && `${prefixCls}-tab-active`,
+        item.disabled && `${prefixCls}-tab-disabled`
       ],
       onfocus: event => handleTabFocus(item.key, event.currentTarget),
       onclick: event => {
@@ -330,14 +332,15 @@
     return {
       role: 'presentation',
       'data-tabs-cell': item.key,
+      'data-ant-tabs-part': 'tab',
       style: [first ? undefined : gutterStyle, slots.item].filter(Boolean).join(';') || undefined,
       class: [
-        'ant-tabs-tab',
+        `${prefixCls}-tab`,
         classes.item,
-        selectedKey === item.key && 'ant-tabs-tab-active',
-        item.disabled && 'ant-tabs-tab-disabled',
-        focusKey === item.key && 'ant-tabs-tab-focus',
-        isTabsItemRemovable(item, editable) && 'ant-tabs-tab-with-remove'
+        selectedKey === item.key && `${prefixCls}-tab-active`,
+        item.disabled && `${prefixCls}-tab-disabled`,
+        focusKey === item.key && `${prefixCls}-tab-focus`,
+        isTabsItemRemovable(item, editable) && `${prefixCls}-tab-with-remove`
       ],
       onclick: event => handleCellClick(item, event),
       onmousedown: event => handleCellMouseDown(item, event)
@@ -346,25 +349,25 @@
 </script>
 
 <style>
-  :global(.ant-tabs) .ant-tabs-nav { min-width: 0; }
-  :global(.ant-tabs) .ant-tabs-nav .ant-tabs-nav-wrap { min-width: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: none; scroll-behavior: auto; }
+  :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"] { min-width: 0; }
+  :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"] [data-ant-tabs-part="nav-wrap"] { min-width: 0; overflow: auto; overscroll-behavior: contain; scrollbar-width: none; scroll-behavior: auto; }
   /* Operations не наследует inline gutter скрытого inner Add; исходный card gutter остаётся. */
-  :global(.ant-tabs) .ant-tabs-nav :global(.ant-tabs-add-in-operations) { margin-block: 0 !important; margin-right: 0 !important; margin-left: var(--ant-tabs-card-gutter) !important; }
-  :global(.ant-tabs) .ant-tabs-nav .ant-tabs-nav-list { flex: 0 0 auto; min-height: var(--ant-control-height); }
+  :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"] :global([data-tabs-add-in-operations]) { margin-block: 0 !important; margin-right: 0 !important; margin-left: var(--ant-tabs-card-gutter) !important; }
+  :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"] [data-ant-tabs-part="nav-list"] { flex: 0 0 auto; min-height: var(--ant-control-height); }
   /* Source tokens могут задавать шапку ниже native минимума, включая zero/undefined. */
-  :global(.ant-tabs) .ant-tabs-nav[data-tabs-source-theme] .ant-tabs-nav-list { min-height: 0; }
+  :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"][data-tabs-source-theme] [data-ant-tabs-part="nav-list"] { min-height: 0; }
   /* В исходном centered вертикальный список растягивается, заголовки остаются сверху. */
-  :global(.ant-tabs) > .ant-tabs-nav[data-tabs-centered-vertical] .ant-tabs-nav-list { flex-grow: 1; }
-  :global(.ant-tabs) > .ant-tabs-nav[data-tabs-root-placement="left"], :global(.ant-tabs) > .ant-tabs-nav[data-tabs-root-placement="right"] { max-width: 45%; }
-  :global(.ant-tabs) > .ant-tabs-nav[data-tabs-root-placement="left"] .ant-tabs-nav-wrap, :global(.ant-tabs) > .ant-tabs-nav[data-tabs-root-placement="right"] .ant-tabs-nav-wrap { max-height: min(400px, 60dvh); }
-  :global(.ant-tabs) > .ant-tabs-nav[data-tabs-root-placement="left"] .ant-tabs-tab, :global(.ant-tabs) > .ant-tabs-nav[data-tabs-root-placement="right"] .ant-tabs-tab { white-space: normal; overflow-wrap: anywhere; }
-  :where(button.ant-tabs-tab) { appearance: none; margin: 0; font: inherit; text-align: inherit; flex: none; }
-  button.ant-tabs-tab-btn { appearance: none; padding: 0; border: 0; background: transparent; font: inherit; color: inherit; text-align: inherit; cursor: inherit; }
-  button.ant-tabs-tab-btn:disabled { cursor: not-allowed; }
-  button.ant-tabs-tab-btn:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
-  :global(.ant-tabs) .ant-tabs-tab:focus-visible, .ant-tabs-nav-list:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -3px; }
-  .ant-tabs-ink-bar[hidden] { display: none; }
-  @media (prefers-reduced-motion: reduce) { :global(.ant-tabs) .ant-tabs-nav .ant-tabs-nav-list, :global(.ant-tabs) .ant-tabs-nav .ant-tabs-tab, :global(.ant-tabs) .ant-tabs-nav .ant-tabs-tab-btn, :global(.ant-tabs) .ant-tabs-nav .ant-tabs-ink-bar { animation: none; transition: none; } }
+  :global([data-ant-tabs-root]) > [data-ant-tabs-part="nav"][data-tabs-centered-vertical] [data-ant-tabs-part="nav-list"] { flex-grow: 1; }
+  :global([data-ant-tabs-root]) > [data-ant-tabs-part="nav"][data-tabs-root-placement="left"], :global([data-ant-tabs-root]) > [data-ant-tabs-part="nav"][data-tabs-root-placement="right"] { max-width: 45%; }
+  :global([data-ant-tabs-root]) > [data-ant-tabs-part="nav"][data-tabs-root-placement="left"] [data-ant-tabs-part="nav-wrap"], :global([data-ant-tabs-root]) > [data-ant-tabs-part="nav"][data-tabs-root-placement="right"] [data-ant-tabs-part="nav-wrap"] { max-height: min(400px, 60dvh); }
+  :global([data-ant-tabs-root]) > [data-ant-tabs-part="nav"][data-tabs-root-placement="left"] [data-ant-tabs-part="tab"], :global([data-ant-tabs-root]) > [data-ant-tabs-part="nav"][data-tabs-root-placement="right"] [data-ant-tabs-part="tab"] { white-space: normal; overflow-wrap: anywhere; }
+  :where(button[data-ant-tabs-part="tab"]) { appearance: none; margin: 0; font: inherit; text-align: inherit; flex: none; }
+  button[data-ant-tabs-part="tab-btn"] { appearance: none; padding: 0; border: 0; background: transparent; font: inherit; color: inherit; text-align: inherit; cursor: inherit; }
+  button[data-ant-tabs-part="tab-btn"]:disabled { cursor: not-allowed; }
+  button[data-ant-tabs-part="tab-btn"]:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: 1px; }
+  :global([data-ant-tabs-root]) [data-ant-tabs-part="tab"]:focus-visible, [data-ant-tabs-part="nav-list"]:focus-visible { outline: var(--ant-line-width-focus) solid var(--ant-color-primary-border); outline-offset: -3px; }
+  [data-ant-tabs-part="ink-bar"][hidden] { display: none; }
+  @media (prefers-reduced-motion: reduce) { :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"] [data-ant-tabs-part="nav-list"], :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"] [data-ant-tabs-part="tab"], :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"] [data-ant-tabs-part="tab-btn"], :global([data-ant-tabs-root]) [data-ant-tabs-part="nav"] [data-ant-tabs-part="ink-bar"] { animation: none; transition: none; } }
 </style>
 
 {#snippet value(node: TabsContent | undefined)}
@@ -379,21 +382,21 @@
 )}
   <button {...attributes} {...overrides}>
     {#if editing}
-      {#if item.icon}<span class="ant-tabs-tab-icon" aria-hidden="true">{@render item.icon()}</span>{/if}<span class="ant-tabs-tab-label">{@render value(item.label)}</span>
+      {#if item.icon}<span data-ant-tabs-part="tab-icon" class={`${prefixCls}-tab-icon`} aria-hidden="true">{@render item.icon()}</span>{/if}<span data-ant-tabs-part="tab-label" class={`${prefixCls}-tab-label`}>{@render value(item.label)}</span>
     {:else}
-      <span class="ant-tabs-tab-btn">{#if item.icon}<span class="ant-tabs-tab-icon" aria-hidden="true">{@render item.icon()}</span>{/if}<span class="ant-tabs-tab-label">{@render value(item.label)}</span></span>
+      <span data-ant-tabs-part="tab-btn" class={`${prefixCls}-tab-btn`}>{#if item.icon}<span data-ant-tabs-part="tab-icon" class={`${prefixCls}-tab-icon`} aria-hidden="true">{@render item.icon()}</span>{/if}<span data-ant-tabs-part="tab-label" class={`${prefixCls}-tab-label`}>{@render value(item.label)}</span></span>
     {/if}
   </button>
 {/snippet}
 
-<div class={['ant-tabs-nav', bar.className, classes.header]} role="presentation" bind:this={element}
+<div data-ant-tabs-part="nav" class={[`${prefixCls}-nav`, bar.className, classes.header]} role="presentation" bind:this={element}
   data-tabs-source-theme={context.themeClassName ? '' : undefined}
   data-tabs-root-placement={context.rootPlacement}
   data-tabs-centered-vertical={context.centered && (context.rootPlacement === 'left' || context.rootPlacement === 'right') ? '' : undefined}
   style={[slots.header, bar.style].filter(Boolean).join(';') || undefined}>
-  {#if extraLeft}<div class="ant-tabs-extra-content">{@render value(extraLeft)}</div>{/if}
-  <div bind:this={viewport} class="ant-tabs-nav-wrap">
-    <div bind:this={list} role="tablist" aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-orientation={vertical ? 'vertical' : 'horizontal'} tabindex={tabStop === undefined ? 0 : undefined} class="ant-tabs-nav-list" data-tabs-editable={editable ? '' : undefined} data-tabs-nested={nestedNavigation ? '' : undefined} onkeydown={handleKeydown} onfocusout={handleFocusout}>
+  {#if extraLeft}<div data-ant-tabs-part="extra-content" class={`${prefixCls}-extra-content`}>{@render value(extraLeft)}</div>{/if}
+  <div bind:this={viewport} data-ant-tabs-part="nav-wrap" class={`${prefixCls}-nav-wrap`}>
+    <div bind:this={list} role="tablist" aria-label={ariaLabel} aria-labelledby={ariaLabelledby} aria-orientation={vertical ? 'vertical' : 'horizontal'} tabindex={tabStop === undefined ? 0 : undefined} data-ant-tabs-part="nav-list" class={`${prefixCls}-nav-list`} data-tabs-editable={editable ? '' : undefined} data-tabs-nested={nestedNavigation ? '' : undefined} onkeydown={handleKeydown} onfocusout={handleFocusout}>
       {#each items as item, index (item.key)}
         {@const attributes = nestedNavigation ? cellAttributes(item, index === 0)
           : tabAttributes(item, false, index === 0)}
@@ -402,7 +405,7 @@
           <div {...attributes} {...overrides}>
             {@render tabButton(item, true, tabAttributes(item, true, index === 0))}
             {#if isTabsItemRemovable(item, editable)}
-              <button type="button" class={['ant-tabs-tab-remove', classes.remove]}
+              <button type="button" data-ant-tabs-part="tab-remove" class={[`${prefixCls}-tab-remove`, classes.remove]}
                 style={slots.remove} data-tabs-key={item.key}
                 aria-label={locale?.removeAriaLabel || 'remove'}
                 tabindex={selectedKey === item.key ? 0 : -1}
@@ -416,18 +419,18 @@
         {#if bar.children}{@render bar.children(node, item, attributes)}{:else}{@render node()}{/if}
       {/each}
       {#if showAdd}
-        <button bind:this={addButton} type="button" class="ant-tabs-nav-add" aria-label={locale?.addAriaLabel || 'Add tab'}
+        <button bind:this={addButton} type="button" data-ant-tabs-part="nav-add" class={`${prefixCls}-nav-add`} aria-label={locale?.addAriaLabel || 'Add tab'}
           style={items.length ? gutterStyle : undefined}
           onclick={event => bar.editable?.onEdit('add', { event })}>
           {@render value(bar.editable?.addIcon)}
         </button>
       {/if}
-      <div class={['ant-tabs-ink-bar', animation.inkBar && 'ant-tabs-ink-bar-animated', classes.indicator]} aria-hidden="true"
+      <div data-ant-tabs-part="ink-bar" class={[`${prefixCls}-ink-bar`, animation.inkBar && `${prefixCls}-ink-bar-animated`, classes.indicator]} aria-hidden="true"
         style={[inkBarStyle, slots.indicator].filter(Boolean).join(';') || undefined}
         hidden={!activeOffset || context.card}></div>
     </div>
   </div>
-  <TabsOverflow bind:nativeElement={operations} rootId={bar.id} ownerId={context.ownerId}
+  <TabsOverflow {prefixCls} rootPrefixCls={context.rootPrefixCls} bind:nativeElement={operations} rootId={bar.id} ownerId={context.ownerId}
     {editable} {locale} more={bar.more} mobile={bar.mobile} rtl={bar.rtl}
       defaultMoreIcon={context.defaultMoreIcon}
     removeIcon={bar.editable?.removeIcon ?? '×'}
@@ -439,5 +442,5 @@
     panelId={key => itemId(key, 'panel')} onSelect={(key, event) => bar.onTabClick(key, event)}
     onRemove={(item, event) => { void removeTab(item, event); }}
     onUnavailable={() => focusTab(tabStop)} />
-  {#if extraRight}<div class="ant-tabs-extra-content">{@render value(extraRight)}</div>{/if}
+  {#if extraRight}<div data-ant-tabs-part="extra-content" class={`${prefixCls}-extra-content`}>{@render value(extraRight)}</div>{/if}
 </div>

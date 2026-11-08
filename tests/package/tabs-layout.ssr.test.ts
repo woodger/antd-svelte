@@ -55,8 +55,8 @@ describe('Tabs layout SSR', () => {
 
       expect(body).toContain('ant-tabs-centered');
       expect(headerControls(body).match(new RegExp(`${margin}:0px`, 'g'))).toHaveLength(3);
-      expect(body).toMatch(/data-tabs-cell="" class=/);
-      expect(body).not.toMatch(/data-tabs-cell="" style=/);
+      expect(body).toMatch(/data-tabs-cell=""[^>]*class="[^"]*\bant-tabs-tab\b/);
+      expect(body).not.toMatch(/data-tabs-cell=""[^>]*\bstyle=/);
       expect(body).toMatch(/aria-selected="true"[^>]*tabindex="0"/);
     }
   );

@@ -1,7 +1,10 @@
 import type { TabsAnimatedConfig, TabsMotionName } from './tabs-motion.types';
 
 /** Два исходных useAnimateConfig: Ant Design wrapper, затем rc-tabs 1.13.0. */
-export function getTabsAnimation(animated: boolean | TabsAnimatedConfig | undefined) {
+export function getTabsAnimation(
+  animated: boolean | TabsAnimatedConfig | undefined,
+  prefixCls = 'ant-tabs'
+) {
   let result: TabsAnimatedConfig;
   if (animated === false) result = { inkBar: false, tabPane: false };
   else if (animated === true) result = { inkBar: true, tabPane: true };
@@ -12,7 +15,7 @@ export function getTabsAnimation(animated: boolean | TabsAnimatedConfig | undefi
       motionAppear: false,
       motionEnter: true,
       motionLeave: true,
-      motionName: 'ant-tabs-switch'
+      motionName: `${prefixCls}-switch`
     };
   }
   if (result.tabPaneMotion && result.tabPane === undefined)

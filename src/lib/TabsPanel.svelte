@@ -4,6 +4,7 @@
   import type { TabsPaneMotion } from './tabs-motion.types';
 
   let {
+    prefixCls = 'ant-tabs',
     id,
     labelledBy,
     itemKey,
@@ -16,6 +17,7 @@
     motion,
     motionEnabled = true
   }: {
+    prefixCls?: string;
     id: string;
     labelledBy: string;
     itemKey: string;
@@ -40,7 +42,7 @@
   let remove = $derived(motion && Object.hasOwn(motion, 'removeOnLeave')
     ? motion.removeOnLeave ?? true : destroyOnHidden);
   let leavedClassName = $derived(motion && Object.hasOwn(motion, 'leavedClassName')
-    ? motion.leavedClassName : 'ant-tabs-content-hidden');
+    ? motion.leavedClassName : `${prefixCls}-content-hidden`);
   let renderContent = $derived(visible || force || motionState.running || mounted && !remove);
   let retainedClass = $derived(!visible && !remove && wasVisible && !!leavedClassName);
   let forcedHidden = $derived(!visible && !retainedClass && (force || !remove && !leavedClassName));
@@ -91,19 +93,20 @@
 </script>
 
 <style>
-  .ant-tabs-content { min-width: 0; overflow-wrap: anywhere; }
-  .ant-tabs-content[hidden] { display: none; }
+  [data-ant-tabs-part="content"] { min-width: 0; overflow-wrap: anywhere; }
+  [data-ant-tabs-part="content"][hidden] { display: none; }
 </style>
 
 <div bind:this={root} {id} role="tabpanel" aria-labelledby={labelledBy}
+  data-ant-tabs-part="content"
   aria-hidden={!active} tabindex={active ? 0 : -1} inert={!active && motionState.running}
   hidden={!visible && !motionState.running} data-tabs-key={itemKey} class={[
-    'ant-tabs-content',
-    active && 'ant-tabs-content-active',
+    `${prefixCls}-content`,
+    active && `${prefixCls}-content-active`,
     className,
     eventClass,
     hiddenClass,
     motionState.className
   ]} style={[style, motionStyle].filter(Boolean).join(';') || undefined}>
-  {#if renderContent}<div class="ant-tabs-content-inner" {@attach rememberContent}>{@render children?.()}</div>{/if}
+  {#if renderContent}<div class={`${prefixCls}-content-inner`} {@attach rememberContent}>{@render children?.()}</div>{/if}
 </div>
