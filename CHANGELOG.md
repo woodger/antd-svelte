@@ -9,6 +9,9 @@
 
 ### Added
 
+- Alert, Collapse и Affix наследуют ConfigProvider.prefixCls. Смена prefix
+  сохраняет fixed node, раскрытые панели, их поля и фокус; SSR не закрепляет Affix.
+
 - Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton с primitives,
   Spin, Progress и Result наследуют ConfigProvider.prefixCls. ScrollNumber и CSS
   Ribbon используют общий prefix отдельно от локального. Сохранены native

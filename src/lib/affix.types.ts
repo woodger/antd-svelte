@@ -13,7 +13,7 @@ export interface AffixProps extends Omit<
   HTMLAttributes<HTMLDivElement>,
   'children' | 'class' | 'style'
 > {
-  /** Локальный CSS prefix fixed-узла; пустое значение использует ant-affix. */
+  /** Локальный CSS prefix fixed-узла; пустое значение наследует ConfigProvider. */
   prefixCls?: string;
   children?: Snippet;
   offsetTop?: number;

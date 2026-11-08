@@ -1372,7 +1372,8 @@ Source aliases, scopes и geometry проверяются в `?fixture=affix-the
 ConfigProvider.affix задаёт class/style внешнего узла: локальные class идут
 первыми, style — после контекстного. Вложенный record заменяет настройки целиком;
 undefined наследует, {} очищает. Локальный prefixCls меняет fixed class и CSS
-selectors, сохраняя имена variables. Пустое значение возвращает ant-affix.
+selectors, сохраняя имена variables. Пустое значение наследует ConfigProvider.prefixCls
+(по умолчанию ant-affix).
 Prefix/theme/config updates сохраняют wrapper, fixed content, placeholder,
 draft/selection/focus и onChange; динамический stylesheet очищается при reset
 и unmount. Проверки — `?fixture=affix-config`.
@@ -1381,7 +1382,7 @@ draft/selection/focus и onChange; динамический stylesheet очищ�
 при custom target слушается сам контейнер, поэтому перемещение контейнера
 внешней прокруткой требует явного updatePosition. Null target или полностью
 нулевой скрытый root сохраняют последнее состояние до следующего измерения.
-Глобальный ConfigProvider prefix пока отсутствует. React ref заменён Svelte bind:this,
+Общий ConfigProvider prefix применяется к fixed-узлу. React ref заменён Svelte bind:this,
 children — Snippet без React-клонирования.
 
 GetTargetContainer поддерживает Window/HTMLElement, как runtime context upstream.
@@ -3421,7 +3422,8 @@ extra остаётся вне кнопки. Item id/class/style и data/ARIA о�
 Theme.components.Collapse подключает все десять токенов: headerPadding/SM/LG,
 headerBg, contentPadding/SM/LG, contentBg, borderlessContentPadding/Bg. Aliases,
 component algorithm, cssVar prefix/key, dark и compact используют общий механизм
-темы. Local prefixCls поддерживается CSS template из того же закреплённого архива;
+темы. Local prefixCls либо общий ConfigProvider prefix поддерживается CSS template
+из того же закреплённого архива;
 все 49 CSS rules воспроизводятся инструментом. Высота содержимого меняется сразу;
 анимируется только стрелка, с учётом reduced motion.
 
@@ -3440,8 +3442,8 @@ Svelte; React RefObject не мутируется.
 React-анимация высоты пока не перенесена. Native group, heading/button/region,
 ARIA-связи, Space, full button hit area, независимость extra, focus recovery
 и icon/showArrow fallback сохранены; это явные отличия от DOM React. Пустой custom
-expandIcon Snippet сохраняет wrapper. Глобальный ConfigProvider.prefixCls и React
-DEV diagnostics пока не поддерживаются.
+expandIcon Snippet сохраняет wrapper. Общий ConfigProvider.prefixCls поддержан;
+React DEV diagnostics пока не поддерживаются.
 
 ## Modal
 
@@ -3779,8 +3781,8 @@ Promise/timer callbacks и SSR ошибки эта граница не пере�
 Вместо React componentStack используется доступный Error.stack Svelte/JavaScript;
 React recovery diagnostics не воспроизводятся. Эти framework differences отделены
 от [16 официальных сценариев](tests/browser/fixtures/ant-design-alert-boundary-reference.json),
-SSR, hydration и lifecycle-проверок. Общий ConfigProvider prefix и React diagnostics
-ещё не перенесены.
+SSR, hydration и lifecycle-проверок. Общий ConfigProvider prefix поддержан;
+React diagnostics ещё не перенесены.
 
 ## Message
 
@@ -9870,7 +9872,8 @@ PrefixCls задаёт базовый префикс CSS-классов; по у
 приоритет. Сейчас общий prefix подключён к App, Layout, LayoutSider,
 LayoutHeader/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex,
 Segmented, Avatar/AvatarGroup, Badge/BadgeRibbon, Tag/CheckableTag/CheckableTagGroup,
-Empty, Skeleton с primitives, Spin, Progress и Result. Остальные семейства подключаются
+Empty, Skeleton с primitives, Spin, Progress, Result, Alert, Collapse и Affix.
+Остальные семейства подключаются
 отдельно. Например,
 ConfigProvider prefixCls="suite" создаёт suite-app, suite-layout,
 suite-layout-sider и suite-layout-header без изменения имён Svelte-компонентов.
@@ -9917,6 +9920,14 @@ AvatarGroup, default-класс Tag и RTL-класс CheckableTag. Native Skele
 имена CSS variables и canonical markers сохраняются. Badge ScrollNumber использует
 общий prefix независимо от локального Badge.prefixCls; CSS Ribbon также следует
 общему prefix. Изменение префикса сохраняет все 17 корней, draft, focus и selection.
+
+Alert, Collapse и активный Affix сверяются по
+[девяти исходным примерам и трём переходам](./tests/browser/fixtures/ant-design-structure-prefix-reference.json):
+[browser](./tests/browser/structure-prefix.spec.ts),
+[SSR](./tests/package/structure-prefix.ssr.test.ts), `?fixture=structure-prefix`.
+Affix использует отдельные scroll targets; в SSR остаётся незакреплённым, как source.
+Обновление prefix сохраняет fixed node и редактор раскрытой панели Collapse,
+его значение, focus/selection и состояние остальных панелей.
 
 ## Формы и валидация
 

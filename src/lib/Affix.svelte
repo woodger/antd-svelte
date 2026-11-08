@@ -21,7 +21,7 @@
   }: AffixProps = $props();
   const componentTheme = useComponentTheme('Affix');
   const config = useConfig();
-  let prefix = $derived(prefixCls || 'ant-affix');
+  let prefix = $derived(config.getPrefixCls('affix', prefixCls));
   let prefixCss = $derived(getAffixPrefixCss(prefix));
   let wrapperStyle = $derived(config.affix?.style
     ? [config.affix.style, style].filter(Boolean).join(';') : style);

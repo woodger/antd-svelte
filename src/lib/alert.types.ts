@@ -85,6 +85,7 @@ export interface AlertProps {
   'aria-hidden'?: HTMLAttributes<HTMLDivElement>['aria-hidden'];
   class?: string;
   style?: string;
+  /** Локальный CSS prefix; отсутствие и пустая строка наследуют ConfigProvider. */
   prefixCls?: string;
   rootClassName?: string;
   /** Callbacks получают разрешённые prefixCls/variant/type/showIcon/boolean closable. */

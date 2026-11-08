@@ -56,7 +56,7 @@
   let repairKey: string | undefined;
   let retainedFocus: HTMLElement | undefined;
   let active = true;
-  let prefix = $derived(prefixCls || 'ant-collapse');
+  let prefix = $derived(config.getPrefixCls('collapse', prefixCls));
   let prefixCss = $derived(getCollapsePrefixCss(prefix));
   let placement = $derived(expandIconPlacement ?? 'start');
   let rootDestroy = $derived(destroyOnHidden ?? false);

@@ -49,7 +49,7 @@
   let phase = $state<'open' | 'closing' | 'closed'>('open');
   let disposeMotion: (() => void) | undefined;
   let active = true;
-  let prefix = $derived(prefixCls || 'ant-alert');
+  let prefix = $derived(config.getPrefixCls('alert', prefixCls));
   let prefixCss = $derived(getAlertPrefixCss(prefix));
   let resolvedVariant = $derived(variant ?? config.alert?.variant ?? 'outlined');
   let resolvedType = $derived(type ?? (banner ? 'warning' : 'info'));

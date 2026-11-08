@@ -11683,10 +11683,18 @@
         {
           "id": "shared-config",
           "title": "Глобальный prefixCls и React diagnostics",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Локальный prefixCls поддержан; общий ConfigProvider.prefixCls и React dev warnings остаются за пределами этого этапа."
+          "evidence": [
+            "tests/browser/fixtures/StructurePrefixScope.svelte",
+            "tests/browser/fixtures/StructurePrefixFixtures.svelte",
+            "tests/browser/fixtures/StructurePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-structure-prefix-reference.json",
+            "tests/browser/structure-prefix-metrics.ts",
+            "tests/browser/structure-prefix.spec.ts",
+            "tests/package/structure-prefix.ssr.test.ts"
+          ],
+          "note": "Общий и локальный prefixCls поддержаны отдельной feature; React development diagnostics ещё не перенесены. Прежние Native lifecycle, accessibility и Svelte contracts сохранены."
         },
         {
           "id": "item-dom-api",
@@ -11699,6 +11707,23 @@
             "tests/browser/collapse-source.spec.ts"
           ],
           "note": "HeaderClass, HTML attributes, camelCase/capture aliases поверх native Svelte delegated events. Callback item.ref node/null, замена callback и стабильность при label update; SSR не вызывает refs. Native currentTarget и click/capture/bubble/stop/prevent/focus/key/mouse traces совпадают с изученными Source сценариями. React SyntheticEvent/input change normalization и RefObject не создаются; keyboard activation остаётся native button, refs используют post-DOM lifecycle Svelte."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Общий ConfigProvider.prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Collapse.svelte",
+            "tests/browser/fixtures/StructurePrefixScope.svelte",
+            "tests/browser/fixtures/StructurePrefixFixtures.svelte",
+            "tests/browser/fixtures/StructurePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-structure-prefix-reference.json",
+            "tests/browser/structure-prefix-metrics.ts",
+            "tests/browser/structure-prefix.spec.ts",
+            "tests/package/structure-prefix.ssr.test.ts"
+          ],
+          "note": "Общий prefix наследуется; локальный непустой prefixCls имеет приоритет, empty/undefined наследуют provider. Девять raw UMD cases и три transitions сверяют классы/computed styles, RTL, local/global/nested/sibling scopes и отдельный CSS-variable prefix. Root/parts/styles и native IDs/refs сохраняются; после prefix update fixed node, открытые панели, редактор, draft/focus/selection остаются прежними. Source motion и Native accessibility boundaries не меняются."
         }
       ]
     },
@@ -15468,13 +15493,20 @@
         {
           "id": "shared-config",
           "title": "Общий ConfigProvider prefix и React diagnostics",
-          "state": "missing",
+          "state": "partial",
           "requiredForV1": false,
           "evidence": [
             "src/lib/config-context.ts",
-            "readme.md"
+            "readme.md",
+            "tests/browser/fixtures/StructurePrefixScope.svelte",
+            "tests/browser/fixtures/StructurePrefixFixtures.svelte",
+            "tests/browser/fixtures/StructurePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-structure-prefix-reference.json",
+            "tests/browser/structure-prefix-metrics.ts",
+            "tests/browser/structure-prefix.spec.ts",
+            "tests/package/structure-prefix.ssr.test.ts"
           ],
-          "note": "Локальный prefixCls поддержан. Общий provider prefix/getPrefixCls и React development/deprecation diagnostics пока отсутствуют."
+          "note": "Общий и локальный prefixCls поддержаны отдельной feature; React development diagnostics ещё не перенесены. Прежние Native lifecycle, accessibility и Svelte contracts сохранены."
         },
         {
           "id": "boundary-framework",
@@ -15487,6 +15519,23 @@
             "readme.md"
           ],
           "note": "React componentStack недоступен в Svelte; default pre получает Error.stack JavaScript/Svelte с реальным текстом и stack frames, без выдуманных React frames. React recovery console diagnostics принадлежат React runtime и не воспроизводятся. Ошибки event handlers/отдельных Promise/timer callbacks и SSR не перехватываются. Нет React class instance/setState/reset API; повторный показ children задаётся remount/key. Strict browser console collector сохраняется."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Общий ConfigProvider.prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Alert.svelte",
+            "tests/browser/fixtures/StructurePrefixScope.svelte",
+            "tests/browser/fixtures/StructurePrefixFixtures.svelte",
+            "tests/browser/fixtures/StructurePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-structure-prefix-reference.json",
+            "tests/browser/structure-prefix-metrics.ts",
+            "tests/browser/structure-prefix.spec.ts",
+            "tests/package/structure-prefix.ssr.test.ts"
+          ],
+          "note": "Общий prefix наследуется; локальный непустой prefixCls имеет приоритет, empty/undefined наследуют provider. Девять raw UMD cases и три transitions сверяют классы/computed styles, RTL, local/global/nested/sibling scopes и отдельный CSS-variable prefix. Root/parts/styles и native IDs/refs сохраняются; после prefix update fixed node, открытые панели, редактор, draft/focus/selection остаются прежними. Source motion и Native accessibility boundaries не меняются."
         }
       ]
     },
@@ -17458,15 +17507,23 @@
             "tests/browser/affix-config.spec.ts",
             "tests/browser/fixtures/ant-design-affix-config-reference.json"
           ],
-          "note": "Local prefixCls меняет только fixed inner class/common descendants; empty/undefined возвращают ant-affix. CSS variable names и native marker сохраняются независимо от theme.cssVar.prefix. Все шесть source rules извлекаются в CSS data template с SHA-256; default rules ограничены собственным data marker. Проверены default/empty/custom/overlapping/shared-marker prefixes, named cssVar/aliases и независимый default sibling. Source hash/native CSS markers исключены из prefix identity, CSS и geometry сравниваются напрямую. Prefix updates сохраняют DOM, focus/selection, data/ref и callbacks; reset/unmount очищает stylesheet. На SSR выводятся outer config/head CSS без fixed content class или placeholder."
+          "note": "Local prefixCls меняет только fixed inner class/common descendants; empty/undefined наследуют provider (по умолчанию ant-affix). CSS variable names и native marker сохраняются независимо от theme.cssVar.prefix. Все шесть source rules извлекаются в CSS data template с SHA-256; default rules ограничены собственным data marker. Проверены default/empty/custom/overlapping/shared-marker prefixes, named cssVar/aliases и независимый default sibling. Source hash/native CSS markers исключены из prefix identity, CSS и geometry сравниваются напрямую. Prefix updates сохраняют DOM, focus/selection, data/ref и callbacks; reset/unmount очищает stylesheet. На SSR выводятся outer config/head CSS без fixed content class или placeholder."
         },
         {
           "id": "global-config",
           "title": "Глобальный ConfigProvider prefix",
-          "state": "missing",
+          "state": "supported",
           "requiredForV1": false,
-          "evidence": [],
-          "note": "Локальный prefixCls и ConfigProvider.affix class/style поддержаны; общий ConfigProvider prefix остаётся отдельной областью."
+          "evidence": [
+            "tests/browser/fixtures/StructurePrefixScope.svelte",
+            "tests/browser/fixtures/StructurePrefixFixtures.svelte",
+            "tests/browser/fixtures/StructurePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-structure-prefix-reference.json",
+            "tests/browser/structure-prefix-metrics.ts",
+            "tests/browser/structure-prefix.spec.ts",
+            "tests/package/structure-prefix.ssr.test.ts"
+          ],
+          "note": "Локальный prefixCls, ConfigProvider.affix class/style и общий ConfigProvider prefix поддержаны; подробные условия указаны в отдельных features."
         },
         {
           "id": "target-container",
@@ -17483,6 +17540,23 @@
             "tests/browser/fixtures/ant-design-target-container-reference.json"
           ],
           "note": "Общий getter Window/HTMLElement наследуется через undefined; local Affix.target/Anchor.getContainer имеют приоритет, без обоих используется window. Nested override и outside scope независимы. Четыре UMD presets фиксируют реальные native scroll, active href, fixed geometry, placeholder и одну копию input. Смена getter/hrefs сохраняет DOM, refs, draft/selection/focus и FormData; Anchor использует актуальный Map регистраций, cleanup одного href не теряет обновлённый соседний href из-за старого rune snapshot. Old target listeners снимаются, текущий target измеряется по собственному событию; SSR getter не вызывается. Отличия Source ShadowRoot/stale reconfiguration записаны отдельными observations."
+        },
+        {
+          "id": "global-prefix-cls",
+          "title": "Общий ConfigProvider.prefixCls",
+          "state": "supported",
+          "requiredForV1": false,
+          "evidence": [
+            "src/lib/Affix.svelte",
+            "tests/browser/fixtures/StructurePrefixScope.svelte",
+            "tests/browser/fixtures/StructurePrefixFixtures.svelte",
+            "tests/browser/fixtures/StructurePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-structure-prefix-reference.json",
+            "tests/browser/structure-prefix-metrics.ts",
+            "tests/browser/structure-prefix.spec.ts",
+            "tests/package/structure-prefix.ssr.test.ts"
+          ],
+          "note": "Общий prefix наследуется; локальный непустой prefixCls имеет приоритет, empty/undefined наследуют provider. Девять raw UMD cases и три transitions сверяют классы/computed styles, RTL, local/global/nested/sibling scopes и отдельный CSS-variable prefix. Root/parts/styles и native IDs/refs сохраняются; после prefix update fixed node, открытые панели, редактор, draft/focus/selection остаются прежними. Source motion и Native accessibility boundaries не меняются. Affix проверяется после закрепления в отдельном scroll target каждого scope. В SSR нет fixed class/placeholder/DOM measurements; head CSS уже содержит prefix."
         }
       ]
     },
@@ -19146,9 +19220,16 @@
             "tests/browser/fixtures/ant-design-status-prefix-reference.json",
             "tests/browser/status-prefix-metrics.ts",
             "tests/browser/status-prefix.spec.ts",
-            "tests/package/status-prefix.ssr.test.ts"
+            "tests/package/status-prefix.ssr.test.ts",
+            "tests/browser/fixtures/StructurePrefixScope.svelte",
+            "tests/browser/fixtures/StructurePrefixFixtures.svelte",
+            "tests/browser/fixtures/StructurePrefixSSRFixtures.svelte",
+            "tests/browser/fixtures/ant-design-structure-prefix-reference.json",
+            "tests/browser/structure-prefix-metrics.ts",
+            "tests/browser/structure-prefix.spec.ts",
+            "tests/package/structure-prefix.ssr.test.ts"
           ],
-          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress и Result подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix."
+          "note": "Общий source resolver: local nonempty prefix wins, undefined/empty provider prefix наследует parent, suffix сохраняет точную роль. App/Layout/Sider/Header/Content/Footer, Statistic/Timer, QRCode, Timeline, Steps, Divider, Flex, Segmented, Avatar/Group, Badge/Ribbon, Tag/CheckableTag/Group, Empty, Skeleton/primitives, Spin, Progress, Result, Alert, Collapse и Affix подключены; остальные families пока используют свои local/default prefixes. Source theme namespace fallback следует class prefix, inherited/local cssVar.prefix приоритетнее; explicit undefined сбрасывает inherited namespace к текущему provider. Theme/color defaults без настройки prefix не меняются. 13 raw UMD cases и 3 transitions, включая nested/reset/sibling scopes, live prefix/value identity и SSR. Display components отдельно сверяются с девятью raw UMD cases и тремя transitions; ambient typography/direction совпадают с Native provider DOM, текущее время Timer исключено из metrics. Divider/Flex/Segmented сверяются ещё с девятью raw UMD cases и тремя transitions; текущий FormData Segmented сохраняет исходное on. Status/display группа сверяется по 17 вариантам в девяти raw UMD cases и трём transitions. Прежние Native group spacing, Tag default и CheckableTag RTL classes, Skeleton wrappers учитываются явно; Badge number и Ribbon CSS отдельно используют общий prefix. Alert/Collapse/активный Affix сверяются ещё с девятью raw UMD cases и тремя transitions; SSR Affix не закрепляется, prefix update сохраняет редактор внутри раскрытой панели."
         },
         {
           "id": "native-legacy-prefix-namespace",
